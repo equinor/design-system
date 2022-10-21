@@ -53,7 +53,7 @@ export const sidebar: ComponentToken = {
       minHeight: '48px',
       spacings: {
         top: '0',
-        bottom: medium,
+        bottom: '0',
       },
       typography: {
         color: expandTextColor,

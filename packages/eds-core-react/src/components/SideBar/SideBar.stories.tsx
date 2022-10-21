@@ -8,16 +8,17 @@ import {
   add,
 } from '@equinor/eds-icons'
 import {
+  TopBar,
+  Divider,
   SideBar,
   SidebarType,
   SidebarLinkProps,
   useSideBar,
-} from '../../components/SideBar'
-import { TopBar, Divider } from '@equinor/eds-core-react'
+} from '../..'
 import page from './SideBar.docs.mdx'
 
 export default {
-  title: 'Components/SideBar',
+  title: 'Navigation/SideBar',
   component: SideBar,
   subcomponents: {
     Content: SideBar.Content,

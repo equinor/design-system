@@ -1,5 +1,5 @@
 import { ForwardRefExoticComponent, forwardRef } from 'react'
-import { Button, ButtonProps, Icon, Tooltip } from '@equinor/eds-core-react'
+import { Button, ButtonProps, Icon, Tooltip } from '../../..'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { useSideBar } from '../SideBar.context'
 import styled, { css } from 'styled-components'

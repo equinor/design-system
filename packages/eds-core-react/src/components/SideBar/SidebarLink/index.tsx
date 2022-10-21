@@ -5,11 +5,7 @@ import {
   outlineTemplate,
   OverridableComponent,
 } from '@equinor/eds-utils'
-import {
-  Icon,
-  Tooltip as EDSTooltip,
-  Typography,
-} from '@equinor/eds-core-react'
+import { Icon, Tooltip as EDSTooltip, Typography } from '../../..'
 import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
 import { useSideBar } from '../SideBar.context'
@@ -38,7 +34,6 @@ const Container = styled.a<ContainerProps>(({ theme, $active }) => {
       sidebarItem: {
         minHeight,
         border,
-        spacings: { bottom: marginBottom },
         states: {
           active: { background: menuActiveBackground },
           hover: { background: menuHoverBackground },

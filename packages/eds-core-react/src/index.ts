@@ -36,4 +36,5 @@ export * from './components/EdsProvider'
 export * from './components/Paper'
 export * from './components/Autocomplete'
 export * from './components/InputWrapper'
+export * from './components/SideBar'
 /* eslint-enable */

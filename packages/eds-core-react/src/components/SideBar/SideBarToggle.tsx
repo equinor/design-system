@@ -1,5 +1,5 @@
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from 'react'
-import { Button, Icon, Tooltip } from '@equinor/eds-core-react'
+import { Button, Icon, Tooltip } from '../..'
 import { useSideBar } from './SideBar.context'
 import { sidebar as tokens } from './SideBar.tokens'
 import { expand, collapse } from '@equinor/eds-icons'

@@ -11,11 +11,11 @@ It has a toggleable collapsed and expanded state.
     
     figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=28061%3A102280"
     /* documentationUrl="does not exist yet" */
-    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-lab-react/src/components/SideBar/SideBar.tsx"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/SideBar/SideBar.tsx"
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="components-sidebar--primary" />
+<Story id="navigation-sidebar--primary" />
 <PropsTable />
 
 ## Usage
@@ -65,7 +65,7 @@ import { SideBar, SidebarLinkProps } from '@equinor/eds-lab-react'
 
 ### With TopBar
 If used together with `TopBar`, the layout should be handled with css-grid to ensure the sidebar does not extend beyond the screen and creates overflow.
-<Story id="components-sidebar--with-topbar" />
+<Story id="navigation-sidebar--with-topbar" />
 
 ### SideBar.Link
 
@@ -73,7 +73,7 @@ If used together with `TopBar`, the layout should be handled with css-grid to en
 Navigation can be done with `href`, or in the case of a third party routing library, one can use the `as` prop 
 to override component type and allow their specific props. 
 Use the `active` property to indicate current active path when used for navigation.
-<Story id="components-sidebar--active-path" />
+<Story id="navigation-sidebar--active-path" />
 
 ### With custom content
 
@@ -82,11 +82,11 @@ Here it is used to make the footer with two states.
 ```tsx
 import { SideBar, useSideBar } from '@equinor/eds-lab-react'
 ```
-<Story id="components-sidebar--custom-content" />
+<Story id="navigation-sidebar--custom-content" />
 
 ### With Button
 
 `SideBar.Button` can be used to perform actions. It must have an icon and a label.
-<Story id="components-sidebar--with-button" />
+<Story id="navigation-sidebar--with-button" />
 
 

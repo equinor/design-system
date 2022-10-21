@@ -7,10 +7,10 @@ import {
   cleanup,
 } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { SidebarLink, SidebarLinkProps } from './index'
+import { SidebarLinkProps } from './index'
 import { home } from '@equinor/eds-icons'
 import userEvent from '@testing-library/user-event'
-import { SideBar } from '../SideBar'
+import { SideBar } from '../'
 
 const defaultProps: SidebarLinkProps = {
   label: 'Home',
@@ -38,17 +38,17 @@ beforeAll(() => {
 })
 describe('Sidebar link', () => {
   it('Renders', () => {
-    customRender(<SidebarLink {...defaultProps}></SidebarLink>, {
+    customRender(<SideBar.Link {...defaultProps}></SideBar.Link>, {
       wrapper: ({ children }) => SideBarWrapper(children),
     })
   })
 
   it('Renders tooltip when closed', async () => {
     customRender(
-      <SidebarLink
+      <SideBar.Link
         data-testid="sidebar-menu-item"
         {...defaultProps}
-      ></SidebarLink>,
+      ></SideBar.Link>,
       {
         wrapper: ({ children }) => SideBarWrapper(children),
       },
@@ -63,10 +63,10 @@ describe('Sidebar link', () => {
 
   it('Does not render tooltip when open', async () => {
     customRender(
-      <SidebarLink
+      <SideBar.Link
         data-testid="sidebar-menu-item"
         {...defaultProps}
-      ></SidebarLink>,
+      ></SideBar.Link>,
       {
         wrapper: ({ children }) => SideBarWrapper(children, true),
       },
@@ -81,7 +81,7 @@ describe('Sidebar link', () => {
   })
 
   it('Renders label when open', () => {
-    customRender(<SidebarLink {...defaultProps}></SidebarLink>, {
+    customRender(<SideBar.Link {...defaultProps}></SideBar.Link>, {
       wrapper: ({ children }) => SideBarWrapper(children, true),
     })
 
@@ -89,7 +89,7 @@ describe('Sidebar link', () => {
   })
 
   it('Does not render label when closed', () => {
-    customRender(<SidebarLink {...defaultProps}></SidebarLink>, {
+    customRender(<SideBar.Link {...defaultProps}></SideBar.Link>, {
       wrapper: ({ children }) => SideBarWrapper(children),
     })
 
