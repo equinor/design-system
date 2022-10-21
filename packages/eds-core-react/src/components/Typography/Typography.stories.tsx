@@ -16,6 +16,8 @@ export default {
   title: 'Typography/Typography',
   component: Typography,
   argTypes: {
+    variant: { control: { type: null } },
+    group: { control: { type: null } },
     as: {
       description: 'Change the HTML element',
       table: {
