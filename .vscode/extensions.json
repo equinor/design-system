@@ -4,11 +4,23 @@
 
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
     "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
     "redhat.vscode-yaml",
-    "plievone.vscode-template-literal-editor",
-    "bierner.lit-html",
-    "deque-systems.vscode-axe-linter"
+    "unifiedjs.vscode-mdx",
+    "deque-systems.vscode-axe-linter",
+    "styled-components.vscode-styled-components",
+    "aaron-bond.better-comments",
+    "seatonjiang.gitmoji-vscode",
+    "usernamehw.errorlens",
+    "eamodio.gitlens",
+    "ms-vsliveshare.vsliveshare-pack",
+    "davidanson.vscode-markdownlint",
+    "ionutvmi.path-autocomplete",
+    "jock.svg",
+    "github.vscode-pull-request-github"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []
