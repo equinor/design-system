@@ -29,6 +29,20 @@ beforeAll(() => {
 })
 
 describe('Sidebar', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <SideBar open={true}>
+        <SideBar.Content>
+          <SideBar.Toggle />
+          <SideBar.Button label="test" icon={home} />
+          {defaultMenuItems.map((m) => (
+            <SideBar.Link key={m.label} {...m} />
+          ))}
+        </SideBar.Content>
+      </SideBar>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Sidebar renders', () => {
     render(
       <SideBar>
