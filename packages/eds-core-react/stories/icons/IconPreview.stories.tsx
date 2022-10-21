@@ -14,6 +14,9 @@ export default {
     docs: {
       page,
     },
+    previewTabs: {
+      canvas: { hidden: true },
+    },
   },
 } as Meta
 
