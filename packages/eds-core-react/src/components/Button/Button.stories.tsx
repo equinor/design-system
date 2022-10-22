@@ -317,3 +317,23 @@ Compact.decorators = [
     </Stack>
   ),
 ]
+
+export const Accessibility: Story<ButtonProps> = () => (
+  <>
+    <Button
+      aria-disabled="true"
+      onClick={() => {
+        alert("I'm still clickable")
+      }}
+    >
+      Aria-disabled (click me)
+    </Button>
+  </>
+)
+Accessibility.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
