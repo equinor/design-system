@@ -131,7 +131,8 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
       border: 0;
     }
 
-    &:disabled {
+    &:disabled,
+    &[aria-disabled='true'] {
       cursor: not-allowed;
       background: ${disabled.background};
       ${bordersTemplate(disabled.border)};
