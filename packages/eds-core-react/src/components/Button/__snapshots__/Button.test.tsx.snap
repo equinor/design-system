@@ -88,7 +88,8 @@ exports[`Button Matches snapshot 1`] = `
   border: 0;
 }
 
-.c0:disabled {
+.c0:disabled,
+.c0[aria-disabled='true'] {
   cursor: not-allowed;
   background: var(--eds_interactive__disabled__fill,rgba(234,234,234,1));
   border: 1px solid var(--eds_interactive__disabled__border,rgba(220,220,220,1));
@@ -110,7 +111,8 @@ exports[`Button Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c0:disabled:hover {
+  .c0:disabled:hover,
+  .c0[aria-disabled='true']:hover {
     background: var(--eds_interactive__disabled__fill,rgba(234,234,234,1));
   }
 }

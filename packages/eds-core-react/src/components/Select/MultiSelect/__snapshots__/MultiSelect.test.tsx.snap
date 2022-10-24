@@ -129,7 +129,8 @@ exports[`MultiSelect Matches snapshot 2`] = `
   border: 0;
 }
 
-.c0:disabled {
+.c0:disabled,
+.c0[aria-disabled='true'] {
   cursor: not-allowed;
   background: transparent;
   border: 1px solid transparent;
@@ -160,7 +161,8 @@ exports[`MultiSelect Matches snapshot 2`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c0:disabled:hover {
+  .c0:disabled:hover,
+  .c0[aria-disabled='true']:hover {
     background: transparent;
   }
 }
