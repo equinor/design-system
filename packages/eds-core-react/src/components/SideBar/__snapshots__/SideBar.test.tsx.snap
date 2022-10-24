@@ -14,7 +14,7 @@ exports[`Sidebar Matches snapshot 1`] = `
         open=""
       >
         <button
-          class="Button__ButtonBase-sc-1hs0myn-1 fMCItm"
+          class="Button__ButtonBase-sc-1hs0myn-1 dpcZuP"
           tabindex="0"
           type="button"
         >
@@ -47,7 +47,7 @@ exports[`Sidebar Matches snapshot 1`] = `
         open=""
       >
         <button
-          class="Button__ButtonBase-sc-1hs0myn-1 iwPiaG SideBarButton__ExtendedButton-sc-15xlkyo-1 coyIua"
+          class="Button__ButtonBase-sc-1hs0myn-1 bkNqPT SideBarButton__ExtendedButton-sc-15xlkyo-1 coyIua"
           open=""
           tabindex="0"
           type="button"
