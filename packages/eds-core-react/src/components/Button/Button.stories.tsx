@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import {
   Button,
   ButtonProps,
@@ -6,6 +6,8 @@ import {
   EdsProvider,
   Density,
   Progress,
+  Checkbox,
+  Snackbar,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { menu, add, save } from '@equinor/eds-icons'
@@ -318,21 +320,39 @@ Compact.decorators = [
   ),
 ]
 
-export const Accessibility: Story<ButtonProps> = () => (
-  <>
-    <Button
-      aria-disabled="true"
-      onClick={() => {
-        alert("I'm still clickable")
-      }}
-    >
-      Aria-disabled (click me)
-    </Button>
-  </>
-)
+export const Accessibility: Story<ButtonProps> = () => {
+  const [canSubmit, setCanSubmit] = useState(false)
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Checkbox
+        label="I agree to the Terms & Conditions (required)"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setCanSubmit(e.target.checked)
+        }}
+        checked={canSubmit}
+      />
+      <Button
+        aria-disabled={!canSubmit}
+        onClick={() => {
+          canSubmit && setOpen(true)
+        }}
+      >
+        Submit
+      </Button>
+      <Snackbar
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={3000}
+      >
+        Submitted
+      </Snackbar>
+    </>
+  )
+}
 Accessibility.decorators = [
   (Story) => (
-    <Stack>
+    <Stack direction="column">
       <Story />
     </Stack>
   ),
