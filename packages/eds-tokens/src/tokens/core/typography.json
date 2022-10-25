@@ -2,7 +2,8 @@
   "const": {
     "capHeight": {
       "value": "0.7",
-      "type": "other"
+      "type": "other",
+      "description": "The cap height of the Equinor typeface (0.7em)"
     }
   },
   "fontFamily": {
@@ -54,10 +55,6 @@
     },
     "9": {
       "value": "5*roundTo(({scale.f0}*{scale.r}^(6/{scale.n})/5),1)",
-      "type": "fontSizes"
-    },
-    "10": {
-      "value": "5*roundTo(({scale.f0}*{scale.r}^(7/{scale.n})/5),1)",
       "type": "fontSizes"
     }
   },
@@ -174,15 +171,6 @@
           "fontFamily": "{fontFamily.default}"
         },
         "type": "typography"
-      },
-      "10": {
-        "value": {
-          "fontSize": "{fontSize.10}",
-          "lineHeight": "{lineHeight.tight.10}",
-          "fontWeight": "{fontWeight.regular}",
-          "fontFamily": "{fontFamily.default}"
-        },
-        "type": "typography"
       }
     },
     "compressed": {
@@ -275,15 +263,6 @@
         "value": {
           "fontSize": "{fontSize.9}",
           "lineHeight": "{lineHeight.compressed.9}",
-          "fontWeight": "{fontWeight.regular}",
-          "fontFamily": "{fontFamily.default}"
-        },
-        "type": "typography"
-      },
-      "10": {
-        "value": {
-          "fontSize": "{fontSize.10}",
-          "lineHeight": "{lineHeight.compressed.10}",
           "fontWeight": "{fontWeight.regular}",
           "fontFamily": "{fontFamily.default}"
         },
@@ -384,15 +363,6 @@
           "fontFamily": "{fontFamily.default}"
         },
         "type": "typography"
-      },
-      "10": {
-        "value": {
-          "fontSize": "{fontSize.10}",
-          "lineHeight": "{lineHeight.comfortable.10}",
-          "fontWeight": "{fontWeight.regular}",
-          "fontFamily": "{fontFamily.default}"
-        },
-        "type": "typography"
       }
     },
     "relaxed": {
@@ -489,15 +459,6 @@
           "fontFamily": "{fontFamily.default}"
         },
         "type": "typography"
-      },
-      "10": {
-        "value": {
-          "fontSize": "{fontSize.10}",
-          "lineHeight": "{lineHeight.relaxed.10}",
-          "fontWeight": "{fontWeight.regular}",
-          "fontFamily": "{fontFamily.default}"
-        },
-        "type": "typography"
       }
     }
   },
@@ -587,18 +548,6 @@
           "itemSpacing": "{spacing.0}"
         },
         "type": "composition"
-      },
-      "10": {
-        "value": {
-          "typography": "{typography.tight.10}",
-          "fontWeights": "{fontWeight.regular}",
-          "paddingTop": "{spacing.3}",
-          "paddingBottom": "{spacing.7}",
-          "paddingLeft": "{spacing.0}",
-          "paddingRight": "{spacing.0}",
-          "itemSpacing": "{spacing.0}"
-        },
-        "type": "composition"
       }
     }
   },
@@ -667,11 +616,6 @@
         "value": "{grid.base} * ceil({fontSize.9} * {factor.xs} / {grid.base})",
         "type": "lineHeights",
         "description": "37/40"
-      },
-      "10": {
-        "value": "{grid.base} * ceil({fontSize.10} * {factor.xs} / {grid.base})",
-        "type": "lineHeights",
-        "description": "42/44"
       }
     },
     "compressed": {
@@ -724,11 +668,6 @@
         "value": "{grid.base} * ceil({fontSize.9} * {factor.sm} / {grid.base})",
         "type": "lineHeights",
         "description": "37/44"
-      },
-      "10": {
-        "value": "{grid.base} * ceil({fontSize.10} * {factor.sm} / {grid.base})",
-        "type": "lineHeights",
-        "description": "42/48"
       }
     },
     "comfortable": {
@@ -781,11 +720,6 @@
         "value": "{grid.base} * ceil({fontSize.9} * {factor.md} / {grid.base})",
         "type": "lineHeights",
         "description": "37/48"
-      },
-      "10": {
-        "value": "{grid.base} * ceil({fontSize.10} * {factor.md} / {grid.base})",
-        "type": "lineHeights",
-        "description": "42/56"
       }
     },
     "relaxed": {
@@ -838,11 +772,6 @@
         "value": "{grid.base} * ceil({fontSize.9} * {factor.lg} / {grid.base})",
         "type": "lineHeights",
         "description": "37/56"
-      },
-      "10": {
-        "value": "{grid.base} * ceil({fontSize.10} * {factor.lg} / {grid.base})",
-        "type": "lineHeights",
-        "description": "42/64"
       }
     }
   },
@@ -850,7 +779,8 @@
     "rounded": {
       "0": {
         "value": "roundTo({fontSize.0} * {const.capHeight})",
-        "type": "other"
+        "type": "other",
+        "description": "The cap height of the Equinor font in typescale 0, rounded to the nearest integer"
       },
       "1": {
         "value": "roundTo({fontSize.1} * {const.capHeight})",
@@ -887,16 +817,13 @@
       "9": {
         "value": "roundTo({fontSize.9} * {const.capHeight})",
         "type": "other"
-      },
-      "10": {
-        "value": "roundTo({fontSize.10} * {const.capHeight})",
-        "type": "other"
       }
     },
     "snappedToGrid": {
       "0": {
         "value": "{grid.base} * ceil({capHeight.rounded.0} / {grid.base})",
-        "type": "other"
+        "type": "other",
+        "description": "The cap height of the Equinor font in typescale 0, rounded to the nearest grid line"
       },
       "1": {
         "value": "{grid.base} * ceil({capHeight.rounded.1} / {grid.base})",
@@ -932,10 +859,6 @@
       },
       "9": {
         "value": "{grid.base} * ceil({capHeight.rounded.9} / {grid.base})",
-        "type": "other"
-      },
-      "10": {
-        "value": "{grid.base} * ceil({capHeight.rounded.10} / {grid.base})",
         "type": "other"
       }
     }

@@ -100,16 +100,6 @@
               },
               "type": "composition",
               "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.tight.3.paddingBottom} in paddingTop results in the wrong number"
-            },
-            "10": {
-              "value": {
-                "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.tight.10} - roundTo({spacing.12} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-                "typography": "{typography.tight.10}"
-              },
-              "type": "composition",
-              "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.tight.3.paddingBottom} in paddingTop results in the wrong number"
             }
           },
           "compressed": {
@@ -206,16 +196,6 @@
                 "paddingBottom": "roundTo({spacing.12} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
                 "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.compressed.9} - roundTo({spacing.12} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
                 "typography": "{typography.compressed.9}"
-              },
-              "type": "composition",
-              "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.compressed.3.paddingBottom} in paddingTop results in the wrong number"
-            },
-            "10": {
-              "value": {
-                "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.compressed.10} - roundTo({spacing.12} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-                "typography": "{typography.compressed.10}"
               },
               "type": "composition",
               "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.compressed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -321,16 +301,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.tight.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.8}",
-              "paddingBottom": "roundTo({spacing.8} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.8} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.tight.10} - roundTo({spacing.8} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.tight.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.8} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.tight.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "compressed": {
@@ -427,16 +397,6 @@
               "paddingBottom": "roundTo({spacing.8} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.8} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.compressed.9} - roundTo({spacing.8} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.compressed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.compressed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.8}",
-              "paddingBottom": "roundTo({spacing.8} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.8} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.compressed.10} - roundTo({spacing.8} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.compressed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.8} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.compressed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -539,16 +499,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.8} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.8}",
-              "paddingBottom": "roundTo({spacing.8} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.8} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.comfortable.10} - roundTo({spacing.8} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.comfortable.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.8} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "relaxed": {
@@ -645,16 +595,6 @@
               "paddingBottom": "roundTo({spacing.8} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.8} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.relaxed.9} - roundTo({spacing.8} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.relaxed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.8} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.8}",
-              "paddingBottom": "roundTo({spacing.8} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.8} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.relaxed.10} - roundTo({spacing.8} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.relaxed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.8} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.8} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.8} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.8.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -759,16 +699,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.tight.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.12}",
-              "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.tight.10} - roundTo({spacing.12} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.tight.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.tight.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "compressed": {
@@ -865,16 +795,6 @@
               "paddingBottom": "roundTo({spacing.12} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.compressed.9} - roundTo({spacing.12} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.compressed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.12} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.compressed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.12}",
-              "paddingBottom": "roundTo({spacing.12} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.compressed.10} - roundTo({spacing.12} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.compressed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.12} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.compressed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -977,16 +897,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.12} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.12}",
-              "paddingBottom": "roundTo({spacing.12} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.comfortable.10} - roundTo({spacing.12} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.comfortable.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.12} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "relaxed": {
@@ -1083,16 +993,6 @@
               "paddingBottom": "roundTo({spacing.12} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.relaxed.9} - roundTo({spacing.12} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.relaxed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.12} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.12}",
-              "paddingBottom": "roundTo({spacing.12} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.relaxed.10} - roundTo({spacing.12} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.relaxed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.12} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -1197,16 +1097,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.16} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.tight.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.16}",
-              "paddingBottom": "roundTo({spacing.16} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.16} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.tight.10} - roundTo({spacing.16} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.tight.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.16} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.tight.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "compressed": {
@@ -1303,16 +1193,6 @@
               "paddingBottom": "roundTo({spacing.16} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.16} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.compressed.9} - roundTo({spacing.16} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.compressed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.16} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.compressed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.16}",
-              "paddingBottom": "roundTo({spacing.16} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.16} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.compressed.10} - roundTo({spacing.16} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.compressed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.16} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.compressed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -1415,16 +1295,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.16} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.16}",
-              "paddingBottom": "roundTo({spacing.16} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.16} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.comfortable.10} - roundTo({spacing.16} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.comfortable.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.16} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "relaxed": {
@@ -1521,16 +1391,6 @@
               "paddingBottom": "roundTo({spacing.16} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.16} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.relaxed.9} - roundTo({spacing.16} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.relaxed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.16} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.16}",
-              "paddingBottom": "roundTo({spacing.16} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.16} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.relaxed.10} - roundTo({spacing.16} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.relaxed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.16} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.16} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.16} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.16.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -1635,16 +1495,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.20} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.tight.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.20}",
-              "paddingBottom": "roundTo({spacing.20} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.20} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.tight.10} - roundTo({spacing.20} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.tight.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.20} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.tight.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "compressed": {
@@ -1741,16 +1591,6 @@
               "paddingBottom": "roundTo({spacing.20} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.20} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.compressed.9} - roundTo({spacing.20} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.compressed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.20} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.compressed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.20}",
-              "paddingBottom": "roundTo({spacing.20} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.20} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.compressed.10} - roundTo({spacing.20} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.compressed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.20} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.compressed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -1853,16 +1693,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.20} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.20}",
-              "paddingBottom": "roundTo({spacing.20} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.20} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.comfortable.10} - roundTo({spacing.20} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.comfortable.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.20} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "relaxed": {
@@ -1959,16 +1789,6 @@
               "paddingBottom": "roundTo({spacing.20} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.20} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.relaxed.9} - roundTo({spacing.20} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.relaxed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.20} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.20}",
-              "paddingBottom": "roundTo({spacing.20} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.20} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.relaxed.10} - roundTo({spacing.20} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.relaxed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.20} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.20} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.20} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.20.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -2073,16 +1893,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.24} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.tight.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.24}",
-              "paddingBottom": "roundTo({spacing.24} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.24} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.tight.10} - roundTo({spacing.24} - ({lineHeight.tight.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.tight.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.24} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.tight.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "compressed": {
@@ -2179,16 +1989,6 @@
               "paddingBottom": "roundTo({spacing.24} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.24} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.compressed.9} - roundTo({spacing.24} - ({lineHeight.compressed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.compressed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.24} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.compressed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.24}",
-              "paddingBottom": "roundTo({spacing.24} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.24} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.compressed.10} - roundTo({spacing.24} - ({lineHeight.compressed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.compressed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.compressed.3} - roundTo({spacing.24} - ({lineHeight.compressed.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.compressed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -2291,16 +2091,6 @@
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.24} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.24}",
-              "paddingBottom": "roundTo({spacing.24} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.24} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.comfortable.10} - roundTo({spacing.24} - ({lineHeight.comfortable.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.comfortable.10}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.comfortable.3} - roundTo({spacing.24} - ({lineHeight.comfortable.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.comfortable.3.paddingBottom} in paddingTop results in the wrong number"
           }
         },
         "relaxed": {
@@ -2397,16 +2187,6 @@
               "paddingBottom": "roundTo({spacing.24} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "paddingTop": "{spacing.24} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.relaxed.9} - roundTo({spacing.24} - ({lineHeight.relaxed.9} - {capHeight.rounded.9}) / 2)",
               "typography": "{typography.relaxed.9}"
-            },
-            "type": "composition",
-            "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.24} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
-          },
-          "10": {
-            "value": {
-              "horizontalPadding": "{spacing.24}",
-              "paddingBottom": "roundTo({spacing.24} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "paddingTop": "{spacing.24} * 2 + {grid.base} * ceil({capHeight.rounded.10} / {grid.base}) - {lineHeight.relaxed.10} - roundTo({spacing.24} - ({lineHeight.relaxed.10} - {capHeight.rounded.10}) / 2)",
-              "typography": "{typography.relaxed.10}"
             },
             "type": "composition",
             "description": "Padding-bottom: roundTo({spacing.24} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.24} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.relaxed.3} - roundTo({spacing.24} - ({lineHeight.relaxed.3} - {capHeight.3}) / 2)\n\nReferencing {container.24.relaxed.3.paddingBottom} in paddingTop results in the wrong number"
@@ -2514,16 +2294,6 @@
                 "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.9} - {lineHeight.tight.9}) / 2",
                 "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.9} - {lineHeight.tight.9}) / 2",
                 "typography": "{typography.tight.9}"
-              },
-              "type": "composition",
-              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
-            },
-            "10": {
-              "value": {
-                "horizontalPadding": "{spacing.12}",
-                "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.10} - {lineHeight.tight.10}) / 2",
-                "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.10} - {lineHeight.tight.10}) / 2",
-                "typography": "{typography.tight.10}"
               },
               "type": "composition",
               "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
