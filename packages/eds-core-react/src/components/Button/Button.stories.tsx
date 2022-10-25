@@ -8,6 +8,7 @@ import {
   Progress,
   Checkbox,
   Snackbar,
+  Tooltip,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { menu, add, save } from '@equinor/eds-icons'
@@ -332,14 +333,16 @@ export const Accessibility: Story<ButtonProps> = () => {
         }}
         checked={canSubmit}
       />
-      <Button
-        aria-disabled={!canSubmit}
-        onClick={() => {
-          canSubmit && setOpen(true)
-        }}
-      >
-        Submit
-      </Button>
+      <Tooltip title={canSubmit ? '' : 'Terms & Conditions must be checked'}>
+        <Button
+          aria-disabled={!canSubmit}
+          onClick={() => {
+            canSubmit && setOpen(true)
+          }}
+        >
+          Submit
+        </Button>
+      </Tooltip>
       <Snackbar
         open={open}
         onClose={() => setOpen(false)}
