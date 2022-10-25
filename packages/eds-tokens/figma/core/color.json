@@ -1,0 +1,20 @@
+{
+  "eds": {
+    "core": {
+      "color": {
+        "mossgreen": {
+          "100": {
+            "value": "#007079",
+            "type": "color"
+          }
+        },
+        "neutral": {
+          "100": {
+            "value": "#fff",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}
