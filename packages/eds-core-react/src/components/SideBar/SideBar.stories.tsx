@@ -1,4 +1,5 @@
 import { Story, ComponentMeta } from '@storybook/react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import {
   dashboard,
@@ -6,14 +7,18 @@ import {
   history,
   home,
   add,
+  menu,
 } from '@equinor/eds-icons'
 import {
+  Button,
+  Icon,
   TopBar,
   Divider,
   SideBar,
   SidebarType,
   SidebarLinkProps,
   useSideBar,
+  Scrim,
 } from '../..'
 import page from './SideBar.docs.mdx'
 
@@ -274,6 +279,60 @@ export const WithTopbar: Story<SidebarType> = () => {
           <SideBar.Toggle />
         </SideBar.Footer>
       </SideBar>
+    </SidebarContainerWithTopbar>
+  )
+}
+
+export const Controlled: Story<SidebarType> = () => {
+  const SidebarContainerWithTopbar = styled(SidebarContainer)`
+    display: grid;
+    grid-template-rows: auto 1fr;
+  `
+  const [isOpen, setIsOpen] = useState(false)
+
+  const menuItems: SidebarLinkProps[] = [
+    {
+      label: 'Dashboard',
+      icon: dashboard,
+    },
+    {
+      label: 'history',
+      icon: history,
+    },
+    {
+      label: 'favourites',
+      icon: favorite_outlined,
+    },
+  ]
+
+  return (
+    <SidebarContainerWithTopbar>
+      <TopBar sticky={false}>
+        <TopBar.Header>
+          <Button
+            variant="ghost_icon"
+            aria-label="toggle sidebar"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <Icon data={menu}></Icon>
+          </Button>
+        </TopBar.Header>
+      </TopBar>
+      {isOpen && (
+        <SideBar open>
+          <SideBar.Content>
+            <SideBar.Button
+              label="Create story"
+              icon={add}
+              onClick={() => console.log('clicked')}
+            />
+            <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
+            {menuItems.map((m) => (
+              <SideBar.Link key={m.label} {...m} />
+            ))}
+          </SideBar.Content>
+        </SideBar>
+      )}
     </SidebarContainerWithTopbar>
   )
 }

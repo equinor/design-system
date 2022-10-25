@@ -4,7 +4,7 @@ import { SideBar } from '.'
 # SideBar
 
 Sidebar is a layout component anchored to the left hand side of the screen. 
-It has a toggleable collapsed and expanded state.
+It has a toggleable collapsed and expanded state. This is an adaptation of the [Amplify Components](https://storybook-amplify-components.app.radix.equinor.com/?path=/docs/navigation-sidebar--primary) `SideBar`
 
 
 <Links 
@@ -88,5 +88,10 @@ import { SideBar, useSideBar } from '@equinor/eds-lab-react'
 
 `SideBar.Button` can be used to perform actions. It must have an icon and a label.
 <Story id="navigation-sidebar--with-button" />
+
+### Controlled
+
+An alternate use case where the `SideBar` is fully closed with an external menu button.
+<Story id="navigation-sidebar--controlled" />
 
 
