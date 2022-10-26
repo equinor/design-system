@@ -7,8 +7,8 @@
             "0": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.0} - {capHeight.rounded.0}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.0} / {grid.base}) - {lineHeight.tight.0} - roundTo({spacing.12} - ({lineHeight.tight.0} - {capHeight.rounded.0}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.0} - {capHeight.rounded.0}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.0} / {grid.base}) - {lineHeight.tight.0} - roundTo({spacing.4} - ({lineHeight.tight.0} - {capHeight.rounded.0}) / 2)",
                 "typography": "{typography.tight.0}"
               },
               "type": "composition"
@@ -16,8 +16,8 @@
             "1": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.1} - {capHeight.rounded.1}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.1} / {grid.base}) - {lineHeight.tight.1} - roundTo({spacing.12} - ({lineHeight.tight.1} - {capHeight.rounded.1}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.1} - {capHeight.rounded.1}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.1} / {grid.base}) - {lineHeight.tight.1} - roundTo({spacing.4} - ({lineHeight.tight.1} - {capHeight.rounded.1}) / 2)",
                 "typography": "{typography.tight.1}"
               },
               "type": "composition"
@@ -25,8 +25,8 @@
             "2": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.2} - {capHeight.rounded.2}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.2} / {grid.base}) - {lineHeight.tight.2} - roundTo({spacing.12} - ({lineHeight.tight.2} - {capHeight.rounded.2}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.2} - {capHeight.rounded.2}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.2} / {grid.base}) - {lineHeight.tight.2} - roundTo({spacing.4} - ({lineHeight.tight.2} - {capHeight.rounded.2}) / 2)",
                 "typography": "{typography.tight.2}"
               },
               "type": "composition"
@@ -34,8 +34,8 @@
             "3": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.rounded.3}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.rounded.3}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.3} - {capHeight.rounded.3}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.4} - ({lineHeight.tight.3} - {capHeight.rounded.3}) / 2)",
                 "typography": "{typography.tight.3}"
               },
               "type": "composition",
@@ -44,8 +44,8 @@
             "4": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.4} - {capHeight.rounded.4}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.4} / {grid.base}) - {lineHeight.tight.4} - roundTo({spacing.12} - ({lineHeight.tight.4} - {capHeight.rounded.4}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.4} - {capHeight.rounded.4}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.4} / {grid.base}) - {lineHeight.tight.4} - roundTo({spacing.4} - ({lineHeight.tight.4} - {capHeight.rounded.4}) / 2)",
                 "typography": "{typography.tight.4}"
               },
               "type": "composition",
@@ -54,8 +54,8 @@
             "5": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.5} - {capHeight.rounded.5}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.5} / {grid.base}) - {lineHeight.tight.5} - roundTo({spacing.12} - ({lineHeight.tight.5} - {capHeight.rounded.5}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.5} - {capHeight.rounded.5}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.5} / {grid.base}) - {lineHeight.tight.5} - roundTo({spacing.4} - ({lineHeight.tight.5} - {capHeight.rounded.5}) / 2)",
                 "typography": "{typography.tight.5}"
               },
               "type": "composition",
@@ -64,8 +64,8 @@
             "6": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.6} - {capHeight.rounded.6}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.6} / {grid.base}) - {lineHeight.tight.6} - roundTo({spacing.12} - ({lineHeight.tight.6} - {capHeight.rounded.6}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.6} - {capHeight.rounded.6}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.6} / {grid.base}) - {lineHeight.tight.6} - roundTo({spacing.4} - ({lineHeight.tight.6} - {capHeight.rounded.6}) / 2)",
                 "typography": "{typography.tight.6}"
               },
               "type": "composition",
@@ -74,8 +74,8 @@
             "7": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.7} - {capHeight.rounded.7}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.7} / {grid.base}) - {lineHeight.tight.7} - roundTo({spacing.12} - ({lineHeight.tight.7} - {capHeight.rounded.7}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.7} - {capHeight.rounded.7}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.7} / {grid.base}) - {lineHeight.tight.7} - roundTo({spacing.4} - ({lineHeight.tight.7} - {capHeight.rounded.7}) / 2)",
                 "typography": "{typography.tight.7}"
               },
               "type": "composition",
@@ -84,8 +84,8 @@
             "8": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.8} - {capHeight.rounded.8}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.8} / {grid.base}) - {lineHeight.tight.8} - roundTo({spacing.12} - ({lineHeight.tight.8} - {capHeight.rounded.8}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.8} - {capHeight.rounded.8}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.8} / {grid.base}) - {lineHeight.tight.8} - roundTo({spacing.4} - ({lineHeight.tight.8} - {capHeight.rounded.8}) / 2)",
                 "typography": "{typography.tight.8}"
               },
               "type": "composition",
@@ -94,8 +94,8 @@
             "9": {
               "value": {
                 "horizontalPadding": "{spacing.4}",
-                "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.9} - {capHeight.rounded.9}) / 2)",
-                "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.tight.9} - roundTo({spacing.12} - ({lineHeight.tight.9} - {capHeight.rounded.9}) / 2)",
+                "paddingBottom": "roundTo({spacing.4} - ({lineHeight.tight.9} - {capHeight.rounded.9}) / 2)",
+                "paddingTop": "{spacing.4} * 2 + {grid.base} * ceil({capHeight.rounded.9} / {grid.base}) - {lineHeight.tight.9} - roundTo({spacing.4} - ({lineHeight.tight.9} - {capHeight.rounded.9}) / 2)",
                 "typography": "{typography.tight.9}"
               },
               "type": "composition",
@@ -2395,6 +2395,112 @@
       }
     },
     "centered": {
+      "4": {
+        "4": {
+          "tight": {
+            "0": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.0} - {lineHeight.tight.0}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.0} - {lineHeight.tight.0}) / 2",
+                "typography": "{typography.tight.0}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.0} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.0} / {grid.base}))"
+            },
+            "1": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.1} - {lineHeight.tight.1}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.1} - {lineHeight.tight.1}) / 2",
+                "typography": "{typography.tight.1}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.1} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.1} / {grid.base}))"
+            },
+            "2": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.2} - {lineHeight.tight.2}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.2} - {lineHeight.tight.2}) / 2",
+                "typography": "{typography.tight.2}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "3": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.3} - {lineHeight.tight.3}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.3} - {lineHeight.tight.3}) / 2",
+                "typography": "{typography.tight.3}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "4": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.4} - {lineHeight.tight.4}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.4} - {lineHeight.tight.4}) / 2",
+                "typography": "{typography.tight.4}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "5": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.5} - {lineHeight.tight.5}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.5} - {lineHeight.tight.5}) / 2",
+                "typography": "{typography.tight.5}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "6": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.6} - {lineHeight.tight.6}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.6} - {lineHeight.tight.6}) / 2",
+                "typography": "{typography.tight.6}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "7": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.7} - {lineHeight.tight.7}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.7} - {lineHeight.tight.7}) / 2",
+                "typography": "{typography.tight.7}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "8": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.8} - {lineHeight.tight.8}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.8} - {lineHeight.tight.8}) / 2",
+                "typography": "{typography.tight.8}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.4} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            },
+            "9": {
+              "value": {
+                "horizontalPadding": "{spacing.4}",
+                "paddingBottom": "({spacing.4} * 2 + {capHeight.snappedToGrid.9} - {lineHeight.tight.9}) / 2",
+                "paddingTop": "({spacing.4} * 2 + {capHeight.snappedToGrid.9} - {lineHeight.tight.9}) / 2",
+                "typography": "{typography.tight.9}"
+              },
+              "type": "composition",
+              "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+            }
+          }
+        }
+      }
       "12": {
         "12": {
           "tight": {
