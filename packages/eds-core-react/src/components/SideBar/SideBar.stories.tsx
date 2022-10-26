@@ -1,5 +1,4 @@
 import { Story, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
 import styled from 'styled-components'
 import {
   dashboard,
@@ -7,18 +6,14 @@ import {
   history,
   home,
   add,
-  menu,
 } from '@equinor/eds-icons'
 import {
-  Button,
-  Icon,
   TopBar,
   Divider,
   SideBar,
   SidebarType,
   SidebarLinkProps,
   useSideBar,
-  Scrim,
 } from '../..'
 import page from './SideBar.docs.mdx'
 
