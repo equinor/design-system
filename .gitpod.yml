@@ -50,3 +50,4 @@ vscode:
     - ionutvmi.path-autocomplete
     - jock.svg
     - github.vscode-pull-request-github
+    - ms-azuretools.vscode-bicep
