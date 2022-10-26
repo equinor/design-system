@@ -99,7 +99,8 @@ exports[`SideSheet Matches snapshot 1`] = `
   border: 0;
 }
 
-.c3:disabled {
+.c3:disabled,
+.c3[aria-disabled='true'] {
   cursor: not-allowed;
   background: transparent;
   border: 1px solid transparent;
@@ -163,7 +164,8 @@ exports[`SideSheet Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c3:disabled:hover {
+  .c3:disabled:hover,
+  .c3[aria-disabled='true']:hover {
     background: transparent;
   }
 }

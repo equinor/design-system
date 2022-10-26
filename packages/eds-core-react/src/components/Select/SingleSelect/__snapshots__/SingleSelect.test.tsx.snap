@@ -194,7 +194,8 @@ exports[`SingleSelect Matches snapshot 1`] = `
   border: 0;
 }
 
-.c7:disabled {
+.c7:disabled,
+.c7[aria-disabled='true'] {
   cursor: not-allowed;
   background: transparent;
   border: 1px solid transparent;
@@ -251,7 +252,8 @@ exports[`SingleSelect Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c7:disabled:hover {
+  .c7:disabled:hover,
+  .c7[aria-disabled='true']:hover {
     background: transparent;
   }
 }
