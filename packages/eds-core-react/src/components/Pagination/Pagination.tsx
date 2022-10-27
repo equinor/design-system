@@ -1,13 +1,12 @@
 import {
   forwardRef,
   useState,
-  useLayoutEffect,
   MouseEvent,
   KeyboardEvent,
   HTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
-import { useIsMounted } from '@equinor/eds-utils'
+import { useIsMounted, useIsomorphicLayoutEffect } from '@equinor/eds-utils'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
@@ -120,7 +119,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const isMounted = useIsMounted()
     const items = PaginationControl(pages, activePage)
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (isMounted) {
         setActivePage(1)
         onChange?.(null, 1)
