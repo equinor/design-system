@@ -3,7 +3,6 @@ import {
   useState,
   HTMLAttributes,
   useEffect,
-  useLayoutEffect,
   useRef,
   useMemo,
   useCallback,
@@ -504,11 +503,11 @@ function AutocompleteInner<T>(
 
   const { getFloatingProps } = useInteractions([])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     reference(anchorRef.current)
   }, [anchorRef, reference])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (refs.reference.current && refs.floating.current && isOpen) {
       return autoUpdate(refs.reference.current, refs.floating.current, update)
     }

@@ -1,6 +1,5 @@
 import {
   forwardRef,
-  useLayoutEffect,
   useEffect,
   HTMLAttributes,
   SVGProps,
@@ -137,7 +136,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       whileElementsMounted: autoUpdate,
     })
 
-    useLayoutEffect(() => {
+    useEffect(() => {
       reference(anchorEl)
     }, [anchorEl, reference])
 
