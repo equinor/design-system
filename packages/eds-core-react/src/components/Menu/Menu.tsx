@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useLayoutEffect,
-  HTMLAttributes,
-  forwardRef,
-  useMemo,
-} from 'react'
+import { useEffect, HTMLAttributes, forwardRef, useMemo } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
@@ -136,7 +130,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
       middleware: [offset(4), flip(), shift({ padding: 8 })],
     })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     reference(anchorEl)
   }, [anchorEl, reference])
 
