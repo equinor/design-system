@@ -200,7 +200,6 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       getLabelProps,
       getMenuProps,
       getInputProps,
-      getComboboxProps,
       highlightedIndex,
       getItemProps,
       openMenu,
@@ -217,7 +216,7 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       <ThemeProvider theme={token}>
         <Container className={className} ref={ref}>
           <Label {...getLabelProps()} label={label} disabled={disabled} />
-          <StyledInputWrapper {...getComboboxProps()}>
+          <StyledInputWrapper>
             <Input
               {...getInputProps({ disabled: disabled })}
               readOnly={readOnly}

@@ -102,7 +102,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       getLabelProps,
       getMenuProps,
       getInputProps,
-      getComboboxProps,
       highlightedIndex,
       getItemProps,
       openMenu,
@@ -126,7 +125,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             meta={meta}
             disabled={disabled}
           />
-          <StyledInputWrapper {...getComboboxProps()}>
+          <StyledInputWrapper>
             <PaddedInput
               {...getInputProps({ disabled: disabled })}
               readOnly={readOnly}
