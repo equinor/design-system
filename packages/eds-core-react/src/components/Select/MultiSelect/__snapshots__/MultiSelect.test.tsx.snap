@@ -168,6 +168,8 @@ exports[`MultiSelect Matches snapshot 2`] = `
 }
 
 <button
+  aria-controls="downshift-0-menu"
+  aria-expanded="false"
   aria-label="toggle options"
   class="c0 c1"
   id="downshift-0-toggle-button"
