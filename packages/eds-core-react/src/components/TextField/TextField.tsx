@@ -130,8 +130,8 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         ...fieldProps,
       }
       helperProps = {
-        id: helperTextId,
         ...helperProps,
+        id: helperTextId,
       }
     }
 
