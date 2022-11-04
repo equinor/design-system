@@ -96,7 +96,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react-dom-interactions": "^0.10.1",
-    "downshift": "^6.1.12"
+    "downshift": "^7.0.1"
   },
   "engines": {
     "pnpm": ">=4",

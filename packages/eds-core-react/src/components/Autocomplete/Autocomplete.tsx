@@ -461,7 +461,6 @@ function AutocompleteInner<T>(
     getLabelProps,
     getMenuProps,
     getInputProps,
-    getComboboxProps,
     highlightedIndex,
     getItemProps,
     openMenu,
@@ -580,7 +579,7 @@ function AutocompleteInner<T>(
           disabled={disabled}
         />
 
-        <Container {...getComboboxProps()}>
+        <Container>
           <Input
             {...getInputProps(
               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

@@ -273,28 +273,29 @@ exports[`SingleSelect Matches snapshot 1`] = `
       </span>
     </label>
     <div
-      aria-expanded="false"
-      aria-haspopup="listbox"
-      aria-owns="downshift-0-menu"
       class="c3"
-      role="combobox"
     >
       <div
         class="c4 c5"
       >
         <input
+          aria-activedescendant=""
           aria-autocomplete="list"
           aria-controls="downshift-0-menu"
+          aria-expanded="false"
           aria-labelledby="downshift-0-label"
           autocomplete="off"
           class="c6"
           id="downshift-0-input"
+          role="combobox"
           style="resize: none;"
           type="text"
           value=""
         />
       </div>
       <button
+        aria-controls="downshift-0-menu"
+        aria-expanded="false"
         aria-label="toggle options"
         class="c7 c8"
         id="downshift-0-toggle-button"
