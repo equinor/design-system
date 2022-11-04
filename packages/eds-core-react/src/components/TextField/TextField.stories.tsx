@@ -572,7 +572,7 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
   })
 
   return (
-    <form className="Form" onSubmit={handleSubmit((data) => console.log(data))}>
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
       <Controller
         name="data"
         control={control}
@@ -580,10 +580,7 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
           required: 'Required',
           pattern: { value: /^[0-9]+$/g, message: 'Only digits allowed' },
         }}
-        render={({
-          field: { ref, ...props },
-          fieldState: { invalid, error },
-        }) => (
+        render={({ field: { ref, ...props }, fieldState: { error } }) => (
           <TextField
             {...props}
             id={props.name}
@@ -591,10 +588,10 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
             label="Label"
             inputRef={ref}
             inputIcon={
-              invalid ? <Icon data={error_filled} title="error" /> : undefined
+              error ? <Icon data={error_filled} title="error" /> : undefined
             }
             helperText={error?.message}
-            variant={invalid ? 'error' : undefined}
+            variant={error ? 'error' : undefined}
           />
         )}
       />
@@ -613,7 +610,7 @@ export const Validation: Story<TextFieldProps> = () => {
     console.log((e.target[0] as HTMLInputElement).value)
   }
   return (
-    <form className="Form" onSubmit={handleSumbmit}>
+    <form onSubmit={handleSumbmit}>
       <TextField
         id="number-validation"
         label="label"
