@@ -31,7 +31,7 @@ It has a toggleable collapsed and expanded state. This is an adaptation of the [
 </ul>
 
 ```tsx
-import { SideBar, SidebarLinkProps } from '@equinor/eds-lab-react'
+import { SideBar, SidebarLinkProps } from '@equinor/eds-core-react'
   const menuItemsInitial: SidebarLinkProps[] = [
     {
       name: 'Home',
@@ -80,7 +80,7 @@ Use the `active` property to indicate current active path when used for navigati
 Use <code>useSideBar</code> to detect sidebar state in your custom content if it needs to be modified based on expanded/collapsed state. 
 Here it is used to make the footer with two states.
 ```tsx
-import { SideBar, useSideBar } from '@equinor/eds-lab-react'
+import { SideBar, useSideBar } from '@equinor/eds-core-react'
 ```
 <Story id="navigation-sidebar--custom-content" />
 
