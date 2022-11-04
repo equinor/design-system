@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import {
   TextField,
   TextFieldProps,
@@ -605,3 +605,35 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
   )
 }
 ValidationWithReactHookForm.storyName = 'Validation with React Hook Form'
+
+export const Validation: Story<TextFieldProps> = () => {
+  const [isValid, setIsValid] = useState<boolean>(true)
+  const handleSumbmit = (e: FormEvent) => {
+    e.preventDefault()
+    console.log((e.target[0] as HTMLInputElement).value)
+  }
+  return (
+    <form className="Form" onSubmit={handleSumbmit}>
+      <TextField
+        id="number-validation"
+        label="label"
+        placeholder="Digits only"
+        required
+        pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
+        variant={isValid ? undefined : 'error'}
+        helperText={isValid ? undefined : 'Only digits allowed'}
+        inputIcon={
+          isValid ? undefined : <Icon data={error_filled} title="error" />
+        }
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setIsValid(
+            event.target.checkValidity() && !isNaN(Number(event.target.value)),
+          )
+        }}
+      />
+      <Button type="submit" style={{ marginTop: '14px' }}>
+        Submit
+      </Button>
+    </form>
+  )
+}
