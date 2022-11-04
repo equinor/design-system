@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.26.0] - 2022-11-01
+## [0.26.0] - 2022-11-04
 
 ### Added
 
@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ♿️ `Tooltip` better announced by screen readers by @martalalik in https://github.com/equinor/design-system/pull/2596
 - 💄 `TopBar.Header` Changed gap to 12px (from from 24px) by @martalalik in https://github.com/equinor/design-system/pull/2623
 - ✨ Replaced unnecessary occurrences of `useLayoutEffect` with `useEffect` for better ssr support by @oddvernes in https://github.com/equinor/design-system/pull/2631
+
+### Fixed
+
+- 🐛 `Textfield`: fixed missing id on helpertext for aria-labelledby by @oddvernes in https://github.com/equinor/design-system/pull/2639
 
 ## [0.25.0] - 2022-10-19
 
