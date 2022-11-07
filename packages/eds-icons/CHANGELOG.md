@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2022-11-07
+
+### Added
+
+- `enlarge`
+- `offline_document`
+- `open_side_sheet`
+- `reduce`
+- `sheet_bottom_position`
+- `sheet_leftposition`
+
+### Fixed
+
+- Rendering error `approve`
+- Rendering error `tag_more`
+
+### Changed
+
+- Resized `in_progress`
+
 ## [0.15.0] - 2022-10-12
 
 ### Added

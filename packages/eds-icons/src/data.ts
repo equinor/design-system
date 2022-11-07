@@ -1,5 +1,23 @@
 import type { IconData } from './types'
 
+export const open_side_sheet: IconData = {
+  name: 'open_side_sheet',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M21 4H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h18c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 14H10V6h10v12zm-4.84-7H11v2h4.16l-1.59 1.59L14.99 16 19 12.01 14.99 8l-1.41 1.41L15.16 11z',
+}
+
+export const reduce: IconData = {
+  name: 'reduce',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M3 4h2v2H3V4zM7 6V4h2v2H7zM3 8v2h2V8H3zM3 13v9h9v-9H3zm2 7v-5h5v5H5zM17 22h-2v-2h2v2zM19 20v2h2v-2h-2zM21 16v2h-2v-2h2zM21 10h-4.512l4.25-4.25-1.414-1.415L15 8.66V4h-2v8h8v-2z',
+}
+
 export const filter_alt_active: IconData = {
   name: 'filter_alt_active',
   prefix: 'eds',
@@ -538,7 +556,35 @@ export const in_progress: IconData = {
   prefix: 'eds',
   height: '24',
   width: '24',
-  svgPathData: 'M12 18V6a6 6 0 1 0 0 12zm0-14a8 8 0 1 1 0 16 8 8 0 0 1 0-16z',
+  svgPathData:
+    'M12 19.5v-15a7.5 7.5 0 1 0 0 15zM12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z',
+}
+
+export const sheet_bottom_position: IconData = {
+  name: 'sheet_bottom_position',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M3 4h18c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1zm1 10h16V6H4v8z',
+}
+
+export const sheet_leftposition: IconData = {
+  name: 'sheet_leftposition',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M3 4h18c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1zm7 14h10V6H10v12z',
+}
+
+export const enlarge: IconData = {
+  name: 'enlarge',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M9 3H3v18h18v-6h-2v4H5V5h4V3zM10 12h2v2h-2v-2zM6.375 14v-2h2.25v2h-2.25zM10 15.375h2v2.25h-2v-2.25zM17.512 5H13V3h8v8h-2V6.34l-4.324 4.325L13.26 9.25 17.512 5z',
 }
 
 export const signature: IconData = {
@@ -548,15 +594,6 @@ export const signature: IconData = {
   width: '24',
   svgPathData:
     'm17.37 2.29 2.34 2.34c.39.39.39 1.02 0 1.41l-1.83 1.83-3.75-3.75 1.83-1.83c.19-.19.44-.29.7-.29.26 0 .51.09.71.29zM2 16.25V20h3.75L16.81 8.94l-3.75-3.75L2 16.25zM4.92 18H4v-.92l9.06-9.06.92.92L4.92 18zM10 18h9v2H8l2-2z',
-}
-
-export const approve: IconData = {
-  name: 'approve',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M16.59 7.58 10 14.17l-2.59-2.58L6 13l4 4 8-8-1.41-1.42zm15.33 1.781 2.137 2.968 3.72.852-.377 3.58 2.541 2.826-2.54 2.765.374 3.56-3.705.91-2.082 2.976-3.393-1.33-3.301 1.33-2.167-2.966-3.722-.854.375-3.625-2.542-2.766L3.19 9.18 2.813 5.6l3.712-.85 2.076-2.97 3.395 1.33 3.334-1.33zM9.338 4.218l-1.615 2.31-2.735.627.284 2.702-1.92 2.135 1.92 2.09-.285 2.762 2.724.625 1.69 2.312 2.594-1.045 2.667 1.045 1.61-2.302 2.741-.673-.286-2.723 1.921-2.09-1.92-2.136.284-2.702-2.727-.626-1.665-2.311-2.617 1.045-2.665-1.045z',
 }
 
 export const select_all: IconData = {
@@ -1243,6 +1280,15 @@ export const zip_file: IconData = {
   width: '24',
   svgPathData:
     'M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2zm-.83 2 2 2H13v2h2v2h-2v2h2v2h-2v2H4V6h5.17zM15 16h2v-2h-2v-2h2v-2h-2V8h5v10h-5v-2z',
+}
+
+export const approve: IconData = {
+  name: 'approve',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'm15.33 1.781 2.137 2.968 3.72.852-.377 3.58 2.541 2.826-2.54 2.765.374 3.56-3.705.91-2.082 2.976-3.393-1.33-3.301 1.33-2.167-2.966-3.722-.854.375-3.625-2.542-2.766L3.19 9.18 2.813 5.6l3.712-.85 2.076-2.97 3.395 1.33 3.334-1.33zM9.338 4.218l-1.615 2.31-2.735.627.284 2.702-1.92 2.135 1.92 2.09-.285 2.762 2.724.625 1.69 2.312 2.594-1.045 2.667 1.045 1.61-2.302 2.741-.673-.286-2.723 1.921-2.09-1.92-2.136.284-2.702-2.727-.626-1.665-2.311-2.617 1.045-2.665-1.045zM16.59 7.58 10 14.17l-2.59-2.58L6 13l4 4 8-8-1.41-1.42z',
 }
 
 export const calendar_event: IconData = {
@@ -3765,6 +3811,15 @@ export const placeholder_icon: IconData = {
         'M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z',
     },
   },
+}
+
+export const offline_document: IconData = {
+  name: 'offline_document',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm5-9h2v4h2.5L12 19l-3.5-4H11v-4z',
 }
 
 export const folder_shared: IconData = {
@@ -6353,7 +6408,7 @@ export const tag_more: IconData = {
   height: '24',
   width: '24',
   svgPathData:
-    'M6.657 6.657a1.358 1.358 0 0 1 1.914 0 1.358 1.358 0 0 1 0 1.914 1.358 1.358 0 0 1-1.914 0 1.358 1.358 0 0 1 0-1.914zM12.4 12.4a1.358 1.358 0 0 1 1.913 0 1.358 1.358 0 0 1 0 1.914 1.358 1.358 0 0 1-1.914 0 1.358 1.358 0 0 1 0-1.915zM11.442 9.528a1.358 1.358 0 0 0-1.914 0 1.357 1.357 0 0 0 0 1.914 1.357 1.357 0 0 0 1.914 0 1.357 1.357 0 0 0 0-1.914zm21.41 11.58-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM13 20.01 4 11V4h7v-.01l9 9-7 7.02z',
+    'm21.41 11.58-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM13 20.01 4 11V4h7v-.01l9 9-7 7.02zM6.657 6.657a1.358 1.358 0 0 1 1.914 0 1.358 1.358 0 0 1 0 1.914 1.358 1.358 0 0 1-1.914 0 1.358 1.358 0 0 1 0-1.914zM12.4 12.4a1.358 1.358 0 0 1 1.913 0 1.358 1.358 0 0 1 0 1.914 1.358 1.358 0 0 1-1.914 0 1.358 1.358 0 0 1 0-1.914zM11.442 9.528a1.357 1.357 0 0 0-1.914 0 1.358 1.358 0 0 0 0 1.915 1.358 1.358 0 0 0 1.914 0 1.358 1.358 0 0 0 0-1.915z',
 }
 
 export const tag_relations: IconData = {
