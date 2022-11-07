@@ -3813,8 +3813,8 @@ export const placeholder_icon: IconData = {
   },
 }
 
-export const offline_documents_48_1: IconData = {
-  name: 'offline_documents_48_1',
+export const offline_document: IconData = {
+  name: 'offline_document',
   prefix: 'eds',
   height: '24',
   width: '24',
