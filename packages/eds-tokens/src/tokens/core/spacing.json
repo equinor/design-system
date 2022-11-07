@@ -1126,7 +1126,7 @@
         "type": "color"
       }
     },
-    "redWarm": {
+    "redCold": {
       "100": {
         "value": "#FFECEE",
         "type": "color"
@@ -1196,7 +1196,7 @@
         "type": "color"
       }
     },
-    "redColder": {
+    "redWarm": {
       "100": {
         "value": "#FFECEC",
         "type": "color"
