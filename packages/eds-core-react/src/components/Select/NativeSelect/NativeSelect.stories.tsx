@@ -5,7 +5,7 @@ import { ComponentMeta } from '@storybook/react'
 import page from './NativeSelect.docs.mdx'
 
 export default {
-  title: 'Inputs/Select/NativeSelect',
+  title: 'Inputs/NativeSelect',
   component: NativeSelect,
   parameters: {
     docs: {
