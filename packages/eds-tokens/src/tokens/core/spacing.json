@@ -1775,7 +1775,7 @@
         "value": "#66FFFF",
         "type": "color"
       },
-      "600": {
+      "500": {
         "value": "#00FFFF",
         "type": "color"
       },
@@ -1801,7 +1801,7 @@
         "value": "#99FF66",
         "type": "color"
       },
-      "600": {
+      "500": {
         "value": "#55FF00",
         "type": "color"
       },
@@ -1827,7 +1827,7 @@
         "value": "#FFE666",
         "type": "color"
       },
-      "600": {
+      "500": {
         "value": "#FFD500",
         "type": "color"
       },
@@ -1853,7 +1853,7 @@
         "value": "#FFA866",
         "type": "color"
       },
-      "600": {
+      "500": {
         "value": "#FF6F00",
         "type": "color"
       },
@@ -1879,7 +1879,7 @@
         "value": "#FF7583",
         "type": "color"
       },
-      "600": {
+      "500": {
         "value": "#FF0019",
         "type": "color"
       },
