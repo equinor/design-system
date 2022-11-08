@@ -1761,6 +1761,136 @@
         "value": "#002124",
         "type": "color"
       }
+    },
+    "turquoiseAlarm": {
+      "100": {
+        "value": "#CCFFFF",
+        "type": "color"
+      },
+      "300": {
+        "value": "#99FFFF",
+        "type": "color"
+      },
+      "400": {
+        "value": "#66FFFF",
+        "type": "color"
+      },
+      "600": {
+        "value": "#00FFFF",
+        "type": "color"
+      },
+      "700": {
+        "value": "#22D5D8",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#116D6E",
+        "type": "color"
+      }
+    },
+    "greenAlarm": {
+      "100": {
+        "value": "#DDFFCC",
+        "type": "color"
+      },
+      "300": {
+        "value": "#BBFF99",
+        "type": "color"
+      },
+      "400": {
+        "value": "#99FF66",
+        "type": "color"
+      },
+      "600": {
+        "value": "#55FF00",
+        "type": "color"
+      },
+      "700": {
+        "value": "#4BE000",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#297A00",
+        "type": "color"
+      }
+    },
+    "yellowAlarm": {
+      "100": {
+        "value": "#FFF7CC",
+        "type": "color"
+      },
+      "300": {
+        "value": "#FFF099",
+        "type": "color"
+      },
+      "400": {
+        "value": "#FFE666",
+        "type": "color"
+      },
+      "600": {
+        "value": "#FFD500",
+        "type": "color"
+      },
+      "700": {
+        "value": "#E5BF00",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#7A6600",
+        "type": "color"
+      }
+    },
+    "orangeAlarm": {
+      "100": {
+        "value": "#FFE2CC",
+        "type": "color"
+      },
+      "300": {
+        "value": "#FFC599",
+        "type": "color"
+      },
+      "400": {
+        "value": "#FFA866",
+        "type": "color"
+      },
+      "600": {
+        "value": "#FF6F00",
+        "type": "color"
+      },
+      "700": {
+        "value": "#E56300",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#994200",
+        "type": "color"
+      }
+    },
+    "redAlarm": {
+      "100": {
+        "value": "#FFE0E3",
+        "type": "color"
+      },
+      "300": {
+        "value": "#FFADB6",
+        "type": "color"
+      },
+      "400": {
+        "value": "#FF7583",
+        "type": "color"
+      },
+      "600": {
+        "value": "#FF0019",
+        "type": "color"
+      },
+      "700": {
+        "value": "#EB002C",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#A3001F",
+        "type": "color"
+      }
     }
   }
 }
