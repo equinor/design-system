@@ -14,7 +14,7 @@ Extracts design decisions into [design tokens] from Figma using the [Figma Web A
 3. Set `FIGMA_TOKEN` env variable to the new personal access token
 4. Run `pnpm install --filter=./scripts/figma-broker` from root
 
-`### Run
+### Run
 
 1. Run either `tokens` or `assets` script with a `fileId` and/or flag for forcing to fetch new data from Figma.
 
