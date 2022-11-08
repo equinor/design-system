@@ -49,6 +49,8 @@ Examples of common used types (`input` type).
 
 <Story id="inputs-textfield--types" />
 
+**Note:** While `type="number"` does provide native validation, the implementation is inconsistent across browsers. We instead recommend using custom validation like the examples provided [here](?path=/docs/inputs-textfield--validation).
+
 ### Multiline
 
 Changes the `input` to `textarea` for multiline support. 
@@ -103,11 +105,15 @@ Compact `TextField` uses `EdsProvider`
 
 <Story id="inputs-textfield--compact" />
 
-### Validation with React Hook Form
+### Validation
 
 How input validation is handled is up to the developer. In this example we use <a href="https://react-hook-form.com/">React Hook Form</a>.
 
 <Story id="inputs-textfield--validation-with-react-hook-form" />
+
+Here is one way to do it using `pattern` and `onChange`
+
+<Story id="inputs-textfield--validation" />
 
 
 
