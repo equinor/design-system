@@ -11,7 +11,7 @@ import {
   Switch,
   Button,
   Menu,
-  SingleSelect,
+  Autocomplete,
 } from '../../src'
 import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
@@ -228,10 +228,10 @@ export const DataTable: Story<TableProps> = (args) => {
               if (idx === 2) {
                 return (
                   <Cell key={cellValue}>
-                    <SingleSelect
+                    <Autocomplete
                       label=""
-                      initialSelectedItem={cellValue}
-                      items={items}
+                      options={items}
+                      initialSelectedOptions={[cellValue]}
                       title="Origin"
                       aria-labelledby="head-origin"
                     />
