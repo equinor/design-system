@@ -584,8 +584,7 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
           <TextField
             {...props}
             id={props.name}
-            placeholder="Digits only"
-            label="Label"
+            label="Digits only"
             inputRef={ref}
             inputIcon={
               error ? <Icon data={error_filled} title="error" /> : undefined
@@ -613,12 +612,11 @@ export const Validation: Story<TextFieldProps> = () => {
     <form onSubmit={handleSumbmit}>
       <TextField
         id="number-validation"
-        label="label"
-        placeholder="Digits only"
+        label="positive numbers only"
         required
         pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
         variant={isValid ? undefined : 'error'}
-        helperText={isValid ? undefined : 'Only digits allowed'}
+        helperText={isValid ? undefined : 'Only positive numbers allowed'}
         inputIcon={
           isValid ? undefined : <Icon data={error_filled} title="error" />
         }
