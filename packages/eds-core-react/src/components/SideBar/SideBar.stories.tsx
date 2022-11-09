@@ -1,4 +1,5 @@
 import { Story, ComponentMeta } from '@storybook/react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import {
   dashboard,
@@ -14,6 +15,7 @@ import {
   SidebarType,
   SidebarLinkProps,
   useSideBar,
+  Menu,
 } from '../..'
 import page from './SideBar.docs.mdx'
 
@@ -151,6 +153,15 @@ export const CustomContent: Story<SidebarType> = () => {
 }
 
 export const WithButton: Story<SidebarType> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'Dashboard',
@@ -171,9 +182,10 @@ export const WithButton: Story<SidebarType> = () => {
       <SideBar>
         <SideBar.Content>
           <SideBar.Button
-            label="Create story"
+            label="Add story"
             icon={add}
-            onClick={() => console.log('clicked')}
+            onClick={() => (isOpen ? closeMenu() : openMenu())}
+            ref={setAnchorEl}
           />
           <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
           {menuItems.map((m) => (
@@ -184,6 +196,18 @@ export const WithButton: Story<SidebarType> = () => {
           <SideBar.Toggle />
         </SideBar.Footer>
       </SideBar>
+      <Menu
+        open={isOpen}
+        onClose={closeMenu}
+        anchorEl={anchorEl}
+        placement="right-start"
+      >
+        <Menu.Section title="Add story">
+          <Menu.Item onClick={closeMenu}>Featured story</Menu.Item>
+          <Menu.Item onClick={closeMenu}>News article</Menu.Item>
+          <Menu.Item onClick={closeMenu}>Blog post</Menu.Item>
+        </Menu.Section>
+      </Menu>
     </SidebarContainer>
   )
 }
@@ -228,13 +252,12 @@ export const ActivePath: Story<SidebarType> = () => {
     </SidebarContainer>
   )
 }
+const SidebarContainerWithTopbar = styled(SidebarContainer)`
+  display: grid;
+  grid-template-rows: auto 1fr;
+`
 
 export const WithTopbar: Story<SidebarType> = () => {
-  const SidebarContainerWithTopbar = styled(SidebarContainer)`
-    display: grid;
-    grid-template-rows: auto 1fr;
-  `
-
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'Dashboard',
