@@ -1,5 +1,7 @@
-import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from 'react'
-import { Button, Icon, Tooltip } from '../..'
+import { forwardRef, HTMLAttributes } from 'react'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import { Tooltip } from '../Tooltip'
 import { useSideBar } from './SideBar.context'
 import { sidebar as tokens } from './SideBar.tokens'
 import { expand, collapse } from '@equinor/eds-icons'
@@ -37,11 +39,8 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme }) => {
 
 type SideBarToggleProps = HTMLAttributes<HTMLDivElement>
 
-export const SideBarToggle: ForwardRefExoticComponent<SideBarToggleProps> =
-  forwardRef<HTMLDivElement, SideBarToggleProps>(function SideBarToggle(
-    { ...rest },
-    ref,
-  ) {
+export const SideBarToggle = forwardRef<HTMLDivElement, SideBarToggleProps>(
+  function SideBarToggle({ ...rest }, ref) {
     const props = {
       ...rest,
       ref,
@@ -60,4 +59,5 @@ export const SideBarToggle: ForwardRefExoticComponent<SideBarToggleProps> =
         </Tooltip>
       </ToggleContainer>
     )
-  })
+  },
+)

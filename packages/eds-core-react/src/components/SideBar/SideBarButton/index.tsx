@@ -1,5 +1,7 @@
-import { ForwardRefExoticComponent, forwardRef } from 'react'
-import { Button, ButtonProps, Icon, Tooltip } from '../../..'
+import { forwardRef } from 'react'
+import { Button, ButtonProps } from '../../Button'
+import { Icon } from '../../Icon'
+import { Tooltip } from '../../Tooltip'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { useSideBar } from '../SideBar.context'
 import styled, { css } from 'styled-components'
@@ -48,11 +50,8 @@ export type SideBarButtonProps = {
   icon: IconData
 } & Omit<ButtonProps, 'href' | 'type' | 'fullWidth' | 'variant'>
 
-export const SideBarButton: ForwardRefExoticComponent<SideBarButtonProps> =
-  forwardRef<HTMLButtonElement, SideBarButtonProps>(function SideBarToggle(
-    { label, icon, style, className, ...rest },
-    ref,
-  ) {
+export const SideBarButton = forwardRef<HTMLButtonElement, SideBarButtonProps>(
+  function SideBarToggle({ label, icon, style, className, ...rest }, ref) {
     const props = {
       ...rest,
       ref,
@@ -80,4 +79,5 @@ export const SideBarButton: ForwardRefExoticComponent<SideBarButtonProps> =
         </MenuButtonContainer>
       </Tooltip>
     )
-  })
+  },
+)
