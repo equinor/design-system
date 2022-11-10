@@ -1,5 +1,7 @@
 import { forwardRef } from 'react'
-import { Button, ButtonProps, Icon, Tooltip } from '../../..'
+import { Button, ButtonProps } from '../../Button'
+import { Icon } from '../../Icon'
+import { Tooltip } from '../../Tooltip'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { useSideBar } from '../SideBar.context'
 import styled, { css } from 'styled-components'
