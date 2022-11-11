@@ -78,28 +78,3 @@ export const WithAction: Story<SnackbarProps> = () => {
   )
 }
 WithAction.storyName = 'With action'
-
-export const Compact: Story<SnackbarProps> = () => {
-  const [open, setOpen] = useState(false)
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <Button type="button" onClick={() => setOpen(true)}>
-        Show a simple compact snackbar
-      </Button>
-      <Snackbar
-        open={open}
-        onClose={() => setOpen(false)}
-        autoHideDuration={5000}
-      >
-        Message goes here
-      </Snackbar>
-    </EdsProvider>
-  )
-}
