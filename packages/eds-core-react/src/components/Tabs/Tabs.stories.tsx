@@ -502,7 +502,7 @@ export const OverflowScrollStyled: Story<TabsProps> = () => {
 }
 OverflowScrollStyled.storyName = 'Overflow with customized scrollbar'
 
-export const Compact: Story<TabsProps> = () => {
+/* export const Compact: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
   const [density, setDensity] = useState<Density>('comfortable')
 
@@ -534,4 +534,4 @@ Compact.decorators = [
       </Stack>
     )
   },
-]
+] */

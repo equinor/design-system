@@ -303,7 +303,7 @@ export const NoTitle: Story<DialogProps> = () => {
 }
 NoTitle.storyName = 'No title'
 
-export const Compact: Story<DialogProps> = () => {
+/* export const Compact: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [density, setDensity] = useState<Density>('comfortable')
   const handleOpen = () => {
@@ -341,4 +341,4 @@ export const Compact: Story<DialogProps> = () => {
       </Dialog>
     </EdsProvider>
   )
-}
+} */

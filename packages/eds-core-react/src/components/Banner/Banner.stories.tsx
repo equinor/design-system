@@ -135,7 +135,7 @@ export const TextAndIconAndAction: Story<BannerProps> = () => (
 )
 TextAndIconAndAction.storyName = 'Text and icon and actions'
 
-export const Compact: Story<BannerProps> = () => {
+/* export const Compact: Story<BannerProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -174,4 +174,4 @@ export const Compact: Story<BannerProps> = () => {
       </Banner>
     </EdsProvider>
   )
-}
+} */
