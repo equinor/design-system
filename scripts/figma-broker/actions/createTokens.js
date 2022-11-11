@@ -92,9 +92,9 @@ export async function createTokens({ query }) {
   const figmaFile = processFigmaFile(data)
   const tokens = makeTokens(figmaFile)
 
-  // writeJSTokens(tokens)
+  writeJSTokens(tokens)
   writeJsonTokens(tokens)
-  // writeCSSTokens(tokens)
+  writeCSSTokens(tokens)
 
   console.info('Finished exporting tokens')
 
