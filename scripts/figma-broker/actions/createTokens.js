@@ -37,9 +37,9 @@ const writeJSTokens = (tokens) => {
   // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
 }
 
-// const writeJsonTokens = (tokens) => {
-//   writeResults(tokens, PATHS_.BASE_TOKENS_JSON, 'json')
-// }
+const writeJsonTokens = (tokens) => {
+  writeResults(tokens, PATHS_.BASE_TOKENS_JSON, 'json')
+}
 
 const writeCSSTokens = (tokens) => {
   let typographyCss
@@ -93,7 +93,7 @@ export async function createTokens({ query }) {
   const tokens = makeTokens(figmaFile)
 
   writeJSTokens(tokens)
-  // writeJsonTokens(tokens)
+  writeJsonTokens(tokens)
   writeCSSTokens(tokens)
 
   console.info('Finished exporting tokens')

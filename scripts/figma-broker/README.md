@@ -10,8 +10,9 @@ Extracts design decisions into [design tokens] from Figma using the [Figma Web A
 ### Setup
 
 1. Go to Figma and generate a new personal access token (Found under your account settings)
-2. Add an `.env` file in the root of `figma-broker` or if you are using Codespaces, go to `Github Settings` → `Codespaces` and create a new secret. Give it the name `FIGMA_TOKEN`, paste your token as value, and select `equinor/design-system` in the repository access select menu.
+2. Add an `.env` file in the root of `figma-broker` or if you are using Codespaces, go to `Github Settings` → `Codespaces` and create a new secret. Give it the name `FIGMA_TOKEN`, paste your token as value, and select `equinor/design-system` in the repository access select menu. If you use Gitpod, type `eval $(gp env -e FIGMA_TOKEN=your-token)` in the terminal. Skip the `$` if you’re using Fish.
 3. Set `FIGMA_TOKEN` env variable to the new personal access token
+4. Run `pnpm install --filter=./scripts/figma-broker` from root
 
 ### Run
 
@@ -28,8 +29,8 @@ https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?no
 ```
 
 ```sh
-pnpm run tokens 0TbIXrrObWj80Cf7KucKYFL0 true  # Fetches new data from Figma
-pnpm run tokens 0TbIXrrObWj80Cf7KucKYFL0 # Reads local figma json file
+pnpm export:tokens -- true  # Fetches new data from Figma
+pnpm export:tokens # Reads local figma json file
 ```
 
 ## Notes
