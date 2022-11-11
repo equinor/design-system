@@ -9,6 +9,7 @@
     "theme/comfortable",
     "theme/compact",
     "theme/light",
-    "theme/dark"
+    "theme/dark",
+    "core/color"
   ]
 }
