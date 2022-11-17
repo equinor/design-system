@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.27.0] - 2022-11-17
+
+### Added
+
+* 📝 `Textfield` Storybook: Added validation example by @oddvernes in https://github.com/equinor/design-system/pull/2640
+
+### Fixed
+
+* 🐛 `SideBar`: Fixed `Sidebar.Button` and `Sidebar.Toggle` ref by @oddvernes in https://github.com/equinor/design-system/pull/2650
+
+### Changed
+
+* ⬆️ Upgraded downshift to 7.0.1 (Improves ARIA-patterns in `Autocomplete`) by @denektenina in https://github.com/equinor/design-system/pull/2637
+
+### Removed
+
+* 🔥 Removed deprecated `SingleSelect` and `MultiSelect` by @denektenina in https://github.com/equinor/design-system/pull/2643
+
 ## [0.26.0] - 2022-11-04
 
 ### Added
