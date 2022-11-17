@@ -314,7 +314,7 @@ export const PersistentPopover: Story<PopoverProps> = () => {
 }
 PersistentPopover.storyName = 'Persistent popover'
 
-export const Compact: Story<PopoverProps> = () => {
+/* export const Compact: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
 
@@ -355,7 +355,7 @@ export const Compact: Story<PopoverProps> = () => {
       </Popover>
     </EdsProvider>
   )
-}
+} */
 
 export const AppLauncher: Story<PopoverProps> = () => {
   const Wrapper = styled.div`

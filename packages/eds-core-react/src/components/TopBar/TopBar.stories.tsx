@@ -118,7 +118,7 @@ export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => {
 }
 WithSearchAndIcons.storyName = 'With search and icons'
 
-export const Compact: Story<TopbarProps> = (): JSX.Element => {
+/* export const Compact: Story<TopbarProps> = (): JSX.Element => {
   const Icons = styled.div`
     display: flex;
     align-items: center;
@@ -159,4 +159,4 @@ export const Compact: Story<TopbarProps> = (): JSX.Element => {
       </TopBar>
     </EdsProvider>
   )
-}
+} */

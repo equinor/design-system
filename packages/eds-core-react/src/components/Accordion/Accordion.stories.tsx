@@ -216,7 +216,7 @@ export const Header: Story<AccordionProps> = () => {
   )
 }
 
-export const Compact: Story<AccordionProps> = () => {
+/* export const Compact: Story<AccordionProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -244,4 +244,4 @@ export const Compact: Story<AccordionProps> = () => {
       </EdsProvider>
     </>
   )
-}
+} */

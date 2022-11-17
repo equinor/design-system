@@ -195,7 +195,7 @@ export const Introduction: Story<TableOfContentsProps> = (args) => {
   )
 }
 
-export const Compact: Story<TableOfContentsProps> = () => {
+/* export const Compact: Story<TableOfContentsProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -358,4 +358,4 @@ export const Compact: Story<TableOfContentsProps> = () => {
       </aside>
     </EdsProvider>
   )
-}
+} */
