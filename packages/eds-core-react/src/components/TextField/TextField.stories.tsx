@@ -56,6 +56,8 @@ export default {
       description:
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
+    inputRef: { control: { type: null } },
+    textareaRef: { control: { type: null } },
   },
   parameters: {
     docs: {
