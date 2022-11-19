@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
+import { useVirtual, VirtualItem } from '@tanstack/react-virtual'
 import styled from 'styled-components'
 import { Story, ComponentMeta } from '@storybook/react'
 import {
@@ -322,5 +323,88 @@ export const Sortable: Story<TableProps> = () => {
         ))}
       </Table.Body>
     </Table>
+  )
+}
+
+type Photo = {
+  albumId: number
+  id: number
+  title: string
+  url: string
+  thumbnailUrl: string
+}
+
+export const VirtualScrollingLong: Story<TableProps> = () => {
+  const [data, setData] = useState<Array<Photo>>([])
+  const parentRef = useRef()
+
+  // useCallback returns a memoized version of the callback that only changes if one of the dependencies has changed
+  const estimateSize = useCallback(() => {
+    return 32
+  }, [])
+
+  const virtualizer = useVirtual({
+    size: data.length,
+    parentRef,
+    estimateSize,
+  })
+
+  useEffect(() => {
+    void fetch(`https://jsonplaceholder.typicode.com/photos`)
+      .then((r) => r.json())
+      .then((d) => {
+        setData(d)
+      })
+  }, [])
+
+  const virtualRows = virtualizer.virtualItems
+  const paddingTop = virtualRows.length ? virtualRows[0].start : 0
+  const paddingBottom = virtualRows.length
+    ? virtualizer.totalSize - virtualRows[virtualRows.length - 1].end
+    : 0
+
+  return (
+    <div style={{ height: '600px', overflow: 'auto' }}>
+      <Table style={{ width: '100%' }} ref={parentRef}>
+        <Table.Head style={{ position: 'sticky', top: 0 }}>
+          <Table.Row>
+            <Table.Cell>ID</Table.Cell>
+            <Table.Cell>Album ID</Table.Cell>
+            <Table.Cell>Title</Table.Cell>
+            <Table.Cell>URL</Table.Cell>
+            <Table.Cell>Thumbnail url</Table.Cell>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell style={{ height: `${paddingTop}px` }}></Table.Cell>
+          </Table.Row>
+          {virtualRows.map((virtualRow: VirtualItem) => {
+            const row: Photo = data[virtualRow.index]
+
+            return (
+              <Table.Row key={row.id}>
+                <Table.Cell>{row.id}</Table.Cell>
+                <Table.Cell>{row.albumId}</Table.Cell>
+                <Table.Cell>{row.title}</Table.Cell>
+                <Table.Cell>
+                  <Typography link href={row.url} target="_blank">
+                    Open image
+                  </Typography>
+                </Table.Cell>
+                <Table.Cell>
+                  <Typography link href={row.thumbnailUrl} target="_blank">
+                    Open thumbnail
+                  </Typography>
+                </Table.Cell>
+              </Table.Row>
+            )
+          })}
+          <Table.Row>
+            <Table.Cell style={{ height: `${paddingBottom}px` }}></Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
   )
 }
