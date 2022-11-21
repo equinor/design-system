@@ -352,7 +352,7 @@ export const VirtualScrollingLong: Story<TableProps> = () => {
   useEffect(() => {
     void fetch(`https://jsonplaceholder.typicode.com/photos`)
       .then((r) => r.json())
-      .then((d) => {
+      .then((d: Photo[]) => {
         setData(d)
       })
   }, [])
