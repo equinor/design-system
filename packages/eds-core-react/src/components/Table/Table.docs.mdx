@@ -96,20 +96,12 @@ Compact `Table` using `EdsProvider` (this will also apply compact on all nested 
 
 ### Sortable
 
-This is just an example demonstrating, how simple sorting can be done. There are many different ways to solve it.
+This is just an example demonstrating how simple sorting can be done. There are many different ways to solve it.
 
 <Story id="data-display-table--sortable" />
 
 ### Virtual scrolling
-Virtual scrolling is a way of displaying large amounts of data in a way that doesn't overload the DOM. 
-Instead of setting all the elements in the DOM, only the elements that are visible at any given time is placed in the DOM. When the user scrolls, 
-the content of the table is replaced with new elements. 
+Virtual scrolling is not supported in the EDS-table, and there are many different ways to implement it. Here 
+is an example of how it can be solved using <a href="https://tanstack.com/virtual/v3">react-virtual</a> 
 
-There are several ways of implementing this, and also a lot of packages available. In the following we will show an example based on code written for us 
-by EDS-user <a href="https://github.com/yusijs">Ronnie Laugen</a>, who figured we needed an example of how virtual scroll could be used in the EDS-table.
-
-We added a package called <a href="https://tanstack.com/virtual/v3">react-virtual</a> which solves this problem in a very typical way: 
-The table only shows a small subset of the data, and uses an empty row over and under the content to simulate a larger list. To achieve this the heights 
-must be recalculated on each scroll. This package provides a hook that does the recalculating and provides the heights and the rows to display in the list.
-
-<Story id="data-display-table--virtual-scrolling-long" />
+<Story id="data-display-table--virtual-scrolling" />

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { useVirtual, VirtualItem } from '@tanstack/react-virtual'
+import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
 import styled from 'styled-components'
 import { Story, ComponentMeta } from '@storybook/react'
 import {
@@ -334,19 +334,14 @@ type Photo = {
   thumbnailUrl: string
 }
 
-export const VirtualScrollingLong: Story<TableProps> = () => {
+export const VirtualScrolling: Story<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
   const parentRef = useRef()
 
-  // useCallback returns a memoized version of the callback that only changes if one of the dependencies has changed
-  const estimateSize = useCallback(() => {
-    return 32
-  }, [])
-
-  const virtualizer = useVirtual({
-    size: data.length,
-    parentRef,
-    estimateSize,
+  const virtualizer = useVirtualizer({
+    count: data.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 47,
   })
 
   useEffect(() => {
@@ -357,16 +352,22 @@ export const VirtualScrollingLong: Story<TableProps> = () => {
       })
   }, [])
 
-  const virtualRows = virtualizer.virtualItems
+  const virtualRows = virtualizer.getVirtualItems()
   const paddingTop = virtualRows.length ? virtualRows[0].start : 0
   const paddingBottom = virtualRows.length
-    ? virtualizer.totalSize - virtualRows[virtualRows.length - 1].end
+    ? virtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
     : 0
 
   return (
-    <div style={{ height: '600px', overflow: 'auto' }}>
-      <Table style={{ width: '100%' }} ref={parentRef}>
-        <Table.Head style={{ position: 'sticky', top: 0 }}>
+    <div
+      style={{
+        height: '600px',
+        overflow: 'auto',
+      }}
+      ref={parentRef}
+    >
+      <Table style={{ width: '100%' }}>
+        <Table.Head sticky>
           <Table.Row>
             <Table.Cell>ID</Table.Cell>
             <Table.Cell>Album ID</Table.Cell>
@@ -384,9 +385,26 @@ export const VirtualScrollingLong: Story<TableProps> = () => {
 
             return (
               <Table.Row key={row.id}>
-                <Table.Cell>{row.id}</Table.Cell>
+                <Table.Cell
+                  style={{
+                    width: '50px',
+                  }}
+                >
+                  {row.id}
+                </Table.Cell>
                 <Table.Cell>{row.albumId}</Table.Cell>
-                <Table.Cell>{row.title}</Table.Cell>
+                <Table.Cell>
+                  <div
+                    style={{
+                      width: '300px',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {row.title}
+                  </div>
+                </Table.Cell>
                 <Table.Cell>
                   <Typography link href={row.url} target="_blank">
                     Open image

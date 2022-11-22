@@ -58,8 +58,5 @@
     "jest-axe": "^6.0.0",
     "prettier": "2.7.1",
     "typescript": "^4.8.4"
-  },
-  "dependencies": {
-    "@tanstack/react-virtual": "3.0.0-alpha.0"
   }
 }
