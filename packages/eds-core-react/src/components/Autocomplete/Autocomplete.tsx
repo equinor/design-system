@@ -14,6 +14,7 @@ import {
   useMultipleSelection,
   UseMultipleSelectionProps,
 } from 'downshift'
+import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
 import { List } from '../List'
@@ -524,7 +525,21 @@ function AutocompleteInner<T>(
     () => selectedItems.map(getLabel),
     [selectedItems, getLabel],
   )
+  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+  const parentRef = useRef()
 
+  const rowVirtualizer = useVirtualizer({
+    count: availableItems.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 48,
+    overscan: 5,
+  })
+  /*   const stuff = rowVirtualizer.getVirtualItems().map((virtualRow) => {
+    return availableItems[virtualRow.index]
+  })
+  console.log('stuff ', stuff) */
+
+  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
   const optionsList = (
     <div
       {...getFloatingProps({
@@ -537,23 +552,40 @@ function AutocompleteInner<T>(
         },
       })}
     >
+      {/*       <div
+        style={{
+          height: `100%`,
+          width: `200px`,
+          overflowY: 'auto',
+        }}
+      > */}
       <StyledList
         {...getMenuProps(
           {
             'aria-multiselectable': multiple ? 'true' : null,
+            ref: parentRef,
+            style: {
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              width: `auto`,
+              position: 'relative',
+              overflowY: 'auto',
+              opacity: `${isOpen ? '1' : '0'}`,
+            },
           },
           { suppressRefError: true },
         )}
       >
         {!isOpen
           ? null
-          : availableItems.map((item, index) => {
+          : rowVirtualizer.getVirtualItems().map((virtualItem, index) => {
+              const item = availableItems[virtualItem.index]
               const label = getLabel(item)
               const isDisabled = optionDisabled(item)
               const isSelected = selectedItemsLabels.includes(label)
+              console.log(item)
               return (
                 <AutocompleteOption
-                  key={label}
+                  key={virtualItem.key}
                   value={label}
                   multiple={multiple}
                   highlighted={
@@ -561,11 +593,24 @@ function AutocompleteInner<T>(
                   }
                   isSelected={isSelected}
                   isDisabled={isDisabled}
-                  {...getItemProps({ item, index, disabled })}
+                  {...getItemProps({
+                    item,
+                    index,
+                    disabled,
+                    style: {
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: virtualItem.size,
+                      transform: `translateY(${virtualItem.start}px)`,
+                    },
+                  })}
                 />
               )
             })}
       </StyledList>
+      {/* </div> */}
     </div>
   )
 
