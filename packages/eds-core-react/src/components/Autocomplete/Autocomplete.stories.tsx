@@ -140,20 +140,37 @@ Introduction.args = {
 
 export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
+  type Photo = {
+    albumId: number
+    id: number
+    title: string
+    url: string
+    thumbnailUrl: string
+  }
+  const optionLabel2 = (item: Photo) => item.id.toString()
+  const [data, setData] = useState<Array<Photo>>([])
+
+  useEffect(() => {
+    void fetch(`https://jsonplaceholder.typicode.com/photos`)
+      .then((r) => r.json())
+      .then((d: Photo[]) => {
+        setData(d)
+      })
+  }, [])
 
   return (
     <>
       <Autocomplete
         label="Select a stock"
-        options={options}
-        optionLabel={optionLabel}
+        options={data}
+        optionLabel={optionLabel2}
       />
-      <Autocomplete
+      {/*       <Autocomplete
         label="Select multiple stocks"
         options={options}
         multiple
         optionLabel={optionLabel}
-      />
+      /> */}
     </>
   )
 }
