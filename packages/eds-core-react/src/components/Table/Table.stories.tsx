@@ -215,6 +215,7 @@ const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }
+
   &:hover {
     svg {
       visibility: visible;
@@ -338,10 +339,14 @@ export const VirtualScrolling: Story<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
   const parentRef = useRef()
 
+  const estimateSize = useCallback(() => {
+    return 47
+  }, [])
+
   const virtualizer = useVirtualizer({
     count: data.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 47,
+    estimateSize,
   })
 
   useEffect(() => {
@@ -369,11 +374,21 @@ export const VirtualScrolling: Story<TableProps> = () => {
       <Table style={{ width: '100%' }}>
         <Table.Head sticky>
           <Table.Row>
-            <Table.Cell>ID</Table.Cell>
-            <Table.Cell>Album ID</Table.Cell>
-            <Table.Cell>Title</Table.Cell>
-            <Table.Cell>URL</Table.Cell>
-            <Table.Cell>Thumbnail url</Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '40px' }}>ID</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '70px' }}>Album ID</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '400px' }}>Title</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '120px' }}>URL</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '120px' }}>Thumbnail url</div>
+            </Table.Cell>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -385,18 +400,16 @@ export const VirtualScrolling: Story<TableProps> = () => {
 
             return (
               <Table.Row key={row.id}>
-                <Table.Cell
-                  style={{
-                    width: '50px',
-                  }}
-                >
-                  {row.id}
+                <Table.Cell>
+                  <div style={{ width: '40px' }}>{row.id}</div>
                 </Table.Cell>
-                <Table.Cell>{row.albumId}</Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '70px' }}>{row.albumId}</div>
+                </Table.Cell>
                 <Table.Cell>
                   <div
                     style={{
-                      width: '300px',
+                      width: '400px',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
@@ -406,14 +419,20 @@ export const VirtualScrolling: Story<TableProps> = () => {
                   </div>
                 </Table.Cell>
                 <Table.Cell>
-                  <Typography link href={row.url} target="_blank">
-                    Open image
-                  </Typography>
+                  <div style={{ width: '120px' }}>
+                    {' '}
+                    <Typography link href={row.url} target="_blank">
+                      Open image
+                    </Typography>
+                  </div>
                 </Table.Cell>
                 <Table.Cell>
-                  <Typography link href={row.thumbnailUrl} target="_blank">
-                    Open thumbnail
-                  </Typography>
+                  <div style={{ width: '120px' }}>
+                    {' '}
+                    <Typography link href={row.thumbnailUrl} target="_blank">
+                      Open thumbnail
+                    </Typography>
+                  </div>
                 </Table.Cell>
               </Table.Row>
             )
