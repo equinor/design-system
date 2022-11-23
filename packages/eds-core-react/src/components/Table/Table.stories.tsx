@@ -36,15 +36,6 @@ export default {
       },
     },
   },
-  decorators: [
-    (Story) => {
-      return (
-        <Stack direction="column" align="stretch">
-          <Story />
-        </Stack>
-      )
-    },
-  ],
 } as ComponentMeta<typeof Table>
 
 export const introduction: Story<TableProps> = (args) => {
@@ -74,6 +65,16 @@ export const introduction: Story<TableProps> = (args) => {
     </Table>
   )
 }
+
+introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="stretch">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
@@ -210,6 +211,15 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 CompactTable.storyName = 'Compact table'
+CompactTable.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="stretch">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
@@ -326,6 +336,15 @@ export const Sortable: Story<TableProps> = () => {
     </Table>
   )
 }
+Sortable.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="stretch">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 type Photo = {
   albumId: number
@@ -371,7 +390,9 @@ export const VirtualScrolling: Story<TableProps> = () => {
       }}
       ref={parentRef}
     >
-      <Table style={{ width: '100%' }}>
+      <Table
+        style={{ width: '100%', paddingLeft: '15px', paddingRight: '15px' }}
+      >
         <Table.Head sticky>
           <Table.Row>
             <Table.Cell>
