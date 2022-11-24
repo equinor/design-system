@@ -359,7 +359,7 @@ export const VirtualScrolling: Story<TableProps> = () => {
   const parentRef = useRef()
 
   const estimateSize = useCallback(() => {
-    return 47
+    return 48
   }, [])
 
   const virtualizer = useVirtualizer({
