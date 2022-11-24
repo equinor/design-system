@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
+import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
 import styled from 'styled-components'
 import { Story, ComponentMeta } from '@storybook/react'
 import {
@@ -35,15 +36,6 @@ export default {
       },
     },
   },
-  decorators: [
-    (Story) => {
-      return (
-        <Stack direction="column" align="stretch">
-          <Story />
-        </Stack>
-      )
-    },
-  ],
 } as ComponentMeta<typeof Table>
 
 export const introduction: Story<TableProps> = (args) => {
@@ -73,6 +65,16 @@ export const introduction: Story<TableProps> = (args) => {
     </Table>
   )
 }
+
+introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="stretch">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
@@ -209,11 +211,21 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 CompactTable.storyName = 'Compact table'
+CompactTable.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="stretch">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }
+
   &:hover {
     svg {
       visibility: visible;
@@ -322,5 +334,135 @@ export const Sortable: Story<TableProps> = () => {
         ))}
       </Table.Body>
     </Table>
+  )
+}
+Sortable.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="stretch">
+        <Story />
+      </Stack>
+    )
+  },
+]
+
+type Photo = {
+  albumId: number
+  id: number
+  title: string
+  url: string
+  thumbnailUrl: string
+}
+
+export const VirtualScrolling: Story<TableProps> = () => {
+  const [data, setData] = useState<Array<Photo>>([])
+  const parentRef = useRef()
+
+  const estimateSize = useCallback(() => {
+    return 48
+  }, [])
+
+  const virtualizer = useVirtualizer({
+    count: data.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize,
+  })
+
+  useEffect(() => {
+    void fetch(`https://jsonplaceholder.typicode.com/photos`)
+      .then((r) => r.json())
+      .then((d: Photo[]) => {
+        setData(d)
+      })
+  }, [])
+
+  const virtualRows = virtualizer.getVirtualItems()
+  const paddingTop = virtualRows.length ? virtualRows[0].start : 0
+  const paddingBottom = virtualRows.length
+    ? virtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
+    : 0
+
+  return (
+    <div
+      style={{
+        height: '600px',
+        overflow: 'auto',
+      }}
+      ref={parentRef}
+    >
+      <Table
+        style={{ width: '100%', paddingLeft: '15px', paddingRight: '15px' }}
+      >
+        <Table.Head sticky>
+          <Table.Row>
+            <Table.Cell>
+              <div style={{ width: '40px' }}>ID</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '70px' }}>Album ID</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '400px' }}>Title</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '120px' }}>URL</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '120px' }}>Thumbnail url</div>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell style={{ height: `${paddingTop}px` }}></Table.Cell>
+          </Table.Row>
+          {virtualRows.map((virtualRow: VirtualItem) => {
+            const row: Photo = data[virtualRow.index]
+
+            return (
+              <Table.Row key={row.id}>
+                <Table.Cell>
+                  <div style={{ width: '40px' }}>{row.id}</div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '70px' }}>{row.albumId}</div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div
+                    style={{
+                      width: '400px',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {row.title}
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '120px' }}>
+                    {' '}
+                    <Typography link href={row.url} target="_blank">
+                      Open image
+                    </Typography>
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '120px' }}>
+                    {' '}
+                    <Typography link href={row.thumbnailUrl} target="_blank">
+                      Open thumbnail
+                    </Typography>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            )
+          })}
+          <Table.Row>
+            <Table.Cell style={{ height: `${paddingBottom}px` }}></Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
   )
 }
