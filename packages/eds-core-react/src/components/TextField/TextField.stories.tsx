@@ -148,13 +148,7 @@ Types.decorators = [
 ]
 
 export const Multiline: Story<TextFieldProps> = () => (
-  <TextField
-    id="storybook-multiline"
-    label="Multiline"
-    multiline
-    style={{ resize: 'none' }}
-    rows={3}
-  />
+  <TextField id="storybook-multiline" label="Multiline" multiline rows={3} />
 )
 
 export const MultilineRowsMax: Story<TextFieldProps> = () => (
@@ -162,7 +156,6 @@ export const MultilineRowsMax: Story<TextFieldProps> = () => (
     id="storybook-multiline-three"
     label="Multiline with max 10 rows"
     multiline
-    style={{ resize: 'none' }}
     rows={3}
     rowsMax={10}
   />
@@ -184,7 +177,7 @@ export const MultilineFixedHeight: Story<TextFieldProps> = () => (
     remaining essentially unchanged."
     label="Multiline with fixed height"
     multiline
-    style={{ height: '100px', resize: 'none' }}
+    style={{ height: '100px' }}
   />
 )
 MultilineFixedHeight.storyName = 'Multiline with fixed height'
@@ -239,7 +232,6 @@ export const WithIcons: Story<TextFieldProps> = () => (
       placeholder="Placeholder text that spans multiple lines"
       label="With icon"
       multiline
-      style={{ resize: 'none' }}
       rows={3}
       inputIcon={<Icon name="comment" title="Comment" />}
     />
@@ -316,7 +308,6 @@ export const Variants: Story<TextFieldProps> = () => (
       defaultValue="Input value that spans multiple lines"
       label="Multiline"
       multiline
-      style={{ resize: 'none' }}
       rows={3}
       helperText="Validation error"
       variant="error"
@@ -345,7 +336,6 @@ export const Variants: Story<TextFieldProps> = () => (
       defaultValue="Input value that spans multiple lines"
       label="Multiline"
       multiline
-      style={{ resize: 'none' }}
       rows={3}
       helperText="Helper/warning text"
       variant="warning"
@@ -374,7 +364,6 @@ export const Variants: Story<TextFieldProps> = () => (
       defaultValue="Input value that spans multiple lines"
       label="Multiline"
       multiline
-      style={{ resize: 'none' }}
       rows={3}
       helperText="Helper text"
       variant="success"
@@ -430,7 +419,6 @@ export const ReadOnly: Story<TextFieldProps> = () => (
       placeholder="Placeholder text that spans multiple lines"
       multiline
       readOnly
-      style={{ resize: 'none' }}
       rows={3}
     />
     <TextField
@@ -440,7 +428,6 @@ export const ReadOnly: Story<TextFieldProps> = () => (
       meta="Meta"
       multiline
       readOnly
-      style={{ resize: 'none' }}
       rows={3}
     />
     <TextField
@@ -450,7 +437,6 @@ export const ReadOnly: Story<TextFieldProps> = () => (
       multiline
       variant="error"
       readOnly
-      style={{ resize: 'none' }}
       rows={3}
       helperText="helper text"
       inputIcon={<Icon name="error_filled" title="Error" />}
@@ -492,7 +478,6 @@ export const Disabled: Story<TextFieldProps> = () => (
       label="Comment"
       multiline
       disabled
-      style={{ resize: 'none' }}
       rows={3}
       helperText="helper text"
       inputIcon={<Icon name="comment_important" title="Comment important" />}
@@ -546,7 +531,6 @@ export const Compact: Story<TextFieldProps> = () => {
         variant="warning"
         inputIcon={<Icon name="warning_filled" title="Warning" />}
         helperText="Helper information text thats very very very loooonooooooong"
-        style={{ resize: 'none' }}
       />
     </EdsProvider>
   )
