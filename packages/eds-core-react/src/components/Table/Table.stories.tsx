@@ -44,7 +44,9 @@ export const introduction: Story<TableProps> = (args) => {
   return (
     <Table {...args}>
       <Table.Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
+        <Typography variant="h2" style={{ marginBottom: '16px' }}>
+          Fruits cost price
+        </Typography>
       </Table.Caption>
       <Table.Head>
         <Table.Row>
@@ -83,7 +85,9 @@ export const FixedTableHeader: Story<TableProps> = () => {
     <div style={{ height: '200px', overflow: 'auto', display: 'grid' }}>
       <Table>
         <Table.Caption>
-          <Typography variant="h2">Fruits cost price</Typography>
+          <Typography variant="h2" style={{ marginBottom: '16px' }}>
+            Fruits cost price
+          </Typography>
         </Table.Caption>
         <Table.Head sticky>
           <Table.Row>
@@ -187,7 +191,9 @@ export const CompactTable: Story<TableProps> = () => {
       <EdsProvider density={density}>
         <Table>
           <Table.Caption>
-            <Typography variant="h2">Fruits cost price</Typography>
+            <Typography variant="h2" style={{ marginBottom: '16px' }}>
+              Fruits cost price
+            </Typography>
           </Table.Caption>
           <Table.Head>
             <Table.Row>
@@ -303,7 +309,9 @@ export const Sortable: Story<TableProps> = () => {
   return (
     <Table>
       <Table.Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
+        <Typography variant="h2" style={{ marginBottom: '16px' }}>
+          Fruits cost price
+        </Typography>
       </Table.Caption>
       <Table.Head>
         <Table.Row>
