@@ -182,8 +182,8 @@ export type SliderProps = {
     event: MouseEvent | KeyboardEvent,
     newValue: number[] | number,
   ) => void
-  /** Function for formatting the output, e.g. with dates */
-  outputFunction?: (text: number) => string
+  /** Function for formatting the displayed value. E.g. formatting dates, or adding a unit suffix */
+  outputFunction?: (value: number) => string
   /** Max value */
   max?: number
   /**  Min value */
