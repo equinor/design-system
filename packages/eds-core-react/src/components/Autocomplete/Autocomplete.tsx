@@ -323,10 +323,10 @@ function AutocompleteInner<T>(
     onStateChange: ({ type, selectedItem }) => {
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
+        case useCombobox.stateChangeTypes.InputBlur:
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem && !optionDisabled(selectedItem)) {
             if (multiple) {
               selectedItems.includes(selectedItem)
