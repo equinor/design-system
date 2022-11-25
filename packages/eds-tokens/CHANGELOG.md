@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - 🔧 Conform packages build, test & linting by @mimarz in https://github.com/equinor/design-system/pull/2555
+- 💄 `shape.icon_button` token changed from 48px to 40px by @mimarz in https://github.com/equinor/design-system/pull/2351
 
 ## [0.7.1] - 2022-06-09
 
