@@ -52,6 +52,10 @@ const StyledList = styled(List)(
     overflow-y: auto;
     max-height: 300px;
     padding: 0;
+    display: grid;
+    & > li {
+      grid-area: 1 / -1;
+    }
   `,
 )
 
@@ -526,19 +530,13 @@ function AutocompleteInner<T>(
     [selectedItems, getLabel],
   )
   /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-  const parentRef = useRef()
-
+  const parentRef = useRef<HTMLElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 48,
+    estimateSize: useCallback(() => 48, []),
     overscan: 5,
   })
-  /*   const stuff = rowVirtualizer.getVirtualItems().map((virtualRow) => {
-    return availableItems[virtualRow.index]
-  })
-  console.log('stuff ', stuff) */
-
   /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
   const optionsList = (
     <div
@@ -552,65 +550,59 @@ function AutocompleteInner<T>(
         },
       })}
     >
-      {/*       <div
-        style={{
-          height: `100%`,
-          width: `200px`,
-          overflowY: 'auto',
-        }}
-      > */}
       <StyledList
         {...getMenuProps(
           {
             'aria-multiselectable': multiple ? 'true' : null,
             ref: parentRef,
             style: {
-              height: `${rowVirtualizer.getTotalSize()}px`,
               width: `auto`,
               position: 'relative',
               overflowY: 'auto',
-              opacity: `${isOpen ? '1' : '0'}`,
+              display: `${isOpen ? 'grid' : 'none'}`,
             },
           },
           { suppressRefError: true },
         )}
       >
-        {!isOpen
-          ? null
-          : rowVirtualizer.getVirtualItems().map((virtualItem, index) => {
-              const item = availableItems[virtualItem.index]
-              const label = getLabel(item)
-              const isDisabled = optionDisabled(item)
-              const isSelected = selectedItemsLabels.includes(label)
-              console.log(item)
-              return (
-                <AutocompleteOption
-                  key={virtualItem.key}
-                  value={label}
-                  multiple={multiple}
-                  highlighted={
-                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
-                  }
-                  isSelected={isSelected}
-                  isDisabled={isDisabled}
-                  {...getItemProps({
-                    item,
-                    index,
-                    disabled,
-                    style: {
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: virtualItem.size,
-                      transform: `translateY(${virtualItem.start}px)`,
-                    },
-                  })}
-                />
-              )
-            })}
+        <li
+          key="total-size"
+          style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
+        />
+        {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+          const index = virtualItem.index
+          const item = availableItems[index]
+          const label = getLabel(item)
+          const isDisabled = optionDisabled(item)
+          const isSelected = selectedItemsLabels.includes(label)
+          return (
+            <li
+              key={virtualItem.key}
+              style={{
+                height: `${virtualItem.size}px`,
+                transform: `translateY(${virtualItem.start}px)`,
+                listStyle: 'none',
+                margin: '0',
+              }}
+            >
+              <AutocompleteOption
+                value={label}
+                multiple={multiple}
+                highlighted={
+                  highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                }
+                isSelected={isSelected}
+                isDisabled={isDisabled}
+                {...getItemProps({
+                  item,
+                  index,
+                  disabled,
+                })}
+              />
+            </li>
+          )
+        })}
       </StyledList>
-      {/* </div> */}
     </div>
   )
 
