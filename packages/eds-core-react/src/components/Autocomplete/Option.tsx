@@ -1,6 +1,5 @@
-import { forwardRef, LiHTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { List } from '../List'
 import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
 
@@ -10,7 +9,7 @@ type StyledListItemType = {
   isdisabled?: string
 }
 
-const StyledListItem = styled(List.Item)<StyledListItemType>(
+const StyledListItem = styled.div<StyledListItemType>(
   ({ theme, highlighted, active, isdisabled }) => {
     const backgroundColor =
       highlighted === 'true'
@@ -23,7 +22,7 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
       display: flex;
       align-items: center;
       margin: 0;
-      list-style: none;
+      //list-style: none;
       background-color: ${backgroundColor};
       user-select: none;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
@@ -44,10 +43,10 @@ export type AutocompleteOptionProps = {
   highlighted: string
   isSelected: boolean
   isDisabled?: boolean
-} & LiHTMLAttributes<HTMLLIElement>
+} & HTMLAttributes<HTMLDivElement>
 
 export const AutocompleteOption = forwardRef<
-  HTMLLIElement,
+  HTMLDivElement,
   AutocompleteOptionProps
 >(function AutocompleteOption(
   {
