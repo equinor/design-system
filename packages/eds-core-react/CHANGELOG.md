@@ -9,19 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* 📝 `Textfield` Storybook: Added validation example by @oddvernes in https://github.com/equinor/design-system/pull/2640
+- 📝 `Textfield` Storybook: Added validation example by @oddvernes in https://github.com/equinor/design-system/pull/2640
 
 ### Fixed
 
-* 🐛 `SideBar`: Fixed `Sidebar.Button` and `Sidebar.Toggle` ref by @oddvernes in https://github.com/equinor/design-system/pull/2650
+- 🐛 `SideBar`: Fixed `Sidebar.Button` and `Sidebar.Toggle` ref by @oddvernes in https://github.com/equinor/design-system/pull/2650
 
 ### Changed
 
-* ⬆️ Upgraded downshift to 7.0.1 (Improves ARIA-patterns in `Autocomplete`) by @denektenina in https://github.com/equinor/design-system/pull/2637
+- ⬆️ Upgraded downshift to 7.0.1 (Improves ARIA-patterns in `Autocomplete`) by @denektenina in https://github.com/equinor/design-system/pull/2637
 
 ### Removed
 
-* 🔥 Removed deprecated `SingleSelect` and `MultiSelect` by @denektenina in https://github.com/equinor/design-system/pull/2643
+- 🔥 Removed deprecated `SingleSelect` and `MultiSelect` by @denektenina in https://github.com/equinor/design-system/pull/2643
 
 ## [0.26.0] - 2022-11-04
 
@@ -68,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ♻️ Autocomplete: Always show all options on re-open after selection by @mimarz in https://github.com/equinor/design-system/pull/2562
 - ⬆️ upgraded floating-ui to v0.10.1 by @oddvernes in https://github.com/equinor/design-system/pull/2554
 - 🔧 Conform packages build, test & linting by @mimarz in https://github.com/equinor/design-system/pull/2555
+- 💄 `Button` variant `ghost_icon` and `contained_icon` changed size from 48px to 40px by @mimarz https://github.com/equinor/design-system/pull/2351
 
 ### Fixed
 
