@@ -30,6 +30,7 @@ export default {
       page,
       source: {
         excludeDecorators: true,
+        type: 'code',
       },
     },
   },
