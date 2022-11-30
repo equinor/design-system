@@ -8,8 +8,6 @@ import {
   Popover,
   PopoverProps,
   Icon,
-  EdsProvider,
-  Density,
 } from '../..'
 import {
   apps,
@@ -47,6 +45,7 @@ export default {
       page,
       source: {
         excludeDecorators: true,
+        type: 'code',
       },
     },
   },
