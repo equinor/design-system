@@ -154,22 +154,73 @@ FileUpload.decorators = [
   ),
 ]
 
-export const ProgressButton: Story<ButtonProps> = () => (
-  <>
-    <Button>
-      <Progress.Dots />
-    </Button>
-    <Button variant="ghost_icon">
-      <Progress.Dots color="primary" />
-    </Button>
-    <Button>
-      <Progress.Circular size={16} color="neutral" />
-    </Button>
-    <Button variant="ghost_icon">
-      <Progress.Circular size={16} color="primary" />
-    </Button>
-  </>
-)
+export const ProgressButton: Story<ButtonProps> = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const handleClick = () => {
+    setIsLoading(true)
+  }
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [isLoading])
+  return (
+    <>
+      <Button aria-label="loading">
+        <Progress.Dots />
+      </Button>
+      <Button variant="ghost_icon">
+        <Progress.Dots color="primary" />
+      </Button>
+      <Button onClick={handleClick} aria-label={isLoading ? 'Loading' : 'Save'}>
+        {isLoading ? (
+          <>
+            <Progress.Circular size={16} color="neutral" />
+            <span>Loading...</span>
+          </>
+        ) : (
+          'Save'
+        )}
+      </Button>
+      <Button
+        onClick={handleClick}
+        aria-label={isLoading ? 'Loading' : 'Save'}
+        disabled={isLoading}
+        variant="contained"
+      >
+        {isLoading ? (
+          <>
+            <Progress.Circular size={16} color="primary" />
+            <span>Loading...</span>
+          </>
+        ) : (
+          'Save'
+        )}
+      </Button>
+      <Button
+        onClick={handleClick}
+        aria-label={isLoading ? 'Loading' : 'Save'}
+        disabled={isLoading}
+        variant="contained"
+      >
+        {isLoading ? (
+          <>
+            <Progress.Circular size={16} color="neutral" />
+            <span>Loading...</span>
+          </>
+        ) : (
+          'Save'
+        )}
+      </Button>
+      <Button variant="ghost_icon">
+        <Progress.Circular size={16} color="primary" />
+      </Button>
+    </>
+  )
+}
 ProgressButton.storyName = 'Progress button'
 ProgressButton.decorators = [
   (Story) => (

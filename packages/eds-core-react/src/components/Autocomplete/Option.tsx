@@ -25,6 +25,7 @@ const StyledListItem = styled.div<StyledListItemType>(
       //list-style: none;
       background-color: ${backgroundColor};
       user-select: none;
+      word-break: break-word;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}

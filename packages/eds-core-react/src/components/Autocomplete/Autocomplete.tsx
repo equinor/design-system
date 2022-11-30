@@ -14,7 +14,7 @@ import {
   useMultipleSelection,
   UseMultipleSelectionProps,
 } from 'downshift'
-import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
 import { List } from '../List'
@@ -50,11 +50,15 @@ const StyledList = styled(List)(
     box-shadow: ${theme.boxShadow};
     ${bordersTemplate(theme.border)}
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 300px;
     padding: 0;
     display: grid;
     & > li {
       grid-area: 1 / -1;
+      list-style: none;
+      display: block;
+      align-self: start;
     }
   `,
 )
@@ -530,13 +534,16 @@ function AutocompleteInner<T>(
     [selectedItems, getLabel],
   )
   /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+  //TODO: kb navigation wrapping & padding? & optional virtualize
   const parentRef = useRef<HTMLElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
     getScrollElement: () => parentRef.current,
     estimateSize: useCallback(() => 48, []),
+    //estimateSize: () => 48,
     overscan: 5,
   })
+  const isOpen2 = true
   /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
   const optionsList = (
     <div
@@ -559,49 +566,57 @@ function AutocompleteInner<T>(
               width: `auto`,
               position: 'relative',
               overflowY: 'auto',
-              display: `${isOpen ? 'grid' : 'none'}`,
             },
           },
           { suppressRefError: true },
         )}
       >
-        <li
-          key="total-size"
-          style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
-        />
-        {rowVirtualizer.getVirtualItems().map((virtualItem) => {
-          const index = virtualItem.index
-          const item = availableItems[index]
-          const label = getLabel(item)
-          const isDisabled = optionDisabled(item)
-          const isSelected = selectedItemsLabels.includes(label)
-          return (
-            <li
-              key={virtualItem.key}
-              style={{
-                height: `${virtualItem.size}px`,
-                transform: `translateY(${virtualItem.start}px)`,
-                listStyle: 'none',
-                margin: '0',
-              }}
-            >
-              <AutocompleteOption
-                value={label}
-                multiple={multiple}
-                highlighted={
-                  highlightedIndex === index && !isDisabled ? 'true' : 'false'
-                }
-                isSelected={isSelected}
-                isDisabled={isDisabled}
-                {...getItemProps({
-                  item,
-                  index,
-                  disabled,
-                })}
-              />
-            </li>
-          )
-        })}
+        {isOpen && (
+          <li
+            key="total-size"
+            style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
+          />
+        )}
+        {!isOpen
+          ? null
+          : rowVirtualizer.getVirtualItems().map((virtualItem) => {
+              const index = virtualItem.index
+              const item = availableItems[index]
+              const label = getLabel(item)
+              const isDisabled = optionDisabled(item)
+              const isSelected = selectedItemsLabels.includes(label)
+              console.log(item)
+              return (
+                <li
+                  key={virtualItem.key}
+                  ref={rowVirtualizer.measureElement}
+                  data-index={virtualItem.index}
+                  style={{
+                    //height: `${virtualItem.size}px`,
+                    transform: `translateY(${virtualItem.start}px)`,
+                    listStyle: 'none',
+                    margin: '0',
+                  }}
+                >
+                  <AutocompleteOption
+                    value={label}
+                    multiple={multiple}
+                    highlighted={
+                      highlightedIndex === index && !isDisabled
+                        ? 'true'
+                        : 'false'
+                    }
+                    isSelected={isSelected}
+                    isDisabled={isDisabled}
+                    {...getItemProps({
+                      item,
+                      index,
+                      disabled,
+                    })}
+                  />
+                </li>
+              )
+            })}
       </StyledList>
     </div>
   )
