@@ -337,16 +337,11 @@ function AutocompleteInner<T>(
       )
     },
     onHighlightedIndexChange({ highlightedIndex, type }) {
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-        case useCombobox.stateChangeTypes.InputKeyDownHome:
-        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-        case useCombobox.stateChangeTypes.InputKeyDownEnd:
-          return rowVirtualizer.scrollToIndex(highlightedIndex, {
-            smoothScroll: false,
-          })
-        default:
-          return
+      if (
+        type !== useCombobox.stateChangeTypes.ItemMouseMove &&
+        type !== useCombobox.stateChangeTypes.MenuMouseLeave
+      ) {
+        rowVirtualizer.scrollToIndex(highlightedIndex, { smoothScroll: false })
       }
     },
     onIsOpenChange: ({ selectedItem }) => {
