@@ -390,7 +390,6 @@ export const VirtualScrolling: Story<TableProps> = () => {
       })
     return () => {
       abortController.abort()
-      console.log('Download aborted')
     }
   }, [])
 
