@@ -310,7 +310,7 @@ function AutocompleteInner<T>(
   )
 
   /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-  //TODO: kb navigation wrapping & padding? & optional virtualize?
+  //TODO:  padding? & optional virtualize?
   const scrollContainer = useRef<HTMLElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
