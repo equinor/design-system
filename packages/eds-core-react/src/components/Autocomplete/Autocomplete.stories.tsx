@@ -57,7 +57,8 @@ const counties = [
 
 const stocks = [
   {
-    label: 'Microsoft Corporation',
+    label:
+      'Microsoft Corporation srg fgs gg  th tee tye thn eth ethn eth eth eht e th ethe th eth gdh djhgthgd eyt jythe  ythj   trjy jyt jyt ytr yjtr yt jyt jyt jyt jyt yt yt yt yt ytj yt yt yt ytr yt tyr ytu ytu te jet jyet jyet dj dj htd',
     symbol: 'MSFT',
     trend: '📉',
   },
@@ -136,6 +137,7 @@ Introduction.args = {
   readOnly: false,
   disabled: false,
   disablePortal: false,
+  autoWidth: true,
 }
 
 export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
@@ -147,7 +149,7 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
     url: string
     thumbnailUrl: string
   }
-  const optionLabel2 = (item: Photo) => item.id.toString()
+  const optionLabel2 = (item: Photo) => item.title
   const [data, setData] = useState<Array<Photo>>([])
 
   useEffect(() => {
@@ -164,6 +166,8 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
         label="Select a stock"
         options={data}
         optionLabel={optionLabel2}
+        multiple
+        autoWidth={true}
       />
       {/*       <Autocomplete
         label="Select multiple stocks"
