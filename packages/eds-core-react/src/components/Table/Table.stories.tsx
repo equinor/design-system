@@ -377,11 +377,20 @@ export const VirtualScrolling: Story<TableProps> = () => {
   })
 
   useEffect(() => {
-    void fetch(`https://jsonplaceholder.typicode.com/photos`)
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
       .then((r) => r.json())
       .then((d: Photo[]) => {
         setData(d)
       })
+      .catch((err: Error) => {
+        console.error(`Error: ${err.message}`)
+      })
+    return () => {
+      abortController.abort()
+    }
   }, [])
 
   const virtualRows = virtualizer.getVirtualItems()
