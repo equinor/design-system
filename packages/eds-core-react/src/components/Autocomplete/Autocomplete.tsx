@@ -309,6 +309,18 @@ function AutocompleteInner<T>(
     [optionLabel],
   )
 
+  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+  //TODO: kb navigation wrapping & padding? & optional virtualize?
+  const scrollContainer = useRef<HTMLElement>(null)
+  const rowVirtualizer = useVirtualizer({
+    count: availableItems.length,
+    getScrollElement: () => scrollContainer.current,
+    estimateSize: useCallback(() => 48, []),
+    overscan: 10,
+  })
+  const isOpen2 = true
+  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
@@ -323,6 +335,19 @@ function AutocompleteInner<T>(
           return getLabel(item).toLowerCase().includes(inputValue.toLowerCase())
         }),
       )
+    },
+    onHighlightedIndexChange({ highlightedIndex, type }) {
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+        case useCombobox.stateChangeTypes.InputKeyDownHome:
+        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+        case useCombobox.stateChangeTypes.InputKeyDownEnd:
+          return rowVirtualizer.scrollToIndex(highlightedIndex, {
+            smoothScroll: false,
+          })
+        default:
+          return
+      }
     },
     onIsOpenChange: ({ selectedItem }) => {
       if (!multiple && selectedItem !== null) {
@@ -353,7 +378,6 @@ function AutocompleteInner<T>(
     },
     stateReducer: (_, actionAndChanges) => {
       const { changes, type } = actionAndChanges
-
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
@@ -533,18 +557,7 @@ function AutocompleteInner<T>(
     () => selectedItems.map(getLabel),
     [selectedItems, getLabel],
   )
-  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-  //TODO: kb navigation wrapping & padding? & optional virtualize
-  const parentRef = useRef<HTMLElement>(null)
-  const rowVirtualizer = useVirtualizer({
-    count: availableItems.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: useCallback(() => 48, []),
-    //estimateSize: () => 48,
-    overscan: 5,
-  })
-  const isOpen2 = true
-  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+
   const optionsList = (
     <div
       {...getFloatingProps({
@@ -561,20 +574,19 @@ function AutocompleteInner<T>(
         {...getMenuProps(
           {
             'aria-multiselectable': multiple ? 'true' : null,
-            ref: parentRef,
-            style: {
-              width: `auto`,
-              position: 'relative',
-              overflowY: 'auto',
-            },
+            ref: scrollContainer,
           },
-          { suppressRefError: true },
+          { suppressRefError: false },
         )}
       >
         {isOpen && (
           <li
             key="total-size"
-            style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
+            role="presentation"
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              margin: '0',
+            }}
           />
         )}
         {!isOpen
@@ -585,14 +597,14 @@ function AutocompleteInner<T>(
               const label = getLabel(item)
               const isDisabled = optionDisabled(item)
               const isSelected = selectedItemsLabels.includes(label)
-              console.log(item)
               return (
                 <li
                   key={virtualItem.key}
                   ref={rowVirtualizer.measureElement}
                   data-index={virtualItem.index}
+                  aria-setsize={availableItems.length}
+                  aria-posinset={index + 1}
                   style={{
-                    //height: `${virtualItem.size}px`,
                     transform: `translateY(${virtualItem.start}px)`,
                     listStyle: 'none',
                     margin: '0',
@@ -608,6 +620,7 @@ function AutocompleteInner<T>(
                     }
                     isSelected={isSelected}
                     isDisabled={isDisabled}
+                    /* move this to li? or merge */
                     {...getItemProps({
                       item,
                       index,
