@@ -171,8 +171,7 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
     url: string
     thumbnailUrl: string
   }
-  const label = (item: Photo) => item.id.toString()
-  const [data, setData] = useState<Array<Photo>>([])
+  const [data, setData] = useState<Array<string>>([])
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -181,10 +180,11 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
     fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
       .then((r) => r.json())
       .then((d: Photo[]) => {
-        setData(d)
+        const parsed = d.map((x) => x.title.substring(0, 30))
+        setData(parsed)
       })
       .catch((err: Error) => {
-        console.error(`Error: ${err.message}`)
+        console.warn(`Warning: ${err.message}`)
       })
     return () => {
       abortController.abort()
@@ -193,18 +193,11 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
 
   return (
     <>
-      <Autocomplete
-        label="Select an item"
-        options={data}
-        optionLabel={label}
-        autoWidth={true}
-      />
+      <Autocomplete label="Select an item" options={data} />
       <Autocomplete
         label="Select multiple items"
         options={data}
         multiple
-        optionLabel={label}
-        autoWidth={true}
         clearSearchOnChange={false}
       />
     </>
