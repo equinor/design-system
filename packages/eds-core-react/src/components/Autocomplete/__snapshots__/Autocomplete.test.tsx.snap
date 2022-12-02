@@ -16,10 +16,14 @@ exports[`Autocomplete Matches snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  grid-area: 1 / -1;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-align-self: start;
+  -ms-flex-item-align: start;
+  align-self: start;
   margin: 0;
   list-style: none;
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
@@ -27,6 +31,7 @@ exports[`Autocomplete Matches snapshot 1`] = `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  word-break: break-word;
   cursor: default;
   margin: 0;
   color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
@@ -40,8 +45,15 @@ exports[`Autocomplete Matches snapshot 1`] = `
   letter-spacing: 0.013em;
   text-align: left;
   padding-left: 24px;
-  padding-top: 16px;
+  padding-top: 0;
   padding-right: 24px;
+  padding-bottom: 0;
+}
+
+.c3 {
+  padding-left: 0;
+  padding-top: 16px;
+  padding-right: 0;
   padding-bottom: 16px;
 }
 
@@ -50,8 +62,10 @@ exports[`Autocomplete Matches snapshot 1`] = `
   box-shadow: 0 7px 8px rgba(0,0,0,0.2),0 5px 22px rgba(0,0,0,0.12),0 12px 17px rgba(0,0,0,0.14);
   border-radius: 4px;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: 300px;
   padding: 0;
+  display: grid;
 }
 
 @media (hover:hover) and (pointer:fine) {
@@ -69,44 +83,57 @@ exports[`Autocomplete Matches snapshot 1`] = `
   role="listbox"
 >
   <li
-    active="false"
+    role="presentation"
+    style="height: 0px; margin: 0px; grid-area: 1 / -1;"
+  />
+  <li
     aria-hidden="false"
+    aria-posinset="1"
     aria-selected="false"
+    aria-setsize="3"
     class="c2"
-    highlighted="false"
+    data-index="0"
     id="downshift-0-item-0"
-    isdisabled="false"
     role="option"
+    style="transform: translateY(0px);"
   >
-    <span>
+    <span
+      class="c3"
+    >
       One
     </span>
   </li>
   <li
-    active="false"
     aria-hidden="false"
+    aria-posinset="2"
     aria-selected="false"
+    aria-setsize="3"
     class="c2"
-    highlighted="false"
+    data-index="1"
     id="downshift-0-item-1"
-    isdisabled="false"
     role="option"
+    style="transform: translateY(0px);"
   >
-    <span>
+    <span
+      class="c3"
+    >
       Two
     </span>
   </li>
   <li
-    active="false"
     aria-hidden="false"
+    aria-posinset="3"
     aria-selected="false"
+    aria-setsize="3"
     class="c2"
-    highlighted="false"
+    data-index="2"
     id="downshift-0-item-2"
-    isdisabled="false"
     role="option"
+    style="transform: translateY(0px);"
   >
-    <span>
+    <span
+      class="c3"
+    >
       Three
     </span>
   </li>

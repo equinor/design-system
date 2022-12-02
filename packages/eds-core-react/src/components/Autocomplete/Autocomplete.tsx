@@ -566,7 +566,7 @@ function AutocompleteInner<T>(
             'aria-multiselectable': multiple ? 'true' : null,
             ref: scrollContainer,
           },
-          { suppressRefError: false },
+          { suppressRefError: true },
         )}
       >
         {isOpen && (
