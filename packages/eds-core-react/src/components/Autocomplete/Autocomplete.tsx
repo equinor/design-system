@@ -54,12 +54,6 @@ const StyledList = styled(List)(
     max-height: 300px;
     padding: 0;
     display: grid;
-    & > li {
-      grid-area: 1 / -1;
-      list-style: none;
-      display: block;
-      align-self: start;
-    }
   `,
 )
 
@@ -310,7 +304,7 @@ function AutocompleteInner<T>(
   )
 
   /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-  //TODO:  padding? & optional virtualize?
+  //TODO:  padding? & optional virtualize? post error?
   const scrollContainer = useRef<HTMLElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
@@ -582,6 +576,7 @@ function AutocompleteInner<T>(
             style={{
               height: `${rowVirtualizer.getTotalSize()}px`,
               margin: '0',
+              gridArea: '1 / -1',
             }}
           />
         )}
@@ -594,36 +589,28 @@ function AutocompleteInner<T>(
               const isDisabled = optionDisabled(item)
               const isSelected = selectedItemsLabels.includes(label)
               return (
-                <li
+                <AutocompleteOption
                   key={virtualItem.key}
-                  ref={rowVirtualizer.measureElement}
                   data-index={virtualItem.index}
                   aria-setsize={availableItems.length}
                   aria-posinset={index + 1}
-                  style={{
-                    transform: `translateY(${virtualItem.start}px)`,
-                    listStyle: 'none',
-                    margin: '0',
-                  }}
-                >
-                  <AutocompleteOption
-                    value={label}
-                    multiple={multiple}
-                    highlighted={
-                      highlightedIndex === index && !isDisabled
-                        ? 'true'
-                        : 'false'
-                    }
-                    isSelected={isSelected}
-                    isDisabled={isDisabled}
-                    /* move this to li? or merge */
-                    {...getItemProps({
-                      item,
-                      index,
-                      disabled,
-                    })}
-                  />
-                </li>
+                  value={label}
+                  multiple={multiple}
+                  highlighted={
+                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                  }
+                  isSelected={isSelected}
+                  isDisabled={isDisabled}
+                  {...getItemProps({
+                    ref: rowVirtualizer.measureElement,
+                    item,
+                    index,
+                    disabled,
+                    style: {
+                      transform: `translateY(${virtualItem.start}px)`,
+                    },
+                  })}
+                />
               )
             })}
       </StyledList>

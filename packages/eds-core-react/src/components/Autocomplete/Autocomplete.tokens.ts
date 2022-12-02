@@ -26,9 +26,9 @@ export const selectTokens: ComponentToken = {
   boxShadow,
   minHeight: straight.minHeight,
   spacings: {
-    top: spacingMedium,
+    top: '0',
     right: spacingLarge,
-    bottom: spacingMedium,
+    bottom: '0',
     left: spacingLarge,
   },
   typography: {
@@ -62,14 +62,22 @@ export const selectTokens: ComponentToken = {
         top: '6px',
       },
     },
+    label: {
+      spacings: {
+        left: '0',
+        right: '0',
+        top: spacingMedium,
+        bottom: spacingMedium,
+      },
+    },
   },
   modes: {
     compact: {
       spacings: {
         left: spacingSmall,
         right: spacingSmall,
-        top: spacingSmall,
-        bottom: spacingSmall,
+        top: '0',
+        bottom: '0',
       },
       entities: {
         button: {
@@ -77,6 +85,14 @@ export const selectTokens: ComponentToken = {
             left: spacingSmall,
             right: spacingSmall,
             top: '0',
+          },
+        },
+        label: {
+          spacings: {
+            left: '0',
+            right: '0',
+            top: spacingSmall,
+            bottom: spacingSmall,
           },
         },
       },
