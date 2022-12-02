@@ -101,10 +101,15 @@ export type MenuItemProps = {
   disabled?: boolean
   /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
+  /** Keep menu open when menu item is clicked */
+  keepOpen?: boolean
 } & React.HTMLAttributes<HTMLButtonElement>
 
 export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
-  function MenuItem({ children, disabled, index = 0, onClick, ...rest }, ref) {
+  function MenuItem(
+    { children, disabled, index = 0, onClick, keepOpen = false, ...rest },
+    ref,
+  ) {
     const { focusedIndex, setFocusedIndex, onClose } = useMenu()
 
     const toggleFocus = (index_: number) => {
@@ -135,7 +140,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
         onClick={(e) => {
           if (onClick) {
             onClick(e)
-            if (onClose !== null) {
+            if (onClose !== null && !keepOpen) {
               onClose(e)
             }
           }

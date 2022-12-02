@@ -292,3 +292,50 @@ export const Compact: Story<MenuProps> = () => {
     </EdsProvider>
   )
 }
+
+export const StaysOpen: Story<MenuProps> = (args) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <Button
+        ref={setAnchorEl}
+        id="anchor-default"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-default"
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
+      >
+        Open Menu
+      </Button>
+      <Menu
+        open={isOpen}
+        {...args}
+        id="menu-default"
+        aria-labelledby="anchor-default"
+        onClose={closeMenu}
+        anchorEl={anchorEl}
+      >
+        <Menu.Item onClick={onClick} keepOpen>
+          Pressure
+        </Menu.Item>
+        <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+        <Menu.Item onClick={onClick} keepOpen>
+          Cable
+        </Menu.Item>
+      </Menu>
+    </>
+  )
+}
+StaysOpen.bind({})
+StaysOpen.args = {
+  placement: 'bottom-end',
+}
