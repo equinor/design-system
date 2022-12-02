@@ -9,7 +9,7 @@ type StyledListItemType = {
   isdisabled?: string
 }
 
-const StyledListItem = styled.div<StyledListItemType>(
+const StyledListItem = styled.li<StyledListItemType>(
   ({ theme, highlighted, active, isdisabled }) => {
     const backgroundColor =
       highlighted === 'true'
@@ -17,12 +17,13 @@ const StyledListItem = styled.div<StyledListItemType>(
         : active === 'true'
         ? theme.states.active.background
         : theme.background
-
     return css`
       display: flex;
+      grid-area: 1 / -1;
       align-items: center;
+      align-self: start;
       margin: 0;
-      //list-style: none;
+      list-style: none;
       background-color: ${backgroundColor};
       user-select: none;
       word-break: break-word;
@@ -38,16 +39,22 @@ const StyledListItem = styled.div<StyledListItemType>(
   },
 )
 
+const Label = styled.span<StyledListItemType>(({ theme }) => {
+  return css`
+    ${spacingsTemplate(theme.entities.label.spacings)}
+  `
+})
+
 export type AutocompleteOptionProps = {
   value: string
   multiple: boolean
   highlighted: string
   isSelected: boolean
   isDisabled?: boolean
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLLIElement>
 
 export const AutocompleteOption = forwardRef<
-  HTMLDivElement,
+  HTMLLIElement,
   AutocompleteOptionProps
 >(function AutocompleteOption(
   {
@@ -81,7 +88,7 @@ export const AutocompleteOption = forwardRef<
           }}
         />
       )}
-      <span>{value}</span>
+      <Label>{value}</Label>
     </StyledListItem>
   )
 })
