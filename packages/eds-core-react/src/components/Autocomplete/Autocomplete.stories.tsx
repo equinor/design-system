@@ -57,8 +57,7 @@ const counties = [
 
 const stocks = [
   {
-    label:
-      'Microsoft Corporation srg fgs gg  th tee tye thn eth ethn eth eth eht e th ethe th eth gdh djhgthgd eyt jythe  ythj   trjy jyt jyt ytr yjtr yt jyt jyt jyt jyt yt yt yt yt ytj yt yt yt ytr yt tyr ytu ytu te jet jyet jyet dj dj htd',
+    label: 'Microsoft Corporation',
     symbol: 'MSFT',
     trend: '📉',
   },
@@ -142,6 +141,29 @@ Introduction.args = {
 
 export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
+  return (
+    <>
+      <Autocomplete
+        label="Select a stock"
+        options={options}
+        optionLabel={optionLabel}
+        multiple
+        autoWidth={true}
+      />
+      <Autocomplete
+        label="Select multiple stocks"
+        options={options}
+        multiple
+        optionLabel={optionLabel}
+      />
+    </>
+  )
+}
+Multiple.args = {
+  options: stocks,
+}
+
+export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
   type Photo = {
     albumId: number
     id: number
@@ -149,37 +171,44 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
     url: string
     thumbnailUrl: string
   }
-  const optionLabel2 = (item: Photo) => item.title
+  const label = (item: Photo) => item.id.toString()
   const [data, setData] = useState<Array<Photo>>([])
 
   useEffect(() => {
-    void fetch(`https://jsonplaceholder.typicode.com/photos`)
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
       .then((r) => r.json())
       .then((d: Photo[]) => {
         setData(d)
       })
+      .catch((err: Error) => {
+        console.error(`Error: ${err.message}`)
+      })
+    return () => {
+      abortController.abort()
+    }
   }, [])
 
   return (
     <>
       <Autocomplete
-        label="Select a stock"
+        label="Select an item"
         options={data}
-        optionLabel={optionLabel2}
-        multiple
+        optionLabel={label}
         autoWidth={true}
       />
-      {/*       <Autocomplete
-        label="Select multiple stocks"
-        options={options}
+      <Autocomplete
+        label="Select multiple items"
+        options={data}
         multiple
-        optionLabel={optionLabel}
-      /> */}
+        optionLabel={label}
+        autoWidth={true}
+        clearSearchOnChange={false}
+      />
     </>
   )
-}
-Multiple.args = {
-  options: stocks,
 }
 
 export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
@@ -367,6 +396,7 @@ export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
         initialSelectedOptions={[options[0], options[1]]}
         options={options}
         multiple
+        autoWidth
         {...args}
       />
     </EdsProvider>
