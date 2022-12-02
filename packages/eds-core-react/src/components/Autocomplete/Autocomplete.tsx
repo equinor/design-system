@@ -339,7 +339,8 @@ function AutocompleteInner<T>(
     onHighlightedIndexChange({ highlightedIndex, type }) {
       if (
         type !== useCombobox.stateChangeTypes.ItemMouseMove &&
-        type !== useCombobox.stateChangeTypes.MenuMouseLeave
+        type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
+        highlightedIndex >= 0
       ) {
         rowVirtualizer.scrollToIndex(highlightedIndex, { smoothScroll: false })
       }
