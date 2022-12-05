@@ -324,13 +324,14 @@ export const StaysOpen: Story<MenuProps> = (args) => {
         onClose={closeMenu}
         anchorEl={anchorEl}
       >
-        <Menu.Item onClick={onClick} closeMenuOnClick={false}>
-          Pressure
-        </Menu.Item>
-        <Menu.Item onClick={onClick}>Bearing</Menu.Item>
-        <Menu.Item onClick={onClick} closeMenuOnClick={false}>
-          Cable
-        </Menu.Item>
+        <Menu.Item closeMenuOnClick={false}>Menu Headline</Menu.Item>
+        <Menu.Item onClick={onClick}>Menu item 1</Menu.Item>
+        <Menu.Item onClick={onClick}>Menu item 2</Menu.Item>
+        <Menu.Item onClick={onClick}>Menu item 3</Menu.Item>
+        <Menu.Item closeMenuOnClick={false}>Menu Headline 2</Menu.Item>
+        <Menu.Item onClick={onClick}>Menu item 1</Menu.Item>
+        <Menu.Item onClick={onClick}>Menu item 2</Menu.Item>
+        <Menu.Item onClick={onClick}>Menu item 3</Menu.Item>
       </Menu>
     </>
   )
