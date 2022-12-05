@@ -22,6 +22,7 @@ import {
   edit,
   delete_to_trash,
   settings,
+  thumb_pin,
 } from '@equinor/eds-icons'
 
 const { colors } = tokens
@@ -324,14 +325,37 @@ export const StaysOpen: Story<MenuProps> = (args) => {
         onClose={closeMenu}
         anchorEl={anchorEl}
       >
-        <Menu.Item closeMenuOnClick={false}>Menu Headline</Menu.Item>
+        <Menu.Item
+          closeMenuOnClick={false}
+          style={{ backgroundColor: 'lightgrey' }}
+        >
+          <Icon
+            data={thumb_pin}
+            size={16}
+            color={colors.text.static_icons__tertiary.hex}
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
+            Menu Headline
+          </Typography>
+        </Menu.Item>
         <Menu.Item onClick={onClick}>Menu item 1</Menu.Item>
         <Menu.Item onClick={onClick}>Menu item 2</Menu.Item>
         <Menu.Item onClick={onClick}>Menu item 3</Menu.Item>
-        <Menu.Item closeMenuOnClick={false}>Menu Headline 2</Menu.Item>
+        <Menu.Item
+          closeMenuOnClick={false}
+          style={{ backgroundColor: 'lightgrey' }}
+        >
+          <Icon
+            data={thumb_pin}
+            size={16}
+            color={colors.text.static_icons__tertiary.hex}
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
+            Menu Headline 2
+          </Typography>
+        </Menu.Item>
         <Menu.Item onClick={onClick}>Menu item 1</Menu.Item>
         <Menu.Item onClick={onClick}>Menu item 2</Menu.Item>
-        <Menu.Item onClick={onClick}>Menu item 3</Menu.Item>
       </Menu>
     </>
   )
