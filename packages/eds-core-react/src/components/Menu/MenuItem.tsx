@@ -1,4 +1,4 @@
-import { MouseEvent, forwardRef } from 'react'
+import { MouseEvent, forwardRef, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import {
@@ -101,16 +101,38 @@ export type MenuItemProps = {
   disabled?: boolean
   /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
-  /** Keep menu open when menu item is clicked */
-  keepOpen?: boolean
+  /** Close menu when item is clicked */
+  closeMenuOnClick?: boolean
 } & React.HTMLAttributes<HTMLButtonElement>
 
 export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
   function MenuItem(
-    { children, disabled, index = 0, onClick, keepOpen = false, ...rest },
+    {
+      children,
+      disabled,
+      index = 0,
+      onClick,
+      closeMenuOnClick = true,
+      ...rest
+    },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex, onClose } = useMenu()
+    const {
+      focusedIndex,
+      setFocusedIndex,
+      onClose,
+      addCloseMenuOnClickIndex,
+      removeCloseMenuOnClickIndex,
+    } = useMenu()
+
+    useEffect(() => {
+      if (closeMenuOnClick) {
+        addCloseMenuOnClickIndex(index)
+      }
+      return () => {
+        removeCloseMenuOnClickIndex(index)
+      }
+    }, [])
 
     const toggleFocus = (index_: number) => {
       if (focusedIndex !== index_) {
@@ -140,7 +162,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
         onClick={(e) => {
           if (onClick) {
             onClick(e)
-            if (onClose !== null && !keepOpen) {
+            if (onClose !== null && closeMenuOnClick) {
               onClose(e)
             }
           }

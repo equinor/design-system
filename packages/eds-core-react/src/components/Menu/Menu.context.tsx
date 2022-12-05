@@ -10,6 +10,7 @@ import type { FocusTarget } from './Menu.types'
 export type State = {
   focusedIndex: number
   initialFocus: FocusTarget
+  closeMenuOnClickIndexes: number[]
   onClose: (e?: MouseEvent) => void
 }
 
@@ -17,12 +18,15 @@ type UseMenu<T> = T & {
   setFocusedIndex: (index: number) => void
   setInitialFocus: (initialFocus: FocusTarget) => void
   setOnClose: (onClose: (e?: MouseEvent) => void) => void
+  addCloseMenuOnClickIndex: (index: number) => void
+  removeCloseMenuOnClickIndex: (index: number) => void
 }
 
 const initalState: State = {
   focusedIndex: -1,
   initialFocus: null,
   onClose: null,
+  closeMenuOnClickIndexes: [],
 }
 
 const MenuContext = createContext<State>(initalState)
@@ -32,7 +36,7 @@ type ProviderProps = { children: ReactNode }
 export const MenuProvider = ({ children }: ProviderProps): JSX.Element => {
   const [state, setState] = useState<State>(initalState)
 
-  const { focusedIndex, initialFocus, onClose } = state
+  const { focusedIndex, initialFocus, onClose, closeMenuOnClickIndexes } = state
 
   const setFocusedIndex: UseMenu<State>['setFocusedIndex'] = (i) => {
     setState((prevState) => ({ ...prevState, focusedIndex: i }))
@@ -40,6 +44,36 @@ export const MenuProvider = ({ children }: ProviderProps): JSX.Element => {
   const setInitialFocus: UseMenu<State>['setInitialFocus'] = (initialFocus) => {
     setState((prevState) => ({ ...prevState, initialFocus: initialFocus }))
   }
+
+  const addCloseMenuOnClickIndex: UseMenu<State>['addCloseMenuOnClickIndex'] = (
+    index: number,
+  ) => {
+    const newCloseMenuOnClickIndexes = [...closeMenuOnClickIndexes]
+
+    if (!newCloseMenuOnClickIndexes.includes(index)) {
+      newCloseMenuOnClickIndexes.push(index)
+    }
+
+    setState((prevState) => ({
+      ...prevState,
+      closeMenuOnClickIndexes: newCloseMenuOnClickIndexes,
+    }))
+  }
+
+  const removeCloseMenuOnClickIndex: UseMenu<State>['removeCloseMenuOnClickIndex'] =
+    (index: number) => {
+      const newCloseMenuOnClickIndexes = [...closeMenuOnClickIndexes]
+      const location = newCloseMenuOnClickIndexes.indexOf(index)
+
+      if (location > -1) {
+        newCloseMenuOnClickIndexes.splice(location, 1)
+      }
+
+      setState((prevState) => ({
+        ...prevState,
+        closeMenuOnClickIndexes: newCloseMenuOnClickIndexes,
+      }))
+    }
 
   const setOnClose: UseMenu<State>['setOnClose'] = (onClose) => {
     const onCloseHelper = () => {
@@ -57,6 +91,9 @@ export const MenuProvider = ({ children }: ProviderProps): JSX.Element => {
     initialFocus,
     setOnClose,
     onClose,
+    closeMenuOnClickIndexes,
+    addCloseMenuOnClickIndex,
+    removeCloseMenuOnClickIndex,
   }
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>
 }

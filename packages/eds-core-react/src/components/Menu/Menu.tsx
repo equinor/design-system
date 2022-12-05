@@ -43,7 +43,13 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
     { children, anchorEl, onClose: onCloseCallback, open, ...rest },
     ref,
   ) {
-    const { setOnClose, onClose, setInitialFocus } = useMenu()
+    const {
+      setOnClose,
+      onClose,
+      setInitialFocus,
+      focusedIndex,
+      closeMenuOnClickIndexes,
+    } = useMenu()
 
     useEffect(() => {
       if (onClose === null && onCloseCallback) {
@@ -87,7 +93,11 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
     })
 
     useGlobalKeyPress('Enter', () => {
-      if (open && onClose !== null) {
+      if (
+        open &&
+        onClose !== null &&
+        closeMenuOnClickIndexes.includes(focusedIndex)
+      ) {
         setTimeout(() => {
           if (window.document.contains(anchorEl)) {
             anchorEl.focus()
