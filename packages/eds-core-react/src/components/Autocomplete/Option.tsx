@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
@@ -51,7 +51,7 @@ export type AutocompleteOptionProps = {
   highlighted: string
   isSelected: boolean
   isDisabled?: boolean
-} & HTMLAttributes<HTMLLIElement>
+} & LiHTMLAttributes<HTMLLIElement>
 
 export const AutocompleteOption = forwardRef<
   HTMLLIElement,
