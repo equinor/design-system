@@ -303,8 +303,6 @@ function AutocompleteInner<T>(
     [optionLabel],
   )
 
-  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-  //TODO:  padding? & optional virtualize? post error?
   const scrollContainer = useRef<HTMLElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
@@ -312,8 +310,6 @@ function AutocompleteInner<T>(
     estimateSize: useCallback(() => 48, []),
     overscan: 10,
   })
-  const isOpen2 = true
-  /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
 
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
