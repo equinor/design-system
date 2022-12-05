@@ -141,14 +141,13 @@ Introduction.args = {
 
 export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
+
   return (
     <>
       <Autocomplete
         label="Select a stock"
         options={options}
         optionLabel={optionLabel}
-        multiple
-        autoWidth={true}
       />
       <Autocomplete
         label="Select multiple stocks"
@@ -389,7 +388,6 @@ export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
         initialSelectedOptions={[options[0], options[1]]}
         options={options}
         multiple
-        autoWidth
         {...args}
       />
     </EdsProvider>
