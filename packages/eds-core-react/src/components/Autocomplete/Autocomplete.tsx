@@ -364,6 +364,7 @@ function AutocompleteInner<T>(
     },
     stateReducer: (_, actionAndChanges) => {
       const { changes, type } = actionAndChanges
+
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
