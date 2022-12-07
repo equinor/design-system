@@ -132,7 +132,12 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
       return () => {
         removeCloseMenuOnClickIndex(index)
       }
-    }, [])
+    }, [
+      closeMenuOnClick,
+      index,
+      addCloseMenuOnClickIndex,
+      removeCloseMenuOnClickIndex,
+    ])
 
     const toggleFocus = (index_: number) => {
       if (focusedIndex !== index_) {
