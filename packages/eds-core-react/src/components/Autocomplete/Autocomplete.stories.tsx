@@ -666,7 +666,7 @@ export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
   return (
     <>
       <Autocomplete
-        optionLabel={optionLabel}
+        optionLabel={(opt) => `${opt.trend} ${opt.label}`}
         label="Select a stock"
         options={options}
         autoWidth
