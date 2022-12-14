@@ -26,7 +26,7 @@ const StyledListItem = styled.li<StyledListItemType>(
       list-style: none;
       background-color: ${backgroundColor};
       user-select: none;
-      word-break: break-word;
+      overflow: hidden;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
@@ -39,9 +39,13 @@ const StyledListItem = styled.li<StyledListItemType>(
   },
 )
 
-const Label = styled.span<StyledListItemType>(({ theme }) => {
+const Label = styled.span<{ multiline: boolean }>(({ theme, multiline }) => {
   return css`
     ${spacingsTemplate(theme.entities.label.spacings)}
+    text-overflow: ellipsis;
+    white-space: ${multiline ? 'normal' : 'nowrap'};
+    overflow: ${multiline ? 'initial' : 'hidden'};
+    overflow-wrap: anywhere;
   `
 })
 
@@ -51,6 +55,7 @@ export type AutocompleteOptionProps = {
   highlighted: string
   isSelected: boolean
   isDisabled?: boolean
+  multiline: boolean
 } & LiHTMLAttributes<HTMLLIElement>
 
 export const AutocompleteOption = forwardRef<
@@ -62,6 +67,7 @@ export const AutocompleteOption = forwardRef<
     multiple,
     isSelected,
     isDisabled,
+    multiline,
     onClick,
     'aria-selected': ariaSelected,
     ...other
@@ -88,7 +94,7 @@ export const AutocompleteOption = forwardRef<
           }}
         />
       )}
-      <Label>{value}</Label>
+      <Label multiline={multiline}>{value}</Label>
     </StyledListItem>
   )
 })

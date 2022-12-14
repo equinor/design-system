@@ -179,6 +179,8 @@ export type AutocompleteProps<T> = {
   placeholder?: string
   /** Toggle if input is cleared when an options is selected when `multiple` is `true`*/
   clearSearchOnChange?: boolean
+  /** Will wrap overflowing text at the expence of some performance overhead to calculate item heigths. Mostly relevant in combination with autoWidth */
+  multiline?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function AutocompleteInner<T>(
@@ -205,6 +207,7 @@ function AutocompleteInner<T>(
     placeholder,
     optionLabel,
     clearSearchOnChange = true,
+    multiline = false,
     ...other
   } = props
   const anchorRef = useRef<HTMLInputElement>(null)
@@ -308,7 +311,7 @@ function AutocompleteInner<T>(
     count: availableItems.length,
     getScrollElement: () => scrollContainer.current,
     estimateSize: useCallback(() => 48, []),
-    overscan: 10,
+    overscan: 25,
   })
 
   let comboBoxProps: UseComboboxProps<T> = {
@@ -598,13 +601,19 @@ function AutocompleteInner<T>(
                   }
                   isSelected={isSelected}
                   isDisabled={isDisabled}
+                  multiline={multiline}
                   {...getItemProps({
-                    ref: rowVirtualizer.measureElement,
+                    ...(multiline && {
+                      ref: rowVirtualizer.measureElement,
+                    }),
                     item,
                     index,
                     disabled,
                     style: {
                       transform: `translateY(${virtualItem.start}px)`,
+                      ...(!multiline && {
+                        height: `${virtualItem.size}px`,
+                      }),
                     },
                   })}
                 />
