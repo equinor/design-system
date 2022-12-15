@@ -54,7 +54,7 @@ jobs:
           fi
   publish-storybook:
     needs: [setup, packages]
-    name: Build & Deploy Docker
+    name: Build & Deploy Website
     runs-on: ubuntu-latest
     steps:
       - name: Use cache with storybook files
@@ -65,7 +65,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
       - name: Deploy the website
-        uses: tibor19/static-website-deploy@v3
+        uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
           folder: 'storybook-build'
