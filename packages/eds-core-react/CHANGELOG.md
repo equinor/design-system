@@ -47,6 +47,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ♿️ Add portal & focusManager to Popover by @martalalik in https://github.com/equinor/design-system/pull/2536
 - ✨ New internal component: `InputWrapper` by @mimarz in https://github.com/equinor/design-system/pull/2395
 
+### Removed
+
+- 🔥 Autocomplete **breaking change**: In the `variant` prop, `default` has been removed as an option by @mimarz in https://github.com/equinor/design-system/pull/2395
+
 ### Changed
 
 - 💄 Bumped z-index for autocomplete by @denektenina in https://github.com/equinor/design-system/pull/2585
