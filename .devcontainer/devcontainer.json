@@ -50,7 +50,8 @@
     "davidanson.vscode-markdownlint",
     "ionutvmi.path-autocomplete",
     "jock.svg",
-    "github.vscode-pull-request-github"
+    "github.vscode-pull-request-github",
+    "ms-azuretools.vscode-bicep"
   ],
   "forwardPorts": [9000],
   "portsAttributes": {
