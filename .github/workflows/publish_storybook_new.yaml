@@ -69,4 +69,4 @@ jobs:
         with:
           enabled-static-website: 'true'
           folder: 'storybook-build'
-          connection-string: ${{ secrets.AZURE_CREDENTIALS_2022 }}
+          connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
