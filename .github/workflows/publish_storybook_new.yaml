@@ -1,0 +1,72 @@
+name: Publish storybook on new subscription
+on:
+  workflow_dispatch:
+    inputs:
+      storybook-slot:
+        description: 'Slot for Storybook (development | production | lab | test)'
+        required: false
+        default: 'development'
+  push:
+    branches:
+      - develop
+    paths:
+      - 'packages/eds-core-react/**'
+      - 'packages/eds-lab-react/**'
+      - 'packages/eds-tokens/**'
+      - 'packages/eds-icons/**'
+jobs:
+  setup:
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    with:
+      cacheKey: ${{ github.sha }}
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
+      stage: ${{ github.event.inputs.storybook-slot }}
+  packages:
+    name: Process packages
+    runs-on: ubuntu-latest
+    needs: [setup]
+    steps:
+      - name: Use "setup" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}
+      - name: Use "dist" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
+      - name: Build packages
+        run: node_modules/.bin/pnpm run build
+      - name: Build Storybook
+        # Using this if statement as steps.if does not work with "needs.setup.outputs.stage" value
+        run: |
+          if [[ ${{ needs.setup.outputs.stage }} == lab ]]; then
+            echo Running build:storybook:lab!
+            node_modules/.bin/pnpm build:storybook:lab
+          else
+            echo Running build:storybook!
+            node_modules/.bin/pnpm build:storybook
+          fi
+  publish-storybook:
+    needs: [setup, packages]
+    name: Build & Deploy Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use cache with storybook files
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
+      - name: Deploy the website
+        uses: tibor19/static-website-deploy@v3
+        with:
+          enabled-static-website: 'true'
+          folder: 'storybook-build'
+          connection-string: ${{ secrets.AZURE_CREDENTIALS_2022 }}
