@@ -44,7 +44,7 @@ param errorDocument404Contents string = '<h1>Example 404 error page</h1>'
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
-  name: guid(resourceGroup().id, managedIdentity.id, contributorRoleDefinition.id)
+  name: guid(resourceGroup().id, managedIdentity.id, contributorRoleDefinition.id, storageAccount.name)
   properties: {
     roleDefinitionId: contributorRoleDefinition.id
     principalId: managedIdentity.properties.principalId
