@@ -7,15 +7,31 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-module stg './storybook.bicep' = {
-  name: 'storageDeployment'
+module storagedev './storage-account-webenabled.bicep' = {
+  name: 'storageDeploymentDev'
   scope: rg
   params: {
-    storageAccountName: 'steds'
+    storageAccountName: 'dev'
     location: location
   }
 }
 
+module storageprod './storage-account-webenabled.bicep' = {
+  name: 'storageDeploymentProd'
+  scope: rg
+  params: {
+    storageAccountName: 'prod'
+    location: location
+  }
+}
+module storagelabs './storage-account-webenabled.bicep' = {
+  name: 'storageDeploymentLabs'
+  scope: rg
+  params: {
+    storageAccountName: 'labs'
+    location: location
+  }
+}
 module kv './keyvault.bicep' = {
   name: 'keyVaultDeployment'
   scope: rg
