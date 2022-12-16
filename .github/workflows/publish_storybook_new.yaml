@@ -68,6 +68,6 @@ jobs:
         uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
-          folder: 'storybook-build'
+          folder: 'packages/eds-core-react/storybook-build'
           public-access-policy: 'container'
           connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
