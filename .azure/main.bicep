@@ -16,7 +16,7 @@ module storagedev './storage-account-webenabled.bicep' = {
   }
 }
 
-module storageprod './storage-account-webenabled.bicep' = {
+/* module storageprod './storage-account-webenabled.bicep' = {
   name: 'storageDeploymentProd'
   scope: rg
   params: {
@@ -31,7 +31,7 @@ module storagelabs './storage-account-webenabled.bicep' = {
     storageAccountName: 'edsstorybooklabs'
     location: location
   }
-}
+} */
 module kv './keyvault.bicep' = {
   name: 'keyVaultDeployment'
   scope: rg
