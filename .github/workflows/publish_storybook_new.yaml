@@ -69,4 +69,5 @@ jobs:
         with:
           enabled-static-website: 'true'
           folder: 'storybook-build'
+          public-access-policy: 'container'
           connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
