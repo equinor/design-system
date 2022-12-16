@@ -28,7 +28,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
 resource contributorRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   scope: subscription()
   // This is the Storage Account Contributor role, which is the minimum role permission we can give. See https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#:~:text=17d1049b-9a84-46fb-8f53-869881c3d3ab
-  name: '17d1049b-9a84-46fb-8f53-869881c3d3ab'
+  //name: '17d1049b-9a84-46fb-8f53-869881c3d3ab'
+  name: guid(resourceGroup().id, managedIdentity.id)
 }
 
 resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
