@@ -6,7 +6,6 @@ const {
   typography,
   colors,
   shape: {
-    straight,
     corners: { borderRadius },
   },
   spacings: {
@@ -16,15 +15,16 @@ const {
       medium: spacingMedium,
       large: spacingLarge,
       xx_small,
+      x_large,
+      xxx_large,
     },
   },
   elevation: { temporary_nav: boxShadow },
 } = tokens
-
+console.log(tokens)
 export const selectTokens: ComponentToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,
-  minHeight: straight.minHeight,
   spacings: {
     top: '0',
     right: spacingLarge,
@@ -63,6 +63,7 @@ export const selectTokens: ComponentToken = {
       },
     },
     label: {
+      minHeight: xxx_large,
       spacings: {
         left: '0',
         right: '0',
@@ -88,6 +89,7 @@ export const selectTokens: ComponentToken = {
           },
         },
         label: {
+          minHeight: x_large,
           spacings: {
             left: '0',
             right: '0',
@@ -110,7 +112,7 @@ export const multiSelect: ComponentToken = mergeDeepRight(selectTokens, {
   modes: {
     compact: {
       spacings: {
-        top: xx_small,
+        top: '0', //xx_small,
         bottom: '0',
       },
     },

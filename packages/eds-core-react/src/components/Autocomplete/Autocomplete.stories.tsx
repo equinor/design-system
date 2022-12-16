@@ -367,7 +367,8 @@ Controlled.args = {
 
 export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
-  const [density, setDensity] = useState<Density>('comfortable')
+  //useVirtualizer does not support dynamic changing of item heights at the moment
+  const [density, setDensity] = useState<Density>('compact')
 
   useEffect(() => {
     // Simulate user change

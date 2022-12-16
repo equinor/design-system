@@ -310,7 +310,11 @@ function AutocompleteInner<T>(
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
     getScrollElement: () => scrollContainer.current,
-    estimateSize: useCallback(() => 48, []),
+    estimateSize: useCallback(() => {
+      //useVirtualizer does not support dynamic changing of item heights at the moment
+      return parseInt(token().entities.label.minHeight)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [density, token]),
     overscan: 25,
   })
 
