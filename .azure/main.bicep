@@ -11,7 +11,7 @@ module storagedev './storage-account-webenabled.bicep' = {
   name: 'storageDeploymentDev'
   scope: rg
   params: {
-    storageAccountName: 'dev'
+    storageAccountName: 'edsstorybookdev'
     location: location
   }
 }
@@ -20,7 +20,7 @@ module storageprod './storage-account-webenabled.bicep' = {
   name: 'storageDeploymentProd'
   scope: rg
   params: {
-    storageAccountName: 'prod'
+    storageAccountName: 'edsstorybookprod'
     location: location
   }
 }
@@ -28,7 +28,7 @@ module storagelabs './storage-account-webenabled.bicep' = {
   name: 'storageDeploymentLabs'
   scope: rg
   params: {
-    storageAccountName: 'labs'
+    storageAccountName: 'edsstorybooklabs'
     location: location
   }
 }
