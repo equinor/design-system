@@ -11,10 +11,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
     }
     tenantId: subscription().tenantId
 
-    enableRbacAuthorization: false // Using Access Policies model
+    enableRbacAuthorization: true // Using RBAC for access control
     accessPolicies: [
       {
-        objectId: 'd89101d9-cf97-4b6c-9656-c6da457d8add'
+        objectId: '8e3af657-a8ff-443c-a75c-2fe8c4bcb635'
         tenantId: subscription().tenantId
         permissions: {
           secrets: [
