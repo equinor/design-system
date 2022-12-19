@@ -14,14 +14,13 @@ const {
       medium_small: spacingMediumSmall,
       medium: spacingMedium,
       large: spacingLarge,
-      xx_small,
       x_large,
       xxx_large,
     },
   },
   elevation: { temporary_nav: boxShadow },
 } = tokens
-console.log(tokens)
+
 export const selectTokens: ComponentToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,

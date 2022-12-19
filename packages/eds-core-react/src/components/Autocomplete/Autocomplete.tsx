@@ -27,7 +27,11 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
-import { useToken, bordersTemplate } from '@equinor/eds-utils'
+import {
+  useToken,
+  bordersTemplate,
+  useIsomorphicLayoutEffect,
+} from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
   offset,
@@ -311,12 +315,16 @@ function AutocompleteInner<T>(
     count: availableItems.length,
     getScrollElement: () => scrollContainer.current,
     estimateSize: useCallback(() => {
-      //useVirtualizer does not support dynamic changing of item heights at the moment
       return parseInt(token().entities.label.minHeight)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [density, token]),
     overscan: 25,
   })
+
+  //https://github.com/TanStack/virtual/discussions/379#discussioncomment-3501037
+  useIsomorphicLayoutEffect(() => {
+    rowVirtualizer?.measure?.()
+  }, [rowVirtualizer, density])
 
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
