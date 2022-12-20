@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📝 `Table` storybook: Added example of virtual scrolling by @denektenina in https://github.com/equinor/design-system/pull/2664
 - 📝 Added missing changelog enteries regarding `Button` variant `ghost_icon` and `contained_icon` size change by @oddvernes in https://github.com/equinor/design-system/pull/2677
 - 📝 Added missing changelog entry regarding Autocomplete `variant` by @oddvernes in https://github.com/equinor/design-system/pull/2695
-- ✨ `Autocomplete` is now virtualized to handle large data sets, and have a new prop `multiline` (multiline, where option text wraps, was previously the default behaviour) by @oddvernes in https://github.com/equinor/design-system/pull/2689
+- ✨ `Autocomplete` is now virtualized to handle large data sets, and have a new prop `multiline` (multiline, where option text wraps, was previously the default behaviour). Also fixes missing padding for `multiline` when more than 2 lines of text by @oddvernes in https://github.com/equinor/design-system/pull/2689
 
 ### Fixed
 
