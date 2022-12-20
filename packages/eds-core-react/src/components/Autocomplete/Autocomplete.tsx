@@ -316,8 +316,7 @@ function AutocompleteInner<T>(
     getScrollElement: () => scrollContainer.current,
     estimateSize: useCallback(() => {
       return parseInt(token().entities.label.minHeight)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [density, token]),
+    }, [token]),
     overscan: 25,
   })
 
