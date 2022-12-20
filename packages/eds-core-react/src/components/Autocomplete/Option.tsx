@@ -1,6 +1,5 @@
 import { forwardRef, LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { List } from '../List'
 import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
 
@@ -10,7 +9,7 @@ type StyledListItemType = {
   isdisabled?: string
 }
 
-const StyledListItem = styled(List.Item)<StyledListItemType>(
+const StyledListItem = styled.li<StyledListItemType>(
   ({ theme, highlighted, active, isdisabled }) => {
     const backgroundColor =
       highlighted === 'true'
@@ -18,14 +17,16 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
         : active === 'true'
         ? theme.states.active.background
         : theme.background
-
     return css`
       display: flex;
+      grid-area: 1 / -1;
       align-items: center;
+      align-self: start;
       margin: 0;
       list-style: none;
       background-color: ${backgroundColor};
       user-select: none;
+      overflow: hidden;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
@@ -38,12 +39,23 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
   },
 )
 
+const Label = styled.span<{ multiline: boolean }>(({ theme, multiline }) => {
+  return css`
+    ${spacingsTemplate(theme.entities.label.spacings)}
+    text-overflow: ellipsis;
+    white-space: ${multiline ? 'normal' : 'nowrap'};
+    overflow: ${multiline ? 'initial' : 'hidden'};
+    overflow-wrap: anywhere;
+  `
+})
+
 export type AutocompleteOptionProps = {
   value: string
   multiple: boolean
   highlighted: string
   isSelected: boolean
   isDisabled?: boolean
+  multiline: boolean
 } & LiHTMLAttributes<HTMLLIElement>
 
 export const AutocompleteOption = forwardRef<
@@ -55,6 +67,7 @@ export const AutocompleteOption = forwardRef<
     multiple,
     isSelected,
     isDisabled,
+    multiline,
     onClick,
     'aria-selected': ariaSelected,
     ...other
@@ -81,7 +94,7 @@ export const AutocompleteOption = forwardRef<
           }}
         />
       )}
-      <span>{value}</span>
+      <Label multiline={multiline}>{value}</Label>
     </StyledListItem>
   )
 })

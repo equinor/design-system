@@ -93,6 +93,10 @@ Downshift controls its own state internally. If you need more controll you can d
 Compact `Autocomplete` using `EdsProvider`.
 <Story id="inputs-autocomplete--compact" />
 
+### Virtualization
+`Autocomplete` uses [@tanstack/react-virtual](https://tanstack.com/virtual/v3) virtualization to support large datasets.
+<Story id="inputs-autocomplete--virtualized" />
+
 ### With `React Hook Form`
 
 Example using [react-hook-form](https://react-hook-form.com/) library.
@@ -108,7 +112,9 @@ This is an example of how to make a "Select All" option for quicker selection.
 Make sure to use `useMemo` if you are mutating the options in the render function to avoid object memory references bugs on re-renders.
 <Story id="inputs-autocomplete--select-all" />
 
-### Options `autoWidth` 
+### Option `autoWidth`
+`autoWidth` set: Dropdown width is the same as input width. Otherwise, dropdown width is based on it's widest content.
+The second input here also have `multiline` added to allow text wrapping.
 <Story id="inputs-autocomplete--auto-width" />
 
 ### Options update

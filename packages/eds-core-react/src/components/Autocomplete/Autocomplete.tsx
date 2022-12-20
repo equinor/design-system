@@ -14,6 +14,7 @@ import {
   useMultipleSelection,
   UseMultipleSelectionProps,
 } from 'downshift'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
 import { List } from '../List'
@@ -26,7 +27,11 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
-import { useToken, bordersTemplate } from '@equinor/eds-utils'
+import {
+  useToken,
+  bordersTemplate,
+  useIsomorphicLayoutEffect,
+} from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
   offset,
@@ -49,8 +54,10 @@ const StyledList = styled(List)(
     box-shadow: ${theme.boxShadow};
     ${bordersTemplate(theme.border)}
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 300px;
     padding: 0;
+    display: grid;
   `,
 )
 
@@ -176,6 +183,8 @@ export type AutocompleteProps<T> = {
   placeholder?: string
   /** Toggle if input is cleared when an options is selected when `multiple` is `true`*/
   clearSearchOnChange?: boolean
+  /** Will wrap overflowing text at the expence of some performance overhead to calculate item heigths. Mostly relevant in combination with autoWidth */
+  multiline?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function AutocompleteInner<T>(
@@ -202,6 +211,7 @@ function AutocompleteInner<T>(
     placeholder,
     optionLabel,
     clearSearchOnChange = true,
+    multiline = false,
     ...other
   } = props
   const anchorRef = useRef<HTMLInputElement>(null)
@@ -300,6 +310,22 @@ function AutocompleteInner<T>(
     [optionLabel],
   )
 
+  const scrollContainer = useRef<HTMLElement>(null)
+  const rowVirtualizer = useVirtualizer({
+    count: availableItems.length,
+    getScrollElement: () => scrollContainer.current,
+    estimateSize: useCallback(() => {
+      return parseInt(token().entities.label.minHeight)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [density, token]),
+    overscan: 25,
+  })
+
+  //https://github.com/TanStack/virtual/discussions/379#discussioncomment-3501037
+  useIsomorphicLayoutEffect(() => {
+    rowVirtualizer?.measure?.()
+  }, [rowVirtualizer, density])
+
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
@@ -314,6 +340,15 @@ function AutocompleteInner<T>(
           return getLabel(item).toLowerCase().includes(inputValue.toLowerCase())
         }),
       )
+    },
+    onHighlightedIndexChange({ highlightedIndex, type }) {
+      if (
+        type !== useCombobox.stateChangeTypes.ItemMouseMove &&
+        type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
+        highlightedIndex >= 0
+      ) {
+        rowVirtualizer.scrollToIndex(highlightedIndex)
+      }
     },
     onIsOpenChange: ({ selectedItem }) => {
       if (!multiple && selectedItem !== null) {
@@ -541,19 +576,36 @@ function AutocompleteInner<T>(
         {...getMenuProps(
           {
             'aria-multiselectable': multiple ? 'true' : null,
+            ref: scrollContainer,
           },
           { suppressRefError: true },
         )}
       >
+        {isOpen && (
+          <li
+            key="total-size"
+            role="presentation"
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              margin: '0',
+              gridArea: '1 / -1',
+            }}
+          />
+        )}
         {!isOpen
           ? null
-          : availableItems.map((item, index) => {
+          : rowVirtualizer.getVirtualItems().map((virtualItem) => {
+              const index = virtualItem.index
+              const item = availableItems[index]
               const label = getLabel(item)
               const isDisabled = optionDisabled(item)
               const isSelected = selectedItemsLabels.includes(label)
               return (
                 <AutocompleteOption
-                  key={label}
+                  key={virtualItem.key}
+                  data-index={virtualItem.index}
+                  aria-setsize={availableItems.length}
+                  aria-posinset={index + 1}
                   value={label}
                   multiple={multiple}
                   highlighted={
@@ -561,7 +613,21 @@ function AutocompleteInner<T>(
                   }
                   isSelected={isSelected}
                   isDisabled={isDisabled}
-                  {...getItemProps({ item, index, disabled })}
+                  multiline={multiline}
+                  {...getItemProps({
+                    ...(multiline && {
+                      ref: rowVirtualizer.measureElement,
+                    }),
+                    item,
+                    index,
+                    disabled,
+                    style: {
+                      transform: `translateY(${virtualItem.start}px)`,
+                      ...(!multiline && {
+                        height: `${virtualItem.size}px`,
+                      }),
+                    },
+                  })}
                 />
               )
             })}

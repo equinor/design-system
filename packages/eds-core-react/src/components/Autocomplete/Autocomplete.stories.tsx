@@ -161,6 +161,47 @@ Multiple.args = {
   options: stocks,
 }
 
+export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
+  type Photo = {
+    albumId: number
+    id: number
+    title: string
+    url: string
+    thumbnailUrl: string
+  }
+  const [data, setData] = useState<Array<string>>([])
+
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
+      .then((r) => r.json())
+      .then((d: Photo[]) => {
+        const parsed = d.map((x) => x.title.substring(0, 30))
+        setData(parsed)
+      })
+      .catch((err: Error) => {
+        console.warn(`Warning: ${err.message}`)
+      })
+    return () => {
+      abortController.abort()
+    }
+  }, [])
+
+  return (
+    <>
+      <Autocomplete label="Select an item" options={data} />
+      <Autocomplete
+        label="Select multiple items"
+        options={data}
+        multiple
+        clearSearchOnChange={false}
+      />
+    </>
+  )
+}
+
 export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
@@ -631,11 +672,12 @@ export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
         autoWidth
       />
       <Autocomplete
-        optionLabel={(opt) => `${opt.trend} ${opt.label}`}
+        optionLabel={optionLabel}
         label="Select multiple stocks"
         options={options}
         multiple
         autoWidth
+        multiline
       />
     </>
   )

@@ -6,7 +6,6 @@ const {
   typography,
   colors,
   shape: {
-    straight,
     corners: { borderRadius },
   },
   spacings: {
@@ -15,7 +14,8 @@ const {
       medium_small: spacingMediumSmall,
       medium: spacingMedium,
       large: spacingLarge,
-      xx_small,
+      x_large,
+      xxx_large,
     },
   },
   elevation: { temporary_nav: boxShadow },
@@ -24,11 +24,10 @@ const {
 export const selectTokens: ComponentToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,
-  minHeight: straight.minHeight,
   spacings: {
-    top: spacingMedium,
+    top: '0',
     right: spacingLarge,
-    bottom: spacingMedium,
+    bottom: '0',
     left: spacingLarge,
   },
   typography: {
@@ -62,14 +61,23 @@ export const selectTokens: ComponentToken = {
         top: '6px',
       },
     },
+    label: {
+      minHeight: xxx_large,
+      spacings: {
+        left: '0',
+        right: '0',
+        top: spacingMedium,
+        bottom: spacingMedium,
+      },
+    },
   },
   modes: {
     compact: {
       spacings: {
         left: spacingSmall,
         right: spacingSmall,
-        top: spacingSmall,
-        bottom: spacingSmall,
+        top: '0',
+        bottom: '0',
       },
       entities: {
         button: {
@@ -77,6 +85,15 @@ export const selectTokens: ComponentToken = {
             left: spacingSmall,
             right: spacingSmall,
             top: '0',
+          },
+        },
+        label: {
+          minHeight: x_large,
+          spacings: {
+            left: '0',
+            right: '0',
+            top: spacingSmall,
+            bottom: spacingSmall,
           },
         },
       },
@@ -94,7 +111,7 @@ export const multiSelect: ComponentToken = mergeDeepRight(selectTokens, {
   modes: {
     compact: {
       spacings: {
-        top: xx_small,
+        top: '0', //xx_small,
         bottom: '0',
       },
     },
