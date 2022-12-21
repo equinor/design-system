@@ -10,12 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - 📝 `Table` storybook: Added example of virtual scrolling by @denektenina in https://github.com/equinor/design-system/pull/2664
-- 📝 Added missing changelog enteries regarding `Button` variant `ghost_icon` and `contained_icon` size change by @oddvernes in https://github.com/equinor/design-system/pull/2677
-- 📝 Added missing changelog entry regarding Autocomplete `variant` by @oddvernes in https://github.com/equinor/design-system/pull/2695
 - ✨ `Autocomplete` is now virtualized to handle large data sets, and have a new prop `multiline` (multiline, where option text wraps, was previously the default behaviour). Also fixes missing padding for `multiline` when more than 2 lines of text by @oddvernes in https://github.com/equinor/design-system/pull/2689
 
 ### Fixed
 
+- 📝 Added missing changelog entry to v0.24.0 regarding `Button` variant `ghost_icon` and `contained_icon` size change by @oddvernes in https://github.com/equinor/design-system/pull/2677
+- 📝 Added missing changelog entry to v0.25.0 regarding Autocomplete `variant` by @oddvernes in https://github.com/equinor/design-system/pull/2695
 - 📝 `Slider` storybook: Improve docs for `outputFunction` by @Strepto in https://github.com/equinor/design-system/pull/2674
 - 📝 Storybook: Fixed wrongly rendered "show code" in certain stories by @denektenina in https://github.com/equinor/design-system/pull/2681
 - ⬆️ `Autocomplete`: Upgraded `downshift` to 7.0.5 to fix react 18 issue where the dropdown was open on load in dev enviroment by @oddvernes in https://github.com/equinor/design-system/pull/2697
