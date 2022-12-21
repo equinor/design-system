@@ -12,29 +12,29 @@ resource rgprod 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-module storagedev './storage-account-webenabled.bicep' = {
-  name: 'S478stedsdev'
+module ststorybookdev './storage-account-webenabled.bicep' = {
+  name: 'stStrybookDev'
   scope: rgdev
   params: {
-    storageAccountName: 'edsstorybookdev'
+    storageAccountName: '478stedsstorybookdev'
     location: location
   }
 }
 
-module storageprod './storage-account-webenabled.bicep' = {
-  name: 'S478stedsprod'
+module ststorybookprod './storage-account-webenabled.bicep' = {
+  name: 'stStorybookProd'
   scope: rgprod
   params: {
-    storageAccountName: 'edsstorybookprod'
+    storageAccountName: 'S478stedsstorybookprod'
     location: location
   }
 }
 
-module storagelabs './storage-account-webenabled.bicep' = {
-  name: 'S478stedsprodlabs'
+module ststorybooklabs './storage-account-webenabled.bicep' = {
+  name: 'stStorybookLabs'
   scope: rgprod
   params: {
-    storageAccountName: 'edsstorybooklabs'
+    storageAccountName: 'S478stedsstorybookprodlabs'
     location: location
   }
 }
