@@ -36,6 +36,6 @@ resource RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   properties: {
     roleDefinitionId: roleDefinition.id
     principalId: principalId
-    principalType: 'Group'
+    principalType: 'User'
   }
 }
