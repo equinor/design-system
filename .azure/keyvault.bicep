@@ -1,8 +1,8 @@
 @description('Specifies the Azure location where the key vault should be created.')
 param location string = resourceGroup().location
 param name string
-param adminRoleId string
-param principalId string
+/* param adminRoleId string
+param principalId string */
 
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: name
@@ -26,7 +26,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   }
 }
 
-resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
+/* resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   scope: resourceGroup()
   name: adminRoleId
 }
@@ -39,3 +39,4 @@ resource RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     principalType: 'User'
   }
 }
+ */
