@@ -16,7 +16,7 @@ module ststorybookdev './storage-account-webenabled.bicep' = {
   name: 'stStrybookDev'
   scope: rgdev
   params: {
-    storageAccountName: '478stedsstorybookdev'
+    storageAccountName: 's478stedsstorybookdev'
     location: location
   }
 }
@@ -25,7 +25,7 @@ module ststorybookprod './storage-account-webenabled.bicep' = {
   name: 'stStorybookProd'
   scope: rgprod
   params: {
-    storageAccountName: 'S478stedsstorybookprod'
+    storageAccountName: 's478stedsstorybookprod'
     location: location
   }
 }
@@ -34,7 +34,7 @@ module ststorybooklabs './storage-account-webenabled.bicep' = {
   name: 'stStorybookLabs'
   scope: rgprod
   params: {
-    storageAccountName: 'S478stedsstorybookprodlabs'
+    storageAccountName: 's478stedsstorybooklabs'
     location: location
   }
 }
