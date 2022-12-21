@@ -13,7 +13,7 @@ resource rgprod 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 module storagedev './storage-account-webenabled.bicep' = {
-  name: 'storageDeploymentDev'
+  name: 'stedsdev'
   scope: rgdev
   params: {
     storageAccountName: 'edsstorybookdev'
@@ -22,7 +22,7 @@ module storagedev './storage-account-webenabled.bicep' = {
 }
 
 module storageprod './storage-account-webenabled.bicep' = {
-  name: 'storageDeploymentProd'
+  name: 'stedsprod'
   scope: rgprod
   params: {
     storageAccountName: 'edsstorybookprod'
@@ -31,7 +31,7 @@ module storageprod './storage-account-webenabled.bicep' = {
 }
 
 module storagelabs './storage-account-webenabled.bicep' = {
-  name: 'storageDeploymentLabs'
+  name: 'stedsprodlabs'
   scope: rgprod
   params: {
     storageAccountName: 'edsstorybooklabs'
