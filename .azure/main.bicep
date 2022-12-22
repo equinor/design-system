@@ -39,6 +39,15 @@ module ststorybooklabs './storage-account-webenabled.bicep' = {
   }
 }
 
+module startefactsdev './storage-account.bicep' = {
+  name: 'stArtefactDev'
+  scope: rgdev
+  params: {
+    storageAccountName: 's478stedsartefactsdev'
+    location: location
+  }
+}
+
 module kvdev './keyvault.bicep' = {
   name: 'keyVaultDevDeployment'
   scope: rgdev
