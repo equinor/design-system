@@ -51,9 +51,8 @@ module startefactsdev './storage-account.bicep' = {
 module blobartefactsdev 'blob-storage.bicep' = {
   name: 'blobArtefactsDev'
   scope: rgdev
-  dependsOn: [startefactsdev]
+  dependsOn: [ startefactsdev ]
   params: {
-    storageAccountName: startefactsdev.outputs.name
     name: 'eds-artefacts-dev'
   }
 }
@@ -61,7 +60,7 @@ module blobartefactsdev 'blob-storage.bicep' = {
 module cdneartefactsdev 'cdn-endpoint.bicep' = {
   name: 'cdneArtefactsDev'
   scope: rgdev
-  dependsOn: [blobartefactsdev]
+  dependsOn: [ blobartefactsdev ]
   params: {
     location: location
     name: 'S478-cdne-edsartefacts-dev'
