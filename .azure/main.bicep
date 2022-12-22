@@ -54,6 +54,7 @@ module blobartefactsdev 'blob-storage.bicep' = {
   dependsOn: [ startefactsdev ]
   params: {
     name: 'eds-artefacts-dev'
+    storageAccountName: startefactsdev.outputs.name
   }
 }
 
