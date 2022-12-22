@@ -40,11 +40,32 @@ module ststorybooklabs './storage-account-webenabled.bicep' = {
 }
 
 module startefactsdev './storage-account.bicep' = {
-  name: 'stArtefactDev'
+  name: 'stArtefacstDev'
   scope: rgdev
   params: {
     storageAccountName: 's478stedsartefactsdev'
     location: location
+  }
+}
+
+module blobartefactsdev 'blob-storage.bicep' = {
+  name: 'blobArtefactsDev'
+  scope: rgdev
+  dependsOn: [startefactsdev]
+  params: {
+    storageAccountName: startefactsdev.outputs.name
+    name: 'eds-artefacts-dev'
+  }
+}
+
+module cdneartefactsdev 'cdn-endpoint.bicep' = {
+  name: 'cdneArtefactsDev'
+  scope: rgdev
+  dependsOn: [blobartefactsdev]
+  params: {
+    location: location
+    name: 'S478-cdne-edsartefacts-dev'
+    origin: 'https://${startefactsdev.outputs.name}.blob.${environment()}'
   }
 }
 
