@@ -10,7 +10,7 @@ resource cdnendpoint 'Microsoft.Cdn/profiles/endpoints@2022-05-01-preview' = {
     Environment: 'Dev'
   }
   properties: {
-    //originHostHeader: originHostName
+    originHostHeader: originHostName
     contentTypesToCompress: [
       'application/eot'
       'application/font'

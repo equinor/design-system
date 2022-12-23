@@ -76,7 +76,7 @@ module cdneartefactsdev 'cdn-endpoint.bicep' = {
     location: 'Global'
     name: 'S478-cdne-edsartefacts-dev'
     cdnProfileName: cdnprofileartefactsdev.outputs.name
-    originHostName: 'https://${startefactsdev.outputs.name}.blob.${environment().suffixes.storage}'
+    originHostName: '${startefactsdev.outputs.name}.blob.${environment().suffixes.storage}'
   }
 }
 
