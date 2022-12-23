@@ -58,13 +58,24 @@ module blobartefactsdev 'blob-storage.bicep' = {
   }
 }
 
-module cdneartefactsdev 'cdn-endpoint.bicep' = {
-  name: 'cdneArtefactsDev'
+module cdnprofileartefactsdev 'cdn-profile.bicep' = {
+  name: 'cdnProfileArtefactsDev'
   scope: rgdev
   dependsOn: [ blobartefactsdev ]
   params: {
-    location: location
+    name: 'S478-afd-edsartefacts-dev'
+    location: 'Global'
+  }
+}
+
+module cdneartefactsdev 'cdn-endpoint.bicep' = {
+  name: 'cdneArtefactsDev'
+  scope: rgdev
+  dependsOn: [ blobartefactsdev, cdnprofileartefactsdev ]
+  params: {
+    location: 'Global'
     name: 'S478-cdne-edsartefacts-dev'
+    cdnProfileName: cdnprofileartefactsdev.outputs.name
     origin: 'https://${startefactsdev.outputs.name}.blob.${environment()}'
   }
 }

@@ -1,9 +1,10 @@
 param location string = resourceGroup().location
 param name string
 param origin string
+param cdnProfileName string
 
 resource cdnendpoint 'Microsoft.Cdn/profiles/endpoints@2022-05-01-preview' = {
-  name: name
+  name: '${cdnProfileName}/${name}'
   location: location
   tags: {
     Environment: 'Dev'
