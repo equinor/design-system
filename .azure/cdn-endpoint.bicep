@@ -1,6 +1,6 @@
 param location string = resourceGroup().location
 param name string
-param origin string
+param originHostName string
 param cdnProfileName string
 
 resource cdnendpoint 'Microsoft.Cdn/profiles/endpoints@2022-05-01-preview' = {
@@ -10,6 +10,7 @@ resource cdnendpoint 'Microsoft.Cdn/profiles/endpoints@2022-05-01-preview' = {
     Environment: 'Dev'
   }
   properties: {
+    originHostHeader: originHostName
     contentTypesToCompress: [
       'application/eot'
       'application/font'
@@ -58,10 +59,10 @@ resource cdnendpoint 'Microsoft.Cdn/profiles/endpoints@2022-05-01-preview' = {
     isHttpsAllowed: true
     origins: [
       {
-        name: origin
+        name: replace(originHostName, '.', '-')
         properties: {
           enabled: true
-          hostName: origin
+          hostName: originHostName
           httpPort: 80
           httpsPort: 443
         }
