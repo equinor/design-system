@@ -80,6 +80,48 @@ module cdneartefactsdev 'cdn-endpoint.bicep' = {
   }
 }
 
+
+module startefactsprod './storage-account.bicep' = {
+  name: 'stArtefacstProd'
+  scope: rgdev
+  params: {
+    storageAccountName: 's478stedsartefactsprod'
+    location: location
+  }
+}
+
+module blobartefactsprod 'blob-storage.bicep' = {
+  name: 'blobArtefactsProd'
+  scope: rgdev
+  dependsOn: [ startefactsprod ]
+  params: {
+    name: 'eds-artefacts-prod'
+    storageAccountName: startefactsprod.outputs.name
+  }
+}
+
+module cdnprofileartefactsprod 'cdn-profile.bicep' = {
+  name: 'cdnProfileArtefactsProd'
+  scope: rgdev
+  dependsOn: [ blobartefactsprod ]
+  params: {
+    name: 'S478-afd-edsartefacts-prod'
+    location: 'Global'
+  }
+}
+
+module cdneartefactsprod 'cdn-endpoint.bicep' = {
+  name: 'cdneArtefactsProd'
+  scope: rgdev
+  dependsOn: [ blobartefactsprod, cdnprofileartefactsprod ]
+  params: {
+    location: 'Global'
+    name: 'S478-cdne-edsartefacts-prod'
+    cdnProfileName: cdnprofileartefactsprod.outputs.name
+    originHostName: '${startefactsprod.outputs.name}.blob.${environment().suffixes.storage}'
+  }
+}
+
 module kvdev './keyvault.bicep' = {
   name: 'keyVaultDevDeployment'
   scope: rgdev
