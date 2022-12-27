@@ -63,7 +63,7 @@ module cdnprofileartefactsdev 'cdn-profile.bicep' = {
   scope: rgdev
   dependsOn: [ blobartefactsdev ]
   params: {
-    name: 'S478-afd-edsartefacts-dev'
+    name: 'S478-cdnp-edsartefacts-dev'
     location: 'Global'
   }
 }
@@ -104,11 +104,15 @@ module cdnprofileartefactsprod 'cdn-profile.bicep' = {
   scope: rgdev
   dependsOn: [ blobartefactsprod ]
   params: {
-    name: 'S478-afd-edsartefacts-prod'
+    name: 'S478-cdnp-edsartefacts-prod'
     location: 'Global'
     cdnSku: 'Premium_Verizon'
   }
 }
+
+//resource customdomainprod 'Microsoft.Cdn/profiles/endpoints/customDomains@2022-11-01-preview' = {
+//  name: 'customDomainProd'
+//}
 
 module cdneartefactsprod 'cdn-endpoint.bicep' = {
   name: 'cdneArtefactsProd'
