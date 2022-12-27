@@ -58,7 +58,7 @@ module blobartefactsdev 'blob-storage.bicep' = {
   }
 }
 
-module cdnartefactsdev 'cdn-microsoft.bicep' = {
+module cdnartefactsdev 'cdn-dev.bicep' = {
   name: 'cdnArtefactsDev'
   scope: rgdev
   dependsOn: [ blobartefactsdev ]
@@ -88,7 +88,7 @@ module blobartefactsprod 'blob-storage.bicep' = {
   }
 }
 
-module cdnartefactsprod 'cdn-verizon.bicep' = {
+module cdnartefactsprod 'cdn-prod.bicep' = {
   name: 'cdnArtefactsProd'
   scope: rgprod
   dependsOn: [ blobartefactsprod ]
