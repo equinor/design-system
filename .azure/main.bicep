@@ -80,7 +80,6 @@ module cdneartefactsdev 'cdn-endpoint.bicep' = {
   }
 }
 
-
 module startefactsprod './storage-account.bicep' = {
   name: 'stArtefacstProd'
   scope: rgdev
@@ -107,6 +106,7 @@ module cdnprofileartefactsprod 'cdn-profile.bicep' = {
   params: {
     name: 'S478-afd-edsartefacts-prod'
     location: 'Global'
+    cdnSku: 'Premium_Verizon'
   }
 }
 
