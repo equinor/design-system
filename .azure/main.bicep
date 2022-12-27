@@ -99,30 +99,14 @@ module blobartefactsprod 'blob-storage.bicep' = {
   }
 }
 
-module cdnprofileartefactsprod 'cdn-profile.bicep' = {
-  name: 'cdnProfileArtefactsProd'
-  scope: rgdev
+module cdnartefactsprod 'cdn-verizon.bicep' = {
+  name: 'cdnArtefactsProd'
+  scope: rgprod
   dependsOn: [ blobartefactsprod ]
   params: {
-    name: 'S478-cdnp-edsartefacts-prod'
     location: 'Global'
-    cdnSku: 'Premium_Verizon'
-  }
-}
-
-//resource customdomainprod 'Microsoft.Cdn/profiles/endpoints/customDomains@2022-11-01-preview' = {
-//  name: 'customDomainProd'
-//}
-
-module cdneartefactsprod 'cdn-endpoint.bicep' = {
-  name: 'cdneArtefactsProd'
-  scope: rgdev
-  dependsOn: [ blobartefactsprod, cdnprofileartefactsprod ]
-  params: {
-    location: 'Global'
-    name: 'S478-cdne-edsartefacts-prod'
-    cdnProfileName: cdnprofileartefactsprod.outputs.name
-    originHostName: '${startefactsprod.outputs.name}.blob.${environment().suffixes.storage}'
+    profileName: 'S478-cdnp-edsartefacts-prod'
+    endpointName: 'S478-cdne-edsartefacts-prod'
   }
 }
 

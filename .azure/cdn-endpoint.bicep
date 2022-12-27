@@ -71,3 +71,5 @@ resource cdnendpoint 'Microsoft.Cdn/profiles/endpoints@2022-05-01-preview' = {
     queryStringCachingBehavior: 'IgnoreQueryString'
   }
 }
+
+output name string = cdnendpoint.name
