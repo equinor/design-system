@@ -71,7 +71,7 @@ module cdnartefactsdev 'cdn-dev.bicep' = {
 
 module startefactsprod './storage-account.bicep' = {
   name: 'stArtefacstProd'
-  scope: rgdev
+  scope: rgprod
   params: {
     storageAccountName: 's478stedsartefactsprod'
     location: location
@@ -80,7 +80,7 @@ module startefactsprod './storage-account.bicep' = {
 
 module blobartefactsprod 'blob-storage.bicep' = {
   name: 'blobArtefactsProd'
-  scope: rgdev
+  scope: rgprod
   dependsOn: [ startefactsprod ]
   params: {
     name: 'eds-artefacts-prod'
