@@ -94,8 +94,11 @@ module cdnartefactsprod 'cdn-prod.bicep' = {
   dependsOn: [ blobartefactsprod ]
   params: {
     location: 'Global'
+    hostName: 'eds-static-new.equinor.com'
     profileName: 'S478-cdnp-edsartefacts-prod'
     endpointName: 'S478-cdne-edsartefacts-prod'
+    vaultName: kvprod.name
+    certificateName: 'eds-static-2023'
   }
 }
 
