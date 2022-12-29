@@ -58,7 +58,12 @@ resource customdomainprod 'Microsoft.Cdn/profiles/endpoints/customDomains@2022-1
 }
 
 // Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{certificateName}
-//var certificateId = '/subscriptions/${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.KeyVault/vaults/${vaultName}/certificates/${certificateName}'
+//var certificateId = '/subscriptions/${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.KeyVault/vaults/${vaultName}/secrets/${certificateName}'
+
+// Expect certificate to exist
+resource certificate 'Microsoft.KeyVault/vaults/secrets@2022-07-01' existing = {
+  name: '${vaultName}/${certificateName}'
+}
 
 resource certificateprod 'Microsoft.Cdn/profiles/secrets@2022-11-01-preview' = {
   name: 'certificateProd'
@@ -67,7 +72,7 @@ resource certificateprod 'Microsoft.Cdn/profiles/secrets@2022-11-01-preview' = {
     parameters: {
       type: 'CustomerCertificate'
       secretSource: {
-        id: resourceId('Microsoft.KeyVault/vaults/secrets', '${vaultName}/${certificateName}')
+        id: certificate.id
       }
       useLatestVersion: true
     }
