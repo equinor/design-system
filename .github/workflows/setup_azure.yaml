@@ -8,24 +8,24 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
-      # Log into Azure
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_2022 }}
-      # Deploy Bicep file
-    - name: deploy
-      uses: azure/arm-deploy@v1
-      with:
-        scope: subscription
-        region: northeurope
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        template: .azure/main.bicep
-        parameters: 'location=northeurope'
-        failOnStdErr: false
-    - name: log-errors-to-slack
-      uses: act10ns/slack@v1
-      with:
+      - uses: actions/checkout@main
+        # Log into Azure
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_2022 }}
+        # Deploy Bicep file
+      - name: deploy
+        uses: azure/arm-deploy@v1
+        with:
+          scope: subscription
+          region: northeurope
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          template: .azure/main.bicep
+          parameters: 'location=northeurope'
+          failOnStdErr: false
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
-      if: failure()
+        if: failure()
