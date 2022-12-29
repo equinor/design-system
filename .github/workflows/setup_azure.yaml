@@ -8,13 +8,24 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-        # Log into Azure
-      - uses: azure/login@v1
+      - name: Login to azure
+        id: login-to-azure
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS_2022 }}
-        # Deploy Bicep file
+      - name: Show Azure account
+        run: az account show
+      # Checkout internal repository where the bicep files are located
+      - name: Checout internal
+        id: checkout-internal
+        uses: actions/checkout@v3
+        with:
+          repository: 'equinor/design-system-internal'
+          ref: main
+          token: ${{ secrets.PAT_INTERNAL }}
+      # Do the actual deployment
       - name: deploy
+        id: deploy
         uses: azure/arm-deploy@v1
         with:
           scope: subscription
