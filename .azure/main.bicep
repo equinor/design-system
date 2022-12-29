@@ -109,7 +109,8 @@ module blobartefactsprod 'blob-storage.bicep' = {
   }
 }
 
-module cdnartefactsprod 'cdn-prod.bicep' = {
+// Comment out cdn prod until we have certificate and domain set up
+/* module cdnartefactsprod 'cdn-prod.bicep' = {
   name: 'cdnArtefactsProd'
   scope: rgprod
   dependsOn: [ blobartefactsprod ]
@@ -121,4 +122,4 @@ module cdnartefactsprod 'cdn-prod.bicep' = {
     vaultName: kvprod.outputs.name
     certificateName: 'eds-static-2023'
   }
-}
+} */
