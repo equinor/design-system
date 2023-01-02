@@ -651,7 +651,9 @@ function AutocompleteInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: refs.reference,
+                ref: refs.reference as unknown as (
+                  instance: HTMLInputElement,
+                ) => void,
                 onChange: (e: ChangeEvent<HTMLInputElement>) =>
                   setTypedInputValue(e?.currentTarget?.value),
               }),
