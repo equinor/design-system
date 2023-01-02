@@ -42,7 +42,7 @@ import {
   useFloating,
   useInteractions,
   FloatingPortal,
-} from '@floating-ui/react-dom-interactions'
+} from '@floating-ui/react'
 
 const Container = styled.div`
   position: relative;

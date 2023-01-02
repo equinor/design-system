@@ -14,7 +14,7 @@ import {
   FloatingPortal,
   useFloating,
   FloatingFocusManager,
-} from '@floating-ui/react-dom-interactions'
+} from '@floating-ui/react'
 
 const StyledDialog = styled(Paper).attrs<DialogProps>({
   tabIndex: 0,

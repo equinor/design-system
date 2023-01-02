@@ -21,7 +21,7 @@ import {
   useInteractions,
   useDismiss,
   FloatingPortal,
-} from '@floating-ui/react-dom-interactions'
+} from '@floating-ui/react'
 
 type MenuPaperProps = {
   open: boolean

@@ -2,7 +2,7 @@ import { forwardRef, MouseEvent, HTMLAttributes, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 import { useGlobalKeyPress, mergeRefs } from '@equinor/eds-utils'
-import { FloatingOverlay } from '@floating-ui/react-dom-interactions'
+import { FloatingOverlay } from '@floating-ui/react'
 
 const { background } = tokens
 

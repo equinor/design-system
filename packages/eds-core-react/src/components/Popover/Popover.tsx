@@ -29,7 +29,7 @@ import {
   useDismiss,
   FloatingPortal,
   FloatingFocusManager,
-} from '@floating-ui/react-dom-interactions'
+} from '@floating-ui/react'
 
 const PopoverPaper = styled(Paper)(({ theme }) => {
   const {
