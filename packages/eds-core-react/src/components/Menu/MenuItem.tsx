@@ -1,4 +1,4 @@
-import { MouseEvent, forwardRef, useEffect } from 'react'
+import { MouseEvent, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import {
@@ -117,27 +117,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
     },
     ref,
   ) {
-    const {
-      focusedIndex,
-      setFocusedIndex,
-      onClose,
-      addCloseMenuOnClickIndex,
-      removeCloseMenuOnClickIndex,
-    } = useMenu()
-
-    useEffect(() => {
-      if (closeMenuOnClick) {
-        addCloseMenuOnClickIndex(index)
-      }
-      return () => {
-        removeCloseMenuOnClickIndex(index)
-      }
-    }, [
-      closeMenuOnClick,
-      index,
-      addCloseMenuOnClickIndex,
-      removeCloseMenuOnClickIndex,
-    ])
+    const { focusedIndex, setFocusedIndex, onClose } = useMenu()
 
     const toggleFocus = (index_: number) => {
       if (focusedIndex !== index_) {

@@ -43,13 +43,9 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
     { children, anchorEl, onClose: onCloseCallback, open, ...rest },
     ref,
   ) {
-    const {
-      setOnClose,
-      onClose,
-      setInitialFocus,
-      focusedIndex,
-      closeMenuOnClickIndexes,
-    } = useMenu()
+    const { setOnClose, onClose, setInitialFocus, focusedIndex } = useMenu()
+
+    const closeMenuOnClickIndexes: number[] = useMemo<number[]>(() => [], [])
 
     useEffect(() => {
       if (onClose === null && onCloseCallback) {
@@ -106,8 +102,18 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
       }
     })
 
+    const addCloseMenuOnClickIndex = (index: number) => {
+      if (closeMenuOnClickIndexes.indexOf(index) < 0) {
+        closeMenuOnClickIndexes.push(index)
+      }
+    }
+
     return (
-      <MenuList {...rest} ref={ref}>
+      <MenuList
+        addCloseMenuOnClickIndex={addCloseMenuOnClickIndex}
+        {...rest}
+        ref={ref}
+      >
         {children}
       </MenuList>
     )
