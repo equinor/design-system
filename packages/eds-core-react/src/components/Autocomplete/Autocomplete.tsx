@@ -7,6 +7,7 @@ import {
   useMemo,
   useCallback,
   ChangeEvent,
+  RefObject,
 } from 'react'
 import {
   useCombobox,
@@ -651,9 +652,7 @@ function AutocompleteInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: refs.reference as unknown as (
-                  instance: HTMLInputElement,
-                ) => void,
+                ref: refs.reference as RefObject<HTMLInputElement>,
                 onChange: (e: ChangeEvent<HTMLInputElement>) =>
                   setTypedInputValue(e?.currentTarget?.value),
               }),
