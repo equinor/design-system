@@ -30,7 +30,7 @@ import {
   useRole,
   useDismiss,
   FloatingPortal,
-} from '@floating-ui/react-dom-interactions'
+} from '@floating-ui/react'
 
 const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}

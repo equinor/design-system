@@ -55,28 +55,28 @@ describe('Sidebar', () => {
 
   it('Renders closed width when closed', () => {
     render(
-      <SideBar open={false}>
+      <SideBar open={false} role="navigation">
         {defaultMenuItems.map((m) => (
           <SideBar.Link key={m.label} {...m} />
         ))}
       </SideBar>,
     )
 
-    expect(screen.getAllByRole('generic')[2]).toHaveStyle({
+    expect(screen.getByRole('navigation')).toHaveStyle({
       width: tokens.minWidth,
     })
   })
 
   it('Renders open width when open', () => {
     render(
-      <SideBar open={true}>
+      <SideBar open={true} role="navigation">
         {defaultMenuItems.map((m) => (
           <SideBar.Link key={m.label} {...m} />
         ))}
       </SideBar>,
     )
 
-    expect(screen.getAllByRole('generic')[2]).toHaveStyle({
+    expect(screen.getByRole('navigation')).toHaveStyle({
       width: tokens.maxWidth,
     })
   })

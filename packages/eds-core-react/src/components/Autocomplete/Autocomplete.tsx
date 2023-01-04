@@ -7,6 +7,7 @@ import {
   useMemo,
   useCallback,
   ChangeEvent,
+  RefObject,
 } from 'react'
 import {
   useCombobox,
@@ -42,7 +43,7 @@ import {
   useFloating,
   useInteractions,
   FloatingPortal,
-} from '@floating-ui/react-dom-interactions'
+} from '@floating-ui/react'
 
 const Container = styled.div`
   position: relative;
@@ -651,7 +652,7 @@ function AutocompleteInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: refs.reference,
+                ref: refs.reference as RefObject<HTMLInputElement>,
                 onChange: (e: ChangeEvent<HTMLInputElement>) =>
                   setTypedInputValue(e?.currentTarget?.value),
               }),
