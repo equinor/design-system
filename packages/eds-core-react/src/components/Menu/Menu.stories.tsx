@@ -8,6 +8,7 @@ import {
   Icon,
   EdsProvider,
   Density,
+  Checkbox,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
@@ -23,6 +24,9 @@ import {
   delete_to_trash,
   settings,
   thumb_pin,
+  error_outlined,
+  warning_outlined,
+  check_circle_outlined,
 } from '@equinor/eds-icons'
 
 const { colors } = tokens
@@ -297,6 +301,9 @@ export const Compact: Story<MenuProps> = () => {
 export const StaysOpen: Story<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [optionOne, setOptionOne] = useState<boolean>(false)
+  const [optionTwo, setOptionTwo] = useState<boolean>(false)
+  const [optionThree, setOptionThree] = useState<boolean>(false)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -325,37 +332,65 @@ export const StaysOpen: Story<MenuProps> = (args) => {
         onClose={closeMenu}
         anchorEl={anchorEl}
       >
-        <Menu.Item
-          closeMenuOnClick={false}
-          style={{ backgroundColor: 'lightgrey' }}
-        >
-          <Icon
-            data={thumb_pin}
-            size={16}
-            color={colors.text.static_icons__tertiary.hex}
-          />
-          <Typography group="navigation" variant="menu_title" as="span">
-            Menu Headline
-          </Typography>
-        </Menu.Item>
-        <Menu.Item onClick={onClick}>Menu item 1</Menu.Item>
-        <Menu.Item onClick={onClick}>Menu item 2</Menu.Item>
-        <Menu.Item onClick={onClick}>Menu item 3</Menu.Item>
-        <Menu.Item
-          closeMenuOnClick={false}
-          style={{ backgroundColor: 'lightgrey' }}
-        >
-          <Icon
-            data={thumb_pin}
-            size={16}
-            color={colors.text.static_icons__tertiary.hex}
-          />
-          <Typography group="navigation" variant="menu_title" as="span">
-            Menu Headline 2
-          </Typography>
-        </Menu.Item>
-        <Menu.Item onClick={onClick}>Menu item 1</Menu.Item>
-        <Menu.Item onClick={onClick}>Menu item 2</Menu.Item>
+        <Menu.Section title="Select options">
+          <Menu.Item
+            onClick={() => setOptionOne(!optionOne)}
+            closeMenuOnClick={false}
+            active={optionOne}
+            style={{ padding: 0 }}
+          >
+            <Checkbox
+              checked={optionOne}
+              readOnly={true}
+              style={{ padding: 0 }}
+              label="Option 1"
+            />
+            <Icon
+              data={error_outlined}
+              size={24}
+              color={colors.interactive.danger__resting.hex}
+              style={{ paddingRight: '1rem' }}
+            />
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => setOptionTwo(!optionTwo)}
+            closeMenuOnClick={false}
+            active={optionTwo}
+            style={{ padding: 0 }}
+          >
+            <Checkbox
+              checked={optionTwo}
+              readOnly={true}
+              style={{ padding: 0 }}
+              label="Option 2"
+            />
+            <Icon
+              data={warning_outlined}
+              size={24}
+              color={colors.interactive.warning__resting.hex}
+              style={{ paddingRight: '1rem' }}
+            />
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => setOptionThree(!optionThree)}
+            closeMenuOnClick={false}
+            active={optionThree}
+            style={{ padding: 0 }}
+          >
+            <Checkbox
+              checked={optionThree}
+              readOnly={true}
+              style={{ padding: 0 }}
+              label="Option 3"
+            />
+            <Icon
+              data={check_circle_outlined}
+              size={24}
+              color={colors.interactive.success__resting.hex}
+              style={{ paddingRight: '1rem' }}
+            />
+          </Menu.Item>
+        </Menu.Section>
       </Menu>
     </>
   )
