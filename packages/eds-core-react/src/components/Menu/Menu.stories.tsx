@@ -23,7 +23,6 @@ import {
   edit,
   delete_to_trash,
   settings,
-  thumb_pin,
   error_outlined,
   warning_outlined,
   check_circle_outlined,
