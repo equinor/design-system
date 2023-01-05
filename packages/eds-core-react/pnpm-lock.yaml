@@ -45,7 +45,7 @@ specifiers:
   rollup: ^2.79.1
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-postcss: ^4.0.2
-  styled-components: 5.3.5
+  styled-components: 5.3.6
   tsc-watch: ^6.0.0
   typescript: ^4.9.4
 
@@ -2306,7 +2306,7 @@ packages:
       '@jest/schemas': 29.0.0
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.7.23
+      '@types/node': 18.11.18
       '@types/yargs': 17.0.13
       chalk: 4.1.2
     dev: true
@@ -5675,8 +5675,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /camelize/1.0.0:
-    resolution: {integrity: sha512-W2lPwkBkMZwFlPCXhIlYgxu+7gC/NUlCtdK652DAJ1JdgV0sTrvuPFshNPrFa1TY2JOkLhgdeEBplB4ezEa+xg==}
+  /camelize/1.0.1:
+    resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
     dev: true
 
   /caniuse-api/3.0.0:
@@ -6288,7 +6288,7 @@ packages:
   /css-to-react-native/3.0.0:
     resolution: {integrity: sha512-Ro1yETZA813eoyUp2GDBhG2j+YggidUmzO1/v9eYBKR2EHVEniE2MI/NqpTQ954BMpTPZFsGNPm46qFB9dpaPQ==}
     dependencies:
-      camelize: 1.0.0
+      camelize: 1.0.1
       css-color-keywords: 1.0.0
       postcss-value-parser: 4.2.0
     dev: true
