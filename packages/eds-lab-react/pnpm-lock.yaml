@@ -51,7 +51,7 @@ specifiers:
   rollup-plugin-postcss: ^4.0.2
   styled-components: 5.3.5
   tsc-watch: ^5.0.3
-  typescript: ^4.8.3
+  typescript: ^4.9.4
   webpack: ^5.75.0
 
 dependencies:
@@ -2280,7 +2280,7 @@ packages:
       '@jest/schemas': 29.0.0
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.7.23
+      '@types/node': 18.11.18
       '@types/yargs': 17.0.13
       chalk: 4.1.2
     dev: true
@@ -3312,7 +3312,7 @@ packages:
       '@babel/register': 7.18.9_@babel+core@7.20.12
       '@storybook/node-logger': 6.5.15
       '@storybook/semver': 7.3.2
-      '@types/node': 16.18.11
+      '@types/node': 16.11.62
       '@types/pretty-hrtime': 1.0.1
       babel-loader: 8.3.0_nwtvwtk5tmh22l2urnqucz7kqu
       babel-plugin-macros: 3.1.0
@@ -4165,10 +4165,6 @@ packages:
 
   /@types/node/16.11.62:
     resolution: {integrity: sha512-K/ggecSdwAAy2NUW4WKmF4Rc03GKbsfP+k326UWgckoS+Rzd2PaWbjk76dSmqdLQvLTJAO9axiTUJ6488mFsYQ==}
-    dev: true
-
-  /@types/node/16.18.11:
-    resolution: {integrity: sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==}
     dev: true
 
   /@types/node/18.11.18:
