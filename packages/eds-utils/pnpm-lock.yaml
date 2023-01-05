@@ -12,7 +12,7 @@ specifiers:
   '@testing-library/react': ^13.4.0
   '@testing-library/user-event': ^14.4.3
   '@types/jest': ^29.0.3
-  '@types/ramda': ^0.28.15
+  '@types/ramda': ^0.28.20
   '@types/react': ^18.0.26
   '@types/react-dom': ^18.0.10
   '@types/styled-components': ^5.1.26
@@ -52,7 +52,7 @@ devDependencies:
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.4.3_znccgeejomvff3jrsk3ljovfpu
   '@types/jest': 29.0.3
-  '@types/ramda': 0.28.15
+  '@types/ramda': 0.28.20
   '@types/react': 18.0.26
   '@types/react-dom': 18.0.10
   '@types/styled-components': 5.1.26
@@ -655,7 +655,7 @@ packages:
       '@jest/schemas': 29.0.0
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.11.18
+      '@types/node': 18.7.23
       '@types/yargs': 17.0.13
       chalk: 4.1.2
     dev: true
@@ -1003,8 +1003,8 @@ packages:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
 
-  /@types/ramda/0.28.15:
-    resolution: {integrity: sha512-FCaLNVZry65jW8x/FDnKgjgkCNQxgc5AYMQwdNn6yW5M+62R+0nt2Y36U43dTNora9hcquemfrY5gxhE5pcilQ==}
+  /@types/ramda/0.28.20:
+    resolution: {integrity: sha512-MeUhzGSXQTRsY19JGn5LIBTLxVEnyF6HDNr08KSJqybsm4DlfLIgK1jBHjhpiSyk252tXYmp+UOe0UFg0UiFsA==}
     dependencies:
       ts-toolbelt: 6.15.5
     dev: true
@@ -1026,7 +1026,7 @@ packages:
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 18.7.23
+      '@types/node': 18.11.18
     dev: true
 
   /@types/scheduler/0.16.2:
