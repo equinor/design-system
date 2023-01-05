@@ -32,7 +32,7 @@ specifiers:
   rollup: ^2.79.1
   rollup-plugin-delete: ^2.0.0
   styled-components: 5.3.5
-  tsc-watch: ^5.0.3
+  tsc-watch: ^6.0.0
   typescript: ^4.9.4
   webpack: ^5.75.0
 
@@ -70,7 +70,7 @@ devDependencies:
   rollup: 2.79.1
   rollup-plugin-delete: 2.0.0
   styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
-  tsc-watch: 5.0.3_typescript@4.8.3
+  tsc-watch: 6.0.0_typescript@4.8.3
   typescript: 4.8.3
   webpack: 5.74.0
 
@@ -655,7 +655,7 @@ packages:
       '@jest/schemas': 29.0.0
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.11.18
+      '@types/node': 18.7.23
       '@types/yargs': 17.0.13
       chalk: 4.1.2
     dev: true
@@ -3438,8 +3438,8 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /string-argv/0.1.2:
-    resolution: {integrity: sha512-mBqPGEOMNJKXRo7z0keX0wlAhbBAjilUdPW13nN0PecVryZxdHIeM7TqbsSUA7VYuS00HGC6mojP7DlQzfa9ZA==}
+  /string-argv/0.3.1:
+    resolution: {integrity: sha512-a1uQGz7IyVy9YwhqjZIZu1c8JO8dNIe20xBmSS6qu9kv++k3JGzCVmprbNN5Kn+BgzD5E7YYwg1CcjuJMRNsvg==}
     engines: {node: '>=0.6.19'}
     dev: true
 
@@ -3642,9 +3642,9 @@ packages:
     resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
     dev: true
 
-  /tsc-watch/5.0.3_typescript@4.8.3:
-    resolution: {integrity: sha512-Hz2UawwELMSLOf0xHvAFc7anLeMw62cMVXr1flYmhRuOhOyOljwmb1l/O60ZwRyy1k7N1iC1mrn1QYM2zITfuw==}
-    engines: {node: '>=8.17.0'}
+  /tsc-watch/6.0.0_typescript@4.8.3:
+    resolution: {integrity: sha512-zgpju+/z5z29/kK5V28Nz16CMkX2voFOUxkTlCim/R25hxzbyUqu2NfTnmJBQfESBSPbEQUGqDdB9A8opAcB4A==}
+    engines: {node: '>=12.12.0'}
     hasBin: true
     peerDependencies:
       typescript: '*'
@@ -3652,8 +3652,7 @@ packages:
       cross-spawn: 7.0.3
       node-cleanup: 2.1.2
       ps-tree: 1.2.0
-      string-argv: 0.1.2
-      strip-ansi: 6.0.1
+      string-argv: 0.3.1
       typescript: 4.8.3
     dev: true
 

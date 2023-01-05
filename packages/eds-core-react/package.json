@@ -82,7 +82,7 @@
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "styled-components": "5.3.5",
-    "tsc-watch": "^5.0.3",
+    "tsc-watch": "^6.0.0",
     "typescript": "^4.9.4"
   },
   "peerDependencies": {
