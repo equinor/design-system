@@ -347,7 +347,6 @@ export const StaysOpen: Story<MenuProps> = (args) => {
               data={error_outlined}
               size={24}
               color={colors.interactive.danger__resting.hex}
-              style={{ paddingRight: '1rem' }}
             />
           </Menu.Item>
           <Menu.Item
@@ -365,7 +364,6 @@ export const StaysOpen: Story<MenuProps> = (args) => {
               data={warning_outlined}
               size={24}
               color={colors.interactive.warning__resting.hex}
-              style={{ paddingRight: '1rem' }}
             />
           </Menu.Item>
           <Menu.Item
@@ -383,7 +381,6 @@ export const StaysOpen: Story<MenuProps> = (args) => {
               data={check_circle_outlined}
               size={24}
               color={colors.interactive.success__resting.hex}
-              style={{ paddingRight: '1rem' }}
             />
           </Menu.Item>
         </Menu.Section>
