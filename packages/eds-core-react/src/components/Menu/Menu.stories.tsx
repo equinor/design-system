@@ -8,6 +8,7 @@ import {
   Icon,
   EdsProvider,
   Density,
+  Checkbox,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
@@ -22,6 +23,9 @@ import {
   edit,
   delete_to_trash,
   settings,
+  error_outlined,
+  warning_outlined,
+  check_circle_outlined,
 } from '@equinor/eds-icons'
 
 const { colors } = tokens
@@ -291,4 +295,100 @@ export const Compact: Story<MenuProps> = () => {
       </EdsProvider>
     </EdsProvider>
   )
+}
+
+export const StaysOpen: Story<MenuProps> = (args) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [optionOne, setOptionOne] = useState<boolean>(false)
+  const [optionTwo, setOptionTwo] = useState<boolean>(false)
+  const [optionThree, setOptionThree] = useState<boolean>(false)
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <Button
+        ref={setAnchorEl}
+        id="anchor-stays-open"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-stays-open"
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
+      >
+        Open Menu
+      </Button>
+      <Menu
+        open={isOpen}
+        {...args}
+        id="menu-stays-open"
+        aria-labelledby="anchor-stays-open"
+        onClose={closeMenu}
+        anchorEl={anchorEl}
+      >
+        <Menu.Section title="Select options">
+          <Menu.Item
+            onClick={() => setOptionOne(!optionOne)}
+            closeMenuOnClick={false}
+            active={optionOne}
+          >
+            <Checkbox
+              checked={optionOne}
+              readOnly={true}
+              style={{ padding: 0 }}
+            />
+            Option 1
+            <Icon
+              data={error_outlined}
+              size={24}
+              color={colors.interactive.danger__resting.hex}
+            />
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => setOptionTwo(!optionTwo)}
+            closeMenuOnClick={false}
+            active={optionTwo}
+          >
+            <Checkbox
+              checked={optionTwo}
+              readOnly={true}
+              style={{ padding: 0 }}
+            />
+            Option 2
+            <Icon
+              data={warning_outlined}
+              size={24}
+              color={colors.interactive.warning__resting.hex}
+            />
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => setOptionThree(!optionThree)}
+            closeMenuOnClick={false}
+            active={optionThree}
+          >
+            <Checkbox
+              checked={optionThree}
+              readOnly={true}
+              style={{ padding: 0 }}
+            />
+            Option 3
+            <Icon
+              data={check_circle_outlined}
+              size={24}
+              color={colors.interactive.success__resting.hex}
+            />
+          </Menu.Item>
+        </Menu.Section>
+      </Menu>
+    </>
+  )
+}
+StaysOpen.bind({})
+StaysOpen.args = {
+  placement: 'bottom-end',
 }

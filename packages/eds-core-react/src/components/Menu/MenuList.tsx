@@ -28,6 +28,7 @@ const List = styled.div`
 `
 type MenuListProps = {
   children: ReactNode
+  addCloseMenuOnClickIndex: (index: number) => void
 }
 
 type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
@@ -40,8 +41,18 @@ function isIndexable(item: MenuChild) {
   return false
 }
 
+function closeMenuOnClick(item: MenuChild) {
+  if (
+    isValidElement(item) &&
+    item.type === MenuItem &&
+    item.props.closeMenuOnClick !== false
+  )
+    return true
+  return false
+}
+
 export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
-  function MenuList({ children, ...rest }, ref) {
+  function MenuList({ addCloseMenuOnClickIndex, children, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex, initialFocus } = useMenu()
 
     let index = -1
@@ -70,10 +81,13 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
           } else {
             index++
             if (isIndexable(child)) focusableIndexs.push(index)
+            if (closeMenuOnClick(child)) {
+              addCloseMenuOnClickIndex(index)
+            }
             return cloneElement(child, { index })
           }
         }),
-      [children, focusableIndexs, index],
+      [children, focusableIndexs, index, addCloseMenuOnClickIndex],
     )
 
     const firstFocusIndex = focusableIndexs[0]
