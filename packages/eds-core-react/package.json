@@ -77,7 +77,7 @@
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.36.1",
+    "react-hook-form": "^7.41.5",
     "rollup": "^2.79.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
@@ -97,7 +97,7 @@
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.15.1",
     "@tanstack/react-virtual": "3.0.0-beta.30",
-    "downshift": "^7.0.5"
+    "downshift": "^7.1.0"
   },
   "engines": {
     "pnpm": ">=4",

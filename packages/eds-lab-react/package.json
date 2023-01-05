@@ -79,7 +79,7 @@
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.36.1",
+    "react-hook-form": "^7.41.5",
     "react-is": "^18.2.0",
     "rollup": "^2.79.1",
     "rollup-plugin-delete": "^2.0.0",
@@ -101,7 +101,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "date-fns": "^2.29.3",
-    "downshift": "^7.0.5",
+    "downshift": "^7.1.0",
     "react-datepicker": "^4.8.0",
     "react-fast-compare": "3.2.0"
   },
