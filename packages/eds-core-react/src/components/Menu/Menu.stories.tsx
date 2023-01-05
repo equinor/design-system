@@ -336,14 +336,13 @@ export const StaysOpen: Story<MenuProps> = (args) => {
             onClick={() => setOptionOne(!optionOne)}
             closeMenuOnClick={false}
             active={optionOne}
-            style={{ padding: 0 }}
           >
             <Checkbox
               checked={optionOne}
               readOnly={true}
               style={{ padding: 0 }}
-              label="Option 1"
             />
+            Option 1
             <Icon
               data={error_outlined}
               size={24}
@@ -355,14 +354,13 @@ export const StaysOpen: Story<MenuProps> = (args) => {
             onClick={() => setOptionTwo(!optionTwo)}
             closeMenuOnClick={false}
             active={optionTwo}
-            style={{ padding: 0 }}
           >
             <Checkbox
               checked={optionTwo}
               readOnly={true}
               style={{ padding: 0 }}
-              label="Option 2"
             />
+            Option 2
             <Icon
               data={warning_outlined}
               size={24}
@@ -374,14 +372,13 @@ export const StaysOpen: Story<MenuProps> = (args) => {
             onClick={() => setOptionThree(!optionThree)}
             closeMenuOnClick={false}
             active={optionThree}
-            style={{ padding: 0 }}
           >
             <Checkbox
               checked={optionThree}
               readOnly={true}
               style={{ padding: 0 }}
-              label="Option 3"
             />
+            Option 3
             <Icon
               data={check_circle_outlined}
               size={24}
