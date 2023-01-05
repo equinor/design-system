@@ -315,10 +315,10 @@ export const StaysOpen: Story<MenuProps> = (args) => {
     <>
       <Button
         ref={setAnchorEl}
-        id="anchor-default"
+        id="anchor-stays-open"
         aria-haspopup="true"
         aria-expanded={isOpen}
-        aria-controls="menu-default"
+        aria-controls="menu-stays-open"
         onClick={() => (isOpen ? closeMenu() : openMenu())}
       >
         Open Menu
@@ -326,8 +326,8 @@ export const StaysOpen: Story<MenuProps> = (args) => {
       <Menu
         open={isOpen}
         {...args}
-        id="menu-default"
-        aria-labelledby="anchor-default"
+        id="menu-stays-open"
+        aria-labelledby="anchor-stays-open"
         onClose={closeMenu}
         anchorEl={anchorEl}
       >
