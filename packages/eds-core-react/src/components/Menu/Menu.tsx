@@ -8,6 +8,7 @@ import {
   useGlobalKeyPress,
   useToken,
   bordersTemplate,
+  useIsomorphicLayoutEffect,
 } from '@equinor/eds-utils'
 import { menu as tokens } from './Menu.tokens'
 import { useEds } from '../EdsProvider'
@@ -154,7 +155,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     () => mergeRefs<HTMLDivElement>(floating, ref),
     [floating, ref],
   )
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (refs.reference.current && refs.floating.current && open) {
       return autoUpdate(refs.reference.current, refs.floating.current, update)
     }
