@@ -138,13 +138,22 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
   const { density } = useEds()
   const token = useToken({ density }, tokens)
 
-  const { x, y, reference, floating, refs, update, strategy, context } =
-    useFloating({
-      placement,
-      open,
-      onOpenChange: onClose,
-      middleware: [offset(4), flip(), shift({ padding: 8 })],
-    })
+  const {
+    x,
+    y,
+    reference,
+    floating,
+    refs,
+    update,
+    strategy,
+    context,
+    isPositioned,
+  } = useFloating({
+    placement,
+    open,
+    onOpenChange: onClose,
+    middleware: [offset(4), flip(), shift({ padding: 8 })],
+  })
 
   useEffect(() => {
     reference(anchorEl)
@@ -190,6 +199,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
                 position: strategy,
                 top: y || 0,
                 left: x || 0,
+                visibility: isPositioned ? 'visible' : 'hidden',
               },
             })}
           >
