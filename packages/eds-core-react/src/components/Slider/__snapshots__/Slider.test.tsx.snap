@@ -3,7 +3,7 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Slider__Wrapper-sc-n1grrg-1 eZSUNL"
+    class="Slider__Wrapper-sc-n1grrg-1 iJEvSY"
     id="test"
     max="100"
     min="0"
@@ -15,7 +15,7 @@ exports[`Simple slider Matches snapshot 1`] = `
       aria-valuemin="0"
       aria-valuenow="0"
       aria-valuetext="0"
-      class="SliderInput__StyledSliderInput-sc-17orw4f-0 bkEmaz"
+      class="SliderInput__StyledSliderInput-sc-17orw4f-0 iXVRyk"
       id="test-thumb"
       max="100"
       min="0"
@@ -24,22 +24,22 @@ exports[`Simple slider Matches snapshot 1`] = `
       value="0"
     />
     <output
-      class="Output__StyledOutput-sc-1dy945x-0 iihHHk"
+      class="Output__StyledOutput-sc-1dy945x-0 jXDBrj"
       for="test-thumb"
       value="0"
     >
       0
     </output>
     <div
-      class="Slider__WrapperGroupLabel-sc-n1grrg-2 Slider__WrapperGroupLabelDots-sc-n1grrg-3 fGFZHv bfGDvh"
+      class="Slider__WrapperGroupLabel-sc-n1grrg-2 Slider__WrapperGroupLabelDots-sc-n1grrg-3 loePiQ eaVbqO"
     />
     <span
-      class="MinMax__StyledMinMax-sc-lxmlid-0 cAfHAl"
+      class="MinMax__StyledMinMax-sc-lxmlid-0 hIXBOW"
     >
       0
     </span>
     <span
-      class="MinMax__StyledMinMax-sc-lxmlid-0 cAfHAl"
+      class="MinMax__StyledMinMax-sc-lxmlid-0 hIXBOW"
     >
       100
     </span>

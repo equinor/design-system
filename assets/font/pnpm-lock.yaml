@@ -2,12 +2,12 @@ lockfileVersion: 5.4
 
 specifiers:
   bent: ^7.3.12
-  http-server: ^14.1.0
+  http-server: ^14.1.1
   subset-font: ^1.4.0
 
 dependencies:
   bent: 7.3.12
-  http-server: 14.1.0
+  http-server: 14.1.1
   subset-font: 1.4.0
 
 packages:
@@ -171,8 +171,8 @@ packages:
       - debug
     dev: false
 
-  /http-server/14.1.0:
-    resolution: {integrity: sha512-5lYsIcZtf6pdR8tCtzAHTWrAveo4liUlJdWc7YafwK/maPgYHs+VNP6KpCClmUnSorJrARVMXqtT055zBv11Yg==}
+  /http-server/14.1.1:
+    resolution: {integrity: sha512-+cbxadF40UXd9T01zUHgA+rlo2Bg1Srer4+B4NwIHdaGxAGGv59nYRnGGDJ9LBk7alpS0US+J+bLLdQOOkJq4A==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
