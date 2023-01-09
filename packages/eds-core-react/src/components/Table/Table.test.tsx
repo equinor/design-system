@@ -65,7 +65,7 @@ describe('Table', () => {
       <Table>
         <Head>
           <Row>
-            <Cell></Cell>
+            <Cell>content</Cell>
           </Row>
         </Head>
       </Table>,
