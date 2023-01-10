@@ -33,7 +33,7 @@ specifiers:
   babel-plugin-styled-components: ^2.0.7
   clsx: ^1.2.1
   date-fns: ^2.29.3
-  downshift: ^7.1.0
+  downshift: ^7.1.2
   jest: ^29.0.3
   jest-environment-jsdom: ^29.0.3
   jest-styled-components: ^7.1.1
@@ -61,7 +61,7 @@ dependencies:
   '@equinor/eds-tokens': link:../eds-tokens
   '@equinor/eds-utils': link:../eds-utils
   date-fns: 2.29.3
-  downshift: 7.1.0_react@18.2.0
+  downshift: 7.1.2_react@18.2.0
   react-datepicker: 4.8.0_biqbaboplfbrettd7655fr4n2y
   react-fast-compare: 3.2.0
 
@@ -6297,8 +6297,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /downshift/7.1.0_react@18.2.0:
-    resolution: {integrity: sha512-NiI5cOPc8rFQc0Du6ZdsD0KgpuHxrAqrsr8ueGFphIu0wjQmVK3aUNcJZdcmzZsb7aMRDjwFBcPJVqJCZhcEgA==}
+  /downshift/7.1.2_react@18.2.0:
+    resolution: {integrity: sha512-Iy9R2qSpTUrQzyhlf5EW2RsFiIN7JpCqLYUnR8LuoKQqJlORwGJKMElbutCehXh/EsLpTHX8gUkY7d9pWPDT+w==}
     peerDependencies:
       react: '>=16.12.0'
     dependencies:
