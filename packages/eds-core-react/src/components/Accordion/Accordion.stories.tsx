@@ -1,13 +1,5 @@
 import { action } from '@storybook/addon-actions'
-import {
-  Accordion,
-  Button,
-  Icon,
-  AccordionProps,
-  Density,
-  EdsProvider,
-} from '../..'
-import { useState, useEffect } from 'react'
+import { Accordion, Button, Icon, AccordionProps } from '../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import {
   attach_file,

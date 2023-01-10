@@ -1,14 +1,5 @@
-import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import {
-  TopBar,
-  Icon,
-  Search,
-  TopbarProps,
-  EdsProvider,
-  Density,
-  Typography,
-} from '../..'
+import { TopBar, Icon, Search, TopbarProps, Typography } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import page from './TopBar.docs.mdx'
 

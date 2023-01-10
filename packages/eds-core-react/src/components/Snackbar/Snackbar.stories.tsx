@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Snackbar, SnackbarProps, Button, EdsProvider, Density } from '../..'
+import { useState } from 'react'
+import { Snackbar, SnackbarProps, Button } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Snackbar.docs.mdx'

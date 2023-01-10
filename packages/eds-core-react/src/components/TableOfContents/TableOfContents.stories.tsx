@@ -1,12 +1,4 @@
-import { useState, useEffect } from 'react'
-import {
-  Icon,
-  TableOfContents,
-  Typography,
-  TableOfContentsProps,
-  Density,
-  EdsProvider,
-} from '../..'
+import { Icon, TableOfContents, Typography, TableOfContentsProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { subdirectory_arrow_right } from '@equinor/eds-icons'
 import page from './TableOfContents.docs.mdx'

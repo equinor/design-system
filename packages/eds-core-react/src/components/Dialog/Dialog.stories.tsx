@@ -1,14 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useArgs } from '@storybook/client-api'
-import {
-  Dialog,
-  DialogProps,
-  Button,
-  Radio,
-  Typography,
-  EdsProvider,
-  Density,
-} from '../..'
+import { Dialog, DialogProps, Button, Radio, Typography } from '../..'
 import styled from 'styled-components'
 import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
