@@ -5,7 +5,7 @@ specifiers:
   '@equinor/eds-icons': workspace:*
   '@equinor/eds-tokens': workspace:*
   '@equinor/eds-utils': workspace:*
-  '@floating-ui/react': ^0.15.1
+  '@floating-ui/react': ^0.16.0
   '@mdx-js/react': 1.6.22
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.2
@@ -54,7 +54,7 @@ dependencies:
   '@equinor/eds-icons': link:../eds-icons
   '@equinor/eds-tokens': link:../eds-tokens
   '@equinor/eds-utils': link:../eds-utils
-  '@floating-ui/react': 0.15.1_ib3m5ricvtkl2cll7qpr2f6lvq
+  '@floating-ui/react': 0.16.0_ib3m5ricvtkl2cll7qpr2f6lvq
   '@tanstack/react-virtual': 3.0.0-beta.30_react@18.2.0
   downshift: 7.1.2_react@18.2.0
 
@@ -1634,8 +1634,8 @@ packages:
       '@floating-ui/core': 1.1.0
     dev: false
 
-  /@floating-ui/react-dom/1.1.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-xyP9dMqZouuQ7h10DvbEbxZItuUleKHXe7XQFvbpttjXZrfyQMaZVTnWsE/t3hrHakZy18HxEBZRzGNXQHd0GA==}
+  /@floating-ui/react-dom/1.1.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-dtz6NGI9nfWll0TPcL5fZzhUoaWo7UpMSmhHYdABQoBA9V/BUVye4SiRa/affb4IocVZefN6HaX+ihrb3kj/dg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -1645,13 +1645,13 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@floating-ui/react/0.15.1_ib3m5ricvtkl2cll7qpr2f6lvq:
-    resolution: {integrity: sha512-fbzUt+JM9o7z/uTBIvTvxUOGXAx8JlCFNpcWen7IjQqqOISkZq1IT7u8wwR+u2emE8wAZoRuoUvny7UMcCGXbw==}
+  /@floating-ui/react/0.16.0_ib3m5ricvtkl2cll7qpr2f6lvq:
+    resolution: {integrity: sha512-h+69TJSAY2R/k5rw+az56RzzDFc/Tg7EHn/qEgwkIVz56Zg9LlaRMMUvxkcvd+iN3CNFDLtEnDlsXnpshjsRsQ==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/react-dom': 1.1.0_biqbaboplfbrettd7655fr4n2y
+      '@floating-ui/react-dom': 1.1.2_biqbaboplfbrettd7655fr4n2y
       aria-hidden: 1.2.2_kzbn2opkn2327fwg5yzwzya5o4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
