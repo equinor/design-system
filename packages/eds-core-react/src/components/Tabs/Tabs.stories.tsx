@@ -1,15 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import {
-  Tabs,
-  Button,
-  Icon,
-  TabsProps,
-  Typography,
-  Search,
-  EdsProvider,
-  Density,
-} from '../..'
+import { Tabs, Button, Icon, TabsProps, Typography, Search } from '../..'
 import { mergeRefs } from '@equinor/eds-utils'
 import { ComponentMeta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'

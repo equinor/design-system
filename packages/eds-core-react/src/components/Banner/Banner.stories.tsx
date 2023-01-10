@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
 import { ComponentMeta, Story } from '@storybook/react'
 import { Stack } from '../../../.storybook/components/'
-import { Banner, Icon, Button, BannerProps, EdsProvider, Density } from '../..'
+import { Banner, Icon, Button, BannerProps } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 import page from './Banner.docs.mdx'
 
