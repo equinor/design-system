@@ -36,7 +36,7 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     border: none;
     box-sizing: border-box;
     box-shadow: ${token.boxShadow};
-    background: ${token.background};
+    background: var(--eds-input-background, ${token.background});
     ${outlineTemplate(token.outline)}
 
     &:focus-within {

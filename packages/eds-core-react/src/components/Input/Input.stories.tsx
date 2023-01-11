@@ -250,3 +250,21 @@ export const WithAdornments: Story<InputProps> = () => {
 export const casted: Story<InputProps> = (args) => {
   return <Input as="textarea" {...args} />
 }
+
+export const OverrideBackground: Story<InputProps> = (args) => {
+  return (
+    <Input
+      style={{ '--eds-input-background': '#fff' } as React.CSSProperties}
+      {...args}
+    />
+  )
+}
+OverrideBackground.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ background: '#f7f7f7', padding: '32px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
