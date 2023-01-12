@@ -332,7 +332,18 @@ PreselectedOptions.args = {
 export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
-  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
+  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([
+    {
+      label: 'Apple Inc.',
+      symbol: 'AAPL',
+      trend: '📈',
+    },
+    {
+      label: 'Meta Platforms, Inc.',
+      symbol: 'FB',
+      trend: '📉',
+    },
+  ])
 
   const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
     setSelectedItems(changes.selectedItems)
@@ -341,28 +352,23 @@ export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
   return (
     <>
       <Typography>
-        Selected items:{selectedItems?.map((x) => x.label).toString()}
+        Your selected items:{' '}
+        {selectedItems?.map((x) => ` ${x.label}`).toString()}
       </Typography>
       <Autocomplete
-        label="Select a stock"
+        label="Select stocks"
         options={options}
         onOptionsChange={onChange}
+        selectedOptions={selectedItems}
         optionLabel={optionLabel}
-        selectedOptions={selectedItems}
-      />
-      <Autocomplete
-        label="Select multiple stocks"
-        options={options}
-        onOptionsChange={onChange}
-        selectedOptions={selectedItems}
         multiple
-        optionLabel={optionLabel}
       />
     </>
   )
 }
 Controlled.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {

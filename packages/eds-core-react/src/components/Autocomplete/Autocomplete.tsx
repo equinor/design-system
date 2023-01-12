@@ -161,7 +161,7 @@ export type AutocompleteProps<T> = {
   hideClearButton?: boolean
   /** If this prop is used, the select will become a controlled component. Use an empty
    * array [] if there will be no initial selected items
-   * Note that this prop replaces the need for ```initialSelectedItems```
+   * Note that this prop replaces the need for ```initialSelectedOptions```
    * The items that should be selected. */
   selectedOptions?: T[]
   /** Callback for the selected item change

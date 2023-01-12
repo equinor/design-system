@@ -50,6 +50,17 @@ const options = [
 />
 ```
 
+## Controlled
+Autocomplete controls its own state internally, and calls your `onOptionsChange` handler when the state changes. You can use `initialSelectedOptions`
+to define pre-selected options.
+
+If you instead want to control your own state, you can use the `selectedOptions` prop to pass your controlled data and `onOptionsChange` to 
+handle changes in selection. The initial value can be an empty array if no elements are to be pre-selected. 
+
+The controlled state is provided from `downshift`. You can read more about it [in the downshift documentation](https://github.com/downshift-js/downshift#control-props).
+
+<Story id="inputs-autocomplete--controlled" />
+
 ## Accessibility
 
 ### ARIA
@@ -84,10 +95,6 @@ You can disable an option by setting the `disabled:true` on option.
 ### Preselected options
 <Story id="inputs-autocomplete--preselected-options" />
 
-
-### Controlled
-Downshift controls its own state internally. If you need more controll you can define the `selectedOptions` to controlled the component state. When defining your own state the initial value needs to be an empty array. This is due to how [Downshift checks whether a component is controlled or not](https://github.com/downshift-js/downshift#control-props).
-<Story id="inputs-autocomplete--controlled" />
 
 ### Compact
 Compact `Autocomplete` using `EdsProvider`.
