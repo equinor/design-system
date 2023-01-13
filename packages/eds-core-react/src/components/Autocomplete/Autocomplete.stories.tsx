@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState, useEffect, useMemo } from 'react'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
+import { Checkbox } from '../Checkbox'
 import { Story, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
@@ -125,6 +126,9 @@ const stocks = [
 
 const optionLabel = (item: MyOptionType) => item.label
 
+const labelWithIcon = (opt: MyOptionType) =>
+  `${opt.trend} ${opt.label} (${opt.symbol})`
+
 export const Introduction: Story<AutocompleteProps<string>> = (args) => {
   return <Autocomplete {...args} />
 }
@@ -143,11 +147,6 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
 
   return (
     <>
-      <Autocomplete
-        label="Select a stock"
-        options={options}
-        optionLabel={optionLabel}
-      />
       <Autocomplete
         label="Select multiple stocks"
         options={options}
@@ -211,41 +210,26 @@ export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
         label="Select a stock"
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
-        initialSelectedOptions={[options[0]]}
-      />
-      <Autocomplete
-        label="Select multiple stocks"
-        options={options}
-        optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
-        initialSelectedOptions={[options[0]]}
-        multiple
+        initialSelectedOptions={[options[1]]}
       />
     </>
   )
 }
-OptionLabel.storyName = 'Option label'
+OptionLabel.storyName = 'Objects as options'
 OptionLabel.args = {
   options: stocks,
 }
 
 export const ReadOnly: Story<AutocompleteProps<MyOptionType>> = (args) => {
-  const { options } = args
+  const { options, optionLabel } = args
   return (
     <>
       <Autocomplete
         label="Select a stock"
-        initialSelectedOptions={[options[0]]}
         options={options}
+        optionLabel={optionLabel}
+        initialSelectedOptions={[options[3]]}
         readOnly
-        {...args}
-      />
-      <Autocomplete
-        label="Select multiple stocks"
-        initialSelectedOptions={[options[0], options[1]]}
-        options={options}
-        multiple
-        readOnly
-        {...args}
       />
     </>
   )
@@ -257,19 +241,20 @@ ReadOnly.args = {
 }
 
 export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
+  const { options, optionLabel } = args
+
   return (
     <>
-      <Autocomplete label="Select a stock" disabled {...args} />
       <Autocomplete
-        label="Select multiple stocks"
+        label="Select a stock"
+        options={options}
+        optionLabel={optionLabel}
         disabled
-        multiple
-        {...args}
       />
     </>
   )
 }
-OptionLabel.args = {
+Disabled.args = {
   options: stocks,
   optionLabel,
 }
@@ -277,21 +262,17 @@ OptionLabel.args = {
 export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
-  const { options } = args
-  const isOptionDisabled = (item: MyOptionType) =>
-    item === options[0] || item === options[options.length - 1]
+  const { options, optionLabel } = args
+
+  const isOptionDisabled = (item: MyOptionType) => item.trend === '📉'
+
   return (
     <>
       <Autocomplete
         label="Select a stock"
+        options={options}
         optionDisabled={isOptionDisabled}
-        {...args}
-      />
-      <Autocomplete
-        label="Select multiple stocks"
-        optionDisabled={isOptionDisabled}
-        {...args}
-        multiple
+        optionLabel={optionLabel}
       />
     </>
   )
@@ -299,26 +280,22 @@ export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
 DisabledOption.storyName = 'Disabled option'
 DisabledOption.args = {
   options: stocks,
-  optionLabel,
+  optionLabel: labelWithIcon,
 }
 
 export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
-  const { options } = args
+  const { options, optionLabel } = args
 
   return (
     <>
       <Autocomplete
-        label="Select a stock"
-        initialSelectedOptions={[options[0]]}
-        {...args}
-      />
-      <Autocomplete
         label="Select multiple stocks"
         initialSelectedOptions={[options[0], options[1], options[5]]}
+        options={options}
+        optionLabel={optionLabel}
         multiple
-        {...args}
       />
     </>
   )
@@ -329,23 +306,15 @@ PreselectedOptions.args = {
   optionLabel,
 }
 
-export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const Controlled: Story<AutocompleteProps<string>> = (args) => {
   const { options } = args
 
-  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([
-    {
-      label: 'Apple Inc.',
-      symbol: 'AAPL',
-      trend: '📈',
-    },
-    {
-      label: 'Meta Platforms, Inc.',
-      symbol: 'FB',
-      trend: '📉',
-    },
+  const [selectedItems, setSelectedItems] = useState<string[]>([
+    'Vestland',
+    'Viken',
   ])
 
-  const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
+  const onChange = (changes: AutocompleteChanges<string>) => {
     setSelectedItems(changes.selectedItems)
   }
 
@@ -353,47 +322,42 @@ export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
     <>
       <Typography>
         Your selected items:{' '}
-        {selectedItems?.map((x) => ` ${x.label}`).toString()}
+        {selectedItems.map(
+          (x, index) => `${x}${index < selectedItems.length - 1 ? ', ' : ''}`,
+        )}
       </Typography>
       <Autocomplete
-        label="Select stocks"
+        label="Select counties"
         options={options}
         onOptionsChange={onChange}
         selectedOptions={selectedItems}
-        optionLabel={optionLabel}
         multiple
       />
     </>
   )
 }
 Controlled.args = {
-  options: stocks,
-  optionLabel,
+  options: counties,
 }
 
 export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
-  const { options } = args
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
+  const { options, optionLabel } = args
+  const [compact, setComfortable] = useState<boolean>(true)
 
   return (
-    <EdsProvider density={density}>
+    <EdsProvider density={compact ? 'compact' : 'comfortable'}>
+      <Checkbox
+        label="Compact"
+        onChange={() => {
+          setComfortable(!compact)
+        }}
+        checked={compact}
+      />
       <Autocomplete
         label="Select a stock"
         initialSelectedOptions={[options[0]]}
         options={options}
-        {...args}
-      />
-      <Autocomplete
-        label="Select multiple stocks"
-        initialSelectedOptions={[options[0], options[1]]}
-        options={options}
-        multiple
-        {...args}
+        optionLabel={optionLabel}
       />
     </EdsProvider>
   )

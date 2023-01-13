@@ -50,25 +50,10 @@ const options = [
 />
 ```
 
-## Controlled
-Autocomplete controls its own state internally, and calls your `onOptionsChange` handler when the state changes. You can use `initialSelectedOptions`
-to define pre-selected options.
-
-If you instead want to control your own state, you can use the `selectedOptions` prop to pass your controlled data and `onOptionsChange` to 
-handle changes in selection. The initial value can be an empty array if no elements are to be pre-selected. 
-
-The controlled state is provided from `downshift`. You can read more about it [in the downshift documentation](https://github.com/downshift-js/downshift#control-props).
-
-<Story id="inputs-autocomplete--controlled" />
-
 ## Accessibility
 
 ### ARIA
-
-<ul>
-  <li>The property <code>label</code> is mandatory and make sure you have a descriptive label for screen readers.</li>
-  <li>If <code>clearSearchOnChange</code> is set to <code>false</code> make sure <code>label</code> has description of how many options are selected for screen readers.</li>
-</ul>
+The property <code>label</code> is mandatory and makes sure you have a descriptive label for screen readers.
 
 ## Examples
 
@@ -76,28 +61,55 @@ The controlled state is provided from `downshift`. You can read more about it [i
 Enable the `multiple` property for multiple selection of values.
 <Story id="inputs-autocomplete--multiple" />
 
-### Option label
-Change the rendered & searchable value by using the `optionLabel` property.
+### Objects as options
+If the options-list contains objects and not strings, you must define the `optionLabel` function to specify
+how the label should be rendered and searched for. This function must return a string.
+
 <Story id="inputs-autocomplete--option-label" />
 
+### Controlled
+Autocomplete controls its own state internally, and calls your `onOptionsChange` handler when the state changes. You can use `initialSelectedOptions`
+to define pre-selected options.
+
+If you instead want to control your own state, you can use the `selectedOptions` prop to pass your controlled data. The initial value can be an 
+empty array if no elements are to be pre-selected. Use `onOptionsChange` to handle changes in selection. 
+
+The controlled state is provided from `downshift`. You can read more about it [in the downshift documentation](https://github.com/downshift-js/downshift#control-props).
+
+<Story id="inputs-autocomplete--controlled" />
+
 ### Read only
+Use prop `readOnly`
+
 <Story id="inputs-autocomplete--read-only" />
 
 ### Disabled
+Use prop `disabled`
+
 <Story id="inputs-autocomplete--disabled" />
 
-
 ### Disabled option
-You can disable an option by setting the `disabled:true` on option.
+You can disable specific options by sending an `optionDisabled` prop containing a function that 
+will disable an option if satisfied.
+
 <Story id="inputs-autocomplete--disabled-option" />
 
 
 ### Preselected options
+For uncontrolled components, you can use `initialSelectedOptions` to define pre-selected options.
+For controlled components, you can use the `selectedOptions` prop to pass your controlled data 
+(see example on this under [Controlled](?path=/docs/inputs-autocomplete--controlled)).
+
 <Story id="inputs-autocomplete--preselected-options" />
 
 
 ### Compact
-Compact `Autocomplete` using `EdsProvider`.
+Compact components are toggled through the react-context [EdsProvider](?path=/docs/inputs-autocomplete--controlled).
+The EdsProvider needs to encapsulate your whole application and when the context-value `density` is set `compact`,
+the `Autocomplete`-component will render as compact (as well as all other EDS-components). 
+
+Note that compact mode should come with the possibility to switch to normal mode for accessibility reasons.
+
 <Story id="inputs-autocomplete--compact" />
 
 ### Virtualization
