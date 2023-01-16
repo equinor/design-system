@@ -190,7 +190,6 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
 
   return (
     <>
-      <Autocomplete label="Select an item" options={data} />
       <Autocomplete
         label="Select multiple items"
         options={data}
@@ -517,6 +516,8 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
 export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
+  const { options, optionLabel } = args
+
   const optionsFilter: AutocompleteProps<MyOptionType>['optionsFilter'] = (
     option,
     inputValue,
@@ -524,20 +525,18 @@ export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
     (option.label + option.symbol)
       .toLowerCase()
       .includes(inputValue.toLocaleLowerCase())
+
   return (
-    <>
+    <div style={{ width: '300px' }}>
       <Autocomplete
-        label="Select a stock"
+        label="Select stocks"
+        placeholder="Try searching for MSFT"
+        options={options}
+        optionLabel={optionLabel}
         optionsFilter={optionsFilter}
-        {...args}
-      />
-      <Autocomplete
-        label="Select multiple stocks"
         multiple
-        optionsFilter={optionsFilter}
-        {...args}
       />
-    </>
+    </div>
   )
 }
 CustomOptionsFilter.storyName = 'Custom options filter'

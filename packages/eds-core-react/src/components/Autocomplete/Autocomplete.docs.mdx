@@ -102,7 +102,6 @@ For controlled components, you can use the `selectedOptions` prop to pass your c
 
 <Story id="inputs-autocomplete--preselected-options" />
 
-
 ### Compact
 Compact components are toggled through the react-context [EdsProvider](?path=/docs/inputs-autocomplete--controlled).
 The EdsProvider needs to encapsulate your whole application and when the context-value `density` is set `compact`,
@@ -114,6 +113,7 @@ Note that compact mode should come with the possibility to switch to normal mode
 
 ### Virtualization
 `Autocomplete` uses [@tanstack/react-virtual](https://tanstack.com/virtual/v3) virtualization to support large datasets.
+
 <Story id="inputs-autocomplete--virtualized" />
 
 ### With `React Hook Form`
@@ -122,8 +122,12 @@ Example using [react-hook-form](https://react-hook-form.com/) library.
 <Story id="inputs-autocomplete--with-react-hook-form" />
 
 ### Custom options filter
-You can specify the filter predicate for options by setting the `optionsFilter` callback. By default the inputValue is checked against the option label. 
-We stronlgy recommend always including all the characters a search might filter on in the label as it may seem confusing for users otherwise.
+The default search filter checks against the option label. For special cases, you can specify a custom filter by setting 
+the `optionsFilter` callback. This is for instace useful for searching for an abbreviation for the label.
+
+This feature should be used with caution: If the search phrase produces results that look different to what was searched for, 
+it may be confusing for the users, so ideally the search phrase should be included in the label.
+
 <Story id="inputs-autocomplete--custom-options-filter" />
 
 ### With Select All option
