@@ -103,13 +103,30 @@ For controlled components, you can use the `selectedOptions` prop to pass your c
 <Story id="inputs-autocomplete--preselected-options" />
 
 ### Compact
-Compact components are toggled through the react-context [EdsProvider](?path=/docs/inputs-autocomplete--controlled).
+Compact components are toggled through the react-context [EdsProvider](?path=/docs/edsprovider--introduction).
 The EdsProvider needs to encapsulate your whole application and when the context-value `density` is set `compact`,
-the `Autocomplete`-component will render as compact (as well as all other EDS-components). 
+the `Autocomplete`-component will render as compact (as well as other EDS-components). 
 
 Note that compact mode should come with the possibility to switch to normal mode for accessibility reasons.
 
 <Story id="inputs-autocomplete--compact" />
+
+### Custom options filter
+The default search filter checks against the option label. For special cases, you can specify a custom filter by setting 
+the `optionsFilter` callback. This is for instace useful for searching for an abbreviation for the label.
+
+This feature should be used with caution: If the search phrase produces results that look different from what was searched for, 
+it may be confusing for the users, so ideally the search phrase should be included in the label.
+
+<Story id="inputs-autocomplete--custom-options-filter" />
+
+### Adjusting dropdown width
+If `autoWidth` is set to `true`, the dropdown width will be the same as the width of the input. 
+Otherwise, the dropdown width will be based on its widest content.
+
+The prop `multiline` lets you wrap long texts into multiple lines, as you can see in the second input.
+
+<Story id="inputs-autocomplete--auto-width" />
 
 ### Virtualization
 `Autocomplete` uses [@tanstack/react-virtual](https://tanstack.com/virtual/v3) virtualization to support large datasets.
@@ -121,25 +138,11 @@ Note that compact mode should come with the possibility to switch to normal mode
 Example using [react-hook-form](https://react-hook-form.com/) library.
 <Story id="inputs-autocomplete--with-react-hook-form" />
 
-### Custom options filter
-The default search filter checks against the option label. For special cases, you can specify a custom filter by setting 
-the `optionsFilter` callback. This is for instace useful for searching for an abbreviation for the label.
-
-This feature should be used with caution: If the search phrase produces results that look different to what was searched for, 
-it may be confusing for the users, so ideally the search phrase should be included in the label.
-
-<Story id="inputs-autocomplete--custom-options-filter" />
-
 ### With Select All option
 This is an example of how to make a "Select All" option for quicker selection. 
 Make sure to use `useMemo` if you are mutating the options in the render function to avoid object memory references bugs on re-renders.
 <Story id="inputs-autocomplete--select-all" />
 
-### Option `autoWidth`
-`autoWidth` set: Dropdown width is the same as input width. Otherwise, dropdown width is based on it's widest content.
-The second input here also have `multiline` added to allow text wrapping.
-<Story id="inputs-autocomplete--auto-width" />
-
 ### Options update
-Story for testing if options are correctly update if changed after initialization.
+Story for testing if options are correctly updated if changed after initialization.
 <Story id="inputs-autocomplete--options-update" />
