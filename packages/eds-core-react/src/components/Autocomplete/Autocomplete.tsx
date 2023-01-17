@@ -145,7 +145,7 @@ const findPrevIndex: IndexFinderType = ({
 export type AutocompleteChanges<T> = { selectedItems: T[] }
 
 export type AutocompleteProps<T> = {
-  /** List of options to choose from */
+  /** List of options in dropdown */
   options: T[]
   /** Label for the select element */
   label: string
@@ -160,8 +160,8 @@ export type AutocompleteProps<T> = {
   /** Hide clear button even when items are selected */
   hideClearButton?: boolean
   /** If this prop is used, the select will become a controlled component. Use an empty
-   * array [] if there will be no initial selected items
-   * Note that this prop replaces the need for ```initialSelectedItems```
+   * array [] if there will be no initial selected items.
+   * Note that this prop replaces the need for ```initialSelectedOptions```
    * The items that should be selected. */
   selectedOptions?: T[]
   /** Callback for the selected item change
@@ -176,13 +176,13 @@ export type AutocompleteProps<T> = {
   disablePortal?: boolean
   /** Disable option */
   optionDisabled?: (option: T) => boolean
-  /** Filter function for options */
+  /** Custom filter function for options */
   optionsFilter?: (option: T, inputValue: string) => boolean
-  /** If `true` the width of the dropdown will adjust accordingly to width of the input */
+  /** If `true` the width of the dropdown will adjust to the width of the input */
   autoWidth?: boolean
   /** Descriptive text for whats selected or about to be selected */
   placeholder?: string
-  /** Toggle if input is cleared when an options is selected when `multiple` is `true`*/
+  /** Toggle if input is cleared when an option is selected when `multiple` is `true`*/
   clearSearchOnChange?: boolean
   /** Will wrap overflowing text at the expence of some performance overhead to calculate item heigths. Mostly relevant in combination with autoWidth */
   multiline?: boolean
