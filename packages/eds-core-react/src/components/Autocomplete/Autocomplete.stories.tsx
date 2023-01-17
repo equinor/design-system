@@ -5,7 +5,7 @@ import { Checkbox } from '../Checkbox'
 import { Story, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button, Density, Chip } from '../..'
+import { Typography, EdsProvider, Button, Chip } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
@@ -160,46 +160,6 @@ Multiple.args = {
   options: stocks,
 }
 
-export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
-  type Photo = {
-    albumId: number
-    id: number
-    title: string
-    url: string
-    thumbnailUrl: string
-  }
-  const [data, setData] = useState<Array<string>>([])
-
-  useEffect(() => {
-    const abortController = new AbortController()
-    const signal = abortController.signal
-
-    fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
-      .then((r) => r.json())
-      .then((d: Photo[]) => {
-        const parsed = d.map((x) => x.title.substring(0, 30))
-        setData(parsed)
-      })
-      .catch((err: Error) => {
-        console.warn(`Warning: ${err.message}`)
-      })
-    return () => {
-      abortController.abort()
-    }
-  }, [])
-
-  return (
-    <>
-      <Autocomplete
-        label="Select multiple items"
-        options={data}
-        multiple
-        clearSearchOnChange={false}
-      />
-    </>
-  )
-}
-
 export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
@@ -217,6 +177,40 @@ export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
 OptionLabel.storyName = 'Objects as options'
 OptionLabel.args = {
   options: stocks,
+}
+
+export const Controlled: Story<AutocompleteProps<string>> = (args) => {
+  const { options } = args
+
+  const [selectedItems, setSelectedItems] = useState<string[]>([
+    'Vestland',
+    'Viken',
+  ])
+
+  const onChange = (changes: AutocompleteChanges<string>) => {
+    setSelectedItems(changes.selectedItems)
+  }
+
+  return (
+    <>
+      <Typography>
+        Your selected items:{' '}
+        {selectedItems.map(
+          (x, index) => `${x}${index < selectedItems.length - 1 ? ', ' : ''}`,
+        )}
+      </Typography>
+      <Autocomplete
+        label="Select counties"
+        options={options}
+        onOptionsChange={onChange}
+        selectedOptions={selectedItems}
+        multiple
+      />
+    </>
+  )
+}
+Controlled.args = {
+  options: counties,
 }
 
 export const ReadOnly: Story<AutocompleteProps<MyOptionType>> = (args) => {
@@ -305,40 +299,6 @@ PreselectedOptions.args = {
   optionLabel,
 }
 
-export const Controlled: Story<AutocompleteProps<string>> = (args) => {
-  const { options } = args
-
-  const [selectedItems, setSelectedItems] = useState<string[]>([
-    'Vestland',
-    'Viken',
-  ])
-
-  const onChange = (changes: AutocompleteChanges<string>) => {
-    setSelectedItems(changes.selectedItems)
-  }
-
-  return (
-    <>
-      <Typography>
-        Your selected items:{' '}
-        {selectedItems.map(
-          (x, index) => `${x}${index < selectedItems.length - 1 ? ', ' : ''}`,
-        )}
-      </Typography>
-      <Autocomplete
-        label="Select counties"
-        options={options}
-        onOptionsChange={onChange}
-        selectedOptions={selectedItems}
-        multiple
-      />
-    </>
-  )
-}
-Controlled.args = {
-  options: counties,
-}
-
 export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options, optionLabel } = args
   const [compact, setComfortable] = useState<boolean>(true)
@@ -364,6 +324,106 @@ export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
 Compact.args = {
   options: stocks,
   optionLabel,
+}
+
+export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
+  const { options, optionLabel } = args
+
+  const optionsFilter: AutocompleteProps<MyOptionType>['optionsFilter'] = (
+    option,
+    inputValue,
+  ) =>
+    (option.label + option.symbol)
+      .toLowerCase()
+      .includes(inputValue.toLocaleLowerCase())
+
+  return (
+    <div style={{ width: '300px' }}>
+      <Autocomplete
+        label="Select stocks"
+        placeholder="Try searching for MSFT"
+        options={options}
+        optionLabel={optionLabel}
+        optionsFilter={optionsFilter}
+        multiple
+      />
+    </div>
+  )
+}
+CustomOptionsFilter.storyName = 'Custom options filter'
+CustomOptionsFilter.args = {
+  options: stocks,
+  optionLabel,
+}
+
+export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
+  const { options } = args
+
+  return (
+    <>
+      <Autocomplete
+        optionLabel={(opt) => `${opt.trend} ${opt.label}`}
+        label="Select a stock"
+        options={options}
+        autoWidth
+      />
+      <Autocomplete
+        optionLabel={optionLabel}
+        label="Select multiple stocks"
+        options={options}
+        multiple
+        autoWidth
+        multiline
+      />
+    </>
+  )
+}
+AutoWidth.storyName = 'Adjusting dropdown width'
+AutoWidth.args = {
+  options: stocks,
+  optionLabel,
+}
+
+export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
+  type Photo = {
+    albumId: number
+    id: number
+    title: string
+    url: string
+    thumbnailUrl: string
+  }
+  const [data, setData] = useState<Array<string>>([])
+
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
+      .then((r) => r.json())
+      .then((d: Photo[]) => {
+        const parsed = d.map((x) => x.title.substring(0, 30))
+        setData(parsed)
+      })
+      .catch((err: Error) => {
+        console.warn(`Warning: ${err.message}`)
+      })
+    return () => {
+      abortController.abort()
+    }
+  }, [])
+
+  return (
+    <>
+      <Autocomplete
+        label="Select multiple items"
+        options={data}
+        multiple
+        clearSearchOnChange={false}
+      />
+    </>
+  )
 }
 
 type MyFormValues = {
@@ -513,38 +573,6 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
   )
 }
 
-export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
-  args,
-) => {
-  const { options, optionLabel } = args
-
-  const optionsFilter: AutocompleteProps<MyOptionType>['optionsFilter'] = (
-    option,
-    inputValue,
-  ) =>
-    (option.label + option.symbol)
-      .toLowerCase()
-      .includes(inputValue.toLocaleLowerCase())
-
-  return (
-    <div style={{ width: '300px' }}>
-      <Autocomplete
-        label="Select stocks"
-        placeholder="Try searching for MSFT"
-        options={options}
-        optionLabel={optionLabel}
-        optionsFilter={optionsFilter}
-        multiple
-      />
-    </div>
-  )
-}
-CustomOptionsFilter.storyName = 'Custom options filter'
-CustomOptionsFilter.args = {
-  options: stocks,
-  optionLabel,
-}
-
 export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
@@ -559,6 +587,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
     () => [selectAllOption, ...options],
     [options, selectAllOption],
   )
+
   const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
 
   const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
@@ -613,7 +642,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
           ))}
       </div>
       <Autocomplete
-        label="Select multiple stocks"
+        label="Select stocks"
         options={optionsWithAll}
         selectedOptions={selectedItems}
         onOptionsChange={onChange}
@@ -625,34 +654,6 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
 }
 SelectAll.storyName = 'Select all'
 SelectAll.args = {
-  options: stocks,
-  optionLabel,
-}
-
-export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
-  const { options } = args
-
-  return (
-    <>
-      <Autocomplete
-        optionLabel={(opt) => `${opt.trend} ${opt.label}`}
-        label="Select a stock"
-        options={options}
-        autoWidth
-      />
-      <Autocomplete
-        optionLabel={optionLabel}
-        label="Select multiple stocks"
-        options={options}
-        multiple
-        autoWidth
-        multiline
-      />
-    </>
-  )
-}
-AutoWidth.storyName = 'Auto width'
-AutoWidth.args = {
   options: stocks,
   optionLabel,
 }
@@ -687,14 +688,10 @@ export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
       <Typography>{loadingText}</Typography>
       <Autocomplete
         optionLabel={(opt) => `${opt.showIcon ? '🔄' : ''}Item ${opt.id}`}
-        label="Select a stock"
+        label="Select an item"
         options={options}
         autoWidth
       />
     </>
   )
-}
-OptionsUpdate.args = {
-  options: stocks,
-  optionLabel,
 }
