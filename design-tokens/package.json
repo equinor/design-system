@@ -1,0 +1,14 @@
+{
+  "name": "@equinor/eds-design-tokens",
+  "private": true,
+  "version": "1",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "scripts": {},
+  "dependencies": {
+    "style-dictionary": "^3.7.2",
+    "token-transformer": "^0.0.29"
+  }
+}
