@@ -13,4 +13,5 @@ export const PATHS = {
   CSS: `${COMMON_DIR}/public/css`,
   ICONS: `${STORYBOOK_DIR}/assets/icons`,
   ICON_FILES: `${ICONS_DIR}/src`,
+  FIGMA: `${TOKENS_DIR}/figma`,
 }
