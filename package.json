@@ -15,6 +15,7 @@
     "build:lab": "pnpm --filter @equinor/eds-lab-react run build",
     "build:utils": "pnpm --filter @equinor/eds-utils run build",
     "build:tokens": "pnpm --filter @equinor/eds-tokens run build",
+    "build:tokens2": "pnpm --filter ./design-tokens run build",
     "build:density-tokens": "pnpm --filter @equinor/eds-token-scripts run build:density",
     "build:spacing-tokens": "pnpm --filter @equinor/eds-token-scripts run build:spacing",
     "build:icons": "pnpm --filter @equinor/eds-icons run build",
