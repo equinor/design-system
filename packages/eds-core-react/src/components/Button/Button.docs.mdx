@@ -41,16 +41,22 @@ import { Button } from '@equinor/eds-core-react'
 <Button as={Link} to="/about">About</Button>
 ```
 
+## Accessibility
+The `aria-disabled` attribute makes it possible to semantically disable the `Button` without hiding it from assistive technologies, such as screen readers. 
+In EDS, the `Button` will be visually styled as disabled, but it is up to the developer to actually disable the button.
+
+<Story id="inputs-button-button--accessibility" />
+
 ## Examples
 
 ### Basic
-The `Button` come with four variants; `contained`, `outlined`, `ghost` and `ghost_icon`.
+The `Button` come with five variants; `contained`,  `contained_icon`, `outlined`, `ghost` and `ghost_icon`.
 
 <Story id="inputs-button-button--basic" />
 
 ### Icon button
 The `ghost_icon` & `contained_icon`variant is meant for standalone icon buttons using the `<Icon>` component.  
-Make sure to defined `aria-label` with descriptive text of `Button` interaction.
+Make sure to define `aria-label` with descriptive text of `Button` interaction.
 
 <Story id="inputs-button-button--icon-button" />
 
@@ -68,32 +74,35 @@ Use variants to differentiate the hierarchy.
 
 <Story id="inputs-button-button--hierarchy" />
 
-### File upload
-Example of how to do file upload button. Please note this demo only works in Storybook Canvas (isolated example only).
+### Compact
+Compact mode is toggled using [EdsProvider](?path=/docs/edsprovider--introduction).
 
-<Story id="inputs-button-button--file-upload" />
+Note that compact mode should come with the possibility to switch to normal mode for accessibility reasons.
+
+<Story id="inputs-button-button--compact" />
 
 ### Progress button
 Use the `Progress` component if you need progress indication on a button.
 
 <Story id="inputs-button-button--progress-button" />
 
-### All
-Example All button combinations. 
+### With tooltip
+To display a tooltip on the `Button` you can wrap it in a `Tooltip`. If you need to disable the Button, the button should be disabled using
+`aria-disabled` instead of the `disabled` prop because Chrome doesn't expose the hover event on disabled buttons. 
 
-<Story id="inputs-button-button--all" />
+When using `aria-disabled`, the button must also be disabled in in the code, as described in the 
+[Accessibility-section](?path=/docs/inputs-button-button--accessibility).
 
-### Accessibility
-The `aria-disabled` attribute makes it possible to semantically disable the `Button` without hiding it from assistive technologies, such as screen readers. 
-In EDS, the `Button` is visually styled as disabled, but it is up to the developer to actually disable the button.
+An alternative workaround is wrapping the `Button` inside a fitted `span`.
 
-<Story id="inputs-button-button--accessibility" />
+<Story id="inputs-button-button--with-tooltip" />
 
 ### Full width
+Use boolean prop `fullWidth`
 
 <Story id="inputs-button-button--full-width" />
 
-### Compact
-Compact `Button` using `EdsProvider`.
+### All
+All button combinations. 
 
-<Story id="inputs-button-button--compact" />
+<Story id="inputs-button-button--all" />
