@@ -71,3 +71,14 @@ Long list of elements that have a tooltip. Used for testing if tooltip "lag" whe
 Inputs of type radio, checkbox and switch will have the tooltip applied to the input element. A good way to get the tooltip to also apply to the label is to simply wrap the input in a span.
 
 <Story id="data-display-tooltip--radio-and-checkboxes" />
+
+### Tooltip on Button
+To display a tooltip on the `Button` you can wrap it in the `Tooltip`. If you need to disable the `Button`, the button should be 
+disabled using `aria-disabled` instead of the `disabled`-prop because Chrome doesn't expose the hover event on disabled buttons. 
+
+When using `aria-disabled`, the button must also be disabled in in the code, as described in the buttons
+[Accessibility-section](?path=/docs/inputs-button-button--accessibility).
+
+An alternative workaround is wrapping the `Button` inside a fitted `span`.
+
+<Story id="data-display-tooltip--tooltip-on-button" />

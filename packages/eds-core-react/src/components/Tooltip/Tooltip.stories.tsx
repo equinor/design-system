@@ -152,3 +152,20 @@ export const RadioAndCheckboxes: Story<TooltipProps> = () => (
   </>
 )
 RadioAndCheckboxes.storyName = 'Radio and checkboxes'
+
+export const TooltipOnButton: Story<TooltipProps> = () => (
+  <>
+    <Tooltip title="This is what a tooltip looks like">
+      <Button>Hover me</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip shows in Chrome with aria-disabled">
+      <Button aria-disabled>Aria-disabled button</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip shows in Chrome because Button is wrapped in span">
+      <span>
+        <Button disabled>Disabled, but wrapped in span</Button>
+      </span>
+    </Tooltip>
+  </>
+)
+TooltipOnButton.storyName = 'Tooltip on Button'
