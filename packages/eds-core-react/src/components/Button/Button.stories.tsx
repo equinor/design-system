@@ -227,6 +227,7 @@ export const ProgressButton: Story<ButtonProps> = () => {
       </Button>
       <Button
         aria-disabled={isSubmitting ? true : false}
+        aria-label={isSubmitting ? 'loading data' : null}
         color="secondary"
         onClick={!isSubmitting ? onSubmit : undefined}
       >
