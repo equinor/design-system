@@ -29,6 +29,7 @@ const StyledAccordionPanel = styled.div.attrs(
   } = theme
   return css`
     ${bordersTemplate(border)}
+    border-top: 0;
     ${spacingsTemplate(panel.spacings)}
     ${typographyTemplate(panel.typography)}
     background: ${header.background};

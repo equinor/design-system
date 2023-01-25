@@ -89,6 +89,7 @@ exports[`Accordion Matches snapshot 1`] = `
 
 .c4 {
   border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+  border-top: 0;
   padding-left: 16px;
   padding-top: 16px;
   padding-right: 16px;
