@@ -1,17 +1,16 @@
-import { useState, useEffect, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import {
   Button,
   ButtonProps,
   Icon,
   EdsProvider,
-  Density,
   Progress,
   Checkbox,
   Snackbar,
   Tooltip,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { menu, add, save } from '@equinor/eds-icons'
+import { menu, add, save, send, refresh } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
@@ -45,6 +44,46 @@ export const Introduction: Story<ButtonProps> = (args) => {
 Introduction.decorators = [
   (Story) => (
     <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const Accessibility: Story<ButtonProps> = () => {
+  const [canSubmit, setCanSubmit] = useState(false)
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Checkbox
+        label="I agree to the Terms & Conditions (required)"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setCanSubmit(e.target.checked)
+        }}
+        checked={canSubmit}
+      />
+      <Tooltip title={canSubmit ? '' : 'Terms & Conditions must be checked'}>
+        <Button
+          aria-disabled={!canSubmit}
+          onClick={() => {
+            canSubmit && setOpen(true)
+          }}
+        >
+          Submit
+        </Button>
+      </Tooltip>
+      <Snackbar
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={3000}
+      >
+        Submitted
+      </Snackbar>
+    </>
+  )
+}
+Accessibility.decorators = [
+  (Story) => (
+    <Stack direction="column">
       <Story />
     </Stack>
   ),
@@ -139,14 +178,80 @@ Hierarchy.decorators = [
   ),
 ]
 
-export const FileUpload: Story<ButtonProps> = () => (
-  <label htmlFor="file-upload">
-    <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
-    <Button as="span">Upload file</Button>
-  </label>
-)
-FileUpload.storyName = 'File upload'
-FileUpload.decorators = [
+export const Compact: Story<ButtonProps> = () => {
+  const [compact, setComfortable] = useState<boolean>(true)
+
+  return (
+    <EdsProvider density={compact ? 'compact' : 'comfortable'}>
+      <Checkbox
+        label="Compact"
+        onChange={() => {
+          setComfortable(!compact)
+        }}
+        checked={compact}
+      />
+      <Stack direction="row">
+        <Button>Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="ghost_icon" aria-label="menu action">
+          <Icon data={menu} title="Ghost icon menu"></Icon>
+        </Button>
+      </Stack>
+    </EdsProvider>
+  )
+}
+Compact.decorators = [
+  (Story) => (
+    <Stack direction="column">
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ProgressButton: Story<ButtonProps> = () => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+  const onSubmit = () => {
+    setIsSubmitting(true)
+  }
+
+  return (
+    <>
+      <Button
+        aria-disabled={isSubmitting ? true : false}
+        aria-label={isSubmitting ? 'loading data' : null}
+        onClick={!isSubmitting ? onSubmit : undefined}
+      >
+        {isSubmitting ? <Progress.Dots color={'primary'} /> : 'Fetch data'}
+      </Button>
+      <Button
+        aria-disabled={isSubmitting ? true : false}
+        aria-label={isSubmitting ? 'loading data' : null}
+        color="secondary"
+        onClick={!isSubmitting ? onSubmit : undefined}
+      >
+        {isSubmitting ? (
+          <Progress.Circular size={16} color="primary" />
+        ) : (
+          <>
+            Send
+            <Icon data={send} size={16}></Icon>
+          </>
+        )}
+      </Button>
+      <Button onClick={() => setIsSubmitting(false)}>
+        <>
+          <Icon data={refresh} size={16}></Icon>
+          Reset
+        </>
+      </Button>
+    </>
+  )
+}
+
+ProgressButton.storyName = 'Progress button'
+ProgressButton.decorators = [
   (Story) => (
     <Stack>
       <Story />
@@ -154,28 +259,40 @@ FileUpload.decorators = [
   ),
 ]
 
-export const ProgressButton: Story<ButtonProps> = () => (
+export const WithTooltip: Story<ButtonProps> = () => (
   <>
-    <Button>
-      <Progress.Dots />
-    </Button>
-    <Button variant="ghost_icon">
-      <Progress.Dots color="primary" />
-    </Button>
-    <Button>
-      <Progress.Circular size={16} color="neutral" />
-    </Button>
-    <Button variant="ghost_icon">
-      <Progress.Circular size={16} color="primary" />
-    </Button>
+    <Tooltip title="This is what a tooltip looks like">
+      <Button>Hover me</Button>
+    </Tooltip>
+    <Tooltip title="This tooltip only shows for people using firefox and using mouse. Don't do this!">
+      <Button disabled>Disabled button</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip works in all browsers and with keyboard navigation when using aria-disabled">
+      <Button aria-disabled>Aria-disabled button</Button>
+    </Tooltip>
   </>
 )
-ProgressButton.storyName = 'Progress button'
-ProgressButton.decorators = [
+
+WithTooltip.decorators = [
   (Story) => (
     <Stack>
       <Story />
     </Stack>
+  ),
+]
+WithTooltip.storyName = 'Disabled buttons and tooltip'
+
+export const FullWidth: Story<ButtonProps> = () => (
+  <>
+    <Button fullWidth>Primary</Button>
+  </>
+)
+FullWidth.storyName = 'Full width'
+FullWidth.decorators = [
+  (Story) => (
+    <div style={{ margin: '32px', display: 'grid', gridGap: '16px' }}>
+      <Story />
+    </div>
   ),
 ]
 
@@ -239,123 +356,6 @@ All.decorators = [
         gridTemplateColumns: 'repeat(4, auto)',
       }}
     >
-      <Story />
-    </Stack>
-  ),
-]
-
-export const FullWidth: Story<ButtonProps> = () => (
-  <>
-    <Button fullWidth>Primary</Button>
-    <Button color="secondary" fullWidth>
-      Secondary
-    </Button>
-    <Button color="danger" fullWidth>
-      Danger
-    </Button>
-    <Button disabled fullWidth>
-      Disabled
-    </Button>
-    <Button fullWidth aria-label="save action">
-      <Icon data={save}></Icon>Primary
-    </Button>
-    <Button color="secondary" fullWidth aria-label="save action">
-      <Icon data={save}></Icon>Secondary
-    </Button>
-    <Button color="danger" fullWidth aria-label="save action">
-      <Icon data={save}></Icon>Danger
-    </Button>
-    <Button disabled fullWidth aria-label="save action">
-      <Icon data={save}></Icon>Disabled
-    </Button>
-    <Button fullWidth aria-label="save action">
-      Primary <Icon data={save}></Icon>
-    </Button>
-    <Button color="secondary" fullWidth aria-label="save action">
-      Secondary
-      <Icon data={save}></Icon>
-    </Button>
-    <Button color="danger" fullWidth aria-label="save action">
-      Danger
-      <Icon data={save}></Icon>
-    </Button>
-    <Button disabled fullWidth aria-label="save action">
-      Disabled
-      <Icon data={save}></Icon>
-    </Button>
-  </>
-)
-FullWidth.storyName = 'Full width'
-FullWidth.decorators = [
-  (Story) => (
-    <div style={{ margin: '32px', display: 'grid', gridGap: '16px' }}>
-      <Story />
-    </div>
-  ),
-]
-
-export const Compact: Story<ButtonProps> = () => {
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <Button>Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="ghost_icon" aria-label="menu action">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
-      </Button>
-    </EdsProvider>
-  )
-}
-Compact.decorators = [
-  (Story) => (
-    <Stack>
-      <Story />
-    </Stack>
-  ),
-]
-
-export const Accessibility: Story<ButtonProps> = () => {
-  const [canSubmit, setCanSubmit] = useState(false)
-  const [open, setOpen] = useState(false)
-  return (
-    <>
-      <Checkbox
-        label="I agree to the Terms & Conditions (required)"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setCanSubmit(e.target.checked)
-        }}
-        checked={canSubmit}
-      />
-      <Tooltip title={canSubmit ? '' : 'Terms & Conditions must be checked'}>
-        <Button
-          aria-disabled={!canSubmit}
-          onClick={() => {
-            canSubmit && setOpen(true)
-          }}
-        >
-          Submit
-        </Button>
-      </Tooltip>
-      <Snackbar
-        open={open}
-        onClose={() => setOpen(false)}
-        autoHideDuration={3000}
-      >
-        Submitted
-      </Snackbar>
-    </>
-  )
-}
-Accessibility.decorators = [
-  (Story) => (
-    <Stack direction="column">
       <Story />
     </Stack>
   ),

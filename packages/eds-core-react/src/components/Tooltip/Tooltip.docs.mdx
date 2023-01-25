@@ -39,12 +39,6 @@ import { Tooltip } from '@equinor/eds-core-react'
 
 Keep in mind that if `Tooltip` is added to a non-focusable element, it is inaccessible to people dependent on keyboard navigation and assistive technologies.
 
-### ARIA
-
-<ul>
-  <li>Tooltip container has <code>role="tooltip"</code>.</li>
-  <li>The element that triggers the tooltip references the tooltip element with <code>aria-describedby</code>.</li>
-</ul>
 
 ## Examples
 
@@ -71,3 +65,10 @@ Long list of elements that have a tooltip. Used for testing if tooltip "lag" whe
 Inputs of type radio, checkbox and switch will have the tooltip applied to the input element. A good way to get the tooltip to also apply to the label is to simply wrap the input in a span.
 
 <Story id="data-display-tooltip--radio-and-checkboxes" />
+
+### Tooltip on disabled Button
+Due to inconsistent browser support for mouse events on disabled buttons, `Tooltip` should not be used in combination with `disabled` on `Button`. 
+Instead use `aria-disabled` and disable the `onClick` in the code. This has the added benefit of making the Tooltip accessible for people using 
+keyboard navigation, as the button is still focusable.
+
+<Story id="data-display-tooltip--tooltip-on-button" />
