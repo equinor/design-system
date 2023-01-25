@@ -72,13 +72,9 @@ Inputs of type radio, checkbox and switch will have the tooltip applied to the i
 
 <Story id="data-display-tooltip--radio-and-checkboxes" />
 
-### Tooltip on Button
-To display a tooltip on the `Button` you can wrap it in the `Tooltip`. If you need to disable the `Button`, the button should be 
-disabled using `aria-disabled` instead of the `disabled`-prop because Chrome doesn't expose the hover event on disabled buttons. 
-
-When using `aria-disabled`, the button must also be disabled in in the code, as described in the buttons
-[Accessibility-section](?path=/docs/inputs-button-button--accessibility).
-
-An alternative workaround is wrapping the `Button` inside a fitted `span`.
+### Tooltip on disabled Button
+Due to inconsistent browser support for mouse events on disabled buttons, `Tooltip` should not be used in combination with `disabled` on `Button`. 
+Instead use `aria-disabled` and disable the `onClick` in the code. This has the added benefit of making the Tooltip accessible for people using 
+keyboard navigation, as the button is still focusable.
 
 <Story id="data-display-tooltip--tooltip-on-button" />

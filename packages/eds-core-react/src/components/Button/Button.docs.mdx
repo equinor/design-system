@@ -86,14 +86,11 @@ Use the `Progress` component if you need progress indication on a button.
 
 <Story id="inputs-button-button--progress-button" />
 
-### With tooltip
-To display a tooltip on the `Button` you can wrap it in a `Tooltip`. If you need to disable the Button, the button should be disabled using
-`aria-disabled` instead of the `disabled` prop because Chrome doesn't expose the hover event on disabled buttons. 
-
-When using `aria-disabled`, the button must also be disabled in in the code, as described in the 
-[Accessibility-section](?path=/docs/inputs-button-button--accessibility).
-
-An alternative workaround is wrapping the `Button` inside a fitted `span`.
+### Disabled buttons and tooltip
+Due to inconsistent browser support for mouse events on disabled buttons, `Tooltip` 
+should not be used in combination with `disabled` on `Button`. Instead use `aria-disabled` 
+and disable the `onClick` in the code. This has the added benefit of making the 
+Tooltip accessible for people using keyboard navigation, as the button is still focusable.
 
 <Story id="inputs-button-button--with-tooltip" />
 

@@ -158,14 +158,12 @@ export const TooltipOnButton: Story<TooltipProps> = () => (
     <Tooltip title="This is what a tooltip looks like">
       <Button>Hover me</Button>
     </Tooltip>
-    <Tooltip title="Tooltip shows in Chrome with aria-disabled">
-      <Button aria-disabled>Aria-disabled button</Button>
+    <Tooltip title="This tooltip only shows for people using firefox and using mouse. Don't do this!">
+      <Button disabled>Disabled button</Button>
     </Tooltip>
-    <Tooltip title="Tooltip shows in Chrome because Button is wrapped in span">
-      <span>
-        <Button disabled>Disabled, but wrapped in span</Button>
-      </span>
+    <Tooltip title="Tooltip works in all browsers and with keyboard navigation when using aria-disabled">
+      <Button aria-disabled>Aria-disabled button</Button>
     </Tooltip>
   </>
 )
-TooltipOnButton.storyName = 'Tooltip on Button'
+TooltipOnButton.storyName = 'Tooltip on disabled Button'

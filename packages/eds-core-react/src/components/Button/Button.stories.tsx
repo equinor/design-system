@@ -220,9 +220,10 @@ export const ProgressButton: Story<ButtonProps> = () => {
     <>
       <Button
         aria-disabled={isSubmitting ? true : false}
+        aria-label={isSubmitting ? 'loading data' : null}
         onClick={!isSubmitting ? onSubmit : undefined}
       >
-        {isSubmitting ? <Progress.Dots /> : 'Fetch data'}
+        {isSubmitting ? <Progress.Dots color={'primary'} /> : 'Fetch data'}
       </Button>
       <Button
         aria-disabled={isSubmitting ? true : false}
@@ -230,7 +231,7 @@ export const ProgressButton: Story<ButtonProps> = () => {
         onClick={!isSubmitting ? onSubmit : undefined}
       >
         {isSubmitting ? (
-          <Progress.Circular size={16} color="neutral" />
+          <Progress.Circular size={16} color="primary" />
         ) : (
           <>
             Send
@@ -262,16 +263,11 @@ export const WithTooltip: Story<ButtonProps> = () => (
     <Tooltip title="This is what a tooltip looks like">
       <Button>Hover me</Button>
     </Tooltip>
-    <Tooltip title="Tooltip doesn't show in Chrome">
+    <Tooltip title="This tooltip only shows for people using firefox and using mouse. Don't do this!">
       <Button disabled>Disabled button</Button>
     </Tooltip>
-    <Tooltip title="Tooltip shows in Chrome with aria-disabled">
+    <Tooltip title="Tooltip works in all browsers and with keyboard navigation when using aria-disabled">
       <Button aria-disabled>Aria-disabled button</Button>
-    </Tooltip>
-    <Tooltip title="Tooltip shows in Chrome because Button is wrapped in span">
-      <span>
-        <Button disabled>Disabled, but wrapped in span</Button>
-      </span>
     </Tooltip>
   </>
 )
@@ -283,6 +279,7 @@ WithTooltip.decorators = [
     </Stack>
   ),
 ]
+WithTooltip.storyName = 'Disabled buttons and tooltip'
 
 export const FullWidth: Story<ButtonProps> = () => (
   <>
