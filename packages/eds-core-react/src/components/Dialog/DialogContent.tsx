@@ -6,6 +6,7 @@ import { typographyTemplate } from '@equinor/eds-utils'
 const StyledDialogContent = styled.div<DialogContentProps>(
   ({ theme, scrollable }) => {
     return css`
+      --content-spacing-top: ${theme.entities.children.spacings.top};
       ${typographyTemplate(theme.entities.content.typography)}
       min-height: ${theme.entities.content.minHeight};
       align-self: stretch;
@@ -13,7 +14,7 @@ const StyledDialogContent = styled.div<DialogContentProps>(
       padding: 0 ${theme.entities.children.spacings.right} 0
         ${theme.entities.children.spacings.left};
       &:first-child {
-        padding-top: ${theme.entities.children.spacings.top};
+        padding-top: var(--content-spacing-top);
       }
       &:last-child {
         padding-bottom: ${theme.entities.children.spacings.bottom};
@@ -21,6 +22,12 @@ const StyledDialogContent = styled.div<DialogContentProps>(
 
       ${scrollable &&
       css`
+        &:not(:first-child) {
+          margin-top: calc(var(--content-spacing-top) * -1);
+        }
+        padding-top: var(--content-spacing-top);
+        margin-bottom: calc(var(--content-spacing-top) * -1);
+        padding-bottom: var(--content-spacing-top);
         min-height: initial;
         height: ${theme.entities.content.height};
         overflow-y: auto;
@@ -31,7 +38,7 @@ const StyledDialogContent = styled.div<DialogContentProps>(
 
 const StyledDivider = styled(Divider)`
   width: 100%;
-  margin-bottom: 0;
+  margin: 0;
 `
 
 export type DialogContentProps = {

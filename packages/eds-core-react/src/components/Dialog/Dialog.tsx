@@ -28,9 +28,10 @@ const StyledDialog = styled(Paper).attrs<DialogProps>({
     background: ${theme.background};
     display: grid;
     grid-auto-columns: auto;
-    ${typographyTemplate(theme.typography)}
-    ${bordersTemplate(theme.border)}
+    ${typographyTemplate(theme.typography)};
+    ${bordersTemplate(theme.border)};
     grid-gap: ${theme.spacings.bottom};
+    overflow: hidden;
   `
 })
 
