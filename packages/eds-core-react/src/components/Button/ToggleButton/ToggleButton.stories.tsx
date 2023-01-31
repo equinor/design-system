@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, ToggleButtonProps, Icon } from '../../..'
+import { Button, ToggleButtonProps, Icon, Tooltip } from '../../..'
 import {
   save,
   edit,
@@ -53,17 +53,24 @@ export const Introduction: Story<ToggleButtonProps> = (args) => {
 }
 
 export const SingleSelection: Story<ToggleButtonProps> = () => {
+  const tooltipDelay = 500
   return (
     <Button.Toggle aria-label="file actions">
-      <Button aria-label="save action">
-        <Icon data={save} title="Ghost icon save"></Icon>
-      </Button>
-      <Button aria-label="edit action">
-        <Icon data={edit} title="Ghost icon edit"></Icon>
-      </Button>
-      <Button aria-label="copy action">
-        <Icon data={copy} title="Ghost icon copy"></Icon>
-      </Button>
+      <Tooltip title="Save" enterDelay={tooltipDelay}>
+        <Button>
+          <Icon data={save} title="Ghost icon save"></Icon>
+        </Button>
+      </Tooltip>
+      <Tooltip title="Edit" enterDelay={tooltipDelay}>
+        <Button>
+          <Icon data={edit} title="Ghost icon edit"></Icon>
+        </Button>
+      </Tooltip>
+      <Tooltip title="Copy" enterDelay={tooltipDelay}>
+        <Button>
+          <Icon data={copy} title="Ghost icon copy"></Icon>
+        </Button>
+      </Tooltip>
     </Button.Toggle>
   )
 }
