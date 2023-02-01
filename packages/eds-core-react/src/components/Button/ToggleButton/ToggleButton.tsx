@@ -10,6 +10,7 @@ import {
   AllHTMLAttributes,
 } from 'react'
 import { Button, ButtonProps } from '../Button'
+import { Tooltip } from '../../Tooltip'
 import { ButtonGroupProps, ButtonGroup } from '../ButtonGroup'
 
 export type ToggleButtonProps = {
@@ -37,6 +38,35 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
       }
     }, [selectedIndexes])
 
+    function updateProps(
+      child: ReactElement,
+      isSelected: boolean,
+      index: number,
+    ) {
+      const childElement = child as ReactElement<AllHTMLAttributes<HTMLElement>>
+      if (isValidElement(child) && child.type === Button) {
+        const buttonProps: ButtonProps = {
+          'aria-pressed': isSelected ? true : undefined,
+          variant: isSelected ? 'contained' : 'outlined',
+          onClick: (e) => {
+            childElement.props?.onClick?.(e)
+            let updatedSelection = [index]
+
+            if (multiple) {
+              updatedSelection = pickedIndexes.includes(index)
+                ? pickedIndexes.filter((i) => i !== index)
+                : [...pickedIndexes, index]
+            }
+            setPickedIndexes(updatedSelection)
+            if (onChange) {
+              onChange(updatedSelection)
+            }
+          },
+        }
+        return cloneElement(child as ReactElement, buttonProps)
+      }
+    }
+
     const updatedChildren = ReactChildren.map(
       children,
       (child, index: number) => {
@@ -44,27 +74,16 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
         const childElement = child as ReactElement<
           AllHTMLAttributes<HTMLElement>
         >
-
-        if (isValidElement(child) && child.type === Button) {
-          const buttonProps: ButtonProps = {
-            'aria-pressed': isSelected ? true : undefined,
-            variant: isSelected ? 'contained' : 'outlined',
-            onClick: (e) => {
-              childElement.props?.onClick?.(e)
-              let updatedSelection = [index]
-
-              if (multiple) {
-                updatedSelection = pickedIndexes.includes(index)
-                  ? pickedIndexes.filter((i) => i !== index)
-                  : [...pickedIndexes, index]
-              }
-              setPickedIndexes(updatedSelection)
-              if (onChange) {
-                onChange(updatedSelection)
-              }
+        if (isValidElement(child) && child.type === Tooltip) {
+          const updatedGrandChildren = ReactChildren.map(
+            childElement.props.children,
+            (grandChild: ReactElement) => {
+              return updateProps(grandChild, isSelected, index)
             },
-          }
-          return cloneElement(child as ReactElement, buttonProps)
+          )
+          return cloneElement(childElement, null, updatedGrandChildren[0])
+        } else {
+          return updateProps(childElement, isSelected, index)
         }
       },
     )
