@@ -244,12 +244,18 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
           <Dialog.Title>Scrollable + actions</Dialog.Title>
         </Dialog.Header>
         <Dialog.CustomContent scrollable>
-          <RadioWrapper label="Black" name="first" />
-          <RadioWrapper label="Blue" defaultChecked name="second" />
-          <RadioWrapper label="Green" name="third" />
-          <RadioWrapper label="Read" name="fourth" />
-          <RadioWrapper label="White" name="fifth" />
-          <RadioWrapper label="Yellow" name="sixth" />
+          <Typography>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Accusantium architecto suscipit laboriosam, nisi quas omnis iusto
+            nam incidunt. Mollitia aliquid alias explicabo dolorum molestias
+            nostrum il
+          </Typography>
+          <Typography>
+            lum vel rem assumenda ea! Lorem ipsum dolor sit, amet consectetur
+            adipisicing elit. Quo repellendus at eligendi voluptas, eos omnis
+            sunt consequatur nam facilis velit veritatis quibusdam dicta
+            voluptate, labore soluta deserunt, odio enim alias.
+          </Typography>
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
