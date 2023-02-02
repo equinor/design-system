@@ -71,7 +71,6 @@ exports[`TopBar Matches snapshot 1`] = `
 
 <header
     class="c0 c1"
-    elevation="0 0 1px rgba(0, 0, 0, 0.14)"
   >
     <div
       class="c2"
