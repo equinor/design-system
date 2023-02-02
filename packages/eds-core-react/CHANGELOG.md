@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.29.0] - 2023-02-03
+
+### Added
+
+- ✨ `Menu` stays open after click on item with the new `closeMenuOnClick` prop by @denektenina in https://github.com/equinor/design-system/pull/2687
+- ✨ `Input`: Added css-variable (`--eds-input-background`) to more easily override background-color. Also works on `Autocomplete`, `Textfield`, `Search` and `Textarea` by @oddvernes in https://github.com/equinor/design-system/pull/2718
+- 📝 Storybook for `Button` and `Tooltip`: added best practices examples for how to use `Tooltip` with disabled `Button` by @denektenina in https://github.com/equinor/design-system/pull/2742
+- ✨ Added `Tooltip` support for `Button.Toggle` by @oddvernes in https://github.com/equinor/design-system/pull/2751
+
+### Fixed
+
+- ⚡️ `Menu`: Fix occasional 1-frame flicker when opening `Menu` by @denektenina in https://github.com/equinor/design-system/pull/2711
+- 💄 `Accordion`: Fixed double border between header and content by @denektenina in https://github.com/equinor/design-system/pull/2739
+- 💄 `Dialog`: Fixed spacing when `scrollable` is set by @oddvernes in https://github.com/equinor/design-system/pull/2749
+- 🎨 `Paper`: Made the `elevation` prop transient so it doesn't clutter the html by @bjartebore in https://github.com/equinor/design-system/pull/2764
+
 ## [0.28.0] - 2022-12-21
 
 ### Added
