@@ -58,7 +58,6 @@ exports[`Popover Matches snapshot 1`] = `
 <div
   class="c0 c1 c2"
   data-testid="popover"
-  elevation="0 1px 10px rgba(0, 0, 0, 0.2),0 4px 5px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14)"
   open=""
   style="position: absolute; top: 0px; left: 0px;"
   tabindex="-1"

@@ -86,7 +86,6 @@ exports[`Dialog Matches snapshot 1`] = `
   aria-modal="true"
   class="c0 c1"
   data-testid="dialog"
-  elevation="0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14)"
   open=""
   role="dialog"
   tabindex="0"

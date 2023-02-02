@@ -69,7 +69,6 @@ exports[`Banner Matches snapshot 1`] = `
 
 <div
     class="c0"
-    elevation="0 0 1px rgba(0, 0, 0, 0.14)"
     role="alert"
   >
     <div

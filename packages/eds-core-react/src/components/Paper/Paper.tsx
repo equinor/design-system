@@ -7,12 +7,12 @@ import {
 } from './Paper.tokens'
 
 type StyledProps = {
-  elevation: string
+  $elevation: string
 }
 
 const StyledPaper = styled.div<StyledProps>`
   background: ${tokens.background};
-  box-shadow: ${({ elevation }) => elevation};
+  box-shadow: ${({ $elevation }) => $elevation};
 `
 
 export type PaperProps = {
@@ -25,7 +25,7 @@ export const Paper = forwardRef<HTMLDivElement, PaperProps>(function Paper(
 ) {
   const props = {
     ...rest,
-    elevation: elevationToken[elevation] || 'none',
+    $elevation: elevationToken[elevation] ?? 'none',
   }
 
   return <StyledPaper {...props} ref={ref} />
