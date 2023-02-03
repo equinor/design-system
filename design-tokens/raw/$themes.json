@@ -15,7 +15,7 @@
       "component/button": "enabled",
       "semantic/shape": "enabled",
       "core/border": "enabled",
-      "semantic/actions": "disabled"
+      "semantic/color": "disabled"
     },
     "$figmaStyleReferences": {}
   },
@@ -31,7 +31,7 @@
       "component/button": "enabled",
       "semantic/shape": "source",
       "core/border": "source",
-      "semantic/actions": "disabled"
+      "semantic/color": "disabled"
     },
     "$figmaStyleReferences": {}
   }

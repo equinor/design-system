@@ -22,6 +22,7 @@
     "semantic/shape",
     "core/border",
     "component/buttonTest",
-    "semantic/actions"
+    "semantic/actions",
+    "semantic/color"
   ]
 }
