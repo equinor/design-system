@@ -1,4 +1,4 @@
-name: Publish storybook on new subscription
+name: Publish core-react storybook on new subscription
 on:
   workflow_dispatch:
     inputs:

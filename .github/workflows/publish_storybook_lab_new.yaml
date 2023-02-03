@@ -1,4 +1,4 @@
-name: Publish storybook on new subscription
+name: Publish lab storybook on new subscription
 on:
   workflow_dispatch:
     inputs:
