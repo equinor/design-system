@@ -1,0 +1,26 @@
+{
+  "eds": {
+    "semantic": {
+      "actions": {
+        "default": {
+          "backgroundColor": {
+            "value": "#ff9900",
+            "type": "color"
+          },
+          "textColor": {
+            "value": "#ff9900",
+            "type": "color"
+          },
+          "iconColor": {
+            "value": "#ff9900",
+            "type": "color"
+          },
+          "borderColor": {
+            "value": "#ff9900",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}
