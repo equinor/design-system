@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.28.0",
+  "version": "0.29.1",
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": [
     "**/*.css"
@@ -63,7 +63,7 @@
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "^29.2.5",
     "@types/ramda": "^0.28.20",
-    "@types/react": "^18.0.26",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
     "@types/testing-library__jest-dom": "^5.14.5",
