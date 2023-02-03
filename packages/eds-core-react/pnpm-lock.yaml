@@ -26,7 +26,7 @@ specifiers:
   '@testing-library/user-event': 14.4.3
   '@types/jest': ^29.2.5
   '@types/ramda': ^0.28.20
-  '@types/react': ^18.0.26
+  '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.10
   '@types/styled-components': ^5.1.26
   '@types/testing-library__jest-dom': ^5.14.5
@@ -54,7 +54,7 @@ dependencies:
   '@equinor/eds-icons': link:../eds-icons
   '@equinor/eds-tokens': link:../eds-tokens
   '@equinor/eds-utils': link:../eds-utils
-  '@floating-ui/react': 0.16.0_ib3m5ricvtkl2cll7qpr2f6lvq
+  '@floating-ui/react': 0.16.0_rj7ozvcq3uehdlnj3cbwzbi5ce
   '@tanstack/react-virtual': 3.0.0-beta.30_react@18.2.0
   downshift: 7.1.2_react@18.2.0
 
@@ -78,7 +78,7 @@ devDependencies:
   '@testing-library/user-event': 14.4.3_ua4wuun3fnehcjqtqj2e2ldgpe
   '@types/jest': 29.2.5
   '@types/ramda': 0.28.20
-  '@types/react': 18.0.26
+  '@types/react': 18.0.21
   '@types/react-dom': 18.0.10
   '@types/styled-components': 5.1.26
   '@types/testing-library__jest-dom': 5.14.5
@@ -1645,14 +1645,14 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@floating-ui/react/0.16.0_ib3m5ricvtkl2cll7qpr2f6lvq:
+  /@floating-ui/react/0.16.0_rj7ozvcq3uehdlnj3cbwzbi5ce:
     resolution: {integrity: sha512-h+69TJSAY2R/k5rw+az56RzzDFc/Tg7EHn/qEgwkIVz56Zg9LlaRMMUvxkcvd+iN3CNFDLtEnDlsXnpshjsRsQ==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@floating-ui/react-dom': 1.1.2_biqbaboplfbrettd7655fr4n2y
-      aria-hidden: 1.2.2_kzbn2opkn2327fwg5yzwzya5o4
+      aria-hidden: 1.2.2_iapumuv4e6jcjznwuxpf4tt22e
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tabbable: 6.0.1
@@ -3869,12 +3869,20 @@ packages:
       '@types/react': 18.0.26
     dev: true
 
+  /@types/react/18.0.21:
+    resolution: {integrity: sha512-7QUCOxvFgnD5Jk8ZKlUAhVcRj7GuJRjnjjiY/IUBWKgOlnvDvTMLD4RTF7NPyVmbRhNrbomZiOepg7M/2Kj1mA==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.2
+      csstype: 3.1.1
+
   /@types/react/18.0.26:
     resolution: {integrity: sha512-hCR3PJQsAIXyxhTNSiDFY//LhnMZWpNNr5etoCqx/iUfGc5gXWtQR2Phl908jVR6uPXacojQWTg4qRpkxTuGug==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.1
+    dev: true
 
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
@@ -4465,7 +4473,7 @@ packages:
       sprintf-js: 1.0.3
     dev: true
 
-  /aria-hidden/1.2.2_kzbn2opkn2327fwg5yzwzya5o4:
+  /aria-hidden/1.2.2_iapumuv4e6jcjznwuxpf4tt22e:
     resolution: {integrity: sha512-6y/ogyDTk/7YAe91T3E2PR1ALVKyM2QbTio5HwM+N1Q6CMlCKhvClyIjkckBswa0f2xJhjsfzIGa1yVSe1UMVA==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -4475,7 +4483,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.0.26
+      '@types/react': 18.0.21
       react: 18.2.0
       tslib: 2.4.1
     dev: false
