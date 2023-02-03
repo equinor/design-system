@@ -3,14 +3,14 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment for the core-react storybook (development | production)'
+        description: 'Environment for the lab storybook (development | production)'
         required: false
         default: 'development'
   push:
     branches:
       - develop
     paths:
-      - 'packages/eds-core-react/**'
+      - 'packages/eds-lab-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
 jobs:
@@ -18,7 +18,7 @@ jobs:
     uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-utils
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -37,13 +37,13 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab-storybook
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
         run: |
-          echo Running build:storybook!
-          node_modules/.bin/pnpm build:storybook
+          echo Running build:storybook:lab!
+          node_modules/.bin/pnpm build:storybook:lab
   publish-storybook:
     needs: [setup, packages]
     name: Build & Deploy Website
@@ -55,11 +55,12 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab-storybook
       - name: Deploy the website
         uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
           folder: 'packages/eds-core-react/storybook-build'
           public-access-policy: 'container'
+          # TODO: Need a new connection string for environment and lab
           connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
