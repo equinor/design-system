@@ -13,6 +13,10 @@ on:
       - 'packages/eds-lab-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   setup:
     uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
@@ -25,6 +29,7 @@ jobs:
     needs: [setup]
     steps:
       - name: Use "setup" cache
+        id: get-setup-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -32,6 +37,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Use "dist" cache
+        id: use-dist-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -39,8 +45,10 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab-storybook
       - name: Build packages
+        id: build-packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
+        id: build-storybook
         run: |
           echo Running build:storybook:lab!
           node_modules/.bin/pnpm build:storybook:lab
@@ -50,6 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use cache with storybook files
+        id: use-cache-storybook
         uses: actions/cache@v3
         with:
           path: |
@@ -57,6 +66,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab-storybook
       - name: Deploy the website
+        id: deploy-website
         uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
@@ -64,3 +74,10 @@ jobs:
           public-access-policy: 'container'
           # TODO: Need a new connection string for environment and lab
           connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
+
