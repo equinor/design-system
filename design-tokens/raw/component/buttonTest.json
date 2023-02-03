@@ -1,0 +1,637 @@
+{
+  "eds": {
+    "button": {
+      "allVariants": {
+        "filled": {
+          "allStates": {
+            "borderWidth": {
+              "value": "0",
+              "type": "borderWidth"
+            }
+          },
+          "disabled": {
+            "backgroundColor": {
+              "value": "silver",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "gray",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.allVariants.filled.disabled.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "outlined": {
+          "allStates": {
+            "borderWidth": {
+              "value": "1",
+              "type": "borderWidth"
+            }
+          },
+          "disabled": {
+            "backgroundColor": {
+              "value": "silver",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "gray",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.allVariants.outlined.disabled.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#00ff53",
+              "type": "color"
+            }
+          }
+        },
+        "ghost": {
+          "allStates": {
+            "borderWidth": {
+              "value": "0",
+              "type": "borderWidth"
+            }
+          },
+          "disabled": {
+            "backgroundColor": {
+              "value": "silver",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "gray",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.allVariants.ghost.disabled.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        }
+      },
+      "primary": {
+        "filled": {
+          "default": {
+            "backgroundColor": {
+              "value": "maroon",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "#008aff",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "orange",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "outlined": {
+          "default": {
+            "backgroundColor": {
+              "value": "#FFF0",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.default.textColor}",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "type": "color"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "lime",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "deeppink",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            }
+          }
+        },
+        "ghost": {
+          "default": {
+            "backgroundColor": {
+              "value": "FFFF",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "lime",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "yellow",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "filled": {
+          "default": {
+            "backgroundColor": {
+              "value": "maroon",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "#008aff",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "orange",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "outlined": {
+          "default": {
+            "backgroundColor": {
+              "value": "#FFF0",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.default.textColor}",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "type": "color"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "lime",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "deeppink",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            }
+          }
+        },
+        "ghost": {
+          "default": {
+            "backgroundColor": {
+              "value": "FFFF",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "lime",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "yellow",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        }
+      },
+      "danger": {
+        "filled": {
+          "default": {
+            "backgroundColor": {
+              "value": "maroon",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "#008aff",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "orange",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.filled.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "outlined": {
+          "default": {
+            "backgroundColor": {
+              "value": "#FFF0",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.default.textColor}",
+              "type": "color"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "type": "color"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "lime",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "deeppink",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            }
+          }
+        },
+        "ghost": {
+          "default": {
+            "backgroundColor": {
+              "value": "FFFF",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.default.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "violet",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "pink",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.hover.textColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "lime",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "yellow",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "iconColor": {
+              "value": "{eds.button.primary.ghost.loading.textColor}",
+              "type": "color",
+              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+            },
+            "borderColor": {
+              "value": "#F000",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        }
+      }
+    }
+  }
+}
