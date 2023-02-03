@@ -3,8 +3,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment for the core-react storybook (development | production)'
+        description: 'Environment for the core-react storybook'
         required: false
+        type: choice
+        options:
+          - development
+          - production
         default: 'development'
   push:
     branches:
