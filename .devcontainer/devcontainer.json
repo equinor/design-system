@@ -12,47 +12,51 @@
       "VARIANT": "16-bullseye"
     }
   },
-  "settings": {
-    "extensions.ignoreRecommendations": true,
-    "git.rebaseWhenSync": true,
-    "git.autofetch": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[svg]": {
-      "editor.defaultFormatter": "jock.svg"
-    },
-    /* pretter-vscode needs this line to find the locally installed prettier */
-    "prettier.prettierPath": "./node_modules/prettier",
-    "editor.formatOnSave": true,
-    "yaml.schemas": {
-      "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
-      "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
-    },
-    "files.associations": {
-      "*.json": "jsonc",
-      "[Dd]ockerfile*": "dockerfile",
-      "docker-compose*": "yaml"
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "extensions.ignoreRecommendations": true,
+        "git.rebaseWhenSync": true,
+        "git.autofetch": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[svg]": {
+          "editor.defaultFormatter": "jock.svg"
+        },
+        /* pretter-vscode needs this line to find the locally installed prettier */
+        "prettier.prettierPath": "./node_modules/prettier",
+        "editor.formatOnSave": true,
+        "yaml.schemas": {
+          "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
+          "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
+        },
+        "files.associations": {
+          "*.json": "jsonc",
+          "[Dd]ockerfile*": "dockerfile",
+          "docker-compose*": "yaml"
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+        "esbenp.prettier-vscode",
+        "editorconfig.editorconfig",
+        "redhat.vscode-yaml",
+        "unifiedjs.vscode-mdx",
+        "deque-systems.vscode-axe-linter",
+        "styled-components.vscode-styled-components",
+        "aaron-bond.better-comments",
+        "seatonjiang.gitmoji-vscode",
+        "usernamehw.errorlens",
+        "eamodio.gitlens",
+        "ms-vsliveshare.vsliveshare",
+        "davidanson.vscode-markdownlint",
+        "ionutvmi.path-autocomplete",
+        "jock.svg",
+        "github.vscode-pull-request-github",
+        "ms-azuretools.vscode-bicep"
+      ]
     }
   },
-  "extensions": [
-    "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
-    "esbenp.prettier-vscode",
-    "editorconfig.editorconfig",
-    "redhat.vscode-yaml",
-    "unifiedjs.vscode-mdx",
-    "deque-systems.vscode-axe-linter",
-    "styled-components.vscode-styled-components",
-    "aaron-bond.better-comments",
-    "seatonjiang.gitmoji-vscode",
-    "usernamehw.errorlens",
-    "eamodio.gitlens",
-    "ms-vsliveshare.vsliveshare-pack",
-    "davidanson.vscode-markdownlint",
-    "ionutvmi.path-autocomplete",
-    "jock.svg",
-    "github.vscode-pull-request-github",
-    "ms-azuretools.vscode-bicep"
-  ],
   "forwardPorts": [9000],
   "portsAttributes": {
     "9000": {
