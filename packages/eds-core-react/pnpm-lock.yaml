@@ -19,7 +19,7 @@ specifiers:
   '@storybook/client-api': ^6.5.15
   '@storybook/manager-webpack5': ^6.5.15
   '@storybook/react': ^6.5.15
-  '@tanstack/react-virtual': 3.0.0-beta.30
+  '@tanstack/react-virtual': 3.0.0-beta.45
   '@testing-library/dom': ^8.19.1
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': 13.4.0
@@ -55,7 +55,7 @@ dependencies:
   '@equinor/eds-tokens': link:../eds-tokens
   '@equinor/eds-utils': link:../eds-utils
   '@floating-ui/react': 0.19.1_rj7ozvcq3uehdlnj3cbwzbi5ce
-  '@tanstack/react-virtual': 3.0.0-beta.30_react@18.2.0
+  '@tanstack/react-virtual': 3.0.0-beta.45_react@18.2.0
   downshift: 7.2.0_react@18.2.0
 
 devDependencies:
@@ -3575,17 +3575,17 @@ packages:
       resolve-from: 5.0.0
     dev: true
 
-  /@tanstack/react-virtual/3.0.0-beta.30_react@18.2.0:
-    resolution: {integrity: sha512-Sn1SSbSjDwb++jVOtgiQ/OHFMdcXFg8Qx02/cn0eq9xxHIhm/SqrKDpywIeydgNdOsdfBomOfxm/4gqTLrY1gg==}
+  /@tanstack/react-virtual/3.0.0-beta.45_react@18.2.0:
+    resolution: {integrity: sha512-/VCBrs89i9s4cM9Ag9nFfu3PD5U50vmqdZqWyxgy2ljuLlDRvOkBXDcyRjP32tDpkYjAKbsqK0UEmHK+nbIPBA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tanstack/virtual-core': 3.0.0-beta.30
+      '@tanstack/virtual-core': 3.0.0-beta.45
       react: 18.2.0
     dev: false
 
-  /@tanstack/virtual-core/3.0.0-beta.30:
-    resolution: {integrity: sha512-fewNoKiJeG5v0T4jg7UO99G+hUYDHig6AkiIeqvC1O2zEw96MlzR6DXw91aqxcsIPSVp83IPsgNa7su8yZWldw==}
+  /@tanstack/virtual-core/3.0.0-beta.45:
+    resolution: {integrity: sha512-RPEwL4BxsQlaO6F923WnElLnOIokJmdwVBK835s9JQPoY+CMJUotAXjJK2I/Gsy8AXLjdvTvS50uOiKHIUHBKw==}
     dev: false
 
   /@testing-library/dom/8.19.1:
