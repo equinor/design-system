@@ -39,24 +39,39 @@ StyleDictionary.registerFormat({
 
     dictionary.allTokens.forEach((token) => {
       const component = token.path[1]
-      const variant = token.path[2] // primary, secondary, danger or allVariants
+      const variant = token.path[2] // primary, secondary, danger, allVariants or elements
       const style = token.path[3] // filled, outlined, ghost
       const state = token.path[4] // default, hover, disabled, loading, or allStates
       const attributeName = token.path[5] // default, hover, disabled, loading
 
-      let componentStyle = styleObject[component]
-        ? { ...styleObject[component] }
-        : {}
+      let componentStyle
 
-      componentStyle[variant] = extractStyle(
-        componentStyle[variant] || {},
-        style,
-        state,
-        attributeName,
-        token.value,
-      )
+      if (variant === 'elements') {
+        console.log('token', token)
+        componentStyle = styleObject['common']
+          ? { ...styleObject['common'] }
+          : {}
 
-      styleObject[component] = componentStyle
+        Object.entries(token.value).forEach(([key, value]) => {
+          componentStyle[key] = value
+        })
+
+        styleObject[component]['common'] = componentStyle
+      } else {
+        componentStyle = styleObject[component]
+          ? { ...styleObject[component] }
+          : {}
+
+        componentStyle[variant] = extractStyle(
+          componentStyle[variant] || {},
+          style,
+          state,
+          attributeName,
+          token.value,
+        )
+
+        styleObject[component] = componentStyle
+      }
     })
     return 'export const edsTokens = ' + JSON.stringify(styleObject, null, 2)
   },
@@ -69,7 +84,11 @@ const getStyleDictionaryConfig = () => {
   console.log(`🚧 Compiling tokens`)
 
   return {
-    source: ['../design-tokens/raw/component/buttonTest.json'],
+    source: [
+      '../design-tokens/raw/component/buttonTest.json',
+      '../design-tokens/build/json/shapeTest.json',
+      '../design-tokens/build/json/semanticTest.json',
+    ],
     platforms: {
       js: {
         transformGroup: 'js',

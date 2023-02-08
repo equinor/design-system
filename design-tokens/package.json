@@ -6,7 +6,9 @@
     "name": "EDS Core Team",
     "email": "fg_eds@equinor.com"
   },
-  "scripts": {},
+  "scripts": {
+    "create-tokens": "node resolve-compositions.js && node build-tokens.js"
+  },
   "dependencies": {
     "style-dictionary": "^3.7.2",
     "token-transformer": "^0.0.29"

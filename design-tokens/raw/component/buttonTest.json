@@ -266,6 +266,16 @@
           }
         }
       },
+      "elements": {
+        "label": {
+          "value": {
+            "horizontalPadding": "{eds.semantic.shape.button.horizontalPadding} / 4",
+            "verticalPadding": "({eds.semantic.shape.button.height} - {eds.semantic.typography.label.default.lineHeight}) / 2",
+            "itemSpacing": "0"
+          },
+          "type": "composition"
+        }
+      },
       "secondary": {
         "filled": {
           "default": {
