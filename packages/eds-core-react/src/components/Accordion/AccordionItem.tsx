@@ -14,7 +14,12 @@ export type AccordionItemProps = {
   accordionId?: string
   /** Is AccordionItem expanded */
   isExpanded?: boolean
-  /** accordion item is disabled */
+  /**
+   * Accordion expanded state is changed
+   * When present the accordion is in controlled state
+   */
+  onExpandedChange?: (isExpanded: boolean) => void
+  /** Accordion item is disabled */
   disabled?: boolean
 } & HTMLAttributes<HTMLDivElement> &
   AccordionProps
@@ -26,7 +31,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       chevronPosition,
       index = 0,
       accordionId,
-      isExpanded,
+      isExpanded = false,
+      onExpandedChange,
       children,
       disabled,
       ...props
@@ -34,9 +40,15 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
     ref,
   ) {
     const [expanded, setExpanded] = useState(isExpanded)
+    const controlled = onExpandedChange != undefined
+    const activeExpandedState = controlled ? isExpanded : expanded
 
     const toggleExpanded = () => {
-      setExpanded(!expanded)
+      if (controlled) {
+        onExpandedChange(!isExpanded)
+      } else {
+        setExpanded(!expanded)
+      }
     }
 
     const Children = ReactChildren.map(children, (child, childIndex) => {
@@ -45,7 +57,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 
       return childIndex === 0
         ? cloneElement(child as ReactElement, {
-            isExpanded: expanded,
+            isExpanded: activeExpandedState,
             toggleExpanded,
             id: headerId,
             panelId,
@@ -55,15 +67,17 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
             disabled,
           })
         : cloneElement(child as ReactElement, {
-            hidden: !expanded,
+            hidden: !activeExpandedState,
             id: panelId,
             headerId,
           })
     })
 
     useEffect(() => {
-      setExpanded(isExpanded)
-    }, [isExpanded])
+      if (!controlled) {
+        setExpanded(isExpanded)
+      }
+    }, [isExpanded, controlled])
 
     return (
       <div {...props} ref={ref}>
