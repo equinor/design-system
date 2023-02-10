@@ -40,7 +40,25 @@ import { Button } from '@equinor/eds-core-react'
 
 <Button as={Link} to="/about">About</Button>
 ```
+A special note about **nextLink**: The `href` type from this component conflicts with the native href type, therefore it is recommended to use the legacy behavior in this case, or alternatively ts-ignore.
+```tsx
+import NextLink from 'next/link'
+import { Button } from '@equinor/eds-core-react'
 
+<NextLink href="/about" passHref legacyBehavior>
+  <Button as="a">About</Button>
+</NextLink>
+
+/* Or */
+
+ <Button
+   as={NextLink}
+   /* @ts-ignore */
+   href={{ pathname: "/foo/bar", query: { id: assetId } }}
+>
+   Bar
+</Button>
+```
 ## Accessibility
 The `aria-disabled` attribute makes it possible to semantically disable the `Button` without hiding it from assistive technologies, such as screen readers. 
 In EDS, the `Button` will be visually styled as disabled, but it is up to the developer to actually disable the button.
