@@ -76,8 +76,7 @@ jobs:
           enabled-static-website: 'true'
           folder: 'packages/eds-core-react/storybook-build'
           public-access-policy: 'container'
-          # TODO: Need a new connection string for environment and lab
-          connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
+          connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
