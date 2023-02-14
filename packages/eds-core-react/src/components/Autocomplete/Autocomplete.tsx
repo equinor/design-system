@@ -690,9 +690,7 @@ function AutocompleteInner<T>(
         {disablePortal ? (
           optionsList
         ) : (
-          <FloatingPortal id="eds-autocomplete-container">
-            {optionsList}
-          </FloatingPortal>
+          <FloatingPortal>{optionsList}</FloatingPortal>
         )}
       </Container>
     </ThemeProvider>
