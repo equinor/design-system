@@ -264,6 +264,18 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
       newValue[valueArrIdx] = changedValue
+
+      //Prevent min/max values from crossing eachother
+      if (valueArrIdx === 0 && newValue[0] >= newValue[1]) {
+        newValue[0] = newValue[1]
+        maxRange.current?.focus()
+      }
+
+      if (valueArrIdx === 1 && newValue[1] <= newValue[0]) {
+        newValue[1] = newValue[0]
+        minRange.current?.focus()
+      }
+
       setSliderValue(newValue)
       if (onChange) {
         // Callback for provided onChange func
@@ -302,18 +314,27 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     const bounds = target.getBoundingClientRect()
     const x = event.clientX - bounds.left
     const inputWidth = minRange.current.offsetWidth
-    const minValue = minRange.current.value
-    const maxValue = maxRange.current.value
+    const minValue = parseFloat(minRange.current.value)
+    const maxValue = parseFloat(maxRange.current.value)
     const diff = max - min
 
     const normX = (x / inputWidth) * diff + min
 
-    const maxX = Math.abs(normX - parseFloat(maxValue))
-    const minX = Math.abs(normX - parseFloat(minValue))
+    const maxX = Math.abs(normX - maxValue)
+    const minX = Math.abs(normX - minValue)
     if (minX > maxX) {
       minRange.current.style.zIndex = '10'
       maxRange.current.style.zIndex = '20'
     } else {
+      minRange.current.style.zIndex = '20'
+      maxRange.current.style.zIndex = '10'
+    }
+    //special cases where both thumbs are all the way to the left or right
+    if (minValue === maxValue && minValue === min) {
+      minRange.current.style.zIndex = '10'
+      maxRange.current.style.zIndex = '20'
+    }
+    if (minValue === maxValue && maxValue === max) {
       minRange.current.style.zIndex = '20'
       maxRange.current.style.zIndex = '10'
     }
