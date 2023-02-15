@@ -1,4 +1,9 @@
-import { forwardRef, OutputHTMLAttributes, ReactNode } from 'react'
+import {
+  forwardRef,
+  OutputHTMLAttributes,
+  ReactNode,
+  CSSProperties,
+} from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { slider as tokens } from './Slider.tokens'
@@ -7,10 +12,7 @@ const {
   entities: { track, output },
 } = tokens
 
-type StyledProps = Pick<OutputProps, 'value'>
-
-const StyledOutput = styled.output<StyledProps>`
-  --val: ${({ value }) => value};
+const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
   width: fit-content;
   position: relative;
@@ -40,7 +42,11 @@ type OutputProps = {
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(
   function Output({ children, value, htmlFor }, ref) {
     return (
-      <StyledOutput ref={ref} value={value} htmlFor={htmlFor}>
+      <StyledOutput
+        ref={ref}
+        style={{ '--val': value } as CSSProperties}
+        htmlFor={htmlFor}
+      >
         {children}
       </StyledOutput>
     )
