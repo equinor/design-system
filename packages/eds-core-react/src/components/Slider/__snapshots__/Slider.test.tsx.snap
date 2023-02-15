@@ -3,10 +3,9 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Slider__Wrapper-sc-n1grrg-1 iJEvSY"
+    class="Slider__Wrapper-sc-n1grrg-1 dnlaQa"
     id="test"
-    max="100"
-    min="0"
+    style="--min: 0; --max: 100; --value: 0; --background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));"
     value="0"
   >
     <input
@@ -24,9 +23,9 @@ exports[`Simple slider Matches snapshot 1`] = `
       value="0"
     />
     <output
-      class="Output__StyledOutput-sc-1dy945x-0 jXDBrj"
+      class="Output__StyledOutput-sc-1dy945x-0 hFTnui"
       for="test-thumb"
-      value="0"
+      style="--val: 0;"
     >
       0
     </output>

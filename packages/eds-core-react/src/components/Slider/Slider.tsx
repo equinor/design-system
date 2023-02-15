@@ -320,7 +320,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   }
 
   const handleDragging = (e: MouseEvent) => {
-    console.log(e)
     if (e.type === 'mousedown') {
       setMousePressed(true)
     } else {
