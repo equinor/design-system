@@ -22,12 +22,11 @@ export type ComponentToken = {
   border?: Borders
   typography?: Partial<Typography>
   clickbound?: Clickbound
-  outline?: Outline
   states?: {
-    active?: ComponentToken
+    active?: ComponentToken & { outline?: Outline }
     disabled?: ComponentToken
-    readOnly?: ComponentToken
-    focus?: ComponentToken
+    readOnly?: ComponentToken & { outline?: Outline }
+    focus?: ComponentToken & { outline?: Outline }
     hover?: ComponentToken
     pressed?: ComponentToken & { pressed?: Pressed }
   }

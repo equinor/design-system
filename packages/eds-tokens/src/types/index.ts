@@ -23,7 +23,7 @@ export type Typography = {
 
 export type TypographyTokens = {
   [P1 in keyof typeof typography]: {
-    [P2 in keyof (typeof typography)[P1]]: Typography
+    [P2 in keyof typeof typography[P1]]: Typography
   }
 }
 
