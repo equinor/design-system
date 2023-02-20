@@ -1,6 +1,7 @@
 {
   "tokenSetOrder": [
     "core/const",
+    "core/border",
     "core/typography",
     "core/sizing",
     "core/spacing",
@@ -9,20 +10,14 @@
     "readonly/spacing",
     "readonly/tight",
     "semantic/semantic",
+    "semantic/shape",
+    "semantic/actions",
+    "semantic/color",
     "theme/default",
     "theme/comfortable",
     "theme/compact",
     "theme/light",
     "theme/dark",
-    "component/button",
-    "component/buttonTests/dimensions",
-    "component/buttonTests/figmaOptimised",
-    "component/buttonTests/beforeBorder",
-    "component/buttonTests/codeOptimised",
-    "semantic/shape",
-    "core/border",
-    "component/buttonTest",
-    "semantic/actions",
-    "semantic/color"
+    "component/button"
   ]
 }
