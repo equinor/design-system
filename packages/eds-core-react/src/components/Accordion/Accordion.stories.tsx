@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { Accordion, Button, Icon, AccordionProps } from '../..'
 import { ComponentMeta, Story } from '@storybook/react'
@@ -201,6 +202,34 @@ export const Header: Story<AccordionProps> = () => {
               </Button>
             </Accordion.HeaderActions>
           </Accordion.Header>
+          <Accordion.Panel>Content</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
+    </>
+  )
+}
+
+export const Controlled: Story<AccordionProps> = () => {
+  const [expanded, setExpanded] = useState(false)
+  const toggleAccordion = (state: boolean) => {
+    console.log(state)
+    setExpanded(state)
+  }
+
+  return (
+    <>
+      <Button
+        onClick={() => toggleAccordion(!expanded)}
+        style={{ width: 'fit-content' }}
+      >
+        {expanded ? 'Collapse ' : 'Expand '} accordion
+      </Button>
+      <Accordion>
+        <Accordion.Item
+          isExpanded={expanded}
+          onExpandedChange={toggleAccordion}
+        >
+          <Accordion.Header>Controlled Accordion</Accordion.Header>
           <Accordion.Panel>Content</Accordion.Panel>
         </Accordion.Item>
       </Accordion>

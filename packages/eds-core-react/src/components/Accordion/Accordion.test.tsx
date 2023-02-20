@@ -6,8 +6,9 @@ import { axe } from 'jest-axe'
 import { attach_file, notifications } from '@equinor/eds-icons'
 import { Accordion } from '.'
 import { Icon } from '../Icon'
+import { Button } from '../Button'
 import type { AccordionProps } from './Accordion.types'
-import React from 'react'
+import { useState } from 'react'
 
 Icon.add({ attach_file, notifications })
 
@@ -93,6 +94,43 @@ describe('Accordion', () => {
     const header = screen.getByTestId('header')
     fireEvent.click(header)
     expect(mockOnToggle).toHaveBeenCalled()
+  })
+
+  type ControlledProps = {
+    onExpandedChange: () => void
+  }
+  const ControlledAccordion = ({ onExpandedChange }: ControlledProps) => {
+    const [expanded, setExpanded] = useState(false)
+    const toggleAccordion = (state: boolean) => {
+      setExpanded(state)
+      onExpandedChange()
+    }
+    return (
+      <>
+        <Button data-testid="button" onClick={() => toggleAccordion(!expanded)}>
+          testbutton
+        </Button>
+        <Accordion>
+          <Accordion.Item
+            isExpanded={expanded}
+            onExpandedChange={toggleAccordion}
+          >
+            <Accordion.Header data-testid="header">Summary 1</Accordion.Header>
+          </Accordion.Item>
+        </Accordion>
+      </>
+    )
+  }
+
+  it('Can be a controlled component', () => {
+    const mockToggled = jest.fn()
+    render(<ControlledAccordion onExpandedChange={mockToggled} />)
+    const header = screen.getByTestId('header')
+    const button = screen.getByTestId('button')
+    expect(header).not.toHaveAttribute('aria-expanded', 'true')
+    fireEvent.click(button)
+    expect(mockToggled).toHaveBeenCalled()
+    expect(header).toHaveAttribute('aria-expanded', 'true')
   })
   it('Add custom icons', () => {
     render(<AccordionWithIcons />)

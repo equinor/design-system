@@ -15,8 +15,8 @@ export type AccordionItemProps = {
   /** Is AccordionItem expanded */
   isExpanded?: boolean
   /**
-   * Accordion expanded state is changed
-   * When present the accordion is in controlled state
+   * Callback fired with expanded state change.
+   * When this prop is present, the accordion is in controlled state
    */
   onExpandedChange?: (isExpanded: boolean) => void
   /** Accordion item is disabled */
