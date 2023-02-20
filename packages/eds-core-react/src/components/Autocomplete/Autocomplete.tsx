@@ -167,6 +167,7 @@ export type AutocompleteProps<T> = {
    * changes.selectedItems gives the selected items
    */
   onOptionsChange?: (changes: AutocompleteChanges<T>) => void
+  onInputChange?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
@@ -201,6 +202,7 @@ function AutocompleteInner<T>(
     readOnly = false,
     hideClearButton = false,
     onOptionsChange,
+    onInputChange,
     selectedOptions,
     multiple,
     initialSelectedOptions = [],
@@ -329,6 +331,7 @@ function AutocompleteInner<T>(
     initialSelectedItem: initialSelectedOptions[0],
     itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
+      onInputChange && onInputChange(inputValue)
       setAvailableItems(
         options.filter((item) => {
           if (optionsFilter) {
