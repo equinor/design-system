@@ -135,16 +135,6 @@
             "type": "sizing"
           }
         }
-      },
-      "borderRadii": {
-        "default": {
-          "value": "{eds.core.borderRadii.0}",
-          "type": "dimension"
-        },
-        "rounded": {
-          "value": "{eds.core.borderRadii.1}",
-          "type": "dimension"
-        }
       }
     }
   }
