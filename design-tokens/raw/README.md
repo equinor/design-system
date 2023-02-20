@@ -17,3 +17,7 @@ For questions or comments use [#eds-design-system][slack] on Slack or <abbr titl
 
 [slack]: https://equinor.slack.com/archives/CJT20H1B9
 [ft]: https://www.figmatokens.com/
+
+## Investigate
+
+- When will we be able to compose composition tokens?
