@@ -7,7 +7,6 @@ import {
   useMemo,
   useCallback,
   ChangeEvent,
-  RefObject,
 } from 'react'
 import {
   useCombobox,
@@ -215,7 +214,6 @@ function AutocompleteInner<T>(
     multiline = false,
     ...other
   } = props
-  const anchorRef = useRef<HTMLInputElement>(null)
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
@@ -515,31 +513,26 @@ function AutocompleteInner<T>(
     }
   }
 
-  const { x, y, refs, update, reference, floating, strategy } =
-    useFloating<HTMLInputElement>({
-      placement: 'bottom-start',
-      middleware: [
-        offset(4),
-        flip(),
-        shift({ padding: 8 }),
-        size({
-          apply({ rects, availableHeight, elements }) {
-            const anchorWidth = `${rects.reference.width}px`
-            Object.assign(elements.floating.style, {
-              width: `${autoWidth ? anchorWidth : 'auto'}`,
-              maxHeight: `${availableHeight}px`,
-            })
-          },
-          padding: 10,
-        }),
-      ],
-    })
+  const { x, y, refs, update, strategy } = useFloating<HTMLInputElement>({
+    placement: 'bottom-start',
+    middleware: [
+      offset(4),
+      flip(),
+      shift({ padding: 8 }),
+      size({
+        apply({ rects, availableHeight, elements }) {
+          const anchorWidth = `${rects.reference.width}px`
+          Object.assign(elements.floating.style, {
+            width: `${autoWidth ? anchorWidth : 'auto'}`,
+            maxHeight: `${availableHeight}px`,
+          })
+        },
+        padding: 10,
+      }),
+    ],
+  })
 
   const { getFloatingProps } = useInteractions([])
-
-  useEffect(() => {
-    reference(anchorRef.current)
-  }, [anchorRef, reference])
 
   useEffect(() => {
     if (refs.reference.current && refs.floating.current && isOpen) {
@@ -563,7 +556,7 @@ function AutocompleteInner<T>(
   const optionsList = (
     <div
       {...getFloatingProps({
-        ref: floating,
+        ref: refs.setFloating,
         style: {
           position: strategy,
           top: y || 0,
@@ -652,7 +645,7 @@ function AutocompleteInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: refs.reference as RefObject<HTMLInputElement>,
+                ref: refs.setReference,
                 onChange: (e: ChangeEvent<HTMLInputElement>) =>
                   setTypedInputValue(e?.currentTarget?.value),
               }),
