@@ -463,8 +463,6 @@
             "value": {
               "typography": "{eds.core.typography.comfortable.3}",
               "fontWeights": "{eds.core.fontWeight.bold}",
-              "paddingTop": "{eds.core.spacing.19}",
-              "paddingBottom": "{eds.core.spacing.9}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"
@@ -476,8 +474,6 @@
             "value": {
               "typography": "{eds.core.typography.comfortable.4}",
               "fontWeights": "{eds.core.fontWeight.bold}",
-              "paddingTop": "{eds.core.spacing.19}",
-              "paddingBottom": "{eds.core.spacing.9}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"
@@ -488,8 +484,6 @@
             "value": {
               "typography": "{eds.core.typography.comfortable.5}",
               "fontWeights": "{eds.core.fontWeight.medium}",
-              "paddingTop": "{eds.core.spacing.20}",
-              "paddingBottom": "{eds.core.spacing.8}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"
@@ -500,8 +494,6 @@
             "value": {
               "typography": "{eds.core.typography.compressed.6}",
               "fontWeights": "{eds.core.fontWeight.medium}",
-              "paddingTop": "{eds.core.spacing.19}",
-              "paddingBottom": "{eds.core.spacing.9}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"
@@ -512,8 +504,6 @@
             "value": {
               "typography": "{eds.core.typography.compressed.7}",
               "fontWeights": "{eds.core.fontWeight.regular}",
-              "paddingTop": "{eds.core.spacing.20}",
-              "paddingBottom": "{eds.core.spacing.8}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"
@@ -524,8 +514,6 @@
             "value": {
               "typography": "{eds.core.typography.compressed.8}",
               "fontWeights": "{eds.core.fontWeight.regular}",
-              "paddingTop": "{eds.core.spacing.20}",
-              "paddingBottom": "{eds.core.spacing.8}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"
@@ -536,8 +524,6 @@
             "value": {
               "typography": "{eds.core.typography.tight.9}",
               "fontWeights": "{eds.core.fontWeight.regular}",
-              "paddingTop": "{eds.core.spacing.20}",
-              "paddingBottom": "{eds.core.spacing.8}",
               "paddingLeft": "{eds.core.spacing.0}",
               "paddingRight": "{eds.core.spacing.0}",
               "itemSpacing": "{eds.core.spacing.0}"

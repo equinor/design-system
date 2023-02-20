@@ -15,7 +15,23 @@
       "component/button": "enabled",
       "semantic/shape": "enabled",
       "core/border": "enabled",
-      "component/buttonTests/beforeBorder": "disabled"
+      "semantic/color": "disabled"
+    },
+    "$figmaStyleReferences": {}
+  },
+  {
+    "id": "f506549733b9dab93d3170bca667fc24591743ac",
+    "name": "button",
+    "selectedTokenSets": {
+      "core/const": "source",
+      "core/typography": "source",
+      "core/sizing": "source",
+      "core/spacing": "source",
+      "semantic/semantic": "source",
+      "component/button": "enabled",
+      "semantic/shape": "source",
+      "core/border": "source",
+      "semantic/color": "disabled"
     },
     "$figmaStyleReferences": {}
   }
