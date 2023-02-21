@@ -1,0 +1,174 @@
+{
+  "eds": {
+    "semantic": {
+      "colors": {
+        "primary": {
+          "default": {
+            "value": "{eds.core.color.mossGreen.1000}",
+            "type": "color",
+            "inheritTypeLevel": 2
+          },
+          "darkened": {
+            "value": "{eds.core.color.mossGreen.1200}",
+            "type": "color",
+            "inheritTypeLevel": 2
+          }
+        }
+      }
+    },
+    "colors": {
+      "text": {
+        "default": {
+          "value": "{eds.core.color.neutrals.1100}",
+          "type": "other"
+        },
+        "interactive": {
+          "value": "{eds.core.color.mossGreen.1000}",
+          "type": "other"
+        }
+      },
+      "highlight": {
+        "value": "yellow",
+        "type": "other"
+      },
+      "primary": {
+        "value": "orange",
+        "type": "other"
+      },
+      "secondary": {
+        "value": "orange",
+        "type": "other"
+      },
+      "muted": {
+        "value": "orange",
+        "type": "other"
+      },
+      "washed": {
+        "value": "orange",
+        "type": "other"
+      },
+      "danger": {
+        "value": "orange",
+        "type": "other"
+      },
+      "information": {
+        "value": "orange",
+        "type": "color"
+      },
+      "success": {
+        "value": "orange",
+        "type": "other"
+      },
+      "warning": {
+        "onWarning": {
+          "value": "{eds.core.color.orange.100}",
+          "type": "other"
+        },
+        "subtle": {
+          "value": "{eds.core.color.orange.600}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": 0.2,
+                "space": "lch"
+              }
+            }
+          }
+        },
+        "emphasis": {
+          "value": "{eds.core.color.orange.100}",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "muted": {
+          "value": "{eds.core.color.orange.100}",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "default": {
+          "value": "{eds.core.color.orange.600}",
+          "type": "color",
+          "inheritTypeLevel": 2
+        }
+      },
+      "fg": {
+        "on-accent": {
+          "value": "#fff",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "subtle": {
+          "value": "#6b7280",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "muted": {
+          "value": "#374151",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "default": {
+          "value": "#131313",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "disabled": {
+          "value": "#9ca3af",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "on-disabled": {
+          "value": "#4b5563",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        }
+      },
+      "bg": {
+        "onAccent": {
+          "value": "#fff",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "subtle": {
+          "value": "#6b7280",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "muted": {
+          "value": "#374151",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "default": {
+          "value": "#131313",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "disabled": {
+          "value": "#9ca3af",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        },
+        "onDisabled": {
+          "value": "#4b5563",
+          "description": "Pro: Teste UU mellom fg og accent",
+          "type": "color",
+          "inheritTypeLevel": 2
+        }
+      }
+    }
+  }
+}

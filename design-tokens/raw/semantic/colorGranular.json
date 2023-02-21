@@ -1,0 +1,90 @@
+{
+  "eds": {
+    "semantic": {
+      "colors": {
+        "actions": {
+          "primary": {
+            "default": {
+              "backgroundColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "textColor": {
+                "value": "{eds.core.color.mossGreen.1000}",
+                "type": "color"
+              },
+              "iconColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "borderColor": {
+                "value": "#ff9900",
+                "type": "color"
+              }
+            },
+            "hover": {
+              "backgroundColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "textColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "iconColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "borderColor": {
+                "value": "#ff9900",
+                "type": "color"
+              }
+            }
+          },
+          "secondary": {
+            "default": {
+              "backgroundColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "textColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "iconColor": {
+                "value": "#ff9900",
+                "type": "color"
+              },
+              "borderColor": {
+                "value": "#ff9900",
+                "type": "color"
+              }
+            }
+          }
+        },
+        "primary": {
+          "default": {
+            "value": "{eds.core.color.mossGreen.1000}",
+            "type": "color"
+          },
+          "darkened": {
+            "value": "{eds.core.color.mossGreen.1200}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "colors": {
+      "text": {
+        "default": {
+          "value": "{eds.core.color.neutrals.1100}",
+          "type": "color"
+        },
+        "interactive": {
+          "value": "{eds.core.color.mossGreen.1000}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

@@ -1,33 +1,47 @@
 {
   "eds": {
     "core": {
-      "const": {
+      "fontMetrics": {
         "capHeight": {
           "value": "0.7",
           "type": "other",
           "description": "The cap height of the Equinor typeface (0.7em)"
         },
-        "r": {
+        "ascent": {
+          "value": "0.788",
+          "type": "other",
+          "description": "Metrics from the Equinor font"
+        },
+        "descent": {
+          "value": "0.212",
+          "type": "other",
+          "description": "Metrics from the Equinor font"
+        }
+      },
+      "typeScale": {
+        "ratio": {
           "value": "2",
           "type": "other",
           "description": "Ratio"
         },
-        "f0": {
+        "base": {
           "value": "16",
           "type": "other",
-          "description": "Fundamental frequency"
+          "description": "Fundamental frequency, base font size"
         },
-        "n": {
+        "steps": {
           "value": "5",
           "type": "other",
-          "description": "Number of notes"
-        },
+          "description": "Steps from the base font size to double the value, for example: 16, 18.5, 21, 24.5, 28, 32"
+        }
+      },
+      "const": {
         "grid": {
           "value": "4",
           "type": "other"
         }
       },
-      "factor": {
+      "lineHeightMultiplier": {
         "xs": {
           "value": "1",
           "type": "other"
