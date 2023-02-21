@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
 import { Story, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button, Chip } from '../..'
+import { Typography, EdsProvider, Button, Chip, Card } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
@@ -425,6 +426,142 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
     </>
   )
 }
+
+const CountryTemplate = styled.div`
+  display: grid;
+  grid-template-columns: 370px 1fr;
+  > img {
+    max-width: 100%;
+  }
+  > div {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    > h3 {
+      margin-block-end: 16px;
+    }
+    > p {
+      margin-block-end: 8px;
+      &:last-child {
+        align-self: flex-end;
+        margin-top: auto;
+        margin-block-end: 0;
+      }
+    }
+  }
+`
+
+export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
+  type CountryName = {
+    common: string
+    official: string
+  }
+  type Flag = {
+    png: string
+    svg: string
+    alt: string
+  }
+  type Country = {
+    name: CountryName
+    population: number
+    capital: string[]
+    flags: Flag
+  }
+
+  const [options, setOptions] = useState<Country[]>([])
+  const [selectedItem, setSelectedItem] = useState<Country>()
+  const [searchInput, setSearchInput] = useState<string>('')
+  const debounce = useRef<ReturnType<typeof setTimeout>>(null)
+
+  const onChange = (changes: AutocompleteChanges<Country>) => {
+    setSelectedItem(changes.selectedItems[0])
+  }
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+    console.log(searchInput)
+    if (searchInput.length < 2) return setOptions([])
+
+    fetch(`https://restcountries.com/v3.1/name/${searchInput}`, { signal })
+      .then((r) => {
+        if (!r.ok) {
+          throw Error(r.statusText)
+        }
+        return r.json()
+      })
+      .then((countries: Country[]) => {
+        countries && setOptions(countries)
+      })
+      .catch((err: Error) => {
+        console.warn(`Warning: ${err.message}`)
+        setOptions([])
+      })
+    return () => {
+      abortController.abort()
+    }
+  }, [searchInput])
+
+  useEffect(() => {
+    return () => {
+      if (debounce.current) clearTimeout(debounce.current)
+    }
+  }, [])
+
+  const search = (input: string) => {
+    if (input.length < 2) return setSearchInput('')
+    if (debounce.current) clearTimeout(debounce.current)
+
+    debounce.current = setTimeout(() => {
+      setSearchInput(input)
+    }, 500)
+  }
+
+  return (
+    <>
+      <Autocomplete
+        label="Search countries"
+        onInputChange={search}
+        options={options}
+        optionsFilter={() => true}
+        optionLabel={(opt) => `${opt.name.common}`}
+        onOptionsChange={onChange}
+        selectedOptions={[selectedItem]}
+        autoWidth
+        multiline
+      />
+      {selectedItem && (
+        <Card elevation="raised" style={{ overflow: 'hidden' }}>
+          <CountryTemplate>
+            <img src={selectedItem.flags.svg} alt={selectedItem.flags.alt} />
+            <div>
+              <Typography variant="h3">
+                {selectedItem?.name.official}
+              </Typography>
+              <Typography variant="body_short">
+                <b>Capital:</b> {selectedItem.capital[0]}
+              </Typography>
+              <Typography variant="body_short">
+                <b>Population:</b>{' '}
+                {new Intl.NumberFormat().format(selectedItem.population)}
+              </Typography>
+              <Typography variant="body_short_italic">
+                source:{' '}
+                <Typography
+                  link
+                  href="https://restcountries.com/"
+                  target="_blank"
+                >
+                  restcountries.com
+                </Typography>
+              </Typography>
+            </div>
+          </CountryTemplate>
+        </Card>
+      )}
+    </>
+  )
+}
+Async.storyName = 'Async search autocomplete'
 
 type MyFormValues = {
   origin: string | null
