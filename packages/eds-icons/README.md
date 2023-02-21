@@ -57,7 +57,7 @@ import { save } from '@equinor/eds-icons'
 
 #### Icon names
 
-Use [EDS Assets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) or our [icon preview in Storybook](https://eds-storybook-react.azurewebsites.net/?path=/story/icons--preview) for icon names. Spaces in icon names are replaced with underscores. 
+Use [EDS Assets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) or our [icon preview in Storybook](https://s478stedsstorybookdev.z16.web.core.windows.net/?path=/docs/icons--preview) for icon names. Spaces in icon names are replaced with underscores. 
 
 `star-filled -> star_filled`.
 
