@@ -432,21 +432,15 @@ const CountryTemplate = styled.div`
   grid-template-columns: 370px 1fr;
   > img {
     max-width: 100%;
+    border-inline-end: 2px solid rgb(247 247 247);
   }
-  > div {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    > h3 {
-      margin-block-end: 16px;
+  div {
+    > h2 {
+      margin-block-end: 24px;
     }
-    > p {
-      margin-block-end: 8px;
-      &:last-child {
-        align-self: flex-end;
-        margin-top: auto;
-        margin-block-end: 0;
-      }
+    > p:last-child {
+      align-self: flex-end;
+      margin-block-start: auto;
     }
   }
 `
@@ -469,6 +463,7 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
   }
 
   const [options, setOptions] = useState<Country[]>([])
+  const [loading, setLoading] = useState(false)
   const [selectedItem, setSelectedItem] = useState<Country>()
   const [searchInput, setSearchInput] = useState<string>('')
   const debounce = useRef<ReturnType<typeof setTimeout>>(null)
@@ -479,8 +474,9 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
   useEffect(() => {
     const abortController = new AbortController()
     const signal = abortController.signal
-    console.log(searchInput)
+
     if (searchInput.length < 2) return setOptions([])
+    setLoading(true)
 
     fetch(`https://restcountries.com/v3.1/name/${searchInput}`, { signal })
       .then((r) => {
@@ -491,10 +487,12 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
       })
       .then((countries: Country[]) => {
         countries && setOptions(countries)
+        setLoading(false)
       })
       .catch((err: Error) => {
         console.warn(`Warning: ${err.message}`)
         setOptions([])
+        setLoading(false)
       })
     return () => {
       abortController.abort()
@@ -513,7 +511,7 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
 
     debounce.current = setTimeout(() => {
       setSearchInput(input)
-    }, 500)
+    }, 400)
   }
 
   return (
@@ -526,6 +524,7 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
         optionLabel={(opt) => `${opt.name.common}`}
         onOptionsChange={onChange}
         selectedOptions={[selectedItem]}
+        loading={loading}
         autoWidth
         multiline
       />
@@ -533,17 +532,30 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
         <Card elevation="raised" style={{ overflow: 'hidden' }}>
           <CountryTemplate>
             <img src={selectedItem.flags.svg} alt={selectedItem.flags.alt} />
-            <div>
-              <Typography variant="h3">
-                {selectedItem?.name.official}
+            <div
+              style={{
+                padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Typography variant="h2" style={{ fontWeight: '600' }}>
+                {selectedItem.name.official}
               </Typography>
-              <Typography variant="body_short">
-                <b>Capital:</b> {selectedItem.capital[0]}
-              </Typography>
-              <Typography variant="body_short">
-                <b>Population:</b>{' '}
-                {new Intl.NumberFormat().format(selectedItem.population)}
-              </Typography>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                <div>
+                  <Typography variant="body_short">CAPITAL</Typography>
+                  <Typography variant="h3" as="p" style={{ fontWeight: '500' }}>
+                    {selectedItem.capital ? selectedItem.capital[0] : 'N/A'}
+                  </Typography>
+                </div>
+                <div>
+                  <Typography variant="body_short">POPULATION</Typography>
+                  <Typography variant="h3" as="p" style={{ fontWeight: '500' }}>
+                    {new Intl.NumberFormat().format(selectedItem.population)}
+                  </Typography>
+                </div>
+              </div>
               <Typography variant="body_short_italic">
                 source:{' '}
                 <Typography
