@@ -22,6 +22,7 @@ import { useEds } from '../EdsProvider'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
+import { Progress } from '../Progress'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
@@ -154,6 +155,8 @@ export type AutocompleteProps<T> = {
   meta?: string
   /** Disabled state */
   disabled?: boolean
+  /** Loading state */
+  loading?: boolean
   /** Read Only */
   readOnly?: boolean
   /** Hide clear button even when items are selected */
@@ -200,6 +203,7 @@ function AutocompleteInner<T>(
     style,
     disabled = false,
     readOnly = false,
+    loading = false,
     hideClearButton = false,
     onOptionsChange,
     onInputChange,
@@ -660,6 +664,7 @@ function AutocompleteInner<T>(
             rightAdornmentsWidth={24 * 2 + 8 + 8}
             rightAdornments={
               <>
+                {loading && <Progress.Circular size={16} />}
                 {showClearButton && (
                   <StyledButton
                     variant="ghost_icon"
