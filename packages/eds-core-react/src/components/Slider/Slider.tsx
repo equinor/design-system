@@ -235,7 +235,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
 ) {
   const isRangeSlider = Array.isArray(value)
   const parsedValue: number[] = isRangeSlider ? value : [value]
-  //if (isRangeSlider) if (value[0] > value[1]) parsedValue.reverse()
   const [initalValue, setInitalValue] = useState<number[]>(parsedValue)
   const [sliderValue, setSliderValue] = useState<number[]>(parsedValue)
   const [mousePressed, setMousePressed] = useState<boolean>(false)
