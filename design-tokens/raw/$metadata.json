@@ -10,15 +10,14 @@
     "readonly/spacing",
     "readonly/tight",
     "semantic/semantic",
+    "semantic/typography",
     "semantic/shape",
-    "semantic/actions",
-    "semantic/palettes",
-    "semantic/colors",
-    "theme/default",
-    "theme/comfortable",
-    "theme/compact",
+    "semantic/categories/actions",
     "theme/light",
     "theme/dark",
+    "theme/defaultDensity",
+    "theme/comfortable",
+    "theme/compact",
     "component/button"
   ]
 }

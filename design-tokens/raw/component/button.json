@@ -8,24 +8,22 @@
               "value": "0",
               "type": "borderWidth"
             }
-          }
-        },
-        "allStyles": {
+          },
           "disabled": {
             "backgroundColor": {
-              "value": "silver",
+              "value": "{eds.semantic.colors.actions.allVariants.filled.disabled.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "gray",
+              "value": "{eds.semantic.colors.actions.allVariants.filled.disabled.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.allVariants.allStyles.disabled.textColor}",
+              "value": "{eds.semantic.colors.actions.allVariants.filled.disabled.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.allVariants.filled.disabled.borderColor}",
               "type": "color",
               "description": "none"
             }
@@ -37,6 +35,25 @@
               "value": "1",
               "type": "borderWidth"
             }
+          },
+          "disabled": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.outlined.disabled.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.outlined.disabled.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.outlined.disabled.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.outlined.disabled.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
           }
         },
         "ghost": {
@@ -45,6 +62,25 @@
               "value": "0",
               "type": "borderWidth"
             }
+          },
+          "disabled": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.ghost.disabled.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.ghost.disabled.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.ghost.disabled.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.allVariants.ghost.disabled.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
           }
         }
       },
@@ -52,59 +88,57 @@
         "filled": {
           "default": {
             "backgroundColor": {
-              "value": "maroon",
+              "value": "{eds.semantic.colors.actions.primary.filled.default.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "pink",
+              "value": "{eds.semantic.colors.actions.primary.filled.default.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.filled.default.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.filled.default.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.primary.filled.default.borderColor}",
               "type": "color",
               "description": "none"
             }
           },
           "hover": {
             "backgroundColor": {
-              "value": "violet",
+              "value": "{eds.semantic.colors.actions.primary.filled.hover.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "pink",
+              "value": "{eds.semantic.colors.actions.primary.filled.hover.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.filled.hover.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.filled.hover.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.primary.filled.hover.borderColor}",
               "type": "color",
               "description": "none"
             }
           },
           "loading": {
             "backgroundColor": {
-              "value": "#008aff",
+              "value": "{eds.semantic.colors.actions.primary.filled.default.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "orange",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "value": "{eds.semantic.colors.actions.primary.filled.default.textColor}",
+              "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.filled.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "value": "{eds.semantic.colors.actions.primary.filled.default.iconColor}",
+              "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.primary.filled.default.borderColor}",
               "type": "color",
               "description": "none"
             }
@@ -113,118 +147,474 @@
         "outlined": {
           "default": {
             "backgroundColor": {
-              "value": "#FFF0",
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "pink",
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.outlined.default.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "{eds.button.primary.outlined.default.textColor}",
-              "type": "color"
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.borderColor}",
+              "type": "color",
+              "description": "none"
             }
           },
           "hover": {
             "backgroundColor": {
-              "value": "violet",
+              "value": "{eds.semantic.colors.actions.primary.outlined.hover.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "pink",
+              "value": "{eds.semantic.colors.actions.primary.outlined.hover.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.outlined.hover.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.outlined.hover.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "{eds.button.primary.outlined.hover.textColor}",
-              "type": "color"
+              "value": "{eds.semantic.colors.actions.primary.outlined.hover.borderColor}",
+              "type": "color",
+              "description": "none"
             }
           },
           "loading": {
             "backgroundColor": {
-              "value": "lime",
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "deeppink",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.textColor}",
+              "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.outlined.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.iconColor}",
+              "type": "color"
             },
             "borderColor": {
-              "value": "{eds.button.primary.outlined.loading.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.outlined.default.borderColor}",
               "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "description": "none"
             }
           }
         },
         "ghost": {
           "default": {
             "backgroundColor": {
-              "value": "FFFF",
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "pink",
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.ghost.default.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.borderColor}",
               "type": "color",
               "description": "none"
             }
           },
           "hover": {
             "backgroundColor": {
-              "value": "violet",
+              "value": "{eds.semantic.colors.actions.primary.ghost.hover.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "pink",
+              "value": "{eds.semantic.colors.actions.primary.ghost.hover.textColor}",
               "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.ghost.hover.textColor}",
+              "value": "{eds.semantic.colors.actions.primary.ghost.hover.iconColor}",
               "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.primary.ghost.hover.borderColor}",
               "type": "color",
               "description": "none"
             }
           },
           "loading": {
             "backgroundColor": {
-              "value": "lime",
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.backgroundColor}",
               "type": "color"
             },
             "textColor": {
-              "value": "yellow",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.textColor}",
+              "type": "color"
             },
             "iconColor": {
-              "value": "{eds.button.primary.ghost.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.iconColor}",
+              "type": "color"
             },
             "borderColor": {
-              "value": "#F000",
+              "value": "{eds.semantic.colors.actions.primary.ghost.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "filled": {
+          "default": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.hover.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.hover.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.hover.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.hover.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.filled.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "outlined": {
+          "default": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.hover.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.hover.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.hover.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.hover.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.outlined.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "ghost": {
+          "default": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.hover.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.hover.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.hover.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.hover.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.secondary.ghost.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        }
+      },
+      "danger": {
+        "filled": {
+          "default": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.hover.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.hover.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.hover.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.hover.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.filled.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "outlined": {
+          "default": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.hover.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.hover.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.hover.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.hover.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.outlined.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          }
+        },
+        "ghost": {
+          "default": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.hover.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.hover.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.hover.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.hover.borderColor}",
+              "type": "color",
+              "description": "none"
+            }
+          },
+          "loading": {
+            "backgroundColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.backgroundColor}",
+              "type": "color"
+            },
+            "textColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.textColor}",
+              "type": "color"
+            },
+            "iconColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.iconColor}",
+              "type": "color"
+            },
+            "borderColor": {
+              "value": "{eds.semantic.colors.actions.danger.ghost.default.borderColor}",
               "type": "color",
               "description": "none"
             }
@@ -267,372 +657,6 @@
             "height": "{eds.semantic.sizing.icon.default}"
           },
           "type": "composition"
-        }
-      },
-      "secondary": {
-        "filled": {
-          "default": {
-            "backgroundColor": {
-              "value": "maroon",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.filled.default.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "hover": {
-            "backgroundColor": {
-              "value": "violet",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.filled.hover.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "loading": {
-            "backgroundColor": {
-              "value": "#008aff",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "orange",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.filled.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          }
-        },
-        "outlined": {
-          "default": {
-            "backgroundColor": {
-              "value": "#FFF0",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.outlined.default.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "{eds.button.primary.outlined.default.textColor}",
-              "type": "color"
-            }
-          },
-          "hover": {
-            "backgroundColor": {
-              "value": "violet",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.outlined.hover.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "{eds.button.primary.outlined.hover.textColor}",
-              "type": "color"
-            }
-          },
-          "loading": {
-            "backgroundColor": {
-              "value": "lime",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "deeppink",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.outlined.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "borderColor": {
-              "value": "{eds.button.primary.outlined.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            }
-          }
-        },
-        "ghost": {
-          "default": {
-            "backgroundColor": {
-              "value": "FFFF",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.ghost.default.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "hover": {
-            "backgroundColor": {
-              "value": "violet",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.ghost.hover.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "loading": {
-            "backgroundColor": {
-              "value": "lime",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "yellow",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.ghost.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          }
-        }
-      },
-      "danger": {
-        "filled": {
-          "default": {
-            "backgroundColor": {
-              "value": "maroon",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.filled.default.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "hover": {
-            "backgroundColor": {
-              "value": "violet",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.filled.hover.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "loading": {
-            "backgroundColor": {
-              "value": "#008aff",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "orange",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.filled.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          }
-        },
-        "outlined": {
-          "default": {
-            "backgroundColor": {
-              "value": "#FFF0",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.outlined.default.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "{eds.button.primary.outlined.default.textColor}",
-              "type": "color"
-            }
-          },
-          "hover": {
-            "backgroundColor": {
-              "value": "violet",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.outlined.hover.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "{eds.button.primary.outlined.hover.textColor}",
-              "type": "color"
-            }
-          },
-          "loading": {
-            "backgroundColor": {
-              "value": "lime",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "deeppink",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.outlined.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "borderColor": {
-              "value": "{eds.button.primary.outlined.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            }
-          }
-        },
-        "ghost": {
-          "default": {
-            "backgroundColor": {
-              "value": "FFFF",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.ghost.default.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "hover": {
-            "backgroundColor": {
-              "value": "violet",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "pink",
-              "type": "color"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.ghost.hover.textColor}",
-              "type": "color"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          },
-          "loading": {
-            "backgroundColor": {
-              "value": "lime",
-              "type": "color"
-            },
-            "textColor": {
-              "value": "yellow",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "iconColor": {
-              "value": "{eds.button.primary.ghost.loading.textColor}",
-              "type": "color",
-              "description": "TODO: Solve how to reference sub-component, possibly using the asset token type"
-            },
-            "borderColor": {
-              "value": "#F000",
-              "type": "color",
-              "description": "none"
-            }
-          }
         }
       }
     }

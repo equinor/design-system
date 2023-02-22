@@ -25,7 +25,7 @@
           "description": "Ratio"
         },
         "base": {
-          "value": "16",
+          "value": "{eds.theme.typeScale.base}",
           "type": "other",
           "description": "Fundamental frequency, base font size"
         },
@@ -36,8 +36,12 @@
         }
       },
       "const": {
-        "grid": {
+        "gridInterval": {
           "value": "4",
+          "type": "other"
+        },
+        "roundingInterval": {
+          "value": "0.5",
           "type": "other"
         }
       },

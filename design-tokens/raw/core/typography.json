@@ -13,43 +13,43 @@
       },
       "fontSize": {
         "0": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(-3/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(-3/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "1": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(-2/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(-2/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "2": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(-1/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(-1/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "3": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(0/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(0/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "4": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(1/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(1/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "5": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(2/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(2/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "6": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(3/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(3/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "7": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(4/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(4/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "8": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(5/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(5/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         },
         "9": {
-          "value": "5*roundTo(({eds.core.typeScale.base}*{eds.core.typeScale.ratio}^(6/{eds.core.typeScale.steps})/5),1)",
+          "value": "5*roundTo(({eds.theme.typeScale.base}*{eds.core.typeScale.ratio}^(6/{eds.core.typeScale.steps})/5),1)",
           "type": "fontSizes"
         }
       },
@@ -549,208 +549,208 @@
       "lineHeight": {
         "tight": {
           "0": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "10.5/12"
           },
           "1": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "12/12"
           },
           "2": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "14/16"
           },
           "3": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "16/16"
           },
           "4": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "18.5/20"
           },
           "5": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "21/24"
           },
           "6": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "24.5/28"
           },
           "7": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "28/28"
           },
           "8": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "32/32"
           },
           "9": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "37/40"
           }
         },
         "compressed": {
           "0": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "10.5/12"
           },
           "1": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "12/16"
           },
           "2": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "14/16"
           },
           "3": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "16/20"
           },
           "4": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "18.5/24"
           },
           "5": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "21/24"
           },
           "6": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "24.5/28"
           },
           "7": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "28/32"
           },
           "8": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "32/36"
           },
           "9": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.sm} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "37/44"
           }
         },
         "comfortable": {
           "0": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "10.5/16"
           },
           "1": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "12/16"
           },
           "2": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "14/16"
           },
           "3": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "16/20"
           },
           "4": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "18.5/24"
           },
           "5": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "21/28"
           },
           "6": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "24.5/32"
           },
           "7": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "28/36"
           },
           "8": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "32/40"
           },
           "9": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.md} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "37/48"
           }
         },
         "relaxed": {
           "0": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "10.5/16"
           },
           "1": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "12/20"
           },
           "2": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "14/20"
           },
           "3": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "16/24"
           },
           "4": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "18.5/28"
           },
           "5": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "21/32"
           },
           "6": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "24.5/40"
           },
           "7": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "28/44"
           },
           "8": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "32/48"
           },
           "9": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.lg} / {eds.core.const.gridInterval})",
             "type": "lineHeights",
             "description": "37/56"
           }
@@ -802,44 +802,44 @@
         },
         "snappedToGrid": {
           "0": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.0} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.0} / {eds.core.const.gridInterval})",
             "type": "other",
             "description": "The cap height of the Equinor font in typescale 0, rounded to the nearest eds.core.grid line"
           },
           "1": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.1} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.1} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "2": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.2} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.2} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "3": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.3} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.3} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "4": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.4} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.4} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "5": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.5} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.5} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "6": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.6} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.6} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "7": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.7} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.7} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "8": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.8} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.8} / {eds.core.const.gridInterval})",
             "type": "other"
           },
           "9": {
-            "value": "{eds.core.const.grid} * ceil({eds.core.capHeight.rounded.9} / {eds.core.const.grid})",
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.capHeight.rounded.9} / {eds.core.const.gridInterval})",
             "type": "other"
           }
         }

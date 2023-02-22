@@ -1,1 +1,12 @@
-{}
+{
+  "eds": {
+    "theme": {
+      "typeScale": {
+        "base": {
+          "value": "12",
+          "type": "other"
+        }
+      }
+    }
+  }
+}

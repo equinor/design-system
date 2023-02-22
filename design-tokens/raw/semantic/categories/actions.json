@@ -4,22 +4,62 @@
       "colors": {
         "actions": {
           "allVariants": {
-            "allStyles": {
+            "filled": {
               "disabled": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.disabled.default}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.theme.colors.disabled.onDisabled}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.theme.colors.disabled.onDisabled}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "#fff0",
+                  "type": "color"
+                }
+              }
+            },
+            "outlined": {
+              "disabled": {
+                "backgroundColor": {
+                  "value": "#fff0",
+                  "type": "color"
+                },
+                "textColor": {
+                  "value": "{eds.theme.colors.disabled.onDisabled}",
+                  "type": "color"
+                },
+                "iconColor": {
+                  "value": "{eds.theme.colors.disabled.onDisabled}",
+                  "type": "color"
+                },
+                "borderColor": {
+                  "value": "{eds.theme.colors.disabled.muted}",
+                  "type": "color"
+                }
+              }
+            },
+            "ghost": {
+              "disabled": {
+                "backgroundColor": {
+                  "value": "#fff0",
+                  "type": "color"
+                },
+                "textColor": {
+                  "value": "{eds.theme.colors.disabled.onDisabled}",
+                  "type": "color"
+                },
+                "iconColor": {
+                  "value": "{eds.theme.colors.disabled.onDisabled}",
+                  "type": "color"
+                },
+                "borderColor": {
+                  "value": "#fff0",
                   "type": "color"
                 }
               }
@@ -29,37 +69,37 @@
             "filled": {
               "default": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "{eds.theme.colors.primary.default}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.primary.onPrimary}",
+                  "value": "{eds.theme.colors.primary.onPrimary}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.primary.onPrimary}",
+                  "value": "{eds.theme.colors.primary.onPrimary}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "#fff0",
                   "type": "color"
                 }
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "{eds.theme.colors.primary.muted}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.primary.onPrimary}",
+                  "value": "{eds.theme.colors.primary.onPrimary}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.primary.onPrimary}",
+                  "value": "{eds.theme.colors.primary.onPrimary}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "#fff0",
                   "type": "color"
                 }
               }
@@ -71,33 +111,33 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "{eds.theme.colors.primary.default}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "{eds.theme.colors.primary.default}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "{eds.theme.colors.primary.default}",
                   "type": "color"
                 }
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.primary.subtle}",
+                  "value": "{eds.theme.colors.primary.subtle}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "{eds.theme.colors.primary.muted}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "{eds.theme.colors.primary.muted}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "{eds.theme.colors.primary.muted}",
                   "type": "color"
                 }
               }
@@ -109,11 +149,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "{eds.theme.colors.primary.default}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.primary.default}",
+                  "value": "{eds.theme.colors.primary.default}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -123,15 +163,15 @@
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.primary.subtle}",
+                  "value": "{eds.theme.colors.primary.subtle}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "{eds.theme.colors.primary.muted}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.primary.muted}",
+                  "value": "{eds.theme.colors.primary.muted}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -145,37 +185,37 @@
             "filled": {
               "default": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "{eds.theme.colors.secondary.default}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.secondary.onSecondary}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.secondary.onSecondary}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "#fff0",
                   "type": "color"
                 }
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "{eds.theme.colors.secondary.muted}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.secondary.onSecondary}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.secondary.onSecondary}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "#fff0",
                   "type": "color"
                 }
               }
@@ -187,33 +227,33 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "{eds.theme.colors.secondary.default}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "{eds.theme.colors.secondary.default}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "{eds.theme.colors.secondary.default}",
                   "type": "color"
                 }
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.secondary.subtle}",
+                  "value": "{eds.theme.colors.secondary.subtle}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "{eds.theme.colors.secondary.muted}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "{eds.theme.colors.secondary.muted}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "{eds.theme.colors.secondary.muted}",
                   "type": "color"
                 }
               }
@@ -225,11 +265,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "{eds.theme.colors.secondary.default}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.secondary.default}",
+                  "value": "{eds.theme.colors.secondary.default}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -239,15 +279,15 @@
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.secondary.subtle}",
+                  "value": "{eds.theme.colors.secondary.subtle}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "{eds.theme.colors.secondary.muted}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.secondary.muted}",
+                  "value": "{eds.theme.colors.secondary.muted}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -261,37 +301,37 @@
             "filled": {
               "default": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.danger.default}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.theme.colors.danger.onDanger}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.theme.colors.danger.onDanger}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "#fff0",
                   "type": "color"
                 }
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "{eds.theme.colors.danger.muted}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.theme.colors.danger.onDanger}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.theme.colors.danger.onDanger}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "#fff0",
                   "type": "color"
                 }
               }
@@ -303,33 +343,33 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.danger.default}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.danger.default}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.danger.default}",
                   "type": "color"
                 }
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.danger.subtle}",
+                  "value": "{eds.theme.colors.danger.subtle}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "{eds.theme.colors.danger.muted}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "{eds.theme.colors.danger.muted}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "{eds.theme.colors.danger.muted}",
                   "type": "color"
                 }
               }
@@ -341,11 +381,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.danger.default}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.theme.colors.danger.default}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -355,15 +395,15 @@
               },
               "hover": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.danger.subtle}",
+                  "value": "{eds.theme.colors.danger.subtle}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "{eds.theme.colors.danger.muted}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.muted}",
+                  "value": "{eds.theme.colors.danger.muted}",
                   "type": "color"
                 },
                 "borderColor": {

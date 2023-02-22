@@ -15,8 +15,7 @@
       "component/button": "enabled",
       "semantic/shape": "enabled",
       "core/border": "enabled",
-      "semantic/colors": "disabled",
-      "semantic/palettes": "disabled"
+      "theme/defaultDensity": "disabled"
     },
     "$figmaStyleReferences": {}
   },
@@ -32,8 +31,26 @@
       "component/button": "enabled",
       "semantic/shape": "source",
       "core/border": "source",
-      "semantic/colors": "disabled",
-      "semantic/palettes": "disabled"
+      "theme/defaultDensity": "disabled"
+    },
+    "$figmaStyleReferences": {}
+  },
+  {
+    "id": "7e04e75cf92cfd20b93b16b88b2cc3769ea0f815",
+    "name": "defaultLight",
+    "selectedTokenSets": {
+      "component/button": "enabled",
+      "core/const": "enabled",
+      "core/border": "enabled",
+      "core/typography": "enabled",
+      "core/sizing": "enabled",
+      "core/spacing": "enabled",
+      "core/color": "enabled",
+      "semantic/semantic": "enabled",
+      "semantic/shape": "enabled",
+      "semantic/categories/actions": "enabled",
+      "theme/light": "enabled",
+      "theme/defaultDensity": "enabled"
     },
     "$figmaStyleReferences": {}
   }
