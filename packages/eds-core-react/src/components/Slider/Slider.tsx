@@ -49,24 +49,32 @@ const wrapperGrid = css`
 type RangeWrapperProps = {
   valA: number
   valB: number
-} & Pick<SliderProps, 'min' | 'max' | 'disabled'>
+  $min: number
+  $max: number
+} & Pick<SliderProps, 'disabled'>
 
-const RangeWrapper = styled.div<RangeWrapperProps>`
-  --a: ${({ valA }) => valA};
-  --b: ${({ valB }) => valB};
-  --min: ${({ min }) => min};
-  --max: ${({ max }) => max};
+const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
+  ({ $min, $max, valA, valB, disabled, style }) => ({
+    style: {
+      '--a': valA,
+      '--b': valB,
+      '--min': $min,
+      '--max': $max,
+      '--background': disabled
+        ? track.entities.indicator.states.disabled.background
+        : track.entities.indicator.background,
+      ...style,
+    },
+  }),
+)<RangeWrapperProps>`
   --dif: calc(var(--max) - var(--min));
   --realWidth: calc(100% - 12px);
   ${wrapperGrid}
   ${fakeTrackBg}
   &::before,
   &::after {
-    ${trackFill}
-    background: ${({ disabled }) =>
-      disabled
-        ? track.entities.indicator.states.disabled.background
-        : track.entities.indicator.background};
+    ${trackFill};
+    background: var(--background);
   }
   /** Faking the active region of the slider */
   &::before {
@@ -95,22 +103,31 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
   }
 `
 
-type WrapperProps = Pick<SliderProps, 'min' | 'max' | 'disabled' | 'value'>
+type WrapperProps = {
+  $min: number
+  $max: number
+} & Pick<SliderProps, 'disabled' | 'value'>
 
-const Wrapper = styled.div<WrapperProps>`
-  --min: ${({ min }) => min};
-  --max: ${({ max }) => max};
+const Wrapper = styled.div.attrs<WrapperProps>(
+  ({ $min, $max, value, disabled, style }) => ({
+    style: {
+      '--min': $min,
+      '--max': $max,
+      '--value': value,
+      '--background': disabled
+        ? track.entities.indicator.states.disabled.background
+        : track.entities.indicator.background,
+      ...style,
+    },
+  }),
+)<WrapperProps>`
   --dif: calc(var(--max) - var(--min));
-  --value: ${({ value }) => value};
   --realWidth: calc(100% - 12px);
   ${wrapperGrid}
   ${fakeTrackBg}
   &::after {
     ${trackFill}
-    background: ${({ disabled }) =>
-      disabled
-        ? track.entities.indicator.states.disabled.background
-        : track.entities.indicator.background}
+    background: var(--background)
   }
   &::after {
     margin-right: calc(
@@ -220,6 +237,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const parsedValue: number[] = isRangeSlider ? value : [value]
   const [initalValue, setInitalValue] = useState<number[]>(parsedValue)
   const [sliderValue, setSliderValue] = useState<number[]>(parsedValue)
+  const [mousePressed, setMousePressed] = useState<boolean>(false)
 
   useEffect(() => {
     if (isRangeSlider) {
@@ -245,6 +263,18 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
       newValue[valueArrIdx] = changedValue
+
+      //Prevent min/max values from crossing eachother
+      if (valueArrIdx === 0 && newValue[0] >= newValue[1]) {
+        newValue[0] = newValue[1]
+        maxRange.current?.focus()
+      }
+
+      if (valueArrIdx === 1 && newValue[1] <= newValue[0]) {
+        newValue[1] = newValue[0]
+        minRange.current?.focus()
+      }
+
       setSliderValue(newValue)
       if (onChange) {
         // Callback for provided onChange func
@@ -277,26 +307,43 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
 
   const findClosestRange = (event: MouseEvent) => {
     const target = event.target as HTMLOutputElement | HTMLInputElement
-    if (target.type === 'output') {
+    if (target.type === 'output' || mousePressed) {
       return
     }
     const bounds = target.getBoundingClientRect()
     const x = event.clientX - bounds.left
     const inputWidth = minRange.current.offsetWidth
-    const minValue = minRange.current.value
-    const maxValue = maxRange.current.value
+    const minValue = parseFloat(minRange.current.value)
+    const maxValue = parseFloat(maxRange.current.value)
     const diff = max - min
 
     const normX = (x / inputWidth) * diff + min
 
-    const maxX = Math.abs(normX - parseFloat(maxValue))
-    const minX = Math.abs(normX - parseFloat(minValue))
+    const maxX = Math.abs(normX - maxValue)
+    const minX = Math.abs(normX - minValue)
     if (minX > maxX) {
       minRange.current.style.zIndex = '10'
       maxRange.current.style.zIndex = '20'
     } else {
       minRange.current.style.zIndex = '20'
       maxRange.current.style.zIndex = '10'
+    }
+    //special cases where both thumbs are all the way to the left or right
+    if (minValue === maxValue && minValue === min) {
+      minRange.current.style.zIndex = '10'
+      maxRange.current.style.zIndex = '20'
+    }
+    if (minValue === maxValue && maxValue === max) {
+      minRange.current.style.zIndex = '20'
+      maxRange.current.style.zIndex = '10'
+    }
+  }
+
+  const handleDragging = (e: MouseEvent) => {
+    if (e.type === 'mousedown') {
+      setMousePressed(true)
+    } else {
+      setMousePressed(false)
     }
   }
 
@@ -326,10 +373,12 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           aria-labelledby={getAriaLabelledby()}
           valA={sliderValue[0]}
           valB={sliderValue[1]}
-          max={max}
-          min={min}
+          $max={max}
+          $min={min}
           disabled={disabled}
           onMouseMove={findClosestRange}
+          onMouseDown={handleDragging}
+          onMouseUp={handleDragging}
         >
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
@@ -385,8 +434,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         <Wrapper
           {...rest}
           ref={ref}
-          max={max}
-          min={min}
+          $max={max}
+          $min={min}
           value={sliderValue[0]}
           disabled={disabled}
         >
