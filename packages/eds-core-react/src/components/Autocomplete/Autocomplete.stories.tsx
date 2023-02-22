@@ -471,12 +471,13 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
   const onChange = (changes: AutocompleteChanges<Country>) => {
     setSelectedItem(changes.selectedItems[0])
   }
+
   useEffect(() => {
+    if (searchInput.length < 2) return setOptions([])
+
+    setLoading(true)
     const abortController = new AbortController()
     const signal = abortController.signal
-
-    if (searchInput.length < 2) return setOptions([])
-    setLoading(true)
 
     fetch(`https://restcountries.com/v3.1/name/${searchInput}`, { signal })
       .then((r) => {

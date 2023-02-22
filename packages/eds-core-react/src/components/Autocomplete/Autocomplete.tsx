@@ -155,7 +155,7 @@ export type AutocompleteProps<T> = {
   meta?: string
   /** Disabled state */
   disabled?: boolean
-  /** Loading state */
+  /** Set loading state (shows a spinner in the right side of the input field) */
   loading?: boolean
   /** Read Only */
   readOnly?: boolean
@@ -170,6 +170,9 @@ export type AutocompleteProps<T> = {
    * changes.selectedItems gives the selected items
    */
   onOptionsChange?: (changes: AutocompleteChanges<T>) => void
+  /** Callback for input changes
+   * Returns input value
+   */
   onInputChange?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
