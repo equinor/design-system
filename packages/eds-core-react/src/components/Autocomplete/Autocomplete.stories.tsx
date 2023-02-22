@@ -388,6 +388,7 @@ AutoWidth.args = {
 }
 
 export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
+  type LoadingState = 'notLoaded' | 'loading' | 'loaded'
   type Photo = {
     albumId: number
     id: number
@@ -396,8 +397,15 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
     thumbnailUrl: string
   }
   const [data, setData] = useState<Array<string>>([])
+  const [loadingState, setLoadingState] = useState<LoadingState>('notLoaded')
+
+  const initialize = () => {
+    if (loadingState === 'notLoaded') setLoadingState('loading')
+  }
 
   useEffect(() => {
+    if (loadingState !== 'loading') return
+
     const abortController = new AbortController()
     const signal = abortController.signal
 
@@ -406,22 +414,30 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
       .then((d: Photo[]) => {
         const parsed = d.map((x) => x.title.substring(0, 30))
         setData(parsed)
+        setLoadingState('loaded')
       })
       .catch((err: Error) => {
         console.warn(`Warning: ${err.message}`)
+        setLoadingState('notLoaded')
       })
     return () => {
       abortController.abort()
     }
-  }, [])
+  }, [loadingState])
 
   return (
     <>
       <Autocomplete
-        label="Select multiple items"
+        label={
+          loadingState === 'loaded'
+            ? 'Select multiple items'
+            : 'Focus the input to load data'
+        }
+        loading={loadingState === 'loading'}
         options={data}
         multiple
         clearSearchOnChange={false}
+        onFocus={initialize}
       />
     </>
   )
