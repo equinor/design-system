@@ -434,14 +434,13 @@ const CountryTemplate = styled.div`
     max-width: 100%;
     border-inline-end: 2px solid rgb(247 247 247);
   }
-  div {
-    > h2 {
-      margin-block-end: 24px;
-    }
-    > p:last-child {
-      align-self: flex-end;
-      margin-block-start: auto;
-    }
+
+  h2 {
+    margin-block-end: 24px;
+  }
+  p:last-child {
+    align-self: flex-end;
+    margin-block-start: auto;
   }
 `
 
