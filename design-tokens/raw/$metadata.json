@@ -18,6 +18,7 @@
     "theme/defaultDensity",
     "theme/comfortable",
     "theme/compact",
-    "component/button"
+    "component/button",
+    "theme/default"
   ]
 }

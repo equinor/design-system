@@ -72,6 +72,103 @@
         }
       },
       "typography": {
+        "trimmed": {
+          "0": {
+            "value": {
+              "fontFamily": "{eds.core.fontFamily.default}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.0}",
+              "fontSize": "{eds.core.fontSize.0}",
+              "paragraphSpacing": "0"
+            },
+            "type": "typography"
+          },
+          "1": {
+            "value": {
+              "fontFamily": "{eds.core.fontFamily.default}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.1}",
+              "fontSize": "{eds.core.fontSize.1}",
+              "paragraphSpacing": "0",
+              "letterSpacing": ""
+            },
+            "type": "typography"
+          },
+          "2": {
+            "value": {
+              "fontFamily": "{eds.core.fontFamily.default}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.2}",
+              "fontSize": "{eds.core.fontSize.2}",
+              "paragraphSpacing": "0"
+            },
+            "type": "typography"
+          },
+          "3": {
+            "value": {
+              "fontFamily": "{eds.core.fontFamily.default}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.3}",
+              "fontSize": "{eds.core.fontSize.3}",
+              "paragraphSpacing": "{eds.core.paragraphSpacing.2}"
+            },
+            "type": "typography"
+          },
+          "4": {
+            "value": {
+              "fontFamily": "{eds.core.fontFamily.default}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.4}",
+              "fontSize": "{eds.core.fontSize.4}"
+            },
+            "type": "typography"
+          },
+          "5": {
+            "value": {
+              "fontFamily": "{eds.core.fontFamily.default}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "fontSize": "{eds.core.fontSize.5}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.5}"
+            },
+            "type": "typography"
+          },
+          "6": {
+            "value": {
+              "fontSize": "{eds.core.fontSize.6}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.6}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "fontFamily": "{eds.core.fontFamily.default}"
+            },
+            "type": "typography"
+          },
+          "7": {
+            "value": {
+              "fontSize": "{eds.core.fontSize.7}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.7}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "fontFamily": "{eds.core.fontFamily.default}"
+            },
+            "type": "typography"
+          },
+          "8": {
+            "value": {
+              "fontSize": "{eds.core.fontSize.8}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.8}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "fontFamily": "{eds.core.fontFamily.default}"
+            },
+            "type": "typography"
+          },
+          "9": {
+            "value": {
+              "fontSize": "{eds.core.fontSize.9}",
+              "lineHeight": "{eds.core.lineHeight.trimmed.9}",
+              "fontWeight": "{eds.core.fontWeight.regular}",
+              "fontFamily": "{eds.core.fontFamily.default}"
+            },
+            "type": "typography"
+          }
+        },
         "tight": {
           "0": {
             "value": {
@@ -397,7 +494,8 @@
               "fontWeight": "{eds.core.fontWeight.regular}",
               "lineHeight": "{eds.core.lineHeight.relaxed.3}",
               "fontSize": "{eds.core.fontSize.3}",
-              "paragraphSpacing": "{eds.core.paragraphSpacing.2}"
+              "paragraphSpacing": "{eds.core.paragraphSpacing.2}",
+              "letterSpacing": "0"
             },
             "type": "typography"
           },
@@ -547,6 +645,58 @@
         }
       },
       "lineHeight": {
+        "trimmed": {
+          "0": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "10.5/12"
+          },
+          "1": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.1} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "12/12"
+          },
+          "2": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.2} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "14/16"
+          },
+          "3": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.3} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "16/16"
+          },
+          "4": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.4} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "18.5/20"
+          },
+          "5": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.5} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "21/24"
+          },
+          "6": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.6} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "24.5/28"
+          },
+          "7": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.7} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "28/28"
+          },
+          "8": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.8} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "32/32"
+          },
+          "9": {
+            "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.9} * {eds.core.lineHeightMultiplier.xxs} / {eds.core.const.gridInterval})",
+            "type": "lineHeights",
+            "description": "37/40"
+          }
+        },
         "tight": {
           "0": {
             "value": "{eds.core.const.gridInterval} * ceil({eds.core.fontSize.0} * {eds.core.lineHeightMultiplier.xs} / {eds.core.const.gridInterval})",

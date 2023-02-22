@@ -46,6 +46,10 @@
         }
       },
       "lineHeightMultiplier": {
+        "xxs": {
+          "value": "0.7",
+          "type": "other"
+        },
         "xs": {
           "value": "1",
           "type": "other"

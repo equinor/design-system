@@ -1,1 +1,101 @@
-{}
+{
+  "eds": {
+    "semantic": {
+      "typography": {
+        "bodyCopy": {
+          "medium": {
+            "paragraph": {
+              "value": {
+                "fontFamily": "{eds.core.fontFamily.default}",
+                "lineHeight": "{eds.core.typography.relaxed.3.lineHeight}",
+                "fontSize": "{eds.core.typography.relaxed.3.fontSize}",
+                "letterSpacing": "0",
+                "paragraphSpacing": "0",
+                "fontWeight": "{eds.core.fontWeight.regular}"
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4
+            }
+          }
+        },
+        "component": {
+          "medium": {
+            "paragraph": {
+              "value": {
+                "fontFamily": "{eds.core.fontFamily.default}",
+                "lineHeight": "{eds.core.typography.comfortable.3.lineHeight}",
+                "fontSize": "{eds.core.typography.comfortable.3.fontSize}",
+                "letterSpacing": "0",
+                "paragraphSpacing": "0"
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4
+            },
+            "detail": {
+              "value": {
+                "fontFamily": "{eds.core.typography.comfortable.1.fontFamily}",
+                "lineHeight": "{eds.core.typography.comfortable.1.lineHeight}",
+                "fontSize": "{eds.core.typography.comfortable.1.fontSize}",
+                "letterSpacing": "0",
+                "paragraphSpacing": "0"
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4
+            },
+            "label": {
+              "value": {
+                "fontFamily": "{eds.core.fontFamily.default}",
+                "lineHeight": "{eds.core.typography.trimmed.2.lineHeight}",
+                "fontSize": "{eds.core.typography.trimmed.2.fontSize}",
+                "letterSpacing": "",
+                "paragraphSpacing": "0",
+                "paragraphIndent": ""
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4
+            }
+          },
+          "small": {
+            "paragraph": {
+              "value": {
+                "fontFamily": "{eds.core.fontFamily.default}",
+                "lineHeight": "{eds.core.typography.compressed.2.lineHeight}",
+                "fontSize": "{eds.core.typography.compressed.2.fontSize}",
+                "letterSpacing": "0",
+                "paragraphSpacing": "0",
+                "fontWeight": "{eds.core.fontWeight.medium}"
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4
+            },
+            "detail": {
+              "value": {
+                "fontFamily": "{eds.core.fontFamily.default}",
+                "lineHeight": "{eds.core.typography.comfortable.1.lineHeight}",
+                "fontSize": "{eds.core.typography.comfortable.1.fontSize}",
+                "letterSpacing": "0",
+                "paragraphSpacing": "0",
+                "fontWeight": "{eds.core.fontWeight.regular}"
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4,
+              "description": "Same line-height as paragraph to make positioning easier"
+            },
+            "strong": {
+              "value": {
+                "fontFamily": "{eds.semantic.typography.component.small.paragraph.fontFamily}",
+                "lineHeight": "{eds.semantic.typography.component.small.paragraph.lineHeight}",
+                "fontSize": "{eds.semantic.typography.component.small.paragraph.fontSize}",
+                "letterSpacing": "",
+                "paragraphSpacing": "0",
+                "fontWeight": "{eds.core.fontWeight.bold}"
+              },
+              "type": "typography",
+              "inheritTypeLevel": 4
+            }
+          }
+        }
+      }
+    }
+  }
+}
