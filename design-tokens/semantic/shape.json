@@ -1,0 +1,127 @@
+{
+  "eds": {
+    "core": {
+      "shape": {
+        "rounded": {
+          "default": {
+            "all": {
+              "value": {
+                "borderRadius": "{eds.core.borderRadii.2}"
+              },
+              "type": "composition"
+            },
+            "top": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.2}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.2}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
+              },
+              "type": "composition"
+            },
+            "bottom": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.2}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.2}"
+              },
+              "type": "composition"
+            },
+            "left": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.2}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.2}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
+              },
+              "type": "composition"
+            },
+            "right": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.2}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.2}"
+              },
+              "type": "composition"
+            }
+          },
+          "small": {
+            "all": {
+              "value": {
+                "borderRadius": "{eds.core.borderRadii.1}"
+              },
+              "type": "composition"
+            },
+            "top": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.1}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.1}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
+              },
+              "type": "composition"
+            },
+            "bottom": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.1}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.1}"
+              },
+              "type": "composition"
+            },
+            "left": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.1}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.1}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
+              },
+              "type": "composition"
+            },
+            "right": {
+              "value": {
+                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.1}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.1}"
+              },
+              "type": "composition"
+            }
+          }
+        },
+        "straight": {
+          "value": {
+            "borderRadius": "{eds.core.borderRadii.0}"
+          },
+          "type": "composition"
+        }
+      }
+    },
+    "semantic": {
+      "shape": {
+        "button": {
+          "value": {
+            "height": "{eds.core.sizing.actions.height.md}",
+            "horizontalPadding": "16px",
+            "borderRadius": "{eds.core.shape.rounded.default.all.borderRadius}",
+            "width": "auto",
+            "verticalPadding": "0"
+          },
+          "type": "composition",
+          "description": "{\"touchTarget\": \"44px\"}"
+        },
+        "actionButton": {
+          "value": {
+            "height": "{eds.core.sizing.actions.height.lg}",
+            "borderRadius": "{eds.semantic.shape.actionButton.height} / 2",
+            "width": "{eds.semantic.shape.actionButton.height}"
+          },
+          "type": "composition"
+        }
+      }
+    }
+  }
+}

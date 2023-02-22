@@ -7,19 +7,19 @@
             "allStyles": {
               "disabled": {
                 "backgroundColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.semantic.colors.disabled.default}",
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.semantic.colors.disabled.onDisabled}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.semantic.colors.danger.onDanger}",
+                  "value": "{eds.semantic.colors.disabled.onDisabled}",
                   "type": "color"
                 },
                 "borderColor": {
-                  "value": "{eds.semantic.colors.danger.default}",
+                  "value": "{eds.semantic.colors.disabled.muted}",
                   "type": "color"
                 }
               }

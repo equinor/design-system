@@ -14,9 +14,7 @@
       "semantic/semantic": "enabled",
       "component/button": "enabled",
       "semantic/shape": "enabled",
-      "core/border": "enabled",
-      "semantic/colors": "disabled",
-      "semantic/palettes": "disabled"
+      "core/border": "enabled"
     },
     "$figmaStyleReferences": {}
   },
@@ -31,9 +29,7 @@
       "semantic/semantic": "source",
       "component/button": "enabled",
       "semantic/shape": "source",
-      "core/border": "source",
-      "semantic/colors": "disabled",
-      "semantic/palettes": "disabled"
+      "core/border": "source"
     },
     "$figmaStyleReferences": {}
   }
