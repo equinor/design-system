@@ -170,7 +170,7 @@ export type AutocompleteProps<T> = {
    * changes.selectedItems gives the selected items
    */
   onOptionsChange?: (changes: AutocompleteChanges<T>) => void
-  /** Callback for input changes
+  /** Callback for input changes.
    * Returns input value
    */
   onInputChange?: (text: string) => void
