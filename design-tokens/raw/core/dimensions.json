@@ -1,0 +1,72 @@
+{
+  "eds": {
+    "core": {
+      "sizingScale": {
+        "0": {
+          "value": "4",
+          "type": "sizing"
+        },
+        "1": {
+          "value": "8",
+          "type": "sizing"
+        },
+        "2": {
+          "value": "12",
+          "type": "sizing"
+        },
+        "3": {
+          "value": "16",
+          "type": "sizing"
+        },
+        "4": {
+          "value": "20",
+          "type": "sizing"
+        },
+        "5": {
+          "value": "24",
+          "type": "sizing"
+        },
+        "6": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(3/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "7": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(4/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "8": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(5/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "9": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(6/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "10": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(7/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "11": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(8/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "12": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(9/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "13": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(10/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "14": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(11/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        },
+        "15": {
+          "value": "{eds.core.const.gridInterval} * floor(16 * {eds.core.dimensionScale.densityMultiplier} ^(12/2) / {eds.core.const.gridInterval})",
+          "type": "sizing"
+        }
+      }
+    }
+  }
+}

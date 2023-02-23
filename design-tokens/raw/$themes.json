@@ -14,7 +14,8 @@
       "semantic/semantic": "enabled",
       "component/button": "enabled",
       "semantic/shape": "enabled",
-      "core/border": "enabled"
+      "core/border": "enabled",
+      "core/dimensions": "disabled"
     },
     "$figmaStyleReferences": {}
   },
@@ -29,7 +30,8 @@
       "semantic/semantic": "source",
       "component/button": "enabled",
       "semantic/shape": "source",
-      "core/border": "source"
+      "core/border": "source",
+      "core/dimensions": "disabled"
     },
     "$figmaStyleReferences": {}
   },
@@ -48,7 +50,8 @@
       "semantic/shape": "enabled",
       "semantic/categories/actions": "enabled",
       "theme/light": "enabled",
-      "theme/defaultDensity": "enabled"
+      "theme/defaultDensity": "enabled",
+      "core/dimensions": "disabled"
     },
     "$figmaStyleReferences": {}
   }

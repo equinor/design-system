@@ -41,11 +41,11 @@
             "description": "Button background",
             "inheritTypeLevel": 2
           },
-          "onSecondary": {
+          "onDefault": {
             "value": "{eds.core.color.neutrals.0}",
             "type": "color",
-            "description": "Button text + icon",
-            "inheritTypeLevel": 2
+            "inheritTypeLevel": 2,
+            "description": "Button text + icon"
           },
           "subtle": {
             "value": "{eds.core.color.mistBlueEds.200}",
@@ -66,18 +66,18 @@
             "inheritTypeLevel": 2
           }
         },
-        "danger": {
+        "error": {
           "default": {
             "value": "{eds.core.color.redAlarm.700}",
             "type": "color",
             "description": "Button background",
             "inheritTypeLevel": 2
           },
-          "onDanger": {
+          "onDefault": {
             "value": "{eds.core.color.neutrals.0}",
             "type": "color",
-            "description": "Button text + icon",
-            "inheritTypeLevel": 2
+            "inheritTypeLevel": 2,
+            "description": "Button text + icon"
           },
           "subtle": {
             "value": "{eds.core.color.redWarm.300}",
@@ -116,6 +116,102 @@
             "type": "color",
             "description": "Button text + icon",
             "inheritTypeLevel": 2
+          }
+        },
+        "success": {
+          "default": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button background"
+          },
+          "onDefault": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button text + icon"
+          },
+          "subtle": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button ghost + outline hover"
+          },
+          "emphasis": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Not used?"
+          },
+          "muted": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "filled hover"
+          }
+        },
+        "information": {
+          "default": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button background"
+          },
+          "onDefault": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button text + icon"
+          },
+          "subtle": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button ghost + outline hover"
+          },
+          "emphasis": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Not used?"
+          },
+          "muted": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "filled hover"
+          }
+        },
+        "warning": {
+          "default": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button background"
+          },
+          "onDefault": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button text + icon"
+          },
+          "subtle": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Button ghost + outline hover"
+          },
+          "emphasis": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "Not used?"
+          },
+          "muted": {
+            "value": "black",
+            "type": "color",
+            "inheritTypeLevel": 2,
+            "description": "filled hover"
           }
         }
       }

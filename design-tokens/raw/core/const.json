@@ -43,6 +43,10 @@
         "roundingInterval": {
           "value": "0.5",
           "type": "other"
+        },
+        "baseDimension": {
+          "value": "36",
+          "type": "other"
         }
       },
       "lineHeightMultiplier": {
@@ -64,6 +68,20 @@
         },
         "lg": {
           "value": "1.5",
+          "type": "other"
+        }
+      },
+      "dimensionScale": {
+        "densityMultiplier": {
+          "value": "1.5",
+          "type": "other"
+        },
+        "medium": {
+          "value": "{eds.theme.dimensionScale.base}",
+          "type": "other"
+        },
+        "large": {
+          "value": "{eds.theme.dimensionScale.large}",
           "type": "other"
         }
       }

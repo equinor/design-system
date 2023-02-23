@@ -11,6 +11,7 @@
     "readonly/tight",
     "semantic/semantic",
     "semantic/typography",
+    "semantic/_static",
     "semantic/shape",
     "semantic/categories/actions",
     "theme/light",
@@ -18,7 +19,8 @@
     "theme/defaultDensity",
     "theme/comfortable",
     "theme/compact",
+    "theme/default",
     "component/button",
-    "theme/default"
+    "core/dimensions"
   ]
 }

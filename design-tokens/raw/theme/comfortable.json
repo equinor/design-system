@@ -6,6 +6,16 @@
           "value": "14",
           "type": "other"
         }
+      },
+      "dimensionScale": {
+        "base": {
+          "value": "{eds.core.const.baseDimension} / {eds.core.dimensionScale.densityMultiplier}^1",
+          "type": "other"
+        },
+        "large": {
+          "value": "{eds.core.const.baseDimension} / {eds.core.dimensionScale.densityMultiplier}^1",
+          "type": "other"
+        }
       }
     }
   }

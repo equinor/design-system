@@ -78,8 +78,8 @@
                 "fontWeight": "{eds.core.fontWeight.regular}"
               },
               "type": "typography",
-              "inheritTypeLevel": 4,
-              "description": "Same line-height as paragraph to make positioning easier"
+              "description": "Same line-height as paragraph to make positioning easier",
+              "inheritTypeLevel": 4
             },
             "strong": {
               "value": {

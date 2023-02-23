@@ -6,6 +6,16 @@
           "value": "16",
           "type": "other"
         }
+      },
+      "dimensionScale": {
+        "base": {
+          "value": "36",
+          "type": "other"
+        },
+        "large": {
+          "value": "36",
+          "type": "other"
+        }
       }
     }
   }

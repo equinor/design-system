@@ -4,6 +4,10 @@
       "sizing": {
         "actions": {
           "height": {
+            "xs": {
+              "value": "18",
+              "type": "sizing"
+            },
             "sm": {
               "value": "24",
               "type": "sizing"

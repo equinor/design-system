@@ -625,8 +625,8 @@
         "label": {
           "value": {
             "horizontalPadding": "{eds.semantic.shape.button.horizontalPadding} / 4",
-            "typography": "{eds.semantic.typography.label.default}",
-            "verticalPadding": "({eds.semantic.shape.button.height} - {eds.semantic.typography.label.default.lineHeight}) / 2",
+            "typography": "{eds.semantic.typography.component.small.paragraph}",
+            "verticalPadding": "({eds.semantic.shape.button.height} - {eds.semantic.typography.component.small.paragraph.lineHeight}) / 2",
             "itemSpacing": "0"
           },
           "type": "composition"
@@ -634,7 +634,7 @@
         "progress": {
           "value": {
             "horizontalPadding": "{eds.semantic.shape.button.horizontalPadding} / 4",
-            "typography": "{eds.semantic.typography.label.default}",
+            "typography": "{eds.semantic.typography.component.small.paragraph}",
             "itemSpacing": "0",
             "height": "{eds.semantic.shape.button.height}",
             "verticalPadding": "0"

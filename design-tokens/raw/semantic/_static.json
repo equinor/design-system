@@ -110,24 +110,68 @@
     },
     "semantic": {
       "shape": {
-        "button": {
-          "value": {
-            "height": "{eds.core.dimensionScale.medium}",
-            "horizontalPadding": "16px",
-            "borderRadius": "{eds.core.shape.rounded.medium.all.borderRadius}",
-            "verticalPadding": "0",
-            "width": "100"
+        "medium": {
+          "button": {
+            "value": {
+              "height": "{eds.core.sizing.actions.height.md}",
+              "horizontalPadding": "16px",
+              "borderRadius": "{eds.core.shape.rounded.medium.all.borderRadius}",
+              "verticalPadding": "0",
+              "width": "100"
+            },
+            "type": "composition",
+            "description": "Don’t use the width value\n\n{\"touchTarget\": \"44px\"}"
           },
-          "type": "composition",
-          "description": "Don’t use the width value\n\n{\"touchTarget\": \"44px\"}"
+          "actionButton": {
+            "value": {
+              "height": "{eds.core.sizing.actions.height.lg}",
+              "borderRadius": "{eds.semantic.shape.default.actionButton.height} / 2",
+              "width": "{eds.semantic.shape.default.actionButton.height}"
+            },
+            "type": "composition"
+          }
         },
-        "actionButton": {
-          "value": {
-            "height": "{eds.core.sizing.actions.height.lg}",
-            "borderRadius": "{eds.semantic.shape.actionButton.height} / 2",
-            "width": "{eds.semantic.shape.actionButton.height}"
+        "small": {
+          "button": {
+            "value": {
+              "height": "{eds.core.sizing.actions.height.sm}",
+              "horizontalPadding": "16px",
+              "borderRadius": "{eds.core.shape.rounded.medium.all.borderRadius}",
+              "verticalPadding": "0",
+              "width": "100"
+            },
+            "type": "composition",
+            "description": "Don’t use the width value\n\n{\"touchTarget\": \"44px\"}"
           },
-          "type": "composition"
+          "actionButton": {
+            "value": {
+              "height": "{eds.core.sizing.actions.height.md}",
+              "borderRadius": "{eds.semantic.shape.default.actionButton.height} / 2",
+              "width": "{eds.semantic.shape.comfortable.actionButton.height}"
+            },
+            "type": "composition"
+          }
+        },
+        "xsmall": {
+          "button": {
+            "value": {
+              "height": "{eds.core.sizing.actions.height.xs}",
+              "horizontalPadding": "16px",
+              "borderRadius": "{eds.core.shape.rounded.medium.all.borderRadius}",
+              "verticalPadding": "0",
+              "width": "100"
+            },
+            "type": "composition",
+            "description": "Don’t use the width value\n\n{\"touchTarget\": \"44px\"}"
+          },
+          "actionButton": {
+            "value": {
+              "height": "{eds.core.sizing.actions.height.sm}",
+              "borderRadius": "{eds.semantic.shape.default.actionButton.height} / 2",
+              "width": "{eds.semantic.shape.compact.actionButton.height}"
+            },
+            "type": "composition"
+          }
         }
       }
     }
