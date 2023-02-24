@@ -2,16 +2,12 @@
   "eds": {
     "core": {
       "borderRadii": {
-        "0": {
-          "value": "0px",
+        "none": {
+          "value": "0",
           "type": "borderRadius"
         },
-        "1": {
-          "value": "2px",
-          "type": "borderRadius"
-        },
-        "2": {
-          "value": "4px",
+        "rounded": {
+          "value": "floor({eds.core.dimensionScale.base} / 8)",
           "type": "borderRadius"
         }
       }

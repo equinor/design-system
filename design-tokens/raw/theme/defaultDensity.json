@@ -12,8 +12,8 @@
           "value": "36",
           "type": "other"
         },
-        "large": {
-          "value": "36",
+        "densityMultiplier": {
+          "value": "1.5",
           "type": "other"
         }
       }

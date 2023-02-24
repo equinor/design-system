@@ -5,16 +5,14 @@
     "selectedTokenSets": {
       "core/const": "enabled",
       "core/typography": "enabled",
-      "core/sizing": "enabled",
       "core/spacing": "enabled",
       "core/color": "enabled",
       "readonly/compressed": "enabled",
       "readonly/spacing": "enabled",
       "readonly/tight": "enabled",
-      "semantic/semantic": "enabled",
       "component/button": "enabled",
-      "semantic/shape": "enabled",
-      "core/border": "enabled"
+      "core/border": "enabled",
+      "semantic/shape": "enabled"
     },
     "$figmaStyleReferences": {}
   },
@@ -24,12 +22,10 @@
     "selectedTokenSets": {
       "core/const": "source",
       "core/typography": "source",
-      "core/sizing": "source",
       "core/spacing": "source",
-      "semantic/semantic": "source",
       "component/button": "enabled",
-      "semantic/shape": "source",
-      "core/border": "source"
+      "core/border": "source",
+      "semantic/shape": "source"
     },
     "$figmaStyleReferences": {}
   },
@@ -41,14 +37,12 @@
       "core/const": "enabled",
       "core/border": "enabled",
       "core/typography": "enabled",
-      "core/sizing": "enabled",
       "core/spacing": "enabled",
       "core/color": "enabled",
-      "semantic/semantic": "enabled",
-      "semantic/shape": "enabled",
       "semantic/categories/actions": "enabled",
       "theme/light": "enabled",
-      "theme/defaultDensity": "enabled"
+      "theme/defaultDensity": "enabled",
+      "semantic/shape": "enabled"
     },
     "$figmaStyleReferences": {}
   }

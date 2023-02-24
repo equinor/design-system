@@ -653,8 +653,7 @@
         },
         "icon": {
           "value": {
-            "width": "{eds.semantic.sizing.icon.default}",
-            "height": "{eds.semantic.sizing.icon.default}"
+            "sizing": "{eds.semantic.shape.icon.sizing}"
           },
           "type": "composition"
         }

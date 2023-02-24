@@ -6,17 +6,17 @@
           "default": {
             "value": "#97CACE",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
           "onPrimary": {
             "value": "#000",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
-            "value": "{eds.core.color.placeholder.100}",
+            "value": "#ADE2E60a",
             "type": "color",
             "description": "Button ghost + outline hover",
             "inheritTypeLevel": 2
@@ -30,25 +30,25 @@
           "muted": {
             "value": "#ADE2E6",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "filled hover"
+            "description": "filled hover",
+            "inheritTypeLevel": 2
           }
         },
         "secondary": {
           "default": {
             "value": "#DEE5E7",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
           "onSecondary": {
             "value": "#000",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
-            "value": "{eds.core.color.placeholder.100}",
+            "value": "#ffffff0a",
             "type": "color",
             "description": "Button ghost + outline hover",
             "inheritTypeLevel": 2
@@ -62,25 +62,25 @@
           "muted": {
             "value": "#fff",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "filled hover"
+            "description": "filled hover",
+            "inheritTypeLevel": 2
           }
         },
         "error": {
           "default": {
             "value": "#FF6670",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
           "onError": {
             "value": "#000",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
-            "value": "{eds.core.color.placeholder.100}",
+            "value": "#FF66700a",
             "type": "color",
             "description": "Button ghost + outline hover",
             "inheritTypeLevel": 2
@@ -94,28 +94,28 @@
           "muted": {
             "value": "#FF949B",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "filled hover"
+            "description": "filled hover",
+            "inheritTypeLevel": 2
           }
         },
         "disabled": {
           "default": {
             "value": "#344450",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
           "onDisabled": {
             "value": "#637583",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "muted": {
             "value": "#344450",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           }
         },
         "success": {

@@ -6,97 +6,57 @@
           "medium": {
             "all": {
               "value": {
-                "borderRadius": "{eds.core.borderRadii.2}"
+                "borderRadius": "{eds.core.borderRadii.rounded}"
               },
               "type": "composition"
             },
             "top": {
               "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.2}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.2}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
+                "borderRadiusTopLeft": "{eds.core.borderRadii.rounded}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.rounded}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.none}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.none}"
               },
               "type": "composition"
             },
             "bottom": {
               "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.2}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.2}"
+                "borderRadiusTopLeft": "{eds.core.borderRadii.none}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.none}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.rounded}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.rounded}"
               },
               "type": "composition"
             },
             "left": {
               "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.2}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.2}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
+                "borderRadiusTopLeft": "{eds.core.borderRadii.rounded}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.none}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.rounded}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.none}"
               },
               "type": "composition"
             },
             "right": {
               "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.2}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.2}"
-              },
-              "type": "composition"
-            }
-          },
-          "small": {
-            "all": {
-              "value": {
-                "borderRadius": "{eds.core.borderRadii.1}"
-              },
-              "type": "composition"
-            },
-            "top": {
-              "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.1}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.1}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
-              },
-              "type": "composition"
-            },
-            "bottom": {
-              "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.1}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.1}"
-              },
-              "type": "composition"
-            },
-            "left": {
-              "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.1}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.1}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.0}"
-              },
-              "type": "composition"
-            },
-            "right": {
-              "value": {
-                "borderRadiusTopLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusTopRight": "{eds.core.borderRadii.1}",
-                "borderRadiusBottomLeft": "{eds.core.borderRadii.0}",
-                "borderRadiusBottomRight": "{eds.core.borderRadii.1}"
+                "borderRadiusTopLeft": "{eds.core.borderRadii.none}",
+                "borderRadiusTopRight": "{eds.core.borderRadii.rounded}",
+                "borderRadiusBottomLeft": "{eds.core.borderRadii.none}",
+                "borderRadiusBottomRight": "{eds.core.borderRadii.rounded}"
               },
               "type": "composition"
             }
           }
         },
-        "straight": {
-          "value": {
-            "borderRadius": "{eds.core.borderRadii.0}"
-          },
-          "type": "composition"
+        "square": {
+          "medium": {
+            "all": {
+              "value": {
+                "borderRadius": "{eds.core.borderRadii.none}"
+              },
+              "type": "composition"
+            }
+          }
         }
       },
       "documentation": {
@@ -112,8 +72,8 @@
       "shape": {
         "button": {
           "value": {
-            "height": "{eds.core.dimensionScale.medium}",
-            "horizontalPadding": "16px",
+            "height": "{eds.core.dimensionScale.base}",
+            "horizontalPadding": "{eds.core.sizingScale.static.3}",
             "borderRadius": "{eds.core.shape.rounded.medium.all.borderRadius}",
             "verticalPadding": "0",
             "width": "100"
@@ -126,6 +86,12 @@
             "height": "{eds.semantic.shape.button.height}+{eds.core.const.gridInterval}",
             "borderRadius": "{eds.semantic.shape.actionButton.height} / 2",
             "width": "{eds.semantic.shape.actionButton.height}"
+          },
+          "type": "composition"
+        },
+        "icon": {
+          "value": {
+            "sizing": "{eds.core.const.gridInterval} * ceil({eds.core.dimensionScale.base} / {eds.core.dimensionScale.densityMultiplier} / {eds.core.const.gridInterval})"
           },
           "type": "composition"
         }

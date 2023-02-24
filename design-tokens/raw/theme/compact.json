@@ -11,10 +11,6 @@
         "base": {
           "value": "{eds.core.const.baseDimension} / {eds.core.dimensionScale.densityMultiplier}^2",
           "type": "other"
-        },
-        "large": {
-          "value": "{eds.core.const.baseDimension} / {eds.core.dimensionScale.densityMultiplier}^2",
-          "type": "other"
         }
       }
     }
