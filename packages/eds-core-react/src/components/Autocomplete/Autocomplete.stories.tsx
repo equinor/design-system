@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
 import { Story, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button, Chip } from '../..'
+import { Typography, EdsProvider, Button, Chip, Card } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
@@ -387,6 +388,7 @@ AutoWidth.args = {
 }
 
 export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
+  type LoadingState = 'notLoaded' | 'loading' | 'loaded'
   type Photo = {
     albumId: number
     id: number
@@ -395,8 +397,15 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
     thumbnailUrl: string
   }
   const [data, setData] = useState<Array<string>>([])
+  const [loadingState, setLoadingState] = useState<LoadingState>('notLoaded')
+
+  const initialize = () => {
+    if (loadingState === 'notLoaded') setLoadingState('loading')
+  }
 
   useEffect(() => {
+    if (loadingState !== 'loading') return
+
     const abortController = new AbortController()
     const signal = abortController.signal
 
@@ -405,26 +414,182 @@ export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
       .then((d: Photo[]) => {
         const parsed = d.map((x) => x.title.substring(0, 30))
         setData(parsed)
+        setLoadingState('loaded')
       })
       .catch((err: Error) => {
         console.warn(`Warning: ${err.message}`)
+        setLoadingState('notLoaded')
       })
     return () => {
       abortController.abort()
     }
-  }, [])
+  }, [loadingState])
 
   return (
     <>
       <Autocomplete
-        label="Select multiple items"
+        label={
+          loadingState === 'loaded'
+            ? 'Select multiple items'
+            : 'Focus the input to load data'
+        }
+        loading={loadingState === 'loading'}
         options={data}
         multiple
         clearSearchOnChange={false}
+        onFocus={initialize}
       />
     </>
   )
 }
+
+const CountryTemplate = styled.div`
+  display: grid;
+  grid-template-columns: 370px 1fr;
+  > img {
+    max-width: 100%;
+    border-inline-end: 2px solid rgb(247 247 247);
+  }
+
+  h2 {
+    margin-block-end: 24px;
+  }
+  p:last-child {
+    align-self: flex-end;
+    margin-block-start: auto;
+  }
+`
+
+export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
+  type CountryName = {
+    common: string
+    official: string
+  }
+  type Flag = {
+    png: string
+    svg: string
+    alt: string
+  }
+  type Country = {
+    name: CountryName
+    population: number
+    capital: string[]
+    flags: Flag
+  }
+
+  const [options, setOptions] = useState<Country[]>([])
+  const [loading, setLoading] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<Country>()
+  const [searchInput, setSearchInput] = useState<string>('')
+  const debounce = useRef<ReturnType<typeof setTimeout>>(null)
+
+  const onChange = (changes: AutocompleteChanges<Country>) => {
+    setSelectedItem(changes.selectedItems[0])
+  }
+
+  useEffect(() => {
+    if (searchInput.length < 2) return setOptions([])
+
+    setLoading(true)
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://restcountries.com/v3.1/name/${searchInput}`, { signal })
+      .then((r) => {
+        if (!r.ok) {
+          throw Error(r.statusText)
+        }
+        return r.json()
+      })
+      .then((countries: Country[]) => {
+        countries && setOptions(countries)
+        setLoading(false)
+      })
+      .catch((err: Error) => {
+        console.warn(`Warning: ${err.message}`)
+        setOptions([])
+        setLoading(false)
+      })
+    return () => {
+      abortController.abort()
+    }
+  }, [searchInput])
+
+  useEffect(() => {
+    return () => {
+      if (debounce.current) clearTimeout(debounce.current)
+    }
+  }, [])
+
+  const search = (input: string) => {
+    if (input.length < 2) return setSearchInput('')
+    if (debounce.current) clearTimeout(debounce.current)
+
+    debounce.current = setTimeout(() => {
+      setSearchInput(input)
+    }, 400)
+  }
+
+  return (
+    <>
+      <Autocomplete
+        label="Search countries"
+        onInputChange={search}
+        options={options}
+        optionsFilter={() => true}
+        optionLabel={(opt) => `${opt.name.common}`}
+        onOptionsChange={onChange}
+        selectedOptions={[selectedItem]}
+        loading={loading}
+        autoWidth
+        multiline
+      />
+      {selectedItem && (
+        <Card elevation="raised" style={{ overflow: 'hidden' }}>
+          <CountryTemplate>
+            <img src={selectedItem.flags.svg} alt={selectedItem.flags.alt} />
+            <div
+              style={{
+                padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Typography variant="h2" style={{ fontWeight: '600' }}>
+                {selectedItem.name.official}
+              </Typography>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                <div>
+                  <Typography variant="body_short">CAPITAL</Typography>
+                  <Typography variant="h3" as="p" style={{ fontWeight: '500' }}>
+                    {selectedItem.capital ? selectedItem.capital[0] : 'N/A'}
+                  </Typography>
+                </div>
+                <div>
+                  <Typography variant="body_short">POPULATION</Typography>
+                  <Typography variant="h3" as="p" style={{ fontWeight: '500' }}>
+                    {new Intl.NumberFormat().format(selectedItem.population)}
+                  </Typography>
+                </div>
+              </div>
+              <Typography variant="body_short_italic">
+                source:{' '}
+                <Typography
+                  link
+                  href="https://restcountries.com/"
+                  target="_blank"
+                >
+                  restcountries.com
+                </Typography>
+              </Typography>
+            </div>
+          </CountryTemplate>
+        </Card>
+      )}
+    </>
+  )
+}
+Async.storyName = 'Async search autocomplete'
 
 type MyFormValues = {
   origin: string | null

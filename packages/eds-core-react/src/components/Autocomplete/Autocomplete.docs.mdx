@@ -131,6 +131,11 @@ The prop `multiline` lets you wrap long texts into multiple lines, as you can se
 
 <Story id="inputs-autocomplete--virtualized" />
 
+### Async search autocomplete
+`Autocomplete` supports async search-as-you-type use cases. You may want to disable local filtering (when this is already handled serverside) with `optionsFilter={() => true}`. `onInputChange` callback is used to call an api with the search query and `loading` is used to visually notify the user that data is being fetched. 
+
+<Story id="inputs-autocomplete--async" />
+
 ### With `React Hook Form`
 
 Example using [react-hook-form](https://react-hook-form.com/) library.

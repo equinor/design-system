@@ -22,6 +22,7 @@ import { useEds } from '../EdsProvider'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
+import { Progress } from '../Progress'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
@@ -154,6 +155,8 @@ export type AutocompleteProps<T> = {
   meta?: string
   /** Disabled state */
   disabled?: boolean
+  /** Set loading state (shows a spinner in the right side of the input field) */
+  loading?: boolean
   /** Read Only */
   readOnly?: boolean
   /** Hide clear button even when items are selected */
@@ -167,6 +170,10 @@ export type AutocompleteProps<T> = {
    * changes.selectedItems gives the selected items
    */
   onOptionsChange?: (changes: AutocompleteChanges<T>) => void
+  /** Callback for input changes.
+   * Returns input value
+   */
+  onInputChange?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
@@ -199,8 +206,10 @@ function AutocompleteInner<T>(
     style,
     disabled = false,
     readOnly = false,
+    loading = false,
     hideClearButton = false,
     onOptionsChange,
+    onInputChange,
     selectedOptions,
     multiple,
     initialSelectedOptions = [],
@@ -329,6 +338,7 @@ function AutocompleteInner<T>(
     initialSelectedItem: initialSelectedOptions[0],
     itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
+      onInputChange && onInputChange(inputValue)
       setAvailableItems(
         options.filter((item) => {
           if (optionsFilter) {
@@ -657,6 +667,7 @@ function AutocompleteInner<T>(
             rightAdornmentsWidth={24 * 2 + 8 + 8}
             rightAdornments={
               <>
+                {loading && <Progress.Circular size={16} />}
                 {showClearButton && (
                   <StyledButton
                     variant="ghost_icon"
