@@ -123,7 +123,7 @@
         },
         "actionButton": {
           "value": {
-            "height": "{eds.core.sizing.actions.height.lg}",
+            "height": "{eds.semantic.shape.button.height}+{eds.core.const.gridInterval}",
             "borderRadius": "{eds.semantic.shape.actionButton.height} / 2",
             "width": "{eds.semantic.shape.actionButton.height}"
           },

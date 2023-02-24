@@ -41,11 +41,11 @@
             "description": "Button background",
             "inheritTypeLevel": 2
           },
-          "onDefault": {
+          "onSecondary": {
             "value": "{eds.core.color.neutrals.0}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
             "value": "{eds.core.color.mistBlueEds.200}",
@@ -54,7 +54,7 @@
             "inheritTypeLevel": 2
           },
           "emphasis": {
-            "value": "white",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
             "description": "Not used?",
             "inheritTypeLevel": 2
@@ -73,11 +73,11 @@
             "description": "Button background",
             "inheritTypeLevel": 2
           },
-          "onDefault": {
+          "onError": {
             "value": "{eds.core.color.neutrals.0}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
             "value": "{eds.core.color.redWarm.300}",
@@ -86,7 +86,7 @@
             "inheritTypeLevel": 2
           },
           "emphasis": {
-            "value": "white",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
             "description": "Not used?",
             "inheritTypeLevel": 2
@@ -114,104 +114,103 @@
           "muted": {
             "value": "{eds.core.color.neutrals.300}",
             "type": "color",
-            "description": "Button text + icon",
-            "inheritTypeLevel": 2
+            "description": "Button text + icon"
           }
         },
         "success": {
           "default": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
-          "onDefault": {
-            "value": "black",
+          "onSuccess": {
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button ghost + outline hover"
+            "description": "Button ghost + outline hover",
+            "inheritTypeLevel": 2
           },
           "emphasis": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Not used?"
+            "description": "Not used?",
+            "inheritTypeLevel": 2
           },
           "muted": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "filled hover"
+            "description": "filled hover",
+            "inheritTypeLevel": 2
           }
         },
         "information": {
           "default": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
-          "onDefault": {
-            "value": "black",
+          "onInformation": {
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button ghost + outline hover"
+            "description": "Button ghost + outline hover",
+            "inheritTypeLevel": 2
           },
           "emphasis": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Not used?"
+            "description": "Not used?",
+            "inheritTypeLevel": 2
           },
           "muted": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "filled hover"
+            "description": "filled hover",
+            "inheritTypeLevel": 2
           }
         },
         "warning": {
           "default": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button background"
+            "description": "Button background",
+            "inheritTypeLevel": 2
           },
-          "onDefault": {
-            "value": "black",
+          "onWarning": {
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button text + icon"
+            "description": "Button text + icon",
+            "inheritTypeLevel": 2
           },
           "subtle": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Button ghost + outline hover"
+            "description": "Button ghost + outline hover",
+            "inheritTypeLevel": 2
           },
           "emphasis": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "Not used?"
+            "description": "Not used?",
+            "inheritTypeLevel": 2
           },
           "muted": {
-            "value": "black",
+            "value": "{eds.core.color.placeholder.100}",
             "type": "color",
-            "inheritTypeLevel": 2,
-            "description": "filled hover"
+            "description": "filled hover",
+            "inheritTypeLevel": 2
           }
         }
       }

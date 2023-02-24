@@ -189,11 +189,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.theme.colors.secondary.onDefault}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.theme.colors.secondary.onDefault}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -207,11 +207,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.theme.colors.secondary.onDefault}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.theme.colors.secondary.onDefault}",
+                  "value": "{eds.theme.colors.secondary.onSecondary}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -305,11 +305,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.theme.colors.error.onDefault}",
+                  "value": "{eds.theme.colors.error.onError}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.theme.colors.error.onDefault}",
+                  "value": "{eds.theme.colors.error.onError}",
                   "type": "color"
                 },
                 "borderColor": {
@@ -323,11 +323,11 @@
                   "type": "color"
                 },
                 "textColor": {
-                  "value": "{eds.theme.colors.error.onDefault}",
+                  "value": "{eds.theme.colors.error.onError}",
                   "type": "color"
                 },
                 "iconColor": {
-                  "value": "{eds.theme.colors.error.onDefault}",
+                  "value": "{eds.theme.colors.error.onError}",
                   "type": "color"
                 },
                 "borderColor": {

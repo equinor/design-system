@@ -19,7 +19,6 @@
     "theme/defaultDensity",
     "theme/comfortable",
     "theme/compact",
-    "theme/default",
     "component/button",
     "core/dimensions"
   ]

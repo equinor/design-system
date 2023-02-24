@@ -2136,6 +2136,12 @@
             "type": "color",
             "inheritTypeLevel": 4
           }
+        },
+        "placeholder": {
+          "100": {
+            "value": "palegoldenrod",
+            "type": "color"
+          }
         }
       }
     }
