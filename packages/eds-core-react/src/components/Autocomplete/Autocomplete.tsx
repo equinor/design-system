@@ -56,7 +56,6 @@ const StyledList = styled(List)(
     ${bordersTemplate(theme.border)}
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 300px;
     padding: 0;
     display: grid;
   `,
@@ -149,17 +148,27 @@ export type AutocompleteProps<T> = {
   options: T[]
   /** Label for the select element */
   label: string
-  /** Array of initial selected items */
+  /** Array of initial selected items
+   * @default []
+   */
   initialSelectedOptions?: T[]
   /** Meta text, for instance unit */
   meta?: string
-  /** Disabled state */
+  /** Disabled state
+   * @default false
+   */
   disabled?: boolean
-  /** Set loading state (shows a spinner in the right side of the input field) */
+  /** Set loading state (shows a spinner in the right side of the input field)
+   * @default false
+   */
   loading?: boolean
-  /** Read Only */
+  /** Read Only
+   * @default false
+   */
   readOnly?: boolean
-  /** Hide clear button even when items are selected */
+  /** Hide clear button even when items are selected
+   * @default false
+   */
   hideClearButton?: boolean
   /** If this prop is used, the select will become a controlled component. Use an empty
    * array [] if there will be no initial selected items.
@@ -180,7 +189,9 @@ export type AutocompleteProps<T> = {
   optionLabel?: (option: T) => string
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
-  /** Disable option */
+  /** Disable option
+   * @default () => false
+   */
   optionDisabled?: (option: T) => boolean
   /** Custom filter function for options */
   optionsFilter?: (option: T, inputValue: string) => boolean
@@ -188,10 +199,18 @@ export type AutocompleteProps<T> = {
   autoWidth?: boolean
   /** Descriptive text for whats selected or about to be selected */
   placeholder?: string
-  /** Toggle if input is cleared when an option is selected when `multiple` is `true`*/
+  /** Toggle if input is cleared when an option is selected when `multiple` is `true`
+   * @default true
+   */
   clearSearchOnChange?: boolean
-  /** Will wrap overflowing text at the expence of some performance overhead to calculate item heigths. Mostly relevant in combination with autoWidth */
+  /** Will wrap overflowing text at the expence of some performance overhead to calculate item heigths. Mostly relevant in combination with autoWidth
+   * @default false
+   */
   multiline?: boolean
+  /** Override default max height on dropdown (in px)
+   *  @default 300
+   */
+  dropdownHeight?: number
 } & HTMLAttributes<HTMLDivElement>
 
 function AutocompleteInner<T>(
@@ -221,6 +240,7 @@ function AutocompleteInner<T>(
     optionLabel,
     clearSearchOnChange = true,
     multiline = false,
+    dropdownHeight = 300,
     ...other
   } = props
 
@@ -580,6 +600,9 @@ function AutocompleteInner<T>(
           {
             'aria-multiselectable': multiple ? 'true' : null,
             ref: scrollContainer,
+            style: {
+              maxHeight: `${dropdownHeight}px`,
+            },
           },
           { suppressRefError: true },
         )}
