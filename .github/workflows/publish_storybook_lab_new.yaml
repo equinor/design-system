@@ -1,18 +1,9 @@
 name: Publish lab storybook on new subscription
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment for the core-react storybook'
-        required: false
-        type: choice
-        options:
-          - development
-          - production
-        default: 'development'
   push:
     branches:
-      - develop
+      - master
     paths:
       - 'packages/eds-lab-react/**'
       - 'packages/eds-tokens/**'
@@ -47,7 +38,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab-storybook
+          key: ${{ github.sha }}-dist-production-lab-storybook
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
@@ -68,7 +59,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab-storybook
+          key: ${{ github.sha }}-dist-production-lab-storybook
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
