@@ -67,7 +67,6 @@ exports[`Autocomplete Matches snapshot 1`] = `
   border-radius: 4px;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 300px;
   padding: 0;
   display: grid;
 }
@@ -85,6 +84,7 @@ exports[`Autocomplete Matches snapshot 1`] = `
   class="c0 c1"
   id="downshift-0-menu"
   role="listbox"
+  style="max-height: 300px;"
 >
   <li
     role="presentation"
