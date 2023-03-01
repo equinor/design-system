@@ -21,11 +21,11 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment }
     steps:
-      - name: Checkout brand assets repo 🛎️
-        id: checkout-brand-assets
+      - name: Checkout cdn repo 🛎️
+        id: checkout-cdn-repo
         uses: actions/checkout@v3
         with:
-          repository: 'equinor/equinor-brand-assets'
+          repository: 'equinor/design-system-cdn'
           ref: main
           ssh-key: ${{ secrets.CDN_REPO_PRIVATE_KEY }}
       - name: Az CLI login 🔑  # Use federated credential
