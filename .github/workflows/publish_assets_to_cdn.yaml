@@ -19,7 +19,7 @@ jobs:
     name: Copy files from GitHub to cdn
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.event.inputs.environment }
+      name: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout cdn repo 🛎️
         id: checkout-cdn-repo
