@@ -1285,6 +1285,10 @@
             "type": "color",
             "inheritTypeLevel": 4
           },
+          "250": {
+            "value": "#FFCDCC",
+            "type": "color"
+          },
           "300": {
             "value": "#FFC3C2",
             "type": "color",
