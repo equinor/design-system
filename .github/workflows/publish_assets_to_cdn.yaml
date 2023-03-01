@@ -41,7 +41,7 @@ jobs:
         with:
         # Need to find out if cli login is good enough
           inlineScript: |
-            az storage blob sync -c ${{ vars.AZURE_ARTEFACTS_CONTAINER }} -s assets --connection-string ${{ secrets.AZURE_ARTEFACTS_CONNECTION_STRING }}
+            az storage blob sync -c ${{ vars.AZURE_ARTEFACTS_CONTAINER }} -s assets --account-name s478stedsartefactsdev
       - name: Purge CDN endpoint
         uses: azure/CLI@v1
         with:
