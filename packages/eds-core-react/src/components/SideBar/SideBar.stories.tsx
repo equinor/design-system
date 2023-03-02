@@ -7,6 +7,8 @@ import {
   history,
   home,
   add,
+  business,
+  gas,
 } from '@equinor/eds-icons'
 import {
   TopBar,
@@ -16,6 +18,7 @@ import {
   SidebarLinkProps,
   useSideBar,
   Menu,
+  Typography,
 } from '../..'
 import page from './SideBar.docs.mdx'
 
@@ -61,7 +64,7 @@ export const Primary: Story<SidebarType> = (args) => {
   ]
 
   return (
-    <SidebarContainer>
+    <Container>
       <SideBar {...args}>
         <SideBar.Content>
           <SideBar.Toggle />
@@ -70,7 +73,7 @@ export const Primary: Story<SidebarType> = (args) => {
           ))}
         </SideBar.Content>
       </SideBar>
-    </SidebarContainer>
+    </Container>
   )
 }
 
@@ -298,5 +301,311 @@ export const WithTopbar: Story<SidebarType> = () => {
         </SideBar.Footer>
       </SideBar>
     </SidebarContainerWithTopbar>
+  )
+}
+
+const Container = styled.div`
+  height: 60vh;
+  margin: -30px -20px;
+  display: flex;
+  flex-direction: row;
+`
+
+export const WithAccordion: Story<SidebarType> = () => {
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState<boolean>(false)
+
+  return (
+    <Container>
+      <SideBar>
+        <SideBar.Content>
+          <SideBar.Toggle />
+          <SideBar.Link label="Home" icon={home} />
+          <SideBar.Link label="Getting started" icon={business} />
+          <SideBar.Accordion label="Gas" icon={gas}>
+            <SideBar.AccordionItem label={'Tools'} />
+            <SideBar.AccordionItem label={'Fields'} />
+            <SideBar.AccordionItem label={'Reports'} />
+            <SideBar.AccordionItem label={'Archived'} />
+          </SideBar.Accordion>
+          <SideBar.Accordion
+            label="Favorites"
+            icon={favorite_outlined}
+            isExpanded={isFavoritesOpen}
+            toggleExpand={() => setIsFavoritesOpen(!isFavoritesOpen)}
+            disabled
+          >
+            <SideBar.AccordionItem label={'Saved Items'} />
+            <SideBar.AccordionItem label={'Work in progress'} />
+            <SideBar.AccordionItem label={'Reports'} />
+          </SideBar.Accordion>
+        </SideBar.Content>
+      </SideBar>
+    </Container>
+  )
+}
+
+const Content = styled.div`
+  padding: 2rem;
+`
+const Headline = styled.h1``
+
+const lorem =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam magna et mi pellentesque mattis. Etiam tempus tortor eget tellus dictum, eget ultrices tortor aliquet. Nullam a tincidunt lectus, sit amet finibus orci. Ut ac egestas mauris, at iaculis odio. Proin a risus at ligula volutpat rutrum ac sodales mauris. Etiam scelerisque, nunc ut ornare tristique, nisl velit dignissim neque, ac ultricies nibh lorem nec ipsum. In pellentesque diam sit amet turpis pellentesque malesuada. Ut lacus tortor, rutrum ac diam in, tempus tempus nisl. Cras tincidunt orci a neque molestie, ut lobortis quam varius. Fusce posuere, libero eu dictum malesuada, arcu nisl scelerisque metus, a mollis enim urna vel neque. Maecenas tincidunt odio at turpis elementum, vel finibus sem mattis. Suspendisse volutpat maximus diam, eget auctor urna ultrices ac. Donec finibus purus sem, vitae interdum nulla volutpat ut.'
+const ipsum =
+  'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam maximus blandit leo ac accumsan. Integer facilisis porta elit, vel dictum lacus viverra et. Nullam ultricies tempor tincidunt. Vestibulum venenatis vulputate augue quis iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas luctus dignissim velit a volutpat.'
+
+const homePage = (
+  <Content>
+    <Headline>Home</Headline>
+    <Typography>{lorem}</Typography>
+    <Typography>{ipsum}</Typography>
+  </Content>
+)
+
+const gettingStartedPage = (
+  <Content>
+    <Headline>Getting started</Headline>
+    <Typography>{ipsum}</Typography>
+  </Content>
+)
+
+const toolsPage = (
+  <Content>
+    <Headline>Tools</Headline>
+    <Typography>{ipsum}</Typography>
+    <Typography>{lorem}</Typography>
+  </Content>
+)
+
+const fieldsPage = (
+  <Content>
+    <Headline>Fields</Headline>
+    <Typography>{lorem}</Typography>
+  </Content>
+)
+
+const reportsPage = (
+  <Content>
+    <Headline>Reports</Headline>
+    <Typography>{lorem}</Typography>
+    <Typography>{ipsum}</Typography>
+  </Content>
+)
+
+const archivedPage = (
+  <Content>
+    <Headline>Archived</Headline>
+    <Typography>{ipsum}</Typography>
+  </Content>
+)
+
+const savedItemsPage = (
+  <Content>
+    <Headline>Saved Items</Headline>
+    <Typography>{lorem}</Typography>
+  </Content>
+)
+
+const workInProgressPage = (
+  <Content>
+    <Headline>Work In Progress</Headline>
+    <Typography>{lorem}</Typography>
+    <Typography>{ipsum}</Typography>
+  </Content>
+)
+
+export const WithRouting: Story<SidebarType> = () => {
+  const [selected, setSelected] = useState<string>('')
+
+  const sidebarLinks = [
+    { label: 'Home', icon: home, name: 'home' },
+    { label: 'Getting started', icon: business, name: 'gettingStarted' },
+  ]
+
+  const sidebarAccordions = [
+    {
+      label: 'Gas',
+      icon: gas,
+      children: [
+        { label: 'Tools', name: 'tools' },
+        { label: 'Fields', name: 'fields' },
+        { label: 'Reports', name: 'reports' },
+        { label: 'Archived', name: 'archived' },
+      ],
+    },
+    {
+      label: 'Favorites',
+      icon: favorite_outlined,
+      children: [
+        { label: 'Saved Items', name: 'savedItems' },
+        { label: 'Work in progress', name: 'workInProgress' },
+      ],
+    },
+  ]
+
+  const selectPage = (selected: string) => {
+    switch (selected) {
+      case 'home':
+        return homePage
+      case 'gettingStarted':
+        return gettingStartedPage
+      case 'tools':
+        return toolsPage
+      case 'fields':
+        return fieldsPage
+      case 'reports':
+        return reportsPage
+      case 'archived':
+        return archivedPage
+      case 'savedItems':
+        return savedItemsPage
+      case 'workInProgress':
+        return workInProgressPage
+      default:
+        return homePage
+    }
+  }
+
+  return (
+    <Container>
+      <SideBar>
+        <SideBar.Content>
+          <SideBar.Toggle />
+          {sidebarLinks.map((linkItem) => (
+            <SideBar.Link
+              key={linkItem.name}
+              label={linkItem.label}
+              icon={linkItem.icon}
+              active={selected === linkItem.name}
+              onClick={() => {
+                setSelected(linkItem.name)
+              }}
+            />
+          ))}
+          {sidebarAccordions.map((accordionItem) => (
+            <SideBar.Accordion
+              key={accordionItem.label}
+              label={accordionItem.label}
+              icon={accordionItem.icon}
+            >
+              {accordionItem.children.map((accordionItemChild) => (
+                <SideBar.AccordionItem
+                  key={accordionItemChild.name}
+                  label={accordionItemChild.label}
+                  active={selected === accordionItemChild.name}
+                  onClick={() => {
+                    setSelected(accordionItemChild.name)
+                  }}
+                />
+              ))}
+            </SideBar.Accordion>
+          ))}
+        </SideBar.Content>
+      </SideBar>
+      {selectPage(selected)}
+    </Container>
+  )
+}
+
+const sidebarLinks = [
+  { label: 'Home', icon: home, name: 'home' },
+  { label: 'Getting started', icon: business, name: 'gettingStarted' },
+]
+
+const sidebarAccordions = [
+  {
+    label: 'Gas',
+    icon: gas,
+    children: [
+      { label: 'Tools', name: 'tools' },
+      { label: 'Fields', name: 'fields' },
+      { label: 'Reports', name: 'reports' },
+      { label: 'Archived', name: 'archived' },
+    ],
+  },
+  {
+    label: 'Favorites',
+    icon: favorite_outlined,
+    children: [
+      { label: 'Saved Items', name: 'savedItems' },
+      { label: 'Work in progress', name: 'workInProgress' },
+    ],
+  },
+]
+
+const selectPage = (selected: string) => {
+  switch (selected) {
+    case 'home':
+      return homePage
+    case 'gettingStarted':
+      return gettingStartedPage
+    case 'tools':
+      return toolsPage
+    case 'fields':
+      return fieldsPage
+    case 'reports':
+      return reportsPage
+    case 'archived':
+      return archivedPage
+    case 'savedItems':
+      return savedItemsPage
+    case 'workInProgress':
+      return workInProgressPage
+    default:
+      return homePage
+  }
+}
+
+export const ControlledExample: Story<SidebarType> = () => {
+  const [selected, setSelected] = useState<string>('')
+
+  const hasActiveItem = (subItems: { label: string; name: string }[]) => {
+    for (const item of subItems) {
+      if (selected === item.name) {
+        return true
+      }
+    }
+    return false
+  }
+
+  return (
+    <Container>
+      <SideBar>
+        <SideBar.Content>
+          <SideBar.Toggle />
+          {sidebarLinks.map((linkItem) => (
+            <SideBar.Link
+              key={linkItem.name}
+              label={linkItem.label}
+              icon={linkItem.icon}
+              active={selected === linkItem.name}
+              onClick={() => {
+                setSelected(linkItem.name)
+              }}
+            />
+          ))}
+          {sidebarAccordions.map((accordionItem) => (
+            <SideBar.Accordion
+              key={accordionItem.label}
+              label={accordionItem.label}
+              icon={accordionItem.icon}
+              active={hasActiveItem(accordionItem.children)}
+            >
+              {accordionItem.children.map((accordionItemChild) => (
+                <SideBar.AccordionItem
+                  key={accordionItemChild.name}
+                  label={accordionItemChild.label}
+                  active={selected === accordionItemChild.name}
+                  onClick={() => {
+                    setSelected(accordionItemChild.name)
+                  }}
+                />
+              ))}
+            </SideBar.Accordion>
+          ))}
+        </SideBar.Content>
+      </SideBar>
+      {selectPage(selected)}
+    </Container>
   )
 }
