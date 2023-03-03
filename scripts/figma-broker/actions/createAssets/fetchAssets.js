@@ -65,6 +65,7 @@ export async function fetchAssets({ query }) {
       params: {
         overrides: {
           removeViewBox: false,
+          sortAttrs: false,
         },
       },
     },
