@@ -107,7 +107,8 @@ jobs:
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
-  publish-storybook-lab:
+  # TODO: To be deleted once new storybook is being used
+  publish-old-storybook-lab:
     name: Publish Storybook
     needs: [publish-lab-package, setup, packages]
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
@@ -120,6 +121,27 @@ jobs:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  publish-storybook-lab:
+    needs: [setup, packages]
+    name: Build & Deploy Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use cache with storybook files
+        id: use-cache-storybook
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-production-lab-storybook
+      - name: Deploy the website
+        id: deploy-website
+        uses: tibor19/static-website-deploy@v2
+        with:
+          enabled-static-website: 'true'
+          folder: 'packages/eds-lab-react/storybook-build'
+          public-access-policy: 'container'
+          connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING }}
   publish-core-package:
     name: Publish core-react to npm
     runs-on: ubuntu-latest
@@ -136,7 +158,8 @@ jobs:
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
-  publish-storybook:
+  # TODO: Delete once new storybook is being used
+  publish-old-storybook:
     name: Publish Storybook
     needs: [publish-core-package, setup, packages]
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
@@ -149,3 +172,24 @@ jobs:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  publish-storybook:
+    needs: [setup, packages]
+    name: Build & Deploy Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use cache with storybook files
+        id: use-cache-storybook
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+      - name: Deploy the website
+        id: deploy-website
+        uses: tibor19/static-website-deploy@v2
+        with:
+          enabled-static-website: 'true'
+          folder: 'packages/eds-core-react/storybook-build'
+          public-access-policy: 'container'
+          connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
