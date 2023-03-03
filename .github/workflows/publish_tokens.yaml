@@ -51,6 +51,8 @@ jobs:
     name: Publish to npm
     runs-on: ubuntu-latest
     needs: [packages, setup]
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Use "dist" cache
         id: dist-cache
@@ -63,7 +65,6 @@ jobs:
       - name: Publish to npm
         id: publish-to-npm
         run: |
-          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2

@@ -64,10 +64,7 @@ jobs:
       - name: Publish to npm
         id: publish-to-npm
         run: |
-          set +e
           node_modules/.bin/pnpm --filter ./packages/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
-          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-          exit "$exitcode"
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
