@@ -10,6 +10,9 @@ on:
         description: 'Slot for Storybook (development | production | lab | test)'
         required: false
         default: 'development'
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   setup:
     uses: equinor/design-system/.github/workflows/_setup.yml@develop
@@ -24,6 +27,7 @@ jobs:
     needs: [setup]
     steps:
       - name: Use "setup" cache
+        id: setup-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -31,6 +35,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Use built packages cache
+        id: packages-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -38,17 +43,27 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
       - name: Build packages
+        id: build-packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
+        id: build-core-storybook
         run: node_modules/.bin/pnpm build:storybook
       - name: Build lab Storybook
+        id: build-lab-storybook
         run: node_modules/.bin/pnpm build:storybook:lab
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   publish-icons:
     name: Publish icons to npm
     runs-on: ubuntu-latest
     needs: [packages, setup]
     steps:
       - name: Use built packages cache
+        id: packages-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -56,15 +71,23 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
       - name: Publish to npm
+        id: publish-to-npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   publish-tokens:
     name: Publish tokens to npm
     runs-on: ubuntu-latest
     needs: [packages, setup]
     steps:
       - name: Use built packages cache
+        id: packages-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -72,15 +95,23 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
       - name: Publish to npm
+        id: publish-to-npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   publish-utils-package:
     name: Publish utils to npm
     runs-on: ubuntu-latest
     needs: [packages, setup, publish-tokens]
     steps:
       - name: Use built packages cache
+        id: packages-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -88,15 +119,23 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
       - name: Publish to npm
+        id: publish-to-npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   publish-lab-package:
     name: Publish lab to npm
     runs-on: ubuntu-latest
     needs: [publish-utils-package, setup]
     steps:
       - name: Use built packages cache
+        id: packages-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -104,9 +143,16 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
       - name: Publish to npm
+        id: publish-to-npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   # TODO: To be deleted once new storybook is being used
   publish-old-storybook-lab:
     name: Publish Storybook
@@ -142,12 +188,19 @@ jobs:
           folder: 'packages/eds-lab-react/storybook-build'
           public-access-policy: 'container'
           connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING }}
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   publish-core-package:
     name: Publish core-react to npm
     runs-on: ubuntu-latest
     needs: [publish-utils-package, publish-icons, publish-tokens, setup]
     steps:
       - name: Use built packages cache
+        id: packages-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -155,9 +208,16 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
       - name: Publish to npm
+        id: publish-to-npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
           node_modules/.bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   # TODO: Delete once new storybook is being used
   publish-old-storybook:
     name: Publish Storybook
@@ -193,3 +253,9 @@ jobs:
           folder: 'packages/eds-core-react/storybook-build'
           public-access-policy: 'container'
           connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()

@@ -11,10 +11,17 @@ on:
       checkout_paths:
         type: string
         required: true
+    secrets:
+        SLACK_WEBHOOK_URL:
+        required: true
     outputs:
       tag:
         description: 'Package tag'
         value: ${{ jobs.variables.outputs.tag }}
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   variables:
     runs-on: ubuntu-latest
@@ -33,6 +40,12 @@ jobs:
         run: echo "tag=next" >> $GITHUB_ENV
       - name: Print generated values
         run: echo "tag -> ${{ env.tag }}"
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
   files:
     runs-on: ubuntu-latest
     env:
@@ -68,9 +81,11 @@ jobs:
             ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
       - name: Install pnpm
+        id: install-pnpm
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
       - name: Install dependencies recursively
+        id: install-dependencies
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
       - id: cache-files
@@ -81,3 +96,9 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ inputs.cacheKey }}
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()

@@ -1,3 +1,4 @@
+# TODO: Delete once new storybook is being used
 name: _Publish to Azure with Docker
 on:
   workflow_call:

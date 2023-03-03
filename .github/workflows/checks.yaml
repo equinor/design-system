@@ -12,6 +12,9 @@ on:
   push:
     branches:
       - develop
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   setup:
     uses: equinor/design-system/.github/workflows/_setup.yml@develop
@@ -24,6 +27,7 @@ jobs:
     needs: setup
     steps:
       - name: Use "setup" cache
+        id: setup-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -31,10 +35,20 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Build packages
+        id: build-packages
         run: node_modules/.bin/pnpm run build
       - name: Test packages
+        id: test-packages
         run: node_modules/.bin/pnpm run test
       - name: Lint packages
+        id: lint-packages
         run: node_modules/.bin/pnpm run lint:all
       - name: Type check packages
+        id: type-check-packages
         run: node_modules/.bin/pnpm run types
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()

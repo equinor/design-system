@@ -29,7 +29,7 @@ jobs:
           repository: 'equinor/design-system-cdn'
           ref: main
           ssh-key: ${{ secrets.CDN_REPO_PRIVATE_KEY }}
-      - name: Az CLI login 🔑  # Use federated credential
+      - name: Az CLI login 🔑  # Using federated credential
         uses: azure/login@v1
         with:
           client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
@@ -39,7 +39,6 @@ jobs:
         id: upload-files
         uses: azure/CLI@v1
         with:
-        # Need to find out if cli login is good enough
           inlineScript: |
             az storage blob sync -c ${{ vars.AZURE_CDN_CONTAINER_NAME }} -s assets --account-name ${{ vars.AZURE_CDN_STORAGE_ACCOUNT_NAME }}
       - name: Purge CDN endpoint 🚮
@@ -47,7 +46,6 @@ jobs:
         with:
           inlineScript: |
             az cdn endpoint purge --content-paths  "/*" --profile-name ${{ vars.AZURE_CDN_PROFILE_NAME }} --name ${{ vars.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ vars.AZURE_RESOURCE_GROUP }}
-      # Azure logout
       - name: logout 🔓
         run: |
           az logout

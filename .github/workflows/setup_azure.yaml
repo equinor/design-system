@@ -8,15 +8,16 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Login to azure
+      - name: Login to azure 🔑
         id: login-to-azure
         uses: azure/login@v1
         with:
+          # TODO: Start using federated credentials
           creds: ${{ secrets.AZURE_CREDENTIALS_2022 }}
       - name: Show Azure account
         run: az account show
       # Checkout internal repository where the bicep files are located
-      - name: Checout internal
+      - name: Checout internal 🛎️
         id: checkout-internal
         uses: actions/checkout@v3
         with:
@@ -24,7 +25,7 @@ jobs:
           ref: main
           token: ${{ secrets.PAT_INTERNAL }}
       # Do the actual deployment
-      - name: deploy
+      - name: deploy 🚀
         id: deploy
         uses: azure/arm-deploy@v1
         with:
@@ -34,6 +35,10 @@ jobs:
           template: .azure/main.bicep
           parameters: 'location=northeurope'
           failOnStdErr: false
+      - name: logout 🔓
+        run: |
+          az logout
+        if: always()
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
