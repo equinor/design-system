@@ -1,4 +1,4 @@
-import * as SVGO from 'svgo'
+import { optimize } from 'svgo'
 import * as R from 'ramda'
 import {
   getFigmaFile,
@@ -22,20 +22,6 @@ export async function fetchAssets({ query }) {
 
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
-
-  const plugins = SVGO.extendDefaultPlugins([
-    {
-      name: 'removeAttrs',
-      active: true,
-      params: {
-        attrs: '(fill)',
-      },
-    },
-    {
-      name: 'removeViewBox',
-      active: false,
-    },
-  ])
 
   console.info('Get asset urls from Figma')
   // Update with svg image urls from Figma
@@ -78,9 +64,7 @@ export async function fetchAssets({ query }) {
       value: await Promise.all(
         assetPage.value.map(async (asset) => {
           const svgDirty = await fetchFile(asset.url)
-          const svgClean = SVGO.optimize(svgDirty, {
-            plugins,
-          })
+          const svgClean = optimize(svgDirty)
 
           const { height, width } = svgClean.info
 
