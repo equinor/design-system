@@ -42,13 +42,13 @@ jobs:
         # Need to find out if cli login is good enough
           inlineScript: |
             az storage blob sync -c ${{ vars.AZURE_CDN_CONTAINER_NAME }} -s assets --account-name ${{ vars.AZURE_CDN_STORAGE_ACCOUNT_NAME }}
-      - name: Purge CDN endpoint
+      - name: Purge CDN endpoint 🚮
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az cdn endpoint purge --content-paths  "/*" --profile-name ${{ vars.AZURE_CDN_PROFILE_NAME }} --name ${{ vars.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ vars.AZURE_RESOURCE_GROUP }}
       # Azure logout
-      - name: logout
+      - name: logout 🔓
         run: |
           az logout
         if: always()
