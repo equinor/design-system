@@ -569,13 +569,31 @@ export const sheet_bottom_position: IconData = {
     'M3 4h18c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1zm1 10h16V6H4v8z',
 }
 
+export const sheet_topposition: IconData = {
+  name: 'sheet_topposition',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M3 20h18c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1zm1-10h16v8H4v-8z',
+}
+
 export const sheet_leftposition: IconData = {
   name: 'sheet_leftposition',
   prefix: 'eds',
   height: '24',
   width: '24',
   svgPathData:
-    'M3 4h18c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1zm7 14h10V6H10v12z',
+    'M3 20h18c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1zm7-14h10v12H10V6z',
+}
+
+export const sheet_rightposition: IconData = {
+  name: 'sheet_rightposition',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M3 4h18c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1zm1 14h10V6H4v12z',
 }
 
 export const enlarge: IconData = {
