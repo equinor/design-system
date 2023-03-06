@@ -120,6 +120,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
       htmlFor: id,
       label,
       meta,
+      disabled,
     }
 
     const showLabel = label || meta
