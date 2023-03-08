@@ -392,3 +392,52 @@ StaysOpen.bind({})
 StaysOpen.args = {
   placement: 'bottom-end',
 }
+
+export const MatchWidth: Story<MenuProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Button
+        ref={setAnchorEl}
+        style={{ width: 300 }}
+        id="anchor-compact"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-compact"
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
+      >
+        Click to open Menu!
+      </Button>
+      <EdsProvider density="compact">
+        <Menu
+          open={isOpen}
+          id="menu-compact"
+          aria-labelledby="anchor-compact"
+          onClose={closeMenu}
+          anchorEl={anchorEl}
+          matchAnchorWidth
+        >
+          <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+          <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+          <Menu.Item onClick={onClick}>Cable</Menu.Item>
+        </Menu>
+      </EdsProvider>
+    </EdsProvider>
+  )
+}
