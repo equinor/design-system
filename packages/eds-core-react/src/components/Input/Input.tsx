@@ -59,6 +59,11 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
       background: states.readOnly.background,
       boxShadow: states.readOnly.boxShadow,
     })}
+    & > input {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   `
 })
 
