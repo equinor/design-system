@@ -22,6 +22,8 @@ import {
   useInteractions,
   useDismiss,
   FloatingPortal,
+  size,
+  Middleware,
 } from '@floating-ui/react'
 
 type MenuPaperProps = {
@@ -130,21 +132,49 @@ export type MenuProps = {
   onClose?: () => void
   /** Menu placement relative to anchorEl */
   placement?: Placement
+  /** Match the width of the menu with the width of the anchorEl */
+  matchAnchorWidth?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
-  { anchorEl, open, placement = 'bottom', onClose, style, className, ...rest },
+  {
+    anchorEl,
+    open,
+    placement = 'bottom',
+    matchAnchorWidth = false,
+    onClose,
+    style,
+    className,
+    ...rest
+  },
   ref,
 ) {
   const { density } = useEds()
   const token = useToken({ density }, tokens)
+  let floatingMiddleware: Middleware[] = [
+    offset(4),
+    flip(),
+    shift({ padding: 8 }),
+  ]
+  if (matchAnchorWidth) {
+    floatingMiddleware = [
+      ...floatingMiddleware,
+      size({
+        apply({ rects, elements }) {
+          Object.assign(elements.floating.style, {
+            width: `${rects.reference.width}px`,
+          })
+        },
+      }),
+    ]
+  }
 
   const { x, y, reference, floating, refs, update, strategy, context } =
     useFloating({
       placement,
       open,
       onOpenChange: onClose,
-      middleware: [offset(4), flip(), shift({ padding: 8 })],
+      middleware: floatingMiddleware,
     })
 
   useEffect(() => {
