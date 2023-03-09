@@ -31,6 +31,12 @@ exports[`Input Matches snapshot 1`] = `
   outline-offset: 0px;
 }
 
+.c0 > input {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .c1 {
   width: 100%;
   border: none;

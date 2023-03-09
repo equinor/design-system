@@ -60,6 +60,12 @@ exports[`TextField Matches snapshot 1`] = `
   outline-offset: 0px;
 }
 
+.c3 > input {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .c4 {
   width: 100%;
   border: none;

@@ -687,7 +687,7 @@ function AutocompleteInner<T>(
             readOnly={readOnly}
             onFocus={openSelect}
             onClick={openSelect}
-            rightAdornmentsWidth={24 * 2 + 8 + 8}
+            rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
             rightAdornments={
               <>
                 {loading && <Progress.Circular size={16} />}
