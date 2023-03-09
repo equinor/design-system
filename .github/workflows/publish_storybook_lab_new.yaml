@@ -15,6 +15,7 @@ env:
 jobs:
   setup:
     uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
+    secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
