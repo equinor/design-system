@@ -7,8 +7,8 @@ export type DialogHeaderProps = HTMLAttributes<HTMLDivElement>
 const StyledDialogHeader = styled.div(({ theme }) => {
   return css`
     display: flex;
-    justify-content: space-betweene;
-    algin-items: center;
+    justify-content: space-between;
+    align-items: center;
     padding: ${theme.entities.children.spacings.top}
       ${theme.entities.children.spacings.right} 0
       ${theme.entities.children.spacings.left};
