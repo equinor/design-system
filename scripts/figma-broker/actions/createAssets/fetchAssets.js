@@ -1,4 +1,4 @@
-import * as SVGO from 'svgo'
+import { optimize } from 'svgo'
 import * as R from 'ramda'
 import {
   getFigmaFile,
@@ -22,20 +22,6 @@ export async function fetchAssets({ query }) {
 
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
-
-  const plugins = SVGO.extendDefaultPlugins([
-    {
-      name: 'removeAttrs',
-      active: true,
-      params: {
-        attrs: '(fill)',
-      },
-    },
-    {
-      name: 'removeViewBox',
-      active: false,
-    },
-  ])
 
   console.info('Get asset urls from Figma')
   // Update with svg image urls from Figma
@@ -70,6 +56,42 @@ export async function fetchAssets({ query }) {
   console.info(
     `Fetching ${R.head(assetPages).name} assets as svgs from Figma urls`,
   )
+
+  let width = null
+  let height = null
+  const plugins = [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          removeViewBox: false,
+          sortAttrs: false,
+        },
+      },
+    },
+    {
+      name: 'removeAttrs',
+      params: {
+        attrs: '(fill)',
+      },
+    },
+    {
+      name: 'find-size',
+      fn: () => {
+        return {
+          element: {
+            enter: (node, parentNode) => {
+              if (parentNode.type === 'root') {
+                width = node.attributes.width
+                height = node.attributes.height
+              }
+            },
+          },
+        }
+      },
+    },
+  ]
+
   // eslint-disable-next-line no-undef
   const assetsWithSvg = await Promise.all(
     [R.head(assetsWithUrl)].map(async (assetPage) => ({
@@ -78,11 +100,7 @@ export async function fetchAssets({ query }) {
       value: await Promise.all(
         assetPage.value.map(async (asset) => {
           const svgDirty = await fetchFile(asset.url)
-          const svgClean = SVGO.optimize(svgDirty, {
-            plugins,
-          })
-
-          const { height, width } = svgClean.info
+          const svgClean = optimize(svgDirty, { plugins })
 
           return {
             ...asset,
