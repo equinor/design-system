@@ -23,10 +23,14 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .c1 {
   display: inline-block;
+  min-width: 30px;
 }
 
 .c4 {
@@ -43,6 +47,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  width: 100%;
 }
 
 @media (hover:hover) and (pointer:fine) {
