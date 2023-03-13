@@ -13,16 +13,18 @@ import { spacingsTemplate } from '@equinor/eds-utils'
 
 const { spacings, typography, states } = tokens
 
-const OrderedList = styled.ol`
+const OrderedList = styled.ol<{ $wrap: boolean }>`
   list-style: none;
   display: flex;
   padding: 0;
   margin: 0;
   flex-wrap: wrap;
+  flex-wrap: ${({ $wrap }) => ($wrap ? 'wrap' : 'nowrap')};
 `
 
 const ListItem = styled.li`
   display: inline-block;
+  min-width: 30px;
 `
 
 const Separator = styled(Typography)`
@@ -42,15 +44,21 @@ const Collapsed = styled(Typography)`
 `
 
 export type BreadcrumbsProps = {
-  /* Collapses the list of breadcrumbs so that only the first
-   * and last breadcrumb will be shown, with an ellipsis in between.  */
+  /** Collapses the list of breadcrumbs so that only the first
+   * and last breadcrumb will be shown, with an ellipsis in between
+   * @default false
+   */
   collapse?: boolean
+  /** Will not wrap breadcrumbs when set to false, but will instead trunkate each breadcrumb when viewport narrows
+   * @default true
+   */
+  wrap?: boolean
   /** Children should be of Breadcrumb component */
   children: ReactNode
 } & HTMLAttributes<HTMLElement>
 
 export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
-  function Breadcrumbs({ children, collapse, ...rest }, ref) {
+  function Breadcrumbs({ children, collapse, wrap = true, ...rest }, ref) {
     const props = {
       ...rest,
       ref,
@@ -78,7 +86,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
       return [
         allCrumbs[0],
         <Fragment key="collapsed">
-          <ListItem>
+          <ListItem style={{ minWidth: 'unset' }}>
             <Collapsed
               link
               role="button"
@@ -112,7 +120,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
 
     return (
       <nav {...props} aria-label="breadcrumbs">
-        <OrderedList>
+        <OrderedList $wrap={wrap}>
           {collapse && !expanded ? collapsedCrumbs(allCrumbs) : allCrumbs}
         </OrderedList>
       </nav>

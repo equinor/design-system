@@ -23,6 +23,7 @@ const StyledTypography = styled(Typography)<StyledProps>`
   display: inline-block;
   text-decoration: none;
   color: ${typography.color};
+  width: 100%;
   ${({ $maxWidth }) => css({ maxWidth: $maxWidth })}
 `
 type OverridableSubComponent = OverridableComponent<
@@ -38,19 +39,24 @@ export type BreadcrumbProps = {
   maxWidth?: number
   /** Children is breadcrumb text */
   children: string
+  /** Always show tooltip */
+  forceTooltip?: boolean
   /** Override element type */
   as?: ElementType
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const Breadcrumb: OverridableSubComponent = forwardRef(
-  function Breadcrumb({ children, maxWidth, href, as, ...other }, ref) {
+  function Breadcrumb(
+    { children, maxWidth, forceTooltip, href, as, ...other },
+    ref,
+  ) {
     const props = {
       ...other,
       href,
       ref,
     }
 
-    const showTooltip = maxWidth > 0
+    const showTooltip = maxWidth > 0 || forceTooltip
     const isHrefDefined = href !== undefined
 
     const forwardedAs: ElementType = useMemo(

@@ -56,7 +56,9 @@ Choose `maxWidth` in pixels to truncate labels. Hover on label to see full text.
 
 ### Wrapped
 
-Wraps over two or more lines. Controlled by parent width.
+`Breadcrumbs` by default wraps to the next line if the parent container is too narrow. 
+With the `wrap` property set to false, the `Breadcrumbs` will instead automatically truncate. 
+It might be a good idea to use `forceTooltip` on the `Breadcrumbs.Breadcrumb` when this is the case.
 
 <Story id="navigation-breadcrumbs--wrapped" />
 
