@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.30.0] - 2023-03-15
+
+### Fixed
+
+- 🐛 `NativeSelect`: fixed label not having disabled-style when disabled by @oddvernes in https://github.com/equinor/design-system/pull/2802
+- 🐛 `Dialog`: fixed css syntax errors in `Dialog.Header`, `align-items: center; justify-content: space-between;` is now applied by @oddvernes in https://github.com/equinor/design-system/pull/2801
+
+### Added
+
+- ✨`Accordion`: Added `onExpandedChange` prop to `Accordion.Item` to enable controlled mode by @bjartebore in https://github.com/equinor/design-system/pull/2775
+- ✨ `Autocomplete`: added `onInputChange` and `loading` props to enable async search-as-you-type use cases. Updated storybook with example by @oddvernes in https://github.com/equinor/design-system/pull/2788
+- ✨ `Autocomplete`: added `dropdownHeight` prop allowing users to override default dropdown height by @oddvernes in https://github.com/equinor/design-system/pull/2793
+- ✨ `Menu`: added `matchAnchorWidth` prop by @bjartebore in https://github.com/equinor/design-system/pull/2806
+- ✨`Breadcrumbs`: added option to not wrap Breadcrumbs with a new `wrap` prop, plus added `forceTooltip` prop. Added storybook example by @oddvernes in https://github.com/equinor/design-system/commit/fdb178be39fd51ec474e85bd008f6a5f9a0f8ef3
+
+### Changed
+
+- 🚸⚡️ `Slider` - new behaviour: min/max thumbs can no longer cross, plus some performance improvements by @oddvernes in https://github.com/equinor/design-system/pull/2783
+- 🚸💄 `Input`: added ellipsis to overflowing text, `Autocomplete` input: reduced padding-right by @oddvernes in https://github.com/equinor/design-system/pull/2807
+
 ## [0.29.1] - 2023-02-03
 
 ### Fixed
