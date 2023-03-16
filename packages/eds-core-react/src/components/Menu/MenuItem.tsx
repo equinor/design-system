@@ -26,12 +26,12 @@ type StyleProps = {
 }
 
 type StyleAttrsProps = {
-  isFocused: string
+  $isFocused: string
 }
 
-const Item = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
+const Item = styled.button.attrs<StyleAttrsProps>(({ $isFocused }) => ({
   role: 'menuitem',
-  tabIndex: isFocused ? -1 : 0,
+  tabIndex: $isFocused ? -1 : 0,
 }))<StyleProps>`
   border: 0;
   background-color: transparent;
@@ -143,7 +143,7 @@ export const MenuItem: OverridableSubComponent = forwardRef<
     ...rest,
     as,
     disabled,
-    isFocused,
+    $isFocused: isFocused,
   }
 
   return (
