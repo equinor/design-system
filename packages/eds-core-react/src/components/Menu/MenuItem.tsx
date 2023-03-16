@@ -110,12 +110,14 @@ export type MenuItemProps = {
   /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
   /**
+   * Close menu when item is clicked
    * @default true
-   *  Close menu when item is clicked */
+   */
   closeMenuOnClick?: boolean
   /**
+   * Override element type
    * @default 'button'
-   * Override element type*/
+   */
   as?: ElementType
 } & React.HTMLAttributes<HTMLButtonElement>
 
