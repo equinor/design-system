@@ -26,6 +26,7 @@ import {
   error_outlined,
   warning_outlined,
   check_circle_outlined,
+  external_link,
 } from '@equinor/eds-icons'
 
 const { colors } = tokens
@@ -394,7 +395,6 @@ StaysOpen.args = {
 }
 
 export const MatchWidth: Story<MenuProps> = () => {
-  const [density, setDensity] = useState<Density>('comfortable')
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -406,20 +406,15 @@ export const MatchWidth: Story<MenuProps> = () => {
     setIsOpen(false)
   }
 
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
   return (
-    <EdsProvider density={density}>
+    <>
       <Button
         ref={setAnchorEl}
         style={{ width: 300 }}
-        id="anchor-compact"
+        id="anchor-match"
         aria-haspopup="true"
         aria-expanded={isOpen}
-        aria-controls="menu-compact"
+        aria-controls="menu-match"
         onClick={() => (isOpen ? closeMenu() : openMenu())}
       >
         Click to open Menu!
@@ -427,8 +422,8 @@ export const MatchWidth: Story<MenuProps> = () => {
       <EdsProvider density="compact">
         <Menu
           open={isOpen}
-          id="menu-compact"
-          aria-labelledby="anchor-compact"
+          id="menu-match"
+          aria-labelledby="anchor-match"
           onClose={closeMenu}
           anchorEl={anchorEl}
           matchAnchorWidth
@@ -438,6 +433,74 @@ export const MatchWidth: Story<MenuProps> = () => {
           <Menu.Item onClick={onClick}>Cable</Menu.Item>
         </Menu>
       </EdsProvider>
-    </EdsProvider>
+    </>
+  )
+}
+
+export const AsLink: Story<MenuProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <Button
+        ref={setAnchorEl}
+        id="anchor-as"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-as"
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
+      >
+        Open menu
+      </Button>
+      <Menu
+        open={isOpen}
+        id="menu-as"
+        aria-labelledby="anchor-as"
+        onClose={closeMenu}
+        anchorEl={anchorEl}
+      >
+        <Menu.Item
+          as="a"
+          onClick={closeMenu}
+          href="https://eds.equinor.com/"
+          target="_blank"
+          style={{ justifyContent: 'space-between' }}
+        >
+          <Typography group="navigation" variant="menu_title" as="span">
+            EDS homepage
+          </Typography>
+          <Icon
+            data={external_link}
+            size={16}
+            color={colors.text.static_icons__tertiary.hex}
+          />
+        </Menu.Item>
+        <Menu.Item
+          as="a"
+          onClick={closeMenu}
+          href="https://equinor.com/"
+          target="_blank"
+          style={{ justifyContent: 'space-between' }}
+        >
+          <Typography group="navigation" variant="menu_title" as="span">
+            Equinor.com
+          </Typography>
+          <Icon
+            data={external_link}
+            size={16}
+            color={colors.text.static_icons__tertiary.hex}
+          />
+        </Menu.Item>
+      </Menu>
+    </>
   )
 }
