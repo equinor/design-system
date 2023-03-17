@@ -50,10 +50,13 @@ const Container = styled.a<ContainerProps>(({ theme, $active }) => {
     },
   } = theme
   return css`
-    background-color: ${$active ? menuActiveBackground : 'none'};
+    background-color: ${$active ? menuActiveBackground : 'transparent'};
     display: grid;
     grid-template-columns: ${minWidth} 1fr;
+    width: 100%;
+    padding: 0;
     place-items: center;
+    border: 0;
     ${bordersTemplate(border)}
     text-decoration: none;
     min-height: ${minHeight};
@@ -64,6 +67,13 @@ const Container = styled.a<ContainerProps>(({ theme, $active }) => {
     &:disabled {
       background-color: ${menuDisabledBackground};
       color: ${menuDisabledText};
+      cursor: not-allowed;
+      & > p {
+        color: ${menuDisabledText};
+      }
+      & > svg {
+        fill: ${menuDisabledText};
+      }
     }
     &:focus-visible {
       ${outlineTemplate(focus.outline)};
