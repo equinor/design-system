@@ -61,6 +61,8 @@ jobs:
     needs: [setup, packages]
     name: Build & Deploy Website
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
@@ -77,7 +79,7 @@ jobs:
           enabled-static-website: 'true'
           folder: 'packages/eds-core-react/storybook-build'
           public-access-policy: 'container'
-          connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
+          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
