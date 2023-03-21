@@ -8,7 +8,6 @@ export const BaseInputWrapper = styled.span(
     border-radius: 50%;
     position: relative;
     grid-area: input;
-    pointer-events: none;
 
     &::before {
       position: absolute;
@@ -38,6 +37,8 @@ export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
     height: 100%;
     grid-area: input;
     margin: 0;
+    position: relative;
+    z-index: 1;
     cursor: ${disabled ? 'not-allowed' : 'pointer'};
     &:focus {
       outline: none;
