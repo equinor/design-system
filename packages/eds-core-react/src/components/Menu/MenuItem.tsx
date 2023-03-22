@@ -1,4 +1,4 @@
-import { MouseEvent, forwardRef } from 'react'
+import { MouseEvent, forwardRef, ElementType } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import {
@@ -6,6 +6,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
   typographyTemplate,
+  OverridableComponent,
 } from '@equinor/eds-utils'
 import { useMenu } from './Menu.context'
 
@@ -25,18 +26,19 @@ type StyleProps = {
 }
 
 type StyleAttrsProps = {
-  isFocused: string
+  $isFocused: string
 }
 
-const Item = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
+const Item = styled.button.attrs<StyleAttrsProps>(({ $isFocused }) => ({
   role: 'menuitem',
-  tabIndex: isFocused ? -1 : 0,
+  tabIndex: $isFocused ? -1 : 0,
 }))<StyleProps>`
   border: 0;
   background-color: transparent;
   width: auto;
   position: relative;
   z-index: 2;
+  text-decoration: none;
 
   ${typographyTemplate(typography)}
   ${({ theme }) => spacingsTemplate(theme.entities.item.spacings)}
@@ -91,6 +93,12 @@ const Content = styled.div`
   grid-auto-columns: max-content auto max-content;
   align-items: center;
 `
+type OverridableSubComponent = OverridableComponent<
+  MenuItemProps,
+  HTMLButtonElement
+> & {
+  displayName?: string
+}
 
 export type MenuItemProps = {
   /** @ignore */
@@ -101,62 +109,73 @@ export type MenuItemProps = {
   disabled?: boolean
   /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
-  /** Close menu when item is clicked */
+  /**
+   * Close menu when item is clicked
+   * @default true
+   */
   closeMenuOnClick?: boolean
+  /**
+   * Override element type
+   * @default 'button'
+   */
+  as?: ElementType
 } & React.HTMLAttributes<HTMLButtonElement>
 
-export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
-  function MenuItem(
-    {
-      children,
-      disabled,
-      index = 0,
-      onClick,
-      closeMenuOnClick = true,
-      ...rest
-    },
-    ref,
-  ) {
-    const { focusedIndex, setFocusedIndex, onClose } = useMenu()
-
-    const toggleFocus = (index_: number) => {
-      if (focusedIndex !== index_) {
-        setFocusedIndex(index_)
-      }
-    }
-
-    const isFocused = index === focusedIndex
-
-    const props = {
-      ...rest,
-      disabled,
-      isFocused,
-    }
-
-    return (
-      <Item
-        {...props}
-        ref={mergeRefs<HTMLButtonElement>(ref, (el) => {
-          if (isFocused) {
-            requestAnimationFrame(() => {
-              if (el !== null) el.focus()
-            })
-          }
-        })}
-        onFocus={() => toggleFocus(index)}
-        onClick={(e) => {
-          if (onClick) {
-            onClick(e)
-            if (onClose !== null && closeMenuOnClick) {
-              onClose(e)
-            }
-          }
-        }}
-      >
-        <Content>{children}</Content>
-      </Item>
-    )
+export const MenuItem: OverridableSubComponent = forwardRef<
+  HTMLButtonElement,
+  MenuItemProps
+>(function MenuItem(
+  {
+    children,
+    disabled,
+    index = 0,
+    as = 'button',
+    onClick,
+    closeMenuOnClick = true,
+    ...rest
   },
-)
+  ref,
+) {
+  const { focusedIndex, setFocusedIndex, onClose } = useMenu()
+
+  const toggleFocus = (index_: number) => {
+    if (focusedIndex !== index_) {
+      setFocusedIndex(index_)
+    }
+  }
+
+  const isFocused = index === focusedIndex
+
+  const props = {
+    ...rest,
+    as,
+    disabled,
+    $isFocused: isFocused,
+  }
+
+  return (
+    <Item
+      {...props}
+      ref={mergeRefs<HTMLButtonElement>(ref, (el) => {
+        if (isFocused) {
+          requestAnimationFrame(() => {
+            if (el !== null) el.focus()
+          })
+        }
+      })}
+      onFocus={() => toggleFocus(index)}
+      onClick={(e: MouseEvent<Element, globalThis.MouseEvent>) => {
+        if (onClick) {
+          onClick(e)
+          if (onClose !== null && closeMenuOnClick) {
+            onClose(e)
+          }
+        }
+      }}
+    >
+      <Content>{children}</Content>
+    </Item>
+  )
+})
 
 MenuItem.displayName = 'MenuItem'
