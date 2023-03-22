@@ -6,7 +6,7 @@ const { writeFile } = fs
 
 const getBuffer = bent(
   'buffer',
-  'https://eds-static.equinor.com/font/Equinor-Regular.woff',
+  'https://cdn.eds.equinor.com/font/Equinor-Regular.woff',
 )
 
 const fontData = await getBuffer()

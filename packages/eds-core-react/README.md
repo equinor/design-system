@@ -20,7 +20,7 @@ npm install typescript --save-dev
  The Equinor typeface is not included and needs to be added to the head of your project. Its available from the EDS CDN:
 
 ```html
-<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-font.css" />
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
 ```
 
 ## Usage
