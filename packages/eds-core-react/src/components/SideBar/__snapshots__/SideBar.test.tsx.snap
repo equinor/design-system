@@ -78,7 +78,7 @@ exports[`Sidebar Matches snapshot 1`] = `
         </button>
       </div>
       <a
-        class="SidebarLink__Container-sc-gbehcj-0 kIjTTm"
+        class="SidebarLink__Container-sc-gbehcj-0 kwBAGP"
         tabindex="0"
       >
         <svg
@@ -106,7 +106,7 @@ exports[`Sidebar Matches snapshot 1`] = `
         </p>
       </a>
       <a
-        class="SidebarLink__Container-sc-gbehcj-0 kIjTTm"
+        class="SidebarLink__Container-sc-gbehcj-0 kwBAGP"
         tabindex="0"
       >
         <svg
