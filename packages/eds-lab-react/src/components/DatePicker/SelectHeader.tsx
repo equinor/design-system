@@ -1,18 +1,13 @@
 import styled from 'styled-components'
-import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { arrow_back, arrow_forward } from '@equinor/eds-icons'
-import { typographyTemplate } from '@equinor/eds-utils'
-import { Typography, Icon, Button } from '@equinor/eds-core-react'
+import { Icon, Button, NativeSelect } from '@equinor/eds-core-react'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 
-type PopupHeaderProps = ReactDatePickerCustomHeaderProps & {
-  changeDate?: (date: Date) => void
-}
-
-const PopupHeader: React.FC<PopupHeaderProps> = ({
+const SelectHeader: React.FC<ReactDatePickerCustomHeaderProps> = ({
   date,
-  changeDate,
+  changeYear,
+  changeMonth,
   decreaseMonth,
   increaseMonth,
   prevMonthButtonDisabled,
@@ -33,6 +28,11 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
     'December',
   ]
 
+  const years: number[] = []
+  for (let i = 1970; i < 2060; i++) {
+    years.push(i)
+  }
+
   return (
     <Header>
       <IconButton
@@ -47,12 +47,32 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
         <Icon data={arrow_back} />
       </IconButton>
       <HeaderControls>
-        <HeaderTitle variant="body_short">
-          {months[getMonth(date)]} {getYear(date)}
-        </HeaderTitle>
-        <TodayLabel variant="ghost" onClick={() => changeDate?.(new Date())}>
-          Today
-        </TodayLabel>
+        <YearSelect
+          id="SelectHeaderYear"
+          label=""
+          name="year"
+          onChange={({ target: { value } }) => changeYear(Number(value))}
+          value={date.getFullYear()}
+        >
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </YearSelect>
+        <MonthSelect
+          id="SelectHeaderMonth"
+          label=""
+          name="month"
+          onChange={({ target: { value } }) => changeMonth(Number(value))}
+          value={date.getMonth()}
+        >
+          {months.map((month, i) => (
+            <option key={month} value={i}>
+              {month}
+            </option>
+          ))}
+        </MonthSelect>
       </HeaderControls>
       <IconButton
         variant="ghost_icon"
@@ -69,8 +89,20 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
   )
 }
 
+const MonthSelect = styled(NativeSelect)`
+  select {
+    max-width: 110px;
+  }
+`
+
+const YearSelect = styled(NativeSelect)`
+  select {
+    max-width: 95px;
+  }
+`
+
 const Header = styled.div`
-  padding: ${tokens.spacings.top} ${tokens.spacings.right};
+  padding: ${tokens.spacings.top} calc(${tokens.spacings.right} / 2);
   width: 100%;
   max-width: ${tokens.width};
   display: grid;
@@ -82,6 +114,7 @@ const Header = styled.div`
 
 const HeaderControls = styled.div`
   display: grid;
+  gap: 2px;
   place-items: center;
   grid-auto-flow: column;
 `
@@ -100,16 +133,4 @@ const IconButton = styled(Button)`
   }
 `
 
-const HeaderTitle = styled(Typography)`
-  ${typographyTemplate(tokens.entities.title.typography)}
-`
-
-const TodayLabel = styled(Button)`
-  width: 100%;
-
-  span {
-    padding-left: 0 !important;
-  }
-`
-
-export { PopupHeader }
+export { SelectHeader }

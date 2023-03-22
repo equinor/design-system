@@ -7,7 +7,10 @@ import {
   useImperativeHandle,
   useEffect,
 } from 'react'
-import DatePicker, { registerLocale } from 'react-datepicker'
+import DatePicker, {
+  ReactDatePickerCustomHeaderProps,
+  registerLocale,
+} from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
 import styled, { css, ThemeProvider } from 'styled-components'
@@ -47,6 +50,9 @@ export type DatePickerProps = {
     | 'left'
     | 'left-start'
   locale?: string
+  renderCustomHeader?: (
+    params: ReactDatePickerCustomHeaderProps,
+  ) => React.ReactNode
 } & InputHTMLAttributes<HTMLInputElement>
 
 export type DatePickerRefProps = DatePicker &
@@ -72,6 +78,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       readOnly = false,
       popperPlacement,
       locale = 'en-gb',
+      renderCustomHeader,
     },
     ref,
   ) {
@@ -90,6 +97,12 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
 
     const localRef = useRef<DatePicker | null>()
     useImperativeHandle(ref, () => localRef.current)
+
+    const customHeader =
+      renderCustomHeader ||
+      ((props: ReactDatePickerCustomHeaderProps) => (
+        <PopupHeader {...props} changeDate={onDateValueChange} />
+      ))
 
     return (
       <ThemeProvider theme={tokens}>
@@ -128,9 +141,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               }}
               autoComplete="false"
               popperPlacement={popperPlacement}
-              renderCustomHeader={(props) => (
-                <PopupHeader {...props} changeDate={onDateValueChange} />
-              )}
+              renderCustomHeader={customHeader}
               shouldCloseOnSelect={true}
               readOnly={readOnly}
               calendarContainer={({ children, ...rest }) => (

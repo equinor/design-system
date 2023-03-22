@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'
+import { SelectHeader } from './SelectHeader'
 
 const Container = styled.div`
   height: 380px;
@@ -136,6 +137,46 @@ export const DatePickerDisabledFuture: Story<DatePickerProps> = ({
       disableFuture={true}
     />
   )
+}
+
+export const DatePickerWithCustomHeader: Story<DatePickerProps> = ({
+  id,
+  dateValue,
+  className,
+  popperPlacement,
+}: DatePickerProps) => {
+  const [startDate, setStartDate] = useState(dateValue)
+  const onChanged = (date: Date): void => {
+    setStartDate(date)
+  }
+
+  return (
+    <DatePicker
+      id={id}
+      dateValue={startDate}
+      label={'Date'}
+      onChanged={onChanged}
+      className={className}
+      popperPlacement={popperPlacement}
+      disableBeforeDate={new Date()}
+      renderCustomHeader={SelectHeader}
+    />
+  )
+}
+
+DatePickerWithCustomHeader.parameters = {
+  docs: {
+    description: {
+      component: `The date picker with custom header.`,
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1em', height: '380px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 DatePickerDisabledFuture.parameters = {
