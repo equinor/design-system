@@ -25,7 +25,6 @@ While the design system itself lives in [Figma][], this repository contains impl
   - [Storefront](#storefront)
   - [React](#react)
     - [Installation](#installation)
-    - [Safari](#safari)
     - [Usage](#usage)
   - [Icons](#icons)
     - [Installation](#installation-1)
@@ -123,17 +122,6 @@ If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 npm install typescript --save-dev
 ```
 
-### Safari
-From version `0.16.0` we added native support for [focus-visible](https://caniuse.com/?search=focus-visible) (enable focus-ring on elements when using <kbd>TAB</kbd> key) and removed the [polyfill](https://github.com/WICG/focus-visible). If your project requires support for keyboard navigation with Safari, you now need to include the polyfill yourself:
-
-```bash
-npm install --save-dev focus-visible
-```
-```jsx
- // import focus-visible polyfill only once
-    import 'focus-visible';
-```
-
 ### Usage
 
 ```jsx
@@ -219,13 +207,13 @@ The Equinor typeface is available from the EDS CDN.
 ### All the fonts
 
 ```html
-<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-font.css" />
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
 ```
 
 ### Individual fonts
 
 ```html
-<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-regular.css" />
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-regular.css" />
 ```
 
 We currently don’t support the font-display property, so if that’s something you need then please let us know.
@@ -238,7 +226,7 @@ When it comes to the Equinor logo, we have two versions – primary and horizont
 ### Usage
 
 ```html
-<img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red" alt="Equinor" />
+<img src="https://cdn.eds.equinor.com/logo/equinor-logo-primary.svg#red" alt="Equinor" />
 ```
 
 
