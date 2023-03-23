@@ -3,6 +3,7 @@
 This package host incubator components that are not ready to be moved to the core.
 
 The main difference between the lab and core is how components are versioned and general component structure. Having a lab package allows us to test new components in isolation, experiment with new features or test technical improvements without breaking changes in core.
+[Storybook](https://s478stedsstorybooklabs.z16.web.core.windows.net/) for lab-react
 ## Installation
 
 ```sh

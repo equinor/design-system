@@ -593,7 +593,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added ✨
 
-- New `placement` property on `Menu` to define placement of opened `Menu`. List of available values [here](https://eds-storybook-react.azurewebsites.net/?path=/docs/components-menu--default) ([#952](https://github.com/equinor/design-system/issues/952))
+- New `placement` property on `Menu` to define placement of opened `Menu`. List of available values [here](https://storybook.eds.equinor.com/?path=/docs/navigation-menu--introduction) ([#952](https://github.com/equinor/design-system/issues/952))
 - New `anchorEl` property on `Popover`. Use this in combination with `ref` on anchor and `open` on `Popover`. ([#673](https://github.com/equinor/design-system/issues/673))
 - New `enterDelay` property on `Tooltip` to delay open ([#1154](https://github.com/equinor/design-system/issues/1154))
 - `Tooltip` can now be closed on global `ESC` keypress ([#1195](https://github.com/equinor/design-system/issues/1195))
@@ -619,7 +619,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking changes ⚠️
 
-- `Placement` values in `Tooltip` and `Popover` are changed to match [popperJS](https://popper.js.org/). List of available values [here](https://eds-storybook-react.azurewebsites.net/?path=/docs/components-popover--default)
+- `Placement` values in `Tooltip` and `Popover` are changed to match [popperJS](https://popper.js.org/). List of available values [here](https://storybook.eds.equinor.com/?path=/docs/data-display-popover--introduction)
 - `Popover.Anchor` deprecated, please use the `anchorEl` property on `Popover` instead.
 - Removed `open` property on `Tooltip` as it was not working as expected
 

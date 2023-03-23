@@ -2,7 +2,7 @@
 
 Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
 
-Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
+Make sure to check out our [Storybook](https://storybook.eds.equinor.com/) for more examples!
 Read the [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/CHANGELOG.md) for details on specific releases.
 
 ## Installation
@@ -20,7 +20,7 @@ npm install typescript --save-dev
  The Equinor typeface is not included and needs to be added to the head of your project. Its available from the EDS CDN:
 
 ```html
-<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-font.css" />
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
 ```
 
 ## Usage
@@ -64,10 +64,13 @@ render(<App />, document.getElementById('root'))
 ## Components
 
 - Accordion
+- Autocomplete
 - Avatar
 - Banner
 - Breadcrumbs
 - Button
+  - ButtonGroup
+  - ToggleButton
 - Card
 - Checkbox
 - Chip
@@ -79,7 +82,9 @@ render(<App />, document.getElementById('root'))
 - Label
 - List
 - Menu
+- Native Select
 - Pagination
+- Paper
 - Popover
 - Progress
   - Circular
@@ -89,10 +94,7 @@ render(<App />, document.getElementById('root'))
 - Radio
 - Scrim
 - Search
-- Select
-  - Native Select
-  - Single Select
-  - Multi Select
+- SideBar
 - Side Sheet
 - Slider
 - Snackbar
@@ -100,6 +102,7 @@ render(<App />, document.getElementById('root'))
 - Table
 - Table of contents
 - Tabs
+- TextArea
 - TextField
 - Tooltip
 - TopBar
