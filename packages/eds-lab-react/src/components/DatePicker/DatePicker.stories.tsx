@@ -139,6 +139,60 @@ export const DatePickerDisabledFuture: Story<DatePickerProps> = ({
   )
 }
 
+DatePickerDisabledFuture.parameters = {
+  docs: {
+    description: {
+      component: `The date picker with disabled future dates.`,
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1em', height: '380px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+}
+
+export const DatePickerDisabled: Story<DatePickerProps> = ({
+  id,
+  dateValue,
+  className,
+  popperPlacement,
+}: DatePickerProps) => {
+  const [startDate, setStartDate] = useState(dateValue)
+  const onChanged = (date: Date): void => {
+    setStartDate(date)
+  }
+
+  return (
+    <DatePicker
+      id={id}
+      dateValue={startDate}
+      label={'Date'}
+      onChanged={onChanged}
+      className={className}
+      popperPlacement={popperPlacement}
+      disabled={true}
+    />
+  )
+}
+
+DatePickerDisabled.parameters = {
+  docs: {
+    description: {
+      component: `The date picker when disabled`,
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1em', height: '380px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+}
+
 export const DatePickerWithCustomHeader: Story<DatePickerProps> = ({
   id,
   dateValue,
@@ -168,21 +222,6 @@ DatePickerWithCustomHeader.parameters = {
   docs: {
     description: {
       component: `The date picker with custom header.`,
-    },
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: '1em', height: '380px' }}>
-        <Story />
-      </div>
-    ),
-  ],
-}
-
-DatePickerDisabledFuture.parameters = {
-  docs: {
-    description: {
-      component: `The date picker with disabled future dates.`,
     },
   },
   decorators: [

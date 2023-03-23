@@ -70,6 +70,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       dateValue,
       onChanged,
       id,
+      disabled,
       disableFuture,
       disableBeforeDate,
       className,
@@ -113,6 +114,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               ref={localRef}
               locale={locale}
               selected={date}
+              disabled={disabled}
               className="eds-datepicker"
               calendarClassName="eds-datepicker-calendar"
               onChange={onDateValueChange}
