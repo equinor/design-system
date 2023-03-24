@@ -239,6 +239,9 @@ export default {
   argTypes: {},
   parameters: {
     docs: {
+      source: {
+        type: 'code',
+      },
       description: {
         component: `The date picker opens as an overlaying interactive calendar that allows the user to select a date. If a date is chosen, this is reflected in the input field.`,
       },
