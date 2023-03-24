@@ -18,7 +18,7 @@ import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { outlineTemplate } from '@equinor/eds-utils'
-import { Paper, Icon } from '@equinor/eds-core-react'
+import { Paper, Icon, Label } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGb)
 
@@ -29,6 +29,7 @@ export type DatePickerProps = {
   onChanged?: (date: Date | null) => void
   disableFuture?: boolean
   disableBeforeDate?: Date
+  disableAfterDate?: Date
   className?: string
   dateFormat?: string
   placeholder?: string
@@ -73,6 +74,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       disabled,
       disableFuture,
       disableBeforeDate,
+      disableAfterDate,
       className,
       dateFormat = 'dd.MM.yyyy',
       placeholder = 'DD.MM.YYYY',
@@ -108,62 +110,70 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
     return (
       <ThemeProvider theme={tokens}>
         <Container className={`date-picker ${className}`}>
-          <DateLabel htmlFor={id} className={`date-label`}>
-            <span>{label}</span>
-            <StyledDatepicker
-              ref={localRef}
-              locale={locale}
-              selected={date}
-              disabled={disabled}
-              className="eds-datepicker"
-              calendarClassName="eds-datepicker-calendar"
-              onChange={onDateValueChange}
-              dateFormat={dateFormat}
-              placeholderText={placeholder}
-              id={id}
-              onKeyDown={(event) => {
-                // If you shift-tab while focusing the input-element, it should close the pop-over.
-                // Not currently supported by react-datepicker.
-                if (
-                  event.code === 'Tab' &&
-                  event.shiftKey &&
-                  (event.target as HTMLElement).nodeName == 'INPUT'
-                ) {
-                  localRef.current?.setOpen(false)
-                }
-              }}
-              filterDate={(date: Date): boolean => {
-                if (disableFuture) {
-                  return new Date() > date
-                }
-                if (disableBeforeDate) {
-                  return date >= disableBeforeDate
-                }
-                return true
-              }}
-              autoComplete="false"
-              popperPlacement={popperPlacement}
-              renderCustomHeader={customHeader}
-              shouldCloseOnSelect={true}
-              readOnly={readOnly}
-              calendarContainer={({ children, ...rest }) => (
-                <Paper
-                  {...rest}
-                  elevation="temporary_nav"
-                  style={{ maxWidth: '312px' }}
-                >
-                  {children}
-                </Paper>
-              )}
-            />
-            <CalendarIcon
-              name="calendar"
-              className="calendar-icon"
-              color={tokens.colors.iconGray}
-              data={calendar}
-              size={24}
-            />
-          </DateLabel>
+          <Label
+            label={label}
+            htmlFor={id}
+            className={`date-label`}
+            disabled={disabled}
+          />
+          <StyledDatepicker
+            ref={localRef}
+            locale={locale}
+            selected={date}
+            disabled={disabled}
+            className="eds-datepicker"
+            calendarClassName="eds-datepicker-calendar"
+            onChange={onDateValueChange}
+            dateFormat={dateFormat}
+            placeholderText={placeholder}
+            id={id}
+            onKeyDown={(event) => {
+              // If you shift-tab while focusing the input-element, it should close the pop-over.
+              // Not currently supported by react-datepicker.
+              if (
+                event.code === 'Tab' &&
+                event.shiftKey &&
+                (event.target as HTMLElement).nodeName == 'INPUT'
+              ) {
+                localRef.current?.setOpen(false)
+              }
+            }}
+            filterDate={(date: Date): boolean => {
+              if (disableFuture) {
+                return new Date() > date
+              }
+              if (disableBeforeDate) {
+                return date > disableBeforeDate
+              }
+              if (disableAfterDate) {
+                return date < disableAfterDate
+              }
+              return true
+            }}
+            autoComplete="false"
+            popperPlacement={popperPlacement}
+            renderCustomHeader={customHeader}
+            shouldCloseOnSelect={true}
+            readOnly={readOnly}
+            calendarContainer={({ children, ...rest }) => (
+              <Paper
+                {...rest}
+                elevation="temporary_nav"
+                style={{ maxWidth: '312px' }}
+              >
+                {children}
+              </Paper>
+            )}
+          />
+          <CalendarIcon
+            name="calendar"
+            className="calendar-icon"
+            color={
+              disabled ? tokens.colors.disabledText : tokens.colors.iconGray
+            }
+            data={calendar}
+            size={24}
+          />
         </Container>
       </ThemeProvider>
     )
@@ -232,24 +242,6 @@ const Container = styled.div`
   }
 `
 
-const DateLabel = styled.label`
-  ${({ theme }) => css`
-    position: relative;
-    color: ${theme.entities.label.typography.color};
-    font-family: ${theme.entities.label.typography.fontFamily};
-    font-size: ${theme.entities.label.typography.fontSize};
-    line-height: ${theme.entities.label.typography.lineHeight};
-
-    span {
-      padding-left: 8px;
-      color: ${tokens.colors.iconGray};
-      &:empty {
-        display: none;
-      }
-    }
-  `}
-`
-
 const StyledDatepicker = styled(DatePicker)`
   ${({ theme }) => css`
     height: 24px;
@@ -268,6 +260,11 @@ const StyledDatepicker = styled(DatePicker)`
     &:focus {
       border-radius: none;
       ${outlineTemplate(theme.states.focus.outline)}
+    }
+    &:disabled {
+      color: var(--eds-input-color);
+      cursor: not-allowed;
+      box-shadow: none;
     }
   `}
 `
