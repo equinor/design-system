@@ -109,7 +109,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
 
     return (
       <ThemeProvider theme={tokens}>
-        <Container className={`date-picker ${className}`}>
+        <Container className={`date-picker ${className || ''}`}>
           <Label
             label={label}
             htmlFor={id}
