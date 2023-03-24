@@ -139,14 +139,14 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               }
             }}
             filterDate={(date: Date): boolean => {
-              if (disableFuture) {
-                return new Date() > date
+              if (disableFuture && new Date() < date) {
+                return false
               }
-              if (disableBeforeDate) {
-                return date > disableBeforeDate
+              if (disableBeforeDate && date < disableBeforeDate) {
+                return false
               }
-              if (disableAfterDate) {
-                return date < disableAfterDate
+              if (disableAfterDate && date > disableAfterDate) {
+                return false
               }
               return true
             }}
