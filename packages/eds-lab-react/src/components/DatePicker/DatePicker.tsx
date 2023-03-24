@@ -10,6 +10,7 @@ import {
 import DatePicker, {
   ReactDatePickerCustomHeaderProps,
   registerLocale,
+  ReactDatePickerProps,
 } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
@@ -22,6 +23,18 @@ import { Paper, Icon, Label } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGb)
 
+type ReactDatePickerComponentProps = Pick<
+  ReactDatePickerProps,
+  | 'className'
+  | 'dateFormat'
+  | 'popperPlacement'
+  | 'locale'
+  | 'renderCustomHeader'
+  | 'minDate'
+  | 'maxDate'
+  | 'readOnly'
+>
+
 export type DatePickerProps = {
   id: string
   dateValue: Date | undefined | null
@@ -30,31 +43,9 @@ export type DatePickerProps = {
   disableFuture?: boolean
   disableBeforeDate?: Date
   disableAfterDate?: Date
-  className?: string
-  dateFormat?: string
   placeholder?: string
-  readOnly?: boolean
-  popperPlacement?:
-    | 'auto-start'
-    | 'auto'
-    | 'auto-end'
-    | 'top-start'
-    | 'top'
-    | 'top-end'
-    | 'right-start'
-    | 'right'
-    | 'right-end'
-    | 'bottom-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'left-end'
-    | 'left'
-    | 'left-start'
-  locale?: string
-  renderCustomHeader?: (
-    params: ReactDatePickerCustomHeaderProps,
-  ) => React.ReactNode
-} & InputHTMLAttributes<HTMLInputElement>
+} & InputHTMLAttributes<HTMLInputElement> &
+  ReactDatePickerComponentProps
 
 export type DatePickerRefProps = DatePicker &
   InputHTMLAttributes<HTMLInputElement> & {
@@ -82,6 +73,8 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       popperPlacement,
       locale = 'en-gb',
       renderCustomHeader,
+      minDate,
+      maxDate,
     },
     ref,
   ) {
@@ -164,6 +157,8 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
                 {children}
               </Paper>
             )}
+            minDate={minDate}
+            maxDate={maxDate}
           />
           <CalendarIcon
             name="calendar"
