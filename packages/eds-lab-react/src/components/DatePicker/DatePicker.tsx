@@ -272,7 +272,6 @@ const StyledDatepicker = styled(DatePicker)`
 
 const CalendarIcon = styled(Icon)`
   position: absolute;
-  z-index: 1;
   bottom: 7px;
   right: 6px;
   cursor: pointer;
