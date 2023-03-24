@@ -182,6 +182,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
 
 const Container = styled.div`
   width: 100%;
+  min-width: 128px;
   max-width: 148px;
   display: flex;
   flex-direction: column;
