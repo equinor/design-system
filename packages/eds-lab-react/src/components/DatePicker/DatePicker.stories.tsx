@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'
-import { SelectHeader } from './SelectHeader'
+import { DatePickerSelectHeader } from './DatePickerSelectHeader'
 
 const Container = styled.div`
   height: 380px;
@@ -213,7 +213,7 @@ export const DatePickerWithCustomHeader: Story<DatePickerProps> = ({
       className={className}
       popperPlacement={popperPlacement}
       disableBeforeDate={new Date()}
-      renderCustomHeader={SelectHeader}
+      renderCustomHeader={DatePickerSelectHeader}
     />
   )
 }

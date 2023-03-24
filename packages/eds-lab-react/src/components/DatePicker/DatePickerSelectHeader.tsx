@@ -4,7 +4,7 @@ import { arrow_back, arrow_forward } from '@equinor/eds-icons'
 import { Icon, Button, NativeSelect } from '@equinor/eds-core-react'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 
-const SelectHeader: React.FC<ReactDatePickerCustomHeaderProps> = ({
+const DatePickerSelectHeader: React.FC<ReactDatePickerCustomHeaderProps> = ({
   date,
   changeYear,
   changeMonth,
@@ -133,4 +133,4 @@ const IconButton = styled(Button)`
   }
 `
 
-export { SelectHeader }
+export { DatePickerSelectHeader }
