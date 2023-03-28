@@ -15,6 +15,7 @@ const {
     },
     interactive: {
       primary__resting: { rgba: focusColor },
+      disabled__text: { rgba: disabledText },
     },
     ui: {
       background__light: { rgba: background },
@@ -34,6 +35,7 @@ export interface DatePickerToken extends ComponentToken {
     green13: string
     green100: string
     iconGray: string
+    disabledText: string
   }
 }
 
@@ -44,6 +46,7 @@ export const datePicker: DatePickerToken = {
     green13: primary13,
     green100: primary100,
     iconGray: iconTertiary,
+    disabledText,
   },
   border: {
     type: 'border',

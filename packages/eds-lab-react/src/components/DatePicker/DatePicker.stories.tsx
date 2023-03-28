@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'
+import { DatePickerSelectHeader } from './DatePickerSelectHeader'
 
 const Container = styled.div`
   height: 380px;
@@ -153,12 +154,94 @@ DatePickerDisabledFuture.parameters = {
   ],
 }
 
+export const DatePickerDisabled: Story<DatePickerProps> = ({
+  id,
+  dateValue,
+  className,
+  popperPlacement,
+}: DatePickerProps) => {
+  const [startDate, setStartDate] = useState(dateValue)
+  const onChanged = (date: Date): void => {
+    setStartDate(date)
+  }
+
+  return (
+    <DatePicker
+      id={id}
+      dateValue={startDate}
+      label={'Date'}
+      onChanged={onChanged}
+      className={className}
+      popperPlacement={popperPlacement}
+      disabled={true}
+    />
+  )
+}
+
+DatePickerDisabled.parameters = {
+  docs: {
+    description: {
+      component: `The date picker when disabled`,
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1em', height: '380px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+}
+
+export const DatePickerWithCustomHeader: Story<DatePickerProps> = ({
+  id,
+  dateValue,
+  className,
+  popperPlacement,
+}: DatePickerProps) => {
+  const [startDate, setStartDate] = useState(dateValue)
+  const onChanged = (date: Date): void => {
+    setStartDate(date)
+  }
+
+  return (
+    <DatePicker
+      id={id}
+      dateValue={startDate}
+      label={'Date'}
+      onChanged={onChanged}
+      className={className}
+      popperPlacement={popperPlacement}
+      disableBeforeDate={new Date()}
+      renderCustomHeader={DatePickerSelectHeader}
+    />
+  )
+}
+
+DatePickerWithCustomHeader.parameters = {
+  docs: {
+    description: {
+      component: `The date picker with custom header.`,
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '1em', height: '380px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+}
+
 export default {
   title: 'Components/DatePicker',
   component: DatePicker,
   argTypes: {},
   parameters: {
     docs: {
+      source: {
+        type: 'code',
+      },
       description: {
         component: `The date picker opens as an overlaying interactive calendar that allows the user to select a date. If a date is chosen, this is reflected in the input field.`,
       },
