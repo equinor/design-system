@@ -19,7 +19,7 @@ import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { outlineTemplate } from '@equinor/eds-utils'
-import { Paper, Icon, Label } from '@equinor/eds-core-react'
+import { Paper, Icon, Label, Button } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGb)
 
@@ -160,15 +160,23 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
             minDate={minDate}
             maxDate={maxDate}
           />
-          <CalendarIcon
-            name="calendar"
-            className="calendar-icon"
-            color={
-              disabled ? tokens.colors.disabledText : tokens.colors.iconGray
-            }
-            data={calendar}
-            size={24}
-          />
+          <StyledButton
+            variant="ghost_icon"
+            disabled={disabled || readOnly}
+            aria-label="open date picker"
+            title="open"
+            onClick={() => localRef.current?.setOpen(true)}
+          >
+            <CalendarIcon
+              name="calendar"
+              className="calendar-icon"
+              color={
+                disabled ? tokens.colors.disabledText : tokens.colors.iconGray
+              }
+              data={calendar}
+              size={24}
+            />
+          </StyledButton>
         </Container>
       </ThemeProvider>
     )
@@ -265,10 +273,15 @@ const StyledDatepicker = styled(DatePicker)`
   `}
 `
 
-const CalendarIcon = styled(Icon)`
+const StyledButton = styled(Button)`
   position: absolute;
-  bottom: 7px;
-  right: 6px;
+  right: 4px;
+  height: 32px;
+  width: 32px;
+  bottom: 3px;
+`
+
+const CalendarIcon = styled(Icon)`
   cursor: pointer;
 `
 
