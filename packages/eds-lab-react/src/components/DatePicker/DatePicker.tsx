@@ -165,7 +165,11 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
             disabled={disabled || readOnly}
             aria-label="open date picker"
             title="open"
-            onClick={() => localRef.current?.setOpen(true)}
+            onClick={() => {
+              localRef.current?.setOpen(true)
+              // change focus to input instead of button
+              localRef.current?.setFocus()
+            }}
           >
             <CalendarIcon
               name="calendar"
