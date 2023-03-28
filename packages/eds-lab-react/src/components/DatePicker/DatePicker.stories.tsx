@@ -199,6 +199,7 @@ export const DatePickerWithCustomHeader: Story<DatePickerProps> = ({
   className,
   popperPlacement,
 }: DatePickerProps) => {
+  //import { DatePickerSelectHeader } from '@equinor/eds-lab-react'
   const [startDate, setStartDate] = useState(dateValue)
   const onChanged = (date: Date): void => {
     setStartDate(date)
@@ -222,6 +223,8 @@ DatePickerWithCustomHeader.parameters = {
   docs: {
     description: {
       component: `The date picker with custom header.`,
+      story:
+        '`renderCustomHeader` allows you to make your own custom header. We have included a `DatePickerSelectHeader` which can be used directly or as a starting point for your own implementation. See also https://reactdatepicker.com/#example-custom-header',
     },
   },
   decorators: [
