@@ -182,7 +182,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  box-sizing: border-box;
+  box-sizing: content-box;
 
   .eds-datepicker {
     font-family: ${tokens.entities.title.typography.fontFamily} !important;
@@ -269,7 +269,7 @@ const CalendarIcon = styled(Icon)`
   position: absolute;
   bottom: 7px;
   right: 6px;
-  cursor: pointer;
+  pointer-events: none;
 `
 
 export { ReactDatePicker as DatePicker }
