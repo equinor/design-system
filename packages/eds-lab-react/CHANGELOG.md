@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2023-03-30
+
+### Added
+
+- `DatePicker`: Forwarded `renderCustomHeader` prop and made an example called `DatePickerSelectHeader` by @bovan in https://github.com/equinor/design-system/pull/2826
+- `DatePicker`: Added `disabled` prop and styles by @bovan in https://github.com/equinor/design-system/pull/2826
+- `DatePicker`: Forwarded `minDate`, `maxDate` & `disableAfterDate` props by @bovan in https://github.com/equinor/design-system/pull/2826
+
+### Changed
+
+- `DatePicker`: Reworked filterDate to be able to use both `disableBeforeDate` and `disableAfterDate` at the same time by @bovan in https://github.com/equinor/design-system/pull/2826
+- `DatePicker`: Uses eds `Label` instead of custom label by @bovan in https://github.com/equinor/design-system/pull/2826
+- `DatePicker`: Updated `react-datepicker` to `v4.10.0` (this is supposed to improve react 18 support) by @oddvernes in https://github.com/equinor/design-system/pull/2835
+
+### Fixed
+
+- `DatePicker`: fixed input dimensions that were wrong in some cases by @oddvernes in https://github.com/equinor/design-system/pull/2835
+
 ## [0.6.0] - 2022-11-04
 
 ### Removed
