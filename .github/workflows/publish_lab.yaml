@@ -5,6 +5,10 @@ on:
       npm-tag:
         description: 'Tag for npm package (next | latest)'
         required: true
+        type: choice
+        options:
+          - next
+          - latest
         default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
