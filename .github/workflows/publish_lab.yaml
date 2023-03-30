@@ -124,7 +124,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab-storybook
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
