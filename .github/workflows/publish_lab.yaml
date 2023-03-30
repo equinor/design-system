@@ -6,20 +6,15 @@ on:
         description: 'Tag for npm package (next | latest)'
         required: true
         default: 'next'
-      storybook-slot:
-        description: 'Slot for Storybook (development | production | lab | test)'
-        required: false
-        default: 'lab'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
-      stage: ${{ github.event.inputs.storybook-slot }}
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
     name: Process packages
