@@ -4,6 +4,7 @@ import { rootFontSize, rem, em } from '../functions/units'
 import { fillToRgba } from './colors'
 
 const fallback = {}
+const cssVarName = (name) => `eds_${name}_color`
 
 export const toTypography = (figmaNode, name) => {
   let typography = {}
@@ -39,7 +40,7 @@ export const toTypography = (figmaNode, name) => {
 
   typography = {
     ...typography,
-    color: fillToRgba(fill),
+    color: `var(--${cssVarName(name)}, ${fillToRgba(fill)})`,
     fontFamily,
     fontSize: rem(fontSizeRem),
     fontWeight,
