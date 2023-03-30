@@ -103,22 +103,22 @@ jobs:
           steps: ${{ toJson(steps) }}
         if: failure()
   # TODO: Delete when new storybook is being used
-  publish-old-storybook:
-    name: Publish Storybook
-    needs: [setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
-    with:
-      stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
-      dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
-    secrets:
-      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  #publish-old-storybook:
+  #  name: Publish Storybook
+  #  needs: [setup, packages]
+  #  uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+  #  with:
+  #    stage: ${{ needs.setup.outputs.stage }}
+  #    cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
+  #    dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
+  #  secrets:
+  #    REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+  #    REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+  #    REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+  #    AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   publish-storybook:
     needs: [setup, packages]
-    name: Build & Deploy Website
+    name: Publish Storybook
     runs-on: ubuntu-latest
     steps:
       - name: Use cache with storybook files
@@ -128,7 +128,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-lab-storybook
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab-storybook
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
