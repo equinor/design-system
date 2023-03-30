@@ -6,20 +6,24 @@ on:
         description: 'Tag for npm package (next | latest)'
         required: true
         default: 'next'
-      storybook-slot:
-        description: 'Slot for Storybook (development | production | lab | test)'
+      environment:
+        description: 'Environment for Storybook (development | production)'
         required: false
+        type: choice
+        options:
+          - development
+          - production
         default: 'development'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
+    secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-core-react packages/eds-utils
-      stage: ${{ github.event.inputs.storybook-slot }}
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
     name: Process packages
@@ -41,7 +45,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-core-react
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
@@ -66,7 +70,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-core-react
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -90,7 +94,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-core-react
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -128,7 +132,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
