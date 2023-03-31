@@ -1,7 +1,7 @@
 export const typography = {
   heading: {
     h1_bold: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h1_bold_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '2.000rem',
       fontWeight: 700,
@@ -9,7 +9,7 @@ export const typography = {
       textAlign: 'left',
     },
     h1: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h1_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '2.000rem',
       fontWeight: 400,
@@ -17,7 +17,7 @@ export const typography = {
       textAlign: 'left',
     },
     h2: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h2_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.750rem',
       fontWeight: 400,
@@ -25,7 +25,7 @@ export const typography = {
       textAlign: 'left',
     },
     h3: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h3_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.500rem',
       fontWeight: 400,
@@ -33,7 +33,7 @@ export const typography = {
       textAlign: 'left',
     },
     h4: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h4_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.250rem',
       fontWeight: 400,
@@ -41,7 +41,7 @@ export const typography = {
       textAlign: 'left',
     },
     h5: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h5_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.125rem',
       fontWeight: 500,
@@ -50,7 +50,7 @@ export const typography = {
       textAlign: 'left',
     },
     h6: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_heading__h6_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 500,
@@ -61,7 +61,7 @@ export const typography = {
   },
   navigation: {
     menu_title: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_navigation__menu_title_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -70,7 +70,7 @@ export const typography = {
       textAlign: 'left',
     },
     menu_tabs: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_navigation__menu_tabs_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 500,
@@ -79,7 +79,7 @@ export const typography = {
       textAlign: 'left',
     },
     label: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_navigation__label_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
@@ -87,7 +87,7 @@ export const typography = {
       textAlign: 'left',
     },
     drawer_active: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_navigation__drawer_active_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 700,
@@ -96,7 +96,7 @@ export const typography = {
       textAlign: 'left',
     },
     drawer_inactive: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_navigation__drawer_inactive_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 500,
@@ -105,7 +105,7 @@ export const typography = {
       textAlign: 'left',
     },
     button: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_navigation__button_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -113,7 +113,7 @@ export const typography = {
       textAlign: 'left',
     },
     breadcrumb: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_navigation__breadcrumb_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -121,7 +121,7 @@ export const typography = {
       textAlign: 'left',
     },
     breadcrumb_hover: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_navigation__breadcrumb_hover_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -130,7 +130,8 @@ export const typography = {
       textAlign: 'left',
     },
     menu_title_hover: {
-      color: 'rgba(61, 61, 61, 1)',
+      color:
+        'var(--eds_navigation__menu_title_hover_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -141,7 +142,7 @@ export const typography = {
   },
   input: {
     label: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_input__label_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
@@ -149,7 +150,7 @@ export const typography = {
       textAlign: 'left',
     },
     text: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_input__text_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -159,7 +160,7 @@ export const typography = {
     },
     text_monospaced: {
       fontFeature: "'tnum' on,'lnum' on",
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_input__text_monospaced_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -168,7 +169,7 @@ export const typography = {
       textAlign: 'left',
     },
     helper: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_input__helper_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
@@ -179,7 +180,8 @@ export const typography = {
   },
   paragraph: {
     body_short_italic: {
-      color: 'rgba(61, 61, 61, 1)',
+      color:
+        'var(--eds_paragraph__body_short_italic_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -188,7 +190,7 @@ export const typography = {
       textAlign: 'left',
     },
     caption: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__caption_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -196,7 +198,7 @@ export const typography = {
       textAlign: 'left',
     },
     meta: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__meta_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.625rem',
       fontWeight: 500,
@@ -204,7 +206,7 @@ export const typography = {
       textAlign: 'left',
     },
     body_short: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__body_short_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -212,7 +214,8 @@ export const typography = {
       textAlign: 'left',
     },
     body_short_bold_italic: {
-      color: 'rgba(61, 61, 61, 1)',
+      color:
+        'var(--eds_paragraph__body_short_bold_italic_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 700,
@@ -221,7 +224,7 @@ export const typography = {
       textAlign: 'left',
     },
     body_short_bold: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__body_short_bold_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 700,
@@ -229,7 +232,8 @@ export const typography = {
       textAlign: 'left',
     },
     body_short_link: {
-      color: 'rgba(0, 112, 121, 1)',
+      color:
+        'var(--eds_paragraph__body_short_link_color, rgba(0, 112, 121, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -238,7 +242,7 @@ export const typography = {
       textAlign: 'left',
     },
     overline: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__overline_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.625rem',
       fontWeight: 500,
@@ -248,7 +252,7 @@ export const typography = {
       textAlign: 'left',
     },
     ingress: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__ingress_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.125rem',
       fontWeight: 400,
@@ -256,7 +260,7 @@ export const typography = {
       textAlign: 'left',
     },
     body_long: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__body_long_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -264,7 +268,7 @@ export const typography = {
       textAlign: 'left',
     },
     body_long_link: {
-      color: 'rgba(0, 112, 121, 1)',
+      color: 'var(--eds_paragraph__body_long_link_color, rgba(0, 112, 121, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -273,7 +277,8 @@ export const typography = {
       textAlign: 'left',
     },
     body_long_italic: {
-      color: 'rgba(61, 61, 61, 1)',
+      color:
+        'var(--eds_paragraph__body_long_italic_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 400,
@@ -282,7 +287,7 @@ export const typography = {
       textAlign: 'left',
     },
     body_long_bold: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_paragraph__body_long_bold_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 700,
@@ -290,7 +295,8 @@ export const typography = {
       textAlign: 'left',
     },
     body_long_bold_italic: {
-      color: 'rgba(61, 61, 61, 1)',
+      color:
+        'var(--eds_paragraph__body_long_bold_italic_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 700,
@@ -301,7 +307,7 @@ export const typography = {
   },
   table: {
     cell_header: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_table__cell_header_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 700,
@@ -309,7 +315,7 @@ export const typography = {
       textAlign: 'left',
     },
     cell_text: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_table__cell_text_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -317,7 +323,7 @@ export const typography = {
       textAlign: 'left',
     },
     cell_text_bold: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_table__cell_text_bold_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 700,
@@ -325,7 +331,7 @@ export const typography = {
       textAlign: 'left',
     },
     cell_text_link: {
-      color: 'rgba(0, 0, 0, 1)',
+      color: 'var(--eds_table__cell_text_link_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -335,7 +341,8 @@ export const typography = {
     },
     cell_numeric_monospaced: {
       fontFeature: "'tnum' on,'lnum' on",
-      color: 'rgba(0, 0, 0, 1)',
+      color:
+        'var(--eds_table__cell_numeric_monospaced_color, rgba(0, 0, 0, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -347,7 +354,7 @@ export const typography = {
     compact: {
       table: {
         cell_header: {
-          color: 'rgba(0, 0, 0, 1)',
+          color: 'var(--eds_table__cell_header_color, rgba(0, 0, 0, 1))',
           fontFamily: 'Equinor',
           fontSize: '0.875rem',
           fontWeight: 700,
@@ -355,7 +362,7 @@ export const typography = {
           textAlign: 'left',
         },
         cell_text: {
-          color: 'rgba(0, 0, 0, 1)',
+          color: 'var(--eds_table__cell_text_color, rgba(0, 0, 0, 1))',
           fontFamily: 'Equinor',
           fontSize: '0.875rem',
           fontWeight: 500,
@@ -363,7 +370,7 @@ export const typography = {
           textAlign: 'left',
         },
         cell_text_bold: {
-          color: 'rgba(0, 0, 0, 1)',
+          color: 'var(--eds_table__cell_text_bold_color, rgba(0, 0, 0, 1))',
           fontFamily: 'Equinor',
           fontSize: '0.875rem',
           fontWeight: 700,
@@ -371,7 +378,7 @@ export const typography = {
           textAlign: 'left',
         },
         cell_text_link: {
-          color: 'rgba(0, 0, 0, 1)',
+          color: 'var(--eds_table__cell_text_link_color, rgba(0, 0, 0, 1))',
           fontFamily: 'Equinor',
           fontSize: '0.875rem',
           fontWeight: 500,
@@ -381,7 +388,8 @@ export const typography = {
         },
         cell_numeric_monospaced: {
           fontFeature: "'tnum' on,'lnum' on",
-          color: 'rgba(0, 0, 0, 1)',
+          color:
+            'var(--eds_table__cell_numeric_monospaced_color, rgba(0, 0, 0, 1))',
           fontFamily: 'Equinor',
           fontSize: '0.875rem',
           fontWeight: 500,
@@ -393,7 +401,7 @@ export const typography = {
   },
   ui: {
     tooltip: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_ui__tooltip_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
@@ -401,7 +409,7 @@ export const typography = {
       textAlign: 'left',
     },
     snackbar: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_ui__snackbar_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
@@ -409,7 +417,7 @@ export const typography = {
       textAlign: 'left',
     },
     accordion_header: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
       fontWeight: 500,
@@ -417,7 +425,7 @@ export const typography = {
       textAlign: 'left',
     },
     chip__badge: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_ui__chip__badge_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
@@ -425,7 +433,7 @@ export const typography = {
       textAlign: 'left',
     },
     chart: {
-      color: 'rgba(61, 61, 61, 1)',
+      color: 'var(--eds_ui__chart_color, rgba(61, 61, 61, 1))',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
