@@ -25,7 +25,7 @@ exports[`TopBar Matches snapshot 1`] = `
   padding-right: 24px;
   padding-bottom: 8px;
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_navigation__menu_title_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;

@@ -12,7 +12,7 @@ exports[`Dialog Matches snapshot 1`] = `
   display: grid;
   grid-auto-columns: auto;
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
@@ -41,7 +41,7 @@ exports[`Dialog Matches snapshot 1`] = `
 
 .c2 {
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
@@ -58,7 +58,7 @@ exports[`Dialog Matches snapshot 1`] = `
 .c3 {
   --content-spacing-top: 16px;
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_paragraph__body_long_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
