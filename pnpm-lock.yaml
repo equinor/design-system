@@ -11,7 +11,7 @@ specifiers:
   '@types/jest-axe': ^3.5.5
   '@typescript-eslint/eslint-plugin': ^5.58.0
   '@typescript-eslint/parser': ^5.58.0
-  babel-plugin-styled-components: ^2.0.7
+  babel-plugin-styled-components: ^2.1.1
   eslint: ^8.38.0
   eslint-config-prettier: ^8.8.0
   eslint-import-resolver-typescript: ^3.5.5
@@ -36,7 +36,7 @@ devDependencies:
   '@types/jest-axe': 3.5.5
   '@typescript-eslint/eslint-plugin': 5.58.0_xgqfamkquxjhhtic3njj45tw6q
   '@typescript-eslint/parser': 5.58.0_hkje5a3rdgb3stx6xfkj5i4cla
-  babel-plugin-styled-components: 2.0.7_styled-components@5.3.9
+  babel-plugin-styled-components: 2.1.1_styled-components@5.3.9
   eslint: 8.38.0
   eslint-config-prettier: 8.8.0_eslint@8.38.0
   eslint-import-resolver-typescript: 3.5.5_ys4nnbp6asstxmlir7a7s7gqmm
@@ -1940,8 +1940,8 @@ packages:
       - supports-color
     dev: true
 
-  /babel-plugin-styled-components/2.0.7_styled-components@5.3.9:
-    resolution: {integrity: sha512-i7YhvPgVqRKfoQ66toiZ06jPNA3p6ierpfUuEWxNF+fV27Uv5gxBkf8KZLHUCc1nFA9j6+80pYoIpqCeyW3/bA==}
+  /babel-plugin-styled-components/2.1.1_styled-components@5.3.9:
+    resolution: {integrity: sha512-c8lJlszObVQPguHkI+akXv8+Jgb9Ccujx0EetL7oIvwU100LxO6XAGe45qry37wUL40a5U9f23SYrivro2XKhA==}
     peerDependencies:
       styled-components: '>= 2'
     dependencies:
@@ -3834,7 +3834,7 @@ packages:
       '@emotion/is-prop-valid': 1.2.0
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
-      babel-plugin-styled-components: 2.0.7_styled-components@5.3.9
+      babel-plugin-styled-components: 2.1.1_styled-components@5.3.9
       css-to-react-native: 3.2.0
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
