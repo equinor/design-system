@@ -91,13 +91,13 @@
     "styled-components": ">=4.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.7",
+    "@babel/runtime": "^7.21.0",
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
-    "@floating-ui/react": "^0.19.2",
-    "@tanstack/react-virtual": "3.0.0-beta.45",
-    "downshift": "^7.2.0"
+    "@floating-ui/react": "^0.23.0",
+    "@tanstack/react-virtual": "3.0.0-beta.54",
+    "downshift": "^7.6.0"
   },
   "engines": {
     "pnpm": ">=4",
