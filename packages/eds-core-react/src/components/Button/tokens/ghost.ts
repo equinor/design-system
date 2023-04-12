@@ -37,9 +37,9 @@ export const primary: ButtonToken = mergeDeepRight(button, {
       },
     },
   },
-})
+}) as ButtonToken
 
-export const secondary: Partial<ButtonToken> = mergeDeepRight(primary, {
+export const secondary = mergeDeepRight(primary, {
   typography: {
     color: secondaryColor,
   },
@@ -51,9 +51,9 @@ export const secondary: Partial<ButtonToken> = mergeDeepRight(primary, {
       },
     },
   },
-})
+}) as Partial<ButtonToken>
 
-export const danger: Partial<ButtonToken> = mergeDeepRight(primary, {
+export const danger = mergeDeepRight(primary, {
   typography: {
     color: dangerColor,
   },
@@ -65,4 +65,4 @@ export const danger: Partial<ButtonToken> = mergeDeepRight(primary, {
       },
     },
   },
-})
+}) as Partial<ButtonToken>

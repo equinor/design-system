@@ -8,7 +8,6 @@ import {
   ComponentPropsWithoutRef,
 } from 'react'
 import styled, { css } from 'styled-components'
-import { ComponentToken } from '@equinor/eds-tokens'
 import {
   typographyMixin,
   spacingsTemplate,
@@ -178,13 +177,13 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
   ) {
     const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
     const { density } = useEds()
-    const _token = useToken({ density }, inputVariant)()
+    const _token = useToken({ density }, inputVariant)() as InputToken
 
     const [rightAdornmentsRef, setRightAdornmentsRef] =
       useState<HTMLDivElement>()
     const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
 
-    const token = useCallback((): ComponentToken => {
+    const token = useCallback((): InputToken => {
       const _leftAdornmentsWidth =
         leftAdornmentsWidth ||
         (leftAdornmentsRef ? leftAdornmentsRef.clientWidth : 0)
