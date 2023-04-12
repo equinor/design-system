@@ -144,13 +144,10 @@ export const tableCell: TableCellToken = {
   },
 }
 
-export const applyVariant = (
-  variant: Variants,
-  token: TableCellToken,
-): TableCellToken => {
+export const applyVariant = (variant: Variants, token: TableCellToken) => {
   switch (variant) {
     case 'numeric':
-      return mergeDeepRight(token, token.variants.numeric)
+      return mergeDeepRight(token, token.variants.numeric) as TableCellToken
 
     default:
       return token

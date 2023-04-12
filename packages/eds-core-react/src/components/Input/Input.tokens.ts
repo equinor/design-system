@@ -26,7 +26,12 @@ const {
   shape,
 } = tokens
 
-export type InputToken = ComponentToken
+export type InputToken = ComponentToken & {
+  entities: {
+    placeholder: ComponentToken
+    adornment: ComponentToken
+  }
+}
 
 export const input: InputToken = {
   height: shape.straight.minHeight,
@@ -108,7 +113,7 @@ export const input: InputToken = {
   },
 }
 
-export const error: InputToken = mergeDeepRight(input, {
+export const error = mergeDeepRight(input, {
   boxShadow: 'none',
   outline: {
     color: danger__resting.rgba,
@@ -135,9 +140,9 @@ export const error: InputToken = mergeDeepRight(input, {
       },
     },
   },
-})
+}) as InputToken
 
-export const warning: InputToken = mergeDeepRight(input, {
+export const warning = mergeDeepRight(input, {
   boxShadow: 'none',
   outline: {
     color: warning__resting.rgba,
@@ -164,9 +169,9 @@ export const warning: InputToken = mergeDeepRight(input, {
       },
     },
   },
-})
+}) as InputToken
 
-export const success: InputToken = mergeDeepRight(input, {
+export const success = mergeDeepRight(input, {
   boxShadow: 'none',
   outline: {
     color: success__resting.rgba,
@@ -193,6 +198,6 @@ export const success: InputToken = mergeDeepRight(input, {
       },
     },
   },
-})
+}) as InputToken
 
 export const inputToken = { input, error, warning, success }

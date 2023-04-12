@@ -101,7 +101,7 @@ export const selectTokens: ComponentToken = {
   },
 }
 
-export const multiSelect: ComponentToken = mergeDeepRight(selectTokens, {
+export const multiSelect = mergeDeepRight(selectTokens, {
   spacings: {
     top: '0',
     bottom: '0',
@@ -116,4 +116,4 @@ export const multiSelect: ComponentToken = mergeDeepRight(selectTokens, {
       },
     },
   },
-})
+}) as ComponentToken

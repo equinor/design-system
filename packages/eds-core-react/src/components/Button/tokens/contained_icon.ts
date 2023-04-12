@@ -58,16 +58,16 @@ const contained_icon = {
   },
 }
 
-export const primary: ButtonToken = mergeDeepRight(
+export const primary = mergeDeepRight(
   primaryContained,
   contained_icon,
-)
+) as ButtonToken
 
-export const secondary: Partial<ButtonToken> = mergeDeepRight(
+export const secondary = mergeDeepRight(
   secondaryContained,
   contained_icon,
-)
-export const danger: Partial<ButtonToken> = mergeDeepRight(
+) as Partial<ButtonToken>
+export const danger = mergeDeepRight(
   dangerContained,
   contained_icon,
-)
+) as Partial<ButtonToken>
