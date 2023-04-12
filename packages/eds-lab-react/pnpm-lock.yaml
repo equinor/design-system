@@ -44,7 +44,7 @@ specifiers:
   react-datepicker: ^4.11.0
   react-dom: ^18.2.0
   react-fast-compare: 3.2.1
-  react-hook-form: ^7.41.5
+  react-hook-form: ^7.43.9
   react-is: ^18.2.0
   rollup: ^2.79.1
   rollup-plugin-delete: ^2.0.0
@@ -100,7 +100,7 @@ devDependencies:
   ramda: 0.29.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-hook-form: 7.41.5_react@18.2.0
+  react-hook-form: 7.43.9_react@18.2.0
   react-is: 18.2.0
   rollup: 2.79.1
   rollup-plugin-delete: 2.0.0
@@ -11373,8 +11373,8 @@ packages:
     resolution: {integrity: sha512-xTYf9zFim2pEif/Fw16dBiXpe0hoy5PxcD8+OwBnTtNLfIm3g6WxhKNurY+6OmdH1u6Ta/W/Vl6vjbYP1MFnDg==}
     dev: false
 
-  /react-hook-form/7.41.5_react@18.2.0:
-    resolution: {integrity: sha512-DAKjSJ7X9f16oQrP3TW2/eD9N6HOgrmIahP4LOdFphEWVfGZ2LulFd6f6AQ/YS/0cx/5oc4j8a1PXxuaurWp/Q==}
+  /react-hook-form/7.43.9_react@18.2.0:
+    resolution: {integrity: sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
