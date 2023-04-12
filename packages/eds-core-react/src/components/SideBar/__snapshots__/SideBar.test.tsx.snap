@@ -3,23 +3,23 @@
 exports[`Sidebar Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="SideBar__GridContainer-sc-a84pkc-0 joYAou"
+    class="SideBar__GridContainer-sc-a84pkc-0 jLWBVh"
     open=""
   >
     <div
-      class="SideBarContent__StyledSideBarContent-sc-kq9ra8-0 fILeuP"
+      class="SideBarContent__StyledSideBarContent-sc-kq9ra8-0 kFNDqg"
     >
       <div
-        class="SideBarToggle__ToggleContainer-sc-1w5e44y-0 hcTlyM"
+        class="SideBarToggle__ToggleContainer-sc-1w5e44y-0 gDtnmz"
         open=""
       >
         <button
-          class="Button__ButtonBase-sc-1hs0myn-1 bRRYQc"
+          class="Button__ButtonBase-sc-1hs0myn-1 hRIJOv"
           tabindex="0"
           type="button"
         >
           <span
-            class="Button__Inner-sc-1hs0myn-0 dtdaeM"
+            class="Button__Inner-sc-1hs0myn-0 hdiASj"
           >
             <svg
               aria-hidden="true"
@@ -43,17 +43,17 @@ exports[`Sidebar Matches snapshot 1`] = `
         </button>
       </div>
       <div
-        class="SideBarButton__MenuButtonContainer-sc-15xlkyo-0 iRzZnR"
+        class="SideBarButton__MenuButtonContainer-sc-15xlkyo-0 gJVGlu"
         open=""
       >
         <button
-          class="Button__ButtonBase-sc-1hs0myn-1 icHSRM SideBarButton__ExtendedButton-sc-15xlkyo-1 ktRrnF"
+          class="Button__ButtonBase-sc-1hs0myn-1 hfdYjz SideBarButton__ExtendedButton-sc-15xlkyo-1 HPTaS"
           open=""
           tabindex="0"
           type="button"
         >
           <span
-            class="Button__Inner-sc-1hs0myn-0 dtdaeM"
+            class="Button__Inner-sc-1hs0myn-0 hdiASj"
           >
             <svg
               aria-hidden="true"
@@ -78,7 +78,7 @@ exports[`Sidebar Matches snapshot 1`] = `
         </button>
       </div>
       <a
-        class="SidebarLink__Container-sc-gbehcj-0 kwBAGP"
+        class="SidebarLink__Container-sc-gbehcj-0 hPVbeM"
         tabindex="0"
       >
         <svg
@@ -100,13 +100,13 @@ exports[`Sidebar Matches snapshot 1`] = `
           />
         </svg>
         <p
-          class="Typography__StyledTypography-sc-179guof-0 eFvBIQ SidebarLink__ItemText-sc-gbehcj-1 esObwH"
+          class="Typography__StyledTypography-sc-179guof-0 fBsTVX SidebarLink__ItemText-sc-gbehcj-1 kOkhOw"
         >
           Home
         </p>
       </a>
       <a
-        class="SidebarLink__Container-sc-gbehcj-0 kwBAGP"
+        class="SidebarLink__Container-sc-gbehcj-0 hPVbeM"
         tabindex="0"
       >
         <svg
@@ -128,7 +128,7 @@ exports[`Sidebar Matches snapshot 1`] = `
           />
         </svg>
         <p
-          class="Typography__StyledTypography-sc-179guof-0 eFvBIQ SidebarLink__ItemText-sc-gbehcj-1 esObwH"
+          class="Typography__StyledTypography-sc-179guof-0 fBsTVX SidebarLink__ItemText-sc-gbehcj-1 kOkhOw"
         >
           Another Link
         </p>
