@@ -25,7 +25,7 @@ specifiers:
   '@testing-library/react': 13.4.0
   '@testing-library/user-event': 14.4.3
   '@types/jest': ^29.5.0
-  '@types/ramda': ^0.28.20
+  '@types/ramda': ^0.28.24
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.10
   '@types/styled-components': ^5.1.26
@@ -38,7 +38,7 @@ specifiers:
   jest-styled-components: ^7.1.1
   js-file-download: ^0.4.12
   postcss: ^8.4.21
-  ramda: ^0.28.0
+  ramda: ^0.29.0
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.41.5
@@ -77,7 +77,7 @@ devDependencies:
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.4.3_ua4wuun3fnehcjqtqj2e2ldgpe
   '@types/jest': 29.5.0
-  '@types/ramda': 0.28.20
+  '@types/ramda': 0.28.24
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.10
   '@types/styled-components': 5.1.26
@@ -89,7 +89,7 @@ devDependencies:
   jest-styled-components: 7.1.1_styled-components@5.3.9
   js-file-download: 0.4.12
   postcss: 8.4.21
-  ramda: 0.28.0
+  ramda: 0.29.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.5_react@18.2.0
@@ -3890,10 +3890,10 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/ramda/0.28.20:
-    resolution: {integrity: sha512-MeUhzGSXQTRsY19JGn5LIBTLxVEnyF6HDNr08KSJqybsm4DlfLIgK1jBHjhpiSyk252tXYmp+UOe0UFg0UiFsA==}
+  /@types/ramda/0.28.24:
+    resolution: {integrity: sha512-VxCMFlrqYFzsarNI0b9RZS2fistW3/CGwslZ9pCrx0xCNC4utASpYPEDMg3wgzeb04mNlxb4BYAiqqSOdqjdIQ==}
     dependencies:
-      ts-toolbelt: 6.15.5
+      types-ramda: 0.29.1
     dev: true
 
   /@types/react-dom/18.0.10:
@@ -11270,6 +11270,10 @@ packages:
     resolution: {integrity: sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==}
     dev: true
 
+  /ramda/0.29.0:
+    resolution: {integrity: sha512-BBea6L67bYLtdbOqfp8f58fPMqEwx0doL+pAi8TZyp2YWz8R9G8z9x75CZI8W+ftqhFHCpEX2cRnUUXK130iKA==}
+    dev: true
+
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
@@ -12894,8 +12898,8 @@ packages:
       typescript: 4.9.4
     dev: true
 
-  /ts-toolbelt/6.15.5:
-    resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
+  /ts-toolbelt/9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: true
 
   /tsc-watch/6.0.0_typescript@4.9.4:
@@ -12979,6 +12983,12 @@ packages:
 
   /typedarray/0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+    dev: true
+
+  /types-ramda/0.29.1:
+    resolution: {integrity: sha512-pdEF8VXcBTSu3fPupZahieG6Lh8eBWPtcaH/OB5QPCoN2hz4vBbspoMLB3X9kwzXRD3lwD4/j0hwj3Z/PAzzcA==}
+    dependencies:
+      ts-toolbelt: 9.6.0
     dev: true
 
   /typescript/4.9.4:

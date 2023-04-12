@@ -5,7 +5,7 @@ specifiers:
   dotenv: ^10.0.0
   node-fetch: ^2.6.7
   prettier: 2.4.1
-  ramda: ^0.28.0
+  ramda: ^0.29.0
   svgo: ^3.0.2
 
 dependencies:
@@ -13,7 +13,7 @@ dependencies:
   dotenv: 10.0.0
   node-fetch: 2.6.7
   prettier: 2.4.1
-  ramda: 0.28.0
+  ramda: 0.29.0
   svgo: 3.0.2
 
 packages:
@@ -387,8 +387,8 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: false
 
-  /ramda/0.28.0:
-    resolution: {integrity: sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==}
+  /ramda/0.29.0:
+    resolution: {integrity: sha512-BBea6L67bYLtdbOqfp8f58fPMqEwx0doL+pAi8TZyp2YWz8R9G8z9x75CZI8W+ftqhFHCpEX2cRnUUXK130iKA==}
     dev: false
 
   /reusify/1.0.4:
