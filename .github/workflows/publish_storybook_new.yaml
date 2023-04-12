@@ -62,7 +62,7 @@ jobs:
     name: Build & Deploy Website
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.event.inputs.environment }}
+      name: ${{ github.event.inputs.environment || 'development' }}
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
