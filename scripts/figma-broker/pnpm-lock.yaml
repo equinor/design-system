@@ -4,7 +4,7 @@ specifiers:
   del: ^6.0.0
   dotenv: ^10.0.0
   node-fetch: ^2.6.7
-  prettier: 2.4.1
+  prettier: 2.8.7
   ramda: ^0.29.0
   svgo: ^3.0.2
 
@@ -12,7 +12,7 @@ dependencies:
   del: 6.0.0
   dotenv: 10.0.0
   node-fetch: 2.6.7
-  prettier: 2.4.1
+  prettier: 2.8.7
   ramda: 0.29.0
   svgo: 3.0.2
 
@@ -377,8 +377,8 @@ packages:
     engines: {node: '>=8.6'}
     dev: false
 
-  /prettier/2.4.1:
-    resolution: {integrity: sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==}
+  /prettier/2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: false
