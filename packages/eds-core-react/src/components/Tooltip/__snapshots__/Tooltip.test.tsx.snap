@@ -49,13 +49,13 @@ exports[`Tooltip Matches snapshot 1`] = `
   class="c0"
   id=":r0:"
   role="tooltip"
-  style="position: absolute; top: 0px; left: 0px;"
+  style="position: absolute; top: 14px; left: 8px;"
   tabindex="-1"
 >
   Tooltip
   <div
     class="c1"
-    style="top: -6px; transform: rotate(90deg);"
+    style="top: -6px; transform: rotate(90deg); left: 0px;"
   >
     <svg
       class="c2 arrowSvg"
