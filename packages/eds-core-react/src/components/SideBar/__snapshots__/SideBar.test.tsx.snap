@@ -100,7 +100,7 @@ exports[`Sidebar Matches snapshot 1`] = `
           />
         </svg>
         <p
-          class="Typography__StyledTypography-sc-179guof-0 goHKeV SidebarLink__ItemText-sc-gbehcj-1 esObwH"
+          class="Typography__StyledTypography-sc-179guof-0 eFvBIQ SidebarLink__ItemText-sc-gbehcj-1 esObwH"
         >
           Home
         </p>
@@ -128,7 +128,7 @@ exports[`Sidebar Matches snapshot 1`] = `
           />
         </svg>
         <p
-          class="Typography__StyledTypography-sc-179guof-0 goHKeV SidebarLink__ItemText-sc-gbehcj-1 esObwH"
+          class="Typography__StyledTypography-sc-179guof-0 eFvBIQ SidebarLink__ItemText-sc-gbehcj-1 esObwH"
         >
           Another Link
         </p>

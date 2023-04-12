@@ -4,7 +4,7 @@ exports[`Card Matches snapshot 1`] = `
 <DocumentFragment>
   .c5 {
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_heading__h5_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.125rem;
   font-weight: 500;
@@ -18,7 +18,7 @@ exports[`Card Matches snapshot 1`] = `
 
 .c6 {
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_paragraph__body_short_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;

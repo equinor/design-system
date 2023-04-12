@@ -1,87 +1,87 @@
 
 h1 {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_heading__h1_color, rgba(61, 61, 61, 1));
   font-size: 2.000rem;
   font-weight: 400;
   line-height: 1.250em;
 }
 h2 {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_heading__h2_color, rgba(61, 61, 61, 1));
   font-size: 1.750rem;
   font-weight: 400;
   line-height: 1.250em;
 }
 h3 {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_heading__h3_color, rgba(61, 61, 61, 1));
   font-size: 1.500rem;
   font-weight: 400;
   line-height: 1.250em;
 }
 h4 {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_heading__h4_color, rgba(61, 61, 61, 1));
   font-size: 1.250rem;
   font-weight: 400;
   line-height: 1.600em;
 }
 h5 {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_heading__h5_color, rgba(61, 61, 61, 1));
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.333em;
   letter-spacing: 0.013em;
 }
 h6 {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_heading__h6_color, rgba(61, 61, 61, 1));
   font-size: 1.000rem;
   font-weight: 500;
   line-height: 1.500em;
   letter-spacing: 0.013em;
 }
 label {
-  color: rgba(0, 0, 0, 1);
+  color: var(--eds_navigation__label_color, rgba(0, 0, 0, 1));
   font-size: 0.750rem;
   font-weight: 500;
   line-height: 1.333em;
 }
 button {
-  color: rgba(0, 0, 0, 1);
+  color: var(--eds_navigation__button_color, rgba(0, 0, 0, 1));
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.143em;
 }
 label {
-  color: rgba(0, 0, 0, 1);
+  color: var(--eds_input__label_color, rgba(0, 0, 0, 1));
   font-size: 0.750rem;
   font-weight: 500;
   line-height: 1.333em;
 }
 p {
-  color: rgba(61, 61, 61, 1);
+  color: var(--eds_paragraph__body_short_color, rgba(61, 61, 61, 1));
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.250em;
 }
 a {
-  color: rgba(0, 112, 121, 1);
+  color: var(--eds_paragraph__body_long_link_color, rgba(0, 112, 121, 1));
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.500em;
   text-decoration: underline;
 }
 th {
-  color: rgba(0, 0, 0, 1);
+  color: var(--eds_table__cell_header_color, rgba(0, 0, 0, 1));
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.429em;
 }
 table {
-  color: rgba(0, 0, 0, 1);
+  color: var(--eds_table__cell_text_color, rgba(0, 0, 0, 1));
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.429em;
 }
 td {
-  color: rgba(0, 0, 0, 1);
+  color: var(--eds_table__cell_numeric_monospaced_color, rgba(0, 0, 0, 1));
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.429em;

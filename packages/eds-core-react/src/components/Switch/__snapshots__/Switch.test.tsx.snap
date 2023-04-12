@@ -131,7 +131,7 @@ exports[`Switch Matches snapshot 1`] = `
 
 .c7 {
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_navigation__menu_title_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;

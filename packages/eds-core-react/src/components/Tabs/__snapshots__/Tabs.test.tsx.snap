@@ -33,7 +33,7 @@ exports[`Tabs Matches snapshot 1`] = `
   padding-left: 16px;
   padding-right: 16px;
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_navigation__menu_tabs_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
@@ -101,7 +101,7 @@ exports[`Tabs Matches snapshot 1`] = `
   padding-left: 16px;
   padding-right: 16px;
   margin: 0;
-  color: rgba(61,61,61,1);
+  color: var(--eds_navigation__menu_tabs_color,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
@@ -111,7 +111,7 @@ exports[`Tabs Matches snapshot 1`] = `
   -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
-  color: rgba(61,61,61,1);
+  color: var(--eds_navigation__menu_tabs_color,rgba(61,61,61,1));
   background-color: transparent;
   position: relative;
   white-space: nowrap;
@@ -186,7 +186,7 @@ exports[`Tabs Matches snapshot 1`] = `
 @media (hover:hover) and (pointer:fine) {
   .c2[data-hover],
   .c2:hover {
-    color: rgba(61,61,61,1);
+    color: var(--eds_navigation__menu_tabs_color,rgba(61,61,61,1));
     background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
     cursor: pointer;
   }
