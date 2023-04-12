@@ -14,7 +14,7 @@ export const useToken: UseToken = (options, token) =>
     const { density } = options
 
     if (density === 'compact') {
-      return mergeDeepRight(token, token.modes.compact)
+      return mergeDeepRight(token, token.modes.compact) as ComponentToken
     }
 
     return token
