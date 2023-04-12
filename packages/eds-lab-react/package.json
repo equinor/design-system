@@ -103,7 +103,7 @@
     "date-fns": "^2.29.3",
     "downshift": "^7.6.0",
     "react-datepicker": "^4.11.0",
-    "react-fast-compare": "3.2.0"
+    "react-fast-compare": "3.2.1"
   },
   "engines": {
     "pnpm": ">=4",

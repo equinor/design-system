@@ -43,7 +43,7 @@ specifiers:
   react: ^18.2.0
   react-datepicker: ^4.11.0
   react-dom: ^18.2.0
-  react-fast-compare: 3.2.0
+  react-fast-compare: 3.2.1
   react-hook-form: ^7.41.5
   react-is: ^18.2.0
   rollup: ^2.79.1
@@ -64,7 +64,7 @@ dependencies:
   date-fns: 2.29.3
   downshift: 7.6.0_react@18.2.0
   react-datepicker: 4.11.0_biqbaboplfbrettd7655fr4n2y
-  react-fast-compare: 3.2.0
+  react-fast-compare: 3.2.1
 
 devDependencies:
   '@mdx-js/react': 1.6.22_react@18.2.0
@@ -11369,8 +11369,8 @@ packages:
       react-is: 17.0.2
     dev: true
 
-  /react-fast-compare/3.2.0:
-    resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+  /react-fast-compare/3.2.1:
+    resolution: {integrity: sha512-xTYf9zFim2pEif/Fw16dBiXpe0hoy5PxcD8+OwBnTtNLfIm3g6WxhKNurY+6OmdH1u6Ta/W/Vl6vjbYP1MFnDg==}
     dev: false
 
   /react-hook-form/7.41.5_react@18.2.0:
@@ -11423,7 +11423,7 @@ packages:
       '@popperjs/core': 2.11.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-fast-compare: 3.2.0
+      react-fast-compare: 3.2.1
       warning: 4.0.3
     dev: false
 

@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/runtime': ^7.21.0
   '@equinor/eds-tokens': workspace:*
-  '@popperjs/core': 2.11.6
+  '@popperjs/core': 2.11.7
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.2
   '@rollup/plugin-node-resolve': ^14.1.0
@@ -39,9 +39,9 @@ specifiers:
 dependencies:
   '@babel/runtime': 7.21.0
   '@equinor/eds-tokens': link:../eds-tokens
-  '@popperjs/core': 2.11.6
+  '@popperjs/core': 2.11.7
   babel-jest: 29.5.0_@babel+core@7.21.4
-  react-popper: 2.3.0_r6q5zrenym2zg7je7hgi674bti
+  react-popper: 2.3.0_d52dtujcogewjimhlbpfze4rs4
 
 devDependencies:
   '@rollup/plugin-babel': 5.3.1_b6cdhqm2xsfe2bpl424qdsl4ei
@@ -729,8 +729,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@popperjs/core/2.11.6:
-    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
+  /@popperjs/core/2.11.7:
+    resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
     dev: false
 
   /@rollup/plugin-babel/5.3.1_b6cdhqm2xsfe2bpl424qdsl4ei:
@@ -3490,14 +3490,14 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
 
-  /react-popper/2.3.0_r6q5zrenym2zg7je7hgi674bti:
+  /react-popper/2.3.0_d52dtujcogewjimhlbpfze4rs4:
     resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
     peerDependencies:
       '@popperjs/core': ^2.0.0
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
     dependencies:
-      '@popperjs/core': 2.11.6
+      '@popperjs/core': 2.11.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-fast-compare: 3.2.0
