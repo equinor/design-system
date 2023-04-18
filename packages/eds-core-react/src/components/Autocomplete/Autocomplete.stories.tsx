@@ -180,6 +180,66 @@ OptionLabel.args = {
   options: stocks,
 }
 
+export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
+  const { options } = args
+  function CustomItem(option: MyOptionType) {
+    const { label, symbol } = option
+    return (
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center',
+          padding: '4px',
+        }}
+      >
+        <img
+          style={{
+            width: '48px',
+            height: '48px',
+            objectFit: 'cover',
+            borderRadius: '48px',
+          }}
+          src={`https://i.pravatar.cc/48?u=${symbol}`}
+          alt="profile"
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <h3 style={{ margin: '0' }}>{label}</h3>
+          <p style={{ margin: '0' }}>{symbol}</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <Autocomplete
+        label="Select a stock"
+        options={options}
+        optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
+        optionComponent={CustomItem}
+        initialSelectedOptions={[options[1]]}
+        multiline
+      />
+      <Autocomplete
+        label="Select multiple stocks"
+        options={options}
+        optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
+        optionComponent={CustomItem}
+        initialSelectedOptions={[options[1]]}
+        multiline
+        multiple
+      />
+    </>
+  )
+}
+optionComponent.storyName = 'Customized option component'
+optionComponent.args = {
+  options: stocks,
+}
+
 export const Controlled: Story<AutocompleteProps<string>> = (args) => {
   const { options } = args
 
