@@ -9,6 +9,7 @@ import {
   add,
   business,
   gas,
+  lock,
 } from '@equinor/eds-icons'
 import {
   TopBar,
@@ -321,23 +322,30 @@ export const WithAccordion: Story<SidebarType> = () => {
           <SideBar.Toggle />
           <SideBar.Link label="Home" icon={home} />
           <SideBar.Link label="Getting started" icon={business} />
-          <SideBar.Accordion label="Gas" icon={gas}>
+          <SideBar.Accordion label="Un-controlled" icon={gas}>
             <SideBar.AccordionItem label={'Tools'} />
             <SideBar.AccordionItem label={'Fields'} />
             <SideBar.AccordionItem label={'Reports'} />
             <SideBar.AccordionItem label={'Archived'} />
           </SideBar.Accordion>
           <SideBar.Accordion
-            label="Favorites"
+            label="Controlled"
             icon={favorite_outlined}
             isExpanded={isFavoritesOpen}
-            toggleExpand={() => setIsFavoritesOpen(!isFavoritesOpen)}
-            disabled
+            toggleExpand={() => {
+              setIsFavoritesOpen(!isFavoritesOpen)
+              console.log('I just toggled the accordion')
+            }}
           >
             <SideBar.AccordionItem label={'Saved Items'} />
             <SideBar.AccordionItem label={'Work in progress'} />
             <SideBar.AccordionItem label={'Reports'} />
           </SideBar.Accordion>
+          <SideBar.Accordion
+            label="Disabled"
+            icon={lock}
+            disabled
+          ></SideBar.Accordion>
         </SideBar.Content>
       </SideBar>
     </Container>
