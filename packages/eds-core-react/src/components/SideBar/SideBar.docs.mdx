@@ -93,7 +93,8 @@ import { SideBar, useSideBar } from '@equinor/eds-core-react'
 
 `SideBar.Accordion` can be used to separate links into groups that are expandable. The expanded state of each
 Accordion can be controlled by using the `toggleExpand` and `isExpanded` props. These can be omitted
-to make the component un-controlled.
+to make the component un-controlled. Similar to `SideBar.Link`,  `SideBar.AccordionItem` is an overridable component
+by using the `as` prop. For example `as={Link}` to make it a `react-router` link.
 <Story id="navigation-sidebar--with-accordion" />
 
 ### With routing
