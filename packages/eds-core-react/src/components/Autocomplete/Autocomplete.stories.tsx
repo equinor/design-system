@@ -544,6 +544,33 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
     setSelectedItem(changes.selectedItems[0])
   }
 
+  function CustomItem(option: Country) {
+    const {
+      name: { common, official },
+      flags: { svg },
+    } = option
+    return (
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center',
+          paddingBlock: '4px',
+        }}
+      >
+        <img src={svg} style={{ width: '100px' }} alt={`flag of ${common}`} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <Typography group="paragraph" variant="body_long_bold">
+            {official}
+          </Typography>
+          <Typography group="paragraph" variant="caption">
+            {common}
+          </Typography>
+        </div>
+      </div>
+    )
+  }
+
   useEffect(() => {
     if (searchInput.length < 2) return setOptions([])
 
@@ -595,10 +622,10 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
         options={options}
         optionsFilter={() => true}
         optionLabel={(opt) => `${opt.name.common}`}
+        optionComponent={CustomItem}
         onOptionsChange={onChange}
         selectedOptions={[selectedItem]}
         loading={loading}
-        autoWidth
         multiline
       />
       {selectedItem && (
