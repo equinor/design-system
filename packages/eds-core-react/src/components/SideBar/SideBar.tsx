@@ -46,7 +46,7 @@ const GridContainer = styled.div<ContainerProps>(({ theme, open }) => {
       'content'
       'footer';
     background-color: ${theme.background};
-    overflow: hidden;
+    overflow: auto;
     width: ${open ? theme.maxWidth : theme.minWidth};
     min-width: ${open ? theme.maxWidth : theme.minWidth};
   `

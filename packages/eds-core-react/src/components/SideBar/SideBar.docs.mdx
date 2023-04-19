@@ -89,4 +89,24 @@ import { SideBar, useSideBar } from '@equinor/eds-core-react'
 `SideBar.Button` can be used to perform actions. It must have an icon and a label.
 <Story id="navigation-sidebar--with-button" />
 
+### With Accordion
+
+`SideBar.Accordion` can be used to separate links into groups that are expandable. The expanded state of each
+Accordion can be controlled by using the `toggleExpand` and `isExpanded` props. These can be omitted
+to make the component un-controlled. Similar to `SideBar.Link`,  `SideBar.AccordionItem` is an overridable component
+by using the `as` prop. For example `as={Link}` to make it a `react-router` link.
+<Story id="navigation-sidebar--with-accordion" />
+
+### With routing
+
+This is a complete example of how the SideBar can be used for navigation, including all components available to use.
+We are using state to decide which page to display. In the real world you would likely use a router.
+<Story id="navigation-sidebar--with-routing" />
+
+### Controlled Example
+
+As default, the AccordionHeader is highlighted if it has an active child and is closed (see Routing-example above for default behavior).
+This is possible to override by sending the `active`-prop to the Accordion.
+<Story id="navigation-sidebar--controlled-example" />
+
 
