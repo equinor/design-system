@@ -32,6 +32,8 @@ export default {
     Link: SideBar.Link,
     Toggle: SideBar.Toggle,
     Button: SideBar.Button,
+    Accordion: SideBar.Accordion,
+    AccordionItem: SideBar.AccordionItem,
   },
   args: {
     open: true,
