@@ -6,7 +6,7 @@ import { Checkbox } from '../Checkbox'
 import { Story, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button, Chip, Card } from '../..'
+import { Typography, EdsProvider, Button, Chip, Card, Avatar } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
@@ -192,22 +192,21 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
           display: 'flex',
           gap: '16px',
           alignItems: 'center',
-          padding: '4px',
+          paddingBlock: '4px',
         }}
       >
-        <img
-          style={{
-            width: '48px',
-            height: '48px',
-            objectFit: 'cover',
-            borderRadius: '48px',
-          }}
+        <Avatar
           src={`https://i.pravatar.cc/48?u=${symbol}`}
+          size={48}
           alt="profile"
         />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <h3 style={{ margin: '0' }}>{label}</h3>
-          <p style={{ margin: '0' }}>{symbol}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <Typography group="paragraph" variant="body_long_bold">
+            {label}
+          </Typography>
+          <Typography group="paragraph" variant="caption">
+            {symbol}
+          </Typography>
         </div>
       </div>
     )
@@ -220,7 +219,6 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         optionComponent={CustomItem}
-        initialSelectedOptions={[options[1]]}
         multiline
       />
       <Autocomplete
@@ -228,7 +226,6 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         optionComponent={CustomItem}
-        initialSelectedOptions={[options[1]]}
         multiline
         multiple
       />
