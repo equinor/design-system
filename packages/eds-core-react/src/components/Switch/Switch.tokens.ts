@@ -46,14 +46,6 @@ export const comfortable: SwitchToken = {
   clickbound: {
     height: clickbounds.default__base,
     width: clickbounds.default__base,
-    offset: {
-      top: `${
-        (parseInt(clickbounds.default__base) - parseInt(circle.minHeight)) / 2
-      }px`,
-      left: `${
-        (parseInt(clickbounds.default__base) - parseInt(circle.minWidth)) / 2
-      }px`,
-    },
   },
   entities: {
     label: {
@@ -100,18 +92,6 @@ export const comfortable: SwitchToken = {
       clickbound: {
         height: clickbounds.compact__standard,
         width: clickbounds.compact__standard,
-        offset: {
-          top: `${
-            (parseInt(clickbounds.compact__standard) -
-              parseInt(compactIconButton.minHeight)) /
-            2
-          }px`,
-          left: `${
-            (parseInt(clickbounds.compact__standard) -
-              parseInt(compactIconButton.minWidth)) /
-            2
-          }px`,
-        },
       },
       entities: {
         track: {

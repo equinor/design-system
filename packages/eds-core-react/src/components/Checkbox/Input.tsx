@@ -77,12 +77,27 @@ type StyledInputWrapperProps = { disabled: boolean }
 const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
-  border-radius: 50%;
+  position: relative;
   ${({ theme }) => spacingsTemplate(theme.spacings)}
+  &::before {
+    content: '';
+    position: absolute;
+    width: ${({ theme }) => theme.width};
+    aspect-ratio: 1/1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+  }
   @media (hover: hover) and (pointer: fine) {
+    > svg {
+      z-index: 1;
+    }
     &:hover {
-      background-color: ${({ disabled }) =>
-        disabled ? 'transparent' : tokens.states.hover.background};
+      &::before {
+        background-color: ${({ disabled }) =>
+          disabled ? 'transparent' : tokens.states.hover.background};
+      }
     }
   }
 `

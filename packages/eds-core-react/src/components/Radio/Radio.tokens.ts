@@ -14,7 +14,7 @@ const {
     navigation: { menu_title: labelTypography },
   },
   spacings: {
-    comfortable: { medium_small, x_small },
+    comfortable: { medium_small, x_small, x_large, xx_large },
   },
   clickbounds: {
     default__base: clicboundSize,
@@ -30,6 +30,7 @@ type RadioToken = ComponentToken
 export const comfortable: RadioToken = {
   background: primaryColor,
   typography: labelTypography,
+  width: xx_large,
   spacings: {
     bottom: medium_small,
     top: medium_small,
@@ -58,6 +59,7 @@ export const comfortable: RadioToken = {
   },
   modes: {
     compact: {
+      width: x_large,
       spacings: {
         bottom: x_small,
         top: x_small,

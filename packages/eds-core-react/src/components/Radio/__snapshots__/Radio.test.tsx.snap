@@ -85,12 +85,29 @@ exports[`Radio Matches snapshot 1`] = `
   padding-bottom: 12px;
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
-  border-radius: 50%;
+  position: relative;
   cursor: pointer;
 }
 
+.c1::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  aspect-ratio: 1/1;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 100%;
+}
+
 @media (hover:hover) and (pointer:fine) {
-  .c1:hover {
+  .c1 > svg {
+    z-index: 1;
+  }
+
+  .c1:hover::before {
     background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
   }
 }

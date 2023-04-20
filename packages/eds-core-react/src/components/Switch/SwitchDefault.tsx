@@ -7,6 +7,8 @@ type StyledProps = { isDisabled: boolean }
 
 const Input = styled(BaseInput)(
   ({ disabled, theme }) => css`
+    width: ${theme.clickbound.height};
+    aspect-ratio: 1/1;
     /*  Track */
     &:checked + span > span {
       background-color: ${disabled

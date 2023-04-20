@@ -6,7 +6,7 @@ import { comfortable as tokens } from './Switch.tokens'
 import { typographyTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
-type StyledProps = { isDisabled: boolean }
+type StyledProps = { isDisabled: boolean; size: 'default' | 'small' }
 
 const StyledLabel = styled.label<StyledProps>`
   cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
@@ -16,12 +16,12 @@ const StyledLabel = styled.label<StyledProps>`
   display: inline-flex;
   align-items: center;
   position: relative;
+  gap: ${({ size }) => (size === 'small' ? '12px' : '8px')};
 `
 
 const Label = styled.span(
   ({ theme }) => css`
-    ${typographyTemplate(theme.typography)}
-    margin-left: ${theme.entities.label.spacings.left};
+    ${typographyTemplate(theme.typography)};
   `,
 )
 
@@ -46,7 +46,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel isDisabled={disabled} className={className} style={style}>
+        <StyledLabel
+          size={size}
+          isDisabled={disabled}
+          className={className}
+          style={style}
+        >
           {size === 'small' ? (
             <SwitchSmall disabled={disabled} {...rest} ref={ref} />
           ) : (

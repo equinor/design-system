@@ -8,25 +8,6 @@ exports[`Switch Matches snapshot 1`] = `
   border-radius: 50%;
   position: relative;
   grid-area: input;
-  pointer-events: none;
-}
-
-.c4::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  min-height: auto;
-  content: '';
-}
-
-.c4::after {
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 48px;
-  height: 48px;
-  content: '';
 }
 
 .c2 {
@@ -37,6 +18,8 @@ exports[`Switch Matches snapshot 1`] = `
   height: 100%;
   grid-area: input;
   margin: 0;
+  position: relative;
+  z-index: 1;
   cursor: pointer;
 }
 
@@ -58,6 +41,12 @@ exports[`Switch Matches snapshot 1`] = `
   display: inline-grid;
   vertical-align: middle;
   grid: [input] 1fr / [input] 1fr;
+  place-items: center;
+}
+
+.c3 {
+  width: 48px;
+  aspect-ratio: 1/1;
 }
 
 .c3:checked + span > span {
@@ -127,6 +116,7 @@ exports[`Switch Matches snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
+  gap: 8px;
 }
 
 .c7 {
@@ -141,7 +131,6 @@ exports[`Switch Matches snapshot 1`] = `
   -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
-  margin-left: 12px;
 }
 
 <label
