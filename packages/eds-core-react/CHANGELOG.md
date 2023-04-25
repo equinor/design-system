@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✨ `Autocomplete`: `optionComponent` prop for custom option templates by @oddvernes in https://github.com/equinor/design-system/pull/2852
 - ✨ `Sidebar`: Added `Sidebar.Accordion` and `Sidebar.AccordionItem` by @denektenina in https://github.com/equinor/design-system/pull/2797
 - ✨ `Typography`: Added fallback css variables for colors by @bjartebore in https://github.com/equinor/design-system/pull/2840
-- ✨ `Menu`: polymorphic `menu.item` (use `as` prop to override element type) by @oddvernes in https://github.com/equinor/design-system/pull/2817
+- ✨ `Menu`: polymorphic `Menu.Item` (use `as` prop to override element type) by @oddvernes in https://github.com/equinor/design-system/pull/2817
 
 ### Changed
 
