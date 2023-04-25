@@ -188,7 +188,7 @@ export type AutocompleteProps<T> = {
   multiple?: boolean
   /**  Custom option label */
   optionLabel?: (option: T) => string
-  /**  Custom option jsx */
+  /**  Custom option template */
   optionComponent?: (option: T, isSelected: boolean) => ReactNode
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
