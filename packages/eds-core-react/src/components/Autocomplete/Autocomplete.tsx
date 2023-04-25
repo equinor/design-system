@@ -189,7 +189,7 @@ export type AutocompleteProps<T> = {
   /**  Custom option label */
   optionLabel?: (option: T) => string
   /**  Custom option jsx */
-  optionComponent?: (option: T) => ReactNode
+  optionComponent?: (option: T, isSelected: boolean) => ReactNode
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
   /** Disable option
@@ -644,7 +644,7 @@ function AutocompleteInner<T>(
                   isSelected={isSelected}
                   isDisabled={isDisabled}
                   multiline={multiline}
-                  optionComponent={optionComponent?.(item)}
+                  optionComponent={optionComponent?.(item, isSelected)}
                   {...getItemProps({
                     ...(multiline && {
                       ref: rowVirtualizer.measureElement,

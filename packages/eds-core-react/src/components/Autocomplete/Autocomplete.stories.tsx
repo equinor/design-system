@@ -184,8 +184,9 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options } = args
-  function CustomItem(option: MyOptionType) {
+  function CustomItem(option: MyOptionType, isSelected: boolean) {
     const { label, symbol } = option
+    const outlineColor = isSelected ? '#007079' : 'transparent'
     return (
       <div
         style={{
@@ -199,6 +200,11 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
           src={`https://i.pravatar.cc/48?u=${symbol}`}
           size={48}
           alt="profile"
+          style={{
+            border: `5px solid transparent`,
+            outline: `3px solid ${outlineColor}`,
+            outlineOffset: '-3px',
+          }}
         />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
           <Typography group="paragraph" variant="body_long_bold">
@@ -219,6 +225,7 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         optionComponent={CustomItem}
+        initialSelectedOptions={[options[1]]}
         multiline
       />
       <Autocomplete
@@ -226,6 +233,7 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         optionComponent={CustomItem}
+        initialSelectedOptions={[options[1]]}
         multiline
         multiple
       />
