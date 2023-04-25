@@ -21,7 +21,7 @@ const {
 } = tokens
 
 type StyleProps = {
-  active?: boolean
+  $active?: boolean
   disabled?: boolean
 }
 
@@ -43,8 +43,8 @@ const Item = styled.button.attrs<StyleAttrsProps>(({ $isFocused }) => ({
   ${typographyTemplate(typography)}
   ${({ theme }) => spacingsTemplate(theme.entities.item.spacings)}
 
-  ${({ active }) =>
-    active &&
+  ${({ $active }) =>
+    $active &&
     css`
       background: ${activeToken.background};
       * {
@@ -128,6 +128,7 @@ export const MenuItem: OverridableSubComponent = forwardRef<
   {
     children,
     disabled,
+    active,
     index = 0,
     as = 'button',
     onClick,
@@ -156,6 +157,7 @@ export const MenuItem: OverridableSubComponent = forwardRef<
   return (
     <Item
       {...props}
+      $active={active}
       ref={mergeRefs<HTMLButtonElement>(ref, (el) => {
         if (isFocused) {
           requestAnimationFrame(() => {
