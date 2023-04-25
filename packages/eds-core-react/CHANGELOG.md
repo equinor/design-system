@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.31.0] - 2023-04-25
+
+### Added
+
+- ✨ `Autocomplete`: `optionComponent` prop for custom option templates by @oddvernes in https://github.com/equinor/design-system/pull/2852
+- ✨ `Sidebar`: Added `Sidebar.Accordion` and `Sidebar.AccordionItem` by @denektenina in https://github.com/equinor/design-system/pull/2797
+- ✨ `Typography`: Added fallback css variables for colors by @bjartebore in https://github.com/equinor/design-system/pull/2840
+- ✨ `Menu`: polymorphic `Menu.Item` (use `as` prop to override element type) by @oddvernes in https://github.com/equinor/design-system/pull/2817
+
+### Changed
+
+- 💄 `Radio`/`Checkbox`: changed visual size of hover background to conform to design by @oddvernes in https://github.com/equinor/design-system/pull/2824
+- 💄 `Switch`: physical size is now same as `Radio`/`Checkbox` to conform to design (from 40x40 to 48x48) by @oddvernes in https://github.com/equinor/design-system/pull/2824
+- ⬆️ Updated production dependencies for all packages by @oddvernes in https://github.com/equinor/design-system/pull/2848
+
 ## [0.30.0] - 2023-03-15
 
 ### Fixed
