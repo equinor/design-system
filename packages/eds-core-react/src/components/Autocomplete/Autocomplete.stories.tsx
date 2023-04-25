@@ -6,7 +6,7 @@ import { Checkbox } from '../Checkbox'
 import { Story, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button, Chip, Card } from '../..'
+import { Typography, EdsProvider, Button, Chip, Card, Avatar } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
@@ -177,6 +177,71 @@ export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
 }
 OptionLabel.storyName = 'Objects as options'
 OptionLabel.args = {
+  options: stocks,
+}
+
+export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
+  const { options } = args
+  function CustomItem(option: MyOptionType, isSelected: boolean) {
+    const { label, symbol } = option
+    const outlineColor = isSelected ? '#007079' : 'transparent'
+    return (
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center',
+          paddingBlock: '4px',
+        }}
+      >
+        <Avatar
+          src={`https://i.pravatar.cc/48?u=${symbol}`}
+          size={48}
+          alt="profile"
+          style={{
+            border: `5px solid transparent`,
+            outline: `3px solid ${outlineColor}`,
+            outlineOffset: '-3px',
+          }}
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <Typography group="paragraph" variant="body_long_bold">
+            {label}
+          </Typography>
+          <Typography group="paragraph" variant="caption">
+            {symbol}
+          </Typography>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <Autocomplete
+        label="Select a stock"
+        options={options}
+        optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
+        optionComponent={CustomItem}
+        initialSelectedOptions={[options[1]]}
+        multiline
+      />
+      <Autocomplete
+        label="Select multiple stocks"
+        options={options}
+        optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
+        optionComponent={CustomItem}
+        initialSelectedOptions={[options[1]]}
+        multiline
+        multiple
+      />
+    </>
+  )
+}
+optionComponent.storyName = 'Customized option component'
+optionComponent.args = {
   options: stocks,
 }
 
@@ -487,6 +552,33 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
     setSelectedItem(changes.selectedItems[0])
   }
 
+  function CustomItem(option: Country) {
+    const {
+      name: { common, official },
+      flags: { svg },
+    } = option
+    return (
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center',
+          paddingBlock: '4px',
+        }}
+      >
+        <img src={svg} style={{ width: '100px' }} alt={`flag of ${common}`} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <Typography group="paragraph" variant="body_long_bold">
+            {official}
+          </Typography>
+          <Typography group="paragraph" variant="caption">
+            {common}
+          </Typography>
+        </div>
+      </div>
+    )
+  }
+
   useEffect(() => {
     if (searchInput.length < 2) return setOptions([])
 
@@ -538,10 +630,10 @@ export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
         options={options}
         optionsFilter={() => true}
         optionLabel={(opt) => `${opt.name.common}`}
+        optionComponent={CustomItem}
         onOptionsChange={onChange}
         selectedOptions={[selectedItem]}
         loading={loading}
-        autoWidth
         multiline
       />
       {selectedItem && (

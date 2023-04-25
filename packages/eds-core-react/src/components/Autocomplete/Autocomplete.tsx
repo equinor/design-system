@@ -7,6 +7,7 @@ import {
   useMemo,
   useCallback,
   ChangeEvent,
+  ReactNode,
 } from 'react'
 import {
   useCombobox,
@@ -187,6 +188,8 @@ export type AutocompleteProps<T> = {
   multiple?: boolean
   /**  Custom option label */
   optionLabel?: (option: T) => string
+  /**  Custom option template */
+  optionComponent?: (option: T, isSelected: boolean) => ReactNode
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
   /** Disable option
@@ -241,6 +244,7 @@ function AutocompleteInner<T>(
     clearSearchOnChange = true,
     multiline = false,
     dropdownHeight = 300,
+    optionComponent,
     ...other
   } = props
 
@@ -640,6 +644,7 @@ function AutocompleteInner<T>(
                   isSelected={isSelected}
                   isDisabled={isDisabled}
                   multiline={multiline}
+                  optionComponent={optionComponent?.(item, isSelected)}
                   {...getItemProps({
                     ...(multiline && {
                       ref: rowVirtualizer.measureElement,

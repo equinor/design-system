@@ -1,4 +1,4 @@
-import { forwardRef, LiHTMLAttributes } from 'react'
+import { forwardRef, LiHTMLAttributes, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
@@ -49,21 +49,23 @@ const Label = styled.span<{ multiline: boolean }>(({ theme, multiline }) => {
   `
 })
 
-export type AutocompleteOptionProps = {
+export type AutocompleteOptionProps<T> = {
   value: string
   multiple: boolean
   highlighted: string
   isSelected: boolean
   isDisabled?: boolean
   multiline: boolean
+  optionComponent?: (option: T, isSelected: boolean) => ReactNode
 } & LiHTMLAttributes<HTMLLIElement>
 
-export const AutocompleteOption = forwardRef<
-  HTMLLIElement,
-  AutocompleteOptionProps
->(function AutocompleteOption(
-  {
+function AutocompleteOptionInner<T>(
+  props: AutocompleteOptionProps<T>,
+  ref: React.ForwardedRef<HTMLLIElement>,
+) {
+  const {
     value,
+    optionComponent,
     multiple,
     isSelected,
     isDisabled,
@@ -71,9 +73,7 @@ export const AutocompleteOption = forwardRef<
     onClick,
     'aria-selected': ariaSelected,
     ...other
-  },
-  ref,
-) {
+  } = props
   return (
     <StyledListItem
       ref={ref}
@@ -94,7 +94,18 @@ export const AutocompleteOption = forwardRef<
           }}
         />
       )}
-      <Label multiline={multiline}>{value}</Label>
+      {optionComponent ? (
+        <>{optionComponent}</>
+      ) : (
+        <Label multiline={multiline}>{value}</Label>
+      )}
     </StyledListItem>
   )
-})
+}
+
+export const AutocompleteOption = forwardRef(AutocompleteOptionInner) as <T>(
+  props: AutocompleteOptionProps<T> & {
+    ref?: React.ForwardedRef<HTMLLIElement>
+    displayName?: string | undefined
+  },
+) => ReturnType<typeof AutocompleteOptionInner>

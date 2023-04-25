@@ -86,6 +86,40 @@ describe('Autocomplete', () => {
     expect(within(options[2]).getByText(labler(items[2]))).toBeDefined()
   })
 
+  it('Can render custom items with optionComponent', async () => {
+    type Item = {
+      label: string
+    }
+    function CustomItem(option: Item) {
+      const { label } = option
+      return <h1>{label}</h1>
+    }
+    render(
+      <Autocomplete
+        disablePortal
+        options={itemObjects}
+        label={labelText}
+        optionLabel={(item) => item.label}
+        optionComponent={CustomItem}
+      />,
+    )
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+    expect(optionsList.childNodes).toHaveLength(0)
+
+    fireEvent.click(buttonNode)
+    expect(await within(optionsList).findAllByRole('option')).toHaveLength(3)
+
+    const options = await within(optionsList).findAllByRole('option')
+    expect(within(options[0]).getByText(items[0])).toBeDefined()
+    const heading = screen.getByText(items[0])
+    expect(heading.nodeName).toBe('H1')
+  })
+
   it('Can be disabled', async () => {
     render(
       <Autocomplete disablePortal label={labelText} options={items} disabled />,
