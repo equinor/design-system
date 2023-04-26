@@ -128,6 +128,8 @@ jobs:
     needs: [setup, packages]
     name: Build & Deploy Website
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment || 'development' }}
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
@@ -144,10 +146,21 @@ jobs:
           enabled-static-website: 'true'
           folder: 'packages/eds-core-react/storybook-build'
           public-access-policy: 'container'
-          connection-string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING_2022 }}
+          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+  purge-cdn:
+    if: github.event.inputs.environment == 'production'
+    needs: [publish-storybook]
+    name: Purge cdn
+    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    secrets: inherit
+    with:
+      environment: production
+      cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
+      cdnEndpointName: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
+      azureResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}
