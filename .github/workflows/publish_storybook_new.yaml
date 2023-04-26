@@ -91,6 +91,7 @@ jobs:
     needs: [publish-storybook]
     name: Purge cdn
     uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    secrets: inherit
     with:
       environment: production
       cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
