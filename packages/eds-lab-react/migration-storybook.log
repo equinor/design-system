@@ -1,0 +1,99 @@
+🔎 checking possible migrations..
+
+🔎 found a 'mdx1to2' migration:
+╭ Automigration detected ──────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                  │
+│   We've found 2 '.stories.mdx' files in your project.                                                            │
+│                                                                                                                  │
+│   Storybook has upgraded to MDX2 (https://mdxjs.com/blog/v2/), which contains breaking changes from MDX1.        │
+│   We can try to automatically upgrade your MDX files to MDX2 format using some common patterns.                  │
+│                                                                                                                  │
+│   After this install completes, and before you start Storybook, we strongly recommend reading the MDX2 section   │
+│   of the 7.0 migration guide. It contains useful tools for detecting and fixing any remaining issues.            │
+│                                                                                                                  │
+│   https://storybook.js.org/migration-guides/7.0                                                                  │
+│                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'mdx1to2' migration on your project? » (Y/n)√ Do you want to run the 'mdx1to2' migration on your project? ... yes
+🆗 Unmodified Intro_components.stories.mdx
+🆗 Unmodified Intro.stories.mdx
+✅ ran mdx1to2 migration
+
+🔎 found a 'github-flavored-markdown-mdx' migration:
+╭ Automigration detected ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                │
+│   In MDX1 you had the option of using GitHub flavored markdown.                                                                                │
+│                                                                                                                                                │
+│   Storybook 7.0 uses MDX2 for compiling MDX, and thus no longer supports GFM out of the box.                                                   │
+│   Because of this you need to explicitly add the GFM plugin in the addon-docs options:                                                         │
+│   https://storybook.js.org/docs/react/writing-docs/mdx#lack-of-github-flavored-markdown-gfm                                                    │
+│                                                                                                                                                │
+│   We recommend you follow the guide on the link above, however we can add a temporary storybook addon that helps make this migration easier.   │
+│   We'll install the addon and add it to your storybook config.                                                                                 │
+│                                                                                                                                                │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'github-flavored-markdown-mdx' migration on your project? » (Y/n)√ Do you want to run the 'github-flavored-markdown-mdx' migration on your project? ... yes
+An error occurred while installing dependencies.
+
+❌ error when running github-flavored-markdown-mdx migration
+HandledError
+    at PNPMProxy.addDependencies (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:37:1198)
+    at Object.run (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:108:240)
+    ... 3 lines matching cause stack trace ...
+    at async Command.<anonymous> (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:435:2802) {
+  handled: true,
+  cause: Error
+      at PNPMProxy.executeCommand (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:39:1699)
+      at PNPMProxy.runAddDeps (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:39:5543)
+      at PNPMProxy.addDependencies (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:37:1036)
+      at Object.run (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:108:240)
+      at runFixes (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:326:1152)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async automigrate (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:321:636)
+      at async Command.<anonymous> (C:\Users\oddbjorn.overnes\AppData\Local\pnpm\store\v3\tmp\dlx-25156\node_modules\.pnpm\@storybook+cli@7.0.7\node_modules\@storybook\cli\dist\generate.js:435:2802)
+}
+
+
+🔎 found a 'autodocsTrue' migration:
+╭ Automigration detected ────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                    │
+│   We've changed the configuration of autodocs (previous docsPage), so now the value:               │
+│     - docs.autodocs: true -- means automatically create docs for every CSF file                    │
+│     - docs.autodocs: 'tag' -- means only create autodocs for CSF files with the 'autodocs' tag     │
+│     - docs.autodocs: false -- means never create autodocs                                          │
+│                                                                                                    │
+│   Based on your prior configuration,  we can set the `docs.autodocs` to keep your old behaviour:   │
+│                                                                                                    │
+│   docs: { autodocs: true }                                                                         │
+│                                                                                                    │
+│   More info: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#autodocs-changes      │
+│                                                                                                    │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'autodocsTrue' migration on your project? » (Y/n)√ Do you want to run the 'autodocsTrue' migration on your project? ... yes
+✅ Setting 'docs.autodocs' to true in main.js
+✅ ran autodocsTrue migration
+
+╭ Migration check ran with failures ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                               │
+│   Successful migrations:                                                                                                                                      │
+│                                                                                                                                                               │
+│   mdx1to2, autodocsTrue                                                                                                                                       │
+│                                                                                                                                                               │
+│   Failed migrations:                                                                                                                                          │
+│                                                                                                                                                               │
+│   github-flavored-markdown-mdx:                                                                                                                               │
+│                                                                                                                                                               │
+│                                                                                                                                                               │
+│   You can find the full logs in C:\git\design-system\packages\eds-lab-react\migration-storybook.log                                                           │
+│                                                                                                                                                               │
+│   ─────────────────────────────────────────────────                                                                                                           │
+│                                                                                                                                                               │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook@next automigrate'                                                        │
+│                                                                                                                                                               │
+│   The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the latest version of Storybook.   │
+│                                                                                                                                                               │
+│   Please check the changelog and migration guide for manual migrations and more information: https://storybook.js.org/migration-guides/7.0                    │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                                                                                     │
+│                                                                                                                                                               │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
