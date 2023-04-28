@@ -1,6 +1,8 @@
+import remarkGfm from 'remark-gfm'
+
 const path = require('path')
 
-module.exports = {
+const config = {
   stories: [
     '../stories/docs/*.stories.@(ts|tsx|mdx)',
     '../src/**/*.stories.@(ts|tsx|mdx)',
@@ -10,10 +12,21 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: '@storybook/builder-webpack5',
+  framework: {
+    // The name of the framework you want to use goes here
+    name: '@storybook/react',
+    options: {},
   },
   webpackFinal: async (config) => {
     config.resolve = {
@@ -27,7 +40,11 @@ module.exports = {
         ),
       },
     }
-
     return config
   },
+  docs: {
+    autodocs: true,
+  },
 }
+
+export default config
