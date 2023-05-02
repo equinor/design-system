@@ -11,6 +11,7 @@ const config = {
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
+    '@storybook/addon-actions',
     '@storybook/addon-essentials',
     {
       name: '@storybook/addon-docs',
@@ -25,7 +26,7 @@ const config = {
   ],
   framework: {
     // The name of the framework you want to use goes here
-    name: '@storybook/react',
+    name: '@storybook/react-webpack5',
     options: {},
   },
   webpackFinal: async (config) => {
