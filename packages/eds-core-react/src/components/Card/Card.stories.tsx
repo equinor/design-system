@@ -7,7 +7,13 @@ import {
   Icon,
   Typography,
 } from '../..'
-import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
+import {
+  more_vertical,
+  share,
+  person_add,
+  settings,
+  save,
+} from '@equinor/eds-icons'
 import { ComponentMeta, Story } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Card.docs.mdx'
@@ -17,6 +23,7 @@ const icons = {
   share,
   person_add,
   settings,
+  save,
 }
 
 Icon.add(icons)

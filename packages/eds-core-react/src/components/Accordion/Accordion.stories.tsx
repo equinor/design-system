@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { Accordion, Button, Icon, AccordionProps } from '../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { ComponentMeta, Story, StoryObj, StoryFn, Meta } from '@storybook/react'
 import {
   attach_file,
   notifications,
@@ -21,7 +21,7 @@ Icon.add({
   error_outlined,
 })
 
-export default {
+const meta: Meta<typeof Accordion> = {
   title: 'Surfaces/Accordion',
   component: Accordion,
   subcomponents: {
@@ -46,9 +46,10 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof Accordion>
+}
+export default meta
 
-export const Introduction: Story<AccordionProps> = (args) => {
+export const Introduction: StoryFn<AccordionProps> = (args) => {
   return (
     <Accordion {...args}>
       <Accordion.Item isExpanded>
@@ -67,7 +68,7 @@ export const Introduction: Story<AccordionProps> = (args) => {
   )
 }
 
-export const Header: Story<AccordionProps> = () => {
+export const Header: StoryFn<AccordionProps> = () => {
   return (
     <>
       <Accordion headerLevel="h3" chevronPosition="left">
@@ -209,7 +210,7 @@ export const Header: Story<AccordionProps> = () => {
   )
 }
 
-export const Controlled: Story<AccordionProps> = () => {
+export const Controlled: StoryFn<AccordionProps> = () => {
   const [expanded, setExpanded] = useState(false)
   const toggleAccordion = (state: boolean) => {
     console.log(state)
