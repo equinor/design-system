@@ -49,7 +49,6 @@ export default [
         format: 'es',
         sourcemap: isDevelopment,
       },
-      { file: pkg.publishConfig.main, format: 'cjs' },
     ],
   },
 ]
