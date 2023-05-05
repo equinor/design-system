@@ -1,4 +1,4 @@
-export const parameters = {
+const preview = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewMode: 'docs',
   options: {
@@ -20,3 +20,4 @@ export const parameters = {
     },
   },
 }
+export default preview
