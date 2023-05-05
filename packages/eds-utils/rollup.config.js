@@ -29,7 +29,7 @@ export default [
     plugins: [
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
-      commonjs(),
+      commonjs({ requireReturnsDefault: 'auto' }),
       babel({
         babelHelpers: 'runtime',
         extensions,
@@ -44,7 +44,6 @@ export default [
         format: 'es',
         sourcemap: isDevelopment,
       },
-      { file: pkg.publishConfig.main, format: 'cjs' },
     ],
   },
 ]
