@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactElement } from 'react'
 import { render, screen, cleanup, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '../.'
@@ -20,7 +20,7 @@ beforeAll(() => {
   window.ResizeObserver = mockResizeObserver
 })
 
-function SideBarWrapper(children: React.ReactElement, isOpen?: boolean) {
+function SideBarWrapper(children: ReactElement, isOpen?: boolean) {
   const toggleExpand = jest.fn()
 
   return (
