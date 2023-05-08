@@ -1,8 +1,8 @@
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Textarea, TextareaProps } from '../Textarea'
 import page from './Textarea.docs.mdx'
 
-export default {
+const meta: Meta<typeof Textarea> = {
   title: 'Inputs/Textarea',
   component: Textarea,
   parameters: {
@@ -10,8 +10,9 @@ export default {
       page,
     },
   },
-} as ComponentMeta<typeof Textarea>
+}
+export default meta
 
-export const Introduction: Story<TextareaProps> = (args) => (
+export const Introduction: StoryFn<TextareaProps> = (args) => (
   <Textarea {...args} />
 )

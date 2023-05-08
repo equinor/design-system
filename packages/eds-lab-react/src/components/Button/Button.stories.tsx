@@ -6,10 +6,10 @@ import {
   EdsProvider,
   Density,
 } from '@equinor/eds-core-react'
-import styled, { css } from 'styled-components'
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ css: FlattenSimpleInterpolation }>`
   margin: 32px;
   display: grid;
   grid-gap: 32px;

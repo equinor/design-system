@@ -20,16 +20,14 @@ const FullWidthWrapper = styled.div`
   grid-gap: 16px;
 `
 
-export default {
+const meta: Meta<typeof CSSButton> = {
   title: 'Core-react experimental features/CSS Button',
   component: CSSButton,
   argTypes: {
     as: {
-      control: {
-        type: 'select',
-        options: ['span', 'a', 'button'],
-        defaultValue: 'button',
-      },
+      options: ['span', 'a', 'button'],
+      control: { type: 'radio' },
+      defaultValue: 'button',
     },
   },
   parameters: {
@@ -41,7 +39,8 @@ export default {
     },
     info: {},
   },
-} as Meta
+}
+export default meta
 
 export const Default: StoryObj<ButtonProps> = {
   render: (args) => <CSSButton {...args}>You can control me</CSSButton>,
