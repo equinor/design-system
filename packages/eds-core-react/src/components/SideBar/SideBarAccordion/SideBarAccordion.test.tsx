@@ -95,6 +95,48 @@ describe('Accordion in open sidebar', () => {
     expect(accordionButton).toHaveAttribute('aria-expanded', 'true')
     expect(accordionPanel).toBeInTheDocument()
   })
+
+  it('uses isExpanded to decide open-state on render', () => {
+    render(
+      <SideBar.Accordion
+        {...defaultProps}
+        isExpanded={true}
+      ></SideBar.Accordion>,
+      {
+        wrapper: ({ children }) => SideBarWrapper(children, true),
+      },
+    )
+
+    const accordionPanel = screen.getByRole('region')
+    expect(accordionPanel).toBeInTheDocument()
+  })
+
+  it('it controls its own open-state on click if toggleExpand is not present, even if isExpanded is always true', async () => {
+    render(
+      <SideBar.Accordion
+        {...defaultProps}
+        isExpanded={true}
+      ></SideBar.Accordion>,
+      {
+        wrapper: ({ children }) => SideBarWrapper(children, true),
+      },
+    )
+    const accordionButton = screen.getByRole('button')
+
+    await userEvent.click(accordionButton)
+
+    let accordionPanel = screen.queryByRole('region')
+
+    expect(accordionButton).toHaveAttribute('aria-expanded', 'false')
+    expect(accordionPanel).not.toBeInTheDocument()
+
+    await userEvent.click(accordionButton)
+
+    accordionPanel = screen.getByRole('region')
+
+    expect(accordionButton).toHaveAttribute('aria-expanded', 'true')
+    expect(accordionPanel).toBeInTheDocument()
+  })
 })
 
 describe('Accordion in closed sidebar', () => {

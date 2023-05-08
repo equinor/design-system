@@ -333,11 +333,7 @@ export const WithAccordion: Story<SidebarType> = () => {
           <SideBar.Accordion
             label="Controlled"
             icon={favorite_outlined}
-            isExpanded={isFavoritesOpen}
-            toggleExpand={() => {
-              setIsFavoritesOpen(!isFavoritesOpen)
-              console.log('I just toggled the accordion')
-            }}
+            isExpanded={true}
           >
             <SideBar.AccordionItem label={'Saved Items'} />
             <SideBar.AccordionItem label={'Work in progress'} />

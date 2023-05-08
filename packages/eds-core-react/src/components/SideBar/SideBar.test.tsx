@@ -42,9 +42,6 @@ describe('Sidebar', () => {
             id="123"
             label="Test accordion"
             isExpanded={true}
-            toggleExpand={() => {
-              console.log('expand')
-            }}
             icon={favorite_outlined}
           >
             <SideBar.AccordionItem label={'Test accordion item'} />
