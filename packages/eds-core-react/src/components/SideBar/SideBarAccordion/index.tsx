@@ -184,7 +184,7 @@ export const SideBarAccordion = forwardRef<
 ) {
   const accordionId: string = useId(id, 'accordion')
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
-  const [accordionIsOpen, setAccordionIsOpen] = useState<boolean>(false)
+  const [accordionIsOpen, setAccordionIsOpen] = useState<boolean>(isExpanded)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
   const { isOpen } = useSideBar()
   const showPanel = toggleExpand !== undefined ? isExpanded : accordionIsOpen
