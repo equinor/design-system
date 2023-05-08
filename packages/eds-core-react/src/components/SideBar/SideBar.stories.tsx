@@ -566,7 +566,7 @@ const selectPage = (selected: string) => {
   }
 }
 
-export const ControlledExample: Story<SidebarType> = () => {
+export const ControlledActiveState: Story<SidebarType> = () => {
   const [selected, setSelected] = useState<string>('')
 
   const hasActiveItem = (subItems: { label: string; name: string }[]) => {
