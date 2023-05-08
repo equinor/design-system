@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { Accordion, Button, Icon, AccordionProps } from '../..'
-import { ComponentMeta, Story, StoryObj, StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import {
   attach_file,
   notifications,

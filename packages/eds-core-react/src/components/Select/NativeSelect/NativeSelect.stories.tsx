@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../../..'
-import { Story } from '@storybook/react/types-6-0'
-import { ComponentMeta } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import page from './NativeSelect.docs.mdx'
 
 export default {

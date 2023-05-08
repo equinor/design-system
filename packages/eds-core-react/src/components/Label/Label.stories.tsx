@@ -1,6 +1,5 @@
 import { Label, LabelProps, Input } from '../..'
-import { Story } from '@storybook/react/types-6-0'
-import { ComponentMeta } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import page from './Label.docs.mdx'
 
 export default {
