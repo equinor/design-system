@@ -5,11 +5,8 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "main": "dist/eds-lab-react.cjs.js",
-  "publishConfig": {
-    "main": "dist/eds-lab-react.cjs.js",
-    "module": "dist/esm/index.js"
-  },
+  "exports": "./dist/esm/index.js",
+  "type": "module",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "author": {
