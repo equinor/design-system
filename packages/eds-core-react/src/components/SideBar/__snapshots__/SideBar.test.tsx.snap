@@ -133,6 +133,83 @@ exports[`Sidebar Matches snapshot 1`] = `
           Another Link
         </p>
       </a>
+      <div
+        class="SideBarAccordion__MenuItem-sc-1ekwnbi-0 cExJJB"
+      >
+        <h2
+          class="SideBarAccordion__AccordionHeader-sc-1ekwnbi-1 eBrMDs"
+        >
+          <button
+            aria-controls="panel_123"
+            aria-expanded="true"
+            class="SideBarAccordion__Button-sc-1ekwnbi-2 SideBarAccordion__OpenSidebarButton-sc-1ekwnbi-3 bIwyEU jEXFBm"
+            id="header_123"
+          >
+            <svg
+              aria-hidden="true"
+              class="Icon__StyledSvg-sc-6evbi1-0"
+              fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="Icon__StyledPath-sc-6evbi1-1"
+                clip-rule="evenodd"
+                d="M12 4.915c1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.777-3.394 6.855-8.537 11.519l-.013.011-1.45 1.32-1.45-1.31-.04-.036C5.384 15.17 2 12.095 2 8.325c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09Zm0 13.56.1-.1c4.76-4.31 7.9-7.16 7.9-10.05 0-2-1.5-3.5-3.5-3.5-1.54 0-3.04.99-3.56 2.36h-1.87c-.53-1.37-2.03-2.36-3.57-2.36-2 0-3.5 1.5-3.5 3.5 0 2.89 3.14 5.74 7.9 10.05l.1.1Z"
+                data-testid="eds-icon-path"
+                fill-rule="evenodd"
+                height="24"
+              />
+            </svg>
+            <p
+              class="Typography__StyledTypography-sc-179guof-0 fBsTVX SideBarAccordion__ItemText-sc-1ekwnbi-7 eObpym"
+            >
+              Test accordion
+            </p>
+            <svg
+              aria-hidden="true"
+              class="Icon__StyledSvg-sc-6evbi1-0"
+              fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="Icon__StyledPath-sc-6evbi1-1"
+                clip-rule="evenodd"
+                d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41Z"
+                data-testid="eds-icon-path"
+                fill-rule="evenodd"
+                height="24"
+              />
+            </svg>
+          </button>
+        </h2>
+        <div
+          aria-labelledby="header_123"
+          class="SideBarAccordion__Panel-sc-1ekwnbi-6 kRIwZR"
+          id="panel_123"
+          role="region"
+        >
+          <a
+            class="SideBarAccordionItem__Container-sc-1aeo1e1-0 jYNDv"
+            tabindex="0"
+          >
+            <div
+              class="SideBarAccordionItem__TextWrapper-sc-1aeo1e1-1 eVJtOl"
+            >
+              <p
+                class="Typography__StyledTypography-sc-179guof-0 fBsTVX SideBarAccordionItem__Text-sc-1aeo1e1-2 fjweUU"
+              >
+                Test accordion item
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </DocumentFragment>
