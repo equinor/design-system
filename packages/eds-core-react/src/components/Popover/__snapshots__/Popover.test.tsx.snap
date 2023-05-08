@@ -59,12 +59,12 @@ exports[`Popover Matches snapshot 1`] = `
   class="c0 c1 c2"
   data-testid="popover"
   open=""
-  style="position: absolute; top: 0px; left: 0px;"
+  style="position: absolute; top: 14px; left: 8px;"
   tabindex="-1"
 >
   <div
     class="c3 arrow"
-    style="top: -6px; transform: rotate(90deg);"
+    style="top: -6px; transform: rotate(90deg); left: 0px;"
   >
     <svg
       class="c4 arrowSvg"
