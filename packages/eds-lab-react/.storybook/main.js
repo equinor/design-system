@@ -1,6 +1,6 @@
 import remarkGfm from 'remark-gfm'
 
-module.exports = {
+const config = {
   stories: [
     '../stories/docs/*.stories.@(ts|tsx|mdx)',
     '../src/**/*.stories.@(ts|tsx|mdx)',
@@ -50,3 +50,5 @@ module.exports = {
     autodocs: true,
   },
 }
+
+export default config
