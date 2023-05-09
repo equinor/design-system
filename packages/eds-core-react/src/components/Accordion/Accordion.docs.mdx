@@ -1,7 +1,9 @@
 import { Links, PropsTable } from './../../../.storybook/components'
-import { Meta, Story, Primary, Controls } from '@storybook/blocks'
+import { Meta, Primary, Canvas } from '@storybook/blocks'
 import * as ComponentStories from './Accordion.stories'
 import { Accordion } from '.'
+
+<Meta of={ComponentStories} />
 
 # Accordion
 
@@ -15,12 +17,9 @@ Allows users to collapse and expand sections of content.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-{/* <Story id="surfaces-accordion--introduction" /> */}
-{/* <Primary />
-<Controls /> */}
-{/* <Story of={ComponentStories.Introduction} /> */}
-{/* <PropsTable /> */}
-{/* <Meta of={ComponentStories} /> */}
+<Primary />
+
+<PropsTable />
 
 ## Usage
 
@@ -66,18 +65,10 @@ import { Accordion } from '@equinor/eds-core-react'
     <li>The expand/collapse functionality is tied to the entire header.</li>
 </ul>
 
-{/* <Story id="surfaces-accordion--header" /> */}
-<Story of={ComponentStories.Header} />
+<Canvas of={ComponentStories.Header} />
 
 ### Controlled
 
 Use `onExpandedChange` prop on `Accordion.Item` to make it a controlled component
-{/* <Story id="surfaces-accordion--controlled" /> */}
-<Story of={ComponentStories.Controlled} />
+<Canvas of={ComponentStories.Controlled} />
 
-{/* Re-enable once compact has been implemented for Accordion */}
-{/* ### Compact
-
-Compact `Accordion` using `EdsProvider`
-
-<Story id="surfaces-accordion--compact" /> */}
