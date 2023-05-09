@@ -3,14 +3,14 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
 import { Typography, EdsProvider, Button, Chip, Card, Avatar } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
-export default {
+const meta: Meta<typeof Autocomplete> = {
   title: 'Inputs/Autocomplete',
   component: Autocomplete,
   argTypes: {
@@ -35,7 +35,9 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Autocomplete>
+}
+
+export default meta
 
 type MyOptionType = {
   label: string
@@ -130,7 +132,7 @@ const optionLabel = (item: MyOptionType) => item.label
 const labelWithIcon = (opt: MyOptionType) =>
   `${opt.trend} ${opt.label} (${opt.symbol})`
 
-export const Introduction: Story<AutocompleteProps<string>> = (args) => {
+export const Introduction: StoryFn<AutocompleteProps<string>> = (args) => {
   return <Autocomplete {...args} />
 }
 Introduction.bind({})
@@ -143,7 +145,7 @@ Introduction.args = {
   disablePortal: false,
 }
 
-export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
@@ -161,7 +163,7 @@ Multiple.args = {
   options: stocks,
 }
 
-export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const OptionLabel: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
@@ -180,7 +182,7 @@ OptionLabel.args = {
   options: stocks,
 }
 
-export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
+export const OptionComponent: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options } = args
@@ -240,12 +242,12 @@ export const optionComponent: Story<AutocompleteProps<MyOptionType>> = (
     </>
   )
 }
-optionComponent.storyName = 'Customized option component'
-optionComponent.args = {
+OptionComponent.storyName = 'Customized option component'
+OptionComponent.args = {
   options: stocks,
 }
 
-export const Controlled: Story<AutocompleteProps<string>> = (args) => {
+export const Controlled: StoryFn<AutocompleteProps<string>> = (args) => {
   const { options } = args
 
   const [selectedItems, setSelectedItems] = useState<string[]>([
@@ -279,7 +281,7 @@ Controlled.args = {
   options: counties,
 }
 
-export const ReadOnly: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const ReadOnly: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options, optionLabel } = args
   return (
     <>
@@ -299,7 +301,7 @@ ReadOnly.args = {
   optionLabel,
 }
 
-export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const Disabled: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options, optionLabel } = args
 
   return (
@@ -318,7 +320,7 @@ Disabled.args = {
   optionLabel,
 }
 
-export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
+export const DisabledOption: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options, optionLabel } = args
@@ -342,7 +344,7 @@ DisabledOption.args = {
   optionLabel: labelWithIcon,
 }
 
-export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
+export const PreselectedOptions: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options, optionLabel } = args
@@ -365,7 +367,7 @@ PreselectedOptions.args = {
   optionLabel,
 }
 
-export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const Compact: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options, optionLabel } = args
   const [compact, setComfortable] = useState<boolean>(true)
 
@@ -392,7 +394,7 @@ Compact.args = {
   optionLabel,
 }
 
-export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
+export const CustomOptionsFilter: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options, optionLabel } = args
@@ -424,7 +426,7 @@ CustomOptionsFilter.args = {
   optionLabel,
 }
 
-export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const AutoWidth: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
@@ -452,7 +454,7 @@ AutoWidth.args = {
   optionLabel,
 }
 
-export const Virtualized: Story<AutocompleteProps<MyOptionType>> = () => {
+export const Virtualized: StoryFn<AutocompleteProps<MyOptionType>> = () => {
   type LoadingState = 'notLoaded' | 'loading' | 'loaded'
   type Photo = {
     albumId: number
@@ -525,7 +527,7 @@ const CountryTemplate = styled.div`
   }
 `
 
-export const Async: Story<AutocompleteProps<MyOptionType>> = () => {
+export const Async: StoryFn<AutocompleteProps<MyOptionType>> = () => {
   type CountryName = {
     common: string
     official: string
@@ -689,7 +691,9 @@ type MyFormValues = {
   fruits: { label: string; emoji: string }[]
 }
 
-export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
+export const WithReactHookForm: StoryFn<
+  AutocompleteProps<MyOptionType>
+> = () => {
   const defaultValues: MyFormValues = {
     origin: null,
     favouriteCounty: null,
@@ -830,7 +834,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
   )
 }
 
-export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const SelectAll: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   const selectAllOption: MyOptionType = useMemo(
