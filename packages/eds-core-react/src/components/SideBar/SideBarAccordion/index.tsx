@@ -158,7 +158,7 @@ export type SidebarAccordionProps = {
   isExpanded?: boolean
   /** Toggle accordion expanded - use it if you want to make the accordion controlled */
   toggleExpand?: () => void
-  /** When menu item is clicked */
+  /** Optional callback when accordion is clicked - called after toggleExpand if it exists */
   onClick?: () => void
   /** Optionally disable component */
   disabled?: boolean

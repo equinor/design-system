@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
 import { SidebarLinkProps } from './SidebarLink'
 import { sidebar as tokens } from './SideBar.tokens'
-import { home, star_half } from '@equinor/eds-icons'
+import { favorite_outlined, home, star_half } from '@equinor/eds-icons'
 
 const defaultMenuItems: SidebarLinkProps[] = [
   {
@@ -38,6 +38,14 @@ describe('Sidebar', () => {
           {defaultMenuItems.map((m) => (
             <SideBar.Link key={m.label} {...m} />
           ))}
+          <SideBar.Accordion
+            id="123"
+            label="Test accordion"
+            isExpanded={true}
+            icon={favorite_outlined}
+          >
+            <SideBar.AccordionItem label={'Test accordion item'} />
+          </SideBar.Accordion>
         </SideBar.Content>
       </SideBar>,
     )
