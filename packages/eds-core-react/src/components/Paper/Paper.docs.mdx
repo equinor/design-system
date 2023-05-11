@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Paper } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Paper.stories'
 
 # Paper
 
@@ -11,8 +12,8 @@ Helper component - provides elevation for the components.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="surfaces-paper--introduction"/>
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -32,4 +33,4 @@ import { Paper } from '@equinor/eds-core-react'
 
 ## Elevation overview 
 
-<Story id="surfaces-paper--elevation-overview"/>
+<Canvas of={ComponentStories.ElevationOverview} />

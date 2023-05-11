@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { List } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './List.stories'
 
 # List
 
@@ -12,7 +13,7 @@ Organise information into related groups of content.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="data-display-lists--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -38,12 +39,12 @@ import { List } from '@equinor/eds-core-react'
 
 ### Unordered
 
-<Story id="data-display-lists--unordered" />
+<Canvas of={ComponentStories.Unordered} />
 
 ### Ordered
 
-<Story id="data-display-lists--ordered" />
+<Canvas of={ComponentStories.Ordered} />
 
 ### With `start` option
 
-<Story id="data-display-lists--with-start-option" />
+<Canvas of={ComponentStories.WithStartOption} />

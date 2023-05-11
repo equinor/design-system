@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../../.storybook/components'
-import { CircularProgress } from './..'
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Circular.stories'
 
 # Circular Progress
 
@@ -13,8 +14,8 @@ Animated helper that indicate waiting time as content loads.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-progress-indicators-circular--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -39,28 +40,28 @@ import { CircularProgress } from '@equinor/eds-core-react'
 
 Indeterminate circular indicators spins along the invisible track.
 
-<Story id="feedback-progress-indicators-circular--indeterminate" />
+<Canvas of={ComponentStories.Indeterminate} />
 
 ### Determinate
 
 Determinate circular indicators fill the invisible, circular track with color, as the indicator moves from 0 to 360 degrees.
 
-<Story id="feedback-progress-indicators-circular--determinate" />
+<Canvas of={ComponentStories.Determinate} />
 
 ### Colors
 
-<Story id="feedback-progress-indicators-circular--colors" />
+<Canvas of={ComponentStories.Colors} />
 
 ### Sizes
 
-<Story id="feedback-progress-indicators-circular--sizes" />
+<Canvas of={ComponentStories.Sizes} />
 
 ### Inside button
 
-<Story id="feedback-progress-indicators-circular--inside-button" />
+<Canvas of={ComponentStories.InsideButton} />
 
 ### Acessibility
 `Circular progress` have `role="progressbar"` and therefore either `aria-describedby` or `aria-label` should be included. 
 Click the button with keyboard and a screen reader activated to test.
 
-<Story id="feedback-progress-indicators-circular--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />

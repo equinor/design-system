@@ -25,13 +25,13 @@ import {
   turbine,
   waves,
 } from '@equinor/eds-icons'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Popover.docs.mdx'
 
 const { Title, Content, Header, Actions } = Popover
 
-export default {
+const meta: Meta<typeof Popover> = {
   title: 'Data Display/Popover',
   component: Popover,
   subcomponents: {
@@ -58,9 +58,10 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Popover>
+}
+export default meta
 
-export const Introduction: Story<PopoverProps> = (args) => {
+export const Introduction: StoryFn<PopoverProps> = (args) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => {
@@ -124,7 +125,7 @@ Introduction.decorators = [
   },
 ]
 
-export const ActivateOnClick: Story<PopoverProps> = () => {
+export const ActivateOnClick: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
 
@@ -161,7 +162,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
 }
 ActivateOnClick.storyName = 'Activate onClick'
 
-export const ActivateOnHover: Story<PopoverProps> = () => {
+export const ActivateOnHover: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
   let timer: ReturnType<typeof setTimeout> = null
@@ -212,7 +213,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
 }
 ActivateOnHover.storyName = 'Activate onHover'
 
-export const WithCloseButton: Story<PopoverProps> = () => {
+export const WithCloseButton: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
 
@@ -258,7 +259,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
 }
 WithCloseButton.storyName = 'With close button'
 
-export const PersistentPopover: Story<PopoverProps> = () => {
+export const PersistentPopover: StoryFn<PopoverProps> = () => {
   const counties = [
     'Oslo',
     'Rogaland',
@@ -356,7 +357,7 @@ PersistentPopover.storyName = 'Persistent popover'
   )
 } */
 
-export const AppLauncher: Story<PopoverProps> = () => {
+export const AppLauncher: StoryFn<PopoverProps> = () => {
   const Wrapper = styled.div`
     display: grid;
     grid-gap: 8px;

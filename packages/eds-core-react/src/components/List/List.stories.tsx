@@ -1,11 +1,11 @@
 import { List, ListProps } from '../..'
-import { ComponentMeta, Story } from '@storybook/react'
-import { Stack } from './../../../.storybook/components'
+import { StoryFn, Meta } from '@storybook/react'
+import { Stack } from '../../../.storybook/components'
 import page from './List.docs.mdx'
 
 const start = '15'
 
-export default {
+const meta: Meta<typeof List> = {
   title: 'Data Display/Lists',
   component: List,
   subcomponents: { Item: List.Item },
@@ -26,9 +26,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof List>
+}
 
-export const Introduction: Story<ListProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<ListProps> = (args) => {
   return (
     <List {...args}>
       <List.Item>List item</List.Item>
@@ -45,7 +47,7 @@ export const Introduction: Story<ListProps> = (args) => {
   )
 }
 
-export const Unordered: Story<ListProps> = () => (
+export const Unordered: StoryFn<ListProps> = () => (
   <List variant="bullet">
     <List.Item>List item</List.Item>
     <List.Item>List item</List.Item>
@@ -60,7 +62,7 @@ export const Unordered: Story<ListProps> = () => (
   </List>
 )
 
-export const Ordered: Story<ListProps> = () => (
+export const Ordered: StoryFn<ListProps> = () => (
   <List variant="numbered">
     <List.Item>List item</List.Item>
     <List.Item>
@@ -82,7 +84,7 @@ export const Ordered: Story<ListProps> = () => (
   </List>
 )
 
-export const WithStartOption: Story<ListProps> = () => (
+export const WithStartOption: StoryFn<ListProps> = () => (
   <List variant="numbered" start={start}>
     <List.Item>List item</List.Item>
     <List.Item>List item</List.Item>

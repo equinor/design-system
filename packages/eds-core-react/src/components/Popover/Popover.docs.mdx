@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Popover } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Popover.stories'
 
 # Popover
 
@@ -12,7 +13,7 @@ Is a floating card that provides more information or actions on hover or click.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="data-display-popover--introduction"/>
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -99,7 +100,7 @@ It is recommended to use <code>trapFocus</code> in every Popover which contains 
     <li>If there are no actions in the popover, then the close icon should be the first focusable element.</li>
 </ul>
 
-<Story id="data-display-popover--activate-on-click"/>
+<Canvas of={ComponentStories.ActivateOnClick} />
 
 ### Activate `onHover`
 
@@ -109,26 +110,19 @@ It is recommended to use <code>trapFocus</code> in every Popover which contains 
     <li>Using activ elemnets inside a Popover when <code>onHover</code>, is not recommended.</li>
 </ul>
 
-<Story id="data-display-popover--activate-on-hover"/>
+<Canvas of={ComponentStories.ActivateOnHover} />
 
 ### With close button
 
 In some cases an explicit close button is recommended.
 
-<Story id="data-display-popover--with-close-button"/>
+<Canvas of={ComponentStories.WithCloseButton} />
 
 ### Persistent Popover
 
 To prevent dismissing `Popover` with click outside or escape key, simply leave out the `onClose` callback.
 
-<Story id="data-display-popover--persistent-popover"/>
-
-{/* Re-enable once compact has been implemented for popover */}
-{/* ### Compact
-
-Compact `Popover` using `EdsProvider`.
-
-<Story id="data-display-popover--compact"/> */}
+<Canvas of={ComponentStories.PersistentPopover} />
 
 ### App launcher
 
@@ -141,4 +135,4 @@ Provides navigation for applications related to the application the user is curr
   <li>Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided.</li>
 </ul>
 
-<Story id="data-display-popover--app-launcher"/>
+<Canvas of={ComponentStories.AppLauncher} />

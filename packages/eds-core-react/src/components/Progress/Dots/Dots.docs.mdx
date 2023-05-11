@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../../.storybook/components'
-import { DotProgress } from './..'
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Dots.stories'
 
 # Dot Progress
 
@@ -13,8 +14,8 @@ Animated helper that indicate waiting time as content loads.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-progress-indicators-dots--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -36,18 +37,18 @@ import { DotProgress } from '@equinor/eds-core-react'
 
 ### Colors
 
-<Story id="feedback-progress-indicators-dots--colors" />
+<Canvas of={ComponentStories.Colors} />
 
 ### Sizes
 
-<Story id="feedback-progress-indicators-dots--sizes" />
+<Canvas of={ComponentStories.Sizes} />
 
 ### Inside button
 
-<Story id="feedback-progress-indicators-dots--inside-button" />
+<Canvas of={ComponentStories.InsideButton} />
 
 ### Acessibility
 `Dot progress` have `role="progressbar"` and therefore either `aria-describedby` or `aria-label` should be included. 
 Click the button with keyboard and a screen reader activated to test.
 
-<Story id="feedback-progress-indicators-dots--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />

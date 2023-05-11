@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Radio } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Radio.stories'
 
 # Radio
 
@@ -13,8 +14,8 @@ Allow users to select only one option from a list.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-selection-controls-radio--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -43,36 +44,36 @@ import { Radio } from '@equinor/eds-core-react'
 
 ### Single radio
 
-<Story id="inputs-selection-controls-radio--single-radio" />
+<Canvas of={ComponentStories.SingleRadio} />
 
 ### Multiple radio buttons in a group
 
-<Story id="inputs-selection-controls-radio--grouped-radio" />
+<Canvas of={ComponentStories.GroupedRadio} />
 
 ### Alternative to label
 
 To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. <br />
 In such cases `aria-label` or `aria-labelledby` should be used.
 
-<Story id="inputs-selection-controls-radio--alternative-to-label" />
+<Canvas of={ComponentStories.AlternativeToLabel} />
 
 ### Custom label
 
 Example of `Label` usage with `Radio`. <br />
 By using `Label` component, you can add more flexibility to displaying a `label`.
 
-<Story id="inputs-selection-controls-radio--custom-label" />
+<Canvas of={ComponentStories.CustomLabel} />
 
 ### Compact
 
 Compact `Radio` using `EdsProvider`.
 
-<Story id="inputs-selection-controls-radio--compact" />
+<Canvas of={ComponentStories.Compact} />
 
 ### Table radio
 
 Example of usage with `Radio` and `aria-label` in tables for accessibility.
 
-<Story id="inputs-selection-controls-radio--table-radio" />
+<Canvas of={ComponentStories.TableRadio} />
 
 

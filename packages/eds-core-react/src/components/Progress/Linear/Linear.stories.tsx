@@ -1,11 +1,11 @@
 import { Progress, LinearProgressProps, Button } from '../../..'
 import { useState, useEffect, useRef } from 'react'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
 import { Stack } from './../../../../.storybook/components'
 import page from './Linear.docs.mdx'
 
-export default {
+const meta: Meta<typeof Progress.Linear> = {
   title: 'Feedback/Progress Indicators/Linear',
   component: Progress.Linear,
   parameters: {
@@ -29,9 +29,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Progress.Linear>
+}
 
-export const Introduction: Story<LinearProgressProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<LinearProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
@@ -44,11 +46,11 @@ export const Introduction: Story<LinearProgressProps> = (args) => {
   )
 }
 
-export const Indeterminate: Story<LinearProgressProps> = () => (
+export const Indeterminate: StoryFn<LinearProgressProps> = () => (
   <Progress.Linear aria-label="Progress bar label" />
 )
 
-export const Determinate: Story<LinearProgressProps> = () => {
+export const Determinate: StoryFn<LinearProgressProps> = () => {
   const [progress, setProgress] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
@@ -99,7 +101,7 @@ export const Determinate: Story<LinearProgressProps> = () => {
   )
 }
 
-export const Accessibility: Story<LinearProgressProps> = () => {
+export const Accessibility: StoryFn<LinearProgressProps> = () => {
   const [isLoading, setIsLoading] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
