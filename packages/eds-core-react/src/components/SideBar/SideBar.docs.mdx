@@ -1,5 +1,6 @@
-import { PropsTable, Story, Links } from './../../../.storybook/components'
-import { SideBar } from '.'
+import { PropsTable, Links } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './SideBar.stories'
 
 # SideBar
 
@@ -15,7 +16,7 @@ It has a toggleable collapsed and expanded state. This is an adaptation of the [
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="navigation-sidebar--primary" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -65,7 +66,7 @@ import { SideBar, SidebarLinkProps } from '@equinor/eds-core-react'
 
 ### With TopBar
 If used together with `TopBar`, the layout should be handled with css-grid to ensure the sidebar does not extend beyond the screen and creates overflow.
-<Story id="navigation-sidebar--with-topbar" />
+<Canvas of={ComponentStories.WithTopbar} />
 
 ### SideBar.Link
 
@@ -73,7 +74,7 @@ If used together with `TopBar`, the layout should be handled with css-grid to en
 Navigation can be done with `href`, or in the case of a third party routing library, one can use the `as` prop 
 to override component type and allow their specific props. 
 Use the `active` property to indicate current active path when used for navigation.
-<Story id="navigation-sidebar--active-path" />
+<Canvas of={ComponentStories.ActivePath} />
 
 ### With custom content
 
@@ -82,12 +83,12 @@ Here it is used to make the footer with two states.
 ```tsx
 import { SideBar, useSideBar } from '@equinor/eds-core-react'
 ```
-<Story id="navigation-sidebar--custom-content" />
+<Canvas of={ComponentStories.CustomContent} />
 
 ### With Button
 
 `SideBar.Button` can be used to perform actions. It must have an icon and a label.
-<Story id="navigation-sidebar--with-button" />
+<Canvas of={ComponentStories.WithButton} />
 
 ### With Accordion
 
@@ -95,18 +96,18 @@ import { SideBar, useSideBar } from '@equinor/eds-core-react'
 Accordion can be controlled by using the `toggleExpand` and `isExpanded` props. These can be omitted
 to make the component un-controlled. Similar to `SideBar.Link`,  `SideBar.AccordionItem` is an overridable component
 by using the `as` prop. For example `as={Link}` to make it a `react-router` link.
-<Story id="navigation-sidebar--with-accordion" />
+<Canvas of={ComponentStories.WithAccordion} />
 
 ### With routing
 
 This is a complete example of how the SideBar can be used for navigation, including all components available to use.
 We are using state to decide which page to display. In the real world you would likely use a router.
-<Story id="navigation-sidebar--with-routing" />
+<Canvas of={ComponentStories.WithRouting} />
 
 ### Controlled Active State
 
 As default, the AccordionHeader is highlighted if it has an active child and is closed (see Routing-example above for default behavior).
 This is possible to override by sending the `active`-prop to the Accordion.
-<Story id="navigation-sidebar--controlled-active-state" />
+<Canvas of={ComponentStories.ControlledActiveState} />
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
 import styled from 'styled-components'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import {
   Table,
   TableProps,
@@ -24,7 +24,7 @@ Icon.add({ arrow_down, arrow_up })
 
 const { Caption, Body, Row, Cell, Head } = Table
 
-export default {
+const meta: Meta<typeof Table> = {
   title: 'Data Display/Table',
   component: Table,
   subcomponents: { Caption, Head, Body, Cell, Row },
@@ -36,9 +36,11 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Table>
+}
 
-export const introduction: Story<TableProps> = (args) => {
+export default meta
+
+export const introduction: StoryFn<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
 
   return (
@@ -78,7 +80,7 @@ introduction.decorators = [
   },
 ]
 
-export const FixedTableHeader: Story<TableProps> = () => {
+export const FixedTableHeader: StoryFn<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   return (
@@ -111,7 +113,7 @@ export const FixedTableHeader: Story<TableProps> = () => {
 }
 FixedTableHeader.storyName = 'Fixed table header'
 
-export const CompactTable: Story<TableProps> = () => {
+export const CompactTable: StoryFn<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   const [state, setState] = useState<{
@@ -238,7 +240,7 @@ const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
     }
   }
 `
-export const Sortable: Story<TableProps> = () => {
+export const Sortable: StoryFn<TableProps> = () => {
   const [state, setState] = useState<{
     columns: Column[]
     cellValues?: string[][]
@@ -362,7 +364,7 @@ type Photo = {
   thumbnailUrl: string
 }
 
-export const VirtualScrolling: Story<TableProps> = () => {
+export const VirtualScrolling: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
   const parentRef = useRef()
 

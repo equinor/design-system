@@ -16,10 +16,10 @@ import {
 } from '../..'
 import { toCellValues } from '../../stories/toCellValues'
 import { data, columns } from '../../stories/data'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import page from './SideSheet.docs.mdx'
 
-export default {
+const meta: Meta<typeof SideSheet> = {
   title: 'Surfaces/SideSheet',
   component: SideSheet,
   args: {
@@ -34,7 +34,9 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof SideSheet>
+}
+
+export default meta
 
 const {
   colors: {
@@ -70,7 +72,7 @@ const UnstyledList = styled.ul`
   list-style-type: none;
 `
 
-export const Introduction: Story<SideSheetProps> = (args) => {
+export const Introduction: StoryFn<SideSheetProps> = (args) => {
   const [toggle, setToggle] = useState(true)
   return (
     <div style={{ height: '400px', position: 'relative' }}>
@@ -84,7 +86,7 @@ export const Introduction: Story<SideSheetProps> = (args) => {
   )
 }
 
-export const Placement: Story<SideSheetProps> = () => {
+export const Placement: StoryFn<SideSheetProps> = () => {
   const [toggle, setToggle] = useState(true)
   const outputFunction = (value: number) => {
     const date = new Date(value)
@@ -185,7 +187,7 @@ export const Placement: Story<SideSheetProps> = () => {
   )
 }
 
-export const Scrollable: Story<SideSheetProps> = () => {
+export const Scrollable: StoryFn<SideSheetProps> = () => {
   const cellValues = toCellValues(data, columns)
   const [open, setOpen] = useState(false)
 
@@ -272,7 +274,7 @@ export const Scrollable: Story<SideSheetProps> = () => {
   )
 }
 
-export const Draggable: Story<SideSheetProps> = () => {
+export const Draggable: StoryFn<SideSheetProps> = () => {
   const [toggle, setToggle] = useState(true)
 
   const DragTarget = styled.div<{ dragging: boolean }>(({ dragging }) => {
