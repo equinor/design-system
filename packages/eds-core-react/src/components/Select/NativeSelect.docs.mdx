@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../../.storybook/components'
-import { NativeSelect } from './..'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './NativeSelect.stories'
 
 # Native Select
 
@@ -9,12 +10,12 @@ Allows users to choose one or multiple items or options from a list.
     ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#select"
     figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17793%3A67"
     documentationUrl="https://eds.equinor.com/0b0c666ab/p/31ae8d-select/b/86826a"
-    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Select/NativeSelect/NativeSelect.tsx"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Select/NativeSelect.tsx"
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-nativeselect--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -40,14 +41,14 @@ import { NativeSelect } from '@equinor/eds-core-react'
 
 ### Multiple native select
 
-<Story id="inputs-nativeselect--multiple" />
+<Canvas of={ComponentStories.Multiple} />
 
 ### Disabled
 
-<Story id="inputs-nativeselect--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Compact
 
 Compact `NativeSelect` using `EdsProvider.
 
-<Story id="inputs-nativeselect--compact" />
+<Canvas of={ComponentStories.Compact} />

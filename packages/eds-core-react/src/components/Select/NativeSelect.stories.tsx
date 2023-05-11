@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../..'
+import { StoryFn, Meta } from '@storybook/react'
 import page from './NativeSelect.docs.mdx'
 
-export default {
+const meta: Meta<typeof NativeSelect> = {
   title: 'Inputs/NativeSelect',
   component: NativeSelect,
   parameters: {
@@ -11,15 +11,19 @@ export default {
       page,
     },
   },
-} as ComponentMeta<typeof NativeSelect>
+}
 
-export const Introduction: Story<NativeSelectProps> = (args) => (
-  <NativeSelect label="Label text" meta="m2" id="default-select" {...args}>
-    <option>First option with a really really long text</option>
-    <option>Second</option>
-  </NativeSelect>
-)
-export const Multiple: Story<NativeSelectProps> = () => (
+export default meta
+
+export const Introduction: StoryFn<NativeSelectProps> = (args) => {
+  return (
+    <NativeSelect label="Label text" meta="m2" id="default-select" {...args}>
+      <option>First option with a really really long text</option>
+      <option>Second</option>
+    </NativeSelect>
+  )
+}
+export const Multiple: StoryFn<NativeSelectProps> = () => (
   <NativeSelect label="Label text" id="multiple-select" multiple>
     <option>First option with a really really long text</option>
     <option>Second</option>
@@ -29,13 +33,13 @@ export const Multiple: Story<NativeSelectProps> = () => (
   </NativeSelect>
 )
 
-export const Disabled: Story<NativeSelectProps> = () => (
+export const Disabled: StoryFn<NativeSelectProps> = () => (
   <NativeSelect label="Label text" disabled id="disabled-select">
     <option>Pick one</option>
   </NativeSelect>
 )
 
-export const Compact: Story = () => {
+export const Compact: StoryFn<NativeSelectProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {

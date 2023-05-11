@@ -1,6 +1,6 @@
 import { forwardRef, SelectHTMLAttributes } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Label } from '../../Label'
+import { Label } from '../Label'
 import { nativeselect as tokens } from './NativeSelect.tokens'
 import {
   typographyTemplate,
@@ -8,7 +8,7 @@ import {
   outlineTemplate,
   useToken,
 } from '@equinor/eds-utils'
-import { useEds } from '../../EdsProvider'
+import { useEds } from '../EdsProvider'
 
 const Container = styled.div`
   min-width: 100px;
