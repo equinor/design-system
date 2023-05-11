@@ -11,12 +11,12 @@ import {
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm } from 'react-hook-form'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
 import page from './Checkbox.docs.mdx'
 
-export default {
+const meta: Meta<typeof Checkbox> = {
   title: 'Inputs/Selection Controls/Checkbox',
   component: Checkbox,
   parameters: {
@@ -36,13 +36,15 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Checkbox>
+}
 
-export const Introduction: Story<CheckboxProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<CheckboxProps> = (args) => {
   return <Checkbox label="Play with me" {...args} />
 }
 
-export const SingleCheckbox: Story<CheckboxProps> = () => {
+export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
   // Use this to set the input to indeterminate = true as this must be done via JavaScript
   // (cannot use an HTML attribute for this)
   const indeterminateRef = useRef()
@@ -89,7 +91,7 @@ export const SingleCheckbox: Story<CheckboxProps> = () => {
 }
 SingleCheckbox.storyName = 'Single checkbox'
 
-export const GroupedCheckbox: Story<CheckboxProps> = () => {
+export const GroupedCheckbox: StoryFn<CheckboxProps> = () => {
   const UnstyledList = styled.ul`
     margin: 0;
     padding: 0;
@@ -124,7 +126,7 @@ type FormData = {
   agree: string
 }
 
-export const WithFormsControl: Story<CheckboxProps> = () => {
+export const WithFormsControl: StoryFn<CheckboxProps> = () => {
   // Example with external forms library, react-hook-form
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const {
@@ -237,7 +239,7 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
 }
 WithFormsControl.storyName = 'Example with React Hook Form'
 
-export const Compact: Story<CheckboxProps> = () => {
+export const Compact: StoryFn<CheckboxProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -252,12 +254,12 @@ export const Compact: Story<CheckboxProps> = () => {
   )
 }
 
-export const AlternativeToLabel: Story<CheckboxProps> = () => (
+export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
   <Checkbox aria-label="This label is invisible, but read by screen-readers" />
 )
 AlternativeToLabel.storyName = 'Alternative to label'
 
-export const TableCheckbox: Story<CheckboxProps> = () => (
+export const TableCheckbox: StoryFn<CheckboxProps> = () => (
   <Table>
     <Table.Head>
       <Table.Row>

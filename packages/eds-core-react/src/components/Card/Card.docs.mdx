@@ -1,5 +1,6 @@
 import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Card } from '.'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Card.stories'
 
 # Card
 
@@ -12,7 +13,7 @@ Displays content related to a single subject and acts as an entry point to more 
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="surfaces-card--introduction"/>
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -61,19 +62,19 @@ import { Card } from '@equinor/eds-core-react'
     <li>There are four available <code>card/container</code> options:</li>
 </ul>
 
-<Story id="surfaces-card--type-of-cards" />
+<Canvas of={ComponentStories.TypeOfCards} />
 
 ### Header variants
 
 There are eleven title blocks to choose between:
 
-<Story id="surfaces-card--card-header-variants" />
+<Canvas of={ComponentStories.CardHeaderVariants} />
 
 ### With media
 
 Elements, like text and images, should be placed on them in a way that clearly indicates hierarchy.
 
-<Story id="surfaces-card--with-media" />
+<Canvas of={ComponentStories.WithMedia} />
 
 ### With actions
 
@@ -82,10 +83,10 @@ Elements, like text and images, should be placed on them in a way that clearly i
     <li>There are three supplemental action blocks to choose between:</li>
 </ul>
 
-<Story id="surfaces-card--with-actions" />
+<Canvas of={ComponentStories.WithActions} />
 
 ### With divider
 
 Dividers can be used to separate areas in cards or to indicate sections of a card that can expand.
 
-<Story id="surfaces-card--with-divider" />
+<Canvas of={ComponentStories.WithDivider} />

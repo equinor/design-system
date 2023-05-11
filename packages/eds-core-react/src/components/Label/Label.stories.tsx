@@ -1,8 +1,8 @@
 import { Label, LabelProps, Input } from '../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import page from './Label.docs.mdx'
 
-export default {
+const meta: Meta<typeof Label> = {
   title: 'Inputs/Label',
   component: Label,
   parameters: {
@@ -10,25 +10,27 @@ export default {
       page,
     },
   },
-} as ComponentMeta<typeof Label>
+}
 
-export const Introduction: Story<LabelProps> = (args) => (
+export default meta
+
+export const Introduction: StoryFn<LabelProps> = (args) => (
   <Label label="I'm a label, play with me!" {...args} />
 )
 
-export const WithMeta: Story<LabelProps> = () => (
+export const WithMeta: StoryFn<LabelProps> = () => (
   <Label label="Speed" meta="km/h" />
 )
 WithMeta.storyName = 'With meta text'
 
-export const Disabled: Story<LabelProps> = () => (
+export const Disabled: StoryFn<LabelProps> = () => (
   <Label
     label="I'm disabled, that means I belong to a disabled input field"
     disabled
   />
 )
 
-export const Accessiblity: Story<LabelProps> = () => {
+export const Accessiblity: StoryFn<LabelProps> = () => {
   // To wrap the input component inside the label element is not yet supported
   return (
     <>

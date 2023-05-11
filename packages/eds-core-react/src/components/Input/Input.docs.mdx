@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Input } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Input.stories'
 
 # Input
 
@@ -11,8 +12,8 @@ Is intended to use if you need to more flexibility than the wrapped TextField or
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-input--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -28,43 +29,41 @@ import { Input } from '@equinor/eds-core-react'
 
 This is the native type property and here is a small selection of examples of all the possible types.
 
-<Story id="inputs-input--types" />
+<Canvas of={ComponentStories.Types} />
 
 ### Variants
 
-<Story id="inputs-input--variants" />
+<Canvas of={ComponentStories.Variants} />
 
 ### Disabled
 
-<Story id="inputs-input--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Read only
 
-<Story id="inputs-input--read-only" />
+<Canvas of={ComponentStories.ReadOnly} />
 
 ### Accessiblity
 
 It's important to link the `Input` to the corresponding label.
 
-<Story id="inputs-input--accessiblity" />
+<Canvas of={ComponentStories.Accessiblity} />
 
 ### Compact
 
 Compact `Input` using `EdsProvider`.
 
-<Story id="inputs-input--compact" />
+<Canvas of={ComponentStories.Compact} />
 
 ### With Adornments
 
-
-<Story id="inputs-input--with-adornments" />
+<Canvas of={ComponentStories.WithAdornments} />
 
 ### Casted as textarea
 
-
-<Story id="inputs-input--casted" />
+<Canvas of={ComponentStories.Casted} />
 
 ### Override input background color
 Use custom property `--eds-input-background` to change the background color of the input field. This also works for all components using input internally: `Autocomplete`, `Textfield`, `Search` and `Textarea`
 
-<Story id="inputs-input--override-background" />
+<Canvas of={ComponentStories.OverrideBackground} />

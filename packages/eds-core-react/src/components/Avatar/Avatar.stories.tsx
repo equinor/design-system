@@ -1,4 +1,4 @@
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import {
   Avatar,
   AvatarProps,
@@ -8,10 +8,17 @@ import {
   Icon,
   Typography,
 } from '../..'
+import { more_vertical } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Avatar.docs.mdx'
 
-export default {
+const icons = {
+  more_vertical,
+}
+
+Icon.add(icons)
+
+const meta: Meta<typeof Avatar> = {
   title: 'Data Display/Avatar',
   component: Avatar,
   parameters: {
@@ -31,15 +38,17 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Avatar>
+}
+
+export default meta
 
 const iconSize = 24
 
-export const Introduction: Story<AvatarProps> = (args) => {
+export const Introduction: StoryFn<AvatarProps> = (args) => {
   return <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} {...args} />
 }
 
-export const Size: Story<AvatarProps> = () => (
+export const Size: StoryFn<AvatarProps> = () => (
   <>
     <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} size={16} alt="avatar" />
     <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} size={24} alt="avatar" />
@@ -49,7 +58,7 @@ export const Size: Story<AvatarProps> = () => (
   </>
 )
 
-export const Disabled: Story<AvatarProps> = () => (
+export const Disabled: StoryFn<AvatarProps> = () => (
   <Avatar
     src={'https://i.imgur.com/UM3mrju.jpg'}
     disabled
@@ -58,7 +67,7 @@ export const Disabled: Story<AvatarProps> = () => (
   />
 )
 
-export const Context: Story<AvatarProps> = () => (
+export const Context: StoryFn<AvatarProps> = () => (
   <>
     <Card>
       <Card.Header>

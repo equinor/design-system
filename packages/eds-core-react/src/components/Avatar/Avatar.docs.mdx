@@ -1,5 +1,8 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Avatar } from '.'
+import { Links } from './../../../.storybook/components'
+import { Meta, Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Avatar.stories'
+
+<Meta of={ComponentStories} />
 
 # Avatar
 
@@ -12,8 +15,8 @@ The avatar does not exist in Figma as a separate component.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="data-display-avatar--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -33,12 +36,12 @@ import { Avatar } from '@equinor/eds-core-react'
 
 ### Sizes
 
-<Story id="data-display-avatar--size" />
+<Canvas of={ComponentStories.Size} />
 
 ### Disabled
 
-<Story id="data-display-avatar--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Context
 
-<Story id="data-display-avatar--context" />
+<Canvas of={ComponentStories.Context} />

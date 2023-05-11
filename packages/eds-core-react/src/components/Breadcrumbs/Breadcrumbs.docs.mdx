@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Breadcrumbs } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Meta, Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Breadcrumbs.stories'
 
 # Breadcrumbs
 
@@ -13,7 +14,7 @@ Show the navigational path to users allowing them to navigate up the hierarchy.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="navigation-breadcrumbs--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -40,19 +41,19 @@ import { Breadcrumbs } from '@equinor/eds-core-react'
 
 ### Normal
 
-<Story id="navigation-breadcrumbs--normal" />
+<Canvas of={ComponentStories.Normal} />
 
 ### Collapsed
 
 Choose collapse prop to use ellipses to indicate the middle pages. Click ellipses (...) to expand.
 
-<Story id="navigation-breadcrumbs--collapsed" />
+<Canvas of={ComponentStories.Collapsed} />
 
 ### Truncated Labels
 
 Choose `maxWidth` in pixels to truncate labels. Hover on label to see full text.
 
-<Story id="navigation-breadcrumbs--truncated-labels" />
+<Canvas of={ComponentStories.TruncatedLabels} />
 
 ### Wrapped
 
@@ -60,7 +61,7 @@ Choose `maxWidth` in pixels to truncate labels. Hover on label to see full text.
 With the `wrap` property set to false, the `Breadcrumbs` will instead automatically truncate. 
 It might be a good idea to use `forceTooltip` on the `Breadcrumbs.Breadcrumb` when this is the case.
 
-<Story id="navigation-breadcrumbs--wrapped" />
+<Canvas of={ComponentStories.Wrapped} />
 
 ### Third-party routing libraries
 

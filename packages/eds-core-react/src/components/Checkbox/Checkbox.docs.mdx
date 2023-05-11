@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Checkbox } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Checkbox.stories'
 
 # Checkbox
 
@@ -13,8 +14,8 @@ Allow users to select one or more items from a set, and can turn an option on or
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-selection-controls-checkbox--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -43,30 +44,31 @@ import { Checkbox } from '@equinor/eds-core-react'
 
 ### Single checkbox
 
-<Story id="inputs-selection-controls-checkbox--single-checkbox" />
+<Canvas of={ComponentStories.SingleCheckbox} />
 
 ### Grouped checkboxes
 
-<Story id="inputs-selection-controls-checkbox--grouped-checkbox" />
+<Canvas of={ComponentStories.GroupedCheckbox} />
 
 ### Example with `React Hook Form`
 
-<Story id="inputs-selection-controls-checkbox--with-forms-control" />
+<Canvas of={ComponentStories.WithFormsControl} />
 
 ### Compact
 
 Compact `Checkbox` using `EdsProvider`.
 
-<Story id="inputs-selection-controls-checkbox--compact" />
+<Canvas of={ComponentStories.Compact} />
+
 
 ### Alternative to label
 
 To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used.
 
-<Story id="inputs-selection-controls-checkbox--alternative-to-label" />
+<Canvas of={ComponentStories.AlternativeToLabel} />
 
 ### Table checkbox
 
 Example of usage with `Checkbox` and `aria-label` in tables for accessibility.
 
-<Story id="inputs-selection-controls-checkbox--table-checkbox" />
+<Canvas of={ComponentStories.TableCheckbox} />
