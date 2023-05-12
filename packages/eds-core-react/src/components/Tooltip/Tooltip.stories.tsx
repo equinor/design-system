@@ -8,12 +8,12 @@ import {
   Checkbox,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { explore } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Tooltip.docs.mdx'
 
-export default {
+const meta: Meta<typeof Tooltip> = {
   title: 'Data Display/Tooltip',
   component: Tooltip,
   parameters: {
@@ -33,9 +33,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Tooltip>
+}
 
-export const Introduction: Story<TooltipProps> = (args) => (
+export default meta
+
+export const Introduction: StoryFn<TooltipProps> = (args) => (
   <Tooltip {...args}>
     <Button variant="ghost_icon">
       <Icon data={explore} title="explore"></Icon>
@@ -47,7 +49,7 @@ Introduction.args = {
   title: 'Explore more actions',
 }
 
-export const WithDelay: Story<TooltipProps> = () => {
+export const WithDelay: StoryFn<TooltipProps> = () => {
   return (
     <Tooltip enterDelay={300} title="Tooltip with delay">
       <Typography link href="#">
@@ -83,7 +85,7 @@ WithDelay.storyName = 'With delay'
 //   },
 // }
 
-export const OnTableCells: Story<TooltipProps> = () => {
+export const OnTableCells: StoryFn<TooltipProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   return (
@@ -120,7 +122,7 @@ export const OnTableCells: Story<TooltipProps> = () => {
 }
 OnTableCells.storyName = 'On table cells'
 
-export const LongListWithTooltips: Story<TooltipProps> = () => {
+export const LongListWithTooltips: StoryFn<TooltipProps> = () => {
   const items = Array(100).fill(1)
 
   return (
@@ -138,7 +140,7 @@ export const LongListWithTooltips: Story<TooltipProps> = () => {
 }
 LongListWithTooltips.storyName = 'Long list with toolstips'
 
-export const RadioAndCheckboxes: Story<TooltipProps> = () => (
+export const RadioAndCheckboxes: StoryFn<TooltipProps> = () => (
   <>
     <Tooltip placement="top" title="tooltip on an input">
       <Checkbox label="Checkbox with tooltip" />
@@ -153,7 +155,7 @@ export const RadioAndCheckboxes: Story<TooltipProps> = () => (
 )
 RadioAndCheckboxes.storyName = 'Radio and checkboxes'
 
-export const TooltipOnButton: Story<TooltipProps> = () => (
+export const TooltipOnButton: StoryFn<TooltipProps> = () => (
   <>
     <Tooltip title="This is what a tooltip looks like">
       <Button>Hover me</Button>

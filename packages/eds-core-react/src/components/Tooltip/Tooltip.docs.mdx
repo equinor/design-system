@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Tooltip } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Tooltip.stories'
 
 # Tooltip
 
@@ -13,8 +14,8 @@ Shows when hovered, focused or pressed (touch), and display information such as 
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="data-display-tooltip--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -46,29 +47,29 @@ Keep in mind that if `Tooltip` is added to a non-focusable element, it is inacce
 
 Tooltip opening is delayed with `300ms`.
 
-<Story id="data-display-tooltip--with-delay" />
+<Canvas of={ComponentStories.WithDelay} />
 
 ### On table cells
 
 Example of how `Tooltip` can be used on `Table.Cell`.
 
-<Story id="data-display-tooltip--on-table-cells" />
+<Canvas of={ComponentStories.OnTableCells} />
 
 ### Long list with tooltips
 
 Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible.
 
-<Story id="data-display-tooltip--long-list-with-tooltips" />
+<Canvas of={ComponentStories.LongListWithTooltips} />
 
 ### Radio and checkboxes
 
 Inputs of type radio, checkbox and switch will have the tooltip applied to the input element. A good way to get the tooltip to also apply to the label is to simply wrap the input in a span.
 
-<Story id="data-display-tooltip--radio-and-checkboxes" />
+<Canvas of={ComponentStories.RadioAndCheckboxes} />
 
 ### Tooltip on disabled Button
 Due to inconsistent browser support for mouse events on disabled buttons, `Tooltip` should not be used in combination with `disabled` on `Button`. 
 Instead use `aria-disabled` and disable the `onClick` in the code. This has the added benefit of making the Tooltip accessible for people using 
 keyboard navigation, as the button is still focusable.
 
-<Story id="data-display-tooltip--tooltip-on-button" />
+<Canvas of={ComponentStories.TooltipOnButton} />

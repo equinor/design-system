@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
-import { Story } from '@storybook/react'
+import { StoryFn } from '@storybook/react'
 import {
   Table,
   TableProps,
@@ -175,7 +175,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
   )
 }
 
-export const DataTable: Story<TableProps> = (args) => {
+export const DataTable: StoryFn<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
   const onChange = (event: React.InputHTMLAttributes<HTMLInputElement>) => {
     // const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

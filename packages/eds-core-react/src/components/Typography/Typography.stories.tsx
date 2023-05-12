@@ -1,6 +1,6 @@
 import { Card, Divider, Typography, TypographyProps } from '../..'
 import styled from 'styled-components'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Typography.docs.mdx'
 import { tokens, Typography as TypographyType } from '@equinor/eds-tokens'
@@ -12,7 +12,7 @@ const SBCard = styled(Card)`
   display: block;
 `
 
-export default {
+const meta: Meta<typeof Typography> = {
   title: 'Typography/Typography',
   component: Typography,
   argTypes: {
@@ -47,9 +47,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Typography>
+}
 
-export const Introduction: Story<TypographyProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<TypographyProps> = (args) => {
   return <Typography {...args}>Sample text</Typography>
 }
 
@@ -83,7 +85,7 @@ GroupsOverview.decorators = [
   },
 ]
 
-export const Colors: Story<TypographyProps> = () => (
+export const Colors: StoryFn<TypographyProps> = () => (
   <>
     <Typography color="primary"> Primary</Typography>
     <Typography color="secondary">Secondary</Typography>
@@ -96,7 +98,7 @@ export const Colors: Story<TypographyProps> = () => (
   </>
 )
 
-export const TokenProperty: Story<TypographyProps> = () => (
+export const TokenProperty: StoryFn<TypographyProps> = () => (
   <>
     <div>
       <Typography
@@ -172,7 +174,7 @@ export const TokenProperty: Story<TypographyProps> = () => (
 )
 TokenProperty.storyName = 'Token property'
 
-export const Lines: Story<TypographyProps> = () => (
+export const Lines: StoryFn<TypographyProps> = () => (
   <>
     <Typography variant="body_long" lines={2}>
       Cupcake ipsum dolor sit amet caramels powder. Chocolate powder donut
@@ -188,7 +190,7 @@ export const Lines: Story<TypographyProps> = () => (
   </>
 )
 
-export const Link: Story<TypographyProps> = () => (
+export const Link: StoryFn<TypographyProps> = () => (
   <>
     <Typography link href="#">
       Link
@@ -225,7 +227,7 @@ Link.decorators = [
   },
 ]
 
-export const As: Story<TypographyProps> = () => (
+export const As: StoryFn<TypographyProps> = () => (
   <Typography variant="h2" as="h4">
     I am a &lt;h4&gt; styled as a &lt;h2&gt;
   </Typography>

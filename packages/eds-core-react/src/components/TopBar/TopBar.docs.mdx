@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { TopBar } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './TopBar.stories'
 
 # TopBar
 
@@ -13,7 +14,7 @@ Displays navigation and actions related to the interface.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="navigation-topbar--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -40,11 +41,5 @@ import { TopBar } from '@equinor/eds-core-react'
 
 The actions on the far-right are standard.
 
-<Story id="navigation-topbar--with-search-and-icons" />
+<Canvas of={ComponentStories.WithSearchAndIcons} />
 
-{/* Re-enable when compact is implemented for TopBar */}
-{/* ### Compact
-
-Compact `TopBar` using `EdsProvider`.
-
-<Story id="navigation-topbar--compact" /> */}

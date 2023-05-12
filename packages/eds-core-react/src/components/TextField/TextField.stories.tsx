@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
+import page from './TextField.docs.mdx'
 import {
   TextField,
   TextFieldProps,
@@ -19,7 +20,6 @@ import {
 } from '@equinor/eds-icons'
 import { Controller, useForm } from 'react-hook-form'
 import { Stack } from '../../../.storybook/components'
-import page from './TextField.docs.mdx'
 
 const icons = {
   thumbs_up,
@@ -35,6 +35,14 @@ Icon.add(icons)
 const meta: Meta<typeof TextField> = {
   title: 'Inputs/TextField',
   component: TextField,
+  parameters: {
+    docs: {
+      page,
+      source: {
+        excludeDecorators: true,
+      },
+    },
+  },
   args: {
     unit: 'unit',
     meta: 'meta',
@@ -71,14 +79,6 @@ const meta: Meta<typeof TextField> = {
     },
     inputRef: { control: { type: null } },
     textareaRef: { control: { type: null } },
-  },
-  parameters: {
-    docs: {
-      page,
-      source: {
-        excludeDecorators: true,
-      },
-    },
   },
   decorators: [
     (Story) => {
