@@ -7,12 +7,15 @@ import {
   Button,
   Density,
 } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import {
   thumbs_up,
   warning_filled,
   error_filled,
   info_circle,
+  comment,
+  done,
+  comment_important,
 } from '@equinor/eds-icons'
 import { Controller, useForm } from 'react-hook-form'
 import { Stack } from '../../../.storybook/components'
@@ -22,13 +25,23 @@ const icons = {
   thumbs_up,
   warning_filled,
   error_filled,
+  comment,
+  done,
+  comment_important,
 }
 
 Icon.add(icons)
 
-export default {
+const meta: Meta<typeof TextField> = {
   title: 'Inputs/TextField',
   component: TextField,
+  args: {
+    unit: 'unit',
+    meta: 'meta',
+    id: 'playWithMe',
+    label: 'Play with me',
+    helperText: 'helper text',
+  },
   argTypes: {
     inputIcon: {
       options: ['error', 'warning', 'success'],
@@ -76,22 +89,27 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof TextField>
+}
 
-export const Introduction: Story<TextFieldProps> = (args) => (
-  <TextField {...args}></TextField>
-)
+export default meta
 
-Introduction.bind({})
-Introduction.args = {
+//type Decorators = any
+type Story = StoryFn<TextFieldProps>
+
+export const Introduction: StoryFn<TextFieldProps> = (args: TextFieldProps) => {
+  return <TextField {...args} />
+}
+
+//Introduction.bind({})
+/* Introduction.args = {
   unit: 'unit',
   meta: 'meta',
   id: 'playWithMe',
   label: 'Play with me',
   helperText: 'helper text',
-}
+} */
 
-export const Types: Story<TextFieldProps> = () => (
+export const Types: Story = () => (
   <>
     <TextField
       id="textfield-normal"
@@ -147,11 +165,11 @@ Types.decorators = [
   },
 ]
 
-export const Multiline: Story<TextFieldProps> = () => (
+export const Multiline: Story = () => (
   <TextField id="storybook-multiline" label="Multiline" multiline rows={3} />
 )
 
-export const MultilineRowsMax: Story<TextFieldProps> = () => (
+export const MultilineRowsMax: Story = () => (
   <TextField
     id="storybook-multiline-three"
     label="Multiline with max 10 rows"
@@ -161,7 +179,7 @@ export const MultilineRowsMax: Story<TextFieldProps> = () => (
   />
 )
 
-export const MultilineFixedHeight: Story<TextFieldProps> = () => (
+export const MultilineFixedHeight: Story = () => (
   <TextField
     id="storybook-multiline-fixedheight"
     defaultValue="Lorem Ipsum is simply dummy text of the printing and
@@ -182,7 +200,7 @@ export const MultilineFixedHeight: Story<TextFieldProps> = () => (
 )
 MultilineFixedHeight.storyName = 'Multiline with fixed height'
 
-export const WithUnit: Story<TextFieldProps> = () => (
+export const WithUnit: Story = () => (
   <>
     <TextField
       id="storybook-unit"
@@ -217,7 +235,7 @@ WithUnit.decorators = [
   },
 ]
 
-export const WithIcons: Story<TextFieldProps> = () => (
+export const WithIcons: Story = () => (
   <>
     <TextField
       id="icons-text"
@@ -255,7 +273,7 @@ WithIcons.decorators = [
   },
 ]
 
-export const Datepicker: Story<TextFieldProps> = () => (
+export const Datepicker: Story = () => (
   <>
     <TextField id="date" label="Select date" type="date" />
     <TextField id="time" label="Select time" type="time" />
@@ -283,7 +301,7 @@ Datepicker.decorators = [
   },
 ]
 
-export const Variants: Story<TextFieldProps> = () => (
+export const Variants: Story = () => (
   <>
     <TextField
       id="storybook-error"
@@ -388,7 +406,7 @@ Variants.decorators = [
   },
 ]
 
-export const ReadOnly: Story<TextFieldProps> = () => (
+export const ReadOnly: Story = () => (
   <>
     <TextField
       id="storybook-readonly"
@@ -461,7 +479,7 @@ ReadOnly.decorators = [
   },
 ]
 
-export const Disabled: Story<TextFieldProps> = () => (
+export const Disabled: Story = () => (
   <>
     <TextField
       id="storybook-unit-four"
@@ -501,7 +519,7 @@ Disabled.decorators = [
   },
 ]
 
-export const Compact: Story<TextFieldProps> = () => {
+export const Compact: Story = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -552,7 +570,7 @@ Compact.decorators = [
   },
 ]
 
-export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
+export const ValidationWithReactHookForm: Story = () => {
   const { handleSubmit, control } = useForm({
     defaultValues: { data: '' },
   })
@@ -588,7 +606,7 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
 }
 ValidationWithReactHookForm.storyName = 'Validation with React Hook Form'
 
-export const Validation: Story<TextFieldProps> = () => {
+export const Validation: Story = () => {
   const [isValid, setIsValid] = useState<boolean>(true)
   const handleSumbmit = (e: FormEvent) => {
     e.preventDefault()
