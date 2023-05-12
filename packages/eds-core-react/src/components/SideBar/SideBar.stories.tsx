@@ -317,8 +317,6 @@ const Container = styled.div`
 `
 
 export const WithAccordion: StoryFn<SidebarType> = () => {
-  const [isFavoritesOpen, setIsFavoritesOpen] = useState<boolean>(false)
-
   return (
     <Container>
       <SideBar>

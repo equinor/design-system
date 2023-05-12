@@ -2,12 +2,12 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { Tabs, Button, Icon, TabsProps, Typography, Search } from '../..'
 import { mergeRefs } from '@equinor/eds-utils'
-import { ComponentMeta, Story } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Stack } from './../../../.storybook/components'
 import page from './Tabs.docs.mdx'
 
-export default {
+const meta: Meta<typeof Tabs> = {
   title: 'Navigation/Tabs',
   component: Tabs,
   subcomponents: {
@@ -24,7 +24,9 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Tabs>
+}
+
+export default meta
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
@@ -57,7 +59,7 @@ const StyledTabList = styled(Tabs.List)`
   }
 `
 
-export const Introduction: Story<TabsProps> = (args) => {
+export const Introduction: StoryFn<TabsProps> = (args) => {
   return (
     <Tabs {...args}>
       <Tabs.List>
@@ -81,7 +83,7 @@ Introduction.decorators = [
   },
 ]
 
-export const States: Story<TabsProps> = () => {
+export const States: StoryFn<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
 
   return (
@@ -108,7 +110,7 @@ States.decorators = [
   },
 ]
 
-export const Widths: Story<TabsProps> = () => {
+export const Widths: StoryFn<TabsProps> = () => {
   return (
     <>
       <Typography variant="h4">minWidth</Typography>
@@ -133,7 +135,7 @@ export const Widths: Story<TabsProps> = () => {
   )
 }
 
-export const WithPanels: Story<TabsProps> = () => {
+export const WithPanels: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
   const handleChange = (index: number) => {
@@ -168,7 +170,7 @@ WithPanels.decorators = [
   },
 ]
 
-export const WithSearch: Story<TabsProps> = () => {
+export const WithSearch: StoryFn<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
@@ -217,7 +219,7 @@ export const WithSearch: Story<TabsProps> = () => {
 }
 WithSearch.storyName = 'With search'
 
-export const WithInputInPanel: Story<TabsProps> = () => {
+export const WithInputInPanel: StoryFn<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
@@ -270,7 +272,7 @@ export const WithInputInPanel: Story<TabsProps> = () => {
 }
 WithInputInPanel.storyName = 'With input in panel'
 
-export const WithStyledComponent: Story<TabsProps> = () => {
+export const WithStyledComponent: StoryFn<TabsProps> = () => {
   const StyledTab = styled(Tabs.Tab)`
     background: pink;
   `
@@ -308,7 +310,7 @@ export const WithStyledComponent: Story<TabsProps> = () => {
 }
 WithStyledComponent.storyName = 'With styled component'
 
-export const Overflow: Story<TabsProps> = () => {
+export const Overflow: StoryFn<TabsProps> = () => {
   const list = useRef<HTMLDivElement>(null)
   const debounceScroll = useRef<ReturnType<typeof setTimeout>>(null)
   const [activeTab, setActiveTab] = useState(0)
@@ -419,7 +421,7 @@ export const Overflow: Story<TabsProps> = () => {
 }
 Overflow.storyName = 'Overflow with next/previous buttons'
 
-export const OverflowScroll: Story<TabsProps> = () => {
+export const OverflowScroll: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
 
   const handleChange = (index: number) => {
@@ -443,7 +445,7 @@ export const OverflowScroll: Story<TabsProps> = () => {
 }
 OverflowScroll.storyName = 'Overflow with default scrollbar'
 
-export const OverflowScrollStyled: Story<TabsProps> = () => {
+export const OverflowScrollStyled: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
 
   const handleChange = (index: number) => {

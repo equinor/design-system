@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Tabs } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Tabs.stories'
 
 # Tabs
 
@@ -13,7 +14,7 @@ Organise related content across different views to be quickly navigated.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="navigation-tabs--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -47,7 +48,7 @@ import { Dialog } from '@equinor/eds-core-react'
 
 ### States
 
-<Story id="navigation-tabs--states" />
+<Canvas of={ComponentStories.States} />
 
 ### Widths
 
@@ -59,7 +60,7 @@ Tab width can be decided by three factors:
     <li>Each tab having its own minimum width to conserve space.</li>
 </ol>
 
-<Story id="navigation-tabs--widths" />
+<Canvas of={ComponentStories.Widths} />
 
 ### With panels
 
@@ -72,7 +73,7 @@ To navigate using the keyboard use:
 
 Focus outline is only visible when navigating using the keyboard.
 
-<Story id="navigation-tabs--with-panels" />
+<Canvas of={ComponentStories.WithPanels} />
 
 ### With third party routers
 `Tabs.Tab` can be rendered as another component using the `as` prop.
@@ -91,24 +92,24 @@ import { Link, Outlet } from "react-router-dom";
 
 ### With search
 
-<Story id="navigation-tabs--with-search" />
+<Canvas of={ComponentStories.WithSearch} />
 
 ### With input in panel
 
-<Story id="navigation-tabs--with-input-in-panel" />
+<Canvas of={ComponentStories.WithInputInPanel} />
 
 ### With styled component
 
 Tabs with panels rendered from collection.
 
-<Story id="navigation-tabs--with-styled-component" />
+<Canvas of={ComponentStories.WithStyledComponent} />
 
 ### Overflow with next/previous buttons
 
 Tabs uses css `scroll-snap`, so in a case where there is overflow and the user wants to add next/previous buttons for scrolling, 
 they can use `element.scrollTo` some amount and then css will take care of alignment.
 
-<Story id="navigation-tabs--overflow" />
+<Canvas of={ComponentStories.Overflow} />
 
 ### Overflow with default scrollbar
 
@@ -116,17 +117,11 @@ In the case of tabs overflowing, and where next/previous buttons are not desired
 Tabs uses css `scroll-snap` which handles alignment and tabs snapping into place. 
 Note that scrollbar had been disabled for touch devices since the tabs are swipeable.
 
-<Story id="navigation-tabs--overflow-scroll" />
+<Canvas of={ComponentStories.OverflowScroll} />
 
 ### Overflow with customized scrollbar
 
 The scrollbar styles for `Tabs.List` can be overwritten.
 
-<Story id="navigation-tabs--overflow-scroll-styled" />
+<Canvas of={ComponentStories.OverflowScrollStyled} />
 
-{/* Re-enable when compact is implemented for Tabs */}
-{/* ### Compact
-
-Compact `Tabs` using `EdsProvider`.
-
-<Story id="navigation-tabs--compact" /> */}

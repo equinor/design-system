@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { TableOfContents } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './TableOfContents.stories'
 
 # Table of Contents
 
@@ -13,7 +14,7 @@ A list of hyperlinks that scroll to anchored text on the same page.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="navigation-tableofcontents--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -86,12 +87,3 @@ const Demo = () => {
 }
 
 ```
-
-## Examples
-
-{/* Re-enable when compact is implemented for TableofContents */}
-{/* ### Compact
-
-Compact `TableOfContents` using `EdsProvider`.
-
-<Story id="navigation-tableofcontents--compact" /> */}
