@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { HeaderMdx } from '@storybook/addon-docs'
 import styled from 'styled-components'
 import { Icon, Button, Typography, Search } from '../../src'
@@ -8,7 +8,7 @@ import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
 import page from './IconPreview.docs.mdx'
 
-export default {
+const meta: Meta = {
   title: 'Icons',
   parameters: {
     docs: {
@@ -18,7 +18,9 @@ export default {
       canvas: { hidden: true },
     },
   },
-} as Meta
+}
+
+export default meta
 
 const IconLabel = styled(Typography)`
   text-align: center;
@@ -78,7 +80,7 @@ type IconType = {
   value?: string
 } & IconData
 
-export const Preview: Story = () => {
+export const Preview: StoryFn = () => {
   const [searchValue, setSearchValue] = useState<string>('')
 
   const iconsByGroup = useMemo(() => {
