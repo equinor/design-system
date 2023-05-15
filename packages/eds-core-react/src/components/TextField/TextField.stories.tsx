@@ -1,13 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
-import page from './TextField.docs.mdx'
-import {
-  TextField,
-  TextFieldProps,
-  Icon,
-  EdsProvider,
-  Button,
-  Density,
-} from '../..'
+import { TextField, Icon, EdsProvider, Button, Density } from '../..'
 import { StoryFn, Meta } from '@storybook/react'
 import {
   thumbs_up,
@@ -20,6 +12,8 @@ import {
 } from '@equinor/eds-icons'
 import { Controller, useForm } from 'react-hook-form'
 import { Stack } from '../../../.storybook/components'
+
+import page from './TextField.docs.mdx'
 
 const icons = {
   thumbs_up,
@@ -42,13 +36,6 @@ const meta: Meta<typeof TextField> = {
         excludeDecorators: true,
       },
     },
-  },
-  args: {
-    unit: 'unit',
-    meta: 'meta',
-    id: 'playWithMe',
-    label: 'Play with me',
-    helperText: 'helper text',
   },
   argTypes: {
     inputIcon: {
@@ -93,21 +80,21 @@ const meta: Meta<typeof TextField> = {
 
 export default meta
 
-//type Decorators = any
-type Story = StoryFn<TextFieldProps>
+//for some reason "TextFieldProps" throws a typescript error here, but "typeof TextField" works
+type Story = StoryFn<typeof TextField>
 
-export const Introduction: StoryFn<TextFieldProps> = (args: TextFieldProps) => {
+export const Introduction: Story = (args) => {
   return <TextField {...args} />
 }
 
-//Introduction.bind({})
-/* Introduction.args = {
+Introduction.bind({})
+Introduction.args = {
   unit: 'unit',
   meta: 'meta',
-  id: 'playWithMe',
+  id: 'intro',
   label: 'Play with me',
   helperText: 'helper text',
-} */
+}
 
 export const Types: Story = () => (
   <>
