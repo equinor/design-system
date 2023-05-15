@@ -9,7 +9,7 @@ import systemIcons from '../assets/icons/system-icons.json'
 import page from './IconPreview.docs.mdx'
 
 const meta: Meta = {
-  title: 'Icons',
+  title: 'Icons/Preview',
   parameters: {
     docs: {
       page,
