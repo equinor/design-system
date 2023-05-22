@@ -10,7 +10,13 @@ const config = {
     '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-actions',
-    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        docs: false,
+        actions: false,
+      },
+    },
     {
       name: '@storybook/addon-docs',
       options: {
