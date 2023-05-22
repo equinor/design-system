@@ -62,9 +62,9 @@ describe('Tooltip', () => {
 
     fireEvent.mouseEnter(content)
 
-    const results = await axe(container)
-
-    expect(results).toHaveNoViolations()
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations()
+    })
   })
   it('can extend the css for the component', async () => {
     render(
