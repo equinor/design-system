@@ -2,8 +2,8 @@
   "name": "@equinor/eds-tokens",
   "version": "0.9.1",
   "description": "Design tokens for the Equinor Design System",
-  "main": "dist/tokens.cjs.js",
-  "module": "dist/esm/index.js",
+  "exports": "./dist/esm/index.js",
+  "type": "module",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "author": {

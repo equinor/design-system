@@ -2,7 +2,6 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
 import del from 'rollup-plugin-delete'
-import pkg from './package.json'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 
@@ -30,7 +29,6 @@ export default [
         preserveModulesRoot: 'src',
         format: 'es',
       },
-      { file: pkg.main, format: 'cjs' },
     ],
   },
 ]
