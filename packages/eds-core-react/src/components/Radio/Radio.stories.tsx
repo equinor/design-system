@@ -10,12 +10,12 @@ import {
 } from '../..'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
 import page from './Radio.docs.mdx'
 
-export default {
+const meta: Meta<typeof Radio> = {
   title: 'Inputs/Selection Controls/Radio',
   component: Radio,
   parameters: {
@@ -35,7 +35,9 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Radio>
+}
+
+export default meta
 
 const {
   colors: {
@@ -51,11 +53,11 @@ const UnstyledList = styled.ul`
   list-style-type: none;
 `
 
-export const Introduction: Story<RadioProps> = (args) => {
+export const Introduction: StoryFn<RadioProps> = (args) => {
   return <Radio label="Play with me" {...args} />
 }
 
-export const SingleRadio: Story<RadioProps> = () => {
+export const SingleRadio: StoryFn<RadioProps> = () => {
   return (
     <UnstyledList>
       <li>
@@ -80,7 +82,7 @@ export const SingleRadio: Story<RadioProps> = () => {
 }
 SingleRadio.storyName = 'Single radio buttons'
 
-export const GroupedRadio: Story<RadioProps> = () => {
+export const GroupedRadio: StoryFn<RadioProps> = () => {
   const [checked, updateChecked] = useState('one')
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateChecked(event.target.value)
@@ -128,12 +130,12 @@ export const GroupedRadio: Story<RadioProps> = () => {
 }
 GroupedRadio.storyName = 'Multiple radio buttons in a group'
 
-export const AlternativeToLabel: Story<RadioProps> = () => (
+export const AlternativeToLabel: StoryFn<RadioProps> = () => (
   <Radio aria-label="This label is invisible, but read by screen-readers" />
 )
 AlternativeToLabel.storyName = 'Alternative to label'
 
-export const CustomLabel: Story<RadioProps> = () => {
+export const CustomLabel: StoryFn<RadioProps> = () => {
   const Control = styled.div`
     display: flex;
     &:hover {
@@ -198,7 +200,7 @@ CustomLabel.decorators = [
   },
 ]
 
-export const Compact: Story<RadioProps> = () => {
+export const Compact: StoryFn<RadioProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -213,7 +215,7 @@ export const Compact: Story<RadioProps> = () => {
   )
 }
 
-export const TableRadio: Story<RadioProps> = () => (
+export const TableRadio: StoryFn<RadioProps> = () => (
   <Table>
     <Table.Head>
       <Table.Row>

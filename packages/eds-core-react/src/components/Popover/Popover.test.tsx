@@ -1,11 +1,5 @@
 /* eslint-disable no-undef */
-import {
-  render,
-  cleanup,
-  screen,
-  waitFor,
-  act,
-} from '@equinor/eds-utils/src/test'
+import { render, cleanup, screen, waitFor, act } from '../../test'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import 'jest-styled-components'

@@ -1,6 +1,8 @@
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Meta, Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Autocomplete.stories'
 
-import { Links, Story, PropsTable } from './../../../.storybook/components'
-import * as icons from '@equinor/eds-icons'
+<Meta of={ComponentStories} />
 
 # Autocomplete 
 
@@ -11,8 +13,8 @@ Allows users to choose one or multiple options from a list. The component is bui
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-autocomplete--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -59,18 +61,18 @@ The property <code>label</code> is mandatory and makes sure you have a descripti
 
 ### Multiple
 Enable the `multiple` property for multiple selection of values.
-<Story id="inputs-autocomplete--multiple" />
+<Canvas of={ComponentStories.Multiple} />
 
 ### Objects as options
 If the options-list contains objects and not strings, you must define the `optionLabel` function to specify
 how the label should be rendered and searched for. This function must return a string.
 
-<Story id="inputs-autocomplete--option-label" />
+<Canvas of={ComponentStories.OptionLabel} />
 
 ### Customized option component
 Use `optionComponent` to render custom item templates. `optionLabel` is required here as it is still needed internally for filtering and what to show in the input as selected option. `multiline` should also be included to allow dynamic height of items.
 
-<Story id="inputs-autocomplete--option-component" />
+<Canvas of={ComponentStories.OptionComponent} />
 
 ### Controlled
 Autocomplete controls its own state internally, and calls your `onOptionsChange` handler when the state changes. You can use `initialSelectedOptions`
@@ -81,23 +83,23 @@ empty array if no elements are to be pre-selected. Use `onOptionsChange` to hand
 
 The controlled state is provided from `downshift`. You can read more about it [in the downshift documentation](https://github.com/downshift-js/downshift#control-props).
 
-<Story id="inputs-autocomplete--controlled" />
+<Canvas of={ComponentStories.Controlled} />
 
 ### Read only
 Use prop `readOnly`
 
-<Story id="inputs-autocomplete--read-only" />
+<Canvas of={ComponentStories.ReadOnly} />
 
 ### Disabled
 Use prop `disabled`
 
-<Story id="inputs-autocomplete--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Disabled option
 You can disable specific options by sending an `optionDisabled` prop containing a function that 
 will disable an option if satisfied.
 
-<Story id="inputs-autocomplete--disabled-option" />
+<Canvas of={ComponentStories.DisabledOption} />
 
 
 ### Preselected options
@@ -105,14 +107,14 @@ For uncontrolled components, you can use `initialSelectedOptions` to define pre-
 For controlled components, you can use the `selectedOptions` prop to pass your controlled data 
 (see example on this under [Controlled](?path=/docs/inputs-autocomplete--controlled)).
 
-<Story id="inputs-autocomplete--preselected-options" />
+<Canvas of={ComponentStories.PreselectedOptions} />
 
 ### Compact
 Compact mode is toggled using [EdsProvider](?path=/docs/edsprovider--introduction).
 
 Note that compact mode should come with the possibility to switch to normal mode for accessibility reasons.
 
-<Story id="inputs-autocomplete--compact" />
+<Canvas of={ComponentStories.Compact} />
 
 ### Custom options filter
 The default search filter checks against the option label. For special cases, you can specify a custom filter by setting 
@@ -121,7 +123,7 @@ the `optionsFilter` callback. This is for instace useful for searching for an ab
 This feature should be used with caution: If the search phrase produces results that look different from what was searched for, 
 it may be confusing for the users, so ideally the search phrase should be included in the label.
 
-<Story id="inputs-autocomplete--custom-options-filter" />
+<Canvas of={ComponentStories.CustomOptionsFilter} />
 
 ### Adjusting dropdown width
 If `autoWidth` is set to `true`, the dropdown width will be the same as the width of the input. 
@@ -129,25 +131,27 @@ Otherwise, the dropdown width will be based on its widest content.
 
 The prop `multiline` lets you wrap long texts into multiple lines, as you can see in the second input.
 
-<Story id="inputs-autocomplete--auto-width" />
+<Canvas of={ComponentStories.AutoWidth} />
 
 ### Virtualization
 `Autocomplete` uses [@tanstack/react-virtual](https://tanstack.com/virtual/v3) virtualization to support large datasets.
 
-<Story id="inputs-autocomplete--virtualized" />
+<Canvas of={ComponentStories.Virtualized} />
 
 ### Async search autocomplete
 `Autocomplete` supports async search-as-you-type use cases. You may want to disable local filtering (when this is already handled serverside) with `optionsFilter={() => true}`. `onInputChange` callback is used to call an api with the search query and `loading` is used to visually notify the user that data is being fetched. 
 
-<Story id="inputs-autocomplete--async" />
+<Canvas of={ComponentStories.Async} />
 
 ### With `React Hook Form`
 
 Example using [react-hook-form](https://react-hook-form.com/) library.
-<Story id="inputs-autocomplete--with-react-hook-form" />
+
+<Canvas of={ComponentStories.WithReactHookForm} />
 
 ### With Select All option
 This is an example of how to make a "Select All" option for quicker selection. 
 Make sure to use `useMemo` if you are mutating the options in the render function to avoid object memory references bugs on re-renders.
-<Story id="inputs-autocomplete--select-all" />
+
+<Canvas of={ComponentStories.SelectAll} />
 

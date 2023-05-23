@@ -1,5 +1,5 @@
 import { Icon, TableOfContents, Typography, TableOfContentsProps } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { subdirectory_arrow_right } from '@equinor/eds-icons'
 import page from './TableOfContents.docs.mdx'
 
@@ -9,7 +9,7 @@ const icons = {
 
 Icon.add(icons)
 
-export default {
+const meta: Meta<typeof TableOfContents> = {
   title: 'Navigation/TableOfContents',
   component: TableOfContents,
   subcomponents: {
@@ -39,9 +39,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof TableOfContents>
+}
 
-export const Introduction: Story<TableOfContentsProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<TableOfContentsProps> = (args) => {
   return (
     <>
       <main>

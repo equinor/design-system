@@ -1,6 +1,6 @@
-const path = require('path')
+import remarkGfm from 'remark-gfm'
 
-module.exports = {
+const config = {
   stories: [
     '../stories/docs/*.stories.@(ts|tsx|mdx)',
     '../src/**/*.stories.@(ts|tsx|mdx)',
@@ -9,25 +9,52 @@ module.exports = {
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
+    '@storybook/addon-actions',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        docs: false,
+        actions: false,
+      },
+    },
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
-  framework: '@storybook/react',
   core: {
-    builder: '@storybook/builder-webpack5',
+    builder: '@storybook/builder-vite',
   },
-  webpackFinal: async (config) => {
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve.alias,
-        'styled-components': path.resolve(
-          __dirname,
-          '../node_modules',
-          'styled-components',
-        ),
+  framework: {
+    name: '@storybook/react-vite',
+  },
+  async viteFinal(config) {
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        dedupe: ['styled-components'],
+      },
+      optimizeDeps: {
+        ...config.optimizeDeps,
+        include: [
+          ...(config.optimizeDeps?.include ?? []),
+          '@equinor/eds-utils',
+          '@storybook/addon-docs/mdx-react-shim',
+          '@storybook/addon-docs/blocks',
+        ],
       },
     }
-
-    return config
+  },
+  docs: {
+    autodocs: true,
   },
 }
+
+export default config

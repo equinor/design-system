@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Banner } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Meta, Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Banner.stories'
 
 # Banner
 
@@ -13,7 +14,7 @@ Displays important notifications and related optional actions.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-banner--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -43,7 +44,7 @@ import { Banner } from '@equinor/eds-core-react'
 
 Banners can supplement their message using a supporting icon.
 
-<Story id="feedback-banner--text-and-icon" />
+<Canvas of={ComponentStories.TextAndIcon} />
 
 ### Text and action
 
@@ -53,7 +54,7 @@ Banners can supplement their message using a supporting icon.
   <li>Place buttons under the banner message, or on the same line if there is enough room to fit both.</li>
 </ul>
 
-<Story id="feedback-banner--text-and-action" />
+<Canvas of={ComponentStories.TextAndAction} />
 
 ### Text and icon and action
 
@@ -62,11 +63,5 @@ Banners can supplement their message using a supporting icon.
   <li>Banners should be considered as part of your overall in-app messaging strategy.</li>
 </ul>
 
-<Story id="feedback-banner--text-and-icon-and-action" />
+<Canvas of={ComponentStories.TextAndIconAndAction} />
 
-<!--Re-enable when compact is implemented for Banner-->
-<!--### Compact
-
-Compact `Banner` using `EdsProvider`.
-
-<Story id="feedback-banner--compact" />-->

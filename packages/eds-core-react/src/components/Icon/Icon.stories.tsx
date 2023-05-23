@@ -1,4 +1,4 @@
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import * as icons from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import { Icon, IconProps } from '../..'
@@ -6,7 +6,7 @@ import page from './Icon.docs.mdx'
 
 Icon.add(icons)
 
-export default {
+const meta: Meta<typeof Icon> = {
   title: 'Icons/Icon',
   component: Icon,
   argTypes: {
@@ -37,9 +37,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Icon>
+}
 
-export const Introduction: Story<IconProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<IconProps> = (args) => {
   return <Icon {...args} />
 }
 Introduction.args = {
@@ -48,11 +50,11 @@ Introduction.args = {
   title: 'save',
 }
 
-export const Accessibility: Story<IconProps> = () => (
+export const Accessibility: StoryFn<IconProps> = () => (
   <Icon name="save" title="Save me!" />
 )
 
-export const Color: Story<IconProps> = () => (
+export const Color: StoryFn<IconProps> = () => (
   <>
     <Icon name="save" color={'red'} />
     <Icon name="save" color={'green'} />
@@ -60,7 +62,7 @@ export const Color: Story<IconProps> = () => (
   </>
 )
 
-export const Rotations: Story<IconProps> = () => (
+export const Rotations: StoryFn<IconProps> = () => (
   <>
     <Icon name="pregnant_woman" rotation={90} />
     <Icon name="pregnant_woman" rotation={180} />
@@ -68,7 +70,7 @@ export const Rotations: Story<IconProps> = () => (
   </>
 )
 
-export const Sizes: Story<IconProps> = () => (
+export const Sizes: StoryFn<IconProps> = () => (
   <>
     <Icon name="fullscreen" size={16} />
     <Icon name="fullscreen" size={18} />

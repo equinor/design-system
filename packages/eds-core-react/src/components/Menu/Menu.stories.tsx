@@ -10,7 +10,7 @@ import {
   Density,
   Checkbox,
 } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Menu.docs.mdx'
 
@@ -31,7 +31,7 @@ import {
 
 const { colors } = tokens
 
-export default {
+const meta: Meta<typeof Menu> = {
   title: 'Navigation/Menu',
   component: Menu,
   subcomponents: {
@@ -56,14 +56,16 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Menu>
+}
+
+export default meta
 
 const onClick = (event: React.MouseEvent) => {
   action('clicked')(event)
   event.stopPropagation()
 }
 
-export const Introduction: Story<MenuProps> = (args) => {
+export const Introduction: StoryFn<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -112,7 +114,7 @@ Introduction.args = {
   placement: 'bottom-end',
 }
 
-export const Complex: Story<MenuProps> = () => {
+export const Complex: StoryFn<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -251,7 +253,7 @@ export const Complex: Story<MenuProps> = () => {
   )
 }
 
-export const Compact: Story<MenuProps> = () => {
+export const Compact: StoryFn<MenuProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
@@ -298,7 +300,7 @@ export const Compact: Story<MenuProps> = () => {
   )
 }
 
-export const StaysOpen: Story<MenuProps> = (args) => {
+export const StaysOpen: StoryFn<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
   const [optionOne, setOptionOne] = useState<boolean>(false)
@@ -394,7 +396,7 @@ StaysOpen.args = {
   placement: 'bottom-end',
 }
 
-export const MatchWidth: Story<MenuProps> = () => {
+export const MatchWidth: StoryFn<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -437,7 +439,7 @@ export const MatchWidth: Story<MenuProps> = () => {
   )
 }
 
-export const AsLink: Story<MenuProps> = () => {
+export const AsLink: StoryFn<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 

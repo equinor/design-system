@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import { Progress, CircularProgressProps, Button, Typography } from '../../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
 import { Stack } from './../../../../.storybook/components'
 import page from './Circular.docs.mdx'
 
-export default {
+const meta: Meta<typeof Progress.Circular> = {
   title: 'Feedback/Progress Indicators/Circular',
   component: Progress.Circular,
   parameters: {
-    backgrounds: { default: 'light' },
+    backgrounds: { default: 'none' },
     docs: {
       page,
       source: {
@@ -17,9 +17,11 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Progress.Circular>
+}
 
-export const Introduction: Story<CircularProgressProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<CircularProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
@@ -39,7 +41,7 @@ Introduction.decorators = [
   },
 ]
 
-export const Indeterminate: Story<CircularProgressProps> = () => (
+export const Indeterminate: StoryFn<CircularProgressProps> = () => (
   <Progress.Circular />
 )
 Indeterminate.decorators = [
@@ -56,7 +58,7 @@ Indeterminate.decorators = [
   },
 ]
 
-export const Determinate: Story<CircularProgressProps> = () => {
+export const Determinate: StoryFn<CircularProgressProps> = () => {
   const [progress, setProgress] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
@@ -121,7 +123,7 @@ Determinate.decorators = [
   },
 ]
 
-export const Colors: Story<CircularProgressProps> = () => (
+export const Colors: StoryFn<CircularProgressProps> = () => (
   <>
     <div>
       <Typography variant="h4" as="h2">
@@ -152,7 +154,7 @@ Colors.decorators = [
   },
 ]
 
-export const Sizes: Story<CircularProgressProps> = () => (
+export const Sizes: StoryFn<CircularProgressProps> = () => (
   <>
     <Progress.Circular size={16} />
     <Progress.Circular size={24} />
@@ -175,7 +177,7 @@ Sizes.decorators = [
   },
 ]
 
-export const InsideButton: Story<CircularProgressProps> = () => (
+export const InsideButton: StoryFn<CircularProgressProps> = () => (
   <>
     <Button>
       <Progress.Circular size={16} color="neutral" />
@@ -201,7 +203,7 @@ InsideButton.decorators = [
   },
 ]
 
-export const Accessibility: Story<CircularProgressProps> = () => {
+export const Accessibility: StoryFn<CircularProgressProps> = () => {
   const [isLoading, setIsLoading] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
 

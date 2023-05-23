@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../../.storybook/components'
-import { LinearProgress } from './..'
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Linear.stories'
 
 # Linear Progress
 
@@ -13,8 +14,8 @@ Animated helper that indicate waiting time as content loads.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-progress-indicators-linear--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -39,16 +40,16 @@ import { LinearProgress } from '@equinor/eds-core-react'
 
 Indeterminate operations display the indicator continually growing and shrinking along the track until the process is complete.
 
-<Story id="feedback-progress-indicators-linear--indeterminate" />
+<Canvas of={ComponentStories.Indeterminate} />
 
 ### Determinate
 
 Determinate operations display the indicator increasing in width from 0 to 100% of the track, in sync with the process’s progress.
 
-<Story id="feedback-progress-indicators-linear--determinate" />
+<Canvas of={ComponentStories.Determinate} />
 
 ### Acessibility
 `Linear progress` have `role="progressbar"` and therefore either `aria-describedby` or `aria-label` should be included. 
 Click the button with keyboard and a screen reader activated to test.
 
-<Story id="feedback-progress-indicators-linear--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />

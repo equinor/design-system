@@ -1,18 +1,19 @@
-import { Story, PropsTable, Links } from './../../../../.storybook/components'
-import { Button } from './..'
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './ButtonGroup.stories'
 
 # Group
 
 Is used to **group** related Buttons.
 
-<Links 
-ariaUrl="https://w3c.github.io/aria/#group" 
+<Links
+ariaUrl="https://w3c.github.io/aria/#group"
 sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Button/ButtonGroup"
 npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 />
 
-<Story id="inputs-button-group--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -41,15 +42,15 @@ import { Button } from '@equinor/eds-core-react'
 ### Orientation
 The `Button.Group` is displayed horizontally by default, can be displayed vertically using the `vertical` prop.
 
-<Story id="inputs-button-group--horizontal" />
+<Canvas of={ComponentStories.Horizontal} />
 
 ### Split
 `Button.Group` can also be used to create a split button. <br />
 The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
 
-<Story id="inputs-button-group--split" />
+<Canvas of={ComponentStories.Split} />
 
 ### Compact
 Compact `Button` using `EdsProvider`.
 
-<Story id="inputs-button-group--compact" />
+<Canvas of={ComponentStories.Compact} />

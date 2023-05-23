@@ -8,13 +8,13 @@ import {
   Checkbox,
   Typography,
 } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './EdsProvider.docs.mdx'
 import { EdsProviderProps, useEds } from './eds.context'
 import { accessible } from '@equinor/eds-icons'
 
-export default {
+const meta: Meta<typeof EdsProvider> = {
   title: 'EdsProvider',
   component: EdsProvider,
   parameters: {
@@ -25,9 +25,11 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof EdsProvider>
+}
 
-export const Introduction: Story<EdsProviderProps> = ({ density }) => {
+export default meta
+
+export const Introduction: StoryFn<EdsProviderProps> = ({ density }) => {
   return (
     <EdsProvider density={density}>
       <Typography>Current density is {density}</Typography>
@@ -47,7 +49,7 @@ Introduction.decorators = [
   ),
 ]
 
-export const CustomState: Story<EdsProviderProps> = (args) => {
+export const CustomState: StoryFn<EdsProviderProps> = (args) => {
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [density, setDensity] =
     useState<EdsProviderProps['density']>('comfortable')
@@ -182,7 +184,7 @@ const MyApp = () => {
   )
 }
 
-export const NestedComponentsDensity: Story<EdsProviderProps> = () => {
+export const NestedComponentsDensity: StoryFn<EdsProviderProps> = () => {
   return (
     <EdsProvider>
       <MyApp />

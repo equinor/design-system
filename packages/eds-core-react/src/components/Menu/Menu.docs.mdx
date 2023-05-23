@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Menu } from '.'
+import { Links, PropsTable } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Menu.stories'
 
 # Menu
 
@@ -13,7 +14,7 @@ A temporary list of actions or functions, known as a `dropdown`.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 ></Links>
 
-<Story id="navigation-menu--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -72,30 +73,31 @@ const Demo = () => {
 
 ### Complex
 
-<Story id="navigation-menu--complex" />
+<Canvas of={ComponentStories.Complex} />
 
 ### Compact
 
 Compact `Menu` using `EdsProvider`. 
 
-<Story id="navigation-menu--compact" />
+<Canvas of={ComponentStories.Compact} />
+
 
 ### Match width
 
 A menu matching the width of the anchorElement
 
-<Story id="navigation-menu--match-width" />
+<Canvas of={ComponentStories.MatchWidth} />
 
 ### Prevent menu close on click
 
 Adding `closeMenuOnClick={false}` to `Menu.Item` makes the Menu stay open on click
 
-<Story id="navigation-menu--stays-open" />
+<Canvas of={ComponentStories.StaysOpen} />
 
 ### Item as link
 
 Use the `as` prop to override component type of `Menu.Item`.
 
-<Story id="navigation-menu--as-link" />
+<Canvas of={ComponentStories.AsLink} />
 
 

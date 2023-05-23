@@ -1,6 +1,7 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { SideSheet } from '.'
+import { Links } from './../../../.storybook/components'
 import { Icon } from './../Icon'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './SideSheet.stories'
 
 # SideSheet
 
@@ -13,8 +14,8 @@ A toggleable area that is anchored to the edge of the viewport with supplementar
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="surfaces-sidesheet--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -44,7 +45,7 @@ import { SideSheet } from '@equinor/eds-core-react'
   <li>Side sheets can display a wide variety of content and layouts, ranging from a list of actions to supplemental content in a tabular layout.</li>
 </ul>
 
-<Story id="surfaces-sidesheet--placement" />
+<Canvas of={ComponentStories.Placement} />
 
 ### Scrollable
 
@@ -56,10 +57,10 @@ To open `SideSheet` press <Icon name="more_vertical" size={18} color="#007079" /
   <li>Side sheets cannot be horizontally scrolled.</li>
 </ul>
 
-<Story id="surfaces-sidesheet--scrollable" />
+<Canvas of={ComponentStories.Scrollable} />
 
 ### Draggable width
 
 `SideSheet` does not have a built in resize with mouse drag, but this can be implemented from the outside, as shown in this example.
 
-<Story id="surfaces-sidesheet--draggable" />
+<Canvas of={ComponentStories.Draggable} />

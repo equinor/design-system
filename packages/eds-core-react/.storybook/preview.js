@@ -1,22 +1,25 @@
-export const parameters = {
+const preview = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewMode: 'docs',
-  options: {
-    storySort: {
-      method: '',
-      order: [
-        'Introduction',
-        'Data Display',
-        'Feedback',
-        'Inputs',
-        'Navigation',
-        'Surfaces',
-        'Typography',
-        'Icons',
-        ['Introduction', 'Preview', 'Icon'],
-        '*',
-        'Playground',
-      ],
+  parameters: {
+    options: {
+      storySort: {
+        method: '',
+        order: [
+          'Introduction',
+          'Data Display',
+          'Feedback',
+          'Inputs',
+          'Navigation',
+          'Surfaces',
+          'Typography',
+          'Icons',
+          ['Introduction', 'Preview', 'Icon'],
+          '*',
+          'Playground',
+        ],
+      },
     },
   },
 }
+export default preview

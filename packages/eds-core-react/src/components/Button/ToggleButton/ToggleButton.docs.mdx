@@ -1,5 +1,6 @@
 import { Story, PropsTable, Links } from './../../../../.storybook/components'
-import { Button } from './..'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './ToggleButton.stories'
 
 # Toggle
 
@@ -13,8 +14,8 @@ sourceUrl="https://github.com/equinor/design-system/tree/develop/packages/eds-co
 npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 />
 
-<Story id="inputs-button-toggle--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -56,16 +57,16 @@ import { save } from '@equinor/eds-icons'
 
 Single selection is a default state, which means that by, selecting one option deselects any other.
 
-<Story id="inputs-button-toggle--single-selection" />
+<Canvas of={ComponentStories.SingleSelection} />
 
 ### Multiple selection
 
 Multiple selection allows for logically-grouped options, to have multiple options selected, by using the `multiple` prop.
 
-<Story id="inputs-button-toggle--multiple-selection" />
+<Canvas of={ComponentStories.MultipleSelection} />
 
 ### Controlled
 
 To controll at least one button to be active, you can adapt your `handleChange` function with `selectedIndexes` prop.
 
-<Story id="inputs-button-toggle--controlled" />
+<Canvas of={ComponentStories.Controlled} />

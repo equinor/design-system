@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { TopBar, Icon, Search, TopbarProps, Typography } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import page from './TopBar.docs.mdx'
 
 import {
@@ -11,7 +11,7 @@ import {
   apps,
 } from '@equinor/eds-icons'
 
-export default {
+const meta: Meta<typeof TopBar> = {
   title: 'Navigation/TopBar',
   component: TopBar,
   subcomponents: {
@@ -24,7 +24,9 @@ export default {
       page,
     },
   },
-} as ComponentMeta<typeof TopBar>
+}
+
+export default meta
 
 const icons = {
   account_circle,
@@ -51,7 +53,7 @@ const BodyWrapper = styled.div`
   padding: 16px;
 `
 
-export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
+export const Introduction: StoryFn<TopbarProps> = (props): JSX.Element => {
   return (
     <Wrapper>
       <TopBar {...props}>
@@ -77,7 +79,7 @@ export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
   )
 }
 
-export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => {
+export const WithSearchAndIcons: StoryFn<TopbarProps> = (): JSX.Element => {
   const Icons = styled.div`
     display: flex;
     align-items: center;

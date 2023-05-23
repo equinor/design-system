@@ -1,5 +1,6 @@
 import { Button } from '../../src'
 import { Stack } from './Stack'
+import { Unstyled } from '@storybook/blocks'
 
 const FigmaIcon = () => (
   <svg
@@ -121,30 +122,32 @@ export const Links = ({
   npmUrl,
   sourceUrl,
 }: LinksProps) => (
-  <Stack style={{ justifyContent: 'flex-start' }}>
-    {ariaUrl && (
-      <Button variant="ghost" as="a" href={ariaUrl}>
-        <W3cIcon />
-        WAI-ARIA
-      </Button>
-    )}
-    {figmaUrl && (
-      <Button variant="ghost" as="a" href={figmaUrl}>
-        <FigmaIcon />
-        <span>Figma</span>
-      </Button>
-    )}
-    {documentationUrl && (
-      <Button variant="ghost" as="a" href={documentationUrl}>
-        📝 &nbsp;Documentation
-      </Button>
-    )}
-    {npmUrl && <NpmLink url={npmUrl} />}
-    {sourceUrl && (
-      <Button variant="ghost" as="a" href={sourceUrl}>
-        <GithubIcon />
-        <span>Github</span>
-      </Button>
-    )}
-  </Stack>
+  <Unstyled>
+    <Stack style={{ justifyContent: 'flex-start' }}>
+      {ariaUrl && (
+        <Button variant="ghost" as="a" href={ariaUrl}>
+          <W3cIcon />
+          WAI-ARIA
+        </Button>
+      )}
+      {figmaUrl && (
+        <Button variant="ghost" as="a" href={figmaUrl}>
+          <FigmaIcon />
+          <span>Figma</span>
+        </Button>
+      )}
+      {documentationUrl && (
+        <Button variant="ghost" as="a" href={documentationUrl}>
+          📝 &nbsp;Documentation
+        </Button>
+      )}
+      {npmUrl && <NpmLink url={npmUrl} />}
+      {sourceUrl && (
+        <Button variant="ghost" as="a" href={sourceUrl}>
+          <GithubIcon />
+          <span>Github</span>
+        </Button>
+      )}
+    </Stack>
+  </Unstyled>
 )

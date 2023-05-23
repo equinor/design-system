@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Chip } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Chips.stories'
 
 # Chip
 
@@ -12,15 +13,15 @@ Chips, also known as tags or badges, are advanced badges that represent discrete
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="data-display-chips--introduction"/>
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
 Chips allow users to enter information, make selections, filter content, or trigger actions.
 <ul>
-    <li>Chips are <strong>compact</strong> components that represent discrete information.</li>
-    <li>Chips should be <strong>relevant</strong> to the content or task they represent.</li>
+    <li>Chips are **compact** components that represent discrete information.</li>
+    <li>Chips should be **relevant** to the content or task they represent.</li>
     <li>Chips should make tasks easier to complete, or content easier to sort.</li>
 </ul>
 
@@ -34,12 +35,12 @@ import { Chip } from '@equinor/eds-core-react'
 
 ### Text
 
-<Story id="data-display-chips--text" />
+<Canvas of={ComponentStories.Text} />
 
 ### Text and Icon
 
-<Story id="data-display-chips--text-and-icon" />
+<Canvas of={ComponentStories.TextAndIcon} />
 
 ### Text and Avatar
 
-<Story id="data-display-chips--text-and-avatar" />
+<Canvas of={ComponentStories.TextAndAvatar} />

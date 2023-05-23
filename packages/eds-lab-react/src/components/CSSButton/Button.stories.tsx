@@ -1,7 +1,7 @@
 import { CSSButton, ButtonProps } from '.'
 import { Icon, EdsProvider } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import { Meta, Story } from '@storybook/react'
+import { StoryFn, StoryObj, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { menu, save } from '@equinor/eds-icons'
 
@@ -20,16 +20,14 @@ const FullWidthWrapper = styled.div`
   grid-gap: 16px;
 `
 
-export default {
+const meta: Meta<typeof CSSButton> = {
   title: 'Core-react experimental features/CSS Button',
   component: CSSButton,
   argTypes: {
     as: {
-      control: {
-        type: 'select',
-        options: ['span', 'a', 'button'],
-        defaultValue: 'button',
-      },
+      options: ['span', 'a', 'button'],
+      control: { type: 'radio' },
+      defaultValue: 'button',
     },
   },
   parameters: {
@@ -41,13 +39,14 @@ export default {
     },
     info: {},
   },
-} as Meta
+}
+export default meta
 
-export const Default: Story<ButtonProps> = (args) => (
-  <CSSButton {...args}>You can control me</CSSButton>
-)
+export const Default: StoryObj<ButtonProps> = {
+  render: (args) => <CSSButton {...args}>You can control me</CSSButton>,
+}
 
-export const All: Story<ButtonProps> = () => (
+export const All: StoryFn<ButtonProps> = () => (
   <Wrapper>
     <CSSButton>Primary</CSSButton>
     <CSSButton color="secondary">Secondary</CSSButton>
@@ -88,7 +87,7 @@ export const All: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
-export const Contained: Story<ButtonProps> = () => (
+export const Contained: StoryFn<ButtonProps> = () => (
   <Wrapper>
     <CSSButton>Primary</CSSButton>
     <CSSButton color="secondary">Secondary</CSSButton>
@@ -124,7 +123,7 @@ export const Contained: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
-export const Outlined: Story<ButtonProps> = () => (
+export const Outlined: StoryFn<ButtonProps> = () => (
   <Wrapper>
     <CSSButton variant="outlined">Primary</CSSButton>
     <CSSButton variant="outlined" color="secondary">
@@ -171,7 +170,7 @@ export const Outlined: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
-export const Ghost: Story<ButtonProps> = () => (
+export const Ghost: StoryFn<ButtonProps> = () => (
   <Wrapper>
     <CSSButton variant="ghost">Primary</CSSButton>
     <CSSButton variant="ghost" color="secondary">
@@ -218,7 +217,7 @@ export const Ghost: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
-export const GhostIcon: Story<ButtonProps> = () => (
+export const GhostIcon: StoryFn<ButtonProps> = () => (
   <Wrapper>
     <CSSButton variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
@@ -235,7 +234,7 @@ export const GhostIcon: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
-export const Form: Story<ButtonProps> = () => {
+export const Form: StoryFn<ButtonProps> = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault() // to prevent navigation from storybook
     action('onSubmit')(e)
@@ -250,31 +249,38 @@ export const Form: Story<ButtonProps> = () => {
   )
 }
 
-export const FileUpload: Story<ButtonProps> = () => (
-  <Wrapper>
-    <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
-    <label htmlFor="file-upload">
-      <CSSButton as="span">Upload</CSSButton>
-    </label>
-  </Wrapper>
-)
+export const FileUpload: StoryObj<ButtonProps> = {
+  render: () => (
+    <Wrapper>
+      <input
+        type="file"
+        id="file-upload"
+        style={{ display: 'none' }}
+        multiple
+      />
+      <label htmlFor="file-upload">
+        <CSSButton as="span">Upload</CSSButton>
+      </label>
+    </Wrapper>
+  ),
 
-FileUpload.parameters = {
-  docs: {
-    description: {
-      story:
-        'Please note this demo only works in Storybook Canvas (isolated example only)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Please note this demo only works in Storybook Canvas (isolated example only)',
+      },
     },
   },
 }
 
-export const Link: Story<ButtonProps> = () => (
+export const Link: StoryFn<ButtonProps> = () => (
   <Wrapper>
     <CSSButton href="#">Link</CSSButton>
   </Wrapper>
 )
 
-export const FullWidth: Story<ButtonProps> = () => (
+export const FullWidth: StoryFn<ButtonProps> = () => (
   <FullWidthWrapper>
     <CSSButton fullWidth>Primary</CSSButton>
     <CSSButton color="secondary" fullWidth>
@@ -316,23 +322,25 @@ export const FullWidth: Story<ButtonProps> = () => (
   </FullWidthWrapper>
 )
 
-export const Compact: Story<ButtonProps> = () => (
-  <EdsProvider density="compact">
-    <Wrapper>
-      <CSSButton>Contained</CSSButton>
-      <CSSButton variant="outlined">Outlined</CSSButton>
-      <CSSButton variant="ghost">Ghost</CSSButton>
-      <CSSButton variant="ghost_icon">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
-      </CSSButton>
-    </Wrapper>
-  </EdsProvider>
-)
+export const Compact: StoryObj<ButtonProps> = {
+  render: () => (
+    <EdsProvider density="compact">
+      <Wrapper>
+        <CSSButton>Contained</CSSButton>
+        <CSSButton variant="outlined">Outlined</CSSButton>
+        <CSSButton variant="ghost">Ghost</CSSButton>
+        <CSSButton variant="ghost_icon">
+          <Icon data={menu} title="Ghost icon menu"></Icon>
+        </CSSButton>
+      </Wrapper>
+    </EdsProvider>
+  ),
 
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Button` using `EdsProvider`',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Compact `Button` using `EdsProvider`',
+      },
     },
   },
 }

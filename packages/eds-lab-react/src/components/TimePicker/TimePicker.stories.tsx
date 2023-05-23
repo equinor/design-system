@@ -1,13 +1,13 @@
-import { Meta, Story } from '@storybook/react/types-6-0'
-import React from 'react'
+import type { StoryObj, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { TimePicker, TimePickerProps } from './TimePicker'
 
-export default {
+const meta: Meta<typeof TimePicker> = {
   title: 'Components/TimePicker',
   component: TimePicker,
-  argTypes: {},
-} as Meta
+}
+
+export default meta
 
 const Container = styled.div`
   height: 360px;
@@ -15,13 +15,15 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 
-export const Default: Story<TimePickerProps> = (args) => (
-  <Container>
-    <TimePicker {...args} />
-  </Container>
-)
+export const Default: StoryObj<TimePickerProps> = {
+  render: (args) => (
+    <Container>
+      <TimePicker {...args} />
+    </Container>
+  ),
 
-Default.args = {
-  label: 'Test Time',
-  className: 'storyTimePicker',
+  args: {
+    label: 'Test Time',
+    className: 'storyTimePicker',
+  },
 }

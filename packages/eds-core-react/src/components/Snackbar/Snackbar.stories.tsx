@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Snackbar, SnackbarProps, Button } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Snackbar.docs.mdx'
 
-export default {
+const meta: Meta<typeof Snackbar> = {
   title: 'Feedback/Snackbar',
   component: Snackbar,
   subcomponents: { Action: Snackbar.Action },
@@ -25,9 +25,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Snackbar>
+}
 
-export const Introduction: Story<SnackbarProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<SnackbarProps> = (args) => {
   const { open } = args
   const [visible, setVisible] = useState(open)
   return (
@@ -42,7 +44,7 @@ export const Introduction: Story<SnackbarProps> = (args) => {
   )
 }
 
-export const Simple: Story<SnackbarProps> = () => {
+export const Simple: StoryFn<SnackbarProps> = () => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -61,7 +63,7 @@ export const Simple: Story<SnackbarProps> = () => {
   )
 }
 
-export const WithAction: Story<SnackbarProps> = () => {
+export const WithAction: StoryFn<SnackbarProps> = () => {
   const [withActionOpen, setWithActionOpen] = useState(false)
   return (
     <>

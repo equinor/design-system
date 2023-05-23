@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Switch } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Switch.stories'
 
 # Switch
 
@@ -13,8 +14,8 @@ Selection controls allow users to select options, make decisions and set prefere
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-selection-controls-switch--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -44,23 +45,23 @@ import { Switch } from '@equinor/eds-core-react'
 
 ### Default states
 
-<Story id="inputs-selection-controls-switch--default-states" />
+<Canvas of={ComponentStories.DefaultStates} />
 
 ### Alternative to label
 
 To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. <br />
 In such cases `aria-label` or `aria-labelledby` should be used.
 
-<Story id="inputs-selection-controls-switch--alternative-to-label" />
+<Canvas of={ComponentStories.AlternativeToLabel} />
 
 ### Compact
 
 Compact `Switch` using `EdsProvider`.
 
-<Story id="inputs-selection-controls-switch--compact" />
+<Canvas of={ComponentStories.Compact} />
 
 ### Table switch
 
 Example of usage with `Switch` and `aria-label` in tables for accessibility.
 
-<Story id="inputs-selection-controls-switch--table-switch" />
+<Canvas of={ComponentStories.TableSwitch} />

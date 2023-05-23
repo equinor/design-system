@@ -1,10 +1,10 @@
 import { useState, ChangeEvent } from 'react'
 import { Label, Slider, SliderProps, Typography } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Slider.docs.mdx'
 
-export default {
+const meta: Meta<typeof Slider> = {
   title: 'Inputs/Slider',
   component: Slider,
   argTypes: {
@@ -32,13 +32,15 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Slider>
+}
 
-export const Introduction: Story<SliderProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<SliderProps> = (args) => {
   return <Slider aria-label="simple-slider" {...args} />
 }
 
-export const SimpleSlider: Story<SliderProps> = () => (
+export const SimpleSlider: StoryFn<SliderProps> = () => (
   <>
     <Label label="Slide me" id="simple-slider" />
     <Slider value={4} min={0} max={10} aria-labelledby="simple-slider" />
@@ -46,7 +48,7 @@ export const SimpleSlider: Story<SliderProps> = () => (
 )
 SimpleSlider.storyName = 'Simple slider'
 
-export const SimpleSliderWithSteps: Story<SliderProps> = () => (
+export const SimpleSliderWithSteps: StoryFn<SliderProps> = () => (
   <>
     <Label
       label=" Simple slider, no dots, no min or max values, steps of 10"
@@ -63,7 +65,7 @@ export const SimpleSliderWithSteps: Story<SliderProps> = () => (
 )
 SimpleSliderWithSteps.storyName = 'Simple slider with steps'
 
-export const RangeSlider: Story<SliderProps> = () => {
+export const RangeSlider: StoryFn<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const changeHandler = (
     event: ChangeEvent<HTMLInputElement>,
@@ -87,7 +89,7 @@ export const RangeSlider: Story<SliderProps> = () => {
 }
 RangeSlider.storyName = 'Range slider'
 
-export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
+export const RangeSliderWithCommittedStep: StoryFn<SliderProps> = () => {
   const [value, updateValue] = useState([0, 500])
   const [valueCommited, updateValueCommited] = useState([0, 500])
 
@@ -117,7 +119,7 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
 }
 RangeSliderWithCommittedStep.storyName = 'Range slider with committed step'
 
-export const RangeSliderWithInterval: Story<SliderProps> = () => (
+export const RangeSliderWithInterval: StoryFn<SliderProps> = () => (
   <>
     <Label label="Range slider with steps of 5" id="large-step-range-slider" />
     <Slider
@@ -131,7 +133,7 @@ export const RangeSliderWithInterval: Story<SliderProps> = () => (
 )
 RangeSliderWithInterval.storyName = 'Range slider with interval'
 
-export const RangeSliderWithDates: Story<SliderProps> = () => {
+export const RangeSliderWithDates: StoryFn<SliderProps> = () => {
   const outputFunction = (value: number) => {
     const date = new Date(value)
     return date.toLocaleDateString('nb-NO', {
@@ -157,6 +159,6 @@ export const RangeSliderWithDates: Story<SliderProps> = () => {
 }
 RangeSliderWithDates.storyName = 'Range slider with dates'
 
-export const Disabled: Story<SliderProps> = () => (
+export const Disabled: StoryFn<SliderProps> = () => (
   <Slider value={50} disabled aria-label="Disabled Slider" />
 )

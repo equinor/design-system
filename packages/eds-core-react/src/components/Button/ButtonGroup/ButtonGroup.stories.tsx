@@ -7,12 +7,12 @@ import {
   Icon,
   Menu,
 } from '../../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Stack } from './../../../../.storybook/components'
 import page from './ButtonGroup.docs.mdx'
 
-export default {
+const meta: Meta<typeof Button.Group> = {
   title: 'Inputs/Button/Group',
   component: Button.Group,
   parameters: {
@@ -30,9 +30,11 @@ export default {
       </Stack>
     ),
   ],
-} as ComponentMeta<typeof Button.Group>
+}
 
-export const Introduction: Story<ButtonGroupProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<ButtonGroupProps> = (args) => {
   return (
     <Button.Group {...args} aria-label="primary actions">
       <Button>Button</Button>
@@ -43,7 +45,7 @@ export const Introduction: Story<ButtonGroupProps> = (args) => {
   )
 }
 
-export const Horizontal: Story<ButtonGroupProps> = () => (
+export const Horizontal: StoryFn<ButtonGroupProps> = () => (
   <Button.Group aria-label="primary actions">
     <Button>Button</Button>
     <Button>Button</Button>
@@ -52,7 +54,7 @@ export const Horizontal: Story<ButtonGroupProps> = () => (
   </Button.Group>
 )
 
-export const Vertical: Story<ButtonGroupProps> = () => (
+export const Vertical: StoryFn<ButtonGroupProps> = () => (
   <Button.Group aria-label="vertical actions" vertical>
     <Button>Button</Button>
     <Button>Button</Button>
@@ -61,7 +63,7 @@ export const Vertical: Story<ButtonGroupProps> = () => (
   </Button.Group>
 )
 
-export const Split: Story<ButtonGroupProps> = () => {
+export const Split: StoryFn<ButtonGroupProps> = () => {
   const options = ['Create task', 'Update task', 'Delete task']
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
@@ -118,7 +120,7 @@ export const Split: Story<ButtonGroupProps> = () => {
   )
 }
 
-export const Compact: Story<ButtonGroupProps> = () => {
+export const Compact: StoryFn<ButtonGroupProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {

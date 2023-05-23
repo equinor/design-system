@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import { Switch, SwitchProps, EdsProvider, Table, Density } from '../..'
 import styled from 'styled-components'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
 import page from './Switch.docs.mdx'
@@ -12,7 +12,7 @@ const UnstyledList = styled.ul`
   list-style-type: none;
 `
 
-export default {
+const meta: Meta<typeof Switch> = {
   title: 'Inputs/Selection Controls/Switch',
   component: Switch,
   parameters: {
@@ -32,13 +32,15 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Switch>
+}
 
-export const Introduction: Story<SwitchProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<SwitchProps> = (args) => {
   return <Switch label="Play with me" {...args} />
 }
 
-export const DefaultStates: Story<SwitchProps> = () => {
+export const DefaultStates: StoryFn<SwitchProps> = () => {
   const [check, setCheck] = useState(false)
 
   return (
@@ -69,12 +71,12 @@ export const DefaultStates: Story<SwitchProps> = () => {
 }
 DefaultStates.storyName = 'Default states'
 
-export const AlternativeToLabel: Story<SwitchProps> = () => (
+export const AlternativeToLabel: StoryFn<SwitchProps> = () => (
   <Switch aria-label="This label is invisible, but read by screen-readers" />
 )
 AlternativeToLabel.storyName = 'Alternative to label'
 
-export const Compact: Story<SwitchProps> = () => {
+export const Compact: StoryFn<SwitchProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -107,7 +109,7 @@ export const Compact: Story<SwitchProps> = () => {
   )
 }
 
-export const TableSwitch: Story<SwitchProps> = () => {
+export const TableSwitch: StoryFn<SwitchProps> = () => {
   return (
     <Table>
       <Table.Head>

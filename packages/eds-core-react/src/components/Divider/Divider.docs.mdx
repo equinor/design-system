@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Divider } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Divider.stories'
 
 # Divider
 Horizontal, thin line.
@@ -12,8 +13,8 @@ Horizontal, thin line.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="data-display-divider--introduction"/>
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -41,17 +42,18 @@ Full-bleed dividers separate content into segments and span the entire length of
   <li>Indicates where an element may expand.</li>
   <li>Helps separate individual tiles.</li>
 </ul>
-<Story id="data-display-divider--full-bleed"/>
+
+<Canvas of={ComponentStories.FullBleed} />
 
 ### Inset dividers
 
 Use inset dividers to separate related content. 
 Use inset dividers when there are anchoring elements such as an icon or avatar.
 
-<Story id="data-display-divider--inset"/>
+<Canvas of={ComponentStories.Inset} />
 
 ### Middle dividers
 
 Middle dividers in the middle of a layout, separates related content.
 
-<Story id="data-display-divider--middle" />
+<Canvas of={ComponentStories.Middle} />

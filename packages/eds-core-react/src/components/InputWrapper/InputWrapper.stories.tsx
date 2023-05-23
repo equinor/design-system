@@ -1,12 +1,14 @@
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { InputWrapper, InputWrapperProps, Input } from '../..'
 
-export default {
+const meta: Meta<typeof InputWrapper> = {
   title: 'Inputs/InputWrapper',
   component: InputWrapper,
-} as ComponentMeta<typeof InputWrapper>
+}
 
-export const Introduction: Story<InputWrapperProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<InputWrapperProps> = (args) => {
   const helperProps = {
     text: 'helperText',
   }

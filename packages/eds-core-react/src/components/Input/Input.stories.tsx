@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { anchor } from '@equinor/eds-icons'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import styled from 'styled-components'
@@ -8,7 +8,7 @@ import page from './Input.docs.mdx'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 
-export default {
+const meta: Meta<typeof Input> = {
   title: 'Inputs/Input',
   component: Input,
   parameters: {
@@ -28,13 +28,15 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Input>
+}
 
-export const Introduction: Story<InputProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<InputProps> = (args) => {
   return <Input {...args} />
 }
 
-export const Types: Story<InputProps> = () => (
+export const Types: StoryFn<InputProps> = () => (
   <>
     <div>
       <Label htmlFor="textfield-normal" label="Text" />
@@ -51,7 +53,7 @@ export const Types: Story<InputProps> = () => (
   </>
 )
 
-export const Variants: Story<InputProps> = () => (
+export const Variants: StoryFn<InputProps> = () => (
   <>
     <div>
       <Label htmlFor="textfield-default" label="Default" />
@@ -91,7 +93,7 @@ export const Variants: Story<InputProps> = () => (
   </>
 )
 
-export const Disabled: Story<InputProps> = () => (
+export const Disabled: StoryFn<InputProps> = () => (
   <>
     <Label htmlFor="textfield-disabled" label="Disabled" />
     <Input id="textfield-disabled" placeholder="Placeholder text" disabled />
@@ -107,7 +109,7 @@ Disabled.decorators = [
   },
 ]
 
-export const ReadOnly: Story<InputProps> = () => (
+export const ReadOnly: StoryFn<InputProps> = () => (
   <>
     <Label htmlFor="textfield-readOnly" label="Read only" />
     <Input id="textfield-readOnly" placeholder="Placeholder text" readOnly />
@@ -115,7 +117,7 @@ export const ReadOnly: Story<InputProps> = () => (
 )
 ReadOnly.storyName = 'Read only'
 
-export const Accessiblity: Story<InputProps> = () => {
+export const Accessiblity: StoryFn<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
   return (
     <>
@@ -125,7 +127,7 @@ export const Accessiblity: Story<InputProps> = () => {
   )
 }
 
-export const Compact: Story<InputProps> = () => {
+export const Compact: StoryFn<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
   const [density, setDensity] = useState<Density>('comfortable')
 
@@ -156,7 +158,7 @@ const SmallButton = styled(Button)`
   width: 24px;
 `
 
-export const WithAdornments: Story<InputProps> = () => {
+export const WithAdornments: StoryFn<InputProps> = () => {
   return (
     <EdsProvider>
       <Label htmlFor="adornments-default" label="Default" />
@@ -247,11 +249,11 @@ export const WithAdornments: Story<InputProps> = () => {
   )
 }
 
-export const casted: Story<InputProps> = (args) => {
+export const Casted: StoryFn<InputProps> = (args) => {
   return <Input as="textarea" {...args} />
 }
 
-export const OverrideBackground: Story<InputProps> = (args) => {
+export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
     <Input
       style={{ '--eds-input-background': '#fff' } as React.CSSProperties}

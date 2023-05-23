@@ -6,10 +6,10 @@ import {
   EdsProvider,
   Density,
 } from '@equinor/eds-core-react'
-import styled, { css } from 'styled-components'
-import { Meta, Story } from '@storybook/react'
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
+import { StoryFn, Meta } from '@storybook/react'
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ css: FlattenSimpleInterpolation }>`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   align-items: start;
 `
 
-export default {
+const meta: Meta<typeof Button> = {
   title:
     'Core-react experimental features/css-variables/Button With Relative Units',
   component: Button,
@@ -29,9 +29,11 @@ export default {
       },
     },
   },
-} as Meta
+}
 
-export const Default: Story<ButtonProps> = () => {
+export default meta
+
+export const Default: StoryFn<ButtonProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {

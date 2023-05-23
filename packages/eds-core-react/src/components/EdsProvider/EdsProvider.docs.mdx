@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Divider } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './EdsProvider.stories'
 
 # EdsProvider
 Provider used to set global values for EDS react components.
@@ -10,9 +11,8 @@ Provider used to set global values for EDS react components.
     ariaUrl="https://www.w3.org/TR/wai-aria-practices/"
 />
 
-<Story id="edsprovider--introduction"/>
-
-<PropsTable />
+<Primary />
+<Controls />
 
 
 
@@ -44,12 +44,13 @@ Use `useEds` to get & set `EdsProvider` values.
 
 ⚠️ `useEds` only works from nested component inside `EdsProvider` as its built using [React Context](https://reactjs.org/docs/context.html)
 
-<Story id="edsprovider--nested-components-density" />
+<Canvas of={ComponentStories.NestedComponentsDensity} />
 
 
 #### Custom state
 
 If you have your own state managment you can just set the `density` prop on `EdsProvider`
-<Story id="edsprovider--custom-state"/>
+
+<Canvas of={ComponentStories.CustomState} />
 
 

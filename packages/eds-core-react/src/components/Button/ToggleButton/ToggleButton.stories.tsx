@@ -9,11 +9,11 @@ import {
   alarm,
   timer,
 } from '@equinor/eds-icons'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../../.storybook/components'
 import page from './ToggleButton.docs.mdx'
 
-export default {
+const meta: Meta<typeof Button.Toggle> = {
   title: 'Inputs/Button/Toggle',
   component: Button.Toggle,
   argTypes: {
@@ -34,9 +34,10 @@ export default {
       </Stack>
     ),
   ],
-} as ComponentMeta<typeof Button.Toggle>
+}
+export default meta
 
-export const Introduction: Story<ToggleButtonProps> = (args) => {
+export const Introduction: StoryFn<ToggleButtonProps> = (args) => {
   return (
     <Button.Toggle {...args} aria-label="file actions">
       <Button aria-label="save action">
@@ -52,7 +53,7 @@ export const Introduction: Story<ToggleButtonProps> = (args) => {
   )
 }
 
-export const SingleSelection: Story<ToggleButtonProps> = () => {
+export const SingleSelection: StoryFn<ToggleButtonProps> = () => {
   const tooltipDelay = 500
   return (
     <Button.Toggle aria-label="file actions">
@@ -76,7 +77,7 @@ export const SingleSelection: Story<ToggleButtonProps> = () => {
 }
 SingleSelection.storyName = 'Single selection'
 
-export const MultipleSelection: Story<ToggleButtonProps> = () => {
+export const MultipleSelection: StoryFn<ToggleButtonProps> = () => {
   return (
     <Button.Toggle multiple aria-label="date and time actions">
       <Button aria-label="calendar">
@@ -96,7 +97,7 @@ export const MultipleSelection: Story<ToggleButtonProps> = () => {
 }
 MultipleSelection.storyName = 'Multiple selection'
 
-export const Controlled: Story<ToggleButtonProps> = () => {
+export const Controlled: StoryFn<ToggleButtonProps> = () => {
   const [selectedButtons, setSelectedButtons] = useState([0, 1])
   const handleChange = (indexes: number[]) => {
     setSelectedButtons(indexes)

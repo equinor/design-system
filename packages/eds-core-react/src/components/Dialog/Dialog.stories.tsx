@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { useArgs } from '@storybook/client-api'
 import { Dialog, DialogProps, Button, Radio, Typography } from '../..'
 import styled from 'styled-components'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Dialog.docs.mdx'
 
-export default {
+const meta: Meta<typeof Dialog> = {
   title: 'Feedback/Dialog',
   component: Dialog,
   args: {
@@ -37,7 +37,9 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Dialog>
+}
+
+export default meta
 
 const Wrapper = styled.div`
   display: grid;
@@ -51,7 +53,7 @@ const RadioWrapper = styled(Radio)`
   display: flex;
 `
 
-export const Introduction: Story<DialogProps> = (args) => {
+export const Introduction: StoryFn<DialogProps> = (args) => {
   const { open, isDismissable } = args
   const [, updateArgs] = useArgs()
   const handleClose = () => {
@@ -85,7 +87,7 @@ export const Introduction: Story<DialogProps> = (args) => {
   )
 }
 
-export const Dismissable: Story<DialogProps> = () => {
+export const Dismissable: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
@@ -120,7 +122,7 @@ export const Dismissable: Story<DialogProps> = () => {
   )
 }
 
-export const TextPlusAction: Story<DialogProps> = () => {
+export const TextPlusAction: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
@@ -154,7 +156,7 @@ export const TextPlusAction: Story<DialogProps> = () => {
 }
 TextPlusAction.storyName = 'Text plus action'
 
-export const PlaceholderPlusAction: Story<DialogProps> = () => {
+export const PlaceholderPlusAction: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
@@ -199,7 +201,7 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
 }
 PlaceholderPlusAction.storyName = 'Placeholder plus action'
 
-export const PlaceholderOnly: Story<DialogProps> = () => {
+export const PlaceholderOnly: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
@@ -226,7 +228,7 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
 }
 PlaceholderOnly.storyName = 'Placeholder only'
 
-export const ScrollablePlusActions: Story<DialogProps> = () => {
+export const ScrollablePlusActions: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
@@ -271,7 +273,7 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
 }
 ScrollablePlusActions.storyName = 'Scrollable plus actions'
 
-export const NoTitle: Story<DialogProps> = () => {
+export const NoTitle: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
@@ -301,43 +303,3 @@ export const NoTitle: Story<DialogProps> = () => {
   )
 }
 NoTitle.storyName = 'No title'
-
-/* export const Compact: Story<DialogProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [density, setDensity] = useState<Density>('comfortable')
-  const handleOpen = () => {
-    setIsOpen(true)
-  }
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <Button aria-haspopup="dialog" onClick={handleOpen}>
-        Trigger Dialog
-      </Button>
-      <Dialog open={isOpen}>
-        <Dialog.Header>
-          <Dialog.Title>Compact</Dialog.Title>
-        </Dialog.Header>
-        <Dialog.CustomContent>
-          <Typography variant="body_short">Small description here.</Typography>
-        </Dialog.CustomContent>
-        <Dialog.Actions>
-          <Wrapper>
-            <Button onClick={handleClose}>OK</Button>
-            <Button onClick={handleClose} variant="ghost">
-              Cancel
-            </Button>
-          </Wrapper>
-        </Dialog.Actions>
-      </Dialog>
-    </EdsProvider>
-  )
-} */

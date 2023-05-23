@@ -1,4 +1,4 @@
-import { Card, Typography, Paper, Button } from '../../src'
+import { Card, Typography, Button } from '../../src'
 import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 

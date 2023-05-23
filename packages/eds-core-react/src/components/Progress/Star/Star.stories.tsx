@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { Progress, StarProgressProps, Button } from '../../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
 import { Stack } from './../../../../.storybook/components'
 import page from './Star.docs.mdx'
 
-export default {
+const meta: Meta<typeof Progress.Star> = {
   title: 'Feedback/Progress Indicators/Star',
   component: Progress.Star,
   parameters: {
@@ -29,23 +29,25 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Progress.Star>
+}
 
-export const Introduction: Story<StarProgressProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<StarProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
   return <Progress.Star value={progress} {...args} />
 }
 
-export const Indeterminate: Story<StarProgressProps> = () => <Progress.Star />
+export const Indeterminate: StoryFn<StarProgressProps> = () => <Progress.Star />
 
-export const Determinate: Story<StarProgressProps> = () => {
+export const Determinate: StoryFn<StarProgressProps> = () => {
   const progress = useMockProgress(0)
   return <Progress.Star value={progress} variant="determinate" />
 }
 
-export const Sizes: Story<StarProgressProps> = () => (
+export const Sizes: StoryFn<StarProgressProps> = () => (
   <>
     <Progress.Star size={16} />
     <Progress.Star size={24} />
@@ -55,7 +57,7 @@ export const Sizes: Story<StarProgressProps> = () => (
   </>
 )
 
-export const Accessibility: Story<StarProgressProps> = () => {
+export const Accessibility: StoryFn<StarProgressProps> = () => {
   const [isLoading, setIsLoading] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)

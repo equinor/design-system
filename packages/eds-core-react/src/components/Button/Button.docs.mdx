@@ -1,6 +1,7 @@
 
-import { Story, PropsTable, Links } from './../../../.storybook/components'
-import { Button } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls, Source } from '@storybook/blocks'
+import * as ComponentStories from './Button.stories'
 
 # Button 
 Allows users to take action with a single click or tap.
@@ -13,8 +14,9 @@ sourceUrl="https://github.com/equinor/design-system/tree/develop/packages/eds-co
 npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 />
 
-<Story id="inputs-button-button--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
+<Source />
 
 
 ## Usage
@@ -63,24 +65,24 @@ import { Button } from '@equinor/eds-core-react'
 The `aria-disabled` attribute makes it possible to semantically disable the `Button` without hiding it from assistive technologies, such as screen readers. 
 In EDS, the `Button` will be visually styled as disabled, but it is up to the developer to actually disable the button.
 
-<Story id="inputs-button-button--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />
 
 ## Examples
 
 ### Basic
 The `Button` come with five variants; `contained`,  `contained_icon`, `outlined`, `ghost` and `ghost_icon`.
 
-<Story id="inputs-button-button--basic" />
+<Canvas of={ComponentStories.Basic} />
 
 ### Icon button
 The `ghost_icon` & `contained_icon`variant is meant for standalone icon buttons using the `<Icon>` component.  
 Make sure to define `aria-label` with descriptive text of `Button` interaction.
 
-<Story id="inputs-button-button--icon-button" />
+<Canvas of={ComponentStories.IconButton} />
 
 ### Color
 
-<Story id="inputs-button-button--color"/>
+<Canvas of={ComponentStories.Color} />
 
 ### Hierarchy
 Use variants to differentiate the hierarchy.
@@ -90,19 +92,19 @@ Use variants to differentiate the hierarchy.
   <li><code>Ghost</code> - being low-emphasis.</li>
 </ul>
 
-<Story id="inputs-button-button--hierarchy" />
+<Canvas of={ComponentStories.Hierarchy} />
 
 ### Compact
 Compact mode is toggled using [EdsProvider](?path=/docs/edsprovider--introduction).
 
 Note that compact mode should come with the possibility to switch to normal mode for accessibility reasons.
 
-<Story id="inputs-button-button--compact" />
+<Canvas of={ComponentStories.Compact} />
 
 ### Progress button
 Use the `Progress` component if you need progress indication on a button.
 
-<Story id="inputs-button-button--progress-button" />
+<Canvas of={ComponentStories.ProgressButton} />
 
 ### Disabled buttons and tooltip
 Due to inconsistent browser support for mouse events on disabled buttons, `Tooltip` 
@@ -110,14 +112,14 @@ should not be used in combination with `disabled` on `Button`. Instead use `aria
 and disable the `onClick` in the code. This has the added benefit of making the 
 Tooltip accessible for people using keyboard navigation, as the button is still focusable.
 
-<Story id="inputs-button-button--with-tooltip" />
+<Canvas of={ComponentStories.WithTooltip} />
 
 ### Full width
 Use boolean prop `fullWidth`
 
-<Story id="inputs-button-button--full-width" />
+<Canvas of={ComponentStories.FullWidth} />
 
 ### All
 All button combinations. 
 
-<Story id="inputs-button-button--all" />
+<Canvas of={ComponentStories.All} />

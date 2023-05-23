@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Pagination, PaginationProps, Button } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import page from './Pagination.docs.mdx'
 
-export default {
+const meta: Meta<typeof Pagination> = {
   title: 'Navigation/Pagination',
   component: Pagination,
   parameters: {
@@ -24,22 +24,24 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Pagination>
+}
 
-export const Introduction: Story<PaginationProps> = (args) => (
+export default meta
+
+export const Introduction: StoryFn<PaginationProps> = (args) => (
   <Pagination {...args} />
 )
 
-export const Truncated: Story<PaginationProps> = () => (
+export const Truncated: StoryFn<PaginationProps> = () => (
   <Pagination totalItems={8} itemsPerPage={1} />
 )
 
-export const WithIndicator: Story<PaginationProps> = () => (
+export const WithIndicator: StoryFn<PaginationProps> = () => (
   <Pagination totalItems={140} itemsPerPage={3} withItemIndicator />
 )
 WithIndicator.storyName = 'With indicator'
 
-export const Dynamic: Story<PaginationProps> = () => {
+export const Dynamic: StoryFn<PaginationProps> = () => {
   const [currentPageIndex, setCurrentPageIndex] = useState(6)
   const [itemsPerPage, setItemsPerPage] = useState(10)
 

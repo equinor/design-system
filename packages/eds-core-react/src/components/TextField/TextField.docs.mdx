@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { TextField } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './TextField.stories'
 
 # TextField
 
@@ -13,8 +14,8 @@ Lets users enter, interact and edit content, typically in forms and dialogs.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-textfield--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -22,11 +23,11 @@ Lets users enter, interact and edit content, typically in forms and dialogs.
 
 <ul>
   <li>Text fields should stand out and point that users can input information.</li>
-  <li>Text field states should be <strong>clearly</strong> distinguish from one another.</li>
+  <li>Text field states should be **clearly** distinguish from one another.</li>
   <li>Text fields should make it easy to understand the required information and to address any errors.</li>
 </ul>
 
-  ```tsx
+```tsx
 import { TextField } from '@equinor/eds-core-react'
 
 <TextField />
@@ -35,11 +36,13 @@ import { TextField } from '@equinor/eds-core-react'
 ## Examples
 
 <ul>
-  <li><strong>Label text</strong> informs users as to what information is requested for a text field. 
-      Every text field should have a label.
+  <li>
+    **Label text** informs users as to what information is requested for a text
+    field. Every text field should have a label.
   </li>
-  <li><strong>Helper text</strong> gives additional guidance about the input field, 
-      such as how it will be used. It should only take up a single line.
+  <li>
+    **Helper text** gives additional guidance about the input field, such as how
+    it will be used. It should only take up a single line.
   </li>
 </ul>
 
@@ -47,73 +50,70 @@ import { TextField } from '@equinor/eds-core-react'
 
 Examples of common used types (`input` type).
 
-<Story id="inputs-textfield--types" />
+<Canvas of={ComponentStories.Types} />
 
 **Note:** While `type="number"` does provide native validation, the implementation is inconsistent across browsers. We instead recommend using custom validation like the examples provided [here](?path=/docs/inputs-textfield--validation).
 
 ### Multiline
 
-Changes the `input` to `textarea` for multiline support. 
+Changes the `input` to `textarea` for multiline support.
 
-<Story id="inputs-textfield--multiline" />
+<Canvas of={ComponentStories.Multiline} />
 
 ### Multiline with `rowsMax`
 
-<Story id="inputs-textfield--multiline-rows-max" />
+<Canvas of={ComponentStories.MultilineRowsMax} />
 
 ### Multiline with fixed height
 
-Note that a multiline with fixed `height` overwrites the `rows` property. `rowsMax` overwrites fixed `height`, 
+Note that a multiline with fixed `height` overwrites the `rows` property. `rowsMax` overwrites fixed `height`,
 so it is not recommended to use those together.
 
-<Story id="inputs-textfield--multiline-fixed-height" />
+<Canvas of={ComponentStories.MultilineFixedHeight} />
 
-### With units 
+### With units
 
 Units are used for single line text field.
 
-<Story id="inputs-textfield--with-unit" />
-
+<Canvas of={ComponentStories.WithUnit} />
 
 ### With icons
 
-<Story id="inputs-textfield--with-icons" />
+<Canvas of={ComponentStories.WithIcons} />
 
 ### Date and time
 
 Textfield can be used with the native `type` prop which allows the usage of `"date"`/`"time"`/`"datetime-local"` to create accessible date/timepickers.
 Note that icon should not be used here, as browser implement this input in different ways and some, such as Chrome, add their own icons inside the input.
-<Story id="inputs-textfield--datepicker" />
+
+<Canvas of={ComponentStories.Datepicker} />
 
 ### Variants
 
 Examples of validation states. You can add the icon in the helper text or inside the text input, both not in both places.
 
-<Story id="inputs-textfield--variants" />
+<Canvas of={ComponentStories.Variants} />
 
 ### Read only
 
-<Story id="inputs-textfield--read-only" />
+<Canvas of={ComponentStories.ReadOnly} />
 
 ### Disabled
 
-<Story id="inputs-textfield--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Compact
 
 Compact `TextField` uses `EdsProvider`
 
-<Story id="inputs-textfield--compact" />
+<Canvas of={ComponentStories.Compact} />
 
 ### Validation
 
 How input validation is handled is up to the developer. In this example we use <a href="https://react-hook-form.com/">React Hook Form</a>.
 
-<Story id="inputs-textfield--validation-with-react-hook-form" />
+<Canvas of={ComponentStories.ValidationWithReactHookForm} />
 
 Here is one way to do it using `pattern` and `onChange`
 
-<Story id="inputs-textfield--validation" />
-
-
-
+<Canvas of={ComponentStories.Validation} />

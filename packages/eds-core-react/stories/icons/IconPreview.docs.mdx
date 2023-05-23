@@ -1,6 +1,5 @@
-import { Story  } from '@storybook/addon-docs'
-
-
+import { Primary, Story, Meta } from '@storybook/blocks'
+import * as ComponentStories from './IconPreview.stories'
 
 # Icons
 
@@ -8,5 +7,5 @@ Icons included in the EDS icon library.
 
 Hover over an icon to download as svg or use the name for lookup in the `@equinor/eds-icons` package.
 
-<Story id="icons--preview" />
+<Story of={ComponentStories.Preview} />
 

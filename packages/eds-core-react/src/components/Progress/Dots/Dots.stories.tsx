@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { Progress, DotProgressProps, Typography, Button } from '../../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../../.storybook/components'
 import page from './Dots.docs.mdx'
 
-export default {
+const meta: Meta<typeof Progress.Dots> = {
   title: 'Feedback/Progress Indicators/Dots',
   component: Progress.Dots,
   parameters: {
-    backgrounds: { default: 'light' },
+    backgrounds: { default: 'none' },
     docs: {
       page,
       source: {
@@ -17,9 +17,11 @@ export default {
     },
   },
   argTypes: {},
-} as ComponentMeta<typeof Progress.Dots>
+}
 
-export const Introduction: Story<DotProgressProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<DotProgressProps> = (args) => {
   return <Progress.Dots {...args} />
 }
 Introduction.bind({})
@@ -40,7 +42,7 @@ Introduction.decorators = [
   },
 ]
 
-export const Colors: Story<DotProgressProps> = () => (
+export const Colors: StoryFn<DotProgressProps> = () => (
   <>
     <div>
       <Typography variant="h4" as="h2">
@@ -77,7 +79,7 @@ Colors.decorators = [
   },
 ]
 
-export const Sizes: Story<DotProgressProps> = () => (
+export const Sizes: StoryFn<DotProgressProps> = () => (
   <>
     <Progress.Dots color="primary" size={32} />
     <Progress.Dots color="primary" size={48} />
@@ -98,7 +100,7 @@ Sizes.decorators = [
   },
 ]
 
-export const InsideButton: Story<DotProgressProps> = () => (
+export const InsideButton: StoryFn<DotProgressProps> = () => (
   <>
     <Button>
       <Progress.Dots />
@@ -122,7 +124,7 @@ InsideButton.decorators = [
   },
 ]
 
-export const Accessibility: Story<DotProgressProps> = () => {
+export const Accessibility: StoryFn<DotProgressProps> = () => {
   const [isLoading, setIsLoading] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
 

@@ -1,4 +1,6 @@
-module.exports = {
+import remarkGfm from 'remark-gfm'
+
+const config = {
   stories: [
     '../src/**/*.stories.@(ts|tsx|mdx)',
     '../stories/**/*.stories.@(ts|tsx|mdx)',
@@ -6,14 +8,58 @@ module.exports = {
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
+    '@storybook/addon-actions',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        docs: false,
+        actions: false,
+      },
+    },
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   features: {
-    interactionsDebugger: true, // enable playback controls
-    buildStoriesJson: true, //needed for zeroheight integration, to be replaced with 'storyStoreV7: true' after upgrade to storybook v7 https://learninghub.zeroheight.com/hc/en-us/articles/11847325839259
+    interactionsDebugger: true,
+    storyStoreV7: true,
   },
-  framework: '@storybook/react',
   core: {
-    builder: '@storybook/builder-webpack5',
+    builder: '@storybook/builder-vite',
+  },
+
+  framework: {
+    name: '@storybook/react-vite',
+  },
+  async viteFinal(config) {
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        dedupe: ['styled-components'],
+      },
+      optimizeDeps: {
+        ...config.optimizeDeps,
+        include: [
+          ...(config.optimizeDeps?.include ?? []),
+          '@equinor/eds-utils',
+          '@storybook/addon-docs/mdx-react-shim',
+          '@storybook/blocks',
+        ],
+      },
+    }
+  },
+
+  docs: {
+    autodocs: true,
   },
 }
+
+export default config

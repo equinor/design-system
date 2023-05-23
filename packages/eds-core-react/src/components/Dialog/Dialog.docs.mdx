@@ -1,5 +1,6 @@
 import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Dialog } from '.'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Dialog.stories'
 
 # Dialog
 
@@ -13,7 +14,7 @@ Informs users about a task and can contain critical information, requires decisi
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-dialog--introduction" />
+<Primary />
 <PropsTable />
 
 ## Usage
@@ -22,8 +23,8 @@ Dialogs disable all app functionality when they appear, and remain on screen unt
 Dialogs are purposefully interruptive, so they should be used sparingly.
 
 <ul>
-    <li>Dialogs <strong>focus</strong> user attention to ensure their content is addressed.</li>
-    <li>Dialogs should be <strong>direct</strong> in communicating information and dedicated to completing a assignment.</li>
+    <li>Dialogs **focus** user attention to ensure their content is addressed.</li>
+    <li>Dialogs should be **direct** in communicating information and dedicated to completing a assignment.</li>
     <li>Dialogs should appear in response to a user task or an action, with suitable or contextual information.</li>
 </ul>
 
@@ -67,7 +68,7 @@ const Demo = () => {
 
 `isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`.
 
-<Story id="feedback-dialog--dismissable" />
+<Canvas of={ComponentStories.Dismissable} />
 
 ### Text plus action
 
@@ -76,17 +77,17 @@ const Demo = () => {
     <li>Actions should always be related to the message. </li>
 </ul>
 
-<Story id="feedback-dialog--text-plus-action" />
+<Canvas of={ComponentStories.TextPlusAction} />
 
 ### Placeholder plus action
 
-<Story id="feedback-dialog--placeholder-plus-action" />
+<Canvas of={ComponentStories.PlaceholderPlusAction} />
 
 ### Placeholder only
 
 Simple dialogs can display items that are immediately actionable when selected.
 
-<Story id="feedback-dialog--placeholder-only" />
+<Canvas of={ComponentStories.PlaceholderOnly} />
 
 ### Scrollable plus actions
 
@@ -98,17 +99,11 @@ Most dialog content should avoid scrolling.
     <li>Dialog does not scroll with elements outside of the dialog, such as the background.</li>
 </ul>
 
-<Story id="feedback-dialog--scrollable-plus-actions" />
+<Canvas of={ComponentStories.ScrollablePlusActions} />
 
 ### No title
 
 Title is optional.
 
-<Story id="feedback-dialog--no-title" />
+<Canvas of={ComponentStories.NoTitle} />
 
-<!--Re-enable when compact is implemented for Dialog-->
-<!--### Compact
-
-Compact `Dialog` using `EdsProvider`.
-
-<Story id="feedback-dialog--compact" />-->

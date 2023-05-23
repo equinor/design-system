@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../../.storybook/components'
-import { StarProgress } from './..'
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Star.stories'
 
 # Star Progress
 
@@ -13,8 +14,8 @@ Animated helper that indicate waiting time as content loads.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-progress-indicators-star--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -38,20 +39,20 @@ import { StarProgress } from '@equinor/eds-core-react'
 
 Indeterminate star indicators spins along the invisible track.
 
-<Story id="feedback-progress-indicators-star--indeterminate" />
+<Canvas of={ComponentStories.Indeterminate} />
 
 ### Determinate
 
 Determinate star indicators fill the invisible, star track with color, as the indicator moves from 0 to 360 degrees.
 
-<Story id="feedback-progress-indicators-star--determinate" />
+<Canvas of={ComponentStories.Determinate} />
 
 ### Sizes
 
-<Story id="feedback-progress-indicators-star--sizes" />
+<Canvas of={ComponentStories.Sizes} />
 
 ### Acessibility
 `Star progress` have `role="progressbar"` and therefore either `aria-describedby` or `aria-label` should be included. 
 Click the button with keyboard and a screen reader activated to test.
 
-<Story id="feedback-progress-indicators-star--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />

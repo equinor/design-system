@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { action } from '@storybook/addon-actions'
 import { Search, Button, SearchProps, EdsProvider, Density } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import page from './Search.docs.mdx'
 
-export default {
+const meta: Meta<typeof Search> = {
   title: 'Inputs/Search',
   component: Search,
   parameters: {
@@ -12,11 +12,13 @@ export default {
       page,
     },
   },
-} as ComponentMeta<typeof Search>
+}
+
+export default meta
 
 const handleOnChange = action('onChange')
 
-export const Introduction: Story<SearchProps> = () => {
+export const Introduction: StoryFn<SearchProps> = () => {
   // This story is not interactive, because Search has no props beyond the default HTML ones.
   return (
     <Search
@@ -28,7 +30,7 @@ export const Introduction: Story<SearchProps> = () => {
   )
 }
 
-export const accessibility: Story<SearchProps> = () => (
+export const Accessibility: StoryFn<SearchProps> = () => (
   <form action="/">
     <Search
       placeholder="Search"
@@ -38,7 +40,7 @@ export const accessibility: Story<SearchProps> = () => (
   </form>
 )
 
-export const Disabled: Story<SearchProps> = () => (
+export const Disabled: StoryFn<SearchProps> = () => (
   <Search
     aria-label="disabled"
     id="search-disabled"
@@ -47,7 +49,7 @@ export const Disabled: Story<SearchProps> = () => (
   />
 )
 
-export const Controlled: Story<SearchProps> = () => {
+export const Controlled: StoryFn<SearchProps> = () => {
   const [searchValue, setSearchValue] = useState('Initial value')
 
   const handleOnSearchValueChange = (
@@ -79,7 +81,7 @@ export const Controlled: Story<SearchProps> = () => {
   )
 }
 
-export const Compact: Story<SearchProps> = () => {
+export const Compact: StoryFn<SearchProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {

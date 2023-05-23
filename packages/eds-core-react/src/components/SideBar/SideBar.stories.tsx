@@ -1,4 +1,4 @@
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { useState } from 'react'
 import styled from 'styled-components'
 import {
@@ -23,7 +23,7 @@ import {
 } from '../..'
 import page from './SideBar.docs.mdx'
 
-export default {
+const meta: Meta<typeof SideBar> = {
   title: 'Navigation/SideBar',
   component: SideBar,
   subcomponents: {
@@ -43,14 +43,16 @@ export default {
       page,
     },
   },
-} as ComponentMeta<typeof SideBar>
+}
+
+export default meta
 
 const SidebarContainer = styled.div`
   height: 60vh;
   margin: -30px -20px;
 `
 
-export const Primary: Story<SidebarType> = (args) => {
+export const Primary: StoryFn<SidebarType> = (args) => {
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'home',
@@ -118,7 +120,7 @@ const LogoClosed = () => (
   </svg>
 )
 
-export const CustomContent: Story<SidebarType> = () => {
+export const CustomContent: StoryFn<SidebarType> = () => {
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'Dashboard',
@@ -158,7 +160,7 @@ export const CustomContent: Story<SidebarType> = () => {
   )
 }
 
-export const WithButton: Story<SidebarType> = () => {
+export const WithButton: StoryFn<SidebarType> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -218,7 +220,7 @@ export const WithButton: Story<SidebarType> = () => {
   )
 }
 
-export const ActivePath: Story<SidebarType> = () => {
+export const ActivePath: StoryFn<SidebarType> = () => {
   type LinkProps = SidebarLinkProps & {
     href: string
   }
@@ -263,7 +265,7 @@ const SidebarContainerWithTopbar = styled(SidebarContainer)`
   grid-template-rows: auto 1fr;
 `
 
-export const WithTopbar: Story<SidebarType> = () => {
+export const WithTopbar: StoryFn<SidebarType> = () => {
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'Dashboard',
@@ -314,9 +316,7 @@ const Container = styled.div`
   flex-direction: row;
 `
 
-export const WithAccordion: Story<SidebarType> = () => {
-  const [isFavoritesOpen, setIsFavoritesOpen] = useState<boolean>(false)
-
+export const WithAccordion: StoryFn<SidebarType> = () => {
   return (
     <Container>
       <SideBar>
@@ -420,7 +420,7 @@ const workInProgressPage = (
   </Content>
 )
 
-export const WithRouting: Story<SidebarType> = () => {
+export const WithRouting: StoryFn<SidebarType> = () => {
   const [selected, setSelected] = useState<string>('')
 
   const sidebarLinks = [
@@ -562,7 +562,7 @@ const selectPage = (selected: string) => {
   }
 }
 
-export const ControlledActiveState: Story<SidebarType> = () => {
+export const ControlledActiveState: StoryFn<SidebarType> = () => {
   const [selected, setSelected] = useState<string>('')
 
   const hasActiveItem = (subItems: { label: string; name: string }[]) => {

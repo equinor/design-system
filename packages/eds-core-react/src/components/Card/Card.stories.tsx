@@ -7,8 +7,14 @@ import {
   Icon,
   Typography,
 } from '../..'
-import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
-import { ComponentMeta, Story } from '@storybook/react'
+import {
+  more_vertical,
+  share,
+  person_add,
+  settings,
+  save,
+} from '@equinor/eds-icons'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Card.docs.mdx'
 
@@ -17,13 +23,14 @@ const icons = {
   share,
   person_add,
   settings,
+  save,
 }
 
 Icon.add(icons)
 
 const iconSize = 24
 
-export default {
+const meta: Meta<typeof Card> = {
   title: 'Surfaces/Card',
   component: Card,
   subcomponents: {
@@ -58,9 +65,11 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Card>
+}
 
-export const Introduction: Story<CardProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<CardProps> = (args) => {
   return (
     <>
       <Card {...args}>
@@ -103,7 +112,7 @@ export const Introduction: Story<CardProps> = (args) => {
   )
 }
 
-export const TypeOfCards: Story<CardProps> = () => (
+export const TypeOfCards: StoryFn<CardProps> = () => (
   <>
     <Card>
       <Card.Header>
@@ -129,7 +138,7 @@ export const TypeOfCards: Story<CardProps> = () => (
 )
 TypeOfCards.storyName = 'Container variants'
 
-export const CardHeaderVariants: Story<CardProps> = () => (
+export const CardHeaderVariants: StoryFn<CardProps> = () => (
   <>
     <Card>
       <Card.Header>
@@ -240,7 +249,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
 )
 CardHeaderVariants.storyName = 'Header variants'
 
-export const WithMedia: Story<CardProps> = () => {
+export const WithMedia: StoryFn<CardProps> = () => {
   const CardMediafullWidth = () => (
     <Card.Media fullWidth>
       <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
@@ -305,7 +314,7 @@ export const WithMedia: Story<CardProps> = () => {
 }
 WithMedia.storyName = 'With media'
 
-export const WithActions: Story<CardProps> = () => (
+export const WithActions: StoryFn<CardProps> = () => (
   <>
     <Card>
       <Card.Header>
@@ -377,7 +386,7 @@ export const WithActions: Story<CardProps> = () => (
 )
 WithActions.storyName = 'With actions'
 
-export const WithDivider: Story<CardProps> = () => {
+export const WithDivider: StoryFn<CardProps> = () => {
   return (
     <>
       <Card>

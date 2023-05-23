@@ -1,5 +1,6 @@
 import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Pagination } from '.'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Pagination.stories'
 
 # Pagination
 
@@ -12,8 +13,8 @@ Allows long sets of data or content to be divided into multiple pages with contr
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 ></Links>
 
-<Story id="navigation-pagination--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -36,16 +37,16 @@ import { Pagination } from '@equinor/eds-core-react'
 
 If the number of page exceeds the parent container, it will truncate the list.
 
-<Story id="navigation-pagination--truncated" />
+<Canvas of={ComponentStories.Truncated} />
 
 ### With indicator
 
 The `withItemIndicator` displays total item count.
 
-<Story id="navigation-pagination--with-indicator" />
+<Canvas of={ComponentStories.Truncated} />WithIndicator
 
 ### Dynamic `itemsPerPage`
 
 If `itemsPerPage` changes dynamically, the active page is set to 1.
 
-<Story id="navigation-pagination--dynamic" />
+<Canvas of={ComponentStories.Dynamic} />

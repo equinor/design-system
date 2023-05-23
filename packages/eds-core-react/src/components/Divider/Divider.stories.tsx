@@ -7,11 +7,11 @@ import {
   DividerProps,
   Typography,
 } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Divider.docs.mdx'
 
-export default {
+const meta: Meta<typeof Divider> = {
   title: 'Data Display/Divider',
   component: Divider,
   argTypes: {
@@ -26,9 +26,11 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Divider>
+}
 
-export const Introduction: Story<DividerProps> = (args) => (
+export default meta
+
+export const Introduction: StoryFn<DividerProps> = (args) => (
   <>
     <Divider {...args} />
     <Divider {...args} />
@@ -36,7 +38,7 @@ export const Introduction: Story<DividerProps> = (args) => (
   </>
 )
 
-export const FullBleed: Story<DividerProps> = () => (
+export const FullBleed: StoryFn<DividerProps> = () => (
   <>
     <Card style={{ width: '50%' }}>
       <Card.Header>
@@ -85,7 +87,7 @@ FullBleed.decorators = [
   },
 ]
 
-export const Inset: Story<DividerProps> = () => (
+export const Inset: StoryFn<DividerProps> = () => (
   <>
     <Card style={{ width: '50%' }}>
       <Card.Header>
@@ -135,7 +137,7 @@ Inset.decorators = [
   },
 ]
 
-export const Middle: Story<DividerProps> = () => (
+export const Middle: StoryFn<DividerProps> = () => (
   <>
     <Card style={{ width: '50%' }}>
       <Card.Header>

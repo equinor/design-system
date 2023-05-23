@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Label } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Label.stories'
 
 # Label
 
@@ -10,8 +11,8 @@ Is intended to use if you need to more flexibility than the wrapped TextField or
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="inputs-label--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -25,15 +26,15 @@ import { Label } from '@equinor/eds-core-react'
 
 ### With `meta` text
 
-<Story id="inputs-label--with-meta" />
+<Canvas of={ComponentStories.WithMeta} />
 
 ### Disabled
 
-<Story id="inputs-label--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Accessiblity
 
 It's important to link the `Label` to the corresponding input element. 
 Use the React version of the html for attribute htmlFor as `Label` does not support to wrap the input field.
 
-<Story id="inputs-label--accessiblity" />
+<Canvas of={ComponentStories.Accessiblity} />

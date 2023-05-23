@@ -9,12 +9,12 @@ import {
   Snackbar,
   Tooltip,
 } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { menu, add, save, send, refresh } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
-export default {
+const meta: Meta<typeof Button> = {
   title: 'Inputs/Button/Button',
   component: Button,
   args: {
@@ -36,9 +36,11 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Button>
+}
 
-export const Introduction: Story<ButtonProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<ButtonProps> = (args) => {
   return <Button {...args}>You can control me</Button>
 }
 Introduction.decorators = [
@@ -49,7 +51,7 @@ Introduction.decorators = [
   ),
 ]
 
-export const Accessibility: Story<ButtonProps> = () => {
+export const Accessibility: StoryFn<ButtonProps> = () => {
   const [canSubmit, setCanSubmit] = useState(false)
   const [open, setOpen] = useState(false)
   return (
@@ -89,7 +91,7 @@ Accessibility.decorators = [
   ),
 ]
 
-export const Basic: Story<ButtonProps> = () => (
+export const Basic: StoryFn<ButtonProps> = () => (
   <>
     <Button>Contained</Button>
     <Button variant="contained_icon" aria-label="add action">
@@ -110,7 +112,7 @@ Basic.decorators = [
   ),
 ]
 
-export const IconButton: Story<ButtonProps> = () => (
+export const IconButton: StoryFn<ButtonProps> = () => (
   <>
     <Button variant="ghost_icon" aria-label="save action">
       <Icon data={save}></Icon>
@@ -148,7 +150,7 @@ IconButton.decorators = [
   ),
 ]
 
-export const Color: Story<ButtonProps> = () => (
+export const Color: StoryFn<ButtonProps> = () => (
   <>
     <Button color="primary">Primary</Button>
     <Button color="secondary">Secondary</Button>
@@ -163,7 +165,7 @@ Color.decorators = [
   ),
 ]
 
-export const Hierarchy: Story<ButtonProps> = () => (
+export const Hierarchy: StoryFn<ButtonProps> = () => (
   <>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
@@ -178,7 +180,7 @@ Hierarchy.decorators = [
   ),
 ]
 
-export const Compact: Story<ButtonProps> = () => {
+export const Compact: StoryFn<ButtonProps> = () => {
   const [compact, setComfortable] = useState<boolean>(true)
 
   return (
@@ -209,7 +211,7 @@ Compact.decorators = [
   ),
 ]
 
-export const ProgressButton: Story<ButtonProps> = () => {
+export const ProgressButton: StoryFn<ButtonProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const onSubmit = () => {
@@ -259,7 +261,7 @@ ProgressButton.decorators = [
   ),
 ]
 
-export const WithTooltip: Story<ButtonProps> = () => (
+export const WithTooltip: StoryFn<ButtonProps> = () => (
   <>
     <Tooltip title="This is what a tooltip looks like">
       <Button>Hover me</Button>
@@ -282,7 +284,7 @@ WithTooltip.decorators = [
 ]
 WithTooltip.storyName = 'Disabled buttons and tooltip'
 
-export const FullWidth: Story<ButtonProps> = () => (
+export const FullWidth: StoryFn<ButtonProps> = () => (
   <>
     <Button fullWidth>Primary</Button>
   </>
@@ -296,7 +298,7 @@ FullWidth.decorators = [
   ),
 ]
 
-export const All: Story<ButtonProps> = () => (
+export const All: StoryFn<ButtonProps> = () => (
   <>
     <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>

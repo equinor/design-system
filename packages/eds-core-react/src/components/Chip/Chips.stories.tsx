@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions'
 import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Chips.docs.mdx'
@@ -11,7 +11,7 @@ const icons = {
 
 Icon.add(icons)
 
-export default {
+const meta: Meta<typeof Chip> = {
   title: 'Data Display/Chips',
   component: Chip,
   parameters: {
@@ -37,7 +37,9 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Chip>
+}
+
+export default meta
 
 const handleDelete = action('onDelete')
 const handleClick = action('onClick')
@@ -46,11 +48,11 @@ const CatImage = (props: Partial<AvatarProps>) => (
   <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} alt="cat" {...props} />
 )
 
-export const Introduction: Story<ChipProps> = (args) => (
+export const Introduction: StoryFn<ChipProps> = (args) => (
   <Chip {...args}>Play with me</Chip>
 )
 
-export const Text: Story<ChipProps> = () => (
+export const Text: StoryFn<ChipProps> = () => (
   <>
     <Chip>Normal</Chip>
     <Chip variant="active">Active</Chip>
@@ -86,7 +88,7 @@ export const Text: Story<ChipProps> = () => (
   </>
 )
 
-export const TextAndIcon: Story<ChipProps> = () => (
+export const TextAndIcon: StoryFn<ChipProps> = () => (
   <>
     <Chip>
       <Icon name="save" />
@@ -149,7 +151,7 @@ export const TextAndIcon: Story<ChipProps> = () => (
 )
 TextAndIcon.storyName = 'Text and icon'
 
-export const TextAndAvatar: Story<ChipProps> = () => (
+export const TextAndAvatar: StoryFn<ChipProps> = () => (
   <>
     <Chip>
       <CatImage />

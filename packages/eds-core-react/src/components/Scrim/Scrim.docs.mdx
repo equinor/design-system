@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Scrim } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Scrim.stories'
 
 # Scrim
 
@@ -12,8 +13,8 @@ Is a temporary visual effect that fades the general interface while allowing the
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
-<Story id="feedback-scrim--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -51,4 +52,4 @@ const Demo = () => {
 
 ## Example: Scrim with Dialog
 
-<Story id="feedback-dialog--dismissable" />
+<Canvas of={ComponentStories.Dismissable} />

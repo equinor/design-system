@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { Paper, PaperProps, Typography } from '../..'
-import { Story, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Paper.docs.mdx'
 
-export default {
+const meta: Meta<typeof Paper> = {
   title: 'Surfaces/Paper',
   component: Paper,
   parameters: {
@@ -24,13 +24,15 @@ export default {
       )
     },
   ],
-} as ComponentMeta<typeof Paper>
+}
 
-export const Introduction: Story<PaperProps> = (args) => {
+export default meta
+
+export const Introduction: StoryFn<PaperProps> = (args) => {
   return <Paper style={{ height: '150px', width: '150px' }} {...args} />
 }
 
-export const ElevationOverview: Story<PaperProps> = () => {
+export const ElevationOverview: StoryFn<PaperProps> = () => {
   const WrapperOverview = styled(Paper)`
     height: 100px;
     width: 110px;

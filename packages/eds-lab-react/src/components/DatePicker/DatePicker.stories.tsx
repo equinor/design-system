@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { StoryObj, Meta } from '@storybook/react'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'
 import { DatePickerSelectHeader } from './DatePickerSelectHeader'
@@ -19,227 +19,234 @@ const Row = styled.div`
   grid-column-gap: 2px;
 `
 
-export const Default: Story<DatePickerProps> = (args) => (
-  <DatePicker {...args} />
-)
-
-Default.args = {
-  id: 'StoryDatePicker',
-  dateValue: new Date(),
-  label: 'Test Date',
-  className: 'storyPicker',
-  popperPlacement: 'bottom',
+export const Default: StoryObj<DatePickerProps> = {
+  args: {
+    id: 'StoryDatePicker',
+    dateValue: new Date(),
+    label: 'Test Date',
+    className: 'storyPicker',
+    popperPlacement: 'bottom',
+  },
 }
 
-export const WithTimePicker: Story<DatePickerProps> = ({
-  id,
-  dateValue,
-  className,
-  popperPlacement,
-}: DatePickerProps) => {
-  const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date: Date): void => {
-    setStartDate(date)
-  }
+export const WithTimePicker: StoryObj<DatePickerProps> = {
+  render: function Render({
+    id,
+    dateValue,
+    className,
+    popperPlacement,
+  }: DatePickerProps) {
+    const [startDate, setStartDate] = useState(dateValue)
+    const onChanged = (date: Date): void => {
+      setStartDate(date)
+    }
 
-  const [timeValue, setTimeValue] = useState('11:00')
-  const onTimeChanged = (date: string): void => {
-    setTimeValue(date)
-  }
+    const [timeValue, setTimeValue] = useState('11:00')
+    const onTimeChanged = (date: string): void => {
+      setTimeValue(date)
+    }
 
-  return (
-    <Container>
-      <Row>
-        <DatePicker
-          id={id + 't'}
-          dateValue={startDate}
-          label={'Choose date'}
-          onChanged={onChanged}
-          className={className}
-          popperPlacement={popperPlacement}
-        />
-        <TimePicker
-          label="Choose Time"
-          value={timeValue}
-          onValueChanged={onTimeChanged}
-        />
-      </Row>
-    </Container>
-  )
-}
+    return (
+      <Container>
+        <Row>
+          <DatePicker
+            id={id + 't'}
+            dateValue={startDate}
+            label={'Choose date'}
+            onChanged={onChanged}
+            className={className}
+            popperPlacement={popperPlacement}
+          />
+          <TimePicker
+            label="Choose Time"
+            value={timeValue}
+            onValueChanged={onTimeChanged}
+          />
+        </Row>
+      </Container>
+    )
+  },
 
-WithTimePicker.parameters = {
-  docs: {
-    description: {
-      component: `The date picker is usually accompanied by a time picker to set time and date more precicely.`,
+  parameters: {
+    docs: {
+      description: {
+        component: `The date picker is usually accompanied by a time picker to set time and date more precicely.`,
+      },
     },
   },
 }
 
-export const DatePickerDisabledBefore: Story<DatePickerProps> = ({
-  id,
-  dateValue,
-  className,
-  popperPlacement,
-}: DatePickerProps) => {
-  const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date: Date): void => {
-    setStartDate(date)
-  }
+export const DatePickerDisabledBefore: StoryObj<DatePickerProps> = {
+  render: function Render({
+    id,
+    dateValue,
+    className,
+    popperPlacement,
+  }: DatePickerProps) {
+    const [startDate, setStartDate] = useState(dateValue)
+    const onChanged = (date: Date): void => {
+      setStartDate(date)
+    }
 
-  return (
-    <DatePicker
-      id={id}
-      dateValue={startDate}
-      label={'Date'}
-      onChanged={onChanged}
-      className={className}
-      popperPlacement={popperPlacement}
-      disableBeforeDate={new Date()}
-    />
-  )
-}
-
-DatePickerDisabledBefore.parameters = {
-  docs: {
-    description: {
-      component: `The date picker with disabled previous dates from selection.`,
-    },
+    return (
+      <DatePicker
+        id={id}
+        dateValue={startDate}
+        label={'Date'}
+        onChanged={onChanged}
+        className={className}
+        popperPlacement={popperPlacement}
+        disableBeforeDate={new Date()}
+      />
+    )
   },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: '1em', height: '380px' }}>
-        <Story />
-      </div>
-    ),
-  ],
-}
 
-export const DatePickerDisabledFuture: Story<DatePickerProps> = ({
-  id,
-  dateValue,
-  className,
-  popperPlacement,
-}: DatePickerProps) => {
-  const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date: Date): void => {
-    setStartDate(date)
-  }
-
-  return (
-    <DatePicker
-      id={id}
-      dateValue={startDate}
-      label={'Date'}
-      onChanged={onChanged}
-      className={className}
-      popperPlacement={popperPlacement}
-      disableFuture={true}
-    />
-  )
-}
-
-DatePickerDisabledFuture.parameters = {
-  docs: {
-    description: {
-      component: `The date picker with disabled future dates.`,
+  parameters: {
+    docs: {
+      description: {
+        component: `The date picker with disabled previous dates from selection.`,
+      },
     },
+    decorators: [
+      (Story) => (
+        <div style={{ padding: '1em', height: '380px' }}>
+          <Story />
+        </div>
+      ),
+    ],
   },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: '1em', height: '380px' }}>
-        <Story />
-      </div>
-    ),
-  ],
 }
 
-export const DatePickerDisabled: Story<DatePickerProps> = ({
-  id,
-  dateValue,
-  className,
-  popperPlacement,
-}: DatePickerProps) => {
-  const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date: Date): void => {
-    setStartDate(date)
-  }
+export const DatePickerDisabledFuture: StoryObj<DatePickerProps> = {
+  render: function Render({
+    id,
+    dateValue,
+    className,
+    popperPlacement,
+  }: DatePickerProps) {
+    const [startDate, setStartDate] = useState(dateValue)
+    const onChanged = (date: Date): void => {
+      setStartDate(date)
+    }
 
-  return (
-    <DatePicker
-      id={id}
-      dateValue={startDate}
-      label={'Date'}
-      onChanged={onChanged}
-      className={className}
-      popperPlacement={popperPlacement}
-      disabled={true}
-    />
-  )
-}
+    return (
+      <DatePicker
+        id={id}
+        dateValue={startDate}
+        label={'Date'}
+        onChanged={onChanged}
+        className={className}
+        popperPlacement={popperPlacement}
+        disableFuture={true}
+      />
+    )
+  },
 
-DatePickerDisabled.parameters = {
-  docs: {
-    description: {
-      component: `The date picker when disabled`,
+  parameters: {
+    docs: {
+      description: {
+        component: `The date picker with disabled future dates.`,
+      },
     },
+    decorators: [
+      (Story) => (
+        <div style={{ padding: '1em', height: '380px' }}>
+          <Story />
+        </div>
+      ),
+    ],
   },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: '1em', height: '380px' }}>
-        <Story />
-      </div>
-    ),
-  ],
 }
 
-export const DatePickerWithCustomHeader: Story<DatePickerProps> = ({
-  id,
-  dateValue,
-  className,
-  popperPlacement,
-}: DatePickerProps) => {
-  //import { DatePickerSelectHeader } from '@equinor/eds-lab-react'
-  const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date: Date): void => {
-    setStartDate(date)
-  }
+export const DatePickerDisabled: StoryObj<DatePickerProps> = {
+  render: function Render({
+    id,
+    dateValue,
+    className,
+    popperPlacement,
+  }: DatePickerProps) {
+    const [startDate, setStartDate] = useState(dateValue)
+    const onChanged = (date: Date): void => {
+      setStartDate(date)
+    }
 
-  return (
-    <DatePicker
-      id={id}
-      dateValue={startDate}
-      label={'Date'}
-      onChanged={onChanged}
-      className={className}
-      popperPlacement={popperPlacement}
-      disableBeforeDate={new Date()}
-      renderCustomHeader={DatePickerSelectHeader}
-    />
-  )
-}
+    return (
+      <DatePicker
+        id={id}
+        dateValue={startDate}
+        label={'Date'}
+        onChanged={onChanged}
+        className={className}
+        popperPlacement={popperPlacement}
+        disabled={true}
+      />
+    )
+  },
 
-DatePickerWithCustomHeader.parameters = {
-  docs: {
-    description: {
-      component: `The date picker with custom header.`,
-      story:
-        '`renderCustomHeader` allows you to make your own custom header. We have included a `DatePickerSelectHeader` which can be used directly or as a starting point for your own implementation. See also https://reactdatepicker.com/#example-custom-header',
+  parameters: {
+    docs: {
+      description: {
+        component: `The date picker when disabled`,
+      },
     },
+    decorators: [
+      (Story) => (
+        <div style={{ padding: '1em', height: '380px' }}>
+          <Story />
+        </div>
+      ),
+    ],
   },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: '1em', height: '380px' }}>
-        <Story />
-      </div>
-    ),
-  ],
 }
 
-export default {
+export const DatePickerWithCustomHeader: StoryObj<DatePickerProps> = {
+  render: function Render({
+    id,
+    dateValue,
+    className,
+    popperPlacement,
+  }: DatePickerProps) {
+    //import { DatePickerSelectHeader } from '@equinor/eds-lab-react'
+    const [startDate, setStartDate] = useState(dateValue)
+    const onChanged = (date: Date): void => {
+      setStartDate(date)
+    }
+
+    return (
+      <DatePicker
+        id={id}
+        dateValue={startDate}
+        label={'Date'}
+        onChanged={onChanged}
+        className={className}
+        popperPlacement={popperPlacement}
+        disableBeforeDate={new Date()}
+        renderCustomHeader={DatePickerSelectHeader}
+      />
+    )
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        component: `The date picker with custom header.`,
+        story:
+          '`renderCustomHeader` allows you to make your own custom header. We have included a `DatePickerSelectHeader` which can be used directly or as a starting point for your own implementation. See also https://reactdatepicker.com/#example-custom-header',
+      },
+    },
+    decorators: [
+      (Story) => (
+        <div style={{ padding: '1em', height: '380px' }}>
+          <Story />
+        </div>
+      ),
+    ],
+  },
+}
+
+const meta: Meta<typeof DatePicker> = {
   title: 'Components/DatePicker',
   component: DatePicker,
-  argTypes: {},
   parameters: {
     docs: {
       source: {
@@ -258,4 +265,6 @@ export default {
       </div>
     ),
   ],
-} as Meta
+}
+
+export default meta

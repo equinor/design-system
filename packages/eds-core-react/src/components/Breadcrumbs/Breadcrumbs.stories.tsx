@@ -1,12 +1,12 @@
 import { Breadcrumbs, BreadcrumbsProps, Checkbox } from '../..'
 import { useState, ChangeEvent } from 'react'
 import { action } from '@storybook/addon-actions'
-import { ComponentMeta, Story } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Breadcrumbs.docs.mdx'
 import styled from 'styled-components'
 
-export default {
+const meta: Meta<typeof Breadcrumbs> = {
   title: 'Navigation/Breadcrumbs',
   component: Breadcrumbs,
   subcomponents: {
@@ -28,7 +28,9 @@ export default {
       </Stack>
     ),
   ],
-} as ComponentMeta<typeof Breadcrumbs>
+}
+
+export default meta
 
 const handleClick = (
   e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
@@ -45,7 +47,7 @@ const Resizable = styled.div`
   width: 360px;
 `
 
-export const Introduction: Story<BreadcrumbsProps> = (args) => {
+export const Introduction: StoryFn<BreadcrumbsProps> = (args) => {
   return (
     <Breadcrumbs {...args}>
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
@@ -67,7 +69,7 @@ export const Introduction: Story<BreadcrumbsProps> = (args) => {
   )
 }
 
-export const Normal: Story<BreadcrumbsProps> = () => (
+export const Normal: StoryFn<BreadcrumbsProps> = () => (
   <Breadcrumbs>
     <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
       Store
@@ -81,7 +83,7 @@ export const Normal: Story<BreadcrumbsProps> = () => (
   </Breadcrumbs>
 )
 
-export const Collapsed: Story<BreadcrumbsProps> = () => (
+export const Collapsed: StoryFn<BreadcrumbsProps> = () => (
   <Breadcrumbs collapse>
     <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
       Store
@@ -98,7 +100,7 @@ export const Collapsed: Story<BreadcrumbsProps> = () => (
   </Breadcrumbs>
 )
 
-export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
+export const TruncatedLabels: StoryFn<BreadcrumbsProps> = () => (
   <Breadcrumbs>
     <Breadcrumbs.Breadcrumb href="#" maxWidth={30} onClick={handleClick}>
       Store
@@ -118,7 +120,7 @@ export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
 )
 TruncatedLabels.storyName = 'Truncated labels'
 
-export const Wrapped: Story<BreadcrumbsProps> = () => {
+export const Wrapped: StoryFn<BreadcrumbsProps> = () => {
   const [wrap, setWrap] = useState(true)
   return (
     <div

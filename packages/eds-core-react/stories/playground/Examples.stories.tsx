@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import {
   Typography,
@@ -18,12 +18,14 @@ import { DataTable } from './DataTable'
 
 import { accessible } from '@equinor/eds-icons'
 
-export default {
+const meta: Meta = {
   title: 'Playground/Examples',
   parameters: {
     viewMode: 'canvas',
   },
-} as Meta
+}
+
+export default meta
 
 const Container = styled.div`
   display: grid;
@@ -60,7 +62,7 @@ const Middle = styled.div`
   grid-auto-rows: max-content max-content;
 `
 
-export const TestPage: Story = () => {
+export const TestPage: StoryFn = () => {
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)

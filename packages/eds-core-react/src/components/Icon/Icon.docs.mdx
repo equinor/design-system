@@ -1,7 +1,7 @@
 
 import { Links, Story, PropsTable } from './../../../.storybook/components'
-import * as icons from '@equinor/eds-icons'
-import { Icon  } from '.'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Icon.stories'
 
 
 # Icon 
@@ -13,8 +13,8 @@ Component for rendering icons from the `@equinor/eds-icons` package.
     sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Icon/Icon.tsx"
 />
 
-<Story id="icons-icon--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Installation 
 
@@ -54,16 +54,16 @@ If you are using the icons alone to convey meaning you need to provide the `titl
 ```tsx
  <Icon name="save" title="Save me!" />
 ```
-<Story id="icons-icon--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />
 
 ## Examples
 
 ### Colour
-<Story id="icons-icon--color" />
+<Canvas of={ComponentStories.Color} />
 
 
 ### Rotations
-<Story id="icons-icon--rotations" />
+<Canvas of={ComponentStories.Rotations} />
 
 
 ### Sizes
@@ -71,7 +71,7 @@ Simple and clear icons require a strict underlying grid.
 <ul>
     <li>When using compact mode the size of icons are 18px.</li>
 </ul>
-<Story id="icons-icon--sizes" />
+<Canvas of={ComponentStories.Sizes} />
 
 
 

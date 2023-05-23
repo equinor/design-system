@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story, Stack, TypographyGroups } from './../../../.storybook/components'
-import { Typography } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Controls } from '@storybook/blocks'
+import * as ComponentStories from './Typography.stories'
 
 # Typography
 
@@ -13,8 +14,8 @@ therefore text sizes and styles were developed to balance content density and re
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 ></Links>
 
-<Story id="typography-typography--introduction" />
-<PropsTable />
+<Primary />
+<Controls />
 
 ## Usage
 
@@ -72,13 +73,13 @@ Typography groups with included varints:
 Example: `<Typography group="input" variant="label"></Typography>`. <br />
 Variants under `heading` and `paragraph` don’t require the group parameter.
 
-<Story id="typography-typography--groups-overview" />
+<Canvas of={ComponentStories.GroupsOverview} />
 
 ## Examples
 
 ### Colors
 
-<Story id="typography-typography--colors" />
+<Canvas of={ComponentStories.Colors} />
 
 ### Token property
 
@@ -102,22 +103,22 @@ const myToken = {
 }
 ```
 
-<Story id="typography-typography--token-property" />
+<Canvas of={ComponentStories.TokenProperty} />
 
 ### Lines
 
-<Story id="typography-typography--lines" />
+<Canvas of={ComponentStories.Lines} />
 
 ### Link
 Link used in body of text.
 
-<Story id="typography-typography--link" />
+<Canvas of={ComponentStories.Link} />
 
 ### Using the 'as' prop to render as another component
 
 The `as` prop allows you to render `Typography` as another html element or even react component. 
 
-<Story id="typography-typography--as" />
+<Canvas of={ComponentStories.As} />
 
 This is useful if you want to use `Typography` with a third party routing library such as react-router.
 

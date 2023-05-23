@@ -1,5 +1,6 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Search } from '.'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './Search.stories'
 
 # Search
 
@@ -13,8 +14,7 @@ Allows users to locate or refine content based on simple words or phrases.
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 ></Links>
 
-<Story id="inputs-search--introduction" />
-<PropsTable />
+<Primary />
 
 ## Usage
 
@@ -33,20 +33,20 @@ import { Search } from '@equinor/eds-core-react'
 * Use either a `label` or `aria-label` for description of whats being searched
 * `Search` should be used inside a `form`
 
-<Story id="inputs-search--accessibility" />
+<Canvas of={ComponentStories.Accessibility} />
 
 ## Examples
 
 ### Disabled
 
-<Story id="inputs-search--disabled" />
+<Canvas of={ComponentStories.Disabled} />
 
 ### Controlled
 
-<Story id="inputs-search--controlled" />
+<Canvas of={ComponentStories.Controlled} />
 
 ### Compact
 
 Compact `Search` using `EdsProvider`.
 
-<Story id="inputs-search--compact" />
+<Canvas of={ComponentStories.Compact} />
