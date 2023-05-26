@@ -907,6 +907,10 @@ export const SelectAll: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
         options={optionsWithAll}
         selectedOptions={selectedItems}
         onOptionsChange={onChange}
+        placeholder={`${
+          selectedItems.filter((o) => !(o.label === selectAllOption.label))
+            .length
+        }/ ${options.length} selected`}
         multiple
         optionLabel={optionLabel}
       />
