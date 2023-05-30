@@ -1,25 +1,28 @@
 import { Meta } from '@storybook/addon-docs'
+import { Unstyled } from '@storybook/blocks'
 import { Links, InfoCard, Stack } from '../../.storybook/components/'
 import { Typography, List, Card } from '../../src'
 
 <Meta title="Introduction" />
 
 # Equinor Design System Storybook
-
-<Typography variant="ingress" style={{marginTop:'24px'}}>This is the storybook for the <Typography link href="https://reactjs.org/">React</Typography> implementation of the Equinor Design System. Our goal is to create and provide building blocks & resources for web development in Equinor.</Typography>
+<Unstyled>
+  <Typography variant="ingress" style={{marginTop:'24px'}}>This is the storybook for the <Typography link href="https://reactjs.org/">React</Typography> implementation of the Equinor Design System. Our goal is to create and provide building blocks & resources for web development in Equinor.</Typography>
+</Unstyled> 
 
 ![license](https://img.shields.io/github/license/equinor/design-system)
 ![github stars](https://img.shields.io/github/stars/equinor/design-system?style=social)
+<Unstyled>
+  <Stack direction="row" align="left" style={{marginBottom:'24px'}}>
+    <InfoCard title="How to get started" description="Read our README on how to get started with code & fonts" url="https://github.com/equinor/design-system" urlTitle="Get started"/>
 
-<Stack direction="row" align="left" style={{marginBottom:'24px'}}>
-<InfoCard title="How to get started" description="Read our README on how to get started with code & fonts" url="https://github.com/equinor/design-system" urlTitle="Get started"/>
+    <InfoCard title="Contribute" description="File a bug report, suggest a change, or open a pull request." url="https://github.com/equinor/design-system/issues/new/choose" urlTitle="Contribute"/>
 
-<InfoCard title="Contribute" description="File a bug report, suggest a change, or open a pull request." url="https://github.com/equinor/design-system/issues/new/choose" urlTitle="Contribute"/>
+    <InfoCard title="Guidelines" description="Read our documentation for components, guidelines and patterns" url="https://eds.equinor.com/" urlTitle="Read guidelines"/>
 
-<InfoCard title="Guidelines" description="Read our documentation for components, guidelines and patterns" url="https://eds.equinor.com/" urlTitle="Read guidelines"/>
-
-<InfoCard title="Icons" description="Explore icons in EDS library" url="/?path=/docs/icons--preview" urlTitle="Browse icons"/>
-</Stack>
+    <InfoCard title="Icons" description="Explore icons in EDS library" url="/?path=/docs/icons--preview" urlTitle="Browse icons"/>
+  </Stack>
+</Unstyled> 
 
 
 
