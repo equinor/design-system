@@ -325,7 +325,7 @@ export const All: StoryFn<ButtonProps> = () => (
       Disabled
     </Button>
     <Button variant="ghost_icon" aria-label="save action">
-      <Icon name="save" title="save action"></Icon>
+      <Icon data={save} title="save action"></Icon>
     </Button>
     <Button variant="ghost_icon" color="secondary" aria-label="save action">
       <Icon data={save}></Icon>

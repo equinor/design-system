@@ -7,6 +7,7 @@ import {
   Icon,
   Menu,
 } from '../../..'
+import { arrow_drop_down } from '@equinor/eds-icons'
 import { StoryFn, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Stack } from './../../../../.storybook/components'
@@ -95,7 +96,7 @@ export const Split: StoryFn<ButtonGroupProps> = () => {
         onClick={() => (isOpen ? closeMenu() : openMenu())}
         style={{ padding: '0 4px' }}
       >
-        <Icon name="arrow_drop_down" title="arrow_down"></Icon>
+        <Icon data={arrow_drop_down} title="arrow_down"></Icon>
       </Button>
       <Menu
         open={isOpen}
