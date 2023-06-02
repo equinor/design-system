@@ -32,7 +32,7 @@ import { Menu } from '@equinor/eds-core-react'
 
 const Demo = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)

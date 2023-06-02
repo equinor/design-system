@@ -67,7 +67,7 @@ const onClick = (event: React.MouseEvent) => {
 
 export const Introduction: StoryFn<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -116,7 +116,7 @@ Introduction.args = {
 
 export const Complex: StoryFn<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -256,7 +256,7 @@ export const Complex: StoryFn<MenuProps> = () => {
 export const Compact: StoryFn<MenuProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -302,7 +302,7 @@ export const Compact: StoryFn<MenuProps> = () => {
 
 export const StaysOpen: StoryFn<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [optionOne, setOptionOne] = useState<boolean>(false)
   const [optionTwo, setOptionTwo] = useState<boolean>(false)
   const [optionThree, setOptionThree] = useState<boolean>(false)
@@ -398,7 +398,7 @@ StaysOpen.args = {
 
 export const MatchWidth: StoryFn<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -441,7 +441,7 @@ export const MatchWidth: StoryFn<MenuProps> = () => {
 
 export const AsLink: StoryFn<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)
