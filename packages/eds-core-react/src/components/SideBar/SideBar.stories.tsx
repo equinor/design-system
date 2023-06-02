@@ -162,7 +162,7 @@ export const CustomContent: StoryFn<SidebarType> = () => {
 
 export const WithButton: StoryFn<SidebarType> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setIsOpen(true)

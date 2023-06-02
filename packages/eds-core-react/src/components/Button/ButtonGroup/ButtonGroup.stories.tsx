@@ -67,7 +67,7 @@ export const Vertical: StoryFn<ButtonGroupProps> = () => (
 export const Split: StoryFn<ButtonGroupProps> = () => {
   const options = ['Create task', 'Update task', 'Delete task']
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const handleMenuItemClick = (event: React.MouseEvent, index: number) => {
