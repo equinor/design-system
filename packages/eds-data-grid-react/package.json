@@ -1,0 +1,31 @@
+{
+  "name": "@equinor/eds-data-grid-react",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system",
+    "directory": "packages/eds-core-react"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
+  },
+  "keywords": [
+    "eds",
+    "design system",
+    "equinor",
+    "react",
+    "data grid"
+  ],
+  "engines": {
+    "pnpm": ">=4",
+    "node": ">=10.0.0"
+  },
+  "browserslist": "defaults, not IE 11"
+}
