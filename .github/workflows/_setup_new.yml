@@ -54,7 +54,7 @@ jobs:
         name: Checkout files
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          BRANCH="${GITHUB_REF/#refs\/heads\//}" .
+          BRANCH="${GITHUB_REF/#refs\/heads\//}"
 
           # Reference https://github.com/actions/checkout/issues/172
           # Following code is based on logs of actions/checkout@v, with sparseCheckout stuff inserted in the middle
