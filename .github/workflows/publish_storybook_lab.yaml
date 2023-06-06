@@ -1,20 +1,11 @@
-name: Publish core-react storybook on new subscription
+name: Publish lab storybook
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment for the core-react storybook'
-        required: false
-        type: choice
-        options:
-          - development
-          - production
-        default: 'development'
   push:
     branches:
-      - develop
+      - master
     paths:
-      - 'packages/eds-core-react/**'
+      - 'packages/eds-lab-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
 
@@ -27,7 +18,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-utils
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -48,21 +39,19 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          key: ${{ github.sha }}-dist-production-lab-storybook
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
         id: build-storybook
         run: |
-          echo Running build:storybook!
-          node_modules/.bin/pnpm build:storybook
+          echo Running build:storybook:lab!
+          node_modules/.bin/pnpm build:storybook:lab
   publish-storybook:
     needs: [setup, packages]
     name: Build & Deploy Website
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.event.inputs.environment || 'development' }}
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
@@ -71,29 +60,19 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          key: ${{ github.sha }}-dist-production-lab-storybook
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
-          folder: 'packages/eds-core-react/storybook-build'
+          folder: 'packages/eds-lab-react/storybook-build'
           public-access-policy: 'container'
-          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
+          connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  purge-cdn:
-    if: github.event.inputs.environment == 'production'
-    needs: [publish-storybook]
-    name: Purge cdn
-    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
-    secrets: inherit
-    with:
-      environment: production
-      cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
-      cdnEndpointName: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
-      azureResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}
+

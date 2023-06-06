@@ -11,7 +11,7 @@ env:
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
     with:
       cacheKey: ${{ github.sha }}-setup-tokens
       checkout_paths: packages/eds-tokens
@@ -36,7 +36,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-tokens
+          key: ${{ github.sha }}-dist-production-tokens
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
@@ -59,7 +59,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-tokens
+          key: ${{ github.sha }}-dist-production-tokens
       - name: Publish to npm
         id: publish-to-npm
         run: |

@@ -6,20 +6,16 @@ on:
         description: 'Tag for npm packages (next | latest)'
         required: true
         default: 'next'
-      storybook-slot:
-        description: 'Slot for Storybook (development | production | lab | test)'
-        required: false
-        default: 'development'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
+    secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages
-      stage: ${{ github.event.inputs.storybook-slot }}
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
     name: Process packages
@@ -41,7 +37,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
@@ -69,7 +65,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -93,7 +89,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -117,7 +113,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -141,7 +137,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -153,20 +149,6 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  # TODO: To be deleted once new storybook is being used
-  publish-old-storybook-lab:
-    name: Publish Storybook
-    needs: [publish-lab-package, setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
-    with:
-      stage: lab
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
-      dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
-    secrets:
-      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   publish-storybook-lab:
     needs: [setup, packages]
     name: Build & Deploy Website
@@ -179,7 +161,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-lab-storybook
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
@@ -206,7 +188,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -218,20 +200,6 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  # TODO: Delete once new storybook is being used
-  publish-old-storybook:
-    name: Publish Storybook
-    needs: [publish-core-package, setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
-    with:
-      stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
-      dockerfilePath: './packages/eds-core-react/Dockerfile.storybook'
-    secrets:
-      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   publish-storybook:
     needs: [setup, packages]
     name: Build & Deploy Website
@@ -244,7 +212,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          key: ${{ github.sha }}-dist-production-all-packages
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
