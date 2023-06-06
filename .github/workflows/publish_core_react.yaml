@@ -18,6 +18,8 @@ on:
           - development
           - production
         default: 'development'
+permissions:
+  id-token: write
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 

@@ -17,7 +17,8 @@ on:
       - 'packages/eds-core-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
-
+permissions:
+  id-token: write
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
