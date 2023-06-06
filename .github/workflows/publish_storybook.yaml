@@ -1,32 +1,41 @@
-name: Publish storybook
+name: Publish core-react storybook
 on:
   workflow_dispatch:
     inputs:
-      storybook-slot:
-        description: 'Slot for Storybook (development | production | lab | test)'
+      environment:
+        description: 'Environment for the core-react storybook'
         required: false
+        type: choice
+        options:
+          - development
+          - production
         default: 'development'
   push:
     branches:
       - develop
     paths:
       - 'packages/eds-core-react/**'
-      - 'packages/eds-lab-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
+permissions:
+  id-token: write
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
+    secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
-      stage: ${{ github.event.inputs.storybook-slot }}
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-utils
   packages:
     name: Process packages
     runs-on: ubuntu-latest
     needs: [setup]
     steps:
       - name: Use "setup" cache
+        id: get-setup-cache
         uses: actions/cache@v3
         with:
           path: |
@@ -34,34 +43,58 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Use "dist" cache
+        id: use-dist-cache
         uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
       - name: Build packages
+        id: build-packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
-        # Using this if statement as steps.if does not work with "needs.setup.outputs.stage" value
+        id: build-storybook
         run: |
-          if [[ ${{ needs.setup.outputs.stage }} == lab ]]; then
-            echo Running build:storybook:lab!
-            node_modules/.bin/pnpm build:storybook:lab
-          else
-            echo Running build:storybook!
-            node_modules/.bin/pnpm build:storybook
-          fi
+          echo Running build:storybook!
+          node_modules/.bin/pnpm build:storybook
   publish-storybook:
     needs: [setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+    name: Build & Deploy Website
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment || 'development' }}
+    steps:
+      - name: Use cache with storybook files
+        id: use-cache-storybook
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+      - name: Deploy the website
+        id: deploy-website
+        uses: tibor19/static-website-deploy@v2
+        with:
+          enabled-static-website: 'true'
+          folder: 'packages/eds-core-react/storybook-build'
+          public-access-policy: 'container'
+          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
+  purge-cdn:
+    if: github.event.inputs.environment == 'production'
+    needs: [publish-storybook]
+    name: Purge cdn
+    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    secrets: inherit
     with:
-      stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
-      # For some reason using "needs.setup.outputs.stage" does not work so using "github.event.inputs.storybook-slot" instead
-      dockerfilePath: ${{  github.event.inputs.storybook-slot == 'lab' && './packages/eds-lab-react/Dockerfile.storybook' || './packages/eds-core-react/Dockerfile.storybook' }}
-    secrets:
-      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      environment: production
+      cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
+      cdnEndpointName: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
+      azureResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}

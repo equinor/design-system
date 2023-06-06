@@ -102,20 +102,6 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  # TODO: Delete when new storybook is being used
-  #publish-old-storybook:
-  #  name: Publish Storybook
-  #  needs: [setup, packages]
-  #  uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
-  #  with:
-  #    stage: ${{ needs.setup.outputs.stage }}
-  #    cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
-  #    dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
-  #  secrets:
-  #    REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-  #    REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-  #    REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-  #    AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   publish-storybook:
     needs: [setup, packages]
     name: Publish Storybook
