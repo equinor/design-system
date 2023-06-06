@@ -14,7 +14,7 @@ env:
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
@@ -75,4 +75,3 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-

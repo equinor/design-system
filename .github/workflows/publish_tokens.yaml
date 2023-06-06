@@ -11,7 +11,7 @@ env:
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup_new.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
     with:
       cacheKey: ${{ github.sha }}-setup-tokens
       checkout_paths: packages/eds-tokens
