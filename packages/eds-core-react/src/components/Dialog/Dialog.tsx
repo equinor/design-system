@@ -43,10 +43,19 @@ export type DialogProps = {
   open: boolean
   /** callback to handle closing scrim */
   onClose?: () => void
+  /** Wheter the dialog should return focus to the previous focused element */
+  returnFocus?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
-  { children, open, onClose, isDismissable = false, ...props },
+  {
+    children,
+    open,
+    onClose,
+    isDismissable = false,
+    returnFocus = true,
+    ...props
+  },
   ref,
 ) {
   const { density } = useEds()
@@ -71,7 +80,11 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
       <ThemeProvider theme={token}>
         {open && (
           <Scrim open isDismissable={isDismissable} onClose={handleDismiss}>
-            <FloatingFocusManager context={context} modal returnFocus>
+            <FloatingFocusManager
+              context={context}
+              modal
+              returnFocus={returnFocus}
+            >
               <StyledDialog elevation="above_scrim" {...rest} ref={dialogRef}>
                 {children}
               </StyledDialog>
