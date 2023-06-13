@@ -26,7 +26,7 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "rollup -c && tsc -p tsconfig.build.json",
+    "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
@@ -42,9 +42,9 @@
   ],
   "devDependencies": {
     "@mdx-js/react": "1.6.22",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.1",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "@storybook/addon-a11y": "^7.0.11",
     "@storybook/addon-actions": "^7.0.11",
     "@storybook/addon-docs": "^7.0.11",
@@ -77,7 +77,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "remark-gfm": "^3.0.1",
-    "rollup": "^2.79.1",
+    "rollup": "^3.25.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^7.0.11",
