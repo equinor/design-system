@@ -2,6 +2,13 @@ import { useState, useCallback } from 'react'
 import styled, { css } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import {
+  more_vertical,
+  place,
+  calendar_date_range,
+  file_description,
+  label,
+} from '@equinor/eds-icons'
+import {
   SideSheet,
   SideSheetProps,
   Checkbox,
@@ -18,6 +25,16 @@ import { toCellValues } from '../../stories/toCellValues'
 import { data, columns } from '../../stories/data'
 import { StoryFn, Meta } from '@storybook/react'
 import page from './SideSheet.docs.mdx'
+
+const icons = {
+  more_vertical,
+  place,
+  calendar_date_range,
+  file_description,
+  label,
+}
+
+Icon.add(icons)
 
 const meta: Meta<typeof SideSheet> = {
   title: 'Surfaces/SideSheet',
