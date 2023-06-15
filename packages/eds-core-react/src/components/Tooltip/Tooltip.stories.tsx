@@ -6,15 +6,12 @@ import {
   Table,
   Icon,
   Checkbox,
-  Dialog,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
 import { StoryFn, Meta } from '@storybook/react'
 import { explore } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Tooltip.docs.mdx'
-import styled from 'styled-components'
-import { useState } from 'react'
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Data Display/Tooltip',
@@ -37,14 +34,6 @@ const meta: Meta<typeof Tooltip> = {
     },
   ],
 }
-
-const Wrapper = styled.div`
-  display: grid;
-  column-gap: 16px;
-  grid-template-columns: repeat(2, auto);
-  justify-content: end;
-  justify-self: end;
-`
 
 export default meta
 
@@ -180,36 +169,3 @@ export const TooltipOnButton: StoryFn<TooltipProps> = () => (
   </>
 )
 TooltipOnButton.storyName = 'Tooltip on disabled Button'
-
-export const TooltipOnButtonWithDialog: StoryFn<TooltipProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const handleOpen = () => {
-    setIsOpen(true)
-  }
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-  return (
-    <>
-      <Tooltip title="Click to open dialog">
-        <Button onClick={handleOpen}>Click me</Button>
-      </Tooltip>
-      <Dialog
-        open={isOpen}
-        onClose={handleClose}
-        isDismissable
-        returnFocus={false}
-      >
-        <Dialog.Header>
-          <Dialog.Title>Close me</Dialog.Title>
-        </Dialog.Header>
-        <Dialog.Actions>
-          <Wrapper>
-            <Button onClick={handleClose}>Close</Button>
-          </Wrapper>
-        </Dialog.Actions>
-      </Dialog>
-    </>
-  )
-}
-TooltipOnButtonWithDialog.storyName = 'Tooltip on Button with dialog'
