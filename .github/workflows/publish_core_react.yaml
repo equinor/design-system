@@ -149,6 +149,6 @@ jobs:
     secrets: inherit
     with:
       environment: production
-      cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
-      cdnEndpointName: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
-      azureResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}
+      cdnProfileName: ${{ env.AZURE_CDN_PROFILE_NAME }}
+      cdnEndpointName: ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }}
+      azureResourceGroup: ${{ env.AZURE_RESOURCE_GROUP }}
