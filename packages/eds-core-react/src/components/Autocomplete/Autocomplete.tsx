@@ -44,6 +44,7 @@ import {
   useFloating,
   useInteractions,
   FloatingPortal,
+  MiddlewareState,
 } from '@floating-ui/react'
 
 const Container = styled.div`
@@ -554,11 +555,10 @@ function AutocompleteInner<T>(
       flip(),
       shift({ padding: 8 }),
       size({
-        apply({ rects, availableHeight, elements }) {
+        apply({ rects, elements }: MiddlewareState) {
           const anchorWidth = `${rects.reference.width}px`
           Object.assign(elements.floating.style, {
             width: `${autoWidth ? anchorWidth : 'auto'}`,
-            maxHeight: `${availableHeight}px`,
           })
         },
         padding: 10,
