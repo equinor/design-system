@@ -60,14 +60,14 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
 ) {
   const { density } = useEds()
   const token = useToken({ density }, dialogToken)
-  const { floating, context } = useFloating()
+  const { refs, context } = useFloating()
   const handleDismiss = () => {
     onClose && onClose()
   }
 
   const dialogRef = useMemo(
-    () => mergeRefs<HTMLDivElement>(floating, ref),
-    [floating, ref],
+    () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
+    [refs.setFloating, ref],
   )
 
   const rest = {
