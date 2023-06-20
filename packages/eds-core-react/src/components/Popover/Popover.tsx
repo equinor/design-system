@@ -117,13 +117,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const {
       x,
       y,
-      reference,
-      floating,
+      refs,
       strategy,
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
       placement: finalPlacement,
     } = useFloating({
+      elements: {
+        reference: anchorEl,
+      },
       placement,
       open,
       onOpenChange: onClose,
@@ -136,13 +138,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       whileElementsMounted: autoUpdate,
     })
 
-    useEffect(() => {
-      reference(anchorEl)
-    }, [anchorEl, reference])
-
     const popoverRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(floating, ref),
-      [floating, ref],
+      () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
+      [refs.setFloating, ref],
     )
 
     const { getFloatingProps } = useInteractions([useDismiss(context)])
