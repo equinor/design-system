@@ -162,7 +162,6 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
       ...floatingMiddleware,
       size({
         apply({ rects, elements }: MiddlewareState) {
-          console.log(elements, rects)
           Object.assign(elements.floating.style, {
             width: `${rects.reference.width}px`,
           })
