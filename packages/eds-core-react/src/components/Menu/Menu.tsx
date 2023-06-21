@@ -24,6 +24,7 @@ import {
   FloatingPortal,
   size,
   Middleware,
+  MiddlewareState,
 } from '@floating-ui/react'
 
 type MenuPaperProps = {
@@ -160,7 +161,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     floatingMiddleware = [
       ...floatingMiddleware,
       size({
-        apply({ rects, elements }) {
+        apply({ rects, elements }: MiddlewareState) {
           Object.assign(elements.floating.style, {
             width: `${rects.reference.width}px`,
           })
@@ -169,21 +170,19 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     ]
   }
 
-  const { x, y, reference, floating, refs, update, strategy, context } =
-    useFloating({
-      placement,
-      open,
-      onOpenChange: onClose,
-      middleware: floatingMiddleware,
-    })
-
-  useEffect(() => {
-    reference(anchorEl)
-  }, [anchorEl, reference])
+  const { x, y, refs, update, strategy, context } = useFloating({
+    elements: {
+      reference: anchorEl,
+    },
+    placement,
+    open,
+    onOpenChange: onClose,
+    middleware: floatingMiddleware,
+  })
 
   const popoverRef = useMemo(
-    () => mergeRefs<HTMLDivElement>(floating, ref),
-    [floating, ref],
+    () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
+    [refs.setFloating, ref],
   )
   useIsomorphicLayoutEffect(() => {
     if (refs.reference.current && refs.floating.current && open) {

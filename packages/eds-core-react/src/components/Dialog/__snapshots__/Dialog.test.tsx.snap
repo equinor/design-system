@@ -88,7 +88,7 @@ exports[`Dialog Matches snapshot 1`] = `
   data-testid="dialog"
   open=""
   role="dialog"
-  tabindex="0"
+  tabindex="-1"
 >
   <div
     class="c2"

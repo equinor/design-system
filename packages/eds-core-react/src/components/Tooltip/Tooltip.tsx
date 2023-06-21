@@ -94,8 +94,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const {
       x,
       y,
-      reference,
-      floating,
+      refs,
       strategy,
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
@@ -113,12 +112,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       whileElementsMounted: autoUpdate,
     })
     const anchorRef = useMemo(
-      () => mergeRefs<HTMLElement>(reference, children?.ref),
-      [reference, children?.ref],
+      () => mergeRefs<HTMLElement>(refs.setReference, children?.ref),
+      [refs.setReference, children?.ref],
     )
     const tooltipRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(floating, ref),
-      [floating, ref],
+      () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
+      [refs.setFloating, ref],
     )
 
     const { getReferenceProps, getFloatingProps } = useInteractions([
