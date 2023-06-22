@@ -48,7 +48,7 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
 
   const handleMouseClose = (event: MouseEvent) => {
     if (event && event.target === scrimRef.current) {
-      if (event.type === 'click' && isDismissable && open) {
+      if (event.type === 'mousedown' && isDismissable && open) {
         onClose && onClose()
       }
     }
@@ -61,7 +61,7 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   return (
     <StyledScrim
       lockScroll
-      onClick={handleMouseClose}
+      onMouseDown={handleMouseClose}
       ref={combinedScrimRef}
       {...rest}
     >
