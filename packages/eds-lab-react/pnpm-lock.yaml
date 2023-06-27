@@ -38,8 +38,8 @@ dependencies:
 
 devDependencies:
   '@mdx-js/react':
-    specifier: 1.6.22
-    version: 1.6.22(react@18.2.0)
+    specifier: 2.3.0
+    version: 2.3.0(react@18.2.0)
   '@rollup/plugin-babel':
     specifier: ^6.0.3
     version: 6.0.3(@babel/core@7.22.5)(rollup@3.25.1)
@@ -2506,14 +2506,6 @@ packages:
 
   /@juggle/resize-observer@3.4.0:
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
-    dev: true
-
-  /@mdx-js/react@1.6.22(react@18.2.0):
-    resolution: {integrity: sha512-TDoPum4SHdfPiGSAaRBw7ECyI8VaHpK8GJugbJIJuqyh6kzw9ZLJZW3HGL3NNrJGxcAixUvqROm+YuQOo5eXtg==}
-    peerDependencies:
-      react: ^16.13.1 || ^17.0.0
-    dependencies:
-      react: 18.2.0
     dev: true
 
   /@mdx-js/react@2.3.0(react@18.2.0):
