@@ -1,0 +1,27 @@
+name: Purge CDN
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment for Storybook (development | production)'
+        required: false
+        type: choice
+        options:
+          - development
+          - production
+        default: 'development'
+permissions:
+  id-token: write
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+jobs:
+  purge-cdn:
+    if: github.event.inputs.environment == 'production'
+    name: Purge cdn
+    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    secrets: inherit
+    with:
+      environment: production
+      cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
+      cdnEndpointName: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
+      azureResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}
