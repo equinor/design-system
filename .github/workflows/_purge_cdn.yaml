@@ -5,15 +5,14 @@ on:
       environment:
         type: string
         required: true
-      cdnProfileName:
-        type: string
-        required: true
-      cdnEndpointName:
-        type: string
-        required: true
-      azureResourceGroup:
-        type: string
-        required: true
+# Because of limitations in how to set environment context when calling reusable workflows,
+# we are using ENV variables directly in this one. Not pretty, but it works.
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  AZURE_CDN_PROFILE_NAME: ${{ vars.AZURE_CDN_PROFILE_NAME }}
+  AZURE_CDN_ENDPOINT_NAME: ${{ vars.AZURE_CDN_ENDPOINT_NAME }}
+  AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
 jobs:
   purge:
     name: Purge the cdn to refresh cache
@@ -28,12 +27,12 @@ jobs:
           allow-no-subscriptions: true
       - name: debug
         shell: bash
-        run: echo "Profile name - ${{ inputs.cdnProfileName }}"
+        run: echo "Profile name - ${{ env.AZURE_CDN_PROFILE_NAME }}"
       - name: Purge CDN endpoint 🚮
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ inputs.cdnProfileName }} --name ${{ inputs.cdnEndpointName }} --resource-group ${{ inputs.azureResourceGroup }}
+            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --name ${{ env.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
       - name: logout 🔓
         run: |
           az logout
