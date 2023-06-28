@@ -1,0 +1,118 @@
+import { Links, PropsTable } from "../.storybook/components"
+import { Primary, Canvas } from '@storybook/blocks'
+import * as ComponentStories from './EdsDataGrid.stories'
+
+# DataGrid
+
+An abstraction created for EDS' [Table](https://eds.equinor.com/0b0c666ab/p/392109-table/b/398446) component to simplify the process of adding more functionality while keeping in line with EDS' guidelines.
+
+Features:
+- Sorting
+- Filtering
+- Pagination
+- Virtualization
+- Toggleable columns
+- Customizable column headers
+- Column grouping
+- Column resizing
+- ++
+
+
+
+<Links
+    ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/table/"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17481%3A1541"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/392109-table/b/398446"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Table/Table.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Primary />
+<PropsTable />
+
+## Usage
+
+Datagrid built as an abstraction over EDS' [Table](https://eds.equinor.com/0b0c666ab/p/392109-table/b/398446) component.
+Uses [Tanstack's React Table](https://tanstack.com/table/v8/docs/api/introduction) under the hood to add functionality such as sorting, filtering, pagination, etc.
+
+```tsx
+import { EdsDataGrid } from '@equinor/eds-data-grid'
+import { createColumnHelper } from '@tanstack/react-table';
+
+type Fruit = {
+  itemNo: string;
+  name: string;
+  price: number;
+}
+
+const Demo = () => {
+
+  const helper = createColumnHelper<Fruit>();
+  const columns = [helper.accessor('itemNo', { header: 'Item no.' }), helper.accessor('name', { header: 'Name' }), helper.accessor('price', { header: 'Price' })]
+  const rows: Array<Fruit> = [
+    { itemNo: '123-456', name: 'Kiwi', price: 1.5 },
+    { itemNo: '789-012', name: 'Apple', price: 0.5 },
+    { itemNo: '345-678', name: 'Mango', price: 2.5 }
+  ];
+
+    return (
+      <EdsDataGrid columns={columns} rows={rows} />
+    )
+}
+```
+
+## Examples
+
+### With paginator
+
+<Canvas of={ComponentStories.Paging} />
+
+### Column ordering
+
+<Canvas of={ComponentStories.ColumnOrdering} />
+
+### Virtualization
+
+Allows to render very large datasets. Uses <a href="https://tanstack.com/virtual/v3">react-virtual</a> under the hood.
+Will automatically handle density changes, but requires a fixed table height (falls back on 500px if virtualHeight is not provided).
+
+<Canvas of={ComponentStories.Virtualization} />
+
+### Toggleable columns
+
+Allows the user to hide/show columns.
+
+<Canvas of={ComponentStories.HideShowColumns} />
+
+### Sorting
+
+Comes with sorting built-in, and uses default sort functions. Can be overridden on a per-column basis.
+See [https://tanstack.com/table/v8/docs/api/features/sorting](Tanstack docs for more)
+
+<Canvas of={ComponentStories.Sortable} />
+
+### Filtering
+
+Comes with prebuilt functionality for column filtering, defaulting to range (from - to) for numbers and multi-select for strings.
+
+<Canvas of={ComponentStories.ColumnFiltering} />
+
+### Resizing
+
+Columns can be resized by dragging the right edge of the column header.
+
+<Canvas of={ComponentStories.ColumnResize} />
+
+### Column grouping
+
+<Canvas of={ComponentStories.ColumnGrouping} />
+
+### Styling
+
+Comes with 4 different ways of styling built in:
+- rowClass: Allows to add a class to a row (tr) based on a function
+- cellClass: Allows to add a class to a cell (td) based on a function
+- rowStyle: Allows to add custom css to a row (tr) based on a function
+- cellStyle: Allows to add custom css to a cell (td) based on a function
+
+<Canvas of={ComponentStories.Styling} />
