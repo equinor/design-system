@@ -14,6 +14,7 @@ permissions:
   id-token: write
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  CDN_PROFILE_NAME: ${{ vars.AZURE_CDN_PROFILE_NAME }}
 jobs:
   purge-cdn:
     if: github.event.inputs.environment == 'production'
@@ -22,6 +23,6 @@ jobs:
     secrets: inherit
     with:
       environment: production
-      cdnProfileName: ${{ vars.AZURE_CDN_PROFILE_NAME }}
+      cdnProfileName: ${{ env.CDN_PROFILE_NAME }}
       cdnEndpointName: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
       azureResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}
