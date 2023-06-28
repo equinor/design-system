@@ -3,8 +3,8 @@
   "version": "0.7.0",
   "description": "Utility functions and hooks for the Equinor Design System",
   "sideEffects": false,
-  "exports": "./dist/esm/index.js",
-  "type": "module",
+  "main": "dist/eds-utils.cjs.js",
+  "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "author": {
