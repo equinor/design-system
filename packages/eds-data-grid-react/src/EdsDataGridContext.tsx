@@ -1,5 +1,5 @@
 import { createContext, CSSProperties, ReactElement, useContext } from 'react'
-import { Row, Table as TanStackTable } from '@tanstack/react-table'
+import { Column, Row, Table as TanStackTable } from "@tanstack/react-table";
 import { Photo } from './stories/columns'
 
 type Context<T> = {
@@ -11,6 +11,8 @@ type Context<T> = {
   rowClass?: (row: Row<T>) => string
   cellStyle?: (row: Row<T>, columnId: string) => CSSProperties
   rowStyle?: (row: Row<T>) => CSSProperties
+  headerClass?: (column: Column<T>) => string
+  headerStyle?: (column: Column<T>) => CSSProperties
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

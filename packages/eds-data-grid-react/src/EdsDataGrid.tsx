@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+  Column,
   ColumnDef,
   ColumnFiltersState,
   ColumnResizeMode,
@@ -152,6 +153,16 @@ export type EdsDataGridProps<T> = {
    * @param row
    */
   rowStyle?: (row: Row<T>) => CSSProperties
+  /**
+   * Function that can be used to set custom classes on a header cell
+   * @param column
+   */
+  headerClass?: (column: Column<T>) => string
+  /**
+   * Function that can be used to set custom styles on a header cell
+   * @param column
+   */
+  headerStyle?: (column: Column<T>) => CSSProperties
 }
 
 export function EdsDataGrid<T>({
@@ -178,6 +189,8 @@ export function EdsDataGrid<T>({
   cellStyle,
   rowClass,
   rowStyle,
+  headerClass,
+  headerStyle,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -375,6 +388,8 @@ export function EdsDataGrid<T>({
       cellStyle={cellStyle}
       rowClass={rowClass}
       rowStyle={rowStyle}
+      headerClass={headerClass}
+      headerStyle={headerStyle}
       table={table}
       enableSorting={!!enableSorting}
       enableColumnFiltering={!!enableColumnFiltering}

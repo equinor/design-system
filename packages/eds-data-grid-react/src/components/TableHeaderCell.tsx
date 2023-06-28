@@ -62,10 +62,17 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
   const ctx = useTableContext()
   const table = ctx.table
   return header.isPlaceholder ? (
-    <Cell sticky={ctx.stickyHeader} aria-hidden={true} />
+    <Cell
+      sticky={ctx.stickyHeader}
+      className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
+      style={ctx.headerStyle ? ctx.headerStyle(header.column) : {}}
+      aria-hidden={true}
+    />
   ) : (
     <Cell
       sticky={ctx.stickyHeader}
+      className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
+      style={ctx.headerStyle ? ctx.headerStyle(header.column) : {}}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       {...{
         onClick: header.column.getToggleSortingHandler(),

@@ -5,7 +5,7 @@ import { data } from './stories/data'
 import { CSSProperties, useEffect, useState } from 'react'
 import { Button, Checkbox, Paper, Typography } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
-import { Row } from '@tanstack/react-table'
+import { Column, Row } from "@tanstack/react-table";
 import { tokens } from '@equinor/eds-tokens'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
@@ -169,6 +169,7 @@ Virtualization.args = {
 }
 
 export const Styling: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const borderColor = tokens.colors.ui.background__medium.rgba
   const rowClass = (row: Row<Photo>) => {
     const id = row.getValue<number>('id')
     if (id % 2 === 0) {
@@ -182,18 +183,17 @@ export const Styling: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   }
 
   const cellStyle = (row: Row<Photo>, columnId: string): CSSProperties => {
-    const column = columns.findIndex((c) => c.id === columnId)
-    return column % 2 === 0
-      ? {
-          backgroundColor:
-            tokens.colors.interactive.table__cell__fill_activated.rgba,
-        }
-      : {}
+    const css: CSSProperties = {}
+    if (columnId === 'id') {
+      css.borderLeft = `1px solid ${borderColor}`
+    }
+    css.borderRight = `1px solid ${borderColor}`
+    return css
   }
 
   const rowStyle = (row: Row<Photo>): CSSProperties => {
     const id = row.getValue<number>('id')
-    if (id % 2 === 0) {
+    if (id % 10 === 0) {
       return {
         backgroundColor:
           tokens.colors.interactive.table__cell__fill_activated.rgba,
@@ -202,9 +202,22 @@ export const Styling: StoryFn<EdsDataGridProps<Photo>> = (args) => {
     return {}
   }
 
+  const headerClass = (col: Column<Photo>) => col.id
+
+  const headerStyle = (col: Column<Photo>): CSSProperties => {
+    const css: CSSProperties = {}
+    if (col.id === 'id') {
+      css.borderLeft = `1px solid ${borderColor}`
+    }
+    css.borderRight = `1px solid ${borderColor}`
+    return css
+  }
+
   return (
     <EdsDataGrid
       cellClass={cellClass}
+      headerStyle={headerStyle}
+      headerClass={headerClass}
       cellStyle={cellStyle}
       rowClass={rowClass}
       rowStyle={rowStyle}
