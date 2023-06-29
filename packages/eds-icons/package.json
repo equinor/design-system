@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "0.19.2",
+  "version": "0.19.2-dev-29062023",
   "description": "Icons from the Equinor Design System",
   "main": "dist/icons.cjs.js",
   "module": "dist/esm/index.mjs",
