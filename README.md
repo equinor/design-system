@@ -138,7 +138,7 @@ See our [storybook](https://storybook.eds.equinor.com/) for more examples.
 
 Built on a copy of the Outlined Material Design icons, the icons have been customised and renamed for Equinor’s use and supplemented with our own icons for Equinor specific domains.
 
-All the icons are available in our [Storybook](https://storybook.eds.equinor.com/?path=/docs/icons--preview), and can also be installed from NPM.
+All the icons are available in our [Storybook](https://storybook.eds.equinor.com/?path=/docs/icons-preview--docs), and can also be installed from NPM.
 
 The following example uses the `<Icon>` component from `@equinor/eds-core-react` – but the icons package can also be used without React.
 
