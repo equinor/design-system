@@ -336,4 +336,51 @@ describe('EdsDataGrid', () => {
       expect(screen.getByTestId('virtual-padding-bottom')).toBeTruthy()
     })
   })
+
+  describe('Styling', () => {
+    it('should apply styling to the table', () => {
+      const cellStyle = () => ({ backgroundColor: 'red' })
+      const rowStyle = () => ({ backgroundColor: 'blue' })
+      const headerStyle = () => ({ backgroundColor: 'green' })
+      render(
+        <EdsDataGrid
+          cellStyle={cellStyle}
+          headerStyle={headerStyle}
+          rowStyle={rowStyle}
+          columns={columns}
+          rows={data}
+        />,
+      )
+      const firstBodyRow = screen.getAllByRole('row')[1]
+      expect(firstBodyRow.style.backgroundColor).toBe('blue')
+      expect(
+        within(firstBodyRow).getAllByRole('cell')[0].style.backgroundColor,
+      ).toBe('red')
+      expect(screen.getAllByRole('columnheader')[0].style.backgroundColor).toBe(
+        'green',
+      )
+    })
+
+    it('should apply classes to the table', () => {
+      const cellClass = () => 'cell-class'
+      const rowClass = () => 'row-class'
+      const headerClass = () => 'header-class'
+
+      render(
+        <EdsDataGrid
+          cellClass={cellClass}
+          rowClass={rowClass}
+          headerClass={headerClass}
+          columns={columns}
+          rows={data}
+        />,
+      )
+      const firstBodyRow = screen.getAllByRole('row')[1]
+      expect(firstBodyRow.classList.contains('row-class')).toBeTruthy()
+      const firstCell = within(firstBodyRow).getAllByRole('cell')[0]
+      expect(firstCell.classList.contains('cell-class')).toBeTruthy()
+      const firstHeader = screen.getAllByRole('columnheader')[0]
+      expect(firstHeader.classList.contains('header-class')).toBeTruthy()
+    })
+  })
 })

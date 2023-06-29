@@ -72,7 +72,6 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
     <Cell
       sticky={ctx.stickyHeader}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
-      style={ctx.headerStyle ? ctx.headerStyle(header.column) : {}}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       {...{
         onClick: header.column.getToggleSortingHandler(),
@@ -81,6 +80,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         style: {
           width: header.getSize(),
           verticalAlign: ctx.enableColumnFiltering ? 'baseline' : 'middle',
+          ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {})
         },
       }}
     >
