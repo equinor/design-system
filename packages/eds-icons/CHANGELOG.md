@@ -6,9 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.19.1] - 2023-03-14
+### Changed 
+- 📦️ Use .mjs file extension for es-modules in the build output, by @oddvernes in https://github.com/equinor/design-system/pull/2866
+
+## [0.19.1] - 2023-03-14
 
 ### Changed 
-- :arrow_up: Updated SVGO to version 3.0.2 (side effect: "z" in all svg paths changed to uppercase), by @oddvernes in https://github.com/equinor/design-system/pull/2799
+- ⬆️ Updated SVGO to version 3.0.2 (side effect: "z" in all svg paths changed to uppercase), by @oddvernes in https://github.com/equinor/design-system/pull/2799
 
 ## [0.19.0] - 2023-03-03
 
