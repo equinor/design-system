@@ -208,6 +208,9 @@ export function EdsDataGrid<T>({
   useEffect(() => {
     setVisible(columnVisibility ?? {})
   }, [columnVisibility, setVisible])
+  useEffect(() => {
+    setSelection(selectedRows ?? {})
+  }, [selectedRows])
 
   /**
    * By default, the filter-function accepts single-value filters. This adds multi-filter functionality out of the box.
