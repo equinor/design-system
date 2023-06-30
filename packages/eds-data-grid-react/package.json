@@ -16,6 +16,11 @@
     "name": "EDS Core Team",
     "email": "fg_eds@equinor.com"
   },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "styled-components": ">=4.2"
+  },
   "dependencies": {
     "@tanstack/react-table": "^8.8.5",
     "@tanstack/react-virtual": "^3.0.0-beta.54",
