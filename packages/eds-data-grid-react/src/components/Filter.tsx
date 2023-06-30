@@ -19,9 +19,9 @@ export function Filter<T = unknown>({ column, table }: FilterProps<T>) {
     () =>
       typeof firstValue === 'number'
         ? ([] as Array<never>)
-        : (Array.from(
-            column.getFacetedUniqueValues().keys(),
-          ).sort() as Array<string>),
+        : Array.from(column.getFacetedUniqueValues().keys())
+            .sort()
+            .map((v: string) => v ?? 'NULL_OR_UNDEFINED'),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [column.getFacetedUniqueValues()],
   )

@@ -199,20 +199,17 @@ export const data: Array<Photo> = [
     id: 28,
     title: 'non neque eligendi molestiae repudiandae illum voluptatem qui aut',
     url: 'https://via.placeholder.com/600/392537',
-    thumbnailUrl: 'https://via.placeholder.com/150/392537',
   },
   {
     albumId: 1,
     id: 29,
     title: 'aut ipsam quos ab placeat omnis',
     url: 'https://via.placeholder.com/600/602b9e',
-    thumbnailUrl: 'https://via.placeholder.com/150/602b9e',
   },
   {
     albumId: 1,
     id: 30,
     title: 'odio enim voluptatem quidem aut nihil illum',
     url: 'https://via.placeholder.com/600/372c93',
-    thumbnailUrl: 'https://via.placeholder.com/150/372c93',
   },
 ]

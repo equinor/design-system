@@ -46,7 +46,9 @@ export function DebouncedInput({
         <Autocomplete
           options={values}
           multiple={true}
-          optionComponent={(opt) => String(opt || '<Blank>')}
+          optionComponent={(opt) =>
+            opt === 'NULL_OR_UNDEFINED' ? '<Blank>' : opt
+          }
           data-testid={'autocomplete'}
           /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
           // @ts-ignore

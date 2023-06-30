@@ -231,7 +231,7 @@ export function EdsDataGrid<T>({
           ) {
             return true
           }
-          const value = row.getValue(columnId)
+          const value = row.getValue(columnId) ?? 'NULL_OR_UNDEFINED'
           if (Array.isArray(filterValue)) {
             const numeric = filterValue.some((v) => typeof v === 'number')
             if (numeric) {
