@@ -250,7 +250,7 @@ export function EdsDataGrid<T>({
         },
       } as ColumnDef<T>
     })
-  }, [debug, columns, enableColumnFiltering])
+  }, [debug, columns])
 
   /**
    * Set up default table options

@@ -5,7 +5,7 @@ import { data } from './stories/data'
 import { CSSProperties, useEffect, useState } from 'react'
 import { Button, Checkbox, Paper, Typography } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
-import { Column, Row } from "@tanstack/react-table";
+import { Column, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
@@ -159,7 +159,7 @@ export const Virtualization: StoryFn<EdsDataGridProps<Photo>> = (args) => {
       abortController.abort()
     }
   }, [])
-  return <EdsDataGrid {...args}  rows={data} />
+  return <EdsDataGrid {...args} rows={data} />
 }
 
 Virtualization.args = {

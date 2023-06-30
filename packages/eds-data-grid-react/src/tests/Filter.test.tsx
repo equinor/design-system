@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import {
   createTable,
   getCoreRowModel,
@@ -6,12 +6,12 @@ import {
   Table,
 } from '@tanstack/react-table'
 import { Filter } from '../components/Filter'
-import data from './data'
+import { data, Data } from './data'
 import { columns } from './columns'
 import userEvent from '@testing-library/user-event'
 
 describe('Filter', () => {
-  let table: Table<any>
+  let table: Table<Data>
   let filterChangeSpy: jest.SpyInstance
   beforeEach(() => {
     class ResizeObserver {
@@ -30,35 +30,35 @@ describe('Filter', () => {
 
     window.ResizeObserver = ResizeObserver
 
-    const onColumnFiltersChange = jest.fn()
-    const obj = { onColumnFiltersChange }
-    filterChangeSpy = jest.spyOn(obj, 'onColumnFiltersChange')
+    filterChangeSpy = jest.fn(() => null)
     table = createTable({
       getCoreRowModel: getCoreRowModel(),
       data,
       onStateChange: () => null,
-      columns: columns as any,
+      columns,
       state: {},
       renderFallbackValue: () => '',
       getFacetedMinMaxValues: getFacetedMinMaxValues(),
-      onColumnFiltersChange: filterChangeSpy as any,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      onColumnFiltersChange: filterChangeSpy,
     })
   })
   describe('Render', () => {
     it('should render', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('cargoId')!} table={table} />,
+        <Filter column={table.getColumn('cargoId')} table={table} />,
       )
       expect(baseElement).toBeTruthy()
     })
     it('should have 1 input for text-columns', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('status')!} table={table} />,
+        <Filter column={table.getColumn('status')} table={table} />,
       )
-      expect(baseElement.querySelectorAll('input').length).toBe(1)
+      expect(within(baseElement).getAllByRole('combobox').length).toBe(1)
     })
     it('should have 2 inputs for number-columns', () => {
-      render(<Filter column={table.getColumn('numeric')!} table={table} />)
+      render(<Filter column={table.getColumn('numeric')} table={table} />)
       expect(screen.queryAllByRole('spinbutton').length).toBe(2)
     })
   })
@@ -66,10 +66,10 @@ describe('Filter', () => {
   describe('onChange', () => {
     it('should emit changes on input', async () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('status')!} table={table} />,
+        <Filter column={table.getColumn('status')} table={table} />,
       )
-      const input = baseElement.querySelector('input')!
-      const col = table.getColumn('status')!
+      const input = within(baseElement).getByRole('combobox')
+      const col = table.getColumn('status')
       const spy = jest.spyOn(col, 'setFilterValue')
       await userEvent.type(input, '1234')
       setTimeout(() => {
@@ -88,10 +88,10 @@ describe('Filter', () => {
 
     it('should emit changes on change-event (text)', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('status')!} table={table} />,
+        <Filter column={table.getColumn('status')} table={table} />,
       )
-      const input = baseElement.querySelector('input')!
-      const col = table.getColumn('status')!
+      const input = within(baseElement).getByRole('combobox')
+      const col = table.getColumn('status')
       const spy = jest.spyOn(col, 'setFilterValue')
       fireEvent.change(input, { target: { value: '1234' } })
       setTimeout(() => {
@@ -102,10 +102,13 @@ describe('Filter', () => {
 
     it('should emit changes on change-event (numeric)', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('numeric')!} table={table} />,
+        <Filter column={table.getColumn('numeric')} table={table} />,
       )
-      const inputs = baseElement.querySelectorAll('input')!
-      const col = table.getColumn('numeric')!
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const inputs = within(baseElement).getAllByRole(
+        'spinbutton',
+      ) as Array<HTMLInputElement>
+      const col = table.getColumn('numeric')
       const spy = jest.spyOn(col, 'setFilterValue')
       fireEvent.change(inputs[0], { target: { value: '1234' } })
       fireEvent.change(inputs[1], { target: { value: '1234' } })
@@ -117,9 +120,12 @@ describe('Filter', () => {
 
   describe('Placeholders', () => {
     it('should have min/max for numeric', () => {
-      const col = table.getColumn('numeric')!
+      const col = table.getColumn('numeric')
       const { baseElement } = render(<Filter column={col} table={table} />)
-      const inputs = baseElement.querySelectorAll('input')!
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const inputs = within(baseElement).getAllByRole(
+        'spinbutton',
+      ) as Array<HTMLInputElement>
       const min = inputs[0]
       const max = inputs[1]
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -137,13 +143,17 @@ describe('Filter', () => {
         getCoreRowModel: getCoreRowModel(),
         data,
         onStateChange: () => null,
-        columns: columns as any,
+        columns: columns,
         state: {},
         renderFallbackValue: () => '',
       })
-      const col = table.getColumn('numeric')!
+      const col = table.getColumn('numeric')
       const { baseElement } = render(<Filter column={col} table={table} />)
-      const inputs = baseElement.querySelectorAll('input')!
+      // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const inputs = within(baseElement).getAllByRole(
+        'spinbutton',
+      ) as Array<HTMLInputElement>
       const min = inputs[0]
       const max = inputs[1]
       expect(min.placeholder).toBe(`Min `)

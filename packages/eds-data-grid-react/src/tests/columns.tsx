@@ -1,8 +1,14 @@
 import { CellContext, ColumnDef } from '@tanstack/react-table'
 
-type Cargo = any
+type Data = {
+  qty: number
+  cargoId: string
+  status: string
+  parcels: Array<string>
+  carrier: string
+}
 
-export const columns: Array<ColumnDef<Cargo, any>> = [
+export const columns: Array<ColumnDef<Data>> = [
   {
     accessorKey: 'cargoId',
     id: 'cargoId',
@@ -30,7 +36,7 @@ export const columns: Array<ColumnDef<Cargo, any>> = [
     accessorKey: 'parcels',
     enableColumnFilter: false,
     header: () => 'Parcels',
-    cell: (info: CellContext<Cargo, 'parcels'>) => (
+    cell: (info: CellContext<Data, 'parcels'>) => (
       <span>{info.getValue().length}</span>
     ),
     footer: (props) => props.column.id,

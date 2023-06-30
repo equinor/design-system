@@ -1,5 +1,4 @@
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import { Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 
@@ -43,7 +42,7 @@ export const columns: Array<ColumnDef<Photo>> = [
 
 export const columnTemplate: Array<ColumnDef<Photo>> = [
   helper.accessor('id', {
-    header: (col) => <span style={{ fontStyle: 'italic' }}>JSX</span>,
+    header: () => <span style={{ fontStyle: 'italic' }}>JSX</span>,
   }),
   helper.accessor('albumId', {
     header: 'Text',

@@ -80,7 +80,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         style: {
           width: header.getSize(),
           verticalAlign: ctx.enableColumnFiltering ? 'baseline' : 'middle',
-          ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {})
+          ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
         },
       }}
     >

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 
 import { EdsDataGrid } from '../EdsDataGrid'
 import { columns } from './columns'
-import data from './data'
+import { Data, data } from './data'
 
 describe('EdsDataGrid', () => {
   beforeEach(() => {
@@ -119,26 +119,26 @@ describe('EdsDataGrid', () => {
     it('should have built-in sorting if enabled', async () => {
       render(<EdsDataGrid enableSorting={true} columns={columns} rows={data} />)
       expect(
-        screen.getAllByRole('columnheader')[0]!.getAttribute('aria-sort'),
+        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
       ).toBe('none')
-      await userEvent.click(screen.getAllByRole('columnheader')[0]!)
+      await userEvent.click(screen.getAllByRole('columnheader')[0])
       expect(
-        screen.getAllByRole('columnheader')[0]!.getAttribute('aria-sort'),
+        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
       ).toBe('ascending')
-      await userEvent.click(screen.getAllByRole('columnheader')[0]!)
+      await userEvent.click(screen.getAllByRole('columnheader')[0])
       expect(
-        screen.getAllByRole('columnheader')[0]!.getAttribute('aria-sort'),
+        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
       ).toBe('descending')
     })
 
     it('should not have sorting if not set', async () => {
       render(<EdsDataGrid columns={columns} rows={data} />)
       expect(
-        screen.getAllByRole('columnheader')[0]!.getAttribute('aria-sort'),
+        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
       ).toBe('none')
-      await userEvent.click(screen.getAllByRole('columnheader')[0]!)
+      await userEvent.click(screen.getAllByRole('columnheader')[0])
       expect(
-        screen.getAllByRole('columnheader')[0]!.getAttribute('aria-sort'),
+        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
       ).toBe('none')
     })
   })
@@ -307,7 +307,7 @@ describe('EdsDataGrid', () => {
         />,
       )
       const thead = screen.getAllByRole('rowgroup')[0]
-      await userEvent.click(within(thead).getByRole('button')!)
+      await userEvent.click(within(thead).getByRole('button'))
       expect(stub).toHaveBeenCalled()
     })
   })
@@ -320,9 +320,9 @@ describe('EdsDataGrid', () => {
       ).toBeFalsy()
     })
     it('should show virtual scroll if specified', () => {
-      let manyRows: Array<unknown> = []
+      let manyRows: Array<Data> = []
       for (let i = 0; i < 200; i++) {
-        manyRows = [...manyRows, ...(data as Array<unknown>)]
+        manyRows = [...manyRows, ...data]
       }
       render(
         <EdsDataGrid enableVirtual={true} columns={columns} rows={manyRows} />,

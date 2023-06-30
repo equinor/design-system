@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from 'react'
 import { Autocomplete, EdsProvider, Input } from '@equinor/eds-core-react'
 
 type Value = string | number | Array<string | number>
@@ -38,7 +38,9 @@ export function DebouncedInput({
           type={'number'}
           placeholder={props.placeholder ?? 'Search'}
           value={value}
-          onChange={(e) => setValue(e.target.valueAsNumber)}
+          onChange={(e: ChangeEvent) =>
+            setValue((e.target as HTMLInputElement).valueAsNumber)
+          }
         />
       ) : (
         <Autocomplete

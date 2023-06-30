@@ -1,7 +1,13 @@
-type Cargo = any
+export type Data = {
+  qty: number
+  cargoId: string
+  status: string
+  parcels: Array<string>
+  carrier: string
+}
 
 const dataGenerator = (length = 20) => {
-  let data = []
+  let data: Array<Data> = []
   for (let i = 0; i < length; i++) {
     data = [
       ...data,
@@ -17,6 +23,4 @@ const dataGenerator = (length = 20) => {
   return data
 }
 
-const data = dataGenerator()
-
-export default data
+export const data = dataGenerator()

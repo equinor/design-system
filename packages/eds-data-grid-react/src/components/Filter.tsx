@@ -5,10 +5,9 @@ import { DebouncedInput } from './DebouncedInput'
 
 type FilterProps<T = unknown> = {
   column: Column<T>
-  table: TanStackTable<unknown>
+  table: TanStackTable<T>
 }
 
-// Having issues with adding coverage for this file. The coverage says onChange is not covered, but it is.
 export function Filter<T = unknown>({ column, table }: FilterProps<T>) {
   const firstValue = table
     .getPreFilteredRowModel()
@@ -16,11 +15,13 @@ export function Filter<T = unknown>({ column, table }: FilterProps<T>) {
 
   const columnFilterValue = column.getFilterValue()
 
-  const sortedUniqueValues = useMemo(
+  const sortedUniqueValues = useMemo<Array<string>>(
     () =>
       typeof firstValue === 'number'
-        ? []
-        : Array.from(column.getFacetedUniqueValues().keys()).sort(),
+        ? ([] as Array<never>)
+        : (Array.from(
+            column.getFacetedUniqueValues().keys(),
+          ).sort() as Array<string>),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [column.getFacetedUniqueValues()],
   )

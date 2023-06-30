@@ -10,7 +10,7 @@ type Props<T> = {
   headerGroup: HeaderGroup<T>
   columnResizeMode?: ColumnResizeMode | null
   deltaOffset: number | null
-  table: TanStackTable<any>
+  table: TanStackTable<T>
 }
 
 export function TableHeaderRow<T>({

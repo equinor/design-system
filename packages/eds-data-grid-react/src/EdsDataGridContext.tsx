@@ -1,6 +1,5 @@
 import { createContext, CSSProperties, ReactElement, useContext } from 'react'
-import { Column, Row, Table as TanStackTable } from "@tanstack/react-table";
-import { Photo } from './stories/columns'
+import { Column, Row, Table as TanStackTable } from '@tanstack/react-table'
 
 type Context<T> = {
   enableSorting: boolean
