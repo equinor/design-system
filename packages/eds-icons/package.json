@@ -1,15 +1,18 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "0.19.2-dev-03072023-2",
+  "version": "0.19.2-dev-03072023-3",
   "description": "Icons from the Equinor Design System",
   "type": "module",
   "exports": {
-    "node": {
-      "module": "./dist/esm/index.mjs",
-      "require": "./dist/icons.cjs"
-    },
-    "types": "./dist/types/index.d.ts",
-    "default": "./dist/esm/index.mjs"
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "default": "./dist/icons.cjs"
+      }
+    }
   },
   "license": "Apache-2.0",
   "author": {
