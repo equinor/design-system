@@ -31,7 +31,7 @@ export default [
         format: 'es',
         entryFileNames: '[name].mjs',
       },
-      { file: pkg.main, format: 'cjs' },
+      { file: pkg.exports.node.require, format: 'cjs' },
     ],
   },
 ]
