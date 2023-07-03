@@ -6,11 +6,11 @@
   "exports": {
     "node": {
       "module": "./dist/esm/index.mjs",
-      "require": "./dist/icons.cjs.js"
+      "require": "./dist/icons.cjs"
     },
+    "types": "./dist/types/index.d.ts",
     "default": "./dist/esm/index.mjs"
   },
-  "types": "dist/types/index.d.ts",
   "license": "Apache-2.0",
   "author": {
     "name": "EDS Core Team",
