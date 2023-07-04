@@ -115,20 +115,25 @@ export const HideShowColumns: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   const [visible, setVisible] = useState<{ [key in keyof Photo]?: boolean }>({})
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '200px auto' }}>
-      <Paper elevation={'none'}>
-        Visible columns:
-        <br />
+      <Paper
+        elevation={'none'}
+        style={{ display: 'flex', flexDirection: 'column' }}
+      >
+        <Typography
+          variant="body_short_bold"
+          style={{ padding: '16px 8px 0 16px' }}
+        >
+          Visible columns:
+        </Typography>
         {columns.map((col) => (
-          <>
-            <Checkbox
-              defaultChecked
-              label={col.id ?? 'F'}
-              onChange={(e) =>
-                setVisible({ ...visible, [col.id]: e.target.checked })
-              }
-            />
-            <br />
-          </>
+          <Checkbox
+            key={col.id}
+            defaultChecked
+            label={col.id ?? 'F'}
+            onChange={(e) =>
+              setVisible({ ...visible, [col.id]: e.target.checked })
+            }
+          />
         ))}
       </Paper>
       <EdsDataGrid
