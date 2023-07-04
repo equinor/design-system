@@ -1,10 +1,20 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Design tokens for the Equinor Design System",
-  "main": "dist/tokens.cjs.js",
-  "module": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/tokens.cjs",
+      "default": "./dist/tokens.cjs"
+    },
+    "./tokens.css": "./tokens.css",
+    "./elements.css": "./elements.css"
+  },
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/tokens.cjs",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
