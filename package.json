@@ -22,7 +22,7 @@
     "build:icons": "pnpm --filter @equinor/eds-icons run build",
     "build:storybook": "pnpm --filter @equinor/eds-core-react run build:storybook",
     "build:storybook:lab": "pnpm --filter @equinor/eds-lab-react run build:storybook",
-    "build:storybook:data-grid": "pnpm --filter @equinor/eds-data-grid-react run build:storybook",
+    "build:storybook:data-grid": "pnpm --filter ./packages/eds-data-grid-react run build:storybook",
     "test": "pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab && pnpm run test:data-grid-react",
     "test:core-react": "pnpm --filter @equinor/eds-core-react run test",
     "test:data-grid-react": "pnpm --filter @equinor/eds-core-react run test",
