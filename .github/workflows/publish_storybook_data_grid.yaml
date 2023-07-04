@@ -1,11 +1,11 @@
-name: Publish lab storybook
+name: Publish data-grid storybook
 on:
   workflow_dispatch:
   push:
     branches:
       - master
     paths:
-      - 'packages/eds-lab-react/**'
+      - 'packages/eds-data-grid-react/**'
       - 'packages/eds-core-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
@@ -19,7 +19,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-utils packages/eds-data-grid-react
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -40,15 +40,15 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-lab-storybook
+          key: ${{ github.sha }}-dist-production-data-grid-storybook
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
         id: build-storybook
         run: |
-          echo Running build:storybook:lab!
-          node_modules/.bin/pnpm build:storybook:lab
+          echo Running build:storybook:data-grid!
+          node_modules/.bin/pnpm build:storybook:data-grid
   publish-storybook:
     needs: [setup, packages]
     name: Build & Deploy Website
@@ -61,15 +61,15 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-lab-storybook
+          key: ${{ github.sha }}-dist-production-data-grid-storybook
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
-          folder: 'packages/eds-lab-react/storybook-build'
+          folder: 'packages/eds-data-grid-react/storybook-build'
           public-access-policy: 'container'
-          connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING }}
+          connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_DATAGRID_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
