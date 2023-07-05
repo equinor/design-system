@@ -43,15 +43,15 @@
         "value": "{neutral-subtle.subtle}",
         "type": "color"
       },
-      "on-outlined": {
+      "on-ghost": {
         "value": "{variant.base}",
         "type": "color"
       },
-      "on-outlined-hover": {
+      "on-ghost-hover": {
         "value": "{variant.em}",
         "type": "color"
       },
-      "on-outlined-pressed": {
+      "on-ghost-pressed": {
         "value": "{variant.strong}",
         "type": "color"
       }
@@ -67,15 +67,15 @@
       "type": "color"
     },
     "action": {
-      "outlined": {
+      "ghost": {
         "value": "{variant.base}",
         "type": "color"
       },
-      "outlined-hover": {
+      "ghost-hover": {
         "value": "{variant.em}",
         "type": "color"
       },
-      "outlined-pressed": {
+      "ghost-pressed": {
         "value": "{variant.strong}",
         "type": "color"
       }
@@ -178,15 +178,15 @@
         "value": "{variant.strong}",
         "type": "color"
       },
-      "outlined": {
+      "ghost": {
         "value": "{variant-subtle.base}",
         "type": "color"
       },
-      "outlined-hover": {
+      "ghost-hover": {
         "value": "{variant-subtle.em}",
         "type": "color"
       },
-      "outlined-pressed": {
+      "ghost-pressed": {
         "value": "{variant-subtle.strong}",
         "type": "color"
       }
@@ -212,6 +212,14 @@
   },
   "icon": {
     "default": {
+      "value": "{neutral-subtle.base}",
+      "type": "color"
+    },
+    "disabled": {
+      "value": "{neutral-subtle.em}",
+      "type": "color"
+    },
+    "interactive": {
       "value": "{primary.base}",
       "type": "color"
     },
@@ -220,15 +228,15 @@
         "value": "{neutral-subtle.subtle}",
         "type": "color"
       },
-      "on-outlined": {
+      "on-ghost": {
         "value": "{variant.base}",
         "type": "color"
       },
-      "on-outlined-hover": {
+      "on-ghost-hover": {
         "value": "{variant.em}",
         "type": "color"
       },
-      "on-outlined-pressed": {
+      "on-ghost-pressed": {
         "value": "{variant.strong}",
         "type": "color"
       }

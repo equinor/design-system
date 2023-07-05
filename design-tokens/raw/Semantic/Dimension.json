@@ -1,115 +1,145 @@
 {
-  "Spacing": {
-    "Component": {
-      "Inline": {
+  "spacing": {
+    "component": {
+      "inline": {
         "XXS": {
           "type": "number",
-          "value": "{Dimension.Inline.25}"
+          "value": "{dimension.inline.25}"
         },
         "XS": {
           "type": "number",
-          "value": "{Dimension.Inline.50}"
+          "value": "{dimension.inline.50}"
         },
         "SM": {
           "type": "number",
-          "value": "{Dimension.Inline.75}"
+          "value": "{dimension.inline.75}"
         },
         "MD": {
           "type": "number",
-          "value": "{Dimension.Inline.100}"
+          "value": "{dimension.inline.100}"
         },
         "LG": {
           "type": "number",
-          "value": "{Dimension.Inline.125}"
+          "value": "{dimension.inline.125}"
         },
         "XL": {
           "type": "number",
-          "value": "{Dimension.Inline.150}"
+          "value": "{dimension.inline.150}"
         }
       },
-      "Stack": {
+      "stack": {
         "XXS": {
           "type": "number",
-          "value": "{Dimension.Stack.25}"
+          "value": "{dimension.stack.25}"
         },
         "XS": {
           "type": "number",
-          "value": "{Dimension.Stack.50}"
+          "value": "{dimension.stack.50}"
         },
         "SM": {
           "type": "number",
-          "value": "{Dimension.Stack.75}"
+          "value": "{dimension.stack.75}"
         },
         "MD": {
           "type": "number",
-          "value": "{Dimension.Stack.100}"
+          "value": "{dimension.stack.100}"
         },
         "LG": {
           "type": "number",
-          "value": "{Dimension.Stack.125}"
+          "value": "{dimension.stack.125}"
         },
         "XL": {
           "type": "number",
-          "value": "{Dimension.Stack.150}"
+          "value": "{dimension.stack.150}"
         }
       }
     },
-    "UI-Shell": {
-      "Inline": {
+    "ui-shell": {
+      "inline": {
         "SM": {
-          "value": "{Dimension.Inline.150}",
+          "value": "{dimension.inline.150}",
           "type": "number"
         },
         "MD": {
-          "value": "{Dimension.Inline.200}",
+          "value": "{dimension.inline.200}",
           "type": "number"
         }
       },
-      "Stack": {
+      "stack": {
         "SM": {
-          "value": "{Dimension.Inline.150}",
+          "value": "{dimension.inline.150}",
           "type": "number"
         },
         "MD": {
-          "value": "{Dimension.Inline.200}",
+          "value": "{dimension.inline.200}",
           "type": "number"
         }
       }
     }
   },
-  "Sizing": {
-    "Component": {
-      "Stack": {
+  "sizing": {
+    "shape": {
+      "height": {
         "XS": {
           "type": "number",
-          "value": "{Dimension.Stack.100}"
+          "value": "{dimension.stack.100}"
         },
         "SM": {
           "type": "number",
-          "value": "{Dimension.Stack.150}"
+          "value": "{dimension.stack.150}"
         },
         "MD": {
           "type": "number",
-          "value": "{Dimension.Stack.200}"
+          "value": "{dimension.stack.200}"
         },
         "LG": {
           "type": "number",
-          "value": "{Dimension.Stack.250}"
+          "value": "{dimension.stack.250}"
         },
         "XL": {
           "type": "number",
-          "value": "{Dimension.Stack.300}"
+          "value": "{dimension.stack.300}"
         }
+      }
+    },
+    "border": {
+      "action-outlined": {
+        "value": "{sizing.border.thin}",
+        "type": "number"
+      },
+      "divider": {
+        "value": "1",
+        "type": "number"
+      },
+      "input": {
+        "value": "1",
+        "type": "number"
+      },
+      "input-focused": {
+        "value": "2",
+        "type": "number"
+      },
+      "table-row": {
+        "value": "1",
+        "type": "number"
+      },
+      "table-header": {
+        "value": "2",
+        "type": "number"
+      },
+      "focus-frame": {
+        "value": "1",
+        "type": "number"
       }
     }
   },
-  "Border": {
+  "border": {
     "none": {
       "value": "0",
       "type": "number"
     },
     "rounded-radius": {
-      "value": "{Dimension.Stack.25}",
+      "value": "{dimension.stack.25}",
       "type": "number"
     },
     "outlined-width": {
@@ -119,6 +149,14 @@
     "focused-width": {
       "value": "2",
       "type": "number"
+    }
+  },
+  "component": {
+    "inline": {
+      "xxs": {
+        "value": "100",
+        "type": "spacing"
+      }
     }
   }
 }

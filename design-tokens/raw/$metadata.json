@@ -1,6 +1,8 @@
 {
   "tokenSetOrder": [
     "Core/Color",
+    "Core/Dimension",
+    "Core/Typography",
     "Theme/Light",
     "Variant/Primary",
     "Variant/Secondary",
@@ -8,6 +10,7 @@
     "Density/Spacious",
     "Semantic/Color",
     "Semantic/Dimension",
-    "Semantic/Typography"
+    "Semantic/Typography",
+    "Semantic/Shape"
   ]
 }
