@@ -1,0 +1,144 @@
+{
+  "Dimension": {
+    "Inline": {
+      "25": {
+        "type": "number",
+        "value": "4"
+      },
+      "50": {
+        "type": "number",
+        "value": "8"
+      },
+      "75": {
+        "type": "number",
+        "value": "12"
+      },
+      "100": {
+        "type": "number",
+        "value": "16"
+      },
+      "125": {
+        "type": "number",
+        "value": "20"
+      },
+      "150": {
+        "type": "number",
+        "value": "24"
+      },
+      "200": {
+        "type": "number",
+        "value": "36"
+      },
+      "250": {
+        "type": "number",
+        "value": "44"
+      },
+      "300": {
+        "type": "number",
+        "value": "56"
+      },
+      "350": {
+        "type": "number",
+        "value": "68"
+      },
+      "400": {
+        "type": "number",
+        "value": "80"
+      },
+      "500": {
+        "type": "number",
+        "value": "100"
+      },
+      "600": {
+        "type": "number",
+        "value": "120"
+      },
+      "700": {
+        "type": "number",
+        "value": "148"
+      },
+      "800": {
+        "type": "number",
+        "value": "184"
+      },
+      "900": {
+        "type": "number",
+        "value": "224"
+      }
+    },
+    "Stack": {
+      "25": {
+        "type": "number",
+        "value": "4"
+      },
+      "50": {
+        "type": "number",
+        "value": "8"
+      },
+      "75": {
+        "type": "number",
+        "value": "12"
+      },
+      "100": {
+        "type": "number",
+        "value": "16"
+      },
+      "125": {
+        "type": "number",
+        "value": "20"
+      },
+      "150": {
+        "type": "number",
+        "value": "24"
+      },
+      "200": {
+        "type": "number",
+        "value": "36"
+      },
+      "250": {
+        "type": "number",
+        "value": "44"
+      },
+      "300": {
+        "type": "number",
+        "value": "56"
+      },
+      "350": {
+        "type": "number",
+        "value": "68"
+      },
+      "400": {
+        "type": "number",
+        "value": "80"
+      },
+      "500": {
+        "type": "number",
+        "value": "100"
+      },
+      "600": {
+        "type": "number",
+        "value": "120"
+      },
+      "700": {
+        "type": "number",
+        "value": "148"
+      },
+      "800": {
+        "type": "number",
+        "value": "184"
+      },
+      "900": {
+        "type": "number",
+        "value": "224"
+      }
+    }
+  },
+  "Border": {
+    "Radius": {
+      "rounded": {
+        "value": "4",
+        "type": "number"
+      }
+    }
+  }
+}

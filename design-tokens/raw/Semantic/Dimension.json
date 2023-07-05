@@ -1,0 +1,124 @@
+{
+  "Spacing": {
+    "Component": {
+      "Inline": {
+        "XXS": {
+          "type": "number",
+          "value": "{Dimension.Inline.25}"
+        },
+        "XS": {
+          "type": "number",
+          "value": "{Dimension.Inline.50}"
+        },
+        "SM": {
+          "type": "number",
+          "value": "{Dimension.Inline.75}"
+        },
+        "MD": {
+          "type": "number",
+          "value": "{Dimension.Inline.100}"
+        },
+        "LG": {
+          "type": "number",
+          "value": "{Dimension.Inline.125}"
+        },
+        "XL": {
+          "type": "number",
+          "value": "{Dimension.Inline.150}"
+        }
+      },
+      "Stack": {
+        "XXS": {
+          "type": "number",
+          "value": "{Dimension.Stack.25}"
+        },
+        "XS": {
+          "type": "number",
+          "value": "{Dimension.Stack.50}"
+        },
+        "SM": {
+          "type": "number",
+          "value": "{Dimension.Stack.75}"
+        },
+        "MD": {
+          "type": "number",
+          "value": "{Dimension.Stack.100}"
+        },
+        "LG": {
+          "type": "number",
+          "value": "{Dimension.Stack.125}"
+        },
+        "XL": {
+          "type": "number",
+          "value": "{Dimension.Stack.150}"
+        }
+      }
+    },
+    "UI-Shell": {
+      "Inline": {
+        "SM": {
+          "value": "{Dimension.Inline.150}",
+          "type": "number"
+        },
+        "MD": {
+          "value": "{Dimension.Inline.200}",
+          "type": "number"
+        }
+      },
+      "Stack": {
+        "SM": {
+          "value": "{Dimension.Inline.150}",
+          "type": "number"
+        },
+        "MD": {
+          "value": "{Dimension.Inline.200}",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "Sizing": {
+    "Component": {
+      "Stack": {
+        "XS": {
+          "type": "number",
+          "value": "{Dimension.Stack.100}"
+        },
+        "SM": {
+          "type": "number",
+          "value": "{Dimension.Stack.150}"
+        },
+        "MD": {
+          "type": "number",
+          "value": "{Dimension.Stack.200}"
+        },
+        "LG": {
+          "type": "number",
+          "value": "{Dimension.Stack.250}"
+        },
+        "XL": {
+          "type": "number",
+          "value": "{Dimension.Stack.300}"
+        }
+      }
+    }
+  },
+  "Border": {
+    "none": {
+      "value": "0",
+      "type": "number"
+    },
+    "rounded-radius": {
+      "value": "{Dimension.Stack.25}",
+      "type": "number"
+    },
+    "outlined-width": {
+      "value": "1",
+      "type": "number"
+    },
+    "focused-width": {
+      "value": "2",
+      "type": "number"
+    }
+  }
+}

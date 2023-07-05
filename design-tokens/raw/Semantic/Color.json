@@ -1,0 +1,269 @@
+{
+  "text": {
+    "default": {
+      "value": "{neutral.strong}",
+      "type": "color"
+    },
+    "disabled": {
+      "value": "{neutral-subtle.strong}",
+      "type": "color"
+    },
+    "input": {
+      "value": "{neutral.base}",
+      "type": "color"
+    },
+    "input-focused": {
+      "value": "{neutral.strong}",
+      "type": "color"
+    },
+    "helper": {
+      "default": {
+        "value": "{neutral.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "success": {
+        "value": "{success.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "warning": {
+        "value": "{warning.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "danger": {
+        "value": "{danger.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #B30D2F"
+      }
+    },
+    "action": {
+      "on-action": {
+        "value": "{neutral-subtle.subtle}",
+        "type": "color"
+      },
+      "on-outlined": {
+        "value": "{variant.base}",
+        "type": "color"
+      },
+      "on-outlined-hover": {
+        "value": "{variant.em}",
+        "type": "color"
+      },
+      "on-outlined-pressed": {
+        "value": "{variant.strong}",
+        "type": "color"
+      }
+    }
+  },
+  "border": {
+    "disabled": {
+      "value": "{neutral-subtle.em}",
+      "type": "color"
+    },
+    "focused": {
+      "value": "{primary.base}",
+      "type": "color"
+    },
+    "action": {
+      "outlined": {
+        "value": "{variant.base}",
+        "type": "color"
+      },
+      "outlined-hover": {
+        "value": "{variant.em}",
+        "type": "color"
+      },
+      "outlined-pressed": {
+        "value": "{variant.strong}",
+        "type": "color"
+      }
+    },
+    "input": {
+      "default": {
+        "value": "{neutral.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "default-focused": {
+        "value": "{primary.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "success": {
+        "value": "{success.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "success-focused": {
+        "value": "{success.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "warning": {
+        "value": "{warning.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "warning-focused": {
+        "value": "{warning.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "danger": {
+        "value": "{danger.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "danger-focused": {
+        "value": "{danger.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #B30D2F"
+      }
+    }
+  },
+  "surface": {
+    "default": {
+      "value": "{neutral-subtle.subtle}",
+      "type": "color"
+    },
+    "alt": {
+      "value": "{neutral-subtle.weak}",
+      "type": "color"
+    },
+    "disabled": {
+      "value": "{neutral-subtle.base}",
+      "type": "color"
+    },
+    "info": {
+      "value": "{info-subtle.base}",
+      "type": "color"
+    },
+    "warning": {
+      "value": "{warning-subtle.base}",
+      "type": "color"
+    },
+    "danger": {
+      "value": "{danger-subtle.base}",
+      "type": "color",
+      "description": "TODO: EDS 1.0 #FFC1C1"
+    },
+    "selected": {
+      "value": "{primary-subtle.base}",
+      "type": "color"
+    },
+    "selected-hover": {
+      "value": "{primary-subtle.em}",
+      "type": "color"
+    },
+    "scrim": {
+      "value": "{translucent.weak}",
+      "type": "color"
+    },
+    "overlay": {
+      "value": "{translucent.strong}",
+      "type": "color"
+    },
+    "action": {
+      "filled": {
+        "value": "{variant.base}",
+        "type": "color"
+      },
+      "filled-hover": {
+        "value": "{variant.em}",
+        "type": "color"
+      },
+      "filled-pressed": {
+        "value": "{variant.strong}",
+        "type": "color"
+      },
+      "outlined": {
+        "value": "{variant-subtle.base}",
+        "type": "color"
+      },
+      "outlined-hover": {
+        "value": "{variant-subtle.em}",
+        "type": "color"
+      },
+      "outlined-pressed": {
+        "value": "{variant-subtle.strong}",
+        "type": "color"
+      }
+    },
+    "navigation": {
+      "item": {
+        "value": "#",
+        "type": "color"
+      },
+      "item-hover": {
+        "value": "#",
+        "type": "color"
+      },
+      "item-pressed": {
+        "value": "#",
+        "type": "color"
+      },
+      "item-selected": {
+        "value": "#",
+        "type": "color"
+      }
+    }
+  },
+  "icon": {
+    "default": {
+      "value": "{primary.base}",
+      "type": "color"
+    },
+    "action": {
+      "on-action": {
+        "value": "{neutral-subtle.subtle}",
+        "type": "color"
+      },
+      "on-outlined": {
+        "value": "{variant.base}",
+        "type": "color"
+      },
+      "on-outlined-hover": {
+        "value": "{variant.em}",
+        "type": "color"
+      },
+      "on-outlined-pressed": {
+        "value": "{variant.strong}",
+        "type": "color"
+      }
+    },
+    "input": {
+      "success": {
+        "value": "{success.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "success-focused": {
+        "value": "{success.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "warning": {
+        "value": "{warning.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "warning-focused": {
+        "value": "{warning.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "danger": {
+        "value": "{danger.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "danger-focused": {
+        "value": "{danger.em}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #B30D2F"
+      }
+    }
+  }
+}

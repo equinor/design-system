@@ -1,0 +1,180 @@
+{
+  "primary": {
+    "base": {
+      "value": "{Moss Green 1.1100}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Moss Green 1.1300}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Moss Green 1.1400}",
+      "type": "color"
+    }
+  },
+  "secondary": {
+    "base": {
+      "value": "{Blue Grey.1200}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Blue Grey.1350}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Blue Grey.1450}",
+      "type": "color"
+    }
+  },
+  "danger": {
+    "base": {
+      "value": "{Red Cold.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Red Cold.1200}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Red Cold.1400}",
+      "type": "color"
+    }
+  },
+  "warning": {
+    "base": {
+      "value": "{Orange.600}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Orange.1000}",
+      "type": "color"
+    }
+  },
+  "success": {
+    "base": {
+      "value": "{Lichen Green.600}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Lichen Green.900}",
+      "type": "color"
+    }
+  },
+  "neutral": {
+    "base": {
+      "value": "{Neutrals.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Neutrals.1100}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Neutrals.1300}",
+      "type": "color"
+    }
+  },
+  "primary-subtle": {
+    "base": {
+      "value": "{Moss Green 1.200}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Moss Green 1.400}",
+      "type": "color"
+    }
+  },
+  "secondary-subtle": {
+    "base": {
+      "value": "{Blue Grey.300}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Blue Grey.500}",
+      "type": "color"
+    }
+  },
+  "danger-subtle": {
+    "base": {
+      "value": "{Red Warm.300}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Red Warm.500}",
+      "type": "color"
+    }
+  },
+  "warning-subtle": {
+    "base": {
+      "value": "{Orange.200}",
+      "type": "color"
+    }
+  },
+  "success-subtle": {
+    "base": {
+      "value": "{Lichen Green.100}",
+      "type": "color"
+    }
+  },
+  "info-subtle": {
+    "base": {
+      "value": "{Mist Blue EDS.300}",
+      "type": "color"
+    }
+  },
+  "neutral-subtle": {
+    "subtle": {
+      "value": "{Neutrals.0}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Neutrals.100}",
+      "type": "color"
+    },
+    "base": {
+      "value": "{Neutrals.300}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Neutrals.500}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Neutrals.600}",
+      "type": "color"
+    }
+  },
+  "translucent": {
+    "weak": {
+      "value": "{Neutrals.1500}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "alpha",
+            "value": ".4",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "strong": {
+      "value": "{Neutrals.1500}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "alpha",
+            "value": ".8",
+            "space": "hsl"
+          }
+        }
+      }
+    }
+  },
+  "naming example": {
+    "value": "eds.theme.light",
+    "type": "text"
+  }
+}

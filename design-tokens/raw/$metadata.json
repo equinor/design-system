@@ -1,0 +1,13 @@
+{
+  "tokenSetOrder": [
+    "Core/Color",
+    "Theme/Light",
+    "Variants/Primary",
+    "Variants/Secondary",
+    "Variants/Danger",
+    "Density/Spacious",
+    "Semantic/Color",
+    "Semantic/Dimension",
+    "Styles/Typography"
+  ]
+}
