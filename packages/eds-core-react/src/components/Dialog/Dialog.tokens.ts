@@ -12,6 +12,7 @@ const {
   colors: {
     ui: {
       background__default: { rgba: background },
+      background__scrim: { rgba: backdrop },
     },
   },
   shape: {
@@ -52,6 +53,9 @@ export const dialog: DialogToken = {
     },
     actions: {
       minHeight: '48px',
+    },
+    scrim: {
+      background: backdrop,
     },
   },
   modes: {
