@@ -38,6 +38,18 @@ const config = {
   framework: {
     name: '@storybook/react-vite',
   },
+  refs: (config, { configType }) => {
+    if (configType === 'DEVELOPMENT') {
+      return {}
+    }
+    return {
+      '@equinor/eds-data-grid-react': {
+        title: 'EDS Data grid',
+        url: 'https://s478stedsstorybookdatag.z16.web.core.windows.net/',
+        expanded: false,
+      },
+    }
+  },
   async viteFinal(config) {
     return {
       ...config,
