@@ -16,13 +16,14 @@ const TabPanels = forwardRef<HTMLDivElement, TabPanelsProps>(function TabPanels(
 ) {
   const { activeTab, tabsId } = useContext(TabsContext)
 
-  const Panels = ReactChildren.map(children, (child: ReactElement, index) =>
-    cloneElement(child, {
+  const Panels = ReactChildren.map(children, (child: ReactElement, index) => {
+    if (activeTab !== index) return null
+    return cloneElement(child, {
       id: `${tabsId}-panel-${index + 1}`,
       'aria-labelledby': `${tabsId}-tab-${index + 1}`,
-      hidden: activeTab !== index,
-    }),
-  )
+    })
+  })
+
   return (
     <div ref={ref} {...props}>
       {Panels}
