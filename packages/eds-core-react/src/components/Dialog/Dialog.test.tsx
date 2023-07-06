@@ -17,6 +17,7 @@ const StyledDialog = styled(Dialog)`
   min-height: ${minHeight};
   width: ${width};
 `
+//dialog is not yet implemented in jsdom, keep an eye on: https://github.com/jsdom/jsdom/issues/3294
 beforeAll(() => {
   HTMLDialogElement.prototype.showModal = jest.fn()
   HTMLDialogElement.prototype.close = jest.fn()
