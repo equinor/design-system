@@ -15,7 +15,6 @@ exports[`Typography Matches snapshot 1`] = `
 
 <p
     class="c0"
-    color="primary"
   >
     Test
   </p>
