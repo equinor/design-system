@@ -16,10 +16,10 @@ const StyledCardHeader = styled.div`
   > :not(:first-child) {
     margin-left: ${spacings.left};
   }
-  :first-child {
+  &:first-child {
     padding-top: ${spacings.top};
   }
-  :last-child {
+  &:last-child {
     padding-bottom: ${spacings.bottom};
   }
 `

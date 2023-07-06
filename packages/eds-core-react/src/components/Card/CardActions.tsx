@@ -21,10 +21,10 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   justify-content: ${({ justifyContent }) => justifyContent};
   padding: 0 ${spacings.right} 0 ${spacings.left};
   margin-top: auto;
-  :first-child {
+  &:first-child {
     padding-top: ${spacings.top};
   }
-  :last-child {
+  &:last-child {
     padding-bottom: ${spacings.bottom};
   }
 `
