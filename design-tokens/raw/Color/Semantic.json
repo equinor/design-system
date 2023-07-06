@@ -4,17 +4,75 @@
       "value": "{neutral.strong}",
       "type": "color"
     },
-    "disabled": {
-      "value": "{neutral-subtle.strong}",
+    "on-danger": {
+      "value": "{danger.strong}",
       "type": "color"
+    },
+    "on-warning": {
+      "value": "{warning.strong}",
+      "type": "color"
+    },
+    "on-success": {
+      "value": "{success.strong}",
+      "type": "color"
+    },
+    "on-overlay": {
+      "value": "{neutral-subtle.subtle}",
+      "type": "color"
+    },
+    "interactive": {
+      "default": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
+      "hover": {
+        "value": "{primary.em}",
+        "type": "color"
+      },
+      "pressed": {
+        "value": "{primary.strong}",
+        "type": "color"
+      },
+      "resting": {
+        "value": "{neutral.base}",
+        "type": "color"
+      },
+      "inactive": {
+        "value": "{neutral-subtle.strong}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{neutral-subtle.strong}",
+        "type": "color"
+      },
+      "variant": {
+        "on-action": {
+          "value": "{neutral-subtle.subtle}",
+          "type": "color"
+        },
+        "on-ghost": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "on-ghost-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "on-ghost-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        }
+      }
     },
     "input": {
-      "value": "{neutral.base}",
-      "type": "color"
-    },
-    "input-focused": {
-      "value": "{neutral.strong}",
-      "type": "color"
+      "default": {
+        "value": "{neutral.base}",
+        "type": "color"
+      },
+      "focused": {
+        "value": "{neutral.strong}",
+        "type": "color"
+      }
     },
     "helper": {
       "default": {
@@ -36,24 +94,6 @@
         "value": "{danger.em}",
         "type": "color",
         "description": "TODO: EDS 1.0 #B30D2F"
-      }
-    },
-    "action": {
-      "on-action": {
-        "value": "{neutral-subtle.subtle}",
-        "type": "color"
-      },
-      "on-ghost": {
-        "value": "{variant.base}",
-        "type": "color"
-      },
-      "on-ghost-hover": {
-        "value": "{variant.em}",
-        "type": "color"
-      },
-      "on-ghost-pressed": {
-        "value": "{variant.strong}",
-        "type": "color"
       }
     }
   },

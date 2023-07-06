@@ -1,0 +1,36 @@
+{
+  "notification-on-inverted": {
+    "base": {
+      "value": "{success-on-inverted.base}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{success-on-inverted.weak}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{success-on-inverted.subtle}",
+      "type": "color"
+    }
+  },
+  "notification": {
+    "base": {
+      "value": "{success.base}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{success.em}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{success.strong}",
+      "type": "color"
+    }
+  },
+  "notification-subtle": {
+    "base": {
+      "value": "{success-subtle.base}",
+      "type": "color"
+    }
+  }
+}

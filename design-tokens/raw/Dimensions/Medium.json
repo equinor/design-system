@@ -7,33 +7,33 @@
       },
       "Padding block ↕︎": {
         "type": "number",
-        "value": "16"
+        "value": "12"
       }
     },
     "Square": {
       "Padding inline ↔︎": {
         "type": "number",
-        "value": "16"
+        "value": "12"
       },
       "Padding block ↕︎": {
         "type": "number",
-        "value": "16"
+        "value": "12"
       }
     },
     "Squish": {
       "Padding block ↕︎": {
         "type": "number",
-        "value": "16"
+        "value": "12"
       },
       "Padding inline ↔︎": {
         "type": "number",
-        "value": "24"
+        "value": "16"
       }
     },
     "Size": {
       "Min Height ↕︎": {
         "type": "number",
-        "value": "44"
+        "value": "36"
       }
     }
   }

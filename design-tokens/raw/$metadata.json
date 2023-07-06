@@ -1,18 +1,24 @@
 {
   "tokenSetOrder": [
-    "Core/Color",
+    "Color/Core",
+    "Color/Palette Light",
+    "Color/Variant Primary",
+    "Color/Variant Secondary",
+    "Color/Variant Danger",
+    "Color/💬 Info",
+    "Color/💬 Success",
+    "Color/💬 Warning",
+    "Color/💬 Danger",
+    "Color/Semantic",
     "Core/Dimension",
     "Core/Typography",
-    "Theme/Light",
-    "Variant/Primary",
-    "Variant/Secondary",
-    "Variant/Danger",
     "Density/Spacious",
-    "Semantic/Color",
     "Semantic/Dimension",
     "Semantic/Typography",
     "Semantic/Shape Alt 1",
     "Semantic/Shape Alt 2",
-    "Dimensions/Large"
+    "Dimensions/Large",
+    "Dimensions/Medium",
+    "Dimensions/Small"
   ]
 }

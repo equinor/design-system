@@ -27,6 +27,20 @@
       "type": "color"
     }
   },
+  "info": {
+    "base": {
+      "value": "{Lichen Green.600}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Lichen Green.900}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Success Green.1300}",
+      "type": "color"
+    }
+  },
   "danger": {
     "base": {
       "value": "{Red Cold.900}",
@@ -49,6 +63,10 @@
     "em": {
       "value": "{Orange.1000}",
       "type": "color"
+    },
+    "strong": {
+      "value": "{Orange.1300}",
+      "type": "color"
     }
   },
   "success": {
@@ -58,6 +76,10 @@
     },
     "em": {
       "value": "{Lichen Green.900}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Success Green.1300}",
       "type": "color"
     }
   },
@@ -176,5 +198,61 @@
   "naming example": {
     "value": "eds.theme.light",
     "type": "text"
+  },
+  "success-on-inverted": {
+    "base": {
+      "value": "{Moss Green 2.400}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Moss Green 2.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Moss Green 2.200}",
+      "type": "color"
+    }
+  },
+  "danger-on-inverted": {
+    "base": {
+      "value": "{Red Warm.500}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Red Warm.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Red Warm.200}",
+      "type": "color"
+    }
+  },
+  "info-on-inverted": {
+    "base": {
+      "value": "{Mist Blue EDS.400}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Mist Blue EDS.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Mist Blue EDS.200}",
+      "type": "color"
+    }
+  },
+  "warning-on-inverted": {
+    "base": {
+      "value": "{Spruce Wood.400}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Spruce Wood.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Spruce Wood.200}",
+      "type": "color"
+    }
   }
 }
