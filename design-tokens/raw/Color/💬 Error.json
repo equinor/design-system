@@ -4,11 +4,11 @@
       "value": "{danger-on-inverted.base}",
       "type": "color"
     },
-    "em": {
+    "weak": {
       "value": "{danger-on-inverted.weak}",
       "type": "color"
     },
-    "strong": {
+    "subtle": {
       "value": "{danger-on-inverted.subtle}",
       "type": "color"
     }

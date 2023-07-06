@@ -29,15 +29,15 @@
   },
   "info": {
     "base": {
-      "value": "{Lichen Green.600}",
+      "value": "{Blue Sky.700}",
       "type": "color"
     },
     "em": {
-      "value": "{Lichen Green.900}",
+      "value": "{Blue Sky.1000}",
       "type": "color"
     },
     "strong": {
-      "value": "{Success Green.1300}",
+      "value": "{Blue Ocean.1300}",
       "type": "color"
     }
   },
