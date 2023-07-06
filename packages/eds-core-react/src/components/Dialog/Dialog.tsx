@@ -1,4 +1,11 @@
-import { forwardRef, useEffect, useRef, MouseEvent } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useRef,
+  MouseEvent,
+  ForwardedRef,
+  useMemo,
+} from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
@@ -6,6 +13,7 @@ import {
   useToken,
   useGlobalKeyPress,
   useHideBodyScroll,
+  mergeRefs,
 } from '@equinor/eds-utils'
 import { Paper } from '../Paper'
 import { dialog as dialogToken } from './Dialog.tokens'
@@ -46,10 +54,14 @@ export type DialogProps = {
   isDismissable?: boolean
   /** programmatically toggle dialog */
   open: boolean
-  /** callback to handle closing scrim */
+  /** callback to handle closing */
   onClose?: () => void
-  /** Wheter the dialog should return focus to the previous focused element */
+  /**
+   * Wether the dialog should return focus to the previous focused element
+   * @deprecated  Component is now based on native dialog and no longer uses floating-ui
+   * */
   returnFocus?: boolean
+  dialogRef?: ForwardedRef<HTMLDialogElement>
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
@@ -58,7 +70,9 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
     open,
     onClose,
     isDismissable = false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     returnFocus = true,
+    dialogRef,
     ...props
   },
   ref,
@@ -66,6 +80,10 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   const { density } = useEds()
   const localRef = useRef<HTMLDialogElement>(null)
   const token = useToken({ density }, dialogToken)
+  const combinedDialogRef = useMemo(
+    () => mergeRefs<HTMLDialogElement>(localRef, dialogRef),
+    [localRef, dialogRef],
+  )
 
   useEffect(() => {
     if (open && !localRef?.current?.hasAttribute('open')) {
@@ -94,7 +112,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
 
   return (
     <ThemeProvider theme={token}>
-      <StyledNativeDialog ref={localRef} onClick={handleDismiss}>
+      <StyledNativeDialog ref={combinedDialogRef} onClick={handleDismiss}>
         {open && (
           <StyledDialog elevation="above_scrim" {...props} ref={ref}>
             {children}
