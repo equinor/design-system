@@ -159,10 +159,14 @@
       "type": "color"
     },
     "em": {
-      "value": "{Neutrals.500}",
+      "value": "{Neutrals.400}",
       "type": "color"
     },
     "strong": {
+      "value": "{Neutrals.500}",
+      "type": "color"
+    },
+    "stronger": {
       "value": "{Neutrals.600}",
       "type": "color"
     }

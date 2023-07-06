@@ -44,11 +44,11 @@
         "type": "color"
       },
       "inactive": {
-        "value": "{neutral-subtle.strong}",
+        "value": "{neutral-subtle.stronger}",
         "type": "color"
       },
       "disabled": {
-        "value": "{neutral-subtle.strong}",
+        "value": "{neutral-subtle.stronger}",
         "type": "color"
       },
       "variant": {
@@ -93,26 +93,36 @@
     }
   },
   "border": {
-    "disabled": {
+    "default": {
       "value": "{neutral-subtle.em}",
       "type": "color"
     },
-    "focused": {
+    "disabled": {
+      "value": "{neutral-subtle.strong}",
+      "type": "color"
+    },
+    "active": {
       "value": "{primary.base}",
       "type": "color"
     },
-    "action": {
-      "ghost": {
-        "value": "{variant.base}",
+    "interactive": {
+      "focused": {
+        "value": "{primary.base}",
         "type": "color"
       },
-      "ghost-hover": {
-        "value": "{variant.em}",
-        "type": "color"
-      },
-      "ghost-pressed": {
-        "value": "{variant.strong}",
-        "type": "color"
+      "variant": {
+        "ghost": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "ghost-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "ghost-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        }
       }
     },
     "input": {
@@ -121,7 +131,7 @@
         "type": "color",
         "description": "TODO: EDS 1.0 #EB0000"
       },
-      "default-focused": {
+      "focused": {
         "value": "{primary.base}",
         "type": "color",
         "description": "TODO: EDS 1.0 #EB0000"
@@ -144,6 +154,16 @@
     "alt": {
       "value": "{neutral-subtle.weak}",
       "type": "color"
+    },
+    "input": {
+      "value": "{neutral-subtle.weak}",
+      "type": "color",
+      "description": "TODO: Needs more work"
+    },
+    "active": {
+      "value": "{neutral-subtle.base}",
+      "type": "color",
+      "description": "Heads up! Same colour as disabled"
     },
     "disabled": {
       "value": "{neutral-subtle.base}",
@@ -219,33 +239,43 @@
   },
   "icon": {
     "default": {
-      "value": "{neutral-subtle.base}",
+      "value": "{neutral.base}",
       "type": "color"
     },
     "disabled": {
-      "value": "{neutral-subtle.em}",
+      "value": "{neutral-subtle.strong}",
       "type": "color"
     },
-    "interactive": {
+    "active": {
       "value": "{primary.base}",
       "type": "color"
     },
-    "action": {
-      "on-action": {
-        "value": "{neutral-subtle.subtle}",
+    "interactive": {
+      "default": {
+        "value": "{primary.base}",
         "type": "color"
       },
-      "on-ghost": {
-        "value": "{variant.base}",
+      "resting": {
+        "value": "{neutral.base}",
         "type": "color"
       },
-      "on-ghost-hover": {
-        "value": "{variant.em}",
-        "type": "color"
-      },
-      "on-ghost-pressed": {
-        "value": "{variant.strong}",
-        "type": "color"
+      "variant": {
+        "on-action": {
+          "value": "{neutral-subtle.subtle}",
+          "type": "color"
+        },
+        "on-ghost": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "on-ghost-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "on-ghost-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        }
       }
     },
     "input": {
