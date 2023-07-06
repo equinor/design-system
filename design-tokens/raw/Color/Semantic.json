@@ -162,43 +162,58 @@
       "type": "color"
     },
     "interactive": {
+      "default": {
+        "value": "{neutral-subtle.subtle}",
+        "type": "color"
+      },
       "hover": {
-        "value": "{neutral-subtle.base}",
+        "value": "{primary-subtle.base}",
+        "type": "color"
+      },
+      "pressed": {
+        "value": "{primary-subtle.em}",
         "type": "color"
       },
       "selected": {
         "value": "{primary-subtle.base}",
-        "type": "color"
+        "type": "color",
+        "description": "TODO: Needs more work"
       },
       "selected-hover": {
         "value": "{primary-subtle.em}",
-        "type": "color"
-      }
-    },
-    "action": {
-      "filled": {
-        "value": "{variant.base}",
-        "type": "color"
+        "type": "color",
+        "description": "TODO: Needs more work"
       },
-      "filled-hover": {
-        "value": "{variant.em}",
-        "type": "color"
+      "selected-pressed": {
+        "value": "{primary-subtle.em}",
+        "type": "color",
+        "description": "TODO: Needs more work"
       },
-      "filled-pressed": {
-        "value": "{variant.strong}",
-        "type": "color"
-      },
-      "ghost": {
-        "value": "{variant-subtle.base}",
-        "type": "color"
-      },
-      "ghost-hover": {
-        "value": "{variant-subtle.em}",
-        "type": "color"
-      },
-      "ghost-pressed": {
-        "value": "{variant-subtle.strong}",
-        "type": "color"
+      "variant": {
+        "filled": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "filled-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "filled-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        },
+        "ghost": {
+          "value": "{variant-subtle.base}",
+          "type": "color"
+        },
+        "ghost-hover": {
+          "value": "{variant-subtle.em}",
+          "type": "color"
+        },
+        "ghost-pressed": {
+          "value": "{variant-subtle.strong}",
+          "type": "color"
+        }
       }
     }
   },
