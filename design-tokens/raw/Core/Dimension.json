@@ -1,13 +1,14 @@
 {
   "border-width": {
+    "type": "number",
     "none": {
-      "value": "0px"
+      "value": "0"
     },
     "thin": {
-      "value": "1px"
+      "value": "1"
     },
     "thick": {
-      "value": "2px"
+      "value": "2"
     }
   }
 }

@@ -4,9 +4,7 @@
     "name": "Color",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Color": "enabled",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Core/Color": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:84:69994",
     "$figmaModeId": "84:0",
@@ -380,9 +378,7 @@
     "name": "Dimension",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Dimension": "enabled",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Core/Dimension": "enabled"
     },
     "group": "⛔️ CoreDimension",
     "$figmaCollectionId": "VariableCollectionId:84:70356",
@@ -400,9 +396,7 @@
     "selectedTokenSets": {
       "Core/Color": "source",
       "Variant/Primary": "enabled",
-      "Theme/Light": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Theme/Light": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:74:69912",
     "$figmaModeId": "74:0",
@@ -423,9 +417,7 @@
     "selectedTokenSets": {
       "Core/Color": "source",
       "Variant/Secondary": "enabled",
-      "Theme/Light": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Theme/Light": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:74:69912",
     "$figmaModeId": "74:1",
@@ -446,9 +438,7 @@
     "selectedTokenSets": {
       "Core/Color": "source",
       "Variant/Danger": "enabled",
-      "Theme/Light": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Theme/Light": "source"
     },
     "$figmaVariableReferences": {
       "variant.base": "9b76cf225b14c67a22a9e0dcc1b9dc9a6b95fc8d",
@@ -468,9 +458,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Theme/Light": "enabled",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Theme/Light": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:38:378",
     "$figmaModeId": "38:4",
@@ -517,9 +505,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Core/Color": "source",
-      "Theme/Light": "enabled",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Theme/Light": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:38:378",
     "$figmaModeId": "38:5",
@@ -566,9 +552,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "enabled",
-      "Core/Dimension": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:4",
@@ -615,9 +599,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "enabled",
-      "Core/Dimension": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:5",
@@ -664,9 +646,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "enabled",
-      "Core/Dimension": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:6",
@@ -714,9 +694,7 @@
     "selectedTokenSets": {
       "Core/Color": "source",
       "Semantic/Color": "enabled",
-      "Theme/Light": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Theme/Light": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:36:722",
     "$figmaModeId": "36:14",
@@ -789,9 +767,7 @@
     "selectedTokenSets": {
       "Semantic/Dimension": "enabled",
       "Density/Spacious": "source",
-      "Core/Dimension": "source",
-      "Core/Typography": "disabled",
-      "Semantic/Shape": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaVariableReferences": {
       "spacing.component.inline.XXS": "1e8e56c378be9474cb1b45b36debfbe5d30b67ca",

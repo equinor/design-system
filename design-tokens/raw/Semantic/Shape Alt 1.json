@@ -3,45 +3,37 @@
     "height": {
       "XS": {
         "value": "{dimension.stack.150}",
-        "type": "dimension"
+        "type": "number"
       },
       "SM": {
         "value": "{dimension.stack.175}",
-        "type": "dimension"
+        "type": "number"
       },
       "MD": {
         "value": "{dimension.stack.200}",
-        "type": "dimension"
+        "type": "number"
       },
       "LG": {
         "value": "{dimension.stack.250}",
-        "type": "dimension"
+        "type": "number"
       },
       "XL": {
         "value": "{dimension.stack.300}",
-        "type": "dimension"
-      }
-    },
-    "width": {
-      "XS": {
-        "value": "{shape.height.XS}",
-        "type": "dimension"
+        "type": "number"
       }
     },
     "border-radius": {
       "none": {
         "value": "0px",
-        "type": "dimension"
+        "type": "number"
       },
       "rounded": {
         "value": "0px",
-        "type": "dimension"
-      }
-    },
-    "button": {
-      "height": {
-        "value": "36px",
-        "type": "dimension"
+        "type": "number"
+      },
+      "round": {
+        "value": "50%",
+        "type": "number"
       }
     }
   }
