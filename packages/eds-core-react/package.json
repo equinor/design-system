@@ -1,13 +1,17 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.31.1",
+  "version": "0.32.0-dev07072023",
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": [
     "**/*.css"
   ],
-  "exports": "./dist/esm/index.js",
   "type": "module",
-  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js"
+    }
+  },
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
