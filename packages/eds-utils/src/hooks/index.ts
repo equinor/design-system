@@ -1,5 +1,4 @@
 export { useOutsideClick } from './useOutsideClick'
-export * from './usePopper'
 export { useGlobalKeyPress } from './useGlobalKeyPress'
 export { useId } from './useId'
 export { useIsMounted } from './useMountedRef'
