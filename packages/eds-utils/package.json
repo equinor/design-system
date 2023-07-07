@@ -76,9 +76,7 @@
   "dependencies": {
     "@babel/runtime": "^7.22.5",
     "@equinor/eds-tokens": "workspace:*",
-    "@popperjs/core": "2.11.8",
-    "babel-jest": "^29.5.0",
-    "react-popper": "2.3.0"
+    "babel-jest": "^29.5.0"
   },
   "engines": {
     "pnpm": ">=4",

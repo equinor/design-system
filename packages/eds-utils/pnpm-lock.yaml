@@ -4,111 +4,127 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@babel/runtime':
-    specifier: ^7.22.5
-    version: 7.22.5
-  '@equinor/eds-tokens':
-    specifier: workspace:*
-    version: link:../eds-tokens
-  '@popperjs/core':
-    specifier: 2.11.8
-    version: 2.11.8
-  babel-jest:
-    specifier: ^29.5.0
-    version: 29.5.0(@babel/core@7.22.5)
-  react-popper:
-    specifier: 2.3.0
-    version: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0)(react@18.2.0)
+importers:
 
-devDependencies:
-  '@rollup/plugin-babel':
-    specifier: ^6.0.3
-    version: 6.0.3(@babel/core@7.22.5)(rollup@3.25.3)
-  '@rollup/plugin-commonjs':
-    specifier: ^25.0.2
-    version: 25.0.2(rollup@3.25.3)
-  '@rollup/plugin-node-resolve':
-    specifier: ^15.1.0
-    version: 15.1.0(rollup@3.25.3)
-  '@testing-library/dom':
-    specifier: ^9.3.1
-    version: 9.3.1
-  '@testing-library/jest-dom':
-    specifier: ^5.16.5
-    version: 5.16.5
-  '@testing-library/react':
-    specifier: ^14.0.0
-    version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
-  '@testing-library/user-event':
-    specifier: ^14.4.3
-    version: 14.4.3(@testing-library/dom@9.3.1)
-  '@types/jest':
-    specifier: ^29.5.2
-    version: 29.5.2
-  '@types/ramda':
-    specifier: ^0.29.2
-    version: 0.29.2
-  '@types/react':
-    specifier: ^18.0.26
-    version: 18.0.26
-  '@types/react-dom':
-    specifier: ^18.0.10
-    version: 18.0.10
-  '@types/styled-components':
-    specifier: ^5.1.26
-    version: 5.1.26
-  '@types/testing-library__jest-dom':
-    specifier: ^5.14.6
-    version: 5.14.6
-  babel-loader:
-    specifier: ^9.1.2
-    version: 9.1.2(@babel/core@7.22.5)(webpack@5.88.0)
-  babel-plugin-styled-components:
-    specifier: ^2.1.4
-    version: 2.1.4(@babel/core@7.22.5)(styled-components@5.3.9)
-  jest:
-    specifier: ^29.5.0
-    version: 29.5.0
-  jest-environment-jsdom:
-    specifier: ^29.5.0
-    version: 29.5.0
-  jest-styled-components:
-    specifier: ^7.1.1
-    version: 7.1.1(styled-components@5.3.9)
-  js-file-download:
-    specifier: ^0.4.12
-    version: 0.4.12
-  ramda:
-    specifier: ^0.29.0
-    version: 0.29.0
-  react:
-    specifier: ^18.2.0
-    version: 18.2.0
-  react-dom:
-    specifier: ^18.2.0
-    version: 18.2.0(react@18.2.0)
-  react-is:
-    specifier: ^18.2.0
-    version: 18.2.0
-  rollup:
-    specifier: ^3.25.3
-    version: 3.25.3
-  rollup-plugin-delete:
-    specifier: ^2.0.0
-    version: 2.0.0
-  styled-components:
-    specifier: 5.3.9
-    version: 5.3.9(@babel/core@7.22.5)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-  tsc-watch:
-    specifier: ^6.0.4
-    version: 6.0.4(typescript@4.9.4)
-  typescript:
-    specifier: ^4.9.4
-    version: 4.9.4
-  webpack:
-    specifier: ^5.88.0
-    version: 5.88.0
+  .:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.22.5
+        version: 7.22.5
+      '@equinor/eds-tokens':
+        specifier: workspace:*
+        version: link:../eds-tokens
+      babel-jest:
+        specifier: ^29.5.0
+        version: 29.5.0(@babel/core@7.22.5)
+    devDependencies:
+      '@rollup/plugin-babel':
+        specifier: ^6.0.3
+        version: 6.0.3(@babel/core@7.22.5)(rollup@3.25.3)
+      '@rollup/plugin-commonjs':
+        specifier: ^25.0.2
+        version: 25.0.2(rollup@3.25.3)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.1.0
+        version: 15.1.0(rollup@3.25.3)
+      '@testing-library/dom':
+        specifier: ^9.3.1
+        version: 9.3.1
+      '@testing-library/jest-dom':
+        specifier: ^5.16.5
+        version: 5.16.5
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@testing-library/user-event':
+        specifier: ^14.4.3
+        version: 14.4.3(@testing-library/dom@9.3.1)
+      '@types/jest':
+        specifier: ^29.5.2
+        version: 29.5.2
+      '@types/ramda':
+        specifier: ^0.29.2
+        version: 0.29.2
+      '@types/react':
+        specifier: ^18.0.26
+        version: 18.0.26
+      '@types/react-dom':
+        specifier: ^18.0.10
+        version: 18.0.10
+      '@types/styled-components':
+        specifier: ^5.1.26
+        version: 5.1.26
+      '@types/testing-library__jest-dom':
+        specifier: ^5.14.6
+        version: 5.14.6
+      babel-loader:
+        specifier: ^9.1.2
+        version: 9.1.2(@babel/core@7.22.5)(webpack@5.88.0)
+      babel-plugin-styled-components:
+        specifier: ^2.1.4
+        version: 2.1.4(@babel/core@7.22.5)(styled-components@5.3.9)
+      jest:
+        specifier: ^29.5.0
+        version: 29.5.0
+      jest-environment-jsdom:
+        specifier: ^29.5.0
+        version: 29.5.0
+      jest-styled-components:
+        specifier: ^7.1.1
+        version: 7.1.1(styled-components@5.3.9)
+      js-file-download:
+        specifier: ^0.4.12
+        version: 0.4.12
+      ramda:
+        specifier: ^0.29.0
+        version: 0.29.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-is:
+        specifier: ^18.2.0
+        version: 18.2.0
+      rollup:
+        specifier: ^3.25.3
+        version: 3.25.3
+      rollup-plugin-delete:
+        specifier: ^2.0.0
+        version: 2.0.0
+      styled-components:
+        specifier: 5.3.9
+        version: 5.3.9(@babel/core@7.22.5)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      tsc-watch:
+        specifier: ^6.0.4
+        version: 6.0.4(typescript@4.9.4)
+      typescript:
+        specifier: ^4.9.4
+        version: 4.9.4
+      webpack:
+        specifier: ^5.88.0
+        version: 5.88.0
+
+  ../..: {}
+
+  ../../assets/font: {}
+
+  ../../assets/woman: {}
+
+  ../../scripts/figma-broker: {}
+
+  ../../scripts/token-scripts: {}
+
+  ../eds-core-react: {}
+
+  ../eds-data-grid-react: {}
+
+  ../eds-icons: {}
+
+  ../eds-lab-react: {}
+
+  ../eds-tokens: {}
 
 packages:
 
@@ -1008,10 +1024,6 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
-
-  /@popperjs/core@2.11.8:
-    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-    dev: false
 
   /@rollup/plugin-babel@6.0.3(@babel/core@7.22.5)(rollup@3.25.3):
     resolution: {integrity: sha512-fKImZKppa1A/gX73eg4JGo+8kQr/q1HBQaCGKECZ0v4YBBv3lFqi14+7xyApECzvkLTHCifx+7ntcrvtBIRcpg==}
@@ -3387,6 +3399,7 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: true
 
   /lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
@@ -3738,10 +3751,7 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-
-  /react-fast-compare@3.2.0:
-    resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
-    dev: false
+    dev: true
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -3755,25 +3765,12 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
 
-  /react-popper@2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
-    peerDependencies:
-      '@popperjs/core': ^2.0.0
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-    dependencies:
-      '@popperjs/core': 2.11.8
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-fast-compare: 3.2.0
-      warning: 4.0.3
-    dev: false
-
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: true
 
   /redent@3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
@@ -3886,6 +3883,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: true
 
   /schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
@@ -4293,12 +4291,6 @@ packages:
     resolution: {integrity: sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==}
     dependencies:
       makeerror: 1.0.12
-
-  /warning@4.0.3:
-    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
-    dependencies:
-      loose-envify: 1.4.0
-    dev: false
 
   /watchpack@2.4.0:
     resolution: {integrity: sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg==}

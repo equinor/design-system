@@ -99,34 +99,6 @@ function useOutsideClick(
 ): void;
 ```
 
-### usePopper
-#### ⚠️ DEPRECATED - this hook is no longer used internally and will be removed in a future version. Eds now uses [floating-ui](https://floating-ui.com/).
-A hook that wraps [react-popper](https://www.npmjs.com/package/react-popper). 
-Used for positioning popup elements such as `Popover`, `Menu` and `Tooltip`.
-
-```ts
-type PopperParams = {
-  anchorEl: HTMLElement
-  popperEl: HTMLElement
-  arrowRef?: HTMLElement | string
-  placement?: Placement
-  offset?: number
-  autoWidth?: boolean
-}
-
-function usePopper({
-  anchorEl = null,
-  popperEl = null,
-  arrowRef = null,
-  placement,
-  offset = 10,
-  autoWidth,
-}: PopperParams): {
-  styles: { [key: string]: CSSProperties }
-  attributes: { [key: string]: { [key: string]: string } }
-};
-```
-
 ### useToken
 
 Used internally in components to fetch the correct designtoken-data based on the density prop from `EdsProvider`.
