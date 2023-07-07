@@ -1,5 +1,5 @@
 {
-  "Neutrals": {
+  "Neutral": {
     "0": {
       "value": "#ffffff"
     },
@@ -104,7 +104,7 @@
     },
     "type": "color"
   },
-  "Slate Blue EDS": {
+  "Slate Blue": {
     "100": {
       "value": "#F0F6FA"
     },
@@ -206,7 +206,7 @@
     },
     "type": "color"
   },
-  "Mist Blue Grey": {
+  "Mist Grey": {
     "100": {
       "value": "#EDF7FD"
     },
@@ -254,7 +254,7 @@
     },
     "type": "color"
   },
-  "Mist Blue EDS": {
+  "Mist Blue": {
     "100": {
       "value": "#EDF8FD"
     },
@@ -299,7 +299,7 @@
     },
     "type": "color"
   },
-  "Mist Blue Brand": {
+  "Mist Blue Saturated": {
     "100": {
       "value": "#EBF9FF"
     },
@@ -344,7 +344,7 @@
     },
     "type": "color"
   },
-  "Blue Sky": {
+  "Sky Blue": {
     "100": {
       "value": "#EBF7FF"
     },
@@ -389,7 +389,7 @@
     },
     "type": "color"
   },
-  "Blue Ocean": {
+  "Ocean Blue": {
     "100": {
       "value": "#E9F1FD"
     },
@@ -659,7 +659,7 @@
     },
     "type": "color"
   },
-  "Pink X Brand": {
+  "Pink": {
     "100": {
       "value": "#FEECEF"
     },
@@ -704,7 +704,7 @@
     },
     "type": "color"
   },
-  "Red Cold": {
+  "Cold Red": {
     "100": {
       "value": "#FFECEE"
     },
@@ -1064,7 +1064,7 @@
     },
     "type": "color"
   },
-  "Moss Green 1": {
+  "Moss Green": {
     "100": {
       "value": "#E6F3F4"
     },
@@ -1109,51 +1109,62 @@
     },
     "type": "color"
   },
-  "": {
-    "type": "color"
-  },
-  "Moss Green 2": {
+  "Moss Green Saturated": {
     "100": {
-      "value": "#E0F4F5"
+      "value": "#E0F4F5",
+      "type": "color"
     },
     "200": {
-      "value": "#D1EDEF"
+      "value": "#D1EDEF",
+      "type": "color"
     },
     "300": {
-      "value": "#B3E2E5"
+      "value": "#B3E2E5",
+      "type": "color"
     },
     "400": {
-      "value": "#A6D6D9"
+      "value": "#A6D6D9",
+      "type": "color"
     },
     "500": {
-      "value": "#97CACE"
+      "value": "#97CACE",
+      "type": "color"
     },
     "600": {
-      "value": "#81C1C5"
+      "value": "#81C1C5",
+      "type": "color"
     },
     "700": {
-      "value": "#5DB0B6"
+      "value": "#5DB0B6",
+      "type": "color"
     },
     "800": {
-      "value": "#3EA0A8"
+      "value": "#3EA0A8",
+      "type": "color"
     },
     "900": {
-      "value": "#2A949D"
+      "value": "#2A949D",
+      "type": "color"
     },
     "1000": {
-      "value": "#17838C"
+      "value": "#17838C",
+      "type": "color"
     },
     "1100": {
-      "value": "#007079"
+      "value": "#007079",
+      "type": "color"
     },
     "1200": {
-      "value": "#005E66"
+      "value": "#005E66",
+      "type": "color"
     },
     "1300": {
-      "value": "#004F55"
+      "value": "#004F55",
+      "type": "color"
     },
     "1400": {
-      "value": "#033235"
+      "value": "#033235",
+      "type": "color"
     }
   },
   "naming structure": {
