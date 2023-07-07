@@ -214,7 +214,7 @@
         "description": "TODO: Needs more work"
       },
       "selected-pressed": {
-        "value": "{primary-subtle.em}",
+        "value": "{primary-subtle.strong}",
         "type": "color",
         "description": "TODO: Needs more work"
       },

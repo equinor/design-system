@@ -113,11 +113,15 @@
   },
   "primary-subtle": {
     "base": {
-      "value": "{Moss Green.200}",
+      "value": "{Moss Green.100}",
       "type": "color"
     },
     "em": {
-      "value": "{Moss Green.400}",
+      "value": "{Moss Green.200}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Moss Green.300}",
       "type": "color"
     }
   },
