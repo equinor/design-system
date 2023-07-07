@@ -9,7 +9,7 @@ export type CardContentProps = HTMLAttributes<HTMLDivElement>
 const StyledCardContent = styled.div`
   display: grid;
   padding: 0 ${spacings.right} 0 ${spacings.left};
-  :last-child {
+  &:last-child {
     padding-bottom: ${spacings.bottom};
   }
 `

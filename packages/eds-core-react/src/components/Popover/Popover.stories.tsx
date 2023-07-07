@@ -109,7 +109,21 @@ export const Introduction: StoryFn<PopoverProps> = (args) => {
           </Button>
         </Popover.Header>
         <Popover.Content>
-          <Typography variant="body_short">Popover content</Typography>
+          <div>
+            <div>First-First</div>
+            <div>First-Last</div>
+          </div>
+          <div>
+            <div>Mid-First</div>
+            <div>Mid-Last</div>
+          </div>
+          <div>Last-First</div>
+          <div>
+            <div>Last-Mid-First</div>
+            <div>Last-Mid-Mid</div>
+            <div>Last-Mid-Last</div>
+          </div>
+          <div>Last-Last</div>
         </Popover.Content>
       </Popover>
     </>

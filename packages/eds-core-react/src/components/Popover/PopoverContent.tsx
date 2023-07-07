@@ -4,10 +4,10 @@ import styled, { css } from 'styled-components'
 const ContentWrapper = styled.div(({ theme }) => {
   return css`
     padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
-    :first-child {
+    &:first-child {
       padding-top: ${theme.spacings.top};
     }
-    :last-child {
+    &:last-child {
       padding-bottom: ${theme.spacings.bottom};
     }
   `
