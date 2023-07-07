@@ -104,7 +104,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
       }
   }
   useGlobalKeyPress('Escape', (e) => {
-    if (!isDismissable) e.preventDefault()
+    e.preventDefault()
     if (isDismissable && onClose && open) {
       onClose && onClose()
     }
