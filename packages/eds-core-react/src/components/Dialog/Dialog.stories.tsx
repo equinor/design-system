@@ -53,6 +53,16 @@ const RadioWrapper = styled(Radio)`
   display: flex;
 `
 
+const Placeholder = styled.div`
+  background: rgba(255, 146, 0, 0.15);
+  border: 1px dashed #ff9200;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  display: inline-block;
+`
+
 export const Introduction: StoryFn<DialogProps> = (args) => {
   const { open, isDismissable } = args
   const [, updateArgs] = useArgs()
@@ -164,16 +174,6 @@ export const PlaceholderPlusAction: StoryFn<DialogProps> = () => {
   const handleClose = () => {
     setIsOpen(false)
   }
-
-  const Placeholder = styled.div`
-    background: rgba(255, 146, 0, 0.15);
-    border: 1px dashed #ff9200;
-    box-sizing: border-box;
-    border-radius: 4px;
-    padding: 8px;
-    width: 100%;
-    display: inline-block;
-  `
 
   return (
     <>

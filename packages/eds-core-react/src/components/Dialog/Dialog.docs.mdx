@@ -45,7 +45,7 @@ const Demo = () => {
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
         <Dialog.Header>
           <Dialog.Title>Title</Dialog.Title>
         </Dialog.Header>

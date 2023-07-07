@@ -17,6 +17,11 @@ const StyledDialog = styled(Dialog)`
   min-height: ${minHeight};
   width: ${width};
 `
+//dialog is not yet implemented in jsdom, keep an eye on: https://github.com/jsdom/jsdom/issues/3294
+beforeAll(() => {
+  HTMLDialogElement.prototype.showModal = jest.fn()
+  HTMLDialogElement.prototype.close = jest.fn()
+})
 
 afterEach(cleanup)
 
@@ -60,10 +65,9 @@ describe('Dialog', () => {
   it('Is dismissable with button click', () => {
     render(<DismissableDialog data-testid="dialog" />)
     const dialog = screen.getByTestId('dialog')
-
     expect(dialog).toBeInTheDocument()
-    expect(screen.queryByText('OK')).toBeVisible()
-    const targetButton = screen.queryByText('OK')
+    expect(screen.getByText('OK')).toBeInTheDocument()
+    const targetButton = screen.getByText('OK')
     fireEvent.click(targetButton)
     expect(dialog).not.toBeInTheDocument()
   })
@@ -72,7 +76,7 @@ describe('Dialog', () => {
     const dialog = screen.getByTestId('dialog')
 
     expect(dialog).toBeInTheDocument()
-    expect(screen.queryByText('OK')).toBeVisible()
+    expect(screen.getByText('OK')).toBeInTheDocument()
     fireEvent.keyDown(dialog, {
       key: 'Escape',
     })

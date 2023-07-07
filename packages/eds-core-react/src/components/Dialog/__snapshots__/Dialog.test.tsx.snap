@@ -83,12 +83,8 @@ exports[`Dialog Matches snapshot 1`] = `
 <div
   aria-describedby="eds-dialog-customcontent"
   aria-labelledby="eds-dialog-title"
-  aria-modal="true"
   class="c0 c1"
   data-testid="dialog"
-  open=""
-  role="dialog"
-  tabindex="-1"
 >
   <div
     class="c2"
