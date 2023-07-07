@@ -315,7 +315,8 @@ function AutocompleteInner<T>(
 
   const getLabel = useCallback(
     (item: T) => {
-      if (!item) {
+      //note: non strict check for null or undefined to allow 0
+      if (item == null) {
         return ''
       }
 
@@ -395,7 +396,8 @@ function AutocompleteInner<T>(
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
-          if (selectedItem && !optionDisabled(selectedItem)) {
+          //note: non strict check for null or undefined to allow 0
+          if (selectedItem != null && !optionDisabled(selectedItem)) {
             if (multiple) {
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
