@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2023-07-07
+
+### Changed
+
+- 💄`useHideBodyScroll`: added scrollbar detection and handling to prevent layout shift by @oddvernes in https://github.com/equinor/design-system/pull/2950
+- ⬆️Updated dependencies @oddvernes in https://github.com/equinor/design-system/pull/2925
+- ⬆️Updated Rollup to v3.x @oddvernes in https://github.com/equinor/design-system/pull/2908
+
+### Removed
+
+- 🔥Removed deprecated usePopper hook @oddvernes in https://github.com/equinor/design-system/pull/2955
+
 ## [0.7.0] - 2022-11-04
 
 ### Added
