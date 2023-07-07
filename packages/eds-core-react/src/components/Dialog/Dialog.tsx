@@ -57,8 +57,8 @@ export type DialogProps = {
   /** callback to handle closing */
   onClose?: () => void
   /**
-   * Wether the dialog should return focus to the previous focused element
-   * @deprecated  Component is now based on native dialog and no longer uses floating-ui
+   * return focus to the previous focused element
+   * @deprecated  Component is now based on native dialog where focus is handled by the browser automatically
    * */
   returnFocus?: boolean
   dialogRef?: ForwardedRef<HTMLDialogElement>
