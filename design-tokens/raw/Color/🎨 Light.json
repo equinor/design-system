@@ -155,7 +155,7 @@
   },
   "warning-subtle": {
     "base": {
-      "value": "{Orange.200}",
+      "value": "{Spruce Wood.200}",
       "type": "color"
     }
   },
