@@ -104,7 +104,7 @@
     },
     "border": {
       "action-outlined": {
-        "value": "{sizing.border.thin}",
+        "value": "{border-width.thin}",
         "type": "number"
       },
       "divider": {

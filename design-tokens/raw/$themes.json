@@ -4,8 +4,7 @@
     "name": "Color",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Color/Core": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Core": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:84:69994",
     "$figmaModeId": "84:0",
@@ -379,8 +378,7 @@
     "name": "Dimension",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Core/Dimension": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Core/Dimension": "enabled"
     },
     "group": "⛔️ CoreDimension",
     "$figmaCollectionId": "VariableCollectionId:84:70356",
@@ -398,8 +396,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Variant Primary": "enabled",
-      "Color/Palette Light": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Palette Light": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:74:69912",
     "$figmaModeId": "74:0",
@@ -420,8 +417,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Variant Secondary": "enabled",
-      "Color/Palette Light": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Palette Light": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:74:69912",
     "$figmaModeId": "74:1",
@@ -442,8 +438,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Variant Danger": "enabled",
-      "Color/Palette Light": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Palette Light": "source"
     },
     "$figmaVariableReferences": {
       "variant.base": "9b76cf225b14c67a22a9e0dcc1b9dc9a6b95fc8d",
@@ -463,8 +458,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Color/Core": "source",
-      "Color/Palette Light": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Palette Light": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83905",
     "$figmaModeId": "102:16",
@@ -528,8 +522,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Color/Core": "source",
-      "Color/Palette Light": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Palette Light": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83905",
     "$figmaModeId": "102:17",
@@ -593,8 +586,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "enabled",
-      "Core/Dimension": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:4",
@@ -645,8 +637,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "enabled",
-      "Core/Dimension": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:5",
@@ -697,8 +688,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "enabled",
-      "Core/Dimension": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:6",
@@ -750,8 +740,7 @@
     "selectedTokenSets": {
       "Color/Semantic": "enabled",
       "Color/Core": "source",
-      "Color/Palette Light": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Color/Palette Light": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:36:722",
     "$figmaModeId": "36:14",
@@ -818,8 +807,7 @@
     "selectedTokenSets": {
       "Semantic/Dimension": "enabled",
       "Density/Spacious": "source",
-      "Core/Dimension": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Core/Dimension": "source"
     },
     "$figmaVariableReferences": {
       "spacing.component.inline.XXS": "8106078227a346a44add4e684aac35b006b90cf2",
@@ -866,8 +854,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimensions/Large": "enabled",
-      "Density/Spacious": "source",
-      "💀 Semantic/Typography": "disabled"
+      "Density/Spacious": "source"
     },
     "group": "💎 Dimension",
     "$figmaCollectionId": "VariableCollectionId:94:76669",
@@ -888,8 +875,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "source",
-      "Dimensions/Medium": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Dimensions/Medium": "enabled"
     },
     "group": "💎 Dimension",
     "$figmaCollectionId": "VariableCollectionId:94:76669",
@@ -910,8 +896,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Density/Spacious": "source",
-      "Dimensions/Small": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Dimensions/Small": "enabled"
     },
     "group": "💎 Dimension",
     "$figmaCollectionId": "VariableCollectionId:94:76669",
@@ -933,8 +918,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Palette Light": "source",
-      "Color/💬 Info": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/💬 Info": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:12",
@@ -956,8 +940,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Palette Light": "source",
-      "Color/💬 Success": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/💬 Success": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:13",
@@ -979,8 +962,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Palette Light": "source",
-      "Color/💬 Warning": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/💬 Warning": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:14",
@@ -1002,8 +984,7 @@
     "selectedTokenSets": {
       "Color/Core": "source",
       "Color/Palette Light": "source",
-      "Color/💬 Error": "enabled",
-      "💀 Semantic/Typography": "disabled"
+      "Color/💬 Error": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:15",
