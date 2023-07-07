@@ -45,7 +45,7 @@ export default [
         sourcemap: isDevelopment,
         entryFileNames: '[name].mjs',
       },
-      { file: pkg.main, format: 'cjs' },
+      { file: './dist/eds-utils.cjs', format: 'cjs' },
     ],
   },
 ]
