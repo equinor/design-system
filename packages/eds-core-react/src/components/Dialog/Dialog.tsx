@@ -56,25 +56,12 @@ export type DialogProps = {
   open: boolean
   /** callback to handle closing */
   onClose?: () => void
-  /**
-   * return focus to the previous focused element
-   * @deprecated  Component is now based on native dialog where focus is handled by the browser automatically
-   * */
-  returnFocus?: boolean
+  /** access the dialog element. use ref to access the inner Paper element */
   dialogRef?: ForwardedRef<HTMLDialogElement>
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
-  {
-    children,
-    open,
-    onClose,
-    isDismissable = false,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    returnFocus = true,
-    dialogRef,
-    ...props
-  },
+  { children, open, onClose, isDismissable = false, dialogRef, ...props },
   ref,
 ) {
   const { density } = useEds()
