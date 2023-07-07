@@ -112,7 +112,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
 
   return (
     <ThemeProvider theme={token}>
-      <StyledNativeDialog ref={combinedDialogRef} onClick={handleDismiss}>
+      <StyledNativeDialog ref={combinedDialogRef} onMouseDown={handleDismiss}>
         {open && (
           <StyledDialog elevation="above_scrim" {...props} ref={ref}>
             {children}
