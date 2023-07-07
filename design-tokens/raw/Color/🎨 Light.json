@@ -27,6 +27,20 @@
       "type": "color"
     }
   },
+  "danger": {
+    "base": {
+      "value": "{Cold Red.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Cold Red.1200}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Cold Red.1400}",
+      "type": "color"
+    }
+  },
   "info": {
     "base": {
       "value": "{Sky Blue.700}",
@@ -41,17 +55,17 @@
       "type": "color"
     }
   },
-  "danger": {
+  "success": {
     "base": {
-      "value": "{Cold Red.900}",
+      "value": "{Lichen Green.600}",
       "type": "color"
     },
     "em": {
-      "value": "{Cold Red.1200}",
+      "value": "{Lichen Green.900}",
       "type": "color"
     },
     "strong": {
-      "value": "{Cold Red.1400}",
+      "value": "{Success Green.1300}",
       "type": "color"
     }
   },
@@ -69,17 +83,17 @@
       "type": "color"
     }
   },
-  "success": {
+  "error": {
     "base": {
-      "value": "{Lichen Green.600}",
+      "value": "{Cold Red.900}",
       "type": "color"
     },
     "em": {
-      "value": "{Lichen Green.900}",
+      "value": "{Cold Red.1200}",
       "type": "color"
     },
     "strong": {
-      "value": "{Success Green.1300}",
+      "value": "{Cold Red.1400}",
       "type": "color"
     }
   },
@@ -127,9 +141,9 @@
       "type": "color"
     }
   },
-  "warning-subtle": {
+  "info-subtle": {
     "base": {
-      "value": "{Orange.200}",
+      "value": "{Mist Blue.300}",
       "type": "color"
     }
   },
@@ -139,9 +153,15 @@
       "type": "color"
     }
   },
-  "info-subtle": {
+  "warning-subtle": {
     "base": {
-      "value": "{Mist Blue.300}",
+      "value": "{Orange.200}",
+      "type": "color"
+    }
+  },
+  "error-subtle": {
+    "base": {
+      "value": "{Red Warm.300}",
       "type": "color"
     }
   },
@@ -172,6 +192,19 @@
     }
   },
   "translucent": {
+    "none": {
+      "value": "{Neutral.1500}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "alpha",
+            "value": "0",
+            "space": "hsl"
+          }
+        }
+      }
+    },
     "weak": {
       "value": "{Neutral.1500}",
       "type": "color",
@@ -217,7 +250,7 @@
       "type": "color"
     }
   },
-  "danger-on-inverted": {
+  "error-on-inverted": {
     "base": {
       "value": "{Red Warm.500}",
       "type": "color"

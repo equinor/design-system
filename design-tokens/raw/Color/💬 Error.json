@@ -1,35 +1,35 @@
 {
   "notification-on-inverted": {
     "base": {
-      "value": "{danger-on-inverted.base}",
+      "value": "{error-on-inverted.base}",
       "type": "color"
     },
     "weak": {
-      "value": "{danger-on-inverted.weak}",
+      "value": "{error-on-inverted.weak}",
       "type": "color"
     },
     "subtle": {
-      "value": "{danger-on-inverted.subtle}",
+      "value": "{error-on-inverted.subtle}",
       "type": "color"
     }
   },
   "notification": {
     "base": {
-      "value": "{danger.base}",
+      "value": "{error.base}",
       "type": "color"
     },
     "em": {
-      "value": "{danger.em}",
+      "value": "{error.em}",
       "type": "color"
     },
     "strong": {
-      "value": "{danger.strong}",
+      "value": "{error.strong}",
       "type": "color"
     }
   },
   "notification-subtle": {
     "base": {
-      "value": "{danger-subtle.base}",
+      "value": "{error-subtle.base}",
       "type": "color"
     }
   }
