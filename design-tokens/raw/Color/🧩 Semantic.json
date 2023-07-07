@@ -251,24 +251,6 @@
       "value": "{neutral.base}",
       "type": "color"
     },
-    "disabled": {
-      "value": "{neutral-subtle.strong}",
-      "type": "color"
-    },
-    "active": {
-      "value": "{primary.base}",
-      "type": "color"
-    },
-    "input": {
-      "notification": {
-        "value": "{notification.base}",
-        "type": "color"
-      },
-      "notification-focused": {
-        "value": "{notification.em}",
-        "type": "color"
-      }
-    },
     "interactive": {
       "default": {
         "value": "{primary.base}",
@@ -276,6 +258,14 @@
       },
       "resting": {
         "value": "{neutral.base}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{neutral-subtle.strong}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{primary.base}",
         "type": "color"
       },
       "<variant>": {
@@ -295,6 +285,16 @@
           "value": "{variant.strong}",
           "type": "color"
         }
+      }
+    },
+    "input": {
+      "<notification>": {
+        "value": "{notification.base}",
+        "type": "color"
+      },
+      "<notification>-focused": {
+        "value": "{notification.em}",
+        "type": "color"
       }
     }
   }
