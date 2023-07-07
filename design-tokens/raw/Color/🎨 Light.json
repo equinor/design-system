@@ -57,11 +57,11 @@
   },
   "success": {
     "base": {
-      "value": "{Lichen Green.600}",
+      "value": "{Success Green.900}",
       "type": "color"
     },
     "em": {
-      "value": "{Lichen Green.900}",
+      "value": "{Success Green.1100}",
       "type": "color"
     },
     "strong": {
@@ -71,11 +71,11 @@
   },
   "warning": {
     "base": {
-      "value": "{Orange.600}",
+      "value": "{Orange.800}",
       "type": "color"
     },
     "em": {
-      "value": "{Orange.1000}",
+      "value": "{Orange.1100}",
       "type": "color"
     },
     "strong": {
@@ -93,7 +93,7 @@
       "type": "color"
     },
     "strong": {
-      "value": "{Cold Red.1400}",
+      "value": "{Cold Red.1300}",
       "type": "color"
     }
   },
