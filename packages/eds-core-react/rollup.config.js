@@ -50,7 +50,6 @@ export default [
         sourcemap: isDevelopment,
         entryFileNames: '[name].mjs',
       },
-      { file: './dist/eds-core-react.cjs', format: 'cjs' },
     ],
   },
 ]
