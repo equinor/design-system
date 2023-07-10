@@ -99,7 +99,7 @@
       "type": "number"
     },
     "round": {
-      "value": "50%",
+      "value": "99999999",
       "type": "number"
     }
   },
