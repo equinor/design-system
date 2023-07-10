@@ -11,13 +11,13 @@
     "Color/Modes/💬 Error",
     "Color/🧩 Semantic",
     "Dimension/Core",
-    "Dimension/Modes/Large",
-    "Dimension/Modes/Medium",
-    "Dimension/Modes/Small",
-    "Dimension/Base",
+    "Dimension/Modes/Spacious",
     "Dimension/Semantic",
+    ".SpacingModes/Modes/Large",
+    ".SpacingModes/Modes/Medium",
+    ".SpacingModes/Modes/Small",
     "Typography/Core",
     "Typography/Semantic",
-    "Density/Spacious"
+    ".SpacingModes"
   ]
 }

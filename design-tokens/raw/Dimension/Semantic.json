@@ -1,76 +1,18 @@
 {
-  "shape": {
-    "height": {
-      "XS": {
-        "value": "{dimension.stack.150}",
-        "type": "number"
-      },
-      "SM": {
-        "value": "{dimension.stack.175}",
-        "type": "number"
-      },
-      "MD": {
-        "value": "{dimension.stack.200}",
-        "type": "number"
-      },
-      "LG": {
-        "value": "{dimension.stack.250}",
-        "type": "number"
-      },
-      "XL": {
-        "value": "{dimension.stack.300}",
-        "type": "number"
+  "Space": {
+    "Component": {
+      "Inset Squish": {
+        "SM": {
+          "Inline ↔︎": {
+            "value": "a",
+            "type": "number"
+          },
+          "Block ↕︎": {
+            "value": "a",
+            "type": "number"
+          }
+        }
       }
-    },
-    "width": {
-      "XS": {
-        "value": "{shape.height.XS}",
-        "type": "number"
-      }
-    },
-    "border-radius": {
-      "none": {
-        "value": "0px",
-        "type": "number"
-      },
-      "rounded": {
-        "value": "0px",
-        "type": "number"
-      },
-      "round": {
-        "value": "50%",
-        "type": "number"
-      }
-    }
-  },
-  "button": {
-    "height": {
-      "value": "36px",
-      "type": "number"
-    },
-    "border-radius": {
-      "value": "{border-radius.rounded}",
-      "type": "number"
-    }
-  },
-  "fab": {
-    "height": {
-      "value": "{dimension.stack.250}",
-      "type": "number"
-    },
-    "border-radius": {
-      "value": "{border-radius.round}",
-      "type": "number"
-    }
-  },
-  "tab": {
-    "height": {
-      "value": "{dimension.stack.250}",
-      "type": "number"
-    },
-    "border-radious": {
-      "value": "{border-radius.none}",
-      "type": "number"
     }
   }
 }

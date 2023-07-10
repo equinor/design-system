@@ -1,14 +1,130 @@
 {
-  "border-width": {
-    "type": "number",
+  "Space": {
+    "Component": {
+      "inline ↔︎": {
+        "XXS": {
+          "type": "number",
+          "value": "{dimension.inline.25}"
+        },
+        "XS": {
+          "type": "number",
+          "value": "{dimension.inline.50}"
+        },
+        "SM": {
+          "type": "number",
+          "value": "{dimension.inline.75}"
+        },
+        "MD": {
+          "type": "number",
+          "value": "{dimension.inline.100}"
+        },
+        "LG": {
+          "type": "number",
+          "value": "{dimension.inline.125}"
+        },
+        "XL": {
+          "type": "number",
+          "value": "{dimension.inline.150}"
+        }
+      },
+      "Block ↕︎": {
+        "XXS": {
+          "type": "number",
+          "value": "{dimension.stack.25}"
+        },
+        "XS": {
+          "type": "number",
+          "value": "{dimension.stack.50}"
+        },
+        "SM": {
+          "type": "number",
+          "value": "{dimension.stack.75}"
+        },
+        "MD": {
+          "type": "number",
+          "value": "{dimension.stack.100}"
+        },
+        "LG": {
+          "type": "number",
+          "value": "{dimension.stack.125}"
+        },
+        "XL": {
+          "type": "number",
+          "value": "{dimension.stack.150}"
+        }
+      }
+    },
+    "UI-Shell": {
+      "Inline ↔︎": {
+        "SM": {
+          "value": "{dimension.inline.150}",
+          "type": "number"
+        },
+        "MD": {
+          "value": "{dimension.inline.200}",
+          "type": "number"
+        }
+      },
+      "Block ↕︎": {
+        "SM": {
+          "value": "{dimension.inline.150}",
+          "type": "number"
+        },
+        "MD": {
+          "value": "{dimension.inline.200}",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "Min-height ↕︎": {
+    "XS": {
+      "type": "number",
+      "value": "{dimension.stack.100}"
+    },
+    "SM": {
+      "type": "number",
+      "value": "{dimension.stack.150}"
+    },
+    "MD": {
+      "type": "number",
+      "value": "{dimension.stack.200}"
+    },
+    "LG": {
+      "type": "number",
+      "value": "{dimension.stack.250}"
+    },
+    "XL": {
+      "type": "number",
+      "value": "{dimension.stack.300}"
+    }
+  },
+  "Border-radius": {
     "none": {
-      "value": "0"
+      "value": "0",
+      "type": "number"
     },
-    "thin": {
-      "value": "1"
+    "rounded": {
+      "value": "{dimension.stack.25}",
+      "type": "number"
     },
-    "thick": {
-      "value": "2"
+    "round": {
+      "value": "50%",
+      "type": "number"
+    }
+  },
+  "Border-width": {
+    "none": {
+      "value": "0",
+      "type": "number"
+    },
+    "default": {
+      "value": "1",
+      "type": "number"
+    },
+    "focused": {
+      "value": "2",
+      "type": "number"
     }
   }
 }
