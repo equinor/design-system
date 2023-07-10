@@ -1,0 +1,38 @@
+/* 💬 Notification.Warning.tokens.json */
+
+{
+  'notification-subtle': {
+    base: {
+      $type: 'color',
+      $value: '{warning-subtle.base}',
+    },
+  },
+  notification: {
+    strong: {
+      $type: 'color',
+      $value: '{warning.strong}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{warning.em}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{warning.base}',
+    },
+  },
+  'notification-on-inverted': {
+    subtle: {
+      $type: 'color',
+      $value: '{warning-on-inverted.subtle}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{warning-on-inverted.weak}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{warning-on-inverted.base}',
+    },
+  },
+}

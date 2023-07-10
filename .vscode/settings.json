@@ -8,6 +8,7 @@
   },
   "files.associations": {
     "*.json": "jsonc",
+    "*.tokens":"json5",
     "[Dd]ockerfile*": "dockerfile",
     "docker-compose*": "yaml"
   },

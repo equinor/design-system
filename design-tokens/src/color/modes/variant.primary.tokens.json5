@@ -1,0 +1,32 @@
+/* ⛔️ Variant.Primary.tokens.json */
+
+{
+  'variant-subtle': {
+    strong: {
+      $type: 'color',
+      $value: '{primary-subtle.em}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{primary-subtle.base}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{neutral-subtle.subtle}',
+    },
+  },
+  variant: {
+    strong: {
+      $type: 'color',
+      $value: '{primary.strong}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{primary.em}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{primary.base}',
+    },
+  },
+}

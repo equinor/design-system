@@ -1,0 +1,32 @@
+/* ⛔️ Variant.Danger.tokens.json */
+
+{
+  'variant-subtle': {
+    strong: {
+      $type: 'color',
+      $value: '{danger-subtle.em}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{danger-subtle.base}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{neutral-subtle.subtle}',
+    },
+  },
+  variant: {
+    strong: {
+      $type: 'color',
+      $value: '{danger.strong}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{danger.em}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{danger.base}',
+    },
+  },
+}
