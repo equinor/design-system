@@ -7,9 +7,9 @@
   ],
   "type": "module",
   "exports": {
-    ".": {
+    "import": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js"
+      "default": "./dist/esm/index.js"
     }
   },
   "license": "MIT",
