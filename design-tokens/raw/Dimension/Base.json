@@ -61,24 +61,28 @@
       }
     }
   },
-  "Min-height": {
-    "XS": {
+  "Size": {
+    "XXS": {
       "type": "number",
       "value": "{dimension.stack.100}"
     },
-    "SM": {
+    "XS": {
       "type": "number",
       "value": "{dimension.stack.150}"
+    },
+    "SM": {
+      "type": "number",
+      "value": "{dimension.stack.175}"
     },
     "MD": {
       "type": "number",
       "value": "{dimension.stack.200}"
     },
-    "LG": {
+    "XL": {
       "type": "number",
       "value": "{dimension.stack.250}"
     },
-    "XL": {
+    "2XL": {
       "type": "number",
       "value": "{dimension.stack.300}"
     }

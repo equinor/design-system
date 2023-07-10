@@ -1,0 +1,40 @@
+{
+  "Component": {
+    "Squish": {
+      "SM": {
+        "Padding inline ↔︎": {
+          "value": "{Space.Inline.MD}",
+          "type": "number"
+        },
+        "Padding block ↕︎": {
+          "value": "{Space.Block.XS}",
+          "type": "number"
+        },
+        "Min Height ↕︎": {
+          "value": "{Size.SM}",
+          "type": "number"
+        }
+      },
+      "MD": {
+        "Padding inline ↔︎": {
+          "value": "{Space.Inline.MD}",
+          "type": "number"
+        },
+        "Padding block ↕︎": {
+          "value": "{Space.Block.SM}",
+          "type": "number"
+        }
+      },
+      "LG": {
+        "Padding inline ↔︎": {
+          "value": "{Space.Inline.XL}",
+          "type": "number"
+        },
+        "Padding block ↕︎": {
+          "value": "{Space.Block.MD}",
+          "type": "number"
+        }
+      }
+    }
+  }
+}
