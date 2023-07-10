@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.32.0] - 2023-07-10
+
+### Fixed
+
+- 🐛 `Autocomplete`: Allow option value of 0 by @oddvernes in https://github.com/equinor/design-system/pull/2957
+- 🐛 `Popover`, `Card`: fixed style-syntax that affected users with `styled-components` v6 in by @oddvernes in https://github.com/equinor/design-system/pull/2953
+- 🐛 `Typography`: make `color` a transient prop so it doesn't show up in the dom by @oddvernes in https://github.com/equinor/design-system/pull/2952
+- 💄 `Sidebar`: Remove visible scrollbar when collapsed by @oddvernes in https://github.com/equinor/design-system/pull/2863
+
+### Changed
+
+- ♻️🚸 `Dialog`: Refactored to use native dialog under the hood by @oddvernes in https://github.com/equinor/design-system/pull/2950
+- ⚡️ `Tabs`: conditionally render tab panels (previously display:none) by @oddvernes in https://github.com/equinor/design-system/pull/2947
+- ⬆️ updated dependencies by @oddvernes in https://github.com/equinor/design-system/pull/2925
+- ⬆️ Update floating-ui by @oddvernes in https://github.com/equinor/design-system/pull/2922
+- ⬆️ Upgrade rollup to v3 by @oddvernes in https://github.com/equinor/design-system/pull/2908
+- 🚸 `Scrim`/`Dialog`: trigger dismiss on mousedown to prevent accidental "click outside" by @oddvernes in https://github.com/equinor/design-system/pull/2923
+- 📝 `Autocomplete`: Improved selectAll story in storybook by @denektenina in https://github.com/equinor/design-system/pull/2883
+- 📝 Storybook, improved documentation: Add null as a possible value for useState hooks that receive HTML elements to avoid type error by @FredrikMWold in https://github.com/equinor/design-system/pull/2891
+- ⬆️ Storybook updated to v7 by @oddvernes in https://github.com/equinor/design-system/pull/2866
+- 🚸 `SideBar.Accordion`: Made the way `isExpanded` works more intuitive by @denektenina in https://github.com/equinor/design-system/pull/2870
+
+### Added
+
+- ✅ Added test coverage for the new `SideBar.Accordion` and `SideBar.AccordionItem` by @denektenina in https://github.com/equinor/design-system/pull/2867
+
 ## [0.31.1] - 2023-04-25
 
 ### Fixed

@@ -48,6 +48,7 @@ export default [
         preserveModulesRoot: 'src',
         format: 'es',
         sourcemap: isDevelopment,
+        entryFileNames: '[name].mjs',
       },
     ],
   },
