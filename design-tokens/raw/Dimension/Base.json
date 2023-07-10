@@ -1,6 +1,6 @@
 {
-  "spacing": {
-    "component": {
+  "Space": {
+    "Component": {
       "inline": {
         "XXS": {
           "type": "number",
@@ -54,7 +54,7 @@
         }
       }
     },
-    "ui-shell": {
+    "UI-Shell": {
       "inline": {
         "SM": {
           "value": "{dimension.inline.150}",
@@ -77,86 +77,50 @@
       }
     }
   },
-  "sizing": {
-    "shape": {
-      "height": {
-        "XS": {
-          "type": "number",
-          "value": "{dimension.stack.100}"
-        },
-        "SM": {
-          "type": "number",
-          "value": "{dimension.stack.150}"
-        },
-        "MD": {
-          "type": "number",
-          "value": "{dimension.stack.200}"
-        },
-        "LG": {
-          "type": "number",
-          "value": "{dimension.stack.250}"
-        },
-        "XL": {
-          "type": "number",
-          "value": "{dimension.stack.300}"
-        }
-      }
+  "min-height": {
+    "XS": {
+      "type": "number",
+      "value": "{dimension.stack.100}"
     },
-    "border": {
-      "action-outlined": {
-        "value": "{border-width.thin}",
-        "type": "number"
-      },
-      "divider": {
-        "value": "1",
-        "type": "number"
-      },
-      "input": {
-        "value": "1",
-        "type": "number"
-      },
-      "input-focused": {
-        "value": "2",
-        "type": "number"
-      },
-      "table-row": {
-        "value": "1",
-        "type": "number"
-      },
-      "table-header": {
-        "value": "2",
-        "type": "number"
-      },
-      "focus-frame": {
-        "value": "1",
-        "type": "number"
-      }
+    "SM": {
+      "type": "number",
+      "value": "{dimension.stack.150}"
+    },
+    "MD": {
+      "type": "number",
+      "value": "{dimension.stack.200}"
+    },
+    "LG": {
+      "type": "number",
+      "value": "{dimension.stack.250}"
+    },
+    "XL": {
+      "type": "number",
+      "value": "{dimension.stack.300}"
     }
   },
-  "border": {
+  "border-radius": {
     "none": {
       "value": "0",
       "type": "number"
     },
-    "rounded-radius": {
+    "rounded": {
       "value": "{dimension.stack.25}",
-      "type": "number"
-    },
-    "outlined-width": {
-      "value": "1",
-      "type": "number"
-    },
-    "focused-width": {
-      "value": "2",
       "type": "number"
     }
   },
-  "component": {
-    "inline": {
-      "xxs": {
-        "value": "100",
-        "type": "spacing"
-      }
+  "border-width": {
+    "none": {
+      "value": "0",
+      "type": "number"
+    },
+    "default": {
+      "value": "1",
+      "type": "number"
+    },
+    "focused": {
+      "value": "2",
+      "type": "number"
     }
   }
 }
