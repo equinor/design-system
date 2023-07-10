@@ -2,7 +2,7 @@
   "Shape-Squared": {
     "SM": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.MD}",
+        "value": "{Space-Inline.XS}",
         "type": "number"
       },
       "Padding block ↕︎": {
@@ -16,7 +16,7 @@
     },
     "MD": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.MD}",
+        "value": "{Space-Inline.SM}",
         "type": "number"
       },
       "Padding block ↕︎": {
@@ -30,7 +30,7 @@
     },
     "LG": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.XL}",
+        "value": "{Space-Inline.MD}",
         "type": "number"
       },
       "Padding block ↕︎": {
@@ -73,12 +73,12 @@
       }
     },
     "LG": {
-      "Padding block ↕︎": {
-        "value": "{Space-Stack.MD}",
-        "type": "number"
-      },
       "Padding inline ↔︎": {
         "value": "{Space-Inline.XL}",
+        "type": "number"
+      },
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.MD}",
         "type": "number"
       },
       "Min Height ↕︎": {
@@ -90,11 +90,11 @@
   "Shape-Stretched": {
     "SM": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.MD}",
+        "value": "{Space-Inline.XXS}",
         "type": "number"
       },
       "Padding block ↕︎": {
-        "value": "{Space-Stack.XS}",
+        "value": "{Space-Stack.SM}",
         "type": "number"
       },
       "Min Height ↕︎": {
@@ -104,7 +104,7 @@
     },
     "MD": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.MD}",
+        "value": "{Space-Inline.XS}",
         "type": "number"
       },
       "Padding block ↕︎": {
@@ -118,7 +118,7 @@
     },
     "LG": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.XL}",
+        "value": "{Space-Inline.XS}",
         "type": "number"
       },
       "Padding block ↕︎": {
