@@ -10,13 +10,13 @@
     "Color/Modes/💬 Warning",
     "Color/Modes/💬 Error",
     "Color/🧩 Semantic",
-    "Dimension/Core",
     "Dimension/Modes/Spacious",
+    "Dimension/Base",
     "Dimension/Semantic",
+    "Typography/Core",
+    "Typography/Semantic",
     "Backup/Modes/Large",
     "Backup/Modes/Medium",
-    "Backup/Modes/Small",
-    "Typography/Core",
-    "Typography/Semantic"
+    "Backup/Modes/Small"
   ]
 }
