@@ -1,135 +1,133 @@
 {
-  "Shape": {
-    "Squish": {
-      "SM": {
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.MD}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.XS}",
-          "type": "number"
-        },
-        "Min Height ↕︎": {
-          "value": "{Size.SM}",
-          "type": "number"
-        }
+  "Shape-Squared": {
+    "SM": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.MD}",
+        "type": "number"
       },
-      "MD": {
-        "Min Height ↕︎": {
-          "value": "{Size.MD}",
-          "type": "number"
-        },
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.MD}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.SM}",
-          "type": "number"
-        }
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.XS}",
+        "type": "number"
       },
-      "LG": {
-        "Min Height ↕︎": {
-          "value": "{Size.LG}",
-          "type": "number"
-        },
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.XL}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.MD}",
-          "type": "number"
-        }
+      "Min Height ↕︎": {
+        "value": "{Size.SM}",
+        "type": "number"
       }
     },
-    "Square": {
-      "SM": {
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.MD}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.XS}",
-          "type": "number"
-        },
-        "Min Height ↕︎": {
-          "value": "{Size.SM}",
-          "type": "number"
-        }
+    "MD": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.MD}",
+        "type": "number"
       },
-      "MD": {
-        "Min Height ↕︎": {
-          "value": "{Size.MD}",
-          "type": "number"
-        },
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.MD}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.SM}",
-          "type": "number"
-        }
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.SM}",
+        "type": "number"
       },
-      "LG": {
-        "Min Height ↕︎": {
-          "value": "{Size.LG}",
-          "type": "number"
-        },
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.XL}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.MD}",
-          "type": "number"
-        }
+      "Min Height ↕︎": {
+        "value": "{Size.MD}",
+        "type": "number"
       }
     },
-    "Stretch": {
-      "SM": {
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.MD}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.XS}",
-          "type": "number"
-        },
-        "Min Height ↕︎": {
-          "value": "{Size.SM}",
-          "type": "number"
-        }
+    "LG": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.XL}",
+        "type": "number"
       },
-      "MD": {
-        "Min Height ↕︎": {
-          "value": "{Size.MD}",
-          "type": "number"
-        },
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.MD}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.SM}",
-          "type": "number"
-        }
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.MD}",
+        "type": "number"
       },
-      "LG": {
-        "Min Height ↕︎": {
-          "value": "{Size.LG}",
-          "type": "number"
-        },
-        "Padding inline ↔︎": {
-          "value": "{Space-Inline.XL}",
-          "type": "number"
-        },
-        "Padding block ↕︎": {
-          "value": "{Space-Block.MD}",
-          "type": "number"
-        }
+      "Min Height ↕︎": {
+        "value": "{Size.LG}",
+        "type": "number"
+      }
+    }
+  },
+  "Shape-Squished": {
+    "SM": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.MD}",
+        "type": "number"
+      },
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.XS}",
+        "type": "number"
+      },
+      "Min Height ↕︎": {
+        "value": "{Size.SM}",
+        "type": "number"
+      }
+    },
+    "MD": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.MD}",
+        "type": "number"
+      },
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.SM}",
+        "type": "number"
+      },
+      "Min Height ↕︎": {
+        "value": "{Size.MD}",
+        "type": "number"
+      }
+    },
+    "LG": {
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.MD}",
+        "type": "number"
+      },
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.XL}",
+        "type": "number"
+      },
+      "Min Height ↕︎": {
+        "value": "{Size.LG}",
+        "type": "number"
+      }
+    }
+  },
+  "Shape-Stretched": {
+    "SM": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.MD}",
+        "type": "number"
+      },
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.XS}",
+        "type": "number"
+      },
+      "Min Height ↕︎": {
+        "value": "{Size.SM}",
+        "type": "number"
+      }
+    },
+    "MD": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.MD}",
+        "type": "number"
+      },
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.SM}",
+        "type": "number"
+      },
+      "Min Height ↕︎": {
+        "value": "{Size.MD}",
+        "type": "number"
+      }
+    },
+    "LG": {
+      "Padding inline ↔︎": {
+        "value": "{Space-Inline.XL}",
+        "type": "number"
+      },
+      "Padding block ↕︎": {
+        "value": "{Space-Stack.MD}",
+        "type": "number"
+      },
+      "Min Height ↕︎": {
+        "value": "{Size.LG}",
+        "type": "number"
       }
     }
   }

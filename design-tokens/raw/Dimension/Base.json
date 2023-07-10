@@ -29,7 +29,7 @@
       "type": "number"
     }
   },
-  "Space-Block": {
+  "Space-Stack": {
     "XXS": {
       "type": "number",
       "value": "{dimension.stack.25}"
