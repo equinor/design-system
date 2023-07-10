@@ -5,12 +5,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Color/🧩 Core": "enabled",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:84:69994",
     "$figmaModeId": "84:0",
@@ -384,12 +381,9 @@
     "name": "Dimension",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "group": "⛔️ CoreDimension",
     "$figmaCollectionId": "VariableCollectionId:84:70356",
@@ -408,12 +402,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/🎛 Primary": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:74:69912",
     "$figmaModeId": "74:0",
@@ -435,12 +426,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/🎛  Secondary": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:74:69912",
     "$figmaModeId": "74:1",
@@ -462,12 +450,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/🎛  Danger": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaVariableReferences": {
       "variant.base": "9b76cf225b14c67a22a9e0dcc1b9dc9a6b95fc8d",
@@ -488,12 +473,9 @@
     "selectedTokenSets": {
       "Color/Modes/🎨 Light": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83905",
     "$figmaModeId": "102:16",
@@ -564,12 +546,9 @@
     "selectedTokenSets": {
       "Color/Modes/🎨 Light": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83905",
     "$figmaModeId": "102:17",
@@ -639,11 +618,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "enabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:4",
@@ -694,11 +671,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "enabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:5",
@@ -749,11 +724,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "enabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:48:42",
     "$figmaModeId": "48:6",
@@ -806,12 +779,9 @@
       "Color/🧩 Semantic": "enabled",
       "Color/Modes/🎨 Light": "source",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:126:94140",
     "$figmaModeId": "126:0",
@@ -888,11 +858,10 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "source",
-      ".SpacingModes": "disabled",
       "Dimension/Core": "enabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaVariableReferences": {
       "spacing.component.inline.XXS": "8106078227a346a44add4e684aac35b006b90cf2",
@@ -938,11 +907,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "source",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "enabled"
+      "Backup/Modes/Large": "enabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "group": "💎 Dimension",
     "$figmaCollectionId": "VariableCollectionId:94:76669",
@@ -963,11 +930,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "source",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "enabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "enabled",
+      "Backup/Modes/Small": "disabled"
     },
     "group": "💎 Dimension",
     "$figmaCollectionId": "VariableCollectionId:94:76669",
@@ -988,11 +953,9 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "Dimension/Modes/Spacious": "source",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "enabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "enabled"
     },
     "group": "💎 Dimension",
     "$figmaCollectionId": "VariableCollectionId:94:76669",
@@ -1015,12 +978,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/💬 Info": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:12",
@@ -1043,12 +1003,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/💬 Success": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:13",
@@ -1071,12 +1028,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/💬 Warning": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:14",
@@ -1099,12 +1053,9 @@
       "Color/Modes/🎨 Light": "source",
       "Color/Modes/💬 Error": "enabled",
       "Color/🧩 Core": "source",
-      "Dimension/Modes/Spacious": "disabled",
-      ".SpacingModes": "disabled",
-      "Dimension/Core": "disabled",
-      ".SpacingModes/Modes/Small": "disabled",
-      ".SpacingModes/Modes/Medium": "disabled",
-      ".SpacingModes/Modes/Large": "disabled"
+      "Backup/Modes/Large": "disabled",
+      "Backup/Modes/Medium": "disabled",
+      "Backup/Modes/Small": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:102:83884",
     "$figmaModeId": "102:15",

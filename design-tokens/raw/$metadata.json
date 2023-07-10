@@ -13,11 +13,10 @@
     "Dimension/Core",
     "Dimension/Modes/Spacious",
     "Dimension/Semantic",
-    ".SpacingModes/Modes/Large",
-    ".SpacingModes/Modes/Medium",
-    ".SpacingModes/Modes/Small",
+    "Backup/Modes/Large",
+    "Backup/Modes/Medium",
+    "Backup/Modes/Small",
     "Typography/Core",
-    "Typography/Semantic",
-    ".SpacingModes"
+    "Typography/Semantic"
   ]
 }
