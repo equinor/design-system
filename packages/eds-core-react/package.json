@@ -5,14 +5,9 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "exports": {
-    "import": {
-      "types": "./dist/types/index.d.ts",
-      "default": "./dist/esm/index.js"
-    }
-  },
   "types": "dist/types/index.d.ts",
-  "module": "./dist/esm/index.js",
+  "main": "dist/eds-core-react.cjs",
+  "module": "dist/esm/index.js",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
