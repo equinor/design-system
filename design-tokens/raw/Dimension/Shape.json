@@ -90,7 +90,7 @@
   "Shape-Stretched": {
     "SM": {
       "Padding inline ↔︎": {
-        "value": "{Space-Inline.XXS}",
+        "value": "{Space-Inline.3XS}",
         "type": "number"
       },
       "Padding block ↕︎": {

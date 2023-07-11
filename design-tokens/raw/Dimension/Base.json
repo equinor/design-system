@@ -4,9 +4,17 @@
       "value": "0",
       "type": "number"
     },
-    "XXS": {
+    "4XS": {
+      "type": "number",
+      "value": "{dimension.inline.20}"
+    },
+    "3XS": {
       "type": "number",
       "value": "{dimension.inline.30}"
+    },
+    "2XS": {
+      "type": "number",
+      "value": "{dimension.inline.40}"
     },
     "XS": {
       "type": "number",
@@ -38,9 +46,17 @@
       "value": "0",
       "type": "number"
     },
-    "XXS": {
+    "4XS": {
       "type": "number",
-      "value": "{dimension.stack.25}"
+      "value": "{dimension.stack.20}"
+    },
+    "3XS": {
+      "type": "number",
+      "value": "{dimension.stack.30}"
+    },
+    "2XS": {
+      "type": "number",
+      "value": "{dimension.stack.40}"
     },
     "XS": {
       "type": "number",
@@ -68,7 +84,7 @@
     }
   },
   "Size": {
-    "XXS": {
+    "2XS": {
       "type": "number",
       "value": "{dimension.stack.100}"
     },
@@ -99,11 +115,11 @@
   },
   "Border-radius": {
     "none": {
-      "value": "0",
+      "value": "{dimension.stack.0}",
       "type": "number"
     },
     "rounded": {
-      "value": "{dimension.stack.25}",
+      "value": "{dimension.stack.30}",
       "type": "number"
     },
     "round": {
@@ -113,15 +129,15 @@
   },
   "Border-width": {
     "none": {
-      "value": "0",
+      "value": "{dimension.inline.0}",
       "type": "number"
     },
     "default": {
-      "value": "1",
+      "value": "{dimension.inline.10}",
       "type": "number"
     },
-    "focused": {
-      "value": "2",
+    "strong": {
+      "value": "{dimension.inline.20}",
       "type": "number"
     }
   }
