@@ -33,6 +33,10 @@
         "type": "color",
         "description": "--eds-color-text-interactive-default: var(--eds-theme-primary-base, #007079);"
       },
+      "active": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
       "hover": {
         "value": "{primary.em}",
         "type": "color"

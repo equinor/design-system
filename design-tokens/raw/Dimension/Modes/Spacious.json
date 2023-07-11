@@ -1,9 +1,25 @@
 {
   "dimension": {
     "inline": {
-      "25": {
+      "0": {
+        "type": "number",
+        "value": "0"
+      },
+      "10": {
+        "type": "number",
+        "value": "1"
+      },
+      "20": {
+        "type": "number",
+        "value": "2"
+      },
+      "30": {
         "type": "number",
         "value": "4"
+      },
+      "40": {
+        "type": "number",
+        "value": "6"
       },
       "50": {
         "type": "number",
