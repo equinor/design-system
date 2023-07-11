@@ -1,5 +1,9 @@
 {
   "Space-Inline": {
+    "none": {
+      "value": "0",
+      "type": "number"
+    },
     "XXS": {
       "type": "number",
       "value": "{dimension.inline.25}"
@@ -30,6 +34,10 @@
     }
   },
   "Space-Stack": {
+    "none": {
+      "value": "0",
+      "type": "number"
+    },
     "XXS": {
       "type": "number",
       "value": "{dimension.stack.25}"
