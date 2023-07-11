@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- ⏪️Added back commonjs build and changed file extension of modules from `.mjs` to `.js` due to a compatability issue with `React 17`. Restricted `styled-components` to below version 6 in `peerDependencies`.
+- ⏪️Added back commonjs build and changed file extension of modules from `.mjs` to `.js` due to a compatability issue with `React 17`. 
+- 📌 Restricted `styled-components` to below version 6 in `peerDependencies`. this package does not support v6 yet.
 
 ## [0.32.0] - 2023-07-10
 
