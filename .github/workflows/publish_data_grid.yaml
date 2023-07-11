@@ -58,7 +58,7 @@ jobs:
   publish-data-grid-package:
     name: Publish data grid to npm
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: [setup, packages]
     steps:
       - name: Use "dist" cache
         id: dist-cache
