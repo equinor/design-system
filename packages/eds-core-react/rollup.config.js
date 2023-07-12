@@ -47,10 +47,11 @@ export default [
         preserveModules: true,
         preserveModulesRoot: 'src',
         format: 'es',
+        interop: 'auto',
         sourcemap: isDevelopment,
         /* entryFileNames: '[name].mjs', */
       },
-      { file: './dist/eds-core-react.cjs', format: 'cjs' },
+      { file: './dist/eds-core-react.cjs', format: 'cjs', interop: 'auto' },
     ],
   },
 ]
