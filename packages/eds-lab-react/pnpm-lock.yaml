@@ -9,16 +9,16 @@ dependencies:
     specifier: ^7.22.5
     version: 7.22.5
   '@equinor/eds-core-react':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-core-react
   '@equinor/eds-icons':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-icons
   '@equinor/eds-tokens':
     specifier: workspace:*
     version: link:../eds-tokens
   '@equinor/eds-utils':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-utils
   '@types/react-datepicker':
     specifier: ^4.11.2

@@ -49,6 +49,7 @@ export default [
         format: 'es',
         sourcemap: isDevelopment,
       },
+      { file: './dist/eds-lab-react.cjs', format: 'cjs', interop: 'auto' },
     ],
   },
 ]
