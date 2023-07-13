@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0-beta.2] - 2023-07-13
 
-- ⬆️ Bump to eds-core-react@0.32.2 and added `^` semver range to `eds-core-react` and `eds-icons` dependencies
+- ⬆️ Bump to eds-core-react@0.32.2 and added `^` semver range to `eds-core-react`, `eds-utils` and `eds-icons` dependencies
 - 📦️ Added commonjs build to output
 
 ## [0.1.0-beta.1] - 2023-07-12
