@@ -1,19 +1,13 @@
 {
   "name": "@equinor/eds-lab-react",
-  "version": "0.7.1-dev20230710-2",
+  "version": "0.7.1-dev20230713",
   "description": "The lab for the Equinor Design System",
   "sideEffects": [
     "**/*.css"
   ],
   "type": "module",
-  "exports": {
-    "import": {
-      "types": "./dist/types/index.d.ts",
-      "default": "./dist/esm/index.mjs"
-    }
-  },
+  "exports": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
-  "module": "./dist/esm/index.mjs",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
@@ -96,7 +90,7 @@
   "peerDependencies": {
     "react": ">=16.8",
     "react-dom": ">=16.8",
-    "styled-components": ">=4.2"
+    "styled-components": ">=4.2 < 6"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.5",
