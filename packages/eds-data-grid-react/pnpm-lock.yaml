@@ -1,17 +1,21 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@equinor/eds-core-react':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-core-react
   '@equinor/eds-icons':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-icons
   '@equinor/eds-tokens':
     specifier: workspace:*
     version: link:../eds-tokens
   '@equinor/eds-utils':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-utils
   '@tanstack/react-table':
     specifier: ^8.8.5
@@ -11393,7 +11397,3 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
