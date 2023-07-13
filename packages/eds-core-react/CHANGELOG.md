@@ -5,11 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.32.2] - 2023-07-13
+
+### Fixed
+
+- 🐛 `Rollup` config: added `interop: auto`. This fixes an issue with the commonJs build where jest was unable to resolve styled-components in downstream tests
+
 ## [0.32.1] - 2023-07-11
 
 ### Changed
 
-- ⏪️Added back commonjs build and changed file extension of modules from `.mjs` to `.js` due to a compatability issue with `React 17`. 
+- ⏪️Added back commonjs build and changed file extension of modules from `.mjs` to `.js` due to a compatability issue with `React 17`.
 - 📌 Restricted `styled-components` to below version 6 in `peerDependencies`. this package does not support v6 yet.
 
 ## [0.32.0] - 2023-07-10
