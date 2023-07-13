@@ -5,9 +5,9 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "type": "module",
-  "exports": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/eds-lab-react.cjs",
+  "module": "./dist/esm/index.js",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
@@ -94,10 +94,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.5",
-    "@equinor/eds-core-react": "workspace:*",
-    "@equinor/eds-icons": "workspace:*",
+    "@equinor/eds-core-react": "workspace:^",
+    "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
-    "@equinor/eds-utils": "workspace:*",
+    "@equinor/eds-utils": "workspace:^",
     "@types/react-datepicker": "^4.11.2",
     "date-fns": "^2.30.0",
     "downshift": "^7.6.0",
