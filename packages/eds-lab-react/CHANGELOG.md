@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ⬆️ Upgrade rollup to v3 by @oddvernes in https://github.com/equinor/design-system/pull/2908
 - ⬆️ Storybook updated to v7 by @oddvernes in https://github.com/equinor/design-system/pull/2866
 - ⬆️ updated dependencies by @oddvernes in https://github.com/equinor/design-system/pull/2925
+- 📌 Restricted `styled-components` to below version 6 in `peerDependencies`. this package does not support v6 yet
 
 ## [0.7.0] - 2023-03-30
 
