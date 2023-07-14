@@ -14,6 +14,7 @@ import {
   typographyTemplate,
   bordersTemplate,
   mergeRefs,
+  useIsInDialog,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 import {
@@ -170,31 +171,40 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }),
     })
 
+    //temporary fix for tooltip inside dialog. Should be replaced by popover api when it is ready
+    const inDialog = useIsInDialog(refs.domReference.current)
+
+    const TooltipEl = (
+      <StyledTooltip
+        {...rest}
+        {...getFloatingProps({
+          ref: tooltipRef,
+          style: {
+            ...style,
+            position: strategy,
+            top: y || 0,
+            left: x || 0,
+          },
+        })}
+      >
+        {title}
+        <ArrowWrapper ref={arrowRef}>
+          <TooltipArrow className="arrowSvg">
+            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+          </TooltipArrow>
+        </ArrowWrapper>
+      </StyledTooltip>
+    )
+
     return (
       <>
-        <FloatingPortal id="eds-tooltip-container">
-          {shouldOpen && open && (
-            <StyledTooltip
-              {...rest}
-              {...getFloatingProps({
-                ref: tooltipRef,
-                style: {
-                  ...style,
-                  position: strategy,
-                  top: y || 0,
-                  left: x || 0,
-                },
-              })}
-            >
-              {title}
-              <ArrowWrapper ref={arrowRef}>
-                <TooltipArrow className="arrowSvg">
-                  <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-                </TooltipArrow>
-              </ArrowWrapper>
-            </StyledTooltip>
-          )}
-        </FloatingPortal>
+        {inDialog ? (
+          <>{shouldOpen && open && TooltipEl}</>
+        ) : (
+          <FloatingPortal id="eds-tooltip-container">
+            {shouldOpen && open && TooltipEl}
+          </FloatingPortal>
+        )}
         {updatedChildren}
       </>
     )

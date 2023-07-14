@@ -33,6 +33,7 @@ import {
   useToken,
   bordersTemplate,
   useIsomorphicLayoutEffect,
+  useIsInDialog,
 } from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
@@ -589,6 +590,9 @@ function AutocompleteInner<T>(
     [selectedItems, getLabel],
   )
 
+  //temporary fix when inside dialog. Should be replaced by popover api when it is ready
+  const inDialog = useIsInDialog(refs.domReference.current)
+
   const optionsList = (
     <div
       {...getFloatingProps({
@@ -728,7 +732,7 @@ function AutocompleteInner<T>(
             {...other}
           />
         </Container>
-        {disablePortal ? (
+        {disablePortal || inDialog ? (
           optionsList
         ) : (
           <FloatingPortal id="eds-autocomplete-container">

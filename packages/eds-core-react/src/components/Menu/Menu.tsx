@@ -9,6 +9,7 @@ import {
   useToken,
   bordersTemplate,
   useIsomorphicLayoutEffect,
+  useIsInDialog,
 } from '@equinor/eds-utils'
 import { menu as tokens } from './Menu.tokens'
 import { useEds } from '../EdsProvider'
@@ -206,29 +207,38 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     open,
   }
 
+  //temporary fix when inside dialog. Should be replaced by popover api when it is ready
+  const inDialog = useIsInDialog(anchorEl)
+
+  const menuElement = (
+    <ThemeProvider theme={token}>
+      <MenuPaper
+        elevation="raised"
+        {...props}
+        {...getFloatingProps({
+          ref: popoverRef,
+          style: {
+            ...style,
+            position: strategy,
+            top: y || 0,
+            left: x || 0,
+          },
+        })}
+      >
+        <MenuProvider>
+          <MenuContainer {...menuProps} ref={ref} />
+        </MenuProvider>
+      </MenuPaper>
+    </ThemeProvider>
+  )
+
   return (
     <>
-      <FloatingPortal id="eds-menu-container">
-        <ThemeProvider theme={token}>
-          <MenuPaper
-            elevation="raised"
-            {...props}
-            {...getFloatingProps({
-              ref: popoverRef,
-              style: {
-                ...style,
-                position: strategy,
-                top: y || 0,
-                left: x || 0,
-              },
-            })}
-          >
-            <MenuProvider>
-              <MenuContainer {...menuProps} ref={ref} />
-            </MenuProvider>
-          </MenuPaper>
-        </ThemeProvider>
-      </FloatingPortal>
+      {inDialog ? (
+        menuElement
+      ) : (
+        <FloatingPortal id="eds-menu-container">{menuElement}</FloatingPortal>
+      )}
     </>
   )
 })
