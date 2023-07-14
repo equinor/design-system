@@ -31,7 +31,6 @@ const StyledDialog = styled(Paper).attrs<DialogProps>({
     ${typographyTemplate(theme.typography)};
     ${bordersTemplate(theme.border)};
     grid-gap: ${theme.spacings.bottom};
-    overflow: hidden;
   `
 })
 
