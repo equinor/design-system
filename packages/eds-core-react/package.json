@@ -92,7 +92,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.5",
-    "@equinor/eds-icons": "workspace:*",
+    "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.24.3",
