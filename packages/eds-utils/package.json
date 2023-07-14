@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-utils",
-  "version": "0.8.1dev20230714",
+  "version": "0.8.1",
   "description": "Utility functions and hooks for the Equinor Design System",
   "sideEffects": false,
   "type": "module",

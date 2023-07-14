@@ -9,7 +9,7 @@ dependencies:
     specifier: ^7.22.5
     version: 7.22.5
   '@equinor/eds-icons':
-    specifier: workspace:*
+    specifier: workspace:^
     version: link:../eds-icons
   '@equinor/eds-tokens':
     specifier: workspace:*

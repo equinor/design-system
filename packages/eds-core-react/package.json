@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.32.2",
+  "version": "0.32.3",
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": [
     "**/*.css"
@@ -92,7 +92,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.5",
-    "@equinor/eds-icons": "workspace:*",
+    "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.24.3",
