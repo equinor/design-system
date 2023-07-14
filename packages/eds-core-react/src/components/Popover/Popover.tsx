@@ -14,6 +14,7 @@ import {
   mergeRefs,
   useToken,
   outlineTemplate,
+  useIsInDialog,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
@@ -189,6 +190,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const { density } = useEds()
     const token = useToken({ density }, popoverToken)
 
+    //temporary fix when inside dialog. Should be replaced by popover api when it is ready
+    const inDialog = useIsInDialog(anchorEl)
+
     const popover = (
       <ThemeProvider theme={token}>
         <PopoverPaper
@@ -216,7 +220,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <>
-        {withinPortal ? (
+        {withinPortal && !inDialog ? (
           <FloatingPortal id="eds-popover-container">
             {open && trapFocus
               ? open && (
