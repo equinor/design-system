@@ -188,7 +188,7 @@ export type AutocompleteProps<T> = {
   onInputChange?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
-  /**  Custom option label */
+  /**  Custom option label. NOTE: This is required when option is an object */
   optionLabel?: (option: T) => string
   /**  Custom option template */
   optionComponent?: (option: T, isSelected: boolean) => ReactNode
