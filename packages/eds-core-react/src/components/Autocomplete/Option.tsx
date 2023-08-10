@@ -56,7 +56,7 @@ export type AutocompleteOptionProps<T> = {
   isSelected: boolean
   isDisabled?: boolean
   multiline: boolean
-  optionComponent?: (option: T, isSelected: boolean) => ReactNode
+  optionComponent?: ReactNode
 } & LiHTMLAttributes<HTMLLIElement>
 
 function AutocompleteOptionInner<T>(

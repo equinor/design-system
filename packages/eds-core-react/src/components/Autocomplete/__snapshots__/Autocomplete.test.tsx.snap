@@ -80,9 +80,9 @@ exports[`Autocomplete Matches snapshot 1`] = `
 }
 
 <ul
-  aria-labelledby="downshift-0-label"
+  aria-labelledby="downshift-:r0:-label"
   class="c0 c1"
-  id="downshift-0-menu"
+  id="downshift-:r0:-menu"
   role="listbox"
   style="max-height: 300px;"
 >
@@ -91,13 +91,14 @@ exports[`Autocomplete Matches snapshot 1`] = `
     style="height: 144px; margin: 0px; grid-area: 1 / -1;"
   />
   <li
+    aria-disabled="false"
     aria-hidden="false"
     aria-posinset="1"
     aria-selected="false"
     aria-setsize="3"
     class="c2"
     data-index="0"
-    id="downshift-0-item-0"
+    id="downshift-:r0:-item-0"
     role="option"
     style="transform: translateY(0px); height: 48px;"
   >
@@ -108,13 +109,14 @@ exports[`Autocomplete Matches snapshot 1`] = `
     </span>
   </li>
   <li
+    aria-disabled="false"
     aria-hidden="false"
     aria-posinset="2"
     aria-selected="false"
     aria-setsize="3"
     class="c2"
     data-index="1"
-    id="downshift-0-item-1"
+    id="downshift-:r0:-item-1"
     role="option"
     style="transform: translateY(48px); height: 48px;"
   >
@@ -125,13 +127,14 @@ exports[`Autocomplete Matches snapshot 1`] = `
     </span>
   </li>
   <li
+    aria-disabled="false"
     aria-hidden="false"
     aria-posinset="3"
     aria-selected="false"
     aria-setsize="3"
     class="c2"
     data-index="2"
-    id="downshift-0-item-2"
+    id="downshift-:r0:-item-2"
     role="option"
     style="transform: translateY(96px); height: 48px;"
   >

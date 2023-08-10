@@ -345,7 +345,7 @@ function AutocompleteInner<T>(
     [optionLabel],
   )
 
-  const scrollContainer = useRef<HTMLElement>(null)
+  const scrollContainer = useRef<HTMLUListElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
     getScrollElement: () => scrollContainer.current,
@@ -363,6 +363,9 @@ function AutocompleteInner<T>(
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
+    isItemDisabled(item) {
+      return optionDisabled(item)
+    },
     itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
       onInputChange && onInputChange(inputValue)
@@ -417,6 +420,11 @@ function AutocompleteInner<T>(
       const { changes, type } = actionAndChanges
 
       switch (type) {
+        case useCombobox.stateChangeTypes.InputClick:
+          return {
+            ...changes,
+            isOpen: !(disabled || readOnly),
+          }
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
           return {
@@ -534,7 +542,6 @@ function AutocompleteInner<T>(
     getInputProps,
     highlightedIndex,
     getItemProps,
-    openMenu,
     inputValue,
     reset: resetCombobox,
   } = useCombobox(comboBoxProps)
@@ -544,12 +551,6 @@ function AutocompleteInner<T>(
       setSelectedItems(selectedOptions)
     }
   }, [isControlled, selectedOptions, setSelectedItems])
-
-  const openSelect = () => {
-    if (!isOpen && !(disabled || readOnly)) {
-      openMenu()
-    }
-  }
 
   const { x, y, refs, update, strategy } = useFloating<HTMLInputElement>({
     placement: 'bottom-start',
@@ -657,7 +658,6 @@ function AutocompleteInner<T>(
                     }),
                     item,
                     index,
-                    disabled,
                     style: {
                       transform: `translateY(${virtualItem.start}px)`,
                       ...(!multiline && {
@@ -696,8 +696,6 @@ function AutocompleteInner<T>(
             )}
             placeholder={placeholderText}
             readOnly={readOnly}
-            onFocus={openSelect}
-            onClick={openSelect}
             rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
             rightAdornments={
               <>
