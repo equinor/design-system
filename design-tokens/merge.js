@@ -1,4 +1,5 @@
-const fs = require('fs').promises
+const fsPromises = require('fs').promises
+const fs = require('fs')
 const JSON5 = require('json5')
 
 async function execute() {
@@ -40,7 +41,7 @@ async function execute() {
           })
         } else {
           console.error(
-            `MERGE ERROR: No available files for mode category ${modeCategory}`,
+            `🧐 No available mode-files for mode-category '${modeCategory}' - this tree was not modified`,
           )
           res[key] = value // TODO consider if this should be handled differently
         }
@@ -67,18 +68,28 @@ async function execute() {
 
   async function mergeFiles() {
     try {
-      const data = await fs.readFile('./src/color/semantic.tokens.json5')
+      const data = await fsPromises.readFile(
+        './src/color/semantic.tokens.json5',
+      )
       const file = Buffer.from(data).toString()
       const semanticTokens = JSON5.parse(file)
       const newJson = expandTree(semanticTokens)
-      console.log('result', JSON.stringify(newJson, null, 2))
+
+      fs.writeFile(
+        './build/semantic.tokens.expanded.json5',
+        JSON5.stringify(newJson, null, 2),
+        function (err) {
+          if (err) throw err
+          console.log('✅  File was successfully saved')
+        },
+      )
     } catch (e) {
       console.error(e)
     }
   }
 
   async function readFiles() {
-    const files = await fs.readdir('./src/color/modes')
+    const files = await fsPromises.readdir('./src/color/modes')
     const modeFiles = new Map()
     const modes = {}
 
@@ -93,7 +104,10 @@ async function execute() {
         modes[modeCategory] = [mode]
       }
       try {
-        const data = await fs.readFile(`./src/color/modes/${file}`, 'utf8')
+        const data = await fsPromises.readFile(
+          `./src/color/modes/${file}`,
+          'utf8',
+        )
         modeFiles.set(`${modeCategory}.${mode}`, JSON5.parse(data))
       } catch (e) {
         console.error(e)
