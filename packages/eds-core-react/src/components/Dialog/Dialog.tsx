@@ -72,7 +72,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   )
 
   useEffect(() => {
-    if (open && !localRef?.current?.hasAttribute('open')) {
+    if (open) {
       localRef?.current?.showModal()
     } else {
       localRef?.current?.close()
