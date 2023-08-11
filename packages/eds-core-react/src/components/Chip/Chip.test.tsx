@@ -30,7 +30,11 @@ describe('Chips', () => {
     expect(asFragment()).toMatchSnapshot()
 
     const { asFragment: asFragment2 } = render(
-      <Chip onClick={() => {}}>
+      <Chip
+        onClick={() => {
+          jest.fn
+        }}
+      >
         <Icon data={add} />
         Chip
       </Chip>,
