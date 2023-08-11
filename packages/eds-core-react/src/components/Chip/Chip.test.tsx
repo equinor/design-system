@@ -28,6 +28,14 @@ describe('Chips', () => {
       </Chip>,
     )
     expect(asFragment()).toMatchSnapshot()
+
+    const { asFragment: asFragment2 } = render(
+      <Chip onClick={() => {}}>
+        <Icon data={add} />
+        Chip
+      </Chip>,
+    )
+    expect(asFragment2()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
     render(<StyledChips>styled chip</StyledChips>)

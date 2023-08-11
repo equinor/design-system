@@ -45,16 +45,6 @@ const StyledChips = styled.div.attrs<StyleProps>(
     fill: ${typography.color};
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      color: ${states.hover.typography.color};
-
-      svg {
-        fill: ${states.hover.typography.color};
-      }
-    }
-  }
-
   &:focus {
     outline: none;
   }
@@ -76,6 +66,10 @@ const StyledChips = styled.div.attrs<StyleProps>(
       @media (hover: hover) and (pointer: fine) {
         &:hover {
           cursor: pointer;
+          color: ${states.hover.typography.color};
+          svg {
+            fill: ${states.hover.typography.color};
+          }
         }
       }
     `}
