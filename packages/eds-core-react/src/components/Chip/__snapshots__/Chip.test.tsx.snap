@@ -123,17 +123,12 @@ exports[`Chips Matches snapshot 2`] = `
 
 @media (hover:hover) and (pointer:fine) {
   .c0:hover {
+    cursor: pointer;
     color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
   }
 
   .c0:hover svg {
     fill: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
-  }
-}
-
-@media (hover:hover) and (pointer:fine) {
-  .c0:hover {
-    cursor: pointer;
   }
 }
 
