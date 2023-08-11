@@ -8,6 +8,9 @@ import {
   useCallback,
   ChangeEvent,
   ReactNode,
+  EventHandler,
+  SyntheticEvent,
+  DOMAttributes,
 } from 'react'
 import {
   useCombobox,
@@ -15,6 +18,7 @@ import {
   useMultipleSelection,
   UseMultipleSelectionProps,
 } from 'downshift'
+import { pickBy, mergeWith } from 'ramda'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
@@ -99,6 +103,31 @@ const findIndex: IndexFinderType = ({
     return findIndex({ calc, index: nextIndex, availableItems, optionDisabled })
   }
   return index
+}
+
+const isEvent = (val: unknown, key: string) =>
+  /^on[A-Z](.*)/.test(key) && typeof val === 'function'
+
+function mergeEventsFromRight(
+  props1: DOMAttributes<unknown>,
+  props2: DOMAttributes<unknown>,
+) {
+  const events1: Partial<DOMAttributes<unknown>> = pickBy(isEvent, props1)
+  const events2: Partial<DOMAttributes<unknown>> = pickBy(isEvent, props2)
+
+  return mergeWith(
+    (
+      event1: EventHandler<SyntheticEvent<unknown>>,
+      event2: EventHandler<SyntheticEvent<unknown>>,
+    ): EventHandler<SyntheticEvent<unknown>> => {
+      return (...args) => {
+        event1(...args)
+        event2(...args)
+      }
+    },
+    events1,
+    events2,
+  ) as Partial<DOMAttributes<unknown>>
 }
 
 const findNextIndex: IndexFinderType = ({
@@ -672,6 +701,18 @@ function AutocompleteInner<T>(
     </div>
   )
 
+  const inputProps = getInputProps(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    getDropdownProps({
+      preventKeyAction: multiple ? isOpen : undefined,
+      disabled,
+      ref: refs.setReference,
+      onChange: (e: ChangeEvent<HTMLInputElement>) =>
+        setTypedInputValue(e?.currentTarget?.value),
+    }),
+  )
+  const consolidatedEvents = mergeEventsFromRight(other, inputProps)
+
   return (
     <ThemeProvider theme={token}>
       <Container className={className} style={style} ref={ref}>
@@ -684,16 +725,7 @@ function AutocompleteInner<T>(
 
         <Container>
           <Input
-            {...getInputProps(
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-              getDropdownProps({
-                preventKeyAction: multiple ? isOpen : undefined,
-                disabled,
-                ref: refs.setReference,
-                onChange: (e: ChangeEvent<HTMLInputElement>) =>
-                  setTypedInputValue(e?.currentTarget?.value),
-              }),
-            )}
+            {...inputProps}
             placeholder={placeholderText}
             readOnly={readOnly}
             rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
@@ -728,6 +760,7 @@ function AutocompleteInner<T>(
               </>
             }
             {...other}
+            {...consolidatedEvents}
           />
         </Container>
         {disablePortal || inDialog ? (
