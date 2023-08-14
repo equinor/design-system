@@ -144,7 +144,6 @@ exports[`Accordion Matches snapshot 1`] = `
               d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41Z"
               data-testid="eds-icon-path"
               fill-rule="evenodd"
-              height="24"
             />
           </svg>
           <span
