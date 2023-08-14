@@ -357,29 +357,28 @@ PersistentPopover.storyName = 'Persistent popover'
   )
 } */
 
+const Wrapper = styled.div`
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(3, auto);
+  padding: 32px;
+`
+
+const IconWrapper = styled.div`
+  display: block;
+`
+
+const StyledButton = styled(Button)`
+  &:hover {
+    border-radius: 4px;
+  }
+  &:focus {
+    border-radius: 4px;
+  }
+  width: 96px;
+  height: 96px;
+`
 export const AppLauncher: StoryFn<PopoverProps> = () => {
-  const Wrapper = styled.div`
-    display: grid;
-    grid-gap: 8px;
-    grid-template-columns: repeat(3, auto);
-    padding: 32px;
-  `
-
-  const IconWrapper = styled.div`
-    display: block;
-  `
-
-  const StyledButton = styled(Button)`
-    &:hover {
-      border-radius: 4px;
-    }
-    &:focus {
-      border-radius: 4px;
-    }
-    width: 96px;
-    height: 96px;
-  `
-
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
 
