@@ -6,6 +6,7 @@ import { get } from './library'
 
 type StyledProps = {
   height: number
+  $height?: number
   width: number
   fill: string
   size?: number
@@ -35,11 +36,11 @@ const StyledSvg = styled.svg.attrs<StyledProps>(({ height, width, fill }) => ({
   ${transform}
 `
 
-const StyledPath = styled.path.attrs<StyledProps>(({ height, size }) => ({
+const StyledPath = styled.path.attrs<StyledProps>(({ $height, size }) => ({
   size: null,
   fillRule: 'evenodd',
   clipRule: 'evenodd',
-  transform: size / height !== 1 ? `scale(${size / height})` : null,
+  transform: size / $height !== 1 ? `scale(${size / $height})` : null,
 }))``
 
 const customIcon = (icon: IconData) => ({
@@ -104,7 +105,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
 
   const pathProps = {
     d: icon.svgPathData,
-    height: icon.height ? icon.height : size,
+    $height: icon.height ? icon.height : size,
     size: size || icon.height,
   }
 
