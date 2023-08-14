@@ -27,6 +27,7 @@ const StyledListItem = styled.li<StyledListItemType>(
       background-color: ${backgroundColor};
       user-select: none;
       overflow: hidden;
+      touch-action: manipulation;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
@@ -80,7 +81,12 @@ function AutocompleteOptionInner<T>(
       isdisabled={isDisabled ? 'true' : 'false'}
       aria-hidden={isDisabled}
       active={!multiple && isSelected ? 'true' : 'false'}
-      onClick={(e) => !isDisabled && onClick(e)}
+      onClick={(e) => {
+        //timeout: workaround for "Maximum update depth exceeded" error that happens when touch input
+        setTimeout(() => {
+          !isDisabled && onClick(e)
+        }, 0)
+      }}
       aria-selected={multiple ? isSelected : ariaSelected}
       {...other}
     >
