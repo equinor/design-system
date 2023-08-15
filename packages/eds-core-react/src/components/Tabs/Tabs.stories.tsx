@@ -1,11 +1,19 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { Tabs, Button, Icon, TabsProps, Typography, Search } from '../..'
+import { chevron_left, chevron_right } from '@equinor/eds-icons'
 import { mergeRefs } from '@equinor/eds-utils'
 import { Meta, StoryFn } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Stack } from './../../../.storybook/components'
 import page from './Tabs.docs.mdx'
+
+const icons = {
+  chevron_left,
+  chevron_right,
+}
+
+Icon.add(icons)
 
 const meta: Meta<typeof Tabs> = {
   title: 'Navigation/Tabs',
