@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.32.4] - 2023-08-15
+
+### Fixed
+
+- 🐛 `Autocomplete`: Added a fix for "Maximum update depth exceeded" error by @oddvernes in https://github.com/equinor/design-system/pull/3005
+- 🐛 `Autocomplete`: Fixed issue where externally added eventlisteners (`onFocus`, `onBlur` etc) broke internal functionality by @bjartebore in https://github.com/equinor/design-system/pull/2999
+- 🐛 `Dialog`: Fixed open on mount by @oddvernes in https://github.com/equinor/design-system/pull/3003
+
+### Changed
+
+- 🔥 `Chip`: Removed z-index from the x-icon by @oddvernes in https://github.com/equinor/design-system/pull/2992
+- 💄 `Chip` removed hover-effect when there is no `onClick` present by @bjartebore in https://github.com/equinor/design-system/pull/2995
+- ⬆️ `Autocomplete` Update to Downshift 8.1.0. `Autocomplete` now opens on click instead of focus to comply with ARIA 1.2 by @oddvernes in https://github.com/equinor/design-system/pull/3000
+- ⬆️ Updated `floating-UI` to v0.24.3 by @oddvernes in https://github.com/equinor/design-system/pull/3004
+- 🦺 `Icon`: removed "height" attribute from svg path to comply with w3 validator by @oddvernes in https://github.com/equinor/design-system/pull/3006
+
 ## [0.32.3] - 2023-07-14
 
 ### Fixed
