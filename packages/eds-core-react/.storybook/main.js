@@ -50,6 +50,15 @@ const config = {
       },
     }
   },
+  managerHead: (head) => {
+    if (process.env.NODE_ENV === 'development') {
+      return head
+    }
+    return `
+      <script async src="https://siteimproveanalytics.com/js/siteanalyze_6003171.js"></script>
+     ${head}
+  `
+  },
   async viteFinal(config) {
     return {
       ...config,
