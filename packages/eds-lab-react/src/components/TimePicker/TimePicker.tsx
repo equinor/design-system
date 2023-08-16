@@ -51,41 +51,41 @@ const StyledList = styled(List)`
   z-index: 50;
 `
 
-const StyledListItem = styled(List.Item)<StyledListItemType>(
-  ({ theme, highlighted, active }) => {
-    const backgroundColor =
-      highlighted === 'true'
-        ? theme.states.hover.background
-        : active === 'true'
-        ? theme.states.active.background
-        : theme.background
+const StyledListItem = styled(List.Item)<StyledListItemType>(({
+  theme,
+  highlighted,
+  active,
+}) => {
+  const backgroundColor =
+    highlighted === 'true'
+      ? theme.states.hover.background
+      : active === 'true'
+      ? theme.states.active.background
+      : theme.background
 
-    return css`
-      margin: 0;
-      list-style: none;
-      background-color: ${backgroundColor};
-      ${typographyTemplate(theme.typography)};
-      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
-      max-width: 90px;
-    `
-  },
-)
+  return css`
+    margin: 0;
+    list-style: none;
+    background-color: ${backgroundColor};
+    ${typographyTemplate(theme.typography)};
+    cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
+    max-width: 90px;
+  `
+})
 
-const StyledButton = styled(Button)(
-  ({
-    theme: {
-      entities: { button },
-    },
-  }) => {
-    return css`
-      position: absolute;
-      right: ${button.spacings.right};
-      height: ${button.height};
-      width: ${button.height};
-      top: ${button.spacings.top};
-    `
+const StyledButton = styled(Button)(({
+  theme: {
+    entities: { button },
   },
-)
+}) => {
+  return css`
+    position: absolute;
+    right: ${button.spacings.right};
+    height: ${button.height};
+    width: ${button.height};
+    top: ${button.spacings.top};
+  `
+})
 
 const StyledInputWrapper = styled.div`
   position: relative;
