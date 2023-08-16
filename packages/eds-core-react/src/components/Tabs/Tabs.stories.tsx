@@ -42,6 +42,15 @@ const noop = () => {}
 const TabsRow = styled.div`
   display: flex;
 `
+const StyledTab = styled(Tabs.Tab)`
+  background: pink;
+`
+
+const StyledTabPanel = styled(Tabs.Panel)`
+  padding: 32px;
+  background: peachpuff;
+`
+
 const NavButton = styled(Button)`
   flex-shrink: 0;
 `
@@ -281,14 +290,6 @@ export const WithInputInPanel: StoryFn<TabsProps> = () => {
 WithInputInPanel.storyName = 'With input in panel'
 
 export const WithStyledComponent: StoryFn<TabsProps> = () => {
-  const StyledTab = styled(Tabs.Tab)`
-    background: pink;
-  `
-
-  const StyledTabPanel = styled(Tabs.Panel)`
-    padding: 32px;
-    background: peachpuff;
-  `
   const [activeTab, setActiveTab] = useState(1)
 
   const handleChange = (index: number) => {

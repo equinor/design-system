@@ -9,7 +9,7 @@ const meta: Meta<typeof Progress.Circular> = {
   title: 'Feedback/Progress Indicators/Circular',
   component: Progress.Circular,
   parameters: {
-    backgrounds: { default: 'none' },
+    backgrounds: { default: 'light' },
     docs: {
       page,
       source: {

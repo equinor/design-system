@@ -40,6 +40,15 @@ const meta: Meta<typeof Checkbox> = {
 
 export default meta
 
+const UnstyledList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`
+const Wrapper = styled(Checkbox)`
+  display: flex;
+`
+
 export const Introduction: StoryFn<CheckboxProps> = (args) => {
   return <Checkbox label="Play with me" {...args} />
 }
@@ -50,12 +59,6 @@ export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
   const indeterminateRef = useRef()
   // State for controlled example
   const [checked, updateChecked] = useState(false)
-  const UnstyledList = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  `
-
   return (
     <UnstyledList>
       <li>
@@ -92,11 +95,6 @@ export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
 SingleCheckbox.storyName = 'Single checkbox'
 
 export const GroupedCheckbox: StoryFn<CheckboxProps> = () => {
-  const UnstyledList = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  `
   return (
     <fieldset>
       <legend>
@@ -142,10 +140,6 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
     updateIsSubmitted(true)
     action('onSubmit')(data)
   }
-
-  const Wrapper = styled(Checkbox)`
-    display: flex;
-  `
 
   return (
     <div>

@@ -28,16 +28,17 @@ const meta: Meta<typeof Paper> = {
 
 export default meta
 
+const WrapperOverview = styled(Paper)`
+  height: 100px;
+  width: 110px;
+  padding: 10px;
+`
+
 export const Introduction: StoryFn<PaperProps> = (args) => {
   return <Paper style={{ height: '150px', width: '150px' }} {...args} />
 }
 
 export const ElevationOverview: StoryFn<PaperProps> = () => {
-  const WrapperOverview = styled(Paper)`
-    height: 100px;
-    width: 110px;
-    padding: 10px;
-  `
   return (
     <>
       <WrapperOverview elevation="none">
