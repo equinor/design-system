@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
-import { StoryObj, StoryFn, Meta } from '@storybook/react'
+import { StoryObj, Meta } from '@storybook/react'
 import { Table, TableProps, Typography } from '@equinor/eds-core-react'
 import { data, multilineText, columns } from '../../stories/data'
 import { toCellValues } from '../../stories/toCellValues'
 
-export default {
+const meta: Meta<typeof Table> = {
   title: 'Core-react experimental features/css-variables/Multiline table',
   component: Table,
   parameters: {
@@ -14,7 +14,9 @@ export default {
       },
     },
   },
-} as Meta
+}
+
+export default meta
 
 export const Default: StoryObj<TableProps> = {
   render: (args) => {
@@ -31,6 +33,8 @@ export const Default: StoryObj<TableProps> = {
     `
 
     return (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      /* @ts-ignore */
       <Table {...args} css={vars}>
         <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>

@@ -1,5 +1,4 @@
 import {
-  cleanup,
   fireEvent,
   render,
   screen,
@@ -9,10 +8,8 @@ import {
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
-import React from 'react'
 import { TimePicker } from './TimePicker'
 
-afterEach(cleanup)
 const labelText = 'Click test'
 
 describe('TimePicker', () => {
