@@ -1,6 +1,8 @@
 import * as icons from './data'
 
-export type IconName = keyof typeof icons
+//@TODO: figure out typescript solution for this (sizes have name with "_small" appended)
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+export type IconName = keyof typeof icons | string
 
 export type IconData = {
   name: IconName
@@ -9,6 +11,6 @@ export type IconData = {
   width: string
   svgPathData: string
   sizes?: {
-    small: Omit<IconData, 'sizes' | 'name'> & { name: string }
+    small: Omit<IconData, 'sizes'>
   }
 }
