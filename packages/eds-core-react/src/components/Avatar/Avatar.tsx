@@ -16,11 +16,10 @@ const StyledAvatar = styled.div<StyledAvatarProps>`
   flex-shrink: 0;
   overflow: hidden;
   ${bordersTemplate(tokens.border)};
-  ${({ size }) =>
-    css`
-      height: ${size}px;
-      width: ${size}px;
-    `}
+  ${({ size }) => css`
+    height: ${size}px;
+    width: ${size}px;
+  `}
 `
 
 type StyledImageProps = {

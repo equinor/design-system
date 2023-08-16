@@ -1,4 +1,4 @@
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -41,8 +41,6 @@ const StyledActions = styled(Actions)`
   height: 100px;
   width: 100px;
 `
-
-afterEach(cleanup)
 
 describe('Card', () => {
   it('Matches snapshot', () => {

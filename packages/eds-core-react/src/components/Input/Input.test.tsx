@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
@@ -7,8 +7,6 @@ import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
 import { trimSpaces } from '@equinor/eds-utils'
-
-afterEach(cleanup)
 
 describe('Input', () => {
   it('Matches snapshot', () => {

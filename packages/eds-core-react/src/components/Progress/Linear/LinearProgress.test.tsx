@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import 'jest-styled-components'
@@ -9,8 +9,6 @@ import { LinearProgress } from './LinearProgress'
 const StyledProgress = styled(LinearProgress)`
   position: absolute;
 `
-
-afterEach(cleanup)
 
 describe('LinearProgress ', () => {
   it('Matches snapshot', () => {

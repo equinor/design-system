@@ -364,6 +364,7 @@ function AutocompleteInner<T>(
         return item
       }
       try {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return item?.toString()
       } catch (error) {
         throw new Error(

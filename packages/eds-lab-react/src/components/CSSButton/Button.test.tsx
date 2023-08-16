@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -19,8 +19,6 @@ const StyledButton = styled(CSSButton)`
 const MarginButton = styled(CSSButton)`
   margin: 12px;
 `
-
-afterEach(cleanup)
 
 describe('Button', () => {
   it('Matches snapshot', () => {

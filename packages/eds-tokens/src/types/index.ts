@@ -64,7 +64,7 @@ export type Color = {
 }
 
 export type Focus = {
-  type?: 'dashed' | string
+  type?: string
   color: string
   width: string
   gap?: string

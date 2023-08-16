@@ -18,13 +18,15 @@ const Label = styled(_Label)`
   margin-left: 8px;
   margin-right: 8px;
 `
-
+/* @TODO fix no-unused-prop-types disabled & readOnly */
 export type InputWrapperProps = {
   /** Label */
   label?: string
   /** Disabled state */
+  // eslint-disable-next-line react/no-unused-prop-types
   disabled?: boolean
   /** Read Only */
+  // eslint-disable-next-line react/no-unused-prop-types
   readOnly?: boolean
   /** Highlight color */
   color?: Variants

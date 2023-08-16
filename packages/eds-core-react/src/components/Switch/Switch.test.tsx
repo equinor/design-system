@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -8,8 +8,6 @@ import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Switch } from './Switch'
-
-afterEach(cleanup)
 
 const StyledSwitch = styled(Switch)`
   clip-path: unset;

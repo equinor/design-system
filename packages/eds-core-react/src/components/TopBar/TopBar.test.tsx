@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, screen, cleanup } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -18,8 +18,6 @@ const ScrollContainer = styled.div`
   width: 500px;
 `
 const { height } = topbarToken
-
-afterEach(cleanup)
 
 describe('TopBar', () => {
   it('Matches snapshot', () => {

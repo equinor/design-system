@@ -1,4 +1,4 @@
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { forwardRef, createRef } from 'react'
 import { mergeRefs } from './mergeRefs'
 
@@ -7,7 +7,6 @@ const Component = forwardRef<HTMLDivElement>((props, ref) => {
   return <div {...props} ref={targetRef} />
 })
 Component.displayName = 'Component'
-afterEach(cleanup)
 
 describe('useCombinedRefs', () => {
   it('calls function ref with correct payload', () => {

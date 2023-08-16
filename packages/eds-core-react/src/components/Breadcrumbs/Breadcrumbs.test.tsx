@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, fireEvent, act, screen } from '@testing-library/react'
+import { render, fireEvent, act, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -11,8 +11,6 @@ const { Breadcrumb } = Breadcrumbs
 const StyledBreadcrumbs = styled(Breadcrumbs)`
   position: absolute;
 `
-
-afterEach(cleanup)
 
 describe('Breadcrumbs', () => {
   it('Matches snapshot', () => {

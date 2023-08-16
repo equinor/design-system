@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { render, screen, cleanup, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '../.'
 import { AccordionItemProps } from './index'
@@ -9,7 +9,6 @@ const defaultProps: AccordionItemProps = {
   label: 'Accordion item',
 }
 
-afterEach(cleanup)
 const mockResizeObserver = jest.fn(() => ({
   observe: jest.fn(),
   disconnect: jest.fn(),

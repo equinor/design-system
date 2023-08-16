@@ -1,4 +1,4 @@
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import 'jest-styled-components'
@@ -16,8 +16,6 @@ const StyledChips = styled(Chip)`
 const { enabled, error } = tokens
 
 const rgbaTrim = (x: string) => x.split(' ').join('')
-
-afterEach(cleanup)
 
 describe('Chips', () => {
   it('Matches snapshot', () => {

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { useState } from 'react'
-import { render, cleanup, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -22,8 +22,6 @@ beforeAll(() => {
   HTMLDialogElement.prototype.showModal = jest.fn()
   HTMLDialogElement.prototype.close = jest.fn()
 })
-
-afterEach(cleanup)
 
 const DismissableDialog = (props) => {
   const [isOpen, setIsOpen] = useState(true)

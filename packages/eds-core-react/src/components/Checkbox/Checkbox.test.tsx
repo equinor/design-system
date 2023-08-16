@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import { useState } from 'react'
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -9,8 +9,6 @@ import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Checkbox } from './Checkbox'
-
-afterEach(cleanup)
 
 const StyledCheckbox = styled(Checkbox)`
   clip-path: unset;

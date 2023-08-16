@@ -1,11 +1,10 @@
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { useHideBodyScroll } from './useHideBodyScroll'
 
 const TestComponent = ({ hideScroll }: { hideScroll: boolean }) => {
   useHideBodyScroll(hideScroll)
   return <div></div>
 }
-afterEach(cleanup)
 
 describe('useHideBodyScroll', () => {
   it('Should add "overflow: hidden" on document.body only while input is true', () => {

@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import {
   render,
-  cleanup,
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react'
@@ -11,8 +10,6 @@ import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Snackbar } from '.'
 import { snackbar as tokens } from './Snackbar.tokens'
-
-afterEach(cleanup)
 
 const StyledSnackbar = styled(Snackbar)`
   clip-path: unset;

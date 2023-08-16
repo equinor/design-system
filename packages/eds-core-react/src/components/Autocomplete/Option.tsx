@@ -50,7 +50,7 @@ const Label = styled.span<{ multiline: boolean }>(({ theme, multiline }) => {
   `
 })
 
-export type AutocompleteOptionProps<T> = {
+export type AutocompleteOptionProps = {
   value: string
   multiple: boolean
   highlighted: string
@@ -60,8 +60,8 @@ export type AutocompleteOptionProps<T> = {
   optionComponent?: ReactNode
 } & LiHTMLAttributes<HTMLLIElement>
 
-function AutocompleteOptionInner<T>(
-  props: AutocompleteOptionProps<T>,
+function AutocompleteOptionInner(
+  props: AutocompleteOptionProps,
   ref: React.ForwardedRef<HTMLLIElement>,
 ) {
   const {
@@ -109,8 +109,8 @@ function AutocompleteOptionInner<T>(
   )
 }
 
-export const AutocompleteOption = forwardRef(AutocompleteOptionInner) as <T>(
-  props: AutocompleteOptionProps<T> & {
+export const AutocompleteOption = forwardRef(AutocompleteOptionInner) as (
+  props: AutocompleteOptionProps & {
     ref?: React.ForwardedRef<HTMLLIElement>
     displayName?: string | undefined
   },

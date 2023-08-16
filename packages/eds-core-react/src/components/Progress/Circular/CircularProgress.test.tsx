@@ -1,4 +1,4 @@
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import 'jest-styled-components'
@@ -9,8 +9,6 @@ import * as tokens from './CircularProgress.tokens'
 const StyledProgress = styled(CircularProgress)`
   position: absolute;
 `
-
-afterEach(cleanup)
 
 describe('CircularProgress', () => {
   it('Matches snapshot', () => {

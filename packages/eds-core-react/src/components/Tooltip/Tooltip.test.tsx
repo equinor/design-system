@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { fireEvent, render, cleanup, screen, act } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -11,7 +11,6 @@ const StyledTooltip = styled(Tooltip)`
 `
 const openDelay = 100
 
-afterEach(cleanup)
 const mockResizeObserver = jest.fn(() => ({
   observe: jest.fn(),
   disconnect: jest.fn(),

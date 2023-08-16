@@ -55,6 +55,8 @@ const findTypography = (
   return (typography[group] as unknown)[variantName] as TypographyType
 }
 
+//@TODO: fix typescript here
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 const findColor: (a: ColorVariants | string) => string = (
   inputColor = null,
 ): string =>
@@ -121,6 +123,7 @@ export type TypographyProps = {
   /** Link. */
   link?: boolean
   /** Typography colors. */
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   color?: ColorVariants | string
   /** Token. */
   token?: Partial<TypographyType>
