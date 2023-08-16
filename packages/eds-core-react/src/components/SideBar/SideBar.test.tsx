@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 //import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
@@ -17,7 +17,6 @@ const defaultMenuItems: SidebarLinkProps[] = [
   },
 ]
 
-afterEach(cleanup)
 const mockResizeObserver = jest.fn(() => ({
   observe: jest.fn(),
   disconnect: jest.fn(),

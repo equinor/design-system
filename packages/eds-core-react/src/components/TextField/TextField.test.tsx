@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -7,8 +7,6 @@ import styled from 'styled-components'
 import { TextField } from '.'
 import { Icon } from '../Icon'
 import { save } from '@equinor/eds-icons'
-
-afterEach(cleanup)
 
 describe('TextField', () => {
   it('Matches snapshot', () => {

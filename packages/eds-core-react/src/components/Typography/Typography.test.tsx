@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -25,8 +25,6 @@ const expectToMatchTypography = (element, token: TypographyType) => {
   expect(element).toHaveStyleRule('line-height', lineHeight)
   expect(element).toHaveStyleRule('font-style', fontStyle)
 }
-
-afterEach(cleanup)
 
 describe('Typography', () => {
   it('Matches snapshot', () => {

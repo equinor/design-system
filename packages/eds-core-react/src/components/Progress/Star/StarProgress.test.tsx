@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -9,8 +9,6 @@ import { StarProgress } from './StarProgress'
 const StyledProgress = styled(StarProgress)`
   position: absolute;
 `
-
-afterEach(cleanup)
 
 describe('StarProgress', () => {
   it('Matches snapshot', () => {

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { render, screen, cleanup, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { favorite_outlined } from '@equinor/eds-icons'
 import { SideBar } from '../.'
@@ -10,7 +10,6 @@ const defaultProps: SidebarAccordionProps = {
   icon: favorite_outlined,
 }
 
-afterEach(cleanup)
 const mockResizeObserver = jest.fn(() => ({
   observe: jest.fn(),
   disconnect: jest.fn(),

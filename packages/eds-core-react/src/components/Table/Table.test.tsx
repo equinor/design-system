@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -11,8 +11,6 @@ import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
 const { Caption, Cell, Head, Row, Body } = Table
 
 const trim = (x: string): string => x.replace(/ /g, '')
-
-afterEach(cleanup)
 
 describe('Caption', () => {
   it('Renders a caption with provided text', () => {

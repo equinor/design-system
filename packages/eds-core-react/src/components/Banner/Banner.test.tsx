@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -18,8 +18,6 @@ const StyledBanner = styled(Banner)`
 `
 
 const rgbaTrim = (x: string) => x.split(' ').join('')
-
-afterEach(cleanup)
 
 describe('Banner', () => {
   it('Matches snapshot', () => {

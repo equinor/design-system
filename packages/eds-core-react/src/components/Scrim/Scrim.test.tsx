@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { useState } from 'react'
-import { render, cleanup, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -13,8 +13,6 @@ const StyledScrim = styled(Scrim)`
 `
 
 const { width, height } = tokens
-
-afterEach(cleanup)
 
 const DismissableScrim = (props) => {
   const [visibleScrim, setVisibleScrim] = useState(true)

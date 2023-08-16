@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  render,
-  screen,
-  waitFor,
-  RenderOptions,
-  cleanup,
-} from '@testing-library/react'
+import { render, screen, waitFor, RenderOptions } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { SidebarLinkProps } from './index'
 import { home } from '@equinor/eds-icons'
@@ -26,7 +20,6 @@ function SideBarWrapper(children: React.ReactElement, isOpen?: boolean) {
   return <SideBar open={isOpen}>{children}</SideBar>
 }
 
-afterEach(cleanup)
 const mockResizeObserver = jest.fn(() => ({
   observe: jest.fn(),
   disconnect: jest.fn(),

@@ -1,4 +1,4 @@
-import { render, cleanup, screen, act } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -10,8 +10,6 @@ const StyledSidesheet = styled(SideSheet)`
   height: 100px;
   width: 100px;
 `
-
-afterEach(cleanup)
 
 describe('SideSheet', () => {
   it('Matches snapshot', () => {

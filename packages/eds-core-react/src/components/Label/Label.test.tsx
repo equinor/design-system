@@ -1,11 +1,9 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Label } from './Label'
-
-afterEach(cleanup)
 
 describe('Label', () => {
   it('Matches snapshot', () => {

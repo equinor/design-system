@@ -1,4 +1,4 @@
-import { render, cleanup, fireEvent, screen, act } from '@testing-library/react'
+import { render, fireEvent, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -9,8 +9,6 @@ const StyledSearch = styled(Search)`
   position: relative;
   width: 50%;
 `
-
-afterEach(cleanup)
 
 describe('Search', () => {
   it('Matches snapshot', () => {

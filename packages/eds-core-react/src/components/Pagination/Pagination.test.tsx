@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, within } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -9,8 +9,6 @@ import { Pagination } from '.'
 const StyledPagination = styled(Pagination)`
   position: absolute;
 `
-
-afterEach(cleanup)
 
 describe('Pagination', () => {
   it('Matches snapshot', () => {

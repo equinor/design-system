@@ -1,14 +1,12 @@
 /* eslint-disable no-undef */
 import { useRef, useEffect, useState, Fragment } from 'react'
-import { render, cleanup, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import { Tabs } from '.'
 
 const noop = () => null
-
-afterEach(cleanup)
 
 const TabsWithRefs = () => {
   const activeRef = useRef<HTMLButtonElement>(null)

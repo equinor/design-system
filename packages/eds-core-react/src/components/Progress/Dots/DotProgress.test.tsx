@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -11,8 +11,6 @@ import { trimSpaces } from '@equinor/eds-utils'
 const StyledProgress = styled(DotProgress)`
   position: absolute;
 `
-
-afterEach(cleanup)
 
 describe('DotProgress', () => {
   it('Matches snapshot', () => {

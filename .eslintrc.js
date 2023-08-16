@@ -130,6 +130,12 @@ module.exports = {
             checksVoidReturn: false,
           },
         ],
+        'testing-library/no-await-sync-events': [
+          'error',
+          {
+            eventModules: ['fire-event'],
+          },
+        ],
       },
     },
     // Testing linting
