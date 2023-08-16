@@ -194,7 +194,7 @@ export const Placement: StoryFn<SideSheetProps> = () => {
           <Slider
             min={getUnixTime('1960')}
             max={getUnixTime('2020')}
-            ariaLabelledby="date-range-slider"
+            aria-labelledby="date-range-slider"
             value={[getUnixTime('1980'), getUnixTime('2000')]}
             outputFunction={outputFunction}
           />

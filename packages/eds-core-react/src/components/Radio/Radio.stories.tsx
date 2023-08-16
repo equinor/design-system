@@ -52,6 +52,17 @@ const UnstyledList = styled.ul`
   padding: 0;
   list-style-type: none;
 `
+const Control = styled.div`
+  display: flex;
+  &:hover {
+    background: ${hoverColor};
+  }
+`
+const FilledLabel = styled(Label)`
+  cursor: pointer;
+  align-items: center;
+  width: 100%;
+`
 
 export const Introduction: StoryFn<RadioProps> = (args) => {
   return <Radio label="Play with me" {...args} />
@@ -136,18 +147,6 @@ export const AlternativeToLabel: StoryFn<RadioProps> = () => (
 AlternativeToLabel.storyName = 'Alternative to label'
 
 export const CustomLabel: StoryFn<RadioProps> = () => {
-  const Control = styled.div`
-    display: flex;
-    &:hover {
-      background: ${hoverColor};
-    }
-  `
-  const FilledLabel = styled(Label)`
-    cursor: pointer;
-    align-items: center;
-    width: 100%;
-  `
-
   const [selectedValue, setSelectedValue] = useState('')
   const onChange = (event: ChangeEvent<HTMLInputElement>) =>
     setSelectedValue(event.target.value)

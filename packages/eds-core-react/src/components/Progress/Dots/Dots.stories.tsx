@@ -8,7 +8,7 @@ const meta: Meta<typeof Progress.Dots> = {
   title: 'Feedback/Progress Indicators/Dots',
   component: Progress.Dots,
   parameters: {
-    backgrounds: { default: 'none' },
+    backgrounds: { default: 'light' },
     docs: {
       page,
       source: {
