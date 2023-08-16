@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   render,
-  cleanup,
   fireEvent,
   screen,
   within,
@@ -17,7 +16,6 @@ const itemObjects = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
 const items = ['One', 'Two', 'Three']
 const labelText = 'Select label test'
 
-afterEach(cleanup)
 const mockResizeObserver = jest.fn(() => ({
   observe: jest.fn(),
   disconnect: jest.fn(),

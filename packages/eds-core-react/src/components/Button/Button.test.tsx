@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -26,8 +26,6 @@ const LinkButton = ({ to }: { to: string }) => {
     </a>
   )
 }
-
-afterEach(cleanup)
 
 describe('Button', () => {
   it('Matches snapshot', () => {

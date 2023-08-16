@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import { render, cleanup, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -18,7 +18,6 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.spyOn(Math, 'random').mockRestore()
-  cleanup
 })
 
 type TestProps = {

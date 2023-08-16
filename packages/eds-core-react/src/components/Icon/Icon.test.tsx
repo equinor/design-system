@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -14,8 +14,6 @@ const StyledIcon = styled(Icon)`
   height: 100px;
   width: 100px;
 `
-
-afterEach(cleanup)
 
 describe('Icon', () => {
   it('Matches snapshot using data', () => {
