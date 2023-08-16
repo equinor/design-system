@@ -1,4 +1,4 @@
-import { render, fireEvent, cleanup, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import { useOutsideClick } from './useOutsideClick'
 import { useState } from 'react'
 
@@ -7,7 +7,6 @@ const TestComponent = ({ onClickOutside }: { onClickOutside: jest.Mock }) => {
   useOutsideClick(btnEl, onClickOutside)
   return <button ref={setBtnEl}>Click</button>
 }
-afterEach(cleanup)
 
 describe('useClickOutside', () => {
   it('should call the callback when clicking outside the element', () => {

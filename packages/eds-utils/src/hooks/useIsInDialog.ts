@@ -6,6 +6,7 @@ export const useIsInDialog = (el: Element): boolean => {
     if (el && inDialog === null) {
       setInDialog(!!el.closest('dialog'))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [el])
   return inDialog
 }
