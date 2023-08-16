@@ -9,6 +9,6 @@ export type IconData = {
   width: string
   svgPathData: string
   sizes?: {
-    small: Omit<IconData, 'sizes'>
+    small: Omit<IconData, 'sizes' | 'name'> & { name: string }
   }
 }
