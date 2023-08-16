@@ -129,17 +129,17 @@ const Panel = styled.div`
   ${bordersTemplate(border)}
 `
 
-const ItemText = styled(Typography)<{ $textColor?: string }>(
-  ({ $textColor }) => {
-    return css`
-      justify-self: start;
-      color: ${$textColor};
-      &::first-letter {
-        text-transform: capitalize;
-      }
-    `
-  },
-)
+const ItemText = styled(Typography)<{ $textColor?: string }>(({
+  $textColor,
+}) => {
+  return css`
+    justify-self: start;
+    color: ${$textColor};
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  `
+})
 
 const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;

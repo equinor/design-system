@@ -84,18 +84,21 @@ export const Preview: StoryFn = () => {
   const [searchValue, setSearchValue] = useState<string>('')
 
   const iconsByGroup = useMemo(() => {
-    return systemIcons.reduce((acc, val) => {
-      if (val.name.includes(searchValue)) {
-        const group =
-          typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
-        return {
-          ...acc,
-          [val.group]: [...group, val as unknown as IconType],
+    return systemIcons.reduce(
+      (acc, val) => {
+        if (val.name.includes(searchValue)) {
+          const group =
+            typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
+          return {
+            ...acc,
+            [val.group]: [...group, val as unknown as IconType],
+          }
+        } else {
+          return acc
         }
-      } else {
-        return acc
-      }
-    }, {} as Record<string, IconType[]>)
+      },
+      {} as Record<string, IconType[]>,
+    )
   }, [searchValue])
 
   return (

@@ -21,11 +21,10 @@ const StyledSelect = styled.select`
   box-shadow: ${tokens.boxShadow};
 
   ${typographyTemplate(tokens.typography)}
-  ${({ theme }) =>
-    css`
-      height: ${theme.minHeight};
-      ${spacingsTemplate(theme.entities.input.spacings)}
-    `}
+  ${({ theme }) => css`
+    height: ${theme.minHeight};
+    ${spacingsTemplate(theme.entities.input.spacings)}
+  `}
 
   padding-right: calc(${tokens.entities.input.spacings.right} *2 + ${tokens
     .entities.icon.width});
