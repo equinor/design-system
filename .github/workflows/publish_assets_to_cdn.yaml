@@ -41,12 +41,6 @@ jobs:
         with:
           inlineScript: |
             az storage blob sync -c ${{ vars.AZURE_CDN_CONTAINER_NAME }} -s assets --account-name ${{ vars.AZURE_CDN_STORAGE_ACCOUNT_NAME }}
-        # TODO: Replace with _purge_cdn.yaml
-      - name: Purge CDN endpoint 🚮
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ vars.AZURE_CDN_PROFILE_NAME }} --name ${{ vars.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ vars.AZURE_RESOURCE_GROUP }}
       - name: logout 🔓
         run: |
           az logout
@@ -57,3 +51,13 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+
+  purge-cdn:
+    if: github.event.inputs.environment == 'production'
+    needs: [copy-files]
+    name: Purge cdn
+    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    secrets: inherit
+    with:
+      environment: production
+      endpoint: artefacts
