@@ -14,7 +14,7 @@ permissions:
   id-token: write
 jobs:
   purge-cdn:
-    if: github.event.inputs.environment == 'production'
+    if: inputs.environment == 'production'
     name: Purge cdn
     uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
     secrets: inherit

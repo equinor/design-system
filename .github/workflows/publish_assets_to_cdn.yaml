@@ -41,6 +41,7 @@ jobs:
         with:
           inlineScript: |
             az storage blob sync -c ${{ vars.AZURE_CDN_CONTAINER_NAME }} -s assets --account-name ${{ vars.AZURE_CDN_STORAGE_ACCOUNT_NAME }}
+        # TODO: Replace with _purge_cdn.yaml
       - name: Purge CDN endpoint 🚮
         uses: azure/CLI@v1
         with:

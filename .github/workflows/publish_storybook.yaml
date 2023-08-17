@@ -95,3 +95,4 @@ jobs:
     secrets: inherit
     with:
       environment: production
+      endpoint: storybook
