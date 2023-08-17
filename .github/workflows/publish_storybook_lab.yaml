@@ -1,14 +1,6 @@
 name: Publish lab storybook
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/eds-lab-react/**'
-      - 'packages/eds-core-react/**'
-      - 'packages/eds-tokens/**'
-      - 'packages/eds-icons/**'
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

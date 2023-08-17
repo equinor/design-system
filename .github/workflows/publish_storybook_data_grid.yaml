@@ -1,14 +1,6 @@
 name: Publish data-grid storybook
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/eds-data-grid-react/**'
-      - 'packages/eds-core-react/**'
-      - 'packages/eds-tokens/**'
-      - 'packages/eds-icons/**'
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
