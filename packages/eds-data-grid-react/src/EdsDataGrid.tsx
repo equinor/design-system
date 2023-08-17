@@ -240,8 +240,8 @@ export function EdsDataGrid<T>({
             if (numeric) {
               const [start, end] = filterValue as [number, number]
               return (
-                value >= (isNaN(start) ? 0 : start) &&
-                value <= (!end || isNaN(end) ? Infinity : end)
+                Number(value) >= (isNaN(start) ? 0 : start) &&
+                Number(value) <= (!end || isNaN(end) ? Infinity : end)
               )
             } else {
               const validFilterValue = filterValue.filter((v) => !!v)
