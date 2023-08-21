@@ -16,9 +16,9 @@ const { spacings, typography, states } = tokens
 const OrderedList = styled.ol<{ $wrap: boolean }>`
   list-style: none;
   display: flex;
+  align-items: center;
   padding: 0;
   margin: 0;
-  flex-wrap: wrap;
   flex-wrap: ${({ $wrap }) => ($wrap ? 'wrap' : 'nowrap')};
 `
 
