@@ -96,7 +96,7 @@ const StyledTab = styled.button.attrs<StyledTabProps>(
 })
 
 export type TabProps = {
-  /** If `true`, the tab will be active. */
+  /** @ignore */
   active?: boolean
   /** If `true`, the tab will be disabled. */
   disabled?: boolean

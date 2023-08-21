@@ -108,7 +108,7 @@ export const States: StoryFn<TabsProps> = () => {
       <Tabs.List>
         <Tabs.Tab>Enabled</Tabs.Tab>
         <Tabs.Tab disabled>Disabled</Tabs.Tab>
-        <Tabs.Tab active>Active</Tabs.Tab>
+        <Tabs.Tab>Active</Tabs.Tab>
         <Tabs.Tab data-hover>Hover</Tabs.Tab>
         <Tabs.Tab data-focus ref={focusedRef}>
           Focus
