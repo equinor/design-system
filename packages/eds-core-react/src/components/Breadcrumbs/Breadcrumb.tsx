@@ -20,7 +20,8 @@ const StyledTypography = styled(Typography)<StyledProps>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block;
+  display: block;
+  line-height: 1;
   text-decoration: none;
   color: ${typography.color};
   width: 100%;

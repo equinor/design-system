@@ -16,6 +16,7 @@ const { spacings, typography, states } = tokens
 const OrderedList = styled.ol<{ $wrap: boolean }>`
   list-style: none;
   display: flex;
+  gap: 0.45em 0;
   align-items: center;
   padding: 0;
   margin: 0;
@@ -23,13 +24,15 @@ const OrderedList = styled.ol<{ $wrap: boolean }>`
 `
 
 const ListItem = styled.li`
-  display: inline-block;
+  display: block;
   min-width: 30px;
 `
 
 const Separator = styled(Typography)`
   color: ${typography.color};
   ${spacingsTemplate(spacings)}
+  display: block;
+  line-height: 1;
 `
 
 const Collapsed = styled(Typography)`
