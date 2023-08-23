@@ -56,6 +56,7 @@ exports[`Checkbox Matches snapshot 1`] = `
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
+  isolation: isolate;
   padding-left: 12px;
   padding-top: 12px;
   padding-right: 12px;
