@@ -86,6 +86,7 @@ exports[`Radio Matches snapshot 1`] = `
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
+  isolation: isolate;
   cursor: pointer;
 }
 

@@ -78,6 +78,7 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
+  isolation: isolate;
   ${({ theme }) => spacingsTemplate(theme.spacings)}
   &::before {
     content: '';

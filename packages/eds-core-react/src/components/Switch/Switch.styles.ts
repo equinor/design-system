@@ -40,4 +40,5 @@ export const GridWrapper = styled.span`
   vertical-align: middle;
   grid: [input] 1fr / [input] 1fr;
   place-items: center;
+  isolation: isolate;
 `
