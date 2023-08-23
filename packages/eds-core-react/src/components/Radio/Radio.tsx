@@ -96,6 +96,7 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
+  isolation: isolate;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &::before {
     content: '';
