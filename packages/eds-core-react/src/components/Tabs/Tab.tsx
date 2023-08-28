@@ -99,6 +99,8 @@ const StyledTab = styled.button.attrs<StyledTabProps>(
 export type TabProps = {
   /** @ignore */
   active?: boolean
+  /** Optional to `onChange` on Tabs. A value that when matched with
+   * `activeTab` will set tab as active (such as the path when using third party routers) */
   value?: number | string
   /** If `true`, the tab will be disabled. */
   disabled?: boolean

@@ -7,6 +7,14 @@ import { Meta, StoryFn } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Stack } from './../../../.storybook/components'
 import page from './Tabs.docs.mdx'
+import {
+  MemoryRouter,
+  Route,
+  Routes,
+  Link,
+  matchPath,
+  useLocation,
+} from 'react-router-dom'
 
 const icons = {
   chevron_left,
@@ -181,6 +189,65 @@ WithPanels.decorators = [
   (Story) => {
     return (
       <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
+
+export const Router: StoryFn<TabsProps> = () => {
+  /*import {MemoryRouter, Route, Routes, Link, matchPath, useLocation} from 'react-router-dom' */
+  function CurrentRoute() {
+    const location = useLocation()
+    return <Typography>Current route: {location.pathname}</Typography>
+  }
+  function useRouteMatch(patterns: readonly string[]) {
+    const { pathname } = useLocation()
+
+    for (let i = 0; i < patterns.length; i += 1) {
+      const pattern = patterns[i]
+      const possibleMatch = matchPath(pattern, pathname)
+      if (possibleMatch !== null) {
+        return possibleMatch
+      }
+    }
+
+    return null
+  }
+  function RouterTabs() {
+    const routeMatch = useRouteMatch(['/wells/:id', '/home', '/settings'])
+    const currentPath = routeMatch?.pattern?.path
+
+    return (
+      <Tabs activeTab={currentPath}>
+        <Tabs.List>
+          <Tabs.Tab value="/home" to="/home" as={Link}>
+            Home
+          </Tabs.Tab>
+          <Tabs.Tab value="/wells/:id" to="/wells/1" as={Link}>
+            Wells
+          </Tabs.Tab>
+          <Tabs.Tab value="/settings" to="/settings" as={Link}>
+            Settings
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs>
+    )
+  }
+
+  return (
+    <MemoryRouter initialEntries={['/home']} initialIndex={0}>
+      <RouterTabs />
+      <Routes>
+        <Route path="*" element={<CurrentRoute />} />
+      </Routes>
+    </MemoryRouter>
+  )
+}
+Router.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column">
         <Story />
       </Stack>
     )
