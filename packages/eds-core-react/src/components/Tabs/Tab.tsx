@@ -17,15 +17,16 @@ type OverridableSubComponent = OverridableComponent<
 type StyledTabProps = {
   $active?: boolean
   disabled: boolean
+  $value: string | number
 }
 
 const StyledTab = styled.button.attrs<StyledTabProps>(
-  ({ $active = false, disabled = false }) => ({
+  ({ $active = false, disabled = false, $value }) => ({
     type: 'button',
     role: 'tab',
     'aria-selected': $active,
     'aria-disabled': disabled,
-    tabIndex: $active ? '0' : '-1',
+    tabIndex: $value ? '0' : $active ? '0' : '-1',
   }),
 )<StyledTabProps>(({ theme, $active, disabled }) => {
   const {
@@ -108,7 +109,6 @@ export type TabProps = {
 export const Tab: OverridableSubComponent = forwardRef<
   HTMLButtonElement,
   TabProps
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(function Tab({ active, value, ...rest }, ref) {
-  return <StyledTab ref={ref} $active={active} {...rest} />
+  return <StyledTab ref={ref} $active={active} $value={value} {...rest} />
 })
