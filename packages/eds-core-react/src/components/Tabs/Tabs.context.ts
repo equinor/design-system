@@ -5,7 +5,7 @@ type State = {
   variant: Variants
   scrollable: boolean
   handleChange: (index: number) => void
-  activeTab: number
+  activeTab: number | string
   tabsId: string
   tabsFocused: boolean
 }
