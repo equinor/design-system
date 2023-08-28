@@ -108,6 +108,7 @@ export type TabProps = {
 export const Tab: OverridableSubComponent = forwardRef<
   HTMLButtonElement,
   TabProps
->(function Tab({ active, ...rest }, ref) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+>(function Tab({ active, value, ...rest }, ref) {
   return <StyledTab ref={ref} $active={active} {...rest} />
 })
