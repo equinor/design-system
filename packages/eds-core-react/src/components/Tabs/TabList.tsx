@@ -4,7 +4,6 @@ import {
   useRef,
   useState,
   useCallback,
-  useEffect,
   ReactElement,
   HTMLAttributes,
   ButtonHTMLAttributes,
@@ -65,6 +64,7 @@ export type TabListProps = {
 type TabChild = {
   disabled?: boolean
   index?: number
+  value?: number | string
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   RefAttributes<HTMLButtonElement> &
   ReactElement
@@ -82,7 +82,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     tabsFocused,
   } = useContext(TabsContext)
 
-  const currentTab = useRef(activeTab)
+  const currentTab = useRef<number>()
 
   const [arrowNavigating, setArrowNavigating] = useState(false)
   const selectedTabRef = useCallback(
@@ -98,20 +98,23 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     [arrowNavigating, tabsFocused],
   )
 
-  useEffect(() => {
-    currentTab.current = activeTab
-  }, [activeTab])
-
   const Tabs = ReactChildren.map(children, (child: TabChild, index: number) => {
-    const tabRef =
-      index === activeTab
-        ? mergeRefs<HTMLButtonElement>(child.ref, selectedTabRef)
-        : child.ref
+    const childProps = child.props as TabChild
+    const controlledActive = childProps.value
+    const isActive = controlledActive
+      ? controlledActive === activeTab
+      : index === activeTab
+
+    const tabRef = isActive
+      ? mergeRefs<HTMLButtonElement>(child.ref, selectedTabRef)
+      : child.ref
+
+    if (isActive) currentTab.current = index
 
     return cloneElement(child, {
       id: `${tabsId}-tab-${index + 1}`,
       'aria-controls': `${tabsId}-panel-${index + 1}`,
-      active: index === activeTab,
+      active: isActive,
       index,
       onClick: () => handleChange(index),
       ref: tabRef,

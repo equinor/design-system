@@ -81,14 +81,16 @@ Focus outline is only visible when navigating using the keyboard.
 import { Tabs } from '@equinor/eds-core-react'
 import { Link, Outlet } from "react-router-dom";
 
-  <Tabs>
+  <Tabs activeTab="/foo/bar">
   <Tabs.List>
-      <Tabs.Tab as={Link} to="/foo/bar">bar</Tabs.Tab>
-      <Tabs.Tab as={Link} to="/foo/baz">baz</Tabs.Tab>
+      <Tabs.Tab as={Link} value="/foo/bar" to="/foo/bar">bar</Tabs.Tab>
+      <Tabs.Tab as={Link} value="/foo/baz" to="/foo/baz">baz</Tabs.Tab>
   </Tabs.List>
   <Outlet />
   </Tabs>
 ```
+Routes can of course be entered by other means than clicking tabs. Therefore, we can not reliably use `onChange` to send a new index to `activeTab`. Instead `activeTab` can take a string value that sets the correct active tab if it matches the `value` prop on a tab. In the below example we use `react-router-dom` and its provided functions to match the current path to the correct tab.
+<Canvas of={ComponentStories.Router} />
 
 ### With search
 

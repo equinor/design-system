@@ -17,15 +17,16 @@ type OverridableSubComponent = OverridableComponent<
 type StyledTabProps = {
   $active?: boolean
   disabled: boolean
+  $value: string | number
 }
 
 const StyledTab = styled.button.attrs<StyledTabProps>(
-  ({ $active = false, disabled = false }) => ({
+  ({ $active = false, disabled = false, $value }) => ({
     type: 'button',
     role: 'tab',
     'aria-selected': $active,
     'aria-disabled': disabled,
-    tabIndex: $active ? '0' : '-1',
+    tabIndex: $value ? '0' : $active ? '0' : '-1',
   }),
 )<StyledTabProps>(({ theme, $active, disabled }) => {
   const {
@@ -98,6 +99,9 @@ const StyledTab = styled.button.attrs<StyledTabProps>(
 export type TabProps = {
   /** @ignore */
   active?: boolean
+  /** Optional to `onChange` on Tabs. A value that when matched with
+   * `activeTab` will set tab as active (such as the path when using third party routers) */
+  value?: number | string
   /** If `true`, the tab will be disabled. */
   disabled?: boolean
   /** Override element type */
@@ -107,6 +111,6 @@ export type TabProps = {
 export const Tab: OverridableSubComponent = forwardRef<
   HTMLButtonElement,
   TabProps
->(function Tab({ active, ...rest }, ref) {
-  return <StyledTab ref={ref} $active={active} {...rest} />
+>(function Tab({ active, value, ...rest }, ref) {
+  return <StyledTab ref={ref} $active={active} $value={value} {...rest} />
 })
