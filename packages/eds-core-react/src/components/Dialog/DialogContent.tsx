@@ -3,8 +3,8 @@ import { styled, css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '@equinor/eds-utils'
 
-const StyledDialogContent = styled.div<DialogContentProps>(
-  ({ theme, scrollable }) => {
+const StyledDialogContent = styled.div<{ $scrollable: boolean }>(
+  ({ theme, $scrollable }) => {
     return css`
       --content-spacing-top: ${theme.entities.children.spacings.top};
       ${typographyTemplate(theme.entities.content.typography)}
@@ -20,7 +20,7 @@ const StyledDialogContent = styled.div<DialogContentProps>(
         padding-bottom: ${theme.entities.children.spacings.bottom};
       }
 
-      ${scrollable &&
+      ${$scrollable &&
       css`
         &:not(:first-child) {
           margin-top: calc(var(--content-spacing-top) * -1);
@@ -49,7 +49,7 @@ export type DialogContentProps = {
 export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
   function DialogContent({ children, scrollable = false, ...rest }, ref) {
     const props = {
-      scrollable,
+      $scrollable: scrollable,
       ref,
       ...rest,
     }

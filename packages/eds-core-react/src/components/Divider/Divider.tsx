@@ -5,20 +5,20 @@ import * as tokens from './Divider.tokens'
 const { divider } = tokens
 
 type StyleProps = {
-  backgroundColor: string
-  marginTop: string
-  marginBottom: string
-  dividerHeight: number
+  $backgroundColor: string
+  $marginTop: string
+  $marginBottom: string
+  $dividerHeight: number
 }
 
 const StyledDivider = styled.hr<StyleProps>(
-  ({ backgroundColor, marginTop, marginBottom, dividerHeight }) => {
+  ({ $backgroundColor, $marginTop, $marginBottom, $dividerHeight }) => {
     return css`
       border: none;
-      background-color: ${backgroundColor};
-      margin-top: ${marginTop};
-      margin-bottom: calc(${marginBottom} - ${dividerHeight}px);
-      height: ${dividerHeight}px;
+      background-color: ${$backgroundColor};
+      margin-top: ${$marginTop};
+      margin-bottom: calc(${$marginBottom} - ${$dividerHeight}px);
+      height: ${$dividerHeight}px;
     `
   },
 )
@@ -41,10 +41,10 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
   const colorValue = color === 'medium' ? 'mediumColor' : color
 
   const props: StyleProps = {
-    backgroundColor: divider[colorValue].background,
-    marginTop: tokens[variant].spacings.top,
-    marginBottom: tokens[variant].spacings.bottom,
-    dividerHeight: parseInt(size),
+    $backgroundColor: divider[colorValue].background,
+    $marginTop: tokens[variant].spacings.top,
+    $marginBottom: tokens[variant].spacings.bottom,
+    $dividerHeight: parseInt(size),
     ...rest,
   }
   return <StyledDivider {...props} ref={ref} />
