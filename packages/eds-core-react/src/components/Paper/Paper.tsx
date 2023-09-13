@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import {
   paper as tokens,
   ElevationTypes,
@@ -16,11 +16,11 @@ const StyledPaper = styled.div<StyledProps>`
 `
 
 export type PaperProps = {
-  elevation: ElevationTypes
+  elevation?: ElevationTypes
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const Paper = forwardRef<HTMLDivElement, PaperProps>(function Paper(
-  { elevation, ...rest },
+  { elevation = 'none', ...rest },
   ref,
 ) {
   const props = {

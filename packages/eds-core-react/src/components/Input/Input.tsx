@@ -7,7 +7,7 @@ import {
   ElementType,
   ComponentPropsWithoutRef,
 } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import {
   typographyMixin,
   spacingsTemplate,
@@ -20,7 +20,7 @@ import type { InputToken } from './Input.tokens'
 import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 
-const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
+const Container = styled.div<StyledProps>(({ token, disabled, readOnly }) => {
   const { states, entities } = token
 
   return css`
@@ -66,8 +66,8 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   `
 })
 
-const StyledInput = styled.input(
-  ({ token, paddingLeft, paddingRight }: StyledProps) => {
+const StyledInput = styled.input<StyledProps>(
+  ({ token, paddingLeft, paddingRight }) => {
     return css`
       width: 100%;
       border: none;

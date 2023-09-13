@@ -8,7 +8,7 @@ import {
   isValidElement,
   ReactElement,
 } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'
@@ -44,19 +44,19 @@ const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
       ${bordersTemplate(border)}
       border-top: ${parentIndex === 0 ? null : 'none'};
       ${disabled
-        ? css({
-            color: header.states.disabled.typography.color,
-            cursor: 'not-allowed',
-          })
-        : css({
-            color: header.typography.color,
-            cursor: 'pointer',
-            '@media (hover: hover) and (pointer: fine)': {
-              ':hover': {
-                background: header.states.hover.background,
-              },
-            },
-          })}
+        ? css`
+            color: ${header.states.disabled.typography.color};
+            cursor: not-allowed;
+          `
+        : css`
+            color: ${header.typography.color};
+            cursor: pointer;
+            @media (hover: hover) and (pointer: fine) {
+              &:hover {
+                background: ${header.states.hover.background};
+              }
+            }
+          `}
     `
   },
 )
@@ -115,12 +115,12 @@ const StyledAccordionHeaderButton =
     `
   })
 
-type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
-
-const StyledIcon = styled(Icon)(({ chevronPosition }: StyledIconProps) => {
+const StyledIcon = styled(Icon)<{ $chevronPosition: 'left' | 'right' }>(({
+  $chevronPosition,
+}) => {
   return css`
     flex-shrink: 0;
-    ${chevronPosition === 'left'
+    ${$chevronPosition === 'left'
       ? css({ marginRight: '32px' })
       : css({ marginLeft: '16px' })}
   `
@@ -193,7 +193,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         key={`${id}-icon`}
         data={isExpanded ? chevron_up : chevron_down}
         size={24}
-        chevronPosition={chevronPosition}
+        $chevronPosition={chevronPosition}
         color={
           disabled
             ? chevronToken.states.disabled.background

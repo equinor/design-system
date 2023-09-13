@@ -1,5 +1,5 @@
 import { useEffect, HTMLAttributes, forwardRef, useMemo } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
