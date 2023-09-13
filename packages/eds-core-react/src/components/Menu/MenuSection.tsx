@@ -1,5 +1,5 @@
 import { ReactNode, memo } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { spacingsTemplate } from '@equinor/eds-utils'
 import { Divider } from '../Divider'

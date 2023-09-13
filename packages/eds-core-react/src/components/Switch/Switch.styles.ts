@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { outlineTemplate } from '@equinor/eds-utils'
 
 export const BaseInputWrapper = styled.span(

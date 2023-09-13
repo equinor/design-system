@@ -1,7 +1,7 @@
 import { Button, Scrim, ScrimProps, Dialog, Typography } from '../..'
 import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useArgs } from '@storybook/client-api'
 import { Stack } from './../../../.storybook/components'
 import page from './Scrim.docs.mdx'

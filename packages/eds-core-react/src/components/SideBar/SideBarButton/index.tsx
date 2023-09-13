@@ -4,7 +4,7 @@ import { Icon } from '../../Icon'
 import { Tooltip } from '../../Tooltip'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { useSideBar } from '../SideBar.context'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
 
 const {

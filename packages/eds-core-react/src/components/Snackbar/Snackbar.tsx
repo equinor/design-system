@@ -1,6 +1,6 @@
 import { useState, useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
 import * as ReactDom from 'react-dom'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { snackbar as SnackbarToken } from './Snackbar.tokens'
 import {
   useToken,

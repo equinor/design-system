@@ -1,5 +1,5 @@
 import { forwardRef, AnchorHTMLAttributes, ElementType } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { OverridableComponent, outlineTemplate } from '@equinor/eds-utils'
 
 import { Typography } from '../../Typography'

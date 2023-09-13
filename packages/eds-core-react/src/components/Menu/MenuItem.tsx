@@ -1,5 +1,5 @@
 import { MouseEvent, forwardRef, ElementType } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import {
   mergeRefs,

@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { token } from './Head.tokens'
 import { bordersTemplate } from '@equinor/eds-utils'
 import { InnerContext } from '../Inner.context'

@@ -1,5 +1,5 @@
 import { forwardRef, SelectHTMLAttributes } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { Label } from '../Label'
 import { nativeselect as tokens } from './NativeSelect.tokens'
 import {

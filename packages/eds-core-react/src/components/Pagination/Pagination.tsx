@@ -5,7 +5,7 @@ import {
   KeyboardEvent,
   HTMLAttributes,
 } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useIsMounted, useIsomorphicLayoutEffect } from '@equinor/eds-utils'
 import { Button } from '../Button'
 import { Icon } from '../Icon'

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import {
   more_vertical,

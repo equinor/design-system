@@ -1,5 +1,5 @@
 import { Children, ReactNode, forwardRef } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 
 const StyledSnackbarAction = styled.div(({ theme }) => {
   return css`

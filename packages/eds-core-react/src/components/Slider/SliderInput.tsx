@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { bordersTemplate, outlineTemplate } from '@equinor/eds-utils'
 
@@ -45,11 +45,7 @@ const thumbDisabled = css`
   border-color: ${_disabled.border.type === 'border' && _disabled.border.color};
 `
 
-type SliderInput = {
-  type: string
-}
-
-const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
+const StyledSliderInput = styled.input.attrs(() => ({
   type: 'range',
 }))`
   &::-webkit-slider-runnable-track,

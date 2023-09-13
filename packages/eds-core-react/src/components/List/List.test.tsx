@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { List } from '.'
 
 const StyledList = styled(List)`

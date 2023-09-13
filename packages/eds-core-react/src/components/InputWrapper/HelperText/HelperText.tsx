@@ -1,5 +1,5 @@
 import { forwardRef, ReactNode, HTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { typographyMixin } from '@equinor/eds-utils'
 import { helperText as tokens } from './HelperText.token'
 

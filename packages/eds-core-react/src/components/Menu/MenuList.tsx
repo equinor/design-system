@@ -8,7 +8,7 @@ import {
   forwardRef,
   Children as ReactChildren,
 } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'

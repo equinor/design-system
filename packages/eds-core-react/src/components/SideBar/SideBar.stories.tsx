@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/react'
 import { useState } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import {
   dashboard,
   favorite_outlined,

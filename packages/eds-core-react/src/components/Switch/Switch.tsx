@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
-import styled, { ThemeProvider, css } from 'styled-components'
+import { styled, ThemeProvider, css } from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 import { comfortable as tokens } from './Switch.tokens'
