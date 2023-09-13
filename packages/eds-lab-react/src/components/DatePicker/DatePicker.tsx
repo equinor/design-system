@@ -14,7 +14,7 @@ import DatePicker, {
 } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'

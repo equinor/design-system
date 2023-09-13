@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export type TopbarCustomContentProps = HTMLAttributes<HTMLDivElement>
 

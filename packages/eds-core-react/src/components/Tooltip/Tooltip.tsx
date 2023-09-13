@@ -8,7 +8,7 @@ import {
   useMemo,
   useEffect,
 } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import {
   spacingsTemplate,
   typographyTemplate,

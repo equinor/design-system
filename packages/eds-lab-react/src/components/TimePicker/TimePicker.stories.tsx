@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { TimePicker, TimePickerProps } from './TimePicker'
 
 const meta: Meta<typeof TimePicker> = {

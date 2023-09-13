@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { List } from '../List'
 import { Typography } from '../Typography'
 import { typographyTemplate, useToken } from '@equinor/eds-utils'

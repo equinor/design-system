@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import {
   Typography,
   Icon,

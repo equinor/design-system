@@ -4,7 +4,7 @@ import {
   UseComboboxProps,
   UseComboboxStateChange,
 } from 'downshift'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import {
   Label,
   Icon,

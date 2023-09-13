@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { arrow_back, arrow_forward } from '@equinor/eds-icons'

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Tabs, Button, Icon, TabsProps, Typography, Search } from '../..'
 import { chevron_left, chevron_right } from '@equinor/eds-icons'
 import { mergeRefs } from '@equinor/eds-utils'
