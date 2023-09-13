@@ -6,10 +6,12 @@ import {
   EdsProvider,
   Density,
 } from '@equinor/eds-core-react'
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 
-const Wrapper = styled.div<{ css: FlattenSimpleInterpolation }>`
+/* @Todo styled see if sc adds back FlattenSimpleInterpolation type */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Wrapper = styled.div<{ css: any }>`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
