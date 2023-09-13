@@ -1,46 +1,50 @@
 import { forwardRef, Ref, SVGProps } from 'react'
 import type { IconData } from '@equinor/eds-icons'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import type { Name } from './Icon.types'
 import { get } from './library'
 
 type StyledProps = {
-  height: number
   $height?: number
-  width: number
+  $width: number
   fill: string
   size?: number
-  rotation?: number
+  $rotation?: number
+}
+type PathProps = {
+  d: string
+  $height: number
+  $size: number
 }
 
 type SimpleSVGProps = {
   name: string
   viewBox: string
-  rotation?: number
+  $rotation?: number
   title?: string
   role?: string
   'aria-hidden'?: boolean | 'true' | 'false'
   'aria-labelledby'?: string
 }
 
-const transform = ({ rotation }: SimpleSVGProps): string =>
-  rotation ? `transform: rotate(${rotation}deg)` : ''
-
-const StyledSvg = styled.svg.attrs<StyledProps>(({ height, width, fill }) => ({
-  name: null,
-  xmlns: 'http://www.w3.org/2000/svg',
-  height: `${height}px`,
-  width: `${width}px`,
-  fill,
-}))`
-  ${transform}
+const StyledSvg = styled.svg.attrs<StyledProps>(
+  ({ $height, $width, fill }) => ({
+    name: null,
+    xmlns: 'http://www.w3.org/2000/svg',
+    height: `${$height}px`,
+    width: `${$width}px`,
+    fill,
+  }),
+)`
+  transform: ${({ $rotation }) =>
+    $rotation ? `rotate(${$rotation}deg)` : 'none'};
 `
 
-const StyledPath = styled.path.attrs<StyledProps>(({ $height, size }) => ({
+const StyledPath = styled.path.attrs<PathProps>(({ $height, $size }) => ({
   size: null,
   fillRule: 'evenodd',
   clipRule: 'evenodd',
-  transform: size / $height !== 1 ? `scale(${size / $height})` : null,
+  transform: $size / $height !== 1 ? `scale(${$size / $height})` : null,
 }))``
 
 const customIcon = (icon: IconData) => ({
@@ -90,23 +94,23 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     )
   }
 
-  const height = size ? size : parseInt(icon.width)
-  const width = size ? size : parseInt(icon.height)
+  const $height = size ? size : parseInt(icon.width)
+  const $width = size ? size : parseInt(icon.height)
 
   let svgProps: SimpleSVGProps & StyledProps = {
-    height,
-    width,
+    $height,
+    $width,
     fill: color,
-    viewBox: `0 0 ${width} ${height}`,
-    rotation,
+    viewBox: `0 0 ${$width} ${$height}`,
+    $rotation: rotation,
     name,
     'aria-hidden': true,
   }
 
   const pathProps = {
     d: icon.svgPathData,
-    $height: icon.height ? icon.height : size,
-    size: size || icon.height,
+    $height: icon.height ? parseInt(icon.height) : size,
+    $size: size || parseInt(icon.height),
   }
 
   // Accessibility
