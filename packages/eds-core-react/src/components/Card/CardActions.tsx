@@ -1,6 +1,6 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
-import type { CSSObject } from 'styled-components'
+import type { StyledObject } from 'styled-components'
+import { styled } from 'styled-components'
 import { Typography } from '../Typography'
 import { primary as tokens } from './Card.tokens'
 
@@ -13,7 +13,10 @@ export type CardActionsProps = {
   meta?: string
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
+/* @Todo styled use styled.div<Pick<CSSObject, 'justifyContent'>>` after Styled components is updated
+https://github.com/styled-components/styled-components/pull/4117 */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const StyledCardActions = styled.div<Pick<StyledObject<any>, 'justifyContent'>>`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;

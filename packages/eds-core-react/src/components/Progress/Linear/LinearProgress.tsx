@@ -1,6 +1,6 @@
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
-import styled, { keyframes } from 'styled-components'
-import type { CSSObject } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
+import type { StyledObject } from 'styled-components'
 import * as tokens from './LinearProgress.tokens'
 
 const indeterminate = keyframes`
@@ -99,7 +99,9 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
       }
     }
 
-    const transformStyle: CSSObject = {
+    /*  @Todo styled replace with CSSObject */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const transformStyle: StyledObject<any> = {
       transform: barStyle,
     }
 

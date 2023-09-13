@@ -1,8 +1,8 @@
-import styled, { CSSProperties } from 'styled-components'
+import { styled, StyledObject } from 'styled-components'
 
 type StackProps = {
-  direction?: CSSProperties['flexDirection']
-  align?: CSSProperties['alignItems']
+  direction?: StyledObject<any>['flexDirection']
+  align?: StyledObject<any>['alignItems']
 }
 
 export const Stack = styled.div<StackProps>`

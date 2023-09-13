@@ -1,8 +1,11 @@
-import { CSSObject } from 'styled-components'
+import { StyledObject } from 'styled-components'
 import type { Typography } from '@equinor/eds-tokens'
 
 /** Simpler version `typographyTemplate` that does not set `color` and `margin` */
-export const typographyMixin = (typography: Partial<Typography>): CSSObject => {
+export const typographyMixin = (
+  typography: Partial<Typography>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): StyledObject<any> => {
   const {
     fontFamily,
     fontSize,
@@ -22,7 +25,8 @@ export const typographyMixin = (typography: Partial<Typography>): CSSObject => {
     letterSpacing,
     lineHeight,
     textDecoration,
-    textTransform: textTransform as CSSObject['textTransform'],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    textTransform: textTransform as StyledObject<any>['textTransform'],
     fontStyle,
   }
 }
