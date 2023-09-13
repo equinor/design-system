@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Typography } from '../Typography'
 import { TypographyProps } from '../Typography/Typography'
 

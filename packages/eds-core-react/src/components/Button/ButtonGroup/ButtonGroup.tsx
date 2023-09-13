@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { group as tokens } from './ButtonGroup.tokens'
 
 const { border } = tokens

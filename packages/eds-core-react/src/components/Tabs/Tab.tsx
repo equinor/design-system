@@ -1,5 +1,5 @@
 import { forwardRef, ButtonHTMLAttributes, ElementType } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import {
   outlineTemplate,
   spacingsTemplate,
@@ -26,7 +26,7 @@ const StyledTab = styled.button.attrs<StyledTabProps>(
     role: 'tab',
     'aria-selected': $active,
     'aria-disabled': disabled,
-    tabIndex: $value ? '0' : $active ? '0' : '-1',
+    tabIndex: $value ? 0 : $active ? 0 : -1,
   }),
 )<StyledTabProps>(({ theme, $active, disabled }) => {
   const {

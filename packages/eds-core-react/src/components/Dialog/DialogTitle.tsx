@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { typographyTemplate } from '@equinor/eds-utils'
 
 const StyledDialogTitle = styled.div(({ theme, children }) => {

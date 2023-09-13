@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
 import { Icon as Icon_ } from '../Icon'
 import * as tokens from './Chip.tokens'

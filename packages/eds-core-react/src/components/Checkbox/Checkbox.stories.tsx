@@ -8,7 +8,7 @@ import {
   Table,
   Density,
 } from '../..'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react'

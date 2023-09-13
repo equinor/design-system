@@ -5,7 +5,7 @@ import {
   ReactNode,
   Children as ReactChildren,
 } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { spacingsTemplate, useToken } from '@equinor/eds-utils'
 import { Paper } from '../Paper'
 import type { Elevations } from '@equinor/eds-tokens'

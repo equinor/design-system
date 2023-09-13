@@ -1,6 +1,6 @@
 /* eslint camelcase: "off" */
 import { forwardRef, InputHTMLAttributes } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
+import { styled, ThemeProvider } from 'styled-components'
 import {
   checkbox,
   checkbox_outline, // eslint-disable-line camelcase

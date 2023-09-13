@@ -11,7 +11,7 @@ import {
   cloneElement,
   Children as ReactChildren,
 } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { mergeRefs } from '@equinor/eds-utils'
 import { TabsContext } from './Tabs.context'
 import { Variants } from './Tabs.types'

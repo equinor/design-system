@@ -1,5 +1,5 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import { styled, css, ThemeProvider } from 'styled-components'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
 import {
