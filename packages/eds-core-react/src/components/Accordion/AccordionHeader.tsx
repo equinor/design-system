@@ -27,7 +27,7 @@ const {
 } = tokens
 
 const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
-  ({ theme, disabled, parentIndex }) => {
+  ({ theme, disabled, $parentIndex }) => {
     const {
       entities: { header },
       border,
@@ -42,7 +42,7 @@ const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
       justify-content: space-between;
       background-color: ${header.background};
       ${bordersTemplate(border)}
-      border-top: ${parentIndex === 0 ? null : 'none'};
+      border-top: ${$parentIndex === 0 ? null : 'none'};
       ${disabled
         ? css`
             color: ${header.states.disabled.typography.color};
@@ -63,21 +63,21 @@ const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
 
 type StyledAccordionHeaderButtonProps = {
   /** The ID of the panel */
-  panelId?: string
+  $panelId?: string
   /**  Is AccordionItem expanded */
-  isExpanded?: boolean
+  $isExpanded?: boolean
   /** Accordion item is disabled */
   disabled?: boolean
   /**  The ID of the parent */
-  parentIndex?: number
+  $parentIndex?: number
 }
 
 const StyledAccordionHeaderButton =
   styled.button.attrs<StyledAccordionHeaderButtonProps>(
-    ({ panelId, isExpanded, disabled }) => ({
-      'aria-expanded': isExpanded,
-      'aria-controls': panelId,
-      'aria-disabled': isExpanded && disabled,
+    ({ $panelId, $isExpanded, disabled }) => ({
+      'aria-expanded': $isExpanded,
+      'aria-controls': $panelId,
+      'aria-disabled': $isExpanded && disabled,
       tabIndex: disabled ? -1 : 0,
       disabled,
     }),
@@ -245,15 +245,15 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     return (
       <StyledAccordionHeader
         disabled={disabled}
-        parentIndex={parentIndex}
+        $parentIndex={parentIndex}
         as={headerLevel}
         className={className}
         style={style}
       >
         <StyledAccordionHeaderButton
-          isExpanded={isExpanded}
+          $isExpanded={isExpanded}
           disabled={disabled}
-          panelId={panelId}
+          $panelId={panelId}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           ref={ref}

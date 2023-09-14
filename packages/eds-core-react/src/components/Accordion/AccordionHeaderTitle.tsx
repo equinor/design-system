@@ -8,8 +8,13 @@ export type AccordionHeaderTitleProps = {
   disabled?: boolean
 } & HTMLAttributes<HTMLSpanElement>
 
-const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>(
-  ({ theme, isExpanded, disabled }) => {
+type StyledAccordionHeaderTitleProps = {
+  $isExpanded?: boolean
+  $disabled?: boolean
+} & HTMLAttributes<HTMLSpanElement>
+
+const StyledAccordionHeaderTitle = styled.span<StyledAccordionHeaderTitleProps>(
+  ({ theme, $isExpanded, $disabled }) => {
     const {
       entities: { header },
     } = theme
@@ -20,7 +25,7 @@ const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>(
       flex-grow: 1;
       overflow: hidden;
       text-align: left;
-      color: ${isExpanded && !disabled
+      color: ${$isExpanded && !$disabled
         ? header.states.active.typography?.color
         : 'inherit'};
     `
@@ -37,8 +42,8 @@ const AccordionHeaderTitle = forwardRef<
   return (
     <StyledAccordionHeaderTitle
       ref={ref}
-      isExpanded={isExpanded}
-      disabled={disabled}
+      $isExpanded={isExpanded}
+      $disabled={disabled}
       {...rest}
     >
       {children}
