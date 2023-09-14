@@ -32,7 +32,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     { variant, disabled = false, type = 'text', rowsMax, ...other },
     ref,
   ) {
-    const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
     const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
     const { density } = useEds()
     const spacings =
@@ -58,8 +57,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       type,
       disabled,
       variant,
-      token: inputVariant,
-      density,
       ...other,
     }
 

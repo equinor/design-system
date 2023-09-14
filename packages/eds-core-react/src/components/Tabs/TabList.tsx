@@ -26,7 +26,10 @@ const variants: VariantsRecord = {
   minWidth: 'max-content',
 }
 
-type StyledProps = TabListProps
+type StyledProps = {
+  $variant?: Variants
+  $scrollable?: boolean
+}
 
 const StyledTabList = styled.div.attrs(
   (): HTMLAttributes<HTMLDivElement> => ({
@@ -35,8 +38,8 @@ const StyledTabList = styled.div.attrs(
 )<StyledProps>`
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: ${({ variant }) => variants[variant] as VariantsRecord};
-  overflow-x: ${({ scrollable }) => (scrollable ? 'auto' : 'hidden')};
+  grid-auto-columns: ${({ $variant }) => variants[$variant] as VariantsRecord};
+  overflow-x: ${({ $scrollable }) => ($scrollable ? 'auto' : 'hidden')};
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
 
@@ -63,7 +66,7 @@ export type TabListProps = {
 
 type TabChild = {
   disabled?: boolean
-  index?: number
+  $index?: number
   value?: number | string
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   RefAttributes<HTMLButtonElement> &
@@ -98,35 +101,38 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     [arrowNavigating, tabsFocused],
   )
 
-  const Tabs = ReactChildren.map(children, (child: TabChild, index: number) => {
-    const childProps = child.props as TabChild
-    const controlledActive = childProps.value
-    const isActive = controlledActive
-      ? controlledActive === activeTab
-      : index === activeTab
+  const Tabs = ReactChildren.map(
+    children,
+    (child: TabChild, $index: number) => {
+      const childProps = child.props as TabChild
+      const controlledActive = childProps.value
+      const isActive = controlledActive
+        ? controlledActive === activeTab
+        : $index === activeTab
 
-    const tabRef = isActive
-      ? mergeRefs<HTMLButtonElement>(child.ref, selectedTabRef)
-      : child.ref
+      const tabRef = isActive
+        ? mergeRefs<HTMLButtonElement>(child.ref, selectedTabRef)
+        : child.ref
 
-    if (isActive) currentTab.current = index
+      if (isActive) currentTab.current = $index
 
-    return cloneElement(child, {
-      id: `${tabsId}-tab-${index + 1}`,
-      'aria-controls': `${tabsId}-panel-${index + 1}`,
-      active: isActive,
-      index,
-      onClick: () => handleChange(index),
-      ref: tabRef,
-    })
-  })
+      return cloneElement(child, {
+        id: `${tabsId}-tab-${$index + 1}`,
+        'aria-controls': `${tabsId}-panel-${$index + 1}`,
+        active: isActive,
+        $index,
+        onClick: () => handleChange($index),
+        ref: tabRef,
+      })
+    },
+  )
 
   const focusableChildren: number[] = Tabs.filter((child: TabChild) => {
     const childProps = child.props as TabChild
     return !childProps.disabled
   }).map((child: TabChild) => {
     const childProps = child.props as TabChild
-    return childProps.index
+    return childProps.$index
   })
 
   const firstFocusableChild = focusableChildren[0]
@@ -160,8 +166,8 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
       onKeyDown={handleKeyPress}
       ref={ref}
       {...props}
-      variant={variant}
-      scrollable={scrollable}
+      $variant={variant}
+      $scrollable={scrollable}
     >
       {Tabs}
     </StyledTabList>
