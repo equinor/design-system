@@ -20,23 +20,23 @@ import type { InputToken } from './Input.tokens'
 import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 
-const Container = styled.div<StyledProps>(({ token, disabled, readOnly }) => {
-  const { states, entities } = token
+const Container = styled.div<StyledProps>(({ $token, disabled, readOnly }) => {
+  const { states, entities } = $token
 
   return css`
     --eds-input-adornment-color: ${entities.adornment.typography.color};
-    --eds-input-color: ${token.typography.color};
+    --eds-input-color: ${$token.typography.color};
 
     position: relative;
-    height: ${token.height};
-    width: ${token.width};
+    height: ${$token.height};
+    width: ${$token.width};
     display: flex;
     flex-direction: row;
     border: none;
     box-sizing: border-box;
-    box-shadow: ${token.boxShadow};
-    background: var(--eds-input-background, ${token.background});
-    ${outlineTemplate(token.outline)}
+    box-shadow: ${$token.boxShadow};
+    background: var(--eds-input-background, ${$token.background});
+    ${outlineTemplate($token.outline)}
 
     &:focus-within {
       --eds-input-adornment-color: ${entities.adornment?.states.focus?.outline
@@ -67,20 +67,20 @@ const Container = styled.div<StyledProps>(({ token, disabled, readOnly }) => {
 })
 
 const StyledInput = styled.input<StyledProps>(
-  ({ token, paddingLeft, paddingRight }) => {
+  ({ $token, $paddingLeft, $paddingRight }) => {
     return css`
       width: 100%;
       border: none;
       background: transparent;
-      ${spacingsTemplate(token.spacings)}
-      ${typographyMixin(token.typography)}
+      ${spacingsTemplate($token.spacings)}
+      ${typographyMixin($token.typography)}
       outline: none;
 
-      padding-left: ${paddingLeft};
-      padding-right: ${paddingRight};
+      padding-left: ${$paddingLeft};
+      padding-right: ${$paddingRight};
 
       &::placeholder {
-        color: ${token.entities.placeholder.typography.color};
+        color: ${$token.entities.placeholder.typography.color};
       }
 
       &:disabled {
@@ -92,38 +92,38 @@ const StyledInput = styled.input<StyledProps>(
 )
 
 type AdornmentProps = {
-  token: InputToken
+  $token: InputToken
 }
 
-const Adornments = styled.div<AdornmentProps>(({ token }) => {
+const Adornments = styled.div<AdornmentProps>(({ $token }) => {
   return css`
     position: absolute;
-    top: ${token.spacings.top};
-    bottom: ${token.spacings.bottom};
+    top: ${$token.spacings.top};
+    bottom: ${$token.spacings.bottom};
     display: flex;
     align-items: center;
-    ${typographyMixin(token.entities.adornment.typography)}
+    ${typographyMixin($token.entities.adornment.typography)}
     color: var(--eds-input-adornment-color);
   `
 })
 
 const LeftAdornments = styled(Adornments)(
-  ({ token }) => css`
+  ({ $token }) => css`
     left: 0;
-    padding-left: ${token.entities.adornment.spacings.left};
+    padding-left: ${$token.entities.adornment.spacings.left};
   `,
 )
 
 const RightAdornments = styled(Adornments)(
-  ({ token }) => css`
+  ({ $token }) => css`
     right: 0;
-    padding-right: ${token.entities.adornment.spacings.right};
+    padding-right: ${$token.entities.adornment.spacings.right};
   `,
 )
 type StyledProps = {
-  token: InputToken
-  paddingLeft?: string
-  paddingRight?: string
+  $token: InputToken
+  $paddingLeft?: string
+  $paddingRight?: string
 } & Required<Pick<InputProps, 'readOnly' | 'disabled'>>
 
 export type InputProps = {
@@ -211,7 +211,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       type,
       disabled,
       readOnly,
-      token,
+      $token: token,
       style: {
         resize: 'none',
       },
@@ -223,18 +223,18 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       readOnly,
       className,
       style,
-      token,
+      $token: token,
     }
 
     const _leftAdornmentProps = {
       ...leftAdornmentsProps,
       ref: setLeftAdornmentsRef,
-      token,
+      $token: token,
     }
     const _rightAdornmentProps = {
       ...rightAdornmentsProps,
       ref: setRightAdornmentsRef,
-      token,
+      $token: token,
     }
 
     return (
@@ -246,8 +246,8 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           </LeftAdornments>
         ) : null}
         <StyledInput
-          paddingLeft={token.spacings.left}
-          paddingRight={token.spacings.right}
+          $paddingLeft={token.spacings.left}
+          $paddingRight={token.spacings.right}
           {...inputProps}
         />
         {rightAdornments ? (
