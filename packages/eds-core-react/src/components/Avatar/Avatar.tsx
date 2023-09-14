@@ -4,8 +4,7 @@ import { bordersTemplate } from '@equinor/eds-utils'
 import { avatar as tokens } from './Avatar.tokens'
 
 type StyledAvatarProps = {
-  size: number
-  disabled: boolean
+  $size: number
 }
 
 const StyledAvatar = styled.div<StyledAvatarProps>`
@@ -16,16 +15,16 @@ const StyledAvatar = styled.div<StyledAvatarProps>`
   flex-shrink: 0;
   overflow: hidden;
   ${bordersTemplate(tokens.border)};
-  ${({ size }) => css`
-    height: ${size}px;
-    width: ${size}px;
+  ${({ $size }) => css`
+    height: ${$size}px;
+    width: ${$size}px;
   `}
 `
 
 type StyledImageProps = {
   alt: string
   src: string
-  disabled: boolean
+  $disabled: boolean
 }
 
 const StyledImage = styled.img<StyledImageProps>`
@@ -33,8 +32,8 @@ const StyledImage = styled.img<StyledImageProps>`
   text-align: center;
   color: transparent;
 
-  ${({ disabled }) =>
-    disabled &&
+  ${({ $disabled }) =>
+    $disabled &&
     css`
       opacity: ${tokens.states.disabled.opacity};
     `};
@@ -57,8 +56,8 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   ref,
 ) {
   return (
-    <StyledAvatar size={size} disabled={disabled} ref={ref} {...rest}>
-      <StyledImage src={src} alt={alt} disabled={disabled} />
+    <StyledAvatar $size={size} ref={ref} {...rest}>
+      <StyledImage src={src} alt={alt} $disabled={disabled} />
     </StyledAvatar>
   )
 })

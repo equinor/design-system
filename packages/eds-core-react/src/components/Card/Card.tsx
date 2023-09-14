@@ -10,7 +10,7 @@ const { primary } = tokens
 type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
 
 type StyledCardProps = {
-  background: string
+  $background: string
 } & HTMLAttributes<HTMLDivElement>
 
 export type CardProps = {
@@ -23,7 +23,7 @@ export type CardProps = {
 const StyledCard = styled(Paper)<StyledCardProps>`
   width: 100%;
   position: relative;
-  background-color: ${({ background }) => background};
+  background-color: ${({ $background }) => $background};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
 
   const props = {
     ref,
-    background: token.background,
+    $background: token.background,
     ...rest,
   }
 
