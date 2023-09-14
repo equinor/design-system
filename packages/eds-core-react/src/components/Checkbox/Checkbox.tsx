@@ -6,13 +6,13 @@ import { typographyTemplate } from '@equinor/eds-utils'
 import { CheckboxInput } from './Input'
 
 type StyledLabelProps = {
-  disabled: boolean
+  $disabled: boolean
 }
 
 const StyledLabel = styled.label<StyledLabelProps>`
   display: inline-flex;
   align-items: center;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
 `
 
 const LabelText = styled.span`
@@ -37,7 +37,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     ref,
   ) {
     return label ? (
-      <StyledLabel disabled={disabled} className={className} style={style}>
+      <StyledLabel $disabled={disabled} className={className} style={style}>
         <CheckboxInput
           {...rest}
           disabled={disabled}

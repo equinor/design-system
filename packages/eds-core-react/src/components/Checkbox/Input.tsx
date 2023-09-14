@@ -12,25 +12,25 @@ import { spacingsTemplate, outlineTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
 type StyledIconPathProps = {
-  icon: IconData
+  $icon: IconData
   name: string
 }
 
-const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
+const StyledPath = styled.path.attrs<StyledIconPathProps>(({ $icon }) => ({
   fillRule: 'evenodd',
   clipRule: 'evenodd',
-  d: icon.svgPathData,
+  d: $icon.svgPathData,
 }))<StyledIconPathProps>``
 
 type StyledInputProps = {
-  iconSize: number
+  $iconSize: number
 }
 
 const Input = styled.input.attrs<StyledInputProps>(({ type = 'checkbox' }) => ({
   type,
 }))<StyledInputProps>`
-  --scale: ${({ theme, iconSize }) =>
-    parseFloat(theme.clickbound.height) / iconSize};
+  --scale: ${({ theme, $iconSize }) =>
+    parseFloat(theme.clickbound.height) / $iconSize};
   appearance: none;
   width: 100%;
   height: 100%;
@@ -140,7 +140,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     return (
       <ThemeProvider theme={token}>
         <InputWrapper {...inputWrapperProps}>
-          <Input iconSize={iconSize} {...inputProps} />
+          <Input $iconSize={iconSize} {...inputProps} />
           {indeterminate ? (
             <Svg
               width={iconSize}
@@ -149,7 +149,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
               fill={fill}
               aria-hidden
             >
-              <StyledPath icon={checkbox_indeterminate} name="indeterminate" />
+              <StyledPath $icon={checkbox_indeterminate} name="indeterminate" />
             </Svg>
           ) : (
             <Svg
@@ -159,8 +159,8 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
               fill={fill}
               aria-hidden
             >
-              <StyledPath icon={checkbox} name="checked" />
-              <StyledPath icon={checkbox_outline} name="not-checked" />
+              <StyledPath $icon={checkbox} name="checked" />
+              <StyledPath $icon={checkbox_outline} name="not-checked" />
             </Svg>
           )}
         </InputWrapper>
