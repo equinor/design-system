@@ -16,14 +16,14 @@ import {
 import { useEds } from '../EdsProvider'
 
 type StyledInputProps = {
-  iconSize: number
+  $iconSize: number
 }
 
 const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
   type,
 }))<StyledInputProps>`
-  --scale: ${({ theme, iconSize }) =>
-    parseFloat(theme.clickbound.height) / iconSize};
+  --scale: ${({ theme, $iconSize }) =>
+    parseFloat(theme.clickbound.height) / $iconSize};
   appearance: none;
   width: 100%;
   height: 100%;
@@ -55,23 +55,23 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
     display: inline;
   }
 `
-type StyledRadioProps = Pick<RadioProps, 'disabled'>
+type StyledRadioProps = { $disabled: boolean }
 
 const StyledLabel = styled.label<StyledRadioProps>`
   display: inline-flex;
   align-items: center;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
 `
 
 type StyledIconPathProps = {
-  icon: IconData
+  $icon: IconData
   name: string
 }
 
-const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
+const StyledPath = styled.path.attrs<StyledIconPathProps>(({ $icon }) => ({
   fillRule: 'evenodd',
   clipRule: 'evenodd',
-  d: icon.svgPathData,
+  d: $icon.svgPathData,
 }))<StyledIconPathProps>``
 
 const Svg = styled.svg.attrs(({ height, width, fill }) => ({
@@ -146,8 +146,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         fill={fill}
         aria-hidden
       >
-        <StyledPath icon={radio_button_selected} name="selected" />
-        <StyledPath icon={radio_button_unselected} name="unselected" />
+        <StyledPath $icon={radio_button_selected} name="selected" />
+        <StyledPath $icon={radio_button_unselected} name="unselected" />
       </Svg>
     )
   }, [fill])
@@ -155,13 +155,13 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel disabled={disabled} className={className} style={style}>
+        <StyledLabel $disabled={disabled} className={className} style={style}>
           <InputWrapper disabled={disabled}>
             <Input
               {...rest}
               ref={ref}
               disabled={disabled}
-              iconSize={iconSize}
+              $iconSize={iconSize}
             />
             {renderSVG}
           </InputWrapper>
@@ -169,7 +169,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         </StyledLabel>
       ) : (
         <InputWrapper disabled={disabled} className={className} style={style}>
-          <Input {...rest} ref={ref} disabled={disabled} iconSize={iconSize} />
+          <Input {...rest} ref={ref} disabled={disabled} $iconSize={iconSize} />
           {renderSVG}
         </InputWrapper>
       )}
