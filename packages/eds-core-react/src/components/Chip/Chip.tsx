@@ -19,17 +19,17 @@ const { enabled, error } = tokens
 const { background, height, typography, spacings, border, states } = enabled
 
 type StyleProps = {
-  variant: 'active' | 'error' | 'default'
-  clickable: boolean
-  deletable: boolean
-  disabled: boolean
-  onlyChild: boolean
+  $variant: 'active' | 'error' | 'default'
+  $clickable: boolean
+  $deletable: boolean
+  $disabled: boolean
+  $onlyChild: boolean
 }
 
 const StyledChips = styled.div.attrs<StyleProps>(
-  ({ clickable, deletable }) => ({
-    tabIndex: clickable || deletable ? 0 : null,
-    role: clickable ? 'button' : null,
+  ({ $clickable, $deletable }) => ({
+    tabIndex: $clickable || $deletable ? 0 : null,
+    role: $clickable ? 'button' : null,
   }),
 )<StyleProps>`
   background: ${background};
@@ -60,8 +60,8 @@ const StyledChips = styled.div.attrs<StyleProps>(
   ${spacingsTemplate(spacings)}
   ${typographyTemplate(typography)}
 
-  ${({ clickable }) =>
-    clickable &&
+  ${({ $clickable }) =>
+    $clickable &&
     css`
       @media (hover: hover) and (pointer: fine) {
         &:hover {
@@ -74,8 +74,8 @@ const StyledChips = styled.div.attrs<StyleProps>(
       }
     `}
 
-  ${({ variant }) => {
-    switch (variant) {
+  ${({ $variant }) => {
+    switch ($variant) {
       case 'active':
         return css`
           background: ${states.active.background};
@@ -104,8 +104,8 @@ const StyledChips = styled.div.attrs<StyleProps>(
     }
   }}
 
-  ${({ disabled }) =>
-    disabled &&
+  ${({ $disabled }) =>
+    $disabled &&
     css`
       cursor: not-allowed;
       background: ${background};
@@ -125,14 +125,14 @@ const StyledChips = styled.div.attrs<StyleProps>(
       }
     `}
 
-  ${({ deletable }) =>
-    deletable &&
+  ${({ $deletable }) =>
+    $deletable &&
     css`
       padding-right: 4px;
     `}
 
-  ${({ onlyChild }) =>
-    onlyChild
+  ${({ $onlyChild }) =>
+    $onlyChild
       ? css`
           padding-left: 8px;
         `
@@ -168,11 +168,11 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   const chipProps = {
     ...other,
     ref,
-    disabled,
-    deletable,
-    clickable,
-    onlyChild,
-    variant,
+    $disabled: disabled,
+    $deletable: deletable,
+    $clickable: clickable,
+    $onlyChild: onlyChild,
+    $variant: variant,
   }
 
   const handleKeyPress = (
@@ -219,15 +219,15 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     <StyledChips
       {...chipProps}
       onClick={(event) => clickable && handleClick(event)}
-      onKeyPress={handleKeyPress}
+      onKeyDown={handleKeyPress}
     >
       {resizedChildren}
       {onDelete && (
         <Icon
           name="close"
           title="close"
-          disabled={disabled}
-          variant={variant}
+          $disabled={disabled}
+          $variant={variant}
           onClick={onDeleteClick}
           size={16}
         />
