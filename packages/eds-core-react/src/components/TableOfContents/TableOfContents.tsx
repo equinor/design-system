@@ -13,13 +13,15 @@ export type TableOfContentsProps = {
   label?: string
 } & HTMLAttributes<HTMLElement>
 
-const StyledTableOfContents = styled.nav<TableOfContentsProps>(
-  ({ theme, sticky }) => {
+type StyledTableOfContentsProps = { $sticky?: boolean }
+
+const StyledTableOfContents = styled.nav<StyledTableOfContentsProps>(
+  ({ theme, $sticky }) => {
     return css`
       margin-top: ${theme.spacings.top};
       margin-bottom: ${theme.spacings.bottom};
 
-      ${sticky &&
+      ${$sticky &&
       css`
         position: fixed;
         top: ${theme.entities.sticky.spacings.top};
@@ -50,12 +52,7 @@ const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <StyledTableOfContents
-          ref={ref}
-          label={label}
-          sticky={sticky}
-          {...rest}
-        >
+        <StyledTableOfContents ref={ref} $sticky={sticky} {...rest}>
           <TocLabel variant="overline">{label}</TocLabel>
           <TocList>{children}</TocList>
         </StyledTableOfContents>

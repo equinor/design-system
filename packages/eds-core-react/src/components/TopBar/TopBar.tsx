@@ -19,7 +19,9 @@ export type TopbarProps = {
   sticky?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledTopBar = styled(Paper)<TopbarProps>(({ theme, sticky }) => {
+type StyledTopbarProps = { $sticky?: boolean }
+
+const StyledTopBar = styled(Paper)<StyledTopbarProps>(({ theme, $sticky }) => {
   return css`
     height: ${theme.height};
     background: ${theme.background};
@@ -33,7 +35,7 @@ const StyledTopBar = styled(Paper)<TopbarProps>(({ theme, sticky }) => {
     ${spacingsTemplate(theme.spacings)};
     ${typographyTemplate(theme.typography)}
 
-    ${sticky &&
+    ${$sticky &&
     css`
       position: sticky;
       top: 0;
@@ -57,7 +59,7 @@ export const TopBar = forwardRef<HTMLDivElement, TopbarProps>(function TopBar(
       <StyledTopBar
         forwardedAs={'header'}
         elevation={elevation}
-        sticky={sticky}
+        $sticky={sticky}
         {...rest}
       >
         {children}
