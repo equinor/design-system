@@ -27,15 +27,15 @@ const icons = {
 
 Icon.add(icons)
 
-type NavigationStyledProps = Pick<PaginationProps, 'withItemIndicator'>
+type NavigationStyledProps = { $withItemIndicator: boolean }
 
 const Navigation = styled.nav<NavigationStyledProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  margin-left: ${({ withItemIndicator }) =>
-    withItemIndicator ? tokens.spacings.left : 0};
+  margin-left: ${({ $withItemIndicator }) =>
+    $withItemIndicator ? tokens.spacings.left : 0};
 `
 
 const OrderedList = styled.ol`
@@ -129,7 +129,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
     const props = {
       ref,
-      withItemIndicator,
+      $withItemIndicator: withItemIndicator,
       ...rest,
     }
 
@@ -165,7 +165,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                     <PaginationItem
                       aria-label={getAriaLabel(page as number, activePage)}
                       aria-current={activePage}
-                      page={page as number}
+                      $page={page as number}
                       selected={page === activePage}
                       onClick={(event) => {
                         onPageChange(event, page as number)

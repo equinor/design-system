@@ -9,12 +9,12 @@ const indeterminate = keyframes`
       transform: rotate(360deg);
     }
 `
-type SvgProps = Pick<CircularProgressProps, 'variant'>
+type SvgProps = { $variant: 'determinate' | 'indeterminate' }
 
 const Svg = styled.svg<SvgProps>`
   display: inline-block;
-  ${({ variant }) =>
-    variant === 'indeterminate'
+  ${({ $variant }) =>
+    $variant === 'indeterminate'
       ? css`
           animation: ${indeterminate} 1.4s linear infinite;
         `
@@ -88,7 +88,7 @@ https://github.com/styled-components/styled-components/pull/4117 */
     const props = {
       ...rest,
       ref,
-      variant,
+      $variant: variant,
     }
     const token = getToken(color)
     const [srProgress, setSrProgress] = useState(0)

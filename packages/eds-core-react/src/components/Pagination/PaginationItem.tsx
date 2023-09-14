@@ -4,7 +4,7 @@ import { pagination as tokens } from './Pagination.tokens'
 
 type PaginationItemProps = {
   // Current page number
-  page: number
+  $page: number
   // If current page is selected
   selected: boolean
   // Click function
@@ -14,10 +14,10 @@ type PaginationItemProps = {
 export const PaginationItem = forwardRef<
   HTMLButtonElement,
   PaginationItemProps
->(function PaginationItem({ page, selected, onClick, ...rest }, ref) {
+>(function PaginationItem({ $page, selected, onClick, ...rest }, ref) {
   const props = {
     ref,
-    page,
+    $page,
     selected,
     ...rest,
   }
@@ -32,7 +32,7 @@ export const PaginationItem = forwardRef<
       onClick={onClick ? onClick : undefined}
       {...props}
     >
-      {page}
+      {$page}
     </Button>
   )
 })

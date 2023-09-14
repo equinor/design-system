@@ -48,14 +48,14 @@ const determinate = keyframes`
 `
 
 type SvgProps = {
-  progress: number
-} & Pick<StarProgressProps, 'variant'> &
-  SVGProps<SVGSVGElement>
+  $progress: number
+  $variant?: 'indeterminate' | 'determinate'
+} & SVGProps<SVGSVGElement>
 
 const Svg = styled.svg<SvgProps>`
   fill: ${token.background};
-  ${({ variant, progress }) =>
-    variant === 'indeterminate'
+  ${({ $variant, $progress }) =>
+    $variant === 'indeterminate'
       ? css`
           path {
             &:nth-child(1) {
@@ -82,22 +82,22 @@ const Svg = styled.svg<SvgProps>`
           path {
             animation: ${determinate} 1.3s linear;
             &:nth-child(6) {
-              animation-play-state: ${progress > 90 ? 'running' : 'paused'};
+              animation-play-state: ${$progress > 90 ? 'running' : 'paused'};
             }
             &:nth-child(5) {
-              animation-play-state: ${progress > 80 ? 'running' : 'paused'};
+              animation-play-state: ${$progress > 80 ? 'running' : 'paused'};
             }
             &:nth-child(4) {
-              animation-play-state: ${progress > 60 ? 'running' : 'paused'};
+              animation-play-state: ${$progress > 60 ? 'running' : 'paused'};
             }
             &:nth-child(3) {
-              animation-play-state: ${progress > 40 ? 'running' : 'paused'};
+              animation-play-state: ${$progress > 40 ? 'running' : 'paused'};
             }
             &:nth-child(2) {
-              animation-play-state: ${progress > 20 ? 'running' : 'paused'};
+              animation-play-state: ${$progress > 20 ? 'running' : 'paused'};
             }
             &:nth-child(1) {
-              animation-play-state: ${progress <= 20 ? 'running' : 'paused'};
+              animation-play-state: ${$progress <= 20 ? 'running' : 'paused'};
             }
           }
         `}
@@ -127,8 +127,8 @@ const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
     const props = {
       ...rest,
       ref,
-      variant,
-      progress,
+      $variant: variant,
+      $progress: progress,
     }
 
     if (variant === 'determinate') {
