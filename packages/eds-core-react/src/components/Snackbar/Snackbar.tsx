@@ -11,9 +11,19 @@ import {
 import { Paper } from '../Paper'
 import { useEds } from '../EdsProvider'
 
-type StyledProps = Pick<SnackbarProps, 'placement'>
+type StyledProps = {
+  $placement?:
+    | 'left'
+    | 'right'
+    | 'top'
+    | 'bottom'
+    | 'top-left'
+    | 'bottom-left'
+    | 'top-right'
+    | 'bottom-right'
+}
 
-const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, placement }) => {
+const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, $placement }) => {
   return css`
     position: fixed;
     background-color: ${theme.background};
@@ -25,22 +35,22 @@ const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, placement }) => {
     z-index: 1400;
 
     ${{
-      top: placement.includes('top')
+      top: $placement.includes('top')
         ? theme.spacings.top
-        : placement === 'left' || placement === 'right'
+        : $placement === 'left' || $placement === 'right'
         ? '50%'
         : undefined,
-      bottom: placement.includes('bottom') ? theme.spacings.bottom : undefined,
-      right: placement.includes('right') ? theme.spacings.right : undefined,
-      left: placement.includes('left')
+      bottom: $placement.includes('bottom') ? theme.spacings.bottom : undefined,
+      right: $placement.includes('right') ? theme.spacings.right : undefined,
+      left: $placement.includes('left')
         ? theme.spacings.left
-        : placement === 'top' || placement === 'bottom'
+        : $placement === 'top' || $placement === 'bottom'
         ? '50%'
         : undefined,
       transform:
-        placement === 'left' || placement === 'right'
+        $placement === 'left' || $placement === 'right'
           ? 'translateY(-50%)'
-          : placement === 'top' || placement === 'bottom'
+          : $placement === 'top' || $placement === 'bottom'
           ? 'translateX(-50%)'
           : undefined,
     }}
@@ -102,7 +112,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
 
     const props = {
       ref,
-      placement,
+      $placement: placement,
       ...rest,
     }
     const { density } = useEds()
