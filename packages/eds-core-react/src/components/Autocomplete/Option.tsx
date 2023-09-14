@@ -4,17 +4,17 @@ import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
 
 type StyledListItemType = {
-  highlighted?: string
-  active?: string
-  isdisabled?: string
+  $highlighted?: string
+  $active?: string
+  $isdisabled?: string
 }
 
 const StyledListItem = styled.li<StyledListItemType>(
-  ({ theme, highlighted, active, isdisabled }) => {
+  ({ theme, $highlighted, $active, $isdisabled }) => {
     const backgroundColor =
-      highlighted === 'true'
+      $highlighted === 'true'
         ? theme.states.hover.background
-        : active === 'true'
+        : $active === 'true'
         ? theme.states.active.background
         : theme.background
     return css`
@@ -28,10 +28,10 @@ const StyledListItem = styled.li<StyledListItemType>(
       user-select: none;
       overflow: hidden;
       touch-action: manipulation;
-      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
+      cursor: ${$highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
-      ${isdisabled === 'true'
+      ${$isdisabled === 'true'
         ? css`
             color: ${theme.states.disabled.typography.color};
           `
@@ -40,12 +40,12 @@ const StyledListItem = styled.li<StyledListItemType>(
   },
 )
 
-const Label = styled.span<{ multiline: boolean }>(({ theme, multiline }) => {
+const Label = styled.span<{ $multiline: boolean }>(({ theme, $multiline }) => {
   return css`
     ${spacingsTemplate(theme.entities.label.spacings)}
     text-overflow: ellipsis;
-    white-space: ${multiline ? 'normal' : 'nowrap'};
-    overflow: ${multiline ? 'initial' : 'hidden'};
+    white-space: ${$multiline ? 'normal' : 'nowrap'};
+    overflow: ${$multiline ? 'initial' : 'hidden'};
     overflow-wrap: anywhere;
   `
 })
@@ -71,6 +71,7 @@ function AutocompleteOptionInner(
     isSelected,
     isDisabled,
     multiline,
+    highlighted,
     onClick,
     'aria-selected': ariaSelected,
     ...other
@@ -78,9 +79,10 @@ function AutocompleteOptionInner(
   return (
     <StyledListItem
       ref={ref}
-      isdisabled={isDisabled ? 'true' : 'false'}
+      $isdisabled={isDisabled ? 'true' : 'false'}
+      $highlighted={highlighted}
       aria-hidden={isDisabled}
-      active={!multiple && isSelected ? 'true' : 'false'}
+      $active={!multiple && isSelected ? 'true' : 'false'}
       onClick={(e) => {
         //timeout: workaround for "Maximum update depth exceeded" error that happens when touch input
         setTimeout(() => {
@@ -103,7 +105,7 @@ function AutocompleteOptionInner(
       {optionComponent ? (
         <>{optionComponent}</>
       ) : (
-        <Label multiline={multiline}>{value}</Label>
+        <Label $multiline={multiline}>{value}</Label>
       )}
     </StyledListItem>
   )
