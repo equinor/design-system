@@ -3,27 +3,27 @@
 exports[`Sidebar Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="SideBar__GridContainer-sc-a84pkc-0 dPXYCw"
+    class="SideBar__GridContainer-sc-a84pkc-0 enAJiO"
     open=""
   >
     <div
-      class="SideBarContent__StyledSideBarContent-sc-kq9ra8-0 kFNDqg"
+      class="SideBarContent__StyledSideBarContent-sc-kq9ra8-0 ctFPhS"
     >
       <div
-        class="SideBarToggle__ToggleContainer-sc-1w5e44y-0 gDtnmz"
+        class="SideBarToggle__ToggleContainer-sc-1w5e44y-0 eTKAwV"
         open=""
       >
         <button
-          class="Button__ButtonBase-sc-1hs0myn-1 hRIJOv"
+          class="Button__ButtonBase-sc-1hs0myn-1 jqASoJ"
           tabindex="0"
           type="button"
         >
           <span
-            class="Button__Inner-sc-1hs0myn-0 hdiASj"
+            class="Button__Inner-sc-1hs0myn-0 cUUPQV"
           >
             <svg
               aria-hidden="true"
-              class="Icon__StyledSvg-sc-6evbi1-0"
+              class="Icon__StyledSvg-sc-6evbi1-0 bxUudF"
               fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
               height="24px"
               viewBox="0 0 24 24"
@@ -42,21 +42,21 @@ exports[`Sidebar Matches snapshot 1`] = `
         </button>
       </div>
       <div
-        class="SideBarButton__MenuButtonContainer-sc-15xlkyo-0 gJVGlu"
+        class="SideBarButton__MenuButtonContainer-sc-15xlkyo-0 kVLqOo"
         open=""
       >
         <button
-          class="Button__ButtonBase-sc-1hs0myn-1 hfdYjz SideBarButton__ExtendedButton-sc-15xlkyo-1 HPTaS"
+          class="Button__ButtonBase-sc-1hs0myn-1 ciytzp SideBarButton__ExtendedButton-sc-15xlkyo-1 gXsEic"
           open=""
           tabindex="0"
           type="button"
         >
           <span
-            class="Button__Inner-sc-1hs0myn-0 hdiASj"
+            class="Button__Inner-sc-1hs0myn-0 cUUPQV"
           >
             <svg
               aria-hidden="true"
-              class="Icon__StyledSvg-sc-6evbi1-0"
+              class="Icon__StyledSvg-sc-6evbi1-0 bxUudF"
               fill="var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1))"
               height="24px"
               viewBox="0 0 24 24"
@@ -76,12 +76,12 @@ exports[`Sidebar Matches snapshot 1`] = `
         </button>
       </div>
       <a
-        class="SidebarLink__Container-sc-gbehcj-0 hPVbeM"
+        class="SidebarLink__Container-sc-gbehcj-0 jTzrgq"
         tabindex="0"
       >
         <svg
           aria-hidden="true"
-          class="Icon__StyledSvg-sc-6evbi1-0"
+          class="Icon__StyledSvg-sc-6evbi1-0 bxUudF"
           fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
           height="24px"
           viewBox="0 0 24 24"
@@ -97,18 +97,18 @@ exports[`Sidebar Matches snapshot 1`] = `
           />
         </svg>
         <p
-          class="Typography__StyledTypography-sc-179guof-0 fBsTVX SidebarLink__ItemText-sc-gbehcj-1 kOkhOw"
+          class="Typography__StyledTypography-sc-179guof-0 exGpie SidebarLink__ItemText-sc-gbehcj-1 cHdQHK"
         >
           Home
         </p>
       </a>
       <a
-        class="SidebarLink__Container-sc-gbehcj-0 hPVbeM"
+        class="SidebarLink__Container-sc-gbehcj-0 jTzrgq"
         tabindex="0"
       >
         <svg
           aria-hidden="true"
-          class="Icon__StyledSvg-sc-6evbi1-0"
+          class="Icon__StyledSvg-sc-6evbi1-0 bxUudF"
           fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
           height="24px"
           viewBox="0 0 24 24"
@@ -124,26 +124,26 @@ exports[`Sidebar Matches snapshot 1`] = `
           />
         </svg>
         <p
-          class="Typography__StyledTypography-sc-179guof-0 fBsTVX SidebarLink__ItemText-sc-gbehcj-1 kOkhOw"
+          class="Typography__StyledTypography-sc-179guof-0 exGpie SidebarLink__ItemText-sc-gbehcj-1 cHdQHK"
         >
           Another Link
         </p>
       </a>
       <div
-        class="SideBarAccordion__MenuItem-sc-1ekwnbi-0 cExJJB"
+        class="SideBarAccordion__MenuItem-sc-1ekwnbi-0 hINoKP"
       >
         <h2
-          class="SideBarAccordion__AccordionHeader-sc-1ekwnbi-1 eBrMDs"
+          class="SideBarAccordion__AccordionHeader-sc-1ekwnbi-1 hEewNC"
         >
           <button
             aria-controls="panel_123"
             aria-expanded="true"
-            class="SideBarAccordion__Button-sc-1ekwnbi-2 SideBarAccordion__OpenSidebarButton-sc-1ekwnbi-3 bIwyEU jEXFBm"
+            class="SideBarAccordion__Button-sc-1ekwnbi-2 SideBarAccordion__OpenSidebarButton-sc-1ekwnbi-3 AilAa gqyscD"
             id="header_123"
           >
             <svg
               aria-hidden="true"
-              class="Icon__StyledSvg-sc-6evbi1-0"
+              class="Icon__StyledSvg-sc-6evbi1-0 bxUudF"
               fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
               height="24px"
               viewBox="0 0 24 24"
@@ -159,13 +159,13 @@ exports[`Sidebar Matches snapshot 1`] = `
               />
             </svg>
             <p
-              class="Typography__StyledTypography-sc-179guof-0 fBsTVX SideBarAccordion__ItemText-sc-1ekwnbi-7 eObpym"
+              class="Typography__StyledTypography-sc-179guof-0 exGpie SideBarAccordion__ItemText-sc-1ekwnbi-7 lxecA"
             >
               Test accordion
             </p>
             <svg
               aria-hidden="true"
-              class="Icon__StyledSvg-sc-6evbi1-0"
+              class="Icon__StyledSvg-sc-6evbi1-0 bxUudF"
               fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
               height="24px"
               viewBox="0 0 24 24"
@@ -184,19 +184,19 @@ exports[`Sidebar Matches snapshot 1`] = `
         </h2>
         <div
           aria-labelledby="header_123"
-          class="SideBarAccordion__Panel-sc-1ekwnbi-6 kRIwZR"
+          class="SideBarAccordion__Panel-sc-1ekwnbi-6 fpExXe"
           id="panel_123"
           role="region"
         >
           <a
-            class="SideBarAccordionItem__Container-sc-1aeo1e1-0 jYNDv"
+            class="SideBarAccordionItem__Container-sc-1aeo1e1-0 jMoTTJ"
             tabindex="0"
           >
             <div
-              class="SideBarAccordionItem__TextWrapper-sc-1aeo1e1-1 eVJtOl"
+              class="SideBarAccordionItem__TextWrapper-sc-1aeo1e1-1 hBvvlA"
             >
               <p
-                class="Typography__StyledTypography-sc-179guof-0 fBsTVX SideBarAccordionItem__Text-sc-1aeo1e1-2 fjweUU"
+                class="Typography__StyledTypography-sc-179guof-0 exGpie SideBarAccordionItem__Text-sc-1aeo1e1-2 iAEkpm"
               >
                 Test accordion item
               </p>

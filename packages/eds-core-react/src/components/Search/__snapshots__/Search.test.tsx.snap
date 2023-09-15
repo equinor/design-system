@@ -2,40 +2,39 @@
 
 exports[`Search Matches snapshot 1`] = `
 <DocumentFragment>
-  .c0 {
-  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-  --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  .c4 {
+  transform: none;
+}
+
+.c0 {
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
   position: relative;
   height: 36px;
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   border: none;
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-  background: var(--eds-input-background,var(--eds_ui_background__light,rgba(247,247,247,1)));
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  background: var(--eds-input-background,var(--eds_ui_background__light, rgba(247, 247, 247, 1)));
   outline: 1px solid transparent;
   outline-offset: 0px;
 }
 
 .c0:focus-within {
   box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  outline: 2px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
   outline-offset: 0px;
 }
 
-.c0 > input {
+.c0>input {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.c4 {
+.c5 {
   width: 100%;
   border: none;
   background: transparent;
@@ -46,9 +45,6 @@ exports[`Search Matches snapshot 1`] = `
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
-  -webkit-letter-spacing: 0.025em;
-  -moz-letter-spacing: 0.025em;
-  -ms-letter-spacing: 0.025em;
   letter-spacing: 0.025em;
   line-height: 1.500em;
   outline: none;
@@ -56,23 +52,11 @@ exports[`Search Matches snapshot 1`] = `
   padding-right: 40px;
 }
 
-.c4::-webkit-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+.c5::placeholder {
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
 }
 
-.c4::-moz-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4:-ms-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4::placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4:disabled {
+.c5:disabled {
   color: var(--eds-input-color);
   cursor: not-allowed;
 }
@@ -81,13 +65,7 @@ exports[`Search Matches snapshot 1`] = `
   position: absolute;
   top: 6px;
   bottom: 6px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   font-family: Equinor;
   font-size: 0.750rem;
@@ -101,7 +79,7 @@ exports[`Search Matches snapshot 1`] = `
   padding-left: 8px;
 }
 
-.c5 {
+.c6 {
   right: 0;
   padding-right: 8px;
 }
@@ -122,7 +100,7 @@ exports[`Search Matches snapshot 1`] = `
       >
         <svg
           aria-hidden="true"
-          class=""
+          class="c4"
           fill="currentColor"
           height="18px"
           viewBox="0 0 18 18"
@@ -139,12 +117,12 @@ exports[`Search Matches snapshot 1`] = `
         </svg>
       </div>
       <input
-        class="c4"
+        class="c5"
         style="resize: none;"
         type="text"
       />
       <div
-        class="c2 c5"
+        class="c2 c6"
       />
     </div>
   </div>

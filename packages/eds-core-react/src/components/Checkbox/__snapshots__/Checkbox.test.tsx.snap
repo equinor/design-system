@@ -4,15 +4,11 @@ exports[`Checkbox Matches snapshot 1`] = `
 <DocumentFragment>
   .c2 {
   --scale: 2;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   width: 100%;
   height: 100%;
   margin: 0;
   grid-area: input;
-  -webkit-transform: scale(var(--scale));
-  -ms-transform: scale(var(--scale));
   transform: scale(var(--scale));
   cursor: pointer;
 }
@@ -21,29 +17,29 @@ exports[`Checkbox Matches snapshot 1`] = `
   outline: none;
 }
 
-.c2[data-focus-visible-added]:focus + svg {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+.c2[data-focus-visible-added]:focus+svg {
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 10px;
 }
 
-.c2:focus-visible + svg {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+.c2:focus-visible+svg {
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 10px;
 }
 
-.c2:not(:checked) ~ svg path[name='checked'] {
+.c2:not(:checked)~svg path[name='checked'] {
   display: none;
 }
 
-.c2:not(:checked) ~ svg path[name='not-checked'] {
+.c2:not(:checked)~svg path[name='not-checked'] {
   display: inline;
 }
 
-.c2:checked ~ svg path[name='not-checked'] {
+.c2:checked~svg path[name='not-checked'] {
   display: none;
 }
 
-.c2:checked ~ svg path[name='checked'] {
+.c2:checked~svg path[name='checked'] {
   display: inline;
 }
 
@@ -54,7 +50,7 @@ exports[`Checkbox Matches snapshot 1`] = `
 
 .c1 {
   display: inline-grid;
-  grid: [input] 1fr / [input] 1fr;
+  grid: [input] 1fr/[input] 1fr;
   position: relative;
   isolation: isolate;
   padding-left: 12px;
@@ -70,45 +66,34 @@ exports[`Checkbox Matches snapshot 1`] = `
   aspect-ratio: 1/1;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   border-radius: 100%;
 }
 
 .c0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
 }
 
 .c4 {
   margin: 0;
-  color: var(--eds_navigation__menu_title_color,rgba(61,61,61,1));
+  color: var(--eds_navigation__menu_title_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.000em;
-  -webkit-letter-spacing: 0.013em;
-  -moz-letter-spacing: 0.013em;
-  -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c1 > svg {
+  .c1 >svg {
     z-index: 1;
   }
 
   .c1:hover::before {
-    background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    background-color: var(--eds_interactive_primary__hover_alt, rgba(222, 237, 238, 1));
   }
 }
 

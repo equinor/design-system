@@ -4,7 +4,7 @@ exports[`SideSheet Matches snapshot 1`] = `
 <DocumentFragment>
   .c2 {
   margin: 0;
-  color: var(--eds_heading__h2_color,rgba(61,61,61,1));
+  color: var(--eds_heading__h2_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.750rem;
   font-weight: 400;
@@ -16,18 +16,12 @@ exports[`SideSheet Matches snapshot 1`] = `
   display: grid;
   grid-gap: var(--eds_button__gap,8px);
   grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   height: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
 }
 
-.c4 > :is(svg,img) {
+.c4>:is(svg,img) {
   margin-top: var(--eds_button__icon__margin_y,0);
   margin-bottom: var(--eds_button__icon__margin_y,0);
 }
@@ -36,7 +30,6 @@ exports[`SideSheet Matches snapshot 1`] = `
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
   cursor: pointer;
@@ -45,15 +38,15 @@ exports[`SideSheet Matches snapshot 1`] = `
   height: 40px;
   width: 40px;
   padding-left: 0;
-  padding-top: var(--eds_button__padding_y,0);
+  padding-top: var(--eds_button__padding_y, 0);
   padding-right: 0;
-  padding-bottom: var(--eds_button__padding_y,0);
+  padding-bottom: var(--eds_button__padding_y, 0);
   border: 0px solid transparent;
   border-radius: 50%;
   margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
   font-family: Equinor;
-  font-size: var(--eds_button__font_size,0.875rem);
+  font-size: var(--eds_button__font_size, 0.875rem);
   font-weight: 500;
   line-height: 1.143em;
   text-align: center;
@@ -86,12 +79,12 @@ exports[`SideSheet Matches snapshot 1`] = `
 }
 
 .c3[data-focus-visible-added]:focus {
-  outline: 2px dashed rgba(0,112,121,1);
+  outline: 2px dashed rgba(0, 112, 121, 1);
   outline-offset: -2px;
 }
 
 .c3:focus-visible {
-  outline: 2px dashed rgba(0,112,121,1);
+  outline: 2px dashed rgba(0, 112, 121, 1);
   outline-offset: -2px;
 }
 
@@ -105,12 +98,16 @@ exports[`SideSheet Matches snapshot 1`] = `
   background: transparent;
   border: 1px solid transparent;
   margin: 0;
-  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  color: var(--eds_interactive__disabled__text, rgba(190, 190, 190, 1));
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.143em;
   text-align: center;
+}
+
+.c5 {
+  transform: none;
 }
 
 .c0 {
@@ -120,14 +117,14 @@ exports[`SideSheet Matches snapshot 1`] = `
   top: 0;
   right: 0;
   box-sizing: border-box;
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   width: 480px;
-  border-left: 2px solid var(--eds_ui_background__light,rgba(247,247,247,1));
+  border-left: 2px solid var(--eds_ui_background__light, rgba(247, 247, 247, 1));
   padding-left: 14px;
   padding-top: 16px;
   padding-right: 16px;
   margin: 0;
-  color: var(--eds_paragraph__body_short_color,rgba(61,61,61,1));
+  color: var(--eds_paragraph__body_short_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
@@ -136,20 +133,9 @@ exports[`SideSheet Matches snapshot 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   padding-bottom: 24px;
   padding-right: 10px;
@@ -157,7 +143,7 @@ exports[`SideSheet Matches snapshot 1`] = `
 
 @media (hover:hover) and (pointer:fine) {
   .c3:hover {
-    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    background: var(--eds_interactive_primary__hover_alt, rgba(222, 237, 238, 1));
     border: 0px solid transparent;
     border-radius: 50%;
   }
@@ -194,7 +180,7 @@ exports[`SideSheet Matches snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class=""
+            class="c5"
             fill="currentColor"
             height="24px"
             viewBox="0 0 24 24"

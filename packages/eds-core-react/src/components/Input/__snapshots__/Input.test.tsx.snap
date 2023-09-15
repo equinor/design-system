@@ -3,22 +3,17 @@
 exports[`Input Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
-  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-  --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
   position: relative;
   height: 36px;
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   border: none;
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-  background: var(--eds-input-background,var(--eds_ui_background__light,rgba(247,247,247,1)));
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  background: var(--eds-input-background,var(--eds_ui_background__light, rgba(247, 247, 247, 1)));
   outline: 1px solid transparent;
   outline-offset: 0px;
   background: transparent;
@@ -27,11 +22,11 @@ exports[`Input Matches snapshot 1`] = `
 
 .c0:focus-within {
   box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  outline: 2px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
   outline-offset: 0px;
 }
 
-.c0 > input {
+.c0>input {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -48,9 +43,6 @@ exports[`Input Matches snapshot 1`] = `
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
-  -webkit-letter-spacing: 0.025em;
-  -moz-letter-spacing: 0.025em;
-  -ms-letter-spacing: 0.025em;
   letter-spacing: 0.025em;
   line-height: 1.500em;
   outline: none;
@@ -58,20 +50,8 @@ exports[`Input Matches snapshot 1`] = `
   padding-right: 8px;
 }
 
-.c1::-webkit-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c1::-moz-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c1:-ms-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
 .c1::placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
 }
 
 .c1:disabled {

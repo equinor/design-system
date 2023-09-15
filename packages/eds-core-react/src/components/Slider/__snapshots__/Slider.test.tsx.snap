@@ -3,7 +3,7 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Slider__Wrapper-sc-n1grrg-1 hsFqRl"
+    class="Slider__Wrapper-sc-n1grrg-1 cLoUXA"
     id="test"
     style="--min: 0; --max: 100; --value: 0; --background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));"
     value="0"
@@ -14,7 +14,7 @@ exports[`Simple slider Matches snapshot 1`] = `
       aria-valuemin="0"
       aria-valuenow="0"
       aria-valuetext="0"
-      class="SliderInput__StyledSliderInput-sc-17orw4f-0 bYtMJz"
+      class="SliderInput__StyledSliderInput-sc-17orw4f-0 gRxwsX"
       id="test-thumb"
       max="100"
       min="0"
@@ -23,22 +23,22 @@ exports[`Simple slider Matches snapshot 1`] = `
       value="0"
     />
     <output
-      class="Output__StyledOutput-sc-1dy945x-0 iTVTZB"
+      class="Output__StyledOutput-sc-1dy945x-0 dBEDNI"
       for="test-thumb"
       style="--val: 0;"
     >
       0
     </output>
     <div
-      class="Slider__WrapperGroupLabel-sc-n1grrg-2 Slider__WrapperGroupLabelDots-sc-n1grrg-3 dxpGeL bWXhHZ"
+      class="Slider__WrapperGroupLabel-sc-n1grrg-2 Slider__WrapperGroupLabelDots-sc-n1grrg-3 cKgnhV fBEdaj"
     />
     <span
-      class="MinMax__StyledMinMax-sc-lxmlid-0 eDkejB"
+      class="MinMax__StyledMinMax-sc-lxmlid-0 gqQAuf"
     >
       0
     </span>
     <span
-      class="MinMax__StyledMinMax-sc-lxmlid-0 eDkejB"
+      class="MinMax__StyledMinMax-sc-lxmlid-0 gqQAuf"
     >
       100
     </span>

@@ -4,47 +4,41 @@ exports[`Table Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
   border-spacing: 0;
-  background: var(--eds_interactive_table__cell__fill_resting,rgba(255,255,255,1));
+  background: var(--eds_interactive_table__cell__fill_resting, rgba(255, 255, 255, 1));
 }
 
 .c3 {
-  min-height: var(--eds_table__cell__height,48px);
-  height: var(--eds_table__cell__height,48px);
-  background: var(--eds_interactive_table__header__fill_resting,rgba(247,247,247,1));
+  min-height: var(--eds_table__cell__height, 48px);
+  height: var(--eds_table__cell__height, 48px);
+  background: var(--eds_interactive_table__header__fill_resting, rgba(247, 247, 247, 1));
   box-sizing: border-box;
-  padding-left: var(--eds_table__cell__padding_x,16px);
-  padding-top: var(--eds_table__cell__padding_y,0);
-  padding-right: var(--eds_table__cell__padding_x,16px);
-  padding-bottom: var(--eds_table__cell__padding_y,0);
+  padding-left: var(--eds_table__cell__padding_x, 16px);
+  padding-top: var(--eds_table__cell__padding_y, 0);
+  padding-right: var(--eds_table__cell__padding_x, 16px);
+  padding-bottom: var(--eds_table__cell__padding_y, 0);
   margin: 0;
-  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
   font-family: Equinor;
-  font-size: var(--eds_table__font_size,0.875rem);
+  font-size: var(--eds_table__font_size, 0.875rem);
   font-weight: 700;
   line-height: 1.429em;
   text-align: left;
-  border-bottom: 2px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+  border-bottom: 2px solid var(--eds_ui_background__medium, rgba(220, 220, 220, 1));
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
 .c1 {
-  border-bottom: 2px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
-  background: var(--eds_interactive_table__header__fill_resting,rgba(247,247,247,1));
+  border-bottom: 2px solid var(--eds_ui_background__medium, rgba(220, 220, 220, 1));
+  background: var(--eds_interactive_table__header__fill_resting, rgba(247, 247, 247, 1));
 }
 
 @media (hover:hover) and (pointer:fine) {
   .c2:hover {
-    background: var(--eds_interactive_table__cell__fill_hover,rgba(234,234,234,1));
+    background: var(--eds_interactive_table__cell__fill_hover, rgba(234, 234, 234, 1));
   }
 }
 

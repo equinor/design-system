@@ -3,7 +3,7 @@
 exports[`Autocomplete Matches snapshot 1`] = `
 .c0 {
   margin: 0;
-  color: var(--eds_paragraph__body_short_color,rgba(61,61,61,1));
+  color: var(--eds_paragraph__body_short_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
@@ -12,37 +12,23 @@ exports[`Autocomplete Matches snapshot 1`] = `
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  grid-area: 1 / -1;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+  grid-area: 1/-1;
   align-items: center;
-  -webkit-align-self: start;
-  -ms-flex-item-align: start;
   align-self: start;
   margin: 0;
   list-style: none;
-  background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  background-color: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   user-select: none;
   overflow: hidden;
   touch-action: manipulation;
   cursor: default;
   margin: 0;
-  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.000em;
-  -webkit-letter-spacing: 0.013em;
-  -moz-letter-spacing: 0.013em;
-  -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
   padding-left: 24px;
@@ -63,8 +49,8 @@ exports[`Autocomplete Matches snapshot 1`] = `
 }
 
 .c1 {
-  background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
-  box-shadow: 0 7px 8px rgba(0,0,0,0.2),0 5px 22px rgba(0,0,0,0.12),0 12px 17px rgba(0,0,0,0.14);
+  background-color: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.2),0 5px 22px rgba(0, 0, 0, 0.12),0 12px 17px rgba(0, 0, 0, 0.14);
   border-radius: 4px;
   overflow-y: auto;
   overflow-x: hidden;

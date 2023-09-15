@@ -4,21 +4,18 @@ exports[`Card Matches snapshot 1`] = `
 <DocumentFragment>
   .c5 {
   margin: 0;
-  color: var(--eds_heading__h5_color,rgba(61,61,61,1));
+  color: var(--eds_heading__h5_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.333em;
-  -webkit-letter-spacing: 0.013em;
-  -moz-letter-spacing: 0.013em;
-  -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
 }
 
 .c6 {
   margin: 0;
-  color: var(--eds_paragraph__body_short_color,rgba(61,61,61,1));
+  color: var(--eds_paragraph__body_short_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
@@ -27,35 +24,27 @@ exports[`Card Matches snapshot 1`] = `
 }
 
 .c0 {
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
-  box-shadow: 0 0 1px rgba(0,0,0,0.14);
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.14);
 }
 
 .c1 {
   width: 100%;
   position: relative;
-  background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
+  background-color: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   grid-gap: 16px;
   border-radius: 4px;
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: auto;
 }
 
-.c2 > * {
+.c2 >* {
   width: 100%;
 }
 
@@ -70,22 +59,13 @@ exports[`Card Matches snapshot 1`] = `
 }
 
 .c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   padding: 0 16px 0 16px;
 }
 
-.c3 > :not(:first-child) {
+.c3 >:not(:first-child) {
   margin-left: 16px;
 }
 
@@ -99,9 +79,6 @@ exports[`Card Matches snapshot 1`] = `
 
 .c4 {
   display: grid;
-  -webkit-box-flex: 2;
-  -webkit-flex-grow: 2;
-  -ms-flex-positive: 2;
   flex-grow: 2;
   grid-auto-columns: auto;
 }

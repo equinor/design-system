@@ -2,17 +2,17 @@
 
 exports[`Dialog Matches snapshot 1`] = `
 .c0 {
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
-  box-shadow: 0 11px 15px rgba(0,0,0,0.2),0 9px 46px rgba(0,0,0,0.12),0 24px 38px rgba(0,0,0,0.14);
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+  box-shadow: 0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14);
 }
 
 .c1 {
   width: 252px;
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   display: grid;
   grid-auto-columns: auto;
   margin: 0;
-  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
+  color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
@@ -23,8 +23,6 @@ exports[`Dialog Matches snapshot 1`] = `
 }
 
 .c4 {
-  -webkit-align-self: end;
-  -ms-flex-item-align: end;
   align-self: end;
   justify-self: start;
   padding: 0 16px 0 16px;
@@ -40,15 +38,13 @@ exports[`Dialog Matches snapshot 1`] = `
 
 .c2 {
   margin: 0;
-  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
+  color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
   line-height: 1.500em;
   text-align: left;
   min-height: 24px;
-  -webkit-align-self: end;
-  -ms-flex-item-align: end;
   align-self: end;
   justify-self: start;
   margin-right: 16px;
@@ -57,15 +53,13 @@ exports[`Dialog Matches snapshot 1`] = `
 .c3 {
   --content-spacing-top: 16px;
   margin: 0;
-  color: var(--eds_paragraph__body_long_color,rgba(61,61,61,1));
+  color: var(--eds_paragraph__body_long_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.500em;
   text-align: left;
   min-height: 80px;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
   justify-self: stretch;
   padding: 0 16px 0 16px;

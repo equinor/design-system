@@ -2,26 +2,25 @@
 
 exports[`Chips Matches snapshot 1`] = `
 <DocumentFragment>
-  .c0 {
-  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  .c1 {
+  transform: none;
+}
+
+.c0 {
+  background: var(--eds_ui_background__light, rgba(247, 247, 247, 1));
   height: 22px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
   grid-auto-columns: max-content;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   border: 1px solid transparent;
   border-radius: 100px;
   padding-left: 4px;
   padding-right: 8px;
   margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 500;
@@ -30,7 +29,7 @@ exports[`Chips Matches snapshot 1`] = `
 }
 
 .c0 svg {
-  fill: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  fill: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
 }
 
 .c0:focus {
@@ -38,12 +37,12 @@ exports[`Chips Matches snapshot 1`] = `
 }
 
 .c0[data-focus-visible-added]:focus {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 3px;
 }
 
 .c0:focus-visible {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 3px;
 }
 
@@ -52,7 +51,7 @@ exports[`Chips Matches snapshot 1`] = `
   >
     <svg
       aria-hidden="true"
-      class=""
+      class="c1"
       fill="currentColor"
       height="16px"
       viewBox="0 0 16 16"
@@ -75,26 +74,25 @@ exports[`Chips Matches snapshot 1`] = `
 
 exports[`Chips Matches snapshot 2`] = `
 <DocumentFragment>
-  .c0 {
-  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  .c1 {
+  transform: none;
+}
+
+.c0 {
+  background: var(--eds_ui_background__light, rgba(247, 247, 247, 1));
   height: 22px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
   grid-auto-columns: max-content;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   border: 1px solid transparent;
   border-radius: 100px;
   padding-left: 4px;
   padding-right: 8px;
   margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 500;
@@ -103,7 +101,7 @@ exports[`Chips Matches snapshot 2`] = `
 }
 
 .c0 svg {
-  fill: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  fill: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
 }
 
 .c0:focus {
@@ -111,23 +109,23 @@ exports[`Chips Matches snapshot 2`] = `
 }
 
 .c0[data-focus-visible-added]:focus {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 3px;
 }
 
 .c0:focus-visible {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 3px;
 }
 
 @media (hover:hover) and (pointer:fine) {
   .c0:hover {
     cursor: pointer;
-    color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+    color: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
   }
 
   .c0:hover svg {
-    fill: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+    fill: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
   }
 }
 
@@ -138,7 +136,7 @@ exports[`Chips Matches snapshot 2`] = `
   >
     <svg
       aria-hidden="true"
-      class=""
+      class="c1"
       fill="currentColor"
       height="16px"
       viewBox="0 0 16 16"
