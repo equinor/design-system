@@ -8,7 +8,7 @@ import {
   isValidElement,
   ReactElement,
 } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'

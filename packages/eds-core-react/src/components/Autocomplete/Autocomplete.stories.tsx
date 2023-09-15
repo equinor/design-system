@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
 import { StoryFn, Meta } from '@storybook/react'

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { token } from './Row.tokens'
 
 type StyledProps = { $active: boolean }

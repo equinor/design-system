@@ -7,7 +7,7 @@ import {
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { Snackbar } from '.'
 import { snackbar as tokens } from './Snackbar.tokens'
 

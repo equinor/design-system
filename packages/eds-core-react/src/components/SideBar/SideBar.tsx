@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef, useEffect } from 'react'
-import { styled, css, ThemeProvider } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'

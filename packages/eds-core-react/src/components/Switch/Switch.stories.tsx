@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import { Switch, SwitchProps, EdsProvider, Table, Density } from '../..'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'

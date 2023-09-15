@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { bordersTemplate } from '@equinor/eds-utils'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 

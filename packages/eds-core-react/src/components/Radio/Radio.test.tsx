@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import 'jest-styled-components'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 import { Radio } from './Radio'
 

@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
-import { styled, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import type { StyledObject } from 'styled-components'
 import * as tokens from './LinearProgress.tokens'
 

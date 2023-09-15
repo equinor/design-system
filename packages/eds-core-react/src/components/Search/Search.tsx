@@ -8,7 +8,7 @@ import {
   MouseEvent,
   useEffect,
 } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { Button } from '../Button'
 import { Icon } from '../Icon'

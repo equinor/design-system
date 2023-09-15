@@ -20,7 +20,7 @@ import {
 } from 'downshift'
 import { pickBy, mergeWith } from 'ramda'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { styled, ThemeProvider, css } from 'styled-components'
+import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
 import { List } from '../List'
 import { useEds } from '../EdsProvider'

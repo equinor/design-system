@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { Typography } from '../Typography'
 import { primary as tokens } from './Card.tokens'
 

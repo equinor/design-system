@@ -1,5 +1,5 @@
 import { forwardRef, SVGProps, Ref } from 'react'
-import { styled, keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import { token } from './StarProgress.tokens'
 
 const indeterminate = keyframes`

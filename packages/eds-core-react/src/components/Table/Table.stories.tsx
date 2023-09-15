@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 import {
   Table,

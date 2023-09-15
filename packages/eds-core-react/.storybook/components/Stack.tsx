@@ -1,4 +1,4 @@
-import { styled, StyledObject } from 'styled-components'
+import styled, { StyledObject } from 'styled-components'
 
 type StackProps = {
   direction?: StyledObject<any>['flexDirection']

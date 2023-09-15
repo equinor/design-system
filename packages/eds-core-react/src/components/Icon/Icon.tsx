@@ -1,6 +1,6 @@
 import { forwardRef, Ref, SVGProps } from 'react'
 import type { IconData } from '@equinor/eds-icons'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import type { Name } from './Icon.types'
 import { get } from './library'
 

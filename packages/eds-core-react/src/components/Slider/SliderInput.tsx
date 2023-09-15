@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { bordersTemplate, outlineTemplate } from '@equinor/eds-utils'
 

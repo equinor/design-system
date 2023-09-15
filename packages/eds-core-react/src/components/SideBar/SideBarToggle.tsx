@@ -5,7 +5,7 @@ import { Tooltip } from '../Tooltip'
 import { useSideBar } from './SideBar.context'
 import { sidebar as tokens } from './SideBar.tokens'
 import { expand, collapse } from '@equinor/eds-icons'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const {
   entities: {

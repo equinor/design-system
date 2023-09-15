@@ -6,7 +6,7 @@ import {
   ReactNode,
   Children as ReactChildren,
 } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
 import { spacingsTemplate } from '@equinor/eds-utils'

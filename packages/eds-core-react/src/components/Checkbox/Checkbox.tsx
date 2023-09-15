@@ -1,6 +1,6 @@
 /* eslint camelcase: "off" */
 import { forwardRef, InputHTMLAttributes } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { checkbox as tokens } from './Checkbox.tokens'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { CheckboxInput } from './Input'

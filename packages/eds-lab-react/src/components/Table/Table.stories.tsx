@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { StoryObj, Meta } from '@storybook/react'
 import { Table, TableProps, Typography } from '@equinor/eds-core-react'
 import { data, multilineText, columns } from '../../stories/data'

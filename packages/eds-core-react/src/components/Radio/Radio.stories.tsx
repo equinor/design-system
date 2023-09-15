@@ -8,7 +8,7 @@ import {
   Label,
   Typography,
 } from '../..'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { StoryFn, Meta } from '@storybook/react'
 import { data } from '../../stories/data'

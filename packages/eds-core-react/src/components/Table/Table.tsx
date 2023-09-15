@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { tableCell } from './DataCell/DataCell.tokens'
 
 const TableBase = styled.table`

@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { Paper } from '../Paper'
 import type { Elevations } from '@equinor/eds-tokens'
 import * as tokens from './Card.tokens'

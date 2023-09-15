@@ -1,6 +1,6 @@
 /* eslint camelcase: "off" */
 import { forwardRef, InputHTMLAttributes, useMemo } from 'react'
-import { styled, ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
   radio_button_unselected, // eslint-disable-line camelcase

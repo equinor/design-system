@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { StoryObj, Meta } from '@storybook/react'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'

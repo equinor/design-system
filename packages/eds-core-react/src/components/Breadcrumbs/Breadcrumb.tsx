@@ -1,5 +1,5 @@
 import { forwardRef, ElementType, useMemo } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { OverridableComponent } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'

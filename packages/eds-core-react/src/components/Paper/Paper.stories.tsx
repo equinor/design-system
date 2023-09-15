@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { Paper, PaperProps, Typography } from '../..'
 import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'

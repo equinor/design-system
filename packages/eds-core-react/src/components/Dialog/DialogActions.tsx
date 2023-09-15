@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const StyledDialogActions = styled.div<DialogActionsProps>(
   ({ theme, children }) => {

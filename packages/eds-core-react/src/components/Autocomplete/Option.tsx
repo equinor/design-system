@@ -1,5 +1,5 @@
 import { forwardRef, LiHTMLAttributes, ReactNode } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
 

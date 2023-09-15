@@ -1,6 +1,6 @@
 import { CSSButton, ButtonProps } from '.'
 import { Icon, EdsProvider } from '@equinor/eds-core-react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { StoryFn, StoryObj, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { menu, save } from '@equinor/eds-icons'

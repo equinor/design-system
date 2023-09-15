@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 import { Switch } from './Switch'
 

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import { Table } from '.'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { tableCell as dataCellToken } from './DataCell/DataCell.tokens'
 import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
 

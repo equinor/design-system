@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Breadcrumbs.docs.mdx'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 const meta: Meta<typeof Breadcrumbs> = {
   title: 'Navigation/Breadcrumbs',

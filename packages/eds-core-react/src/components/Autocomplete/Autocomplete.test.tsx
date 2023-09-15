@@ -9,7 +9,7 @@ import {
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { Autocomplete } from '.'
 
 const itemObjects = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]

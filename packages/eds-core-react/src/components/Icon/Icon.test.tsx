@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { save } from '@equinor/eds-icons'
 import { Icon } from '.'
 

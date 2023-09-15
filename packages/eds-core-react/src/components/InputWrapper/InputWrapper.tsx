@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef, ReactNode, useCallback } from 'react'
-import { styled, ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { useToken } from '@equinor/eds-utils'
 import { Label as _Label, LabelProps } from '../Label'
 import { HelperText as _HelperText, HelperTextProps } from './HelperText'

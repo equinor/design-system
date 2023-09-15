@@ -1,5 +1,5 @@
 import { forwardRef, SVGProps, Ref, useEffect, useState } from 'react'
-import { styled, css, keyframes } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import * as tokens from './CircularProgress.tokens'
 import type { CircularProgressToken } from './CircularProgress.tokens'
 import type { StyledObject } from 'styled-components'

@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export type PopoverActionsProps = HTMLAttributes<HTMLDivElement>
 

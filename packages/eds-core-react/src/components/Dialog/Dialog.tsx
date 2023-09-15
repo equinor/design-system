@@ -6,7 +6,7 @@ import {
   ForwardedRef,
   useMemo,
 } from 'react'
-import { styled, css, ThemeProvider } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   bordersTemplate,

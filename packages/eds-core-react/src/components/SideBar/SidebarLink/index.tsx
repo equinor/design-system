@@ -9,7 +9,7 @@ import { Icon } from '../../Icon'
 import { Tooltip as EDSTooltip } from '../../Tooltip'
 import { Typography } from '../../Typography'
 
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
 import { useSideBar } from '../SideBar.context'
 

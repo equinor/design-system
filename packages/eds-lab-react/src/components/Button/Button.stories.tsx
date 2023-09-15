@@ -7,7 +7,7 @@ import {
   Density,
 } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 
 Icon.add({ save })

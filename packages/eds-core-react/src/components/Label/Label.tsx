@@ -1,5 +1,5 @@
 import { LabelHTMLAttributes, forwardRef } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { label as tokens } from './Label.tokens'
 

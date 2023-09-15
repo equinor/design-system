@@ -1,5 +1,5 @@
 import { forwardRef, ButtonHTMLAttributes, ElementType } from 'react'
-import { styled, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   outlineTemplate,
   spacingsTemplate,

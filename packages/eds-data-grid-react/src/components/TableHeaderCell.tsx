@@ -9,7 +9,7 @@ import { Icon, Table } from '@equinor/eds-core-react'
 import { arrow_down, arrow_up } from '@equinor/eds-icons'
 import { useTableContext } from '../EdsDataGridContext'
 import { Filter } from './Filter'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 
 type Props<T> = {

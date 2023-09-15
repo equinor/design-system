@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import type { StyledObject } from 'styled-components'
 
 const StyledCaption = styled.caption<CaptionProps>(

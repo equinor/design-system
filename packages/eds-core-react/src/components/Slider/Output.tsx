@@ -4,7 +4,7 @@ import {
   ReactNode,
   CSSProperties,
 } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { slider as tokens } from './Slider.tokens'
 

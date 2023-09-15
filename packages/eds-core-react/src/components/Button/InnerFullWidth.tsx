@@ -1,5 +1,5 @@
 import { forwardRef, Children as ReactChildren, HTMLAttributes } from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 const FullWidthCenterContent = styled.span`
   text-align: center;
