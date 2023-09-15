@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, CSSProperties } from 'react'
 import {
   Button,
   Icon,
@@ -6,12 +6,13 @@ import {
   EdsProvider,
   Density,
 } from '@equinor/eds-core-react'
-import { styled, css } from 'styled-components'
+import { save } from '@equinor/eds-icons'
+import { styled } from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 
-/* @Todo styled see if sc adds back FlattenSimpleInterpolation type */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Wrapper = styled.div<{ css: any }>`
+Icon.add({ save })
+
+const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
@@ -43,28 +44,26 @@ export const Default: StoryFn<ButtonProps> = () => {
     setDensity('compact')
   }, [density])
 
-  const vars = css`
-    --eds_button__font_size: calc(14 / 16 * 1rem);
-    --eds_button__radius: calc(4 / 14 * 1em);
-    --eds_button__height: auto;
-    --eds_button__height_compact: auto;
-    --eds_button__gap: calc(8 / 14 * 1em);
-    --eds_button__border_width: 1px;
-    --eds_button__padding_y: calc(
-      10 / 14 * 1em - var(--eds_button__border_width)
-    );
-    --eds_button__padding_y_compact: calc(
-      4 / 14 * 1em - var(--eds_button__border_width)
-    );
-    --eds_button__padding_x: calc(16 / 14 * 1em);
-    --eds_button__icon__size: 24px;
-    --eds_button__icon__margin_y: -4px; // icon = 24px, line-height: 16px, (24 - 16) / 2 = 4px
-    --eds_button__fullwidth__icon__margin_x: calc(8 / 14 * 1em);
-    --eds_button__fullwidth__label__margin_x: calc(32 / 14 * 1em);
-  `
+  const style = {
+    '--eds_button__font_size': 'calc(14 / 16 * 1rem)',
+    '--eds_button__radius': 'calc(4 / 14 * 1em)',
+    '--eds_button__height': 'auto',
+    '--eds_button__height_compact': 'auto',
+    '--eds_button__gap': 'calc(8 / 14 * 1em)',
+    '--eds_button__border_width': '1px',
+    '--eds_button__padding_y':
+      'calc(10 / 14 * 1em - var(--eds_button__border_width))',
+    '--eds_button__padding_y_compact':
+      'calc(4 / 14 * 1em - var(--eds_button__border_width))',
+    '--eds_button__padding_x': 'calc(16 / 14 * 1em)',
+    '--eds_button__icon__size': '24px',
+    '--eds_button__icon__margin_y': '-4px', // icon = 24px, line-height: 16px, (24 - 16) / 2 = 4px
+    '--eds_button__fullwidth__icon__margin_x': 'calc(8 / 14 * 1em)',
+    '--eds_button__fullwidth__label__margin_x': 'calc(32 / 14 * 1em)',
+  } as CSSProperties
 
   return (
-    <Wrapper css={vars}>
+    <Wrapper style={style}>
       <Button variant="outlined">Outlined</Button>
       <Button>
         Contained
