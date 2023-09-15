@@ -17,8 +17,6 @@ const StyledBanner = styled(Banner)`
   position: relative;
 `
 
-const rgbaTrim = (x: string) => x.split(' ').join('')
-
 describe('Banner', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(
@@ -122,7 +120,7 @@ describe('Banner', () => {
     const iconSvg = screen.getByTestId('icon')
     expect(screen.queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(info.entities.icon.background),
+      info.entities.icon.background,
     )
     expect(iconSvg).toHaveAttribute('fill', info.entities.icon.typography.color)
   })
@@ -141,7 +139,7 @@ describe('Banner', () => {
 
     expect(screen.queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(warning.entities.icon.background),
+      warning.entities.icon.background,
     )
     expect(iconSvg).toHaveAttribute(
       'fill',

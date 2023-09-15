@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
-//import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
+import 'jest-styled-components'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
 import { SidebarLinkProps } from './SidebarLink'
@@ -69,9 +70,10 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    expect(screen.getByRole('navigation')).toHaveStyle({
-      width: tokens.minWidth,
-    })
+    expect(screen.getByRole('navigation')).toHaveStyleRule(
+      'width',
+      `${tokens.minWidth}`,
+    )
   })
 
   it('Renders open width when open', () => {
@@ -82,10 +84,10 @@ describe('Sidebar', () => {
         ))}
       </SideBar>,
     )
-
-    expect(screen.getByRole('navigation')).toHaveStyle({
-      width: tokens.maxWidth,
-    })
+    expect(screen.getByRole('navigation')).toHaveStyleRule(
+      'width',
+      `${tokens.maxWidth}`,
+    )
   })
 
   it('Triggers onToggle callback when closed', async () => {

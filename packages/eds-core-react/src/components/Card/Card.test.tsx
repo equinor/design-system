@@ -5,7 +5,6 @@ import { axe } from 'jest-axe'
 import { styled } from 'styled-components'
 import { Typography } from '../Typography'
 import * as tokens from './Card.tokens'
-import { trimSpaces } from '@equinor/eds-utils'
 
 import { Card } from '.'
 
@@ -108,10 +107,7 @@ describe('Card', () => {
   it('Has correct color', () => {
     render(<Card variant="info" data-testid="card" />)
     const card = screen.getByTestId('card')
-    expect(card).toHaveStyleRule(
-      'background-color',
-      trimSpaces(info.background),
-    )
+    expect(card).toHaveStyleRule('background-color', info.background)
   })
   it('Has provided title and subtitle in CardHeaderTitle', () => {
     const title = 'Title'

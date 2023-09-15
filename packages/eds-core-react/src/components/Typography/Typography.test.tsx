@@ -13,12 +13,11 @@ const StyledTypography = styled(Typography)`
   margin-top: 16px;
   margin-bottom: 32px;
 `
-const stripSpaces = (t: string): string => t.replace(/\s/g, '')
 
 const expectToMatchTypography = (element, token: TypographyType) => {
   const { color, fontFamily, fontSize, fontWeight, lineHeight, fontStyle } =
     token
-  expect(element).toHaveStyleRule('color', stripSpaces(color))
+  expect(element).toHaveStyleRule('color', color)
   expect(element).toHaveStyleRule('font-family', fontFamily)
   expect(element).toHaveStyleRule('font-size', fontSize)
   expect(element).toHaveStyleRule('font-weight', fontWeight.toString())
