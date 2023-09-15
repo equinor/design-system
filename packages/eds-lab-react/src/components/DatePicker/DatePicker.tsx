@@ -14,7 +14,12 @@ import DatePicker, {
 } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
-import { styled, css, ThemeProvider } from 'styled-components'
+import {
+  styled,
+  css,
+  ThemeProvider,
+  StyleSheetManager,
+} from 'styled-components'
 import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'
@@ -100,77 +105,82 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
         <PopupHeader {...props} changeDate={onDateValueChange} />
       ))
 
+    const forbiddenProps = ['showPopperArrow', 'arrowProps']
     return (
-      <ThemeProvider theme={tokens}>
-        <Container className={`date-picker ${className || ''}`}>
-          <Label
-            label={label}
-            htmlFor={id}
-            className={`date-label`}
-            disabled={disabled}
-          />
-          <StyledDatepicker
-            ref={localRef}
-            locale={locale}
-            selected={date}
-            disabled={disabled}
-            className="eds-datepicker"
-            calendarClassName="eds-datepicker-calendar"
-            onChange={onDateValueChange}
-            dateFormat={dateFormat}
-            placeholderText={placeholder}
-            id={id}
-            onKeyDown={(event) => {
-              // If you shift-tab while focusing the input-element, it should close the pop-over.
-              // Not currently supported by react-datepicker.
-              if (
-                event.code === 'Tab' &&
-                event.shiftKey &&
-                (event.target as HTMLElement).nodeName == 'INPUT'
-              ) {
-                localRef.current?.setOpen(false)
+      <StyleSheetManager
+        shouldForwardProp={(prop) => !forbiddenProps.includes(prop)}
+      >
+        <ThemeProvider theme={tokens}>
+          <Container className={`date-picker ${className || ''}`}>
+            <Label
+              label={label}
+              htmlFor={id}
+              className={`date-label`}
+              disabled={disabled}
+            />
+            <StyledDatepicker
+              ref={localRef}
+              locale={locale}
+              selected={date}
+              disabled={disabled}
+              className="eds-datepicker"
+              calendarClassName="eds-datepicker-calendar"
+              onChange={onDateValueChange}
+              dateFormat={dateFormat}
+              placeholderText={placeholder}
+              id={id}
+              onKeyDown={(event) => {
+                // If you shift-tab while focusing the input-element, it should close the pop-over.
+                // Not currently supported by react-datepicker.
+                if (
+                  event.code === 'Tab' &&
+                  event.shiftKey &&
+                  (event.target as HTMLElement).nodeName == 'INPUT'
+                ) {
+                  localRef.current?.setOpen(false)
+                }
+              }}
+              filterDate={(date: Date): boolean => {
+                if (disableFuture && new Date() < date) {
+                  return false
+                }
+                if (disableBeforeDate && date < disableBeforeDate) {
+                  return false
+                }
+                if (disableAfterDate && date > disableAfterDate) {
+                  return false
+                }
+                return true
+              }}
+              autoComplete="false"
+              popperPlacement={popperPlacement}
+              renderCustomHeader={customHeader}
+              shouldCloseOnSelect={true}
+              readOnly={readOnly}
+              calendarContainer={({ children, ...rest }) => (
+                <Paper
+                  {...rest}
+                  elevation="temporary_nav"
+                  style={{ maxWidth: '312px' }}
+                >
+                  {children}
+                </Paper>
+              )}
+              minDate={minDate}
+              maxDate={maxDate}
+            />
+            <CalendarIcon
+              name="calendar"
+              className="calendar-icon"
+              color={
+                disabled ? tokens.colors.disabledText : tokens.colors.iconGray
               }
-            }}
-            filterDate={(date: Date): boolean => {
-              if (disableFuture && new Date() < date) {
-                return false
-              }
-              if (disableBeforeDate && date < disableBeforeDate) {
-                return false
-              }
-              if (disableAfterDate && date > disableAfterDate) {
-                return false
-              }
-              return true
-            }}
-            autoComplete="false"
-            popperPlacement={popperPlacement}
-            renderCustomHeader={customHeader}
-            shouldCloseOnSelect={true}
-            readOnly={readOnly}
-            calendarContainer={({ children, ...rest }) => (
-              <Paper
-                {...rest}
-                elevation="temporary_nav"
-                style={{ maxWidth: '312px' }}
-              >
-                {children}
-              </Paper>
-            )}
-            minDate={minDate}
-            maxDate={maxDate}
-          />
-          <CalendarIcon
-            name="calendar"
-            className="calendar-icon"
-            color={
-              disabled ? tokens.colors.disabledText : tokens.colors.iconGray
-            }
-            data={calendar}
-            size={24}
-          />
-        </Container>
-      </ThemeProvider>
+              data={calendar}
+              size={24}
+            />
+          </Container>
+        </ThemeProvider>
+      </StyleSheetManager>
     )
   },
 )
