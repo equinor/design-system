@@ -41,7 +41,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const [showClear, setShowClear] = useState(Boolean(rest.defaultValue))
 
   useEffect(() => {
-    if (rest.value) {
+    if (rest.value && !rest.disabled) {
       setShowClear(Boolean(rest.value))
     }
   }, [rest.value])
