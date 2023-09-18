@@ -1,14 +1,14 @@
-import styled, { StyledObject } from 'styled-components'
+import styled, { CSSObject } from 'styled-components'
 
 type StackProps = {
-  direction?: StyledObject<any>['flexDirection']
-  align?: StyledObject<any>['alignItems']
+  direction?: CSSObject['flexDirection']
+  align?: CSSObject['alignItems']
   children: React.ReactNode
 } & React.HTMLAttributes<HTMLDivElement>
 
 type StyledStackProps = {
-  $direction?: StyledObject<any>['flexDirection']
-  $align?: StyledObject<any>['alignItems']
+  $direction?: CSSObject['flexDirection']
+  $align?: CSSObject['alignItems']
 }
 
 const StyledStack = styled.div<StyledStackProps>`
