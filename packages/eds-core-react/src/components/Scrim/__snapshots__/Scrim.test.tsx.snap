@@ -3,19 +3,10 @@
 exports[`Scrim Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
-  background: var(--eds_ui_background__scrim,rgba(0,0,0,0.4));
+  background: var(--eds_ui_background__scrim, rgba(0, 0, 0, 0.4));
   z-index: 1300;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 

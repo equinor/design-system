@@ -4,7 +4,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
 <DocumentFragment>
   .c2 {
   margin: 0;
-  color: var(--eds_paragraph__body_short_color,rgba(61,61,61,1));
+  color: var(--eds_paragraph__body_short_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
@@ -14,19 +14,11 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
 
 .c0 {
   list-style: none;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   gap: 0.45em 0;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   padding: 0;
   margin: 0;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
@@ -36,7 +28,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
 }
 
 .c4 {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
   padding-left: 16px;
   padding-right: 16px;
   display: block;
@@ -49,17 +41,15 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   text-overflow: ellipsis;
   display: block;
   line-height: 1;
-  -webkit-text-decoration: none;
   text-decoration: none;
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
   width: 100%;
 }
 
 @media (hover:hover) and (pointer:fine) {
   .c3:hover {
-    -webkit-text-decoration: underline;
     text-decoration: underline;
-    color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+    color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
     cursor: pointer;
   }
 }

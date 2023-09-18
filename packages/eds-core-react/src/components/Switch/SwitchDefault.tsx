@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { bordersTemplate } from '@equinor/eds-utils'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 
-type StyledProps = { isDisabled: boolean }
+type StyledProps = { $isDisabled: boolean }
 
 const Input = styled(BaseInput)(
   ({ disabled, theme }) => css`
@@ -37,7 +37,7 @@ const Input = styled(BaseInput)(
 
 const Track = styled.span<StyledProps>(
   ({
-    isDisabled,
+    $isDisabled,
     theme: {
       states,
       entities: { track },
@@ -54,21 +54,21 @@ const Track = styled.span<StyledProps>(
     top: 50%;
     transform: translate(-50%, -50%);
     transition: background 0.36s;
-    ${isDisabled && {
+    ${$isDisabled && {
       backgroundColor: states.disabled.background,
     }}
   `,
 )
 const Handle = styled.span<StyledProps>(
   ({
-    isDisabled,
+    $isDisabled,
     theme: {
       states,
       entities: { handle },
     },
   }) => css`
     background-color: ${handle.background};
-    ${isDisabled && {
+    ${$isDisabled && {
       backgroundColor: states.disabled.background,
     }}
     box-shadow: ${handle.boxShadow};
@@ -94,8 +94,8 @@ export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
       <GridWrapper className={className} style={style}>
         <Input {...rest} ref={ref} disabled={disabled} />
         <BaseInputWrapper>
-          <Track isDisabled={disabled} />
-          <Handle isDisabled={disabled} />
+          <Track $isDisabled={disabled} />
+          <Handle $isDisabled={disabled} />
         </BaseInputWrapper>
       </GridWrapper>
     )

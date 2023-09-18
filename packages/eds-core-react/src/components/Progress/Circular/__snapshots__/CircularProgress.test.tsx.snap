@@ -4,7 +4,6 @@ exports[`CircularProgress Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
   display: inline-block;
-  -webkit-animation: GLFYz 1.4s linear infinite;
   animation: GLFYz 1.4s linear infinite;
 }
 

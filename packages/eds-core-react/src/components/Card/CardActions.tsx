@@ -1,6 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import type { CSSObject } from 'styled-components'
 import { Typography } from '../Typography'
 import { primary as tokens } from './Card.tokens'
 
@@ -13,12 +12,16 @@ export type CardActionsProps = {
   meta?: string
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
+type StyledCardActionsProps = {
+  $justifyContent: string
+}
+
+const StyledCardActions = styled.div<StyledCardActionsProps>`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
   align-items: center;
-  justify-content: ${({ justifyContent }) => justifyContent};
+  justify-content: ${({ $justifyContent }) => $justifyContent};
   padding: 0 ${spacings.right} 0 ${spacings.left};
   margin-top: auto;
   &:first-child {
@@ -34,10 +37,10 @@ export const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
     { children, alignRight = false, meta = '', ...rest },
     ref,
   ) {
-    const justifyContent = alignRight ? 'flex-end' : 'flex-start'
+    const $justifyContent = alignRight ? 'flex-end' : 'flex-start'
     const props = {
       ref,
-      justifyContent,
+      $justifyContent,
       ...rest,
     }
 

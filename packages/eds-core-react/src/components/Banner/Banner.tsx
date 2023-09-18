@@ -17,15 +17,15 @@ import { useEds } from '../EdsProvider'
 type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
 
 type ContentProps = {
-  hasIcon: boolean
+  $hasIcon: boolean
 }
 
-const Content = styled.div<ContentProps>(({ theme, hasIcon }) => {
+const Content = styled.div<ContentProps>(({ theme, $hasIcon }) => {
   return css`
     ${spacingsTemplate(theme.spacings)}
 
     display: grid;
-    grid-template-columns: ${hasIcon ? 'min-content 1fr auto' : '1fr auto'};
+    grid-template-columns: ${$hasIcon ? 'min-content 1fr auto' : '1fr auto'};
     align-items: center;
     background-color: ${theme.background};
   `
@@ -69,7 +69,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
         elevation={elevation}
         role="alert"
       >
-        <Content hasIcon={hasIcon}>{children}</Content>
+        <Content $hasIcon={hasIcon}>{children}</Content>
         <NonMarginDivider color="light" />
       </Paper>
     </ThemeProvider>

@@ -11,12 +11,13 @@ import { Input } from '../Input'
 import { Textarea } from '../Textarea'
 import type { Variants } from '../types'
 
-type FieldProps = SharedTextFieldProps &
-  React.HTMLAttributes<HTMLTextAreaElement | HTMLInputElement>
+type FieldProps = SharedTextFieldProps & {
+  $multiline: boolean
+} & React.HTMLAttributes<HTMLTextAreaElement | HTMLInputElement>
 /** Proxy component for working around typescript and element type switching */
 const Field = forwardRef<HTMLTextAreaElement | HTMLInputElement, FieldProps>(
   function Field(props, ref) {
-    return props.multiline ? (
+    return props.$multiline ? (
       <Textarea ref={ref as ForwardedRef<HTMLTextAreaElement>} {...props} />
     ) : (
       <Input ref={ref as ForwardedRef<HTMLInputElement>} {...props} />
@@ -96,7 +97,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       ),
       rowsMax,
       ref: inputRef || textareaRef,
-      multiline,
+      $multiline: multiline,
       ...other,
     }
 

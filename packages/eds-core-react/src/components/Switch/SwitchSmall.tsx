@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 import { outlineTemplate } from '@equinor/eds-utils'
 
-type StyledProps = { isDisabled: boolean }
+type StyledProps = { $isDisabled: boolean }
 
 const Input = styled(BaseInput)(
   ({
@@ -40,7 +40,7 @@ const Input = styled(BaseInput)(
 
 const Track = styled.span<StyledProps>(
   ({
-    isDisabled,
+    $isDisabled,
     theme: {
       states,
       entities: { track },
@@ -50,7 +50,7 @@ const Track = styled.span<StyledProps>(
     height: ${track.height};
     border-radius: 10px;
     border: none;
-    background-color: ${isDisabled
+    background-color: ${$isDisabled
       ? states.disabled.background
       : track.states.disabled.background};
     position: absolute;
@@ -89,7 +89,7 @@ export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
       <GridWrapper className={className} style={style}>
         <Input {...rest} ref={ref} disabled={disabled} />
         <BaseInputWrapper>
-          <Track isDisabled={disabled} />
+          <Track $isDisabled={disabled} />
           <Handle />
         </BaseInputWrapper>
       </GridWrapper>

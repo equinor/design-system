@@ -2,9 +2,13 @@
 
 exports[`Icon Matches snapshot using data 1`] = `
 <DocumentFragment>
-  <svg
+  .c0 {
+  transform: none;
+}
+
+<svg
     aria-hidden="true"
-    class=""
+    class="c0"
     fill="currentColor"
     height="24px"
     viewBox="0 0 24 24"
@@ -24,9 +28,13 @@ exports[`Icon Matches snapshot using data 1`] = `
 
 exports[`Icon Matches snapshot using name  1`] = `
 <DocumentFragment>
-  <svg
+  .c0 {
+  transform: none;
+}
+
+<svg
     aria-hidden="true"
-    class=""
+    class="c0"
     fill="currentColor"
     height="24px"
     viewBox="0 0 24 24"

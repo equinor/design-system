@@ -10,8 +10,6 @@ import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
-const trim = (x: string): string => x.replace(/ /g, '')
-
 describe('Caption', () => {
   it('Renders a caption with provided text', () => {
     const text = "I'm da caption"
@@ -105,12 +103,10 @@ describe('Table', () => {
     )
     const headElement = screen.getByTestId('head')
     const regularContent = screen.getByText(body)
-    const cellBackground = trim(headerCellToken.background)
+    const cellBackground = headerCellToken.background
     const cellBorderBottom =
       headerCellToken.border.type === 'bordergroup'
-        ? `${headerCellToken.border.bottom.width} ${
-            headerCellToken.border.bottom.style
-          } ${trim(headerCellToken.border.bottom.color)}`
+        ? `${headerCellToken.border.bottom.width} ${headerCellToken.border.bottom.style} ${headerCellToken.border.bottom.color}`
         : ''
 
     expect(headElement).toHaveStyleRule('background', cellBackground)
@@ -166,7 +162,7 @@ describe('Table', () => {
     const row = screen.getByTestId('row')
     expect(row).toHaveStyleRule(
       'background',
-      trim(dataCellToken.states.active.background),
+      dataCellToken.states.active.background,
     )
   })
   it('Has correct color on error cell even when active', () => {
@@ -183,7 +179,7 @@ describe('Table', () => {
     const cell = screen.getByText('error')
     expect(cell).toHaveStyleRule(
       'background',
-      trim(dataCellToken.validation.error.background),
+      dataCellToken.validation.error.background,
     )
   })
   /* TODO: Investigate extra space between variable and fallback value
@@ -271,11 +267,11 @@ describe('Table', () => {
       </Table>,
     )
 
-    const borderBottomColor = trim(
+    const borderBottomColor =
       headerCellToken.states.active.border.type === 'bordergroup'
         ? headerCellToken.states.active.border.bottom.color
-        : '',
-    )
+        : ''
+
     const headerCell1 = screen.getAllByRole('columnheader')[0]
     const headerCell2 = screen.getAllByRole('columnheader')[1]
 
@@ -284,21 +280,21 @@ describe('Table', () => {
 
     expect(headerCell1).toHaveStyleRule(
       'background',
-      trim(headerCellToken.states.active.background),
+      headerCellToken.states.active.background,
     )
     expect(headerCell1).toHaveStyleRule(
       'color',
-      trim(headerCellToken.states.active.typography.color),
+      headerCellToken.states.active.typography.color,
     )
     expect(headerCell1).toHaveStyleRule('border-color', borderBottomColor)
 
     expect(headerCell2).toHaveStyleRule(
       'background',
-      trim(headerCellToken.states.active.background),
+      headerCellToken.states.active.background,
     )
     expect(headerCell2).toHaveStyleRule(
       'color',
-      trim(headerCellToken.states.active.typography.color),
+      headerCellToken.states.active.typography.color,
     )
     expect(headerCell2).toHaveStyleRule('border-color', borderBottomColor)
   })

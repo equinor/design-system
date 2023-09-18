@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import { CSSProperties } from 'react'
+import styled from 'styled-components'
 import { StoryObj, Meta } from '@storybook/react'
 import { Table, TableProps, Typography } from '@equinor/eds-core-react'
 import { data, multilineText, columns } from '../../stories/data'
@@ -25,17 +26,14 @@ export const Default: StoryObj<TableProps> = {
     const CellNoWrap = styled(Table.Cell)`
       white-space: nowrap;
     `
-
-    const vars = css`
-      --eds_table__cell__height: auto;
-      --eds_table__cell__padding_y: 1em;
-      --eds_table__cell__vertical_align: top;
-    `
+    const style = {
+      '--eds_table__cell__height': 'auto',
+      '--eds_table__cell__padding_y': '1em',
+      '--eds_table__cell__vertical_align': 'top',
+    } as CSSProperties
 
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      /* @ts-ignore */
-      <Table {...args} css={vars}>
+      <Table {...args} style={style}>
         <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
         </Table.Caption>

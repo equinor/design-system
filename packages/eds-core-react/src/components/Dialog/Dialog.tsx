@@ -19,9 +19,10 @@ import { Paper } from '../Paper'
 import { dialog as dialogToken } from './Dialog.tokens'
 import { useEds } from '../EdsProvider'
 
-const StyledDialog = styled(Paper).attrs<DialogProps>({
+const StyledDialog = styled(Paper).attrs({
   'aria-labelledby': 'eds-dialog-title',
   'aria-describedby': 'eds-dialog-customcontent',
+  elevation: 'above_scrim',
 })(({ theme }) => {
   return css`
     width: ${theme.width};
@@ -100,7 +101,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
     <ThemeProvider theme={token}>
       <StyledNativeDialog ref={combinedDialogRef} onMouseDown={handleDismiss}>
         {open && (
-          <StyledDialog elevation="above_scrim" {...props} ref={ref}>
+          <StyledDialog {...props} ref={ref}>
             {children}
           </StyledDialog>
         )}

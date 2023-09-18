@@ -6,7 +6,6 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import * as tokens from './Divider.tokens'
 import { Divider } from '.'
-import { trimSpaces } from '@equinor/eds-utils'
 
 const StyledDivider = styled(Divider)`
   position: relative;
@@ -43,20 +42,20 @@ describe('Divider', () => {
   it('Has medium colour and medium spacing as default', () => {
     render(<Divider />)
     const divider = screen.getByRole('separator')
-    expect(divider).toHaveStyleRule('background-color', trimSpaces(mediumColor))
+    expect(divider).toHaveStyleRule('background-color', mediumColor)
     expect(divider).toHaveStyleRule('margin-top', spacingMedium)
   })
   it('Sets backgroundColor to light according to color prop', () => {
     render(<Divider color="light" />)
     const divider = screen.getByRole('separator')
 
-    expect(divider).toHaveStyleRule('background-color', trimSpaces(light))
+    expect(divider).toHaveStyleRule('background-color', light)
   })
   it('Sets backgroundColor to lighter according to color prop', () => {
     render(<Divider color="lighter" />)
     const divider = screen.getByRole('separator')
 
-    expect(divider).toHaveStyleRule('background-color', trimSpaces(lighter))
+    expect(divider).toHaveStyleRule('background-color', lighter)
   })
   it('Sets topMargin to small according to variant prop', () => {
     render(<Divider variant="small" />)

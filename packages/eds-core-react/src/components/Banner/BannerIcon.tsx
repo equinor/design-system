@@ -15,20 +15,20 @@ import { bordersTemplate } from '@equinor/eds-utils'
 type BannerIconVariant = 'info' | 'warning'
 
 type StyledBannerIconProps = {
-  variant: BannerIconVariant
+  $variant: BannerIconVariant
 }
 
 const { info, warning } = tokens
 
 const StyledBannerIcon = styled.span<StyledBannerIconProps>(
-  ({ theme, variant }) => {
+  ({ theme, $variant }) => {
     return css`
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       ${bordersTemplate(theme.entities.icon.border)};
-      background-color: ${variant === 'warning'
+      background-color: ${$variant === 'warning'
         ? warning.entities.icon.background
         : info.entities.icon.background};
       width: ${theme.entities.icon.width};
@@ -68,7 +68,7 @@ export const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
     }
 
     return (
-      <StyledBannerIcon variant={variant} {...props}>
+      <StyledBannerIcon $variant={variant} {...props}>
         {childrenWithColor}
       </StyledBannerIcon>
     )

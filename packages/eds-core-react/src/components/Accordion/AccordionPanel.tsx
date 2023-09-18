@@ -15,12 +15,12 @@ export type AccordionPanelProps = {
   hidden?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-type StyledAccordionPanelProps = Pick<AccordionPanelProps, 'headerId'>
+type StyledAccordionPanelProps = { $headerId: string }
 
-const StyledAccordionPanel = styled.div.attrs(
-  ({ headerId }: StyledAccordionPanelProps): JSX.IntrinsicElements['div'] => ({
+const StyledAccordionPanel = styled.div.attrs<StyledAccordionPanelProps>(
+  ({ $headerId }) => ({
     role: 'region',
-    'aria-labelledby': headerId,
+    'aria-labelledby': $headerId,
   }),
 )<StyledAccordionPanelProps>(({ theme }) => {
   const {
@@ -42,7 +42,7 @@ const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
   function AccordionPanel({ id, headerId, hidden, children, ...props }, ref) {
     return (
       <StyledAccordionPanel
-        headerId={headerId}
+        $headerId={headerId}
         id={id}
         hidden={hidden}
         {...props}

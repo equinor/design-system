@@ -9,9 +9,11 @@ export type ButtonGroupProps = {
   vertical?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
+type StyledButtonGroupProps = { $vertical?: boolean }
+
 const radius = border.type === 'border' && border.radius
 
-const ButtonGroupBase = styled.div<ButtonGroupProps>`
+const ButtonGroupBase = styled.div<StyledButtonGroupProps>`
   display: inline-flex;
   > * {
     border-radius: 0;
@@ -21,8 +23,8 @@ const ButtonGroupBase = styled.div<ButtonGroupProps>`
       }
     }
   }
-  ${({ vertical }) =>
-    vertical
+  ${({ $vertical }) =>
+    $vertical
       ? css`
           flex-direction: column;
           > :first-child {
@@ -56,7 +58,7 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
   function ButtonGroup({ children, vertical, ...rest }, ref) {
     const props = {
       ref,
-      vertical,
+      $vertical: vertical,
       ...rest,
     }
     return (

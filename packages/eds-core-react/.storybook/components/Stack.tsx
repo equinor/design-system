@@ -1,18 +1,32 @@
-import styled, { CSSProperties } from 'styled-components'
+import styled, { CSSObject } from 'styled-components'
 
 type StackProps = {
-  direction?: CSSProperties['flexDirection']
-  align?: CSSProperties['alignItems']
+  direction?: CSSObject['flexDirection']
+  align?: CSSObject['alignItems']
+  children: React.ReactNode
+} & React.HTMLAttributes<HTMLDivElement>
+
+type StyledStackProps = {
+  $direction?: CSSObject['flexDirection']
+  $align?: CSSObject['alignItems']
 }
 
-export const Stack = styled.div<StackProps>`
+const StyledStack = styled.div<StyledStackProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: ${({ align }) => align || 'center'};
+  align-items: ${({ $align }) => $align || 'center'};
   gap: 1rem;
   flex-wrap: wrap;
   @media screen and (min-width: 600px) {
-    flex-direction: ${({ direction }) => direction || 'row'};
+    flex-direction: ${({ $direction }) => $direction || 'row'};
   }
 `
+
+export const Stack = ({ children, direction, align, ...rest }: StackProps) => {
+  return (
+    <StyledStack $direction={direction} $align={align} {...rest}>
+      {children}
+    </StyledStack>
+  )
+}

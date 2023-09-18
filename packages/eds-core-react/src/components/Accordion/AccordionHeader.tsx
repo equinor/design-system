@@ -27,7 +27,7 @@ const {
 } = tokens
 
 const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
-  ({ theme, disabled, parentIndex }) => {
+  ({ theme, disabled, $parentIndex }) => {
     const {
       entities: { header },
       border,
@@ -42,42 +42,42 @@ const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
       justify-content: space-between;
       background-color: ${header.background};
       ${bordersTemplate(border)}
-      border-top: ${parentIndex === 0 ? null : 'none'};
+      border-top: ${$parentIndex === 0 ? null : 'none'};
       ${disabled
-        ? css({
-            color: header.states.disabled.typography.color,
-            cursor: 'not-allowed',
-          })
-        : css({
-            color: header.typography.color,
-            cursor: 'pointer',
-            '@media (hover: hover) and (pointer: fine)': {
-              ':hover': {
-                background: header.states.hover.background,
-              },
-            },
-          })}
+        ? css`
+            color: ${header.states.disabled.typography.color};
+            cursor: not-allowed;
+          `
+        : css`
+            color: ${header.typography.color};
+            cursor: pointer;
+            @media (hover: hover) and (pointer: fine) {
+              &:hover {
+                background: ${header.states.hover.background};
+              }
+            }
+          `}
     `
   },
 )
 
 type StyledAccordionHeaderButtonProps = {
   /** The ID of the panel */
-  panelId?: string
+  $panelId?: string
   /**  Is AccordionItem expanded */
-  isExpanded?: boolean
+  $isExpanded?: boolean
   /** Accordion item is disabled */
   disabled?: boolean
   /**  The ID of the parent */
-  parentIndex?: number
+  $parentIndex?: number
 }
 
 const StyledAccordionHeaderButton =
   styled.button.attrs<StyledAccordionHeaderButtonProps>(
-    ({ panelId, isExpanded, disabled }) => ({
-      'aria-expanded': isExpanded,
-      'aria-controls': panelId,
-      'aria-disabled': isExpanded && disabled,
+    ({ $panelId, $isExpanded, disabled }) => ({
+      'aria-expanded': $isExpanded,
+      'aria-controls': $panelId,
+      'aria-disabled': $isExpanded && disabled,
       tabIndex: disabled ? -1 : 0,
       disabled,
     }),
@@ -115,12 +115,12 @@ const StyledAccordionHeaderButton =
     `
   })
 
-type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
-
-const StyledIcon = styled(Icon)(({ chevronPosition }: StyledIconProps) => {
+const StyledIcon = styled(Icon)<{ $chevronPosition: 'left' | 'right' }>(({
+  $chevronPosition,
+}) => {
   return css`
     flex-shrink: 0;
-    ${chevronPosition === 'left'
+    ${$chevronPosition === 'left'
       ? css({ marginRight: '32px' })
       : css({ marginLeft: '16px' })}
   `
@@ -193,7 +193,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         key={`${id}-icon`}
         data={isExpanded ? chevron_up : chevron_down}
         size={24}
-        chevronPosition={chevronPosition}
+        $chevronPosition={chevronPosition}
         color={
           disabled
             ? chevronToken.states.disabled.background
@@ -245,15 +245,15 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     return (
       <StyledAccordionHeader
         disabled={disabled}
-        parentIndex={parentIndex}
+        $parentIndex={parentIndex}
         as={headerLevel}
         className={className}
         style={style}
       >
         <StyledAccordionHeaderButton
-          isExpanded={isExpanded}
+          $isExpanded={isExpanded}
           disabled={disabled}
-          panelId={panelId}
+          $panelId={panelId}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           ref={ref}

@@ -2,17 +2,18 @@
 
 exports[`Accordion Matches snapshot 1`] = `
 <DocumentFragment>
-  .c3 {
+  .c2 {
+  transform: none;
+}
+
+.c4 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
   flex-grow: 1;
   overflow: hidden;
   text-align: left;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
 }
 
 .c0 {
@@ -20,26 +21,18 @@ exports[`Accordion Matches snapshot 1`] = `
   padding: 0;
   height: 48px;
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
-  border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
-  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
+  background-color: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+  border: 1px solid var(--eds_ui_background__medium, rgba(220, 220, 220, 1));
+  color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   cursor: pointer;
 }
 
 .c1 {
   margin: 0;
-  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
+  color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
@@ -50,69 +43,55 @@ exports[`Accordion Matches snapshot 1`] = `
   border: 0;
   background-color: transparent;
   margin: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
   flex-grow: 1;
-  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
+  color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   cursor: pointer;
 }
 
 .c1[data-focus-visible-added]:focus {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 2px;
 }
 
 .c1:focus-visible {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 2px;
 }
 
-.c1 > svg {
-  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+.c1 >svg {
+  color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
 }
 
-.c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
+.c3 {
   flex-shrink: 0;
   margin-right: 32px;
 }
 
-.c4 {
-  border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+.c5 {
+  border: 1px solid var(--eds_ui_background__medium, rgba(220, 220, 220, 1));
   border-top: 0;
   padding-left: 16px;
   padding-top: 16px;
   padding-right: 16px;
   padding-bottom: 16px;
   margin: 0;
-  color: var(--eds_input__text_color,rgba(0,0,0,1));
+  color: var(--eds_input__text_color, rgba(0, 0, 0, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.500em;
-  -webkit-letter-spacing: 0.025em;
-  -moz-letter-spacing: 0.025em;
-  -ms-letter-spacing: 0.025em;
   letter-spacing: 0.025em;
   text-align: left;
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   min-height: 96px;
   box-sizing: border-box;
 }
 
 @media (hover:hover) and (pointer:fine) {
   .c0:hover {
-    background: var(--eds_ui_background__light,rgba(247,247,247,1));
+    background: var(--eds_ui_background__light, rgba(247, 247, 247, 1));
   }
 }
 
@@ -131,7 +110,7 @@ exports[`Accordion Matches snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="c2"
+            class="c2 c3"
             fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
             height="24px"
             viewBox="0 0 24 24"
@@ -147,7 +126,7 @@ exports[`Accordion Matches snapshot 1`] = `
             />
           </svg>
           <span
-            class="c3"
+            class="c4"
           >
             Summary 1
           </span>
@@ -155,7 +134,7 @@ exports[`Accordion Matches snapshot 1`] = `
       </h2>
       <div
         aria-labelledby="eds-accordion-12345-header-1"
-        class="c4"
+        class="c5"
         id="eds-accordion-12345-panel-1"
         role="region"
       >

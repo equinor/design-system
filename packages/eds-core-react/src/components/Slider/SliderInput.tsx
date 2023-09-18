@@ -45,11 +45,7 @@ const thumbDisabled = css`
   border-color: ${_disabled.border.type === 'border' && _disabled.border.color};
 `
 
-type SliderInput = {
-  type: string
-}
-
-const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
+const StyledSliderInput = styled.input.attrs(() => ({
   type: 'range',
 }))`
   &::-webkit-slider-runnable-track,

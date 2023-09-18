@@ -95,7 +95,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
               role="button"
               variant="body_short"
               onClick={handleExpandClick}
-              onKeyPress={handleExpandClick}
+              onKeyDown={handleExpandClick}
               tabIndex={0}
             >
               …

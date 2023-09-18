@@ -47,20 +47,21 @@ const wrapperGrid = css`
   position: relative;
 `
 type RangeWrapperProps = {
-  valA: number
-  valB: number
+  $valA: number
+  $valB: number
   $min: number
   $max: number
-} & Pick<SliderProps, 'disabled'>
+  $disabled: boolean
+}
 
 const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
-  ({ $min, $max, valA, valB, disabled, style }) => ({
+  ({ $min, $max, $valA, $valB, $disabled, style }) => ({
     style: {
-      '--a': valA,
-      '--b': valB,
+      '--a': $valA,
+      '--b': $valB,
       '--min': $min,
       '--max': $max,
-      '--background': disabled
+      '--background': $disabled
         ? track.entities.indicator.states.disabled.background
         : track.entities.indicator.background,
       ...style,
@@ -371,11 +372,11 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           ref={ref}
           role="group"
           aria-labelledby={getAriaLabelledby()}
-          valA={sliderValue[0]}
-          valB={sliderValue[1]}
+          $valA={sliderValue[0]}
+          $valB={sliderValue[1]}
           $max={max}
           $min={min}
-          disabled={disabled}
+          $disabled={disabled}
           onMouseMove={findClosestRange}
           onMouseDown={handleDragging}
           onMouseUp={handleDragging}

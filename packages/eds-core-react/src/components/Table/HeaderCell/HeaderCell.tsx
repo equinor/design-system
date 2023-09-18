@@ -11,11 +11,11 @@ import { useEds } from '../../EdsProvider'
 
 type BaseProps = {
   theme: TableHeadToken
-  sticky?: boolean
+  $sticky: boolean
 } & Pick<React.AriaAttributes, 'aria-sort'>
 
 const StyledTableCell = styled.th((props: BaseProps) => {
-  const { theme, sticky } = props
+  const { theme, $sticky } = props
   const { background, height, typography, spacings } = theme
   const activeToken = theme.states.active
   const ariaSort = props['aria-sort']
@@ -56,7 +56,7 @@ const StyledTableCell = styled.th((props: BaseProps) => {
   ${sortStylingHover}
   ${sortStylingActive}
 
-  ${sticky
+  ${$sticky
       ? css`
           position: sticky;
           top: 0;
@@ -77,13 +77,18 @@ type CellProps = {
 } & ThHTMLAttributes<HTMLTableCellElement>
 
 export const TableHeaderCell = forwardRef<HTMLTableCellElement, CellProps>(
-  function TableHeaderCell({ children, sort, ...rest }, ref) {
+  function TableHeaderCell({ children, sort, sticky, ...rest }, ref) {
     const { density } = useEds()
     const token = useToken({ density }, tablehead)
+    const props = {
+      ref,
+      $sticky: sticky,
+      ...rest,
+    }
 
     return (
       <ThemeProvider theme={token}>
-        <StyledTableCell aria-sort={sort} {...rest} ref={ref}>
+        <StyledTableCell aria-sort={sort} {...props}>
           <CellInner>{children}</CellInner>
         </StyledTableCell>
       </ThemeProvider>

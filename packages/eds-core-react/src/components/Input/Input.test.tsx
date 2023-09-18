@@ -6,7 +6,6 @@ import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
-import { trimSpaces } from '@equinor/eds-utils'
 
 describe('Input', () => {
   it('Matches snapshot', () => {
@@ -48,9 +47,7 @@ describe('Input', () => {
 
     expect(inputWrapper).toHaveStyleRule(
       'outline',
-      `${tokens.input.outline.width} solid ${trimSpaces(
-        tokens.success.outline.color,
-      )}`,
+      `${tokens.input.outline.width} solid ${tokens.success.outline.color}`,
     )
   })
 
@@ -67,9 +64,7 @@ describe('Input', () => {
 
     expect(inputWrapper).toHaveStyleRule(
       'outline',
-      `${tokens.input.outline.width} solid ${trimSpaces(
-        tokens.warning.outline.color,
-      )}`,
+      `${tokens.input.outline.width} solid ${tokens.warning.outline.color}`,
     )
   })
 
@@ -86,9 +81,7 @@ describe('Input', () => {
 
     expect(inputWrapper).toHaveStyleRule(
       'outline',
-      `${tokens.input.outline.width} solid ${trimSpaces(
-        tokens.error.outline.color,
-      )}`,
+      `${tokens.input.outline.width} solid ${tokens.error.outline.color}`,
     )
   })
 

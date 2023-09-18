@@ -3,36 +3,30 @@
 exports[`StarProgress Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
-  fill: var(--eds_logo__fill_positive,rgba(235,0,55,1));
+  fill: var(--eds_logo__fill_positive, rgba(235, 0, 55, 1));
 }
 
 .c0 path:nth-child(1) {
-  -webkit-animation: cSKOGU 1.3s linear infinite;
   animation: cSKOGU 1.3s linear infinite;
 }
 
 .c0 path:nth-child(2) {
-  -webkit-animation: cSKOGU 1.3s linear 0.3s infinite;
   animation: cSKOGU 1.3s linear 0.3s infinite;
 }
 
 .c0 path:nth-child(3) {
-  -webkit-animation: cSKOGU 1.3s linear 0.4s infinite;
   animation: cSKOGU 1.3s linear 0.4s infinite;
 }
 
 .c0 path:nth-child(4) {
-  -webkit-animation: cSKOGU 1.3s linear 0.6s infinite;
   animation: cSKOGU 1.3s linear 0.6s infinite;
 }
 
 .c0 path:nth-child(5) {
-  -webkit-animation: cSKOGU 1.3s linear 0.8s infinite;
   animation: cSKOGU 1.3s linear 0.8s infinite;
 }
 
 .c0 path:nth-child(6) {
-  -webkit-animation: cSKOGU 1.3s linear 1s infinite;
   animation: cSKOGU 1.3s linear 1s infinite;
 }
 

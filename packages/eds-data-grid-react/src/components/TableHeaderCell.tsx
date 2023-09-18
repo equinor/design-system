@@ -31,14 +31,14 @@ const getSortLabel = (
 }
 
 type ResizeProps = {
-  columnResizeMode: ColumnResizeMode | null | undefined
-  isResizing: boolean
+  $columnResizeMode: ColumnResizeMode | null | undefined
+  $isResizing: boolean
 }
 
 const Resizer = styled.div<ResizeProps>`
   transform: ${(props) =>
-    props.columnResizeMode === 'onEnd' ? 'translateX(0px)' : 'none'};
-  opacity: ${(props) => (props.isResizing ? 1 : 0)};
+    props.$columnResizeMode === 'onEnd' ? 'translateX(0px)' : 'none'};
+  opacity: ${(props) => (props.$isResizing ? 1 : 0)};
 
   position: absolute;
   right: 0;
@@ -109,8 +109,8 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           onClick={(e) => e.stopPropagation()}
           onMouseDown={header.getResizeHandler()}
           onTouchStart={header.getResizeHandler()}
-          isResizing={header.column.getIsResizing()}
-          columnResizeMode={columnResizeMode}
+          $isResizing={header.column.getIsResizing()}
+          $columnResizeMode={columnResizeMode}
           className={'resize-handle'}
           data-testid={'resize-handle'}
         />

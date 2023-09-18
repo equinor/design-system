@@ -5,6 +5,7 @@ import {
   forwardRef,
   useMemo,
   ChangeEvent,
+  MouseEvent,
   useEffect,
 } from 'react'
 import styled from 'styled-components'
@@ -81,7 +82,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
                 aria-label={'clear search'}
                 title="clear"
                 variant="ghost_icon"
-                onClick={(e: ChangeEvent<HTMLButtonElement>) => {
+                onClick={(e: MouseEvent<HTMLButtonElement>) => {
                   e.stopPropagation()
                   clearInputValue()
                 }}

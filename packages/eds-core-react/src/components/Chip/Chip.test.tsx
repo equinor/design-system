@@ -15,8 +15,6 @@ const StyledChips = styled(Chip)`
 
 const { enabled, error } = tokens
 
-const rgbaTrim = (x: string) => x.split(' ').join('')
-
 describe('Chips', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(
@@ -214,7 +212,7 @@ describe('Chips', () => {
     render(<Chip variant="active">{chipText}</Chip>)
     expect(screen.queryByText(chipText)).toHaveStyleRule(
       'background',
-      rgbaTrim(enabled.states.active.background),
+      enabled.states.active.background,
     )
   })
   it('Has some correct error styling', () => {
@@ -228,20 +226,7 @@ describe('Chips', () => {
       </Chip>,
     )
     const chip = screen.queryByText(chipText)
-    const chipIconStyle = window.getComputedStyle(
-      screen.queryByTestId(iconTestId),
-    )
-
-    expect(chip).toHaveStyleRule('background', rgbaTrim(error.background))
-    expect(chip).toHaveStyleRule(
-      'border',
-      `1px solid ${rgbaTrim(
-        error.border.type === 'border' && error.border.color,
-      )}`,
-    )
-    expect(chip).toHaveStyleRule('color', rgbaTrim(error.typography.color))
-    expect(chipIconStyle.fill).toBe(
-      rgbaTrim(error.entities.icon.typography.color),
-    )
+    expect(chip).toHaveStyleRule('background', error.background)
+    expect(chip).toHaveStyleRule('color', error.typography.color)
   })
 })

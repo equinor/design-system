@@ -3,21 +3,18 @@
 exports[`DotProgress Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
-  fill: var(--eds_interactive__icon_on_interactive_colors,rgba(255,255,255,1));
+  fill: var(--eds_interactive__icon_on_interactive_colors, rgba(255, 255, 255, 1));
 }
 
 .c0 circle:nth-child(1) {
-  -webkit-animation: jkwjQg 1s ease infinite;
   animation: jkwjQg 1s ease infinite;
 }
 
 .c0 circle:nth-child(2) {
-  -webkit-animation: jkwjQg 1s ease 0.2s infinite;
   animation: jkwjQg 1s ease 0.2s infinite;
 }
 
 .c0 circle:nth-child(3) {
-  -webkit-animation: jkwjQg 1s ease 0.4s infinite;
   animation: jkwjQg 1s ease 0.4s infinite;
 }
 

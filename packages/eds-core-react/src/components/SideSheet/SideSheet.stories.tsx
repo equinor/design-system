@@ -294,7 +294,7 @@ export const Scrollable: StoryFn<SideSheetProps> = () => {
 export const Draggable: StoryFn<SideSheetProps> = () => {
   const [toggle, setToggle] = useState(true)
 
-  const DragTarget = styled.div<{ dragging: boolean }>(({ dragging }) => {
+  const DragTarget = styled.div<{ $dragging: boolean }>(({ $dragging }) => {
     return css`
       --primary: ${primaryColor};
       position: absolute;
@@ -302,7 +302,7 @@ export const Draggable: StoryFn<SideSheetProps> = () => {
       width: 12px;
       left: -6px;
       top: 0;
-      cursor: ${dragging ? 'col-resize' : 'default'};
+      cursor: ${$dragging ? 'col-resize' : 'default'};
       &::after {
         transition: background-color 150ms ease;
         transition-delay: 150ms;
@@ -313,7 +313,7 @@ export const Draggable: StoryFn<SideSheetProps> = () => {
         width: 4px;
         transform: translateX(-50%);
         height: 100%;
-        background-color: ${dragging ? 'var(--primary)' : 'transparent'};
+        background-color: ${$dragging ? 'var(--primary)' : 'transparent'};
       }
       &:hover {
         cursor: col-resize;
@@ -387,7 +387,7 @@ export const Draggable: StoryFn<SideSheetProps> = () => {
         onClose={() => setToggle(!toggle)}
         width={`${width}px`}
       >
-        <DragTarget onMouseDown={startDrag} dragging={isDragging} />
+        <DragTarget onMouseDown={startDrag} $dragging={isDragging} />
         <div style={{ padding: '0 8px' }}>
           <Typography variant="h4">Filters</Typography>
           <br />

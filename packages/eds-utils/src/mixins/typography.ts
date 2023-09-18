@@ -1,4 +1,4 @@
-import { CSSObject } from 'styled-components'
+import type { CSSObject } from 'styled-components'
 import type { Typography } from '@equinor/eds-tokens'
 
 /** Simpler version `typographyTemplate` that does not set `color` and `margin` */

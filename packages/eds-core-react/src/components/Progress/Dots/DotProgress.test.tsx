@@ -6,7 +6,6 @@ import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import * as tokens from './DotProgress.tokens'
 import { DotProgress } from './DotProgress'
-import { trimSpaces } from '@equinor/eds-utils'
 
 const StyledProgress = styled(DotProgress)`
   position: absolute;
@@ -24,18 +23,12 @@ describe('DotProgress', () => {
   it('should render neutral as default', () => {
     render(<DotProgress />)
     const progressbar = screen.getByRole('progressbar')
-    expect(progressbar).toHaveStyleRule(
-      'fill',
-      trimSpaces(tokens.neutral.background),
-    )
+    expect(progressbar).toHaveStyleRule('fill', tokens.neutral.background)
   })
   it('should render primary color if stated in props', () => {
     render(<DotProgress color="primary" />)
     const progressbar = screen.getByRole('progressbar')
-    expect(progressbar).toHaveStyleRule(
-      'fill',
-      trimSpaces(tokens.primary.background),
-    )
+    expect(progressbar).toHaveStyleRule('fill', tokens.primary.background)
   })
   it('can extend the css for the component', () => {
     render(<StyledProgress />)

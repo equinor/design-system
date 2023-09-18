@@ -10,11 +10,13 @@ export type CardMediaProps = {
   fullWidth?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledCardMedia = styled.div<CardMediaProps>`
+type StyledCardMediaProps = { $fullWidth?: boolean }
+
+const StyledCardMedia = styled.div<StyledCardMediaProps>`
   display: flex;
   width: auto;
-  ${({ fullWidth }) =>
-    fullWidth
+  ${({ $fullWidth }) =>
+    $fullWidth
       ? css`
           > * {
             width: 100%;
@@ -55,7 +57,7 @@ export const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>(
     const props = {
       ...rest,
       ref,
-      fullWidth,
+      $fullWidth: fullWidth,
     }
 
     return <StyledCardMedia {...props}>{children}</StyledCardMedia>

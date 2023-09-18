@@ -9,8 +9,8 @@ Icon_.add({ close })
 const { enabled, error } = tokens
 
 type IconProps = {
-  variant: 'active' | 'error' | 'default'
-  disabled: boolean
+  $variant: 'active' | 'error' | 'default'
+  $disabled: boolean
 }
 
 export const Icon = styled(Icon_)<IconProps>`
@@ -18,8 +18,8 @@ export const Icon = styled(Icon_)<IconProps>`
   padding: 1px;
   ${bordersTemplate(enabled.entities.icon.border)}
   &:hover {
-    ${({ variant }) => {
-      switch (variant) {
+    ${({ $variant }) => {
+      switch ($variant) {
         case 'error':
           return css`
             background: ${error.entities.icon.background};
@@ -38,8 +38,8 @@ export const Icon = styled(Icon_)<IconProps>`
     }};
   }
 
-  ${({ disabled }) =>
-    disabled &&
+  ${({ $disabled }) =>
+    $disabled &&
     css`
       cursor: not-allowed;
       &:hover {

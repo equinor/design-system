@@ -3,7 +3,7 @@
 exports[`Tooltip Matches snapshot 1`] = `
 .c0 {
   margin: 0;
-  color: var(--eds_text__static_icons__primary_white,rgba(255,255,255,1));
+  color: var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1));
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 500;
@@ -14,14 +14,13 @@ exports[`Tooltip Matches snapshot 1`] = `
   padding-right: 8px;
   padding-bottom: 8px;
   border-radius: 4px;
-  background: var(--eds_ui_background__overlay,rgba(0,0,0,0.8));
+  background: var(--eds_ui_background__overlay, rgba(0, 0, 0, 0.8));
   z-index: 1500;
   white-space: nowrap;
 }
 
 .c0::before {
   content: '; Has tooltip: ';
-  -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   height: 1px;
   width: 1px;
@@ -42,7 +41,7 @@ exports[`Tooltip Matches snapshot 1`] = `
   width: 6px;
   height: 8px;
   position: absolute;
-  fill: var(--eds_ui_background__overlay,rgba(0,0,0,0.8));
+  fill: var(--eds_ui_background__overlay, rgba(0, 0, 0, 0.8));
 }
 
 <div

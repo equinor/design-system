@@ -3,17 +3,11 @@
 exports[`Label Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
   margin: 0;
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 500;
@@ -21,7 +15,7 @@ exports[`Label Matches snapshot 1`] = `
   text-align: left;
   margin-left: 8px;
   margin-right: 8px;
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
 }
 
 .c1 {

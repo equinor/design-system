@@ -5,17 +5,17 @@ type BannerActionsPlacement = 'bottom' | 'left'
 
 type StyledBannerActionsProps = {
   /** Where to place the actions */
-  placement: BannerActionsPlacement
+  $placement: BannerActionsPlacement
 }
 
 const StyledBannerActions = styled.div<StyledBannerActionsProps>(
-  ({ theme, placement }) => {
+  ({ theme, $placement }) => {
     return css`
       display: flex;
       margin-left: ${theme.spacings.left};
       grid-gap: 8px;
-      grid-column: ${placement === 'bottom' ? '1/-1' : 'auto'};
-      ${placement === 'bottom' && {
+      grid-column: ${$placement === 'bottom' ? '1/-1' : 'auto'};
+      ${$placement === 'bottom' && {
         marginTop: theme.spacings.top,
         marginLeft: '0',
       }}
@@ -35,7 +35,7 @@ export const BannerActions = forwardRef<HTMLDivElement, BannerActionsProps>(
       ...rest,
     }
     return (
-      <StyledBannerActions placement={placement} {...props}>
+      <StyledBannerActions $placement={placement} {...props}>
         {children}
       </StyledBannerActions>
     )

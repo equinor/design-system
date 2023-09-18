@@ -2,25 +2,25 @@
 
 exports[`Popover Matches snapshot 1`] = `
 .c0 {
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
-  box-shadow: 0 1px 10px rgba(0,0,0,0.2),0 4px 5px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.14);
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2),0 4px 5px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14);
 }
 
 .c1 {
   margin: 0;
-  color: var(--eds_ui__accordion_header_color,rgba(61,61,61,1));
+  color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
   line-height: 1.500em;
   text-align: left;
-  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   border-radius: 4px;
   z-index: 1400;
 }
 
 .c1:focus-visible {
-  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
   outline-offset: 0px;
 }
 
@@ -35,8 +35,6 @@ exports[`Popover Matches snapshot 1`] = `
   display: grid;
   grid-gap: 16px;
   max-height: 80vh;
-  width: -webkit-max-content;
-  width: -moz-max-content;
   width: max-content;
   max-width: 560px;
   overflow: auto;
@@ -46,8 +44,7 @@ exports[`Popover Matches snapshot 1`] = `
   width: 6px;
   height: 8px;
   position: absolute;
-  fill: var(--eds_ui_background__default,rgba(255,255,255,1));
-  -webkit-filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
+  fill: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
 }
 
