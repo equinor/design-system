@@ -1,19 +1,22 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import type { StyledObject } from 'styled-components'
 
-const StyledCaption = styled.caption<CaptionProps>(
-  ({ captionSide = 'top' }) => ({
-    captionSide,
-  }),
-)
+type StyledCaptionProps = {
+  $captionSide: string
+}
+const StyledCaption = styled.caption<StyledCaptionProps>(({ $captionSide }) => {
+  return css`
+    caption-side: ${$captionSide};
+  `
+})
 /* @Todo styled use CSSObject later */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CaptionProps = Pick<StyledObject<any>, 'captionSide'> &
   HTMLAttributes<HTMLTableCaptionElement>
 
 export const Caption = forwardRef<HTMLTableCaptionElement, CaptionProps>(
-  function Caption(props, ref) {
-    return <StyledCaption {...props} ref={ref} />
+  function Caption({ captionSide = 'top', ...props }, ref) {
+    return <StyledCaption $captionSide={captionSide} {...props} ref={ref} />
   },
 )
