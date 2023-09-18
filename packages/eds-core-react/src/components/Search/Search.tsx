@@ -44,7 +44,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     if (rest.value && !rest.disabled) {
       setShowClear(Boolean(rest.value))
     }
-  }, [rest.value])
+  }, [rest.value, rest.disabled])
 
   const clearInputValue = () => {
     const input = inputRef.current
