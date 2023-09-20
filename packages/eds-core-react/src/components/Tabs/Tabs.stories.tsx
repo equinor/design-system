@@ -32,6 +32,14 @@ const meta: Meta<typeof Tabs> = {
     Panels: Tabs.Panels,
     Panel: Tabs.Panel,
   },
+  argTypes: {
+    activeTab: {
+      options: [0, 1],
+      control: {
+        type: 'select',
+      },
+    },
+  },
   parameters: {
     docs: {
       page,
@@ -175,7 +183,7 @@ export const WithPanels: StoryFn<TabsProps> = () => {
         <Tabs.Tab disabled>Tab three</Tabs.Tab>
         <Tabs.Tab>Tab four</Tabs.Tab>
       </Tabs.List>
-      <Tabs.Panels>
+      <Tabs.Panels conditionalRender>
         <Tabs.Panel>Panel one</Tabs.Panel>
         <Tabs.Panel>Panel two</Tabs.Panel>
         <Tabs.Panel>Panel three</Tabs.Panel>
