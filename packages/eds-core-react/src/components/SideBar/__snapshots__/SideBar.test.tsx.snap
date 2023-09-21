@@ -438,6 +438,7 @@ exports[`Sidebar Matches snapshot 1`] = `
         open=""
       >
         <button
+          aria-label="Collapse"
           class="c3"
           tabindex="0"
           type="button"
