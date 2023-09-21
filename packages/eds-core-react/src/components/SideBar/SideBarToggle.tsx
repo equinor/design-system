@@ -49,7 +49,11 @@ export const SideBarToggle = forwardRef<HTMLDivElement, SideBarToggleProps>(
     return (
       <ToggleContainer open={isOpen} {...props}>
         <Tooltip title={isOpen ? 'Collapse' : 'Expand'} placement="right">
-          <Button variant="ghost_icon" onClick={() => setIsOpen(!isOpen)}>
+          <Button
+            variant="ghost_icon"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Collapse' : 'Expand'}
+          >
             <Icon
               size={24}
               data={isOpen ? collapse : expand}
