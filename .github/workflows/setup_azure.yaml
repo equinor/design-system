@@ -9,6 +9,8 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: production
     steps:
       - name: Login to azure 🔑
         id: login-to-azure
