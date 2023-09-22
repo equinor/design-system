@@ -1,4 +1,4 @@
-import { Primary, Story, Meta } from '@storybook/blocks'
+import { Story } from '@storybook/blocks'
 import * as ComponentStories from './IconPreview.stories'
 
 # Icons
@@ -6,6 +6,8 @@ import * as ComponentStories from './IconPreview.stories'
 Icons included in the EDS icon library.
 
 Hover over an icon to download as svg or use the name for lookup in the `@equinor/eds-icons` package.
+
+**Note:** in the npm-package, icons ending with _small do not exist individually but are stored within the regular icon under `icon.sizes.small` and used automatically when Icon size is set to 16 or 18.
 
 <Story of={ComponentStories.Preview} />
 
