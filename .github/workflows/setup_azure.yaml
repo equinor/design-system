@@ -12,12 +12,13 @@ jobs:
         id: login-to-azure
         uses: azure/login@v1
         with:
-          # TODO: Start using federated credentials
-          creds: ${{ secrets.AZURE_CREDENTIALS_2022 }}
+          client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
+          tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
+          allow-no-subscriptions: true
       - name: Show Azure account
         run: az account show
       # Checkout internal repository where the bicep files are located
-      - name: Checout internal 🛎️
+      - name: Checkout internal 🛎️
         id: checkout-internal
         uses: actions/checkout@v3
         with:
