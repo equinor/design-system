@@ -97,7 +97,7 @@
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.25.1",
     "@tanstack/react-virtual": "3.0.0-beta.54",
-    "downshift": "^8.2.0"
+    "downshift": "^8.2.1"
   },
   "engines": {
     "pnpm": ">=4",
