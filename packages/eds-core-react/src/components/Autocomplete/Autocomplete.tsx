@@ -703,11 +703,9 @@ function AutocompleteInner<T>(
   )
 
   const inputProps = getInputProps(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     getDropdownProps({
       preventKeyAction: multiple ? isOpen : undefined,
       disabled,
-      ref: refs.setReference,
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setTypedInputValue(e?.currentTarget?.value),
     }),
@@ -724,7 +722,7 @@ function AutocompleteInner<T>(
           disabled={disabled}
         />
 
-        <Container>
+        <Container ref={refs.setReference}>
           <Input
             {...inputProps}
             placeholder={placeholderText}

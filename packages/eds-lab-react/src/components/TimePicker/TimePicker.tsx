@@ -246,7 +246,7 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
                   active={selectedItem === item ? 'true' : 'false'}
                   key={`${item}`}
-                  {...getItemProps({ item, index, disabled: disabled })}
+                  {...getItemProps({ item, index })}
                 >
                   {item}
                 </PaddedStyledListItem>
