@@ -84,10 +84,7 @@ function AutocompleteOptionInner(
       aria-hidden={isDisabled}
       $active={!multiple && isSelected ? 'true' : 'false'}
       onClick={(e) => {
-        //timeout: workaround for "Maximum update depth exceeded" error that happens when touch input
-        setTimeout(() => {
-          !isDisabled && onClick(e)
-        }, 0)
+        !isDisabled && onClick(e)
       }}
       aria-selected={multiple ? isSelected : ariaSelected}
       {...other}
