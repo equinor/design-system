@@ -14,8 +14,7 @@ import DatePicker, {
 } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
-import {
-  styled,
+import styled, {
   css,
   ThemeProvider,
   StyleSheetManager,
