@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.33.0] - 2023-09-26
+
+### Added
+
+- ✨ `Tabs`: controlled mode for use with routers by @oddvernes in https://github.com/equinor/design-system/pull/3036
+- 🚸 `Tabs`: added `conditionalRender` prop for `Tabs.Panels` by @oddvernes in https://github.com/equinor/design-system/pull/3062
+- ⬆️ Support `Styled-components` v6 by @oddvernes in https://github.com/equinor/design-system/pull/3050
+
+### Changed
+
+- ⬆️ Updated `typescript` from 4.9.x to 5.1.x by @oddvernes in https://github.com/equinor/design-system/pull/3020
+- 🚸 `Search`: removed "clear" button when component is disabled by @denektenina in https://github.com/equinor/design-system/pull/3054
+
+### Fixed
+
+- 💄 `Breadcrumbs`: fixed vertical alignment for icons by @oddvernes in https://github.com/equinor/design-system/pull/3023
+- 💄 `Radio`/`Checbox`/`Switch` fixed z-index bug where component could show through overlaying content by @oddvernes in https://github.com/equinor/design-system/pull/3032
+- 🔒️ Utils: Moved `babel-jest` to dev-dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3055
+- 🚸 `SideBar`: add `aria-label` to toggle button by @ingeridhellen in https://github.com/equinor/design-system/pull/3066
+- 🐛 `Autocomplete` improved fix for "Maximum update depth exceeded" crash caused by merging refs by @oddvernes in https://github.com/equinor/design-system/pull/3069
+
 ## [0.32.4] - 2023-08-15
 
 ### Fixed
