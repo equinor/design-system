@@ -96,7 +96,7 @@ jobs:
         id: publish-to-npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
-          node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+          node_modules/.bin/pnpm --filter ./packages/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
