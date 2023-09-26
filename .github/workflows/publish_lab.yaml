@@ -35,14 +35,14 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-      #      - name: Use "dist" cache
-      #        id: dist-cache
-      #        uses: actions/cache@v3
-      #        with:
-      #          path: |
-      #            ./*
-      #            ~/.pnpm-store
-      #          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+      - name: Use "dist" cache
+        id: dist-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
       - name: Build packages
         id: build-packages
         run: node_modules/.bin/pnpm run build
