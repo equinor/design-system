@@ -286,7 +286,18 @@ WithTooltip.storyName = 'Disabled buttons and tooltip'
 
 export const FullWidth: StoryFn<ButtonProps> = () => (
   <>
-    <Button fullWidth>Primary</Button>
+    <Button fullWidth>
+      <Icon data={refresh} size={16}></Icon>
+      Fullwidth
+    </Button>
+    <Button fullWidth>
+      Fullwidth
+      <Icon data={refresh} size={16}></Icon>
+    </Button>
+    <Button>
+      <Icon data={refresh} size={16}></Icon>
+      not Fullwidth
+    </Button>
   </>
 )
 FullWidth.storyName = 'Full width'
