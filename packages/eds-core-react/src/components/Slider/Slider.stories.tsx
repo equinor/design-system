@@ -69,9 +69,9 @@ export const RangeSlider: StoryFn<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const changeHandler = (
     event: ChangeEvent<HTMLInputElement>,
-    value: number[] | number,
+    value: number[],
   ) => {
-    updateValue(value as number[])
+    updateValue(value)
   }
 
   return (
@@ -98,16 +98,13 @@ export const RangeSliderWithCommittedStep: StoryFn<SliderProps> = () => {
       <Slider
         aria-label="Range slider with a lot of steps"
         value={value}
-        onChange={(
-          event: ChangeEvent<HTMLInputElement>,
-          value: number[] | number,
-        ) => {
-          updateValue(value as number[])
+        onChange={(event, value) => {
+          updateValue(value)
         }}
         min={0}
         max={500}
         onChangeCommitted={(event, value) => {
-          updateValueCommited(value as number[])
+          updateValueCommited(value)
         }}
       />
       <Typography variant="caption">

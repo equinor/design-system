@@ -191,14 +191,11 @@ export type SliderProps = {
   /** Components value, range of numbers */
   value: number[] | number
   /** Function to be called when value change */
-  onChange?: (
-    event: ChangeEvent<HTMLInputElement>,
-    newValue: number[] | number,
-  ) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>, newValue: number[]) => void
   /** Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
-    newValue: number[] | number,
+    newValue: number[],
   ) => void
   /** Function for formatting the displayed value. E.g. formatting dates, or adding a unit suffix */
   outputFunction?: (value: number) => string
@@ -234,8 +231,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   },
   ref,
 ) {
-  const isRangeSlider = Array.isArray(value)
-  const parsedValue: number[] = isRangeSlider ? value : [value]
+  const isNumber = !Array.isArray(value)
+  const isRangeSlider = !isNumber && value.length === 2
+
+  const parsedValue: number[] = isNumber ? [value] : value
   const [initalValue, setInitalValue] = useState<number[]>(parsedValue)
   const [sliderValue, setSliderValue] = useState<number[]>(parsedValue)
   const [mousePressed, setMousePressed] = useState<boolean>(false)
@@ -247,9 +246,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         setSliderValue(value)
       }
     } else {
-      if (value !== initalValue[0]) {
-        setInitalValue([value])
-        setSliderValue([value])
+      const numberValue = Number(value)
+      if (numberValue !== initalValue[0]) {
+        setInitalValue([numberValue])
+        setSliderValue([numberValue])
       }
     }
   }, [value, initalValue, isRangeSlider])
