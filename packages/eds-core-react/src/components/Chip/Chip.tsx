@@ -74,7 +74,7 @@ const StyledChips = styled.div.attrs<StyleProps>(
       }
     `}
 
-  ${({ $variant }) => {
+  ${({ $variant, $clickable }) => {
     switch ($variant) {
       case 'active':
         return css`
@@ -90,11 +90,12 @@ const StyledChips = styled.div.attrs<StyleProps>(
           ${bordersTemplate(error.border)};
           @media (hover: hover) and (pointer: fine) {
             &:hover {
-              border-color: ${error.states.hover.typography.color};
-              color: ${error.states.hover.typography.color};
+              border-color: ${$clickable &&
+              error.states.hover.typography.color};
+              color: ${$clickable && error.states.hover.typography.color};
 
               svg {
-                fill: ${error.states.hover.typography.color};
+                fill: ${$clickable && error.states.hover.typography.color};
               }
             }
           }
