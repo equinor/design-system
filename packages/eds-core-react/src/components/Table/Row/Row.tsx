@@ -20,11 +20,9 @@ export type RowProps = {
 } & React.HTMLAttributes<HTMLTableRowElement>
 
 export const Row = forwardRef<HTMLTableRowElement, RowProps>(function Row(
-  { ...props },
+  { children, active, ...props },
   ref,
 ) {
-  const { children, active } = props
-
   return (
     <StyledRow {...props} $active={active} ref={ref}>
       {children}
