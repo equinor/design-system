@@ -163,7 +163,7 @@ export type ButtonProps = {
    * @default 'button'
    */
   type?: string
-  /** FullWidth (stretched) button  */
+  /** Floats icon to the side if button is stretched beyond its intrinsic width  */
   fullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
