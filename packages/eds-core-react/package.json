@@ -80,7 +80,7 @@
     "rollup": "^3.25.3",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "^7.3.0",
+    "storybook": "^7.5.0",
     "styled-components": "6.0.8",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.1.6"
