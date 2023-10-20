@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.33.1] - 2023-10-20
+
+### Fixed
+
+- 🐛`Chip`: only hover color when clickable (fixed for error variant) by @oddvernes in https://github.com/equinor/design-system/pull/3096
+- 🐛 `Table.Row`: fix Styled-components v6 printing a false positive console warning about `active` prop by @oddvernes in https://github.com/equinor/design-system/pull/3104
+- 🐛 `Slider`: change returnvalue type for `onChange` and `onChangeCommitted` from `number[] | number` to `number[]` to reflect reality. And allow value for non-range slider to be number[] (an array with only one number) by @oddvernes in https://github.com/equinor/design-system/pull/3076
+- ⬆️ Update `@babel/runtime` to fix a vulnerability in its dependency `@babel/traverse` (https://nvd.nist.gov/vuln/detail/CVE-2023-45133) by @oddvernes in https://github.com/equinor/design-system/pull/3115
+
 ## [0.33.0] - 2023-09-26
 
 ### Added
