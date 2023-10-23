@@ -47,7 +47,7 @@
     "design tokens"
   ],
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "rollup": "^3.25.3",

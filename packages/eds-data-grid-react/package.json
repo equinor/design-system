@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@mdx-js/react": "2.3.0",
-    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.1",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@storybook/addon-a11y": "^7.5.0",
