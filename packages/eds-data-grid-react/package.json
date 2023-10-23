@@ -71,7 +71,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.0",
     "rollup": "^3.25.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
