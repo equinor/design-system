@@ -37,7 +37,7 @@
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "rollup": "^3.25.3",
     "rollup-plugin-delete": "^2.0.0",
     "typescript": "^5.1.6"

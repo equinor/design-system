@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^25.0.7
     version: 25.0.7(rollup@3.25.1)
   '@rollup/plugin-node-resolve':
-    specifier: ^15.1.0
-    version: 15.1.0(rollup@3.25.1)
+    specifier: ^15.2.3
+    version: 15.2.3(rollup@3.25.1)
   '@storybook/addon-a11y':
     specifier: ^7.5.1
     version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.21)(react-dom@18.2.0)(react@18.2.0)
@@ -155,8 +155,8 @@ devDependencies:
     specifier: 10.9.1
     version: 10.9.1(@types/node@18.14.2)(typescript@5.1.6)
   tsc-watch:
-    specifier: ^6.0.0
-    version: 6.0.0(typescript@5.1.6)
+    specifier: ^6.0.4
+    version: 6.0.4(typescript@5.1.6)
   typescript:
     specifier: ~5.1.6
     version: 5.1.6
@@ -3878,21 +3878,21 @@ packages:
       rollup: 3.25.1
     dev: true
 
-  /@rollup/plugin-node-resolve@15.1.0(rollup@3.25.1):
-    resolution: {integrity: sha512-xeZHCgsiZ9pzYVgAo9580eCGqwh/XCEUM9q6iQfGNocjgkufHAqC3exA+45URvhiYV8sBF9RlBai650eNs7AsA==}
+  /@rollup/plugin-node-resolve@15.2.3(rollup@3.25.1):
+    resolution: {integrity: sha512-j/lym8nf5E21LwBT4Df1VD6hRO2L2iwUeUmP7litikRsVp1H6NWx20NEp0Y7su+7XGc476GnXXc4kFeZNGmaSQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^2.78.0||^3.0.0
+      rollup: ^2.78.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@3.25.1)
+      '@rollup/pluginutils': 5.0.5(rollup@3.25.1)
       '@types/resolve': 1.20.2
       deepmerge: 4.3.1
       is-builtin-module: 3.2.1
       is-module: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.8
       rollup: 3.25.1
     dev: true
 
@@ -3905,7 +3905,7 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@types/estree': 1.0.1
+      '@types/estree': 1.0.3
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 3.25.1
@@ -5032,10 +5032,6 @@ packages:
 
   /@types/estree@0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
-    dev: true
-
-  /@types/estree@1.0.1:
-    resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
   /@types/estree@1.0.3:
@@ -7042,7 +7038,7 @@ packages:
     dev: true
 
   /event-stream@3.3.4:
-    resolution: {integrity: sha512-QHpkERcGsR0T7Qm3HNJSyXKEEj8AHNxkY3PK8TS2KJvQ7NiSHe3DDpwVKKtoYprL/AreyzFBeIkBIWChAqn60g==}
+    resolution: {integrity: sha1-SrTJoPWlTbkzi0w02Gv86PSzVXE=}
     dependencies:
       duplexer: 0.1.2
       from: 0.1.7
@@ -7964,7 +7960,7 @@ packages:
   /is-reference@1.2.1:
     resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
     dependencies:
-      '@types/estree': 1.0.1
+      '@types/estree': 1.0.3
     dev: true
 
   /is-regex@1.1.4:
@@ -9804,7 +9800,7 @@ packages:
     dev: true
 
   /pause-stream@0.0.11:
-    resolution: {integrity: sha512-e3FBlXLmN/D1S+zHzanP4E/4Z60oFAa3O051qt1pxa7DEJWKAyil6upYVXCWadEnuoqa4Pkc9oUx9zsxYeRv8A==}
+    resolution: {integrity: sha1-/lo0sMvOErWqaitAPuLnO2AvFEU=}
     dependencies:
       through: 2.3.8
     dev: true
@@ -11685,8 +11681,8 @@ packages:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: true
 
-  /tsc-watch@6.0.0(typescript@5.1.6):
-    resolution: {integrity: sha512-zgpju+/z5z29/kK5V28Nz16CMkX2voFOUxkTlCim/R25hxzbyUqu2NfTnmJBQfESBSPbEQUGqDdB9A8opAcB4A==}
+  /tsc-watch@6.0.4(typescript@5.1.6):
+    resolution: {integrity: sha512-cHvbvhjO86w2aGlaHgSCeQRl+Aqw6X6XN4sQMPZKF88GoP30O+oTuh5lRIJr5pgFWrRpF1AgXnJJ2DoFEIPHyg==}
     engines: {node: '>=12.12.0'}
     hasBin: true
     peerDependencies:
