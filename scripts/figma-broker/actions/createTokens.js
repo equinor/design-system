@@ -80,8 +80,8 @@ const writeCSSTokens = (tokens) => {
     }),
   )(tokens)
 
-  writeFile(PATHS.TOKENS, 'tokens', 'css', root)
-  writeFile(PATHS.TOKENS, 'elements', 'css', elements)
+  writeFile(PATHS.VARIABLES, 'tokens', 'css', root)
+  writeFile(PATHS.VARIABLES, 'elements', 'css', elements)
 }
 
 export async function createTokens({ query }) {

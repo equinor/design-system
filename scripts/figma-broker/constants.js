@@ -6,7 +6,7 @@ const ICONS_DIR = '../../packages/eds-icons'
 const STORYBOOK_DIR = '../../packages/eds-core-react/stories'
 
 export const PATHS = {
-  TOKENS: VARIABLES_DIR,
+  VARIABLES: VARIABLES_DIR,
   BASE_TOKENS: `${VARIABLES_DIR}/src/base`,
   COMPONENTS_TOKENS: `${VARIABLES_DIR}/components`,
   ASSETS_ICONS: `${ASSETS_DIR}/icons`,
