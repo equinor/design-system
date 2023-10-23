@@ -24,8 +24,8 @@ dependencies:
     specifier: 3.0.0-beta.54
     version: 3.0.0-beta.54(react@18.2.0)
   downshift:
-    specifier: ^8.2.1
-    version: 8.2.1(react@18.2.0)
+    specifier: ^8.2.2
+    version: 8.2.2(react@18.2.0)
 
 devDependencies:
   '@mdx-js/react':
@@ -6792,8 +6792,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /downshift@8.2.1(react@18.2.0):
-    resolution: {integrity: sha512-mHQUQMWCliXkoWvhxlRyEyKcdlbs8rZjZ+nSqGi8dKIv26gWtbQ8yVTPuYSHT7X8ff+FkEcskT9ktLuNKNoEHA==}
+  /downshift@8.2.2(react@18.2.0):
+    resolution: {integrity: sha512-UmJHlNTzmFN3i427Hh9f1OXMnkhgSB/J+urC9ywabvwuftm0nB0/Utsb89OtDq+2UqyScQV4Ro7EM2PEV80N5w==}
     peerDependencies:
       react: '>=16.12.0'
     dependencies:
