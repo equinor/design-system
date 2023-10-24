@@ -4,168 +4,187 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@babel/runtime':
-    specifier: ^7.23.2
-    version: 7.23.2
-  '@equinor/eds-core-react':
-    specifier: workspace:^
-    version: link:../eds-core-react
-  '@equinor/eds-icons':
-    specifier: workspace:^
-    version: link:../eds-icons
-  '@equinor/eds-tokens':
-    specifier: workspace:*
-    version: link:../eds-tokens
-  '@equinor/eds-utils':
-    specifier: workspace:^
-    version: link:../eds-utils
-  '@types/react-datepicker':
-    specifier: ^4.11.2
-    version: 4.11.2(react-dom@18.2.0)(react@18.2.0)
-  date-fns:
-    specifier: ^2.30.0
-    version: 2.30.0
-  downshift:
-    specifier: ^8.2.2
-    version: 8.2.2(react@18.2.0)
-  react-datepicker:
-    specifier: ^4.21.0
-    version: 4.21.0(react-dom@18.2.0)(react@18.2.0)
-  react-fast-compare:
-    specifier: 3.2.2
-    version: 3.2.2
+importers:
 
-devDependencies:
-  '@mdx-js/react':
-    specifier: 2.3.0
-    version: 2.3.0(react@18.2.0)
-  '@rollup/plugin-babel':
-    specifier: ^6.0.4
-    version: 6.0.4(@babel/core@7.23.2)(rollup@3.25.3)
-  '@rollup/plugin-commonjs':
-    specifier: ^25.0.7
-    version: 25.0.7(rollup@3.25.3)
-  '@rollup/plugin-node-resolve':
-    specifier: ^15.2.3
-    version: 15.2.3(rollup@3.25.3)
-  '@storybook/addon-a11y':
-    specifier: ^7.5.1
-    version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
-  '@storybook/addon-actions':
-    specifier: ^7.5.1
-    version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
-  '@storybook/addon-docs':
-    specifier: ^7.5.1
-    version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
-  '@storybook/addon-essentials':
-    specifier: ^7.5.1
-    version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
-  '@storybook/addon-links':
-    specifier: ^7.5.1
-    version: 7.5.1(react-dom@18.2.0)(react@18.2.0)
-  '@storybook/builder-vite':
-    specifier: ^7.5.1
-    version: 7.5.1(typescript@5.2.2)(vite@4.5.0)
-  '@storybook/react':
-    specifier: ^7.5.1
-    version: 7.5.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
-  '@storybook/react-vite':
-    specifier: ^7.5.1
-    version: 7.5.1(react-dom@18.2.0)(react@18.2.0)(rollup@3.25.3)(typescript@5.2.2)(vite@4.5.0)
-  '@testing-library/dom':
-    specifier: ^9.3.3
-    version: 9.3.3
-  '@testing-library/jest-dom':
-    specifier: ^5.16.5
-    version: 5.16.5
-  '@testing-library/react':
-    specifier: ^14.0.0
-    version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
-  '@testing-library/user-event':
-    specifier: 14.5.1
-    version: 14.5.1(@testing-library/dom@9.3.3)
-  '@types/jest':
-    specifier: ^29.5.6
-    version: 29.5.6
-  '@types/ramda':
-    specifier: ^0.29.7
-    version: 0.29.7
-  '@types/react':
-    specifier: ^18.0.26
-    version: 18.0.26
-  '@types/react-dom':
-    specifier: ^18.0.10
-    version: 18.0.10
-  '@types/testing-library__jest-dom':
-    specifier: ^5.14.6
-    version: 5.14.6
-  babel-loader:
-    specifier: ^9.1.3
-    version: 9.1.3(@babel/core@7.23.2)(webpack@5.88.0)
-  babel-plugin-styled-components:
-    specifier: ^2.1.4
-    version: 2.1.4(@babel/core@7.23.2)(styled-components@6.1.0)
-  clsx:
-    specifier: ^1.2.1
-    version: 1.2.1
-  jest:
-    specifier: ^29.7.0
-    version: 29.7.0
-  jest-environment-jsdom:
-    specifier: ^29.7.0
-    version: 29.7.0
-  jest-styled-components:
-    specifier: ^7.2.0
-    version: 7.2.0(styled-components@6.1.0)
-  js-file-download:
-    specifier: ^0.4.12
-    version: 0.4.12
-  postcss:
-    specifier: ^8.4.31
-    version: 8.4.31
-  ramda:
-    specifier: ^0.29.1
-    version: 0.29.1
-  react:
-    specifier: ^18.2.0
-    version: 18.2.0
-  react-dom:
-    specifier: ^18.2.0
-    version: 18.2.0(react@18.2.0)
-  react-hook-form:
-    specifier: ^7.47.0
-    version: 7.47.0(react@18.2.0)
-  react-is:
-    specifier: ^18.2.0
-    version: 18.2.0
-  remark-gfm:
-    specifier: ^4.0.0
-    version: 4.0.0
-  rollup:
-    specifier: ^3.25.3
-    version: 3.25.3
-  rollup-plugin-delete:
-    specifier: ^2.0.0
-    version: 2.0.0
-  rollup-plugin-postcss:
-    specifier: ^4.0.2
-    version: 4.0.2(postcss@8.4.31)
-  storybook:
-    specifier: 7.5.1
-    version: 7.5.1
-  styled-components:
-    specifier: 6.1.0
-    version: 6.1.0(react-dom@18.2.0)(react@18.2.0)
-  tsc-watch:
-    specifier: ^6.0.4
-    version: 6.0.4(typescript@5.2.2)
-  typescript:
-    specifier: ^5.2.2
-    version: 5.2.2
-  webpack:
-    specifier: ^5.88.0
-    version: 5.88.0(esbuild@0.18.20)
+  .:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.23.2
+        version: 7.23.2
+      '@equinor/eds-core-react':
+        specifier: workspace:^
+        version: link:../eds-core-react
+      '@equinor/eds-icons':
+        specifier: workspace:^
+        version: link:../eds-icons
+      '@equinor/eds-tokens':
+        specifier: workspace:*
+        version: link:../eds-tokens
+      '@equinor/eds-utils':
+        specifier: workspace:^
+        version: link:../eds-utils
+      '@types/react-datepicker':
+        specifier: ^4.11.2
+        version: 4.11.2(react-dom@18.2.0)(react@18.2.0)
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
+      downshift:
+        specifier: ^8.2.2
+        version: 8.2.2(react@18.2.0)
+      react-datepicker:
+        specifier: ^4.21.0
+        version: 4.21.0(react-dom@18.2.0)(react@18.2.0)
+      react-fast-compare:
+        specifier: 3.2.2
+        version: 3.2.2
+    devDependencies:
+      '@mdx-js/react':
+        specifier: 2.3.0
+        version: 2.3.0(react@18.2.0)
+      '@rollup/plugin-babel':
+        specifier: ^6.0.4
+        version: 6.0.4(@babel/core@7.23.2)(rollup@3.25.3)
+      '@rollup/plugin-commonjs':
+        specifier: ^25.0.7
+        version: 25.0.7(rollup@3.25.3)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.2.3
+        version: 15.2.3(rollup@3.25.3)
+      '@storybook/addon-a11y':
+        specifier: ^7.5.1
+        version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-actions':
+        specifier: ^7.5.1
+        version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-docs':
+        specifier: ^7.5.1
+        version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-essentials':
+        specifier: ^7.5.1
+        version: 7.5.1(@types/react-dom@18.0.10)(@types/react@18.0.26)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-links':
+        specifier: ^7.5.1
+        version: 7.5.1(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/builder-vite':
+        specifier: ^7.5.1
+        version: 7.5.1(typescript@5.2.2)(vite@4.5.0)
+      '@storybook/react':
+        specifier: ^7.5.1
+        version: 7.5.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
+      '@storybook/react-vite':
+        specifier: ^7.5.1
+        version: 7.5.1(react-dom@18.2.0)(react@18.2.0)(rollup@3.25.3)(typescript@5.2.2)(vite@4.5.0)
+      '@testing-library/dom':
+        specifier: ^9.3.3
+        version: 9.3.3
+      '@testing-library/jest-dom':
+        specifier: ^5.16.5
+        version: 5.16.5
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@testing-library/user-event':
+        specifier: 14.5.1
+        version: 14.5.1(@testing-library/dom@9.3.3)
+      '@types/jest':
+        specifier: ^29.5.6
+        version: 29.5.6
+      '@types/ramda':
+        specifier: ^0.29.7
+        version: 0.29.7
+      '@types/react':
+        specifier: ^18.0.26
+        version: 18.0.26
+      '@types/react-dom':
+        specifier: ^18.0.10
+        version: 18.0.10
+      '@types/testing-library__jest-dom':
+        specifier: ^5.14.6
+        version: 5.14.6
+      babel-loader:
+        specifier: ^9.1.3
+        version: 9.1.3(@babel/core@7.23.2)(webpack@5.89.0)
+      babel-plugin-styled-components:
+        specifier: ^2.1.4
+        version: 2.1.4(@babel/core@7.23.2)(styled-components@6.1.0)
+      clsx:
+        specifier: ^1.2.1
+        version: 1.2.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0
+      jest-environment-jsdom:
+        specifier: ^29.7.0
+        version: 29.7.0
+      jest-styled-components:
+        specifier: ^7.2.0
+        version: 7.2.0(styled-components@6.1.0)
+      js-file-download:
+        specifier: ^0.4.12
+        version: 0.4.12
+      postcss:
+        specifier: ^8.4.31
+        version: 8.4.31
+      ramda:
+        specifier: ^0.29.1
+        version: 0.29.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.47.0
+        version: 7.47.0(react@18.2.0)
+      react-is:
+        specifier: ^18.2.0
+        version: 18.2.0
+      remark-gfm:
+        specifier: ^4.0.0
+        version: 4.0.0
+      rollup:
+        specifier: ^3.25.3
+        version: 3.25.3
+      rollup-plugin-delete:
+        specifier: ^2.0.0
+        version: 2.0.0
+      rollup-plugin-postcss:
+        specifier: ^4.0.2
+        version: 4.0.2(postcss@8.4.31)
+      storybook:
+        specifier: 7.5.1
+        version: 7.5.1
+      styled-components:
+        specifier: 6.1.0
+        version: 6.1.0(react-dom@18.2.0)(react@18.2.0)
+      tsc-watch:
+        specifier: ^6.0.4
+        version: 6.0.4(typescript@5.2.2)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  ../..: {}
+
+  ../../assets/font: {}
+
+  ../../assets/woman: {}
+
+  ../../scripts/figma-broker: {}
+
+  ../../scripts/token-scripts: {}
+
+  ../eds-core-react: {}
+
+  ../eds-data-grid-react: {}
+
+  ../eds-icons: {}
+
+  ../eds-tokens: {}
+
+  ../eds-utils: {}
 
 packages:
 
@@ -2062,8 +2081,8 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /@jridgewell/source-map@0.3.3:
-    resolution: {integrity: sha512-b+fsZXeLYi9fEULmfBrhxn4IrPlINf8fiNarzTof004v3lFdntdwa9PF7vFJqm3mg7s+ScJMxXaE3Acp1irZcg==}
+  /@jridgewell/source-map@0.3.5:
+    resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.20
@@ -2762,7 +2781,7 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@types/estree': 1.0.1
+      '@types/estree': 1.0.3
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 3.25.3
@@ -3820,26 +3839,22 @@ packages:
     resolution: {integrity: sha512-AjwI4MvWx3HAOaZqYsjKWyEObT9lcVV0Y0V8nXo6cXzN8ZiMxVhf6F3d/UNvXVGKrEzL/Dluc5p+y9GkzlTWig==}
     dev: true
 
-  /@types/eslint-scope@3.7.4:
-    resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
+  /@types/eslint-scope@3.7.6:
+    resolution: {integrity: sha512-zfM4ipmxVKWdxtDaJ3MP3pBurDXOCoyjvlpE3u6Qzrmw4BPbfm4/ambIeTk/r/J0iq/+2/xp0Fmt+gFvXJY2PQ==}
     dependencies:
-      '@types/eslint': 8.40.2
-      '@types/estree': 1.0.1
+      '@types/eslint': 8.44.6
+      '@types/estree': 1.0.3
     dev: true
 
-  /@types/eslint@8.40.2:
-    resolution: {integrity: sha512-PRVjQ4Eh9z9pmmtaq8nTjZjQwKFk7YIHIud3lRoKRBgUQjgjRmoGxxGEPXQkF+lH7QkHJRNr5F4aBgYCW0lqpQ==}
+  /@types/eslint@8.44.6:
+    resolution: {integrity: sha512-P6bY56TVmX8y9J87jHNgQh43h6VVU+6H7oN7hgvivV81K2XY8qJZ5vqPy/HdUoVIelii2kChYVzQanlswPWVFw==}
     dependencies:
-      '@types/estree': 1.0.1
+      '@types/estree': 1.0.3
       '@types/json-schema': 7.0.14
     dev: true
 
   /@types/estree@0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
-    dev: true
-
-  /@types/estree@1.0.1:
-    resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
   /@types/estree@1.0.3:
@@ -4262,12 +4277,12 @@ packages:
       acorn-walk: 8.2.0
     dev: true
 
-  /acorn-import-assertions@1.9.0(acorn@8.9.0):
+  /acorn-import-assertions@1.9.0(acorn@8.10.0):
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
     peerDependencies:
       acorn: ^8
     dependencies:
-      acorn: 8.9.0
+      acorn: 8.10.0
     dev: true
 
   /acorn-jsx@5.3.2(acorn@7.4.1):
@@ -4296,12 +4311,6 @@ packages:
 
   /acorn@8.10.0:
     resolution: {integrity: sha512-F0SAmZ8iUtS//m8DmCTA0jlh6TDKkHQyK6xc6V4KDTyZKA9dnvX9/3sRTVQrWm79glUAZbnmmNcdYwUIHWVybw==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
-    dev: true
-
-  /acorn@8.9.0:
-    resolution: {integrity: sha512-jaVNAFBHNLXspO543WnNNPZFRtavh3skAkITqD0/2aeMkKZTN+254PyhwxFYrk3vQ1xfY+2wbesJMs/JC8/PwQ==}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -4553,7 +4562,7 @@ packages:
       - supports-color
     dev: true
 
-  /babel-loader@9.1.3(@babel/core@7.23.2)(webpack@5.88.0):
+  /babel-loader@9.1.3(@babel/core@7.23.2)(webpack@5.89.0):
     resolution: {integrity: sha512-xG3ST4DglodGf8qSwv0MdeWLhrDsw/32QMdTO5T1ZIp9gQur0HkCyFs7Awskr10JKXFXwpAhiCuYX5oGXnRGbw==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -4563,7 +4572,7 @@ packages:
       '@babel/core': 7.23.2
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.88.0(esbuild@0.18.20)
+      webpack: 5.89.0(esbuild@0.18.20)
     dev: true
 
   /babel-plugin-istanbul@6.1.1:
@@ -4767,17 +4776,6 @@ packages:
     resolution: {integrity: sha512-19OEpq7vWgsH6WkvkBJQDFvJS1uPcbFOQ4v9CU839dO+ZZXUZO6XpE6hNCqvlIIj+4fZvRiJ6DsAQ382GwiyTQ==}
     dependencies:
       pako: 0.2.9
-    dev: true
-
-  /browserslist@4.21.9:
-    resolution: {integrity: sha512-M0MFoZzbUrRU4KNfCrDLnvyE7gub+peetoTid3TBIqtunaDJyXlwhakT+/VkvSXcfIzFfK/nkCs4nmyTmxdNSg==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001553
-      electron-to-chromium: 1.4.565
-      node-releases: 2.0.13
-      update-browserslist-db: 1.0.13(browserslist@4.21.9)
     dev: true
 
   /browserslist@4.22.1:
@@ -5725,8 +5723,8 @@ packages:
     resolution: {integrity: sha512-1HQ2M2sPtxwnvOvT1ZClHyQDiggdNjURWpY2we6aMKCQiUVxTmVs2UYPLIrD84sS+kMdUwfBSylbJPwNnBrnHQ==}
     dev: true
 
-  /es-module-lexer@1.3.0:
-    resolution: {integrity: sha512-vZK7T0N2CBmBOixhmjdqx2gWVbFZ4DXZ/NyRMZVlJXPa7CyFS+/a4QQsDGDQy9ZfEzxFuNEsMLeQJnKP2p5/JA==}
+  /es-module-lexer@1.3.1:
+    resolution: {integrity: sha512-JUFAyicQV9mXc3YRxPnDlrfBKpqt6hUYzz9/boprUJHs4e4KVr3XwOF70doO6gwXUor6EWZJAyWAfKki84t20Q==}
     dev: true
 
   /esbuild-plugin-alias@0.2.1:
@@ -6778,7 +6776,7 @@ packages:
   /is-reference@1.2.1:
     resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
     dependencies:
-      '@types/estree': 1.0.1
+      '@types/estree': 1.0.3
     dev: true
 
   /is-regex@1.1.4:
@@ -10302,7 +10300,7 @@ packages:
       unique-string: 2.0.0
     dev: true
 
-  /terser-webpack-plugin@5.3.9(esbuild@0.18.20)(webpack@5.88.0):
+  /terser-webpack-plugin@5.3.9(esbuild@0.18.20)(webpack@5.89.0):
     resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -10323,17 +10321,17 @@ packages:
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.1
-      terser: 5.18.1
-      webpack: 5.88.0(esbuild@0.18.20)
+      terser: 5.22.0
+      webpack: 5.89.0(esbuild@0.18.20)
     dev: true
 
-  /terser@5.18.1:
-    resolution: {integrity: sha512-j1n0Ao919h/Ai5r43VAnfV/7azUYW43GPxK7qSATzrsERfW7+y2QW9Cp9ufnRF5CQUWbnLSo7UJokSWCqg4tsQ==}
+  /terser@5.22.0:
+    resolution: {integrity: sha512-hHZVLgRA2z4NWcN6aS5rQDc+7Dcy58HOf2zbYwmFcQ+ua3h6eEFf5lIDKTzbWwlazPyOZsFQO8V80/IjVNExEw==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      '@jridgewell/source-map': 0.3.3
-      acorn: 8.9.0
+      '@jridgewell/source-map': 0.3.5
+      acorn: 8.10.0
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: true
@@ -10625,17 +10623,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /update-browserslist-db@1.0.13(browserslist@4.21.9):
-    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.9
-      escalade: 3.1.1
-      picocolors: 1.0.0
-    dev: true
-
   /update-browserslist-db@1.0.13(browserslist@4.22.1):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
     hasBin: true
@@ -10848,8 +10835,8 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
-  /webpack@5.88.0(esbuild@0.18.20):
-    resolution: {integrity: sha512-O3jDhG5e44qIBSi/P6KpcCcH7HD+nYIHVBhdWFxcLOcIGN8zGo5nqF3BjyNCxIh4p1vFdNnreZv2h2KkoAw3lw==}
+  /webpack@5.89.0(esbuild@0.18.20):
+    resolution: {integrity: sha512-qyfIC10pOr70V+jkmud8tMfajraGCZMBWJtrmuBymQKCrLTRejBI8STDp1MCyZu/QTdZSeacCQYpYNQVOzX5kw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -10858,17 +10845,17 @@ packages:
       webpack-cli:
         optional: true
     dependencies:
-      '@types/eslint-scope': 3.7.4
-      '@types/estree': 1.0.1
+      '@types/eslint-scope': 3.7.6
+      '@types/estree': 1.0.3
       '@webassemblyjs/ast': 1.11.6
       '@webassemblyjs/wasm-edit': 1.11.6
       '@webassemblyjs/wasm-parser': 1.11.6
-      acorn: 8.9.0
-      acorn-import-assertions: 1.9.0(acorn@8.9.0)
-      browserslist: 4.21.9
+      acorn: 8.10.0
+      acorn-import-assertions: 1.9.0(acorn@8.10.0)
+      browserslist: 4.22.1
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
-      es-module-lexer: 1.3.0
+      es-module-lexer: 1.3.1
       eslint-scope: 5.1.1
       events: 3.3.0
       glob-to-regexp: 0.4.1
@@ -10879,7 +10866,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.9(esbuild@0.18.20)(webpack@5.88.0)
+      terser-webpack-plugin: 5.3.9(esbuild@0.18.20)(webpack@5.89.0)
       watchpack: 2.4.0
       webpack-sources: 3.2.3
     transitivePeerDependencies:
