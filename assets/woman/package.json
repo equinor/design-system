@@ -5,6 +5,6 @@
     "dev": "browser-sync start --server '.' --files '*{html,css,svg}' --no-ui --no-open --watch --no-inject-changes"
   },
   "dependencies": {
-    "browser-sync": "^2.27.11"
+    "browser-sync": "^2.29.3"
   }
 }
