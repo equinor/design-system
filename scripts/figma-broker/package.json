@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "del": "^7.1.0",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.3.1",
     "node-fetch": "^2.6.7",
     "prettier": "3.0.3",
     "ramda": "^0.29.1",
