@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "del": "^6.0.0",
+    "del": "^7.1.0",
     "dotenv": "^10.0.0",
     "node-fetch": "^2.6.7",
     "prettier": "3.0.3",

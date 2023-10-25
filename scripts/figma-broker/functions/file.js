@@ -1,5 +1,5 @@
 import fs from 'fs'
-import del from 'del'
+import { deleteAsync } from 'del'
 import fetch from 'node-fetch'
 import * as R from 'ramda'
 import { createFolder } from './folder'
@@ -118,4 +118,4 @@ export const writeUrlToFile = (results, savePath, extension = 'json') =>
     }
   })
 
-export const deletePaths = del
+export const deletePaths = deleteAsync
