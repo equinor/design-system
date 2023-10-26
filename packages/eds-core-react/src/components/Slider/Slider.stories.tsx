@@ -163,19 +163,19 @@ export const Disabled: StoryFn<SliderProps> = () => (
   </>
 )
 
-export const DisabledActiveTrack: StoryFn<SliderProps> = () => (
+export const HideActiveTrack: StoryFn<SliderProps> = () => (
   <>
     <Slider
       value={4}
       min={0}
       max={10}
       aria-label="disabled active track"
-      disableActiveTrack
+      hideActiveTrack
     />
     <Slider
       value={[30, 70]}
       aria-label="disabled active track range"
-      disableActiveTrack
+      hideActiveTrack
     />
   </>
 )

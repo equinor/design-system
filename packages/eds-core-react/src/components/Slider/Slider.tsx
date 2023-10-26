@@ -52,11 +52,11 @@ type RangeWrapperProps = {
   $min: number
   $max: number
   $disabled: boolean
-  $disableActiveTrack: boolean
+  $hideActiveTrack: boolean
 }
 
 const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
-  ({ $min, $max, $valA, $valB, $disabled, $disableActiveTrack, style }) => ({
+  ({ $min, $max, $valA, $valB, $disabled, $hideActiveTrack, style }) => ({
     'data-disabled': $disabled ? true : null,
     style: {
       '--a': $valA,
@@ -65,10 +65,10 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
       '--max': $max,
       '--background': $disabled
         ? track.entities.indicator.states.disabled.background
-        : $disableActiveTrack
+        : $hideActiveTrack
         ? 'transparent'
         : track.entities.indicator.background,
-      '--background-hover': $disableActiveTrack
+      '--background-hover': $hideActiveTrack
         ? 'transparent'
         : track.entities.indicator.states.hover.background,
       ...style,
@@ -114,21 +114,21 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
 type WrapperProps = {
   $min: number
   $max: number
-  $disableActiveTrack: boolean
+  $hideActiveTrack: boolean
 } & Pick<SliderProps, 'disabled' | 'value'>
 
 const Wrapper = styled.div.attrs<WrapperProps>(
-  ({ $min, $max, value, disabled, $disableActiveTrack, style }) => ({
+  ({ $min, $max, value, disabled, $hideActiveTrack, style }) => ({
     style: {
       '--min': $min,
       '--max': $max,
       '--value': value,
       '--background': disabled
         ? track.entities.indicator.states.disabled.background
-        : $disableActiveTrack
+        : $hideActiveTrack
         ? 'transparent'
         : track.entities.indicator.background,
-      '--background-hover': $disableActiveTrack
+      '--background-hover': $hideActiveTrack
         ? 'transparent'
         : track.entities.indicator.states.hover.background,
       ...style,
@@ -224,8 +224,8 @@ export type SliderProps = {
   minMaxValues?: boolean
   /** Disabled */
   disabled?: boolean
-  /** Disables the fill color on the active part of the track */
-  disableActiveTrack?: boolean
+  /** hides the "active" fill color on the track */
+  hideActiveTrack?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
@@ -240,7 +240,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     minMaxValues = true,
     step = 1,
     disabled,
-    disableActiveTrack,
+    hideActiveTrack,
     ariaLabelledby,
     'aria-labelledby': ariaLabelledbyNative,
     ...rest
@@ -393,7 +393,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $max={max}
           $min={min}
           $disabled={disabled}
-          $disableActiveTrack={disableActiveTrack}
+          $hideActiveTrack={hideActiveTrack}
           onMouseMove={findClosestRange}
           onMouseDown={handleDragging}
           onMouseUp={handleDragging}
@@ -456,7 +456,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $min={min}
           value={sliderValue[0]}
           disabled={disabled}
-          $disableActiveTrack={disableActiveTrack}
+          $hideActiveTrack={hideActiveTrack}
         >
           <SliderInput
             type="range"
