@@ -3,9 +3,9 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="Slider__Wrapper-sc-n1grrg-1 lilwsG"
+    class="Slider__Wrapper-sc-n1grrg-1 hSCHQq"
     id="test"
-    style="--min: 0; --max: 100; --value: 0; --background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));"
+    style="--min: 0; --max: 100; --value: 0; --background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)); --background-hover: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));"
     value="0"
   >
     <input
