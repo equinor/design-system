@@ -159,7 +159,7 @@ RangeSliderWithDates.storyName = 'Range slider with dates'
 export const Disabled: StoryFn<SliderProps> = () => (
   <>
     <Slider value={50} disabled aria-label="Disabled Slider" />
-    <Slider value={[30, 70]} aria-label="disabled arange slider" disabled />
+    <Slider value={[30, 70]} aria-label="disabled range slider" disabled />
   </>
 )
 
@@ -169,12 +169,12 @@ export const HideActiveTrack: StoryFn<SliderProps> = () => (
       value={4}
       min={0}
       max={10}
-      aria-label="disabled active track"
+      aria-label="hidden active track"
       hideActiveTrack
     />
     <Slider
       value={[30, 70]}
-      aria-label="disabled active track range"
+      aria-label="hidden active track range"
       hideActiveTrack
     />
   </>

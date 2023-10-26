@@ -224,7 +224,7 @@ export type SliderProps = {
   minMaxValues?: boolean
   /** Disabled */
   disabled?: boolean
-  /** hides the "active" fill color on the track */
+  /** hides the "active" fill color from the track */
   hideActiveTrack?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
