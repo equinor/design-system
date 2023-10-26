@@ -1,5 +1,3 @@
-import remarkGfm from 'remark-gfm'
-
 const config = {
   stories: [
     '../src/**/*.stories.@(ts|tsx|mdx)',
@@ -18,13 +16,7 @@ const config = {
     },
     {
       name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
+      options: {},
     },
   ],
   features: {

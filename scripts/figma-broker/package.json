@@ -15,11 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "del": "^6.0.0",
-    "dotenv": "^10.0.0",
-    "node-fetch": "^2.6.7",
+    "del": "^7.1.0",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2",
     "prettier": "3.0.3",
-    "ramda": "^0.29.0",
+    "ramda": "^0.29.1",
     "svgo": "^3.0.2"
   },
   "nodemonConfig": {

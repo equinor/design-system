@@ -12,8 +12,8 @@ dependencies:
     specifier: ^14.1.1
     version: 14.1.1
   subset-font:
-    specifier: ^1.4.0
-    version: 1.4.0
+    specifier: ^2.1.0
+    version: 2.1.0
 
 packages:
 
@@ -132,8 +132,8 @@ packages:
       has-symbols: 1.0.3
     dev: false
 
-  /harfbuzzjs@0.2.1:
-    resolution: {integrity: sha512-4Tu2CiuhgZtku8cz7q2FJFASY7ITKFCjH9jZa1z8wGSXttI7cAvWBOoHbRIva8NMAKxXW5BcOB032zyL3eO4nQ==}
+  /harfbuzzjs@0.3.3:
+    resolution: {integrity: sha512-48C/LOUweD//LTqaQAS9VMOBNPh7DhyJEmdzh5/1GgjNA8kGZMVZKTzkvarBDtiKKaKG5whx7qXU8OeSNLmWcA==}
     dev: false
 
   /has-flag@4.0.0:
@@ -298,11 +298,11 @@ packages:
       object-inspect: 1.12.0
     dev: false
 
-  /subset-font@1.4.0:
-    resolution: {integrity: sha512-JdL+xscAZYYX5na+1iJCaitsf20Ek1PXpHZEP35az//OemoufKgrgh410L+Xf4naBxzLtwFeH9RWkiwimlo73A==}
+  /subset-font@2.1.0:
+    resolution: {integrity: sha512-4xV42NsGGBftUj2bR6cYrUkwtTWZRRg5ISUquTBztWfntyZhod24KI0IH4YBFD3U8luLXFv87uo+1U18kAlVzg==}
     dependencies:
       fontverter: 2.0.0
-      harfbuzzjs: 0.2.1
+      harfbuzzjs: 0.3.3
       lodash: 4.17.21
       p-limit: 3.1.0
     dev: false
