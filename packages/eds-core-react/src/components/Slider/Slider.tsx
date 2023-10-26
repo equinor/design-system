@@ -57,6 +57,7 @@ type RangeWrapperProps = {
 
 const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
   ({ $min, $max, $valA, $valB, $disabled, $disableActiveTrack, style }) => ({
+    'data-disabled': $disabled ? true : null,
     style: {
       '--a': $valA,
       '--b': $valB,
@@ -100,7 +101,7 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
   @media (hover: hover) and (pointer: fine) {
-    &:hover:not([disabled]) {
+    &:hover:not([data-disabled]) {
       ${fakeTrackBgHover}
       &::before,
       &::after {
