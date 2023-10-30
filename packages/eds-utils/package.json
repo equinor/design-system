@@ -69,7 +69,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "rollup": "^3.25.3",
+    "rollup": "^4.1.5",
     "rollup-plugin-delete": "^2.0.0",
     "styled-components": "6.1.0",
     "tsc-watch": "^6.0.4",
