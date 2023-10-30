@@ -160,8 +160,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           {items.length > 0
             ? items.map((page, index) =>
                 page !== 'ELLIPSIS' ? (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <ListItem key={`list-item ${index}`}>
+                  <ListItem
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`list-item ${index}`}
+                  >
                     <PaginationItem
                       aria-label={getAriaLabel(page as number, activePage)}
                       aria-current={activePage}
