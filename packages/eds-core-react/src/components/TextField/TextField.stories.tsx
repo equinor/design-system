@@ -133,6 +133,20 @@ export const Types: Story = () => (
       helperText="Helper Text"
       inputIcon={<Icon name="thumbs_up" key="thumbs" size={16} />}
     />
+    <TextField
+      type="text"
+      id="textfield-datalist"
+      placeholder="Select browser"
+      label="With datalist"
+      list="browsers"
+    />
+    <datalist id="browsers">
+      <option value="Chrome"></option>
+      <option value="Firefox"></option>
+      <option value="Opera"></option>
+      <option value="Safari"></option>
+      <option value="Microsoft Edge"></option>
+    </datalist>
   </>
 )
 Types.decorators = [
