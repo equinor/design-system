@@ -94,9 +94,6 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.14
     version: 18.2.14
-  '@types/testing-library__jest-dom':
-    specifier: ^5.14.5
-    version: 5.14.6
   babel-loader:
     specifier: ^9.1.3
     version: 9.1.3(@babel/core@7.23.2)(webpack@5.89.0)
@@ -4216,12 +4213,6 @@ packages:
 
   /@types/stylis@4.2.2:
     resolution: {integrity: sha512-Rm17MsTpQQP5Jq4BF7CdrxJsDufoiL/q5IbJZYZmOZAJALyijgF7BzLgobXUqraNcQdqFYLYGeglDp6QzaxPpg==}
-    dev: true
-
-  /@types/testing-library__jest-dom@5.14.6:
-    resolution: {integrity: sha512-FkHXCb+ikSoUP4Y4rOslzTdX5sqYwMxfefKh1GmZ8ce1GOkEHntSp6b5cGadmNfp5e4BMEWOMx+WSKd5/MqlDA==}
-    dependencies:
-      '@types/jest': 29.5.6
     dev: true
 
   /@types/tough-cookie@4.0.4:
