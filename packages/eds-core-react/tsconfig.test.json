@@ -6,11 +6,6 @@
     "isolatedModules": true,
     "baseUrl": "."
   },
-  "include": ["src/**/*.test.ts*",],
-  "exclude": [
-    "node_modules",
-    "src/**/*.stories.ts*",
-    "src/stories",
-    "src/test"
-  ]
+  "include": ["src/**/*.test.ts*", "./jest.setup.ts"],
+  "exclude": ["node_modules", "src/**/*.stories.ts*", "src/stories", "src/test"]
 }
