@@ -9,6 +9,6 @@
     "outDir": "./dist",
     "baseUrl": "."
   },
-  "include": ["./src/**/*", "./jest.setup.ts"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }
