@@ -7,8 +7,9 @@
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "outDir": "./dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["@testing-library/jest-dom"]
   },
-  "include": ["./src/**/*", "./jest.setup.ts"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }
