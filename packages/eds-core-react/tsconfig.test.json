@@ -4,7 +4,8 @@
     "declaration": false,
     "noEmit": true,
     "isolatedModules": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["@testing-library/jest-dom"]
   },
   "include": ["src/**/*.test.ts*", "./jest.setup.ts"],
   "exclude": ["node_modules", "src/**/*.stories.ts*", "src/stories", "src/test"]
