@@ -1,6 +1,5 @@
 import React from 'react'
 import { render, screen, waitFor, RenderOptions } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
 import { SidebarLinkProps } from './index'
 import { home } from '@equinor/eds-icons'
 import userEvent from '@testing-library/user-event'
