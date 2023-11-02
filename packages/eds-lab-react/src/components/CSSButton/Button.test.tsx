@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 import { render, screen, fireEvent } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import styled from 'styled-components'
 import { Icon } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'

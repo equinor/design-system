@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import { render, cleanup, screen, fireEvent, act, waitFor } from '../../test'
-import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Menu } from '.'

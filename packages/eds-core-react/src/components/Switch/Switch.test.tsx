@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 
 import { render, fireEvent, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'

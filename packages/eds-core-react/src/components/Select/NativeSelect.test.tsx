@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { render, fireEvent, screen, act } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { NativeSelect } from '.'

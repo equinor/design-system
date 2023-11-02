@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 import { render, screen, fireEvent } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import { DatePicker } from './DatePicker'
 
 describe('DatePicker', () => {
