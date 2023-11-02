@@ -6,9 +6,18 @@ import { Checkbox } from '../Checkbox'
 import { StoryFn, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button, Chip, Card, Avatar } from '../..'
+import {
+  Typography,
+  EdsProvider,
+  Button,
+  Chip,
+  Card,
+  Avatar,
+  Icon,
+} from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
+import { error_filled, thumbs_up, warning_filled } from '@equinor/eds-icons'
 
 const meta: Meta<typeof Autocomplete> = {
   title: 'Inputs/Autocomplete',
@@ -36,6 +45,14 @@ const meta: Meta<typeof Autocomplete> = {
     },
   ],
 }
+
+const icons = {
+  thumbs_up,
+  warning_filled,
+  error_filled,
+}
+
+Icon.add(icons)
 
 export default meta
 
@@ -921,4 +938,34 @@ SelectAll.storyName = 'Select all'
 SelectAll.args = {
   options: stocks,
   optionLabel,
+}
+
+export const Variants: StoryFn<AutocompleteProps<string>> = (args) => {
+  return (
+    <>
+      <Autocomplete
+        {...args}
+        helperText="This field cannot be empty"
+        helperIcon={<Icon name="error_filled" title="Error" size={16} />}
+        variant="error"
+      />
+      <Autocomplete
+        {...args}
+        helperText="Should be something else"
+        helperIcon={<Icon name="warning_filled" title="Warning" size={16} />}
+        variant="warning"
+      />
+      <Autocomplete
+        {...args}
+        helperText="This field is correctly filled"
+        helperIcon={<Icon name="thumbs_up" title="Success" size={16} />}
+        variant="success"
+      />
+    </>
+  )
+}
+Variants.bind({})
+Variants.args = {
+  label: 'Select a stock',
+  options: stocks.map((item) => item.label),
 }

@@ -19,6 +19,7 @@ import {
   UseMultipleSelectionProps,
 } from 'downshift'
 import { pickBy, mergeWith } from 'ramda'
+import { HelperText as _HelperText } from '../InputWrapper/HelperText'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
@@ -30,6 +31,7 @@ import { Input } from '../Input'
 import { Progress } from '../Progress'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
+  AutocompleteToken,
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
@@ -51,6 +53,7 @@ import {
   FloatingPortal,
   MiddlewareState,
 } from '@floating-ui/react'
+import { Variants } from '../types'
 
 const Container = styled.div`
   position: relative;
@@ -67,6 +70,11 @@ const StyledList = styled(List)(
     display: grid;
   `,
 )
+
+const HelperText = styled(_HelperText)`
+  margin-top: 8px;
+  margin-left: 8px;
+`
 
 const StyledButton = styled(Button)(
   ({
@@ -184,6 +192,12 @@ export type AutocompleteProps<T> = {
    * @default []
    */
   initialSelectedOptions?: T[]
+  /** Text that will be displayed under the text field */
+  helperText?: string
+  /** Icon that will be displayed before the helper text */
+  helperIcon?: ReactNode
+  /** Variants */
+  variant?: Variants
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state
@@ -276,6 +290,9 @@ function AutocompleteInner<T>(
     multiline = false,
     dropdownHeight = 300,
     optionComponent,
+    helperText,
+    helperIcon,
+    variant,
     ...other
   } = props
 
@@ -305,6 +322,8 @@ function AutocompleteInner<T>(
     { density },
     multiple ? multiSelectTokens : selectTokens,
   )
+  const tokens = token() as AutocompleteToken
+
   let placeholderText = placeholder
 
   let multipleSelectionProps: UseMultipleSelectionProps<T> = {
@@ -721,10 +740,10 @@ function AutocompleteInner<T>(
           meta={meta}
           disabled={disabled}
         />
-
         <Container ref={refs.setReference}>
           <Input
             {...inputProps}
+            variant={variant}
             placeholder={placeholderText}
             readOnly={readOnly}
             rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
@@ -762,6 +781,15 @@ function AutocompleteInner<T>(
             {...consolidatedEvents}
           />
         </Container>
+        {helperText && (
+          <HelperText
+            color={
+              variant ? tokens.variants[variant].typography.color : undefined
+            }
+            text={helperText}
+            icon={helperIcon}
+          />
+        )}
         {disablePortal || inDialog ? (
           optionsList
         ) : (

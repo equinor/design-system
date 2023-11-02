@@ -21,7 +21,15 @@ const {
   elevation: { temporary_nav: boxShadow },
 } = tokens
 
-export const selectTokens: ComponentToken = {
+export type AutocompleteToken = ComponentToken & {
+  variants: {
+    error: ComponentToken
+    warning: ComponentToken
+    success: ComponentToken
+  }
+}
+
+export const selectTokens: AutocompleteToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,
   spacings: {
@@ -48,6 +56,23 @@ export const selectTokens: ComponentToken = {
     disabled: {
       typography: {
         color: colors.interactive.disabled__text.rgba,
+      },
+    },
+  },
+  variants: {
+    error: {
+      typography: {
+        color: colors.interactive.danger__text.rgba,
+      },
+    },
+    warning: {
+      typography: {
+        color: colors.interactive.warning__text.rgba,
+      },
+    },
+    success: {
+      typography: {
+        color: colors.interactive.success__text.rgba,
       },
     },
   },
@@ -116,4 +141,4 @@ export const multiSelect = mergeDeepRight(selectTokens, {
       },
     },
   },
-}) as ComponentToken
+}) as AutocompleteToken
