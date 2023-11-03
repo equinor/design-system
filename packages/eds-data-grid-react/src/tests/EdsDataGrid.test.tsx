@@ -1,7 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
-
 import { EdsDataGrid } from '../EdsDataGrid'
 import { columns } from './columns'
 import { Data, data } from './data'

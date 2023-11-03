@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import { render, screen } from '@testing-library/react'
-import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Label } from './Label'

@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import { render, fireEvent, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import { Slider } from './Slider'
 import type { SliderProps } from './Slider'

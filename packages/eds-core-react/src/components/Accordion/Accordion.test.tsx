@@ -1,7 +1,5 @@
 /* eslint-disable react/require-default-props */
 import { render, screen, fireEvent } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import { attach_file, notifications } from '@equinor/eds-icons'
 import { Accordion } from '.'

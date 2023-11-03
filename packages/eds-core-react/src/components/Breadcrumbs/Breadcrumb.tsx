@@ -1,6 +1,6 @@
 import { forwardRef, ElementType, useMemo } from 'react'
 import styled, { css } from 'styled-components'
-import { OverridableComponent } from '@equinor/eds-utils'
+import type { OverridableComponent } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'

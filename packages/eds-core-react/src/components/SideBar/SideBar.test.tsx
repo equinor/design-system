@@ -1,6 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
 import { SidebarLinkProps } from './SidebarLink'

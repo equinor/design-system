@@ -1,6 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
