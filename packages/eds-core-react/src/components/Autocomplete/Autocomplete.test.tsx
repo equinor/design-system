@@ -54,6 +54,29 @@ describe('Autocomplete', () => {
     expect(optionsList.nodeName).toBe('UL')
   })
 
+  it('Has provided ReactNode label', async () => {
+    render(
+      <Autocomplete
+        disablePortal
+        label={<div>{labelText}</div>}
+        options={items}
+      />,
+    )
+
+    // The same label is used for both the input field and the list of options
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+
+    expect(input).toBeDefined()
+    expect(input).toHaveAccessibleName(labelText)
+    expect(input.nodeName).toBe('INPUT')
+
+    expect(optionsList).toBeDefined()
+    expect(optionsList).toHaveAccessibleName(labelText)
+    expect(optionsList.nodeName).toBe('UL')
+  })
+
   it('Has provided option label', async () => {
     const labler = (text: string) => `${text}+1`
     render(

@@ -179,7 +179,7 @@ export type AutocompleteProps<T> = {
   /** List of options in dropdown */
   options: T[]
   /** Label for the select element */
-  label: string
+  label: ReactNode
   /** Array of initial selected items
    * @default []
    */
