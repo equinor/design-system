@@ -19,7 +19,7 @@ import {
   UseMultipleSelectionProps,
 } from 'downshift'
 import { pickBy, mergeWith } from 'ramda'
-import { HelperText as _HelperText } from '../InputWrapper/HelperText'
+import { HelperText as _HelperText } from '../InputWrapper/HelperText' /* TODO: Use InputWrapper instead of HelperText once the new token system is in place */
 import { useVirtualizer } from '@tanstack/react-virtual'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
