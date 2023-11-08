@@ -33,6 +33,11 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   padding-right: 16px;
   display: block;
   line-height: 1;
+  display: flex;
+}
+
+.c4>svg {
+  margin-inline: -8px;
 }
 
 .c3 {

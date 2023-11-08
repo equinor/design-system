@@ -33,6 +33,7 @@ const Separator = styled(Typography)`
   ${spacingsTemplate(spacings)}
   display: block;
   line-height: 1;
+  display: flex;
   & > svg {
     margin-inline: -8px;
   }

@@ -159,7 +159,7 @@ export const Wrapped: StoryFn<BreadcrumbsProps> = () => {
 
 export const CustomSeperator: StoryFn<BreadcrumbsProps> = () => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <Breadcrumbs separator={<Icon data={chevron_right}></Icon>}>
         <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
           Label One
@@ -194,6 +194,6 @@ export const CustomSeperator: StoryFn<BreadcrumbsProps> = () => {
           Label Five
         </Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
-    </>
+    </div>
   )
 }
