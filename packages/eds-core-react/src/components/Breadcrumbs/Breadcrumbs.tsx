@@ -33,6 +33,9 @@ const Separator = styled(Typography)`
   ${spacingsTemplate(spacings)}
   display: block;
   line-height: 1;
+  & > svg {
+    margin-inline: -8px;
+  }
 `
 
 const Collapsed = styled(Typography)`
