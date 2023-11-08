@@ -55,7 +55,8 @@ export type BreadcrumbsProps = {
    * @default false
    */
   collapse?: boolean
-  seperator?: ReactNode
+  /** Custom separator can be a character or an Icon */
+  separator?: ReactNode
   /** Will not wrap breadcrumbs when set to false, but will instead trunkate each breadcrumb when viewport narrows
    * @default true
    */
@@ -66,7 +67,7 @@ export type BreadcrumbsProps = {
 
 export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
   function Breadcrumbs(
-    { children, collapse, wrap = true, seperator = '/', ...rest },
+    { children, collapse, wrap = true, separator = '/', ...rest },
     ref,
   ) {
     const props = {
@@ -109,7 +110,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
             </Collapsed>
           </ListItem>
           <li aria-hidden>
-            <Separator variant="body_short">{seperator}</Separator>
+            <Separator variant="body_short">{separator}</Separator>
           </li>
         </Fragment>,
         allCrumbs[allCrumbs.length - 1],
@@ -122,7 +123,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
         <ListItem>{child}</ListItem>
         {index !== ReactChildren.toArray(children).length - 1 && (
           <li aria-hidden>
-            <Separator variant="body_short">{seperator}</Separator>
+            <Separator variant="body_short">{separator}</Separator>
           </li>
         )}
       </Fragment>

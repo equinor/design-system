@@ -159,22 +159,41 @@ export const Wrapped: StoryFn<BreadcrumbsProps> = () => {
 
 export const CustomSeperator: StoryFn<BreadcrumbsProps> = () => {
   return (
-    <Breadcrumbs seperator={<Icon data={chevron_right}></Icon>}>
-      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        Label One
-      </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        Label Two
-      </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        A really rally long label
-      </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        Label Four
-      </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        Label Five
-      </Breadcrumbs.Breadcrumb>
-    </Breadcrumbs>
+    <>
+      <Breadcrumbs separator={<Icon data={chevron_right}></Icon>}>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label One
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Two
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          A really rally long label
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Four
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Five
+        </Breadcrumbs.Breadcrumb>
+      </Breadcrumbs>
+      <Breadcrumbs separator="\">
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label One
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Two
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          A really rally long label
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Four
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Five
+        </Breadcrumbs.Breadcrumb>
+      </Breadcrumbs>
+    </>
   )
 }
