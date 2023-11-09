@@ -236,7 +236,9 @@ export type SliderProps = {
   disabled?: boolean
   /** hides the "active" fill color from the track */
   hideActiveTrack?: boolean
-  /** the current value is always visible, otherwise it only shows on hover/focus */
+  /** Make the current value tooltip always visible, otherwise it only shows on hover/focus
+   * @default false
+   */
   labelAlwaysOn?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
