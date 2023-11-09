@@ -48,6 +48,19 @@ export const SimpleSlider: StoryFn<SliderProps> = () => (
 )
 SimpleSlider.storyName = 'Simple slider'
 
+export const LabelAlwaysOn: StoryFn<SliderProps> = () => (
+  <>
+    <Label label="Label is always visible" id="label-on-slider" />
+    <Slider
+      value={4}
+      min={0}
+      max={10}
+      aria-labelledby="simple-slider"
+      labelAlwaysOn
+    />
+  </>
+)
+
 export const SimpleSliderWithSteps: StoryFn<SliderProps> = () => (
   <>
     <Label
