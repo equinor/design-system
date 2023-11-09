@@ -47,6 +47,13 @@ describe('TextField', () => {
     expect(screen.getByText(labelText)).toBeInTheDocument()
   })
 
+  it('Has correct label ReactNode', () => {
+    const labelText = 'Some label'
+    render(<TextField id="test-label" label={<div>{labelText}</div>} />)
+
+    expect(screen.getByText(labelText)).toBeInTheDocument()
+  })
+
   it('Has correct default value', () => {
     const value = 'Some value'
     render(<TextField id="test-value" value={value} readOnly />)

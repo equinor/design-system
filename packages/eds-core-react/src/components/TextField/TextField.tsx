@@ -31,7 +31,7 @@ type SharedTextFieldProps = {
   /** Input unique id. This is required to ensure accesibility */
   id: string
   /** Label text */
-  label?: string
+  label?: ReactNode
   /** Meta text */
   meta?: string
   /** Unit text */

@@ -33,6 +33,13 @@ describe('Label', () => {
     expect(screen.getByText(labelText)).toBeInTheDocument()
   })
 
+  it('Has correct label ReactNode', () => {
+    const labelText = 'Some label'
+    render(<Label label={<div>{labelText}</div>} />)
+
+    expect(screen.getByText(labelText)).toBeInTheDocument()
+  })
+
   it('Can add a meta text', () => {
     const labelText = 'Some label'
     const metaText = 'Meta'
