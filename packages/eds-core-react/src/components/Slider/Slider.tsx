@@ -53,6 +53,7 @@ type RangeWrapperProps = {
   $max: number
   $disabled: boolean
   $hideActiveTrack: boolean
+  $labelAlwaysOn: boolean
 }
 
 const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
@@ -75,6 +76,7 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
     },
   }),
 )<RangeWrapperProps>`
+  ${({ $labelAlwaysOn }) => css({ '--showTooltip': $labelAlwaysOn ? 1 : 0 })};
   --dif: calc(var(--max) - var(--min));
   --realWidth: calc(100% - 12px);
   ${wrapperGrid}
@@ -109,12 +111,16 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
       }
     }
   }
+  &:where(:hover, :has(:focus-visible)) {
+    --showTooltip: 1;
+  }
 `
 
 type WrapperProps = {
   $min: number
   $max: number
   $hideActiveTrack: boolean
+  $labelAlwaysOn: boolean
 } & Pick<SliderProps, 'disabled' | 'value'>
 
 const Wrapper = styled.div.attrs<WrapperProps>(
@@ -135,6 +141,7 @@ const Wrapper = styled.div.attrs<WrapperProps>(
     },
   }),
 )<WrapperProps>`
+  ${({ $labelAlwaysOn }) => css({ '--showTooltip': $labelAlwaysOn ? 1 : 0 })};
   --dif: calc(var(--max) - var(--min));
   --realWidth: calc(100% - 12px);
   ${wrapperGrid}
@@ -157,6 +164,9 @@ const Wrapper = styled.div.attrs<WrapperProps>(
         background: var(--background-hover);
       }
     }
+  }
+  &:where(:hover, :has(:focus-visible)) {
+    --showTooltip: 1;
   }
 `
 
@@ -226,6 +236,10 @@ export type SliderProps = {
   disabled?: boolean
   /** hides the "active" fill color from the track */
   hideActiveTrack?: boolean
+  /** Make the current value tooltip always visible, otherwise it only shows on hover/focus
+   * @default false
+   */
+  labelAlwaysOn?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
@@ -238,6 +252,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     onChangeCommitted,
     minMaxDots = true,
     minMaxValues = true,
+    labelAlwaysOn,
     step = 1,
     disabled,
     hideActiveTrack,
@@ -394,6 +409,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $min={min}
           $disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
+          $labelAlwaysOn={labelAlwaysOn}
           onMouseMove={findClosestRange}
           onMouseDown={handleDragging}
           onMouseUp={handleDragging}
@@ -457,6 +473,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           value={sliderValue[0]}
           disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
+          $labelAlwaysOn={labelAlwaysOn}
         >
           <SliderInput
             type="range"

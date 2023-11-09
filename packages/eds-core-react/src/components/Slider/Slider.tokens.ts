@@ -59,7 +59,7 @@ export const slider: SliderToken = {
     },
     output: {
       typography: {
-        ...paragraph.overline,
+        ...paragraph.caption,
         color: textColor,
       },
     },
