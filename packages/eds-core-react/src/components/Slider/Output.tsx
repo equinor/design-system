@@ -9,18 +9,23 @@ import { typographyTemplate } from '@equinor/eds-utils'
 import { slider as tokens } from './Slider.tokens'
 
 const {
-  entities: { track, output },
+  entities: { output },
 } = tokens
 
 const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
+  --background: rgb(0 0 0 / 0.8);
   width: fit-content;
   position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
   z-index: 1;
-  ${typographyTemplate(output.typography)}
-  background: ${tokens.background};
-  padding: 0 5px;
-  top: ${track.spacings.top};
+  ${typographyTemplate(output.typography)};
+  color: white;
+  background: var(--background);
+  padding: 8px;
+  top: -32px;
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
@@ -28,6 +33,18 @@ const StyledOutput = styled.output`
   transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
   grid-row: 2;
   grid-column: 1 / -1;
+  opacity: var(--showTooltip);
+`
+
+const TooltipArrow = styled.svg`
+  width: 6px;
+  height: 8px;
+  position: absolute;
+  fill: var(--background);
+  top: calc(100% - 1px);
+  rotate: -90deg;
+  translate: -50%;
+  left: 50%;
 `
 
 type OutputProps = {
@@ -48,6 +65,9 @@ export const Output = forwardRef<HTMLOutputElement, OutputProps>(
         htmlFor={htmlFor}
       >
         {children}
+        <TooltipArrow>
+          <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+        </TooltipArrow>
       </StyledOutput>
     )
   },
