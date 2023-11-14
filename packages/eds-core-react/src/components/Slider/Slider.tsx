@@ -4,6 +4,7 @@ import {
   useRef,
   HTMLAttributes,
   MouseEvent,
+  TouchEvent,
   KeyboardEvent,
   useEffect,
   ChangeEvent,
@@ -54,6 +55,7 @@ type RangeWrapperProps = {
   $disabled: boolean
   $hideActiveTrack: boolean
   $labelAlwaysOn: boolean
+  $touchNavigation: boolean
 }
 
 const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
@@ -114,6 +116,20 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
   &:where(:hover, :has(:focus-visible)) {
     --showTooltip: 1;
   }
+  ${({ $touchNavigation }) =>
+    $touchNavigation &&
+    css`
+      & > input[type='range'] {
+        pointer-events: none;
+      }
+
+      & > input[type='range']::-webkit-slider-thumb {
+        pointer-events: auto;
+      }
+      & > input[type='range']::-moz-range-thumb {
+        pointer-events: auto;
+      }
+    `};
 `
 
 type WrapperProps = {
@@ -236,7 +252,7 @@ export type SliderProps = {
   disabled?: boolean
   /** hides the "active" fill color from the track */
   hideActiveTrack?: boolean
-  /** Make the current value tooltip always visible, otherwise it only shows on hover/focus
+  /** Make the current value label always visible, otherwise it only shows on hover/focus or while using touch input
    * @default false
    */
   labelAlwaysOn?: boolean
@@ -269,6 +285,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const [initalValue, setInitalValue] = useState<number[]>(parsedValue)
   const [sliderValue, setSliderValue] = useState<number[]>(parsedValue)
   const [mousePressed, setMousePressed] = useState<boolean>(false)
+  const [touchNavigation, setTouchNavigation] = useState<boolean>(false)
 
   useEffect(() => {
     if (isRangeSlider) {
@@ -337,13 +354,22 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     return outputFunction ? outputFunction(text) : text
   }
 
-  const findClosestRange = (event: MouseEvent) => {
+  const findClosestRange = (event: MouseEvent | TouchEvent) => {
     const target = event.target as HTMLOutputElement | HTMLInputElement
     if (target.type === 'output' || mousePressed) {
       return
     }
+    let clientX: number
+    if (event.type === 'touchstart') {
+      clientX = (event as TouchEvent<HTMLInputElement>).targetTouches[0].clientX
+      setTouchNavigation(true)
+    } else if (event.type === 'mousemove') {
+      clientX = (event as MouseEvent<HTMLInputElement>).clientX
+      setTouchNavigation(false)
+    }
+
     const bounds = target.getBoundingClientRect()
-    const x = event.clientX - bounds.left
+    const x = clientX - bounds.left
     const inputWidth = minRange.current.offsetWidth
     const minValue = parseFloat(minRange.current.value)
     const maxValue = parseFloat(maxRange.current.value)
@@ -371,8 +397,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const handleDragging = (e: MouseEvent) => {
-    if (e.type === 'mousedown') {
+  const handleDragging = (type: string) => {
+    if (type === 'mousedown' || type === 'touchmove') {
       setMousePressed(true)
     } else {
       setMousePressed(false)
@@ -409,10 +435,14 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $min={min}
           $disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
-          $labelAlwaysOn={labelAlwaysOn}
+          $labelAlwaysOn={labelAlwaysOn || touchNavigation}
+          $touchNavigation={touchNavigation}
           onMouseMove={findClosestRange}
-          onMouseDown={handleDragging}
-          onMouseUp={handleDragging}
+          onTouchStartCapture={findClosestRange}
+          onTouchEnd={(e) => handleDragging(e.type)}
+          onTouchMove={(e) => handleDragging(e.type)}
+          onMouseDown={(e) => handleDragging(e.type)}
+          onMouseUp={(e) => handleDragging(e.type)}
         >
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
@@ -473,7 +503,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           value={sliderValue[0]}
           disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
-          $labelAlwaysOn={labelAlwaysOn}
+          $labelAlwaysOn={labelAlwaysOn || touchNavigation}
+          onTouchStartCapture={() => setTouchNavigation(true)}
+          onMouseDownCapture={() => setTouchNavigation(false)}
         >
           <SliderInput
             type="range"
