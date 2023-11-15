@@ -24,7 +24,7 @@ const StyledOutput = styled.output`
   ${typographyTemplate(output.typography)};
   color: white;
   background: var(--background);
-  padding: 8px;
+  padding: 4px 8px;
   bottom: calc(100% + 8px);
   pointer-events: none;
   /* Calculate the distance on the track*/

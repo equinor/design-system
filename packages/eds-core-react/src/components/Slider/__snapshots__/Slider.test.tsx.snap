@@ -43,7 +43,7 @@ exports[`Simple slider Matches snapshot 1`] = `
   text-align: left;
   color: white;
   background: var(--background);
-  padding: 8px;
+  padding: 4px 8px;
   bottom: calc(100% + 8px);
   pointer-events: none;
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
