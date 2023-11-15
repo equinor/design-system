@@ -16,7 +16,7 @@ const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
   --background: rgb(0 0 0 / 0.8);
   width: fit-content;
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -25,7 +25,7 @@ const StyledOutput = styled.output`
   color: white;
   background: var(--background);
   padding: 8px;
-  top: -32px;
+  bottom: calc(100% + 8px);
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
