@@ -37,7 +37,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
 }
 
 .c4>svg {
-  margin-inline: -8px;
+  margin-inline: -9px;
 }
 
 .c3 {

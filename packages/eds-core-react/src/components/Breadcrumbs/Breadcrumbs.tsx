@@ -35,7 +35,8 @@ const Separator = styled(Typography)`
   line-height: 1;
   display: flex;
   & > svg {
-    margin-inline: -8px;
+    /* Reduce spacing when Icon is used to account for the built in spacing of icons */
+    margin-inline: -9px;
   }
 `
 
