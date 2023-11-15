@@ -29,7 +29,7 @@ exports[`Simple slider Matches snapshot 1`] = `
   --realWidth: calc(100% - 12px);
   --background: rgb(0 0 0 / 0.8);
   width: fit-content;
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -43,8 +43,8 @@ exports[`Simple slider Matches snapshot 1`] = `
   text-align: left;
   color: white;
   background: var(--background);
-  padding: 8px;
-  top: -32px;
+  padding: 4px 8px;
+  bottom: calc(100% + 8px);
   pointer-events: none;
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
