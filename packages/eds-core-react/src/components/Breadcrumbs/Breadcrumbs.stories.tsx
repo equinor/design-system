@@ -1,4 +1,5 @@
-import { Breadcrumbs, BreadcrumbsProps, Checkbox } from '../..'
+import { Breadcrumbs, BreadcrumbsProps, Checkbox, Icon } from '../..'
+import { chevron_right } from '@equinor/eds-icons'
 import { useState, ChangeEvent } from 'react'
 import { action } from '@storybook/addon-actions'
 import { StoryFn, Meta } from '@storybook/react'
@@ -152,6 +153,47 @@ export const Wrapped: StoryFn<BreadcrumbsProps> = () => {
           </Breadcrumbs.Breadcrumb>
         </Breadcrumbs>
       </Resizable>
+    </div>
+  )
+}
+
+export const CustomSeperator: StoryFn<BreadcrumbsProps> = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Breadcrumbs separator={<Icon data={chevron_right}></Icon>}>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label One
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Two
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          A really rally long label
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Four
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Five
+        </Breadcrumbs.Breadcrumb>
+      </Breadcrumbs>
+      <Breadcrumbs separator="\">
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label One
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Two
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          A really rally long label
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Four
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Five
+        </Breadcrumbs.Breadcrumb>
+      </Breadcrumbs>
     </div>
   )
 }
