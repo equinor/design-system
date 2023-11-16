@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.34.0] - 2023-11-17
+
+### Added
+
+- ✨ `Slider`: added `hideActiveTrack` prop by @oddvernes in https://github.com/equinor/design-system/pull/3131
+- ✨ `Slider`: added `labelAlwaysOn` prop by @oddvernes in https://github.com/equinor/design-system/pull/3143
+- ✨ `Autocomplete`: Added `variant` (`error`, `warning`, `success`) and `helperText` props by @denektenina in https://github.com/equinor/design-system/pull/3139
+- ✨ `Breadcrumbs`: custom `separator` prop by @oddvernes in https://github.com/equinor/design-system/pull/3142
+
+### Changed
+
+- 💄 `Slider`: redesigned value label to tooltip style, increased font size by @oddvernes in https://github.com/equinor/design-system/pull/3143
+- ✨ `Label`/`TextField`/`Autocomplete`: The `label` prop type changed from `string` to `ReactNode` to allow it to be more customizable by @FredrikMWold in https://github.com/equinor/design-system/pull/3140
+- ⬆️ Updated dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3121 https://github.com/equinor/design-system/pull/3138 https://github.com/equinor/design-system/pull/3137 https://github.com/equinor/design-system/pull/3132 https://github.com/equinor/design-system/pull/3148
+
+### Fixed
+
+- 📱 `Slider`: added touch support for range slider by @oddvernes in https://github.com/equinor/design-system/pull/3144
+- 🐛 `Slider`: fixed bug in Safari where slider would grow in width on mouseover by @oddvernes in https://github.com/equinor/design-system/pull/3145
+
 ## [0.33.1] - 2023-10-20
 
 ### Fixed
