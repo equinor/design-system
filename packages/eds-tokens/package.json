@@ -11,7 +11,14 @@
       "default": "./dist/tokens.cjs"
     },
     "./tokens.css": "./tokens.css",
-    "./elements.css": "./elements.css"
+    "./elements.css": "./elements.css",
+    "./css/eds-tokens.css": "./build/css/eds-tokens.css",
+    "./css/eds-theme-light.css": "./build/css/eds-theme-light.css",
+    "./css/eds-theme-dark.css": "./build/css/eds-theme-dark.css",
+    "./css/eds-tokens-typography.css": "./build/css/eds-tokens-typography.css",
+    "./css/eds-tokens-border.css": "./build/css/eds-tokens-border.css",
+    "./css/eds-density-spacious.css": "./build/css/eds-density-spacious.css",
+    "./css/eds-tokens-shadow.css": "./build/css/eds-tokens-shadow.css"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
@@ -31,6 +38,7 @@
   },
   "files": [
     "dist/*",
+    "build/*",
     "commonjs/*",
     "tokens.css",
     "elements.css"
