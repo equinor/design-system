@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly
+ * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * @tokens Borders
+ * @presenter Border
+ */
+
+:root {
+  --eds-border-button-danger-pressed: 1px solid var(--eds-color-border-button-danger-pressed);
+  --eds-border-button-danger-hover: 1px solid var(--eds-color-border-button-danger-hover);
+  --eds-border-button-danger-enabled: 1px solid var(--eds-color-border-button-danger-enabled);
+  --eds-border-button-secondary-pressed: 1px solid var(--eds-color-border-button-secondary-pressed);
+  --eds-border-button-secondary-hover: 1px solid var(--eds-color-border-button-secondary-hover);
+  --eds-border-button-secondary-enabled: 1px solid var(--eds-color-border-button-secondary-enabled);
+  --eds-border-button-primary-pressed: 1px solid var(--eds-color-border-button-primary-pressed);
+  --eds-border-button-primary-hover: 1px solid var(--eds-color-border-button-primary-hover);
+  --eds-border-button-primary-enabled: 1px solid var(--eds-color-border-button-primary-enabled);
+}
