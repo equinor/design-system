@@ -1,0 +1,434 @@
+/**
+ * Do not edit directly
+ * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * @tokens SpacingSpacious
+ * @presenter Spacing
+ */
+
+:root {
+  --eds-primitives-line-heights-3xl: 36px; /* 4*ceil(28*1.25/4) */
+  --eds-primitives-line-heights-2xl: 32px; /* 4*ceil(24.5*1.25/4) */
+  --eds-primitives-line-heights-xl: 28px; /* 4*ceil(21*1.25/4) */
+  --eds-primitives-line-heights-lg-default: 24px; /* 4*ceil(18.5*1.25/4) */
+  --eds-primitives-line-heights-lg-squished: 20px;
+  --eds-primitives-line-heights-base-default: 20px; /* 4*ceil(16*1.25/4) */
+  --eds-primitives-line-heights-base-squished: 16px;
+  --eds-primitives-line-heights-sm-default: 20px; /* 4*ceil(14*1.25/4) */
+  --eds-primitives-line-heights-sm-squished: 16px;
+  --eds-primitives-line-heights-xs-default: 16px; /* 4*ceil(12*1.25/4) */
+  --eds-primitives-line-heights-xs-squished: 12px;
+  --eds-primitives-line-heights-xxs-default: 16px; /* 4*ceil(10.5*1.1/4) */
+  --eds-primitives-line-heights-xxs-squished: 12px;
+  --eds-primitives-font-sizes-3xl: 28px; /* 0.5*rint(16*2^(3/5)/0.5) */
+  --eds-primitives-font-sizes-2xl: 24.5px; /* 0.5*rint(16*2^(3/5)/0.5) */
+  --eds-primitives-font-sizes-xl: 21px; /* 0.5*rint(16*2^(2/5)/0.5) */
+  --eds-primitives-font-sizes-lg: 18.5px; /* 0.5*rint(16*2^(1/5)/0.5) */
+  --eds-primitives-font-sizes-base: 16px; /* The base font-size */
+  --eds-primitives-font-sizes-sm: 14px; /* 1 step below the base font-size, using the formula `0.5*rint(16*2^(-1/5)/0.5)` */
+  --eds-primitives-font-sizes-xs: 12px; /* 0.5*rint(16*2^(-2/5)/0.5) */
+  --eds-primitives-font-sizes-xxs: 10.5px; /* 0.5*rint(16*2^(-3/5)/0.5) */
+  --eds-primitives-dimension-stack-1800: 384px;
+  --eds-primitives-dimension-stack-1600: 320px;
+  --eds-primitives-dimension-stack-1400: 256px;
+  --eds-primitives-dimension-stack-1200: 192px;
+  --eds-primitives-dimension-stack-1000: 160px;
+  --eds-primitives-dimension-stack-800: 128px;
+  --eds-primitives-dimension-stack-700: 112px;
+  --eds-primitives-dimension-stack-600: 96px;
+  --eds-primitives-dimension-stack-550: 88px;
+  --eds-primitives-dimension-stack-500: 80px;
+  --eds-primitives-dimension-stack-450: 72px;
+  --eds-primitives-dimension-stack-400: 64px;
+  --eds-primitives-dimension-stack-375: 60px;
+  --eds-primitives-dimension-stack-350: 56px;
+  --eds-primitives-dimension-stack-325: 52px;
+  --eds-primitives-dimension-stack-300: 48px;
+  --eds-primitives-dimension-stack-275: 44px;
+  --eds-primitives-dimension-stack-250: 40px;
+  --eds-primitives-dimension-stack-225: 36px;
+  --eds-primitives-dimension-stack-200: 32px;
+  --eds-primitives-dimension-stack-175: 28px;
+  --eds-primitives-dimension-stack-150: 24px;
+  --eds-primitives-dimension-stack-125: 20px;
+  --eds-primitives-dimension-stack-100: 16px;
+  --eds-primitives-dimension-stack-82: 14px;
+  --eds-primitives-dimension-stack-75: 12px;
+  --eds-primitives-dimension-stack-62: 10px;
+  --eds-primitives-dimension-stack-50: 8px;
+  --eds-primitives-dimension-stack-37: 6px;
+  --eds-primitives-dimension-stack-25: 4px;
+  --eds-primitives-dimension-stack-12: 2px;
+  --eds-primitives-dimension-stack-6: 1px;
+  --eds-primitives-dimension-stack-0: 0px;
+  --eds-primitives-dimension-inline-1800: 384px;
+  --eds-primitives-dimension-inline-1600: 320px;
+  --eds-primitives-dimension-inline-1400: 256px;
+  --eds-primitives-dimension-inline-1200: 192px;
+  --eds-primitives-dimension-inline-1000: 160px;
+  --eds-primitives-dimension-inline-800: 128px;
+  --eds-primitives-dimension-inline-700: 112px;
+  --eds-primitives-dimension-inline-600: 96px;
+  --eds-primitives-dimension-inline-550: 88px;
+  --eds-primitives-dimension-inline-500: 80px;
+  --eds-primitives-dimension-inline-450: 72px;
+  --eds-primitives-dimension-inline-400: 64px;
+  --eds-primitives-dimension-inline-375: 60px;
+  --eds-primitives-dimension-inline-350: 56px;
+  --eds-primitives-dimension-inline-325: 52px;
+  --eds-primitives-dimension-inline-300: 48px;
+  --eds-primitives-dimension-inline-275: 44px;
+  --eds-primitives-dimension-inline-250: 40px;
+  --eds-primitives-dimension-inline-225: 36px;
+  --eds-primitives-dimension-inline-200: 32px;
+  --eds-primitives-dimension-inline-175: 28px;
+  --eds-primitives-dimension-inline-150: 24px;
+  --eds-primitives-dimension-inline-125: 20px;
+  --eds-primitives-dimension-inline-100: 16px;
+  --eds-primitives-dimension-inline-82: 14px;
+  --eds-primitives-dimension-inline-75: 12px;
+  --eds-primitives-dimension-inline-62: 10px;
+  --eds-primitives-dimension-inline-50: 8px;
+  --eds-primitives-dimension-inline-37: 6px;
+  --eds-primitives-dimension-inline-25: 4px;
+  --eds-primitives-dimension-inline-12: 2px;
+  --eds-primitives-dimension-inline-6: 1px;
+  --eds-primitives-dimension-inline-0: 0px;
+}
+/**
+ * Do not edit directly
+ * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * @tokens Colors
+ * @presenter Color
+ */
+
+:root {
+  --eds-color-text-interactive-active-on-ghost: rgba(0, 112, 121, 1);
+  --eds-color-text-interactive-active-on-ghost-hover: rgba(0, 79, 85, 1);
+  --eds-color-text-interactive-active-on-ghost-pressed: rgba(3, 50, 53, 1);
+  --eds-color-text-interactive-active: rgba(0, 112, 121, 1);
+  --eds-color-text-interactive-active-hover: rgba(0, 79, 85, 1);
+  --eds-color-text-interactive-active-pressed: rgba(3, 50, 53, 1);
+  --eds-color-text-interactive-active-neutral: rgba(61, 61, 61, 1);
+  --eds-color-text-interactive-active-neutral-hover: rgba(31, 31, 31, 1);
+  --eds-color-text-interactive-active-neutral-pressed: rgba(23, 23, 23, 1);
+  --eds-color-text-interactive-resting: rgba(111, 111, 111, 1);
+  --eds-color-text-interactive-resting-hover: rgba(86, 86, 86, 1);
+  --eds-color-text-interactive-resting-pressed: rgba(61, 61, 61, 1);
+  --eds-color-text-interactive-disabled: rgba(190, 190, 190, 1);
+  --eds-color-text-notification-info: rgba(4, 94, 141, 1);
+  --eds-color-text-notification-success: rgba(21, 104, 45, 1);
+  --eds-color-text-notification-warning: rgba(127, 70, 0, 1);
+  --eds-color-text-notification-error: rgba(144, 4, 44, 1);
+  --eds-color-text-inputs-helper-default: rgba(111, 111, 111, 1);
+  --eds-color-text-inputs-helper-info: rgba(4, 94, 141, 1);
+  --eds-color-text-inputs-helper-success: rgba(21, 104, 45, 1);
+  --eds-color-text-inputs-helper-warning: rgba(127, 70, 0, 1);
+  --eds-color-text-inputs-helper-error: rgba(144, 4, 44, 1);
+  --eds-color-text-inputs-default: rgba(86, 86, 86, 1);
+  --eds-color-text-inputs-active: rgba(61, 61, 61, 1);
+  --eds-color-text-inputs-label: rgba(111, 111, 111, 1);
+  --eds-color-text-primary-highlighted: rgba(61, 61, 61, 1);
+  --eds-color-text-primary: rgba(61, 61, 61, 1);
+  --eds-color-text-secondary: rgba(86, 86, 86, 1);
+  --eds-color-text-tertiary: rgba(111, 111, 111, 1);
+  --eds-color-text-button-primary-on-filled: rgba(255, 255, 255, 1);
+  --eds-color-text-button-primary-on-outlined: rgba(0, 112, 121, 1);
+  --eds-color-text-button-primary-on-outlined-hover: rgba(0, 79, 85, 1);
+  --eds-color-text-button-primary-on-outlined-pressed: rgba(3, 50, 53, 1);
+  --eds-color-text-button-secondary-on-filled: rgba(255, 255, 255, 1);
+  --eds-color-text-button-secondary-on-outlined: rgba(3, 72, 107, 1);
+  --eds-color-text-button-secondary-on-outlined-hover: rgba(2, 49, 74, 1);
+  --eds-color-text-button-secondary-on-outlined-pressed: rgba(3, 39, 58, 1);
+  --eds-color-text-button-danger-on-filled: rgba(255, 255, 255, 1);
+  --eds-color-text-button-danger-on-outlined: rgba(226, 3, 55, 1);
+  --eds-color-text-button-danger-on-outlined-hover: rgba(144, 4, 44, 1);
+  --eds-color-text-button-danger-on-outlined-pressed: rgba(80, 0, 23, 1);
+  --eds-color-text-button-disabled: rgba(190, 190, 190, 1);
+  --eds-color-text-quaternary: rgba(158, 158, 158, 1);
+  --eds-color-text-on-overlay: rgba(255, 255, 255, 1);
+  --eds-color-text-banner-info: rgba(4, 94, 141, 1);
+  --eds-color-text-banner-success: rgba(21, 104, 45, 1);
+  --eds-color-text-banner-warning: rgba(127, 70, 0, 1);
+  --eds-color-text-banner-error: rgba(144, 4, 44, 1);
+  --eds-color-text-card-info: rgba(4, 94, 141, 1);
+  --eds-color-text-card-success: rgba(21, 104, 45, 1);
+  --eds-color-text-card-warning: rgba(127, 70, 0, 1);
+  --eds-color-text-card-error: rgba(144, 4, 44, 1);
+  --eds-color-text-chip-info: rgba(4, 94, 141, 1);
+  --eds-color-text-chip-info-hover: rgba(3, 65, 135, 1);
+  --eds-color-text-chip-success: rgba(21, 104, 45, 1);
+  --eds-color-text-chip-success-hover: rgba(32, 79, 31, 1);
+  --eds-color-text-chip-warning: rgba(127, 70, 0, 1);
+  --eds-color-text-chip-warning-hover: rgba(100, 55, 0, 1);
+  --eds-color-text-chip-error: rgba(144, 4, 44, 1);
+  --eds-color-text-chip-error-hover: rgba(112, 0, 32, 1);
+  --eds-color-text-chip-neutral-resting: rgba(86, 86, 86, 1);
+  --eds-color-text-chip-neutral-resting-hover: rgba(61, 61, 61, 1);
+  --eds-color-text-chip-neutral-active: rgba(0, 112, 121, 1);
+  --eds-color-text-chip-neutral-active-hover: rgba(0, 79, 85, 1);
+  --eds-color-text-chip-neutral-disabled: rgba(190, 190, 190, 1);
+  --eds-color-icon-availability-available: rgba(56, 142, 54, 1);
+  --eds-color-icon-availability-away: rgba(173, 95, 0, 1);
+  --eds-color-icon-availability-busy: rgba(144, 4, 44, 1);
+  --eds-color-icon-availability-do-not-disturb: rgba(144, 4, 44, 1);
+  --eds-color-icon-interactive-active-on-ghost: rgba(0, 112, 121, 1);
+  --eds-color-icon-interactive-active-on-ghost-hover: rgba(0, 79, 85, 1);
+  --eds-color-icon-interactive-active-on-ghost-pressed: rgba(3, 50, 53, 1);
+  --eds-color-icon-interactive-active: rgba(0, 112, 121, 1);
+  --eds-color-icon-interactive-active-hover: rgba(0, 79, 85, 1);
+  --eds-color-icon-interactive-active-pressed: rgba(3, 50, 53, 1);
+  --eds-color-icon-interactive-active-neutral: rgba(61, 61, 61, 1);
+  --eds-color-icon-interactive-active-neutral-hover: rgba(31, 31, 31, 1);
+  --eds-color-icon-interactive-active-neutral-pressed: rgba(23, 23, 23, 1);
+  --eds-color-icon-interactive-resting: rgba(111, 111, 111, 1);
+  --eds-color-icon-interactive-resting-hover: rgba(86, 86, 86, 1);
+  --eds-color-icon-interactive-resting-pressed: rgba(61, 61, 61, 1);
+  --eds-color-icon-interactive-disabled: rgba(190, 190, 190, 1);
+  --eds-color-icon-primary-alt: rgba(61, 61, 61, 1);
+  --eds-color-icon-primary: rgba(61, 61, 61, 1);
+  --eds-color-icon-secondary: rgba(86, 86, 86, 1);
+  --eds-color-icon-tertiary: rgba(111, 111, 111, 1);
+  --eds-color-icon-quaternary: rgba(158, 158, 158, 1);
+  --eds-color-icon-on-overlay: rgba(255, 255, 255, 1);
+  --eds-color-icon-inputs-asterix: rgba(226, 3, 55, 1);
+  --eds-color-icon-inputs-info-resting: rgba(0, 132, 196, 1);
+  --eds-color-icon-inputs-info-active: rgba(4, 94, 141, 1);
+  --eds-color-icon-inputs-success-resting: rgba(63, 161, 61, 1);
+  --eds-color-icon-inputs-success-active: rgba(49, 122, 47, 1);
+  --eds-color-icon-inputs-warning-resting: rgba(229, 126, 0, 1);
+  --eds-color-icon-inputs-warning-active: rgba(153, 85, 0, 1);
+  --eds-color-icon-inputs-error-resting: rgba(226, 3, 55, 1);
+  --eds-color-icon-inputs-error-active: rgba(144, 4, 44, 1);
+  --eds-color-icon-inputs-helper-info: rgba(4, 94, 141, 1);
+  --eds-color-icon-inputs-helper-success: rgba(21, 104, 45, 1);
+  --eds-color-icon-inputs-helper-warning: rgba(127, 70, 0, 1);
+  --eds-color-icon-inputs-helper-error: rgba(144, 4, 44, 1);
+  --eds-color-icon-button-primary-on-filled: rgba(255, 255, 255, 1);
+  --eds-color-icon-button-primary-on-outlined: rgba(0, 112, 121, 1);
+  --eds-color-icon-button-primary-on-outlined-hover: rgba(0, 79, 85, 1);
+  --eds-color-icon-button-primary-on-outlined-pressed: rgba(3, 50, 53, 1);
+  --eds-color-icon-button-secondary-on-filled: rgba(255, 255, 255, 1);
+  --eds-color-icon-button-secondary-on-outlined: rgba(3, 72, 107, 1);
+  --eds-color-icon-button-secondary-on-outlined-hover: rgba(2, 49, 74, 1);
+  --eds-color-icon-button-secondary-on-outlined-pressed: rgba(3, 39, 58, 1);
+  --eds-color-icon-button-danger-on-filled: rgba(255, 255, 255, 1);
+  --eds-color-icon-button-danger-on-outlined: rgba(226, 3, 55, 1);
+  --eds-color-icon-button-danger-on-outlined-hover: rgba(144, 4, 44, 1);
+  --eds-color-icon-button-danger-on-outlined-pressed: rgba(80, 0, 23, 1);
+  --eds-color-icon-banner-info: rgba(4, 94, 141, 1);
+  --eds-color-icon-banner-success: rgba(21, 104, 45, 1);
+  --eds-color-icon-banner-warning: rgba(127, 70, 0, 1);
+  --eds-color-icon-banner-error: rgba(144, 4, 44, 1);
+  --eds-color-icon-card-info: rgba(4, 94, 141, 1);
+  --eds-color-icon-card-success: rgba(21, 104, 45, 1);
+  --eds-color-icon-card-warning: rgba(127, 70, 0, 1);
+  --eds-color-icon-card-error: rgba(144, 4, 44, 1);
+  --eds-color-icon-chip-info: rgba(4, 94, 141, 1);
+  --eds-color-icon-chip-info-hover: rgba(3, 72, 107, 1);
+  --eds-color-icon-chip-success: rgba(21, 104, 45, 1);
+  --eds-color-icon-chip-success-hover: rgba(32, 79, 31, 1);
+  --eds-color-icon-chip-warning: rgba(127, 70, 0, 1);
+  --eds-color-icon-chip-warning-hover: rgba(100, 55, 0, 1);
+  --eds-color-icon-chip-error: rgba(144, 4, 44, 1);
+  --eds-color-icon-chip-error-hover: rgba(112, 0, 32, 1);
+  --eds-color-icon-chip-neutral-resting: rgba(86, 86, 86, 1);
+  --eds-color-icon-chip-neutral-resting-hover: rgba(61, 61, 61, 1);
+  --eds-color-icon-chip-neutral-active: rgba(0, 112, 121, 1);
+  --eds-color-icon-chip-neutral-active-hover: rgba(0, 79, 85, 1);
+  --eds-color-icon-chip-neutral-disabled: rgba(190, 190, 190, 1);
+  --eds-color-border-interactive-resting: rgba(220, 220, 220, 1);
+  --eds-color-border-interactive-resting-hover: rgba(190, 190, 190, 1);
+  --eds-color-border-interactive-resting-pressed: rgba(158, 158, 158, 1);
+  --eds-color-border-interactive-active: rgba(0, 112, 121, 1);
+  --eds-color-border-interactive-active-hover: rgba(0, 79, 85, 1);
+  --eds-color-border-interactive-active-pressed: rgba(3, 50, 53, 1);
+  --eds-color-border-interactive-disabled: rgba(220, 220, 220, 1);
+  --eds-color-border-inputs-info-default: rgba(0, 132, 196, 1);
+  --eds-color-border-inputs-info-active: rgba(4, 94, 141, 1);
+  --eds-color-border-inputs-success-default: rgba(63, 161, 61, 1);
+  --eds-color-border-inputs-success-active: rgba(49, 122, 47, 1);
+  --eds-color-border-inputs-default: rgba(179, 179, 179, 1);
+  --eds-color-border-inputs-warning-default: rgba(229, 126, 0, 1);
+  --eds-color-border-inputs-warning-active: rgba(153, 85, 0, 1);
+  --eds-color-border-inputs-active: rgba(0, 112, 121, 1);
+  --eds-color-border-inputs-error-default: rgba(226, 3, 55, 1);
+  --eds-color-border-inputs-error-active: rgba(144, 4, 44, 1);
+  --eds-color-border-chip-info: rgba(0, 132, 196, 1);
+  --eds-color-border-chip-info-hover: rgba(3, 65, 135, 1);
+  --eds-color-border-chip-success: rgba(63, 161, 61, 1);
+  --eds-color-border-chip-success-hover: rgba(32, 79, 31, 1);
+  --eds-color-border-chip-warning: rgba(229, 126, 0, 1);
+  --eds-color-border-chip-warning-hover: rgba(100, 55, 0, 1);
+  --eds-color-border-chip-error: rgba(226, 3, 55, 1);
+  --eds-color-border-chip-error-hover: rgba(112, 0, 32, 1);
+  --eds-color-border-chip-neutral-resting: rgba(220, 220, 220, 1);
+  --eds-color-border-chip-neutral-resting-hover: rgba(86, 86, 86, 1);
+  --eds-color-border-chip-neutral-active: rgba(185, 215, 218, 1);
+  --eds-color-border-chip-neutral-active-hover: rgba(0, 112, 121, 1);
+  --eds-color-border-chip-neutral-disabled: rgba(220, 220, 220, 1);
+  --eds-color-border-banner-info: rgba(213, 234, 244, 1);
+  --eds-color-border-banner-success: rgba(217, 247, 226, 1);
+  --eds-color-border-banner-warning: rgba(255, 231, 214, 1);
+  --eds-color-border-banner-error: rgba(255, 210, 209, 1);
+  --eds-color-border-card-info: rgba(204, 239, 255, 1);
+  --eds-color-border-card-success: rgba(217, 247, 226, 1);
+  --eds-color-border-card-warning: rgba(255, 231, 214, 1);
+  --eds-color-border-card-error: rgba(255, 210, 209, 1);
+  --eds-color-border-default: rgba(220, 220, 220, 1);
+  --eds-color-border-button-primary-enabled: rgba(0, 112, 121, 1);
+  --eds-color-border-button-primary-hover: rgba(0, 79, 85, 1);
+  --eds-color-border-button-primary-pressed: rgba(3, 50, 53, 1);
+  --eds-color-border-button-secondary-enabled: rgba(4, 94, 141, 1);
+  --eds-color-border-button-secondary-hover: rgba(2, 49, 74, 1);
+  --eds-color-border-button-secondary-pressed: rgba(3, 39, 58, 1);
+  --eds-color-border-button-danger-enabled: rgba(226, 3, 55, 1);
+  --eds-color-border-button-danger-hover: rgba(144, 4, 44, 1);
+  --eds-color-border-button-danger-pressed: rgba(80, 0, 23, 1);
+  --eds-color-border-button-disabled: rgba(207, 207, 207, 1);
+  --eds-color-border-alternative: rgba(247, 247, 247, 1);
+  --eds-color-border-ui-shell: rgba(247, 247, 247, 1);
+  --eds-color-surface-elevation-level-1: rgba(255, 255, 255, 1);
+  --eds-color-surface-elevation-level-2: rgba(255, 255, 255, 1);
+  --eds-color-surface-elevation-level-3: rgba(255, 255, 255, 1);
+  --eds-color-surface-elevation-level-4: rgba(255, 255, 255, 1);
+  --eds-color-surface-interactive-resting: rgba(255, 255, 255, 0);
+  --eds-color-surface-interactive-resting-hover: rgba(220, 220, 220, 1);
+  --eds-color-surface-interactive-resting-pressed: rgba(190, 190, 190, 1);
+  --eds-color-surface-interactive-active: rgba(222, 237, 238, 1);
+  --eds-color-surface-interactive-active-hover: rgba(201, 224, 226, 1);
+  --eds-color-surface-interactive-active-pressed: rgba(168, 207, 209, 1);
+  --eds-color-surface-interactive-active-on-elevation: rgba(222, 237, 238, 1);
+  --eds-color-surface-interactive-active-on-elevation-hover: rgba(201, 224, 226, 1);
+  --eds-color-surface-interactive-active-on-elevation-pressed: rgba(168, 207, 209, 1);
+  --eds-color-surface-interactive-disabled: rgba(255, 255, 255, 0);
+  --eds-color-surface-inputs-default: rgba(247, 247, 247, 1);
+  --eds-color-surface-inputs-on-alternative: rgba(255, 255, 255, 1);
+  --eds-color-surface-chip-info: rgba(223, 239, 247, 1);
+  --eds-color-surface-chip-info-hover: rgba(223, 239, 247, 1);
+  --eds-color-surface-chip-success: rgba(230, 250, 236, 1);
+  --eds-color-surface-chip-success-hover: rgba(230, 250, 236, 1);
+  --eds-color-surface-chip-warning: rgba(255, 231, 214, 1);
+  --eds-color-surface-chip-warning-hover: rgba(255, 231, 214, 1);
+  --eds-color-surface-chip-error: rgba(255, 225, 224, 1);
+  --eds-color-surface-chip-error-hover: rgba(255, 225, 224, 1);
+  --eds-color-surface-chip-neutral-resting: rgba(234, 234, 234, 1);
+  --eds-color-surface-chip-neutral-resting-hover: rgba(234, 234, 234, 1);
+  --eds-color-surface-chip-neutral-active: rgba(230, 243, 244, 1);
+  --eds-color-surface-chip-neutral-active-hover: rgba(230, 243, 244, 1);
+  --eds-color-surface-chip-neutral-disabled: rgba(234, 234, 234, 1);
+  --eds-color-surface-banner-info: rgba(213, 234, 244, 1);
+  --eds-color-surface-banner-success: rgba(217, 247, 226, 1);
+  --eds-color-surface-banner-warning: rgba(255, 231, 214, 1);
+  --eds-color-surface-banner-error: rgba(255, 210, 209, 1);
+  --eds-color-surface-card-elevation-level-1-info: rgba(213, 234, 244, 1);
+  --eds-color-surface-card-elevation-level-1-success: rgba(217, 247, 226, 1);
+  --eds-color-surface-card-elevation-level-1-warning: rgba(255, 231, 214, 1);
+  --eds-color-surface-card-elevation-level-1-error: rgba(255, 210, 209, 1);
+  --eds-color-surface-card-elevation-level-2-info: rgba(213, 234, 244, 1);
+  --eds-color-surface-card-elevation-level-2-success: rgba(217, 247, 226, 1);
+  --eds-color-surface-card-elevation-level-2-warning: rgba(255, 231, 214, 1);
+  --eds-color-surface-card-elevation-level-2-error: rgba(255, 210, 209, 1);
+  --eds-color-surface-none: rgba(255, 255, 255, 0);
+  --eds-color-surface-canvas: rgba(255, 255, 255, 1);
+  --eds-color-surface-canvas-alternative: rgba(247, 247, 247, 1);
+  --eds-color-surface-table-header-resting: rgba(247, 247, 247, 1);
+  --eds-color-surface-table-header-resting-hover: rgba(220, 220, 220, 1);
+  --eds-color-surface-table-header-active: rgba(234, 234, 234, 1);
+  --eds-color-surface-table-header-active-hover: rgba(220, 220, 220, 1);
+  --eds-color-surface-table-header-on-alternative-resting: rgba(255, 255, 255, 1);
+  --eds-color-surface-table-header-on-alternative-resting-hover: rgba(220, 220, 220, 1);
+  --eds-color-surface-table-header-on-alternative-active: rgba(234, 234, 234, 1);
+  --eds-color-surface-table-header-on-alternative-active-hover: rgba(234, 234, 234, 1);
+  --eds-color-surface-table-header-on-alternative-disabled: rgba(255, 255, 255, 1);
+  --eds-color-surface-table-header-disabled: rgba(247, 247, 247, 1);
+  --eds-color-surface-table-cell-resting: rgba(255, 255, 255, 0);
+  --eds-color-surface-table-cell-resting-hover: rgba(220, 220, 220, 1);
+  --eds-color-surface-table-cell-disabled: rgba(255, 255, 255, 0);
+  --eds-color-surface-table-cell-error: rgba(255, 210, 209, 1);
+  --eds-color-surface-scrim: rgba(0, 0, 0, 0.4);
+  --eds-color-surface-overlay: rgba(0, 0, 0, 0.8);
+  --eds-color-surface-ui-shell: rgba(255, 255, 255, 1);
+  --eds-color-surface-button-primary-filled-enabled: rgba(0, 112, 121, 1);
+  --eds-color-surface-button-primary-filled-hover: rgba(0, 79, 85, 1);
+  --eds-color-surface-button-primary-filled-pressed: rgba(3, 50, 53, 1);
+  --eds-color-surface-button-primary-outlined-enabled: rgba(255, 255, 255, 0);
+  --eds-color-surface-button-primary-outlined-hover: rgba(222, 237, 238, 1);
+  --eds-color-surface-button-primary-outlined-pressed: rgba(185, 215, 218, 1);
+  --eds-color-surface-button-secondary-filled-enabled: rgba(3, 72, 107, 1);
+  --eds-color-surface-button-secondary-filled-hover: rgba(2, 49, 74, 1);
+  --eds-color-surface-button-secondary-filled-pressed: rgba(3, 39, 58, 1);
+  --eds-color-surface-button-secondary-outlined-enabled: rgba(255, 255, 255, 0);
+  --eds-color-surface-button-secondary-outlined-hover: rgba(216, 231, 240, 1);
+  --eds-color-surface-button-secondary-outlined-pressed: rgba(175, 206, 224, 1);
+  --eds-color-surface-button-danger-filled-enabled: rgba(226, 3, 55, 1);
+  --eds-color-surface-button-danger-filled-hover: rgba(144, 4, 44, 1);
+  --eds-color-surface-button-danger-filled-pressed: rgba(80, 0, 23, 1);
+  --eds-color-surface-button-danger-outlined-enabled: rgba(255, 255, 255, 0);
+  --eds-color-surface-button-danger-outlined-hover: rgba(255, 210, 209, 1);
+  --eds-color-surface-button-danger-outlined-pressed: rgba(255, 171, 171, 1);
+  --eds-color-surface-button-disabled-filled: rgba(234, 234, 234, 1);
+  --eds-color-surface-button-disabled-outlined: rgba(255, 255, 255, 0);
+  --eds-color-surface-placeholder-image: rgba(220, 220, 220, 1);
+}
+/**
+ * Do not edit directly
+ * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * @tokens Borders
+ * @presenter Border
+ */
+
+:root {
+  --eds-border-button-danger-pressed: 1px solid var(--eds-color-border-button-danger-pressed);
+  --eds-border-button-danger-hover: 1px solid var(--eds-color-border-button-danger-hover);
+  --eds-border-button-danger-enabled: 1px solid var(--eds-color-border-button-danger-enabled);
+  --eds-border-button-secondary-pressed: 1px solid var(--eds-color-border-button-secondary-pressed);
+  --eds-border-button-secondary-hover: 1px solid var(--eds-color-border-button-secondary-hover);
+  --eds-border-button-secondary-enabled: 1px solid var(--eds-color-border-button-secondary-enabled);
+  --eds-border-button-primary-pressed: 1px solid var(--eds-color-border-button-primary-pressed);
+  --eds-border-button-primary-hover: 1px solid var(--eds-color-border-button-primary-hover);
+  --eds-border-button-primary-enabled: 1px solid var(--eds-color-border-button-primary-enabled);
+}
+/**
+ * Do not edit directly
+ * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * @tokens Shadows
+ * @presenter Shadow
+ */
+
+:root {
+  --eds-shadows-elevation-0: 0px 0px 1px 0px rgba(0, 0, 0, 0.14);
+  --eds-shadows-elevation-100: 0px 3px 4px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
+  --eds-shadows-elevation-200: 0px 1px 10px 0px rgba(0, 0, 0, 0.20), 0px 4px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
+  --eds-shadows-elevation-300: 0px 4px 5px 0px rgba(0, 0, 0, 0.20), 0px 3px 14px 0px rgba(0, 0, 0, 0.12), 0px 8px 10px 0px rgba(0, 0, 0, 0.14);
+  --eds-shadows-elevation-400: 0px 7px 8px 0px rgba(0, 0, 0, 0.20), 0px 5px 22px 0px rgba(0, 0, 0, 0.12), 0px 12px 17px 0px rgba(0, 0, 0, 0.14);
+  --eds-shadows-elevation-500: 0px 11px 15px 0px rgba(0, 0, 0, 0.20), 0px 9px 46px 0px rgba(0, 0, 0, 0.12), 0px 24px 38px 0px rgba(0, 0, 0, 0.14);
+}
+/**
+ * Do not edit directly
+ * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * @tokens Fonts
+ * @presenter FontSize
+ */
+
+:root {
+  --eds-typography-lg-default: 386 18.5px/24px "Equinor Variable";
+  --eds-typography-lg-bolder: 469 18.5px/24px "Equinor Variable";
+  --eds-typography-lg-squished: 386 18.5px/20px "Equinor Variable";
+  --eds-typography-lg-squished-bolder: 469 18.5px/20px "Equinor Variable";
+  --eds-typography-base-default: 400 16px/20px "Equinor Variable";
+  --eds-typography-base-bolder: 500 16px/20px "Equinor Variable";
+  --eds-typography-base-squished: 400 16px/16px "Equinor Variable";
+  --eds-typography-base-squished-bolder: 500 16px/16px "Equinor Variable";
+  --eds-typography-sm-default: 439 14px/20px "Equinor Variable";
+  --eds-typography-sm-bolder: 529 14px/20px "Equinor Variable";
+  --eds-typography-sm-squished: 439 14px/16px "Equinor Variable";
+  --eds-typography-sm-squished-bolder: 529 14px/16px "Equinor Variable";
+  --eds-typography-xs-default: 471 12px/16px "Equinor Variable";
+  --eds-typography-xs-bolder: 563 12px/16px "Equinor Variable";
+  --eds-typography-xs-squished: 471 12px/12px "Equinor Variable";
+  --eds-typography-xs-squished-bolder: 563 12px/12px "Equinor Variable";
+  --eds-typography-xxs-default: 496 10.5px/16px "Equinor Variable";
+  --eds-typography-xxs-bolder: 612 10.5px/16px "Equinor Variable";
+  --eds-typography-xxs-squished: 496 10.5px/12px "Equinor Variable";
+  --eds-typography-xxs-squished-bolder: 612 10.5px/12px "Equinor Variable";
+}
