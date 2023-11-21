@@ -3,10 +3,10 @@
  * For use as value of fontSize property in a Tailwind theme/extend object
  * 
  * Do not edit directly
- * Generated on Mon, 20 Nov 2023 13:05:34 GMT
+ * Generated on Tue, 21 Nov 2023 13:48:18 GMT
  */
 
-module.exports = {
+export default {
   "lg": ["18.5px",{"lineHeight":"24px","fontWeight":386}],
   "lg-bolder": ["18.5px",{"lineHeight":"24px","fontWeight":469}],
   "lg-squished": ["18.5px",{"lineHeight":"20px","fontWeight":386}],
