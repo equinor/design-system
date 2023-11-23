@@ -3,10 +3,10 @@
  * For use as value of fontFamily property in a Tailwind theme/extend object
  * 
  * Do not edit directly
- * Generated on Tue, 21 Nov 2023 13:48:18 GMT
+ * Generated on Thu, 23 Nov 2023 13:38:03 GMT
  */
 
-export default {
+export const fontFamily = {
   "sans": "\"Equinor Variable\"",
   "mono": "\"Equinor Mono\""
 };

@@ -14,10 +14,10 @@
  * For more information, check out https://tailwindcss.com/docs/dark-mode.
  * 
  * Do not edit directly
- * Generated on Tue, 21 Nov 2023 13:48:18 GMT
+ * Generated on Thu, 23 Nov 2023 13:38:03 GMT
  */
 
-export default {
+export const colors = {
   "neutral-0": "rgba(255, 255, 255, 1)",
   "neutral-100": "rgba(247, 247, 247, 1)",
   "neutral-200": "rgba(234, 234, 234, 1)",
