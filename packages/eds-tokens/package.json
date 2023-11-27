@@ -19,9 +19,7 @@
     "./css/eds-tokens-border.css": "./build/css/eds-tokens-border.css",
     "./css/eds-density-spacious.css": "./build/css/eds-density-spacious.css",
     "./css/eds-tokens-shadow.css": "./build/css/eds-tokens-shadow.css",
-    "./tailwind/eds-colors-primitive": "./build/tailwind/eds-colors-primitive.tailwind.js",
-    "./tailwind/eds-font-family": "./build/tailwind/eds-font-family.tailwind.js",
-    "./tailwind/eds-typography": "./build/tailwind/eds-typography.tailwind.js"
+    "./tailwind": "./build/tailwind/index.js"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
