@@ -1,9 +1,9 @@
 /**
  * Do not edit directly
- * Generated on Thu, 23 Nov 2023 13:38:03 GMT
+ * Generated on Thu, 23 Nov 2023 15:30:25 GMT
  */
 
-declare const fontFamily: {
+export declare const fontFamily: {
 /** "The Equinor typeface as a variable font, but only with uprights – as we don’t use italics in EDS."
  */
 'sans': string,
@@ -11,5 +11,3 @@ declare const fontFamily: {
  */
 'mono': string,
 }
-
-export = fontFamily

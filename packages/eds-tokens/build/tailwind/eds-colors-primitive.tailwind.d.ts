@@ -1,9 +1,9 @@
 /**
  * Do not edit directly
- * Generated on Thu, 23 Nov 2023 13:38:03 GMT
+ * Generated on Thu, 23 Nov 2023 15:30:25 GMT
  */
 
-declare const colors: {
+export declare const colors: {
 'neutral-0': string,
 'neutral-100': string,
 'neutral-200': string,
@@ -331,5 +331,3 @@ declare const colors: {
 'moss-green-sat-1400': string,
 'moss-green-sat-1450': string,
 }
-
-export = colors
