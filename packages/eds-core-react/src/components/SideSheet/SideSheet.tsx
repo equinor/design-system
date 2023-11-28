@@ -25,7 +25,7 @@ export type SideSheetProps = {
   /** OnClick function (close) */
   onClose?: (Event) => void
   /** Open / close Side Sheet */
-  open?: boolean
+  open: boolean
   /** Override width of Side Sheet */
   width?: string
 } & HTMLAttributes<HTMLDivElement>
@@ -52,6 +52,9 @@ const Header = styled.div`
   align-items: center;
   padding-bottom: 24px;
   padding-right: 10px;
+  & > button {
+    margin-left: auto;
+  }
 `
 
 export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
@@ -59,7 +62,7 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
     {
       variant = 'medium',
       width,
-      title = '',
+      title,
       children,
       open = true,
       onClose,
@@ -73,21 +76,24 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
       width: width || variants[variant],
     }
 
-    // Controller must set open={false} when pressing the close button
     return (
       open && (
         <StyledSideSheet {...props}>
-          <Header>
-            <Typography variant="h2">{title}</Typography>
-            <Button
-              variant="ghost_icon"
-              onClick={onClose}
-              title="Close"
-              aria-label="Close sidesheet"
-            >
-              <Icon name="clear" data={clear} />
-            </Button>
-          </Header>
+          {(title || onClose) && (
+            <Header>
+              {title && <Typography variant="h2">{title}</Typography>}
+              {onClose && (
+                <Button
+                  variant="ghost_icon"
+                  onClick={onClose}
+                  title="Close"
+                  aria-label="Close sidesheet"
+                >
+                  <Icon name="clear" data={clear} />
+                </Button>
+              )}
+            </Header>
+          )}
           {children}
         </StyledSideSheet>
       )
