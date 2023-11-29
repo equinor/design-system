@@ -5,6 +5,7 @@ import { DebouncedInput } from './DebouncedInput'
 import { Icon, Popover, Button } from '@equinor/eds-core-react'
 import { filter_alt, filter_alt_active } from '@equinor/eds-icons'
 import styled from 'styled-components'
+import { tokens } from '@equinor/eds-tokens'
 
 type FilterProps<T = unknown> = {
   column: Column<T>
@@ -85,6 +86,7 @@ export function Filter<T = unknown>({ column, table }: FilterProps<T>) {
         variant={'ghost_icon'}
       >
         <Icon
+          color={tokens.colors.text.static_icons__default.hex}
           data={
             hasActiveFilters(columnFilterValue) ? filter_alt_active : filter_alt
           }

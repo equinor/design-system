@@ -35,10 +35,18 @@ type ResizeProps = {
   $isResizing: boolean
 }
 
+const ResizeInner = styled.div`
+  width: 2px;
+  opacity: 0;
+  height: 100%;
+`
+
 const Resizer = styled.div<ResizeProps>`
   transform: ${(props) =>
     props.$columnResizeMode === 'onEnd' ? 'translateX(0px)' : 'none'};
-  opacity: ${(props) => (props.$isResizing ? 1 : 0)};
+  ${ResizeInner} {
+    opacity: ${(props) => (props.$isResizing ? 1 : 0)};
+  }
 
   position: absolute;
   right: 0;
@@ -48,13 +56,15 @@ const Resizer = styled.div<ResizeProps>`
   cursor: col-resize;
   user-select: none;
   touch-action: none;
+  display: flex;
+  justify-content: flex-end;
 `
 
 const Cell = styled(Table.Cell)<{ sticky: boolean }>`
   font-weight: bold;
   height: 30px;
   position: ${(p) => (p.sticky ? 'sticky' : 'relative')};
-  &:hover ${Resizer} {
+  &:hover ${ResizeInner} {
     background: ${tokens.colors.interactive.primary__hover.rgba};
     opacity: 1;
   }
@@ -114,7 +124,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           $columnResizeMode={columnResizeMode}
           className={'resize-handle'}
           data-testid={'resize-handle'}
-        />
+        >
+          <ResizeInner />
+        </Resizer>
       )}
     </Cell>
   )

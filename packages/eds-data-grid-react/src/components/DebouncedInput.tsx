@@ -55,6 +55,7 @@ export function DebouncedInput({
         <>
           <Autocomplete
             options={values}
+            autoWidth={true}
             multiple={true}
             optionComponent={(opt) =>
               opt === 'NULL_OR_UNDEFINED' ? '<Blank>' : opt
