@@ -96,6 +96,11 @@ export type EdsDataGridProps<T> = {
    */
   pageSize?: number
   /**
+   * Add this if you want to implement a custom pagination component
+   * Useful for e.g server-side paging
+   */
+  externalPaginator?: ReactElement
+  /**
    * The message to display when there are no rows
    * @default undefined
    */
@@ -191,6 +196,7 @@ export function EdsDataGrid<T>({
   rowStyle,
   headerClass,
   headerStyle,
+  externalPaginator,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -467,17 +473,21 @@ export function EdsDataGrid<T>({
                 .rows.map((row) => <TableRow key={row.id} row={row} />)}
           </Table.Body>
         </Table>
-        {enablePagination && (
-          <div style={{ maxWidth: `${table.getTotalSize()}px` }}>
-            <Pagination
-              totalItems={table.getFilteredRowModel().rows.length}
-              withItemIndicator={true}
-              itemsPerPage={page.pageSize}
-              onChange={(e, p) => setPage((s) => ({ ...s, pageIndex: p - 1 }))}
-              defaultPage={1}
-            />
-          </div>
-        )}
+        {externalPaginator
+          ? externalPaginator
+          : enablePagination && (
+              <div style={{ maxWidth: `${table.getTotalSize()}px` }}>
+                <Pagination
+                  totalItems={table.getFilteredRowModel().rows.length}
+                  withItemIndicator={true}
+                  itemsPerPage={page.pageSize}
+                  onChange={(e, p) =>
+                    setPage((s) => ({ ...s, pageIndex: p - 1 }))
+                  }
+                  defaultPage={1}
+                />
+              </div>
+            )}
       </div>
       {debug && enableVirtual && (
         <span>
