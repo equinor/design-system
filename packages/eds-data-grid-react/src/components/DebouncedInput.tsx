@@ -1,6 +1,11 @@
 /* istanbul ignore file */
 import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from 'react'
-import { Autocomplete, EdsProvider, Input } from '@equinor/eds-core-react'
+import {
+  Autocomplete,
+  InputWrapper,
+  Input,
+  Chip,
+} from '@equinor/eds-core-react'
 
 type Value = string | number | Array<string | number>
 // File ignored, as relevant actions are covered via Filter.test.tsx
@@ -9,12 +14,14 @@ export function DebouncedInput({
   values,
   onChange,
   debounce = 500,
+  label,
   ...props
 }: {
   value: Value
   values: Array<string | number>
   onChange: (value: Value) => void
   debounce?: number
+  label?: string
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
   const [value, setValue] = useState<Value>(initialValue)
 
@@ -32,31 +39,62 @@ export function DebouncedInput({
   }, [value])
 
   return (
-    <EdsProvider density="compact">
+    <>
       {props.type === 'number' ? (
-        <Input
-          type={'number'}
-          placeholder={props.placeholder ?? 'Search'}
-          value={value}
-          onChange={(e: ChangeEvent) =>
-            setValue((e.target as HTMLInputElement).valueAsNumber)
-          }
-        />
+        <InputWrapper label={props.placeholder}>
+          <Input
+            type={'number'}
+            placeholder={'0'}
+            value={value}
+            onChange={(e: ChangeEvent) =>
+              setValue((e.target as HTMLInputElement).valueAsNumber)
+            }
+          />
+        </InputWrapper>
       ) : (
-        <Autocomplete
-          options={values}
-          multiple={true}
-          optionComponent={(opt) =>
-            opt === 'NULL_OR_UNDEFINED' ? '<Blank>' : opt
-          }
-          data-testid={'autocomplete'}
-          /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-          // @ts-ignore
-          label={null}
-          placeholder={props.placeholder ?? 'Search'}
-          onOptionsChange={(c) => setValue(c.selectedItems)}
-        />
+        <>
+          <Autocomplete
+            options={values}
+            multiple={true}
+            optionComponent={(opt) =>
+              opt === 'NULL_OR_UNDEFINED' ? '<Blank>' : opt
+            }
+            data-testid={'autocomplete'}
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+            label={`Select ${label ?? ''}`}
+            placeholder={props.placeholder ?? 'Search'}
+            disablePortal={
+              false /*TODO: Check with Oddbjørn re. sizing/position*/
+            }
+            selectedOptions={value as Array<string>}
+            onOptionsChange={(c) => setValue(c.selectedItems)}
+          />
+          <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '8px' }}>
+            {(value as Array<string>).map((v) => (
+              <Chip
+                title={v}
+                onKeyDownCapture={(event) => {
+                  if (['Backspace', 'Delete'].includes(event.key)) {
+                    onChange(
+                      (value as Array<string>).filter((item) => item !== v),
+                    )
+                  }
+                }}
+                style={{ margin: '4px' }}
+                onDelete={() =>
+                  onChange(
+                    (value as Array<string>).filter((item) => item !== v),
+                  )
+                }
+                key={v}
+              >
+                {v.slice(0, 20)}
+                {v.length > 20 ? '...' : ''}
+              </Chip>
+            ))}
+          </div>
+        </>
       )}
-    </EdsProvider>
+    </>
   )
 }

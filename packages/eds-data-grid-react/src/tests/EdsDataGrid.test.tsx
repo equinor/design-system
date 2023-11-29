@@ -25,7 +25,7 @@ describe('EdsDataGrid', () => {
 
   describe('Filtering', () => {
     it('should have built-in filtering if enabled', async () => {
-      render(
+      const {} = render(
         <EdsDataGrid
           enableColumnFiltering={true}
           columns={columns}
@@ -34,8 +34,20 @@ describe('EdsDataGrid', () => {
       )
       expect(screen.getAllByRole('columnheader').length).toBe(columns.length)
       expect(
-        within(screen.getAllByRole('columnheader')[0]).getByRole('combobox'),
+        within(screen.getAllByRole('columnheader')[0]).getByTestId(
+          'open-filters',
+        ),
       ).toBeTruthy()
+
+      const header = screen.getAllByRole('columnheader')[0]
+      const button = within(header).getByTestId('open-filters')
+      fireEvent(
+        button,
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        }),
+      )
 
       expect(
         within(screen.getAllByRole('listbox')[0]).queryAllByRole('option')
