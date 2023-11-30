@@ -4,9 +4,7 @@ import { columns, groupedColumns, Photo } from './stories/columns'
 import { data } from './stories/data'
 import { CSSProperties, useEffect, useState } from 'react'
 import {
-  Banner,
   Button,
-  Card,
   Checkbox,
   Pagination,
   Paper,

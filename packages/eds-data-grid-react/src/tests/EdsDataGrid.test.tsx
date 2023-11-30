@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
 import { EdsDataGrid } from '../EdsDataGrid'
 import { columns } from './columns'
 import { Data, data } from './data'
@@ -25,7 +25,7 @@ describe('EdsDataGrid', () => {
 
   describe('Filtering', () => {
     it('should have built-in filtering if enabled', async () => {
-      const {} = render(
+      render(
         <EdsDataGrid
           enableColumnFiltering={true}
           columns={columns}

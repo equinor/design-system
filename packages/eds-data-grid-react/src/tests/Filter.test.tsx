@@ -8,7 +8,7 @@ import {
 import { Filter } from '../components/Filter'
 import { data, Data } from './data'
 import { columns } from './columns'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
 
 const openPopover = (header: HTMLElement) => {
   const button = within(header).getByTestId('open-filters')
@@ -148,12 +148,6 @@ describe('Filter', () => {
       ) as Array<HTMLInputElement>
       const min = inputs[0]
       const max = inputs[1]
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const minValue = Math.min(...data.map((v) => v.qty))
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const maxValue = Math.max(...data.map((v) => v.qty))
       expect(min.placeholder).toBe(`0`)
       expect(max.placeholder).toBe(`0`)
     })
