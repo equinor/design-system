@@ -14,6 +14,8 @@ const config: Config = {
       '<rootDir>/node_modules/@equinor/eds-utils/src/test/__mocks__/styleMock.js',
     '^react$': '<rootDir>/node_modules/react',
     '^styled-components$': '<rootDir>/node_modules/styled-components',
+    '^@equinor/eds-core-react$':
+      '<rootDir>/node_modules/@equinor/eds-core-react/dist/esm/index.js',
   },
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   testEnvironment: 'jest-environment-jsdom',

@@ -35,10 +35,18 @@ type ResizeProps = {
   $isResizing: boolean
 }
 
+const ResizeInner = styled.div`
+  width: 2px;
+  opacity: 0;
+  height: 100%;
+`
+
 const Resizer = styled.div<ResizeProps>`
   transform: ${(props) =>
     props.$columnResizeMode === 'onEnd' ? 'translateX(0px)' : 'none'};
-  opacity: ${(props) => (props.$isResizing ? 1 : 0)};
+  ${ResizeInner} {
+    opacity: ${(props) => (props.$isResizing ? 1 : 0)};
+  }
 
   position: absolute;
   right: 0;
@@ -48,13 +56,15 @@ const Resizer = styled.div<ResizeProps>`
   cursor: col-resize;
   user-select: none;
   touch-action: none;
+  display: flex;
+  justify-content: flex-end;
 `
 
 const Cell = styled(Table.Cell)<{ sticky: boolean }>`
   font-weight: bold;
   height: 30px;
   position: ${(p) => (p.sticky ? 'sticky' : 'relative')};
-  &:hover ${Resizer} {
+  &:hover ${ResizeInner} {
     background: ${tokens.colors.interactive.primary__hover.rgba};
     opacity: 1;
   }
@@ -81,7 +91,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         colSpan: header.colSpan,
         style: {
           width: header.getSize(),
-          verticalAlign: ctx.enableColumnFiltering ? 'baseline' : 'middle',
+          verticalAlign: ctx.enableColumnFiltering ? 'top' : 'middle',
           ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
         },
       }}
@@ -91,18 +101,19 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           <span className="table-header-cell-label">
             {flexRender(header.column.columnDef.header, header.getContext())}
           </span>
-          {header.column.getCanFilter() ? (
-            // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-            <div onClick={(e) => e.stopPropagation()}>
-              <Filter column={header.column} table={table} />
-            </div>
-          ) : null}
         </div>
         {{
           asc: <Icon data={arrow_up} />,
           desc: <Icon data={arrow_down} />,
         }[header.column.getIsSorted() as string] ?? null}
+
+        {header.column.getCanFilter() ? (
+          // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+          <div onClick={(e) => e.stopPropagation()}>
+            <Filter column={header.column} table={table} />
+          </div>
+        ) : null}
       </>
       {columnResizeMode && (
         <Resizer
@@ -113,7 +124,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           $columnResizeMode={columnResizeMode}
           className={'resize-handle'}
           data-testid={'resize-handle'}
-        />
+        >
+          <ResizeInner />
+        </Resizer>
       )}
     </Cell>
   )

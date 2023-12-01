@@ -8,7 +8,18 @@ import {
 import { Filter } from '../components/Filter'
 import { data, Data } from './data'
 import { columns } from './columns'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
+
+const openPopover = (header: HTMLElement) => {
+  const button = within(header).getByTestId('open-filters')
+  fireEvent(
+    button,
+    new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+    }),
+  )
+}
 
 describe('Filter', () => {
   let table: Table<Data>
@@ -55,10 +66,14 @@ describe('Filter', () => {
       const { baseElement } = render(
         <Filter column={table.getColumn('status')} table={table} />,
       )
+      openPopover(baseElement)
       expect(within(baseElement).getAllByRole('combobox').length).toBe(1)
     })
     it('should have 2 inputs for number-columns', () => {
-      render(<Filter column={table.getColumn('numeric')} table={table} />)
+      const { baseElement } = render(
+        <Filter column={table.getColumn('numeric')} table={table} />,
+      )
+      openPopover(baseElement)
       expect(screen.queryAllByRole('spinbutton').length).toBe(2)
     })
   })
@@ -68,6 +83,7 @@ describe('Filter', () => {
       const { baseElement } = render(
         <Filter column={table.getColumn('status')} table={table} />,
       )
+      openPopover(baseElement)
       const input = within(baseElement).getByRole('combobox')
       const col = table.getColumn('status')
       const spy = jest.spyOn(col, 'setFilterValue')
@@ -90,6 +106,7 @@ describe('Filter', () => {
       const { baseElement } = render(
         <Filter column={table.getColumn('status')} table={table} />,
       )
+      openPopover(baseElement)
       const input = within(baseElement).getByRole('combobox')
       const col = table.getColumn('status')
       const spy = jest.spyOn(col, 'setFilterValue')
@@ -104,6 +121,7 @@ describe('Filter', () => {
       const { baseElement } = render(
         <Filter column={table.getColumn('numeric')} table={table} />,
       )
+      openPopover(baseElement)
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
@@ -122,20 +140,16 @@ describe('Filter', () => {
     it('should have min/max for numeric', () => {
       const col = table.getColumn('numeric')
       const { baseElement } = render(<Filter column={col} table={table} />)
+
+      openPopover(baseElement)
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
       ) as Array<HTMLInputElement>
       const min = inputs[0]
       const max = inputs[1]
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const minValue = Math.min(...data.map((v) => v.qty))
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const maxValue = Math.max(...data.map((v) => v.qty))
-      expect(min.placeholder).toBe(`Min (${minValue})`)
-      expect(max.placeholder).toBe(`Max (${maxValue})`)
+      expect(min.placeholder).toBe(`0`)
+      expect(max.placeholder).toBe(`0`)
     })
 
     it('should work with min/max if no faceted values', () => {
@@ -149,6 +163,7 @@ describe('Filter', () => {
       })
       const col = table.getColumn('numeric')
       const { baseElement } = render(<Filter column={col} table={table} />)
+      openPopover(baseElement)
       // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const inputs = within(baseElement).getAllByRole(
@@ -156,8 +171,8 @@ describe('Filter', () => {
       ) as Array<HTMLInputElement>
       const min = inputs[0]
       const max = inputs[1]
-      expect(min.placeholder).toBe(`Min `)
-      expect(max.placeholder).toBe(`Max `)
+      expect(min.placeholder).toBe(`0`)
+      expect(max.placeholder).toBe(`0`)
     })
   })
 })

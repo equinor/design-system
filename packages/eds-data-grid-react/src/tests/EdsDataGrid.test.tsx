@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
 import { EdsDataGrid } from '../EdsDataGrid'
 import { columns } from './columns'
 import { Data, data } from './data'
@@ -34,8 +34,20 @@ describe('EdsDataGrid', () => {
       )
       expect(screen.getAllByRole('columnheader').length).toBe(columns.length)
       expect(
-        within(screen.getAllByRole('columnheader')[0]).getByRole('combobox'),
+        within(screen.getAllByRole('columnheader')[0]).getByTestId(
+          'open-filters',
+        ),
       ).toBeTruthy()
+
+      const header = screen.getAllByRole('columnheader')[0]
+      const button = within(header).getByTestId('open-filters')
+      fireEvent(
+        button,
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        }),
+      )
 
       expect(
         within(screen.getAllByRole('listbox')[0]).queryAllByRole('option')

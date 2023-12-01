@@ -3,10 +3,17 @@ import { EdsDataGrid, EdsDataGridProps } from './EdsDataGrid'
 import { columns, groupedColumns, Photo } from './stories/columns'
 import { data } from './stories/data'
 import { CSSProperties, useEffect, useState } from 'react'
-import { Button, Checkbox, Paper, Typography } from '@equinor/eds-core-react'
+import {
+  Button,
+  Checkbox,
+  Pagination,
+  Paper,
+  Typography,
+} from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
 import { Column, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
+import { action } from '@storybook/addon-actions'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -55,6 +62,35 @@ export const Paging: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 Paging.args = {
   enablePagination: true,
   pageSize: 10,
+}
+
+export const ExternalPaging: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  return (
+    <>
+      <div>
+        <Typography variant={'body_long'}>
+          Using externalPaginator gives you control over setting the appropriate
+          rows yourself.
+        </Typography>
+        <Typography variant={'body_long'}>
+          This is useful for e.g server-side pagination
+        </Typography>
+      </div>
+      <EdsDataGrid
+        {...args}
+        externalPaginator={
+          <Pagination
+            itemsPerPage={10}
+            totalItems={40}
+            withItemIndicator
+            onChange={(event, page) => {
+              action(`Page changed`)(page)
+            }}
+          />
+        }
+      />
+    </>
+  )
 }
 
 export const ColumnGrouping: StoryFn<EdsDataGridProps<Photo>> = (args) => {

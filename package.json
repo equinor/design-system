@@ -25,7 +25,7 @@
     "build:storybook:data-grid": "pnpm --filter ./packages/eds-data-grid-react run build:storybook",
     "test": "pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab && pnpm run test:data-grid-react",
     "test:core-react": "pnpm --filter @equinor/eds-core-react run test",
-    "test:data-grid-react": "pnpm --filter @equinor/eds-core-react run test",
+    "test:data-grid-react": "pnpm --filter @equinor/eds-data-grid-react run test",
     "test:lab": "pnpm --filter @equinor/eds-lab-react run test",
     "test:utils": "pnpm --filter @equinor/eds-utils run test",
     "test:watch:core-react": "pnpm --filter @equinor/eds-core-react run test:watch",
