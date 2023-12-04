@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react'
-import { EdsDataGrid, EdsDataGridProps } from './EdsDataGrid'
+import { EdsDataGrid } from './EdsDataGrid'
 import { columns, groupedColumns, Photo } from './stories/columns'
 import { data } from './stories/data'
 import { CSSProperties, useEffect, useState } from 'react'
@@ -14,6 +14,7 @@ import page from './EdsDataGrid.docs.mdx'
 import { Column, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
+import { EdsDataGridProps } from './EdsDataGridProps'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -108,6 +109,31 @@ export const Sortable: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
 Sortable.args = {
   enableSorting: true,
+  columns: groupedColumns,
+  sortingState: [
+    {
+      desc: true,
+      id: 'id',
+    },
+  ],
+}
+
+export const ManualSorting: StoryFn<EdsDataGridProps<Photo>> = (
+  args: EdsDataGridProps<Photo>,
+) => {
+  return <EdsDataGrid {...args} />
+}
+
+ManualSorting.args = {
+  enableSorting: true,
+  manualSorting: true,
+  onSortingChange: (c) => {
+    if (typeof c === 'function') {
+      action('Change sorting')(c([]))
+    } else {
+      action('Change sorting')(c)
+    }
+  },
   columns: groupedColumns,
 }
 
