@@ -91,6 +91,13 @@ See [https://tanstack.com/table/v8/docs/api/features/sorting](Tanstack docs for 
 
 <Canvas of={ComponentStories.Sortable} />
 
+### External sorting
+
+It's also possible to handle sorting manually by setting manualSorting to `true` and listening on the onSortingChange prop.
+See [https://tanstack.com/table/v8/docs/api/features/sorting](Tanstack docs for more)
+
+<Canvas of={ComponentStories.ManualSorting} />
+
 ### Filtering
 
 Comes with prebuilt functionality for column filtering, defaulting to range (from - to) for numbers and multi-select for strings.
