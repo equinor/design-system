@@ -59,13 +59,23 @@ type RangeWrapperProps = {
 }
 
 const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
-  ({ $min, $max, $valA, $valB, $disabled, $hideActiveTrack, style }) => ({
+  ({
+    $min,
+    $max,
+    $valA,
+    $valB,
+    $disabled,
+    $hideActiveTrack,
+    $labelAlwaysOn,
+    style,
+  }) => ({
     'data-disabled': $disabled ? true : null,
     style: {
       '--a': $valA,
       '--b': $valB,
       '--min': $min,
       '--max': $max,
+      '--showTooltip': $labelAlwaysOn ? 1 : 0,
       '--background': $disabled
         ? track.entities.indicator.states.disabled.background
         : $hideActiveTrack
@@ -78,7 +88,6 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
     },
   }),
 )<RangeWrapperProps>`
-  ${({ $labelAlwaysOn }) => css({ '--showTooltip': $labelAlwaysOn ? 1 : 0 })};
   --dif: calc(var(--max) - var(--min));
   --realWidth: calc(100% - 12px);
   ${wrapperGrid}
@@ -104,6 +113,13 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
     );
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
+
+  &:where(:hover, :has(:focus-visible)) {
+    > output {
+      --showTooltip: 1;
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover:not([data-disabled]) {
       ${fakeTrackBgHover}
@@ -113,9 +129,7 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
       }
     }
   }
-  &:where(:hover, :has(:focus-visible)) {
-    --showTooltip: 1;
-  }
+
   ${({ $touchNavigation }) =>
     $touchNavigation &&
     css`
@@ -140,11 +154,20 @@ type WrapperProps = {
 } & Pick<SliderProps, 'disabled' | 'value'>
 
 const Wrapper = styled.div.attrs<WrapperProps>(
-  ({ $min, $max, value, disabled, $hideActiveTrack, style }) => ({
+  ({
+    $min,
+    $max,
+    value,
+    disabled,
+    $hideActiveTrack,
+    $labelAlwaysOn,
+    style,
+  }) => ({
     style: {
       '--min': $min,
       '--max': $max,
       '--value': value,
+      '--showTooltip': $labelAlwaysOn ? 1 : 0,
       '--background': disabled
         ? track.entities.indicator.states.disabled.background
         : $hideActiveTrack
@@ -157,7 +180,6 @@ const Wrapper = styled.div.attrs<WrapperProps>(
     },
   }),
 )<WrapperProps>`
-  ${({ $labelAlwaysOn }) => css({ '--showTooltip': $labelAlwaysOn ? 1 : 0 })};
   --dif: calc(var(--max) - var(--min));
   --realWidth: calc(100% - 12px);
   ${wrapperGrid}
@@ -173,6 +195,13 @@ const Wrapper = styled.div.attrs<WrapperProps>(
     /* Adjusting for start dot circle */
     margin-left: 3px;
   }
+
+  &:where(:hover, :has(:focus-visible)) {
+    > output {
+      --showTooltip: 1;
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover:not([disabled]) {
       ${fakeTrackBgHover}
@@ -180,9 +209,6 @@ const Wrapper = styled.div.attrs<WrapperProps>(
         background: var(--background-hover);
       }
     }
-  }
-  &:where(:hover, :has(:focus-visible)) {
-    --showTooltip: 1;
   }
 `
 
@@ -199,7 +225,7 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     width: ${dot.width};
     height: ${dot.height};
     background: ${tokens.background};
-    ${bordersTemplate(dot.border)}
+    ${bordersTemplate(dot.border)};
     bottom: ${dot.spacings.bottom};
     left: 0;
   }
