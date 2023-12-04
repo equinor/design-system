@@ -141,6 +141,10 @@ exports[`SideSheet Matches snapshot 1`] = `
   padding-right: 10px;
 }
 
+.c1>button {
+  margin-left: auto;
+}
+
 @media (hover:hover) and (pointer:fine) {
   .c3:hover {
     background: var(--eds_interactive_primary__hover_alt, rgba(222, 237, 238, 1));
