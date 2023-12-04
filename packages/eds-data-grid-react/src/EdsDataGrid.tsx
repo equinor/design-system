@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  Column,
   ColumnDef,
   ColumnFiltersState,
-  ColumnResizeMode,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedRowModel,
@@ -11,9 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  OnChangeFn,
   PaginationState,
-  Row,
   RowSelectionState,
   SortingState,
   TableOptions,
@@ -22,7 +18,6 @@ import {
 import { Pagination, Table, useEds } from '@equinor/eds-core-react'
 import {
   CSSProperties,
-  ReactElement,
   useCallback,
   useEffect,
   useMemo,
