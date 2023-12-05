@@ -64,18 +64,23 @@ const Resizer = styled.div<ResizeProps>`
 `
 
 const Cell = styled(Table.Cell)<{
-  sticky: boolean
-  pinned: ColumnPinningPosition
-  offset: number
+  $sticky: boolean
+  $pinned: ColumnPinningPosition
+  $offset: number
 }>`
   font-weight: bold;
   height: 30px;
-  position: ${(p) => (p.sticky || p.pinned ? 'sticky' : 'relative')};
+  position: ${(p) => (p.$sticky || p.$pinned ? 'sticky' : 'relative')};
   top: 0;
-  ${(p) => p.pinned}: ${(p) => p.offset}px;
+  ${(p) => {
+    if (p.$pinned) {
+      return `${p.$pinned}: ${p.$offset}px;`
+    }
+    return ''
+  }}
   z-index: ${(p) => {
-    if (p.sticky && p.pinned) return 13
-    if (p.sticky || p.pinned) return 12
+    if (p.$sticky && p.$pinned) return 13
+    if (p.$sticky || p.$pinned) return 12
     return 1
   }};
   &:hover ${ResizeInner} {
@@ -98,9 +103,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
   }, [pinned, header, table])
   return header.isPlaceholder ? (
     <Cell
-      sticky={ctx.stickyHeader}
-      offset={offset}
-      pinned={pinned}
+      $sticky={ctx.stickyHeader}
+      $offset={offset}
+      $pinned={pinned}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       style={{
         ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
@@ -109,9 +114,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
     />
   ) : (
     <Cell
-      sticky={ctx.stickyHeader}
-      offset={offset}
-      pinned={pinned}
+      $sticky={ctx.stickyHeader}
+      $offset={offset}
+      $pinned={pinned}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       {...{

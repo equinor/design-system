@@ -10,12 +10,17 @@ type Props<T> = {
 }
 
 const StyledCell = styled(Table.Cell)<{
-  sticky: ColumnPinningPosition
-  offset: number
+  $pinned: ColumnPinningPosition
+  $offset: number
 }>`
-  position: ${(p) => (p.sticky ? 'sticky' : 'relative')};
-  ${(p) => p.sticky}: ${(p) => p.offset}px;
-  z-index: ${(p) => (p.sticky ? 11 : 1)};
+  position: ${(p) => (p.$pinned ? 'sticky' : 'relative')};
+  ${(p) => {
+    if (p.$pinned) {
+      return `${p.$pinned}: ${p.$offset}px;`
+    }
+    return ''
+  }}
+  z-index: ${(p) => (p.$pinned ? 11 : 1)};
   background-color: ${tokens.colors.ui.background__default.hex};
   overflow: hidden;
   white-space: nowrap;
@@ -36,8 +41,8 @@ export function TableBodyCell<T>({ cell }: Props<T>) {
   }, [pinned, cell.column, table])
   return (
     <StyledCell
-      sticky={pinned}
-      offset={pinnedOffset}
+      $pinned={pinned}
+      $offset={pinnedOffset}
       className={cellClass ? cellClass(cell.row, cell.column.id) : ''}
       {...{
         key: cell.id,
