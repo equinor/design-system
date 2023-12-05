@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
-import { Column, ColumnPinningState, Row } from '@tanstack/react-table'
+import { Column, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
 import { EdsDataGridProps } from './EdsDataGridProps'
