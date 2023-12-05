@@ -84,17 +84,27 @@ Allows the user to hide/show columns.
 
 <Canvas of={ComponentStories.HideShowColumns} />
 
+### Column pinning
+
+Columns can be pinned (frozen) to the right / left side of the table by setting the `columnPinState`.
+
+*Note:* This requires `scrollbarHorizontal` to be true
+
+See [Tanstack docs for more](https://tanstack.com/table/v8/docs/api/features/pinning)
+
+<Canvas of={ComponentStories.ColumnPinning} />
+
 ### Sorting
 
 Comes with sorting built-in, and uses default sort functions. Can be overridden on a per-column basis.
-See [https://tanstack.com/table/v8/docs/api/features/sorting](Tanstack docs for more)
+See [Tanstack docs for more](https://tanstack.com/table/v8/docs/api/features/sorting)
 
 <Canvas of={ComponentStories.Sortable} />
 
 ### External sorting
 
 It's also possible to handle sorting manually by setting manualSorting to `true` and listening on the onSortingChange prop.
-See [https://tanstack.com/table/v8/docs/api/features/sorting](Tanstack docs for more)
+See [Tanstack docs for more](https://tanstack.com/table/v8/docs/api/features/sorting)
 
 <Canvas of={ComponentStories.ManualSorting} />
 

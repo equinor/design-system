@@ -2,6 +2,7 @@
 import {
   ColumnDef,
   ColumnFiltersState,
+  ColumnPinningState,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedRowModel,
@@ -60,10 +61,17 @@ export function EdsDataGrid<T>({
   onSortingChange,
   manualSorting,
   sortingState,
+  columnPinState,
+  scrollbarHorizontal,
+  width,
+  height,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
     selectedRows ?? {},
+  )
+  const [columnPin, setColumnPin] = useState<ColumnPinningState>(
+    columnPinState ?? {},
   )
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [visible, setVisible] = useState(columnVisibility ?? {})
@@ -77,6 +85,10 @@ export function EdsDataGrid<T>({
   useEffect(() => {
     setVisible(columnVisibility ?? {})
   }, [columnVisibility, setVisible])
+
+  useEffect(() => {
+    setColumnPin((s) => columnPinState ?? s)
+  }, [columnPinState])
 
   useEffect(() => {
     setSorting(sortingState)
@@ -138,6 +150,7 @@ export function EdsDataGrid<T>({
     columnResizeMode: columnResizeMode,
     state: {
       sorting,
+      columnPinning: columnPin,
       rowSelection: selection,
       columnOrder: columnOrderState,
     },
@@ -158,6 +171,8 @@ export function EdsDataGrid<T>({
     debugHeaders: debug,
     debugColumns: debug,
     enableRowSelection: rowSelection ?? false,
+    enableColumnPinning: true,
+    enablePinning: true,
   }
 
   useEffect(() => {
@@ -231,7 +246,7 @@ export function EdsDataGrid<T>({
    */
   if (enableVirtual) {
     parentRefStyle = {
-      height: virtualHeight ?? 500,
+      height: height ?? virtualHeight ?? 500,
       overflow: 'auto',
       position: 'relative',
     }
@@ -278,7 +293,17 @@ export function EdsDataGrid<T>({
       enableColumnFiltering={!!enableColumnFiltering}
       stickyHeader={!!stickyHeader}
     >
-      <div className="table-wrapper" style={parentRefStyle} ref={parentRef}>
+      <div
+        className="table-wrapper"
+        style={{
+          height: height ?? 'auto',
+          ...parentRefStyle,
+          width: scrollbarHorizontal ? width : table.getTotalSize(),
+          tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
+          overflow: 'auto',
+        }}
+        ref={parentRef}
+      >
         <Table
           className={Object.entries(classList)
             .filter(([, k]) => k)

@@ -19,6 +19,7 @@ const Link = styled.a`
 export const columns: Array<ColumnDef<Photo>> = [
   helper.accessor('id', {
     header: () => <span style={{ fontStyle: 'italic' }}>ID</span>,
+    size: 100,
     id: 'id',
   }),
   helper.accessor('albumId', {
@@ -28,6 +29,7 @@ export const columns: Array<ColumnDef<Photo>> = [
   helper.accessor('title', {
     header: 'Title',
     id: 'title',
+    size: 250,
   }),
   helper.accessor('url', {
     header: 'URL',

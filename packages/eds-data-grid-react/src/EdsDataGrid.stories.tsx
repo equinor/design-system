@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
-import { Column, Row } from '@tanstack/react-table'
+import { Column, ColumnPinningState, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
 import { EdsDataGridProps } from './EdsDataGridProps'
@@ -135,6 +135,31 @@ ManualSorting.args = {
     }
   },
   columns: groupedColumns,
+}
+
+export const ColumnPinning: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const { columnPinState } = args
+  return (
+    <>
+      <Typography as={'div'} style={{ whiteSpace: 'pre' }}>
+        {JSON.stringify(columnPinState, null, 2)}
+      </Typography>
+      <EdsDataGrid {...args} />
+    </>
+  )
+}
+
+ColumnPinning.args = {
+  columnPinState: {
+    right: [columns[0].id, columns.at(1).id],
+    left: [columns.at(2).id],
+  },
+  scrollbarHorizontal: true,
+  stickyHeader: true,
+  width: 700,
+  columns: columns,
+  height: 500,
+  rows: data,
 }
 
 export const ColumnOrdering: StoryFn<EdsDataGridProps<Photo>> = (args) => {

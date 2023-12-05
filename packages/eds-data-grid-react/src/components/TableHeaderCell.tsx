@@ -1,4 +1,5 @@
 import {
+  ColumnPinningPosition,
   ColumnResizeMode,
   flexRender,
   Header,
@@ -11,6 +12,7 @@ import { useTableContext } from '../EdsDataGridContext'
 import { Filter } from './Filter'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
+import { useMemo } from 'react'
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -44,6 +46,7 @@ const ResizeInner = styled.div`
 const Resizer = styled.div<ResizeProps>`
   transform: ${(props) =>
     props.$columnResizeMode === 'onEnd' ? 'translateX(0px)' : 'none'};
+
   ${ResizeInner} {
     opacity: ${(props) => (props.$isResizing ? 1 : 0)};
   }
@@ -60,10 +63,21 @@ const Resizer = styled.div<ResizeProps>`
   justify-content: flex-end;
 `
 
-const Cell = styled(Table.Cell)<{ sticky: boolean }>`
+const Cell = styled(Table.Cell)<{
+  sticky: boolean
+  pinned: ColumnPinningPosition
+  offset: number
+}>`
   font-weight: bold;
   height: 30px;
-  position: ${(p) => (p.sticky ? 'sticky' : 'relative')};
+  position: ${(p) => (p.sticky || p.pinned ? 'sticky' : 'relative')};
+  top: 0;
+  ${(p) => p.pinned}: ${(p) => p.offset}px;
+  z-index: ${(p) => {
+    if (p.sticky && p.pinned) return 13
+    if (p.sticky || p.pinned) return 12
+    return 1
+  }};
   &:hover ${ResizeInner} {
     background: ${tokens.colors.interactive.primary__hover.rgba};
     opacity: 1;
@@ -73,16 +87,31 @@ const Cell = styled(Table.Cell)<{ sticky: boolean }>`
 export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
   const ctx = useTableContext()
   const table = ctx.table
+  const pinned = header.column.getIsPinned()
+  const offset = useMemo<number>(() => {
+    if (!pinned) {
+      return null
+    }
+    return pinned === 'left'
+      ? header.getStart()
+      : table.getTotalSize() - header.getStart() - header.getSize()
+  }, [pinned, header, table])
   return header.isPlaceholder ? (
     <Cell
       sticky={ctx.stickyHeader}
+      offset={offset}
+      pinned={pinned}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
-      style={ctx.headerStyle ? ctx.headerStyle(header.column) : {}}
+      style={{
+        ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
+      }}
       aria-hidden={true}
     />
   ) : (
     <Cell
       sticky={ctx.stickyHeader}
+      offset={offset}
+      pinned={pinned}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       {...{
