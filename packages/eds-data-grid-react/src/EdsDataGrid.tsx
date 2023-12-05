@@ -298,7 +298,7 @@ export function EdsDataGrid<T>({
         style={{
           height: height ?? 'auto',
           ...parentRefStyle,
-          width: scrollbarHorizontal ? width : table.getTotalSize(),
+          width: scrollbarHorizontal ? width : 'auto',
           tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
           overflow: 'auto',
         }}
