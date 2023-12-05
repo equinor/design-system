@@ -20,7 +20,7 @@ const StyledCell = styled(Table.Cell)<{
     }
     return ''
   }}
-  z-index: ${(p) => (p.$pinned ? 11 : 1)};
+  z-index: ${(p) => (p.$pinned ? 11 : 'auto')};
   background-color: ${tokens.colors.ui.background__default.hex};
   overflow: hidden;
   white-space: nowrap;
