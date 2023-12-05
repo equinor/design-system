@@ -21,7 +21,8 @@ const StyledCell = styled(Table.Cell)<{
     return ''
   }}
   z-index: ${(p) => (p.$pinned ? 11 : 'auto')};
-  background-color: ${tokens.colors.ui.background__default.hex};
+  background-color: ${(p) =>
+    p.$pinned ? tokens.colors.ui.background__default.hex : 'inherit'};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
