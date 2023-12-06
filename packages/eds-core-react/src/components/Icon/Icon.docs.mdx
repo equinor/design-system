@@ -73,6 +73,10 @@ Simple and clear icons require a strict underlying grid.
 </ul>
 <Canvas of={ComponentStories.Sizes} />
 
+### Custom icon data
+If using custom icons not from `@equinor/eds-icons`, make sure to use the `IconData` type, and note that `width`/`height` must match the drawn size og the path(s) in order to scale the icon correctly inside the svg viewbox
+<Canvas of={ComponentStories.Custom} />
+
 
 
 
