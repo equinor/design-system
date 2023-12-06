@@ -1,6 +1,7 @@
 import {
   Column,
   ColumnDef,
+  ColumnPinningState,
   ColumnResizeMode,
   OnChangeFn,
   Row,
@@ -58,6 +59,22 @@ type BaseProps<T> = {
    * @default {}
    */
   selectedRows?: Record<string | number, boolean>
+  /**
+   * Whether there should be horizontal scrolling.
+   * This must be true for column pinning to work
+   * @default true
+   */
+  scrollbarHorizontal?: boolean
+  /**
+   * Width of the table. Only takes effect if {@link scrollbarHorizontal} is true.
+   * @default 800
+   */
+  width?: number
+  /**
+   * Height of the table.
+   * @default none
+   */
+  height?: number
 }
 
 type StyleProps<T> = {
@@ -159,11 +176,16 @@ type SortProps = {
   sortingState?: SortingState
 }
 
+type ColumnProps = {
+  columnPinState?: ColumnPinningState
+}
+
 export type EdsDataGridProps<T> = BaseProps<T> &
   StyleProps<T> &
   SortProps &
   FilterProps &
   PagingProps &
+  ColumnProps &
   VirtualProps & {
     /**
      * Which columns are visible. If not set, all columns are visible. undefined means that the column is visible.
