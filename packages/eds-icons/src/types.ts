@@ -9,7 +9,7 @@ export type IconData = {
   prefix: string
   height: string
   width: string
-  svgPathData: string
+  svgPathData: string | Array<string>
   sizes?: {
     small: Omit<IconData, 'sizes'>
   }
