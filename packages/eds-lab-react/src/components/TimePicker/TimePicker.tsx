@@ -60,8 +60,8 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(({
     highlighted === 'true'
       ? theme.states.hover.background
       : active === 'true'
-      ? theme.states.active.background
-      : theme.background
+        ? theme.states.active.background
+        : theme.background
 
   return css`
     margin: 0;

@@ -15,8 +15,8 @@ const StyledListItem = styled.li<StyledListItemType>(
       $highlighted === 'true'
         ? theme.states.hover.background
         : $active === 'true'
-        ? theme.states.active.background
-        : theme.background
+          ? theme.states.active.background
+          : theme.background
     return css`
       display: flex;
       grid-area: 1 / -1;

@@ -79,8 +79,8 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
       '--background': $disabled
         ? track.entities.indicator.states.disabled.background
         : $hideActiveTrack
-        ? 'transparent'
-        : track.entities.indicator.background,
+          ? 'transparent'
+          : track.entities.indicator.background,
       '--background-hover': $hideActiveTrack
         ? 'transparent'
         : track.entities.indicator.states.hover.background,
@@ -171,8 +171,8 @@ const Wrapper = styled.div.attrs<WrapperProps>(
       '--background': disabled
         ? track.entities.indicator.states.disabled.background
         : $hideActiveTrack
-        ? 'transparent'
-        : track.entities.indicator.background,
+          ? 'transparent'
+          : track.entities.indicator.background,
       '--background-hover': $hideActiveTrack
         ? 'transparent'
         : track.entities.indicator.states.hover.background,
