@@ -108,7 +108,6 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   }
 
   const pathProps = {
-    d: icon.svgPathData as string,
     $height: icon.height ? parseInt(icon.height) : size,
     $size: size || parseInt(icon.height),
   }
@@ -132,12 +131,14 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
       {title && <title id={titleId}>{title}</title>}
       {Array.isArray(icon.svgPathData) ? (
         icon.svgPathData.map((pathData) => {
-          return (
-            <StyledPath key={pathData} {...{ ...pathProps, d: pathData }} />
-          )
+          return <StyledPath key={pathData} {...pathProps} d={pathData} />
         })
       ) : (
-        <StyledPath data-testid="eds-icon-path" {...pathProps} />
+        <StyledPath
+          data-testid="eds-icon-path"
+          {...pathProps}
+          d={icon.svgPathData}
+        />
       )}
     </StyledSvg>
   )
