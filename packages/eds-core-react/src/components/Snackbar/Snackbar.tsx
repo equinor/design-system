@@ -38,21 +38,21 @@ const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, $placement }) => {
       top: $placement.includes('top')
         ? theme.spacings.top
         : $placement === 'left' || $placement === 'right'
-        ? '50%'
-        : undefined,
+          ? '50%'
+          : undefined,
       bottom: $placement.includes('bottom') ? theme.spacings.bottom : undefined,
       right: $placement.includes('right') ? theme.spacings.right : undefined,
       left: $placement.includes('left')
         ? theme.spacings.left
         : $placement === 'top' || $placement === 'bottom'
-        ? '50%'
-        : undefined,
+          ? '50%'
+          : undefined,
       transform:
         $placement === 'left' || $placement === 'right'
           ? 'translateY(-50%)'
           : $placement === 'top' || $placement === 'bottom'
-          ? 'translateX(-50%)'
-          : undefined,
+            ? 'translateX(-50%)'
+            : undefined,
     }}
 
     a,

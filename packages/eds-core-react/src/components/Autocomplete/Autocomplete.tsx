@@ -330,8 +330,8 @@ function AutocompleteInner<T>(
     initialSelectedItems: multiple
       ? initialSelectedOptions
       : initialSelectedOptions[0]
-      ? [initialSelectedOptions[0]]
-      : [],
+        ? [initialSelectedOptions[0]]
+        : [],
   }
 
   if (multiple) {

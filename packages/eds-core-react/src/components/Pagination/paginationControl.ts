@@ -21,22 +21,22 @@ export function PaginationControl(
       activePage < pagesBeforeEllipsis || pages <= totalPagesShown
         ? 1
         : activePage + siblings + 1 >= pages
-        ? pages - 4 // - 4 to fit total columns /
-        : activePage > 4 && pages > totalPagesShown
-        ? activePage - siblings
-        : 1,
+          ? pages - 4 // - 4 to fit total columns /
+          : activePage > 4 && pages > totalPagesShown
+            ? activePage - siblings
+            : 1,
     ) // the first page after left ellipsis
 
     const endOffset =
       activePage < pagesBeforeEllipsis && pages > totalPagesShown
         ? pagesBeforeEllipsis
         : activePage < pagesBeforeEllipsis && pages <= totalPagesShown
-        ? pages
-        : activePage + siblings + 1 < pages - 1
-        ? activePage + siblings
-        : activePage + siblings + 1 === pages - 1
-        ? pages
-        : pages
+          ? pages
+          : activePage + siblings + 1 < pages - 1
+            ? activePage + siblings
+            : activePage + siblings + 1 === pages - 1
+              ? pages
+              : pages
 
     const endPage = Math.min(pages, endOffset) // the last page before right ellipsis
     pageRange = range(startPage, endPage) // range in between ellipsis(es). Ex: range(4, 6) =  1 ... ( 4 5 6 )  ... 10
