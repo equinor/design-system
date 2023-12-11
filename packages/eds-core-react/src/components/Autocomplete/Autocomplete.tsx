@@ -68,6 +68,10 @@ const StyledList = styled(List)(
     overflow-x: hidden;
     padding: 0;
     display: grid;
+    /* hack to fix clipping issue in firefox (#3170) */
+    @supports (-moz-appearance: none) {
+      scrollbar-width: thin;
+    }
   `,
 )
 
