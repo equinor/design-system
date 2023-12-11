@@ -19,7 +19,7 @@ type StyledIconPathProps = {
 const StyledPath = styled.path.attrs<StyledIconPathProps>(({ $icon }) => ({
   fillRule: 'evenodd',
   clipRule: 'evenodd',
-  d: $icon.svgPathData,
+  d: $icon.svgPathData as string,
 }))<StyledIconPathProps>``
 
 type StyledInputProps = {
