@@ -47,6 +47,10 @@ const Label = styled.span<{ $multiline: boolean }>(({ theme, $multiline }) => {
     white-space: ${$multiline ? 'normal' : 'nowrap'};
     overflow: ${$multiline ? 'initial' : 'hidden'};
     overflow-wrap: anywhere;
+    /* hack to fix clipping issue in firefox (#3170) */
+    @supports (-moz-appearance: none) {
+      overflow: ${$multiline ? 'initial' : 'clip'};
+    }
   `
 })
 

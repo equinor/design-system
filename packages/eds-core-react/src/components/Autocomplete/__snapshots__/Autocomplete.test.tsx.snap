@@ -66,6 +66,18 @@ exports[`Autocomplete Matches snapshot 1`] = `
 
 }
 
+@supports (-moz-appearance:none) {
+  .c3 {
+    overflow: clip;
+  }
+}
+
+@supports (-moz-appearance:none) {
+  .c1 {
+    scrollbar-width: thin;
+  }
+}
+
 <ul
   aria-labelledby="downshift-:r0:-label"
   class="c0 c1"
