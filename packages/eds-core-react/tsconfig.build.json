@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "exclude": [
+    "./jest.setup.ts",
     "src/**/*.stories.ts*",
     "src/**/*.test.ts*",
-    "src/stories",
+    "src/test/",
+    "src/stories"
   ]
 }
