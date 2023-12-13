@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.35.0] - 2023-12-13
+
+### Added
+
+- ✨ `Icon`: Added support for multiple paths (type `IconData.svgPathData` is now `string | Array<string>`) by @oddvernes in https://github.com/equinor/design-system/pull/3177
+
+### Fixed
+
+- 🐛 `Autocomplete`: Fixed scrollbar clipping issue that manifested in Firefox by @oddvernes in https://github.com/equinor/design-system/pull/3179
+- 🐛 `Slider`: Fixed a bug where label tooltip was always visible for users with `styled-components@5.x.x` by @oddvernes in https://github.com/equinor/design-system/pull/3173
+
+### Changed
+
+- 🧑‍💻 `SideSheet`: `open` prop type changed to required, conditionally render title and close button to reflect the optional types of `title` and `onClose` props by @oddvernes in https://github.com/equinor/design-system/pull/3161
+
 ## [0.34.0] - 2023-11-17
 
 ### Added

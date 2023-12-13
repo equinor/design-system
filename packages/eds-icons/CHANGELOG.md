@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.0] - 2023-12-13
+
+### Changed
+
+- `IconData` type: `svgPathData` changed to `string | Array<string>` to allow multiple paths in the eds-core-react `Icon` component by @oddvernes in https://github.com/equinor/design-system/pull/3177
+
 ## [0.19.3] - 2023-07-14
 
 ### Changed
