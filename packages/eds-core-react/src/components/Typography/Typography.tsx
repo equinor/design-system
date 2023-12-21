@@ -85,16 +85,13 @@ const StyledTypography = styled.p<StyledProps>`
   ${({ $typography, $link }) => typographyTemplate($typography, $link)}
   ${({ $color }) => css({ color: findColor($color) })}
   ${({ $lines }) =>
-    //https://caniuse.com/#feat=css-line-clamp
-    $lines > 0 &&
+    $lines &&
     css`
-      & {
-        display: -webkit-box;
-        -webkit-line-clamp: ${$lines};
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+      display: -webkit-box;
+      -webkit-line-clamp: ${$lines};
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     `}
   ${({ $link }) =>
     $link &&
