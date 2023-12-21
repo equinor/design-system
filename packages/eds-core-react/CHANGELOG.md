@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.35.1] - 2023-12-21
+
+### Fixed
+
+- 🐛 `Typography`: Bug affecting users of styled-components v6 where line-clamping would be applied to all `Typography` elements on the page if the `lines` prop was set on one of them by @oddvernes in https://github.com/equinor/design-system/pull/3193
+
 ## [0.35.0] - 2023-12-13
 
 ### Added
