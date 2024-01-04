@@ -59,6 +59,7 @@ import { Accordion } from '@equinor/eds-core-react'
     <code>Accordion.HeaderActions</code> which should be used if there is a need
      for additional action buttons in the header. Raw text will get wrapped 
      in an <code>Accordion.HeaderTitle</code> automatically.</li>
+      <li>For accessibility, please make sure to set the correct `headerLevel` based on the context the Accordion is used in. An accordion under a `h2` paragraph should be set to `h3`and so on. There is no visual difference between Accordion headerlevels.</li>
     <li>The expand/collapse functionality is tied to the entire header.</li>
 </ul>
 
