@@ -21,6 +21,20 @@ describe('EdsDataGrid', () => {
     }
 
     window.ResizeObserver = ResizeObserver
+
+    //https://github.com/TanStack/virtual/issues/641
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    Element.prototype.getBoundingClientRect = jest.fn(() => {
+      return {
+        width: 120,
+        height: 120,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+      }
+    })
   })
 
   describe('Filtering', () => {
@@ -57,7 +71,6 @@ describe('EdsDataGrid', () => {
       await userEvent.click(
         within(screen.getAllByRole('columnheader')[0]).getByRole('combobox'),
       )
-
       expect(
         within(screen.getAllByRole('listbox')[0]).queryAllByRole('option')
           .length,

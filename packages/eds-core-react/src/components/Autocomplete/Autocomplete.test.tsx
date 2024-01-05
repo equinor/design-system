@@ -21,10 +21,24 @@ const mockResizeObserver = jest.fn(() => ({
 
 beforeAll(() => {
   window.ResizeObserver = mockResizeObserver
+
+  //https://github.com/TanStack/virtual/issues/641
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  Element.prototype.getBoundingClientRect = jest.fn(() => {
+    return {
+      width: 120,
+      height: 120,
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    }
+  })
 })
 
 describe('Autocomplete', () => {
-  it.skip('Matches snapshot', async () => {
+  it('Matches snapshot', async () => {
     render(<Autocomplete options={items} label={labelText} />)
 
     const autocomplete = screen.getAllByLabelText(labelText)
@@ -77,7 +91,7 @@ describe('Autocomplete', () => {
     expect(optionsList.nodeName).toBe('UL')
   })
 
-  it.skip('Has provided option label', async () => {
+  it('Has provided option label', async () => {
     const labler = (text: string) => `${text}+1`
     render(
       <Autocomplete
@@ -104,7 +118,7 @@ describe('Autocomplete', () => {
     expect(within(options[2]).getByText(labler(items[2]))).toBeDefined()
   })
 
-  it.skip('Can render custom items with optionComponent', async () => {
+  it('Can render custom items with optionComponent', async () => {
     type Item = {
       label: string
     }
@@ -148,7 +162,7 @@ describe('Autocomplete', () => {
     expect(input).toBeDisabled()
   })
 
-  it.skip('Can preselect specific options', async () => {
+  it('Can preselect specific options', async () => {
     render(
       <Autocomplete
         options={items}
@@ -167,7 +181,7 @@ describe('Autocomplete', () => {
     expect(checked.length).toBe(2)
   })
 
-  it.skip('Can open the options on button click', async () => {
+  it('Can open the options on button click', async () => {
     render(<Autocomplete disablePortal options={items} label={labelText} />)
 
     const labeledNodes = await screen.findAllByLabelText(labelText)
@@ -204,7 +218,7 @@ describe('Autocomplete', () => {
     )
   }
 
-  it.skip('Can be a controlled component', async () => {
+  it('Can be a controlled component', async () => {
     const handleChange = jest.fn()
     render(<ControlledAutoComplete onOptionsChange={handleChange} />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
@@ -225,7 +239,7 @@ describe('Autocomplete', () => {
     })
   })
 
-  it.skip('Can filter results by input value', async () => {
+  it('Can filter results by input value', async () => {
     render(<Autocomplete disablePortal options={items} label={labelText} />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
@@ -247,7 +261,7 @@ describe('Autocomplete', () => {
     expect(within(filteredOptions[0]).getByText('Three')).toBeDefined()
   })
 
-  it.skip('Second option is first when first option is disabled', async () => {
+  it('Second option is first when first option is disabled', async () => {
     render(
       <Autocomplete
         disablePortal
