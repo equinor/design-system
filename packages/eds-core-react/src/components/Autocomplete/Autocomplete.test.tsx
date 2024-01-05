@@ -247,6 +247,19 @@ describe('Autocomplete', () => {
     expect(within(filteredOptions[0]).getByText('Three')).toBeDefined()
   })
 
+  it('Clears the input text on blur when no option is selected', async () => {
+    render(<Autocomplete disablePortal options={items} label={labelText} />)
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+
+    fireEvent.change(input, {
+      target: { value: 'ree' },
+    })
+
+    fireEvent.blur(input)
+    expect(input).toHaveValue('')
+  })
+
   it('Second option is first when first option is disabled', async () => {
     render(
       <Autocomplete

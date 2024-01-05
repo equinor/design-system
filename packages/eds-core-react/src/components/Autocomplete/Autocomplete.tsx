@@ -597,6 +597,7 @@ function AutocompleteInner<T>(
     getItemProps,
     inputValue,
     reset: resetCombobox,
+    setInputValue,
   } = useCombobox(comboBoxProps)
 
   useEffect(() => {
@@ -731,6 +732,16 @@ function AutocompleteInner<T>(
       disabled,
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setTypedInputValue(e?.currentTarget?.value),
+      onBlur: () => {
+        if (multiple) return
+        if (selectedItems[0]) {
+          const inputValue = getLabel(selectedItems[0])
+          setTypedInputValue(inputValue)
+          setInputValue(inputValue)
+          return
+        }
+        clear()
+      },
     }),
   )
   const consolidatedEvents = mergeEventsFromRight(other, inputProps)
