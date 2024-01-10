@@ -80,6 +80,12 @@ const HelperText = styled(_HelperText)`
   margin-left: 8px;
 `
 
+const AutocompleteNoOptions = styled(AutocompleteOption)(
+  ({ theme }) => css`
+    color: ${theme.entities.noOptions.typography.color};
+  `,
+)
+
 const StyledButton = styled(Button)(
   ({
     theme: {
@@ -456,6 +462,7 @@ function AutocompleteInner<T>(
           //note: non strict check for null or undefined to allow 0
           if (selectedItem != null && !optionDisabled(selectedItem)) {
             if (multiple) {
+              console.log('it broken? ', selectedItem)
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
                 : addSelectedItem(selectedItem)
@@ -469,39 +476,6 @@ function AutocompleteInner<T>(
           break
       }
     },
-    stateReducer: (_, actionAndChanges) => {
-      const { changes, type } = actionAndChanges
-
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputClick:
-          return {
-            ...changes,
-            isOpen: !(disabled || readOnly),
-          }
-        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-        case useCombobox.stateChangeTypes.InputKeyDownHome:
-          return {
-            ...changes,
-            highlightedIndex: findNextIndex<T>({
-              index: changes.highlightedIndex,
-              availableItems,
-              optionDisabled,
-            }),
-          }
-        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-        case useCombobox.stateChangeTypes.InputKeyDownEnd:
-          return {
-            ...changes,
-            highlightedIndex: findPrevIndex<T>({
-              index: changes.highlightedIndex,
-              availableItems,
-              optionDisabled,
-            }),
-          }
-        default:
-          return changes
-      }
-    },
   }
 
   if (!multiple) {
@@ -513,6 +487,45 @@ function AutocompleteInner<T>(
           onOptionsChange({
             selectedItems: selectedItem ? [selectedItem] : [],
           })
+        }
+      },
+      stateReducer: (_, actionAndChanges) => {
+        const { changes, type } = actionAndChanges
+        switch (type) {
+          case useCombobox.stateChangeTypes.InputClick:
+            return {
+              ...changes,
+              isOpen: !(disabled || readOnly),
+            }
+          case useCombobox.stateChangeTypes.InputBlur:
+            return {
+              ...changes,
+              inputValue: changes.selectedItem
+                ? getLabel(changes.selectedItem)
+                : '',
+            }
+          case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+          case useCombobox.stateChangeTypes.InputKeyDownHome:
+            return {
+              ...changes,
+              highlightedIndex: findNextIndex<T>({
+                index: changes.highlightedIndex,
+                availableItems,
+                optionDisabled,
+              }),
+            }
+          case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+          case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            return {
+              ...changes,
+              highlightedIndex: findPrevIndex<T>({
+                index: changes.highlightedIndex,
+                availableItems,
+                optionDisabled,
+              }),
+            }
+          default:
+            return changes
         }
       },
     }
@@ -539,6 +552,11 @@ function AutocompleteInner<T>(
         const { changes, type } = actionAndChanges
 
         switch (type) {
+          case useCombobox.stateChangeTypes.InputClick:
+            return {
+              ...changes,
+              isOpen: !(disabled || readOnly),
+            }
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             return {
@@ -561,12 +579,18 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
+            console.log('itemclcik')
             return {
               ...changes,
               isOpen: true, // keep menu open after selection.
               highlightedIndex: state.highlightedIndex,
               inputValue: !clearSearchOnChange ? typedInputValue : '',
             }
+          /*           case useCombobox.stateChangeTypes.InputChange:
+            setTypedInputValue(changes.inputValue)
+            return {
+              ...changes,
+            } */
           case useCombobox.stateChangeTypes.InputBlur:
             setTypedInputValue('')
             return {
@@ -639,6 +663,9 @@ function AutocompleteInner<T>(
   const showClearButton =
     (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
 
+  const showNoOptions =
+    isOpen && !availableItems.length && inputValue.length > 0
+
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),
     [selectedItems, getLabel],
@@ -671,6 +698,16 @@ function AutocompleteInner<T>(
           { suppressRefError: true },
         )}
       >
+        {showNoOptions && (
+          <AutocompleteNoOptions
+            value={'No options'}
+            multiple={false}
+            multiline={false}
+            highlighted={'false'}
+            isSelected={false}
+            isDisabled
+          />
+        )}
         {isOpen && (
           <li
             key="total-size"

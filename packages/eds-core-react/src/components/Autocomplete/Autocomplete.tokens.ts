@@ -95,6 +95,11 @@ export const selectTokens: AutocompleteToken = {
         bottom: spacingMedium,
       },
     },
+    noOptions: {
+      typography: {
+        color: colors.text.static_icons__tertiary.rgba,
+      },
+    },
   },
   modes: {
     compact: {
