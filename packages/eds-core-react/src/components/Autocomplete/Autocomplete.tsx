@@ -462,7 +462,6 @@ function AutocompleteInner<T>(
           //note: non strict check for null or undefined to allow 0
           if (selectedItem != null && !optionDisabled(selectedItem)) {
             if (multiple) {
-              console.log('it broken? ', selectedItem)
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
                 : addSelectedItem(selectedItem)
@@ -506,6 +505,12 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
             return {
               ...changes,
               highlightedIndex: findNextIndex<T>({
@@ -516,6 +521,12 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
             return {
               ...changes,
               highlightedIndex: findPrevIndex<T>({
@@ -559,6 +570,12 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
             return {
               ...changes,
               highlightedIndex: findNextIndex<T>({
@@ -569,6 +586,12 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
             return {
               ...changes,
               highlightedIndex: findPrevIndex<T>({
@@ -579,7 +602,6 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
-            console.log('itemclcik')
             return {
               ...changes,
               isOpen: true, // keep menu open after selection.
