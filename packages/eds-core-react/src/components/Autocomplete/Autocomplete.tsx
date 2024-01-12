@@ -6,7 +6,6 @@ import {
   useRef,
   useMemo,
   useCallback,
-  ChangeEvent,
   ReactNode,
   EventHandler,
   SyntheticEvent,
@@ -608,11 +607,11 @@ function AutocompleteInner<T>(
               highlightedIndex: state.highlightedIndex,
               inputValue: !clearSearchOnChange ? typedInputValue : '',
             }
-          /*           case useCombobox.stateChangeTypes.InputChange:
+          case useCombobox.stateChangeTypes.InputChange:
             setTypedInputValue(changes.inputValue)
             return {
               ...changes,
-            } */
+            }
           case useCombobox.stateChangeTypes.InputBlur:
             setTypedInputValue('')
             return {
@@ -788,8 +787,6 @@ function AutocompleteInner<T>(
     getDropdownProps({
       preventKeyAction: multiple ? isOpen : undefined,
       disabled,
-      onChange: (e: ChangeEvent<HTMLInputElement>) =>
-        setTypedInputValue(e?.currentTarget?.value),
     }),
   )
   const consolidatedEvents = mergeEventsFromRight(other, inputProps)
