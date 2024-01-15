@@ -6,7 +6,6 @@ import {
   useRef,
   useMemo,
   useCallback,
-  ChangeEvent,
   ReactNode,
   EventHandler,
   SyntheticEvent,
@@ -79,6 +78,12 @@ const HelperText = styled(_HelperText)`
   margin-top: 8px;
   margin-left: 8px;
 `
+
+const AutocompleteNoOptions = styled(AutocompleteOption)(
+  ({ theme }) => css`
+    color: ${theme.entities.noOptions.typography.color};
+  `,
+)
 
 const StyledButton = styled(Button)(
   ({
@@ -200,6 +205,10 @@ export type AutocompleteProps<T> = {
   helperText?: string
   /** Icon that will be displayed before the helper text */
   helperIcon?: ReactNode
+  /** Set text for the "no options" item. Set to an empty string to force off
+   * @default 'No options'
+   */
+  noOptionsText?: string
   /** Variants */
   variant?: Variants
   /** Meta text, for instance unit */
@@ -296,6 +305,7 @@ function AutocompleteInner<T>(
     optionComponent,
     helperText,
     helperIcon,
+    noOptionsText = 'No options',
     variant,
     ...other
   } = props
@@ -469,39 +479,6 @@ function AutocompleteInner<T>(
           break
       }
     },
-    stateReducer: (_, actionAndChanges) => {
-      const { changes, type } = actionAndChanges
-
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputClick:
-          return {
-            ...changes,
-            isOpen: !(disabled || readOnly),
-          }
-        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-        case useCombobox.stateChangeTypes.InputKeyDownHome:
-          return {
-            ...changes,
-            highlightedIndex: findNextIndex<T>({
-              index: changes.highlightedIndex,
-              availableItems,
-              optionDisabled,
-            }),
-          }
-        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-        case useCombobox.stateChangeTypes.InputKeyDownEnd:
-          return {
-            ...changes,
-            highlightedIndex: findPrevIndex<T>({
-              index: changes.highlightedIndex,
-              availableItems,
-              optionDisabled,
-            }),
-          }
-        default:
-          return changes
-      }
-    },
   }
 
   if (!multiple) {
@@ -513,6 +490,57 @@ function AutocompleteInner<T>(
           onOptionsChange({
             selectedItems: selectedItem ? [selectedItem] : [],
           })
+        }
+      },
+      stateReducer: (_, actionAndChanges) => {
+        const { changes, type } = actionAndChanges
+        switch (type) {
+          case useCombobox.stateChangeTypes.InputClick:
+            return {
+              ...changes,
+              isOpen: !(disabled || readOnly),
+            }
+          case useCombobox.stateChangeTypes.InputBlur:
+            return {
+              ...changes,
+              inputValue: changes.selectedItem
+                ? getLabel(changes.selectedItem)
+                : '',
+            }
+          case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+          case useCombobox.stateChangeTypes.InputKeyDownHome:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
+            return {
+              ...changes,
+              highlightedIndex: findNextIndex<T>({
+                index: changes.highlightedIndex,
+                availableItems,
+                optionDisabled,
+              }),
+            }
+          case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+          case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
+            return {
+              ...changes,
+              highlightedIndex: findPrevIndex<T>({
+                index: changes.highlightedIndex,
+                availableItems,
+                optionDisabled,
+              }),
+            }
+          default:
+            return changes
         }
       },
     }
@@ -539,8 +567,19 @@ function AutocompleteInner<T>(
         const { changes, type } = actionAndChanges
 
         switch (type) {
+          case useCombobox.stateChangeTypes.InputClick:
+            return {
+              ...changes,
+              isOpen: !(disabled || readOnly),
+            }
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
             return {
               ...changes,
               highlightedIndex: findNextIndex<T>({
@@ -551,6 +590,12 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
             return {
               ...changes,
               highlightedIndex: findPrevIndex<T>({
@@ -566,6 +611,11 @@ function AutocompleteInner<T>(
               isOpen: true, // keep menu open after selection.
               highlightedIndex: state.highlightedIndex,
               inputValue: !clearSearchOnChange ? typedInputValue : '',
+            }
+          case useCombobox.stateChangeTypes.InputChange:
+            setTypedInputValue(changes.inputValue)
+            return {
+              ...changes,
             }
           case useCombobox.stateChangeTypes.InputBlur:
             setTypedInputValue('')
@@ -639,6 +689,12 @@ function AutocompleteInner<T>(
   const showClearButton =
     (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
 
+  const showNoOptions =
+    isOpen &&
+    !availableItems.length &&
+    inputValue.length > 0 &&
+    noOptionsText.length > 0
+
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),
     [selectedItems, getLabel],
@@ -671,6 +727,16 @@ function AutocompleteInner<T>(
           { suppressRefError: true },
         )}
       >
+        {showNoOptions && (
+          <AutocompleteNoOptions
+            value={noOptionsText}
+            multiple={false}
+            multiline={false}
+            highlighted={'false'}
+            isSelected={false}
+            isDisabled
+          />
+        )}
         {isOpen && (
           <li
             key="total-size"
@@ -729,8 +795,6 @@ function AutocompleteInner<T>(
     getDropdownProps({
       preventKeyAction: multiple ? isOpen : undefined,
       disabled,
-      onChange: (e: ChangeEvent<HTMLInputElement>) =>
-        setTypedInputValue(e?.currentTarget?.value),
     }),
   )
   const consolidatedEvents = mergeEventsFromRight(other, inputProps)

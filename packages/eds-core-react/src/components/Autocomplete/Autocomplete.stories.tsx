@@ -653,6 +653,7 @@ export const Async: StoryFn<AutocompleteProps<MyOptionType>> = () => {
         onOptionsChange={onChange}
         selectedOptions={[selectedItem]}
         loading={loading}
+        noOptionsText={loading ? 'Loading data..' : 'No options'}
         multiline
       />
       {selectedItem && (
