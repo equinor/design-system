@@ -205,6 +205,10 @@ export type AutocompleteProps<T> = {
   helperText?: string
   /** Icon that will be displayed before the helper text */
   helperIcon?: ReactNode
+  /** Set text for the "no options" item. Set to an empty string to force off
+   * @default 'No options'
+   */
+  noOptionsText?: string
   /** Variants */
   variant?: Variants
   /** Meta text, for instance unit */
@@ -301,6 +305,7 @@ function AutocompleteInner<T>(
     optionComponent,
     helperText,
     helperIcon,
+    noOptionsText = 'No options',
     variant,
     ...other
   } = props
@@ -685,7 +690,10 @@ function AutocompleteInner<T>(
     (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
 
   const showNoOptions =
-    isOpen && !availableItems.length && inputValue.length > 0
+    isOpen &&
+    !availableItems.length &&
+    inputValue.length > 0 &&
+    noOptionsText.length > 0
 
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),
@@ -721,7 +729,7 @@ function AutocompleteInner<T>(
       >
         {showNoOptions && (
           <AutocompleteNoOptions
-            value={'No options'}
+            value={noOptionsText}
             multiple={false}
             multiline={false}
             highlighted={'false'}
