@@ -69,6 +69,7 @@ export function DebouncedInput({
             }
             selectedOptions={value as Array<string>}
             onOptionsChange={(c) => setValue(c.selectedItems)}
+            multiline
           />
           <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '8px' }}>
             {(value as Array<string>).map((v) => (
