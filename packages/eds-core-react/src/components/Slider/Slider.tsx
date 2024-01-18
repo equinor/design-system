@@ -114,8 +114,9 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
 
-  &:where(:hover, :has(:focus-visible)) {
-    > output {
+  &:has(:focus-visible),
+  &:hover {
+    & > output {
       --showTooltip: 1;
     }
   }
@@ -196,8 +197,9 @@ const Wrapper = styled.div.attrs<WrapperProps>(
     margin-left: 3px;
   }
 
-  &:where(:hover, :has(:focus-visible)) {
-    > output {
+  &:has(:focus-visible),
+  &:hover {
+    & > output {
       --showTooltip: 1;
     }
   }
