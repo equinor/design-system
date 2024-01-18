@@ -30,6 +30,7 @@ import { TableRow } from './components/TableRow'
 import { TableProvider } from './EdsDataGridContext'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { EdsDataGridProps } from './EdsDataGridProps'
+import { Typography } from '@equinor/eds-core-react'
 
 export function EdsDataGrid<T>({
   rows,
@@ -147,6 +148,23 @@ export function EdsDataGrid<T>({
   const options: TableOptions<T> = {
     data: rows,
     columns: _columns,
+    defaultColumn: {
+      cell: (context) => {
+        return (
+          <Typography
+            style={{
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+            }}
+            group="table"
+            variant="cell_text"
+          >
+            {String(context.getValue() ?? '')}
+          </Typography>
+        )
+      },
+    },
     columnResizeMode: columnResizeMode,
     state: {
       sorting,

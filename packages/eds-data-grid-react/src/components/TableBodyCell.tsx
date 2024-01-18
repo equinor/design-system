@@ -23,9 +23,6 @@ const StyledCell = styled(Table.Cell)<{
   z-index: ${(p) => (p.$pinned ? 11 : 'auto')};
   background-color: ${(p) =>
     p.$pinned ? tokens.colors.ui.background__default.hex : 'inherit'};
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `
 
 export function TableBodyCell<T>({ cell }: Props<T>) {
@@ -54,9 +51,7 @@ export function TableBodyCell<T>({ cell }: Props<T>) {
         },
       }}
     >
-      <Typography as="span" group="table" variant="cell_text">
-        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-      </Typography>
+      {flexRender(cell.column.columnDef.cell, cell.getContext())}
     </StyledCell>
   )
 }
