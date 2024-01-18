@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "import/default": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

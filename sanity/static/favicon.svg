@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="85.333336"
+   height="85.333336"
+   viewBox="0 0 85.333336 85.333336"
+   sodipodi:docname="Equinor_Symbol_Favicon_RED_64x64px[1].ai"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath16">
+      <path
+         d="M 0,64 H 64 V 0 H 0 Z"
+         id="path14" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="Equinor_Symbol_Favicon_RED_64x64px[1]"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,85.333333)">
+    <g
+       id="g10">
+      <g
+         id="g12"
+         clip-path="url(#clipPath16)">
+        <g
+           id="g18"
+           transform="translate(14.2842,46.4058)">
+          <path
+             d="m 0,0 v -14.059 c -0.001,-0.417 0.208,-0.802 0.569,-1.01 l 12.182,-7.017 c 0.517,-0.298 1.176,0.075 1.177,0.671 v 14.059 c 0,0.416 -0.222,0.802 -0.583,1.01 L 1.163,0.671 C 0.646,0.969 0,0.597 0,0 M 37.521,10.978 19.982,0.874 C 19.463,0.575 19.144,0.021 19.144,-0.579 V -20.82 c 0.001,-0.858 0.949,-1.395 1.693,-0.967 l 17.539,10.104 c 0.52,0.3 0.819,0.853 0.819,1.453 v 20.241 c -10e-4,0.859 -0.929,1.395 -1.674,0.967 M 13.462,-32.071 8.588,-34.879 c -0.145,-0.083 -0.234,-0.237 -0.233,-0.404 l -0.001,-5.625 c 0,-0.239 0.265,-0.387 0.472,-0.268 l 4.874,2.807 c 0.144,0.083 0.228,0.238 0.228,0.405 v 5.625 c 0,0.238 -0.259,0.387 -0.466,0.268 m -2.84,5.191 -7.3,4.223 c -0.216,0.125 -0.482,0.125 -0.699,0 l -7.299,-4.223 c -0.31,-0.18 -0.31,-0.627 0,-0.806 l 7.299,-4.224 c 0.217,-0.125 0.483,-0.125 0.699,0 l 7.3,4.224 c 0.31,0.179 0.31,0.626 0,0.806 m 11.751,-0.762 3.243,-1.876 c 0.192,-0.111 0.429,-0.111 0.621,0 l 3.243,1.876 c 0.276,0.159 0.276,0.557 0,0.716 l -3.243,1.877 c -0.192,0.111 -0.429,0.111 -0.621,0 l -3.243,-1.877 c -0.275,-0.159 -0.275,-0.557 0,-0.716 m -2.609,-4.517 3.247,-1.87 c 0.192,-0.11 0.31,-0.315 0.31,-0.538 l -0.004,-3.747 c 0,-0.317 -0.344,-0.517 -0.62,-0.357 l -3.246,1.87 c -0.192,0.111 -0.306,0.316 -0.306,0.538 l -0.001,3.747 c 0,0.317 0.344,0.516 0.62,0.357"
+             style="fill:#ff1243;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path20" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
