@@ -21,8 +21,7 @@ const StyledCell = styled(Table.Cell)<{
     return ''
   }}
   z-index: ${(p) => (p.$pinned ? 11 : 'auto')};
-  background-color: ${(p) =>
-    p.$pinned ? tokens.colors.ui.background__default.hex : 'inherit'};
+  background-color: inherit;
 `
 
 export function TableBodyCell<T>({ cell }: Props<T>) {

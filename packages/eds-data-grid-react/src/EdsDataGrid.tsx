@@ -345,7 +345,7 @@ export function EdsDataGrid<T>({
               />
             ))}
           </Table.Head>
-          <Table.Body>
+          <Table.Body style={{ backgroundColor: 'inherit' }}>
             {table.getRowModel().rows.length === 0 && emptyMessage && (
               <Table.Row>
                 <Table.Cell colSpan={table.getHeaderGroups().length}>
