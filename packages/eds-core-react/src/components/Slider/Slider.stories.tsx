@@ -1,8 +1,16 @@
 import { useState, ChangeEvent } from 'react'
 import { Label, Slider, SliderProps, Typography } from '../..'
 import { StoryFn, Meta } from '@storybook/react'
+import styled from 'styled-components'
 import { Stack } from './../../../.storybook/components'
 import page from './Slider.docs.mdx'
+
+const StyledSlider = styled(Slider)`
+  margin-bottom: 32px;
+`
+const StyledLabel = styled(Label)`
+  margin-bottom: 8px;
+`
 
 const meta: Meta<typeof Slider> = {
   title: 'Inputs/Slider',
@@ -189,3 +197,33 @@ export const HideActiveTrack: StoryFn<SliderProps> = () => (
     />
   </>
 )
+
+export const SliderStack: StoryFn<SliderProps> = () => (
+  <div style={{ width: '100%' }}>
+    <StyledLabel label="Its a range slider" id="below-1" />
+    <StyledSlider
+      aria-labelledby="below-1"
+      min={30}
+      value={[40, 60]}
+      labelBelow
+      labelAlwaysOn
+    />
+    <StyledLabel label="Another range slider" id="below-2" />
+    <StyledSlider
+      aria-labelledby="below-2"
+      min={30}
+      value={[30, 70]}
+      labelBelow
+      labelAlwaysOn
+    />
+    <StyledLabel label="Slider" id="below-3" />
+    <StyledSlider
+      aria-labelledby="below-3"
+      min={0}
+      value={[35]}
+      labelBelow
+      labelAlwaysOn
+    />
+  </div>
+)
+RangeSliderWithInterval.storyName = 'Range slider with interval'

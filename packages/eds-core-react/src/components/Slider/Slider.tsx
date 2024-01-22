@@ -55,6 +55,7 @@ type RangeWrapperProps = {
   $disabled: boolean
   $hideActiveTrack: boolean
   $labelAlwaysOn: boolean
+  $labelBelow: boolean
   $touchNavigation: boolean
 }
 
@@ -145,6 +146,14 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
         pointer-events: auto;
       }
     `};
+  ${({ $labelBelow }) =>
+    $labelBelow &&
+    css`
+      & > output {
+        top: calc(100% + 1px);
+        bottom: unset;
+      }
+    `};
 `
 
 type WrapperProps = {
@@ -152,6 +161,7 @@ type WrapperProps = {
   $max: number
   $hideActiveTrack: boolean
   $labelAlwaysOn: boolean
+  $labelBelow: boolean
 } & Pick<SliderProps, 'disabled' | 'value'>
 
 const Wrapper = styled.div.attrs<WrapperProps>(
@@ -211,6 +221,14 @@ const Wrapper = styled.div.attrs<WrapperProps>(
         background: var(--background-hover);
       }
     }
+    ${({ $labelBelow }) =>
+      $labelBelow &&
+      css`
+        & > output {
+          top: calc(100% + 1px);
+          bottom: unset;
+        }
+      `};
   }
 `
 
@@ -284,6 +302,10 @@ export type SliderProps = {
    * @default false
    */
   labelAlwaysOn?: boolean
+  /** Display the value label below the track
+   * @default false
+   */
+  labelBelow?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
@@ -297,6 +319,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     minMaxDots = true,
     minMaxValues = true,
     labelAlwaysOn,
+    labelBelow,
     step = 1,
     disabled,
     hideActiveTrack,
@@ -464,6 +487,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
           $labelAlwaysOn={labelAlwaysOn || touchNavigation}
+          $labelBelow={labelBelow}
           $touchNavigation={touchNavigation}
           onMouseMove={findClosestRange}
           onTouchStartCapture={findClosestRange}
@@ -532,6 +556,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
           $labelAlwaysOn={labelAlwaysOn || touchNavigation}
+          $labelBelow={labelBelow}
           onTouchStartCapture={() => setTouchNavigation(true)}
           onMouseDownCapture={() => setTouchNavigation(false)}
         >

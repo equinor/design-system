@@ -25,7 +25,8 @@ const StyledOutput = styled.output`
   color: white;
   background: var(--background);
   padding: 4px 8px;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 1px);
+  //top: calc(100% + 1px);
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
@@ -34,17 +35,6 @@ const StyledOutput = styled.output`
   grid-row: 2;
   grid-column: 1 / -1;
   opacity: var(--showTooltip);
-`
-
-const TooltipArrow = styled.svg`
-  width: 6px;
-  height: 8px;
-  position: absolute;
-  fill: var(--background);
-  top: calc(100% - 1px);
-  rotate: -90deg;
-  translate: -50%;
-  left: 50%;
 `
 
 type OutputProps = {
@@ -65,9 +55,6 @@ export const Output = forwardRef<HTMLOutputElement, OutputProps>(
         htmlFor={htmlFor}
       >
         {children}
-        <TooltipArrow>
-          <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-        </TooltipArrow>
       </StyledOutput>
     )
   },
