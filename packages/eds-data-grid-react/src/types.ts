@@ -1,0 +1,34 @@
+// Re-exports from react-table
+import type {
+  Cell,
+  CellContext,
+  ColumnDef,
+  ColumnPinningState,
+  ColumnResizeMode,
+  ColumnSort,
+  ExpandedState,
+  HeaderContext,
+  OnChangeFn,
+  Row,
+  RowSelectionState,
+  SortingState,
+  Table,
+  VisibilityState,
+} from '@tanstack/react-table'
+
+export type {
+  Cell,
+  CellContext,
+  ColumnDef,
+  ColumnPinningState,
+  ColumnResizeMode,
+  ColumnSort,
+  ExpandedState,
+  HeaderContext,
+  OnChangeFn,
+  Row,
+  RowSelectionState,
+  SortingState,
+  Table,
+  VisibilityState,
+}

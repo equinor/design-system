@@ -1,8 +1,7 @@
 import { Cell, ColumnPinningPosition, flexRender } from '@tanstack/react-table'
-import { Table, Typography } from '@equinor/eds-core-react'
+import { Table } from '@equinor/eds-core-react'
 import { useTableContext } from '../EdsDataGridContext'
 import { useMemo } from 'react'
-import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 
 type Props<T> = {

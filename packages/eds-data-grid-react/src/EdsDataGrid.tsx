@@ -316,9 +316,9 @@ export function EdsDataGrid<T>({
         style={{
           height: height ?? 'auto',
           ...parentRefStyle,
-          width: scrollbarHorizontal ? width : 'auto',
-          tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
+          width: scrollbarHorizontal ? width ?? '100%' : 'auto',
           overflow: 'auto',
+          contain: 'strict',
         }}
         ref={parentRef}
       >
@@ -329,6 +329,7 @@ export function EdsDataGrid<T>({
             .join(' ')}
           {...{
             style: {
+              tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
               width: table.getTotalSize(),
             },
           }}

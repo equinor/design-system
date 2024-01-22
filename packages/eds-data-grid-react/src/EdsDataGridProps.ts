@@ -67,14 +67,18 @@ type BaseProps<T> = {
   scrollbarHorizontal?: boolean
   /**
    * Width of the table. Only takes effect if {@link scrollbarHorizontal} is true.
+   *
+   * No suffix (like `px` or `rem`) equals to `px`.
    * @default 800
    */
-  width?: number
+  width?: string | number
   /**
    * Height of the table.
+   *
+   * No suffix (like `px` or `rem`) equals to `px`.
    * @default none
    */
-  height?: number
+  height?: string | number
 }
 
 type StyleProps<T> = {
