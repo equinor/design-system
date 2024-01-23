@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Pagination, Table, Typography, useEds } from '@equinor/eds-core-react'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -16,7 +17,7 @@ import {
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
-import { Pagination, Table, Typography, useEds } from '@equinor/eds-core-react'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import {
   CSSProperties,
   useCallback,
@@ -28,7 +29,6 @@ import {
 import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableRow } from './components/TableRow'
 import { TableProvider } from './EdsDataGridContext'
-import { useVirtualizer } from '@tanstack/react-virtual'
 import { EdsDataGridProps } from './EdsDataGridProps'
 
 export function EdsDataGrid<T>({
@@ -67,7 +67,7 @@ export function EdsDataGrid<T>({
   minWidth,
   height,
   getRowId,
-  rowVirtualizedInstanceRef,
+  rowVirtualizerInstanceRef,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -288,7 +288,7 @@ export function EdsDataGrid<T>({
     getScrollElement: () => parentRef.current,
     estimateSize,
   })
-  if (rowVirtualizedInstanceRef) rowVirtualizedInstanceRef.current = virtualizer
+  if (rowVirtualizerInstanceRef) rowVirtualizerInstanceRef.current = virtualizer
 
   const virtualRows = virtualizer.getVirtualItems()
   const paddingTop = virtualRows.length ? virtualRows[0].start : 0

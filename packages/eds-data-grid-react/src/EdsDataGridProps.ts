@@ -201,7 +201,7 @@ type ColumnProps = {
 }
 
 type RefProps = {
-  rowVirtualizedInstanceRef?: MutableRefObject<Virtualizer<
+  rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
     HTMLDivElement,
     Element
   > | null>
