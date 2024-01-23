@@ -323,7 +323,7 @@ export function EdsDataGrid<T>({
           ...parentRefStyle,
           width: scrollbarHorizontal ? width ?? '100%' : 'auto',
           overflow: 'auto',
-          contain: 'strict',
+          contain: 'layout paint style',
         }}
         ref={parentRef}
       >
