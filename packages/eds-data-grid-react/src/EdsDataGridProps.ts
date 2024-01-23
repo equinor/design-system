@@ -73,6 +73,13 @@ type BaseProps<T> = {
    */
   width?: string | number
   /**
+   * Min width of the table element.
+   *
+   * @example minWidth: 800
+   * @default none
+   */
+  minWidth?: string | number
+  /**
    * Height of the table.
    *
    * No suffix (like `px` or `rem`) equals to `px`.

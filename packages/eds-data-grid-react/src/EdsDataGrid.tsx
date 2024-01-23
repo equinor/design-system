@@ -65,6 +65,7 @@ export function EdsDataGrid<T>({
   columnPinState,
   scrollbarHorizontal,
   width,
+  minWidth,
   height,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
@@ -331,6 +332,7 @@ export function EdsDataGrid<T>({
             style: {
               tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
               width: table.getTotalSize(),
+              minWidth: scrollbarHorizontal ? width : 'auto',
             },
           }}
         >
@@ -349,7 +351,7 @@ export function EdsDataGrid<T>({
           <Table.Body style={{ backgroundColor: 'inherit' }}>
             {table.getRowModel().rows.length === 0 && emptyMessage && (
               <Table.Row>
-                <Table.Cell colSpan={table.getHeaderGroups().length}>
+                <Table.Cell colSpan={table.getFlatHeaders().length}>
                   {emptyMessage}
                 </Table.Cell>
               </Table.Row>
