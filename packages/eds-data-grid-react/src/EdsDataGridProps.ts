@@ -9,7 +9,8 @@ import {
   SortingState,
   TableOptions,
 } from '@tanstack/react-table'
-import { CSSProperties, ReactElement } from 'react'
+import { Virtualizer } from '@tanstack/react-virtual'
+import { CSSProperties, MutableRefObject, ReactElement } from 'react'
 
 type BaseProps<T> = {
   /**
@@ -199,13 +200,21 @@ type ColumnProps = {
   columnPinState?: ColumnPinningState
 }
 
+type RefProps = {
+  rowVirtualizedInstanceRef?: MutableRefObject<Virtualizer<
+    HTMLDivElement,
+    Element
+  > | null>
+}
+
 export type EdsDataGridProps<T> = BaseProps<T> &
   StyleProps<T> &
   SortProps &
   FilterProps &
   PagingProps &
   ColumnProps &
-  VirtualProps & {
+  VirtualProps &
+  RefProps & {
     /**
      * Which columns are visible. If not set, all columns are visible. undefined means that the column is visible.
      * @default undefined

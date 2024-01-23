@@ -15,6 +15,7 @@ import type {
   Table,
   VisibilityState,
 } from '@tanstack/react-table'
+import type { Virtualizer } from '@tanstack/react-virtual'
 
 export type {
   Cell,
@@ -31,4 +32,5 @@ export type {
   SortingState,
   Table,
   VisibilityState,
+  Virtualizer,
 }

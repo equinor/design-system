@@ -68,6 +68,7 @@ export function EdsDataGrid<T>({
   minWidth,
   height,
   getRowId,
+  rowVirtualizedInstanceRef,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -288,6 +289,8 @@ export function EdsDataGrid<T>({
     getScrollElement: () => parentRef.current,
     estimateSize,
   })
+  if (rowVirtualizedInstanceRef) rowVirtualizedInstanceRef.current = virtualizer
+
   const virtualRows = virtualizer.getVirtualItems()
   const paddingTop = virtualRows.length ? virtualRows[0].start : 0
   const paddingBottom = virtualRows.length
@@ -334,7 +337,7 @@ export function EdsDataGrid<T>({
             style: {
               tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
               width: table.getTotalSize(),
-              minWidth: scrollbarHorizontal ? width : 'auto',
+              minWidth: scrollbarHorizontal ? minWidth : 'auto',
             },
           }}
         >
@@ -360,16 +363,19 @@ export function EdsDataGrid<T>({
             )}
             {enableVirtual && (
               <>
-                <Table.Row
-                  data-testid="virtual-padding-top"
-                  className={'virtual-padding-top'}
-                >
-                  <Table.Cell
-                    style={{
-                      height: `${paddingTop}px`,
-                    }}
-                  ></Table.Cell>
-                </Table.Row>
+                {paddingTop > 0 && (
+                  <Table.Row
+                    data-testid="virtual-padding-top"
+                    className={'virtual-padding-top'}
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    <Table.Cell
+                      style={{
+                        height: `${paddingTop}px`,
+                      }}
+                    />
+                  </Table.Row>
+                )}
 
                 {virtualRows.map((row) => (
                   <TableRow
@@ -377,16 +383,20 @@ export function EdsDataGrid<T>({
                     row={table.getRowModel().rows[row.index]}
                   />
                 ))}
-                <Table.Row
-                  data-testid="virtual-padding-bottom"
-                  className={'virtual-padding-bottom'}
-                >
-                  <Table.Cell
-                    style={{
-                      height: `${paddingBottom}px`,
-                    }}
-                  ></Table.Cell>
-                </Table.Row>
+
+                {paddingBottom > 0 && (
+                  <Table.Row
+                    data-testid="virtual-padding-bottom"
+                    className={'virtual-padding-bottom'}
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    <Table.Cell
+                      style={{
+                        height: `${paddingBottom}px`,
+                      }}
+                    />
+                  </Table.Row>
+                )}
               </>
             )}
             {!enableVirtual &&

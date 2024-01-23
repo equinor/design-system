@@ -342,7 +342,8 @@ describe('EdsDataGrid', () => {
         screen.queryByRole('table')?.classList.contains('virtual'),
       ).toBeFalsy()
     })
-    it('should show virtual scroll if specified', () => {
+
+    it('should show virtual scroll if enabled', () => {
       let manyRows: Array<Data> = []
       for (let i = 0; i < 200; i++) {
         manyRows = [...manyRows, ...data]
@@ -355,8 +356,23 @@ describe('EdsDataGrid', () => {
         screen.getByRole('table')?.classList.contains('virtual'),
       ).toBeTruthy()
       // Has 2 virtual padding elements
-      expect(screen.getByTestId('virtual-padding-top')).toBeTruthy()
+      // Only bottom scroll element is visible before scrolling
+      expect(screen.queryByTestId('virtual-padding-top')).toBeFalsy()
       expect(screen.getByTestId('virtual-padding-bottom')).toBeTruthy()
+    })
+
+    it('should not show virtual scroll if enabled, but not needed', () => {
+      const fewRows: Data[] = data.slice(0, 2)
+      render(
+        <EdsDataGrid enableVirtual={true} columns={columns} rows={fewRows} />,
+      )
+      // Applies virtual class
+      expect(
+        screen.getByRole('table')?.classList.contains('virtual'),
+      ).toBeTruthy()
+      // Only bottom scroll element is visible before scrolling
+      expect(screen.queryByTestId('virtual-padding-top')).toBeFalsy()
+      expect(screen.queryByTestId('virtual-padding-bottom')).toBeFalsy()
     })
   })
 
