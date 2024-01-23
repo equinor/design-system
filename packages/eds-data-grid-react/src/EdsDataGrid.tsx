@@ -67,6 +67,7 @@ export function EdsDataGrid<T>({
   width,
   minWidth,
   height,
+  getRowId,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -192,6 +193,7 @@ export function EdsDataGrid<T>({
     enableRowSelection: rowSelection ?? false,
     enableColumnPinning: true,
     enablePinning: true,
+    getRowId,
   }
 
   useEffect(() => {
