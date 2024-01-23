@@ -1,0 +1,32 @@
+{
+  "eds": {
+    "semantic": {
+      "shape": {
+        "button": {
+          "height": {
+            "value": "36px",
+            "type": "dimension"
+          },
+          "horizontalPadding": {
+            "value": "16px",
+            "type": "dimension"
+          }
+        },
+        "actionButton": {
+          "height": {
+            "value": "40px",
+            "type": "dimension"
+          },
+          "width": {
+            "value": "{eds.semantic.shape.actionButton.height}",
+            "type": "dimension"
+          },
+          "borderRadius": {
+            "value": "{eds.semantic.shape.actionButton.height} / 2",
+            "type": "dimension"
+          }
+        }
+      }
+    }
+  }
+}

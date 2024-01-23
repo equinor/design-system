@@ -7,9 +7,30 @@
             "value": "silver",
             "type": "color",
             "description": "The background colour of buttons, tabs, menu items etc."
+          },
+          "primary": {
+            "value": "#007079",
+            "type": "color",
+            "description": "The background colour of buttons, tabs, menu items etc."
+          },
+          "primary-hover": {
+            "value": "#03c5d3",
+            "type": "color",
+            "description": "The background colour of buttons, tabs, menu items etc."
           }
         },
         "fg": {
+          "default": {
+            "value": "gray",
+            "type": "color",
+            "description": "Default text and icon colour"
+          },
+          "disabled": {
+            "value": "gray",
+            "type": "color"
+          }
+        },
+        "border": {
           "default": {
             "value": "gray",
             "type": "color",
@@ -84,13 +105,13 @@
           "value": "2",
           "type": "borderWidth"
         },
-        "color": {
-          "primary": {
-            "enabled": {
-              "value": "maroon",
-              "type": "color"
-            }
-          }
+        "inputs": {
+          "value": {
+            "color": "#bababa",
+            "width": "1",
+            "style": "solid"
+          },
+          "type": "border"
         }
       },
       "typography": {

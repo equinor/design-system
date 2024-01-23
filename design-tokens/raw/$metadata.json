@@ -20,6 +20,9 @@
     "component/buttonTests/beforeBorder",
     "component/buttonTests/codeOptimised",
     "semantic/shape",
-    "core/border"
+    "core/border",
+    "component/buttonTest",
+    "semantic/actions",
+    "semantic/color"
   ]
 }
