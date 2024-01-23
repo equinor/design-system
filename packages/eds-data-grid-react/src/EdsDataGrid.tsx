@@ -16,7 +16,7 @@ import {
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
-import { Pagination, Table, useEds } from '@equinor/eds-core-react'
+import { Pagination, Table, Typography, useEds } from '@equinor/eds-core-react'
 import {
   CSSProperties,
   useCallback,
@@ -30,7 +30,6 @@ import { TableRow } from './components/TableRow'
 import { TableProvider } from './EdsDataGridContext'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { EdsDataGridProps } from './EdsDataGridProps'
-import { Typography } from '@equinor/eds-core-react'
 
 export function EdsDataGrid<T>({
   rows,
