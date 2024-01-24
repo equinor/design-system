@@ -20,6 +20,7 @@ const Container = styled.div<ContainerProps>(({ color }) =>
 const Text = styled.p`
   margin: 0;
   ${typographyMixin(tokens.typography)};
+  white-space: pre-line;
 `
 
 export type HelperTextProps = {
