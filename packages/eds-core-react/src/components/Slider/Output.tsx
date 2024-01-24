@@ -14,7 +14,11 @@ const {
 
 const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
-  --background: rgb(0 0 0 / 0.8);
+  //fix use from token once decided
+  --background: var(
+    --tooltip-background,
+    rgba(0, 112, 121, 1)
+  ); //rgb(0 0 0 / 0.8);
   width: fit-content;
   position: absolute;
   display: flex;
@@ -24,9 +28,9 @@ const StyledOutput = styled.output`
   ${typographyTemplate(output.typography)};
   color: white;
   background: var(--background);
-  padding: 4px 8px;
+  //padding: 4px 8px;
+  padding: 4px 4px 2px 4px;
   bottom: calc(100% + 1px);
-  //top: calc(100% + 1px);
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));

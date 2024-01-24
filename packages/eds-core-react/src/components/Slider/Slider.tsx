@@ -119,6 +119,7 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
   &:hover {
     & > output {
       --showTooltip: 1;
+      --tooltip-background: ${track.entities.indicator.states.hover.background};
     }
   }
 
@@ -211,6 +212,7 @@ const Wrapper = styled.div.attrs<WrapperProps>(
   &:hover {
     & > output {
       --showTooltip: 1;
+      --tooltip-background: ${track.entities.indicator.states.hover.background};
     }
   }
 
