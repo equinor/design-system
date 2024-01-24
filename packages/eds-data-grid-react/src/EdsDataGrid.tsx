@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Pagination, Table, Typography, useEds } from '@equinor/eds-core-react'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -16,7 +17,7 @@ import {
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
-import { Pagination, Table, useEds } from '@equinor/eds-core-react'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import {
   CSSProperties,
   useCallback,
@@ -28,7 +29,6 @@ import {
 import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableRow } from './components/TableRow'
 import { TableProvider } from './EdsDataGridContext'
-import { useVirtualizer } from '@tanstack/react-virtual'
 import { EdsDataGridProps } from './EdsDataGridProps'
 
 export function EdsDataGrid<T>({
@@ -64,7 +64,10 @@ export function EdsDataGrid<T>({
   columnPinState,
   scrollbarHorizontal,
   width,
+  minWidth,
   height,
+  getRowId,
+  rowVirtualizerInstanceRef,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -147,6 +150,23 @@ export function EdsDataGrid<T>({
   const options: TableOptions<T> = {
     data: rows,
     columns: _columns,
+    defaultColumn: {
+      cell: (context) => {
+        return (
+          <Typography
+            style={{
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+            }}
+            group="table"
+            variant="cell_text"
+          >
+            {String(context.getValue() ?? '')}
+          </Typography>
+        )
+      },
+    },
     columnResizeMode: columnResizeMode,
     state: {
       sorting,
@@ -173,6 +193,7 @@ export function EdsDataGrid<T>({
     enableRowSelection: rowSelection ?? false,
     enableColumnPinning: true,
     enablePinning: true,
+    getRowId,
   }
 
   useEffect(() => {
@@ -267,6 +288,8 @@ export function EdsDataGrid<T>({
     getScrollElement: () => parentRef.current,
     estimateSize,
   })
+  if (rowVirtualizerInstanceRef) rowVirtualizerInstanceRef.current = virtualizer
+
   const virtualRows = virtualizer.getVirtualItems()
   const paddingTop = virtualRows.length ? virtualRows[0].start : 0
   const paddingBottom = virtualRows.length
@@ -298,9 +321,9 @@ export function EdsDataGrid<T>({
         style={{
           height: height ?? 'auto',
           ...parentRefStyle,
-          width: scrollbarHorizontal ? width : 'auto',
-          tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
+          width: scrollbarHorizontal ? width ?? '100%' : 'auto',
           overflow: 'auto',
+          contain: 'layout paint style',
         }}
         ref={parentRef}
       >
@@ -311,7 +334,9 @@ export function EdsDataGrid<T>({
             .join(' ')}
           {...{
             style: {
+              tableLayout: scrollbarHorizontal ? 'fixed' : 'auto',
               width: table.getTotalSize(),
+              minWidth: scrollbarHorizontal ? minWidth : 'auto',
             },
           }}
         >
@@ -327,26 +352,29 @@ export function EdsDataGrid<T>({
               />
             ))}
           </Table.Head>
-          <Table.Body>
+          <Table.Body style={{ backgroundColor: 'inherit' }}>
             {table.getRowModel().rows.length === 0 && emptyMessage && (
               <Table.Row>
-                <Table.Cell colSpan={table.getHeaderGroups().length}>
+                <Table.Cell colSpan={table.getFlatHeaders().length}>
                   {emptyMessage}
                 </Table.Cell>
               </Table.Row>
             )}
             {enableVirtual && (
               <>
-                <Table.Row
-                  data-testid="virtual-padding-top"
-                  className={'virtual-padding-top'}
-                >
-                  <Table.Cell
-                    style={{
-                      height: `${paddingTop}px`,
-                    }}
-                  ></Table.Cell>
-                </Table.Row>
+                {paddingTop > 0 && (
+                  <Table.Row
+                    data-testid="virtual-padding-top"
+                    className={'virtual-padding-top'}
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    <Table.Cell
+                      style={{
+                        height: `${paddingTop}px`,
+                      }}
+                    />
+                  </Table.Row>
+                )}
 
                 {virtualRows.map((row) => (
                   <TableRow
@@ -354,16 +382,20 @@ export function EdsDataGrid<T>({
                     row={table.getRowModel().rows[row.index]}
                   />
                 ))}
-                <Table.Row
-                  data-testid="virtual-padding-bottom"
-                  className={'virtual-padding-bottom'}
-                >
-                  <Table.Cell
-                    style={{
-                      height: `${paddingBottom}px`,
-                    }}
-                  ></Table.Cell>
-                </Table.Row>
+
+                {paddingBottom > 0 && (
+                  <Table.Row
+                    data-testid="virtual-padding-bottom"
+                    className={'virtual-padding-bottom'}
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    <Table.Cell
+                      style={{
+                        height: `${paddingBottom}px`,
+                      }}
+                    />
+                  </Table.Row>
+                )}
               </>
             )}
             {!enableVirtual &&

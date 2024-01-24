@@ -1,8 +1,7 @@
 import { Cell, ColumnPinningPosition, flexRender } from '@tanstack/react-table'
-import { Table, Typography } from '@equinor/eds-core-react'
+import { Table } from '@equinor/eds-core-react'
 import { useTableContext } from '../EdsDataGridContext'
 import { useMemo } from 'react'
-import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 
 type Props<T> = {
@@ -21,11 +20,7 @@ const StyledCell = styled(Table.Cell)<{
     return ''
   }}
   z-index: ${(p) => (p.$pinned ? 11 : 'auto')};
-  background-color: ${(p) =>
-    p.$pinned ? tokens.colors.ui.background__default.hex : 'inherit'};
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  background-color: inherit;
 `
 
 export function TableBodyCell<T>({ cell }: Props<T>) {
@@ -54,9 +49,7 @@ export function TableBodyCell<T>({ cell }: Props<T>) {
         },
       }}
     >
-      <Typography as="span" group="table" variant="cell_text">
-        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-      </Typography>
+      {flexRender(cell.column.columnDef.cell, cell.getContext())}
     </StyledCell>
   )
 }

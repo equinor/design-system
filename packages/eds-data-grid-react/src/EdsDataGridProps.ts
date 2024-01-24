@@ -7,8 +7,10 @@ import {
   Row,
   RowSelectionState,
   SortingState,
+  TableOptions,
 } from '@tanstack/react-table'
-import { CSSProperties, ReactElement } from 'react'
+import { Virtualizer } from '@tanstack/react-virtual'
+import { CSSProperties, MutableRefObject, ReactElement } from 'react'
 
 type BaseProps<T> = {
   /**
@@ -67,14 +69,32 @@ type BaseProps<T> = {
   scrollbarHorizontal?: boolean
   /**
    * Width of the table. Only takes effect if {@link scrollbarHorizontal} is true.
+   *
+   * No suffix (like `px` or `rem`) equals to `px`.
    * @default 800
    */
-  width?: number
+  width?: string | number
   /**
-   * Height of the table.
+   * Min width of the table element.
+   *
+   * @example minWidth: 800
    * @default none
    */
-  height?: number
+  minWidth?: string | number
+  /**
+   * Height of the table.
+   *
+   * No suffix (like `px` or `rem`) equals to `px`.
+   * @default none
+   */
+  height?: string | number
+  /**
+   * This optional function is used to derive a unique ID for any given row. If not provided the rows index is used (nested rows join together with `.` using their grandparents' index eg. `index.index.index`). If you need to identify individual rows that are originating from any server-side operations, it's suggested you use this function to return an ID that makes sense regardless of network IO/ambiguity eg. a userId, taskId, database ID field, etc.
+   * @example getRowId: row => row.userId
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#getrowid)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/tables)
+   */
+  getRowId?: TableOptions<T>['getRowId']
 }
 
 type StyleProps<T> = {
@@ -180,13 +200,21 @@ type ColumnProps = {
   columnPinState?: ColumnPinningState
 }
 
+type RefProps = {
+  rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
+    HTMLDivElement,
+    Element
+  > | null>
+}
+
 export type EdsDataGridProps<T> = BaseProps<T> &
   StyleProps<T> &
   SortProps &
   FilterProps &
   PagingProps &
   ColumnProps &
-  VirtualProps & {
+  VirtualProps &
+  RefProps & {
     /**
      * Which columns are visible. If not set, all columns are visible. undefined means that the column is visible.
      * @default undefined

@@ -2,12 +2,20 @@ import { Meta, StoryFn } from '@storybook/react'
 import { EdsDataGrid } from './EdsDataGrid'
 import { columns, groupedColumns, Photo } from './stories/columns'
 import { data } from './stories/data'
-import { CSSProperties, useEffect, useState } from 'react'
+import {
+  CSSProperties,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import {
   Button,
   Checkbox,
   Pagination,
   Paper,
+  TextField,
   Typography,
 } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
@@ -15,6 +23,7 @@ import { Column, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
 import { EdsDataGridProps } from './EdsDataGridProps'
+import { Virtualizer } from './types'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -196,6 +205,69 @@ export const ColumnOrdering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
       <EdsDataGrid columnOrder={sort} {...args} />
     </>
   )
+}
+
+export const ScrollToIndex: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const [index, setIndex] = useState<number>(100)
+
+  const rowVirtualizerInstanceRef =
+    useRef<Virtualizer<HTMLDivElement, Element>>(null)
+
+  const scrollToIndex = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    rowVirtualizerInstanceRef.current?.scrollToIndex(index, {
+      align: 'center',
+      behavior: 'smooth',
+    })
+  }
+
+  return (
+    <>
+      <form
+        style={{
+          display: 'flex',
+          alignItems: 'end',
+          gap: '1rem',
+          marginBottom: '1rem',
+        }}
+        onSubmit={scrollToIndex}
+      >
+        <TextField
+          id="index"
+          type="number"
+          label="Index"
+          name="index"
+          value={String(index)}
+          style={{ width: '8rem' }}
+          min={0}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setIndex(e.target.valueAsNumber)
+          }
+        />
+        <Button type="submit" style={{ flexShrink: 0 }} disabled={isNaN(index)}>
+          Scroll To Index
+        </Button>
+      </form>
+
+      <EdsDataGrid
+        {...args}
+        rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
+      />
+    </>
+  )
+}
+
+ScrollToIndex.args = {
+  stickyHeader: true,
+  enableVirtual: true,
+  height: 300,
+  rows: Array.from(new Array(100)).flatMap((_, copyNumber) =>
+    data.map<(typeof data)[number]>((item, index, { length }) => ({
+      ...item,
+      id: index + copyNumber * length,
+    })),
+  ),
 }
 
 export const HideShowColumns: StoryFn<EdsDataGridProps<Photo>> = (args) => {

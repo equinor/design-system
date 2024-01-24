@@ -3,6 +3,7 @@ import { Row } from '@tanstack/react-table'
 import { TableBodyCell } from './TableBodyCell'
 import { HTMLAttributes } from 'react'
 import { useTableContext } from '../EdsDataGridContext'
+import styled from 'styled-components'
 
 type Props<T> = {
   row: Row<T>
@@ -11,7 +12,7 @@ type Props<T> = {
 export function TableRow<T>({ row }: Props<T>) {
   const { rowClass, rowStyle } = useTableContext()
   return (
-    <Table.Row
+    <StyledTableRow
       style={{
         cursor: row.getCanSelect() ? 'pointer' : 'inherit',
         ...(rowStyle?.(row) ?? {}),
@@ -22,6 +23,11 @@ export function TableRow<T>({ row }: Props<T>) {
       {row.getVisibleCells().map((cell) => (
         <TableBodyCell key={cell.id} cell={cell} />
       ))}
-    </Table.Row>
+    </StyledTableRow>
   )
 }
+
+// Neccessary to have this attribute as class to prevent overriding hover color
+const StyledTableRow = styled(Table.Row)`
+  background-color: inherit;
+`

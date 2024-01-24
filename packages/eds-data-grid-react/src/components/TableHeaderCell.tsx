@@ -78,10 +78,9 @@ const Cell = styled(Table.Cell)<{
     }
     return ''
   }}
-  z-index: ${(p) => {
-    if (p.$sticky && p.$pinned) return 13
-    if (p.$sticky || p.$pinned) return 12
-    return 'auto'
+  ${(p) => {
+    if (p.$sticky && p.$pinned) return 'z-index: 13'
+    if (p.$sticky || p.$pinned) return 'z-index: 12'
   }};
   &:hover ${ResizeInner} {
     background: ${tokens.colors.interactive.primary__hover.rgba};
