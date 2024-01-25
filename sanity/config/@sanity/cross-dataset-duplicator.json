@@ -1,0 +1,4 @@
+{
+  "tool": true,
+  "types": ["news", "tag", "countryTag"]
+}

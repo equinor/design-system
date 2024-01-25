@@ -1,0 +1,9 @@
+{
+  "parts": [
+    {
+      "name": "part:asset-source-brandmaster/image-asset-source",
+      "implements": "part:@sanity/form-builder/input/image/asset-source",
+      "path": "index.ts"
+    }
+  ]
+}
