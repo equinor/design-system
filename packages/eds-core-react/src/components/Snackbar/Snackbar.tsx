@@ -98,15 +98,14 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
 
     useEffect(() => {
       setVisible(open)
-
-      timer.current = setTimeout(() => {
-        setVisible(false)
-
-        if (onClose) {
-          onClose()
-        }
-      }, autoHideDuration)
-
+      if (open) {
+        timer.current = setTimeout(() => {
+          setVisible(false)
+          if (onClose) {
+            onClose()
+          }
+        }, autoHideDuration)
+      }
       return () => clearTimeout(timer.current)
     }, [open, autoHideDuration, setVisible, onClose])
 
