@@ -3,9 +3,9 @@ import { deleteAsync } from 'del'
 import fetch from 'node-fetch'
 import * as R from 'ramda'
 import { createFolder } from './folder'
-import prettier from 'prettier'
+//import prettier from 'prettier'
 
-const prettierConfig = fs.readFileSync('./../../.prettierrc.yaml', 'utf8')
+//const prettierConfig = fs.readFileSync('./../../.prettierrc.yaml', 'utf8')
 const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`
 
 const write = (file, path, name, ext) => {
@@ -41,8 +41,11 @@ export const writeFile = (path, name, ext, file) => {
       let value = file
 
       if (ext === 'js' || ext === 'ts') {
-        const options = prettier.resolveConfig.sync(prettierConfig)
-        value = prettier.format(file, { ...options, parser: 'babel' })
+        /* prettier "resolveConfig" and "format" was made async in v3
+        @todo rewrite this and the cascade of other functions using it to async.
+        In the meantime autoformat packages\eds-icons\src\data.ts with vsCode instead */
+        //const options = await prettier.resolveConfig(prettierConfig)
+        //value = await prettier.format(file, { ...options, parser: 'babel' })
       }
 
       write(value, path, name, ext)
