@@ -4209,6 +4209,24 @@ export const image_add: IconData = {
     'M19.5 1.5v3h3v2h-3v2.99s-1.99.01-2 0V6.5h-3s.01-1.99 0-2h3v-3h2Zm-2 19h-14v-14h9v-2h-9c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9h-2v9Zm-7.79-3.17-1.96-2.36L5 18.5h11l-3.54-4.71-2.75 3.54Z',
 }
 
+export const monopile: IconData = {
+  name: 'monopile',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M17 15a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4H3v2h4v1h2v-6.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5V22h2v-1h4v-2h-4v-4ZM14 18h-4v4h4v-4ZM11.5 2A1.5 1.5 0 0 0 10 3.5V7a1 1 0 0 0 1 1h.333L10 10v1h4v-1l-1.333-2H13a1 1 0 0 0 1-1h5a1 1 0 1 0 0-2h-5a1 1 0 0 0-1-1h-1V2h-.5Z',
+}
+
+export const jacket: IconData = {
+  name: 'jacket',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M7.351 4.822A2 2 0 0 1 9.343 3h5.314a2 2 0 0 1 1.992 1.822L17.915 19H21v2H3v-2h3.085L7.351 4.822ZM8.093 19h7.814l-.418-4.679-7.266 3.23L8.093 19ZM14.81 6.713l.427 4.787-5-2.5 4.573-2.287ZM9.343 5h4.42L9.138 7.314 9.343 5Zm-.917 10.272.422-4.73 4.81 2.405-5.232 2.325Z',
+}
+
 export const sun: IconData = {
   name: 'sun',
   prefix: 'eds',
