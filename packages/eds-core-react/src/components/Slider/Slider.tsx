@@ -261,7 +261,7 @@ export type SliderProps = {
   onChange?: (event: ChangeEvent<HTMLInputElement>, newValue: number[]) => void
   /** Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
-    event: MouseEvent | KeyboardEvent,
+    event: MouseEvent | KeyboardEvent | TouchEvent,
     newValue: number[],
   ) => void
   /** Function for formatting the displayed value. E.g. formatting dates, or adding a unit suffix */
@@ -372,7 +372,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const handleCommitedValue = (event: KeyboardEvent | MouseEvent) => {
+  const handleCommitedValue = (
+    event: KeyboardEvent | MouseEvent | TouchEvent,
+  ) => {
     if (onChangeCommitted) {
       onChangeCommitted(event, sliderValue)
     }
@@ -490,6 +492,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
               onValueChange(event, 0)
             }}
             onMouseUp={(event) => handleCommitedValue(event)}
+            onTouchEnd={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
             disabled={disabled}
           />
@@ -514,6 +517,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
               onValueChange(event, 1)
             }}
             onMouseUp={(event) => handleCommitedValue(event)}
+            onTouchEnd={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
             disabled={disabled}
           />
@@ -553,6 +557,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             aria-labelledby={getAriaLabelledby()}
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
+            onTouchEnd={(event) => handleCommitedValue(event)}
           />
           <Output htmlFor={inputId} value={sliderValue[0]}>
             {getFormattedText(sliderValue[0])}
