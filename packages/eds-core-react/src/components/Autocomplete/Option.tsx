@@ -62,6 +62,7 @@ export type AutocompleteOptionProps = {
   isDisabled?: boolean
   multiline: boolean
   optionComponent?: ReactNode
+  indeterminate?: boolean
 } & LiHTMLAttributes<HTMLLIElement>
 
 function AutocompleteOptionInner(
@@ -73,6 +74,7 @@ function AutocompleteOptionInner(
     optionComponent,
     multiple,
     isSelected,
+    indeterminate,
     isDisabled,
     multiline,
     highlighted,
@@ -97,6 +99,7 @@ function AutocompleteOptionInner(
         <Checkbox
           disabled={isDisabled}
           checked={isSelected}
+          indeterminate={indeterminate}
           value={value}
           onChange={() => {
             return null

@@ -854,57 +854,28 @@ export const WithReactHookForm: StoryFn<
 
 export const SelectAll: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
-
-  const selectAllOption: MyOptionType = useMemo(
-    () => ({
-      label: 'Select All',
-    }),
-    [],
-  )
-
-  const optionsWithAll = useMemo(
-    () => [selectAllOption, ...options],
-    [options, selectAllOption],
-  )
-
   const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
-
-  const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
-    const nextAll = changes.selectedItems.find(
-      (item) => item.label === selectAllOption.label,
-    )
-    const prevAll = selectedItems.find(
-      (item) => item.label === selectAllOption.label,
-    )
-
-    switch (true) {
-      case nextAll && selectedItems.length === 1:
-      case prevAll && !nextAll:
-        setSelectedItems([])
-        break
-      case !prevAll && changes.selectedItems.length === options.length:
-      case nextAll && !prevAll:
-        setSelectedItems(optionsWithAll)
-        break
-      case nextAll &&
-        changes.selectedItems.length === optionsWithAll.length - 1:
-        setSelectedItems(
-          changes.selectedItems.filter(
-            (option) => !(option.label === selectAllOption.label),
-          ),
-        )
-        break
-      default:
-        setSelectedItems(changes.selectedItems)
-        break
-    }
-  }
 
   const onDelete = (itemLabel: string) =>
     setSelectedItems(selectedItems.filter((x) => !(x.label === itemLabel)))
 
+  const onChange = (e: AutocompleteChanges<MyOptionType>) => {
+    action('optionsChange')(e)
+    setSelectedItems(e.selectedItems)
+  }
+
   return (
     <>
+      <Autocomplete
+        label="Select stocks"
+        options={options}
+        selectedOptions={selectedItems}
+        allowSelectAll={true}
+        onOptionsChange={onChange}
+        placeholder={`${selectedItems.length}/ ${options.length} selected`}
+        multiple
+        optionLabel={optionLabel}
+      />
       <div
         style={{
           display: 'grid',
@@ -912,26 +883,12 @@ export const SelectAll: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
           gridTemplateColumns: 'repeat(4, auto)',
         }}
       >
-        {selectedItems
-          .filter((option) => !(option.label === selectAllOption.label))
-          .map((x) => (
-            <Chip key={x.label} onDelete={() => onDelete(x.label)}>
-              {x.label}
-            </Chip>
-          ))}
+        {selectedItems.map((x) => (
+          <Chip key={x.label} onDelete={() => onDelete(x.label)}>
+            {x.label}
+          </Chip>
+        ))}
       </div>
-      <Autocomplete
-        label="Select stocks"
-        options={optionsWithAll}
-        selectedOptions={selectedItems}
-        onOptionsChange={onChange}
-        placeholder={`${
-          selectedItems.filter((o) => !(o.label === selectAllOption.label))
-            .length
-        }/ ${options.length} selected`}
-        multiple
-        optionLabel={optionLabel}
-      />
     </>
   )
 }
