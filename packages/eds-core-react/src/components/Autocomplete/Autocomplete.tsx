@@ -249,7 +249,7 @@ export type AutocompleteProps<T> = {
   onInputChange?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
-  /** Add select-all option */
+  /** Add select-all option. Throws an error if true while multiple = false */
   allowSelectAll?: boolean
   /**  Custom option label. NOTE: This is required when option is an object */
   optionLabel?: (option: T) => string
@@ -323,11 +323,17 @@ function AutocompleteInner<T>(
   const [_availableItems, setAvailableItems] = useState(inputOptions)
   const [typedInputValue, setTypedInputValue] = useState<string>('')
 
+  const showSelectAll = useMemo(() => {
+    if (!multiple && allowSelectAll) {
+      throw new Error(`allowSelectAll can only be used with multiple`)
+    }
+    return allowSelectAll && !typedInputValue
+  }, [allowSelectAll, multiple, typedInputValue])
+
   const availableItems = useMemo(() => {
-    if (allowSelectAll && !typedInputValue)
-      return [AllSymbol as T, ..._availableItems]
+    if (showSelectAll) return [AllSymbol as T, ..._availableItems]
     return _availableItems
-  }, [_availableItems, allowSelectAll, typedInputValue])
+  }, [_availableItems, showSelectAll])
 
   const toggleAllSelected = () => {
     if (selectedItems.length === inputOptions.length) {
