@@ -809,9 +809,7 @@ function AutocompleteInner<T>(
                     }
                     isDisabled={false}
                     multiline={multiline}
-                    onClick={(e) => {
-                      toggleAllSelected()
-                    }}
+                    onClick={toggleAllSelected}
                     style={{
                       position: 'sticky',
                       top: 0,
