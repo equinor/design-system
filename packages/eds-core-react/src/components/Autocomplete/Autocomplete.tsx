@@ -799,6 +799,7 @@ function AutocompleteInner<T>(
                     key={'select-all'}
                     data-index={0}
                     value={'Select all'}
+                    aria-setsize={availableItems.length}
                     multiple={true}
                     isSelected={allSelectedState === 'ALL'}
                     indeterminate={allSelectedState === 'SOME'}
