@@ -181,6 +181,43 @@ describe('Autocomplete', () => {
     expect(checked.length).toBe(2)
   })
 
+  it('Can select all options', async () => {
+    const onChange = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        multiple={true}
+        disablePortal={true}
+        allowSelectAll={true}
+        onOptionsChange={onChange}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+
+    const options = await within(optionsList).findAllByRole('option')
+    fireEvent.click(options[0])
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith({ selectedItems: items })
+    })
+
+    fireEvent.click(options[0])
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith({ selectedItems: [] })
+    })
+  })
+
   it('Can open the options on button click', async () => {
     render(<Autocomplete disablePortal options={items} label={labelText} />)
 

@@ -798,6 +798,7 @@ function AutocompleteInner<T>(
                   <AutocompleteOption
                     key={'select-all'}
                     data-index={0}
+                    data-testid={'select-all'}
                     value={'Select all'}
                     aria-setsize={availableItems.length}
                     multiple={true}
