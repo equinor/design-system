@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 🔧 Update babel compile target to "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead" by @oddvernes in https://github.com/equinor/design-system/pull/3219
 - ✨ Improve data grid by @magnh in https://github.com/equinor/design-system/pull/3231
-  Details of https://github.com/equinor/design-system/pull/3231:
+
+#### Details of https://github.com/equinor/design-system/pull/3231:
+
 - ✨ Reexport `@tanstack/react-table` types to ease typing in apps using the data grid
 - 📌 Move `eds-core-react` to peer dependencies
   - This is neccessary because EDS uses React Context and the grid and the project should
