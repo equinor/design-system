@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0-rc] - 2024-02-02
+
+### Changed
+
+- 🔧 Update babel compile target to "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead" by @oddvernes in https://github.com/equinor/design-system/pull/3219
+- ✨ Improve data grid by @magnh in https://github.com/equinor/design-system/pull/3231
+  Details of https://github.com/equinor/design-system/pull/3231:
+- ✨ Reexport `@tanstack/react-table` types to ease typing in apps using the data grid
+- 📌 Move `eds-core-react` to peer dependencies
+  - This is neccessary because EDS uses React Context and the grid and the project should
+    have the same React instance running. This makes it possible to set EDS Density of the
+    table above the component.
+- ♻️ Move text truncating into default cell to enable overwriting cell content
+  - This enables custom cells like popover, autocomplete or other cells that overflows the cell itself.
+- 🐛 Inherit row background color for pinned cells
+  - This ensures hover color on the whole row when columns are pinned
+- 🐛 Support 100% width
+  - Support string `width` and `height`
+- ✨ Allow setting `minWidth` of table
+- ✨ Expose `getRowId` callback from react-table
+- ✨ Expose virtualizer ref
+  - This is needed to be able to run "scroll to" functionality in apps.
+- 🐛 Hide virtualizer rows top and bottom rows when not needed
+
 ## [0.2.0] - 2023-12-13
 
 ### Added
