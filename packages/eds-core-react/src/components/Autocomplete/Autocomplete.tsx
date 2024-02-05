@@ -873,6 +873,7 @@ function AutocompleteInner<T>(
 export const Autocomplete = forwardRef(AutocompleteInner) as <T>(
   props: AutocompleteProps<T> & {
     ref?: React.ForwardedRef<HTMLDivElement>
+    /** @ignore */
     displayName?: string | undefined
   },
 ) => ReturnType<typeof AutocompleteInner>
