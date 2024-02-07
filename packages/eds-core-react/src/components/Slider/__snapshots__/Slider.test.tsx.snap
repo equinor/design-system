@@ -27,7 +27,7 @@ exports[`Simple slider Matches snapshot 1`] = `
 
 .c2 {
   --realWidth: calc(100% - 12px);
-  --background: var(--tooltip-background,rgba(0,112,121,1));
+  --background: var(--tooltip-background,var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)));
   width: fit-content;
   position: absolute;
   display: flex;

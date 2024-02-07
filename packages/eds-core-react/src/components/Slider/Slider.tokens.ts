@@ -59,7 +59,7 @@ export const slider: SliderToken = {
       },
     },
     output: {
-      background: backgroundColorDefault,
+      background: indicatorColor,
       typography: {
         ...paragraph.caption,
         color: textColor,

@@ -14,7 +14,7 @@ const {
 
 const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
-  --background: var(--tooltip-background, rgba(0, 112, 121, 1));
+  --background: var(--tooltip-background, ${output.background});
   width: fit-content;
   position: absolute;
   display: flex;
