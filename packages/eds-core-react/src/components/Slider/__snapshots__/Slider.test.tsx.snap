@@ -27,7 +27,7 @@ exports[`Simple slider Matches snapshot 1`] = `
 
 .c2 {
   --realWidth: calc(100% - 12px);
-  --background: rgb(0 0 0 / 0.8);
+  --background: var(--tooltip-background,rgba(0,112,121,1));
   width: fit-content;
   position: absolute;
   display: flex;
@@ -43,7 +43,7 @@ exports[`Simple slider Matches snapshot 1`] = `
   text-align: left;
   color: white;
   background: var(--background);
-  padding: 4px 8px;
+  padding: 4px 4px 2px 4px;
   bottom: calc(100% + 1px);
   pointer-events: none;
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
@@ -51,6 +51,11 @@ exports[`Simple slider Matches snapshot 1`] = `
   grid-row: 2;
   grid-column: 1/-1;
   opacity: var(--showTooltip);
+}
+
+[data-disabled] .c2 {
+  background: var(--eds_interactive__disabled__fill, rgba(234, 234, 234, 1));
+  color: var(--eds_interactive__disabled__text, rgba(190, 190, 190, 1));
 }
 
 .c1 {
@@ -174,7 +179,7 @@ exports[`Simple slider Matches snapshot 1`] = `
   grid-template-columns: 1fr 1fr;
   width: 100%;
   position: relative;
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__light, rgba(247, 247, 247, 1))' width='100%' height='4' rx='2' /></svg>");background-size:cover;background-repeat:no-repeat;} .c0::after{grid-column:1/span 2;grid-row:2;height:4px;margin-bottom:9px;align-self:end;content:'';background:var(--background);} .c0::after{margin-right:calc( (var(--max) - var(--value)) / var(--dif) * var(--realWidth) );margin-left:3px;} .c0:has(:focus-visible)>output,.c0:hover>output{--showTooltip:1;} @media (hover:hover) and (pointer:fine){.c0:hover:not([disabled]){background-image:url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__medium, rgba(220, 220, 220, 1))' width='100%' height='4' rx='2' /></svg>");}.c0:hover:not([disabled])::after{background:var(--background-hover);}} .c3{grid-row:1;grid-column:1/3;} .c4:before,.c4:after{content:' ';
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__light, rgba(247, 247, 247, 1))' width='100%' height='4' rx='2' /></svg>");background-size:cover;background-repeat:no-repeat;} .c0::after{grid-column:1/span 2;grid-row:2;height:4px;margin-bottom:9px;align-self:end;content:'';background:var(--background);} .c0::after{margin-right:calc( (var(--max) - var(--value)) / var(--dif) * var(--realWidth) );margin-left:3px;} .c0:has(:focus-visible)>output,.c0:hover>output{--showTooltip:1;--tooltip-background:var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));} @media (hover:hover) and (pointer:fine){.c0:hover:not([data-disabled]){background-image:url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__medium, rgba(220, 220, 220, 1))' width='100%' height='4' rx='2' /></svg>");}.c0:hover:not([data-disabled])::after{background:var(--background-hover);}} .c3{grid-row:1;grid-column:1/3;} .c4:before,.c4:after{content:' ';
   display: block;
   position: absolute;
   width: 6px;
