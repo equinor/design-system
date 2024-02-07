@@ -14,7 +14,7 @@ const {
 
 const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
-  --background: rgb(0 0 0 / 0.8);
+  --background: var(--tooltip-background, ${output.background});
   width: fit-content;
   position: absolute;
   display: flex;
@@ -24,8 +24,8 @@ const StyledOutput = styled.output`
   ${typographyTemplate(output.typography)};
   color: white;
   background: var(--background);
-  padding: 4px 8px;
-  bottom: calc(100% + 8px);
+  padding: 4px 4px 2px 4px;
+  bottom: calc(100% + 1px);
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
@@ -34,17 +34,10 @@ const StyledOutput = styled.output`
   grid-row: 2;
   grid-column: 1 / -1;
   opacity: var(--showTooltip);
-`
-
-const TooltipArrow = styled.svg`
-  width: 6px;
-  height: 8px;
-  position: absolute;
-  fill: var(--background);
-  top: calc(100% - 1px);
-  rotate: -90deg;
-  translate: -50%;
-  left: 50%;
+  [data-disabled] & {
+    background: ${output.states.disabled.background};
+    color: ${output.states.disabled.typography.color};
+  }
 `
 
 type OutputProps = {
@@ -65,9 +58,6 @@ export const Output = forwardRef<HTMLOutputElement, OutputProps>(
         htmlFor={htmlFor}
       >
         {children}
-        <TooltipArrow>
-          <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-        </TooltipArrow>
       </StyledOutput>
     )
   },

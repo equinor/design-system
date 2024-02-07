@@ -18,7 +18,7 @@ import { SliderInput } from './SliderInput'
 import { bordersTemplate, useId } from '@equinor/eds-utils'
 
 const {
-  entities: { track, handle, dot },
+  entities: { track, handle, dot, output },
 } = tokens
 
 const fakeTrackBg = css`
@@ -55,6 +55,7 @@ type RangeWrapperProps = {
   $disabled: boolean
   $hideActiveTrack: boolean
   $labelAlwaysOn: boolean
+  $labelBelow: boolean
   $touchNavigation: boolean
 }
 
@@ -118,6 +119,7 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
   &:hover {
     & > output {
       --showTooltip: 1;
+      --tooltip-background: ${output.states.hover.background};
     }
   }
 
@@ -145,6 +147,14 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
         pointer-events: auto;
       }
     `};
+  ${({ $labelBelow }) =>
+    $labelBelow &&
+    css`
+      & > output {
+        top: calc(100% + 1px);
+        bottom: unset;
+      }
+    `};
 `
 
 type WrapperProps = {
@@ -152,24 +162,27 @@ type WrapperProps = {
   $max: number
   $hideActiveTrack: boolean
   $labelAlwaysOn: boolean
-} & Pick<SliderProps, 'disabled' | 'value'>
+  $labelBelow: boolean
+  $disabled: boolean
+} & Pick<SliderProps, 'value'>
 
 const Wrapper = styled.div.attrs<WrapperProps>(
   ({
     $min,
     $max,
     value,
-    disabled,
+    $disabled,
     $hideActiveTrack,
     $labelAlwaysOn,
     style,
   }) => ({
+    'data-disabled': $disabled ? true : null,
     style: {
       '--min': $min,
       '--max': $max,
       '--value': value,
       '--showTooltip': $labelAlwaysOn ? 1 : 0,
-      '--background': disabled
+      '--background': $disabled
         ? track.entities.indicator.states.disabled.background
         : $hideActiveTrack
           ? 'transparent'
@@ -201,16 +214,25 @@ const Wrapper = styled.div.attrs<WrapperProps>(
   &:hover {
     & > output {
       --showTooltip: 1;
+      --tooltip-background: ${output.states.hover.background};
     }
   }
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover:not([disabled]) {
+    &:hover:not([data-disabled]) {
       ${fakeTrackBgHover}
       &::after {
         background: var(--background-hover);
       }
     }
+    ${({ $labelBelow }) =>
+      $labelBelow &&
+      css`
+        & > output {
+          top: calc(100% + 1px);
+          bottom: unset;
+        }
+      `};
   }
 `
 
@@ -284,6 +306,10 @@ export type SliderProps = {
    * @default false
    */
   labelAlwaysOn?: boolean
+  /** Display the value label below the track
+   * @default false
+   */
+  labelBelow?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
@@ -297,6 +323,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     minMaxDots = true,
     minMaxValues = true,
     labelAlwaysOn,
+    labelBelow,
     step = 1,
     disabled,
     hideActiveTrack,
@@ -466,6 +493,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
           $labelAlwaysOn={labelAlwaysOn || touchNavigation}
+          $labelBelow={labelBelow}
           $touchNavigation={touchNavigation}
           onMouseMove={findClosestRange}
           onTouchStartCapture={findClosestRange}
@@ -533,9 +561,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $max={max}
           $min={min}
           value={sliderValue[0]}
-          disabled={disabled}
+          $disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
           $labelAlwaysOn={labelAlwaysOn || touchNavigation}
+          $labelBelow={labelBelow}
           onTouchStartCapture={() => setTouchNavigation(true)}
           onMouseDownCapture={() => setTouchNavigation(false)}
         >
