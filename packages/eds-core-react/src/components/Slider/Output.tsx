@@ -14,11 +14,7 @@ const {
 
 const StyledOutput = styled.output`
   --realWidth: calc(100% - 12px);
-  //fix use from token once decided
-  --background: var(
-    --tooltip-background,
-    rgba(0, 112, 121, 1)
-  ); //rgb(0 0 0 / 0.8);
+  --background: var(--tooltip-background, rgba(0, 112, 121, 1));
   width: fit-content;
   position: absolute;
   display: flex;
@@ -28,7 +24,6 @@ const StyledOutput = styled.output`
   ${typographyTemplate(output.typography)};
   color: white;
   background: var(--background);
-  //padding: 4px 8px;
   padding: 4px 4px 2px 4px;
   bottom: calc(100% + 1px);
   pointer-events: none;
@@ -39,6 +34,10 @@ const StyledOutput = styled.output`
   grid-row: 2;
   grid-column: 1 / -1;
   opacity: var(--showTooltip);
+  [data-disabled] & {
+    background: ${output.states.disabled.background};
+    color: ${output.states.disabled.typography.color};
+  }
 `
 
 type OutputProps = {

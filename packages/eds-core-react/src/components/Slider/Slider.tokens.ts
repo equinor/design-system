@@ -14,6 +14,7 @@ const {
       primary__hover: { rgba: primaryHover },
       focus: { rgba: focusOutlineColor },
       disabled__fill: { rgba: backgroundColorDisabled },
+      disabled__text: { rgba: textColorDisabled },
       disabled__border: { rgba: backgroundBorderDisabled },
     },
     text: {
@@ -58,9 +59,21 @@ export const slider: SliderToken = {
       },
     },
     output: {
+      background: backgroundColorDefault,
       typography: {
         ...paragraph.caption,
         color: textColor,
+      },
+      states: {
+        hover: {
+          background: primaryHover,
+        },
+        disabled: {
+          background: backgroundColorDisabled,
+          typography: {
+            color: textColorDisabled,
+          },
+        },
       },
     },
     handle: {

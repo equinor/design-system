@@ -18,7 +18,7 @@ import { SliderInput } from './SliderInput'
 import { bordersTemplate, useId } from '@equinor/eds-utils'
 
 const {
-  entities: { track, handle, dot },
+  entities: { track, handle, dot, output },
 } = tokens
 
 const fakeTrackBg = css`
@@ -119,7 +119,7 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
   &:hover {
     & > output {
       --showTooltip: 1;
-      --tooltip-background: ${track.entities.indicator.states.hover.background};
+      --tooltip-background: ${output.states.hover.background};
     }
   }
 
@@ -163,24 +163,26 @@ type WrapperProps = {
   $hideActiveTrack: boolean
   $labelAlwaysOn: boolean
   $labelBelow: boolean
-} & Pick<SliderProps, 'disabled' | 'value'>
+  $disabled: boolean
+} & Pick<SliderProps, 'value'>
 
 const Wrapper = styled.div.attrs<WrapperProps>(
   ({
     $min,
     $max,
     value,
-    disabled,
+    $disabled,
     $hideActiveTrack,
     $labelAlwaysOn,
     style,
   }) => ({
+    'data-disabled': $disabled ? true : null,
     style: {
       '--min': $min,
       '--max': $max,
       '--value': value,
       '--showTooltip': $labelAlwaysOn ? 1 : 0,
-      '--background': disabled
+      '--background': $disabled
         ? track.entities.indicator.states.disabled.background
         : $hideActiveTrack
           ? 'transparent'
@@ -212,12 +214,12 @@ const Wrapper = styled.div.attrs<WrapperProps>(
   &:hover {
     & > output {
       --showTooltip: 1;
-      --tooltip-background: ${track.entities.indicator.states.hover.background};
+      --tooltip-background: ${output.states.hover.background};
     }
   }
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover:not([disabled]) {
+    &:hover:not([data-disabled]) {
       ${fakeTrackBgHover}
       &::after {
         background: var(--background-hover);
@@ -555,7 +557,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           $max={max}
           $min={min}
           value={sliderValue[0]}
-          disabled={disabled}
+          $disabled={disabled}
           $hideActiveTrack={hideActiveTrack}
           $labelAlwaysOn={labelAlwaysOn || touchNavigation}
           $labelBelow={labelBelow}
