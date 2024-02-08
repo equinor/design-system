@@ -58,6 +58,8 @@ const Container = styled.div`
   position: relative;
 `
 
+const AllSymbol = Symbol('Select all')
+
 const StyledList = styled(List)(
   ({ theme }) => css`
     background-color: ${theme.background};
@@ -96,7 +98,10 @@ const StyledButton = styled(Button)(
   `,
 )
 
-type IndexFinderType = <T>({
+// Typescript can struggle with parsing generic arrow functions in a .tsx file (see https://github.com/microsoft/TypeScript/issues/15713)
+// Workaround is to add a trailing , after T, which tricks the compiler, but also have to ignore prettier rule.
+// prettier-ignore
+type IndexFinderType = <T,>({
   calc,
   index,
   optionDisabled,
@@ -244,6 +249,8 @@ export type AutocompleteProps<T> = {
   onInputChange?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
+  /** Add select-all option. Throws an error if true while multiple = false */
+  allowSelectAll?: boolean
   /**  Custom option label. NOTE: This is required when option is an object */
   optionLabel?: (option: T) => string
   /**  Custom option template */
@@ -292,6 +299,7 @@ function AutocompleteInner<T>(
     onInputChange,
     selectedOptions,
     multiple,
+    allowSelectAll,
     initialSelectedOptions = [],
     disablePortal,
     optionDisabled = () => false,
@@ -312,8 +320,28 @@ function AutocompleteInner<T>(
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
-  const [availableItems, setAvailableItems] = useState(inputOptions)
+  const [_availableItems, setAvailableItems] = useState(inputOptions)
   const [typedInputValue, setTypedInputValue] = useState<string>('')
+
+  const showSelectAll = useMemo(() => {
+    if (!multiple && allowSelectAll) {
+      throw new Error(`allowSelectAll can only be used with multiple`)
+    }
+    return allowSelectAll && !typedInputValue
+  }, [allowSelectAll, multiple, typedInputValue])
+
+  const availableItems = useMemo(() => {
+    if (showSelectAll) return [AllSymbol as T, ..._availableItems]
+    return _availableItems
+  }, [_availableItems, showSelectAll])
+
+  const toggleAllSelected = () => {
+    if (selectedItems.length === inputOptions.length) {
+      setSelectedItems([])
+    } else {
+      setSelectedItems(inputOptions)
+    }
+  }
 
   useEffect(() => {
     const availableHash = JSON.stringify(inputOptions)
@@ -353,7 +381,9 @@ function AutocompleteInner<T>(
       ...multipleSelectionProps,
       onSelectedItemsChange: (changes) => {
         if (onOptionsChange) {
-          const { selectedItems } = changes
+          const selectedItems = changes.selectedItems.filter(
+            (item) => item !== AllSymbol,
+          )
           onOptionsChange({ selectedItems })
         }
       },
@@ -375,6 +405,14 @@ function AutocompleteInner<T>(
     reset: resetSelection,
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
+
+  const allSelectedState = useMemo(() => {
+    if (!inputOptions || !selectedItems) return 'NONE'
+    if (inputOptions.length === selectedItems.length) return 'ALL'
+    if (inputOptions.length != selectedItems.length && selectedItems.length > 0)
+      return 'SOME'
+    return 'NONE'
+  }, [inputOptions, selectedItems])
 
   const getLabel = useCallback(
     (item: T) => {
@@ -448,7 +486,9 @@ function AutocompleteInner<T>(
         type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
         highlightedIndex >= 0
       ) {
-        rowVirtualizer.scrollToIndex(highlightedIndex)
+        rowVirtualizer.scrollToIndex(highlightedIndex, {
+          align: allowSelectAll ? 'center' : 'auto',
+        })
       }
     },
     onIsOpenChange: ({ selectedItem }) => {
@@ -465,7 +505,9 @@ function AutocompleteInner<T>(
         case useCombobox.stateChangeTypes.ItemClick:
           //note: non strict check for null or undefined to allow 0
           if (selectedItem != null && !optionDisabled(selectedItem)) {
-            if (multiple) {
+            if (selectedItem === AllSymbol) {
+              toggleAllSelected()
+            } else if (multiple) {
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
                 : addSelectedItem(selectedItem)
@@ -606,6 +648,9 @@ function AutocompleteInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
+            if (clearSearchOnChange) {
+              setTypedInputValue('')
+            }
             return {
               ...changes,
               isOpen: true, // keep menu open after selection.
@@ -756,10 +801,44 @@ function AutocompleteInner<T>(
               const label = getLabel(item)
               const isDisabled = optionDisabled(item)
               const isSelected = selectedItemsLabels.includes(label)
+              if (item === AllSymbol) {
+                return (
+                  <AutocompleteOption
+                    key={'select-all'}
+                    data-index={0}
+                    data-testid={'select-all'}
+                    value={'Select all'}
+                    aria-setsize={availableItems.length}
+                    multiple={true}
+                    isSelected={allSelectedState === 'ALL'}
+                    indeterminate={allSelectedState === 'SOME'}
+                    highlighted={
+                      highlightedIndex === index && !isDisabled
+                        ? 'true'
+                        : 'false'
+                    }
+                    isDisabled={false}
+                    multiline={multiline}
+                    onClick={toggleAllSelected}
+                    style={{
+                      position: 'sticky',
+                      top: 0,
+                      zIndex: 99,
+                    }}
+                    {...getItemProps({
+                      ...(multiline && {
+                        ref: rowVirtualizer.measureElement,
+                      }),
+                      item,
+                      index: index,
+                    })}
+                  />
+                )
+              }
               return (
                 <AutocompleteOption
                   key={virtualItem.key}
-                  data-index={virtualItem.index}
+                  data-index={index}
                   aria-setsize={availableItems.length}
                   aria-posinset={index + 1}
                   value={label}
