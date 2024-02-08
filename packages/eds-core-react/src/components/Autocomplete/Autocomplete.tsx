@@ -486,7 +486,9 @@ function AutocompleteInner<T>(
         type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
         highlightedIndex >= 0
       ) {
-        rowVirtualizer.scrollToIndex(highlightedIndex)
+        rowVirtualizer.scrollToIndex(highlightedIndex, {
+          align: allowSelectAll ? 'center' : 'auto',
+        })
       }
     },
     onIsOpenChange: ({ selectedItem }) => {
