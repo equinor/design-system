@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.5] - 2024-02-09
+
+### Changed
+
+- 🔧 Updated `babel` browserlist from "defaults" to "last 2 versions of chrome/edge/firefox/safari". This reduces build size signicantly and removes all the babel runtime helpers. by @oddvernes in https://github.com/equinor/design-system/pull/3219
+
 ## [0.7.4] - 2023-12-13
 
 ### Changed
