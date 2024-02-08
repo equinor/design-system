@@ -23,17 +23,17 @@
     "email": "fg_eds@equinor.com"
   },
   "peerDependencies": {
+    "@equinor/eds-core-react": "workspace:^",
     "react": ">=16.8",
     "react-dom": ">=16.8",
-    "styled-components": ">=4.2",
-    "@equinor/eds-core-react": "workspace:^"
+    "styled-components": ">=4.2"
   },
   "dependencies": {
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
     "@tanstack/react-table": "^8.10.7",
-    "@tanstack/react-virtual": "^3.0.1"
+    "@tanstack/react-virtual": "^3.0.4"
   },
   "devDependencies": {
     "@mdx-js/react": "2.3.0",
