@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 💄`Slider`: design adjustments to the "value label": changed color, reduced padding, removed "arrow" and moved closer to the "thumb" by @oddvernes in https://github.com/equinor/design-system/pull/3227
 - 💄 `TextField`/`InputWrapper`: allow line break character to work in `HelperText` by @oddvernes in https://github.com/equinor/design-system/pull/3233
-- 🔧 Updated `babel` browserlist from "defaults" to "last 2 versions of chrome/edge/firefox/safari". This reduces build size signicantly and removes all the babel runtime helpers. by @oddvernes in https://github.com/equinor/design-system/pull/3219
+- 🔧 Updated `babel` browserlist from "defaults" to "last 2 versions of chrome/edge/firefox/safari". This reduces build size significantly and removes all the babel runtime helpers. by @oddvernes in https://github.com/equinor/design-system/pull/3219
 - 🚸 `Autocomplete` ux-changes: input cleared on blur, added "no options" dropdown and `noOptionsText` prop by @oddvernes in https://github.com/equinor/design-system/pull/3216
 
 ## [0.35.1] - 2023-12-21
