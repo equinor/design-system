@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.36.0] - 2024-02-09
+
+### Added
+
+- ✨ `Autocomplete`: Implemented "Select all" functionality, enabled with `allowSelectAll` prop by @yusijs in https://github.com/equinor/design-system/pull/3245
+- 💄 `Slider`: option to render "value label" below the track with new `labelBelow` prop by @oddvernes in https://github.com/equinor/design-system/pull/3227
+
+### Fixed
+
+- 🐛 `Slider`: `onChangeCommitted` was not triggered by touch input by @oddvernes in https://github.com/equinor/design-system/pull/3244
+- 🐛 `Slider`: fixed bug in Firefox where "value label" did not show on hover by @oddvernes in https://github.com/equinor/design-system/pull/3224
+- 🐛 `Snackbar`: A missing check in the autohide timer caused `onClose` to be called twice by @oddvernes and @yusijs in https://github.com/equinor/design-system/pull/3241
+- 🐛 `Autocomplete`: with `multiple`, `readOnly` was still accessible when clicking in the input. `readOnly` was still accessible in both modes when using keyboard arrow buttons by @oddvernes in https://github.com/equinor/design-system/pull/3216
+
+### Changed
+
+- 💄`Slider`: design adjustments to the "value label": changed color, reduced padding, removed "arrow" and moved closer to the "thumb" by @oddvernes in https://github.com/equinor/design-system/pull/3227
+- 💄 `TextField`/`InputWrapper`: allow line break character to work in `HelperText` by @oddvernes in https://github.com/equinor/design-system/pull/3233
+- 🔧 Updated `babel` browserlist from "defaults" to "last 2 versions of chrome/edge/firefox/safari". This reduces build size significantly and removes all the babel runtime helpers. by @oddvernes in https://github.com/equinor/design-system/pull/3219
+- 🚸 `Autocomplete` ux-changes: input cleared on blur, added "no options" dropdown and `noOptionsText` prop by @oddvernes in https://github.com/equinor/design-system/pull/3216
+
 ## [0.35.1] - 2023-12-21
 
 ### Fixed
