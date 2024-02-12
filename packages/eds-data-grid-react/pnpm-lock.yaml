@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   '@equinor/eds-core-react':
-    specifier: workspace:^
+    specifier: workspace:>=0.36.0
     version: link:../eds-core-react
   '@equinor/eds-icons':
     specifier: workspace:^
