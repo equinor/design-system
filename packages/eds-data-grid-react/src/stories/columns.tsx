@@ -25,6 +25,7 @@ export const columns: Array<ColumnDef<Photo>> = [
   helper.accessor('albumId', {
     header: 'Album ID',
     id: 'albumId',
+    size: 150,
   }),
   helper.accessor('title', {
     header: 'Title',
@@ -35,10 +36,12 @@ export const columns: Array<ColumnDef<Photo>> = [
     header: 'URL',
     cell: (cell) => <Link href={cell.getValue()}>Open</Link>,
     id: 'url',
+    size: 150,
   }),
   helper.accessor('thumbnailUrl', {
     header: 'Thumbnail URL',
     id: 'thumbnailUrl',
+    size: 150,
   }),
 ]
 
