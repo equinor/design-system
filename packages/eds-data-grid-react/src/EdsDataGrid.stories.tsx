@@ -57,8 +57,43 @@ ColumnFiltering.args = {
   enableColumnFiltering: true,
 }
 
+const defaultSizeState = columns
+  .map((c) => ({ [c.id]: c.size }))
+  .reduce((a, b) => ({ ...a, ...b }), {})
+
 export const ColumnResize: StoryFn<EdsDataGridProps<Photo>> = (args) => {
-  return <EdsDataGrid {...args} />
+  const [size, setSize] = useState(defaultSizeState)
+  const randomizeSize = () => {
+    setSize(
+      Object.keys(defaultSizeState)
+        .map((k) => ({ [k]: Math.floor(Math.random() * 200) }))
+        .reduce((a, b) => ({ ...a, ...b }), {}),
+    )
+  }
+  const throttle = useRef<number | null>(null)
+  return (
+    <>
+      <Button onClick={randomizeSize}>Randomize</Button>
+      <pre>
+        columnSizing=
+        {JSON.stringify(size, null, 2)}
+      </pre>
+      <EdsDataGrid
+        {...args}
+        columnSizing={size}
+        onColumnResize={(e) => {
+          setSize(e)
+          if (throttle.current) {
+            clearTimeout(throttle.current)
+            throttle.current = null
+          }
+          throttle.current = setTimeout(() => {
+            action('onResize')(e)
+          }, 300) as unknown as number
+        }}
+      />
+    </>
+  )
 }
 
 ColumnResize.args = {

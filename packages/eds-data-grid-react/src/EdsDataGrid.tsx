@@ -4,6 +4,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   ColumnPinningState,
+  ColumnSizingState,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedRowModel,
@@ -68,6 +69,8 @@ export function EdsDataGrid<T>({
   height,
   getRowId,
   rowVirtualizerInstanceRef,
+  columnSizing,
+  onColumnResize,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -77,6 +80,8 @@ export function EdsDataGrid<T>({
     columnPinState ?? {},
   )
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [internalColumnSize, setInternalColumnSize] =
+    useState<ColumnSizingState>(columnSizing ?? {})
   const [visible, setVisible] = useState(columnVisibility ?? {})
   const [globalFilter, setGlobalFilter] = useState('')
   const [columnOrderState, setColumnOrderState] = useState<string[]>([])
@@ -168,11 +173,22 @@ export function EdsDataGrid<T>({
       },
     },
     columnResizeMode: columnResizeMode,
+    onColumnSizingChange: (change) => {
+      if (typeof change === 'function') {
+        setInternalColumnSize(change(internalColumnSize))
+      } else {
+        setInternalColumnSize(change)
+      }
+      if (onColumnResize) {
+        onColumnResize(internalColumnSize)
+      }
+    },
     state: {
       sorting,
       columnPinning: columnPin,
       rowSelection: selection,
       columnOrder: columnOrderState,
+      columnSizing: columnSizing ?? internalColumnSize,
     },
     onSortingChange: (changes) => {
       if (onSortingChange) {

@@ -3,6 +3,7 @@ import {
   ColumnDef,
   ColumnPinningState,
   ColumnResizeMode,
+  ColumnSizingState,
   OnChangeFn,
   Row,
   RowSelectionState,
@@ -198,6 +199,8 @@ type SortProps = {
 
 type ColumnProps = {
   columnPinState?: ColumnPinningState
+  columnSizing?: ColumnSizingState
+  onColumnResize?: (e: ColumnSizingState) => void
 }
 
 type RefProps = {
