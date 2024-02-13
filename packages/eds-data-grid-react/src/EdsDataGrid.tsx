@@ -32,6 +32,7 @@ import { TableRow } from './components/TableRow'
 import { TableProvider } from './EdsDataGridContext'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import styled from 'styled-components'
+import { addPxSuffixIfInputHasNoPrefix } from './utils'
 
 export function EdsDataGrid<T>({
   rows,
@@ -450,9 +451,11 @@ const TableWrapper = styled.div<{
   $width?: string | number
   $scrollbarHorizontal?: boolean
 }>`
-  height: ${({ $height }) => $height ?? 'auto'};
+  height: ${({ $height }) => addPxSuffixIfInputHasNoPrefix($height) ?? 'auto'};
   width: ${({ $scrollbarHorizontal, $width }) =>
-    $scrollbarHorizontal ? $width ?? '100%' : 'auto'};
+    $scrollbarHorizontal
+      ? addPxSuffixIfInputHasNoPrefix($width) ?? '100%'
+      : 'auto'};
   overflow: auto;
   contain: ${({ $height, $width }) =>
     Boolean($height) && Boolean($width) ? 'strict' : 'unset'};
