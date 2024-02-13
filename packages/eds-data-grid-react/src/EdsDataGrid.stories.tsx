@@ -145,6 +145,10 @@ export const ColumnGrouping: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 ColumnGrouping.args = {
   rows: data,
   columns: groupedColumns,
+  height: 400,
+  width: '100%',
+  enableVirtual: true,
+  scrollbarHorizontal: true,
 }
 
 export const Sortable: StoryFn<EdsDataGridProps<Photo>> = (args) => {
