@@ -31,6 +31,8 @@ import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableRow } from './components/TableRow'
 import { TableProvider } from './EdsDataGridContext'
 import { EdsDataGridProps } from './EdsDataGridProps'
+import styled from 'styled-components'
+import { addPxSuffixIfInputHasNoPrefix } from './utils'
 
 export function EdsDataGrid<T>({
   rows,
@@ -156,6 +158,7 @@ export function EdsDataGrid<T>({
     data: rows,
     columns: _columns,
     defaultColumn: {
+      size: 150,
       cell: (context) => {
         return (
           <Typography
@@ -275,14 +278,14 @@ export function EdsDataGrid<T>({
 
   const table = useReactTable(options)
 
-  let parentRefStyle: CSSProperties = {}
+  let tableWrapperStyle: CSSProperties = {}
 
   /**
    * Style the parent container to enable virtualization.
    * By not setting this, the virtual-scroll will always render every row, reducing computational overhead if turned off.
    */
   if (enableVirtual) {
-    parentRefStyle = {
+    tableWrapperStyle = {
       height: height ?? virtualHeight ?? 500,
       overflow: 'auto',
       position: 'relative',
@@ -332,15 +335,13 @@ export function EdsDataGrid<T>({
       enableColumnFiltering={!!enableColumnFiltering}
       stickyHeader={!!stickyHeader}
     >
-      <div
+      <TableWrapper
         className="table-wrapper"
-        style={{
-          height: height ?? 'auto',
-          ...parentRefStyle,
-          width: scrollbarHorizontal ? width ?? '100%' : 'auto',
-          overflow: 'auto',
-        }}
+        style={tableWrapperStyle}
         ref={parentRef}
+        $height={height}
+        $width={width}
+        $scrollbarHorizontal={scrollbarHorizontal}
       >
         <Table
           className={Object.entries(classList)
@@ -434,7 +435,7 @@ export function EdsDataGrid<T>({
                 />
               </div>
             )}
-      </div>
+      </TableWrapper>
       {debug && enableVirtual && (
         <span>
           Visible items: {virtualizer.range.startIndex} -{' '}
@@ -444,3 +445,18 @@ export function EdsDataGrid<T>({
     </TableProvider>
   )
 }
+
+const TableWrapper = styled.div<{
+  $height?: string | number
+  $width?: string | number
+  $scrollbarHorizontal?: boolean
+}>`
+  height: ${({ $height }) => addPxSuffixIfInputHasNoPrefix($height) ?? 'auto'};
+  width: ${({ $scrollbarHorizontal, $width }) =>
+    $scrollbarHorizontal
+      ? addPxSuffixIfInputHasNoPrefix($width) ?? '100%'
+      : 'auto'};
+  overflow: auto;
+  contain: ${({ $height, $width }) =>
+    Boolean($height) && Boolean($width) ? 'strict' : 'unset'};
+`
