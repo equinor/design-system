@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.0] - 2024-02-12
+## [0.3.0] - 2024-02-15
 
 ### Added
 
@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - 🔧 Update babel compile target to "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead" by @oddvernes in https://github.com/equinor/design-system/pull/3219
+- ⚡️ Improve performance by enabling `contain: strict` when width and height is provided by @magnh in https://github.com/equinor/design-system/pull/3273
 - ✨ Improve data grid by @magnh in https://github.com/equinor/design-system/pull/3231
 
 #### Details of https://github.com/equinor/design-system/pull/3231:
