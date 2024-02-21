@@ -1,6 +1,12 @@
 import { Meta, StoryFn } from '@storybook/react'
 import { EdsDataGrid } from './EdsDataGrid'
-import { columns, groupedColumns, Photo } from './stories/columns'
+import {
+  columns,
+  expandColumns,
+  groupedColumns,
+  Photo,
+  PostComment,
+} from './stories/columns'
 import { data } from './stories/data'
 import {
   CSSProperties,
@@ -13,17 +19,24 @@ import {
 import {
   Button,
   Checkbox,
+  Icon,
   Pagination,
   Paper,
   TextField,
   Typography,
 } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
-import { Column, Row } from '@tanstack/react-table'
+import { Column, ColumnDef, ExpandedState, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { Virtualizer } from './types'
+import {
+  arrow_drop_down,
+  arrow_drop_right,
+  chevron_down,
+  chevron_right,
+} from '@equinor/eds-icons'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -366,6 +379,55 @@ export const Virtualization: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 }
 
 Virtualization.args = {
+  stickyHeader: true,
+  enableVirtual: true,
+  virtualHeight: 500,
+}
+
+export const ExpandRows: StoryFn<EdsDataGridProps<PostComment>> = (args) => {
+  const [data, setData] = useState<Array<PostComment>>([])
+  const [expansionState, setExpansionState] = useState<ExpandedState>({})
+
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    Promise.all([
+      fetch(`https://jsonplaceholder.typicode.com/posts`, { signal }).then(
+        (r) => r.json() as Promise<Array<PostComment>>,
+      ),
+      fetch(`https://jsonplaceholder.typicode.com/comments`, { signal }).then(
+        (r) => r.json() as Promise<Array<PostComment>>,
+      ),
+    ])
+      .then(([posts, comments]) =>
+        posts.map((p) => ({
+          ...p,
+          comments: comments
+            .filter((c) => c.postId === p.id)
+            .map((c) => ({ ...c, comments: [{ ...c, id: c.id * 1000 }] })),
+        })),
+      )
+      .then((posts) => setData(posts))
+      .catch(console.error)
+
+    return () => {
+      abortController.abort()
+    }
+  }, [])
+  return (
+    <EdsDataGrid
+      {...args}
+      columns={expandColumns}
+      rows={data}
+      expansionState={expansionState}
+      setExpansionState={setExpansionState}
+      getSubRows={(r) => r.comments}
+    />
+  )
+}
+
+ExpandRows.args = {
   stickyHeader: true,
   enableVirtual: true,
   virtualHeight: 500,

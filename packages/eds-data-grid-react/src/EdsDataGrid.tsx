@@ -6,6 +6,7 @@ import {
   ColumnPinningState,
   ColumnSizingState,
   getCoreRowModel,
+  getExpandedRowModel,
   getFacetedMinMaxValues,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -73,6 +74,9 @@ export function EdsDataGrid<T>({
   rowVirtualizerInstanceRef,
   columnSizing,
   onColumnResize,
+  expansionState,
+  setExpansionState,
+  getSubRows,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -192,7 +196,11 @@ export function EdsDataGrid<T>({
       rowSelection: selection,
       columnOrder: columnOrderState,
       columnSizing: columnSizing ?? internalColumnSize,
+      expanded: expansionState,
     },
+    getSubRows: getSubRows,
+    onExpandedChange: setExpansionState,
+    getExpandedRowModel: getExpandedRowModel(),
     onSortingChange: (changes) => {
       if (onSortingChange) {
         onSortingChange(changes)

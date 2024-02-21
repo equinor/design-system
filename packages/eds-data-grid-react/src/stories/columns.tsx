@@ -1,6 +1,8 @@
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
+import { Button, Icon, Typography } from '@equinor/eds-core-react'
+import { chevron_down, chevron_right } from '@equinor/eds-icons'
 
 export type Photo = {
   albumId: number
@@ -42,6 +44,87 @@ export const columns: Array<ColumnDef<Photo>> = [
     header: 'Thumbnail URL',
     id: 'thumbnailUrl',
     size: 150,
+  }),
+]
+
+type Post = {
+  userId: number
+  id: number
+  title: string
+  body: string
+  comments: Array<Comment>
+}
+
+type Comment = Post & {
+  postId: number
+  name: string
+  email: string
+}
+
+export type PostComment = Post & Comment
+
+const postHelper = createColumnHelper<PostComment>()
+
+export const expandColumns: Array<ColumnDef<PostComment>> = [
+  postHelper.accessor('id', {
+    id: 'expand',
+    size: 200,
+    header: ({ table }) => (
+      <Button
+        variant={'ghost_icon'}
+        onClick={table.getToggleAllRowsExpandedHandler()}
+      >
+        <Icon
+          data={table.getIsAllRowsExpanded() ? chevron_down : chevron_right}
+        />
+      </Button>
+    ),
+    cell: ({ row, getValue }) => (
+      <div
+        style={{
+          display: 'flex',
+          paddingLeft: `calc(${row.depth * 2}rem + ${row.getCanExpand() ? '0px' : '2rem'})`,
+          alignItems: 'center',
+        }}
+      >
+        {row.getCanExpand() && (
+          <Button
+            variant={'ghost_icon'}
+            style={{
+              cursor: 'pointer',
+            }}
+            onClick={row.getToggleExpandedHandler()}
+          >
+            <Icon data={row.getIsExpanded() ? chevron_down : chevron_right} />
+          </Button>
+        )}{' '}
+        {getValue()}
+      </div>
+    ),
+  }),
+  postHelper.accessor('userId', {
+    header: 'User#',
+    id: 'userId',
+    size: 150,
+  }),
+  postHelper.accessor('title', {
+    header: 'Title',
+    id: 'title',
+    size: 250,
+  }),
+  postHelper.accessor('body', {
+    header: 'Body',
+    cell: (cell) => (
+      <Typography
+        variant={'cell_text'}
+        group={'table'}
+        style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+      >
+        {cell.getValue().substring(0, 60)}...
+      </Typography>
+    ),
+    id: 'body',
+    size: 250,
   }),
 ]
 
