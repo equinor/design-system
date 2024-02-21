@@ -9,8 +9,8 @@ import {
 } from './stories/columns'
 import { data } from './stories/data'
 import {
-  CSSProperties,
   ChangeEvent,
+  CSSProperties,
   FormEvent,
   useEffect,
   useRef,
@@ -19,24 +19,17 @@ import {
 import {
   Button,
   Checkbox,
-  Icon,
   Pagination,
   Paper,
   TextField,
   Typography,
 } from '@equinor/eds-core-react'
 import page from './EdsDataGrid.docs.mdx'
-import { Column, ColumnDef, ExpandedState, Row } from '@tanstack/react-table'
+import { Column, ExpandedState, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { Virtualizer } from './types'
-import {
-  arrow_drop_down,
-  arrow_drop_right,
-  chevron_down,
-  chevron_right,
-} from '@equinor/eds-icons'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
