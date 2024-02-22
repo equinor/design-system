@@ -4,6 +4,7 @@ import {
   ColumnPinningState,
   ColumnResizeMode,
   ColumnSizingState,
+  ExpandedState,
   OnChangeFn,
   Row,
   RowSelectionState,
@@ -210,6 +211,12 @@ type RefProps = {
   > | null>
 }
 
+type ExpansionProps<T> = {
+  expansionState?: ExpandedState
+  setExpansionState?: React.Dispatch<React.SetStateAction<ExpandedState>>
+  getSubRows?: (row: T, rowIndex: number) => Array<T>
+}
+
 export type EdsDataGridProps<T> = BaseProps<T> &
   StyleProps<T> &
   SortProps &
@@ -217,7 +224,8 @@ export type EdsDataGridProps<T> = BaseProps<T> &
   PagingProps &
   ColumnProps &
   VirtualProps &
-  RefProps & {
+  RefProps &
+  ExpansionProps<T> & {
     /**
      * Which columns are visible. If not set, all columns are visible. undefined means that the column is visible.
      * @default undefined
