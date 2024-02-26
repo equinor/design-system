@@ -97,7 +97,7 @@
     "@equinor/eds-utils": "workspace:^",
     "@types/react-datepicker": "^4.19.1",
     "date-fns": "^2.30.0",
-    "downshift": "^8.2.3",
+    "downshift": "^8.3.2",
     "react-datepicker": "^4.21.0",
     "react-fast-compare": "3.2.2"
   },
