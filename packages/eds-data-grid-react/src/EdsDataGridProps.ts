@@ -97,6 +97,11 @@ type BaseProps<T> = {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/tables)
    */
   getRowId?: TableOptions<T>['getRowId']
+  /**
+   * Optional prop to override the default column setup (cell, header, size etc.)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#defaultcolumn)
+   */
+  defaultColumn?: Partial<ColumnDef<T, unknown>>
 }
 
 type StyleProps<T> = {
