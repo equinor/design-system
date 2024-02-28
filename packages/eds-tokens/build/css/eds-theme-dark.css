@@ -1,276 +1,289 @@
 /**
  * Do not edit directly
- * Generated on Thu, 23 Nov 2023 13:38:02 GMT
- * @tokens ColorsDark
+ * Generated on Tue, 27 Feb 2024 11:15:55 GMT
+ * @tokens Colors
  * @presenter Color
  */
 
 [data-theme="dark"] {
-  --eds-color-text-interactive-active-on-ghost: rgba(151, 202, 206, 1);
-  --eds-color-text-interactive-active-on-ghost-hover: rgba(179, 226, 229, 1);
-  --eds-color-text-interactive-active-on-ghost-pressed: rgba(209, 237, 239, 1);
-  --eds-color-text-interactive-active: rgba(209, 237, 239, 1);
-  --eds-color-text-interactive-active-hover: rgba(224, 244, 245, 1);
-  --eds-color-text-interactive-active-pressed: rgba(224, 244, 245, 1);
-  --eds-color-text-interactive-active-neutral: rgba(214, 217, 220, 1);
-  --eds-color-text-interactive-active-neutral-hover: rgba(233, 235, 237, 1);
-  --eds-color-text-interactive-active-neutral-pressed: rgba(243, 245, 246, 1);
-  --eds-color-text-interactive-resting: rgba(166, 175, 181, 1);
-  --eds-color-text-interactive-resting-hover: rgba(194, 200, 204, 1);
-  --eds-color-text-interactive-resting-pressed: rgba(214, 217, 220, 1);
-  --eds-color-text-interactive-disabled: rgba(82, 97, 109, 1);
-  --eds-color-text-notification-info: rgba(111, 201, 251, 1);
-  --eds-color-text-notification-success: rgba(123, 207, 120, 1);
-  --eds-color-text-notification-warning: rgba(255, 174, 116, 1);
-  --eds-color-text-notification-error: rgba(255, 133, 149, 1);
-  --eds-color-text-inputs-helper-default: rgba(166, 175, 181, 1);
-  --eds-color-text-inputs-helper-info: rgba(111, 201, 251, 1);
-  --eds-color-text-inputs-helper-success: rgba(123, 207, 120, 1);
-  --eds-color-text-inputs-helper-warning: rgba(255, 174, 116, 1);
-  --eds-color-text-inputs-helper-error: rgba(255, 138, 138, 1);
-  --eds-color-text-inputs-default: rgba(194, 200, 204, 1);
-  --eds-color-text-inputs-active: rgba(255, 255, 255, 1);
-  --eds-color-text-inputs-label: rgba(166, 175, 181, 1);
-  --eds-color-text-primary-highlighted: rgba(255, 255, 255, 1);
-  --eds-color-text-primary: rgba(214, 217, 220, 1);
-  --eds-color-text-secondary: rgba(194, 200, 204, 1);
-  --eds-color-text-tertiary: rgba(166, 175, 181, 1);
-  --eds-color-text-button-primary-on-filled: rgba(0, 0, 0, 1);
-  --eds-color-text-button-primary-on-outlined: rgba(151, 202, 206, 1);
-  --eds-color-text-button-primary-on-outlined-hover: rgba(179, 226, 229, 1);
-  --eds-color-text-button-primary-on-outlined-pressed: rgba(209, 237, 239, 1);
-  --eds-color-text-button-secondary-on-filled: rgba(0, 0, 0, 1);
-  --eds-color-text-button-secondary-on-outlined: rgba(144, 187, 213, 1);
-  --eds-color-text-button-secondary-on-outlined-hover: rgba(196, 219, 232, 1);
-  --eds-color-text-button-secondary-on-outlined-pressed: rgba(216, 231, 240, 1);
-  --eds-color-text-button-danger-on-filled: rgba(0, 0, 0, 1);
-  --eds-color-text-button-danger-on-outlined: rgba(255, 102, 107, 1);
-  --eds-color-text-button-danger-on-outlined-hover: rgba(255, 171, 171, 1);
-  --eds-color-text-button-danger-on-outlined-pressed: rgba(255, 210, 209, 1);
-  --eds-color-text-button-disabled: rgba(82, 97, 109, 1);
-  --eds-color-text-quaternary: rgba(100, 114, 125, 1);
-  --eds-color-text-on-overlay: rgba(0, 0, 0, 1);
-  --eds-color-text-banner-info: rgba(223, 239, 247, 1);
-  --eds-color-text-banner-success: rgba(217, 247, 226, 1);
-  --eds-color-text-banner-warning: rgba(255, 231, 214, 1);
-  --eds-color-text-banner-error: rgba(255, 225, 224, 1);
-  --eds-color-text-card-info: rgba(111, 201, 251, 1);
-  --eds-color-text-card-success: rgba(123, 207, 120, 1);
-  --eds-color-text-card-warning: rgba(255, 174, 116, 1);
-  --eds-color-text-card-error: rgba(255, 138, 138, 1);
-  --eds-color-text-chip-info: rgba(111, 201, 251, 1);
-  --eds-color-text-chip-info-hover: rgba(174, 225, 253, 1);
-  --eds-color-text-chip-success: rgba(123, 207, 120, 1);
-  --eds-color-text-chip-success-hover: rgba(204, 238, 203, 1);
-  --eds-color-text-chip-warning: rgba(255, 174, 116, 1);
-  --eds-color-text-chip-warning-hover: rgba(255, 217, 189, 1);
-  --eds-color-text-chip-error: rgba(255, 138, 138, 1);
-  --eds-color-text-chip-error-hover: rgba(255, 171, 171, 1);
-  --eds-color-text-chip-neutral-resting: rgba(194, 200, 204, 1);
-  --eds-color-text-chip-neutral-resting-hover: rgba(214, 217, 220, 1);
-  --eds-color-text-chip-neutral-active: rgba(179, 226, 229, 1);
-  --eds-color-text-chip-neutral-active-hover: rgba(209, 237, 239, 1);
-  --eds-color-text-chip-neutral-disabled: rgba(82, 97, 109, 1);
-  --eds-color-icon-availability-available: rgba(123, 207, 120, 1);
-  --eds-color-icon-availability-away: rgba(255, 158, 40, 1);
-  --eds-color-icon-availability-busy: rgba(239, 72, 72, 1);
-  --eds-color-icon-availability-do-not-disturb: rgba(239, 72, 72, 1);
-  --eds-color-icon-interactive-active-on-ghost: rgba(151, 202, 206, 1);
-  --eds-color-icon-interactive-active-on-ghost-hover: rgba(179, 226, 229, 1);
-  --eds-color-icon-interactive-active-on-ghost-pressed: rgba(209, 237, 239, 1);
-  --eds-color-icon-interactive-active: rgba(209, 237, 239, 1);
-  --eds-color-icon-interactive-active-hover: rgba(224, 244, 245, 1);
-  --eds-color-icon-interactive-active-pressed: rgba(224, 244, 245, 1);
-  --eds-color-icon-interactive-active-neutral: rgba(214, 217, 220, 1);
-  --eds-color-icon-interactive-active-neutral-hover: rgba(233, 235, 237, 1);
-  --eds-color-icon-interactive-active-neutral-pressed: rgba(243, 245, 246, 1);
-  --eds-color-icon-interactive-resting: rgba(166, 175, 181, 1);
-  --eds-color-icon-interactive-resting-hover: rgba(194, 200, 204, 1);
-  --eds-color-icon-interactive-resting-pressed: rgba(214, 217, 220, 1);
-  --eds-color-icon-interactive-disabled: rgba(82, 97, 109, 1);
-  --eds-color-icon-primary-alt: rgba(255, 255, 255, 1);
-  --eds-color-icon-primary: rgba(214, 217, 220, 1);
-  --eds-color-icon-secondary: rgba(194, 200, 204, 1);
-  --eds-color-icon-tertiary: rgba(166, 175, 181, 1);
-  --eds-color-icon-quaternary: rgba(100, 114, 125, 1);
-  --eds-color-icon-on-overlay: rgba(0, 0, 0, 1);
-  --eds-color-icon-inputs-asterix: rgba(226, 3, 55, 1);
-  --eds-color-icon-inputs-info-resting: rgba(0, 132, 196, 1);
-  --eds-color-icon-inputs-info-active: rgba(111, 201, 251, 1);
-  --eds-color-icon-inputs-success-resting: rgba(75, 183, 72, 1);
-  --eds-color-icon-inputs-success-active: rgba(123, 207, 120, 1);
-  --eds-color-icon-inputs-warning-resting: rgba(229, 126, 0, 1);
-  --eds-color-icon-inputs-warning-active: rgba(255, 174, 116, 1);
-  --eds-color-icon-inputs-error-resting: rgba(226, 3, 55, 1);
-  --eds-color-icon-inputs-error-active: rgba(255, 138, 138, 1);
-  --eds-color-icon-inputs-helper-info: rgba(111, 201, 251, 1);
-  --eds-color-icon-inputs-helper-success: rgba(123, 207, 120, 1);
-  --eds-color-icon-inputs-helper-warning: rgba(255, 174, 116, 1);
-  --eds-color-icon-inputs-helper-error: rgba(255, 138, 138, 1);
-  --eds-color-icon-button-primary-on-filled: rgba(0, 0, 0, 1);
-  --eds-color-icon-button-primary-on-outlined: rgba(151, 202, 206, 1);
-  --eds-color-icon-button-primary-on-outlined-hover: rgba(179, 226, 229, 1);
-  --eds-color-icon-button-primary-on-outlined-pressed: rgba(209, 237, 239, 1);
-  --eds-color-icon-button-secondary-on-filled: rgba(0, 0, 0, 1);
-  --eds-color-icon-button-secondary-on-outlined: rgba(144, 187, 213, 1);
-  --eds-color-icon-button-secondary-on-outlined-hover: rgba(196, 219, 232, 1);
-  --eds-color-icon-button-secondary-on-outlined-pressed: rgba(216, 231, 240, 1);
-  --eds-color-icon-button-danger-on-filled: rgba(0, 0, 0, 1);
-  --eds-color-icon-button-danger-on-outlined: rgba(255, 102, 107, 1);
-  --eds-color-icon-button-danger-on-outlined-hover: rgba(255, 171, 171, 1);
-  --eds-color-icon-button-danger-on-outlined-pressed: rgba(255, 210, 209, 1);
-  --eds-color-icon-banner-info: rgba(223, 239, 247, 1);
-  --eds-color-icon-banner-success: rgba(217, 247, 226, 1);
-  --eds-color-icon-banner-warning: rgba(255, 231, 214, 1);
-  --eds-color-icon-banner-error: rgba(255, 225, 224, 1);
-  --eds-color-icon-card-info: rgba(111, 201, 251, 1);
-  --eds-color-icon-card-success: rgba(123, 207, 120, 1);
-  --eds-color-icon-card-warning: rgba(255, 174, 116, 1);
-  --eds-color-icon-card-error: rgba(255, 138, 138, 1);
-  --eds-color-icon-chip-info: rgba(111, 201, 251, 1);
-  --eds-color-icon-chip-info-hover: rgba(174, 225, 253, 1);
-  --eds-color-icon-chip-success: rgba(123, 207, 120, 1);
-  --eds-color-icon-chip-success-hover: rgba(204, 238, 203, 1);
-  --eds-color-icon-chip-warning: rgba(255, 174, 116, 1);
-  --eds-color-icon-chip-warning-hover: rgba(255, 217, 189, 1);
-  --eds-color-icon-chip-error: rgba(255, 138, 138, 1);
-  --eds-color-icon-chip-error-hover: rgba(255, 171, 171, 1);
-  --eds-color-icon-chip-neutral-resting: rgba(194, 200, 204, 1);
-  --eds-color-icon-chip-neutral-resting-hover: rgba(214, 217, 220, 1);
-  --eds-color-icon-chip-neutral-active: rgba(179, 226, 229, 1);
-  --eds-color-icon-chip-neutral-active-hover: rgba(209, 237, 239, 1);
-  --eds-color-icon-chip-neutral-disabled: rgba(82, 97, 109, 1);
-  --eds-color-border-interactive-resting: rgba(255, 255, 255, 0.16);
-  --eds-color-border-interactive-resting-hover: rgba(255, 255, 255, 0.2);
-  --eds-color-border-interactive-resting-pressed: rgba(255, 255, 255, 0.3);
-  --eds-color-border-interactive-active: rgba(151, 202, 206, 1);
-  --eds-color-border-interactive-active-hover: rgba(179, 226, 229, 1);
-  --eds-color-border-interactive-active-pressed: rgba(209, 237, 239, 1);
-  --eds-color-border-interactive-disabled: rgba(67, 84, 96, 1);
-  --eds-color-border-inputs-info-default: rgba(0, 132, 196, 1);
-  --eds-color-border-inputs-info-active: rgba(111, 201, 251, 1);
-  --eds-color-border-inputs-success-default: rgba(75, 183, 72, 1);
-  --eds-color-border-inputs-success-active: rgba(123, 207, 120, 1);
-  --eds-color-border-inputs-default: rgba(255, 255, 255, 0.16);
-  --eds-color-border-inputs-warning-default: rgba(229, 126, 0, 1);
-  --eds-color-border-inputs-warning-active: rgba(255, 174, 116, 1);
-  --eds-color-border-inputs-active: rgba(151, 202, 206, 1);
-  --eds-color-border-inputs-error-default: rgba(226, 3, 55, 1);
-  --eds-color-border-inputs-error-active: rgba(255, 138, 138, 1);
-  --eds-color-border-chip-info: rgba(0, 132, 196, 1);
-  --eds-color-border-chip-info-hover: rgba(174, 225, 253, 1);
-  --eds-color-border-chip-success: rgba(75, 183, 72, 1);
-  --eds-color-border-chip-success-hover: rgba(204, 238, 203, 1);
-  --eds-color-border-chip-warning: rgba(229, 126, 0, 1);
-  --eds-color-border-chip-warning-hover: rgba(255, 217, 189, 1);
-  --eds-color-border-chip-error: rgba(226, 3, 55, 1);
-  --eds-color-border-chip-error-hover: rgba(255, 171, 171, 1);
-  --eds-color-border-chip-neutral-resting: rgba(67, 84, 96, 1);
-  --eds-color-border-chip-neutral-resting-hover: rgba(214, 217, 220, 1);
-  --eds-color-border-chip-neutral-active: rgba(30, 93, 120, 1);
-  --eds-color-border-chip-neutral-active-hover: rgba(166, 214, 217, 1);
-  --eds-color-border-chip-neutral-disabled: rgba(82, 97, 109, 1);
-  --eds-color-border-banner-info: rgba(4, 94, 141, 1);
-  --eds-color-border-banner-success: rgba(21, 104, 45, 1);
-  --eds-color-border-banner-warning: rgba(127, 70, 0, 1);
-  --eds-color-border-banner-error: rgba(144, 4, 44, 1);
-  --eds-color-border-card-info: rgba(0, 132, 196, 1);
-  --eds-color-border-card-success: rgba(75, 183, 72, 1);
-  --eds-color-border-card-warning: rgba(229, 126, 0, 1);
-  --eds-color-border-card-error: rgba(226, 3, 55, 1);
-  --eds-color-border-default: rgba(255, 255, 255, 0.16);
-  --eds-color-border-button-primary-enabled: rgba(151, 202, 206, 1);
-  --eds-color-border-button-primary-hover: rgba(179, 226, 229, 1);
-  --eds-color-border-button-primary-pressed: rgba(209, 237, 239, 1);
-  --eds-color-border-button-secondary-enabled: rgba(144, 187, 213, 1);
-  --eds-color-border-button-secondary-hover: rgba(196, 219, 232, 1);
-  --eds-color-border-button-secondary-pressed: rgba(216, 231, 240, 1);
-  --eds-color-border-button-danger-enabled: rgba(255, 102, 107, 1);
-  --eds-color-border-button-danger-hover: rgba(255, 171, 171, 1);
-  --eds-color-border-button-danger-pressed: rgba(255, 210, 209, 1);
-  --eds-color-border-button-disabled: rgba(67, 84, 96, 1);
-  --eds-color-border-alternative: rgba(19, 38, 52, 1);
-  --eds-color-border-ui-shell: rgba(19, 38, 52, 1);
-  --eds-color-surface-elevation-level-1: rgba(36, 55, 70, 1);
-  --eds-color-surface-elevation-level-2: rgba(44, 66, 81, 1);
-  --eds-color-surface-elevation-level-3: rgba(52, 76, 91, 1);
-  --eds-color-surface-elevation-level-4: rgba(63, 86, 100, 1);
-  --eds-color-surface-interactive-resting: rgba(0, 0, 0, 0);
-  --eds-color-surface-interactive-resting-hover: rgba(52, 76, 91, 1);
-  --eds-color-surface-interactive-resting-pressed: rgba(36, 55, 70, 1);
-  --eds-color-surface-interactive-active: rgba(23, 72, 93, 1);
-  --eds-color-surface-interactive-active-hover: rgba(30, 93, 120, 1);
-  --eds-color-surface-interactive-active-pressed: rgba(37, 113, 147, 1);
-  --eds-color-surface-interactive-active-on-elevation: rgba(30, 93, 120, 1);
-  --eds-color-surface-interactive-active-on-elevation-hover: rgba(37, 113, 147, 1);
-  --eds-color-surface-interactive-active-on-elevation-pressed: rgba(43, 132, 171, 1);
-  --eds-color-surface-interactive-disabled: rgba(0, 0, 0, 0);
-  --eds-color-surface-inputs-default: rgba(0, 0, 0, 0.28);
-  --eds-color-surface-inputs-on-alternative: rgba(0, 0, 0, 0.28);
-  --eds-color-surface-chip-info: rgba(223, 239, 247, 0.1);
-  --eds-color-surface-chip-info-hover: rgba(223, 239, 247, 0.1);
-  --eds-color-surface-chip-success: rgba(230, 250, 236, 0.1);
-  --eds-color-surface-chip-success-hover: rgba(230, 250, 236, 0.1);
-  --eds-color-surface-chip-warning: rgba(255, 231, 214, 0.1);
-  --eds-color-surface-chip-warning-hover: rgba(255, 231, 214, 0.1);
-  --eds-color-surface-chip-error: rgba(255, 225, 224, 0.1);
-  --eds-color-surface-chip-error-hover: rgba(255, 225, 224, 0.1);
-  --eds-color-surface-chip-neutral-resting: rgba(234, 234, 234, 0.1);
-  --eds-color-surface-chip-neutral-resting-hover: rgba(234, 234, 234, 0.1);
-  --eds-color-surface-chip-neutral-active: rgba(42, 88, 116, 0.5);
-  --eds-color-surface-chip-neutral-active-hover: rgba(42, 88, 116, 0.5);
-  --eds-color-surface-chip-neutral-disabled: rgba(46, 63, 76, 0.4);
-  --eds-color-surface-banner-info: rgba(4, 94, 141, 1);
-  --eds-color-surface-banner-success: rgba(21, 104, 45, 1);
-  --eds-color-surface-banner-warning: rgba(127, 70, 0, 1);
-  --eds-color-surface-banner-error: rgba(144, 4, 44, 1);
-  --eds-color-surface-card-elevation-level-1-info: rgba(36, 55, 70, 1);
-  --eds-color-surface-card-elevation-level-1-success: rgba(36, 55, 70, 1);
-  --eds-color-surface-card-elevation-level-1-warning: rgba(36, 55, 70, 1);
-  --eds-color-surface-card-elevation-level-1-error: rgba(36, 55, 70, 1);
-  --eds-color-surface-card-elevation-level-2-info: rgba(44, 66, 81, 1);
-  --eds-color-surface-card-elevation-level-2-success: rgba(44, 66, 81, 1);
-  --eds-color-surface-card-elevation-level-2-warning: rgba(44, 66, 81, 1);
-  --eds-color-surface-card-elevation-level-2-error: rgba(44, 66, 81, 1);
+  --eds-color-surface-button-danger-outlined: rgba(0, 0, 0, 0); /* Button */
+  --eds-color-surface-button-secondary-outlined: rgba(0, 0, 0, 0); /* Button */
+  --eds-color-surface-button-primary-outlined: rgba(0, 0, 0, 0); /* Button, Ghost button, Toggle button */
+  --eds-color-surface-overlay: rgba(220, 242, 255, 0.949); /* Snackbar, Tooltip */
+  --eds-color-surface-scrim: rgba(0, 0, 0, 0.4); /* Scrim */
+  --eds-color-surface-table-cell-error: rgba(255, 102, 107, 0.278); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-disabled: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-resting: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
   --eds-color-surface-none: rgba(0, 0, 0, 0);
-  --eds-color-surface-canvas: rgba(19, 38, 52, 1);
-  --eds-color-surface-canvas-alternative: rgba(19, 38, 52, 1);
-  --eds-color-surface-table-header-resting: rgba(36, 55, 70, 1);
-  --eds-color-surface-table-header-resting-hover: rgba(52, 76, 91, 1);
-  --eds-color-surface-table-header-active: rgba(44, 66, 81, 1);
-  --eds-color-surface-table-header-active-hover: rgba(52, 76, 91, 1);
-  --eds-color-surface-table-header-on-alternative-resting: rgba(19, 38, 52, 1);
-  --eds-color-surface-table-header-on-alternative-resting-hover: rgba(52, 76, 91, 1);
-  --eds-color-surface-table-header-on-alternative-active: rgba(44, 66, 81, 1);
-  --eds-color-surface-table-header-on-alternative-active-hover: rgba(44, 66, 81, 1);
-  --eds-color-surface-table-header-on-alternative-disabled: rgba(19, 38, 52, 1);
-  --eds-color-surface-table-header-disabled: rgba(36, 55, 70, 1);
-  --eds-color-surface-table-cell-resting: rgba(0, 0, 0, 0);
-  --eds-color-surface-table-cell-resting-hover: rgba(52, 76, 91, 1);
-  --eds-color-surface-table-cell-disabled: rgba(0, 0, 0, 0);
-  --eds-color-surface-table-cell-error: rgba(255, 102, 107, 0.28);
-  --eds-color-surface-scrim: rgba(0, 0, 0, 0.4);
-  --eds-color-surface-overlay: rgba(220, 242, 255, 0.95);
-  --eds-color-surface-ui-shell: rgba(36, 55, 70, 1);
-  --eds-color-surface-button-primary-filled-enabled: rgba(151, 202, 206, 1);
-  --eds-color-surface-button-primary-filled-hover: rgba(179, 226, 229, 1);
-  --eds-color-surface-button-primary-filled-pressed: rgba(209, 237, 239, 1);
-  --eds-color-surface-button-primary-outlined-enabled: rgba(0, 0, 0, 0);
-  --eds-color-surface-button-primary-outlined-hover: rgba(3, 50, 53, 1);
-  --eds-color-surface-button-primary-outlined-pressed: rgba(0, 79, 85, 1);
-  --eds-color-surface-button-secondary-filled-enabled: rgba(144, 187, 213, 1);
-  --eds-color-surface-button-secondary-filled-hover: rgba(196, 219, 232, 1);
-  --eds-color-surface-button-secondary-filled-pressed: rgba(216, 231, 240, 1);
-  --eds-color-surface-button-secondary-outlined-enabled: rgba(0, 0, 0, 0);
-  --eds-color-surface-button-secondary-outlined-hover: rgba(2, 49, 74, 1);
-  --eds-color-surface-button-secondary-outlined-pressed: rgba(3, 72, 107, 1);
-  --eds-color-surface-button-danger-filled-enabled: rgba(255, 102, 107, 1);
-  --eds-color-surface-button-danger-filled-hover: rgba(255, 171, 171, 1);
-  --eds-color-surface-button-danger-filled-pressed: rgba(255, 210, 209, 1);
-  --eds-color-surface-button-danger-outlined-enabled: rgba(0, 0, 0, 0);
-  --eds-color-surface-button-danger-outlined-hover: rgba(80, 0, 23, 1);
-  --eds-color-surface-button-danger-outlined-pressed: rgba(112, 0, 32, 1);
-  --eds-color-surface-button-disabled-filled: rgba(46, 63, 76, 1);
-  --eds-color-surface-button-disabled-outlined: rgba(0, 0, 0, 0);
-  --eds-color-surface-placeholder-image: rgba(63, 86, 100, 1);
+  --eds-color-surface-chip-neutral-disabled: rgba(46, 63, 76, 0.4); /* Chip */
+  --eds-color-surface-chip-neutral-active-hover: rgba(42, 88, 116, 0.502); /* Chip */
+  --eds-color-surface-chip-neutral-active: rgba(42, 88, 116, 0.502); /* Chip */
+  --eds-color-surface-chip-neutral-resting-hover: rgba(234, 234, 234, 0.102); /* Chip */
+  --eds-color-surface-chip-neutral-resting: rgba(234, 234, 234, 0.102); /* Chip */
+  --eds-color-surface-chip-error-hover: rgba(255, 225, 224, 0.102); /* Chip */
+  --eds-color-surface-chip-error: rgba(255, 225, 224, 0.102); /* Chip */
+  --eds-color-surface-chip-warning-hover: rgba(255, 231, 214, 0.102); /* Chip */
+  --eds-color-surface-chip-warning: rgba(255, 231, 214, 0.102); /* Chip */
+  --eds-color-surface-chip-success-hover: rgba(230, 250, 236, 0.102); /* Chip */
+  --eds-color-surface-chip-success: rgba(230, 250, 236, 0.102); /* Chip */
+  --eds-color-surface-chip-info-hover: rgba(223, 239, 247, 0.102); /* Chip */
+  --eds-color-surface-chip-info: rgba(223, 239, 247, 0.102); /* Chip */
+  --eds-color-surface-input-on-main-deep: rgba(0, 0, 0, 0.278); /* Autocomplete, Search, Table input, Text field input */
+  --eds-color-surface-input-on-main-flat: rgba(0, 0, 0, 0.278); /* Autocomplete, Search, Table input, Text field input */
+  --eds-color-surface-interactive-disabled: rgba(0, 0, 0, 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-active-ghost: rgba(0, 0, 0, 0); /* Tab */
+  --eds-color-surface-interactive-resting: rgba(0, 0, 0, 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-shadow-bottom: rgba(0, 0, 0, 0.2);
+  --eds-color-surface-shadow-middle: rgba(0, 0, 0, 0.122);
+  --eds-color-surface-shadow-top: rgba(0, 0, 0, 0.141);
+  --eds-color-border-alternative: rgba(255, 255, 255, 0.161);
+  --eds-color-border-quaternary: rgba(255, 255, 255, 0.4);
+  --eds-color-border-tertiary: rgba(255, 255, 255, 0.302);
+  --eds-color-border-secondary: rgba(255, 255, 255, 0.2);
+  --eds-color-border-primary: rgba(255, 255, 255, 0.161); /* Dialog, Popover */
+  --eds-color-border-input-resting: rgba(255, 255, 255, 0.161); /* Autocomplete, Text field */
+  --eds-color-border-interactive-resting-pressed: rgba(255, 255, 255, 0.302);
+  --eds-color-border-interactive-resting-hover: rgba(255, 255, 255, 0.2); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-border-interactive-resting: rgba(255, 255, 255, 0.161); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-surface-placeholder-image: var(--eds-color-slate-blue-1100); /* Placeholder image */
+  --eds-color-surface-button-disabled-outlined: var(--eds-color-surface-interactive-resting); /* Button */
+  --eds-color-surface-button-disabled-filled: var(--eds-color-slate-grey-1300); /* Button */
+  --eds-color-surface-button-danger-outlined-pressed: var(--eds-color-red-cold-1300);
+  --eds-color-surface-button-danger-outlined-hover: var(--eds-color-red-cold-1400); /* Button */
+  --eds-color-surface-button-danger-filled-pressed: var(--eds-color-red-warm-300);
+  --eds-color-surface-button-danger-filled-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-surface-button-danger-filled: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-surface-button-secondary-outlined-pressed: var(--eds-color-blue-sky-1300);
+  --eds-color-surface-button-secondary-outlined-hover: var(--eds-color-blue-sky-1400); /* Button */
+  --eds-color-surface-button-secondary-filled-pressed: var(--eds-color-mist-grey-300);
+  --eds-color-surface-button-secondary-filled-hover: var(--eds-color-mist-grey-400); /* Button */
+  --eds-color-surface-button-secondary-filled: var(--eds-color-mist-grey-600); /* Button */
+  --eds-color-surface-button-primary-outlined-pressed: var(--eds-color-moss-green-sat-1300);
+  --eds-color-surface-button-primary-outlined-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
+  --eds-color-surface-button-primary-filled-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-surface-button-primary-filled-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-surface-button-primary-filled: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
+  --eds-color-surface-ui-shell: var(--eds-color-slate-blue-1350); /* Sidebar, Side sheet, Toolbar, Top bar */
+  --eds-color-surface-table-cell-resting-hover: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-header-active-hover: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-active: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-resting-hover: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-deep-disabled: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-deep-resting: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-flat-disabled: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-flat-resting: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-color-surface-main-deep: var(--eds-color-slate-blue-1400); /* UI main */
+  --eds-color-surface-main-flat: var(--eds-color-slate-blue-1400); /* UI main */
+  --eds-color-surface-card-elevation-level-2-error: var(--eds-color-slate-blue-1300); /* Card */
+  --eds-color-surface-card-elevation-level-2-warning: var(--eds-color-slate-blue-1300); /* Card */
+  --eds-color-surface-card-elevation-level-2-success: var(--eds-color-slate-blue-1300); /* Card */
+  --eds-color-surface-card-elevation-level-2-info: var(--eds-color-slate-blue-1300); /* Card */
+  --eds-color-surface-card-elevation-level-1-error: var(--eds-color-slate-blue-1350); /* Card */
+  --eds-color-surface-card-elevation-level-1-warning: var(--eds-color-slate-blue-1350); /* Card */
+  --eds-color-surface-card-elevation-level-1-success: var(--eds-color-slate-blue-1350); /* Card */
+  --eds-color-surface-card-elevation-level-1-info: var(--eds-color-slate-blue-1350); /* Card */
+  --eds-color-surface-banner-error: var(--eds-color-red-cold-1200); /* Banner */
+  --eds-color-surface-banner-warning: var(--eds-color-orange-1200); /* Banner */
+  --eds-color-surface-banner-success: var(--eds-color-lichen-green-1200); /* Chip */
+  --eds-color-surface-banner-info: var(--eds-color-blue-sky-1200); /* Chip */
+  --eds-color-surface-interactive-elevation-level-2-active-pressed: var(--eds-color-mist-blue-muted-1000); /* Used in Table cell, Menu, Sidebar, Tab */
+  --eds-color-surface-interactive-elevation-level-2-active-hover: var(--eds-color-mist-blue-muted-1100); /* Menu */
+  --eds-color-surface-interactive-elevation-level-2-active: var(--eds-color-mist-blue-muted-1200); /* Menu */
+  --eds-color-surface-interactive-active-pressed: var(--eds-color-mist-blue-muted-1100); /* Used in Table cell, Menu, Sidebar, Tab */
+  --eds-color-surface-interactive-active-hover: var(--eds-color-mist-blue-muted-1200); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-active: var(--eds-color-mist-blue-muted-1300); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-resting-pressed: var(--eds-color-slate-blue-1350); /* Used in Tab resting hover, Menu item resting hover, Sidebar item resting hover, App launcher hover */
+  --eds-color-surface-interactive-resting-hover: var(--eds-color-slate-blue-1200); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-elevation-level-4: var(--eds-color-slate-blue-1100);
+  --eds-color-surface-elevation-level-3: var(--eds-color-slate-blue-1200);
+  --eds-color-surface-elevation-level-2: var(--eds-color-slate-blue-1300); /* Card neutral, Menu, Popover */
+  --eds-color-surface-elevation-level-1: var(--eds-color-slate-blue-1350); /* Dialog */
+  --eds-color-border-ui-shell: var(--eds-color-slate-blue-1400); /* Sidebar, Topbar, Side sheet */
+  --eds-color-border-button-danger-outlined-pressed: var(--eds-color-red-warm-300);
+  --eds-color-border-button-danger-outlined-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-border-button-danger-outlined: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-border-button-secondary-outlined-pressed: var(--eds-color-mist-grey-300);
+  --eds-color-border-button-secondary-outlined-hover: var(--eds-color-mist-grey-400); /* Button */
+  --eds-color-border-button-secondary-outlined: var(--eds-color-mist-grey-600); /* Button */
+  --eds-color-border-button-primary-outlined-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-border-button-primary-outlined-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-border-button-primary-outlined: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
+  --eds-color-border-card-error: var(--eds-color-red-cold-900); /* Card */
+  --eds-color-border-card-warning: var(--eds-color-orange-800); /* Card */
+  --eds-color-border-card-success: var(--eds-color-success-green-800); /* Card */
+  --eds-color-border-card-info: var(--eds-color-blue-sky-1000); /* Card */
+  --eds-color-border-banner-error: var(--eds-color-red-cold-1200); /* Banner */
+  --eds-color-border-banner-warning: var(--eds-color-orange-1200); /* Banner */
+  --eds-color-border-banner-success: var(--eds-color-lichen-green-1200); /* Banner */
+  --eds-color-border-banner-info: var(--eds-color-blue-sky-1200); /* Banner */
+  --eds-color-border-chip-neutral-disabled: var(--eds-color-slate-grey-1000); /* Chip */
+  --eds-color-border-chip-neutral-active-hover: var(--eds-color-moss-green-sat-400); /* Chip */
+  --eds-color-border-chip-neutral-active: var(--eds-color-mist-blue-muted-1200); /* Chip */
+  --eds-color-border-chip-neutral-resting-hover: var(--eds-color-slate-grey-400); /* Chip */
+  --eds-color-border-chip-neutral-resting: var(--eds-color-slate-grey-1100); /* Chip */
+  --eds-color-border-chip-error-hover: var(--eds-color-red-warm-500); /* Chip */
+  --eds-color-border-chip-error: var(--eds-color-red-cold-900); /* Chip */
+  --eds-color-border-chip-warning-hover: var(--eds-color-spruce-wood-300); /* Chip */
+  --eds-color-border-chip-warning: var(--eds-color-orange-800); /* Chip */
+  --eds-color-border-chip-success-hover: var(--eds-color-success-green-300); /* Chip */
+  --eds-color-border-chip-success: var(--eds-color-success-green-800); /* Chip */
+  --eds-color-border-chip-info-hover: var(--eds-color-blue-sky-400); /* Chip */
+  --eds-color-border-chip-info: var(--eds-color-blue-sky-1000); /* Chip */
+  --eds-color-border-input-error-active: var(--eds-color-red-warm-600); /* Text field */
+  --eds-color-border-input-error-resting: var(--eds-color-red-cold-900); /* Text field */
+  --eds-color-border-input-active: var(--eds-color-moss-green-sat-500); /* Autocomplete, Search, Text field */
+  --eds-color-border-input-warning-active: var(--eds-color-spruce-wood-500); /* Text field */
+  --eds-color-border-input-warning-resting: var(--eds-color-orange-800); /* Text field */
+  --eds-color-border-input-success-active: var(--eds-color-success-green-600); /* Text field */
+  --eds-color-border-input-success-resting: var(--eds-color-success-green-800); /* Text field */
+  --eds-color-border-input-info-active: var(--eds-color-blue-sky-600); /* Text field */
+  --eds-color-border-input-info-resting: var(--eds-color-blue-sky-1000); /* Text field */
+  --eds-color-border-interactive-disabled: var(--eds-color-slate-grey-1100); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-border-interactive-active-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-border-interactive-active-hover: var(--eds-color-moss-green-sat-300); /* Menu item Sidebar, Tab, Table header, Table header data grid */
+  --eds-color-border-interactive-active: var(--eds-color-moss-green-sat-500); /* Menu item Sidebar, Tab, Table header, Table header data grid */
+  --eds-color-icon-chip-neutral-disabled: var(--eds-color-slate-grey-1000); /* Chip */
+  --eds-color-icon-chip-neutral-active-hover: var(--eds-color-moss-green-sat-200); /* Chip */
+  --eds-color-icon-chip-neutral-active: var(--eds-color-moss-green-sat-300); /* Chip */
+  --eds-color-icon-chip-neutral-resting-hover: var(--eds-color-slate-grey-400); /* Chip */
+  --eds-color-icon-chip-neutral-resting: var(--eds-color-slate-grey-500); /* Chip */
+  --eds-color-icon-chip-error-hover: var(--eds-color-red-warm-500); /* Chip */
+  --eds-color-icon-chip-error: var(--eds-color-red-warm-600); /* Chip */
+  --eds-color-icon-chip-warning-hover: var(--eds-color-spruce-wood-300); /* Chip */
+  --eds-color-icon-chip-warning: var(--eds-color-spruce-wood-500); /* Chip */
+  --eds-color-icon-chip-success-hover: var(--eds-color-success-green-300); /* Chip */
+  --eds-color-icon-chip-success: var(--eds-color-success-green-600); /* Chip */
+  --eds-color-icon-chip-info-hover: var(--eds-color-blue-sky-400); /* Chip */
+  --eds-color-icon-chip-info: var(--eds-color-blue-sky-600); /* Chip */
+  --eds-color-icon-card-error: var(--eds-color-red-warm-600); /* Card */
+  --eds-color-icon-card-warning: var(--eds-color-spruce-wood-500); /* Card */
+  --eds-color-icon-card-success: var(--eds-color-success-green-600); /* Card */
+  --eds-color-icon-card-info: var(--eds-color-blue-sky-600); /* Card */
+  --eds-color-icon-banner-error: var(--eds-color-red-warm-200); /* Banner */
+  --eds-color-icon-banner-warning: var(--eds-color-spruce-wood-200); /* Banner */
+  --eds-color-icon-banner-success: var(--eds-color-lichen-green-200); /* Banner */
+  --eds-color-icon-banner-info: var(--eds-color-mist-blue-muted-200); /* Banner */
+  --eds-color-icon-button-danger-on-outlined-pressed: var(--eds-color-red-warm-300);
+  --eds-color-icon-button-danger-on-outlined-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-icon-button-danger-on-outlined: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-icon-button-danger-on-filled: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-icon-button-secondary-on-outlined-pressed: var(--eds-color-mist-grey-300);
+  --eds-color-icon-button-secondary-on-outlined-hover: var(--eds-color-mist-grey-400); /* Button */
+  --eds-color-icon-button-secondary-on-outlined: var(--eds-color-mist-grey-600); /* Button */
+  --eds-color-icon-button-secondary-on-filled: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-icon-button-primary-on-outlined-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-icon-button-primary-on-outlined-hover: var(--eds-color-moss-green-sat-300); /* Button, Ghost button, Toggle button */
+  --eds-color-icon-button-primary-on-outlined: var(--eds-color-moss-green-sat-500); /* Button, Ghost button, Toggle button */
+  --eds-color-icon-button-primary-on-filled: var(--eds-color-neutral-1500); /* Button, Toggle button */
+  --eds-color-icon-input-helper-error: var(--eds-color-red-warm-600); /* Text field */
+  --eds-color-icon-input-helper-warning: var(--eds-color-spruce-wood-500); /* Text field */
+  --eds-color-icon-input-helper-success: var(--eds-color-success-green-600); /* Text field */
+  --eds-color-icon-input-helper-info: var(--eds-color-blue-sky-600); /* Text field */
+  --eds-color-icon-input-helper-default: var(--eds-color-slate-grey-600); /* Text field */
+  --eds-color-icon-input-error-active: var(--eds-color-red-warm-600); /* Text field */
+  --eds-color-icon-input-error-resting: var(--eds-color-red-cold-900); /* Text field */
+  --eds-color-icon-input-warning-active: var(--eds-color-spruce-wood-500); /* Text field */
+  --eds-color-icon-input-warning-resting: var(--eds-color-orange-800); /* Text field */
+  --eds-color-icon-input-success-active: var(--eds-color-success-green-600); /* Text field */
+  --eds-color-icon-input-success-resting: var(--eds-color-success-green-800); /* Text field */
+  --eds-color-icon-input-info-active: var(--eds-color-blue-sky-600); /* Text field */
+  --eds-color-icon-input-info-resting: var(--eds-color-blue-sky-1000); /* Text field */
+  --eds-color-icon-on-overlay: var(--eds-color-neutral-1500); /* Button, Toggle button */
+  --eds-color-icon-quaternary: var(--eds-color-slate-grey-900);
+  --eds-color-icon-tertiary: var(--eds-color-slate-grey-600);
+  --eds-color-icon-secondary: var(--eds-color-slate-grey-500);
+  --eds-color-icon-primary: var(--eds-color-slate-grey-400);
+  --eds-color-icon-interactive-elevation-level-2-active-pressed: var(--eds-color-moss-green-sat-100);
+  --eds-color-icon-interactive-elevation-level-2-active-hover: var(--eds-color-moss-green-sat-100); /* Menu item */
+  --eds-color-icon-interactive-elevation-level-2-active: var(--eds-color-moss-green-sat-200); /* Menu item */
+  --eds-color-icon-interactive-elevation-level-2-resting-pressed: var(--eds-color-slate-grey-200);
+  --eds-color-icon-interactive-elevation-level-2-resting-hover: var(--eds-color-slate-grey-400); /* Menu item */
+  --eds-color-icon-interactive-elevation-level-2-resting: var(--eds-color-slate-grey-500); /* Menu item */
+  --eds-color-icon-interactive-disabled: var(--eds-color-slate-grey-1000); /* Autocomplete, Menu item (Menu &amp; Sidebar) Search, Tab, Table header, Table header data grid, Table cell, Table data grid cell, Text field, Top bar */
+  --eds-color-icon-interactive-active-neutral-pressed: var(--eds-color-slate-grey-100);
+  --eds-color-icon-interactive-active-neutral-hover: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-color-icon-interactive-active-neutral: var(--eds-color-slate-grey-400); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-color-icon-interactive-active-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-icon-interactive-active-hover: var(--eds-color-moss-green-sat-300); /* Autocomplete, Menu item (Sidebar) */
+  --eds-color-icon-interactive-active: var(--eds-color-moss-green-sat-500); /* Autocomplete, Menu item (Sidebar) */
+  --eds-color-icon-interactive-resting-pressed: var(--eds-color-slate-grey-400);
+  --eds-color-icon-interactive-resting-hover: var(--eds-color-slate-grey-500); /* Autocomplete, Menu item (Sidebar) */
+  --eds-color-icon-interactive-resting: var(--eds-color-slate-grey-600); /* Autocomplete, Menu item (Sidebar) Search */
+  --eds-color-icon-availability-do-not-disturb: var(--eds-color-red-warm-800); /* Card neutral */
+  --eds-color-icon-availability-busy: var(--eds-color-red-warm-800); /* Card */
+  --eds-color-icon-availability-away: var(--eds-color-orange-600); /* Card */
+  --eds-color-icon-availability-available: var(--eds-color-success-green-600); /* Card */
+  --eds-color-text-chip-neutral-disabled: var(--eds-color-slate-grey-1000); /* Chip */
+  --eds-color-text-chip-neutral-active-hover: var(--eds-color-moss-green-sat-200); /* Chip */
+  --eds-color-text-chip-neutral-active: var(--eds-color-moss-green-sat-300); /* Chip */
+  --eds-color-text-chip-neutral-resting-hover: var(--eds-color-slate-grey-400); /* Chip */
+  --eds-color-text-chip-neutral-resting: var(--eds-color-slate-grey-500); /* Chip */
+  --eds-color-text-chip-error-hover: var(--eds-color-red-warm-500); /* Chip */
+  --eds-color-text-chip-error: var(--eds-color-red-warm-600); /* Chip */
+  --eds-color-text-chip-warning-hover: var(--eds-color-spruce-wood-300); /* Chip */
+  --eds-color-text-chip-warning: var(--eds-color-spruce-wood-500); /* Chip */
+  --eds-color-text-chip-success-hover: var(--eds-color-success-green-300); /* Chip */
+  --eds-color-text-chip-success: var(--eds-color-success-green-600); /* Chip */
+  --eds-color-text-chip-info-hover: var(--eds-color-blue-sky-400); /* Chip */
+  --eds-color-text-chip-info: var(--eds-color-blue-sky-600); /* Chip */
+  --eds-color-text-card-error: var(--eds-color-red-warm-600); /* Card */
+  --eds-color-text-card-warning: var(--eds-color-spruce-wood-500); /* Card */
+  --eds-color-text-card-success: var(--eds-color-success-green-600); /* Card */
+  --eds-color-text-card-info: var(--eds-color-blue-sky-600); /* Card */
+  --eds-color-text-banner-error: var(--eds-color-red-warm-200); /* Banner */
+  --eds-color-text-banner-warning: var(--eds-color-spruce-wood-200); /* Banner */
+  --eds-color-text-banner-success: var(--eds-color-lichen-green-200); /* Banner */
+  --eds-color-text-banner-info: var(--eds-color-mist-blue-muted-200); /* Banner */
+  --eds-color-text-on-overlay: var(--eds-color-neutral-1500); /* Button, Toggle button */
+  --eds-color-text-quaternary: var(--eds-color-slate-grey-900);
+  --eds-color-text-button-danger-on-outlined-pressed: var(--eds-color-red-warm-300);
+  --eds-color-text-button-danger-on-outlined-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-text-button-danger-on-outlined: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-text-button-danger-on-filled: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-text-button-secondary-on-outlined-pressed: var(--eds-color-mist-grey-300);
+  --eds-color-text-button-secondary-on-outlined-hover: var(--eds-color-mist-grey-400); /* Button */
+  --eds-color-text-button-secondary-on-outlined: var(--eds-color-mist-grey-600); /* Button */
+  --eds-color-text-button-secondary-on-filled: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-text-button-primary-on-outlined-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-text-button-primary-on-outlined-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-text-button-primary-on-outlined: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
+  --eds-color-text-button-primary-on-filled: var(--eds-color-neutral-1500); /* Button, Toggle button */
+  --eds-color-text-tertiary: var(--eds-color-slate-grey-600);
+  --eds-color-text-secondary: var(--eds-color-slate-grey-500); /* Application name, Dialog body text, Popover body text */
+  --eds-color-text-primary: var(--eds-color-slate-grey-400); /* Dialog title, Popover title, Side sheet title, Title */
+  --eds-color-text-primary-highlighted: var(--eds-color-neutral-0);
+  --eds-color-text-input-asterix: var(--eds-color-red-cold-900); /* Autocomplete, Text field */
+  --eds-color-text-input-label: var(--eds-color-slate-grey-600); /* Autocomplete, Text field */
+  --eds-color-text-input-active: var(--eds-color-neutral-0); /* Autocomplete, Table input, Search, Text field */
+  --eds-color-text-input-resting: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
+  --eds-color-text-input-helper-error: var(--eds-color-red-warm-600); /* Text field */
+  --eds-color-text-input-helper-warning: var(--eds-color-spruce-wood-500); /* Text field */
+  --eds-color-text-input-helper-success: var(--eds-color-success-green-600); /* Text field */
+  --eds-color-text-input-helper-info: var(--eds-color-blue-sky-600); /* Text field */
+  --eds-color-text-input-helper-default: var(--eds-color-slate-grey-600); /* Text field */
+  --eds-color-text-notification-error: var(--eds-color-red-cold-600);
+  --eds-color-text-notification-warning: var(--eds-color-spruce-wood-500);
+  --eds-color-text-notification-success: var(--eds-color-success-green-600);
+  --eds-color-text-notification-info: var(--eds-color-blue-sky-600); /* Banner, Chips, Card */
+  --eds-color-text-interactive-elevation-level-2-active-pressed: var(--eds-color-moss-green-sat-100);
+  --eds-color-text-interactive-elevation-level-2-active-hover: var(--eds-color-moss-green-sat-100); /* Menu item */
+  --eds-color-text-interactive-elevation-level-2-active: var(--eds-color-moss-green-sat-200); /* Menu item */
+  --eds-color-text-interactive-elevation-level-2-resting-pressed: var(--eds-color-slate-grey-200); /* tab */
+  --eds-color-text-interactive-elevation-level-2-resting-hover: var(--eds-color-slate-grey-400); /* Menu item */
+  --eds-color-text-interactive-elevation-level-2-resting: var(--eds-color-slate-grey-500); /* Menu item */
+  --eds-color-text-interactive-disabled: var(--eds-color-slate-grey-1000); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-color-text-interactive-active-neutral-pressed: var(--eds-color-slate-grey-100); /* table */
+  --eds-color-text-interactive-active-neutral-hover: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell */
+  --eds-color-text-interactive-active-neutral: var(--eds-color-slate-grey-400); /* Table cell, Table data grid cell */
+  --eds-color-text-interactive-active-pressed: var(--eds-color-moss-green-sat-200);
+  --eds-color-text-interactive-active-hover: var(--eds-color-moss-green-sat-300); /* Menu item, Tab */
+  --eds-color-text-interactive-active: var(--eds-color-moss-green-sat-500); /* Menu item, Tab */
+  --eds-color-text-interactive-resting-pressed: var(--eds-color-slate-grey-400); /* tab */
+  --eds-color-text-interactive-resting-hover: var(--eds-color-slate-grey-500); /* Menu item, Tab */
+  --eds-color-text-interactive-resting: var(--eds-color-slate-grey-600); /* Menu item, Tab */
+  --eds-color-surface-interactive-active-ghost-pressed: var(--eds-color-surface-interactive-active-pressed);
+  --eds-color-surface-interactive-active-ghost-hover: var(--eds-color-surface-interactive-active-hover); /* Tab */
+  --eds-color-border-button-disabled: var(--eds-color-border-interactive-disabled); /* Button */
+  --eds-color-text-button-disabled: var(--eds-color-text-interactive-disabled); /* Button */
+  --eds-color-text-input-placeholder: var(--eds-color-text-quaternary); /* Autocomplete, Table input, Search, Text field */
 }
