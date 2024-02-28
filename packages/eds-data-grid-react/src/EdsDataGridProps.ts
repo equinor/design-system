@@ -177,6 +177,7 @@ type VirtualProps = {
   enableVirtual?: boolean
   /**
    * The height of the virtualized table in pixels.
+   * @deprecated Use `height` prop over virtualHeight, this will be removed in a later version
    * @default 500
    */
   virtualHeight?: number
