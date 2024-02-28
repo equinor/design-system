@@ -40,13 +40,11 @@ export function TableBodyCell<T>({ cell }: Props<T>) {
       $pinned={pinned}
       $offset={pinnedOffset}
       className={cellClass ? cellClass(cell.row, cell.column.id) : ''}
-      {...{
-        key: cell.id,
-        style: {
-          width: cell.column.getSize(),
-          maxWidth: cell.column.getSize(),
-          ...(cellStyle?.(cell.row, cell.column.id) ?? {}),
-        },
+      key={cell.id}
+      style={{
+        width: cell.column.getSize(),
+        maxWidth: cell.column.getSize(),
+        ...(cellStyle?.(cell.row, cell.column.id) ?? {}),
       }}
     >
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
