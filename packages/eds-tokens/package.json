@@ -13,12 +13,9 @@
     "./tokens.css": "./tokens.css",
     "./elements.css": "./elements.css",
     "./css/eds-tokens.css": "./build/css/eds-tokens.css",
+    "./css/eds-primitives.css": "./build/css/eds-primitives.css",
     "./css/eds-theme-light.css": "./build/css/eds-theme-light.css",
     "./css/eds-theme-dark.css": "./build/css/eds-theme-dark.css",
-    "./css/eds-tokens-typography.css": "./build/css/eds-tokens-typography.css",
-    "./css/eds-tokens-border.css": "./build/css/eds-tokens-border.css",
-    "./css/eds-density-spacious.css": "./build/css/eds-density-spacious.css",
-    "./css/eds-tokens-shadow.css": "./build/css/eds-tokens-shadow.css",
     "./tailwind": "./build/tailwind/index.js"
   },
   "types": "./dist/types/index.d.ts",
