@@ -77,6 +77,7 @@ export function EdsDataGrid<T>({
   expansionState,
   setExpansionState,
   getSubRows,
+  defaultColumn,
 }: EdsDataGridProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
   const [selection, setSelection] = useState<RowSelectionState>(
@@ -161,7 +162,7 @@ export function EdsDataGrid<T>({
   const options: TableOptions<T> = {
     data: rows,
     columns: _columns,
-    defaultColumn: {
+    defaultColumn: defaultColumn ?? {
       size: 150,
       cell: (context) => {
         return (

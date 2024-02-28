@@ -69,7 +69,6 @@ const Cell = styled(Table.Cell)<{
   $offset: number
 }>`
   font-weight: bold;
-  height: 30px;
   position: ${(p) => (p.$sticky || p.$pinned ? 'sticky' : 'relative')};
   top: 0;
   ${(p) => {
@@ -118,15 +117,13 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       $pinned={pinned}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
-      {...{
-        onClick: header.column.getToggleSortingHandler(),
-        key: header.id,
-        colSpan: header.colSpan,
-        style: {
-          width: header.getSize(),
-          verticalAlign: ctx.enableColumnFiltering ? 'top' : 'middle',
-          ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
-        },
+      key={header.id}
+      onClick={header.column.getToggleSortingHandler()}
+      colSpan={header.colSpan}
+      style={{
+        width: header.getSize(),
+        verticalAlign: ctx.enableColumnFiltering ? 'top' : 'middle',
+        ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
       }}
     >
       <>
