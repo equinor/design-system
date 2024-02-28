@@ -374,7 +374,7 @@ export const Virtualization: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 Virtualization.args = {
   stickyHeader: true,
   enableVirtual: true,
-  virtualHeight: 500,
+  height: 500,
 }
 
 export const ExpandRows: StoryFn<EdsDataGridProps<PostComment>> = (args) => {
@@ -423,7 +423,7 @@ export const ExpandRows: StoryFn<EdsDataGridProps<PostComment>> = (args) => {
 ExpandRows.args = {
   stickyHeader: true,
   enableVirtual: true,
-  virtualHeight: 500,
+  height: 500,
 }
 
 export const Styling: StoryFn<EdsDataGridProps<Photo>> = (args) => {

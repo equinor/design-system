@@ -98,6 +98,14 @@ export function EdsDataGrid<T>({
   })
 
   useEffect(() => {
+    if (virtualHeight) {
+      console.warn(
+        `virtualHeight prop is deprecated and will be removed in a later version. Please update your code to use height instead.`,
+      )
+    }
+  }, [virtualHeight])
+
+  useEffect(() => {
     setVisible(columnVisibility ?? {})
   }, [columnVisibility, setVisible])
 
