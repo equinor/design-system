@@ -25,17 +25,12 @@ export const Default: StoryObj<DatePickerProps> = {
     dateValue: new Date(),
     label: 'Test Date',
     className: 'storyPicker',
-    popperPlacement: 'bottom',
+    popperPlacement: 'bottom-start',
   },
 }
 
 export const WithTimePicker: StoryObj<DatePickerProps> = {
-  render: function Render({
-    id,
-    dateValue,
-    className,
-    popperPlacement,
-  }: DatePickerProps) {
+  render: function Render({ id, dateValue, className }: DatePickerProps) {
     const [startDate, setStartDate] = useState(dateValue)
     const onChanged = (date: Date): void => {
       setStartDate(date)
@@ -55,7 +50,7 @@ export const WithTimePicker: StoryObj<DatePickerProps> = {
             label={'Choose date'}
             onChanged={onChanged}
             className={className}
-            popperPlacement={popperPlacement}
+            popperPlacement="bottom-start"
           />
           <TimePicker
             label="Choose Time"
@@ -77,12 +72,7 @@ export const WithTimePicker: StoryObj<DatePickerProps> = {
 }
 
 export const DatePickerDisabledBefore: StoryObj<DatePickerProps> = {
-  render: function Render({
-    id,
-    dateValue,
-    className,
-    popperPlacement,
-  }: DatePickerProps) {
+  render: function Render({ id, dateValue, className }: DatePickerProps) {
     const [startDate, setStartDate] = useState(dateValue)
     const onChanged = (date: Date): void => {
       setStartDate(date)
@@ -95,7 +85,7 @@ export const DatePickerDisabledBefore: StoryObj<DatePickerProps> = {
         label={'Date'}
         onChanged={onChanged}
         className={className}
-        popperPlacement={popperPlacement}
+        popperPlacement="bottom-start"
         disableBeforeDate={new Date()}
       />
     )
@@ -118,12 +108,7 @@ export const DatePickerDisabledBefore: StoryObj<DatePickerProps> = {
 }
 
 export const DatePickerDisabledFuture: StoryObj<DatePickerProps> = {
-  render: function Render({
-    id,
-    dateValue,
-    className,
-    popperPlacement,
-  }: DatePickerProps) {
+  render: function Render({ id, dateValue, className }: DatePickerProps) {
     const [startDate, setStartDate] = useState(dateValue)
     const onChanged = (date: Date): void => {
       setStartDate(date)
@@ -136,7 +121,7 @@ export const DatePickerDisabledFuture: StoryObj<DatePickerProps> = {
         label={'Date'}
         onChanged={onChanged}
         className={className}
-        popperPlacement={popperPlacement}
+        popperPlacement="bottom-start"
         disableFuture={true}
       />
     )
@@ -200,12 +185,7 @@ export const DatePickerDisabled: StoryObj<DatePickerProps> = {
 }
 
 export const DatePickerWithCustomHeader: StoryObj<DatePickerProps> = {
-  render: function Render({
-    id,
-    dateValue,
-    className,
-    popperPlacement,
-  }: DatePickerProps) {
+  render: function Render({ id, dateValue, className }: DatePickerProps) {
     //import { DatePickerSelectHeader } from '@equinor/eds-lab-react'
     const [startDate, setStartDate] = useState(dateValue)
     const onChanged = (date: Date): void => {
@@ -219,7 +199,7 @@ export const DatePickerWithCustomHeader: StoryObj<DatePickerProps> = {
         label={'Date'}
         onChanged={onChanged}
         className={className}
-        popperPlacement={popperPlacement}
+        popperPlacement="bottom-start"
         disableBeforeDate={new Date()}
         renderCustomHeader={DatePickerSelectHeader}
       />

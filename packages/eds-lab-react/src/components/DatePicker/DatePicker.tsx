@@ -13,7 +13,7 @@ import DatePicker, {
   ReactDatePickerProps,
 } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import enGb from 'date-fns/locale/en-GB'
+import { enGB } from 'date-fns/locale'
 import styled, {
   css,
   ThemeProvider,
@@ -25,7 +25,7 @@ import { datePicker as tokens } from './DatePicker.tokens'
 import { outlineTemplate } from '@equinor/eds-utils'
 import { Paper, Icon, Label } from '@equinor/eds-core-react'
 
-registerLocale('en-gb', enGb)
+registerLocale('en-gb', enGB)
 
 type ReactDatePickerComponentProps = Pick<
   ReactDatePickerProps,
