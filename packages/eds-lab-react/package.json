@@ -95,10 +95,10 @@
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
-    "@types/react-datepicker": "^4.19.1",
+    "@types/react-datepicker": "^6.0.1",
     "date-fns": "^3.3.1",
     "downshift": "8.2.3",
-    "react-datepicker": "^4.21.0",
+    "react-datepicker": "^6.2.0",
     "react-fast-compare": "3.2.2"
   },
   "engines": {
