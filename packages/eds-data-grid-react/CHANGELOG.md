@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2024-02-29
+
+### Added
+
+- ✨ Expose expansion-state controls to allow having multiple nested rows by @yusijs in https://github.com/equinor/design-system/pull/3292
+- ✨ Added `defaultColumn` prop to allow overriding things like size, cells etc by @yusijs in https://github.com/equinor/design-system/pull/3300
+
+### Changed
+
+- 🗑️ Deprecated `virtualHeight` prop by @yusijs in https://github.com/equinor/design-system/pull/3301
+
+### Fixed
+
+- 🐛 Fixed prop-spreading that caused warning in next.js applications by @yusijs in https://github.com/equinor/design-system/pull/3300
+
 ## [0.3.0] - 2024-02-15
 
 ### Added
