@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.6] - 2024-03-01
+
+### Changed
+
+- ⬆️ Update prod dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3298
+
+### Fixed
+
+- ⬆️ `Datepicker`: Update downshift@8.3.3 to fix focus grabbing on load bug by @oddvernes in https://github.com/equinor/design-system/pull/3336
+
 ## [0.7.5] - 2024-02-09
 
 ### Changed
