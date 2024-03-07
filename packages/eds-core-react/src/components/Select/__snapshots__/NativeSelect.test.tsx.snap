@@ -5,6 +5,7 @@ exports[`NativeSelect Matches snapshot 1`] = `
   .c1 {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   position: relative;
   margin: 0;
   color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
