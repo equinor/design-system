@@ -33,7 +33,7 @@ type SharedTextFieldProps = {
   /** Label text */
   label?: ReactNode
   /** Meta text */
-  meta?: string
+  meta?: ReactNode
   /** Unit text */
   unit?: string
   /** Helper text */
