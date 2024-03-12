@@ -14,11 +14,10 @@ If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 npm install typescript --save-dev
 ```
 
-## Known issues and workarounds
 
-### Datepicker
+### DatePicker
 
-Under some circumstances `<Datepicker />` is missing it’s styles. A temporary workaround is to import the css explicitly as reported in issue [#2081](https://github.com/equinor/design-system/issues/2081).
+You will need to require the CSS file from the `react-datepicker` package (or provide your own). The example below shows how to include the CSS from this package if your build system supports requiring CSS files.
 
 ```css
 import 'react-datepicker/dist/react-datepicker.css';
