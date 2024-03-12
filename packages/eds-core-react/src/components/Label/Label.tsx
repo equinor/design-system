@@ -10,6 +10,7 @@ type LabelBaseType = {
 const LabelBase = styled.label<LabelBaseType>`
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   position: relative;
   ${typographyTemplate(tokens.typography)}
   margin-left: ${tokens.spacings.left};
@@ -26,7 +27,7 @@ const Text = styled.span`
 
 export type LabelProps = {
   label: ReactNode
-  meta?: string
+  meta?: ReactNode
   disabled?: boolean
 } & LabelHTMLAttributes<HTMLLabelElement>
 

@@ -217,7 +217,7 @@ export type AutocompleteProps<T> = {
   /** Variants */
   variant?: Variants
   /** Meta text, for instance unit */
-  meta?: string
+  meta?: ReactNode
   /** Disabled state
    * @default false
    */
