@@ -12,7 +12,6 @@ import DatePicker, {
   registerLocale,
   ReactDatePickerProps,
 } from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import { enGB } from 'date-fns/locale'
 import styled, {
   css,
