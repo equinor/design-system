@@ -1,50 +1,50 @@
 /**
  * Do not edit directly
- * Generated on Tue, 27 Feb 2024 11:15:55 GMT
+ * Generated on Thu, 14 Mar 2024 09:18:25 GMT
  * @tokens Colors
  * @presenter Color
  */
 
 [data-theme="dark"] {
-  --eds-color-surface-button-danger-outlined: rgba(0, 0, 0, 0); /* Button */
-  --eds-color-surface-button-secondary-outlined: rgba(0, 0, 0, 0); /* Button */
-  --eds-color-surface-button-primary-outlined: rgba(0, 0, 0, 0); /* Button, Ghost button, Toggle button */
-  --eds-color-surface-overlay: rgba(220, 242, 255, 0.949); /* Snackbar, Tooltip */
-  --eds-color-surface-scrim: rgba(0, 0, 0, 0.4); /* Scrim */
-  --eds-color-surface-table-cell-error: rgba(255, 102, 107, 0.278); /* Table cell, Table data grid cell */
-  --eds-color-surface-table-cell-disabled: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
-  --eds-color-surface-table-cell-resting: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
-  --eds-color-surface-none: rgba(0, 0, 0, 0);
-  --eds-color-surface-chip-neutral-disabled: rgba(46, 63, 76, 0.4); /* Chip */
-  --eds-color-surface-chip-neutral-active-hover: rgba(42, 88, 116, 0.502); /* Chip */
-  --eds-color-surface-chip-neutral-active: rgba(42, 88, 116, 0.502); /* Chip */
-  --eds-color-surface-chip-neutral-resting-hover: rgba(234, 234, 234, 0.102); /* Chip */
-  --eds-color-surface-chip-neutral-resting: rgba(234, 234, 234, 0.102); /* Chip */
-  --eds-color-surface-chip-error-hover: rgba(255, 225, 224, 0.102); /* Chip */
-  --eds-color-surface-chip-error: rgba(255, 225, 224, 0.102); /* Chip */
-  --eds-color-surface-chip-warning-hover: rgba(255, 231, 214, 0.102); /* Chip */
-  --eds-color-surface-chip-warning: rgba(255, 231, 214, 0.102); /* Chip */
-  --eds-color-surface-chip-success-hover: rgba(230, 250, 236, 0.102); /* Chip */
-  --eds-color-surface-chip-success: rgba(230, 250, 236, 0.102); /* Chip */
-  --eds-color-surface-chip-info-hover: rgba(223, 239, 247, 0.102); /* Chip */
-  --eds-color-surface-chip-info: rgba(223, 239, 247, 0.102); /* Chip */
-  --eds-color-surface-input-on-main-deep: rgba(0, 0, 0, 0.278); /* Autocomplete, Search, Table input, Text field input */
-  --eds-color-surface-input-on-main-flat: rgba(0, 0, 0, 0.278); /* Autocomplete, Search, Table input, Text field input */
-  --eds-color-surface-interactive-disabled: rgba(0, 0, 0, 0); /* Menu item, Tab, Table cell, Table data grid cell */
-  --eds-color-surface-interactive-active-ghost: rgba(0, 0, 0, 0); /* Tab */
-  --eds-color-surface-interactive-resting: rgba(0, 0, 0, 0); /* Menu item, Tab, Table cell, Table data grid cell */
-  --eds-color-surface-shadow-bottom: rgba(0, 0, 0, 0.2);
-  --eds-color-surface-shadow-middle: rgba(0, 0, 0, 0.122);
-  --eds-color-surface-shadow-top: rgba(0, 0, 0, 0.141);
-  --eds-color-border-alternative: rgba(255, 255, 255, 0.161);
-  --eds-color-border-quaternary: rgba(255, 255, 255, 0.4);
-  --eds-color-border-tertiary: rgba(255, 255, 255, 0.302);
-  --eds-color-border-secondary: rgba(255, 255, 255, 0.2);
-  --eds-color-border-primary: rgba(255, 255, 255, 0.161); /* Dialog, Popover */
-  --eds-color-border-input-resting: rgba(255, 255, 255, 0.161); /* Autocomplete, Text field */
-  --eds-color-border-interactive-resting-pressed: rgba(255, 255, 255, 0.302);
-  --eds-color-border-interactive-resting-hover: rgba(255, 255, 255, 0.2); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
-  --eds-color-border-interactive-resting: rgba(255, 255, 255, 0.161); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-surface-button-danger-outlined: oklch(0% 0 none / 0); /* Button */
+  --eds-color-surface-button-secondary-outlined: oklch(0% 0 none / 0); /* Button */
+  --eds-color-surface-button-primary-outlined: oklch(0% 0 none / 0); /* Button, Ghost button, Toggle button */
+  --eds-color-surface-overlay: oklch(94.9% 0.029 234 / 0.949); /* Snackbar, Tooltip */
+  --eds-color-surface-scrim: oklch(0% 0 none / 0.4); /* Scrim */
+  --eds-color-surface-table-cell-error: oklch(70.5% 0.187 21.3 / 0.278); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-disabled: oklch(0% 0 none / 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-resting: oklch(0% 0 none / 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-none: oklch(0% 0 none / 0);
+  --eds-color-surface-chip-neutral-disabled: oklch(35.9% 0.032 242 / 0.4); /* Chip */
+  --eds-color-surface-chip-neutral-active-hover: oklch(44.1% 0.068 238 / 0.502); /* Chip */
+  --eds-color-surface-chip-neutral-active: oklch(44.1% 0.068 238 / 0.502); /* Chip */
+  --eds-color-surface-chip-neutral-resting-hover: oklch(93.7% 0 none / 0.102); /* Chip */
+  --eds-color-surface-chip-neutral-resting: oklch(93.7% 0 none / 0.102); /* Chip */
+  --eds-color-surface-chip-error-hover: oklch(93.4% 0.033 20 / 0.102); /* Chip */
+  --eds-color-surface-chip-error: oklch(93.4% 0.033 20 / 0.102); /* Chip */
+  --eds-color-surface-chip-warning-hover: oklch(94.3% 0.035 57.6 / 0.102); /* Chip */
+  --eds-color-surface-chip-warning: oklch(94.3% 0.035 57.6 / 0.102); /* Chip */
+  --eds-color-surface-chip-success-hover: oklch(96.7% 0.028 155 / 0.102); /* Chip */
+  --eds-color-surface-chip-success: oklch(96.7% 0.028 155 / 0.102); /* Chip */
+  --eds-color-surface-chip-info-hover: oklch(94.3% 0.02 229 / 0.102); /* Chip */
+  --eds-color-surface-chip-info: oklch(94.3% 0.02 229 / 0.102); /* Chip */
+  --eds-color-surface-input-on-main-deep: oklch(0% 0 none / 0.278); /* Autocomplete, Search, Table input, Text field input */
+  --eds-color-surface-input-on-main-flat: oklch(0% 0 none / 0.278); /* Autocomplete, Search, Table input, Text field input */
+  --eds-color-surface-interactive-disabled: oklch(0% 0 none / 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-active-ghost: oklch(0% 0 none / 0); /* Tab */
+  --eds-color-surface-interactive-resting: oklch(0% 0 none / 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-shadow-bottom: oklch(0% 0 none / 0.2);
+  --eds-color-surface-shadow-middle: oklch(0% 0 none / 0.122);
+  --eds-color-surface-shadow-top: oklch(0% 0 none / 0.141);
+  --eds-color-border-alternative: oklch(100% 0 none / 0.161);
+  --eds-color-border-quaternary: oklch(100% 0 none / 0.4);
+  --eds-color-border-tertiary: oklch(100% 0 none / 0.302);
+  --eds-color-border-secondary: oklch(100% 0 none / 0.2);
+  --eds-color-border-primary: oklch(100% 0 none / 0.161); /* Dialog, Popover */
+  --eds-color-border-input-resting: oklch(100% 0 none / 0.161); /* Autocomplete, Text field */
+  --eds-color-border-interactive-resting-pressed: oklch(100% 0 none / 0.302);
+  --eds-color-border-interactive-resting-hover: oklch(100% 0 none / 0.2); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-border-interactive-resting: oklch(100% 0 none / 0.161); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
   --eds-color-surface-placeholder-image: var(--eds-color-slate-blue-1100); /* Placeholder image */
   --eds-color-surface-button-disabled-outlined: var(--eds-color-surface-interactive-resting); /* Button */
   --eds-color-surface-button-disabled-filled: var(--eds-color-slate-grey-1300); /* Button */

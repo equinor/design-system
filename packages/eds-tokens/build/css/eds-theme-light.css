@@ -1,25 +1,25 @@
 /**
  * Do not edit directly
- * Generated on Tue, 27 Feb 2024 11:15:55 GMT
+ * Generated on Thu, 14 Mar 2024 09:18:25 GMT
  * @tokens Colors
  * @presenter Color
  */
 
 :root {
-  --eds-color-surface-button-danger-outlined: rgba(255, 255, 255, 0); /* Button */
-  --eds-color-surface-button-secondary-outlined: rgba(255, 255, 255, 0); /* Button */
-  --eds-color-surface-button-primary-outlined: rgba(255, 255, 255, 0); /* Button, Ghost button, Toggle button */
-  --eds-color-surface-overlay: rgba(0, 0, 0, 0.8); /* Snackbar, Tooltip */
-  --eds-color-surface-scrim: rgba(0, 0, 0, 0.4); /* Scrim */
-  --eds-color-surface-table-cell-disabled: rgba(255, 255, 255, 0); /* Table cell, Table data grid cell */
-  --eds-color-surface-table-cell-resting: rgba(255, 255, 255, 0); /* Table cell, Table data grid cell */
-  --eds-color-surface-none: rgba(255, 255, 255, 0);
-  --eds-color-surface-interactive-disabled: rgba(255, 255, 255, 0); /* Menu item, Tab, Table cell, Table data grid cell */
-  --eds-color-surface-interactive-active-ghost: rgba(255, 255, 255, 0); /* Tab */
-  --eds-color-surface-interactive-resting: rgba(255, 255, 255, 0); /* Menu item, Tab, Table cell, Table data grid cell */
-  --eds-color-surface-shadow-bottom: rgba(0, 0, 0, 0.2);
-  --eds-color-surface-shadow-middle: rgba(0, 0, 0, 0.122);
-  --eds-color-surface-shadow-top: rgba(0, 0, 0, 0.141);
+  --eds-color-surface-button-danger-outlined: oklch(100% 0 none / 0); /* Button */
+  --eds-color-surface-button-secondary-outlined: oklch(100% 0 none / 0); /* Button */
+  --eds-color-surface-button-primary-outlined: oklch(100% 0 none / 0); /* Button, Ghost button, Toggle button */
+  --eds-color-surface-overlay: oklch(0% 0 none / 0.8); /* Snackbar, Tooltip */
+  --eds-color-surface-scrim: oklch(0% 0 none / 0.4); /* Scrim */
+  --eds-color-surface-table-cell-disabled: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-resting: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-none: oklch(100% 0 none / 0);
+  --eds-color-surface-interactive-disabled: oklch(100% 0 none / 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-active-ghost: oklch(100% 0 none / 0); /* Tab */
+  --eds-color-surface-interactive-resting: oklch(100% 0 none / 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-shadow-bottom: oklch(0% 0 none / 0.2);
+  --eds-color-surface-shadow-middle: oklch(0% 0 none / 0.122);
+  --eds-color-surface-shadow-top: oklch(0% 0 none / 0.141);
   --eds-color-surface-placeholder-image: var(--eds-color-neutral-300); /* Placeholder image */
   --eds-color-surface-button-disabled-outlined: var(--eds-color-surface-interactive-resting); /* Button */
   --eds-color-surface-button-disabled-filled: var(--eds-color-neutral-200); /* Button */
