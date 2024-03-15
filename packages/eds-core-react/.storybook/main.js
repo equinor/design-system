@@ -1,8 +1,5 @@
 const config = {
-  stories: [
-    '../src/**/*.stories.@(ts|tsx|mdx)',
-    '../stories/**/*.stories.@(ts|tsx|mdx)',
-  ],
+  stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))', '../stories/**/*.@(mdx|stories.@(ts|tsx))'],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
@@ -23,12 +20,11 @@ const config = {
     interactionsDebugger: true,
     storyStoreV7: true,
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
+  core: {},
 
   framework: {
-    name: '@storybook/react-vite',
+    name: "@storybook/react-vite",
+    options: {}
   },
   refs: (config, { configType }) => {
     if (configType === 'DEVELOPMENT') {

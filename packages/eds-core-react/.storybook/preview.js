@@ -1,5 +1,5 @@
 const preview = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  //actions: { argTypesRegex: '^on[A-Z].*' },
   viewMode: 'docs',
   parameters: {
     options: {
