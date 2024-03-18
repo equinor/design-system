@@ -1,7 +1,14 @@
 import remarkGfm from 'remark-gfm'
 
 const config = {
-  stories: ['../stories/docs/*.@(mdx|stories.@(ts|tsx))', '../src/**/*.@(mdx|stories.@(ts|tsx))', '../stories/**/*.@(mdx|stories.@(ts|tsx))'],
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
+  stories: [
+    '../stories/docs/*.@(mdx|stories.@(ts|tsx))',
+    '../src/**/*.@(mdx|stories.@(ts|tsx))',
+    '../stories/**/*.@(mdx|stories.@(ts|tsx))',
+  ],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
@@ -27,7 +34,7 @@ const config = {
   core: {},
   framework: {
     name: '@storybook/react-vite',
-    options: {}
+    options: {},
   },
   async viteFinal(config) {
     return {
