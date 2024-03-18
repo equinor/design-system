@@ -1,5 +1,11 @@
 const config = {
-  stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))', '../stories/**/*.@(mdx|stories.@(ts|tsx))'],
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
+  stories: [
+    '../src/**/*.@(mdx|stories.@(ts|tsx))',
+    '../stories/**/*.@(mdx|stories.@(ts|tsx))',
+  ],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
@@ -23,8 +29,8 @@ const config = {
   core: {},
 
   framework: {
-    name: "@storybook/react-vite",
-    options: {}
+    name: '@storybook/react-vite',
+    options: {},
   },
   refs: (config, { configType }) => {
     if (configType === 'DEVELOPMENT') {
