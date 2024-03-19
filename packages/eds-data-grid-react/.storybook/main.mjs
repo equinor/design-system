@@ -1,7 +1,10 @@
 const config = {
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
   stories: [
-    '../src/**/*.stories.@(ts|tsx|mdx)',
-    '../stories/**/*.stories.@(ts|tsx|mdx)',
+    '../src/**/*.@(mdx|stories.@(ts|tsx))',
+    '../stories/**/*.@(mdx|stories.@(ts|tsx))',
   ],
   addons: [
     '@storybook/addon-a11y',
@@ -23,12 +26,11 @@ const config = {
     interactionsDebugger: true,
     storyStoreV7: true,
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
+  core: {},
 
   framework: {
     name: '@storybook/react-vite',
+    options: {},
   },
   async viteFinal(config) {
     return {
