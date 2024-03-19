@@ -43,7 +43,7 @@ importers:
         version: 6.9.0(eslint@8.52.0)(typescript@5.2.2)
       babel-plugin-styled-components:
         specifier: ^2.1.4
-        version: 2.1.4(@babel/core@7.24.0)(styled-components@6.1.8)
+        version: 2.1.4(@babel/core@7.24.0)(styled-components@5.3.11)
       eslint:
         specifier: ^8.52.0
         version: 8.52.0
@@ -437,9 +437,6 @@ importers:
         specifier: 3.2.2
         version: 3.2.2
     devDependencies:
-      '@mdx-js/react':
-        specifier: 2.3.0
-        version: 2.3.0(react@18.2.0)
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.0.4(@babel/core@7.24.0)(rollup@4.12.1)
@@ -533,9 +530,6 @@ importers:
       react-is:
         specifier: ^18.2.0
         version: 18.2.0
-      remark-gfm:
-        specifier: ^4.0.0
-        version: 4.0.0
       rollup:
         specifier: ^4.2.0
         version: 4.12.1
@@ -2501,11 +2495,9 @@ packages:
 
   /@emotion/stylis@0.8.5:
     resolution: {integrity: sha512-h6KtPihKFn3T9fuIrwvXXUOwlx3rfUvfZIcP5a6rh8Y7zjE3O06hT5Ss4S/YI1AYhuZ1kjaE/5EaOOI2NqSylQ==}
-    dev: false
 
   /@emotion/unitless@0.7.5:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
-    dev: false
 
   /@emotion/unitless@0.8.0:
     resolution: {integrity: sha512-VINS5vEYAscRl2ZUDiT3uMPlrFQupiKgHz5AA4bCH1miKBg4qtwkim1qPmJj/4WG6TreYMY111rEFsjupcOKHw==}
@@ -8648,7 +8640,6 @@ packages:
       styled-components: 5.3.11(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
-    dev: false
 
   /babel-plugin-styled-components@2.1.4(@babel/core@7.24.0)(styled-components@6.1.0):
     resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
@@ -8661,21 +8652,6 @@ packages:
       lodash: 4.17.21
       picomatch: 2.3.1
       styled-components: 6.1.0(react-dom@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-    dev: true
-
-  /babel-plugin-styled-components@2.1.4(@babel/core@7.24.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
-    peerDependencies:
-      styled-components: '>= 2'
-    dependencies:
-      '@babel/helper-annotate-as-pure': 7.22.5
-      '@babel/helper-module-imports': 7.22.15
-      '@babel/plugin-syntax-jsx': 7.23.3(@babel/core@7.24.0)
-      lodash: 4.17.21
-      picomatch: 2.3.1
-      styled-components: 6.1.8(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -17943,7 +17919,6 @@ packages:
       supports-color: 5.5.0
     transitivePeerDependencies:
       - '@babel/core'
-    dev: false
 
   /styled-components@6.1.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-VWNfYYBuXzuLS/QYEeoPgMErP26WL+dX9//rEh80B2mmlS1yRxRxuL5eax4m6ybYEUoHWlTy2XOU32767mlMkg==}
@@ -17963,26 +17938,6 @@ packages:
       shallowequal: 1.1.0
       stylis: 4.3.1
       tslib: 2.6.2
-    dev: true
-
-  /styled-components@6.1.8(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-PQ6Dn+QxlWyEGCKDS71NGsXoVLKfE1c3vApkvDYS5KAK+V8fNWGhbSUEo9Gg2iaID2tjLXegEW3bZDUGpofRWw==}
-    engines: {node: '>= 16'}
-    peerDependencies:
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-    dependencies:
-      '@emotion/is-prop-valid': 1.2.1
-      '@emotion/unitless': 0.8.0
-      '@types/stylis': 4.2.0
-      css-to-react-native: 3.2.0
-      csstype: 3.1.2
-      postcss: 8.4.31
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      shallowequal: 1.1.0
-      stylis: 4.3.1
-      tslib: 2.5.0
     dev: true
 
   /stylehacks@5.1.1(postcss@8.4.31):
@@ -18474,10 +18429,6 @@ packages:
   /tslib@2.1.0:
     resolution: {integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==}
     dev: false
-
-  /tslib@2.5.0:
-    resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
-    dev: true
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
