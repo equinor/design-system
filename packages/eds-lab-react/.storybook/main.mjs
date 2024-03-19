@@ -1,4 +1,4 @@
-import remarkGfm from 'remark-gfm'
+//import remarkGfm from 'remark-gfm'
 
 const config = {
   typescript: {
@@ -13,21 +13,12 @@ const config = {
     '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-actions',
+    '@storybook/addon-docs',
     {
       name: '@storybook/addon-essentials',
       options: {
         docs: false,
         actions: false,
-      },
-    },
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
       },
     },
   ],
