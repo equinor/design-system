@@ -2,14 +2,12 @@ const config = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
-  stories: [
-    '../src/**/*.@(mdx|stories.@(ts|tsx))',
-    '../stories/**/*.@(mdx|stories.@(ts|tsx))',
-  ],
+  stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))'],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-actions',
+    '@storybook/addon-docs',
     {
       name: '@storybook/addon-essentials',
       options: {
@@ -17,15 +15,11 @@ const config = {
         actions: false,
       },
     },
-    {
-      name: '@storybook/addon-docs',
-      options: {},
-    },
   ],
-  features: {
+  /*   features: {
     interactionsDebugger: true,
     storyStoreV7: true,
-  },
+  }, */
   core: {},
 
   framework: {
@@ -37,14 +31,14 @@ const config = {
       ...config,
       resolve: {
         ...config.resolve,
-        dedupe: ['styled-components'],
+        dedupe: ['styled-components', 'react', 'react-dom'],
       },
       optimizeDeps: {
         ...config.optimizeDeps,
         include: [
           ...(config.optimizeDeps?.include ?? []),
-          '@equinor/eds-utils',
-          '@storybook/addon-docs/mdx-react-shim',
+          '@mdx-js/react',
+          'react/jsx-dev-runtime',
           '@storybook/blocks',
         ],
       },

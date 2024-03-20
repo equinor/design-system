@@ -1,5 +1,3 @@
-//import remarkGfm from 'remark-gfm'
-
 const config = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
