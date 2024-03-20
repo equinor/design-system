@@ -1,6 +1,9 @@
-type FontToken = {
+type FontFamily = {
   fontFamily: string
   fontAlias: 'inter' | 'equinor'
+}
+
+type FontToken = FontFamily & {
   fontSize: number
   lineHeightMultiplier: number
 }
@@ -15,40 +18,47 @@ type FontTokens = {
 }
 
 // TODO: This should be imported from tokens when we have defined these font families
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const equinor: FontFamily = {
+  fontFamily: 'Equinor, sans-serif',
+  fontAlias: 'equinor',
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const inter: FontFamily = {
+  fontFamily: '"Inter", Arial, sans-serif',
+  fontAlias: 'inter',
+}
+
 export const headingTokens: FontTokens = {
   LG: {
-    fontFamily: 'Equinor, sans-serif',
-    fontAlias: 'equinor',
+    ...inter,
     fontSize: 37,
     lineHeightMultiplier: 1.1,
   },
   BASE: {
-    fontFamily: 'Equinor, sans-serif',
-    fontAlias: 'equinor',
+    ...inter,
     fontSize: 28,
     lineHeightMultiplier: 1.1,
   },
   SM: {
-    fontFamily: 'Equinor, sans-serif',
-    fontAlias: 'equinor',
+    ...inter,
     fontSize: 21,
     lineHeightMultiplier: 1.1,
   },
   XS: {
-    fontFamily: '"Inter", Arial, sans-serif',
-    fontAlias: 'inter',
+    ...inter,
     fontSize: 16,
     lineHeightMultiplier: 1.25,
   },
   '2XS': {
-    fontFamily: '"Inter", Arial, sans-serif',
-    fontAlias: 'inter',
+    ...inter,
     fontSize: 12,
     lineHeightMultiplier: 1.25,
   },
   '3XS': {
-    fontFamily: '"Inter", Arial, sans-serif',
-    fontAlias: 'inter',
+    ...inter,
     fontSize: 10.5,
     lineHeightMultiplier: 1.25,
   },
