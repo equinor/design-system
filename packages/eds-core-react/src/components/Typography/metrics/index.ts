@@ -1,4 +1,4 @@
-type FontMetrics = {
+export type FontMetrics = {
   familyName: string
   category?: string
   capHeight: number
@@ -23,7 +23,7 @@ export const inter: FontMetrics = {
   category: 'sans-serif',
   capHeight: 2048,
   ascent: 2728,
-  descent: -680,
+  descent: 680,
   lineGap: 0,
   unitsPerEm: 2816,
   xHeight: 1536,
@@ -42,7 +42,7 @@ export const equinor: FontMetrics = {
   familyName: 'Equinor Light',
   capHeight: 700,
   ascent: 943,
-  descent: -212,
+  descent: 212,
   lineGap: 0,
   unitsPerEm: 1000,
   xHeight: 480,

@@ -45,6 +45,23 @@ export const Headings: StoryFn<HeadingProps> = (args) => {
   )
 }
 
+export const Demo: StoryFn<HeadingProps> = () => {
+  return (
+    <BaselineGrid>
+      <Heading size="LG" as="h1">
+        Heading
+      </Heading>
+      <Heading size="2XS" as="h2">
+        Subheading
+      </Heading>
+
+      <Heading size="BASE" as="h2">
+        {TEXT}
+      </Heading>
+    </BaselineGrid>
+  )
+}
+
 export const Sizes: StoryFn<HeadingProps> = () => {
   return (
     <BaselineGrid>
