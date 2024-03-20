@@ -22,7 +22,6 @@ export type StyleHeadingProps = {
     capHeightTrim: string
     baselineTrim: string
   }
-  $baselineShift?: string
 }
 
 const StyledHeading = styled.h1<StyleHeadingProps>`
