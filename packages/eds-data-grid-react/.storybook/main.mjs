@@ -31,7 +31,13 @@ const config = {
       ...config,
       resolve: {
         ...config.resolve,
-        dedupe: ['styled-components', 'react', 'react-dom'],
+        dedupe: [
+          'styled-components',
+          'react',
+          'react-dom',
+          '@equinor/eds-core-react',
+          '@tanstack/react-virtual',
+        ],
       },
       optimizeDeps: {
         ...config.optimizeDeps,
