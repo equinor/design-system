@@ -1,5 +1,6 @@
 import { Heading, HeadingProps } from './Heading'
 import { StoryFn, Meta } from '@storybook/react'
+import { BaselineGrid } from './BaselineGrid'
 
 const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
@@ -37,12 +38,16 @@ export default meta
 const TEXT = 'This is some text, hi ho! This is line two'
 
 export const Headings: StoryFn<HeadingProps> = (args) => {
-  return <Heading {...args}>{TEXT}</Heading>
+  return (
+    <Heading {...args} isGridVisible>
+      {TEXT} {TEXT}
+    </Heading>
+  )
 }
 
 export const Sizes: StoryFn<HeadingProps> = () => {
   return (
-    <>
+    <BaselineGrid>
       <Heading size="3XS">{TEXT}</Heading>
       <Heading size="2XS">{TEXT}</Heading>
       <Heading size="XS">{TEXT}</Heading>
@@ -53,7 +58,7 @@ export const Sizes: StoryFn<HeadingProps> = () => {
       <Heading size="LG" as="h1">
         {TEXT}
       </Heading>
-    </>
+    </BaselineGrid>
   )
 }
 
