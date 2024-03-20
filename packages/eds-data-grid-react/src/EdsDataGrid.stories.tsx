@@ -4,6 +4,7 @@ import {
   columns,
   expandColumns,
   groupedColumns,
+  helper,
   Photo,
   PostComment,
 } from './stories/columns'
@@ -30,6 +31,7 @@ import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { Virtualizer } from './types'
+import { FilterWrapper } from './components/FilterWrapper'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -56,7 +58,132 @@ export const Introduction: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 }
 
 export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
-  return <EdsDataGrid {...args} />
+  const TitleFilterComponent = ({
+    onChange,
+    value,
+  }: {
+    onChange: (value: string) => void
+    value: string
+  }) => {
+    return (
+      <TextField
+        label={'Custom filter'}
+        id={'my-custom-filter'}
+        value={value ?? ''}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange(e.currentTarget.value)
+        }
+      />
+    )
+  }
+  const DateFilterComponent = ({
+    onChange,
+    value,
+  }: {
+    onChange: (value: { start: string; end: string }) => void
+    value: { start: string; end: string }
+  }) => {
+    const [start, setStart] = useState<string>(value?.start ?? '')
+    const [end, setEnd] = useState<string>(value?.end ?? '')
+
+    useEffect(() => {
+      onChange({ start, end })
+    }, [start, end])
+
+    return (
+      <div>
+        <TextField
+          label={'Start'}
+          id={'my-custom-date-start'}
+          type={'date'}
+          value={start}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setStart(e.currentTarget.value)
+          }
+        />
+        <TextField
+          label={'End'}
+          id={'my-custom-date-end'}
+          type={'date'}
+          value={end}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setEnd(e.currentTarget.value)
+          }
+        />
+      </div>
+    )
+  }
+  const titleCustomFilterColumn = helper.accessor('title', {
+    header: (header) => {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant={'cell_header'} group={'table'}>
+            Title (custom filter)
+          </Typography>
+          <FilterWrapper
+            column={header.column}
+            CustomComponent={TitleFilterComponent}
+          />
+        </div>
+      )
+    },
+    id: 'custom-title',
+    size: 200,
+    filterFn: 'includesString',
+    meta: {
+      customFilterInput: true,
+    },
+  })
+  const dateColumn = helper.accessor('timestamp', {
+    header: (header) => {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant={'cell_header'} group={'table'}>
+            Timestamp (custom filter)
+          </Typography>
+          <FilterWrapper
+            column={header.column}
+            CustomComponent={DateFilterComponent}
+          />
+        </div>
+      )
+    },
+    id: 'timestamp',
+    size: 200,
+    filterFn: (row, columnId, filterValue: { start?: Date; end?: Date }) => {
+      const { start, end } = filterValue
+      if (!start && !end) return true
+      let startDate = 0
+      let endDate = Infinity
+      if (start) {
+        startDate = new Date(start).getTime()
+      }
+      if (end) {
+        endDate = new Date(end).getTime()
+      }
+      const value: Date = row.getValue(columnId)
+      if (!value) return false
+      return value.getTime() > startDate && value.getTime() < endDate
+    },
+    meta: {
+      customFilterInput: true,
+    },
+  })
+  const filterColumns = [...columns]
+  filterColumns.splice(3, 0, titleCustomFilterColumn, dateColumn)
+  return <EdsDataGrid height={300} {...args} columns={filterColumns} />
 }
 
 ColumnFiltering.args = {

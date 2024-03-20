@@ -10,9 +10,10 @@ export type Photo = {
   title: string
   url: string
   thumbnailUrl?: string
+  timestamp?: Date
 }
 
-const helper = createColumnHelper<Photo>()
+export const helper = createColumnHelper<Photo>()
 
 const Link = styled.a`
   color: ${tokens.colors.interactive.primary__resting.rgba};
@@ -43,7 +44,7 @@ export const columns: Array<ColumnDef<Photo>> = [
   helper.accessor('thumbnailUrl', {
     header: 'Thumbnail URL',
     id: 'thumbnailUrl',
-    size: 150,
+    size: 180,
   }),
 ]
 

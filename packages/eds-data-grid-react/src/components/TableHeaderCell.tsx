@@ -13,6 +13,7 @@ import { Filter } from './Filter'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { useMemo } from 'react'
+import { FilterWrapper } from './FilterWrapper'
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -137,11 +138,12 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           desc: <Icon data={arrow_down} />,
         }[header.column.getIsSorted() as string] ?? null}
 
-        {header.column.getCanFilter() ? (
+        {header.column.getCanFilter() &&
+        !header.column.columnDef.meta?.customFilterInput ? (
           // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
           <div onClick={(e) => e.stopPropagation()}>
-            <Filter column={header.column} table={table} />
+            <FilterWrapper column={header.column} table={table} />
           </div>
         ) : null}
       </>

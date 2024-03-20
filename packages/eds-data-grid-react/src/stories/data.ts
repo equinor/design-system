@@ -2,6 +2,14 @@
 
 import { Photo } from './columns'
 
+const getRandomDate = () => {
+  const date = new Date()
+  if (Math.random() * 10 < 5)
+    date.setDate(date.getDate() + Math.floor(Math.random() * 10))
+  else date.setDate(date.getDate() - Math.floor(Math.random() * 10))
+  return date
+}
+
 export const data: Array<Photo> = [
   {
     albumId: 1,
@@ -9,6 +17,7 @@ export const data: Array<Photo> = [
     title: 'accusamus beatae ad facilis cum similique qui sunt',
     url: 'https://via.placeholder.com/600/92c952',
     thumbnailUrl: 'https://via.placeholder.com/150/92c952',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -16,6 +25,7 @@ export const data: Array<Photo> = [
     title: 'reprehenderit est deserunt velit ipsam',
     url: 'https://via.placeholder.com/600/771796',
     thumbnailUrl: 'https://via.placeholder.com/150/771796',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -23,6 +33,7 @@ export const data: Array<Photo> = [
     title: 'officia porro iure quia iusto qui ipsa ut modi',
     url: 'https://via.placeholder.com/600/24f355',
     thumbnailUrl: 'https://via.placeholder.com/150/24f355',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -30,6 +41,7 @@ export const data: Array<Photo> = [
     title: 'culpa odio esse rerum omnis laboriosam voluptate repudiandae',
     url: 'https://via.placeholder.com/600/d32776',
     thumbnailUrl: 'https://via.placeholder.com/150/d32776',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -37,6 +49,7 @@ export const data: Array<Photo> = [
     title: 'natus nisi omnis corporis facere molestiae rerum in',
     url: 'https://via.placeholder.com/600/f66b97',
     thumbnailUrl: 'https://via.placeholder.com/150/f66b97',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -44,6 +57,7 @@ export const data: Array<Photo> = [
     title: 'accusamus ea aliquid et amet sequi nemo',
     url: 'https://via.placeholder.com/600/56a8c2',
     thumbnailUrl: 'https://via.placeholder.com/150/56a8c2',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -51,6 +65,7 @@ export const data: Array<Photo> = [
     title: 'officia delectus consequatur vero aut veniam explicabo molestias',
     url: 'https://via.placeholder.com/600/b0f7cc',
     thumbnailUrl: 'https://via.placeholder.com/150/b0f7cc',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -58,6 +73,7 @@ export const data: Array<Photo> = [
     title: 'aut porro officiis laborum odit ea laudantium corporis',
     url: 'https://via.placeholder.com/600/54176f',
     thumbnailUrl: 'https://via.placeholder.com/150/54176f',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -65,6 +81,7 @@ export const data: Array<Photo> = [
     title: 'qui eius qui autem sed',
     url: 'https://via.placeholder.com/600/51aa97',
     thumbnailUrl: 'https://via.placeholder.com/150/51aa97',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -72,6 +89,7 @@ export const data: Array<Photo> = [
     title: 'beatae et provident et ut vel',
     url: 'https://via.placeholder.com/600/810b14',
     thumbnailUrl: 'https://via.placeholder.com/150/810b14',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -79,6 +97,7 @@ export const data: Array<Photo> = [
     title: 'nihil at amet non hic quia qui',
     url: 'https://via.placeholder.com/600/1ee8a4',
     thumbnailUrl: 'https://via.placeholder.com/150/1ee8a4',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -87,6 +106,7 @@ export const data: Array<Photo> = [
       'mollitia soluta ut rerum eos aliquam consequatur perspiciatis maiores',
     url: 'https://via.placeholder.com/600/66b7d2',
     thumbnailUrl: 'https://via.placeholder.com/150/66b7d2',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -94,6 +114,7 @@ export const data: Array<Photo> = [
     title: 'repudiandae iusto deleniti rerum',
     url: 'https://via.placeholder.com/600/197d29',
     thumbnailUrl: 'https://via.placeholder.com/150/197d29',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -101,6 +122,7 @@ export const data: Array<Photo> = [
     title: 'est necessitatibus architecto ut laborum',
     url: 'https://via.placeholder.com/600/61a65',
     thumbnailUrl: 'https://via.placeholder.com/150/61a65',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -108,6 +130,7 @@ export const data: Array<Photo> = [
     title: 'harum dicta similique quis dolore earum ex qui',
     url: 'https://via.placeholder.com/600/f9cee5',
     thumbnailUrl: 'https://via.placeholder.com/150/f9cee5',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -115,6 +138,7 @@ export const data: Array<Photo> = [
     title: 'iusto sunt nobis quasi veritatis quas expedita voluptatum deserunt',
     url: 'https://via.placeholder.com/600/fdf73e',
     thumbnailUrl: 'https://via.placeholder.com/150/fdf73e',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -122,6 +146,7 @@ export const data: Array<Photo> = [
     title: 'natus doloribus necessitatibus ipsa',
     url: 'https://via.placeholder.com/600/9c184f',
     thumbnailUrl: 'https://via.placeholder.com/150/9c184f',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
@@ -129,6 +154,7 @@ export const data: Array<Photo> = [
     title: 'laboriosam odit nam necessitatibus et illum dolores reiciendis',
     url: 'https://via.placeholder.com/600/1fe46f',
     thumbnailUrl: 'https://via.placeholder.com/150/1fe46f',
+    timestamp: getRandomDate(),
   },
   {
     albumId: 1,
