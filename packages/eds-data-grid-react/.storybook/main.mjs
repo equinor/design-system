@@ -1,12 +1,13 @@
 const config = {
-  stories: [
-    '../src/**/*.stories.@(ts|tsx|mdx)',
-    '../stories/**/*.stories.@(ts|tsx|mdx)',
-  ],
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
+  stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))'],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-actions',
+    '@storybook/addon-docs',
     {
       name: '@storybook/addon-essentials',
       options: {
@@ -14,35 +15,36 @@ const config = {
         actions: false,
       },
     },
-    {
-      name: '@storybook/addon-docs',
-      options: {},
-    },
   ],
-  features: {
+  /*   features: {
     interactionsDebugger: true,
     storyStoreV7: true,
-  },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
+  }, */
+  core: {},
 
   framework: {
     name: '@storybook/react-vite',
+    options: {},
   },
   async viteFinal(config) {
     return {
       ...config,
       resolve: {
         ...config.resolve,
-        dedupe: ['styled-components'],
+        dedupe: [
+          'styled-components',
+          'react',
+          'react-dom',
+          '@equinor/eds-core-react',
+          '@tanstack/react-virtual',
+        ],
       },
       optimizeDeps: {
         ...config.optimizeDeps,
         include: [
           ...(config.optimizeDeps?.include ?? []),
-          '@equinor/eds-utils',
-          '@storybook/addon-docs/mdx-react-shim',
+          '@mdx-js/react',
+          'react/jsx-dev-runtime',
           '@storybook/blocks',
         ],
       },

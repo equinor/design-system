@@ -1,6 +1,8 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Primary, Canvas } from '@storybook/blocks'
+import { Links, Story } from './../../../.storybook/components'
+import { Primary, Canvas, Meta, Controls } from '@storybook/blocks'
 import * as ComponentStories from './Table.stories'
+
+<Meta of={ComponentStories} />
 
 # Table
 
@@ -15,7 +17,7 @@ Display data in a structured format.
 />
 
 <Primary />
-<PropsTable />
+<Controls />
 
 ## Usage
 

@@ -1,6 +1,8 @@
-import { Links, PropsTable } from './../../../.storybook/components'
-import { Primary, Canvas } from '@storybook/blocks'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Meta, Controls } from '@storybook/blocks'
 import * as ComponentStories from './TopBar.stories'
+
+<Meta of={ComponentStories} />
 
 # TopBar
 
@@ -15,7 +17,7 @@ Displays navigation and actions related to the interface.
 />
 
 <Primary />
-<PropsTable />
+<Controls />
 
 ## Usage
 

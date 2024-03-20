@@ -1,6 +1,8 @@
-import { Links, PropsTable } from './../../../.storybook/components'
-import { Primary, Canvas } from '@storybook/blocks'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Meta, Controls } from '@storybook/blocks'
 import * as ComponentStories from './TableOfContents.stories'
+
+<Meta of={ComponentStories} />
 
 # Table of Contents
 
@@ -15,7 +17,7 @@ A list of hyperlinks that scroll to anchored text on the same page.
 />
 
 <Primary />
-<PropsTable />
+<Controls />
 
 ## Usage
 

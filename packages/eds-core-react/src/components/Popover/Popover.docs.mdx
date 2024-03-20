@@ -1,6 +1,8 @@
-import { Links, PropsTable } from './../../../.storybook/components'
-import { Primary, Canvas } from '@storybook/blocks'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Meta, Controls } from '@storybook/blocks'
 import * as ComponentStories from './Popover.stories'
+
+<Meta of={ComponentStories} />
 
 # Popover
 
@@ -14,7 +16,7 @@ Is a floating card that provides more information or actions on hover or click.
 />
 
 <Primary />
-<PropsTable />
+<Controls />
 
 ## Usage
 
