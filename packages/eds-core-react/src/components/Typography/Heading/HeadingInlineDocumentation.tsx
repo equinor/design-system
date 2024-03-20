@@ -15,7 +15,7 @@ export function HeadingInlineDocumentation(
     $lineHeight,
     $fontFamily,
     $color,
-    $capsizeStyles,
+    $trimValues,
     level,
     size,
   } = props
@@ -27,10 +27,10 @@ export function HeadingInlineDocumentation(
       <li>font-family: {$fontFamily}</li>
       <li>color: {$color}</li>
       <li>level: {level?.toString()}</li>
-      <p>
-        capsize styles:
-        {JSON.stringify($capsizeStyles)}
-      </p>
+      <pre>
+        Trim values:
+        {JSON.stringify($trimValues, null, 2)}
+      </pre>
     </StyledHeadingInlineDocumentation>
   )
 }
