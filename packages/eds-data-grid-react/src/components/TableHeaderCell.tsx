@@ -143,7 +143,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
           <div onClick={(e) => e.stopPropagation()}>
-            <FilterWrapper column={header.column} table={table} />
+            <FilterWrapper column={header.column} />
           </div>
         ) : null}
       </>
