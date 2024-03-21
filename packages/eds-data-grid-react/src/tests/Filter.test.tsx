@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 import {
   createTable,
   getCoreRowModel,
@@ -234,6 +234,40 @@ describe('Filter', () => {
       const max = inputs[1]
       expect(min.placeholder).toBe(`0`)
       expect(max.placeholder).toBe(`0`)
+    })
+
+    it('should work with custom filters', () => {
+      const col = table.getColumn('status')
+      const CustomFilter = ({
+        onChange,
+        value,
+      }: {
+        onChange: (value: string) => void
+        value: string
+      }) => (
+        <input
+          data-testid={'input'}
+          placeholder={'Custom filter'}
+          value={value}
+          onChange={(e) => onChange(e.currentTarget.value)}
+        />
+      )
+      const { baseElement } = render(
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={col} CustomComponent={CustomFilter} />
+        </TableProvider>,
+      )
+      openPopover(baseElement)
+      // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const input = within(baseElement).getByTestId('input') as HTMLInputElement
+      expect(input).toBeDefined()
+      expect(input.placeholder).toBe('Custom filter')
     })
   })
 })
