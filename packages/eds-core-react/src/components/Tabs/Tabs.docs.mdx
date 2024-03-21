@@ -1,6 +1,8 @@
-import { Links, PropsTable } from './../../../.storybook/components'
-import { Primary, Canvas } from '@storybook/blocks'
+import { Links } from './../../../.storybook/components'
+import { Primary, Canvas, Meta, Controls } from '@storybook/blocks'
 import * as ComponentStories from './Tabs.stories'
+
+<Meta of={ComponentStories} />
 
 # Tabs
 
@@ -15,7 +17,7 @@ Organise related content across different views to be quickly navigated.
 />
 
 <Primary />
-<PropsTable />
+<Controls />
 
 ## Usage
 

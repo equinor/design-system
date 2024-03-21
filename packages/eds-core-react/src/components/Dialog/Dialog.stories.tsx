@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useArgs } from '@storybook/client-api'
+import { useArgs } from '@storybook/preview-api'
 import { Dialog, DialogProps, Button, Radio, Typography } from '../..'
 import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'

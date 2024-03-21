@@ -1,4 +1,4 @@
 packages:
   - 'scripts/**'
   - 'packages/**'
-  - 'sanity/**'
+  - '!sanity/**'

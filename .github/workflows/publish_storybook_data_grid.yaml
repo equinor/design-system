@@ -11,7 +11,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-utils packages/eds-data-grid-react
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-data-grid-react packages/eds-utils
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -59,6 +59,7 @@ jobs:
         uses: tibor19/static-website-deploy@v2
         with:
           enabled-static-website: 'true'
+          remove-existing-files: 'true'
           folder: 'packages/eds-data-grid-react/storybook-build'
           public-access-policy: 'container'
           connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_DATAGRID_CONNECTION_STRING }}

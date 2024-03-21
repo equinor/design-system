@@ -1,6 +1,8 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
-import { Primary, Canvas, Controls } from '@storybook/blocks'
+import { Links, Story } from './../../../.storybook/components'
+import { Primary, Canvas, Controls, Meta } from '@storybook/blocks'
 import * as ComponentStories from './Dialog.stories'
+
+<Meta of={ComponentStories} />
 
 # Dialog
 
@@ -15,7 +17,7 @@ Informs users about a task and can contain critical information, requires decisi
 />
 
 <Primary />
-<PropsTable />
+<Controls />
 
 ## Usage
 
