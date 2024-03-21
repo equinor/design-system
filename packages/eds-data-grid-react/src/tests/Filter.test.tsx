@@ -5,10 +5,11 @@ import {
   getFacetedMinMaxValues,
   Table,
 } from '@tanstack/react-table'
-import { Filter } from '../components/Filter'
 import { data, Data } from './data'
 import { columns } from './columns'
 import { userEvent } from '@testing-library/user-event'
+import { FilterWrapper } from '../components/FilterWrapper'
+import { TableProvider } from '../EdsDataGridContext'
 
 const openPopover = (header: HTMLElement) => {
   const button = within(header).getByTestId('open-filters')
@@ -58,20 +59,41 @@ describe('Filter', () => {
   describe('Render', () => {
     it('should render', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('cargoId')} table={table} />,
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={table.getColumn('cargoId')} />
+        </TableProvider>,
       )
       expect(baseElement).toBeTruthy()
     })
     it('should have 1 input for text-columns', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('status')} table={table} />,
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={table.getColumn('status')} />
+        </TableProvider>,
       )
       openPopover(baseElement)
       expect(within(baseElement).getAllByRole('combobox').length).toBe(1)
     })
     it('should have 2 inputs for number-columns', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('numeric')} table={table} />,
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={table.getColumn('numeric')} />
+        </TableProvider>,
       )
       openPopover(baseElement)
       expect(screen.queryAllByRole('spinbutton').length).toBe(2)
@@ -81,7 +103,14 @@ describe('Filter', () => {
   describe('onChange', () => {
     it('should emit changes on input', async () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('status')} table={table} />,
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={table.getColumn('status')} />
+        </TableProvider>,
       )
       openPopover(baseElement)
       const input = within(baseElement).getByRole('combobox')
@@ -104,7 +133,14 @@ describe('Filter', () => {
 
     it('should emit changes on change-event (text)', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('status')} table={table} />,
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={table.getColumn('status')} />
+        </TableProvider>,
       )
       openPopover(baseElement)
       const input = within(baseElement).getByRole('combobox')
@@ -119,7 +155,14 @@ describe('Filter', () => {
 
     it('should emit changes on change-event (numeric)', () => {
       const { baseElement } = render(
-        <Filter column={table.getColumn('numeric')} table={table} />,
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={table.getColumn('numeric')} />
+        </TableProvider>,
       )
       openPopover(baseElement)
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -139,7 +182,16 @@ describe('Filter', () => {
   describe('Placeholders', () => {
     it('should have min/max for numeric', () => {
       const col = table.getColumn('numeric')
-      const { baseElement } = render(<Filter column={col} table={table} />)
+      const { baseElement } = render(
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={col} />
+        </TableProvider>,
+      )
 
       openPopover(baseElement)
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -162,7 +214,16 @@ describe('Filter', () => {
         renderFallbackValue: () => '',
       })
       const col = table.getColumn('numeric')
-      const { baseElement } = render(<Filter column={col} table={table} />)
+      const { baseElement } = render(
+        <TableProvider
+          enableSorting={false}
+          stickyHeader={true}
+          enableColumnFiltering={true}
+          table={table}
+        >
+          <FilterWrapper column={col} />
+        </TableProvider>,
+      )
       openPopover(baseElement)
       // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
