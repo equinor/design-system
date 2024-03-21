@@ -1,11 +1,8 @@
 /* istanbul ignore file */
 import { Column, Table as TanStackTable } from '@tanstack/react-table'
-import { useMemo, useState, useRef, MouseEvent } from 'react'
+import { useMemo } from 'react'
 import { DebouncedInput } from './DebouncedInput'
-import { Icon, Popover, Button } from '@equinor/eds-core-react'
-import { filter_alt, filter_alt_active } from '@equinor/eds-icons'
 import styled from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
 
 type FilterProps<T = unknown> = {
   column: Column<T>

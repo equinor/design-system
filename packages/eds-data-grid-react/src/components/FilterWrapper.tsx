@@ -1,10 +1,8 @@
 /* istanbul ignore file */
-import { Column, Table as TanStackTable } from '@tanstack/react-table'
-import { useMemo, useState, useRef, MouseEvent, FC, ChangeEvent } from 'react'
-import { DebouncedInput } from './DebouncedInput'
-import { Icon, Popover, Button } from '@equinor/eds-core-react'
+import { Column } from '@tanstack/react-table'
+import { FC, MouseEvent, useRef, useState } from 'react'
+import { Button, Icon, Popover } from '@equinor/eds-core-react'
 import { filter_alt, filter_alt_active } from '@equinor/eds-icons'
-import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { Filter } from './Filter'
 import { useTableContext } from '../EdsDataGridContext'
