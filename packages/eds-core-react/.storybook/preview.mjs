@@ -1,3 +1,5 @@
+import './eds-tokens.css'
+
 const preview = {
   viewMode: 'docs',
   parameters: {
