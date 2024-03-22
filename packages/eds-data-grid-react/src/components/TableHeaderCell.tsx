@@ -6,8 +6,7 @@ import {
   SortDirection,
   Table as TanStackTable,
 } from '@tanstack/react-table'
-import { Icon, Table } from '@equinor/eds-core-react'
-import { arrow_down, arrow_up } from '@equinor/eds-icons'
+import { Table } from '@equinor/eds-core-react'
 import { useTableContext } from '../EdsDataGridContext'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
