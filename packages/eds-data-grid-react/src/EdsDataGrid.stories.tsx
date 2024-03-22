@@ -88,7 +88,7 @@ export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
     useEffect(() => {
       onChange({ start, end })
-    }, [start, end])
+    }, [start, end, onChange])
 
     return (
       <div>

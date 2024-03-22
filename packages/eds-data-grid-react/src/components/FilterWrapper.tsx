@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import { Column } from '@tanstack/react-table'
-import { FC, MouseEvent, useRef, useState } from 'react'
+import { FC, MouseEvent, useCallback, useRef, useState } from 'react'
 import { Button, Icon, Popover } from '@equinor/eds-core-react'
 import { filter_alt, filter_alt_active } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
@@ -44,6 +44,11 @@ export function FilterWrapper<T = unknown>({
     return value
   }
 
+  const onChange = useCallback(
+    (value: unknown) => column.setFilterValue(value),
+    [column],
+  )
+
   return (
     <>
       <Button
@@ -72,10 +77,7 @@ export function FilterWrapper<T = unknown>({
           style={{ width: typeof firstValue === 'number' ? '180px' : '310px' }}
         >
           {CustomComponent ? (
-            <CustomComponent
-              onChange={(value) => column.setFilterValue(value)}
-              value={columnFilterValue}
-            />
+            <CustomComponent onChange={onChange} value={columnFilterValue} />
           ) : (
             <Filter column={column} table={table} />
           )}
