@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { useMemo } from 'react'
 import { FilterWrapper } from './FilterWrapper'
+import { SortIndicator } from './SortIndicator'
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -132,10 +133,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
             {flexRender(header.column.columnDef.header, header.getContext())}
           </span>
         </div>
-        {{
-          asc: <Icon data={arrow_up} />,
-          desc: <Icon data={arrow_down} />,
-        }[header.column.getIsSorted() as string] ?? null}
+        {header.column.columnDef.meta?.customFilterInput && (
+          <SortIndicator column={header.column} />
+        )}
 
         {header.column.getCanFilter() &&
         !header.column.columnDef.meta?.customFilterInput ? (
