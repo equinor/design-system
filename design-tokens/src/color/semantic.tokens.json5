@@ -1,0 +1,292 @@
+/* 🎨 Semantic.Color.tokens.json */
+
+{
+  icon: {
+    input: {
+      '<notification>-focused': {
+        $type: 'color',
+        $value: '{notification.em}',
+      },
+      '<notification>': {
+        $type: 'color',
+        $value: '{notification.base}',
+      },
+    },
+    interactive: {
+      '<variant>': {
+        'on-ghost-pressed': {
+          $type: 'color',
+          $value: '{variant.strong}',
+        },
+        'on-ghost-hover': {
+          $type: 'color',
+          $value: '{variant.em}',
+        },
+        'on-ghost': {
+          $type: 'color',
+          $value: '{variant.base}',
+        },
+        'on-action': {
+          $type: 'color',
+          $value: '{neutral-subtle.subtle}',
+        },
+      },
+      active: {
+        $type: 'color',
+        $value: '{primary.base}',
+      },
+      disabled: {
+        $type: 'color',
+        $value: '{neutral-subtle.strong}',
+      },
+      resting: {
+        $type: 'color',
+        $value: '{neutral.base}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{primary.base}',
+      },
+    },
+    default: {
+      $type: 'color',
+      $value: '{neutral.base}',
+    },
+  },
+  surface: {
+    interactive: {
+      '<variant>': {
+        'ghost-pressed': {
+          $type: 'color',
+          $value: '{variant-subtle.strong}',
+        },
+        'ghost-hover': {
+          $type: 'color',
+          $value: '{variant-subtle.em}',
+        },
+        ghost: {
+          $type: 'color',
+          $value: '{translucent.none}',
+        },
+        'filled-pressed': {
+          $type: 'color',
+          $value: '{variant.strong}',
+        },
+        'filled-hover': {
+          $type: 'color',
+          $value: '{variant.em}',
+        },
+        filled: {
+          $type: 'color',
+          $value: '{variant.base}',
+        },
+      },
+      'selected-pressed': {
+        $type: 'color',
+        $value: '{primary-subtle.strong}',
+      },
+      'selected-hover': {
+        $type: 'color',
+        $value: '{primary-subtle.em}',
+      },
+      selected: {
+        $type: 'color',
+        $value: '{primary-subtle.base}',
+      },
+      pressed: {
+        $type: 'color',
+        $value: '{primary-subtle.em}',
+      },
+      hover: {
+        $type: 'color',
+        $value: '{primary-subtle.base}',
+      },
+      disabled: {
+        $type: 'color',
+        $value: '{neutral-subtle.base}',
+      },
+      active: {
+        $type: 'color',
+        $value: '{neutral-subtle.base}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{translucent.none}',
+      },
+    },
+    input: {
+      'on-alternative': {
+        $type: 'color',
+        $value: '{neutral-subtle.subtle}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{neutral-subtle.weak}',
+      },
+    },
+    '<notfication>': {
+      $type: 'color',
+      $value: '{notification-subtle.base}',
+    },
+    overlay: {
+      $type: 'color',
+      $value: '{translucent.strong}',
+    },
+    scrim: {
+      $type: 'color',
+      $value: '{translucent.weak}',
+    },
+    alternative: {
+      $type: 'color',
+      $value: '{neutral-subtle.weak}',
+    },
+    default: {
+      $type: 'color',
+      $value: '{neutral-subtle.subtle}',
+    },
+  },
+  border: {
+    input: {
+      '<notification>-focused': {
+        $type: 'color',
+        $value: '{notification.em}',
+      },
+      '<notification>': {
+        $type: 'color',
+        $value: '{notification.base}',
+      },
+      focused: {
+        $type: 'color',
+        $value: '{primary.base}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{neutral.base}',
+      },
+    },
+    interactive: {
+      '<variant>': {
+        'ghost-pressed': {
+          $type: 'color',
+          $value: '{variant.strong}',
+        },
+        'ghost-hover': {
+          $type: 'color',
+          $value: '{variant.em}',
+        },
+        ghost: {
+          $type: 'color',
+          $value: '{variant.base}',
+        },
+      },
+      focused: {
+        $type: 'color',
+        $value: '{primary.base}',
+      },
+      active: {
+        $type: 'color',
+        $value: '{primary.base}',
+      },
+      disabled: {
+        $type: 'color',
+        $value: '{neutral-subtle.strong}',
+      },
+    },
+    default: {
+      $type: 'color',
+      $value: '{neutral-subtle.em}',
+    },
+  },
+  text: {
+    helper: {
+      notification: {
+        $type: 'color',
+        $value: '{notification.em}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{neutral.base}',
+      },
+    },
+    interactive: {
+      '<variant>': {
+        'on-action': {
+          $type: 'color',
+          $value: '{neutral-subtle.subtle}',
+        },
+        'on-ghost-pressed': {
+          $type: 'color',
+          $value: '{variant.strong}',
+        },
+        'on-ghost-hover': {
+          $type: 'color',
+          $value: '{variant.em}',
+        },
+        'on-ghost': {
+          $type: 'color',
+          $value: '{variant.base}',
+        },
+      },
+      disabled: {
+        $type: 'color',
+        $value: '#b3b3b3',
+      },
+      inactive: {
+        $type: 'color',
+        $value: '#b3b3b3',
+      },
+      resting: {
+        $type: 'color',
+        $value: '{neutral.base}',
+      },
+      pressed: {
+        $type: 'color',
+        $value: '{primary.strong}',
+      },
+      hover: {
+        $type: 'color',
+        $value: '{primary.em}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{primary.base}',
+      },
+    },
+    input: {
+      focused: {
+        $type: 'color',
+        $value: '{neutral.strong}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{neutral.base}',
+      },
+    },
+    '<notification>': {
+      'on-inverted-hover': {
+        $type: 'color',
+        $value: '{notification-on-inverted.weak}',
+      },
+      'on-inverted': {
+        $type: 'color',
+        $value: '{notification-on-inverted.base}',
+      },
+      default: {
+        $type: 'color',
+        $value: '{notification.em}',
+      },
+      'on-inverted-pressed': {
+        $type: 'color',
+        $value: '{notification-on-inverted.subtle}',
+      },
+    },
+    'on-overlay': {
+      $type: 'color',
+      $value: '{neutral-subtle.subtle}',
+    },
+    default: {
+      $type: 'color',
+      $value: '{neutral.strong}',
+    },
+  },
+}

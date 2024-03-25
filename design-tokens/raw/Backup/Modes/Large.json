@@ -1,0 +1,40 @@
+{
+  "Component": {
+    "Stretch": {
+      "Padding inline ↔︎": {
+        "type": "number",
+        "value": "8"
+      },
+      "Padding block ↕︎": {
+        "type": "number",
+        "value": "16"
+      }
+    },
+    "Square": {
+      "Padding inline ↔︎": {
+        "type": "number",
+        "value": "16"
+      },
+      "Padding block ↕︎": {
+        "type": "number",
+        "value": "16"
+      }
+    },
+    "Squish": {
+      "Padding block ↕︎": {
+        "type": "number",
+        "value": "16"
+      },
+      "Padding inline ↔︎": {
+        "type": "number",
+        "value": "24"
+      }
+    },
+    "Size": {
+      "Min Height ↕︎": {
+        "type": "number",
+        "value": "44"
+      }
+    }
+  }
+}

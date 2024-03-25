@@ -1,0 +1,309 @@
+{
+  "text": {
+    "default": {
+      "value": "{neutral.strong}",
+      "type": "color"
+    },
+    "on-overlay": {
+      "value": "{neutral-subtle.subtle}",
+      "type": "color"
+    },
+    "<notification>": {
+      "default": {
+        "value": "{notification.em}",
+        "type": "color",
+        "description": "--eds-color-text-error-default"
+      },
+      "on-inverted": {
+        "value": "{notification-on-inverted.base}",
+        "type": "color"
+      },
+      "on-inverted-hover": {
+        "value": "{notification-on-inverted.weak}",
+        "type": "color"
+      },
+      "on-inverted-pressed": {
+        "value": "{notification-on-inverted.subtle}",
+        "type": "color"
+      }
+    },
+    "interactive": {
+      "default": {
+        "value": "{primary.base}",
+        "type": "color",
+        "description": "--eds-color-text-interactive-default: var(--eds-theme-primary-base, #007079);"
+      },
+      "active": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
+      "hover": {
+        "value": "{primary.em}",
+        "type": "color"
+      },
+      "pressed": {
+        "value": "{primary.strong}",
+        "type": "color"
+      },
+      "resting": {
+        "value": "{neutral.base}",
+        "type": "color"
+      },
+      "inactive": {
+        "value": "{neutral-subtle.stronger}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{neutral-subtle.stronger}",
+        "type": "color"
+      },
+      "<variant>": {
+        "on-action": {
+          "value": "{neutral-subtle.subtle}",
+          "type": "color"
+        },
+        "on-ghost": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "on-ghost-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "on-ghost-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        }
+      }
+    },
+    "input": {
+      "default": {
+        "value": "{neutral.base}",
+        "type": "color"
+      },
+      "focused": {
+        "value": "{neutral.strong}",
+        "type": "color"
+      }
+    },
+    "helper": {
+      "default": {
+        "value": "{neutral.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "notification": {
+        "value": "{notification.em}",
+        "type": "color"
+      }
+    }
+  },
+  "border": {
+    "default": {
+      "value": "{neutral-subtle.em}",
+      "type": "color"
+    },
+    "interactive": {
+      "resting": {
+        "value": "{neutral-subtle.em}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{neutral-subtle.strong}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
+      "focused": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
+      "<variant>": {
+        "ghost": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "ghost-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "ghost-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        }
+      }
+    },
+    "input": {
+      "default": {
+        "value": "{neutral.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "focused": {
+        "value": "{primary.base}",
+        "type": "color",
+        "description": "TODO: EDS 1.0 #EB0000"
+      },
+      "<notification>": {
+        "value": "{notification.base}",
+        "type": "color"
+      },
+      "<notification>-focused": {
+        "value": "{notification.em}",
+        "type": "color"
+      }
+    }
+  },
+  "surface": {
+    "default": {
+      "value": "{neutral-subtle.subtle}",
+      "type": "color"
+    },
+    "alternative": {
+      "value": "{neutral-subtle.weak}",
+      "type": "color"
+    },
+    "scrim": {
+      "value": "{translucent.weak}",
+      "type": "color"
+    },
+    "overlay": {
+      "value": "{translucent.strong}",
+      "type": "color"
+    },
+    "<notfication>": {
+      "value": "{notification-subtle.base}",
+      "type": "color"
+    },
+    "input": {
+      "default": {
+        "value": "{neutral-subtle.weak}",
+        "type": "color",
+        "description": "TODO: Needs more work"
+      },
+      "on-alternative": {
+        "value": "{neutral-subtle.subtle}",
+        "type": "color",
+        "description": "TODO: Needs more work"
+      }
+    },
+    "interactive": {
+      "default": {
+        "value": "{translucent.none}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{neutral-subtle.base}",
+        "type": "color",
+        "description": "Heads up! Same colour as disabled"
+      },
+      "disabled": {
+        "value": "{neutral-subtle.base}",
+        "type": "color"
+      },
+      "hover": {
+        "value": "{primary-subtle.base}",
+        "type": "color"
+      },
+      "pressed": {
+        "value": "{primary-subtle.em}",
+        "type": "color"
+      },
+      "selected": {
+        "value": "{primary-subtle.base}",
+        "type": "color",
+        "description": "TODO: Needs more work"
+      },
+      "selected-hover": {
+        "value": "{primary-subtle.em}",
+        "type": "color",
+        "description": "TODO: Needs more work"
+      },
+      "selected-pressed": {
+        "value": "{primary-subtle.strong}",
+        "type": "color",
+        "description": "TODO: Needs more work"
+      },
+      "<variant>": {
+        "filled": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "filled-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "filled-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        },
+        "ghost": {
+          "value": "{translucent.none}",
+          "type": "color"
+        },
+        "ghost-hover": {
+          "value": "{variant-subtle.em}",
+          "type": "color"
+        },
+        "ghost-pressed": {
+          "value": "{variant-subtle.strong}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "icon": {
+    "default": {
+      "value": "{neutral.base}",
+      "type": "color"
+    },
+    "interactive": {
+      "default": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
+      "resting": {
+        "value": "{neutral.base}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{neutral-subtle.strong}",
+        "type": "color"
+      },
+      "active": {
+        "value": "{primary.base}",
+        "type": "color"
+      },
+      "<variant>": {
+        "on-action": {
+          "value": "{neutral-subtle.subtle}",
+          "type": "color"
+        },
+        "on-ghost": {
+          "value": "{variant.base}",
+          "type": "color"
+        },
+        "on-ghost-hover": {
+          "value": "{variant.em}",
+          "type": "color"
+        },
+        "on-ghost-pressed": {
+          "value": "{variant.strong}",
+          "type": "color"
+        }
+      }
+    },
+    "input": {
+      "<notification>": {
+        "value": "{notification.base}",
+        "type": "color"
+      },
+      "<notification>-focused": {
+        "value": "{notification.em}",
+        "type": "color"
+      }
+    }
+  }
+}

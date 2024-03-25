@@ -1,0 +1,13 @@
+{
+  "Caption": {
+    "Regular": {
+      "value": {
+        "fontFamily": "Equinor",
+        "fontWeight": "400",
+        "fontSize": "12",
+        "lineHeight": "16"
+      },
+      "type": "typography"
+    }
+  }
+}
