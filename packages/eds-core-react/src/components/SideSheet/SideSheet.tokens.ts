@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { ComponentToken } from '@equinor/eds-tokens'
+import type { Borders, ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -16,7 +16,10 @@ const {
   },
 } = tokens
 
-type SidesheetToken = ComponentToken
+type SidesheetToken = ComponentToken & {
+  borderRight?: Borders
+  borderLeft?: Borders
+}
 
 export const comfortable: SidesheetToken = {
   background,
@@ -25,11 +28,15 @@ export const comfortable: SidesheetToken = {
     right: spacingMedium,
     top: spacingMedium,
   },
-  border: {
+  typography: { ...body_short },
+  borderLeft: {
     type: 'bordergroup',
     left: { color: borderColor, width: spacingXXS, style: 'solid' },
   },
-  typography: { ...body_short },
+  borderRight: {
+    type: 'bordergroup',
+    right: { color: borderColor, width: spacingXXS, style: 'solid' },
+  },
 }
 
 export const variants = {

@@ -29,6 +29,19 @@ describe('SideSheet', () => {
     )
     expect(screen.getByTestId('sidesheet')).toHaveStyleRule('width', '480px')
   })
+  it('Opens on the left side', () => {
+    render(
+      <SideSheet
+        open
+        variant="large"
+        title="Title"
+        data-testid="sidesheet"
+        position="left"
+      />,
+    )
+    expect(screen.getByTestId('sidesheet')).toHaveStyleRule('left', '0')
+    expect(screen.getByTestId('sidesheet')).not.toHaveStyleRule('right', '0')
+  })
   it('Has provided necessary props', () => {
     const title = 'Title'
     const variant = 'large'

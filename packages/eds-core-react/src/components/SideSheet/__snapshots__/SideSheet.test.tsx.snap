@@ -162,6 +162,7 @@ exports[`SideSheet Matches snapshot 1`] = `
 
 <div
     class="c0"
+    position="right"
     width="480px"
   >
     <div
