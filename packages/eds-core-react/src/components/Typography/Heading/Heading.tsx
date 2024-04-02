@@ -16,7 +16,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       fontFamily,
       color,
       capHeightTrim,
-      baselineTrim,
+      baselineTrimGrid,
     } = getTypographyProperties({
       size,
       tokens: headingTokens,
@@ -31,7 +31,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
         $fontFamily={fontFamily}
         $color={color}
         $capHeightTrim={capHeightTrim}
-        $baselineTrim={baselineTrim}
+        $baselineTrim={baselineTrimGrid}
       >
         {props.children}
       </Typography>

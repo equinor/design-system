@@ -84,6 +84,7 @@ export const getTypographyProperties = ({
     color: token.color || '#000',
     capHeightTrim: calculatedProperties.trimValuesWithUnit.capHeightTrim,
     baselineTrim: calculatedProperties.trimValuesWithUnit.baselineTrim,
+    baselineTrimGrid: calculatedProperties.trimValuesWithUnit.baselineTrimGrid,
   }
 }
 
@@ -108,7 +109,8 @@ export function _getCalculatedTypographyProps(currentToken: TypographyToken) {
 
   const trimValuesWithUnit = {
     capHeightTrim: `${formattedTrimValues.capHeightTrim}em`,
-    baselineTrim: `${formattedTrimValues.baselineTrimGrid}em`,
+    baselineTrim: `${formattedTrimValues.baselineTrim}em`,
+    baselineTrimGrid: `${formattedTrimValues.baselineTrimGrid}em`,
   }
   return { lineHeight, trimValuesWithUnit }
 }
