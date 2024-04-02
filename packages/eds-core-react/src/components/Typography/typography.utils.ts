@@ -1,4 +1,9 @@
-import { FontMetrics } from './metrics'
+import { FontMetrics, metrics } from './metrics'
+import {
+  TypographySize,
+  TypographyToken,
+  TypographyTokenCollection,
+} from './typography.types'
 
 export const calculateLineHeight = ({
   fontSize,
@@ -62,3 +67,47 @@ export const formatTextBoxTrimValues = ({
   baselineTrim: Math.round((baselineTrim / fontSize) * 10000) / 10000,
   baselineTrimGrid: Math.round((baselineTrimGrid / fontSize) * 10000) / 10000,
 })
+
+export const getTypographyProperties = ({
+  tokens,
+  size,
+}: {
+  tokens: TypographyTokenCollection
+  size: TypographySize
+}) => {
+  const token = tokens[size]
+  const calculatedProperties = _getCalculatedTypographyProps(token)
+  return {
+    fontSize: `${token.fontSize}px`,
+    lineHeight: `${calculatedProperties.lineHeight}px`,
+    fontFamily: token.fontFamily,
+    color: token.color || '#000',
+    trimValues: calculatedProperties.trimValuesWithUnit,
+  }
+}
+
+export function _getCalculatedTypographyProps(currentToken: TypographyToken) {
+  const lineHeight = calculateLineHeight({
+    fontSize: currentToken.fontSize,
+    lineHeightMultiplier: currentToken.lineHeightMultiplier,
+  })
+
+  const textBoxTrimValues = getTextBoxTrimValues({
+    fontSize: currentToken.fontSize,
+    lineHeight,
+    fontMetrics: metrics[currentToken.fontAlias],
+  })
+
+  const formattedTrimValues = formatTextBoxTrimValues({
+    fontSize: currentToken.fontSize,
+    capHeightTrim: textBoxTrimValues.capHeightTrim,
+    baselineTrim: textBoxTrimValues.baselineTrim,
+    baselineTrimGrid: textBoxTrimValues.baselineTrimGrid,
+  })
+
+  const trimValuesWithUnit = {
+    capHeightTrim: `${formattedTrimValues.capHeightTrim}em`,
+    baselineTrim: `${formattedTrimValues.baselineTrimGrid}em`,
+  }
+  return { lineHeight, trimValuesWithUnit }
+}
