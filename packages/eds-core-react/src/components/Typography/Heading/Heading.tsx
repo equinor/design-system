@@ -1,17 +1,17 @@
 // eslint-disable-next-line import/no-named-as-default
 import styled, { css } from 'styled-components'
 import { forwardRef } from 'react'
-import { HeadingInlineDocumentation } from './HeadingInlineDocumentation'
+import { InlineDocumentation } from '../_components/InlineDocumentation'
 import { metrics } from '../metrics'
-import { BaselineGrid } from './BaselineGrid'
+import { BaselineGrid } from '../_components/BaselineGrid'
 import {
   calculateLineHeight,
   formatTextBoxTrimValues,
   getTextBoxTrimValues,
-} from './typography.utils'
-import { HeadingLevel, TypographySize } from './heading.types'
+} from '../typography.utils'
+import { HeadingLevel, TypographySize } from '../typography.types'
 import { tokens } from '@equinor/eds-tokens'
-import { headingTokens } from './heading.tokens'
+import { headingTokens } from '../_typography.tokens'
 
 export type StyleHeadingProps = {
   $fontFamily: string
@@ -98,7 +98,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
         {props.children}
         {props.isDocumentationVisible && (
           <>
-            <HeadingInlineDocumentation
+            <InlineDocumentation
               size={size}
               $fontSize={`${currentHeadingToken.fontSize}px`}
               $lineHeight={`${lineHeight}px`}
