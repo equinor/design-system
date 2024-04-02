@@ -91,3 +91,42 @@ export const uiTextTokens: TypographyTokenCollection = {
     color: '#000',
   },
 }
+
+export const bodyTextTokens: TypographyTokenCollection = {
+  LG: {
+    ...inter,
+    fontSize: 21,
+    lineHeightMultiplier: 1.125,
+    color: '#000',
+  },
+  BASE: {
+    ...inter,
+    fontSize: 16,
+    lineHeightMultiplier: 1.125,
+    color: '#000',
+  },
+  SM: {
+    ...inter,
+    fontSize: 14,
+    lineHeightMultiplier: 1.125,
+    color: '#000',
+  },
+  XS: {
+    ...inter,
+    fontSize: 12,
+    lineHeightMultiplier: 1.125, // TODO: the line-height of this size should be calculated to 16px
+    color: '#000',
+  },
+  '2XS': {
+    ...inter,
+    fontSize: 10.5,
+    lineHeightMultiplier: 1.125,
+    color: '#000',
+  },
+  '3XS': {
+    ...inter,
+    fontSize: 9,
+    lineHeightMultiplier: 1.125,
+    color: '#000',
+  },
+}

@@ -1,4 +1,5 @@
 import { UIText } from './UIText'
+import { UITextBaselineGrid } from './UITextBaselineGrid'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
 import { UITextProps } from '../typography.types'
@@ -52,6 +53,20 @@ export const Demo: StoryFn<UITextProps> = () => {
   )
 }
 
+export const UITextAndUITextBaselineGrid: StoryFn<UITextProps> = () => {
+  return (
+    <BaselineGrid>
+      <UITextBaselineGrid size="BASE">
+        {TEXT} {TEXT}
+      </UITextBaselineGrid>
+      <UIText size="BASE">
+        {TEXT} {TEXT}
+      </UIText>
+      <PropertyDocumentation size="BASE" tokens={uiTextTokens} />
+    </BaselineGrid>
+  )
+}
+
 export const Sizes: StoryFn<UITextProps> = () => {
   return (
     <BaselineGrid>
@@ -62,10 +77,10 @@ export const Sizes: StoryFn<UITextProps> = () => {
       <UIText size="BASE" as="h2">
         {TEXT}
       </UIText>
+      <PropertyDocumentation size="BASE" tokens={uiTextTokens} />
       <UIText size="LG" as="h1">
         {TEXT}
       </UIText>
-      <PropertyDocumentation size="LG" tokens={uiTextTokens} />
     </BaselineGrid>
   )
 }
