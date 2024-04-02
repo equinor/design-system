@@ -17,6 +17,8 @@ export type UITextProps = TypographyProps & {
   as?: TypographyElement
 }
 
+export type BodyTextProps = UITextProps
+
 export type FontFamily = {
   fontFamily: string
   fontAlias: 'inter' | 'equinor'
