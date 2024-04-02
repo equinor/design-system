@@ -1,16 +1,12 @@
-import { Heading, HeadingProps } from './Heading'
+import { Heading } from './Heading'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
+import { HeadingProps } from '../typography.types'
 
 const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
   component: Heading,
   argTypes: {
-    isDocumentationVisible: {
-      control: {
-        type: 'boolean',
-      },
-    },
     as: {
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
       control: {
@@ -36,14 +32,6 @@ const meta: Meta<typeof Heading> = {
 export default meta
 
 const TEXT = 'This is some text, hi ho! This is line two'
-
-export const Headings: StoryFn<HeadingProps> = (args) => {
-  return (
-    <Heading {...args} isGridVisible>
-      {TEXT} {TEXT}
-    </Heading>
-  )
-}
 
 export const Demo: StoryFn<HeadingProps> = () => {
   return (
