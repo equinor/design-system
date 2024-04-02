@@ -2,6 +2,8 @@ import { Heading } from './Heading'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
 import { HeadingProps } from '../typography.types'
+import { PropertyDocumentation } from '../_components/PropertyDocumentation'
+import { headingTokens } from '../_typography.tokens'
 
 const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
@@ -63,6 +65,7 @@ export const Sizes: StoryFn<HeadingProps> = () => {
       <Heading size="LG" as="h1">
         {TEXT}
       </Heading>
+      <PropertyDocumentation size="LG" tokens={headingTokens} />
     </BaselineGrid>
   )
 }

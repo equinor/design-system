@@ -82,7 +82,8 @@ export const getTypographyProperties = ({
     lineHeight: `${calculatedProperties.lineHeight}px`,
     fontFamily: token.fontFamily,
     color: token.color || '#000',
-    trimValues: calculatedProperties.trimValuesWithUnit,
+    capHeightTrim: calculatedProperties.trimValuesWithUnit.capHeightTrim,
+    baselineTrim: calculatedProperties.trimValuesWithUnit.baselineTrim,
   }
 }
 

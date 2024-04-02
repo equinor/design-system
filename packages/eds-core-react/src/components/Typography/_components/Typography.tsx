@@ -6,16 +6,21 @@ export type StyleHeadingProps = {
   $fontSize: string
   $lineHeight: string
   $color: string
-  $trimValues: {
-    capHeightTrim: string
-    baselineTrim: string
-  }
+  $capHeightTrim: string
+  $baselineTrim: string
 }
 
 export const Typography = styled.p<StyleHeadingProps>`
   font-weight: 400;
   margin: 0;
-  ${({ $fontFamily, $fontSize, $lineHeight, $color, $trimValues }) => css`
+  ${({
+    $fontFamily,
+    $fontSize,
+    $lineHeight,
+    $color,
+    $capHeightTrim,
+    $baselineTrim,
+  }) => css`
     font-family: ${$fontFamily};
     font-size: ${$fontSize};
     line-height: ${$lineHeight};
@@ -23,13 +28,13 @@ export const Typography = styled.p<StyleHeadingProps>`
 
     &::before {
       content: '';
-      margin-bottom: ${$trimValues.capHeightTrim};
+      margin-bottom: ${$capHeightTrim};
       display: table;
     }
 
     &::after {
       content: '';
-      margin-top: ${$trimValues.baselineTrim};
+      margin-top: ${$baselineTrim};
       display: table;
     }
   `}
