@@ -10,11 +10,17 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(
     const size = props.size || 'BASE'
     const element = props.as ?? 'p'
 
-    const { fontSize, lineHeight, fontFamily, color, trimValues } =
-      getTypographyProperties({
-        size,
-        tokens: uiTextTokens,
-      })
+    const {
+      fontSize,
+      lineHeight,
+      fontFamily,
+      color,
+      baselineTrim,
+      capHeightTrim,
+    } = getTypographyProperties({
+      size,
+      tokens: uiTextTokens,
+    })
 
     const component = (
       <Typography
@@ -24,7 +30,8 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
         $color={color}
-        $trimValues={trimValues}
+        $capHeightTrim={capHeightTrim}
+        $baselineTrim={baselineTrim}
       >
         {props.children}
       </Typography>

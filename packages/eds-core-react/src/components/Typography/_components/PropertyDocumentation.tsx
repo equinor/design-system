@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-named-as-default
 import styled from 'styled-components'
+import { TypographySize, TypographyTokenCollection } from '../typography.types'
+import { getTypographyProperties } from '../typography.utils'
 
 const List = styled.ul`
   font-size: 0.875rem;
@@ -9,22 +11,34 @@ const List = styled.ul`
   }
 `
 
-export function PropertyDocumentation(props: {
-  fontSize: string
-  lineHeight: string
-  fontFamily: string
-  color: string
-  trimValues?: { capHeightTrim: string; baselineTrim: string }
-}) {
-  const { fontSize, lineHeight, fontFamily, color, trimValues } = props
+type PropertyDocumentationProps = {
+  size: TypographySize
+  tokens: TypographyTokenCollection
+}
+
+export function PropertyDocumentation({
+  size,
+  tokens,
+}: PropertyDocumentationProps) {
+  const properties = getTypographyProperties({
+    size,
+    tokens,
+  })
+
+  {
+    Object.entries(properties).map(([key, value]) => (
+      <li key={key}>
+        {key}: {value ?? 'N/A'}
+      </li>
+    ))
+  }
   return (
     <List>
-      <li>font-size: {`${fontSize}`}</li>
-      <li>line-height: {`${lineHeight}`}</li>
-      <li>font-family: {fontFamily}</li>
-      <li>color: {color}</li>
-      <li>capHeightTrim: {trimValues?.capHeightTrim}</li>
-      <li>baselineTrim: {trimValues?.baselineTrim}</li>
+      {Object.entries(properties).map(([key, value]) => (
+        <li key={key}>
+          {key}: {value ?? 'N/A'}
+        </li>
+      ))}
     </List>
   )
 }

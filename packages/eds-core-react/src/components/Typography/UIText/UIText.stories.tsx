@@ -2,6 +2,8 @@ import { UIText } from './UIText'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
 import { UITextProps } from '../typography.types'
+import { PropertyDocumentation } from '../_components/PropertyDocumentation'
+import { uiTextTokens } from '../_typography.tokens'
 
 const meta: Meta<typeof UIText> = {
   title: 'Typography/UIText',
@@ -63,6 +65,7 @@ export const Sizes: StoryFn<UITextProps> = () => {
       <UIText size="LG" as="h1">
         {TEXT}
       </UIText>
+      <PropertyDocumentation size="LG" tokens={uiTextTokens} />
     </BaselineGrid>
   )
 }
