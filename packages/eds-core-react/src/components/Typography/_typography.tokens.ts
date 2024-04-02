@@ -63,3 +63,36 @@ export const headingTokens: FontTokens = {
     lineHeightMultiplier: 1.25,
   },
 }
+
+export const uiTextTokens: FontTokens = {
+  LG: {
+    ...inter,
+    fontSize: 21,
+    lineHeightMultiplier: 1.125,
+  },
+  BASE: {
+    ...inter,
+    fontSize: 16,
+    lineHeightMultiplier: 1.125,
+  },
+  SM: {
+    ...inter,
+    fontSize: 14,
+    lineHeightMultiplier: 1.125,
+  },
+  XS: {
+    ...inter,
+    fontSize: 12,
+    lineHeightMultiplier: 1.175,
+  },
+  '2XS': {
+    ...inter,
+    fontSize: 10.5,
+    lineHeightMultiplier: 1.125,
+  },
+  '3XS': {
+    ...inter,
+    fontSize: 9,
+    lineHeightMultiplier: 1.125,
+  },
+}

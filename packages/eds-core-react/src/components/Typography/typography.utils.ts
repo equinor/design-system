@@ -1,4 +1,4 @@
-import { FontMetrics } from '../metrics'
+import { FontMetrics } from './metrics'
 
 export const calculateLineHeight = ({
   fontSize,

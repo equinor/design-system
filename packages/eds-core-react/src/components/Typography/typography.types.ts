@@ -1,2 +1,4 @@
 export type TypographySize = '3XS' | '2XS' | 'XS' | 'SM' | 'BASE' | 'LG'
 export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+
+export type UITextElement = HeadingLevel | 'p'

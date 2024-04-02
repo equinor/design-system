@@ -1,6 +1,6 @@
 import { Heading, HeadingProps } from './Heading'
 import { StoryFn, Meta } from '@storybook/react'
-import { BaselineGrid } from './BaselineGrid'
+import { BaselineGrid } from '../_components/BaselineGrid'
 
 const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
