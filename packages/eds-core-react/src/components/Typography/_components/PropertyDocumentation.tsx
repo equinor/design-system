@@ -7,8 +7,9 @@ const List = styled.ul`
   font-family: 'Inter', Arial, sans-serif;
   font-size: 0.875rem;
   background: #f9f9f9;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   list-style-position: inside;
+  border-radius: 4px;
 
   li ~ li {
     margin-top: 4px;
