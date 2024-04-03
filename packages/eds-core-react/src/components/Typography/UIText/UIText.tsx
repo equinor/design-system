@@ -14,8 +14,8 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
     capHeightTrimInEm: capHeightTrim,
     color,
     fontFamily,
-    fontSize,
-    lineHeight,
+    fontSizeInRem: fontSize,
+    lineHeightInRem: lineHeight,
   } = getTypographyProperties({
     size,
     tokens: uiTextTokens,
