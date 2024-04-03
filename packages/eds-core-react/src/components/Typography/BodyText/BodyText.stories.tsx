@@ -5,9 +5,15 @@ import { PropertyDocumentation } from '../_components/PropertyDocumentation'
 import { bodyTextTokens, uiTextTokens } from '../_typography.tokens'
 import { BodyTextProps } from '../typography.types'
 
+const TEXT = 'This is some text, hi ho! This is line two'
+
 const meta: Meta<typeof BodyText> = {
   title: 'Typography/BodyText',
   component: BodyText,
+  args: {
+    children: TEXT,
+    size: 'BASE',
+  },
   argTypes: {
     as: {
       options: ['p', 'span', 'div'],
@@ -33,7 +39,9 @@ const meta: Meta<typeof BodyText> = {
 
 export default meta
 
-const TEXT = 'This is some text, hi ho! This is line two'
+export const Introduction: StoryFn<BodyTextProps> = (args) => {
+  return <BodyText {...args} />
+}
 
 export const Demo: StoryFn<BodyTextProps> = () => {
   return (
@@ -71,19 +79,6 @@ export const Sizes: StoryFn<BodyTextProps> = () => {
         {TEXT}
       </BodyText>
       <PropertyDocumentation size="LG" tokens={uiTextTokens} />
-    </>
-  )
-}
-
-export const Elements: StoryFn<BodyTextProps> = () => {
-  return (
-    <>
-      <BodyText as="h6">{TEXT}</BodyText>
-      <BodyText as="h5">{TEXT}</BodyText>
-      <BodyText as="h4">{TEXT}</BodyText>
-      <BodyText as="h3">{TEXT}</BodyText>
-      <BodyText as="h2">{TEXT}</BodyText>
-      <BodyText as="h1">{TEXT}</BodyText>
     </>
   )
 }
