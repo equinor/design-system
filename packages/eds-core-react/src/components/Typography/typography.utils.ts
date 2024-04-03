@@ -97,13 +97,13 @@ export const getTypographyProperties = ({
   }
 
   return {
-    fontSize: `${token.fontSize / 16}rem`,
-    fontSizeInPx: token.fontSize,
-    lineHeight: `${lineHeight / 16}rem`,
-    lineHeightInPx: lineHeight,
+    fontSize: token.fontSize,
+    lineHeight: lineHeight,
+    ...textBoxTrimValues,
+    fontSizeInRem: `${token.fontSize / 16}rem`,
+    lineHeightInRem: `${lineHeight / 16}rem`,
+    ...trimValuesWithUnit,
     fontFamily: token.fontFamily,
     color: token.color || '#000',
-    ...textBoxTrimValues,
-    ...trimValuesWithUnit,
   }
 }
