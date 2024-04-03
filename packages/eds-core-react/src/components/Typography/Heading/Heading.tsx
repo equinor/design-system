@@ -15,8 +15,8 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       capHeightTrimInEm: capHeightTrim,
       color,
       fontFamily,
-      fontSize,
-      lineHeight,
+      fontSizeInRem: fontSize,
+      lineHeightInRem: lineHeight,
     } = getTypographyProperties({
       size,
       tokens: headingTokens,
