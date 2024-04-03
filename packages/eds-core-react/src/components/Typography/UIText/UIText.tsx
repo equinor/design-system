@@ -1,44 +1,38 @@
 import { forwardRef } from 'react'
-import { BaselineGrid } from '../_components/BaselineGrid'
 import { getTypographyProperties } from '../typography.utils'
 import { UITextProps } from '../typography.types'
 import { uiTextTokens } from '../_typography.tokens'
 import { Typography } from '../_components/Typography'
+import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
 
-export const UIText = forwardRef<HTMLElement, UITextProps>(
-  function UIText(props, ref) {
-    const size = props.size || 'BASE'
-    const element = props.as ?? 'p'
+export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
+  { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children },
+  ref,
+) {
+  const {
+    baselineTrim,
+    capHeightTrim,
+    color,
+    fontFamily,
+    fontSize,
+    lineHeight,
+  } = getTypographyProperties({
+    size,
+    tokens: uiTextTokens,
+  })
 
-    const {
-      baselineTrim,
-      capHeightTrim,
-      color,
-      fontFamily,
-      fontSize,
-      lineHeight,
-    } = getTypographyProperties({
-      size,
-      tokens: uiTextTokens,
-    })
-
-    const component = (
-      <Typography
-        ref={ref}
-        as={element}
-        $fontSize={fontSize}
-        $lineHeight={lineHeight}
-        $fontFamily={fontFamily}
-        $color={color}
-        $capHeightTrim={capHeightTrim}
-        $baselineTrim={baselineTrim}
-      >
-        {props.children}
-      </Typography>
-    )
-
-    if (props.isGridVisible) return <BaselineGrid>{component}</BaselineGrid>
-
-    return component
-  },
-)
+  return (
+    <Typography
+      ref={ref}
+      as={as}
+      $fontSize={fontSize}
+      $lineHeight={lineHeight}
+      $fontFamily={fontFamily}
+      $color={color}
+      $capHeightTrim={capHeightTrim}
+      $baselineTrim={baselineTrim}
+    >
+      {children}
+    </Typography>
+  )
+})

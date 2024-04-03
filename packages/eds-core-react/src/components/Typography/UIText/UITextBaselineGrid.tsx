@@ -1,15 +1,15 @@
 import { forwardRef } from 'react'
-import { BaselineGrid } from '../_components/BaselineGrid'
 import { getTypographyProperties } from '../typography.utils'
 import { UITextProps } from '../typography.types'
 import { uiTextTokens } from '../_typography.tokens'
 import { Typography } from '../_components/Typography'
+import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
 
 export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
-  function UIText(props, ref) {
-    const size = props.size || 'BASE'
-    const element = props.as ?? 'p'
-
+  function UITextBaselineGrid(
+    { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children },
+    ref,
+  ) {
     const {
       baselineTrimGrid,
       capHeightTrim,
@@ -22,10 +22,10 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
       tokens: uiTextTokens,
     })
 
-    const component = (
+    return (
       <Typography
         ref={ref}
-        as={element}
+        as={as}
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
@@ -33,12 +33,8 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
         $capHeightTrim={capHeightTrim}
         $baselineTrim={baselineTrimGrid}
       >
-        {props.children}
+        {children}
       </Typography>
     )
-
-    if (props.isGridVisible) return <BaselineGrid>{component}</BaselineGrid>
-
-    return component
   },
 )

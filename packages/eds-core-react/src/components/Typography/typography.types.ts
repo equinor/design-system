@@ -6,7 +6,6 @@ export type TypographyElement = HeadingElement | 'p' | 'span' | 'div' | 'a'
 export type TypographyProps = {
   size?: TypographySize
   children?: React.ReactNode
-  isGridVisible?: boolean
 }
 
 export type HeadingProps = TypographyProps & {
