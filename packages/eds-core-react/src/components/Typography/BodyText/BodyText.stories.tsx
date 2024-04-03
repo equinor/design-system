@@ -2,7 +2,7 @@ import { BodyText } from './BodyText'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
 import { PropertyDocumentation } from '../_components/PropertyDocumentation'
-import { uiTextTokens } from '../_typography.tokens'
+import { bodyTextTokens, uiTextTokens } from '../_typography.tokens'
 import { BodyTextProps } from '../typography.types'
 
 const meta: Meta<typeof BodyText> = {
@@ -54,19 +54,24 @@ export const Demo: StoryFn<BodyTextProps> = () => {
 
 export const Sizes: StoryFn<BodyTextProps> = () => {
   return (
-    <BaselineGrid>
+    <>
       <BodyText size="3XS">{TEXT}</BodyText>
+      <PropertyDocumentation size="3XS" tokens={bodyTextTokens} />
       <BodyText size="2XS">{TEXT}</BodyText>
+      <PropertyDocumentation size="2XS" tokens={bodyTextTokens} />
       <BodyText size="XS">{TEXT}</BodyText>
+      <PropertyDocumentation size="XS" tokens={bodyTextTokens} />
       <BodyText size="SM">{TEXT}</BodyText>
+      <PropertyDocumentation size="SM" tokens={bodyTextTokens} />
       <BodyText size="BASE" as="h2">
         {TEXT}
       </BodyText>
+      <PropertyDocumentation size="BASE" tokens={bodyTextTokens} />
       <BodyText size="LG" as="h1">
         {TEXT}
       </BodyText>
       <PropertyDocumentation size="LG" tokens={uiTextTokens} />
-    </BaselineGrid>
+    </>
   )
 }
 
