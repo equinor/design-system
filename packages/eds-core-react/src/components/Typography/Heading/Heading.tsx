@@ -11,8 +11,8 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     ref,
   ) {
     const {
-      baselineTrimGrid,
-      capHeightTrim,
+      baselineTrimGridInEm: baselineTrimGrid,
+      capHeightTrimInEm: capHeightTrim,
       color,
       fontFamily,
       fontSize,

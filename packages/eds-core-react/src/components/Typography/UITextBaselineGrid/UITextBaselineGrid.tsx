@@ -11,8 +11,8 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
     ref,
   ) {
     const {
-      baselineTrimGrid,
-      capHeightTrim,
+      baselineTrimGridInEm: baselineTrim,
+      capHeightTrimInEm: capHeightTrim,
       color,
       fontFamily,
       fontSize,
@@ -31,7 +31,7 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
         $fontFamily={fontFamily}
         $color={color}
         $capHeightTrim={capHeightTrim}
-        $baselineTrim={baselineTrimGrid}
+        $baselineTrim={baselineTrim}
       >
         {children}
       </Typography>
