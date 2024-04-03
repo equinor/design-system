@@ -11,12 +11,12 @@ export const BodyText = forwardRef<HTMLElement, UITextProps>(
     const element = props.as ?? 'p'
 
     const {
-      fontSize,
-      lineHeight,
-      fontFamily,
-      color,
       baselineTrimGrid,
       capHeightTrim,
+      color,
+      fontFamily,
+      fontSize,
+      lineHeight,
     } = getTypographyProperties({
       size,
       tokens: bodyTextTokens,
