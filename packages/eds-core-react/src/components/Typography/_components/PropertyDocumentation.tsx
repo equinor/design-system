@@ -4,11 +4,19 @@ import { TypographySize, TypographyTokenCollection } from '../typography.types'
 import { getTypographyProperties } from '../typography.utils'
 
 const List = styled.ul`
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 0.875rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  list-style-position: inside;
 
   li ~ li {
     margin-top: 4px;
   }
+`
+
+const Key = styled.span`
+  font-weight: 500;
 `
 
 type PropertyDocumentationProps = {
@@ -25,18 +33,11 @@ export function PropertyDocumentation({
     tokens,
   })
 
-  {
-    Object.entries(properties).map(([key, value]) => (
-      <li key={key}>
-        {key}: {value ?? 'N/A'}
-      </li>
-    ))
-  }
   return (
     <List>
       {Object.entries(properties).map(([key, value]) => (
         <li key={key}>
-          {key}: {value ?? 'N/A'}
+          <Key>{key}</Key>: {value ?? 'N/A'}
         </li>
       ))}
     </List>
