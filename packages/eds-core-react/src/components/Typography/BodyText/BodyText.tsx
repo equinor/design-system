@@ -15,8 +15,8 @@ export const BodyText = forwardRef<HTMLElement, BodyTextProps>(
       capHeightTrimInEm: capHeightTrim,
       color,
       fontFamily,
-      fontSize,
-      lineHeight,
+      fontSizeInRem: fontSize,
+      lineHeightInRem: lineHeight,
     } = getTypographyProperties({
       size,
       tokens: bodyTextTokens,
