@@ -11,12 +11,12 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(
     const element = props.as ?? 'p'
 
     const {
-      fontSize,
-      lineHeight,
-      fontFamily,
-      color,
       baselineTrim,
       capHeightTrim,
+      color,
+      fontFamily,
+      fontSize,
+      lineHeight,
     } = getTypographyProperties({
       size,
       tokens: uiTextTokens,
