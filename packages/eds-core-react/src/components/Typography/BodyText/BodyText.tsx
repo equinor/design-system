@@ -11,8 +11,8 @@ export const BodyText = forwardRef<HTMLElement, BodyTextProps>(
     ref,
   ) {
     const {
-      baselineTrimGrid,
-      capHeightTrim,
+      baselineTrimGridInEm: baselineTrimGrid,
+      capHeightTrimInEm: capHeightTrim,
       color,
       fontFamily,
       fontSize,
