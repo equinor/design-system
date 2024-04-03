@@ -15,8 +15,8 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
       capHeightTrimInEm: capHeightTrim,
       color,
       fontFamily,
-      fontSize,
-      lineHeight,
+      fontSizeInRem: fontSize,
+      lineHeightInRem: lineHeight,
     } = getTypographyProperties({
       size,
       tokens: uiTextTokens,
