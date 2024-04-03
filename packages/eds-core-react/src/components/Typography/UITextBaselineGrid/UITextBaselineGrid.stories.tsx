@@ -1,15 +1,16 @@
-import { UIText } from './UIText'
+import { UITextBaselineGrid } from './UITextBaselineGrid'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
 import { UITextProps } from '../typography.types'
 import { PropertyDocumentation } from '../_components/PropertyDocumentation'
 import { uiTextTokens } from '../_typography.tokens'
+import { UIText } from '../UIText/UIText'
 
 const TEXT = 'This is some text, hi ho! This is line two'
 
-const meta: Meta<typeof UIText> = {
-  title: 'Typography/UIText',
-  component: UIText,
+const meta: Meta<typeof UITextBaselineGrid> = {
+  title: 'Typography/UITextBaselineGrid',
+  component: UITextBaselineGrid,
   args: {
     children: TEXT,
     size: 'BASE',
@@ -40,22 +41,35 @@ const meta: Meta<typeof UIText> = {
 export default meta
 
 export const Introduction: StoryFn<UITextProps> = (args) => {
-  return <UIText {...args} />
+  return <UITextBaselineGrid {...args} />
 }
 
 export const Demo: StoryFn<UITextProps> = () => {
   return (
     <BaselineGrid>
-      <UIText size="LG" as="h1">
+      <UITextBaselineGrid size="LG" as="h1">
         LG
-      </UIText>
-      <UIText size="2XS" as="h2">
+      </UITextBaselineGrid>
+      <UITextBaselineGrid size="2XS" as="h2">
         2XS
-      </UIText>
+      </UITextBaselineGrid>
 
-      <UIText size="BASE" as="h2">
+      <UITextBaselineGrid size="BASE" as="h2">
         {TEXT}
+      </UITextBaselineGrid>
+    </BaselineGrid>
+  )
+}
+
+export const UITextAndUITextBaselineGrid: StoryFn<UITextProps> = () => {
+  return (
+    <BaselineGrid>
+      <UIText size="BASE">
+        {TEXT} {TEXT}
       </UIText>
+      <UITextBaselineGrid size="BASE">
+        {TEXT} {TEXT}
+      </UITextBaselineGrid>
     </BaselineGrid>
   )
 }
@@ -63,21 +77,21 @@ export const Demo: StoryFn<UITextProps> = () => {
 export const Sizes: StoryFn<UITextProps> = () => {
   return (
     <>
-      <UIText size="3XS">{TEXT}</UIText>
+      <UITextBaselineGrid size="3XS">{TEXT}</UITextBaselineGrid>
       <PropertyDocumentation size="3XS" tokens={uiTextTokens} />
-      <UIText size="2XS">{TEXT}</UIText>
+      <UITextBaselineGrid size="2XS">{TEXT}</UITextBaselineGrid>
       <PropertyDocumentation size="2XS" tokens={uiTextTokens} />
-      <UIText size="XS">{TEXT}</UIText>
+      <UITextBaselineGrid size="XS">{TEXT}</UITextBaselineGrid>
       <PropertyDocumentation size="XS" tokens={uiTextTokens} />
-      <UIText size="SM">{TEXT}</UIText>
+      <UITextBaselineGrid size="SM">{TEXT}</UITextBaselineGrid>
       <PropertyDocumentation size="SM" tokens={uiTextTokens} />
-      <UIText size="BASE" as="h2">
+      <UITextBaselineGrid size="BASE" as="h2">
         {TEXT}
-      </UIText>
+      </UITextBaselineGrid>
       <PropertyDocumentation size="BASE" tokens={uiTextTokens} />
-      <UIText size="LG" as="h1">
+      <UITextBaselineGrid size="LG" as="h1">
         {TEXT}
-      </UIText>
+      </UITextBaselineGrid>
       <PropertyDocumentation size="LG" tokens={uiTextTokens} />
     </>
   )
