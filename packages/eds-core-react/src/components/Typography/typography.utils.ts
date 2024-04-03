@@ -78,8 +78,10 @@ export const getTypographyProperties = ({
   const token = tokens[size]
   const calculatedProperties = _getCalculatedTypographyProps(token)
   return {
-    fontSize: `${token.fontSize}px`,
-    lineHeight: `${calculatedProperties.lineHeight}px`,
+    fontSize: `${token.fontSize / 16}rem`,
+    fontSizeInPx: token.fontSize,
+    lineHeight: `${calculatedProperties.lineHeight / 16}rem`,
+    lineHeightInPx: calculatedProperties.lineHeight,
     fontFamily: token.fontFamily,
     color: token.color || '#000',
     capHeightTrim: calculatedProperties.trimValuesWithUnit.capHeightTrim,
