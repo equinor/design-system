@@ -10,8 +10,8 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
   ref,
 ) {
   const {
-    baselineTrim,
-    capHeightTrim,
+    baselineTrimInEm: baselineTrim,
+    capHeightTrimInEm: capHeightTrim,
     color,
     fontFamily,
     fontSize,
