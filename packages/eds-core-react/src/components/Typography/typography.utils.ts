@@ -47,6 +47,8 @@ export const getTextBoxTrimValues = ({
     descentScale,
     capHeightScale,
     lineHeightScale,
+    lineHeightNormal,
+    specifiedLineHeightOffset,
     capHeightTrim,
     baselineTrim,
     baselineTrimGrid,
