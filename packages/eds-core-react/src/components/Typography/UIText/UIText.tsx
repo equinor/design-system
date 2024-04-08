@@ -12,7 +12,6 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
   const {
     baselineTrimInEm: baselineTrim,
     capHeightTrimInEm: capHeightTrim,
-    color,
     fontFamily,
     fontSizeInRem: fontSize,
     lineHeightInRem: lineHeight,
@@ -28,7 +27,6 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
       $fontSize={fontSize}
       $lineHeight={lineHeight}
       $fontFamily={fontFamily}
-      $color={color}
       $capHeightTrim={capHeightTrim}
       $baselineTrim={baselineTrim}
       {...rest}
