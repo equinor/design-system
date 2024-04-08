@@ -18,7 +18,6 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     const {
       baselineTrimGridInEm: baselineTrim,
       capHeightTrimInEm: capHeightTrim,
-      color,
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
@@ -34,7 +33,6 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
-        $color={color}
         $capHeightTrim={capHeightTrim}
         $baselineTrim={baselineTrim}
         {...rest}

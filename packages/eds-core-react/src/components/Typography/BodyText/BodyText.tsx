@@ -13,7 +13,6 @@ export const BodyText = forwardRef<HTMLElement, BodyTextProps>(
     const {
       baselineTrimGridInEm: baselineTrim,
       capHeightTrimInEm: capHeightTrim,
-      color,
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
@@ -29,7 +28,6 @@ export const BodyText = forwardRef<HTMLElement, BodyTextProps>(
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
-        $color={color}
         $capHeightTrim={capHeightTrim}
         $baselineTrim={baselineTrim}
         {...rest}

@@ -13,7 +13,6 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
     const {
       baselineTrimGridInEm: baselineTrim,
       capHeightTrimInEm: capHeightTrim,
-      color,
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
@@ -29,7 +28,6 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
-        $color={color}
         $capHeightTrim={capHeightTrim}
         $baselineTrim={baselineTrim}
         {...rest}

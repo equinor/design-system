@@ -5,7 +5,6 @@ export type StyleHeadingProps = {
   $fontFamily: string
   $fontSize: string
   $lineHeight: string
-  $color: string
   $capHeightTrim: string
   $baselineTrim: string
 }
@@ -17,14 +16,12 @@ export const Typography = styled.p<StyleHeadingProps>`
     $fontFamily,
     $fontSize,
     $lineHeight,
-    $color,
     $capHeightTrim,
     $baselineTrim,
   }) => css`
     font-family: ${$fontFamily};
     font-size: ${$fontSize};
     line-height: ${$lineHeight};
-    color: ${$color};
 
     &::before {
       content: '';
