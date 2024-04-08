@@ -6,7 +6,7 @@ import { Typography } from '../_components/Typography'
 import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
 
 export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
-  { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children },
+  { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children, ...rest },
   ref,
 ) {
   const {
@@ -31,6 +31,7 @@ export const UIText = forwardRef<HTMLElement, UITextProps>(function UIText(
       $color={color}
       $capHeightTrim={capHeightTrim}
       $baselineTrim={baselineTrim}
+      {...rest}
     >
       {children}
     </Typography>

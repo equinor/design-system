@@ -7,7 +7,7 @@ import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
 
 export const BodyText = forwardRef<HTMLElement, BodyTextProps>(
   function BodyText(
-    { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children },
+    { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children, ...rest },
     ref,
   ) {
     const {
@@ -32,6 +32,7 @@ export const BodyText = forwardRef<HTMLElement, BodyTextProps>(
         $color={color}
         $capHeightTrim={capHeightTrim}
         $baselineTrim={baselineTrim}
+        {...rest}
       >
         {children}
       </Typography>

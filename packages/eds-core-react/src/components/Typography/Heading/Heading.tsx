@@ -7,7 +7,12 @@ import { DEFAULT_HEADING_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
 
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   function Heading(
-    { size = DEFAULT_TEXT_SIZE, as = DEFAULT_HEADING_ELEMENT, children },
+    {
+      size = DEFAULT_TEXT_SIZE,
+      as = DEFAULT_HEADING_ELEMENT,
+      children,
+      ...rest
+    },
     ref,
   ) {
     const {
@@ -32,6 +37,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
         $color={color}
         $capHeightTrim={capHeightTrim}
         $baselineTrim={baselineTrim}
+        {...rest}
       >
         {children}
       </Typography>
