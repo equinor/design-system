@@ -26,7 +26,6 @@ export type FontFamily = {
 export type TypographyToken = FontFamily & {
   fontSize: number
   lineHeightMultiplier: number
-  color?: string
 }
 
 export type TypographyTokenCollection = {

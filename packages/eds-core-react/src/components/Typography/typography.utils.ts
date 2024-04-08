@@ -106,6 +106,5 @@ export const getTypographyProperties = ({
     lineHeightInRem: `${lineHeight / 16}rem`,
     ...trimValuesWithUnit,
     fontFamily: token.fontFamily,
-    color: token.color || '#000',
   }
 }

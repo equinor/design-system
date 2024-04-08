@@ -19,37 +19,31 @@ export const headingTokens: TypographyTokenCollection = {
     ...inter,
     fontSize: 37,
     lineHeightMultiplier: 1.1,
-    color: '#000',
   },
   BASE: {
     ...inter,
     fontSize: 28,
     lineHeightMultiplier: 1.1,
-    color: '#000',
   },
   SM: {
     ...inter,
     fontSize: 21,
     lineHeightMultiplier: 1.1,
-    color: '#000',
   },
   XS: {
     ...inter,
     fontSize: 16,
     lineHeightMultiplier: 1.25,
-    color: '#000',
   },
   '2XS': {
     ...inter,
     fontSize: 12,
     lineHeightMultiplier: 1.25,
-    color: '#000',
   },
   '3XS': {
     ...inter,
     fontSize: 10.5,
     lineHeightMultiplier: 1.25,
-    color: '#000',
   },
 }
 
@@ -58,37 +52,31 @@ export const uiTextTokens: TypographyTokenCollection = {
     ...inter,
     fontSize: 21,
     lineHeightMultiplier: 1.125,
-    color: '#000',
   },
   BASE: {
     ...inter,
     fontSize: 16,
     lineHeightMultiplier: 1.125,
-    color: '#000',
   },
   SM: {
     ...inter,
     fontSize: 14,
     lineHeightMultiplier: 1.125,
-    color: '#000',
   },
   XS: {
     ...inter,
     fontSize: 12,
     lineHeightMultiplier: 1.125, // TODO: the line-height of this size should be calculated to 16px but is now 14px.
-    color: '#000',
   },
   '2XS': {
     ...inter,
     fontSize: 10.5,
     lineHeightMultiplier: 1.125,
-    color: '#000',
   },
   '3XS': {
     ...inter,
     fontSize: 9,
     lineHeightMultiplier: 1.125,
-    color: '#000',
   },
 }
 
@@ -97,36 +85,30 @@ export const bodyTextTokens: TypographyTokenCollection = {
     ...inter,
     fontSize: 21,
     lineHeightMultiplier: 1.5,
-    color: '#000',
   },
   BASE: {
     ...inter,
     fontSize: 16,
     lineHeightMultiplier: 1.5,
-    color: '#000',
   },
   SM: {
     ...inter,
     fontSize: 14,
     lineHeightMultiplier: 1.5,
-    color: '#000',
   },
   XS: {
     ...inter,
     fontSize: 12,
     lineHeightMultiplier: 1.5, // TODO: the line-height of this size should be calculated to 16px but is now 20px
-    color: '#000',
   },
   '2XS': {
     ...inter,
     fontSize: 10.5,
     lineHeightMultiplier: 1.5,
-    color: '#000',
   },
   '3XS': {
     ...inter,
     fontSize: 9,
     lineHeightMultiplier: 1.5, // TODO: the line-height of this size should be calculated to 28px but is now 24px
-    color: '#000',
   },
 }
