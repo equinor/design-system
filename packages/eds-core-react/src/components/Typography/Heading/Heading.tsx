@@ -1,12 +1,12 @@
-import { forwardRef } from 'react'
-import { getTypographyProperties } from '../typography.utils'
+import { forwardRef, memo } from 'react'
 import { HeadingProps } from '../typography.types'
-import { headingTokens } from '../_typography.tokens'
 import { Typography } from '../_components/Typography'
+import { headingTokens as tokens } from '../_typography.tokens'
 import { DEFAULT_HEADING_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
+import { getTypographyProperties } from '../typography.utils'
 
-export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
-  function Heading(
+export const Heading = memo(
+  forwardRef<HTMLHeadingElement, HeadingProps>(function Heading(
     {
       size = DEFAULT_TEXT_SIZE,
       as = DEFAULT_HEADING_ELEMENT,
@@ -21,10 +21,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
-    } = getTypographyProperties({
-      size,
-      tokens: headingTokens,
-    })
+    } = getTypographyProperties({ size, tokens })
 
     return (
       <Typography
@@ -40,5 +37,5 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
         {children}
       </Typography>
     )
-  },
+  }),
 )

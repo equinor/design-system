@@ -1,12 +1,12 @@
-import { forwardRef } from 'react'
-import { getTypographyProperties } from '../typography.utils'
+import { forwardRef, memo } from 'react'
 import { UITextProps } from '../typography.types'
-import { uiTextTokens } from '../_typography.tokens'
+import { uiTextTokens as tokens } from '../_typography.tokens'
 import { Typography } from '../_components/Typography'
 import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
+import { getTypographyProperties } from '../typography.utils'
 
-export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
-  function UITextBaselineGrid(
+export const UITextBaselineGrid = memo(
+  forwardRef<HTMLElement, UITextProps>(function UITextBaselineGrid(
     { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children, ...rest },
     ref,
   ) {
@@ -16,10 +16,7 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
-    } = getTypographyProperties({
-      size,
-      tokens: uiTextTokens,
-    })
+    } = getTypographyProperties({ size, tokens })
 
     return (
       <Typography
@@ -35,5 +32,5 @@ export const UITextBaselineGrid = forwardRef<HTMLElement, UITextProps>(
         {children}
       </Typography>
     )
-  },
+  }),
 )
