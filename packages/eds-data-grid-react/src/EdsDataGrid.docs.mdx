@@ -119,7 +119,32 @@ See [Tanstack docs for more](https://tanstack.com/table/v8/docs/api/features/sor
 ### Filtering
 
 Comes with prebuilt functionality for column filtering, defaulting to range (from - to) for numbers and multi-select for strings.
-Empty values are shown as `<Blank>` in the dropdown
+Empty values are shown as `<Blank>` in the dropdown.
+
+If you need a filter outside of these two variants, you can add a custom filter in `columnDef.header`, and set `columnDef.meta.customFilterInput` to `true`.
+We expose a helper (`import { FilterWrapper } from '@equinor/eds-data-grid-react'`) to handle the filtering & layout and keep it in line with the other fields.
+
+Simple example for string-matching:
+```tsx
+const TitleFilterComponent = ({
+  onChange,
+  value,
+}: {
+  onChange: (value: string) => void
+  value: string
+}) => (
+    <TextField
+      label={'Custom filter'}
+      id={'my-custom-filter'}
+      value={value ?? ''}
+      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+        onChange(e.currentTarget.value)
+      }
+    />
+  )
+```
+
+**Note: By using custom filters, you also lose the built-in sort indicators. You can add this yourself by using the `SortIndicator` component**
 
 <Canvas of={ComponentStories.ColumnFiltering} />
 

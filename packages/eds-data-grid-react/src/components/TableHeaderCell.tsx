@@ -6,13 +6,13 @@ import {
   SortDirection,
   Table as TanStackTable,
 } from '@tanstack/react-table'
-import { Icon, Table } from '@equinor/eds-core-react'
-import { arrow_down, arrow_up } from '@equinor/eds-icons'
+import { Table } from '@equinor/eds-core-react'
 import { useTableContext } from '../EdsDataGridContext'
-import { Filter } from './Filter'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { useMemo } from 'react'
+import { FilterWrapper } from './FilterWrapper'
+import { SortIndicator } from './SortIndicator'
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -132,16 +132,16 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
             {flexRender(header.column.columnDef.header, header.getContext())}
           </span>
         </div>
-        {{
-          asc: <Icon data={arrow_up} />,
-          desc: <Icon data={arrow_down} />,
-        }[header.column.getIsSorted() as string] ?? null}
+        {header.column.columnDef.meta?.customFilterInput && (
+          <SortIndicator column={header.column} />
+        )}
 
-        {header.column.getCanFilter() ? (
+        {header.column.getCanFilter() &&
+        !header.column.columnDef.meta?.customFilterInput ? (
           // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
           <div onClick={(e) => e.stopPropagation()}>
-            <Filter column={header.column} table={table} />
+            <FilterWrapper column={header.column} />
           </div>
         ) : null}
       </>

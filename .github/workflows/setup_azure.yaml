@@ -28,7 +28,7 @@ jobs:
         with:
           repository: 'equinor/design-system-internal'
           ref: main
-          token: ${{ secrets.PAT_INTERNAL }}
+          ssh-key: ${{ secrets.DEPLOY_KEY_INTERNAL }}
       # Do the actual deployment
       - name: deploy 🚀
         id: deploy
