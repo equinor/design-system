@@ -84,6 +84,7 @@ module.exports = {
         'import/no-default-export': ['error'],
         'import/newline-after-import': ['error'],
         'import/prefer-default-export': ['off'],
+        'import/no-named-as-default': ['off'],
         'import/namespace': ['error', { allowComputed: true }],
         // TODO: Enable this rule once "functions" support is released https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
         'react/require-default-props': [
