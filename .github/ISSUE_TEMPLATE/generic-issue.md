@@ -6,20 +6,22 @@ labels: ''
 assignees: ''
 
 ---
-**Description**
+#### General objective
 
-A clear and concise description of what this issue is about.
+A clear and concise description of the main goal
 
-**Definition of done**
+#### Specific objectives
 
-- 
-- 
-- 
+(A list of) actionable goals that leads to fulfilling the general objective
 
-**Owner**
+#### Outcome
 
-Assign an owner to the issue to make it easier to know who’s responsible if there are more than one assignee at some point in the life cycle.  
+The definition of done
 
-owner: @octocat
+#### Owner
+
+Assign an owner to the issue to make it easier to know who’s responsible if there are more than one assignee at some point in the life cycle. Example:
+
+@octocat
 
 
