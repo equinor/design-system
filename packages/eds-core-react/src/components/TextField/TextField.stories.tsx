@@ -236,26 +236,39 @@ WithUnit.decorators = [
   },
 ]
 
-export const WithIcons: Story = () => (
-  <>
-    <TextField
-      id="icons-text"
-      defaultValue="Input text"
-      label="Label text"
-      meta="Meta"
-      helperText="Helper Text"
-      inputIcon={<Icon name="done" title="Done" />}
-    />
-    <TextField
-      id="storybook-multiline-two"
-      placeholder="Placeholder text that spans multiple lines"
-      label="With icon"
-      multiline
-      rows={3}
-      inputIcon={<Icon name="comment" title="Comment" />}
-    />
-  </>
-)
+export const WithIcons: Story = () => {
+  const [icon, setIcon] = useState(true)
+  return (
+    <>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={() => setIcon(!icon)}
+          style={{ marginBottom: '16px' }}
+        >
+          Toggle Icon
+        </Button>
+        <TextField
+          id="icons-text"
+          type="date"
+          defaultValue="Input text"
+          label="Label text"
+          meta="Meta"
+          helperText="Helper Text"
+          inputIcon={icon && <Icon name="done" title="Done" />}
+        />
+      </div>
+      <TextField
+        id="storybook-multiline-two"
+        placeholder="Placeholder text that spans multiple lines"
+        label="With icon"
+        multiline
+        rows={3}
+        inputIcon={<Icon name="comment" title="Comment" />}
+      />
+    </>
+  )
+}
 WithIcons.storyName = 'With icons'
 WithIcons.decorators = [
   (Story) => {
