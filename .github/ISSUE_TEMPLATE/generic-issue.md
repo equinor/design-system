@@ -12,10 +12,9 @@ A clear and concise description of what this issue is about.
 
 **Definition of done**
 
-1.
-2.
-3.
-4.
+- 
+- 
+- 
 
 **Owner**
 
