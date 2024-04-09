@@ -92,8 +92,8 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.26.9",
-    "downshift": "9.0.4",
-    "@tanstack/react-virtual": "3.2.0"
+    "@tanstack/react-virtual": "3.2.0",
+    "downshift": "9.0.4"
   },
   "engines": {
     "pnpm": ">=4",
