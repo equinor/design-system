@@ -41,7 +41,7 @@ export const inter: FontMetrics = {
 export const equinor: FontMetrics = {
   familyName: 'Equinor Light',
   capHeight: 700,
-  ascent: 943,
+  ascent: 788,
   descent: 212,
   lineGap: 0,
   unitsPerEm: 1000,
