@@ -36,10 +36,11 @@ export const getTextBoxTrimValues = ({
     (ascentScale - capHeightScale - specifiedLineHeightOffset / fontSize) *
     fontSize *
     -1
+  const computedCapHeight = fontSize * capHeightScale
   const baselineTrim =
     (descentScale - specifiedLineHeightOffset / fontSize) * fontSize * -1
   const baselineTrimGrid =
-    baselineTrim + roundUpToNearest4(lineHeightNormal) - lineHeightNormal
+    baselineTrim + roundUpToNearest4(computedCapHeight) - computedCapHeight
 
   return {
     contentArea,
