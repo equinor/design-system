@@ -25,13 +25,13 @@ export const Typography = styled.p<StyleHeadingProps>`
 
     &::before {
       content: '';
-      margin-bottom: ${$capHeightTrim};
+      margin-bottom: ${$baselineTrim};
       display: table;
     }
 
     &::after {
       content: '';
-      margin-top: ${$baselineTrim};
+      margin-top: ${$capHeightTrim};
       display: table;
     }
   `}
