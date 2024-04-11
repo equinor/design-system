@@ -3,6 +3,7 @@ import {
   useState,
   TextareaHTMLAttributes,
   useCallback,
+  CSSProperties,
 } from 'react'
 import * as tokens from '../Input/Input.tokens'
 import { mergeRefs, useAutoResize } from '@equinor/eds-utils'
@@ -60,13 +61,21 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...other,
     }
 
-    const adornmentsToTop = { style: { alignItems: 'flex-start' } }
+    const leftAdornmentStyles = {
+      style: { alignItems: 'flex-start' },
+    }
+    const rigthAdornmentStyles = {
+      style: {
+        alignItems: 'flex-start',
+        pointerEvents: 'none' as CSSProperties['pointerEvents'],
+      },
+    }
 
     return (
       <Input
         as="textarea"
-        rightAdornmentsProps={adornmentsToTop}
-        leftAdornmentsProps={adornmentsToTop}
+        rightAdornmentsProps={rigthAdornmentStyles}
+        leftAdornmentsProps={leftAdornmentStyles}
         style={{ height: 'auto' }}
         {...inputProps}
       />
