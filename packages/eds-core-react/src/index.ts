@@ -37,4 +37,5 @@ export * from './components/Paper'
 export * from './components/Autocomplete'
 export * from './components/InputWrapper'
 export * from './components/SideBar'
+export * from './components/Datepicker'
 /* eslint-enable */
