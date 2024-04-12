@@ -4,9 +4,6 @@ import {
   TextareaHTMLAttributes,
   forwardRef,
   ForwardedRef,
-  useState,
-  useCallback,
-  useEffect,
 } from 'react'
 import { useId } from '@equinor/eds-utils'
 import { InputWrapper } from '../InputWrapper'
@@ -85,23 +82,17 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     ref,
   ) {
     const helperTextId = useId(null, 'helpertext')
-    const [, updateState] = useState<object>({})
-    const forceUpdate = useCallback(() => updateState({}), [])
-    //if rightAdornments are updated dynamically, we need to force re-render the component so the Input can set correct padding
-    useEffect(() => {
-      forceUpdate()
-    }, [unit, inputIcon, forceUpdate])
-
+    const hasRightAdornments = Boolean(unit || inputIcon)
     let fieldProps = {
       'aria-invalid': variant === 'error' || undefined,
       disabled,
       placeholder,
       id,
       variant,
-      rightAdornments: (
+      rightAdornments: hasRightAdornments && (
         <>
           {inputIcon}
-          <span>{unit}</span>
+          {unit && <span>{unit}</span>}
         </>
       ),
       rowsMax,

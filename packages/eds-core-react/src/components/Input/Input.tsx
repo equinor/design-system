@@ -2,10 +2,11 @@ import {
   forwardRef,
   ReactNode,
   useState,
-  useCallback,
   CSSProperties,
   ElementType,
   ComponentPropsWithoutRef,
+  useRef,
+  useEffect,
 } from 'react'
 import styled, { css } from 'styled-components'
 import {
@@ -169,42 +170,55 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       style,
       leftAdornmentsProps,
       rightAdornmentsProps,
-      leftAdornmentsWidth,
-      rightAdornmentsWidth,
+      leftAdornmentsWidth: manualLeftAdornmentsWidth,
+      rightAdornmentsWidth: manualRightAdornmentsWidth,
       ...other
     },
     ref,
   ) {
+    const leftAdornmentsRef = useRef<HTMLDivElement>(null)
+    const rightAdornmentsRef = useRef<HTMLDivElement>(null)
     const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
     const { density } = useEds()
     const _token = useToken({ density }, inputVariant)() as InputToken
 
-    const [rightAdornmentsRef, setRightAdornmentsRef] =
-      useState<HTMLDivElement>()
-    const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
+    const [rightAdornmentsWidth, setRightAdornmentsWidth] = useState<number>(0)
+    const [leftAdornmentsWidth, setLeftAdornmentsWidth] = useState<number>(0)
 
-    const token = useCallback((): InputToken => {
-      const _leftAdornmentsWidth =
-        leftAdornmentsWidth ||
-        (leftAdornmentsRef ? leftAdornmentsRef.clientWidth : 0)
-      const _rightAdornmentsWidth =
-        rightAdornmentsWidth ||
-        (rightAdornmentsRef ? rightAdornmentsRef.clientWidth : 0)
-      return {
-        ..._token,
-        spacings: {
-          ..._token.spacings,
-          left: `${_leftAdornmentsWidth + parseInt(_token.spacings.left)}px`,
-          right: `${_rightAdornmentsWidth + parseInt(_token.spacings.right)}px`,
-        },
-      }
+    useEffect(() => {
+      const rightAdornmentsWidth: number =
+        manualRightAdornmentsWidth ||
+        (!!rightAdornments && rightAdornmentsRef?.current?.clientWidth) ||
+        0
+      setRightAdornmentsWidth(rightAdornmentsWidth)
     }, [
-      leftAdornmentsWidth,
-      leftAdornmentsRef,
-      rightAdornmentsWidth,
+      manualRightAdornmentsWidth,
+      rightAdornments,
       rightAdornmentsRef,
-      _token,
-    ])()
+      setRightAdornmentsWidth,
+    ])
+
+    useEffect(() => {
+      const leftAdornmentsWidth: number =
+        manualLeftAdornmentsWidth ||
+        (!!leftAdornments && leftAdornmentsRef?.current?.clientWidth) ||
+        0
+      setLeftAdornmentsWidth(leftAdornmentsWidth)
+    }, [
+      manualLeftAdornmentsWidth,
+      leftAdornments,
+      leftAdornmentsRef,
+      setLeftAdornmentsWidth,
+    ])
+
+    const token = {
+      ..._token,
+      spacings: {
+        ..._token.spacings,
+        left: `${leftAdornmentsWidth + parseInt(_token.spacings.left)}px`,
+        right: `${rightAdornmentsWidth + parseInt(_token.spacings.right)}px`,
+      },
+    }
 
     const inputProps = {
       ref,
@@ -228,33 +242,27 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
 
     const _leftAdornmentProps = {
       ...leftAdornmentsProps,
-      ref: setLeftAdornmentsRef,
       $token: token,
     }
     const _rightAdornmentProps = {
       ...rightAdornmentsProps,
-      ref: setRightAdornmentsRef,
       $token: token,
     }
 
     return (
       // Not using <ThemeProvider> because of cascading styling messing with adornments
       <Container {...containerProps}>
-        {leftAdornments ? (
-          <LeftAdornments {..._leftAdornmentProps}>
-            {leftAdornments}
-          </LeftAdornments>
-        ) : null}
+        <LeftAdornments {..._leftAdornmentProps} ref={leftAdornmentsRef}>
+          {leftAdornments}
+        </LeftAdornments>
         <StyledInput
           $paddingLeft={token.spacings.left}
           $paddingRight={token.spacings.right}
           {...inputProps}
         />
-        {rightAdornments ? (
-          <RightAdornments {..._rightAdornmentProps}>
-            {rightAdornments}
-          </RightAdornments>
-        ) : null}
+        <RightAdornments {..._rightAdornmentProps} ref={rightAdornmentsRef}>
+          {rightAdornments}
+        </RightAdornments>
       </Container>
     )
   })

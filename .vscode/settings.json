@@ -18,5 +18,6 @@
   "task.allowAutomaticTasks": "off",
   "[bicep]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-bicep"
-  }
+  },
+  "cSpell.words": ["Overridable"]
 }
