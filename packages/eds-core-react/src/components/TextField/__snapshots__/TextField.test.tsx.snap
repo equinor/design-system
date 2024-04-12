@@ -83,24 +83,6 @@ exports[`TextField Matches snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c5 {
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  display: flex;
-  align-items: center;
-  font-family: Equinor;
-  font-size: 0.750rem;
-  font-weight: 500;
-  line-height: 1.333em;
-  color: var(--eds-input-adornment-color);
-}
-
-.c6 {
-  right: 0;
-  padding-right: 8px;
-}
-
 <div
     class=""
     style="width: 100%;"
@@ -124,11 +106,6 @@ exports[`TextField Matches snapshot 1`] = `
         style="resize: none;"
         type="text"
       />
-      <div
-        class="c5 c6"
-      >
-        <span />
-      </div>
     </div>
   </div>
 </DocumentFragment>
