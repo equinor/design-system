@@ -82,14 +82,14 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     ref,
   ) {
     const helperTextId = useId(null, 'helpertext')
-
+    const hasRightAdornments = Boolean(unit || inputIcon)
     let fieldProps = {
       'aria-invalid': variant === 'error' || undefined,
       disabled,
       placeholder,
       id,
       variant,
-      rightAdornments: (
+      rightAdornments: hasRightAdornments && (
         <>
           {inputIcon}
           <span>{unit}</span>
