@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { anchor } from '@equinor/eds-icons'
+import { anchor, done } from '@equinor/eds-icons'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import styled from 'styled-components'
 import { Stack } from './../../../.storybook/components'
 import page from './Input.docs.mdx'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
+
+const icons = {
+  done,
+}
+
+Icon.add(icons)
 
 const meta: Meta<typeof Input> = {
   title: 'Inputs/Input',
@@ -157,6 +163,69 @@ const SmallButton = styled(Button)`
   height: 24px;
   width: 24px;
 `
+
+export const WithIcons: StoryFn<InputProps> = () => {
+  const [icon, setIcon] = useState(true)
+  return (
+    <>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={() => setIcon(!icon)}
+          style={{ marginBottom: '16px' }}
+        >
+          Toggle Icon
+        </Button>
+        <Input
+          id="icons-text"
+          type="date"
+          defaultValue="Input text"
+          label="Label text"
+          meta="Meta"
+          helperText="Helper Text"
+          leftAdornments={icon && <Icon name="done" title="Done" />}
+        />
+        <Input
+          id="icons-text"
+          type="date"
+          defaultValue="Input text"
+          label="Label text"
+          meta="Meta"
+          helperText="Helper Text"
+          rightAdornments={icon && <Icon name="done" title="Done" />}
+        />
+        <Input
+          id="icons-text"
+          type="date"
+          defaultValue="Input text"
+          label="Label text"
+          meta="Meta"
+          helperText="Helper Text"
+          rightAdornments={icon && <Icon name="done" title="Done" />}
+          leftAdornments={icon && <Icon name="done" title="Done" />}
+        />
+      </div>
+    </>
+  )
+}
+
+WithIcons.storyName = 'With icons'
+WithIcons.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, auto)',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const WithAdornments: StoryFn<InputProps> = () => {
   return (
