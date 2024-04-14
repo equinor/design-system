@@ -47,7 +47,7 @@ export function CalendarHeader({
         >
           <Icon data={fast_rewind} />
         </Button>
-        <Typography variant={'h5'} group={'heading'}>
+        <Typography variant={'h5'} group={'heading'} data-testid={'heading'}>
           {title}
         </Typography>
         <Button
@@ -64,6 +64,7 @@ export function CalendarHeader({
       <div>
         <Button
           variant={'ghost_icon'}
+          aria-label={'Previous month'}
           disabled={previousMonthDisabled}
           onClick={() => state.focusPreviousPage()}
         >
@@ -73,6 +74,7 @@ export function CalendarHeader({
           variant={'ghost_icon'}
           onClick={() => state.focusNextPage()}
           disabled={nextMonthDisabled}
+          aria-label={'Next month'}
         >
           <Icon data={chevron_right} />
         </Button>
