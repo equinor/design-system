@@ -4,6 +4,7 @@ import { DateRangePicker } from './DateRangePicker'
 import { I18nProvider } from 'react-aria'
 import { ReactNode } from 'react'
 import userEvent from '@testing-library/user-event'
+import { DatePicker } from './DatePicker'
 
 const RangeContainer = ({ children }: { children: ReactNode }) => {
   return <I18nProvider locale={'en-US'}>{children}</I18nProvider>
@@ -123,5 +124,57 @@ describe('DateRangePicker', () => {
     await userEvent.click(previousYear)
     await userEvent.click(previousYear)
     expect(header).toHaveTextContent('May 2023')
+  })
+
+  it('should be possible to limit the min/max dates', async () => {
+    const date = {
+      from: new Date(2024, 4, 4),
+      to: new Date(2024, 4, 6),
+    }
+    const min = new Date(2024, 4, 2)
+    const max = new Date(2024, 4, 30)
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DateRangePicker
+          label={'Datepicker'}
+          value={date}
+          minValue={min}
+          maxValue={max}
+        />
+      </I18nProvider>,
+    )
+
+    const picker = screen.getByLabelText('Toggle calendar')
+    await userEvent.click(picker)
+    const header = screen.getByTestId('heading')
+    expect(header).toHaveTextContent('May 2024')
+    const disabledMinElement = screen.getByLabelText('Wednesday, May 1, 2024')
+    const disabledMaxElement = screen.getByLabelText('Friday, May 31, 2024')
+    expect(disabledMinElement).toHaveAttribute('aria-disabled', 'true')
+    expect(disabledMaxElement).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('should be possible to limit specific days', async () => {
+    const date = {
+      from: new Date(2024, 4, 4),
+      to: new Date(2024, 4, 6),
+    }
+
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DateRangePicker
+          label={'Datepicker'}
+          value={date}
+          isDateUnavailable={(d) => d.getDate() === 31}
+        />
+      </I18nProvider>,
+    )
+
+    const picker = screen.getByLabelText('Toggle calendar')
+    await userEvent.click(picker)
+    const header = screen.getByTestId('heading')
+    expect(header).toHaveTextContent('May 2024')
+    const disabledDate = screen.getByLabelText('Friday, May 31, 2024')
+    expect(disabledDate).toHaveAttribute('aria-disabled', 'true')
   })
 })
