@@ -15,6 +15,7 @@ import {
   useEds,
 } from '../../../index'
 import { GroupDOMAttributes } from '@react-types/shared'
+import { filterDOMProps } from '@react-aria/utils'
 
 const getVariant = (variant: InputWrapperProps['color']) => {
   if (variant === 'error') {
@@ -91,7 +92,7 @@ export const InputFieldWrapper = forwardRef<HTMLDivElement, WrapperProps>(
         $density={density}
         $variant={color}
         $disabled={disabled ?? false}
-        {...props}
+        {...filterDOMProps(props)}
       >
         {children}
       </StyledInputFieldWrapper>

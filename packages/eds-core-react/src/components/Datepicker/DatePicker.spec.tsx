@@ -32,7 +32,7 @@ describe('DatePicker', () => {
 
     render(
       <I18nProvider locale={'en-US'}>
-        <DatePicker label={'Datepicker'} onChange={onChange} />
+        <DatePicker label={'Datepicker'} value={null} onChange={onChange} />
       </I18nProvider>,
     )
     const monthEl = screen.getByText('mm')

@@ -4,6 +4,7 @@ import { KeyboardEvent } from 'react'
 import { Button } from '../../Button/Button'
 import styled, { css } from 'styled-components'
 import { AriaButtonProps } from 'react-aria'
+import { filterDOMProps } from '@react-aria/utils'
 
 const StyledButton = styled(Button)(
   () => css`
@@ -55,7 +56,7 @@ export const Toggle = ({
         <Icon data={close} />
       </StyledButton>
       <StyledButton
-        {...buttonProps}
+        {...filterDOMProps(buttonProps)}
         disabled={disabled}
         aria-label={'Toggle calendar'}
         variant={'ghost_icon'}

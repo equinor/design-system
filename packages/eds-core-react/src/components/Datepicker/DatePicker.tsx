@@ -54,7 +54,13 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     timezone = timezone ?? defaultTimezone
     const [innerValue, setInnerValue] = useState<
       CalendarDate | CalendarDateTime
-    >()
+    >(
+      value
+        ? time
+          ? toCalendarDateTime(fromDate(value, timezone))
+          : toCalendarDate(fromDate(value, timezone))
+        : null,
+    )
     const [open, setOpen] = useState<boolean | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
     const pickerRef = useRef<HTMLDivElement | null>(null)
@@ -129,6 +135,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         minValue: _minValue,
         maxValue: _maxValue,
         isDateUnavailable: _isDateUnavailable,
+        label,
       }
     }, [
       props,
@@ -138,6 +145,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       _minValue,
       _maxValue,
       _isDateUnavailable,
+      label,
     ])
 
     const pickerState = useDatePickerState(dateCreateProps)
