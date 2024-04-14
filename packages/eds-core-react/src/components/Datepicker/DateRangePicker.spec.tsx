@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { DateRangePicker } from './DateRangePicker'
 import { I18nProvider } from 'react-aria'
-import { DatePicker } from './DatePicker'
 import { ReactNode } from 'react'
 
 const RangeContainer = ({ children }: { children: ReactNode }) => {
