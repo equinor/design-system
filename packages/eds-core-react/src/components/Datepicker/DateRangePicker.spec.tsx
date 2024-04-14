@@ -3,6 +3,7 @@ import { axe } from 'jest-axe'
 import { DateRangePicker } from './DateRangePicker'
 import { I18nProvider } from 'react-aria'
 import { ReactNode } from 'react'
+import userEvent from '@testing-library/user-event'
 
 const RangeContainer = ({ children }: { children: ReactNode }) => {
   return <I18nProvider locale={'en-US'}>{children}</I18nProvider>
@@ -40,5 +41,87 @@ describe('DateRangePicker', () => {
       'aria-disabled',
       'true',
     )
+  })
+
+  it('Should be possible to pick a date-range from the calendar', async () => {
+    const onChange = jest.fn()
+    const date = {
+      from: new Date(2024, 4, 4),
+      to: new Date(2024, 4, 6),
+    }
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DateRangePicker
+          label={'Datepicker'}
+          value={date}
+          onChange={onChange}
+        />
+      </I18nProvider>,
+    )
+
+    const picker = screen.getByLabelText('Toggle calendar')
+    expect(picker).toBeDefined()
+    await userEvent.click(picker)
+    expect(screen.getByText('May 2024')).toBeDefined()
+    const highlighted = screen.getAllByRole('gridcell', { selected: true })
+    highlighted.forEach((cell, i) => {
+      expect(cell).toHaveTextContent(`${i + 4}`)
+    })
+    const fromDay = screen.getByLabelText('Wednesday, May 1, 2024')
+    await userEvent.click(fromDay)
+    const toDay = screen.getByLabelText('Thursday, May 2, 2024')
+    await userEvent.click(toDay)
+    expect(onChange).toHaveBeenCalledWith({
+      from: new Date(2024, 4, 1),
+      to: new Date(2024, 4, 2),
+    })
+  })
+
+  it('Should be possible to change month', async () => {
+    const date = {
+      from: new Date(2024, 4, 4),
+      to: new Date(2024, 4, 6),
+    }
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DateRangePicker label={'Datepicker'} value={date} />
+      </I18nProvider>,
+    )
+
+    const picker = screen.getByLabelText('Toggle calendar')
+    await userEvent.click(picker)
+    const header = screen.getByTestId('heading')
+    expect(header).toHaveTextContent('May 2024')
+    const nextMonth = screen.getByLabelText('Next month')
+    await userEvent.click(nextMonth)
+    expect(header).toHaveTextContent('June 2024')
+    const previousMonth = screen.getByLabelText('Previous month')
+    await userEvent.click(previousMonth)
+    await userEvent.click(previousMonth)
+    expect(header).toHaveTextContent('April 2024')
+  })
+
+  it('Should be possible to change year', async () => {
+    const date = {
+      from: new Date(2024, 4, 4),
+      to: new Date(2024, 4, 6),
+    }
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DateRangePicker label={'Datepicker'} value={date} />
+      </I18nProvider>,
+    )
+
+    const picker = screen.getByLabelText('Toggle calendar')
+    await userEvent.click(picker)
+    const header = screen.getByTestId('heading')
+    expect(header).toHaveTextContent('May 2024')
+    const nextYear = screen.getByLabelText('Next year')
+    await userEvent.click(nextYear)
+    expect(header).toHaveTextContent('May 2025')
+    const previousYear = screen.getByLabelText('Previous year')
+    await userEvent.click(previousYear)
+    await userEvent.click(previousYear)
+    expect(header).toHaveTextContent('May 2023')
   })
 })
