@@ -4,7 +4,6 @@ import { DateRangePicker } from './DateRangePicker'
 import { I18nProvider } from 'react-aria'
 import { ReactNode } from 'react'
 import userEvent from '@testing-library/user-event'
-import { DatePicker } from './DatePicker'
 
 const RangeContainer = ({ children }: { children: ReactNode }) => {
   return <I18nProvider locale={'en-US'}>{children}</I18nProvider>
