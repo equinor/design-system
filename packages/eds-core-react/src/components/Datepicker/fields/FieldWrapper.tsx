@@ -86,13 +86,21 @@ type WrapperProps = {
 export const InputFieldWrapper = forwardRef<HTMLDivElement, WrapperProps>(
   ({ children, color, disabled, ...props }, ref) => {
     const { density } = useEds()
+    // As the props returned are designed for react-aria, some of them are not valid DOM props (i.e. onPress).
+    // The filterDOMProps-method strips out the invalid props, but it also removes event listeners due to casing
+    const filteredProps = filterDOMProps(props)
+    // filterDOMProps also strips event handlers
+    const eventHandlers = Object.keys(props)
+      .filter((k) => k.startsWith('on'))
+      .reduce((a, b) => ({ ...a, [b]: props[b] }), {})
     return (
       <StyledInputFieldWrapper
         ref={ref}
         $density={density}
         $variant={color}
         $disabled={disabled ?? false}
-        {...filterDOMProps(props)}
+        {...filteredProps}
+        {...eventHandlers}
       >
         {children}
       </StyledInputFieldWrapper>
