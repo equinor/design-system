@@ -160,4 +160,44 @@ describe('DatePicker', () => {
     const disabledDate = screen.getByLabelText('Friday, May 31, 2024')
     expect(disabledDate).toHaveAttribute('aria-disabled', 'true')
   })
+
+  it('should be localized', () => {
+    const date = new Date(2024, 4, 4)
+
+    const { rerender } = render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={date}
+          isDateUnavailable={(d) => d.getDate() === 31}
+        />
+      </I18nProvider>,
+    )
+
+    expect(screen.getByRole('presentation')).toHaveTextContent('05/04/2024')
+
+    rerender(
+      <I18nProvider locale={'no'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={date}
+          isDateUnavailable={(d) => d.getDate() === 31}
+        />
+      </I18nProvider>,
+    )
+
+    expect(screen.getByRole('presentation')).toHaveTextContent('04.05.2024')
+
+    rerender(
+      <I18nProvider locale={'zh-Hans-SG'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={date}
+          isDateUnavailable={(d) => d.getDate() === 31}
+        />
+      </I18nProvider>,
+    )
+
+    expect(screen.getByRole('presentation')).toHaveTextContent('2024年05月04日')
+  })
 })
