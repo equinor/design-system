@@ -92,7 +92,10 @@ export const InputFieldWrapper = forwardRef<HTMLDivElement, WrapperProps>(
     // filterDOMProps also strips event handlers
     const eventHandlers = Object.keys(props)
       .filter((k) => k.startsWith('on'))
-      .reduce((a, b) => ({ ...a, [b]: props[b] }), {})
+      .reduce(
+        (a, b) => ({ ...a, [b]: props[b] as EventListener }),
+        {},
+      ) as Record<string, EventListener>
     return (
       <StyledInputFieldWrapper
         ref={ref}

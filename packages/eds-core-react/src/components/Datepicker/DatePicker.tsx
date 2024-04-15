@@ -25,7 +25,6 @@ import {
 import { useDatePicker, useLocale } from 'react-aria'
 import { useDatePickerState } from '@react-stately/datepicker'
 import { DatePickerProvider, defaultTimezone } from './utils/context'
-import { HelperTextProps } from '../InputWrapper/HelperText'
 import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
 

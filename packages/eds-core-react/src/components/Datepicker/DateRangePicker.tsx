@@ -14,15 +14,11 @@ import { useConvertedValidationFunctions } from './utils/useConvertedValidationF
 import { FieldWrapper } from './fields/FieldWrapper'
 import { Toggle } from './fields/Toggle'
 import { DateValue, useDateRangePicker, useLocale } from 'react-aria'
-import {
-  DateRangePickerStateOptions,
-  useDateRangePickerState,
-} from '@react-stately/datepicker'
+import { useDateRangePickerState } from '@react-stately/datepicker'
 import { DateRangeField } from './fields/DateRangeField'
 import { RangeValue } from './utils/types'
 import { fromDate, toCalendarDate } from '@internationalized/date'
 import { DatePickerProvider, defaultTimezone } from './utils/context'
-import { HelperTextProps } from '../InputWrapper/HelperText'
 import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
 
