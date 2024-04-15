@@ -72,7 +72,7 @@ export type DatePickerProps = Partial<{
   /**
    * Whether to allow picking the time as well as the date
    */
-  time?: boolean
+  showTimeInput?: boolean
   /**
    * Uncontrolled value
    */
@@ -93,7 +93,12 @@ export type DateTimePickerProps = Omit<
 
 export type DateRangePickerProps = Omit<
   DatePickerProps,
-  'onChange' | 'value' | 'multiple' | 'stateRef' | 'time' | 'defaultValue'
+  | 'onChange'
+  | 'value'
+  | 'multiple'
+  | 'stateRef'
+  | 'showTimeInput'
+  | 'defaultValue'
 > &
   Partial<{
     onChange: (range: DateRange | null) => void

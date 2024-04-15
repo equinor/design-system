@@ -10,7 +10,7 @@ import {
 import { DateRangePickerProps } from './props'
 import { RangeCalendar } from './calendars/RangeCalendar'
 import { calendar_date_range, warning_outlined } from '@equinor/eds-icons'
-import { useCommonHook } from './utils/useCommonHook'
+import { useConvertedValidationFunctions } from './utils/useConvertedValidationFunctions'
 import { FieldWrapper } from './fields/FieldWrapper'
 import { Toggle } from './fields/Toggle'
 import { DateValue, useDateRangePicker, useLocale } from 'react-aria'
@@ -45,31 +45,32 @@ export const DateRangePicker = forwardRef(
       defaultValue,
       ...props
     }: DateRangePickerProps,
-    fwdRef,
+    forwardedRef,
   ) => {
     timezone = timezone ?? defaultTimezone
     const [innerValue, setInnerValue] = useState<RangeValue<DateValue>>()
     const [open, setOpen] = useState<boolean | null>(null)
     const inputRef = useRef(null)
     const pickerRef = useRef(null)
-    const ref = useMemo(() => {
-      return (fwdRef || inputRef) as RefObject<HTMLDivElement>
-    }, [fwdRef, inputRef])
+    const ref = (forwardedRef || inputRef) as RefObject<HTMLDivElement>
     const { locale } = useLocale()
 
-    const { _minValue, _maxValue, _isDateUnavailable } = useCommonHook(
-      minValue,
-      maxValue,
-      isDateUnavailable,
-      timezone,
-    )
+    const { _minValue, _maxValue, _isDateUnavailable } =
+      useConvertedValidationFunctions(
+        minValue,
+        maxValue,
+        isDateUnavailable,
+        timezone,
+      )
 
     const _onChange = useCallback(
       (r: RangeValue<DateValue> | undefined | null) => {
         setInnerValue(r)
+        // Close picker on selecting date
         if (open) {
           setOpen(false)
         }
+        // Propagate change
         if (onChange) {
           if (!r) onChange(null)
           else {
@@ -93,26 +94,15 @@ export const DateRangePicker = forwardRef(
       }
     }, [innerValue, timezone, value])
 
-    const dateRangePickerStateProps =
-      useMemo<DateRangePickerStateOptions>(() => {
-        return {
-          maxValue: _maxValue,
-          minValue: _minValue,
-          isDateUnavailable: _isDateUnavailable,
-          onChange: _onChange,
-          label: label,
-          value: _value,
-          isDisabled: props.disabled,
-        }
-      }, [
-        _isDateUnavailable,
-        _maxValue,
-        _minValue,
-        label,
-        _onChange,
-        _value,
-        props.disabled,
-      ])
+    const dateRangePickerStateProps = {
+      maxValue: _maxValue,
+      minValue: _minValue,
+      isDateUnavailable: _isDateUnavailable,
+      onChange: _onChange,
+      label: label,
+      value: _value,
+      isDisabled: props.disabled,
+    }
 
     useEffect(() => {
       if (defaultValue) {
@@ -134,16 +124,13 @@ export const DateRangePicker = forwardRef(
       calendarProps,
     } = useDateRangePicker(dateRangePickerStateProps, state, ref)
 
-    const helperProps = useMemo<HelperTextProps | undefined>(() => {
-      if (state.displayValidation.isInvalid) {
-        return {
+    const helperProps = state.displayValidation.isInvalid
+      ? {
           text: state.displayValidation.validationErrors.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
           icon: <Icon data={warning_outlined} />,
         }
-      }
-      return undefined
-    }, [state.displayValidation])
+      : undefined
 
     const valueString = useMemo(() => {
       const value = state.formatValue(locale, {

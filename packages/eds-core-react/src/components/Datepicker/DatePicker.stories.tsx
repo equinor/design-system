@@ -71,7 +71,7 @@ export const DateTime: StoryFn = () => {
   const [val, setValue] = useState(new Date())
   return (
     <DatePicker
-      time={true}
+      showTimeInput={true}
       value={val}
       onChange={(v) => {
         setValue(v)

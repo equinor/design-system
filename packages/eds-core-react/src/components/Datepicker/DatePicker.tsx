@@ -11,7 +11,7 @@ import { DatePickerProps } from './props'
 import { Calendar } from './calendars/Calendar'
 import { DateField } from './fields/DateField'
 import { calendar, warning_outlined } from '@equinor/eds-icons'
-import { useCommonHook } from './utils/useCommonHook'
+import { useConvertedValidationFunctions } from './utils/useConvertedValidationFunctions'
 import { FieldWrapper } from './fields/FieldWrapper'
 import { Toggle } from './fields/Toggle'
 import {
@@ -46,17 +46,17 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       Header,
       timezone,
       defaultValue,
-      time,
+      showTimeInput,
       ...props
     }: DatePickerProps,
-    ref,
+    forwardedRef,
   ) => {
     timezone = timezone ?? defaultTimezone
     const [innerValue, setInnerValue] = useState<
       CalendarDate | CalendarDateTime
     >(
       value
-        ? time
+        ? showTimeInput
           ? toCalendarDateTime(fromDate(value, timezone))
           : toCalendarDate(fromDate(value, timezone))
         : null,
@@ -65,29 +65,31 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const inputRef = useRef<HTMLInputElement | null>(null)
     const pickerRef = useRef<HTMLDivElement | null>(null)
 
-    const actualRef = useMemo(() => {
-      return (ref || inputRef) as RefObject<HTMLDivElement>
-    }, [ref, inputRef])
+    const ref = (forwardedRef || inputRef) as RefObject<HTMLDivElement>
 
-    const { _minValue, _maxValue, _isDateUnavailable } = useCommonHook(
-      minValue,
-      maxValue,
-      isDateUnavailable,
-      timezone,
-    )
+    const { _minValue, _maxValue, _isDateUnavailable } =
+      useConvertedValidationFunctions(
+        minValue,
+        maxValue,
+        isDateUnavailable,
+        timezone,
+      )
 
     const _onChange = useCallback(
       (value: CalendarDate | CalendarDateTime) => {
+        // Set internal value
         if (value) {
           setInnerValue(
-            time ? toCalendarDateTime(value) : toCalendarDate(value),
+            showTimeInput ? toCalendarDateTime(value) : toCalendarDate(value),
           )
         } else {
           setInnerValue(null)
         }
+        // Close the picker after selecting a date
         if (open) {
           setOpen(false)
         }
+        // Call onChange callback from props
         if (onChange) {
           if (!value) {
             onChange(null)
@@ -97,21 +99,21 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           }
         }
       },
-      [onChange, open, time, timezone],
+      [onChange, open, showTimeInput, timezone],
     )
 
     const _value = useMemo(() => {
       if (!value) {
         return innerValue
       }
-      return time
+      return showTimeInput
         ? toCalendarDateTime(fromDate(value, timezone))
         : toCalendarDate(fromDate(value, timezone))
-    }, [value, time, timezone, innerValue])
+    }, [value, showTimeInput, timezone, innerValue])
 
     useEffect(() => {
       if (defaultValue) {
-        if (time) {
+        if (showTimeInput) {
           setInnerValue(toCalendarDateTime(fromDate(defaultValue, timezone)))
         } else {
           setInnerValue(toCalendarDate(fromDate(defaultValue, timezone)))
@@ -123,52 +125,38 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const { locale } = useLocale()
 
-    const dateCreateProps = useMemo(() => {
-      return {
-        ...props,
-        isDisabled: props.disabled,
-        value: _value,
-        hideTimeZone: true,
-        locale,
-        createCalendar,
-        onChange: _onChange,
-        minValue: _minValue,
-        maxValue: _maxValue,
-        isDateUnavailable: _isDateUnavailable,
-        label,
-      }
-    }, [
-      props,
-      _value,
+    const dateCreateProps = {
+      ...props,
+      isDisabled: props.disabled,
+      value: _value,
+      hideTimeZone: true,
       locale,
-      _onChange,
-      _minValue,
-      _maxValue,
-      _isDateUnavailable,
+      createCalendar,
+      onChange: _onChange,
+      minValue: _minValue,
+      maxValue: _maxValue,
+      isDateUnavailable: _isDateUnavailable,
       label,
-    ])
+    }
 
     const pickerState = useDatePickerState(dateCreateProps)
     const { groupProps, buttonProps, fieldProps, calendarProps } =
-      useDatePicker(dateCreateProps, pickerState, actualRef)
+      useDatePicker(dateCreateProps, pickerState, ref)
 
-    const helperProps = useMemo<HelperTextProps | undefined>(() => {
-      if (pickerState.displayValidation.isInvalid) {
-        return {
+    const helperProps = pickerState.displayValidation.isInvalid
+      ? {
           text: pickerState.displayValidation.validationErrors.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
           icon: <Icon data={warning_outlined} />,
         }
-      }
-      return undefined
-    }, [pickerState.displayValidation])
+      : undefined
 
     return (
       <DatePickerProvider timezone={timezone}>
         <FieldWrapper
           open={open}
           pickerRef={pickerRef}
-          ref={actualRef}
+          ref={ref}
           setOpen={setOpen}
           label={label}
           calendar={
@@ -180,7 +168,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {...dateCreateProps}
             />
           }
-          {...props}
+          disabled={props.disabled}
+          readOnly={props.readOnly}
           color={pickerState.isInvalid ? 'warning' : props.variant}
           helperProps={helperProps ?? props.helperProps}
         >
@@ -188,7 +177,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             fieldProps={fieldProps}
             groupProps={groupProps}
             dateCreateProps={dateCreateProps}
-            ref={actualRef}
+            ref={ref}
             onChange={_onChange}
             rightAdornments={
               <Toggle

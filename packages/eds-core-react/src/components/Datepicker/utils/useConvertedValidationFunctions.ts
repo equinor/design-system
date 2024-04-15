@@ -3,7 +3,7 @@ import { fromDate, toCalendarDate } from '@internationalized/date'
 import { DateValue } from 'react-aria'
 import { defaultTimezone } from './context'
 
-export const useCommonHook = (
+export const useConvertedValidationFunctions = (
   minValue?: Date,
   maxValue?: Date,
   isDateUnavailable?: (v: Date) => boolean,
