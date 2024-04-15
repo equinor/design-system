@@ -167,7 +167,7 @@ export const FieldWrapper = forwardRef(
           anchorEl={(ref as RefObject<HTMLElement>).current}
           placement={'bottom-start'}
         >
-          <Popover.Content>{calendar}</Popover.Content>
+          {calendar}
         </Popover>
       </>
     )

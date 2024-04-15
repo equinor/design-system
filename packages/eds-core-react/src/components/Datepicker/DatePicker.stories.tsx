@@ -134,7 +134,7 @@ export const CustomHeaderFooter: StoryFn<DatePickerProps> = ({
         )
       }}
       footer={
-        <div>
+        <div style={{ paddingBottom: 4 }}>
           <Autocomplete
             options={options}
             label={'Preset'}

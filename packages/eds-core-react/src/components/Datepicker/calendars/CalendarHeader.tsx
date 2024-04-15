@@ -9,6 +9,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   text-transform: capitalize;
+  width: 100%;
 `
 
 function TodayPicker({ onClick }: { onClick: (v: CalendarDate) => void }) {

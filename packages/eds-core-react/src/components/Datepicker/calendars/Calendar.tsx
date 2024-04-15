@@ -12,6 +12,7 @@ import {
   createCalendar,
   toCalendarDate,
 } from '@internationalized/date'
+import { Popover } from '../../Popover'
 
 /**
  * Calendar is the inline calendar picker used in {@link DatePicker}.
@@ -59,15 +60,8 @@ export const Calendar = forwardRef(
     }, [state.value])
 
     return (
-      <div
-        {...calendarProps}
-        className="calendar"
-        style={{ width: 'fit-content' }}
-      >
-        <div
-          style={{ height: 'fit-content' }}
-          ref={ref as RefObject<HTMLDivElement>}
-        >
+      <>
+        <Popover.Header style={{ width: '100%' }}>
           {Header ? (
             <Header
               month={calendarState.focusedDate.month}
@@ -92,10 +86,17 @@ export const Calendar = forwardRef(
               nextMonthDisabled={nextButtonProps.isDisabled}
             />
           )}
+        </Popover.Header>
+        <Popover.Content
+          {...calendarProps}
+          className="calendar"
+          style={{ height: 'fit-content' }}
+          ref={ref as RefObject<HTMLDivElement>}
+        >
           <CalendarGrid state={calendarState} />
-        </div>
-        {footer}
-      </div>
+        </Popover.Content>
+        {footer && <Popover.Actions>{footer}</Popover.Actions>}
+      </>
     )
   },
 )
