@@ -62,7 +62,7 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    const picker = screen.getByLabelText('Toggle calendar')
+    const picker = screen.getByLabelText(/^Change date.*/)
     expect(picker).toBeDefined()
     await userEvent.click(picker)
     expect(screen.getByText('May 2024')).toBeDefined()
@@ -81,7 +81,7 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    const picker = screen.getByLabelText('Toggle calendar')
+    const picker = screen.getByLabelText(/^Change date.*/)
     await userEvent.click(picker)
     const header = screen.getByTestId('heading')
     expect(header).toHaveTextContent('May 2024')
@@ -102,7 +102,7 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    const picker = screen.getByLabelText('Toggle calendar')
+    const picker = screen.getByLabelText(/^Change date.*/)
     await userEvent.click(picker)
     const header = screen.getByTestId('heading')
     expect(header).toHaveTextContent('May 2024')
@@ -130,7 +130,7 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    const picker = screen.getByLabelText('Toggle calendar')
+    const picker = screen.getByLabelText(/^Change date.*/)
     await userEvent.click(picker)
     const header = screen.getByTestId('heading')
     expect(header).toHaveTextContent('May 2024')
@@ -153,7 +153,7 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    const picker = screen.getByLabelText('Toggle calendar')
+    const picker = screen.getByLabelText(/^Change date.*/)
     await userEvent.click(picker)
     const header = screen.getByTestId('heading')
     expect(header).toHaveTextContent('May 2024')
