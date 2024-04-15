@@ -92,7 +92,7 @@ export const DateRangePicker = forwardRef(
       minValue: _minValue,
       isDateUnavailable: _isDateUnavailable,
       onChange: _onChange,
-      label: label,
+      label: label ?? 'Date-range',
       value: _value,
       isDisabled: props.disabled,
     }
@@ -130,7 +130,9 @@ export const DateRangePicker = forwardRef(
       month: 'short',
       day: '2-digit',
     })
-    const valueString = formattedValue ? Object.values(value).join(' - ') : null
+    const valueString = formattedValue
+      ? Object.values(formattedValue).join(' - ')
+      : null
 
     return (
       <DatePickerProvider timezone={timezone}>

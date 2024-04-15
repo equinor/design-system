@@ -128,7 +128,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       minValue: _minValue,
       maxValue: _maxValue,
       isDateUnavailable: _isDateUnavailable,
-      label,
+      label: label || 'Date picker',
     }
 
     const pickerState = useDatePickerState(dateCreateProps)
