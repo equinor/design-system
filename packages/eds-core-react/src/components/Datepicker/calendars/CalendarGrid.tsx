@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria'
 import { getWeeksInMonth } from '@internationalized/date'
@@ -13,9 +14,12 @@ export function CalendarGrid({
   state: CalendarState | RangeCalendarState
 } & AriaCalendarGridProps) {
   const { locale } = useLocale()
-  const { gridProps, headerProps, weekDays } = useCalendarGrid(props, state)
+  const { gridProps, headerProps, weekDays } = useCalendarGrid(
+    { ...props, weekdayStyle: 'long' },
+    state,
+  )
 
-  // Get the number of weeks in the month so we can render the proper number of rows.
+  // Get the number of weeks in the month so that we can render the proper number of rows.
   const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
 
   return (
@@ -23,10 +27,12 @@ export function CalendarGrid({
       <thead {...headerProps}>
         <tr>
           {weekDays.map((day, index) => (
-            // This is just first letter, so there can be conflicts (e.g S for Sunday and Saturday)
-            // eslint-disable-next-line react/no-array-index-key
-            <th style={{ textAlign: 'center' }} key={`${day}-${index}`}>
-              {day}
+            <th
+              style={{ textAlign: 'center' }}
+              key={`${day}-${index}`}
+              abbr={day}
+            >
+              {day.charAt(0).toLocaleUpperCase()}
             </th>
           ))}
         </tr>
@@ -34,15 +40,19 @@ export function CalendarGrid({
       <tbody>
         {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
           <tr key={weekIndex}>
-            {state.getDatesInWeek(weekIndex).map((date, i) =>
-              date ? (
-                <CalendarCell key={date.toString()} state={state} date={date} />
-              ) : (
-                // There isn't anything better than index to use as a key here.
-                // eslint-disable-next-line react/no-array-index-key
-                <td key={`placeholder-${i}`} />
-              ),
-            )}
+            {state
+              .getDatesInWeek(weekIndex)
+              .map((date, i) =>
+                date ? (
+                  <CalendarCell
+                    key={date.toString()}
+                    state={state}
+                    date={date}
+                  />
+                ) : (
+                  <td key={`placeholder-${i}`} />
+                ),
+              )}
           </tr>
         ))}
       </tbody>
