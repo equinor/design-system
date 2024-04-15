@@ -42,6 +42,7 @@ export function DateSegment({
       $invalid={state.isInvalid}
       $disabled={state.isDisabled}
       $placeholder={segment.isPlaceholder}
+      style={{ padding: segment.type === 'literal' ? '0 2px' : '0' }}
       onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
         if (e.code === 'Enter' || e.code === 'Space') {
           e.stopPropagation()
