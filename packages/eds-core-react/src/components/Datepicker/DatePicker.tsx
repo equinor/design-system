@@ -3,7 +3,6 @@ import {
   RefObject,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -27,6 +26,7 @@ import { useDatePickerState } from '@react-stately/datepicker'
 import { DatePickerProvider, defaultTimezone } from './utils/context'
 import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
+import { getCalendarDate } from './utils/get-calendar-date'
 
 /**
  * DatePicker component encapsulates the logic for selecting a single date.
@@ -101,14 +101,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       [onChange, open, showTimeInput, timezone],
     )
 
-    const _value = useMemo(() => {
-      if (!value) {
-        return innerValue
-      }
-      return showTimeInput
-        ? toCalendarDateTime(fromDate(value, timezone))
-        : toCalendarDate(fromDate(value, timezone))
-    }, [value, showTimeInput, timezone, innerValue])
+    const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
 
     useEffect(() => {
       if (defaultValue) {

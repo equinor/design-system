@@ -3,7 +3,6 @@ import {
   RefObject,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -21,6 +20,7 @@ import { fromDate, toCalendarDate } from '@internationalized/date'
 import { DatePickerProvider, defaultTimezone } from './utils/context'
 import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
+import { getCalendarDate } from './utils/get-calendar-date'
 
 /**
  * DateRangePicker component encapsulates the logic for selecting a range of dates
@@ -80,15 +80,12 @@ export const DateRangePicker = forwardRef(
       [onChange, open, timezone],
     )
 
-    const _value = useMemo<RangeValue<DateValue>>(() => {
-      if (!value) return innerValue
-      return {
-        start: value.from
-          ? toCalendarDate(fromDate(value.from, timezone))
-          : null,
-        end: value.to ? toCalendarDate(fromDate(value.to, timezone)) : null,
-      }
-    }, [innerValue, timezone, value])
+    const _value = value
+      ? {
+          start: getCalendarDate(value.from, timezone),
+          end: getCalendarDate(value.to, timezone),
+        }
+      : innerValue
 
     const dateRangePickerStateProps = {
       maxValue: _maxValue,
@@ -128,15 +125,12 @@ export const DateRangePicker = forwardRef(
         }
       : undefined
 
-    const valueString = useMemo(() => {
-      const value = state.formatValue(locale, {
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-      })
-      if (!value) return null
-      return Object.values(value).join(' - ')
-    }, [state, locale])
+    const formattedValue = state.formatValue(locale, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    })
+    const valueString = formattedValue ? Object.values(value).join(' - ') : null
 
     return (
       <DatePickerProvider timezone={timezone}>
