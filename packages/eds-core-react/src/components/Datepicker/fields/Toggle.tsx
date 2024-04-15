@@ -20,7 +20,8 @@ const StyledButton = styled(Button)(
  * @param open
  * @param icon
  * @param disabled
- * @param buttonProps */
+ * @param buttonProps
+ * @param valueString */
 export const Toggle = ({
   reset,
   setOpen,
@@ -28,6 +29,7 @@ export const Toggle = ({
   icon,
   disabled,
   buttonProps,
+  valueString,
 }: {
   reset: () => void
   setOpen: (open: boolean) => void
@@ -35,6 +37,7 @@ export const Toggle = ({
   icon: IconData
   disabled: boolean
   buttonProps: AriaButtonProps
+  valueString: string
 }) => {
   return (
     <>
@@ -58,7 +61,7 @@ export const Toggle = ({
       <StyledButton
         {...filterDOMProps(buttonProps)}
         disabled={disabled}
-        aria-label={'Toggle calendar'}
+        aria-label={valueString ? `Change date, ${valueString}` : `Change date`}
         variant={'ghost_icon'}
         onClick={(e) => {
           e.preventDefault()

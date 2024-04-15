@@ -47,7 +47,12 @@ export function CalendarHeader({
         >
           <Icon data={fast_rewind} />
         </Button>
-        <Typography variant={'h5'} group={'heading'} data-testid={'heading'}>
+        <Typography
+          variant={'h5'}
+          group={'heading'}
+          data-testid={'heading'}
+          aria-live={'polite'}
+        >
           {title}
         </Typography>
         <Button

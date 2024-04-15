@@ -198,6 +198,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 disabled={calendarProps.isDisabled}
                 reset={() => _onChange(null)}
                 buttonProps={buttonProps}
+                valueString={pickerState.formatValue(locale, {
+                  year: 'numeric',
+                  month: 'short',
+                  day: '2-digit',
+                })}
               />
             }
             variant={props.variant}

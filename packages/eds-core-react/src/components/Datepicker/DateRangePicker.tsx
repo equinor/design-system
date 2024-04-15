@@ -13,7 +13,7 @@ import { calendar_date_range, warning_outlined } from '@equinor/eds-icons'
 import { useCommonHook } from './utils/useCommonHook'
 import { FieldWrapper } from './fields/FieldWrapper'
 import { Toggle } from './fields/Toggle'
-import { DateValue, useDateRangePicker } from 'react-aria'
+import { DateValue, useDateRangePicker, useLocale } from 'react-aria'
 import {
   DateRangePickerStateOptions,
   useDateRangePickerState,
@@ -55,6 +55,7 @@ export const DateRangePicker = forwardRef(
     const ref = useMemo(() => {
       return (fwdRef || inputRef) as RefObject<HTMLDivElement>
     }, [fwdRef, inputRef])
+    const { locale } = useLocale()
 
     const { _minValue, _maxValue, _isDateUnavailable } = useCommonHook(
       minValue,
@@ -144,6 +145,16 @@ export const DateRangePicker = forwardRef(
       return undefined
     }, [state.displayValidation])
 
+    const valueString = useMemo(() => {
+      const value = state.formatValue(locale, {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+      })
+      if (!value) return null
+      return Object.values(value).join(' - ')
+    }, [state, locale])
+
     return (
       <DatePickerProvider timezone={timezone}>
         <FieldWrapper
@@ -178,11 +189,12 @@ export const DateRangePicker = forwardRef(
                 buttonProps={buttonProps}
                 disabled={props.disabled}
                 reset={() => {
-                  if (onChange) onChange(null)
+                  _onChange(null)
                 }}
                 setOpen={setOpen}
                 open={open}
                 icon={calendar_date_range}
+                valueString={valueString}
               />
             }
           />
