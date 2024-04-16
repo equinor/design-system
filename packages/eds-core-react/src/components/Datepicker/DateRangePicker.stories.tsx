@@ -44,7 +44,7 @@ const meta: Meta<typeof DateRangePicker> = {
             gridGap: '32px',
             gridTemplateColumns: 'repeat(4, auto)',
             alignItems: 'start',
-            height: '400px',
+            height: '100px',
           }}
         >
           <Story />

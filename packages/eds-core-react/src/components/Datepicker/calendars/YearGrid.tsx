@@ -51,18 +51,22 @@ const GridFocusManager = ({
     const parent = target.parentElement as HTMLDivElement
     switch (e.key) {
       case 'ArrowRight':
+        e.preventDefault()
         focusManager.focusNext({ wrap: true })
         break
       case 'ArrowLeft':
+        e.preventDefault()
         focusManager.focusPrevious({ wrap: true })
         break
       case 'ArrowDown': {
+        e.preventDefault()
         const selfIndex = Array.from(parent.children).indexOf(target)
         const focusElement = Array.from(parent.children).at(selfIndex + 5)
         focusManager.focusNext({ from: focusElement })
         break
       }
       case 'ArrowUp': {
+        e.preventDefault()
         const selfIndex = Array.from(parent.children).indexOf(target)
         const focusElement = Array.from(parent.children).at(selfIndex - 5)
         focusManager.focusPrevious({ from: focusElement })

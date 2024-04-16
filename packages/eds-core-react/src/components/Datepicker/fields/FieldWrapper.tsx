@@ -127,15 +127,7 @@ export const FieldWrapper = forwardRef(
     ref,
   ) => {
     useEffect(() => {
-      if (open) {
-        const selected: HTMLDivElement =
-          pickerRef.current?.querySelector(`.cell.selected`)
-        const first: HTMLDivElement = pickerRef.current?.querySelector(
-          '.cell:not(.disabled)',
-        )
-        if (selected) selected.focus()
-        else first?.focus()
-      } else if (open === false) {
+      if (open === false) {
         const segment: HTMLDivElement = (
           ref as RefObject<HTMLDivElement>
         ).current?.querySelector('.segment')
@@ -166,6 +158,7 @@ export const FieldWrapper = forwardRef(
           onClose={() => setOpen(false)}
           anchorEl={(ref as RefObject<HTMLElement>).current}
           placement={'bottom-start'}
+          withinPortal={true}
         >
           {calendar}
         </Popover>
