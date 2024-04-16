@@ -1,5 +1,5 @@
 import { useCalendar, useLocale } from 'react-aria'
-import { forwardRef, ReactNode, RefObject, useEffect } from 'react'
+import { forwardRef, ReactNode, RefObject, useEffect, useState } from 'react'
 import { CalendarStateOptions, useCalendarState } from '@react-stately/calendar'
 
 import { CalendarGrid } from './CalendarGrid'
@@ -41,6 +41,7 @@ export const Calendar = forwardRef(
     } & CalendarStateOptions<CalendarDate | CalendarDateTime>,
     ref,
   ) => {
+    const [showYearPicker, setShowYearPicker] = useState(false)
     const { locale } = useLocale()
     const calendarState = useCalendarState({
       ...props,
@@ -84,6 +85,8 @@ export const Calendar = forwardRef(
               title={title}
               previousMonthDisabled={prevButtonProps.isDisabled}
               nextMonthDisabled={nextButtonProps.isDisabled}
+              setShowYearPicker={setShowYearPicker}
+              showYearPicker={showYearPicker}
             />
           )}
         </Popover.Header>
@@ -93,7 +96,11 @@ export const Calendar = forwardRef(
           style={{ height: 'fit-content' }}
           ref={ref as RefObject<HTMLDivElement>}
         >
-          <CalendarGrid state={calendarState} />
+          <CalendarGrid
+            state={calendarState}
+            setShowYearPicker={setShowYearPicker}
+            showYearPicker={showYearPicker}
+          />
         </Popover.Content>
         {footer && <Popover.Actions>{footer}</Popover.Actions>}
       </>

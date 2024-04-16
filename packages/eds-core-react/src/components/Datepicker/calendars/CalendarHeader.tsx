@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import { Button, Icon, Typography } from '../../../index'
-import { chevron_left, chevron_right } from '@equinor/eds-icons'
+import {
+  chevron_down,
+  chevron_left,
+  chevron_right,
+  chevron_up,
+} from '@equinor/eds-icons'
 import { CalendarDate } from '@internationalized/date'
+import { tokens } from '@equinor/eds-tokens'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -12,10 +18,17 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `
 
-function TodayPicker({ onClick }: { onClick: (v: CalendarDate) => void }) {
+function TodayPicker({
+  onClick,
+  disabled,
+}: {
+  onClick: (v: CalendarDate) => void
+  disabled: boolean
+}) {
   const today = new Date()
   return (
     <Button
+      disabled={disabled}
       onClick={() =>
         onClick(
           new CalendarDate(
@@ -41,11 +54,15 @@ export function CalendarHeader({
   title,
   previousMonthDisabled,
   nextMonthDisabled,
+  showYearPicker,
+  setShowYearPicker,
 }: {
   state: CalendarState | RangeCalendarState
   title: string
   previousMonthDisabled?: boolean
   nextMonthDisabled?: boolean
+  showYearPicker: boolean
+  setShowYearPicker: (showYearPicker: boolean) => void
 }) {
   return (
     <HeaderWrapper>
@@ -59,26 +76,34 @@ export function CalendarHeader({
         <Button
           variant={'ghost_icon'}
           aria-label={'Previous month'}
-          disabled={previousMonthDisabled}
+          disabled={previousMonthDisabled || showYearPicker}
           onClick={() => state.focusPreviousPage()}
         >
           <Icon data={chevron_left} />
         </Button>
         <span style={{ flex: '1 1 auto' }}></span>
-        <Typography
-          variant={'h5'}
-          group={'heading'}
+        <Button
+          onClick={() => setShowYearPicker(!showYearPicker)}
           data-testid={'heading'}
           aria-live={'polite'}
+          variant={'ghost'}
+          style={{
+            fontSize: tokens.typography.heading.h5.fontSize,
+            textTransform: 'capitalize',
+          }}
         >
           {title}
-        </Typography>
-        <TodayPicker onClick={(v: CalendarDate) => state.setFocusedDate(v)} />
+          <Icon data={showYearPicker ? chevron_up : chevron_down} />
+        </Button>
+        <TodayPicker
+          disabled={showYearPicker}
+          onClick={(v: CalendarDate) => state.setFocusedDate(v)}
+        />
         <span style={{ flex: '1 1 auto' }}></span>
         <Button
           variant={'ghost_icon'}
           onClick={() => state.focusNextPage()}
-          disabled={nextMonthDisabled}
+          disabled={nextMonthDisabled || showYearPicker}
           aria-label={'Next month'}
         >
           <Icon data={chevron_right} />

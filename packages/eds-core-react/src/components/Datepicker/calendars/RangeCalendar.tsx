@@ -9,7 +9,7 @@ import { createCalendar } from '@internationalized/date'
 
 // Reuse the Button from your component library. See below for details.
 import { CalendarGrid } from './CalendarGrid'
-import { forwardRef, ReactNode, RefObject } from 'react'
+import { forwardRef, ReactNode, RefObject, useState } from 'react'
 import { CalendarHeader } from './CalendarHeader'
 import { HeaderProps } from '../props'
 import { Popover } from '../../Popover'
@@ -32,6 +32,7 @@ export const RangeCalendar = forwardRef(
     >,
     ref,
   ) => {
+    const [showYearPicker, setShowYearPicker] = useState(false)
     const { locale } = useLocale()
     const state = useRangeCalendarState({
       ...props,
@@ -61,7 +62,12 @@ export const RangeCalendar = forwardRef(
               year={state.focusedDate.year}
             />
           ) : (
-            <CalendarHeader state={state} title={title} />
+            <CalendarHeader
+              state={state}
+              title={title}
+              setShowYearPicker={setShowYearPicker}
+              showYearPicker={showYearPicker}
+            />
           )}
         </Popover.Header>
         <Popover.Content>
@@ -70,7 +76,11 @@ export const RangeCalendar = forwardRef(
             ref={ref as RefObject<HTMLDivElement>}
             className="calendar"
           >
-            <CalendarGrid state={state} />
+            <CalendarGrid
+              state={state}
+              setShowYearPicker={setShowYearPicker}
+              showYearPicker={showYearPicker}
+            />
           </div>
         </Popover.Content>
         {footer && <Popover.Actions>{footer}</Popover.Actions>}
