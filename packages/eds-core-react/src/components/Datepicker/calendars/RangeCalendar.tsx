@@ -47,7 +47,19 @@ export const RangeCalendar = forwardRef(
     )
 
     return (
-      <>
+      <div
+        {...calendarProps}
+        ref={ref as RefObject<HTMLDivElement>}
+        className="calendar"
+        style={{
+          display: 'grid',
+          gridGap: '16px',
+          maxHeight: '80vh',
+          width: 'max-content',
+          maxWidth: '560px',
+          overflow: 'auto',
+        }}
+      >
         <Popover.Header>
           {Header ? (
             <Header
@@ -71,20 +83,14 @@ export const RangeCalendar = forwardRef(
           )}
         </Popover.Header>
         <Popover.Content>
-          <div
-            {...calendarProps}
-            ref={ref as RefObject<HTMLDivElement>}
-            className="calendar"
-          >
-            <CalendarGrid
-              state={state}
-              setShowYearPicker={setShowYearPicker}
-              showYearPicker={showYearPicker}
-            />
-          </div>
+          <CalendarGrid
+            state={state}
+            setShowYearPicker={setShowYearPicker}
+            showYearPicker={showYearPicker}
+          />
         </Popover.Content>
         {footer && <Popover.Actions>{footer}</Popover.Actions>}
-      </>
+      </div>
     )
   },
 )
