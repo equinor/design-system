@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria'
-import { CalendarDate, getWeeksInMonth } from '@internationalized/date'
+import { getWeeksInMonth } from '@internationalized/date'
 import { CalendarCell } from './CalendarCell'
 import { YearGrid } from './YearGrid'
 

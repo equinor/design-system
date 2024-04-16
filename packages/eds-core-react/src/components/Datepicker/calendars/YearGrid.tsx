@@ -1,3 +1,5 @@
+// Disable no-autofocus - it's not the native autofocus attribute, but react-aria's autoFocus prop
+/* eslint-disable jsx-a11y/no-autofocus */
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { FocusScope, useFocusManager } from 'react-aria'

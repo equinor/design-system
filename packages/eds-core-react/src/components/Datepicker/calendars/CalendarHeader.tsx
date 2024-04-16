@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
-import { Button, Icon, Typography } from '../../../index'
+import { Button, Icon } from '../../../index'
 import {
   chevron_down,
   chevron_left,
