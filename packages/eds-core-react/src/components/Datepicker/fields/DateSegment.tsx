@@ -12,6 +12,7 @@ const Segment = styled.div<{
   $invalid: boolean
   $disabled: boolean
 }>`
+  color: ${tokens.typography.input.text.color};
   font-family: ${tokens.typography.input.text.fontFamily};
   &:focus-visible {
     outline: 2px solid ${tokens.colors.interactive.primary__resting.rgba};

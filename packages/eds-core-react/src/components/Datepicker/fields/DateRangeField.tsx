@@ -4,6 +4,7 @@ import { InputFieldWrapper } from './FieldWrapper'
 import { AriaDatePickerProps, DateValue } from 'react-aria'
 import { SingleDateField } from './SingleDateField'
 import { GroupDOMAttributes } from '@react-types/shared'
+import { Typography } from '../../Typography'
 
 type Props = {
   startFieldProps: AriaDatePickerProps<DateValue>
@@ -30,7 +31,14 @@ export const DateRangeField = forwardRef<HTMLDivElement, Props>(function (
       {...props.groupProps}
     >
       <SingleDateField {...props.startFieldProps} ref={fromRef} />
-      <span style={{ padding: '0 8px' }}>&mdash;</span>
+      <Typography
+        as={'span'}
+        variant={'text'}
+        group={'input'}
+        style={{ padding: '0 4px' }}
+      >
+        &mdash;
+      </Typography>
       <SingleDateField {...props.endFieldProps} ref={toRef} />
       <span style={{ flex: '1 1 auto' }} />
       {props.rightAdornments}

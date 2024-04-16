@@ -40,7 +40,7 @@ const getVariantText = (variant: InputWrapperProps['color']) => {
   if (variant === 'warning') {
     return tokens.colors.interactive.warning__text.rgba
   }
-  return tokens.colors.text.static_icons__default.rgba
+  return tokens.typography.input.text.color
 }
 
 const StyledInputFieldWrapper = styled.div<{
