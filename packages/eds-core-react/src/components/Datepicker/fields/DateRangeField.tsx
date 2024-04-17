@@ -2,7 +2,7 @@ import React, { forwardRef, useRef } from 'react'
 import { InputProps } from '../../Input'
 import { InputFieldWrapper } from './FieldWrapper'
 import { AriaDatePickerProps, DateValue } from 'react-aria'
-import { SingleDateField } from './SingleDateField'
+import { DateFieldSegments } from './DateFieldSegments'
 import { GroupDOMAttributes } from '@react-types/shared'
 import { Typography } from '../../Typography'
 
@@ -31,7 +31,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, Props>(function (
       color={props.variant}
       {...props.groupProps}
     >
-      <SingleDateField {...props.startFieldProps} ref={fromRef} />
+      <DateFieldSegments {...props.startFieldProps} ref={fromRef} />
       <Typography
         as={'span'}
         variant={'text'}
@@ -40,7 +40,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, Props>(function (
       >
         &mdash;
       </Typography>
-      <SingleDateField {...props.endFieldProps} ref={toRef} />
+      <DateFieldSegments {...props.endFieldProps} ref={toRef} />
       <span style={{ flex: '1 1 auto' }} />
       {props.rightAdornments}
     </InputFieldWrapper>

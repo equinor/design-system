@@ -14,7 +14,7 @@ type Props = Partial<DateFieldStateOptions>
 /**
  * A field that wraps segments for inputting a date / date-time
  */
-export const SingleDateField = forwardRef(
+export const DateFieldSegments = forwardRef(
   (props: Props, ref: RefObject<HTMLDivElement>) => {
     const { locale } = useLocale()
     const state = useDateFieldState({
@@ -43,4 +43,4 @@ export const SingleDateField = forwardRef(
   },
 )
 
-SingleDateField.displayName = 'SingleDateField'
+DateFieldSegments.displayName = 'SingleDateField'

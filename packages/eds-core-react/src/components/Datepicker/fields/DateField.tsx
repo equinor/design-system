@@ -5,7 +5,7 @@ import {
 } from '@react-stately/datepicker'
 import { forwardRef, ReactNode, useRef } from 'react'
 import { InputFieldWrapper } from './FieldWrapper'
-import { SingleDateField } from './SingleDateField'
+import { DateFieldSegments } from './DateFieldSegments'
 import { GroupDOMAttributes } from '@react-types/shared'
 import { Variants } from '../../types'
 import { CalendarDate, CalendarDateTime } from '@internationalized/date'
@@ -39,7 +39,7 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
       ref={ref}
       className={`field ${state.isInvalid ? 'invalid' : 'valid'}`}
     >
-      <SingleDateField {...state} {...fieldProps} ref={inputRef} />
+      <DateFieldSegments {...state} {...fieldProps} ref={inputRef} />
       <span style={{ flex: '1 1 auto' }} />
       {props.rightAdornments}
     </InputFieldWrapper>
