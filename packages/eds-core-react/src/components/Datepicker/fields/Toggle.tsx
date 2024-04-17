@@ -2,7 +2,7 @@ import { Icon } from '../../Icon'
 import { close, IconData } from '@equinor/eds-icons'
 import { KeyboardEvent } from 'react'
 import { Button } from '../../Button/Button'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { AriaButtonProps } from 'react-aria'
 import { filterDOMProps } from '@react-aria/utils'
 
