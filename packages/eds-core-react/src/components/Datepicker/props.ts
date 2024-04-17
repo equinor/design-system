@@ -79,6 +79,10 @@ export type DatePickerProps = Partial<{
    * Timezone to use for the datepicker
    */
   timezone: string
+  /**
+   * Granularity of the time field if enabled
+   */
+  granularity?: 'hour' | 'minute' | 'second'
 }>
 
 export type DateTimePickerProps = Omit<

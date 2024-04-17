@@ -39,6 +39,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       timezone,
       defaultValue,
       showTimeInput,
+      granularity,
       ...props
     }: DatePickerProps,
     forwardedRef: RefObject<HTMLDivElement>,
@@ -115,6 +116,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       isDateUnavailable: _isDateUnavailable,
       label: label || 'Date picker',
       isReadOnly: props.readOnly,
+      granularity,
     }
 
     const pickerState = useDatePickerState(dateCreateProps)
