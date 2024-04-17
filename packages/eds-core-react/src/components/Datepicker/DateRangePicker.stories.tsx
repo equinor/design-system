@@ -4,7 +4,6 @@ import { Stack } from '../../../.storybook/components'
 import { DateRangePickerProps } from './props'
 import { useState } from 'react'
 import { DateRangePicker } from './DateRangePicker'
-import { Autocomplete } from '../Autocomplete'
 import { action } from '@storybook/addon-actions'
 
 const PrimaryComponent = (props: DateRangePickerProps) => {
@@ -73,54 +72,4 @@ export const WithMinAndMaxValue: StoryFn = (args) => (
 export const LimitSpecificDays: StoryFn<DateRangePickerProps> = (args) => {
   const isDateUnavailable = (d: Date) => d.getDay() === 0 || d.getDay() === 6
   return <DateRangePicker {...args} isDateUnavailable={isDateUnavailable} />
-}
-
-const minusOneMonth = new Date()
-minusOneMonth.setMonth(minusOneMonth.getMonth() - 1)
-const plusOneMonth = new Date()
-plusOneMonth.setMonth(plusOneMonth.getMonth() + 1)
-
-const options = [
-  { value: { from: new Date(), to: new Date() }, label: 'Today' },
-  {
-    value: { from: minusOneMonth, to: plusOneMonth },
-    label: '-1 month to +1 month',
-  },
-]
-
-export const CustomHeaderFooter: StoryFn<DateRangePickerProps> = (args) => {
-  const [val, setValue] = useState({ from: null, to: null })
-  return (
-    <DateRangePicker
-      {...args}
-      value={val}
-      onChange={setValue}
-      Header={({ setMonth, year, month }) => {
-        const yrs: Array<string> = []
-        for (let i = 0; i < 30; i++) {
-          yrs.push(`20${String(i).padStart(2, '0')}`)
-        }
-        return (
-          <div>
-            <button onClick={() => setMonth(month - 1)}>-</button>
-            {year}-{month}
-            <button onClick={() => setMonth(month + 1)}>+</button>
-          </div>
-        )
-      }}
-      footer={
-        <div style={{ paddingBottom: '4px' }}>
-          <Autocomplete
-            options={options}
-            label={'Preset'}
-            optionLabel={(v) => v.label}
-            onOptionsChange={(v) => {
-              const sel = v.selectedItems[0].value
-              setValue(sel)
-            }}
-          />
-        </div>
-      }
-    />
-  )
 }

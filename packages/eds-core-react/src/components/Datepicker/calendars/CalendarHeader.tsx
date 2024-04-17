@@ -46,6 +46,12 @@ function TodayPicker({
   )
 }
 
+const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`
+
 /**
  * The default header for the calendar components if no custom header is provided
  */
@@ -66,13 +72,7 @@ export function CalendarHeader({
 }) {
   return (
     <HeaderWrapper>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
+      <HeaderActions>
         <Button
           variant={'ghost_icon'}
           aria-label={'Previous month'}
@@ -108,7 +108,7 @@ export function CalendarHeader({
         >
           <Icon data={chevron_right} />
         </Button>
-      </div>
+      </HeaderActions>
     </HeaderWrapper>
   )
 }

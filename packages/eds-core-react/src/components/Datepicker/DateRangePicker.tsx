@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { forwardRef, RefObject, useCallback, useRef, useState } from 'react'
 import { DateRangePickerProps } from './props'
 import { RangeCalendar } from './calendars/RangeCalendar'
 import { calendar_date_range, warning_outlined } from '@equinor/eds-icons'
@@ -38,20 +31,32 @@ export const DateRangePicker = forwardRef(
       isDateUnavailable,
       minValue,
       maxValue,
-      footer,
+      Footer,
       Header,
       timezone,
       defaultValue,
       ...props
     }: DateRangePickerProps,
-    forwardedRef,
+    forwardedRef: RefObject<HTMLDivElement>,
   ) => {
     timezone = timezone ?? defaultTimezone
-    const [innerValue, setInnerValue] = useState<RangeValue<DateValue>>()
+    const [innerValue, setInnerValue] = useState<RangeValue<DateValue>>(() => {
+      const initialValue = value ?? defaultValue
+      if (initialValue) {
+        return {
+          start: initialValue.from
+            ? toCalendarDate(fromDate(initialValue.from, timezone))
+            : null,
+          end: initialValue.to
+            ? toCalendarDate(fromDate(initialValue.to, timezone))
+            : null,
+        }
+      }
+    })
     const [open, setOpen] = useState<boolean | null>(null)
     const inputRef = useRef(null)
     const pickerRef = useRef(null)
-    const ref = (forwardedRef || inputRef) as RefObject<HTMLDivElement>
+    const ref = forwardedRef || inputRef
     const { locale } = useLocale()
 
     const { _minValue, _maxValue, _isDateUnavailable } =
@@ -63,19 +68,19 @@ export const DateRangePicker = forwardRef(
       )
 
     const _onChange = useCallback(
-      (r: RangeValue<DateValue> | undefined | null) => {
-        setInnerValue(r)
+      (rangeValue: RangeValue<DateValue> | undefined | null) => {
+        setInnerValue(rangeValue)
         // Close picker on selecting date
         if (open) {
           setOpen(false)
         }
         // Propagate change
         if (onChange) {
-          if (!r) onChange(null)
+          if (!rangeValue) onChange(null)
           else {
             onChange({
-              from: r.start?.toDate(timezone) ?? null,
-              to: r.end?.toDate(timezone) ?? null,
+              from: rangeValue.start?.toDate(timezone) ?? null,
+              to: rangeValue.end?.toDate(timezone) ?? null,
             })
           }
         }
@@ -100,17 +105,6 @@ export const DateRangePicker = forwardRef(
       isDisabled: props.disabled,
       isReadOnly: props.readOnly,
     }
-
-    useEffect(() => {
-      if (defaultValue) {
-        setInnerValue({
-          start: toCalendarDate(fromDate(defaultValue?.from, timezone)),
-          end: toCalendarDate(fromDate(defaultValue?.to, timezone)),
-        })
-      }
-      // Disable this rule because we only want to set the defaultValue once
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     const state = useDateRangePickerState(dateRangePickerStateProps)
     const {
@@ -155,7 +149,7 @@ export const DateRangePicker = forwardRef(
               maxValue={_maxValue}
               minValue={_minValue}
               isDateUnavailable={_isDateUnavailable}
-              footer={footer}
+              Footer={Footer}
               Header={Header}
               {...calendarProps}
             />

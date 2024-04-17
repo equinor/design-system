@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { forwardRef, RefObject, useCallback, useRef, useState } from 'react'
 import { DatePickerProps } from './props'
 import { Calendar } from './calendars/Calendar'
 import { DateField } from './fields/DateField'
@@ -41,30 +34,34 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       isDateUnavailable,
       minValue,
       maxValue,
-      footer,
+      Footer,
       Header,
       timezone,
       defaultValue,
       showTimeInput,
       ...props
     }: DatePickerProps,
-    forwardedRef,
+    forwardedRef: RefObject<HTMLDivElement>,
   ) => {
     timezone = timezone ?? defaultTimezone
     const [innerValue, setInnerValue] = useState<
       CalendarDate | CalendarDateTime
-    >(
-      value
-        ? showTimeInput
-          ? toCalendarDateTime(fromDate(value, timezone))
-          : toCalendarDate(fromDate(value, timezone))
-        : null,
-    )
+    >(() => {
+      const initialValue = value ?? defaultValue
+      if (initialValue) {
+        if (showTimeInput) {
+          return toCalendarDateTime(fromDate(initialValue, timezone))
+        } else {
+          return toCalendarDate(fromDate(initialValue, timezone))
+        }
+      }
+      return null
+    })
     const [open, setOpen] = useState<boolean | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
     const pickerRef = useRef<HTMLDivElement | null>(null)
 
-    const ref = (forwardedRef || inputRef) as RefObject<HTMLDivElement>
+    const ref = forwardedRef || inputRef
 
     const { _minValue, _maxValue, _isDateUnavailable } =
       useConvertedValidationFunctions(
@@ -102,18 +99,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     )
 
     const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
-
-    useEffect(() => {
-      if (defaultValue) {
-        if (showTimeInput) {
-          setInnerValue(toCalendarDateTime(fromDate(defaultValue, timezone)))
-        } else {
-          setInnerValue(toCalendarDate(fromDate(defaultValue, timezone)))
-        }
-      }
-      // Disable this rule because we only want to set the defaultValue once
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     const { locale } = useLocale()
 
@@ -156,10 +141,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           calendar={
             <Calendar
               ref={pickerRef}
-              footer={footer}
+              Footer={Footer}
               Header={Header}
-              state={pickerState}
-              {...dateCreateProps}
+              {...calendarProps}
             />
           }
           disabled={props.disabled}

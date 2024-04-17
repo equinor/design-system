@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Autocomplete } from '../Autocomplete'
 import { NativeSelect } from '../Select'
 import { action } from '@storybook/addon-actions'
+import { CalendarDate } from '@internationalized/date'
 
 const meta: Meta<typeof DatePicker> = {
   title: 'Inputs/Dates/Datepicker',
@@ -133,7 +134,7 @@ export const CustomHeaderFooter: StoryFn<DatePickerProps> = ({
           </div>
         )
       }}
-      footer={
+      Footer={({ state }) => (
         <div style={{ paddingBottom: 4 }}>
           <Autocomplete
             options={options}
@@ -141,11 +142,18 @@ export const CustomHeaderFooter: StoryFn<DatePickerProps> = ({
             optionLabel={(v) => v.label}
             onOptionsChange={(v) => {
               const sel = v.selectedItems[0].value
+              state.setFocusedDate(
+                new CalendarDate(
+                  sel.getFullYear(),
+                  sel.getMonth() + 1,
+                  sel.getDate(),
+                ),
+              )
               setValue(sel)
             }}
           />
         </div>
-      }
+      )}
     />
   )
 }

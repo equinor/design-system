@@ -14,34 +14,33 @@ type Props = Partial<DateFieldStateOptions>
 /**
  * A field that wraps segments for inputting a date / date-time
  */
-export const SingleDateField = forwardRef((props: Props, ref) => {
-  const { locale } = useLocale()
-  const state = useDateFieldState({
-    ...props,
-    locale,
-    createCalendar,
-  })
-
-  const { fieldProps } = useDateField(
-    {
+export const SingleDateField = forwardRef(
+  (props: Props, ref: RefObject<HTMLDivElement>) => {
+    const { locale } = useLocale()
+    const state = useDateFieldState({
       ...props,
-      'aria-label': 'Date input field',
-    },
-    state,
-    ref as RefObject<HTMLDivElement>,
-  )
+      locale,
+      createCalendar,
+    })
 
-  return (
-    <div
-      {...fieldProps}
-      style={{ display: 'flex' }}
-      ref={ref as RefObject<HTMLDivElement>}
-    >
-      {state.segments.map((segment, i) => (
-        <DateSegment key={i} segment={segment} state={state} />
-      ))}
-    </div>
-  )
-})
+    const { fieldProps } = useDateField(
+      {
+        ...props,
+        // Type-casting as react-aria expects string | ReactNode, but we only pass strings
+        'aria-label': (props.label as string) ?? 'Date input field',
+      },
+      state,
+      ref,
+    )
+
+    return (
+      <div {...fieldProps} style={{ display: 'flex' }} ref={ref}>
+        {state.segments.map((segment, i) => (
+          <DateSegment key={i} segment={segment} state={state} />
+        ))}
+      </div>
+    )
+  },
+)
 
 SingleDateField.displayName = 'SingleDateField'

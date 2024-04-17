@@ -10,25 +10,17 @@ export const useConvertedValidationFunctions = (
   timezone?: string,
 ) => {
   const tz = timezone ?? defaultTimezone
-  const _minValue = useMemo(() => {
-    return minValue ? toCalendarDate(fromDate(minValue, tz)) : undefined
-  }, [tz, minValue])
-  const _maxValue = useMemo(() => {
-    return maxValue ? toCalendarDate(fromDate(maxValue, tz)) : undefined
-  }, [tz, maxValue])
-  const _minTimeValue = useMemo(() => {
-    return minValue ? fromDate(minValue, tz) : undefined
-  }, [tz, minValue])
-  const _maxTimeValue = useMemo(() => {
-    return maxValue ? fromDate(maxValue, tz) : undefined
-  }, [tz, maxValue])
+  const _minValue = minValue
+    ? toCalendarDate(fromDate(minValue, tz))
+    : undefined
+  const _maxValue = maxValue
+    ? toCalendarDate(fromDate(maxValue, tz))
+    : undefined
+  const _minTimeValue = minValue ? fromDate(minValue, tz) : undefined
+  const _maxTimeValue = maxValue ? fromDate(maxValue, tz) : undefined
 
-  const _isDateUnavailable = useCallback(
-    (value: DateValue) => {
-      return isDateUnavailable ? isDateUnavailable(value.toDate(tz)) : false
-    },
-    [tz, isDateUnavailable],
-  )
+  const _isDateUnavailable = (value: DateValue) =>
+    isDateUnavailable ? isDateUnavailable(value.toDate(tz)) : false
 
   return {
     _minValue,

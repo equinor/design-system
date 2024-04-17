@@ -5,7 +5,7 @@ import { HelperTextProps } from '../InputWrapper/HelperText'
 
 type DateRange = { from: Date | null; to: Date | null }
 
-export type HeaderProps<T = CalendarState | RangeCalendarState> = {
+export type HeaderFooterProps<T = CalendarState | RangeCalendarState> = {
   setYear: (year: number) => void
   setMonth: (month: number) => void
   year: number
@@ -62,13 +62,13 @@ export type DatePickerProps = Partial<{
   /**
    * An optional footer to display below the calendar, useful for e.g. presets
    */
-  footer: ReactNode
+  Footer: (props: HeaderFooterProps<CalendarState>) => ReactNode
   /**
    * An optional header to display above the calendar, can be used to override the default
    * The component is fed with enough props to be able to control the calendar-view
    * @param props
    */
-  Header: (props: HeaderProps) => ReactNode
+  Header: (props: HeaderFooterProps<CalendarState>) => ReactNode
   /**
    * Whether to allow picking the time as well as the date
    */
@@ -105,4 +105,14 @@ export type DateRangePickerProps = Omit<
     value: DateRange
     stateRef: MutableRefObject<RangeCalendarState>
     defaultValue: DateRange
+    /**
+     * An optional footer to display below the calendar, useful for e.g. presets
+     */
+    Footer: (props: HeaderFooterProps<RangeCalendarState>) => ReactNode
+    /**
+     * An optional header to display above the calendar, can be used to override the default
+     * The component is fed with enough props to be able to control the calendar-view
+     * @param props
+     */
+    Header: (props: HeaderFooterProps<RangeCalendarState>) => ReactNode
   }>

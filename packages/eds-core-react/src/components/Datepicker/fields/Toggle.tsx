@@ -6,12 +6,10 @@ import styled, { css } from 'styled-components'
 import { AriaButtonProps } from 'react-aria'
 import { filterDOMProps } from '@react-aria/utils'
 
-const StyledButton = styled(Button)(
-  () => css`
-    height: 24px;
-    width: 24px;
-  `,
-)
+const StyledButton = styled(Button)`
+  height: 24px;
+  width: 24px;
+`
 
 /**
  * Toggle component encapsulates the reset and open calendar buttons

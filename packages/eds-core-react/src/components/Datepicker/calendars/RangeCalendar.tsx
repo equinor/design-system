@@ -11,8 +11,9 @@ import { createCalendar } from '@internationalized/date'
 import { CalendarGrid } from './CalendarGrid'
 import { forwardRef, ReactNode, RefObject, useState } from 'react'
 import { CalendarHeader } from './CalendarHeader'
-import { HeaderProps } from '../props'
+import { HeaderFooterProps } from '../props'
 import { Popover } from '../../Popover'
+import { CalendarWrapper } from './CalendarWrapper'
 
 /**
  * RangeCalendar is the inline calendar picker used in {@link DateRangePicker}.
@@ -22,15 +23,15 @@ export const RangeCalendar = forwardRef(
   (
     {
       Header,
-      footer,
+      Footer,
       ...props
     }: Partial<
       AriaRangeCalendarProps<DateValue> & {
-        footer?: ReactNode
-        Header?: (props: HeaderProps) => ReactNode
+        Footer?: (props: HeaderFooterProps) => ReactNode
+        Header?: (props: HeaderFooterProps) => ReactNode
       }
     >,
-    ref,
+    ref: RefObject<HTMLDivElement>,
   ) => {
     const [showYearPicker, setShowYearPicker] = useState(false)
     const { locale } = useLocale()
@@ -40,26 +41,10 @@ export const RangeCalendar = forwardRef(
       createCalendar,
     })
 
-    const { calendarProps, title } = useRangeCalendar(
-      props,
-      state,
-      ref as RefObject<HTMLDivElement>,
-    )
+    const { calendarProps, title } = useRangeCalendar(props, state, ref)
 
     return (
-      <div
-        {...calendarProps}
-        ref={ref as RefObject<HTMLDivElement>}
-        className="calendar"
-        style={{
-          display: 'grid',
-          gridGap: '16px',
-          maxHeight: '80vh',
-          width: 'max-content',
-          maxWidth: '560px',
-          overflow: 'auto',
-        }}
-      >
+      <CalendarWrapper {...calendarProps} ref={ref}>
         <Popover.Header>
           {Header ? (
             <Header
@@ -89,8 +74,22 @@ export const RangeCalendar = forwardRef(
             showYearPicker={showYearPicker}
           />
         </Popover.Content>
-        {footer && <Popover.Actions>{footer}</Popover.Actions>}
-      </div>
+        {Footer && (
+          <Popover.Actions>
+            <Footer
+              month={state.focusedDate.month}
+              state={state}
+              setMonth={(month) =>
+                state.setFocusedDate(state.focusedDate.set({ month }))
+              }
+              setYear={(year) =>
+                state.setFocusedDate(state.focusedDate.set({ year }))
+              }
+              year={state.focusedDate.year}
+            />
+          </Popover.Actions>
+        )}
+      </CalendarWrapper>
     )
   },
 )

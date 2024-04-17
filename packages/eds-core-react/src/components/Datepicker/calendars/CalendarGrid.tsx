@@ -25,7 +25,8 @@ export function CalendarGrid({
   )
 
   // Get the number of weeks in the month so that we can render the proper number of rows.
-  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
+  const howManyWeeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
+  const weeksInMonthArray = [...new Array(howManyWeeksInMonth).keys()]
 
   return showYearPicker ? (
     <YearGrid
@@ -51,7 +52,7 @@ export function CalendarGrid({
         </tr>
       </thead>
       <tbody>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+        {weeksInMonthArray.map((weekIndex) => (
           <tr key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex)

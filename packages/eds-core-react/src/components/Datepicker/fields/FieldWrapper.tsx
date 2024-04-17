@@ -146,13 +146,12 @@ export const FieldWrapper = forwardRef(
       readonly,
       ...props
     }: Props,
-    ref,
+    ref: RefObject<HTMLDivElement>,
   ) => {
     useEffect(() => {
       if (open === false) {
-        const segment: HTMLDivElement = (
-          ref as RefObject<HTMLDivElement>
-        ).current?.querySelector('.segment')
+        // Focus the first segment in the input field
+        const segment: HTMLDivElement = ref.current?.querySelector('.segment')
         segment?.focus()
       }
     }, [ref, open, pickerRef])
@@ -179,7 +178,7 @@ export const FieldWrapper = forwardRef(
         <Popover
           open={open ?? false}
           onClose={() => setOpen(false)}
-          anchorEl={(ref as RefObject<HTMLElement>).current}
+          anchorEl={ref.current}
           placement={'bottom-start'}
           withinPortal={true}
         >
