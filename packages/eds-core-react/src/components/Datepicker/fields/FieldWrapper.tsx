@@ -125,8 +125,8 @@ export const InputFieldWrapper = forwardRef<HTMLDivElement, WrapperProps>(
 
 type Props = {
   children: ReactNode
-  open: boolean | null
-  setOpen: (open: boolean) => void
+  isOpen: boolean | null
+  setIsOpen: (open: boolean) => void
   label?: string
   calendar: ReactNode
   pickerRef: RefObject<HTMLDivElement>
@@ -140,8 +140,8 @@ export const FieldWrapper = forwardRef(
       children,
       pickerRef,
       calendar,
-      open,
-      setOpen,
+      isOpen,
+      setIsOpen,
       label,
       readonly,
       ...props
@@ -149,12 +149,12 @@ export const FieldWrapper = forwardRef(
     ref: RefObject<HTMLDivElement>,
   ) => {
     useEffect(() => {
-      if (open === false) {
+      if (isOpen === false) {
         // Focus the first segment in the input field
         const segment: HTMLDivElement = ref.current?.querySelector('.segment')
         segment?.focus()
       }
-    }, [ref, open, pickerRef])
+    }, [ref, isOpen, pickerRef])
 
     return (
       <>
@@ -167,7 +167,7 @@ export const FieldWrapper = forwardRef(
               !isIconTarget &&
               (event.code === 'Space' || event.code === 'Enter')
             ) {
-              setOpen(true)
+              setIsOpen(true)
             }
           }}
           {...props}
@@ -176,8 +176,8 @@ export const FieldWrapper = forwardRef(
         </InputWrapper>
 
         <Popover
-          open={open ?? false}
-          onClose={() => setOpen(false)}
+          open={isOpen ?? false}
+          onClose={() => setIsOpen(false)}
           anchorEl={ref.current}
           placement={'bottom-start'}
           withinPortal={true}

@@ -57,7 +57,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       }
       return null
     })
-    const [open, setOpen] = useState<boolean | null>(null)
+    const [isOpen, setIsOpen] = useState<boolean | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
     const pickerRef = useRef<HTMLDivElement | null>(null)
 
@@ -82,8 +82,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           setInnerValue(null)
         }
         // Close the picker after selecting a date
-        if (open) {
-          setOpen(false)
+        if (isOpen) {
+          setIsOpen(false)
         }
         // Call onChange callback from props
         if (onChange) {
@@ -95,7 +95,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           }
         }
       },
-      [onChange, open, showTimeInput, timezone],
+      [onChange, isOpen, showTimeInput, timezone],
     )
 
     const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
@@ -132,11 +132,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     return (
       <DatePickerProvider timezone={timezone}>
         <FieldWrapper
-          open={open}
+          isOpen={isOpen}
           readonly={fieldProps.isReadOnly}
           pickerRef={pickerRef}
           ref={ref}
-          setOpen={setOpen}
+          setIsOpen={setIsOpen}
           label={label}
           calendar={
             <Calendar
@@ -159,8 +159,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             onChange={_onChange}
             rightAdornments={
               <Toggle
-                setOpen={setOpen}
-                open={open}
+                setOpen={setIsOpen}
+                open={isOpen}
                 icon={calendar}
                 disabled={calendarProps.isDisabled}
                 readonly={calendarProps.isReadOnly}

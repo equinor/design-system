@@ -53,7 +53,7 @@ export const DateRangePicker = forwardRef(
         }
       }
     })
-    const [open, setOpen] = useState<boolean | null>(null)
+    const [isOpen, setIsOpen] = useState<boolean | null>(null)
     const inputRef = useRef(null)
     const pickerRef = useRef(null)
     const ref = forwardedRef || inputRef
@@ -71,8 +71,8 @@ export const DateRangePicker = forwardRef(
       (rangeValue: RangeValue<DateValue> | undefined | null) => {
         setInnerValue(rangeValue)
         // Close picker on selecting date
-        if (open) {
-          setOpen(false)
+        if (isOpen) {
+          setIsOpen(false)
         }
         // Propagate change
         if (onChange) {
@@ -85,7 +85,7 @@ export const DateRangePicker = forwardRef(
           }
         }
       },
-      [onChange, open, timezone],
+      [onChange, isOpen, timezone],
     )
 
     const _value = value
@@ -135,13 +135,13 @@ export const DateRangePicker = forwardRef(
     return (
       <DatePickerProvider timezone={timezone}>
         <FieldWrapper
-          open={open}
+          isOpen={isOpen}
           color={state.isInvalid ? 'warning' : props.variant}
           helperProps={helperProps ?? props.helperProps}
           readonly={startFieldProps.isReadOnly}
           ref={ref}
           pickerRef={pickerRef}
-          setOpen={setOpen}
+          setIsOpen={setIsOpen}
           label={label}
           calendar={
             <RangeCalendar
@@ -170,8 +170,8 @@ export const DateRangePicker = forwardRef(
                 reset={() => {
                   _onChange(null)
                 }}
-                setOpen={setOpen}
-                open={open}
+                setOpen={setIsOpen}
+                open={isOpen}
                 icon={calendar_date_range}
                 valueString={valueString}
               />
