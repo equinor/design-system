@@ -47,14 +47,15 @@ const StyledInputFieldWrapper = styled.div<{
   $density: 'compact' | 'comfortable'
   $variant?: InputWrapperProps['color']
   $disabled: boolean
+  $readonly: boolean
 }>`
   display: flex;
   align-items: center;
   background-color: ${tokens.colors.ui.background__light.rgba};
   height: ${({ $density }) => ($density === 'compact' ? '24px' : '36px')};
   padding: 0 8px;
-  ${({ $variant, $disabled }) => {
-    if (!$variant) {
+  ${({ $variant, $disabled, $readonly }) => {
+    if (!$variant && !$readonly) {
       return `&:focus-within:not(.invalid) {
     outline: 2px solid
       ${tokens.colors.interactive.primary__resting.rgba};
@@ -70,6 +71,15 @@ const StyledInputFieldWrapper = styled.div<{
     }
     return `outline: 2px solid ${getVariant($variant)};`
   }}
+
+  ${({ $readonly }) => {
+    return (
+      $readonly &&
+      `background-color: ${tokens.colors.ui.background__default.rgba};
+      outline: none;`
+    )
+  }}
+  
   color: ${(p) => getVariantText(p.$variant)};
   cursor: default;
 `
@@ -78,13 +88,14 @@ type WrapperProps = {
   children: ReactNode
   color?: InputWrapperProps['color']
   disabled: boolean
+  readonly: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 /**
  * Applies styles around the date input fields (density, color etc.)
  */
 export const InputFieldWrapper = forwardRef<HTMLDivElement, WrapperProps>(
-  ({ children, color, disabled, ...props }, ref) => {
+  ({ children, color, disabled, readonly, ...props }, ref) => {
     const { density } = useEds()
     // As the props returned are designed for react-aria, some of them are not valid DOM props (i.e. onPress).
     // The filterDOMProps-method strips out the invalid props, but it also removes event listeners due to casing
@@ -102,6 +113,7 @@ export const InputFieldWrapper = forwardRef<HTMLDivElement, WrapperProps>(
         $density={density}
         $variant={color}
         $disabled={disabled ?? false}
+        $readonly={readonly ?? false}
         {...filteredProps}
         {...eventHandlers}
       >
@@ -118,12 +130,22 @@ type Props = {
   label?: string
   calendar: ReactNode
   pickerRef: RefObject<HTMLDivElement>
+  readonly: boolean
   extraProps?: GroupDOMAttributes
 } & InputWrapperProps
 
 export const FieldWrapper = forwardRef(
   (
-    { children, pickerRef, calendar, open, setOpen, label, ...props }: Props,
+    {
+      children,
+      pickerRef,
+      calendar,
+      open,
+      setOpen,
+      label,
+      readonly,
+      ...props
+    }: Props,
     ref,
   ) => {
     useEffect(() => {
@@ -138,6 +160,7 @@ export const FieldWrapper = forwardRef(
     return (
       <>
         <InputWrapper
+          readOnly={readonly}
           label={label}
           onKeyDownCapture={(event: KeyboardEvent<HTMLDivElement>) => {
             const isIconTarget = event.target instanceof SVGSVGElement

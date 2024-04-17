@@ -33,6 +33,7 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
   return (
     <InputFieldWrapper
       {...groupProps}
+      readonly={fieldProps.isReadOnly}
       disabled={state.isDisabled}
       color={state.isInvalid ? 'warning' : variant}
       ref={ref}

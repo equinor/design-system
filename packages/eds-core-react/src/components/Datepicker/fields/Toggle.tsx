@@ -30,16 +30,18 @@ export const Toggle = ({
   disabled,
   buttonProps,
   valueString,
+  readonly,
 }: {
   reset: () => void
   setOpen: (open: boolean) => void
   open: boolean
   icon: IconData
   disabled: boolean
+  readonly: boolean
   buttonProps: AriaButtonProps
   valueString: string
 }) => {
-  return (
+  return readonly || disabled ? null : (
     <>
       <StyledButton
         disabled={disabled}

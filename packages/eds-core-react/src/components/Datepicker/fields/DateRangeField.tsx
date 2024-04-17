@@ -25,6 +25,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, Props>(function (
   return (
     <InputFieldWrapper
       ref={ref}
+      readonly={props.startFieldProps.isReadOnly}
       className="field"
       disabled={props.disabled}
       color={props.variant}

@@ -129,6 +129,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       maxValue: _maxValue,
       isDateUnavailable: _isDateUnavailable,
       label: label || 'Date picker',
+      isReadOnly: props.readOnly,
     }
 
     const pickerState = useDatePickerState(dateCreateProps)
@@ -147,6 +148,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DatePickerProvider timezone={timezone}>
         <FieldWrapper
           open={open}
+          readonly={fieldProps.isReadOnly}
           pickerRef={pickerRef}
           ref={ref}
           setOpen={setOpen}
@@ -177,6 +179,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 open={open}
                 icon={calendar}
                 disabled={calendarProps.isDisabled}
+                readonly={calendarProps.isReadOnly}
                 reset={() => _onChange(null)}
                 buttonProps={buttonProps}
                 valueString={pickerState.formatValue(locale, {

@@ -13,7 +13,10 @@ import { useConvertedValidationFunctions } from './utils/useConvertedValidationF
 import { FieldWrapper } from './fields/FieldWrapper'
 import { Toggle } from './fields/Toggle'
 import { DateValue, useDateRangePicker, useLocale } from 'react-aria'
-import { useDateRangePickerState } from '@react-stately/datepicker'
+import {
+  DateRangePickerStateOptions,
+  useDateRangePickerState,
+} from '@react-stately/datepicker'
 import { DateRangeField } from './fields/DateRangeField'
 import { RangeValue } from './utils/types'
 import { fromDate, toCalendarDate } from '@internationalized/date'
@@ -87,7 +90,7 @@ export const DateRangePicker = forwardRef(
         }
       : innerValue
 
-    const dateRangePickerStateProps = {
+    const dateRangePickerStateProps: DateRangePickerStateOptions = {
       maxValue: _maxValue,
       minValue: _minValue,
       isDateUnavailable: _isDateUnavailable,
@@ -95,6 +98,7 @@ export const DateRangePicker = forwardRef(
       label: label ?? 'Date-range',
       value: _value,
       isDisabled: props.disabled,
+      isReadOnly: props.readOnly,
     }
 
     useEffect(() => {
@@ -140,6 +144,7 @@ export const DateRangePicker = forwardRef(
           open={open}
           color={state.isInvalid ? 'warning' : props.variant}
           helperProps={helperProps ?? props.helperProps}
+          readonly={startFieldProps.isReadOnly}
           ref={ref}
           pickerRef={pickerRef}
           setOpen={setOpen}
@@ -167,6 +172,7 @@ export const DateRangePicker = forwardRef(
               <Toggle
                 buttonProps={buttonProps}
                 disabled={props.disabled}
+                readonly={startFieldProps.isReadOnly}
                 reset={() => {
                   _onChange(null)
                 }}
