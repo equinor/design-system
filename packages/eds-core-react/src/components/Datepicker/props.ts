@@ -56,7 +56,6 @@ export type DatePickerProps = Partial<{
   maxValue: Date
   /**
    * isDateUnavailable is used to disable specific dates (e.g. weekends)
-   * @param v
    */
   isDateUnavailable?: (v: Date) => boolean
   /**
@@ -66,7 +65,6 @@ export type DatePickerProps = Partial<{
   /**
    * An optional header to display above the calendar, can be used to override the default
    * The component is fed with enough props to be able to control the calendar-view
-   * @param props
    */
   Header: (props: HeaderFooterProps<CalendarState>) => ReactNode
   /**
@@ -112,7 +110,6 @@ export type DateRangePickerProps = Omit<
     /**
      * An optional header to display above the calendar, can be used to override the default
      * The component is fed with enough props to be able to control the calendar-view
-     * @param props
      */
     Header: (props: HeaderFooterProps<RangeCalendarState>) => ReactNode
   }>

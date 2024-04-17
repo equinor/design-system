@@ -13,13 +13,7 @@ const StyledButton = styled(Button)`
 
 /**
  * Toggle component encapsulates the reset and open calendar buttons
- * @param reset
- * @param setOpen
- * @param open
- * @param icon
- * @param disabled
- * @param buttonProps
- * @param valueString */
+ */
 export const Toggle = ({
   reset,
   setOpen,

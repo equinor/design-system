@@ -24,8 +24,6 @@ const Segment = styled.div<{
 
 /**
  * DateSegment is used to represent a single segment of a date in the DateField (i.e. day, month, year)
- * @param segment
- * @param state
  */
 export function DateSegment({
   segment,
