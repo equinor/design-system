@@ -110,21 +110,24 @@ export function CalendarCell({
    * Determines how the selection should be highlighted
    * If range is selected, it will highlight start - end, with differing border-radius
    */
-  const ishighlight = useMemo<Selections>(() => {
+  const isHighlight = useMemo<Selections>(() => {
     if (isSelected && 'highlightedRange' in state) {
       const start = state.highlightedRange.start
       const end = state.highlightedRange.end
-      if (
+      const startSame =
         start.day === date.day &&
         start.month === date.month &&
+        start.year === date.year
+      const endSame =
         end.day === date.day &&
-        end.month === date.month
-      ) {
+        end.month === date.month &&
+        end.year === date.year
+      if (startSame && endSame) {
         return 'BOTH'
       }
-      if (start.day === date.day && start.month === date.month) {
+      if (startSame) {
         return 'START'
-      } else if (end.day === date.day && end.month === date.month) {
+      } else if (endSame) {
         return 'END'
       } else {
         return 'RANGE'
@@ -133,7 +136,7 @@ export function CalendarCell({
       return 'SINGLE'
     }
     return 'NONE'
-  }, [date.day, date.month, isSelected, state])
+  }, [date.day, date.month, date.year, isSelected, state])
 
   return (
     <StyledTd
@@ -150,7 +153,7 @@ export function CalendarCell({
           isUnavailable ? 'unavailable' : ''
         }${isDisabled ? 'disabled' : ''}`}
         $selected={isSelected}
-        $highlight={ishighlight}
+        $highlight={isHighlight}
         $disabled={isDisabled || isUnavailable}
         $density={density}
       >
