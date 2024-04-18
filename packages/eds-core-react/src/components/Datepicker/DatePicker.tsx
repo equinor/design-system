@@ -40,6 +40,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       defaultValue,
       showTimeInput,
       granularity,
+      disabled: isDisabled,
+      readOnly: isReadOnly,
       ...props
     }: DatePickerProps,
     forwardedRef: RefObject<HTMLDivElement>,
@@ -105,7 +107,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const dateCreateProps = {
       ...props,
-      isDisabled: props.disabled,
+      isDisabled,
       value: _value,
       hideTimeZone: true,
       locale,
@@ -115,7 +117,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       maxValue: _maxValue,
       isDateUnavailable: _isDateUnavailable,
       label: label || 'Date picker',
-      isReadOnly: props.readOnly,
+      isReadOnly,
       granularity,
     }
 
@@ -148,8 +150,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {...calendarProps}
             />
           }
-          disabled={props.disabled}
-          readOnly={props.readOnly}
+          disabled={isDisabled}
+          readOnly={isReadOnly}
           color={pickerState.isInvalid ? 'warning' : props.variant}
           helperProps={helperProps ?? props.helperProps}
         >
@@ -164,8 +166,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 setOpen={setIsOpen}
                 open={isOpen}
                 icon={calendar}
-                disabled={calendarProps.isDisabled}
-                readonly={calendarProps.isReadOnly}
+                disabled={isDisabled}
+                readonly={isReadOnly}
                 reset={() => _onChange(null)}
                 buttonProps={buttonProps}
                 valueString={pickerState.formatValue(locale, {

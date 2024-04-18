@@ -35,6 +35,8 @@ export const DateRangePicker = forwardRef(
       Header,
       timezone,
       defaultValue,
+      disabled: isDisabled,
+      readOnly: isReadOnly,
       ...props
     }: DateRangePickerProps,
     forwardedRef: RefObject<HTMLDivElement>,
@@ -102,8 +104,8 @@ export const DateRangePicker = forwardRef(
       onChange: _onChange,
       label: label ?? 'Date-range',
       value: _value,
-      isDisabled: props.disabled,
-      isReadOnly: props.readOnly,
+      isDisabled: isDisabled,
+      isReadOnly: isReadOnly,
     }
 
     const state = useDateRangePickerState(dateRangePickerStateProps)
@@ -161,12 +163,12 @@ export const DateRangePicker = forwardRef(
             groupProps={groupProps}
             ref={ref}
             variant={props.variant}
-            disabled={props.disabled}
+            disabled={isDisabled}
             rightAdornments={
               <Toggle
                 buttonProps={buttonProps}
-                disabled={props.disabled}
-                readonly={startFieldProps.isReadOnly}
+                disabled={isDisabled}
+                readonly={isReadOnly}
                 reset={() => {
                   _onChange(null)
                 }}
