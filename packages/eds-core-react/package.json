@@ -92,8 +92,14 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.26.9",
+    "@internationalized/date": "^3.5.2",
+    "@react-aria/utils": "^3.23.2",
+    "@react-stately/calendar": "^3.4.4",
+    "@react-stately/datepicker": "^3.9.2",
+    "@react-types/shared": "^3.22.1",
     "@tanstack/react-virtual": "3.2.0",
-    "downshift": "9.0.4"
+    "downshift": "9.0.4",
+    "react-aria": "^3.32.1"
   },
   "engines": {
     "pnpm": ">=4",

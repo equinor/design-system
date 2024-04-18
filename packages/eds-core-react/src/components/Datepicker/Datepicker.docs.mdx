@@ -1,0 +1,52 @@
+import { Canvas, Controls, Meta, Primary } from '@storybook/blocks'
+
+import * as ComponentStories from './DatePicker.stories'
+import { Links } from '../../../.storybook/components'
+
+<Meta of={ComponentStories} />
+
+<Links
+  documentationUrl="https://eds.equinor.com/0b0c666ab/p/07b531-datetime-picker/b/86826a"
+  sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/DatePicker/DatePicker.tsx"
+  npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+# Datepicker
+
+Datepicker for selecting a single date, built on [react-aria](https://react-spectrum.adobe.com/react-aria)'s date/time hooks.
+
+<Primary />
+<Controls />
+
+## Usage
+
+### Min / Max values
+
+Limits on min/max can be set to restrict the dates that can be selected. In this example, it's set as the current month excluding first/last date
+
+```
+<DatePicker
+  minValue={new Date(...)}
+  maxValue={new Date(...)} />
+```
+
+<Canvas of={ComponentStories.WithMinAndMaxValue} />
+
+### Disable specific days
+
+In this example, we disable saturday + sunday
+
+```
+const isDateUnavailable = (d: Date) => d.getDay() === 0 || d.getDay() === 6
+<DatePicker isDateUnavailable={isDateUnavailable} />
+```
+
+<Canvas of={ComponentStories.LimitSpecificDays} />
+
+### DateTime
+
+<Canvas of={ComponentStories.DateTime} />
+
+### Custom header / footer
+
+<Canvas of={ComponentStories.CustomHeaderFooter} />

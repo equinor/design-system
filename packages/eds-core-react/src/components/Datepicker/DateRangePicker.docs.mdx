@@ -1,0 +1,31 @@
+import { Canvas, Controls, Meta, Primary } from '@storybook/blocks'
+
+import * as ComponentStories from './DateRangePicker.stories'
+
+<Meta of={ComponentStories} />
+
+# DateRangePicker
+
+Datepicker for selecting a range of dates, built on [react-aria](https://react-spectrum.adobe.com/react-aria)'s date/time hooks.
+
+The API is more or less the same as the [DatePicker](/?path=/docs/inputs-dates-datepicker--datepicker) component, but the `value` prop differs as it is a range.
+
+<Primary />
+<Controls />
+
+## Usage
+
+### Min / Max value
+
+<Canvas of={ComponentStories.WithMinAndMaxValue} />
+
+### Disable specific days
+
+In this example, we disable saturday + sunday
+
+```
+const isDateUnavailable = (d: Date) => d.getDay() === 0 || d.getDay() === 6
+<DatePicker isDateUnavailable={isDateUnavailable} />
+```
+
+<Canvas of={ComponentStories.LimitSpecificDays} />
