@@ -27,8 +27,12 @@ const contained_icon = {
   clickbound: {
     width: clicboundHeight,
     offset: {
-      top: '0',
-      left: `${(parseInt(clicboundHeight) - parseInt('40px')) / 2}px`,
+      top: `${
+        (parseInt(clicboundHeight) - parseInt(shape.icon_button.minWidth)) / 2
+      }px`,
+      left: `${
+        (parseInt(clicboundHeight) - parseInt(shape.icon_button.minWidth)) / 2
+      }px`,
     },
   },
   states: {
