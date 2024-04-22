@@ -90,15 +90,6 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     ${bordersTemplate(theme.border)}
     ${typographyTemplate(theme.typography)}
 
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: auto;
-      min-height: auto;
-      content: '';
-    }
-
     &::after {
       position: absolute;
       top: -${clickbound?.offset?.top};
