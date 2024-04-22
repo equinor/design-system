@@ -42,7 +42,9 @@ export const primary = mergeDeepRight(button, {
   clickbound: {
     width: clicboundHeight,
     offset: {
-      top: '0',
+      top: `${
+        (parseInt(clicboundHeight) - parseInt(shape.icon_button.minWidth)) / 2
+      }px`,
       left: `${
         (parseInt(clicboundHeight) - parseInt(shape.icon_button.minWidth)) / 2
       }px`,
