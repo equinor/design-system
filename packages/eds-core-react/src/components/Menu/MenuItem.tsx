@@ -70,7 +70,6 @@ const Item = styled.button.attrs<StyleAttrsProps>(({ $isFocused }) => ({
       : css`
           @media (hover: hover) and (pointer: fine) {
             &:hover {
-              z-index: 1;
               cursor: pointer;
               background: ${hover.background};
             }
