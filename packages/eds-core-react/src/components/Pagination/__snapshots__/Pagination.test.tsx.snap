@@ -46,18 +46,9 @@ exports[`Pagination Matches snapshot 1`] = `
   justify-self: center;
 }
 
-.c3::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  min-height: auto;
-  content: '';
-}
-
 .c3::after {
   position: absolute;
-  top: -0;
+  top: -4px;
   left: -4px;
   width: 48px;
   height: 48px;
