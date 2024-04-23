@@ -735,10 +735,7 @@ function AutocompleteInner<T>(
     (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
 
   const showNoOptions =
-    isOpen &&
-    !availableItems.length &&
-    inputValue.length > 0 &&
-    noOptionsText.length > 0
+    isOpen && !availableItems.length && noOptionsText.length > 0
 
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),
