@@ -61,9 +61,6 @@ const Item = styled.button.attrs<StyleAttrsProps>(({ $isFocused }) => ({
           svg {
             fill: ${icon.states.disabled.typography.color};
           }
-          &:focus {
-            outline: none;
-          }
           @media (hover: hover) and (pointer: fine) {
             &:hover {
               cursor: not-allowed;
@@ -73,12 +70,11 @@ const Item = styled.button.attrs<StyleAttrsProps>(({ $isFocused }) => ({
       : css`
           @media (hover: hover) and (pointer: fine) {
             &:hover {
-              z-index: 1;
               cursor: pointer;
               background: ${hover.background};
             }
           }
-          &:focus {
+          &:focus-visible {
             z-index: 3;
             ${outlineTemplate(focus.outline)}
           }
