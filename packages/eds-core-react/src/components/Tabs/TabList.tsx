@@ -57,12 +57,7 @@ const StyledTabList = styled.div.attrs(
   }
 `
 
-export type TabListProps = {
-  /** @ignore */
-  variant?: Variants
-  /** @ignore */
-  scrollable?: boolean
-} & HTMLAttributes<HTMLDivElement>
+export type TabListProps = HTMLAttributes<HTMLDivElement>
 
 type TabChild = {
   disabled?: boolean
