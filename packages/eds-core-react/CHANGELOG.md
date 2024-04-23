@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ✨ New components: `Datepicker` and `DateRangePicker` by @yusijs in https://github.com/equinor/design-system/pull/3387
+- ➕ New dependencies
+  - `react-aria`
+  - `@react-aria/utils`
+  - `@react-stately/calendar`
+  - `@react-stately/datepicker`
+  - `@react-types/shared`
+  - `@internationalized/date`
 
 ### Changed
 
