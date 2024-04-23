@@ -58,9 +58,9 @@ const StyledTabList = styled.div.attrs(
 `
 
 export type TabListProps = {
-  /** Sets the width of the tabs */
+  /** @ignore */
   variant?: Variants
-  /** adds scrollbar if tabs overflow on non-touch devices */
+  /** @ignore */
   scrollable?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
