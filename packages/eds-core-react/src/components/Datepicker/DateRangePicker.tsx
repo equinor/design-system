@@ -121,7 +121,7 @@ export const DateRangePicker = forwardRef(
       ? {
           text: state.displayValidation.validationErrors.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
-          icon: <Icon data={warning_outlined} />,
+          icon: <Icon size={16} data={warning_outlined} />,
         }
       : undefined
 
