@@ -76,7 +76,7 @@ export const DateTime: StoryFn = () => {
       value={val}
       onChange={(v) => {
         setValue(v)
-        action('onChange')(v.toISOString())
+        action('onChange')(v?.toISOString())
       }}
     />
   )
