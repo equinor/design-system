@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.37.0] - 2024-04-24
+
+### Added
+
+- ✨ New components: `Datepicker` and `DateRangePicker` by @yusijs in https://github.com/equinor/design-system/pull/3387
+- ➕ New dependencies
+  - `react-aria`
+  - `@react-aria/utils`
+  - `@react-stately/calendar`
+  - `@react-stately/datepicker`
+  - `@react-types/shared`
+  - `@internationalized/date`
+
+### Changed
+
+- 🏷️ `Label`: change "meta" field type to `ReactNode` by @oddvernes in https://github.com/equinor/design-system/pull/3341
+- 🚸 `Autocomplete`: show "no options" on focus when `options` is empty by @oddvernes in https://github.com/equinor/design-system/pull/3399
+- 💄 `Menu`: focus-ring changed from :focus to :focus-visible by @oddvernes in https://github.com/equinor/design-system/pull/3396
+
+### Fixed
+
+- 🐛 `TextArea`/`TextField`: Fixed scrollbar being inaccessible when `inputIcon` is present by @oddvernes in https://github.com/equinor/design-system/pull/3378
+- 🐛 `TextField`: Dynamically update padding when `inputIcon` changes by @torleifhalseth in https://github.com/equinor/design-system/pull/3380
+- 🐛 `Button`: fixed misaligned clickbounds on icon/ghost icon variants by @oddvernes in https://github.com/equinor/design-system/pull/3397
+- 🔥 `Tabs`: Remove invalid props from `TabListProps` type by @oddvernes in https://github.com/equinor/design-system/pull/3401
+
 ## [0.36.1] - 2024-03-01
 
 ### Changed

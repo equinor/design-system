@@ -8,12 +8,9 @@ import {
   RefObject,
   useEffect,
 } from 'react'
-import {
-  InputWrapper,
-  InputWrapperProps,
-  Popover,
-  useEds,
-} from '../../../index'
+import { InputWrapper, InputWrapperProps } from '../../InputWrapper'
+import { Popover } from '../../Popover'
+import { useEds } from '../../EdsProvider'
 import { GroupDOMAttributes } from '@react-types/shared'
 import { filterDOMProps } from '@react-aria/utils'
 
@@ -60,7 +57,7 @@ const StyledInputFieldWrapper = styled.div<{
     outline: 2px solid
       ${tokens.colors.interactive.primary__resting.rgba};
   }
-  
+
   ${
     !$disabled &&
     `&:not(:focus-within) {
@@ -79,7 +76,7 @@ const StyledInputFieldWrapper = styled.div<{
       outline: none;`
     )
   }}
-  
+
   color: ${(p) => getVariantText(p.$variant)};
   cursor: default;
 `

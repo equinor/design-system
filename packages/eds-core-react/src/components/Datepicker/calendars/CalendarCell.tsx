@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Typography, useEds } from '../../../index'
+import { Typography } from '../../Typography'
+import { useEds } from '../../EdsProvider'
 import { tokens } from '@equinor/eds-tokens'
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import { CalendarDate } from '@internationalized/date'
@@ -46,7 +47,7 @@ const StyledCell = styled(Typography)<{
   ${({ $disabled }) =>
     $disabled &&
     `
-    
+
     color: ${tokens.colors.interactive.disabled__text.rgba};
     &:hover {
       background-color: transparent;

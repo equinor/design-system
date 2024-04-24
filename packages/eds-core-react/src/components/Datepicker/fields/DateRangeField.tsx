@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react'
+import { forwardRef, useRef } from 'react'
 import { InputProps } from '../../Input'
 import { InputFieldWrapper } from './FieldWrapper'
 import { AriaDatePickerProps, DateValue } from 'react-aria'
