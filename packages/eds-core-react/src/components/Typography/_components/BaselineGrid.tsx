@@ -11,6 +11,7 @@ export const BaselineGrid = styled.div`
     transparent
   );
   background-size: 100% 8px;
+  min-height: 32px;
   padding: 4px;
   display: flex;
   flex-flow: column;
