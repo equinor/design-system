@@ -1,7 +1,6 @@
-import { UIText } from './UIText'
+import { UIText, UITextProps } from './UIText'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
-import { UITextProps } from '../typography.types'
 import { PropertyDocumentation } from '../_components/PropertyDocumentation'
 import { uiTextTokens } from '../_typography.tokens'
 
@@ -11,7 +10,6 @@ const meta: Meta<typeof UIText> = {
   title: 'Typography/UIText',
   component: UIText,
   args: {
-    children: TEXT,
     size: 'BASE',
   },
   argTypes: {
@@ -22,7 +20,6 @@ const meta: Meta<typeof UIText> = {
       },
     },
     size: {
-      description: 'Size of the UIText',
       table: {
         type: {
           summary: 'TypographySize',
@@ -35,17 +32,30 @@ const meta: Meta<typeof UIText> = {
       },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <BaselineGrid>
+          <Story />
+        </BaselineGrid>
+      )
+    },
+  ],
 }
 
 export default meta
 
 export const Introduction: StoryFn<UITextProps> = (args) => {
-  return <UIText {...args} />
+  return (
+    <UIText {...args} contentEditable>
+      This text is editable
+    </UIText>
+  )
 }
 
 export const Demo: StoryFn<UITextProps> = () => {
   return (
-    <BaselineGrid>
+    <>
       <UIText size="LG" as="h1">
         LG
       </UIText>
@@ -56,7 +66,7 @@ export const Demo: StoryFn<UITextProps> = () => {
       <UIText size="BASE" as="h2">
         {TEXT}
       </UIText>
-    </BaselineGrid>
+    </>
   )
 }
 
