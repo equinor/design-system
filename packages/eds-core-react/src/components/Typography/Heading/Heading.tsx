@@ -1,26 +1,26 @@
-import { forwardRef, memo } from 'react'
-import { HeadingProps } from '../typography.types'
+import { forwardRef, ElementType } from 'react'
+import { TypographyProps } from '../typography.types'
 import { Typography } from '../_components/Typography'
 import { headingTokens as tokens } from '../_typography.tokens'
-import { DEFAULT_HEADING_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
+import { DEFAULT_TEXT_SIZE } from '../_defaults'
 import { getTypographyProperties } from '../typography.utils'
+import { OverridableComponent } from '@equinor/eds-utils'
 
-export const Heading = memo(
-  forwardRef<HTMLHeadingElement, HeadingProps>(function Heading(
-    {
-      size = DEFAULT_TEXT_SIZE,
-      as = DEFAULT_HEADING_ELEMENT,
-      children,
-      ...rest
-    },
+export type HeadingProps = TypographyProps & {
+  /** as is required in Heading due to the a11y importance of using the correct level */
+  as: ElementType
+}
+
+export const Heading: OverridableComponent<HeadingProps, HTMLElement> =
+  forwardRef(function Heading(
+    { size = DEFAULT_TEXT_SIZE, as, children, ...rest },
     ref,
   ) {
     const {
-      baselineTrimGridInEm: baselineTrim,
-      capHeightTrimInEm: capHeightTrim,
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
+      verticalOffset,
     } = getTypographyProperties({ size, tokens })
 
     return (
@@ -30,12 +30,10 @@ export const Heading = memo(
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
-        $capHeightTrim={capHeightTrim}
-        $baselineTrim={baselineTrim}
+        $offset={verticalOffset}
         {...rest}
       >
         {children}
       </Typography>
     )
-  }),
-)
+  })

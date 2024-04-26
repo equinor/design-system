@@ -6,12 +6,14 @@ import { FontFamily, TypographyTokenCollection } from './typography.types'
 const equinor: FontFamily = {
   fontFamily: 'Equinor, sans-serif',
   fontAlias: 'equinor',
+  verticalOffset: 0.06,
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const inter: FontFamily = {
   fontFamily: '"Inter", Arial, sans-serif',
   fontAlias: 'inter',
+  verticalOffset: 0.002,
 }
 
 export const headingTokens: TypographyTokenCollection = {
