@@ -1,23 +1,26 @@
-import { forwardRef, memo } from 'react'
+import { forwardRef } from 'react'
 import { bodyTextTokens as tokens } from '../_typography.tokens'
 import { Typography } from '../_components/Typography'
-import { BodyTextProps } from '../typography.types'
+import { TypographyProps } from '../typography.types'
 import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
 import { getTypographyProperties } from '../typography.utils'
+import { OverridableComponent } from '@equinor/eds-utils'
 
-export const BodyText = memo(
-  forwardRef<HTMLElement, BodyTextProps>(function BodyText(
+export type BodyTextProps = TypographyProps
+
+export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
+  forwardRef(function BodyText(
     { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children, ...rest },
     ref,
   ) {
     const {
-      baselineTrimGridInEm: baselineTrim,
-      capHeightTrimInEm: capHeightTrim,
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
+      verticalOffset,
     } = getTypographyProperties({ size, tokens })
 
+    //@todo: optional color prop to set primary/secondary/tertiary text? (default should be  inherit)
     return (
       <Typography
         ref={ref}
@@ -25,12 +28,11 @@ export const BodyText = memo(
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
-        $capHeightTrim={capHeightTrim}
-        $baselineTrim={baselineTrim}
+        $offset={verticalOffset}
+        $onGrid={true}
         {...rest}
       >
         {children}
       </Typography>
     )
-  }),
-)
+  })
