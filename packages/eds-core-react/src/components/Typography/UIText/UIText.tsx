@@ -1,21 +1,34 @@
-import { forwardRef, memo } from 'react'
-import { UITextProps } from '../typography.types'
-import { uiTextTokens as tokens } from '../_typography.tokens'
+import { forwardRef } from 'react'
+import { TypographyProps } from '../typography.types'
 import { Typography } from '../_components/Typography'
-import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
+import { uiTextTokens as tokens } from '../_typography.tokens'
+import { DEFAULT_TEXT_SIZE, DEFAULT_TEXT_ELEMENT } from '../_defaults'
 import { getTypographyProperties } from '../typography.utils'
+import { OverridableComponent } from '@equinor/eds-utils'
 
-export const UIText = memo(
-  forwardRef<HTMLElement, UITextProps>(function UIText(
-    { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children, ...rest },
+export type UITextProps = TypographyProps & {
+  /** When true, text is pushed to the bottom of its text-box (making it "on grid" as the total heigth is rounded to a multiple of 4px), when false it is centered within the text-box
+   * @default false
+   */
+  onGrid?: boolean
+}
+
+export const UIText: OverridableComponent<UITextProps, HTMLElement> =
+  forwardRef(function UIText(
+    {
+      size = DEFAULT_TEXT_SIZE,
+      as = DEFAULT_TEXT_ELEMENT,
+      onGrid = false,
+      children,
+      ...rest
+    },
     ref,
   ) {
     const {
-      baselineTrimInEm: baselineTrim,
-      capHeightTrimInEm: capHeightTrim,
       fontFamily,
       fontSizeInRem: fontSize,
       lineHeightInRem: lineHeight,
+      verticalOffset,
     } = getTypographyProperties({ size, tokens })
 
     return (
@@ -25,12 +38,11 @@ export const UIText = memo(
         $fontSize={fontSize}
         $lineHeight={lineHeight}
         $fontFamily={fontFamily}
-        $capHeightTrim={capHeightTrim}
-        $baselineTrim={baselineTrim}
+        $offset={verticalOffset}
+        $onGrid={onGrid}
         {...rest}
       >
         {children}
       </Typography>
     )
-  }),
-)
+  })
