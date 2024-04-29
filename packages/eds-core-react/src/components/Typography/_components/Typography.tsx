@@ -45,7 +45,7 @@ export const Typography = styled.p<StyleHeadingProps>`
         : 'calc((round(up, 1cap, var(--_grid-base)) - 1cap) / 2)'};
     }
 
-    /*This emulates text-box-trim*/
+    /*This emulates text-box-trim: both; text-box-edge: cap alphabetic*/
     --_trim-top: calc(((((1lh - 1cap) / 2) - var(--_offset)) * -1));
     --_trim-bottom: calc(((((1lh - 1cap) / 2) + var(--_offset)) * -1));
 
