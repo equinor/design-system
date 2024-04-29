@@ -236,7 +236,7 @@ const meta: Meta<typeof DatePicker> = {
       },
       description: {
         component:
-          "⚠️ **`@equinor/eds-core-react` now has new `Datepicker` and `DateRangePicker` components which replaces the need for this. Please use those instead.** <br>The date picker is a community contributed component based around `react-datepicker`. It opens an overlaying interactive calendar that allows the user to select a date. If a date is chosen, this is reflected in the input field. Under some circumstances `Datepicker` is missing it's styles. A workaround is to import the css explicitly: `import 'react-datepicker/dist/react-datepicker.css';`",
+          "⚠️ **`@equinor/eds-core-react` now has new `DatePicker` and `DateRangePicker` components which replaces the need for this. Please use those instead.** <br>The date picker is a community contributed component based around `react-datepicker`. It opens an overlaying interactive calendar that allows the user to select a date. If a date is chosen, this is reflected in the input field. Under some circumstances `Datepicker` is missing it's styles. A workaround is to import the css explicitly: `import 'react-datepicker/dist/react-datepicker.css';`",
       },
     },
   },
