@@ -8,6 +8,7 @@ export type StyleHeadingProps = {
   $lineHeight: string
   $offset?: number
   $onGrid?: boolean
+  $color?: string
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
 export const Typography = styled.p<StyleHeadingProps>`
@@ -19,12 +20,20 @@ export const Typography = styled.p<StyleHeadingProps>`
     $lineHeight,
     $offset = 0,
     $onGrid = true,
+    $color,
   }) => css`
+    //populate old token fallbacks with new tokens? but these new components will REQUIRE new tokens no? so maybe this is pointless
+    --eds_text_static_icons__default: var(--eds-color-text-primary);
+    --eds_text_static_icons__secondary: var(--eds-color-text-secondary);
+    --eds_text_static_icons__tertiary: var(--eds-color-text-tertiary);
+
+    --_text-preset-color: ${$color};
     font-family: ${$fontFamily};
     font-size: ${$fontSize};
     line-height: ${$lineHeight};
-    //line-height: round(${$fontSize} * 1.125, 4px); //works?
-    color: var(--text-custom-color, inherit);
+    //how to calculate unitless line-height rounded to 4px in css
+    //line-height: round(1em * 1.5, 4px);
+    color: var(--_text-preset-color, inherit);
     //background-color: rgb(255 0 0 / 0.3);
     --_offset: calc(${$offset} * 1em);
     --_grid-base: 4px;
