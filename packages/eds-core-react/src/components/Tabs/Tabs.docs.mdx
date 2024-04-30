@@ -27,22 +27,30 @@ Tabs allow for navigation between content that is related and has an equal hiera
     <li>Each tab's content should be noticeably different from the other.</li>
     <li>Tabs allow for information to be presented in a space-saving layout.</li>
     <li>Tab labels should provide clear and concise direction.</li>
-    <li>Note that if the label is longer than the maximum width it will be truncated and should have a tooltip provided.</li>
 </ul>
 
 ```tsx
 import { Dialog } from '@equinor/eds-core-react'
+import { useState } from 'react'
 
-<Tabs>
-    <Tabs.List>
-      <Tabs.Tab>One</Tabs.Tab>
-      <Tabs.Tab>Two</Tabs.Tab>
-    </Tabs.List>
-    <Tabs.Panels>
-      <Tabs.Panel>Panel one</Tabs.Panel>
-      <Tabs.Panel>Panel two</Tabs.Panel>
-    </Tabs.Panels>
-</Tabs>
+function TabsExample() {
+  const [activeTab, setActiveTab] = useState(0)
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+return (
+  <Tabs activeTab={activeTab} onChange={handleChange}>
+      <Tabs.List>
+        <Tabs.Tab>One</Tabs.Tab>
+        <Tabs.Tab>Two</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panels>
+        <Tabs.Panel>Panel one</Tabs.Panel>
+        <Tabs.Panel>Panel two</Tabs.Panel>
+      </Tabs.Panels>
+  </Tabs>
+  )
+}
 
 ```
 
