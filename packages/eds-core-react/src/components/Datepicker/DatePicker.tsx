@@ -1,4 +1,11 @@
-import { forwardRef, RefObject, useCallback, useRef, useState } from 'react'
+import {
+  forwardRef,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { DatePickerProps } from './props'
 import { Calendar } from './calendars/Calendar'
 import { DateField } from './fields/DateField'
@@ -42,11 +49,17 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       granularity,
       disabled: isDisabled,
       readOnly: isReadOnly,
+      formatOptions,
       ...props
     }: DatePickerProps,
     forwardedRef: RefObject<HTMLDivElement>,
   ) => {
     timezone = timezone ?? defaultTimezone
+    formatOptions = formatOptions ?? {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }
     const [innerValue, setInnerValue] = useState<
       CalendarDate | CalendarDateTime
     >(() => {
@@ -133,8 +146,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }
       : undefined
 
+    useEffect(() => {
+      if (!defaultValue && !value) setInnerValue(null)
+    }, [defaultValue, value])
+
     return (
-      <DatePickerProvider timezone={timezone}>
+      <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
         <FieldWrapper
           isOpen={isOpen}
           readonly={fieldProps.isReadOnly}

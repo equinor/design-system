@@ -8,6 +8,7 @@ import { Autocomplete } from '../Autocomplete'
 import { NativeSelect } from '../Select'
 import { action } from '@storybook/addon-actions'
 import { CalendarDate } from '@internationalized/date'
+import { I18nProvider } from 'react-aria'
 
 const meta: Meta<typeof DatePicker> = {
   title: 'Inputs/Dates/Datepicker',
@@ -46,7 +47,7 @@ export const Introduction: StoryFn = (props: DatePickerProps) => {
     <DatePicker
       {...props}
       onChange={(v) => {
-        const str = v.toISOString()
+        const str = v?.toISOString()
         action('onChange')(str)
       }}
     />
@@ -79,6 +80,67 @@ export const DateTime: StoryFn = () => {
         action('onChange')(v?.toISOString())
       }}
     />
+  )
+}
+
+export const CustomDisplayFormat: StoryFn = () => {
+  const [val, setValue] = useState(new Date())
+  return (
+    <DatePicker
+      formatOptions={{
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit',
+      }}
+      value={val}
+      onChange={(v) => {
+        setValue(v)
+        action('onChange')(v?.toISOString())
+      }}
+    />
+  )
+}
+
+export const CustomLocale: StoryFn = () => {
+  const [val, setValue] = useState(new Date())
+  const [locale, setLocale] = useState('en-US')
+  const locales = [
+    { value: 'en-US', label: 'English' },
+    { value: 'uk', label: 'Ukrainian' },
+    { value: 'sv-SE', label: 'Swedish' },
+    { value: 'zh-Hans', label: 'Chinese (Simplified)' },
+    { value: 'zh-Hant', label: 'Chinese (Traditional)' },
+  ]
+  return (
+    <div>
+      <NativeSelect
+        id={'locale-picker'}
+        label={'Select locale'}
+        onChange={(e) => setLocale(e.currentTarget.value)}
+        value={locale}
+      >
+        {locales.map((l) => (
+          <option value={l.value} key={l.value}>
+            {l.label}
+          </option>
+        ))}
+      </NativeSelect>{' '}
+      <br />
+      <I18nProvider locale={locale}>
+        <DatePicker
+          formatOptions={{
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit',
+          }}
+          value={val}
+          onChange={(v) => {
+            setValue(v)
+            action('onChange')(v?.toISOString())
+          }}
+        />
+      </I18nProvider>
+    </div>
   )
 }
 

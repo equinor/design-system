@@ -2,6 +2,7 @@ import { MutableRefObject, ReactNode } from 'react'
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import { Variants } from '../types'
 import { HelperTextProps } from '../InputWrapper/HelperText'
+import { DateFormatterOptions } from 'react-aria'
 
 type DateRange = { from: Date | null; to: Date | null }
 
@@ -83,6 +84,11 @@ export type DatePickerProps = Partial<{
    * Granularity of the time field if enabled
    */
   granularity?: 'hour' | 'minute' | 'second'
+  /**
+   * Format options for the datepicker input field
+   * Only applies when input is blurred
+   */
+  formatOptions?: DateFormatterOptions
 }>
 
 export type DateTimePickerProps = Omit<

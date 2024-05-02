@@ -35,6 +35,7 @@ export const DateRangePicker = forwardRef(
       Header,
       timezone,
       defaultValue,
+      formatOptions,
       disabled: isDisabled,
       readOnly: isReadOnly,
       ...props
@@ -42,6 +43,11 @@ export const DateRangePicker = forwardRef(
     forwardedRef: RefObject<HTMLDivElement>,
   ) => {
     timezone = timezone ?? defaultTimezone
+    formatOptions = formatOptions ?? {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }
     const [innerValue, setInnerValue] = useState<RangeValue<DateValue>>(() => {
       const initialValue = value ?? defaultValue
       if (initialValue) {
@@ -135,7 +141,7 @@ export const DateRangePicker = forwardRef(
       : null
 
     return (
-      <DatePickerProvider timezone={timezone}>
+      <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
         <FieldWrapper
           isOpen={isOpen}
           color={state.isInvalid ? 'warning' : props.variant}
