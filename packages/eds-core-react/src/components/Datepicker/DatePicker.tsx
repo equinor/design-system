@@ -146,6 +146,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }
       : undefined
 
+    // innerValue is used as a fallback, especially for uncontrolled inputs, so it needs to be reset when value / defaultValue is reset
     useEffect(() => {
       if (!defaultValue && !value) setInnerValue(null)
     }, [defaultValue, value])
