@@ -1,4 +1,11 @@
-import { forwardRef, RefObject, useCallback, useRef, useState } from 'react'
+import {
+  forwardRef,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { DateRangePickerProps } from './props'
 import { RangeCalendar } from './calendars/RangeCalendar'
 import { calendar_date_range, warning_outlined } from '@equinor/eds-icons'
@@ -35,6 +42,7 @@ export const DateRangePicker = forwardRef(
       Header,
       timezone,
       defaultValue,
+      formatOptions,
       disabled: isDisabled,
       readOnly: isReadOnly,
       ...props
@@ -42,6 +50,11 @@ export const DateRangePicker = forwardRef(
     forwardedRef: RefObject<HTMLDivElement>,
   ) => {
     timezone = timezone ?? defaultTimezone
+    formatOptions = formatOptions ?? {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }
     const [innerValue, setInnerValue] = useState<RangeValue<DateValue>>(() => {
       const initialValue = value ?? defaultValue
       if (initialValue) {
@@ -134,8 +147,15 @@ export const DateRangePicker = forwardRef(
       ? Object.values(formattedValue).join(' - ')
       : null
 
+    // innerValue is used as a fallback, especially for uncontrolled inputs, so it needs to be reset when value / defaultValue is reset
+    useEffect(() => {
+      const val = defaultValue ?? value
+      if (!defaultValue && !value) setInnerValue(null)
+      if (!val?.from && !val?.to) setInnerValue(null)
+    }, [defaultValue, value])
+
     return (
-      <DatePickerProvider timezone={timezone}>
+      <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
         <FieldWrapper
           isOpen={isOpen}
           color={state.isInvalid ? 'warning' : props.variant}

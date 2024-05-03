@@ -20,6 +20,31 @@ Datepicker for selecting a single date, built on [react-aria](https://react-spec
 
 ## Usage
 
+### Custom display format
+
+In some cases it's useful to display the date in a different format than the default. This can be done by passing a `formatOptions` prop, which uses the [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat) options.
+
+For example, to display the date as `dd MMMM yyyy`:
+```
+<DatePicker
+  formatOptions={{ day: '2-digit', month: 'long', year: 'numeric' }} />
+```
+
+<Canvas of={ComponentStories.CustomDisplayFormat} />
+
+### Custom locale
+
+In some cases it's useful to display the date in a different locale than the default, e.g. if your app has a locale-picker.
+This can be done by wrapping the component with [I18nProvider](https://react-spectrum.adobe.com/react-aria/I18nProvider.html) from react-aria, which supports all the locales that Intl.DateTimeFormat does.
+
+```
+<I18nProvider locale={'en-US'}>
+  <DatePicker />
+</I18nProvider>
+```
+
+<Canvas of={ComponentStories.CustomLocale} />
+
 ### Min / Max values
 
 Limits on min/max can be set to restrict the dates that can be selected. In this example, it's set as the current month excluding first/last date

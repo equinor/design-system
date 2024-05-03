@@ -21,8 +21,6 @@ const mockResizeObserver = jest.fn(() => ({
 
 beforeAll(() => {
   window.ResizeObserver = mockResizeObserver
-  HTMLDivElement.prototype.showPopover = jest.fn()
-  HTMLDivElement.prototype.hidePopover = jest.fn()
 
   //https://github.com/TanStack/virtual/issues/641
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

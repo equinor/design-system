@@ -2,10 +2,11 @@ import {
   DateFieldState,
   DateSegment as IDateSegment,
 } from '@react-stately/datepicker'
-import { KeyboardEvent, useRef } from 'react'
-import { useDateSegment } from 'react-aria'
+import { KeyboardEvent, useRef, useState } from 'react'
+import { useDateFormatter, useDateSegment } from 'react-aria'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
+import { useDatePickerContext } from '../utils/context'
 
 const Segment = styled.div<{
   $placeholder: boolean
@@ -32,12 +33,29 @@ export function DateSegment({
   state: DateFieldState
   segment: IDateSegment
 }) {
+  const { formatOptions, timezone } = useDatePickerContext()
+  const formatter = useDateFormatter(formatOptions)
+  const parts = state.value
+    ? formatter.formatToParts(state.value.toDate(timezone))
+    : []
+  const part = parts.find((p) => p.type === segment.type)
+  const value = part?.value ?? segment.text
+
+  const [focus, setFocus] = useState(false)
   const ref = useRef(null)
   const { segmentProps } = useDateSegment(segment, state, ref)
 
   return (
     <Segment
       {...segmentProps}
+      onFocus={(e) => {
+        setFocus(true)
+        segmentProps.onFocus(e)
+      }}
+      onBlur={(e) => {
+        setFocus(false)
+        segmentProps.onBlur(e)
+      }}
       $invalid={state.isInvalid}
       $disabled={state.isDisabled}
       $placeholder={segment.isPlaceholder}
@@ -53,9 +71,11 @@ export function DateSegment({
       ref={ref}
       className={`segment ${segment.isPlaceholder ? 'placeholder' : ''}`}
     >
-      {segment.isPlaceholder || segment.type === 'literal'
-        ? segment.text
-        : segment.text.padStart(segment.type === 'year' ? 4 : 2, '0')}
+      {focus
+        ? segment.isPlaceholder || segment.type === 'literal'
+          ? segment.text
+          : segment.text.padStart(segment.type === 'year' ? 4 : 2, '0')
+        : value}
     </Segment>
   )
 }

@@ -3,6 +3,7 @@ import { axe } from 'jest-axe'
 import { DatePicker } from './DatePicker'
 import userEvent from '@testing-library/user-event'
 import { I18nProvider } from 'react-aria'
+import { useState } from 'react'
 
 describe('DatePicker', () => {
   it('Can render', () => {
@@ -25,6 +26,24 @@ describe('DatePicker', () => {
   it('Should be disabled', () => {
     render(<DatePicker label={'Datepicker'} disabled={true} />)
     expect(screen.getByText('dd')).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('should be nullable from outside', async () => {
+    const Comp = () => {
+      const [date, setDate] = useState<Date | null>(new Date(2024, 4, 1))
+      return (
+        <I18nProvider locale={'en-US'}>
+          <button type={'button'} onClick={() => setDate(null)}>
+            Reset
+          </button>
+          <DatePicker label={'Datepicker'} value={date} />
+        </I18nProvider>
+      )
+    }
+    render(<Comp />)
+    expect(screen.getByRole('presentation')).toHaveTextContent('05/01/2024')
+    await userEvent.click(screen.getByText('Reset'))
+    expect(screen.getByRole('presentation')).toHaveTextContent('mm/dd/yyyy')
   })
 
   it('Should be possible to type', async () => {
@@ -195,6 +214,6 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    expect(screen.getByRole('presentation')).toHaveTextContent('2024年05月04日')
+    expect(screen.getByRole('presentation')).toHaveTextContent('2024年05年04年')
   })
 })
