@@ -38,18 +38,15 @@ import {
   useToken,
   bordersTemplate,
   useIsomorphicLayoutEffect,
-  useIsInDialog,
 } from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
   offset,
   flip,
-  shift,
   size,
   autoUpdate,
   useFloating,
   useInteractions,
-  FloatingPortal,
   MiddlewareState,
 } from '@floating-ui/react'
 import { Variants } from '../types'
@@ -75,6 +72,16 @@ const StyledList = styled(List)(
     }
   `,
 )
+
+const StyledPopover = styled('div').withConfig({
+  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
+})<{ popover: string }>`
+  inset: unset;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+`
 
 const HelperText = styled(_HelperText)`
   margin-top: 8px;
@@ -275,7 +282,9 @@ export type AutocompleteProps<T> = {
   allowSelectAll?: boolean
   /**  Custom option template */
   optionComponent?: (option: T, isSelected: boolean) => ReactNode
-  /** Disable use of react portal for dropdown */
+  /** Disable use of react portal for dropdown
+   * @deprecated  Autocomplete now uses the native popover api to render the dropdown. This prop will be removed in a future version
+   */
   disablePortal?: boolean
   /** Custom filter function for options */
   optionsFilter?: (option: T, inputValue: string) => boolean
@@ -334,6 +343,12 @@ function AutocompleteInner<T>(
     variant,
     ...other
   } = props
+
+  if (disablePortal) {
+    console.warn(
+      'Autocomplete "disablePortal" prop has been deprecated. Autocomplete now uses the native popover api',
+    )
+  }
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
@@ -721,8 +736,9 @@ function AutocompleteInner<T>(
     placement: 'bottom-start',
     middleware: [
       offset(4),
-      flip(),
-      shift({ padding: 8 }),
+      flip({
+        boundary: document?.body,
+      }),
       size({
         apply({ rects, elements }: MiddlewareState) {
           const anchorWidth = `${rects.reference.width}px`
@@ -743,6 +759,14 @@ function AutocompleteInner<T>(
     }
   }, [refs.reference, refs.floating, update, isOpen])
 
+  useEffect(() => {
+    if (isOpen) {
+      refs.floating.current.showPopover()
+    } else {
+      refs.floating.current.hidePopover()
+    }
+  }, [isOpen, refs.floating])
+
   const clear = () => {
     resetCombobox()
     resetSelection()
@@ -759,18 +783,15 @@ function AutocompleteInner<T>(
     [selectedItems, getLabel],
   )
 
-  //temporary fix when inside dialog. Should be replaced by popover api when it is ready
-  const inDialog = useIsInDialog(refs.domReference.current)
-
   const optionsList = (
-    <div
+    <StyledPopover
+      popover="manual"
       {...getFloatingProps({
         ref: refs.setFloating,
         style: {
           position: strategy,
           top: y || 0,
           left: x || 0,
-          zIndex: 1500,
         },
       })}
     >
@@ -881,7 +902,7 @@ function AutocompleteInner<T>(
               )
             })}
       </StyledList>
-    </div>
+    </StyledPopover>
   )
 
   const inputProps = getInputProps(
@@ -951,13 +972,7 @@ function AutocompleteInner<T>(
             icon={helperIcon}
           />
         )}
-        {disablePortal || inDialog ? (
-          optionsList
-        ) : (
-          <FloatingPortal id="eds-autocomplete-container">
-            {optionsList}
-          </FloatingPortal>
-        )}
+        {optionsList}
       </Container>
     </ThemeProvider>
   )

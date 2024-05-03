@@ -21,6 +21,8 @@ const mockResizeObserver = jest.fn(() => ({
 
 beforeAll(() => {
   window.ResizeObserver = mockResizeObserver
+  HTMLDivElement.prototype.showPopover = jest.fn()
+  HTMLDivElement.prototype.hidePopover = jest.fn()
 
   //https://github.com/TanStack/virtual/issues/641
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -52,7 +54,7 @@ describe('Autocomplete', () => {
     expect(optionsList).toMatchSnapshot()
   })
   it('Has provided label', async () => {
-    render(<Autocomplete disablePortal label={labelText} options={items} />)
+    render(<Autocomplete label={labelText} options={items} />)
 
     // The same label is used for both the input field and the list of options
     const labeledNodes = await screen.findAllByLabelText(labelText)
@@ -69,13 +71,7 @@ describe('Autocomplete', () => {
   })
 
   it('Has provided ReactNode label', async () => {
-    render(
-      <Autocomplete
-        disablePortal
-        label={<div>{labelText}</div>}
-        options={items}
-      />,
-    )
+    render(<Autocomplete label={<div>{labelText}</div>} options={items} />)
 
     // The same label is used for both the input field and the list of options
     const labeledNodes = await screen.findAllByLabelText(labelText)
@@ -95,7 +91,6 @@ describe('Autocomplete', () => {
     const labler = (text: string) => `${text}+1`
     render(
       <Autocomplete
-        disablePortal
         options={itemObjects}
         label={labelText}
         optionLabel={(item) => labler(item.label)}
@@ -128,7 +123,6 @@ describe('Autocomplete', () => {
     }
     render(
       <Autocomplete
-        disablePortal
         options={itemObjects}
         label={labelText}
         optionLabel={(item) => item.label}
@@ -153,9 +147,7 @@ describe('Autocomplete', () => {
   })
 
   it('Can be disabled', async () => {
-    render(
-      <Autocomplete disablePortal label={labelText} options={items} disabled />,
-    )
+    render(<Autocomplete label={labelText} options={items} disabled />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
 
@@ -189,7 +181,6 @@ describe('Autocomplete', () => {
         options={items}
         data-testid="styled-autocomplete"
         multiple={true}
-        disablePortal={true}
         allowSelectAll={true}
         onOptionsChange={onChange}
       />,
@@ -219,7 +210,7 @@ describe('Autocomplete', () => {
   })
 
   it('Can open the options on button click', async () => {
-    render(<Autocomplete disablePortal options={items} label={labelText} />)
+    render(<Autocomplete options={items} label={labelText} />)
 
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const optionsList = labeledNodes[1]
@@ -243,7 +234,6 @@ describe('Autocomplete', () => {
     return (
       <Autocomplete
         multiple
-        disablePortal
         options={items}
         label={labelText}
         selectedOptions={selected}
@@ -277,7 +267,7 @@ describe('Autocomplete', () => {
   })
 
   it('Can filter results by input value', async () => {
-    render(<Autocomplete disablePortal options={items} label={labelText} />)
+    render(<Autocomplete options={items} label={labelText} />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
     const optionsList = labeledNodes[1]
@@ -301,7 +291,6 @@ describe('Autocomplete', () => {
   it('Second option is first when first option is disabled', async () => {
     render(
       <Autocomplete
-        disablePortal
         options={items}
         label={labelText}
         optionDisabled={(item) => item === items[0]}
@@ -330,7 +319,7 @@ describe('Autocomplete', () => {
   })
 
   it('Clears the input text on blur when no option is selected', async () => {
-    render(<Autocomplete disablePortal options={items} label={labelText} />)
+    render(<Autocomplete options={items} label={labelText} />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
 
