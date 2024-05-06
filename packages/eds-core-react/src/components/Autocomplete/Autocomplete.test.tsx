@@ -175,6 +175,7 @@ describe('Autocomplete', () => {
     const onChange = jest.fn()
     render(
       <StyledAutocomplete
+        optionLabel={(label: string) => label}
         label={labelText}
         options={items}
         data-testid="styled-autocomplete"
@@ -336,6 +337,7 @@ describe('Autocomplete', () => {
   it('Can extend the css for the component & props are passed correctly to input', async () => {
     const { container } = render(
       <StyledAutocomplete
+        optionLabel={(label: string) => label}
         label="test"
         options={items}
         data-testid="styled-autocomplete"
