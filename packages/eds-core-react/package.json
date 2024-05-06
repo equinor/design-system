@@ -99,7 +99,7 @@
     "@react-types/shared": "^3.22.1",
     "@tanstack/react-virtual": "3.2.0",
     "downshift": "9.0.4",
-    "react-aria": "^3.32.1"
+    "react-aria": "^3.33.0"
   },
   "engines": {
     "pnpm": ">=4",
