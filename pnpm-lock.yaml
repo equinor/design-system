@@ -188,7 +188,7 @@ importers:
         version: 9.1.3(@babel/core@7.24.5)(webpack@5.91.0)
       babel-plugin-styled-components:
         specifier: ^2.1.4
-        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.9)
+        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.8)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.8.9)(ts-node@10.9.1)
@@ -197,7 +197,7 @@ importers:
         version: 29.7.0
       jest-styled-components:
         specifier: ^7.2.0
-        version: 7.2.0(styled-components@6.1.9)
+        version: 7.2.0(styled-components@6.1.8)
       js-file-download:
         specifier: ^0.4.12
         version: 0.4.12
@@ -232,8 +232,8 @@ importers:
         specifier: ^8.0.2
         version: 8.0.2(@babel/preset-env@7.24.0)(react-dom@18.2.0)(react@18.2.0)
       styled-components:
-        specifier: 6.1.9
-        version: 6.1.9(react-dom@18.2.0)(react@18.2.0)
+        specifier: 6.1.8
+        version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
       tsc-watch:
         specifier: ^6.0.4
         version: 6.0.4(typescript@5.2.2)
@@ -330,7 +330,7 @@ importers:
         version: 9.1.3(@babel/core@7.24.5)(webpack@5.91.0)
       babel-plugin-styled-components:
         specifier: ^2.1.4
-        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.9)
+        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.8)
       jest:
         specifier: 29.7.0
         version: 29.7.0(@types/node@20.8.9)(ts-node@10.9.1)
@@ -339,7 +339,7 @@ importers:
         version: 29.7.0
       jest-styled-components:
         specifier: ^7.2.0
-        version: 7.2.0(styled-components@6.1.9)
+        version: 7.2.0(styled-components@6.1.8)
       js-file-download:
         specifier: ^0.4.12
         version: 0.4.12
@@ -371,8 +371,8 @@ importers:
         specifier: ^8.0.2
         version: 8.0.2(@babel/preset-env@7.24.0)(react-dom@18.2.0)(react@18.2.0)
       styled-components:
-        specifier: 6.1.9
-        version: 6.1.9(react-dom@18.2.0)(react@18.2.0)
+        specifier: 6.1.8
+        version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
       ts-jest:
         specifier: 29.1.1
         version: 29.1.1(@babel/core@7.24.5)(esbuild@0.20.2)(jest@29.7.0)(typescript@5.2.2)
@@ -499,7 +499,7 @@ importers:
         version: 9.1.3(@babel/core@7.24.5)(webpack@5.91.0)
       babel-plugin-styled-components:
         specifier: ^2.1.4
-        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.9)
+        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.8)
       clsx:
         specifier: ^2.0.0
         version: 2.1.0
@@ -511,7 +511,7 @@ importers:
         version: 29.7.0
       jest-styled-components:
         specifier: ^7.2.0
-        version: 7.2.0(styled-components@6.1.9)
+        version: 7.2.0(styled-components@6.1.8)
       js-file-download:
         specifier: ^0.4.12
         version: 0.4.12
@@ -546,8 +546,8 @@ importers:
         specifier: 8.0.2
         version: 8.0.2(@babel/preset-env@7.24.0)(react-dom@18.2.0)(react@18.2.0)
       styled-components:
-        specifier: 6.1.9
-        version: 6.1.9(react-dom@18.2.0)(react@18.2.0)
+        specifier: 6.1.8
+        version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
       tsc-watch:
         specifier: ^6.0.4
         version: 6.0.4(typescript@5.2.2)
@@ -626,7 +626,7 @@ importers:
         version: 9.1.3(@babel/core@7.24.5)(webpack@5.91.0)
       babel-plugin-styled-components:
         specifier: ^2.1.4
-        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.9)
+        version: 2.1.4(@babel/core@7.24.5)(styled-components@6.1.8)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.8.9)(ts-node@10.9.1)
@@ -635,7 +635,7 @@ importers:
         version: 29.7.0
       jest-styled-components:
         specifier: ^7.2.0
-        version: 7.2.0(styled-components@6.1.9)
+        version: 7.2.0(styled-components@6.1.8)
       js-file-download:
         specifier: ^0.4.12
         version: 0.4.12
@@ -658,8 +658,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       styled-components:
-        specifier: 6.1.9
-        version: 6.1.9(react-dom@18.2.0)(react@18.2.0)
+        specifier: 6.1.8
+        version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
       tsc-watch:
         specifier: ^6.0.4
         version: 6.0.4(typescript@5.2.2)
@@ -3437,6 +3437,10 @@ packages:
 
   /@emotion/memoize@0.8.1:
     resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
+    dev: true
+
+  /@emotion/unitless@0.8.0:
+    resolution: {integrity: sha512-VINS5vEYAscRl2ZUDiT3uMPlrFQupiKgHz5AA4bCH1miKBg4qtwkim1qPmJj/4WG6TreYMY111rEFsjupcOKHw==}
     dev: true
 
   /@emotion/unitless@0.8.1:
@@ -7862,7 +7866,7 @@ packages:
       - '@babel/core'
     dev: true
 
-  /babel-plugin-styled-components@2.1.4(@babel/core@7.24.5)(styled-components@6.1.9):
+  /babel-plugin-styled-components@2.1.4(@babel/core@7.24.5)(styled-components@6.1.8):
     resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
     peerDependencies:
       styled-components: '>= 2'
@@ -7872,7 +7876,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.23.3(@babel/core@7.24.5)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 6.1.9(react-dom@18.2.0)(react@18.2.0)
+      styled-components: 6.1.8(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -11324,14 +11328,14 @@ packages:
       - supports-color
     dev: true
 
-  /jest-styled-components@7.2.0(styled-components@6.1.9):
+  /jest-styled-components@7.2.0(styled-components@6.1.8):
     resolution: {integrity: sha512-gwyyveNjvuRA0pyhbQoydXZllLZESs2VuL5fXCabzh0buHPAOUfANtW7n5YMPmdC0sH3VB7h2eUGZ23+tjvaBA==}
     engines: {node: '>= 12'}
     peerDependencies:
       styled-components: '>= 5'
     dependencies:
       '@adobe/css-tools': 4.3.3
-      styled-components: 6.1.9(react-dom@18.2.0)(react@18.2.0)
+      styled-components: 6.1.8(react-dom@18.2.0)(react@18.2.0)
     dev: true
 
   /jest-util@29.7.0:
@@ -14105,15 +14109,15 @@ packages:
     resolution: {integrity: sha512-IezA2qp+vcdlhJaVm5SOdPPTUu0FCEqfNSli2vRuSIBbu5Nq5UvygTk/VzeCqfLz2Atj3dVII5QBKGZRZ0edzw==}
     dev: true
 
-  /styled-components@6.1.9(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-aBOqs0uMsYufFXSE4q6cA6Ty1fwZuMk4BJRHfiGSna59F1otnxiDelwhN4fEwmBtIymmF0ZqXHnpSigr2ps9Cg==}
+  /styled-components@6.1.8(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-PQ6Dn+QxlWyEGCKDS71NGsXoVLKfE1c3vApkvDYS5KAK+V8fNWGhbSUEo9Gg2iaID2tjLXegEW3bZDUGpofRWw==}
     engines: {node: '>= 16'}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
     dependencies:
       '@emotion/is-prop-valid': 1.2.1
-      '@emotion/unitless': 0.8.1
+      '@emotion/unitless': 0.8.0
       '@types/stylis': 4.2.0
       css-to-react-native: 3.2.0
       csstype: 3.1.2
