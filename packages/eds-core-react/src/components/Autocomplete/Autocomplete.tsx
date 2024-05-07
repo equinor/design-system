@@ -367,14 +367,6 @@ function AutocompleteInner<T>(
     return _availableItems
   }, [_availableItems, showSelectAll])
 
-  const toggleAllSelected = () => {
-    if (selectedItems.length === inputOptions.length) {
-      setSelectedItems([])
-    } else {
-      setSelectedItems(inputOptions)
-    }
-  }
-
   useEffect(() => {
     const availableHash = JSON.stringify(inputOptions)
     const optionsHash = JSON.stringify(options)
@@ -445,6 +437,14 @@ function AutocompleteInner<T>(
       return 'SOME'
     return 'NONE'
   }, [inputOptions, selectedItems])
+
+  const toggleAllSelected = () => {
+    if (selectedItems.length === inputOptions.length) {
+      setSelectedItems([])
+    } else {
+      setSelectedItems(inputOptions)
+    }
+  }
 
   const getLabel = useCallback(
     (item: T) => {
