@@ -726,12 +726,6 @@ function AutocompleteInner<T>(
     reset: resetCombobox,
   } = useCombobox(comboBoxProps)
 
-  useEffect(() => {
-    if (isControlled) {
-      setSelectedItems(selectedOptions)
-    }
-  }, [isControlled, selectedOptions, setSelectedItems])
-
   const { x, y, refs, update, strategy } = useFloating<HTMLInputElement>({
     placement: 'bottom-start',
     middleware: [
