@@ -367,14 +367,6 @@ function AutocompleteInner<T>(
     return _availableItems
   }, [_availableItems, showSelectAll])
 
-  const toggleAllSelected = () => {
-    if (selectedItems.length === inputOptions.length) {
-      setSelectedItems([])
-    } else {
-      setSelectedItems(inputOptions)
-    }
-  }
-
   useEffect(() => {
     const availableHash = JSON.stringify(inputOptions)
     const optionsHash = JSON.stringify(options)
@@ -445,6 +437,14 @@ function AutocompleteInner<T>(
       return 'SOME'
     return 'NONE'
   }, [inputOptions, selectedItems])
+
+  const toggleAllSelected = () => {
+    if (selectedItems.length === inputOptions.length) {
+      setSelectedItems([])
+    } else {
+      setSelectedItems(inputOptions)
+    }
+  }
 
   const getLabel = useCallback(
     (item: T) => {
@@ -725,12 +725,6 @@ function AutocompleteInner<T>(
     inputValue,
     reset: resetCombobox,
   } = useCombobox(comboBoxProps)
-
-  useEffect(() => {
-    if (isControlled) {
-      setSelectedItems(selectedOptions)
-    }
-  }, [isControlled, selectedOptions, setSelectedItems])
 
   const { x, y, refs, update, strategy } = useFloating<HTMLInputElement>({
     placement: 'bottom-start',
