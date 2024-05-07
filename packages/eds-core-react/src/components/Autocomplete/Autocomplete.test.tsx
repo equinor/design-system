@@ -175,6 +175,7 @@ describe('Autocomplete', () => {
     const onChange = jest.fn()
     render(
       <StyledAutocomplete
+        //a bug in styled-components 6.1.8 breaks the conditional type for optionLabel when using styled(Autocomplete)
         optionLabel={(label: string) => label}
         label={labelText}
         options={items}
@@ -337,6 +338,7 @@ describe('Autocomplete', () => {
   it('Can extend the css for the component & props are passed correctly to input', async () => {
     const { container } = render(
       <StyledAutocomplete
+        //a bug in styled-components 6.1.8 breaks the conditional type for optionLabel when using styled(Autocomplete)
         optionLabel={(label: string) => label}
         label="test"
         options={items}
