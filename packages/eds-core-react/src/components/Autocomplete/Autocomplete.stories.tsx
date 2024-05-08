@@ -351,6 +351,8 @@ export const DisabledOption: StoryFn<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionDisabled={isOptionDisabled}
         optionLabel={optionLabel}
+        multiple
+        allowSelectAll
       />
     </>
   )
