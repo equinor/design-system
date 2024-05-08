@@ -202,6 +202,8 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
+const defaultOptionDisabled = () => false
+
 type OptionLabelProps<T> = T extends string | number
   ? {
       /**  Custom option label */
@@ -328,7 +330,7 @@ function AutocompleteInner<T>(
     allowSelectAll,
     initialSelectedOptions = [],
     disablePortal,
-    optionDisabled = () => false,
+    optionDisabled = defaultOptionDisabled,
     optionsFilter,
     autoWidth,
     placeholder,
