@@ -425,7 +425,6 @@ function AutocompleteInner<T>(
     addSelectedItem,
     removeSelectedItem,
     selectedItems,
-    reset: resetSelection,
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
@@ -779,7 +778,8 @@ function AutocompleteInner<T>(
 
   const clear = () => {
     resetCombobox()
-    resetSelection()
+    //dont clear items if they are selected and disabled
+    setSelectedItems([...selectedDisabledItems])
     setTypedInputValue('')
   }
   const showClearButton =
