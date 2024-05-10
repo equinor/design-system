@@ -428,38 +428,37 @@ function AutocompleteInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
-  const notDisabledItems = useMemo(() => {
+  const enabledItems = useMemo(() => {
     const disabledItemsSet = new Set(inputOptions.filter(optionDisabled))
     return inputOptions.filter((x) => !disabledItemsSet.has(x))
   }, [inputOptions, optionDisabled])
 
-  const selectedDisabledItems = useMemo(
+  const selectedDisabledItemsSet = useMemo(
     () => new Set(selectedItems.filter(optionDisabled)),
     [selectedItems, optionDisabled],
   )
 
-  const selectedNotDisabledItems = useMemo(
-    () => selectedItems.filter((x) => !selectedDisabledItems.has(x)),
-    [selectedItems, selectedDisabledItems],
+  const selectedEnabledItems = useMemo(
+    () => selectedItems.filter((x) => !selectedDisabledItemsSet.has(x)),
+    [selectedItems, selectedDisabledItemsSet],
   )
 
   const allSelectedState = useMemo(() => {
-    if (!notDisabledItems || !selectedNotDisabledItems) return 'NONE'
-    if (notDisabledItems.length === selectedNotDisabledItems.length)
-      return 'ALL'
+    if (!enabledItems || !selectedEnabledItems) return 'NONE'
+    if (enabledItems.length === selectedEnabledItems.length) return 'ALL'
     if (
-      notDisabledItems.length != selectedNotDisabledItems.length &&
-      selectedNotDisabledItems.length > 0
+      enabledItems.length != selectedEnabledItems.length &&
+      selectedEnabledItems.length > 0
     )
       return 'SOME'
     return 'NONE'
-  }, [notDisabledItems, selectedNotDisabledItems])
+  }, [enabledItems, selectedEnabledItems])
 
   const toggleAllSelected = () => {
-    if (selectedNotDisabledItems.length === notDisabledItems.length) {
-      setSelectedItems([...selectedDisabledItems])
+    if (selectedEnabledItems.length === enabledItems.length) {
+      setSelectedItems([...selectedDisabledItemsSet])
     } else {
-      setSelectedItems([...notDisabledItems, ...selectedDisabledItems])
+      setSelectedItems([...enabledItems, ...selectedDisabledItemsSet])
     }
   }
 
@@ -779,7 +778,7 @@ function AutocompleteInner<T>(
   const clear = () => {
     resetCombobox()
     //dont clear items if they are selected and disabled
-    setSelectedItems([...selectedDisabledItems])
+    setSelectedItems([...selectedDisabledItemsSet])
     setTypedInputValue('')
   }
   const showClearButton =
