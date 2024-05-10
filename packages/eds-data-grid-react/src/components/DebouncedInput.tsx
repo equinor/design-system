@@ -64,9 +64,6 @@ export function DebouncedInput({
             /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             label={`Select ${label ?? ''}`}
             placeholder={props.placeholder ?? 'Search'}
-            disablePortal={
-              false /*TODO: Check with Oddbjørn re. sizing/position*/
-            }
             selectedOptions={value as Array<string>}
             onOptionsChange={(c) => setValue(c.selectedItems)}
             multiline

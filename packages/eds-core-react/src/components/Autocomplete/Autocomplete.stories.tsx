@@ -159,7 +159,6 @@ Introduction.args = {
   multiple: false,
   readOnly: false,
   disabled: false,
-  disablePortal: false,
 }
 
 export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
