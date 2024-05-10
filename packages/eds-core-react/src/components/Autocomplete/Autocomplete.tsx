@@ -369,6 +369,7 @@ function AutocompleteInner<T>(
     return _availableItems
   }, [_availableItems, showSelectAll])
 
+  //issue 2304, update dataset when options are added dynamically
   useEffect(() => {
     const availableHash = JSON.stringify(inputOptions)
     const optionsHash = JSON.stringify(options)
@@ -380,11 +381,6 @@ function AutocompleteInner<T>(
   useEffect(() => {
     setAvailableItems(inputOptions)
   }, [inputOptions])
-
-  const notDisabledItems = useMemo(() => {
-    const disabledItemsSet = new Set(inputOptions.filter(optionDisabled))
-    return inputOptions.filter((x) => !disabledItemsSet.has(x))
-  }, [inputOptions, optionDisabled])
 
   const { density } = useEds()
   const token = useToken(
@@ -433,22 +429,38 @@ function AutocompleteInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
+  const notDisabledItems = useMemo(() => {
+    const disabledItemsSet = new Set(inputOptions.filter(optionDisabled))
+    return inputOptions.filter((x) => !disabledItemsSet.has(x))
+  }, [inputOptions, optionDisabled])
+
+  const selectedDisabledItems = useMemo(
+    () => new Set(selectedItems.filter(optionDisabled)),
+    [selectedItems, optionDisabled],
+  )
+
+  const selectedNotDisabledItems = useMemo(
+    () => selectedItems.filter((x) => !selectedDisabledItems.has(x)),
+    [selectedItems, selectedDisabledItems],
+  )
+
   const allSelectedState = useMemo(() => {
-    if (!notDisabledItems || !selectedItems) return 'NONE'
-    if (notDisabledItems.length === selectedItems.length) return 'ALL'
+    if (!notDisabledItems || !selectedNotDisabledItems) return 'NONE'
+    if (notDisabledItems.length === selectedNotDisabledItems.length)
+      return 'ALL'
     if (
-      notDisabledItems.length != selectedItems.length &&
-      selectedItems.length > 0
+      notDisabledItems.length != selectedNotDisabledItems.length &&
+      selectedNotDisabledItems.length > 0
     )
       return 'SOME'
     return 'NONE'
-  }, [notDisabledItems, selectedItems])
+  }, [notDisabledItems, selectedNotDisabledItems])
 
   const toggleAllSelected = () => {
-    if (selectedItems.length === notDisabledItems.length) {
-      setSelectedItems([])
+    if (selectedNotDisabledItems.length === notDisabledItems.length) {
+      setSelectedItems([...selectedDisabledItems])
     } else {
-      setSelectedItems(notDisabledItems)
+      setSelectedItems([...notDisabledItems, ...selectedDisabledItems])
     }
   }
 
@@ -637,7 +649,7 @@ function AutocompleteInner<T>(
     placeholderText =
       typeof placeholderText !== 'undefined'
         ? placeholderText
-        : `${selectedItems.length}/${notDisabledItems.length} selected`
+        : `${selectedItems.length}/${inputOptions.length} selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,

@@ -341,15 +341,22 @@ export const DisabledOption: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options, optionLabel } = args
-
+  const [filter, setFilter] = useState<boolean>(false)
   const isOptionDisabled = (item: MyOptionType) => item.trend === '📉'
 
   return (
     <>
+      <Checkbox
+        label="disable options"
+        onChange={() => {
+          setFilter(!filter)
+        }}
+        checked={filter}
+      />
       <Autocomplete
         label="Select a stock"
         options={options}
-        optionDisabled={isOptionDisabled}
+        optionDisabled={filter ? isOptionDisabled : undefined}
         optionLabel={optionLabel}
         multiple
         allowSelectAll
