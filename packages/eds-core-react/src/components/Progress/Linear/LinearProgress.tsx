@@ -1,6 +1,11 @@
-import { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
+import {
+  forwardRef,
+  HTMLAttributes,
+  useEffect,
+  useState,
+  CSSProperties,
+} from 'react'
 import styled, { keyframes } from 'styled-components'
-import type { CSSObject } from 'styled-components'
 import * as tokens from './LinearProgress.tokens'
 
 const indeterminate = keyframes`
@@ -99,7 +104,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
       }
     }
 
-    const transformStyle: CSSObject = {
+    const transformStyle: CSSProperties = {
       transform: barStyle,
     }
 
