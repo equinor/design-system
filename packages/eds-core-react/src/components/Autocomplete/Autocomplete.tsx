@@ -202,6 +202,8 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
+const defaultOptionDisabled = () => false
+
 type OptionLabelProps<T> = T extends string | number
   ? {
       /**  Custom option label */
@@ -328,7 +330,7 @@ function AutocompleteInner<T>(
     allowSelectAll,
     initialSelectedOptions = [],
     disablePortal,
-    optionDisabled = () => false,
+    optionDisabled = defaultOptionDisabled,
     optionsFilter,
     autoWidth,
     placeholder,
@@ -367,6 +369,7 @@ function AutocompleteInner<T>(
     return _availableItems
   }, [_availableItems, showSelectAll])
 
+  //issue 2304, update dataset when options are added dynamically
   useEffect(() => {
     const availableHash = JSON.stringify(inputOptions)
     const optionsHash = JSON.stringify(options)
@@ -379,10 +382,6 @@ function AutocompleteInner<T>(
     setAvailableItems(inputOptions)
   }, [inputOptions])
 
-  const disabledItems = useMemo(
-    () => options.filter(optionDisabled),
-    [options, optionDisabled],
-  )
   const { density } = useEds()
   const token = useToken(
     { density },
@@ -426,23 +425,40 @@ function AutocompleteInner<T>(
     addSelectedItem,
     removeSelectedItem,
     selectedItems,
-    reset: resetSelection,
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
+  const enabledItems = useMemo(() => {
+    const disabledItemsSet = new Set(inputOptions.filter(optionDisabled))
+    return inputOptions.filter((x) => !disabledItemsSet.has(x))
+  }, [inputOptions, optionDisabled])
+
+  const selectedDisabledItemsSet = useMemo(
+    () => new Set(selectedItems.filter(optionDisabled)),
+    [selectedItems, optionDisabled],
+  )
+
+  const selectedEnabledItems = useMemo(
+    () => selectedItems.filter((x) => !selectedDisabledItemsSet.has(x)),
+    [selectedItems, selectedDisabledItemsSet],
+  )
+
   const allSelectedState = useMemo(() => {
-    if (!inputOptions || !selectedItems) return 'NONE'
-    if (inputOptions.length === selectedItems.length) return 'ALL'
-    if (inputOptions.length != selectedItems.length && selectedItems.length > 0)
+    if (!enabledItems || !selectedEnabledItems) return 'NONE'
+    if (enabledItems.length === selectedEnabledItems.length) return 'ALL'
+    if (
+      enabledItems.length != selectedEnabledItems.length &&
+      selectedEnabledItems.length > 0
+    )
       return 'SOME'
     return 'NONE'
-  }, [inputOptions, selectedItems])
+  }, [enabledItems, selectedEnabledItems])
 
   const toggleAllSelected = () => {
-    if (selectedItems.length === inputOptions.length) {
-      setSelectedItems([])
+    if (selectedEnabledItems.length === enabledItems.length) {
+      setSelectedItems([...selectedDisabledItemsSet])
     } else {
-      setSelectedItems(inputOptions)
+      setSelectedItems([...enabledItems, ...selectedDisabledItemsSet])
     }
   }
 
@@ -631,9 +647,7 @@ function AutocompleteInner<T>(
     placeholderText =
       typeof placeholderText !== 'undefined'
         ? placeholderText
-        : `${selectedItems.length}/${
-            options.length - disabledItems.length
-          } selected`
+        : `${selectedItems.length}/${inputOptions.length} selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
@@ -763,7 +777,8 @@ function AutocompleteInner<T>(
 
   const clear = () => {
     resetCombobox()
-    resetSelection()
+    //dont clear items if they are selected and disabled
+    setSelectedItems([...selectedDisabledItemsSet])
     setTypedInputValue('')
   }
   const showClearButton =
