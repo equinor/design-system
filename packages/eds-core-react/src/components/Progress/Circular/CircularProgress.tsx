@@ -1,8 +1,14 @@
-import { forwardRef, SVGProps, Ref, useEffect, useState } from 'react'
+import {
+  forwardRef,
+  SVGProps,
+  Ref,
+  useEffect,
+  useState,
+  CSSProperties,
+} from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import * as tokens from './CircularProgress.tokens'
 import type { CircularProgressToken } from './CircularProgress.tokens'
-import type { CSSObject } from 'styled-components'
 
 const indeterminate = keyframes`
     100% {
@@ -81,7 +87,7 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
   ) {
     const thickness = 4
     const progress = Math.round(value)
-    const trackStyle: CSSObject = {}
+    const trackStyle: CSSProperties = {}
     const props = {
       ...rest,
       ref,
