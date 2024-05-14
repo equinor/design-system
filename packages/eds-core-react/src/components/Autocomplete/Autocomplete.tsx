@@ -10,6 +10,7 @@ import {
   EventHandler,
   SyntheticEvent,
   DOMAttributes,
+  FocusEvent,
 } from 'react'
 import {
   useCombobox,
@@ -200,6 +201,21 @@ const findPrevIndex: IndexFinderType = ({
   }
 
   return prevIndex
+}
+
+/*When a user clicks the StyledList scrollbar, the input looses focus which breaks downshift
+ * keyboard navigation in the list. This code returns focus to the input on mouseUp
+ */
+const handleListFocus = (e: FocusEvent<HTMLElement>) => {
+  e.preventDefault()
+  e.stopPropagation()
+  window?.addEventListener(
+    'mouseup',
+    () => {
+      ;(e.relatedTarget as HTMLInputElement)?.focus()
+    },
+    { once: true },
+  )
 }
 
 const defaultOptionDisabled = () => false
@@ -530,6 +546,18 @@ function AutocompleteInner<T>(
     },
     onHighlightedIndexChange({ highlightedIndex, type }) {
       if (
+        type == useCombobox.stateChangeTypes.InputClick ||
+        (type == useCombobox.stateChangeTypes.InputKeyDownArrowDown &&
+          !isOpen) ||
+        (type == useCombobox.stateChangeTypes.InputKeyDownArrowUp && !isOpen)
+      ) {
+        //needs delay for dropdown to render before calling scroll
+        setTimeout(() => {
+          rowVirtualizer.scrollToIndex(highlightedIndex, {
+            align: allowSelectAll ? 'center' : 'auto',
+          })
+        }, 1)
+      } else if (
         type !== useCombobox.stateChangeTypes.ItemMouseMove &&
         type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
         highlightedIndex >= 0
@@ -767,7 +795,7 @@ function AutocompleteInner<T>(
     }
   }, [refs.reference, refs.floating, update, isOpen])
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (isOpen) {
       refs.floating.current.showPopover()
     } else {
@@ -797,6 +825,7 @@ function AutocompleteInner<T>(
       popover="manual"
       {...getFloatingProps({
         ref: refs.setFloating,
+        onFocus: handleListFocus,
         style: {
           position: strategy,
           top: y || 0,
