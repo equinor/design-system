@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.38.0] - 2024-05-14
+
+### Added
+
+- ✨ `DatePicker`: Enable custom date-formats in the input segments when they are not focused. Also added support for custom locale by @yusijs in https://github.com/equinor/design-system/pull/3415
+
+### Changed
+
+- `🧑‍💻 Autocomplete`: improved type safety for autocomplete when `optionLabel` is required by @FredrikMWold in https://github.com/equinor/design-system/pull/3408
+- 🚸 `Autocomplete`: implement native `popover` for better compatability with `Dialog` by @oddvernes in https://github.com/equinor/design-system/pull/3416
+- ⬆️ Updated prod dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3425
+
+### Fixed
+
+- 🐛 `Autocomplete` "Select all" toggle causing crashes under certain circumstances with controlled `Autocomplete` by @mhwaage in https://github.com/equinor/design-system/pull/3428
+- 🐛 `Autocomplete` when toggling "Select all" or clicking the "clear" button, disabled items are now left unchanged. The "x/y selected" text in the input has changed "y" from "total non-disabled items length" to "all items length" by @oddvernes in https://github.com/equinor/design-system/pull/3429
+- 🐛 `Autocomplete`: dragging scrollbar and then switching to using up/down arrow navigation should now work as expected by @oddvernes in https://github.com/equinor/design-system/pull/3441
+
+### Notes
+
+Due to the introduction of the native `popover` attribute, downstream unit tests involving eds `Autocomplete` may fail due to Jest/jsDom not having added support for the popover api yet. The easy solution to this is to add the following lines to your `jest.setup.ts` or alternatively within the test itself:
+`HTMLElement.prototype.showPopover = jest.fn()`
+`HTMLElement.prototype.hidePopover = jest.fn()`
+
 ## [0.37.0] - 2024-04-24
 
 ### Added
