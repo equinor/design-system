@@ -545,7 +545,12 @@ function AutocompleteInner<T>(
       )
     },
     onHighlightedIndexChange({ highlightedIndex, type }) {
-      if (type == useCombobox.stateChangeTypes.InputClick) {
+      if (
+        type == useCombobox.stateChangeTypes.InputClick ||
+        (type == useCombobox.stateChangeTypes.InputKeyDownArrowDown &&
+          !isOpen) ||
+        (type == useCombobox.stateChangeTypes.InputKeyDownArrowUp && !isOpen)
+      ) {
         //needs delay for dropdown to render before calling scroll
         setTimeout(() => {
           rowVirtualizer.scrollToIndex(highlightedIndex, {
