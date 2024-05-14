@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- ✨ `DatePicker`: Enable custom date-formats in the input segments when they are not focused by @yusijs in https://github.com/equinor/design-system/pull/3415
+- ✨ `DatePicker`: Enable custom date-formats in the input segments when they are not focused. Also added support for custom locale by @yusijs in https://github.com/equinor/design-system/pull/3415
 
 ### Changed
 
