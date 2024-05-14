@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - 🐛 `Autocomplete` "Select all" toggle causing crashes under certain circumstances with controlled `Autocomplete` by @mhwaage in https://github.com/equinor/design-system/pull/3428
-- 🐛 `Autocomplete` when toggling "Select all" or clicking the "clear" button, disabled items are left unchanged. The "x/y selected" text in the input has changed "y" from "total non-disabled items length" to "all items length" by @oddvernes in https://github.com/equinor/design-system/pull/3429
+- 🐛 `Autocomplete` when toggling "Select all" or clicking the "clear" button, disabled items are now left unchanged. The "x/y selected" text in the input has changed "y" from "total non-disabled items length" to "all items length" by @oddvernes in https://github.com/equinor/design-system/pull/3429
 - 🐛 `Autocomplete`: dragging scrollbar and then switching to using up/down arrow navigation should now work as expected by @oddvernes in https://github.com/equinor/design-system/pull/3441
 
 ### Notes
