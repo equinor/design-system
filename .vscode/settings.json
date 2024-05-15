@@ -19,5 +19,13 @@
   "[bicep]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-bicep"
   },
-  "conventionalCommits.scopes": ["eds-tokens"]
+  "conventionalCommits.scopes": [
+    "eds-core-react",
+    "eds-data-grid-react",
+    "eds-icons",
+    "eds-lab-react",
+    "eds-tokens",
+    "eds-utils",
+    "eds-config-custom"
+  ]
 }
