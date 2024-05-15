@@ -11,7 +11,10 @@
       "default": "./dist/tokens.cjs"
     },
     "./tokens.css": "./tokens.css",
-    "./elements.css": "./elements.css"
+    "./elements.css": "./elements.css",
+    "./css/color/*.css": "./dist/css/color/*.css",
+    "./json/color/*.json": "./dist/json/color/*.json",
+    "./ts/color/*.ts": "./dist/ts/color/*.ts"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
@@ -50,9 +53,9 @@
     "update-figma:themes": "npm run _sync:figma -- --file-key aRgKtCisnm98k9kVy6zasL",
     "sync-figma-to-tokens": "npm run update-tokens:primitives && npm run update-tokens:themes",
     "sync-tokens-to-figma": "npm run update-figma:primitives && npm run update-figma:themes",
-    "_prebuild:css-index": "shx cp src/index.css dist/v1/css/index.css",
-    "_build:css": "npm run _prebuild:css-index && lightningcss --bundle dist/v1/css/index.css -o dist/v1/css/variables.css",
-    "_build:css-min": "npm run _prebuild:css-index && lightningcss --minify --bundle dist/v1/css/index.css -o dist/v1/css/variables.min.css",
+    "_prebuild:css-index": "shx cp src/index.css dist/css/index.css",
+    "_build:css": "npm run _prebuild:css-index && lightningcss --bundle dist/css/index.css -o dist/css/variables.css",
+    "_build:css-min": "npm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
     "clean:beta": "shx rm -rf dist/css dist/ts dist/json",
     "build:beta": "npm run clean:beta && ts-node-esm -P src/sync/tsconfig.json src/sync/build.ts && npm run _build:css && npm run _build:css-min",
     "test": "jest"
