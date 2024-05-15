@@ -1,0 +1,36 @@
+name: Sync Figma to tokens
+on:
+  workflow_dispatch:
+jobs:
+  sync-figma-to-tokens:
+    runs-on: ubuntu-latest
+    permissions:
+      # Need to be able to create new branches and commits
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.0'
+
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: packages/tokens-sync
+
+      - name: Sync variables from Figma file to canonical tokens in GitHub
+        run: npm run sync-figma-to-tokens && npm run build
+        working-directory: packages/tokens-sync
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update canonical tokens from Figma
+          title: Update canonical tokens from Figma
+          body: 'Update canonical tokens from Figma and generate CSS variables'
+          branch: update-canonical-tokens

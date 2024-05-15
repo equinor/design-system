@@ -1,0 +1,58 @@
+{
+  "Icon width": {
+    "$type": "number",
+    "$value": "{sizing.Icon Large Size}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Icon height": {
+    "$type": "number",
+    "$value": "{sizing.Icon Large Size}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Icon Container width": {
+    "$type": "number",
+    "$value": "{sizing.Icon Box Width}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Icon Container height": {
+    "$type": "number",
+    "$value": "{cap-height-rounded}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

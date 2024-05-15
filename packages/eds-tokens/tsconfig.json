@@ -7,8 +7,9 @@
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "outDir": "./dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "allowImportingTsExtensions": true
   },
   "include": ["./src/**/*", "./commonjs/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["./src/sync/**/*", "node_modules"]
 }

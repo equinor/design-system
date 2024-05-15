@@ -36,9 +36,26 @@
     "elements.css"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc",
+    "build": "rollup -c --bundleConfigAsCjs && tsc && npm run build:beta",
     "dev": "rollup -c -w",
-    "types": "tsc"
+    "types": "tsc",
+    "prettier:check": "prettier --check src/",
+    "_sync:tokens": "ts-node --esm --project tsconfig.json src/scripts/sync_figma_to_tokens.ts",
+    "update-tokens:primitives": "npm run _sync:tokens -- --file-key cVaqjfgt3gDiqbx10q3Pj8",
+    "update-tokens:themes": "npm run _sync:tokens -- --file-key aRgKtCisnm98k9kVy6zasL",
+    "update-tokens:typography-primitives": "npm run _sync:tokens -- --file-key cpNchKjiIM19dPqTxE0fqg",
+    "update-tokens:typography-modes": "npm run _sync:tokens -- --file-key FQQqyumcpPQoiFRCjdS9GM",
+    "_sync:figma": "ts-node --esm --project tsconfig.json src/scripts/sync_tokens_to_figma.ts",
+    "update-figma:primitives": "npm run _sync:figma -- --file-key cVaqjfgt3gDiqbx10q3Pj8",
+    "update-figma:themes": "npm run _sync:figma -- --file-key aRgKtCisnm98k9kVy6zasL",
+    "sync-figma-to-tokens": "npm run update-tokens:primitives && npm run update-tokens:themes",
+    "sync-tokens-to-figma": "npm run update-figma:primitives && npm run update-figma:themes",
+    "_prebuild:css-index": "shx cp src/index.css dist/v1/css/index.css",
+    "_build:css": "npm run _prebuild:css-index && lightningcss --bundle dist/v1/css/index.css -o dist/v1/css/variables.css",
+    "_build:css-min": "npm run _prebuild:css-index && lightningcss --minify --bundle dist/v1/css/index.css -o dist/v1/css/variables.min.css",
+    "clean:beta": "shx rm -rf dist/css dist/ts dist/json",
+    "build:beta": "npm run clean:beta && ts-node-esm -P src/sync/tsconfig.json src/sync/build.ts && npm run _build:css && npm run _build:css-min",
+    "test": "jest"
   },
   "keywords": [
     "eds",
@@ -46,13 +63,29 @@
     "equinor",
     "design tokens"
   ],
+  "dependencies": {
+    "@figma/rest-api-spec": "^0.10.0",
+    "axios": "^1.6.0",
+    "colorjs.io": "^0.5.0",
+    "dotenv": "^16.3.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "rollup": "^4.2.0",
     "rollup-plugin-delete": "^2.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.5",
+    "jest": "^29.6.2",
+    "lightningcss-cli": "^1.24.0",
+    "prettier": "3.0.0",
+    "shx": "^0.3.4",
+    "style-dictionary-utils": "^2.0.7",
+    "ts-jest": "^29.1.1"
   },
   "engines": {
     "pnpm": ">=4",
