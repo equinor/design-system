@@ -1,3 +1,6 @@
+import '@equinor/eds-tokens/css/color/primitives.css'
+import '@equinor/eds-tokens/css/color/theme.css'
+
 const preview = {
   viewMode: 'docs',
   parameters: {
