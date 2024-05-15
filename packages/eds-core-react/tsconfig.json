@@ -8,7 +8,8 @@
     "isolatedModules": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom"]
+    "types": ["@testing-library/jest-dom"],
+    "moduleResolution": "Bundler"
   },
   "include": ["./src/**/*", "./jest.setup.ts"],
   "exclude": ["node_modules"]

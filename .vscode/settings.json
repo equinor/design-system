@@ -27,5 +27,6 @@
     "eds-tokens",
     "eds-utils",
     "eds-config-custom"
-  ]
+  ],
+  "cSpell.words": ["Overridable"]
 }
