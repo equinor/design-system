@@ -18,55 +18,55 @@ const {
       danger__hover: { rgba: dangerHoverColor },
     },
   },
-
   shape: {
     button: { borderRadius: buttonBorderRadius },
   },
 } = tokens
 
 export const primary = mergeDeepRight(button, {
-  background: primaryColor,
+  background: `var(--eds-color-surface-button-primary-filled, ${primaryColor})`,
   typography: {
-    color: primaryWhite,
+    color: `var(--eds-color-text-button-primary-on-filled, ${primaryWhite})`,
   },
   border: {
     type: 'border',
     style: 'solid',
     width: '1px',
-    color: primaryColor,
+    color: `var(--eds-color-text-button-primary-on-filled, ${primaryColor})`,
     radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
   },
   states: {
     hover: {
-      background: primaryHoverColor,
+      background: `var(--eds-color-surface-button-primary-filled-hover, ${primaryHoverColor})`,
     },
   },
 }) as ButtonToken
+
 export const secondary = mergeDeepRight(primary, {
-  background: secondaryColor,
+  background: `var(--eds-color-surface-button-secondary-filled, ${secondaryColor})`,
   border: {
-    color: secondaryColor,
+    color: `var(--eds-color-border-button-secondary-outlined, ${secondaryColor})`,
   },
   states: {
     hover: {
-      background: secondaryHoverColor,
+      background: `var(--eds-color-surface-button-secondary-filled-hover, ${secondaryHoverColor})`,
       border: {
-        color: secondaryHoverColor,
+        color: `var(--eds-color-border-button-secondary-outlined-hover, ${secondaryHoverColor})`,
       },
     },
   },
 }) as ButtonToken
 
 export const danger = mergeDeepRight(primary, {
-  background: dangerColor,
+  background: `var(--eds-color-surface-button-danger-filled, ${dangerColor})`,
   border: {
-    color: dangerColor,
+    color: `var(--eds-color-border-button-danger-outlined, ${dangerColor})`,
   },
   states: {
     hover: {
-      background: dangerHoverColor,
+      background: `var(--eds-color-surface-button-danger-filled-hover, ${dangerHoverColor})`,
       border: {
-        color: dangerHoverColor,
+        color: `var(--eds-color-border-button-danger-outlined-hover, ${dangerHoverColor})`,
       },
     },
   },
