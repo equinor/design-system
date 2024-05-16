@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Use "setup" cache
         id: setup-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -37,7 +37,7 @@ jobs:
           key: ${{ github.sha }}
       - name: Use "dist" cache
         id: dist-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -62,7 +62,7 @@ jobs:
     steps:
       - name: Use "dist" cache
         id: dist-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -86,7 +86,7 @@ jobs:
     steps:
       - name: Use "dist" cache
         id: dist-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -110,7 +110,7 @@ jobs:
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*

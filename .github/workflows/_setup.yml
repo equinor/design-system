@@ -73,7 +73,7 @@ jobs:
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
       - id: cache-pnpm-store
         name: Cache pnpm-store
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.pnpm-store
@@ -88,7 +88,7 @@ jobs:
         run: node_modules/.bin/pnpm i --force
       - id: cache-files
         name: Cache files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
