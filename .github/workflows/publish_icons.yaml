@@ -12,7 +12,7 @@ env:
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}-setup-icons

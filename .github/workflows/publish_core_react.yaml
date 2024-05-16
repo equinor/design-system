@@ -25,7 +25,7 @@ env:
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
@@ -145,7 +145,7 @@ jobs:
     if: github.event.inputs.environment == 'production'
     needs: [publish-storybook]
     name: Purge cdn
-    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
       environment: production

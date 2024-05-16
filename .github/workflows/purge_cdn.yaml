@@ -16,7 +16,7 @@ jobs:
   purge-cdn:
     if: inputs.environment == 'production'
     name: Purge cdn
-    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
       environment: production

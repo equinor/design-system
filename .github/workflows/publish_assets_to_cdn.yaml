@@ -29,7 +29,7 @@ jobs:
           repository: 'equinor/design-system-cdn'
           ref: main
           ssh-key: ${{ secrets.CDN_REPO_PRIVATE_KEY }}
-      - name: Az CLI login 🔑  # Using federated credential
+      - name: Az CLI login 🔑 # Using federated credential
         uses: azure/login@v1
         with:
           client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
@@ -56,7 +56,7 @@ jobs:
     if: github.event.inputs.environment == 'production'
     needs: [copy-files]
     name: Purge cdn
-    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
       environment: production
