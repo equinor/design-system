@@ -48,25 +48,25 @@
     "elements.css"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc && npm run build:beta",
+    "build": "rollup -c --bundleConfigAsCjs && tsc && pnpm run build:beta",
     "dev": "rollup -c -w",
     "types": "tsc",
     "prettier:check": "prettier --check src/",
     "_sync:tokens": "ts-node --esm --project src/sync/tsconfig.json src/sync/scripts/sync_figma_to_tokens.ts",
-    "update-tokens:primitives": "npm run _sync:tokens -- --file-key cVaqjfgt3gDiqbx10q3Pj8",
-    "update-tokens:themes": "npm run _sync:tokens -- --file-key aRgKtCisnm98k9kVy6zasL",
-    "update-tokens:typography-primitives": "npm run _sync:tokens -- --file-key cpNchKjiIM19dPqTxE0fqg",
-    "update-tokens:typography-modes": "npm run _sync:tokens -- --file-key FQQqyumcpPQoiFRCjdS9GM",
+    "update-tokens:primitives": "pnpm run _sync:tokens -- --file-key cVaqjfgt3gDiqbx10q3Pj8",
+    "update-tokens:themes": "pnpm run _sync:tokens -- --file-key aRgKtCisnm98k9kVy6zasL",
+    "update-tokens:typography-primitives": "pnpm run _sync:tokens -- --file-key cpNchKjiIM19dPqTxE0fqg",
+    "update-tokens:typography-modes": "pnpm run _sync:tokens -- --file-key FQQqyumcpPQoiFRCjdS9GM",
     "_sync:figma": "ts-node --esm --project tsconfig.json src/sync/scripts/sync_tokens_to_figma.ts",
-    "update-figma:primitives": "npm run _sync:figma -- --file-key cVaqjfgt3gDiqbx10q3Pj8",
-    "update-figma:themes": "npm run _sync:figma -- --file-key aRgKtCisnm98k9kVy6zasL",
-    "sync-figma-to-tokens": "npm run update-tokens:primitives && npm run update-tokens:themes",
-    "sync-tokens-to-figma": "npm run update-figma:primitives && npm run update-figma:themes",
+    "update-figma:primitives": "pnpm run _sync:figma -- --file-key cVaqjfgt3gDiqbx10q3Pj8",
+    "update-figma:themes": "pnpm run _sync:figma -- --file-key aRgKtCisnm98k9kVy6zasL",
+    "sync-figma-to-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes",
+    "sync-tokens-to-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes",
     "_prebuild:css-index": "shx cp src/index.css dist/css/index.css",
-    "_build:css": "npm run _prebuild:css-index && lightningcss --bundle dist/css/index.css -o dist/css/variables.css",
-    "_build:css-min": "npm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
+    "_build:css": "pnpm run _prebuild:css-index && lightningcss --bundle dist/css/index.css -o dist/css/variables.css",
+    "_build:css-min": "pnpm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
     "clean:beta": "shx rm -rf dist/css dist/ts dist/json",
-    "build:beta": "npm run clean:beta && ts-node-esm -P src/sync/tsconfig.json src/sync/build.ts && npm run _build:css && npm run _build:css-min",
+    "build:beta": "pnpm run clean:beta && ts-node --esm -P src/sync/tsconfig.json src/sync/build.ts && pnpm run _build:css && pnpm run _build:css-min",
     "test": "jest"
   },
   "keywords": [
@@ -97,7 +97,7 @@
     "typescript": "^5.2.2"
   },
   "engines": {
-    "pnpm": ">=4",
-    "node": ">=10.0.0"
+    "pnpm": ">=8.15.4",
+    "node": ">=18.17.1"
   }
 }
