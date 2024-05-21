@@ -4,9 +4,12 @@ import * as fs from 'fs'
 import FigmaApi from '../api/figma_api.ts'
 
 import { green } from '../utils/utils.ts'
-import { generatePostVariablesPayload, readJsonFiles } from '../utils/token_import.ts'
+import {
+  generatePostVariablesPayload,
+  readJsonFiles,
+} from '../utils/token_import.ts'
 
-async function main() {
+export async function syncTokensToFigma() {
   const fileKeyIdx = process.argv.indexOf('--file-key')
   let fileKey
 
@@ -24,7 +27,9 @@ async function main() {
 
   const tokensDir = `tokens/${fileKey}`
 
-  const tokensFiles = fs.readdirSync(tokensDir).map((file: string) => `${tokensDir}/${file}`)
+  const tokensFiles = fs
+    .readdirSync(tokensDir)
+    .map((file: string) => `${tokensDir}/${file}`)
 
   const tokensByFile = readJsonFiles(tokensFiles)
 
@@ -33,9 +38,14 @@ async function main() {
   const api = new FigmaApi(process.env.PERSONAL_ACCESS_TOKEN)
   const localVariables = await api.getLocalVariables(fileKey)
 
-  const postVariablesPayload = generatePostVariablesPayload(tokensByFile, localVariables)
+  const postVariablesPayload = generatePostVariablesPayload(
+    tokensByFile,
+    localVariables,
+  )
 
-  if (Object.values(postVariablesPayload).every((value) => value.length === 0)) {
+  if (
+    Object.values(postVariablesPayload).every((value) => value.length === 0)
+  ) {
     console.log(green('✅ Tokens are already up to date with the Figma file'))
     return
   }
@@ -44,11 +54,20 @@ async function main() {
 
   console.log('POST variables API response:', apiResp)
 
-  if (postVariablesPayload.variableCollections && postVariablesPayload.variableCollections.length) {
-    console.log('Updated variable collections', postVariablesPayload.variableCollections)
+  if (
+    postVariablesPayload.variableCollections &&
+    postVariablesPayload.variableCollections.length
+  ) {
+    console.log(
+      'Updated variable collections',
+      postVariablesPayload.variableCollections,
+    )
   }
 
-  if (postVariablesPayload.variableModes && postVariablesPayload.variableModes.length) {
+  if (
+    postVariablesPayload.variableModes &&
+    postVariablesPayload.variableModes.length
+  ) {
     console.log('Updated variable modes', postVariablesPayload.variableModes)
   }
 
@@ -56,11 +75,15 @@ async function main() {
     console.log('Updated variables', postVariablesPayload.variables)
   }
 
-  if (postVariablesPayload.variableModeValues && postVariablesPayload.variableModeValues.length) {
-    console.log('Updated variable mode values', postVariablesPayload.variableModeValues)
+  if (
+    postVariablesPayload.variableModeValues &&
+    postVariablesPayload.variableModeValues.length
+  ) {
+    console.log(
+      'Updated variable mode values',
+      postVariablesPayload.variableModeValues,
+    )
   }
 
   console.log(green('✅ Figma file has been updated with the new tokens'))
 }
-
-main()

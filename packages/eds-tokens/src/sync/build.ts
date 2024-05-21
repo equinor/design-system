@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
 import Color from 'colorjs.io'
-import { readJsonFiles } from './utils/token_import.ts'
+import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
 const FILE_KEY_PRIMITIVES = 'cVaqjfgt3gDiqbx10q3Pj8'

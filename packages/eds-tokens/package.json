@@ -67,8 +67,7 @@
     "_build:css-min": "pnpm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
     "clean:beta": "shx rm -rf dist/css dist/ts dist/json",
     "build:beta": "pnpm run clean:beta && ts-node --esm -P src/sync/tsconfig.json src/sync/build.ts && pnpm run _build:css && pnpm run _build:css-min",
-    "test": "jest",
-    "build:sync": "tsc --project src/sync/tsconfig.json"
+    "test": "jest"
   },
   "keywords": [
     "eds",
@@ -77,11 +76,6 @@
     "design tokens"
   ],
   "devDependencies": {
-    "axios": "^1.6.0",
-    "colorjs.io": "^0.5.0",
-    "dotenv": "^16.3.1",
-    "ts-node": "^10.9.1",
-    "@figma/rest-api-spec": "^0.10.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -95,7 +89,10 @@
     "shx": "^0.3.4",
     "style-dictionary-utils": "^2.0.7",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "colorjs.io": "^0.5.0",
+    "ts-node": "^10.9.1",
+    "@equinor/eds-tokens-sync": "workspace:*"
   },
   "engines": {
     "pnpm": ">=8.15.4",

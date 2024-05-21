@@ -16,7 +16,7 @@ import { tokenFilesFromLocalVariables } from '../utils/token_export.ts'
  * npm run sync-figma-to-tokens -- --output directory_name
  */
 
-async function main() {
+export async function syncFigmaToTokens() {
   const fileKeyIdx = process.argv.indexOf('--file-key')
   let fileKey
 
@@ -55,5 +55,3 @@ async function main() {
     green(`✅ Tokens files have been written to the ${outputDir} directory`),
   )
 }
-
-main()
