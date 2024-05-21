@@ -18,5 +18,10 @@
   "task.allowAutomaticTasks": "off",
   "[bicep]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-bicep"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#1C3408",
+    "titleBar.activeBackground": "#27480C",
+    "titleBar.activeForeground": "#F4FCED"
   }
 }
