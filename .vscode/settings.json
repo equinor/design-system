@@ -26,7 +26,8 @@
     "eds-lab-react",
     "eds-tokens",
     "eds-utils",
-    "eds-config-custom"
+    "eds-config-custom",
+    "eds-tokens-sync"
   ],
   "cSpell.words": ["Overridable"]
 }
