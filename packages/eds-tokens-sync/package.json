@@ -6,13 +6,14 @@
   "files": [
     "dist"
   ],
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "main": "dist/eds-tokens-sync.umd.cjs",
   "module": "dist/eds-tokens-sync.js",
   "exports": {
     ".": {
       "import": "./dist/eds-tokens-sync.js",
-      "require": "./dist/eds-tokens-sync.umd.cjs"
+      "require": "./dist/eds-tokens-sync.umd.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
