@@ -67,7 +67,8 @@
     "_build:css-min": "pnpm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
     "clean:beta": "shx rm -rf dist/css dist/ts dist/json",
     "build:beta": "pnpm run clean:beta && ts-node --esm -P src/sync/tsconfig.json src/sync/build.ts && pnpm run _build:css && pnpm run _build:css-min",
-    "test": "jest"
+    "test": "jest",
+    "build:sync": "tsc --project src/sync/tsconfig.json"
   },
   "keywords": [
     "eds",

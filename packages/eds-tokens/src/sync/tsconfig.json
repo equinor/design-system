@@ -16,7 +16,8 @@
     "removeComments": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "outDir": "./dist/sync"
   },
   "exclude": ["node_modules"]
 }
