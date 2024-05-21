@@ -39,7 +39,10 @@ export function DateSegment({
     ? formatter.formatToParts(state.value.toDate(timezone))
     : []
   const part = parts.find((p) => p.type === segment.type)
-  const value = part?.value ?? segment.text
+  const value =
+    segment.isPlaceholder || segment.type === 'literal'
+      ? segment.text
+      : part?.value ?? segment.text
 
   const [focus, setFocus] = useState(false)
   const ref = useRef(null)
