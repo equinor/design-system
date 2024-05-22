@@ -241,18 +241,27 @@ describe('EdsDataGrid', () => {
   })
 
   describe('Row selection', () => {
-    it('should not call onSelectRow if rowSelection is not set', async () => {
-      const spy = jest.fn()
-      render(<EdsDataGrid onSelectRow={spy} columns={columns} rows={data} />)
-      await userEvent.click(screen.getAllByRole('row')[1])
-      expect(spy).toHaveBeenCalledTimes(0)
-    })
-    it('should call onSelectRow if rowSelection is set', async () => {
+    it('should not call onRowSelectionChange if enableRowSelection is not set', async () => {
       const spy = jest.fn()
       render(
         <EdsDataGrid
-          rowSelection={true}
-          onSelectRow={spy}
+          onRowSelectionChange={spy}
+          columns={columns}
+          rows={data}
+        />,
+      )
+      await userEvent.click(screen.getAllByRole('row')[1])
+      expect(spy).toHaveBeenCalledTimes(0)
+    })
+    it('should call onRowSelectionChange if enableRowSelection is set', async () => {
+      const spy = jest.fn()
+      render(
+        <EdsDataGrid
+          enableRowSelection
+          onRowSelectionChange={spy}
+          onRowClick={(row) =>
+            row.getCanSelect() ? row.toggleSelected() : null
+          }
           columns={columns}
           rows={data}
         />,

@@ -476,7 +476,9 @@ export function EdsDataGrid<T>({
                   <TableRow
                     key={row.id}
                     row={row}
-                    onClick={(event) => onRowClick(row, event)}
+                    onClick={
+                      onRowClick ? (event) => onRowClick(row, event) : undefined
+                    }
                     onCellClick={onCellClick}
                   />
                 ))}

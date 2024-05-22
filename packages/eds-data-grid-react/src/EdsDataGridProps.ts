@@ -37,15 +37,6 @@ type BaseProps<T> = {
    */
   columnResizeMode?: ColumnResizeMode
   /**
-   * Callback for when row-selection changes
-   * @deprecated Use `onRowSelectionChange`
-   */
-  onSelectRow?: OnChangeFn<RowSelectionState>
-  /**
-   * Callback for when row-selection changes
-   */
-  onRowSelectionChange?: OnChangeFn<RowSelectionState>
-  /**
    * Enable debug mode. See https://tanstack.com/table/v8/docs/api/core/table#debugall
    * @default false
    */
@@ -108,6 +99,18 @@ type BaseProps<T> = {
 
 type RowSelectionProps<T> = {
   /**
+   * Set this to enable rowSelection. If a function is provided, it will be called for each row to determine if it is selectable.
+   * @default false
+   */
+  enableRowSelection?: boolean | ((row: Row<T>) => boolean)
+  /**
+   * Only used if row selection has been enabled via `enableRowSelection`
+   * Enables/disables multiple row selection for all rows in the table OR
+   * A function that given a row, returns whether to enable/disable multiple row selection for that row's children/grandchildren
+   * @default false
+   */
+  enableMultiRowSelection?: boolean | ((row: Row<T>) => boolean)
+  /**
    * The currently selected rows
    * @deprecated Use `rowSelectionState`
    * @default {}
@@ -125,17 +128,14 @@ type RowSelectionProps<T> = {
    */
   rowSelection?: boolean | ((row: Row<T>) => boolean)
   /**
-   * Set this to enable rowSelection. If a function is provided, it will be called for each row to determine if it is selectable.
-   * @default false
+   * Callback for when row-selection changes
+   * @deprecated Use `onRowSelectionChange`
    */
-  enableRowSelection?: boolean | ((row: Row<T>) => boolean)
+  onSelectRow?: OnChangeFn<RowSelectionState>
   /**
-   * Only used if row selection has been enabled via `enableRowSelection`
-   * Enables/disables multiple row selection for all rows in the table OR
-   * A function that given a row, returns whether to enable/disable multiple row selection for that row's children/grandchildren
-   * @default false
+   * Callback for when row-selection changes
    */
-  enableMultiRowSelection?: boolean | ((row: Row<T>) => boolean)
+  onRowSelectionChange?: OnChangeFn<RowSelectionState>
 }
 
 type StyleProps<T> = {
