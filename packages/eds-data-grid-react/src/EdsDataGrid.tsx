@@ -33,7 +33,10 @@ import { TableProvider } from './EdsDataGridContext'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableRow } from './components/TableRow'
-import { addPxSuffixIfInputHasNoPrefix } from './utils'
+import {
+  addPxSuffixIfInputHasNoPrefix,
+  logDevelopmentWarningOfPropUse,
+} from './utils'
 
 export function EdsDataGrid<T>({
   rows,
@@ -440,7 +443,7 @@ export function EdsDataGrid<T>({
                   return (
                     <TableRow
                       key={virtualItem.index}
-                      row={table.getRowModel().rows[virtualItem.index]}
+                      row={row}
                       onClick={
                         onRowClick
                           ? (event) => onRowClick(row, event)
@@ -503,24 +506,6 @@ export function EdsDataGrid<T>({
       )}
     </TableProvider>
   )
-}
-
-function logDevelopmentWarningOfPropUse(
-  deprecatedProps: Record<string, { value: unknown; mitigationInfo?: string }>,
-) {
-  if (process.env.NODE_ENV !== 'development') {
-    return
-  }
-
-  for (const [key, { value, mitigationInfo }] of Object.entries(
-    deprecatedProps,
-  )) {
-    if (typeof value !== 'undefined') {
-      console.warn(
-        `The prop '${key}' is deprecated and will be removed in a future release. ${mitigationInfo}`,
-      )
-    }
-  }
 }
 
 const TableWrapper = styled.div<{

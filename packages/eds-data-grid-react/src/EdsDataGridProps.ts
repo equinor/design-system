@@ -185,9 +185,23 @@ type FilterProps = {
 }
 
 type HandlersProps<T> = {
+  /**
+   * Row click handler.
+   *
+   * @param row The current row
+   * @param event The click event
+   * @returns
+   */
   onRowClick?: (row: Row<T>, event: MouseEvent<HTMLTableRowElement>) => unknown
+  /**
+   * Cell click handler.
+   *
+   * @param cell The current cell
+   * @param event The click event
+   * @returns
+   */
   onCellClick?: (
-    row: Cell<T, unknown>,
+    cell: Cell<T, unknown>,
     event: MouseEvent<HTMLTableCellElement>,
   ) => unknown
 }
