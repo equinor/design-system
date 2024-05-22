@@ -214,6 +214,6 @@ describe('DatePicker', () => {
       </I18nProvider>,
     )
 
-    expect(screen.getByRole('presentation')).toHaveTextContent('2024年05年04年')
+    expect(screen.getByRole('presentation')).toHaveTextContent('2024年05月04日')
   })
 })
