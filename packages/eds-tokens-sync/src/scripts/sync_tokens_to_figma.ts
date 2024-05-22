@@ -11,7 +11,7 @@ import {
 
 export async function run() {
   const fileKeyIdx = process.argv.indexOf('--file-key')
-  let fileKey
+  let fileKey: string
 
   if (fileKeyIdx !== -1) {
     fileKey = process.argv[fileKeyIdx + 1]

@@ -11,6 +11,7 @@ export default defineConfig({
       entry: [
         resolve(__dirname, 'src/main.ts'),
         resolve(__dirname, 'src/scripts/sync_figma_to_tokens.ts'),
+        resolve(__dirname, 'src/scripts/sync_tokens_to_figma.ts'),
       ],
     },
     rollupOptions: {

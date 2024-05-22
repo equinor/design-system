@@ -1,13 +1,13 @@
 {
   "name": "@equinor/eds-tokens-sync",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "files": [
     "bin",
     "dist"
   ],
-  "types": "dist/index.d.ts",
+  "types": "dist/main.d.ts",
   "main": "dist/main.umd.cjs",
   "module": "dist/main.js",
   "exports": {
@@ -18,7 +18,8 @@
     }
   },
   "bin": {
-    "sync-figma-to-tokens": "bin/sync-figma-to-tokens.js"
+    "sync-figma-to-tokens": "bin/sync-figma-to-tokens.js",
+    "sync-tokens-to-figma": "bin/sync-tokens-to-figma.js"
   },
   "scripts": {
     "dev": "vite",
