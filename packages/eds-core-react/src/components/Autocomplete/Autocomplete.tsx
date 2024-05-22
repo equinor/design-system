@@ -82,6 +82,9 @@ const StyledPopover = styled('div').withConfig({
   padding: 0;
   margin: 0;
   overflow: visible;
+  &::backdrop {
+    background-color: transparent;
+  }
 `
 
 const HelperText = styled(_HelperText)`
