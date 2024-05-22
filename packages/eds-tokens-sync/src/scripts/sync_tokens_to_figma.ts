@@ -9,7 +9,7 @@ import {
   readJsonFiles,
 } from '../utils/token_import.ts'
 
-export async function syncTokensToFigma() {
+export async function run() {
   const fileKeyIdx = process.argv.indexOf('--file-key')
   let fileKey
 

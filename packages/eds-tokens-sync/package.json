@@ -4,17 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "files": [
+    "bin",
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "main": "dist/eds-tokens-sync.umd.cjs",
-  "module": "dist/eds-tokens-sync.js",
+  "main": "dist/main.umd.cjs",
+  "module": "dist/main.js",
   "exports": {
     ".": {
-      "import": "./dist/eds-tokens-sync.js",
-      "require": "./dist/eds-tokens-sync.umd.cjs",
+      "import": "./dist/main.js",
+      "require": "./dist/main.umd.cjs",
       "types": "./dist/index.d.ts"
     }
+  },
+  "bin": {
+    "sync-figma-to-tokens": "bin/sync-figma-to-tokens.js"
   },
   "scripts": {
     "dev": "vite",

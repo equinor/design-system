@@ -8,8 +8,10 @@ export default defineConfig({
   build: {
     lib: {
       name: 'eds-tokens-sync',
-      // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/main.ts'),
+      entry: [
+        resolve(__dirname, 'src/main.ts'),
+        resolve(__dirname, 'src/scripts/sync_figma_to_tokens.ts'),
+      ],
     },
     rollupOptions: {
       external: [

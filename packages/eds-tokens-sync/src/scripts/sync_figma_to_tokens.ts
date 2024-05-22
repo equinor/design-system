@@ -1,24 +1,12 @@
 import 'dotenv/config'
 import * as fs from 'fs'
-
 import FigmaApi from '../api/figma_api.ts'
-
 import { green } from '../utils/utils.ts'
 import { tokenFilesFromLocalVariables } from '../utils/token_export.ts'
 
-/**
- * Usage:
- *
- * // Defaults to writing to the tokens_new directory
- * npm run sync-figma-to-tokens
- *
- * // Writes to the specified directory
- * npm run sync-figma-to-tokens -- --output directory_name
- */
-
-export async function syncFigmaToTokens() {
+export async function run() {
   const fileKeyIdx = process.argv.indexOf('--file-key')
-  let fileKey
+  let fileKey: string
 
   if (fileKeyIdx !== -1) {
     fileKey = process.argv[fileKeyIdx + 1]
