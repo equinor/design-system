@@ -66,7 +66,7 @@
     "update-tokens:themes": "sync-figma-to-tokens --file-key aRgKtCisnm98k9kVy6zasL",
     "update-tokens:typography-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-tokens:typography-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
-    "update-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes && update-tokens:typography-primitives && update-tokens:typography-modes"
+    "update-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes && pnpm run update-tokens:typography-primitives && pnpm run update-tokens:typography-modes"
   },
   "keywords": [
     "eds",
