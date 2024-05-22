@@ -1,37 +1,38 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { EdsDataGrid } from './EdsDataGrid'
-import {
-  columns,
-  expandColumns,
-  groupedColumns,
-  helper,
-  Photo,
-  PostComment,
-} from './stories/columns'
-import { data } from './stories/data'
-import {
-  ChangeEvent,
-  CSSProperties,
-  FormEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
 import {
   Button,
   Checkbox,
+  Divider,
   Pagination,
   Paper,
   TextField,
   Typography,
 } from '@equinor/eds-core-react'
-import page from './EdsDataGrid.docs.mdx'
-import { Column, ExpandedState, Row } from '@tanstack/react-table'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
+import { Meta, StoryFn } from '@storybook/react'
+import { Column, ExpandedState, Row } from '@tanstack/react-table'
+import {
+  CSSProperties,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+import { EdsDataGrid } from './EdsDataGrid'
+import page from './EdsDataGrid.docs.mdx'
 import { EdsDataGridProps } from './EdsDataGridProps'
-import { Virtualizer } from './types'
 import { FilterWrapper } from './components/FilterWrapper'
+import {
+  Photo,
+  PostComment,
+  columns,
+  expandColumns,
+  groupedColumns,
+  helper,
+} from './stories/columns'
+import { data } from './stories/data'
+import { Virtualizer } from './types'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -232,6 +233,56 @@ export const ColumnResize: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 ColumnResize.args = {
   columnResizeMode: 'onChange',
 }
+
+export const RowSelection: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const [rowSelectionState, setRowSelectionState] = useState({})
+  const [enableMultiRowSelection, setEnableMultiRowSelection] = useState(true)
+
+  return (
+    <>
+      <Typography>Click a row to select and deselect.</Typography>
+      <Divider />
+      <Button onClick={() => setRowSelectionState({})}>
+        Reset row selection state
+      </Button>
+      <br />
+      <Checkbox
+        label="Enable multi row selection"
+        checked={enableMultiRowSelection}
+        onChange={(event) => setEnableMultiRowSelection(event.target.checked)}
+      />
+      <pre>
+        rowSelectionState=
+        {JSON.stringify(rowSelectionState, null, 2)}
+      </pre>
+      <EdsDataGrid
+        {...args}
+        enableRowSelection
+        enableMultiRowSelection={enableMultiRowSelection}
+        rowSelectionState={rowSelectionState}
+        onRowSelectionChange={setRowSelectionState}
+        onRowClick={(row) => (row.getCanSelect() ? row.toggleSelected() : null)}
+        rowStyle={(row) => ({
+          cursor: row.getCanSelect() ? 'pointer' : 'inherit',
+        })}
+        cellStyle={(row) => {
+          if (row.getIsSelected()) {
+            return {
+              backgroundColor:
+                tokens.colors.infographic.primary__lichen_green.hex,
+            }
+          }
+
+          return undefined
+        }}
+      />
+    </>
+  )
+}
+
+RowSelection.args = {
+  columnResizeMode: 'onChange',
+} satisfies Partial<EdsDataGridProps<Photo>>
 
 export const Paging: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   return <EdsDataGrid {...args} />

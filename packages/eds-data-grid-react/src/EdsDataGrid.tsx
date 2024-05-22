@@ -5,6 +5,10 @@ import {
   ColumnFiltersState,
   ColumnPinningState,
   ColumnSizingState,
+  PaginationState,
+  RowSelectionState,
+  SortingState,
+  TableOptions,
   getCoreRowModel,
   getExpandedRowModel,
   getFacetedMinMaxValues,
@@ -13,10 +17,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  PaginationState,
-  RowSelectionState,
-  SortingState,
-  TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
@@ -28,11 +28,11 @@ import {
   useRef,
   useState,
 } from 'react'
-import { TableHeaderRow } from './components/TableHeaderRow'
-import { TableRow } from './components/TableRow'
+import styled from 'styled-components'
 import { TableProvider } from './EdsDataGridContext'
 import { EdsDataGridProps } from './EdsDataGridProps'
-import styled from 'styled-components'
+import { TableHeaderRow } from './components/TableHeaderRow'
+import { TableRow } from './components/TableRow'
 import { addPxSuffixIfInputHasNoPrefix } from './utils'
 
 export function EdsDataGrid<T>({
@@ -41,14 +41,17 @@ export function EdsDataGrid<T>({
   columnResizeMode,
   pageSize,
   rowSelection,
-  multiRowSelection,
+  enableRowSelection,
+  enableMultiRowSelection,
   selectedRows,
+  rowSelectionState,
   enableColumnFiltering,
   debug,
   enablePagination,
   enableSorting,
   stickyHeader,
   onSelectRow,
+  onRowSelectionChange,
   caption,
   enableVirtual,
   virtualHeight,
@@ -79,11 +82,31 @@ export function EdsDataGrid<T>({
   setExpansionState,
   getSubRows,
   defaultColumn,
+  onRowClick,
+  onCellClick,
 }: EdsDataGridProps<T>) {
+  logDevelopmentWarningOfPropUse({
+    virtualHeight: {
+      value: virtualHeight,
+      mitigationInfo: "Use 'height' instead.",
+    },
+    rowSelection: {
+      value: rowSelection,
+      mitigationInfo: "Use 'enableRowSelection' instead.",
+    },
+    onSelectRow: {
+      value: onSelectRow,
+      mitigationInfo: "Use 'onRowSelectionChange' instead.",
+    },
+    selectedRows: {
+      value: selectedRows,
+      mitigationInfo: "Use 'rowSelectionState' instead.",
+    },
+  })
+
   const [sorting, setSorting] = useState<SortingState>(sortingState ?? [])
-  const [selection, setSelection] = useState<RowSelectionState>(
-    selectedRows ?? {},
-  )
+  const [internalRowSelectionState, setInternalRowSelectionState] =
+    useState<RowSelectionState>(rowSelectionState ?? selectedRows ?? {})
   const [columnPin, setColumnPin] = useState<ColumnPinningState>(
     columnPinState ?? {},
   )
@@ -119,8 +142,8 @@ export function EdsDataGrid<T>({
   }, [sortingState])
 
   useEffect(() => {
-    setSelection(selectedRows ?? {})
-  }, [selectedRows])
+    setInternalRowSelectionState(rowSelectionState ?? selectedRows ?? {})
+  }, [rowSelectionState, selectedRows])
 
   /**
    * By default, the filter-function accepts single-value filters. This adds multi-filter functionality out of the box.
@@ -203,7 +226,7 @@ export function EdsDataGrid<T>({
     state: {
       sorting,
       columnPinning: columnPin,
-      rowSelection: selection,
+      rowSelection: internalRowSelectionState,
       columnOrder: columnOrderState,
       columnSizing: columnSizing ?? internalColumnSize,
       expanded: expansionState,
@@ -227,8 +250,8 @@ export function EdsDataGrid<T>({
     debugTable: debug,
     debugHeaders: debug,
     debugColumns: debug,
-    enableRowSelection: rowSelection ?? false,
-    enableMultiRowSelection: multiRowSelection,
+    enableRowSelection: enableRowSelection ?? rowSelection ?? false,
+    enableMultiRowSelection: enableMultiRowSelection ?? false,
     enableColumnPinning: true,
     enablePinning: true,
     getRowId,
@@ -243,12 +266,12 @@ export function EdsDataGrid<T>({
   /**
    * Set up handlers for rowSelection
    */
-  if (rowSelection ?? false) {
+  if (enableRowSelection ?? rowSelection ?? false) {
     options.onRowSelectionChange = (updaterOrValue) => {
-      if (onSelectRow) {
-        onSelectRow(updaterOrValue)
-      }
-      setSelection(updaterOrValue)
+      onSelectRow?.(updaterOrValue)
+      onRowSelectionChange?.(updaterOrValue)
+
+      setInternalRowSelectionState(updaterOrValue)
     }
   }
 
@@ -411,12 +434,22 @@ export function EdsDataGrid<T>({
                   </Table.Row>
                 )}
 
-                {virtualRows.map((row) => (
-                  <TableRow
-                    key={row.index}
-                    row={table.getRowModel().rows[row.index]}
-                  />
-                ))}
+                {virtualRows.map((virtualItem) => {
+                  const row = table.getRowModel().rows[virtualItem.index]
+
+                  return (
+                    <TableRow
+                      key={virtualItem.index}
+                      row={table.getRowModel().rows[virtualItem.index]}
+                      onClick={
+                        onRowClick
+                          ? (event) => onRowClick(row, event)
+                          : undefined
+                      }
+                      onCellClick={onCellClick}
+                    />
+                  )
+                })}
 
                 {paddingBottom > 0 && (
                   <Table.Row
@@ -436,7 +469,14 @@ export function EdsDataGrid<T>({
             {!enableVirtual &&
               table
                 .getRowModel()
-                .rows.map((row) => <TableRow key={row.id} row={row} />)}
+                .rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    row={row}
+                    onClick={(event) => onRowClick(row, event)}
+                    onCellClick={onCellClick}
+                  />
+                ))}
           </Table.Body>
         </Table>
         {externalPaginator
@@ -463,6 +503,24 @@ export function EdsDataGrid<T>({
       )}
     </TableProvider>
   )
+}
+
+function logDevelopmentWarningOfPropUse(
+  deprecatedProps: Record<string, { value: unknown; mitigationInfo?: string }>,
+) {
+  if (process.env.NODE_ENV !== 'development') {
+    return
+  }
+
+  for (const [key, { value, mitigationInfo }] of Object.entries(
+    deprecatedProps,
+  )) {
+    if (typeof value !== 'undefined') {
+      console.warn(
+        `The prop '${key}' is deprecated and will be removed in a future release. ${mitigationInfo}`,
+      )
+    }
+  }
 }
 
 const TableWrapper = styled.div<{

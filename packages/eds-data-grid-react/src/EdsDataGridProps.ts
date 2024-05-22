@@ -1,4 +1,5 @@
 import {
+  Cell,
   Column,
   ColumnDef,
   ColumnPinningState,
@@ -12,7 +13,12 @@ import {
   TableOptions,
 } from '@tanstack/react-table'
 import { Virtualizer } from '@tanstack/react-virtual'
-import { CSSProperties, MutableRefObject, ReactElement } from 'react'
+import {
+  CSSProperties,
+  MouseEvent,
+  MutableRefObject,
+  ReactElement,
+} from 'react'
 
 type BaseProps<T> = {
   /**
@@ -22,7 +28,8 @@ type BaseProps<T> = {
   /**
    * Definition of the columns to display in the table
    */
-  columns: ColumnDef<T>[]
+
+  columns: TableOptions<T>['columns']
   /**
    * The mode of column resizing. If not set, column resizing is disabled.
    * Can be either 'onChange' or 'onEnd'
@@ -30,21 +37,14 @@ type BaseProps<T> = {
    */
   columnResizeMode?: ColumnResizeMode
   /**
-   * Set this to enable rowSelection. If a function is provided, it will be called for each row to determine if it is selectable.
-   * @default false
+   * Callback for when row-selection changes
+   * @deprecated Use `onRowSelectionChange`
    */
-  rowSelection?: boolean | ((row: Row<T>) => boolean)
-  /**
-   * Only used if row selection has been enabled via `rowSelection`
-   * Enables/disables multiple row selection for all rows in the table OR
-   * A function that given a row, returns whether to enable/disable multiple row selection for that row's children/grandchildren
-   * @default true
-   */
-  multiRowSelection?: boolean | ((row: Row<T>) => boolean)
+  onSelectRow?: OnChangeFn<RowSelectionState>
   /**
    * Callback for when row-selection changes
    */
-  onSelectRow?: OnChangeFn<RowSelectionState>
+  onRowSelectionChange?: OnChangeFn<RowSelectionState>
   /**
    * Enable debug mode. See https://tanstack.com/table/v8/docs/api/core/table#debugall
    * @default false
@@ -65,11 +65,6 @@ type BaseProps<T> = {
    * @default undefined
    */
   emptyMessage?: string
-  /**
-   * The currently selected rows
-   * @default {}
-   */
-  selectedRows?: Record<string | number, boolean>
   /**
    * Whether there should be horizontal scrolling.
    * This must be true for column pinning to work
@@ -109,6 +104,38 @@ type BaseProps<T> = {
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#defaultcolumn)
    */
   defaultColumn?: Partial<ColumnDef<T, unknown>>
+}
+
+type RowSelectionProps<T> = {
+  /**
+   * The currently selected rows
+   * @deprecated Use `rowSelectionState`
+   * @default {}
+   */
+  selectedRows?: Record<string | number, boolean>
+  /**
+   * The currently selected rows
+   * @default {}
+   */
+  rowSelectionState?: RowSelectionState
+  /**
+   * Set this to enable rowSelection. If a function is provided, it will be called for each row to determine if it is selectable.
+   * @deprecated Use `enableRowSelection`
+   * @default false
+   */
+  rowSelection?: boolean | ((row: Row<T>) => boolean)
+  /**
+   * Set this to enable rowSelection. If a function is provided, it will be called for each row to determine if it is selectable.
+   * @default false
+   */
+  enableRowSelection?: boolean | ((row: Row<T>) => boolean)
+  /**
+   * Only used if row selection has been enabled via `enableRowSelection`
+   * Enables/disables multiple row selection for all rows in the table OR
+   * A function that given a row, returns whether to enable/disable multiple row selection for that row's children/grandchildren
+   * @default false
+   */
+  enableMultiRowSelection?: boolean | ((row: Row<T>) => boolean)
 }
 
 type StyleProps<T> = {
@@ -155,6 +182,14 @@ type FilterProps = {
    * @default false
    */
   enableColumnFiltering?: boolean
+}
+
+type HandlersProps<T> = {
+  onRowClick?: (row: Row<T>, event: MouseEvent<HTMLTableRowElement>) => unknown
+  onCellClick?: (
+    row: Cell<T, unknown>,
+    event: MouseEvent<HTMLTableCellElement>,
+  ) => unknown
 }
 
 type PagingProps = {
@@ -231,7 +266,9 @@ type ExpansionProps<T> = {
 }
 
 export type EdsDataGridProps<T> = BaseProps<T> &
+  RowSelectionProps<T> &
   StyleProps<T> &
+  HandlersProps<T> &
   SortProps &
   FilterProps &
   PagingProps &
