@@ -58,10 +58,13 @@ export function tokenFilesFromLocalVariables(
         tokenFiles[fileName] = {}
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let obj: any = tokenFiles[fileName]
 
       variable.name.split('/').forEach((groupName) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         obj[groupName] = obj[groupName] || {}
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         obj = obj[groupName]
       })
 

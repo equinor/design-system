@@ -43,6 +43,7 @@ export function readJsonFiles(files: string[]) {
       throw new Error(`Invalid tokens file: ${file}. File is empty.`)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const tokensFile: TokensFile = JSON.parse(fileContent)
 
     tokensJsonByFile[baseFileName] = flattenTokensFile(tokensFile)
@@ -133,10 +134,7 @@ function variableValueFromToken(
   if (typeof token.$value === 'string' && isAlias(token.$value)) {
     // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
     // The Figma syntax for variable names is: group/subgroup/token
-    const value = token.$value
-      .trim()
-      .replace(/\./g, '/')
-      .replace(/[\{\}]/g, '')
+    const value = token.$value.trim().replace(/\./g, '/').replace(/[{}]/g, '')
 
     // When mapping aliases to existing local variables, we assume that variable names
     // are unique *across all collections* in the Figma file
