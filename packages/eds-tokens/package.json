@@ -12,6 +12,7 @@
     },
     "./tokens.css": "./tokens.css",
     "./elements.css": "./elements.css",
+    "./css/variables": "./dist/css/variables.css",
     "./css/color/*": "./dist/css/color/*.css",
     "./css/spacing/*": "./dist/css/spacing/*.css",
     "./css/typography/*": "./dist/css/typography/*.css",
