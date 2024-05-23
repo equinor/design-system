@@ -14,9 +14,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    
-    "outDir": "../dist/script",
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["./*.ts"],  
+  "include": ["./*.ts"]
 }

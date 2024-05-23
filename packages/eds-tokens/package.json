@@ -57,7 +57,7 @@
     "_build:css-min": "pnpm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
     "test": "jest",
     "tokens-in-code:build-script": "tsc --project script/tsconfig.json",
-    "tokens-in-code:build-raw": "node dist/script/build.js",
+    "tokens-in-code:build-raw": "node script/build.js",
     "tokens-in-code:clean": "shx rm -rf dist/css dist/ts dist/json dist/script",
     "tokens-in-code:build": "pnpm run tokens-in-code:clean && pnpm run tokens-in-code:build-script && pnpm run tokens-in-code:build-raw && pnpm run _build:css && pnpm run _build:css-min",
     "update-tokens:primitives": "sync-figma-to-tokens --file-key cVaqjfgt3gDiqbx10q3Pj8",
