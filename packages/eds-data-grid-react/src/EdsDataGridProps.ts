@@ -35,6 +35,13 @@ type BaseProps<T> = {
    */
   rowSelection?: boolean | ((row: Row<T>) => boolean)
   /**
+   * Only used if row selection has been enabled via `rowSelection`
+   * Enables/disables multiple row selection for all rows in the table OR
+   * A function that given a row, returns whether to enable/disable multiple row selection for that row's children/grandchildren
+   * @default true
+   */
+  multiRowSelection?: boolean | ((row: Row<T>) => boolean)
+  /**
    * Callback for when row-selection changes
    */
   onSelectRow?: OnChangeFn<RowSelectionState>

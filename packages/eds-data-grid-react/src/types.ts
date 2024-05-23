@@ -17,6 +17,8 @@ import type {
 } from '@tanstack/react-table'
 import type { Virtualizer } from '@tanstack/react-virtual'
 
+export { createColumnHelper } from '@tanstack/react-table'
+
 export type {
   Cell,
   CellContext,
@@ -31,6 +33,6 @@ export type {
   RowSelectionState,
   SortingState,
   Table,
-  VisibilityState,
   Virtualizer,
+  VisibilityState,
 }
