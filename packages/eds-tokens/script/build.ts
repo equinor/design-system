@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
 import Color from 'colorjs.io'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
@@ -18,16 +17,18 @@ const {
   filter: { isColor },
 } = StyleDictionary
 
-//manually convert reference into custom property
-const resolveReference = (value: string, prefix: string) => {
-  if (!value) return
-  return `var(--${prefix}-${value
+// manually convert reference into custom property
+const resolveReference = (value: string, prefix: string): string => {
+  if (!value) return ''
+
+  const valueFormatted = value
     .toLowerCase()
     .replace('{', '')
     .replace('}', '')
-    //@ts-ignore
     .replaceAll(' ', '-')
-    .replaceAll('.', '-')})`
+    .replaceAll('.', '-')
+
+  return `var(--${prefix}-${valueFormatted}`
 }
 
 const darkTokens = readJsonFiles([
@@ -40,13 +41,13 @@ const lightDarkTransform: StyleDictionary.Transform = {
   transformer: (token: StyleDictionary.TransformedToken, options) => {
     const path = token.path.join('/')
     const darkValue = darkTokens['🌗 Themes.Dark.json']?.[`${path}`]?.['$value']
-    let newValue = token.value
+    let newValue = `${token.value}`
     if (darkValue) {
       //it is a reference
       if (String(darkValue).startsWith('{')) {
         const resolvedReference = resolveReference(
-          darkValue as string,
-          options.prefix as string,
+          `${darkValue}`,
+          `${options.prefix}`,
         )
         //make sure it is not a local variable, in which case it has light-dark set already
         if (token.original.value != darkValue) {
@@ -68,11 +69,12 @@ const toOKLCHTransform: StyleDictionary.Transform = {
   transitive: true,
   matcher: isColor,
   transformer: (token: StyleDictionary.TransformedToken) => {
+    const tokenAsString = `${token.value}`
     //handle partially transformed light-dark values
-    if (token.value.startsWith('light')) {
-      return token.value
+    if (tokenAsString.startsWith('light')) {
+      return tokenAsString
     }
-    return new Color(token.value)
+    return new Color(tokenAsString)
       .to('oklch')
       .toString({ precision: OKLCH_PRECISION })
   },
@@ -131,7 +133,7 @@ StyleDictionary.registerTransform({
     return isFontMetricInPx || isSpacing
   },
   transformer: (token) => {
-    return `${parseFloat(token.value) / 16}rem`
+    return `${parseFloat(`${token.value}`) / 16}rem`
   },
 })
 

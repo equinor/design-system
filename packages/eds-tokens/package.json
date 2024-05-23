@@ -48,16 +48,18 @@
     "elements.css"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc && pnpm run build:beta",
+    "build": "rollup -c --bundleConfigAsCjs && pnpm run tokens-in-code:build",
     "dev": "rollup -c -w",
     "types": "tsc",
     "prettier:check": "prettier --check src/",
     "_prebuild:css-index": "shx cp src/index.css dist/css/index.css",
     "_build:css": "pnpm run _prebuild:css-index && lightningcss --bundle dist/css/index.css -o dist/css/variables.css",
     "_build:css-min": "pnpm run _prebuild:css-index && lightningcss --minify --bundle dist/css/index.css -o dist/css/variables.min.css",
-    "clean:beta": "shx rm -rf dist/css dist/ts dist/json",
-    "build:beta": "pnpm run clean:beta && ts-node --esm -P src/sync/tsconfig.json src/sync/build.ts && pnpm run _build:css && pnpm run _build:css-min",
     "test": "jest",
+    "tokens-in-code:build-script": "tsc --project script/tsconfig.json",
+    "tokens-in-code:build-raw": "node dist/script/build.js",
+    "tokens-in-code:clean": "shx rm -rf dist/css dist/ts dist/json dist/script",
+    "tokens-in-code:build": "pnpm run tokens-in-code:clean && pnpm run tokens-in-code:build-script && pnpm run tokens-in-code:build-raw && pnpm run _build:css && pnpm run _build:css-min",
     "update-tokens:primitives": "sync-figma-to-tokens --file-key cVaqjfgt3gDiqbx10q3Pj8",
     "update-tokens:themes": "sync-figma-to-tokens --file-key aRgKtCisnm98k9kVy6zasL",
     "update-tokens:typography-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
@@ -89,7 +91,6 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2",
     "colorjs.io": "^0.5.0",
-    "ts-node": "^10.9.1",
     "@equinor/eds-tokens-sync": "workspace:*"
   },
   "engines": {
