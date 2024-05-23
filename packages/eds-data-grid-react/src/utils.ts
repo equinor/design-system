@@ -25,3 +25,21 @@ export function addPxSuffixIfInputHasNoPrefix(size: number | string) {
 
   return size
 }
+
+export function logDevelopmentWarningOfPropUse(
+  deprecatedProps: Record<string, { value: unknown; mitigationInfo?: string }>,
+) {
+  if (process.env.NODE_ENV !== 'development') {
+    return
+  }
+
+  for (const [key, { value, mitigationInfo }] of Object.entries(
+    deprecatedProps,
+  )) {
+    if (typeof value !== 'undefined') {
+      console.warn(
+        `The prop '${key}' is deprecated and will be removed in a future release. ${mitigationInfo}`,
+      )
+    }
+  }
+}
