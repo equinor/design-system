@@ -7,6 +7,7 @@ import {
   cloneElement,
   useMemo,
   useEffect,
+  ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
@@ -81,7 +82,7 @@ export type TooltipProps = {
   /** Tooltip placement relative to anchor */
   placement?: Placement
   /** Tooltip title */
-  title?: string
+  title?: ReactNode
   /** Tooltip anchor element */
   children: React.ReactElement & React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
@@ -90,7 +91,7 @@ export type TooltipProps = {
    * @default document.body
    * */
   portalContainer?: HTMLElement
-} & HTMLAttributes<HTMLDivElement>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'title'>
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
@@ -107,8 +108,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
-    const shouldOpen = title !== '' && typeof document !== 'undefined'
     const { rootElement } = useEds()
+    const shouldOpen = Boolean(title) && typeof document !== 'undefined'
 
     const {
       x,
