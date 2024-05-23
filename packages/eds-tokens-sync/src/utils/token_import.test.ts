@@ -149,7 +149,7 @@ describe('readJsonFiles', () => {
 })
 
 describe('generatePostVariablesPayload', () => {
-  it('does an initial sync', async () => {
+  it('does an initial sync', () => {
     const localVariablesResponse: GetLocalVariablesResponse = {
       status: 200,
       error: false,
@@ -355,7 +355,7 @@ describe('generatePostVariablesPayload', () => {
     ])
   })
 
-  it('does an in-place update', async () => {
+  it('does an in-place update', () => {
     const localVariablesResponse: GetLocalVariablesResponse = {
       status: 200,
       error: false,
@@ -995,7 +995,7 @@ describe('generatePostVariablesPayload', () => {
     ])
   })
 
-  it('throws on unsupported token types', async () => {
+  it('throws on unsupported token types', () => {
     const localVariablesResponse: GetLocalVariablesResponse = {
       status: 200,
       error: false,
@@ -1005,6 +1005,7 @@ describe('generatePostVariablesPayload', () => {
       },
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tokensByFile: any = {
       'primitives.mode1.json': {
         'font-weight-default': { $type: 'fontWeight', $value: 400 },
@@ -1012,6 +1013,7 @@ describe('generatePostVariablesPayload', () => {
     }
 
     expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       generatePostVariablesPayload(tokensByFile, localVariablesResponse)
     }).toThrowError('Invalid token $type: fontWeight')
   })

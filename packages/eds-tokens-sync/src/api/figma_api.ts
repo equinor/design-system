@@ -5,7 +5,7 @@ import {
   PostVariablesResponse,
 } from '@figma/rest-api-spec'
 
-export default class FigmaApi {
+export class FigmaApi {
   private baseUrl = 'https://api.figma.com'
   private token: string
 

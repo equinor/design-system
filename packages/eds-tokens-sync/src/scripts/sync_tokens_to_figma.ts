@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import * as fs from 'fs'
 
-import FigmaApi from '../api/figma_api.ts'
+import { FigmaApi } from '../api/figma_api.ts'
 
 import { green } from '../utils/utils.ts'
 import {
