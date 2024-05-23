@@ -243,7 +243,12 @@ export const OptionComponent: StoryFn<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         optionComponent={CustomItem}
-        initialSelectedOptions={[options[1]]}
+        initialSelectedOptions={
+          [JSON.parse(JSON.stringify(options[1]))] as MyOptionType[]
+        }
+        itemCompare={(item, compare) => {
+          return item.label === compare.label
+        }}
         multiline
       />
       <Autocomplete
@@ -251,7 +256,12 @@ export const OptionComponent: StoryFn<AutocompleteProps<MyOptionType>> = (
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         optionComponent={CustomItem}
-        initialSelectedOptions={[options[1]]}
+        initialSelectedOptions={
+          JSON.parse(JSON.stringify([options[1], options[2]])) as MyOptionType[]
+        }
+        itemCompare={(item, compare) => {
+          return item.label === compare.label
+        }}
         multiline
         multiple
       />

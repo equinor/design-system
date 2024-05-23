@@ -223,7 +223,8 @@ const handleListFocus = (e: FocusEvent<HTMLElement>) => {
 
 const defaultOptionDisabled = () => false
 
-type OptionLabelProps<T> = T extends string | number
+// prettier-ignore
+type OptionLabelProps<T,> = T extends string | number
   ? {
       /**  Custom option label */
       optionLabel?: (option: T) => string
@@ -325,6 +326,10 @@ export type AutocompleteProps<T> = {
    *  @default 300
    */
   dropdownHeight?: number
+  /**
+   * Method that is used to compare objects by value. If omitted, objects are matched by reference.
+   */
+  itemCompare?: (value: T, compare: T) => boolean
 } & HTMLAttributes<HTMLDivElement> &
   OptionLabelProps<T>
 
@@ -344,10 +349,11 @@ function AutocompleteInner<T>(
     hideClearButton = false,
     onOptionsChange,
     onInputChange,
-    selectedOptions,
+    selectedOptions: _selectedOptions,
     multiple,
+    itemCompare,
     allowSelectAll,
-    initialSelectedOptions = [],
+    initialSelectedOptions: _initialSelectedOptions = [],
     disablePortal,
     optionDisabled = defaultOptionDisabled,
     optionsFilter,
@@ -364,6 +370,21 @@ function AutocompleteInner<T>(
     variant,
     ...other
   } = props
+
+  const selectedOptions = _selectedOptions
+    ? itemCompare
+      ? options.filter((item) =>
+          _selectedOptions.some((compare) => itemCompare(item, compare)),
+        )
+      : _selectedOptions
+    : undefined
+  const initialSelectedOptions = _initialSelectedOptions
+    ? itemCompare
+      ? options.filter((item) =>
+          _initialSelectedOptions.some((compare) => itemCompare(item, compare)),
+        )
+      : _initialSelectedOptions
+    : undefined
 
   if (disablePortal) {
     console.warn(
@@ -423,9 +444,14 @@ function AutocompleteInner<T>(
       ...multipleSelectionProps,
       onSelectedItemsChange: (changes) => {
         if (onOptionsChange) {
-          const selectedItems = changes.selectedItems.filter(
+          let selectedItems = changes.selectedItems.filter(
             (item) => item !== AllSymbol,
           )
+          if (itemCompare) {
+            selectedItems = inputOptions.filter((item) =>
+              selectedItems.some((compare) => itemCompare(item, compare)),
+            )
+          }
           onOptionsChange({ selectedItems })
         }
       },
@@ -607,7 +633,12 @@ function AutocompleteInner<T>(
       ...comboBoxProps,
       onSelectedItemChange: (changes) => {
         if (onOptionsChange) {
-          const { selectedItem } = changes
+          let { selectedItem } = changes
+          if (itemCompare) {
+            selectedItem = inputOptions.find((item) =>
+              itemCompare(item, selectedItem),
+            )
+          }
           onOptionsChange({
             selectedItems: selectedItem ? [selectedItem] : [],
           })
