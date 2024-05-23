@@ -29,15 +29,18 @@ function tokenValueFromVariable(
       return rgbToHex(value)
     }
 
-    throw new Error(`Format of variable value is invalid: ${value}`)
+    throw new Error(`Format of variable value is invalid: ${value?.id}`)
   } else {
     return value
   }
 }
 
-export function tokenFilesFromLocalVariables(localVariablesResponse: GetLocalVariablesResponse) {
+export function tokenFilesFromLocalVariables(
+  localVariablesResponse: GetLocalVariablesResponse,
+) {
   const tokenFiles: { [fileName: string]: TokensFile } = {}
-  const localVariableCollections = localVariablesResponse.meta.variableCollections
+  const localVariableCollections =
+    localVariablesResponse.meta.variableCollections
   const localVariables = localVariablesResponse.meta.variables
 
   Object.values(localVariables).forEach((variable) => {

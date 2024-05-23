@@ -71,12 +71,28 @@ describe('readJsonFiles', () => {
     ])
     expect(result).toEqual({
       'collection1.mode1.json': {
-        'spacing/1': { $type: 'number', $value: 8, $description: '8px spacing' },
-        'spacing/2': { $type: 'number', $value: 16, $description: '16px spacing' },
+        'spacing/1': {
+          $type: 'number',
+          $value: 8,
+          $description: '8px spacing',
+        },
+        'spacing/2': {
+          $type: 'number',
+          $value: 16,
+          $description: '16px spacing',
+        },
       },
       'collection2.mode1.json': {
-        'color/brand/radish': { $type: 'color', $value: '#ffbe16', $description: 'Radish color' },
-        'color/brand/pear': { $type: 'color', $value: '#ffbe16', $description: 'Pear color' },
+        'color/brand/radish': {
+          $type: 'color',
+          $value: '#ffbe16',
+          $description: 'Radish color',
+        },
+        'color/brand/pear': {
+          $type: 'color',
+          $value: '#ffbe16',
+          $description: 'Pear color',
+        },
       },
       'collection3.mode1.json': {
         token1: { $type: 'string', $value: 'value1' },
@@ -97,12 +113,18 @@ describe('readJsonFiles', () => {
         'tokens/collection1.mode1.2.json',
         'tokens/collection1.mode1.3.json',
       ])
-    }).toThrowError('Duplicate collection and mode in file: tokens/collection1.mode1.2.json')
+    }).toThrowError(
+      'Duplicate collection and mode in file: tokens/collection1.mode1.2.json',
+    )
   })
 
   it('handles file names that do not match the expected format', () => {
     expect(() => {
-      readJsonFiles(['tokens/collection1.mode1.json', 'tokens/collection2.mode1.json', 'foo.json'])
+      readJsonFiles([
+        'tokens/collection1.mode1.json',
+        'tokens/collection2.mode1.json',
+        'foo.json',
+      ])
     }).toThrowError(
       'Invalid tokens file name: foo.json. File names must be in the format: {collectionName}.{modeName}.json',
     )
@@ -111,14 +133,18 @@ describe('readJsonFiles', () => {
   it('ignores keys that start with $', () => {
     const result = readJsonFiles(['file_with_$_keys.mode1.json'])
     expect(result).toEqual({
-      'file_with_$_keys.mode1.json': { token1: { $type: 'string', $value: 'value1' } },
+      'file_with_$_keys.mode1.json': {
+        token1: { $type: 'string', $value: 'value1' },
+      },
     })
   })
 
   it('handles empty files', () => {
     expect(() => {
       readJsonFiles(['empty_file.mode1.json'])
-    }).toThrowError('Invalid tokens file: empty_file.mode1.json. File is empty.')
+    }).toThrowError(
+      'Invalid tokens file: empty_file.mode1.json. File is empty.',
+    )
   })
 })
 
@@ -135,9 +161,17 @@ describe('generatePostVariablesPayload', () => {
 
     const tokensByFile: FlattenedTokensByFile = {
       'primitives.mode1.json': {
-        'spacing/1': { $type: 'number', $value: 8, $description: '8px spacing' },
+        'spacing/1': {
+          $type: 'number',
+          $value: 8,
+          $description: '8px spacing',
+        },
         'spacing/2': { $type: 'number', $value: 16 },
-        'color/brand/radish': { $type: 'color', $value: '#ffbe16', $description: 'Radish color' },
+        'color/brand/radish': {
+          $type: 'color',
+          $value: '#ffbe16',
+          $description: 'Radish color',
+        },
         'color/brand/pear': { $type: 'color', $value: '#ffbe16' },
       },
       'primitives.mode2.json': {
@@ -148,15 +182,24 @@ describe('generatePostVariablesPayload', () => {
       },
       'tokens.mode1.json': {
         'spacing/spacing-sm': { $type: 'number', $value: '{spacing.1}' },
-        'surface/surface-brand': { $type: 'color', $value: '{color.brand.radish}' },
+        'surface/surface-brand': {
+          $type: 'color',
+          $value: '{color.brand.radish}',
+        },
       },
       'tokens.mode2.json': {
         'spacing/spacing-sm': { $type: 'number', $value: '{spacing.1}' },
-        'surface/surface-brand': { $type: 'color', $value: '{color.brand.pear}' },
+        'surface/surface-brand': {
+          $type: 'color',
+          $value: '{color.brand.pear}',
+        },
       },
     }
 
-    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const result = generatePostVariablesPayload(
+      tokensByFile,
+      localVariablesResponse,
+    )
     expect(result.variableCollections).toEqual([
       {
         action: 'CREATE',
@@ -270,12 +313,20 @@ describe('generatePostVariablesPayload', () => {
       {
         variableId: 'color/brand/radish',
         modeId: 'mode2',
-        value: { r: 0.00392156862745098, g: 0.00392156862745098, b: 0.00392156862745098 },
+        value: {
+          r: 0.00392156862745098,
+          g: 0.00392156862745098,
+          b: 0.00392156862745098,
+        },
       },
       {
         variableId: 'color/brand/pear',
         modeId: 'mode2',
-        value: { r: 0.00392156862745098, g: 0.00392156862745098, b: 0.00392156862745098 },
+        value: {
+          r: 0.00392156862745098,
+          g: 0.00392156862745098,
+          b: 0.00392156862745098,
+        },
       },
 
       // tokens, mode1
@@ -318,7 +369,12 @@ describe('generatePostVariablesPayload', () => {
             remote: false,
             key: 'variableKey',
             hiddenFromPublishing: false,
-            variableIds: ['VariableID:2:1', 'VariableID:2:2', 'VariableID:2:3', 'VariableID:2:4'],
+            variableIds: [
+              'VariableID:2:1',
+              'VariableID:2:2',
+              'VariableID:2:3',
+              'VariableID:2:4',
+            ],
           },
         },
         variables: {
@@ -359,7 +415,12 @@ describe('generatePostVariablesPayload', () => {
             variableCollectionId: 'VariableCollectionId:1:1',
             resolvedType: 'COLOR',
             valuesByMode: {
-              '1:0': { r: 1, g: 0.7450980392156863, b: 0.08627450980392157, a: 1 },
+              '1:0': {
+                r: 1,
+                g: 0.7450980392156863,
+                b: 0.08627450980392157,
+                a: 1,
+              },
             },
             remote: false,
             description: 'Radish color',
@@ -424,15 +485,24 @@ describe('generatePostVariablesPayload', () => {
       },
       'tokens.mode1.json': {
         'spacing/spacing-sm': { $type: 'number', $value: '{spacing.1}' },
-        'surface/surface-brand': { $type: 'color', $value: '{color.brand.radish}' },
+        'surface/surface-brand': {
+          $type: 'color',
+          $value: '{color.brand.radish}',
+        },
       },
       'tokens.mode2.json': {
         'spacing/spacing-sm': { $type: 'number', $value: '{spacing.1}' },
-        'surface/surface-brand': { $type: 'color', $value: '{color.brand.pear}' },
+        'surface/surface-brand': {
+          $type: 'color',
+          $value: '{color.brand.pear}',
+        },
       },
     }
 
-    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const result = generatePostVariablesPayload(
+      tokensByFile,
+      localVariablesResponse,
+    )
     expect(result.variableCollections).toEqual([
       {
         action: 'CREATE',
@@ -504,12 +574,20 @@ describe('generatePostVariablesPayload', () => {
       {
         variableId: 'VariableID:2:3',
         modeId: 'mode2',
-        value: { r: 0.00392156862745098, g: 0.00392156862745098, b: 0.00392156862745098 },
+        value: {
+          r: 0.00392156862745098,
+          g: 0.00392156862745098,
+          b: 0.00392156862745098,
+        },
       },
       {
         variableId: 'VariableID:2:4',
         modeId: 'mode2',
-        value: { r: 0.00392156862745098, g: 0.00392156862745098, b: 0.00392156862745098 },
+        value: {
+          r: 0.00392156862745098,
+          g: 0.00392156862745098,
+          b: 0.00392156862745098,
+        },
       },
 
       // tokens, mode1
@@ -619,7 +697,10 @@ describe('generatePostVariablesPayload', () => {
       },
     }
 
-    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const result = generatePostVariablesPayload(
+      tokensByFile,
+      localVariablesResponse,
+    )
 
     expect(result).toEqual({
       variableCollections: [],
@@ -710,7 +791,10 @@ describe('generatePostVariablesPayload', () => {
       },
     }
 
-    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const result = generatePostVariablesPayload(
+      tokensByFile,
+      localVariablesResponse,
+    )
 
     expect(result).toEqual({
       variableCollections: [],
@@ -803,7 +887,9 @@ describe('generatePostVariablesPayload', () => {
 
     expect(() => {
       generatePostVariablesPayload(tokensByFile, localVariablesResponse)
-    }).toThrowError(`Cannot update remote variable "var1" in collection "collection"`)
+    }).toThrowError(
+      `Cannot update remote variable "var1" in collection "collection"`,
+    )
   })
 
   it('updates aliases to remote variables', () => {
@@ -892,7 +978,10 @@ describe('generatePostVariablesPayload', () => {
       },
     }
 
-    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const result = generatePostVariablesPayload(
+      tokensByFile,
+      localVariablesResponse,
+    )
 
     expect(result.variableCollections).toEqual([])
     expect(result.variableModes).toEqual([])

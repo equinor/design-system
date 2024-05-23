@@ -28,7 +28,8 @@ export function readJsonFiles(files: string[]) {
 
   files.forEach((file) => {
     const baseFileName = path.basename(file)
-    const { collectionName, modeName } = collectionAndModeFromFileName(baseFileName)
+    const { collectionName, modeName } =
+      collectionAndModeFromFileName(baseFileName)
 
     if (seenCollectionsAndModes.has(`${collectionName}.${modeName}`)) {
       throw new Error(`Duplicate collection and mode in file: ${file}`)
@@ -41,6 +42,7 @@ export function readJsonFiles(files: string[]) {
     if (!fileContent) {
       throw new Error(`Invalid tokens file: ${file}. File is empty.`)
     }
+
     const tokensFile: TokensFile = JSON.parse(fileContent)
 
     tokensJsonByFile[baseFileName] = flattenTokensFile(tokensFile)
@@ -53,7 +55,11 @@ function flattenTokensFile(tokensFile: TokensFile) {
   const flattenedTokens: { [tokenName: string]: Token } = {}
 
   Object.entries(tokensFile).forEach(([tokenGroup, groupValues]) => {
-    traverseCollection({ key: tokenGroup, object: groupValues, tokens: flattenedTokens })
+    traverseCollection({
+      key: tokenGroup,
+      object: groupValues,
+      tokens: flattenedTokens,
+    })
   })
 
   return flattenedTokens
@@ -110,7 +116,7 @@ function variableResolvedTypeFromToken(token: Token) {
     case 'boolean':
       return 'BOOLEAN'
     default:
-      throw new Error(`Invalid token $type: ${token.$type}`)
+      throw new Error(`Invalid token $type: ${JSON.stringify(token)}`)
   }
 }
 
@@ -134,7 +140,9 @@ function variableValueFromToken(
 
     // When mapping aliases to existing local variables, we assume that variable names
     // are unique *across all collections* in the Figma file
-    for (const localVariablesByName of Object.values(localVariablesByCollectionAndName)) {
+    for (const localVariablesByName of Object.values(
+      localVariablesByCollectionAndName,
+    )) {
       if (localVariablesByName[value]) {
         return {
           type: 'VARIABLE_ALIAS',
@@ -159,7 +167,12 @@ function variableValueFromToken(
 
 function compareVariableValues(a: VariableValue, b: VariableValue) {
   if (typeof a === 'object' && typeof b === 'object') {
-    if ('type' in a && 'type' in b && a.type === 'VARIABLE_ALIAS' && b.type === 'VARIABLE_ALIAS') {
+    if (
+      'type' in a &&
+      'type' in b &&
+      a.type === 'VARIABLE_ALIAS' &&
+      b.type === 'VARIABLE_ALIAS'
+    ) {
       return a.id === b.id
     } else if ('r' in a && 'r' in b) {
       return colorApproximatelyEqual(a, b)
@@ -175,7 +188,9 @@ function isCodeSyntaxEqual(a: VariableCodeSyntax, b: VariableCodeSyntax) {
   return (
     Object.keys(a).length === Object.keys(b).length &&
     Object.keys(a).every(
-      (key) => a[key as keyof VariableCodeSyntax] === b[key as keyof VariableCodeSyntax],
+      (key) =>
+        a[key as keyof VariableCodeSyntax] ===
+        b[key as keyof VariableCodeSyntax],
     )
   )
 }
@@ -189,7 +204,10 @@ function isCodeSyntaxEqual(a: VariableCodeSyntax, b: VariableCodeSyntax) {
  * a particular property, we do not include it in the differences object to avoid
  * touching that property in Figma.
  */
-function tokenAndVariableDifferences(token: Token, variable: LocalVariable | null) {
+function tokenAndVariableDifferences(
+  token: Token,
+  variable: LocalVariable | null,
+) {
   const differences: Partial<
     Omit<
       VariableCreate | VariableUpdate,
@@ -209,21 +227,27 @@ function tokenAndVariableDifferences(token: Token, variable: LocalVariable | nul
 
     if (
       figmaExtensions.hiddenFromPublishing !== undefined &&
-      (!variable || figmaExtensions.hiddenFromPublishing !== variable.hiddenFromPublishing)
+      (!variable ||
+        figmaExtensions.hiddenFromPublishing !== variable.hiddenFromPublishing)
     ) {
       differences.hiddenFromPublishing = figmaExtensions.hiddenFromPublishing
     }
 
     if (
       figmaExtensions.scopes &&
-      (!variable || !areSetsEqual(new Set(figmaExtensions.scopes), new Set(variable.scopes)))
+      (!variable ||
+        !areSetsEqual(
+          new Set(figmaExtensions.scopes),
+          new Set(variable.scopes),
+        ))
     ) {
       differences.scopes = figmaExtensions.scopes
     }
 
     if (
       figmaExtensions.codeSyntax &&
-      (!variable || !isCodeSyntaxEqual(figmaExtensions.codeSyntax, variable.codeSyntax))
+      (!variable ||
+        !isCodeSyntaxEqual(figmaExtensions.codeSyntax, variable.codeSyntax))
     ) {
       differences.codeSyntax = figmaExtensions.codeSyntax
     }
@@ -236,25 +260,33 @@ export function generatePostVariablesPayload(
   tokensByFile: FlattenedTokensByFile,
   localVariables: GetLocalVariablesResponse,
 ) {
-  const localVariableCollectionsByName: { [name: string]: LocalVariableCollection } = {}
+  const localVariableCollectionsByName: {
+    [name: string]: LocalVariableCollection
+  } = {}
   const localVariablesByCollectionAndName: {
     [variableCollectionId: string]: { [variableName: string]: LocalVariable }
   } = {}
 
-  Object.values(localVariables.meta.variableCollections).forEach((collection) => {
-    if (localVariableCollectionsByName[collection.name]) {
-      throw new Error(`Duplicate variable collection in file: ${collection.name}`)
-    }
+  Object.values(localVariables.meta.variableCollections).forEach(
+    (collection) => {
+      if (localVariableCollectionsByName[collection.name]) {
+        throw new Error(
+          `Duplicate variable collection in file: ${collection.name}`,
+        )
+      }
 
-    localVariableCollectionsByName[collection.name] = collection
-  })
+      localVariableCollectionsByName[collection.name] = collection
+    },
+  )
 
   Object.values(localVariables.meta.variables).forEach((variable) => {
     if (!localVariablesByCollectionAndName[variable.variableCollectionId]) {
       localVariablesByCollectionAndName[variable.variableCollectionId] = {}
     }
 
-    localVariablesByCollectionAndName[variable.variableCollectionId][variable.name] = variable
+    localVariablesByCollectionAndName[variable.variableCollectionId][
+      variable.name
+    ] = variable
   })
 
   console.log(
@@ -274,16 +306,22 @@ export function generatePostVariablesPayload(
 
     const variableCollection = localVariableCollectionsByName[collectionName]
     // Use the actual variable collection id or use the name as the temporary id
-    const variableCollectionId = variableCollection ? variableCollection.id : collectionName
-    const variableMode = variableCollection?.modes.find((mode) => mode.name === modeName)
+    const variableCollectionId = variableCollection
+      ? variableCollection.id
+      : collectionName
+    const variableMode = variableCollection?.modes.find(
+      (mode) => mode.name === modeName,
+    )
     // Use the actual mode id or use the name as the temporary id
     const modeId = variableMode ? variableMode.modeId : modeName
 
     if (
       !variableCollection &&
-      !postVariablesPayload.variableCollections!.find((c) => c.id === variableCollectionId)
+      !postVariablesPayload.variableCollections?.find(
+        (c) => c.id === variableCollectionId,
+      )
     ) {
-      postVariablesPayload.variableCollections!.push({
+      postVariablesPayload.variableCollections?.push({
         action: 'CREATE',
         id: variableCollectionId,
         name: variableCollectionId,
@@ -291,7 +329,7 @@ export function generatePostVariablesPayload(
       })
 
       // Rename the initial mode, since we're using it as our first mode in the collection
-      postVariablesPayload.variableModes!.push({
+      postVariablesPayload.variableModes?.push({
         action: 'UPDATE',
         id: modeId,
         name: modeId,
@@ -303,11 +341,14 @@ export function generatePostVariablesPayload(
     // and it's not the initial mode in the collection
     if (
       !variableMode &&
-      !postVariablesPayload.variableCollections!.find(
-        (c) => c.id === variableCollectionId && 'initialModeId' in c && c.initialModeId === modeId,
+      !postVariablesPayload.variableCollections?.find(
+        (c) =>
+          c.id === variableCollectionId &&
+          'initialModeId' in c &&
+          c.initialModeId === modeId,
       )
     ) {
-      postVariablesPayload.variableModes!.push({
+      postVariablesPayload.variableModes?.push({
         action: 'CREATE',
         id: modeId,
         name: modeId,
@@ -315,12 +356,13 @@ export function generatePostVariablesPayload(
       })
     }
 
-    const localVariablesByName = localVariablesByCollectionAndName[variableCollection?.id] || {}
+    const localVariablesByName =
+      localVariablesByCollectionAndName[variableCollection?.id] || {}
 
     Object.entries(tokens).forEach(([tokenName, token]) => {
       const variable = localVariablesByName[tokenName]
       const variableId = variable ? variable.id : tokenName
-      const variableInPayload = postVariablesPayload.variables!.find(
+      const variableInPayload = postVariablesPayload.variables?.find(
         (v) =>
           v.id === variableId &&
           'variableCollectionId' in v &&
@@ -331,7 +373,7 @@ export function generatePostVariablesPayload(
       // Add a new variable if it doesn't exist in the Figma file,
       // and we haven't added it already in another mode
       if (!variable && !variableInPayload) {
-        postVariablesPayload.variables!.push({
+        postVariablesPayload.variables?.push({
           action: 'CREATE',
           id: variableId,
           name: tokenName,
@@ -346,22 +388,26 @@ export function generatePostVariablesPayload(
           )
         }
 
-        postVariablesPayload.variables!.push({
+        postVariablesPayload.variables?.push({
           action: 'UPDATE',
           id: variableId,
           ...differences,
         })
       }
 
-      const existingVariableValue = variable && variableMode ? variable.valuesByMode[modeId] : null
-      const newVariableValue = variableValueFromToken(token, localVariablesByCollectionAndName)
+      const existingVariableValue =
+        variable && variableMode ? variable.valuesByMode[modeId] : null
+      const newVariableValue = variableValueFromToken(
+        token,
+        localVariablesByCollectionAndName,
+      )
 
       // Only include the variable mode value in the payload if it's different from the existing value
       if (
         existingVariableValue === null ||
         !compareVariableValues(existingVariableValue, newVariableValue)
       ) {
-        postVariablesPayload.variableModeValues!.push({
+        postVariablesPayload.variableModeValues?.push({
           variableId,
           modeId,
           value: newVariableValue,

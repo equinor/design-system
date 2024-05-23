@@ -4,7 +4,10 @@ import { RGB, RGBA } from '@figma/rest-api-spec'
  * Compares two colors for approximate equality since converting between Figma RGBA objects (from 0 -> 1) and
  * hex colors can result in slight differences.
  */
-export function colorApproximatelyEqual(colorA: RGB | RGBA, colorB: RGB | RGBA) {
+export function colorApproximatelyEqual(
+  colorA: RGB | RGBA,
+  colorB: RGB | RGBA,
+) {
   return rgbToHex(colorA) === rgbToHex(colorB)
 }
 
@@ -23,7 +26,8 @@ export function parseColor(color: string): RGB | RGBA {
             .join('')
         : hexValue
 
-    const alphaValue = expandedHex.length === 8 ? expandedHex.slice(6, 8) : undefined
+    const alphaValue =
+      expandedHex.length === 8 ? expandedHex.slice(6, 8) : undefined
 
     return {
       r: parseInt(expandedHex.slice(0, 2), 16) / 255,

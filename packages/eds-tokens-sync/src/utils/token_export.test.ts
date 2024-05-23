@@ -60,7 +60,12 @@ describe('tokenFilesFromLocalVariables', () => {
             remote: false,
             key: 'variableKey',
             hiddenFromPublishing: false,
-            variableIds: ['VariableID:2:1', 'VariableID:2:2', 'VariableID:2:3', 'VariableID:2:4'],
+            variableIds: [
+              'VariableID:2:1',
+              'VariableID:2:2',
+              'VariableID:2:3',
+              'VariableID:2:4',
+            ],
           },
         },
         variables: {
@@ -103,8 +108,18 @@ describe('tokenFilesFromLocalVariables', () => {
             variableCollectionId: 'VariableCollectionId:1:1',
             resolvedType: 'COLOR',
             valuesByMode: {
-              '1:0': { r: 1, g: 0.7450980392156863, b: 0.08627450980392157, a: 1 },
-              '1:1': { r: 1, g: 0.796078431372549, b: 0.7176470588235294, a: 1 },
+              '1:0': {
+                r: 1,
+                g: 0.7450980392156863,
+                b: 0.08627450980392157,
+                a: 1,
+              },
+              '1:1': {
+                r: 1,
+                g: 0.796078431372549,
+                b: 0.7176470588235294,
+                a: 1,
+              },
             },
             remote: false,
             description: 'Radish color',
@@ -120,7 +135,12 @@ describe('tokenFilesFromLocalVariables', () => {
             resolvedType: 'COLOR',
             valuesByMode: {
               '1:0': { r: 1, g: 0, b: 0.08627450980392157, a: 1 },
-              '1:1': { r: 0.8705882352941177, g: 0.9529411764705882, b: 0.34509803921568627, a: 1 },
+              '1:1': {
+                r: 0.8705882352941177,
+                g: 0.9529411764705882,
+                b: 0.34509803921568627,
+                a: 1,
+              },
             },
             remote: false,
             description: 'Pear color',
