@@ -269,7 +269,7 @@ export const RowSelection: StoryFn<EdsDataGridProps<Photo>> = (args) => {
           if (row.getIsSelected()) {
             return {
               backgroundColor:
-                tokens.colors.infographic.primary__lichen_green.hex,
+                tokens.colors.interactive.table__cell__fill_activated.rgba,
             }
           }
 
