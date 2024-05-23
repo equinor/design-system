@@ -172,16 +172,16 @@ exports[`Sidebar Matches snapshot 1`] = `
   position: relative;
   cursor: pointer;
   display: inline-block;
-  background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
+  background: var(--eds-color-surface-button-primary-filled, var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)));
   height: var(--eds_button__height, 36px);
   padding-left: var(--eds_button__padding_x, 16px);
   padding-top: var(--eds_button__padding_y, 0);
   padding-right: var(--eds_button__padding_x, 16px);
   padding-bottom: var(--eds_button__padding_y, 0);
-  border: 1px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
+  border: 1px solid var(--eds-color-text-button-primary-on-filled, var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)));
   border-radius: var(--eds_button__radius, 4px);
   margin: 0;
-  color: var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1));
+  color: var(--eds-color-text-button-primary-on-filled, var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1)));
   font-family: Equinor;
   font-size: var(--eds_button__font_size, 0.875rem);
   font-weight: 500;
@@ -391,7 +391,7 @@ exports[`Sidebar Matches snapshot 1`] = `
 
 @media (hover:hover) and (pointer:fine) {
   .c7:hover {
-    background: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
+    background: var(--eds-color-surface-button-primary-filled-hover, var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1)));
     border: 1px solid transparent;
     border-radius: var(--eds_button__radius, 4px);
   }
