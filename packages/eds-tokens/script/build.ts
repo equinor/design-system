@@ -28,7 +28,7 @@ const resolveReference = (value: string, prefix: string): string => {
     .replaceAll(' ', '-')
     .replaceAll('.', '-')
 
-  return `var(--${prefix}-${valueFormatted}`
+  return `var(--${prefix}-${valueFormatted})`
 }
 
 const darkTokens = readJsonFiles([
