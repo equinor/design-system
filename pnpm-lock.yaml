@@ -596,9 +596,12 @@ importers:
       shx:
         specifier: ^0.3.4
         version: 0.3.4
+      style-dictionary:
+        specifier: 3.8.0
+        version: 3.8.0
       style-dictionary-utils:
         specifier: ^2.0.7
-        version: 2.3.0(style-dictionary@3.9.2)
+        version: 2.0.7(style-dictionary@3.8.0)
       ts-jest:
         specifier: ^29.1.1
         version: 29.1.1(@babel/core@7.24.5)(esbuild@0.20.2)(jest@29.7.0)(typescript@5.2.2)
@@ -14651,19 +14654,19 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /style-dictionary-utils@2.3.0(style-dictionary@3.9.2):
-    resolution: {integrity: sha512-2hEDIyHXVh/JJjmCvqQAoug4H74ui7gF/NlT1E34fNMSVkR+47zhaOPg1LaLzeF6NfARYlBv5EUtdXKgeSQIrw==}
+  /style-dictionary-utils@2.0.7(style-dictionary@3.8.0):
+    resolution: {integrity: sha512-wM868yc7fDkgvVLX7w8W+i1gqJBkXScuSDxAzTkabNK1PlSsospxUKVNIVWi1smISh7o+SFVkY05ulWcq3mHHQ==}
     peerDependencies:
       style-dictionary: ^3.7.1
     dependencies:
       color2k: 2.0.3
       json5: 2.2.3
       prettier: 2.8.8
-      style-dictionary: 3.9.2
+      style-dictionary: 3.8.0
     dev: true
 
-  /style-dictionary@3.9.2:
-    resolution: {integrity: sha512-M2pcQ6hyRtqHOh+NyT6T05R3pD/gwNpuhREBKvxC1En0vyywx+9Wy9nXWT1SZ9ePzv1vAo65ItnpA16tT9ZUCg==}
+  /style-dictionary@3.8.0:
+    resolution: {integrity: sha512-wHlB/f5eO3mDcYv6WtOz6gvQC477jBKrwuIXe+PtHskTCBsJdAOvL8hCquczJxDui2TnwpeNE+2msK91JJomZg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -14671,7 +14674,7 @@ packages:
       change-case: 4.1.2
       commander: 8.3.0
       fs-extra: 10.1.0
-      glob: 10.3.10
+      glob: 7.2.3
       json5: 2.2.3
       jsonc-parser: 3.2.1
       lodash: 4.17.21
