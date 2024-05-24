@@ -59,7 +59,7 @@
     "test": "jest",
     "tokens-in-code:build:css": "pnpm run _prebuild:css-index && pnpm run _build:css && pnpm run _build:css-min",
     "tokens-in-code:build-script": "tsc --project script/tsconfig.json",
-    "tokens-in-code:build-raw": "node script/build.js",
+    "tokens-in-code:build-raw": "node script/dist/build.js",
     "tokens-in-code:clean": "shx rm -rf dist/css dist/ts dist/json",
     "tokens-in-code:build": "pnpm run tokens-in-code:clean && pnpm run tokens-in-code:build-script && pnpm run tokens-in-code:build-raw && pnpm run tokens-in-code:build:css",
     "update-tokens:primitives": "sync-figma-to-tokens --file-key cVaqjfgt3gDiqbx10q3Pj8",
