@@ -30,12 +30,12 @@
   },
   "devDependencies": {
     "@figma/rest-api-spec": "^0.10.0",
-    "@types/node": "^20.4.5",
-    "axios": "^1.6.0",
-    "dotenv": "^16.3.1",
+    "@types/node": "^20.12.12",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "prettier": "^3.2.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1"
   }
 }
