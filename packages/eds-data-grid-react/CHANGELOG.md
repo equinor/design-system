@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2024-05-27
+
+### Added
+
+- ✨ Added possibility for custom filters by @yusijs in https://github.com/equinor/design-system/pull/3359
+- ✨ Expose `createColumnHelper` from `react-table` by @magnh in https://github.com/equinor/design-system/pull/3451
+- ✨ Allow enabling/disabling multi row selection with `enableMultiRowSelection` by @mhwaage in https://github.com/equinor/design-system/pull/3355
+
+### Changed
+
+- 📌 Bump required styled-components version to 5.1 by @oddvernes in https://github.com/equinor/design-system/pull/3459
+- 🚸✨ Align selection state props with react table by @magnh in https://github.com/equinor/design-system/pull/3456
+
+#### Details of https://github.com/equinor/design-system/pull/3456:
+
+- Warn developer in developer environment when using deprecated props.
+- Rename `selectedRows` to `rowSelectionState` and deprecated `selectedRows`.
+- Rename `rowSelection` to `enableRowSelection` and deprecated `rowSelection`.
+- Add `onRowClick` and `onCellClick` handlers as props.
+
 ## [0.4.0] - 2024-02-29
 
 ### Added
