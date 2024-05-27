@@ -8,8 +8,9 @@ on:
       - 'packages/eds-core-react/**'
       - 'packages/eds-lab-react/**'
       - 'packages/eds-data-grid-react/**'
-      - 'packages/eds-tokens/**'
       - 'packages/eds-tokens-sync/**'
+      - 'packages/eds-tokens-build/**'
+      - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
   push:
     branches:
@@ -23,7 +24,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages/eds-core-react packages/eds-tokens-sync packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-data-grid-react packages/eds-utils
+      checkout_paths: packages/eds-core-react packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-data-grid-react packages/eds-utils
   packages:
     name: Process packages
     runs-on: ubuntu-latest
