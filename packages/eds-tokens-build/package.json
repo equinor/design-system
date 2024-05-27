@@ -4,15 +4,15 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
   },
   "bin": {
     "eds-tokens-build": "bin/eds-tokens-build.js"
   },
-  "types": "./dist/types/index.d.ts",
-  "main": "./dist/tokens.cjs",
+  "types": "./dist/index.d.ts",
+  "module": "dist/index.js",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
