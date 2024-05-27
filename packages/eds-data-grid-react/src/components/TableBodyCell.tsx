@@ -1,12 +1,12 @@
-import { Cell, ColumnPinningPosition, flexRender } from '@tanstack/react-table'
 import { Table } from '@equinor/eds-core-react'
-import { useTableContext } from '../EdsDataGridContext'
-import { useMemo } from 'react'
+import { Cell, ColumnPinningPosition, flexRender } from '@tanstack/react-table'
+import { HTMLAttributes, useMemo } from 'react'
 import styled from 'styled-components'
+import { useTableContext } from '../EdsDataGridContext'
 
 type Props<T> = {
   cell: Cell<T, unknown>
-}
+} & HTMLAttributes<HTMLTableCellElement>
 
 const StyledCell = styled(Table.Cell)<{
   $pinned: ColumnPinningPosition
@@ -25,6 +25,7 @@ const StyledCell = styled(Table.Cell)<{
 
 export function TableBodyCell<T>({ cell }: Props<T>) {
   const { cellClass, cellStyle, table } = useTableContext()
+
   const pinned = cell.column.getIsPinned()
   const pinnedOffset = useMemo<number>(() => {
     if (!pinned) {
@@ -35,6 +36,7 @@ export function TableBodyCell<T>({ cell }: Props<T>) {
       ? header.getStart()
       : table.getTotalSize() - header.getStart() - cell.column.getSize()
   }, [pinned, cell.column, table])
+
   return (
     <StyledCell
       $pinned={pinned}

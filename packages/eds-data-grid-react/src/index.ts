@@ -1,5 +1,6 @@
+export { createColumnHelper } from '@tanstack/react-table'
 export * from './EdsDataGrid'
+export * from './EdsDataGridProps'
 export * from './components/FilterWrapper'
 export * from './components/SortIndicator'
-export * from './EdsDataGridProps'
 export * from './types'

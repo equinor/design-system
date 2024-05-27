@@ -1,27 +1,35 @@
 import { Table } from '@equinor/eds-core-react'
 import { Row } from '@tanstack/react-table'
-import { TableBodyCell } from './TableBodyCell'
 import { HTMLAttributes } from 'react'
-import { useTableContext } from '../EdsDataGridContext'
 import styled from 'styled-components'
+import { useTableContext } from '../EdsDataGridContext'
+import { EdsDataGridProps } from '../EdsDataGridProps'
+import { TableBodyCell } from './TableBodyCell'
 
 type Props<T> = {
   row: Row<T>
+  onCellClick?: EdsDataGridProps<T>['onCellClick']
 } & HTMLAttributes<HTMLTableRowElement>
 
-export function TableRow<T>({ row }: Props<T>) {
+export function TableRow<T>({ row, onCellClick, onClick }: Props<T>) {
   const { rowClass, rowStyle } = useTableContext()
+
   return (
     <StyledTableRow
       style={{
-        cursor: row.getCanSelect() ? 'pointer' : 'inherit',
         ...(rowStyle?.(row) ?? {}),
       }}
       className={`${row.getIsSelected() ? 'selected' : ''} ${rowClass?.(row)}`}
-      onClick={() => (row.getCanSelect() ? row.toggleSelected() : null)}
+      onClick={onClick}
     >
       {row.getVisibleCells().map((cell) => (
-        <TableBodyCell key={cell.id} cell={cell} />
+        <TableBodyCell
+          key={cell.id}
+          cell={cell}
+          onClick={
+            onCellClick ? (event) => onCellClick(cell, event) : undefined
+          }
+        />
       ))}
     </StyledTableRow>
   )

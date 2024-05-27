@@ -102,6 +102,12 @@ See [Tanstack docs for more](https://tanstack.com/table/v8/docs/api/features/pin
 
 <Canvas of={ComponentStories.ColumnPinning} />
 
+### Row selection
+
+Enable row selection with the `enableRowSelection` prop, enable multi select with `enableMultiRowSelection` and control the state with `rowSelectionState` and `onRowSelectionChange`. Currently, you have to provide you own way of triggering `row.toggleSelection`.
+
+<Canvas of={ComponentStories.RowSelection} />
+
 ### Sorting
 
 Comes with sorting built-in, and uses default sort functions. Can be overridden on a per-column basis.
