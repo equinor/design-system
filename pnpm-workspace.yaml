@@ -1,5 +1,4 @@
 packages:
   - 'scripts/**'
   - 'packages/**'
-  - 'packages/eds-tokens-sync'
   - '!sanity/**'

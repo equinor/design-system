@@ -29,5 +29,5 @@
     "eds-config-custom",
     "eds-tokens-sync"
   ],
-  "cSpell.words": ["OKLCH", "Overridable"]
+  "cSpell.words": ["colorjs", "OKLCH", "Overridable"]
 }
