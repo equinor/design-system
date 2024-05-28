@@ -32,7 +32,7 @@ export const primary = mergeDeepRight(button, {
     type: 'border',
     style: 'solid',
     width: '1px',
-    color: `var(--eds-color-text-button-primary-on-filled, ${primaryColor})`,
+    color: `var(--eds-color-surface-button-primary-filled, ${primaryColor})`,
     radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
   },
   states: {

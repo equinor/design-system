@@ -1,5 +1,4 @@
-import '@equinor/eds-tokens/css/color/primitives'
-import '@equinor/eds-tokens/css/color/theme'
+import '@equinor/eds-tokens/css/variables'
 
 const preview = {
   viewMode: 'docs',
