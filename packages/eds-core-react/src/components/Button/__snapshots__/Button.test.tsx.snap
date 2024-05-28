@@ -30,7 +30,7 @@ exports[`Button Matches snapshot 1`] = `
   padding-top: var(--eds_button__padding_y, 0);
   padding-right: var(--eds_button__padding_x, 16px);
   padding-bottom: var(--eds_button__padding_y, 0);
-  border: 1px solid var(--eds-color-text-button-primary-on-filled, var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)));
+  border: 1px solid var(--eds-color-surface-button-primary-filled, var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)));
   border-radius: var(--eds_button__radius, 4px);
   margin: 0;
   color: var(--eds-color-text-button-primary-on-filled, var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1)));
