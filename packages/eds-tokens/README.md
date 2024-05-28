@@ -5,7 +5,7 @@
 ## Installation
 
 ```sh
-npm install @equinor/eds-tokens
+pnpm add @equinor/eds-tokens
 ```
 
 ## Usage
@@ -86,7 +86,7 @@ This workflow has some key behaviors to note:
 
 ## Local development
 
-You can run the GitHub actions locally by running `npm install` and creating a `.env` file.
+You can run the GitHub actions locally by running `pnpm install` and creating a `.env` file.
 
 Example: 
 ```
@@ -98,20 +98,10 @@ PERSONAL_ACCESS_TOKEN="your_personal_access_token"
 and then running:
 
 ```sh
-npm run sync-tokens-to-figma
-
-# or
-
 # Defaults to writing to the tokens directory
-npm run sync-figma-to-tokens
+pnpm run update-tokens
 
+# and / or
 
-```
-
-### Testing
-
-Run the Jest tests:
-
-```sh
-npm run test
+pnpm run update-figma
 ```
