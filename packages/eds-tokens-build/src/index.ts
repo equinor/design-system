@@ -285,7 +285,7 @@ const typographyDensityComfortable = _extend({
   source: [
     `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
   ],
-  dirName: 'typography',
+  dirName: 'spacing',
   fileName: 'comfortable',
   prefix: 'eds-semantic',
   filter: (token) => token.filePath.includes('Density'),
@@ -296,7 +296,7 @@ const typographyDensityCompact = _extend({
   source: [
     `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`,
   ],
-  dirName: 'typography',
+  dirName: 'spacing',
   fileName: 'compact',
   prefix: 'eds-semantic',
   filter: (token) => token.filePath.includes('Density'),
@@ -307,7 +307,7 @@ const typographyDensitySpacious = _extend({
   source: [
     `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`,
   ],
-  dirName: 'typography',
+  dirName: 'spacing',
   fileName: 'spacious',
   prefix: 'eds-semantic',
   filter: (token) => token.filePath.includes('Density'),
