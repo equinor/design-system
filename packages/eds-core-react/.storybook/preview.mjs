@@ -1,5 +1,3 @@
-import '@equinor/eds-tokens/css/variables'
-
 const preview = {
   viewMode: 'docs',
   parameters: {
