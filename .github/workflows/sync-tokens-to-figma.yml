@@ -2,21 +2,15 @@ name: Sync tokens to Figma
 on:
   workflow_dispatch:
 jobs:
+  setup:
+    uses: ./.github/workflows/_setup.yml
+    secrets: inherit
+    with:
+      cacheKey: ${{ github.sha }}-sync-tokens-to-figma
+      checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
   sync-tokens-to-figma:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.20.2'
-
-      - name: Clone repo
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: pnpm install
-        working-directory: packages/eds-tokens
-
       - name: Sync tokens to Figma file
         run: pnpm run update-figma
         working-directory: packages/eds-tokens

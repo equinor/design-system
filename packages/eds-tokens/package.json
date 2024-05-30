@@ -62,11 +62,13 @@
     "tokens-in-code:build": "pnpm run tokens-in-code:clean && eds-tokens-build && pnpm run tokens-in-code:build:css",
     "update-tokens:primitives": "sync-figma-to-tokens --file-key cVaqjfgt3gDiqbx10q3Pj8",
     "update-tokens:themes": "sync-figma-to-tokens --file-key aRgKtCisnm98k9kVy6zasL",
-    "update-tokens:typography-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
-    "update-tokens:typography-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
-    "update-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes && pnpm run update-tokens:typography-primitives && pnpm run update-tokens:typography-modes",
+    "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
+    "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
+    "update-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
     "update-figma:primitives": "sync-tokens-to-figma --file-key cVaqjfgt3gDiqbx10q3Pj8",
     "update-figma:themes": "sync-tokens-to-figma --file-key aRgKtCisnm98k9kVy6zasL",
+    "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
+    "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"
   },
   "keywords": [
