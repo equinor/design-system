@@ -1,0 +1,30 @@
+name: Sync Figma to tokens
+on:
+  workflow_dispatch:
+jobs:
+  setup:
+    uses: ./.github/workflows/_setup.yml
+    secrets: inherit
+    with:
+      cacheKey: ${{ github.sha }}-sync-figma-to-tokens
+      checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
+  sync-figma-to-tokens:
+    runs-on: ubuntu-latest
+    permissions:
+      # Need to be able to create new branches and commits
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Sync variables from Figma file to canonical tokens in GitHub
+        run: pnpm run update-tokens && pnpm run build
+        working-directory: packages/eds-tokens
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update canonical tokens from Figma
+          title: Update canonical tokens from Figma
+          body: 'Update canonical tokens from Figma and generate CSS variables'
+          branch: update-canonical-tokens

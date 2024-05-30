@@ -1,0 +1,41 @@
+{
+  "name": "@equinor/eds-tokens-sync",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "types": "dist/main.d.ts",
+  "main": "dist/main.umd.cjs",
+  "module": "dist/main.js",
+  "exports": {
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.umd.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "sync-figma-to-tokens": "bin/sync-figma-to-tokens.js",
+    "sync-tokens-to-figma": "bin/sync-tokens-to-figma.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prettier": "prettier . --write",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@figma/rest-api-spec": "^0.10.0",
+    "@types/node": "^20.12.12",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-dts": "^3.9.1"
+  }
+}

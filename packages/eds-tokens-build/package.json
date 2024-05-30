@@ -1,0 +1,52 @@
+{
+  "name": "@equinor/eds-tokens-build",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "eds-tokens-build": "bin/eds-tokens-build.js"
+  },
+  "types": "./dist/index.d.ts",
+  "module": "dist/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system",
+    "directory": "packages/eds-tokens-build"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc",
+    "prettier": "prettier ./src --write",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@equinor/eds-tokens-sync": "workspace:*",
+    "@types/node": "^20.12.12",
+    "colorjs.io": "^0.5.0",
+    "prettier": "3.0.0",
+    "style-dictionary": "3.8.0",
+    "style-dictionary-utils": "^2.4.1",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "pnpm": ">=8.15.4",
+    "node": "^18.20.2"
+  }
+}

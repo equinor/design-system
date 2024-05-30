@@ -1,0 +1,172 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "xs",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "font-size": {
+    "$type": "number",
+    "$value": "{Font family.XS.font-size}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "padding-centred": {
+    "$type": "number",
+    "$value": "{Font family.XS.padding-centred}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "padding-baselined": {
+    "$type": "number",
+    "$value": "{Font family.XS.padding-baselined}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "cap-height-rounded": {
+    "$type": "number",
+    "$value": "{Font family.XS.cap-height-rounded}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "tracking-tight": {
+    "$type": "number",
+    "$value": "{Font family.XS.tracking-tight}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "tracking-normal": {
+    "$type": "number",
+    "$value": "{Font family.XS.tracking-normal}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "tracking-loose": {
+    "$type": "number",
+    "$value": "{Font family.XS.tracking-loose}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "font-weight-lighter": {
+    "$type": "number",
+    "$value": "{Font family.XS.font-weight-lighter}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "font-weight-normal": {
+    "$type": "number",
+    "$value": "{Font family.XS.font-weight-normal}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "font-weight-bolder": {
+    "$type": "number",
+    "$value": "{Font family.XS.font-weight-bolder}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "lineheight-default": {
+    "$type": "number",
+    "$value": "{Font family.XS.lineheight-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "lineheight-default 2": {
+    "$type": "number",
+    "$value": "{Font family.XS.lineheight-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "lineheight-squished": {
+    "$type": "number",
+    "$value": "{Font family.XS.lineheight-squished}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

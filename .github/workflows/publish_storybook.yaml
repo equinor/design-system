@@ -24,7 +24,7 @@ env:
 
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Use "setup" cache
         id: get-setup-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -44,7 +44,7 @@ jobs:
           key: ${{ github.sha }}
       - name: Use "dist" cache
         id: use-dist-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -67,7 +67,7 @@ jobs:
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ./*
@@ -91,7 +91,7 @@ jobs:
     if: github.event.inputs.environment == 'production'
     needs: [publish-storybook]
     name: Purge cdn
-    uses: equinor/design-system/.github/workflows/_purge_cdn.yaml@develop
+    uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
       environment: production

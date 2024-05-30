@@ -1,0 +1,30 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "SM",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Padding horizontal": {
+    "$type": "number",
+    "$value": "{Density Aware.Spacing.Inline.SM}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "GAP"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

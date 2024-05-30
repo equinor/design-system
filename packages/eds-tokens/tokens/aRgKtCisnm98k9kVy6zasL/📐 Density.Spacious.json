@@ -1,0 +1,372 @@
+{
+  "shadow": {
+    "elevation-level-1": {
+      "top": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 2,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 2,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "middle": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 3,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 4,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "bottom": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      }
+    },
+    "elevation-level-2": {
+      "top": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 2,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 4,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "middle": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 4,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "bottom": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 10,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      }
+    },
+    "elevation-level-3": {
+      "top": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 8,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 10,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "middle": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 3,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 14,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "bottom": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 4,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      }
+    },
+    "elevation-level-4": {
+      "top": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 12,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 17,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "middle": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 22,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "bottom": {
+        "offsetY": {
+          "$type": "number",
+          "$value": 7,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 8,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

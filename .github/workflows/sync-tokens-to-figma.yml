@@ -1,0 +1,19 @@
+name: Sync tokens to Figma
+on:
+  workflow_dispatch:
+jobs:
+  setup:
+    uses: ./.github/workflows/_setup.yml
+    secrets: inherit
+    with:
+      cacheKey: ${{ github.sha }}-sync-tokens-to-figma
+      checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
+  sync-tokens-to-figma:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync tokens to Figma file
+        run: pnpm run update-figma
+        working-directory: packages/eds-tokens
+        env:
+          FILE_KEY: ${{ github.event.inputs.file_key }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}

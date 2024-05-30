@@ -11,7 +11,20 @@
       "default": "./dist/tokens.cjs"
     },
     "./tokens.css": "./tokens.css",
-    "./elements.css": "./elements.css"
+    "./elements.css": "./elements.css",
+    "./css/variables": "./dist/css/variables.css",
+    "./css/color/*": "./dist/css/color/*.css",
+    "./css/spacing/*": "./dist/css/spacing/*.css",
+    "./css/typography/*": "./dist/css/typography/*.css",
+    "./json/color/flat/*": "./dist/json/color/flat/*.json",
+    "./json/spacing/flat/*": "./dist/json/spacing/flat/*.json",
+    "./json/typography/flat/*": "./dist/json/typography/flat/*.json",
+    "./json/color/nested/*": "./dist/json/color/nested/*.json",
+    "./json/spacing/nested/*": "./dist/json/spacing/nested/*.json",
+    "./json/typography/nested/*": "./dist/json/typography/nested/*.json",
+    "./ts/color/*": "./dist/ts/color/*.ts",
+    "./ts/spacing/*": "./dist/ts/spacing/*.ts",
+    "./ts/typography/*": "./dist/ts/typography/*.ts"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
@@ -36,9 +49,27 @@
     "elements.css"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc",
+    "build": "rollup -c --bundleConfigAsCjs && pnpm run types && pnpm run tokens-in-code:build",
     "dev": "rollup -c -w",
-    "types": "tsc"
+    "types": "tsc",
+    "prettier:check": "prettier --check src/",
+    "_prebuild:css-index": "pnpm shx cp ./src/index.css ./dist/css/index.css",
+    "_build:css": "lightningcss --bundle dist/css/index.css -o dist/css/variables.css",
+    "_build:css-min": "lightningcss --minify --bundle ./dist/css/index.css -o ./dist/css/variables.min.css",
+    "test": "jest",
+    "tokens-in-code:build:css": "pnpm run _prebuild:css-index && pnpm run _build:css && pnpm run _build:css-min",
+    "tokens-in-code:clean": "shx rm -rf dist/css dist/ts dist/json",
+    "tokens-in-code:build": "pnpm run tokens-in-code:clean && eds-tokens-build && pnpm run tokens-in-code:build:css",
+    "update-tokens:primitives": "sync-figma-to-tokens --file-key cVaqjfgt3gDiqbx10q3Pj8",
+    "update-tokens:themes": "sync-figma-to-tokens --file-key aRgKtCisnm98k9kVy6zasL",
+    "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
+    "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
+    "update-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
+    "update-figma:primitives": "sync-tokens-to-figma --file-key cVaqjfgt3gDiqbx10q3Pj8",
+    "update-figma:themes": "sync-tokens-to-figma --file-key aRgKtCisnm98k9kVy6zasL",
+    "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
+    "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
+    "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"
   },
   "keywords": [
     "eds",
@@ -47,15 +78,21 @@
     "design tokens"
   ],
   "devDependencies": {
+    "@equinor/eds-tokens-build": "workspace:*",
+    "@equinor/eds-tokens-sync": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "rollup": "^4.2.0",
+    "@types/node": "^20.12.12",
+    "lightningcss-cli": "^1.25.1",
+    "prettier": "3.0.0",
+    "rollup": "^4.18.0",
     "rollup-plugin-delete": "^2.0.0",
-    "typescript": "^5.2.2"
+    "shx": "^0.3.4",
+    "typescript": "^5.4.5"
   },
   "engines": {
-    "pnpm": ">=4",
-    "node": ">=10.0.0"
+    "pnpm": ">=8.15.4",
+    "node": "^18.20.2"
   }
 }
