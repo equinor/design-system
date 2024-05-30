@@ -13,7 +13,7 @@ jobs:
     needs: setup
     steps:
       - name: Sync tokens to Figma file
-        run: pnpm run update-figma
+        run: pnpm run update:figma
         working-directory: packages/eds-tokens
         env:
           FILE_KEY: ${{ github.event.inputs.file_key }}
