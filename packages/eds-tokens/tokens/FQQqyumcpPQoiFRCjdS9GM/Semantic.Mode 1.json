@@ -1,6 +1,6 @@
 {
-  "Spacing": {
-    "Padding Horisontal": {
+  "Padding": {
+    "Horisontal padding": {
       "$type": "number",
       "$value": "{Padding horizontal}",
       "$description": "",
@@ -14,7 +14,7 @@
         }
       }
     },
-    "Padding Vertical": {
+    "Vertical padding": {
       "$type": "number",
       "$value": "{Padding vertical}",
       "$description": "",
@@ -23,6 +23,126 @@
           "hiddenFromPublishing": false,
           "scopes": [
             "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Gap": {
+    "Horisontal gap": {
+      "$type": "number",
+      "$value": "{Gap horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical gap": {
+      "$type": "number",
+      "$value": "{Gap vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Selectable Dimensions": {
+    "Horizontal padding": {
+      "$type": "number",
+      "$value": "{Selectable.Spacing.Inline}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical padding": {
+      "$type": "number",
+      "$value": "{Selectable.Spacing.Stack}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Container Dimensions": {
+    "Horizontal padding": {
+      "$type": "number",
+      "$value": "{Container.Spacing.Inline}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical padding": {
+      "$type": "number",
+      "$value": "{Container.Spacing.Stack}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Page Dimensions": {
+    "Horizontal padding": {
+      "$type": "number",
+      "$value": "{Page.Spacing.Inline}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical padding": {
+      "$type": "number",
+      "$value": "{Page.Spacing.Stack}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
           ],
           "codeSyntax": {}
         }

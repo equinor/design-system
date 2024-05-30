@@ -1,0 +1,30 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "XS",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Padding vertical": {
+    "$type": "number",
+    "$value": "{Density Aware.Spacing.Stack.XS}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "GAP"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

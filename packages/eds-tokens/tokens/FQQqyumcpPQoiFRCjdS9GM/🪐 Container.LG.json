@@ -1,0 +1,30 @@
+{
+  "Container": {
+    "Spacing": {
+      "Inline": {
+        "$type": "number",
+        "$value": "{Spacing proportions.LG.Inline}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "Stack": {
+        "$type": "number",
+        "$value": "{Spacing proportions.LG.Stack}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,57 +1,73 @@
 {
-  "Icon width": {
-    "$type": "number",
-    "$value": "{sizing.Icon Large Size}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ],
-        "codeSyntax": {}
+  "Icon": {
+    "Documentation": {
+      "$type": "string",
+      "$value": "lg",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
       }
-    }
-  },
-  "Icon height": {
-    "$type": "number",
-    "$value": "{sizing.Icon Large Size}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ],
-        "codeSyntax": {}
+    },
+    "Width": {
+      "$type": "number",
+      "$value": "{sizing.icon.lg-size}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
       }
-    }
-  },
-  "Icon Container width": {
-    "$type": "number",
-    "$value": "{sizing.Icon Box Width}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ],
-        "codeSyntax": {}
+    },
+    "Height": {
+      "$type": "number",
+      "$value": "{sizing.icon.lg-size}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
       }
-    }
-  },
-  "Icon Container height": {
-    "$type": "number",
-    "$value": "{cap-height-rounded}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ],
-        "codeSyntax": {}
+    },
+    "Container width": {
+      "$type": "number",
+      "$value": "{sizing.icon.Icon Box Width}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Container height": {
+      "$type": "number",
+      "$value": "{cap-height-rounded}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
       }
     }
   }
