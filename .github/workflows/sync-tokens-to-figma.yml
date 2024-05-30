@@ -10,6 +10,7 @@ jobs:
       checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
   sync-tokens-to-figma:
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       - name: Sync tokens to Figma file
         run: pnpm run update-figma

@@ -10,6 +10,7 @@ jobs:
       checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
   sync-figma-to-tokens:
     runs-on: ubuntu-latest
+    needs: setup
     permissions:
       # Need to be able to create new branches and commits
       contents: write
