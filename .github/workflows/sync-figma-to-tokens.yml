@@ -18,7 +18,6 @@ jobs:
     steps:
       - name: Sync variables from Figma file to canonical tokens in GitHub
         run: pnpm run update:tokens && pnpm run build:tokens
-        working-directory: packages/eds-tokens
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}
 
