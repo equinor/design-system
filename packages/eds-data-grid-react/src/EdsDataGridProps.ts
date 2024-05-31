@@ -110,6 +110,12 @@ type RowSelectionProps<T> = {
    * @default false
    */
   enableMultiRowSelection?: boolean | ((row: Row<T>) => boolean)
+  /** 
+   * Enables/disables automatic sub-row selection when a parent row is selected, or a function that enables/disables automatic sub-row selection 
+   * @link https://tanstack.com/table/v8/docs/api/features/row-selection#enablesubrowselection
+   * @default false
+   */
+  enableSubRowSelection?: boolean | ((row: Row<T>) => boolean)
   /**
    * The currently selected rows
    * @deprecated Use `rowSelectionState`
