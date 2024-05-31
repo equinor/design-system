@@ -288,6 +288,7 @@ const typographyDensityComfortable = _extend({
   dirName: 'spacing',
   fileName: 'comfortable',
   prefix: 'eds-semantic',
+  selector: ':root, [data-density="comfortable"]',
   filter: (token) => token.filePath.includes('Density'),
 })
 
@@ -299,6 +300,7 @@ const typographyDensityCompact = _extend({
   dirName: 'spacing',
   fileName: 'compact',
   prefix: 'eds-semantic',
+  selector: '[data-density="compact"]',
   filter: (token) => token.filePath.includes('Density'),
 })
 
@@ -310,6 +312,7 @@ const typographyDensitySpacious = _extend({
   dirName: 'spacing',
   fileName: 'spacious',
   prefix: 'eds-semantic',
+  selector: '[data-density="Spacious"]',
   filter: (token) => token.filePath.includes('Density'),
 })
 
