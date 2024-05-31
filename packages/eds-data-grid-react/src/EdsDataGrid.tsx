@@ -46,6 +46,7 @@ export function EdsDataGrid<T>({
   rowSelection,
   enableRowSelection,
   enableMultiRowSelection,
+  enableSubRowSelection,
   selectedRows,
   rowSelectionState,
   enableColumnFiltering,
