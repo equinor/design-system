@@ -134,7 +134,7 @@ describe('DatePicker', () => {
   it('should be possible to limit the min/max dates', async () => {
     const date = new Date(2024, 4, 4)
     const min = new Date(2024, 4, 2)
-    const max = new Date(2024, 4, 30)
+    const max = new Date(2024, 4, 29)
     render(
       <I18nProvider locale={'en-US'}>
         <DatePicker
@@ -151,7 +151,7 @@ describe('DatePicker', () => {
     const header = screen.getByTestId('heading')
     expect(header).toHaveTextContent('May 2024')
     const disabledMinElement = screen.getByLabelText('Wednesday, May 1, 2024')
-    const disabledMaxElement = screen.getByLabelText('Friday, May 31, 2024')
+    const disabledMaxElement = screen.getByLabelText('Thursday, May 30, 2024')
     expect(disabledMinElement).toHaveAttribute('aria-disabled', 'true')
     expect(disabledMaxElement).toHaveAttribute('aria-disabled', 'true')
   })
@@ -164,7 +164,7 @@ describe('DatePicker', () => {
         <DatePicker
           label={'Datepicker'}
           value={date}
-          isDateUnavailable={(d) => d.getDate() === 31}
+          isDateUnavailable={(d) => d.getDate() === 30}
         />
       </I18nProvider>,
     )
@@ -173,7 +173,7 @@ describe('DatePicker', () => {
     await userEvent.click(picker)
     const header = screen.getByTestId('heading')
     expect(header).toHaveTextContent('May 2024')
-    const disabledDate = screen.getByLabelText('Friday, May 31, 2024')
+    const disabledDate = screen.getByLabelText('Thursday, May 30, 2024')
     expect(disabledDate).toHaveAttribute('aria-disabled', 'true')
   })
 
