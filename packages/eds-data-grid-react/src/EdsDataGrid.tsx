@@ -256,7 +256,7 @@ export function EdsDataGrid<T>({
     debugColumns: debug,
     enableRowSelection: enableRowSelection ?? rowSelection ?? false,
     enableMultiRowSelection: enableMultiRowSelection ?? false,
-    enableMultiRowSelection: enableMultiRowSelection ?? false,
+    enableSubRowSelection: enableSubRowSelection ?? false,
     enableColumnPinning: true,
     enablePinning: true,
     getRowId,
