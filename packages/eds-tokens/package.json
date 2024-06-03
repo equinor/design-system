@@ -55,7 +55,7 @@
     "elements.css"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && pnpm run types",
+    "build": "rollup -c --bundleConfigAsCjs && pnpm run types && pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build",
     "dev": "rollup -c -w",
     "types": "tsc",
     "prettier:check": "prettier --check src/",
