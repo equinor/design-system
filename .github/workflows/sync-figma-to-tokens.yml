@@ -9,6 +9,7 @@ jobs:
       cacheKey: ${{ github.sha }}-sync-figma-to-tokens
       checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
   sync-figma-to-tokens:
+    name: Sync Figma variables to tokens
     runs-on: ubuntu-latest
     needs: setup
     permissions:
@@ -16,6 +17,18 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.2'
+      - name: Use "setup" cache
+        id: setup-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-sync-figma-to-tokens
       - name: Sync variables from Figma file to canonical tokens in GitHub
         run: node_modules/.bin/pnpm run update:tokens
         env:

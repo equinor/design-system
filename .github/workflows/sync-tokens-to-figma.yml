@@ -12,6 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.2'
+      - name: Use "setup" cache
+        id: setup-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-sync-tokens-to-figma
       - name: Sync tokens to Figma file
         run: node_modules/.bin/pnpm run update:figma
         env:
