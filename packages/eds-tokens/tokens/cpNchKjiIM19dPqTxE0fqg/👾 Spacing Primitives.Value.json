@@ -4050,7 +4050,7 @@
     "inter": {
       "$type": "string",
       "$value": "Inter",
-      "$description": "",
+      "$description": "Inter",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
