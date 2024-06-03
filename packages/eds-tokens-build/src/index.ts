@@ -124,7 +124,7 @@ const lightDark = StyleDictionary.extend({
 
 StyleDictionary.registerTransform({
   type: `value`,
-  transitive: true,
+  transitive: false,
   name: `eds/font/pxToRem`,
   matcher: (token) => {
     const isFontMetricInPx =
