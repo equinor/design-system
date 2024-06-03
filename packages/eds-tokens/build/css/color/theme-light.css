@@ -1,0 +1,298 @@
+/**
+ * Do not edit directly
+ */
+
+:root {
+  --eds-color-surface-button-danger-outlined: oklch(100% 0 none / 0); /* Button */
+  --eds-color-surface-button-secondary-outlined: oklch(100% 0 none / 0); /* Button */
+  --eds-color-surface-button-primary-outlined: oklch(100% 0 none / 0); /* Button, Ghost button, Toggle button */
+  --eds-color-surface-overlay: oklch(0% 0 none / 0.8); /* Snackbar, Tooltip */
+  --eds-color-surface-scrim: oklch(0% 0 none / 0.4); /* Scrim */
+  --eds-color-surface-table-cell-disabled: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-resting: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
+  --eds-color-surface-none: oklch(100% 0 none / 0);
+  --eds-color-surface-interactive-disabled: oklch(100% 0 none / 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-active-ghost: oklch(100% 0 none / 0); /* Tab */
+  --eds-color-surface-interactive-resting: oklch(100% 0 none / 0); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-shadow-bottom: oklch(0% 0 none / 0.2);
+  --eds-color-surface-shadow-middle: oklch(0% 0 none / 0.122);
+  --eds-color-surface-shadow-top: oklch(0% 0 none / 0.141);
+  --eds-color-surface-placeholder-image: var(--eds-color-neutral-300); /* Placeholder image */
+  --eds-color-surface-button-disabled-outlined: var(--eds-color-surface-interactive-resting); /* Button */
+  --eds-color-surface-button-disabled-filled: var(--eds-color-neutral-200); /* Button */
+  --eds-color-surface-button-danger-outlined-pressed: var(--eds-color-red-warm-500);
+  --eds-color-surface-button-danger-outlined-hover: var(--eds-color-red-warm-300); /* Button */
+  --eds-color-surface-button-danger-filled-pressed: var(--eds-color-red-cold-1400);
+  --eds-color-surface-button-danger-filled-hover: var(--eds-color-red-cold-1200); /* Button */
+  --eds-color-surface-button-danger-filled: var(--eds-color-red-cold-900); /* Button */
+  --eds-color-surface-button-secondary-outlined-pressed: var(--eds-color-mist-grey-500);
+  --eds-color-surface-button-secondary-outlined-hover: var(--eds-color-mist-grey-300); /* Button */
+  --eds-color-surface-button-secondary-filled-pressed: var(--eds-color-blue-sky-1450);
+  --eds-color-surface-button-secondary-filled-hover: var(--eds-color-blue-sky-1400); /* Button */
+  --eds-color-surface-button-secondary-filled: var(--eds-color-blue-sky-1300); /* Button */
+  --eds-color-surface-button-primary-outlined-pressed: var(--eds-color-moss-green-400);
+  --eds-color-surface-button-primary-outlined-hover: var(--eds-color-moss-green-200); /* Button, Ghost button, Toggle button */
+  --eds-color-surface-button-primary-filled-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-surface-button-primary-filled-hover: var(--eds-color-moss-green-1300); /* Button, Toggle button */
+  --eds-color-surface-button-primary-filled: var(--eds-color-moss-green-1100); /* Button, Toggle button */
+  --eds-color-surface-ui-shell: var(--eds-color-neutral-0); /* Sidebar, Side sheet, Toolbar, Top bar */
+  --eds-color-surface-table-cell-error: var(--eds-color-red-warm-300); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-cell-resting-hover: var(--eds-color-neutral-300); /* Table cell, Table data grid cell */
+  --eds-color-surface-table-header-active-hover: var(--eds-color-neutral-300); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-active: var(--eds-color-neutral-200); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-resting-hover: var(--eds-color-neutral-300); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-deep-disabled: var(--eds-color-neutral-0); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-deep-resting: var(--eds-color-neutral-0); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-flat-disabled: var(--eds-color-neutral-100); /* Table header, Table data grid header */
+  --eds-color-surface-table-header-on-main-flat-resting: var(--eds-color-neutral-100); /* Table header, Table data grid header */
+  --eds-color-surface-main-deep: var(--eds-color-neutral-100); /* UI main */
+  --eds-color-surface-main-flat: var(--eds-color-neutral-0); /* UI main */
+  --eds-color-surface-card-elevation-level-2-error: var(--eds-color-red-warm-300); /* Card */
+  --eds-color-surface-card-elevation-level-2-warning: var(--eds-color-spruce-wood-200); /* Card */
+  --eds-color-surface-card-elevation-level-2-success: var(--eds-color-lichen-green-200); /* Card */
+  --eds-color-surface-card-elevation-level-2-info: var(--eds-color-mist-blue-muted-300); /* Card */
+  --eds-color-surface-card-elevation-level-1-error: var(--eds-color-red-warm-300); /* Card */
+  --eds-color-surface-card-elevation-level-1-warning: var(--eds-color-spruce-wood-200); /* Card */
+  --eds-color-surface-card-elevation-level-1-success: var(--eds-color-lichen-green-200); /* Card */
+  --eds-color-surface-card-elevation-level-1-info: var(--eds-color-mist-blue-muted-300); /* Card */
+  --eds-color-surface-banner-error: var(--eds-color-red-warm-300); /* Banner */
+  --eds-color-surface-banner-warning: var(--eds-color-spruce-wood-200); /* Banner */
+  --eds-color-surface-banner-success: var(--eds-color-lichen-green-200); /* Chip */
+  --eds-color-surface-banner-info: var(--eds-color-mist-blue-muted-300); /* Chip */
+  --eds-color-surface-chip-neutral-disabled: var(--eds-color-neutral-200); /* Chip */
+  --eds-color-surface-chip-neutral-active-hover: var(--eds-color-moss-green-100); /* Chip */
+  --eds-color-surface-chip-neutral-active: var(--eds-color-moss-green-100); /* Chip */
+  --eds-color-surface-chip-neutral-resting-hover: var(--eds-color-neutral-200); /* Chip */
+  --eds-color-surface-chip-neutral-resting: var(--eds-color-neutral-200); /* Chip */
+  --eds-color-surface-chip-error-hover: var(--eds-color-red-warm-200); /* Chip */
+  --eds-color-surface-chip-error: var(--eds-color-red-warm-200); /* Chip */
+  --eds-color-surface-chip-warning-hover: var(--eds-color-spruce-wood-100); /* Chip */
+  --eds-color-surface-chip-warning: var(--eds-color-spruce-wood-100); /* Chip */
+  --eds-color-surface-chip-success-hover: var(--eds-color-lichen-green-100); /* Chip */
+  --eds-color-surface-chip-success: var(--eds-color-lichen-green-100); /* Chip */
+  --eds-color-surface-chip-info-hover: var(--eds-color-mist-blue-muted-200); /* Chip */
+  --eds-color-surface-chip-info: var(--eds-color-mist-blue-muted-200); /* Chip */
+  --eds-color-surface-input-on-main-deep: var(--eds-color-neutral-0); /* Autocomplete, Search, Table input, Text field input */
+  --eds-color-surface-input-on-main-flat: var(--eds-color-neutral-100); /* Autocomplete, Search, Table input, Text field input */
+  --eds-color-surface-interactive-elevation-level-2-active-pressed: var(--eds-color-moss-green-500); /* Used in Table cell, Menu, Sidebar, Tab */
+  --eds-color-surface-interactive-elevation-level-2-active-hover: var(--eds-color-moss-green-300); /* Menu */
+  --eds-color-surface-interactive-elevation-level-2-active: var(--eds-color-moss-green-200); /* Menu */
+  --eds-color-surface-interactive-active-pressed: var(--eds-color-moss-green-500); /* Used in Table cell, Menu, Sidebar, Tab */
+  --eds-color-surface-interactive-active-hover: var(--eds-color-moss-green-300); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-active: var(--eds-color-moss-green-200); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-interactive-resting-pressed: var(--eds-color-neutral-500); /* Used in Tab resting hover, Menu item resting hover, Sidebar item resting hover, App launcher hover */
+  --eds-color-surface-interactive-resting-hover: var(--eds-color-neutral-300); /* Menu item, Tab, Table cell, Table data grid cell */
+  --eds-color-surface-elevation-level-4: var(--eds-color-neutral-0);
+  --eds-color-surface-elevation-level-3: var(--eds-color-neutral-0);
+  --eds-color-surface-elevation-level-2: var(--eds-color-neutral-0); /* Card neutral, Menu, Popover */
+  --eds-color-surface-elevation-level-1: var(--eds-color-neutral-0); /* Dialog */
+  --eds-color-border-ui-shell: var(--eds-color-neutral-100); /* Sidebar, Topbar, Side sheet */
+  --eds-color-border-alternative: var(--eds-color-neutral-100);
+  --eds-color-border-quaternary: var(--eds-color-neutral-900);
+  --eds-color-border-tertiary: var(--eds-color-neutral-700);
+  --eds-color-border-button-disabled: var(--eds-color-neutral-400); /* Button */
+  --eds-color-border-button-danger-outlined-pressed: var(--eds-color-red-cold-1400);
+  --eds-color-border-button-danger-outlined-hover: var(--eds-color-red-cold-1200); /* Button */
+  --eds-color-border-button-danger-outlined: var(--eds-color-red-cold-900); /* Button */
+  --eds-color-border-button-secondary-outlined-pressed: var(--eds-color-blue-sky-1450);
+  --eds-color-border-button-secondary-outlined-hover: var(--eds-color-blue-sky-1400); /* Button */
+  --eds-color-border-button-secondary-outlined: var(--eds-color-blue-sky-1200); /* Button */
+  --eds-color-border-button-primary-outlined-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-border-button-primary-outlined-hover: var(--eds-color-moss-green-1300); /* Button, Toggle button */
+  --eds-color-border-button-primary-outlined: var(--eds-color-moss-green-1100); /* Button, Toggle button */
+  --eds-color-border-secondary: var(--eds-color-neutral-500);
+  --eds-color-border-primary: var(--eds-color-neutral-300); /* Dialog, Popover */
+  --eds-color-border-card-error: var(--eds-color-red-warm-300); /* Card */
+  --eds-color-border-card-warning: var(--eds-color-spruce-wood-200); /* Card */
+  --eds-color-border-card-success: var(--eds-color-lichen-green-200); /* Card */
+  --eds-color-border-card-info: var(--eds-color-mist-blue-muted-300); /* Card */
+  --eds-color-border-banner-error: var(--eds-color-red-warm-300); /* Banner */
+  --eds-color-border-banner-warning: var(--eds-color-spruce-wood-200); /* Banner */
+  --eds-color-border-banner-success: var(--eds-color-lichen-green-200); /* Banner */
+  --eds-color-border-banner-info: var(--eds-color-mist-blue-muted-300); /* Banner */
+  --eds-color-border-chip-neutral-disabled: var(--eds-color-neutral-300); /* Chip */
+  --eds-color-border-chip-neutral-active-hover: var(--eds-color-moss-green-1100); /* Chip */
+  --eds-color-border-chip-neutral-active: var(--eds-color-moss-green-400); /* Chip */
+  --eds-color-border-chip-neutral-resting-hover: var(--eds-color-neutral-1100); /* Chip */
+  --eds-color-border-chip-neutral-resting: var(--eds-color-neutral-300); /* Chip */
+  --eds-color-border-chip-error-hover: var(--eds-color-red-cold-1300); /* Chip */
+  --eds-color-border-chip-error: var(--eds-color-red-cold-900); /* Chip */
+  --eds-color-border-chip-warning-hover: var(--eds-color-orange-1300); /* Chip */
+  --eds-color-border-chip-warning: var(--eds-color-orange-800); /* Chip */
+  --eds-color-border-chip-success-hover: var(--eds-color-success-green-1300); /* Chip */
+  --eds-color-border-chip-success: var(--eds-color-success-green-900); /* Chip */
+  --eds-color-border-chip-info-hover: var(--eds-color-blue-ocean-1300); /* Chip */
+  --eds-color-border-chip-info: var(--eds-color-blue-sky-1000); /* Chip */
+  --eds-color-border-input-error-active: var(--eds-color-red-cold-1200); /* Text field */
+  --eds-color-border-input-error-resting: var(--eds-color-red-cold-900); /* Text field */
+  --eds-color-border-input-active: var(--eds-color-moss-green-1100); /* Autocomplete, Search, Text field */
+  --eds-color-border-input-warning-active: var(--eds-color-orange-1100); /* Text field */
+  --eds-color-border-input-warning-resting: var(--eds-color-orange-800); /* Text field */
+  --eds-color-border-input-resting: var(--eds-color-neutral-600); /* Autocomplete, Text field */
+  --eds-color-border-input-success-active: var(--eds-color-success-green-1100); /* Text field */
+  --eds-color-border-input-success-resting: var(--eds-color-success-green-900); /* Text field */
+  --eds-color-border-input-info-active: var(--eds-color-blue-sky-1200); /* Text field */
+  --eds-color-border-input-info-resting: var(--eds-color-blue-sky-1000); /* Text field */
+  --eds-color-border-interactive-disabled: var(--eds-color-neutral-300); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-border-interactive-active-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-border-interactive-active-hover: var(--eds-color-moss-green-1300); /* Menu item Sidebar, Tab, Table header, Table header data grid */
+  --eds-color-border-interactive-active: var(--eds-color-moss-green-1100); /* Menu item Sidebar, Tab, Table header, Table header data grid */
+  --eds-color-border-interactive-resting-pressed: var(--eds-color-neutral-700);
+  --eds-color-border-interactive-resting-hover: var(--eds-color-neutral-500); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-border-interactive-resting: var(--eds-color-neutral-300); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
+  --eds-color-icon-chip-neutral-disabled: var(--eds-color-neutral-500); /* Chip */
+  --eds-color-icon-chip-neutral-active-hover: var(--eds-color-moss-green-1300); /* Chip */
+  --eds-color-icon-chip-neutral-active: var(--eds-color-moss-green-1100); /* Chip */
+  --eds-color-icon-chip-neutral-resting-hover: var(--eds-color-neutral-1300); /* Chip */
+  --eds-color-icon-chip-neutral-resting: var(--eds-color-neutral-1100); /* Chip */
+  --eds-color-icon-banner-error: var(--eds-color-red-cold-1200); /* Banner */
+  --eds-color-icon-banner-warning: var(--eds-color-orange-1200); /* Banner */
+  --eds-color-icon-banner-success: var(--eds-color-lichen-green-1200); /* Banner */
+  --eds-color-icon-banner-info: var(--eds-color-blue-sky-1200); /* Banner */
+  --eds-color-icon-button-danger-on-outlined-pressed: var(--eds-color-red-cold-1400);
+  --eds-color-icon-button-danger-on-outlined-hover: var(--eds-color-red-cold-1200); /* Button */
+  --eds-color-icon-button-danger-on-outlined: var(--eds-color-red-cold-900); /* Button */
+  --eds-color-icon-button-danger-on-filled: var(--eds-color-neutral-0); /* Button */
+  --eds-color-icon-button-secondary-on-outlined-pressed: var(--eds-color-blue-sky-1450);
+  --eds-color-icon-button-secondary-on-outlined-hover: var(--eds-color-blue-sky-1400); /* Button */
+  --eds-color-icon-button-secondary-on-outlined: var(--eds-color-blue-sky-1300); /* Button */
+  --eds-color-icon-button-secondary-on-filled: var(--eds-color-neutral-0); /* Button */
+  --eds-color-icon-button-primary-on-outlined-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-icon-button-primary-on-outlined-hover: var(--eds-color-moss-green-1300); /* Button, Ghost button, Toggle button */
+  --eds-color-icon-button-primary-on-outlined: var(--eds-color-moss-green-1100); /* Button, Ghost button, Toggle button */
+  --eds-color-icon-button-primary-on-filled: var(--eds-color-neutral-0); /* Button, Toggle button */
+  --eds-color-icon-input-error-active: var(--eds-color-red-cold-1200); /* Text field */
+  --eds-color-icon-input-error-resting: var(--eds-color-red-cold-900); /* Text field */
+  --eds-color-icon-input-warning-active: var(--eds-color-orange-1100); /* Text field */
+  --eds-color-icon-input-warning-resting: var(--eds-color-orange-800); /* Text field */
+  --eds-color-icon-input-success-active: var(--eds-color-success-green-1100); /* Text field */
+  --eds-color-icon-input-success-resting: var(--eds-color-success-green-900); /* Text field */
+  --eds-color-icon-input-info-active: var(--eds-color-blue-sky-1200); /* Text field */
+  --eds-color-icon-input-info-resting: var(--eds-color-blue-sky-1000); /* Text field */
+  --eds-color-icon-on-overlay: var(--eds-color-neutral-0); /* Button, Toggle button */
+  --eds-color-icon-quaternary: var(--eds-color-neutral-700);
+  --eds-color-icon-tertiary: var(--eds-color-neutral-900);
+  --eds-color-icon-secondary: var(--eds-color-neutral-1100);
+  --eds-color-icon-primary: var(--eds-color-neutral-1300);
+  --eds-color-icon-interactive-elevation-level-2-active-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-icon-interactive-elevation-level-2-active-hover: var(--eds-color-moss-green-1300); /* Menu item */
+  --eds-color-icon-interactive-elevation-level-2-active: var(--eds-color-moss-green-1100); /* Menu item */
+  --eds-color-icon-interactive-elevation-level-2-resting-pressed: var(--eds-color-neutral-1400);
+  --eds-color-icon-interactive-elevation-level-2-resting-hover: var(--eds-color-neutral-1300); /* Menu item */
+  --eds-color-icon-interactive-elevation-level-2-resting: var(--eds-color-neutral-1100); /* Menu item */
+  --eds-color-icon-interactive-disabled: var(--eds-color-neutral-500); /* Autocomplete, Menu item (Menu &amp; Sidebar) Search, Tab, Table header, Table header data grid, Table cell, Table data grid cell, Text field, Top bar */
+  --eds-color-icon-interactive-active-neutral-pressed: var(--eds-color-neutral-1450);
+  --eds-color-icon-interactive-active-neutral-hover: var(--eds-color-neutral-1400); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-color-icon-interactive-active-neutral: var(--eds-color-neutral-1300); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-color-icon-interactive-active-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-icon-interactive-active-hover: var(--eds-color-moss-green-1300); /* Autocomplete, Menu item (Sidebar) */
+  --eds-color-icon-interactive-active: var(--eds-color-moss-green-1100); /* Autocomplete, Menu item (Sidebar) */
+  --eds-color-icon-interactive-resting-pressed: var(--eds-color-neutral-1300);
+  --eds-color-icon-interactive-resting-hover: var(--eds-color-neutral-1100); /* Autocomplete, Menu item (Sidebar) */
+  --eds-color-icon-interactive-resting: var(--eds-color-neutral-900); /* Autocomplete, Menu item (Sidebar) Search */
+  --eds-color-icon-availability-do-not-disturb: var(--eds-color-red-cold-1200); /* Card neutral */
+  --eds-color-icon-availability-busy: var(--eds-color-red-cold-1200); /* Card */
+  --eds-color-icon-availability-away: var(--eds-color-orange-1000); /* Card */
+  --eds-color-icon-availability-available: var(--eds-color-success-green-1000); /* Card */
+  --eds-color-text-chip-neutral-disabled: var(--eds-color-neutral-500); /* Chip */
+  --eds-color-text-chip-neutral-active-hover: var(--eds-color-moss-green-1300); /* Chip */
+  --eds-color-text-chip-neutral-active: var(--eds-color-moss-green-1100); /* Chip */
+  --eds-color-text-chip-neutral-resting-hover: var(--eds-color-neutral-1300); /* Chip */
+  --eds-color-text-chip-neutral-resting: var(--eds-color-neutral-1100); /* Chip */
+  --eds-color-text-banner-error: var(--eds-color-red-cold-1200); /* Banner */
+  --eds-color-text-banner-warning: var(--eds-color-orange-1200); /* Banner */
+  --eds-color-text-banner-success: var(--eds-color-lichen-green-1200); /* Banner */
+  --eds-color-text-banner-info: var(--eds-color-blue-sky-1200); /* Banner */
+  --eds-color-text-on-overlay: var(--eds-color-neutral-0); /* Button, Toggle button */
+  --eds-color-text-quaternary: var(--eds-color-neutral-700);
+  --eds-color-text-button-danger-on-outlined-pressed: var(--eds-color-red-cold-1400);
+  --eds-color-text-button-danger-on-outlined-hover: var(--eds-color-red-cold-1200); /* Button */
+  --eds-color-text-button-danger-on-outlined: var(--eds-color-red-cold-900); /* Button */
+  --eds-color-text-button-danger-on-filled: var(--eds-color-neutral-0); /* Button */
+  --eds-color-text-button-secondary-on-outlined-pressed: var(--eds-color-blue-sky-1450);
+  --eds-color-text-button-secondary-on-outlined-hover: var(--eds-color-blue-sky-1400); /* Button */
+  --eds-color-text-button-secondary-on-outlined: var(--eds-color-blue-sky-1300); /* Button */
+  --eds-color-text-button-secondary-on-filled: var(--eds-color-neutral-0); /* Button */
+  --eds-color-text-button-primary-on-outlined-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-text-button-primary-on-outlined-hover: var(--eds-color-moss-green-1300); /* Button, Toggle button */
+  --eds-color-text-button-primary-on-outlined: var(--eds-color-moss-green-1100); /* Button, Toggle button */
+  --eds-color-text-button-primary-on-filled: var(--eds-color-neutral-0); /* Button, Toggle button */
+  --eds-color-text-tertiary: var(--eds-color-neutral-900);
+  --eds-color-text-secondary: var(--eds-color-neutral-1100); /* Application name, Dialog body text, Popover body text */
+  --eds-color-text-primary: var(--eds-color-neutral-1300); /* Dialog title, Popover title, Side sheet title, Title */
+  --eds-color-text-primary-highlighted: var(--eds-color-neutral-1300);
+  --eds-color-text-input-asterix: var(--eds-color-red-cold-900); /* Autocomplete, Text field */
+  --eds-color-text-input-label: var(--eds-color-neutral-900); /* Autocomplete, Text field */
+  --eds-color-text-input-active: var(--eds-color-neutral-1300); /* Autocomplete, Table input, Search, Text field */
+  --eds-color-text-input-resting: var(--eds-color-neutral-1100); /* Autocomplete, Table input, Text field */
+  --eds-color-text-interactive-elevation-level-2-active-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-text-interactive-elevation-level-2-active-hover: var(--eds-color-moss-green-1300); /* Menu item */
+  --eds-color-text-interactive-elevation-level-2-active: var(--eds-color-moss-green-1100); /* Menu item */
+  --eds-color-text-interactive-elevation-level-2-resting-pressed: var(--eds-color-neutral-1400); /* tab */
+  --eds-color-text-interactive-elevation-level-2-resting-hover: var(--eds-color-neutral-1300); /* Menu item */
+  --eds-color-text-interactive-elevation-level-2-resting: var(--eds-color-neutral-1100); /* Menu item */
+  --eds-color-text-interactive-disabled: var(--eds-color-neutral-500); /* Menu item, Tab, Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-color-text-interactive-active-neutral-pressed: var(--eds-color-neutral-1450); /* table */
+  --eds-color-text-interactive-active-neutral-hover: var(--eds-color-neutral-1400); /* Table cell, Table data grid cell */
+  --eds-color-text-interactive-active-neutral: var(--eds-color-neutral-1300); /* Table cell, Table data grid cell */
+  --eds-color-text-interactive-active-pressed: var(--eds-color-moss-green-1400);
+  --eds-color-text-interactive-active-hover: var(--eds-color-moss-green-1300); /* Menu item, Tab */
+  --eds-color-text-interactive-active: var(--eds-color-moss-green-1100); /* Menu item, Tab */
+  --eds-color-text-interactive-resting-pressed: var(--eds-color-neutral-1300); /* tab */
+  --eds-color-text-interactive-resting-hover: var(--eds-color-neutral-1100); /* Menu item, Tab */
+  --eds-color-text-interactive-resting: var(--eds-color-neutral-900); /* Menu item, Tab */
+  --eds-color-text-message-error-hover: var(--eds-color-red-cold-1300); /* Chip */
+  --eds-color-text-message-error: var(--eds-color-red-cold-1200); /* Chip, Card, input helper */
+  --eds-color-text-message-warning-hover: var(--eds-color-orange-1300); /* Chip */
+  --eds-color-text-message-warning: var(--eds-color-orange-1200); /* Chip, Card, input helper */
+  --eds-color-text-message-success-hover: var(--eds-color-success-green-1300); /* Chip */
+  --eds-color-text-message-success: var(--eds-color-lichen-green-1200); /* Chip, Card, input helper */
+  --eds-color-text-message-info-hover: var(--eds-color-blue-ocean-1300); /* Chip */
+  --eds-color-text-message-info: var(--eds-color-blue-sky-1200); /* Chip, Card, input helper */
+  --eds-color-surface-interactive-active-ghost-pressed: var(--eds-color-surface-interactive-active-pressed);
+  --eds-color-surface-interactive-active-ghost-hover: var(--eds-color-surface-interactive-active-hover); /* Tab */
+  --eds-color-icon-input-helper-default: var(--eds-color-icon-tertiary); /* Deprecated - helper text for input field. Use icon/tertiary. */
+  --eds-color-icon-message-error-hover: var(--eds-color-text-message-error-hover); /* Chip */
+  --eds-color-icon-message-error: var(--eds-color-text-message-error); /* Chip, Card, input helper */
+  --eds-color-icon-message-warning-hover: var(--eds-color-text-message-warning-hover); /* Chip */
+  --eds-color-icon-message-warning: var(--eds-color-text-message-warning); /* Chip, Card, input helper */
+  --eds-color-icon-message-success-hover: var(--eds-color-text-message-success-hover); /* Chip */
+  --eds-color-icon-message-success: var(--eds-color-text-message-success); /* Chip, Card, input helper */
+  --eds-color-icon-message-info-hover: var(--eds-color-text-message-info-hover); /* Chip */
+  --eds-color-icon-message-info: var(--eds-color-text-message-info); /* Chip, Card, input helper */
+  --eds-color-text-chip-error-hover: var(--eds-color-text-message-error-hover); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-error: var(--eds-color-text-message-error); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-warning-hover: var(--eds-color-text-message-warning-hover); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-warning: var(--eds-color-text-message-warning); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-success-hover: var(--eds-color-text-message-success-hover); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-success: var(--eds-color-text-message-success); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-info-hover: var(--eds-color-text-message-info-hover); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-chip-info: var(--eds-color-text-message-info); /* Deprecated - Chip. Use text/message. */
+  --eds-color-text-card-error: var(--eds-color-text-message-error); /* Deprecated - Card. Use text/message. */
+  --eds-color-text-card-warning: var(--eds-color-text-message-warning); /* Deprecated - Card. Use text/message. */
+  --eds-color-text-card-success: var(--eds-color-text-message-success); /* Deprecated - Card. Use text/message. */
+  --eds-color-text-card-info: var(--eds-color-text-message-info); /* Deprecated - Card. Use text/message. */
+  --eds-color-text-button-disabled: var(--eds-color-text-interactive-disabled); /* Button */
+  --eds-color-text-input-placeholder: var(--eds-color-text-quaternary); /* Autocomplete, Table input, Search, Text field */
+  --eds-color-text-input-helper-error: var(--eds-color-text-message-error); /* Deprecated - helper text for input field. Use text/message. */
+  --eds-color-text-input-helper-warning: var(--eds-color-text-message-warning); /* Deprecated - helper text for input field. Use text/message. */
+  --eds-color-text-input-helper-success: var(--eds-color-text-message-success); /* Deprecated - helper text for input field. Use text/message. */
+  --eds-color-text-input-helper-info: var(--eds-color-text-message-info); /* Deprecated - helper text for input field. Use text/message. */
+  --eds-color-text-input-helper-default: var(--eds-color-text-tertiary); /* Deprecated - helper text for input field. Use text/tertiary. */
+  --eds-color-icon-chip-error-hover: var(--eds-color-icon-message-error-hover); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-error: var(--eds-color-icon-message-error); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-warning-hover: var(--eds-color-icon-message-warning-hover); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-warning: var(--eds-color-icon-message-warning); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-success-hover: var(--eds-color-icon-message-success-hover); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-success: var(--eds-color-icon-message-success); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-info-hover: var(--eds-color-icon-message-info-hover); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-chip-info: var(--eds-color-icon-message-info); /* Deprecated - Chip. Use icon/message. */
+  --eds-color-icon-card-error: var(--eds-color-icon-message-error); /* Deprecated - Card. Use icon/message. */
+  --eds-color-icon-card-warning: var(--eds-color-icon-message-warning); /* Deprecated - Card. Use icon/message. */
+  --eds-color-icon-card-success: var(--eds-color-icon-message-success); /* Deprecated - Card. Use icon/message. */
+  --eds-color-icon-card-info: var(--eds-color-icon-message-info); /* Deprecated - Card. Use icon/message. */
+  --eds-color-icon-input-helper-error: var(--eds-color-icon-message-error); /* Deprecated - helper text for input field. Use icon/message. */
+  --eds-color-icon-input-helper-warning: var(--eds-color-icon-message-warning); /* Deprecated - helper text for input field. Use icon/message. */
+  --eds-color-icon-input-helper-success: var(--eds-color-icon-message-success); /* Deprecated - helper text for input field. Use icon/message. */
+  --eds-color-icon-input-helper-info: var(--eds-color-icon-message-info); /* Deprecated - helper text for input field. Use icon/message. */
+}

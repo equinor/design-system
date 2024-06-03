@@ -8,7 +8,7 @@ const FILE_KEY_THEMES = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 const OKLCH_PRECISION = 3
-const rootVersion1 = './dist/'
+const rootVersion1 = './build/'
 const cssDistPath = `${rootVersion1}/css`
 const tsDistPath = `${rootVersion1}/ts`
 const jsonDistPath = `${rootVersion1}/json`
@@ -89,11 +89,13 @@ StyleDictionary.registerTransform({
   ...lightDarkTransform,
 })
 
-const fileHeader = (defaultMessage: string[]) => [
+/* const fileHeader = (defaultMessage: string[]) => [
   ...defaultMessage,
   '@tokens Colors',
   '@presenter Color',
-]
+] */
+
+const fileHeader = () => ['Do not edit directly']
 const outputReferences = true
 
 const lightDark = StyleDictionary.extend({
