@@ -18,7 +18,7 @@
     "build:lab": "pnpm --filter @equinor/eds-lab-react run build",
     "build:utils": "pnpm --filter @equinor/eds-utils run build",
     "build:tokens": "pnpm --filter @equinor/eds-tokens run build",
-    "build:sdtokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run tokens-in-code:build",
+    "transform:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run tokens-in-code:build",
     "update:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run update-tokens",
     "update:figma": "pnpm --filter @equinor/eds-tokens run update-figma",
     "build:density-tokens": "pnpm --filter @equinor/eds-token-scripts run build:density",
