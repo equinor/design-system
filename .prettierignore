@@ -1,3 +1,4 @@
 *.mdx
 README.md
 packages/eds-icons/src/data.ts
+packages/eds-tokens/build/*
