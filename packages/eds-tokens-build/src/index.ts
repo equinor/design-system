@@ -141,7 +141,7 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerTransform({
   type: `value`,
-  transitive: true,
+  transitive: false,
   name: `eds/font/quote`,
   matcher: (token) => {
     const isFontMetricInString =

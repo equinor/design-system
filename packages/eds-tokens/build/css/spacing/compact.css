@@ -46,7 +46,7 @@
   --eds-typography-header-sm-padding-baselined: 2;
   --eds-typography-header-sm-padding-centred: 1;
   --eds-typography-header-sm-font-size: 9;
-  --eds-typography-header-font-family: "var(--eds-font-family-equinor)";
+  --eds-typography-header-font-family: var(--eds-font-family-equinor);
   --eds-typography-header-xs-font-weight-bolder: 500;
   --eds-typography-header-xs-font-weight-normal: 400;
   --eds-typography-header-xs-font-weight-lighter: 300;
@@ -107,7 +107,7 @@
   --eds-typography-ui-body-static-xs-padding-baselined: 0;
   --eds-typography-ui-body-static-xs-padding-centred: 0;
   --eds-typography-ui-body-static-xs-font-size: 10.5;
-  --eds-typography-ui-body-static-font-family: "var(--eds-font-family-inter)";
+  --eds-typography-ui-body-static-font-family: var(--eds-font-family-inter);
   --eds-typography-ui-body-dynamic-xl-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-xl-font-weight-normal: 400;
   --eds-typography-ui-body-dynamic-xl-font-weight-lighter: 300;
@@ -138,7 +138,7 @@
   --eds-typography-ui-body-dynamic-md-padding-baselined: 0;
   --eds-typography-ui-body-dynamic-md-padding-centred: 0;
   --eds-typography-ui-body-dynamic-md-font-size: 10.5;
-  --eds-typography-ui-body-dynamic-font-family: "var(--eds-font-family-inter)";
+  --eds-typography-ui-body-dynamic-font-family: var(--eds-font-family-inter);
   --eds-typography-ui-body-dynamic-sm-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-sm-font-weight-normal: 400;
   --eds-typography-ui-body-dynamic-sm-font-weight-lighter: 300;
