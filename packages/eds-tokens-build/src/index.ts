@@ -279,7 +279,7 @@ const spacingPrimitives = _extend({
   source: [SPACING_PRIMITIVE_SOURCE],
   dirName: 'spacing',
   fileName: 'primitives',
-  prefix: 'eds-primitives',
+  prefix: 'eds',
 })
 
 const typographyDensityComfortable = _extend({
@@ -289,7 +289,7 @@ const typographyDensityComfortable = _extend({
   ],
   dirName: 'spacing',
   fileName: 'comfortable',
-  prefix: 'eds-semantic',
+  prefix: 'eds',
   selector: ':root, [data-density="comfortable"]',
   filter: (token) => token.filePath.includes('Density'),
 })
@@ -301,7 +301,7 @@ const typographyDensityCompact = _extend({
   ],
   dirName: 'spacing',
   fileName: 'compact',
-  prefix: 'eds-semantic',
+  prefix: 'eds',
   selector: '[data-density="compact"]',
   filter: (token) => token.filePath.includes('Density'),
 })
@@ -313,7 +313,7 @@ const typographyDensitySpacious = _extend({
   ],
   dirName: 'spacing',
   fileName: 'spacious',
-  prefix: 'eds-semantic',
+  prefix: 'eds',
   selector: '[data-density="Spacious"]',
   filter: (token) => token.filePath.includes('Density'),
 })
