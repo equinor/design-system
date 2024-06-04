@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-data-grid-react",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A feature-rich data-grid written in React, implementing the Equinor Design System",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -95,7 +95,7 @@
     "data grid"
   ],
   "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
+    "pnpm": ">=4",
+    "node": ">=10.0.0"
   }
 }
