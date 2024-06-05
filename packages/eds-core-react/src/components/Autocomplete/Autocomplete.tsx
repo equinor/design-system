@@ -250,7 +250,7 @@ export type AutocompleteChanges<T> = { selectedItems: T[] }
 
 export type AutocompleteProps<T> = {
   /** List of options in dropdown */
-  options: T[]
+  options: readonly T[]
   /** Label for the select element */
   label: ReactNode
   /** Array of initial selected items
