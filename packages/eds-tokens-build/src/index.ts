@@ -13,6 +13,8 @@ const cssDistPath = `${rootVersion1}/css`
 const tsDistPath = `${rootVersion1}/ts`
 const jsonDistPath = `${rootVersion1}/json`
 
+const outputReferences = true
+
 const {
   filter: { isColor },
 } = StyleDictionary
@@ -51,7 +53,9 @@ const lightDarkTransform: StyleDictionary.Transform = {
         )
         //make sure it is not a local variable, in which case it has light-dark set already
         if (token.original.value != darkValue) {
-          newValue = `light-dark(${token.value}, ${resolvedReference})`
+          newValue = `light-dark(${token.value}, ${
+            outputReferences ? resolvedReference : darkValue
+          })`
         }
       } else {
         //the dark value was hardcoded (color with alpha transparency)
@@ -96,7 +100,6 @@ StyleDictionary.registerTransform({
 ] */
 
 const fileHeader = () => ['Do not edit directly']
-const outputReferences = true
 
 const lightDark = StyleDictionary.extend({
   include: [`./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`],
