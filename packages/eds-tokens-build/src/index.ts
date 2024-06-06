@@ -126,21 +126,60 @@ const lightDark = StyleDictionary.extend({
 })
 
 StyleDictionary.registerTransform({
+  type: 'value',
+  transitive: false,
+  name: 'eds/pxFormatted',
+  matcher: (token) => {
+    const isNumber = token.$type === 'number'
+    if (!isNumber) return false
+
+    const isDefined = token?.value !== undefined
+    if (!isDefined) return false
+
+    const pxToEmMatchers = [
+      'tracking-tight',
+      'tracking-normal',
+      'tracking-loose',
+    ]
+    return (
+      token?.path?.length > 0 &&
+      pxToEmMatchers.some((metric) => token.path.includes(metric))
+    )
+  },
+  transformer: (token) => {
+    const isNumber = token.$type === 'number'
+    if (!isNumber) return false
+
+    const isDefined = token?.value !== undefined
+    if (!isDefined) return false
+
+    const fixedValue = toFixedWithoutTrailingZeroes(Number(token.value))
+    return `${fixedValue}px`
+  },
+})
+
+StyleDictionary.registerTransform({
   type: `value`,
   transitive: false,
-  name: `eds/font/pxToRem`,
+  name: `eds/pxToRem`,
   matcher: (token) => {
-    const fontMetricsInPx = ['font', 'size', 'line-height', 'font-size']
+    const isNumber = token.$type === 'number'
+    if (!isNumber) return false
+
+    const isDefined = token?.value !== undefined
+    if (!isDefined) return false
+
+    const pxToRemMatchers = ['font', 'size', 'line-height', 'font-size']
     const isFontMetricInPx =
       token?.path?.length > 0 &&
-      fontMetricsInPx.some((metric) => token.path.includes(metric))
+      pxToRemMatchers.some((metric) => token.path.includes(metric))
 
     const isSpacing = token?.path?.includes('spacing')
 
     return isFontMetricInPx || isSpacing
   },
   transformer: (token) => {
-    return `${parseFloat(`${token.value}`) / 16}rem`
+    return transformNumberToRem(Number(token.value))
   },
 })
 
@@ -189,7 +228,8 @@ const _extend = ({
         buildPath: `${cssDistPath}/${dirName}/`,
         transforms: [
           'name/cti/kebab',
-          'eds/font/pxToRem',
+          'eds/pxToRem',
+          'eds/pxFormatted',
           'eds/font/quote',
           'color/oklch',
         ],
@@ -333,4 +373,31 @@ export function run() {
   typographyDensityComfortable.buildAllPlatforms()
   typographyDensityCompact.buildAllPlatforms()
   typographyDensitySpacious.buildAllPlatforms()
+}
+
+function transformNumberToRem(value: number): string {
+  return transformNumberToUnit(value, 16, 'rem')
+}
+
+function transformNumberToUnit(
+  value: number,
+  rootFontSize: number,
+  unit: string,
+): string {
+  if (value === 0) return `0${unit}`
+
+  const valueWithTwoDigitsAfterDecimal = Number(value.toFixed(3))
+  const valueInUnit = valueWithTwoDigitsAfterDecimal / rootFontSize
+  const valueWithoutTrailingZeroes = toFixedWithoutTrailingZeroes(valueInUnit)
+  const valueWithSuffix = `${valueWithoutTrailingZeroes}${unit}`
+
+  return valueWithSuffix
+}
+
+function toFixedWithoutTrailingZeroes(value: number, fractionDigits = 3) {
+  const valueWithTwoDigitsAfterDecimal = value.toFixed(fractionDigits)
+  const valueWithoutTrailingZeroes = parseFloat(
+    `${valueWithTwoDigitsAfterDecimal}`,
+  )
+  return valueWithoutTrailingZeroes
 }
