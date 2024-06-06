@@ -130,9 +130,11 @@ StyleDictionary.registerTransform({
   transitive: false,
   name: `eds/font/pxToRem`,
   matcher: (token) => {
+    const fontMetricsInPx = ['font', 'size', 'line-height', 'font-size']
     const isFontMetricInPx =
-      token?.path?.includes('font') &&
-      (token?.path?.includes('size') || token?.path?.includes('line-height'))
+      token?.path?.length > 0 &&
+      fontMetricsInPx.some((metric) => token.path.includes(metric))
+
     const isSpacing = token?.path?.includes('spacing')
 
     return isFontMetricInPx || isSpacing
@@ -147,10 +149,11 @@ StyleDictionary.registerTransform({
   transitive: false,
   name: `eds/font/quote`,
   matcher: (token) => {
+    const fontMetricsInString = ['font', 'family', 'weight', 'font-family']
+
     const isFontMetricInString =
-      (token?.path?.includes('font') &&
-        (token?.path?.includes('family') || token?.path?.includes('weight'))) ||
-      token?.path?.includes('font-family')
+      token?.path?.length > 0 &&
+      fontMetricsInString.some((metric) => token.path.includes(metric))
 
     return isFontMetricInString
   },

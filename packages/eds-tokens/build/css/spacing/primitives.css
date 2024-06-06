@@ -14,7 +14,7 @@
   --eds-type-scale-equinor-1100-cap-height-rounded: 28;
   --eds-type-scale-equinor-1100-padding-baselined: 2;
   --eds-type-scale-equinor-1100-padding-centred: 1;
-  --eds-type-scale-equinor-1100-font-size: 37;
+  --eds-type-scale-equinor-1100-font-size: 2.3125rem;
   --eds-type-scale-equinor-1000-font-weight-bolder: 500;
   --eds-type-scale-equinor-1000-font-weight-normal: 400;
   --eds-type-scale-equinor-1000-font-weight-lighter: 300;
@@ -24,7 +24,7 @@
   --eds-type-scale-equinor-1000-cap-height-rounded: 24;
   --eds-type-scale-equinor-1000-padding-baselined: 2;
   --eds-type-scale-equinor-1000-padding-centred: 1;
-  --eds-type-scale-equinor-1000-font-size: 32;
+  --eds-type-scale-equinor-1000-font-size: 2rem;
   --eds-type-scale-equinor-900-font-weight-bolder: 500;
   --eds-type-scale-equinor-900-font-weight-normal: 400;
   --eds-type-scale-equinor-900-font-weight-lighter: 300;
@@ -34,7 +34,7 @@
   --eds-type-scale-equinor-900-cap-height-rounded: 20;
   --eds-type-scale-equinor-900-padding-baselined: 0;
   --eds-type-scale-equinor-900-padding-centred: 0;
-  --eds-type-scale-equinor-900-font-size: 28;
+  --eds-type-scale-equinor-900-font-size: 1.75rem;
   --eds-type-scale-equinor-800-font-weight-bolder: 500;
   --eds-type-scale-equinor-800-font-weight-normal: 400;
   --eds-type-scale-equinor-800-font-weight-lighter: 300;
@@ -44,7 +44,7 @@
   --eds-type-scale-equinor-800-cap-height-rounded: 20;
   --eds-type-scale-equinor-800-padding-baselined: -1;
   --eds-type-scale-equinor-800-padding-centred: -0.5;
-  --eds-type-scale-equinor-800-font-size: 24.5;
+  --eds-type-scale-equinor-800-font-size: 1.53125rem;
   --eds-type-scale-equinor-700-font-weight-bolder: 500;
   --eds-type-scale-equinor-700-font-weight-normal: 400;
   --eds-type-scale-equinor-700-font-weight-lighter: 300;
@@ -54,7 +54,7 @@
   --eds-type-scale-equinor-700-cap-height-rounded: 16;
   --eds-type-scale-equinor-700-padding-baselined: 1;
   --eds-type-scale-equinor-700-padding-centred: 0.5;
-  --eds-type-scale-equinor-700-font-size: 21;
+  --eds-type-scale-equinor-700-font-size: 1.3125rem;
   --eds-type-scale-equinor-600-font-weight-bolder: 500;
   --eds-type-scale-equinor-600-font-weight-normal: 400;
   --eds-type-scale-equinor-600-font-weight-lighter: 300;
@@ -64,7 +64,7 @@
   --eds-type-scale-equinor-600-cap-height-rounded: 12;
   --eds-type-scale-equinor-600-padding-baselined: -1;
   --eds-type-scale-equinor-600-padding-centred: -0.5;
-  --eds-type-scale-equinor-600-font-size: 18.5;
+  --eds-type-scale-equinor-600-font-size: 1.15625rem;
   --eds-type-scale-equinor-500-font-weight-bolder: 500;
   --eds-type-scale-equinor-500-font-weight-normal: 400;
   --eds-type-scale-equinor-500-font-weight-lighter: 300;
@@ -74,7 +74,7 @@
   --eds-type-scale-equinor-500-cap-height-rounded: 12;
   --eds-type-scale-equinor-500-padding-baselined: 1;
   --eds-type-scale-equinor-500-padding-centred: 0.5;
-  --eds-type-scale-equinor-500-font-size: 16;
+  --eds-type-scale-equinor-500-font-size: 1rem;
   --eds-type-scale-equinor-400-font-weight-bolder: 500;
   --eds-type-scale-equinor-400-font-weight-normal: 400;
   --eds-type-scale-equinor-400-font-weight-lighter: 300;
@@ -84,7 +84,7 @@
   --eds-type-scale-equinor-400-cap-height-rounded: 12;
   --eds-type-scale-equinor-400-padding-baselined: 2;
   --eds-type-scale-equinor-400-padding-centred: 1;
-  --eds-type-scale-equinor-400-font-size: 14;
+  --eds-type-scale-equinor-400-font-size: 0.875rem;
   --eds-type-scale-equinor-300-font-weight-normal: 400;
   --eds-type-scale-equinor-300-font-weight-bolder: 500;
   --eds-type-scale-equinor-300-font-weight-lighter: 300;
@@ -94,7 +94,7 @@
   --eds-type-scale-equinor-300-cap-height-rounded: 8;
   --eds-type-scale-equinor-300-padding-baselined: 0;
   --eds-type-scale-equinor-300-padding-centred: 0;
-  --eds-type-scale-equinor-300-font-size: 12;
+  --eds-type-scale-equinor-300-font-size: 0.75rem;
   --eds-type-scale-equinor-200-font-weight-bolder: 500;
   --eds-type-scale-equinor-200-font-weight-normal: 400;
   --eds-type-scale-equinor-200-font-weight-lighter: 300;
@@ -104,7 +104,7 @@
   --eds-type-scale-equinor-200-cap-height-rounded: 8;
   --eds-type-scale-equinor-200-padding-baselined: 1;
   --eds-type-scale-equinor-200-padding-centred: 0.5;
-  --eds-type-scale-equinor-200-font-size: 10.5;
+  --eds-type-scale-equinor-200-font-size: 0.65625rem;
   --eds-type-scale-equinor-100-font-weight-normal: 400;
   --eds-type-scale-equinor-100-font-weight-bolder: 500;
   --eds-type-scale-equinor-100-font-weight-lighter: 300;
@@ -114,7 +114,7 @@
   --eds-type-scale-equinor-100-cap-height-rounded: 8;
   --eds-type-scale-equinor-100-padding-baselined: 2;
   --eds-type-scale-equinor-100-padding-centred: 1;
-  --eds-type-scale-equinor-100-font-size: 9;
+  --eds-type-scale-equinor-100-font-size: 0.5625rem;
   --eds-type-scale-inter-1100-font-weight-bolder: 500;
   --eds-type-scale-inter-1100-font-weight-normal: 400;
   --eds-type-scale-inter-1100-font-weight-lighter: 300;
@@ -124,7 +124,7 @@
   --eds-type-scale-inter-1100-cap-height-rounded: 28;
   --eds-type-scale-inter-1100-padding-baselined: 1;
   --eds-type-scale-inter-1100-padding-centred: 0.5;
-  --eds-type-scale-inter-1100-font-size: 37;
+  --eds-type-scale-inter-1100-font-size: 2.3125rem;
   --eds-type-scale-inter-1000-font-weight-bolder: 500;
   --eds-type-scale-inter-1000-font-weight-normal: 400;
   --eds-type-scale-inter-1000-font-weight-lighter: 300;
@@ -134,7 +134,7 @@
   --eds-type-scale-inter-1000-cap-height-rounded: 24;
   --eds-type-scale-inter-1000-padding-baselined: 1;
   --eds-type-scale-inter-1000-padding-centred: 0.5;
-  --eds-type-scale-inter-1000-font-size: 32;
+  --eds-type-scale-inter-1000-font-size: 2rem;
   --eds-type-scale-inter-900-font-weight-bolder: 500;
   --eds-type-scale-inter-900-font-weight-normal: 400;
   --eds-type-scale-inter-900-font-weight-lighter: 300;
@@ -144,7 +144,7 @@
   --eds-type-scale-inter-900-cap-height-rounded: 20;
   --eds-type-scale-inter-900-padding-baselined: 0;
   --eds-type-scale-inter-900-padding-centred: 0;
-  --eds-type-scale-inter-900-font-size: 28;
+  --eds-type-scale-inter-900-font-size: 1.75rem;
   --eds-type-scale-inter-800-font-weight-bolder: 500;
   --eds-type-scale-inter-800-font-weight-normal: 400;
   --eds-type-scale-inter-800-font-weight-lighter: 300;
@@ -154,7 +154,7 @@
   --eds-type-scale-inter-800-cap-height-rounded: 16;
   --eds-type-scale-inter-800-padding-baselined: 2;
   --eds-type-scale-inter-800-padding-centred: 1;
-  --eds-type-scale-inter-800-font-size: 24.5;
+  --eds-type-scale-inter-800-font-size: 1.53125rem;
   --eds-type-scale-inter-700-font-weight-bolder: 500;
   --eds-type-scale-inter-700-font-weight-normal: 400;
   --eds-type-scale-inter-700-font-weight-lighter: 300;
@@ -164,7 +164,7 @@
   --eds-type-scale-inter-700-cap-height-rounded: 16;
   --eds-type-scale-inter-700-padding-baselined: 1;
   --eds-type-scale-inter-700-padding-centred: 0.5;
-  --eds-type-scale-inter-700-font-size: 21;
+  --eds-type-scale-inter-700-font-size: 1.3125rem;
   --eds-type-scale-inter-600-font-weight-bolder: 500;
   --eds-type-scale-inter-600-font-weight-normal: 400;
   --eds-type-scale-inter-600-font-weight-lighter: 300;
@@ -174,7 +174,7 @@
   --eds-type-scale-inter-600-cap-height-rounded: 12;
   --eds-type-scale-inter-600-padding-baselined: -1;
   --eds-type-scale-inter-600-padding-centred: -0.5;
-  --eds-type-scale-inter-600-font-size: 18.5;
+  --eds-type-scale-inter-600-font-size: 1.15625rem;
   --eds-type-scale-inter-500-font-weight-bolder: 500;
   --eds-type-scale-inter-500-font-weight-normal: 400;
   --eds-type-scale-inter-500-font-weight-lighter: 300;
@@ -184,7 +184,7 @@
   --eds-type-scale-inter-500-cap-height-rounded: 12;
   --eds-type-scale-inter-500-padding-baselined: 0;
   --eds-type-scale-inter-500-padding-centred: 0;
-  --eds-type-scale-inter-500-font-size: 16;
+  --eds-type-scale-inter-500-font-size: 1rem;
   --eds-type-scale-inter-400-font-weight-bolder: 500;
   --eds-type-scale-inter-400-font-weight-normal: 400;
   --eds-type-scale-inter-400-font-weight-lighter: 300;
@@ -194,7 +194,7 @@
   --eds-type-scale-inter-400-cap-height-rounded: 12;
   --eds-type-scale-inter-400-padding-baselined: 2;
   --eds-type-scale-inter-400-padding-centred: 1;
-  --eds-type-scale-inter-400-font-size: 14;
+  --eds-type-scale-inter-400-font-size: 0.875rem;
   --eds-type-scale-inter-300-font-weight-normal: 400;
   --eds-type-scale-inter-300-font-weight-bolder: 500;
   --eds-type-scale-inter-300-font-weight-lighter: 300;
@@ -204,7 +204,7 @@
   --eds-type-scale-inter-300-cap-height-rounded: 8;
   --eds-type-scale-inter-300-padding-baselined: -1;
   --eds-type-scale-inter-300-padding-centred: -0.5;
-  --eds-type-scale-inter-300-font-size: 12;
+  --eds-type-scale-inter-300-font-size: 0.75rem;
   --eds-type-scale-inter-200-font-weight-bolder: 500;
   --eds-type-scale-inter-200-font-weight-normal: 400;
   --eds-type-scale-inter-200-font-weight-lighter: 300;
@@ -214,7 +214,7 @@
   --eds-type-scale-inter-200-cap-height-rounded: 8;
   --eds-type-scale-inter-200-padding-baselined: 0;
   --eds-type-scale-inter-200-padding-centred: 0;
-  --eds-type-scale-inter-200-font-size: 10.5;
+  --eds-type-scale-inter-200-font-size: 0.65625rem;
   --eds-type-scale-inter-100-font-weight-normal: 400;
   --eds-type-scale-inter-100-font-weight-bolder: 500;
   --eds-type-scale-inter-100-font-weight-lighter: 300;
@@ -224,7 +224,7 @@
   --eds-type-scale-inter-100-cap-height-rounded: 8;
   --eds-type-scale-inter-100-padding-baselined: 1;
   --eds-type-scale-inter-100-padding-centred: 0.5;
-  --eds-type-scale-inter-100-font-size: 9;
+  --eds-type-scale-inter-100-font-size: 0.5625rem;
   --eds-spacing-2200: 22rem;
   --eds-spacing-2100: 21rem;
   --eds-spacing-2000: 20rem;

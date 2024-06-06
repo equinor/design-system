@@ -15,7 +15,7 @@
   --eds-typography-header-xl-cap-rounded: 12;
   --eds-typography-header-xl-padding-baselined: 1;
   --eds-typography-header-xl-padding-centred: 0.5;
-  --eds-typography-header-xl-font-size: 16;
+  --eds-typography-header-xl-font-size: var(--eds-type-scale-equinor-500-font-size);
   --eds-typography-header-lg-font-weight-bolder: 500;
   --eds-typography-header-lg-font-weight-normal: 400;
   --eds-typography-header-lg-font-weight-lighter: 300;
@@ -25,7 +25,7 @@
   --eds-typography-header-lg-cap-rounded: 12;
   --eds-typography-header-lg-padding-baselined: 2;
   --eds-typography-header-lg-padding-centred: 1;
-  --eds-typography-header-lg-font-size: 14;
+  --eds-typography-header-lg-font-size: var(--eds-type-scale-equinor-400-font-size);
   --eds-typography-header-md-font-weight-bolder: 500;
   --eds-typography-header-md-font-weight-normal: 400;
   --eds-typography-header-md-font-weight-lighter: 300;
@@ -35,7 +35,7 @@
   --eds-typography-header-md-cap-rounded: 8;
   --eds-typography-header-md-padding-baselined: 0;
   --eds-typography-header-md-padding-centred: 0;
-  --eds-typography-header-md-font-size: 12;
+  --eds-typography-header-md-font-size: var(--eds-type-scale-equinor-300-font-size);
   --eds-typography-header-sm-font-weight-bolder: 500;
   --eds-typography-header-sm-font-weight-normal: 400;
   --eds-typography-header-sm-font-weight-lighter: 300;
@@ -45,7 +45,7 @@
   --eds-typography-header-sm-cap-rounded: 8;
   --eds-typography-header-sm-padding-baselined: 1;
   --eds-typography-header-sm-padding-centred: 0.5;
-  --eds-typography-header-sm-font-size: 10.5;
+  --eds-typography-header-sm-font-size: var(--eds-type-scale-equinor-200-font-size);
   --eds-typography-header-font-family: var(--eds-font-family-equinor);
   --eds-typography-header-xs-font-weight-bolder: 500;
   --eds-typography-header-xs-font-weight-normal: 400;
@@ -56,7 +56,7 @@
   --eds-typography-header-xs-cap-rounded: 8;
   --eds-typography-header-xs-padding-baselined: 2;
   --eds-typography-header-xs-padding-centred: 1;
-  --eds-typography-header-xs-font-size: 9;
+  --eds-typography-header-xs-font-size: var(--eds-type-scale-equinor-100-font-size);
   --eds-typography-ui-body-static-xl-font-weight-bolder: 500;
   --eds-typography-ui-body-static-xl-font-weight-normal: 400;
   --eds-typography-ui-body-static-xl-font-weight-lighter: 300;
@@ -66,7 +66,7 @@
   --eds-typography-ui-body-static-xl-cap-rounded: 12;
   --eds-typography-ui-body-static-xl-padding-baselined: -1;
   --eds-typography-ui-body-static-xl-padding-centred: -0.5;
-  --eds-typography-ui-body-static-xl-font-size: 18.5;
+  --eds-typography-ui-body-static-xl-font-size: var(--eds-type-scale-inter-600-font-size);
   --eds-typography-ui-body-static-lg-font-weight-bolder: 500;
   --eds-typography-ui-body-static-lg-font-weight-normal: 400;
   --eds-typography-ui-body-static-lg-font-weight-lighter: 300;
@@ -76,7 +76,7 @@
   --eds-typography-ui-body-static-lg-cap-rounded: 12;
   --eds-typography-ui-body-static-lg-padding-baselined: 0;
   --eds-typography-ui-body-static-lg-padding-centred: 0;
-  --eds-typography-ui-body-static-lg-font-size: 16;
+  --eds-typography-ui-body-static-lg-font-size: var(--eds-type-scale-inter-500-font-size);
   --eds-typography-ui-body-static-md-font-weight-bolder: 500;
   --eds-typography-ui-body-static-md-font-weight-normal: 400;
   --eds-typography-ui-body-static-md-font-weight-lighter: 300;
@@ -86,7 +86,7 @@
   --eds-typography-ui-body-static-md-cap-rounded: 12;
   --eds-typography-ui-body-static-md-padding-baselined: 2;
   --eds-typography-ui-body-static-md-padding-centred: 1;
-  --eds-typography-ui-body-static-md-font-size: 14;
+  --eds-typography-ui-body-static-md-font-size: var(--eds-type-scale-inter-400-font-size);
   --eds-typography-ui-body-static-sm-font-weight-bolder: 500;
   --eds-typography-ui-body-static-sm-font-weight-normal: 400;
   --eds-typography-ui-body-static-sm-font-weight-lighter: 300;
@@ -96,7 +96,7 @@
   --eds-typography-ui-body-static-sm-cap-rounded: 8;
   --eds-typography-ui-body-static-sm-padding-baselined: -1;
   --eds-typography-ui-body-static-sm-padding-centred: -0.5;
-  --eds-typography-ui-body-static-sm-font-size: 12;
+  --eds-typography-ui-body-static-sm-font-size: var(--eds-type-scale-inter-300-font-size);
   --eds-typography-ui-body-static-xs-font-weight-bolder: 500;
   --eds-typography-ui-body-static-xs-font-weight-normal: 400;
   --eds-typography-ui-body-static-xs-font-weight-lighter: 300;
@@ -106,7 +106,7 @@
   --eds-typography-ui-body-static-xs-cap-rounded: 8;
   --eds-typography-ui-body-static-xs-padding-baselined: 0;
   --eds-typography-ui-body-static-xs-padding-centred: 0;
-  --eds-typography-ui-body-static-xs-font-size: 10.5;
+  --eds-typography-ui-body-static-xs-font-size: var(--eds-type-scale-inter-200-font-size);
   --eds-typography-ui-body-static-font-family: var(--eds-font-family-inter);
   --eds-typography-ui-body-dynamic-xl-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-xl-font-weight-normal: 400;
@@ -117,7 +117,7 @@
   --eds-typography-ui-body-dynamic-xl-cap-rounded: 12;
   --eds-typography-ui-body-dynamic-xl-padding-baselined: 0;
   --eds-typography-ui-body-dynamic-xl-padding-centred: 0;
-  --eds-typography-ui-body-dynamic-xl-font-size: 16;
+  --eds-typography-ui-body-dynamic-xl-font-size: var(--eds-type-scale-inter-500-font-size);
   --eds-typography-ui-body-dynamic-lg-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-lg-font-weight-normal: 400;
   --eds-typography-ui-body-dynamic-lg-font-weight-lighter: 300;
@@ -127,7 +127,7 @@
   --eds-typography-ui-body-dynamic-lg-cap-rounded: 12;
   --eds-typography-ui-body-dynamic-lg-padding-baselined: 2;
   --eds-typography-ui-body-dynamic-lg-padding-centred: 1;
-  --eds-typography-ui-body-dynamic-lg-font-size: 14;
+  --eds-typography-ui-body-dynamic-lg-font-size: var(--eds-type-scale-inter-400-font-size);
   --eds-typography-ui-body-dynamic-md-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-md-font-weight-normal: 400;
   --eds-typography-ui-body-dynamic-md-font-weight-lighter: 300;
@@ -137,7 +137,7 @@
   --eds-typography-ui-body-dynamic-md-cap-rounded: 8;
   --eds-typography-ui-body-dynamic-md-padding-baselined: -1;
   --eds-typography-ui-body-dynamic-md-padding-centred: -0.5;
-  --eds-typography-ui-body-dynamic-md-font-size: 12;
+  --eds-typography-ui-body-dynamic-md-font-size: var(--eds-type-scale-inter-300-font-size);
   --eds-typography-ui-body-dynamic-font-family: var(--eds-font-family-inter);
   --eds-typography-ui-body-dynamic-sm-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-sm-font-weight-normal: 400;
@@ -148,7 +148,7 @@
   --eds-typography-ui-body-dynamic-sm-cap-rounded: 8;
   --eds-typography-ui-body-dynamic-sm-padding-baselined: 0;
   --eds-typography-ui-body-dynamic-sm-padding-centred: 0;
-  --eds-typography-ui-body-dynamic-sm-font-size: 10.5;
+  --eds-typography-ui-body-dynamic-sm-font-size: var(--eds-type-scale-inter-200-font-size);
   --eds-typography-ui-body-dynamic-xs-font-weight-bolder: 500;
   --eds-typography-ui-body-dynamic-xs-font-weight-normal: 400;
   --eds-typography-ui-body-dynamic-xs-font-weight-lighter: 300;
@@ -158,7 +158,7 @@
   --eds-typography-ui-body-dynamic-xs-cap-rounded: 8;
   --eds-typography-ui-body-dynamic-xs-padding-baselined: 1;
   --eds-typography-ui-body-dynamic-xs-padding-centred: 0.5;
-  --eds-typography-ui-body-dynamic-xs-font-size: 9;
+  --eds-typography-ui-body-dynamic-xs-font-size: var(--eds-type-scale-inter-100-font-size);
   --eds-border-radius-pill-xl: var(--eds-spacing-62);
   --eds-border-radius-pill-lg: var(--eds-spacing-50);
   --eds-border-radius-pill-md: var(--eds-spacing-37);
