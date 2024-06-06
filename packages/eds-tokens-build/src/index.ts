@@ -147,12 +147,6 @@ StyleDictionary.registerTransform({
     )
   },
   transformer: (token) => {
-    const isNumber = token.$type === 'number'
-    if (!isNumber) return false
-
-    const isDefined = token?.value !== undefined
-    if (!isDefined) return false
-
     const fixedValue = toFixedWithoutTrailingZeroes(Number(token.value))
     return `${fixedValue}px`
   },
