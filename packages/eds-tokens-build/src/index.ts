@@ -8,10 +8,10 @@ const FILE_KEY_THEMES = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 const OKLCH_PRECISION = 3
-const rootVersion1 = './build/'
-const cssDistPath = `${rootVersion1}/css`
-const tsDistPath = `${rootVersion1}/ts`
-const jsonDistPath = `${rootVersion1}/json`
+const outputDirectory = './build'
+const cssDistPath = `${outputDirectory}/css`
+const tsDistPath = `${outputDirectory}/ts`
+const jsonDistPath = `${outputDirectory}/json`
 
 const outputReferences = true
 
@@ -128,7 +128,7 @@ const lightDark = StyleDictionary.extend({
 StyleDictionary.registerTransform({
   type: 'value',
   transitive: false,
-  name: 'eds/pxFormatted',
+  name: 'eds/css/pxFormatted',
   matcher: (token) => {
     const isNumber = token.$type === 'number'
     if (!isNumber) return false
@@ -155,7 +155,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   type: `value`,
   transitive: false,
-  name: `eds/pxToRem`,
+  name: `eds/css/pxToRem`,
   matcher: (token) => {
     const isNumber = token.$type === 'number'
     if (!isNumber) return false
@@ -163,17 +163,49 @@ StyleDictionary.registerTransform({
     const isDefined = token?.value !== undefined
     if (!isDefined) return false
 
-    const pxToRemMatchers = ['font', 'size', 'line-height', 'font-size']
-    const isFontMetricInPx =
+    const matchingPathSegments = [
+      'font',
+      'size',
+      'line-height',
+      'font-size',
+      'spacing',
+    ]
+    const isMatch =
       token?.path?.length > 0 &&
-      pxToRemMatchers.some((metric) => token.path.includes(metric))
+      matchingPathSegments.some((segment) => token.path.includes(segment))
 
-    const isSpacing = token?.path?.includes('spacing')
-
-    return isFontMetricInPx || isSpacing
+    return isMatch
   },
   transformer: (token) => {
     return transformNumberToRem(Number(token.value))
+  },
+})
+
+StyleDictionary.registerTransform({
+  type: `value`,
+  transitive: true,
+  name: `eds/css/spacing/shorthand`,
+  matcher: (token) => {
+    const isNumber = token.$type === 'number'
+    if (!isNumber) return false
+
+    const isDefined = token?.value !== undefined
+    if (!isDefined) return false
+
+    const matchingPathSegments = [
+      'stack-squished',
+      'stack-squared',
+      'stack-stretched',
+    ]
+    const isMatch =
+      token?.path?.length > 0 &&
+      matchingPathSegments.some((segment) => token.path.includes(segment))
+
+    return isMatch
+  },
+  transformer: (token) => {
+    const size = token.path[2]
+    return `${token.value} var(--eds-spacing-static-inline-${size})`
   },
 })
 
@@ -222,8 +254,9 @@ const _extend = ({
         buildPath: `${cssDistPath}/${dirName}/`,
         transforms: [
           'name/cti/kebab',
-          'eds/pxToRem',
-          'eds/pxFormatted',
+          'eds/css/spacing/shorthand',
+          'eds/css/pxToRem',
+          'eds/css/pxFormatted',
           'eds/font/quote',
           'color/oklch',
         ],
@@ -322,7 +355,7 @@ const spacingPrimitives = _extend({
   prefix: 'eds',
 })
 
-const typographyDensityComfortable = _extend({
+const densityComfortable = _extend({
   include: [SPACING_PRIMITIVE_SOURCE],
   source: [
     `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
@@ -334,7 +367,7 @@ const typographyDensityComfortable = _extend({
   filter: (token) => token.filePath.includes('Density'),
 })
 
-const typographyDensityCompact = _extend({
+const densityCompact = _extend({
   include: [SPACING_PRIMITIVE_SOURCE],
   source: [
     `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`,
@@ -343,10 +376,13 @@ const typographyDensityCompact = _extend({
   fileName: 'compact',
   prefix: 'eds',
   selector: '[data-density="compact"]',
-  filter: (token) => token.filePath.includes('Density'),
+  filter: (token) => {
+    const isDensityToken = token.filePath.includes('Density')
+    return isDensityToken
+  },
 })
 
-const typographyDensitySpacious = _extend({
+const densitySpacious = _extend({
   include: [SPACING_PRIMITIVE_SOURCE],
   source: [
     `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`,
@@ -364,9 +400,9 @@ export function run() {
   darkMode.buildAllPlatforms()
   lightDark.buildAllPlatforms()
   spacingPrimitives.buildAllPlatforms()
-  typographyDensityComfortable.buildAllPlatforms()
-  typographyDensityCompact.buildAllPlatforms()
-  typographyDensitySpacious.buildAllPlatforms()
+  densityComfortable.buildAllPlatforms()
+  densityCompact.buildAllPlatforms()
+  densitySpacious.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
