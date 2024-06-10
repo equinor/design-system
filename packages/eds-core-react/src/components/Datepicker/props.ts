@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactNode, HTMLAttributes } from 'react'
+import { MutableRefObject, ReactNode } from 'react'
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import { Variants } from '../types'
 import { HelperTextProps } from '../InputWrapper/HelperText'
@@ -89,8 +89,7 @@ export type DatePickerProps = Partial<{
    * Only applies when input is blurred
    */
   formatOptions?: DateFormatterOptions
-}> &
-  HTMLAttributes<HTMLDivElement>
+}>
 
 export type DateTimePickerProps = Omit<
   DatePickerProps,

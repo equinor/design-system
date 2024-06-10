@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  HTMLAttributes,
 } from 'react'
 import { DatePickerProps } from './props'
 import { Calendar } from './calendars/Calendar'
@@ -53,7 +54,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       helperProps,
       variant,
       ...props
-    }: DatePickerProps,
+    }: DatePickerProps & HTMLAttributes<HTMLDivElement>,
     forwardedRef: RefObject<HTMLDivElement>,
   ) => {
     timezone = timezone ?? defaultTimezone
