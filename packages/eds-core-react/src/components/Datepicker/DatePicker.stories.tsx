@@ -50,9 +50,6 @@ export const Introduction: StoryFn = (props: DatePickerProps) => {
         const str = v?.toISOString()
         action('onChange')(str)
       }}
-      onMouseEnter={() => console.log('test')}
-      className="TEST"
-      style={{ background: 'red' }}
     />
   )
 }
