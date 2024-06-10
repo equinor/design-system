@@ -295,53 +295,66 @@ const _extend = ({
 }
 
 export function run({ outputReferences } = { outputReferences: true }) {
+  console.info('Running Style Dictionary build script')
+  console.info('outputReferences:', outputReferences)
+
+  const systemName = 'eds'
+  const colorPrefix = `${systemName}-color`
+  const colorDirName = 'color'
+
+  const spacingDirName = 'spacing'
+
   const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
+  const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Spacing Primitives.Value.json`
+  const THEME_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`
+  const THEME_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`
+
+  const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
+  const DENSITY_COMPACT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`
+  const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
-    dirName: 'color',
+    dirName: colorDirName,
+    prefix: colorPrefix,
     fileName: 'primitives',
-    prefix: 'eds-color',
     outputReferences, // The primitives should not reference other tokens. This can always be false.
   })
 
   const lightMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [`./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`],
+    source: [THEME_LIGHT_SOURCE],
     filter: (token) => token.filePath.includes('Light'),
+    dirName: colorDirName,
+    prefix: colorPrefix,
     fileName: 'theme-light',
-    dirName: 'color',
-    prefix: 'eds-color',
     outputReferences,
   })
 
   const darkMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [`./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`],
+    source: [THEME_DARK_SOURCE],
     filter: (token) => token.filePath.includes('Dark'),
+    dirName: colorDirName,
+    prefix: colorPrefix,
     fileName: 'theme-dark',
-    dirName: 'color',
-    prefix: 'eds-color',
     selector: '[data-theme="dark"]',
     outputReferences,
   })
 
-  const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Spacing Primitives.Value.json`
-
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
-    dirName: 'spacing',
+    dirName: spacingDirName,
+    prefix: systemName,
     fileName: 'primitives',
-    prefix: 'eds',
   })
+
   const densityComfortable = _extend({
     include: [SPACING_PRIMITIVE_SOURCE],
-    source: [
-      `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
-    ],
-    dirName: 'spacing',
+    source: [DENSITY_COMFORTABLE_SOURCE],
+    dirName: spacingDirName,
+    prefix: systemName,
     fileName: 'comfortable',
-    prefix: 'eds',
     selector: ':root, [data-density="comfortable"]',
     filter: (token) => token.filePath.includes('Density'),
     outputReferences,
@@ -349,12 +362,10 @@ export function run({ outputReferences } = { outputReferences: true }) {
 
   const densityCompact = _extend({
     include: [SPACING_PRIMITIVE_SOURCE],
-    source: [
-      `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`,
-    ],
-    dirName: 'spacing',
+    source: [DENSITY_COMPACT_SOURCE],
+    dirName: spacingDirName,
+    prefix: systemName,
     fileName: 'compact',
-    prefix: 'eds',
     selector: '[data-density="compact"]',
     filter: (token) => {
       const isDensityToken = token.filePath.includes('Density')
@@ -365,24 +376,22 @@ export function run({ outputReferences } = { outputReferences: true }) {
 
   const densitySpacious = _extend({
     include: [SPACING_PRIMITIVE_SOURCE],
-    source: [
-      `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`,
-    ],
-    dirName: 'spacing',
+    source: [DENSITY_SPACIOUS_SOURCE],
+    dirName: spacingDirName,
+    prefix: systemName,
     fileName: 'spacious',
-    prefix: 'eds',
     selector: '[data-density="Spacious"]',
     filter: (token) => token.filePath.includes('Density'),
     outputReferences,
   })
 
   const lightDark = StyleDictionary.extend({
-    include: [`./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`],
-    source: [`./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`],
+    include: [COLOR_PRIMITIVE_SOURCE],
+    source: [THEME_LIGHT_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: 'eds-color',
+        prefix: colorPrefix,
         buildPath: `${cssDistPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [
@@ -399,10 +408,36 @@ export function run({ outputReferences } = { outputReferences: true }) {
       },
     },
   })
+
+  const lightDarkTrimmed = StyleDictionary.extend({
+    include: [COLOR_PRIMITIVE_SOURCE],
+    source: [THEME_LIGHT_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: colorPrefix,
+        buildPath: `${cssDistPath}/`,
+        transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
+        files: [
+          {
+            filter: (token) => token.filePath.includes('Light'),
+            destination: 'variables-trimmed.css',
+            format: 'css/variables',
+            options: {
+              fileHeader,
+              outputReferences: false, // The trimmed theme should not reference other tokens
+            },
+          },
+        ],
+      },
+    },
+  })
+
   primitives.buildAllPlatforms()
   lightMode.buildAllPlatforms()
   darkMode.buildAllPlatforms()
   lightDark.buildAllPlatforms()
+  lightDarkTrimmed.buildAllPlatforms()
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
   densityCompact.buildAllPlatforms()
