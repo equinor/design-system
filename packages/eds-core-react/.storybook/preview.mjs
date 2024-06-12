@@ -1,3 +1,6 @@
+//these imports are temporary for typograpy testing, will be replaced by final variables-verbose.css
+import '@equinor/eds-tokens/css/spacing/primitives.css'
+import '@equinor/eds-tokens/css/spacing/comfortable.css'
 const preview = {
   viewMode: 'docs',
   parameters: {

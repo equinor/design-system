@@ -1,16 +1,14 @@
 import { UIText, UITextProps } from './UIText'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
-import { PropertyDocumentation } from '../_components/PropertyDocumentation'
-import { uiTextTokens } from '../_typography.tokens'
 
-const TEXT = 'This is some text, hi ho! This is line two'
+const TEXT = 'The quick brown fox jumps over the lazy dog'
 
 const meta: Meta<typeof UIText> = {
   title: 'Typography/UIText',
   component: UIText,
   args: {
-    size: 'BASE',
+    size: 'md',
   },
   argTypes: {
     as: {
@@ -25,7 +23,7 @@ const meta: Meta<typeof UIText> = {
           summary: 'TypographySize',
         },
       },
-      options: ['3XS', '2XS', 'XS', 'SM', 'BASE', 'LG'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
 
       control: {
         type: 'select',
@@ -46,26 +44,15 @@ const meta: Meta<typeof UIText> = {
 export default meta
 
 export const Introduction: StoryFn<UITextProps> = (args) => {
-  return (
-    <UIText {...args} contentEditable>
-      This text is editable
-    </UIText>
-  )
+  return <UIText {...args}>The quick brown fox jumps over the lazy dog</UIText>
 }
 
 export const Demo: StoryFn<UITextProps> = () => {
   return (
     <>
-      <UIText size="LG" as="h1">
-        LG
-      </UIText>
-      <UIText size="2XS" as="h2">
-        2XS
-      </UIText>
-
-      <UIText size="BASE" as="h2">
-        {TEXT}
-      </UIText>
+      <UIText size="lg">lg</UIText>
+      <UIText size="xs">xs</UIText>
+      <UIText>{TEXT}</UIText>
     </>
   )
 }
@@ -73,22 +60,11 @@ export const Demo: StoryFn<UITextProps> = () => {
 export const Sizes: StoryFn<UITextProps> = () => {
   return (
     <>
-      <UIText size="3XS">{TEXT}</UIText>
-      <PropertyDocumentation size="3XS" tokens={uiTextTokens} />
-      <UIText size="2XS">{TEXT}</UIText>
-      <PropertyDocumentation size="2XS" tokens={uiTextTokens} />
-      <UIText size="XS">{TEXT}</UIText>
-      <PropertyDocumentation size="XS" tokens={uiTextTokens} />
-      <UIText size="SM">{TEXT}</UIText>
-      <PropertyDocumentation size="SM" tokens={uiTextTokens} />
-      <UIText size="BASE" as="h2">
-        {TEXT}
-      </UIText>
-      <PropertyDocumentation size="BASE" tokens={uiTextTokens} />
-      <UIText size="LG" as="h1">
-        {TEXT}
-      </UIText>
-      <PropertyDocumentation size="LG" tokens={uiTextTokens} />
+      <UIText size="xs">{TEXT}</UIText>
+      <UIText size="sm">{TEXT}</UIText>
+      <UIText size="md">{TEXT}</UIText>
+      <UIText size="lg">{TEXT}</UIText>
+      <UIText size="xl">{TEXT}</UIText>
     </>
   )
 }
