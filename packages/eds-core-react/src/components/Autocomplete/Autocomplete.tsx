@@ -57,7 +57,7 @@ const Container = styled.div`
 `
 
 const AllSymbol = Symbol('Select all')
-
+// MARK: styled components
 const StyledList = styled(List)(
   ({ theme }) => css`
     background-color: ${theme.background};
@@ -108,7 +108,7 @@ const StyledButton = styled(Button)(
     width: ${button.height};
   `,
 )
-
+// MARK: outside functions
 // Typescript can struggle with parsing generic arrow functions in a .tsx file (see https://github.com/microsoft/TypeScript/issues/15713)
 // Workaround is to add a trailing , after T, which tricks the compiler, but also have to ignore prettier rule.
 // prettier-ignore
@@ -222,7 +222,7 @@ const handleListFocus = (e: FocusEvent<HTMLElement>) => {
 }
 
 const defaultOptionDisabled = () => false
-
+// MARK: types
 // prettier-ignore
 type OptionLabelProps<T,> = T extends string | number
   ? {
@@ -333,6 +333,7 @@ export type AutocompleteProps<T> = {
 } & HTMLAttributes<HTMLDivElement> &
   OptionLabelProps<T>
 
+// MARK: component
 function AutocompleteInner<T>(
   props: AutocompleteProps<T>,
   ref: React.ForwardedRef<HTMLDivElement>,
@@ -371,6 +372,7 @@ function AutocompleteInner<T>(
     ...other
   } = props
 
+  // MARK: initializing data/setup
   const selectedOptions = _selectedOptions
     ? itemCompare
       ? options.filter((item) =>
@@ -473,6 +475,7 @@ function AutocompleteInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
+  // MARK: select all logic
   const enabledItems = useMemo(() => {
     const disabledItemsSet = new Set(inputOptions.filter(optionDisabled))
     return inputOptions.filter((x) => !disabledItemsSet.has(x))
@@ -507,6 +510,7 @@ function AutocompleteInner<T>(
     }
   }
 
+  // MARK: getLabel
   const getLabel = useCallback(
     (item: T) => {
       //note: non strict check for null or undefined to allow 0
@@ -539,6 +543,7 @@ function AutocompleteInner<T>(
     [optionLabel],
   )
 
+  // MARK: setup virtualizer
   const scrollContainer = useRef<HTMLUListElement>(null)
   const rowVirtualizer = useVirtualizer({
     count: availableItems.length,
@@ -554,6 +559,7 @@ function AutocompleteInner<T>(
     rowVirtualizer?.measure?.()
   }, [rowVirtualizer, density])
 
+  // MARK: downshift state
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
@@ -627,7 +633,7 @@ function AutocompleteInner<T>(
       }
     },
   }
-
+  // MARK: singleselect specific
   if (!multiple) {
     comboBoxProps = {
       ...comboBoxProps,
@@ -704,7 +710,7 @@ function AutocompleteInner<T>(
       }
     }
   }
-
+  // MARK: multiselect specific
   if (multiple) {
     placeholderText =
       typeof placeholderText !== 'undefined'
@@ -802,6 +808,7 @@ function AutocompleteInner<T>(
     reset: resetCombobox,
   } = useCombobox(comboBoxProps)
 
+  // MARK: floating-ui setup
   const { x, y, refs, update, strategy } = useFloating<HTMLInputElement>({
     placement: 'bottom-start',
     middleware: [
@@ -829,6 +836,7 @@ function AutocompleteInner<T>(
     }
   }, [refs.reference, refs.floating, update, isOpen])
 
+  // MARK: popover toggle
   useIsomorphicLayoutEffect(() => {
     if (isOpen) {
       refs.floating.current.showPopover()
@@ -854,6 +862,7 @@ function AutocompleteInner<T>(
     [selectedItems, getLabel],
   )
 
+  // MARK: optionsList
   const optionsList = (
     <StyledPopover
       popover="manual"
@@ -985,6 +994,7 @@ function AutocompleteInner<T>(
   )
   const consolidatedEvents = mergeEventsFromRight(other, inputProps)
 
+  // MARK: input
   return (
     <ThemeProvider theme={token}>
       <Container className={className} style={style} ref={ref}>
@@ -1049,7 +1059,7 @@ function AutocompleteInner<T>(
     </ThemeProvider>
   )
 }
-
+// MARK: exported component
 export const Autocomplete = forwardRef(AutocompleteInner) as <T>(
   props: AutocompleteProps<T> & {
     ref?: React.ForwardedRef<HTMLDivElement>
