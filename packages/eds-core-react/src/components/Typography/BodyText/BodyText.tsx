@@ -1,35 +1,34 @@
 import { forwardRef } from 'react'
-import { bodyTextTokens as tokens } from '../_typography.tokens'
 import { Typography } from '../_components/Typography'
 import { TypographyProps } from '../typography.types'
-import { DEFAULT_TEXT_ELEMENT, DEFAULT_TEXT_SIZE } from '../_defaults'
-import { getTypographyProperties } from '../typography.utils'
 import { OverridableComponent } from '@equinor/eds-utils'
 
 export type BodyTextProps = TypographyProps
+const INTER_VERTICAL_OFFSET = 0.002
 
 export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
   forwardRef(function BodyText(
-    { size = DEFAULT_TEXT_SIZE, as = DEFAULT_TEXT_ELEMENT, children, ...rest },
+    {
+      size = 'md',
+      lineHeight = 'default',
+      fontWeight = 'normal',
+      letterSpacing = 'normal',
+      as = 'p',
+      children,
+      ...rest
+    },
     ref,
   ) {
-    const {
-      fontFamily,
-      fontSizeInRem: fontSize,
-      lineHeightInRem: lineHeight,
-      verticalOffset,
-    } = getTypographyProperties({ size, tokens })
-
-    //@todo: optional color prop to set primary/secondary/tertiary text? (default should be  inherit)
     return (
       <Typography
         ref={ref}
         as={as}
-        $fontSize={fontSize}
+        $type={'ui-body-static'}
+        $offset={INTER_VERTICAL_OFFSET}
+        $size={size}
         $lineHeight={lineHeight}
-        $fontFamily={fontFamily}
-        $offset={verticalOffset}
-        $onGrid={true}
+        $fontWeight={fontWeight}
+        $letterSpacing={letterSpacing}
         {...rest}
       >
         {children}

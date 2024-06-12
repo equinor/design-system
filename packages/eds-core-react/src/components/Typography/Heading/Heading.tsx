@@ -1,9 +1,6 @@
 import { forwardRef, ElementType } from 'react'
 import { TypographyProps } from '../typography.types'
 import { Typography } from '../_components/Typography'
-import { headingTokens as tokens } from '../_typography.tokens'
-import { DEFAULT_TEXT_SIZE } from '../_defaults'
-import { getTypographyProperties } from '../typography.utils'
 import { OverridableComponent } from '@equinor/eds-utils'
 
 export type HeadingProps = TypographyProps & {
@@ -11,26 +8,31 @@ export type HeadingProps = TypographyProps & {
   as: ElementType
 }
 
+const EQUINOR_VERTICAL_OFFSET = 0.06
+
 export const Heading: OverridableComponent<HeadingProps, HTMLElement> =
   forwardRef(function Heading(
-    { size = DEFAULT_TEXT_SIZE, as, children, ...rest },
+    {
+      size = 'md',
+      lineHeight = 'default',
+      fontWeight = 'normal',
+      letterSpacing = 'normal',
+      as,
+      children,
+      ...rest
+    },
     ref,
   ) {
-    const {
-      fontFamily,
-      fontSizeInRem: fontSize,
-      lineHeightInRem: lineHeight,
-      verticalOffset,
-    } = getTypographyProperties({ size, tokens })
-
     return (
       <Typography
         ref={ref}
-        as={as}
-        $fontSize={fontSize}
         $lineHeight={lineHeight}
-        $fontFamily={fontFamily}
-        $offset={verticalOffset}
+        $type={'header'}
+        $size={size}
+        $offset={EQUINOR_VERTICAL_OFFSET}
+        $fontWeight={fontWeight}
+        $letterSpacing={letterSpacing}
+        as={as}
         {...rest}
       >
         {children}
