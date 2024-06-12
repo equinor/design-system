@@ -97,9 +97,5 @@
     "rollup-plugin-delete": "^2.0.0",
     "shx": "^0.3.4",
     "typescript": "^5.4.5"
-  },
-  "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
   }
 }

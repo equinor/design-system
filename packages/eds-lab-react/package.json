@@ -97,9 +97,5 @@
     "downshift": "9.0.6",
     "react-datepicker": "^6.2.0",
     "react-fast-compare": "3.2.2"
-  },
-  "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
   }
 }

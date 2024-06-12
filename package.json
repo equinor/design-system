@@ -1,9 +1,5 @@
 {
   "name": "eds",
-  "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
-  },
   "scripts": {
     "lint": "eslint",
     "lint:all": "pnpm run lint .",

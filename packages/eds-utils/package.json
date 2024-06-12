@@ -82,9 +82,5 @@
   "dependencies": {
     "@babel/runtime": "^7.24.0",
     "@equinor/eds-tokens": "workspace:*"
-  },
-  "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
   }
 }
