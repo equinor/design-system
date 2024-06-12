@@ -1,36 +1,43 @@
 // eslint-disable-next-line import/no-named-as-default
 import { HTMLAttributes, AnchorHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
+import {
+  TypographySize,
+  TypographyLineHeight,
+  TypographyElement,
+  TypographyFontWeight,
+  TypographyLetterSpacing,
+} from '../typography.types'
 
 export type StyleHeadingProps = {
-  $fontFamily: string
-  $fontSize: string
-  $lineHeight: string
+  $type: TypographyElement
+  $size: TypographySize
+  $lineHeight: TypographyLineHeight
+  $fontWeight: TypographyFontWeight
+  $letterSpacing: TypographyLetterSpacing
   $offset?: number
   $onGrid?: boolean
   $color?: string
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
 export const Typography = styled.p<StyleHeadingProps>`
-  font-weight: 400; //font weight will be provided via token probably
   margin: 0;
   ${({
-    $fontFamily,
-    $fontSize,
+    $type,
+    $size,
     $lineHeight,
+    $fontWeight,
+    $letterSpacing,
     $offset = 0,
     $onGrid = true,
     $color,
   }) => css`
-    //populate old token fallbacks with new tokens? but these new components will REQUIRE new tokens no? so maybe this is pointless
-    --eds_text_static_icons__default: var(--eds-color-text-primary);
-    --eds_text_static_icons__secondary: var(--eds-color-text-secondary);
-    --eds_text_static_icons__tertiary: var(--eds-color-text-tertiary);
-
     --_text-preset-color: ${$color};
-    font-family: ${$fontFamily};
-    font-size: ${$fontSize};
-    line-height: ${$lineHeight};
+    font-family: ${`var(--eds-typography-${$type}-font-family)`};
+    font-size: ${`var(--eds-typography-${$type}-${$size}-font-size)`};
+    line-height: ${`var(--eds-typography-${$type}-${$size}-lineheight-${$lineHeight})`};
+    font-weight: ${`var(--eds-typography-${$type}-${$size}-font-weight-${$fontWeight})`};
+    letter-spacing: ${`var(--eds-typography-${$type}-${$size}-tracking-${$letterSpacing})`};
     //how to calculate unitless line-height rounded to 4px in css
     //line-height: round(1em * 1.5, 4px);
     color: var(--_text-preset-color, inherit);
