@@ -1,9 +1,6 @@
 import { forwardRef } from 'react'
-import { TypographyProps } from '../typography.types'
 import { Typography } from '../_components/Typography'
-import { uiTextTokens as tokens } from '../_typography.tokens'
-import { DEFAULT_TEXT_SIZE, DEFAULT_TEXT_ELEMENT } from '../_defaults'
-import { getTypographyProperties } from '../typography.utils'
+import { TypographyProps } from '../typography.types'
 import { OverridableComponent } from '@equinor/eds-utils'
 
 export type UITextProps = TypographyProps & {
@@ -16,29 +13,26 @@ export type UITextProps = TypographyProps & {
 export const UIText: OverridableComponent<UITextProps, HTMLElement> =
   forwardRef(function UIText(
     {
-      size = DEFAULT_TEXT_SIZE,
-      as = DEFAULT_TEXT_ELEMENT,
+      size = 'md',
+      lineHeight = 'default',
+      fontWeight = 'normal',
+      letterSpacing = 'normal',
+      as = 'p',
       onGrid = false,
       children,
       ...rest
     },
     ref,
   ) {
-    const {
-      fontFamily,
-      fontSizeInRem: fontSize,
-      lineHeightInRem: lineHeight,
-      verticalOffset,
-    } = getTypographyProperties({ size, tokens })
-
     return (
       <Typography
         ref={ref}
         as={as}
-        $fontSize={fontSize}
+        $type={'ui-body-static'}
+        $size={size}
         $lineHeight={lineHeight}
-        $fontFamily={fontFamily}
-        $offset={verticalOffset}
+        $fontWeight={fontWeight}
+        $letterSpacing={letterSpacing}
         $onGrid={onGrid}
         {...rest}
       >

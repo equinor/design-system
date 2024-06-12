@@ -1,16 +1,14 @@
 import { Heading, HeadingProps } from './Heading'
 import { StoryFn, Meta } from '@storybook/react'
 import { BaselineGrid } from '../_components/BaselineGrid'
-import { PropertyDocumentation } from '../_components/PropertyDocumentation'
-import { headingTokens } from '../_typography.tokens'
 
-const TEXT = 'This is some text, hi ho! This is line two'
+const TEXT = 'The quick brown fox jumps over the lazy dog'
 
 const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
   component: Heading,
   args: {
-    size: 'BASE',
+    size: 'md',
     as: 'h2',
   },
   argTypes: {
@@ -31,7 +29,7 @@ const meta: Meta<typeof Heading> = {
           summary: 'TypographySize',
         },
       },
-      options: ['3XS', '2XS', 'XS', 'SM', 'BASE', 'LG'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
       control: {
         type: 'select',
       },
@@ -52,23 +50,21 @@ export default meta
 
 export const Introduction: StoryFn<HeadingProps> = (args) => {
   return (
-    <Heading {...args} contentEditable>
-      This text is editable
-    </Heading>
+    <Heading {...args}>The quick brown fox jumps over the lazy dog</Heading>
   )
 }
 
 export const Demo: StoryFn<HeadingProps> = () => {
   return (
     <>
-      <Heading size="LG" as="h1">
+      <Heading size="lg" as="h1">
         Heading
       </Heading>
-      <Heading size="2XS" as="h2">
+      <Heading size="xs" as="h2">
         Subheading
       </Heading>
 
-      <Heading size="BASE" as="h2">
+      <Heading size="md" as="h2">
         {TEXT}
       </Heading>
     </>
@@ -78,30 +74,21 @@ export const Demo: StoryFn<HeadingProps> = () => {
 export const Sizes: StoryFn<HeadingProps> = () => {
   return (
     <>
-      <Heading size="3XS" as="h4">
+      <Heading size="xs" as="h4">
         {TEXT}
       </Heading>
-      <PropertyDocumentation size="3XS" tokens={headingTokens} />
-      <Heading size="2XS" as="h4">
+      <Heading size="sm" as="h4">
         {TEXT}
       </Heading>
-      <PropertyDocumentation size="2XS" tokens={headingTokens} />
-      <Heading size="XS" as="h4">
+      <Heading size="md" as="h4">
         {TEXT}
       </Heading>
-      <PropertyDocumentation size="XS" tokens={headingTokens} />
-      <Heading size="SM" as="h4">
+      <Heading size="lg" as="h4">
         {TEXT}
       </Heading>
-      <PropertyDocumentation size="SM" tokens={headingTokens} />
-      <Heading size="BASE" as="h2">
+      <Heading size="xl" as="h4">
         {TEXT}
       </Heading>
-      <PropertyDocumentation size="BASE" tokens={headingTokens} />
-      <Heading size="LG" as="h1">
-        {TEXT}
-      </Heading>
-      <PropertyDocumentation size="LG" tokens={headingTokens} />
     </>
   )
 }
