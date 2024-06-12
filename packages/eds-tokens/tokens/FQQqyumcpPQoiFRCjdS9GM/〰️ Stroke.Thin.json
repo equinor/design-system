@@ -1,0 +1,16 @@
+{
+  "Stroke": {
+    "thickness": {
+      "$type": "number",
+      "$value": "{sizing.stroke.thin}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

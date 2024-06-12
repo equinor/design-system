@@ -455,7 +455,7 @@
         "XS": {
           "Font size": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.font-size}",
+            "$value": "{typography.ui-body.xs.font-size}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -467,7 +467,7 @@
           },
           "Padding centred": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.padding-centred}",
+            "$value": "{typography.ui-body.xs.padding-centred}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -479,7 +479,7 @@
           },
           "Padding baselined": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.padding-baselined}",
+            "$value": "{typography.ui-body.xs.padding-baselined}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -491,7 +491,7 @@
           },
           "Cap rounded": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.cap-rounded}",
+            "$value": "{typography.ui-body.xs.cap-rounded}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -503,7 +503,7 @@
           },
           "Tracking tight": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.tracking-tight}",
+            "$value": "{typography.ui-body.xs.tracking-tight}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -515,7 +515,7 @@
           },
           "Tracking normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.tracking-normal}",
+            "$value": "{typography.ui-body.xs.tracking-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -527,7 +527,7 @@
           },
           "Tracking loose": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.tracking-loose}",
+            "$value": "{typography.ui-body.xs.tracking-loose}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -539,7 +539,7 @@
           },
           "Font weight lighter": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.font-weight-lighter}",
+            "$value": "{typography.ui-body.xs.font-weight-lighter}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -551,7 +551,7 @@
           },
           "Font weight normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.font-weight-normal}",
+            "$value": "{typography.ui-body.xs.font-weight-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -563,7 +563,7 @@
           },
           "Font weight bolder": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.font-weight-bolder}",
+            "$value": "{typography.ui-body.xs.font-weight-bolder}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -575,7 +575,7 @@
           },
           "Lineheight default": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.lineheight-default}",
+            "$value": "{typography.ui-body.xs.lineheight-default}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -587,7 +587,7 @@
           },
           "Lineheight squished": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xs.lineheight-squished}",
+            "$value": "{typography.ui-body.xs.lineheight-squished}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -601,7 +601,7 @@
         "SM": {
           "Font size": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.font-size}",
+            "$value": "{typography.ui-body.sm.font-size}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -613,7 +613,7 @@
           },
           "Padding centred": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.padding-centred}",
+            "$value": "{typography.ui-body.sm.padding-centred}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -625,7 +625,7 @@
           },
           "Padding baselined": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.padding-baselined}",
+            "$value": "{typography.ui-body.sm.padding-baselined}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -637,7 +637,7 @@
           },
           "Cap rounded": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.cap-rounded}",
+            "$value": "{typography.ui-body.sm.cap-rounded}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -649,7 +649,7 @@
           },
           "Tracking tight": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.tracking-tight}",
+            "$value": "{typography.ui-body.sm.tracking-tight}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -661,7 +661,7 @@
           },
           "Tracking normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.tracking-normal}",
+            "$value": "{typography.ui-body.sm.tracking-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -673,7 +673,7 @@
           },
           "Tracking loose": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.tracking-loose}",
+            "$value": "{typography.ui-body.sm.tracking-loose}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -685,7 +685,7 @@
           },
           "Font weight lighter": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.font-weight-lighter}",
+            "$value": "{typography.ui-body.sm.font-weight-lighter}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -697,7 +697,7 @@
           },
           "Font weight normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.font-weight-normal}",
+            "$value": "{typography.ui-body.sm.font-weight-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -709,7 +709,7 @@
           },
           "Font weight bolder": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.font-weight-bolder}",
+            "$value": "{typography.ui-body.sm.font-weight-bolder}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -721,7 +721,7 @@
           },
           "Lineheight default": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.lineheight-default}",
+            "$value": "{typography.ui-body.sm.lineheight-default}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -733,7 +733,7 @@
           },
           "Lineheight squished": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.sm.lineheight-squished}",
+            "$value": "{typography.ui-body.sm.lineheight-squished}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -747,7 +747,7 @@
         "MD": {
           "Font size": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.font-size}",
+            "$value": "{typography.ui-body.md.font-size}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -759,7 +759,7 @@
           },
           "Padding centred": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.padding-centred}",
+            "$value": "{typography.ui-body.md.padding-centred}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -771,7 +771,7 @@
           },
           "Padding baselined": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.padding-baselined}",
+            "$value": "{typography.ui-body.md.padding-baselined}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -783,7 +783,7 @@
           },
           "Cap rounded": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.cap-rounded}",
+            "$value": "{typography.ui-body.md.cap-rounded}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -795,7 +795,7 @@
           },
           "Tracking tight": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.tracking-tight}",
+            "$value": "{typography.ui-body.md.tracking-tight}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -807,7 +807,7 @@
           },
           "Tracking normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.tracking-normal}",
+            "$value": "{typography.ui-body.md.tracking-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -819,7 +819,7 @@
           },
           "Tracking loose": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.tracking-loose}",
+            "$value": "{typography.ui-body.md.tracking-loose}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -831,7 +831,7 @@
           },
           "Font weight lighter": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.font-weight-lighter}",
+            "$value": "{typography.ui-body.md.font-weight-lighter}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -843,7 +843,7 @@
           },
           "Font weight normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.font-weight-normal}",
+            "$value": "{typography.ui-body.md.font-weight-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -855,7 +855,7 @@
           },
           "Font weight bolder": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.font-weight-bolder}",
+            "$value": "{typography.ui-body.md.font-weight-bolder}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -867,7 +867,7 @@
           },
           "Lineheight default": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.lineheight-default}",
+            "$value": "{typography.ui-body.md.lineheight-default}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -879,7 +879,7 @@
           },
           "Lineheight squished": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.md.lineheight-squished}",
+            "$value": "{typography.ui-body.md.lineheight-squished}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -893,7 +893,7 @@
         "LG": {
           "Font size": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.font-size}",
+            "$value": "{typography.ui-body.lg.font-size}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -905,7 +905,7 @@
           },
           "Padding centred": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.padding-centred}",
+            "$value": "{typography.ui-body.lg.padding-centred}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -917,7 +917,7 @@
           },
           "Padding baselined": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.padding-baselined}",
+            "$value": "{typography.ui-body.lg.padding-baselined}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -929,7 +929,7 @@
           },
           "Cap rounded": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.cap-rounded}",
+            "$value": "{typography.ui-body.lg.cap-rounded}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -941,7 +941,7 @@
           },
           "Tracking tight": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.tracking-tight}",
+            "$value": "{typography.ui-body.lg.tracking-tight}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -953,7 +953,7 @@
           },
           "Tracking normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.tracking-normal}",
+            "$value": "{typography.ui-body.lg.tracking-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -965,7 +965,7 @@
           },
           "Tracking loose": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.tracking-loose}",
+            "$value": "{typography.ui-body.lg.tracking-loose}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -977,7 +977,7 @@
           },
           "Font weight lighter": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.font-weight-lighter}",
+            "$value": "{typography.ui-body.lg.font-weight-lighter}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -989,7 +989,7 @@
           },
           "Font weight normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.font-weight-normal}",
+            "$value": "{typography.ui-body.lg.font-weight-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1001,7 +1001,7 @@
           },
           "Font weight bolder": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.font-weight-bolder}",
+            "$value": "{typography.ui-body.lg.font-weight-bolder}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1013,7 +1013,7 @@
           },
           "Lineheight default": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.lineheight-default}",
+            "$value": "{typography.ui-body.lg.lineheight-default}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1025,7 +1025,7 @@
           },
           "Lineheight squished": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.lg.lineheight-squished}",
+            "$value": "{typography.ui-body.lg.lineheight-squished}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1039,7 +1039,7 @@
         "XL": {
           "Font size": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.font-size}",
+            "$value": "{typography.ui-body.xl.font-size}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1051,7 +1051,7 @@
           },
           "Padding centred": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.padding-centred}",
+            "$value": "{typography.ui-body.xl.padding-centred}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1063,7 +1063,7 @@
           },
           "Padding baselined": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.padding-baselined}",
+            "$value": "{typography.ui-body.xl.padding-baselined}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1075,7 +1075,7 @@
           },
           "Cap rounded": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.cap-rounded}",
+            "$value": "{typography.ui-body.xl.cap-rounded}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1087,7 +1087,7 @@
           },
           "Tracking tight": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.tracking-tight}",
+            "$value": "{typography.ui-body.xl.tracking-tight}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1099,7 +1099,7 @@
           },
           "Tracking normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.tracking-normal}",
+            "$value": "{typography.ui-body.xl.tracking-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1111,7 +1111,7 @@
           },
           "Tracking loose": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.tracking-loose}",
+            "$value": "{typography.ui-body.xl.tracking-loose}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1123,7 +1123,7 @@
           },
           "Font weight lighter": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.font-weight-lighter}",
+            "$value": "{typography.ui-body.xl.font-weight-lighter}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1135,7 +1135,7 @@
           },
           "Font weight normal": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.font-weight-normal}",
+            "$value": "{typography.ui-body.xl.font-weight-normal}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1147,7 +1147,7 @@
           },
           "Font weight bolder": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.font-weight-bolder}",
+            "$value": "{typography.ui-body.xl.font-weight-bolder}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1159,7 +1159,7 @@
           },
           "Lineheight default": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.lineheight-default}",
+            "$value": "{typography.ui-body.xl.lineheight-default}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1171,7 +1171,7 @@
           },
           "Lineheight squished": {
             "$type": "number",
-            "$value": "{typography.ui-body-dynamic.xl.lineheight-squished}",
+            "$value": "{typography.ui-body.xl.lineheight-squished}",
             "$description": "",
             "$extensions": {
               "com.figma": {

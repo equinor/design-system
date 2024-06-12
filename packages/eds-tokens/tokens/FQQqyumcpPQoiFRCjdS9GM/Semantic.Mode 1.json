@@ -1,66 +1,6 @@
 {
-  "Padding": {
+  "Selectable": {
     "Horisontal padding": {
-      "$type": "number",
-      "$value": "{Padding horizontal}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        }
-      }
-    },
-    "Vertical padding": {
-      "$type": "number",
-      "$value": "{Padding vertical}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        }
-      }
-    }
-  },
-  "Gap": {
-    "Horisontal gap": {
-      "$type": "number",
-      "$value": "{Gap horizontal}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        }
-      }
-    },
-    "Vertical gap": {
-      "$type": "number",
-      "$value": "{Gap vertical}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
-        }
-      }
-    }
-  },
-  "Selectable Dimensions": {
-    "Horizontal padding": {
       "$type": "number",
       "$value": "{Selectable.Spacing.Inline}",
       "$description": "",
@@ -87,10 +27,108 @@
           "codeSyntax": {}
         }
       }
+    },
+    "Icon width": {
+      "$type": "number",
+      "$value": "{Icon.Width}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon height": {
+      "$type": "number",
+      "$value": "{Icon.Height}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon container width": {
+      "$type": "number",
+      "$value": "{Icon.Container width}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon container height": {
+      "$type": "number",
+      "$value": "{Icon.Container height}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Horisontal gap": {
+      "$type": "number",
+      "$value": "{gap-horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical gap": {
+      "$type": "number",
+      "$value": "{gap-vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Size (fixed)": {
+      "$type": "number",
+      "$value": "{Size.Selectables.Size}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
     }
   },
-  "Container Dimensions": {
-    "Horizontal padding": {
+  "Container": {
+    "Horisontal padding": {
       "$type": "number",
       "$value": "{Container.Spacing.Inline}",
       "$description": "",
@@ -117,10 +155,38 @@
           "codeSyntax": {}
         }
       }
+    },
+    "Horisontal gap": {
+      "$type": "number",
+      "$value": "{spacing.inline.MD}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical gap": {
+      "$type": "number",
+      "$value": "{spacing.stack.MD}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
     }
   },
-  "Page Dimensions": {
-    "Horizontal padding": {
+  "Page": {
+    "Horisontal padding": {
       "$type": "number",
       "$value": "{Page.Spacing.Inline}",
       "$description": "",
@@ -147,6 +213,148 @@
           "codeSyntax": {}
         }
       }
+    },
+    "Horisontal gap": {
+      "$type": "number",
+      "$value": "{spacing.inline.XL}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical gap": {
+      "$type": "number",
+      "$value": "{spacing.stack.XL}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Generic": {
+    "Horisontal padding": {
+      "$type": "number",
+      "$value": "{Padding horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical padding": {
+      "$type": "number",
+      "$value": "{Padding vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Horisontal gap": {
+      "$type": "number",
+      "$value": "{Gap horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical gap": {
+      "$type": "number",
+      "$value": "{Gap vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon container width": {
+      "$type": "number",
+      "$value": "{Icon.Container width}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon container height": {
+      "$type": "number",
+      "$value": "{Icon.Container height}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Corner radius": {
+      "$type": "number",
+      "$value": "{Border.radius}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Stroke width": {
+      "$type": "number",
+      "$value": "{Stroke.thickness}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": {}
+        }
+      }
     }
   },
   "Typography": {
@@ -158,7 +366,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "FONT_FAMILY"
           ],
           "codeSyntax": {}
         }
@@ -172,7 +380,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "FONT_SIZE"
           ],
           "codeSyntax": {}
         }
@@ -186,7 +394,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "LINE_HEIGHT"
           ],
           "codeSyntax": {}
         }
@@ -200,7 +408,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "LETTER_SPACING"
           ],
           "codeSyntax": {}
         }
@@ -214,7 +422,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "GAP"
           ],
           "codeSyntax": {}
         }
@@ -228,7 +436,21 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Font weight": {
+      "$type": "number",
+      "$value": "{Font Weight}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "FONT_STYLE"
           ],
           "codeSyntax": {}
         }

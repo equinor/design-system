@@ -1,0 +1,52 @@
+{
+  "Icon": {
+    "Width": {
+      "$type": "number",
+      "$value": "{sizing.icon.sm.width}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Height": {
+      "$type": "number",
+      "$value": "{sizing.icon.sm.height}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Container width": {
+      "$type": "number",
+      "$value": "{sizing.icon.sm.container-width}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Container height": {
+      "$type": "number",
+      "$value": "{sizing.icon.sm.container-height}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

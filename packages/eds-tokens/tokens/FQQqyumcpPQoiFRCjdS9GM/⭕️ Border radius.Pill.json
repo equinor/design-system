@@ -1,0 +1,16 @@
+{
+  "Border": {
+    "radius": {
+      "$type": "number",
+      "$value": "{border-radius.pill}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}
