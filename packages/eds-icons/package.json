@@ -41,9 +41,5 @@
     "rollup": "^4.2.0",
     "rollup-plugin-delete": "^2.0.0",
     "typescript": "^5.2.2"
-  },
-  "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
   }
 }
