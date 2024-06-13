@@ -429,7 +429,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
       fontWeight: 500,
-      lineHeight: '1.333em',
+      lineHeight: '1.55em',
       textAlign: 'left',
     },
     chart: {
