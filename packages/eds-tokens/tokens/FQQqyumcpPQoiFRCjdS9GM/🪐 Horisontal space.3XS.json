@@ -1,0 +1,28 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "3XS",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Padding horizontal": {
+    "$type": "number",
+    "$value": "{Density Aware.Spacing.Inline.3XS}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

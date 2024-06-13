@@ -24,6 +24,9 @@ function tokenValueFromVariable(
   if (typeof value === 'object') {
     if ('type' in value && value.type === 'VARIABLE_ALIAS') {
       const aliasedVariable = localVariables[value.id]
+      if (!aliasedVariable) {
+        throw new Error(`💥 Variable alias does not exist: ${value.id}`)
+      }
       return `{${aliasedVariable.name.replace(/\//g, '.')}}`
     } else if ('r' in value) {
       return rgbToHex(value)

@@ -145,9 +145,9 @@
       }
     }
   },
-  "lineheight-default 2": {
+  "lineheight-squished": {
     "$type": "number",
-    "$value": "{Font family.LG.lineheight-default}",
+    "$value": "{Font family.LG.lineheight-squished}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -157,9 +157,45 @@
       }
     }
   },
-  "lineheight-squished": {
+  "icon-size": {
     "$type": "number",
-    "$value": "{Font family.LG.lineheight-squished}",
+    "$value": "{sizing.icon.lg}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "gap-horizontal": {
+    "$type": "number",
+    "$value": "{spacing.icon.lg.gap-horizontal}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "gap-vertical": {
+    "$type": "number",
+    "$value": "{spacing.icon.lg.gap-vertical}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "icon-container-size": {
+    "$type": "number",
+    "$value": "{sizing.icon.lg-container}",
     "$description": "",
     "$extensions": {
       "com.figma": {

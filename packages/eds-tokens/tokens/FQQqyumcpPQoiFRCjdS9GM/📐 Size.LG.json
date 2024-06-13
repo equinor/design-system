@@ -1,0 +1,32 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "LG",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "Size": {
+    "Selectables": {
+      "Size": {
+        "$type": "number",
+        "$value": "{sizing.selectable.lg}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}
