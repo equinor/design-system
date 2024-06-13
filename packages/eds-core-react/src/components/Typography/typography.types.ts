@@ -1,11 +1,20 @@
-export type TypographySize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type TypographySize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl'
 export type TypographyLineHeight = 'default' | 'squished'
-export type TypographyElement = 'header' | 'ui-body-static'
+export type TypographyElement = 'header' | 'ui-body'
 export type TypographyFontWeight = 'bolder' | 'normal' | 'lighter'
 export type TypographyLetterSpacing = 'loose' | 'normal' | 'tight'
 
 export type TypographyProps = {
-  /** affects font-size & line-height. Choose between presets  */
   size?: TypographySize
   lineHeight?: TypographyLineHeight
   fontWeight?: TypographyFontWeight

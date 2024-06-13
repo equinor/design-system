@@ -23,7 +23,18 @@ const meta: Meta<typeof UIText> = {
           summary: 'TypographySize',
         },
       },
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: [
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+        '3xl',
+        '4xl',
+        '5xl',
+        '6xl',
+      ],
 
       control: {
         type: 'select',
@@ -60,11 +71,16 @@ export const Demo: StoryFn<UITextProps> = () => {
 export const Sizes: StoryFn<UITextProps> = () => {
   return (
     <>
-      <UIText size="xs">{TEXT}</UIText>
-      <UIText size="sm">{TEXT}</UIText>
-      <UIText size="md">{TEXT}</UIText>
-      <UIText size="lg">{TEXT}</UIText>
-      <UIText size="xl">{TEXT}</UIText>
+      <UIText size="xs">xs: {TEXT}</UIText>
+      <UIText size="sm">sm: {TEXT}</UIText>
+      <UIText size="md">md: {TEXT}</UIText>
+      <UIText size="lg">lg: {TEXT}</UIText>
+      <UIText size="xl">xl: {TEXT}</UIText>
+      <UIText size="2xl">2xl: {TEXT}</UIText>
+      <UIText size="3xl">3xl: {TEXT}</UIText>
+      <UIText size="4xl">4xl: {TEXT}</UIText>
+      <UIText size="5xl">5xl: {TEXT}</UIText>
+      <UIText size="6xl">6xl: {TEXT}</UIText>
     </>
   )
 }

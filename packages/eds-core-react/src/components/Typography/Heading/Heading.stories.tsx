@@ -29,7 +29,18 @@ const meta: Meta<typeof Heading> = {
           summary: 'TypographySize',
         },
       },
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: [
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+        '3xl',
+        '4xl',
+        '5xl',
+        '6xl',
+      ],
       control: {
         type: 'select',
       },
@@ -75,19 +86,34 @@ export const Sizes: StoryFn<HeadingProps> = () => {
   return (
     <>
       <Heading size="xs" as="h4">
-        {TEXT}
+        xs: {TEXT}
       </Heading>
       <Heading size="sm" as="h4">
-        {TEXT}
+        sm: {TEXT}
       </Heading>
       <Heading size="md" as="h4">
-        {TEXT}
+        md: {TEXT}
       </Heading>
       <Heading size="lg" as="h4">
-        {TEXT}
+        lg: {TEXT}
       </Heading>
       <Heading size="xl" as="h4">
-        {TEXT}
+        xl: {TEXT}
+      </Heading>
+      <Heading size="2xl" as="h4">
+        2xl: {TEXT}
+      </Heading>
+      <Heading size="3xl" as="h4">
+        3xl: {TEXT}
+      </Heading>
+      <Heading size="4xl" as="h4">
+        4xl: {TEXT}
+      </Heading>
+      <Heading size="5xl" as="h4">
+        5xl: {TEXT}
+      </Heading>
+      <Heading size="6xl" as="h4">
+        6xl: {TEXT}
       </Heading>
     </>
   )
