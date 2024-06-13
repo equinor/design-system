@@ -303,6 +303,7 @@ const includeTokenFilter = (
     'padding-centred',
     'padding-baselined',
     'cap-height',
+    'cap-rounded',
   ]
   const isExcluded = namesToExclude.some((nameToExclude) =>
     token.name.includes(nameToExclude),

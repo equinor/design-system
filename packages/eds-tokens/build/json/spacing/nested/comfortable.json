@@ -143,7 +143,6 @@
     "ui-body": {
       "xs": {
         "font-size": 9,
-        "cap-rounded": 8,
         "tracking-tight": -0.9900000095367432,
         "tracking-normal": 0,
         "tracking-loose": 0.9900000095367432,
@@ -155,7 +154,6 @@
       },
       "sm": {
         "font-size": 10.5,
-        "cap-rounded": 8,
         "tracking-tight": -1.149999976158142,
         "tracking-normal": 0,
         "tracking-loose": 1.149999976158142,
@@ -168,7 +166,6 @@
       "font-family": "Inter",
       "md": {
         "font-size": 12,
-        "cap-rounded": 8,
         "tracking-tight": -1.3200000524520874,
         "tracking-normal": 0,
         "tracking-loose": 1.3200000524520874,
@@ -180,7 +177,6 @@
       },
       "lg": {
         "font-size": 14,
-        "cap-rounded": 12,
         "tracking-tight": -1.5399999618530273,
         "tracking-normal": 0,
         "tracking-loose": 1.5399999618530273,
@@ -192,7 +188,6 @@
       },
       "xl": {
         "font-size": 16,
-        "cap-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 1.7599999904632568,
@@ -204,7 +199,6 @@
       },
       "2xl": {
         "font-size": 18.5,
-        "cap-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 2.0350000858306885,
@@ -216,7 +210,6 @@
       },
       "3xl": {
         "font-size": 21,
-        "cap-rounded": 16,
         "tracking-tight": -2.309999942779541,
         "tracking-normal": 0,
         "tracking-loose": 2.309999942779541,
@@ -228,7 +221,6 @@
       },
       "4xl": {
         "font-size": 24.5,
-        "cap-rounded": 16,
         "tracking-tight": -2.694999933242798,
         "tracking-normal": 0,
         "tracking-loose": 2.694999933242798,
@@ -240,7 +232,6 @@
       },
       "5xl": {
         "font-size": 28,
-        "cap-rounded": 20,
         "tracking-tight": -3.0799999237060547,
         "tracking-normal": 0,
         "tracking-loose": 3.0799999237060547,
@@ -252,7 +243,6 @@
       },
       "6xl": {
         "font-size": 32,
-        "cap-rounded": 24,
         "tracking-tight": -3.5199999809265137,
         "tracking-normal": 0,
         "tracking-loose": 3.5199999809265137,
@@ -267,7 +257,6 @@
       "font-family": "Equinor",
       "xs": {
         "font-size": 10.5,
-        "cap-rounded": 8,
         "tracking-tight": -0.9900000095367432,
         "tracking-normal": 0,
         "tracking-loose": 0.9900000095367432,
@@ -279,7 +268,6 @@
       },
       "sm": {
         "font-size": 12,
-        "cap-rounded": 8,
         "tracking-tight": -1.149999976158142,
         "tracking-normal": 0,
         "tracking-loose": 1.149999976158142,
@@ -291,7 +279,6 @@
       },
       "md": {
         "font-size": 14,
-        "cap-rounded": 8,
         "tracking-tight": -1.3200000524520874,
         "tracking-normal": 0,
         "tracking-loose": 1.3200000524520874,
@@ -303,7 +290,6 @@
       },
       "lg": {
         "font-size": 16,
-        "cap-rounded": 12,
         "tracking-tight": -1.5399999618530273,
         "tracking-normal": 0,
         "tracking-loose": 1.5399999618530273,
@@ -315,7 +301,6 @@
       },
       "xl": {
         "font-size": 18,
-        "cap-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 1.7599999904632568,
@@ -327,7 +312,6 @@
       },
       "2xl": {
         "font-size": 21,
-        "cap-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 2.0350000858306885,
@@ -339,7 +323,6 @@
       },
       "3xl": {
         "font-size": 24,
-        "cap-rounded": 16,
         "tracking-tight": -2.309999942779541,
         "tracking-normal": 0,
         "tracking-loose": 2.309999942779541,
@@ -351,7 +334,6 @@
       },
       "4xl": {
         "font-size": 27.5,
-        "cap-rounded": 20,
         "tracking-tight": -2.694999933242798,
         "tracking-normal": 0,
         "tracking-loose": 2.694999933242798,
@@ -363,7 +345,6 @@
       },
       "5xl": {
         "font-size": 31.5,
-        "cap-rounded": 20,
         "tracking-tight": -3.0799999237060547,
         "tracking-normal": 0,
         "tracking-loose": 3.0799999237060547,
@@ -375,7 +356,6 @@
       },
       "6xl": {
         "font-size": 36.5,
-        "cap-rounded": 24,
         "tracking-tight": -3.5199999809265137,
         "tracking-normal": 0,
         "tracking-loose": 3.5199999809265137,
