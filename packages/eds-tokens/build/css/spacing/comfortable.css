@@ -2,7 +2,7 @@
  * Do not edit directly
  */
 
-:root, [data-density="comfortable"] {
+[data-density="comfortable"] {
   --eds-documentation: Comfortable;
   --eds-border-radius-pill-2xl: 26;
   --eds-sizing-page-xs: 0;

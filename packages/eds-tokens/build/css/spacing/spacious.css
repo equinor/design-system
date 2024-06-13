@@ -2,7 +2,7 @@
  * Do not edit directly
  */
 
-[data-density="Spacious"] {
+:root, [data-density="Spacious"] {
   --eds-documentation: Spacious;
   --eds-border-radius-pill-2xl: 30;
   --eds-border-radius-pill-xl: 26;
