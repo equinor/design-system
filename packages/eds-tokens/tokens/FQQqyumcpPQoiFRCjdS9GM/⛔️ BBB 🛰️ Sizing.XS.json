@@ -1,0 +1,54 @@
+{
+  "Sizing": {
+    "Selectable": {
+      "min-height": {
+        "$type": "number",
+        "$value": "{Spacing.XS.Height}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "spacing-inline": {
+        "$type": "number",
+        "$value": "{Spacing.XS.Spacing-inline}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "spacing-stack": {
+        "$type": "number",
+        "$value": "{Spacing.XS.Spacing-stack-metric}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "layout-stack": {
+        "$type": "number",
+        "$value": "{Spacing.XS.Spacing-stack-optical}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}

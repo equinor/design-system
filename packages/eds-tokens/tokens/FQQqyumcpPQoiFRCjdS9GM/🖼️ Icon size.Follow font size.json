@@ -1,0 +1,28 @@
+{
+  "Icon": {
+    "Size": {
+      "$type": "number",
+      "$value": "{icon-size}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Container size": {
+      "$type": "number",
+      "$value": "{icon-container-size}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

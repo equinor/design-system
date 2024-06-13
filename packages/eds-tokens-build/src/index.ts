@@ -104,20 +104,16 @@ StyleDictionary.registerTransform({
   transitive: false,
   name: 'eds/css/pxFormatted',
   matcher: (token) => {
-    const isNumber = token.$type === 'number'
-    if (!isNumber) return false
-
     const isDefined = token?.value !== undefined
     if (!isDefined) return false
 
-    const pxToEmMatchers = [
-      'tracking-tight',
-      'tracking-normal',
-      'tracking-loose',
-    ]
+    const isNumber = token.$type === 'number'
+    if (!isNumber) return false
+
+    const pxMatchers = ['tracking-tight', 'tracking-normal', 'tracking-loose']
     return (
       token?.path?.length > 0 &&
-      pxToEmMatchers.some((metric) => token.path.includes(metric))
+      pxMatchers.some((metric) => token.path.includes(metric))
     )
   },
   transformer: (token) => {
@@ -130,20 +126,25 @@ StyleDictionary.registerTransform({
   type: `value`,
   transitive: false,
   name: `eds/css/pxToRem`,
-  matcher: (token) => {
-    const isNumber = token.$type === 'number'
-    if (!isNumber) return false
 
-    const isDefined = token?.value !== undefined
-    if (!isDefined) return false
+  matcher: (token) => {
+    if (
+      token?.value === undefined ||
+      token.$type !== 'number' ||
+      isNaN(Number(token.value))
+    ) {
+      return false
+    }
 
     const matchingPathSegments = [
       'font',
       'size',
       'line-height',
       'font-size',
+      'sizing',
       'spacing',
     ]
+
     const isMatch =
       token?.path?.length > 0 &&
       matchingPathSegments.some((segment) => token.path.includes(segment))
@@ -294,6 +295,32 @@ const _extend = ({
   })
 }
 
+const includeTokenFilter = (
+  token: TransformedToken,
+  filePathSegmentsToInclude?: string[],
+) => {
+  const namesToExclude = [
+    'documentation',
+    'padding-centred',
+    'padding-baselined',
+  ]
+  const isExcluded = namesToExclude.some((nameToExclude) =>
+    token.name.includes(nameToExclude),
+  )
+  if (isExcluded) {
+    return false
+  }
+
+  if (filePathSegmentsToInclude && filePathSegmentsToInclude.length > 0) {
+    const isIncludingFilePathSegmentsToInclude = filePathSegmentsToInclude.some(
+      (segment) => token.filePath.includes(segment),
+    )
+    return isIncludingFilePathSegmentsToInclude
+  }
+
+  return true
+}
+
 export function run({ outputReferences } = { outputReferences: true }) {
   console.info('Running Style Dictionary build script')
   console.info('outputReferences:', outputReferences)
@@ -305,13 +332,14 @@ export function run({ outputReferences } = { outputReferences: true }) {
   const spacingDirName = 'spacing'
 
   const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
-  const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Spacing Primitives.Value.json`
+  const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
   const THEME_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`
   const THEME_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`
 
-  const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
-  const DENSITY_COMPACT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`
+  const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
   const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
+  const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
+  // const DENSITY_COMPACT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
@@ -324,24 +352,22 @@ export function run({ outputReferences } = { outputReferences: true }) {
   const lightMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
     source: [THEME_LIGHT_SOURCE],
-    filter: (token) => token.filePath.includes('Light'),
+    filter: (token) => includeTokenFilter(token, ['Light']),
     dirName: colorDirName,
     prefix: colorPrefix,
     fileName: 'theme-light',
     outputReferences,
   })
-
   const darkMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
     source: [THEME_DARK_SOURCE],
-    filter: (token) => token.filePath.includes('Dark'),
+    filter: (token) => includeTokenFilter(token, ['Dark']),
     dirName: colorDirName,
     prefix: colorPrefix,
     fileName: 'theme-dark',
     selector: '[data-theme="dark"]',
     outputReferences,
   })
-
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
     dirName: spacingDirName,
@@ -350,38 +376,34 @@ export function run({ outputReferences } = { outputReferences: true }) {
   })
 
   const densityComfortable = _extend({
-    include: [SPACING_PRIMITIVE_SOURCE],
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     dirName: spacingDirName,
     prefix: systemName,
     fileName: 'comfortable',
     selector: ':root, [data-density="comfortable"]',
-    filter: (token) => token.filePath.includes('Density'),
-    outputReferences,
+    filter: (token) => includeTokenFilter(token, ['Density']),
+    outputReferences: true,
   })
 
-  const densityCompact = _extend({
-    include: [SPACING_PRIMITIVE_SOURCE],
-    source: [DENSITY_COMPACT_SOURCE],
-    dirName: spacingDirName,
-    prefix: systemName,
-    fileName: 'compact',
-    selector: '[data-density="compact"]',
-    filter: (token) => {
-      const isDensityToken = token.filePath.includes('Density')
-      return isDensityToken
-    },
-    outputReferences,
-  })
-
+  // const densityCompact = _extend({
+  // include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+  //   source: [DENSITY_COMPACT_SOURCE],
+  //   dirName: spacingDirName,
+  //   prefix: systemName,
+  //   fileName: 'compact',
+  //   selector: '[data-density="compact"]',
+  //   filter: (token) => includeTokenFilter(token, ['Density']),
+  //   outputReferences,
+  // })
   const densitySpacious = _extend({
-    include: [SPACING_PRIMITIVE_SOURCE],
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     dirName: spacingDirName,
     prefix: systemName,
     fileName: 'spacious',
     selector: '[data-density="Spacious"]',
-    filter: (token) => token.filePath.includes('Density'),
+    filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
   })
 
@@ -396,7 +418,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [
           {
-            filter: (token) => token.filePath.includes('Light'),
+            filter: (token) => includeTokenFilter(token, ['Light']),
             destination: 'theme.css',
             format: 'css/variables',
             options: {
@@ -420,7 +442,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [
           {
-            filter: (token) => token.filePath.includes('Light'),
+            filter: (token) => includeTokenFilter(token, ['Light']),
             destination: 'variables-trimmed.css',
             format: 'css/variables',
             options: {
@@ -440,8 +462,8 @@ export function run({ outputReferences } = { outputReferences: true }) {
   lightDarkTrimmed.buildAllPlatforms()
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
-  densityCompact.buildAllPlatforms()
   densitySpacious.buildAllPlatforms()
+  // densityCompact.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
