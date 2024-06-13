@@ -227,7 +227,7 @@ export type AutocompleteChanges<T> = { selectedItems: T[] }
 
 export type AutocompleteProps<T> = {
   /** List of options in dropdown */
-  options: T[]
+  options: readonly T[]
   /** Label for the select element */
   label: ReactNode
   /** Array of initial selected items
@@ -543,7 +543,7 @@ function AutocompleteInner<T>(
 
   // MARK: downshift state
   let comboBoxProps: UseComboboxProps<T> = {
-    items: availableItems,
+    items: availableItems as T[], //can not pass readonly type to downshift so we cast it to regular T[]
     initialSelectedItem: initialSelectedOptions[0],
     isItemDisabled(item) {
       return optionDisabled(item)
