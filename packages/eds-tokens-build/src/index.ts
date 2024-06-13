@@ -355,7 +355,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     dirName: spacingDirName,
     prefix: systemName,
     fileName: 'comfortable',
-    selector: ':root, [data-density="comfortable"]',
+    selector: '[data-density="comfortable"]',
     filter: (token) => token.filePath.includes('Density'),
     outputReferences,
   })
@@ -380,7 +380,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     dirName: spacingDirName,
     prefix: systemName,
     fileName: 'spacious',
-    selector: '[data-density="Spacious"]',
+    selector: ':root, [data-density="Spacious"]',
     filter: (token) => token.filePath.includes('Density'),
     outputReferences,
   })
