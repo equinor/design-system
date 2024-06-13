@@ -124,9 +124,8 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerTransform({
   type: `value`,
-  transitive: false,
+  transitive: true,
   name: `eds/css/pxToRem`,
-
   matcher: (token) => {
     if (
       token?.value === undefined ||
