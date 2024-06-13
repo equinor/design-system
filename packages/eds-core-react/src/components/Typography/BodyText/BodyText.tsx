@@ -23,7 +23,7 @@ export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
       <Typography
         ref={ref}
         as={as}
-        $type={'ui-body-static'}
+        $type={'ui-body'}
         $offset={INTER_VERTICAL_OFFSET}
         $size={size}
         $lineHeight={lineHeight}

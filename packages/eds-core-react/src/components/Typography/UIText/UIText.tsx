@@ -28,7 +28,7 @@ export const UIText: OverridableComponent<UITextProps, HTMLElement> =
       <Typography
         ref={ref}
         as={as}
-        $type={'ui-body-static'}
+        $type={'ui-body'}
         $size={size}
         $lineHeight={lineHeight}
         $fontWeight={fontWeight}

@@ -24,7 +24,18 @@ const meta: Meta<typeof BodyText> = {
           summary: 'TypographySize',
         },
       },
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: [
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+        '3xl',
+        '4xl',
+        '5xl',
+        '6xl',
+      ],
       control: {
         type: 'select',
       },
@@ -86,11 +97,16 @@ export const Demo: StoryFn<BodyTextProps> = () => {
 export const Sizes: StoryFn<BodyTextProps> = () => {
   return (
     <>
-      <BodyText size="xs">{TEXT}</BodyText>
-      <BodyText size="sm">{TEXT}</BodyText>
-      <BodyText size="md">{TEXT}</BodyText>
-      <BodyText size="lg">{TEXT}</BodyText>
-      <BodyText size="xl">{TEXT}</BodyText>
+      <BodyText size="xs">xs: {TEXT}</BodyText>
+      <BodyText size="sm">sm: {TEXT}</BodyText>
+      <BodyText size="md">md: {TEXT}</BodyText>
+      <BodyText size="lg">lg: {TEXT}</BodyText>
+      <BodyText size="xl">xl: {TEXT}</BodyText>
+      <BodyText size="2xl">2xl: {TEXT}</BodyText>
+      <BodyText size="3xl">3xl: {TEXT}</BodyText>
+      <BodyText size="4xl">4xl: {TEXT}</BodyText>
+      <BodyText size="5xl">5xl: {TEXT}</BodyText>
+      <BodyText size="6xl">6xl: {TEXT}</BodyText>
     </>
   )
 }
