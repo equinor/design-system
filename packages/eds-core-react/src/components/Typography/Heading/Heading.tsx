@@ -4,7 +4,7 @@ import { Typography } from '../_components/Typography'
 import { OverridableComponent } from '@equinor/eds-utils'
 
 export type HeadingProps = TypographyProps & {
-  /** as is required in Heading due to the a11y importance of using the correct level */
+  /** "as" is required in Heading due to the a11y importance of using the correct level */
   as: ElementType
 }
 
