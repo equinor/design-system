@@ -303,6 +303,7 @@ const includeTokenFilter = (
     'documentation',
     'padding-centred',
     'padding-baselined',
+    'cap-height',
   ]
   const isExcluded = namesToExclude.some((nameToExclude) =>
     token.name.includes(nameToExclude),
@@ -373,6 +374,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     dirName: spacingDirName,
     prefix: systemName,
     fileName: 'primitives',
+    filter: (token) => includeTokenFilter(token),
   })
 
   const densityComfortable = _extend({

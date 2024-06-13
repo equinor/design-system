@@ -48,7 +48,6 @@
     "inter": {
       "100": {
         "font-size": 9,
-        "cap-height-rounded": 8,
         "tracking-tight": -0.9900000095367432,
         "tracking-normal": 0,
         "tracking-loose": 0.9900000095367432,
@@ -58,7 +57,6 @@
       },
       "200": {
         "font-size": 10.5,
-        "cap-height-rounded": 8,
         "tracking-tight": -1.149999976158142,
         "tracking-normal": 0,
         "tracking-loose": 1.149999976158142,
@@ -68,7 +66,6 @@
       },
       "300": {
         "font-size": 12,
-        "cap-height-rounded": 8,
         "tracking-tight": -1.3200000524520874,
         "tracking-normal": 0,
         "tracking-loose": 1.3200000524520874,
@@ -78,7 +75,6 @@
       },
       "400": {
         "font-size": 14,
-        "cap-height-rounded": 12,
         "tracking-tight": -1.5399999618530273,
         "tracking-normal": 0,
         "tracking-loose": 1.5399999618530273,
@@ -88,7 +84,6 @@
       },
       "500": {
         "font-size": 16,
-        "cap-height-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 1.7599999904632568,
@@ -98,7 +93,6 @@
       },
       "600": {
         "font-size": 18.5,
-        "cap-height-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 2.0350000858306885,
@@ -108,7 +102,6 @@
       },
       "700": {
         "font-size": 21,
-        "cap-height-rounded": 16,
         "tracking-tight": -2.309999942779541,
         "tracking-normal": 0,
         "tracking-loose": 2.309999942779541,
@@ -118,7 +111,6 @@
       },
       "800": {
         "font-size": 24.5,
-        "cap-height-rounded": 16,
         "tracking-tight": -2.694999933242798,
         "tracking-normal": 0,
         "tracking-loose": 2.694999933242798,
@@ -128,7 +120,6 @@
       },
       "900": {
         "font-size": 28,
-        "cap-height-rounded": 20,
         "tracking-tight": -3.0799999237060547,
         "tracking-normal": 0,
         "tracking-loose": 3.0799999237060547,
@@ -138,7 +129,6 @@
       },
       "1000": {
         "font-size": 32,
-        "cap-height-rounded": 24,
         "tracking-tight": -3.5199999809265137,
         "tracking-normal": 0,
         "tracking-loose": 3.5199999809265137,
@@ -148,7 +138,6 @@
       },
       "1100": {
         "font-size": 37,
-        "cap-height-rounded": 28,
         "tracking-tight": -4.070000171661377,
         "tracking-normal": 0,
         "tracking-loose": 4.070000171661377,
@@ -160,7 +149,6 @@
     "equinor": {
       "100": {
         "font-size": 10.5,
-        "cap-height-rounded": 8,
         "tracking-tight": -0.9900000095367432,
         "tracking-normal": 0,
         "tracking-loose": 0.9900000095367432,
@@ -170,7 +158,6 @@
       },
       "200": {
         "font-size": 12,
-        "cap-height-rounded": 8,
         "tracking-tight": -1.149999976158142,
         "tracking-normal": 0,
         "tracking-loose": 1.149999976158142,
@@ -180,7 +167,6 @@
       },
       "300": {
         "font-size": 14,
-        "cap-height-rounded": 8,
         "tracking-tight": -1.3200000524520874,
         "tracking-normal": 0,
         "tracking-loose": 1.3200000524520874,
@@ -190,7 +176,6 @@
       },
       "400": {
         "font-size": 16,
-        "cap-height-rounded": 12,
         "tracking-tight": -1.5399999618530273,
         "tracking-normal": 0,
         "tracking-loose": 1.5399999618530273,
@@ -200,7 +185,6 @@
       },
       "500": {
         "font-size": 18,
-        "cap-height-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 1.7599999904632568,
@@ -210,7 +194,6 @@
       },
       "600": {
         "font-size": 21,
-        "cap-height-rounded": 12,
         "tracking-tight": -1.7599999904632568,
         "tracking-normal": 0,
         "tracking-loose": 2.0350000858306885,
@@ -220,7 +203,6 @@
       },
       "700": {
         "font-size": 24,
-        "cap-height-rounded": 16,
         "tracking-tight": -2.309999942779541,
         "tracking-normal": 0,
         "tracking-loose": 2.309999942779541,
@@ -230,7 +212,6 @@
       },
       "800": {
         "font-size": 27.5,
-        "cap-height-rounded": 20,
         "tracking-tight": -2.694999933242798,
         "tracking-normal": 0,
         "tracking-loose": 2.694999933242798,
@@ -240,7 +221,6 @@
       },
       "900": {
         "font-size": 31.5,
-        "cap-height-rounded": 20,
         "tracking-tight": -3.0799999237060547,
         "tracking-normal": 0,
         "tracking-loose": 3.0799999237060547,
@@ -250,7 +230,6 @@
       },
       "1000": {
         "font-size": 36.5,
-        "cap-height-rounded": 24,
         "tracking-tight": -3.5199999809265137,
         "tracking-normal": 0,
         "tracking-loose": 3.5199999809265137,
@@ -260,7 +239,6 @@
       },
       "1100": {
         "font-size": 42,
-        "cap-height-rounded": 28,
         "tracking-tight": -4.070000171661377,
         "tracking-normal": 0,
         "tracking-loose": 4.070000171661377,
