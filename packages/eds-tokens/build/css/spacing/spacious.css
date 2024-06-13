@@ -2,7 +2,7 @@
  * Do not edit directly
  */
 
-[data-density="Spacious"] {
+:root, [data-density="Spacious"] {
   --eds-sizing-stroke-none: 0rem;
   --eds-sizing-stroke-thick: 0.125rem;
   --eds-sizing-stroke-thin: 0.063rem;

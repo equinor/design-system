@@ -381,9 +381,20 @@ export function run({ outputReferences } = { outputReferences: true }) {
     dirName: spacingDirName,
     prefix: systemName,
     fileName: 'comfortable',
-    selector: ':root, [data-density="comfortable"]',
+    selector: '[data-density="comfortable"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
-    outputReferences: true,
+    outputReferences,
+  })
+
+  const densitySpacious = _extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE],
+    dirName: spacingDirName,
+    prefix: systemName,
+    fileName: 'spacious',
+    selector: ':root, [data-density="Spacious"]',
+    filter: (token) => includeTokenFilter(token, ['Density']),
+    outputReferences,
   })
 
   // const densityCompact = _extend({
@@ -396,16 +407,6 @@ export function run({ outputReferences } = { outputReferences: true }) {
   //   filter: (token) => includeTokenFilter(token, ['Density']),
   //   outputReferences,
   // })
-  const densitySpacious = _extend({
-    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
-    source: [DENSITY_SPACIOUS_SOURCE],
-    dirName: spacingDirName,
-    prefix: systemName,
-    fileName: 'spacious',
-    selector: '[data-density="Spacious"]',
-    filter: (token) => includeTokenFilter(token, ['Density']),
-    outputReferences,
-  })
 
   const lightDark = StyleDictionary.extend({
     include: [COLOR_PRIMITIVE_SOURCE],

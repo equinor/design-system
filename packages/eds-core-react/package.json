@@ -100,9 +100,5 @@
     "@tanstack/react-virtual": "3.5.0",
     "downshift": "9.0.6",
     "react-aria": "^3.33.0"
-  },
-  "engines": {
-    "pnpm": ">=8.15.4",
-    "node": "^18.20.2"
   }
 }
