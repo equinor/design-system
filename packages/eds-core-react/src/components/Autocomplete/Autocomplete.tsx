@@ -223,29 +223,6 @@ const handleListFocus = (e: FocusEvent<HTMLElement>) => {
 
 const defaultOptionDisabled = () => false
 // MARK: types
-// prettier-ignore
-type OptionLabelProps<T,> = T extends string | number
-  ? {
-      /**  Custom option label */
-      optionLabel?: (option: T) => string
-      /** Disable option
-       * @default () => false
-       */
-      optionDisabled?: (option: T) => boolean
-      /** List of options in dropdown */
-      options: (string | number)[]
-    }
-  : {
-      /**  Custom option label */
-      optionLabel: (option: T) => string
-      /** Disable option
-       * @default () => false
-       */
-      optionDisabled?: (option: T) => boolean
-      /** List of options in dropdown */
-      options: T[]
-    }
-
 export type AutocompleteChanges<T> = { selectedItems: T[] }
 
 export type AutocompleteProps<T> = {
@@ -302,12 +279,18 @@ export type AutocompleteProps<T> = {
   multiple?: boolean
   /** Add select-all option. Throws an error if true while multiple = false */
   allowSelectAll?: boolean
+  /**  Custom option label. NOTE: This is required when option is an object */
+  optionLabel?: (option: T) => string
   /**  Custom option template */
   optionComponent?: (option: T, isSelected: boolean) => ReactNode
   /** Disable use of react portal for dropdown
    * @deprecated  Autocomplete now uses the native popover api to render the dropdown. This prop will be removed in a future version
    */
   disablePortal?: boolean
+  /** Disable option
+   * @default () => false
+   */
+  optionDisabled?: (option: T) => boolean
   /** Custom filter function for options */
   optionsFilter?: (option: T, inputValue: string) => boolean
   /** If `true` the width of the dropdown will adjust to the width of the input */
@@ -330,8 +313,7 @@ export type AutocompleteProps<T> = {
    * Method that is used to compare objects by value. If omitted, objects are matched by reference.
    */
   itemCompare?: (value: T, compare: T) => boolean
-} & HTMLAttributes<HTMLDivElement> &
-  OptionLabelProps<T>
+} & HTMLAttributes<HTMLDivElement>
 
 // MARK: component
 function AutocompleteInner<T>(
