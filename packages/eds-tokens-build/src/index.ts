@@ -74,34 +74,42 @@ const lightDarkTransform: StyleDictionary.Transform = {
 //MARK: SpaceToggleTransform
 const densitySpaceToggleTransform: StyleDictionary.Transform = {
   type: 'value',
-  transitive: false,
+  transitive: true,
   matcher: isNumber,
   transformer: (token: StyleDictionary.TransformedToken, options) => {
     const path = token.path.join('/')
-    const darkValue =
+    const comfortableValue =
       spacingComfortableTokens['💎 Density.Comfortable.json']?.[`${path}`]?.[
         '$value'
       ]
 
-    if (darkValue) {
+    if (comfortableValue) {
       //it is a reference
-      if (String(darkValue).startsWith('{')) {
-        //make sure it is not a local variable, in which case it has light-dark set already
-        if (token.original.value != darkValue) {
+      if (String(comfortableValue).startsWith('{')) {
+        //make sure it is not a local variable
+        if (token.original.value != comfortableValue) {
           const outputReferences =
             options?.files?.[0]?.options?.outputReferences
           if (outputReferences) {
             const resolvedReference = resolveReference(
-              `${darkValue}`,
+              `${comfortableValue}`,
               `${options.prefix}`,
             )
             return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${resolvedReference})`
           } else {
-            return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${darkValue})`
+            return `var(--density-spacious, ${
+              token.value
+            }) var(--density-comfortable, ${transformNumberToRem(
+              Number(comfortableValue),
+            )})`
           }
         }
       } else {
-        return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${darkValue})`
+        return `var(--density-spacious, ${
+          token.value
+        }) var(--density-comfortable, ${transformNumberToRem(
+          Number(comfortableValue),
+        )})`
       }
     }
 
