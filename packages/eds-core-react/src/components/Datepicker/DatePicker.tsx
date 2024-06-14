@@ -50,6 +50,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       disabled: isDisabled,
       readOnly: isReadOnly,
       formatOptions,
+      helperProps,
+      variant,
       ...props
     }: DatePickerProps,
     forwardedRef: RefObject<HTMLDivElement>,
@@ -119,7 +121,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const { locale } = useLocale()
 
     const dateCreateProps = {
-      ...props,
+      helperProps,
+      variant,
       isDisabled,
       value: _value,
       hideTimeZone: true,
@@ -138,7 +141,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const { groupProps, buttonProps, fieldProps, calendarProps } =
       useDatePicker(dateCreateProps, pickerState, ref)
 
-    const helperProps = pickerState.displayValidation.isInvalid
+    const helperPropsInvalid = pickerState.displayValidation.isInvalid
       ? {
           text: pickerState.displayValidation.validationErrors.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
@@ -154,6 +157,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     return (
       <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
         <FieldWrapper
+          {...props}
           isOpen={isOpen}
           readonly={fieldProps.isReadOnly}
           pickerRef={pickerRef}
@@ -170,8 +174,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           }
           disabled={isDisabled}
           readOnly={isReadOnly}
-          color={pickerState.isInvalid ? 'warning' : props.variant}
-          helperProps={helperProps ?? props.helperProps}
+          color={pickerState.isInvalid ? 'warning' : variant}
+          helperProps={helperPropsInvalid ?? helperProps}
         >
           <DateField
             fieldProps={fieldProps}
@@ -195,7 +199,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 })}
               />
             }
-            variant={props.variant}
+            variant={variant}
           />
         </FieldWrapper>
       </DatePickerProvider>
