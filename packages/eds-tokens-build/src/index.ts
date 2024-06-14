@@ -278,7 +278,7 @@ StyleDictionary.registerTransform({
 
 const cssTransforms = [
   'name/cti/kebab',
-  'eds/css/spacing/shorthand',
+  //'eds/css/spacing/shorthand',
   'eds/css/pxToRem',
   'eds/css/pxFormatted',
   'eds/font/quote',
