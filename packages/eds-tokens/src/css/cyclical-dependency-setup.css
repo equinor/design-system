@@ -1,15 +1,15 @@
 :root,
 [data-density] {
-  --density: var(--density--spacious);
+  --density: var(--eds--spacious);
 
-  --density--comfortable: var(--density, );
-  --density--spacious: var(--density, );
+  --eds--comfortable: var(--density, );
+  --eds--spacious: var(--density, );
 }
 
 [data-density="comfortable"] {
-  --density: var(--density--comfortable);
+  --density: var(--eds--comfortable);
 }
 
 [data-density="spacious"] {
-  --density: var(--density--spacious);
+  --density: var(--eds--spacious);
 }
