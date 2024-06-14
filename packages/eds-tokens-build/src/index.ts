@@ -478,7 +478,37 @@ export function run({ outputReferences } = { outputReferences: true }) {
     outputReferences,
   })
   //MARK: densityAll
-  const densityAll = StyleDictionary.extend({
+  const densityAllTrimmed = StyleDictionary.extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: systemName,
+        buildPath: `${cssBuildPath}/spacing/`,
+        transforms: [
+          'name/cti/kebab',
+          //'eds/css/spacing/shorthand',
+          'eds/css/pxToRem',
+          'eds/css/pxFormatted',
+          'eds/font/quote',
+          'densitySpaceToggle',
+        ],
+        files: [
+          {
+            filter: (token) => includeTokenFilter(token, ['Density']),
+            destination: 'spacing-trimmed.css',
+            format: 'css/variables',
+            options: {
+              fileHeader,
+              outputReferences: false,
+            },
+          },
+        ],
+      },
+    },
+  })
+  const densityAllVerbose = StyleDictionary.extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -501,7 +531,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
             format: 'css/variables',
             options: {
               fileHeader,
-              outputReferences: false,
+              outputReferences: true,
             },
           },
         ],
@@ -619,7 +649,8 @@ export function run({ outputReferences } = { outputReferences: true }) {
   densitySpacious.buildAllPlatforms()
   densitySpaciousTrimmed.buildAllPlatforms()
   densityComfortableTrimmed.buildAllPlatforms()
-  densityAll.buildAllPlatforms()
+  densityAllTrimmed.buildAllPlatforms()
+  densityAllVerbose.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
