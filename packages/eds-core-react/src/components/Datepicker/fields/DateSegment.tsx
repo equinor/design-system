@@ -4,7 +4,7 @@ import {
 } from '@react-stately/datepicker'
 import { KeyboardEvent, useRef, useState } from 'react'
 import { useDateFormatter, useDateSegment } from 'react-aria'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { useDatePickerContext } from '../utils/context'
 
@@ -12,16 +12,26 @@ const Segment = styled.div<{
   $placeholder: boolean
   $invalid: boolean
   $disabled: boolean
-}>`
-  color: ${tokens.typography.input.text.color};
-  font-family: ${tokens.typography.input.text.fontFamily};
-  &:focus-visible {
-    outline: 2px solid ${tokens.colors.interactive.primary__resting.rgba};
-    background-color: ${tokens.colors.ui.background__medium.rgba};
-  }
-  ${({ $disabled }) =>
-    $disabled && `color: ${tokens.colors.interactive.disabled__text.rgba};`}
-`
+}>(({ $placeholder, $disabled }) => {
+  return css`
+    font-family: ${tokens.typography.input.text.fontFamily};
+    &:focus-visible {
+      outline: 2px solid ${tokens.colors.interactive.primary__resting.rgba};
+      background-color: ${tokens.colors.ui.background__medium.rgba};
+    }
+    ${$placeholder
+      ? css({
+          color: tokens.colors.text.static_icons__tertiary.rgba,
+        })
+      : css({
+          color: tokens.colors.text.static_icons__default.rgba,
+        })}
+    ${$disabled &&
+    css`
+      color: ${tokens.colors.interactive.disabled__text.rgba};
+    `}
+  `
+})
 
 /**
  * DateSegment is used to represent a single segment of a date in the DateField (i.e. day, month, year)
