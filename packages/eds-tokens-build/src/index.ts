@@ -97,12 +97,10 @@ const densitySpaceToggleTransform: StyleDictionary.Transform = {
             )
             return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${resolvedReference})`
           } else {
-            console.log('AAAAAAAAAAAAAAAA', comfortableValue)
             return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${comfortableValue})`
           }
         }
       } else {
-        console.log('BBBBBBBBBBBB', comfortableValue)
         return `var(--density-spacious, ${
           token.value
         }) var(--density-comfortable, ${transformNumberToRem(
