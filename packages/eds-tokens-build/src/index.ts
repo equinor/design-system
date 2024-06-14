@@ -10,7 +10,7 @@ const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 const OKLCH_PRECISION = 3
 
 const {
-  filter: { isColor },
+  filter: { isColor, isNumber },
 } = StyleDictionary
 
 // manually convert reference into custom property
@@ -29,6 +29,9 @@ const resolveReference = (value: string, prefix: string): string => {
 
 const darkTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`,
+])
+const spacingComfortableTokens = readJsonFiles([
+  `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
 ])
 
 const lightDarkTransform: StyleDictionary.Transform = {
@@ -68,6 +71,44 @@ const lightDarkTransform: StyleDictionary.Transform = {
   },
 }
 
+//MARK: SpaceToggleTransform
+const densitySpaceToggleTransform: StyleDictionary.Transform = {
+  type: 'value',
+  transitive: false,
+  matcher: isNumber,
+  transformer: (token: StyleDictionary.TransformedToken, options) => {
+    const path = token.path.join('/')
+    const darkValue =
+      spacingComfortableTokens['💎 Density.Comfortable.json']?.[`${path}`]?.[
+        '$value'
+      ]
+
+    if (darkValue) {
+      //it is a reference
+      if (String(darkValue).startsWith('{')) {
+        //make sure it is not a local variable, in which case it has light-dark set already
+        if (token.original.value != darkValue) {
+          const outputReferences =
+            options?.files?.[0]?.options?.outputReferences
+          if (outputReferences) {
+            const resolvedReference = resolveReference(
+              `${darkValue}`,
+              `${options.prefix}`,
+            )
+            return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${resolvedReference})`
+          } else {
+            return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${darkValue})`
+          }
+        }
+      } else {
+        return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${darkValue})`
+      }
+    }
+
+    return `${token.value}`
+  },
+}
+
 const toOKLCHTransform: StyleDictionary.Transform = {
   type: 'value',
   transitive: true,
@@ -91,6 +132,10 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   name: 'lightDark',
   ...lightDarkTransform,
+})
+StyleDictionary.registerTransform({
+  name: 'densitySpaceToggle',
+  ...densitySpaceToggleTransform,
 })
 
 const fileHeader = () => ['Do not edit directly']
@@ -151,6 +196,7 @@ StyleDictionary.registerTransform({
   },
 })
 
+//MARK: shorthand
 StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
@@ -427,6 +473,37 @@ export function run({ outputReferences } = { outputReferences: true }) {
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
   })
+  //MARK: densityAll
+  const densityAll = StyleDictionary.extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: systemName,
+        buildPath: `${cssBuildPath}/spacing/`,
+        transforms: [
+          'name/cti/kebab',
+          //'eds/css/spacing/shorthand',
+          'eds/css/pxToRem',
+          'eds/css/pxFormatted',
+          'eds/font/quote',
+          'densitySpaceToggle',
+        ],
+        files: [
+          {
+            filter: (token) => includeTokenFilter(token, ['Density']),
+            destination: 'spacing-verbose.css',
+            format: 'css/variables',
+            options: {
+              fileHeader,
+              outputReferences: false,
+            },
+          },
+        ],
+      },
+    },
+  })
 
   const lightDark = StyleDictionary.extend({
     include: [COLOR_PRIMITIVE_SOURCE],
@@ -538,6 +615,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   densitySpacious.buildAllPlatforms()
   densitySpaciousTrimmed.buildAllPlatforms()
   densityComfortableTrimmed.buildAllPlatforms()
+  densityAll.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
