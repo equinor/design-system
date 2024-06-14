@@ -30,5 +30,11 @@
     "eds-tokens-sync",
     "eds-tokens-build"
   ],
-  "cSpell.words": ["colorjs", "lightningcss", "OKLCH", "Overridable"]
+  "cSpell.words": [
+    "colorjs",
+    "copyfiles",
+    "lightningcss",
+    "OKLCH",
+    "Overridable"
+  ]
 }
