@@ -2,7 +2,8 @@
  * Do not edit directly
  */
 
-:root, [data-density="spacious"] {
+:root,
+[data-density="spacious"] {
   --eds-spacing-icon-xs-gap-horizontal: 0.406rem;
   --eds-spacing-icon-xs-gap-vertical: 0.406rem;
   --eds-spacing-icon-sm-gap-horizontal: 0.469rem;
@@ -67,21 +68,17 @@
   --eds-spacing-inset-xl-stack-squared: 1.5rem 1.5rem;
   --eds-spacing-inset-xl-stack-stretched: 1.75rem 1.5rem;
   --eds-sizing-icon-xs: 1rem;
-  --eds-sizing-icon-xs-container: 0.5rem;
   --eds-sizing-icon-sm: 1.125rem;
   --eds-sizing-icon-sm-container: 0.5rem;
   --eds-sizing-icon-md: 1.25rem;
   --eds-sizing-icon-md-container: 0.75rem;
   --eds-sizing-icon-lg: 1.5rem;
-  --eds-sizing-icon-lg-container: 0.75rem;
   --eds-sizing-icon-xl: 1.75rem;
   --eds-sizing-icon-xl-container: 0.75rem;
   --eds-sizing-icon-2xl: 2rem;
   --eds-sizing-icon-2xl-container: 1rem;
   --eds-sizing-icon-3xl: 2.313rem;
-  --eds-sizing-icon-3xl-container: 1rem;
   --eds-sizing-icon-4xl: 2.625rem;
-  --eds-sizing-icon-4xl-container: 1.25rem;
   --eds-sizing-icon-5xl: 3rem;
   --eds-sizing-icon-5xl-container: 1.5rem;
   --eds-sizing-icon-6xl: 3.5rem;
