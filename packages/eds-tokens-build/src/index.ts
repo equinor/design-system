@@ -452,9 +452,9 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densityTrimmed = StyleDictionary.extend({
+  const densitySpaciousTrimmed = StyleDictionary.extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
-    source: [DENSITY_SPACIOUS_SOURCE, DENSITY_COMFORTABLE_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
@@ -473,6 +473,21 @@ export function run({ outputReferences } = { outputReferences: true }) {
               outputReferences: false,
             },
           },
+        ],
+      },
+    },
+  })
+
+  const densityComfortableTrimmed = StyleDictionary.extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_COMFORTABLE_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: systemName,
+        buildPath: `${cssBuildPath}/${spacingBuildPath}`,
+        transforms: cssTransforms,
+        files: [
           {
             filter: (token) =>
               includeTokenFilter(token, ['Density', 'Comfortable']),
@@ -521,8 +536,8 @@ export function run({ outputReferences } = { outputReferences: true }) {
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
   densitySpacious.buildAllPlatforms()
-  // densityComfortableTrimmed.buildAllPlatforms()
-  densityTrimmed.buildAllPlatforms()
+  densitySpaciousTrimmed.buildAllPlatforms()
+  densityComfortableTrimmed.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
