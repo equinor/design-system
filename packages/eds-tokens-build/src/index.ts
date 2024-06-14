@@ -8,10 +8,6 @@ const FILE_KEY_THEMES = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 const OKLCH_PRECISION = 3
-const outputDirectory = './build'
-const cssDistPath = `${outputDirectory}/css`
-const tsDistPath = `${outputDirectory}/ts`
-const jsonDistPath = `${outputDirectory}/json`
 
 const {
   filter: { isColor },
@@ -177,9 +173,38 @@ StyleDictionary.registerTransform({
 
     return isMatch
   },
-  transformer: (token) => {
+  transformer: (token, options) => {
+    const outputReferences = options?.files?.[0]?.options?.outputReferences
     const size = token.path[2]
-    return `${token.value} var(--eds-spacing-static-inline-${size})`
+
+    if (outputReferences) {
+      return `${token.value} var(--eds-spacing-static-inline-${size})`
+    }
+
+    // Determine the density of the current token using the filePath
+    // because we need to know where to look for the raw value of the current spacing
+    // the current token for the current density mode.
+    const density = token.filePath.includes('Spacious')
+      ? 'spacious'
+      : 'comfortable'
+
+    const densityFilePath =
+      density === 'spacious'
+        ? DENSITY_SPACIOUS_SOURCE
+        : DENSITY_COMFORTABLE_SOURCE
+
+    const spacingTokens = readJsonFiles([densityFilePath])
+
+    const path = `spacing/inset/${size}/inline`
+
+    const collectionName =
+      density === 'spacious'
+        ? '💎 Density.Spacious.json'
+        : '💎 Density.Comfortable.json'
+
+    const value = spacingTokens[collectionName]?.[path]?.['$value']
+
+    return `${token.value} ${value}`
   },
 })
 
@@ -201,10 +226,23 @@ StyleDictionary.registerTransform({
   },
 })
 
+const cssTransforms = [
+  'name/cti/kebab',
+  'eds/css/spacing/shorthand',
+  'eds/css/pxToRem',
+  'eds/css/pxFormatted',
+  'eds/font/quote',
+  'color/oklch',
+]
+const outputDirectory = './build'
+const cssBuildPath = `${outputDirectory}/css`
+const tsBuildPath = `${outputDirectory}/ts`
+const jsonBuildPath = `${outputDirectory}/json`
+
 const _extend = ({
   source,
   fileName,
-  dirName,
+  buildPath,
   prefix,
   selector,
   filter,
@@ -214,7 +252,7 @@ const _extend = ({
   include?: string[]
   source: string[]
   fileName: string
-  dirName: string
+  buildPath: string
   prefix: string
   selector?: string
   filter?: (token: TransformedToken) => boolean
@@ -227,15 +265,8 @@ const _extend = ({
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssDistPath}/${dirName}/`,
-        transforms: [
-          'name/cti/kebab',
-          'eds/css/spacing/shorthand',
-          'eds/css/pxToRem',
-          'eds/css/pxFormatted',
-          'eds/font/quote',
-          'color/oklch',
-        ],
+        buildPath: `${cssBuildPath}/${buildPath}/`,
+        transforms: cssTransforms,
         files: [
           {
             filter,
@@ -252,7 +283,7 @@ const _extend = ({
       ts: {
         transformGroup: 'js',
         transforms: ['name/cti/constant'],
-        buildPath: `${tsDistPath}/${dirName}/`,
+        buildPath: `${tsBuildPath}/${buildPath}/`,
         files: [
           {
             filter,
@@ -275,7 +306,7 @@ const _extend = ({
         ],
       },
       json: {
-        buildPath: `${jsonDistPath}/${dirName}/`,
+        buildPath: `${jsonBuildPath}/${buildPath}/`,
         transforms: ['name/cti/kebab'],
         files: [
           {
@@ -322,29 +353,27 @@ const includeTokenFilter = (
   return true
 }
 
+const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
+const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
+const THEME_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`
+const THEME_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`
+
+const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
+const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
+const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
+
 export function run({ outputReferences } = { outputReferences: true }) {
   console.info('Running Style Dictionary build script')
   console.info('outputReferences:', outputReferences)
 
   const systemName = 'eds'
   const colorPrefix = `${systemName}-color`
-  const colorDirName = 'color'
-
-  const spacingDirName = 'spacing'
-
-  const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
-  const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
-  const THEME_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`
-  const THEME_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`
-
-  const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
-  const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
-  const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
-  // const DENSITY_COMPACT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Compact.json`
+  const colorBuildPath = 'color/'
+  const spacingBuildPath = 'spacing/'
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
-    dirName: colorDirName,
+    buildPath: colorBuildPath,
     prefix: colorPrefix,
     fileName: 'primitives',
     outputReferences, // The primitives should not reference other tokens. This can always be false.
@@ -354,7 +383,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     include: [COLOR_PRIMITIVE_SOURCE],
     source: [THEME_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
-    dirName: colorDirName,
+    buildPath: colorBuildPath,
     prefix: colorPrefix,
     fileName: 'theme-light',
     outputReferences,
@@ -363,7 +392,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     include: [COLOR_PRIMITIVE_SOURCE],
     source: [THEME_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
-    dirName: colorDirName,
+    buildPath: colorBuildPath,
     prefix: colorPrefix,
     fileName: 'theme-dark',
     selector: '[data-theme="dark"]',
@@ -371,7 +400,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   })
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
-    dirName: spacingDirName,
+    buildPath: spacingBuildPath,
     prefix: systemName,
     fileName: 'primitives',
     filter: (token) => includeTokenFilter(token),
@@ -380,9 +409,9 @@ export function run({ outputReferences } = { outputReferences: true }) {
   const densityComfortable = _extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
-    dirName: spacingDirName,
+    buildPath: spacingBuildPath,
     prefix: systemName,
-    fileName: 'comfortable',
+    fileName: 'comfortable-verbose',
     selector: '[data-density="comfortable"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
@@ -391,24 +420,13 @@ export function run({ outputReferences } = { outputReferences: true }) {
   const densitySpacious = _extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
-    dirName: spacingDirName,
+    buildPath: spacingBuildPath,
     prefix: systemName,
-    fileName: 'spacious',
-    selector: ':root, [data-density="Spacious"]',
+    fileName: 'spacious-verbose',
+    selector: ':root, [data-density="spacious"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
   })
-
-  // const densityCompact = _extend({
-  // include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
-  //   source: [DENSITY_COMPACT_SOURCE],
-  //   dirName: spacingDirName,
-  //   prefix: systemName,
-  //   fileName: 'compact',
-  //   selector: '[data-density="compact"]',
-  //   filter: (token) => includeTokenFilter(token, ['Density']),
-  //   outputReferences,
-  // })
 
   const lightDark = StyleDictionary.extend({
     include: [COLOR_PRIMITIVE_SOURCE],
@@ -417,16 +435,52 @@ export function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix: colorPrefix,
-        buildPath: `${cssDistPath}/color/`,
+        buildPath: `${cssBuildPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [
           {
             filter: (token) => includeTokenFilter(token, ['Light']),
-            destination: 'theme.css',
+            destination: 'theme-verbose.css',
             format: 'css/variables',
             options: {
               fileHeader,
               outputReferences,
+            },
+          },
+        ],
+      },
+    },
+  })
+
+  const densityTrimmed = StyleDictionary.extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE, DENSITY_COMFORTABLE_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: systemName,
+        buildPath: `${cssBuildPath}/${spacingBuildPath}`,
+        transforms: cssTransforms,
+        files: [
+          {
+            filter: (token) =>
+              includeTokenFilter(token, ['Density', 'Spacious']),
+            destination: 'spacious-trimmed.css',
+            format: 'css/variables',
+            options: {
+              selector: ':root, [data-density="spacious"]',
+              outputReferences: false,
+            },
+          },
+          {
+            filter: (token) =>
+              includeTokenFilter(token, ['Density', 'Comfortable']),
+            destination: 'comfortable-trimmed.css',
+            format: 'css/variables',
+            options: {
+              selector: '[data-density="comfortable"]',
+              outputReferences: false,
+              fileHeader,
             },
           },
         ],
@@ -441,12 +495,12 @@ export function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix: colorPrefix,
-        buildPath: `${cssDistPath}/`,
+        buildPath: `${cssBuildPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [
           {
             filter: (token) => includeTokenFilter(token, ['Light']),
-            destination: 'variables-trimmed.css',
+            destination: 'theme-trimmed.css',
             format: 'css/variables',
             options: {
               fileHeader,
@@ -466,7 +520,8 @@ export function run({ outputReferences } = { outputReferences: true }) {
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
   densitySpacious.buildAllPlatforms()
-  // densityCompact.buildAllPlatforms()
+  // densityComfortableTrimmed.buildAllPlatforms()
+  densityTrimmed.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
