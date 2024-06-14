@@ -617,6 +617,24 @@
   --eds-color-icon-input-helper-warning: var(--eds-color-icon-message-warning);
   --eds-color-icon-input-helper-success: var(--eds-color-icon-message-success);
   --eds-color-icon-input-helper-info: var(--eds-color-icon-message-info);
+}
+
+:root,
+[data-density] {
+  --density: var(--density--spacious);
+  --density--comfortable: var(--density, );
+  --density--spacious: var(--density, );
+}
+
+[data-density="comfortable"] {
+  --density: var(--density--comfortable);
+}
+
+[data-density="spacious"] {
+  --density: var(--density--spacious);
+}
+
+:root {
   --eds-spacing-0: 0rem;
   --eds-spacing-6: .063rem;
   --eds-spacing-12: .125rem;
@@ -838,9 +856,6 @@
   --eds-lineheight-scale-1100-squished: 2.25rem;
   --eds-font-family-inter: "Inter";
   --eds-font-family-equinor: "Equinor";
-}
-
-[data-density="comfortable"] {
   --eds-sizing-stroke-none: 0rem;
   --eds-sizing-stroke-thick: .125rem;
   --eds-sizing-stroke-thin: .063rem;

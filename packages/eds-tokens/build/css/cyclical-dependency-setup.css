@@ -1,0 +1,15 @@
+:root,
+[data-density] {
+  --density: var(--density--spacious);
+
+  --density--comfortable: var(--density, );
+  --density--spacious: var(--density, );
+}
+
+[data-density="comfortable"] {
+  --density: var(--density--comfortable);
+}
+
+[data-density="spacious"] {
+  --density: var(--density--spacious);
+}

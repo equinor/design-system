@@ -1,5 +1,5 @@
 @import 'color/primitives.css';
 @import 'color/theme-verbose.css';
+@import 'cyclical-dependency-setup.css';
 @import 'spacing/primitives.css';
-@import 'spacing/comfortable-verbose.css';
-@import 'spacing/spacious-verbose.css';
+@import 'spacing/spacing-verbose.css';
