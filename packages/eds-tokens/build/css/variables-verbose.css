@@ -856,6 +856,10 @@
   --eds-lineheight-scale-1100-squished: 2.25rem;
   --eds-font-family-inter: "Inter";
   --eds-font-family-equinor: "Equinor";
+}
+
+:root,
+[data-density] {
   --eds-sizing-stroke-none: 0rem;
   --eds-sizing-stroke-thick: .125rem;
   --eds-sizing-stroke-thin: .063rem;

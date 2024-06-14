@@ -95,15 +95,15 @@ const densitySpaceToggleTransform: StyleDictionary.Transform = {
               `${comfortableValue}`,
               `${options.prefix}`,
             )
-            return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${resolvedReference})`
+            return `var(--density--spacious, ${token.value}) var(--density--comfortable, ${resolvedReference})`
           } else {
-            return `var(--density-spacious, ${token.value}) var(--density-comfortable, ${comfortableValue})`
+            return `var(--density--spacious, ${token.value}) var(--density--comfortable, ${comfortableValue})`
           }
         }
       } else {
-        return `var(--density-spacious, ${
+        return `var(--density--spacious, ${
           token.value
-        }) var(--density-comfortable, ${transformNumberToRem(
+        }) var(--density--comfortable, ${transformNumberToRem(
           Number(comfortableValue),
         )})`
       }
@@ -502,6 +502,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
             format: 'css/variables',
             options: {
               fileHeader,
+              selector: ':root, [data-density]',
               outputReferences: false,
             },
           },
@@ -532,6 +533,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
             format: 'css/variables',
             options: {
               fileHeader,
+              selector: ':root, [data-density]',
               outputReferences: true,
             },
           },
