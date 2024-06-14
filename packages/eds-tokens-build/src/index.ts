@@ -468,6 +468,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
             destination: 'spacious-trimmed.css',
             format: 'css/variables',
             options: {
+              fileHeader,
               selector: ':root, [data-density="spacious"]',
               outputReferences: false,
             },
