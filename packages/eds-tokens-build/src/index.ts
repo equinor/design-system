@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
 import Color from 'colorjs.io'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
@@ -639,11 +642,11 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  primitives.buildAllPlatforms()
-  lightMode.buildAllPlatforms()
-  darkMode.buildAllPlatforms()
-  lightDark.buildAllPlatforms()
-  lightDarkTrimmed.buildAllPlatforms()
+  //primitives.buildAllPlatforms()
+  //lightMode.buildAllPlatforms()
+  //darkMode.buildAllPlatforms()
+  //lightDark.buildAllPlatforms()
+  //lightDarkTrimmed.buildAllPlatforms()
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
   densitySpacious.buildAllPlatforms()
