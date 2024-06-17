@@ -2,8 +2,7 @@
  * Do not edit directly
  */
 
-:root,
-[data-density="spacious"] {
+:root, [data-density="spacious"] {
   --eds-sizing-stroke-none: 0rem;
   --eds-sizing-stroke-thick: 0.125rem;
   --eds-sizing-stroke-thin: 0.063rem;
@@ -207,25 +206,25 @@
   --eds-typography-ui-body-xs-tracking-normal: var(--eds-type-scale-inter-200-tracking-normal);
   --eds-typography-ui-body-xs-tracking-tight: var(--eds-type-scale-inter-200-tracking-tight);
   --eds-typography-ui-body-xs-font-size: var(--eds-type-scale-inter-200-font-size);
-  --eds-spacing-inset-xl-stack-stretched: var(--eds-spacing-stack-2-xl) var(--eds-spacing-static-inline-xl);
-  --eds-spacing-inset-xl-stack-squared: var(--eds-spacing-stack-xl) var(--eds-spacing-static-inline-xl);
-  --eds-spacing-inset-xl-stack-squished: var(--eds-spacing-stack-lg) var(--eds-spacing-static-inline-xl);
+  --eds-spacing-inset-xl-stack-stretched: var(--eds-spacing-stack-2-xl);
+  --eds-spacing-inset-xl-stack-squared: var(--eds-spacing-stack-xl);
+  --eds-spacing-inset-xl-stack-squished: var(--eds-spacing-stack-lg);
   --eds-spacing-inset-xl-inline: var(--eds-spacing-inline-xl);
-  --eds-spacing-inset-lg-stack-stretched: var(--eds-spacing-stack-xl) var(--eds-spacing-static-inline-lg);
-  --eds-spacing-inset-lg-stack-squared: var(--eds-spacing-stack-lg) var(--eds-spacing-static-inline-lg);
-  --eds-spacing-inset-lg-stack-squished: var(--eds-spacing-stack-md) var(--eds-spacing-static-inline-lg);
+  --eds-spacing-inset-lg-stack-stretched: var(--eds-spacing-stack-xl);
+  --eds-spacing-inset-lg-stack-squared: var(--eds-spacing-stack-lg);
+  --eds-spacing-inset-lg-stack-squished: var(--eds-spacing-stack-md);
   --eds-spacing-inset-lg-inline: var(--eds-spacing-inline-lg);
-  --eds-spacing-inset-md-stack-stretched: var(--eds-spacing-stack-lg) var(--eds-spacing-static-inline-md);
-  --eds-spacing-inset-md-stack-squared: var(--eds-spacing-stack-md) var(--eds-spacing-static-inline-md);
-  --eds-spacing-inset-md-stack-squished: var(--eds-spacing-stack-sm) var(--eds-spacing-static-inline-md);
+  --eds-spacing-inset-md-stack-stretched: var(--eds-spacing-stack-lg);
+  --eds-spacing-inset-md-stack-squared: var(--eds-spacing-stack-md);
+  --eds-spacing-inset-md-stack-squished: var(--eds-spacing-stack-sm);
   --eds-spacing-inset-md-inline: var(--eds-spacing-inline-md);
-  --eds-spacing-inset-sm-stack-stretched: var(--eds-spacing-stack-md) var(--eds-spacing-static-inline-sm);
-  --eds-spacing-inset-sm-stack-squared: var(--eds-spacing-stack-sm) var(--eds-spacing-static-inline-sm);
-  --eds-spacing-inset-sm-stack-squished: var(--eds-spacing-stack-xs) var(--eds-spacing-static-inline-sm);
+  --eds-spacing-inset-sm-stack-stretched: var(--eds-spacing-stack-md);
+  --eds-spacing-inset-sm-stack-squared: var(--eds-spacing-stack-sm);
+  --eds-spacing-inset-sm-stack-squished: var(--eds-spacing-stack-xs);
   --eds-spacing-inset-sm-inline: var(--eds-spacing-inline-sm);
-  --eds-spacing-inset-xs-stack-stretched: var(--eds-spacing-stack-sm) var(--eds-spacing-static-inline-xs);
-  --eds-spacing-inset-xs-stack-squared: var(--eds-spacing-stack-xs) var(--eds-spacing-static-inline-xs);
-  --eds-spacing-inset-xs-stack-squished: var(--eds-spacing-stack-2-xs) var(--eds-spacing-static-inline-xs);
+  --eds-spacing-inset-xs-stack-stretched: var(--eds-spacing-stack-sm);
+  --eds-spacing-inset-xs-stack-squared: var(--eds-spacing-stack-xs);
+  --eds-spacing-inset-xs-stack-squished: var(--eds-spacing-stack-2-xs);
   --eds-spacing-inset-xs-inline: var(--eds-spacing-inline-xs);
   --eds-spacing-border-radius-rounded: var(--eds-spacing-25);
   --eds-typography-header-6xl-lineheight-squished: var(--eds-lineheight-scale-1100-squished);
@@ -268,24 +267,4 @@
   --eds-typography-ui-body-sm-lineheight-default: var(--eds-lineheight-scale-300-default);
   --eds-typography-ui-body-xs-lineheight-squished: var(--eds-lineheight-scale-200-lineheight-squished);
   --eds-typography-ui-body-xs-lineheight-default: var(--eds-lineheight-scale-200-default);
-  --eds-spacing-inset-xl-stack-stretched: var(--eds-spacing-stack-2-xl);
-  --eds-spacing-inset-xl-stack-squared: var(--eds-spacing-stack-xl);
-  --eds-spacing-inset-xl-stack-squished: var(--eds-spacing-stack-lg);
-  --eds-spacing-inset-xl-inline: var(--eds-spacing-inline-xl);
-  --eds-spacing-inset-lg-stack-stretched: var(--eds-spacing-stack-xl);
-  --eds-spacing-inset-lg-stack-squared: var(--eds-spacing-stack-lg);
-  --eds-spacing-inset-lg-stack-squished: var(--eds-spacing-stack-md);
-  --eds-spacing-inset-lg-inline: var(--eds-spacing-inline-lg);
-  --eds-spacing-inset-md-stack-stretched: var(--eds-spacing-stack-lg);
-  --eds-spacing-inset-md-stack-squared: var(--eds-spacing-stack-md);
-  --eds-spacing-inset-md-stack-squished: var(--eds-spacing-stack-sm);
-  --eds-spacing-inset-md-inline: var(--eds-spacing-inline-md);
-  --eds-spacing-inset-sm-stack-stretched: var(--eds-spacing-stack-md);
-  --eds-spacing-inset-sm-stack-squared: var(--eds-spacing-stack-sm);
-  --eds-spacing-inset-sm-stack-squished: var(--eds-spacing-stack-xs);
-  --eds-spacing-inset-sm-inline: var(--eds-spacing-inline-sm);
-  --eds-spacing-inset-xs-stack-stretched: var(--eds-spacing-stack-sm);
-  --eds-spacing-inset-xs-stack-squared: var(--eds-spacing-stack-xs);
-  --eds-spacing-inset-xs-stack-squished: var(--eds-spacing-stack-2-xs);
-  --eds-spacing-inset-xs-inline: var(--eds-spacing-inline-xs);
 }

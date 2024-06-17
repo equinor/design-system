@@ -108,20 +108,14 @@
     "icon": {
       "xs": 16,
       "sm": 18,
-      "sm-container": 8,
       "md": 20,
-      "md-container": 12,
       "lg": 24,
       "xl": 28,
-      "xl-container": 12,
       "2xl": 32,
-      "2xl-container": 16,
       "3xl": 37,
       "4xl": 42,
       "5xl": 48,
-      "5xl-container": 24,
-      "6xl": 56,
-      "6xl-container": 28
+      "6xl": 56
     },
     "selectable": {
       "xs": 20,

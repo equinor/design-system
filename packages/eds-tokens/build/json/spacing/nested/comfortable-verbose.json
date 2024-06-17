@@ -107,17 +107,12 @@
   "sizing": {
     "icon": {
       "xs": 14,
-      "xs-container": 8,
       "sm": 16,
       "md": 18,
-      "md-container": 8,
       "lg": 20,
-      "lg-container": 12,
       "xl": 24,
       "2xl": 28,
-      "2xl-container": 12,
       "3xl": 32,
-      "3xl-container": 16,
       "4xl": 37,
       "5xl": 42,
       "6xl": 48
