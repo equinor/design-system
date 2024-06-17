@@ -16,10 +16,7 @@
     "./css/variables-verbose.css": "./build/css/variables-verbose.min.css",
     "./css/spacing/primitives.css": "./build/css/spacing/primitives.css",
     "./css/spacing/comfortable.css": "./build/css/spacing/comfortable-verbose.css",
-    "./css/spacing/spacious.css": "./build/css/spacing/spacious-verbose.css",
-    "./json/spacing/flat/*": "./build/json/spacing/flat/*.json",
-    "./json/spacing/nested/*": "./build/json/spacing/nested/*.json",
-    "./ts/spacing/*": "./build/ts/spacing/*.ts"
+    "./css/spacing/spacious.css": "./build/css/spacing/spacious-verbose.css"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
