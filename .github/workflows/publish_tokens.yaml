@@ -15,7 +15,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}-setup-tokens
-      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-data-grid-react packages/eds-utils
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-tokens-build packages/eds-icons packages/eds-lab-react packages/eds-data-grid-react packages/eds-utils
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
     name: Process packages
