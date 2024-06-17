@@ -332,7 +332,7 @@ const _extend = ({
           },
         ],
       },
-      ts: {
+      /*       ts: {
         transformGroup: 'js',
         transforms: ['name/cti/constant'],
         buildPath: `${tsBuildPath}/${buildPath}/`,
@@ -372,7 +372,7 @@ const _extend = ({
             format: 'json/nested',
           },
         ],
-      },
+      }, */
     },
   })
 }
