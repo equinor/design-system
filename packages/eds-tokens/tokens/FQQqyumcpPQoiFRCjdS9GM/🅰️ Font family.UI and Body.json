@@ -137,7 +137,7 @@
       },
       "font-weight-bolder": {
         "$type": "number",
-        "$value": "{typography.ui-body.xs.font-weight-normal}",
+        "$value": "{typography.ui-body.xs.font-weight-bolder}",
         "$description": "",
         "$extensions": {
           "com.figma": {

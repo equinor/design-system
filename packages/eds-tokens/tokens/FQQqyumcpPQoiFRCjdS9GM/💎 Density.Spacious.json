@@ -51,7 +51,7 @@
       },
       "md": {
         "$type": "number",
-        "$value": 21,
+        "$value": 20,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -123,7 +123,7 @@
       },
       "2xl": {
         "$type": "number",
-        "$value": 31.5,
+        "$value": 32,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -219,7 +219,7 @@
       },
       "6xl": {
         "$type": "number",
-        "$value": 55.5,
+        "$value": 56,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -245,7 +245,7 @@
     "selectable": {
       "xs": {
         "$type": "number",
-        "$value": "{spacing.150}",
+        "$value": 20,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -257,7 +257,7 @@
       },
       "sm": {
         "$type": "number",
-        "$value": "{spacing.200}",
+        "$value": 24,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -269,7 +269,7 @@
       },
       "md": {
         "$type": "number",
-        "$value": "{spacing.225}",
+        "$value": 36,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -281,7 +281,7 @@
       },
       "lg": {
         "$type": "number",
-        "$value": "{spacing.275}",
+        "$value": 44,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -293,7 +293,7 @@
       },
       "xl": {
         "$type": "number",
-        "$value": "{spacing.325}",
+        "$value": 52,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -305,7 +305,7 @@
       },
       "2xl": {
         "$type": "number",
-        "$value": "{spacing.375}",
+        "$value": 60,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -619,9 +619,21 @@
       }
     },
     "inline": {
+      "4XS": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
       "3XS": {
         "$type": "number",
-        "$value": "{spacing.12}",
+        "$value": 4,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -633,7 +645,7 @@
       },
       "2XS": {
         "$type": "number",
-        "$value": "{spacing.25}",
+        "$value": 6,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -645,7 +657,7 @@
       },
       "XS": {
         "$type": "number",
-        "$value": "{spacing.50}",
+        "$value": 8,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -657,7 +669,7 @@
       },
       "SM": {
         "$type": "number",
-        "$value": "{spacing.75}",
+        "$value": 12,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -669,7 +681,7 @@
       },
       "MD": {
         "$type": "number",
-        "$value": "{spacing.100}",
+        "$value": 16,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -681,7 +693,7 @@
       },
       "LG": {
         "$type": "number",
-        "$value": "{spacing.125}",
+        "$value": 20,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -693,7 +705,7 @@
       },
       "XL": {
         "$type": "number",
-        "$value": "{spacing.150}",
+        "$value": 24,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -705,7 +717,7 @@
       },
       "2XL": {
         "$type": "number",
-        "$value": "{spacing.175}",
+        "$value": 28,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -717,7 +729,7 @@
       },
       "3XL": {
         "$type": "number",
-        "$value": "{spacing.200}",
+        "$value": 32,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -729,9 +741,21 @@
       }
     },
     "stack": {
+      "4XS": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
       "3XS": {
         "$type": "number",
-        "$value": "{spacing.12}",
+        "$value": 4,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -743,7 +767,7 @@
       },
       "2XS": {
         "$type": "number",
-        "$value": "{spacing.25}",
+        "$value": 6,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -755,7 +779,7 @@
       },
       "XS": {
         "$type": "number",
-        "$value": "{spacing.50}",
+        "$value": 8,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -767,7 +791,7 @@
       },
       "SM": {
         "$type": "number",
-        "$value": "{spacing.75}",
+        "$value": 12,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -779,7 +803,7 @@
       },
       "MD": {
         "$type": "number",
-        "$value": "{spacing.100}",
+        "$value": 16,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -791,7 +815,7 @@
       },
       "LG": {
         "$type": "number",
-        "$value": "{spacing.125}",
+        "$value": 20,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -803,7 +827,7 @@
       },
       "XL": {
         "$type": "number",
-        "$value": "{spacing.150}",
+        "$value": 24,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -815,7 +839,7 @@
       },
       "2XL": {
         "$type": "number",
-        "$value": "{spacing.175}",
+        "$value": 28,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -827,7 +851,7 @@
       },
       "3XL": {
         "$type": "number",
-        "$value": "{spacing.200}",
+        "$value": 32,
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -2621,20 +2645,6 @@
       }
     },
     "header": {
-      "font-family": {
-        "$type": "string",
-        "$value": "{font-family.equinor}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
       "xs": {
         "font-size": {
           "$type": "number",
@@ -2778,6 +2788,20 @@
               "scopes": [],
               "codeSyntax": {}
             }
+          }
+        }
+      },
+      "font-family": {
+        "$type": "string",
+        "$value": "{font-family.equinor}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
           }
         }
       },

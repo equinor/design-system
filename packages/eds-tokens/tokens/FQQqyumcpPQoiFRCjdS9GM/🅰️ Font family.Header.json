@@ -867,7 +867,7 @@
       },
       "font-weight-bolder": {
         "$type": "number",
-        "$value": "{typography.header.2xl.font-weight-normal}",
+        "$value": "{typography.header.2xl.font-weight-bolder}",
         "$description": "",
         "$extensions": {
           "com.figma": {

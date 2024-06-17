@@ -23,8 +23,9 @@
   --eds-spacing-icon-5xl-gap-vertical: 1.25rem;
   --eds-spacing-icon-6xl-gap-horizontal: 1.438rem;
   --eds-spacing-icon-6xl-gap-vertical: 1.438rem;
-  --eds-spacing-inline-3-xs: 0.125rem;
-  --eds-spacing-inline-2-xs: 0.25rem;
+  --eds-spacing-inline-4-xs: 0.125rem;
+  --eds-spacing-inline-3-xs: 0.25rem;
+  --eds-spacing-inline-2-xs: 0.375rem;
   --eds-spacing-inline-xs: 0.5rem;
   --eds-spacing-inline-sm: 0.75rem;
   --eds-spacing-inline-md: 1rem;
@@ -32,8 +33,9 @@
   --eds-spacing-inline-xl: 1.5rem;
   --eds-spacing-inline-2-xl: 1.75rem;
   --eds-spacing-inline-3-xl: 2rem;
-  --eds-spacing-stack-3-xs: 0.125rem;
-  --eds-spacing-stack-2-xs: 0.25rem;
+  --eds-spacing-stack-4-xs: 0.125rem;
+  --eds-spacing-stack-3-xs: 0.25rem;
+  --eds-spacing-stack-2-xs: 0.375rem;
   --eds-spacing-stack-xs: 0.5rem;
   --eds-spacing-stack-sm: 0.75rem;
   --eds-spacing-stack-md: 1rem;
@@ -45,7 +47,7 @@
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
   --eds-spacing-inset-xs-inline: 0.5rem;
-  --eds-spacing-inset-xs-stack-squished: 0.25rem 0.5rem;
+  --eds-spacing-inset-xs-stack-squished: 0.375rem 0.5rem;
   --eds-spacing-inset-xs-stack-squared: 0.5rem 0.5rem;
   --eds-spacing-inset-xs-stack-stretched: 0.75rem 0.5rem;
   --eds-spacing-inset-sm-inline: 0.75rem;
@@ -68,13 +70,13 @@
   --eds-sizing-icon-xs-container: 0.5rem;
   --eds-sizing-icon-sm: 1.125rem;
   --eds-sizing-icon-sm-container: 0.5rem;
-  --eds-sizing-icon-md: 1.313rem;
+  --eds-sizing-icon-md: 1.25rem;
   --eds-sizing-icon-md-container: 0.75rem;
   --eds-sizing-icon-lg: 1.5rem;
   --eds-sizing-icon-lg-container: 0.75rem;
   --eds-sizing-icon-xl: 1.75rem;
   --eds-sizing-icon-xl-container: 0.75rem;
-  --eds-sizing-icon-2xl: 1.969rem;
+  --eds-sizing-icon-2xl: 2rem;
   --eds-sizing-icon-2xl-container: 1rem;
   --eds-sizing-icon-3xl: 2.313rem;
   --eds-sizing-icon-3xl-container: 1rem;
@@ -82,10 +84,10 @@
   --eds-sizing-icon-4xl-container: 1.25rem;
   --eds-sizing-icon-5xl: 3rem;
   --eds-sizing-icon-5xl-container: 1.5rem;
-  --eds-sizing-icon-6xl: 3.469rem;
+  --eds-sizing-icon-6xl: 3.5rem;
   --eds-sizing-icon-6xl-container: 1.75rem;
-  --eds-sizing-selectable-xs: 1.5rem;
-  --eds-sizing-selectable-sm: 2rem;
+  --eds-sizing-selectable-xs: 1.25rem;
+  --eds-sizing-selectable-sm: 1.5rem;
   --eds-sizing-selectable-md: 2.25rem;
   --eds-sizing-selectable-lg: 2.75rem;
   --eds-sizing-selectable-xl: 3.25rem;
@@ -184,7 +186,6 @@
   --eds-typography-ui-body-6xl-font-weight-bolder: 500;
   --eds-typography-ui-body-6xl-lineheight-default: 2.5rem;
   --eds-typography-ui-body-6xl-lineheight-squished: 2.25rem;
-  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: 0.75rem;
   --eds-typography-header-xs-tracking-tight: -1.15px;
   --eds-typography-header-xs-tracking-normal: 0px;
@@ -194,6 +195,7 @@
   --eds-typography-header-xs-font-weight-bolder: 500;
   --eds-typography-header-xs-lineheight-default: 1rem;
   --eds-typography-header-xs-lineheight-squished: 0.75rem;
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-sm-font-size: 0.875rem;
   --eds-typography-header-sm-tracking-tight: -1.32px;
   --eds-typography-header-sm-tracking-normal: 0px;
