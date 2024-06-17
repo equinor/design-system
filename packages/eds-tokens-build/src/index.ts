@@ -71,7 +71,7 @@ const lightDarkTransform: StyleDictionary.Transform = {
   },
 }
 
-//MARK: SpaceToggleTransform
+//@todo: rewrite to include compact when those tokens are ready
 const densitySpaceToggleTransform: StyleDictionary.Transform = {
   type: 'value',
   transitive: true,
@@ -200,7 +200,7 @@ StyleDictionary.registerTransform({
   },
 })
 
-//MARK: shorthand
+//This is not used for now, we need to rethink how to implement shorthand if it is even needed
 StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
@@ -278,7 +278,6 @@ StyleDictionary.registerTransform({
 
 const cssTransforms = [
   'name/cti/kebab',
-  //'eds/css/spacing/shorthand',
   'eds/css/pxToRem',
   'eds/css/pxFormatted',
   'eds/font/quote',
@@ -478,7 +477,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
   })
-  //MARK: densityAll
+
   const densityAllTrimmed = StyleDictionary.extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
@@ -489,7 +488,6 @@ export function run({ outputReferences } = { outputReferences: true }) {
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/cti/kebab',
-          //'eds/css/spacing/shorthand',
           'eds/css/pxToRem',
           'eds/css/pxFormatted',
           'eds/font/quote',
@@ -520,7 +518,6 @@ export function run({ outputReferences } = { outputReferences: true }) {
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/cti/kebab',
-          //'eds/css/spacing/shorthand',
           'eds/css/pxToRem',
           'eds/css/pxFormatted',
           'eds/font/quote',
