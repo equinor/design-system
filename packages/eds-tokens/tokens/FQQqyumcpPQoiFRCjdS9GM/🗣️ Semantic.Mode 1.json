@@ -56,7 +56,7 @@
         }
       }
     },
-    "Horisontal gap": {
+    "Icon + text gap ↔︎": {
       "$type": "number",
       "$value": "{gap-horizontal}",
       "$description": "",
@@ -70,7 +70,7 @@
         }
       }
     },
-    "Vertical gap": {
+    "Icon + text gap ↕︎": {
       "$type": "number",
       "$value": "{gap-vertical}",
       "$description": "",
@@ -93,6 +93,34 @@
           "hiddenFromPublishing": false,
           "scopes": [
             "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Horisontal gap": {
+      "$type": "number",
+      "$value": "{spacing.inline.XS}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Vertical gap": {
+      "$type": "number",
+      "$value": "{spacing.stack.XS}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
           ],
           "codeSyntax": {}
         }

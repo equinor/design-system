@@ -2,6 +2,18 @@
   "Density Aware": {
     "Spacing": {
       "Inline": {
+        "4XS": {
+          "$type": "number",
+          "$value": "{spacing.inline.4XS}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
         "3XS": {
           "$type": "number",
           "$value": "{spacing.inline.3XS}",
@@ -112,6 +124,18 @@
         }
       },
       "Stack": {
+        "4XS": {
+          "$type": "number",
+          "$value": "{spacing.stack.4XS}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
         "3XS": {
           "$type": "number",
           "$value": "{spacing.stack.3XS}",
