@@ -10,7 +10,7 @@ const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 const OKLCH_PRECISION = 3
 
 const {
-  filter: { isColor },
+  filter: { isColor, isNumber },
 } = StyleDictionary
 
 // manually convert reference into custom property
@@ -29,6 +29,9 @@ const resolveReference = (value: string, prefix: string): string => {
 
 const darkTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`,
+])
+const spacingComfortableTokens = readJsonFiles([
+  `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
 ])
 
 const lightDarkTransform: StyleDictionary.Transform = {
@@ -68,6 +71,48 @@ const lightDarkTransform: StyleDictionary.Transform = {
   },
 }
 
+//@todo: rewrite to include compact when those tokens are ready
+const densitySpaceToggleTransform: StyleDictionary.Transform = {
+  type: 'value',
+  transitive: true,
+  matcher: isNumber,
+  transformer: (token: StyleDictionary.TransformedToken, options) => {
+    const path = token.path.join('/')
+    const comfortableValue =
+      spacingComfortableTokens['💎 Density.Comfortable.json']?.[`${path}`]?.[
+        '$value'
+      ]
+
+    if (comfortableValue) {
+      //it is a reference
+      if (String(comfortableValue).startsWith('{')) {
+        //make sure it is not a local variable
+        if (token.original.value != comfortableValue) {
+          const outputReferences =
+            options?.files?.[0]?.options?.outputReferences
+          if (outputReferences) {
+            const resolvedReference = resolveReference(
+              `${comfortableValue}`,
+              `${options.prefix}`,
+            )
+            return `var(--eds--spacious, ${token.value}) var(--eds--comfortable, ${resolvedReference})`
+          } else {
+            return `var(--eds--spacious, ${token.value}) var(--eds--comfortable, ${comfortableValue})`
+          }
+        }
+      } else {
+        return `var(--eds--spacious, ${
+          token.value
+        }) var(--eds--comfortable, ${transformNumberToRem(
+          Number(comfortableValue),
+        )})`
+      }
+    }
+
+    return `${token.value}`
+  },
+}
+
 const toOKLCHTransform: StyleDictionary.Transform = {
   type: 'value',
   transitive: true,
@@ -91,6 +136,10 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   name: 'lightDark',
   ...lightDarkTransform,
+})
+StyleDictionary.registerTransform({
+  name: 'densitySpaceToggle',
+  ...densitySpaceToggleTransform,
 })
 
 const fileHeader = () => ['Do not edit directly']
@@ -151,6 +200,7 @@ StyleDictionary.registerTransform({
   },
 })
 
+//This is not used for now, we need to rethink how to implement shorthand if it is even needed
 StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
@@ -228,7 +278,6 @@ StyleDictionary.registerTransform({
 
 const cssTransforms = [
   'name/cti/kebab',
-  'eds/css/spacing/shorthand',
   'eds/css/pxToRem',
   'eds/css/pxFormatted',
   'eds/font/quote',
@@ -335,6 +384,7 @@ const includeTokenFilter = (
     'padding-baselined',
     'cap-height',
     'cap-rounded',
+    'container',
   ]
   const isExcluded = namesToExclude.some((nameToExclude) =>
     token.name.includes(nameToExclude),
@@ -426,6 +476,67 @@ export function run({ outputReferences } = { outputReferences: true }) {
     selector: ':root, [data-density="spacious"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
+  })
+
+  const densityAllTrimmed = StyleDictionary.extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: systemName,
+        buildPath: `${cssBuildPath}/spacing/`,
+        transforms: [
+          'name/cti/kebab',
+          'eds/css/pxToRem',
+          'eds/css/pxFormatted',
+          'eds/font/quote',
+          'densitySpaceToggle',
+        ],
+        files: [
+          {
+            filter: (token) => includeTokenFilter(token, ['Density']),
+            destination: 'spacing-trimmed.css',
+            format: 'css/variables',
+            options: {
+              fileHeader,
+              selector: ':root, [data-density]',
+              outputReferences: false,
+            },
+          },
+        ],
+      },
+    },
+  })
+  const densityAllVerbose = StyleDictionary.extend({
+    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    source: [DENSITY_SPACIOUS_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix: systemName,
+        buildPath: `${cssBuildPath}/spacing/`,
+        transforms: [
+          'name/cti/kebab',
+          'eds/css/pxToRem',
+          'eds/css/pxFormatted',
+          'eds/font/quote',
+          'densitySpaceToggle',
+        ],
+        files: [
+          {
+            filter: (token) => includeTokenFilter(token, ['Density']),
+            destination: 'spacing-verbose.css',
+            format: 'css/variables',
+            options: {
+              fileHeader,
+              selector: ':root, [data-density]',
+              outputReferences: true,
+            },
+          },
+        ],
+      },
+    },
   })
 
   const lightDark = StyleDictionary.extend({
@@ -538,6 +649,8 @@ export function run({ outputReferences } = { outputReferences: true }) {
   densitySpacious.buildAllPlatforms()
   densitySpaciousTrimmed.buildAllPlatforms()
   densityComfortableTrimmed.buildAllPlatforms()
+  densityAllTrimmed.buildAllPlatforms()
+  densityAllVerbose.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
