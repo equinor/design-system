@@ -9,7 +9,7 @@ const meta: Meta<typeof BodyText> = {
   title: 'Typography/BodyText',
   component: BodyText,
   args: {
-    size: 'md',
+    size: 'lg',
   },
   argTypes: {
     as: {
