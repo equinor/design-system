@@ -380,6 +380,7 @@ function AutocompleteInner<T>(
   const [inputOptions, setInputOptions] = useState(options)
   const [_availableItems, setAvailableItems] = useState(inputOptions)
   const [typedInputValue, setTypedInputValue] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const showSelectAll = useMemo(() => {
     if (!multiple && allowSelectAll) {
@@ -832,6 +833,7 @@ function AutocompleteInner<T>(
     //dont clear items if they are selected and disabled
     setSelectedItems([...selectedDisabledItemsSet])
     setTypedInputValue('')
+    inputRef.current?.focus()
   }
   const showClearButton =
     (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
@@ -972,6 +974,7 @@ function AutocompleteInner<T>(
     getDropdownProps({
       preventKeyAction: multiple ? isOpen : undefined,
       disabled,
+      ref: inputRef,
     }),
   )
   const consolidatedEvents = mergeEventsFromRight(other, inputProps)
