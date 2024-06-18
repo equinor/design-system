@@ -285,7 +285,7 @@ const cssTransforms = [
 ]
 const outputDirectory = './build'
 const cssBuildPath = `${outputDirectory}/css`
-const tsBuildPath = `${outputDirectory}/ts`
+const jsBuildPath = `${outputDirectory}/js`
 const jsonBuildPath = `${outputDirectory}/json`
 
 const _extend = ({
@@ -335,11 +335,11 @@ const _extend = ({
       ts: {
         transformGroup: 'js',
         transforms: ['name/cti/constant'],
-        buildPath: `${tsBuildPath}/${buildPath}/`,
+        buildPath: `${jsBuildPath}/${buildPath}/`,
         files: [
           {
             filter,
-            destination: `${fileName}.ts`,
+            destination: `${fileName}.js`,
             options: {
               fileHeader,
               outputReferences,

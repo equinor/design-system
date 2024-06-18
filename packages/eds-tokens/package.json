@@ -25,8 +25,8 @@
     "./json/spacing/flat/*": "./build/json/spacing/flat/*.json",
     "./json/color/nested/*": "./build/json/color/nested/*.json",
     "./json/spacing/nested/*": "./build/json/spacing/nested/*.json",
-    "./ts/color/*": "./build/ts/color/*.ts",
-    "./ts/spacing/*": "./build/ts/spacing/*.ts"
+    "./js/color/*": "./build/js/color/*.js",
+    "./js/spacing/*": "./build/js/spacing/*.js"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
