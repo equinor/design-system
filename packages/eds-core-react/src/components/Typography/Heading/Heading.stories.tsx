@@ -8,7 +8,7 @@ const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
   component: Heading,
   args: {
-    size: 'md',
+    size: 'lg',
     as: 'h2',
   },
   argTypes: {
