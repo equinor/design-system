@@ -8,11 +8,11 @@ const meta: Meta<typeof UIText> = {
   title: 'Typography/UIText',
   component: UIText,
   args: {
-    size: 'md',
+    size: 'lg',
   },
   argTypes: {
     as: {
-      options: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+      options: ['p', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
       control: {
         type: 'select',
       },

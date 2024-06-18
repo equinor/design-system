@@ -13,7 +13,7 @@ export type UITextProps = TypographyProps & {
 export const UIText: OverridableComponent<UITextProps, HTMLElement> =
   forwardRef(function UIText(
     {
-      size = 'md',
+      size = 'lg',
       lineHeight = 'default',
       fontWeight = 'normal',
       letterSpacing = 'normal',

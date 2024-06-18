@@ -9,7 +9,7 @@ const INTER_VERTICAL_OFFSET = 0.002
 export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
   forwardRef(function BodyText(
     {
-      size = 'md',
+      size = 'lg',
       lineHeight = 'default',
       fontWeight = 'normal',
       letterSpacing = 'normal',
