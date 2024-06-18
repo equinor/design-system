@@ -307,6 +307,9 @@ const _extend = ({
   filter?: (token: TransformedToken) => boolean
   outputReferences?: boolean
 }): StyleDictionary.Core => {
+  const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
+  const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
+
   return StyleDictionary.extend({
     include,
     source,
@@ -319,7 +322,7 @@ const _extend = ({
         files: [
           {
             filter,
-            destination: `${fileName}.css`,
+            destination: cssDestinationFileName,
             format: 'css/variables',
             options: {
               selector,
@@ -426,7 +429,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     buildPath: colorBuildPath,
     prefix: colorPrefix,
     fileName: 'primitives',
-    outputReferences, // The primitives should not reference other tokens. This can always be false.
+    outputReferences: false, // The primitives should not reference other tokens. This can always be false.
   })
 
   const lightMode = _extend({
@@ -461,7 +464,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     source: [DENSITY_COMFORTABLE_SOURCE],
     buildPath: spacingBuildPath,
     prefix: systemName,
-    fileName: 'comfortable-verbose',
+    fileName: 'comfortable',
     selector: '[data-density="comfortable"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
@@ -472,7 +475,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     source: [DENSITY_SPACIOUS_SOURCE],
     buildPath: spacingBuildPath,
     prefix: systemName,
-    fileName: 'spacious-verbose',
+    fileName: 'spacious',
     selector: ':root, [data-density="spacious"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
