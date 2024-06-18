@@ -8,7 +8,7 @@
     "lint:lab": "pnpm run lint ./packages/eds-lab-react",
     "lint:utils": "pnpm run lint ./packages/eds-utils",
     "init": "pnpm install --force && pnpm run build",
-    "build": "pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab && pnpm run build:token-build && pnpm run build:token-sync",
+    "build": "pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab && pnpm run build:token-sync && pnpm run build:token-build",
     "build:core-react": "pnpm --filter @equinor/eds-core-react run build",
     "build:data-grid-react": "pnpm --filter ./packages/eds-data-grid-react run build",
     "build:lab": "pnpm --filter @equinor/eds-lab-react run build",
