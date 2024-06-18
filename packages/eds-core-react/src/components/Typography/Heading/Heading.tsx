@@ -13,7 +13,7 @@ const EQUINOR_VERTICAL_OFFSET = 0.06
 export const Heading: OverridableComponent<HeadingProps, HTMLElement> =
   forwardRef(function Heading(
     {
-      size = 'md',
+      size = 'lg',
       lineHeight = 'default',
       fontWeight = 'normal',
       letterSpacing = 'normal',
