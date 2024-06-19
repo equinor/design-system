@@ -1,7 +1,6 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { Typography } from '../Typography'
-import { TypographyProps } from '../Typography/Typography'
+import { Typography, TypographyProps } from '../Typography'
 
 const StyledBannerMessage = styled(Typography)``
 
