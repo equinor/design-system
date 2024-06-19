@@ -1,6 +1,6 @@
 import { Heading, HeadingProps } from './Heading'
 import { StoryFn, Meta } from '@storybook/react'
-import { BaselineGrid } from '../_components/BaselineGrid'
+import { BaselineGrid } from './../../../../.storybook/components'
 
 const TEXT = 'The quick brown fox jumps over the lazy dog'
 

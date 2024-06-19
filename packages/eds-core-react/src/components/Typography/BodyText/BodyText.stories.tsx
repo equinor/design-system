@@ -1,6 +1,6 @@
 import { BodyText, BodyTextProps } from './BodyText'
 import { StoryFn, Meta } from '@storybook/react'
-import { BaselineGrid } from '../_components/BaselineGrid'
+import { BaselineGrid } from './../../../../.storybook/components'
 import { Heading } from '../Heading/Heading'
 
 const TEXT = 'The quick brown fox jumps over the lazy dog'
@@ -56,9 +56,7 @@ export default meta
 
 export const Introduction: StoryFn<BodyTextProps> = (args) => {
   return (
-    <BodyText {...args}>
-      The XXX quick brown fox jumps over the lazy dog
-    </BodyText>
+    <BodyText {...args}>The quick brown fox jumps over the lazy dog</BodyText>
   )
 }
 
