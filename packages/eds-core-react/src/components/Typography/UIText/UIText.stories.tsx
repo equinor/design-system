@@ -9,6 +9,7 @@ const meta: Meta<typeof UIText> = {
   component: UIText,
   args: {
     size: 'lg',
+    children: TEXT,
   },
   argTypes: {
     as: {
@@ -55,7 +56,7 @@ const meta: Meta<typeof UIText> = {
 export default meta
 
 export const Introduction: StoryFn<UITextProps> = (args) => {
-  return <UIText {...args}>The quick brown fox jumps over the lazy dog</UIText>
+  return <UIText {...args} />
 }
 
 export const Demo: StoryFn<UITextProps> = () => {
