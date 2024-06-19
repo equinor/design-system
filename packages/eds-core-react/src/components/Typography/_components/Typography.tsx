@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-named-as-default
 import { HTMLAttributes, AnchorHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import {

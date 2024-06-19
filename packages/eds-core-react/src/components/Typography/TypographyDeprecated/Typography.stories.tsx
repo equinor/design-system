@@ -1,7 +1,8 @@
-import { Card, Divider, Typography, TypographyProps } from '../..'
+import { Typography, TypographyProps } from './Typography'
+import { Card, Divider } from '../../..'
 import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
-import { Stack } from './../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import page from './Typography.docs.mdx'
 import { tokens, Typography as TypographyType } from '@equinor/eds-tokens'
 
@@ -13,7 +14,7 @@ const SBCard = styled(Card)`
 `
 
 const meta: Meta<typeof Typography> = {
-  title: 'Typography/Typography',
+  title: 'Typography/⚠️ Typography',
   component: Typography,
   argTypes: {
     variant: { control: { type: null } },

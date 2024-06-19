@@ -2,7 +2,7 @@
 import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
-import { Typography } from '../..'
+import { Typography } from './Typography'
 import { tokens } from '@equinor/eds-tokens'
 import { colors } from './Typography.tokens'
 import type { Typography as TypographyType } from '@equinor/eds-tokens'
