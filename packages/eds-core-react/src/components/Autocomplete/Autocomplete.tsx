@@ -117,10 +117,12 @@ type IndexFinderType = <T,>({
   index,
   optionDisabled,
   availableItems,
+  allDisabled,
 }: {
   index: number
   optionDisabled: AutocompleteProps<T>['optionDisabled']
   availableItems: AutocompleteProps<T>['options']
+  allDisabled?: boolean
   calc?: (n: number) => number
 }) => number
 
@@ -167,7 +169,9 @@ const findNextIndex: IndexFinderType = ({
   index,
   optionDisabled,
   availableItems,
+  allDisabled,
 }) => {
+  if (allDisabled) return 0
   const options = {
     index,
     optionDisabled,
@@ -188,7 +192,9 @@ const findPrevIndex: IndexFinderType = ({
   index,
   optionDisabled,
   availableItems,
+  allDisabled,
 }) => {
+  if (allDisabled) return 0
   const options = {
     index,
     optionDisabled,
@@ -464,6 +470,8 @@ function AutocompleteInner<T>(
     return inputOptions.filter((x) => !disabledItemsSet.has(x))
   }, [inputOptions, optionDisabled])
 
+  const allDisabled = enabledItems.length === 0
+
   const selectedDisabledItemsSet = useMemo(
     () => new Set(selectedItems.filter(optionDisabled)),
     [selectedItems, optionDisabled],
@@ -662,6 +670,7 @@ function AutocompleteInner<T>(
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
+                allDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
@@ -678,6 +687,7 @@ function AutocompleteInner<T>(
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
+                allDisabled,
               }),
             }
           default:
@@ -725,6 +735,7 @@ function AutocompleteInner<T>(
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
+                allDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
@@ -741,6 +752,7 @@ function AutocompleteInner<T>(
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
+                allDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
