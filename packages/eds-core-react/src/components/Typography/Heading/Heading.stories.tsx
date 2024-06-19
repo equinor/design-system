@@ -65,23 +65,6 @@ export const Introduction: StoryFn<HeadingProps> = (args) => {
   )
 }
 
-export const Demo: StoryFn<HeadingProps> = () => {
-  return (
-    <>
-      <Heading size="lg" as="h1">
-        Heading
-      </Heading>
-      <Heading size="xs" as="h2">
-        Subheading
-      </Heading>
-
-      <Heading size="md" as="h2">
-        {TEXT}
-      </Heading>
-    </>
-  )
-}
-
 export const Sizes: StoryFn<HeadingProps> = () => {
   return (
     <>
@@ -115,19 +98,6 @@ export const Sizes: StoryFn<HeadingProps> = () => {
       <Heading size="6xl" as="h4">
         6xl: {TEXT}
       </Heading>
-    </>
-  )
-}
-
-export const Levels: StoryFn<HeadingProps> = () => {
-  return (
-    <>
-      <Heading as="h6">{TEXT}</Heading>
-      <Heading as="h5">{TEXT}</Heading>
-      <Heading as="h4">{TEXT}</Heading>
-      <Heading as="h3">{TEXT}</Heading>
-      <Heading as="h2">{TEXT}</Heading>
-      <Heading as="h1">{TEXT}</Heading>
     </>
   )
 }

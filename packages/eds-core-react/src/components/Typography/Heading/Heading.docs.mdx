@@ -1,0 +1,22 @@
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls, Meta } from '@storybook/blocks'
+import * as ComponentStories from './Heading.stories'
+
+<Meta of={ComponentStories} />
+
+# Heading
+
+<Primary />
+<Controls />
+
+## Usage
+Unlike `BodyText` and` UIText`, `Heading` requires the `as` prop to be explicitly set, since in most cases it should be assigned the semantically correct headerlevel.
+
+```tsx
+import { Heading } from '@equinor/eds-core-react'
+ <Heading size="6xl" as="h1">This is a title</Heading>
+```
+
+## Sizes
+
+<Canvas of={ComponentStories.Sizes} />
