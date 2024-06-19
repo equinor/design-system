@@ -10,6 +10,7 @@ const meta: Meta<typeof Heading> = {
   args: {
     size: 'lg',
     as: 'h2',
+    children: TEXT,
   },
   argTypes: {
     as: {
@@ -60,9 +61,7 @@ const meta: Meta<typeof Heading> = {
 export default meta
 
 export const Introduction: StoryFn<HeadingProps> = (args) => {
-  return (
-    <Heading {...args}>The quick brown fox jumps over the lazy dog</Heading>
-  )
+  return <Heading {...args} />
 }
 
 export const Sizes: StoryFn<HeadingProps> = () => {

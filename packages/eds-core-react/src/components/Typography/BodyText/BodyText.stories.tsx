@@ -10,6 +10,7 @@ const meta: Meta<typeof BodyText> = {
   component: BodyText,
   args: {
     size: 'lg',
+    children: TEXT,
   },
   argTypes: {
     as: {
@@ -55,9 +56,7 @@ const meta: Meta<typeof BodyText> = {
 export default meta
 
 export const Introduction: StoryFn<BodyTextProps> = (args) => {
-  return (
-    <BodyText {...args}>The quick brown fox jumps over the lazy dog</BodyText>
-  )
+  return <BodyText {...args} />
 }
 
 export const Demo: StoryFn<BodyTextProps> = () => {
