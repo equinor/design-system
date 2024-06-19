@@ -31,6 +31,8 @@ export const Typography = styled.p<StyleHeadingProps>`
     $onGrid = true,
     $color,
   }) => css`
+    /*temporary rounding for testing*/
+    --_rounding: var(--rounding, nearest);
     --_text-preset-color: ${$color};
     font-family: ${`var(--eds-typography-${$type}-font-family)`};
     font-size: ${`var(--eds-typography-${$type}-${$size}-font-size)`};
@@ -53,11 +55,11 @@ export const Typography = styled.p<StyleHeadingProps>`
       /*This calculates the rest-values to make the total height rounded to 4px.
       When onGrid is true, the rest is only added to the top of the text-box.*/
       --_rest-top: ${$onGrid
-        ? 'calc(round(up, 1cap, var(--_grid-base)) - 1cap)'
-        : 'calc((round(up, 1cap, var(--_grid-base)) - 1cap) / 2)'};
+        ? 'calc(round(var(--_rounding), 1cap, var(--_grid-base)) - 1cap)'
+        : 'calc((round(var(--_rounding), 1cap, var(--_grid-base)) - 1cap) / 2)'};
       --_rest-bottom: ${$onGrid
         ? '0cap'
-        : 'calc((round(up, 1cap, var(--_grid-base)) - 1cap) / 2)'};
+        : 'calc((round(var(--_rounding), 1cap, var(--_grid-base)) - 1cap) / 2)'};
     }
 
     /*This emulates text-box-trim: both; text-box-edge: cap alphabetic*/
