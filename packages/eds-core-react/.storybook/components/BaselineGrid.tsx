@@ -1,12 +1,12 @@
-// eslint-disable-next-line import/no-named-as-default
 import styled from 'styled-components'
 
 export const BaselineGrid = styled.div`
-  --gray: #f2f2f2;
+  /*TODO: find color that work in dark mode, or use an existing token if possible*/
+  --line: light-dark(#f2f2f2, #f2f2f2);
   background: linear-gradient(
     to bottom,
-    var(--gray),
-    var(--gray) 50%,
+    var(--line),
+    var(--line) 50%,
     transparent 50%,
     transparent
   );
