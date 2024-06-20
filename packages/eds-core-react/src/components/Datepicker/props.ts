@@ -74,6 +74,11 @@ export type DatePickerProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> &
      */
     showTimeInput?: boolean
     /**
+     * hide the clear button even when date is set
+     * @default false
+     */
+    hideClearButton?: boolean
+    /**
      * Uncontrolled value
      */
     defaultValue?: Date | null

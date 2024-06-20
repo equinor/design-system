@@ -47,6 +47,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       defaultValue,
       showTimeInput,
       granularity,
+      hideClearButton,
       disabled: isDisabled,
       readOnly: isReadOnly,
       formatOptions,
@@ -149,6 +150,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }
       : undefined
 
+    const showClearButton = pickerState.dateValue !== null && !hideClearButton
+
     // innerValue is used as a fallback, especially for uncontrolled inputs, so it needs to be reset when value / defaultValue is reset
     useEffect(() => {
       if (!defaultValue && !value) setInnerValue(null)
@@ -185,6 +188,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             onChange={_onChange}
             rightAdornments={
               <Toggle
+                showClearButton={showClearButton}
                 setOpen={setIsOpen}
                 open={isOpen}
                 icon={calendar}

@@ -43,6 +43,7 @@ export const DateRangePicker = forwardRef(
       timezone,
       defaultValue,
       formatOptions,
+      hideClearButton,
       disabled: isDisabled,
       readOnly: isReadOnly,
       ...props
@@ -138,6 +139,8 @@ export const DateRangePicker = forwardRef(
         }
       : undefined
 
+    const showClearButton = state.dateRange !== null && !hideClearButton
+
     const formattedValue = state.formatValue(locale, {
       year: 'numeric',
       month: 'short',
@@ -186,6 +189,7 @@ export const DateRangePicker = forwardRef(
             disabled={isDisabled}
             rightAdornments={
               <Toggle
+                showClearButton={showClearButton}
                 buttonProps={buttonProps}
                 disabled={isDisabled}
                 readonly={isReadOnly}

@@ -22,6 +22,7 @@ export const Toggle = ({
   disabled,
   buttonProps,
   valueString,
+  showClearButton,
   readonly,
 }: {
   reset: () => void
@@ -32,26 +33,29 @@ export const Toggle = ({
   readonly: boolean
   buttonProps: AriaButtonProps
   valueString: string
+  showClearButton: boolean
 }) => {
   return readonly || disabled ? null : (
     <>
-      <StyledButton
-        disabled={disabled}
-        variant={'ghost_icon'}
-        aria-label={'Reset'}
-        onClick={() => {
-          reset()
-        }}
-        onKeyDown={(e: KeyboardEvent) => {
-          if (e.code === 'Enter' || e.code === 'Space') {
-            e.preventDefault()
-            e.stopPropagation()
+      {showClearButton && (
+        <StyledButton
+          disabled={disabled}
+          variant={'ghost_icon'}
+          aria-label={'Reset'}
+          onClick={() => {
             reset()
-          }
-        }}
-      >
-        <Icon data={close} />
-      </StyledButton>
+          }}
+          onKeyDown={(e: KeyboardEvent) => {
+            if (e.code === 'Enter' || e.code === 'Space') {
+              e.preventDefault()
+              e.stopPropagation()
+              reset()
+            }
+          }}
+        >
+          <Icon data={close} />
+        </StyledButton>
+      )}
       <StyledButton
         {...filterDOMProps(buttonProps)}
         disabled={disabled}
