@@ -1,0 +1,38 @@
+/* 💬 Notification.Success.tokens.json */
+
+{
+  'notification-subtle': {
+    base: {
+      $type: 'color',
+      $value: '{success-subtle.base}',
+    },
+  },
+  notification: {
+    strong: {
+      $type: 'color',
+      $value: '{success.strong}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{success.em}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{success.base}',
+    },
+  },
+  'notification-on-inverted': {
+    subtle: {
+      $type: 'color',
+      $value: '{success-on-inverted.subtle}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{success-on-inverted.weak}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{success-on-inverted.base}',
+    },
+  },
+}

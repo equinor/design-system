@@ -1,0 +1,280 @@
+/* ⛔️ Theme.Light.tokens.json */
+
+{
+  'warning-on-inverted': {
+    subtle: {
+      $type: 'color',
+      $value: '{Spruce Wood.200}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{Spruce Wood.300}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Spruce Wood.400}',
+    },
+  },
+  'info-subtle': {
+    base: {
+      $type: 'color',
+      $value: '{Mist Blue.300}',
+    },
+  },
+  'info-on-inverted': {
+    subtle: {
+      $type: 'color',
+      $value: '{Mist Blue.200}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{Mist Blue.300}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Mist Blue.400}',
+    },
+  },
+  'success-subtle': {
+    base: {
+      $type: 'color',
+      $value: '{Lichen Green.100}',
+    },
+  },
+  'error-on-inverted': {
+    base: {
+      $type: 'color',
+      $value: '{Red Warm.500}',
+    },
+    subtle: {
+      $type: 'color',
+      $value: '{Red Warm.200}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{Red Warm.300}',
+    },
+  },
+  'warning-subtle': {
+    base: {
+      $type: 'color',
+      $value: '{Spruce Wood.200}',
+    },
+  },
+  translucent: {
+    none: {
+      $type: 'color',
+      $value: 'rgba(0, 0, 0, 0.0000)',
+    },
+    strong: {
+      $type: 'color',
+      $value: 'rgba(0, 0, 0, 0.8000)',
+    },
+    weak: {
+      $type: 'color',
+      $value: 'rgba(0, 0, 0, 0.4000)',
+    },
+  },
+  'danger-subtle': {
+    em: {
+      $type: 'color',
+      $value: '{Red Warm.500}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Red Warm.300}',
+    },
+  },
+  'danger-on-inverted': {
+    subtle: {
+      $type: 'color',
+      $value: '{Red Warm.200}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{Red Warm.300}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Red Warm.500}',
+    },
+  },
+  'error-subtle': {
+    base: {
+      $type: 'color',
+      $value: '{Red Warm.300}',
+    },
+  },
+  error: {
+    strong: {
+      $type: 'color',
+      $value: '{Cold Red.1300}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Cold Red.1200}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Cold Red.900}',
+    },
+  },
+  'secondary-subtle': {
+    em: {
+      $type: 'color',
+      $value: '{Blue Grey.500}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Blue Grey.300}',
+    },
+  },
+  'success-on-inverted': {
+    subtle: {
+      $type: 'color',
+      $value: '{Moss Green Saturated.200}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{Moss Green Saturated.300}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Moss Green Saturated.400}',
+    },
+  },
+  'primary-subtle': {
+    em: {
+      $type: 'color',
+      $value: '{Moss Green.200}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Moss Green.100}',
+    },
+    strong: {
+      $type: 'color',
+      $value: '{Moss Green.300}',
+    },
+  },
+  neutral: {
+    strong: {
+      $type: 'color',
+      $value: '{Neutral.1300}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Neutral.1100}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Neutral.900}',
+    },
+  },
+  'neutral-subtle': {
+    strong: {
+      $type: 'color',
+      $value: '{Neutral.600}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Neutral.500}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Neutral.300}',
+    },
+    weak: {
+      $type: 'color',
+      $value: '{Neutral.100}',
+    },
+    subtle: {
+      $type: 'color',
+      $value: '{Neutral.0}',
+    },
+  },
+  success: {
+    strong: {
+      $type: 'color',
+      $value: '{Success Green.1300}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Success Green.1100}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Success Green.900}',
+    },
+  },
+  warning: {
+    strong: {
+      $type: 'color',
+      $value: '{Orange.1300}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Orange.1100}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Orange.800}',
+    },
+  },
+  danger: {
+    strong: {
+      $type: 'color',
+      $value: '{Cold Red.1400}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Cold Red.1200}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Cold Red.900}',
+    },
+  },
+  info: {
+    strong: {
+      $type: 'color',
+      $value: '{Ocean Blue.1300}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Sky Blue.1000}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Sky Blue.700}',
+    },
+  },
+  secondary: {
+    strong: {
+      $type: 'color',
+      $value: '{Blue Grey.1450}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Blue Grey.1350}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Blue Grey.1200}',
+    },
+  },
+  primary: {
+    strong: {
+      $type: 'color',
+      $value: '{Moss Green.1400}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{Moss Green.1300}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{Moss Green.1100}',
+    },
+  },
+}

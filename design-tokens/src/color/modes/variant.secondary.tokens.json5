@@ -1,0 +1,32 @@
+/* ⛔️ Variant.Secondary.tokens.json */
+
+{
+  'variant-subtle': {
+    strong: {
+      $type: 'color',
+      $value: '{secondary-subtle.em}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{secondary-subtle.base}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{neutral-subtle.subtle}',
+    },
+  },
+  variant: {
+    strong: {
+      $type: 'color',
+      $value: '{secondary.strong}',
+    },
+    em: {
+      $type: 'color',
+      $value: '{secondary.em}',
+    },
+    base: {
+      $type: 'color',
+      $value: '{secondary.base}',
+    },
+  },
+}

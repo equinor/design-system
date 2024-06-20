@@ -1,0 +1,22 @@
+{
+  "tokenSetOrder": [
+    "Color/🧩 Core",
+    "Color/Modes/🎨 Light",
+    "Color/Modes/🎛 Primary",
+    "Color/Modes/🎛  Secondary",
+    "Color/Modes/🎛  Danger",
+    "Color/Modes/💬 Info",
+    "Color/Modes/💬 Success",
+    "Color/Modes/💬 Warning",
+    "Color/Modes/💬 Error",
+    "Color/🧩 Semantic",
+    "Dimension/Modes/Spacious",
+    "Dimension/Base",
+    "Dimension/Shape",
+    "Typography/Core",
+    "Typography/Semantic",
+    "Backup/Modes/Large",
+    "Backup/Modes/Medium",
+    "Backup/Modes/Small"
+  ]
+}

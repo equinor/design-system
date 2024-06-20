@@ -1,0 +1,30 @@
+{
+  "variant": {
+    "base": {
+      "value": "{danger.base}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{danger.em}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{danger.strong}",
+      "type": "color"
+    }
+  },
+  "variant-subtle": {
+    "base": {
+      "value": "{neutral-subtle.subtle}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{danger-subtle.base}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{danger-subtle.em}",
+      "type": "color"
+    }
+  }
+}

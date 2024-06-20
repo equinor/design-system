@@ -1,0 +1,299 @@
+{
+  "primary": {
+    "base": {
+      "value": "{Moss Green.1100}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Moss Green.1300}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Moss Green.1400}",
+      "type": "color"
+    }
+  },
+  "secondary": {
+    "base": {
+      "value": "{Blue Grey.1200}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Blue Grey.1350}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Blue Grey.1450}",
+      "type": "color"
+    }
+  },
+  "danger": {
+    "base": {
+      "value": "{Cold Red.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Cold Red.1200}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Cold Red.1400}",
+      "type": "color"
+    }
+  },
+  "info": {
+    "base": {
+      "value": "{Sky Blue.700}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Sky Blue.1000}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Ocean Blue.1300}",
+      "type": "color"
+    }
+  },
+  "success": {
+    "base": {
+      "value": "{Success Green.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Success Green.1100}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Success Green.1300}",
+      "type": "color"
+    }
+  },
+  "warning": {
+    "base": {
+      "value": "{Orange.800}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Orange.1100}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Orange.1300}",
+      "type": "color"
+    }
+  },
+  "error": {
+    "base": {
+      "value": "{Cold Red.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Cold Red.1200}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Cold Red.1300}",
+      "type": "color"
+    }
+  },
+  "neutral": {
+    "base": {
+      "value": "{Neutral.900}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Neutral.1100}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Neutral.1300}",
+      "type": "color"
+    }
+  },
+  "primary-subtle": {
+    "base": {
+      "value": "{Moss Green.100}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Moss Green.200}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Moss Green.300}",
+      "type": "color"
+    }
+  },
+  "secondary-subtle": {
+    "base": {
+      "value": "{Blue Grey.300}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Blue Grey.500}",
+      "type": "color"
+    }
+  },
+  "danger-subtle": {
+    "base": {
+      "value": "{Red Warm.300}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Red Warm.500}",
+      "type": "color"
+    }
+  },
+  "info-subtle": {
+    "base": {
+      "value": "{Mist Blue.300}",
+      "type": "color"
+    }
+  },
+  "success-subtle": {
+    "base": {
+      "value": "{Lichen Green.100}",
+      "type": "color"
+    }
+  },
+  "warning-subtle": {
+    "base": {
+      "value": "{Spruce Wood.200}",
+      "type": "color"
+    }
+  },
+  "error-subtle": {
+    "base": {
+      "value": "{Red Warm.300}",
+      "type": "color"
+    }
+  },
+  "neutral-subtle": {
+    "subtle": {
+      "value": "{Neutral.0}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Neutral.100}",
+      "type": "color"
+    },
+    "base": {
+      "value": "{Neutral.300}",
+      "type": "color"
+    },
+    "em": {
+      "value": "{Neutral.400}",
+      "type": "color"
+    },
+    "strong": {
+      "value": "{Neutral.500}",
+      "type": "color"
+    },
+    "stronger": {
+      "value": "{Neutral.600}",
+      "type": "color"
+    }
+  },
+  "translucent": {
+    "none": {
+      "value": "{Neutral.1500}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "alpha",
+            "value": "0",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "weak": {
+      "value": "{Neutral.1500}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "alpha",
+            "value": ".4",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "strong": {
+      "value": "{Neutral.1500}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "alpha",
+            "value": ".8",
+            "space": "hsl"
+          }
+        }
+      }
+    }
+  },
+  "naming example": {
+    "value": "eds.theme.light",
+    "type": "text"
+  },
+  "success-on-inverted": {
+    "base": {
+      "value": "{Moss Green Saturated.400}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Moss Green Saturated.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Moss Green Saturated.200}",
+      "type": "color"
+    }
+  },
+  "error-on-inverted": {
+    "base": {
+      "value": "{Red Warm.500}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Red Warm.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Red Warm.200}",
+      "type": "color"
+    }
+  },
+  "info-on-inverted": {
+    "base": {
+      "value": "{Mist Blue.400}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Mist Blue.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Mist Blue.200}",
+      "type": "color"
+    }
+  },
+  "warning-on-inverted": {
+    "base": {
+      "value": "{Spruce Wood.400}",
+      "type": "color"
+    },
+    "weak": {
+      "value": "{Spruce Wood.300}",
+      "type": "color"
+    },
+    "subtle": {
+      "value": "{Spruce Wood.200}",
+      "type": "color"
+    }
+  }
+}
