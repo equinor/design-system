@@ -25,7 +25,7 @@ const {
 } = tokens
 
 export const primary = mergeDeepRight(button, {
-  background: primaryColor,
+  background: `var(--eds-color-surface-button-primary-filled, ${primaryColor})`,
   typography: {
     color: primaryWhite,
   },
@@ -33,12 +33,12 @@ export const primary = mergeDeepRight(button, {
     type: 'border',
     style: 'solid',
     width: '1px',
-    color: primaryColor,
+    color: `var(--eds-color-surface-button-primary-filled, ${primaryColor})`,
     radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
   },
   states: {
     hover: {
-      background: primaryHoverColor,
+      background: `var(--eds-color-surface-button-primary-filled-hover, ${primaryHoverColor})`,
     },
   },
 }) as ButtonToken
