@@ -42,6 +42,14 @@ const meta: Meta<typeof SideSheet> = {
   args: {
     title: 'Title',
   },
+  argTypes: {
+    position: {
+      control: {
+        type: 'radio',
+      },
+      options: ['left', 'right'],
+    },
+  },
   parameters: {
     docs: {
       page,

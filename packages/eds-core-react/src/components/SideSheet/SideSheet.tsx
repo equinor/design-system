@@ -11,10 +11,10 @@ import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { comfortable as tokens, variants } from './SideSheet.tokens'
 
-const { background, spacings, border, typography } = tokens
-
+const { background, spacings, typography, borderLeft, borderRight } = tokens
 type StyleProps = {
   width: string
+  position?: 'left' | 'right'
 }
 
 export type SideSheetProps = {
@@ -28,6 +28,8 @@ export type SideSheetProps = {
   open: boolean
   /** Override width of Side Sheet */
   width?: string
+  /** Controls if the sidesheet should open on the right or left */
+  position?: 'left' | 'right'
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledSideSheet = styled.div<StyleProps>`
@@ -35,12 +37,12 @@ const StyledSideSheet = styled.div<StyleProps>`
   position: absolute;
   z-index: 1200;
   top: 0;
-  right: 0;
+  ${({ position }) => `${position}: 0`};
   box-sizing: border-box;
   background: ${background};
   width: ${({ width }) => width};
-
-  ${bordersTemplate(border)}
+  ${({ position }) =>
+    bordersTemplate(position === 'left' ? borderRight : borderLeft)}
   ${spacingsTemplate(spacings)};
   ${typographyTemplate(typography)}
 `
@@ -59,13 +61,23 @@ const Header = styled.div`
 
 export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
   function SideSheet(
-    { variant = 'medium', width, title, children, open, onClose, ...rest },
+    {
+      variant = 'medium',
+      position = 'right',
+      width,
+      title,
+      children,
+      open,
+      onClose,
+      ...rest
+    },
     ref,
   ) {
     const props = {
       ...rest,
       ref,
       width: width || variants[variant],
+      position,
     }
 
     return (
