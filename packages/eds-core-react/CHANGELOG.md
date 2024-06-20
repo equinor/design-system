@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.40.0] - 2024-06-21
+
+### Fixed
+
+- 💄 `DatePicker`: use correct token for text color by @oddvernes in https://github.com/equinor/design-system/pull/3520
+- 🐛 `DatePicker`: export `DatePickerProps` type by @oddvernes in https://github.com/equinor/design-system/pull/3538
+- 🐛 `Autocomplete`: reverted changes from https://github.com/equinor/design-system/pull/3408 (conditional `optionLabel` type) due to typescript issues when wrapping the component. Also made `options` type `readonly` by @oddvernes in https://github.com/equinor/design-system/pull/3515
+- 🚸 `Autocomplete`: return focus to input after pressing 'clear' button by @oddvernes in https://github.com/equinor/design-system/pull/3531
+- 🐛 `Autocomplete`: crash triggered by opening dropdown using keyboard if all items are disabled by @oddvernes in https://github.com/equinor/design-system/pull/3534
+
+### Added
+
+- 🧑‍💻 `Datepicker` type: allow passing standard html attributes by @oddvernes in https://github.com/equinor/design-system/pull/3509
+- ✨ `Datepicker`/`DateRangepicker`: added `hideClearButton` prop, and also hide clear button if no date is set by @oddvernes in https://github.com/equinor/design-system/pull/3537
+
 ## [0.39.0] - 2024-05-27
 
 ### Fixed
