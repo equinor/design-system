@@ -14,6 +14,7 @@ export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
       fontWeight = 'normal',
       letterSpacing = 'normal',
       as = 'p',
+      lines,
       children,
       ...rest
     },
@@ -27,6 +28,7 @@ export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
         $offset={INTER_VERTICAL_OFFSET}
         $size={size}
         $lineHeight={lineHeight}
+        $lines={lines}
         $fontWeight={fontWeight}
         $letterSpacing={letterSpacing}
         {...rest}
