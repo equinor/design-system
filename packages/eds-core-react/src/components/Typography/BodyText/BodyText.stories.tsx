@@ -6,7 +6,7 @@ import { Heading } from '../Heading/Heading'
 const TEXT = 'The quick brown fox jumps over the lazy dog'
 
 const meta: Meta<typeof BodyText> = {
-  title: 'Typography/BodyText',
+  title: 'Typography/BodyText (Beta)',
   component: BodyText,
   args: {
     size: 'lg',
@@ -66,10 +66,10 @@ export const Demo: StoryFn<BodyTextProps> = () => {
         Lorem Ipsum
       </Heading>
       <BodyText>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        <b>Lorem ipsum dolor sit amet</b>, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat.
       </BodyText>
       <BodyText as="a" href="#q">
         As a link
@@ -86,7 +86,6 @@ export const Demo: StoryFn<BodyTextProps> = () => {
         dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </BodyText>
-      <section></section>
     </>
   )
 }
@@ -105,5 +104,17 @@ export const Sizes: StoryFn<BodyTextProps> = () => {
       <BodyText size="5xl">5xl: {TEXT}</BodyText>
       <BodyText size="6xl">6xl: {TEXT}</BodyText>
     </>
+  )
+}
+export const Trunkated: StoryFn<BodyTextProps> = () => {
+  return (
+    <BodyText lines={2}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, sit, non
+      velit corrupti ad sint excepturi expedita odit recusandae rerum cumque
+      repudiandae tempora a fuga nulla. Tempore minima eligendi officiis. Lorem
+      ipsum dolor sit amet consectetur adipisicing elit. Iure, sit, non velit
+      corrupti ad sint excepturi expedita odit recusandae rerum cumque
+      repudiandae tempora a fuga nulla. Tempore minima eligendi officiis.
+    </BodyText>
   )
 }

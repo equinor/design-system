@@ -17,6 +17,7 @@ export type StyleHeadingProps = {
   $offset?: number
   $onGrid?: boolean
   $color?: string
+  $lines?: number
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
 export const Typography = styled.p<StyleHeadingProps>`
@@ -30,27 +31,32 @@ export const Typography = styled.p<StyleHeadingProps>`
     $offset = 0,
     $onGrid = true,
     $color,
+    $lines,
   }) => css`
+    ${$lines &&
+    css`
+      display: -webkit-box;
+      -webkit-line-clamp: ${$lines};
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `}
     --_text-preset-color: ${$color};
     font-family: ${`var(--eds-typography-${$type}-font-family)`};
     font-size: ${`var(--eds-typography-${$type}-${$size}-font-size)`};
     line-height: ${`var(--eds-typography-${$type}-${$size}-lineheight-${$lineHeight})`};
     font-weight: ${`var(--eds-typography-${$type}-${$size}-font-weight-${$fontWeight})`};
     letter-spacing: ${`var(--eds-typography-${$type}-${$size}-tracking-${$letterSpacing})`};
-    //how to calculate unitless line-height rounded to 4px in css
-    //line-height: round(1em * 1.5, 4px);
     color: var(--_text-preset-color, inherit);
-    //background-color: rgb(255 0 0 / 0.3);
     --_offset: calc(${$offset} * 1em);
     --_grid-base: 4px;
-    //style links this way using token color?
     /* &[href],
     & [href] {
       color: var(--custom-color-link, var(--eds-whatever-the-link-color-token-is));
     } */
 
     @supports (height: round(up, 10px, 1px)) {
-      /*This calculates the rest-values to make the total height rounded to 4px.
+      /*This calculates the rest-values to make the total height a multiple of 4px.
       When onGrid is true, the rest is only added to the top of the text-box.*/
       --_rest-top: ${$onGrid
         ? 'calc(round(nearest, 1cap, var(--_grid-base)) - 1cap)'
