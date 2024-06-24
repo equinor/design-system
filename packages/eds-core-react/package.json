@@ -88,7 +88,7 @@
   "dependencies": {
     "@babel/runtime": "^7.25.0",
     "@equinor/eds-icons": "workspace:^",
-    "@equinor/eds-tokens": "workspace:*",
+    "@equinor/eds-tokens": "1.0.0-beta-2",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.26.22",
     "@internationalized/date": "^3.5.5",
