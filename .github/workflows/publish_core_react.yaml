@@ -3,12 +3,13 @@ on:
   workflow_dispatch:
     inputs:
       npm-tag:
-        description: 'Tag for npm package (next | latest)'
+        description: 'Tag for npm package (next | latest | beta)'
         required: true
         type: choice
         options:
           - next
           - latest
+          - beta
         default: 'next'
       environment:
         description: 'Environment for Storybook (development | production)'
