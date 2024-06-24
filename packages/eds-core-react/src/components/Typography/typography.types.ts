@@ -19,4 +19,6 @@ export type TypographyProps = {
   lineHeight?: TypographyLineHeight
   fontWeight?: TypographyFontWeight
   letterSpacing?: TypographyLetterSpacing
+  /** Trunkate to n number of lines. */
+  lines?: number
 }
