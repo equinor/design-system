@@ -16,6 +16,23 @@
   .sb-show-main {
     min-height: 100%;
   }
+  body {
+    :has(.hide-grid-lines__input:checked) {
+      --baseline-grid-color: transparent;
+    }
+  }
+
+  .hide-grid-lines {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    cursor: pointer;
+    input {
+      margin: 0;
+      cursor: inherit;
+    }
+  }
   /*.sbdocs.sbdocs *:not(code):not(.token) {
     font-family: Equinor, sans-serif;
   }*/
