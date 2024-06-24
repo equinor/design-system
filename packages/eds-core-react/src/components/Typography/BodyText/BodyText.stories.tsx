@@ -62,8 +62,8 @@ export const Introduction: StoryFn<BodyTextProps> = (args) => {
 export const Demo: StoryFn<BodyTextProps> = () => {
   return (
     <>
-      <Heading size="lg" as="h2">
-        Lorem Ipsum
+      <Heading size="4xl" as="h3">
+        A heading
       </Heading>
       <BodyText>
         <b>Lorem ipsum dolor sit amet</b>, consectetur adipiscing elit, sed do
@@ -80,7 +80,9 @@ export const Demo: StoryFn<BodyTextProps> = () => {
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
         id est laborum.
       </BodyText>
-      <Heading as="h2">Lorem Ipsum</Heading>
+      <Heading as="h4" size="3xl">
+        A smaller heading
+      </Heading>
       <BodyText>
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
         dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
