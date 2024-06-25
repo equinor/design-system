@@ -809,7 +809,7 @@ function AutocompleteInner<T>(
     middleware: [
       offset(4),
       flip({
-        boundary: document?.body,
+        boundary: typeof document === 'undefined' ? undefined : document?.body,
       }),
       size({
         apply({ rects, elements }: MiddlewareState) {
