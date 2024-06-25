@@ -7,6 +7,7 @@ import {
   cloneElement,
   useMemo,
   useEffect,
+  ReactNode,
 } from 'react'
 import styled from 'styled-components'
 import {
@@ -76,12 +77,12 @@ export type TooltipProps = {
   /** Tooltip placement relative to anchor */
   placement?: Placement
   /** Tooltip title */
-  title?: string
+  title?: ReactNode
   /** Tooltip anchor element */
   children: React.ReactElement & React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
   enterDelay?: number
-} & HTMLAttributes<HTMLDivElement>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'title'>
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
@@ -90,7 +91,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
-    const shouldOpen = title !== ''
+    const shouldOpen = Boolean(title)
 
     const {
       x,
