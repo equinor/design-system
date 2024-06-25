@@ -33,7 +33,7 @@
     "@types/node": "^20.12.12",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1"
