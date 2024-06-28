@@ -245,3 +245,4 @@ export const LINEHEIGHT_SCALE_1100_DEFAULT : number;
 export const LINEHEIGHT_SCALE_1100_SQUISHED : number;
 export const FONT_FAMILY_INTER : string;
 export const FONT_FAMILY_EQUINOR : string;
+export const DOCUMENTATION : string;

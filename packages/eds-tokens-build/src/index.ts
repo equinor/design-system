@@ -4,7 +4,7 @@ import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
 const FILE_KEY_PRIMITIVES = 'cVaqjfgt3gDiqbx10q3Pj8'
-const FILE_KEY_THEMES = 'aRgKtCisnm98k9kVy6zasL'
+const FILE_KEY_COLORS = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 const OKLCH_PRECISION = 3
@@ -28,7 +28,7 @@ const resolveReference = (value: string, prefix: string): string => {
 }
 
 const darkTokens = readJsonFiles([
-  `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`,
+  `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🌗 Mode.Dark.json`,
 ])
 const spacingComfortableTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
@@ -40,7 +40,8 @@ const lightDarkTransform: StyleDictionary.Transform = {
   matcher: isColor,
   transformer: (token: StyleDictionary.TransformedToken, options) => {
     const path = token.path.join('/')
-    const darkValue = darkTokens['🌗 Themes.Dark.json']?.[`${path}`]?.['$value']
+    console.log(path)
+    const darkValue = darkTokens['🌗 Mode.Dark.json']?.[`${path}`]?.['$value']
 
     if (darkValue) {
       //it is a reference
@@ -118,6 +119,7 @@ const toOKLCHTransform: StyleDictionary.Transform = {
   transitive: true,
   matcher: isColor,
   transformer: (token: StyleDictionary.TransformedToken) => {
+    // if (!token.value) return ''
     const tokenAsString = `${token.value}`
     //handle partially transformed light-dark values
     if (tokenAsString.startsWith('light')) {
@@ -408,8 +410,8 @@ const includeTokenFilter = (
 
 const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
 const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
-const THEME_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`
-const THEME_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`
+const COLOR_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🌗 Mode.Light.json`
+const COLOR_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🌗 Mode.Dark.json`
 
 const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
 const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
@@ -420,37 +422,39 @@ export function run({ outputReferences } = { outputReferences: true }) {
   console.info('outputReferences:', outputReferences)
 
   const systemName = 'eds'
-  const colorPrefix = `${systemName}-color`
+  // const colorPrefix = `${systemName}-color`
   const colorBuildPath = 'color/'
   const spacingBuildPath = 'spacing/'
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
     buildPath: colorBuildPath,
-    prefix: colorPrefix,
+    prefix: systemName,
     fileName: 'primitives',
     outputReferences: false, // The primitives should not reference other tokens. This can always be false.
   })
 
   const lightMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_LIGHT_SOURCE],
+    source: [COLOR_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
     buildPath: colorBuildPath,
-    prefix: colorPrefix,
+    prefix: systemName,
     fileName: 'theme-light',
     outputReferences,
   })
+
   const darkMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_DARK_SOURCE],
+    source: [COLOR_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
     buildPath: colorBuildPath,
-    prefix: colorPrefix,
+    prefix: systemName,
     fileName: 'theme-dark',
     selector: '[data-theme="dark"]',
     outputReferences,
   })
+
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
     buildPath: spacingBuildPath,
@@ -511,6 +515,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
       },
     },
   })
+
   const densityAllVerbose = StyleDictionary.extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
@@ -544,11 +549,11 @@ export function run({ outputReferences } = { outputReferences: true }) {
 
   const lightDark = StyleDictionary.extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_LIGHT_SOURCE],
+    source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: colorPrefix,
+        prefix: systemName,
         buildPath: `${cssBuildPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [
@@ -620,11 +625,11 @@ export function run({ outputReferences } = { outputReferences: true }) {
 
   const lightDarkTrimmed = StyleDictionary.extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_LIGHT_SOURCE],
+    source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: colorPrefix,
+        prefix: systemName,
         buildPath: `${cssBuildPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
         files: [

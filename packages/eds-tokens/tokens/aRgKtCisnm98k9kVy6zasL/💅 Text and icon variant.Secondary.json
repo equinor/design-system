@@ -1,0 +1,26 @@
+{
+  "text": {
+    "$type": "color",
+    "$value": "{color.text.secondary}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "icon": {
+    "$type": "color",
+    "$value": "{color.icon.secondary}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}
