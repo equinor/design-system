@@ -395,15 +395,14 @@ export function run({ outputReferences } = { outputReferences: true }) {
   console.info('Running Style Dictionary build script')
   console.info('outputReferences:', outputReferences)
 
-  const systemName = 'eds'
-  // const colorPrefix = `${systemName}-color`
+  const prefix = 'eds'
   const colorBuildPath = 'color/'
   const spacingBuildPath = 'spacing/'
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
     buildPath: colorBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'primitives',
     outputReferences: false, // The primitives should not reference other tokens. This can always be false.
   })
@@ -413,7 +412,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     source: [COLOR_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
     buildPath: colorBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'light',
     outputReferences,
   })
@@ -423,7 +422,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     source: [COLOR_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
     buildPath: colorBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'dark',
     selector: '[data-color-scheme="dark"]',
     outputReferences,
@@ -432,7 +431,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
     buildPath: spacingBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'primitives',
     filter: (token) => includeTokenFilter(token),
   })
@@ -441,7 +440,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     buildPath: spacingBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'comfortable',
     selector: '[data-density="comfortable"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
@@ -452,7 +451,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     buildPath: spacingBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'spacious',
     selector: ':root, [data-density="spacious"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
@@ -465,7 +464,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/cti/kebab',
@@ -496,7 +495,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/cti/kebab',
@@ -527,7 +526,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/${spacingBuildPath}`,
         transforms: cssTransforms,
         files: [
@@ -553,7 +552,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/${spacingBuildPath}`,
         transforms: cssTransforms,
         files: [
@@ -579,7 +578,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
         files: [
@@ -603,7 +602,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/color/`,
         transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
         files: [
