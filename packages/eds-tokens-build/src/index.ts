@@ -1,5 +1,4 @@
 import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
-import Color from 'colorjs.io'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
@@ -7,7 +6,6 @@ const FILE_KEY_PRIMITIVES = 'cVaqjfgt3gDiqbx10q3Pj8'
 const FILE_KEY_COLORS = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
-const OKLCH_PRECISION = 3
 
 const {
   filter: { isColor, isNumber },
@@ -62,9 +60,7 @@ const lightDarkTransform: StyleDictionary.Transform = {
         }
       } else {
         //the dark value was hardcoded (color with alpha transparency)
-        return `light-dark(${token.value}, ${new Color(darkValue as string)
-          .to('oklch')
-          .toString({ precision: OKLCH_PRECISION })})`
+        return `light-dark(${token.value}, ${darkValue})`
       }
     }
 
@@ -114,26 +110,6 @@ const densitySpaceToggleTransform: StyleDictionary.Transform = {
   },
 }
 
-const toOKLCHTransform: StyleDictionary.Transform = {
-  type: 'value',
-  transitive: true,
-  matcher: isColor,
-  transformer: (token: StyleDictionary.TransformedToken) => {
-    const tokenAsString = `${token.value}`
-    //handle partially transformed light-dark values
-    if (tokenAsString.startsWith('light')) {
-      return tokenAsString
-    }
-    return new Color(tokenAsString)
-      .to('oklch')
-      .toString({ precision: OKLCH_PRECISION })
-  },
-}
-
-StyleDictionary.registerTransform({
-  name: 'color/oklch',
-  ...toOKLCHTransform,
-})
 StyleDictionary.registerTransform({
   name: 'lightDark',
   ...lightDarkTransform,
@@ -282,7 +258,6 @@ const cssTransforms = [
   'eds/css/pxToRem',
   'eds/css/pxFormatted',
   'eds/font/quote',
-  'color/oklch',
 ]
 const outputDirectory = './build'
 const cssBuildPath = `${outputDirectory}/css`
@@ -606,7 +581,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transformGroup: 'css',
         prefix: systemName,
         buildPath: `${cssBuildPath}/color/`,
-        transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
+        transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
         files: [
           {
             filter: (token) => includeTokenFilter(token, ['Light']),
@@ -630,7 +605,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transformGroup: 'css',
         prefix: systemName,
         buildPath: `${cssBuildPath}/color/`,
-        transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
+        transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
         files: [
           {
             filter: (token) => includeTokenFilter(token, ['Light']),

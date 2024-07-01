@@ -3,33 +3,33 @@
  */
 
 :root {
-  --eds-ui-scrim-color-surface: oklch(0% 0 none / 0.4); /* Scrim */
-  --eds-table-cell-color-interactive-surface-disabled: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-initial-on-level-3: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-initial-on-level-2: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-initial-on-level-1: oklch(100% 0 none / 0); /* Table cell, Table data grid cell */
-  --eds-input-color-surface-read-only-on-level-3: oklch(100% 0 none / 0);
-  --eds-input-color-surface-read-only-on-level-2: oklch(100% 0 none / 0);
-  --eds-input-color-surface-read-only-on-level-1: oklch(100% 0 none / 0);
-  --eds-input-color-border-disabled: oklch(100% 0 none / 0); /* Autocomplete, Search, Text field */
-  --eds-color-interactive-surface-standard-quaternary-active-initial: oklch(100% 0 none / 0); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-resting-initial: oklch(100% 0 none / 0); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-disabled: oklch(100% 0 none / 0); /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-resting-initial: oklch(100% 0 none / 0); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-disabled: oklch(100% 0 none / 0); /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-resting-initial: oklch(100% 0 none / 0); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-disabled: oklch(100% 0 none / 0); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-resting-initial: oklch(100% 0 none / 0); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-disabled-outline: oklch(100% 0 none / 0); /* Toggle button */
-  --eds-color-interactive-border-standard-tertiary-active-hover: oklch(100% 0 none / 0); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-active-initial: oklch(100% 0 none / 0); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-resting-hover: oklch(100% 0 none / 0); /* Tab */
-  --eds-color-interactive-border-standard-tertiary-resting-initial: oklch(100% 0 none / 0); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-disabled: oklch(100% 0 none / 0); /* Sidebar menu */
-  --eds-color-surface-inverted: oklch(0% 0 none / 0.8); /* Snackbar, Tooltip */
-  --eds-color-surface-none: oklch(100% 0 none / 0); /* transparent */
-  --eds-color-border-none: oklch(100% 0 none / 0);
-  --eds-color-shadow: oklch(0% 0 none / 0.141); /* For use in box shadows */
+  --eds-ui-scrim-color-surface: #00000066; /* Scrim */
+  --eds-table-cell-color-interactive-surface-disabled: #ffffff00; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-resting-initial-on-level-3: #ffffff00; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-resting-initial-on-level-2: #ffffff00; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-resting-initial-on-level-1: #ffffff00; /* Table cell, Table data grid cell */
+  --eds-input-color-surface-read-only-on-level-3: #ffffff00;
+  --eds-input-color-surface-read-only-on-level-2: #ffffff00;
+  --eds-input-color-surface-read-only-on-level-1: #ffffff00;
+  --eds-input-color-border-disabled: #ffffff00; /* Autocomplete, Search, Text field */
+  --eds-color-interactive-surface-standard-quaternary-active-initial: #ffffff00; /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-resting-initial: #ffffff00; /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-disabled: #ffffff00; /* Tab */
+  --eds-color-interactive-surface-standard-tertiary-resting-initial: #ffffff00; /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-disabled: #ffffff00; /* Sidebar link */
+  --eds-color-interactive-surface-standard-secondary-resting-initial: #ffffff00; /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-disabled: #ffffff00; /* Sidebar menu */
+  --eds-color-interactive-surface-standard-primary-resting-initial: #ffffff00; /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-disabled-outline: #ffffff00; /* Toggle button */
+  --eds-color-interactive-border-standard-tertiary-active-hover: #ffffff00; /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-active-initial: #ffffff00; /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-resting-hover: #ffffff00; /* Tab */
+  --eds-color-interactive-border-standard-tertiary-resting-initial: #ffffff00; /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-disabled: #ffffff00; /* Sidebar menu */
+  --eds-color-surface-inverted: #000000cc; /* Snackbar, Tooltip */
+  --eds-color-surface-none: #ffffff00; /* transparent */
+  --eds-color-border-none: #ffffff00;
+  --eds-color-shadow: #00000024; /* For use in box shadows */
   --eds-table-header-color-interactive-icon-active-hover-on-level-3: var(--eds-color-moss-green-1300);
   --eds-table-header-color-interactive-icon-active-hover-on-level-2: var(--eds-color-moss-green-1300);
   --eds-table-header-color-interactive-icon-active-hover-on-level-1: var(--eds-color-moss-green-1300);
