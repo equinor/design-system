@@ -418,6 +418,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     buildPath: colorBuildPath,
     prefix,
     fileName: 'light',
+    selector: ':root, [data-color-scheme="light"]',
     outputReferences,
   })
 

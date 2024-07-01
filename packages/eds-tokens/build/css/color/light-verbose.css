@@ -2,7 +2,7 @@
  * Do not edit directly
  */
 
-:root {
+:root, [data-color-scheme="light"] {
   --eds-ui-scrim-color-surface: #00000066; /* Scrim */
   --eds-table-cell-color-interactive-surface-disabled: #ffffff00; /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-resting-initial-on-level-3: #ffffff00; /* Table cell, Table data grid cell */
