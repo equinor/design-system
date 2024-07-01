@@ -90,8 +90,8 @@ importers:
         specifier: workspace:^
         version: link:../eds-icons
       '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
+        specifier: 1.0.0-beta-2
+        version: 1.0.0-beta-2
       '@equinor/eds-utils':
         specifier: workspace:*
         version: link:../eds-utils
@@ -244,7 +244,7 @@ importers:
   packages/eds-data-grid-react:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: workspace:>=0.36.0
+        specifier: workspace:>=0.36.0 || ^1.0.0-beta.1
         version: link:../eds-core-react
       '@equinor/eds-icons':
         specifier: workspace:^
@@ -3835,6 +3835,10 @@ packages:
     dependencies:
       react: 18.2.0
     dev: true
+
+  /@equinor/eds-tokens@1.0.0-beta-2:
+    resolution: {integrity: sha512-cVtdhQi/nptL6wsr5oqBVcBGKerKrb/TyKLMY/740NE4yWSWvqJoT24GvbUK5DdLrqOpAQm3esl11kM3cDpf5g==}
+    dev: false
 
   /@esbuild/aix-ppc64@0.20.2:
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
