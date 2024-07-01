@@ -2,7 +2,7 @@
  * Do not edit directly
  */
 
-[data-theme="dark"] {
+[data-color-scheme="dark"] {
   --eds-ui-scrim-color-surface: oklch(0% 0 none / 0.4); /* Scrim */
   --eds-table-header-color-interactive-border-resting-hover-on-level-3: oklch(100% 0 none / 0.2);
   --eds-table-header-color-interactive-border-resting-hover-on-level-2: oklch(100% 0 none / 0.2);
