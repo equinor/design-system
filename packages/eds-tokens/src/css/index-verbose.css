@@ -1,4 +1,5 @@
 @import 'color/primitives-trimmed.css';
+@import 'color-setup.css';
 @import 'color/colors-verbose.css';
 @import 'spacing-setup.css';
 @import 'spacing/primitives-trimmed.css';

@@ -41,7 +41,6 @@ const lightDarkTransform: StyleDictionary.Transform = {
   matcher: isColor,
   transformer: (token: StyleDictionary.TransformedToken, options) => {
     const path = token.path.join('/')
-    console.log(path)
     const darkValue =
       darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
 

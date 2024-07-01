@@ -325,6 +325,17 @@
   --eds-color-moss-green-sat-1350: #033b3f;
   --eds-color-moss-green-sat-1400: #033235;
   --eds-color-moss-green-sat-1450: #02292c;
+}
+
+:root, [data-color-scheme="light"] {
+  color-scheme: light;
+}
+
+[data-color-scheme="dark"] {
+  color-scheme: dark;
+}
+
+:root {
   --eds-ui-scrim-color-surface: light-dark(#0006, #0006);
   --eds-table-cell-color-interactive-surface-disabled: light-dark(#fff0, #0000);
   --eds-table-cell-color-interactive-surface-resting-initial-on-level-3: light-dark(#fff0, #0000);

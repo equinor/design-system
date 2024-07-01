@@ -1,0 +1,8 @@
+:root,
+[data-color-scheme="light"] {
+  color-scheme: light;
+}
+
+[data-color-scheme="dark"] {
+  color-scheme: dark;
+}

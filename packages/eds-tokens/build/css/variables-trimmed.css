@@ -1,3 +1,11 @@
+:root, [data-color-scheme="light"] {
+  color-scheme: light;
+}
+
+[data-color-scheme="dark"] {
+  color-scheme: dark;
+}
+
 :root {
   --eds-color-shadow: light-dark(#00000024, #00000024);
   --eds-color-text-primary: light-dark(#3d3d3d, #d6d9dc);
