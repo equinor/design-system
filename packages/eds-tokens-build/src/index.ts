@@ -25,8 +25,8 @@ const resolveReference = (value: string, prefix: string): string => {
   return `var(--${prefix}-${valueFormatted})`
 }
 
-const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
-const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
+const darkColorSchemeCollectionFile = '🌗 Colour scheme.Dark.json'
+const lightColorSchemeCollectionFile = '🌗 Colour scheme.Light.json'
 
 const darkTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`,
