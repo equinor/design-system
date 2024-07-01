@@ -25,8 +25,11 @@ const resolveReference = (value: string, prefix: string): string => {
   return `var(--${prefix}-${valueFormatted})`
 }
 
+const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
+const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
+
 const darkTokens = readJsonFiles([
-  `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🌗 Mode.Dark.json`,
+  `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`,
 ])
 const spacingComfortableTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
@@ -39,7 +42,8 @@ const lightDarkTransform: StyleDictionary.Transform = {
   transformer: (token: StyleDictionary.TransformedToken, options) => {
     const path = token.path.join('/')
     console.log(path)
-    const darkValue = darkTokens['🌗 Mode.Dark.json']?.[`${path}`]?.['$value']
+    const darkValue =
+      darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
 
     if (darkValue) {
       //it is a reference
@@ -384,8 +388,8 @@ const includeTokenFilter = (
 
 const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
 const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
-const COLOR_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🌗 Mode.Light.json`
-const COLOR_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🌗 Mode.Dark.json`
+const COLOR_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${lightColorSchemeCollectionFile}`
+const COLOR_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`
 
 const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
 const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`

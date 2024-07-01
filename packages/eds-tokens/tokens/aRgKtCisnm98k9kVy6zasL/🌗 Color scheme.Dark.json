@@ -17,7 +17,7 @@
     "text": {
       "primary": {
         "$type": "color",
-        "$value": "{Slate Grey.400}",
+        "$value": "{color.Slate Grey.400}",
         "$description": "Dialog title, Popover title, Side sheet title, Title",
         "$extensions": {
           "com.figma": {
@@ -31,7 +31,7 @@
       },
       "secondary": {
         "$type": "color",
-        "$value": "{Slate Grey.500}",
+        "$value": "{color.Slate Grey.500}",
         "$description": "Application name, Dialog body text, Popover body text",
         "$extensions": {
           "com.figma": {
@@ -45,7 +45,7 @@
       },
       "tertiary": {
         "$type": "color",
-        "$value": "{Slate Grey.600}",
+        "$value": "{color.Slate Grey.600}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -59,7 +59,7 @@
       },
       "quaternary": {
         "$type": "color",
-        "$value": "{Slate Grey.900}",
+        "$value": "{color.Slate Grey.900}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -73,7 +73,7 @@
       },
       "maximal": {
         "$type": "color",
-        "$value": "{Neutral.0}",
+        "$value": "{color.Neutral.0}",
         "$description": "For titles and high-contrast headers",
         "$extensions": {
           "com.figma": {
@@ -85,7 +85,7 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{Slate Grey.1000}",
+        "$value": "{color.Slate Grey.1000}",
         "$description": "simple semantic text color. Covers: Menu item, Tab, Table cell, Table data grid cell, Table header, Table data grid header",
         "$extensions": {
           "com.figma": {
@@ -99,7 +99,7 @@
       },
       "inverted": {
         "$type": "color",
-        "$value": "{Neutral.1500}",
+        "$value": "{color.Neutral.1500}",
         "$description": "Button, Toggle button",
         "$extensions": {
           "com.figma": {
@@ -115,7 +115,7 @@
     "icon": {
       "primary": {
         "$type": "color",
-        "$value": "{Slate Grey.400}",
+        "$value": "{color.Slate Grey.400}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -129,7 +129,7 @@
       },
       "secondary": {
         "$type": "color",
-        "$value": "{Slate Grey.500}",
+        "$value": "{color.Slate Grey.500}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -143,7 +143,7 @@
       },
       "tertiary": {
         "$type": "color",
-        "$value": "{Slate Grey.600}",
+        "$value": "{color.Slate Grey.600}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -157,7 +157,7 @@
       },
       "quaternary": {
         "$type": "color",
-        "$value": "{Slate Grey.900}",
+        "$value": "{color.Slate Grey.900}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -171,7 +171,7 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{Slate Grey.1000}",
+        "$value": "{color.Slate Grey.1000}",
         "$description": "simple semantic color for disabled icons. Covers: Autocomplete, Menu item (Menu &amp; Sidebar) Search, Tab, Table header, Table header data grid, Table cell, Table data grid cell, Text field, Top bar",
         "$extensions": {
           "com.figma": {
@@ -185,7 +185,7 @@
       },
       "inverted": {
         "$type": "color",
-        "$value": "{Neutral.1500}",
+        "$value": "{color.Neutral.1500}",
         "$description": "Button, Toggle button",
         "$extensions": {
           "com.figma": {
@@ -257,7 +257,7 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{Slate Grey.1100}",
+        "$value": "{color.Slate Grey.1100}",
         "$description": "simple semantic disabled colour for borders. Covers: Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid",
         "$extensions": {
           "com.figma": {
@@ -287,7 +287,7 @@
     "surface": {
       "level-1": {
         "$type": "color",
-        "$value": "{Slate Blue.1400}",
+        "$value": "{color.Slate Blue.1400}",
         "$description": "level 1 surface (UI main)",
         "$extensions": {
           "com.figma": {
@@ -301,7 +301,7 @@
       },
       "level-2": {
         "$type": "color",
-        "$value": "{Slate Blue.1350}",
+        "$value": "{color.Slate Blue.1350}",
         "$description": "Card, Dialog",
         "$extensions": {
           "com.figma": {
@@ -315,7 +315,7 @@
       },
       "level-3": {
         "$type": "color",
-        "$value": "{Slate Blue.1300}",
+        "$value": "{color.Slate Blue.1300}",
         "$description": "Card, Menu, Popover",
         "$extensions": {
           "com.figma": {
@@ -482,7 +482,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -496,7 +496,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -512,7 +512,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -526,7 +526,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -542,7 +542,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -556,7 +556,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -588,7 +588,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -602,7 +602,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -618,7 +618,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -632,7 +632,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -648,7 +648,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -662,7 +662,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -800,7 +800,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -814,7 +814,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -830,7 +830,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -844,7 +844,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -860,7 +860,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -874,7 +874,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -904,7 +904,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -918,7 +918,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -934,7 +934,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -948,7 +948,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -964,7 +964,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -978,7 +978,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -997,7 +997,7 @@
         "primary": {
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1300}",
+            "$value": "{color.Slate Grey.1300}",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -1012,7 +1012,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1026,7 +1026,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1042,7 +1042,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1056,7 +1056,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1072,7 +1072,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1086,7 +1086,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1118,7 +1118,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1132,7 +1132,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1148,7 +1148,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1162,7 +1162,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1178,7 +1178,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1192,7 +1192,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1303,7 +1303,7 @@
         "primary": {
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1300}",
+            "$value": "{color.Slate Grey.1300}",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -1318,7 +1318,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.500}",
+              "$value": "{color.Moss Green Sat.500}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1332,7 +1332,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1348,7 +1348,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.600}",
+              "$value": "{color.Slate Grey.600}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1362,7 +1362,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1378,7 +1378,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.700}",
+              "$value": "{color.Red Warm.700}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1392,7 +1392,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1438,7 +1438,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.1400}",
+              "$value": "{color.Moss Green Sat.1400}",
               "$description": "Button, Ghost button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1468,7 +1468,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Blue.1200}",
+              "$value": "{color.Slate Blue.1200}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1498,7 +1498,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Cold.1400}",
+              "$value": "{color.Red Cold.1400}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1544,7 +1544,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.1400}",
+              "$value": "{color.Moss Green Sat.1400}",
               "$description": "Button, Ghost button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1574,7 +1574,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Blue.1200}",
+              "$value": "{color.Slate Blue.1200}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1604,7 +1604,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Cold.1400}",
+              "$value": "{color.Red Cold.1400}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1684,7 +1684,7 @@
           "info": {
             "initial": {
               "$type": "color",
-              "$value": "{Blue Sky.600}",
+              "$value": "{color.Blue Sky.600}",
               "$description": "Chip, Card, input helper",
               "$extensions": {
                 "com.figma": {
@@ -1698,7 +1698,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Blue Sky.400}",
+              "$value": "{color.Blue Sky.400}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -1714,7 +1714,7 @@
           "success": {
             "initial": {
               "$type": "color",
-              "$value": "{Success Green.600}",
+              "$value": "{color.Success Green.600}",
               "$description": "Chip, Card, input helper",
               "$extensions": {
                 "com.figma": {
@@ -1728,7 +1728,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Success Green.300}",
+              "$value": "{color.Success Green.300}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -1744,7 +1744,7 @@
           "warning": {
             "initial": {
               "$type": "color",
-              "$value": "{Spruce Wood.500}",
+              "$value": "{color.Spruce Wood.500}",
               "$description": "Chip, Card, input helper",
               "$extensions": {
                 "com.figma": {
@@ -1758,7 +1758,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Spruce Wood.300}",
+              "$value": "{color.Spruce Wood.300}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -1774,7 +1774,7 @@
           "error": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.600}",
+              "$value": "{color.Red Warm.600}",
               "$description": "Chip, Card, input helper",
               "$extensions": {
                 "com.figma": {
@@ -1788,7 +1788,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -1805,7 +1805,7 @@
         "callout": {
           "info": {
             "$type": "color",
-            "$value": "{Mist Blue Muted.200}",
+            "$value": "{color.Mist Blue Muted.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -1819,7 +1819,7 @@
           },
           "success": {
             "$type": "color",
-            "$value": "{Lichen Green.200}",
+            "$value": "{color.Lichen Green.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -1833,7 +1833,7 @@
           },
           "warning": {
             "$type": "color",
-            "$value": "{Spruce Wood.200}",
+            "$value": "{color.Spruce Wood.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -1847,7 +1847,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{Red Warm.200}",
+            "$value": "{color.Red Warm.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -1865,7 +1865,7 @@
         "standard": {
           "info": {
             "$type": "color",
-            "$value": "{Blue Sky.600}",
+            "$value": "{color.Blue Sky.600}",
             "$description": "Deprecated - Card. Use icon/message.",
             "$extensions": {
               "com.figma": {
@@ -1879,7 +1879,7 @@
           },
           "success": {
             "$type": "color",
-            "$value": "{Success Green.600}",
+            "$value": "{color.Success Green.600}",
             "$description": "Deprecated - Card. Use icon/message.",
             "$extensions": {
               "com.figma": {
@@ -1893,7 +1893,7 @@
           },
           "warning": {
             "$type": "color",
-            "$value": "{Spruce Wood.500}",
+            "$value": "{color.Spruce Wood.500}",
             "$description": "Deprecated - Card. Use icon/message.",
             "$extensions": {
               "com.figma": {
@@ -1907,7 +1907,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{Red Warm.600}",
+            "$value": "{color.Red Warm.600}",
             "$description": "Deprecated - Card. Use icon/message.",
             "$extensions": {
               "com.figma": {
@@ -1924,7 +1924,7 @@
           "info": {
             "initial": {
               "$type": "color",
-              "$value": "{Blue Sky.600}",
+              "$value": "{color.Blue Sky.600}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -1938,7 +1938,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Blue Sky.400}",
+              "$value": "{color.Blue Sky.400}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -1954,7 +1954,7 @@
           "success": {
             "initial": {
               "$type": "color",
-              "$value": "{Success Green.600}",
+              "$value": "{color.Success Green.600}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -1968,7 +1968,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Success Green.300}",
+              "$value": "{color.Success Green.300}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -1984,7 +1984,7 @@
           "warning": {
             "initial": {
               "$type": "color",
-              "$value": "{Spruce Wood.500}",
+              "$value": "{color.Spruce Wood.500}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -1998,7 +1998,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Spruce Wood.300}",
+              "$value": "{color.Spruce Wood.300}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -2014,7 +2014,7 @@
           "error": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Warm.600}",
+              "$value": "{color.Red Warm.600}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -2028,7 +2028,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Deprecated - Chip. Use icon/message.",
               "$extensions": {
                 "com.figma": {
@@ -2045,7 +2045,7 @@
         "callout": {
           "info": {
             "$type": "color",
-            "$value": "{Mist Blue Muted.200}",
+            "$value": "{color.Mist Blue Muted.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2059,7 +2059,7 @@
           },
           "success": {
             "$type": "color",
-            "$value": "{Lichen Green.200}",
+            "$value": "{color.Lichen Green.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2073,7 +2073,7 @@
           },
           "warning": {
             "$type": "color",
-            "$value": "{Spruce Wood.200}",
+            "$value": "{color.Spruce Wood.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2087,7 +2087,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{Red Warm.200}",
+            "$value": "{color.Red Warm.200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2105,7 +2105,7 @@
         "standard": {
           "info": {
             "$type": "color",
-            "$value": "{Blue Sky.1000}",
+            "$value": "{color.Blue Sky.1000}",
             "$description": "Card",
             "$extensions": {
               "com.figma": {
@@ -2119,7 +2119,7 @@
           },
           "success": {
             "$type": "color",
-            "$value": "{Success Green.900}",
+            "$value": "{color.Success Green.900}",
             "$description": "Card",
             "$extensions": {
               "com.figma": {
@@ -2133,7 +2133,7 @@
           },
           "warning": {
             "$type": "color",
-            "$value": "{Orange.800}",
+            "$value": "{color.Orange.800}",
             "$description": "Card",
             "$extensions": {
               "com.figma": {
@@ -2147,7 +2147,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{Red Cold.900}",
+            "$value": "{color.Red Cold.900}",
             "$description": "Card",
             "$extensions": {
               "com.figma": {
@@ -2164,7 +2164,7 @@
           "info": {
             "initial": {
               "$type": "color",
-              "$value": "{Blue Sky.1000}",
+              "$value": "{color.Blue Sky.1000}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2178,7 +2178,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Blue Sky.400}",
+              "$value": "{color.Blue Sky.400}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2194,7 +2194,7 @@
           "success": {
             "initial": {
               "$type": "color",
-              "$value": "{Success Green.900}",
+              "$value": "{color.Success Green.900}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2208,7 +2208,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Success Green.300}",
+              "$value": "{color.Success Green.300}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2224,7 +2224,7 @@
           "warning": {
             "initial": {
               "$type": "color",
-              "$value": "{Orange.800}",
+              "$value": "{color.Orange.800}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2238,7 +2238,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Spruce Wood.300}",
+              "$value": "{color.Spruce Wood.300}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2254,7 +2254,7 @@
           "error": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Cold.900}",
+              "$value": "{color.Red Cold.900}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2268,7 +2268,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Red Warm.500}",
+              "$value": "{color.Red Warm.500}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2285,7 +2285,7 @@
         "callout": {
           "info": {
             "$type": "color",
-            "$value": "{Blue Sky.1200}",
+            "$value": "{color.Blue Sky.1200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2299,7 +2299,7 @@
           },
           "success": {
             "$type": "color",
-            "$value": "{Lichen Green.1200}",
+            "$value": "{color.Lichen Green.1200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2313,7 +2313,7 @@
           },
           "warning": {
             "$type": "color",
-            "$value": "{Orange.1200}",
+            "$value": "{color.Orange.1200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2327,7 +2327,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{Red Cold.1200}",
+            "$value": "{color.Red Cold.1200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2346,7 +2346,7 @@
           "info": {
             "on-level-1": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2360,7 +2360,7 @@
             },
             "on-level-2": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2374,7 +2374,7 @@
             },
             "on-level-3": {
               "$type": "color",
-              "$value": "{Slate Blue.1300}",
+              "$value": "{color.Slate Blue.1300}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2390,7 +2390,7 @@
           "success": {
             "on-level-1": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2404,7 +2404,7 @@
             },
             "on-level-2": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2418,7 +2418,7 @@
             },
             "on-level-3": {
               "$type": "color",
-              "$value": "{Slate Blue.1300}",
+              "$value": "{color.Slate Blue.1300}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2434,7 +2434,7 @@
           "warning": {
             "on-level-1": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2448,7 +2448,7 @@
             },
             "on-level-2": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2462,7 +2462,7 @@
             },
             "on-level-3": {
               "$type": "color",
-              "$value": "{Slate Blue.1300}",
+              "$value": "{color.Slate Blue.1300}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2478,7 +2478,7 @@
           "error": {
             "on-level-1": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2492,7 +2492,7 @@
             },
             "on-level-2": {
               "$type": "color",
-              "$value": "{Slate Blue.1350}",
+              "$value": "{color.Slate Blue.1350}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2506,7 +2506,7 @@
             },
             "on-level-3": {
               "$type": "color",
-              "$value": "{Slate Blue.1300}",
+              "$value": "{color.Slate Blue.1300}",
               "$description": "Card",
               "$extensions": {
                 "com.figma": {
@@ -2645,7 +2645,7 @@
         "callout": {
           "info": {
             "$type": "color",
-            "$value": "{Blue Sky.1200}",
+            "$value": "{color.Blue Sky.1200}",
             "$description": "Chip",
             "$extensions": {
               "com.figma": {
@@ -2659,7 +2659,7 @@
           },
           "success": {
             "$type": "color",
-            "$value": "{Lichen Green.1200}",
+            "$value": "{color.Lichen Green.1200}",
             "$description": "Chip",
             "$extensions": {
               "com.figma": {
@@ -2673,7 +2673,7 @@
           },
           "warning": {
             "$type": "color",
-            "$value": "{Orange.1200}",
+            "$value": "{color.Orange.1200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2687,7 +2687,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{Red Cold.1200}",
+            "$value": "{color.Red Cold.1200}",
             "$description": "Banner",
             "$extensions": {
               "com.figma": {
@@ -2708,7 +2708,7 @@
           "resting": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.1100}",
+              "$value": "{color.Slate Grey.1100}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2722,7 +2722,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.400}",
+              "$value": "{color.Slate Grey.400}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2738,7 +2738,7 @@
           "active": {
             "initial": {
               "$type": "color",
-              "$value": "{Mist Blue Muted.1200}",
+              "$value": "{color.Mist Blue Muted.1200}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2752,7 +2752,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.400}",
+              "$value": "{color.Moss Green Sat.400}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -2767,7 +2767,7 @@
           },
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Chip",
             "$extensions": {
               "com.figma": {
@@ -2784,7 +2784,7 @@
           "primary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -2799,7 +2799,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -2813,7 +2813,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -2829,7 +2829,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -2843,7 +2843,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -2860,7 +2860,7 @@
           "secondary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Blue.1400}",
+              "$value": "{color.Slate Blue.1400}",
               "$description": "Sidebar link",
               "$extensions": {
                 "com.figma": {
@@ -2875,7 +2875,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Blue.1400}",
+                "$value": "{color.Slate Blue.1400}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -2889,7 +2889,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Blue.1400}",
+                "$value": "{color.Slate Blue.1400}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -2905,7 +2905,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -2919,7 +2919,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.300}",
+                "$value": "{color.Moss Green Sat.300}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3057,7 +3057,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -3071,7 +3071,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.300}",
+                "$value": "{color.Moss Green Sat.300}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -3092,7 +3092,7 @@
           "primary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Disabled Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -3105,7 +3105,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3119,7 +3119,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3135,7 +3135,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Neutral.1500}",
+                "$value": "{color.Neutral.1500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3149,7 +3149,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Neutral.1500}",
+                "$value": "{color.Neutral.1500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3166,7 +3166,7 @@
           "secondary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Disabled Sidebar link",
               "$extensions": {
                 "com.figma": {
@@ -3179,7 +3179,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3193,7 +3193,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3209,7 +3209,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3223,7 +3223,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.300}",
+                "$value": "{color.Moss Green Sat.300}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3240,7 +3240,7 @@
           "tertiary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Disabled Sidebar link",
               "$extensions": {
                 "com.figma": {
@@ -3253,7 +3253,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3267,7 +3267,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3283,7 +3283,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.200}",
+                "$value": "{color.Moss Green Sat.200}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3297,7 +3297,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.100}",
+                "$value": "{color.Moss Green Sat.100}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3314,7 +3314,7 @@
           "quaternary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Disabled Tab",
               "$extensions": {
                 "com.figma": {
@@ -3327,7 +3327,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -3341,7 +3341,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -3357,7 +3357,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -3371,7 +3371,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.300}",
+                "$value": "{color.Moss Green Sat.300}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -3389,7 +3389,7 @@
         "raised": {
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Chip",
             "$extensions": {
               "com.figma": {
@@ -3404,7 +3404,7 @@
           "resting": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3418,7 +3418,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.400}",
+              "$value": "{color.Slate Grey.400}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3434,7 +3434,7 @@
           "active": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3448,7 +3448,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.200}",
+              "$value": "{color.Moss Green Sat.200}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3469,7 +3469,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3483,7 +3483,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3499,7 +3499,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3513,7 +3513,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.300}",
+                "$value": "{color.Moss Green Sat.300}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -3528,7 +3528,7 @@
             },
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Sidebar link",
               "$extensions": {
                 "com.figma": {
@@ -3542,7 +3542,7 @@
           "primary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Disabled Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -3555,7 +3555,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3569,7 +3569,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3585,7 +3585,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Neutral.1500}",
+                "$value": "{color.Neutral.1500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3599,7 +3599,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Neutral.1500}",
+                "$value": "{color.Neutral.1500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3617,7 +3617,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -3631,7 +3631,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -3646,7 +3646,7 @@
             },
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Sidebar menu",
               "$extensions": {
                 "com.figma": {
@@ -3659,7 +3659,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.200}",
+                "$value": "{color.Moss Green Sat.200}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -3673,7 +3673,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.100}",
+                "$value": "{color.Moss Green Sat.100}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -3690,7 +3690,7 @@
           "quaternary": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "Disabled Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -3703,7 +3703,7 @@
             "resting": {
               "initial": {
                 "$type": "color",
-                "$value": "{Slate Grey.600}",
+                "$value": "{color.Slate Grey.600}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3717,7 +3717,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Grey.500}",
+                "$value": "{color.Slate Grey.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3733,7 +3733,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3747,7 +3747,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green.300}",
+                "$value": "{color.Moss Green.300}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3765,7 +3765,7 @@
         "raised": {
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Chip",
             "$extensions": {
               "com.figma": {
@@ -3780,7 +3780,7 @@
           "resting": {
             "initial": {
               "$type": "color",
-              "$value": "{Slate Grey.500}",
+              "$value": "{color.Slate Grey.500}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3794,7 +3794,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Slate Grey.400}",
+              "$value": "{color.Slate Grey.400}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3810,7 +3810,7 @@
           "active": {
             "initial": {
               "$type": "color",
-              "$value": "{Moss Green Sat.300}",
+              "$value": "{color.Moss Green Sat.300}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3824,7 +3824,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{Moss Green Sat.200}",
+              "$value": "{color.Moss Green Sat.200}",
               "$description": "Chip",
               "$extensions": {
                 "com.figma": {
@@ -3858,7 +3858,7 @@
             },
             "disabled-filled": {
               "$type": "color",
-              "$value": "{Slate Grey.1300}",
+              "$value": "{color.Slate Grey.1300}",
               "$description": "Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -3887,7 +3887,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Blue.1200}",
+                "$value": "{color.Slate Blue.1200}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3903,7 +3903,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3917,7 +3917,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.500}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -3963,7 +3963,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Blue.1200}",
+                "$value": "{color.Slate Blue.1200}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -3979,7 +3979,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Mist Blue Muted.1200}",
+                "$value": "{color.Mist Blue Muted.1200}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -3993,7 +3993,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Mist Blue Muted.1100}",
+                "$value": "{color.Mist Blue Muted.1100}",
                 "$description": "Sidebar menu",
                 "$extensions": {
                   "com.figma": {
@@ -4039,7 +4039,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Blue.1200}",
+                "$value": "{color.Slate Blue.1200}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -4055,7 +4055,7 @@
             "active": {
               "initial": {
                 "$type": "color",
-                "$value": "{Mist Blue Muted.1200}",
+                "$value": "{color.Mist Blue Muted.1200}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -4069,7 +4069,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Mist Blue Muted.1100}",
+                "$value": "{color.Mist Blue Muted.1100}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -4115,7 +4115,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Slate Blue.1200}",
+                "$value": "{color.Slate Blue.1200}",
                 "$description": "Tab",
                 "$extensions": {
                   "com.figma": {
@@ -4145,7 +4145,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{Mist Blue Muted.1200}",
+                "$value": "{color.Mist Blue Muted.1200}",
                 "$description": "Sidebar link",
                 "$extensions": {
                   "com.figma": {
@@ -4242,7 +4242,7 @@
       "text": {
         "standard": {
           "$type": "color",
-          "$value": "{Slate Grey.200}",
+          "$value": "{color.Slate Grey.200}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4254,7 +4254,7 @@
         },
         "raised": {
           "$type": "color",
-          "$value": "{Moss Green Sat.300}",
+          "$value": "{color.Moss Green Sat.300}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4266,7 +4266,7 @@
         },
         "callout": {
           "$type": "color",
-          "$value": "{Neutral.0}",
+          "$value": "{color.Neutral.0}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4280,7 +4280,7 @@
       "icon": {
         "standard": {
           "$type": "color",
-          "$value": "{Moss Green.500}",
+          "$value": "{color.Moss Green.500}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4292,7 +4292,7 @@
         },
         "raised": {
           "$type": "color",
-          "$value": "{Moss Green Sat.300}",
+          "$value": "{color.Moss Green Sat.300}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4304,7 +4304,7 @@
         },
         "callout": {
           "$type": "color",
-          "$value": "{Moss Green.500}",
+          "$value": "{color.Moss Green.500}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4319,7 +4319,7 @@
         "standard": {
           "on-level-1": {
             "$type": "color",
-            "$value": "{Slate Blue.1350}",
+            "$value": "{color.Slate Blue.1350}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -4331,7 +4331,7 @@
           },
           "on-level-2": {
             "$type": "color",
-            "$value": "{Slate Blue.1350}",
+            "$value": "{color.Slate Blue.1350}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -4343,7 +4343,7 @@
           },
           "on-level-3": {
             "$type": "color",
-            "$value": "{Slate Blue.1300}",
+            "$value": "{color.Slate Blue.1300}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -4356,7 +4356,7 @@
         },
         "raised": {
           "$type": "color",
-          "$value": "{Slate Grey.1100}",
+          "$value": "{color.Slate Grey.1100}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4368,7 +4368,7 @@
         },
         "callout": {
           "$type": "color",
-          "$value": "{Slate Blue.1300}",
+          "$value": "{color.Slate Blue.1300}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4383,7 +4383,7 @@
         "standard": {
           "on-level-1": {
             "$type": "color",
-            "$value": "{Slate Blue.1350}",
+            "$value": "{color.Slate Blue.1350}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -4395,7 +4395,7 @@
           },
           "on-level-2": {
             "$type": "color",
-            "$value": "{Slate Blue.1350}",
+            "$value": "{color.Slate Blue.1350}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -4407,7 +4407,7 @@
           },
           "on-level-3": {
             "$type": "color",
-            "$value": "{Slate Blue.1300}",
+            "$value": "{color.Slate Blue.1300}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -4432,1826 +4432,13 @@
         },
         "callout": {
           "$type": "color",
-          "$value": "{Slate Blue.1300}",
+          "$value": "{color.Slate Blue.1300}",
           "$description": "",
           "$extensions": {
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [],
               "codeSyntax": {}
-            }
-          }
-        }
-      }
-    }
-  },
-  "deprecated": {
-    "text": {
-      "interactive": {
-        "resting": {
-          "$type": "color",
-          "$value": "{Slate Grey.600}",
-          "$description": "Menu item, Tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-interactive-resting)"
-              }
-            }
-          }
-        },
-        "resting-hover": {
-          "$type": "color",
-          "$value": "{Slate Grey.500}",
-          "$description": "Menu item, Tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-interactive-resting-hover)"
-              }
-            }
-          }
-        },
-        "resting-pressed": {
-          "$type": "color",
-          "$value": "{Slate Grey.400}",
-          "$description": "tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active": {
-          "$type": "color",
-          "$value": "{Moss Green Sat.500}",
-          "$description": "Menu item, Tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-interactive-active)"
-              }
-            }
-          }
-        },
-        "active-hover": {
-          "$type": "color",
-          "$value": "{Moss Green Sat.300}",
-          "$description": "Menu item, Tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-interactive-active-hover)"
-              }
-            }
-          }
-        },
-        "active-pressed": {
-          "$type": "color",
-          "$value": "{Moss Green Sat.200}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active-neutral-pressed": {
-          "$type": "color",
-          "$value": "{Slate Grey.100}",
-          "$description": "table",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "elevation-level-2": {
-          "resting": {
-            "$type": "color",
-            "$value": "{Slate Grey.500}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-interactive-elevation-level-2-resting)"
-                }
-              }
-            }
-          },
-          "resting-hover": {
-            "$type": "color",
-            "$value": "{Slate Grey.400}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-interactive-elevation-level-2-resting-hover)"
-                }
-              }
-            }
-          },
-          "resting-pressed": {
-            "$type": "color",
-            "$value": "{Slate Grey.200}",
-            "$description": "tab",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          },
-          "active": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.200}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-interactive-elevation-level-2-active)"
-                }
-              }
-            }
-          },
-          "active-hover": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.100}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-interactive-elevation-level-2-active-hover)"
-                }
-              }
-            }
-          },
-          "active-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.100}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      },
-      "input": {
-        "helper": {
-          "default": {
-            "$type": "color",
-            "$value": "{color.text.tertiary}",
-            "$description": "Deprecated - helper text for input field. Use text/tertiary.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-input-helper-default)"
-                }
-              }
-            }
-          },
-          "info": {
-            "$type": "color",
-            "$value": "{color.message.text.raised.info.initial}",
-            "$description": "Deprecated - helper text for input field. Use text/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-input-helper-info)"
-                }
-              }
-            }
-          },
-          "success": {
-            "$type": "color",
-            "$value": "{color.message.text.raised.success.initial}",
-            "$description": "Deprecated - helper text for input field. Use text/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-input-helper-success)"
-                }
-              }
-            }
-          },
-          "warning": {
-            "$type": "color",
-            "$value": "{color.message.text.raised.warning.initial}",
-            "$description": "Deprecated - helper text for input field. Use text/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-input-helper-warning)"
-                }
-              }
-            }
-          },
-          "error": {
-            "$type": "color",
-            "$value": "{color.message.text.raised.error.initial}",
-            "$description": "Deprecated - helper text for input field. Use text/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-text-input-helper-error)"
-                }
-              }
-            }
-          }
-        },
-        "placeholder": {
-          "$type": "color",
-          "$value": "{color.text.quaternary}",
-          "$description": "Autocomplete, Table input, Search, Text field",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-input-placeholder)"
-              }
-            }
-          }
-        },
-        "label": {
-          "$type": "color",
-          "$value": "{Slate Grey.600}",
-          "$description": "Autocomplete, Text field",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-input-label)"
-              }
-            }
-          }
-        }
-      },
-      "button": {
-        "primary": {
-          "on-outlined-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.200}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "secondary": {
-          "on-outlined-pressed": {
-            "$type": "color",
-            "$value": "{Mist Grey.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "danger": {
-          "on-outlined-pressed": {
-            "$type": "color",
-            "$value": "{Red Warm.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "TEXT_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      },
-      "chip": {
-        "info": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.info.initial}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-info)"
-              }
-            }
-          }
-        },
-        "info-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.info.hover}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-info-hover)"
-              }
-            }
-          }
-        },
-        "success": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.success.initial}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-success)"
-              }
-            }
-          }
-        },
-        "success-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.success.hover}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-success-hover)"
-              }
-            }
-          }
-        },
-        "warning": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.warning.initial}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-warning)"
-              }
-            }
-          }
-        },
-        "warning-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.warning.hover}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-warning-hover)"
-              }
-            }
-          }
-        },
-        "error": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.error.initial}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-error)"
-              }
-            }
-          }
-        },
-        "error-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.error.hover}",
-          "$description": "Deprecated - Chip. Use text/message.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-chip-error-hover)"
-              }
-            }
-          }
-        }
-      }
-    },
-    "icon": {
-      "message": {
-        "info": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.info.initial}",
-          "$description": "Chip, Card, input helper",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-notification-info)"
-              }
-            }
-          }
-        },
-        "info-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.info.hover}",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-chip-info-hover)"
-              }
-            }
-          }
-        },
-        "success": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.success.initial}",
-          "$description": "Chip, Card, input helper",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-notification-success)"
-              }
-            }
-          }
-        },
-        "success-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.success.hover}",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-chip-success-hover)"
-              }
-            }
-          }
-        },
-        "warning": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.warning.initial}",
-          "$description": "Chip, Card, input helper",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-notification-warning)"
-              }
-            }
-          }
-        },
-        "warning-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.warning.hover}",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-chip-warning-hover)"
-              }
-            }
-          }
-        },
-        "error": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.error.initial}",
-          "$description": "Chip, Card, input helper",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-text-notification-error)"
-              }
-            }
-          }
-        },
-        "error-hover": {
-          "$type": "color",
-          "$value": "{color.message.text.raised.error.hover}",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-chip-error-hover)"
-              }
-            }
-          }
-        }
-      },
-      "availability": {
-        "available": {
-          "$type": "color",
-          "$value": "{Success Green.600}",
-          "$description": "Card",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-availability-available)"
-              }
-            }
-          }
-        },
-        "away": {
-          "$type": "color",
-          "$value": "{Orange.600}",
-          "$description": "Card",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-availability-away)"
-              }
-            }
-          }
-        },
-        "busy": {
-          "$type": "color",
-          "$value": "{Red Warm.800}",
-          "$description": "Card",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-availability-busy)"
-              }
-            }
-          }
-        },
-        "do-not-disturb": {
-          "$type": "color",
-          "$value": "{Red Warm.800}",
-          "$description": "Card neutral",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-availability-do-not-disturb)"
-              }
-            }
-          }
-        }
-      },
-      "interactive": {
-        "resting": {
-          "$type": "color",
-          "$value": "{Slate Grey.600}",
-          "$description": "Autocomplete, Menu item (Sidebar) Search",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-interactive-resting)"
-              }
-            }
-          }
-        },
-        "resting-hover": {
-          "$type": "color",
-          "$value": "{Slate Grey.500}",
-          "$description": "Autocomplete, Menu item (Sidebar)",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-interactive-resting-hover)"
-              }
-            }
-          }
-        },
-        "resting-pressed": {
-          "$type": "color",
-          "$value": "{Slate Grey.400}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active-hover": {
-          "$type": "color",
-          "$value": "{Moss Green Sat.300}",
-          "$description": "Autocomplete, Menu item (Sidebar)",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-icon-interactive-active-hover)"
-              }
-            }
-          }
-        },
-        "active-pressed": {
-          "$type": "color",
-          "$value": "{Moss Green Sat.200}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active-neutral-pressed": {
-          "$type": "color",
-          "$value": "{Slate Grey.100}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "elevation-level-2": {
-          "resting": {
-            "$type": "color",
-            "$value": "{Slate Grey.500}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-interactive-elevation-level-2-resting)"
-                }
-              }
-            }
-          },
-          "resting-hover": {
-            "$type": "color",
-            "$value": "{Slate Grey.400}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-interactive-elevation-level-2-resting-hover)"
-                }
-              }
-            }
-          },
-          "resting-pressed": {
-            "$type": "color",
-            "$value": "{Slate Grey.200}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          },
-          "active-hover": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.100}",
-            "$description": "Menu item",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-interactive-elevation-level-2-active-hover)"
-                }
-              }
-            }
-          },
-          "active-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.100}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      },
-      "input": {
-        "helper": {
-          "default": {
-            "$type": "color",
-            "$value": "{color.icon.tertiary}",
-            "$description": "Deprecated - helper text for input field. Use icon/tertiary.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-input-helper-default)"
-                }
-              }
-            }
-          },
-          "info": {
-            "$type": "color",
-            "$value": "{deprecated.icon.message.info}",
-            "$description": "Deprecated - helper text for input field. Use icon/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-input-helper-info)"
-                }
-              }
-            }
-          },
-          "success": {
-            "$type": "color",
-            "$value": "{deprecated.icon.message.success}",
-            "$description": "Deprecated - helper text for input field. Use icon/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-input-helper-success)"
-                }
-              }
-            }
-          },
-          "warning": {
-            "$type": "color",
-            "$value": "{deprecated.icon.message.warning}",
-            "$description": "Deprecated - helper text for input field. Use icon/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-input-helper-warning)"
-                }
-              }
-            }
-          },
-          "error": {
-            "$type": "color",
-            "$value": "{deprecated.icon.message.error}",
-            "$description": "Deprecated - helper text for input field. Use icon/message.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-icon-input-helper-error)"
-                }
-              }
-            }
-          }
-        }
-      },
-      "button": {
-        "primary": {
-          "on-outlined-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.200}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "secondary": {
-          "on-outlined-pressed": {
-            "$type": "color",
-            "$value": "{Mist Grey.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "danger": {
-          "on-outlined-pressed": {
-            "$type": "color",
-            "$value": "{Red Warm.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "border": {
-      "interactive": {
-        "resting-pressed": {
-          "$type": "color",
-          "$value": "#ffffff4d",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active-pressed": {
-          "$type": "color",
-          "$value": "{Moss Green Sat.200}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        }
-      },
-      "alternative": {
-        "$type": "color",
-        "$value": "#ffffff29",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "STROKE_COLOR"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-border-alternative)"
-            }
-          }
-        }
-      },
-      "button": {
-        "primary": {
-          "outlined-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.200}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "STROKE_COLOR"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "secondary": {
-          "outlined-pressed": {
-            "$type": "color",
-            "$value": "{Mist Grey.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "STROKE_COLOR"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "danger": {
-          "outlined-pressed": {
-            "$type": "color",
-            "$value": "{Red Warm.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "STROKE_COLOR"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      },
-      "ui-shell": {
-        "resting": {
-          "$type": "color",
-          "$value": "{Slate Blue.1400}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "resting-hover": {
-          "$type": "color",
-          "$value": "{Slate Blue.1400}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active": {
-          "$type": "color",
-          "$value": "{color.interactive.border.standard.secondary.active.initial}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active-hover": {
-          "$type": "color",
-          "$value": "{color.interactive.border.standard.secondary.active.hover}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "disabled": {
-          "$type": "color",
-          "$value": "{Slate Blue.1400}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        }
-      }
-    },
-    "surface": {
-      "shadow": {
-        "middle": {
-          "$type": "color",
-          "$value": "#0000001f",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-shadow-middle)"
-              }
-            }
-          }
-        },
-        "bottom": {
-          "$type": "color",
-          "$value": "#00000033",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-shadow-bottom)"
-              }
-            }
-          }
-        }
-      },
-      "elevation": {
-        "level-3": {
-          "$type": "color",
-          "$value": "{Slate Blue.1200}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-elevation-level-3)"
-              }
-            }
-          }
-        },
-        "level-4": {
-          "$type": "color",
-          "$value": "{Slate Blue.1100}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-elevation-level-4)"
-              }
-            }
-          }
-        }
-      },
-      "interactive": {
-        "resting": {
-          "$type": "color",
-          "$value": "#00000000",
-          "$description": "Menu item, Tab, Table cell, Table data grid cell",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-interactive-resting)"
-              }
-            }
-          }
-        },
-        "resting-hover": {
-          "$type": "color",
-          "$value": "{Slate Blue.1200}",
-          "$description": "Menu item, Tab, Table cell, Table data grid cell",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-interactive-resting-hover)"
-              }
-            }
-          }
-        },
-        "resting-pressed": {
-          "$type": "color",
-          "$value": "{Slate Blue.1350}",
-          "$description": "Used in Tab resting hover, Menu item resting hover, Sidebar item resting hover, App launcher hover",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "active": {
-          "$type": "color",
-          "$value": "{Mist Blue Muted.1300}",
-          "$description": "Menu item, Tab, Table cell, Table data grid cell",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-interactive-active)"
-              }
-            }
-          }
-        },
-        "active-hover": {
-          "$type": "color",
-          "$value": "{Mist Blue Muted.1200}",
-          "$description": "Menu item, Tab, Table cell, Table data grid cell",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-interactive-active-hover)"
-              }
-            }
-          }
-        },
-        "active-pressed": {
-          "$type": "color",
-          "$value": "{Mist Blue Muted.1100}",
-          "$description": "Used in Table cell, Menu, Sidebar, Tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "elevation-level-2": {
-          "active": {
-            "$type": "color",
-            "$value": "{Mist Blue Muted.1200}",
-            "$description": "Menu",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-surface-interactive-elevation-level-2-active)"
-                }
-              }
-            }
-          },
-          "active-hover": {
-            "$type": "color",
-            "$value": "{Mist Blue Muted.1100}",
-            "$description": "Menu",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-surface-interactive-elevation-level-2-active-hover)"
-                }
-              }
-            }
-          },
-          "active-pressed": {
-            "$type": "color",
-            "$value": "{Mist Blue Muted.1000}",
-            "$description": "Used in Table cell, Menu, Sidebar, Tab",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "active-ghost-hover": {
-          "$type": "color",
-          "$value": "{deprecated.surface.interactive.active-hover}",
-          "$description": "Tab",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-interactive-active-ghost-hover)"
-              }
-            }
-          }
-        },
-        "active-ghost-pressed": {
-          "$type": "color",
-          "$value": "{deprecated.surface.interactive.active-pressed}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {}
-            }
-          }
-        }
-      },
-      "chip": {
-        "info": {
-          "$type": "color",
-          "$value": "#dfeff71a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-info)"
-              }
-            }
-          }
-        },
-        "info-hover": {
-          "$type": "color",
-          "$value": "#dfeff71a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-info-hover)"
-              }
-            }
-          }
-        },
-        "success": {
-          "$type": "color",
-          "$value": "#e6faec1a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-success)"
-              }
-            }
-          }
-        },
-        "success-hover": {
-          "$type": "color",
-          "$value": "#e6faec1a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-success-hover)"
-              }
-            }
-          }
-        },
-        "warning": {
-          "$type": "color",
-          "$value": "#fff0e51a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-warning)"
-              }
-            }
-          }
-        },
-        "warning-hover": {
-          "$type": "color",
-          "$value": "#fff0e51a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-warning-hover)"
-              }
-            }
-          }
-        },
-        "error": {
-          "$type": "color",
-          "$value": "#ffe1e01a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-error)"
-              }
-            }
-          }
-        },
-        "error-hover": {
-          "$type": "color",
-          "$value": "#ffe1e01a",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-chip-error-hover)"
-              }
-            }
-          }
-        },
-        "neutral": {
-          "resting": {
-            "$type": "color",
-            "$value": "#eaeaea1a",
-            "$description": "Chip",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {
-                  "WEB": "var(--eds-color-surface-chip-neutral-resting)"
-                }
-              }
-            }
-          }
-        }
-      },
-      "banner": {
-        "info": {
-          "$type": "color",
-          "$value": "{Blue Sky.1200}",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-banner-info)"
-              }
-            }
-          }
-        },
-        "success": {
-          "$type": "color",
-          "$value": "{Lichen Green.1200}",
-          "$description": "Chip",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-banner-success)"
-              }
-            }
-          }
-        },
-        "warning": {
-          "$type": "color",
-          "$value": "{Orange.1200}",
-          "$description": "Banner",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-banner-warning)"
-              }
-            }
-          }
-        },
-        "error": {
-          "$type": "color",
-          "$value": "{Red Cold.1200}",
-          "$description": "Banner",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-banner-error)"
-              }
-            }
-          }
-        }
-      },
-      "main-flat": {
-        "$type": "color",
-        "$value": "{Slate Blue.1400}",
-        "$description": "UI main",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-surface-main-flat)"
-            }
-          }
-        }
-      },
-      "button": {
-        "primary": {
-          "filled-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.200}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          },
-          "outlined-pressed": {
-            "$type": "color",
-            "$value": "{Moss Green Sat.1300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "secondary": {
-          "filled-pressed": {
-            "$type": "color",
-            "$value": "{Mist Grey.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          },
-          "outlined-pressed": {
-            "$type": "color",
-            "$value": "{Blue Sky.1300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "danger": {
-          "filled-pressed": {
-            "$type": "color",
-            "$value": "{Red Warm.300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          },
-          "outlined-pressed": {
-            "$type": "color",
-            "$value": "{Red Cold.1300}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
-                ],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      },
-      "placeholder": {
-        "image": {
-          "$type": "color",
-          "$value": "{Slate Blue.1100}",
-          "$description": "Placeholder image",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
-              ],
-              "codeSyntax": {
-                "WEB": "var(--eds-color-surface-placeholder-image)"
-              }
             }
           }
         }
@@ -6263,7 +4450,7 @@
       "color": {
         "text": {
           "$type": "color",
-          "$value": "{Red Cold.900}",
+          "$value": "{color.Red Cold.900}",
           "$description": "Autocomplete, Text field",
           "$extensions": {
             "com.figma": {
@@ -6281,7 +4468,7 @@
       "color": {
         "text": {
           "$type": "color",
-          "$value": "{Slate Grey.800}",
+          "$value": "{color.Slate Grey.800}",
           "$description": "Autocomplete, Table input, Search, Text field",
           "$extensions": {
             "com.figma": {
@@ -6300,7 +4487,7 @@
         "text": {
           "initial": {
             "$type": "color",
-            "$value": "{Slate Grey.600}",
+            "$value": "{color.Slate Grey.600}",
             "$description": "Autocomplete, Table input, Text field",
             "$extensions": {
               "com.figma": {
@@ -6314,7 +4501,7 @@
           },
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Autocomplete, Table input, Search, Text field",
             "$extensions": {
               "com.figma": {
@@ -6330,7 +4517,7 @@
         "icon": {
           "initial": {
             "$type": "color",
-            "$value": "{Slate Grey.600}",
+            "$value": "{color.Slate Grey.600}",
             "$description": "Autocomplete, Table input, Text field",
             "$extensions": {
               "com.figma": {
@@ -6344,7 +4531,7 @@
           },
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Autocomplete, Table input, Search, Text field",
             "$extensions": {
               "com.figma": {
@@ -6363,7 +4550,7 @@
       "text": {
         "initial": {
           "$type": "color",
-          "$value": "{Slate Grey.500}",
+          "$value": "{color.Slate Grey.500}",
           "$description": "Autocomplete, Table input, Text field",
           "$extensions": {
             "com.figma": {
@@ -6377,7 +4564,7 @@
         },
         "focus": {
           "$type": "color",
-          "$value": "{Neutral.0}",
+          "$value": "{color.Neutral.0}",
           "$description": "Autocomplete, Table input, Search, Text field",
           "$extensions": {
             "com.figma": {
@@ -6391,7 +4578,7 @@
         },
         "disabled": {
           "$type": "color",
-          "$value": "{Slate Grey.1000}",
+          "$value": "{color.Slate Grey.1000}",
           "$description": "Autocomplete, Table input, Search, Text field",
           "$extensions": {
             "com.figma": {
@@ -6407,7 +4594,7 @@
       "icon": {
         "initial": {
           "$type": "color",
-          "$value": "{Slate Grey.500}",
+          "$value": "{color.Slate Grey.500}",
           "$description": "Autocomplete, Table input, Text field",
           "$extensions": {
             "com.figma": {
@@ -6421,7 +4608,7 @@
         },
         "focus": {
           "$type": "color",
-          "$value": "{Neutral.0}",
+          "$value": "{color.Neutral.0}",
           "$description": "Autocomplete, Table input, Search, Text field",
           "$extensions": {
             "com.figma": {
@@ -6435,7 +4622,7 @@
         },
         "disabled": {
           "$type": "color",
-          "$value": "{Slate Grey.1000}",
+          "$value": "{color.Slate Grey.1000}",
           "$description": "Autocomplete, Table input, Search, Text field",
           "$extensions": {
             "com.figma": {
@@ -6465,7 +4652,7 @@
         },
         "focus": {
           "$type": "color",
-          "$value": "{Moss Green Sat.500}",
+          "$value": "{color.Moss Green Sat.500}",
           "$description": "Autocomplete, Search, Text field",
           "$extensions": {
             "com.figma": {
@@ -6621,7 +4808,7 @@
           "success": {
             "initial": {
               "$type": "color",
-              "$value": "{Success Green.900}",
+              "$value": "{color.Success Green.900}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6635,7 +4822,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Success Green.600}",
+              "$value": "{color.Success Green.600}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6651,7 +4838,7 @@
           "warning": {
             "initial": {
               "$type": "color",
-              "$value": "{Orange.800}",
+              "$value": "{color.Orange.800}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6665,7 +4852,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Spruce Wood.500}",
+              "$value": "{color.Spruce Wood.500}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6681,7 +4868,7 @@
           "error": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Cold.900}",
+              "$value": "{color.Red Cold.900}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6695,7 +4882,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Red Warm.600}",
+              "$value": "{color.Red Warm.600}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6713,7 +4900,7 @@
           "success": {
             "initial": {
               "$type": "color",
-              "$value": "{Success Green.900}",
+              "$value": "{color.Success Green.900}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6727,7 +4914,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Success Green.600}",
+              "$value": "{color.Success Green.600}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6743,7 +4930,7 @@
           "warning": {
             "initial": {
               "$type": "color",
-              "$value": "{Orange.800}",
+              "$value": "{color.Orange.800}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6757,7 +4944,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Spruce Wood.500}",
+              "$value": "{color.Spruce Wood.500}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6773,7 +4960,7 @@
           "error": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Cold.900}",
+              "$value": "{color.Red Cold.900}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6787,7 +4974,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Red Warm.600}",
+              "$value": "{color.Red Warm.600}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6805,7 +4992,7 @@
           "success": {
             "initial": {
               "$type": "color",
-              "$value": "{Success Green.900}",
+              "$value": "{color.Success Green.900}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6819,7 +5006,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Success Green.600}",
+              "$value": "{color.Success Green.600}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6835,7 +5022,7 @@
           "warning": {
             "initial": {
               "$type": "color",
-              "$value": "{Orange.800}",
+              "$value": "{color.Orange.800}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6849,7 +5036,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Spruce Wood.500}",
+              "$value": "{color.Spruce Wood.500}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6865,7 +5052,7 @@
           "error": {
             "initial": {
               "$type": "color",
-              "$value": "{Red Cold.900}",
+              "$value": "{color.Red Cold.900}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6879,7 +5066,7 @@
             },
             "focus": {
               "$type": "color",
-              "$value": "{Red Warm.600}",
+              "$value": "{color.Red Warm.600}",
               "$description": "Text field",
               "$extensions": {
                 "com.figma": {
@@ -6900,7 +5087,7 @@
         "text": {
           "initial": {
             "$type": "color",
-            "$value": "{Slate Grey.600}",
+            "$value": "{color.Slate Grey.600}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -6912,7 +5099,7 @@
           },
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -6926,7 +5113,7 @@
         "icon": {
           "initial": {
             "$type": "color",
-            "$value": "{Slate Grey.600}",
+            "$value": "{color.Slate Grey.600}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -6938,7 +5125,7 @@
           },
           "disabled": {
             "$type": "color",
-            "$value": "{Slate Grey.1000}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -6977,7 +5164,7 @@
           "text": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -6991,7 +5178,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7003,7 +5190,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7015,7 +5202,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7029,7 +5216,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7041,7 +5228,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7053,7 +5240,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7069,7 +5256,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "Interactive table cell, table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7083,7 +5270,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "Interactive table cell, table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7097,7 +5284,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "Interactive table cell, table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7113,7 +5300,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "Interactive table cell, data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7127,7 +5314,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "Interactive table cell, data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7141,7 +5328,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "Interactive table cell, data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7159,7 +5346,7 @@
           "icon": {
             "disabled": {
               "$type": "color",
-              "$value": "{Slate Grey.1000}",
+              "$value": "{color.Slate Grey.1000}",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -7173,7 +5360,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.600}",
+                  "$value": "{color.Slate Grey.600}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7187,7 +5374,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.600}",
+                  "$value": "{color.Slate Grey.600}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7201,7 +5388,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Grey.500}",
+                  "$value": "{color.Slate Grey.500}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7217,7 +5404,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7231,7 +5418,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7245,7 +5432,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Grey.200}",
+                  "$value": "{color.Slate Grey.200}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7263,7 +5450,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7277,7 +5464,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7291,7 +5478,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.200}",
+                  "$value": "{color.Moss Green Sat.200}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7307,7 +5494,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7321,7 +5508,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7335,7 +5522,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.100}",
+                  "$value": "{color.Moss Green Sat.100}",
                   "$description": "Table cell, Table data grid cell, Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7569,7 +5756,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7583,7 +5770,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7597,7 +5784,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7629,7 +5816,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Mist Blue Muted.1300}",
+                  "$value": "{color.Mist Blue Muted.1300}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7643,7 +5830,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Mist Blue Muted.1300}",
+                  "$value": "{color.Mist Blue Muted.1300}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7657,7 +5844,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Mist Blue Muted.1200}",
+                  "$value": "{color.Mist Blue Muted.1200}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7673,7 +5860,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Mist Blue Muted.1200}",
+                  "$value": "{color.Mist Blue Muted.1200}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7687,7 +5874,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Mist Blue Muted.1200}",
+                  "$value": "{color.Mist Blue Muted.1200}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7701,7 +5888,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Mist Blue Muted.1100}",
+                  "$value": "{color.Mist Blue Muted.1100}",
                   "$description": "Table cell, Table data grid cell",
                   "$extensions": {
                     "com.figma": {
@@ -7739,7 +5926,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7751,7 +5938,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7763,7 +5950,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7777,7 +5964,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7789,7 +5976,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7801,7 +5988,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.200}",
+                  "$value": "{color.Moss Green Sat.200}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -7897,7 +6084,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1350}",
+                  "$value": "{color.Slate Blue.1350}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7911,7 +6098,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1350}",
+                  "$value": "{color.Slate Blue.1350}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7925,7 +6112,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1300}",
+                  "$value": "{color.Slate Blue.1300}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7941,7 +6128,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7955,7 +6142,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7969,7 +6156,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1100}",
+                  "$value": "{color.Slate Blue.1100}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -7987,7 +6174,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1300}",
+                  "$value": "{color.Slate Blue.1300}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -8001,7 +6188,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1300}",
+                  "$value": "{color.Slate Blue.1300}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -8015,7 +6202,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -8031,7 +6218,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -8045,7 +6232,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1200}",
+                  "$value": "{color.Slate Blue.1200}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -8059,7 +6246,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Slate Blue.1100}",
+                  "$value": "{color.Slate Blue.1100}",
                   "$description": "Table header, Table data grid header",
                   "$extensions": {
                     "com.figma": {
@@ -8076,7 +6263,7 @@
             "disabled": {
               "on-level-1": {
                 "$type": "color",
-                "$value": "{Slate Blue.1350}",
+                "$value": "{color.Slate Blue.1350}",
                 "$description": "Table header, Table data grid header",
                 "$extensions": {
                   "com.figma": {
@@ -8090,7 +6277,7 @@
               },
               "on-level-2": {
                 "$type": "color",
-                "$value": "{Slate Blue.1350}",
+                "$value": "{color.Slate Blue.1350}",
                 "$description": "Table header, Table data grid header",
                 "$extensions": {
                   "com.figma": {
@@ -8104,7 +6291,7 @@
               },
               "on-level-3": {
                 "$type": "color",
-                "$value": "{Slate Blue.1300}",
+                "$value": "{color.Slate Blue.1300}",
                 "$description": "Table header, Table data grid header",
                 "$extensions": {
                   "com.figma": {
@@ -8123,7 +6310,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8135,7 +6322,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8147,7 +6334,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Neutral.0}",
+                  "$value": "{color.Neutral.0}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8161,7 +6348,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8173,7 +6360,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8185,7 +6372,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Neutral.0}",
+                  "$value": "{color.Neutral.0}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8201,7 +6388,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8213,7 +6400,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8225,7 +6412,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8239,7 +6426,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8251,7 +6438,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8263,7 +6450,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.200}",
+                  "$value": "{color.Moss Green Sat.200}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8281,7 +6468,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.600}",
+                  "$value": "{color.Slate Grey.600}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8293,7 +6480,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.600}",
+                  "$value": "{color.Slate Grey.600}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8305,7 +6492,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Neutral.0}",
+                  "$value": "{color.Neutral.0}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8319,7 +6506,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8331,7 +6518,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Slate Grey.400}",
+                  "$value": "{color.Slate Grey.400}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8343,7 +6530,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Neutral.0}",
+                  "$value": "{color.Neutral.0}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8359,7 +6546,7 @@
               "initial": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8371,7 +6558,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.500}",
+                  "$value": "{color.Moss Green Sat.500}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8383,7 +6570,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8397,7 +6584,7 @@
               "hover": {
                 "on-level-1": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8409,7 +6596,7 @@
                 },
                 "on-level-2": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.300}",
+                  "$value": "{color.Moss Green Sat.300}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
@@ -8421,7 +6608,7 @@
                 },
                 "on-level-3": {
                   "$type": "color",
-                  "$value": "{Moss Green Sat.200}",
+                  "$value": "{color.Moss Green Sat.200}",
                   "$description": "",
                   "$extensions": {
                     "com.figma": {
