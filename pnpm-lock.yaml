@@ -605,9 +605,6 @@ importers:
       '@types/node':
         specifier: ^20.12.12
         version: 20.12.12
-      colorjs.io:
-        specifier: ^0.5.0
-        version: 0.5.0
       prettier:
         specifier: 3.3.2
         version: 3.3.2
@@ -9219,10 +9216,6 @@ packages:
 
   /colord@2.9.3:
     resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
-    dev: true
-
-  /colorjs.io@0.5.0:
-    resolution: {integrity: sha512-qekjTiBLM3F/sXKks/ih5aWaHIGu+Ftel0yKEvmpbKvmxpNOhojKgha5uiWEUOqEpRjC1Tq3nJRT7WgdBOxIGg==}
     dev: true
 
   /combined-stream@1.0.8:
