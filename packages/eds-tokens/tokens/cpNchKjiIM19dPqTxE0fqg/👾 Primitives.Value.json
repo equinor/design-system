@@ -3483,5 +3483,19 @@
         }
       }
     }
+  },
+  "Documentation": {
+    "$type": "string",
+    "$value": "The EDS 2.0 Spacing and Typography Primitives",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
   }
 }

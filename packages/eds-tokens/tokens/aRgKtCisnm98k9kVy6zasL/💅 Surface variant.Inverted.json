@@ -1,0 +1,14 @@
+{
+  "surface": {
+    "$type": "color",
+    "$value": "{color.surface.inverted}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

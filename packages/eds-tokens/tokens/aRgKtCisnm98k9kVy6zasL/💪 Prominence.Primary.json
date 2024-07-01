@@ -1,0 +1,110 @@
+{
+  "action": {
+    "text": {
+      "$type": "color",
+      "$value": "{action.text.primary}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "icon": {
+      "$type": "color",
+      "$value": "{action.icon.primary}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{action.border.primary}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "surface": {
+      "$type": "color",
+      "$value": "{action.surface.primary}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "interactive": {
+    "text": {
+      "standard": {
+        "$type": "color",
+        "$value": "{interactive.text.standard.primary}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "icon": {
+      "standard": {
+        "$type": "color",
+        "$value": "{interactive.icon.standard.primary}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "border": {
+      "standard": {
+        "$type": "color",
+        "$value": "{interactive.border.standard.primary}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "surface": {
+      "standard": {
+        "$type": "color",
+        "$value": "{interactive.surface.standard.primary}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}

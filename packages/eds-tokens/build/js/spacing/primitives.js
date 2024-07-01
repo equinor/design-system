@@ -245,3 +245,4 @@ export const LINEHEIGHT_SCALE_1100_DEFAULT = 40;
 export const LINEHEIGHT_SCALE_1100_SQUISHED = 36;
 export const FONT_FAMILY_INTER = "Inter";
 export const FONT_FAMILY_EQUINOR = "Equinor";
+export const DOCUMENTATION = "The EDS 2.0 Spacing and Typography Primitives";

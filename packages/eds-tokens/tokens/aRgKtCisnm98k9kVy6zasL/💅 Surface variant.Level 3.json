@@ -1,0 +1,14 @@
+{
+  "surface": {
+    "$type": "color",
+    "$value": "{color.surface.level-3}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

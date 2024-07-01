@@ -1,13 +1,11 @@
 import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
-import Color from 'colorjs.io'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
 const FILE_KEY_PRIMITIVES = 'cVaqjfgt3gDiqbx10q3Pj8'
-const FILE_KEY_THEMES = 'aRgKtCisnm98k9kVy6zasL'
+const FILE_KEY_COLORS = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
-const OKLCH_PRECISION = 3
 
 const {
   filter: { isColor, isNumber },
@@ -27,8 +25,11 @@ const resolveReference = (value: string, prefix: string): string => {
   return `var(--${prefix}-${valueFormatted})`
 }
 
+const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
+const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
+
 const darkTokens = readJsonFiles([
-  `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`,
+  `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`,
 ])
 const spacingComfortableTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
@@ -40,7 +41,9 @@ const lightDarkTransform: StyleDictionary.Transform = {
   matcher: isColor,
   transformer: (token: StyleDictionary.TransformedToken, options) => {
     const path = token.path.join('/')
-    const darkValue = darkTokens['🌗 Themes.Dark.json']?.[`${path}`]?.['$value']
+    console.log(path)
+    const darkValue =
+      darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
 
     if (darkValue) {
       //it is a reference
@@ -61,9 +64,7 @@ const lightDarkTransform: StyleDictionary.Transform = {
         }
       } else {
         //the dark value was hardcoded (color with alpha transparency)
-        return `light-dark(${token.value}, ${new Color(darkValue as string)
-          .to('oklch')
-          .toString({ precision: OKLCH_PRECISION })})`
+        return `light-dark(${token.value}, ${darkValue})`
       }
     }
 
@@ -113,26 +114,6 @@ const densitySpaceToggleTransform: StyleDictionary.Transform = {
   },
 }
 
-const toOKLCHTransform: StyleDictionary.Transform = {
-  type: 'value',
-  transitive: true,
-  matcher: isColor,
-  transformer: (token: StyleDictionary.TransformedToken) => {
-    const tokenAsString = `${token.value}`
-    //handle partially transformed light-dark values
-    if (tokenAsString.startsWith('light')) {
-      return tokenAsString
-    }
-    return new Color(tokenAsString)
-      .to('oklch')
-      .toString({ precision: OKLCH_PRECISION })
-  },
-}
-
-StyleDictionary.registerTransform({
-  name: 'color/oklch',
-  ...toOKLCHTransform,
-})
 StyleDictionary.registerTransform({
   name: 'lightDark',
   ...lightDarkTransform,
@@ -281,7 +262,6 @@ const cssTransforms = [
   'eds/css/pxToRem',
   'eds/css/pxFormatted',
   'eds/font/quote',
-  'color/oklch',
 ]
 const outputDirectory = './build'
 const cssBuildPath = `${outputDirectory}/css`
@@ -408,8 +388,8 @@ const includeTokenFilter = (
 
 const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
 const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
-const THEME_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Light.json`
-const THEME_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_THEMES}/🌗 Themes.Dark.json`
+const COLOR_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${lightColorSchemeCollectionFile}`
+const COLOR_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`
 
 const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
 const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
@@ -419,42 +399,43 @@ export function run({ outputReferences } = { outputReferences: true }) {
   console.info('Running Style Dictionary build script')
   console.info('outputReferences:', outputReferences)
 
-  const systemName = 'eds'
-  const colorPrefix = `${systemName}-color`
+  const prefix = 'eds'
   const colorBuildPath = 'color/'
   const spacingBuildPath = 'spacing/'
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
     buildPath: colorBuildPath,
-    prefix: colorPrefix,
+    prefix,
     fileName: 'primitives',
     outputReferences: false, // The primitives should not reference other tokens. This can always be false.
   })
 
   const lightMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_LIGHT_SOURCE],
+    source: [COLOR_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
     buildPath: colorBuildPath,
-    prefix: colorPrefix,
-    fileName: 'theme-light',
+    prefix,
+    fileName: 'light',
     outputReferences,
   })
+
   const darkMode = _extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_DARK_SOURCE],
+    source: [COLOR_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
     buildPath: colorBuildPath,
-    prefix: colorPrefix,
-    fileName: 'theme-dark',
-    selector: '[data-theme="dark"]',
+    prefix,
+    fileName: 'dark',
+    selector: '[data-color-scheme="dark"]',
     outputReferences,
   })
+
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
     buildPath: spacingBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'primitives',
     filter: (token) => includeTokenFilter(token),
   })
@@ -463,7 +444,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     buildPath: spacingBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'comfortable',
     selector: '[data-density="comfortable"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
@@ -474,7 +455,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     buildPath: spacingBuildPath,
-    prefix: systemName,
+    prefix,
     fileName: 'spacious',
     selector: ':root, [data-density="spacious"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
@@ -487,7 +468,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/cti/kebab',
@@ -511,13 +492,14 @@ export function run({ outputReferences } = { outputReferences: true }) {
       },
     },
   })
+
   const densityAllVerbose = StyleDictionary.extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/cti/kebab',
@@ -542,37 +524,13 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const lightDark = StyleDictionary.extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_LIGHT_SOURCE],
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix: colorPrefix,
-        buildPath: `${cssBuildPath}/color/`,
-        transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
-        files: [
-          {
-            filter: (token) => includeTokenFilter(token, ['Light']),
-            destination: 'theme-verbose.css',
-            format: 'css/variables',
-            options: {
-              fileHeader,
-              outputReferences,
-            },
-          },
-        ],
-      },
-    },
-  })
-
   const densitySpaciousTrimmed = StyleDictionary.extend({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/${spacingBuildPath}`,
         transforms: cssTransforms,
         files: [
@@ -598,7 +556,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: systemName,
+        prefix,
         buildPath: `${cssBuildPath}/${spacingBuildPath}`,
         transforms: cssTransforms,
         files: [
@@ -618,23 +576,47 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const lightDarkTrimmed = StyleDictionary.extend({
+  const lightDarkColorsVerbose = StyleDictionary.extend({
     include: [COLOR_PRIMITIVE_SOURCE],
-    source: [THEME_LIGHT_SOURCE],
+    source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
         transformGroup: 'css',
-        prefix: colorPrefix,
+        prefix,
         buildPath: `${cssBuildPath}/color/`,
-        transforms: ['name/cti/kebab', 'color/css', 'color/oklch', 'lightDark'],
+        transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
         files: [
           {
             filter: (token) => includeTokenFilter(token, ['Light']),
-            destination: 'theme-trimmed.css',
+            destination: 'colors-verbose.css',
             format: 'css/variables',
             options: {
               fileHeader,
-              outputReferences: false, // The trimmed theme should not reference other tokens
+              outputReferences,
+            },
+          },
+        ],
+      },
+    },
+  })
+
+  const lightDarkColorsTrimmed = StyleDictionary.extend({
+    include: [COLOR_PRIMITIVE_SOURCE],
+    source: [COLOR_LIGHT_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix,
+        buildPath: `${cssBuildPath}/color/`,
+        transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
+        files: [
+          {
+            filter: (token) => includeTokenFilter(token, ['Light']),
+            destination: 'colors-trimmed.css',
+            format: 'css/variables',
+            options: {
+              fileHeader,
+              outputReferences: false, // The trimmed colors should not reference other tokens
             },
           },
         ],
@@ -645,8 +627,8 @@ export function run({ outputReferences } = { outputReferences: true }) {
   primitives.buildAllPlatforms()
   lightMode.buildAllPlatforms()
   darkMode.buildAllPlatforms()
-  lightDark.buildAllPlatforms()
-  lightDarkTrimmed.buildAllPlatforms()
+  lightDarkColorsVerbose.buildAllPlatforms()
+  lightDarkColorsTrimmed.buildAllPlatforms()
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
   densitySpacious.buildAllPlatforms()

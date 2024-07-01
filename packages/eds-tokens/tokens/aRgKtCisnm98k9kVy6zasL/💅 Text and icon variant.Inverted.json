@@ -1,0 +1,26 @@
+{
+  "text": {
+    "$type": "color",
+    "$value": "{color.text.inverted}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "icon": {
+    "$type": "color",
+    "$value": "{color.icon.inverted}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}
