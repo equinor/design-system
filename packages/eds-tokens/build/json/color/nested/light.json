@@ -46,7 +46,7 @@
             "hover": "#ffffff"
           },
           "danger": {
-            "intial": "#ffffff",
+            "initial": "#ffffff",
             "hover": "#ffffff"
           }
         },
@@ -170,7 +170,7 @@
             "hover": "#ffffff00"
           },
           "danger": {
-            "intial": "#ffffff00",
+            "initial": "#ffffff00",
             "hover": "#ffffff00"
           }
         }
@@ -558,7 +558,7 @@
             },
             "active": {
               "initial": "#007079",
-              "hover": "#007079"
+              "hover": "#004f55"
             }
           },
           "secondary": {

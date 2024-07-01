@@ -53,7 +53,7 @@ export const COLOR_ACTION_TEXT_PRIMARY_MUTED_INITIAL : string;
 /** Button */
 export const COLOR_ACTION_TEXT_PRIMARY_MUTED_HOVER : string;
 /** Button */
-export const COLOR_ACTION_TEXT_PRIMARY_DANGER_INTIAL : string;
+export const COLOR_ACTION_TEXT_PRIMARY_DANGER_INITIAL : string;
 /** Button */
 export const COLOR_ACTION_TEXT_PRIMARY_DANGER_HOVER : string;
 /** Button */
@@ -156,7 +156,7 @@ export const COLOR_ACTION_BORDER_TERTIARY_DEFAULT_INITIAL : string;
 export const COLOR_ACTION_BORDER_TERTIARY_DEFAULT_HOVER : string;
 export const COLOR_ACTION_BORDER_TERTIARY_MUTED_INITIAL : string;
 export const COLOR_ACTION_BORDER_TERTIARY_MUTED_HOVER : string;
-export const COLOR_ACTION_BORDER_TERTIARY_DANGER_INTIAL : string;
+export const COLOR_ACTION_BORDER_TERTIARY_DANGER_INITIAL : string;
 export const COLOR_ACTION_BORDER_TERTIARY_DANGER_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_PRIMARY_DISABLED : string;

@@ -28,7 +28,7 @@
         },
         "danger": {
           "$type": "color",
-          "$value": "{color.action.text.primary.danger.intial}",
+          "$value": "{color.action.text.primary.danger.initial}",
           "$description": "",
           "$extensions": {
             "com.figma": {

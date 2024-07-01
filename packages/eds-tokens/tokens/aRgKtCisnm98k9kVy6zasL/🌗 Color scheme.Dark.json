@@ -361,7 +361,7 @@
         "primary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.text.disabled}",
+            "$value": "{color.Neutral.1000}",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -376,7 +376,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{color.text.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -390,7 +390,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.text.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -406,7 +406,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{color.text.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -420,7 +420,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.text.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -434,9 +434,9 @@
             }
           },
           "danger": {
-            "intial": {
+            "initial": {
               "$type": "color",
-              "$value": "{color.text.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -450,7 +450,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.text.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -467,7 +467,7 @@
         "secondary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.text.disabled}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -573,7 +573,7 @@
         "tertiary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.text.disabled}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -681,7 +681,7 @@
         "primary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.icon.disabled}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -696,7 +696,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{color.icon.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -710,7 +710,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.icon.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -726,7 +726,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{color.icon.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -740,7 +740,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.icon.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -756,7 +756,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{color.icon.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -770,7 +770,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.icon.inverted}",
+              "$value": "{color.Neutral.1500}",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -787,7 +787,7 @@
         "secondary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.icon.disabled}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -891,7 +891,7 @@
         "tertiary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.icon.disabled}",
+            "$value": "{color.Slate Grey.1000}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1209,7 +1209,7 @@
         "tertiary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.border.none}",
+            "$value": "#00000000",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -1222,7 +1222,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{color.border.none}",
+              "$value": "#00000000",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -1234,7 +1234,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.border.none}",
+              "$value": "#00000000",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -1248,7 +1248,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{color.border.none}",
+              "$value": "#00000000",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -1260,7 +1260,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "{color.border.none}",
+              "$value": "#00000000",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -1272,9 +1272,9 @@
             }
           },
           "danger": {
-            "intial": {
+            "initial": {
               "$type": "color",
-              "$value": "{color.border.none}",
+              "$value": "#00000000",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -1286,7 +1286,7 @@
             },
             "hover": {
               "$type": "color",
-              "$value": "#ffffff00",
+              "$value": "#00000000",
               "$description": "",
               "$extensions": {
                 "com.figma": {
@@ -1409,7 +1409,7 @@
         "secondary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.surface.none}",
+            "$value": "#00000000",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -1424,7 +1424,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{color.surface.none}",
+              "$value": "#00000000",
               "$description": "Button, Ghost button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1454,7 +1454,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{color.surface.none}",
+              "$value": "#00000000",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1484,7 +1484,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{color.surface.none}",
+              "$value": "#00000000",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1515,7 +1515,7 @@
         "tertiary": {
           "disabled": {
             "$type": "color",
-            "$value": "{color.surface.none}",
+            "$value": "#00000000",
             "$description": "Button",
             "$extensions": {
               "com.figma": {
@@ -1530,7 +1530,7 @@
           "default": {
             "initial": {
               "$type": "color",
-              "$value": "{color.surface.none}",
+              "$value": "#00000000",
               "$description": "Button, Ghost button, Toggle button",
               "$extensions": {
                 "com.figma": {
@@ -1560,7 +1560,7 @@
           "muted": {
             "initial": {
               "$type": "color",
-              "$value": "{color.surface.none}",
+              "$value": "#00000000",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -1590,7 +1590,7 @@
           "danger": {
             "initial": {
               "$type": "color",
-              "$value": "{color.surface.none}",
+              "$value": "#00000000",
               "$description": "Button",
               "$extensions": {
                 "com.figma": {
@@ -3917,7 +3917,7 @@
               },
               "hover": {
                 "$type": "color",
-                "$value": "{color.Moss Green Sat.500}",
+                "$value": "{color.Moss Green Sat.300}",
                 "$description": "Toggle button",
                 "$extensions": {
                   "com.figma": {
@@ -6648,7 +6648,7 @@
       "color": {
         "surface": {
           "$type": "color",
-          "$value": "{color.surface.level-2}",
+          "$value": "{color.Slate Blue.1350}",
           "$description": "Sidebar, Side sheet, Toolbar, Top bar",
           "$extensions": {
             "com.figma": {
@@ -6662,7 +6662,7 @@
         },
         "border": {
           "$type": "color",
-          "$value": "{color.surface.level-1}",
+          "$value": "{color.Slate Blue.1400}",
           "$description": "Sidebar, Topbar, Side sheet",
           "$extensions": {
             "com.figma": {
@@ -6680,7 +6680,7 @@
       "color": {
         "surface": {
           "$type": "color",
-          "$value": "{color.surface.level-1}",
+          "$value": "{color.Slate Blue.1400}",
           "$description": "Recommended background color for EDS applications",
           "$extensions": {
             "com.figma": {

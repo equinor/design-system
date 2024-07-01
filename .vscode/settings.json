@@ -31,10 +31,13 @@
     "eds-tokens-build"
   ],
   "cSpell.words": [
+    "asterix",
+    "callout",
     "colorjs",
     "copyfiles",
     "lightningcss",
     "OKLCH",
-    "Overridable"
+    "Overridable",
+    "Topbar"
   ]
 }

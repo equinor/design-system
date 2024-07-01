@@ -36,7 +36,7 @@
     "action": {
       "text": {
         "primary": {
-          "disabled": "#52616d",
+          "disabled": "#616161",
           "default": {
             "initial": "#000000",
             "hover": "#000000"
@@ -46,7 +46,7 @@
             "hover": "#000000"
           },
           "danger": {
-            "intial": "#000000",
+            "initial": "#000000",
             "hover": "#000000"
           }
         },
@@ -170,8 +170,8 @@
             "hover": "#00000000"
           },
           "danger": {
-            "intial": "#00000000",
-            "hover": "#ffffff00"
+            "initial": "#00000000",
+            "hover": "#00000000"
           }
         }
       },
@@ -558,7 +558,7 @@
             },
             "active": {
               "initial": "#97cace",
-              "hover": "#97cace"
+              "hover": "#b3e2e5"
             }
           },
           "secondary": {

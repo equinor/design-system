@@ -28,12 +28,12 @@
   --eds-color-surface-level-3: light-dark(#ffffff, #2c4251); /* Card, Menu, Popover */
   --eds-color-surface-none: light-dark(#ffffff00, #00000000); /* transparent */
   --eds-color-surface-inverted: light-dark(#000000cc, #dcf2fff2); /* Snackbar, Tooltip */
-  --eds-color-action-text-primary-disabled: light-dark(#bebebe, #52616d); /* Button */
+  --eds-color-action-text-primary-disabled: light-dark(#bebebe, #616161); /* Button */
   --eds-color-action-text-primary-default-initial: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-primary-default-hover: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-primary-muted-initial: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-primary-muted-hover: light-dark(#ffffff, #000000); /* Button */
-  --eds-color-action-text-primary-danger-intial: light-dark(#ffffff, #000000); /* Button */
+  --eds-color-action-text-primary-danger-initial: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-primary-danger-hover: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-secondary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-secondary-default-initial: light-dark(#007079, #97cace); /* Button */
@@ -89,8 +89,8 @@
   --eds-color-action-border-tertiary-default-hover: light-dark(#ffffff00, #00000000);
   --eds-color-action-border-tertiary-muted-initial: light-dark(#ffffff00, #00000000);
   --eds-color-action-border-tertiary-muted-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-danger-intial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-danger-hover: light-dark(light-dark(#ffffff00, #00000000), #ffffff00);
+  --eds-color-action-border-tertiary-danger-initial: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-tertiary-danger-hover: light-dark(#ffffff00, #00000000);
   --eds-color-action-surface-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-surface-primary-default-initial: light-dark(#007079, #97cace); /* Button, Toggle button */
   --eds-color-action-surface-primary-default-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
@@ -264,7 +264,7 @@
   --eds-color-interactive-surface-standard-primary-resting-initial: light-dark(#ffffff00, #00000000); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-resting-hover: light-dark(#dcdcdc, #344c5b); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-active-initial: light-dark(#007079, #97cace); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-active-hover: light-dark(#007079, #97cace); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-active-hover: light-dark(#004f55, #b3e2e5); /* Toggle button */
   --eds-color-interactive-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-resting-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-resting-hover: light-dark(#dcdcdc, #344c5b); /* Sidebar menu */
@@ -287,7 +287,7 @@
   --eds-color-interactive-surface-raised-active-hover: light-dark(#e6f3f4, #2a587480); /* Interactive Chip */
   --eds-color-static-text-standard: light-dark(#3d3d3d, #e9ebed);
   --eds-color-static-text-raised: light-dark(#007079, #b3e2e5);
-  --eds-color-static-text-callout: light-dark(light-dark(#3d3d3d, #ffffff), #ffffff);
+  --eds-color-static-text-callout: light-dark(#3d3d3d, #ffffff);
   --eds-color-static-icon-standard: light-dark(#007079, #a8cfd1);
   --eds-color-static-icon-raised: light-dark(#007079, #b3e2e5);
   --eds-color-static-icon-callout: light-dark(#007079, #a8cfd1);

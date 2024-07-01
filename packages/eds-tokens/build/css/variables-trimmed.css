@@ -24,12 +24,12 @@
   --eds-color-surface-level-3: light-dark(#fff, #2c4251);
   --eds-color-surface-none: light-dark(#fff0, #0000);
   --eds-color-surface-inverted: light-dark(#000c, #dcf2fff2);
-  --eds-color-action-text-primary-disabled: light-dark(#bebebe, #52616d);
+  --eds-color-action-text-primary-disabled: light-dark(#bebebe, #616161);
   --eds-color-action-text-primary-default-initial: light-dark(#fff, #000);
   --eds-color-action-text-primary-default-hover: light-dark(#fff, #000);
   --eds-color-action-text-primary-muted-initial: light-dark(#fff, #000);
   --eds-color-action-text-primary-muted-hover: light-dark(#fff, #000);
-  --eds-color-action-text-primary-danger-intial: light-dark(#fff, #000);
+  --eds-color-action-text-primary-danger-initial: light-dark(#fff, #000);
   --eds-color-action-text-primary-danger-hover: light-dark(#fff, #000);
   --eds-color-action-text-secondary-disabled: light-dark(#bebebe, #52616d);
   --eds-color-action-text-secondary-default-initial: light-dark(#007079, #97cace);
@@ -85,8 +85,8 @@
   --eds-color-action-border-tertiary-default-hover: light-dark(#fff0, #0000);
   --eds-color-action-border-tertiary-muted-initial: light-dark(#fff0, #0000);
   --eds-color-action-border-tertiary-muted-hover: light-dark(#fff0, #0000);
-  --eds-color-action-border-tertiary-danger-intial: light-dark(#fff0, #0000);
-  --eds-color-action-border-tertiary-danger-hover: light-dark(#fff0, #fff0);
+  --eds-color-action-border-tertiary-danger-initial: light-dark(#fff0, #0000);
+  --eds-color-action-border-tertiary-danger-hover: light-dark(#fff0, #0000);
   --eds-color-action-surface-primary-disabled: light-dark(#eaeaea, #2e3f4c);
   --eds-color-action-surface-primary-default-initial: light-dark(#007079, #97cace);
   --eds-color-action-surface-primary-default-hover: light-dark(#004f55, #b3e2e5);
@@ -260,7 +260,7 @@
   --eds-color-interactive-surface-standard-primary-resting-initial: light-dark(#fff0, #0000);
   --eds-color-interactive-surface-standard-primary-resting-hover: light-dark(#dcdcdc, #344c5b);
   --eds-color-interactive-surface-standard-primary-active-initial: light-dark(#007079, #97cace);
-  --eds-color-interactive-surface-standard-primary-active-hover: light-dark(#007079, #97cace);
+  --eds-color-interactive-surface-standard-primary-active-hover: light-dark(#004f55, #b3e2e5);
   --eds-color-interactive-surface-standard-secondary-disabled: light-dark(#fff0, #0000);
   --eds-color-interactive-surface-standard-secondary-resting-initial: light-dark(#fff0, #0000);
   --eds-color-interactive-surface-standard-secondary-resting-hover: light-dark(#dcdcdc, #344c5b);
