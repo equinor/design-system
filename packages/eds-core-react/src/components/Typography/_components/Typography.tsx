@@ -47,13 +47,13 @@ export const Typography = styled.p<StyleHeadingProps>`
     line-height: ${`var(--eds-typography-${$type}-${$size}-lineheight-${$lineHeight})`};
     font-weight: ${`var(--eds-typography-${$type}-${$size}-font-weight-${$fontWeight})`};
     letter-spacing: ${`var(--eds-typography-${$type}-${$size}-tracking-${$letterSpacing})`};
-    color: var(--_text-preset-color, inherit);
+    color: var(--text-override-color, var(--_text-preset-color, inherit));
     --_offset: calc(${$offset} * 1em);
     --_grid-base: 4px;
-    /* &[href],
+    &[href],
     & [href] {
-      color: var(--custom-color-link, var(--eds-whatever-the-link-color-token-is));
-    } */
+      color: var(--custom-color-link, light-dark(#034187, #90d6fc));
+    }
 
     @supports (height: round(up, 10px, 1px)) {
       /*This calculates the rest-values to make the total height a multiple of 4px.
