@@ -80,7 +80,7 @@ export const Introduction: StoryFn<HeadingProps> = (args) => {
 
 export const Sizes: StoryFn<HeadingProps> = () => {
   return (
-    <div style={{ '--override-text-color': 'red', gap: 'inherit' }}>
+    <>
       <Heading size="xs" as="h4">
         xs: {TEXT}
       </Heading>
@@ -108,9 +108,9 @@ export const Sizes: StoryFn<HeadingProps> = () => {
       <Heading size="5xl" as="h4">
         5xl: {TEXT}
       </Heading>
-      <Heading size="6xl" as="h4" color="quaternary">
+      <Heading size="6xl" as="h4">
         6xl: {TEXT}
       </Heading>
-    </div>
+    </>
   )
 }
