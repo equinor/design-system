@@ -14,6 +14,7 @@ export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
       fontWeight = 'normal',
       letterSpacing = 'normal',
       as = 'p',
+      color,
       lines,
       children,
       ...rest
@@ -24,6 +25,7 @@ export const BodyText: OverridableComponent<BodyTextProps, HTMLElement> =
       <Typography
         ref={ref}
         as={as}
+        $color={color}
         $type={'ui-body'}
         $offset={INTER_VERTICAL_OFFSET}
         $size={size}
