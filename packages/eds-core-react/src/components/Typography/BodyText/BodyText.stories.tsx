@@ -19,6 +19,20 @@ const meta: Meta<typeof BodyText> = {
         type: 'select',
       },
     },
+    color: {
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'quaternary',
+        'maximal',
+        'disabled',
+        'inverted',
+      ],
+      control: {
+        type: 'select',
+      },
+    },
     size: {
       table: {
         type: {

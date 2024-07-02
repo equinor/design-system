@@ -17,6 +17,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLElement> =
       lineHeight = 'default',
       fontWeight = 'normal',
       letterSpacing = 'normal',
+      color,
       lines,
       as,
       children,
@@ -27,6 +28,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLElement> =
     return (
       <Typography
         ref={ref}
+        $color={color}
         $lineHeight={lineHeight}
         $lines={lines}
         $type={'header'}

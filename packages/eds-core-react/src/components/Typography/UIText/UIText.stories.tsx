@@ -18,6 +18,20 @@ const meta: Meta<typeof UIText> = {
         type: 'select',
       },
     },
+    color: {
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'quaternary',
+        'maximal',
+        'disabled',
+        'inverted',
+      ],
+      control: {
+        type: 'select',
+      },
+    },
     size: {
       table: {
         type: {

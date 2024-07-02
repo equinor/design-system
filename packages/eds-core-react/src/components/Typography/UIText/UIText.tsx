@@ -18,6 +18,7 @@ export const UIText: OverridableComponent<UITextProps, HTMLElement> =
       fontWeight = 'normal',
       letterSpacing = 'normal',
       lines,
+      color,
       as = 'p',
       onGrid = false,
       children,
@@ -29,6 +30,7 @@ export const UIText: OverridableComponent<UITextProps, HTMLElement> =
       <Typography
         ref={ref}
         as={as}
+        $color={color}
         $type={'ui-body'}
         $size={size}
         $lineHeight={lineHeight}
