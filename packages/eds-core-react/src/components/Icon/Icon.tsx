@@ -64,22 +64,41 @@ const findIcon = (name: string, data: IconData, size: number) => {
   return { icon, count }
 }
 
-export type IconProps = {
-  /** Title for icon when used semantically */
-  title?: string
-  /** Color */
-  color?: string
-  /** Size */
-  size?: 16 | 18 | 24 | 32 | 40 | 48
-  /** Rotation */
-  rotation?: 0 | 90 | 180 | 270
-  /** Name */
-  name?: Name
-  /** Manually specify which icon data to use */
-  data?: IconData
-  /** @ignore */
-  ref?: Ref<SVGSVGElement>
-} & SVGProps<SVGSVGElement>
+export type IconProps = (
+  | {
+      /** Title for icon when used semantically */
+      title?: string
+      /** Color */
+      color?: string
+      /** Size */
+      size?: 16 | 18 | 24 | 32 | 40 | 48
+      /** Rotation */
+      rotation?: 0 | 90 | 180 | 270
+      /** Name */
+      name: Name
+      /** Manually specify which icon data to use */
+      data?: IconData
+      /** @ignore */
+      ref?: Ref<SVGSVGElement>
+    }
+  | {
+      /** Title for icon when used semantically */
+      title?: string
+      /** Color */
+      color?: string
+      /** Size */
+      size?: 16 | 18 | 24 | 32 | 40 | 48
+      /** Rotation */
+      rotation?: 0 | 90 | 180 | 270
+      /** Name */
+      name?: Name
+      /** Manually specify which icon data to use */
+      data: IconData
+      /** @ignore */
+      ref?: Ref<SVGSVGElement>
+    }
+) &
+  SVGProps<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   { size, color = 'currentColor', name, rotation, title, data, ...rest },
