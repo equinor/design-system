@@ -41,18 +41,22 @@ export const Typography = styled.p<StyleHeadingProps>`
       overflow: hidden;
       text-overflow: ellipsis;
     `}
-    --_text-preset-color: ${$color};
+    ${$color &&
+    css`
+      --_text-preset-color: ${`var(--eds-color-text-${$color})`};
+    `}
     font-family: ${`var(--eds-typography-${$type}-font-family)`};
     font-size: ${`var(--eds-typography-${$type}-${$size}-font-size)`};
     line-height: ${`var(--eds-typography-${$type}-${$size}-lineheight-${$lineHeight})`};
     font-weight: ${`var(--eds-typography-${$type}-${$size}-font-weight-${$fontWeight})`};
     letter-spacing: ${`var(--eds-typography-${$type}-${$size}-tracking-${$letterSpacing})`};
-    color: var(--text-override-color, var(--_text-preset-color, inherit));
+    /*TODO: determine if --override-text-color/link-color is needed or if inherit covers all the bases. override overrides all, while inherit only applies when color prop is not set*/
+    color: var(--override-text-color, var(--_text-preset-color, inherit));
     --_offset: calc(${$offset} * 1em);
     --_grid-base: 4px;
     &[href],
     & [href] {
-      color: var(--custom-color-link, light-dark(#034187, #90d6fc));
+      color: var(--override-link-color, light-dark(#034187, #90d6fc));
     }
 
     @supports (height: round(up, 10px, 1px)) {
