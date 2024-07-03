@@ -1,31 +1,42 @@
 :root {
-  --eds_text__static_icons__default: rgba(61, 61, 61, 1);
-  --eds_text__static_icons__secondary: rgba(86, 86, 86, 1);
-  --eds_text__static_icons__tertiary: rgba(111, 111, 111, 1);
-  --eds_text__static_icons__primary_white: rgba(255, 255, 255, 1);
-  --eds_ui_background__default: rgba(255, 255, 255, 1);
+  --eds_text__static_icons__default: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_text__static_icons__secondary: var(--eds-color-text-secondary, rgba(86, 86, 86, 1));
+  --eds_text__static_icons__tertiary: var(--eds-color-text-tertiary, rgba(111, 111, 111, 1));
+  --eds_text__static_icons__primary_white: var(--eds-color-text-inverted, rgba(255, 255, 255, 1));
+  --eds_ui_background__default: var(--eds-color-surface-level-2, rgba(255, 255, 255, 1));
+  /*circularProgress background, may need a custom light-dark*/
   --eds_ui_background__semitransparent: rgba(255, 255, 255, 0.2);
-  --eds_ui_background__light: rgba(247, 247, 247, 1);
-  --eds_ui_background__scrim: rgba(0, 0, 0, 0.4);
-  --eds_ui_background__overlay: rgba(0, 0, 0, 0.8);
-  --eds_ui_background__medium: rgba(220, 220, 220, 1);
-  --eds_ui_background__info: rgba(213, 234, 244, 1);
-  --eds_ui_background__warning: rgba(255, 231, 214, 1);
-  --eds_ui_background__danger: rgba(255, 193, 193, 1);
+  --eds_ui_background__light: var(--eds-color-surface-level-1, rgba(247, 247, 247, 1));
+  --eds_ui_background__scrim: var(--eds-ui-scrim-color-surface, rgba(0, 0, 0, 0.4));
+  /*tooltip, snackbar*/
+  --eds_ui_background__overlay: var(--eds-color-surface-inverted, rgba(0, 0, 0, 0.8));
+  /*background__medium is used for misc borders, autocomplete/sidebarlink hover background,
+   *table header background and more, so need testing in dark mode to see if this works*/
+  --eds_ui_background__medium: var(--eds-color-border-primary, rgba(220, 220, 220, 1));
+  /*card backgrounds*/
+  --eds_ui_background__info: var(--eds-color-message-surface-standard-info-on-level-1, rgba(213, 234, 244, 1));
+  --eds_ui_background__warning: var(--eds-color-message-surface-standard-warning-on-level-1, rgba(255, 231, 214, 1));
+  --eds_ui_background__danger: var(--eds-color-message-surface-standard-error-on-level-1, rgba(255, 193, 193, 1));
+
   --eds_logo__fill_positive: rgba(235, 0, 55, 1);
   --eds_logo__fill_negative: rgba(255, 255, 255, 1);
-  --eds_interactive_primary__selected_highlight: rgba(230, 250, 236, 1);
-  --eds_interactive_primary__selected_hover: rgba(195, 243, 210, 1);
-  --eds_interactive_primary__resting: rgba(0, 112, 121, 1);
-  --eds_interactive_primary__hover: rgba(0, 79, 85, 1);
-  --eds_interactive_primary__hover_alt: rgba(222, 237, 238, 1);
-  --eds_interactive_secondary__highlight: rgba(213, 234, 244, 1);
+  /*active background color (menu, autocomplete, pagination etc)*/
+  --eds_interactive_primary__selected_highlight: var(--eds-color-interactive-surface-standard-secondary-active-initial, rgba(230, 250, 236, 1));
+  --eds_interactive_primary__selected_hover: var(--eds-color-interactive-surface-standard-secondary-active-hover, rgba(195, 243, 210, 1));
+  --eds_interactive_primary__resting: var(--eds-color-action-surface-primary-default-initial, rgba(0, 112, 121, 1));
+  --eds_interactive_primary__hover: var(--eds-color-action-surface-primary-default-hover, rgba(0, 79, 85, 1));
+  --eds_interactive_primary__hover_alt: var(--eds-color-interactive-surface-standard-secondary-active-initial, rgba(222, 237, 238, 1));
+  /*secondary button ghost/outlined does not exist in 2.0 but the color is used other places.
+   *So lets see if one of them works for button in dark mode*/
+  --eds_interactive_secondary__highlight: var(--eds-color-message-surface-standard-info-on-level-1, rgba(213, 234, 244, 1));
+  /*in older version of 2.0: light: #03486b dark: #90bbd5*/
   --eds_interactive_secondary__resting: rgba(36, 55, 70, 1);
+  /*in older version of 2.0: light: #02314a dark: #c4dbe8*/
   --eds_interactive_secondary__link_hover: rgba(23, 36, 47, 1);
-  --eds_interactive_danger__highlight: rgba(255, 193, 193, 1);
-  --eds_interactive_danger__resting: rgba(235, 0, 0, 1);
-  --eds_interactive_danger__hover: rgba(179, 13, 47, 1);
-  --eds_interactive_danger__text: rgba(179, 13, 47, 1);
+  --eds_interactive_danger__highlight: var(--eds-color-action-surface-secondary-danger-hover, rgba(255, 193, 193, 1));
+  --eds_interactive_danger__resting: var(--eds-color-action-surface-primary-danger-initial, rgba(235, 0, 0, 1));
+  --eds_interactive_danger__hover: var(--eds-color-action-surface-primary-danger-hover, rgba(179, 13, 47, 1));
+  --eds_interactive_danger__text: var(--eds-color-action-text-secondary-danger-initial, rgba(179, 13, 47, 1));
   --eds_interactive_warning__highlight: rgba(255, 231, 214, 1);
   --eds_interactive_warning__resting: rgba(255, 146, 0, 1);
   --eds_interactive_warning__hover: rgba(173, 98, 0, 1);
@@ -52,53 +63,54 @@
   --eds_interactive__pressed_overlay_light: rgba(255, 255, 255, 0.2);
 
   /*Typography colors*/
-  --eds_heading__h1_bold_color: rgba(61, 61, 61, 1);
-  --eds_heading__h1_color: rgba(61, 61, 61, 1);
-  --eds_heading__h2_color: rgba(61, 61, 61, 1);
-  --eds_heading__h3_color: rgba(61, 61, 61, 1);
-  --eds_heading__h4_color: rgba(61, 61, 61, 1);
-  --eds_heading__h5_color: rgba(61, 61, 61, 1);
-  --eds_heading__h6_color: rgba(61, 61, 61, 1);
-  --eds_navigation__menu_title_color: rgba(61, 61, 61, 1);
-  --eds_navigation__menu_tabs_color: rgba(61, 61, 61, 1);
-  --eds_navigation__label_color: rgba(0, 0, 0, 1);
-  --eds_navigation__drawer_active_color: rgba(0, 0, 0, 1);
-  --eds_navigation__drawer_inactive_color: rgba(0, 0, 0, 1);
-  --eds_navigation__button_color: rgba(0, 0, 0, 1);
-  --eds_navigation__breadcrumb_color: rgba(0, 0, 0, 1);
-  --eds_navigation__breadcrumb_hover_color: rgba(0, 0, 0, 1);
-  --eds_navigation__menu_title_hover_color: rgba(61, 61, 61, 1);
-  --eds_input__label_color: rgba(0, 0, 0, 1);
-  --eds_input__text_color: rgba(0, 0, 0, 1);
-  --eds_input__text_monospaced_color: rgba(0, 0, 0, 1);
-  --eds_input__helper_color: rgba(0, 0, 0, 1);
-  --eds_paragraph__body_short_italic_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__caption_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__meta_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_short_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_short_bold_italic_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_short_bold_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_short_link_color: rgba(0, 112, 121, 1);
-  --eds_paragraph__overline_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__ingress_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_long_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_long_link_color: rgba(0, 112, 121, 1);
-  --eds_paragraph__body_long_italic_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_long_bold_color: rgba(61, 61, 61, 1);
-  --eds_paragraph__body_long_bold_italic_color: rgba(61, 61, 61, 1);
-  --eds_table__cell_header_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_text_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_text_bold_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_text_link_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_numeric_monospaced_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_header_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_text_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_text_bold_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_text_link_color: rgba(0, 0, 0, 1);
-  --eds_table__cell_numeric_monospaced_color: rgba(0, 0, 0, 1);
-  --eds_ui__tooltip_color: rgba(61, 61, 61, 1);
-  --eds_ui__snackbar_color: rgba(61, 61, 61, 1);
-  --eds_ui__accordion_header_color: rgba(61, 61, 61, 1);
-  --eds_ui__chip__badge_color: rgba(61, 61, 61, 1);
-  --eds_ui__chart_color: rgba(61, 61, 61, 1);
+  --eds_heading__h1_bold_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_heading__h1_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_heading__h2_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_heading__h3_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_heading__h4_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_heading__h5_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_heading__h6_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_navigation__menu_title_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_navigation__menu_tabs_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_navigation__menu_title_hover_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_short_italic_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__caption_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__meta_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_short_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_short_bold_italic_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_short_bold_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__overline_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__ingress_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_long_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_long_italic_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_long_bold_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_long_bold_italic_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_ui__tooltip_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_ui__snackbar_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_ui__accordion_header_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_ui__chip__badge_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_ui__chart_color: var(--eds-color-text-primary, rgba(61, 61, 61, 1));
+  --eds_paragraph__body_short_link_color: var(--eds-color-interactive-text-standard-secondary-active-initial, rgba(0, 112, 121, 1));
+  --eds_paragraph__body_long_link_color: var(--eds-color-interactive-text-standard-secondary-active-initial, rgba(0, 112, 121, 1));
+  /*I don't think we use any of these black text colors, but just in case we'll replace rgba(0, 0, 0, 1) with light-dark(black, white)*/
+  --eds_navigation__label_color: light-dark(black, white);
+  --eds_navigation__drawer_active_color: light-dark(black, white);
+  --eds_navigation__drawer_inactive_color: light-dark(black, white);
+  --eds_navigation__button_color: light-dark(black, white);
+  --eds_navigation__breadcrumb_color: light-dark(black, white);
+  --eds_navigation__breadcrumb_hover_color: light-dark(black, white);
+  --eds_input__label_color: light-dark(black, white);
+  --eds_input__text_color: light-dark(black, white);
+  --eds_input__text_monospaced_color: light-dark(black, white);
+  --eds_input__helper_color: light-dark(black, white);
+  --eds_table__cell_header_color: light-dark(black, white);
+  --eds_table__cell_text_color: light-dark(black, white);
+  --eds_table__cell_text_bold_color: light-dark(black, white);
+  --eds_table__cell_text_link_color: light-dark(black, white);
+  --eds_table__cell_numeric_monospaced_color: light-dark(black, white);
+  --eds_table__cell_header_color: light-dark(black, white);
+  --eds_table__cell_text_color: light-dark(black, white);
+  --eds_table__cell_text_bold_color: light-dark(black, white);
+  --eds_table__cell_text_link_color: light-dark(black, white);
+  --eds_table__cell_numeric_monospaced_color: light-dark(black, white);
 }
