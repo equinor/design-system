@@ -17,7 +17,7 @@ export type HelperTextProps = {
 }
 
 export const helperText: HelperTextProps = {
-  background: colors.ui.background__light.hex,
+  background: colors.ui.background__light.rgba,
   typography: {
     ...typography.input.helper,
     color: colors.text.static_icons__tertiary.rgba,
