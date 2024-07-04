@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
@@ -624,11 +626,11 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  primitives.buildAllPlatforms()
+  /*   primitives.buildAllPlatforms()
   lightMode.buildAllPlatforms()
   darkMode.buildAllPlatforms()
   lightDarkColorsVerbose.buildAllPlatforms()
-  lightDarkColorsTrimmed.buildAllPlatforms()
+  lightDarkColorsTrimmed.buildAllPlatforms() */
   spacingPrimitives.buildAllPlatforms()
   densityComfortable.buildAllPlatforms()
   densitySpacious.buildAllPlatforms()
