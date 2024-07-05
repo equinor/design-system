@@ -1,224 +1,531 @@
 {
   "color": {
     "shadow": "#00000024",
-    "text": {
-      "primary": "#3d3d3d",
-      "secondary": "#565656",
-      "tertiary": "#6f6f6f",
-      "quaternary": "#9e9e9e",
-      "maximal": "#3d3d3d",
-      "disabled": "#bebebe",
-      "inverted": "#ffffff"
-    },
-    "icon": {
-      "primary": "#3d3d3d",
-      "secondary": "#565656",
-      "tertiary": "#6f6f6f",
-      "quaternary": "#9e9e9e",
-      "disabled": "#bebebe",
-      "inverted": "#ffffff"
-    },
-    "border": {
-      "primary": "#dcdcdc",
-      "secondary": "#bebebe",
-      "tertiary": "#9e9e9e",
-      "quaternary": "#6f6f6f",
-      "disabled": "#dcdcdc",
-      "none": "#ffffff00"
-    },
-    "surface": {
-      "level-1": "#f7f7f7",
-      "level-2": "#ffffff",
-      "level-3": "#ffffff",
-      "none": "#ffffff00",
-      "inverted": "#000000cc"
-    },
-    "action": {
+    "static": {
       "text": {
-        "primary": {
-          "disabled": "#bebebe",
-          "default": {
-            "initial": "#ffffff",
-            "hover": "#ffffff"
+        "raised": "#007079",
+        "inverted": "#ffffff",
+        "standard": {
+          "primary": "#3d3d3d",
+          "secondary": "#565656",
+          "maximal": "#3d3d3d"
+        }
+      },
+      "icon": {
+        "raised": "#007079",
+        "inverted": "#ffffff",
+        "standard": {
+          "primary": "#3d3d3d",
+          "secondary": "#565656",
+          "maximal": "#3d3d3d"
+        }
+      },
+      "border": {
+        "raised": "#dcdcdc",
+        "inverted": "#000000cc",
+        "standard": {
+          "on-level-1": "#ffffff",
+          "on-level-2": "#ffffff",
+          "on-level-3": "#ffffff"
+        }
+      },
+      "surface": {
+        "raised": "#eaeaea",
+        "inverted": "#000000cc",
+        "standard": {
+          "on-level-1": "#ffffff",
+          "on-level-2": "#ffffff",
+          "on-level-3": "#ffffff"
+        }
+      }
+    },
+    "interactive": {
+      "text": {
+        "standard": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#ffffff",
+              "active-hover": "#ffffff"
+            }
           },
-          "muted": {
-            "initial": "#ffffff",
-            "hover": "#ffffff"
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
           },
-          "danger": {
-            "initial": "#ffffff",
-            "hover": "#ffffff"
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
+          },
+          "quaternary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
           }
         },
-        "secondary": {
+        "raised": {
           "disabled": "#bebebe",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
-          },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
-          }
-        },
-        "tertiary": {
-          "disabled": "#bebebe",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
-          },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
+          "enabled": {
+            "initial": "#565656",
+            "hover": "#3d3d3d",
+            "active": "#007079",
+            "active-hover": "#004f55"
           }
         }
       },
       "icon": {
-        "primary": {
-          "disabled": "#bebebe",
-          "default": {
-            "initial": "#ffffff",
-            "hover": "#ffffff"
+        "standard": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#6f6f6f",
+              "active": "#ffffff",
+              "active-hover": "#ffffff"
+            }
           },
-          "muted": {
-            "initial": "#ffffff",
-            "hover": "#ffffff"
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
           },
-          "danger": {
-            "initial": "#ffffff",
-            "hover": "#ffffff"
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
+          },
+          "quaternary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
           }
         },
-        "secondary": {
+        "raised": {
           "disabled": "#bebebe",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
-          },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
-          }
-        },
-        "tertiary": {
-          "disabled": "#bebebe",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
-          },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
+          "enabled": {
+            "initial": "#565656",
+            "hover": "#3d3d3d",
+            "active": "#007079",
+            "active-hover": "#004f55"
           }
         }
       },
       "border": {
-        "primary": {
-          "disabled": "#eaeaea",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
+        "standard": {
+          "primary": {
+            "disabled": "#dcdcdc",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#6f6f6f",
+              "active": "#007079",
+              "active-hover": "#007079"
+            }
           },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
+          "secondary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#ffffff00",
+              "active": "#ffffff00",
+              "active-hover": "#ffffff00"
+            }
           },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
+          "tertiary": {
+            "disabled": "#f7f7f7",
+            "enabled": {
+              "initial": "#f7f7f7",
+              "hover": "#f7f7f7",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
+          },
+          "quaternary": {
+            "disabled": "#dcdcdc",
+            "enabled": {
+              "initial": "#dcdcdc",
+              "hover": "#bebebe",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
           }
         },
-        "secondary": {
-          "disabled": "#cfcfcf",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
-          },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
-          }
-        },
-        "tertiary": {
-          "disabled": "#ffffff00",
-          "default": {
-            "initial": "#ffffff00",
-            "hover": "#ffffff00"
-          },
-          "muted": {
-            "initial": "#ffffff00",
-            "hover": "#ffffff00"
-          },
-          "danger": {
-            "initial": "#ffffff00",
-            "hover": "#ffffff00"
+        "raised": {
+          "disabled": "#dcdcdc",
+          "enabled": {
+            "initial": "#dcdcdc",
+            "hover": "#565656",
+            "active": "#b9d7da",
+            "active-hover": "#007079"
           }
         }
       },
       "surface": {
-        "primary": {
+        "standard": {
+          "primary": {
+            "disabled-outlined": "#ffffff00",
+            "disabled-filled": "#eaeaea",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#dcdcdc",
+              "active": "#007079",
+              "active-hover": "#004f55"
+            }
+          },
+          "secondary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#dcdcdc",
+              "active": "#deedee",
+              "active-hover": "#c9e0e2"
+            }
+          },
+          "tertiary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#dcdcdc",
+              "active": "#deedee",
+              "active-hover": "#c9e0e2"
+            }
+          },
+          "quaternary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#dcdcdc",
+              "active": "#ffffff00",
+              "active-hover": "#c9e0e2"
+            }
+          }
+        },
+        "raised": {
           "disabled": "#eaeaea",
-          "default": {
-            "initial": "#007079",
-            "hover": "#004f55"
+          "enabled": {
+            "initial": "#eaeaea",
+            "hover": "#eaeaea",
+            "active": "#e6f3f4",
+            "active-hover": "#e6f3f4"
+          }
+        }
+      }
+    },
+    "action": {
+      "text": {
+        "primary": {
+          "disabled": "#bebebe"
+        },
+        "standard": {
+          "primary": {
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            },
+            "disabled": "#bebebe"
           },
-          "muted": {
-            "initial": "#6f6f6f",
-            "hover": "#565656"
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
           },
-          "danger": {
-            "initial": "#e20337",
-            "hover": "#90042c"
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
+          }
+        },
+        "danger": {
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            }
+          },
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            }
+          },
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            }
+          }
+        },
+        "muted": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            }
+          },
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            }
+          },
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            }
+          }
+        }
+      },
+      "icon": {
+        "standard": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            }
+          },
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
+          },
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
+          }
+        },
+        "muted": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            }
+          },
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            }
+          },
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            }
+          }
+        },
+        "danger": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            }
+          },
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            }
+          },
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            }
+          }
+        }
+      },
+      "border": {
+        "standard": {
+          "primary": {
+            "disabled": "#eaeaea",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
+          },
+          "secondary": {
+            "disabled": "#eaeaea",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
+          },
+          "tertiary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#ffffff00"
+            }
+          }
+        },
+        "muted": {
+          "primary": {
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            },
+            "disabled": "#eaeaea"
+          },
+          "secondary": {
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            },
+            "disabled": "#eaeaea"
+          },
+          "tertiary": {
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#ffffff00"
+            },
+            "disabled": "#eaeaea"
+          }
+        },
+        "danger": {
+          "primary": {
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            },
+            "disabled": "#eaeaea"
+          },
+          "secondary": {
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            },
+            "disabled": "#eaeaea"
+          },
+          "tertiary": {
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#ffffff00"
+            },
+            "disabled": "#eaeaea"
           }
         },
         "secondary": {
-          "disabled": "#ffffff00",
-          "default": {
-            "initial": "#ffffff00",
-            "hover": "#deedee"
+          "disabled": "#cfcfcf"
+        }
+      },
+      "surface": {
+        "standard": {
+          "primary": {
+            "disabled": "#eaeaea",
+            "enabled": {
+              "initial": "#007079",
+              "hover": "#004f55"
+            }
           },
-          "muted": {
-            "initial": "#ffffff00",
-            "hover": "#dcdcdc"
+          "secondary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#deedee"
+            }
           },
-          "danger": {
-            "initial": "#ffffff00",
-            "hover": "#ffd2d1"
+          "tertiary": {
+            "disabled": "#ffffff00",
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#deedee"
+            }
           }
         },
-        "tertiary": {
-          "disabled": "#ffffff00",
-          "default": {
-            "initial": "#ffffff00",
-            "hover": "#deedee"
+        "muted": {
+          "primary": {
+            "enabled": {
+              "initial": "#6f6f6f",
+              "hover": "#565656"
+            },
+            "disabled": "#eaeaea"
           },
-          "muted": {
-            "initial": "#ffffff00",
-            "hover": "#dcdcdc"
+          "secondary": {
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#dcdcdc"
+            },
+            "disabled": "#ffffff00"
           },
-          "danger": {
-            "initial": "#ffffff00",
-            "hover": "#ffd2d1"
+          "tertiary": {
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#dcdcdc"
+            },
+            "disabled": "#ffffff00"
+          }
+        },
+        "danger": {
+          "primary": {
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            },
+            "disabled": "#eaeaea"
+          },
+          "secondary": {
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#ffd2d1"
+            },
+            "disabled": "#ffffff00"
+          },
+          "tertiary": {
+            "enabled": {
+              "initial": "#ffffff00",
+              "hover": "#ffd2d1"
+            },
+            "disabled": "#ffffff00"
           }
         }
       }
@@ -368,275 +675,6 @@
           "error": "#ffd2d1"
         }
       }
-    },
-    "interactive": {
-      "border": {
-        "raised": {
-          "resting": {
-            "initial": "#dcdcdc",
-            "hover": "#565656"
-          },
-          "active": {
-            "initial": "#b9d7da",
-            "hover": "#007079"
-          },
-          "disabled": "#dcdcdc"
-        },
-        "standard": {
-          "primary": {
-            "disabled": "#dcdcdc",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#6f6f6f"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#007079"
-            }
-          },
-          "secondary": {
-            "disabled": "#f7f7f7",
-            "resting": {
-              "initial": "#f7f7f7",
-              "hover": "#f7f7f7"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          },
-          "tertiary": {
-            "disabled": "#ffffff00",
-            "resting": {
-              "initial": "#ffffff00",
-              "hover": "#ffffff00"
-            },
-            "active": {
-              "initial": "#ffffff00",
-              "hover": "#ffffff00"
-            }
-          },
-          "quaternary": {
-            "disabled": "#dcdcdc",
-            "resting": {
-              "initial": "#dcdcdc",
-              "hover": "#bebebe"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          }
-        }
-      },
-      "text": {
-        "standard": {
-          "primary": {
-            "disabled": "#bebebe",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "active": {
-              "initial": "#ffffff",
-              "hover": "#ffffff"
-            }
-          },
-          "secondary": {
-            "disabled": "#bebebe",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          },
-          "tertiary": {
-            "disabled": "#bebebe",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          },
-          "quaternary": {
-            "disabled": "#bebebe",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          }
-        },
-        "raised": {
-          "disabled": "#bebebe",
-          "resting": {
-            "initial": "#565656",
-            "hover": "#3d3d3d"
-          },
-          "active": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          }
-        }
-      },
-      "icon": {
-        "standard": {
-          "secondary": {
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            },
-            "disabled": "#bebebe"
-          },
-          "primary": {
-            "disabled": "#bebebe",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#6f6f6f"
-            },
-            "active": {
-              "initial": "#ffffff",
-              "hover": "#ffffff"
-            }
-          },
-          "tertiary": {
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "disabled": "#bebebe",
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          },
-          "quaternary": {
-            "disabled": "#bebebe",
-            "resting": {
-              "initial": "#6f6f6f",
-              "hover": "#565656"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          }
-        },
-        "raised": {
-          "disabled": "#bebebe",
-          "resting": {
-            "initial": "#565656",
-            "hover": "#3d3d3d"
-          },
-          "active": {
-            "initial": "#007079",
-            "hover": "#004f55"
-          }
-        }
-      },
-      "surface": {
-        "standard": {
-          "primary": {
-            "disabled-outline": "#ffffff00",
-            "disabled-filled": "#eaeaea",
-            "resting": {
-              "initial": "#ffffff00",
-              "hover": "#dcdcdc"
-            },
-            "active": {
-              "initial": "#007079",
-              "hover": "#004f55"
-            }
-          },
-          "secondary": {
-            "disabled": "#ffffff00",
-            "resting": {
-              "initial": "#ffffff00",
-              "hover": "#dcdcdc"
-            },
-            "active": {
-              "initial": "#deedee",
-              "hover": "#c9e0e2"
-            }
-          },
-          "tertiary": {
-            "disabled": "#ffffff00",
-            "resting": {
-              "initial": "#ffffff00",
-              "hover": "#dcdcdc"
-            },
-            "active": {
-              "initial": "#deedee",
-              "hover": "#c9e0e2"
-            }
-          },
-          "quaternary": {
-            "disabled": "#ffffff00",
-            "resting": {
-              "initial": "#ffffff00",
-              "hover": "#dcdcdc"
-            },
-            "active": {
-              "initial": "#ffffff00",
-              "hover": "#c9e0e2"
-            }
-          }
-        },
-        "raised": {
-          "disabled": "#eaeaea",
-          "resting": {
-            "initial": "#eaeaea",
-            "hover": "#eaeaea"
-          },
-          "active": {
-            "initial": "#e6f3f4",
-            "hover": "#e6f3f4"
-          }
-        }
-      }
-    },
-    "static": {
-      "text": {
-        "standard": "#3d3d3d",
-        "raised": "#007079",
-        "callout": "#3d3d3d"
-      },
-      "icon": {
-        "standard": "#007079",
-        "raised": "#007079",
-        "callout": "#007079"
-      },
-      "border": {
-        "standard": {
-          "on-level-1": "#ffffff",
-          "on-level-2": "#ffffff",
-          "on-level-3": "#ffffff"
-        },
-        "raised": "#dcdcdc",
-        "callout": "#ffffff"
-      },
-      "surface": {
-        "standard": {
-          "on-level-1": "#ffffff",
-          "on-level-2": "#ffffff",
-          "on-level-3": "#ffffff"
-        },
-        "raised": "#eaeaea",
-        "callout": "#ffffff"
-      }
     }
   },
   "input": {
@@ -653,36 +691,47 @@
     "helper": {
       "color": {
         "text": {
-          "initial": "#6f6f6f",
+          "enabled": "#6f6f6f",
           "disabled": "#bebebe"
         },
         "icon": {
-          "initial": "#6f6f6f",
+          "enabled": "#6f6f6f",
           "disabled": "#bebebe"
         }
       }
     },
     "color": {
       "text": {
-        "initial": "#565656",
-        "focus": "#3d3d3d",
+        "enabled": {
+          "initial": "#565656",
+          "focus": "#3d3d3d"
+        },
+        "read-only": "#565656",
         "disabled": "#bebebe"
       },
       "icon": {
-        "initial": "#565656",
-        "focus": "#3d3d3d",
+        "enabled": {
+          "initial": "#565656",
+          "focus": "#3d3d3d"
+        },
+        "read-only": "#565656",
         "disabled": "#bebebe"
       },
       "border": {
-        "initial": "#b3b3b3",
-        "focus": "#007079",
+        "enabled": {
+          "initial": "#b3b3b3",
+          "focus": "#007079"
+        },
+        "read-only": "#b3b3b3",
         "disabled": "#ffffff00"
       },
       "surface": {
-        "initial": {
-          "on-level-1": "#ffffff",
-          "on-level-2": "#f7f7f7",
-          "on-level-3": "#f7f7f7"
+        "enabled": {
+          "initial": {
+            "on-level-1": "#ffffff",
+            "on-level-2": "#f7f7f7",
+            "on-level-3": "#f7f7f7"
+          }
         },
         "disabled": {
           "on-level-1": "#ffffff",
@@ -743,11 +792,11 @@
     "label": {
       "color": {
         "text": {
-          "initial": "#6f6f6f",
+          "enabled": "#6f6f6f",
           "disabled": "#bebebe"
         },
         "icon": {
-          "initial": "#6f6f6f",
+          "enabled": "#6f6f6f",
           "disabled": "#bebebe"
         }
       }
@@ -764,7 +813,7 @@
         "interactive": {
           "text": {
             "disabled": "#bebebe",
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#3d3d3d",
                 "on-level-2": "#3d3d3d",
@@ -774,15 +823,13 @@
                 "on-level-1": "#1f1f1f",
                 "on-level-2": "#1f1f1f",
                 "on-level-3": "#1f1f1f"
-              }
-            },
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#3d3d3d",
                 "on-level-2": "#3d3d3d",
                 "on-level-3": "#3d3d3d"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#1f1f1f",
                 "on-level-2": "#1f1f1f",
                 "on-level-3": "#1f1f1f"
@@ -791,7 +838,7 @@
           },
           "icon": {
             "disabled": "#bebebe",
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#6f6f6f",
                 "on-level-2": "#6f6f6f",
@@ -801,15 +848,13 @@
                 "on-level-1": "#1f1f1f",
                 "on-level-2": "#1f1f1f",
                 "on-level-3": "#1f1f1f"
-              }
-            },
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#007079",
                 "on-level-2": "#007079",
                 "on-level-3": "#007079"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#004f55",
                 "on-level-2": "#004f55",
                 "on-level-3": "#004f55"
@@ -818,7 +863,7 @@
           },
           "border": {
             "disabled": "#dcdcdc",
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#dcdcdc",
                 "on-level-2": "#dcdcdc",
@@ -828,15 +873,13 @@
                 "on-level-1": "#bebebe",
                 "on-level-2": "#bebebe",
                 "on-level-3": "#bebebe"
-              }
-            },
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#dcdcdc",
                 "on-level-2": "#dcdcdc",
                 "on-level-3": "#dcdcdc"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#bebebe",
                 "on-level-2": "#bebebe",
                 "on-level-3": "#bebebe"
@@ -844,7 +887,7 @@
             }
           },
           "surface": {
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#ffffff00",
                 "on-level-2": "#ffffff00",
@@ -854,21 +897,19 @@
                 "on-level-1": "#dcdcdc",
                 "on-level-2": "#dcdcdc",
                 "on-level-3": "#dcdcdc"
-              }
-            },
-            "disabled": "#ffffff00",
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#deedee",
                 "on-level-2": "#deedee",
                 "on-level-3": "#deedee"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#c9e0e2",
                 "on-level-2": "#c9e0e2",
                 "on-level-3": "#c9e0e2"
               }
-            }
+            },
+            "disabled": "#ffffff00"
           }
         }
       }
@@ -878,19 +919,7 @@
         "interactive": {
           "border": {
             "disabled": "#dcdcdc",
-            "active": {
-              "initial": {
-                "on-level-1": "#007079",
-                "on-level-2": "#007079",
-                "on-level-3": "#007079"
-              },
-              "hover": {
-                "on-level-1": "#004f55",
-                "on-level-2": "#004f55",
-                "on-level-3": "#004f55"
-              }
-            },
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#dcdcdc",
                 "on-level-2": "#dcdcdc",
@@ -900,29 +929,37 @@
                 "on-level-1": "#bebebe",
                 "on-level-2": "#bebebe",
                 "on-level-3": "#bebebe"
+              },
+              "active": {
+                "on-level-1": "#007079",
+                "on-level-2": "#007079",
+                "on-level-3": "#007079"
+              },
+              "active-hover": {
+                "on-level-1": "#004f55",
+                "on-level-2": "#004f55",
+                "on-level-3": "#004f55"
               }
             }
           },
           "surface": {
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#ffffff",
-                "on-level-2": "#ffffff",
+                "on-level-2": "#f7f7f7",
                 "on-level-3": "#f7f7f7"
               },
               "hover": {
                 "on-level-1": "#dcdcdc",
                 "on-level-2": "#dcdcdc",
                 "on-level-3": "#dcdcdc"
-              }
-            },
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#eaeaea",
                 "on-level-2": "#eaeaea",
                 "on-level-3": "#eaeaea"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#dcdcdc",
                 "on-level-2": "#dcdcdc",
                 "on-level-3": "#dcdcdc"
@@ -935,7 +972,7 @@
             }
           },
           "text": {
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#3d3d3d",
                 "on-level-2": "#3d3d3d",
@@ -945,15 +982,13 @@
                 "on-level-1": "#3d3d3d",
                 "on-level-2": "#3d3d3d",
                 "on-level-3": "#3d3d3d"
-              }
-            },
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#007079",
                 "on-level-2": "#007079",
                 "on-level-3": "#007079"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#004f55",
                 "on-level-2": "#004f55",
                 "on-level-3": "#004f55"
@@ -961,7 +996,7 @@
             }
           },
           "icon": {
-            "resting": {
+            "enabled": {
               "initial": {
                 "on-level-1": "#6f6f6f",
                 "on-level-2": "#6f6f6f",
@@ -971,29 +1006,49 @@
                 "on-level-1": "#3d3d3d",
                 "on-level-2": "#3d3d3d",
                 "on-level-3": "#3d3d3d"
-              }
-            },
-            "active": {
-              "initial": {
+              },
+              "active": {
                 "on-level-1": "#007079",
                 "on-level-2": "#007079",
                 "on-level-3": "#007079"
               },
-              "hover": {
+              "active-hover": {
                 "on-level-1": "#004f55",
                 "on-level-2": "#004f55",
                 "on-level-3": "#004f55"
               }
             }
           }
+        },
+        "static": {
+          "surface": {
+            "on-level-1": "#ffffff",
+            "on-level-2": "#f7f7f7",
+            "on-level-3": "#f7f7f7"
+          },
+          "border": {
+            "on-level-1": "#dcdcdc",
+            "on-level-2": "#dcdcdc",
+            "on-level-3": "#dcdcdc"
+          },
+          "text": {
+            "on-level-1": "#3d3d3d",
+            "on-level-2": "#3d3d3d",
+            "on-level-3": "#3d3d3d"
+          },
+          "icon": {
+            "on-level-1": "#3d3d3d",
+            "on-level-2": "#3d3d3d",
+            "on-level-3": "#3d3d3d"
+          }
         }
       }
     }
   },
   "ui": {
-    "scrim": {
+    "main": {
       "color": {
-        "surface": "#00000066"
+        "surface": "#f7f7f7"
       }
     },
     "shell": {
@@ -1002,9 +1057,14 @@
         "border": "#f7f7f7"
       }
     },
-    "main": {
+    "floating": {
       "color": {
-        "surface": "#f7f7f7"
+        "surface": "#ffffff"
+      }
+    },
+    "scrim": {
+      "color": {
+        "surface": "#00000066"
       }
     }
   }

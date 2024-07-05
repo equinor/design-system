@@ -4,7 +4,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.interactive.icon.standard.primary.disabled}",
+          "$value": "{interactive.icon.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -16,7 +16,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.interactive.icon.standard.secondary.disabled}",
+          "$value": "{interactive.icon.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -28,7 +28,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.interactive.icon.standard.tertiary.disabled}",
+          "$value": "{interactive.icon.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -40,7 +40,7 @@
         },
         "quaternary": {
           "$type": "color",
-          "$value": "{color.interactive.icon.standard.quaternary.disabled}",
+          "$value": "{interactive.icon.standard.quaternary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -53,7 +53,7 @@
       },
       "raised": {
         "$type": "color",
-        "$value": "{color.interactive.icon.raised.disabled}",
+        "$value": "{interactive.icon.raised.enabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -67,7 +67,7 @@
     "text": {
       "raised": {
         "$type": "color",
-        "$value": "{color.interactive.text.raised.disabled}",
+        "$value": "{interactive.text.raised.enabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -80,7 +80,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.interactive.text.standard.primary.disabled}",
+          "$value": "{interactive.text.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -92,7 +92,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.interactive.text.standard.secondary.disabled}",
+          "$value": "{interactive.text.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -104,7 +104,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.interactive.text.standard.tertiary.disabled}",
+          "$value": "{interactive.text.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -116,7 +116,7 @@
         },
         "quaternary": {
           "$type": "color",
-          "$value": "{color.interactive.text.standard.quaternary.disabled}",
+          "$value": "{interactive.text.standard.quaternary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -131,7 +131,7 @@
     "border": {
       "raised": {
         "$type": "color",
-        "$value": "{color.interactive.border.raised.disabled}",
+        "$value": "{interactive.border.raised.enabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -144,7 +144,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.interactive.border.standard.primary.disabled}",
+          "$value": "{interactive.border.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -156,7 +156,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.interactive.border.standard.secondary.disabled}",
+          "$value": "{interactive.border.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -168,7 +168,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.interactive.border.standard.tertiary.disabled}",
+          "$value": "{interactive.border.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -180,7 +180,7 @@
         },
         "quaternary": {
           "$type": "color",
-          "$value": "{color.interactive.border.standard.quaternary.disabled}",
+          "$value": "{interactive.border.standard.quaternary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -196,7 +196,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.interactive.surface.standard.primary.disabled-filled}",
+          "$value": "{interactive.surface.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -208,7 +208,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.interactive.surface.standard.secondary.disabled}",
+          "$value": "{interactive.surface.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -220,7 +220,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.interactive.surface.standard.tertiary.disabled}",
+          "$value": "{interactive.surface.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -232,7 +232,7 @@
         },
         "quaternary": {
           "$type": "color",
-          "$value": "{color.interactive.surface.standard.quaternary.disabled}",
+          "$value": "{interactive.surface.standard.quaternary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -245,7 +245,7 @@
       },
       "raised": {
         "$type": "color",
-        "$value": "{color.interactive.surface.raised.disabled}",
+        "$value": "{interactive.surface.raised.enabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -262,7 +262,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.text.standard.primary.disabled}",
+          "$value": "{action.text.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -274,7 +274,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.text.standard.tertiary.disabled}",
+          "$value": "{action.text.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -286,7 +286,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.text.standard.tertiary.disabled}",
+          "$value": "{action.text.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -300,7 +300,7 @@
       "muted": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.text.muted.primary.disabled}",
+          "$value": "{action.text.muted.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -312,7 +312,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.text.muted.secondary.disabled}",
+          "$value": "{action.text.muted.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -324,7 +324,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.text.muted.tertiary.disabled}",
+          "$value": "{action.text.muted.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -338,7 +338,7 @@
       "danger": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.text.danger.primary.disabled}",
+          "$value": "{action.text.danger.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -350,7 +350,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.text.danger.secondary.disabled}",
+          "$value": "{action.text.muted.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -362,7 +362,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.text.danger.tertiary.disabled}",
+          "$value": "{action.text.muted.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -378,7 +378,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.icon.standard.primary.disabled}",
+          "$value": "{action.icon.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -390,7 +390,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.icon.standard.secondary.disabled}",
+          "$value": "{action.icon.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -402,7 +402,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.icon.standard.tertiary.disabled}",
+          "$value": "{action.icon.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -416,7 +416,7 @@
       "muted": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.icon.muted.primary.disabled}",
+          "$value": "{action.icon.muted.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -428,7 +428,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.icon.muted.secondary.disabled}",
+          "$value": "{action.icon.muted.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -440,7 +440,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.icon.muted.tertiary.disabled}",
+          "$value": "{action.icon.muted.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -454,7 +454,7 @@
       "danger": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.icon.danger.primary.disabled}",
+          "$value": "{action.icon.danger.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -466,7 +466,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.icon.danger.secondary.disabled}",
+          "$value": "{action.icon.danger.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -478,7 +478,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.icon.danger.tertiary.disabled}",
+          "$value": "{action.icon.danger.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -494,7 +494,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.border.standard.primary.disabled}",
+          "$value": "{action.border.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -506,7 +506,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.border.standard.secondary.disabled}",
+          "$value": "{action.border.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -518,7 +518,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.border.standard.tertiary.disabled}",
+          "$value": "{action.border.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -532,7 +532,7 @@
       "muted": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.border.muted.primary.disabled}",
+          "$value": "{action.border.muted.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -544,7 +544,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.border.muted.secondary.disabled}",
+          "$value": "{action.border.muted.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -556,7 +556,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.border.muted.tertiary.disabled}",
+          "$value": "{action.border.muted.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -570,7 +570,7 @@
       "danger": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.border.danger.primary.disabled}",
+          "$value": "{action.border.danger.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -582,7 +582,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.border.danger.secondary.disabled}",
+          "$value": "{action.border.danger.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -594,7 +594,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.border.danger.tertiary.disabled}",
+          "$value": "{action.border.danger.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -610,7 +610,7 @@
       "standard": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.surface.standard.primary.disabled}",
+          "$value": "{action.surface.standard.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -622,7 +622,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.surface.standard.secondary.disabled}",
+          "$value": "{action.surface.standard.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -634,7 +634,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.surface.standard.tertiary.disabled}",
+          "$value": "{action.surface.standard.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -648,7 +648,7 @@
       "muted": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.surface.muted.primary.disabled}",
+          "$value": "{action.surface.muted.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -660,7 +660,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.surface.muted.secondary.disabled}",
+          "$value": "{action.surface.muted.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -672,7 +672,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.surface.muted.tertiary.disabled}",
+          "$value": "{action.surface.muted.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -686,7 +686,7 @@
       "danger": {
         "primary": {
           "$type": "color",
-          "$value": "{color.action.surface.danger.primary.disabled}",
+          "$value": "{action.surface.danger.primary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -698,7 +698,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{color.action.surface.danger.secondary.disabled}",
+          "$value": "{action.surface.danger.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -710,7 +710,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{color.action.surface.danger.tertiary.disabled}",
+          "$value": "{action.surface.danger.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -729,7 +729,7 @@
         "interactive": {
           "text": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.text.disabled}",
+            "$value": "{table.cell.color.interactive.text.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -741,7 +741,7 @@
           },
           "icon": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.icon.disabled}",
+            "$value": "{table.cell.color.interactive.icon.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -753,7 +753,7 @@
           },
           "border": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.border.disabled}",
+            "$value": "{table.cell.color.interactive.border.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -765,7 +765,7 @@
           },
           "surface": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.surface.disabled}",
+            "$value": "{table.cell.color.interactive.surface.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -783,7 +783,7 @@
         "interactive": {
           "text": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.text.disabled}",
+            "$value": "{table.header.color.interactive.text.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -795,7 +795,7 @@
           },
           "icon": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.icon.disabled}",
+            "$value": "{table.header.color.interactive.icon.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -807,7 +807,7 @@
           },
           "border": {
             "$type": "color",
-            "$value": "{table.cell.color.interactive.border.disabled}",
+            "$value": "{table.header.color.interactive.border.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -819,7 +819,7 @@
           },
           "surface": {
             "$type": "color",
-            "$value": "{table.header.color.interactive.surface.disabled}",
+            "$value": "{table.header.color.interactive.surface.enabled}",
             "$description": "",
             "$extensions": {
               "com.figma": {

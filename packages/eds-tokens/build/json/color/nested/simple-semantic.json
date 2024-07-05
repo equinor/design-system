@@ -1,0 +1,114 @@
+{
+  "color": {
+    "text": {
+      "primary": {
+        "on-light": "#3d3d3d",
+        "on-dark": "#d6d9dc"
+      },
+      "secondary": {
+        "on-light": "#565656",
+        "on-dark": "#c2c8cc"
+      },
+      "tertiary": {
+        "on-light": "#6f6f6f",
+        "on-dark": "#a6afb5"
+      },
+      "quaternary": {
+        "on-light": "#9e9e9e",
+        "on-dark": "#64727d"
+      },
+      "maximal": {
+        "on-light": "#3d3d3d",
+        "on-dark": "#ffffff"
+      },
+      "disabled": {
+        "on-light": "#bebebe",
+        "on-dark": "#52616d"
+      },
+      "inverted": {
+        "on-light": "#ffffff",
+        "on-dark": "#000000"
+      }
+    },
+    "icon": {
+      "primary": {
+        "on-light": "#3d3d3d",
+        "on-dark": "#d6d9dc"
+      },
+      "secondary": {
+        "on-light": "#565656",
+        "on-dark": "#c2c8cc"
+      },
+      "tertiary": {
+        "on-light": "#6f6f6f",
+        "on-dark": "#a6afb5"
+      },
+      "quaternary": {
+        "on-light": "#9e9e9e",
+        "on-dark": "#64727d"
+      },
+      "maximal": {
+        "on-light": "#3d3d3d",
+        "on-dark": "#ffffff"
+      },
+      "disabled": {
+        "on-light": "#bebebe",
+        "on-dark": "#52616d"
+      },
+      "inverted": {
+        "on-light": "#ffffff",
+        "on-dark": "#000000"
+      }
+    },
+    "border": {
+      "none": "#ffffff00",
+      "primary": {
+        "on-light": "#dcdcdc",
+        "on-dark": "#ffffff29"
+      },
+      "secondary": {
+        "on-light": "#bebebe",
+        "on-dark": "#ffffff33"
+      },
+      "tertiary": {
+        "on-light": "#9e9e9e",
+        "on-dark": "#ffffff4d"
+      },
+      "quaternary": {
+        "on-light": "#6f6f6f",
+        "on-dark": "#ffffff66"
+      },
+      "maximal": {
+        "on-light": "#1f1f1f",
+        "on-dark": "#ffffff80"
+      },
+      "disabled": {
+        "on-light": "#dcdcdc",
+        "on-dark": "#435460"
+      },
+      "inverted": {
+        "on-light": "#000000cc",
+        "on-dark": "#dcf2fff2"
+      }
+    },
+    "surface": {
+      "none": "#ffffff00",
+      "inverted": {
+        "on-light": "#000000cc",
+        "on-dark": "#dcf2fff2"
+      },
+      "on-level-1": {
+        "on-light": "#f7f7f7",
+        "on-dark": "#132634"
+      },
+      "on-level-2": {
+        "on-light": "#ffffff",
+        "on-dark": "#243746"
+      },
+      "on-level-3": {
+        "on-light": "#ffffff",
+        "on-dark": "#2c4251"
+      }
+    }
+  }
+}

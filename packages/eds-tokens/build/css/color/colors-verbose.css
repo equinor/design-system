@@ -5,154 +5,168 @@
 :root {
   --eds-ui-scrim-color-surface: light-dark(#00000066, #00000066); /* Scrim */
   --eds-table-cell-color-interactive-surface-disabled: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-initial-on-level-3: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-initial-on-level-2: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-initial-on-level-1: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-initial-on-level-3: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-initial-on-level-2: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-initial-on-level-1: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
   --eds-input-color-surface-read-only-on-level-3: light-dark(#ffffff00, #00000000);
   --eds-input-color-surface-read-only-on-level-2: light-dark(#ffffff00, #00000000);
   --eds-input-color-surface-read-only-on-level-1: light-dark(#ffffff00, #00000000);
   --eds-input-color-border-disabled: light-dark(#ffffff00, #00000000); /* Autocomplete, Search, Text field */
-  --eds-color-interactive-surface-standard-quaternary-active-initial: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-resting-initial: light-dark(#ffffff00, #00000000); /* Tab */
+  --eds-color-action-surface-danger-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-danger-tertiary-enabled-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-danger-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-danger-secondary-enabled-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-tertiary-enabled-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-secondary-enabled-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-standard-tertiary-enabled-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-standard-secondary-enabled-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-border-danger-tertiary-enabled-hover: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-danger-tertiary-enabled-initial: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-muted-tertiary-enabled-hover: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-muted-tertiary-enabled-initial: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-standard-tertiary-enabled-hover: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-standard-tertiary-enabled-initial: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-standard-tertiary-disabled: light-dark(#ffffff00, #00000000);
+  --eds-color-interactive-surface-standard-quaternary-enabled-active: light-dark(#ffffff00, #00000000); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-enabled-initial: light-dark(#ffffff00, #00000000); /* Tab */
   --eds-color-interactive-surface-standard-quaternary-disabled: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-resting-initial: light-dark(#ffffff00, #00000000); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-enabled-initial: light-dark(#ffffff00, #00000000); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-resting-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-enabled-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-resting-initial: light-dark(#ffffff00, #00000000); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-disabled-outline: light-dark(#ffffff00, #00000000); /* Toggle button */
-  --eds-color-interactive-border-standard-tertiary-active-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-active-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-resting-hover: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-border-standard-tertiary-resting-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-action-surface-tertiary-danger-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-tertiary-muted-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-tertiary-default-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-secondary-danger-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-secondary-muted-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-secondary-default-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-border-tertiary-danger-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-danger-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-muted-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-muted-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-default-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-default-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-tertiary-disabled: light-dark(#ffffff00, #00000000);
-  --eds-color-surface-inverted: light-dark(#000000cc, #dcf2fff2); /* Snackbar, Tooltip */
-  --eds-color-surface-none: light-dark(#ffffff00, #00000000); /* transparent */
-  --eds-color-border-none: light-dark(#ffffff00, #00000000);
+  --eds-color-interactive-surface-standard-primary-enabled-initial: light-dark(#ffffff00, #00000000); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-disabled-outlined: light-dark(#ffffff00, #00000000); /* Toggle button */
+  --eds-color-interactive-border-standard-secondary-enabled-active-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-enabled-active: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-enabled-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-enabled-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
   --eds-color-shadow: light-dark(#00000024, #00000024); /* For use in box shadows */
-  --eds-ui-main-color-surface: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Recommended background color for EDS applications */
+  --eds-ui-floating-color-surface: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300)); /* Recommended background color for EDS applications */
   --eds-ui-shell-color-border: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar, Topbar, Side sheet */
   --eds-ui-shell-color-surface: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Sidebar, Side sheet, Toolbar, Top bar */
-  --eds-table-header-color-interactive-icon-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200));
-  --eds-table-header-color-interactive-icon-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-icon-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-icon-active-initial-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-icon-active-initial-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
-  --eds-table-header-color-interactive-icon-active-initial-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
-  --eds-table-header-color-interactive-icon-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
-  --eds-table-header-color-interactive-icon-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-header-color-interactive-icon-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-header-color-interactive-icon-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
-  --eds-table-header-color-interactive-icon-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
-  --eds-table-header-color-interactive-icon-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
-  --eds-table-header-color-interactive-text-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200));
-  --eds-table-header-color-interactive-text-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-text-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-text-active-initial-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-text-active-initial-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
-  --eds-table-header-color-interactive-text-active-initial-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
-  --eds-table-header-color-interactive-text-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
-  --eds-table-header-color-interactive-text-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-header-color-interactive-text-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-header-color-interactive-text-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
-  --eds-table-header-color-interactive-text-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-header-color-interactive-text-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-ui-main-color-surface: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Recommended background color for EDS applications */
+  --eds-table-header-color-static-icon-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-static-icon-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-static-icon-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-static-text-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-static-text-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-static-text-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-static-border-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-header-color-static-border-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-header-color-static-border-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-header-color-static-surface-on-level-3: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-static-surface-on-level-2: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
+  --eds-table-header-color-static-surface-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-icon-enabled-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200));
+  --eds-table-header-color-interactive-icon-enabled-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-icon-enabled-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-icon-enabled-active-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-icon-enabled-active-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-icon-enabled-active-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-icon-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-interactive-icon-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-header-color-interactive-icon-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-header-color-interactive-icon-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-interactive-icon-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
+  --eds-table-header-color-interactive-icon-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
+  --eds-table-header-color-interactive-text-enabled-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200));
+  --eds-table-header-color-interactive-text-enabled-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-text-enabled-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-text-enabled-active-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-text-enabled-active-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-text-enabled-active-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-text-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-interactive-text-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-header-color-interactive-text-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-header-color-interactive-text-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-interactive-text-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-header-color-interactive-text-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
   --eds-table-header-color-interactive-surface-disabled-on-level-3: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-disabled-on-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-disabled-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-active-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1100)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-active-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-active-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-active-initial-on-level-3: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-active-initial-on-level-2: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-active-initial-on-level-1: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1100)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-border-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-header-color-interactive-border-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-header-color-interactive-border-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-header-color-interactive-border-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-header-color-interactive-border-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-header-color-interactive-border-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-header-color-interactive-border-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200));
-  --eds-table-header-color-interactive-border-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-border-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-border-active-initial-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-table-header-color-interactive-border-active-initial-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
-  --eds-table-header-color-interactive-border-active-initial-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-surface-enabled-active-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1100)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-active-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-active-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-active-on-level-3: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-active-on-level-2: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-active-on-level-1: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1300)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-border-enabled-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200));
+  --eds-table-header-color-interactive-border-enabled-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-border-enabled-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-border-enabled-active-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
+  --eds-table-header-color-interactive-border-enabled-active-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-border-enabled-active-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
+  --eds-table-header-color-interactive-border-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-header-color-interactive-border-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-header-color-interactive-border-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-header-color-interactive-border-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-header-color-interactive-border-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-header-color-interactive-border-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
   --eds-table-header-color-interactive-border-disabled: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-cell-color-interactive-surface-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-active-initial-on-level-3: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-active-initial-on-level-2: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1300)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-active-initial-on-level-1: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1300)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-border-active-hover-on-level-3: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-cell-color-interactive-border-active-hover-on-level-2: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-cell-color-interactive-border-active-hover-on-level-1: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-cell-color-interactive-border-active-initial-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-cell-color-interactive-border-active-initial-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-cell-color-interactive-border-active-initial-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-cell-color-interactive-border-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-cell-color-interactive-border-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-cell-color-interactive-border-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-table-cell-color-interactive-border-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-cell-color-interactive-border-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
-  --eds-table-cell-color-interactive-border-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-cell-color-interactive-surface-enabled-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-active-on-level-3: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-active-on-level-2: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1300)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-active-on-level-1: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1300)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-border-enabled-active-hover-on-level-3: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-cell-color-interactive-border-enabled-active-hover-on-level-2: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-cell-color-interactive-border-enabled-active-hover-on-level-1: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-cell-color-interactive-border-enabled-active-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-cell-color-interactive-border-enabled-active-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-cell-color-interactive-border-enabled-active-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-cell-color-interactive-border-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-cell-color-interactive-border-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-cell-color-interactive-border-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-500), #ffffff33);
+  --eds-table-cell-color-interactive-border-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-cell-color-interactive-border-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29);
+  --eds-table-cell-color-interactive-border-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29);
   --eds-table-cell-color-interactive-border-disabled: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
-  --eds-table-cell-color-interactive-icon-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-100)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-active-initial-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-active-initial-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-active-initial-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-100)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-active-on-level-3: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-active-on-level-2: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-active-on-level-1: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Table cell, Table data grid cell, Table header, Table data grid header */
   --eds-table-cell-color-interactive-icon-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
-  --eds-table-cell-color-interactive-text-active-hover-on-level-3: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Interactive table cell, data grid cell */
-  --eds-table-cell-color-interactive-text-active-hover-on-level-2: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Interactive table cell, data grid cell */
-  --eds-table-cell-color-interactive-text-active-hover-on-level-1: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Interactive table cell, data grid cell */
-  --eds-table-cell-color-interactive-text-active-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Interactive table cell, table data grid cell */
-  --eds-table-cell-color-interactive-text-active-initial-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Interactive table cell, table data grid cell */
-  --eds-table-cell-color-interactive-text-active-initial-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Interactive table cell, table data grid cell */
-  --eds-table-cell-color-interactive-text-resting-hover-on-level-3: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200));
-  --eds-table-cell-color-interactive-text-resting-hover-on-level-2: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200));
-  --eds-table-cell-color-interactive-text-resting-hover-on-level-1: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200));
-  --eds-table-cell-color-interactive-text-resting-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-cell-color-interactive-text-resting-initial-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-table-cell-color-interactive-text-resting-initial-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-cell-color-interactive-text-enabled-active-hover-on-level-3: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Interactive table cell, data grid cell */
+  --eds-table-cell-color-interactive-text-enabled-active-hover-on-level-2: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Interactive table cell, data grid cell */
+  --eds-table-cell-color-interactive-text-enabled-active-hover-on-level-1: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200)); /* Interactive table cell, data grid cell */
+  --eds-table-cell-color-interactive-text-enabled-active-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Interactive table cell, table data grid cell */
+  --eds-table-cell-color-interactive-text-enabled-active-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Interactive table cell, table data grid cell */
+  --eds-table-cell-color-interactive-text-enabled-active-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Interactive table cell, table data grid cell */
+  --eds-table-cell-color-interactive-text-enabled-hover-on-level-3: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200));
+  --eds-table-cell-color-interactive-text-enabled-hover-on-level-2: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200));
+  --eds-table-cell-color-interactive-text-enabled-hover-on-level-1: light-dark(var(--eds-color-neutral-1400), var(--eds-color-slate-grey-200));
+  --eds-table-cell-color-interactive-text-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-cell-color-interactive-text-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-cell-color-interactive-text-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
   --eds-table-cell-color-interactive-text-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
   --eds-table-cell-color-message-surface-error: light-dark(var(--eds-color-red-warm-300), #ff666b47); /* Table cell, Table data grid cell */
   --eds-input-label-color-icon-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
-  --eds-input-label-color-icon-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
+  --eds-input-label-color-icon-enabled: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
   --eds-input-label-color-text-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
-  --eds-input-label-color-text-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
+  --eds-input-label-color-text-enabled: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
   --eds-input-color-message-text-error-focus: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-600)); /* Text field */
   --eds-input-color-message-text-error-initial: var(--eds-color-red-cold-900); /* Text field */
   --eds-input-color-message-text-warning-focus: light-dark(var(--eds-color-orange-1200), var(--eds-color-spruce-wood-500)); /* Text field */
@@ -174,126 +188,26 @@
   --eds-input-color-surface-disabled-on-level-3: light-dark(var(--eds-color-neutral-100), #00000047);
   --eds-input-color-surface-disabled-on-level-2: light-dark(var(--eds-color-neutral-100), #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-disabled-on-level-1: light-dark(var(--eds-color-neutral-0), #00000047); /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-initial-on-level-3: light-dark(var(--eds-color-neutral-100), #00000047);
-  --eds-input-color-surface-initial-on-level-2: light-dark(var(--eds-color-neutral-100), #00000047); /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-initial-on-level-1: light-dark(var(--eds-color-neutral-0), #00000047); /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-border-focus: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Autocomplete, Search, Text field */
-  --eds-input-color-border-initial: light-dark(var(--eds-color-neutral-600), #ffffff29); /* Autocomplete, Text field */
+  --eds-input-color-surface-enabled-initial-on-level-3: light-dark(var(--eds-color-neutral-100), #00000047);
+  --eds-input-color-surface-enabled-initial-on-level-2: light-dark(var(--eds-color-neutral-100), #00000047); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-surface-enabled-initial-on-level-1: light-dark(var(--eds-color-neutral-0), #00000047); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-border-read-only: light-dark(var(--eds-color-neutral-600), #ffffff29); /* Autocomplete, Text field */
+  --eds-input-color-border-enabled-focus: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Autocomplete, Search, Text field */
+  --eds-input-color-border-enabled-initial: light-dark(var(--eds-color-neutral-600), #ffffff29); /* Autocomplete, Text field */
   --eds-input-color-icon-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-color-icon-focus: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0)); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-color-icon-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Autocomplete, Table input, Text field */
+  --eds-input-color-icon-read-only: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Autocomplete, Table input, Text field */
+  --eds-input-color-icon-enabled-focus: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0)); /* Autocomplete, Table input, Search, Text field */
+  --eds-input-color-icon-enabled-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Autocomplete, Table input, Text field */
   --eds-input-color-text-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-color-text-focus: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0)); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-color-text-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Autocomplete, Table input, Text field */
+  --eds-input-color-text-read-only: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Autocomplete, Table input, Text field */
+  --eds-input-color-text-enabled-focus: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0)); /* Autocomplete, Table input, Search, Text field */
+  --eds-input-color-text-enabled-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Autocomplete, Table input, Text field */
   --eds-input-helper-color-icon-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-helper-color-icon-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-icon-enabled: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Autocomplete, Table input, Text field */
   --eds-input-helper-color-text-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-helper-color-text-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-text-enabled: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Autocomplete, Table input, Text field */
   --eds-input-placeholder-color-text: light-dark(var(--eds-color-neutral-800), var(--eds-color-slate-grey-800)); /* Autocomplete, Table input, Search, Text field */
   --eds-input-asterix-color-text: var(--eds-color-red-cold-900); /* Autocomplete, Text field */
-  --eds-color-static-surface-callout: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
-  --eds-color-static-surface-raised: light-dark(var(--eds-color-neutral-200), #eaeaea1a);
-  --eds-color-static-surface-standard-on-level-3: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
-  --eds-color-static-surface-standard-on-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
-  --eds-color-static-surface-standard-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
-  --eds-color-static-border-callout: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
-  --eds-color-static-border-raised: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1100));
-  --eds-color-static-border-standard-on-level-3: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
-  --eds-color-static-border-standard-on-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
-  --eds-color-static-border-standard-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
-  --eds-color-static-icon-callout: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-500));
-  --eds-color-static-icon-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-color-static-icon-standard: light-dark(var(--eds-color-moss-green-sat-1100), var(--eds-color-moss-green-500));
-  --eds-color-static-text-callout: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
-  --eds-color-static-text-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-color-static-text-standard: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-200));
-  --eds-color-interactive-surface-raised-active-hover: light-dark(var(--eds-color-moss-green-100), #2a587480); /* Interactive Chip */
-  --eds-color-interactive-surface-raised-active-initial: light-dark(var(--eds-color-moss-green-100), #2a587480); /* Interactive Chip */
-  --eds-color-interactive-surface-raised-resting-hover: light-dark(var(--eds-color-neutral-200), #eaeaea1a); /* Interactive Chip */
-  --eds-color-interactive-surface-raised-resting-initial: light-dark(var(--eds-color-neutral-200), #eaeaea1a); /* Interactive Chip */
-  --eds-color-interactive-surface-raised-disabled: light-dark(var(--eds-color-neutral-200), #2e3f4c66); /* Interactive Chip (disabled) */
-  --eds-color-interactive-surface-standard-quaternary-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Sidebar link */
-  --eds-color-interactive-surface-standard-quaternary-resting-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-active-initial: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1200)); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-resting-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-active-initial: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1200)); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-resting-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-resting-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-disabled-filled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Toggle button */
-  --eds-color-interactive-icon-raised-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200)); /* Chip */
-  --eds-color-interactive-icon-raised-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300)); /* Chip */
-  --eds-color-interactive-icon-raised-resting-hover: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Chip */
-  --eds-color-interactive-icon-raised-resting-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Chip */
-  --eds-color-interactive-icon-raised-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Chip */
-  --eds-color-interactive-icon-standard-quaternary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-300)); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Toggle button */
-  --eds-color-interactive-icon-standard-tertiary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-100)); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-200)); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-primary-active-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-active-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-resting-hover: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Toggle button */
-  --eds-color-interactive-icon-standard-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar link */
-  --eds-color-interactive-text-raised-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200)); /* Chip */
-  --eds-color-interactive-text-raised-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300)); /* Chip */
-  --eds-color-interactive-text-raised-resting-hover: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Chip */
-  --eds-color-interactive-text-raised-resting-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Chip */
-  --eds-color-interactive-text-raised-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Chip */
-  --eds-color-interactive-text-standard-quaternary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Tab */
-  --eds-color-interactive-text-standard-tertiary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-100)); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-200)); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Sidebar link */
-  --eds-color-interactive-text-standard-secondary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Sidebar link */
-  --eds-color-interactive-text-standard-primary-active-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-active-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Toggle button */
-  --eds-color-interactive-border-standard-quaternary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Tab */
-  --eds-color-interactive-border-standard-quaternary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Tab */
-  --eds-color-interactive-border-standard-quaternary-resting-hover: light-dark(var(--eds-color-neutral-500), #ffffff33); /* Tab */
-  --eds-color-interactive-border-standard-quaternary-resting-initial: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Tab */
-  --eds-color-interactive-border-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Tab */
-  --eds-color-interactive-border-standard-secondary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Sidebar link */
-  --eds-color-interactive-border-standard-secondary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Sidebar link */
-  --eds-color-interactive-border-standard-secondary-resting-hover: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar link */
-  --eds-color-interactive-border-standard-secondary-resting-initial: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar link */
-  --eds-color-interactive-border-standard-secondary-disabled: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar link */
-  --eds-color-interactive-border-standard-primary-active-hover: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-active-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-resting-hover: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-resting-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-disabled: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1000)); /* Toggle button */
-  --eds-color-interactive-border-raised-disabled: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1000)); /* Chip */
-  --eds-color-interactive-border-raised-active-hover: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-400)); /* Chip */
-  --eds-color-interactive-border-raised-active-initial: light-dark(var(--eds-color-moss-green-400), var(--eds-color-mist-blue-muted-1200)); /* Chip */
-  --eds-color-interactive-border-raised-resting-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-400)); /* Chip */
-  --eds-color-interactive-border-raised-resting-initial: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1100)); /* Chip */
   --eds-color-message-surface-callout-error: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1200)); /* Banner */
   --eds-color-message-surface-callout-warning: light-dark(var(--eds-color-spruce-wood-200), var(--eds-color-orange-1200)); /* Banner */
   --eds-color-message-surface-callout-success: light-dark(var(--eds-color-lichen-green-200), var(--eds-color-lichen-green-1200)); /* Chip */
@@ -362,98 +276,206 @@
   --eds-color-message-text-raised-success-initial: light-dark(var(--eds-color-lichen-green-1200), var(--eds-color-success-green-600)); /* Chip, Card, input helper */
   --eds-color-message-text-raised-info-hover: light-dark(var(--eds-color-blue-ocean-1300), var(--eds-color-blue-sky-400)); /* Chip */
   --eds-color-message-text-raised-info-initial: light-dark(var(--eds-color-blue-sky-1200), var(--eds-color-blue-sky-600)); /* Chip, Card, input helper */
-  --eds-color-action-surface-tertiary-danger-hover: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1400)); /* Button */
-  --eds-color-action-surface-tertiary-muted-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Button */
-  --eds-color-action-surface-tertiary-default-hover: light-dark(var(--eds-color-moss-green-200), var(--eds-color-moss-green-sat-1400)); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-secondary-danger-hover: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1400)); /* Button */
-  --eds-color-action-surface-secondary-muted-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Button */
-  --eds-color-action-surface-secondary-default-hover: light-dark(var(--eds-color-moss-green-200), var(--eds-color-moss-green-sat-1400)); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-primary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-surface-primary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-surface-primary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-surface-primary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-surface-primary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
-  --eds-color-action-surface-primary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
-  --eds-color-action-surface-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
-  --eds-color-action-border-secondary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-border-secondary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-border-secondary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-border-secondary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-border-secondary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
-  --eds-color-action-border-secondary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
-  --eds-color-action-border-secondary-disabled: light-dark(var(--eds-color-neutral-400), var(--eds-color-border-disabled)); /* Button */
-  --eds-color-action-border-primary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-border-primary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-border-primary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-border-primary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-border-primary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
-  --eds-color-action-border-primary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
-  --eds-color-action-border-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
-  --eds-color-action-icon-tertiary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-icon-tertiary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-icon-tertiary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-icon-tertiary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-icon-tertiary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button */
-  --eds-color-action-icon-tertiary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
-  --eds-color-action-icon-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
-  --eds-color-action-icon-secondary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-icon-secondary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-icon-secondary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-icon-secondary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-icon-secondary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button */
-  --eds-color-action-icon-secondary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
-  --eds-color-action-icon-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
-  --eds-color-action-icon-primary-danger-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-icon-primary-danger-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-icon-primary-muted-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-icon-primary-muted-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-icon-primary-default-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-icon-primary-default-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-icon-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
-  --eds-color-action-text-tertiary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-text-tertiary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-text-tertiary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-text-tertiary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-text-tertiary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
-  --eds-color-action-text-tertiary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
-  --eds-color-action-text-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
-  --eds-color-action-text-secondary-danger-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
-  --eds-color-action-text-secondary-danger-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
-  --eds-color-action-text-secondary-muted-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
-  --eds-color-action-text-secondary-muted-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
-  --eds-color-action-text-secondary-default-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
-  --eds-color-action-text-secondary-default-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
-  --eds-color-action-text-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
-  --eds-color-action-text-primary-danger-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-text-primary-danger-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-text-primary-muted-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-text-primary-muted-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-text-primary-default-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
-  --eds-color-action-text-primary-default-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-surface-danger-tertiary-enabled-hover: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1400)); /* Button */
+  --eds-color-action-surface-danger-secondary-enabled-hover: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1400)); /* Button */
+  --eds-color-action-surface-danger-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-surface-danger-primary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-surface-danger-primary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-surface-muted-tertiary-enabled-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Button */
+  --eds-color-action-surface-muted-secondary-enabled-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Button */
+  --eds-color-action-surface-muted-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-surface-muted-primary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-surface-muted-primary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-surface-standard-tertiary-enabled-hover: light-dark(var(--eds-color-moss-green-200), var(--eds-color-moss-green-sat-1400)); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-enabled-hover: light-dark(var(--eds-color-moss-green-200), var(--eds-color-moss-green-sat-1400)); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-primary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
+  --eds-color-action-surface-standard-primary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
+  --eds-color-action-surface-standard-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-secondary-disabled: light-dark(var(--eds-color-neutral-400), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-danger-tertiary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-danger-secondary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-danger-secondary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-border-danger-secondary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-border-danger-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-danger-primary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-border-danger-primary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-border-muted-tertiary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-muted-secondary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-muted-secondary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-border-muted-secondary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-border-muted-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-muted-primary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-border-muted-primary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-border-standard-secondary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
+  --eds-color-action-border-standard-secondary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
+  --eds-color-action-border-standard-secondary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-standard-primary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
+  --eds-color-action-border-standard-primary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
+  --eds-color-action-border-standard-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-icon-danger-tertiary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-icon-danger-tertiary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-icon-danger-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-danger-secondary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-icon-danger-secondary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-icon-danger-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-danger-primary-enabled-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-icon-danger-primary-enabled-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-icon-danger-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-muted-secondary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-icon-muted-secondary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-icon-muted-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-muted-tertiary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-icon-muted-tertiary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-icon-muted-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-muted-primary-enabled-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-icon-muted-primary-enabled-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-icon-muted-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-standard-tertiary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button */
+  --eds-color-action-icon-standard-tertiary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
+  --eds-color-action-icon-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-standard-secondary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button */
+  --eds-color-action-icon-standard-secondary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
+  --eds-color-action-icon-standard-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-icon-standard-primary-enabled-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-icon-standard-primary-enabled-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-icon-standard-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000));
+  --eds-color-action-text-muted-tertiary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-text-muted-tertiary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-text-muted-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-muted-secondary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
+  --eds-color-action-text-muted-secondary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-text-muted-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-muted-primary-enabled-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-text-muted-primary-enabled-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-text-muted-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-danger-tertiary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-text-danger-tertiary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-text-danger-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-danger-primary-enabled-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-text-danger-primary-enabled-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-text-danger-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-danger-secondary-enabled-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
+  --eds-color-action-text-danger-secondary-enabled-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-text-danger-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-standard-tertiary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
+  --eds-color-action-text-standard-tertiary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
+  --eds-color-action-text-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-standard-secondary-enabled-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
+  --eds-color-action-text-standard-secondary-enabled-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button */
+  --eds-color-action-text-standard-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-standard-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Button */
+  --eds-color-action-text-standard-primary-enabled-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
+  --eds-color-action-text-standard-primary-enabled-initial: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button */
   --eds-color-action-text-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-neutral-1000)); /* Button */
-  --eds-color-surface-level-3: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300)); /* Card, Menu, Popover */
-  --eds-color-surface-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Card, Dialog */
-  --eds-color-surface-level-1: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* level 1 surface (UI main) */
-  --eds-color-border-disabled: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1100)); /* simple semantic disabled colour for borders. Covers: Menu item, Tab, Table cell, Table data grid cell, Table header, Table header data grid */
-  --eds-color-border-quaternary: light-dark(var(--eds-color-neutral-900), #ffffff66);
-  --eds-color-border-tertiary: light-dark(var(--eds-color-neutral-700), #ffffff4d);
-  --eds-color-border-secondary: light-dark(var(--eds-color-neutral-500), #ffffff33);
-  --eds-color-border-primary: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Dialog, Popover */
-  --eds-color-icon-inverted: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button, Toggle button */
-  --eds-color-icon-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* simple semantic color for disabled icons. Covers: Autocomplete, Menu item (Menu &amp; Sidebar) Search, Tab, Table header, Table header data grid, Table cell, Table data grid cell, Text field, Top bar */
-  --eds-color-icon-quaternary: light-dark(var(--eds-color-neutral-700), var(--eds-color-slate-grey-900));
-  --eds-color-icon-tertiary: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
-  --eds-color-icon-secondary: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500));
-  --eds-color-icon-primary: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
-  --eds-color-text-inverted: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Button, Toggle button */
-  --eds-color-text-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* simple semantic text color. Covers: Menu item, Tab, Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-color-text-maximal: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0)); /* For titles and high-contrast headers */
-  --eds-color-text-quaternary: light-dark(var(--eds-color-neutral-700), var(--eds-color-slate-grey-900));
-  --eds-color-text-tertiary: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600));
-  --eds-color-text-secondary: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Application name, Dialog body text, Popover body text */
-  --eds-color-text-primary: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Dialog title, Popover title, Side sheet title, Title */
+  --eds-color-interactive-surface-raised-enabled-active-hover: light-dark(var(--eds-color-moss-green-100), #2a587480); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-enabled-active: light-dark(var(--eds-color-moss-green-100), #2a587480); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-enabled-hover: light-dark(var(--eds-color-neutral-200), #eaeaea1a); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-enabled-initial: light-dark(var(--eds-color-neutral-200), #eaeaea1a); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-disabled: light-dark(var(--eds-color-neutral-200), #2e3f4c66); /* Interactive Chip (disabled) */
+  --eds-color-interactive-surface-standard-quaternary-enabled-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Sidebar link */
+  --eds-color-interactive-surface-standard-quaternary-enabled-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Tab */
+  --eds-color-interactive-surface-standard-tertiary-enabled-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-enabled-active: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1200)); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-enabled-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Sidebar link */
+  --eds-color-interactive-surface-standard-secondary-enabled-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1000)); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-enabled-active: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1100)); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-enabled-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-primary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-enabled-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-disabled-filled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Toggle button */
+  --eds-color-interactive-border-raised-enabled-active-hover: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-400)); /* Chip */
+  --eds-color-interactive-border-raised-enabled-active: light-dark(var(--eds-color-moss-green-400), var(--eds-color-mist-blue-muted-1200)); /* Chip */
+  --eds-color-interactive-border-raised-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-400)); /* Chip */
+  --eds-color-interactive-border-raised-enabled-initial: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1100)); /* Chip */
+  --eds-color-interactive-border-raised-disabled: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1000)); /* Chip */
+  --eds-color-interactive-border-standard-quaternary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-enabled-hover: light-dark(var(--eds-color-neutral-500), #ffffff33); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-enabled-initial: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Tab */
+  --eds-color-interactive-border-standard-tertiary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-enabled-hover: var(--eds-color-neutral-100); /* Tab */
+  --eds-color-interactive-border-standard-tertiary-enabled-initial: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar menu */
+  --eds-color-interactive-border-standard-primary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-enabled-hover: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-disabled: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1000)); /* Toggle button */
+  --eds-color-interactive-icon-raised-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200)); /* Chip */
+  --eds-color-interactive-icon-raised-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300)); /* Chip */
+  --eds-color-interactive-icon-raised-enabled-hover: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Chip */
+  --eds-color-interactive-icon-raised-enabled-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Chip */
+  --eds-color-interactive-icon-raised-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Chip */
+  --eds-color-interactive-icon-standard-quaternary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-300)); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Toggle button */
+  --eds-color-interactive-icon-standard-tertiary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-secondary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-100)); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-200)); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Sidebar link */
+  --eds-color-interactive-icon-standard-primary-enabled-active-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-enabled-active: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-enabled-hover: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Toggle button */
+  --eds-color-interactive-text-raised-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-200)); /* Chip */
+  --eds-color-interactive-text-raised-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300)); /* Chip */
+  --eds-color-interactive-text-raised-enabled-hover: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400)); /* Chip */
+  --eds-color-interactive-text-raised-enabled-initial: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Chip */
+  --eds-color-interactive-text-raised-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Chip */
+  --eds-color-interactive-text-standard-quaternary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Tab */
+  --eds-color-interactive-text-standard-tertiary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Sidebar link */
+  --eds-color-interactive-text-standard-secondary-enabled-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-100)); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-enabled-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-200)); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Sidebar link */
+  --eds-color-interactive-text-standard-primary-enabled-active-hover: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-enabled-active: light-dark(var(--eds-color-neutral-0), var(--eds-color-neutral-1500)); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-enabled-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-enabled-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-disabled: light-dark(var(--eds-color-neutral-500), var(--eds-color-slate-grey-1000)); /* Disabled Toggle button */
+  --eds-color-static-surface-standard-on-level-3: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
+  --eds-color-static-surface-standard-on-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
+  --eds-color-static-surface-standard-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
+  --eds-color-static-surface-inverted: light-dark(var(--eds-color-surface-inverted-on-light), var(--eds-color-surface-inverted-on-dark));
+  --eds-color-static-surface-raised: light-dark(var(--eds-color-neutral-200), #eaeaea1a);
+  --eds-color-static-border-standard-on-level-3: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
+  --eds-color-static-border-standard-on-level-2: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
+  --eds-color-static-border-standard-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
+  --eds-color-static-border-inverted: light-dark(var(--eds-color-border-inverted-on-light), var(--eds-color-border-inverted-on-dark));
+  --eds-color-static-border-raised: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1100));
+  --eds-color-static-icon-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
+  --eds-color-static-text-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
   --eds-color-message-text-standard-error: var(--eds-color-message-text-raised-error-initial); /* Deprecated - Card. Use text/message. */
   --eds-color-message-text-standard-warning: var(--eds-color-message-text-raised-warning-initial); /* Deprecated - Card. Use text/message. */
   --eds-color-message-text-standard-success: var(--eds-color-message-text-raised-success-initial); /* Deprecated - Card. Use text/message. */
   --eds-color-message-text-standard-info: var(--eds-color-message-text-raised-info-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-static-icon-standard-maximal: light-dark(var(--eds-color-icon-maximal-on-light), var(--eds-color-icon-maximal-on-dark));
+  --eds-color-static-icon-standard-secondary: light-dark(var(--eds-color-icon-secondary-on-light), var(--eds-color-icon-secondary-on-dark));
+  --eds-color-static-icon-standard-primary: light-dark(var(--eds-color-icon-primary-on-light), var(--eds-color-icon-primary-on-dark));
+  --eds-color-static-icon-inverted: light-dark(var(--eds-color-icon-inverted-on-light), var(--eds-color-icon-inverted-on-dark));
+  --eds-color-static-text-standard-maximal: light-dark(var(--eds-color-text-maximal-on-light), var(--eds-color-text-maximal-on-dark));
+  --eds-color-static-text-standard-secondary: light-dark(var(--eds-color-text-secondary-on-light), var(--eds-color-text-secondary-on-dark));
+  --eds-color-static-text-standard-primary: light-dark(var(--eds-color-text-primary-on-light), var(--eds-color-text-primary-on-dark));
+  --eds-color-static-text-inverted: light-dark(var(--eds-color-text-inverted-on-light), var(--eds-color-text-inverted-on-dark));
 }

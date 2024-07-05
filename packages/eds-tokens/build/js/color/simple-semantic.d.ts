@@ -1,0 +1,56 @@
+/**
+ * Do not edit directly
+ */
+
+export const COLOR_TEXT_PRIMARY_ON_LIGHT : string;
+export const COLOR_TEXT_PRIMARY_ON_DARK : string;
+export const COLOR_TEXT_SECONDARY_ON_LIGHT : string;
+export const COLOR_TEXT_SECONDARY_ON_DARK : string;
+export const COLOR_TEXT_TERTIARY_ON_LIGHT : string;
+export const COLOR_TEXT_TERTIARY_ON_DARK : string;
+export const COLOR_TEXT_QUATERNARY_ON_LIGHT : string;
+export const COLOR_TEXT_QUATERNARY_ON_DARK : string;
+export const COLOR_TEXT_MAXIMAL_ON_LIGHT : string;
+export const COLOR_TEXT_MAXIMAL_ON_DARK : string;
+export const COLOR_TEXT_DISABLED_ON_LIGHT : string;
+export const COLOR_TEXT_DISABLED_ON_DARK : string;
+export const COLOR_TEXT_INVERTED_ON_LIGHT : string;
+export const COLOR_TEXT_INVERTED_ON_DARK : string;
+export const COLOR_ICON_PRIMARY_ON_LIGHT : string;
+export const COLOR_ICON_PRIMARY_ON_DARK : string;
+export const COLOR_ICON_SECONDARY_ON_LIGHT : string;
+export const COLOR_ICON_SECONDARY_ON_DARK : string;
+export const COLOR_ICON_TERTIARY_ON_LIGHT : string;
+export const COLOR_ICON_TERTIARY_ON_DARK : string;
+export const COLOR_ICON_QUATERNARY_ON_LIGHT : string;
+export const COLOR_ICON_QUATERNARY_ON_DARK : string;
+export const COLOR_ICON_MAXIMAL_ON_LIGHT : string;
+export const COLOR_ICON_MAXIMAL_ON_DARK : string;
+export const COLOR_ICON_DISABLED_ON_LIGHT : string;
+export const COLOR_ICON_DISABLED_ON_DARK : string;
+export const COLOR_ICON_INVERTED_ON_LIGHT : string;
+export const COLOR_ICON_INVERTED_ON_DARK : string;
+export const COLOR_BORDER_NONE : string;
+export const COLOR_BORDER_PRIMARY_ON_LIGHT : string;
+export const COLOR_BORDER_PRIMARY_ON_DARK : string;
+export const COLOR_BORDER_SECONDARY_ON_LIGHT : string;
+export const COLOR_BORDER_SECONDARY_ON_DARK : string;
+export const COLOR_BORDER_TERTIARY_ON_LIGHT : string;
+export const COLOR_BORDER_TERTIARY_ON_DARK : string;
+export const COLOR_BORDER_QUATERNARY_ON_LIGHT : string;
+export const COLOR_BORDER_QUATERNARY_ON_DARK : string;
+export const COLOR_BORDER_MAXIMAL_ON_LIGHT : string;
+export const COLOR_BORDER_MAXIMAL_ON_DARK : string;
+export const COLOR_BORDER_DISABLED_ON_LIGHT : string;
+export const COLOR_BORDER_DISABLED_ON_DARK : string;
+export const COLOR_BORDER_INVERTED_ON_LIGHT : string;
+export const COLOR_BORDER_INVERTED_ON_DARK : string;
+export const COLOR_SURFACE_NONE : string;
+export const COLOR_SURFACE_INVERTED_ON_LIGHT : string;
+export const COLOR_SURFACE_INVERTED_ON_DARK : string;
+export const COLOR_SURFACE_ON_LEVEL_1_ON_LIGHT : string;
+export const COLOR_SURFACE_ON_LEVEL_1_ON_DARK : string;
+export const COLOR_SURFACE_ON_LEVEL_2_ON_LIGHT : string;
+export const COLOR_SURFACE_ON_LEVEL_2_ON_DARK : string;
+export const COLOR_SURFACE_ON_LEVEL_3_ON_LIGHT : string;
+export const COLOR_SURFACE_ON_LEVEL_3_ON_DARK : string;

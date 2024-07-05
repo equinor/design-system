@@ -386,6 +386,7 @@ const includeTokenFilter = (
 }
 
 const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
+const COLOR_SIMPLE_SEMANTIC_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/🗣️ Simple semantic.Mode 1.json`
 const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
 const COLOR_LIGHT_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${lightColorSchemeCollectionFile}`
 const COLOR_DARK_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`
@@ -410,8 +411,17 @@ export function run({ outputReferences } = { outputReferences: true }) {
     outputReferences: false, // The primitives should not reference other tokens. This can always be false.
   })
 
+  const simpleSemantic = _extend({
+    source: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Simple semantic']),
+    buildPath: colorBuildPath,
+    prefix,
+    fileName: 'simple-semantic',
+    outputReferences,
+  })
+
   const lightMode = _extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
     buildPath: colorBuildPath,
@@ -422,7 +432,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   })
 
   const darkMode = _extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
     buildPath: colorBuildPath,
@@ -577,7 +587,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   })
 
   const lightDarkColorsVerbose = StyleDictionary.extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
@@ -601,7 +611,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   })
 
   const lightDarkColorsTrimmed = StyleDictionary.extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
@@ -625,6 +635,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
   })
 
   primitives.buildAllPlatforms()
+  simpleSemantic.buildAllPlatforms()
   lightMode.buildAllPlatforms()
   darkMode.buildAllPlatforms()
   lightDarkColorsVerbose.buildAllPlatforms()
