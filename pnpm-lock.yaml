@@ -114,8 +114,8 @@ importers:
         specifier: ^3.23.0
         version: 3.23.0(react@18.2.0)
       '@tanstack/react-virtual':
-        specifier: 3.7.0
-        version: 3.7.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 3.8.1
+        version: 3.8.1(react-dom@18.2.0)(react@18.2.0)
       downshift:
         specifier: 9.0.6
         version: 9.0.6(react@18.2.0)
@@ -259,8 +259,8 @@ importers:
         specifier: ^8.16.0
         version: 8.16.0(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-virtual':
-        specifier: ^3.7.0
-        version: 3.7.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.8.1
+        version: 3.8.1(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@rollup/plugin-babel':
         specifier: ^6.0.4
@@ -7467,13 +7467,13 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/react-virtual@3.7.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-3RtOwEU1HKS4iFBoTcCrV3Szqt4KoERMhZr8v57dvnh5o70sR9GAdF+0aE/qhiOmePrKujGwAayFNJSr/8Dbqw==}
+  /@tanstack/react-virtual@3.8.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-dP5a7giEM4BQWLJ7K07ToZv8rF51mzbrBMkf0scg1QNYuFx3utnPUBPUHdzaowZhIez1K2XS78amuzD+YGRA5Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tanstack/virtual-core': 3.7.0
+      '@tanstack/virtual-core': 3.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -7483,8 +7483,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /@tanstack/virtual-core@3.7.0:
-    resolution: {integrity: sha512-p0CWuqn+n8iZmsL7/l0Xg7kbyIKnHNqkEJkMDOkg4x3Ni3LohszmnJY8FPhTgG7Ad9ZFGcdKmn1R1mKUGEh9Xg==}
+  /@tanstack/virtual-core@3.8.1:
+    resolution: {integrity: sha512-uNtAwenT276M9QYCjTBoHZ8X3MUeCRoGK59zPi92hMIxdfS9AyHjkDWJ94WroDxnv48UE+hIeo21BU84jKc8aQ==}
     dev: false
 
   /@testing-library/dom@9.3.4:

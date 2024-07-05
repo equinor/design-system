@@ -33,7 +33,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
     "@tanstack/react-table": "^8.16.0",
-    "@tanstack/react-virtual": "^3.7.0"
+    "@tanstack/react-virtual": "^3.8.1"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
