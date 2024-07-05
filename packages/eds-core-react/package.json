@@ -68,7 +68,7 @@
     "jest-styled-components": "^7.2.0",
     "js-file-download": "^0.4.12",
     "postcss": "^8.4.31",
-    "ramda": "^0.30.0",
+    "ramda": "^0.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
@@ -91,14 +91,14 @@
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
-    "@floating-ui/react": "^0.26.13",
-    "@internationalized/date": "^3.5.3",
-    "@react-aria/utils": "^3.24.0",
-    "@react-stately/calendar": "^3.5.0",
-    "@react-stately/datepicker": "^3.9.3",
-    "@react-types/shared": "^3.23.0",
-    "@tanstack/react-virtual": "3.7.0",
+    "@floating-ui/react": "^0.26.19",
+    "@internationalized/date": "^3.5.4",
+    "@react-aria/utils": "^3.24.1",
+    "@react-stately/calendar": "^3.5.1",
+    "@react-stately/datepicker": "^3.9.4",
+    "@react-types/shared": "^3.23.1",
+    "@tanstack/react-virtual": "3.8.1",
     "downshift": "9.0.6",
-    "react-aria": "^3.33.0"
+    "react-aria": "^3.33.1"
   }
 }
