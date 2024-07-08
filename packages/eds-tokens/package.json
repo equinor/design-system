@@ -92,7 +92,7 @@
     "copyfiles": "^2.4.1",
     "lightningcss-cli": "^1.25.1",
     "prettier": "3.3.2",
-    "rimraf": "^5.0.7",
+    "rimraf": "^5.0.8",
     "rollup": "^4.18.0",
     "rollup-plugin-delete": "^2.0.0",
     "typescript": "^5.4.5"
