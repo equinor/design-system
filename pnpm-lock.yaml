@@ -425,11 +425,11 @@ importers:
         specifier: workspace:^
         version: link:../eds-utils
       '@types/react-datepicker':
-        specifier: ^6.0.1
-        version: 6.0.3(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^6.2.0
+        version: 6.2.0(react-dom@18.3.1)(react@18.3.1)
       date-fns:
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.6.0
+        version: 3.6.0
       downshift:
         specifier: 9.0.6
         version: 9.0.6(react@18.3.1)
@@ -6259,12 +6259,12 @@ packages:
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
     dev: true
 
-  /@types/react-datepicker@6.0.3(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-3x5flRBrEgC3fFrBryFIrxbLf8bOkte/GNryPjfnXu3my4/XZeaML/01U+XArMCLfk2d3pei6ccNIgTlpe4c5g==}
+  /@types/react-datepicker@6.2.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-+JtO4Fm97WLkJTH8j8/v3Ldh7JCNRwjMYjRaKh4KHH0M3jJoXtwiD3JBCsdlg3tsFIw9eQSqyAPeVDN2H2oM9Q==}
     dependencies:
       '@floating-ui/react': 0.26.19(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.3
-      date-fns: 3.3.1
+      date-fns: 3.6.0
     transitivePeerDependencies:
       - react
       - react-dom
@@ -8121,8 +8121,8 @@ packages:
       is-data-view: 1.0.1
     dev: true
 
-  /date-fns@3.3.1:
-    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
+  /date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
     dev: false
 
   /de-indent@1.0.2:
@@ -12941,7 +12941,7 @@ packages:
     dependencies:
       '@floating-ui/react': 0.26.19(react-dom@18.3.1)(react@18.3.1)
       classnames: 2.5.1
-      date-fns: 3.3.1
+      date-fns: 3.6.0
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
