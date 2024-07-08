@@ -69,7 +69,7 @@
     "eslint-plugin-testing-library": "^6.2.2",
     "jest-axe": "^9.0.0",
     "prettier": "3.3.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.3"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead"
 }
