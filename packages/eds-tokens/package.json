@@ -86,7 +86,7 @@
     "@equinor/eds-tokens-build": "workspace:*",
     "@equinor/eds-tokens-sync": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/node": "^20.12.12",
     "copyfiles": "^2.4.1",
