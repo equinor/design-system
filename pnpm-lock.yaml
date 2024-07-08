@@ -501,8 +501,8 @@ importers:
         specifier: ^2.1.4
         version: 2.1.4(@babel/core@7.24.7)(styled-components@6.1.11)
       clsx:
-        specifier: ^2.0.0
-        version: 2.1.0
+        specifier: ^2.1.1
+        version: 2.1.1
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.8.9)(ts-node@10.9.1)
@@ -7742,15 +7742,9 @@ packages:
     engines: {node: '>=0.8'}
     dev: true
 
-  /clsx@2.1.0:
-    resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
-    engines: {node: '>=6'}
-    dev: true
-
   /clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
-    dev: false
 
   /co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
