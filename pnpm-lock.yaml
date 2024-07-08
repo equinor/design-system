@@ -235,8 +235,8 @@ importers:
         specifier: 6.1.11
         version: 6.1.11(react-dom@18.3.1)(react@18.3.1)
       tsc-watch:
-        specifier: ^6.0.4
-        version: 6.0.4(typescript@5.2.2)
+        specifier: ^6.2.0
+        version: 6.2.0(typescript@5.2.2)
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -380,8 +380,8 @@ importers:
         specifier: 10.9.1
         version: 10.9.1(@types/node@20.8.9)(typescript@5.2.2)
       tsc-watch:
-        specifier: ^6.0.4
-        version: 6.0.4(typescript@5.2.2)
+        specifier: ^6.2.0
+        version: 6.2.0(typescript@5.2.2)
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -549,8 +549,8 @@ importers:
         specifier: 6.1.11
         version: 6.1.11(react-dom@18.3.1)(react@18.3.1)
       tsc-watch:
-        specifier: ^6.0.4
-        version: 6.0.4(typescript@5.2.2)
+        specifier: ^6.2.0
+        version: 6.2.0(typescript@5.2.2)
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -730,8 +730,8 @@ importers:
         specifier: 6.1.11
         version: 6.1.11(react-dom@18.3.1)(react@18.3.1)
       tsc-watch:
-        specifier: ^6.0.4
-        version: 6.0.4(typescript@5.2.2)
+        specifier: ^6.2.0
+        version: 6.2.0(typescript@5.2.2)
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -9317,7 +9317,7 @@ packages:
     dev: true
 
   /event-stream@3.3.4:
-    resolution: {integrity: sha512-QHpkERcGsR0T7Qm3HNJSyXKEEj8AHNxkY3PK8TS2KJvQ7NiSHe3DDpwVKKtoYprL/AreyzFBeIkBIWChAqn60g==}
+    resolution: {integrity: sha1-SrTJoPWlTbkzi0w02Gv86PSzVXE=}
     dependencies:
       duplexer: 0.1.2
       from: 0.1.7
@@ -12581,7 +12581,7 @@ packages:
     dev: true
 
   /pause-stream@0.0.11:
-    resolution: {integrity: sha512-e3FBlXLmN/D1S+zHzanP4E/4Z60oFAa3O051qt1pxa7DEJWKAyil6upYVXCWadEnuoqa4Pkc9oUx9zsxYeRv8A==}
+    resolution: {integrity: sha1-/lo0sMvOErWqaitAPuLnO2AvFEU=}
     dependencies:
       through: 2.3.8
     dev: true
@@ -14794,8 +14794,8 @@ packages:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: true
 
-  /tsc-watch@6.0.4(typescript@5.2.2):
-    resolution: {integrity: sha512-cHvbvhjO86w2aGlaHgSCeQRl+Aqw6X6XN4sQMPZKF88GoP30O+oTuh5lRIJr5pgFWrRpF1AgXnJJ2DoFEIPHyg==}
+  /tsc-watch@6.2.0(typescript@5.2.2):
+    resolution: {integrity: sha512-2LBhf9kjKXnz7KQ/puLHlozMzzUNHAdYBNMkg3eksQJ9GBAgMg8czznM83T5PmsoUvDnXzfIeQn2lNcIYDr8LA==}
     engines: {node: '>=12.12.0'}
     hasBin: true
     peerDependencies:

@@ -78,7 +78,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^8.1.11",
     "styled-components": "6.1.11",
-    "tsc-watch": "^6.0.4",
+    "tsc-watch": "^6.2.0",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
