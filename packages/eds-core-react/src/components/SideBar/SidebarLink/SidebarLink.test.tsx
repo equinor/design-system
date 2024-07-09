@@ -15,7 +15,7 @@ const customRender = (
   options?: Omit<RenderOptions, 'queries'>,
 ) => render(ui, { ...options })
 
-function SideBarWrapper(children: React.ReactElement, isOpen?: boolean) {
+function SideBarWrapper(children: React.ReactNode, isOpen?: boolean) {
   return <SideBar open={isOpen}>{children}</SideBar>
 }
 
