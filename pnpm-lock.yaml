@@ -621,8 +621,8 @@ importers:
   packages/eds-tokens-sync:
     devDependencies:
       '@figma/rest-api-spec':
-        specifier: ^0.10.0
-        version: 0.10.0
+        specifier: ^0.15.0
+        version: 0.15.0
       '@types/node':
         specifier: ^20.14.10
         version: 20.14.10
@@ -2829,8 +2829,8 @@ packages:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
 
-  /@figma/rest-api-spec@0.10.0:
-    resolution: {integrity: sha512-QwAZ5iW/QmvX+HDD0ItK9TaE/BfhJitQWmi9JFZswGhthFO1EJcPYbFNlknOG+ZvtIeK693b0hDrVE0xpsZomQ==}
+  /@figma/rest-api-spec@0.15.0:
+    resolution: {integrity: sha512-4OsifgI1aNYWEXHrHWAQQHYoYocy2hYd2B7+YxlxWb/hrTyScetcbLvRe+wGnmvlT8a483w+FV2vH9qFhq8wLw==}
     dev: true
 
   /@floating-ui/core@1.6.4:
