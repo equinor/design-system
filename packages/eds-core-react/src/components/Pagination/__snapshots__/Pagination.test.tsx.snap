@@ -160,7 +160,7 @@ exports[`Pagination Matches snapshot 1`] = `
               <path
                 class=""
                 clip-rule="evenodd"
-                d="M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41Z"
+                d="M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6z"
                 data-testid="eds-icon-path"
                 fill-rule="evenodd"
               />
@@ -210,7 +210,7 @@ exports[`Pagination Matches snapshot 1`] = `
               <path
                 class=""
                 clip-rule="evenodd"
-                d="m8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41Z"
+                d="m8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6z"
                 data-testid="eds-icon-path"
                 fill-rule="evenodd"
               />

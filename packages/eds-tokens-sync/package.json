@@ -29,13 +29,13 @@
     "lint": "eslint"
   },
   "devDependencies": {
-    "@figma/rest-api-spec": "^0.10.0",
-    "@types/node": "^20.12.12",
+    "@figma/rest-api-spec": "^0.15.0",
+    "@types/node": "^20.14.10",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "prettier": "^3.3.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
     "vite-plugin-dts": "^3.9.1"
   }
 }

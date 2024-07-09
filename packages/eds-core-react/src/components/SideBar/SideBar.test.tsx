@@ -101,7 +101,7 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    const collapse = screen.getByRole('button')
+    const collapse = await screen.findByRole('button')
     await userEvent.click(collapse)
 
     expect(cb).toHaveBeenCalled()
@@ -120,7 +120,7 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    const expand = screen.getByRole('button')
+    const expand = await screen.findByRole('button')
     await userEvent.click(expand)
 
     expect(cb).toHaveBeenCalled()
@@ -139,10 +139,10 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    const expand = screen.getByRole('button')
+    const expand = await screen.findByRole('button')
     await userEvent.click(expand)
 
-    expect(toggle).toBeCalled()
+    expect(toggle).toHaveBeenCalled()
     expect(toggle).toHaveBeenCalledWith(true) // Since we send in false to start with
   })
 })

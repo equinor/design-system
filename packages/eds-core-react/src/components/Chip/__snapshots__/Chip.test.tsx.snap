@@ -61,7 +61,7 @@ exports[`Chips Matches snapshot 1`] = `
       <path
         class=""
         clip-rule="evenodd"
-        d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"
+        d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"
         data-testid="eds-icon-path"
         fill-rule="evenodd"
         transform="scale(0.6666666666666666)"
@@ -146,7 +146,7 @@ exports[`Chips Matches snapshot 2`] = `
       <path
         class=""
         clip-rule="evenodd"
-        d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"
+        d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"
         data-testid="eds-icon-path"
         fill-rule="evenodd"
         transform="scale(0.6666666666666666)"
