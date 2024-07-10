@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.40.1] - 2024-07-10
+
+### Fixed
+
+- 🐛 `Autocomplete`: Do not attach document.body if server side rendering by @magnh in https://github.com/equinor/design-system/pull/3542
+
+### Changed
+
+- 🧑‍💻 `Icon`: improve icon type definition by making it a descriminated union on `name` and `data` by @FredrikMWold in https://github.com/equinor/design-system/pull/3547
+- ⬆️ Updated prod dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3554
+
 ## [0.40.0] - 2024-06-21
 
 ### Fixed
