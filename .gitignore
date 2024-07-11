@@ -16,3 +16,4 @@ docz-fresh
 .idea
 .size-snapshot.json
 storybook-build
+.pnpm-store
