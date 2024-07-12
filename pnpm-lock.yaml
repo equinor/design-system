@@ -757,8 +757,6 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
 
-  scripts/token-scripts: {}
-
 packages:
 
   /@adobe/css-tools@4.3.3:

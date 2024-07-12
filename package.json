@@ -19,8 +19,6 @@
     "transform:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run tokens-in-code:build",
     "update:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run update-tokens",
     "update:figma": "pnpm --filter @equinor/eds-tokens run update-figma",
-    "build:density-tokens": "pnpm --filter @equinor/eds-token-scripts run build:density",
-    "build:spacing-tokens": "pnpm --filter @equinor/eds-token-scripts run build:spacing",
     "build:icons": "pnpm --filter @equinor/eds-icons run build",
     "build:storybook": "pnpm --filter @equinor/eds-core-react run build:storybook",
     "build:storybook:lab": "pnpm --filter @equinor/eds-lab-react run build:storybook",
@@ -39,7 +37,6 @@
     "storybook": "pnpm storybook:core-react",
     "storybook:lab": "pnpm --filter @equinor/eds-lab-react run storybook",
     "storybook:data-grid": "pnpm --filter @equinor/eds-data-grid-react run storybook",
-    "graphics": "pnpm --filter ./assets/woman run dev",
     "export:tokens": "pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0",
     "export:assets": "pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU",
     "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types"
