@@ -245,11 +245,11 @@
         },
         "standard": {
           "primary": {
+            "disabled": "#52616d",
             "enabled": {
               "initial": "#000000",
               "hover": "#000000"
-            },
-            "disabled": "#52616d"
+            }
           },
           "secondary": {
             "disabled": "#52616d",
@@ -263,29 +263,6 @@
             "enabled": {
               "initial": "#97cace",
               "hover": "#b3e2e5"
-            }
-          }
-        },
-        "danger": {
-          "secondary": {
-            "disabled": "#52616d",
-            "enabled": {
-              "initial": "#ff666b",
-              "hover": "#ffabab"
-            }
-          },
-          "primary": {
-            "disabled": "#52616d",
-            "enabled": {
-              "initial": "#000000",
-              "hover": "#000000"
-            }
-          },
-          "tertiary": {
-            "disabled": "#52616d",
-            "enabled": {
-              "initial": "#ff666b",
-              "hover": "#ffabab"
             }
           }
         },
@@ -309,6 +286,29 @@
             "enabled": {
               "initial": "#a6afb5",
               "hover": "#c2c8cc"
+            }
+          }
+        },
+        "danger": {
+          "primary": {
+            "disabled": "#52616d",
+            "enabled": {
+              "initial": "#000000",
+              "hover": "#000000"
+            }
+          },
+          "secondary": {
+            "disabled": "#52616d",
+            "enabled": {
+              "initial": "#ff666b",
+              "hover": "#ffabab"
+            }
+          },
+          "tertiary": {
+            "disabled": "#52616d",
+            "enabled": {
+              "initial": "#ff666b",
+              "hover": "#ffabab"
             }
           }
         }
@@ -385,6 +385,9 @@
         }
       },
       "border": {
+        "secondary": {
+          "disabled": "#2e3f4c"
+        },
         "standard": {
           "primary": {
             "disabled": "#2e3f4c",
@@ -394,7 +397,7 @@
             }
           },
           "secondary": {
-            "disabled": "#2e3f4c",
+            "disabled": "#435460",
             "enabled": {
               "initial": "#97cace",
               "hover": "#b3e2e5"
@@ -428,7 +431,7 @@
               "initial": "#00000000",
               "hover": "#00000000"
             },
-            "disabled": "#2e3f4c"
+            "disabled": "#00000000"
           }
         },
         "danger": {
@@ -451,11 +454,8 @@
               "initial": "#00000000",
               "hover": "#00000000"
             },
-            "disabled": "#2e3f4c"
+            "disabled": "#00000000"
           }
-        },
-        "secondary": {
-          "disabled": "#2e3f4c"
         }
       },
       "surface": {
@@ -697,6 +697,52 @@
         "icon": {
           "enabled": "#a6afb5",
           "disabled": "#52616d"
+        },
+        "message": {
+          "text": {
+            "info": {
+              "enabled": "#6fc9fb",
+              "read-only": "#6fc9fb",
+              "disabled": "#52616d"
+            },
+            "success": {
+              "enabled": "#4ad974",
+              "read-only": "#4ad974",
+              "disabled": "#52616d"
+            },
+            "warning": {
+              "enabled": "#ffb65e",
+              "read-only": "#ffb65e",
+              "disabled": "#52616d"
+            },
+            "error": {
+              "enabled": "#ff8595",
+              "read-only": "#ff8595",
+              "disabled": "#52616d"
+            }
+          },
+          "icon": {
+            "info": {
+              "enabled": "#6fc9fb",
+              "read-only": "#6fc9fb",
+              "disabled": "#52616d"
+            },
+            "success": {
+              "enabled": "#4ad974",
+              "read-only": "#4ad974",
+              "disabled": "#52616d"
+            },
+            "warning": {
+              "enabled": "#ffb65e",
+              "read-only": "#ffb65e",
+              "disabled": "#52616d"
+            },
+            "error": {
+              "enabled": "#ff8595",
+              "read-only": "#ff8595",
+              "disabled": "#52616d"
+            }
+          }
         }
       }
     },

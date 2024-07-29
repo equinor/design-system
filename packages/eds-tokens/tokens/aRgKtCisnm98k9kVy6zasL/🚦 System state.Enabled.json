@@ -350,7 +350,7 @@
         },
         "secondary": {
           "$type": "color",
-          "$value": "{action.text.muted.secondary.enabled}",
+          "$value": "{action.text.danger.secondary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -362,7 +362,7 @@
         },
         "tertiary": {
           "$type": "color",
-          "$value": "{action.text.muted.tertiary.enabled}",
+          "$value": "{action.text.danger.tertiary.enabled}",
           "$description": "",
           "$extensions": {
             "com.figma": {

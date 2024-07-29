@@ -166,60 +166,6 @@
         }
       }
     },
-    "helper": {
-      "color": {
-        "text": {
-          "$type": "color",
-          "$value": "{input.helper.color.text.enabled}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "icon": {
-          "$type": "color",
-          "$value": "{input.helper.color.icon.enabled}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "message": {
-          "text": {
-            "$type": "color",
-            "$value": "{input.helper.text}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [],
-                "codeSyntax": {}
-              }
-            }
-          },
-          "icon": {
-            "$type": "color",
-            "$value": "{input.helper.icon}",
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": [],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      }
-    },
     "label": {
       "text": {
         "$type": "color",

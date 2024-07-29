@@ -229,11 +229,11 @@ export const COLOR_INTERACTIVE_SURFACE_RAISED_ENABLED_ACTIVE_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_PRIMARY_DISABLED : string;
 /** Button */
+export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_DISABLED : string;
+/** Button */
 export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_ENABLED_INITIAL : string;
 /** Button */
 export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_DISABLED : string;
 /** Button */
 export const COLOR_ACTION_TEXT_STANDARD_SECONDARY_DISABLED : string;
 /** Button */
@@ -246,24 +246,6 @@ export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_DISABLED : string;
 export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_ENABLED_INITIAL : string;
 /** Button, Toggle button */
 export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_SECONDARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_SECONDARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_SECONDARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_PRIMARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_PRIMARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_PRIMARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_TERTIARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_TERTIARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_TERTIARY_ENABLED_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_MUTED_PRIMARY_DISABLED : string;
 /** Button */
@@ -282,6 +264,24 @@ export const COLOR_ACTION_TEXT_MUTED_TERTIARY_DISABLED : string;
 export const COLOR_ACTION_TEXT_MUTED_TERTIARY_ENABLED_INITIAL : string;
 /** Button */
 export const COLOR_ACTION_TEXT_MUTED_TERTIARY_ENABLED_HOVER : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_PRIMARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_PRIMARY_ENABLED_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_PRIMARY_ENABLED_HOVER : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_SECONDARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_SECONDARY_ENABLED_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_SECONDARY_ENABLED_HOVER : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_TERTIARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_TERTIARY_ENABLED_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_TERTIARY_ENABLED_HOVER : string;
 export const COLOR_ACTION_ICON_STANDARD_PRIMARY_DISABLED : string;
 /** Button */
 export const COLOR_ACTION_ICON_STANDARD_PRIMARY_ENABLED_INITIAL : string;
@@ -327,6 +327,8 @@ export const COLOR_ACTION_ICON_DANGER_TERTIARY_DISABLED : string;
 export const COLOR_ACTION_ICON_DANGER_TERTIARY_ENABLED_INITIAL : string;
 /** Button */
 export const COLOR_ACTION_ICON_DANGER_TERTIARY_ENABLED_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_SECONDARY_DISABLED : string;
 /** Button */
 export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_DISABLED : string;
 /** Button, Toggle button */
@@ -374,8 +376,6 @@ export const COLOR_ACTION_BORDER_DANGER_TERTIARY_ENABLED_INITIAL : string;
 export const COLOR_ACTION_BORDER_DANGER_TERTIARY_ENABLED_HOVER : string;
 /** Button */
 export const COLOR_ACTION_BORDER_DANGER_TERTIARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_BORDER_SECONDARY_DISABLED : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_STANDARD_PRIMARY_DISABLED : string;
 /** Button, Toggle button */
@@ -586,6 +586,30 @@ export const INPUT_HELPER_COLOR_TEXT_DISABLED : string;
 export const INPUT_HELPER_COLOR_ICON_ENABLED : string;
 /** Autocomplete, Table input, Search, Text field */
 export const INPUT_HELPER_COLOR_ICON_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_ENABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_DISABLED : string;
 /** Autocomplete, Table input, Text field */
 export const INPUT_COLOR_TEXT_ENABLED_INITIAL : string;
 /** Autocomplete, Table input, Search, Text field */

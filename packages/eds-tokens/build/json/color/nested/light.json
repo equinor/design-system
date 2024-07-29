@@ -245,11 +245,11 @@
         },
         "standard": {
           "primary": {
+            "disabled": "#bebebe",
             "enabled": {
               "initial": "#ffffff",
               "hover": "#ffffff"
-            },
-            "disabled": "#bebebe"
+            }
           },
           "secondary": {
             "disabled": "#bebebe",
@@ -263,29 +263,6 @@
             "enabled": {
               "initial": "#007079",
               "hover": "#004f55"
-            }
-          }
-        },
-        "danger": {
-          "secondary": {
-            "disabled": "#bebebe",
-            "enabled": {
-              "initial": "#e20337",
-              "hover": "#90042c"
-            }
-          },
-          "primary": {
-            "disabled": "#bebebe",
-            "enabled": {
-              "initial": "#ffffff",
-              "hover": "#ffffff"
-            }
-          },
-          "tertiary": {
-            "disabled": "#bebebe",
-            "enabled": {
-              "initial": "#e20337",
-              "hover": "#90042c"
             }
           }
         },
@@ -309,6 +286,29 @@
             "enabled": {
               "initial": "#6f6f6f",
               "hover": "#565656"
+            }
+          }
+        },
+        "danger": {
+          "primary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#ffffff",
+              "hover": "#ffffff"
+            }
+          },
+          "secondary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
+            }
+          },
+          "tertiary": {
+            "disabled": "#bebebe",
+            "enabled": {
+              "initial": "#e20337",
+              "hover": "#90042c"
             }
           }
         }
@@ -385,6 +385,9 @@
         }
       },
       "border": {
+        "secondary": {
+          "disabled": "#cfcfcf"
+        },
         "standard": {
           "primary": {
             "disabled": "#eaeaea",
@@ -394,7 +397,7 @@
             }
           },
           "secondary": {
-            "disabled": "#eaeaea",
+            "disabled": "#cfcfcf",
             "enabled": {
               "initial": "#007079",
               "hover": "#004f55"
@@ -428,7 +431,7 @@
               "initial": "#ffffff00",
               "hover": "#ffffff00"
             },
-            "disabled": "#eaeaea"
+            "disabled": "#ffffff00"
           }
         },
         "danger": {
@@ -451,11 +454,8 @@
               "initial": "#ffffff00",
               "hover": "#ffffff00"
             },
-            "disabled": "#eaeaea"
+            "disabled": "#ffffff00"
           }
-        },
-        "secondary": {
-          "disabled": "#cfcfcf"
         }
       },
       "surface": {
@@ -697,6 +697,52 @@
         "icon": {
           "enabled": "#6f6f6f",
           "disabled": "#bebebe"
+        },
+        "message": {
+          "text": {
+            "info": {
+              "enabled": "#045e8d",
+              "read-only": "#045e8d",
+              "disabled": "#bebebe"
+            },
+            "success": {
+              "enabled": "#15682d",
+              "read-only": "#15682d",
+              "disabled": "#bebebe"
+            },
+            "warning": {
+              "enabled": "#7f4600",
+              "read-only": "#7f4600",
+              "disabled": "#bebebe"
+            },
+            "error": {
+              "enabled": "#90042c",
+              "read-only": "#90042c",
+              "disabled": "#bebebe"
+            }
+          },
+          "icon": {
+            "info": {
+              "enabled": "#045e8d",
+              "read-only": "#045e8d",
+              "disabled": "#bebebe"
+            },
+            "success": {
+              "enabled": "#15682d",
+              "read-only": "#15682d",
+              "disabled": "#bebebe"
+            },
+            "warning": {
+              "enabled": "#7f4600",
+              "read-only": "#7f4600",
+              "disabled": "#bebebe"
+            },
+            "error": {
+              "enabled": "#90042c",
+              "read-only": "#90042c",
+              "disabled": "#bebebe"
+            }
+          }
         }
       }
     },

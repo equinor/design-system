@@ -191,7 +191,7 @@
     "helper": {
       "text": {
         "$type": "color",
-        "$value": "{color.message.text.standard.error}",
+        "$value": "{input.helper.color.message.text.error.enabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -203,7 +203,7 @@
       },
       "icon": {
         "$type": "color",
-        "$value": "{color.message.icon.standard.error}",
+        "$value": "{input.helper.color.message.icon.error.enabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {

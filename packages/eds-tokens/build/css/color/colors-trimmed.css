@@ -126,24 +126,15 @@
   --eds-color-interactive-surface-raised-enabled-active: light-dark(#e6f3f4, #2a587480); /* Interactive Chip */
   --eds-color-interactive-surface-raised-enabled-active-hover: light-dark(#e6f3f4, #2a587480); /* Interactive Chip */
   --eds-color-action-text-primary-disabled: light-dark(#bebebe, #616161); /* Button */
+  --eds-color-action-text-standard-primary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-standard-primary-enabled-initial: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-standard-primary-enabled-hover: light-dark(#ffffff, #000000); /* Button */
-  --eds-color-action-text-standard-primary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-standard-secondary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-standard-secondary-enabled-initial: light-dark(#007079, #97cace); /* Button */
   --eds-color-action-text-standard-secondary-enabled-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
   --eds-color-action-text-standard-tertiary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-standard-tertiary-enabled-initial: light-dark(#007079, #97cace); /* Button */
   --eds-color-action-text-standard-tertiary-enabled-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
-  --eds-color-action-text-danger-secondary-disabled: light-dark(#bebebe, #52616d); /* Button */
-  --eds-color-action-text-danger-secondary-enabled-initial: light-dark(#e20337, #ff666b); /* Button */
-  --eds-color-action-text-danger-secondary-enabled-hover: light-dark(#90042c, #ffabab); /* Button */
-  --eds-color-action-text-danger-primary-disabled: light-dark(#bebebe, #52616d); /* Button */
-  --eds-color-action-text-danger-primary-enabled-initial: light-dark(#ffffff, #000000); /* Button */
-  --eds-color-action-text-danger-primary-enabled-hover: light-dark(#ffffff, #000000); /* Button */
-  --eds-color-action-text-danger-tertiary-disabled: light-dark(#bebebe, #52616d); /* Button */
-  --eds-color-action-text-danger-tertiary-enabled-initial: light-dark(#e20337, #ff666b); /* Button */
-  --eds-color-action-text-danger-tertiary-enabled-hover: light-dark(#90042c, #ffabab); /* Button */
   --eds-color-action-text-muted-primary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-muted-primary-enabled-initial: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-text-muted-primary-enabled-hover: light-dark(#ffffff, #000000); /* Button */
@@ -153,6 +144,15 @@
   --eds-color-action-text-muted-tertiary-disabled: light-dark(#bebebe, #52616d); /* Button */
   --eds-color-action-text-muted-tertiary-enabled-initial: light-dark(#6f6f6f, #a6afb5); /* Button */
   --eds-color-action-text-muted-tertiary-enabled-hover: light-dark(#565656, #c2c8cc); /* Button */
+  --eds-color-action-text-danger-primary-disabled: light-dark(#bebebe, #52616d); /* Button */
+  --eds-color-action-text-danger-primary-enabled-initial: light-dark(#ffffff, #000000); /* Button */
+  --eds-color-action-text-danger-primary-enabled-hover: light-dark(#ffffff, #000000); /* Button */
+  --eds-color-action-text-danger-secondary-disabled: light-dark(#bebebe, #52616d); /* Button */
+  --eds-color-action-text-danger-secondary-enabled-initial: light-dark(#e20337, #ff666b); /* Button */
+  --eds-color-action-text-danger-secondary-enabled-hover: light-dark(#90042c, #ffabab); /* Button */
+  --eds-color-action-text-danger-tertiary-disabled: light-dark(#bebebe, #52616d); /* Button */
+  --eds-color-action-text-danger-tertiary-enabled-initial: light-dark(#e20337, #ff666b); /* Button */
+  --eds-color-action-text-danger-tertiary-enabled-hover: light-dark(#90042c, #ffabab); /* Button */
   --eds-color-action-icon-standard-primary-disabled: light-dark(#bebebe, #52616d);
   --eds-color-action-icon-standard-primary-enabled-initial: light-dark(#ffffff, #000000); /* Button */
   --eds-color-action-icon-standard-primary-enabled-hover: light-dark(#ffffff, #000000); /* Button */
@@ -180,10 +180,11 @@
   --eds-color-action-icon-danger-tertiary-disabled: light-dark(#bebebe, #52616d);
   --eds-color-action-icon-danger-tertiary-enabled-initial: light-dark(#e20337, #ff666b); /* Button */
   --eds-color-action-icon-danger-tertiary-enabled-hover: light-dark(#90042c, #ffabab); /* Button */
+  --eds-color-action-border-secondary-disabled: light-dark(#cfcfcf, #2e3f4c); /* Button */
   --eds-color-action-border-standard-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-border-standard-primary-enabled-initial: light-dark(#007079, #97cace); /* Button, Toggle button */
   --eds-color-action-border-standard-primary-enabled-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
-  --eds-color-action-border-standard-secondary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
+  --eds-color-action-border-standard-secondary-disabled: light-dark(#cfcfcf, #435460); /* Button */
   --eds-color-action-border-standard-secondary-enabled-initial: light-dark(#007079, #97cace); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-enabled-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
   --eds-color-action-border-standard-tertiary-disabled: light-dark(#ffffff00, #00000000);
@@ -197,7 +198,7 @@
   --eds-color-action-border-muted-secondary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-border-muted-tertiary-enabled-initial: light-dark(#ffffff00, #00000000);
   --eds-color-action-border-muted-tertiary-enabled-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-muted-tertiary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
+  --eds-color-action-border-muted-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
   --eds-color-action-border-danger-primary-enabled-initial: light-dark(#e20337, #ff666b); /* Button */
   --eds-color-action-border-danger-primary-enabled-hover: light-dark(#90042c, #ffabab); /* Button */
   --eds-color-action-border-danger-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
@@ -206,8 +207,7 @@
   --eds-color-action-border-danger-secondary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-border-danger-tertiary-enabled-initial: light-dark(#ffffff00, #00000000);
   --eds-color-action-border-danger-tertiary-enabled-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-danger-tertiary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
-  --eds-color-action-border-secondary-disabled: light-dark(#cfcfcf, #2e3f4c); /* Button */
+  --eds-color-action-border-danger-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
   --eds-color-action-surface-standard-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-surface-standard-primary-enabled-initial: light-dark(#007079, #97cace); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-enabled-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
@@ -313,6 +313,30 @@
   --eds-input-helper-color-text-disabled: light-dark(#bebebe, #52616d); /* Autocomplete, Table input, Search, Text field */
   --eds-input-helper-color-icon-enabled: light-dark(#6f6f6f, #a6afb5); /* Autocomplete, Table input, Text field */
   --eds-input-helper-color-icon-disabled: light-dark(#bebebe, #52616d); /* Autocomplete, Table input, Search, Text field */
+  --eds-input-helper-color-message-text-info-enabled: light-dark(#045e8d, #6fc9fb);
+  --eds-input-helper-color-message-text-info-read-only: light-dark(#045e8d, #6fc9fb);
+  --eds-input-helper-color-message-text-info-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-text-success-enabled: light-dark(#15682d, #4ad974);
+  --eds-input-helper-color-message-text-success-read-only: light-dark(#15682d, #4ad974);
+  --eds-input-helper-color-message-text-success-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-text-warning-enabled: light-dark(#7f4600, #ffb65e);
+  --eds-input-helper-color-message-text-warning-read-only: light-dark(#7f4600, #ffb65e);
+  --eds-input-helper-color-message-text-warning-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-text-error-enabled: light-dark(#90042c, #ff8595);
+  --eds-input-helper-color-message-text-error-read-only: light-dark(#90042c, #ff8595);
+  --eds-input-helper-color-message-text-error-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-icon-info-enabled: light-dark(#045e8d, #6fc9fb);
+  --eds-input-helper-color-message-icon-info-read-only: light-dark(#045e8d, #6fc9fb);
+  --eds-input-helper-color-message-icon-info-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-icon-success-enabled: light-dark(#15682d, #4ad974);
+  --eds-input-helper-color-message-icon-success-read-only: light-dark(#15682d, #4ad974);
+  --eds-input-helper-color-message-icon-success-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-icon-warning-enabled: light-dark(#7f4600, #ffb65e);
+  --eds-input-helper-color-message-icon-warning-read-only: light-dark(#7f4600, #ffb65e);
+  --eds-input-helper-color-message-icon-warning-disabled: light-dark(#bebebe, #52616d);
+  --eds-input-helper-color-message-icon-error-enabled: light-dark(#90042c, #ff8595);
+  --eds-input-helper-color-message-icon-error-read-only: light-dark(#90042c, #ff8595);
+  --eds-input-helper-color-message-icon-error-disabled: light-dark(#bebebe, #52616d);
   --eds-input-color-text-enabled-initial: light-dark(#565656, #c2c8cc); /* Autocomplete, Table input, Text field */
   --eds-input-color-text-enabled-focus: light-dark(#3d3d3d, #ffffff); /* Autocomplete, Table input, Search, Text field */
   --eds-input-color-text-read-only: light-dark(#565656, #c2c8cc); /* Autocomplete, Table input, Text field */
