@@ -336,7 +336,8 @@ describe('Autocomplete', () => {
       <Autocomplete
         options={items}
         label={labelText}
-        optionDisabled={() => true}
+        // Somewhat contrived condition to emulate a scenario where an undefined item would return true for the 'option' being disabled
+        optionDisabled={(item) => item !== items[0]}
       />,
     )
     const labeledNodes = await screen.findAllByLabelText(labelText)
@@ -344,10 +345,16 @@ describe('Autocomplete', () => {
     const optionsList = labeledNodes[1]
 
     fireEvent.keyDown(input, { key: 'ArrowDown' })
-    const options = within(optionsList).queryAllByRole('option')
-    expect(options).toHaveLength(0) // since all options is disabled
+    const options = await within(optionsList).findAllByRole('option')
+    expect(options).toHaveLength(1) // since all but one options are disabled
 
-    // Prevent regression: key up/down when all (visible) options are disabled causes infinite loop
+    fireEvent.change(input, {
+      target: { value: 'asfsggsdhfj' },
+    })
+    const optionsAfterSearch = within(optionsList).queryAllByRole('option')
+    expect(optionsAfterSearch).toHaveLength(0) // since all are filtered out
+
+    // Prevent regression: key up/down when options are disabled causes infinite loop
     fireEvent.keyDown(input, { key: 'ArrowDown' })
     fireEvent.blur(input)
     expect(input).toHaveValue('')
