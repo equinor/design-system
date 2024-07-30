@@ -12,11 +12,13 @@ export function CalendarGrid({
   state,
   showYearPicker,
   setShowYearPicker,
+  yearPickerPage,
   ...props
 }: {
   state: CalendarState | RangeCalendarState
   showYearPicker: boolean
   setShowYearPicker: (showYearPicker: boolean) => void
+  yearPickerPage: number
 } & AriaCalendarGridProps) {
   const { locale } = useLocale()
   const { gridProps, headerProps, weekDays } = useCalendarGrid(
@@ -35,6 +37,7 @@ export function CalendarGrid({
         state.setFocusedDate(state.focusedDate.set({ year }))
         setShowYearPicker(false)
       }}
+      yearPickerPage={yearPickerPage}
     />
   ) : (
     <table {...gridProps} style={{ borderSpacing: '0px' }}>

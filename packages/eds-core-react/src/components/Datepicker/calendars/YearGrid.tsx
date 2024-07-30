@@ -38,12 +38,17 @@ const GridColumn = styled.button<{ $active: boolean }>`
   }
 `
 
+const TOTAL_VISIBLE_YEARS = 36
+const RANGE_OFFSET = 30 / 2
+
 const GridFocusManager = ({
   year: selectedYear,
   setFocusedYear,
+  yearPickerPage,
 }: {
   setFocusedYear: (year: number) => void
   year: number
+  yearPickerPage?: number
 }) => {
   const focusManager = useFocusManager()
   const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
@@ -74,9 +79,12 @@ const GridFocusManager = ({
       }
     }
   }
+
+  const page = yearPickerPage * TOTAL_VISIBLE_YEARS
+
   const years = Array.from(
-    { length: 36 },
-    (_, i) => i + (selectedYear - 30 / 2),
+    { length: TOTAL_VISIBLE_YEARS },
+    (_, i) => i + (selectedYear + page - RANGE_OFFSET),
   )
   return years.map((year) => (
     <GridColumn
@@ -95,14 +103,20 @@ const GridFocusManager = ({
 export const YearGrid = ({
   setFocusedYear,
   year: selectedYear,
+  yearPickerPage,
 }: {
   setFocusedYear: (year: number) => void
   year: number
+  yearPickerPage: number
 }) => {
   return (
     <Grid>
       <FocusScope contain restoreFocus autoFocus>
-        <GridFocusManager year={selectedYear} setFocusedYear={setFocusedYear} />
+        <GridFocusManager
+          year={selectedYear}
+          setFocusedYear={setFocusedYear}
+          yearPickerPage={yearPickerPage}
+        />
       </FocusScope>
     </Grid>
   )
