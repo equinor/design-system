@@ -107,16 +107,21 @@ pnpm run update-figma
 ```
 
 
-### Figma Variables
+## Figma Variables
 
 - The semantic variable is the variable applied to a layer in Figma. 
 - A semantic variable can have different modes defined, and the designer can select these
 
 
-#### How the variables are setup with references between collections
+### How the variables are setup with references between collections
 
 The semantic variable references the first segment (collection) in the variable. For example, the first segment is “appearance” for the action variables. Variables defined in appearance point to the next segment, which for action variables would be prominence. In the prominence collection, we define a variable for each of the appearance modes so that these are represented in the context of each prominence mode. The variables in the “prominence” collection point to variables in the state collection, and again, we represent all the prominence modes as new variables in the state collection. For action variables, the journey ends here, and the variables in the state collection point to the light/dark color scheme variables in the color scheme collection. 
 
-#### Tokens in code
+### Tokens in code
 
 The color scheme collection variables support all the combinations of modes in the different collections and are used to generate tokens in code. All the combinations of modes in different collections must be provided here so that the code syntax matches tokens in the code. 
+
+
+### How to setup variable collections in Figma
+
+To set up tokens in Figma, start with the base value defined in the Colour Scheme collection. Once these are defined, you have all the different combinations of a variable and are ready to set up the collections you want to provide. Using the action variables as an example, you would first create the base values and then start with the variable’s last segment(collection). This is the taxonomy of our action variables: `color/action/[appearance]/[prominence]/[state]`.  The last segment in this example would be the “state” collection. The state collection references the base values you defined in the Colour Scheme collection. In the state collection, you should define a variable for each mode in the previous segment; in this example, that would be all the modes you want to define in the prominence collection. Example: primary, secondary, tertiary. When this is ready, you continue to the segment before the prominence collection; in this example, this would be the appearance collection.   The appearance collection is, in this example, the first segment and, therefore, the last collection you need to create. In this collection, you create all the variables you need. In our token taxonomy, we create a variable for different properties (text, icon, border, surface). These variables should reference the variables you created in the previous collection; in this example, that would be the specific appearance variables you created in the prominence collection.
