@@ -27,407 +27,407 @@ export const COLOR_STATIC_SURFACE_STANDARD_ON_LEVEL_3 : string;
 /** Disabled Toggle button */
 export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_DISABLED : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_INITIAL : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_HOVER : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_ACTIVE : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_PRIMARY_ACTIVE_HOVER : string;
 /** Disabled Sidebar link */
 export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_DISABLED : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_INITIAL : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_HOVER : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_ACTIVE : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_SECONDARY_ACTIVE_HOVER : string;
 /** Disabled Sidebar link */
 export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_DISABLED : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_INITIAL : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_HOVER : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_ACTIVE : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_TERTIARY_ACTIVE_HOVER : string;
 /** Disabled Tab */
 export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_DISABLED : string;
 /** Tab */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_INITIAL : string;
 /** Tab */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_HOVER : string;
 /** Tab */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_ACTIVE : string;
 /** Tab */
-export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_STANDARD_QUATERNARY_ACTIVE_HOVER : string;
 /** Chip */
 export const COLOR_INTERACTIVE_TEXT_RAISED_DISABLED : string;
 /** Chip */
-export const COLOR_INTERACTIVE_TEXT_RAISED_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_TEXT_RAISED_INITIAL : string;
 /** Chip */
-export const COLOR_INTERACTIVE_TEXT_RAISED_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_RAISED_HOVER : string;
 /** Chip */
-export const COLOR_INTERACTIVE_TEXT_RAISED_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_TEXT_RAISED_ACTIVE : string;
 /** Chip */
-export const COLOR_INTERACTIVE_TEXT_RAISED_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_TEXT_RAISED_ACTIVE_HOVER : string;
 /** Disabled Toggle button */
 export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_DISABLED : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_INITIAL : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_HOVER : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_ACTIVE : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_PRIMARY_ACTIVE_HOVER : string;
 /** Sidebar link */
 export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_DISABLED : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_INITIAL : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_HOVER : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_ACTIVE : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_SECONDARY_ACTIVE_HOVER : string;
 /** Sidebar menu */
 export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_DISABLED : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_INITIAL : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_HOVER : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_ACTIVE : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_TERTIARY_ACTIVE_HOVER : string;
 /** Disabled Toggle button */
 export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_DISABLED : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_INITIAL : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_HOVER : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_ACTIVE : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_STANDARD_QUATERNARY_ACTIVE_HOVER : string;
 /** Chip */
 export const COLOR_INTERACTIVE_ICON_RAISED_DISABLED : string;
 /** Chip */
-export const COLOR_INTERACTIVE_ICON_RAISED_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_ICON_RAISED_INITIAL : string;
 /** Chip */
-export const COLOR_INTERACTIVE_ICON_RAISED_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_RAISED_HOVER : string;
 /** Chip */
-export const COLOR_INTERACTIVE_ICON_RAISED_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_ICON_RAISED_ACTIVE : string;
 /** Chip */
-export const COLOR_INTERACTIVE_ICON_RAISED_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_ICON_RAISED_ACTIVE_HOVER : string;
 /** Toggle button */
 export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_DISABLED : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_INITIAL : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_HOVER : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_ACTIVE : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_PRIMARY_ACTIVE_HOVER : string;
 /** Sidebar menu */
 export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_DISABLED : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_INITIAL : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_HOVER : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_ACTIVE : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_SECONDARY_ACTIVE_HOVER : string;
 /** Sidebar menu */
 export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_DISABLED : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_INITIAL : string;
 /** Tab */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_HOVER : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_ACTIVE : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_TERTIARY_ACTIVE_HOVER : string;
 /** Tab */
 export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_DISABLED : string;
 /** Tab */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_INITIAL : string;
 /** Tab */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_HOVER : string;
 /** Tab */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_ACTIVE : string;
 /** Tab */
-export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_STANDARD_QUATERNARY_ACTIVE_HOVER : string;
 /** Chip */
 export const COLOR_INTERACTIVE_BORDER_RAISED_DISABLED : string;
 /** Chip */
-export const COLOR_INTERACTIVE_BORDER_RAISED_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_BORDER_RAISED_INITIAL : string;
 /** Chip */
-export const COLOR_INTERACTIVE_BORDER_RAISED_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_RAISED_HOVER : string;
 /** Chip */
-export const COLOR_INTERACTIVE_BORDER_RAISED_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_BORDER_RAISED_ACTIVE : string;
 /** Chip */
-export const COLOR_INTERACTIVE_BORDER_RAISED_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_BORDER_RAISED_ACTIVE_HOVER : string;
 /** Toggle button */
 export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_DISABLED_OUTLINED : string;
 /** Toggle button */
 export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_DISABLED_FILLED : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_INITIAL : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_HOVER : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_ACTIVE : string;
 /** Toggle button */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_PRIMARY_ACTIVE_HOVER : string;
 /** Sidebar menu */
 export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_DISABLED : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_INITIAL : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_HOVER : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_ACTIVE : string;
 /** Sidebar menu */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_SECONDARY_ACTIVE_HOVER : string;
 /** Sidebar link */
 export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_DISABLED : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_INITIAL : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_HOVER : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_ACTIVE : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_TERTIARY_ACTIVE_HOVER : string;
 /** Tab */
 export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_DISABLED : string;
 /** Tab */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_INITIAL : string;
 /** Tab */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_HOVER : string;
 /** Tab */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_ACTIVE : string;
 /** Sidebar link */
-export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_STANDARD_QUATERNARY_ACTIVE_HOVER : string;
 /** Interactive Chip (disabled) */
 export const COLOR_INTERACTIVE_SURFACE_RAISED_DISABLED : string;
 /** Interactive Chip */
-export const COLOR_INTERACTIVE_SURFACE_RAISED_ENABLED_INITIAL : string;
+export const COLOR_INTERACTIVE_SURFACE_RAISED_INITIAL : string;
 /** Interactive Chip */
-export const COLOR_INTERACTIVE_SURFACE_RAISED_ENABLED_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_RAISED_HOVER : string;
 /** Interactive Chip */
-export const COLOR_INTERACTIVE_SURFACE_RAISED_ENABLED_ACTIVE : string;
+export const COLOR_INTERACTIVE_SURFACE_RAISED_ACTIVE : string;
 /** Interactive Chip */
-export const COLOR_INTERACTIVE_SURFACE_RAISED_ENABLED_ACTIVE_HOVER : string;
+export const COLOR_INTERACTIVE_SURFACE_RAISED_ACTIVE_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_ENABLED_HOVER : string;
-/** Button */
 export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_STANDARD_PRIMARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_STANDARD_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_TEXT_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_TEXT_STANDARD_SECONDARY_INITIAL : string;
 /** Button, Toggle button */
-export const COLOR_ACTION_TEXT_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_TEXT_STANDARD_SECONDARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_INITIAL : string;
 /** Button, Toggle button */
-export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_SECONDARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_SECONDARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_SECONDARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_PRIMARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_PRIMARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_PRIMARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_TERTIARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_TERTIARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_TEXT_DANGER_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_TEXT_STANDARD_TERTIARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_MUTED_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_TEXT_MUTED_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_TEXT_MUTED_PRIMARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_TEXT_MUTED_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_TEXT_MUTED_PRIMARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_MUTED_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_TEXT_MUTED_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_TEXT_MUTED_SECONDARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_TEXT_MUTED_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_TEXT_MUTED_SECONDARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_TEXT_MUTED_TERTIARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_TEXT_MUTED_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_TEXT_MUTED_TERTIARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_TEXT_MUTED_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_TEXT_MUTED_TERTIARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_PRIMARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_PRIMARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_PRIMARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_SECONDARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_SECONDARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_SECONDARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_TERTIARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_TERTIARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_TEXT_DANGER_TERTIARY_HOVER : string;
 export const COLOR_ACTION_ICON_STANDARD_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_STANDARD_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_STANDARD_PRIMARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_STANDARD_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_STANDARD_PRIMARY_HOVER : string;
 export const COLOR_ACTION_ICON_STANDARD_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_STANDARD_SECONDARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_STANDARD_SECONDARY_HOVER : string;
 export const COLOR_ACTION_ICON_STANDARD_TERTIARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_STANDARD_TERTIARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_STANDARD_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_STANDARD_TERTIARY_HOVER : string;
 export const COLOR_ACTION_ICON_MUTED_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_MUTED_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_MUTED_PRIMARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_MUTED_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_MUTED_PRIMARY_HOVER : string;
 export const COLOR_ACTION_ICON_MUTED_TERTIARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_MUTED_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_MUTED_TERTIARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_MUTED_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_MUTED_TERTIARY_HOVER : string;
 export const COLOR_ACTION_ICON_MUTED_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_MUTED_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_MUTED_SECONDARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_MUTED_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_MUTED_SECONDARY_HOVER : string;
 export const COLOR_ACTION_ICON_DANGER_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_DANGER_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_DANGER_PRIMARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_DANGER_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_DANGER_PRIMARY_HOVER : string;
 export const COLOR_ACTION_ICON_DANGER_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_DANGER_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_DANGER_SECONDARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_DANGER_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_ICON_DANGER_SECONDARY_HOVER : string;
 export const COLOR_ACTION_ICON_DANGER_TERTIARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_ICON_DANGER_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_ICON_DANGER_TERTIARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_ICON_DANGER_TERTIARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_DISABLED : string;
-/** Button, Toggle button */
-export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_ENABLED_INITIAL : string;
-/** Button, Toggle button */
-export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_STANDARD_SECONDARY_DISABLED : string;
-/** Button, Toggle button */
-export const COLOR_ACTION_BORDER_STANDARD_SECONDARY_ENABLED_INITIAL : string;
-/** Button, Toggle button */
-export const COLOR_ACTION_BORDER_STANDARD_SECONDARY_ENABLED_HOVER : string;
-export const COLOR_ACTION_BORDER_STANDARD_TERTIARY_DISABLED : string;
-export const COLOR_ACTION_BORDER_STANDARD_TERTIARY_ENABLED_INITIAL : string;
-export const COLOR_ACTION_BORDER_STANDARD_TERTIARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_PRIMARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_PRIMARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_PRIMARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_SECONDARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_SECONDARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_SECONDARY_DISABLED : string;
-export const COLOR_ACTION_BORDER_MUTED_TERTIARY_ENABLED_INITIAL : string;
-export const COLOR_ACTION_BORDER_MUTED_TERTIARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_MUTED_TERTIARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_PRIMARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_PRIMARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_PRIMARY_DISABLED : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_SECONDARY_ENABLED_INITIAL : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_SECONDARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_SECONDARY_DISABLED : string;
-export const COLOR_ACTION_BORDER_DANGER_TERTIARY_ENABLED_INITIAL : string;
-export const COLOR_ACTION_BORDER_DANGER_TERTIARY_ENABLED_HOVER : string;
-/** Button */
-export const COLOR_ACTION_BORDER_DANGER_TERTIARY_DISABLED : string;
+export const COLOR_ACTION_ICON_DANGER_TERTIARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_BORDER_SECONDARY_DISABLED : string;
 /** Button */
+export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_DISABLED : string;
+/** Button, Toggle button */
+export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_INITIAL : string;
+/** Button, Toggle button */
+export const COLOR_ACTION_BORDER_STANDARD_PRIMARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_STANDARD_SECONDARY_DISABLED : string;
+/** Button, Toggle button */
+export const COLOR_ACTION_BORDER_STANDARD_SECONDARY_INITIAL : string;
+/** Button, Toggle button */
+export const COLOR_ACTION_BORDER_STANDARD_SECONDARY_HOVER : string;
+export const COLOR_ACTION_BORDER_STANDARD_TERTIARY_DISABLED : string;
+export const COLOR_ACTION_BORDER_STANDARD_TERTIARY_INITIAL : string;
+export const COLOR_ACTION_BORDER_STANDARD_TERTIARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_PRIMARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_PRIMARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_PRIMARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_SECONDARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_SECONDARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_SECONDARY_DISABLED : string;
+export const COLOR_ACTION_BORDER_MUTED_TERTIARY_INITIAL : string;
+export const COLOR_ACTION_BORDER_MUTED_TERTIARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_MUTED_TERTIARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_PRIMARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_PRIMARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_PRIMARY_DISABLED : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_SECONDARY_INITIAL : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_SECONDARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_SECONDARY_DISABLED : string;
+export const COLOR_ACTION_BORDER_DANGER_TERTIARY_INITIAL : string;
+export const COLOR_ACTION_BORDER_DANGER_TERTIARY_HOVER : string;
+/** Button */
+export const COLOR_ACTION_BORDER_DANGER_TERTIARY_DISABLED : string;
+/** Button */
 export const COLOR_ACTION_SURFACE_STANDARD_PRIMARY_DISABLED : string;
 /** Button, Toggle button */
-export const COLOR_ACTION_SURFACE_STANDARD_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_STANDARD_PRIMARY_INITIAL : string;
 /** Button, Toggle button */
-export const COLOR_ACTION_SURFACE_STANDARD_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_STANDARD_PRIMARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_STANDARD_SECONDARY_DISABLED : string;
 /** Button, Ghost button, Toggle button */
-export const COLOR_ACTION_SURFACE_STANDARD_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_STANDARD_SECONDARY_INITIAL : string;
 /** Button, Ghost button, Toggle button */
-export const COLOR_ACTION_SURFACE_STANDARD_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_STANDARD_SECONDARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_STANDARD_TERTIARY_DISABLED : string;
 /** Button, Ghost button, Toggle button */
-export const COLOR_ACTION_SURFACE_STANDARD_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_STANDARD_TERTIARY_INITIAL : string;
 /** Button, Ghost button, Toggle button */
-export const COLOR_ACTION_SURFACE_STANDARD_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_STANDARD_TERTIARY_HOVER : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_MUTED_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_MUTED_PRIMARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_MUTED_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_MUTED_PRIMARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_MUTED_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_MUTED_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_MUTED_SECONDARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_MUTED_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_MUTED_SECONDARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_MUTED_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_MUTED_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_MUTED_TERTIARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_MUTED_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_MUTED_TERTIARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_MUTED_TERTIARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_DANGER_PRIMARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_DANGER_PRIMARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_DANGER_PRIMARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_DANGER_PRIMARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_DANGER_PRIMARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_DANGER_SECONDARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_DANGER_SECONDARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_DANGER_SECONDARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_DANGER_SECONDARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_DANGER_SECONDARY_DISABLED : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_DANGER_TERTIARY_ENABLED_INITIAL : string;
+export const COLOR_ACTION_SURFACE_DANGER_TERTIARY_INITIAL : string;
 /** Button */
-export const COLOR_ACTION_SURFACE_DANGER_TERTIARY_ENABLED_HOVER : string;
+export const COLOR_ACTION_SURFACE_DANGER_TERTIARY_HOVER : string;
 /** Button */
 export const COLOR_ACTION_SURFACE_DANGER_TERTIARY_DISABLED : string;
 /** Deprecated - Card. Use text/message. */
@@ -579,42 +579,82 @@ export const INPUT_ASTERIX_COLOR_TEXT : string;
 /** Autocomplete, Table input, Search, Text field */
 export const INPUT_PLACEHOLDER_COLOR_TEXT : string;
 /** Autocomplete, Table input, Text field */
-export const INPUT_HELPER_COLOR_TEXT_ENABLED : string;
+export const INPUT_HELPER_COLOR_TEXT_INITIAL : string;
+/** Autocomplete, Table input, Text field */
+export const INPUT_HELPER_COLOR_TEXT_FOCUS : string;
+/** Autocomplete, Table input, Text field */
+export const INPUT_HELPER_COLOR_TEXT_READ_ONLY : string;
 /** Autocomplete, Table input, Search, Text field */
 export const INPUT_HELPER_COLOR_TEXT_DISABLED : string;
 /** Autocomplete, Table input, Text field */
-export const INPUT_HELPER_COLOR_ICON_ENABLED : string;
+export const INPUT_HELPER_COLOR_ICON_INITIAL : string;
+/** Autocomplete, Table input, Text field */
+export const INPUT_HELPER_COLOR_ICON_FOCUS : string;
+/** Autocomplete, Table input, Text field */
+export const INPUT_HELPER_COLOR_ICON_READ_ONLY : string;
 /** Autocomplete, Table input, Search, Text field */
 export const INPUT_HELPER_COLOR_ICON_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_INFO_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_SUCCESS_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_WARNING_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_TEXT_ERROR_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_INFO_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_SUCCESS_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_WARNING_DISABLED : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_INITIAL : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_FOCUS : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_READ_ONLY : string;
+export const INPUT_HELPER_COLOR_MESSAGE_ICON_ERROR_DISABLED : string;
 /** Autocomplete, Table input, Text field */
-export const INPUT_COLOR_TEXT_ENABLED_INITIAL : string;
-/** Autocomplete, Table input, Search, Text field */
-export const INPUT_COLOR_TEXT_ENABLED_FOCUS : string;
+export const INPUT_COLOR_TEXT_INITIAL : string;
 /** Autocomplete, Table input, Text field */
 export const INPUT_COLOR_TEXT_READ_ONLY : string;
 /** Autocomplete, Table input, Search, Text field */
+export const INPUT_COLOR_TEXT_FOCUS : string;
+/** Autocomplete, Table input, Search, Text field */
 export const INPUT_COLOR_TEXT_DISABLED : string;
 /** Autocomplete, Table input, Text field */
-export const INPUT_COLOR_ICON_ENABLED_INITIAL : string;
-/** Autocomplete, Table input, Search, Text field */
-export const INPUT_COLOR_ICON_ENABLED_FOCUS : string;
+export const INPUT_COLOR_ICON_INITIAL : string;
 /** Autocomplete, Table input, Text field */
 export const INPUT_COLOR_ICON_READ_ONLY : string;
 /** Autocomplete, Table input, Search, Text field */
+export const INPUT_COLOR_ICON_FOCUS : string;
+/** Autocomplete, Table input, Search, Text field */
 export const INPUT_COLOR_ICON_DISABLED : string;
 /** Autocomplete, Text field */
-export const INPUT_COLOR_BORDER_ENABLED_INITIAL : string;
-/** Autocomplete, Search, Text field */
-export const INPUT_COLOR_BORDER_ENABLED_FOCUS : string;
+export const INPUT_COLOR_BORDER_INITIAL : string;
 /** Autocomplete, Text field */
 export const INPUT_COLOR_BORDER_READ_ONLY : string;
 /** Autocomplete, Search, Text field */
+export const INPUT_COLOR_BORDER_FOCUS : string;
+/** Autocomplete, Search, Text field */
 export const INPUT_COLOR_BORDER_DISABLED : string;
 /** Autocomplete, Search, Table input, Text field input */
-export const INPUT_COLOR_SURFACE_ENABLED_INITIAL_ON_LEVEL_1 : string;
+export const INPUT_COLOR_SURFACE_INITIAL_ON_LEVEL_1 : string;
 /** Autocomplete, Search, Table input, Text field input */
-export const INPUT_COLOR_SURFACE_ENABLED_INITIAL_ON_LEVEL_2 : string;
-export const INPUT_COLOR_SURFACE_ENABLED_INITIAL_ON_LEVEL_3 : string;
+export const INPUT_COLOR_SURFACE_INITIAL_ON_LEVEL_2 : string;
+export const INPUT_COLOR_SURFACE_INITIAL_ON_LEVEL_3 : string;
 /** Autocomplete, Search, Table input, Text field input */
 export const INPUT_COLOR_SURFACE_DISABLED_ON_LEVEL_1 : string;
 /** Autocomplete, Search, Table input, Text field input */
@@ -628,209 +668,267 @@ export const INPUT_COLOR_MESSAGE_BORDER_SUCCESS_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_BORDER_SUCCESS_FOCUS : string;
 /** Text field */
+export const INPUT_COLOR_MESSAGE_BORDER_SUCCESS_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_BORDER_SUCCESS_DISABLED : string;
+/** Text field */
 export const INPUT_COLOR_MESSAGE_BORDER_WARNING_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_BORDER_WARNING_FOCUS : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_BORDER_WARNING_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_BORDER_WARNING_DISABLED : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_BORDER_ERROR_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_BORDER_ERROR_FOCUS : string;
 /** Text field */
+export const INPUT_COLOR_MESSAGE_BORDER_ERROR_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_BORDER_ERROR_DISABLED : string;
+/** Text field */
 export const INPUT_COLOR_MESSAGE_ICON_SUCCESS_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_ICON_SUCCESS_FOCUS : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_ICON_SUCCESS_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_ICON_SUCCESS_DISABLED : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_ICON_WARNING_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_ICON_WARNING_FOCUS : string;
 /** Text field */
+export const INPUT_COLOR_MESSAGE_ICON_WARNING_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_ICON_WARNING_DISABLED : string;
+/** Text field */
 export const INPUT_COLOR_MESSAGE_ICON_ERROR_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_ICON_ERROR_FOCUS : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_ICON_ERROR_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_ICON_ERROR_DISABLED : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_TEXT_SUCCESS_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_TEXT_SUCCESS_FOCUS : string;
 /** Text field */
+export const INPUT_COLOR_MESSAGE_TEXT_SUCCESS_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_TEXT_SUCCESS_DISABLED : string;
+/** Text field */
 export const INPUT_COLOR_MESSAGE_TEXT_WARNING_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_TEXT_WARNING_FOCUS : string;
 /** Text field */
+export const INPUT_COLOR_MESSAGE_TEXT_WARNING_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_TEXT_WARNING_DISABLED : string;
+/** Text field */
 export const INPUT_COLOR_MESSAGE_TEXT_ERROR_INITIAL : string;
 /** Text field */
 export const INPUT_COLOR_MESSAGE_TEXT_ERROR_FOCUS : string;
-export const INPUT_LABEL_COLOR_TEXT_ENABLED : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_TEXT_ERROR_READ_ONLY : string;
+/** Text field */
+export const INPUT_COLOR_MESSAGE_TEXT_ERROR_DISABLED : string;
+export const INPUT_LABEL_COLOR_TEXT_INITIAL : string;
+export const INPUT_LABEL_COLOR_TEXT_READ_ONLY : string;
 export const INPUT_LABEL_COLOR_TEXT_DISABLED : string;
-export const INPUT_LABEL_COLOR_ICON_ENABLED : string;
+export const INPUT_LABEL_COLOR_ICON_INITIAL : string;
+export const INPUT_LABEL_COLOR_ICON_READ_ONLY : string;
 export const INPUT_LABEL_COLOR_ICON_DISABLED : string;
 /** Table cell, Table data grid cell */
 export const TABLE_CELL_COLOR_MESSAGE_SURFACE_ERROR : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_DISABLED : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_INITIAL_ON_LEVEL_1 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_INITIAL_ON_LEVEL_2 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_INITIAL_ON_LEVEL_3 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_HOVER_ON_LEVEL_1 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_HOVER_ON_LEVEL_2 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_HOVER_ON_LEVEL_3 : string;
 /** Interactive table cell, table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ACTIVE_ON_LEVEL_1 : string;
 /** Interactive table cell, table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ACTIVE_ON_LEVEL_2 : string;
 /** Interactive table cell, table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ACTIVE_ON_LEVEL_3 : string;
 /** Interactive table cell, data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ACTIVE_HOVER_ON_LEVEL_1 : string;
 /** Interactive table cell, data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ACTIVE_HOVER_ON_LEVEL_2 : string;
 /** Interactive table cell, data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_DISABLED : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_DISABLED_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_DISABLED_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_TEXT_DISABLED_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_INITIAL_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_INITIAL_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_INITIAL_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_HOVER_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_HOVER_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_HOVER_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ACTIVE_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ACTIVE_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ACTIVE_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ACTIVE_HOVER_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ACTIVE_HOVER_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell, Table header, Table data grid header */
-export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_DISABLED_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_DISABLED_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_ICON_DISABLED_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ACTIVE_HOVER_ON_LEVEL_3 : string;
 /** Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_DISABLED : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_INITIAL_ON_LEVEL_1 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_INITIAL_ON_LEVEL_2 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_INITIAL_ON_LEVEL_3 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_HOVER_ON_LEVEL_1 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_HOVER_ON_LEVEL_2 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_HOVER_ON_LEVEL_3 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_ON_LEVEL_1 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_ON_LEVEL_2 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_ON_LEVEL_3 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
-export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_DISABLED_ON_LEVEL_1 : string;
+/** Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_DISABLED_ON_LEVEL_2 : string;
+/** Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+export const TABLE_CELL_COLOR_INTERACTIVE_BORDER_DISABLED_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_INITIAL_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_INITIAL_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_INITIAL_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_HOVER_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_HOVER_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_HOVER_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ACTIVE_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ACTIVE_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ACTIVE_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ACTIVE_HOVER_ON_LEVEL_1 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ACTIVE_HOVER_ON_LEVEL_2 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_ACTIVE_HOVER_ON_LEVEL_3 : string;
 /** Table cell, Table data grid cell */
-export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_DISABLED : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_DISABLED : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_INITIAL_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_INITIAL_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_INITIAL_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_HOVER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_HOVER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_HOVER_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_DISABLED_ON_LEVEL_1 : string;
+/** Table cell, Table data grid cell */
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_DISABLED_ON_LEVEL_2 : string;
+/** Table cell, Table data grid cell */
+export const TABLE_CELL_COLOR_INTERACTIVE_SURFACE_DISABLED_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_DISABLED_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_DISABLED_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_DISABLED_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_DISABLED_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_DISABLED_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_DISABLED_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_DISABLED_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_DISABLED_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_BORDER_DISABLED_ON_LEVEL_3 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_INITIAL_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_INITIAL_ON_LEVEL_1 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_INITIAL_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_INITIAL_ON_LEVEL_2 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_INITIAL_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_INITIAL_ON_LEVEL_3 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_HOVER_ON_LEVEL_1 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_HOVER_ON_LEVEL_2 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_HOVER_ON_LEVEL_3 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ACTIVE_ON_LEVEL_1 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ACTIVE_ON_LEVEL_2 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ACTIVE_ON_LEVEL_3 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ACTIVE_HOVER_ON_LEVEL_1 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ACTIVE_HOVER_ON_LEVEL_2 : string;
 /** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_ACTIVE_HOVER_ON_LEVEL_3 : string;
 /** Table header, Table data grid header */
 export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_DISABLED_ON_LEVEL_1 : string;
 /** Table header, Table data grid header */
 export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_DISABLED_ON_LEVEL_2 : string;
 /** Table header, Table data grid header */
 export const TABLE_HEADER_COLOR_INTERACTIVE_SURFACE_DISABLED_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_INITIAL_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_INITIAL_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_INITIAL_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_HOVER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_HOVER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_HOVER_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_TEXT_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_INITIAL_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_INITIAL_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_INITIAL_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_HOVER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_HOVER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_HOVER_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_HOVER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_HOVER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_INTERACTIVE_ICON_ENABLED_ACTIVE_HOVER_ON_LEVEL_3 : string;
-/** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_STATIC_SURFACE_ON_LEVEL_1 : string;
-/** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_STATIC_SURFACE_ON_LEVEL_2 : string;
-/** Table header, Table data grid header */
-export const TABLE_HEADER_COLOR_STATIC_SURFACE_ON_LEVEL_3 : string;
-export const TABLE_HEADER_COLOR_STATIC_BORDER_ON_LEVEL_1 : string;
-export const TABLE_HEADER_COLOR_STATIC_BORDER_ON_LEVEL_2 : string;
-export const TABLE_HEADER_COLOR_STATIC_BORDER_ON_LEVEL_3 : string;
 export const TABLE_HEADER_COLOR_STATIC_TEXT_ON_LEVEL_1 : string;
 export const TABLE_HEADER_COLOR_STATIC_TEXT_ON_LEVEL_2 : string;
 export const TABLE_HEADER_COLOR_STATIC_TEXT_ON_LEVEL_3 : string;
 export const TABLE_HEADER_COLOR_STATIC_ICON_ON_LEVEL_1 : string;
 export const TABLE_HEADER_COLOR_STATIC_ICON_ON_LEVEL_2 : string;
 export const TABLE_HEADER_COLOR_STATIC_ICON_ON_LEVEL_3 : string;
+export const TABLE_HEADER_COLOR_STATIC_BORDER_ON_LEVEL_1 : string;
+export const TABLE_HEADER_COLOR_STATIC_BORDER_ON_LEVEL_2 : string;
+export const TABLE_HEADER_COLOR_STATIC_BORDER_ON_LEVEL_3 : string;
+/** Table header, Table data grid header */
+export const TABLE_HEADER_COLOR_STATIC_SURFACE_ON_LEVEL_1 : string;
+/** Table header, Table data grid header */
+export const TABLE_HEADER_COLOR_STATIC_SURFACE_ON_LEVEL_2 : string;
+/** Table header, Table data grid header */
+export const TABLE_HEADER_COLOR_STATIC_SURFACE_ON_LEVEL_3 : string;
 /** Recommended background color for EDS applications */
 export const UI_MAIN_COLOR_SURFACE : string;
 /** Sidebar, Side sheet, Toolbar, Top bar */

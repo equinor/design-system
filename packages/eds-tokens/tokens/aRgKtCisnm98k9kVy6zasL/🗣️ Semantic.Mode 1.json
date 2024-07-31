@@ -52,8 +52,8 @@
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
+                "FRAME_FILL",
+                "SHAPE_FILL"
               ],
               "codeSyntax": {}
             }
@@ -70,8 +70,8 @@
               "com.figma": {
                 "hiddenFromPublishing": false,
                 "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
                 ],
                 "codeSyntax": {}
               }
@@ -132,8 +132,8 @@
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
+                "FRAME_FILL",
+                "SHAPE_FILL"
               ],
               "codeSyntax": {}
             }
@@ -191,8 +191,8 @@
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
+                "FRAME_FILL",
+                "SHAPE_FILL"
               ],
               "codeSyntax": {}
             }
@@ -211,10 +211,12 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-ui-main-color-surface"
+            }
           }
         }
       }
@@ -228,10 +230,12 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-ui-shell-color-surface"
+            }
           }
         }
       },
@@ -245,7 +249,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-ui-shell-color-border"
+            }
           }
         }
       }
@@ -259,10 +265,12 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-ui-floating-color-surface"
+            }
           }
         }
       }
@@ -276,10 +284,12 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-ui-scrim-color-surface"
+            }
           }
         }
       }
@@ -337,8 +347,8 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
             "codeSyntax": {}
           }
@@ -355,7 +365,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-input-color-text-${state-input}"
+          }
         }
       }
     },
@@ -369,7 +381,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-input-color-icon-${state-input}"
+          }
         }
       }
     },
@@ -383,7 +397,9 @@
           "scopes": [
             "STROKE_COLOR"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-input-color-border-${state-input}"
+          }
         }
       }
     },
@@ -395,10 +411,12 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-input-color-surface-${state-input}-${elevation}"
+          }
         }
       }
     },
@@ -413,7 +431,9 @@
             "scopes": [
               "TEXT_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-input-helper-color-text-${state-input}"
+            }
           }
         }
       },
@@ -427,14 +447,16 @@
             "scopes": [
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-input-helper-color-icon-${state-input}"
+            }
           }
         }
       },
       "message": {
         "text": {
           "$type": "color",
-          "$value": "{input.helper.color.message.text}",
+          "$value": "{input.helper.text}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -442,13 +464,15 @@
               "scopes": [
                 "TEXT_FILL"
               ],
-              "codeSyntax": {}
+              "codeSyntax": {
+                "WEB": "--eds-input-helper-color-message-text-${message-variant}-${state-input}"
+              }
             }
           }
         },
         "icon": {
           "$type": "color",
-          "$value": "{input.helper.color.message.icon}",
+          "$value": "{input.helper.icon}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -456,7 +480,9 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
-              "codeSyntax": {}
+              "codeSyntax": {
+                "WEB": "--eds-input-helper-color-message-icon-${message-variant}-${state-input}"
+              }
             }
           }
         }
@@ -536,7 +562,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-interactive-text-${appearance-interactive}-${prominence-interactive}-${state-interactive}"
+          }
         }
       }
     },
@@ -550,7 +578,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-interactive-icon-${appearance-interactive}-${prominence-interactive}-${state-interactive}"
+          }
         }
       }
     },
@@ -576,8 +606,8 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
           "codeSyntax": {}
         }
@@ -595,7 +625,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-static-text-${appereance-static}-${prominence-text-and-icon}"
+          }
         }
       }
     },
@@ -609,7 +641,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-static-icon-${appereance-static}-${prominence-text-and-icon}"
+          }
         }
       }
     },
@@ -623,7 +657,9 @@
           "scopes": [
             "STROKE_COLOR"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-static-border-${appereance-static}-${prominence-text-and-icon}-${elevation}"
+          }
         }
       }
     },
@@ -635,10 +671,12 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-static-border-${appereance-static}-${prominence-text-and-icon}-${elevation}"
+          }
         }
       }
     }
@@ -654,7 +692,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-text-${appearance-action}-${prominence-action}-${state-action}"
+          }
         }
       }
     },
@@ -668,7 +708,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-icon-${appearance-action}-${prominence-action}-${state-action}"
+          }
         }
       }
     },
@@ -682,7 +724,9 @@
           "scopes": [
             "STROKE_COLOR"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-border-${appearance-action}-${prominence-action}-${state-action}"
+          }
         }
       }
     },
@@ -694,10 +738,12 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-surface-${appearance-action}-${prominence-action}-${state-action}"
+          }
         }
       }
     }
@@ -713,7 +759,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-message-text-${appearance-message}-${message-variant}"
+          }
         }
       }
     },
@@ -727,7 +775,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-message-icon-${appearance-message}-${message-variant}"
+          }
         }
       }
     },
@@ -741,7 +791,9 @@
           "scopes": [
             "STROKE_COLOR"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-message-border-${appearance-message}-${message-variant}"
+          }
         }
       }
     },
@@ -753,10 +805,12 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-message-surface-${appearance-message}-${message-variant}"
+          }
         }
       }
     }
