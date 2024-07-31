@@ -105,3 +105,18 @@ pnpm run update-tokens
 
 pnpm run update-figma
 ```
+
+
+### Figma Variables
+
+- The semantic variable is the variable applied to a layer in Figma. 
+- A semantic variable can have different modes defined, and the designer can select these
+
+
+#### How the variables are setup with references between collections
+
+The semantic variable references the first segment (collection) in the variable. For example, the first segment is “appearance” for the action variables. Variables defined in appearance point to the next segment, which for action variables would be prominence. In the prominence collection, we define a variable for each of the appearance modes so that these are represented in the context of each prominence mode. The variables in the “prominence” collection point to variables in the state collection, and again, we represent all the prominence modes as new variables in the state collection. For action variables, the journey ends here, and the variables in the state collection point to the light/dark color scheme variables in the color scheme collection. 
+
+#### Tokens in code
+
+The color scheme collection variables support all the combinations of modes in the different collections and are used to generate tokens in code. All the combinations of modes in different collections must be provided here so that the code syntax matches tokens in the code. 
