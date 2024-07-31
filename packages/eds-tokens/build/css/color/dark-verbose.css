@@ -7,30 +7,39 @@
   --eds-table-header-color-static-border-on-level-3: #ffffff29;
   --eds-table-header-color-static-border-on-level-2: #ffffff29;
   --eds-table-header-color-static-border-on-level-1: #ffffff29;
-  --eds-table-header-color-interactive-border-enabled-hover-on-level-3: #ffffff33;
-  --eds-table-header-color-interactive-border-enabled-hover-on-level-2: #ffffff33;
-  --eds-table-header-color-interactive-border-enabled-hover-on-level-1: #ffffff33;
-  --eds-table-header-color-interactive-border-enabled-initial-on-level-3: #ffffff29;
-  --eds-table-header-color-interactive-border-enabled-initial-on-level-2: #ffffff29;
-  --eds-table-header-color-interactive-border-enabled-initial-on-level-1: #ffffff29;
-  --eds-table-header-color-interactive-border-disabled: #ffffff29;
-  --eds-table-cell-color-interactive-surface-disabled: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-initial-on-level-3: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-initial-on-level-2: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-initial-on-level-1: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-border-enabled-active-hover-on-level-3: #ffffff33;
-  --eds-table-cell-color-interactive-border-enabled-active-hover-on-level-2: #ffffff33;
-  --eds-table-cell-color-interactive-border-enabled-active-hover-on-level-1: #ffffff33;
-  --eds-table-cell-color-interactive-border-enabled-active-on-level-3: #ffffff29;
-  --eds-table-cell-color-interactive-border-enabled-active-on-level-2: #ffffff29;
-  --eds-table-cell-color-interactive-border-enabled-active-on-level-1: #ffffff29;
-  --eds-table-cell-color-interactive-border-enabled-hover-on-level-3: #ffffff33;
-  --eds-table-cell-color-interactive-border-enabled-hover-on-level-2: #ffffff33;
-  --eds-table-cell-color-interactive-border-enabled-hover-on-level-1: #ffffff33;
-  --eds-table-cell-color-interactive-border-enabled-initial-on-level-3: #ffffff29;
-  --eds-table-cell-color-interactive-border-enabled-initial-on-level-2: #ffffff29;
-  --eds-table-cell-color-interactive-border-enabled-initial-on-level-1: #ffffff29;
-  --eds-table-cell-color-interactive-border-disabled: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-header-color-interactive-surface-disabled-on-level-3: #00000000; /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-2: #00000000; /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-1: #00000000; /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-border-disabled-on-level-3: #ffffff29;
+  --eds-table-header-color-interactive-border-disabled-on-level-2: #ffffff29;
+  --eds-table-header-color-interactive-border-disabled-on-level-1: #ffffff29;
+  --eds-table-header-color-interactive-border-hover-on-level-3: #ffffff33;
+  --eds-table-header-color-interactive-border-hover-on-level-2: #ffffff33;
+  --eds-table-header-color-interactive-border-hover-on-level-1: #ffffff33;
+  --eds-table-header-color-interactive-border-initial-on-level-3: #ffffff29;
+  --eds-table-header-color-interactive-border-initial-on-level-2: #ffffff29;
+  --eds-table-header-color-interactive-border-initial-on-level-1: #ffffff29;
+  --eds-table-cell-color-interactive-surface-disabled-on-level-3: #00000000; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-2: #00000000; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-1: #00000000; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-3: #00000000; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-2: #00000000; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-1: #00000000; /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-border-disabled-on-level-3: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-cell-color-interactive-border-disabled-on-level-2: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-cell-color-interactive-border-disabled-on-level-1: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-cell-color-interactive-border-active-hover-on-level-3: #ffffff33;
+  --eds-table-cell-color-interactive-border-active-hover-on-level-2: #ffffff33;
+  --eds-table-cell-color-interactive-border-active-hover-on-level-1: #ffffff33;
+  --eds-table-cell-color-interactive-border-active-on-level-3: #ffffff29;
+  --eds-table-cell-color-interactive-border-active-on-level-2: #ffffff29;
+  --eds-table-cell-color-interactive-border-active-on-level-1: #ffffff29;
+  --eds-table-cell-color-interactive-border-hover-on-level-3: #ffffff33;
+  --eds-table-cell-color-interactive-border-hover-on-level-2: #ffffff33;
+  --eds-table-cell-color-interactive-border-hover-on-level-1: #ffffff33;
+  --eds-table-cell-color-interactive-border-initial-on-level-3: #ffffff29;
+  --eds-table-cell-color-interactive-border-initial-on-level-2: #ffffff29;
+  --eds-table-cell-color-interactive-border-initial-on-level-1: #ffffff29;
   --eds-table-cell-color-message-surface-error: #ff666b47; /* Table cell, Table data grid cell */
   --eds-input-color-surface-read-only-on-level-3: #00000000;
   --eds-input-color-surface-read-only-on-level-2: #00000000;
@@ -38,12 +47,12 @@
   --eds-input-color-surface-disabled-on-level-3: #00000047;
   --eds-input-color-surface-disabled-on-level-2: #00000047; /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-disabled-on-level-1: #00000047; /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-enabled-initial-on-level-3: #00000047;
-  --eds-input-color-surface-enabled-initial-on-level-2: #00000047; /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-enabled-initial-on-level-1: #00000047; /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-surface-initial-on-level-3: #00000047;
+  --eds-input-color-surface-initial-on-level-2: #00000047; /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-surface-initial-on-level-1: #00000047; /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-border-disabled: #00000000; /* Autocomplete, Search, Text field */
   --eds-input-color-border-read-only: #ffffff29; /* Autocomplete, Text field */
-  --eds-input-color-border-enabled-initial: #ffffff29; /* Autocomplete, Text field */
+  --eds-input-color-border-initial: #ffffff29; /* Autocomplete, Text field */
   --eds-color-message-surface-raised-error-hover: #ffe1e01a; /* Chip */
   --eds-color-message-surface-raised-error-initial: #ffe1e01a; /* Chip */
   --eds-color-message-surface-raised-warning-hover: #fff0e51a; /* Chip */
@@ -53,47 +62,47 @@
   --eds-color-message-surface-raised-info-hover: #dfeff71a; /* Chip */
   --eds-color-message-surface-raised-info-initial: #dfeff71a; /* Chip */
   --eds-color-action-surface-danger-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-danger-tertiary-enabled-initial: #00000000; /* Button */
+  --eds-color-action-surface-danger-tertiary-initial: #00000000; /* Button */
   --eds-color-action-surface-danger-secondary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-danger-secondary-enabled-initial: #00000000; /* Button */
+  --eds-color-action-surface-danger-secondary-initial: #00000000; /* Button */
   --eds-color-action-surface-muted-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-muted-tertiary-enabled-initial: #00000000; /* Button */
+  --eds-color-action-surface-muted-tertiary-initial: #00000000; /* Button */
   --eds-color-action-surface-muted-secondary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-muted-secondary-enabled-initial: #00000000; /* Button */
-  --eds-color-action-surface-standard-tertiary-enabled-initial: #00000000; /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-muted-secondary-initial: #00000000; /* Button */
+  --eds-color-action-surface-standard-tertiary-initial: #00000000; /* Button, Ghost button, Toggle button */
   --eds-color-action-surface-standard-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-standard-secondary-enabled-initial: #00000000; /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-initial: #00000000; /* Button, Ghost button, Toggle button */
   --eds-color-action-surface-standard-secondary-disabled: #00000000; /* Button */
   --eds-color-action-border-danger-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-border-danger-tertiary-enabled-hover: #00000000;
-  --eds-color-action-border-danger-tertiary-enabled-initial: #00000000;
+  --eds-color-action-border-danger-tertiary-hover: #00000000;
+  --eds-color-action-border-danger-tertiary-initial: #00000000;
   --eds-color-action-border-muted-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-border-muted-tertiary-enabled-hover: #00000000;
-  --eds-color-action-border-muted-tertiary-enabled-initial: #00000000;
-  --eds-color-action-border-standard-tertiary-enabled-hover: #00000000;
-  --eds-color-action-border-standard-tertiary-enabled-initial: #00000000;
+  --eds-color-action-border-muted-tertiary-hover: #00000000;
+  --eds-color-action-border-muted-tertiary-initial: #00000000;
+  --eds-color-action-border-standard-tertiary-hover: #00000000;
+  --eds-color-action-border-standard-tertiary-initial: #00000000;
   --eds-color-action-border-standard-tertiary-disabled: #00000000;
-  --eds-color-interactive-surface-raised-enabled-active-hover: #2a587480; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-enabled-active: #2a587480; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-enabled-hover: #eaeaea1a; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-enabled-initial: #eaeaea1a; /* Interactive Chip */
+  --eds-color-interactive-surface-raised-active-hover: #2a587480; /* Interactive Chip */
+  --eds-color-interactive-surface-raised-active: #2a587480; /* Interactive Chip */
+  --eds-color-interactive-surface-raised-hover: #eaeaea1a; /* Interactive Chip */
+  --eds-color-interactive-surface-raised-initial: #eaeaea1a; /* Interactive Chip */
   --eds-color-interactive-surface-raised-disabled: #2e3f4c66; /* Interactive Chip (disabled) */
-  --eds-color-interactive-surface-standard-quaternary-enabled-active: #00000000; /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-enabled-initial: #00000000; /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-active: #00000000; /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-initial: #00000000; /* Tab */
   --eds-color-interactive-surface-standard-quaternary-disabled: #00000000; /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-enabled-initial: #00000000; /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-initial: #00000000; /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-disabled: #00000000; /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-enabled-initial: #00000000; /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-initial: #00000000; /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-disabled: #00000000; /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-enabled-initial: #00000000; /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-initial: #00000000; /* Toggle button */
   --eds-color-interactive-surface-standard-primary-disabled-outlined: #00000000; /* Toggle button */
-  --eds-color-interactive-border-standard-quaternary-enabled-hover: #ffffff33; /* Tab */
-  --eds-color-interactive-border-standard-quaternary-enabled-initial: #ffffff29; /* Tab */
+  --eds-color-interactive-border-standard-quaternary-hover: #ffffff33; /* Tab */
+  --eds-color-interactive-border-standard-quaternary-initial: #ffffff29; /* Tab */
   --eds-color-interactive-border-standard-quaternary-disabled: #ffffff29; /* Tab */
-  --eds-color-interactive-border-standard-secondary-enabled-active-hover: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-enabled-active: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-enabled-hover: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-enabled-initial: #00000000; /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active-hover: #00000000; /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active: #00000000; /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-hover: #00000000; /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-initial: #00000000; /* Sidebar menu */
   --eds-color-interactive-border-standard-secondary-disabled: #00000000; /* Sidebar menu */
   --eds-color-static-surface-raised: #eaeaea1a;
   --eds-color-shadow: #00000024; /* For use in box shadows */
@@ -101,154 +110,193 @@
   --eds-ui-shell-color-border: var(--eds-color-slate-blue-1400); /* Sidebar, Topbar, Side sheet */
   --eds-ui-shell-color-surface: var(--eds-color-slate-blue-1350); /* Sidebar, Side sheet, Toolbar, Top bar */
   --eds-ui-main-color-surface: var(--eds-color-slate-blue-1400); /* Recommended background color for EDS applications */
+  --eds-table-header-color-static-surface-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-static-surface-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
+  --eds-table-header-color-static-surface-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
   --eds-table-header-color-static-icon-on-level-3: var(--eds-color-neutral-0);
   --eds-table-header-color-static-icon-on-level-2: var(--eds-color-neutral-0);
   --eds-table-header-color-static-icon-on-level-1: var(--eds-color-neutral-0);
   --eds-table-header-color-static-text-on-level-3: var(--eds-color-neutral-0);
   --eds-table-header-color-static-text-on-level-2: var(--eds-color-neutral-0);
   --eds-table-header-color-static-text-on-level-1: var(--eds-color-neutral-0);
-  --eds-table-header-color-static-surface-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-static-surface-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
-  --eds-table-header-color-static-surface-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-icon-enabled-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
-  --eds-table-header-color-interactive-icon-enabled-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-icon-enabled-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-icon-enabled-active-on-level-3: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-icon-enabled-active-on-level-2: var(--eds-color-moss-green-sat-500);
-  --eds-table-header-color-interactive-icon-enabled-active-on-level-1: var(--eds-color-moss-green-sat-500);
-  --eds-table-header-color-interactive-icon-enabled-hover-on-level-3: var(--eds-color-neutral-0);
-  --eds-table-header-color-interactive-icon-enabled-hover-on-level-2: var(--eds-color-slate-grey-400);
-  --eds-table-header-color-interactive-icon-enabled-hover-on-level-1: var(--eds-color-slate-grey-400);
-  --eds-table-header-color-interactive-icon-enabled-initial-on-level-3: var(--eds-color-neutral-0);
-  --eds-table-header-color-interactive-icon-enabled-initial-on-level-2: var(--eds-color-slate-grey-600);
-  --eds-table-header-color-interactive-icon-enabled-initial-on-level-1: var(--eds-color-slate-grey-600);
-  --eds-table-header-color-interactive-text-enabled-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
-  --eds-table-header-color-interactive-text-enabled-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-text-enabled-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-text-enabled-active-on-level-3: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-text-enabled-active-on-level-2: var(--eds-color-moss-green-sat-500);
-  --eds-table-header-color-interactive-text-enabled-active-on-level-1: var(--eds-color-moss-green-sat-500);
-  --eds-table-header-color-interactive-text-enabled-hover-on-level-3: var(--eds-color-neutral-0);
-  --eds-table-header-color-interactive-text-enabled-hover-on-level-2: var(--eds-color-slate-grey-400);
-  --eds-table-header-color-interactive-text-enabled-hover-on-level-1: var(--eds-color-slate-grey-400);
-  --eds-table-header-color-interactive-text-enabled-initial-on-level-3: var(--eds-color-neutral-0);
-  --eds-table-header-color-interactive-text-enabled-initial-on-level-2: var(--eds-color-slate-grey-400);
-  --eds-table-header-color-interactive-text-enabled-initial-on-level-1: var(--eds-color-slate-grey-400);
-  --eds-table-header-color-interactive-surface-disabled-on-level-3: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-2: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-active-hover-on-level-3: var(--eds-color-slate-blue-1100); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-active-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-active-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-active-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-active-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-active-on-level-1: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-hover-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-initial-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-initial-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-enabled-initial-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-border-enabled-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
-  --eds-table-header-color-interactive-border-enabled-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-border-enabled-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-border-enabled-active-on-level-3: var(--eds-color-moss-green-sat-300);
-  --eds-table-header-color-interactive-border-enabled-active-on-level-2: var(--eds-color-moss-green-sat-500);
-  --eds-table-header-color-interactive-border-enabled-active-on-level-1: var(--eds-color-moss-green-sat-500);
-  --eds-table-cell-color-interactive-surface-enabled-active-hover-on-level-3: var(--eds-color-mist-blue-muted-1100); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-active-hover-on-level-2: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-active-hover-on-level-1: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-active-on-level-3: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-active-on-level-2: var(--eds-color-mist-blue-muted-1300); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-active-on-level-1: var(--eds-color-mist-blue-muted-1300); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-hover-on-level-3: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-enabled-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-icon-enabled-active-hover-on-level-3: var(--eds-color-moss-green-sat-100); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-active-hover-on-level-2: var(--eds-color-moss-green-sat-300); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-active-hover-on-level-1: var(--eds-color-moss-green-sat-300); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-active-on-level-3: var(--eds-color-moss-green-sat-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-active-on-level-2: var(--eds-color-moss-green-sat-500); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-active-on-level-1: var(--eds-color-moss-green-sat-500); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-hover-on-level-3: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-hover-on-level-2: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-hover-on-level-1: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-initial-on-level-3: var(--eds-color-slate-grey-500); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-initial-on-level-2: var(--eds-color-slate-grey-600); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-enabled-initial-on-level-1: var(--eds-color-slate-grey-600); /* Table cell, Table data grid cell, Table header, Table data grid header */
-  --eds-table-cell-color-interactive-icon-disabled: var(--eds-color-slate-grey-1000);
-  --eds-table-cell-color-interactive-text-enabled-active-hover-on-level-3: var(--eds-color-slate-grey-200); /* Interactive table cell, data grid cell */
-  --eds-table-cell-color-interactive-text-enabled-active-hover-on-level-2: var(--eds-color-slate-grey-200); /* Interactive table cell, data grid cell */
-  --eds-table-cell-color-interactive-text-enabled-active-hover-on-level-1: var(--eds-color-slate-grey-200); /* Interactive table cell, data grid cell */
-  --eds-table-cell-color-interactive-text-enabled-active-on-level-3: var(--eds-color-slate-grey-400); /* Interactive table cell, table data grid cell */
-  --eds-table-cell-color-interactive-text-enabled-active-on-level-2: var(--eds-color-slate-grey-400); /* Interactive table cell, table data grid cell */
-  --eds-table-cell-color-interactive-text-enabled-active-on-level-1: var(--eds-color-slate-grey-400); /* Interactive table cell, table data grid cell */
-  --eds-table-cell-color-interactive-text-enabled-hover-on-level-3: var(--eds-color-slate-grey-200);
-  --eds-table-cell-color-interactive-text-enabled-hover-on-level-2: var(--eds-color-slate-grey-200);
-  --eds-table-cell-color-interactive-text-enabled-hover-on-level-1: var(--eds-color-slate-grey-200);
-  --eds-table-cell-color-interactive-text-enabled-initial-on-level-3: var(--eds-color-slate-grey-400);
-  --eds-table-cell-color-interactive-text-enabled-initial-on-level-2: var(--eds-color-slate-grey-400);
-  --eds-table-cell-color-interactive-text-enabled-initial-on-level-1: var(--eds-color-slate-grey-400);
-  --eds-table-cell-color-interactive-text-disabled: var(--eds-color-slate-grey-1000);
+  --eds-table-header-color-interactive-surface-active-hover-on-level-3: var(--eds-color-slate-blue-1100); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-active-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-active-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-active-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-active-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-active-on-level-1: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-hover-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-initial-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-initial-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-initial-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-border-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
+  --eds-table-header-color-interactive-border-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-border-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-border-active-on-level-3: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-border-active-on-level-2: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-border-active-on-level-1: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-icon-disabled-on-level-3: var(--eds-color-neutral-0);
+  --eds-table-header-color-interactive-icon-disabled-on-level-2: var(--eds-color-slate-grey-600);
+  --eds-table-header-color-interactive-icon-disabled-on-level-1: var(--eds-color-slate-grey-600);
+  --eds-table-header-color-interactive-icon-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
+  --eds-table-header-color-interactive-icon-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-icon-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-icon-active-on-level-3: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-icon-active-on-level-2: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-icon-active-on-level-1: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-icon-hover-on-level-3: var(--eds-color-neutral-0);
+  --eds-table-header-color-interactive-icon-hover-on-level-2: var(--eds-color-slate-grey-400);
+  --eds-table-header-color-interactive-icon-hover-on-level-1: var(--eds-color-slate-grey-400);
+  --eds-table-header-color-interactive-icon-initial-on-level-3: var(--eds-color-neutral-0);
+  --eds-table-header-color-interactive-icon-initial-on-level-2: var(--eds-color-slate-grey-600);
+  --eds-table-header-color-interactive-icon-initial-on-level-1: var(--eds-color-slate-grey-600);
+  --eds-table-header-color-interactive-text-disabled-on-level-3: var(--eds-color-neutral-1000);
+  --eds-table-header-color-interactive-text-disabled-on-level-2: var(--eds-color-slate-grey-1000);
+  --eds-table-header-color-interactive-text-disabled-on-level-1: var(--eds-color-slate-grey-1000);
+  --eds-table-header-color-interactive-text-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
+  --eds-table-header-color-interactive-text-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-text-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-text-active-on-level-3: var(--eds-color-moss-green-sat-300);
+  --eds-table-header-color-interactive-text-active-on-level-2: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-text-active-on-level-1: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-text-hover-on-level-3: var(--eds-color-neutral-0);
+  --eds-table-header-color-interactive-text-hover-on-level-2: var(--eds-color-slate-grey-400);
+  --eds-table-header-color-interactive-text-hover-on-level-1: var(--eds-color-slate-grey-400);
+  --eds-table-header-color-interactive-text-initial-on-level-3: var(--eds-color-neutral-0);
+  --eds-table-header-color-interactive-text-initial-on-level-2: var(--eds-color-slate-grey-400);
+  --eds-table-header-color-interactive-text-initial-on-level-1: var(--eds-color-slate-grey-400);
+  --eds-table-cell-color-interactive-surface-active-hover-on-level-3: var(--eds-color-mist-blue-muted-1100); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-active-hover-on-level-2: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-active-hover-on-level-1: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-active-on-level-3: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-active-on-level-2: var(--eds-color-mist-blue-muted-1300); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-active-on-level-1: var(--eds-color-mist-blue-muted-1300); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-hover-on-level-3: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-icon-disabled-on-level-3: var(--eds-color-slate-grey-1000);
+  --eds-table-cell-color-interactive-icon-disabled-on-level-2: var(--eds-color-slate-grey-1000);
+  --eds-table-cell-color-interactive-icon-disabled-on-level-1: var(--eds-color-slate-grey-1000);
+  --eds-table-cell-color-interactive-icon-active-hover-on-level-3: var(--eds-color-moss-green-sat-100); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-active-hover-on-level-2: var(--eds-color-moss-green-sat-300); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-active-hover-on-level-1: var(--eds-color-moss-green-sat-300); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-active-on-level-3: var(--eds-color-moss-green-sat-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-active-on-level-2: var(--eds-color-moss-green-sat-500); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-active-on-level-1: var(--eds-color-moss-green-sat-500); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-hover-on-level-3: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-hover-on-level-2: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-hover-on-level-1: var(--eds-color-slate-grey-200); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-initial-on-level-3: var(--eds-color-slate-grey-500); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-initial-on-level-2: var(--eds-color-slate-grey-600); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-icon-initial-on-level-1: var(--eds-color-slate-grey-600); /* Table cell, Table data grid cell, Table header, Table data grid header */
+  --eds-table-cell-color-interactive-text-disabled-on-level-3: var(--eds-color-slate-grey-1000);
+  --eds-table-cell-color-interactive-text-disabled-on-level-2: var(--eds-color-slate-grey-1000);
+  --eds-table-cell-color-interactive-text-disabled-on-level-1: var(--eds-color-slate-grey-1000);
+  --eds-table-cell-color-interactive-text-active-hover-on-level-3: var(--eds-color-slate-grey-200); /* Interactive table cell, data grid cell */
+  --eds-table-cell-color-interactive-text-active-hover-on-level-2: var(--eds-color-slate-grey-200); /* Interactive table cell, data grid cell */
+  --eds-table-cell-color-interactive-text-active-hover-on-level-1: var(--eds-color-slate-grey-200); /* Interactive table cell, data grid cell */
+  --eds-table-cell-color-interactive-text-active-on-level-3: var(--eds-color-slate-grey-400); /* Interactive table cell, table data grid cell */
+  --eds-table-cell-color-interactive-text-active-on-level-2: var(--eds-color-slate-grey-400); /* Interactive table cell, table data grid cell */
+  --eds-table-cell-color-interactive-text-active-on-level-1: var(--eds-color-slate-grey-400); /* Interactive table cell, table data grid cell */
+  --eds-table-cell-color-interactive-text-hover-on-level-3: var(--eds-color-slate-grey-200);
+  --eds-table-cell-color-interactive-text-hover-on-level-2: var(--eds-color-slate-grey-200);
+  --eds-table-cell-color-interactive-text-hover-on-level-1: var(--eds-color-slate-grey-200);
+  --eds-table-cell-color-interactive-text-initial-on-level-3: var(--eds-color-slate-grey-400);
+  --eds-table-cell-color-interactive-text-initial-on-level-2: var(--eds-color-slate-grey-400);
+  --eds-table-cell-color-interactive-text-initial-on-level-1: var(--eds-color-slate-grey-400);
   --eds-input-label-color-icon-disabled: var(--eds-color-slate-grey-1000);
-  --eds-input-label-color-icon-enabled: var(--eds-color-slate-grey-600);
+  --eds-input-label-color-icon-read-only: var(--eds-color-slate-grey-600);
+  --eds-input-label-color-icon-initial: var(--eds-color-slate-grey-600);
   --eds-input-label-color-text-disabled: var(--eds-color-slate-grey-1000);
-  --eds-input-label-color-text-enabled: var(--eds-color-slate-grey-600);
+  --eds-input-label-color-text-read-only: var(--eds-color-slate-grey-600);
+  --eds-input-label-color-text-initial: var(--eds-color-slate-grey-600);
+  --eds-input-color-message-text-error-disabled: var(--eds-color-red-cold-900); /* Text field */
+  --eds-input-color-message-text-error-read-only: var(--eds-color-red-cold-900); /* Text field */
   --eds-input-color-message-text-error-focus: var(--eds-color-red-warm-600); /* Text field */
   --eds-input-color-message-text-error-initial: var(--eds-color-red-cold-900); /* Text field */
+  --eds-input-color-message-text-warning-disabled: var(--eds-color-orange-800); /* Text field */
+  --eds-input-color-message-text-warning-read-only: var(--eds-color-orange-800); /* Text field */
   --eds-input-color-message-text-warning-focus: var(--eds-color-spruce-wood-500); /* Text field */
   --eds-input-color-message-text-warning-initial: var(--eds-color-orange-800); /* Text field */
+  --eds-input-color-message-text-success-disabled: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-message-text-success-read-only: var(--eds-color-success-green-900); /* Text field */
   --eds-input-color-message-text-success-focus: var(--eds-color-success-green-600); /* Text field */
   --eds-input-color-message-text-success-initial: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-message-icon-error-disabled: var(--eds-color-red-cold-900); /* Text field */
+  --eds-input-color-message-icon-error-read-only: var(--eds-color-red-cold-900); /* Text field */
   --eds-input-color-message-icon-error-focus: var(--eds-color-red-warm-600); /* Text field */
   --eds-input-color-message-icon-error-initial: var(--eds-color-red-cold-900); /* Text field */
+  --eds-input-color-message-icon-warning-disabled: var(--eds-color-orange-800); /* Text field */
+  --eds-input-color-message-icon-warning-read-only: var(--eds-color-orange-800); /* Text field */
   --eds-input-color-message-icon-warning-focus: var(--eds-color-spruce-wood-500); /* Text field */
   --eds-input-color-message-icon-warning-initial: var(--eds-color-orange-800); /* Text field */
+  --eds-input-color-message-icon-success-disabled: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-message-icon-success-read-only: var(--eds-color-success-green-900); /* Text field */
   --eds-input-color-message-icon-success-focus: var(--eds-color-success-green-600); /* Text field */
   --eds-input-color-message-icon-success-initial: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-message-border-error-disabled: var(--eds-color-red-cold-900); /* Text field */
+  --eds-input-color-message-border-error-read-only: var(--eds-color-red-cold-900); /* Text field */
   --eds-input-color-message-border-error-focus: var(--eds-color-red-warm-600); /* Text field */
   --eds-input-color-message-border-error-initial: var(--eds-color-red-cold-900); /* Text field */
+  --eds-input-color-message-border-warning-disabled: var(--eds-color-orange-800); /* Text field */
+  --eds-input-color-message-border-warning-read-only: var(--eds-color-orange-800); /* Text field */
   --eds-input-color-message-border-warning-focus: var(--eds-color-spruce-wood-500); /* Text field */
   --eds-input-color-message-border-warning-initial: var(--eds-color-orange-800); /* Text field */
+  --eds-input-color-message-border-success-disabled: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-message-border-success-read-only: var(--eds-color-success-green-900); /* Text field */
   --eds-input-color-message-border-success-focus: var(--eds-color-success-green-600); /* Text field */
   --eds-input-color-message-border-success-initial: var(--eds-color-success-green-900); /* Text field */
-  --eds-input-color-border-enabled-focus: var(--eds-color-moss-green-sat-500); /* Autocomplete, Search, Text field */
+  --eds-input-color-border-focus: var(--eds-color-moss-green-sat-500); /* Autocomplete, Search, Text field */
   --eds-input-color-icon-disabled: var(--eds-color-slate-grey-1000); /* Autocomplete, Table input, Search, Text field */
+  --eds-input-color-icon-focus: var(--eds-color-neutral-0); /* Autocomplete, Table input, Search, Text field */
   --eds-input-color-icon-read-only: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
-  --eds-input-color-icon-enabled-focus: var(--eds-color-neutral-0); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-color-icon-enabled-initial: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
+  --eds-input-color-icon-initial: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
   --eds-input-color-text-disabled: var(--eds-color-slate-grey-1000); /* Autocomplete, Table input, Search, Text field */
+  --eds-input-color-text-focus: var(--eds-color-neutral-0); /* Autocomplete, Table input, Search, Text field */
   --eds-input-color-text-read-only: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
-  --eds-input-color-text-enabled-focus: var(--eds-color-neutral-0); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-color-text-enabled-initial: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
+  --eds-input-color-text-initial: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
   --eds-input-helper-color-message-icon-error-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-icon-error-read-only: var(--eds-color-red-cold-600);
-  --eds-input-helper-color-message-icon-error-enabled: var(--eds-color-red-cold-600);
+  --eds-input-helper-color-message-icon-error-focus: var(--eds-color-red-cold-600);
+  --eds-input-helper-color-message-icon-error-initial: var(--eds-color-red-cold-600);
   --eds-input-helper-color-message-icon-warning-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-icon-warning-read-only: var(--eds-color-orange-500);
-  --eds-input-helper-color-message-icon-warning-enabled: var(--eds-color-orange-500);
+  --eds-input-helper-color-message-icon-warning-focus: var(--eds-color-orange-500);
+  --eds-input-helper-color-message-icon-warning-initial: var(--eds-color-orange-500);
   --eds-input-helper-color-message-icon-success-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-icon-success-read-only: var(--eds-color-lichen-green-600);
-  --eds-input-helper-color-message-icon-success-enabled: var(--eds-color-lichen-green-600);
+  --eds-input-helper-color-message-icon-success-focus: var(--eds-color-lichen-green-600);
+  --eds-input-helper-color-message-icon-success-initial: var(--eds-color-lichen-green-600);
   --eds-input-helper-color-message-icon-info-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-icon-info-read-only: var(--eds-color-blue-sky-600);
-  --eds-input-helper-color-message-icon-info-enabled: var(--eds-color-blue-sky-600);
+  --eds-input-helper-color-message-icon-info-focus: var(--eds-color-blue-sky-600);
+  --eds-input-helper-color-message-icon-info-initial: var(--eds-color-blue-sky-600);
   --eds-input-helper-color-message-text-error-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-text-error-read-only: var(--eds-color-red-cold-600);
-  --eds-input-helper-color-message-text-error-enabled: var(--eds-color-red-cold-600);
+  --eds-input-helper-color-message-text-error-focus: var(--eds-color-red-cold-600);
+  --eds-input-helper-color-message-text-error-initial: var(--eds-color-red-cold-600);
   --eds-input-helper-color-message-text-warning-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-text-warning-read-only: var(--eds-color-orange-500);
-  --eds-input-helper-color-message-text-warning-enabled: var(--eds-color-orange-500);
+  --eds-input-helper-color-message-text-warning-focus: var(--eds-color-orange-500);
+  --eds-input-helper-color-message-text-warning-initial: var(--eds-color-orange-500);
   --eds-input-helper-color-message-text-success-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-text-success-read-only: var(--eds-color-lichen-green-600);
-  --eds-input-helper-color-message-text-success-enabled: var(--eds-color-lichen-green-600);
+  --eds-input-helper-color-message-text-success-focus: var(--eds-color-lichen-green-600);
+  --eds-input-helper-color-message-text-success-initial: var(--eds-color-lichen-green-600);
   --eds-input-helper-color-message-text-info-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-helper-color-message-text-info-read-only: var(--eds-color-blue-sky-600);
-  --eds-input-helper-color-message-text-info-enabled: var(--eds-color-blue-sky-600);
+  --eds-input-helper-color-message-text-info-focus: var(--eds-color-blue-sky-600);
+  --eds-input-helper-color-message-text-info-initial: var(--eds-color-blue-sky-600);
   --eds-input-helper-color-icon-disabled: var(--eds-color-slate-grey-1000); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-helper-color-icon-enabled: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-icon-read-only: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-icon-focus: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-icon-initial: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
   --eds-input-helper-color-text-disabled: var(--eds-color-slate-grey-1000); /* Autocomplete, Table input, Search, Text field */
-  --eds-input-helper-color-text-enabled: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-text-read-only: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-text-focus: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
+  --eds-input-helper-color-text-initial: var(--eds-color-slate-grey-600); /* Autocomplete, Table input, Text field */
   --eds-input-placeholder-color-text: var(--eds-color-slate-grey-800); /* Autocomplete, Table input, Search, Text field */
   --eds-input-asterix-color-text: var(--eds-color-red-cold-900); /* Autocomplete, Text field */
   --eds-color-message-surface-callout-error: var(--eds-color-red-cold-1200); /* Banner */
@@ -311,173 +359,173 @@
   --eds-color-message-text-raised-success-initial: var(--eds-color-success-green-600); /* Chip, Card, input helper */
   --eds-color-message-text-raised-info-hover: var(--eds-color-blue-sky-400); /* Chip */
   --eds-color-message-text-raised-info-initial: var(--eds-color-blue-sky-600); /* Chip, Card, input helper */
-  --eds-color-action-surface-danger-tertiary-enabled-hover: var(--eds-color-red-cold-1400); /* Button */
-  --eds-color-action-surface-danger-secondary-enabled-hover: var(--eds-color-red-cold-1400); /* Button */
+  --eds-color-action-surface-danger-tertiary-hover: var(--eds-color-red-cold-1400); /* Button */
+  --eds-color-action-surface-danger-secondary-hover: var(--eds-color-red-cold-1400); /* Button */
   --eds-color-action-surface-danger-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-surface-danger-primary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-surface-danger-primary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
-  --eds-color-action-surface-muted-tertiary-enabled-hover: var(--eds-color-slate-blue-1200); /* Button */
-  --eds-color-action-surface-muted-secondary-enabled-hover: var(--eds-color-slate-blue-1200); /* Button */
+  --eds-color-action-surface-danger-primary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-surface-danger-primary-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-surface-muted-tertiary-hover: var(--eds-color-slate-blue-1200); /* Button */
+  --eds-color-action-surface-muted-secondary-hover: var(--eds-color-slate-blue-1200); /* Button */
   --eds-color-action-surface-muted-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-surface-muted-primary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-surface-muted-primary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
-  --eds-color-action-surface-standard-tertiary-enabled-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-secondary-enabled-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-primary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
-  --eds-color-action-surface-standard-primary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
+  --eds-color-action-surface-muted-primary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-surface-muted-primary-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-surface-standard-tertiary-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-primary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-action-surface-standard-primary-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-border-danger-secondary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-border-danger-secondary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-border-danger-secondary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-border-danger-secondary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-border-danger-secondary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-border-danger-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-border-danger-primary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-border-danger-primary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-border-danger-primary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-border-danger-primary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-border-muted-secondary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-border-muted-secondary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-border-muted-secondary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-border-muted-secondary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-border-muted-secondary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-border-muted-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-border-muted-primary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-border-muted-primary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
-  --eds-color-action-border-standard-secondary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
-  --eds-color-action-border-standard-secondary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
+  --eds-color-action-border-muted-primary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-border-muted-primary-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-border-standard-secondary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-action-border-standard-secondary-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-disabled: var(--eds-color-slate-grey-1100); /* Button */
-  --eds-color-action-border-standard-primary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
-  --eds-color-action-border-standard-primary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
+  --eds-color-action-border-standard-primary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-action-border-standard-primary-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
   --eds-color-action-border-standard-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-border-secondary-disabled: var(--eds-color-slate-grey-1300); /* Button */
-  --eds-color-action-icon-danger-tertiary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-icon-danger-tertiary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-icon-danger-tertiary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-icon-danger-tertiary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-icon-danger-tertiary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-danger-secondary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-icon-danger-secondary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-icon-danger-secondary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-icon-danger-secondary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-icon-danger-secondary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-danger-primary-enabled-hover: var(--eds-color-neutral-1500); /* Button */
-  --eds-color-action-icon-danger-primary-enabled-initial: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-icon-danger-primary-hover: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-icon-danger-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-icon-danger-primary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-muted-secondary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-icon-muted-secondary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-icon-muted-secondary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-icon-muted-secondary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-icon-muted-secondary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-muted-tertiary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-icon-muted-tertiary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-icon-muted-tertiary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-icon-muted-tertiary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-icon-muted-tertiary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-muted-primary-enabled-hover: var(--eds-color-neutral-1500); /* Button */
-  --eds-color-action-icon-muted-primary-enabled-initial: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-icon-muted-primary-hover: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-icon-muted-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-icon-muted-primary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-standard-tertiary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button */
-  --eds-color-action-icon-standard-tertiary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button */
+  --eds-color-action-icon-standard-tertiary-hover: var(--eds-color-moss-green-sat-300); /* Button */
+  --eds-color-action-icon-standard-tertiary-initial: var(--eds-color-moss-green-sat-500); /* Button */
   --eds-color-action-icon-standard-tertiary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-standard-secondary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button */
-  --eds-color-action-icon-standard-secondary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button */
+  --eds-color-action-icon-standard-secondary-hover: var(--eds-color-moss-green-sat-300); /* Button */
+  --eds-color-action-icon-standard-secondary-initial: var(--eds-color-moss-green-sat-500); /* Button */
   --eds-color-action-icon-standard-secondary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-icon-standard-primary-enabled-hover: var(--eds-color-neutral-1500); /* Button */
-  --eds-color-action-icon-standard-primary-enabled-initial: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-icon-standard-primary-hover: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-icon-standard-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-icon-standard-primary-disabled: var(--eds-color-slate-grey-1000);
-  --eds-color-action-text-danger-tertiary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-text-danger-tertiary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-text-danger-tertiary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-text-danger-tertiary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-text-danger-tertiary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-danger-secondary-enabled-hover: var(--eds-color-red-warm-500); /* Button */
-  --eds-color-action-text-danger-secondary-enabled-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-text-danger-secondary-hover: var(--eds-color-red-warm-500); /* Button */
+  --eds-color-action-text-danger-secondary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-text-danger-secondary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-danger-primary-enabled-hover: var(--eds-color-neutral-1500); /* Button */
-  --eds-color-action-text-danger-primary-enabled-initial: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-text-danger-primary-hover: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-text-danger-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-text-danger-primary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-muted-tertiary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-text-muted-tertiary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-text-muted-tertiary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-text-muted-tertiary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-text-muted-tertiary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-muted-secondary-enabled-hover: var(--eds-color-slate-grey-500); /* Button */
-  --eds-color-action-text-muted-secondary-enabled-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-text-muted-secondary-hover: var(--eds-color-slate-grey-500); /* Button */
+  --eds-color-action-text-muted-secondary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-text-muted-secondary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-muted-primary-enabled-hover: var(--eds-color-neutral-1500); /* Button */
-  --eds-color-action-text-muted-primary-enabled-initial: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-text-muted-primary-hover: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-text-muted-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-text-muted-primary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-standard-tertiary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
-  --eds-color-action-text-standard-tertiary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button */
+  --eds-color-action-text-standard-tertiary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-action-text-standard-tertiary-initial: var(--eds-color-moss-green-sat-500); /* Button */
   --eds-color-action-text-standard-tertiary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-standard-secondary-enabled-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
-  --eds-color-action-text-standard-secondary-enabled-initial: var(--eds-color-moss-green-sat-500); /* Button */
+  --eds-color-action-text-standard-secondary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
+  --eds-color-action-text-standard-secondary-initial: var(--eds-color-moss-green-sat-500); /* Button */
   --eds-color-action-text-standard-secondary-disabled: var(--eds-color-slate-grey-1000); /* Button */
-  --eds-color-action-text-standard-primary-enabled-hover: var(--eds-color-neutral-1500); /* Button */
-  --eds-color-action-text-standard-primary-enabled-initial: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-text-standard-primary-hover: var(--eds-color-neutral-1500); /* Button */
+  --eds-color-action-text-standard-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-text-standard-primary-disabled: var(--eds-color-slate-grey-1000); /* Button */
   --eds-color-action-text-primary-disabled: var(--eds-color-neutral-1000); /* Button */
-  --eds-color-interactive-surface-standard-quaternary-enabled-active-hover: var(--eds-color-mist-blue-muted-1200); /* Sidebar link */
-  --eds-color-interactive-surface-standard-quaternary-enabled-hover: var(--eds-color-slate-blue-1200); /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-enabled-active-hover: var(--eds-color-mist-blue-muted-1100); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-enabled-active: var(--eds-color-mist-blue-muted-1200); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-enabled-hover: var(--eds-color-slate-blue-1200); /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-enabled-active-hover: var(--eds-color-mist-blue-muted-1000); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-enabled-active: var(--eds-color-mist-blue-muted-1100); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-enabled-hover: var(--eds-color-slate-blue-1200); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-enabled-active-hover: var(--eds-color-moss-green-sat-300); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-enabled-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-enabled-hover: var(--eds-color-slate-blue-1200); /* Toggle button */
+  --eds-color-interactive-surface-standard-quaternary-active-hover: var(--eds-color-mist-blue-muted-1200); /* Sidebar link */
+  --eds-color-interactive-surface-standard-quaternary-hover: var(--eds-color-slate-blue-1200); /* Tab */
+  --eds-color-interactive-surface-standard-tertiary-active-hover: var(--eds-color-mist-blue-muted-1100); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-active: var(--eds-color-mist-blue-muted-1200); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-hover: var(--eds-color-slate-blue-1200); /* Sidebar link */
+  --eds-color-interactive-surface-standard-secondary-active-hover: var(--eds-color-mist-blue-muted-1000); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-active: var(--eds-color-mist-blue-muted-1100); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-hover: var(--eds-color-slate-blue-1200); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-primary-active-hover: var(--eds-color-moss-green-sat-300); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-hover: var(--eds-color-slate-blue-1200); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-disabled-filled: var(--eds-color-slate-grey-1300); /* Toggle button */
-  --eds-color-interactive-border-raised-enabled-active-hover: var(--eds-color-moss-green-sat-400); /* Chip */
-  --eds-color-interactive-border-raised-enabled-active: var(--eds-color-mist-blue-muted-1200); /* Chip */
-  --eds-color-interactive-border-raised-enabled-hover: var(--eds-color-slate-grey-400); /* Chip */
-  --eds-color-interactive-border-raised-enabled-initial: var(--eds-color-slate-grey-1100); /* Chip */
+  --eds-color-interactive-border-raised-active-hover: var(--eds-color-moss-green-sat-400); /* Chip */
+  --eds-color-interactive-border-raised-active: var(--eds-color-mist-blue-muted-1200); /* Chip */
+  --eds-color-interactive-border-raised-hover: var(--eds-color-slate-grey-400); /* Chip */
+  --eds-color-interactive-border-raised-initial: var(--eds-color-slate-grey-1100); /* Chip */
   --eds-color-interactive-border-raised-disabled: var(--eds-color-slate-grey-1000); /* Chip */
-  --eds-color-interactive-border-standard-quaternary-enabled-active-hover: var(--eds-color-moss-green-sat-300); /* Tab */
-  --eds-color-interactive-border-standard-quaternary-enabled-active: var(--eds-color-moss-green-sat-500); /* Tab */
-  --eds-color-interactive-border-standard-tertiary-enabled-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-enabled-active: var(--eds-color-moss-green-sat-500); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-enabled-hover: var(--eds-color-neutral-100); /* Tab */
-  --eds-color-interactive-border-standard-tertiary-enabled-initial: var(--eds-color-slate-blue-1400); /* Sidebar menu */
+  --eds-color-interactive-border-standard-quaternary-active-hover: var(--eds-color-moss-green-sat-300); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-active: var(--eds-color-moss-green-sat-500); /* Tab */
+  --eds-color-interactive-border-standard-tertiary-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-active: var(--eds-color-moss-green-sat-500); /* Sidebar menu */
+  --eds-color-interactive-border-standard-tertiary-hover: var(--eds-color-neutral-100); /* Tab */
+  --eds-color-interactive-border-standard-tertiary-initial: var(--eds-color-slate-blue-1400); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-disabled: var(--eds-color-slate-blue-1400); /* Sidebar menu */
-  --eds-color-interactive-border-standard-primary-enabled-active-hover: var(--eds-color-moss-green-sat-500); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-enabled-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-enabled-hover: var(--eds-color-slate-grey-600); /* Toggle button */
-  --eds-color-interactive-border-standard-primary-enabled-initial: var(--eds-color-slate-grey-600); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-active-hover: var(--eds-color-moss-green-sat-500); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-hover: var(--eds-color-slate-grey-600); /* Toggle button */
+  --eds-color-interactive-border-standard-primary-initial: var(--eds-color-slate-grey-600); /* Toggle button */
   --eds-color-interactive-border-standard-primary-disabled: var(--eds-color-slate-grey-1000); /* Toggle button */
-  --eds-color-interactive-icon-raised-enabled-active-hover: var(--eds-color-moss-green-sat-200); /* Chip */
-  --eds-color-interactive-icon-raised-enabled-active: var(--eds-color-moss-green-sat-300); /* Chip */
-  --eds-color-interactive-icon-raised-enabled-hover: var(--eds-color-slate-grey-400); /* Chip */
-  --eds-color-interactive-icon-raised-enabled-initial: var(--eds-color-slate-grey-500); /* Chip */
+  --eds-color-interactive-icon-raised-active-hover: var(--eds-color-moss-green-sat-200); /* Chip */
+  --eds-color-interactive-icon-raised-active: var(--eds-color-moss-green-sat-300); /* Chip */
+  --eds-color-interactive-icon-raised-hover: var(--eds-color-slate-grey-400); /* Chip */
+  --eds-color-interactive-icon-raised-initial: var(--eds-color-slate-grey-500); /* Chip */
   --eds-color-interactive-icon-raised-disabled: var(--eds-color-slate-grey-1000); /* Chip */
-  --eds-color-interactive-icon-standard-quaternary-enabled-active-hover: var(--eds-color-moss-green-300); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-enabled-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-enabled-hover: var(--eds-color-slate-grey-500); /* Toggle button */
-  --eds-color-interactive-icon-standard-quaternary-enabled-initial: var(--eds-color-slate-grey-600); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-active-hover: var(--eds-color-moss-green-300); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-hover: var(--eds-color-slate-grey-500); /* Toggle button */
+  --eds-color-interactive-icon-standard-quaternary-initial: var(--eds-color-slate-grey-600); /* Toggle button */
   --eds-color-interactive-icon-standard-quaternary-disabled: var(--eds-color-slate-grey-1000); /* Disabled Toggle button */
-  --eds-color-interactive-icon-standard-tertiary-enabled-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-enabled-active: var(--eds-color-moss-green-sat-500); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-enabled-hover: var(--eds-color-slate-grey-500); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-tertiary-enabled-initial: var(--eds-color-slate-grey-600); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-active: var(--eds-color-moss-green-sat-500); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-hover: var(--eds-color-slate-grey-500); /* Sidebar menu */
+  --eds-color-interactive-icon-standard-tertiary-initial: var(--eds-color-slate-grey-600); /* Sidebar menu */
   --eds-color-interactive-icon-standard-tertiary-disabled: var(--eds-color-slate-grey-1000); /* Sidebar menu */
-  --eds-color-interactive-icon-standard-secondary-enabled-active-hover: var(--eds-color-moss-green-sat-100); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-enabled-active: var(--eds-color-moss-green-sat-200); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-enabled-hover: var(--eds-color-slate-grey-500); /* Sidebar link */
-  --eds-color-interactive-icon-standard-secondary-enabled-initial: var(--eds-color-slate-grey-600); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-active-hover: var(--eds-color-moss-green-sat-100); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-active: var(--eds-color-moss-green-sat-200); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-hover: var(--eds-color-slate-grey-500); /* Sidebar link */
+  --eds-color-interactive-icon-standard-secondary-initial: var(--eds-color-slate-grey-600); /* Sidebar link */
   --eds-color-interactive-icon-standard-secondary-disabled: var(--eds-color-slate-grey-1000); /* Sidebar link */
-  --eds-color-interactive-icon-standard-primary-enabled-active-hover: var(--eds-color-neutral-1500); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-enabled-active: var(--eds-color-neutral-1500); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-enabled-hover: var(--eds-color-slate-grey-600); /* Toggle button */
-  --eds-color-interactive-icon-standard-primary-enabled-initial: var(--eds-color-slate-grey-600); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-active-hover: var(--eds-color-neutral-1500); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-active: var(--eds-color-neutral-1500); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-hover: var(--eds-color-slate-grey-600); /* Toggle button */
+  --eds-color-interactive-icon-standard-primary-initial: var(--eds-color-slate-grey-600); /* Toggle button */
   --eds-color-interactive-icon-standard-primary-disabled: var(--eds-color-slate-grey-1000); /* Disabled Toggle button */
-  --eds-color-interactive-text-raised-enabled-active-hover: var(--eds-color-moss-green-sat-200); /* Chip */
-  --eds-color-interactive-text-raised-enabled-active: var(--eds-color-moss-green-sat-300); /* Chip */
-  --eds-color-interactive-text-raised-enabled-hover: var(--eds-color-slate-grey-400); /* Chip */
-  --eds-color-interactive-text-raised-enabled-initial: var(--eds-color-slate-grey-500); /* Chip */
+  --eds-color-interactive-text-raised-active-hover: var(--eds-color-moss-green-sat-200); /* Chip */
+  --eds-color-interactive-text-raised-active: var(--eds-color-moss-green-sat-300); /* Chip */
+  --eds-color-interactive-text-raised-hover: var(--eds-color-slate-grey-400); /* Chip */
+  --eds-color-interactive-text-raised-initial: var(--eds-color-slate-grey-500); /* Chip */
   --eds-color-interactive-text-raised-disabled: var(--eds-color-slate-grey-1000); /* Chip */
-  --eds-color-interactive-text-standard-quaternary-enabled-active-hover: var(--eds-color-moss-green-sat-300); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-enabled-active: var(--eds-color-moss-green-sat-500); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-enabled-hover: var(--eds-color-slate-grey-500); /* Tab */
-  --eds-color-interactive-text-standard-quaternary-enabled-initial: var(--eds-color-slate-grey-600); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-active-hover: var(--eds-color-moss-green-sat-300); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-active: var(--eds-color-moss-green-sat-500); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-hover: var(--eds-color-slate-grey-500); /* Tab */
+  --eds-color-interactive-text-standard-quaternary-initial: var(--eds-color-slate-grey-600); /* Tab */
   --eds-color-interactive-text-standard-quaternary-disabled: var(--eds-color-slate-grey-1000); /* Disabled Tab */
-  --eds-color-interactive-text-standard-tertiary-enabled-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-enabled-active: var(--eds-color-moss-green-sat-500); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-enabled-hover: var(--eds-color-slate-grey-500); /* Sidebar link */
-  --eds-color-interactive-text-standard-tertiary-enabled-initial: var(--eds-color-slate-grey-600); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-active: var(--eds-color-moss-green-sat-500); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-hover: var(--eds-color-slate-grey-500); /* Sidebar link */
+  --eds-color-interactive-text-standard-tertiary-initial: var(--eds-color-slate-grey-600); /* Sidebar link */
   --eds-color-interactive-text-standard-tertiary-disabled: var(--eds-color-slate-grey-1000); /* Disabled Sidebar link */
-  --eds-color-interactive-text-standard-secondary-enabled-active-hover: var(--eds-color-moss-green-sat-100); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-enabled-active: var(--eds-color-moss-green-sat-200); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-enabled-hover: var(--eds-color-slate-grey-500); /* Sidebar link */
-  --eds-color-interactive-text-standard-secondary-enabled-initial: var(--eds-color-slate-grey-600); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-active-hover: var(--eds-color-moss-green-sat-100); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-active: var(--eds-color-moss-green-sat-200); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-hover: var(--eds-color-slate-grey-500); /* Sidebar link */
+  --eds-color-interactive-text-standard-secondary-initial: var(--eds-color-slate-grey-600); /* Sidebar link */
   --eds-color-interactive-text-standard-secondary-disabled: var(--eds-color-slate-grey-1000); /* Disabled Sidebar link */
-  --eds-color-interactive-text-standard-primary-enabled-active-hover: var(--eds-color-neutral-1500); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-enabled-active: var(--eds-color-neutral-1500); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-enabled-hover: var(--eds-color-slate-grey-500); /* Toggle button */
-  --eds-color-interactive-text-standard-primary-enabled-initial: var(--eds-color-slate-grey-600); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-active-hover: var(--eds-color-neutral-1500); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-active: var(--eds-color-neutral-1500); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-hover: var(--eds-color-slate-grey-500); /* Toggle button */
+  --eds-color-interactive-text-standard-primary-initial: var(--eds-color-slate-grey-600); /* Toggle button */
   --eds-color-interactive-text-standard-primary-disabled: var(--eds-color-slate-grey-1000); /* Disabled Toggle button */
   --eds-color-static-surface-standard-on-level-3: var(--eds-color-slate-blue-1300);
   --eds-color-static-surface-standard-on-level-2: var(--eds-color-slate-blue-1350);

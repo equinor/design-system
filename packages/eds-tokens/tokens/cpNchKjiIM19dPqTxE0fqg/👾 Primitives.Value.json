@@ -8,12 +8,12 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "GAP",
-            "WIDTH_HEIGHT",
-            "OPACITY",
+            "TEXT_CONTENT",
             "CORNER_RADIUS",
+            "WIDTH_HEIGHT",
+            "GAP",
             "EFFECT_FLOAT",
-            "TEXT_CONTENT"
+            "OPACITY"
           ],
           "codeSyntax": {}
         }

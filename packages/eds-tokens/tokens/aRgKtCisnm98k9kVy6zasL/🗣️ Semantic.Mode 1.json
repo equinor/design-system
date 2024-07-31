@@ -52,8 +52,8 @@
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
+                "FRAME_FILL",
+                "SHAPE_FILL"
               ],
               "codeSyntax": {}
             }
@@ -70,8 +70,8 @@
               "com.figma": {
                 "hiddenFromPublishing": false,
                 "scopes": [
-                  "SHAPE_FILL",
-                  "FRAME_FILL"
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
                 ],
                 "codeSyntax": {}
               }
@@ -132,8 +132,8 @@
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
+                "FRAME_FILL",
+                "SHAPE_FILL"
               ],
               "codeSyntax": {}
             }
@@ -191,8 +191,8 @@
             "com.figma": {
               "hiddenFromPublishing": false,
               "scopes": [
-                "SHAPE_FILL",
-                "FRAME_FILL"
+                "FRAME_FILL",
+                "SHAPE_FILL"
               ],
               "codeSyntax": {}
             }
@@ -211,8 +211,8 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
             "codeSyntax": {
               "WEB": "--eds-ui-main-color-surface"
@@ -230,8 +230,8 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
             "codeSyntax": {
               "WEB": "--eds-ui-shell-color-surface"
@@ -265,8 +265,8 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
             "codeSyntax": {
               "WEB": "--eds-ui-floating-color-surface"
@@ -284,8 +284,8 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
             "codeSyntax": {
               "WEB": "--eds-ui-scrim-color-surface"
@@ -347,8 +347,8 @@
           "com.figma": {
             "hiddenFromPublishing": false,
             "scopes": [
-              "SHAPE_FILL",
-              "FRAME_FILL"
+              "FRAME_FILL",
+              "SHAPE_FILL"
             ],
             "codeSyntax": {}
           }
@@ -405,8 +405,8 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
           "codeSyntax": {}
         }
@@ -448,7 +448,7 @@
       "message": {
         "text": {
           "$type": "color",
-          "$value": "{input.helper.color.message.text}",
+          "$value": "{input.helper.text}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -464,7 +464,7 @@
         },
         "icon": {
           "$type": "color",
-          "$value": "{input.helper.color.message.icon}",
+          "$value": "{input.helper.icon}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -594,8 +594,8 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
           "codeSyntax": {}
         }
@@ -653,8 +653,8 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
           "codeSyntax": {}
         }
@@ -672,7 +672,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-text-${appearance-action}-${prominence-action}-${system-state}-${user-state-action}"
+          }
         }
       }
     },
@@ -686,7 +688,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-icon-${appearance-action}-${prominence-action}-${system-state}-${user-state-action}"
+          }
         }
       }
     },
@@ -700,7 +704,9 @@
           "scopes": [
             "STROKE_COLOR"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-border-${appearance-action}-${prominence-action}-${system-state}-${user-state-action}"
+          }
         }
       }
     },
@@ -712,10 +718,12 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "--eds-color-action-surface-${appearance-action}-${prominence-action}-${system-state}-${user-state-action}"
+          }
         }
       }
     }
@@ -771,8 +779,8 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "SHAPE_FILL",
-            "FRAME_FILL"
+            "FRAME_FILL",
+            "SHAPE_FILL"
           ],
           "codeSyntax": {}
         }
