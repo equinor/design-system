@@ -12,6 +12,7 @@
     },
     "./tokens.css": "./tokens.css",
     "./elements.css": "./elements.css",
+    "./legacy-colors-override.css": "./legacy-colors-override.css",
     "./css/variables.css": "./build/css/variables-trimmed.min.css",
     "./css/variables-verbose.css": "./build/css/variables-verbose.min.css",
     "./css/color/primitives.css": "./build/css/color/primitives-trimmed.css",
