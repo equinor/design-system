@@ -52,7 +52,7 @@ export function DateSegment({
   const value =
     segment.isPlaceholder || segment.type === 'literal'
       ? segment.text
-      : part?.value ?? segment.text
+      : (part?.value ?? segment.text)
 
   const [focus, setFocus] = useState(false)
   const ref = useRef(null)

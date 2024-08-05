@@ -520,7 +520,7 @@ const TableWrapper = styled.div<{
   height: ${({ $height }) => addPxSuffixIfInputHasNoPrefix($height) ?? 'auto'};
   width: ${({ $scrollbarHorizontal, $width }) =>
     $scrollbarHorizontal
-      ? addPxSuffixIfInputHasNoPrefix($width) ?? '100%'
+      ? (addPxSuffixIfInputHasNoPrefix($width) ?? '100%')
       : 'auto'};
   overflow: auto;
   contain: ${({ $height, $width }) =>
