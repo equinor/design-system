@@ -133,7 +133,7 @@ const findIndex: IndexFinderType = ({
   availableItems,
 }) => {
   const nextItem = availableItems[index]
-  if (optionDisabled(nextItem)) {
+  if (optionDisabled(nextItem) && index >= 0 && index < availableItems.length) {
     const nextIndex = calc(index)
     return findIndex({ calc, index: nextIndex, availableItems, optionDisabled })
   }

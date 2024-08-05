@@ -331,6 +331,35 @@ describe('Autocomplete', () => {
     expect(input).toHaveValue('')
   })
 
+  it('Correctly handles keypresses up/down when all options are disabled', async () => {
+    render(
+      <Autocomplete
+        options={items}
+        label={labelText}
+        // Somewhat contrived condition to emulate a scenario where an undefined item would return true for the 'option' being disabled
+        optionDisabled={(item) => item !== items[0]}
+      />,
+    )
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+
+    fireEvent.keyDown(input, { key: 'ArrowDown' })
+    const options = await within(optionsList).findAllByRole('option')
+    expect(options).toHaveLength(1) // since all but one options are disabled
+
+    fireEvent.change(input, {
+      target: { value: 'asfsggsdhfj' },
+    })
+    const optionsAfterSearch = within(optionsList).queryAllByRole('option')
+    expect(optionsAfterSearch).toHaveLength(0) // since all are filtered out
+
+    // Prevent regression: key up/down when options are disabled causes infinite loop
+    fireEvent.keyDown(input, { key: 'ArrowDown' })
+    fireEvent.blur(input)
+    expect(input).toHaveValue('')
+  })
+
   const StyledAutocomplete = styled(Autocomplete)`
     clip-path: unset;
   `
