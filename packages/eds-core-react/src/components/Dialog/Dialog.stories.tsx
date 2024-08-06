@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useArgs } from '@storybook/preview-api'
-import { Dialog, DialogProps, Button, Radio, Typography } from '../..'
+import { Dialog, DialogProps, Button, Radio, Typography, Tooltip } from '../..'
 import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
@@ -121,7 +121,9 @@ export const Dismissable: StoryFn<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={handleClose}>OK</Button>
+            <Tooltip title="A tooltip inside dialog" placement="top">
+              <Button onClick={handleClose}>OK</Button>
+            </Tooltip>
             <Button variant="ghost" onClick={handleClose}>
               Cancel
             </Button>

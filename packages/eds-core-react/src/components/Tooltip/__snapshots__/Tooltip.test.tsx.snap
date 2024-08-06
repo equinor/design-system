@@ -2,6 +2,9 @@
 
 exports[`Tooltip Matches snapshot 1`] = `
 .c0 {
+  inset: unset;
+  border: 0;
+  overflow: visible;
   margin: 0;
   color: var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1));
   font-family: Equinor;
@@ -15,7 +18,6 @@ exports[`Tooltip Matches snapshot 1`] = `
   padding-bottom: 8px;
   border-radius: 4px;
   background: var(--eds_ui_background__overlay, rgba(0, 0, 0, 0.8));
-  z-index: 1500;
   white-space: nowrap;
 }
 
@@ -28,6 +30,10 @@ exports[`Tooltip Matches snapshot 1`] = `
   overflow: hidden;
   padding: 0;
   position: absolute;
+}
+
+.c0::backdrop {
+  background-color: transparent;
 }
 
 .c1 {
@@ -47,6 +53,7 @@ exports[`Tooltip Matches snapshot 1`] = `
 <div
   class="c0"
   id=":r0:"
+  popover="manual"
   role="tooltip"
   style="position: absolute; top: 14px; left: 8px;"
   tabindex="-1"
