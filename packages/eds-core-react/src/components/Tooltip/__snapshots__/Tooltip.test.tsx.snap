@@ -4,8 +4,6 @@ exports[`Tooltip Matches snapshot 1`] = `
 .c0 {
   inset: unset;
   border: 0;
-  padding: 0;
-  margin: 0;
   overflow: visible;
   margin: 0;
   color: var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1));
