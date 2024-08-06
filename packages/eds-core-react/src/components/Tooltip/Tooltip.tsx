@@ -14,7 +14,7 @@ import {
   typographyTemplate,
   bordersTemplate,
   mergeRefs,
-  useIsInDialog,
+  useIsomorphicLayoutEffect,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 import {
@@ -30,18 +30,19 @@ import {
   useFocus,
   useRole,
   useDismiss,
-  FloatingPortal,
 } from '@floating-ui/react'
 
-const StyledTooltip = styled.div`
+const StyledTooltip = styled('div').withConfig({
+  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
+})<{ popover: string }>`
+  inset: unset;
+  border: 0;
+  overflow: visible;
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   ${bordersTemplate(tokens.border)}
-
   background: ${tokens.background};
-  z-index: 1500;
   white-space: nowrap;
-
   &::before {
     content: '; Has tooltip: ';
     clip-path: inset(50%);
@@ -51,6 +52,9 @@ const StyledTooltip = styled.div`
     overflow: hidden;
     padding: 0;
     position: absolute;
+  }
+  &::backdrop {
+    background-color: transparent;
   }
 `
 
@@ -171,11 +175,15 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }),
     })
 
-    //temporary fix for tooltip inside dialog. Should be replaced by popover api when it is ready
-    const inDialog = useIsInDialog(refs.domReference.current)
+    useIsomorphicLayoutEffect(() => {
+      if (shouldOpen && open) {
+        refs.floating.current?.showPopover()
+      }
+    }, [open, shouldOpen, refs.floating])
 
     const TooltipEl = (
       <StyledTooltip
+        popover="manual"
         {...rest}
         {...getFloatingProps({
           ref: tooltipRef,
@@ -198,13 +206,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {inDialog ? (
-          <>{shouldOpen && open && TooltipEl}</>
-        ) : (
-          <FloatingPortal id="eds-tooltip-container">
-            {shouldOpen && open && TooltipEl}
-          </FloatingPortal>
-        )}
+        {shouldOpen && open && TooltipEl}
         {updatedChildren}
       </>
     )
