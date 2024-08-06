@@ -160,10 +160,10 @@ export const TooltipOnButton: StoryFn<TooltipProps> = () => (
     <Tooltip title="This is what a tooltip looks like">
       <Button>Hover me</Button>
     </Tooltip>
-    <Tooltip title="This tooltip only shows for people using firefox and using mouse. Don't do this!">
+    <Tooltip title="This tooltip only shows for people using mouse. Don't do this!">
       <Button disabled>Disabled button</Button>
     </Tooltip>
-    <Tooltip title="Tooltip works in all browsers and with keyboard navigation when using aria-disabled">
+    <Tooltip title="Tooltip works with keyboard navigation when using aria-disabled">
       <Button aria-disabled>Aria-disabled button</Button>
     </Tooltip>
   </>
