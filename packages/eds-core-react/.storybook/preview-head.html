@@ -2,6 +2,12 @@
   rel="stylesheet"
   href="https://cdn.eds.equinor.com/font/equinor-font.css"
 />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+  rel="stylesheet"
+/>
 
 <style>
   html {
@@ -10,8 +16,30 @@
   .sb-show-main {
     min-height: 100%;
   }
-  .sbdocs.sbdocs *:not(code):not(.token) {
-    font-family: Equinor, sans-serif !important;
+  body {
+    :has(.hide-grid-lines__input:checked) {
+      --baseline-grid-color: transparent;
+    }
+  }
+
+  .hide-grid-lines {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    cursor: pointer;
+    input {
+      margin: 0;
+      cursor: inherit;
+    }
+  }
+  /*.sbdocs.sbdocs *:not(code):not(.token) {
+    font-family: Equinor, sans-serif;
+  }*/
+  @scope (body) to (.docs-story) {
+    :scope * {
+      font-family: Equinor, sans-serif;
+    }
   }
   .sbdocs.sbdocs-a {
     font-size: inherit;

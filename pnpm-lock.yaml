@@ -90,8 +90,8 @@ importers:
         specifier: workspace:^
         version: link:../eds-icons
       '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
+        specifier: 1.0.0-beta-2
+        version: 1.0.0-beta-2
       '@equinor/eds-utils':
         specifier: workspace:*
         version: link:../eds-utils
@@ -158,13 +158,13 @@ importers:
         version: 8.1.11(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
       '@storybook/react-vite':
         specifier: ^8.1.11
-        version: 8.1.11(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.3(@types/node@22.1.0)(terser@5.31.3))
+        version: 8.1.11(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.3))
       '@testing-library/dom':
         specifier: ^10.3.1
         version: 10.3.1
       '@testing-library/jest-dom':
         specifier: ^6.4.6
-        version: 6.4.6(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@22.1.0)(ts-node@10.9.2(@types/node@22.1.0)(typescript@5.5.3)))
+        version: 6.4.6(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3)))
       '@testing-library/react':
         specifier: 16.0.0
         version: 16.0.0(@testing-library/dom@10.3.1)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -191,7 +191,7 @@ importers:
         version: 2.1.4(@babel/core@7.24.7)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@22.1.0)(ts-node@10.9.2(@types/node@22.1.0)(typescript@5.5.3))
+        version: 29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0
@@ -227,7 +227,7 @@ importers:
         version: 2.0.0
       rollup-plugin-postcss:
         specifier: ^4.0.2
-        version: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@types/node@22.1.0)(typescript@5.5.3))
+        version: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))
       storybook:
         specifier: ^8.1.11
         version: 8.1.11(@babel/preset-env@7.24.7(@babel/core@7.24.7))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -244,7 +244,7 @@ importers:
   packages/eds-data-grid-react:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: workspace:>=0.36.0
+        specifier: workspace:>=0.36.0 || ^1.0.0-beta.1
         version: link:../eds-core-react
       '@equinor/eds-icons':
         specifier: workspace:^
@@ -668,7 +668,7 @@ importers:
         version: 10.3.1
       '@testing-library/jest-dom':
         specifier: ^6.4.6
-        version: 6.4.6(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3)))
+        version: 6.4.6(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@22.1.0)(ts-node@10.9.2(@types/node@22.1.0)(typescript@5.5.3)))
       '@testing-library/react':
         specifier: ^16.0.0
         version: 16.0.0(@testing-library/dom@10.3.1)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -698,7 +698,7 @@ importers:
         version: 2.1.4(@babel/core@7.24.7)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))
+        version: 29.7.0(@types/node@22.1.0)(ts-node@10.9.2(@types/node@22.1.0)(typescript@5.5.3))
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0
@@ -1539,6 +1539,9 @@ packages:
     resolution: {integrity: sha512-jT/qyKZ9rzLErtrjGgdkMBn2OP8wl0G3sQlBb3YPryvKHsjvINUhVaPFfP+fpBcOkmrVOVEEHQFJ7nbj2TH2gw==}
     peerDependencies:
       react: '>=16.8.0'
+
+  '@equinor/eds-tokens@1.0.0-beta-2':
+    resolution: {integrity: sha512-cVtdhQi/nptL6wsr5oqBVcBGKerKrb/TyKLMY/740NE4yWSWvqJoT24GvbUK5DdLrqOpAQm3esl11kM3cDpf5g==}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -8958,6 +8961,8 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  '@equinor/eds-tokens@1.0.0-beta-2': {}
+
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
 
@@ -11524,6 +11529,7 @@ snapshots:
   '@types/node@22.1.0':
     dependencies:
       undici-types: 6.13.0
+    optional: true
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -14649,7 +14655,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.1.0
+      '@types/node': 20.14.10
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -16815,7 +16821,8 @@ snapshots:
 
   undici-types@5.26.5: {}
 
-  undici-types@6.13.0: {}
+  undici-types@6.13.0:
+    optional: true
 
   unicode-canonical-property-names-ecmascript@2.0.0: {}
 
