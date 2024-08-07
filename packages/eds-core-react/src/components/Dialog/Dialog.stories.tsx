@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { useArgs } from '@storybook/preview-api'
-import { Dialog, DialogProps, Button, Radio, Typography, Tooltip } from '../..'
+import {
+  Dialog,
+  DialogProps,
+  Button,
+  Radio,
+  Typography,
+  Tooltip,
+  Snackbar,
+} from '../..'
 import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
@@ -99,6 +107,7 @@ export const Introduction: StoryFn<DialogProps> = (args) => {
 
 export const Dismissable: StoryFn<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [snackbar, setSnackbar] = useState(false)
   const handleOpen = () => {
     setIsOpen(true)
   }
@@ -110,6 +119,13 @@ export const Dismissable: StoryFn<DialogProps> = () => {
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
+      <Snackbar
+        open={snackbar}
+        onClose={() => setSnackbar(false)}
+        autoHideDuration={5000}
+      >
+        Snackbar in front of scrim!
+      </Snackbar>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
         <Dialog.Header>
           <Dialog.Title>Dismissable dialog</Dialog.Title>
@@ -118,6 +134,9 @@ export const Dismissable: StoryFn<DialogProps> = () => {
           <Typography variant="body_short">
             Closes dialog on click outside and escape key.
           </Typography>
+          <Button variant="outlined" onClick={() => setSnackbar(true)}>
+            Show a snackbar
+          </Button>
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>

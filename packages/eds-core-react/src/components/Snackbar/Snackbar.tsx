@@ -1,5 +1,4 @@
-import { useState, useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
-import * as ReactDom from 'react-dom'
+import { useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { snackbar as SnackbarToken } from './Snackbar.tokens'
 import {
@@ -12,6 +11,7 @@ import { Paper } from '../Paper'
 import { useEds } from '../EdsProvider'
 
 type StyledProps = {
+  popover: string
   $placement?:
     | 'left'
     | 'right'
@@ -23,17 +23,16 @@ type StyledProps = {
     | 'bottom-right'
 }
 
-const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, $placement }) => {
+const PopoverDiv = styled('div').withConfig({
+  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
+})<StyledProps>(({ theme, $placement }) => {
   return css`
+    inset: unset;
+    border: 0;
+    overflow: visible;
     position: fixed;
-    background-color: ${theme.background};
-    ${spacingsTemplate(theme.spacings)}
-    ${bordersTemplate(theme.border)}
-    ${typographyTemplate(theme.typography)}
-    min-height: ${theme.minHeight};
-    box-sizing: border-box;
-    z-index: 1400;
-
+    padding: 0;
+    background-color: transparent;
     ${{
       top: $placement.includes('top')
         ? theme.spacings.top
@@ -54,7 +53,20 @@ const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, $placement }) => {
             ? 'translateX(-50%)'
             : undefined,
     }}
+    &::backdrop {
+      background-color: transparent;
+    }
+  `
+})
 
+const StyledSnackbar = styled(Paper)(({ theme }) => {
+  return css`
+    background-color: ${theme.background};
+    ${spacingsTemplate(theme.spacings)}
+    ${bordersTemplate(theme.border)}
+    ${typographyTemplate(theme.typography)}
+    min-height: ${theme.minHeight};
+    box-sizing: border-box;
     a,
     button {
       color: ${theme.entities.button.typography.color};
@@ -93,25 +105,26 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
     },
     ref,
   ) {
-    const [visible, setVisible] = useState(open)
+    const popoverRef = useRef<HTMLDivElement | null>(null)
     const timer = useRef<ReturnType<typeof setTimeout>>()
 
     useEffect(() => {
-      setVisible(open)
       if (open) {
+        popoverRef.current?.showPopover()
         timer.current = setTimeout(() => {
-          setVisible(false)
+          popoverRef.current?.hidePopover()
           if (onClose) {
             onClose()
           }
         }, autoHideDuration)
+      } else {
+        popoverRef.current?.hidePopover()
       }
       return () => clearTimeout(timer.current)
-    }, [open, autoHideDuration, setVisible, onClose])
+    }, [open, autoHideDuration, onClose])
 
     const props = {
       ref,
-      $placement: placement,
       ...rest,
     }
     const { density } = useEds()
@@ -119,13 +132,13 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
 
     return (
       <ThemeProvider theme={token}>
-        {visible &&
-          ReactDom.createPortal(
+        {open && (
+          <PopoverDiv popover="manual" $placement={placement} ref={popoverRef}>
             <StyledSnackbar role="alert" elevation="overlay" {...props}>
               {children}
-            </StyledSnackbar>,
-            document.body,
-          )}
+            </StyledSnackbar>
+          </PopoverDiv>
+        )}
       </ThemeProvider>
     )
   },
