@@ -122,7 +122,7 @@ export const Dismissable: StoryFn<DialogProps> = () => {
       <Snackbar
         open={snackbar}
         onClose={() => setSnackbar(false)}
-        autoHideDuration={5000}
+        autoHideDuration={2000}
       >
         Snackbar in front of scrim!
       </Snackbar>

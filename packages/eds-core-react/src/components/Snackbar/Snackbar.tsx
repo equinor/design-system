@@ -1,4 +1,4 @@
-import { useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
+import { useEffect, HTMLAttributes, forwardRef, useRef, useState } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { snackbar as SnackbarToken } from './Snackbar.tokens'
 import {
@@ -105,23 +105,21 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
     },
     ref,
   ) {
-    const popoverRef = useRef<HTMLDivElement | null>(null)
+    const [visible, setVisible] = useState(open)
     const timer = useRef<ReturnType<typeof setTimeout>>()
 
     useEffect(() => {
+      setVisible(open)
       if (open) {
-        popoverRef.current?.showPopover()
         timer.current = setTimeout(() => {
-          popoverRef.current?.hidePopover()
+          setVisible(false)
           if (onClose) {
             onClose()
           }
         }, autoHideDuration)
-      } else {
-        popoverRef.current?.hidePopover()
       }
       return () => clearTimeout(timer.current)
-    }, [open, autoHideDuration, onClose])
+    }, [open, setVisible, autoHideDuration, onClose])
 
     const props = {
       ref,
@@ -132,8 +130,12 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
 
     return (
       <ThemeProvider theme={token}>
-        {open && (
-          <PopoverDiv popover="manual" $placement={placement} ref={popoverRef}>
+        {visible && (
+          <PopoverDiv
+            popover="manual"
+            $placement={placement}
+            ref={(el) => el?.showPopover()}
+          >
             <StyledSnackbar role="alert" elevation="overlay" {...props}>
               {children}
             </StyledSnackbar>
