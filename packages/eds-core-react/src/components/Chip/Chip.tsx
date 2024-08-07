@@ -39,10 +39,15 @@ const StyledChips = styled.div.attrs<StyleProps>(
   grid-gap: 8px;
   grid-auto-flow: column;
   grid-auto-columns: max-content;
-  align-items: center;
+  align-items: end;
 
   svg {
     fill: ${typography.color};
+    align-self: center;
+  }
+
+  & > div {
+    align-self: center;
   }
 
   &:focus {
