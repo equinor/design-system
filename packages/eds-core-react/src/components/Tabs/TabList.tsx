@@ -49,7 +49,7 @@ const StyledTabList = styled.div.attrs(
   @media (hover: none) {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: 0;
+    scrollbar-width: none;
     & ::-webkit-scrollbar {
       width: 0;
       height: 0;
