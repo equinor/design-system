@@ -84,10 +84,15 @@ describe('Snackbar', () => {
         {message}
       </Snackbar>,
     )
-    expect(screen.getByTestId('test-snackbar-3')).toHaveStyleRule(
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('test-snackbar-3').parentElement).toHaveStyleRule(
       'top',
       tokens.spacings.top,
     )
-    expect(screen.getByTestId('test-snackbar-3')).toHaveStyleRule('left', '50%')
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('test-snackbar-3').parentElement).toHaveStyleRule(
+      'left',
+      '50%',
+    )
   })
 })

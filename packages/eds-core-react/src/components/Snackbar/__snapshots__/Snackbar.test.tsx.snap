@@ -7,7 +7,6 @@ exports[`Snackbar Matches snapshot 1`] = `
 }
 
 .c1 {
-  position: fixed;
   background-color: var(--eds_ui_background__overlay, rgba(0, 0, 0, 0.8));
   padding-left: 16px;
   padding-top: 16px;
@@ -23,10 +22,6 @@ exports[`Snackbar Matches snapshot 1`] = `
   text-align: left;
   min-height: 48px;
   box-sizing: border-box;
-  z-index: 1400;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .c1 a,
