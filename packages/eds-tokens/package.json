@@ -95,6 +95,6 @@
     "rimraf": "^5.0.8",
     "rollup": "^4.20.0",
     "rollup-plugin-delete": "^2.0.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }

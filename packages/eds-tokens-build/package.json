@@ -42,7 +42,7 @@
     "prettier": "3.3.3",
     "style-dictionary": "3.8.0",
     "style-dictionary-utils": "^2.4.1",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "engines": {
     "pnpm": ">=8",
