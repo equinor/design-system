@@ -256,8 +256,8 @@ importers:
         specifier: workspace:^
         version: link:../eds-utils
       '@tanstack/react-table':
-        specifier: ^8.19.2
-        version: 8.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^8.20.1
+        version: 8.20.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-virtual':
         specifier: ^3.8.4
         version: 3.8.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2747,8 +2747,8 @@ packages:
   '@swc/helpers@0.5.12':
     resolution: {integrity: sha512-KMZNXiGibsW9kvZAO1Pam2JPTDBm+KSHMMHWdsyI/1DbIZjT2A6Gy3hblVXUMEDvUAKq+e0vL0X0o54owWji7g==}
 
-  '@tanstack/react-table@8.19.2':
-    resolution: {integrity: sha512-itoSIAkA/Vsg+bjY23FSemcTyPhc5/1YjYyaMsr9QSH/cdbZnQxHVWrpWn0Sp2BWN71qkzR7e5ye8WuMmwyOjg==}
+  '@tanstack/react-table@8.20.1':
+    resolution: {integrity: sha512-PJK+07qbengObe5l7c8vCdtefXm8cyR4i078acWrHbdm8JKw1ES7YpmOtVt9ALUVEEFAHscdVpGRhRgikgFMbQ==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16.8'
@@ -2760,8 +2760,8 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  '@tanstack/table-core@8.19.2':
-    resolution: {integrity: sha512-KpRjhgehIhbfH78ARm/GJDXGnpdw4bCg3qas6yjWSi7czJhI/J6pWln7NHtmBkGE9ZbohiiNtLqwGzKmBfixig==}
+  '@tanstack/table-core@8.20.1':
+    resolution: {integrity: sha512-5Ly5TIRHnWH7vSDell9B/OVyV380qqIJVg7H7R7jU4fPEmOD4smqAX7VRflpYI09srWR8aj5OLD2Ccs1pI5mTg==}
     engines: {node: '>=12'}
 
   '@tanstack/virtual-core@3.8.4':
@@ -10161,9 +10161,9 @@ snapshots:
     dependencies:
       tslib: 2.6.3
 
-  '@tanstack/react-table@8.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-table@8.20.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tanstack/table-core': 8.19.2
+      '@tanstack/table-core': 8.20.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -10173,7 +10173,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@tanstack/table-core@8.19.2': {}
+  '@tanstack/table-core@8.20.1': {}
 
   '@tanstack/virtual-core@3.8.4': {}
 
