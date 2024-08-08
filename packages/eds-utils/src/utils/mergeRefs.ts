@@ -8,7 +8,6 @@ export const mergeRefs = <T extends HTMLElement>(
       if (typeof ref === 'function') {
         ref(element)
       } else if (ref && typeof ref === 'object') {
-        // eslint-disable-next-line @typescript-eslint/no-extra-semi
         ;(ref as MutableRefObject<T | null>).current = element
       }
     })

@@ -525,7 +525,7 @@ function AutocompleteInner<T>(
       try {
         // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return item?.toString()
-      } catch (error) {
+      } catch {
         throw new Error(
           'Unable to find label, make sure your are using options as documented',
         )

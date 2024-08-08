@@ -15,6 +15,7 @@ describe('Search', () => {
   })
   it('Should pass a11y test', async () => {
     /** workaround the console error */
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { getComputedStyle } = window
     window.getComputedStyle = (elt) => getComputedStyle(elt)
 
