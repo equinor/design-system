@@ -93,10 +93,10 @@
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react": "^0.26.22",
     "@internationalized/date": "^3.5.5",
-    "@react-aria/utils": "^3.24.1",
+    "@react-aria/utils": "^3.25.1",
     "@react-stately/calendar": "^3.5.3",
-    "@react-stately/datepicker": "^3.9.4",
-    "@react-types/shared": "^3.23.1",
+    "@react-stately/datepicker": "^3.10.1",
+    "@react-types/shared": "^3.24.1",
     "@tanstack/react-virtual": "3.8.4",
     "downshift": "9.0.7",
     "react-aria": "^3.33.1"
