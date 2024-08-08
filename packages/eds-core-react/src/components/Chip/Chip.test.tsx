@@ -26,7 +26,7 @@ describe('Chips', () => {
     const { asFragment: asFragment2 } = render(
       <Chip
         onClick={() => {
-          jest.fn
+          jest.fn()
         }}
       >
         <Icon data={add} />

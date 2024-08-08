@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import styled from 'styled-components'
 import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'

@@ -100,6 +100,14 @@ module.exports = {
         'react/no-array-index-key': ['error'],
         'react/no-typos': ['error'],
         'react/destructuring-assignment': ['error', 'always'],
+        '@typescript-eslint/no-unused-expressions': [
+          'error',
+          {
+            allowShortCircuit: true,
+            enforceForJSX: true,
+            allowTernary: true,
+          },
+        ],
         // 'jsx-a11y/accessible-emoji': ['warn'],
         // 'jsx-a11y/control-has-associated-label': ['warn'],
         'jsx-a11y/label-has-associated-control': [

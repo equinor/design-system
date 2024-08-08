@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 enum KEY {
   Escape = 'Escape',
   Enter = 'Enter',
