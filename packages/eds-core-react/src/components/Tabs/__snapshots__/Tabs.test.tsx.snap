@@ -120,7 +120,7 @@ exports[`Tabs Matches snapshot 1`] = `
   .c0 {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: 0;
+    scrollbar-width: none;
   }
 
   .c0 ::-webkit-scrollbar {
