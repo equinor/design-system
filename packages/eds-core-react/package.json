@@ -91,7 +91,7 @@
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
-    "@floating-ui/react": "^0.26.19",
+    "@floating-ui/react": "^0.26.22",
     "@internationalized/date": "^3.5.4",
     "@react-aria/utils": "^3.24.1",
     "@react-stately/calendar": "^3.5.1",
