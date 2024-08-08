@@ -117,8 +117,8 @@ importers:
         specifier: 3.8.4
         version: 3.8.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       downshift:
-        specifier: 9.0.6
-        version: 9.0.6(react@18.3.1)
+        specifier: 9.0.7
+        version: 9.0.7(react@18.3.1)
       react-aria:
         specifier: ^3.33.1
         version: 3.33.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -431,8 +431,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       downshift:
-        specifier: 9.0.6
-        version: 9.0.6(react@18.3.1)
+        specifier: 9.0.7
+        version: 9.0.7(react@18.3.1)
       react-datepicker:
         specifier: ^6.2.0
         version: 6.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4162,8 +4162,8 @@ packages:
     resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
     engines: {node: '>=12'}
 
-  downshift@9.0.6:
-    resolution: {integrity: sha512-lkqWh0eb34XuH+3z3/BH/LGVRV7ur0rielSlxtlQKsjAFF/wc/c0wsM9phUGXyzK2g1QWHoNHQyc+vVAheI17Q==}
+  downshift@9.0.7:
+    resolution: {integrity: sha512-B6JY4sJGEl9xBEJEvC/C+QYYYtPWN5RL+TlROJQfue9+ZFgrD/p1ZgGw73I0WSTNH9/h5q3LIKQA4FLd/N10vg==}
     peerDependencies:
       react: '>=16.12.0'
 
@@ -12052,7 +12052,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   camelcase@5.3.1: {}
 
@@ -12076,7 +12076,7 @@ snapshots:
   capital-case@1.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
       upper-case-first: 2.0.2
 
   chalk@2.4.2:
@@ -12108,7 +12108,7 @@ snapshots:
       path-case: 3.0.4
       sentence-case: 3.0.4
       snake-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   char-regex@1.0.2: {}
 
@@ -12228,7 +12228,7 @@ snapshots:
   constant-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
       upper-case: 2.0.2
 
   content-disposition@0.5.4:
@@ -12612,11 +12612,11 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   dotenv@16.4.5: {}
 
-  downshift@9.0.6(react@18.3.1):
+  downshift@9.0.7(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.7
       compute-scroll-into-view: 3.1.0
@@ -13469,7 +13469,7 @@ snapshots:
   header-case@2.0.4:
     dependencies:
       capital-case: 1.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   html-encoding-sniffer@3.0.0:
     dependencies:
@@ -14479,7 +14479,7 @@ snapshots:
 
   lower-case@2.0.2:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   lru-cache@10.4.0: {}
 
@@ -14631,7 +14631,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   node-cleanup@2.1.2: {}
 
@@ -14838,7 +14838,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   parent-module@1.0.1:
     dependencies:
@@ -14860,14 +14860,14 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   path-browserify@1.0.1: {}
 
   path-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   path-exists@3.0.0: {}
 
@@ -15666,7 +15666,7 @@ snapshots:
   sentence-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
       upper-case-first: 2.0.2
 
   serialize-javascript@6.0.2:
@@ -15740,7 +15740,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   source-map-js@1.2.0: {}
 
@@ -16329,11 +16329,11 @@ snapshots:
 
   upper-case-first@2.0.2:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   upper-case@2.0.2:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   uri-js@4.4.1:
     dependencies:
