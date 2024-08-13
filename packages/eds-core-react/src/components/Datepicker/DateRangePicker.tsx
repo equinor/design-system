@@ -160,6 +160,7 @@ export const DateRangePicker = forwardRef(
     return (
       <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
         <FieldWrapper
+          {...props}
           isOpen={isOpen}
           color={state.isInvalid ? 'warning' : props.variant}
           helperProps={helperProps ?? props.helperProps}
