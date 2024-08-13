@@ -28,6 +28,7 @@ const StyledListItem = styled.li<StyledListItemType>(
       user-select: none;
       overflow: hidden;
       touch-action: manipulation;
+      z-index: 3;
       cursor: ${$highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}

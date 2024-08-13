@@ -33,7 +33,7 @@ export const MenuSection = memo(function MenuSection(props: MenuSectionProps) {
         </div>
       )}
       {title && (
-        <Header>
+        <Header role="group">
           <Typography group="navigation" variant="label">
             {title}
           </Typography>

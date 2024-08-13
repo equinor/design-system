@@ -1,6 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu Matches snapshot 1`] = `
+.c1 {
+  border: 0;
+  background-color: transparent;
+  width: auto;
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+  margin: 0;
+  color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.000em;
+  letter-spacing: 0.013em;
+  text-align: left;
+  padding-left: 24px;
+  padding-top: 16px;
+  padding-right: 24px;
+  padding-bottom: 16px;
+}
+
+.c1:focus-visible {
+  z-index: 3;
+  outline: 2px dashed var(--eds_interactive__focus, rgba(0, 112, 121, 1));
+  outline-offset: 2px;
+}
+
+.c2 {
+  width: auto;
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content auto max-content;
+  align-items: center;
+}
+
 .c0 {
   position: relative;
   list-style: none;
@@ -17,14 +53,27 @@ exports[`Menu Matches snapshot 1`] = `
   z-index: 3;
 }
 
+@media (hover:hover) and (pointer:fine) {
+  .c1:hover {
+    cursor: pointer;
+    background: var(--eds_interactive_table__header__fill_hover, rgba(220, 220, 220, 1));
+  }
+}
+
 <div
   class="c0"
   role="menu"
 >
-  <div
-    index="0"
+  <button
+    class="c1"
+    role="menuitem"
+    tabindex="0"
   >
-    some random content
-  </div>
+    <div
+      class="c2"
+    >
+      Item 1
+    </div>
+  </button>
 </div>
 `;

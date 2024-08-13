@@ -22,6 +22,7 @@ exports[`Autocomplete Matches snapshot 1`] = `
   user-select: none;
   overflow: hidden;
   touch-action: manipulation;
+  z-index: 3;
   cursor: default;
   margin: 0;
   color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));

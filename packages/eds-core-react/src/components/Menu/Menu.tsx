@@ -1,5 +1,5 @@
 import { useEffect, HTMLAttributes, forwardRef, useMemo } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
@@ -9,7 +9,6 @@ import {
   useToken,
   bordersTemplate,
   useIsomorphicLayoutEffect,
-  useIsInDialog,
 } from '@equinor/eds-utils'
 import { menu as tokens } from './Menu.tokens'
 import { useEds } from '../EdsProvider'
@@ -22,25 +21,31 @@ import {
   useFloating,
   useInteractions,
   useDismiss,
-  FloatingPortal,
   size,
   Middleware,
   MiddlewareState,
 } from '@floating-ui/react'
 
-type MenuPaperProps = {
-  open: boolean
-}
-
 const { border } = tokens
 
-const MenuPaper = styled(Paper)<MenuPaperProps>`
-  position: absolute;
-  z-index: 1400;
-  width: fit-content;
+const MenuPaper = styled(Paper)`
+  width: 100%;
   min-width: fit-content;
   ${bordersTemplate(border)};
-  ${({ open }) => css({ display: open ? 'block' : 'none' })};
+`
+
+const StyledPopover = styled('div').withConfig({
+  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
+})<{ popover: string }>`
+  inset: unset;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  background-color: transparent;
+  &::backdrop {
+    background-color: transparent;
+  }
 `
 
 const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
@@ -191,12 +196,19 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     }
   }, [refs.reference, refs.floating, update, open])
 
+  useIsomorphicLayoutEffect(() => {
+    if (open) {
+      refs.floating.current?.showPopover()
+    } else {
+      refs.floating.current?.hidePopover()
+    }
+  }, [open, refs.floating])
+
   const { getFloatingProps } = useInteractions([
     useDismiss(context, { escapeKey: false }),
   ])
 
   const props = {
-    open,
     className,
   }
 
@@ -207,14 +219,10 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     open,
   }
 
-  //temporary fix when inside dialog. Should be replaced by popover api when it is ready
-  const inDialog = useIsInDialog(anchorEl)
-
-  const menuElement = (
+  return (
     <ThemeProvider theme={token}>
-      <MenuPaper
-        elevation="raised"
-        {...props}
+      <StyledPopover
+        popover="manual"
         {...getFloatingProps({
           ref: popoverRef,
           style: {
@@ -225,20 +233,12 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
           },
         })}
       >
-        <MenuProvider>
-          <MenuContainer {...menuProps} ref={ref} />
-        </MenuProvider>
-      </MenuPaper>
+        <MenuPaper elevation="raised" {...props}>
+          <MenuProvider>
+            <MenuContainer {...menuProps} ref={ref} />
+          </MenuProvider>
+        </MenuPaper>
+      </StyledPopover>
     </ThemeProvider>
-  )
-
-  return (
-    <>
-      {inDialog ? (
-        menuElement
-      ) : (
-        <FloatingPortal id="eds-menu-container">{menuElement}</FloatingPortal>
-      )}
-    </>
   )
 })
