@@ -714,7 +714,6 @@ function AutocompleteInner<T>(
       selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
-
         switch (type) {
           case useCombobox.stateChangeTypes.InputClick:
             return {
@@ -834,9 +833,9 @@ function AutocompleteInner<T>(
   // MARK: popover toggle
   useIsomorphicLayoutEffect(() => {
     if (isOpen) {
-      refs.floating.current.showPopover()
+      refs.floating.current?.showPopover()
     } else {
-      refs.floating.current.hidePopover()
+      refs.floating.current?.hidePopover()
     }
   }, [isOpen, refs.floating])
 
