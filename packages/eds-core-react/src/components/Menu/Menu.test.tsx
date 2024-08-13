@@ -18,7 +18,7 @@ describe('Menu', () => {
   it('Matches snapshot', async () => {
     render(
       <StyledMenu open>
-        <div>some random content</div>
+        <Menu.Item>Item 1</Menu.Item>
       </StyledMenu>,
     )
 
@@ -26,7 +26,7 @@ describe('Menu', () => {
 
     expect(menuContainer).toMatchSnapshot()
   })
-  it('Should pass a11y test', async () => {
+  it('Should not pass a11y test with div as child', async () => {
     const { container } = render(
       <TestMenu open>
         <div>some random content</div>
@@ -34,7 +34,7 @@ describe('Menu', () => {
     )
     await act(async () => {
       const results = await axe(container)
-      expect(results).toHaveNoViolations()
+      expect(results).not.toHaveNoViolations()
     })
   })
   it('Should pass a11y test with Item', async () => {
