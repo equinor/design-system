@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.41.0] - 2024-08-14
+
+### Fixed
+
+- 🐛 `DateRangePicker`: Added missing `{...props}` spread that prevented attaching eventlisteners etc to this component by @oddvernes in https://github.com/equinor/design-system/pull/3584
+- 🐛 `Autocomplete`: fixed an edge case where it would crash when all items in filter are disabled by @mhwaage in https://github.com/equinor/design-system/pull/3565
+- 🐛 `Autocomplete`: fixed a bug where it was unclickable inside `Menu` by @oddvernes in https://github.com/equinor/design-system/pull/3583
+- 🩹 `Tabs`: Fix firefox error message caused by invalid value for scrollbar-width by @Benjamin-Lyon in https://github.com/equinor/design-system/pull/3578
+- ♿️ `Menu`: added missing `role="group"` to `Menu.Section` by @oddvernes in https://github.com/equinor/design-system/pull/3583
+
+### Changed
+
+- 💄 `Tooltip`: implement native `popover` by @oddvernes in https://github.com/equinor/design-system/pull/3575
+- 💄 `Snackbar`: implement native `popover` by @oddvernes in https://github.com/equinor/design-system/pull/3577
+- 💄`Menu`: implement native `popover` by @oddvernes in https://github.com/equinor/design-system/pull/3583
+- ⬆️ Updated dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3579
+
 ## [0.40.1] - 2024-07-10
 
 ### Fixed
