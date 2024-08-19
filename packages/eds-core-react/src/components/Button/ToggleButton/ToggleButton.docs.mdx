@@ -72,3 +72,10 @@ Multiple selection allows for logically-grouped options, to have multiple option
 To controll at least one button to be active, you can adapt your `handleChange` function with `selectedIndexes` prop.
 
 <Canvas of={ComponentStories.Controlled} />
+
+### Wrapped Buttons
+
+Be sure to pass on props when wrapping the Button, since `Button.Toggle` uses this to update its childrens state
+
+<Canvas of={ComponentStories.Wrapped} />
+
