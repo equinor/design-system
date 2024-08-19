@@ -9,7 +9,7 @@ import {
   isValidElement,
   AllHTMLAttributes,
 } from 'react'
-import { Button, ButtonProps } from '../Button'
+import { ButtonProps } from '../Button'
 import { Tooltip } from '../../Tooltip'
 import { ButtonGroupProps, ButtonGroup } from '../ButtonGroup'
 
@@ -44,7 +44,7 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
       index: number,
     ) {
       const childElement = child as ReactElement<AllHTMLAttributes<HTMLElement>>
-      if (isValidElement(child) && child.type === Button) {
+      if (isValidElement(child)) {
         const buttonProps: ButtonProps = {
           'aria-pressed': isSelected ? true : undefined,
           variant: isSelected ? 'contained' : 'outlined',

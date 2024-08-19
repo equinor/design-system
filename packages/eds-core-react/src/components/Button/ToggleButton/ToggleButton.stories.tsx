@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ComponentProps } from 'react'
 import { Button, ToggleButtonProps, Icon, Tooltip } from '../../..'
 import {
   save,
@@ -119,6 +119,22 @@ export const Controlled: StoryFn<ToggleButtonProps> = () => {
       <Button aria-label="alarm">
         <Icon data={alarm} title="Ghost icon alarm"></Icon>
       </Button>
+    </Button.Toggle>
+  )
+}
+
+export const Wrapped: StoryFn<ToggleButtonProps> = () => {
+  type ButtonProps = ComponentProps<typeof Button> &
+    JSX.IntrinsicAttributes & { title: string }
+
+  const ButtonWrapper = ({ title, ...props }: ButtonProps) => {
+    return <Button {...props}>{title}</Button>
+  }
+  return (
+    <Button.Toggle aria-label="wrapper example">
+      <ButtonWrapper title="Hello" />
+      <ButtonWrapper title="world" />
+      <ButtonWrapper title="foo" />
     </Button.Toggle>
   )
 }
