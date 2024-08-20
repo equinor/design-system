@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.41.1] - 2024-08-20
+
+### Changed
+
+- 🧑‍💻`Button.Toggle`: allow "wrapped" Button as child by @oddvernes in https://github.com/equinor/design-system/pull/3590
+
+### Fixed
+
+- 🐛`Snackbar`: fixed "auto hide" timer restarting every render by @oddvernes in https://github.com/equinor/design-system/pull/3591
+
 ## [0.41.0] - 2024-08-14
 
 ### Fixed
