@@ -80,3 +80,42 @@ export const WithAction: StoryFn<SnackbarProps> = () => {
   )
 }
 WithAction.storyName = 'With action'
+
+export const TimerRegressionTest: StoryFn<SnackbarProps> = () => {
+  const [message, setMessage] = useState({ open: false, text: '' })
+  const [data, setData] = useState(0)
+
+  const handleClick = () => {
+    setMessage({ open: !message.open, text: 'Hello, World!' })
+  }
+
+  const handleDataClick = () => {
+    setData(data + 1)
+  }
+
+  return (
+    <>
+      <div>
+        <Button onClick={() => handleClick()}>Show Snackbar</Button>
+        <Button
+          style={{ marginLeft: '10px' }}
+          onClick={() => handleDataClick()}
+        >
+          Data + {data}
+        </Button>
+      </div>
+
+      <Snackbar
+        open={message.open}
+        onClose={() => setMessage({ open: false, text: '' })}
+        autoHideDuration={2000}
+      >
+        {message.text}
+      </Snackbar>
+    </>
+  )
+}
+TimerRegressionTest.storyName =
+  'Test to ensure timer stays consistent across rerenders'
+//hide this story from sidebar
+TimerRegressionTest.tags = ['!dev']

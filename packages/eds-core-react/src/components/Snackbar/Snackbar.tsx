@@ -119,7 +119,8 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
         }, autoHideDuration)
       }
       return () => clearTimeout(timer.current)
-    }, [open, setVisible, autoHideDuration, onClose])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open, autoHideDuration])
 
     const props = {
       ref,
