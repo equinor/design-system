@@ -34,6 +34,8 @@ export const RangeCalendar = forwardRef(
     ref: RefObject<HTMLDivElement>,
   ) => {
     const [showYearPicker, setShowYearPicker] = useState(false)
+    const [yearPickerPage, setYearPickerPage] = useState(0)
+
     const { locale } = useLocale()
     const state = useRangeCalendarState({
       ...props,
@@ -64,6 +66,7 @@ export const RangeCalendar = forwardRef(
               title={title}
               setShowYearPicker={setShowYearPicker}
               showYearPicker={showYearPicker}
+              setYearPickerPage={setYearPickerPage}
             />
           )}
         </Popover.Header>
@@ -72,6 +75,8 @@ export const RangeCalendar = forwardRef(
             state={state}
             setShowYearPicker={setShowYearPicker}
             showYearPicker={showYearPicker}
+            yearPickerPage={yearPickerPage}
+            setYearPickerPage={setYearPickerPage}
           />
         </Popover.Content>
         {Footer && (

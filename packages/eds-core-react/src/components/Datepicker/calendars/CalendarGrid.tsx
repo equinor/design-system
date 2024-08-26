@@ -4,6 +4,7 @@ import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria'
 import { getWeeksInMonth } from '@internationalized/date'
 import { CalendarCell } from './CalendarCell'
 import { YearGrid } from './YearGrid'
+import { Dispatch, SetStateAction } from 'react'
 
 /**
  * The grid laying out the cells for the calendars in {link Calendar} and {link RangeCalendar}
@@ -12,11 +13,15 @@ export function CalendarGrid({
   state,
   showYearPicker,
   setShowYearPicker,
+  yearPickerPage,
+  setYearPickerPage,
   ...props
 }: {
   state: CalendarState | RangeCalendarState
   showYearPicker: boolean
   setShowYearPicker: (showYearPicker: boolean) => void
+  yearPickerPage: number
+  setYearPickerPage: Dispatch<SetStateAction<number>>
 } & AriaCalendarGridProps) {
   const { locale } = useLocale()
   const { gridProps, headerProps, weekDays } = useCalendarGrid(
@@ -35,6 +40,8 @@ export function CalendarGrid({
         state.setFocusedDate(state.focusedDate.set({ year }))
         setShowYearPicker(false)
       }}
+      yearPickerPage={yearPickerPage}
+      setYearPickerPage={setYearPickerPage}
     />
   ) : (
     <table {...gridProps} style={{ borderSpacing: '0px' }}>
