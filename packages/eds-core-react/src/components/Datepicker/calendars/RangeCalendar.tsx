@@ -76,6 +76,7 @@ export const RangeCalendar = forwardRef(
             setShowYearPicker={setShowYearPicker}
             showYearPicker={showYearPicker}
             yearPickerPage={yearPickerPage}
+            setYearPickerPage={setYearPickerPage}
           />
         </Popover.Content>
         {Footer && (

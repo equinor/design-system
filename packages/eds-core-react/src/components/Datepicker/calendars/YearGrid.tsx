@@ -3,7 +3,13 @@
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { FocusScope, useFocusManager } from 'react-aria'
-import { KeyboardEvent } from 'react'
+import {
+  Dispatch,
+  KeyboardEvent,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react'
 
 const Grid = styled.div`
   display: grid;
@@ -45,26 +51,67 @@ const GridFocusManager = ({
   year: selectedYear,
   setFocusedYear,
   yearPickerPage,
+  setYearPickerPage,
 }: {
   setFocusedYear: (year: number) => void
   year: number
   yearPickerPage?: number
+  setYearPickerPage?: Dispatch<SetStateAction<number>>
 }) => {
   const focusManager = useFocusManager()
-  const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+
+  const prevYear = useRef<number | undefined>()
+  const page = yearPickerPage * TOTAL_VISIBLE_YEARS
+
+  const years = Array.from(
+    { length: TOTAL_VISIBLE_YEARS },
+    (_, i) => i + (selectedYear + page - RANGE_OFFSET),
+  )
+
+  useEffect(() => {
+    if (prevYear.current === undefined) {
+      prevYear.current = yearPickerPage
+      return
+    }
+
+    yearPickerPage > prevYear.current
+      ? focusManager.focusFirst()
+      : focusManager.focusLast()
+
+    prevYear.current = yearPickerPage
+  }, [yearPickerPage, focusManager])
+
+  const onKeyDown = (year: number) => (e: KeyboardEvent<HTMLButtonElement>) => {
     const target = e.currentTarget
     const parent = target.parentElement as HTMLDivElement
+
+    const isFirstYear = years.at(0) === year
+    const isLastYear = years.at(-1) === year
+
+
     switch (e.key) {
       case 'ArrowRight':
         e.preventDefault()
+        if (isLastYear) {
+          setYearPickerPage((page) => page + 1)
+          break
+        }
         focusManager.focusNext({ wrap: true })
         break
       case 'ArrowLeft':
         e.preventDefault()
+        if (isFirstYear) {
+          setYearPickerPage((page) => page - 1)
+          break
+        }
         focusManager.focusPrevious({ wrap: true })
         break
       case 'ArrowDown': {
         e.preventDefault()
+        if (isLastYear) {
+          setYearPickerPage((page) => page + 1)
+          break
+        }
         const selfIndex = Array.from(parent.children).indexOf(target)
         const focusElement = Array.from(parent.children).at(selfIndex + 5)
         focusManager.focusNext({ from: focusElement })
@@ -72,6 +119,10 @@ const GridFocusManager = ({
       }
       case 'ArrowUp': {
         e.preventDefault()
+        if (isFirstYear) {
+          setYearPickerPage((page) => page - 1)
+          break
+        }
         const selfIndex = Array.from(parent.children).indexOf(target)
         const focusElement = Array.from(parent.children).at(selfIndex - 5)
         focusManager.focusPrevious({ from: focusElement })
@@ -80,16 +131,10 @@ const GridFocusManager = ({
     }
   }
 
-  const page = yearPickerPage * TOTAL_VISIBLE_YEARS
-
-  const years = Array.from(
-    { length: TOTAL_VISIBLE_YEARS },
-    (_, i) => i + (selectedYear + page - RANGE_OFFSET),
-  )
   return years.map((year) => (
     <GridColumn
       $active={selectedYear === year}
-      onKeyDown={onKeyDown}
+      onKeyDown={onKeyDown(year)}
       onClick={() => setFocusedYear(year)}
       aria-label={`Set year to ${year}`}
       tabIndex={0}
@@ -104,10 +149,12 @@ export const YearGrid = ({
   setFocusedYear,
   year: selectedYear,
   yearPickerPage,
+  setYearPickerPage,
 }: {
   setFocusedYear: (year: number) => void
   year: number
   yearPickerPage: number
+  setYearPickerPage?: Dispatch<SetStateAction<number>>
 }) => {
   return (
     <Grid>
@@ -116,6 +163,7 @@ export const YearGrid = ({
           year={selectedYear}
           setFocusedYear={setFocusedYear}
           yearPickerPage={yearPickerPage}
+          setYearPickerPage={setYearPickerPage}
         />
       </FocusScope>
     </Grid>
