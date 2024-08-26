@@ -1,4 +1,5 @@
-import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
+import StyleDictionary from 'style-dictionary-utils'
+import type { TransformedToken } from 'style-dictionary/types'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
@@ -39,7 +40,7 @@ const lightDarkTransform: StyleDictionary.Transform = {
   type: 'value',
   transitive: true,
   matcher: isColor,
-  transformer: (token: StyleDictionary.TransformedToken, options) => {
+  transformer: (token: TransformedToken, options) => {
     const path = token.path.join('/')
     const darkValue =
       darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
@@ -76,7 +77,7 @@ const densitySpaceToggleTransform: StyleDictionary.Transform = {
   type: 'value',
   transitive: true,
   matcher: isNumber,
-  transformer: (token: StyleDictionary.TransformedToken, options) => {
+  transformer: (token: TransformedToken, options) => {
     const path = token.path.join('/')
     const comfortableValue =
       spacingComfortableTokens['💎 Density.Comfortable.json']?.[`${path}`]?.[
