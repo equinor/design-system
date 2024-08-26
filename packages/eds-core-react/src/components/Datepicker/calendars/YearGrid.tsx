@@ -61,6 +61,8 @@ const GridFocusManager = ({
   const focusManager = useFocusManager()
 
   const prevYear = useRef<number | undefined>()
+  const navByKeyboard = useRef<boolean>(false)
+
   const page = yearPickerPage * TOTAL_VISIBLE_YEARS
 
   const years = Array.from(
@@ -73,6 +75,13 @@ const GridFocusManager = ({
       prevYear.current = yearPickerPage
       return
     }
+
+    if (!navByKeyboard.current) {
+      focusManager.focusFirst()
+      return
+    }
+
+    navByKeyboard.current = false
 
     yearPickerPage > prevYear.current
       ? focusManager.focusFirst()
@@ -88,11 +97,11 @@ const GridFocusManager = ({
     const isFirstYear = years.at(0) === year
     const isLastYear = years.at(-1) === year
 
-
     switch (e.key) {
       case 'ArrowRight':
         e.preventDefault()
         if (isLastYear) {
+          navByKeyboard.current = true
           setYearPickerPage((page) => page + 1)
           break
         }
@@ -101,6 +110,7 @@ const GridFocusManager = ({
       case 'ArrowLeft':
         e.preventDefault()
         if (isFirstYear) {
+          navByKeyboard.current = true
           setYearPickerPage((page) => page - 1)
           break
         }
@@ -109,6 +119,7 @@ const GridFocusManager = ({
       case 'ArrowDown': {
         e.preventDefault()
         if (isLastYear) {
+          navByKeyboard.current = true
           setYearPickerPage((page) => page + 1)
           break
         }
@@ -120,6 +131,7 @@ const GridFocusManager = ({
       case 'ArrowUp': {
         e.preventDefault()
         if (isFirstYear) {
+          navByKeyboard.current = true
           setYearPickerPage((page) => page - 1)
           break
         }
