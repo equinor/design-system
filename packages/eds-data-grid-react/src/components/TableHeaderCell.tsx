@@ -132,7 +132,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
             {flexRender(header.column.columnDef.header, header.getContext())}
           </span>
         </div>
-        {header.column.columnDef.meta?.customFilterInput && (
+        {!header.column.columnDef.meta?.customFilterInput && (
           <SortIndicator column={header.column} />
         )}
 
