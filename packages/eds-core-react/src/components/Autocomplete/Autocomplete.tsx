@@ -610,9 +610,14 @@ function AutocompleteInner<T>(
             if (selectedItem === AllSymbol) {
               toggleAllSelected()
             } else if (multiple) {
-              selectedItems.includes(selectedItem)
-                ? removeSelectedItem(selectedItem)
-                : addSelectedItem(selectedItem)
+              const shouldRemove = itemCompare
+                ? selectedItems.some((i) => itemCompare(selectedItem, i))
+                : selectedItems.includes(selectedItem)
+              if (shouldRemove) {
+                removeSelectedItem(selectedItem)
+              } else {
+                addSelectedItem(selectedItem)
+              }
             } else {
               setSelectedItems([selectedItem])
             }
