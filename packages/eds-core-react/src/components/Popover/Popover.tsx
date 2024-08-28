@@ -14,7 +14,7 @@ import {
   mergeRefs,
   useToken,
   outlineTemplate,
-  useIsInDialog,
+  useIsomorphicLayoutEffect,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
@@ -28,7 +28,6 @@ import {
   useFloating,
   useInteractions,
   useDismiss,
-  FloatingPortal,
   FloatingFocusManager,
 } from '@floating-ui/react'
 
@@ -38,22 +37,35 @@ const PopoverPaper = styled(Paper)(({ theme }) => {
   } = theme
 
   return css`
+    position: relative;
     ${typographyTemplate(theme.typography)}
     background: ${theme.background};
     ${bordersTemplate(theme.border)}
-    z-index: 1400;
     &:focus-visible {
       ${outlineTemplate(paper.states.focus.outline)}
     }
   `
 })
 
+const StyledPopover = styled('div').withConfig({
+  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
+})<{ popover: string }>`
+  inset: unset;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  background-color: transparent;
+  &::backdrop {
+    background-color: transparent;
+  }
+`
+
 const ArrowWrapper = styled.div(({ theme }) => {
   return css`
     position: absolute;
     width: ${theme.entities.arrow.width};
     height: ${theme.entities.arrow.height};
-    z-index: -1;
   `
 })
 
@@ -91,7 +103,9 @@ export type PopoverProps = {
   anchorEl?: HTMLElement | null
   /** Is Popover open */
   open: boolean
-  /** initializes react portal for dropdown, default to false. */
+  /**
+   * @deprecated  Popover now uses the native popover api instead of react portal. This prop will be removed in a future version
+   */
   withinPortal?: boolean
   /** Determines whether focus should be trapped within dropdown,
    * default to false. */
@@ -113,6 +127,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     },
     ref,
   ) {
+    if (withinPortal) {
+      console.warn(
+        'Popover "withinPortal" prop has been deprecated. Popover now uses the native popover api',
+      )
+    }
     const arrowRef = useRef<HTMLDivElement>(null)
 
     const {
@@ -145,6 +164,14 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     )
 
     const { getFloatingProps } = useInteractions([useDismiss(context)])
+
+    useIsomorphicLayoutEffect(() => {
+      if (open) {
+        refs.floating.current?.showPopover()
+      } else {
+        refs.floating.current?.hidePopover()
+      }
+    }, [open, refs.floating])
 
     useEffect(() => {
       if (arrowRef.current) {
@@ -183,21 +210,16 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }, [arrowRef.current, arrowX, arrowY, finalPlacement])
 
     const props = {
-      open,
       ...rest,
     }
 
     const { density } = useEds()
     const token = useToken({ density }, popoverToken)
 
-    //temporary fix when inside dialog. Should be replaced by popover api when it is ready
-    const inDialog = useIsInDialog(anchorEl)
-
     const popover = (
       <ThemeProvider theme={token}>
-        <PopoverPaper
-          elevation="overlay"
-          {...props}
+        <StyledPopover
+          popover="manual"
           {...getFloatingProps({
             ref: popoverRef,
             style: {
@@ -208,39 +230,27 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             },
           })}
         >
-          <ArrowWrapper ref={arrowRef} className="arrow">
-            <PopoverArrow className="arrowSvg">
-              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-            </PopoverArrow>
-          </ArrowWrapper>
-          <InnerWrapper>{children}</InnerWrapper>
-        </PopoverPaper>
+          <PopoverPaper elevation="overlay" {...props}>
+            <ArrowWrapper ref={arrowRef} className="arrow">
+              <PopoverArrow className="arrowSvg">
+                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+              </PopoverArrow>
+            </ArrowWrapper>
+            <InnerWrapper>{children}</InnerWrapper>
+          </PopoverPaper>
+        </StyledPopover>
       </ThemeProvider>
     )
 
     return (
       <>
-        {withinPortal && !inDialog ? (
-          <FloatingPortal id="eds-popover-container">
-            {open && trapFocus
-              ? open && (
-                  <FloatingFocusManager context={context} modal={true}>
-                    {popover}
-                  </FloatingFocusManager>
-                )
-              : open && popover}
-          </FloatingPortal>
-        ) : (
-          <>
-            {trapFocus
-              ? open && (
-                  <FloatingFocusManager context={context} modal={true}>
-                    {popover}
-                  </FloatingFocusManager>
-                )
-              : open && popover}
-          </>
-        )}
+        {trapFocus
+          ? open && (
+              <FloatingFocusManager context={context} modal={true}>
+                {popover}
+              </FloatingFocusManager>
+            )
+          : open && popover}
       </>
     )
   },
