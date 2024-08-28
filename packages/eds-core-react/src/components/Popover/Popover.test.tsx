@@ -62,19 +62,15 @@ describe('Popover', () => {
 
     await waitFor(() => expect(container).toHaveStyleRule('background', 'red'))
   })
-  it('is visible when open is true & anchorEl is set', async () => {
+  it('is visible when open is true & anchorEl is set', () => {
     render(
       <TestPopover open placement="right-start" data-testid="popover">
         <div>some random content</div>
       </TestPopover>,
     )
-    const container = screen.getByTestId('popover')
-    await waitFor(() => {
-      expect(container).toBeDefined()
-    })
-    await waitFor(() => {
-      expect(container).toHaveAttribute('open')
-    })
+    const container = screen.queryByTestId('popover')
+    expect(container).toBeDefined()
+    expect(container).toBeVisible()
   })
 
   it('has rendered Popover Title', async () => {

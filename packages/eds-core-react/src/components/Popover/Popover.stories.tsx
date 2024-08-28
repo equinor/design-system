@@ -148,7 +148,6 @@ export const ActivateOnClick: StoryFn<PopoverProps> = () => {
         onClose={closePopover}
         open={isOpen}
         placement="top"
-        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -199,7 +198,6 @@ export const ActivateOnHover: StoryFn<PopoverProps> = () => {
         onClose={handleClose}
         open={isOpen}
         placement="top"
-        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -237,7 +235,6 @@ export const WithCloseButton: StoryFn<PopoverProps> = () => {
         open={isOpen}
         placement="top"
         trapFocus
-        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -297,7 +294,6 @@ export const PersistentPopover: StoryFn<PopoverProps> = () => {
         open={isOpen}
         placement="top"
         trapFocus
-        withinPortal
       >
         <Popover.Header>
           <Popover.Title>With Autocomplete</Popover.Title>
@@ -345,7 +341,6 @@ PersistentPopover.storyName = 'Persistent popover'
         onClose={closePopover}
         open={isOpen}
         placement="top"
-        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -404,7 +399,6 @@ export const AppLauncher: StoryFn<PopoverProps> = () => {
         onClose={closePopover}
         placement="top"
         trapFocus
-        withinPortal
       >
         <Popover.Content>
           <Wrapper>

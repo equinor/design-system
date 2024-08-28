@@ -7,6 +7,7 @@ exports[`Popover Matches snapshot 1`] = `
 }
 
 .c1 {
+  position: relative;
   margin: 0;
   color: var(--eds_ui__accordion_header_color, rgba(61, 61, 61, 1));
   font-family: Equinor;
@@ -16,7 +17,6 @@ exports[`Popover Matches snapshot 1`] = `
   text-align: left;
   background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
   border-radius: 4px;
-  z-index: 1400;
 }
 
 .c1:focus-visible {
@@ -28,7 +28,6 @@ exports[`Popover Matches snapshot 1`] = `
   position: absolute;
   width: 6px;
   height: 8px;
-  z-index: -1;
 }
 
 .c5 {
@@ -55,9 +54,6 @@ exports[`Popover Matches snapshot 1`] = `
 <div
   class="c0 c1 c2"
   data-testid="popover"
-  open=""
-  style="position: absolute; top: 14px; left: 8px;"
-  tabindex="-1"
 >
   <div
     class="c3 arrow"
