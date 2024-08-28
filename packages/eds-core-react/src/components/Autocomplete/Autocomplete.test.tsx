@@ -209,6 +209,47 @@ describe('Autocomplete', () => {
     })
   })
 
+  it('Can deselect complex options', async () => {
+    const onChange = jest.fn()
+    const opts = [
+      { label: 'Its', value: 'relationship' },
+      { label: 'Complicated', value: 'status' },
+    ]
+    render(
+      <Autocomplete
+        optionLabel={(o) => o.label}
+        itemCompare={(o1, o2) => o1.value === o2.value}
+        label={labelText}
+        options={opts}
+        data-testid="styled-autocomplete"
+        multiple={true}
+        onOptionsChange={onChange}
+        selectedOptions={[
+          {
+            label: 'Its',
+            value: 'relationship',
+          },
+        ]}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+
+    const options = await within(optionsList).findAllByRole('option')
+    fireEvent.click(options[0])
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith({ selectedItems: [] })
+    })
+  })
+
   it('Can open the options on button click', async () => {
     render(<Autocomplete options={items} label={labelText} />)
 
