@@ -289,10 +289,6 @@ export type AutocompleteProps<T> = {
   optionLabel?: (option: T) => string
   /**  Custom option template */
   optionComponent?: (option: T, isSelected: boolean) => ReactNode
-  /** Disable use of react portal for dropdown
-   * @deprecated  Autocomplete now uses the native popover api to render the dropdown. This prop will be removed in a future version
-   */
-  disablePortal?: boolean
   /** Disable option
    * @default () => false
    */
@@ -343,7 +339,6 @@ function AutocompleteInner<T>(
     itemCompare,
     allowSelectAll,
     initialSelectedOptions: _initialSelectedOptions = [],
-    disablePortal,
     optionDisabled = defaultOptionDisabled,
     optionsFilter,
     autoWidth,
@@ -375,12 +370,6 @@ function AutocompleteInner<T>(
         )
       : _initialSelectedOptions
     : undefined
-
-  if (disablePortal) {
-    console.warn(
-      'Autocomplete "disablePortal" prop has been deprecated. Autocomplete now uses the native popover api',
-    )
-  }
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
