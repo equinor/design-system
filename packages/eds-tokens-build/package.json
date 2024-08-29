@@ -40,7 +40,7 @@
     "@equinor/eds-tokens-sync": "workspace:*",
     "@types/node": "^22.1.0",
     "prettier": "3.3.3",
-    "style-dictionary": "4.0.1",
+    "style-dictionary": "^4.0.1",
     "style-dictionary-utils": "^3.1.1",
     "typescript": "^5.5.4"
   },
