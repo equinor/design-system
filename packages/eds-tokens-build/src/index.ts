@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -287,11 +288,11 @@ const _extend = ({
   selector?: string
   filter?: (token: TransformedToken) => boolean
   outputReferences?: boolean
-}): StyleDictionary.Core => {
+}) /*return type??*/ => {
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
 
-  return StyleDictionary.extend({
+  return new StyleDictionary({
     include,
     source,
     platforms: {
@@ -474,7 +475,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     outputReferences,
   })
 
-  const densityAllTrimmed = StyleDictionary.extend({
+  const densityAllTrimmed = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -491,7 +492,8 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         ],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Density']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Density']),
             destination: 'spacing-trimmed.css',
             format: 'css/variables',
             options: {
@@ -505,7 +507,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densityAllVerbose = StyleDictionary.extend({
+  const densityAllVerbose = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -522,7 +524,8 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         ],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Density']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Density']),
             destination: 'spacing-verbose.css',
             format: 'css/variables',
             options: {
@@ -536,7 +539,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densitySpaciousTrimmed = StyleDictionary.extend({
+  const densitySpaciousTrimmed = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -547,7 +550,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         transforms: cssTransforms,
         files: [
           {
-            filter: (token) =>
+            filter: (token: TransformedToken) =>
               includeTokenFilter(token, ['Density', 'Spacious']),
             destination: 'spacious-trimmed.css',
             format: 'css/variables',
@@ -562,7 +565,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densityComfortableTrimmed = StyleDictionary.extend({
+  const densityComfortableTrimmed = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     platforms: {
@@ -573,7 +576,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         transforms: cssTransforms,
         files: [
           {
-            filter: (token) =>
+            filter: (token: TransformedToken) =>
               includeTokenFilter(token, ['Density', 'Comfortable']),
             destination: 'comfortable-trimmed.css',
             format: 'css/variables',
@@ -588,7 +591,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const lightDarkColorsVerbose = StyleDictionary.extend({
+  const lightDarkColorsVerbose = new StyleDictionary({
     include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
@@ -599,7 +602,8 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         transforms: ['name/kebab', 'color/css', 'lightDark'],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Light']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Light']),
             destination: 'colors-verbose.css',
             format: 'css/variables',
             options: {
@@ -612,7 +616,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const lightDarkColorsTrimmed = StyleDictionary.extend({
+  const lightDarkColorsTrimmed = new StyleDictionary({
     include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
@@ -623,7 +627,8 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         transforms: ['name/kebab', 'color/css', 'lightDark'],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Light']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Light']),
             destination: 'colors-trimmed.css',
             format: 'css/variables',
             options: {
