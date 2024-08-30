@@ -132,7 +132,7 @@ StyleDictionary.registerTransform({
   transitive: false,
   name: 'eds/css/pxFormatted',
   filter: (token) => {
-    const isDefined = token?.value !== undefined
+    const isDefined = token?.$value !== undefined
     if (!isDefined) return false
 
     const isNumber = token.$type === 'number'
@@ -156,7 +156,7 @@ StyleDictionary.registerTransform({
   name: `eds/css/pxToRem`,
   filter: (token) => {
     if (
-      token?.value === undefined ||
+      token?.$value === undefined ||
       token.$type !== 'number' ||
       isNaN(Number(token.$value))
     ) {
@@ -192,7 +192,7 @@ StyleDictionary.registerTransform({
     const isNumber = token.$type === 'number'
     if (!isNumber) return false
 
-    const isDefined = token?.value !== undefined
+    const isDefined = token?.$value !== undefined
     if (!isDefined) return false
 
     const matchingPathSegments = [
