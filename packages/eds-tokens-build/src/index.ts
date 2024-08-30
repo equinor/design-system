@@ -69,18 +69,18 @@ StyleDictionary.registerTransform({
               `${darkValue}`,
               `${options.prefix}`,
             )
-            return `light-dark(${token.value}, ${resolvedReference})`
+            return `light-dark(${token.$value}, ${resolvedReference})`
           } else {
-            return `light-dark(${token.value}, ${darkValue})`
+            return `light-dark(${token.$value}, ${darkValue})`
           }
         }
       } else {
         //the dark value was hardcoded (color with alpha transparency)
-        return `light-dark(${token.value}, ${darkValue})`
+        return `light-dark(${token.$value}, ${darkValue})`
       }
     }
 
-    return `${token.value}`
+    return `${token.$value}`
   },
 })
 StyleDictionary.registerTransform({
@@ -107,21 +107,21 @@ StyleDictionary.registerTransform({
               `${comfortableValue}`,
               `${options.prefix}`,
             )
-            return `var(--eds--spacious, ${token.value}) var(--eds--comfortable, ${resolvedReference})`
+            return `var(--eds--spacious, ${token.$value}) var(--eds--comfortable, ${resolvedReference})`
           } else {
-            return `var(--eds--spacious, ${token.value}) var(--eds--comfortable, ${comfortableValue})`
+            return `var(--eds--spacious, ${token.$value}) var(--eds--comfortable, ${comfortableValue})`
           }
         }
       } else {
         return `var(--eds--spacious, ${
-          token.value
+          token.$value
         }) var(--eds--comfortable, ${transformNumberToRem(
           Number(comfortableValue),
         )})`
       }
     }
 
-    return `${token.value}`
+    return `${token.$value}`
   },
 })
 
@@ -145,7 +145,7 @@ StyleDictionary.registerTransform({
     )
   },
   transform: (token) => {
-    const fixedValue = toFixedWithoutTrailingZeroes(Number(token.value))
+    const fixedValue = toFixedWithoutTrailingZeroes(Number(token.$value))
     return `${fixedValue}px`
   },
 })
@@ -158,7 +158,7 @@ StyleDictionary.registerTransform({
     if (
       token?.value === undefined ||
       token.$type !== 'number' ||
-      isNaN(Number(token.value))
+      isNaN(Number(token.$value))
     ) {
       return false
     }
@@ -179,7 +179,7 @@ StyleDictionary.registerTransform({
     return isMatch
   },
   transform: (token) => {
-    return transformNumberToRem(Number(token.value))
+    return transformNumberToRem(Number(token.$value))
   },
 })
 
@@ -211,7 +211,7 @@ StyleDictionary.registerTransform({
     const size = token.path[2]
 
     if (outputReferences) {
-      return `${token.value} var(--eds-spacing-static-inline-${size})`
+      return `${token.$value} var(--eds-spacing-static-inline-${size})`
     }
 
     // Determine the density of the current token using the filePath
@@ -237,7 +237,7 @@ StyleDictionary.registerTransform({
 
     const value = spacingTokens[collectionName]?.[path]?.['$value']
 
-    return `${token.value} ${value}`
+    return `${token.$value} ${value}`
   },
 })
 
@@ -255,7 +255,7 @@ StyleDictionary.registerTransform({
     return isFontMetricInString
   },
   transform: (token) => {
-    return `"${token.value}"`
+    return `"${token.$value}"`
   },
 })
 
