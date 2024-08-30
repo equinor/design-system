@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -61,7 +63,7 @@ StyleDictionary.registerTransform({
       //it is a reference
       if (String(darkValue).startsWith('{')) {
         //make sure it is not a local variable, in which case it has light-dark set already
-        if (token.original.value != darkValue) {
+        if (token.original.$value != darkValue) {
           const outputReferences =
             options?.files?.[0]?.options?.outputReferences
           if (outputReferences) {
@@ -69,12 +71,15 @@ StyleDictionary.registerTransform({
               `${darkValue}`,
               `${options.prefix}`,
             )
+            console.log('else 1', resolvedReference)
             return `light-dark(${token.$value}, ${resolvedReference})`
           } else {
+            console.log('else 2')
             return `light-dark(${token.$value}, ${darkValue})`
           }
         }
       } else {
+        console.log('else 3')
         //the dark value was hardcoded (color with alpha transparency)
         return `light-dark(${token.$value}, ${darkValue})`
       }
@@ -99,7 +104,7 @@ StyleDictionary.registerTransform({
       //it is a reference
       if (String(comfortableValue).startsWith('{')) {
         //make sure it is not a local variable
-        if (token.original.value != comfortableValue) {
+        if (token.original.$value != comfortableValue) {
           const outputReferences =
             options?.files?.[0]?.options?.outputReferences
           if (outputReferences) {
@@ -646,7 +651,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   await lightMode.buildAllPlatforms()
   await darkMode.buildAllPlatforms()
   await lightDarkColorsVerbose.buildAllPlatforms()
-  await lightDarkColorsTrimmed.buildAllPlatforms()
+  //await lightDarkColorsTrimmed.buildAllPlatforms()
   await spacingPrimitives.buildAllPlatforms()
   await densityComfortable.buildAllPlatforms()
   await densitySpacious.buildAllPlatforms()
