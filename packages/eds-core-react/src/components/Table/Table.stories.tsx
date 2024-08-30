@@ -435,7 +435,7 @@ export const VirtualScrolling: StoryFn<TableProps> = () => {
           <Table.Row>
             <Table.Cell style={{ height: `${paddingTop}px` }}></Table.Cell>
           </Table.Row>
-          {virtualRows.map((virtualRow: VirtualItem<HTMLTableRowElement>) => {
+          {virtualRows.map((virtualRow) => {
             const row: Photo = data[virtualRow.index]
 
             return (
