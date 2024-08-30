@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react'
 import {
@@ -435,7 +435,7 @@ export const VirtualScrolling: StoryFn<TableProps> = () => {
           <Table.Row>
             <Table.Cell style={{ height: `${paddingTop}px` }}></Table.Cell>
           </Table.Row>
-          {virtualRows.map((virtualRow: VirtualItem<HTMLTableRowElement>) => {
+          {virtualRows.map((virtualRow) => {
             const row: Photo = data[virtualRow.index]
 
             return (
