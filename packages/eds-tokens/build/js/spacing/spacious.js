@@ -1,5 +1,5 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
 export const SPACING_ICON_XS_GAP_HORIZONTAL = 6.5;

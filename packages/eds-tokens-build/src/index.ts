@@ -8,9 +8,7 @@
 import type { TransformedToken } from 'style-dictionary/types'
 import {
   usesReferences,
-  outputReferencesFilter,
   outputReferencesTransformed,
-  resolveReferences,
 } from 'style-dictionary/utils'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
@@ -21,9 +19,6 @@ const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
 import { StyleDictionary } from 'style-dictionary-utils'
-
-/* const StyleDictionary = new SD()
-await StyleDictionary.hasInitialized */
 
 const {
   hooks: {
@@ -336,26 +331,18 @@ const _extend = ({
         ],
       },
       ts: {
-        transformGroup: 'js',
+        //transformGroup: 'js',
         transforms: ['name/constant'],
         buildPath: `${jsBuildPath}/${buildPath}/`,
         files: [
           {
             filter,
             destination: `${fileName}.js`,
-            options: {
-              fileHeader,
-              outputReferences,
-            },
             format: 'javascript/es6',
           },
           {
             filter,
             format: 'typescript/es6-declarations',
-            options: {
-              fileHeader,
-              outputReferences,
-            },
             destination: `${fileName}.d.ts`,
           },
         ],

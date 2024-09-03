@@ -1,5 +1,5 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
 export const COLOR_TEXT_PRIMARY_ON_LIGHT = "#3d3d3d";
