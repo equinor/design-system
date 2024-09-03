@@ -3,56 +3,7 @@
  */
 
 :root {
-  --eds-ui-scrim-color-surface: light-dark(#00000066, #00000066); /* Scrim */
-  --eds-table-header-color-interactive-surface-disabled-on-level-3: light-dark(#ffffff00, #00000000); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-2: light-dark(#ffffff00, #00000000); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-1: light-dark(#ffffff00, #00000000); /* Table header, Table data grid header */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-3: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-2: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-1: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-3: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-2: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-1: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-input-color-surface-read-only-on-level-3: light-dark(#ffffff00, #00000000);
-  --eds-input-color-surface-read-only-on-level-2: light-dark(#ffffff00, #00000000);
-  --eds-input-color-surface-read-only-on-level-1: light-dark(#ffffff00, #00000000);
-  --eds-input-color-border-disabled: light-dark(#ffffff00, #00000000); /* Autocomplete, Search, Text field */
-  --eds-color-action-surface-danger-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-danger-tertiary-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-danger-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-danger-secondary-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-muted-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-muted-tertiary-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-muted-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-muted-secondary-initial: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-standard-tertiary-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-standard-secondary-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-border-danger-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-border-danger-tertiary-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-danger-tertiary-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-muted-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-border-muted-tertiary-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-muted-tertiary-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-standard-tertiary-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-standard-tertiary-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-standard-tertiary-disabled: light-dark(#ffffff00, #00000000);
-  --eds-color-interactive-surface-standard-quaternary-active: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-initial: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-disabled: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-initial: light-dark(#ffffff00, #00000000); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-initial: light-dark(#ffffff00, #00000000); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-disabled-outlined: light-dark(#ffffff00, #00000000); /* Toggle button */
-  --eds-color-interactive-border-standard-secondary-active-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-active: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-shadow: light-dark(#00000024, #00000024); /* For use in box shadows */
+  --eds-ui-scrim-color-surface: light-dark(rgba(0, 0, 0, 0.4), #00000066); /* Scrim */
   --eds-ui-floating-color-surface: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300)); /* Recommended background color for EDS applications */
   --eds-ui-shell-color-border: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar, Topbar, Side sheet */
   --eds-ui-shell-color-surface: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350)); /* Sidebar, Side sheet, Toolbar, Top bar */
@@ -69,6 +20,9 @@
   --eds-table-header-color-static-text-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
   --eds-table-header-color-static-text-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
   --eds-table-header-color-static-text-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
+  --eds-table-header-color-interactive-surface-disabled-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1100)); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table header, Table data grid header */
@@ -126,6 +80,9 @@
   --eds-table-header-color-interactive-text-initial-on-level-3: light-dark(var(--eds-color-neutral-1300), var(--eds-color-neutral-0));
   --eds-table-header-color-interactive-text-initial-on-level-2: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
   --eds-table-header-color-interactive-text-initial-on-level-1: light-dark(var(--eds-color-neutral-1300), var(--eds-color-slate-grey-400));
+  --eds-table-cell-color-interactive-surface-disabled-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-3: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-2: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-1: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Table cell, Table data grid cell */
@@ -135,6 +92,9 @@
   --eds-table-cell-color-interactive-surface-hover-on-level-3: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-2: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-1: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-border-disabled-on-level-3: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
   --eds-table-cell-color-interactive-border-disabled-on-level-2: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
   --eds-table-cell-color-interactive-border-disabled-on-level-1: light-dark(var(--eds-color-neutral-300), #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
@@ -223,12 +183,16 @@
   --eds-input-color-message-border-success-read-only: var(--eds-color-success-green-900); /* Text field */
   --eds-input-color-message-border-success-focus: light-dark(var(--eds-color-lichen-green-1200), var(--eds-color-success-green-600)); /* Text field */
   --eds-input-color-message-border-success-initial: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-surface-read-only-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-input-color-surface-read-only-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-input-color-surface-read-only-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000);
   --eds-input-color-surface-disabled-on-level-3: light-dark(var(--eds-color-neutral-100), #00000047);
   --eds-input-color-surface-disabled-on-level-2: light-dark(var(--eds-color-neutral-100), #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-disabled-on-level-1: light-dark(var(--eds-color-neutral-0), #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-initial-on-level-3: light-dark(var(--eds-color-neutral-100), #00000047);
   --eds-input-color-surface-initial-on-level-2: light-dark(var(--eds-color-neutral-100), #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-initial-on-level-1: light-dark(var(--eds-color-neutral-0), #00000047); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-border-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Autocomplete, Search, Text field */
   --eds-input-color-border-focus: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Autocomplete, Search, Text field */
   --eds-input-color-border-read-only: light-dark(var(--eds-color-neutral-600), #ffffff29); /* Autocomplete, Text field */
   --eds-input-color-border-initial: light-dark(var(--eds-color-neutral-600), #ffffff29); /* Autocomplete, Text field */
@@ -350,33 +314,58 @@
   --eds-color-message-text-raised-success-initial: light-dark(var(--eds-color-lichen-green-1200), var(--eds-color-success-green-600)); /* Chip, Card, input helper */
   --eds-color-message-text-raised-info-hover: light-dark(var(--eds-color-blue-ocean-1300), var(--eds-color-blue-sky-400)); /* Chip */
   --eds-color-message-text-raised-info-initial: light-dark(var(--eds-color-blue-sky-1200), var(--eds-color-blue-sky-600)); /* Chip, Card, input helper */
+  --eds-color-message-text-standard-error: var(--eds-color-message-text-raised-error-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-message-text-standard-warning: var(--eds-color-message-text-raised-warning-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-message-text-standard-success: var(--eds-color-message-text-raised-success-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-message-text-standard-info: var(--eds-color-message-text-raised-info-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-action-surface-danger-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-danger-tertiary-hover: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1400)); /* Button */
+  --eds-color-action-surface-danger-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-surface-danger-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-danger-secondary-hover: light-dark(var(--eds-color-red-warm-300), var(--eds-color-red-cold-1400)); /* Button */
+  --eds-color-action-surface-danger-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-danger-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
   --eds-color-action-surface-danger-primary-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
   --eds-color-action-surface-danger-primary-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-surface-muted-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-muted-tertiary-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Button */
+  --eds-color-action-surface-muted-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-surface-muted-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-muted-secondary-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Button */
+  --eds-color-action-surface-muted-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-muted-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
   --eds-color-action-surface-muted-primary-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
   --eds-color-action-surface-muted-primary-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
   --eds-color-action-surface-standard-tertiary-hover: light-dark(var(--eds-color-moss-green-200), var(--eds-color-moss-green-sat-1400)); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-standard-secondary-hover: light-dark(var(--eds-color-moss-green-200), var(--eds-color-moss-green-sat-1400)); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-standard-primary-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
+  --eds-color-action-border-danger-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-border-danger-tertiary-hover: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-danger-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000);
   --eds-color-action-border-danger-secondary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
   --eds-color-action-border-danger-secondary-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
   --eds-color-action-border-danger-secondary-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
   --eds-color-action-border-danger-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
   --eds-color-action-border-danger-primary-hover: light-dark(var(--eds-color-red-cold-1200), var(--eds-color-red-warm-500)); /* Button */
   --eds-color-action-border-danger-primary-initial: light-dark(var(--eds-color-red-cold-900), var(--eds-color-red-warm-700)); /* Button */
+  --eds-color-action-border-muted-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-border-muted-tertiary-hover: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-muted-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000);
   --eds-color-action-border-muted-secondary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
   --eds-color-action-border-muted-secondary-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
   --eds-color-action-border-muted-secondary-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
   --eds-color-action-border-muted-primary-disabled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Button */
   --eds-color-action-border-muted-primary-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-500)); /* Button */
   --eds-color-action-border-muted-primary-initial: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Button */
+  --eds-color-action-border-standard-tertiary-hover: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-standard-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-standard-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000);
   --eds-color-action-border-standard-secondary-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-initial: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-disabled: light-dark(var(--eds-color-neutral-400), var(--eds-color-slate-grey-1100)); /* Button */
@@ -445,17 +434,26 @@
   --eds-color-interactive-surface-raised-initial: light-dark(var(--eds-color-neutral-200), #eaeaea1a); /* Interactive Chip */
   --eds-color-interactive-surface-raised-disabled: light-dark(var(--eds-color-neutral-200), #2e3f4c66); /* Interactive Chip (disabled) */
   --eds-color-interactive-surface-standard-quaternary-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1200)); /* Sidebar link */
+  --eds-color-interactive-surface-standard-quaternary-active: light-dark(rgba(255, 255, 255, 0), #00000000); /* Tab */
   --eds-color-interactive-surface-standard-quaternary-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Tab */
   --eds-color-interactive-surface-standard-tertiary-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1100)); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-active: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1200)); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar link */
   --eds-color-interactive-surface-standard-secondary-active-hover: light-dark(var(--eds-color-moss-green-300), var(--eds-color-mist-blue-muted-1000)); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-active: light-dark(var(--eds-color-moss-green-200), var(--eds-color-mist-blue-muted-1100)); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
   --eds-color-interactive-surface-standard-primary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300)); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-hover: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-blue-1200)); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-disabled-filled: light-dark(var(--eds-color-neutral-200), var(--eds-color-slate-grey-1300)); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-disabled-outlined: light-dark(rgba(255, 255, 255, 0), #00000000); /* Toggle button */
   --eds-color-interactive-border-raised-active-hover: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-400)); /* Chip */
   --eds-color-interactive-border-raised-active: light-dark(var(--eds-color-moss-green-400), var(--eds-color-mist-blue-muted-1200)); /* Chip */
   --eds-color-interactive-border-raised-hover: light-dark(var(--eds-color-neutral-1100), var(--eds-color-slate-grey-400)); /* Chip */
@@ -471,6 +469,11 @@
   --eds-color-interactive-border-standard-tertiary-hover: var(--eds-color-neutral-100); /* Tab */
   --eds-color-interactive-border-standard-tertiary-initial: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400)); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active-hover: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-hover: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
   --eds-color-interactive-border-standard-primary-active-hover: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
   --eds-color-interactive-border-standard-primary-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500)); /* Toggle button */
   --eds-color-interactive-border-standard-primary-hover: light-dark(var(--eds-color-neutral-900), var(--eds-color-slate-grey-600)); /* Toggle button */
@@ -536,18 +539,15 @@
   --eds-color-static-border-standard-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
   --eds-color-static-border-inverted: light-dark(var(--eds-color-border-inverted-on-light), var(--eds-color-border-inverted-on-dark));
   --eds-color-static-border-raised: light-dark(var(--eds-color-neutral-300), var(--eds-color-slate-grey-1100));
-  --eds-color-static-icon-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-color-static-text-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
-  --eds-color-message-text-standard-error: var(--eds-color-message-text-raised-error-initial); /* Deprecated - Card. Use text/message. */
-  --eds-color-message-text-standard-warning: var(--eds-color-message-text-raised-warning-initial); /* Deprecated - Card. Use text/message. */
-  --eds-color-message-text-standard-success: var(--eds-color-message-text-raised-success-initial); /* Deprecated - Card. Use text/message. */
-  --eds-color-message-text-standard-info: var(--eds-color-message-text-raised-info-initial); /* Deprecated - Card. Use text/message. */
   --eds-color-static-icon-standard-maximal: light-dark(var(--eds-color-icon-maximal-on-light), var(--eds-color-icon-maximal-on-dark));
   --eds-color-static-icon-standard-secondary: light-dark(var(--eds-color-icon-secondary-on-light), var(--eds-color-icon-secondary-on-dark));
   --eds-color-static-icon-standard-primary: light-dark(var(--eds-color-icon-primary-on-light), var(--eds-color-icon-primary-on-dark));
   --eds-color-static-icon-inverted: light-dark(var(--eds-color-icon-inverted-on-light), var(--eds-color-icon-inverted-on-dark));
+  --eds-color-static-icon-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
   --eds-color-static-text-standard-maximal: light-dark(var(--eds-color-text-maximal-on-light), var(--eds-color-text-maximal-on-dark));
   --eds-color-static-text-standard-secondary: light-dark(var(--eds-color-text-secondary-on-light), var(--eds-color-text-secondary-on-dark));
   --eds-color-static-text-standard-primary: light-dark(var(--eds-color-text-primary-on-light), var(--eds-color-text-primary-on-dark));
   --eds-color-static-text-inverted: light-dark(var(--eds-color-text-inverted-on-light), var(--eds-color-text-inverted-on-dark));
+  --eds-color-static-text-raised: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-300));
+  --eds-color-shadow: light-dark(rgba(0, 0, 0, 0.14), #00000024); /* For use in box shadows */
 }

@@ -3,7 +3,7 @@
  */
 
 :root {
-  --eds-color-shadow: light-dark(#00000024, #00000024); /* For use in box shadows */
+  --eds-color-shadow: light-dark(rgba(0, 0, 0, 0.14), #00000024); /* For use in box shadows */
   --eds-color-static-text-raised: light-dark(#007079, #b3e2e5);
   --eds-color-static-text-inverted: light-dark(#ffffff, #000000);
   --eds-color-static-text-standard-primary: light-dark(#3d3d3d, #d6d9dc);
@@ -15,12 +15,12 @@
   --eds-color-static-icon-standard-secondary: light-dark(#565656, #c2c8cc);
   --eds-color-static-icon-standard-maximal: light-dark(#3d3d3d, #ffffff);
   --eds-color-static-border-raised: light-dark(#dcdcdc, #435460);
-  --eds-color-static-border-inverted: light-dark(#000000cc, #dcf2fff2);
+  --eds-color-static-border-inverted: light-dark(rgba(0, 0, 0, 0.8), rgba(220, 242, 255, 0.95));
   --eds-color-static-border-standard-on-level-1: light-dark(#ffffff, #243746);
   --eds-color-static-border-standard-on-level-2: light-dark(#ffffff, #243746);
   --eds-color-static-border-standard-on-level-3: light-dark(#ffffff, #2c4251);
   --eds-color-static-surface-raised: light-dark(#eaeaea, #eaeaea1a);
-  --eds-color-static-surface-inverted: light-dark(#000000cc, #dcf2fff2);
+  --eds-color-static-surface-inverted: light-dark(rgba(0, 0, 0, 0.8), rgba(220, 242, 255, 0.95));
   --eds-color-static-surface-standard-on-level-1: light-dark(#ffffff, #243746);
   --eds-color-static-surface-standard-on-level-2: light-dark(#ffffff, #243746);
   --eds-color-static-surface-standard-on-level-3: light-dark(#ffffff, #2c4251);
@@ -79,11 +79,11 @@
   --eds-color-interactive-border-standard-primary-hover: light-dark(#6f6f6f, #a6afb5); /* Toggle button */
   --eds-color-interactive-border-standard-primary-active: light-dark(#007079, #97cace); /* Toggle button */
   --eds-color-interactive-border-standard-primary-active-hover: light-dark(#007079, #97cace); /* Toggle button */
-  --eds-color-interactive-border-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-active: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-active-hover: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-hover: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active-hover: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-disabled: light-dark(#f7f7f7, #132634); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-initial: light-dark(#f7f7f7, #132634); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-hover: #f7f7f7; /* Tab */
@@ -99,26 +99,26 @@
   --eds-color-interactive-border-raised-hover: light-dark(#565656, #d6d9dc); /* Chip */
   --eds-color-interactive-border-raised-active: light-dark(#b9d7da, #1e5d78); /* Chip */
   --eds-color-interactive-border-raised-active-hover: light-dark(#007079, #a6d6d9); /* Chip */
-  --eds-color-interactive-surface-standard-primary-disabled-outlined: light-dark(#ffffff00, #00000000); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-disabled-outlined: light-dark(rgba(255, 255, 255, 0), #00000000); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-disabled-filled: light-dark(#eaeaea, #2e3f4c); /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-initial: light-dark(#ffffff00, #00000000); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-hover: light-dark(#dcdcdc, #344c5b); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-active: light-dark(#007079, #97cace); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-active-hover: light-dark(#004f55, #b3e2e5); /* Toggle button */
-  --eds-color-interactive-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-initial: light-dark(#ffffff00, #00000000); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-hover: light-dark(#dcdcdc, #344c5b); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-active: light-dark(#deedee, #257193); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-active-hover: light-dark(#c9e0e2, #2b84ab); /* Sidebar menu */
-  --eds-color-interactive-surface-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-initial: light-dark(#ffffff00, #00000000); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-hover: light-dark(#dcdcdc, #344c5b); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-active: light-dark(#deedee, #1e5d78); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-active-hover: light-dark(#c9e0e2, #257193); /* Sidebar link */
-  --eds-color-interactive-surface-standard-quaternary-disabled: light-dark(#ffffff00, #00000000); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-initial: light-dark(#ffffff00, #00000000); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Tab */
   --eds-color-interactive-surface-standard-quaternary-hover: light-dark(#dcdcdc, #344c5b); /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-active: light-dark(#ffffff00, #00000000); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-active: light-dark(rgba(255, 255, 255, 0), #00000000); /* Tab */
   --eds-color-interactive-surface-standard-quaternary-active-hover: light-dark(#c9e0e2, #1e5d78); /* Sidebar link */
   --eds-color-interactive-surface-raised-disabled: light-dark(#eaeaea, #2e3f4c66); /* Interactive Chip (disabled) */
   --eds-color-interactive-surface-raised-initial: light-dark(#eaeaea, #eaeaea1a); /* Interactive Chip */
@@ -187,54 +187,54 @@
   --eds-color-action-border-standard-secondary-disabled: light-dark(#cfcfcf, #435460); /* Button */
   --eds-color-action-border-standard-secondary-initial: light-dark(#007079, #97cace); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
-  --eds-color-action-border-standard-tertiary-disabled: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-standard-tertiary-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-standard-tertiary-hover: light-dark(#ffffff00, #00000000);
+  --eds-color-action-border-standard-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-standard-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-standard-tertiary-hover: light-dark(rgba(255, 255, 255, 0), #00000000);
   --eds-color-action-border-muted-primary-initial: light-dark(#6f6f6f, #a6afb5); /* Button */
   --eds-color-action-border-muted-primary-hover: light-dark(#565656, #c2c8cc); /* Button */
   --eds-color-action-border-muted-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-border-muted-secondary-initial: light-dark(#6f6f6f, #a6afb5); /* Button */
   --eds-color-action-border-muted-secondary-hover: light-dark(#565656, #c2c8cc); /* Button */
   --eds-color-action-border-muted-secondary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
-  --eds-color-action-border-muted-tertiary-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-muted-tertiary-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-muted-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-border-muted-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-muted-tertiary-hover: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-muted-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-border-danger-primary-initial: light-dark(#e20337, #ff666b); /* Button */
   --eds-color-action-border-danger-primary-hover: light-dark(#90042c, #ffabab); /* Button */
   --eds-color-action-border-danger-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-border-danger-secondary-initial: light-dark(#e20337, #ff666b); /* Button */
   --eds-color-action-border-danger-secondary-hover: light-dark(#90042c, #ffabab); /* Button */
   --eds-color-action-border-danger-secondary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
-  --eds-color-action-border-danger-tertiary-initial: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-danger-tertiary-hover: light-dark(#ffffff00, #00000000);
-  --eds-color-action-border-danger-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-border-danger-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-danger-tertiary-hover: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-color-action-border-danger-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-standard-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
   --eds-color-action-surface-standard-primary-initial: light-dark(#007079, #97cace); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-hover: light-dark(#004f55, #b3e2e5); /* Button, Toggle button */
-  --eds-color-action-surface-standard-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-standard-secondary-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-surface-standard-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button, Ghost button, Toggle button */
   --eds-color-action-surface-standard-secondary-hover: light-dark(#deedee, #033235); /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-standard-tertiary-initial: light-dark(#ffffff00, #00000000); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-surface-standard-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button, Ghost button, Toggle button */
   --eds-color-action-surface-standard-tertiary-hover: light-dark(#deedee, #033235); /* Button, Ghost button, Toggle button */
   --eds-color-action-surface-muted-primary-initial: light-dark(#6f6f6f, #a6afb5); /* Button */
   --eds-color-action-surface-muted-primary-hover: light-dark(#565656, #c2c8cc); /* Button */
   --eds-color-action-surface-muted-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
-  --eds-color-action-surface-muted-secondary-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-muted-secondary-hover: light-dark(#dcdcdc, #344c5b); /* Button */
-  --eds-color-action-surface-muted-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-muted-tertiary-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-surface-muted-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-muted-tertiary-hover: light-dark(#dcdcdc, #344c5b); /* Button */
-  --eds-color-action-surface-muted-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-muted-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-danger-primary-initial: light-dark(#e20337, #ff666b); /* Button */
   --eds-color-action-surface-danger-primary-hover: light-dark(#90042c, #ffabab); /* Button */
   --eds-color-action-surface-danger-primary-disabled: light-dark(#eaeaea, #2e3f4c); /* Button */
-  --eds-color-action-surface-danger-secondary-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-danger-secondary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-danger-secondary-hover: light-dark(#ffd2d1, #500017); /* Button */
-  --eds-color-action-surface-danger-secondary-disabled: light-dark(#ffffff00, #00000000); /* Button */
-  --eds-color-action-surface-danger-tertiary-initial: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-danger-secondary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
+  --eds-color-action-surface-danger-tertiary-initial: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-action-surface-danger-tertiary-hover: light-dark(#ffd2d1, #500017); /* Button */
-  --eds-color-action-surface-danger-tertiary-disabled: light-dark(#ffffff00, #00000000); /* Button */
+  --eds-color-action-surface-danger-tertiary-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Button */
   --eds-color-message-text-standard-info: light-dark(#045e8d, #6fc9fb); /* Deprecated - Card. Use text/message. */
   --eds-color-message-text-standard-success: light-dark(#15682d, #7bcf78); /* Deprecated - Card. Use text/message. */
   --eds-color-message-text-standard-warning: light-dark(#7f4600, #ffae74); /* Deprecated - Card. Use text/message. */
@@ -360,16 +360,16 @@
   --eds-input-color-border-initial: light-dark(#b3b3b3, #ffffff29); /* Autocomplete, Text field */
   --eds-input-color-border-read-only: light-dark(#b3b3b3, #ffffff29); /* Autocomplete, Text field */
   --eds-input-color-border-focus: light-dark(#007079, #97cace); /* Autocomplete, Search, Text field */
-  --eds-input-color-border-disabled: light-dark(#ffffff00, #00000000); /* Autocomplete, Search, Text field */
+  --eds-input-color-border-disabled: light-dark(rgba(255, 255, 255, 0), #00000000); /* Autocomplete, Search, Text field */
   --eds-input-color-surface-initial-on-level-1: light-dark(#ffffff, #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-initial-on-level-2: light-dark(#f7f7f7, #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-initial-on-level-3: light-dark(#f7f7f7, #00000047);
   --eds-input-color-surface-disabled-on-level-1: light-dark(#ffffff, #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-disabled-on-level-2: light-dark(#f7f7f7, #00000047); /* Autocomplete, Search, Table input, Text field input */
   --eds-input-color-surface-disabled-on-level-3: light-dark(#f7f7f7, #00000047);
-  --eds-input-color-surface-read-only-on-level-1: light-dark(#ffffff00, #00000000);
-  --eds-input-color-surface-read-only-on-level-2: light-dark(#ffffff00, #00000000);
-  --eds-input-color-surface-read-only-on-level-3: light-dark(#ffffff00, #00000000);
+  --eds-input-color-surface-read-only-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-input-color-surface-read-only-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000);
+  --eds-input-color-surface-read-only-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000);
   --eds-input-color-message-border-success-initial: #3fa13d; /* Text field */
   --eds-input-color-message-border-success-focus: light-dark(#15682d, #7bcf78); /* Text field */
   --eds-input-color-message-border-success-read-only: #3fa13d; /* Text field */
@@ -458,9 +458,9 @@
   --eds-table-cell-color-interactive-border-disabled-on-level-1: light-dark(#dcdcdc, #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
   --eds-table-cell-color-interactive-border-disabled-on-level-2: light-dark(#dcdcdc, #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
   --eds-table-cell-color-interactive-border-disabled-on-level-3: light-dark(#dcdcdc, #ffffff29); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
-  --eds-table-cell-color-interactive-surface-initial-on-level-1: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-2: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-3: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-1: light-dark(#dcdcdc, #344c5b); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-2: light-dark(#dcdcdc, #344c5b); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-3: light-dark(#dcdcdc, #344c5b); /* Table cell, Table data grid cell */
@@ -470,9 +470,9 @@
   --eds-table-cell-color-interactive-surface-active-hover-on-level-1: light-dark(#c9e0e2, #1e5d78); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-2: light-dark(#c9e0e2, #1e5d78); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-3: light-dark(#c9e0e2, #257193); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-1: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-2: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-3: light-dark(#ffffff00, #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table cell, Table data grid cell */
   --eds-table-header-color-interactive-text-initial-on-level-1: light-dark(#3d3d3d, #d6d9dc);
   --eds-table-header-color-interactive-text-initial-on-level-2: light-dark(#3d3d3d, #d6d9dc);
   --eds-table-header-color-interactive-text-initial-on-level-3: light-dark(#3d3d3d, #ffffff);
@@ -530,9 +530,9 @@
   --eds-table-header-color-interactive-surface-active-hover-on-level-1: light-dark(#dcdcdc, #344c5b); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-2: light-dark(#dcdcdc, #344c5b); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-3: light-dark(#dcdcdc, #3f5664); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-1: light-dark(#ffffff00, #00000000); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-2: light-dark(#ffffff00, #00000000); /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-3: light-dark(#ffffff00, #00000000); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-1: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-2: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-3: light-dark(rgba(255, 255, 255, 0), #00000000); /* Table header, Table data grid header */
   --eds-table-header-color-static-text-on-level-1: light-dark(#3d3d3d, #ffffff);
   --eds-table-header-color-static-text-on-level-2: light-dark(#3d3d3d, #ffffff);
   --eds-table-header-color-static-text-on-level-3: light-dark(#3d3d3d, #ffffff);
@@ -549,5 +549,5 @@
   --eds-ui-shell-color-surface: light-dark(#ffffff, #243746); /* Sidebar, Side sheet, Toolbar, Top bar */
   --eds-ui-shell-color-border: light-dark(#f7f7f7, #132634); /* Sidebar, Topbar, Side sheet */
   --eds-ui-floating-color-surface: light-dark(#ffffff, #2c4251); /* Recommended background color for EDS applications */
-  --eds-ui-scrim-color-surface: light-dark(#00000066, #00000066); /* Scrim */
+  --eds-ui-scrim-color-surface: light-dark(rgba(0, 0, 0, 0.4), #00000066); /* Scrim */
 }
