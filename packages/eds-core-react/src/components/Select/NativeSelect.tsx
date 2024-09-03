@@ -31,7 +31,10 @@ const StyledSelect = styled.select`
   display: block;
   margin: 0;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%236f6f6f' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),
+  background-image: ${(props) =>
+      props.multiple
+        ? ``
+        : `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%236f6f6f' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),`}
     linear-gradient(
       to bottom,
       ${tokens.background} 0%,

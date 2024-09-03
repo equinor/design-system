@@ -1,5 +1,115 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`NativeSelect Matches multi-select snapshot 1`] = `
+<DocumentFragment>
+  .c1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  margin: 0;
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  text-align: left;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+}
+
+.c2 {
+  margin: 0;
+}
+
+.c0 {
+  min-width: 100px;
+  width: 100%;
+}
+
+.c3 {
+  border: none;
+  border-radius: 0;
+  box-shadow: inset 0 -1px 0 0 var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  margin: 0;
+  color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  letter-spacing: 0.025em;
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+  padding-right: calc(8px *2 + 24px);
+  display: block;
+  margin: 0;
+  appearance: none;
+  background-image: linear-gradient( to bottom,var(--eds_ui_background__light, rgba(247, 247, 247, 1)) 0%,var(--eds_ui_background__light, rgba(247, 247, 247, 1)) 100% );
+  background-repeat: no-repeat,repeat;
+  background-position: right 8px top 50%;
+  width: 100%;
+}
+
+.c3:active,
+.c3:focus {
+  box-shadow: none;
+  outline: 2px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
+  outline-offset: 0px;
+}
+
+.c3:disabled {
+  color: var(--eds_interactive__disabled__text, rgba(190, 190, 190, 1));
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23bebebe' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),linear-gradient( to bottom,var(--eds_ui_background__light, rgba(247, 247, 247, 1)) 0%,var(--eds_ui_background__light, rgba(247, 247, 247, 1)) 100% );
+  cursor: not-allowed;
+  box-shadow: none;
+  outline: none;
+}
+
+.c3:disabled .arrow-icon {
+  fill: red;
+}
+
+.c3:disabled:focus,
+.c3:disabled:active {
+  outline: none;
+}
+
+<div
+    class="c0"
+  >
+    <label
+      class="c1"
+      for="native-multi-select-snapshot"
+    >
+      <span
+        class="c2"
+      >
+        label
+      </span>
+    </label>
+    <select
+      class="c3"
+      id="native-multi-select-snapshot"
+      multiple=""
+    >
+      <option>
+        Option one
+      </option>
+      <option>
+        Option two
+      </option>
+      <option>
+        Option three
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`NativeSelect Matches snapshot 1`] = `
 <DocumentFragment>
   .c1 {

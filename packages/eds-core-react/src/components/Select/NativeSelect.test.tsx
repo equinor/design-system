@@ -29,6 +29,16 @@ describe('NativeSelect', () => {
     )
     expect(asFragment()).toMatchSnapshot()
   })
+  it('Matches multi-select snapshot', () => {
+    const { asFragment } = render(
+      <NativeSelect label="label" id="native-multi-select-snapshot" multiple>
+        <option>Option one</option>
+        <option>Option two</option>
+        <option>Option three</option>
+      </NativeSelect>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Should pass a11y test', async () => {
     const { container } = render(
       <NativeSelect label="label" id="a11y-id">
