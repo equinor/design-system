@@ -141,8 +141,6 @@ StyleDictionary.registerTransform({
   },
 })
 
-const fileHeader = () => ['Do not edit directly']
-
 StyleDictionary.registerTransform({
   type: 'value',
   transitive: false,
@@ -325,7 +323,6 @@ const _extend = ({
             options: {
               selector,
               outputReferences,
-              fileHeader,
             },
           },
         ],
@@ -505,7 +502,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             destination: 'spacing-trimmed.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               selector: ':root, [data-density]',
               outputReferences: false,
             },
@@ -537,7 +533,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             destination: 'spacing-verbose.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               selector: ':root, [data-density]',
               outputReferences: outputReferencesTransformed,
             },
@@ -563,7 +558,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             destination: 'spacious-trimmed.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               selector: ':root, [data-density="spacious"]',
               outputReferences: false,
             },
@@ -591,7 +585,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             options: {
               selector: '[data-density="comfortable"]',
               outputReferences: false,
-              fileHeader,
             },
           },
         ],
@@ -615,7 +608,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             destination: 'colors-verbose.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               outputReferences: outputReferencesTransformed,
             },
           },
@@ -640,7 +632,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             destination: 'colors-trimmed.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               outputReferences: false, // The trimmed colors should not reference other tokens
             },
           },
