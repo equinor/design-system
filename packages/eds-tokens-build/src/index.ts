@@ -1,10 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-//import StyleDictionary from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import {
   usesReferences,
@@ -306,6 +302,7 @@ const _extend = ({
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return new StyleDictionary({
     include,
     source,
