@@ -6,6 +6,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 //import StyleDictionary from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
+import {
+  usesReferences,
+  outputReferencesFilter,
+  outputReferencesTransformed,
+  resolveReferences,
+} from 'style-dictionary/utils'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
@@ -54,37 +60,43 @@ StyleDictionary.registerTransform({
   type: 'value',
   transitive: true,
   filter: isColor,
-  transform: (token: TransformedToken, options) => {
+  transform: (token: TransformedToken, config) => {
+    const outputReferences = config?.files?.[0]?.options?.outputReferences
     const path = token.path.join('/')
+    let resolvedLightReference
     const darkValue =
       darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
 
+    if (outputReferences && usesReferences(token.original.$value)) {
+      resolvedLightReference = resolveReference(
+        `${token.original.$value}`,
+        `${config.prefix}`,
+      )
+    }
     if (darkValue) {
       //it is a reference
-      if (String(darkValue).startsWith('{')) {
+      if (usesReferences(darkValue)) {
         //make sure it is not a local variable, in which case it has light-dark set already
         if (token.original.$value != darkValue) {
-          const outputReferences =
-            options?.files?.[0]?.options?.outputReferences
           if (outputReferences) {
-            const resolvedReference = resolveReference(
+            const resolvedDarkReference = resolveReference(
               `${darkValue}`,
-              `${options.prefix}`,
+              `${config.prefix}`,
             )
-            console.log('else 1', resolvedReference)
-            return `light-dark(${token.$value}, ${resolvedReference})`
+            return `light-dark(${resolvedLightReference}, ${resolvedDarkReference})`
           } else {
-            console.log('else 2')
             return `light-dark(${token.$value}, ${darkValue})`
           }
         }
       } else {
-        console.log('else 3')
         //the dark value was hardcoded (color with alpha transparency)
-        return `light-dark(${token.$value}, ${darkValue})`
+        if (outputReferences && resolvedLightReference) {
+          return `light-dark(${resolvedLightReference}, ${darkValue})`
+        } else {
+          return `light-dark(${token.$value}, ${darkValue})`
+        }
       }
     }
-
     return `${token.$value}`
   },
 })
@@ -102,17 +114,21 @@ StyleDictionary.registerTransform({
 
     if (comfortableValue) {
       //it is a reference
-      if (String(comfortableValue).startsWith('{')) {
+      if (usesReferences(comfortableValue)) {
         //make sure it is not a local variable
         if (token.original.$value != comfortableValue) {
           const outputReferences =
             options?.files?.[0]?.options?.outputReferences
           if (outputReferences) {
-            const resolvedReference = resolveReference(
+            const resolvedComfortableReference = resolveReference(
               `${comfortableValue}`,
               `${options.prefix}`,
             )
-            return `var(--eds--spacious, ${token.$value}) var(--eds--comfortable, ${resolvedReference})`
+            const resolvedSpaciousReference = resolveReference(
+              `${token.original.$value}`,
+              `${options.prefix}`,
+            )
+            return `var(--eds--spacious, ${resolvedSpaciousReference}) var(--eds--comfortable, ${resolvedComfortableReference})`
           } else {
             return `var(--eds--spacious, ${token.$value}) var(--eds--comfortable, ${comfortableValue})`
           }
@@ -189,7 +205,7 @@ StyleDictionary.registerTransform({
 })
 
 //This is not used for now, we need to rethink how to implement shorthand if it is even needed
-StyleDictionary.registerTransform({
+/* StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
   name: `eds/css/spacing/shorthand`,
@@ -244,7 +260,7 @@ StyleDictionary.registerTransform({
 
     return `${token.$value} ${value}`
   },
-})
+}) */
 
 StyleDictionary.registerTransform({
   type: `value`,
@@ -536,7 +552,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             options: {
               fileHeader,
               selector: ':root, [data-density]',
-              outputReferences: true,
+              outputReferences: outputReferencesTransformed,
             },
           },
         ],
@@ -613,7 +629,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
             format: 'css/variables',
             options: {
               fileHeader,
-              outputReferences,
+              outputReferences: outputReferencesTransformed,
             },
           },
         ],
@@ -651,7 +667,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   await lightMode.buildAllPlatforms()
   await darkMode.buildAllPlatforms()
   await lightDarkColorsVerbose.buildAllPlatforms()
-  //await lightDarkColorsTrimmed.buildAllPlatforms()
+  await lightDarkColorsTrimmed.buildAllPlatforms()
   await spacingPrimitives.buildAllPlatforms()
   await densityComfortable.buildAllPlatforms()
   await densitySpacious.buildAllPlatforms()
