@@ -1,8 +1,8 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
-export const COLOR_NEUTRAL_0 = "#ffffff"; // White
+export const COLOR_NEUTRAL_0 = "#ffffff";
 export const COLOR_NEUTRAL_100 = "#f7f7f7";
 export const COLOR_NEUTRAL_200 = "#eaeaea";
 export const COLOR_NEUTRAL_300 = "#dcdcdc";

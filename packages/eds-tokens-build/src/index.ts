@@ -1,4 +1,11 @@
-import StyleDictionary, { TransformedToken } from 'style-dictionary-utils'
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import type { TransformedToken } from 'style-dictionary/types'
+import {
+  usesReferences,
+  outputReferencesTransformed,
+} from 'style-dictionary/utils'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 const TOKENS_DIR = './tokens'
@@ -7,8 +14,12 @@ const FILE_KEY_COLORS = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
+import { StyleDictionary } from 'style-dictionary-utils'
+
 const {
-  filter: { isColor, isNumber },
+  hooks: {
+    filters: { isColor, isNumber },
+  },
 } = StyleDictionary
 
 // manually convert reference into custom property
@@ -35,48 +46,59 @@ const spacingComfortableTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
 ])
 
-const lightDarkTransform: StyleDictionary.Transform = {
+StyleDictionary.registerTransform({
+  name: 'lightDark',
   type: 'value',
   transitive: true,
-  matcher: isColor,
-  transformer: (token: StyleDictionary.TransformedToken, options) => {
+  filter: isColor,
+  transform: (token: TransformedToken, config) => {
+    const outputReferences = config?.files?.[0]?.options?.outputReferences
     const path = token.path.join('/')
     const darkValue =
       darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
 
+    //we have to manually create css variables for both light and dark
+    let resolvedLightReference
+    if (outputReferences && usesReferences(token.original.$value)) {
+      resolvedLightReference = resolveReference(
+        `${token.original.$value}`,
+        `${config.prefix}`,
+      )
+    }
     if (darkValue) {
       //it is a reference
-      if (String(darkValue).startsWith('{')) {
+      if (usesReferences(darkValue)) {
         //make sure it is not a local variable, in which case it has light-dark set already
-        if (token.original.value != darkValue) {
-          const outputReferences =
-            options?.files?.[0]?.options?.outputReferences
+        if (token.original.$value != darkValue) {
           if (outputReferences) {
-            const resolvedReference = resolveReference(
+            const resolvedDarkReference = resolveReference(
               `${darkValue}`,
-              `${options.prefix}`,
+              `${config.prefix}`,
             )
-            return `light-dark(${token.value}, ${resolvedReference})`
+            return `light-dark(${resolvedLightReference}, ${resolvedDarkReference})`
           } else {
-            return `light-dark(${token.value}, ${darkValue})`
+            return `light-dark(${token.$value}, ${darkValue})`
           }
         }
+        //the dark value is not a reference but a direct value (color with alpha transparency)
       } else {
-        //the dark value was hardcoded (color with alpha transparency)
-        return `light-dark(${token.value}, ${darkValue})`
+        if (outputReferences && resolvedLightReference) {
+          return `light-dark(${resolvedLightReference}, ${darkValue})`
+        } else {
+          return `light-dark(${token.$value}, ${darkValue})`
+        }
       }
     }
-
-    return `${token.value}`
+    //there is no dark value
+    return `${token.$value}`
   },
-}
-
-//@todo: rewrite to include compact when those tokens are ready
-const densitySpaceToggleTransform: StyleDictionary.Transform = {
+})
+StyleDictionary.registerTransform({
+  name: 'densitySpaceToggle',
   type: 'value',
   transitive: true,
-  matcher: isNumber,
-  transformer: (token: StyleDictionary.TransformedToken, options) => {
+  filter: isNumber,
+  transform: (token: TransformedToken, options) => {
     const path = token.path.join('/')
     const comfortableValue =
       spacingComfortableTokens['💎 Density.Comfortable.json']?.[`${path}`]?.[
@@ -85,51 +107,44 @@ const densitySpaceToggleTransform: StyleDictionary.Transform = {
 
     if (comfortableValue) {
       //it is a reference
-      if (String(comfortableValue).startsWith('{')) {
-        //make sure it is not a local variable
-        if (token.original.value != comfortableValue) {
+      if (usesReferences(comfortableValue)) {
+        //make sure it is not a locally defined variable
+        if (token.original.$value != comfortableValue) {
           const outputReferences =
             options?.files?.[0]?.options?.outputReferences
           if (outputReferences) {
-            const resolvedReference = resolveReference(
+            const resolvedComfortableReference = resolveReference(
               `${comfortableValue}`,
               `${options.prefix}`,
             )
-            return `var(--eds--spacious, ${token.value}) var(--eds--comfortable, ${resolvedReference})`
+            const resolvedSpaciousReference = resolveReference(
+              `${token.original.$value}`,
+              `${options.prefix}`,
+            )
+            return `var(--eds--spacious, ${resolvedSpaciousReference}) var(--eds--comfortable, ${resolvedComfortableReference})`
           } else {
-            return `var(--eds--spacious, ${token.value}) var(--eds--comfortable, ${comfortableValue})`
+            return `var(--eds--spacious, ${token.$value}) var(--eds--comfortable, ${comfortableValue})`
           }
         }
       } else {
         return `var(--eds--spacious, ${
-          token.value
+          token.$value
         }) var(--eds--comfortable, ${transformNumberToRem(
           Number(comfortableValue),
         )})`
       }
     }
 
-    return `${token.value}`
+    return `${token.$value}`
   },
-}
-
-StyleDictionary.registerTransform({
-  name: 'lightDark',
-  ...lightDarkTransform,
 })
-StyleDictionary.registerTransform({
-  name: 'densitySpaceToggle',
-  ...densitySpaceToggleTransform,
-})
-
-const fileHeader = () => ['Do not edit directly']
 
 StyleDictionary.registerTransform({
   type: 'value',
   transitive: false,
   name: 'eds/css/pxFormatted',
-  matcher: (token) => {
-    const isDefined = token?.value !== undefined
+  filter: (token) => {
+    const isDefined = token?.$value !== undefined
     if (!isDefined) return false
 
     const isNumber = token.$type === 'number'
@@ -141,8 +156,8 @@ StyleDictionary.registerTransform({
       pxMatchers.some((metric) => token.path.includes(metric))
     )
   },
-  transformer: (token) => {
-    const fixedValue = toFixedWithoutTrailingZeroes(Number(token.value))
+  transform: (token) => {
+    const fixedValue = toFixedWithoutTrailingZeroes(Number(token.$value))
     return `${fixedValue}px`
   },
 })
@@ -151,11 +166,11 @@ StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
   name: `eds/css/pxToRem`,
-  matcher: (token) => {
+  filter: (token) => {
     if (
-      token?.value === undefined ||
+      token?.$value === undefined ||
       token.$type !== 'number' ||
-      isNaN(Number(token.value))
+      isNaN(Number(token.$value))
     ) {
       return false
     }
@@ -175,21 +190,21 @@ StyleDictionary.registerTransform({
 
     return isMatch
   },
-  transformer: (token) => {
-    return transformNumberToRem(Number(token.value))
+  transform: (token) => {
+    return transformNumberToRem(Number(token.$value))
   },
 })
 
 //This is not used for now, we need to rethink how to implement shorthand if it is even needed
-StyleDictionary.registerTransform({
+/* StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
   name: `eds/css/spacing/shorthand`,
-  matcher: (token) => {
+  filter: (token) => {
     const isNumber = token.$type === 'number'
     if (!isNumber) return false
 
-    const isDefined = token?.value !== undefined
+    const isDefined = token?.$value !== undefined
     if (!isDefined) return false
 
     const matchingPathSegments = [
@@ -203,12 +218,12 @@ StyleDictionary.registerTransform({
 
     return isMatch
   },
-  transformer: (token, options) => {
+  transform: (token, options) => {
     const outputReferences = options?.files?.[0]?.options?.outputReferences
     const size = token.path[2]
 
     if (outputReferences) {
-      return `${token.value} var(--eds-spacing-static-inline-${size})`
+      return `${token.$value} var(--eds-spacing-static-inline-${size})`
     }
 
     // Determine the density of the current token using the filePath
@@ -234,15 +249,15 @@ StyleDictionary.registerTransform({
 
     const value = spacingTokens[collectionName]?.[path]?.['$value']
 
-    return `${token.value} ${value}`
+    return `${token.$value} ${value}`
   },
-})
+}) */
 
 StyleDictionary.registerTransform({
   type: `value`,
   transitive: false,
   name: `eds/font/quote`,
-  matcher: (token) => {
+  filter: (token) => {
     const fontMetricsInString = ['font', 'family', 'weight', 'font-family']
 
     const isFontMetricInString =
@@ -251,13 +266,13 @@ StyleDictionary.registerTransform({
 
     return isFontMetricInString
   },
-  transformer: (token) => {
-    return `"${token.value}"`
+  transform: (token) => {
+    return `"${token.$value}"`
   },
 })
 
 const cssTransforms = [
-  'name/cti/kebab',
+  'name/kebab',
   'eds/css/pxToRem',
   'eds/css/pxFormatted',
   'eds/font/quote',
@@ -285,11 +300,12 @@ const _extend = ({
   selector?: string
   filter?: (token: TransformedToken) => boolean
   outputReferences?: boolean
-}): StyleDictionary.Core => {
+}) /*return type??*/ => {
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
 
-  return StyleDictionary.extend({
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return new StyleDictionary({
     include,
     source,
     platforms: {
@@ -306,39 +322,30 @@ const _extend = ({
             options: {
               selector,
               outputReferences,
-              fileHeader,
             },
           },
         ],
       },
       ts: {
-        transformGroup: 'js',
-        transforms: ['name/cti/constant'],
+        //transformGroup: 'js',
+        transforms: ['name/constant'],
         buildPath: `${jsBuildPath}/${buildPath}/`,
         files: [
           {
             filter,
             destination: `${fileName}.js`,
-            options: {
-              fileHeader,
-              outputReferences,
-            },
             format: 'javascript/es6',
           },
           {
             filter,
             format: 'typescript/es6-declarations',
-            options: {
-              fileHeader,
-              outputReferences,
-            },
             destination: `${fileName}.d.ts`,
           },
         ],
       },
       json: {
         buildPath: `${jsonBuildPath}/${buildPath}/`,
-        transforms: ['name/cti/kebab'],
+        transforms: ['name/kebab'],
         files: [
           {
             filter,
@@ -395,7 +402,7 @@ const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.V
 const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
 const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
 
-export function run({ outputReferences } = { outputReferences: true }) {
+export async function run({ outputReferences } = { outputReferences: true }) {
   console.info('Running Style Dictionary build script')
   console.info('outputReferences:', outputReferences)
 
@@ -472,7 +479,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     outputReferences,
   })
 
-  const densityAllTrimmed = StyleDictionary.extend({
+  const densityAllTrimmed = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -481,7 +488,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
         prefix,
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
-          'name/cti/kebab',
+          'name/kebab',
           'eds/css/pxToRem',
           'eds/css/pxFormatted',
           'eds/font/quote',
@@ -489,11 +496,11 @@ export function run({ outputReferences } = { outputReferences: true }) {
         ],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Density']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Density']),
             destination: 'spacing-trimmed.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               selector: ':root, [data-density]',
               outputReferences: false,
             },
@@ -503,7 +510,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densityAllVerbose = StyleDictionary.extend({
+  const densityAllVerbose = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -512,7 +519,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
         prefix,
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
-          'name/cti/kebab',
+          'name/kebab',
           'eds/css/pxToRem',
           'eds/css/pxFormatted',
           'eds/font/quote',
@@ -520,13 +527,13 @@ export function run({ outputReferences } = { outputReferences: true }) {
         ],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Density']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Density']),
             destination: 'spacing-verbose.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               selector: ':root, [data-density]',
-              outputReferences: true,
+              outputReferences: outputReferencesTransformed,
             },
           },
         ],
@@ -534,7 +541,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densitySpaciousTrimmed = StyleDictionary.extend({
+  const densitySpaciousTrimmed = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
@@ -545,12 +552,11 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transforms: cssTransforms,
         files: [
           {
-            filter: (token) =>
+            filter: (token: TransformedToken) =>
               includeTokenFilter(token, ['Density', 'Spacious']),
             destination: 'spacious-trimmed.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               selector: ':root, [data-density="spacious"]',
               outputReferences: false,
             },
@@ -560,7 +566,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const densityComfortableTrimmed = StyleDictionary.extend({
+  const densityComfortableTrimmed = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     platforms: {
@@ -571,14 +577,13 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transforms: cssTransforms,
         files: [
           {
-            filter: (token) =>
+            filter: (token: TransformedToken) =>
               includeTokenFilter(token, ['Density', 'Comfortable']),
             destination: 'comfortable-trimmed.css',
             format: 'css/variables',
             options: {
               selector: '[data-density="comfortable"]',
               outputReferences: false,
-              fileHeader,
             },
           },
         ],
@@ -586,7 +591,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const lightDarkColorsVerbose = StyleDictionary.extend({
+  const lightDarkColorsVerbose = new StyleDictionary({
     include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
@@ -594,15 +599,15 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transformGroup: 'css',
         prefix,
         buildPath: `${cssBuildPath}/color/`,
-        transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
+        transforms: ['name/kebab', 'color/css', 'lightDark'],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Light']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Light']),
             destination: 'colors-verbose.css',
             format: 'css/variables',
             options: {
-              fileHeader,
-              outputReferences,
+              outputReferences: outputReferencesTransformed,
             },
           },
         ],
@@ -610,7 +615,7 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  const lightDarkColorsTrimmed = StyleDictionary.extend({
+  const lightDarkColorsTrimmed = new StyleDictionary({
     include: [COLOR_PRIMITIVE_SOURCE, COLOR_SIMPLE_SEMANTIC_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
@@ -618,14 +623,14 @@ export function run({ outputReferences } = { outputReferences: true }) {
         transformGroup: 'css',
         prefix,
         buildPath: `${cssBuildPath}/color/`,
-        transforms: ['name/cti/kebab', 'color/css', 'lightDark'],
+        transforms: ['name/kebab', 'color/css', 'lightDark'],
         files: [
           {
-            filter: (token) => includeTokenFilter(token, ['Light']),
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Light']),
             destination: 'colors-trimmed.css',
             format: 'css/variables',
             options: {
-              fileHeader,
               outputReferences: false, // The trimmed colors should not reference other tokens
             },
           },
@@ -634,19 +639,19 @@ export function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  primitives.buildAllPlatforms()
-  simpleSemantic.buildAllPlatforms()
-  lightMode.buildAllPlatforms()
-  darkMode.buildAllPlatforms()
-  lightDarkColorsVerbose.buildAllPlatforms()
-  lightDarkColorsTrimmed.buildAllPlatforms()
-  spacingPrimitives.buildAllPlatforms()
-  densityComfortable.buildAllPlatforms()
-  densitySpacious.buildAllPlatforms()
-  densitySpaciousTrimmed.buildAllPlatforms()
-  densityComfortableTrimmed.buildAllPlatforms()
-  densityAllTrimmed.buildAllPlatforms()
-  densityAllVerbose.buildAllPlatforms()
+  await primitives.buildAllPlatforms()
+  await simpleSemantic.buildAllPlatforms()
+  await lightMode.buildAllPlatforms()
+  await darkMode.buildAllPlatforms()
+  await lightDarkColorsVerbose.buildAllPlatforms()
+  await lightDarkColorsTrimmed.buildAllPlatforms()
+  await spacingPrimitives.buildAllPlatforms()
+  await densityComfortable.buildAllPlatforms()
+  await densitySpacious.buildAllPlatforms()
+  await densitySpaciousTrimmed.buildAllPlatforms()
+  await densityComfortableTrimmed.buildAllPlatforms()
+  await densityAllTrimmed.buildAllPlatforms()
+  await densityAllVerbose.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {

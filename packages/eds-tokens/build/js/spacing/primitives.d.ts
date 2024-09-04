@@ -1,5 +1,5 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
 export const SPACING_0 : number;

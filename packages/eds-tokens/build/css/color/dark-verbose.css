@@ -1,111 +1,9 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
 [data-color-scheme="dark"] {
-  --eds-ui-scrim-color-surface: #00000066; /* Scrim */
-  --eds-table-header-color-static-border-on-level-3: #ffffff29;
-  --eds-table-header-color-static-border-on-level-2: #ffffff29;
-  --eds-table-header-color-static-border-on-level-1: #ffffff29;
-  --eds-table-header-color-interactive-surface-disabled-on-level-3: #00000000; /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-2: #00000000; /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-surface-disabled-on-level-1: #00000000; /* Table header, Table data grid header */
-  --eds-table-header-color-interactive-border-disabled-on-level-3: #ffffff29;
-  --eds-table-header-color-interactive-border-disabled-on-level-2: #ffffff29;
-  --eds-table-header-color-interactive-border-disabled-on-level-1: #ffffff29;
-  --eds-table-header-color-interactive-border-hover-on-level-3: #ffffff33;
-  --eds-table-header-color-interactive-border-hover-on-level-2: #ffffff33;
-  --eds-table-header-color-interactive-border-hover-on-level-1: #ffffff33;
-  --eds-table-header-color-interactive-border-initial-on-level-3: #ffffff29;
-  --eds-table-header-color-interactive-border-initial-on-level-2: #ffffff29;
-  --eds-table-header-color-interactive-border-initial-on-level-1: #ffffff29;
-  --eds-table-cell-color-interactive-surface-disabled-on-level-3: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-2: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-disabled-on-level-1: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-3: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-2: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-surface-initial-on-level-1: #00000000; /* Table cell, Table data grid cell */
-  --eds-table-cell-color-interactive-border-disabled-on-level-3: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
-  --eds-table-cell-color-interactive-border-disabled-on-level-2: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
-  --eds-table-cell-color-interactive-border-disabled-on-level-1: #ffffff29; /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
-  --eds-table-cell-color-interactive-border-active-hover-on-level-3: #ffffff33;
-  --eds-table-cell-color-interactive-border-active-hover-on-level-2: #ffffff33;
-  --eds-table-cell-color-interactive-border-active-hover-on-level-1: #ffffff33;
-  --eds-table-cell-color-interactive-border-active-on-level-3: #ffffff29;
-  --eds-table-cell-color-interactive-border-active-on-level-2: #ffffff29;
-  --eds-table-cell-color-interactive-border-active-on-level-1: #ffffff29;
-  --eds-table-cell-color-interactive-border-hover-on-level-3: #ffffff33;
-  --eds-table-cell-color-interactive-border-hover-on-level-2: #ffffff33;
-  --eds-table-cell-color-interactive-border-hover-on-level-1: #ffffff33;
-  --eds-table-cell-color-interactive-border-initial-on-level-3: #ffffff29;
-  --eds-table-cell-color-interactive-border-initial-on-level-2: #ffffff29;
-  --eds-table-cell-color-interactive-border-initial-on-level-1: #ffffff29;
-  --eds-table-cell-color-message-surface-error: #ff666b47; /* Table cell, Table data grid cell */
-  --eds-input-color-surface-read-only-on-level-3: #00000000;
-  --eds-input-color-surface-read-only-on-level-2: #00000000;
-  --eds-input-color-surface-read-only-on-level-1: #00000000;
-  --eds-input-color-surface-disabled-on-level-3: #00000047;
-  --eds-input-color-surface-disabled-on-level-2: #00000047; /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-disabled-on-level-1: #00000047; /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-initial-on-level-3: #00000047;
-  --eds-input-color-surface-initial-on-level-2: #00000047; /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-surface-initial-on-level-1: #00000047; /* Autocomplete, Search, Table input, Text field input */
-  --eds-input-color-border-disabled: #00000000; /* Autocomplete, Search, Text field */
-  --eds-input-color-border-read-only: #ffffff29; /* Autocomplete, Text field */
-  --eds-input-color-border-initial: #ffffff29; /* Autocomplete, Text field */
-  --eds-color-message-surface-raised-error-hover: #ffe1e01a; /* Chip */
-  --eds-color-message-surface-raised-error-initial: #ffe1e01a; /* Chip */
-  --eds-color-message-surface-raised-warning-hover: #fff0e51a; /* Chip */
-  --eds-color-message-surface-raised-warning-initial: #fff0e51a; /* Chip */
-  --eds-color-message-surface-raised-success-hover: #e6faec1a; /* Chip */
-  --eds-color-message-surface-raised-success-initial: #e6faec1a; /* Chip */
-  --eds-color-message-surface-raised-info-hover: #dfeff71a; /* Chip */
-  --eds-color-message-surface-raised-info-initial: #dfeff71a; /* Chip */
-  --eds-color-action-surface-danger-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-danger-tertiary-initial: #00000000; /* Button */
-  --eds-color-action-surface-danger-secondary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-danger-secondary-initial: #00000000; /* Button */
-  --eds-color-action-surface-muted-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-muted-tertiary-initial: #00000000; /* Button */
-  --eds-color-action-surface-muted-secondary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-muted-secondary-initial: #00000000; /* Button */
-  --eds-color-action-surface-standard-tertiary-initial: #00000000; /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-surface-standard-secondary-initial: #00000000; /* Button, Ghost button, Toggle button */
-  --eds-color-action-surface-standard-secondary-disabled: #00000000; /* Button */
-  --eds-color-action-border-danger-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-border-danger-tertiary-hover: #00000000;
-  --eds-color-action-border-danger-tertiary-initial: #00000000;
-  --eds-color-action-border-muted-tertiary-disabled: #00000000; /* Button */
-  --eds-color-action-border-muted-tertiary-hover: #00000000;
-  --eds-color-action-border-muted-tertiary-initial: #00000000;
-  --eds-color-action-border-standard-tertiary-hover: #00000000;
-  --eds-color-action-border-standard-tertiary-initial: #00000000;
-  --eds-color-action-border-standard-tertiary-disabled: #00000000;
-  --eds-color-interactive-surface-raised-active-hover: #2a587480; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-active: #2a587480; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-hover: #eaeaea1a; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-initial: #eaeaea1a; /* Interactive Chip */
-  --eds-color-interactive-surface-raised-disabled: #2e3f4c66; /* Interactive Chip (disabled) */
-  --eds-color-interactive-surface-standard-quaternary-active: #00000000; /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-initial: #00000000; /* Tab */
-  --eds-color-interactive-surface-standard-quaternary-disabled: #00000000; /* Tab */
-  --eds-color-interactive-surface-standard-tertiary-initial: #00000000; /* Sidebar link */
-  --eds-color-interactive-surface-standard-tertiary-disabled: #00000000; /* Sidebar link */
-  --eds-color-interactive-surface-standard-secondary-initial: #00000000; /* Sidebar menu */
-  --eds-color-interactive-surface-standard-secondary-disabled: #00000000; /* Sidebar menu */
-  --eds-color-interactive-surface-standard-primary-initial: #00000000; /* Toggle button */
-  --eds-color-interactive-surface-standard-primary-disabled-outlined: #00000000; /* Toggle button */
-  --eds-color-interactive-border-standard-quaternary-hover: #ffffff33; /* Tab */
-  --eds-color-interactive-border-standard-quaternary-initial: #ffffff29; /* Tab */
-  --eds-color-interactive-border-standard-quaternary-disabled: #ffffff29; /* Tab */
-  --eds-color-interactive-border-standard-secondary-active-hover: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-active: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-hover: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-initial: #00000000; /* Sidebar menu */
-  --eds-color-interactive-border-standard-secondary-disabled: #00000000; /* Sidebar menu */
-  --eds-color-static-surface-raised: #eaeaea1a;
-  --eds-color-shadow: #00000024; /* For use in box shadows */
+  --eds-ui-scrim-color-surface: rgba(0, 0, 0, 0.4); /* Scrim */
   --eds-ui-floating-color-surface: var(--eds-color-slate-blue-1300); /* Recommended background color for EDS applications */
   --eds-ui-shell-color-border: var(--eds-color-slate-blue-1400); /* Sidebar, Topbar, Side sheet */
   --eds-ui-shell-color-surface: var(--eds-color-slate-blue-1350); /* Sidebar, Side sheet, Toolbar, Top bar */
@@ -113,12 +11,18 @@
   --eds-table-header-color-static-surface-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
   --eds-table-header-color-static-surface-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
   --eds-table-header-color-static-surface-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-table-header-color-static-border-on-level-3: rgba(255, 255, 255, 0.16);
+  --eds-table-header-color-static-border-on-level-2: rgba(255, 255, 255, 0.16);
+  --eds-table-header-color-static-border-on-level-1: rgba(255, 255, 255, 0.16);
   --eds-table-header-color-static-icon-on-level-3: var(--eds-color-neutral-0);
   --eds-table-header-color-static-icon-on-level-2: var(--eds-color-neutral-0);
   --eds-table-header-color-static-icon-on-level-1: var(--eds-color-neutral-0);
   --eds-table-header-color-static-text-on-level-3: var(--eds-color-neutral-0);
   --eds-table-header-color-static-text-on-level-2: var(--eds-color-neutral-0);
   --eds-table-header-color-static-text-on-level-1: var(--eds-color-neutral-0);
+  --eds-table-header-color-interactive-surface-disabled-on-level-3: rgba(0, 0, 0, 0); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-2: rgba(0, 0, 0, 0); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-surface-disabled-on-level-1: rgba(0, 0, 0, 0); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-3: var(--eds-color-slate-blue-1100); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-active-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
@@ -131,12 +35,21 @@
   --eds-table-header-color-interactive-surface-initial-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-initial-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
   --eds-table-header-color-interactive-surface-initial-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
+  --eds-table-header-color-interactive-border-disabled-on-level-3: rgba(255, 255, 255, 0.16);
+  --eds-table-header-color-interactive-border-disabled-on-level-2: rgba(255, 255, 255, 0.16);
+  --eds-table-header-color-interactive-border-disabled-on-level-1: rgba(255, 255, 255, 0.16);
   --eds-table-header-color-interactive-border-active-hover-on-level-3: var(--eds-color-moss-green-sat-200);
   --eds-table-header-color-interactive-border-active-hover-on-level-2: var(--eds-color-moss-green-sat-300);
   --eds-table-header-color-interactive-border-active-hover-on-level-1: var(--eds-color-moss-green-sat-300);
   --eds-table-header-color-interactive-border-active-on-level-3: var(--eds-color-moss-green-sat-300);
   --eds-table-header-color-interactive-border-active-on-level-2: var(--eds-color-moss-green-sat-500);
   --eds-table-header-color-interactive-border-active-on-level-1: var(--eds-color-moss-green-sat-500);
+  --eds-table-header-color-interactive-border-hover-on-level-3: rgba(255, 255, 255, 0.2);
+  --eds-table-header-color-interactive-border-hover-on-level-2: rgba(255, 255, 255, 0.2);
+  --eds-table-header-color-interactive-border-hover-on-level-1: rgba(255, 255, 255, 0.2);
+  --eds-table-header-color-interactive-border-initial-on-level-3: rgba(255, 255, 255, 0.16);
+  --eds-table-header-color-interactive-border-initial-on-level-2: rgba(255, 255, 255, 0.16);
+  --eds-table-header-color-interactive-border-initial-on-level-1: rgba(255, 255, 255, 0.16);
   --eds-table-header-color-interactive-icon-disabled-on-level-3: var(--eds-color-neutral-0);
   --eds-table-header-color-interactive-icon-disabled-on-level-2: var(--eds-color-slate-grey-600);
   --eds-table-header-color-interactive-icon-disabled-on-level-1: var(--eds-color-slate-grey-600);
@@ -167,6 +80,9 @@
   --eds-table-header-color-interactive-text-initial-on-level-3: var(--eds-color-neutral-0);
   --eds-table-header-color-interactive-text-initial-on-level-2: var(--eds-color-slate-grey-400);
   --eds-table-header-color-interactive-text-initial-on-level-1: var(--eds-color-slate-grey-400);
+  --eds-table-cell-color-interactive-surface-disabled-on-level-3: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-2: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-disabled-on-level-1: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-3: var(--eds-color-mist-blue-muted-1100); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-2: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-active-hover-on-level-1: var(--eds-color-mist-blue-muted-1200); /* Table cell, Table data grid cell */
@@ -176,6 +92,24 @@
   --eds-table-cell-color-interactive-surface-hover-on-level-3: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-2: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
   --eds-table-cell-color-interactive-surface-hover-on-level-1: var(--eds-color-slate-blue-1200); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-3: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-2: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-surface-initial-on-level-1: rgba(0, 0, 0, 0); /* Table cell, Table data grid cell */
+  --eds-table-cell-color-interactive-border-disabled-on-level-3: rgba(255, 255, 255, 0.16); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-cell-color-interactive-border-disabled-on-level-2: rgba(255, 255, 255, 0.16); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-cell-color-interactive-border-disabled-on-level-1: rgba(255, 255, 255, 0.16); /* Border on Table cell doesn&#39;t change from Initial state, only the text &amp; the icon. */
+  --eds-table-cell-color-interactive-border-active-hover-on-level-3: rgba(255, 255, 255, 0.2);
+  --eds-table-cell-color-interactive-border-active-hover-on-level-2: rgba(255, 255, 255, 0.2);
+  --eds-table-cell-color-interactive-border-active-hover-on-level-1: rgba(255, 255, 255, 0.2);
+  --eds-table-cell-color-interactive-border-active-on-level-3: rgba(255, 255, 255, 0.16);
+  --eds-table-cell-color-interactive-border-active-on-level-2: rgba(255, 255, 255, 0.16);
+  --eds-table-cell-color-interactive-border-active-on-level-1: rgba(255, 255, 255, 0.16);
+  --eds-table-cell-color-interactive-border-hover-on-level-3: rgba(255, 255, 255, 0.2);
+  --eds-table-cell-color-interactive-border-hover-on-level-2: rgba(255, 255, 255, 0.2);
+  --eds-table-cell-color-interactive-border-hover-on-level-1: rgba(255, 255, 255, 0.2);
+  --eds-table-cell-color-interactive-border-initial-on-level-3: rgba(255, 255, 255, 0.16);
+  --eds-table-cell-color-interactive-border-initial-on-level-2: rgba(255, 255, 255, 0.16);
+  --eds-table-cell-color-interactive-border-initial-on-level-1: rgba(255, 255, 255, 0.16);
   --eds-table-cell-color-interactive-icon-disabled-on-level-3: var(--eds-color-slate-grey-1000);
   --eds-table-cell-color-interactive-icon-disabled-on-level-2: var(--eds-color-slate-grey-1000);
   --eds-table-cell-color-interactive-icon-disabled-on-level-1: var(--eds-color-slate-grey-1000);
@@ -206,6 +140,7 @@
   --eds-table-cell-color-interactive-text-initial-on-level-3: var(--eds-color-slate-grey-400);
   --eds-table-cell-color-interactive-text-initial-on-level-2: var(--eds-color-slate-grey-400);
   --eds-table-cell-color-interactive-text-initial-on-level-1: var(--eds-color-slate-grey-400);
+  --eds-table-cell-color-message-surface-error: rgba(255, 102, 107, 0.28); /* Table cell, Table data grid cell */
   --eds-input-label-color-icon-disabled: var(--eds-color-slate-grey-1000);
   --eds-input-label-color-icon-read-only: var(--eds-color-slate-grey-600);
   --eds-input-label-color-icon-initial: var(--eds-color-slate-grey-600);
@@ -248,7 +183,19 @@
   --eds-input-color-message-border-success-read-only: var(--eds-color-success-green-900); /* Text field */
   --eds-input-color-message-border-success-focus: var(--eds-color-success-green-600); /* Text field */
   --eds-input-color-message-border-success-initial: var(--eds-color-success-green-900); /* Text field */
+  --eds-input-color-surface-read-only-on-level-3: rgba(0, 0, 0, 0);
+  --eds-input-color-surface-read-only-on-level-2: rgba(0, 0, 0, 0);
+  --eds-input-color-surface-read-only-on-level-1: rgba(0, 0, 0, 0);
+  --eds-input-color-surface-disabled-on-level-3: rgba(0, 0, 0, 0.28);
+  --eds-input-color-surface-disabled-on-level-2: rgba(0, 0, 0, 0.28); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-surface-disabled-on-level-1: rgba(0, 0, 0, 0.28); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-surface-initial-on-level-3: rgba(0, 0, 0, 0.28);
+  --eds-input-color-surface-initial-on-level-2: rgba(0, 0, 0, 0.28); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-surface-initial-on-level-1: rgba(0, 0, 0, 0.28); /* Autocomplete, Search, Table input, Text field input */
+  --eds-input-color-border-disabled: rgba(0, 0, 0, 0); /* Autocomplete, Search, Text field */
   --eds-input-color-border-focus: var(--eds-color-moss-green-sat-500); /* Autocomplete, Search, Text field */
+  --eds-input-color-border-read-only: rgba(255, 255, 255, 0.16); /* Autocomplete, Text field */
+  --eds-input-color-border-initial: rgba(255, 255, 255, 0.16); /* Autocomplete, Text field */
   --eds-input-color-icon-disabled: var(--eds-color-slate-grey-1000); /* Autocomplete, Table input, Search, Text field */
   --eds-input-color-icon-focus: var(--eds-color-neutral-0); /* Autocomplete, Table input, Search, Text field */
   --eds-input-color-icon-read-only: var(--eds-color-slate-grey-500); /* Autocomplete, Table input, Text field */
@@ -303,6 +250,14 @@
   --eds-color-message-surface-callout-warning: var(--eds-color-orange-1200); /* Banner */
   --eds-color-message-surface-callout-success: var(--eds-color-lichen-green-1200); /* Chip */
   --eds-color-message-surface-callout-info: var(--eds-color-blue-sky-1200); /* Chip */
+  --eds-color-message-surface-raised-error-hover: rgba(255, 225, 224, 0.1); /* Chip */
+  --eds-color-message-surface-raised-error-initial: rgba(255, 225, 224, 0.1); /* Chip */
+  --eds-color-message-surface-raised-warning-hover: rgba(255, 240, 229, 0.1); /* Chip */
+  --eds-color-message-surface-raised-warning-initial: rgba(255, 240, 229, 0.1); /* Chip */
+  --eds-color-message-surface-raised-success-hover: rgba(230, 250, 236, 0.1); /* Chip */
+  --eds-color-message-surface-raised-success-initial: rgba(230, 250, 236, 0.1); /* Chip */
+  --eds-color-message-surface-raised-info-hover: rgba(223, 239, 247, 0.1); /* Chip */
+  --eds-color-message-surface-raised-info-initial: rgba(223, 239, 247, 0.1); /* Chip */
   --eds-color-message-surface-standard-error-on-level-3: var(--eds-color-slate-blue-1300); /* Card */
   --eds-color-message-surface-standard-error-on-level-2: var(--eds-color-slate-blue-1350); /* Card */
   --eds-color-message-surface-standard-error-on-level-1: var(--eds-color-slate-blue-1350); /* Card */
@@ -359,33 +314,58 @@
   --eds-color-message-text-raised-success-initial: var(--eds-color-success-green-600); /* Chip, Card, input helper */
   --eds-color-message-text-raised-info-hover: var(--eds-color-blue-sky-400); /* Chip */
   --eds-color-message-text-raised-info-initial: var(--eds-color-blue-sky-600); /* Chip, Card, input helper */
+  --eds-color-message-text-standard-error: var(--eds-color-message-text-raised-error-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-message-text-standard-warning: var(--eds-color-message-text-raised-warning-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-message-text-standard-success: var(--eds-color-message-text-raised-success-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-message-text-standard-info: var(--eds-color-message-text-raised-info-initial); /* Deprecated - Card. Use text/message. */
+  --eds-color-action-surface-danger-tertiary-disabled: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-danger-tertiary-hover: var(--eds-color-red-cold-1400); /* Button */
+  --eds-color-action-surface-danger-tertiary-initial: rgba(0, 0, 0, 0); /* Button */
+  --eds-color-action-surface-danger-secondary-disabled: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-danger-secondary-hover: var(--eds-color-red-cold-1400); /* Button */
+  --eds-color-action-surface-danger-secondary-initial: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-danger-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-surface-danger-primary-hover: var(--eds-color-red-warm-500); /* Button */
   --eds-color-action-surface-danger-primary-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-surface-muted-tertiary-disabled: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-muted-tertiary-hover: var(--eds-color-slate-blue-1200); /* Button */
+  --eds-color-action-surface-muted-tertiary-initial: rgba(0, 0, 0, 0); /* Button */
+  --eds-color-action-surface-muted-secondary-disabled: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-muted-secondary-hover: var(--eds-color-slate-blue-1200); /* Button */
+  --eds-color-action-surface-muted-secondary-initial: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-muted-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-surface-muted-primary-hover: var(--eds-color-slate-grey-500); /* Button */
   --eds-color-action-surface-muted-primary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-surface-standard-tertiary-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-tertiary-initial: rgba(0, 0, 0, 0); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-tertiary-disabled: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-standard-secondary-hover: var(--eds-color-moss-green-sat-1400); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-initial: rgba(0, 0, 0, 0); /* Button, Ghost button, Toggle button */
+  --eds-color-action-surface-standard-secondary-disabled: rgba(0, 0, 0, 0); /* Button */
   --eds-color-action-surface-standard-primary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
   --eds-color-action-surface-standard-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
+  --eds-color-action-border-danger-tertiary-disabled: rgba(0, 0, 0, 0); /* Button */
+  --eds-color-action-border-danger-tertiary-hover: rgba(0, 0, 0, 0);
+  --eds-color-action-border-danger-tertiary-initial: rgba(0, 0, 0, 0);
   --eds-color-action-border-danger-secondary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-border-danger-secondary-hover: var(--eds-color-red-warm-500); /* Button */
   --eds-color-action-border-danger-secondary-initial: var(--eds-color-red-warm-700); /* Button */
   --eds-color-action-border-danger-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-border-danger-primary-hover: var(--eds-color-red-warm-500); /* Button */
   --eds-color-action-border-danger-primary-initial: var(--eds-color-red-warm-700); /* Button */
+  --eds-color-action-border-muted-tertiary-disabled: rgba(0, 0, 0, 0); /* Button */
+  --eds-color-action-border-muted-tertiary-hover: rgba(0, 0, 0, 0);
+  --eds-color-action-border-muted-tertiary-initial: rgba(0, 0, 0, 0);
   --eds-color-action-border-muted-secondary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-border-muted-secondary-hover: var(--eds-color-slate-grey-500); /* Button */
   --eds-color-action-border-muted-secondary-initial: var(--eds-color-slate-grey-600); /* Button */
   --eds-color-action-border-muted-primary-disabled: var(--eds-color-slate-grey-1300); /* Button */
   --eds-color-action-border-muted-primary-hover: var(--eds-color-slate-grey-500); /* Button */
   --eds-color-action-border-muted-primary-initial: var(--eds-color-slate-grey-600); /* Button */
+  --eds-color-action-border-standard-tertiary-hover: rgba(0, 0, 0, 0);
+  --eds-color-action-border-standard-tertiary-initial: rgba(0, 0, 0, 0);
+  --eds-color-action-border-standard-tertiary-disabled: rgba(0, 0, 0, 0);
   --eds-color-action-border-standard-secondary-hover: var(--eds-color-moss-green-sat-300); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-initial: var(--eds-color-moss-green-sat-500); /* Button, Toggle button */
   --eds-color-action-border-standard-secondary-disabled: var(--eds-color-slate-grey-1100); /* Button */
@@ -448,18 +428,32 @@
   --eds-color-action-text-standard-primary-initial: var(--eds-color-neutral-1500); /* Button */
   --eds-color-action-text-standard-primary-disabled: var(--eds-color-slate-grey-1000); /* Button */
   --eds-color-action-text-primary-disabled: var(--eds-color-neutral-1000); /* Button */
+  --eds-color-interactive-surface-raised-active-hover: rgba(42, 88, 116, 0.5); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-active: rgba(42, 88, 116, 0.5); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-hover: rgba(234, 234, 234, 0.1); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-initial: rgba(234, 234, 234, 0.1); /* Interactive Chip */
+  --eds-color-interactive-surface-raised-disabled: rgba(46, 63, 76, 0.4); /* Interactive Chip (disabled) */
   --eds-color-interactive-surface-standard-quaternary-active-hover: var(--eds-color-mist-blue-muted-1200); /* Sidebar link */
+  --eds-color-interactive-surface-standard-quaternary-active: rgba(0, 0, 0, 0); /* Tab */
   --eds-color-interactive-surface-standard-quaternary-hover: var(--eds-color-slate-blue-1200); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-initial: rgba(0, 0, 0, 0); /* Tab */
+  --eds-color-interactive-surface-standard-quaternary-disabled: rgba(0, 0, 0, 0); /* Tab */
   --eds-color-interactive-surface-standard-tertiary-active-hover: var(--eds-color-mist-blue-muted-1100); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-active: var(--eds-color-mist-blue-muted-1200); /* Sidebar link */
   --eds-color-interactive-surface-standard-tertiary-hover: var(--eds-color-slate-blue-1200); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-initial: rgba(0, 0, 0, 0); /* Sidebar link */
+  --eds-color-interactive-surface-standard-tertiary-disabled: rgba(0, 0, 0, 0); /* Sidebar link */
   --eds-color-interactive-surface-standard-secondary-active-hover: var(--eds-color-mist-blue-muted-1000); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-active: var(--eds-color-mist-blue-muted-1100); /* Sidebar menu */
   --eds-color-interactive-surface-standard-secondary-hover: var(--eds-color-slate-blue-1200); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-initial: rgba(0, 0, 0, 0); /* Sidebar menu */
+  --eds-color-interactive-surface-standard-secondary-disabled: rgba(0, 0, 0, 0); /* Sidebar menu */
   --eds-color-interactive-surface-standard-primary-active-hover: var(--eds-color-moss-green-sat-300); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-hover: var(--eds-color-slate-blue-1200); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-initial: rgba(0, 0, 0, 0); /* Toggle button */
   --eds-color-interactive-surface-standard-primary-disabled-filled: var(--eds-color-slate-grey-1300); /* Toggle button */
+  --eds-color-interactive-surface-standard-primary-disabled-outlined: rgba(0, 0, 0, 0); /* Toggle button */
   --eds-color-interactive-border-raised-active-hover: var(--eds-color-moss-green-sat-400); /* Chip */
   --eds-color-interactive-border-raised-active: var(--eds-color-mist-blue-muted-1200); /* Chip */
   --eds-color-interactive-border-raised-hover: var(--eds-color-slate-grey-400); /* Chip */
@@ -467,11 +461,19 @@
   --eds-color-interactive-border-raised-disabled: var(--eds-color-slate-grey-1000); /* Chip */
   --eds-color-interactive-border-standard-quaternary-active-hover: var(--eds-color-moss-green-sat-300); /* Tab */
   --eds-color-interactive-border-standard-quaternary-active: var(--eds-color-moss-green-sat-500); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-hover: rgba(255, 255, 255, 0.2); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-initial: rgba(255, 255, 255, 0.16); /* Tab */
+  --eds-color-interactive-border-standard-quaternary-disabled: rgba(255, 255, 255, 0.16); /* Tab */
   --eds-color-interactive-border-standard-tertiary-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-active: var(--eds-color-moss-green-sat-500); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-hover: var(--eds-color-neutral-100); /* Tab */
   --eds-color-interactive-border-standard-tertiary-initial: var(--eds-color-slate-blue-1400); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-disabled: var(--eds-color-slate-blue-1400); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active-hover: rgba(0, 0, 0, 0); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-active: rgba(0, 0, 0, 0); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-hover: rgba(0, 0, 0, 0); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-initial: rgba(0, 0, 0, 0); /* Sidebar menu */
+  --eds-color-interactive-border-standard-secondary-disabled: rgba(0, 0, 0, 0); /* Sidebar menu */
   --eds-color-interactive-border-standard-primary-active-hover: var(--eds-color-moss-green-sat-500); /* Toggle button */
   --eds-color-interactive-border-standard-primary-active: var(--eds-color-moss-green-sat-500); /* Toggle button */
   --eds-color-interactive-border-standard-primary-hover: var(--eds-color-slate-grey-600); /* Toggle button */
@@ -531,23 +533,21 @@
   --eds-color-static-surface-standard-on-level-2: var(--eds-color-slate-blue-1350);
   --eds-color-static-surface-standard-on-level-1: var(--eds-color-slate-blue-1350);
   --eds-color-static-surface-inverted: var(--eds-color-surface-inverted-on-dark);
+  --eds-color-static-surface-raised: rgba(234, 234, 234, 0.1);
   --eds-color-static-border-standard-on-level-3: var(--eds-color-slate-blue-1300);
   --eds-color-static-border-standard-on-level-2: var(--eds-color-slate-blue-1350);
   --eds-color-static-border-standard-on-level-1: var(--eds-color-slate-blue-1350);
   --eds-color-static-border-inverted: var(--eds-color-border-inverted-on-dark);
   --eds-color-static-border-raised: var(--eds-color-slate-grey-1100);
-  --eds-color-static-icon-raised: var(--eds-color-moss-green-sat-300);
-  --eds-color-static-text-raised: var(--eds-color-moss-green-sat-300);
-  --eds-color-message-text-standard-error: var(--eds-color-message-text-raised-error-initial); /* Deprecated - Card. Use text/message. */
-  --eds-color-message-text-standard-warning: var(--eds-color-message-text-raised-warning-initial); /* Deprecated - Card. Use text/message. */
-  --eds-color-message-text-standard-success: var(--eds-color-message-text-raised-success-initial); /* Deprecated - Card. Use text/message. */
-  --eds-color-message-text-standard-info: var(--eds-color-message-text-raised-info-initial); /* Deprecated - Card. Use text/message. */
   --eds-color-static-icon-standard-maximal: var(--eds-color-icon-maximal-on-dark);
   --eds-color-static-icon-standard-secondary: var(--eds-color-icon-secondary-on-dark);
   --eds-color-static-icon-standard-primary: var(--eds-color-icon-primary-on-dark);
   --eds-color-static-icon-inverted: var(--eds-color-icon-inverted-on-dark);
+  --eds-color-static-icon-raised: var(--eds-color-moss-green-sat-300);
   --eds-color-static-text-standard-maximal: var(--eds-color-text-maximal-on-dark);
   --eds-color-static-text-standard-secondary: var(--eds-color-text-secondary-on-dark);
   --eds-color-static-text-standard-primary: var(--eds-color-text-primary-on-dark);
   --eds-color-static-text-inverted: var(--eds-color-text-inverted-on-dark);
+  --eds-color-static-text-raised: var(--eds-color-moss-green-sat-300);
+  --eds-color-shadow: rgba(0, 0, 0, 0.14); /* For use in box shadows */
 }

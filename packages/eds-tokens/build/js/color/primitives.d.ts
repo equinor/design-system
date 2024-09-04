@@ -1,8 +1,7 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
-/** White */
 export const COLOR_NEUTRAL_0 : string;
 export const COLOR_NEUTRAL_100 : string;
 export const COLOR_NEUTRAL_200 : string;

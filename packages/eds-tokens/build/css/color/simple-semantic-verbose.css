@@ -1,32 +1,32 @@
 /**
- * Do not edit directly
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
-  --eds-color-surface-inverted-on-dark: #dcf2fff2;
-  --eds-color-surface-inverted-on-light: #000000cc;
-  --eds-color-surface-none: #ffffff00;
-  --eds-color-border-inverted-on-dark: #dcf2fff2;
-  --eds-color-border-inverted-on-light: #000000cc;
-  --eds-color-border-maximal-on-dark: #ffffff80;
-  --eds-color-border-quaternary-on-dark: #ffffff66;
-  --eds-color-border-tertiary-on-dark: #ffffff4d;
-  --eds-color-border-secondary-on-dark: #ffffff33;
-  --eds-color-border-primary-on-dark: #ffffff29;
-  --eds-color-border-none: #ffffff00;
   --eds-color-surface-on-level-3-on-dark: var(--eds-color-slate-blue-1300);
   --eds-color-surface-on-level-3-on-light: var(--eds-color-neutral-0);
   --eds-color-surface-on-level-2-on-dark: var(--eds-color-slate-blue-1350);
   --eds-color-surface-on-level-2-on-light: var(--eds-color-neutral-0);
   --eds-color-surface-on-level-1-on-dark: var(--eds-color-slate-blue-1400);
   --eds-color-surface-on-level-1-on-light: var(--eds-color-neutral-100);
+  --eds-color-surface-inverted-on-dark: rgba(220, 242, 255, 0.95);
+  --eds-color-surface-inverted-on-light: rgba(0, 0, 0, 0.8);
+  --eds-color-surface-none: rgba(255, 255, 255, 0);
+  --eds-color-border-inverted-on-dark: rgba(220, 242, 255, 0.95);
+  --eds-color-border-inverted-on-light: rgba(0, 0, 0, 0.8);
   --eds-color-border-disabled-on-dark: var(--eds-color-slate-grey-1100);
   --eds-color-border-disabled-on-light: var(--eds-color-neutral-300);
+  --eds-color-border-maximal-on-dark: rgba(255, 255, 255, 0.5);
   --eds-color-border-maximal-on-light: var(--eds-color-neutral-1400);
+  --eds-color-border-quaternary-on-dark: rgba(255, 255, 255, 0.4);
   --eds-color-border-quaternary-on-light: var(--eds-color-neutral-900);
+  --eds-color-border-tertiary-on-dark: rgba(255, 255, 255, 0.3);
   --eds-color-border-tertiary-on-light: var(--eds-color-neutral-700);
+  --eds-color-border-secondary-on-dark: rgba(255, 255, 255, 0.2);
   --eds-color-border-secondary-on-light: var(--eds-color-neutral-500);
+  --eds-color-border-primary-on-dark: rgba(255, 255, 255, 0.16);
   --eds-color-border-primary-on-light: var(--eds-color-neutral-300);
+  --eds-color-border-none: rgba(255, 255, 255, 0);
   --eds-color-icon-inverted-on-dark: var(--eds-color-neutral-1500);
   --eds-color-icon-inverted-on-light: var(--eds-color-neutral-0);
   --eds-color-icon-disabled-on-dark: var(--eds-color-slate-grey-1000);
