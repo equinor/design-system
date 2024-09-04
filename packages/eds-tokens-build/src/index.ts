@@ -54,10 +54,11 @@ StyleDictionary.registerTransform({
   transform: (token: TransformedToken, config) => {
     const outputReferences = config?.files?.[0]?.options?.outputReferences
     const path = token.path.join('/')
-    let resolvedLightReference
     const darkValue =
       darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
 
+    //we have to manually create css variables for both light and dark
+    let resolvedLightReference
     if (outputReferences && usesReferences(token.original.$value)) {
       resolvedLightReference = resolveReference(
         `${token.original.$value}`,
@@ -79,8 +80,8 @@ StyleDictionary.registerTransform({
             return `light-dark(${token.$value}, ${darkValue})`
           }
         }
+        //the dark value is not a reference but a direct value (color with alpha transparency)
       } else {
-        //the dark value was hardcoded (color with alpha transparency)
         if (outputReferences && resolvedLightReference) {
           return `light-dark(${resolvedLightReference}, ${darkValue})`
         } else {
@@ -88,6 +89,7 @@ StyleDictionary.registerTransform({
         }
       }
     }
+    //there is no dark value
     return `${token.$value}`
   },
 })
@@ -106,7 +108,7 @@ StyleDictionary.registerTransform({
     if (comfortableValue) {
       //it is a reference
       if (usesReferences(comfortableValue)) {
-        //make sure it is not a local variable
+        //make sure it is not a locally defined variable
         if (token.original.$value != comfortableValue) {
           const outputReferences =
             options?.files?.[0]?.options?.outputReferences
