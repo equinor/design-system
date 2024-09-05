@@ -179,6 +179,41 @@ Multiple.args = {
   options: stocks,
 }
 
+export const ControlledSingleSelect: StoryFn<
+  AutocompleteProps<MyOptionType>
+> = () => {
+  const [selectedOptions, setSelectedOptions] = useState([])
+  const options = ['option 1', 'option 2', 'option 3', 'option 4']
+  const isOptionDisabled = (item: string) => item === 'option 3'
+  return (
+    <div>
+      <Autocomplete
+        label="test"
+        options={options}
+        selectedOptions={selectedOptions}
+        onOptionsChange={({ selectedItems: options }) =>
+          setSelectedOptions(options)
+        }
+        optionDisabled={isOptionDisabled}
+      />
+      <Button
+        onClick={() => {
+          setSelectedOptions([
+            options.filter((option) => !selectedOptions.includes(option))[
+              Math.floor(Math.random() * (options.length - 1))
+            ],
+          ])
+        }}
+      >
+        Change to random other option
+      </Button>
+      <Typography>Selected option is: {selectedOptions[0]}</Typography>
+    </div>
+  )
+}
+//this story is for internal testing, so by default we hide the story from the sidebar
+ControlledSingleSelect.tags = ['!dev']
+
 export const OptionLabel: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
