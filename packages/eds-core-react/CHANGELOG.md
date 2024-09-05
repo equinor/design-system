@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.41.4] - 2024-09-05
+
+### Changed
+
+- 🐛 `NativeSelect`: Remove dropdown svg icon when `multiple` is set by @mhwaage in https://github.com/equinor/design-system/pull/3611
+- ⬆️ Updated `@tanstack/react-virtual` by @oddvernes in https://github.com/equinor/design-system/pull/3606
+- ⬆️ Updated `downshift` by @oddvernes in https://github.com/equinor/design-system/pull/3608
+
+### Fixed
+
+- 🐛 `Autocomplete`: in controlled singleselect, if updating `selectedOptions` programmatically by something other that the `Autocomplete` itself, the internal "selected item" state was not updated by @oddvernes in https://github.com/equinor/design-system/pull/3614
+
 ## [0.41.3] - 2024-08-28
 
 ### Changed
