@@ -684,6 +684,11 @@ function AutocompleteInner<T>(
                 allDisabled,
               }),
             }
+          case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
+            setSelectedItems([changes.selectedItem])
+            return {
+              ...changes,
+            }
           default:
             return changes
         }
