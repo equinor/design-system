@@ -1,7 +1,11 @@
 import { forwardRef, MouseEvent, HTMLAttributes, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useGlobalKeyPress, mergeRefs } from '@equinor/eds-utils'
+import {
+  useGlobalKeyPress,
+  mergeRefs,
+  useHideBodyScroll,
+} from '@equinor/eds-utils'
 import { FloatingOverlay } from '@floating-ui/react'
 
 const { background } = tokens
@@ -34,6 +38,7 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   ref,
 ) {
   const scrimRef = useRef<HTMLDivElement>(null)
+  useHideBodyScroll(open)
 
   const combinedScrimRef = useMemo(
     () => mergeRefs<HTMLDivElement>(scrimRef, ref),
@@ -60,7 +65,6 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
 
   return (
     <StyledScrim
-      lockScroll
       onMouseDown={handleMouseClose}
       ref={combinedScrimRef}
       {...rest}
