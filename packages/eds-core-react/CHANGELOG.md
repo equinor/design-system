@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.41.5] - 2024-09-10
+
+### Fixed
+
+- 🐛`Scrim`: fixed a bug where body scroll was not restored after opening a `Dialog` within `Scrim` by @oddvernes in https://github.com/equinor/design-system/pull/3619
+
 ## [0.41.4] - 2024-09-05
 
 ### Changed
