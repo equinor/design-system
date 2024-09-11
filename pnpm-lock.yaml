@@ -90,8 +90,8 @@ importers:
         specifier: workspace:^
         version: link:../eds-icons
       '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
+        specifier: 1.0.0-beta-2
+        version: 1.0.0-beta-2
       '@equinor/eds-utils':
         specifier: workspace:*
         version: link:../eds-utils
@@ -244,7 +244,7 @@ importers:
   packages/eds-data-grid-react:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: workspace:>=0.36.0
+        specifier: workspace:>=0.36.0 || ^1.0.0-beta.1
         version: link:../eds-core-react
       '@equinor/eds-icons':
         specifier: workspace:^
@@ -1588,6 +1588,9 @@ packages:
 
   '@emotion/unitless@0.8.1':
     resolution: {integrity: sha512-KOEGMu6dmJZtpadb476IsZBclKvILjopjUii3V+7MnXIQCYh8W3NgNcgwo21n9LXZX6EDIKvqfjYxXebDwxKmQ==}
+
+  '@equinor/eds-tokens@1.0.0-beta-2':
+    resolution: {integrity: sha512-cVtdhQi/nptL6wsr5oqBVcBGKerKrb/TyKLMY/740NE4yWSWvqJoT24GvbUK5DdLrqOpAQm3esl11kM3cDpf5g==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -8480,6 +8483,8 @@ snapshots:
 
   '@emotion/unitless@0.8.1': {}
 
+  '@equinor/eds-tokens@1.0.0-beta-2': {}
+
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
 
@@ -10488,6 +10493,7 @@ snapshots:
   '@types/node@22.5.3':
     dependencies:
       undici-types: 6.19.8
+    optional: true
 
   '@types/prop-types@15.7.12': {}
 
@@ -13395,7 +13401,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.5.3
+      '@types/node': 22.1.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -15471,7 +15477,8 @@ snapshots:
 
   undici-types@6.13.0: {}
 
-  undici-types@6.19.8: {}
+  undici-types@6.19.8:
+    optional: true
 
   unicode-canonical-property-names-ecmascript@2.0.0: {}
 
