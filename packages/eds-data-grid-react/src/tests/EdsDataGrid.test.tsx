@@ -136,6 +136,37 @@ describe('EdsDataGrid', () => {
         expect(window.getComputedStyle(column).position).toBe('sticky')
       })
     })
+
+    /**
+     * Footer
+     */
+    it('should not render footer by default when enableFooter is not provided', () => {
+      render(<EdsDataGrid columns={columns} rows={data} />)
+      const foot = screen.queryByTestId('eds-grid-footer')
+      expect(foot).toBeNull() // Assert Footer is not available in the document
+    })
+
+    it('should render footer when `enableFooter` is provided', () => {
+      render(<EdsDataGrid columns={columns} rows={data} enableFooter />)
+      const foot = screen.getByTestId('eds-grid-footer')
+      expect(foot).toBeTruthy() // Assert Footer is not available in the document
+      const thElements = within(foot).getAllByRole('columnheader')
+      thElements.forEach((th) => {
+        expect(window.getComputedStyle(th).position).not.toBe('sticky')
+      })
+    })
+
+    it('should render sticky footer when `enableFooter` & `stickyFooter` provided', () => {
+      render(
+        <EdsDataGrid columns={columns} rows={data} enableFooter stickyFooter />,
+      )
+      const foot = screen.getByTestId('eds-grid-footer')
+      expect(foot).toBeTruthy() // Assert Footer is not available in the document
+      const thElements = within(foot).getAllByRole('columnheader')
+      thElements.forEach((th) => {
+        expect(window.getComputedStyle(th).position).toBe('sticky')
+      })
+    })
   })
 
   describe('Sorting', () => {
@@ -390,10 +421,13 @@ describe('EdsDataGrid', () => {
       const cellStyle = () => ({ backgroundColor: 'red' })
       const rowStyle = () => ({ backgroundColor: 'blue' })
       const headerStyle = () => ({ backgroundColor: 'green' })
+      const footerStyle = () => ({ backgroundColor: 'yellow', color: 'black' })
       render(
         <EdsDataGrid
+          enableFooter // `enableFooter` will show footer
           cellStyle={cellStyle}
           headerStyle={headerStyle}
+          footerStyle={footerStyle}
           rowStyle={rowStyle}
           columns={columns}
           rows={data}
@@ -407,18 +441,28 @@ describe('EdsDataGrid', () => {
       expect(screen.getAllByRole('columnheader')[0].style.backgroundColor).toBe(
         'green',
       )
+      const foot = screen.getByTestId('eds-grid-footer')
+      expect(foot).toBeTruthy() // Assert Footer is available in the document
+      const thElements = within(foot).getAllByRole('columnheader')
+      thElements.forEach((th) => {
+        expect(th.style.backgroundColor).toBe('yellow')
+        expect(th.style.color).toBe('black')
+      })
     })
 
-    it('should apply classes to the table', () => {
+    it('should apply classes to the table + footer enabled', () => {
       const cellClass = () => 'cell-class'
       const rowClass = () => 'row-class'
       const headerClass = () => 'header-class'
+      const footerClass = () => 'footer-class'
 
       render(
         <EdsDataGrid
+          enableFooter
           cellClass={cellClass}
           rowClass={rowClass}
           headerClass={headerClass}
+          footerClass={footerClass}
           columns={columns}
           rows={data}
         />,
@@ -429,6 +473,12 @@ describe('EdsDataGrid', () => {
       expect(firstCell.classList.contains('cell-class')).toBeTruthy()
       const firstHeader = screen.getAllByRole('columnheader')[0]
       expect(firstHeader.classList.contains('header-class')).toBeTruthy()
+      const foot = screen.getByTestId('eds-grid-footer')
+      expect(foot).toBeTruthy() // Assert Footer is available in the document
+      const thElements = within(foot).getAllByRole('columnheader')
+      thElements.forEach((th) => {
+        expect(th.classList.contains('footer-class')).toBeTruthy()
+      })
     })
   })
 })

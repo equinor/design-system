@@ -1,18 +1,16 @@
 import {
-  ColumnPinningPosition,
   ColumnResizeMode,
   flexRender,
   Header,
   SortDirection,
   Table as TanStackTable,
 } from '@tanstack/react-table'
-import { Table } from '@equinor/eds-core-react'
 import { useTableContext } from '../EdsDataGridContext'
-import styled from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
 import { useMemo } from 'react'
 import { FilterWrapper } from './FilterWrapper'
 import { SortIndicator } from './SortIndicator'
+import { ResizeInner, Resizer } from './Resizer'
+import { TableCell } from './TableCell'
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -32,61 +30,6 @@ const getSortLabel = (
   return 'none'
 }
 
-type ResizeProps = {
-  $columnResizeMode: ColumnResizeMode | null | undefined
-  $isResizing: boolean
-}
-
-const ResizeInner = styled.div`
-  width: 2px;
-  opacity: 0;
-  height: 100%;
-`
-
-const Resizer = styled.div<ResizeProps>`
-  transform: ${(props) =>
-    props.$columnResizeMode === 'onEnd' ? 'translateX(0px)' : 'none'};
-
-  ${ResizeInner} {
-    opacity: ${(props) => (props.$isResizing ? 1 : 0)};
-  }
-
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 5px;
-  cursor: col-resize;
-  user-select: none;
-  touch-action: none;
-  display: flex;
-  justify-content: flex-end;
-`
-
-const Cell = styled(Table.Cell)<{
-  $sticky: boolean
-  $pinned: ColumnPinningPosition
-  $offset: number
-}>`
-  font-weight: bold;
-  position: ${(p) => (p.$sticky || p.$pinned ? 'sticky' : 'relative')};
-  top: 0;
-  ${(p) => {
-    if (p.$pinned) {
-      return `${p.$pinned}: ${p.$offset}px;`
-    }
-    return ''
-  }}
-  ${(p) => {
-    if (p.$sticky && p.$pinned) return 'z-index: 13'
-    if (p.$sticky || p.$pinned) return 'z-index: 12'
-  }};
-  &:hover ${ResizeInner} {
-    background: ${tokens.colors.interactive.primary__hover.rgba};
-    opacity: 1;
-  }
-`
-
 export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
   const ctx = useTableContext()
   const table = ctx.table
@@ -100,7 +43,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       : table.getTotalSize() - header.getStart() - header.getSize()
   }, [pinned, header, table])
   return header.isPlaceholder ? (
-    <Cell
+    <TableCell
       $sticky={ctx.stickyHeader}
       $offset={offset}
       $pinned={pinned}
@@ -111,7 +54,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       aria-hidden={true}
     />
   ) : (
-    <Cell
+    <TableCell
       $sticky={ctx.stickyHeader}
       $offset={offset}
       $pinned={pinned}
@@ -158,6 +101,6 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           <ResizeInner />
         </Resizer>
       )}
-    </Cell>
+    </TableCell>
   )
 }

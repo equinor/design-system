@@ -62,6 +62,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -75,6 +76,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -89,6 +91,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -106,6 +109,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -136,6 +140,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -158,6 +163,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -186,6 +192,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -218,6 +225,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
@@ -225,7 +233,7 @@ describe('Filter', () => {
         </TableProvider>,
       )
       openPopover(baseElement)
-      // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
+      // eslint complains about unnecessary cast, but HTMLElement != HTMLInputElement
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
@@ -256,6 +264,7 @@ describe('Filter', () => {
         <TableProvider
           enableSorting={false}
           stickyHeader={true}
+          stickyFooter={false}
           enableColumnFiltering={true}
           table={table}
         >
