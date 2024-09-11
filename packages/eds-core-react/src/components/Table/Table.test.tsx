@@ -1,12 +1,50 @@
 /* eslint-disable no-undef */
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { Table } from '.'
 import styled from 'styled-components'
 import { tableCell as dataCellToken } from './DataCell/DataCell.tokens'
 import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
 
-const { Caption, Cell, Head, Row, Body } = Table
+const { Caption, Cell, Head, Row, Body, Foot } = Table
+
+const RenderFooterTable = ({ sticky = false }: { sticky?: boolean }) => {
+  return (
+    <Table>
+      <Head>
+        <Row>
+          <Cell>Country</Cell>
+          <Cell>Tax</Cell>
+          <Cell>Discount</Cell>
+        </Row>
+      </Head>
+      <Body>
+        <Row>
+          <Cell>Italy</Cell>
+          <Cell>42</Cell>
+          <Cell>12</Cell>
+        </Row>
+        <Row>
+          <Cell>Norway</Cell>
+          <Cell>50</Cell>
+          <Cell>10</Cell>
+        </Row>
+        <Row>
+          <Cell>Swedend</Cell>
+          <Cell>32</Cell>
+          <Cell>15</Cell>
+        </Row>
+      </Body>
+      <Foot data-testid="footer" sticky={sticky}>
+        <Row>
+          <Cell>Total</Cell>
+          <Cell>54</Cell>
+          <Cell>4</Cell>
+        </Row>
+      </Foot>
+    </Table>
+  )
+}
 
 describe('Caption', () => {
   it('Renders a caption with provided text', () => {
@@ -295,5 +333,23 @@ describe('Table', () => {
       headerCellToken.states.active.typography.color,
     )
     expect(headerCell2).toHaveStyleRule('border-color', borderBottomColor)
+  })
+  it('Renders a table with fixed footer if <Foot> is provided', () => {
+    render(<RenderFooterTable sticky />)
+    const foot = screen.getByTestId('footer') // Assert Footer is available in the document
+    expect(foot).toBeInTheDocument()
+    const thElements = within(foot).getAllByRole('columnheader')
+    thElements.forEach((th) => {
+      expect(th).toHaveStyle('position: sticky') // Ensure this one is sticky
+    })
+  })
+  it('Renders a table with footer ( not fixed ) if <Foot> is provided', () => {
+    render(<RenderFooterTable />)
+    const foot = screen.getByTestId('footer') // Assert Footer is available in the document
+    expect(foot).toBeInTheDocument()
+    const thElements = within(foot).getAllByRole('columnheader')
+    thElements.forEach((th) => {
+      expect(th).not.toHaveStyle('position: sticky') // Ensure this one is not sticky
+    })
   })
 })

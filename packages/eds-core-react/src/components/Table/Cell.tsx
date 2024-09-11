@@ -2,6 +2,7 @@ import { TdHTMLAttributes, ThHTMLAttributes, forwardRef } from 'react'
 import { Variants, Colors } from './Table.types'
 import { TableDataCell } from './DataCell'
 import { TableHeaderCell } from './HeaderCell'
+import { TableFooterCell } from './FooterCell'
 import { InnerContext } from './Inner.context'
 
 export type CellProps = {
@@ -25,6 +26,8 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(function Cell(
         switch (variant) {
           case 'head':
             return <TableHeaderCell ref={ref} sticky={sticky} {...rest} />
+          case 'foot':
+            return <TableFooterCell ref={ref} sticky={sticky} {...rest} />
           default:
           case 'body':
             return <TableDataCell ref={ref} {...rest} />
