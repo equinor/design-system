@@ -22,12 +22,12 @@ import page from './Table.docs.mdx'
 
 Icon.add({ arrow_down, arrow_up })
 
-const { Caption, Body, Row, Cell, Head } = Table
+const { Caption, Body, Row, Cell, Head, Foot } = Table
 
 const meta: Meta<typeof Table> = {
   title: 'Data Display/Table',
   component: Table,
-  subcomponents: { Caption, Head, Body, Cell, Row },
+  subcomponents: { Caption, Head, Body, Cell, Row, Foot },
   parameters: {
     docs: {
       page,
@@ -66,6 +66,11 @@ export const introduction: StoryFn<TableProps> = (args) => {
           </Table.Row>
         ))}
       </Table.Body>
+      <Table.Foot>
+        <Table.Row>
+          <Table.Cell colSpan={columns.length}>Footer</Table.Cell>
+        </Table.Row>
+      </Table.Foot>
     </Table>
   )
 }
@@ -112,6 +117,46 @@ export const FixedTableHeader: StoryFn<TableProps> = () => {
   )
 }
 FixedTableHeader.storyName = 'Fixed table header'
+
+export const FixedTableHeaderAndFooter: StoryFn<TableProps> = () => {
+  const cellValues = toCellValues(data, columns)
+  const total = data.reduce((acc, curr) => acc + curr?.price, 0)
+  return (
+    <div style={{ height: '400px', overflow: 'auto', display: 'grid' }}>
+      <Table>
+        <Table.Caption>
+          <Typography variant="h2" style={{ marginBottom: '16px' }}>
+            Fruits cost price
+          </Typography>
+        </Table.Caption>
+        <Table.Head sticky>
+          <Table.Row>
+            {columns.map((col) => (
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
+            ))}
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {cellValues?.map((row) => (
+            <Table.Row key={row.toString()}>
+              {row.map((cellValue) => (
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Body>
+        <Table.Foot sticky>
+          <Table.Row>
+            <Table.Cell colSpan={columns?.length - 1}>Total</Table.Cell>
+            <Table.Cell colSpan={1}>{total}</Table.Cell>
+          </Table.Row>
+        </Table.Foot>
+      </Table>
+    </div>
+  )
+}
+
+FixedTableHeaderAndFooter.storyName = 'Fixed table header and footer'
 
 export const CompactTable: StoryFn<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
@@ -213,6 +258,11 @@ export const CompactTable: StoryFn<TableProps> = () => {
               </Table.Row>
             ))}
           </Table.Body>
+          <Table.Foot>
+            <Table.Row>
+              <Table.Cell colSpan={5}>Footer</Table.Cell>
+            </Table.Row>
+          </Table.Foot>
         </Table>
       </EdsProvider>
     </>
@@ -343,6 +393,11 @@ export const Sortable: StoryFn<TableProps> = () => {
           </Table.Row>
         ))}
       </Table.Body>
+      <Table.Foot>
+        <Table.Row>
+          <Table.Cell colSpan={5}>Footer</Table.Cell>
+        </Table.Row>
+      </Table.Foot>
     </Table>
   )
 }
@@ -362,6 +417,133 @@ type Photo = {
   title: string
   url: string
   thumbnailUrl: string
+}
+
+export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
+  const [data, setData] = useState<Array<Photo>>([])
+  const parentRef = useRef()
+
+  const estimateSize = useCallback(() => {
+    return 48
+  }, [])
+
+  const virtualizer = useVirtualizer({
+    count: data.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize,
+  })
+
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://jsonplaceholder.typicode.com/photos`, { signal })
+      .then((r) => r.json())
+      .then((d: Photo[]) => {
+        setData(d.slice(0, 100))
+      })
+      .catch((err: Error) => {
+        console.error(`Error: ${err.message}`)
+      })
+    return () => {
+      abortController.abort()
+    }
+  }, [])
+
+  const virtualRows = virtualizer.getVirtualItems()
+  const paddingTop = virtualRows.length ? virtualRows[0].start : 0
+  const paddingBottom = virtualRows.length
+    ? virtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
+    : 0
+
+  return (
+    <div
+      style={{
+        height: '600px',
+        overflow: 'auto',
+      }}
+      ref={parentRef}
+    >
+      <Table
+        style={{ width: '100%', paddingLeft: '15px', paddingRight: '15px' }}
+      >
+        <Table.Head sticky>
+          <Table.Row>
+            <Table.Cell>
+              <div style={{ width: '40px' }}>ID</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '70px' }}>Album ID</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '400px' }}>Title</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '120px' }}>URL</div>
+            </Table.Cell>
+            <Table.Cell>
+              <div style={{ width: '120px' }}>Thumbnail url</div>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell style={{ height: `${paddingTop}px` }}></Table.Cell>
+          </Table.Row>
+          {virtualRows.map((virtualRow) => {
+            const row: Photo = data[virtualRow.index]
+
+            return (
+              <Table.Row key={row.id}>
+                <Table.Cell>
+                  <div style={{ width: '40px' }}>{row.id}</div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '70px' }}>{row.albumId}</div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div
+                    style={{
+                      width: '400px',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {row.title}
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '120px' }}>
+                    {' '}
+                    <Typography link href={row.url} target="_blank">
+                      Open image
+                    </Typography>
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ width: '120px' }}>
+                    {' '}
+                    <Typography link href={row.thumbnailUrl} target="_blank">
+                      Open thumbnail
+                    </Typography>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            )
+          })}
+          <Table.Row>
+            <Table.Cell style={{ height: `${paddingBottom}px` }}></Table.Cell>
+          </Table.Row>
+        </Table.Body>
+        <Table.Foot sticky>
+          <Table.Row>
+            <Table.Cell colSpan={5}>{`Total ${data?.length} items`}</Table.Cell>
+          </Table.Row>
+        </Table.Foot>
+      </Table>
+    </div>
+  )
 }
 
 export const VirtualScrolling: StoryFn<TableProps> = () => {
@@ -481,6 +663,11 @@ export const VirtualScrolling: StoryFn<TableProps> = () => {
             <Table.Cell style={{ height: `${paddingBottom}px` }}></Table.Cell>
           </Table.Row>
         </Table.Body>
+        <Table.Foot>
+          <Table.Row>
+            <Table.Cell colSpan={5}>Footer</Table.Cell>
+          </Table.Row>
+        </Table.Foot>
       </Table>
     </div>
   )

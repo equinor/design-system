@@ -26,12 +26,14 @@ import { FilterWrapper } from './components/FilterWrapper'
 import {
   Photo,
   PostComment,
+  Summary,
+  aggregatedSummaryColumns,
   columns,
   expandColumns,
   groupedColumns,
   helper,
 } from './stories/columns'
-import { data } from './stories/data'
+import { data, summaryData } from './stories/data'
 import { Virtualizer } from './types'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
@@ -392,6 +394,38 @@ ColumnPinning.args = {
   columns: columns,
   height: 500,
   rows: data,
+  enableFooter: true,
+  stickyFooter: true,
+}
+
+export const ColumnPinningWithFooter: StoryFn<EdsDataGridProps<Summary>> = (
+  args,
+) => {
+  const { columnPinState } = args
+  return (
+    <>
+      <Typography as={'div'} style={{ whiteSpace: 'pre' }}>
+        {JSON.stringify(columnPinState, null, 2)}
+      </Typography>
+      <EdsDataGrid {...args} />
+    </>
+  )
+}
+
+ColumnPinningWithFooter.args = {
+  columnPinState: {
+    left: [aggregatedSummaryColumns.at(0).id],
+  },
+  scrollbarHorizontal: true,
+  stickyHeader: true,
+  width: 700,
+  columns: aggregatedSummaryColumns,
+  height: 500,
+  rows: summaryData,
+  enableFooter: true,
+  stickyFooter: true,
+  headerClass: () => 'header-class',
+  footerClass: () => 'footer-class',
 }
 
 export const ColumnOrdering: StoryFn<EdsDataGridProps<Photo>> = (args) => {

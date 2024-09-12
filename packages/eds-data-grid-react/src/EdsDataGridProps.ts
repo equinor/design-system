@@ -47,6 +47,11 @@ type BaseProps<T> = {
    */
   stickyHeader?: boolean
   /**
+   * Make the table footer sticky
+   * @default false
+   */
+  stickyFooter?: boolean
+  /**
    * Element to display in Table.Caption
    * @default undefined
    */
@@ -95,6 +100,10 @@ type BaseProps<T> = {
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#defaultcolumn)
    */
   defaultColumn?: Partial<ColumnDef<T, unknown>>
+  /**
+   * Optional props to show table footer
+   */
+  enableFooter?: boolean
 }
 
 type RowSelectionProps<T> = {
@@ -179,6 +188,16 @@ type StyleProps<T> = {
    * @param column
    */
   headerStyle?: (column: Column<T>) => CSSProperties
+  /**
+   * Function that can be used to set custom classes on a footer cell
+   * @param column
+   */
+  footerClass?: (column: Column<T>) => string
+  /**
+   * Function that can be used to set custom styles on a footer cell
+   * @param column
+   */
+  footerStyle?: (column: Column<T>) => CSSProperties
 }
 
 type FilterProps = {

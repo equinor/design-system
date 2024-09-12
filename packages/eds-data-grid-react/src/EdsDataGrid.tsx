@@ -32,6 +32,7 @@ import styled from 'styled-components'
 import { TableProvider } from './EdsDataGridContext'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { TableHeaderRow } from './components/TableHeaderRow'
+import { TableFooterRow } from './components/TableFooterRow'
 import { TableRow } from './components/TableRow'
 import {
   addPxSuffixIfInputHasNoPrefix,
@@ -54,6 +55,7 @@ export function EdsDataGrid<T>({
   enablePagination,
   enableSorting,
   stickyHeader,
+  stickyFooter,
   onSelectRow,
   onRowSelectionChange,
   caption,
@@ -69,6 +71,8 @@ export function EdsDataGrid<T>({
   rowStyle,
   headerClass,
   headerStyle,
+  footerClass,
+  footerStyle,
   externalPaginator,
   onSortingChange,
   manualSorting,
@@ -88,6 +92,7 @@ export function EdsDataGrid<T>({
   defaultColumn,
   onRowClick,
   onCellClick,
+  enableFooter,
 }: EdsDataGridProps<T>) {
   logDevelopmentWarningOfPropUse({
     virtualHeight: {
@@ -365,6 +370,7 @@ export function EdsDataGrid<T>({
   // These classes are primarily used to allow for feature-detection in the test-suite
   const classList = {
     'sticky-header': !!stickyHeader,
+    'sticky-footer': !!stickyFooter,
     virtual: !!enableVirtual,
     paging: !!enablePagination,
   }
@@ -377,10 +383,13 @@ export function EdsDataGrid<T>({
       rowStyle={rowStyle}
       headerClass={headerClass}
       headerStyle={headerStyle}
+      footerClass={footerClass}
+      footerStyle={footerStyle}
       table={table}
       enableSorting={!!enableSorting}
       enableColumnFiltering={!!enableColumnFiltering}
       stickyHeader={!!stickyHeader}
+      stickyFooter={!!stickyFooter}
     >
       <TableWrapper
         className="table-wrapper"
@@ -441,7 +450,6 @@ export function EdsDataGrid<T>({
 
                 {virtualRows.map((virtualItem) => {
                   const row = table.getRowModel().rows[virtualItem.index]
-
                   return (
                     <TableRow
                       key={virtualItem.index}
@@ -485,6 +493,19 @@ export function EdsDataGrid<T>({
                   />
                 ))}
           </Table.Body>
+          {enableFooter && (
+            <Table.Foot sticky={stickyFooter} data-testid="eds-grid-footer">
+              {table.getFooterGroups().map((footerGroup) => (
+                <TableFooterRow
+                  key={footerGroup.id}
+                  table={table}
+                  footerGroup={footerGroup}
+                  columnResizeMode={columnResizeMode}
+                  deltaOffset={table.getState().columnSizingInfo.deltaOffset}
+                />
+              ))}
+            </Table.Foot>
+          )}
         </Table>
         {externalPaginator
           ? externalPaginator

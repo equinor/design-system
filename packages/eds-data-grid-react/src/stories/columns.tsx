@@ -13,11 +13,63 @@ export type Photo = {
   timestamp?: Date
 }
 
-export const helper = createColumnHelper<Photo>()
+export type Summary = {
+  id: string
+  country: string
+  price: number
+  tax: number
+  discount: number
+}
 
 const Link = styled.a`
   color: ${tokens.colors.interactive.primary__resting.rgba};
 `
+
+export const summaryHelper = createColumnHelper<Summary>()
+export const aggregatedSummaryColumns: Array<ColumnDef<Summary>> = [
+  summaryHelper.accessor('country', {
+    header: 'Country',
+    footer: () => 'Total',
+    size: 150,
+    id: 'country',
+  }),
+  summaryHelper.accessor('price', {
+    header: 'Price',
+    footer: (props) => {
+      const price = props.table
+        .getCoreRowModel()
+        .rows.reduce((acc, curr) => (acc = acc + curr?.original?.price || 0), 0)
+      return <span>{price.toFixed(2)}</span>
+    },
+  }),
+  summaryHelper.accessor('tax', {
+    header: 'Tax',
+    footer: (props) => {
+      const price = props.table
+        .getCoreRowModel()
+        .rows.reduce((acc, curr) => (acc = acc + curr?.original?.tax || 0), 0)
+      return <span>{price.toFixed(2)}</span>
+    },
+    size: 250,
+    id: 'tax',
+  }),
+  summaryHelper.accessor('discount', {
+    header: 'Discount',
+    footer: (props) => {
+      const price = props.table
+        .getCoreRowModel()
+        .rows.reduce(
+          (acc, curr) => (acc = acc + curr?.original?.discount || 0),
+          0,
+        )
+      return <span>{price.toFixed(2)}</span>
+    },
+    size: 250,
+    id: 'discount',
+  }),
+]
+
+export const helper = createColumnHelper<Photo>()
 
 export const columns: Array<ColumnDef<Photo>> = [
   helper.accessor('id', {

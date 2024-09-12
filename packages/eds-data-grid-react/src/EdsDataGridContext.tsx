@@ -4,6 +4,7 @@ import { Column, Row, Table as TanStackTable } from '@tanstack/react-table'
 type Context<T> = {
   enableSorting: boolean
   stickyHeader: boolean
+  stickyFooter: boolean
   enableColumnFiltering: boolean
   table: TanStackTable<T> | null
   cellClass?: (row: Row<T>, columnId: string) => string
@@ -12,12 +13,15 @@ type Context<T> = {
   rowStyle?: (row: Row<T>) => CSSProperties
   headerClass?: (column: Column<T>) => string
   headerStyle?: (column: Column<T>) => CSSProperties
+  footerClass?: (column: Column<T>) => string
+  footerStyle?: (column: Column<T>) => CSSProperties
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const EdsDataGridContext = createContext<Context<any>>({
   enableSorting: false,
   stickyHeader: false,
+  stickyFooter: false,
   enableColumnFiltering: false,
   table: null,
 })

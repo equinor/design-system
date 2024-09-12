@@ -42,6 +42,15 @@ Tables display information in an easy to scan format.
     <li>Icons can be used for sorting columns as well as a alternative text.</li>
 </ul>
 
+
+**Table Footer**
+<ul>
+    <li>The table footer is used to display summary information, totals, or additional notes that relate to the data presented in the table body.</li>
+    <li> It serves as the concluding section of the table, often providing context or aggregated data that complements the table's content.</li>
+    <li>The width of footer cells is customizable using the `colSpan` prop, allowing footer cells to span multiple columns. This is useful for displaying summary data or totals that need to align visually across the table.</li>
+</ul>
+
+
 **Table Cell**
 <ul>
     <li>The cell row can have icons, text, links, inputs, numbers, monospaced numbers and other custom content (by using the placeholder).</li>
@@ -80,12 +89,23 @@ const Demo = () => {
                 <Table.Cell>2.5</Table.Cell>
             </Table.Row>
         </Table.Body>
+        <Table.Foot>
+           <Table.Row>
+                <Table.Cell colspan={3}>Footer</Table.Cell>
+            </Table.Row>
+        </Table.Foot>
     </Table>
     )
 }
 ```
 
 ## Examples
+
+### Fixed Table Header & Footer
+
+<Canvas of={ComponentStories.FixedTableHeaderAndFooter} />
+
+
 
 ### Fixed table header
 
@@ -108,3 +128,7 @@ To render very large datasets, "virtual scrolling" might sometimes be a good opt
 combination with 3rd party solutions such as <a href="https://tanstack.com/virtual/v3">react-virtual</a> to achieve this.
 
 <Canvas of={ComponentStories.VirtualScrolling} />
+
+
+### Virtual scrolling with fixed footer
+<Canvas of={ComponentStories.VirtualScrollingWithFixedFooter} />
