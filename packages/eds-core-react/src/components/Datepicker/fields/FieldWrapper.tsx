@@ -177,7 +177,6 @@ export const FieldWrapper = forwardRef(
           onClose={() => setIsOpen(false)}
           anchorEl={ref.current}
           placement={'bottom-start'}
-          withinPortal={true}
         >
           {calendar}
         </Popover>
