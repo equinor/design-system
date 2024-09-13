@@ -205,6 +205,17 @@ describe('DatePicker', () => {
     expect(screen.getByRole('presentation')).toHaveTextContent('04.05.2024')
 
     rerender(
+      <DatePicker
+        locale={'no'}
+        label={'Datepicker'}
+        value={date}
+        isDateUnavailable={(d) => d.getDate() === 31}
+      />,
+    )
+
+    expect(screen.getByRole('presentation')).toHaveTextContent('04.05.2024')
+
+    rerender(
       <I18nProvider locale={'zh-Hans-SG'}>
         <DatePicker
           label={'Datepicker'}

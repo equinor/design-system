@@ -12,7 +12,7 @@ import { calendar_date_range, warning_outlined } from '@equinor/eds-icons'
 import { useConvertedValidationFunctions } from './utils/useConvertedValidationFunctions'
 import { FieldWrapper } from './fields/FieldWrapper'
 import { Toggle } from './fields/Toggle'
-import { DateValue, useDateRangePicker, useLocale } from 'react-aria'
+import { DateValue, I18nProvider, useDateRangePicker } from 'react-aria'
 import {
   DateRangePickerStateOptions,
   useDateRangePickerState,
@@ -24,6 +24,7 @@ import { DatePickerProvider, defaultTimezone } from './utils/context'
 import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
 import { getCalendarDate } from './utils/get-calendar-date'
+import { useGetLocale } from './utils/useGetLocale'
 
 /**
  * DateRangePicker component encapsulates the logic for selecting a range of dates
@@ -42,6 +43,7 @@ export const DateRangePicker = forwardRef(
       Header,
       timezone,
       defaultValue,
+      locale: propLocale,
       formatOptions,
       hideClearButton,
       disabled: isDisabled,
@@ -73,7 +75,7 @@ export const DateRangePicker = forwardRef(
     const inputRef = useRef(null)
     const pickerRef = useRef(null)
     const ref = forwardedRef || inputRef
-    const { locale } = useLocale()
+    const locale = useGetLocale(propLocale)
 
     const { _minValue, _maxValue, _isDateUnavailable } =
       useConvertedValidationFunctions(
@@ -158,54 +160,56 @@ export const DateRangePicker = forwardRef(
     }, [defaultValue, value])
 
     return (
-      <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
-        <FieldWrapper
-          {...props}
-          isOpen={isOpen}
-          color={state.isInvalid ? 'warning' : props.variant}
-          helperProps={helperProps ?? props.helperProps}
-          readonly={startFieldProps.isReadOnly}
-          ref={ref}
-          pickerRef={pickerRef}
-          setIsOpen={setIsOpen}
-          label={label}
-          calendar={
-            <RangeCalendar
-              ref={pickerRef}
-              maxValue={_maxValue}
-              minValue={_minValue}
-              isDateUnavailable={_isDateUnavailable}
-              Footer={Footer}
-              Header={Header}
-              {...calendarProps}
-            />
-          }
-        >
-          <DateRangeField
-            startFieldProps={startFieldProps}
-            endFieldProps={endFieldProps}
-            groupProps={groupProps}
+      <I18nProvider locale={locale}>
+        <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
+          <FieldWrapper
+            {...props}
+            isOpen={isOpen}
+            color={state.isInvalid ? 'warning' : props.variant}
+            helperProps={helperProps ?? props.helperProps}
+            readonly={startFieldProps.isReadOnly}
             ref={ref}
-            variant={props.variant}
-            disabled={isDisabled}
-            rightAdornments={
-              <Toggle
-                showClearButton={showClearButton}
-                buttonProps={buttonProps}
-                disabled={isDisabled}
-                readonly={isReadOnly}
-                reset={() => {
-                  _onChange(null)
-                }}
-                setOpen={setIsOpen}
-                open={isOpen}
-                icon={calendar_date_range}
-                valueString={valueString}
+            pickerRef={pickerRef}
+            setIsOpen={setIsOpen}
+            label={label}
+            calendar={
+              <RangeCalendar
+                ref={pickerRef}
+                maxValue={_maxValue}
+                minValue={_minValue}
+                isDateUnavailable={_isDateUnavailable}
+                Footer={Footer}
+                Header={Header}
+                {...calendarProps}
               />
             }
-          />
-        </FieldWrapper>
-      </DatePickerProvider>
+          >
+            <DateRangeField
+              startFieldProps={startFieldProps}
+              endFieldProps={endFieldProps}
+              groupProps={groupProps}
+              ref={ref}
+              variant={props.variant}
+              disabled={isDisabled}
+              rightAdornments={
+                <Toggle
+                  showClearButton={showClearButton}
+                  buttonProps={buttonProps}
+                  disabled={isDisabled}
+                  readonly={isReadOnly}
+                  reset={() => {
+                    _onChange(null)
+                  }}
+                  setOpen={setIsOpen}
+                  open={isOpen}
+                  icon={calendar_date_range}
+                  valueString={valueString}
+                />
+              }
+            />
+          </FieldWrapper>
+        </DatePickerProvider>
+      </I18nProvider>
     )
   },
 )
