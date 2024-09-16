@@ -1,10 +1,14 @@
 {
   "name": "@equinor/eds-core-react",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "0.41.5",
 =======
   "version": "0.41.4-dev03092024-2",
 >>>>>>> 632128d9 (try with timeout)
+=======
+  "version": "0.41.3",
+>>>>>>> ded87273 (restore version)
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": [
     "**/*.css"
