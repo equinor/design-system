@@ -21,12 +21,13 @@ import {
   toCalendarDate,
   toCalendarDateTime,
 } from '@internationalized/date'
-import { useDatePicker, useLocale } from 'react-aria'
+import { I18nProvider, useDatePicker } from 'react-aria'
 import { useDatePickerState } from '@react-stately/datepicker'
 import { DatePickerProvider, defaultTimezone } from './utils/context'
 import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
 import { getCalendarDate } from './utils/get-calendar-date'
+import { useGetLocale } from './utils/useGetLocale'
 
 /**
  * DatePicker component encapsulates the logic for selecting a single date.
@@ -44,6 +45,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       Footer,
       Header,
       timezone,
+      locale: propLocale,
       defaultValue,
       showTimeInput,
       granularity,
@@ -119,7 +121,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
 
-    const { locale } = useLocale()
+    const locale = useGetLocale(propLocale)
 
     const dateCreateProps = {
       helperProps,
@@ -127,7 +129,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       isDisabled,
       value: _value,
       hideTimeZone: true,
-      locale,
+      locale: locale,
       createCalendar,
       onChange: _onChange,
       minValue: _minValue,
@@ -158,55 +160,57 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     }, [defaultValue, value])
 
     return (
-      <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
-        <FieldWrapper
-          {...props}
-          isOpen={isOpen}
-          readonly={fieldProps.isReadOnly}
-          pickerRef={pickerRef}
-          ref={ref}
-          setIsOpen={setIsOpen}
-          label={label}
-          calendar={
-            <Calendar
-              ref={pickerRef}
-              Footer={Footer}
-              Header={Header}
-              {...calendarProps}
-            />
-          }
-          disabled={isDisabled}
-          readOnly={isReadOnly}
-          color={pickerState.isInvalid ? 'warning' : variant}
-          helperProps={helperPropsInvalid ?? helperProps}
-        >
-          <DateField
-            fieldProps={fieldProps}
-            groupProps={groupProps}
-            dateCreateProps={dateCreateProps}
+      <I18nProvider locale={locale}>
+        <DatePickerProvider timezone={timezone} formatOptions={formatOptions}>
+          <FieldWrapper
+            {...props}
+            isOpen={isOpen}
+            readonly={fieldProps.isReadOnly}
+            pickerRef={pickerRef}
             ref={ref}
-            onChange={_onChange}
-            rightAdornments={
-              <Toggle
-                showClearButton={showClearButton}
-                setOpen={setIsOpen}
-                open={isOpen}
-                icon={calendar}
-                disabled={isDisabled}
-                readonly={isReadOnly}
-                reset={() => _onChange(null)}
-                buttonProps={buttonProps}
-                valueString={pickerState.formatValue(locale, {
-                  year: 'numeric',
-                  month: 'short',
-                  day: '2-digit',
-                })}
+            setIsOpen={setIsOpen}
+            label={label}
+            calendar={
+              <Calendar
+                ref={pickerRef}
+                Footer={Footer}
+                Header={Header}
+                {...calendarProps}
               />
             }
-            variant={variant}
-          />
-        </FieldWrapper>
-      </DatePickerProvider>
+            disabled={isDisabled}
+            readOnly={isReadOnly}
+            color={pickerState.isInvalid ? 'warning' : variant}
+            helperProps={helperPropsInvalid ?? helperProps}
+          >
+            <DateField
+              fieldProps={fieldProps}
+              groupProps={groupProps}
+              dateCreateProps={dateCreateProps}
+              ref={ref}
+              onChange={_onChange}
+              rightAdornments={
+                <Toggle
+                  showClearButton={showClearButton}
+                  setOpen={setIsOpen}
+                  open={isOpen}
+                  icon={calendar}
+                  disabled={isDisabled}
+                  readonly={isReadOnly}
+                  reset={() => _onChange(null)}
+                  buttonProps={buttonProps}
+                  valueString={pickerState.formatValue(locale, {
+                    year: 'numeric',
+                    month: 'short',
+                    day: '2-digit',
+                  })}
+                />
+              }
+              variant={variant}
+            />
+          </FieldWrapper>
+        </DatePickerProvider>
+      </I18nProvider>
     )
   },
 )

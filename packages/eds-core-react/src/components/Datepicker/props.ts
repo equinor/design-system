@@ -95,6 +95,11 @@ export type DatePickerProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> &
      * Only applies when input is blurred
      */
     formatOptions?: DateFormatterOptions
+    /**
+     * The locale to use for formatting the date.
+     * Defaults to browser's language setting
+     */
+    locale?: string
   }>
 
 export type DateTimePickerProps = Omit<
