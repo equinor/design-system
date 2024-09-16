@@ -14,7 +14,6 @@ import {
   mergeRefs,
   useToken,
   outlineTemplate,
-  useIsomorphicLayoutEffect,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
@@ -165,9 +164,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const { getFloatingProps } = useInteractions([useDismiss(context)])
 
-    useIsomorphicLayoutEffect(() => {
+    useEffect(() => {
       if (open) {
-        refs.floating.current?.showPopover()
+        setTimeout(() => {
+          if (refs.floating.current?.isConnected) {
+            refs.floating.current.showPopover()
+          }
+        }, 1)
       } else {
         refs.floating.current?.hidePopover()
       }
