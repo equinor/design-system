@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.42.0] - 2024-09-17
+
+### Added
+
+- ✨ `Table`: new table footer sub-component `<Table.Foot>` by @zulu-eq-bouvet in https://github.com/equinor/design-system/pull/3624
+- ✨ `DatePicker`: Enable setting locale from prop (`<DatePicker locale="en-US" />`), and fetch default locale from system settings instead of browser language. by @yusijs in https://github.com/equinor/design-system/pull/3626
+
+### Fixed
+
+🐛 `Popover`: added check to make it more robust againt an edge case where popover element is not connected to DOM by @oddvernes in https://github.com/equinor/design-system/pull/3610
+🐛 `DatePicker`: removing a deprecated popover prop causing consople warnings by @oddvernes
+
 ## [0.41.5] - 2024-09-10
 
 ### Fixed
