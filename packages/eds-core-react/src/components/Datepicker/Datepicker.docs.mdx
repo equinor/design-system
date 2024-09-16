@@ -35,13 +35,15 @@ For example, to display the date as `dd MMMM yyyy`:
 ### Custom locale
 
 In some cases it's useful to display the date in a different locale than the default, e.g. if your app has a locale-picker.
-This can be done by wrapping the component with [I18nProvider](https://react-spectrum.adobe.com/react-aria/I18nProvider.html) from react-aria, which supports all the locales that Intl.DateTimeFormat does.
-
+Currently the locale is selected on a priority basis:
+* The locale passed to the DatePicker component as a prop: `<DatePicker locale="en-US" />`
+* The locale defined in react-aria's `I18nProvider`:
 ```
 <I18nProvider locale={'en-US'}>
   <DatePicker />
 </I18nProvider>
 ```
+* The locale resolved from your system setup (`Intl.DateTimeFormat().resolvedOptions().locale`)
 
 <Canvas of={ComponentStories.CustomLocale} />
 
