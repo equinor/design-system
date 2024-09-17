@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 🐛 `Popover`: added check to make it more robust againt an edge case where popover element is not connected to DOM by @oddvernes in https://github.com/equinor/design-system/pull/3610
-🐛 `DatePicker`: removing a deprecated popover prop causing consople warnings by @oddvernes
+🐛 `DatePicker`: removing a deprecated popover prop causing console warnings by @oddvernes
 
 ## [0.41.5] - 2024-09-10
 
