@@ -85,7 +85,11 @@ export const Determinate: StoryFn<LinearProgressProps> = () => {
   }
 
   return (
-    <div aria-busy={isLoading} aria-live="polite">
+    <div
+      aria-busy={isLoading}
+      aria-live="polite"
+      style={{ display: 'contents' }}
+    >
       {isLoading ? (
         <Progress.Linear
           variant="determinate"
@@ -119,7 +123,7 @@ export const Accessibility: StoryFn<LinearProgressProps> = () => {
     }, 6000)
   }
   return (
-    <div aria-live="assertive">
+    <div aria-live="assertive" style={{ display: 'contents' }}>
       {isLoading ? (
         <Progress.Linear aria-label="Loading linear accessibility test" />
       ) : (
