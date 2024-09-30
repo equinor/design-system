@@ -47,8 +47,8 @@
   ],
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^27.0.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
@@ -68,8 +68,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
-    "rollup": "^4.20.0",
-    "rollup-plugin-delete": "^2.0.0",
+    "rollup": "^4.22.5",
+    "rollup-plugin-delete": "^2.1.0",
     "styled-components": "6.1.12",
     "tsc-watch": "^6.2.0",
     "typescript": "^5.5.4"

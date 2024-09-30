@@ -86,15 +86,15 @@
     "@equinor/eds-tokens-build": "workspace:*",
     "@equinor/eds-tokens-sync": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^27.0.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
     "@types/node": "^22.1.0",
     "copyfiles": "^2.4.1",
     "lightningcss-cli": "^1.26.0",
     "prettier": "3.3.3",
     "rimraf": "^5.0.8",
-    "rollup": "^4.20.0",
-    "rollup-plugin-delete": "^2.0.0",
+    "rollup": "^4.22.5",
+    "rollup-plugin-delete": "^2.1.0",
     "typescript": "^5.5.4"
   }
 }
