@@ -283,6 +283,12 @@ type SortProps = {
    * Override the default sorting state
    */
   sortingState?: SortingState
+  /**
+   * By default, the ability to remove sorting while cycling through the sorting states for a column is enabled.
+   * You can disable this behavior using the enableSortingRemoval table option.
+   * This behavior is useful if you want to ensure that at least one column is always sorted.
+   */
+  enableSortingRemoval?: boolean;
 }
 
 type ColumnProps = {
