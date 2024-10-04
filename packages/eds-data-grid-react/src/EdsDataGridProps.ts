@@ -288,7 +288,7 @@ type SortProps = {
    * You can disable this behavior using the enableSortingRemoval table option.
    * This behavior is useful if you want to ensure that at least one column is always sorted.
    */
-  enableSortingRemoval?: boolean;
+  enableSortingRemoval?: boolean
 }
 
 type ColumnProps = {
