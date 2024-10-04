@@ -93,6 +93,7 @@ export function EdsDataGrid<T>({
   onRowClick,
   onCellClick,
   enableFooter,
+  enableSortingRemoval
 }: EdsDataGridProps<T>) {
   logDevelopmentWarningOfPropUse({
     virtualHeight: {
@@ -265,6 +266,7 @@ export function EdsDataGrid<T>({
     enableColumnPinning: true,
     enablePinning: true,
     getRowId,
+    enableSortingRemoval: enableSortingRemoval ?? true
   }
 
   useEffect(() => {
