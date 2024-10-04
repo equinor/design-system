@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.42.1] - 2024-10-04
+
+### Fixed
+
+- 🐛 Popover: Fixed an issue where popover would "flicker" in a prod enviroment by @oddvernes in https://github.com/equinor/design-system/pull/3639
+
+### changed
+
+- ⬆️ Updated @tanstack/react-virtual by @oddvernes in https://github.com/equinor/design-system/pull/3629
+- ⬆️ Updated rollup and related plugins by @oddvernes in https://github.com/equinor/design-system/pull/3633
+
 ## [0.42.0] - 2024-09-17
 
 ### Added
