@@ -139,6 +139,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       refs,
       strategy,
       context,
+      elements,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
       placement: finalPlacement,
     } = useFloating({
@@ -165,16 +166,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const { getFloatingProps } = useInteractions([useDismiss(context)])
 
     useEffect(() => {
+      if (!elements.floating) return
       if (open) {
-        setTimeout(() => {
-          if (refs.floating.current?.isConnected) {
-            refs.floating.current.showPopover()
-          }
-        }, 1)
+        if (elements.floating.isConnected) {
+          elements.floating.showPopover()
+        }
       } else {
-        refs.floating.current?.hidePopover()
+        elements.floating.hidePopover()
       }
-    }, [open, refs.floating])
+    }, [open, elements.floating])
 
     useEffect(() => {
       if (arrowRef.current) {
