@@ -94,6 +94,7 @@ export function EdsDataGrid<T>({
   onCellClick,
   enableFooter,
   enableSortingRemoval,
+  className
 }: EdsDataGridProps<T>) {
   logDevelopmentWarningOfPropUse({
     virtualHeight: {
@@ -394,7 +395,7 @@ export function EdsDataGrid<T>({
       stickyFooter={!!stickyFooter}
     >
       <TableWrapper
-        className="table-wrapper"
+        className={`${className} table-wrapper`}
         style={tableWrapperStyle}
         ref={parentRef}
         $height={height}
