@@ -104,10 +104,6 @@ type BaseProps<T> = {
    * Optional props to show table footer
    */
   enableFooter?: boolean
-  /**
-   * Optional prop to pass classname to the root component
-   */
-  className?: string
 }
 
 type RowSelectionProps<T> = {
