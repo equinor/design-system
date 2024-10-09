@@ -22,6 +22,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual'
 import {
   CSSProperties,
+  HTMLAttributes,
   useCallback,
   useEffect,
   useMemo,
@@ -94,7 +95,8 @@ export function EdsDataGrid<T>({
   onCellClick,
   enableFooter,
   enableSortingRemoval,
-}: EdsDataGridProps<T>) {
+  ...rest
+}: EdsDataGridProps<T> & HTMLAttributes<HTMLDivElement>) {
   logDevelopmentWarningOfPropUse({
     virtualHeight: {
       value: virtualHeight,
@@ -394,8 +396,9 @@ export function EdsDataGrid<T>({
       stickyFooter={!!stickyFooter}
     >
       <TableWrapper
-        className="table-wrapper"
-        style={tableWrapperStyle}
+        {...rest}
+        className={`table-wrapper ${rest.className ?? ''}`}
+        style={{ ...rest.style, ...tableWrapperStyle  }}
         ref={parentRef}
         $height={height}
         $width={width}
