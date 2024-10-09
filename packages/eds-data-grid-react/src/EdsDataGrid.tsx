@@ -398,7 +398,7 @@ export function EdsDataGrid<T>({
       <TableWrapper
         {...rest}
         className={`table-wrapper ${rest.className ?? ''}`}
-        style={{ ...rest.style, ...tableWrapperStyle  }}
+        style={{ ...rest.style, ...tableWrapperStyle }}
         ref={parentRef}
         $height={height}
         $width={width}
