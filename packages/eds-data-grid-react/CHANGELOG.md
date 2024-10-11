@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2024-10-11
+
+### Added
+
+- ✨ Expose `enableSortingRemoval` flag by @arkadiy93 in https://github.com/equinor/design-system/pull/3636
+
+### Fixed
+
+- 🐛 Added missing `{...props}` spread to allow passing `className`, `style` etc to component by @arkadiy93 in https://github.com/equinor/design-system/pull/3648
+
 ## [0.7.0] - 2024-09-17
 
 ### Added
