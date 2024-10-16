@@ -8,6 +8,7 @@ import {
   useMemo,
   useEffect,
 } from 'react'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import {
   spacingsTemplate,
@@ -94,7 +95,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
-    const shouldOpen = title !== ''
+    const shouldOpen = title !== '' && typeof document !== 'undefined'
 
     const {
       x,
@@ -206,7 +207,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {shouldOpen && open && TooltipEl}
+        {shouldOpen && open && createPortal(TooltipEl, document.body)}
         {updatedChildren}
       </>
     )
