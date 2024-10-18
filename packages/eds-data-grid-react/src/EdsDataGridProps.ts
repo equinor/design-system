@@ -211,6 +211,16 @@ type FilterProps = {
 
 type HandlersProps<T> = {
   /**
+   *
+   * @param row the current row
+   * @param event The right-click event
+   * @returns
+   */
+  onRowContextMenu?: (
+    row: Row<T>,
+    event: MouseEvent<HTMLTableRowElement>,
+  ) => unknown
+  /**
    * Row click handler.
    *
    * @param row The current row

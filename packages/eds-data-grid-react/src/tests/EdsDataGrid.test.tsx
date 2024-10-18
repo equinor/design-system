@@ -300,6 +300,27 @@ describe('EdsDataGrid', () => {
       await userEvent.click(screen.getAllByRole('row')[1])
       expect(spy).toHaveBeenCalledTimes(1)
     })
+    it('right-click should call onRowSelectionChange if enableRowSelection is set', async () => {
+      const spy = jest.fn()
+      render(
+        <EdsDataGrid
+          enableRowSelection
+          onRowSelectionChange={spy}
+          onRowContextMenu={(row) =>
+            row.getCanSelect() ? row.toggleSelected() : null
+          }
+          columns={columns}
+          rows={data}
+        />,
+      )
+
+      await userEvent.pointer({
+        keys: '[MouseRight]',
+        target: screen.getAllByRole('row')[1],
+      })
+
+      expect(spy).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('Paging', () => {
