@@ -286,6 +286,76 @@ RowSelection.args = {
   columnResizeMode: 'onChange',
 } satisfies Partial<EdsDataGridProps<Photo>>
 
+const BasicModal = ({
+  text,
+  top,
+  left,
+  onHide,
+}: {
+  text: string
+  top: number
+  left: number
+  onHide: () => void
+}) => (
+  <div
+    id="modal"
+    style={{
+      position: 'absolute',
+      top,
+      left,
+      zIndex: 10,
+      backgroundColor: '#fff',
+      padding: '1rem',
+      border: '1px solid #000',
+      width: 'fit-content',
+      textAlign: 'right',
+    }}
+  >
+    <Typography>{text}</Typography>
+    <br />
+    <Button onClick={() => onHide()}>Close</Button>
+  </div>
+)
+
+export const RowContextmenuPopup: StoryFn<EdsDataGridProps<Photo>> = (
+  args,
+) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [modalProps, setModalProps] = useState<{
+    text: string
+    top: number
+    left: number
+    onHide: () => void
+  } | null>(null)
+
+  const showModal = (
+    row: Row<Photo>,
+    event: React.MouseEvent<HTMLTableRowElement>,
+  ) => {
+    event.preventDefault()
+    event.stopPropagation()
+    setModalProps({
+      text: `Row id: ${row.original.id} - Opening position (${event.pageX},${event.pageY})`,
+      top: event.pageY,
+      left: event.pageX,
+      onHide: () => setIsOpen(false),
+    })
+    setIsOpen(true)
+  }
+
+  return (
+    <>
+      <Typography>Right click a row to open a basic popup.</Typography>
+      <Divider />
+      <br />
+      {isOpen && <BasicModal {...modalProps} />}
+      <EdsDataGrid {...args} onRowContextMenu={showModal} />
+    </>
+  )
+}
+
+RowContextmenuPopup.args = {} satisfies Partial<EdsDataGridProps<Photo>>
+
 export const Paging: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   return <EdsDataGrid {...args} />
 }
