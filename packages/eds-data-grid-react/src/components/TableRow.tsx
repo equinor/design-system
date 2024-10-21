@@ -11,7 +11,12 @@ type Props<T> = {
   onCellClick?: EdsDataGridProps<T>['onCellClick']
 } & HTMLAttributes<HTMLTableRowElement>
 
-export function TableRow<T>({ row, onCellClick, onClick }: Props<T>) {
+export function TableRow<T>({
+  row,
+  onCellClick,
+  onClick,
+  onContextMenu,
+}: Props<T>) {
   const { rowClass, rowStyle } = useTableContext()
 
   return (
@@ -21,6 +26,7 @@ export function TableRow<T>({ row, onCellClick, onClick }: Props<T>) {
       }}
       className={`${row.getIsSelected() ? 'selected' : ''} ${rowClass?.(row)}`}
       onClick={onClick}
+      onContextMenu={onContextMenu}
     >
       {row.getVisibleCells().map((cell) => (
         <TableBodyCell

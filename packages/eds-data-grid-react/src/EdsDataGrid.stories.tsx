@@ -2,6 +2,8 @@ import {
   Button,
   Checkbox,
   Divider,
+  Icon,
+  Menu,
   Pagination,
   Paper,
   TextField,
@@ -35,6 +37,7 @@ import {
 } from './stories/columns'
 import { data, summaryData } from './stories/data'
 import { Virtualizer } from './types'
+import { external_link } from '@equinor/eds-icons'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -285,6 +288,104 @@ export const RowSelection: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 RowSelection.args = {
   columnResizeMode: 'onChange',
 } satisfies Partial<EdsDataGridProps<Photo>>
+
+const SimpleMenu = ({
+  text,
+  top,
+  left,
+  onHide,
+}: {
+  text: string
+  top: number
+  left: number
+  onHide: () => void
+}): JSX.Element => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  return (
+    <div
+      id="anchor"
+      ref={setAnchorEl}
+      style={{
+        position: 'absolute',
+        top: top,
+        left: left,
+      }}
+    >
+      <Menu
+        open
+        id="menu-as"
+        aria-labelledby="anchor-as"
+        onClose={onHide}
+        anchorEl={anchorEl}
+        placement="right-start"
+      >
+        <Menu.Section title={text}>
+          <Menu.Item
+            as="a"
+            onClick={onHide}
+            href="https://eds.equinor.com/"
+            target="_blank"
+            style={{ justifyContent: 'space-between' }}
+          >
+            <Typography group="navigation" variant="menu_title" as="span">
+              EDS homepage
+            </Typography>
+            <Icon data={external_link} size={16} />
+          </Menu.Item>
+          <Menu.Item
+            as="a"
+            onClick={onHide}
+            href="https://equinor.com/"
+            target="_blank"
+            style={{ justifyContent: 'space-between' }}
+          >
+            <Typography group="navigation" variant="menu_title" as="span">
+              Equinor.com
+            </Typography>
+            <Icon data={external_link} size={16} />
+          </Menu.Item>
+        </Menu.Section>
+      </Menu>
+    </div>
+  )
+}
+
+export const RowContextMenu: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [menuProps, setMenuProps] = useState<{
+    text: string
+    top: number
+    left: number
+    onHide: () => void
+  } | null>(null)
+
+  const showMenu = (
+    row: Row<Photo>,
+    event: React.MouseEvent<HTMLTableRowElement>,
+  ) => {
+    event.preventDefault()
+    event.stopPropagation()
+    setMenuProps({
+      text: `Menu for row id: ${row.original.id}`,
+      top: event.pageY,
+      left: event.pageX,
+      onHide: () => setIsOpen(false),
+    })
+    setIsOpen(true)
+  }
+
+  return (
+    <>
+      <Typography>Right click a row to open a basic popup.</Typography>
+      <Divider />
+      <br />
+      {isOpen && <SimpleMenu {...menuProps} />}
+      <EdsDataGrid {...args} onRowContextMenu={showMenu} />
+    </>
+  )
+}
+
+RowContextMenu.args = {} satisfies Partial<EdsDataGridProps<Photo>>
 
 export const Paging: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   return <EdsDataGrid {...args} />

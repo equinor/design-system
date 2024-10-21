@@ -91,6 +91,7 @@ export function EdsDataGrid<T>({
   setExpansionState,
   getSubRows,
   defaultColumn,
+  onRowContextMenu,
   onRowClick,
   onCellClick,
   enableFooter,
@@ -459,6 +460,11 @@ export function EdsDataGrid<T>({
                     <TableRow
                       key={virtualItem.index}
                       row={row}
+                      onContextMenu={
+                        onRowContextMenu
+                          ? (event) => onRowContextMenu(row, event)
+                          : undefined
+                      }
                       onClick={
                         onRowClick
                           ? (event) => onRowClick(row, event)
@@ -491,6 +497,11 @@ export function EdsDataGrid<T>({
                   <TableRow
                     key={row.id}
                     row={row}
+                    onContextMenu={
+                      onRowContextMenu
+                        ? (event) => onRowContextMenu(row, event)
+                        : undefined
+                    }
                     onClick={
                       onRowClick ? (event) => onRowClick(row, event) : undefined
                     }
