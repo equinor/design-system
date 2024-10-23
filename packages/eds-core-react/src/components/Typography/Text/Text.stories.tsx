@@ -1,6 +1,6 @@
 import { Text, TextProps } from './Text'
 import { StoryFn, Meta } from '@storybook/react'
-import { BaselineGrid } from '../../../.storybook/components/BaselineGrid'
+import { BaselineGrid } from './../../../../.storybook/components'
 
 const TEXT = 'The quick brown fox jumps over the lazy dog'
 
@@ -104,7 +104,7 @@ export const Introduction: StoryFn<TextProps> = (args) => {
 export const Demo: StoryFn<TextProps> = () => {
   return (
     <>
-      <Text variant='header' size="4xl" as="h3">
+      <Text variant="header" size="4xl" as="h3">
         A heading
       </Text>
       <Text>
@@ -122,7 +122,7 @@ export const Demo: StoryFn<TextProps> = () => {
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
         id est laborum.
       </Text>
-      <Text variant='header' as="h4" size="3xl">
+      <Text variant="header" as="h4" size="3xl">
         A smaller heading
       </Text>
       <Text>
@@ -153,34 +153,34 @@ export const Sizes: StoryFn<TextProps> = () => {
 export const SizesHeader: StoryFn<TextProps> = () => {
   return (
     <>
-      <Text variant='header' size="xs" as="h4">
+      <Text variant="header" size="xs" as="h4">
         xs: {TEXT}
       </Text>
-      <Text variant='header' size="sm" as="h4">
+      <Text variant="header" size="sm" as="h4">
         sm: {TEXT}
       </Text>
-      <Text variant='header' size="md" as="h4">
+      <Text variant="header" size="md" as="h4">
         md: {TEXT}
       </Text>
-      <Text variant='header' size="lg" as="h4">
+      <Text variant="header" size="lg" as="h4">
         lg: {TEXT}
       </Text>
-      <Text variant='header' size="xl" as="h4">
+      <Text variant="header" size="xl" as="h4">
         xl: {TEXT}
       </Text>
-      <Text variant='header' size="2xl" as="h4">
+      <Text variant="header" size="2xl" as="h4">
         2xl: {TEXT}
       </Text>
-      <Text variant='header' size="3xl" as="h4">
+      <Text variant="header" size="3xl" as="h4">
         3xl: {TEXT}
       </Text>
-      <Text variant='header' size="4xl" as="h4">
+      <Text variant="header" size="4xl" as="h4">
         4xl: {TEXT}
       </Text>
-      <Text variant='header' size="5xl" as="h4">
+      <Text variant="header" size="5xl" as="h4">
         5xl: {TEXT}
       </Text>
-      <Text variant='header' size="6xl" as="h4">
+      <Text variant="header" size="6xl" as="h4">
         6xl: {TEXT}
       </Text>
     </>
