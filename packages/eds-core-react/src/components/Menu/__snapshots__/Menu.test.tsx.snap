@@ -68,6 +68,7 @@ exports[`Menu Matches snapshot 1`] = `
     class="c1"
     role="menuitem"
     tabindex="0"
+    type="button"
   >
     <div
       class="c2"
