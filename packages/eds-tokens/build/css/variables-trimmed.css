@@ -1,3 +1,45 @@
+@property --captured-size-1 {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --captured-size-2 {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --captured-size-3 {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --captured-color-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+
+@property --captured-color-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+
+@property --captured-color-3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+
+@property --captured-color-4 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+
 :root, [data-color-scheme="light"] {
   color-scheme: light;
 }
