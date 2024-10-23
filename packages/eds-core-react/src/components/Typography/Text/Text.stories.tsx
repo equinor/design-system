@@ -5,7 +5,7 @@ import { BaselineGrid } from './../../../../.storybook/components'
 const TEXT = 'The quick brown fox jumps over the lazy dog'
 
 const meta: Meta<typeof Text> = {
-  title: 'Typography/Text',
+  title: 'Typography/Text (beta)',
   component: Text,
   args: {
     size: 'lg',
