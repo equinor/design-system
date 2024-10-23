@@ -5,7 +5,7 @@ import { Preview } from '@storybook/react'
 
 const DocsContainerWithWrapper = ({ children, context, ...props }) => {
   return (
-    <div data-density={context.store.globals.globals.density}>
+    <div data-density={context.store.userGlobals.globals.density}>
       <DocsContainer context={context} {...props}>
         {children}
       </DocsContainer>
