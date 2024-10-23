@@ -154,6 +154,7 @@ export const MenuItem: OverridableSubComponent = forwardRef<
     <Item
       {...props}
       $active={active}
+      type="button"
       ref={mergeRefs<HTMLButtonElement>(ref, (el) => {
         if (isFocused) {
           requestAnimationFrame(() => {
