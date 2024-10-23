@@ -1,0 +1,65 @@
+import { Primary, Canvas, Controls, Meta } from '@storybook/blocks'
+import { Text } from '../Text/Text'
+import * as ComponentStories from './Text.stories'
+
+<Meta of={ComponentStories} />
+
+# Text
+This component is currently available in the beta release of eds-core-React: <br />
+`npm install @equinor/eds-core-react@beta` <br />
+It requires the new eds 2.0 design tokens to be included in your app as css variables:
+```tsx
+//App.tsx or similar
+import '@equinor/eds-tokens/css/variables.css'
+```
+`Text` uses the `Inter` typeface for the `body` and `ui` variants.  We will likely bundle this on the equinor EDS CDN before the full release, but for now it is available from google fonts:
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+  rel="stylesheet"
+/>
+```
+The `header` variant currently works with the regular equinor typeface, but will later require the variable version of the equinor typeface to display properly, as the font-weights will get updated.
+The equinor variable typeface is available on the EDS CDN
+```html
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font-vf.css" />
+```
+But we will later add a new endpoint on the cdn that should include both this and `Inter`.
+
+<label className="hide-grid-lines">
+  <input className="hide-grid-lines__input" type="checkbox" />
+  <Text className="sb-unstyled">hide grid lines</Text>
+</label>
+<Primary />
+<Controls />
+
+## Baseline grid
+TODO explain this better
+One of the fundamental aims of eds 2.0 spacing and typography is to achieve something called baseline grid. This is a concept of vertically aligning text and other elements in such a way where sizes and spacing always adds up to a multiple of 4px optically, thus creating a harmonious vertical rhythm.
+
+## Usage
+`Text` comes in three variants. `header` uses the `Equinor` typeface while `body` and `ui` uses `Inter`.
+- `header`: For use in headings. It is important to use the `as` prop to assign the context correct header-level (`as="h3"`).
+- `body`: This is the default variant, and is for use on general surfaces such as body, cards, popovers, sidesheets etc.
+- `ui`: For use within UI elements such as buttons, chips, tabs etc. The text is centered within its textbox by default, but can be set to `onGrid` for cases where this makes sense. Note that for font-sizes where the cap-height happens to be a multiple of 4, there is no difference between `onGrid` true or false regardless.
+
+
+```tsx
+import { Text } from '@equinor/eds-core-react'
+ <Text size="lg">This is text</Text>
+```
+<Canvas of={ComponentStories.Demo} />
+
+## Sizes header
+
+<Canvas of={ComponentStories.SizesHeader} />
+
+## Sizes ui/body
+
+<Canvas of={ComponentStories.Sizes} />
+
+## Trunkated
+Use `lines` to clamp number of lines  
+<Canvas of={ComponentStories.Trunkated} />

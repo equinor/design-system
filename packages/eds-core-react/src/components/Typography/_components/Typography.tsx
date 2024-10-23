@@ -43,10 +43,11 @@ export const Typography = styled.p<StyleHeadingProps>`
     `}
     ${$color &&
     css`
-      --_text-preset-color: ${`var(--eds-color-text-${$color})`};
+      /*currently broken*/
+      --_text-preset-color: ${`var(--eds-color-static-text-standard-${$color})`};
     `}
+    font-size: ${`var(--override-font-size, var(--eds-typography-${$type}-${$size}-font-size))`};
     font-family: ${`var(--eds-typography-${$type}-font-family)`};
-    font-size: ${`var(--eds-typography-${$type}-${$size}-font-size)`};
     line-height: ${`var(--eds-typography-${$type}-${$size}-lineheight-${$lineHeight})`};
     font-weight: ${`var(--eds-typography-${$type}-${$size}-font-weight-${$fontWeight})`};
     letter-spacing: ${`var(--eds-typography-${$type}-${$size}-tracking-${$letterSpacing})`};
@@ -57,6 +58,17 @@ export const Typography = styled.p<StyleHeadingProps>`
     &[href],
     & [href] {
       color: var(--override-link-color, light-dark(#034187, #90d6fc));
+    }
+    /* vertically center inline icons.
+     * Need to capture 1ex - 1cap from typography and pass it down to svg,
+     * as icons have their own font-size set based on their height*/
+    --captured-size-1: calc(1ex - 1cap);
+    --_vertical-align-icon: var(--captured-size-1);
+    & > svg {
+      margin-bottom: -0.5em;
+      margin-top: calc(-0.5em + var(--_vertical-align-icon));
+      display: inline-block;
+      vertical-align: middle;
     }
 
     @supports (height: round(up, 10px, 1px)) {
