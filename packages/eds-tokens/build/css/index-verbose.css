@@ -1,8 +1,8 @@
 @import 'registered-properties.css';
-@import 'color/primitives-trimmed.css';
+/* @import 'color/primitives-trimmed.css';
 @import 'color-setup.css';
 @import 'color/simple-semantic-verbose.css';
-@import 'color/colors-verbose.css';
+@import 'color/colors-verbose.css'; */
 @import 'spacing-setup.css';
 @import 'spacing/primitives-trimmed.css';
 @import 'spacing/spacing-verbose.css';
