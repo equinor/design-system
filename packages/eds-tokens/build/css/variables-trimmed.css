@@ -132,7 +132,7 @@
   --eds-color-interactive-border-standard-secondary-active-hover: light-dark(#fff0, #0000);
   --eds-color-interactive-border-standard-tertiary-disabled: light-dark(#f7f7f7, #132634);
   --eds-color-interactive-border-standard-tertiary-initial: light-dark(#f7f7f7, #132634);
-  --eds-color-interactive-border-standard-tertiary-hover: #f7f7f7;
+  --eds-color-interactive-border-standard-tertiary-hover: light-dark(#f7f7f7, #132634);
   --eds-color-interactive-border-standard-tertiary-active: light-dark(#007079, #97cace);
   --eds-color-interactive-border-standard-tertiary-active-hover: light-dark(#004f55, #b3e2e5);
   --eds-color-interactive-border-standard-quaternary-disabled: light-dark(#dcdcdc, #ffffff29);

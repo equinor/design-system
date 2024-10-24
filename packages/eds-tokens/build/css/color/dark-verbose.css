@@ -4,10 +4,10 @@
 
 [data-color-scheme="dark"] {
   --eds-ui-scrim-color-surface: rgba(0, 0, 0, 0.4); /* Scrim */
-  --eds-ui-floating-color-surface: var(--eds-color-slate-blue-1300); /* Recommended background color for EDS applications */
+  --eds-ui-floating-color-surface: var(--eds-color-surface-on-level-3-on-dark); /* Recommended background color for EDS applications */
   --eds-ui-shell-color-border: var(--eds-color-slate-blue-1400); /* Sidebar, Topbar, Side sheet */
-  --eds-ui-shell-color-surface: var(--eds-color-slate-blue-1350); /* Sidebar, Side sheet, Toolbar, Top bar */
-  --eds-ui-main-color-surface: var(--eds-color-slate-blue-1400); /* Recommended background color for EDS applications */
+  --eds-ui-shell-color-surface: var(--eds-color-surface-on-level-2-on-dark); /* Sidebar, Side sheet, Toolbar, Top bar */
+  --eds-ui-main-color-surface: var(--eds-color-surface-on-level-1-on-dark); /* Recommended background color for EDS applications */
   --eds-table-header-color-static-surface-on-level-3: var(--eds-color-slate-blue-1200); /* Table header, Table data grid header */
   --eds-table-header-color-static-surface-on-level-2: var(--eds-color-slate-blue-1300); /* Table header, Table data grid header */
   --eds-table-header-color-static-surface-on-level-1: var(--eds-color-slate-blue-1350); /* Table header, Table data grid header */
@@ -466,7 +466,7 @@
   --eds-color-interactive-border-standard-quaternary-disabled: rgba(255, 255, 255, 0.16); /* Tab */
   --eds-color-interactive-border-standard-tertiary-active-hover: var(--eds-color-moss-green-sat-300); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-active: var(--eds-color-moss-green-sat-500); /* Sidebar menu */
-  --eds-color-interactive-border-standard-tertiary-hover: var(--eds-color-neutral-100); /* Tab */
+  --eds-color-interactive-border-standard-tertiary-hover: var(--eds-color-slate-blue-1400); /* Tab */
   --eds-color-interactive-border-standard-tertiary-initial: var(--eds-color-slate-blue-1400); /* Sidebar menu */
   --eds-color-interactive-border-standard-tertiary-disabled: var(--eds-color-slate-blue-1400); /* Sidebar menu */
   --eds-color-interactive-border-standard-secondary-active-hover: rgba(0, 0, 0, 0); /* Sidebar menu */

@@ -431,10 +431,10 @@
   --eds-color-text-primary-on-dark: var(--eds-color-slate-grey-400);
   --eds-color-text-primary-on-light: var(--eds-color-neutral-1300);
   --eds-ui-scrim-color-surface: light-dark(#0006, #0006);
-  --eds-ui-floating-color-surface: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1300));
+  --eds-ui-floating-color-surface: light-dark(var(--eds-color-surface-on-level-3-on-light), var(--eds-color-surface-on-level-3-on-dark));
   --eds-ui-shell-color-border: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400));
-  --eds-ui-shell-color-surface: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
-  --eds-ui-main-color-surface: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400));
+  --eds-ui-shell-color-surface: light-dark(var(--eds-color-surface-on-level-2-on-light), var(--eds-color-surface-on-level-2-on-dark));
+  --eds-ui-main-color-surface: light-dark(var(--eds-color-surface-on-level-1-on-light), var(--eds-color-surface-on-level-1-on-dark));
   --eds-table-header-color-static-surface-on-level-3: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1200));
   --eds-table-header-color-static-surface-on-level-2: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1300));
   --eds-table-header-color-static-surface-on-level-1: light-dark(var(--eds-color-neutral-0), var(--eds-color-slate-blue-1350));
@@ -893,7 +893,7 @@
   --eds-color-interactive-border-standard-quaternary-disabled: light-dark(var(--eds-color-neutral-300), #ffffff29);
   --eds-color-interactive-border-standard-tertiary-active-hover: light-dark(var(--eds-color-moss-green-1300), var(--eds-color-moss-green-sat-300));
   --eds-color-interactive-border-standard-tertiary-active: light-dark(var(--eds-color-moss-green-1100), var(--eds-color-moss-green-sat-500));
-  --eds-color-interactive-border-standard-tertiary-hover: var(--eds-color-neutral-100);
+  --eds-color-interactive-border-standard-tertiary-hover: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400));
   --eds-color-interactive-border-standard-tertiary-initial: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400));
   --eds-color-interactive-border-standard-tertiary-disabled: light-dark(var(--eds-color-neutral-100), var(--eds-color-slate-blue-1400));
   --eds-color-interactive-border-standard-secondary-active-hover: light-dark(#fff0, #0000);

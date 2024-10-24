@@ -137,7 +137,7 @@
           "tertiary": {
             "disabled": "#132634",
             "initial": "#132634",
-            "hover": "#f7f7f7",
+            "hover": "#132634",
             "active": "#97cace",
             "active-hover": "#b3e2e5"
           },

@@ -4,10 +4,10 @@
 
 :root, [data-color-scheme="light"] {
   --eds-ui-scrim-color-surface: rgba(0, 0, 0, 0.4); /* Scrim */
-  --eds-ui-floating-color-surface: var(--eds-color-neutral-0); /* Recommended background color for EDS applications */
+  --eds-ui-floating-color-surface: var(--eds-color-surface-on-level-3-on-light); /* Recommended background color for EDS applications */
   --eds-ui-shell-color-border: var(--eds-color-neutral-100); /* Sidebar, Topbar, Side sheet */
-  --eds-ui-shell-color-surface: var(--eds-color-neutral-0); /* Sidebar, Side sheet, Toolbar, Top bar */
-  --eds-ui-main-color-surface: var(--eds-color-neutral-100); /* Recommended background color for EDS applications */
+  --eds-ui-shell-color-surface: var(--eds-color-surface-on-level-2-on-light); /* Sidebar, Side sheet, Toolbar, Top bar */
+  --eds-ui-main-color-surface: var(--eds-color-surface-on-level-1-on-light); /* Recommended background color for EDS applications */
   --eds-table-header-color-static-surface-on-level-3: var(--eds-color-neutral-100); /* Table header, Table data grid header */
   --eds-table-header-color-static-surface-on-level-2: var(--eds-color-neutral-100); /* Table header, Table data grid header */
   --eds-table-header-color-static-surface-on-level-1: var(--eds-color-neutral-0); /* Table header, Table data grid header */

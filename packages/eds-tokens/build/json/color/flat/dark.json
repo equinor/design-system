@@ -82,7 +82,7 @@
   "color-interactive-border-standard-secondary-active-hover": "#00000000",
   "color-interactive-border-standard-tertiary-disabled": "#132634",
   "color-interactive-border-standard-tertiary-initial": "#132634",
-  "color-interactive-border-standard-tertiary-hover": "#f7f7f7",
+  "color-interactive-border-standard-tertiary-hover": "#132634",
   "color-interactive-border-standard-tertiary-active": "#97cace",
   "color-interactive-border-standard-tertiary-active-hover": "#b3e2e5",
   "color-interactive-border-standard-quaternary-disabled": "#ffffff29",
