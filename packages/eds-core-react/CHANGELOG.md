@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.42.2] - 2024-10-24
+
+### Fixed
+
+- `Menu`: when using menu within a form, the form was submitted due to missing `type="button"` attribute by @FredrikMWold in https://github.com/equinor/design-system/pull/3660
+- 🐛`Tooltip`: use `react.createPortal` to render element in body to prevent possible invalid syntax (such as wrapping tooltip around a path within svg) by @oddvernes in https://github.com/equinor/design-system/pull/3657
+
 ## [0.42.1] - 2024-10-04
 
 ### Fixed
