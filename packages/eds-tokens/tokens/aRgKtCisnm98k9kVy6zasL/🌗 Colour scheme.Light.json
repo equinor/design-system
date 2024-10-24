@@ -7748,7 +7748,7 @@
       "color": {
         "surface": {
           "$type": "color",
-          "$value": "{color.Neutral.100}",
+          "$value": "{color.surface.on-level-1.on-light}",
           "$description": "Recommended background color for EDS applications",
           "$extensions": {
             "com.figma": {
@@ -7764,7 +7764,7 @@
       "color": {
         "surface": {
           "$type": "color",
-          "$value": "{color.Neutral.0}",
+          "$value": "{color.surface.on-level-2.on-light}",
           "$description": "Sidebar, Side sheet, Toolbar, Top bar",
           "$extensions": {
             "com.figma": {
@@ -7796,7 +7796,7 @@
       "color": {
         "surface": {
           "$type": "color",
-          "$value": "{color.Neutral.0}",
+          "$value": "{color.surface.on-level-3.on-light}",
           "$description": "Recommended background color for EDS applications",
           "$extensions": {
             "com.figma": {
