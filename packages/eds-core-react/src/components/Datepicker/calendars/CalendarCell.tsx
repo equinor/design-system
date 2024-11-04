@@ -14,6 +14,7 @@ const StyledCell = styled(Typography)<{
   $highlight: Selections
   $disabled: boolean
   $density: 'compact' | 'comfortable'
+  $focused: boolean
 }>`
   display: flex;
   justify-content: center;
@@ -22,9 +23,8 @@ const StyledCell = styled(Typography)<{
   &:hover {
     background-color: ${tokens.colors.interactive.table__cell__fill_hover.rgba};
   }
-  &:focus {
-    outline: 2px dashed rgba(0, 112, 121, 1);
-  }
+
+  ${({ $focused }) => $focused && `outline: 2px dashed rgba(0, 112, 121, 1);`}
 
   ${({ $selected }) =>
     $selected &&
@@ -105,6 +105,7 @@ export function CalendarCell({
     isDisabled,
     isUnavailable,
     formattedDate,
+    isFocused,
   } = useCalendarCell({ date }, state, ref)
 
   /**
@@ -157,6 +158,7 @@ export function CalendarCell({
         $highlight={isHighlight}
         $disabled={isDisabled || isUnavailable}
         $density={density}
+        $focused={isFocused}
       >
         {formattedDate}
       </StyledCell>
