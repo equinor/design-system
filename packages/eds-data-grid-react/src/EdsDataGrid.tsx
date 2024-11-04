@@ -85,6 +85,7 @@ export function EdsDataGrid<T>({
   height,
   getRowId,
   rowVirtualizerInstanceRef,
+  tableInstanceRef,
   columnSizing,
   onColumnResize,
   expansionState,
@@ -334,6 +335,9 @@ export function EdsDataGrid<T>({
   }, [pageSize])
 
   const table = useReactTable(options)
+  if (tableInstanceRef) {
+    tableInstanceRef.current = table
+  }
 
   let tableWrapperStyle: CSSProperties = {}
 

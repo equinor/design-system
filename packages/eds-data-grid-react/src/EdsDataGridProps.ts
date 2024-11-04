@@ -10,6 +10,7 @@ import {
   Row,
   RowSelectionState,
   SortingState,
+  Table,
   TableOptions,
 } from '@tanstack/react-table'
 import { Virtualizer } from '@tanstack/react-virtual'
@@ -307,11 +308,12 @@ type ColumnProps = {
   onColumnResize?: (e: ColumnSizingState) => void
 }
 
-type RefProps = {
+type RefProps<T> = {
   rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
     HTMLDivElement,
     Element
   > | null>
+  tableInstanceRef?: MutableRefObject<Table<T> | null>
 }
 
 type ExpansionProps<T> = {
@@ -329,7 +331,7 @@ export type EdsDataGridProps<T> = BaseProps<T> &
   PagingProps &
   ColumnProps &
   VirtualProps &
-  RefProps &
+  RefProps<T> &
   ExpansionProps<T> & {
     /**
      * Which columns are visible. If not set, all columns are visible. undefined means that the column is visible.
