@@ -11,21 +11,16 @@ type ContainerProps = {
 
 const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
   function SideBarContainer(
-    { onToggle: onToggleCallback, open = false, children, ...rest },
+    { onToggle: onToggleCallback, children, ...rest },
     ref,
   ) {
-    const { isOpen, setIsOpen, onToggle, setOnToggle } = useSideBar()
+    const { isOpen, onToggle, setOnToggle } = useSideBar()
 
     useEffect(() => {
       if (onToggle === null && onToggleCallback) {
         setOnToggle(onToggleCallback)
       }
     }, [onToggle, onToggleCallback, setOnToggle])
-
-    useEffect(() => {
-      setIsOpen(open)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open])
 
     return (
       <GridContainer {...rest} open={isOpen} ref={ref}>
@@ -79,7 +74,7 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <SideBarProvider>
+        <SideBarProvider isOpen={open}>
           <SideBarContainer {...props} ref={ref} />
         </SideBarProvider>
       </ThemeProvider>

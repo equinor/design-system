@@ -23,10 +23,16 @@ const initalState: State = {
 
 const SideBarContext = createContext<State>(initalState)
 
-type ProviderProps = { children: ReactNode }
+type ProviderProps = { children: ReactNode; isOpen: boolean }
 
-export const SideBarProvider = ({ children }: ProviderProps): JSX.Element => {
-  const [state, setState] = useState<State>(initalState)
+export const SideBarProvider = ({
+  children,
+  isOpen: isOpenProp = false,
+}: ProviderProps) => {
+  const [state, setState] = useState<State>({
+    onToggle: () => {},
+    isOpen: isOpenProp,
+  })
   const { isOpen, onToggle } = state
 
   const setIsOpen = useCallback(
