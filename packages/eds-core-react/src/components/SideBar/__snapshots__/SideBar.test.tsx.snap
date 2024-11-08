@@ -382,14 +382,6 @@ exports[`Sidebar Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-
-}
-
-@media (hover:hover) and (pointer:fine) {
-
-}
-
-@media (hover:hover) and (pointer:fine) {
   .c7:hover {
     background: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
     border: 1px solid transparent;
@@ -402,10 +394,6 @@ exports[`Sidebar Matches snapshot 1`] = `
   .c7[aria-disabled='true']:hover {
     background: var(--eds_interactive__disabled__fill, rgba(234, 234, 234, 1));
   }
-}
-
-@media (hover:hover) and (pointer:fine) {
-
 }
 
 <div

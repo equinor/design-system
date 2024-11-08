@@ -30,7 +30,7 @@ export const SideBarProvider = ({
   isOpen: isOpenProp = false,
 }: ProviderProps) => {
   const [state, setState] = useState<State>({
-    onToggle: () => {},
+    onToggle: null,
     isOpen: isOpenProp,
   })
   const { isOpen, onToggle } = state
