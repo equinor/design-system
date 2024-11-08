@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## What's Changed
+
+- feat(data-grid): Expose table-instance via ref by @yusijs in https://github.com/equinor/design-system/pull/3670
+
+## [0.42.3] - 2024-11-08
+
+### Fixed
+
+- 🐛 `Datepicker`: "today" button stopped working and didn't focus on today's cell by @arkadiy93 in https://github.com/equinor/design-system/pull/3669
+- 🐛 `SideBar`: fixes issue where sidebar default state always starts as closed by @FredrikMWold in https://github.com/equinor/design-system/pull/3672
+
 ## [0.42.2] - 2024-10-24
 
 ### Fixed
