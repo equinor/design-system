@@ -5,11 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.3] - 2024-11-11
+
+### Added
+
+- ✨ Expose table-instance via ref (tableInstanceRef) by @yusijs in https://github.com/equinor/design-system/pull/3670
+
 ## [0.7.2] - 2024-10-24
 
 ### Added
 
-- ✨ exposed `onRowContextMenu` to enable context menu on right click by @tlastad in https://github.com/equinor/design-system/pull/3658
+- ✨ Exposed `onRowContextMenu` to enable context menu on right click by @tlastad in https://github.com/equinor/design-system/pull/3658
 
 ## [0.7.1] - 2024-10-11
 
