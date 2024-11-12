@@ -14,6 +14,7 @@ export type StyleHeadingProps = {
   $lineHeight: TypographyLineHeight
   $fontWeight: TypographyFontWeight
   $letterSpacing: TypographyLetterSpacing
+  $monoSpacedNumbers?: boolean
   $offset?: number
   $onGrid?: boolean
   $color?: string
@@ -28,6 +29,7 @@ export const Typography = styled.p<StyleHeadingProps>`
     $lineHeight,
     $fontWeight,
     $letterSpacing,
+    $monoSpacedNumbers,
     $offset = 0,
     $onGrid = true,
     $color,
@@ -51,6 +53,7 @@ export const Typography = styled.p<StyleHeadingProps>`
     line-height: ${`var(--eds-typography-${$type}-${$size}-lineheight-${$lineHeight})`};
     font-weight: ${`var(--eds-typography-${$type}-${$size}-font-weight-${$fontWeight})`};
     letter-spacing: ${`var(--eds-typography-${$type}-${$size}-tracking-${$letterSpacing})`};
+    font-variant-numeric: ${$monoSpacedNumbers ? 'tabular-nums' : 'normal'};
     /*TODO: determine if --override-text-color/link-color is needed or if inherit covers all the bases. override overrides all, while inherit only applies when color prop is not set*/
     color: var(--override-text-color, var(--_text-preset-color, inherit));
     --_offset: calc(${$offset} * 1em);

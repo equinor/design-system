@@ -108,10 +108,10 @@ export const Demo: StoryFn<TextProps> = () => {
         A heading
       </Text>
       <Text>
-        <b>Lorem ipsum dolor sit amet</b>, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-        ex ea commodo consequat.
+        <b>Lorem ipsum dolor sit amet</b>, 0123456789 consectetur adipiscing
+        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat.
       </Text>
       <Text as="a" href="#q">
         As a link
@@ -129,6 +129,16 @@ export const Demo: StoryFn<TextProps> = () => {
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
         dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </Text>
+      <Text>
+        <b>Normal numbers</b>
+      </Text>
+      <Text size="3xl">0123456789</Text>
+      <Text>
+        <b>Monospaced numbers</b>
+      </Text>
+      <Text size="3xl" monoSpacedNumbers>
+        0123456789
       </Text>
     </>
   )
