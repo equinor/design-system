@@ -315,6 +315,10 @@ export type AutocompleteProps<T> = {
    * Method that is used to compare objects by value. If omitted, objects are matched by reference.
    */
   itemCompare?: (value: T, compare: T) => boolean
+  /**
+   * Callback for clear all button
+   */
+  onClear?: () => void
 } & HTMLAttributes<HTMLDivElement>
 
 // MARK: component
@@ -352,6 +356,7 @@ function AutocompleteInner<T>(
     helperIcon,
     noOptionsText = 'No options',
     variant,
+    onClear,
     ...other
   } = props
 
@@ -839,6 +844,7 @@ function AutocompleteInner<T>(
   }, [isOpen, refs.floating])
 
   const clear = () => {
+    if (onClear) onClear()
     resetCombobox()
     //dont clear items if they are selected and disabled
     setSelectedItems([...selectedDisabledItemsSet])
