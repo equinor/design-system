@@ -22,12 +22,14 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual'
 import {
   CSSProperties,
+  forwardRef,
   HTMLAttributes,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
+  ForwardedRef,
 } from 'react'
 import styled from 'styled-components'
 import { TableProvider } from './EdsDataGridContext'
@@ -39,66 +41,70 @@ import {
   addPxSuffixIfInputHasNoPrefix,
   logDevelopmentWarningOfPropUse,
 } from './utils'
+import { mergeRefs } from '@equinor/eds-utils'
 
-export function EdsDataGrid<T>({
-  rows,
-  columns,
-  columnResizeMode,
-  pageSize,
-  rowSelection,
-  enableRowSelection,
-  enableMultiRowSelection,
-  enableSubRowSelection,
-  selectedRows,
-  rowSelectionState,
-  enableColumnFiltering,
-  debug,
-  enablePagination,
-  enableSorting,
-  stickyHeader,
-  stickyFooter,
-  onSelectRow,
-  onRowSelectionChange,
-  caption,
-  enableVirtual,
-  virtualHeight,
-  columnVisibility,
-  columnVisibilityChange,
-  emptyMessage,
-  columnOrder,
-  cellClass,
-  cellStyle,
-  rowClass,
-  rowStyle,
-  headerClass,
-  headerStyle,
-  footerClass,
-  footerStyle,
-  externalPaginator,
-  onSortingChange,
-  manualSorting,
-  sortingState,
-  columnPinState,
-  scrollbarHorizontal,
-  width,
-  minWidth,
-  height,
-  getRowId,
-  rowVirtualizerInstanceRef,
-  tableInstanceRef,
-  columnSizing,
-  onColumnResize,
-  expansionState,
-  setExpansionState,
-  getSubRows,
-  defaultColumn,
-  onRowContextMenu,
-  onRowClick,
-  onCellClick,
-  enableFooter,
-  enableSortingRemoval,
-  ...rest
-}: EdsDataGridProps<T> & HTMLAttributes<HTMLDivElement>) {
+function EdsDataGridInner<T>(
+  {
+    rows,
+    columns,
+    columnResizeMode,
+    pageSize,
+    rowSelection,
+    enableRowSelection,
+    enableMultiRowSelection,
+    enableSubRowSelection,
+    selectedRows,
+    rowSelectionState,
+    enableColumnFiltering,
+    debug,
+    enablePagination,
+    enableSorting,
+    stickyHeader,
+    stickyFooter,
+    onSelectRow,
+    onRowSelectionChange,
+    caption,
+    enableVirtual,
+    virtualHeight,
+    columnVisibility,
+    columnVisibilityChange,
+    emptyMessage,
+    columnOrder,
+    cellClass,
+    cellStyle,
+    rowClass,
+    rowStyle,
+    headerClass,
+    headerStyle,
+    footerClass,
+    footerStyle,
+    externalPaginator,
+    onSortingChange,
+    manualSorting,
+    sortingState,
+    columnPinState,
+    scrollbarHorizontal,
+    width,
+    minWidth,
+    height,
+    getRowId,
+    rowVirtualizerInstanceRef,
+    tableInstanceRef,
+    columnSizing,
+    onColumnResize,
+    expansionState,
+    setExpansionState,
+    getSubRows,
+    defaultColumn,
+    onRowContextMenu,
+    onRowClick,
+    onCellClick,
+    enableFooter,
+    enableSortingRemoval,
+    ...rest
+  }: EdsDataGridProps<T> & HTMLAttributes<HTMLDivElement>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   logDevelopmentWarningOfPropUse({
     virtualHeight: {
       value: virtualHeight,
@@ -404,7 +410,7 @@ export function EdsDataGrid<T>({
         {...rest}
         className={`table-wrapper ${rest.className ?? ''}`}
         style={{ ...rest.style, ...tableWrapperStyle }}
-        ref={parentRef}
+        ref={mergeRefs(parentRef, ref)}
         $height={height}
         $width={width}
         $scrollbarHorizontal={scrollbarHorizontal}
@@ -567,3 +573,10 @@ const TableWrapper = styled.div<{
   contain: ${({ $height, $width }) =>
     Boolean($height) && Boolean($width) ? 'strict' : 'unset'};
 `
+
+export const EdsDataGrid = forwardRef(EdsDataGridInner) as <T>(
+  props: EdsDataGridProps<T> &
+    HTMLAttributes<HTMLDivElement> & {
+      ref?: ForwardedRef<HTMLDivElement>
+    },
+) => ReturnType<typeof EdsDataGridInner>
