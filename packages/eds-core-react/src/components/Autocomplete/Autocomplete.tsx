@@ -25,7 +25,7 @@ import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
 import { List } from '../List'
 import { useEds } from '../EdsProvider'
-import { Label } from '../Label'
+import { Label } from '../Label'.
 import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { Progress } from '../Progress'
