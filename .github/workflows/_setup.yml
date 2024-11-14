@@ -13,7 +13,7 @@ on:
         required: true
     secrets:
       SLACK_WEBHOOK_URL:
-        required: true
+        required: false
     outputs:
       tag:
         description: 'Package tag'
@@ -99,4 +99,4 @@ jobs:
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
-        if: failure()
+        if: ${{ github.event.pull_request.head.repo.fork }} = 'false' &&  failure()
