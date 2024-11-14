@@ -75,7 +75,7 @@ const StyledList = styled(List)(
 )
 
 const StyledPopover = styled('div').withConfig({
-  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
+  shouldForwardProp: () => true, // workaround to avoid warning until popover gets added to react types
 })<{ popover: string }>`
   inset: unset;
   border: 0;
