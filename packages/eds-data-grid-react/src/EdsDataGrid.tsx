@@ -360,6 +360,10 @@ function EdsDataGridInner<T>(
   }
 
   const parentRef = useRef<HTMLDivElement>(null)
+  const combinedRef = useMemo(
+    () => mergeRefs<HTMLDivElement>(parentRef, ref),
+    [parentRef, ref],
+  )
 
   /**
    * Virtualization setup
@@ -410,7 +414,7 @@ function EdsDataGridInner<T>(
         {...rest}
         className={`table-wrapper ${rest.className ?? ''}`}
         style={{ ...rest.style, ...tableWrapperStyle }}
-        ref={mergeRefs(parentRef, ref)}
+        ref={combinedRef}
         $height={height}
         $width={width}
         $scrollbarHorizontal={scrollbarHorizontal}
