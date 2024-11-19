@@ -71,6 +71,19 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
   const { focus, hover, disabled } = states
 
   return css`
+    --_button-color-background: var(
+      --eds-button-color-background,
+      ${theme.background}
+    );
+    --_button-color-background-hover: var(
+      --eds-button-color-background-hover,
+      ${hover.background}
+    );
+    --_button-color-text: var(
+      --eds-button-color-text,
+      ${theme.typography.color}
+    );
+
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -78,7 +91,7 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     position: relative;
     cursor: pointer;
     display: inline-block;
-    background: ${theme.background};
+    background-color: var(--_button-color-background);
     height: ${theme.height};
     width: ${theme.width};
 
@@ -89,6 +102,7 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     ${spacingsTemplate(theme.spacings)}
     ${bordersTemplate(theme.border)}
     ${typographyTemplate(theme.typography)}
+    //color: var(--_button-color-text);
 
     &::after {
       position: absolute;
@@ -101,7 +115,7 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background: ${hover.background};
+        background: var(--_button-color-background-hover);
         color: ${hover.typography?.color};
         ${bordersTemplate(hover?.border)};
       }
