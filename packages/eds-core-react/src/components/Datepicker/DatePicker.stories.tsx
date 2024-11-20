@@ -106,6 +106,7 @@ export const CustomLocale: StoryFn = () => {
   const [locale, setLocale] = useState('en-US')
   const locales = [
     { value: 'en-US', label: 'English' },
+    { value: 'nb-NO', label: 'Norwegian' },
     { value: 'uk', label: 'Ukrainian' },
     { value: 'sv-SE', label: 'Swedish' },
     { value: 'zh-Hans', label: 'Chinese (Simplified)' },

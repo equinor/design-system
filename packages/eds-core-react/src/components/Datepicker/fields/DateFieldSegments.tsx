@@ -4,7 +4,7 @@ import {
   DateFieldStateOptions,
   useDateFieldState,
 } from '@react-stately/datepicker'
-import { useDateField, useLocale } from 'react-aria'
+import { useDateField } from 'react-aria'
 import { createCalendar } from '@internationalized/date'
 import { DateSegment } from './DateSegment'
 import { forwardRef, RefObject } from 'react'
@@ -16,10 +16,9 @@ type Props = Partial<DateFieldStateOptions>
  */
 export const DateFieldSegments = forwardRef(
   (props: Props, ref: RefObject<HTMLDivElement>) => {
-    const { locale } = useLocale()
     const state = useDateFieldState({
       ...props,
-      locale,
+      locale: props.locale,
       createCalendar,
     })
 

@@ -10,6 +10,7 @@ type Props = {
   startFieldProps: AriaDatePickerProps<DateValue>
   endFieldProps: AriaDatePickerProps<DateValue>
   groupProps: GroupDOMAttributes
+  locale: string
 } & Partial<InputProps>
 
 /**
@@ -31,7 +32,11 @@ export const DateRangeField = forwardRef<HTMLDivElement, Props>(function (
       color={props.variant}
       {...props.groupProps}
     >
-      <DateFieldSegments {...props.startFieldProps} ref={fromRef} />
+      <DateFieldSegments
+        {...props.startFieldProps}
+        ref={fromRef}
+        locale={props.locale}
+      />
       <Typography
         as={'span'}
         variant={'text'}
@@ -40,7 +45,11 @@ export const DateRangeField = forwardRef<HTMLDivElement, Props>(function (
       >
         &mdash;
       </Typography>
-      <DateFieldSegments {...props.endFieldProps} ref={toRef} />
+      <DateFieldSegments
+        {...props.endFieldProps}
+        ref={toRef}
+        locale={props.locale}
+      />
       <span style={{ flex: '1 1 auto' }} />
       {props.rightAdornments}
     </InputFieldWrapper>
