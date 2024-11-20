@@ -467,7 +467,7 @@ function AutocompleteInner<T>(
   const allDisabled = enabledItems.length === 0
 
   const selectedDisabledItemsSet = useMemo(
-    () => new Set(selectedItems.filter(optionDisabled)),
+    () => new Set(selectedItems.filter((x) => x !== null && optionDisabled(x))),
     [selectedItems, optionDisabled],
   )
 
