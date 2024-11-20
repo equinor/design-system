@@ -191,6 +191,7 @@ export const DateRangePicker = forwardRef(
               ref={ref}
               variant={props.variant}
               disabled={isDisabled}
+              locale={locale}
               rightAdornments={
                 <Toggle
                   showClearButton={showClearButton}

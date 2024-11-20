@@ -20,7 +20,7 @@ type Props = {
 }
 
 /**
- * Datefield is the input field used in {@link DatePicker} to type in a single date.
+ * DateField is the input field used in {@link DatePicker} to type in a single date.
  * Encapsulates styling / functionality for typing a date
  */
 export const DateField = forwardRef<HTMLDivElement, Props>(function (
@@ -39,7 +39,12 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
       ref={ref}
       className={`field ${state.isInvalid ? 'invalid' : 'valid'}`}
     >
-      <DateFieldSegments {...state} {...fieldProps} ref={inputRef} />
+      <DateFieldSegments
+        {...state}
+        {...fieldProps}
+        locale={dateCreateProps.locale}
+        ref={inputRef}
+      />
       <span style={{ flex: '1 1 auto' }} />
       {props.rightAdornments}
     </InputFieldWrapper>
