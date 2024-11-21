@@ -15,7 +15,6 @@ import {
   typographyTemplate,
   bordersTemplate,
   mergeRefs,
-  useIsomorphicLayoutEffect,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 import {
