@@ -61,7 +61,7 @@ export function FilterWrapper<T = unknown>({
         aria-label={'Show column filters'}
       >
         <Icon
-          color={tokens.colors.text.static_icons__default.hex}
+          color={tokens.colors.text.static_icons__default.rgba}
           data={
             hasActiveFilters(columnFilterValue) ? filter_alt_active : filter_alt
           }
