@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.42.5] - 2024-11-21
+
+### Fixed
+
+- 🐛 `Autocomplete`: undefined param in `optionDisabled` by @oddvernes in https://github.com/equinor/design-system/pull/3689
+- 🐛 `DatePicker`: use locale prop for text and formats when it is defined by @torleifhalseth in https://github.com/equinor/design-system/pull/3690
+
 ## [0.42.4] - 2024-11-15
 
 ### added
