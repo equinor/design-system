@@ -75,3 +75,8 @@ Instead use `aria-disabled` and disable the `onClick` in the code. This has the 
 keyboard navigation, as the button is still focusable.
 
 <Canvas of={ComponentStories.TooltipOnButton} />
+
+### Custom root element
+Some apps might not want to use the default root element for the tooltip. This can be changed by passing a custom `portalContainer` to the `Tooltip` component, or by setting the `rootElement` prop on the `EdsProvider`
+
+<Canvas of={ComponentStories.CustomRootElement} />

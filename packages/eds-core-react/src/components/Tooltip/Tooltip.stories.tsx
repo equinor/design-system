@@ -6,12 +6,14 @@ import {
   Table,
   Icon,
   Checkbox,
+  EdsProvider,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
 import { StoryFn, Meta } from '@storybook/react'
 import { explore } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Tooltip.docs.mdx'
+import { useState } from 'react'
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Data Display/Tooltip',
@@ -169,3 +171,33 @@ export const TooltipOnButton: StoryFn<TooltipProps> = () => (
   </>
 )
 TooltipOnButton.storyName = 'Tooltip on disabled Button'
+
+export const CustomRootElement: StoryFn<TooltipProps> = () => {
+  const [element, setElement] = useState<null | HTMLElement>(null)
+
+  return (
+    <>
+      <div ref={(el) => setElement(el)}>#root</div>
+      <EdsProvider rootElement={element}>
+        <Tooltip
+          title={
+            'This tooltip renders within the #root div, set from EdsProvider'
+          }
+        >
+          <Icon data={explore} />
+        </Tooltip>
+      </EdsProvider>
+
+      <Tooltip
+        title={
+          'This tooltip renders within the #root div, but from portalContainer prop'
+        }
+        portalContainer={element}
+      >
+        <Icon data={explore} />
+      </Tooltip>
+    </>
+  )
+}
+
+CustomRootElement.storyName = `Custom portal element`

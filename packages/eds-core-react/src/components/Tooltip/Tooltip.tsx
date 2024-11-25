@@ -32,6 +32,7 @@ import {
   useRole,
   useDismiss,
 } from '@floating-ui/react'
+import { useEds } from '../EdsProvider'
 
 const StyledTooltip = styled('div').withConfig({
   shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
@@ -86,16 +87,29 @@ export type TooltipProps = {
   children: React.ReactElement & React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
   enterDelay?: number
+  /** Portal container
+   * @default document.body
+   * */
+  portalContainer?: HTMLElement
 } & HTMLAttributes<HTMLDivElement>
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    { title, placement = 'bottom', children, style, enterDelay = 100, ...rest },
+    {
+      title,
+      placement = 'bottom',
+      children,
+      style,
+      enterDelay = 100,
+      portalContainer,
+      ...rest
+    },
     ref,
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
     const shouldOpen = title !== '' && typeof document !== 'undefined'
+    const { rootElement } = useEds()
 
     const {
       x,
@@ -207,7 +221,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {shouldOpen && open && createPortal(TooltipEl, document.body)}
+        {shouldOpen &&
+          open &&
+          createPortal(
+            TooltipEl,
+            portalContainer ?? rootElement ?? document.body,
+          )}
         {updatedChildren}
       </>
     )
