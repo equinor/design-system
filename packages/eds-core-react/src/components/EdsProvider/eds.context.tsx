@@ -10,6 +10,7 @@ export type Density = 'compact' | 'comfortable'
 
 type State = {
   density: Density
+  rootElement?: HTMLElement | null
 }
 
 const initalState: State = {
@@ -26,12 +27,14 @@ const EdsContext = createContext<State>(initalState)
 
 export type EdsProviderProps = {
   density?: Density
+  rootElement?: HTMLElement | null
   children: ReactNode
 }
 
 export const EdsProvider: React.FC<EdsProviderProps> = ({
   children,
   density,
+  rootElement,
 }) => {
   const [state, setState] = useState<State>({
     ...initalState,
@@ -49,6 +52,7 @@ export const EdsProvider: React.FC<EdsProviderProps> = ({
 
   const value = {
     density: state.density,
+    rootElement,
     setDensity,
   }
   return <EdsContext.Provider value={value}>{children}</EdsContext.Provider>
