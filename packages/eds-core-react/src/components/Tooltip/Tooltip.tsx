@@ -15,7 +15,6 @@ import {
   typographyTemplate,
   bordersTemplate,
   mergeRefs,
-  useIsomorphicLayoutEffect,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 import {
@@ -119,6 +118,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
       placement: finalPlacement,
+      elements,
     } = useFloating({
       placement,
       open,
@@ -190,11 +190,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }),
     })
 
-    useIsomorphicLayoutEffect(() => {
-      if (shouldOpen && open) {
-        refs.floating.current?.showPopover()
+    useEffect(() => {
+      if (!elements.floating) return
+      if (elements.floating.isConnected && shouldOpen && open) {
+        elements.floating.showPopover()
       }
-    }, [open, shouldOpen, refs.floating])
+    }, [open, shouldOpen, elements.floating])
 
     const TooltipEl = (
       <StyledTooltip
