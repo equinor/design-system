@@ -51,7 +51,7 @@ exports[`Tooltip Matches snapshot 1`] = `
 }
 
 <div
-  class="c0"
+  class="c0 eds-tooltip "
   id=":r0:"
   popover="manual"
   role="tooltip"
