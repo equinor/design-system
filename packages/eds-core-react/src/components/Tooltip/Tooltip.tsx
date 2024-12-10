@@ -202,6 +202,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         {...rest}
         {...getFloatingProps({
           ref: tooltipRef,
+          className: `eds-tooltip ${rest.className ?? ''}`,
           style: {
             ...style,
             position: strategy,
