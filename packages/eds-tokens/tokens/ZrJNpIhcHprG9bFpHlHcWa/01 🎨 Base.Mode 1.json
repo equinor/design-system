@@ -745,7 +745,7 @@
           }
         }
       },
-      "neutral": {
+      "gray": {
         "light": {
           "1": {
             "$type": "color",
