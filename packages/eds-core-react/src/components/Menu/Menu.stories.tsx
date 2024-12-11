@@ -150,13 +150,13 @@ export const Complex: StoryFn<MenuProps> = () => {
           <Icon
             data={folder}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
           <Typography group="navigation" variant="menu_title" as="span">
             Open
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             as="span"
@@ -168,13 +168,13 @@ export const Complex: StoryFn<MenuProps> = () => {
           <Icon
             data={copy}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
           <Typography group="navigation" variant="menu_title" as="span">
             Copy
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             as="span"
@@ -186,13 +186,13 @@ export const Complex: StoryFn<MenuProps> = () => {
           <Icon
             data={paste}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
           <Typography group="navigation" variant="menu_title" as="span">
             Paste
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             as="span"
@@ -204,13 +204,13 @@ export const Complex: StoryFn<MenuProps> = () => {
           <Icon
             data={edit}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
           <Typography group="navigation" variant="menu_title" as="span">
             Rename
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             as="span"
@@ -222,13 +222,13 @@ export const Complex: StoryFn<MenuProps> = () => {
           <Icon
             data={delete_to_trash}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
           <Typography group="navigation" variant="menu_title" as="span">
             Delete
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             as="span"
@@ -241,7 +241,7 @@ export const Complex: StoryFn<MenuProps> = () => {
             <Icon
               data={settings}
               size={16}
-              color={colors.text.static_icons__tertiary.hex}
+              color={colors.text.static_icons__tertiary.rgba}
             />
             <Typography group="navigation" variant="menu_title" as="span">
               Settings
@@ -349,7 +349,7 @@ export const StaysOpen: StoryFn<MenuProps> = (args) => {
             <Icon
               data={error_outlined}
               size={24}
-              color={colors.interactive.danger__resting.hex}
+              color={colors.interactive.danger__resting.rgba}
             />
           </Menu.Item>
           <Menu.Item
@@ -366,7 +366,7 @@ export const StaysOpen: StoryFn<MenuProps> = (args) => {
             <Icon
               data={warning_outlined}
               size={24}
-              color={colors.interactive.warning__resting.hex}
+              color={colors.interactive.warning__resting.rgba}
             />
           </Menu.Item>
           <Menu.Item
@@ -383,7 +383,7 @@ export const StaysOpen: StoryFn<MenuProps> = (args) => {
             <Icon
               data={check_circle_outlined}
               size={24}
-              color={colors.interactive.success__resting.hex}
+              color={colors.interactive.success__resting.rgba}
             />
           </Menu.Item>
         </Menu.Section>
@@ -483,7 +483,7 @@ export const AsLink: StoryFn<MenuProps> = () => {
           <Icon
             data={external_link}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
         </Menu.Item>
         <Menu.Item
@@ -499,7 +499,7 @@ export const AsLink: StoryFn<MenuProps> = () => {
           <Icon
             data={external_link}
             size={16}
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
           />
         </Menu.Item>
       </Menu>

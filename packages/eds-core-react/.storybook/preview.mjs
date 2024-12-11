@@ -1,3 +1,5 @@
+import '@equinor/eds-tokens/css/variables-verbose.css'
+import '@equinor/eds-tokens/legacy-colors-override.css'
 const preview = {
   viewMode: 'docs',
   parameters: {
