@@ -316,7 +316,7 @@
         }
       }
     },
-    "border": {
+    "borderColor": {
       "default": {
         "$type": "color",
         "$value": "{ds.border.default}",
@@ -499,7 +499,7 @@
           }
         }
       },
-      "border": {
+      "borderColor": {
         "$type": "color",
         "$value": "{ds.overlay.borderColor}",
         "$description": "",
