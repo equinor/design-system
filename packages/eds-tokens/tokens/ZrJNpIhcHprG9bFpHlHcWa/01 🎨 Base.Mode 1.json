@@ -1,6 +1,6 @@
 {
-  "primitives": {
-    "default": {
+  "eds": {
+    "base": {
       "slate-gray": {
         "light": {
           "0": {
