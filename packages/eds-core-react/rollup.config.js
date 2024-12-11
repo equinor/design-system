@@ -2,6 +2,7 @@
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from '@rollup/plugin-commonjs'
+import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
 import del from 'rollup-plugin-delete'
 import pkg from './package.json'
@@ -28,6 +29,7 @@ export default [
       include: ['./src/**', './../tokens/**'],
     },
     plugins: [
+      preserveDirective(),
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
       commonjs(),
