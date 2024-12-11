@@ -1934,7 +1934,7 @@
         }
       }
     },
-    "border": {
+    "borderColor": {
       "default": {
         "$type": "color",
         "$value": "{eds.base.slate-gray.dark.7}",

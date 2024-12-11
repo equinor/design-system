@@ -316,10 +316,10 @@
         }
       }
     },
-    "border": {
+    "borderColor": {
       "default": {
         "$type": "color",
-        "$value": "{eds.border.default}",
+        "$value": "{eds.borderColor.default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -331,7 +331,7 @@
       },
       "muted": {
         "$type": "color",
-        "$value": "{eds.border.muted}",
+        "$value": "{eds.borderColor.muted}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -343,7 +343,7 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{eds.border.disabled}",
+        "$value": "{eds.borderColor.disabled}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -355,7 +355,7 @@
       },
       "emphasis": {
         "$type": "color",
-        "$value": "{eds.border.emphasis}",
+        "$value": "{eds.borderColor.emphasis}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -367,7 +367,7 @@
       },
       "accent-emphasis": {
         "$type": "color",
-        "$value": "{eds.border.accent-emphasis}",
+        "$value": "{eds.borderColor.accent-emphasis}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -379,7 +379,7 @@
       },
       "accent-muted": {
         "$type": "color",
-        "$value": "{eds.border.accent-muted}",
+        "$value": "{eds.borderColor.accent-muted}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -391,7 +391,7 @@
       },
       "warning-emphasis": {
         "$type": "color",
-        "$value": "{eds.border.warning-emphasis}",
+        "$value": "{eds.borderColor.warning-emphasis}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -403,7 +403,7 @@
       },
       "warning-muted": {
         "$type": "color",
-        "$value": "{eds.border.warning-muted}",
+        "$value": "{eds.borderColor.warning-muted}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -415,7 +415,7 @@
       },
       "danger-emphasis": {
         "$type": "color",
-        "$value": "{eds.border.danger-emphasis}",
+        "$value": "{eds.borderColor.danger-emphasis}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -427,7 +427,7 @@
       },
       "danger-muted": {
         "$type": "color",
-        "$value": "{eds.border.danger-muted}",
+        "$value": "{eds.borderColor.danger-muted}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -439,7 +439,7 @@
       },
       "success-emphasis": {
         "$type": "color",
-        "$value": "{eds.border.success-emphasis}",
+        "$value": "{eds.borderColor.success-emphasis}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -451,7 +451,7 @@
       },
       "success-muted": {
         "$type": "color",
-        "$value": "{eds.border.success-muted}",
+        "$value": "{eds.borderColor.success-muted}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -463,7 +463,7 @@
       },
       "info-emphasis": {
         "$type": "color",
-        "$value": "{eds.border.info-emphasis}",
+        "$value": "{eds.borderColor.info-emphasis}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -475,7 +475,7 @@
       },
       "info-muted": {
         "$type": "color",
-        "$value": "{eds.border.info-muted}",
+        "$value": "{eds.borderColor.info-muted}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -499,7 +499,7 @@
           }
         }
       },
-      "border": {
+      "borderColor": {
         "$type": "color",
         "$value": "{eds.overlay.borderColor}",
         "$description": "",
