@@ -1,5 +1,6 @@
-import { forwardRef, Ref, SVGProps } from 'react'
 import type { IconData } from '@equinor/eds-icons'
+import { useId } from '@equinor/eds-utils'
+import { Ref, SVGProps, forwardRef } from 'react'
 import styled from 'styled-components'
 import type { Name } from './Icon.types'
 import { get } from './library'
@@ -47,21 +48,16 @@ const StyledPath = styled.path.attrs<PathProps>(({ $height, $size }) => ({
   transform: $size / $height !== 1 ? `scale(${$size / $height})` : null,
 }))``
 
-const customIcon = (icon: IconData) => ({
-  icon,
-  count: Math.floor(Math.random() * 1000),
-})
-
 const findIcon = (name: string, data: IconData, size: number) => {
   // eslint-disable-next-line prefer-const
-  let { icon, count } = data ? customIcon(data) : get(name)
+  const icon = data ?? get(name)
 
   if (size < 24) {
     // fallback to normal icon if small is not made yet
-    icon = icon.sizes?.small || icon
+    return icon.sizes?.small || icon
   }
 
-  return { icon, count }
+  return icon
 }
 
 export type IconProps = (
@@ -105,7 +101,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   ref,
 ) {
   // eslint-disable-next-line prefer-const
-  const { icon, count } = findIcon(name, data, size)
+  const icon = findIcon(name, data, size)
 
   if (typeof icon === 'undefined') {
     throw Error(
@@ -132,10 +128,8 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   }
 
   // Accessibility
-  let titleId = ''
-
+  const titleId = useId(`${icon.prefix}-${icon.name}`)
   if (title) {
-    titleId = `${icon.prefix}-${icon.name}-${count}`
     svgProps = {
       ...svgProps,
       title,
