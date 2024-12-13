@@ -128,7 +128,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   }
 
   // Accessibility
-  const titleId = useId(`${icon.prefix}-${icon.name}`)
+  const titleId = useId(null, `${icon.prefix}-${icon.name}`)
   if (title) {
     svgProps = {
       ...svgProps,
