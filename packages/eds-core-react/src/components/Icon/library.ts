@@ -1,10 +1,9 @@
 import type { IconData } from '@equinor/eds-icons'
-import type { IconBasket, Name } from './Icon.types'
+import type { Name } from './Icon.types'
 
 type IconRecord = Record<Name, IconData>
 
 let _icons: IconRecord = {}
-let count = 0
 /** Add icons to library to be used for rendering using name.
 This needs to be done lonly once */
 export const add = (icons: IconRecord): void => {
@@ -14,7 +13,6 @@ export const add = (icons: IconRecord): void => {
   }
 }
 
-export const get = (name: Name): IconBasket => {
-  count += 1
-  return { icon: _icons[name], count }
+export const get = (name: Name): IconData | undefined => {
+  return _icons[name]
 }
