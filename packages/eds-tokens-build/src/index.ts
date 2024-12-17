@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -639,12 +641,12 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  await primitives.buildAllPlatforms()
+  /*   await primitives.buildAllPlatforms()
   await simpleSemantic.buildAllPlatforms()
   await lightMode.buildAllPlatforms()
   await darkMode.buildAllPlatforms()
   await lightDarkColorsVerbose.buildAllPlatforms()
-  await lightDarkColorsTrimmed.buildAllPlatforms()
+  await lightDarkColorsTrimmed.buildAllPlatforms() */
   await spacingPrimitives.buildAllPlatforms()
   await densityComfortable.buildAllPlatforms()
   await densitySpacious.buildAllPlatforms()
