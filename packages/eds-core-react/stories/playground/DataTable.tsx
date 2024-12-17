@@ -147,7 +147,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
             Open
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             style={{ height: 12 }}
@@ -161,7 +161,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
             Copy
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
+            color={colors.text.static_icons__tertiary.rgba}
             group="navigation"
             variant="label"
             as="span"
