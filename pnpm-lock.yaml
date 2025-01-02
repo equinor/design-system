@@ -211,8 +211,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-hook-form:
-        specifier: ^7.52.2
-        version: 7.52.2(react@18.3.1)
+        specifier: ^7.54.2
+        version: 7.54.2(react@18.3.1)
       react-router-dom:
         specifier: ^6.26.0
         version: 6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -353,8 +353,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-hook-form:
-        specifier: ^7.52.2
-        version: 7.52.2(react@18.3.1)
+        specifier: ^7.54.2
+        version: 7.54.2(react@18.3.1)
       rollup:
         specifier: ^4.22.5
         version: 4.22.5
@@ -522,8 +522,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-hook-form:
-        specifier: ^7.52.2
-        version: 7.52.2(react@18.3.1)
+        specifier: ^7.54.2
+        version: 7.54.2(react@18.3.1)
       react-is:
         specifier: ^18.3.1
         version: 18.3.1
@@ -573,8 +573,8 @@ importers:
         specifier: ^2.4.1
         version: 2.4.1
       lightningcss-cli:
-        specifier: ^1.26.0
-        version: 1.26.0
+        specifier: ^1.28.2
+        version: 1.28.2
       prettier:
         specifier: 3.4.2
         version: 3.4.2
@@ -4918,68 +4918,68 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
-  lightningcss-cli-darwin-arm64@1.26.0:
-    resolution: {integrity: sha512-ztlxASFVcIhShPM7f7nwgz7SUv9wXfRHUhGk4/ACaTn18wm8gw7TG3WKF36NQ1zYJyhLEar7+Vd/SClKYTCrpg==}
+  lightningcss-cli-darwin-arm64@1.28.2:
+    resolution: {integrity: sha512-P6CzNJcRNsuLLv/UKiYqWF4N78prZfcRdg+/2/XtaAXlWv2CpkDOCerAEHgq9QaQjB+b5aFAkDY9/KONVIYiwQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [darwin]
 
-  lightningcss-cli-darwin-x64@1.26.0:
-    resolution: {integrity: sha512-qL2LO4dn4wBAlnNiJspojKZXxJqIvddLfmgH3rA6A7Q27qHt01LIOB9WMxriApLpTThYGH4c2fOd2oTFF17/5w==}
+  lightningcss-cli-darwin-x64@1.28.2:
+    resolution: {integrity: sha512-cbp+U2u8OAjXo8KjLoQMVLJJqXBPWKDLgtmrrIx/qIw0aVpo3IgkLVWOg+uLLr23f9RSFvEMD8SEwcgtpJL4Bw==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [darwin]
 
-  lightningcss-cli-freebsd-x64@1.26.0:
-    resolution: {integrity: sha512-kKCL5zTgxcaqZMjXTG2Zj8br9pVlC8kF4Zj6tg/bQp/dEJ2cYWQ/Y2ZLYwulnMqyU/jN+mI6x0Z9a5RbjQ0iQw==}
+  lightningcss-cli-freebsd-x64@1.28.2:
+    resolution: {integrity: sha512-1F88CelPjWzawGgwq1SA1KYfHZBGg0B61DNknLzBqIEXmbDxp4PCUrXP3GatamgcyRJID2kjRg8y44mSIHXw8Q==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [freebsd]
 
-  lightningcss-cli-linux-arm-gnueabihf@1.26.0:
-    resolution: {integrity: sha512-ZX54fDqvyMUGuIZjv+bUth3O23g62Y7H33fKuDTHMi8z7F067gI40gjbC3BeCxpYbiOjbbE/6kHPibcGUy+xsQ==}
+  lightningcss-cli-linux-arm-gnueabihf@1.28.2:
+    resolution: {integrity: sha512-GTe8SSYUC/y4aa6BSP4p5Y1ixEGZPxHezsK8y3qvO12+W0l5S+7DHUoe7d6LXRepWqAbajzr8cLk1f5NqAMgjA==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm]
     os: [linux]
 
-  lightningcss-cli-linux-arm64-gnu@1.26.0:
-    resolution: {integrity: sha512-URhW35aInLYXiM5oYcYTl8vSnUer1fBP+sx5pzgPHmwGRFbuwY+KaUj8s0cIKulOoW1n3d/6/k2GrgYDIgrPmg==}
+  lightningcss-cli-linux-arm64-gnu@1.28.2:
+    resolution: {integrity: sha512-lwy70KvUdOf7WLgn+EIuogeCy8AaJji59ioCxiY96YbRPQkfwrPg1UWKaPO+oFqeHiUcHdoYuP86v53P3py1Rw==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
 
-  lightningcss-cli-linux-arm64-musl@1.26.0:
-    resolution: {integrity: sha512-qaR+U4mdNSYsSaW/bqmWgSM7582i7iH/ShrJw1ut7dq7VeMxY44jZzacBjMVVyVZnlbNkhhiAtz9Ksj01gl8Bw==}
+  lightningcss-cli-linux-arm64-musl@1.28.2:
+    resolution: {integrity: sha512-mloVIVE6L+j0fVDT81uHegAtGBI52oxIqNv5jrcWa9d9xewfBeSrFyv71ZtJu8h72VRksT/bP7dUVEqGwM3+eA==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
 
-  lightningcss-cli-linux-x64-gnu@1.26.0:
-    resolution: {integrity: sha512-6EXxjBdE8xrHf7hearDq0xpmpK2IG8Ure7Cex70fxwVa24ISVxu08ifnftyrSOtmwJngp7PutRIJxCeMempy6Q==}
+  lightningcss-cli-linux-x64-gnu@1.28.2:
+    resolution: {integrity: sha512-M0MGrjkmgGRbGAkAQlfBVIdb1ZW78JpJ6Bqz4ERkZ8siKUDR4yCH/vFJ9RHRxsQSXqc1qGLEuOXWi1NVYqtSfA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
 
-  lightningcss-cli-linux-x64-musl@1.26.0:
-    resolution: {integrity: sha512-/0OrCqCGrb1yTKmkKpD5TS6pLzaRo1nfdqQSdj3ljtjePLSLZ4zmlSy8jQzWLj0Rd4neZrn5GTXes1IXeXKCZg==}
+  lightningcss-cli-linux-x64-musl@1.28.2:
+    resolution: {integrity: sha512-QgYkVugR7Od3vMJonT+WlUf25X+H+zivbXJPP+itYWYnDyXZ14Loega+ae4MFdSzx+B4K6+l7BQxcKTGNx4kyg==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
 
-  lightningcss-cli-win32-arm64-msvc@1.26.0:
-    resolution: {integrity: sha512-n33pwvOKZuqcbvwWPezH5A1Rsn+N1jNUXhdtXIldtuBqRhroPFixm2ryHht86A3cVPfmCdbFx3wxWXVwG1azUw==}
+  lightningcss-cli-win32-arm64-msvc@1.28.2:
+    resolution: {integrity: sha512-sxyia6nERnx7NAOsqGrqozsV4xeyClwnOn4KQcDlkOaO31hlAlTGveWSEU1UHoMm9CE2fhLvUCiJmF605uEk0Q==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [win32]
 
-  lightningcss-cli-win32-x64-msvc@1.26.0:
-    resolution: {integrity: sha512-RrB10En50bq5V2eb8ZvO+miSpDsJZIGRzFjNAejEvpuaaIWibLcItXhuxbuAb3JWWJewRjX0wQlaG4ftXf+eVg==}
+  lightningcss-cli-win32-x64-msvc@1.28.2:
+    resolution: {integrity: sha512-2lsfto01pnWUyFe3Vlrer3oAhsYwX4Bk/FTjVKLMm785O3DD6jf2LYCKOcgTfVnCqAl+sTR+jM8B2AWVlgFyKw==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [win32]
 
-  lightningcss-cli@1.26.0:
-    resolution: {integrity: sha512-guvqLilK/ptQwqBDR6MNZLAp0yAyDe/Uomf+NOu1VsmR7QaDVILiDKPpcr33dsaSSqKVH3Uhv35j6EPdvohS4Q==}
+  lightningcss-cli@1.28.2:
+    resolution: {integrity: sha512-f+KommuBfCFYGL1ZCN6edSXt1Q+ZH35nCo+7RzT1/XpRIWhixZIJIWJE+AcXUArnrKYx/m26BQMCFRYazWZrBw==}
     engines: {node: '>= 12.0.0'}
     hasBin: true
 
@@ -5722,8 +5722,8 @@ packages:
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
 
-  react-hook-form@7.52.2:
-    resolution: {integrity: sha512-pqfPEbERnxxiNMPd0bzmt1tuaPcVccywFDpyk2uV5xCIBphHV5T8SVnX9/o3kplPE1zzKt77+YIoq+EMwJp56A==}
+  react-hook-form@7.54.2:
+    resolution: {integrity: sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -12003,50 +12003,50 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  lightningcss-cli-darwin-arm64@1.26.0:
+  lightningcss-cli-darwin-arm64@1.28.2:
     optional: true
 
-  lightningcss-cli-darwin-x64@1.26.0:
+  lightningcss-cli-darwin-x64@1.28.2:
     optional: true
 
-  lightningcss-cli-freebsd-x64@1.26.0:
+  lightningcss-cli-freebsd-x64@1.28.2:
     optional: true
 
-  lightningcss-cli-linux-arm-gnueabihf@1.26.0:
+  lightningcss-cli-linux-arm-gnueabihf@1.28.2:
     optional: true
 
-  lightningcss-cli-linux-arm64-gnu@1.26.0:
+  lightningcss-cli-linux-arm64-gnu@1.28.2:
     optional: true
 
-  lightningcss-cli-linux-arm64-musl@1.26.0:
+  lightningcss-cli-linux-arm64-musl@1.28.2:
     optional: true
 
-  lightningcss-cli-linux-x64-gnu@1.26.0:
+  lightningcss-cli-linux-x64-gnu@1.28.2:
     optional: true
 
-  lightningcss-cli-linux-x64-musl@1.26.0:
+  lightningcss-cli-linux-x64-musl@1.28.2:
     optional: true
 
-  lightningcss-cli-win32-arm64-msvc@1.26.0:
+  lightningcss-cli-win32-arm64-msvc@1.28.2:
     optional: true
 
-  lightningcss-cli-win32-x64-msvc@1.26.0:
+  lightningcss-cli-win32-x64-msvc@1.28.2:
     optional: true
 
-  lightningcss-cli@1.26.0:
+  lightningcss-cli@1.28.2:
     dependencies:
       detect-libc: 1.0.3
     optionalDependencies:
-      lightningcss-cli-darwin-arm64: 1.26.0
-      lightningcss-cli-darwin-x64: 1.26.0
-      lightningcss-cli-freebsd-x64: 1.26.0
-      lightningcss-cli-linux-arm-gnueabihf: 1.26.0
-      lightningcss-cli-linux-arm64-gnu: 1.26.0
-      lightningcss-cli-linux-arm64-musl: 1.26.0
-      lightningcss-cli-linux-x64-gnu: 1.26.0
-      lightningcss-cli-linux-x64-musl: 1.26.0
-      lightningcss-cli-win32-arm64-msvc: 1.26.0
-      lightningcss-cli-win32-x64-msvc: 1.26.0
+      lightningcss-cli-darwin-arm64: 1.28.2
+      lightningcss-cli-darwin-x64: 1.28.2
+      lightningcss-cli-freebsd-x64: 1.28.2
+      lightningcss-cli-linux-arm-gnueabihf: 1.28.2
+      lightningcss-cli-linux-arm64-gnu: 1.28.2
+      lightningcss-cli-linux-arm64-musl: 1.28.2
+      lightningcss-cli-linux-x64-gnu: 1.28.2
+      lightningcss-cli-linux-x64-musl: 1.28.2
+      lightningcss-cli-win32-arm64-msvc: 1.28.2
+      lightningcss-cli-win32-x64-msvc: 1.28.2
 
   lilconfig@2.1.0: {}
 
@@ -12784,7 +12784,7 @@ snapshots:
 
   react-fast-compare@3.2.2: {}
 
-  react-hook-form@7.52.2(react@18.3.1):
+  react-hook-form@7.54.2(react@18.3.1):
     dependencies:
       react: 18.3.1
 
