@@ -38,7 +38,7 @@
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
-    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@storybook/addon-a11y": "^8.4.7",
     "@storybook/addon-actions": "^8.4.7",
     "@storybook/addon-docs": "^8.4.7",

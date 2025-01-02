@@ -87,7 +87,7 @@
     "@equinor/eds-tokens-sync": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
-    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@types/node": "^22.10.3",
     "copyfiles": "^2.4.1",
     "lightningcss-cli": "^1.28.2",
