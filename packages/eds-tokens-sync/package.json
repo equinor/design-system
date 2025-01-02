@@ -32,7 +32,7 @@
     "@figma/rest-api-spec": "^0.16.0",
     "@types/node": "^22.1.0",
     "axios": "^1.7.4",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "prettier": "^3.4.2",
     "typescript": "^5.5.4",
     "vite": "^5.4.6",
