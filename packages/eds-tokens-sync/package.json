@@ -35,7 +35,7 @@
     "dotenv": "^16.4.7",
     "prettier": "^3.4.2",
     "typescript": "^5.7.2",
-    "vite": "^5.4.6",
-    "vite-plugin-dts": "^3.9.1"
+    "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.4.0"
   }
 }
