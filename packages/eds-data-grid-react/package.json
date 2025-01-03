@@ -32,7 +32,7 @@
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
-    "@tanstack/react-table": "^8.20.1",
+    "@tanstack/react-table": "^8.20.6",
     "@tanstack/react-virtual": "^3.11.1"
   },
   "devDependencies": {
