@@ -227,6 +227,7 @@ function EdsDataGridInner<T>(
             group="table"
             variant="cell_text"
           >
+            {/* eslint-disable-next-line @typescript-eslint/no-base-to-string */}
             {String(context.getValue() ?? '')}
           </Typography>
         )
