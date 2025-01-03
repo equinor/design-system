@@ -1,3 +1,4 @@
+'use client'
 import { Accordion as BaseAccordion } from './Accordion'
 import { AccordionItem, AccordionItemProps } from './AccordionItem'
 import { AccordionHeader, AccordionHeaderProps } from './AccordionHeader'

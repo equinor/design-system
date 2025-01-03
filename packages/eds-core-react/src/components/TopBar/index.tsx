@@ -1,3 +1,4 @@
+'use client'
 import { TopBar as BaseComponent, TopbarProps } from './TopBar'
 import { Actions, TopbarActionsProps } from './Actions'
 import { Header, TopbarHeaderProps } from './Header'

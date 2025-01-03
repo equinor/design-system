@@ -1,3 +1,4 @@
+'use client'
 import { List as BaseComponent, ListProps } from './List'
 import { ListItem, ListItemProps } from './ListItem'
 

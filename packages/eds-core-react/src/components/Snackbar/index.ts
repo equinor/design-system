@@ -1,3 +1,4 @@
+'use client'
 import { SnackbarAction, SnackbarActionProps } from './SnackbarAction'
 import { Snackbar as BaseComponent, SnackbarProps } from './Snackbar'
 

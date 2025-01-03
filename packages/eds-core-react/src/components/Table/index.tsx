@@ -1,3 +1,4 @@
+'use client'
 import { Table as BaseTable, TableProps } from './Table'
 import { Body, BodyProps } from './Body'
 import { Cell, CellProps } from './Cell'

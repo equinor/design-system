@@ -1,3 +1,4 @@
+'use client'
 import {
   TableOfContents as BaseComponent,
   TableOfContentsProps,

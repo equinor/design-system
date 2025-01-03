@@ -1,3 +1,4 @@
+'use client'
 import { Breadcrumbs as BaseComponent, BreadcrumbsProps } from './Breadcrumbs'
 import { Breadcrumb, BreadcrumbProps } from './Breadcrumb'
 

@@ -1,3 +1,4 @@
+'use client'
 import { Card as CardWrapper, CardProps } from './Card'
 import { CardActions, CardActionsProps } from './CardActions'
 import { CardContent, CardContentProps } from './CardContent'

@@ -1,3 +1,4 @@
+'use client'
 import { Banner as BaseBanner, BannerProps } from './Banner'
 import { BannerIcon, BannerIconProps } from './BannerIcon'
 import { BannerMessage, BannerMessageProps } from './BannerMessage'

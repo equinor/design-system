@@ -1,3 +1,4 @@
+'use client'
 import { Button as ButtonWrapper, ButtonProps } from './Button'
 import { ButtonGroup, ButtonGroupProps } from './ButtonGroup/ButtonGroup'
 import { ToggleButton, ToggleButtonProps } from './ToggleButton/ToggleButton'

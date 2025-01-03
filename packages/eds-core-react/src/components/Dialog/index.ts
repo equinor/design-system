@@ -1,3 +1,4 @@
+'use client'
 import { Dialog as BaseComponent, DialogProps } from './Dialog'
 import { DialogActions, DialogActionsProps } from './DialogActions'
 import { DialogTitle, DialogTitleProps } from './DialogTitle'

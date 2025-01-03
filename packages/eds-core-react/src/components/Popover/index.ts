@@ -1,3 +1,4 @@
+'use client'
 import { Popover as BaseComponent, PopoverProps } from './Popover'
 import { PopoverTitle, PopoverTitleProps } from './PopoverTitle'
 import { PopoverContent, PopoverContentProps } from './PopoverContent'

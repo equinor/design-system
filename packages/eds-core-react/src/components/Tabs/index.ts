@@ -1,3 +1,4 @@
+'use client'
 import { Tabs as BaseComponent, TabsProps } from './Tabs'
 import { TabList, TabListProps } from './TabList'
 import { Tab, TabProps } from './Tab'

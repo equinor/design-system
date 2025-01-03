@@ -1,3 +1,4 @@
+'use client'
 import { Menu as BaseMenu, MenuProps } from './Menu'
 import { MenuItem, MenuItemProps } from './MenuItem'
 import { MenuSection, MenuSectionProps } from './MenuSection'

@@ -1,3 +1,4 @@
+'use client'
 import { SideBar as BaseSideBar } from './SideBar'
 import { useSideBar } from './SideBar.context'
 import { SidebarLink, SidebarLinkProps } from './SidebarLink'
