@@ -210,11 +210,9 @@ export const Router: StoryFn<TabsProps> = () => {
     return <Typography>Current route: {location.pathname}</Typography>
   }
   function useRouteMatch(patterns: readonly string[]) {
-    const { pathname } = useLocation()
-
     for (let i = 0; i < patterns.length; i += 1) {
       const pattern = patterns[i]
-      const possibleMatch = matchPath(pattern, pathname)
+      const possibleMatch = matchPath(pattern, location.pathname)
       if (possibleMatch !== null) {
         return possibleMatch
       }
