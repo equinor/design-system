@@ -5,8 +5,8 @@ import {
   pickChildren,
   toDict,
   withName,
-} from '../../functions/utils'
-import { toFocus, toOverlay } from '../../transformers'
+} from '../../functions/utils.js'
+import { toFocus, toOverlay } from '../../transformers/index.js'
 
 const processGroup = R.pipe(
   pickChildren,

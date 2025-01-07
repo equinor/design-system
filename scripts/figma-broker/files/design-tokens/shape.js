@@ -6,8 +6,8 @@ import {
   toDict,
   mergeStrings,
   withName,
-} from '../../functions/utils'
-import { px } from '../../functions/units'
+} from '../../functions/utils.js'
+import { px } from '../../functions/units.js'
 
 const processGroup = R.pipe(
   pickChildren,

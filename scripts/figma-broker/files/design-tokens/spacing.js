@@ -1,7 +1,12 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '../../functions/utils'
-import { px } from '../../functions/units'
-import { toCSSVars } from '../../transformers'
+import {
+  propName,
+  withType,
+  pickChildren,
+  toDict,
+} from '../../functions/utils.js'
+import { px } from '../../functions/units.js'
+import { toCSSVars } from '../../transformers/index.js'
 
 const toComfortable = (x) => ({ comfortable: x })
 

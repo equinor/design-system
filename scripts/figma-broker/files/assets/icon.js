@@ -1,4 +1,4 @@
-import { pathName, propName } from '../../functions/utils'
+import { pathName, propName } from '../../functions/utils.js'
 
 const parseComponent = (groupName, x) => ({
   name: propName(x.name.replace('-', ' ')),

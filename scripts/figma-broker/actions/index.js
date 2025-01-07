@@ -1,2 +1,2 @@
-export { createAssets } from './createAssets'
-export { createTokens } from './createTokens'
+export { createAssets } from './createAssets/index.js'
+export { createTokens } from './createTokens.js'

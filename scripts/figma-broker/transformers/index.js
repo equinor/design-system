@@ -1,10 +1,10 @@
 import * as R from 'ramda'
-import { withType, removeNilAndEmpty } from '../functions/utils'
-import { px } from '../functions/units'
-import { fillToRgba } from './colors'
+import { withType, removeNilAndEmpty } from '../functions/utils.js'
+import { px } from '../functions/units.js'
+import { fillToRgba } from './colors.js'
 
-export * from './typography'
-export * from './colors'
+export * from './typography.js'
+export * from './colors.js'
 
 const fallback = {}
 

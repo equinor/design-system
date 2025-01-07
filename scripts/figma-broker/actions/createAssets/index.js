@@ -4,9 +4,9 @@ import {
   writeResults,
   writeFile,
   writeResultsIndividually,
-} from '../../functions/file'
-import { PATHS } from '../../constants'
-import { fetchAssets } from './fetchAssets'
+} from '../../functions/file.js'
+import { PATHS } from '../../constants.js'
+import { fetchAssets } from './fetchAssets.js'
 
 // const svgContent = (asset) => {
 //   if (!asset) return { symbol: '', use: '' }

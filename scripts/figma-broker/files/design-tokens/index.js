@@ -1,11 +1,11 @@
-import { makeColorToken } from './color'
-import { makeSpacingTokens } from './spacing'
-import { makeElevationTokens } from './elevation'
-import { makeClickboundsTokens } from './clickbounds'
-import { makeTextTokens } from './typography'
-import { makeShapeTokens } from './shape'
-import { makeInteractionsTokens } from './interactions'
-import { fixPageName } from '../../functions/utils'
+import { makeColorToken } from './color.js'
+import { makeSpacingTokens } from './spacing.js'
+import { makeElevationTokens } from './elevation.js'
+import { makeClickboundsTokens } from './clickbounds.js'
+import { makeTextTokens } from './typography.js'
+import { makeShapeTokens } from './shape.js'
+import { makeInteractionsTokens } from './interactions.js'
+import { fixPageName } from '../../functions/utils.js'
 
 export const makeTokens = (figmaFile) => {
   const tokens = []

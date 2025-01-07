@@ -4,13 +4,13 @@ import {
   withType,
   pickChildren,
   toDictMode,
-} from '../../functions/utils'
+} from '../../functions/utils.js'
 import {
   fillToRgba,
   fillToHex,
   fillToHsla,
   toCSSVars,
-} from '../../transformers'
+} from '../../transformers/index.js'
 
 const findMode = (name) => {
   if (/⚫/.test(name)) {
