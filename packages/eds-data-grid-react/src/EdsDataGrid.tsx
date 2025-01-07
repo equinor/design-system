@@ -98,6 +98,7 @@ function EdsDataGridInner<T>(
     defaultColumn,
     onRowContextMenu,
     onRowClick,
+    onRowDoubleClick,
     onCellClick,
     enableFooter,
     enableSortingRemoval,
@@ -483,6 +484,11 @@ function EdsDataGridInner<T>(
                       onClick={
                         onRowClick
                           ? (event) => onRowClick(row, event)
+                          : undefined
+                      }
+                      onDoubleClick={
+                        onRowDoubleClick
+                          ? (event) => onRowDoubleClick(row, event)
                           : undefined
                       }
                       onCellClick={onCellClick}

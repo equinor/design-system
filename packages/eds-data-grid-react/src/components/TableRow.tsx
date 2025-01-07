@@ -15,6 +15,7 @@ export function TableRow<T>({
   row,
   onCellClick,
   onClick,
+  onDoubleClick,
   onContextMenu,
 }: Props<T>) {
   const { rowClass, rowStyle } = useTableContext()
@@ -26,6 +27,7 @@ export function TableRow<T>({
       }}
       className={`${row.getIsSelected() ? 'selected' : ''} ${rowClass?.(row)}`}
       onClick={onClick}
+      onDoubleClick={onDoubleClick}
       onContextMenu={onContextMenu}
     >
       {row.getVisibleCells().map((cell) => (

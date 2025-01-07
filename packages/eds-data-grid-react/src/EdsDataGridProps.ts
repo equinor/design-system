@@ -230,6 +230,17 @@ type HandlersProps<T> = {
    */
   onRowClick?: (row: Row<T>, event: MouseEvent<HTMLTableRowElement>) => unknown
   /**
+   * Row double-click handler.
+   *
+   * @param row The current row
+   * @param event The click event
+   * @returns
+   */
+  onRowDoubleClick?: (
+    row: Row<T>,
+    event: MouseEvent<HTMLTableRowElement>
+  ) => unknown
+  /**
    * Cell click handler.
    *
    * @param cell The current cell
