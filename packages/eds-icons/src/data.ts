@@ -562,7 +562,7 @@ export const in_progress: IconData = {
       prefix: 'eds',
       height: '24',
       width: '24',
-      svgPathData: 'M12 19.5v-15a7.5 7.5 0 1 0 0 15M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2',
+      svgPathData: 'M12 20V4c-4.142 0-8 3.858-8 8s3.858 8 8 8m0-18c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2',
 
     }
 
@@ -608,6 +608,15 @@ export const enlarge: IconData = {
       height: '24',
       width: '24',
       svgPathData: 'M9 3H3v18h18v-6h-2v4H5V5h4zM10 12h2v2h-2zM6.375 14v-2h2.25v2zM10 15.375h2v2.25h-2zM17.512 5H13V3h8v8h-2V6.34l-4.324 4.325L13.26 9.25z',
+
+    }
+
+export const circle_filled: IconData = {
+      name: 'circle_filled',
+      prefix: 'eds',
+      height: '24',
+      width: '24',
+      svgPathData: 'M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10',
 
     }
 
