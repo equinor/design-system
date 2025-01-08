@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import fetch from 'node-fetch'
-import { readFile, writeFile } from './file'
+import { readFile, writeFile } from './file.js'
 
 const options = () => ({
   headers: {

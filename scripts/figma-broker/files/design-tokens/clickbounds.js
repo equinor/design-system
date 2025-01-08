@@ -4,9 +4,9 @@ import {
   withType,
   pickChildren,
   toDictDeep,
-} from '../../functions/utils'
-import { px } from '../../functions/units'
-import { toCSSVars } from '../../transformers'
+} from '../../functions/utils.js'
+import { px } from '../../functions/units.js'
+import { toCSSVars } from '../../transformers/index.js'
 
 const toHeightTokens = R.pipe(
   R.filter(withType('frame')),

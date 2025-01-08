@@ -4,9 +4,9 @@ import {
   withType,
   pickChildren,
   toDictDeep,
-} from '../../functions/utils'
-import { px } from '../../functions/units'
-import { fillToRgba, toCSSVars } from '../../transformers'
+} from '../../functions/utils.js'
+import { px } from '../../functions/units.js'
+import { fillToRgba, toCSSVars } from '../../transformers/index.js'
 
 const toBoxShadow = (effect) =>
   `${px(effect.offset.x)} ${px(effect.offset.y)} ${px(

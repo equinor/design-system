@@ -2,7 +2,7 @@ import fs from 'fs'
 import { deleteAsync } from 'del'
 import fetch from 'node-fetch'
 import * as R from 'ramda'
-import { createFolder } from './folder'
+import { createFolder } from './folder.js'
 //import prettier from 'prettier'
 
 //const prettierConfig = fs.readFileSync('./../../.prettierrc.yaml', 'utf8')

@@ -1,7 +1,7 @@
 import { argv } from 'process'
 import dotenv from 'dotenv'
 
-import { createTokens, createAssets } from './actions'
+import { createTokens, createAssets } from './actions/index.js'
 
 dotenv.config()
 

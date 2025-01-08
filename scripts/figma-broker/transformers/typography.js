@@ -1,7 +1,7 @@
 import * as R from 'ramda'
-import { withType, withName, removeNilAndEmpty } from '../functions/utils'
-import { rootFontSize, rem, em } from '../functions/units'
-import { fillToRgba } from './colors'
+import { withType, withName, removeNilAndEmpty } from '../functions/utils.js'
+import { rootFontSize, rem, em } from '../functions/units.js'
+import { fillToRgba } from './colors.js'
 
 const fallback = {}
 const cssVarName = (name) => `eds_${name}_color`
