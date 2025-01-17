@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.43.0] - 2025-01-17
+
+### Fixed
+
+- 🐛`Tooltip`: fixed an issue that caused the Tooltip to flicker in some cases by @oddvernes in https://github.com/equinor/design-system/pull/3695
+- 🐛`Icon`: icon now uses deterministically generated id internally to work better with server side rendering by @sebastianvitterso in https://github.com/equinor/design-system/pull/3706
+
+### Added
+
+- ✨`Tooltip`: Allow defining custom root element for tooltips portal by setting the new `rootElement` prop on the `EdsProvider` by @yusijs in https://github.com/equinor/design-system/pull/3696
+- 🧑‍💻`Tooltip`: added `eds-tooltip` class for easier access to override styling by @oddvernes in https://github.com/equinor/design-system/pull/3700
+
+### Changed
+
+- 🧑‍💻components are `'use client'` by default for better ssr support (this only applies to non-composite components) by @oddvernes in https://github.com/equinor/design-system/pull/3703
+- ⬆️ updated dev dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3713
+- ⬆️ updated prod dependencies by @oddvernes in https://github.com/equinor/design-system/pull/3715
+
 ## [0.42.5] - 2024-11-21
 
 ### Fixed
