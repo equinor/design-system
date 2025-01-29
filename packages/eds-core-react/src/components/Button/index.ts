@@ -14,5 +14,5 @@ Button.Toggle = ToggleButton
 Button.Group.displayName = 'Button.Group'
 Button.Toggle.displayName = 'Button.Toggle'
 
-export { Button }
+export { Button, ButtonGroup, ToggleButton }
 export type { ButtonProps, ButtonGroupProps, ToggleButtonProps }

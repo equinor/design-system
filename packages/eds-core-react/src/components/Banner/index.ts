@@ -18,7 +18,7 @@ Banner.Icon.displayName = 'Banner.Icon'
 Banner.Message.displayName = 'Banner.Message'
 Banner.Actions.displayName = 'Banner.Actions'
 
-export { Banner }
+export { Banner, BannerIcon, BannerMessage, BannerActions }
 export type {
   BannerProps,
   BannerMessageProps,

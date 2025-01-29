@@ -33,7 +33,14 @@ Accordion.HeaderTitle.displayName = 'Accordion.HeaderTitle'
 Accordion.HeaderActions.displayName = 'Accordion.HeaderActions'
 Accordion.Panel.displayName = 'Accordion.Panel'
 
-export { Accordion }
+export {
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionHeaderTitle,
+  AccordionHeaderActions,
+  AccordionPanel,
+}
 export type {
   AccordionProps,
   AccordionPanelProps,

@@ -1,28 +1,28 @@
 import { Table as BaseTable, TableProps } from './Table'
-import { Body, BodyProps } from './Body'
-import { Cell, CellProps } from './Cell'
-import { Head, HeadProps } from './Head'
-import { Foot, FootProps } from './Foot'
-import { Row, RowProps } from './Row'
-import { Caption, CaptionProps } from './Caption'
+import { Body as TableBody, BodyProps } from './Body'
+import { Cell as TableCell, CellProps } from './Cell'
+import { Head as TableHead, HeadProps } from './Head'
+import { Foot as TableFoot, FootProps } from './Foot'
+import { Row as tableRow, RowProps } from './Row'
+import { Caption as TableCaption, CaptionProps } from './Caption'
 
 type TableCompoundProps = typeof BaseTable & {
-  Body: typeof Body
-  Cell: typeof Cell
-  Head: typeof Head
-  Foot: typeof Foot
-  Row: typeof Row
-  Caption: typeof Caption
+  Body: typeof TableBody
+  Cell: typeof TableCell
+  Head: typeof TableHead
+  Foot: typeof TableFoot
+  Row: typeof tableRow
+  Caption: typeof TableCaption
 }
 
 const Table = BaseTable as TableCompoundProps
 
-Table.Body = Body
-Table.Cell = Cell
-Table.Head = Head
-Table.Foot = Foot
-Table.Row = Row
-Table.Caption = Caption
+Table.Body = TableBody
+Table.Cell = TableCell
+Table.Head = TableHead
+Table.Foot = TableFoot
+Table.Row = tableRow
+Table.Caption = TableCaption
 
 Table.Body.displayName = 'Table.Body'
 Table.Cell.displayName = 'Table.Cell'
@@ -31,7 +31,15 @@ Table.Foot.displayName = 'Table.Foot'
 Table.Row.displayName = 'Table.Row'
 Table.Caption.displayName = 'Table.Caption'
 
-export { Table }
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableFoot,
+  tableRow,
+  TableCaption,
+}
 export type {
   TableProps,
   CellProps,

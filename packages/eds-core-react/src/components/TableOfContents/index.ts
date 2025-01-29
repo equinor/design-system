@@ -2,17 +2,20 @@ import {
   TableOfContents as BaseComponent,
   TableOfContentsProps,
 } from './TableOfContents'
-import { LinkItem, TableOfContentsLinkItemProps } from './LinkItem'
+import {
+  LinkItem as TableOfContentsLinkItem,
+  TableOfContentsLinkItemProps,
+} from './LinkItem'
 
 type TableOfContentsCompoundProps = typeof BaseComponent & {
-  LinkItem: typeof LinkItem
+  LinkItem: typeof TableOfContentsLinkItem
 }
 
 const TableOfContents = BaseComponent as TableOfContentsCompoundProps
 
-TableOfContents.LinkItem = LinkItem
+TableOfContents.LinkItem = TableOfContentsLinkItem
 
 TableOfContents.LinkItem.displayName = 'TableOfContents.LinkItem'
 
-export { TableOfContents }
+export { TableOfContents, TableOfContentsLinkItem }
 export type { TableOfContentsProps, TableOfContentsLinkItemProps }

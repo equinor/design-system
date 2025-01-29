@@ -35,5 +35,15 @@ SideBar.Button.displayName = 'SideBar.Button'
 SideBar.Accordion.displayName = 'SideBar.Accordion'
 SideBar.AccordionItem.displayName = 'SideBar.AccordionItem'
 
-export { SideBar, useSideBar }
+export {
+  SideBar,
+  useSideBar,
+  SidebarLink,
+  SideBarContent,
+  SideBarFooter,
+  SideBarToggle,
+  SideBarButton,
+  SideBarAccordion,
+  SideBarAccordionItem,
+}
 export type { SidebarType, SidebarLinkProps }

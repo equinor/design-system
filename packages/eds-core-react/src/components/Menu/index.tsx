@@ -14,5 +14,5 @@ Menu.Section = MenuSection
 Menu.Item.displayName = 'Menu.Item'
 Menu.Section.displayName = 'Menu.Section'
 
-export { Menu }
+export { Menu, MenuItem, MenuSection }
 export type { MenuProps, MenuItemProps, MenuSectionProps }

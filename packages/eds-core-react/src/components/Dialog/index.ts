@@ -25,7 +25,7 @@ Dialog.Title.displayName = 'Dialog.Title'
 Dialog.Content.displayName = 'Dialog.Content'
 Dialog.Header.displayName = 'Dialog.Header'
 
-export { Dialog }
+export { Dialog, DialogActions, DialogTitle, DialogContent, DialogHeader }
 export type {
   DialogProps,
   DialogActionsProps,

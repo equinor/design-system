@@ -23,5 +23,5 @@ Tabs.Panels.displayName = 'Tabs.Panels'
 Tabs.Panel.displayName = 'Tabs.Panel'
 Tabs.List.displayName = 'Tabs.List'
 
-export { Tabs }
+export { Tabs, Tab, TabPanels, TabPanel, TabList }
 export type { TabsProps, TabProps, TabListProps, TabPanelProps, TabPanelsProps }
