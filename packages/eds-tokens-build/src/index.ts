@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import type { TransformedToken } from 'style-dictionary/types'
+import type { PlatformConfig, TransformedToken } from 'style-dictionary/types'
 import {
   usesReferences,
   outputReferencesTransformed,
@@ -42,57 +42,85 @@ const lightColorSchemeCollectionFile = '🌗 Colour scheme.Light.json'
 const darkTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`,
 ])
+
+const newDarkColorSchemeCollectionFile = '02 🌗 Color scheme.Dark.json'
+const newDarkTokens = readJsonFiles([
+  `./${TOKENS_DIR}/ZrJNpIhcHprG9bFpHlHcWa/${newDarkColorSchemeCollectionFile}`,
+])
+
 const spacingComfortableTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
 ])
+
+function transformLightDark(
+  token: TransformedToken,
+  config: PlatformConfig,
+  darkValue: string | boolean | number | undefined,
+) {
+  const outputReferences = config?.files?.[0]?.options?.outputReferences
+
+  //we have to manually create css variables for both light and dark
+  let resolvedLightReference
+  if (outputReferences && usesReferences(token.original.$value)) {
+    resolvedLightReference = resolveReference(
+      `${token.original.$value}`,
+      `${config.prefix}`,
+    )
+  }
+  if (darkValue) {
+    //it is a reference
+    if (usesReferences(darkValue)) {
+      //make sure it is not a local variable, in which case it has light-dark set already
+      if (token.original.$value != darkValue) {
+        if (outputReferences) {
+          const resolvedDarkReference = resolveReference(
+            `${darkValue}`,
+            `${config.prefix}`,
+          )
+          return `light-dark(${resolvedLightReference}, ${resolvedDarkReference})`
+        } else {
+          return `light-dark(${token.$value}, ${darkValue})`
+        }
+      }
+      //the dark value is not a reference but a direct value (color with alpha transparency)
+    } else {
+      if (outputReferences && resolvedLightReference) {
+        return `light-dark(${resolvedLightReference}, ${darkValue})`
+      } else {
+        return `light-dark(${token.$value}, ${darkValue})`
+      }
+    }
+  }
+  //there is no dark value
+  return `${token.$value}`
+}
 
 StyleDictionary.registerTransform({
   name: 'lightDark',
   type: 'value',
   transitive: true,
   filter: isColor,
-  transform: (token: TransformedToken, config) => {
-    const outputReferences = config?.files?.[0]?.options?.outputReferences
+  transform: (token: TransformedToken, config: PlatformConfig) => {
     const path = token.path.join('/')
     const darkValue =
       darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
-
-    //we have to manually create css variables for both light and dark
-    let resolvedLightReference
-    if (outputReferences && usesReferences(token.original.$value)) {
-      resolvedLightReference = resolveReference(
-        `${token.original.$value}`,
-        `${config.prefix}`,
-      )
-    }
-    if (darkValue) {
-      //it is a reference
-      if (usesReferences(darkValue)) {
-        //make sure it is not a local variable, in which case it has light-dark set already
-        if (token.original.$value != darkValue) {
-          if (outputReferences) {
-            const resolvedDarkReference = resolveReference(
-              `${darkValue}`,
-              `${config.prefix}`,
-            )
-            return `light-dark(${resolvedLightReference}, ${resolvedDarkReference})`
-          } else {
-            return `light-dark(${token.$value}, ${darkValue})`
-          }
-        }
-        //the dark value is not a reference but a direct value (color with alpha transparency)
-      } else {
-        if (outputReferences && resolvedLightReference) {
-          return `light-dark(${resolvedLightReference}, ${darkValue})`
-        } else {
-          return `light-dark(${token.$value}, ${darkValue})`
-        }
-      }
-    }
-    //there is no dark value
-    return `${token.$value}`
+    return transformLightDark(token, config, darkValue)
   },
 })
+
+StyleDictionary.registerTransform({
+  name: 'newLightDark',
+  type: 'value',
+  transitive: true,
+  filter: isColor,
+  transform: (token: TransformedToken, config: PlatformConfig) => {
+    const path = token.path.join('/')
+    const darkValue =
+      newDarkTokens[newDarkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
+    return transformLightDark(token, config, darkValue)
+  },
+})
+
 StyleDictionary.registerTransform({
   name: 'densitySpaceToggle',
   type: 'value',
@@ -291,15 +319,17 @@ const _extend = ({
   filter,
   include,
   outputReferences,
+  transforms,
 }: {
   include?: string[]
   source: string[]
   fileName: string
   buildPath: string
-  prefix: string
+  prefix?: string
   selector?: string
   filter?: (token: TransformedToken) => boolean
   outputReferences?: boolean
+  transforms?: string[]
 }) /*return type??*/ => {
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
@@ -313,7 +343,7 @@ const _extend = ({
         transformGroup: 'css',
         prefix,
         buildPath: `${cssBuildPath}/${buildPath}/`,
-        transforms: cssTransforms,
+        transforms,
         files: [
           {
             filter,
@@ -410,12 +440,61 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   const colorBuildPath = 'color/'
   const spacingBuildPath = 'spacing/'
 
+  const NEW_TOKENS_DIR = `./${TOKENS_DIR}/ZrJNpIhcHprG9bFpHlHcWa`
+  const NEW_BASE_SOURCE = `${NEW_TOKENS_DIR}/01 🎨 Base.Mode 1.json`
+  const NEW_COLOR_LIGHT_SOURCE = `${NEW_TOKENS_DIR}/02 🌗 Color scheme.Light.json`
+  const NEW_COLOR_DARK_SOURCE = `${NEW_TOKENS_DIR}/02 🌗 Color scheme.Dark.json`
+
+  const newLightMode = _extend({
+    include: [NEW_BASE_SOURCE],
+    source: [NEW_COLOR_LIGHT_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Light']),
+    buildPath: colorBuildPath,
+    fileName: 'new-light',
+    selector: ':root, [data-color-scheme="light"]',
+    outputReferences: false,
+  })
+
+  const newDarkMode = _extend({
+    include: [NEW_BASE_SOURCE],
+    source: [NEW_COLOR_DARK_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Dark']),
+    buildPath: colorBuildPath,
+    fileName: 'new-dark',
+    selector: '[data-color-scheme="dark"]',
+    outputReferences: false,
+  })
+
+  const newLightDarkColorsTrimmed = new StyleDictionary({
+    include: [NEW_BASE_SOURCE],
+    source: [NEW_COLOR_LIGHT_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        buildPath: `${cssBuildPath}/color/`,
+        transforms: ['name/kebab', 'color/css', 'newLightDark'],
+        files: [
+          {
+            filter: (token: TransformedToken) =>
+              includeTokenFilter(token, ['Light']),
+            destination: 'new-colors-trimmed.css',
+            format: 'css/variables',
+            options: {
+              outputReferences: false, // The trimmed colors should not reference other tokens
+            },
+          },
+        ],
+      },
+    },
+  })
+
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
     buildPath: colorBuildPath,
     prefix,
     fileName: 'primitives',
     outputReferences: false, // The primitives should not reference other tokens. This can always be false.
+    transforms: cssTransforms,
   })
 
   const simpleSemantic = _extend({
@@ -425,6 +504,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     prefix,
     fileName: 'simple-semantic',
     outputReferences,
+    transforms: cssTransforms,
   })
 
   const lightMode = _extend({
@@ -436,6 +516,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     fileName: 'light',
     selector: ':root, [data-color-scheme="light"]',
     outputReferences,
+    transforms: cssTransforms,
   })
 
   const darkMode = _extend({
@@ -447,6 +528,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     fileName: 'dark',
     selector: '[data-color-scheme="dark"]',
     outputReferences,
+    transforms: cssTransforms,
   })
 
   const spacingPrimitives = _extend({
@@ -455,6 +537,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     prefix,
     fileName: 'primitives',
     filter: (token) => includeTokenFilter(token),
+    transforms: cssTransforms,
   })
 
   const densityComfortable = _extend({
@@ -466,6 +549,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     selector: '[data-density="comfortable"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
+    transforms: cssTransforms,
   })
 
   const densitySpacious = _extend({
@@ -477,6 +561,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     selector: ':root, [data-density="spacious"]',
     filter: (token) => includeTokenFilter(token, ['Density']),
     outputReferences,
+    transforms: cssTransforms,
   })
 
   const densityAllTrimmed = new StyleDictionary({
@@ -652,6 +737,9 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   await densityComfortableTrimmed.buildAllPlatforms()
   await densityAllTrimmed.buildAllPlatforms()
   await densityAllVerbose.buildAllPlatforms()
+  await newLightMode.buildAllPlatforms()
+  await newDarkMode.buildAllPlatforms()
+  await newLightDarkColorsTrimmed.buildAllPlatforms()
 }
 
 function transformNumberToRem(value: number): string {
