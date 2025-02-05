@@ -1,7 +1,7 @@
 {
   "eds": {
     "color": {
-      "bg": {
+      "background": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.background-default}",
         "$description": "The header, footer, toolbars, panels, and primary content use the background color",
@@ -13,7 +13,7 @@
           }
         }
       },
-      "bg-base": {
+      "background-base": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.background-subtle}",
         "$description": "Application background color. Should be set to either html or body element.",
@@ -25,7 +25,7 @@
           }
         }
       },
-      "bg-disabled": {
+      "background-disabled": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.surface-hover}",
         "$description": "",
@@ -37,7 +37,7 @@
           }
         }
       },
-      "bg-success": {
+      "background-success": {
         "$type": "color",
         "$value": "{eds.color.base.green.light.surface-default}",
         "$description": "",
@@ -49,7 +49,7 @@
           }
         }
       },
-      "bg-success-strong": {
+      "background-success-strong": {
         "$type": "color",
         "$value": "{eds.color.base.green.light.base-default}",
         "$description": "",
@@ -61,7 +61,7 @@
           }
         }
       },
-      "bg-info": {
+      "background-info": {
         "$type": "color",
         "$value": "{eds.color.base.blue.light.surface-default}",
         "$description": "",
@@ -73,7 +73,7 @@
           }
         }
       },
-      "bg-info-strong": {
+      "background-info-strong": {
         "$type": "color",
         "$value": "{eds.color.base.blue.light.base-default}",
         "$description": "",
@@ -85,7 +85,7 @@
           }
         }
       },
-      "bg-warning": {
+      "background-warning": {
         "$type": "color",
         "$value": "{eds.color.base.orange.light.surface-default}",
         "$description": "",
@@ -97,7 +97,7 @@
           }
         }
       },
-      "bg-warning-strong": {
+      "background-warning-strong": {
         "$type": "color",
         "$value": "{eds.color.base.orange.light.base-default}",
         "$description": "",
@@ -109,7 +109,7 @@
           }
         }
       },
-      "bg-danger": {
+      "background-danger": {
         "$type": "color",
         "$value": "{eds.color.base.red.light.surface-default}",
         "$description": "",
@@ -121,7 +121,7 @@
           }
         }
       },
-      "bg-danger-strong": {
+      "background-danger-strong": {
         "$type": "color",
         "$value": "{eds.color.base.red.light.base-default}",
         "$description": "",
@@ -133,7 +133,7 @@
           }
         }
       },
-      "bg-accent-initial": {
+      "background-accent": {
         "$type": "color",
         "$value": "{eds.color.base.moss-green.light.surface-default}",
         "$description": "",
@@ -145,7 +145,7 @@
           }
         }
       },
-      "bg-accent-hover": {
+      "background-accent-hover": {
         "$type": "color",
         "$value": "{eds.color.base.moss-green.light.surface-hover}",
         "$description": "",
@@ -160,7 +160,7 @@
       "button": {
         "primary": {
           "accent": {
-            "bg": {
+            "background": {
               "initial": {
                 "$type": "color",
                 "$value": "{eds.color.base.moss-green.light.base-default}",
@@ -212,7 +212,7 @@
             }
           },
           "neutral": {
-            "bg": {
+            "background": {
               "initial": {
                 "$type": "color",
                 "$value": "{eds.color.base.gray.light.base-default}",
@@ -264,7 +264,7 @@
             }
           },
           "danger": {
-            "bg": {
+            "background": {
               "initial": {
                 "$type": "color",
                 "$value": "{eds.color.base.red.light.base-default}",
@@ -357,7 +357,7 @@
           }
         },
         "checked": {
-          "bg": {
+          "background": {
             "initial": {
               "$type": "color",
               "$value": "{eds.color.base.moss-green.light.base-default}",
@@ -410,7 +410,7 @@
         }
       },
       "overlay": {
-        "bg": {
+        "background": {
           "$type": "color",
           "$value": "{eds.color.base.gray.light.background-default}",
           "$description": "",
@@ -461,7 +461,7 @@
           }
         }
       },
-      "bg-accent-active": {
+      "background-accent-active": {
         "$type": "color",
         "$value": "{eds.color.base.moss-green.light.surface-active}",
         "$description": "",
@@ -473,7 +473,7 @@
           }
         }
       },
-      "bg-accent-strong-initial": {
+      "background-accent-strong": {
         "$type": "color",
         "$value": "{eds.color.base.moss-green.light.base-default}",
         "$description": "",
@@ -485,7 +485,7 @@
           }
         }
       },
-      "bg-accent-strong-hover": {
+      "background-accent-strong-hover": {
         "$type": "color",
         "$value": "{eds.color.base.moss-green.light.base-hover}",
         "$description": "",
@@ -497,7 +497,7 @@
           }
         }
       },
-      "bg-accent-strong-active": {
+      "background-accent-strong-active": {
         "$type": "color",
         "$value": "{eds.color.base.moss-green.light.base-active}",
         "$description": "",
@@ -509,7 +509,7 @@
           }
         }
       },
-      "bg-neutral-initial": {
+      "background-neutral": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.surface-default}",
         "$description": "",
@@ -521,7 +521,19 @@
           }
         }
       },
-      "bg-neutral-hover": {
+      "background-neutral-subtle": {
+        "$type": "color",
+        "$value": "{eds.color.base.gray.light.background-subtle}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "background-neutral-hover": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.surface-hover}",
         "$description": "",
@@ -533,7 +545,7 @@
           }
         }
       },
-      "bg-neutral-active": {
+      "background-neutral-active": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.surface-active}",
         "$description": "",
@@ -545,7 +557,7 @@
           }
         }
       },
-      "bg-neutral-strong-initial": {
+      "background-neutral-strong": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.base-default}",
         "$description": "",
@@ -557,7 +569,7 @@
           }
         }
       },
-      "bg-neutral-strong-hover": {
+      "background-neutral-strong-hover": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.base-hover}",
         "$description": "",
@@ -569,7 +581,7 @@
           }
         }
       },
-      "bg-neutral-strong-active": {
+      "background-neutral-strong-active": {
         "$type": "color",
         "$value": "{eds.color.base.gray.light.base-active}",
         "$description": "",
