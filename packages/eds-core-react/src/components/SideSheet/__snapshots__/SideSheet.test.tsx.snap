@@ -134,6 +134,7 @@ exports[`SideSheet Matches snapshot 1`] = `
 
 .c1>button {
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 @media (hover:hover) and (pointer:fine) {
