@@ -54,6 +54,7 @@ const Header = styled.div`
   padding-right: 10px;
   & > button {
     margin-left: auto;
+    flex-shrink: 0;
   }
 `
 
