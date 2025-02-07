@@ -29,7 +29,7 @@ type SharedTextFieldProps = {
   /** Variants */
   variant?: Variants
   /** Input unique id. This is required to ensure accesibility */
-  id: string
+  id?: string
   /** Label text */
   label?: ReactNode
   /** Meta text */
@@ -61,7 +61,7 @@ export type TextFieldProps = SharedTextFieldProps &
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   function TextField(
     {
-      id,
+      id: _id,
       label,
       meta,
       unit,
@@ -81,6 +81,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     },
     ref,
   ) {
+    const id = useId(_id, "input");
     const helperTextId = useId(null, 'helpertext')
     const hasRightAdornments = Boolean(unit || inputIcon)
     let fieldProps = {

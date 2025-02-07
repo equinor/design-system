@@ -40,6 +40,14 @@ describe('TextField', () => {
     )
     expect(await axe(container)).toHaveNoViolations()
   })
+  it('Should pas a11y test even if no id has been provided', async () => {
+    const { container } = render(
+      <TextField
+        label="textfield"
+      />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('Has correct label text', () => {
     const labelText = 'Some label'
     render(<TextField id="test-label" label={labelText} />)
