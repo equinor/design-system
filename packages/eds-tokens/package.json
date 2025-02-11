@@ -65,6 +65,8 @@
     "tokens-in-code:build:css": "pnpm run _prebuild:css-index && pnpm run _build:css && pnpm run _build:css-min",
     "tokens-in-code:clean": "rimraf build",
     "tokens-in-code:build": "pnpm run tokens-in-code:clean && eds-tokens-build && pnpm run tokens-in-code:build:css",
+    "update-figma:colors-matrix": "sync-tokens-to-figma --file-key l61klzmHcRrHVk7Ag0eLGn",
+    "update-tokens:colors-matrix": "sync-figma-to-tokens --file-key l61klzmHcRrHVk7Ag0eLGn",
     "update-figma:colors": "sync-tokens-to-figma --file-key ZrJNpIhcHprG9bFpHlHcWa",
     "update-tokens:primitives": "sync-figma-to-tokens --file-key cVaqjfgt3gDiqbx10q3Pj8",
     "update-tokens:themes": "sync-figma-to-tokens --file-key aRgKtCisnm98k9kVy6zasL",
