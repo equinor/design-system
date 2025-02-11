@@ -11,7 +11,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text"
+            "WEB": "--eds-color-theme-text"
           }
         }
       }
@@ -27,7 +27,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background"
+            "WEB": "--eds-color-theme-background"
           }
         }
       }
@@ -43,7 +43,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border"
+            "WEB": "--eds-color-theme-border"
           }
         }
       }
@@ -61,7 +61,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-subtle"
+            "WEB": "--eds-color-theme-text-subtle"
           }
         }
       }
@@ -77,7 +77,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-on-strong"
+            "WEB": "--eds-color-theme-text-on-strong"
           }
         }
       }
@@ -93,7 +93,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-disabled"
+            "WEB": "--eds-color-theme-text-disabled"
           }
         }
       }
@@ -109,7 +109,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-accent"
+            "WEB": "--eds-color-theme-text-accent"
           }
         }
       }
@@ -125,7 +125,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-accent-subtle"
+            "WEB": "--eds-color-theme-text-accent-subtle"
           }
         }
       }
@@ -141,7 +141,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-warning"
+            "WEB": "--eds-color-theme-text-warning"
           }
         }
       }
@@ -157,7 +157,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-warning-subtle"
+            "WEB": "--eds-color-theme-text-warning-subtle"
           }
         }
       }
@@ -173,7 +173,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-danger"
+            "WEB": "--eds-color-theme-text-danger"
           }
         }
       }
@@ -189,7 +189,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-danger-subtle"
+            "WEB": "--eds-color-theme-text-danger-subtle"
           }
         }
       }
@@ -205,7 +205,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-success"
+            "WEB": "--eds-color-theme-text-success"
           }
         }
       }
@@ -221,7 +221,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-success-subtle"
+            "WEB": "--eds-color-theme-text-success-subtle"
           }
         }
       }
@@ -237,7 +237,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-info"
+            "WEB": "--eds-color-theme-text-info"
           }
         }
       }
@@ -253,7 +253,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-text-info-subtle"
+            "WEB": "--eds-color-theme-text-info-subtle"
           }
         }
       }
@@ -271,7 +271,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-disabled"
+            "WEB": "--eds-color-theme-background-disabled"
           }
         }
       }
@@ -287,7 +287,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-accent-initial"
+            "WEB": "--eds-color-theme-background-accent-initial"
           }
         }
       }
@@ -303,7 +303,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-accent-hover"
+            "WEB": "--eds-color-theme-background-accent-hover"
           }
         }
       }
@@ -319,7 +319,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-accent-active"
+            "WEB": "--eds-color-theme-background-accent-active"
           }
         }
       }
@@ -335,7 +335,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-accent-strong-initial"
+            "WEB": "--eds-color-theme-background-accent-strong-initial"
           }
         }
       }
@@ -351,7 +351,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-accent-strong-hover"
+            "WEB": "--eds-color-theme-background-accent-strong-hover"
           }
         }
       }
@@ -367,7 +367,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-accent-strong-active"
+            "WEB": "--eds-color-theme-background-accent-strong-active"
           }
         }
       }
@@ -383,7 +383,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-neutral-initial"
+            "WEB": "--eds-color-theme-background-neutral-initial"
           }
         }
       }
@@ -399,7 +399,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-neutral-hover"
+            "WEB": "--eds-color-theme-background-neutral-hover"
           }
         }
       }
@@ -415,7 +415,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-neutral-active"
+            "WEB": "--eds-color-theme-background-neutral-active"
           }
         }
       }
@@ -431,7 +431,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-neutral-strong-initial"
+            "WEB": "--eds-color-theme-background-neutral-strong-initial"
           }
         }
       }
@@ -447,7 +447,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-neutral-strong-hover"
+            "WEB": "--eds-color-theme-background-neutral-strong-hover"
           }
         }
       }
@@ -463,7 +463,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-neutral-strong-active"
+            "WEB": "--eds-color-theme-background-neutral-strong-active"
           }
         }
       }
@@ -479,7 +479,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-danger"
+            "WEB": "--eds-color-theme-background-danger"
           }
         }
       }
@@ -495,7 +495,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-danger-hover"
+            "WEB": "--eds-color-theme-background-danger-hover"
           }
         }
       }
@@ -511,7 +511,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-danger-active"
+            "WEB": "--eds-color-theme-background-danger-active"
           }
         }
       }
@@ -527,7 +527,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-danger-strong"
+            "WEB": "--eds-color-theme-background-danger-strong"
           }
         }
       }
@@ -543,7 +543,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-danger-strong"
+            "WEB": "--eds-color-theme-background-danger-strong"
           }
         }
       }
@@ -559,7 +559,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-danger-strong"
+            "WEB": "--eds-color-theme-background-danger-strong"
           }
         }
       }
@@ -575,7 +575,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-warning"
+            "WEB": "--eds-color-theme-background-warning"
           }
         }
       }
@@ -591,7 +591,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-warning-strong"
+            "WEB": "--eds-color-theme-background-warning-strong"
           }
         }
       }
@@ -607,7 +607,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-success"
+            "WEB": "--eds-color-theme-background-success"
           }
         }
       }
@@ -623,7 +623,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-success-strong"
+            "WEB": "--eds-color-theme-background-success-strong"
           }
         }
       }
@@ -639,7 +639,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-info"
+            "WEB": "--eds-color-theme-background-info"
           }
         }
       }
@@ -655,7 +655,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-background-info-strong"
+            "WEB": "--eds-color-theme-background-info-strong"
           }
         }
       }
@@ -673,7 +673,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-subtle"
+            "WEB": "--eds-color-theme-border-subtle"
           }
         }
       }
@@ -689,7 +689,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-strong"
+            "WEB": "--eds-color-theme-border-strong"
           }
         }
       }
@@ -705,7 +705,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-disabled"
+            "WEB": "--eds-color-theme-border-disabled"
           }
         }
       }
@@ -721,7 +721,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-accent"
+            "WEB": "--eds-color-theme-border-accent"
           }
         }
       }
@@ -737,7 +737,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-accent-subtle"
+            "WEB": "--eds-color-theme-border-accent-subtle"
           }
         }
       }
@@ -753,7 +753,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-accent-strong"
+            "WEB": "--eds-color-theme-border-accent-strong"
           }
         }
       }
@@ -769,7 +769,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-warning"
+            "WEB": "--eds-color-theme-border-warning"
           }
         }
       }
@@ -785,7 +785,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-warning-subtle"
+            "WEB": "--eds-color-theme-border-warning-subtle"
           }
         }
       }
@@ -801,7 +801,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-danger"
+            "WEB": "--eds-color-theme-border-danger"
           }
         }
       }
@@ -817,7 +817,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-danger-subtle"
+            "WEB": "--eds-color-theme-border-danger-subtle"
           }
         }
       }
@@ -833,7 +833,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-success"
+            "WEB": "--eds-color-theme-border-success"
           }
         }
       }
@@ -849,7 +849,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-success-subtle"
+            "WEB": "--eds-color-theme-border-success-subtle"
           }
         }
       }
@@ -865,7 +865,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-info"
+            "WEB": "--eds-color-theme-border-info"
           }
         }
       }
@@ -881,7 +881,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-border-info-subtle"
+            "WEB": "--eds-color-theme-border-info-subtle"
           }
         }
       }
@@ -900,7 +900,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "--eds-color-app-background"
+              "WEB": "--eds-color-component-app-background"
             }
           }
         }
@@ -917,7 +917,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "--eds-color-component-input-background"
+            }
           }
         }
       }
@@ -934,7 +936,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "--eds-color-popover-background"
+              "WEB": "--eds-color-component-popover-background"
             }
           }
         }
@@ -952,7 +954,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "--eds-color-backdrop-background"
+              "WEB": "--eds-color-component-backdrop-background"
             }
           }
         }
@@ -970,7 +972,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "--eds-color-focus-border"
+              "WEB": "--eds-color-component-focus-border"
             }
           }
         }
