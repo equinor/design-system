@@ -441,7 +441,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   const spacingBuildPath = 'spacing/'
 
   const NEW_TOKENS_DIR = `./${TOKENS_DIR}/ZrJNpIhcHprG9bFpHlHcWa`
-  const NEW_BASE_SOURCE = `${NEW_TOKENS_DIR}/01 🎨 Base.Mode 1.json`
+  const NEW_BASE_SOURCE = `${NEW_TOKENS_DIR}/01 🎨 Colors.Mode 1.json`
   const NEW_COLOR_LIGHT_SOURCE = `${NEW_TOKENS_DIR}/02 🌗 Color scheme.Light.json`
   const NEW_COLOR_DARK_SOURCE = `${NEW_TOKENS_DIR}/02 🌗 Color scheme.Dark.json`
 

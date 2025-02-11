@@ -2,7 +2,7 @@
   "Default": {
     "text": {
       "$type": "color",
-      "$value": "{eds.color.text}",
+      "$value": "{eds.color.theme.text}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -18,7 +18,7 @@
     },
     "background": {
       "$type": "color",
-      "$value": "{eds.color.background}",
+      "$value": "{eds.color.theme.background}",
       "$description": "The header, footer, toolbars, panels, and primary content use the background color",
       "$extensions": {
         "com.figma": {
@@ -34,7 +34,7 @@
     },
     "border": {
       "$type": "color",
-      "$value": "{eds.color.border}",
+      "$value": "{eds.color.theme.border}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -52,7 +52,7 @@
   "Text & Icon": {
     "subtle": {
       "$type": "color",
-      "$value": "{eds.color.text-subtle}",
+      "$value": "{eds.color.theme.text-subtle}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -68,7 +68,7 @@
     },
     "on-strong": {
       "$type": "color",
-      "$value": "{eds.color.text-on-strong}",
+      "$value": "{eds.color.theme.text-on-strong}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -84,7 +84,7 @@
     },
     "disabled": {
       "$type": "color",
-      "$value": "{eds.color.text-disabled}",
+      "$value": "{eds.color.theme.text-disabled}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -100,7 +100,7 @@
     },
     "accent": {
       "$type": "color",
-      "$value": "{eds.color.text-accent}",
+      "$value": "{eds.color.theme.text-accent}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -116,7 +116,7 @@
     },
     "accent-subtle": {
       "$type": "color",
-      "$value": "{eds.color.text-accent-subtle}",
+      "$value": "{eds.color.theme.text-accent-subtle}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -132,7 +132,7 @@
     },
     "warning": {
       "$type": "color",
-      "$value": "{eds.color.text-warning}",
+      "$value": "{eds.color.theme.text-warning}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -148,7 +148,7 @@
     },
     "warning-subtle": {
       "$type": "color",
-      "$value": "{eds.color.text-warning-subtle}",
+      "$value": "{eds.color.theme.text-warning-subtle}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -164,7 +164,7 @@
     },
     "danger": {
       "$type": "color",
-      "$value": "{eds.color.text-danger}",
+      "$value": "{eds.color.theme.text-danger}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -180,7 +180,7 @@
     },
     "danger-subtle": {
       "$type": "color",
-      "$value": "{eds.color.text-danger-subtle}",
+      "$value": "{eds.color.theme.text-danger-subtle}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -196,7 +196,7 @@
     },
     "success": {
       "$type": "color",
-      "$value": "{eds.color.text-success}",
+      "$value": "{eds.color.theme.text-success}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -212,7 +212,7 @@
     },
     "success-subtle": {
       "$type": "color",
-      "$value": "{eds.color.text-success-subtle}",
+      "$value": "{eds.color.theme.text-success-subtle}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -228,7 +228,7 @@
     },
     "info": {
       "$type": "color",
-      "$value": "{eds.color.text-info}",
+      "$value": "{eds.color.theme.text-info}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -244,7 +244,7 @@
     },
     "info-subtle": {
       "$type": "color",
-      "$value": "{eds.color.text-info-subtle}",
+      "$value": "{eds.color.theme.text-info-subtle}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -262,7 +262,7 @@
   "Background": {
     "disabled": {
       "$type": "color",
-      "$value": "{eds.color.background-disabled}",
+      "$value": "{eds.color.theme.background-disabled}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -278,7 +278,7 @@
     },
     "accent": {
       "$type": "color",
-      "$value": "{eds.color.background-accent}",
+      "$value": "{eds.color.theme.background-accent}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -294,7 +294,7 @@
     },
     "accent-hover": {
       "$type": "color",
-      "$value": "{eds.color.background-accent-hover}",
+      "$value": "{eds.color.theme.background-accent-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -310,7 +310,7 @@
     },
     "accent-active": {
       "$type": "color",
-      "$value": "{eds.color.background-accent-active}",
+      "$value": "{eds.color.theme.background-accent-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -326,7 +326,7 @@
     },
     "accent-strong": {
       "$type": "color",
-      "$value": "{eds.color.background-accent-strong}",
+      "$value": "{eds.color.theme.background-accent-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -342,7 +342,7 @@
     },
     "accent-strong-hover": {
       "$type": "color",
-      "$value": "{eds.color.background-accent-strong-hover}",
+      "$value": "{eds.color.theme.background-accent-strong-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -358,7 +358,7 @@
     },
     "accent-strong-active": {
       "$type": "color",
-      "$value": "{eds.color.background-accent-strong-active}",
+      "$value": "{eds.color.theme.background-accent-strong-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -374,7 +374,7 @@
     },
     "neutral": {
       "$type": "color",
-      "$value": "{eds.color.background-neutral}",
+      "$value": "{eds.color.theme.background-neutral}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -390,7 +390,7 @@
     },
     "neutral-hover": {
       "$type": "color",
-      "$value": "{eds.color.background-neutral-hover}",
+      "$value": "{eds.color.theme.background-neutral-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -406,7 +406,7 @@
     },
     "neutral-active": {
       "$type": "color",
-      "$value": "{eds.color.background-neutral-active}",
+      "$value": "{eds.color.theme.background-neutral-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -422,7 +422,7 @@
     },
     "neutral-strong": {
       "$type": "color",
-      "$value": "{eds.color.background-neutral-strong}",
+      "$value": "{eds.color.theme.background-neutral-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -438,7 +438,7 @@
     },
     "neutral-strong-hover": {
       "$type": "color",
-      "$value": "{eds.color.background-neutral-strong-hover}",
+      "$value": "{eds.color.theme.background-neutral-strong-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -454,7 +454,7 @@
     },
     "neutral-strong-active": {
       "$type": "color",
-      "$value": "{eds.color.background-neutral-strong-active}",
+      "$value": "{eds.color.theme.background-neutral-strong-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -470,7 +470,7 @@
     },
     "danger": {
       "$type": "color",
-      "$value": "{eds.color.background-danger}",
+      "$value": "{eds.color.theme.background-danger}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -486,7 +486,7 @@
     },
     "danger-hover": {
       "$type": "color",
-      "$value": "{eds.color.background-danger-hover}",
+      "$value": "{eds.color.theme.background-danger-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -502,7 +502,7 @@
     },
     "danger-active": {
       "$type": "color",
-      "$value": "{eds.color.background-danger-active}",
+      "$value": "{eds.color.theme.background-danger-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -518,7 +518,7 @@
     },
     "danger-strong": {
       "$type": "color",
-      "$value": "{eds.color.background-danger-strong}",
+      "$value": "{eds.color.theme.background-danger-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -534,7 +534,7 @@
     },
     "danger-strong-hover": {
       "$type": "color",
-      "$value": "{eds.color.background-danger-strong-hover}",
+      "$value": "{eds.color.theme.background-danger-strong-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -550,7 +550,7 @@
     },
     "danger-strong-active": {
       "$type": "color",
-      "$value": "{eds.color.background-danger-strong-active}",
+      "$value": "{eds.color.theme.background-danger-strong-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -566,7 +566,7 @@
     },
     "warning": {
       "$type": "color",
-      "$value": "{eds.color.background-warning}",
+      "$value": "{eds.color.theme.background-warning}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -582,7 +582,7 @@
     },
     "warning-strong": {
       "$type": "color",
-      "$value": "{eds.color.background-warning-strong}",
+      "$value": "{eds.color.theme.background-warning-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -598,7 +598,7 @@
     },
     "success": {
       "$type": "color",
-      "$value": "{eds.color.background-success}",
+      "$value": "{eds.color.theme.background-success}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -614,7 +614,7 @@
     },
     "success-strong": {
       "$type": "color",
-      "$value": "{eds.color.background-success-strong}",
+      "$value": "{eds.color.theme.background-success-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -630,7 +630,7 @@
     },
     "info": {
       "$type": "color",
-      "$value": "{eds.color.background-info}",
+      "$value": "{eds.color.theme.background-info}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -646,7 +646,7 @@
     },
     "info-strong": {
       "$type": "color",
-      "$value": "{eds.color.background-info-strong}",
+      "$value": "{eds.color.theme.background-info-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -664,7 +664,7 @@
   "Border": {
     "subtle": {
       "$type": "color",
-      "$value": "{eds.color.border-subtle}",
+      "$value": "{eds.color.theme.border-subtle}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -680,7 +680,7 @@
     },
     "strong": {
       "$type": "color",
-      "$value": "{eds.color.border-strong}",
+      "$value": "{eds.color.theme.border-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -696,7 +696,7 @@
     },
     "disabled": {
       "$type": "color",
-      "$value": "{eds.color.border-disabled}",
+      "$value": "{eds.color.theme.border-disabled}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -712,7 +712,7 @@
     },
     "accent": {
       "$type": "color",
-      "$value": "{eds.color.border-accent}",
+      "$value": "{eds.color.theme.border-accent}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -728,7 +728,7 @@
     },
     "accent-subtle": {
       "$type": "color",
-      "$value": "{eds.color.border-accent-subtle}",
+      "$value": "{eds.color.theme.border-accent-subtle}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -744,7 +744,7 @@
     },
     "accent-strong": {
       "$type": "color",
-      "$value": "{eds.color.border-accent-strong}",
+      "$value": "{eds.color.theme.border-accent-strong}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -760,7 +760,7 @@
     },
     "warning": {
       "$type": "color",
-      "$value": "{eds.color.border-warning}",
+      "$value": "{eds.color.theme.border-warning}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -776,7 +776,7 @@
     },
     "warning-subtle": {
       "$type": "color",
-      "$value": "{eds.color.border-warning-subtle}",
+      "$value": "{eds.color.theme.border-warning-subtle}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -792,7 +792,7 @@
     },
     "danger": {
       "$type": "color",
-      "$value": "{eds.color.border-danger}",
+      "$value": "{eds.color.theme.border-danger}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -808,7 +808,7 @@
     },
     "danger-subtle": {
       "$type": "color",
-      "$value": "{eds.color.border-danger-subtle}",
+      "$value": "{eds.color.theme.border-danger-subtle}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -824,7 +824,7 @@
     },
     "success": {
       "$type": "color",
-      "$value": "{eds.color.border-success}",
+      "$value": "{eds.color.theme.border-success}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -840,7 +840,7 @@
     },
     "success-subtle": {
       "$type": "color",
-      "$value": "{eds.color.border-success-subtle}",
+      "$value": "{eds.color.theme.border-success-subtle}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -856,7 +856,7 @@
     },
     "info": {
       "$type": "color",
-      "$value": "{eds.color.border-info}",
+      "$value": "{eds.color.theme.border-info}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -872,7 +872,7 @@
     },
     "info-subtle": {
       "$type": "color",
-      "$value": "{eds.color.border-info-subtle}",
+      "$value": "{eds.color.theme.border-info-subtle}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -887,11 +887,11 @@
       }
     }
   },
-  "Component": {
+  "Component & Pattern": {
     "app": {
       "background": {
         "$type": "color",
-        "$value": "{eds.color.app.background}",
+        "$value": "{eds.color.component.app.background}",
         "$description": "Application background color. Should be set to either html or body element.",
         "$extensions": {
           "com.figma": {
@@ -909,7 +909,7 @@
     "input": {
       "background": {
         "$type": "color",
-        "$value": "{eds.color.input.background}",
+        "$value": "{eds.color.component.input.background}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -925,7 +925,7 @@
     "popover": {
       "background": {
         "$type": "color",
-        "$value": "{eds.color.popover.background}",
+        "$value": "{eds.color.component.popover.background}",
         "$description": "Popover elements will appear above all other elements",
         "$extensions": {
           "com.figma": {
@@ -943,7 +943,7 @@
     "backdrop": {
       "background": {
         "$type": "color",
-        "$value": "{eds.color.backdrop.background}",
+        "$value": "{eds.color.component.backdrop.background}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -961,7 +961,7 @@
     "focus": {
       "border": {
         "$type": "color",
-        "$value": "{eds.color.focus.border}",
+        "$value": "{eds.color.component.focus.border}",
         "$description": "",
         "$extensions": {
           "com.figma": {

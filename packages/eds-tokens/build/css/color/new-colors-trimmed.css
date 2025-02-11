@@ -3,64 +3,64 @@
  */
 
 :root {
-  --eds-color-background: light-dark(#fefefe, #1d242a); /* The header, footer, toolbars, panels, and primary content use the background color */
-  --eds-color-app-background: light-dark(#f2f2f2, #161c20); /* Application background color. Should be set to either html or body element. */
-  --eds-color-background-disabled: light-dark(#7f7f7f, #717e87);
-  --eds-color-background-success: light-dark(#d8e6d8, #163715);
-  --eds-color-background-success-strong: light-dark(#317a2f, #539051);
-  --eds-color-background-info: light-dark(#d2e6f0, #02334d);
-  --eds-color-background-info-strong: light-dark(#0473ad, #2b89ba);
-  --eds-color-background-warning: light-dark(#ede1d1, #492800);
-  --eds-color-background-warning-strong: light-dark(#995500, #b17e3d);
-  --eds-color-background-danger: light-dark(#fadcdc, #620f0f);
-  --eds-color-background-danger-hover: light-dark(#f6c6c6, #7c1212);
-  --eds-color-background-danger-active: light-dark(#f3b0b0, #951616);
-  --eds-color-background-danger-strong: light-dark(#de2121, #e33f3f);
-  --eds-color-background-danger-strong-hover: light-dark(#b91c1c, #e96868);
-  --eds-color-background-danger-strong-active: light-dark(#951616, #ee8a8a);
-  --eds-color-background-accent: light-dark(#d2e6e7, #00363b);
-  --eds-color-background-accent-hover: light-dark(#b8d7da, #00454b);
-  --eds-color-input-background: light-dark(#f2f2f2, #273139);
-  --eds-color-popover-background: light-dark(#fefefe, #273139); /* Popover elements will appear above all other elements */
-  --eds-color-backdrop-background: light-dark(#7f7f7f, #1d242a); /* The color of the mask overlay that appears when you enter a modal state. */
-  --eds-color-background-accent-active: light-dark(#9ec8cc, #00545b);
-  --eds-color-background-accent-strong: light-dark(#007079, #42959c);
-  --eds-color-background-accent-strong-hover: light-dark(#005b62, #65a9ae);
-  --eds-color-background-accent-strong-active: light-dark(#00474d, #89bdc1);
-  --eds-color-background-neutral: light-dark(#e2e2e2, #273139);
-  --eds-color-background-neutral-hover: light-dark(#d0d0d0, #323f48);
-  --eds-color-background-neutral-active: light-dark(#c1c1c1, #3e4d58);
-  --eds-color-background-neutral-strong: light-dark(#565656, #969fa6);
-  --eds-color-background-neutral-strong-hover: light-dark(#434343, #7f8b93);
-  --eds-color-background-neutral-strong-active: light-dark(#323232, #697781);
-  --eds-color-text: light-dark(#2c2c2c, #e0e2e4);
-  --eds-color-text-subtle: light-dark(#616161, #99a2a8);
-  --eds-color-text-disabled: light-dark(#7f7f7f, #717e87);
-  --eds-color-text-accent: light-dark(#003236, #d2e6e7);
-  --eds-color-text-accent-subtle: light-dark(#006b74, #69abb0);
-  --eds-color-text-on-strong: light-dark(#ffffff, #000000);
-  --eds-color-text-warning: light-dark(#432500, #ede1d1);
-  --eds-color-text-warning-subtle: light-dark(#915000, #c29966);
-  --eds-color-text-danger: light-dark(#5a0d0d, #fadcdc);
-  --eds-color-text-danger-subtle: light-dark(#be1c1c, #ec8181);
-  --eds-color-text-success: light-dark(#143213, #d8e6d8);
-  --eds-color-text-success-subtle: light-dark(#2c6e2a, #7eac7d);
-  --eds-color-text-info: light-dark(#022f47, #d2e6f0);
-  --eds-color-text-info-subtle: light-dark(#046699, #64a9cc);
-  --eds-color-border: light-dark(#7f7f7f, #717e87);
-  --eds-color-border-subtle: light-dark(#bbbbbb, #445460);
-  --eds-color-border-strong: light-dark(#616161, #99a2a8);
-  --eds-color-focus-border: light-dark(#2686b8, #2284b7);
-  --eds-color-border-disabled: light-dark(#bbbbbb, #445460);
-  --eds-color-border-accent: light-dark(#2f8a92, #2a878f);
-  --eds-color-border-accent-subtle: light-dark(#95c4c7, #005c63);
-  --eds-color-border-accent-strong: light-dark(#006b74, #69abb0);
-  --eds-color-border-danger: light-dark(#e34545, #e33f3f);
-  --eds-color-border-danger-subtle: light-dark(#f2a7a7, #a21818);
-  --eds-color-border-warning: light-dark(#ab722c, #a97029);
-  --eds-color-border-warning-subtle: light-dark(#d4b793, #7b4500);
-  --eds-color-border-success: light-dark(#4e8d4d, #4b8a49);
-  --eds-color-border-success-subtle: light-dark(#a4c4a3, #265d24);
-  --eds-color-border-info: light-dark(#2686b8, #2284b7);
-  --eds-color-border-info-subtle: light-dark(#92c2db, #035783);
+  --eds-color-theme-background: light-dark(#fefefe, #1d242a); /* The header, footer, toolbars, panels, and primary content use the background color */
+  --eds-color-theme-background-disabled: light-dark(#7f7f7f, #717e87);
+  --eds-color-theme-background-success: light-dark(#d8e6d8, #163715);
+  --eds-color-theme-background-danger-strong: light-dark(#de2121, #e33f3f);
+  --eds-color-theme-background-danger-strong-hover: light-dark(#b91c1c, #e96868);
+  --eds-color-theme-background-danger-strong-active: light-dark(#951616, #ee8a8a);
+  --eds-color-theme-background-accent: light-dark(#d2e6e7, #00363b);
+  --eds-color-theme-background-accent-hover: light-dark(#b8d7da, #00454b);
+  --eds-color-theme-background-accent-active: light-dark(#9ec8cc, #00545b);
+  --eds-color-theme-background-accent-strong: light-dark(#007079, #42959c);
+  --eds-color-theme-background-accent-strong-hover: light-dark(#005b62, #65a9ae);
+  --eds-color-theme-background-accent-strong-active: light-dark(#00474d, #89bdc1);
+  --eds-color-theme-background-neutral: light-dark(#e2e2e2, #273139);
+  --eds-color-theme-background-success-strong: light-dark(#317a2f, #539051);
+  --eds-color-theme-background-neutral-hover: light-dark(#d0d0d0, #323f48);
+  --eds-color-theme-background-neutral-active: light-dark(#c1c1c1, #3e4d58);
+  --eds-color-theme-background-neutral-strong: light-dark(#565656, #969fa6);
+  --eds-color-theme-background-neutral-strong-hover: light-dark(#434343, #7f8b93);
+  --eds-color-theme-background-neutral-strong-active: light-dark(#323232, #697781);
+  --eds-color-theme-text: light-dark(#2c2c2c, #e0e2e4);
+  --eds-color-theme-text-subtle: light-dark(#616161, #99a2a8);
+  --eds-color-theme-text-disabled: light-dark(#7f7f7f, #717e87);
+  --eds-color-theme-text-accent: light-dark(#003236, #d2e6e7);
+  --eds-color-theme-text-accent-subtle: light-dark(#006b74, #69abb0);
+  --eds-color-theme-background-info: light-dark(#d2e6f0, #02334d);
+  --eds-color-theme-text-on-strong: light-dark(#ffffff, #000000);
+  --eds-color-theme-text-warning: light-dark(#432500, #ede1d1);
+  --eds-color-theme-text-warning-subtle: light-dark(#915000, #c29966);
+  --eds-color-theme-text-danger: light-dark(#5a0d0d, #fadcdc);
+  --eds-color-theme-text-danger-subtle: light-dark(#be1c1c, #ec8181);
+  --eds-color-theme-text-success: light-dark(#143213, #d8e6d8);
+  --eds-color-theme-text-success-subtle: light-dark(#2c6e2a, #7eac7d);
+  --eds-color-theme-text-info: light-dark(#022f47, #d2e6f0);
+  --eds-color-theme-text-info-subtle: light-dark(#046699, #64a9cc);
+  --eds-color-theme-border: light-dark(#7f7f7f, #717e87);
+  --eds-color-theme-background-info-strong: light-dark(#0473ad, #2b89ba);
+  --eds-color-theme-border-subtle: light-dark(#bbbbbb, #445460);
+  --eds-color-theme-border-strong: light-dark(#616161, #99a2a8);
+  --eds-color-theme-border-disabled: light-dark(#bbbbbb, #445460);
+  --eds-color-theme-border-accent: light-dark(#2f8a92, #2a878f);
+  --eds-color-theme-border-accent-subtle: light-dark(#95c4c7, #005c63);
+  --eds-color-theme-border-accent-strong: light-dark(#006b74, #69abb0);
+  --eds-color-theme-border-danger: light-dark(#e34545, #e33f3f);
+  --eds-color-theme-border-danger-subtle: light-dark(#f2a7a7, #a21818);
+  --eds-color-theme-border-warning: light-dark(#ab722c, #a97029);
+  --eds-color-theme-border-warning-subtle: light-dark(#d4b793, #7b4500);
+  --eds-color-theme-background-warning: light-dark(#ede1d1, #492800);
+  --eds-color-theme-border-success: light-dark(#4e8d4d, #4b8a49);
+  --eds-color-theme-border-success-subtle: light-dark(#a4c4a3, #265d24);
+  --eds-color-theme-border-info: light-dark(#2686b8, #2284b7);
+  --eds-color-theme-border-info-subtle: light-dark(#92c2db, #035783);
+  --eds-color-theme-background-warning-strong: light-dark(#995500, #b17e3d);
+  --eds-color-theme-background-danger: light-dark(#fadcdc, #620f0f);
+  --eds-color-theme-background-danger-hover: light-dark(#f6c6c6, #7c1212);
+  --eds-color-theme-background-danger-active: light-dark(#f3b0b0, #951616);
+  --eds-color-component-app-background: light-dark(#f2f2f2, #161c20); /* Application background color. Should be set to either html or body element. */
+  --eds-color-component-input-background: light-dark(#f2f2f2, #273139);
+  --eds-color-component-popover-background: light-dark(#fefefe, #273139); /* Popover elements will appear above all other elements */
+  --eds-color-component-backdrop-background: light-dark(#7f7f7f, #1d242a); /* The color of the mask overlay that appears when you enter a modal state. */
+  --eds-color-component-focus-border: light-dark(#2686b8, #2284b7);
 }
