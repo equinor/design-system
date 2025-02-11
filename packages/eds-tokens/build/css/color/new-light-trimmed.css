@@ -1,0 +1,66 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-color-scheme="light"] {
+  --eds-color-background: #fefefe; /* The header, footer, toolbars, panels, and primary content use the background color */
+  --eds-color-app-background: #f2f2f2; /* Application background color. Should be set to either html or body element. */
+  --eds-color-background-disabled: #7f7f7f;
+  --eds-color-background-success: #d8e6d8;
+  --eds-color-background-success-strong: #317a2f;
+  --eds-color-background-info: #d2e6f0;
+  --eds-color-background-info-strong: #0473ad;
+  --eds-color-background-warning: #ede1d1;
+  --eds-color-background-warning-strong: #995500;
+  --eds-color-background-danger: #fadcdc;
+  --eds-color-background-danger-hover: #f6c6c6;
+  --eds-color-background-danger-active: #f3b0b0;
+  --eds-color-background-danger-strong: #de2121;
+  --eds-color-background-danger-strong-hover: #b91c1c;
+  --eds-color-background-danger-strong-active: #951616;
+  --eds-color-background-accent: #d2e6e7;
+  --eds-color-background-accent-hover: #b8d7da;
+  --eds-color-input-background: #f2f2f2;
+  --eds-color-popover-background: #fefefe; /* Popover elements will appear above all other elements */
+  --eds-color-backdrop-background: #7f7f7f; /* The color of the mask overlay that appears when you enter a modal state. */
+  --eds-color-background-accent-active: #9ec8cc;
+  --eds-color-background-accent-strong: #007079;
+  --eds-color-background-accent-strong-hover: #005b62;
+  --eds-color-background-accent-strong-active: #00474d;
+  --eds-color-background-neutral: #e2e2e2;
+  --eds-color-background-neutral-hover: #d0d0d0;
+  --eds-color-background-neutral-active: #c1c1c1;
+  --eds-color-background-neutral-strong: #565656;
+  --eds-color-background-neutral-strong-hover: #434343;
+  --eds-color-background-neutral-strong-active: #323232;
+  --eds-color-text: #2c2c2c;
+  --eds-color-text-subtle: #616161;
+  --eds-color-text-disabled: #7f7f7f;
+  --eds-color-text-accent: #003236;
+  --eds-color-text-accent-subtle: #006b74;
+  --eds-color-text-on-strong: #ffffff;
+  --eds-color-text-warning: #432500;
+  --eds-color-text-warning-subtle: #915000;
+  --eds-color-text-danger: #5a0d0d;
+  --eds-color-text-danger-subtle: #be1c1c;
+  --eds-color-text-success: #143213;
+  --eds-color-text-success-subtle: #2c6e2a;
+  --eds-color-text-info: #022f47;
+  --eds-color-text-info-subtle: #046699;
+  --eds-color-border: #7f7f7f;
+  --eds-color-border-subtle: #bbbbbb;
+  --eds-color-border-strong: #616161;
+  --eds-color-focus-border: #2686b8;
+  --eds-color-border-disabled: #bbbbbb;
+  --eds-color-border-accent: #2f8a92;
+  --eds-color-border-accent-subtle: #95c4c7;
+  --eds-color-border-accent-strong: #006b74;
+  --eds-color-border-danger: #e34545;
+  --eds-color-border-danger-subtle: #f2a7a7;
+  --eds-color-border-warning: #ab722c;
+  --eds-color-border-warning-subtle: #d4b793;
+  --eds-color-border-success: #4e8d4d;
+  --eds-color-border-success-subtle: #a4c4a3;
+  --eds-color-border-info: #2686b8;
+  --eds-color-border-info-subtle: #92c2db;
+}
