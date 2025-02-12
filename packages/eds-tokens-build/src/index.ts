@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import type { PlatformConfig, TransformedToken } from 'style-dictionary/types'
-import {
-  usesReferences,
-  outputReferencesTransformed,
-} from 'style-dictionary/utils'
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import type { TransformedToken } from 'style-dictionary/types'
+import { outputReferencesTransformed } from 'style-dictionary/utils'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
+import { StyleDictionary } from 'style-dictionary-utils'
 
 const TOKENS_DIR = './tokens'
 const FILE_KEY_PRIMITIVES = 'cVaqjfgt3gDiqbx10q3Pj8'
@@ -14,32 +14,17 @@ const FILE_KEY_COLORS = 'aRgKtCisnm98k9kVy6zasL'
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
-import { StyleDictionary } from 'style-dictionary-utils'
-
-const {
-  hooks: {
-    filters: { isColor, isNumber },
-  },
-} = StyleDictionary
-
-// manually convert reference into custom property
-const resolveReference = (value: string, prefix: string): string => {
-  if (!value) return ''
-
-  const valueFormatted = value
-    .toLowerCase()
-    .replace('{', '')
-    .replace('}', '')
-    .replaceAll(' ', '-')
-    .replaceAll('.', '-')
-
-  return `var(--${prefix}-${valueFormatted})`
-}
+import { pxToRem, PX_TO_REM_NAME } from './transform/pxToRem'
+import { fontQuote, FONT_QUOTE_NAME } from './transform/fontQuote'
+import { pxFormatted, PX_FORMATTED_NAME } from './transform/pxFormatted'
+import { createLightDarkTransform } from './transform/lightDark'
+import { createDensitySpaceToggleTransform } from './transform/densitySpaceToggle'
+import { includeTokenFilter } from './filter/includeTokenFilter'
 
 const darkColorSchemeCollectionFile = '🌗 Colour scheme.Dark.json'
 const lightColorSchemeCollectionFile = '🌗 Colour scheme.Light.json'
 
-const darkTokens = readJsonFiles([
+const oldDarkTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_COLORS}/${darkColorSchemeCollectionFile}`,
 ])
 
@@ -52,258 +37,33 @@ const spacingComfortableTokens = readJsonFiles([
   `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
 ])
 
-function transformLightDark(
-  token: TransformedToken,
-  config: PlatformConfig,
-  darkValue: string | boolean | number | undefined,
-) {
-  const outputReferences = config?.files?.[0]?.options?.outputReferences
-
-  //we have to manually create css variables for both light and dark
-  let resolvedLightReference
-  if (outputReferences && usesReferences(token.original.$value)) {
-    resolvedLightReference = resolveReference(
-      `${token.original.$value}`,
-      `${config.prefix}`,
-    )
-  }
-  if (darkValue) {
-    //it is a reference
-    if (usesReferences(darkValue)) {
-      //make sure it is not a local variable, in which case it has light-dark set already
-      if (token.original.$value != darkValue) {
-        if (outputReferences) {
-          const resolvedDarkReference = resolveReference(
-            `${darkValue}`,
-            `${config.prefix}`,
-          )
-          return `light-dark(${resolvedLightReference}, ${resolvedDarkReference})`
-        } else {
-          return `light-dark(${token.$value}, ${darkValue})`
-        }
-      }
-      //the dark value is not a reference but a direct value (color with alpha transparency)
-    } else {
-      if (outputReferences && resolvedLightReference) {
-        return `light-dark(${resolvedLightReference}, ${darkValue})`
-      } else {
-        return `light-dark(${token.$value}, ${darkValue})`
-      }
-    }
-  }
-  //there is no dark value
-  return `${token.$value}`
-}
-
-StyleDictionary.registerTransform({
+const oldLightDarkTransform = createLightDarkTransform({
   name: 'lightDark',
-  type: 'value',
-  transitive: true,
-  filter: isColor,
-  transform: (token: TransformedToken, config: PlatformConfig) => {
-    const path = token.path.join('/')
-    const darkValue =
-      darkTokens[darkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
-    return transformLightDark(token, config, darkValue)
-  },
+  darkTokensObject: oldDarkTokens[darkColorSchemeCollectionFile],
 })
+StyleDictionary.registerTransform(oldLightDarkTransform)
 
-StyleDictionary.registerTransform({
+const newLightDarkTransform = createLightDarkTransform({
   name: 'newLightDark',
-  type: 'value',
-  transitive: true,
-  filter: isColor,
-  transform: (token: TransformedToken, config: PlatformConfig) => {
-    const path = token.path.join('/')
-    const darkValue =
-      newDarkTokens[newDarkColorSchemeCollectionFile]?.[`${path}`]?.['$value']
-    return transformLightDark(token, config, darkValue)
-  },
+  darkTokensObject: newDarkTokens[newDarkColorSchemeCollectionFile],
 })
+StyleDictionary.registerTransform(newLightDarkTransform)
 
-StyleDictionary.registerTransform({
+const densitySpaceToggleTransform = createDensitySpaceToggleTransform({
   name: 'densitySpaceToggle',
-  type: 'value',
-  transitive: true,
-  filter: isNumber,
-  transform: (token: TransformedToken, options) => {
-    const path = token.path.join('/')
-    const comfortableValue =
-      spacingComfortableTokens['💎 Density.Comfortable.json']?.[`${path}`]?.[
-        '$value'
-      ]
-
-    if (comfortableValue) {
-      //it is a reference
-      if (usesReferences(comfortableValue)) {
-        //make sure it is not a locally defined variable
-        if (token.original.$value != comfortableValue) {
-          const outputReferences =
-            options?.files?.[0]?.options?.outputReferences
-          if (outputReferences) {
-            const resolvedComfortableReference = resolveReference(
-              `${comfortableValue}`,
-              `${options.prefix}`,
-            )
-            const resolvedSpaciousReference = resolveReference(
-              `${token.original.$value}`,
-              `${options.prefix}`,
-            )
-            return `var(--eds--spacious, ${resolvedSpaciousReference}) var(--eds--comfortable, ${resolvedComfortableReference})`
-          } else {
-            return `var(--eds--spacious, ${token.$value}) var(--eds--comfortable, ${comfortableValue})`
-          }
-        }
-      } else {
-        return `var(--eds--spacious, ${
-          token.$value
-        }) var(--eds--comfortable, ${transformNumberToRem(
-          Number(comfortableValue),
-        )})`
-      }
-    }
-
-    return `${token.$value}`
-  },
+  tokens: spacingComfortableTokens['💎 Density.Comfortable.json'],
 })
 
-StyleDictionary.registerTransform({
-  type: 'value',
-  transitive: false,
-  name: 'eds/css/pxFormatted',
-  filter: (token) => {
-    const isDefined = token?.$value !== undefined
-    if (!isDefined) return false
-
-    const isNumber = token.$type === 'number'
-    if (!isNumber) return false
-
-    const pxMatchers = ['tracking-tight', 'tracking-normal', 'tracking-loose']
-    return (
-      token?.path?.length > 0 &&
-      pxMatchers.some((metric) => token.path.includes(metric))
-    )
-  },
-  transform: (token) => {
-    const fixedValue = toFixedWithoutTrailingZeroes(Number(token.$value))
-    return `${fixedValue}px`
-  },
-})
-
-StyleDictionary.registerTransform({
-  type: `value`,
-  transitive: true,
-  name: `eds/css/pxToRem`,
-  filter: (token) => {
-    if (
-      token?.$value === undefined ||
-      token.$type !== 'number' ||
-      isNaN(Number(token.$value))
-    ) {
-      return false
-    }
-
-    const matchingPathSegments = [
-      'font',
-      'size',
-      'line-height',
-      'font-size',
-      'sizing',
-      'spacing',
-    ]
-
-    const isMatch =
-      token?.path?.length > 0 &&
-      matchingPathSegments.some((segment) => token.path.includes(segment))
-
-    return isMatch
-  },
-  transform: (token) => {
-    return transformNumberToRem(Number(token.$value))
-  },
-})
-
-//This is not used for now, we need to rethink how to implement shorthand if it is even needed
-/* StyleDictionary.registerTransform({
-  type: `value`,
-  transitive: true,
-  name: `eds/css/spacing/shorthand`,
-  filter: (token) => {
-    const isNumber = token.$type === 'number'
-    if (!isNumber) return false
-
-    const isDefined = token?.$value !== undefined
-    if (!isDefined) return false
-
-    const matchingPathSegments = [
-      'stack-squished',
-      'stack-squared',
-      'stack-stretched',
-    ]
-    const isMatch =
-      token?.path?.length > 0 &&
-      matchingPathSegments.some((segment) => token.path.includes(segment))
-
-    return isMatch
-  },
-  transform: (token, options) => {
-    const outputReferences = options?.files?.[0]?.options?.outputReferences
-    const size = token.path[2]
-
-    if (outputReferences) {
-      return `${token.$value} var(--eds-spacing-static-inline-${size})`
-    }
-
-    // Determine the density of the current token using the filePath
-    // because we need to know where to look for the raw value of the current spacing
-    // the current token for the current density mode.
-    const density = token.filePath.includes('Spacious')
-      ? 'spacious'
-      : 'comfortable'
-
-    const densityFilePath =
-      density === 'spacious'
-        ? DENSITY_SPACIOUS_SOURCE
-        : DENSITY_COMFORTABLE_SOURCE
-
-    const spacingTokens = readJsonFiles([densityFilePath])
-
-    const path = `spacing/inset/${size}/inline`
-
-    const collectionName =
-      density === 'spacious'
-        ? '💎 Density.Spacious.json'
-        : '💎 Density.Comfortable.json'
-
-    const value = spacingTokens[collectionName]?.[path]?.['$value']
-
-    return `${token.$value} ${value}`
-  },
-}) */
-
-StyleDictionary.registerTransform({
-  type: `value`,
-  transitive: false,
-  name: `eds/font/quote`,
-  filter: (token) => {
-    const fontMetricsInString = ['font', 'family', 'weight', 'font-family']
-
-    const isFontMetricInString =
-      token?.path?.length > 0 &&
-      fontMetricsInString.some((metric) => token.path.includes(metric))
-
-    return isFontMetricInString
-  },
-  transform: (token) => {
-    return `"${token.$value}"`
-  },
-})
+StyleDictionary.registerTransform(densitySpaceToggleTransform)
+StyleDictionary.registerTransform(pxFormatted)
+StyleDictionary.registerTransform(pxToRem)
+StyleDictionary.registerTransform(fontQuote)
 
 const cssTransforms = [
   'name/kebab',
-  'eds/css/pxToRem',
-  'eds/css/pxFormatted',
-  'eds/font/quote',
+  PX_TO_REM_NAME,
+  PX_FORMATTED_NAME,
+  FONT_QUOTE_NAME,
 ]
 const outputDirectory = './build'
 const cssBuildPath = `${outputDirectory}/css`
@@ -330,7 +90,7 @@ const _extend = ({
   filter?: (token: TransformedToken) => boolean
   outputReferences?: boolean
   transforms?: string[]
-}) /*return type??*/ => {
+}) => {
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
 
@@ -391,35 +151,6 @@ const _extend = ({
       },
     },
   })
-}
-
-const includeTokenFilter = (
-  token: TransformedToken,
-  filePathSegmentsToInclude?: string[],
-) => {
-  const namesToExclude = [
-    'documentation',
-    'padding-centred',
-    'padding-baselined',
-    'cap-height',
-    'cap-rounded',
-    'container',
-  ]
-  const isExcluded = namesToExclude.some((nameToExclude) =>
-    token.name.includes(nameToExclude),
-  )
-  if (isExcluded) {
-    return false
-  }
-
-  if (filePathSegmentsToInclude && filePathSegmentsToInclude.length > 0) {
-    const isIncludingFilePathSegmentsToInclude = filePathSegmentsToInclude.some(
-      (segment) => token.filePath.includes(segment),
-    )
-    return isIncludingFilePathSegmentsToInclude
-  }
-
-  return true
 }
 
 const COLOR_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_PRIMITIVES}/🎨 Color.Color.json`
@@ -574,9 +305,9 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/kebab',
-          'eds/css/pxToRem',
-          'eds/css/pxFormatted',
-          'eds/font/quote',
+          PX_TO_REM_NAME,
+          PX_FORMATTED_NAME,
+          FONT_QUOTE_NAME,
           'densitySpaceToggle',
         ],
         files: [
@@ -605,9 +336,9 @@ export async function run({ outputReferences } = { outputReferences: true }) {
         buildPath: `${cssBuildPath}/spacing/`,
         transforms: [
           'name/kebab',
-          'eds/css/pxToRem',
-          'eds/css/pxFormatted',
-          'eds/font/quote',
+          PX_TO_REM_NAME,
+          PX_FORMATTED_NAME,
+          FONT_QUOTE_NAME,
           'densitySpaceToggle',
         ],
         files: [
@@ -740,31 +471,4 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   await newLightMode.buildAllPlatforms()
   await newDarkMode.buildAllPlatforms()
   await newLightDarkColorsTrimmed.buildAllPlatforms()
-}
-
-function transformNumberToRem(value: number): string {
-  return transformNumberToUnit(value, 16, 'rem')
-}
-
-function transformNumberToUnit(
-  value: number,
-  rootFontSize: number,
-  unit: string,
-): string {
-  if (value === 0) return `0${unit}`
-
-  const valueWithTwoDigitsAfterDecimal = Number(value.toFixed(3))
-  const valueInUnit = valueWithTwoDigitsAfterDecimal / rootFontSize
-  const valueWithoutTrailingZeroes = toFixedWithoutTrailingZeroes(valueInUnit)
-  const valueWithSuffix = `${valueWithoutTrailingZeroes}${unit}`
-
-  return valueWithSuffix
-}
-
-function toFixedWithoutTrailingZeroes(value: number, fractionDigits = 3) {
-  const valueWithTwoDigitsAfterDecimal = value.toFixed(fractionDigits)
-  const valueWithoutTrailingZeroes = parseFloat(
-    `${valueWithTwoDigitsAfterDecimal}`,
-  )
-  return valueWithoutTrailingZeroes
 }

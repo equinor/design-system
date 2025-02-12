@@ -5,7 +5,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/eds-tokens-build.js"
     }
   },
   "bin": {
@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc",
+    "build": "vite build",
     "prettier": "prettier ./src --write",
     "lint": "eslint"
   },
@@ -42,7 +42,9 @@
     "prettier": "3.4.2",
     "style-dictionary": "^4.3.0",
     "style-dictionary-utils": "^4.0.3",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vite": "^5.4.6",
+    "vite-plugin-dts": "^3.9.1"
   },
   "engines": {
     "pnpm": ">=8",
