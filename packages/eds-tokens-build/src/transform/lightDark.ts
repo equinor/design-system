@@ -18,7 +18,7 @@ const {
 } = StyleDictionary
 
 // manually convert reference into custom property
-const resolveReference = (value: string, prefix: string): string => {
+const resolveReference = (value: string, prefix?: string): string => {
   if (!value) return ''
 
   const valueFormatted = value
@@ -28,7 +28,10 @@ const resolveReference = (value: string, prefix: string): string => {
     .replaceAll(' ', '-')
     .replaceAll('.', '-')
 
-  return `var(--${prefix}-${valueFormatted})`
+  if (prefix) {
+    return `var(--${prefix}-${valueFormatted})`
+  }
+  return `var(--${valueFormatted})`
 }
 
 function transformLightDark(
@@ -43,7 +46,7 @@ function transformLightDark(
   if (outputReferences && usesReferences(token.original.$value)) {
     resolvedLightReference = resolveReference(
       `${token.original.$value}`,
-      `${config.prefix}`,
+      config.prefix,
     )
   }
   if (darkValue) {
@@ -54,7 +57,7 @@ function transformLightDark(
         if (outputReferences) {
           const resolvedDarkReference = resolveReference(
             `${darkValue}`,
-            `${config.prefix}`,
+            config.prefix,
           )
           return `light-dark(${resolvedLightReference}, ${resolvedDarkReference})`
         } else {
