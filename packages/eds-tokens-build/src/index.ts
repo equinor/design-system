@@ -65,8 +65,8 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   console.info('outputReferences:', outputReferences)
 
   const prefix = 'eds'
-  const colorBuildPath = 'color/'
-  const spacingBuildPath = 'spacing/'
+  const colorBuildPath = 'color'
+  const spacingBuildPath = 'spacing'
 
   const COLOR_TOKENS_DIR = `./${TOKENS_DIR}/ZrJNpIhcHprG9bFpHlHcWa`
   const COLOR_PRIMITIVE_SOURCE = `${COLOR_TOKENS_DIR}/01 🎨 Colors.Mode 1.json`
@@ -269,7 +269,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/${spacingBuildPath}`,
+        buildPath: `${cssBuildPath}/${spacingBuildPath}/`,
         transforms: cssTransforms,
         files: [
           {
@@ -294,7 +294,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/${spacingBuildPath}`,
+        buildPath: `${cssBuildPath}/${spacingBuildPath}/`,
         transforms: cssTransforms,
         files: [
           {
