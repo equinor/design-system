@@ -32,9 +32,10 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "pnpm run type-check && vite build",
     "prettier": "prettier ./src --write",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@equinor/eds-tokens-sync": "workspace:*",

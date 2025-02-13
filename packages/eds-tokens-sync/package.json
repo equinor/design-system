@@ -12,9 +12,9 @@
   "module": "dist/main.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/main.js",
-      "require": "./dist/main.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/main.umd.cjs"
     }
   },
   "bin": {
