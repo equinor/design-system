@@ -7,28 +7,19 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   build: {
     lib: {
-      name: 'eds-tokens-build',
       entry: 'src/index.ts',
+      formats: ['es'],
     },
     rollupOptions: {
       external: [
-        'style-dictionary',
-        'style-dictionary-utils',
         'fs',
         'path',
         'os',
         'crypto',
+        'style-dictionary',
+        'style-dictionary-utils',
+        '@equinor/eds-tokens-sync',
       ],
-      output: {
-        globals: {
-          'style-dictionary': 'StyleDictionary',
-          'style-dictionary-utils': 'StyleDictionaryUtils',
-          fs: 'fs',
-          path: 'path',
-          os: 'os',
-          crypto: 'crypto',
-        },
-      },
     },
   },
   plugins: [

@@ -1,18 +1,6 @@
 {
   "name": "@equinor/eds-tokens-build",
   "version": "1.0.0",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/eds-tokens-build.js"
-    }
-  },
-  "bin": {
-    "eds-tokens-build": "bin/eds-tokens-build.js"
-  },
-  "types": "./dist/index.d.ts",
-  "module": "dist/index.js",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
@@ -27,9 +15,21 @@
   "bugs": {
     "url": "https://github.com/equinor/design-system/issues"
   },
+  "type": "module",
   "files": [
-    "dist/*"
+    "bin",
+    "dist"
   ],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/eds-tokens-build.js"
+    }
+  },
+  "bin": {
+    "eds-tokens-build": "bin/eds-tokens-build.js"
+  },
   "scripts": {
     "dev": "vite",
     "build": "pnpm run type-check && vite build",

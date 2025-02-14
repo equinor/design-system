@@ -74,11 +74,15 @@ export const _extend = ({
   return new StyleDictionary({
     include,
     source,
+    log: {
+      warnings: 'warn',
+      verbosity: 'verbose',
+    },
     platforms: {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/${buildPath}/`,
+        buildPath: `${cssBuildPath}/${buildPath}`,
         transforms,
         files: [
           {
@@ -93,9 +97,8 @@ export const _extend = ({
         ],
       },
       ts: {
-        //transformGroup: 'js',
         transforms: ['name/constant'],
-        buildPath: `${jsBuildPath}/${buildPath}/`,
+        buildPath: `${jsBuildPath}/${buildPath}`,
         files: [
           {
             filter,
@@ -110,7 +113,7 @@ export const _extend = ({
         ],
       },
       json: {
-        buildPath: `${jsonBuildPath}/${buildPath}/`,
+        buildPath: `${jsonBuildPath}/${buildPath}`,
         transforms: ['name/kebab'],
         files: [
           {

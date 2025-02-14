@@ -7,6 +7,8 @@ import type { TransformedToken } from 'style-dictionary/types'
 import { outputReferencesTransformed } from 'style-dictionary/utils'
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 import { StyleDictionary } from 'style-dictionary-utils'
+import path from 'path'
+import fs from 'fs'
 import { pxToRem, PX_TO_REM_NAME } from './transform/pxToRem'
 import { fontQuote, FONT_QUOTE_NAME } from './transform/fontQuote'
 import { pxFormatted, PX_FORMATTED_NAME } from './transform/pxFormatted'
@@ -15,17 +17,27 @@ import { createDensitySpaceToggleTransform } from './transform/densitySpaceToggl
 import { includeTokenFilter } from './filter/includeTokenFilter'
 import { _extend } from './utils'
 
-const TOKENS_DIR = './tokens'
+// Get the script's directory path for ESM
+const TOKENS_DIR_FILE_PATH = path.resolve(process.cwd(), 'tokens')
+
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
 const darkColorSchemeCollectionFile = '02 🌗 Color scheme.Dark.json'
 const darkTokens = readJsonFiles([
-  `./${TOKENS_DIR}/ZrJNpIhcHprG9bFpHlHcWa/${darkColorSchemeCollectionFile}`,
+  path.join(
+    TOKENS_DIR_FILE_PATH,
+    'ZrJNpIhcHprG9bFpHlHcWa',
+    darkColorSchemeCollectionFile,
+  ),
 ])
 
 const spacingComfortableTokens = readJsonFiles([
-  `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`,
+  path.join(
+    TOKENS_DIR_FILE_PATH,
+    FILE_KEY_TYPOGRAPHY_MODES,
+    '💎 Density.Comfortable.json',
+  ),
 ])
 
 const lightDarkTransform = createLightDarkTransform({
@@ -50,28 +62,61 @@ const cssTransforms = [
   PX_FORMATTED_NAME,
   FONT_QUOTE_NAME,
 ]
-const outputDirectory = './build'
-export const cssBuildPath = `${outputDirectory}/css`
-export const jsBuildPath = `${outputDirectory}/js`
-export const jsonBuildPath = `${outputDirectory}/json`
+const outputDirectory = path.resolve(process.cwd(), 'build')
+export const cssBuildPath = path.join(outputDirectory, 'css')
+export const jsBuildPath = path.join(outputDirectory, 'js')
+export const jsonBuildPath = path.join(outputDirectory, 'json')
 
-const SPACING_PRIMITIVE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/👾 Primitives.Value.json`
-const DENSITY_FIGMA_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_SPACING}/⛔️ Figma.Value.json`
-const DENSITY_SPACIOUS_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Spacious.json`
-const DENSITY_COMFORTABLE_SOURCE = `./${TOKENS_DIR}/${FILE_KEY_TYPOGRAPHY_MODES}/💎 Density.Comfortable.json`
+const SPACING_PRIMITIVE_SOURCE = path.join(
+  TOKENS_DIR_FILE_PATH,
+  FILE_KEY_SPACING,
+  '👾 Primitives.Value.json',
+)
+const DENSITY_FIGMA_SOURCE = path.join(
+  TOKENS_DIR_FILE_PATH,
+  FILE_KEY_SPACING,
+  '⛔️ Figma.Value.json',
+)
+const DENSITY_SPACIOUS_SOURCE = path.join(
+  TOKENS_DIR_FILE_PATH,
+  FILE_KEY_TYPOGRAPHY_MODES,
+  '💎 Density.Spacious.json',
+)
+const DENSITY_COMFORTABLE_SOURCE = path.join(
+  TOKENS_DIR_FILE_PATH,
+  FILE_KEY_TYPOGRAPHY_MODES,
+  '💎 Density.Comfortable.json',
+)
 
 export async function run({ outputReferences } = { outputReferences: true }) {
   console.info('Running Style Dictionary build script')
   console.info('outputReferences:', outputReferences)
+  console.info('Tokens directory:', TOKENS_DIR_FILE_PATH)
 
   const prefix = 'eds'
-  const colorBuildPath = 'color'
-  const spacingBuildPath = 'spacing'
+  const colorBuildPath = 'color/'
+  const spacingBuildPath = 'spacing/'
 
-  const COLOR_TOKENS_DIR = `./${TOKENS_DIR}/ZrJNpIhcHprG9bFpHlHcWa`
-  const COLOR_PRIMITIVE_SOURCE = `${COLOR_TOKENS_DIR}/01 🎨 Colors.Mode 1.json`
-  const COLOR_LIGHT_SOURCE = `${COLOR_TOKENS_DIR}/02 🌗 Color scheme.Light.json`
-  const COLOR_DARK_SOURCE = `${COLOR_TOKENS_DIR}/02 🌗 Color scheme.Dark.json`
+  const COLOR_TOKENS_DIR = path.join(
+    TOKENS_DIR_FILE_PATH,
+    'ZrJNpIhcHprG9bFpHlHcWa',
+  )
+  const COLOR_PRIMITIVE_SOURCE = path.join(
+    COLOR_TOKENS_DIR,
+    '01 🎨 Colors.Mode 1.json',
+  )
+  console.info('COLOR_PRIMITIVE_SOURCE:', COLOR_PRIMITIVE_SOURCE)
+  console.info('File exists:', fs.existsSync(COLOR_PRIMITIVE_SOURCE))
+
+  const COLOR_LIGHT_SOURCE = path.join(
+    COLOR_TOKENS_DIR,
+    '02 🌗 Color scheme.Light.json',
+  )
+
+  const COLOR_DARK_SOURCE = path.join(
+    COLOR_TOKENS_DIR,
+    '02 🌗 Color scheme.Dark.json',
+  )
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
@@ -127,7 +172,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        buildPath: `${cssBuildPath}/color/`,
+        buildPath: path.join(cssBuildPath, colorBuildPath),
         transforms: ['name/kebab', 'color/css', 'lightDark'],
         files: [
           {
@@ -150,7 +195,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     platforms: {
       css: {
         transformGroup: 'css',
-        buildPath: `${cssBuildPath}/color/`,
+        buildPath: path.join(cssBuildPath, colorBuildPath),
         transforms: ['name/kebab', 'color/css', 'lightDark'],
         files: [
           {
@@ -207,7 +252,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/spacing/`,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
         transforms: [
           'name/kebab',
           PX_TO_REM_NAME,
@@ -238,7 +283,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/spacing/`,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
         transforms: [
           'name/kebab',
           PX_TO_REM_NAME,
@@ -269,7 +314,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/${spacingBuildPath}/`,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
         transforms: cssTransforms,
         files: [
           {
@@ -294,7 +339,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       css: {
         transformGroup: 'css',
         prefix,
-        buildPath: `${cssBuildPath}/${spacingBuildPath}/`,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
         transforms: cssTransforms,
         files: [
           {
