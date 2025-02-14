@@ -1,17 +1,18 @@
-import { forwardRef, ButtonHTMLAttributes } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
-import { token as buttonToken } from './tokens'
-import { ButtonTokenSet, ButtonToken } from './Button.types'
 import {
-  typographyTemplate,
   bordersTemplate,
   outlineTemplate,
-  spacingsTemplate,
-  useToken,
   OverridableComponent,
+  spacingsTemplate,
+  typographyTemplate,
+  useToken,
 } from '@equinor/eds-utils'
-import { InnerFullWidth } from './InnerFullWidth'
+import { ButtonHTMLAttributes, forwardRef } from 'react'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { useEds } from '../EdsProvider'
+import { ButtonToken, ButtonTokenSet } from './Button.types'
+import { InnerFullWidth } from './InnerFullWidth'
+import { token as buttonToken } from './tokens'
+import { Progress } from '../Progress'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants =
@@ -150,6 +151,8 @@ export type ButtonProps = {
   href?: string
   /** Is the button disabled */
   disabled?: boolean
+  /** Is the button loading */
+  loading?: boolean
   /** Type of button
    * @default 'button'
    */
@@ -165,6 +168,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       variant = 'contained',
       children,
       disabled = false,
+      loading = false,
       href,
       tabIndex = 0,
       fullWidth = false,
@@ -191,14 +195,15 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       ...other,
     }
 
+    const ButtonInner = fullWidth ? InnerFullWidth : Inner
+
     return (
       <ThemeProvider theme={token}>
         <ButtonBase {...buttonProps}>
-          {fullWidth ? (
-            <InnerFullWidth>{children}</InnerFullWidth>
-          ) : (
-            <Inner>{children}</Inner>
-          )}
+          <ButtonInner>
+            {!loading && children}
+            {loading && <Progress.Circular size={16} />}
+          </ButtonInner>
         </ButtonBase>
       </ThemeProvider>
     )

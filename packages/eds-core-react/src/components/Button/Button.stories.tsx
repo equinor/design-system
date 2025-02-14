@@ -1,16 +1,16 @@
-import { useState, ChangeEvent } from 'react'
+import { add, menu, refresh, save } from '@equinor/eds-icons'
+import { Meta, StoryFn } from '@storybook/react'
+import { ChangeEvent, useState } from 'react'
 import {
   Button,
   ButtonProps,
-  Icon,
-  EdsProvider,
-  Progress,
   Checkbox,
+  EdsProvider,
+  Icon,
+  Progress,
   Snackbar,
   Tooltip,
 } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
-import { menu, add, save, send, refresh } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
@@ -230,17 +230,11 @@ export const ProgressButton: StoryFn<ButtonProps> = () => {
       <Button
         aria-disabled={isSubmitting ? true : false}
         aria-label={isSubmitting ? 'loading data' : null}
+        loading={isSubmitting}
         color="secondary"
         onClick={!isSubmitting ? onSubmit : undefined}
       >
-        {isSubmitting ? (
-          <Progress.Circular size={16} color="primary" />
-        ) : (
-          <>
-            Send
-            <Icon data={send} size={16}></Icon>
-          </>
-        )}
+        Send
       </Button>
       <Button onClick={() => setIsSubmitting(false)}>
         <>

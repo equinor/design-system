@@ -138,6 +138,14 @@ describe('Button', () => {
 
     expect(button).toBeInTheDocument()
   })
+  it('Renders with a progress when loading prop is true', () => {
+    render(<Button loading={true} />)
+    const button = screen.getByRole('button')
+    const progress = screen.getByRole('progressbar')
+
+    expect(button).toBeInTheDocument()
+    expect(progress).toBeInTheDocument()
+  })
   it('Can be cast as another component', () => {
     render(<Button as={LinkButton} to="/" />)
     const button = screen.getByRole('link')
