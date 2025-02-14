@@ -45,11 +45,31 @@ const lightDarkTransform = createLightDarkTransform({
   darkTokensObject: darkTokens[darkColorSchemeCollectionFile],
 })
 
+const COLOR__MATRIX_TOKENS_DIR = path.join(
+  TOKENS_DIR_FILE_PATH,
+  'l61klzmHcRrHVk7Ag0eLGn',
+)
+
+const matrixDarkColorSchemeCollectionFile = 'Color scheme.Dark.json'
+
+const COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE = path.join(
+  COLOR__MATRIX_TOKENS_DIR,
+  matrixDarkColorSchemeCollectionFile,
+)
+
+const darkTokenMatrix = readJsonFiles([COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE])
+
+const lightDarkMatrixTransform = createLightDarkTransform({
+  name: 'lightDarkMatrix',
+  darkTokensObject: darkTokenMatrix[matrixDarkColorSchemeCollectionFile],
+})
+
 const densitySpaceToggleTransform = createDensitySpaceToggleTransform({
   name: 'densitySpaceToggle',
   tokens: spacingComfortableTokens['💎 Density.Comfortable.json'],
 })
 
+StyleDictionary.registerTransform(lightDarkMatrixTransform)
 StyleDictionary.registerTransform(lightDarkTransform)
 StyleDictionary.registerTransform(densitySpaceToggleTransform)
 StyleDictionary.registerTransform(pxFormatted)
@@ -117,6 +137,54 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     COLOR_TOKENS_DIR,
     '02 🌗 Color scheme.Dark.json',
   )
+
+  const COLOR_MATRIX_COLORS_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Colors.Mode 1.json',
+  )
+
+  const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Color scheme.Light.json',
+  )
+
+  const COLOR_MATRIX_ACCENT_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Appearance.Accent.json',
+  )
+
+  const accentLightDark = _extend({
+    include: [
+      COLOR_MATRIX_COLORS_SOURCE,
+      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
+    ],
+    source: [COLOR_MATRIX_ACCENT_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Accent']),
+    buildPath: colorBuildPath,
+    fileName: 'matrix-accent',
+    outputReferences: false,
+    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
+    selector: '[data-color-appearance="accent"]',
+  })
+
+  const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Appearance.Neutral.json',
+  )
+
+  const neutralLightDark = _extend({
+    include: [
+      COLOR_MATRIX_COLORS_SOURCE,
+      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
+    ],
+    source: [COLOR_MATRIX_NEUTRAL_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Neutral']),
+    buildPath: colorBuildPath,
+    fileName: 'matrix-neutral',
+    outputReferences: false,
+    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
+    selector: '[data-color-appearance="neutral"]',
+  })
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
@@ -372,4 +440,7 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   await densityComfortableTrimmed.buildAllPlatforms()
   await densityAllTrimmed.buildAllPlatforms()
   await densityAllVerbose.buildAllPlatforms()
+
+  await accentLightDark.buildAllPlatforms()
+  await neutralLightDark.buildAllPlatforms()
 }

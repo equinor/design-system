@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-appearance="accent"] {
+  --background-default: light-dark(#ffffff, #002124);
+  --background-subtle: light-dark(#eef5f6, #00292d);
+  --surface-default: light-dark(#d3e6e7, #00363a);
+  --surface-hover: light-dark(#bad7d9, #004449);
+  --surface-active: light-dark(#a2c9cd, #00535a);
+  --border-default: light-dark(#98c3c7, #005a62);
+  --border-subtle: light-dark(#348a91, #2f878f);
+  --border-strong: light-dark(#006c75, #6facb1);
+  --text-default: light-dark(#006c75, #4d989f);
+  --text-subtle: light-dark(#00575e, #6facb1);
+  --base-default: light-dark(#004349, #92c0c4);
+  --base-hover: light-dark(#006c75, #6facb1);
+  --base-active: light-dark(#003135, #d7e8e9);
+  --contrast-subtle: light-dark(#ffffff, #000000);
+  --contrast-default: light-dark(#d9e9eb, #0e1b1c);
+}
