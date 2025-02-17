@@ -22,56 +22,12 @@ const TOKENS_DIR_FILE_PATH = path.resolve(process.cwd(), 'tokens')
 
 const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
+const colorBuildPath = 'color/'
+const outputDirectory = path.resolve(process.cwd(), 'build')
+export const cssBuildPath = path.join(outputDirectory, 'css')
+export const jsBuildPath = path.join(outputDirectory, 'js')
+export const jsonBuildPath = path.join(outputDirectory, 'json')
 
-const darkColorSchemeCollectionFile = '02 🌗 Color scheme.Dark.json'
-const darkTokens = readJsonFiles([
-  path.join(
-    TOKENS_DIR_FILE_PATH,
-    'ZrJNpIhcHprG9bFpHlHcWa',
-    darkColorSchemeCollectionFile,
-  ),
-])
-
-const spacingComfortableTokens = readJsonFiles([
-  path.join(
-    TOKENS_DIR_FILE_PATH,
-    FILE_KEY_TYPOGRAPHY_MODES,
-    '💎 Density.Comfortable.json',
-  ),
-])
-
-const lightDarkTransform = createLightDarkTransform({
-  name: 'lightDark',
-  darkTokensObject: darkTokens[darkColorSchemeCollectionFile],
-})
-
-const COLOR__MATRIX_TOKENS_DIR = path.join(
-  TOKENS_DIR_FILE_PATH,
-  'l61klzmHcRrHVk7Ag0eLGn',
-)
-
-const matrixDarkColorSchemeCollectionFile = 'Color scheme.Dark.json'
-
-const COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE = path.join(
-  COLOR__MATRIX_TOKENS_DIR,
-  matrixDarkColorSchemeCollectionFile,
-)
-
-const darkTokenMatrix = readJsonFiles([COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE])
-
-const lightDarkMatrixTransform = createLightDarkTransform({
-  name: 'lightDarkMatrix',
-  darkTokensObject: darkTokenMatrix[matrixDarkColorSchemeCollectionFile],
-})
-
-const densitySpaceToggleTransform = createDensitySpaceToggleTransform({
-  name: 'densitySpaceToggle',
-  tokens: spacingComfortableTokens['💎 Density.Comfortable.json'],
-})
-
-StyleDictionary.registerTransform(lightDarkMatrixTransform)
-StyleDictionary.registerTransform(lightDarkTransform)
-StyleDictionary.registerTransform(densitySpaceToggleTransform)
 StyleDictionary.registerTransform(pxFormatted)
 StyleDictionary.registerTransform(pxToRem)
 StyleDictionary.registerTransform(fontQuote)
@@ -82,41 +38,32 @@ const cssTransforms = [
   PX_FORMATTED_NAME,
   FONT_QUOTE_NAME,
 ]
-const outputDirectory = path.resolve(process.cwd(), 'build')
-export const cssBuildPath = path.join(outputDirectory, 'css')
-export const jsBuildPath = path.join(outputDirectory, 'js')
-export const jsonBuildPath = path.join(outputDirectory, 'json')
 
-const SPACING_PRIMITIVE_SOURCE = path.join(
-  TOKENS_DIR_FILE_PATH,
-  FILE_KEY_SPACING,
-  '👾 Primitives.Value.json',
-)
-const DENSITY_FIGMA_SOURCE = path.join(
-  TOKENS_DIR_FILE_PATH,
-  FILE_KEY_SPACING,
-  '⛔️ Figma.Value.json',
-)
-const DENSITY_SPACIOUS_SOURCE = path.join(
-  TOKENS_DIR_FILE_PATH,
-  FILE_KEY_TYPOGRAPHY_MODES,
-  '💎 Density.Spacious.json',
-)
-const DENSITY_COMFORTABLE_SOURCE = path.join(
-  TOKENS_DIR_FILE_PATH,
-  FILE_KEY_TYPOGRAPHY_MODES,
-  '💎 Density.Comfortable.json',
-)
-
-export async function run({ outputReferences } = { outputReferences: true }) {
+export async function run() {
   console.info('Running Style Dictionary build script')
-  console.info('outputReferences:', outputReferences)
   console.info('Tokens directory:', TOKENS_DIR_FILE_PATH)
 
-  const prefix = 'eds'
-  const colorBuildPath = 'color/'
-  const spacingBuildPath = 'spacing/'
+  await createClassicColorVariables()
+  await createSpacingAndTypographyVariables()
+  await createMatrixColorVariables()
+}
 
+async function createClassicColorVariables() {
+  const darkColorSchemeCollectionFile = '02 🌗 Color scheme.Dark.json'
+  const darkTokens = readJsonFiles([
+    path.join(
+      TOKENS_DIR_FILE_PATH,
+      'ZrJNpIhcHprG9bFpHlHcWa',
+      darkColorSchemeCollectionFile,
+    ),
+  ])
+
+  const lightDarkTransform = createLightDarkTransform({
+    name: 'lightDark',
+    darkTokensObject: darkTokens[darkColorSchemeCollectionFile],
+  })
+
+  StyleDictionary.registerTransform(lightDarkTransform)
   const COLOR_TOKENS_DIR = path.join(
     TOKENS_DIR_FILE_PATH,
     'ZrJNpIhcHprG9bFpHlHcWa',
@@ -137,54 +84,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     COLOR_TOKENS_DIR,
     '02 🌗 Color scheme.Dark.json',
   )
-
-  const COLOR_MATRIX_COLORS_SOURCE = path.join(
-    COLOR__MATRIX_TOKENS_DIR,
-    'Colors.Mode 1.json',
-  )
-
-  const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
-    COLOR__MATRIX_TOKENS_DIR,
-    'Color scheme.Light.json',
-  )
-
-  const COLOR_MATRIX_ACCENT_SOURCE = path.join(
-    COLOR__MATRIX_TOKENS_DIR,
-    'Appearance.Accent.json',
-  )
-
-  const accentLightDark = _extend({
-    include: [
-      COLOR_MATRIX_COLORS_SOURCE,
-      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
-    ],
-    source: [COLOR_MATRIX_ACCENT_SOURCE],
-    filter: (token) => includeTokenFilter(token, ['Accent']),
-    buildPath: colorBuildPath,
-    fileName: 'matrix-accent',
-    outputReferences: false,
-    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
-    selector: '[data-color-appearance="accent"]',
-  })
-
-  const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
-    COLOR__MATRIX_TOKENS_DIR,
-    'Appearance.Neutral.json',
-  )
-
-  const neutralLightDark = _extend({
-    include: [
-      COLOR_MATRIX_COLORS_SOURCE,
-      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
-    ],
-    source: [COLOR_MATRIX_NEUTRAL_SOURCE],
-    filter: (token) => includeTokenFilter(token, ['Neutral']),
-    buildPath: colorBuildPath,
-    fileName: 'matrix-neutral',
-    outputReferences: false,
-    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
-    selector: '[data-color-appearance="neutral"]',
-  })
 
   const primitives = _extend({
     source: [COLOR_PRIMITIVE_SOURCE],
@@ -279,6 +178,129 @@ export async function run({ outputReferences } = { outputReferences: true }) {
       },
     },
   })
+
+  await primitives.buildAllPlatforms()
+  await lightMode.buildAllPlatforms()
+  await lightModeTrimmed.buildAllPlatforms()
+  await darkMode.buildAllPlatforms()
+  await darkModeTrimmed.buildAllPlatforms()
+  await lightDarkColorsVerbose.buildAllPlatforms()
+  await lightDarkColorsTrimmed.buildAllPlatforms()
+}
+
+async function createMatrixColorVariables() {
+  const COLOR__MATRIX_TOKENS_DIR = path.join(
+    TOKENS_DIR_FILE_PATH,
+    'l61klzmHcRrHVk7Ag0eLGn',
+  )
+
+  const matrixDarkColorSchemeCollectionFile = 'Color scheme.Dark.json'
+
+  const COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    matrixDarkColorSchemeCollectionFile,
+  )
+
+  const darkTokenMatrix = readJsonFiles([COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE])
+
+  const lightDarkMatrixTransform = createLightDarkTransform({
+    name: 'lightDarkMatrix',
+    darkTokensObject: darkTokenMatrix[matrixDarkColorSchemeCollectionFile],
+  })
+
+  StyleDictionary.registerTransform(lightDarkMatrixTransform)
+
+  const COLOR_MATRIX_COLORS_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Colors.Mode 1.json',
+  )
+
+  const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Color scheme.Light.json',
+  )
+
+  const COLOR_MATRIX_ACCENT_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Appearance.Accent.json',
+  )
+
+  const accentLightDark = _extend({
+    include: [
+      COLOR_MATRIX_COLORS_SOURCE,
+      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
+    ],
+    source: [COLOR_MATRIX_ACCENT_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Accent']),
+    buildPath: colorBuildPath,
+    fileName: 'matrix-accent',
+    outputReferences: false,
+    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
+    selector: '[data-color-appearance="accent"]',
+  })
+
+  const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Appearance.Neutral.json',
+  )
+
+  const neutralLightDark = _extend({
+    include: [
+      COLOR_MATRIX_COLORS_SOURCE,
+      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
+    ],
+    source: [COLOR_MATRIX_NEUTRAL_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Neutral']),
+    buildPath: colorBuildPath,
+    fileName: 'matrix-neutral',
+    outputReferences: false,
+    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
+    selector: '[data-color-appearance="neutral"]',
+  })
+
+  await accentLightDark.buildAllPlatforms()
+  await neutralLightDark.buildAllPlatforms()
+}
+
+async function createSpacingAndTypographyVariables() {
+  const prefix = 'eds'
+  const spacingBuildPath = 'spacing/'
+  const outputReferences = true
+
+  const SPACING_PRIMITIVE_SOURCE = path.join(
+    TOKENS_DIR_FILE_PATH,
+    FILE_KEY_SPACING,
+    '👾 Primitives.Value.json',
+  )
+  const DENSITY_FIGMA_SOURCE = path.join(
+    TOKENS_DIR_FILE_PATH,
+    FILE_KEY_SPACING,
+    '⛔️ Figma.Value.json',
+  )
+  const DENSITY_SPACIOUS_SOURCE = path.join(
+    TOKENS_DIR_FILE_PATH,
+    FILE_KEY_TYPOGRAPHY_MODES,
+    '💎 Density.Spacious.json',
+  )
+  const DENSITY_COMFORTABLE_SOURCE = path.join(
+    TOKENS_DIR_FILE_PATH,
+    FILE_KEY_TYPOGRAPHY_MODES,
+    '💎 Density.Comfortable.json',
+  )
+
+  const spacingComfortableTokens = readJsonFiles([
+    path.join(
+      TOKENS_DIR_FILE_PATH,
+      FILE_KEY_TYPOGRAPHY_MODES,
+      '💎 Density.Comfortable.json',
+    ),
+  ])
+  const densitySpaceToggleTransform = createDensitySpaceToggleTransform({
+    name: 'densitySpaceToggle',
+    tokens: spacingComfortableTokens['💎 Density.Comfortable.json'],
+  })
+
+  StyleDictionary.registerTransform(densitySpaceToggleTransform)
 
   const spacingPrimitives = _extend({
     source: [SPACING_PRIMITIVE_SOURCE],
@@ -425,14 +447,6 @@ export async function run({ outputReferences } = { outputReferences: true }) {
     },
   })
 
-  await primitives.buildAllPlatforms()
-  await lightMode.buildAllPlatforms()
-  await lightModeTrimmed.buildAllPlatforms()
-  await darkMode.buildAllPlatforms()
-  await darkModeTrimmed.buildAllPlatforms()
-  await lightDarkColorsVerbose.buildAllPlatforms()
-  await lightDarkColorsTrimmed.buildAllPlatforms()
-
   await spacingPrimitives.buildAllPlatforms()
   await densityComfortable.buildAllPlatforms()
   await densitySpacious.buildAllPlatforms()
@@ -440,7 +454,4 @@ export async function run({ outputReferences } = { outputReferences: true }) {
   await densityComfortableTrimmed.buildAllPlatforms()
   await densityAllTrimmed.buildAllPlatforms()
   await densityAllVerbose.buildAllPlatforms()
-
-  await accentLightDark.buildAllPlatforms()
-  await neutralLightDark.buildAllPlatforms()
 }
