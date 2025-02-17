@@ -2,7 +2,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-color-appearance="neutral"] {
+:root, [data-color-appearance="neutral"] {
   --background-default: light-dark(#ffffff, #191d20);
   --background-subtle: light-dark(#f3f3f3, #202529);
   --surface-default: light-dark(#e2e2e2, #293136);

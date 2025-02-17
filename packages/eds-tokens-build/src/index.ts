@@ -225,41 +225,95 @@ async function createMatrixColorVariables() {
     'Appearance.Accent.json',
   )
 
-  const accentLightDark = _extend({
-    include: [
-      COLOR_MATRIX_COLORS_SOURCE,
-      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
-    ],
+  const transforms = ['name/kebab', 'color/css', 'lightDarkMatrix']
+  const outputReferences = false
+  const include = [
+    COLOR_MATRIX_COLORS_SOURCE,
+    COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
+  ]
+
+  const accent = _extend({
     source: [COLOR_MATRIX_ACCENT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Accent']),
-    buildPath: colorBuildPath,
     fileName: 'matrix-accent',
-    outputReferences: false,
-    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
     selector: '[data-color-appearance="accent"]',
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
   })
+
+  await accent.buildAllPlatforms()
 
   const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
     'Appearance.Neutral.json',
   )
 
-  const neutralLightDark = _extend({
-    include: [
-      COLOR_MATRIX_COLORS_SOURCE,
-      COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
-    ],
+  const natural = _extend({
     source: [COLOR_MATRIX_NEUTRAL_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Neutral']),
-    buildPath: colorBuildPath,
     fileName: 'matrix-neutral',
-    outputReferences: false,
-    transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
-    selector: '[data-color-appearance="neutral"]',
+    selector: ':root, [data-color-appearance="neutral"]',
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
   })
 
-  await accentLightDark.buildAllPlatforms()
-  await neutralLightDark.buildAllPlatforms()
+  await natural.buildAllPlatforms()
+
+  const danger = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Danger.json')],
+    filter: (token) => includeTokenFilter(token, ['Danger']),
+    fileName: 'matrix-danger',
+    selector: '[data-color-appearance="danger"]',
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await danger.buildAllPlatforms()
+
+  const success = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Success.json')],
+    filter: (token) => includeTokenFilter(token, ['Success']),
+    fileName: 'matrix-success',
+    selector: '[data-color-appearance="success"]',
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await success.buildAllPlatforms()
+
+  const warning = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Warning.json')],
+    filter: (token) => includeTokenFilter(token, ['Warning']),
+    fileName: 'matrix-warning',
+    selector: '[data-color-appearance="warning"]',
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await warning.buildAllPlatforms()
+
+  const info = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Info.json')],
+    filter: (token) => includeTokenFilter(token, ['Info']),
+    fileName: 'matrix-info',
+    selector: '[data-color-appearance="info"]',
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await info.buildAllPlatforms()
 }
 
 async function createSpacingAndTypographyVariables() {
