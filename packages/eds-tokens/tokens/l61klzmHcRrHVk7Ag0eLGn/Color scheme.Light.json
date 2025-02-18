@@ -60,7 +60,7 @@
         }
       }
     },
-    "border-default": {
+    "border-subtle": {
       "$type": "color",
       "$value": "{eds.neutral.light.6}",
       "$description": "",
@@ -72,7 +72,7 @@
         }
       }
     },
-    "border-subtle": {
+    "border-default": {
       "$type": "color",
       "$value": "{eds.neutral.light.7}",
       "$description": "",
@@ -96,7 +96,7 @@
         }
       }
     },
-    "text-default": {
+    "text-subtle": {
       "$type": "color",
       "$value": "{eds.neutral.light.9}",
       "$description": "",
@@ -108,7 +108,7 @@
         }
       }
     },
-    "text-subtle": {
+    "text-default": {
       "$type": "color",
       "$value": "{eds.neutral.light.10}",
       "$description": "",
@@ -242,7 +242,7 @@
         }
       }
     },
-    "border-default": {
+    "border-subtle": {
       "$type": "color",
       "$value": "{eds.accent.light.6}",
       "$description": "",
@@ -254,7 +254,7 @@
         }
       }
     },
-    "border-subtle": {
+    "border-default": {
       "$type": "color",
       "$value": "{eds.accent.light.7}",
       "$description": "",
@@ -278,7 +278,7 @@
         }
       }
     },
-    "text-default": {
+    "text-subtle": {
       "$type": "color",
       "$value": "{eds.accent.light.9}",
       "$description": "",
@@ -290,7 +290,7 @@
         }
       }
     },
-    "text-subtle": {
+    "text-default": {
       "$type": "color",
       "$value": "{eds.accent.light.10}",
       "$description": "",
@@ -424,7 +424,7 @@
         }
       }
     },
-    "border-default": {
+    "border-subtle": {
       "$type": "color",
       "$value": "{eds.success.light.6}",
       "$description": "",
@@ -436,7 +436,7 @@
         }
       }
     },
-    "border-subtle": {
+    "border-default": {
       "$type": "color",
       "$value": "{eds.success.light.7}",
       "$description": "",
@@ -460,7 +460,7 @@
         }
       }
     },
-    "text-default": {
+    "text-subtle": {
       "$type": "color",
       "$value": "{eds.success.light.9}",
       "$description": "",
@@ -472,7 +472,7 @@
         }
       }
     },
-    "text-subtle": {
+    "text-default": {
       "$type": "color",
       "$value": "{eds.success.light.10}",
       "$description": "",
@@ -606,7 +606,7 @@
         }
       }
     },
-    "border-default": {
+    "border-subtle": {
       "$type": "color",
       "$value": "{eds.info.light.6}",
       "$description": "",
@@ -618,7 +618,7 @@
         }
       }
     },
-    "border-subtle": {
+    "border-default": {
       "$type": "color",
       "$value": "{eds.info.light.7}",
       "$description": "",
@@ -642,7 +642,7 @@
         }
       }
     },
-    "text-default": {
+    "text-subtle": {
       "$type": "color",
       "$value": "{eds.info.light.9}",
       "$description": "",
@@ -654,7 +654,7 @@
         }
       }
     },
-    "text-subtle": {
+    "text-default": {
       "$type": "color",
       "$value": "{eds.info.light.10}",
       "$description": "",
@@ -788,7 +788,7 @@
         }
       }
     },
-    "border-default": {
+    "border-subtle": {
       "$type": "color",
       "$value": "{eds.warning.light.6}",
       "$description": "",
@@ -800,7 +800,7 @@
         }
       }
     },
-    "border-subtle": {
+    "border-default": {
       "$type": "color",
       "$value": "{eds.warning.light.7}",
       "$description": "",
@@ -824,7 +824,7 @@
         }
       }
     },
-    "text-default": {
+    "text-subtle": {
       "$type": "color",
       "$value": "{eds.warning.light.9}",
       "$description": "",
@@ -836,7 +836,7 @@
         }
       }
     },
-    "text-subtle": {
+    "text-default": {
       "$type": "color",
       "$value": "{eds.warning.light.10}",
       "$description": "",
@@ -970,7 +970,7 @@
         }
       }
     },
-    "border-default": {
+    "border-subtle": {
       "$type": "color",
       "$value": "{eds.danger.light.6}",
       "$description": "",
@@ -982,7 +982,7 @@
         }
       }
     },
-    "border-subtle": {
+    "border-default": {
       "$type": "color",
       "$value": "{eds.danger.light.7}",
       "$description": "",
@@ -1006,7 +1006,7 @@
         }
       }
     },
-    "text-default": {
+    "text-subtle": {
       "$type": "color",
       "$value": "{eds.danger.light.9}",
       "$description": "",
@@ -1018,7 +1018,7 @@
         }
       }
     },
-    "text-subtle": {
+    "text-default": {
       "$type": "color",
       "$value": "{eds.danger.light.10}",
       "$description": "",
