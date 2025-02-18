@@ -3,19 +3,19 @@
  */
 
 [data-color-appearance="info"] {
-  --background-default: light-dark(#ffffff, #011f2f);
-  --background-subtle: light-dark(#eef5f8, #02273b);
-  --surface-default: light-dark(#d4e5ee, #02334c);
-  --surface-hover: light-dark(#bbd6e4, #034161);
-  --surface-active: light-dark(#a3c8da, #034f76);
-  --border-default: light-dark(#99c1d6, #035680);
-  --border-subtle: light-dark(#3786af, #3383ad);
-  --border-strong: light-dark(#04679a, #71a9c6);
-  --text-default: light-dark(#04679a, #5095b8);
-  --text-subtle: light-dark(#03537c, #72a9c6);
-  --base-default: light-dark(#024060, #94bed4);
-  --base-hover: light-dark(#04679a, #71a9c6);
-  --base-active: light-dark(#022f46, #d8e7ef);
-  --contrast-subtle: light-dark(#ffffff, #000000);
-  --contrast-default: light-dark(#dae8f0, #0e1b21);
+  --eds-color-background-default: light-dark(#ffffff, #011f2f);
+  --eds-color-background-subtle: light-dark(#eef5f8, #02273b);
+  --eds-color-surface-default: light-dark(#d4e5ee, #02334c);
+  --eds-color-surface-hover: light-dark(#bbd6e4, #034161);
+  --eds-color-surface-active: light-dark(#a3c8da, #034f76);
+  --eds-color-border-default: light-dark(#99c1d6, #035680);
+  --eds-color-border-subtle: light-dark(#3786af, #3383ad);
+  --eds-color-border-strong: light-dark(#04679a, #71a9c6);
+  --eds-color-text-default: light-dark(#04679a, #5095b8);
+  --eds-color-text-subtle: light-dark(#03537c, #72a9c6);
+  --eds-color-base-default: light-dark(#024060, #94bed4);
+  --eds-color-base-hover: light-dark(#04679a, #71a9c6);
+  --eds-color-base-active: light-dark(#022f46, #d8e7ef);
+  --eds-color-contrast-subtle: light-dark(#ffffff, #000000);
+  --eds-color-contrast-default: light-dark(#dae8f0, #0e1b21);
 }

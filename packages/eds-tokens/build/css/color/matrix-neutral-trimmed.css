@@ -3,19 +3,19 @@
  */
 
 :root, [data-color-appearance="neutral"] {
-  --background-default: light-dark(#ffffff, #191d20);
-  --background-subtle: light-dark(#f3f3f3, #202529);
-  --surface-default: light-dark(#e2e2e2, #293136);
-  --surface-hover: light-dark(#d1d1d1, #343e45);
-  --surface-active: light-dark(#c2c2c2, #404c54);
-  --border-default: light-dark(#bcbcbc, #46535c);
-  --border-subtle: light-dark(#7e7e7e, #717d87);
-  --border-strong: light-dark(#616161, #9aa3aa);
-  --text-default: light-dark(#616161, #859097);
-  --text-subtle: light-dark(#4e4e4e, #9ca4ab);
-  --base-default: light-dark(#3c3c3c, #b2b9be);
-  --base-hover: light-dark(#616161, #9aa3aa);
-  --base-active: light-dark(#2b2b2b, #e2e5e7);
-  --contrast-subtle: light-dark(#ffffff, #000000);
-  --contrast-default: light-dark(#e6e6e6, #181a1c);
+  --eds-color-background-default: light-dark(#ffffff, #191d20);
+  --eds-color-background-subtle: light-dark(#f3f3f3, #202529);
+  --eds-color-surface-default: light-dark(#e2e2e2, #293136);
+  --eds-color-surface-hover: light-dark(#d1d1d1, #343e45);
+  --eds-color-surface-active: light-dark(#c2c2c2, #404c54);
+  --eds-color-border-default: light-dark(#bcbcbc, #46535c);
+  --eds-color-border-subtle: light-dark(#7e7e7e, #717d87);
+  --eds-color-border-strong: light-dark(#616161, #9aa3aa);
+  --eds-color-text-default: light-dark(#616161, #859097);
+  --eds-color-text-subtle: light-dark(#4e4e4e, #9ca4ab);
+  --eds-color-base-default: light-dark(#3c3c3c, #b2b9be);
+  --eds-color-base-hover: light-dark(#616161, #9aa3aa);
+  --eds-color-base-active: light-dark(#2b2b2b, #e2e5e7);
+  --eds-color-contrast-subtle: light-dark(#ffffff, #000000);
+  --eds-color-contrast-default: light-dark(#e6e6e6, #181a1c);
 }
