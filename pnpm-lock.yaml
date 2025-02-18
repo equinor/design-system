@@ -90,8 +90,8 @@ importers:
         specifier: workspace:^
         version: link:../eds-icons
       '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
+        specifier: 1.0.0-beta-2
+        version: 1.0.0-beta-2
       '@equinor/eds-utils':
         specifier: workspace:*
         version: link:../eds-utils
@@ -1469,6 +1469,9 @@ packages:
 
   '@emotion/unitless@0.8.1':
     resolution: {integrity: sha512-KOEGMu6dmJZtpadb476IsZBclKvILjopjUii3V+7MnXIQCYh8W3NgNcgwo21n9LXZX6EDIKvqfjYxXebDwxKmQ==}
+
+  '@equinor/eds-tokens@1.0.0-beta-2':
+    resolution: {integrity: sha512-cVtdhQi/nptL6wsr5oqBVcBGKerKrb/TyKLMY/740NE4yWSWvqJoT24GvbUK5DdLrqOpAQm3esl11kM3cDpf5g==}
 
   '@esbuild/aix-ppc64@0.24.2':
     resolution: {integrity: sha512-thpVCb/rhxE/BnMLQ7GReQLLN8q9qbHmI55F4489/ByVg2aQaQ6kbcLb6FHkocZzQhxc4gx0sCk0tJkKBFzDhA==}
@@ -7602,6 +7605,8 @@ snapshots:
   '@emotion/memoize@0.8.1': {}
 
   '@emotion/unitless@0.8.1': {}
+
+  '@equinor/eds-tokens@1.0.0-beta-2': {}
 
   '@esbuild/aix-ppc64@0.24.2':
     optional: true

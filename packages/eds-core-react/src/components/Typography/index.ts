@@ -1,1 +1,2 @@
-export * from './Typography'
+export * from './TypographyDeprecated/Typography'
+export * from './Text/Text'
