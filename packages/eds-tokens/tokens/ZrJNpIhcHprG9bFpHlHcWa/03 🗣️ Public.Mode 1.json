@@ -276,54 +276,6 @@
         }
       }
     },
-    "neutral-strong": {
-      "$type": "color",
-      "$value": "{eds.color.theme.background-neutral-strong}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "--eds-color-theme-background-neutral-strong-initial"
-          }
-        }
-      }
-    },
-    "neutral-strong-hover": {
-      "$type": "color",
-      "$value": "{eds.color.theme.background-neutral-strong-hover}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "--eds-color-theme-background-neutral-strong-hover"
-          }
-        }
-      }
-    },
-    "neutral-strong-active": {
-      "$type": "color",
-      "$value": "{eds.color.theme.background-neutral-strong-active}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "--eds-color-theme-background-neutral-strong-active"
-          }
-        }
-      }
-    },
     "neutral": {
       "$type": "color",
       "$value": "{eds.color.theme.background-neutral}",
@@ -368,6 +320,54 @@
           ],
           "codeSyntax": {
             "WEB": "--eds-color-theme-background-neutral-active"
+          }
+        }
+      }
+    },
+    "neutral-strong": {
+      "$type": "color",
+      "$value": "{eds.color.theme.background-neutral-strong}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-background-neutral-strong-initial"
+          }
+        }
+      }
+    },
+    "neutral-strong-hover": {
+      "$type": "color",
+      "$value": "{eds.color.theme.background-neutral-strong-hover}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-background-neutral-strong-hover"
+          }
+        }
+      }
+    },
+    "neutral-strong-active": {
+      "$type": "color",
+      "$value": "{eds.color.theme.background-neutral-strong-active}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-background-neutral-strong-active"
           }
         }
       }

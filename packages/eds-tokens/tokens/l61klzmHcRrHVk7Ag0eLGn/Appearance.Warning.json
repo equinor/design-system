@@ -9,7 +9,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--background-default"
+        }
       }
     }
   },
@@ -23,7 +25,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--background-subtle"
+        }
       }
     }
   },
@@ -79,7 +83,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--border-default"
+        }
       }
     }
   },

@@ -7,7 +7,7 @@
             "background-default": {
               "$type": "color",
               "$value": "#fefefe",
-              "$description": "",
+              "$description": "test",
               "$extensions": {
                 "com.figma": {
                   "hiddenFromPublishing": true,
