@@ -8,5 +8,5 @@ type SnackbarTypes = typeof BaseComponent & {
 const Snackbar = BaseComponent as SnackbarTypes
 Snackbar.Action = SnackbarAction
 
-export { Snackbar }
+export { Snackbar, SnackbarAction }
 export type { SnackbarProps, SnackbarActionProps }

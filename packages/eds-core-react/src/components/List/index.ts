@@ -10,5 +10,5 @@ List.Item = ListItem
 
 List.Item.displayName = 'List.Item'
 
-export { List }
+export { List, ListItem }
 export type { ListProps, ListItemProps }

@@ -26,7 +26,14 @@ Card.Header.displayName = 'Card.Header'
 Card.Media.displayName = 'Card.Media'
 Card.HeaderTitle.displayName = 'Card.HeaderTitle'
 
-export { Card }
+export {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  CardHeaderTitle,
+}
 export type {
   CardProps,
   CardActionsProps,

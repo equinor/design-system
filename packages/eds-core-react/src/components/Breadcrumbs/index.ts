@@ -11,5 +11,5 @@ Breadcrumbs.Breadcrumb = Breadcrumb
 
 Breadcrumbs.Breadcrumb.displayName = 'Breadcrumbs.Breadcrumb'
 
-export { Breadcrumbs }
+export { Breadcrumbs, Breadcrumb }
 export type { BreadcrumbsProps, BreadcrumbProps }

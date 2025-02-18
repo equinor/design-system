@@ -22,7 +22,7 @@ Popover.Content.displayName = 'Popover.Content'
 Popover.Header.displayName = 'Popover.Header'
 Popover.Actions.displayName = 'Popover.Actions'
 
-export { Popover }
+export { Popover, PopoverTitle, PopoverContent, PopoverHeader, PopoverActions }
 export type {
   PopoverProps,
   PopoverContentProps,
