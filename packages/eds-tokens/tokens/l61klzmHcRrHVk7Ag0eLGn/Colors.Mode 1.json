@@ -1,16 +1,4 @@
 {
-  "Color": {
-    "$type": "color",
-    "$value": "#ffffff",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [],
-        "codeSyntax": {}
-      }
-    }
-  },
   "eds": {
     "neutral": {
       "light": {
