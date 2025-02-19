@@ -2,7 +2,7 @@
   "Text & Icon": {
     "default": {
       "$type": "color",
-      "$value": "{eds.color.theme.text}",
+      "$value": "{eds.color.theme.text-default}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -11,7 +11,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-text"
+            "WEB": "--eds-color-theme-text-default"
           }
         }
       }
@@ -64,9 +64,9 @@
         }
       }
     },
-    "accent": {
+    "accent-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.text-accent}",
+      "$value": "{eds.color.theme.text-accent-default}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -75,7 +75,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-text-accent"
+            "WEB": "--eds-color-theme-text-accent-default"
           }
         }
       }
@@ -96,9 +96,9 @@
         }
       }
     },
-    "info": {
+    "info-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.text-info}",
+      "$value": "{eds.color.theme.text-info-default}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -107,7 +107,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-text-info"
+            "WEB": "--eds-color-theme-text-info-default"
           }
         }
       }
@@ -128,9 +128,9 @@
         }
       }
     },
-    "success": {
+    "success-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.text-success}",
+      "$value": "{eds.color.theme.text-success-default}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -139,7 +139,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-text-success"
+            "WEB": "--eds-color-theme-text-success-default"
           }
         }
       }
@@ -160,9 +160,9 @@
         }
       }
     },
-    "warning": {
+    "warning-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.text-warning}",
+      "$value": "{eds.color.theme.text-warning-default}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -171,7 +171,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-text-warning"
+            "WEB": "--eds-color-theme-text-warning-default"
           }
         }
       }
@@ -192,9 +192,9 @@
         }
       }
     },
-    "danger": {
+    "danger-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.text-danger}",
+      "$value": "{eds.color.theme.text-danger-default}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -203,7 +203,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-text-danger"
+            "WEB": "--eds-color-theme-text-danger-default"
           }
         }
       }
@@ -228,7 +228,7 @@
   "Background": {
     "default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background}",
+      "$value": "{eds.color.theme.background-default}",
       "$description": "The header, footer, toolbars, panels, and primary content use the background color",
       "$extensions": {
         "com.figma": {
@@ -237,7 +237,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background"
+            "WEB": "--eds-color-theme-background-default"
           }
         }
       }
@@ -258,9 +258,9 @@
         }
       }
     },
-    "neutral": {
+    "neutral-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-neutral}",
+      "$value": "{eds.color.theme.background-neutral-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -269,14 +269,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-neutral-initial"
+            "WEB": "--eds-color-theme-background-neutral-default"
           }
         }
       }
     },
-    "neutral-hover": {
+    "neutral-default-hover": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-neutral-hover}",
+      "$value": "{eds.color.theme.background-neutral-default-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -285,14 +285,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-neutral-hover"
+            "WEB": "--eds-color-theme-background-neutral-default-hover"
           }
         }
       }
     },
-    "neutral-active": {
+    "neutral-default-active": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-neutral-active}",
+      "$value": "{eds.color.theme.background-neutral-default-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -301,7 +301,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-neutral-active"
+            "WEB": "--eds-color-theme-background-neutral-default-active"
           }
         }
       }
@@ -354,9 +354,9 @@
         }
       }
     },
-    "accent": {
+    "accent-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-accent}",
+      "$value": "{eds.color.theme.background-accent-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -365,14 +365,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-accent-initial"
+            "WEB": "--eds-color-theme-background-accent-default"
           }
         }
       }
     },
-    "accent-hover": {
+    "accent-default-hover": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-accent-hover}",
+      "$value": "{eds.color.theme.background-accent-default-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -381,14 +381,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-accent-hover"
+            "WEB": "--eds-color-theme-background-accent-default-hover"
           }
         }
       }
     },
-    "accent-active": {
+    "accent-default-active": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-accent-active}",
+      "$value": "{eds.color.theme.background-accent-default-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -397,7 +397,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-accent-active"
+            "WEB": "--eds-color-theme-background-accent-default-active"
           }
         }
       }
@@ -413,7 +413,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-accent-strong-initial"
+            "WEB": "--eds-color-theme-background-accent-strong"
           }
         }
       }
@@ -450,9 +450,9 @@
         }
       }
     },
-    "danger": {
+    "danger-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-danger}",
+      "$value": "{eds.color.theme.background-danger-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -461,14 +461,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-danger"
+            "WEB": "--eds-color-theme-background-danger-default"
           }
         }
       }
     },
-    "danger-hover": {
+    "danger-default-hover": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-danger-hover}",
+      "$value": "{eds.color.theme.background-danger-default-hover}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -477,14 +477,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-danger-hover"
+            "WEB": "--eds-color-theme-background-danger-default-hover"
           }
         }
       }
     },
-    "danger-active": {
+    "danger-default-active": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-danger-active}",
+      "$value": "{eds.color.theme.background-danger-default-active}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -493,7 +493,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-danger-active"
+            "WEB": "--eds-color-theme-background-danger-default-active"
           }
         }
       }
@@ -546,9 +546,9 @@
         }
       }
     },
-    "info": {
+    "info-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-info}",
+      "$value": "{eds.color.theme.background-info-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -557,7 +557,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-info"
+            "WEB": "--eds-color-theme-background-info-default"
           }
         }
       }
@@ -578,9 +578,9 @@
         }
       }
     },
-    "success": {
+    "success-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-success}",
+      "$value": "{eds.color.theme.background-success-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -589,7 +589,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-success"
+            "WEB": "--eds-color-theme-background-success-default"
           }
         }
       }
@@ -610,9 +610,9 @@
         }
       }
     },
-    "warning": {
+    "warning-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.background-warning}",
+      "$value": "{eds.color.theme.background-warning-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -621,7 +621,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-background-warning"
+            "WEB": "--eds-color-theme-background-warning-default"
           }
         }
       }
@@ -646,7 +646,7 @@
   "Border": {
     "default": {
       "$type": "color",
-      "$value": "{eds.color.theme.border}",
+      "$value": "{eds.color.theme.border-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -655,7 +655,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-border"
+            "WEB": "--eds-color-theme-border-default"
           }
         }
       }
@@ -708,9 +708,9 @@
         }
       }
     },
-    "accent": {
+    "accent-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.border-accent}",
+      "$value": "{eds.color.theme.border-accent-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -719,7 +719,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-border-accent"
+            "WEB": "--eds-color-theme-border-accent-default"
           }
         }
       }
@@ -756,9 +756,9 @@
         }
       }
     },
-    "info": {
+    "info-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.border-info}",
+      "$value": "{eds.color.theme.border-info-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -767,7 +767,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-border-info"
+            "WEB": "--eds-color-theme-border-info-default"
           }
         }
       }
@@ -788,9 +788,9 @@
         }
       }
     },
-    "success": {
+    "success-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.border-success}",
+      "$value": "{eds.color.theme.border-success-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -820,9 +820,9 @@
         }
       }
     },
-    "warning": {
+    "warning-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.border-warning}",
+      "$value": "{eds.color.theme.border-warning-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -831,7 +831,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-border-warning"
+            "WEB": "--eds-color-theme-border-warning-default"
           }
         }
       }
@@ -852,9 +852,9 @@
         }
       }
     },
-    "danger": {
+    "danger-default": {
       "$type": "color",
-      "$value": "{eds.color.theme.border-danger}",
+      "$value": "{eds.color.theme.border-danger-default}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -863,7 +863,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-color-theme-border-danger"
+            "WEB": "--eds-color-theme-border-danger-default"
           }
         }
       }

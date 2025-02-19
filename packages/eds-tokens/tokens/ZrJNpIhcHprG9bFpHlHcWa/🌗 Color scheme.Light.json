@@ -2,7 +2,7 @@
   "eds": {
     "color": {
       "theme": {
-        "background": {
+        "background-default": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.background-default}",
           "$description": "The header, footer, toolbars, panels, and primary content use the background color",
@@ -26,7 +26,7 @@
             }
           }
         },
-        "background-neutral": {
+        "background-neutral-default": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.surface-default}",
           "$description": "",
@@ -38,7 +38,7 @@
             }
           }
         },
-        "background-neutral-hover": {
+        "background-neutral-default-hover": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.surface-hover}",
           "$description": "",
@@ -50,7 +50,7 @@
             }
           }
         },
-        "background-neutral-active": {
+        "background-neutral-default-active": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.surface-active}",
           "$description": "",
@@ -98,7 +98,7 @@
             }
           }
         },
-        "background-accent": {
+        "background-accent-default": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.light.surface-default}",
           "$description": "",
@@ -110,7 +110,7 @@
             }
           }
         },
-        "background-accent-hover": {
+        "background-accent-default-hover": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.light.surface-hover}",
           "$description": "",
@@ -122,7 +122,7 @@
             }
           }
         },
-        "background-accent-active": {
+        "background-accent-default-active": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.light.surface-active}",
           "$description": "",
@@ -170,7 +170,7 @@
             }
           }
         },
-        "background-danger": {
+        "background-danger-default": {
           "$type": "color",
           "$value": "{eds.color.brand.red.light.surface-default}",
           "$description": "",
@@ -182,7 +182,7 @@
             }
           }
         },
-        "background-danger-hover": {
+        "background-danger-default-hover": {
           "$type": "color",
           "$value": "{eds.color.brand.red.light.surface-hover}",
           "$description": "",
@@ -194,7 +194,7 @@
             }
           }
         },
-        "background-danger-active": {
+        "background-danger-default-active": {
           "$type": "color",
           "$value": "{eds.color.brand.red.light.surface-active}",
           "$description": "",
@@ -242,7 +242,7 @@
             }
           }
         },
-        "background-info": {
+        "background-info-default": {
           "$type": "color",
           "$value": "{eds.color.brand.blue.light.surface-default}",
           "$description": "",
@@ -266,7 +266,7 @@
             }
           }
         },
-        "background-success": {
+        "background-success-default": {
           "$type": "color",
           "$value": "{eds.color.brand.green.light.surface-default}",
           "$description": "",
@@ -290,7 +290,7 @@
             }
           }
         },
-        "background-warning": {
+        "background-warning-default": {
           "$type": "color",
           "$value": "{eds.color.brand.orange.light.surface-default}",
           "$description": "",
@@ -314,7 +314,7 @@
             }
           }
         },
-        "text": {
+        "text-default": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.text-default}",
           "$description": "",
@@ -362,7 +362,7 @@
             }
           }
         },
-        "text-accent": {
+        "text-accent-default": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.light.text-default}",
           "$description": "",
@@ -386,7 +386,7 @@
             }
           }
         },
-        "text-warning": {
+        "text-warning-default": {
           "$type": "color",
           "$value": "{eds.color.brand.orange.light.text-default}",
           "$description": "",
@@ -410,7 +410,7 @@
             }
           }
         },
-        "text-danger": {
+        "text-danger-default": {
           "$type": "color",
           "$value": "{eds.color.brand.red.light.text-default}",
           "$description": "",
@@ -434,7 +434,7 @@
             }
           }
         },
-        "text-success": {
+        "text-success-default": {
           "$type": "color",
           "$value": "{eds.color.brand.green.light.text-default}",
           "$description": "",
@@ -458,7 +458,7 @@
             }
           }
         },
-        "text-info": {
+        "text-info-default": {
           "$type": "color",
           "$value": "{eds.color.brand.blue.light.text-default}",
           "$description": "",
@@ -482,7 +482,7 @@
             }
           }
         },
-        "border": {
+        "border-default": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.border-default}",
           "$description": "",
@@ -530,7 +530,7 @@
             }
           }
         },
-        "border-accent": {
+        "border-accent-default": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.light.border-default}",
           "$description": "",
@@ -566,7 +566,7 @@
             }
           }
         },
-        "border-danger": {
+        "border-danger-default": {
           "$type": "color",
           "$value": "{eds.color.brand.red.light.border-default}",
           "$description": "",
@@ -590,7 +590,7 @@
             }
           }
         },
-        "border-warning": {
+        "border-warning-default": {
           "$type": "color",
           "$value": "{eds.color.brand.orange.light.border-default}",
           "$description": "",
@@ -614,7 +614,7 @@
             }
           }
         },
-        "border-success": {
+        "border-success-default": {
           "$type": "color",
           "$value": "{eds.color.brand.green.light.border-default}",
           "$description": "",
@@ -638,7 +638,7 @@
             }
           }
         },
-        "border-info": {
+        "border-info-default": {
           "$type": "color",
           "$value": "{eds.color.brand.blue.light.border-default}",
           "$description": "",
