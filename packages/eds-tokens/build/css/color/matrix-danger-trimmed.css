@@ -11,8 +11,8 @@
   --eds-color-border-subtle: light-dark(#ebaab9, #a50328);
   --eds-color-border-default: light-dark(#d64f6e, #d54a6a);
   --eds-color-border-strong: light-dark(#c40330, #e3879c);
-  --eds-color-text-default: light-dark(#9f0227, #e3879d);
   --eds-color-text-subtle: light-dark(#c40330, #dc6883);
+  --eds-color-text-default: light-dark(#9f0227, #e3879d);
   --eds-color-base-default: light-dark(#7d021f, #eaa5b5);
   --eds-color-base-hover: light-dark(#c40330, #e3879c);
   --eds-color-base-active: light-dark(#5e0117, #f7dfe4);

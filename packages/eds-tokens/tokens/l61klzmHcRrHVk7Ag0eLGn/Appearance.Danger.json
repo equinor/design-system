@@ -10,7 +10,7 @@
           "ALL_SCOPES"
         ],
         "codeSyntax": {
-          "WEB": "--background-default"
+          "WEB": "--eds-color-background-default"
         }
       }
     }
@@ -26,7 +26,7 @@
           "ALL_SCOPES"
         ],
         "codeSyntax": {
-          "WEB": "--background-subtle"
+          "WEB": "--eds-color-background-subtle"
         }
       }
     }
@@ -41,7 +41,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-surface-default"
+        }
       }
     }
   },
@@ -55,7 +57,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-surface-hover"
+        }
       }
     }
   },
@@ -69,7 +73,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-surface-active"
+        }
       }
     }
   },
@@ -83,7 +89,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-border-subtle"
+        }
       }
     }
   },
@@ -98,7 +106,7 @@
           "ALL_SCOPES"
         ],
         "codeSyntax": {
-          "WEB": "--border-default"
+          "WEB": "--eds-color-border-default"
         }
       }
     }
@@ -113,21 +121,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
-      }
-    }
-  },
-  "text-default": {
-    "$type": "color",
-    "$value": "{danger.text-default}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-border-strong"
+        }
       }
     }
   },
@@ -141,7 +137,25 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-text-subtle"
+        }
+      }
+    }
+  },
+  "text-default": {
+    "$type": "color",
+    "$value": "{danger.text-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "--eds-color-text-default"
+        }
       }
     }
   },
@@ -155,7 +169,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-base-default"
+        }
       }
     }
   },
@@ -169,7 +185,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-base-hover"
+        }
       }
     }
   },
@@ -183,7 +201,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-base-active"
+        }
       }
     }
   },
@@ -197,7 +217,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-contrast-subtle"
+        }
       }
     }
   },
@@ -211,7 +233,9 @@
         "scopes": [
           "ALL_SCOPES"
         ],
-        "codeSyntax": {}
+        "codeSyntax": {
+          "WEB": "--eds-color-contrast-default"
+        }
       }
     }
   }
