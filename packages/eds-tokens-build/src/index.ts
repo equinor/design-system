@@ -49,7 +49,10 @@ export async function run() {
 }
 
 async function createClassicColorVariables() {
-  const darkColorSchemeCollectionFile = '02 🌗 Color scheme.Dark.json'
+  const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
+  const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
+  const primitiveColorCollectionFile = 'Brand.Mode 1.json'
+
   const darkTokens = readJsonFiles([
     path.join(
       TOKENS_DIR_FILE_PATH,
@@ -70,19 +73,19 @@ async function createClassicColorVariables() {
   )
   const COLOR_PRIMITIVE_SOURCE = path.join(
     COLOR_TOKENS_DIR,
-    '01 🎨 Colors.Mode 1.json',
+    primitiveColorCollectionFile,
   )
   console.info('COLOR_PRIMITIVE_SOURCE:', COLOR_PRIMITIVE_SOURCE)
   console.info('File exists:', fs.existsSync(COLOR_PRIMITIVE_SOURCE))
 
   const COLOR_LIGHT_SOURCE = path.join(
     COLOR_TOKENS_DIR,
-    '02 🌗 Color scheme.Light.json',
+    lightColorSchemeCollectionFile,
   )
 
   const COLOR_DARK_SOURCE = path.join(
     COLOR_TOKENS_DIR,
-    '02 🌗 Color scheme.Dark.json',
+    darkColorSchemeCollectionFile,
   )
 
   const primitives = _extend({

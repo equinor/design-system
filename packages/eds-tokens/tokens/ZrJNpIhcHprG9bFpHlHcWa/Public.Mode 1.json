@@ -1,6 +1,6 @@
 {
-  "Default": {
-    "text": {
+  "Text & Icon": {
+    "default": {
       "$type": "color",
       "$value": "{eds.color.theme.text}",
       "$description": "Used for text and icons",
@@ -16,40 +16,6 @@
         }
       }
     },
-    "background": {
-      "$type": "color",
-      "$value": "{eds.color.theme.background}",
-      "$description": "The header, footer, toolbars, panels, and primary content use the background color",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "--eds-color-theme-background"
-          }
-        }
-      }
-    },
-    "border": {
-      "$type": "color",
-      "$value": "{eds.color.theme.border}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "--eds-color-theme-border"
-          }
-        }
-      }
-    }
-  },
-  "Text & Icon": {
     "subtle": {
       "$type": "color",
       "$value": "{eds.color.theme.text-subtle}",
@@ -260,6 +226,22 @@
     }
   },
   "Background": {
+    "default": {
+      "$type": "color",
+      "$value": "{eds.color.theme.background}",
+      "$description": "The header, footer, toolbars, panels, and primary content use the background color",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-background"
+          }
+        }
+      }
+    },
     "disabled": {
       "$type": "color",
       "$value": "{eds.color.theme.background-disabled}",
@@ -662,6 +644,22 @@
     }
   },
   "Border": {
+    "default": {
+      "$type": "color",
+      "$value": "{eds.color.theme.border}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-border"
+          }
+        }
+      }
+    },
     "subtle": {
       "$type": "color",
       "$value": "{eds.color.theme.border-subtle}",
