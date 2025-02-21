@@ -1,27 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 import fs from 'fs'
 import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import { outputReferencesTransformed } from 'style-dictionary/utils'
-import {
-  TOKENS_DIR_FILE_PATH,
-  colorBuildPath,
-  cssTransforms,
-  cssBuildPath,
-} from '.'
 import { includeTokenFilter } from './filter/includeTokenFilter'
 import { createLightDarkTransform } from './transform/lightDark'
 import { _extend } from './utils'
 
-export async function createClassicColorVariables() {
+export async function createClassicColorVariables({
+  tokensDir,
+  cssBuildPath,
+  colorBuildPath,
+  cssTransforms,
+}: {
+  tokensDir: string
+  cssBuildPath: string
+  colorBuildPath: string
+  cssTransforms: string[]
+}) {
   const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
   const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
   const primitiveColorCollectionFile = 'Brand.Mode 1.json'
 
   const darkTokens = readJsonFiles([
     path.join(
-      TOKENS_DIR_FILE_PATH,
+      tokensDir,
       'ZrJNpIhcHprG9bFpHlHcWa',
       darkColorSchemeCollectionFile,
     ),
@@ -33,10 +43,7 @@ export async function createClassicColorVariables() {
   })
 
   StyleDictionary.registerTransform(lightDarkTransform)
-  const COLOR_TOKENS_DIR = path.join(
-    TOKENS_DIR_FILE_PATH,
-    'ZrJNpIhcHprG9bFpHlHcWa',
-  )
+  const COLOR_TOKENS_DIR = path.join(tokensDir, 'ZrJNpIhcHprG9bFpHlHcWa')
   const COLOR_PRIMITIVE_SOURCE = path.join(
     COLOR_TOKENS_DIR,
     primitiveColorCollectionFile,

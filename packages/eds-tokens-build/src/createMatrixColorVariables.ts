@@ -1,14 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
-import { TOKENS_DIR_FILE_PATH, colorBuildPath } from '.'
 import { includeTokenFilter } from './filter/includeTokenFilter'
 import { createLightDarkTransform } from './transform/lightDark'
 import { _extend } from './utils'
 
-export async function createMatrixColorVariables() {
+export async function createMatrixColorVariables({
+  tokensDir,
+  colorBuildPath,
+}: {
+  tokensDir: string
+  colorBuildPath: string
+  cssTransforms: string[]
+}) {
   const COLOR__MATRIX_TOKENS_DIR = path.join(
-    TOKENS_DIR_FILE_PATH,
+    tokensDir,
     'l61klzmHcRrHVk7Ag0eLGn',
   )
 
@@ -30,7 +42,7 @@ export async function createMatrixColorVariables() {
 
   const COLOR_MATRIX_COLORS_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    'Colors.Mode 1.json',
+    'Brand.Mode 1.json',
   )
 
   const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(

@@ -1,15 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import { outputReferencesTransformed } from 'style-dictionary/utils'
-import {
-  TOKENS_DIR_FILE_PATH,
-  FILE_KEY_SPACING,
-  FILE_KEY_TYPOGRAPHY_MODES,
-  cssTransforms,
-  cssBuildPath,
-} from '.'
 import { includeTokenFilter } from './filter/includeTokenFilter'
 import { createDensitySpaceToggleTransform } from './transform/densitySpaceToggle'
 import { FONT_QUOTE_NAME } from './transform/fontQuote'
@@ -17,35 +16,46 @@ import { PX_FORMATTED_NAME } from './transform/pxFormatted'
 import { PX_TO_REM_NAME } from './transform/pxToRem'
 import { _extend } from './utils'
 
-export async function createSpacingAndTypographyVariables() {
+export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
+export const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
+
+export async function createSpacingAndTypographyVariables({
+  tokensDir,
+  cssBuildPath,
+  cssTransforms,
+}: {
+  tokensDir: string
+  cssBuildPath: string
+  cssTransforms: string[]
+}) {
   const prefix = 'eds'
   const spacingBuildPath = 'spacing/'
   const outputReferences = true
 
   const SPACING_PRIMITIVE_SOURCE = path.join(
-    TOKENS_DIR_FILE_PATH,
+    tokensDir,
     FILE_KEY_SPACING,
     '👾 Primitives.Value.json',
   )
   const DENSITY_FIGMA_SOURCE = path.join(
-    TOKENS_DIR_FILE_PATH,
+    tokensDir,
     FILE_KEY_SPACING,
     '⛔️ Figma.Value.json',
   )
   const DENSITY_SPACIOUS_SOURCE = path.join(
-    TOKENS_DIR_FILE_PATH,
+    tokensDir,
     FILE_KEY_TYPOGRAPHY_MODES,
     '💎 Density.Spacious.json',
   )
   const DENSITY_COMFORTABLE_SOURCE = path.join(
-    TOKENS_DIR_FILE_PATH,
+    tokensDir,
     FILE_KEY_TYPOGRAPHY_MODES,
     '💎 Density.Comfortable.json',
   )
 
   const spacingComfortableTokens = readJsonFiles([
     path.join(
-      TOKENS_DIR_FILE_PATH,
+      tokensDir,
       FILE_KEY_TYPOGRAPHY_MODES,
       '💎 Density.Comfortable.json',
     ),
