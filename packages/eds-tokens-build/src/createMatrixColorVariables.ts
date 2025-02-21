@@ -1,0 +1,142 @@
+import { readJsonFiles } from '@equinor/eds-tokens-sync'
+import path from 'path'
+import { StyleDictionary } from 'style-dictionary-utils'
+import { TOKENS_DIR_FILE_PATH, colorBuildPath } from '.'
+import { includeTokenFilter } from './filter/includeTokenFilter'
+import { createLightDarkTransform } from './transform/lightDark'
+import { _extend } from './utils'
+
+export async function createMatrixColorVariables() {
+  const COLOR__MATRIX_TOKENS_DIR = path.join(
+    TOKENS_DIR_FILE_PATH,
+    'l61klzmHcRrHVk7Ag0eLGn',
+  )
+
+  const matrixDarkColorSchemeCollectionFile = 'Color scheme.Dark.json'
+
+  const COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    matrixDarkColorSchemeCollectionFile,
+  )
+
+  const darkTokenMatrix = readJsonFiles([COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE])
+
+  const lightDarkMatrixTransform = createLightDarkTransform({
+    name: 'lightDarkMatrix',
+    darkTokensObject: darkTokenMatrix[matrixDarkColorSchemeCollectionFile],
+  })
+
+  StyleDictionary.registerTransform(lightDarkMatrixTransform)
+
+  const COLOR_MATRIX_COLORS_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Colors.Mode 1.json',
+  )
+
+  const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Color scheme.Light.json',
+  )
+
+  const COLOR_MATRIX_ACCENT_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Appearance.Accent.json',
+  )
+
+  const transforms = ['name/kebab', 'color/css', 'lightDarkMatrix']
+  const outputReferences = false
+  const include = [
+    COLOR_MATRIX_COLORS_SOURCE,
+    COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
+  ]
+  const prefix = 'eds/color'
+
+  const accent = _extend({
+    source: [COLOR_MATRIX_ACCENT_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Accent']),
+    fileName: 'matrix-accent',
+    selector: '[data-color-appearance="accent"]',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await accent.buildAllPlatforms()
+
+  const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
+    COLOR__MATRIX_TOKENS_DIR,
+    'Appearance.Neutral.json',
+  )
+
+  const natural = _extend({
+    source: [COLOR_MATRIX_NEUTRAL_SOURCE],
+    filter: (token) => includeTokenFilter(token, ['Neutral']),
+    fileName: 'matrix-neutral',
+    selector: ':root, [data-color-appearance="neutral"]',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await natural.buildAllPlatforms()
+
+  const danger = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Danger.json')],
+    filter: (token) => includeTokenFilter(token, ['Danger']),
+    fileName: 'matrix-danger',
+    selector: '[data-color-appearance="danger"]',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await danger.buildAllPlatforms()
+
+  const success = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Success.json')],
+    filter: (token) => includeTokenFilter(token, ['Success']),
+    fileName: 'matrix-success',
+    selector: '[data-color-appearance="success"]',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await success.buildAllPlatforms()
+
+  const warning = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Warning.json')],
+    filter: (token) => includeTokenFilter(token, ['Warning']),
+    fileName: 'matrix-warning',
+    selector: '[data-color-appearance="warning"]',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await warning.buildAllPlatforms()
+
+  const info = _extend({
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Info.json')],
+    filter: (token) => includeTokenFilter(token, ['Info']),
+    fileName: 'matrix-info',
+    selector: '[data-color-appearance="info"]',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  await info.buildAllPlatforms()
+}

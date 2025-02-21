@@ -35,7 +35,7 @@
     "on-strong": {
       "$type": "color",
       "$value": "{eds.color.theme.text-on-strong}",
-      "$description": "Used for text and icons",
+      "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
