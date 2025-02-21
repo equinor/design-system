@@ -24,7 +24,8 @@ export async function createMatrixColorVariables({
     'l61klzmHcRrHVk7Ag0eLGn',
   )
 
-  const matrixDarkColorSchemeCollectionFile = 'Color scheme.Dark.json'
+  const matrixDarkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
+  const matrixLightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
 
   const COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
@@ -47,12 +48,12 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    'Color scheme.Light.json',
+    matrixLightColorSchemeCollectionFile,
   )
 
   const COLOR_MATRIX_ACCENT_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    'Appearance.Accent.json',
+    '🎨 Appearance.Accent.json',
   )
 
   const transforms = ['name/kebab', 'color/css', 'lightDarkMatrix']
@@ -79,7 +80,7 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    'Appearance.Neutral.json',
+    '🎨 Appearance.Neutral.json',
   )
 
   const natural = _extend({
@@ -97,7 +98,7 @@ export async function createMatrixColorVariables({
   await natural.buildAllPlatforms()
 
   const danger = _extend({
-    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Danger.json')],
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, '🎨 Appearance.Danger.json')],
     filter: (token) => includeTokenFilter(token, ['Danger']),
     fileName: 'matrix-danger',
     selector: '[data-color-appearance="danger"]',
@@ -111,7 +112,7 @@ export async function createMatrixColorVariables({
   await danger.buildAllPlatforms()
 
   const success = _extend({
-    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Success.json')],
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, '🎨 Appearance.Success.json')],
     filter: (token) => includeTokenFilter(token, ['Success']),
     fileName: 'matrix-success',
     selector: '[data-color-appearance="success"]',
@@ -125,7 +126,7 @@ export async function createMatrixColorVariables({
   await success.buildAllPlatforms()
 
   const warning = _extend({
-    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Warning.json')],
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, '🎨 Appearance.Warning.json')],
     filter: (token) => includeTokenFilter(token, ['Warning']),
     fileName: 'matrix-warning',
     selector: '[data-color-appearance="warning"]',
@@ -139,7 +140,7 @@ export async function createMatrixColorVariables({
   await warning.buildAllPlatforms()
 
   const info = _extend({
-    source: [path.join(COLOR__MATRIX_TOKENS_DIR, 'Appearance.Info.json')],
+    source: [path.join(COLOR__MATRIX_TOKENS_DIR, '🎨 Appearance.Info.json')],
     filter: (token) => includeTokenFilter(token, ['Info']),
     fileName: 'matrix-info',
     selector: '[data-color-appearance="info"]',
