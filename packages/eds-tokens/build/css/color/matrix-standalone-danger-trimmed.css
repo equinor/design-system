@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-danger-background-default: light-dark(#fffefe, #3a0909);
+  --eds-color-danger-background-subtle: light-dark(#fdf0f0, #4a0b0b);
+  --eds-color-danger-surface-default: light-dark(#fadcdc, #620f0f);
+  --eds-color-danger-surface-hover: light-dark(#f6c6c6, #7c1212);
+  --eds-color-danger-surface-active: light-dark(#f3b0b0, #951616);
+  --eds-color-danger-border-subtle: light-dark(#f2a7a7, #a21818);
+  --eds-color-danger-border-default: light-dark(#e34545, #e33f3f);
+  --eds-color-danger-border-strong: light-dark(#be1c1c, #ec8181);
+  --eds-color-danger-text-subtle: light-dark(#be1c1c, #ec8181);
+  --eds-color-danger-text-default: light-dark(#5a0d0d, #fadcdc);
+  --eds-color-danger-base-default: light-dark(#de2121, #e33f3f);
+  --eds-color-danger-base-hover: light-dark(#b91c1c, #e96868);
+  --eds-color-danger-base-active: light-dark(#951616, #ee8a8a);
+  --eds-color-danger-contrast-subtle: light-dark(#fef6f6, #100505);
+  --eds-color-danger-contrast-default: light-dark(#ffffff, #000000);
+}

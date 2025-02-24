@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-warning-background-default: light-dark(#fefefd, #2a1700);
+  --eds-color-warning-background-subtle: light-dark(#f8f3ed, #351e00);
+  --eds-color-warning-surface-default: light-dark(#ede1d1, #492800);
+  --eds-color-warning-surface-hover: light-dark(#e2ceb6, #5d3300);
+  --eds-color-warning-surface-active: light-dark(#d8bd9c, #723f00);
+  --eds-color-warning-border-subtle: light-dark(#d4b793, #7b4500);
+  --eds-color-warning-border-default: light-dark(#ab722c, #a97029);
+  --eds-color-warning-border-strong: light-dark(#915000, #c29966);
+  --eds-color-warning-text-subtle: light-dark(#915000, #c29966);
+  --eds-color-warning-text-default: light-dark(#432500, #ede1d1);
+  --eds-color-warning-base-default: light-dark(#995500, #b17e3d);
+  --eds-color-warning-base-hover: light-dark(#7d4500, #c09661);
+  --eds-color-warning-base-active: light-dark(#613600, #cead84);
+  --eds-color-warning-contrast-subtle: light-dark(#f2e9de, #1b1409);
+  --eds-color-warning-contrast-default: light-dark(#ffffff, #000000);
+}
