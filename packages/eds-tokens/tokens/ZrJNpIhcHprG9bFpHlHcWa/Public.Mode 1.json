@@ -226,6 +226,22 @@
     }
   },
   "Background": {
+    "base": {
+      "$type": "color",
+      "$value": "{eds.color.theme.background-base}",
+      "$description": "Application background color. Should be set to either html or body element.",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-background-base"
+          }
+        }
+      }
+    },
     "default": {
       "$type": "color",
       "$value": "{eds.color.theme.background-default}",
@@ -238,6 +254,22 @@
           ],
           "codeSyntax": {
             "WEB": "--eds-color-theme-background-default"
+          }
+        }
+      }
+    },
+    "elevated": {
+      "$type": "color",
+      "$value": "{eds.color.theme.background-elevated}",
+      "$description": "Background of elements with a higher elevation than the page base/default. Popover elements will appear above all other elements.Matches the base background in the light theme, as shadow alone is enough to distinguish elevation. Slightly lighter than the base background in the dark theme to provide additional distinction.",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "--eds-color-theme-background-elevated"
           }
         }
       }
@@ -886,24 +918,6 @@
     }
   },
   "Component & Pattern": {
-    "app": {
-      "background": {
-        "$type": "color",
-        "$value": "{eds.color.component.app.background}",
-        "$description": "Application background color. Should be set to either html or body element.",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "--eds-color-component-app-background"
-            }
-          }
-        }
-      }
-    },
     "input": {
       "background": {
         "$type": "color",
@@ -917,24 +931,6 @@
             ],
             "codeSyntax": {
               "WEB": "--eds-color-component-input-background"
-            }
-          }
-        }
-      }
-    },
-    "popover": {
-      "background": {
-        "$type": "color",
-        "$value": "{eds.color.component.popover.background}",
-        "$description": "Popover elements will appear above all other elements",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "--eds-color-component-popover-background"
             }
           }
         }

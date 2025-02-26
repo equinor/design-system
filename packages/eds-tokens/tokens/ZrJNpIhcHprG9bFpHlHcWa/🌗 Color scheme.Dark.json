@@ -2,10 +2,34 @@
   "eds": {
     "color": {
       "theme": {
+        "background-base": {
+          "$type": "color",
+          "$value": "{eds.color.brand.slate-gray.dark.background-default}",
+          "$description": "Application background color. Should be set to either html or body element.",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
         "background-default": {
           "$type": "color",
           "$value": "{eds.color.brand.slate-gray.dark.background-subtle}",
           "$description": "The header, footer, toolbars, panels, and primary content use the background color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-elevated": {
+          "$type": "color",
+          "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
+          "$description": "Popover elements will appear above all other elements",
           "$extensions": {
             "com.figma": {
               "hiddenFromPublishing": true,
@@ -664,39 +688,11 @@
         }
       },
       "component": {
-        "app": {
-          "background": {
-            "$type": "color",
-            "$value": "{eds.color.brand.slate-gray.dark.background-default}",
-            "$description": "Application background color. Should be set to either html or body element.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": true,
-                "scopes": [],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
         "input": {
           "background": {
             "$type": "color",
             "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
             "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": true,
-                "scopes": [],
-                "codeSyntax": {}
-              }
-            }
-          }
-        },
-        "popover": {
-          "background": {
-            "$type": "color",
-            "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
-            "$description": "Popover elements will appear above all other elements",
             "$extensions": {
               "com.figma": {
                 "hiddenFromPublishing": true,
