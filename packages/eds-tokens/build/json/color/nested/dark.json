@@ -2,7 +2,9 @@
   "eds": {
     "color": {
       "theme": {
+        "background-base": "#161c20",
         "background-default": "#1d242a",
+        "background-elevated": "#273139",
         "background-disabled": "#717e87",
         "background-neutral-default": "#273139",
         "background-neutral-default-hover": "#323f48",
@@ -59,13 +61,7 @@
         "border-info-subtle": "#035783"
       },
       "component": {
-        "app": {
-          "background": "#161c20"
-        },
         "input": {
-          "background": "#273139"
-        },
-        "popover": {
           "background": "#273139"
         },
         "backdrop": {

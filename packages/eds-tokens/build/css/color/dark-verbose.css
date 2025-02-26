@@ -3,7 +3,9 @@
  */
 
 [data-color-scheme="dark"] {
+  --eds-color-theme-background-base: var(--eds-color-brand-slate-gray-dark-background-default); /* Application background color. Should be set to either html or body element. */
   --eds-color-theme-background-default: var(--eds-color-brand-slate-gray-dark-background-subtle); /* The header, footer, toolbars, panels, and primary content use the background color */
+  --eds-color-theme-background-elevated: var(--eds-color-brand-slate-gray-dark-surface-default); /* Popover elements will appear above all other elements */
   --eds-color-theme-background-disabled: var(--eds-color-brand-slate-gray-dark-border-default);
   --eds-color-theme-background-neutral-default: var(--eds-color-brand-slate-gray-dark-surface-default);
   --eds-color-theme-background-neutral-default-hover: var(--eds-color-brand-slate-gray-dark-surface-hover);
@@ -58,9 +60,7 @@
   --eds-color-theme-border-success-subtle: var(--eds-color-brand-green-dark-border-subtle);
   --eds-color-theme-border-info-default: var(--eds-color-brand-blue-dark-border-default);
   --eds-color-theme-border-info-subtle: var(--eds-color-brand-blue-dark-border-subtle);
-  --eds-color-component-app-background: var(--eds-color-brand-slate-gray-dark-background-default); /* Application background color. Should be set to either html or body element. */
   --eds-color-component-input-background: var(--eds-color-brand-slate-gray-dark-surface-default);
-  --eds-color-component-popover-background: var(--eds-color-brand-slate-gray-dark-surface-default); /* Popover elements will appear above all other elements */
   --eds-color-component-backdrop-background: var(--eds-color-brand-slate-gray-dark-background-subtle); /* The color of the mask overlay that appears when you enter a modal state. */
   --eds-color-component-focus-border: var(--eds-color-brand-blue-dark-border-default);
 }

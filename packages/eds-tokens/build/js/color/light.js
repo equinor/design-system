@@ -2,7 +2,9 @@
  * Do not edit directly, this file was auto-generated.
  */
 
+export const EDS_COLOR_THEME_BACKGROUND_BASE = "#f2f2f2"; // Application background color. Should be set to either html or body element.
 export const EDS_COLOR_THEME_BACKGROUND_DEFAULT = "#fefefe"; // The header, footer, toolbars, panels, and primary content use the background color
+export const EDS_COLOR_THEME_BACKGROUND_ELEVATED = "#fefefe"; // Popover elements will appear above all other elements
 export const EDS_COLOR_THEME_BACKGROUND_DISABLED = "#7f7f7f";
 export const EDS_COLOR_THEME_BACKGROUND_NEUTRAL_DEFAULT = "#e2e2e2";
 export const EDS_COLOR_THEME_BACKGROUND_NEUTRAL_DEFAULT_HOVER = "#d0d0d0";
@@ -57,8 +59,6 @@ export const EDS_COLOR_THEME_BORDER_SUCCESS_DEFAULT = "#4e8d4d";
 export const EDS_COLOR_THEME_BORDER_SUCCESS_SUBTLE = "#a4c4a3";
 export const EDS_COLOR_THEME_BORDER_INFO_DEFAULT = "#2686b8";
 export const EDS_COLOR_THEME_BORDER_INFO_SUBTLE = "#92c2db";
-export const EDS_COLOR_COMPONENT_APP_BACKGROUND = "#f2f2f2"; // Application background color. Should be set to either html or body element.
 export const EDS_COLOR_COMPONENT_INPUT_BACKGROUND = "#f2f2f2";
-export const EDS_COLOR_COMPONENT_POPOVER_BACKGROUND = "#fefefe"; // Popover elements will appear above all other elements
 export const EDS_COLOR_COMPONENT_BACKDROP_BACKGROUND = "#7f7f7f"; // The color of the mask overlay that appears when you enter a modal state.
 export const EDS_COLOR_COMPONENT_FOCUS_BORDER = "#2686b8";
