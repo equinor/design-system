@@ -1,25 +1,35 @@
 {
   "name": "@equinor/eds-tokens-sync",
-  "private": true,
   "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system",
+    "directory": "packages/eds-tokens-build"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
+  },
   "type": "module",
   "files": [
     "bin",
     "dist"
   ],
-  "types": "dist/main.d.ts",
-  "main": "dist/main.umd.cjs",
-  "module": "dist/main.js",
+  "types": "./dist/main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js"
     }
   },
   "bin": {
-    "sync-figma-to-tokens": "bin/sync-figma-to-tokens.js",
-    "sync-tokens-to-figma": "bin/sync-tokens-to-figma.js"
+    "sync-figma-to-tokens": "./bin/sync-figma-to-tokens.js",
+    "sync-tokens-to-figma": "./bin/sync-tokens-to-figma.js"
   },
   "scripts": {
     "dev": "vite",

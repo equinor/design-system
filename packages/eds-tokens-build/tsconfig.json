@@ -5,18 +5,19 @@
     "module": "ESNext",
     "lib": ["ES2021"],
     "skipLibCheck": true,
-    "declaration": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "outDir": "./dist"
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/*.ts"]
+  "include": ["src"]
 }

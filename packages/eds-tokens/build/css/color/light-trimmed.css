@@ -1,0 +1,66 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-color-scheme="light"] {
+  --eds-color-theme-background-base: #f2f2f2; /* Application background color. Should be set to either html or body element. */
+  --eds-color-theme-background-default: #fefefe; /* The header, footer, toolbars, panels, and primary content use the background color */
+  --eds-color-theme-background-elevated: #fefefe; /* Popover elements will appear above all other elements */
+  --eds-color-theme-background-disabled: #7f7f7f;
+  --eds-color-theme-background-neutral-default: #e2e2e2;
+  --eds-color-theme-background-neutral-default-hover: #d0d0d0;
+  --eds-color-theme-background-neutral-default-active: #c1c1c1;
+  --eds-color-theme-background-neutral-strong: #565656;
+  --eds-color-theme-background-neutral-strong-hover: #434343;
+  --eds-color-theme-background-neutral-strong-active: #323232;
+  --eds-color-theme-background-accent-default: #d2e6e7;
+  --eds-color-theme-background-accent-default-hover: #b8d7da;
+  --eds-color-theme-background-accent-default-active: #9ec8cc;
+  --eds-color-theme-background-accent-strong: #007079;
+  --eds-color-theme-background-accent-strong-hover: #005b62;
+  --eds-color-theme-background-accent-strong-active: #00474d;
+  --eds-color-theme-background-danger-default: #fadcdc;
+  --eds-color-theme-background-danger-default-hover: #f6c6c6;
+  --eds-color-theme-background-danger-default-active: #f3b0b0;
+  --eds-color-theme-background-danger-strong: #de2121;
+  --eds-color-theme-background-danger-strong-hover: #b91c1c;
+  --eds-color-theme-background-danger-strong-active: #951616;
+  --eds-color-theme-background-info-default: #d2e6f0;
+  --eds-color-theme-background-info-strong: #0473ad;
+  --eds-color-theme-background-success-default: #d8e6d8;
+  --eds-color-theme-background-success-strong: #317a2f;
+  --eds-color-theme-background-warning-default: #ede1d1;
+  --eds-color-theme-background-warning-strong: #995500;
+  --eds-color-theme-text-default: #2c2c2c;
+  --eds-color-theme-text-subtle: #616161;
+  --eds-color-theme-text-on-strong: #ffffff;
+  --eds-color-theme-text-disabled: #7f7f7f;
+  --eds-color-theme-text-accent-default: #003236;
+  --eds-color-theme-text-accent-subtle: #006b74;
+  --eds-color-theme-text-warning-default: #432500;
+  --eds-color-theme-text-warning-subtle: #915000;
+  --eds-color-theme-text-danger-default: #5a0d0d;
+  --eds-color-theme-text-danger-subtle: #be1c1c;
+  --eds-color-theme-text-success-default: #143213;
+  --eds-color-theme-text-success-subtle: #2c6e2a;
+  --eds-color-theme-text-info-default: #022f47;
+  --eds-color-theme-text-info-subtle: #046699;
+  --eds-color-theme-border-default: #7f7f7f;
+  --eds-color-theme-border-subtle: #bbbbbb;
+  --eds-color-theme-border-strong: #616161;
+  --eds-color-theme-border-disabled: #bbbbbb;
+  --eds-color-theme-border-accent-default: #2f8a92;
+  --eds-color-theme-border-accent-subtle: #95c4c7;
+  --eds-color-theme-border-accent-strong: #006b74;
+  --eds-color-theme-border-danger-default: #e34545;
+  --eds-color-theme-border-danger-subtle: #f2a7a7;
+  --eds-color-theme-border-warning-default: #ab722c;
+  --eds-color-theme-border-warning-subtle: #d4b793;
+  --eds-color-theme-border-success-default: #4e8d4d;
+  --eds-color-theme-border-success-subtle: #a4c4a3;
+  --eds-color-theme-border-info-default: #2686b8;
+  --eds-color-theme-border-info-subtle: #92c2db;
+  --eds-color-component-input-background: #f2f2f2;
+  --eds-color-component-backdrop-background: #7f7f7f; /* The color of the mask overlay that appears when you enter a modal state. */
+  --eds-color-component-focus-border: #2686b8;
+}

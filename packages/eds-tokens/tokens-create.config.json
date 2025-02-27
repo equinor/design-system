@@ -1,0 +1,25 @@
+{
+  "outDir": "./tokens-create",
+  "themes": {
+    "eds": {
+      "colors": {
+        "main": {
+          "accent": "#006c75"
+        },
+        "support": {
+          "success": "#2c6f2b",
+          "info": "#04679a",
+          "warning": "#935100",
+          "error": "#c40330",
+          "neutral-light": "#616161",
+          "neutral-dark": "#54636e"
+        },
+        "neutral": "#616161"
+      },
+      "typography": {
+        "fontFamily": "Inter"
+      },
+      "borderRadius": 4
+    }
+  }
+}

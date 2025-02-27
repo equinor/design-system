@@ -1,0 +1,17 @@
+{
+  "background-default": "#fffefe",
+  "background-subtle": "#fdf0f0",
+  "surface-default": "#fadcdc",
+  "surface-hover": "#f6c6c6",
+  "surface-active": "#f3b0b0",
+  "border-subtle": "#f2a7a7",
+  "border-default": "#e34545",
+  "border-strong": "#be1c1c",
+  "text-subtle": "#be1c1c",
+  "text-default": "#5a0d0d",
+  "base-default": "#de2121",
+  "base-hover": "#b91c1c",
+  "base-active": "#951616",
+  "contrast-subtle": "#fef6f6",
+  "contrast-default": "#ffffff"
+}

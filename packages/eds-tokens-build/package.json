@@ -1,18 +1,6 @@
 {
   "name": "@equinor/eds-tokens-build",
   "version": "1.0.0",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "bin": {
-    "eds-tokens-build": "bin/eds-tokens-build.js"
-  },
-  "types": "./dist/index.d.ts",
-  "module": "dist/index.js",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
@@ -27,14 +15,27 @@
   "bugs": {
     "url": "https://github.com/equinor/design-system/issues"
   },
+  "type": "module",
   "files": [
-    "dist/*"
+    "bin",
+    "dist"
   ],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/eds-tokens-build.js"
+    }
+  },
+  "bin": {
+    "eds-tokens-build": "bin/eds-tokens-build.js"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc",
+    "build": "pnpm run type-check && vite build",
     "prettier": "prettier ./src --write",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@equinor/eds-tokens-sync": "workspace:*",
@@ -42,7 +43,9 @@
     "prettier": "3.4.2",
     "style-dictionary": "^4.3.0",
     "style-dictionary-utils": "^4.0.3",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vite": "^5.4.6",
+    "vite-plugin-dts": "^3.9.1"
   },
   "engines": {
     "pnpm": ">=8",

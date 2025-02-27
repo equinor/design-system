@@ -7,39 +7,22 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   build: {
     lib: {
-      name: 'eds-tokens-sync',
-      entry: [
-        resolve(__dirname, 'src/main.ts'),
-        resolve(__dirname, 'src/scripts/sync_figma_to_tokens.ts'),
-        resolve(__dirname, 'src/scripts/sync_tokens_to_figma.ts'),
-      ],
+      entry: {
+        main: resolve(__dirname, 'src/main.ts'),
+        sync_figma_to_tokens: resolve(
+          __dirname,
+          'src/scripts/sync_figma_to_tokens.ts',
+        ),
+        sync_tokens_to_figma: resolve(
+          __dirname,
+          'src/scripts/sync_tokens_to_figma.ts',
+        ),
+      },
+      formats: ['es'],
     },
     rollupOptions: {
-      external: [
-        '@figma/rest-api-spec',
-        'dotenv',
-        'axios',
-        'fs',
-        'path',
-        'os',
-        'crypto',
-      ],
-      output: {
-        globals: {
-          '@figma/rest-api-spec': '@figma/rest-api-spec',
-          dotenv: 'dotenv',
-          axios: 'axios',
-          fs: 'fs',
-          path: 'path',
-          os: 'os',
-          crypto: 'crypto',
-        },
-      },
+      external: ['fs', 'path'], // Keep only Node.js built-ins as external
     },
   },
-  plugins: [
-    dts({
-      rollupTypes: true,
-    }),
-  ],
+  plugins: [dts({ rollupTypes: true })],
 })

@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-accent-background-default: light-dark(#fefefe, #001f22);
+  --eds-color-accent-background-subtle: light-dark(#eef5f6, #00282c);
+  --eds-color-accent-surface-default: light-dark(#d2e6e7, #00363b);
+  --eds-color-accent-surface-hover: light-dark(#b8d7da, #00454b);
+  --eds-color-accent-surface-active: light-dark(#9ec8cc, #00545b);
+  --eds-color-accent-border-subtle: light-dark(#95c4c7, #005c63);
+  --eds-color-accent-border-default: light-dark(#2f8a92, #2a878f);
+  --eds-color-accent-border-strong: light-dark(#006b74, #69abb0);
+  --eds-color-accent-text-subtle: light-dark(#006b74, #69abb0);
+  --eds-color-accent-text-default: light-dark(#003236, #d2e6e7);
+  --eds-color-accent-base-default: light-dark(#007079, #42959c);
+  --eds-color-accent-base-hover: light-dark(#005b62, #65a9ae);
+  --eds-color-accent-base-active: light-dark(#00474d, #89bdc1);
+  --eds-color-accent-contrast-subtle: light-dark(#dcebed, #0b181a);
+  --eds-color-accent-contrast-default: light-dark(#ffffff, #000000);
+}

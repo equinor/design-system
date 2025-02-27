@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-info-background-default: light-dark(#fefeff, #011d2c);
+  --eds-color-info-background-subtle: light-dark(#eaf3f8, #01263a);
+  --eds-color-info-surface-default: light-dark(#d2e6f0, #02334d);
+  --eds-color-info-surface-hover: light-dark(#b6d6e7, #024163);
+  --eds-color-info-surface-active: light-dark(#9bc7de, #035079);
+  --eds-color-info-border-subtle: light-dark(#92c2db, #035783);
+  --eds-color-info-border-default: light-dark(#2686b8, #2284b7);
+  --eds-color-info-border-strong: light-dark(#046699, #64a9cc);
+  --eds-color-info-text-subtle: light-dark(#046699, #64a9cc);
+  --eds-color-info-text-default: light-dark(#022f47, #d2e6f0);
+  --eds-color-info-base-default: light-dark(#0473ad, #2b89ba);
+  --eds-color-info-base-hover: light-dark(#035e8e, #529ec6);
+  --eds-color-info-base-active: light-dark(#034b72, #77b3d3);
+  --eds-color-info-contrast-subtle: light-dark(#eaf3f8, #050f15);
+  --eds-color-info-contrast-default: light-dark(#ffffff, #000000);
+}
