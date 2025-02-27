@@ -1,25 +1,138 @@
-# Releasing
+Follow these steps to ensure a smooth and consistent release process.
 
-## Libraries
+## 1. Create a Release Ticket
 
-### Prepare
+- Open a new release ticket (issue) in your project management tool.
+- Note the ticket/issue number for use in the release branch name.
 
-This can be done from develop or seperate release branches (before merging to develop)
+## 2. Create a New Release Branch
 
-1. Change the version-number in accordance with the magnitude of change.
-   1. If its not a `@latest` release, the type should be "dashed", for example; `0.0.0-beta` or `0.0.0-dev.20210101`.
-   2. We try to follow [semver](https://semver.org/) but are holding back major v1 until we feel its ready.
-2. Update the changelog for your library in `CHANGELOG.md`.
-   1. Follow the guide in the changelog file.
-3. Add a [release on github](https://github.com/equinor/design-system/releases) with the changes you added in `CHANGELOG.md`.
-   1. Name the release in accordance with package name and version, for example; `eds-core-react@0.8.5`
+- In your terminal, create a new branch for the release using the following command:
 
-### Publish
+  ```bash
+  git checkout -b release-[ticket/issue number]
+  ```
 
-1. Find the corresponding workflow for your library, usually prepended with "Publish \<LIBRARY NAME\>".
-2. "Run workflow" and decide if input values need to be changed.
-   1. Storybok slot: If present, choose which environment Storybook should be updated.
-      1. _Leave this input *empty* for deployment to production_
-   2. NPM tag: Choose which tag to apply to the published package
-      1. _Choose `latest` for production release_
-3. ⚠️ Check "Publish eds-\<LIBRARY NAME\> to npm" step to verify the package was actually published. **_If an existing version exists on npmjs.org, the package will not be published, but this step will still pass._**
+  - Replace `[ticket/issue number]` with the actual number. For example: `release-3692`.
+
+## 3. Generate Release Notes
+
+- Navigate to the **code** section on GitHub and go to **Releases**.
+- Click **Draft New Release**.
+
+  - **Name the Release**: Use the naming convention `eds-core-react@[version]`. Replace `[version]` with the new version number.
+  - **Tag Creation**: Select **Create a new tag on publish**.
+  - **Generate Release Notes**:
+
+    - Automatically generate the release notes.
+    - Copy and paste the generated notes into the `CHANGELOG.md` file in your new release branch.
+    - Filter out commits unrelated to the release, such as updated dev dependencies, changes to GitHub actions, etc.
+    - Review and modify the notes to match the existing format, improving commit messages if needed.
+
+  - Save the release as a **Draft**.
+
+## 4. Update the Version Number
+
+- Open the `package.json` file.
+- Update the version number to the new release version.
+
+## 5. Commit Changes
+
+- Stage the changes and commit them with a clear message:
+
+  ```bash
+  git commit -m "🔖 Release eds-core-react@[version]"
+  ```
+
+  - Replace `[version]` with the version number, e.g., `0.42.5`.
+
+## 6. Create a Pull Request (PR)
+
+- Open a pull request for the new release branch.
+- In the PR description, include a reference to the release ticket: `resolves #[ticket/issue number]`.
+
+## 7. Run GitHub Actions to Publish
+
+- Go to **GitHub Actions**.
+- Find the **Publish [package]** workflow.
+- **Run the Workflow**:
+  - Select the release branch you created.
+  - **Tag for npm**: Use `latest`.
+  - **Environment for Storybook**: Set to `production`.
+- Ensure the workflow runs successfully by reviewing the action logs.
+
+## 8. Merge Pull Request to Develop
+
+- Once the release is published successfully, merge the pull request into the `develop` branch.
+  - Include all changed packages in the release title for clarity.
+
+## 9. Publish the Release
+
+- Go back to **Releases** on GitHub.
+- Publish the release. Ensure that all packages with changes have a unique release.
+
+## 10. Update Master and Push Changes
+
+- Switch to the `master` branch:
+
+  ```bash
+  git checkout master
+  ```
+
+- Rebase `master` with the latest changes from `develop`:
+
+  ```bash
+  git rebase develop
+  ```
+
+- Push the updates to the remote repository:
+
+  ```bash
+  git push
+  ```
+
+---
+
+## 11. Verify
+
+- Verify the new version is available on [npmjs](https://www.npmjs.com/package/@equinor/eds-core-react?activeTab=versions).
+- Verify the new [storybook](https://storybook.eds.equinor.com/) is published.
+
+## 12. Celebrate
+
+- Announce the release in #eds-design-system
+  Here's a template for future release announcements:
+
+---
+
+We've just released:
+
+- **[package-name-1] v[version-number-1]**
+- **[package-name-2] v[version-number-2]**
+
+### **[Package-Name-1]:**
+
+**Added**
+
+- ✨ [Feature-1]: [Short description of the feature] by @[author]
+- ✨ [Feature-2]: [Short description of the feature] by @[author]
+
+**Fixed**
+
+- 🐛 [Fix-1]: [Short description of the fix] by @[author]
+- 🐛 [Fix-2]: [Short description of the fix] by @[author]
+
+### **[Package-Name-2]:**
+
+**Added**
+
+- ✨ [Feature-1]: [Short description of the feature] by @[author]
+
+> Note: [Include any important dependency or compatibility notes here.]
+
+---
+
+**Best,**  
+The EDS Core Team
+
+---
