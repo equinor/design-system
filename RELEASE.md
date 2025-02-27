@@ -17,11 +17,12 @@ Follow these steps to ensure a smooth and consistent release process.
 
 ## 3. Generate Release Notes
 
-- Navigate to the **code** section on GitHub and go to **Releases**.
-- Click **Draft New Release**.
+- Navigate to the **code** section on GitHub and go to [**Releases**](https://github.com/equinor/design-system/releases).
+- Click [**Draft New Release**](https://github.com/equinor/design-system/releases/new).
 
   - **Name the Release**: Use the naming convention `eds-core-react@[version]`. Replace `[version]` with the new version number.
-  - **Tag Creation**: Select **Create a new tag on publish**.
+  - **Version number** Look at the [commit history](https://github.com/equinor/design-system/commits/develop/) to define what [sem version](https://semver.org/) we should use in the release.
+  - **Tag Creation**: Select **Create a new tag on publish** and use the same value as release name.
   - **Generate Release Notes**:
 
     - Automatically generate the release notes.
@@ -29,22 +30,23 @@ Follow these steps to ensure a smooth and consistent release process.
     - Filter out commits unrelated to the release, such as updated dev dependencies, changes to GitHub actions, etc.
     - Review and modify the notes to match the existing format, improving commit messages if needed.
 
-  - Save the release as a **Draft**.
+  - Copy changelog back to release notes and save the release as a **Draft**.
 
 ## 4. Update the Version Number
 
-- Open the `package.json` file.
-- Update the version number to the new release version.
+- Open the `package.json` file and update the version number to the new release version.
 
 ## 5. Commit Changes
 
 - Stage the changes and commit them with a clear message:
+- If multiple packages are changed we should include this in the commit message. This will eventually be used as title in our pull request.
 
   ```bash
   git commit -m "🔖 Release eds-core-react@[version]"
   ```
 
   - Replace `[version]` with the version number, e.g., `0.42.5`.
+  - Push changes
 
 ## 6. Create a Pull Request (PR)
 
@@ -60,15 +62,16 @@ Follow these steps to ensure a smooth and consistent release process.
   - **Tag for npm**: Use `latest`.
   - **Environment for Storybook**: Set to `production`.
 - Ensure the workflow runs successfully by reviewing the action logs.
+- Ensure the new version is published to npm [(@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react)
 
 ## 8. Merge Pull Request to Develop
 
 - Once the release is published successfully, merge the pull request into the `develop` branch.
-  - Include all changed packages in the release title for clarity.
+  - Ensure all changed packages are included in the release title for clarity.
 
-## 9. Publish the Release
+## 9. Publish the Release on GitHub
 
-- Go back to **Releases** on GitHub.
+- Go back to [**Releases**](https://github.com/equinor/design-system/releases) on GitHub.
 - Publish the release. Ensure that all packages with changes have a unique release.
 
 ## 10. Update Master and Push Changes
