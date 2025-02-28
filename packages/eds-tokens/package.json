@@ -73,9 +73,11 @@
     "update-tokens:colors-matrix": "sync-figma-to-tokens --file-key l61klzmHcRrHVk7Ag0eLGn",
     "update-figma:colors": "sync-tokens-to-figma --file-key ZrJNpIhcHprG9bFpHlHcWa",
     "update-tokens:colors": "sync-figma-to-tokens --file-key ZrJNpIhcHprG9bFpHlHcWa",
+    "update-figma:colors:brand": "sync-tokens-to-figma --file-key 9Jody75rpiDhyTgNm3xOHd",
+    "update-tokens:colors:brand": "sync-figma-to-tokens --file-key 9Jody75rpiDhyTgNm3xOHd",
     "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
-    "update-tokens": "pnpm run update-tokens:primitives && pnpm run update-tokens:themes && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
+    "update-tokens": "pnpm run update-tokens:colors:brand && pnpm run update-tokens:colors && pnpm run update-tokens:colors-matrix && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
     "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"

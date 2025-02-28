@@ -27,7 +27,14 @@ export async function createClassicColorVariables({
 }) {
   const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
   const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
-  const primitiveColorCollectionFile = 'Brand.Mode 1.json'
+  const brandColorCollectionFile = 'Brand.Mode 1.json'
+
+  const COLOR_TOKENS_DIR = path.join(tokensDir, 'ZrJNpIhcHprG9bFpHlHcWa')
+  const COLOR_BRAND_DIR = path.join(tokensDir, '9Jody75rpiDhyTgNm3xOHd')
+  const COLOR_BRAND_SOURCE = path.join(
+    COLOR_BRAND_DIR,
+    brandColorCollectionFile,
+  )
 
   const darkTokens = readJsonFiles([
     path.join(
@@ -43,13 +50,9 @@ export async function createClassicColorVariables({
   })
 
   StyleDictionary.registerTransform(lightDarkTransform)
-  const COLOR_TOKENS_DIR = path.join(tokensDir, 'ZrJNpIhcHprG9bFpHlHcWa')
-  const COLOR_PRIMITIVE_SOURCE = path.join(
-    COLOR_TOKENS_DIR,
-    primitiveColorCollectionFile,
-  )
-  console.info('COLOR_PRIMITIVE_SOURCE:', COLOR_PRIMITIVE_SOURCE)
-  console.info('File exists:', fs.existsSync(COLOR_PRIMITIVE_SOURCE))
+
+  console.info('COLOR_BRAND_SOURCE:', COLOR_BRAND_SOURCE)
+  console.info('File exists:', fs.existsSync(COLOR_BRAND_SOURCE))
 
   const COLOR_LIGHT_SOURCE = path.join(
     COLOR_TOKENS_DIR,
@@ -62,7 +65,7 @@ export async function createClassicColorVariables({
   )
 
   const primitives = _extend({
-    source: [COLOR_PRIMITIVE_SOURCE],
+    source: [COLOR_BRAND_SOURCE],
     buildPath: colorBuildPath,
     fileName: 'primitives',
     outputReferences: false, // The primitives should not reference other tokens. This can always be false.
@@ -70,7 +73,7 @@ export async function createClassicColorVariables({
   })
 
   const lightMode = _extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_BRAND_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
     buildPath: colorBuildPath,
@@ -80,7 +83,7 @@ export async function createClassicColorVariables({
   })
 
   const darkMode = _extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_BRAND_SOURCE],
     source: [COLOR_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
     buildPath: colorBuildPath,
@@ -90,7 +93,7 @@ export async function createClassicColorVariables({
   })
 
   const lightModeTrimmed = _extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_BRAND_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Light']),
     buildPath: colorBuildPath,
@@ -100,7 +103,7 @@ export async function createClassicColorVariables({
   })
 
   const darkModeTrimmed = _extend({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_BRAND_SOURCE],
     source: [COLOR_DARK_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Dark']),
     buildPath: colorBuildPath,
@@ -110,7 +113,7 @@ export async function createClassicColorVariables({
   })
 
   const lightDarkColorsTrimmed = new StyleDictionary({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_BRAND_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
@@ -133,7 +136,7 @@ export async function createClassicColorVariables({
   })
 
   const lightDarkColorsVerbose = new StyleDictionary({
-    include: [COLOR_PRIMITIVE_SOURCE],
+    include: [COLOR_BRAND_SOURCE],
     source: [COLOR_LIGHT_SOURCE],
     platforms: {
       css: {
