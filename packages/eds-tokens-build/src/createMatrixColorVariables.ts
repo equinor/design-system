@@ -19,6 +19,13 @@ export async function createMatrixColorVariables({
   colorBuildPath: string
   cssTransforms: string[]
 }) {
+  const brandColorCollectionFile = 'Brand.Mode 1.json'
+  const COLOR_BRAND_DIR = path.join(tokensDir, '9Jody75rpiDhyTgNm3xOHd')
+  const COLOR_BRAND_SOURCE = path.join(
+    COLOR_BRAND_DIR,
+    brandColorCollectionFile,
+  )
+
   const COLOR__MATRIX_TOKENS_DIR = path.join(
     tokensDir,
     'l61klzmHcRrHVk7Ag0eLGn',
@@ -41,11 +48,6 @@ export async function createMatrixColorVariables({
 
   StyleDictionary.registerTransform(lightDarkMatrixTransform)
 
-  const COLOR_MATRIX_COLORS_SOURCE = path.join(
-    COLOR__MATRIX_TOKENS_DIR,
-    'Brand.Mode 1.json',
-  )
-
   const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
     matrixLightColorSchemeCollectionFile,
@@ -58,10 +60,7 @@ export async function createMatrixColorVariables({
 
   const transforms = ['name/kebab', 'color/css', 'lightDarkMatrix']
   const outputReferences = false
-  const include = [
-    COLOR_MATRIX_COLORS_SOURCE,
-    COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE,
-  ]
+  const include = [COLOR_BRAND_SOURCE, COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE]
   const prefix = 'eds-color'
 
   const accent = _extend({

@@ -18,7 +18,7 @@
     "build:token-sync": "pnpm --filter @equinor/eds-tokens-sync run build",
     "build:tokens-in-code": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run tokens-in-code:build",
     "update:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run update-tokens",
-    "update:tokens:colors": "pnpm --filter @equinor/eds-tokens run update-tokens:colors && pnpm --filter @equinor/eds-tokens run update-tokens:colors-matrix",
+    "update:tokens:colors": "pnpm --filter @equinor/eds-tokens run update-tokens:colors:brand && pnpm --filter @equinor/eds-tokens run update-tokens:colors && pnpm --filter @equinor/eds-tokens run update-tokens:colors-matrix",
     "update:figma:colors": "pnpm --filter @equinor/eds-tokens run update-figma:colors",
     "update:figma": "pnpm --filter @equinor/eds-tokens run update-figma",
     "build:icons": "pnpm --filter @equinor/eds-icons run build",
