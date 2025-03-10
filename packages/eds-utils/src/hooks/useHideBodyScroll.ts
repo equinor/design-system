@@ -1,39 +1,52 @@
 import { useEffect, useRef } from 'react'
 
-type Styles = {
-  overflow: string
-  paddingRight: string
+const dialogState = {
+  count: 0,
+  originalOverflow: '',
+  originalPaddingRight: '',
 }
-
 export const useHideBodyScroll = (active: boolean): void => {
-  const originalStyles = useRef<Styles | undefined>()
+  const wasActive = useRef(false)
   useEffect(() => {
     if (typeof document === 'undefined') return
-    const html = document.documentElement
+
     const { body } = document
+    const html = document.documentElement
 
-    if (active) {
-      const scrollBarWidth = window.innerWidth - html.clientWidth
-      const bodyPaddingRight =
-        parseInt(
-          window.getComputedStyle(body).getPropertyValue('padding-right'),
-        ) || 0
-      const oldStyle: Styles = {
-        overflow: body.style.overflow,
-        paddingRight: body.style.paddingRight,
+    if (active && !wasActive.current) {
+      wasActive.current = true
+
+      if (dialogState.count === 0) {
+        dialogState.originalOverflow = body.style.overflow || ''
+        dialogState.originalPaddingRight = body.style.paddingRight || ''
+        const scrollBarWidth = window.innerWidth - html.clientWidth
+        const bodyPaddingRight =
+          parseInt(
+            window.getComputedStyle(body).getPropertyValue('padding-right'),
+          ) || 0
+        body.style.overflow = 'hidden'
+        body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`
       }
-      originalStyles.current = oldStyle
+      dialogState.count += 1
+    } else if (!active && wasActive.current) {
+      wasActive.current = false
+      dialogState.count = Math.max(0, dialogState.count - 1)
 
-      body.style.overflow = 'hidden'
-      body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`
-    } else if (originalStyles.current) {
-      body.style.overflow = originalStyles.current.overflow
-      body.style.paddingRight = originalStyles.current.paddingRight
+      if (dialogState.count === 0) {
+        body.style.overflow = dialogState.originalOverflow
+        body.style.paddingRight = dialogState.originalPaddingRight
+      }
     }
-    const originalState = originalStyles.current
     return () => {
-      body.style.overflow = originalState?.overflow
-      body.style.paddingRight = originalState?.paddingRight
+      if (wasActive.current) {
+        wasActive.current = false
+        dialogState.count = Math.max(0, dialogState.count - 1)
+
+        if (dialogState.count === 0) {
+          body.style.overflow = dialogState.originalOverflow
+          body.style.paddingRight = dialogState.originalPaddingRight
+        }
+      }
     }
   }, [active])
 }
