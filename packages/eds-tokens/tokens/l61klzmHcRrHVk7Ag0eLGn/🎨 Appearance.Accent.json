@@ -167,7 +167,7 @@
       }
     }
   },
-  "text-hight-contrast": {
+  "text-high-contrast": {
     "$type": "color",
     "$value": "{accent.text-default}",
     "$description": "",

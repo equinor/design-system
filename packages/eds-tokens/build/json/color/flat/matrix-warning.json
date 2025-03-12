@@ -11,5 +11,5 @@
   "solid-component-hover": "#7d4500",
   "solid-component-active": "#613600",
   "text-low-contrast": "#915000",
-  "text-hight-contrast": "#432500"
+  "text-high-contrast": "#432500"
 }

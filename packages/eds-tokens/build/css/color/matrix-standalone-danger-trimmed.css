@@ -15,5 +15,5 @@
   --eds-color-danger-solid-component-hover: light-dark(#b91c1c, #e96868);
   --eds-color-danger-solid-component-active: light-dark(#951616, #ee8a8a);
   --eds-color-danger-text-low-contrast: light-dark(#be1c1c, #ec8181);
-  --eds-color-danger-text-hight-contrast: light-dark(#5a0d0d, #fadcdc);
+  --eds-color-danger-text-high-contrast: light-dark(#5a0d0d, #fadcdc);
 }

@@ -15,5 +15,5 @@
   --eds-color-neutral-solid-component-hover: light-dark(#434343, #7f8b93);
   --eds-color-neutral-solid-component-active: light-dark(#323232, #697781);
   --eds-color-neutral-text-low-contrast: light-dark(#616161, #99a2a8);
-  --eds-color-neutral-text-hight-contrast: light-dark(#2c2c2c, #e0e2e4);
+  --eds-color-neutral-text-high-contrast: light-dark(#2c2c2c, #e0e2e4);
 }

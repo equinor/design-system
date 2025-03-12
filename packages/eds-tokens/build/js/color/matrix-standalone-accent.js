@@ -14,4 +14,4 @@ export const SOLID_COMPONENT = "#007079";
 export const SOLID_COMPONENT_HOVER = "#005b62";
 export const SOLID_COMPONENT_ACTIVE = "#00474d";
 export const TEXT_LOW_CONTRAST = "#006b74";
-export const TEXT_HIGHT_CONTRAST = "#003236";
+export const TEXT_HIGH_CONTRAST = "#003236";

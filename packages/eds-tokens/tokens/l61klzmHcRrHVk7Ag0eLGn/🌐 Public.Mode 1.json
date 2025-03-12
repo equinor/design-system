@@ -202,7 +202,7 @@
     },
     "High contrast": {
       "$type": "color",
-      "$value": "{text-hight-contrast}",
+      "$value": "{text-high-contrast}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -229,7 +229,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--contrast)"
+            "WEB": "var(--eds-color-functional-app-level-0)"
           }
         }
       }
@@ -261,7 +261,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--surface-level-1)"
+            "WEB": "var(--eds-color-functional-surface-level-1)"
           }
         }
       }
@@ -277,7 +277,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--surface-level-2)"
+            "WEB": "var(--eds-color-functional-surface-level-2)"
           }
         }
       }
@@ -293,7 +293,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--surface-level-3)"
+            "WEB": "var(--eds-color-functional-surface-level-3)"
           }
         }
       }
@@ -309,7 +309,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--focus)"
+            "WEB": "var(--eds-color-functional-focus)"
           }
         }
       }
@@ -325,7 +325,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--link)"
+            "WEB": "var(--eds-color-functional-link)"
           }
         }
       }

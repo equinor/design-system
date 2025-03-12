@@ -15,5 +15,5 @@
   --eds-color-accent-solid-component-hover: light-dark(#005b62, #65a9ae);
   --eds-color-accent-solid-component-active: light-dark(#00474d, #89bdc1);
   --eds-color-accent-text-low-contrast: light-dark(#006b74, #69abb0);
-  --eds-color-accent-text-hight-contrast: light-dark(#003236, #d2e6e7);
+  --eds-color-accent-text-high-contrast: light-dark(#003236, #d2e6e7);
 }

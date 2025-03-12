@@ -14,4 +14,4 @@ export const SOLID_COMPONENT: string;
 export const SOLID_COMPONENT_HOVER: string;
 export const SOLID_COMPONENT_ACTIVE: string;
 export const TEXT_LOW_CONTRAST: string;
-export const TEXT_HIGHT_CONTRAST: string;
+export const TEXT_HIGH_CONTRAST: string;

@@ -61,7 +61,7 @@
   --eds-color-solid-component-hover: light-dark(#434343, #7f8b93);
   --eds-color-solid-component-active: light-dark(#323232, #697781);
   --eds-color-text-low-contrast: light-dark(#616161, #99a2a8);
-  --eds-color-text-hight-contrast: light-dark(#2c2c2c, #e0e2e4);
+  --eds-color-text-high-contrast: light-dark(#2c2c2c, #e0e2e4);
 }
 
 [data-color-appearance="accent"] {
@@ -77,7 +77,7 @@
   --eds-color-solid-component-hover: light-dark(#005b62, #65a9ae);
   --eds-color-solid-component-active: light-dark(#00474d, #89bdc1);
   --eds-color-text-low-contrast: light-dark(#006b74, #69abb0);
-  --eds-color-text-hight-contrast: light-dark(#003236, #d2e6e7);
+  --eds-color-text-high-contrast: light-dark(#003236, #d2e6e7);
 }
 
 [data-color-appearance="success"] {
@@ -93,7 +93,7 @@
   --eds-color-solid-component-hover: light-dark(#286326, #72a470);
   --eds-color-solid-component-active: light-dark(#204e1e, #8fb78e);
   --eds-color-text-low-contrast: light-dark(#2c6e2a, #7eac7d);
-  --eds-color-text-hight-contrast: light-dark(#143213, #d8e6d8);
+  --eds-color-text-high-contrast: light-dark(#143213, #d8e6d8);
 }
 
 [data-color-appearance="info"] {
@@ -109,7 +109,7 @@
   --eds-color-solid-component-hover: light-dark(#035e8e, #529ec6);
   --eds-color-solid-component-active: light-dark(#034b72, #77b3d3);
   --eds-color-text-low-contrast: light-dark(#046699, #64a9cc);
-  --eds-color-text-hight-contrast: light-dark(#022f47, #d2e6f0);
+  --eds-color-text-high-contrast: light-dark(#022f47, #d2e6f0);
 }
 
 [data-color-appearance="warning"] {
@@ -125,7 +125,7 @@
   --eds-color-solid-component-hover: light-dark(#7d4500, #c09661);
   --eds-color-solid-component-active: light-dark(#613600, #cead84);
   --eds-color-text-low-contrast: light-dark(#915000, #c29966);
-  --eds-color-text-hight-contrast: light-dark(#432500, #ede1d1);
+  --eds-color-text-high-contrast: light-dark(#432500, #ede1d1);
 }
 
 [data-color-appearance="danger"] {
@@ -141,7 +141,7 @@
   --eds-color-solid-component-hover: light-dark(#b91c1c, #e96868);
   --eds-color-solid-component-active: light-dark(#951616, #ee8a8a);
   --eds-color-text-low-contrast: light-dark(#be1c1c, #ec8181);
-  --eds-color-text-hight-contrast: light-dark(#5a0d0d, #fadcdc);
+  --eds-color-text-high-contrast: light-dark(#5a0d0d, #fadcdc);
 }
 
 :root {
