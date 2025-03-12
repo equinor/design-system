@@ -63,6 +63,26 @@ export async function createMatrixColorVariables({
   const include = [COLOR_BRAND_SOURCE, COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE]
   const prefix = 'eds-color'
 
+  const functional = _extend({
+    source: [COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE],
+    filter: (token) => {
+      console.log(token.name)
+      return (
+        token.name.includes('functional') &&
+        !token.name.includes('light') &&
+        !token.name.includes('dark')
+      )
+    },
+    fileName: 'matrix-functional',
+    prefix,
+    include,
+    buildPath: colorBuildPath,
+    outputReferences,
+    transforms,
+  })
+
+  functional.buildAllPlatforms()
+
   const accent = _extend({
     source: [COLOR_MATRIX_ACCENT_SOURCE],
     filter: (token) => includeTokenFilter(token, ['Accent']),

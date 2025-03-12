@@ -1090,5 +1090,105 @@
         }
       }
     }
+  },
+  "functional": {
+    "app-level-0": {
+      "$type": "color",
+      "$value": "{eds.color.brand.slate-gray.dark.background-default}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "surface-level-1": {
+      "$type": "color",
+      "$value": "{eds.color.brand.slate-gray.dark.background-subtle}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "surface-level-2": {
+      "$type": "color",
+      "$value": "#222b32",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "surface-level-3": {
+      "$type": "color",
+      "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "contrast": {
+      "$type": "color",
+      "$value": "#ffffff",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "focus": {
+      "$type": "color",
+      "$value": "{eds.color.brand.blue.dark.border-default}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "link": {
+      "$type": "color",
+      "$value": "{eds.color.brand.blue.dark.border-default}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "opacity-disabled": {
+      "$type": "number",
+      "$value": 30,
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
   }
 }

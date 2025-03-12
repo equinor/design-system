@@ -2,54 +2,6 @@
   "eds": {
     "color": {
       "theme": {
-        "background-base": {
-          "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.background-default}",
-          "$description": "Application background color. Should be set to either html or body element.",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "background-default": {
-          "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.background-subtle}",
-          "$description": "The header, footer, toolbars, panels, and primary content use the background color",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "background-elevated": {
-          "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
-          "$description": "Popover elements will appear above all other elements",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "background-disabled": {
-          "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.border-default}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
         "background-neutral-default": {
           "$type": "color",
           "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
@@ -278,9 +230,57 @@
             }
           }
         },
+        "background-info-default-hover": {
+          "$type": "color",
+          "$value": "{eds.color.brand.blue.dark.surface-hover}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-info-default-active": {
+          "$type": "color",
+          "$value": "{eds.color.brand.blue.dark.surface-active}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
         "background-info-strong": {
           "$type": "color",
           "$value": "{eds.color.brand.blue.dark.base-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-info-strong-hover": {
+          "$type": "color",
+          "$value": "{eds.color.brand.blue.dark.base-hover}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-info-strong-active": {
+          "$type": "color",
+          "$value": "{eds.color.brand.blue.dark.base-active}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -302,9 +302,57 @@
             }
           }
         },
+        "background-success-hover": {
+          "$type": "color",
+          "$value": "{eds.color.brand.green.dark.surface-hover}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-success-active": {
+          "$type": "color",
+          "$value": "{eds.color.brand.green.dark.surface-active}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
         "background-success-strong": {
           "$type": "color",
           "$value": "{eds.color.brand.green.dark.base-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-success-strong-hover": {
+          "$type": "color",
+          "$value": "{eds.color.brand.green.dark.base-hover}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-success-strong-active": {
+          "$type": "color",
+          "$value": "{eds.color.brand.green.dark.base-active}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -326,9 +374,57 @@
             }
           }
         },
+        "background-warning-default-hover": {
+          "$type": "color",
+          "$value": "{eds.color.brand.orange.dark.surface-hover}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-warning-default-active": {
+          "$type": "color",
+          "$value": "{eds.color.brand.orange.dark.surface-active}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
         "background-warning-strong": {
           "$type": "color",
           "$value": "{eds.color.brand.orange.dark.base-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-warning-strong-hover": {
+          "$type": "color",
+          "$value": "{eds.color.brand.orange.dark.base-hover}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "background-warning-strong-active": {
+          "$type": "color",
+          "$value": "{eds.color.brand.orange.dark.base-active}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -365,18 +461,6 @@
         "text-on-strong": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.dark.contrast-default}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "text-disabled": {
-          "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.border-default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -506,9 +590,9 @@
             }
           }
         },
-        "border-default": {
+        "border-subtle": {
           "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.border-default}",
+          "$value": "{eds.color.brand.slate-gray.dark.border-subtle}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -518,9 +602,9 @@
             }
           }
         },
-        "border-subtle": {
+        "border-default": {
           "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.border-subtle}",
+          "$value": "{eds.color.brand.slate-gray.dark.border-default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -542,9 +626,9 @@
             }
           }
         },
-        "border-disabled": {
+        "border-accent-subtle": {
           "$type": "color",
-          "$value": "{eds.color.brand.slate-gray.dark.border-subtle}",
+          "$value": "{eds.color.brand.moss-green.dark.border-subtle}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -566,33 +650,9 @@
             }
           }
         },
-        "border-accent-subtle": {
-          "$type": "color",
-          "$value": "{eds.color.brand.moss-green.dark.border-subtle}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
         "border-accent-strong": {
           "$type": "color",
           "$value": "{eds.color.brand.moss-green.dark.border-strong}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "border-danger-default": {
-          "$type": "color",
-          "$value": "{eds.color.brand.red.dark.border-default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -614,9 +674,21 @@
             }
           }
         },
-        "border-warning-default": {
+        "border-danger-default": {
           "$type": "color",
-          "$value": "{eds.color.brand.orange.dark.border-default}",
+          "$value": "{eds.color.brand.red.dark.border-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "border-danger-strong": {
+          "$type": "color",
+          "$value": "{eds.color.brand.red.dark.border-strong}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -638,9 +710,21 @@
             }
           }
         },
-        "border-success-default": {
+        "border-warning-default": {
           "$type": "color",
-          "$value": "{eds.color.brand.green.dark.border-default}",
+          "$value": "{eds.color.brand.orange.dark.border-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "border-warning-strong": {
+          "$type": "color",
+          "$value": "{eds.color.brand.orange.dark.border-strong}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -662,9 +746,21 @@
             }
           }
         },
-        "border-info-default": {
+        "border-success-default": {
           "$type": "color",
-          "$value": "{eds.color.brand.blue.dark.border-default}",
+          "$value": "{eds.color.brand.green.dark.border-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "border-success-strong": {
+          "$type": "color",
+          "$value": "{eds.color.brand.green.dark.border-strong}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -685,9 +781,99 @@
               "codeSyntax": {}
             }
           }
+        },
+        "border-info-default": {
+          "$type": "color",
+          "$value": "{eds.color.brand.blue.dark.border-default}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "border-info-strong": {
+          "$type": "color",
+          "$value": "{eds.color.brand.blue.dark.border-strong}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
         }
       },
       "component": {
+        "ui": {
+          "background": {
+            "base": {
+              "$type": "color",
+              "$value": "#0a0d0f",
+              "$description": "Application background color. Should be set to either html or body element.",
+              "$extensions": {
+                "com.figma": {
+                  "hiddenFromPublishing": true,
+                  "scopes": [],
+                  "codeSyntax": {}
+                }
+              }
+            },
+            "layer-1": {
+              "$type": "color",
+              "$value": "{eds.color.brand.slate-gray.dark.background-default}",
+              "$description": "The header, footer, toolbars, panels, and primary content can use this background color",
+              "$extensions": {
+                "com.figma": {
+                  "hiddenFromPublishing": true,
+                  "scopes": [],
+                  "codeSyntax": {}
+                }
+              }
+            },
+            "layer-2": {
+              "$type": "color",
+              "$value": "{eds.color.brand.slate-gray.dark.background-subtle}",
+              "$description": "The header, footer, toolbars, panels, and primary content can use this background color",
+              "$extensions": {
+                "com.figma": {
+                  "hiddenFromPublishing": true,
+                  "scopes": [],
+                  "codeSyntax": {}
+                }
+              }
+            },
+            "elevated": {
+              "$type": "color",
+              "$value": "{eds.color.brand.slate-gray.dark.surface-default}",
+              "$description": "Popover elements will appear above all other elements",
+              "$extensions": {
+                "com.figma": {
+                  "hiddenFromPublishing": true,
+                  "scopes": [],
+                  "codeSyntax": {}
+                }
+              }
+            }
+          }
+        },
+        "backdrop": {
+          "background": {
+            "$type": "color",
+            "$value": "{eds.color.brand.slate-gray.dark.background-subtle}",
+            "$description": "The color of the mask overlay that appears when you enter a modal state.",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
+          }
+        },
         "input": {
           "background": {
             "$type": "color",
@@ -700,13 +886,75 @@
                 "codeSyntax": {}
               }
             }
+          },
+          "border-disabled": {
+            "$type": "color",
+            "$value": "{eds.color.brand.slate-gray.dark.border-subtle}",
+            "$description": "",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
+          },
+          "text-disabled": {
+            "$type": "color",
+            "$value": "{eds.color.brand.slate-gray.dark.border-default}",
+            "$description": "",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
           }
         },
-        "backdrop": {
-          "background": {
+        "button": {
+          "background-disabled": {
             "$type": "color",
-            "$value": "{eds.color.brand.slate-gray.dark.background-subtle}",
-            "$description": "The color of the mask overlay that appears when you enter a modal state.",
+            "$value": "{eds.color.brand.slate-gray.dark.border-default}",
+            "$description": "",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
+          },
+          "border-disabled": {
+            "$type": "color",
+            "$value": "{eds.color.brand.slate-gray.dark.border-subtle}",
+            "$description": "",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
+          },
+          "text-disabled": {
+            "$type": "color",
+            "$value": "{eds.color.brand.slate-gray.dark.border-default}",
+            "$description": "",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
+          }
+        },
+        "link": {
+          "text": {
+            "$type": "color",
+            "$value": "{eds.color.brand.blue.dark.text-subtle}",
+            "$description": "",
             "$extensions": {
               "com.figma": {
                 "hiddenFromPublishing": true,
