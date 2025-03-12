@@ -1,18 +1,13 @@
 @import 'registered-properties.css';
 @import 'color-setup.css';
 
-@import 'color/matrix-standalone-neutral-trimmed.css';
-@import 'color/matrix-standalone-accent-trimmed.css';
-@import 'color/matrix-standalone-success-trimmed.css';
-@import 'color/matrix-standalone-info-trimmed.css';
-@import 'color/matrix-standalone-warning-trimmed.css';
-@import 'color/matrix-standalone-danger-trimmed.css';
-
 @import 'color/matrix-neutral-trimmed.css';
 @import 'color/matrix-accent-trimmed.css';
 @import 'color/matrix-success-trimmed.css';
 @import 'color/matrix-info-trimmed.css';
 @import 'color/matrix-warning-trimmed.css';
 @import 'color/matrix-danger-trimmed.css';
+@import 'color/matrix-functional-trimmed.css';
+
 @import 'spacing-setup.css';
 @import 'spacing/spacing-trimmed.css';

@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-functional-app-level-0: light-dark(#f2f2f2, #161c20);
+  --eds-color-functional-surface-level-1: light-dark(#ffffff, #1d242a);
+  --eds-color-functional-surface-level-2: light-dark(#ffffff, #222b32);
+  --eds-color-functional-surface-level-3: light-dark(#ffffff, #273139);
+  --eds-color-functional-contrast: light-dark(#ffffff, #ffffff);
+  --eds-color-functional-focus: light-dark(#2686b8, #2284b7);
+  --eds-color-functional-link: light-dark(#2686b8, #2284b7);
+  --eds-color-functional-opacity-disabled: 30;
+}

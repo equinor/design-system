@@ -254,6 +254,24 @@
             "contrast-subtle": "#0a1109"
           }
         }
+      },
+      "functional": {
+        "light": {
+          "app-level-0": "#f2f2f2",
+          "surface-level-1": "#ffffff",
+          "surface-level-2": "#ffffff",
+          "surface-level-3": "#ffffff",
+          "contrast": "#ffffff",
+          "disabled-opacity": 30
+        },
+        "dark": {
+          "app-level-0": "#161c20",
+          "surface-level-1": "#1d242a",
+          "surface-level-2": "#222b32",
+          "surface-level-3": "#273139",
+          "contrast": "#ffffff",
+          "disabled-opacity": 30
+        }
       }
     }
   }

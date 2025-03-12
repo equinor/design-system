@@ -251,6 +251,18 @@
   --eds-color-brand-green-dark-text-default: #d8e6d8;
   --eds-color-brand-green-dark-contrast-default: #000;
   --eds-color-brand-green-dark-contrast-subtle: #0a1109;
+  --eds-color-functional-light-app-level-0: #f2f2f2;
+  --eds-color-functional-light-surface-level-1: #fff;
+  --eds-color-functional-light-surface-level-2: #fff;
+  --eds-color-functional-light-surface-level-3: #fff;
+  --eds-color-functional-light-contrast: #fff;
+  --eds-color-functional-light-disabled-opacity: 30;
+  --eds-color-functional-dark-app-level-0: #161c20;
+  --eds-color-functional-dark-surface-level-1: #1d242a;
+  --eds-color-functional-dark-surface-level-2: #222b32;
+  --eds-color-functional-dark-surface-level-3: #273139;
+  --eds-color-functional-dark-contrast: #fff;
+  --eds-color-functional-dark-disabled-opacity: 30;
 }
 
 :root, [data-color-scheme="light"] {
@@ -262,10 +274,6 @@
 }
 
 :root {
-  --eds-color-theme-background-base: light-dark(var(--eds-color-brand-gray-light-background-subtle), var(--eds-color-brand-slate-gray-dark-background-default));
-  --eds-color-theme-background-default: light-dark(var(--eds-color-brand-gray-light-background-default), var(--eds-color-brand-slate-gray-dark-background-subtle));
-  --eds-color-theme-background-elevated: light-dark(var(--eds-color-brand-gray-light-background-default), var(--eds-color-brand-slate-gray-dark-surface-default));
-  --eds-color-theme-background-disabled: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
   --eds-color-theme-background-neutral-default: light-dark(var(--eds-color-brand-gray-light-surface-default), var(--eds-color-brand-slate-gray-dark-surface-default));
   --eds-color-theme-background-neutral-default-hover: light-dark(var(--eds-color-brand-gray-light-surface-hover), var(--eds-color-brand-slate-gray-dark-surface-hover));
   --eds-color-theme-background-neutral-default-active: light-dark(var(--eds-color-brand-gray-light-surface-active), var(--eds-color-brand-slate-gray-dark-surface-active));
@@ -285,15 +293,26 @@
   --eds-color-theme-background-danger-strong-hover: light-dark(var(--eds-color-brand-red-light-base-hover), var(--eds-color-brand-red-dark-base-hover));
   --eds-color-theme-background-danger-strong-active: light-dark(var(--eds-color-brand-red-light-base-active), var(--eds-color-brand-red-dark-base-active));
   --eds-color-theme-background-info-default: light-dark(var(--eds-color-brand-blue-light-surface-default), var(--eds-color-brand-blue-dark-surface-default));
+  --eds-color-theme-background-info-default-hover: light-dark(var(--eds-color-brand-blue-light-surface-hover), var(--eds-color-brand-blue-dark-surface-hover));
+  --eds-color-theme-background-info-default-active: light-dark(var(--eds-color-brand-blue-light-surface-active), var(--eds-color-brand-blue-dark-surface-active));
   --eds-color-theme-background-info-strong: light-dark(var(--eds-color-brand-blue-light-base-default), var(--eds-color-brand-blue-dark-base-default));
+  --eds-color-theme-background-info-strong-hover: light-dark(var(--eds-color-brand-blue-light-base-hover), var(--eds-color-brand-blue-dark-base-hover));
+  --eds-color-theme-background-info-strong-active: light-dark(var(--eds-color-brand-blue-light-base-active), var(--eds-color-brand-blue-dark-base-active));
   --eds-color-theme-background-success-default: light-dark(var(--eds-color-brand-green-light-surface-default), var(--eds-color-brand-green-dark-surface-default));
+  --eds-color-theme-background-success-hover: light-dark(var(--eds-color-brand-green-light-surface-hover), var(--eds-color-brand-green-dark-surface-hover));
+  --eds-color-theme-background-success-active: light-dark(var(--eds-color-brand-green-light-surface-active), var(--eds-color-brand-green-dark-surface-active));
   --eds-color-theme-background-success-strong: light-dark(var(--eds-color-brand-green-light-base-default), var(--eds-color-brand-green-dark-base-default));
+  --eds-color-theme-background-success-strong-hover: light-dark(var(--eds-color-brand-green-light-base-hover), var(--eds-color-brand-green-dark-base-hover));
+  --eds-color-theme-background-success-strong-active: light-dark(var(--eds-color-brand-green-light-base-active), var(--eds-color-brand-green-dark-base-active));
   --eds-color-theme-background-warning-default: light-dark(var(--eds-color-brand-orange-light-surface-default), var(--eds-color-brand-orange-dark-surface-default));
+  --eds-color-theme-background-warning-default-hover: light-dark(var(--eds-color-brand-orange-light-surface-hover), var(--eds-color-brand-orange-dark-surface-hover));
+  --eds-color-theme-background-warning-default-active: light-dark(var(--eds-color-brand-orange-light-surface-active), var(--eds-color-brand-orange-dark-surface-active));
   --eds-color-theme-background-warning-strong: light-dark(var(--eds-color-brand-orange-light-base-default), var(--eds-color-brand-orange-dark-base-default));
+  --eds-color-theme-background-warning-strong-hover: light-dark(var(--eds-color-brand-orange-light-base-hover), var(--eds-color-brand-orange-dark-base-hover));
+  --eds-color-theme-background-warning-strong-active: light-dark(var(--eds-color-brand-orange-light-base-active), var(--eds-color-brand-orange-dark-base-active));
   --eds-color-theme-text-default: light-dark(var(--eds-color-brand-gray-light-text-default), var(--eds-color-brand-slate-gray-dark-text-default));
   --eds-color-theme-text-subtle: light-dark(var(--eds-color-brand-gray-light-text-subtle), var(--eds-color-brand-slate-gray-dark-text-subtle));
   --eds-color-theme-text-on-strong: light-dark(var(--eds-color-brand-moss-green-light-contrast-default), var(--eds-color-brand-moss-green-dark-contrast-default));
-  --eds-color-theme-text-disabled: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
   --eds-color-theme-text-accent-default: light-dark(var(--eds-color-brand-moss-green-light-text-default), var(--eds-color-brand-moss-green-dark-text-default));
   --eds-color-theme-text-accent-subtle: light-dark(var(--eds-color-brand-moss-green-light-text-subtle), var(--eds-color-brand-moss-green-dark-text-subtle));
   --eds-color-theme-text-warning-default: light-dark(var(--eds-color-brand-orange-light-text-default), var(--eds-color-brand-orange-dark-text-default));
@@ -304,23 +323,36 @@
   --eds-color-theme-text-success-subtle: light-dark(var(--eds-color-brand-green-light-text-subtle), var(--eds-color-brand-green-dark-text-subtle));
   --eds-color-theme-text-info-default: light-dark(var(--eds-color-brand-blue-light-text-default), var(--eds-color-brand-blue-dark-text-default));
   --eds-color-theme-text-info-subtle: light-dark(var(--eds-color-brand-blue-light-text-subtle), var(--eds-color-brand-blue-dark-text-subtle));
-  --eds-color-theme-border-default: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
   --eds-color-theme-border-subtle: light-dark(var(--eds-color-brand-gray-light-border-subtle), var(--eds-color-brand-slate-gray-dark-border-subtle));
+  --eds-color-theme-border-default: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
   --eds-color-theme-border-strong: light-dark(var(--eds-color-brand-gray-light-border-strong), var(--eds-color-brand-slate-gray-dark-border-strong));
-  --eds-color-theme-border-disabled: light-dark(var(--eds-color-brand-gray-light-border-subtle), var(--eds-color-brand-slate-gray-dark-border-subtle));
-  --eds-color-theme-border-accent-default: light-dark(var(--eds-color-brand-moss-green-light-border-default), var(--eds-color-brand-moss-green-dark-border-default));
   --eds-color-theme-border-accent-subtle: light-dark(var(--eds-color-brand-moss-green-light-border-subtle), var(--eds-color-brand-moss-green-dark-border-subtle));
+  --eds-color-theme-border-accent-default: light-dark(var(--eds-color-brand-moss-green-light-border-default), var(--eds-color-brand-moss-green-dark-border-default));
   --eds-color-theme-border-accent-strong: light-dark(var(--eds-color-brand-moss-green-light-border-strong), var(--eds-color-brand-moss-green-dark-border-strong));
-  --eds-color-theme-border-danger-default: light-dark(var(--eds-color-brand-red-light-border-default), var(--eds-color-brand-red-dark-border-default));
   --eds-color-theme-border-danger-subtle: light-dark(var(--eds-color-brand-red-light-border-subtle), var(--eds-color-brand-red-dark-border-subtle));
-  --eds-color-theme-border-warning-default: light-dark(var(--eds-color-brand-orange-light-border-default), var(--eds-color-brand-orange-dark-border-default));
+  --eds-color-theme-border-danger-default: light-dark(var(--eds-color-brand-red-light-border-default), var(--eds-color-brand-red-dark-border-default));
+  --eds-color-theme-border-danger-strong: light-dark(var(--eds-color-brand-red-light-border-strong), var(--eds-color-brand-red-dark-border-strong));
   --eds-color-theme-border-warning-subtle: light-dark(var(--eds-color-brand-orange-light-border-subtle), var(--eds-color-brand-orange-dark-border-subtle));
-  --eds-color-theme-border-success-default: light-dark(var(--eds-color-brand-green-light-border-default), var(--eds-color-brand-green-dark-border-default));
+  --eds-color-theme-border-warning-default: light-dark(var(--eds-color-brand-orange-light-border-default), var(--eds-color-brand-orange-dark-border-default));
+  --eds-color-theme-border-warning-strong: light-dark(var(--eds-color-brand-orange-light-border-strong), var(--eds-color-brand-orange-dark-border-strong));
   --eds-color-theme-border-success-subtle: light-dark(var(--eds-color-brand-green-light-border-subtle), var(--eds-color-brand-green-dark-border-subtle));
-  --eds-color-theme-border-info-default: light-dark(var(--eds-color-brand-blue-light-border-default), var(--eds-color-brand-blue-dark-border-default));
+  --eds-color-theme-border-success-default: light-dark(var(--eds-color-brand-green-light-border-default), var(--eds-color-brand-green-dark-border-default));
+  --eds-color-theme-border-success-strong: light-dark(var(--eds-color-brand-green-light-border-strong), var(--eds-color-brand-green-dark-border-strong));
   --eds-color-theme-border-info-subtle: light-dark(var(--eds-color-brand-blue-light-border-subtle), var(--eds-color-brand-blue-dark-border-subtle));
-  --eds-color-component-input-background: light-dark(var(--eds-color-brand-gray-light-background-subtle), var(--eds-color-brand-slate-gray-dark-surface-default));
+  --eds-color-theme-border-info-default: light-dark(var(--eds-color-brand-blue-light-border-default), var(--eds-color-brand-blue-dark-border-default));
+  --eds-color-theme-border-info-strong: light-dark(var(--eds-color-brand-blue-light-border-strong), var(--eds-color-brand-blue-dark-border-strong));
+  --eds-color-component-ui-background-base: light-dark(var(--eds-color-brand-gray-light-background-subtle), #0a0d0f);
+  --eds-color-component-ui-background-layer-1: light-dark(var(--eds-color-brand-gray-light-background-default), var(--eds-color-brand-slate-gray-dark-background-default));
+  --eds-color-component-ui-background-layer-2: light-dark(var(--eds-color-brand-gray-light-background-default), var(--eds-color-brand-slate-gray-dark-background-subtle));
+  --eds-color-component-ui-background-elevated: light-dark(var(--eds-color-brand-gray-light-background-default), var(--eds-color-brand-slate-gray-dark-surface-default));
   --eds-color-component-backdrop-background: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-background-subtle));
+  --eds-color-component-input-background: light-dark(var(--eds-color-brand-gray-light-background-subtle), var(--eds-color-brand-slate-gray-dark-surface-default));
+  --eds-color-component-input-border-disabled: light-dark(var(--eds-color-brand-gray-light-border-subtle), var(--eds-color-brand-slate-gray-dark-border-subtle));
+  --eds-color-component-input-text-disabled: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
+  --eds-color-component-button-background-disabled: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
+  --eds-color-component-button-border-disabled: light-dark(var(--eds-color-brand-gray-light-border-subtle), var(--eds-color-brand-slate-gray-dark-border-subtle));
+  --eds-color-component-button-text-disabled: light-dark(var(--eds-color-brand-gray-light-border-default), var(--eds-color-brand-slate-gray-dark-border-default));
+  --eds-color-component-link-text: light-dark(var(--eds-color-brand-blue-light-text-subtle), var(--eds-color-brand-blue-dark-text-subtle));
   --eds-color-component-focus-border: light-dark(var(--eds-color-brand-blue-light-border-default), var(--eds-color-brand-blue-dark-border-default));
 }
 

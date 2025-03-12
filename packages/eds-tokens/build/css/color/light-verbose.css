@@ -3,10 +3,6 @@
  */
 
 :root, [data-color-scheme="light"] {
-  --eds-color-theme-background-base: var(--eds-color-brand-gray-light-background-subtle); /* Application background color. Should be set to either html or body element. */
-  --eds-color-theme-background-default: var(--eds-color-brand-gray-light-background-default); /* The header, footer, toolbars, panels, and primary content use the background color */
-  --eds-color-theme-background-elevated: var(--eds-color-brand-gray-light-background-default); /* Popover elements will appear above all other elements */
-  --eds-color-theme-background-disabled: var(--eds-color-brand-gray-light-border-default);
   --eds-color-theme-background-neutral-default: var(--eds-color-brand-gray-light-surface-default);
   --eds-color-theme-background-neutral-default-hover: var(--eds-color-brand-gray-light-surface-hover);
   --eds-color-theme-background-neutral-default-active: var(--eds-color-brand-gray-light-surface-active);
@@ -26,15 +22,26 @@
   --eds-color-theme-background-danger-strong-hover: var(--eds-color-brand-red-light-base-hover);
   --eds-color-theme-background-danger-strong-active: var(--eds-color-brand-red-light-base-active);
   --eds-color-theme-background-info-default: var(--eds-color-brand-blue-light-surface-default);
+  --eds-color-theme-background-info-default-hover: var(--eds-color-brand-blue-light-surface-hover);
+  --eds-color-theme-background-info-default-active: var(--eds-color-brand-blue-light-surface-active);
   --eds-color-theme-background-info-strong: var(--eds-color-brand-blue-light-base-default);
+  --eds-color-theme-background-info-strong-hover: var(--eds-color-brand-blue-light-base-hover);
+  --eds-color-theme-background-info-strong-active: var(--eds-color-brand-blue-light-base-active);
   --eds-color-theme-background-success-default: var(--eds-color-brand-green-light-surface-default);
+  --eds-color-theme-background-success-hover: var(--eds-color-brand-green-light-surface-hover);
+  --eds-color-theme-background-success-active: var(--eds-color-brand-green-light-surface-active);
   --eds-color-theme-background-success-strong: var(--eds-color-brand-green-light-base-default);
+  --eds-color-theme-background-success-strong-hover: var(--eds-color-brand-green-light-base-hover);
+  --eds-color-theme-background-success-strong-active: var(--eds-color-brand-green-light-base-active);
   --eds-color-theme-background-warning-default: var(--eds-color-brand-orange-light-surface-default);
+  --eds-color-theme-background-warning-default-hover: var(--eds-color-brand-orange-light-surface-hover);
+  --eds-color-theme-background-warning-default-active: var(--eds-color-brand-orange-light-surface-active);
   --eds-color-theme-background-warning-strong: var(--eds-color-brand-orange-light-base-default);
+  --eds-color-theme-background-warning-strong-hover: var(--eds-color-brand-orange-light-base-hover);
+  --eds-color-theme-background-warning-strong-active: var(--eds-color-brand-orange-light-base-active);
   --eds-color-theme-text-default: var(--eds-color-brand-gray-light-text-default);
   --eds-color-theme-text-subtle: var(--eds-color-brand-gray-light-text-subtle);
   --eds-color-theme-text-on-strong: var(--eds-color-brand-moss-green-light-contrast-default);
-  --eds-color-theme-text-disabled: var(--eds-color-brand-gray-light-border-default);
   --eds-color-theme-text-accent-default: var(--eds-color-brand-moss-green-light-text-default);
   --eds-color-theme-text-accent-subtle: var(--eds-color-brand-moss-green-light-text-subtle);
   --eds-color-theme-text-warning-default: var(--eds-color-brand-orange-light-text-default);
@@ -45,22 +52,35 @@
   --eds-color-theme-text-success-subtle: var(--eds-color-brand-green-light-text-subtle);
   --eds-color-theme-text-info-default: var(--eds-color-brand-blue-light-text-default);
   --eds-color-theme-text-info-subtle: var(--eds-color-brand-blue-light-text-subtle);
-  --eds-color-theme-border-default: var(--eds-color-brand-gray-light-border-default);
   --eds-color-theme-border-subtle: var(--eds-color-brand-gray-light-border-subtle);
+  --eds-color-theme-border-default: var(--eds-color-brand-gray-light-border-default);
   --eds-color-theme-border-strong: var(--eds-color-brand-gray-light-border-strong);
-  --eds-color-theme-border-disabled: var(--eds-color-brand-gray-light-border-subtle);
-  --eds-color-theme-border-accent-default: var(--eds-color-brand-moss-green-light-border-default);
   --eds-color-theme-border-accent-subtle: var(--eds-color-brand-moss-green-light-border-subtle);
+  --eds-color-theme-border-accent-default: var(--eds-color-brand-moss-green-light-border-default);
   --eds-color-theme-border-accent-strong: var(--eds-color-brand-moss-green-light-border-strong);
-  --eds-color-theme-border-danger-default: var(--eds-color-brand-red-light-border-default);
   --eds-color-theme-border-danger-subtle: var(--eds-color-brand-red-light-border-subtle);
-  --eds-color-theme-border-warning-default: var(--eds-color-brand-orange-light-border-default);
+  --eds-color-theme-border-danger-default: var(--eds-color-brand-red-light-border-default);
+  --eds-color-theme-border-danger-strong: var(--eds-color-brand-red-light-border-strong);
   --eds-color-theme-border-warning-subtle: var(--eds-color-brand-orange-light-border-subtle);
-  --eds-color-theme-border-success-default: var(--eds-color-brand-green-light-border-default);
+  --eds-color-theme-border-warning-default: var(--eds-color-brand-orange-light-border-default);
+  --eds-color-theme-border-warning-strong: var(--eds-color-brand-orange-light-border-strong);
   --eds-color-theme-border-success-subtle: var(--eds-color-brand-green-light-border-subtle);
-  --eds-color-theme-border-info-default: var(--eds-color-brand-blue-light-border-default);
+  --eds-color-theme-border-success-default: var(--eds-color-brand-green-light-border-default);
+  --eds-color-theme-border-success-strong: var(--eds-color-brand-green-light-border-strong);
   --eds-color-theme-border-info-subtle: var(--eds-color-brand-blue-light-border-subtle);
-  --eds-color-component-input-background: var(--eds-color-brand-gray-light-background-subtle);
+  --eds-color-theme-border-info-default: var(--eds-color-brand-blue-light-border-default);
+  --eds-color-theme-border-info-strong: var(--eds-color-brand-blue-light-border-strong);
+  --eds-color-component-ui-background-base: var(--eds-color-brand-gray-light-background-subtle); /* Application background color. Should be set to either html or body element. */
+  --eds-color-component-ui-background-layer-1: var(--eds-color-brand-gray-light-background-default); /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-color-component-ui-background-layer-2: var(--eds-color-brand-gray-light-background-default); /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-color-component-ui-background-elevated: var(--eds-color-brand-gray-light-background-default); /* Popover elements will appear above all other elements */
   --eds-color-component-backdrop-background: var(--eds-color-brand-gray-light-border-default); /* The color of the mask overlay that appears when you enter a modal state. */
+  --eds-color-component-input-background: var(--eds-color-brand-gray-light-background-subtle);
+  --eds-color-component-input-border-disabled: var(--eds-color-brand-gray-light-border-subtle);
+  --eds-color-component-input-text-disabled: var(--eds-color-brand-gray-light-border-default);
+  --eds-color-component-button-background-disabled: var(--eds-color-brand-gray-light-border-default);
+  --eds-color-component-button-border-disabled: var(--eds-color-brand-gray-light-border-subtle);
+  --eds-color-component-button-text-disabled: var(--eds-color-brand-gray-light-border-default);
+  --eds-color-component-link-text: var(--eds-color-brand-blue-light-text-subtle);
   --eds-color-component-focus-border: var(--eds-color-brand-blue-light-border-default);
 }

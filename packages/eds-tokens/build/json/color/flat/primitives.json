@@ -208,5 +208,17 @@
   "eds-color-brand-green-dark-text-subtle": "#7eac7d",
   "eds-color-brand-green-dark-text-default": "#d8e6d8",
   "eds-color-brand-green-dark-contrast-default": "#000000",
-  "eds-color-brand-green-dark-contrast-subtle": "#0a1109"
+  "eds-color-brand-green-dark-contrast-subtle": "#0a1109",
+  "eds-color-functional-light-app-level-0": "#f2f2f2",
+  "eds-color-functional-light-surface-level-1": "#ffffff",
+  "eds-color-functional-light-surface-level-2": "#ffffff",
+  "eds-color-functional-light-surface-level-3": "#ffffff",
+  "eds-color-functional-light-contrast": "#ffffff",
+  "eds-color-functional-light-disabled-opacity": 30,
+  "eds-color-functional-dark-app-level-0": "#161c20",
+  "eds-color-functional-dark-surface-level-1": "#1d242a",
+  "eds-color-functional-dark-surface-level-2": "#222b32",
+  "eds-color-functional-dark-surface-level-3": "#273139",
+  "eds-color-functional-dark-contrast": "#ffffff",
+  "eds-color-functional-dark-disabled-opacity": 30
 }
