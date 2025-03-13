@@ -1,10 +1,17 @@
 import { useEffect, useRef } from 'react'
 
-const dialogState = {
+interface DialogState {
+  count: number
+  originalOverflow: string
+  originalPaddingRight: string
+}
+
+export const dialogState: DialogState = {
   count: 0,
   originalOverflow: '',
   originalPaddingRight: '',
 }
+
 export const useHideBodyScroll = (active: boolean): void => {
   const wasActive = useRef(false)
   useEffect(() => {
