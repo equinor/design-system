@@ -220,3 +220,25 @@ export const CustomHeaderFooter: StoryFn<DatePickerProps> = ({
     />
   )
 }
+
+export const WithCustomOutline: StoryFn = (props: DatePickerProps) => {
+  return (
+    <div className="custom-datepicker">
+      <DatePicker {...props} />
+    </div>
+  )
+}
+
+// Add the CSS override in Storybook's global styles or an external stylesheet
+const customStyles = document.createElement('style')
+customStyles.innerHTML = `
+  .custom-datepicker > div:focus-within:not(.invalid) {
+    outline: 1px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)) !important;
+  }
+
+  .custom-datepicker input {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+`
+document.head.appendChild(customStyles)
