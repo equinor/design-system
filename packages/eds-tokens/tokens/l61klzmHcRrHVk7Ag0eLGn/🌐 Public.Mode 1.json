@@ -229,7 +229,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-functional-app-level-0)"
+            "WEB": "var(--eds-color-functional-contrast)"
           }
         }
       }
@@ -245,7 +245,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--app-level-0)"
+            "WEB": "var(--eds-color-functional-app-level-0)"
           }
         }
       }
