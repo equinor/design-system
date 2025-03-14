@@ -3,17 +3,17 @@
  */
 
 [data-color-appearance="info"] {
-  --eds-color-background-app: light-dark(#fefeff, #011d2c);
-  --eds-color-background-subtle: light-dark(#eaf3f8, #01263a);
-  --eds-color-surface-element: light-dark(#d2e6f0, #02334d);
-  --eds-color-surface-element-hover: light-dark(#b6d6e7, #024163);
-  --eds-color-surface-element-active: light-dark(#9bc7de, #035079);
-  --eds-color-border-separator: light-dark(#92c2db, #035783);
-  --eds-color-border-element: light-dark(#2686b8, #2284b7);
-  --eds-color-border-element-hover: light-dark(#046699, #64a9cc);
-  --eds-color-solid-component: light-dark(#0473ad, #2b89ba);
-  --eds-color-solid-component-hover: light-dark(#035e8e, #529ec6);
-  --eds-color-solid-component-active: light-dark(#034b72, #77b3d3);
-  --eds-color-text-low-contrast: light-dark(#046699, #64a9cc);
-  --eds-color-text-high-contrast: light-dark(#022f47, #d2e6f0);
+  --eds-color-background-app: light-dark(#f3ffff, #111c23);
+  --eds-color-background-subtle: light-dark(#e5f6ff, #152430);
+  --eds-color-surface-element: light-dark(#cae6fa, #183243);
+  --eds-color-surface-element-hover: light-dark(#aed6f4, #17405a);
+  --eds-color-surface-element-active: light-dark(#8fc6ee, #114e73);
+  --eds-color-border-separator: light-dark(#86c2ed, #0b5680);
+  --eds-color-border-element: light-dark(#0083c3, #0080c0);
+  --eds-color-border-element-hover: light-dark(#006498, #50a7e1);
+  --eds-color-solid-component: light-dark(#0084c4, #1c8fcf);
+  --eds-color-solid-component-hover: light-dark(#00699d, #1472a7);
+  --eds-color-solid-component-active: light-dark(#005885, #0f5f8c);
+  --eds-color-text-low-contrast: light-dark(#144a6b, #99cbf0);
+  --eds-color-text-high-contrast: light-dark(#022f47, #dcf1ff);
 }

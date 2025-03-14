@@ -2,16 +2,16 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BACKGROUND_APP = "#fffefe";
-export const BACKGROUND_SUBTLE = "#fdf0f0";
-export const SURFACE_ELEMENT = "#fadcdc";
-export const SURFACE_ELEMENT_HOVER = "#f6c6c6";
-export const SURFACE_ELEMENT_ACTIVE = "#f3b0b0";
-export const BORDER_SEPARATOR = "#f2a7a7";
-export const BORDER_ELEMENT = "#e34545";
-export const BORDER_ELEMENT_HOVER = "#be1c1c";
-export const SOLID_COMPONENT = "#de2121";
-export const SOLID_COMPONENT_HOVER = "#b91c1c";
-export const SOLID_COMPONENT_ACTIVE = "#951616";
-export const TEXT_LOW_CONTRAST = "#be1c1c";
-export const TEXT_HIGH_CONTRAST = "#5a0d0d";
+export const BACKGROUND_APP = "#fff8f7";
+export const BACKGROUND_SUBTLE = "#ffeae8";
+export const SURFACE_ELEMENT = "#ffd0ce";
+export const SURFACE_ELEMENT_HOVER = "#ffb6b3";
+export const SURFACE_ELEMENT_ACTIVE = "#ff9a99";
+export const BORDER_SEPARATOR = "#ff9190";
+export const BORDER_ELEMENT = "#e40d39";
+export const BORDER_ELEMENT_HOVER = "#b20029";
+export const SOLID_COMPONENT = "#e20337";
+export const SOLID_COMPONENT_HOVER = "#b6022a";
+export const SOLID_COMPONENT_ACTIVE = "#990122";
+export const TEXT_LOW_CONTRAST = "#7d1a23";
+export const TEXT_HIGH_CONTRAST = "#311515";

@@ -1,15 +1,15 @@
 {
-  "background-app": "#fefefe",
-  "background-subtle": "#eef5f6",
-  "surface-element": "#d2e6e7",
-  "surface-element-hover": "#b8d7da",
-  "surface-element-active": "#9ec8cc",
-  "border-separator": "#95c4c7",
-  "border-element": "#2f8a92",
-  "border-element-hover": "#006b74",
+  "background-app": "#f6ffff",
+  "background-subtle": "#e8f7f8",
+  "surface-element": "#cfe7e9",
+  "surface-element-hover": "#b5d8db",
+  "surface-element-active": "#99c9ce",
+  "border-separator": "#91c5ca",
+  "border-element": "#2f8a93",
+  "border-element-hover": "#1f6a71",
   "solid-component": "#007079",
-  "solid-component-hover": "#005b62",
-  "solid-component-active": "#00474d",
-  "text-low-contrast": "#006b74",
-  "text-high-contrast": "#003236"
+  "solid-component-hover": "#005960",
+  "solid-component-active": "#004a50",
+  "text-low-contrast": "#214d51",
+  "text-high-contrast": "#152122"
 }

@@ -1,12 +1,12 @@
 {
   "functional": {
-    "app-level-0": "#f2f2f2",
+    "app-level-0": "#f3f3f3",
     "surface-level-1": "#ffffff",
     "surface-level-2": "#ffffff",
     "surface-level-3": "#ffffff",
     "contrast": "#ffffff",
-    "focus": "#2686b8",
-    "link": "#2686b8",
+    "focus": "#0083c3",
+    "link": "#0083c3",
     "opacity-disabled": 30
   }
 }
