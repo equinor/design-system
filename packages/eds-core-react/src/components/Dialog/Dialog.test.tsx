@@ -5,6 +5,7 @@ import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { dialog as tokens } from './Dialog.tokens'
 import { Dialog } from '.'
+import { useHideBodyScroll, dialogState } from '@equinor/eds-utils'
 
 const { Actions, Title, CustomContent } = Dialog
 
@@ -19,6 +20,19 @@ const StyledDialog = styled(Dialog)`
 beforeAll(() => {
   HTMLDialogElement.prototype.showModal = jest.fn()
   HTMLDialogElement.prototype.close = jest.fn()
+})
+
+beforeEach(() => {
+  Object.defineProperty(window, 'innerWidth', {
+    writable: true,
+    configurable: true,
+    value: 1024,
+  })
+  Object.defineProperty(document.documentElement, 'clientWidth', {
+    writable: true,
+    configurable: true,
+    value: 1000,
+  })
 })
 
 const DismissableDialog = (props) => {
@@ -38,6 +52,11 @@ const DismissableDialog = (props) => {
       </Actions>
     </Dialog>
   )
+}
+
+const ScrollLockComponent = ({ active }: { active: boolean }) => {
+  useHideBodyScroll(active)
+  return <div data-testid="scroll-lock-component">Scroll Lock Test</div>
 }
 
 describe('Dialog', () => {
@@ -130,5 +149,50 @@ describe('Dialog', () => {
     expect(dialog).toHaveStyleRule('background', 'red')
     expect(dialog).toHaveStyleRule('width', width)
     expect(dialog).toHaveStyleRule('min-height', minHeight)
+  })
+})
+
+describe('useHideBodyScroll', () => {
+  beforeEach(() => {
+    document.body.style.overflow = ''
+    document.body.style.paddingRight = ''
+  })
+
+  it('Locks scroll when active is true', () => {
+    render(<ScrollLockComponent active={true} />)
+    expect(document.body.style.overflow).toBe('hidden')
+    expect(parseInt(document.body.style.paddingRight)).toBeGreaterThan(0)
+  })
+
+  it('Unlocks scroll when active is false', () => {
+    const { rerender } = render(<ScrollLockComponent active={true} />)
+    expect(document.body.style.overflow).toBe('hidden')
+
+    rerender(<ScrollLockComponent active={false} />)
+    expect(document.body.style.overflow).toBe(dialogState.originalOverflow)
+    expect(document.body.style.paddingRight).toBe(
+      dialogState.originalPaddingRight,
+    )
+  })
+
+  it('Maintains scroll lock when multiple dialogs are open', () => {
+    render(<ScrollLockComponent active={true} />)
+    expect(document.body.style.overflow).toBe('hidden')
+
+    render(<ScrollLockComponent active={true} />)
+    expect(document.body.style.overflow).toBe('hidden')
+  })
+
+  it('Unlocks scroll only after all dialogs are closed', () => {
+    const { unmount: unmount1 } = render(<ScrollLockComponent active={true} />)
+    const { unmount: unmount2 } = render(<ScrollLockComponent active={true} />)
+
+    expect(document.body.style.overflow).toBe('hidden')
+
+    unmount1()
+    expect(document.body.style.overflow).toBe('hidden')
+
+    unmount2()
+    expect(document.body.style.overflow).toBe('')
   })
 })
