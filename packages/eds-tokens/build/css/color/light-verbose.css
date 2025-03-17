@@ -16,12 +16,12 @@
   --eds-theme-color-text-danger-default: var(--eds-color-brand-red-light-13);
   --eds-theme-color-text-success-subtle: var(--eds-color-brand-green-light-12);
   --eds-theme-color-text-success-default: var(--eds-color-brand-green-light-13);
-  --eds-theme-color-background-neutral-default: var(--eds-color-brand-gray-light-3);
-  --eds-theme-color-background-neutral-default-hover: var(--eds-color-brand-gray-light-4);
-  --eds-theme-color-background-neutral-default-active: var(--eds-color-brand-gray-light-5);
-  --eds-theme-color-background-neutral-strong: var(--eds-color-brand-gray-light-9);
-  --eds-theme-color-background-neutral-strong-hover: var(--eds-color-brand-gray-light-10);
-  --eds-theme-color-background-neutral-strong-active: var(--eds-color-brand-gray-light-11);
+  --eds-theme-color-background-default: var(--eds-color-brand-gray-light-3);
+  --eds-theme-color-background-default-hover: var(--eds-color-brand-gray-light-4);
+  --eds-theme-color-background-default-active: var(--eds-color-brand-gray-light-5);
+  --eds-theme-color-background-strong: var(--eds-color-brand-gray-light-9);
+  --eds-theme-color-background-strong-hover: var(--eds-color-brand-gray-light-10);
+  --eds-theme-color-background-strong-active: var(--eds-color-brand-gray-light-11);
   --eds-theme-color-background-accent-default: var(--eds-color-brand-moss-green-light-3);
   --eds-theme-color-background-accent-default-hover: var(--eds-color-brand-moss-green-light-4);
   --eds-theme-color-background-accent-default-active: var(--eds-color-brand-moss-green-light-5);
@@ -74,13 +74,13 @@
   --eds-theme-ui-color-background-layer-1: var(--eds-color-brand-gray-light-1); /* The header, footer, toolbars, panels, and primary content can use this background color */
   --eds-theme-ui-color-background-layer-2: var(--eds-color-brand-gray-light-1); /* The header, footer, toolbars, panels, and primary content can use this background color */
   --eds-theme-ui-color-background-elevated: var(--eds-color-brand-gray-light-1); /* Popover elements will appear above all other elements */
-  --eds-theme-backdrop-color-background: var(--eds-color-brand-gray-light-7); /* The color of the mask overlay that appears when you enter a modal state. */
-  --eds-theme-input-color-background: var(--eds-color-brand-gray-light-2);
-  --eds-theme-input-color-border-disabled: var(--eds-color-brand-gray-light-6);
-  --eds-theme-input-color-text-disabled: var(--eds-color-brand-gray-light-7);
   --eds-theme-button-color-background-disabled: var(--eds-color-brand-gray-light-7);
   --eds-theme-button-color-border-disabled: var(--eds-color-brand-gray-light-6);
   --eds-theme-button-color-text-disabled: var(--eds-color-brand-gray-light-7);
+  --eds-theme-input-color-background: var(--eds-color-brand-gray-light-2);
+  --eds-theme-input-color-border-disabled: var(--eds-color-brand-gray-light-6);
+  --eds-theme-input-color-text-disabled: var(--eds-color-brand-gray-light-7);
   --eds-theme-link-color-text: var(--eds-color-brand-blue-light-12);
-  --eds-theme-focus-color-border: var(--eds-color-brand-blue-light-7);
+  --eds-theme-focus-ring-color-border: var(--eds-color-brand-blue-light-7);
+  --eds-theme-overlay-color-background: var(--eds-color-brand-gray-light-7); /* The color of the mask overlay that appears when you enter a modal state. */
 }

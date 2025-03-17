@@ -15,12 +15,12 @@
         "text-danger-default": "#ffe1df",
         "text-success-subtle": "#a2d49f",
         "text-success-default": "#d8e6d8",
-        "background-neutral-default": "#2a3033",
-        "background-neutral-default-hover": "#363d43",
-        "background-neutral-default-active": "#414b53",
-        "background-neutral-strong": "#778996",
-        "background-neutral-strong-hover": "#5e6d78",
-        "background-neutral-strong-active": "#4f5b65",
+        "background-default": "#2a3033",
+        "background-default-hover": "#363d43",
+        "background-default-active": "#414b53",
+        "background-strong": "#778996",
+        "background-strong-hover": "#5e6d78",
+        "background-strong-active": "#4f5b65",
         "background-accent-default": "#1d3335",
         "background-accent-default-hover": "#204246",
         "background-accent-default-active": "#215257",
@@ -78,9 +78,11 @@
           "background-elevated": "#2a3033"
         }
       },
-      "backdrop": {
+      "button": {
         "color": {
-          "background": "#202325"
+          "background-disabled": "#697b88",
+          "border-disabled": "#47525b",
+          "text-disabled": "#697b88"
         }
       },
       "input": {
@@ -90,21 +92,19 @@
           "text-disabled": "#697b88"
         }
       },
-      "button": {
-        "color": {
-          "background-disabled": "#697b88",
-          "border-disabled": "#47525b",
-          "text-disabled": "#697b88"
-        }
-      },
       "link": {
         "color": {
           "text": "#99cbf0"
         }
       },
-      "focus": {
+      "focus-ring": {
         "color": {
           "border": "#0080c0"
+        }
+      },
+      "overlay": {
+        "color": {
+          "background": "#202325"
         }
       }
     }

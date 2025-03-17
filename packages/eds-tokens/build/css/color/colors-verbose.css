@@ -16,12 +16,12 @@
   --eds-theme-color-text-danger-default: light-dark(var(--eds-color-brand-red-light-13), var(--eds-color-brand-red-dark-13));
   --eds-theme-color-text-success-subtle: light-dark(var(--eds-color-brand-green-light-12), var(--eds-color-brand-green-dark-12));
   --eds-theme-color-text-success-default: light-dark(var(--eds-color-brand-green-light-13), var(--eds-color-brand-green-dark-13));
-  --eds-theme-color-background-neutral-default: light-dark(var(--eds-color-brand-gray-light-3), var(--eds-color-brand-slate-gray-dark-3));
-  --eds-theme-color-background-neutral-default-hover: light-dark(var(--eds-color-brand-gray-light-4), var(--eds-color-brand-slate-gray-dark-4));
-  --eds-theme-color-background-neutral-default-active: light-dark(var(--eds-color-brand-gray-light-5), var(--eds-color-brand-slate-gray-dark-5));
-  --eds-theme-color-background-neutral-strong: light-dark(var(--eds-color-brand-gray-light-9), var(--eds-color-brand-slate-gray-dark-9));
-  --eds-theme-color-background-neutral-strong-hover: light-dark(var(--eds-color-brand-gray-light-10), var(--eds-color-brand-slate-gray-dark-10));
-  --eds-theme-color-background-neutral-strong-active: light-dark(var(--eds-color-brand-gray-light-11), var(--eds-color-brand-slate-gray-dark-11));
+  --eds-theme-color-background-default: light-dark(var(--eds-color-brand-gray-light-3), var(--eds-color-brand-slate-gray-dark-3));
+  --eds-theme-color-background-default-hover: light-dark(var(--eds-color-brand-gray-light-4), var(--eds-color-brand-slate-gray-dark-4));
+  --eds-theme-color-background-default-active: light-dark(var(--eds-color-brand-gray-light-5), var(--eds-color-brand-slate-gray-dark-5));
+  --eds-theme-color-background-strong: light-dark(var(--eds-color-brand-gray-light-9), var(--eds-color-brand-slate-gray-dark-9));
+  --eds-theme-color-background-strong-hover: light-dark(var(--eds-color-brand-gray-light-10), var(--eds-color-brand-slate-gray-dark-10));
+  --eds-theme-color-background-strong-active: light-dark(var(--eds-color-brand-gray-light-11), var(--eds-color-brand-slate-gray-dark-11));
   --eds-theme-color-background-accent-default: light-dark(var(--eds-color-brand-moss-green-light-3), var(--eds-color-brand-moss-green-dark-3));
   --eds-theme-color-background-accent-default-hover: light-dark(var(--eds-color-brand-moss-green-light-4), var(--eds-color-brand-moss-green-dark-4));
   --eds-theme-color-background-accent-default-active: light-dark(var(--eds-color-brand-moss-green-light-5), var(--eds-color-brand-moss-green-dark-5));
@@ -74,13 +74,13 @@
   --eds-theme-ui-color-background-layer-1: light-dark(var(--eds-color-brand-gray-light-1), var(--eds-color-brand-slate-gray-dark-1)); /* The header, footer, toolbars, panels, and primary content can use this background color */
   --eds-theme-ui-color-background-layer-2: light-dark(var(--eds-color-brand-gray-light-1), var(--eds-color-brand-slate-gray-dark-2)); /* The header, footer, toolbars, panels, and primary content can use this background color */
   --eds-theme-ui-color-background-elevated: light-dark(var(--eds-color-brand-gray-light-1), var(--eds-color-brand-slate-gray-dark-3)); /* Popover elements will appear above all other elements */
-  --eds-theme-backdrop-color-background: light-dark(var(--eds-color-brand-gray-light-7), var(--eds-color-brand-slate-gray-dark-2)); /* The color of the mask overlay that appears when you enter a modal state. */
-  --eds-theme-input-color-background: light-dark(var(--eds-color-brand-gray-light-2), var(--eds-color-brand-slate-gray-dark-3));
-  --eds-theme-input-color-border-disabled: light-dark(var(--eds-color-brand-gray-light-6), var(--eds-color-brand-slate-gray-dark-6));
-  --eds-theme-input-color-text-disabled: light-dark(var(--eds-color-brand-gray-light-7), var(--eds-color-brand-slate-gray-dark-7));
   --eds-theme-button-color-background-disabled: light-dark(var(--eds-color-brand-gray-light-7), var(--eds-color-brand-slate-gray-dark-7));
   --eds-theme-button-color-border-disabled: light-dark(var(--eds-color-brand-gray-light-6), var(--eds-color-brand-slate-gray-dark-6));
   --eds-theme-button-color-text-disabled: light-dark(var(--eds-color-brand-gray-light-7), var(--eds-color-brand-slate-gray-dark-7));
+  --eds-theme-input-color-background: light-dark(var(--eds-color-brand-gray-light-2), var(--eds-color-brand-slate-gray-dark-3));
+  --eds-theme-input-color-border-disabled: light-dark(var(--eds-color-brand-gray-light-6), var(--eds-color-brand-slate-gray-dark-6));
+  --eds-theme-input-color-text-disabled: light-dark(var(--eds-color-brand-gray-light-7), var(--eds-color-brand-slate-gray-dark-7));
   --eds-theme-link-color-text: light-dark(var(--eds-color-brand-blue-light-12), var(--eds-color-brand-blue-dark-12));
-  --eds-theme-focus-color-border: light-dark(var(--eds-color-brand-blue-light-7), var(--eds-color-brand-blue-dark-7));
+  --eds-theme-focus-ring-color-border: light-dark(var(--eds-color-brand-blue-light-7), var(--eds-color-brand-blue-dark-7));
+  --eds-theme-overlay-color-background: light-dark(var(--eds-color-brand-gray-light-7), var(--eds-color-brand-slate-gray-dark-2)); /* The color of the mask overlay that appears when you enter a modal state. */
 }

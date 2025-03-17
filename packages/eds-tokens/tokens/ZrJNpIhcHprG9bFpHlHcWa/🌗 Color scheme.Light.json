@@ -158,7 +158,7 @@
             }
           }
         },
-        "background-neutral-default": {
+        "background-default": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.3}",
           "$description": "",
@@ -170,7 +170,7 @@
             }
           }
         },
-        "background-neutral-default-hover": {
+        "background-default-hover": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.4}",
           "$description": "",
@@ -182,7 +182,7 @@
             }
           }
         },
-        "background-neutral-default-active": {
+        "background-default-active": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.5}",
           "$description": "",
@@ -194,7 +194,7 @@
             }
           }
         },
-        "background-neutral-strong": {
+        "background-strong": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.9}",
           "$description": "",
@@ -206,7 +206,7 @@
             }
           }
         },
-        "background-neutral-strong-hover": {
+        "background-strong-hover": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.10}",
           "$description": "",
@@ -218,7 +218,7 @@
             }
           }
         },
-        "background-neutral-strong-active": {
+        "background-strong-active": {
           "$type": "color",
           "$value": "{eds.color.brand.gray.light.11}",
           "$description": "",
@@ -859,27 +859,11 @@
           }
         }
       },
-      "backdrop": {
+      "button": {
         "color": {
-          "background": {
+          "background-disabled": {
             "$type": "color",
             "$value": "{eds.color.brand.gray.light.7}",
-            "$description": "The color of the mask overlay that appears when you enter a modal state.",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": true,
-                "scopes": [],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
-      },
-      "input": {
-        "color": {
-          "background": {
-            "$type": "color",
-            "$value": "{eds.color.brand.gray.light.2}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -915,11 +899,11 @@
           }
         }
       },
-      "button": {
+      "input": {
         "color": {
-          "background-disabled": {
+          "background": {
             "$type": "color",
-            "$value": "{eds.color.brand.gray.light.7}",
+            "$value": "{eds.color.brand.gray.light.2}",
             "$description": "",
             "$extensions": {
               "com.figma": {
@@ -971,12 +955,28 @@
           }
         }
       },
-      "focus": {
+      "focus-ring": {
         "color": {
           "border": {
             "$type": "color",
             "$value": "{eds.color.brand.blue.light.7}",
             "$description": "",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [],
+                "codeSyntax": {}
+              }
+            }
+          }
+        }
+      },
+      "overlay": {
+        "color": {
+          "background": {
+            "$type": "color",
+            "$value": "{eds.color.brand.gray.light.7}",
+            "$description": "The color of the mask overlay that appears when you enter a modal state.",
             "$extensions": {
               "com.figma": {
                 "hiddenFromPublishing": true,
