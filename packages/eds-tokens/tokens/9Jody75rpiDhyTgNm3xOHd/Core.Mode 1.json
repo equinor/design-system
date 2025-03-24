@@ -2056,22 +2056,6 @@
             }
           }
         }
-      },
-      "functional": {
-        "light": {
-          "disabled-opacity": {
-            "$type": "number",
-            "$value": 30,
-            "$description": "",
-            "$extensions": {
-              "com.figma": {
-                "hiddenFromPublishing": false,
-                "scopes": ["ALL_SCOPES"],
-                "codeSyntax": {}
-              }
-            }
-          }
-        }
       }
     }
   }
