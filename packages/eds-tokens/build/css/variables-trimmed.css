@@ -51,7 +51,7 @@
 :root {
   --eds-theme-color-text-subtle: light-dark(#454545, #bcc6ce);
   --eds-theme-color-text-default: light-dark(#1e1e1e, #eaeef1);
-  --eds-theme-color-text-on-strong: light-dark(#fff, #000);
+  --eds-theme-color-text-on-strong: light-dark(#fff, #fff);
   --eds-theme-color-text-accent-subtle: light-dark(#214d51, #a2ced2);
   --eds-theme-color-text-accent-default: light-dark(#152122, #e0f1f3);
   --eds-theme-color-text-info-subtle: light-dark(#144a6b, #99cbf0);

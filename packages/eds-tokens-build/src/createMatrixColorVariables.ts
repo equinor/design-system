@@ -19,12 +19,9 @@ export async function createMatrixColorVariables({
   colorBuildPath: string
   cssTransforms: string[]
 }) {
-  const brandColorCollectionFile = 'Brand.Mode 1.json'
+  const coreColorCollectionFile = 'Core.Mode 1.json'
   const COLOR_BRAND_DIR = path.join(tokensDir, '9Jody75rpiDhyTgNm3xOHd')
-  const COLOR_BRAND_SOURCE = path.join(
-    COLOR_BRAND_DIR,
-    brandColorCollectionFile,
-  )
+  const COLOR_BRAND_SOURCE = path.join(COLOR_BRAND_DIR, coreColorCollectionFile)
 
   const COLOR__MATRIX_TOKENS_DIR = path.join(
     tokensDir,

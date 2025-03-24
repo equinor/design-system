@@ -27,14 +27,11 @@ export async function createClassicColorVariables({
 }) {
   const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
   const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
-  const brandColorCollectionFile = 'Brand.Mode 1.json'
+  const coreColorCollectionFile = 'Core.Mode 1.json'
 
   const COLOR_TOKENS_DIR = path.join(tokensDir, 'ZrJNpIhcHprG9bFpHlHcWa')
   const COLOR_BRAND_DIR = path.join(tokensDir, '9Jody75rpiDhyTgNm3xOHd')
-  const COLOR_BRAND_SOURCE = path.join(
-    COLOR_BRAND_DIR,
-    brandColorCollectionFile,
-  )
+  const COLOR_BRAND_SOURCE = path.join(COLOR_BRAND_DIR, coreColorCollectionFile)
 
   const darkTokens = readJsonFiles([
     path.join(

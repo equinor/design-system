@@ -4,7 +4,7 @@
 
 export const EDS_THEME_COLOR_TEXT_SUBTLE = "#bcc6ce";
 export const EDS_THEME_COLOR_TEXT_DEFAULT = "#eaeef1";
-export const EDS_THEME_COLOR_TEXT_ON_STRONG = "#000000";
+export const EDS_THEME_COLOR_TEXT_ON_STRONG = "#ffffff";
 export const EDS_THEME_COLOR_TEXT_ACCENT_SUBTLE = "#a2ced2";
 export const EDS_THEME_COLOR_TEXT_ACCENT_DEFAULT = "#e0f1f3";
 export const EDS_THEME_COLOR_TEXT_INFO_SUBTLE = "#99cbf0";
