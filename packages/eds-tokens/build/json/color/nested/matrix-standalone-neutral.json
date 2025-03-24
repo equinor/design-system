@@ -1,5 +1,5 @@
 {
-  "background-app": "#fefefe",
+  "background-app": "#ffffff",
   "background-subtle": "#f3f3f3",
   "surface-element": "#e1e1e1",
   "surface-element-hover": "#d0d0d0",
@@ -8,8 +8,8 @@
   "border-element": "#7b7b7b",
   "border-element-hover": "#5e5e5e",
   "solid-component": "#4a4a4a",
-  "solid-component-hover": "#656261",
-  "solid-component-active": "#787271",
+  "solid-component-hover": "#3a3a3a",
+  "solid-component-active": "#2f2f2f",
   "text-low-contrast": "#454545",
   "text-high-contrast": "#1e1e1e"
 }

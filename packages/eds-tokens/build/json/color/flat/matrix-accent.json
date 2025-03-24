@@ -1,5 +1,5 @@
 {
-  "background-app": "#f6ffff",
+  "background-app": "#ffffff",
   "background-subtle": "#e8f7f8",
   "surface-element": "#cfe7e9",
   "surface-element-hover": "#b5d8db",
@@ -8,8 +8,8 @@
   "border-element": "#2f8a93",
   "border-element-hover": "#1f6a71",
   "solid-component": "#007079",
-  "solid-component-hover": "#005960",
-  "solid-component-active": "#004a50",
+  "solid-component-hover": "#005a63",
+  "solid-component-active": "#004c55",
   "text-low-contrast": "#214d51",
   "text-high-contrast": "#152122"
 }

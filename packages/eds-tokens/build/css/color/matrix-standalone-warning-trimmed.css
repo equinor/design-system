@@ -3,17 +3,17 @@
  */
 
 :root {
-  --eds-color-warning-background-app: light-dark(#fffef4, #1d1a11);
-  --eds-color-warning-background-subtle: light-dark(#f8f3e5, #262216);
-  --eds-color-warning-surface-element: light-dark(#e9e1cb, #352e1b);
-  --eds-color-warning-surface-element-hover: light-dark(#dbcfb0, #463b1d);
-  --eds-color-warning-surface-element-active: light-dark(#cebe93, #57481d);
-  --eds-color-warning-border-separator: light-dark(#cab98a, #5f4f1c);
-  --eds-color-warning-border-element: light-dark(#92792a, #8f7627);
-  --eds-color-warning-border-element-hover: light-dark(#705c1c, #b39c5b);
-  --eds-color-warning-solid-component: light-dark(#796003, #9d8336);
-  --eds-color-warning-solid-component-hover: light-dark(#604c02, #7e6929);
-  --eds-color-warning-solid-component-active: light-dark(#503f01, #695721);
-  --eds-color-warning-text-low-contrast: light-dark(#51441d, #d2c49c);
-  --eds-color-warning-text-high-contrast: light-dark(#221e14, #f3eddd);
+  --eds-color-warning-background-app: light-dark(#ffffff, #23170d);
+  --eds-color-warning-background-subtle: light-dark(#ffefdf, #2f1e10);
+  --eds-color-warning-surface-element: light-dark(#fbdac1, #432710);
+  --eds-color-warning-surface-element-hover: light-dark(#f5c5a1, #593008);
+  --eds-color-warning-surface-element-active: light-dark(#efb07f, #713800);
+  --eds-color-warning-border-separator: light-dark(#eda974, #7d3c00);
+  --eds-color-warning-border-element: light-dark(#be5d00, #ba5b00);
+  --eds-color-warning-border-element-hover: light-dark(#944500, #e08531);
+  --eds-color-warning-solid-component: light-dark(#e57e00, #e57e00);
+  --eds-color-warning-solid-component-hover: light-dark(#c05e00, #ff9f3e);
+  --eds-color-warning-solid-component-active: light-dark(#a34e00, #ffc185);
+  --eds-color-warning-text-low-contrast: light-dark(#693600, #f1b78a);
+  --eds-color-warning-text-high-contrast: light-dark(#2a1b0f, #ffe8d6);
 }
