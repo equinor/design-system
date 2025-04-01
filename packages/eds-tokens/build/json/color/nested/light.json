@@ -70,7 +70,7 @@
         "border-info-default": "#0083c3",
         "border-info-strong": "#006498"
       },
-      "ui": {
+      "app": {
         "color": {
           "background-base": "#f3f3f3",
           "background-layer-1": "#ffffff",

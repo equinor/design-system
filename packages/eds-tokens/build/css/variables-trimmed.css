@@ -116,10 +116,10 @@
   --eds-theme-color-border-info-subtle: light-dark(#86c2ed, #0a5680);
   --eds-theme-color-border-info-default: light-dark(#0083c3, #0080c0);
   --eds-theme-color-border-info-strong: light-dark(#006498, #50a7e1);
-  --eds-theme-ui-color-background-base: light-dark(#f3f3f3, #0a0d0f);
-  --eds-theme-ui-color-background-layer-1: light-dark(#fff, #181a1c);
-  --eds-theme-ui-color-background-layer-2: light-dark(#fff, #202325);
-  --eds-theme-ui-color-background-elevated: light-dark(#fff, #2a3033);
+  --eds-theme-app-color-background-base: light-dark(#f3f3f3, #0a0d0f);
+  --eds-theme-app-color-background-layer-1: light-dark(#fff, #181a1c);
+  --eds-theme-app-color-background-layer-2: light-dark(#fff, #202325);
+  --eds-theme-app-color-background-elevated: light-dark(#fff, #2a3033);
   --eds-theme-button-color-background-disabled: light-dark(#7b7b7b, #697b88);
   --eds-theme-button-color-border-disabled: light-dark(#bababa, #47525b);
   --eds-theme-button-color-text-disabled: light-dark(#7b7b7b, #697b88);

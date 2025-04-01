@@ -145,10 +145,10 @@
 }
 
 :root {
-  --eds-color-functional-app-level-0: light-dark(#f3f3f3, #181a1c);
-  --eds-color-functional-surface-level-1: light-dark(#fff, #202325);
-  --eds-color-functional-surface-level-2: light-dark(#fff, #222b32);
-  --eds-color-functional-surface-level-3: light-dark(#fff, #2a3033);
+  --eds-color-functional-app-base: light-dark(#f3f3f3, #181a1c);
+  --eds-color-functional-app-layer-1: light-dark(#fff, #202325);
+  --eds-color-functional-app-layer-2: light-dark(#fff, #222b32);
+  --eds-color-functional-app-elevated: light-dark(#fff, #2a3033);
   --eds-color-functional-contrast: light-dark(#fff, #fff);
   --eds-color-functional-focus: light-dark(#0083c3, #0080c0);
   --eds-color-functional-link: light-dark(#0083c3, #0080c0);

@@ -70,10 +70,10 @@
   --eds-theme-color-border-info-subtle: var(--eds-color-utility-blue-light-6);
   --eds-theme-color-border-info-default: var(--eds-color-utility-blue-light-7);
   --eds-theme-color-border-info-strong: var(--eds-color-utility-blue-light-8);
-  --eds-theme-ui-color-background-base: var(--eds-color-neutral-light-2); /* Application background color. Should be set to either html or body element. */
-  --eds-theme-ui-color-background-layer-1: var(--eds-color-neutral-light-1); /* The header, footer, toolbars, panels, and primary content can use this background color */
-  --eds-theme-ui-color-background-layer-2: var(--eds-color-neutral-light-1); /* The header, footer, toolbars, panels, and primary content can use this background color */
-  --eds-theme-ui-color-background-elevated: var(--eds-color-neutral-light-1); /* Popover elements will appear above all other elements */
+  --eds-theme-app-color-background-base: var(--eds-color-neutral-light-2); /* Application background color. Should be set to either html or body element. */
+  --eds-theme-app-color-background-layer-1: var(--eds-color-neutral-light-1); /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-theme-app-color-background-layer-2: var(--eds-color-neutral-light-1); /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-theme-app-color-background-elevated: var(--eds-color-neutral-light-1); /* Popover elements will appear above all other elements */
   --eds-theme-button-color-background-disabled: var(--eds-color-neutral-light-7);
   --eds-theme-button-color-border-disabled: var(--eds-color-neutral-light-6);
   --eds-theme-button-color-text-disabled: var(--eds-color-neutral-light-7);

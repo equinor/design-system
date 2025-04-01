@@ -1160,7 +1160,7 @@
     "background": {
       "base": {
         "$type": "color",
-        "$value": "{eds.theme.ui.color.background-base}",
+        "$value": "{eds.theme.app.color.background-base}",
         "$description": "Application background color. It should be set to either html or body element.",
         "$extensions": {
           "com.figma": {
@@ -1176,7 +1176,7 @@
       },
       "layer-1": {
         "$type": "color",
-        "$value": "{eds.theme.ui.color.background-layer-1}",
+        "$value": "{eds.theme.app.color.background-layer-1}",
         "$description": "Application background color. It should be set to either html or body element.",
         "$extensions": {
           "com.figma": {
@@ -1192,7 +1192,7 @@
       },
       "layer-2": {
         "$type": "color",
-        "$value": "{eds.theme.ui.color.background-layer-2}",
+        "$value": "{eds.theme.app.color.background-layer-2}",
         "$description": "The header, footer, toolbars, panels, and primary content use the background color",
         "$extensions": {
           "com.figma": {
@@ -1208,7 +1208,7 @@
       },
       "elevated": {
         "$type": "color",
-        "$value": "{eds.theme.ui.color.background-elevated}",
+        "$value": "{eds.theme.app.color.background-elevated}",
         "$description": "Background of elements with a higher elevation than the page base/default. Popover elements will appear above all other elements.Matches the base background in the light theme, as shadow alone is enough to distinguish elevation. Slightly lighter than the base background in the dark theme to provide additional distinction.",
         "$extensions": {
           "com.figma": {

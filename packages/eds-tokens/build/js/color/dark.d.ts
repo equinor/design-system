@@ -69,10 +69,10 @@ export const EDS_THEME_COLOR_BORDER_SUCCESS_STRONG: string;
 export const EDS_THEME_COLOR_BORDER_INFO_SUBTLE: string;
 export const EDS_THEME_COLOR_BORDER_INFO_DEFAULT: string;
 export const EDS_THEME_COLOR_BORDER_INFO_STRONG: string; /** Application background color. Should be set to either html or body element. */
-export const EDS_THEME_UI_COLOR_BACKGROUND_BASE: string; /** The header, footer, toolbars, panels, and primary content can use this background color */
-export const EDS_THEME_UI_COLOR_BACKGROUND_LAYER_1: string; /** The header, footer, toolbars, panels, and primary content can use this background color */
-export const EDS_THEME_UI_COLOR_BACKGROUND_LAYER_2: string; /** Popover elements will appear above all other elements */
-export const EDS_THEME_UI_COLOR_BACKGROUND_ELEVATED: string;
+export const EDS_THEME_APP_COLOR_BACKGROUND_BASE: string; /** The header, footer, toolbars, panels, and primary content can use this background color */
+export const EDS_THEME_APP_COLOR_BACKGROUND_LAYER_1: string; /** The header, footer, toolbars, panels, and primary content can use this background color */
+export const EDS_THEME_APP_COLOR_BACKGROUND_LAYER_2: string; /** Popover elements will appear above all other elements */
+export const EDS_THEME_APP_COLOR_BACKGROUND_ELEVATED: string;
 export const EDS_THEME_BUTTON_COLOR_BACKGROUND_DISABLED: string;
 export const EDS_THEME_BUTTON_COLOR_BORDER_DISABLED: string;
 export const EDS_THEME_BUTTON_COLOR_TEXT_DISABLED: string;

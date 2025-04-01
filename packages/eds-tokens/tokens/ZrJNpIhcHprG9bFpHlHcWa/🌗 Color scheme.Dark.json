@@ -807,7 +807,7 @@
           }
         }
       },
-      "ui": {
+      "app": {
         "color": {
           "background-base": {
             "$type": "color",

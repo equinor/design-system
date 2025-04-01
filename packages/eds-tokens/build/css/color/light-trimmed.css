@@ -70,10 +70,10 @@
   --eds-theme-color-border-info-subtle: #86c2ed;
   --eds-theme-color-border-info-default: #0083c3;
   --eds-theme-color-border-info-strong: #006498;
-  --eds-theme-ui-color-background-base: #f3f3f3; /* Application background color. Should be set to either html or body element. */
-  --eds-theme-ui-color-background-layer-1: #ffffff; /* The header, footer, toolbars, panels, and primary content can use this background color */
-  --eds-theme-ui-color-background-layer-2: #ffffff; /* The header, footer, toolbars, panels, and primary content can use this background color */
-  --eds-theme-ui-color-background-elevated: #ffffff; /* Popover elements will appear above all other elements */
+  --eds-theme-app-color-background-base: #f3f3f3; /* Application background color. Should be set to either html or body element. */
+  --eds-theme-app-color-background-layer-1: #ffffff; /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-theme-app-color-background-layer-2: #ffffff; /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-theme-app-color-background-elevated: #ffffff; /* Popover elements will appear above all other elements */
   --eds-theme-button-color-background-disabled: #7b7b7b;
   --eds-theme-button-color-border-disabled: #bababa;
   --eds-theme-button-color-text-disabled: #7b7b7b;

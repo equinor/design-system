@@ -70,10 +70,10 @@
   --eds-theme-color-border-info-subtle: light-dark(var(--eds-color-utility-blue-light-6), var(--eds-color-utility-blue-dark-6));
   --eds-theme-color-border-info-default: light-dark(var(--eds-color-utility-blue-light-7), var(--eds-color-utility-blue-dark-7));
   --eds-theme-color-border-info-strong: light-dark(var(--eds-color-utility-blue-light-8), var(--eds-color-utility-blue-dark-8));
-  --eds-theme-ui-color-background-base: light-dark(var(--eds-color-neutral-light-2), #0a0d0f); /* Application background color. Should be set to either html or body element. */
-  --eds-theme-ui-color-background-layer-1: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-1)); /* The header, footer, toolbars, panels, and primary content can use this background color */
-  --eds-theme-ui-color-background-layer-2: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-2)); /* The header, footer, toolbars, panels, and primary content can use this background color */
-  --eds-theme-ui-color-background-elevated: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-3)); /* Popover elements will appear above all other elements */
+  --eds-theme-app-color-background-base: light-dark(var(--eds-color-neutral-light-2), #0a0d0f); /* Application background color. Should be set to either html or body element. */
+  --eds-theme-app-color-background-layer-1: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-1)); /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-theme-app-color-background-layer-2: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-2)); /* The header, footer, toolbars, panels, and primary content can use this background color */
+  --eds-theme-app-color-background-elevated: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-3)); /* Popover elements will appear above all other elements */
   --eds-theme-button-color-background-disabled: light-dark(var(--eds-color-neutral-light-7), var(--eds-color-neutral-dark-7));
   --eds-theme-button-color-border-disabled: light-dark(var(--eds-color-neutral-light-6), var(--eds-color-neutral-dark-6));
   --eds-theme-button-color-text-disabled: light-dark(var(--eds-color-neutral-light-7), var(--eds-color-neutral-dark-7));

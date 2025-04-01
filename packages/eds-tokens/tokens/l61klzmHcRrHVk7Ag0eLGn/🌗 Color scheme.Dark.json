@@ -948,7 +948,7 @@
     }
   },
   "functional": {
-    "app-level-0": {
+    "app-base": {
       "$type": "color",
       "$value": "{eds.color.neutral.dark.1}",
       "$description": "",
@@ -960,7 +960,7 @@
         }
       }
     },
-    "surface-level-1": {
+    "app-layer-1": {
       "$type": "color",
       "$value": "{eds.color.neutral.dark.2}",
       "$description": "",
@@ -972,7 +972,7 @@
         }
       }
     },
-    "surface-level-2": {
+    "app-layer-2": {
       "$type": "color",
       "$value": "#222b32",
       "$description": "",
@@ -984,7 +984,7 @@
         }
       }
     },
-    "surface-level-3": {
+    "app-elevated": {
       "$type": "color",
       "$value": "{eds.color.neutral.dark.3}",
       "$description": "",
