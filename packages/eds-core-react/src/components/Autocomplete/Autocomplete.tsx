@@ -315,7 +315,7 @@ export type AutocompleteProps<T> = {
   /**
    * Method that is used to select a key that can be used for comparing items. If omitted, objects are matched by reference.
    */
-  itemToKey?: (value: T) => any
+  itemToKey?: (value: T) => unknown
   /**
    * @deprecated since version 0.45.0 - use itemToKey instead
    * Method that is used to compare objects by value. If omitted, objects are matched by reference.
@@ -375,7 +375,7 @@ function AutocompleteInner<T>(
       return _itemCompare
     }
     if (_itemToKey) {
-      return (o1: T, o2: T) => itemToKey(o1) === itemToKey(o2)
+      return (o1: T, o2: T) => _itemToKey(o1) === _itemToKey(o2)
     }
     return _itemCompare
   }, [_itemCompare, _itemToKey])
