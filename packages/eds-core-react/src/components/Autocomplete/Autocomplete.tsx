@@ -311,7 +311,13 @@ export type AutocompleteProps<T> = {
    *  @default 300
    */
   dropdownHeight?: number
+
   /**
+   * Method that is used to select a key that can be used for comparing items. If omitted, objects are matched by reference.
+   */
+  itemToKey?: (value: T) => any
+  /**
+   * @deprecated since version 0.45.0 - use itemToKey instead
    * Method that is used to compare objects by value. If omitted, objects are matched by reference.
    */
   itemCompare?: (value: T, compare: T) => boolean
@@ -340,7 +346,8 @@ function AutocompleteInner<T>(
     onInputChange,
     selectedOptions: _selectedOptions,
     multiple,
-    itemCompare,
+    itemToKey,
+    itemCompare: _itemCompare,
     allowSelectAll,
     initialSelectedOptions: _initialSelectedOptions = [],
     optionDisabled = defaultOptionDisabled,
@@ -359,6 +366,17 @@ function AutocompleteInner<T>(
     onClear,
     ...other
   } = props
+
+  const itemCompare = useMemo(() => {
+    if(_itemCompare && itemToKey) {
+      console.error("Error: Specifying both itemCompare and itemToKey. itemCompare is deprecated, while itemToKey should be used instead of it. Please only use one.")
+      return _itemCompare;
+    }
+    if(itemToKey) {
+      return (o1: T, o2: T) => (itemToKey(o1) === itemToKey(o2))
+    }
+    return _itemCompare
+  }, [_itemCompare, itemToKey])
 
   // MARK: initializing data/setup
   const selectedOptions = _selectedOptions
@@ -417,6 +435,7 @@ function AutocompleteInner<T>(
   let placeholderText = placeholder
 
   let multipleSelectionProps: UseMultipleSelectionProps<T> = {
+    itemToKey,
     initialSelectedItems: multiple
       ? initialSelectedOptions
       : initialSelectedOptions[0]
@@ -551,6 +570,7 @@ function AutocompleteInner<T>(
     isItemDisabled(item) {
       return optionDisabled(item)
     },
+    itemToKey,
     itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
       onInputChange && onInputChange(inputValue)
