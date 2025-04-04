@@ -346,7 +346,7 @@ function AutocompleteInner<T>(
     onInputChange,
     selectedOptions: _selectedOptions,
     multiple,
-    itemToKey,
+    itemToKey: _itemToKey,
     itemCompare: _itemCompare,
     allowSelectAll,
     initialSelectedOptions: _initialSelectedOptions = [],
@@ -368,15 +368,24 @@ function AutocompleteInner<T>(
   } = props
 
   const itemCompare = useMemo(() => {
-    if(_itemCompare && itemToKey) {
-      console.error("Error: Specifying both itemCompare and itemToKey. itemCompare is deprecated, while itemToKey should be used instead of it. Please only use one.")
-      return _itemCompare;
+    if (_itemCompare && _itemToKey) {
+      console.error(
+        'Error: Specifying both itemCompare and itemToKey. itemCompare is deprecated, while itemToKey should be used instead of it. Please only use one.',
+      )
+      return _itemCompare
     }
-    if(itemToKey) {
-      return (o1: T, o2: T) => (itemToKey(o1) === itemToKey(o2))
+    if (_itemToKey) {
+      return (o1: T, o2: T) => itemToKey(o1) === itemToKey(o2)
     }
     return _itemCompare
-  }, [_itemCompare, itemToKey])
+  }, [_itemCompare, _itemToKey])
+
+  const itemToKey = useCallback(
+    (item) => {
+      return _itemToKey ? _itemToKey(item) : item
+    },
+    [_itemToKey],
+  )
 
   // MARK: initializing data/setup
   const selectedOptions = _selectedOptions
