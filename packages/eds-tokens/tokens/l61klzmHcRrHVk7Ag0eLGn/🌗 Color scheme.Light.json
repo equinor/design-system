@@ -962,7 +962,7 @@
     },
     "app-layer-1": {
       "$type": "color",
-      "$value": "#ffffff",
+      "$value": "{eds.color.neutral.light.1}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -974,7 +974,7 @@
     },
     "app-layer-2": {
       "$type": "color",
-      "$value": "#ffffff",
+      "$value": "{eds.color.neutral.light.1}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -986,7 +986,7 @@
     },
     "app-elevated": {
       "$type": "color",
-      "$value": "#ffffff",
+      "$value": "{eds.color.neutral.light.1}",
       "$description": "",
       "$extensions": {
         "com.figma": {

@@ -4,7 +4,7 @@
 
 [data-color-scheme="dark"] {
   --eds-theme-color-text-on-strong: #ffffff;
-  --eds-theme-app-color-background-base: #0a0d0f; /* Application background color. Should be set to either html or body element. */
+  --eds-theme-app-color-background-base: #0e0f10; /* Application background color. Should be set to either html or body element. */
   --eds-theme-color-text-subtle: var(--eds-color-neutral-dark-12);
   --eds-theme-color-text-default: var(--eds-color-neutral-dark-13);
   --eds-theme-color-text-accent-subtle: var(--eds-color-brand-moss-green-dark-12);

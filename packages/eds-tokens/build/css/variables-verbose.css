@@ -275,7 +275,7 @@
   --eds-theme-color-border-info-subtle: light-dark(var(--eds-color-utility-blue-light-6), var(--eds-color-utility-blue-dark-6));
   --eds-theme-color-border-info-default: light-dark(var(--eds-color-utility-blue-light-7), var(--eds-color-utility-blue-dark-7));
   --eds-theme-color-border-info-strong: light-dark(var(--eds-color-utility-blue-light-8), var(--eds-color-utility-blue-dark-8));
-  --eds-theme-app-color-background-base: light-dark(var(--eds-color-neutral-light-2), #0a0d0f);
+  --eds-theme-app-color-background-base: light-dark(var(--eds-color-neutral-light-2), #0e0f10);
   --eds-theme-app-color-background-layer-1: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-1));
   --eds-theme-app-color-background-layer-2: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-2));
   --eds-theme-app-color-background-elevated: light-dark(var(--eds-color-neutral-light-1), var(--eds-color-neutral-dark-3));

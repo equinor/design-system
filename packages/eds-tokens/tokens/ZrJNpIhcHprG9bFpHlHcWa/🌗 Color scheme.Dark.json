@@ -811,7 +811,7 @@
         "color": {
           "background-base": {
             "$type": "color",
-            "$value": "#0a0d0f",
+            "$value": "#0e0f10",
             "$description": "Application background color. Should be set to either html or body element.",
             "$extensions": {
               "com.figma": {

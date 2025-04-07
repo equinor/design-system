@@ -70,7 +70,7 @@
   --eds-theme-color-border-info-subtle: light-dark(#86c2ed, #0a5680);
   --eds-theme-color-border-info-default: light-dark(#0083c3, #0080c0);
   --eds-theme-color-border-info-strong: light-dark(#006498, #50a7e1);
-  --eds-theme-app-color-background-base: light-dark(#f3f3f3, #0a0d0f); /* Application background color. Should be set to either html or body element. */
+  --eds-theme-app-color-background-base: light-dark(#f3f3f3, #0e0f10); /* Application background color. Should be set to either html or body element. */
   --eds-theme-app-color-background-layer-1: light-dark(#ffffff, #181a1c); /* The header, footer, toolbars, panels, and primary content can use this background color */
   --eds-theme-app-color-background-layer-2: light-dark(#ffffff, #202325); /* The header, footer, toolbars, panels, and primary content can use this background color */
   --eds-theme-app-color-background-elevated: light-dark(#ffffff, #2a3033); /* Popover elements will appear above all other elements */

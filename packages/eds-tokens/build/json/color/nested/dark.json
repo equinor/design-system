@@ -72,7 +72,7 @@
       },
       "app": {
         "color": {
-          "background-base": "#0a0d0f",
+          "background-base": "#0e0f10",
           "background-layer-1": "#181a1c",
           "background-layer-2": "#202325",
           "background-elevated": "#2a3033"
