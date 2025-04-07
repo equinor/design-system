@@ -381,7 +381,7 @@ function AutocompleteInner<T>(
   }, [_itemCompare, _itemToKey])
 
   const itemToKey = useCallback(
-    (item) => {
+    (item: T) => {
       return _itemToKey ? _itemToKey(item) : item
     },
     [_itemToKey],
