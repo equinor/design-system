@@ -33,7 +33,14 @@ export const DateFieldSegments = forwardRef(
     )
 
     return (
-      <div {...fieldProps} style={{ display: 'flex' }} ref={ref}>
+      <div
+        {...fieldProps}
+        style={{
+          display: 'flex',
+          fontFamily: 'Equinor, Arial, sans-serif',
+        }}
+        ref={ref}
+      >
         {state.segments.map((segment, i) => (
           <DateSegment key={i} segment={segment} state={state} />
         ))}

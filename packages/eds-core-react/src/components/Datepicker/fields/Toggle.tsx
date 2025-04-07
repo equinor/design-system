@@ -35,8 +35,8 @@ export const Toggle = ({
   valueString: string
   showClearButton: boolean
 }) => {
-  return readonly || disabled ? null : (
-    <>
+  return (
+    <div style={{ visibility: readonly || disabled ? 'hidden' : 'visible' }}>
       {showClearButton && (
         <StyledButton
           disabled={disabled}
@@ -69,6 +69,6 @@ export const Toggle = ({
       >
         <Icon data={icon} />
       </StyledButton>
-    </>
+    </div>
   )
 }
