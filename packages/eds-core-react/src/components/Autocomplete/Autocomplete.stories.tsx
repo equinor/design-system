@@ -281,8 +281,8 @@ export const OptionComponent: StoryFn<AutocompleteProps<MyOptionType>> = (
         initialSelectedOptions={
           [JSON.parse(JSON.stringify(options[1]))] as MyOptionType[]
         }
-        itemCompare={(item, compare) => {
-          return item.label === compare.label
+        itemToKey={(item) => {
+          return item.label
         }}
         multiline
       />
@@ -294,8 +294,8 @@ export const OptionComponent: StoryFn<AutocompleteProps<MyOptionType>> = (
         initialSelectedOptions={
           JSON.parse(JSON.stringify([options[1], options[2]])) as MyOptionType[]
         }
-        itemCompare={(item, compare) => {
-          return item.label === compare.label
+        itemToKey={(item) => {
+          return item.label
         }}
         multiline
         multiple
