@@ -315,7 +315,7 @@ export type AutocompleteProps<T> = {
   /**
    * Method that is used to select a key that can be used for comparing items. If omitted, objects are matched by reference.
    */
-  itemToKey?: (value: T) => unknown
+  itemToKey?: (value: T | null) => unknown
   /**
    * @deprecated since version 0.45.0 - use itemToKey instead
    * Method that is used to compare objects by value. If omitted, objects are matched by reference.
@@ -382,6 +382,7 @@ function AutocompleteInner<T>(
 
   const itemToKey = useCallback(
     (item: T) => {
+      console.log(`item is`, item)
       return _itemToKey ? _itemToKey(item) : item
     },
     [_itemToKey],

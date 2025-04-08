@@ -218,7 +218,7 @@ describe('Autocomplete', () => {
     render(
       <Autocomplete
         optionLabel={(o) => o.label}
-        itemToKey={(o) => o.value}
+        itemToKey={(item) => item?.value}
         label={labelText}
         options={opts}
         data-testid="styled-autocomplete"
