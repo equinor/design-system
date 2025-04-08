@@ -10,7 +10,7 @@ import { useMemo } from 'react'
 import { FilterWrapper } from './FilterWrapper'
 import { SortIndicator } from './SortIndicator'
 import { ResizeInner, Resizer } from './Resizer'
-import { TableCell } from './TableCell'
+import { TableCell, FilterVisibility } from './TableCell'
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -58,6 +58,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       $sticky={ctx.stickyHeader}
       $offset={offset}
       $pinned={pinned}
+      $activeFilter={header.column.getIsFiltered()}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       key={header.id}
@@ -83,9 +84,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         !header.column.columnDef.meta?.customFilterInput ? (
           // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-          <div onClick={(e) => e.stopPropagation()}>
+          <FilterVisibility onClick={(e) => e.stopPropagation()}>
             <FilterWrapper column={header.column} />
-          </div>
+          </FilterVisibility>
         ) : null}
       </>
       {columnResizeMode && (

@@ -194,6 +194,12 @@ export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
 ColumnFiltering.args = {
   enableColumnFiltering: true,
+  columnFiltersState: [
+    {
+      id: 'id',
+      value: [2, 4],
+    },
+  ],
 }
 
 const defaultSizeState = columns

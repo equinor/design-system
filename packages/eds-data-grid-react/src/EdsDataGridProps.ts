@@ -2,6 +2,7 @@ import {
   Cell,
   Column,
   ColumnDef,
+  ColumnFilter,
   ColumnPinningState,
   ColumnResizeMode,
   ColumnSizingState,
@@ -208,6 +209,16 @@ type FilterProps = {
    * @default false
    */
   enableColumnFiltering?: boolean
+  /**
+   * Initial filter state
+   * @default undefined
+   */
+  columnFiltersState?: Array<ColumnFilter>
+  /**
+   * Callback for when the filter state changes
+   * @default undefined
+   */
+  onColumnFiltersChange?: OnChangeFn<Array<ColumnFilter>>
 }
 
 type HandlersProps<T> = {
