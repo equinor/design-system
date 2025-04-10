@@ -75,7 +75,7 @@
     "ts-jest": "29.2.5",
     "ts-node": "10.9.2",
     "tsc-watch": "^6.2.1",
-    "typescript": "~5.7.2"
+    "typescript": "~5.8.2"
   },
   "homepage": "https://eds.equinor.com",
   "repository": {

@@ -44,7 +44,7 @@
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "prettier": "^3.5.3",
-    "typescript": "^5.7.2",
+    "typescript": "^5.8.2",
     "vite": "^6.0.9",
     "vite-plugin-dts": "^4.4.0"
   }

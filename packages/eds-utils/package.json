@@ -71,7 +71,7 @@
     "rollup-plugin-delete": "^2.1.0",
     "styled-components": "6.1.13",
     "tsc-watch": "^6.2.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "react": ">=16.8",
