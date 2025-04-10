@@ -40,7 +40,7 @@
   "devDependencies": {
     "@equinor/eds-tokens-sync": "workspace:*",
     "@types/node": "^22.13.14",
-    "prettier": "3.4.2",
+    "prettier": "3.5.3",
     "style-dictionary": "^4.3.0",
     "style-dictionary-utils": "^4.0.3",
     "typescript": "^5.8.2",
