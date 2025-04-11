@@ -50,7 +50,7 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
-    "@babel/runtime": "^7.26.0",
+    "@babel/runtime": "^7.26.10",
     "@types/jest": "^29.5.14",
     "@types/jest-axe": "^3.5.9",
     "@typescript-eslint/eslint-plugin": "^8.29.1",

@@ -44,7 +44,7 @@
     "style-dictionary": "^4.3.0",
     "style-dictionary-utils": "^4.0.3",
     "typescript": "^5.8.2",
-    "vite": "^5.4.14",
+    "vite": "^5.4.17",
     "vite-plugin-dts": "^3.9.1"
   },
   "engines": {
