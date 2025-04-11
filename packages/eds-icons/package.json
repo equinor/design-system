@@ -40,6 +40,6 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "rollup": "^4.29.1",
     "rollup-plugin-delete": "^2.1.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.2"
   }
 }

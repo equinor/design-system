@@ -53,8 +53,8 @@
     "@babel/runtime": "^7.26.0",
     "@types/jest": "^29.5.14",
     "@types/jest-axe": "^3.5.9",
-    "@typescript-eslint/eslint-plugin": "^8.19.0",
-    "@typescript-eslint/parser": "^8.19.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -66,8 +66,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-testing-library": "^7.1.1",
     "jest-axe": "^9.0.0",
-    "prettier": "3.4.2",
-    "typescript": "^5.7.2"
+    "prettier": "3.5.3",
+    "typescript": "^5.8.2"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
   "packageManager": "pnpm@9.15.0+sha1.8bfdb6d72b4d5fdf87d21d27f2bfbe2b21dd2629"

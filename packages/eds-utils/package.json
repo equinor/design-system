@@ -51,7 +51,7 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.14",
     "@types/ramda": "^0.30.2",
@@ -69,9 +69,9 @@
     "react-is": "^18.3.1",
     "rollup": "^4.29.1",
     "rollup-plugin-delete": "^2.1.0",
-    "styled-components": "6.1.13",
+    "styled-components": "6.1.17",
     "tsc-watch": "^6.2.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "react": ">=16.8",
