@@ -2,12 +2,14 @@ import {
   Button,
   Checkbox,
   Divider,
+  EdsProvider,
   Icon,
   Menu,
   Pagination,
   Paper,
   TextField,
   Typography,
+  useEds,
 } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { action } from '@storybook/addon-actions'
@@ -688,6 +690,302 @@ Virtualization.args = {
   stickyHeader: true,
   enableVirtual: true,
   height: 500,
+}
+
+const TableInDensityContext = () => {
+  const { density, setDensity } = useEds()
+  const newDensity = density === 'comfortable' ? 'compact' : 'comfortable'
+  const handleClick = () => {
+    console.log(`Setting density to ${newDensity}`)
+    setDensity(newDensity)
+  }
+  return (
+    <>
+      <Button onClick={handleClick}>Toggle {newDensity} Mode</Button>
+      <div style={{ border: '1px solid #cfcfcf' }}>
+        <EdsDataGrid
+          enableVirtual
+          columns={[
+            {
+              accessorKey: 'id',
+              header: function Ki() {},
+              id: 'id',
+              size: 100,
+            },
+            {
+              accessorKey: 'albumId',
+              header: 'Album ID',
+              id: 'albumId',
+              size: 150,
+            },
+            {
+              accessorKey: 'title',
+              header: 'Title',
+              id: 'title',
+              size: 250,
+            },
+            {
+              accessorKey: 'url',
+              cell: function Ki() {},
+              header: 'URL',
+              id: 'url',
+              size: 150,
+            },
+            {
+              accessorKey: 'thumbnailUrl',
+              header: 'Thumbnail URL',
+              id: 'thumbnailUrl',
+              size: 180,
+            },
+          ]}
+          rows={[
+            {
+              albumId: 1,
+              id: 1,
+              thumbnailUrl: 'https://via.placeholder.com/150/92c952',
+              timestamp: new Date('2025-04-10T12:12:31.356Z'),
+              title: 'accusamus beatae ad facilis cum similique qui sunt',
+              url: 'https://via.placeholder.com/600/92c952',
+            },
+            {
+              albumId: 1,
+              id: 2,
+              thumbnailUrl: 'https://via.placeholder.com/150/771796',
+              timestamp: new Date('2025-04-02T12:12:31.356Z'),
+              title: 'reprehenderit est deserunt velit ipsam',
+              url: 'https://via.placeholder.com/600/771796',
+            },
+            {
+              albumId: 1,
+              id: 3,
+              thumbnailUrl: 'https://via.placeholder.com/150/24f355',
+              timestamp: new Date('2025-04-01T12:12:31.356Z'),
+              title: 'officia porro iure quia iusto qui ipsa ut modi',
+              url: 'https://via.placeholder.com/600/24f355',
+            },
+            {
+              albumId: 1,
+              id: 4,
+              thumbnailUrl: 'https://via.placeholder.com/150/d32776',
+              timestamp: new Date('2025-04-14T12:12:31.356Z'),
+              title:
+                'culpa odio esse rerum omnis laboriosam voluptate repudiandae',
+              url: 'https://via.placeholder.com/600/d32776',
+            },
+            {
+              albumId: 1,
+              id: 5,
+              thumbnailUrl: 'https://via.placeholder.com/150/f66b97',
+              timestamp: new Date('2025-04-04T12:12:31.356Z'),
+              title: 'natus nisi omnis corporis facere molestiae rerum in',
+              url: 'https://via.placeholder.com/600/f66b97',
+            },
+            {
+              albumId: 1,
+              id: 6,
+              thumbnailUrl: 'https://via.placeholder.com/150/56a8c2',
+              timestamp: new Date('2025-04-12T12:12:31.356Z'),
+              title: 'accusamus ea aliquid et amet sequi nemo',
+              url: 'https://via.placeholder.com/600/56a8c2',
+            },
+            {
+              albumId: 1,
+              id: 7,
+              thumbnailUrl: 'https://via.placeholder.com/150/b0f7cc',
+              timestamp: new Date('2025-04-12T12:12:31.356Z'),
+              title:
+                'officia delectus consequatur vero aut veniam explicabo molestias',
+              url: 'https://via.placeholder.com/600/b0f7cc',
+            },
+            {
+              albumId: 1,
+              id: 8,
+              thumbnailUrl: 'https://via.placeholder.com/150/54176f',
+              timestamp: new Date('2025-04-11T12:12:31.356Z'),
+              title: 'aut porro officiis laborum odit ea laudantium corporis',
+              url: 'https://via.placeholder.com/600/54176f',
+            },
+            {
+              albumId: 1,
+              id: 9,
+              thumbnailUrl: 'https://via.placeholder.com/150/51aa97',
+              timestamp: new Date('2025-04-05T12:12:31.356Z'),
+              title: 'qui eius qui autem sed',
+              url: 'https://via.placeholder.com/600/51aa97',
+            },
+            {
+              albumId: 1,
+              id: 10,
+              thumbnailUrl: 'https://via.placeholder.com/150/810b14',
+              timestamp: new Date('2025-04-07T12:12:31.356Z'),
+              title: 'beatae et provident et ut vel',
+              url: 'https://via.placeholder.com/600/810b14',
+            },
+            {
+              albumId: 1,
+              id: 11,
+              thumbnailUrl: 'https://via.placeholder.com/150/1ee8a4',
+              timestamp: new Date('2025-04-03T12:12:31.356Z'),
+              title: 'nihil at amet non hic quia qui',
+              url: 'https://via.placeholder.com/600/1ee8a4',
+            },
+            {
+              albumId: 1,
+              id: 12,
+              thumbnailUrl: 'https://via.placeholder.com/150/66b7d2',
+              timestamp: new Date('2025-03-31T12:12:31.356Z'),
+              title:
+                'mollitia soluta ut rerum eos aliquam consequatur perspiciatis maiores',
+              url: 'https://via.placeholder.com/600/66b7d2',
+            },
+            {
+              albumId: 1,
+              id: 13,
+              thumbnailUrl: 'https://via.placeholder.com/150/197d29',
+              timestamp: new Date('2025-04-09T12:12:31.356Z'),
+              title: 'repudiandae iusto deleniti rerum',
+              url: 'https://via.placeholder.com/600/197d29',
+            },
+            {
+              albumId: 1,
+              id: 14,
+              thumbnailUrl: 'https://via.placeholder.com/150/61a65',
+              timestamp: new Date('2025-04-05T12:12:31.356Z'),
+              title: 'est necessitatibus architecto ut laborum',
+              url: 'https://via.placeholder.com/600/61a65',
+            },
+            {
+              albumId: 1,
+              id: 15,
+              thumbnailUrl: 'https://via.placeholder.com/150/f9cee5',
+              timestamp: new Date('2025-04-04T12:12:31.356Z'),
+              title: 'harum dicta similique quis dolore earum ex qui',
+              url: 'https://via.placeholder.com/600/f9cee5',
+            },
+            {
+              albumId: 1,
+              id: 16,
+              thumbnailUrl: 'https://via.placeholder.com/150/fdf73e',
+              timestamp: new Date('2025-04-16T12:12:31.356Z'),
+              title:
+                'iusto sunt nobis quasi veritatis quas expedita voluptatum deserunt',
+              url: 'https://via.placeholder.com/600/fdf73e',
+            },
+            {
+              albumId: 1,
+              id: 17,
+              thumbnailUrl: 'https://via.placeholder.com/150/9c184f',
+              timestamp: new Date('2025-04-03T12:12:31.356Z'),
+              title: 'natus doloribus necessitatibus ipsa',
+              url: 'https://via.placeholder.com/600/9c184f',
+            },
+            {
+              albumId: 1,
+              id: 18,
+              thumbnailUrl: 'https://via.placeholder.com/150/1fe46f',
+              timestamp: new Date('2025-04-13T12:12:31.356Z'),
+              title:
+                'laboriosam odit nam necessitatibus et illum dolores reiciendis',
+              url: 'https://via.placeholder.com/600/1fe46f',
+            },
+            {
+              albumId: 1,
+              id: 19,
+              thumbnailUrl: 'https://via.placeholder.com/150/56acb2',
+              title: 'perferendis nesciunt eveniet et optio a',
+              url: 'https://via.placeholder.com/600/56acb2',
+            },
+            {
+              albumId: 1,
+              id: 20,
+              thumbnailUrl: 'https://via.placeholder.com/150/8985dc',
+              title:
+                'assumenda voluptatem laboriosam enim consequatur veniam placeat reiciendis error',
+              url: 'https://via.placeholder.com/600/8985dc',
+            },
+            {
+              albumId: 1,
+              id: 21,
+              thumbnailUrl: 'https://via.placeholder.com/150/5e12c6',
+              title: 'ad et natus qui',
+              url: 'https://via.placeholder.com/600/5e12c6',
+            },
+            {
+              albumId: 1,
+              id: 22,
+              thumbnailUrl: 'https://via.placeholder.com/150/45601a',
+              title: 'et ea illo et sit voluptas animi blanditiis porro',
+              url: 'https://via.placeholder.com/600/45601a',
+            },
+            {
+              albumId: 1,
+              id: 23,
+              thumbnailUrl: 'https://via.placeholder.com/150/e924e6',
+              title: 'harum velit vero totam',
+              url: 'https://via.placeholder.com/600/e924e6',
+            },
+            {
+              albumId: 1,
+              id: 24,
+              thumbnailUrl: 'https://via.placeholder.com/150/8f209a',
+              title: 'beatae officiis ut aut',
+              url: 'https://via.placeholder.com/600/8f209a',
+            },
+            {
+              albumId: 1,
+              id: 25,
+              thumbnailUrl: 'https://via.placeholder.com/150/5e3a73',
+              title: 'facere non quis fuga fugit vitae',
+              url: 'https://via.placeholder.com/600/5e3a73',
+            },
+            {
+              albumId: 1,
+              id: 26,
+              thumbnailUrl: 'https://via.placeholder.com/150/474645',
+              title: 'asperiores nobis voluptate qui',
+              url: 'https://via.placeholder.com/600/474645',
+            },
+            {
+              albumId: 1,
+              id: 27,
+              thumbnailUrl: 'https://via.placeholder.com/150/c984bf',
+              title: 'sit asperiores est quos quis nisi veniam error',
+              url: 'https://via.placeholder.com/600/c984bf',
+            },
+            {
+              albumId: 1,
+              id: 28,
+              title:
+                'non neque eligendi molestiae repudiandae illum voluptatem qui aut',
+              url: 'https://via.placeholder.com/600/392537',
+            },
+            {
+              albumId: 1,
+              id: 29,
+              title: 'aut ipsam quos ab placeat omnis',
+              url: 'https://via.placeholder.com/600/602b9e',
+            },
+            {
+              albumId: 1,
+              id: 30,
+              title: 'odio enim voluptatem quidem aut nihil illum',
+              url: 'https://via.placeholder.com/600/372c93',
+            },
+          ]}
+        />
+      </div>
+    </>
+  )
+}
+
+export const VirtualizationWithDensityChange: StoryFn<
+  EdsDataGridProps<Photo>
+> = () => {
+  return (
+    <EdsProvider>
+      <TableInDensityContext />
+    </EdsProvider>
+  )
 }
 
 export const ExpandRows: StoryFn<EdsDataGridProps<PostComment>> = (args) => {
