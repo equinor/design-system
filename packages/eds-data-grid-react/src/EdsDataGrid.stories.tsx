@@ -696,7 +696,6 @@ const TableInDensityContext = () => {
   const { density, setDensity } = useEds()
   const newDensity = density === 'comfortable' ? 'compact' : 'comfortable'
   const handleClick = () => {
-    console.log(`Setting density to ${newDensity}`)
     setDensity(newDensity)
   }
   return (
