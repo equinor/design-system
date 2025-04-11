@@ -382,6 +382,14 @@ function EdsDataGridInner<T>(
   })
   if (rowVirtualizerInstanceRef) rowVirtualizerInstanceRef.current = virtualizer
 
+  // Add effect to recalculate virtualization when density changes
+  useEffect(() => {
+    if (enableVirtual && virtualizer) {
+      // Force the virtualizer to recalculate when density changes
+      virtualizer.measure()
+    }
+  }, [density, enableVirtual, virtualizer])
+
   const virtualRows = virtualizer.getVirtualItems()
   const paddingTop = virtualRows.length ? virtualRows[0].start : 0
   const paddingBottom = virtualRows.length
