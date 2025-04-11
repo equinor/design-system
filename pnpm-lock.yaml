@@ -27,8 +27,8 @@ importers:
         specifier: ^7.26.0
         version: 7.26.0(@babel/core@7.26.0)
       '@babel/runtime':
-        specifier: ^7.26.10
-        version: 7.26.10
+        specifier: ^7.27.0
+        version: 7.27.0
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -84,8 +84,8 @@ importers:
   packages/eds-core-react:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.26.10
-        version: 7.26.10
+        specifier: ^7.27.0
+        version: 7.27.0
       '@equinor/eds-icons':
         specifier: workspace:^
         version: link:../eds-icons
@@ -407,8 +407,8 @@ importers:
   packages/eds-lab-react:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.26.10
-        version: 7.26.10
+        specifier: ^7.27.0
+        version: 7.27.0
       '@equinor/eds-core-react':
         specifier: workspace:^
         version: link:../eds-core-react
@@ -612,11 +612,11 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^5.4.17
-        version: 5.4.17(@types/node@22.13.14)(terser@5.34.1)
+        specifier: ^5.4.18
+        version: 5.4.18(@types/node@22.13.14)(terser@5.34.1)
       vite-plugin-dts:
         specifier: ^3.9.1
-        version: 3.9.1(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.17(@types/node@22.13.14)(terser@5.34.1))
+        version: 3.9.1(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.18(@types/node@22.13.14)(terser@5.34.1))
 
   packages/eds-tokens-sync:
     devDependencies:
@@ -639,17 +639,17 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^5.4.17
-        version: 5.4.17(@types/node@22.13.14)(terser@5.34.1)
+        specifier: ^5.4.18
+        version: 5.4.18(@types/node@22.13.14)(terser@5.34.1)
       vite-plugin-dts:
         specifier: ^4.4.0
-        version: 4.4.0(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.17(@types/node@22.13.14)(terser@5.34.1))
+        version: 4.4.0(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.18(@types/node@22.13.14)(terser@5.34.1))
 
   packages/eds-utils:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.26.10
-        version: 7.26.10
+        specifier: ^7.27.0
+        version: 7.27.0
       '@equinor/eds-tokens':
         specifier: workspace:*
         version: link:../eds-tokens
@@ -1419,8 +1419,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/runtime@7.26.10':
-    resolution: {integrity: sha512-2WJMeRQPHKSPemqk/awGrAiuFfzBmOIPXKizAsVhWH9YJqLZ0H+HS4c8loHGgW6utJ3E/ejXQUsiGaQy2NZ9Fw==}
+  '@babel/runtime@7.27.0':
+    resolution: {integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.25.0':
@@ -6807,8 +6807,8 @@ packages:
       vite:
         optional: true
 
-  vite@5.4.17:
-    resolution: {integrity: sha512-5+VqZryDj4wgCs55o9Lp+p8GE78TLVg0lasCH5xFZ4jacZjtqZa6JUw9/p0WeAojaOfncSM6v77InkFPGnvPvg==}
+  vite@5.4.18:
+    resolution: {integrity: sha512-1oDcnEp3lVyHCuQ2YFelM4Alm2o91xNoMncRm1U7S+JdYfYOvbiGZ3/CxGttrOu2M/KcGz7cRC2DoNUA6urmMA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -7870,7 +7870,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/runtime@7.26.10':
+  '@babel/runtime@7.27.0':
     dependencies:
       regenerator-runtime: 0.14.1
 
@@ -9958,7 +9958,7 @@ snapshots:
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.26.2
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.27.0
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -9978,7 +9978,7 @@ snapshots:
 
   '@testing-library/react@16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.27.0
       '@testing-library/dom': 10.4.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -11120,7 +11120,7 @@ snapshots:
 
   downshift@9.0.8(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.27.0
       compute-scroll-into-view: 3.1.0
       prop-types: 15.8.1
       react: 18.3.1
@@ -13139,7 +13139,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.27.0
 
   possible-typed-array-names@1.0.0: {}
 
@@ -13577,7 +13577,7 @@ snapshots:
 
   regenerator-transform@0.15.2:
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.27.0
 
   regexp.prototype.flags@1.5.3:
     dependencies:
@@ -14372,7 +14372,7 @@ snapshots:
 
   validator@13.12.0: {}
 
-  vite-plugin-dts@3.9.1(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.17(@types/node@22.13.14)(terser@5.34.1)):
+  vite-plugin-dts@3.9.1(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.18(@types/node@22.13.14)(terser@5.34.1)):
     dependencies:
       '@microsoft/api-extractor': 7.43.0(@types/node@22.13.14)
       '@rollup/pluginutils': 5.1.4(rollup@4.39.0)
@@ -14383,13 +14383,13 @@ snapshots:
       typescript: 5.8.2
       vue-tsc: 1.8.27(typescript@5.8.2)
     optionalDependencies:
-      vite: 5.4.17(@types/node@22.13.14)(terser@5.34.1)
+      vite: 5.4.18(@types/node@22.13.14)(terser@5.34.1)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-plugin-dts@4.4.0(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.17(@types/node@22.13.14)(terser@5.34.1)):
+  vite-plugin-dts@4.4.0(@types/node@22.13.14)(rollup@4.39.0)(typescript@5.8.2)(vite@5.4.18(@types/node@22.13.14)(terser@5.34.1)):
     dependencies:
       '@microsoft/api-extractor': 7.48.1(@types/node@22.13.14)
       '@rollup/pluginutils': 5.1.4(rollup@4.39.0)
@@ -14402,13 +14402,13 @@ snapshots:
       magic-string: 0.30.17
       typescript: 5.8.2
     optionalDependencies:
-      vite: 5.4.17(@types/node@22.13.14)(terser@5.34.1)
+      vite: 5.4.18(@types/node@22.13.14)(terser@5.34.1)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite@5.4.17(@types/node@22.13.14)(terser@5.34.1):
+  vite@5.4.18(@types/node@22.13.14)(terser@5.34.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.3
