@@ -39,7 +39,7 @@
     "lint": "eslint"
   },
   "devDependencies": {
-    "@figma/rest-api-spec": "^0.22.0",
+    "@figma/rest-api-spec": "^0.25.0",
     "@types/node": "^22.13.14",
     "axios": "^1.8.2",
     "dotenv": "^16.4.7",
