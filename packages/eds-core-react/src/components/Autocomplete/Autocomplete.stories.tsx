@@ -14,6 +14,7 @@ import {
   Card,
   Avatar,
   Icon,
+  TextField,
 } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
@@ -163,7 +164,7 @@ Introduction.args = {
 
 export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
-
+  const [value, setValue] = useState<MyOptionType | null>(null)
   return (
     <>
       <Autocomplete
@@ -171,6 +172,12 @@ export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
         options={options}
         multiple
         optionLabel={optionLabel}
+        selectedOptions={[value]}
+        onOptionsChange={({ selectedItems }) => {
+          const selectedItem = selectedItems[0]
+          if (!selectedItem?.label) return setValue(null)
+          setValue(selectedItem)
+        }}
       />
     </>
   )
@@ -184,6 +191,8 @@ export const ControlledSingleSelect: StoryFn<
 > = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
   const options = ['option 1', 'option 2', 'option 3', 'option 4']
+  const ref2 = useRef<HTMLInputElement>(null)
+  console.log(ref2, 'component')
   const isOptionDisabled = (item: string) => item === 'option 3'
   return (
     <div>
@@ -195,6 +204,7 @@ export const ControlledSingleSelect: StoryFn<
           setSelectedOptions(options)
         }
         optionDisabled={isOptionDisabled}
+        ref={ref2}
       />
       <Button
         onClick={() => {
@@ -760,6 +770,7 @@ type MyFormValues = {
   origin: string | null
   favouriteCounty: string | null
   fruits: { label: string; emoji: string }[]
+  test: string | null
 }
 
 export const WithReactHookForm: StoryFn<
@@ -769,6 +780,7 @@ export const WithReactHookForm: StoryFn<
     origin: null,
     favouriteCounty: null,
     fruits: [],
+    test: null,
   }
   const {
     handleSubmit,
@@ -791,6 +803,7 @@ export const WithReactHookForm: StoryFn<
         updateIsSubmitted(true)
         action('onSubmit')(data)
       })}
+      style={{ maxHeight: '40px' }}
     >
       {isSubmitted ? (
         <>
@@ -812,12 +825,18 @@ export const WithReactHookForm: StoryFn<
         </>
       ) : (
         <>
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <Button type="submit">I have made my decisions!</Button>
+            <Button variant="outlined" onClick={() => reset()}>
+              Reset
+            </Button>
+          </div>
           <div style={{ margin: '16px 0' }}>
             <Controller
               control={control}
               name="origin"
               rules={{ required: true }}
-              render={({ field: { onChange } }) => (
+              render={({ field: { onChange, ref } }) => (
                 <Autocomplete
                   onOptionsChange={({ selectedItems }) => {
                     console.log('selected origin', selectedItems)
@@ -826,6 +845,7 @@ export const WithReactHookForm: StoryFn<
                   }}
                   selectedOptions={[values.origin]}
                   label="Where are you from?"
+                  ref={ref}
                   options={counties}
                   aria-invalid={errors.origin ? 'true' : 'false'}
                   aria-describedby="error-county-required"
@@ -854,8 +874,10 @@ export const WithReactHookForm: StoryFn<
             <Controller
               control={control}
               name="favouriteCounty"
-              render={({ field: { onChange } }) => (
+              rules={{ required: true }}
+              render={({ field: { onChange, ref } }) => (
                 <Autocomplete
+                  ref={ref}
                   onOptionsChange={({ selectedItems }) => {
                     const [selectedItem] = selectedItems
                     onChange(selectedItem)
@@ -869,6 +891,17 @@ export const WithReactHookForm: StoryFn<
             />
           </div>
           <div style={{ margin: '16px 0' }}>
+            <Controller
+              control={control}
+              name="test"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Pick atleast two fruits (optional)"
+                />
+              )}
+            />
             <Controller
               control={control}
               name="fruits"
@@ -892,12 +925,6 @@ export const WithReactHookForm: StoryFn<
                 />
               )}
             />
-          </div>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Button type="submit">I have made my decisions!</Button>
-            <Button variant="outlined" onClick={() => reset()}>
-              Reset
-            </Button>
           </div>
         </>
       )}
