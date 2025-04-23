@@ -6,7 +6,7 @@ import {
   Table as TanStackTable,
 } from '@tanstack/react-table'
 import { useTableContext } from '../EdsDataGridContext'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { FilterWrapper } from './FilterWrapper'
 import { SortIndicator } from './SortIndicator'
 import { ResizeInner, Resizer } from './Resizer'
@@ -31,6 +31,7 @@ const getSortLabel = (
 }
 
 export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
+  const isResizingRef = useRef(false)
   const ctx = useTableContext()
   const table = ctx.table
   const pinned = header.column.getIsPinned()
@@ -42,6 +43,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       ? header.getStart()
       : table.getTotalSize() - header.getStart() - header.getSize()
   }, [pinned, header, table])
+
   return header.isPlaceholder ? (
     <TableCell
       $sticky={ctx.stickyHeader}
@@ -61,7 +63,12 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       key={header.id}
-      onClick={header.column.getToggleSortingHandler()}
+      onClick={(event) => {
+        if (!isResizingRef.current && header.column.getCanSort()) {
+          const toggleSort = header.column.getToggleSortingHandler()
+          toggleSort?.(event)
+        }
+      }}
       colSpan={header.colSpan}
       style={{
         width: header.getSize(),
@@ -91,8 +98,24 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       {columnResizeMode && (
         <Resizer
           onClick={(e) => e.stopPropagation()}
-          onMouseDown={header.getResizeHandler()}
-          onTouchStart={header.getResizeHandler()}
+          onMouseDown={(e) => {
+            isResizingRef.current = true
+            header.getResizeHandler()?.(e)
+          }}
+          onTouchStart={(e) => {
+            isResizingRef.current = true
+            header.getResizeHandler()?.(e)
+          }}
+          onMouseUp={() => {
+            setTimeout(() => {
+              isResizingRef.current = false
+            }, 100)
+          }}
+          onTouchEnd={() => {
+            setTimeout(() => {
+              isResizingRef.current = false
+            }, 100)
+          }}
           $isResizing={header.column.getIsResizing()}
           $columnResizeMode={columnResizeMode}
           className={'resize-handle'}
