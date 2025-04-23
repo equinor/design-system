@@ -116,9 +116,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
             header.getResizeHandler()?.(e)
           }}
           onTouchStart={(e) => {
-            if ('touches' in e && e.touches.length > 0) {
-              dragStartX.current = e.touches[0].clientX
-            }
+            dragStartX.current = e.touches[0]?.clientX ?? null
             header.getResizeHandler()?.(e)
           }}
           $isResizing={header.column.getIsResizing()}
