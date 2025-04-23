@@ -30,15 +30,18 @@ const getSortLabel = (
   return 'none'
 }
 
+// Number of pixels the pointer must move horizontally to be considered a drag.
+// A value of 3 provides a good balance between ignoring micro-movements from clicks
+// and still allowing quick column resizing without accidental sorting.
+const DRAG_TOLERANCE = 3
+
 export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
-  const isResizingRef = useRef(false)
+  const dragStartX = useRef<number | null>(null)
   const ctx = useTableContext()
   const table = ctx.table
   const pinned = header.column.getIsPinned()
   const offset = useMemo<number>(() => {
-    if (!pinned) {
-      return null
-    }
+    if (!pinned) return null
     return pinned === 'left'
       ? header.getStart()
       : table.getTotalSize() - header.getStart() - header.getSize()
@@ -64,10 +67,18 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       aria-sort={getSortLabel(header.column.getIsSorted())}
       key={header.id}
       onClick={(event) => {
-        if (!isResizingRef.current && header.column.getCanSort()) {
-          const toggleSort = header.column.getToggleSortingHandler()
-          toggleSort?.(event)
+        const endX = event.clientX
+        const hasDragged =
+          dragStartX.current !== null &&
+          Math.abs(endX - dragStartX.current) > DRAG_TOLERANCE
+
+        if (!hasDragged && header.column.getCanSort()) {
+          header.column.getToggleSortingHandler()?.(event)
         }
+
+        setTimeout(() => {
+          dragStartX.current = null
+        }, 0)
       }}
       colSpan={header.colSpan}
       style={{
@@ -85,7 +96,6 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         {!header.column.columnDef.meta?.customFilterInput && (
           <SortIndicator column={header.column} />
         )}
-
         {header.column.getCanFilter() &&
         !header.column.columnDef.meta?.customFilterInput ? (
           // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
@@ -97,24 +107,19 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       </>
       {columnResizeMode && (
         <Resizer
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
           onMouseDown={(e) => {
-            isResizingRef.current = true
+            dragStartX.current = e.clientX
             header.getResizeHandler()?.(e)
           }}
           onTouchStart={(e) => {
-            isResizingRef.current = true
+            if ('touches' in e && e.touches.length > 0) {
+              dragStartX.current = e.touches[0].clientX
+            }
             header.getResizeHandler()?.(e)
-          }}
-          onMouseUp={() => {
-            setTimeout(() => {
-              isResizingRef.current = false
-            }, 100)
-          }}
-          onTouchEnd={() => {
-            setTimeout(() => {
-              isResizingRef.current = false
-            }, 100)
           }}
           $isResizing={header.column.getIsResizing()}
           $columnResizeMode={columnResizeMode}
