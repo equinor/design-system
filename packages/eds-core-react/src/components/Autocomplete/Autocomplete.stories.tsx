@@ -212,7 +212,6 @@ export const ControlledSingleSelect: StoryFn<
   const [selectedOptions, setSelectedOptions] = useState([])
   const options = ['option 1', 'option 2', 'option 3', 'option 4']
   const ref2 = useRef<HTMLInputElement>(null)
-  console.log(ref2, 'component')
   const isOptionDisabled = (item: string) => item === 'option 3'
   return (
     <div>
