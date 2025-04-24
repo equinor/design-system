@@ -555,18 +555,18 @@ function EdsDataGridInner<T>(
         {externalPaginator
           ? externalPaginator
           : enablePagination && (
-              <div style={{ maxWidth: `${table.getTotalSize()}px` }}>
-                <Pagination
-                  totalItems={table.getFilteredRowModel().rows.length}
-                  withItemIndicator={true}
-                  itemsPerPage={page.pageSize}
-                  onChange={(e, p) =>
-                    setPage((s) => ({ ...s, pageIndex: p - 1 }))
-                  }
-                  defaultPage={1}
-                />
-              </div>
-            )}
+            <div className="table-pagination" style={{ maxWidth: `${table.getTotalSize()}px` }}>
+              <Pagination
+                totalItems={table.getFilteredRowModel().rows.length}
+                withItemIndicator={true}
+                itemsPerPage={page.pageSize}
+                onChange={(e, p) =>
+                  setPage((s) => ({ ...s, pageIndex: p - 1 }))
+                }
+                defaultPage={1}
+              />
+            </div>
+          )}
       </TableWrapper>
       {debug && enableVirtual && (
         <span>
