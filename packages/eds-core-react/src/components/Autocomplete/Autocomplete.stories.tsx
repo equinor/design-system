@@ -14,11 +14,31 @@ import {
   Card,
   Avatar,
   Icon,
-  TextField,
 } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 import { error_filled, thumbs_up, warning_filled } from '@equinor/eds-icons'
+
+const FormError = ({
+  id,
+  children,
+}: {
+  id: string
+  children: React.ReactNode
+}) => (
+  <span
+    role="alert"
+    id={id}
+    style={{
+      color: 'red',
+      paddingTop: '0.5rem',
+      fontSize: '0.75rem',
+      display: 'block',
+    }}
+  >
+    {children}
+  </span>
+)
 
 const meta: Meta<typeof Autocomplete> = {
   title: 'Inputs/Autocomplete',
@@ -854,21 +874,11 @@ export const WithReactHookForm: StoryFn<
                 />
               )}
             />
-            <span
-              role="alert"
-              id="error-county-required"
-              style={{
-                color: 'red',
-                paddingTop: '0.5rem',
-                fontSize: '0.75rem',
-                display:
-                  errors.origin && errors.origin.type === 'required'
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              Hey you! This field is required
-            </span>
+            {errors.origin && errors.origin.type === 'required' && (
+              <FormError id="error-county-required">
+                This field is required
+              </FormError>
+            )}
           </div>
           <div style={{ margin: '16px 0' }}>
             <Controller
@@ -889,19 +899,14 @@ export const WithReactHookForm: StoryFn<
                 />
               )}
             />
+            {errors.favouriteCounty &&
+              errors.favouriteCounty.type === 'required' && (
+                <FormError id="error-county-required">
+                  This field is required
+                </FormError>
+              )}
           </div>
           <div style={{ margin: '16px 0' }}>
-            <Controller
-              control={control}
-              name="test"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Pick atleast two fruits (optional)"
-                />
-              )}
-            />
             <Controller
               control={control}
               name="fruits"
@@ -911,7 +916,7 @@ export const WithReactHookForm: StoryFn<
                     onChange(selectedItems)
                   }}
                   selectedOptions={values.fruits}
-                  label="Pick atleast two fruits (optional)"
+                  label="Pick at least two fruits"
                   options={[
                     { label: 'Banana', emoji: '🍌' },
                     { label: 'Apple', emoji: '🍎' },
