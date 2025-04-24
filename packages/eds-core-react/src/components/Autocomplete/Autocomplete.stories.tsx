@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
+import { TextField } from '../TextField'
 import { StoryFn, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
@@ -786,20 +787,20 @@ export const Async: StoryFn<AutocompleteProps<MyOptionType>> = () => {
 Async.storyName = 'Async search autocomplete'
 
 type MyFormValues = {
+  firstName: string | null
   origin: string | null
   favouriteCounty: string | null
   fruits: { label: string; emoji: string }[]
-  test: string | null
 }
 
 export const WithReactHookForm: StoryFn<
   AutocompleteProps<MyOptionType>
 > = () => {
   const defaultValues: MyFormValues = {
+    firstName: null,
     origin: null,
     favouriteCounty: null,
     fruits: [],
-    test: null,
   }
   const {
     handleSubmit,
@@ -849,6 +850,26 @@ export const WithReactHookForm: StoryFn<
             <Button variant="outlined" onClick={() => reset()}>
               Reset
             </Button>
+          </div>
+          <div style={{ margin: '16px 0' }}>
+            <Controller
+              control={control}
+              name="firstName"
+              rules={{ required: true }}
+              render={({ field: { onChange, ref } }) => (
+                <TextField
+                  label="First name"
+                  ref={ref}
+                  onChange={onChange}
+                  value={values.firstName}
+                />
+              )}
+            />
+            {errors.firstName && errors.firstName.type === 'required' && (
+              <FormError id="error-test-required">
+                This field is required
+              </FormError>
+            )}
           </div>
           <div style={{ margin: '16px 0' }}>
             <Controller
