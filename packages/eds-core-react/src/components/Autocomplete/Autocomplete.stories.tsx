@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
-import { TextField } from '../TextField'
 import { StoryFn, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
@@ -185,7 +184,6 @@ Introduction.args = {
 
 export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
-  const [value, setValue] = useState<MyOptionType | null>(null)
   return (
     <>
       <Autocomplete
@@ -193,12 +191,6 @@ export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
         options={options}
         multiple
         optionLabel={optionLabel}
-        selectedOptions={[value]}
-        onOptionsChange={({ selectedItems }) => {
-          const selectedItem = selectedItems[0]
-          if (!selectedItem?.label) return setValue(null)
-          setValue(selectedItem)
-        }}
       />
     </>
   )
@@ -212,7 +204,6 @@ export const ControlledSingleSelect: StoryFn<
 > = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
   const options = ['option 1', 'option 2', 'option 3', 'option 4']
-  const ref2 = useRef<HTMLInputElement>(null)
   const isOptionDisabled = (item: string) => item === 'option 3'
   return (
     <div>
@@ -224,7 +215,6 @@ export const ControlledSingleSelect: StoryFn<
           setSelectedOptions(options)
         }
         optionDisabled={isOptionDisabled}
-        ref={ref2}
       />
       <Button
         onClick={() => {
@@ -845,32 +835,6 @@ export const WithReactHookForm: StoryFn<
         </>
       ) : (
         <>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Button type="submit">I have made my decisions!</Button>
-            <Button variant="outlined" onClick={() => reset()}>
-              Reset
-            </Button>
-          </div>
-          <div style={{ margin: '16px 0' }}>
-            <Controller
-              control={control}
-              name="firstName"
-              rules={{ required: true }}
-              render={({ field: { onChange, ref } }) => (
-                <TextField
-                  label="First name"
-                  ref={ref}
-                  onChange={onChange}
-                  value={values.firstName}
-                />
-              )}
-            />
-            {errors.firstName && errors.firstName.type === 'required' && (
-              <FormError id="error-test-required">
-                This field is required
-              </FormError>
-            )}
-          </div>
           <div style={{ margin: '16px 0' }}>
             <Controller
               control={control}
@@ -950,6 +914,12 @@ export const WithReactHookForm: StoryFn<
                 />
               )}
             />
+          </div>
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <Button type="submit">I have made my decisions!</Button>
+            <Button variant="outlined" onClick={() => reset()}>
+              Reset
+            </Button>
           </div>
         </>
       )}
