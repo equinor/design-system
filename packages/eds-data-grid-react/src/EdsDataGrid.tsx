@@ -555,7 +555,10 @@ function EdsDataGridInner<T>(
         {externalPaginator
           ? externalPaginator
           : enablePagination && (
-              <div style={{ maxWidth: `${table.getTotalSize()}px` }}>
+              <div
+                className="table-pagination"
+                style={{ maxWidth: `${table.getTotalSize()}px` }}
+              >
                 <Pagination
                   totalItems={table.getFilteredRowModel().rows.length}
                   withItemIndicator={true}
