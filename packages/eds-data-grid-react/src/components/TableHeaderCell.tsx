@@ -6,7 +6,7 @@ import {
   Table as TanStackTable,
 } from '@tanstack/react-table'
 import { useTableContext } from '../EdsDataGridContext'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { FilterWrapper } from './FilterWrapper'
 import { SortIndicator } from './SortIndicator'
 import { ResizeInner, Resizer } from './Resizer'
@@ -34,6 +34,12 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
   const ctx = useTableContext()
   const table = ctx.table
   const pinned = header.column.getIsPinned()
+
+  // Track resize in progress
+  const [isResizing, setIsResizing] = useState(false)
+  // Track when the last resize operation ended to prevent immediate sorting
+  const [lastResizeTime, setLastResizeTime] = useState(0)
+
   const offset = useMemo<number>(() => {
     if (!pinned) {
       return null
@@ -42,6 +48,37 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       ? header.getStart()
       : table.getTotalSize() - header.getStart() - header.getSize()
   }, [pinned, header, table])
+
+  // Enhanced cleanup function with debounce mechanism
+  useEffect(() => {
+    if (!isResizing) return
+
+    const handleMouseUp = () => {
+      setIsResizing(false)
+      setLastResizeTime(Date.now())
+    }
+
+    // Capture events at the document level to ensure we catch all end events
+    document.addEventListener('mouseup', handleMouseUp, { capture: true })
+    document.addEventListener('touchend', handleMouseUp, { capture: true })
+
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp, { capture: true })
+      document.removeEventListener('touchend', handleMouseUp, { capture: true })
+    }
+  }, [isResizing])
+
+  // Handler for cell click that prevents sorting right after resize
+  const handleCellClick = (e: React.MouseEvent) => {
+    // Prevent sort if we're resizing or if resize just finished (within 300ms)
+    if (isResizing || Date.now() - lastResizeTime < 300) {
+      e.stopPropagation()
+      e.preventDefault()
+      return
+    }
+    header.column.getToggleSortingHandler()?.(e)
+  }
+
   return header.isPlaceholder ? (
     <TableCell
       $sticky={ctx.stickyHeader}
@@ -61,7 +98,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       key={header.id}
-      onClick={header.column.getToggleSortingHandler()}
+      onClick={handleCellClick}
       colSpan={header.colSpan}
       style={{
         width: header.getSize(),
@@ -90,13 +127,20 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       </>
       {columnResizeMode && (
         <Resizer
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation()
+            e.preventDefault()
+          }}
           onMouseDown={(e) => {
             e.stopPropagation()
+            e.preventDefault()
+            setIsResizing(true)
             header.getResizeHandler()(e)
           }}
           onTouchStart={(e) => {
             e.stopPropagation()
+            e.preventDefault()
+            setIsResizing(true)
             header.getResizeHandler()(e)
           }}
           $isResizing={header.column.getIsResizing()}
