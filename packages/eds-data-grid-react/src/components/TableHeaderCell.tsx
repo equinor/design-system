@@ -127,19 +127,11 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       </>
       {columnResizeMode && (
         <Resizer
-          onClick={(e) => {
-            e.stopPropagation()
-            e.preventDefault()
-          }}
           onMouseDown={(e) => {
-            e.stopPropagation()
-            e.preventDefault()
             setIsResizing(true)
             header.getResizeHandler()(e)
           }}
           onTouchStart={(e) => {
-            e.stopPropagation()
-            e.preventDefault()
             setIsResizing(true)
             header.getResizeHandler()(e)
           }}

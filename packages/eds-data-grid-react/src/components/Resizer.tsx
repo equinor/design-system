@@ -31,6 +31,6 @@ export const Resizer = styled.div<ResizeProps>`
   display: flex;
   justify-content: flex-end;
 
-  /* Make resizer handle have higher specificity to ensure events don't reach the header cell */
+  /* Make resizer handle have higher specificity */
   z-index: 1;
 `
