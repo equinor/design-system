@@ -440,14 +440,15 @@ ColumnGrouping.args = {
   scrollbarHorizontal: true,
 }
 
-export const Sortable: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+export const AllTheThings: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   return <EdsDataGrid {...args} />
 }
 
-Sortable.args = {
+AllTheThings.args = {
   enableSorting: true,
   columnResizeMode: 'onChange',
   columns: groupedColumns,
+  enableColumnFiltering: true,
   sortingState: [
     {
       desc: true,
