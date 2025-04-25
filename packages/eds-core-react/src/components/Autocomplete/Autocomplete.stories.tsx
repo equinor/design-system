@@ -19,6 +19,27 @@ import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 import { error_filled, thumbs_up, warning_filled } from '@equinor/eds-icons'
 
+const FormError = ({
+  id,
+  children,
+}: {
+  id: string
+  children: React.ReactNode
+}) => (
+  <span
+    role="alert"
+    id={id}
+    style={{
+      color: 'red',
+      paddingTop: '0.5rem',
+      fontSize: '0.75rem',
+      display: 'block',
+    }}
+  >
+    {children}
+  </span>
+)
+
 const meta: Meta<typeof Autocomplete> = {
   title: 'Inputs/Autocomplete',
   component: Autocomplete,
@@ -163,7 +184,6 @@ Introduction.args = {
 
 export const Multiple: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
-
   return (
     <>
       <Autocomplete
@@ -757,6 +777,7 @@ export const Async: StoryFn<AutocompleteProps<MyOptionType>> = () => {
 Async.storyName = 'Async search autocomplete'
 
 type MyFormValues = {
+  firstName: string | null
   origin: string | null
   favouriteCounty: string | null
   fruits: { label: string; emoji: string }[]
@@ -766,6 +787,7 @@ export const WithReactHookForm: StoryFn<
   AutocompleteProps<MyOptionType>
 > = () => {
   const defaultValues: MyFormValues = {
+    firstName: null,
     origin: null,
     favouriteCounty: null,
     fruits: [],
@@ -791,6 +813,7 @@ export const WithReactHookForm: StoryFn<
         updateIsSubmitted(true)
         action('onSubmit')(data)
       })}
+      style={{ maxHeight: '40px' }}
     >
       {isSubmitted ? (
         <>
@@ -817,7 +840,7 @@ export const WithReactHookForm: StoryFn<
               control={control}
               name="origin"
               rules={{ required: true }}
-              render={({ field: { onChange } }) => (
+              render={({ field: { onChange, ref } }) => (
                 <Autocomplete
                   onOptionsChange={({ selectedItems }) => {
                     console.log('selected origin', selectedItems)
@@ -826,6 +849,7 @@ export const WithReactHookForm: StoryFn<
                   }}
                   selectedOptions={[values.origin]}
                   label="Where are you from?"
+                  ref={ref}
                   options={counties}
                   aria-invalid={errors.origin ? 'true' : 'false'}
                   aria-describedby="error-county-required"
@@ -834,28 +858,20 @@ export const WithReactHookForm: StoryFn<
                 />
               )}
             />
-            <span
-              role="alert"
-              id="error-county-required"
-              style={{
-                color: 'red',
-                paddingTop: '0.5rem',
-                fontSize: '0.75rem',
-                display:
-                  errors.origin && errors.origin.type === 'required'
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              Hey you! This field is required
-            </span>
+            {errors.origin && errors.origin.type === 'required' && (
+              <FormError id="error-county-required">
+                This field is required
+              </FormError>
+            )}
           </div>
           <div style={{ margin: '16px 0' }}>
             <Controller
               control={control}
               name="favouriteCounty"
-              render={({ field: { onChange } }) => (
+              rules={{ required: true }}
+              render={({ field: { onChange, ref } }) => (
                 <Autocomplete
+                  ref={ref}
                   onOptionsChange={({ selectedItems }) => {
                     const [selectedItem] = selectedItems
                     onChange(selectedItem)
@@ -867,6 +883,12 @@ export const WithReactHookForm: StoryFn<
                 />
               )}
             />
+            {errors.favouriteCounty &&
+              errors.favouriteCounty.type === 'required' && (
+                <FormError id="error-county-required">
+                  This field is required
+                </FormError>
+              )}
           </div>
           <div style={{ margin: '16px 0' }}>
             <Controller
@@ -878,7 +900,7 @@ export const WithReactHookForm: StoryFn<
                     onChange(selectedItems)
                   }}
                   selectedOptions={values.fruits}
-                  label="Pick atleast two fruits (optional)"
+                  label="Pick at least two fruits"
                   options={[
                     { label: 'Banana', emoji: '🍌' },
                     { label: 'Apple', emoji: '🍎' },

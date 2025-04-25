@@ -11,6 +11,7 @@ import {
   SyntheticEvent,
   DOMAttributes,
   FocusEvent,
+  useImperativeHandle,
 } from 'react'
 import {
   useCombobox,
@@ -330,7 +331,7 @@ export type AutocompleteProps<T> = {
 // MARK: component
 function AutocompleteInner<T>(
   props: AutocompleteProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     options = [],
@@ -409,6 +410,7 @@ function AutocompleteInner<T>(
   const [_availableItems, setAvailableItems] = useState(inputOptions)
   const [typedInputValue, setTypedInputValue] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
+  useImperativeHandle(ref, () => inputRef.current)
 
   const showSelectAll = useMemo(() => {
     if (!multiple && allowSelectAll) {
@@ -1028,7 +1030,7 @@ function AutocompleteInner<T>(
   // MARK: input
   return (
     <ThemeProvider theme={token}>
-      <Container className={className} style={style} ref={ref}>
+      <Container className={className} style={style}>
         <Label
           {...getLabelProps()}
           label={label}
@@ -1093,7 +1095,7 @@ function AutocompleteInner<T>(
 // MARK: exported component
 export const Autocomplete = forwardRef(AutocompleteInner) as <T>(
   props: AutocompleteProps<T> & {
-    ref?: React.ForwardedRef<HTMLDivElement>
+    ref?: React.ForwardedRef<HTMLInputElement>
     /** @ignore */
     displayName?: string | undefined
   },
