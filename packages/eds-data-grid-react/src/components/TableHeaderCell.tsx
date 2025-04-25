@@ -6,7 +6,7 @@ import {
   Table as TanStackTable,
 } from '@tanstack/react-table'
 import { useTableContext } from '../EdsDataGridContext'
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useEffect } from 'react'
 import { FilterWrapper } from './FilterWrapper'
 import { SortIndicator } from './SortIndicator'
 import { ResizeInner, Resizer } from './Resizer'
@@ -30,9 +30,6 @@ const getSortLabel = (
   return 'none'
 }
 
-// Number of pixels the pointer must move horizontally to be considered a drag.
-// A value of 3 provides a good balance between ignoring micro-movements from clicks
-// and still allowing quick column resizing without accidental sorting.
 const DRAG_TOLERANCE = 3
 
 export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
@@ -46,6 +43,20 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       ? header.getStart()
       : table.getTotalSize() - header.getStart() - header.getSize()
   }, [pinned, header, table])
+
+  useEffect(() => {
+    const handlePointerUp = () => {
+      dragStartX.current = null
+    }
+
+    window.addEventListener('mouseup', handlePointerUp)
+    window.addEventListener('touchend', handlePointerUp)
+
+    return () => {
+      window.removeEventListener('mouseup', handlePointerUp)
+      window.removeEventListener('touchend', handlePointerUp)
+    }
+  }, [])
 
   return header.isPlaceholder ? (
     <TableCell
@@ -75,10 +86,6 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         if (!hasDragged && header.column.getCanSort()) {
           header.column.getToggleSortingHandler()?.(event)
         }
-
-        setTimeout(() => {
-          dragStartX.current = null
-        }, 0)
       }}
       colSpan={header.colSpan}
       style={{
@@ -96,11 +103,17 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         {!header.column.columnDef.meta?.customFilterInput && (
           <SortIndicator column={header.column} />
         )}
+
         {header.column.getCanFilter() &&
         !header.column.columnDef.meta?.customFilterInput ? (
           // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-          <div onClick={(e) => e.stopPropagation()}>
+          <div
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+            }}
+          >
             <FilterWrapper column={header.column} />
           </div>
         ) : null}
@@ -117,7 +130,6 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
           }}
           onTouchStart={(e) => {
             dragStartX.current = e.touches[0]?.clientX ?? null
-            header.getResizeHandler()?.(e)
           }}
           $isResizing={header.column.getIsResizing()}
           $columnResizeMode={columnResizeMode}
