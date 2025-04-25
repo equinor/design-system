@@ -1093,3 +1093,39 @@ export const Styling: StoryFn<EdsDataGridProps<Photo>> = (args) => {
     />
   )
 }
+
+export const ResizeSortableColumns: StoryFn<EdsDataGridProps<Photo>> = (
+  args,
+) => {
+  const [size, setSize] = useState(defaultSizeState)
+  const [sorting, setSorting] = useState([])
+  const throttle = useRef<number | null>(null)
+
+  return (
+    <>
+      <Typography variant="h5">Resizing should not trigger sorting</Typography>
+      <pre>Sorting state: {JSON.stringify(sorting, null, 2)}</pre>
+      <EdsDataGrid
+        {...args}
+        columnSizing={size}
+        sortingState={sorting}
+        onSortingChange={setSorting}
+        onColumnResize={(e) => {
+          setSize(e)
+          if (throttle.current) {
+            clearTimeout(throttle.current)
+            throttle.current = null
+          }
+          throttle.current = setTimeout(() => {
+            action('onResize')(e)
+          }, 300) as unknown as number
+        }}
+      />
+    </>
+  )
+}
+
+ResizeSortableColumns.args = {
+  columnResizeMode: 'onChange',
+  enableSorting: true,
+}
