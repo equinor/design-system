@@ -30,4 +30,7 @@ export const Resizer = styled.div<ResizeProps>`
   touch-action: none;
   display: flex;
   justify-content: flex-end;
+
+  /* Make resizer handle have higher specificity to ensure events don't reach the header cell */
+  z-index: 1;
 `

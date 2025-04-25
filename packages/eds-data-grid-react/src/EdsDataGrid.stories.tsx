@@ -446,6 +446,7 @@ export const Sortable: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
 Sortable.args = {
   enableSorting: true,
+  columnResizeMode: 'onChange',
   columns: groupedColumns,
   sortingState: [
     {
