@@ -131,12 +131,8 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
 
       {columnResizeMode && (
         <Resizer
-          onMouseDown={(e) => {
-            header.getResizeHandler()(e)
-          }}
-          onTouchStart={(e) => {
-            header.getResizeHandler()(e)
-          }}
+          onMouseDown={header.getResizeHandler()}
+          onTouchStart={header.getResizeHandler()}
           $isResizing={header.column.getIsResizing()}
           $columnResizeMode={columnResizeMode}
           className={'resize-handle'}
