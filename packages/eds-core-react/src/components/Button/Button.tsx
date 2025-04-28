@@ -179,7 +179,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
 
     const type = href || other.as ? undefined : 'button'
 
-    tabIndex = disabled ? -1 : tabIndex
+    const adjustedTabIndex = disabled ? -1 : tabIndex
 
     const buttonProps = {
       ref,
@@ -187,7 +187,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       href,
       type,
       disabled,
-      tabIndex,
+      tabIndex: adjustedTabIndex,
       ...other,
     }
 
