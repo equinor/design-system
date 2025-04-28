@@ -3,7 +3,6 @@ import {
   ElementType,
   HTMLAttributes,
   AnchorHTMLAttributes,
-  ReactNode,
 } from 'react'
 import styled, { css } from 'styled-components'
 import {
@@ -53,64 +52,38 @@ const findTypography = (
   if (!group && quickVariants[variantName]) {
     return quickVariants[variantName] as TypographyType
   }
-
-  if (!group) {
-    throw new Error(`Group is required for variant ${variantName}`)
-  }
-
-  const typographyGroup = typography[group]
-  if (!typographyGroup) {
-    throw new Error(`Typography group "${group}" not found`)
-  }
-
-  const variant = typographyGroup[variantName] as TypographyType
-  if (!variant) {
-    throw new Error(
-      `Typography variant "${variantName}" not found in group "${group}"`,
-    )
-  }
-
-  return variant
+  return (typography[group] as unknown)[variantName] as TypographyType
 }
 
-const findColor = (
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  inputColor: ColorVariants | string | undefined = undefined,
-): string => {
-  if (inputColor === undefined || inputColor === null) {
-    return ''
-  }
-
-  return typeof colors[inputColor as ColorVariants] === 'undefined'
+//@TODO: fix typescript here
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+const findColor: (a: ColorVariants | string) => string = (
+  inputColor = null,
+): string =>
+  typeof colors[inputColor] === 'undefined'
     ? inputColor
-    : colors[inputColor as ColorVariants]
-}
+    : (colors[inputColor] as string)
 
 const toVariantName = (
   variant: TypographyVariants,
-  bold: boolean = false,
-  italic: boolean = false,
-  link: boolean = false,
-): TypographyVariants => {
-  const variantName =
-    `${variant}${bold ? '_bold' : ''}${italic ? '_italic' : ''}${
-      link ? '_link' : ''
-    }` as TypographyVariants
-
-  return variantName
-}
+  bold = false,
+  italic = false,
+  link = false,
+) =>
+  `${variant}${bold ? '_bold' : ''}${italic ? '_italic' : ''}${
+    link ? '_link' : ''
+  }`
 
 type StyledProps = {
   $typography: Partial<TypographyType>
   $link: boolean
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  $color: ColorVariants | string | undefined
-  $lines: number | undefined
+  $color: ColorVariants
+  $lines: number
 }
 
 const StyledTypography = styled.p<StyledProps>`
   ${({ $typography, $link }) => typographyTemplate($typography, $link)}
-  ${({ $color }) => $color && css({ color: findColor($color) })}
+  ${({ $color }) => css({ color: findColor($color) })}
   ${({ $lines }) =>
     $lines &&
     css`
@@ -153,8 +126,6 @@ export type TypographyProps = {
   token?: Partial<TypographyType>
   /** Number of lines. */
   lines?: number
-  /** Children content */
-  children?: ReactNode
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
 export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
@@ -162,9 +133,9 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
     {
       variant = 'body_short',
       children,
-      bold = false,
-      italic = false,
-      link = false,
+      bold,
+      italic,
+      link,
       lines,
       color,
       group,
@@ -176,13 +147,18 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
   ) {
     const as: ElementType = providedAs
       ? providedAs
-      : getElementType(variant, !!link)
+      : getElementType(variant, link)
 
-    const variantName = toVariantName(variant, !!bold, !!italic, !!link)
+    const variantName = toVariantName(
+      variant,
+      bold,
+      italic,
+      link,
+    ) as TypographyVariants
 
-    const typographyToken = findTypography(variantName, group)
+    const typography = findTypography(variantName, group)
 
-    if (typeof typographyToken === 'undefined') {
+    if (typeof typography === 'undefined') {
       throw new Error(
         `Typography variant not found for variant "${variantName}" ("${variant}") & group "${
           group || ''
@@ -193,8 +169,8 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
     return (
       <StyledTypography
         as={as}
-        $typography={{ ...typographyToken, ...token }}
-        $link={!!link}
+        $typography={{ ...typography, ...token }}
+        $link={link}
         $lines={lines}
         ref={ref}
         $color={color}
@@ -205,4 +181,4 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
     )
   })
 
-// Typography.displayName = 'EdsTypography';
+// Typography.displayName = 'EdsTypography'
