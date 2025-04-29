@@ -171,18 +171,25 @@ describe('EdsDataGrid', () => {
 
   describe('Sorting', () => {
     it('should have built-in sorting if enabled', async () => {
+      // Setup
       render(<EdsDataGrid enableSorting={true} columns={columns} rows={data} />)
-      expect(
-        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
-      ).toBe('none')
-      await userEvent.click(screen.getAllByRole('columnheader')[0])
-      expect(
-        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
-      ).toBe('ascending')
-      await userEvent.click(screen.getAllByRole('columnheader')[0])
-      expect(
-        screen.getAllByRole('columnheader')[0].getAttribute('aria-sort'),
-      ).toBe('descending')
+      const header = screen.getAllByRole('columnheader')[0]
+      const sortButton = within(header).getByTestId('sort-button-cargoId')
+
+      // Initial state verification
+      expect(header.getAttribute('aria-sort')).toBe('none')
+
+      // Test ascending sort
+      await userEvent.click(sortButton)
+      expect(header.getAttribute('aria-sort')).toBe('ascending')
+
+      // Test descending sort
+      await userEvent.click(sortButton)
+      expect(header.getAttribute('aria-sort')).toBe('descending')
+
+      // Test reset to default (optional additional verification)
+      await userEvent.click(sortButton)
+      expect(header.getAttribute('aria-sort')).toBe('none')
     })
 
     it('should not have sorting if not set', async () => {

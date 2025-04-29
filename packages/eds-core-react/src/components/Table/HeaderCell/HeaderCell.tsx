@@ -69,6 +69,7 @@ const StyledTableCell = styled.th((props: BaseProps) => {
 const CellInner = styled.div`
   display: flex;
   align-items: center;
+  height: 100%;
 `
 
 type CellProps = {
