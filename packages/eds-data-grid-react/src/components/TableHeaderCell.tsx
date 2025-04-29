@@ -111,6 +111,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         <SortButton
           tabIndex={-1}
           onClick={header.column.getToggleSortingHandler()}
+          data-testid={`sort-button-${header.id}`}
         >
           <TableHeaderCellLabel className="table-header-cell-label">
             {flexRender(header.column.columnDef.header, header.getContext())}
