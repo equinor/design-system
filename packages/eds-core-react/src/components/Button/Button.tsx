@@ -175,7 +175,10 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
     const { density } = useEds()
     const token = useToken({ density }, getToken(variant, color))
 
-    const as = href && !disabled ? 'a' : other.as ? other.as : 'button'
+    let as: React.ElementType = 'button'
+    if (href) as = 'a'
+    if (other.as) as = other.as
+    if (disabled) as = 'button'
 
     const type = href || other.as ? undefined : 'button'
 
@@ -183,22 +186,20 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
 
     const buttonProps = {
       ref,
-      as,
       href,
       type,
       disabled,
       tabIndex,
       ...other,
+      as,
     }
+
+    const Container = fullWidth ? InnerFullWidth : Inner
 
     return (
       <ThemeProvider theme={token}>
         <ButtonBase {...buttonProps}>
-          {fullWidth ? (
-            <InnerFullWidth>{children}</InnerFullWidth>
-          ) : (
-            <Inner>{children}</Inner>
-          )}
+          <Container>{children}</Container>
         </ButtonBase>
       </ThemeProvider>
     )
