@@ -196,14 +196,14 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
     const as = getElementType(disabled, other.as, href)
     const type = getButtonType(href, other.as)
 
-    tabIndex = disabled ? -1 : tabIndex
+    const adjustedTabIndex = disabled ? -1 : tabIndex
 
     const buttonProps = {
       ref,
       href,
       type,
       disabled,
-      tabIndex,
+      tabIndex: adjustedTabIndex,
       ...other,
       as,
     }

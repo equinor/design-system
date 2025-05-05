@@ -51,7 +51,7 @@ export const Breadcrumb: OverridableSubComponent = forwardRef(
     { children, maxWidth, forceTooltip, href, as, ...other },
     ref,
   ) {
-    const props = {
+    const props: React.ComponentProps<typeof StyledTypography> = {
       ...other,
       href,
       ref,
