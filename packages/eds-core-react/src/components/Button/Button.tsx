@@ -138,6 +138,25 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
   `
 })
 
+const getElementType = (
+  disabled: boolean,
+  customType?: React.ElementType,
+  href?: string,
+): React.ElementType => {
+  if (disabled) return 'button'
+  if (customType) return customType
+  if (href) return 'a'
+  return 'button'
+}
+
+const getButtonType = (
+  href?: string,
+  customElementType?: React.ElementType,
+): string | undefined => {
+  if (href || customElementType) return undefined
+  return 'button'
+}
+
 export type ButtonProps = {
   /**  Specifies color */
   color?: Colors
@@ -174,13 +193,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
   ) {
     const { density } = useEds()
     const token = useToken({ density }, getToken(variant, color))
-
-    let as: React.ElementType = 'button'
-    if (href) as = 'a'
-    if (other.as) as = other.as
-    if (disabled) as = 'button'
-
-    const type = href || other.as ? undefined : 'button'
+    const as = getElementType(disabled, other.as, href)
+    const type = getButtonType(href, other.as)
 
     tabIndex = disabled ? -1 : tabIndex
 
