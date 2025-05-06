@@ -34,6 +34,15 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
   const ctx = useTableContext()
   const table = ctx.table
   const pinned = header.column.getIsPinned()
+  const isFiltered = header.column.getIsFiltered()
+  const filterValue = header.column.getFilterValue()
+  const hasActiveFilters = useMemo(() => {
+    if (!isFiltered) return false
+    if (Array.isArray(filterValue)) {
+      return filterValue.length > 0 && filterValue.some((v) => !!v || v === 0) // avoid empty strings counting
+    }
+    return !!filterValue
+  }, [isFiltered, filterValue])
   const offset = useMemo<number>(() => {
     if (!pinned) {
       return null
@@ -58,7 +67,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       $sticky={ctx.stickyHeader}
       $offset={offset}
       $pinned={pinned}
-      $activeFilter={header.column.getIsFiltered()}
+      $activeFilter={hasActiveFilters}
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       key={header.id}

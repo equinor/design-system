@@ -29,10 +29,13 @@ export const TableCell = styled(Table.Cell)<{
     background: ${tokens.colors.interactive.primary__hover.rgba};
     opacity: 1;
   }
-  ${FilterVisibility} {
+  ${FilterVisibility}:not(:focus-within) {
     opacity: ${({ $activeFilter }) => ($activeFilter ? 1 : 0)};
   }
   &:hover ${FilterVisibility} {
+    opacity: 1;
+  }
+  ${FilterVisibility}:focus-within {
     opacity: 1;
   }
 `
