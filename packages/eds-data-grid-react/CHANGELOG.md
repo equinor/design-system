@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- :bug: Prevent triggering sorting on resize by @torleifhalseth in https://github.com/equinor/design-system/pull/3782
+- :bug: Prevent triggering sorting on resize by @torleifhalseth & @pomfrida in https://github.com/equinor/design-system/pull/3782
 
 ### Added
 
