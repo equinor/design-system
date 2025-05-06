@@ -389,6 +389,14 @@ function EdsDataGridInner<T>(
   })
   if (rowVirtualizerInstanceRef) rowVirtualizerInstanceRef.current = virtualizer
 
+  // Add effect to recalculate virtualization when density changes
+  useEffect(() => {
+    if (enableVirtual && virtualizer) {
+      // Force the virtualizer to recalculate when density changes
+      virtualizer.measure()
+    }
+  }, [density, enableVirtual, virtualizer])
+
   const virtualRows = virtualizer.getVirtualItems()
   const paddingTop = virtualRows.length ? virtualRows[0].start : 0
   const paddingBottom = virtualRows.length
@@ -554,7 +562,10 @@ function EdsDataGridInner<T>(
         {externalPaginator
           ? externalPaginator
           : enablePagination && (
-              <div style={{ maxWidth: `${table.getTotalSize()}px` }}>
+              <div
+                className="table-pagination"
+                style={{ maxWidth: `${table.getTotalSize()}px` }}
+              >
                 <Pagination
                   totalItems={table.getFilteredRowModel().rows.length}
                   withItemIndicator={true}

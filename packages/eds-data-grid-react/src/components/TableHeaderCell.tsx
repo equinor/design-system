@@ -11,6 +11,30 @@ import { FilterWrapper } from './FilterWrapper'
 import { SortIndicator } from './SortIndicator'
 import { ResizeInner, Resizer } from './Resizer'
 import { TableCell, FilterVisibility } from './TableCell'
+import styled from 'styled-components'
+
+const SortButton = styled.button`
+  cursor: pointer;
+  height: 100%;
+  width: calc(100% - 5px); /* Leave space for resizer */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding-left: var(--eds_table__cell__padding_x, 16px);
+  padding-right: var(--eds_table__cell__padding_x, 16px);
+  margin: 0;
+  outline: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+`
+
+const TableHeaderCellLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 type Props<T> = {
   header: Header<T, unknown>
@@ -43,6 +67,9 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
     }
     return !!filterValue
   }, [isFiltered, filterValue])
+  const canSort = header.column.getCanSort()
+  const canFilter = header.column.getCanFilter()
+
   const offset = useMemo<number>(() => {
     if (!pinned) {
       return null
@@ -51,6 +78,17 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       ? header.getStart()
       : table.getTotalSize() - header.getStart() - header.getSize()
   }, [pinned, header, table])
+
+  const tableCellPadding = useMemo(() => {
+    if (canSort && canFilter) {
+      return '0 var(--eds_table__cell__padding_x, 16px) 0 0'
+    }
+    if (canSort) {
+      return '0'
+    }
+    return '0 var(--eds_table__cell__padding_x, 16px) 0 var(--eds_table__cell__padding_x, 16px)'
+  }, [canSort, canFilter])
+
   return header.isPlaceholder ? (
     <TableCell
       $sticky={ctx.stickyHeader}
@@ -71,36 +109,43 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       aria-sort={getSortLabel(header.column.getIsSorted())}
       key={header.id}
-      onClick={header.column.getToggleSortingHandler()}
       colSpan={header.colSpan}
       style={{
         width: header.getSize(),
         verticalAlign: ctx.enableColumnFiltering ? 'top' : 'middle',
         ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
+        padding: tableCellPadding,
       }}
     >
-      <>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span className="table-header-cell-label">
+      {canSort ? (
+        <SortButton
+          tabIndex={-1}
+          onClick={header.column.getToggleSortingHandler()}
+          data-testid={`sort-button-${header.id}`}
+        >
+          <TableHeaderCellLabel className="table-header-cell-label">
             {flexRender(header.column.columnDef.header, header.getContext())}
-          </span>
-        </div>
-        {!header.column.columnDef.meta?.customFilterInput && (
-          <SortIndicator column={header.column} />
-        )}
+          </TableHeaderCellLabel>
+          {!header.column.columnDef.meta?.customFilterInput && (
+            <SortIndicator column={header.column} />
+          )}
+        </SortButton>
+      ) : (
+        <TableHeaderCellLabel className="table-header-cell-label">
+          {flexRender(header.column.columnDef.header, header.getContext())}
+        </TableHeaderCellLabel>
+      )}
 
-        {header.column.getCanFilter() &&
-        !header.column.columnDef.meta?.customFilterInput ? (
-          // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-          <FilterVisibility onClick={(e) => e.stopPropagation()}>
-            <FilterWrapper column={header.column} />
-          </FilterVisibility>
-        ) : null}
-      </>
+      {canFilter && !header.column.columnDef.meta?.customFilterInput ? (
+        // Supressing this warning - div is not interactive, but prevents propagation of events to avoid unintended sorting
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+        <FilterVisibility onClick={(e) => e.stopPropagation()}>
+          <FilterWrapper column={header.column} />
+        </FilterVisibility>
+      ) : null}
+
       {columnResizeMode && (
         <Resizer
-          onClick={(e) => e.stopPropagation()}
           onMouseDown={header.getResizeHandler()}
           onTouchStart={header.getResizeHandler()}
           $isResizing={header.column.getIsResizing()}

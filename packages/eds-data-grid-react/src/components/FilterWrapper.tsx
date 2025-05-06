@@ -50,7 +50,7 @@ export function FilterWrapper<T = unknown>({
   )
 
   return (
-    <>
+    <span>
       <Button
         aria-haspopup
         aria-expanded={open}
@@ -83,6 +83,6 @@ export function FilterWrapper<T = unknown>({
           )}
         </Popover.Content>
       </Popover>
-    </>
+    </span>
   )
 }

@@ -3,3 +3,4 @@ README.md
 packages/eds-icons/src/data.ts
 packages/eds-tokens/build/*
 packages/eds-icons/src/data.ts
+packages/eds-core-react/src/components/Select/NativeSelect.tsx

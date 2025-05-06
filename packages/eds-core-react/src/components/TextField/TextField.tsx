@@ -58,7 +58,7 @@ export type TextFieldProps = SharedTextFieldProps &
     | InputHTMLAttributes<HTMLInputElement>
   )
 
-export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
     {
       id: _id,
@@ -97,7 +97,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         </>
       ),
       rowsMax,
-      ref: inputRef || textareaRef,
+      ref: ref || inputRef || textareaRef,
       $multiline: multiline,
       ...other,
     }
@@ -110,7 +110,6 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     }
 
     const containerProps = {
-      ref,
       className,
       style: {
         width: '100%',

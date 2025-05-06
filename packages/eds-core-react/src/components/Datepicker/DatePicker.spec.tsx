@@ -32,7 +32,7 @@ describe('DatePicker', () => {
     const Comp = () => {
       const [date, setDate] = useState<Date | null>(new Date(2024, 4, 1))
       return (
-        <I18nProvider locale={'en-US'}>
+        <I18nProvider locale="en-US">
           <button type={'button'} onClick={() => setDate(null)}>
             Reset
           </button>

@@ -5,8 +5,12 @@
     "noEmit": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom"]
+    "types": ["@testing-library/jest-dom", "styled-components"]
   },
-  "include": ["src/**/*.test.ts*", "./jest.setup.ts"],
+  "include": [
+    "src/**/*.test.ts*", 
+    "./jest.setup.ts",
+    "src/components/styled.d.ts"  // Make sure styled.d.ts is included for tests
+  ],
   "exclude": ["node_modules", "src/**/*.stories.ts*", "src/stories", "src/test"]
 }

@@ -11,6 +11,7 @@ import {
   SyntheticEvent,
   DOMAttributes,
   FocusEvent,
+  useImperativeHandle,
 } from 'react'
 import {
   useCombobox,
@@ -311,7 +312,13 @@ export type AutocompleteProps<T> = {
    *  @default 300
    */
   dropdownHeight?: number
+
   /**
+   * Method that is used to select a key that can be used for comparing items. If omitted, objects are matched by reference.
+   */
+  itemToKey?: (value: T | null) => unknown
+  /**
+   * @deprecated since version 0.45.0 - use itemToKey instead
    * Method that is used to compare objects by value. If omitted, objects are matched by reference.
    */
   itemCompare?: (value: T, compare: T) => boolean
@@ -324,7 +331,7 @@ export type AutocompleteProps<T> = {
 // MARK: component
 function AutocompleteInner<T>(
   props: AutocompleteProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     options = [],
@@ -340,7 +347,8 @@ function AutocompleteInner<T>(
     onInputChange,
     selectedOptions: _selectedOptions,
     multiple,
-    itemCompare,
+    itemToKey: _itemToKey,
+    itemCompare: _itemCompare,
     allowSelectAll,
     initialSelectedOptions: _initialSelectedOptions = [],
     optionDisabled = defaultOptionDisabled,
@@ -359,6 +367,27 @@ function AutocompleteInner<T>(
     onClear,
     ...other
   } = props
+
+  const itemCompare = useMemo(() => {
+    if (_itemCompare && _itemToKey) {
+      console.error(
+        'Error: Specifying both itemCompare and itemToKey. itemCompare is deprecated, while itemToKey should be used instead of it. Please only use one.',
+      )
+      return _itemCompare
+    }
+    if (_itemToKey) {
+      return (o1: T, o2: T) => _itemToKey(o1) === _itemToKey(o2)
+    }
+    return _itemCompare
+  }, [_itemCompare, _itemToKey])
+
+  const itemToKey = useCallback(
+    (item: T) => {
+      console.log(`item is`, item)
+      return _itemToKey ? _itemToKey(item) : item
+    },
+    [_itemToKey],
+  )
 
   // MARK: initializing data/setup
   const selectedOptions = _selectedOptions
@@ -381,6 +410,7 @@ function AutocompleteInner<T>(
   const [_availableItems, setAvailableItems] = useState(inputOptions)
   const [typedInputValue, setTypedInputValue] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
+  useImperativeHandle(ref, () => inputRef.current)
 
   const showSelectAll = useMemo(() => {
     if (!multiple && allowSelectAll) {
@@ -417,6 +447,7 @@ function AutocompleteInner<T>(
   let placeholderText = placeholder
 
   let multipleSelectionProps: UseMultipleSelectionProps<T> = {
+    itemToKey,
     initialSelectedItems: multiple
       ? initialSelectedOptions
       : initialSelectedOptions[0]
@@ -551,6 +582,7 @@ function AutocompleteInner<T>(
     isItemDisabled(item) {
       return optionDisabled(item)
     },
+    itemToKey,
     itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
       onInputChange && onInputChange(inputValue)
@@ -998,7 +1030,7 @@ function AutocompleteInner<T>(
   // MARK: input
   return (
     <ThemeProvider theme={token}>
-      <Container className={className} style={style} ref={ref}>
+      <Container className={className} style={style}>
         <Label
           {...getLabelProps()}
           label={label}
@@ -1063,7 +1095,7 @@ function AutocompleteInner<T>(
 // MARK: exported component
 export const Autocomplete = forwardRef(AutocompleteInner) as <T>(
   props: AutocompleteProps<T> & {
-    ref?: React.ForwardedRef<HTMLDivElement>
+    ref?: React.ForwardedRef<HTMLInputElement>
     /** @ignore */
     displayName?: string | undefined
   },

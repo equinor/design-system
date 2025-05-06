@@ -29,6 +29,7 @@ exports[`Table Matches snapshot 1`] = `
 .c4 {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
 .c1 {
