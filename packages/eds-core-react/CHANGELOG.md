@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.45.1] - 2025-05-06
+
+### Fixed
+
+- :bug: `Autocomplete`, `TextField`: fix scroll to field error with react hook form by @FredrikMWold in https://github.com/equinor/design-system/pull/3777
+- :bug: `Button`: allow button to become disabled when the as prop is used by @FredrikMWold in https://github.com/equinor/design-system/pull/3785
+- :bug: `Slider`: fix active line disappearing when user hovers by @pomfrida in https://github.com/equinor/design-system/pull/3783
+- :bug: `Autocomplete`: clean up console log by @FredrikMWold in https://github.com/equinor/design-system/pull/3788
+
 ## [0.45.0] - 2025-04-11
 
 ### Fixed
