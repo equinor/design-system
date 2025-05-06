@@ -383,7 +383,6 @@ function AutocompleteInner<T>(
 
   const itemToKey = useCallback(
     (item: T) => {
-      console.log(`item is`, item)
       return _itemToKey ? _itemToKey(item) : item
     },
     [_itemToKey],
