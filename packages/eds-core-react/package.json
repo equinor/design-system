@@ -97,7 +97,7 @@
     "@react-stately/calendar": "^3.8.0",
     "@react-stately/datepicker": "^3.14.0",
     "@react-types/shared": "^3.29.0",
-    "@tanstack/react-virtual": "3.13.2",
+    "@tanstack/react-virtual": "3.13.6",
     "downshift": "9.0.8",
     "react-aria": "^3.39.0"
   }
