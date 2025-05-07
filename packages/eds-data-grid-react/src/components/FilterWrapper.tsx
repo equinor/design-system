@@ -6,6 +6,7 @@ import { filter_alt, filter_alt_active } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
 import { Filter } from './Filter'
 import { useTableContext } from '../EdsDataGridContext'
+import { FilterVisibility } from './TableCell'
 
 type FilterProps<T = unknown, U = unknown> = {
   column: Column<T>
@@ -50,7 +51,7 @@ export function FilterWrapper<T = unknown>({
   )
 
   return (
-    <span>
+    <FilterVisibility onClick={(e) => e.stopPropagation()}>
       <Button
         aria-haspopup
         aria-expanded={open}
@@ -83,6 +84,6 @@ export function FilterWrapper<T = unknown>({
           )}
         </Popover.Content>
       </Popover>
-    </span>
+    </FilterVisibility>
   )
 }
