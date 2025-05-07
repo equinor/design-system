@@ -56,6 +56,8 @@ function EdsDataGridInner<T>(
     selectedRows,
     rowSelectionState,
     enableColumnFiltering,
+    columnFiltersState,
+    onColumnFiltersChange,
     debug,
     enablePagination,
     enableSorting,
@@ -155,6 +157,10 @@ function EdsDataGridInner<T>(
   }, [columnVisibility, setVisible])
 
   useEffect(() => {
+    setColumnFilters(columnFiltersState)
+  }, [columnFiltersState])
+
+  useEffect(() => {
     setColumnPin((s) => columnPinState ?? s)
   }, [columnPinState])
 
@@ -247,6 +253,7 @@ function EdsDataGridInner<T>(
     },
     state: {
       sorting,
+      columnFilters: columnFilters,
       columnPinning: columnPin,
       rowSelection: internalRowSelectionState,
       columnOrder: columnOrderState,
@@ -305,7 +312,7 @@ function EdsDataGridInner<T>(
   if (enableColumnFiltering) {
     options.state.columnFilters = columnFilters
     options.state.globalFilter = globalFilter
-    options.onColumnFiltersChange = setColumnFilters
+    options.onColumnFiltersChange = onColumnFiltersChange ?? setColumnFilters
     options.onGlobalFilterChange = setGlobalFilter
     options.getFacetedRowModel = getFacetedRowModel()
     options.getFacetedUniqueValues = getFacetedUniqueValues()

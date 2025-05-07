@@ -127,6 +127,9 @@ See [Tanstack docs for more](https://tanstack.com/table/v8/docs/api/features/sor
 Comes with prebuilt functionality for column filtering, defaulting to range (from - to) for numbers and multi-select for strings.
 Empty values are shown as `<Blank>` in the dropdown.
 
+External filtering is also supported by passing the columnFilterState and onColumnFilterChange props to the EdsDataGrid component.
+If you only pass `columnFilterState`, this is used as the initial state, and the grid will handle the filtering internally.
+
 If you need a filter outside of these two variants, you can add a custom filter in `columnDef.header`, and set `columnDef.meta.customFilterInput` to `true`.
 We expose a helper (`import { FilterWrapper } from '@equinor/eds-data-grid-react'`) to handle the filtering & layout and keep it in line with the other fields.
 

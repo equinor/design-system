@@ -95,7 +95,8 @@ export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
     const [end, setEnd] = useState<string>(value?.end ?? '')
 
     useEffect(() => {
-      onChange({ start, end })
+      if (!start && !end) onChange(null)
+      else onChange({ start, end })
     }, [start, end, onChange])
 
     return (
@@ -105,9 +106,9 @@ export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
           id={'my-custom-date-start'}
           type={'date'}
           value={start}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setStart(e.currentTarget.value)
-          }
+          }}
         />
         <TextField
           label={'End'}
@@ -171,6 +172,7 @@ export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
     id: 'timestamp',
     size: 200,
     filterFn: (row, columnId, filterValue: { start?: Date; end?: Date }) => {
+      if (!filterValue) return true
       const { start, end } = filterValue
       if (!start && !end) return true
       let startDate = 0
@@ -196,6 +198,12 @@ export const ColumnFiltering: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
 ColumnFiltering.args = {
   enableColumnFiltering: true,
+  columnFiltersState: [
+    {
+      id: 'id',
+      value: [2, 4],
+    },
+  ],
 }
 
 const defaultSizeState = columns
