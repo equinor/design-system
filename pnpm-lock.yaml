@@ -27,8 +27,8 @@ importers:
         specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)
       '@babel/runtime':
-        specifier: ^7.27.0
-        version: 7.27.0
+        specifier: ^7.27.1
+        version: 7.27.1
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -84,8 +84,8 @@ importers:
   packages/eds-core-react:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.27.0
-        version: 7.27.0
+        specifier: ^7.27.1
+        version: 7.27.1
       '@equinor/eds-icons':
         specifier: workspace:^
         version: link:../eds-icons
@@ -114,8 +114,8 @@ importers:
         specifier: ^3.29.0
         version: 3.29.0(react@18.3.1)
       '@tanstack/react-virtual':
-        specifier: 3.13.2
-        version: 3.13.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 3.13.6
+        version: 3.13.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       downshift:
         specifier: 9.0.8
         version: 9.0.8(react@18.3.1)
@@ -371,8 +371,8 @@ importers:
         specifier: 6.1.17
         version: 6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ts-jest:
-        specifier: 29.3.1
-        version: 29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@22.15.3)(ts-node@10.9.2(@types/node@22.15.3)(typescript@5.8.3)))(typescript@5.8.3)
+        specifier: 29.3.2
+        version: 29.3.2(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@22.15.3)(ts-node@10.9.2(@types/node@22.15.3)(typescript@5.8.3)))(typescript@5.8.3)
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@22.15.3)(typescript@5.8.3)
@@ -407,8 +407,8 @@ importers:
   packages/eds-lab-react:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.27.0
-        version: 7.27.0
+        specifier: ^7.27.1
+        version: 7.27.1
       '@equinor/eds-core-react':
         specifier: workspace:^
         version: link:../eds-core-react
@@ -612,11 +612,11 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       vite:
-        specifier: ^5.4.18
-        version: 5.4.18(@types/node@22.15.3)(terser@5.34.1)
+        specifier: ^5.4.19
+        version: 5.4.19(@types/node@22.15.3)(terser@5.34.1)
       vite-plugin-dts:
         specifier: ^3.9.1
-        version: 3.9.1(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.18(@types/node@22.15.3)(terser@5.34.1))
+        version: 3.9.1(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.19(@types/node@22.15.3)(terser@5.34.1))
 
   packages/eds-tokens-sync:
     devDependencies:
@@ -639,17 +639,17 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       vite:
-        specifier: ^5.4.18
-        version: 5.4.18(@types/node@22.15.3)(terser@5.34.1)
+        specifier: ^5.4.19
+        version: 5.4.19(@types/node@22.15.3)(terser@5.34.1)
       vite-plugin-dts:
         specifier: ^4.5.3
-        version: 4.5.3(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.18(@types/node@22.15.3)(terser@5.34.1))
+        version: 4.5.3(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.19(@types/node@22.15.3)(terser@5.34.1))
 
   packages/eds-utils:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.27.0
-        version: 7.27.0
+        specifier: ^7.27.1
+        version: 7.27.1
       '@equinor/eds-tokens':
         specifier: workspace:*
         version: link:../eds-tokens
@@ -1374,6 +1374,10 @@ packages:
 
   '@babel/runtime@7.27.0':
     resolution: {integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.27.1':
+    resolution: {integrity: sha512-1x3D2xEk2fRo3PAhwQwu5UubzgiVWSXTBfWpVd2Mx2AzRqJuDJCsgaDVZ7HB5iGzDW1Hl1sWN2mFyKjmR9uAog==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.0':
@@ -3059,12 +3063,6 @@ packages:
       react: '>=16.8'
       react-dom: '>=16.8'
 
-  '@tanstack/react-virtual@3.13.2':
-    resolution: {integrity: sha512-LceSUgABBKF6HSsHK2ZqHzQ37IKV/jlaWbHm+NyTa3/WNb/JZVcThDuTainf+PixltOOcFCYXwxbLpOX9sCx+g==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
   '@tanstack/react-virtual@3.13.6':
     resolution: {integrity: sha512-WT7nWs8ximoQ0CDx/ngoFP7HbQF9Q2wQe4nh2NB+u2486eX3nZRE40P9g6ccCVq7ZfTSH5gFOuCoVH5DLNS/aA==}
     peerDependencies:
@@ -3074,9 +3072,6 @@ packages:
   '@tanstack/table-core@8.21.3':
     resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
     engines: {node: '>=12'}
-
-  '@tanstack/virtual-core@3.13.2':
-    resolution: {integrity: sha512-Qzz4EgzMbO5gKrmqUondCjiHcuu4B1ftHb0pjCut661lXZdGoHeze9f/M8iwsK1t5LGR6aNuNGU7mxkowaW6RQ==}
 
   '@tanstack/virtual-core@3.13.6':
     resolution: {integrity: sha512-cnQUeWnhNP8tJ4WsGcYiX24Gjkc9ALstLbHcBj1t3E7EimN6n6kHH+DPV4PpDnuw00NApQp+ViojMj1GRdwYQg==}
@@ -6636,8 +6631,8 @@ packages:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
 
-  ts-jest@29.3.1:
-    resolution: {integrity: sha512-FT2PIRtZABwl6+ZCry8IY7JZ3xMuppsEV9qFVHOVe8jDzggwUZ9TsM4chyJxL9yi6LvkqcZYU3LmapEE454zBQ==}
+  ts-jest@29.3.2:
+    resolution: {integrity: sha512-bJJkrWc6PjFVz5g2DGCNUo8z7oFEYaz1xP1NpeDU7KNLMWPpEyV8Chbpkn8xjzgRDpQhnGMyvyldoL7h8JXyug==}
     engines: {node: ^14.15.0 || ^16.10.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -6868,8 +6863,8 @@ packages:
       vite:
         optional: true
 
-  vite@5.4.18:
-    resolution: {integrity: sha512-1oDcnEp3lVyHCuQ2YFelM4Alm2o91xNoMncRm1U7S+JdYfYOvbiGZ3/CxGttrOu2M/KcGz7cRC2DoNUA6urmMA==}
+  vite@5.4.19:
+    resolution: {integrity: sha512-qO3aKv3HoQC8QKiNSTuUM1l9o/XX3+c+VTgLHbJWHZGeTPVAg2XwazI9UWzoxjIJCGCV2zU60uqMzjeLZuULqA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -7879,6 +7874,8 @@ snapshots:
   '@babel/runtime@7.27.0':
     dependencies:
       regenerator-runtime: 0.14.1
+
+  '@babel/runtime@7.27.1': {}
 
   '@babel/template@7.27.0':
     dependencies:
@@ -10000,12 +9997,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@tanstack/react-virtual@3.13.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@tanstack/virtual-core': 3.13.2
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
   '@tanstack/react-virtual@3.13.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/virtual-core': 3.13.6
@@ -10013,8 +10004,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@tanstack/table-core@8.21.3': {}
-
-  '@tanstack/virtual-core@3.13.2': {}
 
   '@tanstack/virtual-core@3.13.6': {}
 
@@ -11219,7 +11208,7 @@ snapshots:
 
   downshift@9.0.8(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
       compute-scroll-into-view: 3.1.1
       prop-types: 15.8.1
       react: 18.3.1
@@ -11228,7 +11217,7 @@ snapshots:
 
   downshift@9.0.9(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
       compute-scroll-into-view: 3.1.1
       prop-types: 15.8.1
       react: 18.3.1
@@ -13225,7 +13214,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
 
   possible-typed-array-names@1.1.0: {}
 
@@ -13675,7 +13664,7 @@ snapshots:
 
   regenerator-transform@0.15.2:
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
 
   regexp.prototype.flags@1.5.4:
     dependencies:
@@ -14234,7 +14223,7 @@ snapshots:
 
   ts-dedent@2.2.0: {}
 
-  ts-jest@29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@22.15.3)(ts-node@10.9.2(@types/node@22.15.3)(typescript@5.8.3)))(typescript@5.8.3):
+  ts-jest@29.3.2(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@22.15.3)(ts-node@10.9.2(@types/node@22.15.3)(typescript@5.8.3)))(typescript@5.8.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
@@ -14463,7 +14452,7 @@ snapshots:
 
   validator@13.15.0: {}
 
-  vite-plugin-dts@3.9.1(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.18(@types/node@22.15.3)(terser@5.34.1)):
+  vite-plugin-dts@3.9.1(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.19(@types/node@22.15.3)(terser@5.34.1)):
     dependencies:
       '@microsoft/api-extractor': 7.43.0(@types/node@22.15.3)
       '@rollup/pluginutils': 5.1.4(rollup@4.40.1)
@@ -14474,13 +14463,13 @@ snapshots:
       typescript: 5.8.3
       vue-tsc: 1.8.27(typescript@5.8.3)
     optionalDependencies:
-      vite: 5.4.18(@types/node@22.15.3)(terser@5.34.1)
+      vite: 5.4.19(@types/node@22.15.3)(terser@5.34.1)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-plugin-dts@4.5.3(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.18(@types/node@22.15.3)(terser@5.34.1)):
+  vite-plugin-dts@4.5.3(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@5.4.19(@types/node@22.15.3)(terser@5.34.1)):
     dependencies:
       '@microsoft/api-extractor': 7.52.5(@types/node@22.15.3)
       '@rollup/pluginutils': 5.1.4(rollup@4.40.1)
@@ -14493,13 +14482,13 @@ snapshots:
       magic-string: 0.30.17
       typescript: 5.8.3
     optionalDependencies:
-      vite: 5.4.18(@types/node@22.15.3)(terser@5.34.1)
+      vite: 5.4.19(@types/node@22.15.3)(terser@5.34.1)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite@5.4.18(@types/node@22.15.3)(terser@5.34.1):
+  vite@5.4.19(@types/node@22.15.3)(terser@5.34.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.3
