@@ -41,19 +41,21 @@ const StyledListItem = styled.li<StyledListItemType>(
   },
 )
 
-const Label = styled.span<{ $multiline: boolean }>(({ theme, $multiline }) => {
-  return css`
-    ${spacingsTemplate(theme.entities.label.spacings)}
-    text-overflow: ellipsis;
-    white-space: ${$multiline ? 'normal' : 'nowrap'};
-    overflow: ${$multiline ? 'initial' : 'hidden'};
-    overflow-wrap: anywhere;
-    /* hack to fix clipping issue in firefox (#3170) */
-    @supports (-moz-appearance: none) {
-      overflow: ${$multiline ? 'initial' : 'clip'};
-    }
-  `
-})
+export const AutocompleteOptionLabel = styled.span<{ $multiline: boolean }>(
+  ({ theme, $multiline }) => {
+    return css`
+      ${spacingsTemplate(theme.entities.label.spacings)}
+      text-overflow: ellipsis;
+      white-space: ${$multiline ? 'normal' : 'nowrap'};
+      overflow: ${$multiline ? 'initial' : 'hidden'};
+      overflow-wrap: anywhere;
+      /* hack to fix clipping issue in firefox (#3170) */
+      @supports (-moz-appearance: none) {
+        overflow: ${$multiline ? 'initial' : 'clip'};
+      }
+    `
+  },
+)
 
 export type AutocompleteOptionProps = {
   value: string
@@ -110,7 +112,9 @@ function AutocompleteOptionInner(
       {optionComponent ? (
         <>{optionComponent}</>
       ) : (
-        <Label $multiline={multiline}>{value}</Label>
+        <AutocompleteOptionLabel $multiline={multiline}>
+          {value}
+        </AutocompleteOptionLabel>
       )}
     </StyledListItem>
   )
