@@ -1,5 +1,5 @@
 {
-  "name": "eds-color-palette-generator",
+  "name": "@equinor/eds-color-palette-generator",
   "description": "EDS Color Palette Generator",
   "version": "0.1.0",
   "private": true,

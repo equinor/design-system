@@ -1,1 +1,1 @@
-export type ColorValue = string;
+export type ColorValue = string

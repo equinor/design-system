@@ -1,106 +1,103 @@
-"use client";
+'use client'
 
-import { generateColorScale } from "../utils/color";
-import { useState } from "react";
-import TokenDownloader from "@/components/TokenDownloader";
-import { ColorScale } from "@/components/ColorScale";
-import {
-  lightnessValuesInDarkMode,
-  lightnessValuesInLightMode,
-} from "@/config";
-import { useColorScheme } from "@/context/ColorSchemeContext";
+import { generateColorScale } from '../utils/color'
+import { useState } from 'react'
+import TokenDownloader from '@/components/TokenDownloader'
+import { ColorScale } from '@/components/ColorScale'
+import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
+import { useColorScheme } from '@/context/ColorSchemeContext'
 
 export default function App() {
-  const [mean, setMean] = useState(0.6);
-  const [stdDev, setStdDev] = useState(2);
-  const { colorScheme } = useColorScheme();
-  const [showContrast, setShowContrast] = useState(false);
-  const [contrastMethod, setContrastMethod] = useState<"WCAG21" | "APCA">(
-    "WCAG21",
-  );
+  const [mean, setMean] = useState(0.6)
+  const [stdDev, setStdDev] = useState(2)
+  const { colorScheme } = useColorScheme()
+  const [showContrast, setShowContrast] = useState(false)
+  const [contrastMethod, setContrastMethod] = useState<'WCAG21' | 'APCA'>(
+    'APCA',
+  )
 
   const accent = generateColorScale(
-    "#007079",
+    '#007079',
     lightnessValuesInLightMode,
     mean,
     stdDev,
-  );
+  )
 
   const accentDark = generateColorScale(
-    "#007079",
+    '#007079',
     lightnessValuesInDarkMode,
     mean,
     stdDev,
-    "dark",
-  );
+    'dark',
+  )
 
   const neutral = generateColorScale(
-    "#4A4A4A",
+    '#4A4A4A',
     lightnessValuesInLightMode,
     mean,
     stdDev,
-  );
+  )
 
   const neutralDark = generateColorScale(
-    "#435460",
+    '#435460',
     lightnessValuesInDarkMode,
     mean,
     stdDev,
-    "dark",
-  );
+    'dark',
+  )
   const success = generateColorScale(
-    "#3FA13D",
+    '#3FA13D',
     lightnessValuesInLightMode,
     mean,
     stdDev,
-  );
+  )
   const successDark = generateColorScale(
-    "#3FA13D",
+    '#3FA13D',
     lightnessValuesInDarkMode,
     mean,
     stdDev,
-    "dark",
-  );
+    'dark',
+  )
   const info = generateColorScale(
-    "#0084C4",
+    '#0084C4',
     lightnessValuesInLightMode,
     mean,
     stdDev,
-  );
+  )
   const infoDark = generateColorScale(
-    "#0084C4",
+    '#0084C4',
     lightnessValuesInDarkMode,
     mean,
     stdDev,
-    "dark",
-  );
+    'dark',
+  )
   const warning = generateColorScale(
-    "#E57E00",
+    '#E57E00',
     lightnessValuesInLightMode,
     mean,
     stdDev,
-  );
+  )
 
   const warningDark = generateColorScale(
-    "#E57E00",
+    '#E57E00',
     lightnessValuesInDarkMode,
     mean,
     stdDev,
-    "dark",
-  );
+    'dark',
+  )
   const danger = generateColorScale(
-    "#E20337",
+    '#E20337',
     lightnessValuesInLightMode,
     mean,
     stdDev,
-  );
+  )
   const dangerDark = generateColorScale(
-    "#E20337",
+    '#E20337',
     lightnessValuesInDarkMode,
     mean,
     stdDev,
-    "dark",
-  );
+    'dark',
+  )
   return (
     <div
       data-theme={colorScheme}
@@ -164,8 +161,8 @@ export default function App() {
                       type="radio"
                       name="contrastMethod"
                       value="WCAG21"
-                      checked={contrastMethod === "WCAG21"}
-                      onChange={() => setContrastMethod("WCAG21")}
+                      checked={contrastMethod === 'WCAG21'}
+                      onChange={() => setContrastMethod('WCAG21')}
                       className="accent-current"
                     />
                     <span>WCAG 2.1</span>
@@ -175,8 +172,8 @@ export default function App() {
                       type="radio"
                       name="contrastMethod"
                       value="APCA"
-                      checked={contrastMethod === "APCA"}
-                      onChange={() => setContrastMethod("APCA")}
+                      checked={contrastMethod === 'APCA'}
+                      onChange={() => setContrastMethod('APCA')}
                       className="accent-current"
                     />
                     <span>APCA</span>
@@ -211,7 +208,7 @@ export default function App() {
           </div>
         ))}
       </div>
-      {colorScheme === "light" ? (
+      {colorScheme === 'light' ? (
         <>
           <ColorScale
             colors={accent}
@@ -296,7 +293,7 @@ export default function App() {
           dangerDark,
         }}
       />
-      <section style={{ maxWidth: "500px", margin: "0 auto 48px" }}>
+      <section style={{ maxWidth: '500px', margin: '0 auto 48px' }}>
         <p>
           The generator is using a gaussian function to calculate chroma based
           on a predefined lightness for each step. We provide sensible defaults
@@ -310,5 +307,5 @@ export default function App() {
         </p>
       </section>
     </div>
-  );
+  )
 }

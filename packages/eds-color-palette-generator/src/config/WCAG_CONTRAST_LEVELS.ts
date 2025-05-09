@@ -4,47 +4,47 @@
 export const WCAG_CONTRAST_LEVELS = {
   AAA_LARGE: {
     value: 4.5,
-    description: "Enhanced contrast for large text (Level AAA)",
+    description: 'Enhanced contrast for large text (Level AAA)',
     rules: [
-      "Applies to text 18pt and larger, or 14pt and larger if bold",
-      "Recommended for optimal accessibility",
-      "Required for Level AAA compliance",
+      'Applies to text 18pt and larger, or 14pt and larger if bold',
+      'Recommended for optimal accessibility',
+      'Required for Level AAA compliance',
     ],
   },
   AAA_NORMAL: {
     value: 7,
-    description: "Enhanced contrast for normal text (Level AAA)",
+    description: 'Enhanced contrast for normal text (Level AAA)',
     rules: [
-      "Applies to text smaller than 18pt",
-      "Highest level of contrast for normal text",
-      "Required for Level AAA compliance",
+      'Applies to text smaller than 18pt',
+      'Highest level of contrast for normal text',
+      'Required for Level AAA compliance',
     ],
   },
   AA_LARGE: {
     value: 3,
-    description: "Standard contrast for large text (Level AA)",
+    description: 'Standard contrast for large text (Level AA)',
     rules: [
-      "Applies to text 18pt and larger, or 14pt and larger if bold",
-      "Minimum requirement for WCAG AA compliance",
-      "Common requirement for most websites",
+      'Applies to text 18pt and larger, or 14pt and larger if bold',
+      'Minimum requirement for WCAG AA compliance',
+      'Common requirement for most websites',
     ],
   },
   AA_NORMAL: {
     value: 4.5,
-    description: "Standard contrast for normal text (Level AA)",
+    description: 'Standard contrast for normal text (Level AA)',
     rules: [
-      "Applies to text smaller than 18pt",
-      "Minimum requirement for WCAG AA compliance",
-      "Most commonly used contrast requirement",
+      'Applies to text smaller than 18pt',
+      'Minimum requirement for WCAG AA compliance',
+      'Most commonly used contrast requirement',
     ],
   },
   UI_COMPONENTS: {
     value: 3,
-    description: "Contrast for UI components and graphical objects",
+    description: 'Contrast for UI components and graphical objects',
     rules: [
-      "Applies to interactive UI components",
-      "Required for visual boundaries of components",
-      "Applies to graphical objects necessary for understanding",
+      'Applies to interactive UI components',
+      'Required for visual boundaries of components',
+      'Applies to graphical objects necessary for understanding',
     ],
   },
-};
+}

@@ -1,12 +1,12 @@
-import Color from "colorjs.io";
+import Color from 'colorjs.io'
 
 export function gaussian(
   x: number,
   mean: number = 0.6,
   stdDev: number = 2,
 ): number {
-  const exponent = (-25 / stdDev) * Math.pow(mean * -1 + x, 2);
-  return Math.exp(exponent);
+  const exponent = (-25 / stdDev) * Math.pow(mean * -1 + x, 2)
+  return Math.exp(exponent)
 }
 
 export function generateNextSolidColor({
@@ -14,19 +14,19 @@ export function generateNextSolidColor({
   colorScheme,
   amount = 0.2,
 }: {
-  baseColor: string;
-  colorScheme: "light" | "dark";
-  amount?: number;
+  baseColor: string
+  colorScheme: 'light' | 'dark'
+  amount?: number
 }): string {
-  if (colorScheme === "dark") {
-    const baseLighten = new Color(baseColor);
-    baseLighten.lighten(amount);
-    return baseLighten.toString({ format: "hex" });
+  if (colorScheme === 'dark') {
+    const baseLighten = new Color(baseColor)
+    baseLighten.lighten(amount)
+    return baseLighten.toString({ format: 'hex' })
   }
 
-  const baseDarken = new Color(baseColor);
-  baseDarken.darken(amount);
-  return baseDarken.toString({ format: "hex" });
+  const baseDarken = new Color(baseColor)
+  baseDarken.darken(amount)
+  return baseDarken.toString({ format: 'hex' })
 }
 
 export function generateColorScale(
@@ -34,43 +34,43 @@ export function generateColorScale(
   lightnessValues: number[],
   mean: number,
   stdDev: number,
-  colorScheme: "light" | "dark" = "light",
+  colorScheme: 'light' | 'dark' = 'light',
 ): string[] {
-  const base = new Color(baseColor);
-  const colors: string[] = [];
-  const steps = lightnessValues.length;
+  const base = new Color(baseColor)
+  const colors: string[] = []
+  const steps = lightnessValues.length
 
   for (let i = 0; i < steps; i++) {
-    const lightness = lightnessValues[i];
-    const color = new Color(base);
-    const chroma = gaussian(lightness, mean, stdDev) * color.to("oklch").c;
-    color.set("oklch.l", lightness);
-    color.set("oklch.c", chroma);
-    colors.push(color.toString({ format: "hex" }));
+    const lightness = lightnessValues[i]
+    const color = new Color(base)
+    const chroma = gaussian(lightness, mean, stdDev) * color.to('oklch').c
+    color.set('oklch.l', lightness)
+    color.set('oklch.c', chroma)
+    colors.push(color.toString({ format: 'hex' }))
   }
 
   // Set lightness to 0.62 for base color in dark mode to ensure contrast against background and text
-  const newBaseColor = new Color(baseColor);
-  if (colorScheme === "dark") {
-    newBaseColor.set("oklch.l", 0.62);
+  const newBaseColor = new Color(baseColor)
+  if (colorScheme === 'dark') {
+    newBaseColor.set('oklch.l', 0.62)
   }
 
-  colors.push(newBaseColor.toString({ format: "hex" }));
+  colors.push(newBaseColor.toString({ format: 'hex' }))
 
   const solidHover = generateNextSolidColor({
     baseColor,
     colorScheme,
     amount: 0.15,
-  });
+  })
   const solidActive = generateNextSolidColor({
     baseColor,
     colorScheme,
     amount: 0.25,
-  });
-  colors.push(solidHover);
-  colors.push(solidActive);
+  })
+  colors.push(solidHover)
+  colors.push(solidActive)
 
-  return colors;
+  return colors
 }
 
 /**
@@ -94,7 +94,7 @@ const WCAGThresholds = {
   nonText: {
     minimum: 3, // Level AA for non-text UI components
   },
-};
+}
 
 /**
  * APCA contrast thresholds based on different text and UI categories
@@ -117,12 +117,12 @@ const APCAThresholds = {
   nonText: {
     minimum: 15, // Minimum for non-semantic elements like dividers (>=5px solid)
   },
-};
+}
 
-type ContrastMethod = "WCAG21" | "APCA";
+type ContrastMethod = 'WCAG21' | 'APCA'
 
 function getThresholds(method: ContrastMethod) {
-  return method === "WCAG21" ? WCAGThresholds : APCAThresholds;
+  return method === 'WCAG21' ? WCAGThresholds : APCAThresholds
 }
 
 /**
@@ -137,18 +137,16 @@ export function checkContrast(
   background: string | Color,
   method: ContrastMethod,
 ) {
-  const fg =
-    typeof foreground === "string" ? new Color(foreground) : foreground;
-  const bg =
-    typeof background === "string" ? new Color(background) : background;
+  const fg = typeof foreground === 'string' ? new Color(foreground) : foreground
+  const bg = typeof background === 'string' ? new Color(background) : background
 
-  const contrastValue = fg.contrast(bg, method);
-  const thresholds = getThresholds(method);
-  const contrast = method === "APCA" ? Math.abs(contrastValue) : contrastValue;
+  const contrastValue = fg.contrast(bg, method)
+  const thresholds = getThresholds(method)
+  const contrast = method === 'APCA' ? Math.abs(contrastValue) : contrastValue
 
   return {
     contrastValue:
-      method === "APCA" ? contrast.toFixed(0) : contrast.toFixed(1),
+      method === 'APCA' ? contrast.toFixed(0) : contrast.toFixed(1),
     fluentText: {
       preferred: contrast >= thresholds.fluentText.preferred,
       minimum: contrast >= thresholds.fluentText.minimum,
@@ -171,5 +169,5 @@ export function checkContrast(
       minimum: contrast >= thresholds.nonText.minimum,
       threshold: thresholds.nonText,
     },
-  };
+  }
 }

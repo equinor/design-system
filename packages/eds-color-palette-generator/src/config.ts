@@ -1,5 +1,5 @@
-import { APCA_CONTRAST_LEVELS } from "@/config/APCA_CONTRAST_LEVELS";
-import { WCAG_CONTRAST_LEVELS } from "@/config/WCAG_CONTRAST_LEVELS";
+import { APCA_CONTRAST_LEVELS } from '@/config/APCA_CONTRAST_LEVELS'
+import { WCAG_CONTRAST_LEVELS } from '@/config/WCAG_CONTRAST_LEVELS'
 
 export const lightnessValuesInDarkMode = [
   0.218, // --ld-1
@@ -12,21 +12,21 @@ export const lightnessValuesInDarkMode = [
   0.7, // --ld-8
   0.821, // --ld-12
   0.947, // --ld-13
-];
+]
 
 export const lightnessValuesInLightMode = [
   1, 0.965, 0.91, 0.857, 0.804, 0.788, 0.584, 0.482, 0.39, 0.237,
-];
+]
 
 type ColorPairRequirements = {
-  stepIndex: number;
-  lc: (typeof APCA_CONTRAST_LEVELS)[keyof typeof APCA_CONTRAST_LEVELS];
-  wcag: (typeof WCAG_CONTRAST_LEVELS)[keyof typeof WCAG_CONTRAST_LEVELS];
-};
+  stepIndex: number
+  lc: (typeof APCA_CONTRAST_LEVELS)[keyof typeof APCA_CONTRAST_LEVELS]
+  wcag: (typeof WCAG_CONTRAST_LEVELS)[keyof typeof WCAG_CONTRAST_LEVELS]
+}
 
 type ColorPair = {
-  usedOnStep?: Array<ColorPairRequirements>;
-};
+  usedOnStep?: Array<ColorPairRequirements>
+}
 
 export const colorPairs: Array<ColorPair | null> = [
   // background 1
@@ -259,4 +259,4 @@ export const colorPairs: Array<ColorPair | null> = [
     //   { stepIndex: 1, lc: APCA_CONTRAST_LEVELS.LC_45, wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS.value }, // For interactive states
     // ],
   },
-];
+]
