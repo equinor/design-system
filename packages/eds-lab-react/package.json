@@ -86,7 +86,7 @@
     "styled-components": ">=5.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.27.0",
+    "@babel/runtime": "^7.27.1",
     "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
