@@ -35,6 +35,19 @@ describe('EdsDataGrid', () => {
         right: 0,
       }
     })
+
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+      configurable: true,
+      value: 500,
+    })
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+      configurable: true,
+      value: 2000,
+    })
+    Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+      configurable: true,
+      value: 500,
+    })
   })
 
   describe('Filtering', () => {
@@ -411,7 +424,7 @@ describe('EdsDataGrid', () => {
       ).toBeFalsy()
     })
 
-    it('should show virtual scroll if enabled', () => {
+    it('should show virtual scroll if enabled', async () => {
       let manyRows: Array<Data> = []
       for (let i = 0; i < 200; i++) {
         manyRows = [...manyRows, ...data]
@@ -426,7 +439,7 @@ describe('EdsDataGrid', () => {
       // Has 2 virtual padding elements
       // Only bottom scroll element is visible before scrolling
       expect(screen.queryByTestId('virtual-padding-top')).toBeFalsy()
-      expect(screen.getByTestId('virtual-padding-bottom')).toBeTruthy()
+      await screen.findByTestId('virtual-padding-bottom')
     })
 
     it('should not show virtual scroll if enabled, but not needed', () => {
