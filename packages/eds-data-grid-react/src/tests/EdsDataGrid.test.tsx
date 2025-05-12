@@ -424,7 +424,7 @@ describe('EdsDataGrid', () => {
       ).toBeFalsy()
     })
 
-    it('should show virtual scroll if enabled', async () => {
+    it('should show virtual scroll if enabled', () => {
       let manyRows: Array<Data> = []
       for (let i = 0; i < 200; i++) {
         manyRows = [...manyRows, ...data]
@@ -439,7 +439,7 @@ describe('EdsDataGrid', () => {
       // Has 2 virtual padding elements
       // Only bottom scroll element is visible before scrolling
       expect(screen.queryByTestId('virtual-padding-top')).toBeFalsy()
-      await screen.findByTestId('virtual-padding-bottom')
+      expect(screen.getByTestId('virtual-padding-bottom')).toBeTruthy()
     })
 
     it('should not show virtual scroll if enabled, but not needed', () => {
