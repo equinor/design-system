@@ -21,14 +21,17 @@ const {
   entities: { track, handle, dot, output },
 } = tokens
 
+const encodedTrackColor = encodeURIComponent(track.background)
+const encodedHoverColor = encodeURIComponent(track.states.hover.background)
+
 const fakeTrackBg = css`
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track.background}' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedTrackColor}' width='100%' height='4' rx='2' /></svg>");
   background-size: cover;
   background-repeat: no-repeat;
 `
 
 const fakeTrackBgHover = css({
-  backgroundImage: `url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track.states.hover.background}' width='100%' height='4' rx='2' /></svg>")`,
+  backgroundImage: `url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedHoverColor}' width='100%' height='4' rx='2' /></svg>")`,
 })
 
 const trackFill = css`
