@@ -35,6 +35,19 @@ describe('EdsDataGrid', () => {
         right: 0,
       }
     })
+
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+      configurable: true,
+      value: 500,
+    })
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+      configurable: true,
+      value: 2000,
+    })
+    Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+      configurable: true,
+      value: 500,
+    })
   })
 
   describe('Filtering', () => {
