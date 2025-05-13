@@ -22,6 +22,7 @@ const {
 } = tokens
 
 const encodedTrackColor = encodeURIComponent(track.background)
+const encodedHoverColor = encodeURIComponent(track.states.hover.background)
 
 const fakeTrackBg = css`
   background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedTrackColor}' width='100%' height='4' rx='2' /></svg>");
@@ -120,6 +121,8 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
 
   @media (hover: hover) and (pointer: fine) {
     &:hover:not([data-disabled]) {
+      background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedHoverColor}' width='100%' height='4' rx='2' /></svg>");
+
       &::before,
       &::after {
         background: ${({ $hideActiveTrack }) =>
@@ -214,6 +217,8 @@ const Wrapper = styled.div.attrs<WrapperProps>(
 
   @media (hover: hover) and (pointer: fine) {
     &:hover:not([data-disabled]) {
+      background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedHoverColor}' width='100%' height='4' rx='2' /></svg>");
+
       &::after {
         background: ${({ $hideActiveTrack }) =>
           $hideActiveTrack
@@ -330,7 +335,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   },
   ref,
 ) {
-  console.log('3')
   const isNumber = !Array.isArray(value)
   const isRangeSlider = !isNumber && value.length === 2
 
