@@ -35,6 +35,7 @@
     "test:watch:data-grid-react": "pnpm --filter @equinor/eds-data-grid-react run test:watch",
     "test:update-snapshots:core-react": "pnpm --filter @equinor/eds-core-react run test:update-snapshots",
     "test:update-snapshots:lab": "pnpm --filter @equinor/eds-lab-react run test:update-snapshots",
+    "test:storybook-build": "pnpm run build && pnpm run build:storybook && npx serve packages/eds-core-react/storybook-build",
     "storybook:core-react": "pnpm --filter @equinor/eds-core-react run storybook",
     "storybook": "pnpm storybook:core-react",
     "storybook:lab": "pnpm --filter @equinor/eds-lab-react run storybook",

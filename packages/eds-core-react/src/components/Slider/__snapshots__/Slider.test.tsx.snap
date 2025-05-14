@@ -179,7 +179,7 @@ exports[`Simple slider Matches snapshot 1`] = `
   grid-template-columns: 1fr 1fr;
   width: 100%;
   position: relative;
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__light, rgba(247, 247, 247, 1))' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__light%2C%20rgba(247%2C%20247%2C%20247%2C%201))' width='100%' height='4' rx='2' /></svg>");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -263,18 +263,18 @@ exports[`Simple slider Matches snapshot 1`] = `
 
 @media (hover:hover) and (pointer:fine) {
   .c0:hover:not([data-disabled]) {
-    background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__medium, rgba(220, 220, 220, 1))' width='100%' height='4' rx='2' /></svg>");
+    background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='var(--eds_ui_background__medium%2C%20rgba(220%2C%20220%2C%20220%2C%201))' width='100%' height='4' rx='2' /></svg>");
   }
 
   .c0:hover:not([data-disabled])::after {
-    background: var(--background-hover);
+    background: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
   }
 }
 
 <div
     class="c0"
     id="test"
-    style="--min: 0; --max: 100; --value: 0; --showTooltip: 0; --background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)); --background-hover: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));"
+    style="--min: 0; --max: 100; --value: 0; --showTooltip: 0; --background: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));"
     value="0"
   >
     <input
