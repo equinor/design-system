@@ -44,7 +44,6 @@ export function DebouncedInput({
         <InputWrapper label={props.placeholder}>
           <Input
             type={'number'}
-            placeholder={'0'}
             value={value}
             onChange={(e: ChangeEvent) =>
               setValue((e.target as HTMLInputElement).valueAsNumber)
