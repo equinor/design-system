@@ -78,6 +78,9 @@
     "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-tokens": "pnpm run update-tokens:colors:brand && pnpm run update-tokens:colors && pnpm run update-tokens:colors-matrix && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
+    "update-demo-tokens": "sync-figma-to-tokens --file-key V3XAAjEw7dl2vQmDvG4RNW",
+    "update-demo-tokens-2": "sync-figma-to-tokens --file-key 4bTwgrm9k6g0T23n5l4ZFz",
+    "build-demo:css": "lightningcss --bundle ./build/css/selectable.css -o ./build/css/selectable-verbose.css",
     "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"

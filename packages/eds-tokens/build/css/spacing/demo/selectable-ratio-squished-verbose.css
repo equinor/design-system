@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-ratio="squished"] {
+  --selectable-padding-stack: var(--squished-stack);
+  --selectable-padding-inline: var(--squished-inline);
+}
