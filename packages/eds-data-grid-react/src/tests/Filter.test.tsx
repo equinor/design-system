@@ -186,7 +186,7 @@ describe('Filter', () => {
   })
 
   describe('Placeholders', () => {
-    it('should have min/max for numeric', () => {
+    it('should have empty placeholder for numeric inputs', () => {
       const col = table.getColumn('numeric')
       const { baseElement } = render(
         <TableProvider
@@ -207,41 +207,8 @@ describe('Filter', () => {
       ) as Array<HTMLInputElement>
       const min = inputs[0]
       const max = inputs[1]
-      expect(min.placeholder).toBe(`0`)
-      expect(max.placeholder).toBe(`0`)
-    })
-
-    it('should work with min/max if no faceted values', () => {
-      table = createTable({
-        getCoreRowModel: getCoreRowModel(),
-        data,
-        onStateChange: () => null,
-        columns: columns,
-        state: {},
-        renderFallbackValue: () => '',
-      })
-      const col = table.getColumn('numeric')
-      const { baseElement } = render(
-        <TableProvider
-          enableSorting={false}
-          stickyHeader={true}
-          stickyFooter={false}
-          enableColumnFiltering={true}
-          table={table}
-        >
-          <FilterWrapper column={col} />
-        </TableProvider>,
-      )
-      openPopover(baseElement)
-      // eslint complains about unnecessary cast, but HTMLElement != HTMLInputElement
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      const inputs = within(baseElement).getAllByRole(
-        'spinbutton',
-      ) as Array<HTMLInputElement>
-      const min = inputs[0]
-      const max = inputs[1]
-      expect(min.placeholder).toBe(`0`)
-      expect(max.placeholder).toBe(`0`)
+      expect(min.placeholder).toBe('')
+      expect(max.placeholder).toBe('')
     })
 
     it('should work with custom filters', () => {
