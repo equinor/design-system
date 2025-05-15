@@ -1,0 +1,14 @@
+{
+  "Squished": {
+    "Stack": 12,
+    "Inline": 16
+  },
+  "Squared": {
+    "Stack": 16,
+    "Inline": 16
+  },
+  "Stretched": {
+    "Stack": 20,
+    "Inline": 16
+  }
+}

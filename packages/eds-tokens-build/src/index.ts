@@ -5,9 +5,11 @@ import path from 'path'
 import { pxToRem, PX_TO_REM_NAME } from './transform/pxToRem'
 import { fontQuote, FONT_QUOTE_NAME } from './transform/fontQuote'
 import { pxFormatted, PX_FORMATTED_NAME } from './transform/pxFormatted'
+import { pxTransform } from './transform/pxTransform'
 import { createSpacingAndTypographyVariables } from './createSpacingAndTypographyVariables'
 import { createMatrixColorVariables } from './createMatrixColorVariables'
 import { createClassicColorVariables } from './createClassicColorVariables'
+import { createSpacingAndTypographyDemoVariables } from './createSpacingAndTypographyDemoVariables'
 
 const outputDirectory = path.resolve(process.cwd(), 'build')
 export const cssBuildPath = path.join(outputDirectory, 'css')
@@ -15,6 +17,7 @@ export const jsBuildPath = path.join(outputDirectory, 'js')
 export const jsonBuildPath = path.join(outputDirectory, 'json')
 
 StyleDictionary.registerTransform(pxFormatted)
+StyleDictionary.registerTransform(pxTransform)
 StyleDictionary.registerTransform(pxToRem)
 StyleDictionary.registerTransform(fontQuote)
 
@@ -47,6 +50,11 @@ export async function run() {
   await createSpacingAndTypographyVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
+    cssTransforms,
+  })
+
+  await createSpacingAndTypographyDemoVariables({
+    tokensDir: TOKENS_DIR_FILE_PATH,
     cssTransforms,
   })
 }

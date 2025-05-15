@@ -1,0 +1,32 @@
+{
+  "Padding": {
+    "Inline": {
+      "$type": "number",
+      "$value": "{Ratio.Inline.MD}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Stack": {
+      "$type": "number",
+      "$value": "{Ratio.Stack.MD}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-padding="xs"] {
+  --squished-stack: var(--spacing-1-5);
+  --squished-inline: var(--spacing-2);
+  --squared-stack: var(--spacing-2);
+  --squared-inline: var(--spacing-2);
+  --stretched-stack: var(--spacing-3);
+  --stretched-inline: var(--spacing-2);
+}
