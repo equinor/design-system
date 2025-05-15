@@ -134,3 +134,60 @@ export const TextAndIconAndAction: StoryFn<BannerProps> = () => (
   </>
 )
 TextAndIconAndAction.storyName = 'Text and icon and actions'
+
+export const ComplexBannerMessage: StoryFn<BannerProps> = () => (
+  <>
+    <Banner>
+      <Banner.Icon variant="warning">
+        <Icon name="thumbs_down" />
+      </Banner.Icon>
+      <Banner.Message>
+        <div>
+          <strong>Important update required</strong>
+          <p style={{ margin: '4px 0' }}>
+            Your project contains{' '}
+            <a href="#deprecated">3 deprecated components</a> that need to be
+            updated before June 2025.
+          </p>
+          <code
+            style={{
+              background: '#f5f5f5',
+              padding: '2px 4px',
+              borderRadius: '2px',
+              fontSize: '0.9em',
+            }}
+          >
+            ComponentA, ComponentB, ComponentC
+          </code>
+        </div>
+      </Banner.Message>
+      <Banner.Actions>
+        <Button>View details</Button>
+      </Banner.Actions>
+    </Banner>
+
+    <Banner>
+      <Banner.Icon>
+        <Icon name="thumbs_up" />
+      </Banner.Icon>
+      <Banner.Message>
+        <div>
+          Project status:{' '}
+          <span style={{ color: 'green', fontWeight: 'bold' }}>Active</span>
+          <ul style={{ margin: '4px 0', paddingLeft: '20px' }}>
+            <li>Last updated: May 15, 2025</li>
+            <li>Contributors: 8</li>
+            <li>
+              Health check: <span style={{ color: 'green' }}>Passing</span>
+            </li>
+          </ul>
+        </div>
+      </Banner.Message>
+      <Banner.Actions>
+        <Button>View dashboard</Button>
+        <Button variant="outlined">Export report</Button>
+      </Banner.Actions>
+    </Banner>
+  </>
+)
+ComplexBannerMessage.storyName = 'Complex Banner Message'
