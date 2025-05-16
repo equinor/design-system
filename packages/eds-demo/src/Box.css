@@ -1,0 +1,15 @@
+.box {
+  background: #f3f3f3;
+  color: black;
+  padding: var(--selectable-padding-stack) var(--selectable-padding-inline);
+}
+
+.box__inner {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted black;
+  font-family: monospace;
+}
