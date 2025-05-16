@@ -22,6 +22,7 @@
     "./css/spacing/primitives.css": "./build/css/spacing/primitives-trimmed.css",
     "./css/spacing/comfortable.css": "./build/css/spacing/comfortable-verbose.css",
     "./css/spacing/spacious.css": "./build/css/spacing/spacious-verbose.css",
+    "./css/demo/selectable.css": "./build/css/demo/selectable-verbose.css",
     "./json/color/flat/*": "./build/json/color/flat/*.json",
     "./json/spacing/flat/*": "./build/json/spacing/flat/*.json",
     "./json/color/nested/*": "./build/json/color/nested/*.json",
