@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-ratio="squared"] {
+  --spacing-inline-xs: var(--spacing-2);
+  --spacing-inline-sm: var(--spacing-3);
+  --spacing-inline-md: var(--spacing-4);
+  --spacing-stack-xs: var(--spacing-2);
+  --spacing-stack-sm: var(--spacing-3);
+  --spacing-stack-md: var(--spacing-4);
+}

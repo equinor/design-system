@@ -9,7 +9,7 @@ import { pxTransform } from './transform/pxTransform'
 import { createSpacingAndTypographyVariables } from './createSpacingAndTypographyVariables'
 import { createMatrixColorVariables } from './createMatrixColorVariables'
 import { createClassicColorVariables } from './createClassicColorVariables'
-import { createSpacingAndTypographyDemoVariables } from './createSpacingAndTypographyDemoVariables'
+import { createDemoVariables } from './createDemoVariables'
 
 const outputDirectory = path.resolve(process.cwd(), 'build')
 export const cssBuildPath = path.join(outputDirectory, 'css')
@@ -53,7 +53,7 @@ export async function run() {
     cssTransforms,
   })
 
-  await createSpacingAndTypographyDemoVariables({
+  await createDemoVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssTransforms,
   })

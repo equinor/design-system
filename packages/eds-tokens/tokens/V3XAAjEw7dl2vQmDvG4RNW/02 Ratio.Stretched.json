@@ -1,38 +1,44 @@
 {
-  "Ratio": {
+  "Spacing": {
     "Inline": {
       "XS": {
         "$type": "number",
-        "$value": "{spacing-2}",
+        "$value": "{Spacing.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
       },
       "SM": {
         "$type": "number",
-        "$value": "{spacing-3}",
+        "$value": "{Spacing.3}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
       },
       "MD": {
         "$type": "number",
-        "$value": "{spacing-4}",
+        "$value": "{Spacing.4}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -41,36 +47,42 @@
     "Stack": {
       "XS": {
         "$type": "number",
-        "$value": "{spacing-3}",
+        "$value": "{Spacing.3}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
       },
       "SM": {
         "$type": "number",
-        "$value": "{spacing-4}",
+        "$value": "{Spacing.4}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
       },
       "MD": {
         "$type": "number",
-        "$value": "{spacing-5}",
+        "$value": "{Spacing.5}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }

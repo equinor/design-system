@@ -2,7 +2,7 @@
   "Selectable": {
     "Padding inline": {
       "$type": "number",
-      "$value": "{Padding.Inline}",
+      "$value": "{Selectable.Padding.Inline}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -18,7 +18,7 @@
     },
     "Padding stack": {
       "$type": "number",
-      "$value": "{Padding.Stack}",
+      "$value": "{Selectable.Padding.Stack}",
       "$description": "",
       "$extensions": {
         "com.figma": {

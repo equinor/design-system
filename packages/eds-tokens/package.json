@@ -62,6 +62,7 @@
     "_build:css:verbose": "lightningcss --bundle ./build/css/index-verbose.css -o ./build/css/variables-verbose.css",
     "_build:css:trimmed": "lightningcss --bundle ./build/css/index-trimmed.css -o ./build/css/variables-trimmed.css",
     "_build:css": "pnpm run _build:css:verbose && pnpm run _build:css:trimmed && pnpm run _build:css:matrix:trimmed",
+    "_build:css:demo": "lightningcss --bundle ./build/css/selectable-trimmed.css -o ./build/css/demo/selectable-verbose.css",
     "_build:css-min-matrix": "lightningcss --minify --bundle ./build/css/variables-matrix-trimmed.css -o ./build/css/variables-matrix-trimmed.min.css",
     "_build:css-min-classic": "lightningcss --minify --bundle ./build/css/variables-verbose.css -o ./build/css/variables-verbose.min.css && lightningcss --minify ./build/css/variables-trimmed.css -o ./build/css/variables-trimmed.min.css",
     "_build:css-min": "pnpm run _build:css-min-classic && pnpm run _build:css-min-matrix",
@@ -78,9 +79,7 @@
     "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-tokens": "pnpm run update-tokens:colors:brand && pnpm run update-tokens:colors && pnpm run update-tokens:colors-matrix && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
-    "update-demo-tokens": "sync-figma-to-tokens --file-key V3XAAjEw7dl2vQmDvG4RNW",
-    "update-demo-tokens-2": "sync-figma-to-tokens --file-key 4bTwgrm9k6g0T23n5l4ZFz",
-    "build-demo:css": "lightningcss --bundle ./build/css/selectable.css -o ./build/css/selectable-verbose.css",
+    "update-tokens:demo": "sync-figma-to-tokens --file-key V3XAAjEw7dl2vQmDvG4RNW",
     "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"
