@@ -1,5 +1,5 @@
+import '@equinor/eds-tokens/css/demo/selectable.css'
 import './App.css'
-import './selectable-verbose.css'
 import './Box.css'
 
 function App() {

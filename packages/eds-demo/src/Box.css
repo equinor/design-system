@@ -1,6 +1,6 @@
 .box {
-  background: #f3f3f3;
-  color: black;
+  background-color: #f3f3f3;
+  color: #212121;
   padding: var(--selectable-padding-stack) var(--selectable-padding-inline);
 }
 
