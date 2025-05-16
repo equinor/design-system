@@ -1,30 +1,32 @@
 {
-  "Padding": {
-    "Inline": {
-      "$type": "number",
-      "$value": "{Ratio.Inline.MD}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
+  "Selectable": {
+    "Padding": {
+      "Inline": {
+        "$type": "number",
+        "$value": "{Spacing.Inline.MD}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
         }
-      }
-    },
-    "Stack": {
-      "$type": "number",
-      "$value": "{Ratio.Stack.MD}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {}
+      },
+      "Stack": {
+        "$type": "number",
+        "$value": "{Spacing.Stack.MD}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
         }
       }
     }

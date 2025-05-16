@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-padding="sm"] {
+  --selectable-padding-inline: var(--spacing-inline-sm);
+  --selectable-padding-stack: var(--spacing-stack-sm);
+}

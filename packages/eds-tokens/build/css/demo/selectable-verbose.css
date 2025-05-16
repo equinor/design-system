@@ -1,0 +1,64 @@
+:root {
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-px: 1px;
+  --spacing-0-5: 2px;
+  --spacing-1-5: 6px;
+  --spacing-2-5: 10px;
+  --spacing-3-5: 14px;
+}
+
+:root, [data-ratio="squished"] {
+  --spacing-inline-xs: var(--spacing-2);
+  --spacing-inline-sm: var(--spacing-3);
+  --spacing-inline-md: var(--spacing-4);
+  --spacing-stack-xs: var(--spacing-1-5);
+  --spacing-stack-sm: var(--spacing-2);
+  --spacing-stack-md: var(--spacing-3);
+}
+
+[data-ratio="squared"] {
+  --spacing-inline-xs: var(--spacing-2);
+  --spacing-inline-sm: var(--spacing-3);
+  --spacing-inline-md: var(--spacing-4);
+  --spacing-stack-xs: var(--spacing-2);
+  --spacing-stack-sm: var(--spacing-3);
+  --spacing-stack-md: var(--spacing-4);
+}
+
+[data-ratio="stretched"] {
+  --spacing-inline-xs: var(--spacing-2);
+  --spacing-inline-sm: var(--spacing-3);
+  --spacing-inline-md: var(--spacing-4);
+  --spacing-stack-xs: var(--spacing-3);
+  --spacing-stack-sm: var(--spacing-4);
+  --spacing-stack-md: var(--spacing-5);
+}
+
+:root, [data-padding="xs"] {
+  --selectable-padding-inline: var(--spacing-inline-xs);
+  --selectable-padding-stack: var(--spacing-stack-xs);
+}
+
+[data-padding="sm"] {
+  --selectable-padding-inline: var(--spacing-inline-sm);
+  --selectable-padding-stack: var(--spacing-stack-sm);
+}
+
+[data-padding="md"] {
+  --selectable-padding-inline: var(--spacing-inline-md);
+  --selectable-padding-stack: var(--spacing-stack-md);
+}

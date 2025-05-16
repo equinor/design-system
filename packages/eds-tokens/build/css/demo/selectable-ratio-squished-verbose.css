@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-ratio="squished"] {
+  --spacing-inline-xs: var(--spacing-2);
+  --spacing-inline-sm: var(--spacing-3);
+  --spacing-inline-md: var(--spacing-4);
+  --spacing-stack-xs: var(--spacing-1-5);
+  --spacing-stack-sm: var(--spacing-2);
+  --spacing-stack-md: var(--spacing-3);
+}
