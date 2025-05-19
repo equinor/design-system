@@ -1,0 +1,184 @@
+{
+  "background-app": {
+    "$type": "color",
+    "$value": "{info.background-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-background-default"
+        }
+      }
+    }
+  },
+  "background-subtle": {
+    "$type": "color",
+    "$value": "{info.background-subtle}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-background-subtle"
+        }
+      }
+    }
+  },
+  "surface-element": {
+    "$type": "color",
+    "$value": "{info.surface-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-surface-default"
+        }
+      }
+    }
+  },
+  "surface-element-hover": {
+    "$type": "color",
+    "$value": "{info.surface-hover}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-surface-hover"
+        }
+      }
+    }
+  },
+  "surface-element-active": {
+    "$type": "color",
+    "$value": "{info.surface-active}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-surface-active"
+        }
+      }
+    }
+  },
+  "border-separator": {
+    "$type": "color",
+    "$value": "{info.border-subtle}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-border-subtle"
+        }
+      }
+    }
+  },
+  "border-element": {
+    "$type": "color",
+    "$value": "{info.border-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-border-default"
+        }
+      }
+    }
+  },
+  "border-element-hover": {
+    "$type": "color",
+    "$value": "{info.border-strong}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-border-strong"
+        }
+      }
+    }
+  },
+  "solid-component": {
+    "$type": "color",
+    "$value": "{info.base-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-base-default"
+        }
+      }
+    }
+  },
+  "solid-component-hover": {
+    "$type": "color",
+    "$value": "{info.base-hover}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-base-hover"
+        }
+      }
+    }
+  },
+  "solid-component-active": {
+    "$type": "color",
+    "$value": "{info.base-active}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-base-active"
+        }
+      }
+    }
+  },
+  "text-low-contrast": {
+    "$type": "color",
+    "$value": "{info.text-subtle}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-text-subtle"
+        }
+      }
+    }
+  },
+  "text-high-contrast": {
+    "$type": "color",
+    "$value": "{info.text-default}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {
+          "WEB": "--eds-color-text-default"
+        }
+      }
+    }
+  }
+}

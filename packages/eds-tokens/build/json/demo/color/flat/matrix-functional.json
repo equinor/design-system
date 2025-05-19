@@ -1,0 +1,10 @@
+{
+  "functional-app-base": "#f3f3f3",
+  "functional-app-layer-1": "#ffffff",
+  "functional-app-layer-2": "#ffffff",
+  "functional-app-elevated": "#ffffff",
+  "functional-contrast": "#ffffff",
+  "functional-focus": "#0083c3",
+  "functional-link": "#0083c3",
+  "functional-opacity-disabled": 30
+}

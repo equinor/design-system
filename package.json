@@ -43,7 +43,7 @@
     "export:tokens": "pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0",
     "export:assets": "pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU --true",
     "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types",
-    "demo": "pnpm --filter @equinor/eds-tokens run update-tokens:demo && pnpm run build:tokens-build && pnpm run build:tokens-in-code && pnpm pnpm --filter @equinor/eds-tokens run _build:css:demo"
+    "demo": "pnpm --filter @equinor/eds-tokens run update-tokens:demo:spacing && pnpm --filter @equinor/eds-tokens run update-tokens:demo:color && pnpm run build:tokens-build && pnpm run build:tokens-in-code"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
