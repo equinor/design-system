@@ -8,7 +8,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "WIDTH_HEIGHT"
           ],
           "codeSyntax": {
             "WEB": "var(--selectable-padding-inline)"
@@ -24,7 +24,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "WIDTH_HEIGHT"
           ],
           "codeSyntax": {
             "WEB": "var(--selectable-padding-stack)"
@@ -34,7 +34,21 @@
     },
     "Icon size": {
       "$type": "number",
-      "$value": 0,
+      "$value": "{fontsize.icon-size}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon container padding horisontal": {
+      "$type": "number",
+      "$value": "{fontsize.icon-container-padding-horisontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -46,9 +60,9 @@
         }
       }
     },
-    "Icon container size": {
+    "Icon container padding vertical": {
       "$type": "number",
-      "$value": 0,
+      "$value": "{fontsize.icon-container-padding-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -62,7 +76,7 @@
     },
     "Gap": {
       "$type": "number",
-      "$value": 0,
+      "$value": "{fontsize.icon-text-gap}",
       "$description": "",
       "$extensions": {
         "com.figma": {

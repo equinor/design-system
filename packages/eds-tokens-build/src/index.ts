@@ -38,7 +38,26 @@ export async function run() {
   await createMatrixColorVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     colorBuildPath: colorBuildPath,
-    cssTransforms,
+  })
+
+  await createMatrixColorVariables({
+    tokensDir: TOKENS_DIR_FILE_PATH,
+    colorBuildPath: `demo/color/`,
+    colorMatrixTokensDirName: 'QRFchmc6GHsKSBEdqdFLMr',
+    fileNames: {
+      colorScheme: {
+        dark: '01 Color scheme.Dark.json',
+        light: '01 Color scheme.Light.json',
+      },
+      appearance: {
+        accent: '02 Appearance.Accent.json',
+        neutral: '02 Appearance.Neutral.json',
+        danger: '02 Appearance.Danger.json',
+        success: '02 Appearance.Success.json',
+        warning: '02 Appearance.Warning.json',
+        info: '02 Appearance.Info.json',
+      },
+    },
   })
 
   await createClassicColorVariables({

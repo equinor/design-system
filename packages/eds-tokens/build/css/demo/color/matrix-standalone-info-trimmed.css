@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-info-background-app: light-dark(#ffffff, #111c23);
+  --eds-color-info-background-subtle: light-dark(#e5f6ff, #152430);
+  --eds-color-info-surface-element: light-dark(#cae6fa, #183243);
+  --eds-color-info-surface-element-hover: light-dark(#aed6f4, #17405a);
+  --eds-color-info-surface-element-active: light-dark(#8fc6ee, #114e73);
+  --eds-color-info-border-separator: light-dark(#86c2ed, #0a5680);
+  --eds-color-info-border-element: light-dark(#0083c3, #0080c0);
+  --eds-color-info-border-element-hover: light-dark(#006498, #50a7e1);
+  --eds-color-info-solid-component: light-dark(#0084c4, #0084c4);
+  --eds-color-info-solid-component-hover: light-dark(#0069a7, #349fe1);
+  --eds-color-info-solid-component-active: light-dark(#005892, #4bb2f5);
+  --eds-color-info-text-low-contrast: light-dark(#144a6b, #99cbf0);
+  --eds-color-info-text-high-contrast: light-dark(#13202a, #dcf1ff);
+}

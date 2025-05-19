@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@equinor/eds-tokens": "workspace:*",
+    "@equinor/eds-tokens-build": "workspace:*",
+    "@equinor/eds-tokens-sync": "workspace:*",
     "@tailwindcss/vite": "^4.1.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4",
-    "@equinor/eds-tokens": "workspace:*"
+    "tailwindcss": "^4"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

@@ -431,6 +431,12 @@ importers:
       '@equinor/eds-tokens':
         specifier: workspace:*
         version: link:../eds-tokens
+      '@equinor/eds-tokens-build':
+        specifier: workspace:*
+        version: link:../eds-tokens-build
+      '@equinor/eds-tokens-sync':
+        specifier: workspace:*
+        version: link:../eds-tokens-sync
       '@tailwindcss/vite':
         specifier: ^4.1.7
         version: 4.1.7(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.7.1))
