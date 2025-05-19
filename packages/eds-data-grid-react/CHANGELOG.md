@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2025-05-19
+
+## Fixed
+
+- 🐛 Fix Storybook docs page error by @pomfrida in https://github.com/equinor/design-system/pull/3797
+- 🐛 Add mockup to test @pomfrida in https://github.com/equinor/design-system/pull/3802
+
+## Added
+
+- ✨ Enable external filters, hide filter-icon when not active by @yusijs in https://github.com/equinor/design-system/pull/3764
+
+## Changed
+
+- 🔥 Remove redundant placeholder in DebouncedInput by @pomfrida in https://github.com/equinor/design-system/pull/3807
+
 ## [0.7.7] - 2025-05-06
 
 ### Fixed

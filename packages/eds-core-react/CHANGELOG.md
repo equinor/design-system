@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.46.0] - 2025-05-19
+
+### Fixed
+
+- 🐛 `Slider`: Fix slider track disappearing on hover by @pomfrida in https://github.com/equinor/design-system/pull/3803
+
+### Added
+
+- ✨ `Autocomplete`: Export Autocomplete Option Label by @pomfrida in https://github.com/equinor/design-system/pull/3799
+- ✨ `Banner.Message`: Allow ReactNode as children by @pomfrida in https://github.com/equinor/design-system/pull/3805
+
 ## [0.45.1] - 2025-05-06
 
 ### Fixed
