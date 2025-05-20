@@ -30,6 +30,32 @@ function App() {
     'text-high-contrast',
   ]
 
+  // Define the typography variations
+  const fontSizes = [
+    { name: 'xs', label: 'Extra Small' },
+    { name: 'sm', label: 'Small' },
+    { name: 'md', label: 'Medium' },
+    { name: 'lg', label: 'Large' },
+  ]
+
+  const fontWeights = [
+    { name: 'regular', label: 'Regular' },
+    { name: 'bold', label: 'Bold' },
+  ]
+
+  const lineHeights = [
+    { name: 'normal', label: 'Normal' },
+    { name: 'squished', label: 'Squished' },
+  ]
+
+  const baselineAlignments = [
+    { name: 'true', label: 'Baseline Aligned' },
+    { name: 'false', label: 'Center Aligned' },
+  ]
+
+  // Generate a sample text with various lengths
+  const sampleText = 'The quick brown fox jumps over the lazy dog'
+
   return (
     <div>
       <article className="text-left mb-12">
@@ -139,6 +165,74 @@ function App() {
             ))}
           </div>
         </section>
+      </article>
+      <article className="text-left mb-12">
+        <h2 className="text-4xl mb-10">Typography</h2>
+
+        {fontSizes.map((fontSize) => (
+          <section key={fontSize.name} className="mb-12">
+            <h3 className="text-2xl mb-6">
+              {fontSize.label} ({fontSize.name})
+            </h3>
+
+            <div className="grid gap-10">
+              {fontWeights.map((fontWeight) => (
+                <div key={fontWeight.name} className="mb-8">
+                  <h4 className="text-xl mb-4">Weight: {fontWeight.label}</h4>
+
+                  {lineHeights.map((lineHeight) => (
+                    <div key={lineHeight.name} className="mb-6">
+                      <h5 className="text-lg mb-2">
+                        Line Height: {lineHeight.label}
+                      </h5>
+
+                      <div className="mb-6 grid gap-4">
+                        {baselineAlignments.map((alignment) => (
+                          <div
+                            key={alignment.name}
+                            className="p-4 border border-gray-300 rounded"
+                          >
+                            <p className="mb-2">
+                              Baseline Alignment: {alignment.label}
+                            </p>
+                            <div className="text-sm mb-4">
+                              <code
+                                className="px-1 rounded"
+                                style={{
+                                  backgroundColor:
+                                    'var(--eds-color-background-subtle)',
+                                }}
+                              >
+                                data-font-size="{fontSize.name}"
+                                data-font-weight="{fontWeight.name}"
+                                data-line-height="{lineHeight.name}"
+                                data-baseline-aligned="{alignment.name}"
+                              </code>
+                            </div>
+                            <div
+                              data-font-size={fontSize.name}
+                              data-font-weight={fontWeight.name}
+                              data-line-height={lineHeight.name}
+                              data-baseline-aligned={alignment.name}
+                              style={{
+                                backgroundColor:
+                                  'var(--eds-color-functional-app-layer-1)',
+                                padding: '8px',
+                                display: 'inline-block',
+                              }}
+                            >
+                              {sampleText}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </article>
     </div>
   )
