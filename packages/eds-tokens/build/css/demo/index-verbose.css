@@ -166,3 +166,108 @@
   --selectable-padding-inline: var(--spacing-inline-md);
   --selectable-padding-stack: var(--spacing-stack-md);
 }
+
+:root {
+  --typography-xs-font-size: .656rem;
+  --typography-xs-fontweight-regular: 400;
+  --typography-xs-fontweight-bold: 700;
+  --typography-xs-lineheight-normal: 16;
+  --typography-xs-lineheight-squished: 12;
+  --typography-xs-icon-size: 15.75;
+  --typography-xs-icon-padding-inline: -3.15;
+  --typography-xs-icon-padding-stack: -7.88;
+  --typography-xs-icon-text-gap: 6.5;
+  --typography-sm-font-size: .75rem;
+  --typography-sm-fontweight-regular: 400;
+  --typography-sm-fontweight-bold: 700;
+  --typography-sm-lineheight-normal: 16;
+  --typography-sm-lineheight-squished: 12;
+  --typography-sm-icon-size: 18;
+  --typography-sm-icon-padding-inline: -3.6;
+  --typography-sm-icon-padding-stack: -9;
+  --typography-sm-icon-text-gap: 7.5;
+  --typography-md-font-size: .875rem;
+  --typography-md-fontweight-regular: 400;
+  --typography-md-fontweight-bold: 700;
+  --typography-md-lineheight-normal: 20;
+  --typography-md-lineheight-squished: 16;
+  --typography-md-icon-size: 21;
+  --typography-md-icon-padding-inline: -4.2;
+  --typography-md-icon-padding-stack: -10.5;
+  --typography-md-icon-text-gap: 8.5;
+  --typography-lg-font-size: 1rem;
+  --typography-lg-fontweight-regular: 400;
+  --typography-lg-fontweight-bold: 700;
+  --typography-lg-lineheight-normal: 24;
+  --typography-lg-lineheight-squished: 20;
+  --typography-lg-icon-size: 24;
+  --typography-lg-icon-padding-inline: -4.8;
+  --typography-lg-icon-padding-stack: -12;
+  --typography-lg-icon-text-gap: 10;
+}
+
+:root, [data-font-size="xs"] {
+  --fontsize-font-size: var(--typography-xs-font-size);
+  --fontsize-fontweight-regular: var(--typography-xs-fontweight-regular);
+  --fontsize-fontweight-bold: var(--typography-xs-fontweight-bold);
+  --fontsize-lineheight-normal: var(--typography-xs-lineheight-normal);
+  --fontsize-lineheight-squished: var(--typography-xs-lineheight-squished);
+  --fontsize-icon-size: var(--typography-xs-icon-size);
+  --fontsize-icon-text-gap: var(--typography-xs-icon-text-gap);
+}
+
+[data-font-size="sm"] {
+  --fontsize-font-size: var(--typography-sm-font-size);
+  --fontsize-fontweight-regular: var(--typography-sm-fontweight-regular);
+  --fontsize-fontweight-bold: var(--typography-sm-fontweight-bold);
+  --fontsize-lineheight-normal: var(--typography-sm-lineheight-normal);
+  --fontsize-lineheight-squished: var(--typography-sm-lineheight-squished);
+  --fontsize-icon-size: var(--typography-sm-icon-size);
+  --fontsize-icon-text-gap: var(--typography-sm-icon-text-gap);
+}
+
+[data-font-size="md"] {
+  --fontsize-font-size: var(--typography-md-font-size);
+  --fontsize-fontweight-regular: var(--typography-md-fontweight-regular);
+  --fontsize-fontweight-bold: var(--typography-md-fontweight-bold);
+  --fontsize-lineheight-normal: var(--typography-md-lineheight-normal);
+  --fontsize-lineheight-squished: var(--typography-md-lineheight-squished);
+  --fontsize-icon-size: var(--typography-md-icon-size);
+  --fontsize-icon-text-gap: var(--typography-md-icon-text-gap);
+}
+
+[data-font-size="lg"] {
+  --fontsize-font-size: var(--typography-lg-font-size);
+  --fontsize-fontweight-regular: var(--typography-lg-fontweight-regular);
+  --fontsize-fontweight-bold: var(--typography-lg-fontweight-bold);
+  --fontsize-lineheight-normal: var(--typography-lg-lineheight-normal);
+  --fontsize-lineheight-squished: var(--typography-lg-lineheight-squished);
+  --fontsize-icon-size: var(--typography-lg-icon-size);
+  --fontsize-icon-text-gap: var(--typography-lg-icon-text-gap);
+}
+
+:root, [data-font-weight="regular"] {
+  --font-weight-font-weight: var(--fontsize-fontweight-regular);
+}
+
+[data-font-weight="bold"] {
+  --font-weight-font-weight: var(--fontsize-fontweight-bold);
+}
+
+:root, [data-line-height="normal"] {
+  --lineheight-lineheight: var(--fontsize-lineheight-normal);
+}
+
+[data-line-height="squished"] {
+  --lineheight-lineheight: var(--fontsize-lineheight-squished);
+}
+
+:root, [data-baseline-aligned="true"] {
+  --padding-bottom: 0;
+  --padding-top: var(--fontsize-padding-baselined);
+}
+
+[data-baseline-aligned="false"] {
+  --padding-top: var(--fontsize-padding-centred);
+  --padding-bottom: var(--fontsize-padding-centred);
+}

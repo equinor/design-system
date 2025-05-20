@@ -23,57 +23,26 @@ export async function createDemoTypographyVariables({
     FILE_KEY,
     '01 Typography.Value.json',
   )
-  // const FONT_SIZE_XS_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '02 Font size.XS.json',
-  // )
-  // const FONT_SIZE_SM_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '02 Font size.SM.json',
-  // )
-  // const FONT_SIZE_MD_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '02 Font size.MD.json',
-  // )
-  // const FONT_SIZE_LG_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '02 Font size.LG.json',
-  // )
-
-  // const FONT_WEIGHT_BOLD_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '03 Font weight.Bold.json',
-  // )
-  // const FONT_WEIGHT_REGULAR_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '03 Font weight.Regular.json',
-  // )
-  // const LINEHEIGHT_NORMAL_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '04 Lineheight.Normal.json',
-  // )
-  // const LINEHEIGHT_SQUISHED_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '04 Lineheight.Squished.json',
-  // )
-  // const BASELINE_ALIGNED_TRUE_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '05 Baseline aligned.True.json',
-  // )
-  // const BASELINE_ALIGNED_FALSE_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '05 Baseline aligned.False.json',
-  // )
+  const FONT_SIZE_XS_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '02 Font size.XS.json',
+  )
+  const FONT_SIZE_SM_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '02 Font size.SM.json',
+  )
+  const FONT_SIZE_MD_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '02 Font size.MD.json',
+  )
+  const FONT_SIZE_LG_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '02 Font size.LG.json',
+  )
 
   const typography = _extend({
     source: [TYPOGRAPHY_SOURCE],
@@ -83,115 +52,159 @@ export async function createDemoTypographyVariables({
     transforms: cssTransforms,
   })
 
+  const xs = _extend({
+    source: [FONT_SIZE_XS_SOURCE],
+    include: [TYPOGRAPHY_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'font-size-xs',
+    selector: ':root, [data-font-size="xs"]',
+    filter: (token) => includeTokenFilter(token, ['Font size']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+
+  const sm = _extend({
+    source: [FONT_SIZE_SM_SOURCE],
+    include: [TYPOGRAPHY_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'font-size-sm',
+    selector: '[data-font-size="sm"]',
+    filter: (token) => includeTokenFilter(token, ['Font size']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+
+  const md = _extend({
+    source: [FONT_SIZE_MD_SOURCE],
+    include: [TYPOGRAPHY_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'font-size-md',
+    selector: '[data-font-size="md"]',
+    filter: (token) => includeTokenFilter(token, ['Font size']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+
+  const lg = _extend({
+    source: [FONT_SIZE_LG_SOURCE],
+    include: [TYPOGRAPHY_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'font-size-lg',
+    selector: '[data-font-size="lg"]',
+    filter: (token) => includeTokenFilter(token, ['Font size']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+
+  const FONT_WEIGHT_REGULAR_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '03 Font weight.Regular.json',
+  )
+
+  const FONT_WEIGHT_BOLD_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '03 Font weight.Bold.json',
+  )
+
+  const regular = _extend({
+    source: [FONT_WEIGHT_REGULAR_SOURCE],
+    include: [TYPOGRAPHY_SOURCE, FONT_SIZE_XS_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'font-weight-regular',
+    selector: ':root, [data-font-weight="regular"]',
+    filter: (token) => includeTokenFilter(token, ['Font weight']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+
+  const bold = _extend({
+    source: [FONT_WEIGHT_BOLD_SOURCE],
+    include: [TYPOGRAPHY_SOURCE, FONT_SIZE_XS_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'font-weight-bold',
+    selector: '[data-font-weight="bold"]',
+    filter: (token) => includeTokenFilter(token, ['Font weight']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+
+  await regular.buildAllPlatforms()
+  await bold.buildAllPlatforms()
+
   await typography.buildAllPlatforms()
+  await xs.buildAllPlatforms()
+  await sm.buildAllPlatforms()
+  await md.buildAllPlatforms()
+  await lg.buildAllPlatforms()
 
-  // const SQUISHED_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '02 Ratio.Squished.json',
-  // )
-  // const STRETCHED_SOURCE = path.join(
-  //   tokensDir,
-  //   FILE_KEY,
-  //   '02 Ratio.Stretched.json',
-  // )
-  // const SQUARED_SOURCE = path.join(tokensDir, FILE_KEY, '02 Ratio.Squared.json')
-  // const BUILD_PATH = '/demo/'
+  const LINE_HEIGHT_NORMAL_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '04 Lineheight.Normal.json',
+  )
+  const LINE_HEIGHT_SQUISHED_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '04 Lineheight.Squished.json',
+  )
 
-  // const spacing = _extend({
-  //   source: [SPACING_SOURCE],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'spacing',
-  //   filter: (token) => includeTokenFilter(token),
-  //   transforms: [...cssTransforms, PX_TRANSFORM_NAME],
-  // })
+  const lineHeightNormal = _extend({
+    source: [LINE_HEIGHT_NORMAL_SOURCE],
+    include: [TYPOGRAPHY_SOURCE, FONT_SIZE_XS_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'line-height-normal',
+    selector: ':root, [data-line-height="normal"]',
+    filter: (token) => includeTokenFilter(token, ['Lineheight']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+  const lineHeightSquished = _extend({
+    source: [LINE_HEIGHT_SQUISHED_SOURCE],
+    include: [TYPOGRAPHY_SOURCE, FONT_SIZE_XS_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'line-height-squished',
+    selector: '[data-line-height="squished"]',
+    filter: (token) => includeTokenFilter(token, ['Lineheight']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
 
-  // const xs = _extend({
-  //   source: [PADDING_XS_SOURCE],
-  //   include: [
-  //     SPACING_SOURCE,
-  //     SQUARED_SOURCE,
-  //     SQUISHED_SOURCE,
-  //     STRETCHED_SOURCE,
-  //   ],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'selectable-padding-xs',
-  //   selector: ':root, [data-padding="xs"]',
-  //   filter: (token) => includeTokenFilter(token, ['Padding']),
-  //   transforms: cssTransforms,
-  //   outputReferences: true,
-  // })
+  await lineHeightNormal.buildAllPlatforms()
+  await lineHeightSquished.buildAllPlatforms()
 
-  // const sm = _extend({
-  //   source: [PADDING_SM_SOURCE],
-  //   include: [
-  //     SPACING_SOURCE,
-  //     SQUARED_SOURCE,
-  //     SQUISHED_SOURCE,
-  //     STRETCHED_SOURCE,
-  //   ],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'selectable-padding-sm',
-  //   selector: '[data-padding="sm"]',
-  //   filter: (token) => includeTokenFilter(token, ['Padding']),
-  //   transforms: cssTransforms,
-  //   outputReferences: true,
-  // })
+  const BASELINE_ALIGNED_TRUE_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '05 Baseline aligned.True.json',
+  )
+  const BASELINE_ALIGNED_FALSE_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY,
+    '05 Baseline aligned.False.json',
+  )
 
-  // const md = _extend({
-  //   source: [PADDING_MD_SOURCE],
-  //   include: [
-  //     SPACING_SOURCE,
-  //     SQUARED_SOURCE,
-  //     SQUISHED_SOURCE,
-  //     STRETCHED_SOURCE,
-  //   ],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'selectable-padding-md',
-  //   selector: '[data-padding="md"]',
-  //   filter: (token) => includeTokenFilter(token, ['Padding']),
-  //   transforms: cssTransforms,
-  //   outputReferences: true,
-  // })
-
-  // const squished = _extend({
-  //   source: [SQUISHED_SOURCE],
-  //   include: [SPACING_SOURCE],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'selectable-ratio-squished',
-  //   selector: ':root, [data-ratio="squished"]',
-  //   filter: (token) => includeTokenFilter(token, ['Squished']),
-  //   transforms: cssTransforms,
-  //   outputReferences: true,
-  // })
-
-  // const stretched = _extend({
-  //   source: [STRETCHED_SOURCE],
-  //   include: [SPACING_SOURCE],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'selectable-ratio-stretched',
-  //   selector: '[data-ratio="stretched"]',
-  //   filter: (token) => includeTokenFilter(token, ['Stretched']),
-  //   transforms: cssTransforms,
-  //   outputReferences: true,
-  // })
-
-  // const squared = _extend({
-  //   source: [SQUARED_SOURCE],
-  //   include: [SPACING_SOURCE],
-  //   buildPath: BUILD_PATH,
-  //   fileName: 'selectable-ratio-squared',
-  //   selector: '[data-ratio="squared"]',
-  //   filter: (token) => includeTokenFilter(token, ['Squared']),
-  //   transforms: cssTransforms,
-  //   outputReferences: true,
-  // })
-
-  // await xs.buildAllPlatforms()
-  // await md.buildAllPlatforms()
-  // await sm.buildAllPlatforms()
-  // await spacing.buildAllPlatforms()
-  // await squished.buildAllPlatforms()
-  // await stretched.buildAllPlatforms()
-  // await squared.buildAllPlatforms()
+  const baselineAlignedTrue = _extend({
+    source: [BASELINE_ALIGNED_TRUE_SOURCE],
+    include: [TYPOGRAPHY_SOURCE, FONT_SIZE_XS_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'baseline-aligned-true',
+    selector: ':root, [data-baseline-aligned="true"]',
+    filter: (token) => includeTokenFilter(token, ['Baseline aligned']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+  const baselineAlignedFalse = _extend({
+    source: [BASELINE_ALIGNED_FALSE_SOURCE],
+    include: [TYPOGRAPHY_SOURCE, FONT_SIZE_XS_SOURCE],
+    buildPath: BUILD_PATH,
+    fileName: 'baseline-aligned-false',
+    selector: '[data-baseline-aligned="false"]',
+    filter: (token) => includeTokenFilter(token, ['Baseline aligned']),
+    transforms: cssTransforms,
+    outputReferences: true,
+  })
+  await baselineAlignedTrue.buildAllPlatforms()
+  await baselineAlignedFalse.buildAllPlatforms()
 }
