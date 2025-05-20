@@ -15,3 +15,18 @@
 @import 'demo/spacing/selectable-padding-xs-verbose.css';
 @import 'demo/spacing/selectable-padding-sm-verbose.css';
 @import 'demo/spacing/selectable-padding-md-verbose.css';
+
+@import 'demo/typography/typography-trimmed.css';
+@import 'demo/typography/font-size-xs-verbose.css';
+@import 'demo/typography/font-size-sm-verbose.css';
+@import 'demo/typography/font-size-md-verbose.css';
+@import 'demo/typography/font-size-lg-verbose.css';
+
+@import 'demo/typography/font-weight-regular-verbose.css';
+@import 'demo/typography/font-weight-bold-verbose.css';
+
+@import 'demo/typography/line-height-normal-verbose.css';
+@import 'demo/typography/line-height-squished-verbose.css';
+
+@import 'demo/typography/baseline-aligned-true-verbose.css';
+@import 'demo/typography/baseline-aligned-false-verbose.css';

@@ -1,0 +1,16 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+export const FONTSIZE_FONT_SIZE = 14;
+export const FONTSIZE_FONTWEIGHT_REGULAR = 400;
+export const FONTSIZE_FONTWEIGHT_BOLD = 700;
+export const FONTSIZE_CAP_HEIGHT_ROUNDED = 12;
+export const FONTSIZE_PADDING_CENTRED = 1;
+export const FONTSIZE_PADDING_BASELINED = 2;
+export const FONTSIZE_LINEHEIGHT_NORMAL = 20;
+export const FONTSIZE_LINEHEIGHT_SQUISHED = 16;
+export const FONTSIZE_ICON_SIZE = 21;
+export const FONTSIZE_ICON_CONTAINER_PADDING_HORISONTAL = -4.199999809265137;
+export const FONTSIZE_ICON_CONTAINER_PADDING_VERTICAL = -10.5;
+export const FONTSIZE_ICON_TEXT_GAP = 8.5;

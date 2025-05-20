@@ -1,0 +1,13 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-font-size="xs"] {
+  --fontsize-font-size: var(--typography-xs-font-size);
+  --fontsize-fontweight-regular: var(--typography-xs-fontweight-regular);
+  --fontsize-fontweight-bold: var(--typography-xs-fontweight-bold);
+  --fontsize-lineheight-normal: var(--typography-xs-lineheight-normal);
+  --fontsize-lineheight-squished: var(--typography-xs-lineheight-squished);
+  --fontsize-icon-size: var(--typography-xs-icon-size);
+  --fontsize-icon-text-gap: var(--typography-xs-icon-text-gap);
+}

@@ -1,0 +1,11 @@
+{
+  "fontsize": {
+    "font-size": 16,
+    "fontweight-regular": 400,
+    "fontweight-bold": 700,
+    "lineheight-normal": 24,
+    "lineheight-squished": 20,
+    "icon-size": 24,
+    "icon-text-gap": 10
+  }
+}
