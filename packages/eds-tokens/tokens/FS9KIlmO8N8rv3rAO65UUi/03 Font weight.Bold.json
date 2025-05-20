@@ -1,0 +1,16 @@
+{
+  "font-weight": {
+    "font-weight": {
+      "$type": "number",
+      "$value": "{fontsize.fontweight-bold}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

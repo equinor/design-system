@@ -36,7 +36,7 @@ export async function createDemoVariables({
     '02 Ratio.Stretched.json',
   )
   const SQUARED_SOURCE = path.join(tokensDir, FILE_KEY, '02 Ratio.Squared.json')
-  const BUILD_PATH = '/demo/'
+  const BUILD_PATH = '/demo/spacing/'
 
   const spacing = _extend({
     source: [SPACING_SOURCE],

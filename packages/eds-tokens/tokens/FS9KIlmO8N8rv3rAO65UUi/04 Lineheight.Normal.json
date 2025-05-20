@@ -1,0 +1,16 @@
+{
+  "lineheight": {
+    "lineheight": {
+      "$type": "number",
+      "$value": "{fontsize.lineheight-normal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

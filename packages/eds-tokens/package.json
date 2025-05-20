@@ -82,6 +82,7 @@
     "update-tokens": "pnpm run update-tokens:colors:brand && pnpm run update-tokens:colors && pnpm run update-tokens:colors-matrix && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
     "update-tokens:demo:spacing": "sync-figma-to-tokens --file-key V3XAAjEw7dl2vQmDvG4RNW",
     "update-tokens:demo:colors": "sync-figma-to-tokens --file-key QRFchmc6GHsKSBEdqdFLMr",
+    "update-tokens:demo:typography": "sync-figma-to-tokens --file-key FS9KIlmO8N8rv3rAO65UUi",
     "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"
