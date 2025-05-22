@@ -1,7 +1,7 @@
 {
-  "font-weight": {
+  "line-height": {
     "$type": "number",
-    "$value": "{font-weight-bold}",
+    "$value": "{line-height-squished}",
     "$description": "",
     "$extensions": {
       "com.figma": {

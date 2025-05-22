@@ -4,5 +4,5 @@
 
 :root, [data-baseline-aligned="true"] {
   --padding-bottom: 0;
-  --padding-top: var(--fontsize-padding-baselined);
+  --padding-top: var(--padding-baselined);
 }

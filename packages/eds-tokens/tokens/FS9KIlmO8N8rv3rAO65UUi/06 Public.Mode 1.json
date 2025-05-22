@@ -2,7 +2,7 @@
   "typography": {
     "font-size": {
       "$type": "number",
-      "$value": "{fontsize.font-size}",
+      "$value": "{font-size}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -16,7 +16,7 @@
     },
     "font-weight": {
       "$type": "number",
-      "$value": "{font-weight.font-weight}",
+      "$value": "{font-weight}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -30,7 +30,7 @@
     },
     "lineheight": {
       "$type": "number",
-      "$value": "{lineheight.lineheight}",
+      "$value": "{line-height}",
       "$description": "",
       "$extensions": {
         "com.figma": {

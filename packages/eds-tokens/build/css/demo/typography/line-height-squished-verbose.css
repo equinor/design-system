@@ -3,5 +3,5 @@
  */
 
 [data-line-height="squished"] {
-  --lineheight-lineheight: var(--fontsize-lineheight-squished);
+  --line-height: var(--line-height-squished);
 }

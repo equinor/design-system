@@ -1,11 +1,9 @@
 {
-  "fontsize": {
-    "font-size": 12,
-    "fontweight-regular": 400,
-    "fontweight-bold": 700,
-    "lineheight-normal": 16,
-    "lineheight-squished": 12,
-    "icon-size": 18,
-    "icon-text-gap": 7.5
-  }
+  "font-size": 12,
+  "icon-text-gap": 7.5,
+  "font-weight-regular": 400,
+  "font-weight-bold": 700,
+  "line-height-normal": 16,
+  "line-height-squished": 12,
+  "icon-size": 18
 }

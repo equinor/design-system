@@ -2,4 +2,4 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const LINEHEIGHT_LINEHEIGHT = 16;
+export const LINE_HEIGHT = 16;

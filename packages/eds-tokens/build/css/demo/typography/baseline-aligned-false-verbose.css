@@ -3,6 +3,6 @@
  */
 
 [data-baseline-aligned="false"] {
-  --padding-top: var(--fontsize-padding-centred);
-  --padding-bottom: var(--fontsize-padding-centred);
+  --padding-top: var(--padding-centred);
+  --padding-bottom: var(--padding-centred);
 }
