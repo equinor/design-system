@@ -142,12 +142,12 @@ export async function createDemoTypographyVariables({
   const LINE_HEIGHT_NORMAL_SOURCE = path.join(
     tokensDir,
     FILE_KEY,
-    '04 Lineheight.Normal.json',
+    '04 Line height.Normal.json',
   )
   const LINE_HEIGHT_SQUISHED_SOURCE = path.join(
     tokensDir,
     FILE_KEY,
-    '04 Lineheight.Squished.json',
+    '04 Line height.Squished.json',
   )
 
   const lineHeightNormal = _extend({
@@ -156,7 +156,7 @@ export async function createDemoTypographyVariables({
     buildPath: BUILD_PATH,
     fileName: 'line-height-normal',
     selector: ':root, [data-line-height="normal"]',
-    filter: (token) => includeTokenFilter(token, ['Lineheight']),
+    filter: (token) => includeTokenFilter(token, ['Line height']),
     transforms: cssTransforms,
     outputReferences: true,
   })
@@ -166,7 +166,7 @@ export async function createDemoTypographyVariables({
     buildPath: BUILD_PATH,
     fileName: 'line-height-squished',
     selector: '[data-line-height="squished"]',
-    filter: (token) => includeTokenFilter(token, ['Lineheight']),
+    filter: (token) => includeTokenFilter(token, ['Line height']),
     transforms: cssTransforms,
     outputReferences: true,
   })

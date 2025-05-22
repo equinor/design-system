@@ -3,5 +3,5 @@
  */
 
 [data-font-weight="bold"] {
-  --font-weight-font-weight: var(--fontsize-fontweight-bold);
+  --font-weight: var(--font-weight-bold);
 }

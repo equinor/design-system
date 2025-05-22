@@ -2,7 +2,7 @@
   "padding": {
     "top": {
       "$type": "number",
-      "$value": "{fontsize.padding-baselined}",
+      "$value": "{padding-baselined}",
       "$description": "",
       "$extensions": {
         "com.figma": {

@@ -2,7 +2,7 @@
   "padding": {
     "top": {
       "$type": "number",
-      "$value": "{fontsize.padding-centred}",
+      "$value": "{padding-centred}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -14,7 +14,7 @@
     },
     "bottom": {
       "$type": "number",
-      "$value": "{fontsize.padding-centred}",
+      "$value": "{padding-centred}",
       "$description": "",
       "$extensions": {
         "com.figma": {

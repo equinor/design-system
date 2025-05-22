@@ -3,5 +3,5 @@
  */
 
 :root, [data-font-weight="regular"] {
-  --font-weight-font-weight: var(--fontsize-fontweight-regular);
+  --font-weight: var(--font-weight-regular);
 }

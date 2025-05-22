@@ -3,5 +3,5 @@
  */
 
 :root, [data-line-height="normal"] {
-  --lineheight-lineheight: var(--fontsize-lineheight-normal);
+  --line-height: var(--line-height-normal);
 }

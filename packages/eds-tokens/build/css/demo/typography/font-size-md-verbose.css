@@ -3,11 +3,11 @@
  */
 
 [data-font-size="md"] {
-  --fontsize-font-size: var(--typography-md-font-size);
-  --fontsize-fontweight-regular: var(--typography-md-fontweight-regular);
-  --fontsize-fontweight-bold: var(--typography-md-fontweight-bold);
-  --fontsize-lineheight-normal: var(--typography-md-lineheight-normal);
-  --fontsize-lineheight-squished: var(--typography-md-lineheight-squished);
-  --fontsize-icon-size: var(--typography-md-icon-size);
-  --fontsize-icon-text-gap: var(--typography-md-icon-text-gap);
+  --font-size: var(--typography-md-font-size);
+  --icon-text-gap: var(--typography-md-icon-text-gap);
+  --font-weight-regular: var(--typography-md-fontweight-regular);
+  --font-weight-bold: var(--typography-md-fontweight-bold);
+  --line-height-normal: var(--typography-md-lineheight-normal);
+  --line-height-squished: var(--typography-md-lineheight-squished);
+  --icon-size: var(--typography-md-icon-size);
 }
