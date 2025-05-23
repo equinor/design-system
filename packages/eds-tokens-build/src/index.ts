@@ -39,6 +39,7 @@ export async function run() {
   await createMatrixColorVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     colorBuildPath: colorBuildPath,
+    prefix: 'eds-color',
   })
 
   await createMatrixColorVariables({

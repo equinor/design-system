@@ -8,7 +8,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "WIDTH_HEIGHT"
+            "GAP"
           ],
           "codeSyntax": {
             "WEB": "var(--selectable-padding-inline)"
@@ -24,7 +24,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "WIDTH_HEIGHT"
+            "GAP"
           ],
           "codeSyntax": {
             "WEB": "var(--selectable-padding-stack)"
@@ -54,7 +54,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "GAP"
           ],
           "codeSyntax": {}
         }
@@ -68,7 +68,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "GAP"
           ],
           "codeSyntax": {}
         }
@@ -82,7 +82,7 @@
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "ALL_SCOPES"
+            "GAP"
           ],
           "codeSyntax": {}
         }
