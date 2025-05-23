@@ -16,6 +16,7 @@ export async function createMatrixColorVariables({
   colorBuildPath,
   coreTokensDirName = '9Jody75rpiDhyTgNm3xOHd',
   colorMatrixTokensDirName = 'l61klzmHcRrHVk7Ag0eLGn',
+  prefix,
   fileNames = {
     colorScheme: {
       dark: '🌗 Color scheme.Dark.json',
@@ -35,6 +36,7 @@ export async function createMatrixColorVariables({
   colorBuildPath: string
   coreTokensDirName?: string
   colorMatrixTokensDirName?: string
+  prefix?: string
   fileNames?: {
     colorScheme: {
       dark: string
@@ -85,7 +87,6 @@ export async function createMatrixColorVariables({
   const transforms = ['name/kebab', 'color/css', 'lightDarkMatrix']
   const outputReferences = false
   const include = [COLOR_BRAND_SOURCE, COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE]
-  const prefix = 'eds-color'
 
   const functional = _extend({
     source: [COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE],
