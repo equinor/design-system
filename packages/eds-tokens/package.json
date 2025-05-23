@@ -22,7 +22,6 @@
     "./css/spacing/primitives.css": "./build/css/spacing/primitives-trimmed.css",
     "./css/spacing/comfortable.css": "./build/css/spacing/comfortable-verbose.css",
     "./css/spacing/spacious.css": "./build/css/spacing/spacious-verbose.css",
-    "./css/demo.css": "./build/css/demo/index-verbose.css",
     "./json/color/flat/*": "./build/json/color/flat/*.json",
     "./json/spacing/flat/*": "./build/json/spacing/flat/*.json",
     "./json/color/nested/*": "./build/json/color/nested/*.json",
@@ -80,9 +79,6 @@
     "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-tokens": "pnpm run update-tokens:colors:brand && pnpm run update-tokens:colors && pnpm run update-tokens:colors-matrix && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
-    "update-tokens:demo:spacing": "sync-figma-to-tokens --file-key V3XAAjEw7dl2vQmDvG4RNW",
-    "update-tokens:demo:colors": "sync-figma-to-tokens --file-key QRFchmc6GHsKSBEdqdFLMr",
-    "update-tokens:demo:typography": "sync-figma-to-tokens --file-key FS9KIlmO8N8rv3rAO65UUi",
     "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes"
