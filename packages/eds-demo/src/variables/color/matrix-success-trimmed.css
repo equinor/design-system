@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-appearance="success"] {
+  --background-app: light-dark(#ffffff, #131d12);
+  --background-subtle: light-dark(#e8f9e6, #172716);
+  --surface-element: light-dark(#cfeacc, #1d361c);
+  --surface-element-hover: light-dark(#b5ddb2, #20461f);
+  --surface-element-active: light-dark(#99d095, #21571f);
+  --border-separator: light-dark(#91cc8d, #20601f);
+  --border-element: light-dark(#2f932e, #2c902c);
+  --border-element-hover: light-dark(#20711f, #62b55e);
+  --solid-component: light-dark(#3fa13d, #3fa13d);
+  --solid-component-hover: light-dark(#1a841c, #5ebf5b);
+  --solid-component-active: light-dark(#007100, #73d46f);
+  --text-low-contrast: light-dark(#21511f, #a2d49f);
+  --text-high-contrast: light-dark(#152215, #e0f4de);
+}

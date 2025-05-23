@@ -1,0 +1,32 @@
+@import 'color/matrix-neutral-trimmed.css';
+@import 'color/matrix-accent-trimmed.css';
+@import 'color/matrix-success-trimmed.css';
+@import 'color/matrix-info-trimmed.css';
+@import 'color/matrix-warning-trimmed.css';
+@import 'color/matrix-danger-trimmed.css';
+@import 'color/matrix-functional-trimmed.css';
+
+@import 'spacing/spacing-trimmed.css';
+
+@import 'spacing/selectable-ratio-squished-verbose.css';
+@import 'spacing/selectable-ratio-squared-verbose.css';
+@import 'spacing/selectable-ratio-stretched-verbose.css';
+
+@import 'spacing/selectable-padding-xs-verbose.css';
+@import 'spacing/selectable-padding-sm-verbose.css';
+@import 'spacing/selectable-padding-md-verbose.css';
+
+@import 'typography/typography-trimmed.css';
+@import 'typography/font-size-xs-verbose.css';
+@import 'typography/font-size-sm-verbose.css';
+@import 'typography/font-size-md-verbose.css';
+@import 'typography/font-size-lg-verbose.css';
+
+@import 'typography/font-weight-regular-verbose.css';
+@import 'typography/font-weight-bold-verbose.css';
+
+@import 'typography/line-height-normal-verbose.css';
+@import 'typography/line-height-squished-verbose.css';
+
+@import 'typography/baseline-aligned-true-verbose.css';
+@import 'typography/baseline-aligned-false-verbose.css';

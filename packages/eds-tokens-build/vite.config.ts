@@ -7,8 +7,8 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/index.ts',
-      formats: ['es'],
+      name: 'main',
+      entry: 'src/main.ts',
     },
     rollupOptions: {
       external: [
@@ -22,9 +22,5 @@ export default defineConfig({
       ],
     },
   },
-  plugins: [
-    dts({
-      rollupTypes: true,
-    }),
-  ],
+  plugins: [dts()],
 })

@@ -1,0 +1,13 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-font-size="sm"] {
+  --font-size: var(--typography-sm-font-size);
+  --icon-text-gap: var(--typography-sm-icon-text-gap);
+  --font-weight-regular: var(--typography-sm-fontweight-regular);
+  --font-weight-bold: var(--typography-sm-fontweight-bold);
+  --line-height-normal: var(--typography-sm-lineheight-normal);
+  --line-height-squished: var(--typography-sm-lineheight-squished);
+  --icon-size: var(--typography-sm-icon-size);
+}

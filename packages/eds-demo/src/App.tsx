@@ -1,4 +1,5 @@
-import '@equinor/eds-tokens/css/demo.css'
+// import '@equinor/eds-tokens/css/demo.css'
+import './variables/index.css'
 import './App.css'
 import './Box.css'
 
@@ -120,15 +121,15 @@ function App() {
                   key={variable}
                   className="color-swatch p-6 rounded-lg flex flex-col justify-between h-[120px] shadow"
                   style={{
-                    backgroundColor: `var(--eds-color-${variable})`,
+                    backgroundColor: `var(--${variable})`,
                     color: variable.includes('text')
-                      ? 'var(--eds-color-background-app)'
+                      ? 'var(--background-app)'
                       : variable.includes('background')
-                        ? 'var(--eds-color-text-high-contrast)'
-                        : 'var(--eds-color-text-high-contrast)',
+                        ? 'var(--text-high-contrast)'
+                        : 'var(--text-high-contrast)',
                   }}
                 >
-                  <span className="text-sm">--eds-color-{variable}</span>
+                  <span className="text-sm">--{variable}</span>
                 </div>
               ))}
             </div>
@@ -151,16 +152,14 @@ function App() {
                 key={variable}
                 className="color-swatch p-6 rounded-lg flex flex-col justify-between h-[120px] shadow"
                 style={{
-                  backgroundColor: `var(--eds-color-functional-${variable})`,
+                  backgroundColor: `var(--functional-${variable})`,
                   color:
                     variable === 'contrast'
                       ? '#000'
-                      : 'var(--eds-color-text-high-contrast)',
+                      : 'var(--text-high-contrast)',
                 }}
               >
-                <span className="text-sm">
-                  --eds-color-functional-{variable}
-                </span>
+                <span className="text-sm">--functional-{variable}</span>
               </div>
             ))}
           </div>
@@ -199,8 +198,7 @@ function App() {
                               <code
                                 className="px-1 rounded"
                                 style={{
-                                  backgroundColor:
-                                    'var(--eds-color-background-subtle)',
+                                  backgroundColor: 'var(--background-subtle)',
                                 }}
                               >
                                 data-font-size="{fontSize.name}"
@@ -216,7 +214,7 @@ function App() {
                               data-baseline-aligned={alignment.name}
                               style={{
                                 backgroundColor:
-                                  'var(--eds-color-functional-app-layer-1)',
+                                  'var(--functional-app-layer-1)',
                                 padding: '8px',
                                 display: 'inline-block',
                               }}

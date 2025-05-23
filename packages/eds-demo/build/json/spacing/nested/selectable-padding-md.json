@@ -1,0 +1,8 @@
+{
+  "Selectable": {
+    "Padding": {
+      "Inline": 16,
+      "Stack": 20
+    }
+  }
+}

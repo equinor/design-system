@@ -1,0 +1,14 @@
+{
+  "line-height": {
+    "$type": "number",
+    "$value": "{line-height-normal}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "padding": {
+    "top": {
+      "$type": "number",
+      "$value": "{padding-centred}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "bottom": {
+      "$type": "number",
+      "$value": "{padding-centred}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}
