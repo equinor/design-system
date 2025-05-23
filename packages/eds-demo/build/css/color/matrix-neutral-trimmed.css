@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-color-appearance="neutral"] {
+  --background-app: light-dark(#ffffff, #181a1c);
+  --background-subtle: light-dark(#f3f3f3, #202325);
+  --surface-element: light-dark(#e1e1e1, #2a3033);
+  --surface-element-hover: light-dark(#d0d0d0, #363d43);
+  --surface-element-active: light-dark(#bfbfbf, #414b53);
+  --border-separator: light-dark(#bababa, #47525b);
+  --border-element: light-dark(#7b7b7b, #697b88);
+  --border-element-hover: light-dark(#5e5e5e, #90a1ad);
+  --solid-component: light-dark(#4a4a4a, #435460);
+  --solid-component-hover: light-dark(#3a3a3a, #556673);
+  --solid-component-active: light-dark(#2f2f2f, #617380);
+  --text-low-contrast: light-dark(#454545, #bcc6ce);
+  --text-high-contrast: light-dark(#1e1e1e, #eaeef1);
+}

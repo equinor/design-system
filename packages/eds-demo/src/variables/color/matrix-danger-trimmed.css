@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-appearance="danger"] {
+  --background-app: light-dark(#ffffff, #291312);
+  --background-subtle: light-dark(#ffeae8, #371717);
+  --surface-element: light-dark(#ffd0ce, #4f1c1d);
+  --surface-element-hover: light-dark(#ffb6b3, #6a1c21);
+  --surface-element-active: light-dark(#ff9a99, #871724);
+  --border-separator: light-dark(#ff9190, #961226);
+  --border-element: light-dark(#e40d39, #e00537);
+  --border-element-hover: light-dark(#b20029, #ff5b64);
+  --solid-component: light-dark(#e20337, #e20337);
+  --solid-component-hover: light-dark(#bd0023, #ff3c51);
+  --solid-component-active: light-dark(#a0001b, #ff666d);
+  --text-low-contrast: light-dark(#7d1a23, #ffa3a1);
+  --text-high-contrast: light-dark(#311515, #ffe1df);
+}

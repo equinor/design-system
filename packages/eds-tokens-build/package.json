@@ -17,18 +17,17 @@
   },
   "type": "module",
   "files": [
-    "bin",
     "dist"
   ],
-  "types": "./dist/index.d.ts",
+  "main": "./dist/eds-tokens-build.umd.cjs",
+  "module": "./dist/eds-tokens-build.js",
+  "types": "./dist/main.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/eds-tokens-build.js"
+      "types": "./dist/main.d.ts",
+      "import": "./dist/eds-tokens-build.js",
+      "require": "./dist/eds-tokens-build.umd.cjs"
     }
-  },
-  "bin": {
-    "eds-tokens-build": "bin/eds-tokens-build.js"
   },
   "scripts": {
     "dev": "vite",

@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --functional-app-base: light-dark(#f3f3f3, #0e0f10);
+  --functional-app-layer-1: light-dark(#ffffff, #181a1c);
+  --functional-app-layer-2: light-dark(#ffffff, #202325);
+  --functional-app-elevated: light-dark(#ffffff, #2a3033);
+  --functional-contrast: light-dark(#ffffff, #ffffff);
+  --functional-focus: light-dark(#0083c3, #0080c0);
+  --functional-link: light-dark(#0083c3, #0080c0);
+  --functional-opacity-disabled: 30;
+}

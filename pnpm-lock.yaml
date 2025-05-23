@@ -440,12 +440,18 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.7
         version: 4.1.7(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.7.1))
+      copyfiles:
+        specifier: ^2.4.1
+        version: 2.4.1
       react:
         specifier: ^19.1.0
         version: 19.1.0
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
+      style-dictionary:
+        specifier: ^4.4.0
+        version: 4.4.0
       tailwindcss:
         specifier: ^4
         version: 4.1.5
@@ -474,6 +480,15 @@ importers:
       globals:
         specifier: ^16.0.0
         version: 16.1.0
+      lightningcss-cli:
+        specifier: ^1.29.3
+        version: 1.29.3
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+      style-dictionary-utils:
+        specifier: ^4.0.5
+        version: 4.0.5(style-dictionary@4.4.0)
       typescript:
         specifier: ~5.8.3
         version: 5.8.3

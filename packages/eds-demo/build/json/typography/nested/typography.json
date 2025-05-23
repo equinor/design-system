@@ -1,0 +1,48 @@
+{
+  "typography": {
+    "xs": {
+      "font-size": 10.5,
+      "fontweight-regular": 400,
+      "fontweight-bold": 700,
+      "lineheight-normal": 16,
+      "lineheight-squished": 12,
+      "icon-size": 15.75,
+      "icon-padding-inline": -3.1500000953674316,
+      "icon-padding-stack": -7.880000114440918,
+      "icon-text-gap": 6.5
+    },
+    "sm": {
+      "font-size": 12,
+      "fontweight-regular": 400,
+      "fontweight-bold": 700,
+      "lineheight-normal": 16,
+      "lineheight-squished": 12,
+      "icon-size": 18,
+      "icon-padding-inline": -3.5999999046325684,
+      "icon-padding-stack": -9,
+      "icon-text-gap": 7.5
+    },
+    "md": {
+      "font-size": 14,
+      "fontweight-regular": 400,
+      "fontweight-bold": 700,
+      "lineheight-normal": 20,
+      "lineheight-squished": 16,
+      "icon-size": 21,
+      "icon-padding-inline": -4.199999809265137,
+      "icon-padding-stack": -10.5,
+      "icon-text-gap": 8.5
+    },
+    "lg": {
+      "font-size": 16,
+      "fontweight-regular": 400,
+      "fontweight-bold": 700,
+      "lineheight-normal": 24,
+      "lineheight-squished": 20,
+      "icon-size": 24,
+      "icon-padding-inline": -4.800000190734863,
+      "icon-padding-stack": -12,
+      "icon-text-gap": 10
+    }
+  }
+}

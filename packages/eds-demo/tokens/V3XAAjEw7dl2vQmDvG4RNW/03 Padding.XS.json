@@ -1,0 +1,30 @@
+{
+  "Selectable": {
+    "Padding": {
+      "Inline": {
+        "$type": "number",
+        "$value": "{Spacing.Inline.XS}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "Stack": {
+        "$type": "number",
+        "$value": "{Spacing.Stack.XS}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "line-height": {
+    "$type": "number",
+    "$value": "{line-height-squished}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}
