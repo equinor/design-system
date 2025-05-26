@@ -428,15 +428,12 @@ importers:
 
   packages/eds-demo:
     dependencies:
-      '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
       '@equinor/eds-tokens-build':
-        specifier: workspace:*
-        version: link:../eds-tokens-build
+        specifier: ^1.0.0
+        version: 1.0.0
       '@equinor/eds-tokens-sync':
-        specifier: workspace:*
-        version: link:../eds-tokens-sync
+        specifier: ^1.0.0
+        version: 1.0.0
       '@tailwindcss/vite':
         specifier: ^4.1.7
         version: 4.1.7(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.7.1))
@@ -1553,6 +1550,14 @@ packages:
 
   '@emotion/unitless@0.8.1':
     resolution: {integrity: sha512-KOEGMu6dmJZtpadb476IsZBclKvILjopjUii3V+7MnXIQCYh8W3NgNcgwo21n9LXZX6EDIKvqfjYxXebDwxKmQ==}
+
+  '@equinor/eds-tokens-build@1.0.0':
+    resolution: {integrity: sha512-Hi5HTgQdUFhmldPwMwl7lYbcEY5AOiJkyB5lTjArRCwnInjRdbfCY8CNykaBaLjjoiIUVEnPPSFylfyIAlFpzA==}
+    engines: {node: '>=18.0.0', pnpm: '>=8'}
+
+  '@equinor/eds-tokens-sync@1.0.0':
+    resolution: {integrity: sha512-QvhEo+ZcyLIyFZAFzMhTGtdWtKn9Qvu1fOe3TtyR9XbsKUgLWIK3J1ks7UwuD+7RlhSRr3u3WJlRbqZnDH3TuQ==}
+    hasBin: true
 
   '@esbuild/aix-ppc64@0.25.4':
     resolution: {integrity: sha512-1VCICWypeQKhVbE9oW/sJaAmjLxhVqacdkvPLEjwlttjfwENRSClS8EjBz0KzRyFSCPDIkuXW34Je/vk7zdB7Q==}
@@ -8705,6 +8710,10 @@ snapshots:
   '@emotion/memoize@0.8.1': {}
 
   '@emotion/unitless@0.8.1': {}
+
+  '@equinor/eds-tokens-build@1.0.0': {}
+
+  '@equinor/eds-tokens-sync@1.0.0': {}
 
   '@esbuild/aix-ppc64@0.25.4':
     optional: true

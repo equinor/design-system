@@ -20,9 +20,8 @@
     "generate": "pnpm run _pre-generate:clean && pnpm run _pre-generate:build && node dist/generate.js && pnpm run _pre-generate:copy && pnpm run _pre-generate:copy-build && lightningcss --bundle ./src/variables/_index.css -o ./src/variables/index.css"
   },
   "dependencies": {
-    "@equinor/eds-tokens": "workspace:*",
-    "@equinor/eds-tokens-build": "workspace:*",
-    "@equinor/eds-tokens-sync": "workspace:*",
+    "@equinor/eds-tokens-build": "^1.0.0",
+    "@equinor/eds-tokens-sync": "^1.0.0",
     "@tailwindcss/vite": "^4.1.7",
     "copyfiles": "^2.4.1",
     "react": "^19.1.0",
