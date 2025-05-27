@@ -235,6 +235,8 @@ export type AutocompleteChanges<T> = { selectedItems: T[] }
 export type AutocompleteProps<T> = {
   /** List of options in dropdown */
   options: readonly T[]
+  /** Total number of options */
+  totalOptions?: number
   /** Label for the select element */
   label: ReactNode
   /** Array of initial selected items
@@ -335,6 +337,7 @@ function AutocompleteInner<T>(
 ) {
   const {
     options = [],
+    totalOptions,
     label,
     meta,
     className,
@@ -740,10 +743,12 @@ function AutocompleteInner<T>(
   }
   // MARK: multiselect specific
   if (multiple) {
-    placeholderText =
-      typeof placeholderText !== 'undefined'
-        ? placeholderText
-        : `${selectedItems.length}/${inputOptions.length} selected`
+    const showPlaceholder = placeholderText && selectedItems.length === 0
+    const optionCount = totalOptions || inputOptions.length
+    placeholderText = showPlaceholder
+      ? placeholderText
+      : `${selectedItems.length}/${optionCount} selected`
+
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
