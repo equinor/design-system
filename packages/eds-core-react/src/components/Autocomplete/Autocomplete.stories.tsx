@@ -1017,9 +1017,7 @@ export const LargeDatasets: StoryFn<AutocompleteProps<MyOptionType>> = (
 
   return (
     <>
-      <Typography
-        style={{ marginBottom: '1rem', color: '#6f6f6f', fontSize: '0.875rem' }}
-      >
+      <Typography style={{ marginBottom: '1rem', fontSize: '0.875rem' }}>
         This example simulates an API that returns 13 stocks from a total of
         1,500 available stocks. Notice how the selection counter shows "x/1,500
         selected" instead of "x/13 selected".
