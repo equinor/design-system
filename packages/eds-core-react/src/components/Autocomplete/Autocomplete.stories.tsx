@@ -1024,7 +1024,7 @@ export const LargeDatasets: StoryFn<AutocompleteProps<MyOptionType>> = (
       </Typography>
       <Autocomplete
         label="Select from paginated stock results"
-        options={options.slice(0, 50)} // Simulate showing only first 50 results
+        options={options}
         multiple
         placeholder="Search and select stocks"
         totalOptions={1500} // Total available options from API
