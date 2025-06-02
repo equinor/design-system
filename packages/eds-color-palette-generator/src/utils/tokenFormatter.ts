@@ -26,31 +26,31 @@ export function formatColorsAsTokens(
     eds: {
       color: {
         neutral: {
-          light: formatColorScale(lightColors.neutral, 'neutral'),
-          dark: formatColorScale(darkColors.neutralDark, 'neutral'),
+          light: formatColorScale(lightColors.neutral),
+          dark: formatColorScale(darkColors.neutralDark),
         },
         utility: {
           red: {
-            light: formatColorScale(lightColors.danger, 'danger'),
-            dark: formatColorScale(darkColors.dangerDark, 'danger'),
+            light: formatColorScale(lightColors.danger),
+            dark: formatColorScale(darkColors.dangerDark),
           },
           yellow: {
-            light: formatColorScale(lightColors.warning, 'warning'),
-            dark: formatColorScale(darkColors.warningDark, 'warning'),
+            light: formatColorScale(lightColors.warning),
+            dark: formatColorScale(darkColors.warningDark),
           },
           green: {
-            light: formatColorScale(lightColors.success, 'success'),
-            dark: formatColorScale(darkColors.successDark, 'success'),
+            light: formatColorScale(lightColors.success),
+            dark: formatColorScale(darkColors.successDark),
           },
           blue: {
-            light: formatColorScale(lightColors.info, 'info'),
-            dark: formatColorScale(darkColors.infoDark, 'info'),
+            light: formatColorScale(lightColors.info),
+            dark: formatColorScale(darkColors.infoDark),
           },
         },
         brand: {
           'moss-green': {
-            light: formatColorScale(lightColors.accent, 'accent'),
-            dark: formatColorScale(darkColors.accentDark, 'accent'),
+            light: formatColorScale(lightColors.accent),
+            dark: formatColorScale(darkColors.accentDark),
           },
         },
       },
@@ -60,7 +60,7 @@ export function formatColorsAsTokens(
   return JSON.stringify(tokens, null, 2)
 }
 
-function formatColorScale(colors: ColorValue[], name: string): TokenGroup {
+function formatColorScale(colors: ColorValue[]): TokenGroup {
   const result: TokenGroup = {}
 
   const start = colors.slice(0, 8)
