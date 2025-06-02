@@ -14,56 +14,83 @@ import { _extend } from './utils'
 export async function createMatrixColorVariables({
   tokensDir,
   colorBuildPath,
+  coreTokensDirName = '9Jody75rpiDhyTgNm3xOHd',
+  colorMatrixTokensDirName = 'l61klzmHcRrHVk7Ag0eLGn',
+  prefix,
+  fileNames = {
+    colorScheme: {
+      dark: '🌗 Color scheme.Dark.json',
+      light: '🌗 Color scheme.Light.json',
+    },
+    appearance: {
+      accent: '🎨 Appearance.Accent.json',
+      neutral: '🎨 Appearance.Neutral.json',
+      danger: '🎨 Appearance.Danger.json',
+      success: '🎨 Appearance.Success.json',
+      warning: '🎨 Appearance.Warning.json',
+      info: '🎨 Appearance.Info.json',
+    },
+  },
 }: {
   tokensDir: string
   colorBuildPath: string
-  cssTransforms: string[]
+  coreTokensDirName?: string
+  colorMatrixTokensDirName?: string
+  prefix?: string
+  fileNames?: {
+    colorScheme: {
+      dark: string
+      light: string
+    }
+    appearance: {
+      accent: string
+      neutral: string
+      danger: string
+      success: string
+      warning: string
+      info: string
+    }
+  }
 }) {
-  const coreColorCollectionFile = 'Core.Mode 1.json'
-  const COLOR_BRAND_DIR = path.join(tokensDir, '9Jody75rpiDhyTgNm3xOHd')
-  const COLOR_BRAND_SOURCE = path.join(COLOR_BRAND_DIR, coreColorCollectionFile)
+  const COLOR_BRAND_DIR = path.join(tokensDir, coreTokensDirName)
+  const COLOR_BRAND_SOURCE = path.join(COLOR_BRAND_DIR, 'Core.Mode 1.json')
 
   const COLOR__MATRIX_TOKENS_DIR = path.join(
     tokensDir,
-    'l61klzmHcRrHVk7Ag0eLGn',
+    colorMatrixTokensDirName,
   )
-
-  const matrixDarkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
-  const matrixLightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
 
   const COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    matrixDarkColorSchemeCollectionFile,
+    fileNames.colorScheme.dark,
   )
 
   const darkTokenMatrix = readJsonFiles([COLOR_MATRIX_COLOR_SCHEME_DARK_SOURCE])
 
   const lightDarkMatrixTransform = createLightDarkTransform({
     name: 'lightDarkMatrix',
-    darkTokensObject: darkTokenMatrix[matrixDarkColorSchemeCollectionFile],
+    darkTokensObject: darkTokenMatrix[fileNames.colorScheme.dark],
   })
 
   StyleDictionary.registerTransform(lightDarkMatrixTransform)
 
   const COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    matrixLightColorSchemeCollectionFile,
+    fileNames.colorScheme.light,
   )
 
   const COLOR_MATRIX_ACCENT_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    '🎨 Appearance.Accent.json',
+    fileNames.appearance.accent,
   )
 
   const transforms = ['name/kebab', 'color/css', 'lightDarkMatrix']
   const outputReferences = false
   const include = [COLOR_BRAND_SOURCE, COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE]
-  const prefix = 'eds-color'
 
   const functional = _extend({
     source: [COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE],
     filter: (token) => {
-      console.log(token.name)
       return (
         token.name.includes('functional') &&
         !token.name.includes('light') &&
@@ -78,7 +105,7 @@ export async function createMatrixColorVariables({
     transforms,
   })
 
-  functional.buildAllPlatforms()
+  await functional.buildAllPlatforms()
 
   const accent = _extend({
     source: [COLOR_MATRIX_ACCENT_SOURCE],
@@ -109,7 +136,7 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_NEUTRAL_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    '🎨 Appearance.Neutral.json',
+    fileNames.appearance.neutral,
   )
 
   const natural = _extend({
@@ -141,7 +168,7 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_DANGER_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    '🎨 Appearance.Danger.json',
+    fileNames.appearance.danger,
   )
 
   const danger = _extend({
@@ -173,7 +200,7 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_SUCCESS_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    '🎨 Appearance.Success.json',
+    fileNames.appearance.success,
   )
 
   const success = _extend({
@@ -205,7 +232,7 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_WARNING_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    '🎨 Appearance.Warning.json',
+    fileNames.appearance.warning,
   )
 
   const warning = _extend({
@@ -237,7 +264,7 @@ export async function createMatrixColorVariables({
 
   const COLOR_MATRIX_INFO_SOURCE = path.join(
     COLOR__MATRIX_TOKENS_DIR,
-    '🎨 Appearance.Info.json',
+    fileNames.appearance.info,
   )
 
   const info = _extend({

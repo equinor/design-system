@@ -1,6 +1,11 @@
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
-import { cssBuildPath, jsBuildPath, jsonBuildPath } from '..'
+import path from 'path'
+
+const outputDirectory = path.resolve(process.cwd(), 'build')
+export const cssBuildPath = path.join(outputDirectory, 'css')
+export const jsBuildPath = path.join(outputDirectory, 'js')
+export const jsonBuildPath = path.join(outputDirectory, 'json')
 
 export function toFixedWithoutTrailingZeroes(
   value: number,
