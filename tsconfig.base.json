@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "esnext",
-    "lib": ["dom", "ES2021"],
-    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["dom", "ES2022"],
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
