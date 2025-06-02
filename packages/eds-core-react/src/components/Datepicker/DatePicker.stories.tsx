@@ -9,6 +9,8 @@ import { NativeSelect } from '../Select'
 import { action } from '@storybook/addon-actions'
 import { CalendarDate } from '@internationalized/date'
 import { I18nProvider } from 'react-aria'
+import { EdsProvider } from '../EdsProvider'
+import { Checkbox } from '../Checkbox'
 
 const meta: Meta<typeof DatePicker> = {
   title: 'Inputs/Dates/Datepicker',
@@ -218,5 +220,28 @@ export const CustomHeaderFooter: StoryFn<DatePickerProps> = ({
         </div>
       )}
     />
+  )
+}
+
+export const Compact: StoryFn = (props: DatePickerProps) => {
+  const [compact, setComfortable] = useState<boolean>(true)
+
+  return (
+    <EdsProvider density={compact ? 'compact' : 'comfortable'}>
+      <Checkbox
+        label="Compact"
+        onChange={() => {
+          setComfortable(!compact)
+        }}
+        checked={compact}
+      />
+      <DatePicker
+        {...props}
+        onChange={(v) => {
+          const str = v?.toISOString()
+          action('onChange')(str)
+        }}
+      />
+    </EdsProvider>
   )
 }
