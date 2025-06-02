@@ -26,7 +26,7 @@
     "@equinor/eds-core-react": "workspace:>=0.42.0",
     "react": ">=16.8",
     "react-dom": ">=16.8",
-    "styled-components": "^6.1.18"
+    "styled-components": ">=5.1"
   },
   "dependencies": {
     "@equinor/eds-icons": "workspace:^",

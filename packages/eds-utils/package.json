@@ -76,7 +76,7 @@
   "peerDependencies": {
     "react": ">=16.8",
     "react-dom": ">=16.8",
-    "styled-components": "^6.1.18"
+    "styled-components": ">=5.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.4",
