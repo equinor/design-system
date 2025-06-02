@@ -91,7 +91,6 @@ export async function createMatrixColorVariables({
   const functional = _extend({
     source: [COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE],
     filter: (token) => {
-      console.log(token.name)
       return (
         token.name.includes('functional') &&
         !token.name.includes('light') &&
@@ -106,7 +105,7 @@ export async function createMatrixColorVariables({
     transforms,
   })
 
-  functional.buildAllPlatforms()
+  await functional.buildAllPlatforms()
 
   const accent = _extend({
     source: [COLOR_MATRIX_ACCENT_SOURCE],
