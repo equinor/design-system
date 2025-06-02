@@ -26,14 +26,14 @@
     "@equinor/eds-core-react": "workspace:>=0.42.0",
     "react": ">=16.8",
     "react-dom": ">=16.8",
-    "styled-components": ">=5.1"
+    "styled-components": "^6.1.18"
   },
   "dependencies": {
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
     "@tanstack/react-table": "^8.21.3",
-    "@tanstack/react-virtual": "^3.13.6"
+    "@tanstack/react-virtual": "^3.13.8"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
@@ -71,7 +71,7 @@
     "rollup-plugin-delete": "^2.2.0",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^8.6.12",
-    "styled-components": "6.1.17",
+    "styled-components": "6.1.18",
     "ts-jest": "29.3.2",
     "ts-node": "10.9.2",
     "tsc-watch": "^6.2.1",
