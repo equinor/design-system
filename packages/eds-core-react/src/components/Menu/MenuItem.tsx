@@ -166,9 +166,9 @@ export const MenuItem: OverridableSubComponent = forwardRef<
       onClick={(e: MouseEvent<Element, globalThis.MouseEvent>) => {
         if (onClick) {
           onClick(e)
-          if (onClose !== null && closeMenuOnClick) {
-            onClose(e)
-          }
+        }
+        if (onClose !== null && closeMenuOnClick) {
+          onClose(e)
         }
       }}
     >
