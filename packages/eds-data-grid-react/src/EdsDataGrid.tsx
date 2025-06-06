@@ -450,7 +450,7 @@ function EdsDataGridInner<T>(
           }}
         >
           {caption && <Table.Caption>{caption}</Table.Caption>}
-          <Table.Head sticky={stickyHeader}>
+          <Table.Head>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableHeaderRow
                 key={headerGroup.id}

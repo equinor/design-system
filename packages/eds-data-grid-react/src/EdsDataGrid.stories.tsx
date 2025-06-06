@@ -446,6 +446,7 @@ ColumnGrouping.args = {
   width: '100%',
   enableVirtual: true,
   scrollbarHorizontal: true,
+  stickyHeader: true,
 }
 
 export const AllTheThings: StoryFn<EdsDataGridProps<Photo>> = (args) => {
