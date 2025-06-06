@@ -102,6 +102,7 @@ describe('Autocomplete', () => {
   it('Has provided label', async () => {
     render(<Autocomplete label={labelText} options={items} />)
 
+    // The same label is used for both the input field and the list of options
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
     const optionsList = labeledNodes[1]
@@ -118,6 +119,7 @@ describe('Autocomplete', () => {
   it('Has provided ReactNode label', async () => {
     render(<Autocomplete label={<div>{labelText}</div>} options={items} />)
 
+    // The same label is used for both the input field and the list of options
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
     const optionsList = labeledNodes[1]
