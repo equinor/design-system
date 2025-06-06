@@ -12,6 +12,7 @@ import { SortIndicator } from './SortIndicator'
 import { ResizeInner, Resizer } from './Resizer'
 import { TableCell, FilterVisibility } from './TableCell'
 import styled from 'styled-components'
+import { useEds } from '@equinor/eds-core-react'
 
 const SortButton = styled.button`
   cursor: pointer;
@@ -39,9 +40,7 @@ const TableHeaderCellLabel = styled.div`
 type Props<T> = {
   header: Header<T, unknown>
   columnResizeMode: ColumnResizeMode | null | undefined
-  // eslint-disable-next-line react/no-unused-prop-types
   deltaOffset: number | null
-  // eslint-disable-next-line react/no-unused-prop-types
   table: TanStackTable<T>
 }
 
@@ -79,6 +78,14 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       : table.getTotalSize() - header.getStart() - header.getSize()
   }, [pinned, header, table])
 
+  const { density } = useEds()
+  // Future improvement: If we down the line end up granting the ability to customize row height, we should move this to the table-context
+  const rowHeight = density === 'compact' ? 32 : 48
+
+  const vertOffset = ctx.stickyHeader
+    ? (header.depth - 1) * rowHeight
+    : undefined
+
   const tableCellPadding = useMemo(() => {
     if (canSort && canFilter) {
       return '0 var(--eds_table__cell__padding_x, 16px) 0 0'
@@ -97,6 +104,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
       className={ctx.headerClass ? ctx.headerClass(header.column) : ''}
       style={{
         ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
+        top: vertOffset,
       }}
       aria-hidden={true}
     />
@@ -115,6 +123,7 @@ export function TableHeaderCell<T>({ header, columnResizeMode }: Props<T>) {
         verticalAlign: ctx.enableColumnFiltering ? 'top' : 'middle',
         ...(ctx.headerStyle ? ctx.headerStyle(header.column) : {}),
         padding: tableCellPadding,
+        top: vertOffset,
       }}
     >
       {canSort ? (
