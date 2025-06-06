@@ -40,7 +40,9 @@ const TableHeaderCellLabel = styled.div`
 type Props<T> = {
   header: Header<T, unknown>
   columnResizeMode: ColumnResizeMode | null | undefined
+  // eslint-disable-next-line react/no-unused-prop-types
   deltaOffset: number | null
+  // eslint-disable-next-line react/no-unused-prop-types
   table: TanStackTable<T>
 }
 
