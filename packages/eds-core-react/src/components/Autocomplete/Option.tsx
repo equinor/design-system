@@ -9,7 +9,7 @@ type StyledListItemType = {
   $isdisabled?: string
 }
 
-const StyledListItem = styled.li<StyledListItemType>(
+export const StyledListItem = styled.li<StyledListItemType>(
   ({ theme, $highlighted, $active, $isdisabled }) => {
     const backgroundColor =
       $highlighted === 'true'
