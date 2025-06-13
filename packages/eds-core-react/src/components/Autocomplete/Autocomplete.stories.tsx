@@ -1039,3 +1039,80 @@ export const LargeDatasets: StoryFn<AutocompleteProps<MyOptionType>> = (
 LargeDatasets.args = {
   options: stocks,
 }
+
+export const AddNewOption: StoryFn<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
+  const [options, setOptions] = useState<MyOptionType[]>([...stocks])
+  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
+
+  const handleOptionsChange = (changes: AutocompleteChanges<MyOptionType>) => {
+    setSelectedItems(changes.selectedItems)
+  }
+
+  const handleAddNewOption = (newOption: string) => {
+    // Create a new object with the input as company name
+    const newStock: MyOptionType = {
+      label: newOption,
+      symbol: newOption.substring(0, 4).toUpperCase(),
+      trend: '',
+    }
+
+    // Add the new option to the list if it doesn't already exist
+    if (
+      !options.some(
+        (opt) => opt.label.toLowerCase() === newOption.toLowerCase(),
+      )
+    ) {
+      setOptions((prev) => [...prev, newStock])
+      // Also add it to selected items
+      setSelectedItems((prev) => [...prev, newStock])
+      action('onAddNewOption')(newOption)
+    }
+  }
+
+  return (
+    <>
+      <Typography style={{ marginBottom: '1rem' }}>
+        Type a company name that's not in the list and press Enter or click the
+        "Add" option to add it as a new stock.
+      </Typography>
+
+      <Autocomplete
+        label="Select or add stocks"
+        options={options}
+        multiple
+        placeholder="Type to search or add new stocks..."
+        selectedOptions={selectedItems}
+        onOptionsChange={handleOptionsChange}
+        onAddNewOption={handleAddNewOption}
+        optionLabel={optionLabel}
+      />
+
+      {selectedItems.length > 0 && (
+        <div style={{ marginTop: '1rem' }}>
+          <Typography variant="body_short" style={{ marginBottom: '0.5rem' }}>
+            Selected stocks:
+          </Typography>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {selectedItems.map((stock) => (
+              <Chip
+                key={stock.label}
+                onDelete={() =>
+                  setSelectedItems((prev) =>
+                    prev.filter((item) => item.label !== stock.label),
+                  )
+                }
+              >
+                {stock.trend} {stock.label} ({stock.symbol})
+              </Chip>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+AddNewOption.storyName = 'Add new option'
+AddNewOption.args = {}
