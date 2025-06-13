@@ -81,6 +81,10 @@ const waitForVirtualizedOptions = async (
   return validOptions.slice(0, expectedCount)
 }
 
+const StyledAutocomplete = styled(Autocomplete)`
+  clip-path: unset;
+`
+
 describe('Autocomplete', () => {
   it('Matches snapshot', async () => {
     render(<Autocomplete options={items} label={labelText} />)
@@ -276,40 +280,6 @@ describe('Autocomplete', () => {
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith({ selectedItems: [] })
-    })
-  })
-
-  it('Can add new options', async () => {
-    const onChange = jest.fn()
-    const onAddNewOption = jest.fn()
-    render(
-      <StyledAutocomplete
-        label={labelText}
-        options={items}
-        data-testid="styled-autocomplete"
-        onOptionsChange={onChange}
-        onAddNewOption={onAddNewOption}
-      />,
-    )
-
-    const labeledNodes = await screen.findAllByLabelText(labelText)
-    const input = labeledNodes[0]
-    const optionsList = labeledNodes[1]
-
-    const buttonNode = await screen.findByLabelText('toggle options', {
-      selector: 'button',
-    })
-
-    fireEvent.click(buttonNode)
-    fireEvent.change(input, {
-      target: { value: 'New option' },
-    })
-
-    const options = await within(optionsList).findAllByRole('option')
-    fireEvent.click(options[0])
-
-    await waitFor(() => {
-      expect(onAddNewOption).toHaveBeenNthCalledWith(1, 'New option')
     })
   })
 
@@ -549,10 +519,6 @@ describe('Autocomplete', () => {
     expect(input).toHaveValue('')
   })
 
-  const StyledAutocomplete = styled(Autocomplete)`
-    clip-path: unset;
-  `
-
   it('Can extend the css for the component & props are passed correctly to input', async () => {
     const { container } = render(
       <StyledAutocomplete
@@ -569,5 +535,238 @@ describe('Autocomplete', () => {
     // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
     expect(autocomplete.nodeName).toBe('INPUT')
+  })
+})
+describe('Autocomplete: Add new options feature', () => {
+  it('Can add new options', async () => {
+    const onChange = jest.fn()
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onOptionsChange={onChange}
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+    fireEvent.change(input, {
+      target: { value: 'New option' },
+    })
+
+    const options = await within(optionsList).findAllByRole('option')
+    fireEvent.click(options[0])
+
+    await waitFor(() => {
+      expect(onAddNewOption).toHaveBeenNthCalledWith(1, 'New option')
+    })
+  })
+  it('Does not show add option when input is empty', async () => {
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+    fireEvent.click(buttonNode)
+
+    const addOption = screen.queryByTestId('add-item')
+    expect(addOption).not.toBeInTheDocument()
+  })
+
+  it('Shows add option only when no matches are found', async () => {
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+
+    fireEvent.change(input, {
+      target: { value: 'One' }, // In test data
+    })
+
+    const addOption = screen.queryByTestId('add-item')
+    expect(addOption).not.toBeInTheDocument()
+
+    fireEvent.change(input, {
+      target: { value: 'Completely new item' },
+    })
+
+    const addOptionAfter = await screen.findByTestId('add-item')
+    expect(addOptionAfter).toBeInTheDocument()
+  })
+
+  it('Can add new option using arrow down and Enter key', async () => {
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+    fireEvent.change(input, {
+      target: { value: 'New option via arrow+enter' },
+    })
+
+    const addOption = await within(optionsList).findByTestId('add-item')
+    expect(addOption).toBeInTheDocument()
+
+    // Use arrow down to highlight the add option, then Enter
+    fireEvent.keyDown(input, { key: 'ArrowDown', code: 'ArrowDown' })
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' })
+
+    await waitFor(() => {
+      expect(onAddNewOption).toHaveBeenCalledWith('New option via arrow+enter')
+    })
+  })
+
+  it('Does not call onAddNewOption with empty string', async () => {
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+
+    fireEvent.focus(input)
+    fireEvent.change(input, {
+      target: { value: '   ' },
+    })
+
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' })
+
+    expect(onAddNewOption).not.toHaveBeenCalled()
+  })
+
+  it('Clears input after adding new option', async () => {
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0] as HTMLInputElement
+    const optionsList = labeledNodes[1]
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+    fireEvent.change(input, {
+      target: { value: 'New option to clear' },
+    })
+
+    const options = await within(optionsList).findAllByRole('option')
+    fireEvent.click(options[0])
+
+    await waitFor(() => {
+      expect(onAddNewOption).toHaveBeenCalledWith('New option to clear')
+    })
+    expect(input.value).toBe('')
+  })
+
+  it('Displays correct aria-label for add option', async () => {
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+    fireEvent.change(input, {
+      target: { value: 'Test option' },
+    })
+
+    const addOption = await screen.findByTestId('add-item')
+    expect(addOption).toHaveAttribute(
+      'aria-label',
+      'Add new option: Test option',
+    )
+  })
+
+  it('Does not show add option when onAddNewOption is not provided', async () => {
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        // no onAddNewOption prop
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+    fireEvent.change(input, {
+      target: { value: 'Should not show add option' },
+    })
+
+    const addOption = screen.queryByTestId('add-item')
+    expect(addOption).not.toBeInTheDocument()
   })
 })
