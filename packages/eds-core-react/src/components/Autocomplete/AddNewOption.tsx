@@ -30,6 +30,7 @@ function AddNewOptionInner(
     <StyledListItem
       ref={ref}
       $highlighted={highlighted}
+      aria-label={`Add new option: ${value}`}
       onClick={(e) => {
         onClick(e)
       }}
