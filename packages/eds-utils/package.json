@@ -79,7 +79,7 @@
     "styled-components": ">=5.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.27.4",
+    "@babel/runtime": "^7.26.10",
     "@equinor/eds-tokens": "workspace:*"
   }
 }
