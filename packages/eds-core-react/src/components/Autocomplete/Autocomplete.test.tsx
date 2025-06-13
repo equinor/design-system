@@ -279,6 +279,40 @@ describe('Autocomplete', () => {
     })
   })
 
+  it('Can add new options', async () => {
+    const onChange = jest.fn()
+    const onAddNewOption = jest.fn()
+    render(
+      <StyledAutocomplete
+        label={labelText}
+        options={items}
+        data-testid="styled-autocomplete"
+        onOptionsChange={onChange}
+        onAddNewOption={onAddNewOption}
+      />,
+    )
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+
+    fireEvent.click(buttonNode)
+    fireEvent.change(input, {
+      target: { value: 'New option' },
+    })
+
+    const options = await within(optionsList).findAllByRole('option')
+    fireEvent.click(options[0])
+
+    await waitFor(() => {
+      expect(onAddNewOption).toHaveBeenNthCalledWith(1, 'New option')
+    })
+  })
+
   it('Can deselect complex options', async () => {
     const onChange = jest.fn()
     const opts = [
