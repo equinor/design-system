@@ -1040,9 +1040,7 @@ LargeDatasets.args = {
   options: stocks,
 }
 
-export const AddNewOption: StoryFn<AutocompleteProps<MyOptionType>> = (
-  args,
-) => {
+export const AddNewOption: StoryFn<AutocompleteProps<MyOptionType>> = () => {
   const [options, setOptions] = useState<MyOptionType[]>([...stocks])
   const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
 
