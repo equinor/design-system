@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-data-grid-react",
-  "version": "0.7.7",
+  "version": "0.8.1",
   "description": "A feature-rich data-grid written in React, implementing the Equinor Design System",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -33,7 +33,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
     "@tanstack/react-table": "^8.21.3",
-    "@tanstack/react-virtual": "^3.13.6"
+    "@tanstack/react-virtual": "^3.13.8"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
@@ -70,9 +70,9 @@
     "rollup": "^4.40.1",
     "rollup-plugin-delete": "^2.2.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "^8.6.12",
-    "styled-components": "6.1.17",
-    "ts-jest": "29.3.2",
+    "storybook": "^8.6.14",
+    "styled-components": "6.1.18",
+    "ts-jest": "29.3.3",
     "ts-node": "10.9.2",
     "tsc-watch": "^6.2.1",
     "typescript": "~5.8.3"

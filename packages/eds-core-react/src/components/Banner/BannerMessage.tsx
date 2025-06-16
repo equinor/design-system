@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 import { TypographyProps } from '../Typography/Typography'
@@ -6,8 +6,8 @@ import { TypographyProps } from '../Typography/Typography'
 const StyledBannerMessage = styled(Typography)``
 
 export type BannerMessageProps = {
-  /** Text content */
-  children: string
+  /** Content */
+  children: ReactNode
 } & Omit<TypographyProps, 'children'>
 
 export const BannerMessage = forwardRef<HTMLElement, BannerMessageProps>(

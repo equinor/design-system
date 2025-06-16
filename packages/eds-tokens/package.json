@@ -56,7 +56,10 @@
     "build": "rollup -c --bundleConfigAsCjs && pnpm run types",
     "dev": "rollup -c -w",
     "types": "tsc",
+    "test": "jest",
     "prettier:check": "prettier --check src/",
+    "_prebuild:generate-variables:build": "vite build --config vite.generate-variables.config.ts",
+    "generate-variables": "pnpm run _prebuild:generate-variables:build && node ./build-generate-variables/generate-variables.js",
     "_prebuild:css-index": "copyfiles ./src/css/*.css ./build/css --flat",
     "_build:css:matrix:trimmed": "lightningcss --bundle ./build/css/index-matrix-trimmed.css -o ./build/css/variables-matrix-trimmed.css",
     "_build:css:verbose": "lightningcss --bundle ./build/css/index-verbose.css -o ./build/css/variables-verbose.css",
@@ -65,10 +68,9 @@
     "_build:css-min-matrix": "lightningcss --minify --bundle ./build/css/variables-matrix-trimmed.css -o ./build/css/variables-matrix-trimmed.min.css",
     "_build:css-min-classic": "lightningcss --minify --bundle ./build/css/variables-verbose.css -o ./build/css/variables-verbose.min.css && lightningcss --minify ./build/css/variables-trimmed.css -o ./build/css/variables-trimmed.min.css",
     "_build:css-min": "pnpm run _build:css-min-classic && pnpm run _build:css-min-matrix",
-    "test": "jest",
     "tokens-in-code:build:css": "pnpm run _prebuild:css-index && pnpm run _build:css && pnpm run _build:css-min",
     "tokens-in-code:clean": "rimraf build",
-    "tokens-in-code:build": "pnpm run tokens-in-code:clean && eds-tokens-build && pnpm run tokens-in-code:build:css",
+    "tokens-in-code:build": "pnpm run tokens-in-code:clean && pnpm run generate-variables && pnpm run tokens-in-code:build:css",
     "update-figma:colors-matrix": "sync-tokens-to-figma --file-key l61klzmHcRrHVk7Ag0eLGn",
     "update-tokens:colors-matrix": "sync-figma-to-tokens --file-key l61klzmHcRrHVk7Ag0eLGn",
     "update-figma:colors": "sync-tokens-to-figma --file-key ZrJNpIhcHprG9bFpHlHcWa",
@@ -101,6 +103,9 @@
     "rimraf": "^6.0.1",
     "rollup": "^4.40.1",
     "rollup-plugin-delete": "^2.2.0",
-    "typescript": "^5.8.3"
+    "style-dictionary": "^4.4.0",
+    "style-dictionary-utils": "^4.0.5",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
   }
 }

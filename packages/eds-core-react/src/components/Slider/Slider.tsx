@@ -21,15 +21,14 @@ const {
   entities: { track, handle, dot, output },
 } = tokens
 
+const encodedTrackColor = encodeURIComponent(track.background)
+const encodedHoverColor = encodeURIComponent(track.states.hover.background)
+
 const fakeTrackBg = css`
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track.background}' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedTrackColor}' width='100%' height='4' rx='2' /></svg>");
   background-size: cover;
   background-repeat: no-repeat;
 `
-
-const fakeTrackBgHover = css({
-  backgroundImage: `url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track.states.hover.background}' width='100%' height='4' rx='2' /></svg>")`,
-})
 
 const trackFill = css`
   grid-column: 1 / span 2;
@@ -82,9 +81,6 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
         : $hideActiveTrack
           ? 'transparent'
           : track.entities.indicator.background,
-      '--background-hover': $hideActiveTrack
-        ? 'transparent'
-        : track.entities.indicator.states.hover.background,
       ...style,
     },
   }),
@@ -125,10 +121,14 @@ const RangeWrapper = styled.div.attrs<RangeWrapperProps>(
 
   @media (hover: hover) and (pointer: fine) {
     &:hover:not([data-disabled]) {
-      ${fakeTrackBgHover}
+      background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedHoverColor}' width='100%' height='4' rx='2' /></svg>");
+
       &::before,
       &::after {
-        background: var(--background-hover);
+        background: ${({ $hideActiveTrack }) =>
+          $hideActiveTrack
+            ? 'transparent'
+            : track.entities.indicator.states.hover.background};
       }
     }
   }
@@ -187,9 +187,6 @@ const Wrapper = styled.div.attrs<WrapperProps>(
         : $hideActiveTrack
           ? 'transparent'
           : track.entities.indicator.background,
-      '--background-hover': $hideActiveTrack
-        ? 'transparent'
-        : track.entities.indicator.states.hover.background,
       ...style,
     },
   }),
@@ -220,11 +217,16 @@ const Wrapper = styled.div.attrs<WrapperProps>(
 
   @media (hover: hover) and (pointer: fine) {
     &:hover:not([data-disabled]) {
-      ${fakeTrackBgHover}
+      background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${encodedHoverColor}' width='100%' height='4' rx='2' /></svg>");
+
       &::after {
-        background: var(--background-hover);
+        background: ${({ $hideActiveTrack }) =>
+          $hideActiveTrack
+            ? 'transparent'
+            : track.entities.indicator.states.hover.background};
       }
     }
+
     ${({ $labelBelow }) =>
       $labelBelow &&
       css`

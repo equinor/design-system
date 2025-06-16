@@ -9,15 +9,17 @@ export function gaussian(
   return Math.exp(exponent)
 }
 
+interface GenerateNextSolidColorProps {
+  baseColor: string
+  colorScheme: 'light' | 'dark'
+  amount?: number
+}
+
 export function generateNextSolidColor({
   baseColor,
   colorScheme,
   amount = 0.2,
-}: {
-  baseColor: string
-  colorScheme: 'light' | 'dark'
-  amount?: number
-}): string {
+}: GenerateNextSolidColorProps): string {
   if (colorScheme === 'dark') {
     const baseLighten = new Color(baseColor)
     baseLighten.lighten(amount)
@@ -99,7 +101,7 @@ const WCAGThresholds = {
   nonText: {
     minimum: 3, // Level AA for non-text UI components
   },
-}
+} as const
 
 /**
  * APCA contrast thresholds based on different text and UI categories
@@ -122,12 +124,50 @@ const APCAThresholds = {
   nonText: {
     minimum: 15, // Minimum for non-semantic elements like dividers (>=5px solid)
   },
-}
+} as const
 
 type ContrastMethod = 'WCAG21' | 'APCA'
 
 function getThresholds(method: ContrastMethod) {
   return method === 'WCAG21' ? WCAGThresholds : APCAThresholds
+}
+
+type ContrastResult = {
+  contrastValue: string
+  fluentText: {
+    preferred: boolean
+    minimum: boolean
+    threshold: {
+      preferred: number
+      minimum: number
+    }
+  }
+  contentText: {
+    preferred: boolean
+    minimum: boolean
+    threshold: {
+      preferred: number
+      minimum: number
+    }
+  }
+  headlines: {
+    minimum: boolean
+    threshold: {
+      minimum: number
+    }
+  }
+  spotReadable: {
+    minimum: boolean
+    threshold: {
+      minimum: number
+    }
+  }
+  nonText: {
+    minimum: boolean
+    threshold: {
+      minimum: number
+    }
+  }
 }
 
 /**
@@ -141,7 +181,7 @@ export function checkContrast(
   foreground: string | Color,
   background: string | Color,
   method: ContrastMethod,
-) {
+): ContrastResult {
   const fg = typeof foreground === 'string' ? new Color(foreground) : foreground
   const bg = typeof background === 'string' ? new Color(background) : background
 

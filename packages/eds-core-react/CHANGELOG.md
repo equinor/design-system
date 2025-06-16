@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.47.0] - 2025-06-13
+
+## Fixed
+
+- 🐛 `Autocomplete`: Improvements to placeholder text by @FredrikMWold in https://github.com/equinor/design-system/pull/3813
+- 🐛 `Menu`: Ensure onClose is called when a MenuItem without onClick is clicked by @FredrikMWold in https://github.com/equinor/design-system/pull/3828
+
+## Added
+
+- ✨`Autocomplete`: Add support for adding new options in Autocomplete by @FredrikMWold in https://github.com/equinor/design-system/pull/3833
+- 📝 `Autocomplete`: story example with the new totalOptions prop by @pomfrida in https://github.com/equinor/design-system/pull/3817
+- 📝 ♿ ✅ `Autocomplete`: enhance Autocomplete onAddNewOption - stories, tests, and accessibility by @pomfrida in https://github.com/equinor/design-system/pull/3841
+
+## BREAKING CHANGES ⚠️
+
+- ⬆️ `Autocomplete`: Upgraded TanStack Virtual dependency by @pomfrida in https://github.com/equinor/design-system/pull/3824
+  Virtual items may not render immediately in test environments
+  Tests expecting DOM elements to be present synchronously may fail:
+
+```
+// ❌ Old - may fail
+const options = screen.getAllByRole('option')
+
+// ✅ New - wait for virtual items
+const options = await screen.findAllByRole('option')
+// or
+await waitFor(() => {
+  expect(screen.getAllByRole('option')).toHaveLength(expectedCount)
+})
+```
+
+## [0.46.0] - 2025-05-19
+
+### Fixed
+
+- 🐛 `Slider`: Fix slider track disappearing on hover by @pomfrida in https://github.com/equinor/design-system/pull/3803
+
+### Added
+
+- ✨ `Autocomplete`: Export Autocomplete Option Label by @pomfrida in https://github.com/equinor/design-system/pull/3799
+- ✨ `Banner.Message`: Allow ReactNode as children by @pomfrida in https://github.com/equinor/design-system/pull/3805
+
 ## [0.45.1] - 2025-05-06
 
 ### Fixed

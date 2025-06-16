@@ -1,16 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable import/no-default-export */
-
 import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   build: {
     lib: {
-      name: 'main',
-      entry: 'src/main.ts',
+      name: 'generate-variables',
+      fileName: 'generate-variables',
+      entry: 'src/generate-variables/index.ts',
     },
     rollupOptions: {
+      output: {
+        dir: 'build-generate-variables',
+      },
       external: [
         'fs',
         'path',
@@ -19,8 +20,8 @@ export default defineConfig({
         'style-dictionary',
         'style-dictionary-utils',
         '@equinor/eds-tokens-sync',
+        '@equinor/eds-tokens-build',
       ],
     },
   },
-  plugins: [dts()],
 })

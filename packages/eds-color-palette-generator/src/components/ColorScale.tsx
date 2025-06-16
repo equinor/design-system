@@ -1,18 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { colorPairs } from '@/config'
 import { checkContrast } from '@/utils/color'
+
+type ColorScaleProps = {
+  colors: string[]
+  showContrast?: boolean
+  contrastMethod?: 'WCAG21' | 'APCA'
+}
 
 export function ColorScale({
   colors,
   showContrast = true,
   contrastMethod = 'WCAG21',
-}: {
-  colors: any
-  showContrast?: boolean
-  contrastMethod?: 'WCAG21' | 'APCA'
-}) {
-  const contrasts = colors.map((color: any, i: number) => {
+}: ColorScaleProps) {
+  const contrasts = colors.map((color: string, i: number) => {
     const indexOfBackgroundColorThatPairs = colorPairs[i]?.usedOnStep
     if (!indexOfBackgroundColorThatPairs) return null
     const contrastForAllBackgroundPairings = colorPairs[i]?.usedOnStep?.map(
@@ -75,7 +76,7 @@ export function ColorScale({
     </div>
   )
 }
-function getTextColorForStep(colors: any, stepIndex: number) {
+function getTextColorForStep(colors: string[], stepIndex: number): string {
   // Steps 1-6 use the text step 9 color.
   // Step 7-10 use the bg color
   // Step 11-12 use the contrast color #fff

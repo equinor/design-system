@@ -52,12 +52,15 @@ import {
   MiddlewareState,
 } from '@floating-ui/react'
 import { Variants } from '../types'
+import { AddNewOption } from './AddNewOption'
 
 const Container = styled.div`
   position: relative;
 `
 
 const AllSymbol = Symbol('Select all')
+const AddSymbol = Symbol('Add new')
+
 // MARK: styled components
 const StyledList = styled(List)(
   ({ theme }) => css`
@@ -235,6 +238,8 @@ export type AutocompleteChanges<T> = { selectedItems: T[] }
 export type AutocompleteProps<T> = {
   /** List of options in dropdown */
   options: readonly T[]
+  /** Total number of options */
+  totalOptions?: number
   /** Label for the select element */
   label: ReactNode
   /** Array of initial selected items
@@ -282,6 +287,8 @@ export type AutocompleteProps<T> = {
    * Returns input value
    */
   onInputChange?: (text: string) => void
+  /** Callback for clicking the add new option button */
+  onAddNewOption?: (text: string) => void
   /** Enable multiselect */
   multiple?: boolean
   /** Add select-all option. Throws an error if true while multiple = false */
@@ -335,6 +342,7 @@ function AutocompleteInner<T>(
 ) {
   const {
     options = [],
+    totalOptions,
     label,
     meta,
     className,
@@ -344,6 +352,7 @@ function AutocompleteInner<T>(
     loading = false,
     hideClearButton = false,
     onOptionsChange,
+    onAddNewOption,
     onInputChange,
     selectedOptions: _selectedOptions,
     multiple,
@@ -420,8 +429,9 @@ function AutocompleteInner<T>(
 
   const availableItems = useMemo(() => {
     if (showSelectAll) return [AllSymbol as T, ..._availableItems]
+    if (_availableItems.length === 0 && onAddNewOption) return [AddSymbol as T]
     return _availableItems
-  }, [_availableItems, showSelectAll])
+  }, [_availableItems, showSelectAll, onAddNewOption])
 
   //issue 2304, update dataset when options are added dynamically
   useEffect(() => {
@@ -460,7 +470,7 @@ function AutocompleteInner<T>(
       onSelectedItemsChange: (changes) => {
         if (onOptionsChange) {
           let selectedItems = changes.selectedItems.filter(
-            (item) => item !== AllSymbol,
+            (item) => item !== AllSymbol || item !== AddSymbol,
           )
           if (itemCompare) {
             selectedItems = inputOptions.filter((item) =>
@@ -634,6 +644,8 @@ function AutocompleteInner<T>(
           if (selectedItem != null && !optionDisabled(selectedItem)) {
             if (selectedItem === AllSymbol) {
               toggleAllSelected()
+            } else if (selectedItem === AddSymbol) {
+              onAddNewOption?.(typedInputValue)
             } else if (multiple) {
               const shouldRemove = itemCompare
                 ? selectedItems.some((i) => itemCompare(selectedItem, i))
@@ -679,12 +691,30 @@ function AutocompleteInner<T>(
               ...changes,
               isOpen: !(disabled || readOnly),
             }
+          case useCombobox.stateChangeTypes.InputKeyDownEnter:
+          case useCombobox.stateChangeTypes.ItemClick:
+            if (changes.selectedItem === AddSymbol) {
+              onAddNewOption(typedInputValue)
+              return {
+                ...changes,
+                inputValue: '',
+                selectedItem: null,
+              }
+            }
+            return {
+              ...changes,
+            }
           case useCombobox.stateChangeTypes.InputBlur:
             return {
               ...changes,
               inputValue: changes.selectedItem
                 ? getLabel(changes.selectedItem)
                 : '',
+            }
+          case useCombobox.stateChangeTypes.InputChange:
+            setTypedInputValue(changes.inputValue)
+            return {
+              ...changes,
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
@@ -740,10 +770,12 @@ function AutocompleteInner<T>(
   }
   // MARK: multiselect specific
   if (multiple) {
-    placeholderText =
-      typeof placeholderText !== 'undefined'
-        ? placeholderText
-        : `${selectedItems.length}/${inputOptions.length} selected`
+    const showPlaceholder = placeholderText && selectedItems.length === 0
+    const optionCount = totalOptions || inputOptions.length
+    placeholderText = showPlaceholder
+      ? placeholderText
+      : `${selectedItems.length}/${optionCount} selected`
+
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
@@ -979,6 +1011,36 @@ function AutocompleteInner<T>(
                       item,
                       index: index,
                     })}
+                  />
+                )
+              }
+              if (item === AddSymbol && onAddNewOption) {
+                return (
+                  <AddNewOption
+                    key={'add-item'}
+                    data-index={0}
+                    data-testid={'add-item'}
+                    aria-setsize={availableItems.length}
+                    multiple={multiple}
+                    highlighted={
+                      highlightedIndex === index && !isDisabled
+                        ? 'true'
+                        : 'false'
+                    }
+                    multiline={multiline}
+                    style={{
+                      position: 'sticky',
+                      top: 0,
+                      zIndex: 99,
+                    }}
+                    {...getItemProps({
+                      ...(multiline && {
+                        ref: rowVirtualizer.measureElement,
+                      }),
+                      item,
+                      index: index,
+                    })}
+                    value={`${typedInputValue}`}
                   />
                 )
               }
