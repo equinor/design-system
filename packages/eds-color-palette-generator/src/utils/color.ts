@@ -67,8 +67,13 @@ export function generateColorScale(
     colorScheme,
     amount: 0.25,
   })
+  const solidWhite = generateNextSolidColor({
+    baseColor: '#fff',
+    colorScheme,
+  })
   colors.push(solidHover)
   colors.push(solidActive)
+  colors.push(solidWhite)
 
   return colors
 }

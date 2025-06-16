@@ -24,7 +24,7 @@ export function ColorScale({
   })
 
   return (
-    <div className="grid gap-3 mb-8 grid-cols-13">
+    <div className="grid gap-3 mb-8 grid-cols-14">
       {colors.map((color: any, i: number) => {
         const textColor = getTextColorForStep(colors, i + 1)
 
@@ -79,11 +79,15 @@ function getTextColorForStep(colors: any, stepIndex: number) {
   // Steps 1-6 use the text step 9 color.
   // Step 7-10 use the bg color
   // Step 11-12 use the contrast color #fff
+  // Step 14 use the bg color
 
   if (stepIndex <= 6) {
     return colors[9]
   }
   if (stepIndex >= 7 && stepIndex <= 10) {
+    return colors[0]
+  }
+  if (stepIndex >= 14) {
     return colors[0]
   }
 

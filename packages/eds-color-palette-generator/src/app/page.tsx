@@ -184,7 +184,7 @@ export default function App() {
           </fieldset>
         </div>
       </div>
-      <div className="grid gap-3 mb-2 grid-cols-13">
+      <div className="grid gap-3 mb-2 grid-cols-14">
         <div className="col-span-2 border-b border-gray-200 dark:border-gray-800">
           background (1-2)
         </div>
@@ -197,12 +197,12 @@ export default function App() {
         <div className="col-span-2 border-b border-gray-200 dark:border-gray-800">
           text (9-10)
         </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          base (11-13)
+        <div className="col-span-4 border-b border-gray-200 dark:border-gray-800">
+          base (11-14)
         </div>
       </div>
-      <div className={`grid grid-cols-13 gap-3 mb-4 sticky top-0 z-10 `}>
-        {Array.from({ length: 13 }).map((_, index) => (
+      <div className={`grid grid-cols-14 gap-3 mb-4 sticky top-0 z-10 `}>
+        {Array.from({ length: 14 }).map((_, index) => (
           <div key={index} className="flex items-center justify-center">
             {index + 1}
           </div>

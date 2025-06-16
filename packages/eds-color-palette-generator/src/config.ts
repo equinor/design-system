@@ -240,23 +240,67 @@ export const colorPairs: Array<ColorPair | null> = [
   },
   // solid 11
   {
-    // usedOnStep: [
-    //   { stepIndex: 0, lc: APCA_CONTRAST_LEVELS.LC_60, wcag: WCAG_CONTRAST_LEVELS.AA_LARGE.value }, // For UI elements
-    //   { stepIndex: 1, lc: APCA_CONTRAST_LEVELS.LC_60, wcag: WCAG_CONTRAST_LEVELS.AA_LARGE.value }, // For UI elements
-    // ],
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+      }, // For UI elements
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+      }, // For UI elements
+    ],
   },
   // solid 12 (hover)
   {
-    // usedOnStep: [
-    //   { stepIndex: 0, lc: APCA_CONTRAST_LEVELS.LC_45, wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS.value }, // For interactive states
-    //   { stepIndex: 1, lc: APCA_CONTRAST_LEVELS.LC_45, wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS.value }, // For interactive states
-    // ],
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+    ],
   },
   // solid 13 (active)
   {
-    // usedOnStep: [
-    //   { stepIndex: 0, lc: APCA_CONTRAST_LEVELS.LC_45, wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS.value }, // For interactive states
-    //   { stepIndex: 1, lc: APCA_CONTRAST_LEVELS.LC_45, wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS.value }, // For interactive states
-    // ],
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+    ],
+  },
+  // solid 14 (to see how colors 11-13 works together with all white) #ffff
+  {
+    usedOnStep: [
+      {
+        stepIndex: 10,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+      }, // For UI elements
+      {
+        stepIndex: 11,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+      {
+        stepIndex: 12,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+    ],
   },
 ]
