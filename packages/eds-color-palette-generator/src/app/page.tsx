@@ -18,7 +18,7 @@ export default function App() {
   const [stdDev, setStdDev] = useState(2)
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(false)
-  const [showLightnessInputs, setShowLightnessInputs] = useState(true)
+  const [showLightnessInputs, setShowLightnessInputs] = useState(false)
   const [contrastMethod, setContrastMethod] = useState<'WCAG21' | 'APCA'>(
     'APCA',
   )
@@ -215,9 +215,75 @@ export default function App() {
         </div>
       </div>
 
+      <div className="sticky top-0 z-10 bg-white dark:bg-black">
+        <div className="grid gap-3 mb-2 grid-cols-14">
+          <div className="col-span-2 border-b border-gray-300 dark:border-gray-800">
+            background
+          </div>
+          <div className="col-span-3 pb-2 border-b border-gray-300 dark:border-gray-800">
+            surface
+          </div>
+          <div className="col-span-3 border-b border-gray-300 dark:border-gray-800">
+            border
+          </div>
+          <div className="col-span-3 border-b border-gray-300 dark:border-gray-800">
+            text
+          </div>
+          <div className="col-span-3 border-b border-gray-300 dark:border-gray-800">
+            base
+          </div>
+        </div>
+
+        <div className={`grid grid-cols-14 gap-3 mb-4 `}>
+          {Array.from({ length: 14 }).map((_, index) => (
+            <div key={index} className="flex items-center justify-center">
+              {index + 1}
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
+      {showLightnessInputs && (
+        <div className="grid grid-cols-14 gap-3 mb-2">
+          {(colorScheme === 'light'
+            ? customLightModeValues
+            : customDarkModeValues
+          ).map((value, index) => (
+            <div
+              key={`lightness-${index}`}
+              className="flex flex-col items-center"
+            >
+              <input
+                type="number"
+                min="0"
+                max="1"
+                step="0.01"
+                value={value}
+                onChange={(e) =>
+                  updateLightnessValue(index, Number(e.target.value))
+                }
+                className="w-full text-center text-xs p-1 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                style={{ maxWidth: '90%' }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Render color scales dynamically */}
+      {colorScales.map((colorData) => (
+        <ColorScale
+          key={colorData.name}
+          colors={colorData.scale}
+          showContrast={showContrast}
+          contrastMethod={contrastMethod}
+          colorName={colorData.name}
+        />
+      ))}
+
       {/* Color management UI with CSS Grid */}
       <div className="max-w-3xl p-6 mx-auto mb-12">
-        <h2 className="mb-4 text-2xl font-medium">Base Colors</h2>
+        <h2 className="mb-4 text-2xl font-medium">Color management</h2>
 
         {/* Header Row */}
         <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-gray-200 dark:border-gray-800 pb-2 font-medium">
@@ -303,70 +369,6 @@ export default function App() {
           </button>
         </div>
       </div>
-
-      <div className="grid gap-3 mb-2 grid-cols-14">
-        <div className="col-span-2 border-b border-gray-200 dark:border-gray-800">
-          background (1-2)
-        </div>
-        <div className="col-span-3 pb-2 border-b border-gray-200 dark:border-gray-800">
-          surface (3-5)
-        </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          border (6-8)
-        </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          text (9-11)
-        </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          base (12-14)
-        </div>
-      </div>
-
-      <div className={`grid grid-cols-14 gap-3 mb-4 sticky top-0 z-10 `}>
-        {Array.from({ length: 14 }).map((_, index) => (
-          <div key={index} className="flex items-center justify-center">
-            {index + 1}
-          </div>
-        ))}
-      </div>
-      {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
-      {showLightnessInputs && (
-        <div className="grid grid-cols-14 gap-3 mb-2">
-          {(colorScheme === 'light'
-            ? customLightModeValues
-            : customDarkModeValues
-          ).map((value, index) => (
-            <div
-              key={`lightness-${index}`}
-              className="flex flex-col items-center"
-            >
-              <input
-                type="number"
-                min="0"
-                max="1"
-                step="0.01"
-                value={value}
-                onChange={(e) =>
-                  updateLightnessValue(index, Number(e.target.value))
-                }
-                className="w-full text-center text-xs p-1 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
-                style={{ maxWidth: '90%' }}
-              />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Render color scales dynamically */}
-      {colorScales.map((colorData) => (
-        <ColorScale
-          key={colorData.name}
-          colors={colorData.scale}
-          showContrast={showContrast}
-          contrastMethod={contrastMethod}
-          colorName={colorData.name}
-        />
-      ))}
 
       <TokenDownloader
         customLightModeValues={customLightModeValues}
