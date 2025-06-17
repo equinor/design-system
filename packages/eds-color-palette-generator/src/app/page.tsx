@@ -43,20 +43,25 @@ export default function App() {
     setCustomDarkModeValues(lightnessValuesInDarkMode)
   }
 
+  // Handle configuration upload
+  const handleConfigUpload = (config: {
+    lightModeValues: number[]
+    darkModeValues: number[]
+    mean: number
+    stdDev: number
+  }) => {
+    setCustomLightModeValues(config.lightModeValues)
+    setCustomDarkModeValues(config.darkModeValues)
+    setMean(config.mean)
+    setStdDev(config.stdDev)
+  }
+
   const accent = generateColorScale(
     '#007079',
     colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
     colorScheme,
-  )
-
-  const accentDark = generateColorScale(
-    '#007079',
-    customDarkModeValues,
-    mean,
-    stdDev,
-    'dark',
   )
 
   const neutral = generateColorScale(
@@ -67,13 +72,6 @@ export default function App() {
     colorScheme,
   )
 
-  const neutralDark = generateColorScale(
-    '#435460',
-    customDarkModeValues,
-    mean,
-    stdDev,
-    'dark',
-  )
   const success = generateColorScale(
     '#3FA13D',
     colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
@@ -81,26 +79,13 @@ export default function App() {
     stdDev,
     colorScheme,
   )
-  const successDark = generateColorScale(
-    '#3FA13D',
-    customDarkModeValues,
-    mean,
-    stdDev,
-    'dark',
-  )
+
   const info = generateColorScale(
     '#0084C4',
     colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
     colorScheme,
-  )
-  const infoDark = generateColorScale(
-    '#0084C4',
-    customDarkModeValues,
-    mean,
-    stdDev,
-    'dark',
   )
   const warning = generateColorScale(
     '#E57E00',
@@ -110,26 +95,12 @@ export default function App() {
     colorScheme,
   )
 
-  const warningDark = generateColorScale(
-    '#E57E00',
-    customDarkModeValues,
-    mean,
-    stdDev,
-    'dark',
-  )
   const danger = generateColorScale(
     '#E20337',
     colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
     colorScheme,
-  )
-  const dangerDark = generateColorScale(
-    '#E20337',
-    customDarkModeValues,
-    mean,
-    stdDev,
-    'dark',
   )
   return (
     <div
@@ -277,90 +248,42 @@ export default function App() {
           </div>
         ))}
       </div>
-      {colorScheme === 'light' ? (
-        <>
-          <ColorScale
-            colors={accent}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={neutral}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={info}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={success}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={warning}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={danger}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-        </>
-      ) : (
-        <>
-          <ColorScale
-            colors={accentDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={neutralDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={infoDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={successDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={warningDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={dangerDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-        </>
-      )}
+      <ColorScale
+        colors={accent}
+        showContrast={showContrast}
+        contrastMethod={contrastMethod}
+      />
+      <ColorScale
+        colors={neutral}
+        showContrast={showContrast}
+        contrastMethod={contrastMethod}
+      />
+      <ColorScale
+        colors={info}
+        showContrast={showContrast}
+        contrastMethod={contrastMethod}
+      />
+      <ColorScale
+        colors={success}
+        showContrast={showContrast}
+        contrastMethod={contrastMethod}
+      />
+      <ColorScale
+        colors={warning}
+        showContrast={showContrast}
+        contrastMethod={contrastMethod}
+      />
+      <ColorScale
+        colors={danger}
+        showContrast={showContrast}
+        contrastMethod={contrastMethod}
+      />
       <TokenDownloader
-        lightColors={{
-          accent,
-          neutral,
-          success,
-          info,
-          warning,
-          danger,
-        }}
-        darkColors={{
-          accentDark,
-          neutralDark,
-          successDark,
-          infoDark,
-          warningDark,
-          dangerDark,
-        }}
+        customLightModeValues={customLightModeValues}
+        customDarkModeValues={customDarkModeValues}
+        mean={mean}
+        stdDev={stdDev}
+        onConfigUpload={handleConfigUpload}
       />
       <section style={{ maxWidth: '500px', margin: '0 auto 48px' }}>
         <p>
