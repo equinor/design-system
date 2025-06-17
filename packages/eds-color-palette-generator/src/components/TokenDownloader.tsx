@@ -2,12 +2,19 @@ import React from 'react'
 import { formatColorsAsTokens } from '../utils/tokenFormatter'
 import { generateColorScale } from '../utils/color'
 
+type ColorDefinition = {
+  name: string
+  hue: string
+  displayName?: string
+}
+
 type TokenDownloaderProps = {
   customLightModeValues: number[]
   customDarkModeValues: number[]
   mean: number
   stdDev: number
   onConfigUpload?: (config: ConfigFile) => void
+  colors?: ColorDefinition[]
 }
 
 type ConfigFile = {
@@ -15,6 +22,7 @@ type ConfigFile = {
   darkModeValues: number[]
   mean: number
   stdDev: number
+  colors?: ColorDefinition[]
 }
 
 const TokenDownloader: React.FC<TokenDownloaderProps> = ({
@@ -23,46 +31,55 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
   mean,
   stdDev,
   onConfigUpload = () => {},
+  colors = [
+    { name: 'accent', hue: '#007079' },
+    { name: 'neutral', hue: '#4A4A4A' },
+    { name: 'success', hue: '#3FA13D' },
+    { name: 'info', hue: '#0084C4' },
+    { name: 'warning', hue: '#E57E00' },
+    { name: 'danger', hue: '#E20337' },
+  ],
 }) => {
   const generateColors = () => {
+    // Generate light mode colors with specific structure for the tokenFormatter
     const lightColors = {
       accent: generateColorScale(
-        '#007079',
+        colors.find((c) => c.name === 'accent')?.hue || '#007079',
         customLightModeValues,
         mean,
         stdDev,
         'light',
       ),
       neutral: generateColorScale(
-        '#4A4A4A',
+        colors.find((c) => c.name === 'neutral')?.hue || '#4A4A4A',
         customLightModeValues,
         mean,
         stdDev,
         'light',
       ),
       success: generateColorScale(
-        '#3FA13D',
+        colors.find((c) => c.name === 'success')?.hue || '#3FA13D',
         customLightModeValues,
         mean,
         stdDev,
         'light',
       ),
       info: generateColorScale(
-        '#0084C4',
+        colors.find((c) => c.name === 'info')?.hue || '#0084C4',
         customLightModeValues,
         mean,
         stdDev,
         'light',
       ),
       warning: generateColorScale(
-        '#E57E00',
+        colors.find((c) => c.name === 'warning')?.hue || '#E57E00',
         customLightModeValues,
         mean,
         stdDev,
         'light',
       ),
       danger: generateColorScale(
-        '#E20337',
+        colors.find((c) => c.name === 'danger')?.hue || '#E20337',
         customLightModeValues,
         mean,
         stdDev,
@@ -70,44 +87,45 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
       ),
     }
 
+    // Generate dark mode colors
     const darkColors = {
       accentDark: generateColorScale(
-        '#007079',
+        colors.find((c) => c.name === 'accent')?.hue || '#007079',
         customDarkModeValues,
         mean,
         stdDev,
         'dark',
       ),
       neutralDark: generateColorScale(
-        '#435460',
+        colors.find((c) => c.name === 'neutral')?.hue || '#435460',
         customDarkModeValues,
         mean,
         stdDev,
         'dark',
       ),
       successDark: generateColorScale(
-        '#3FA13D',
+        colors.find((c) => c.name === 'success')?.hue || '#3FA13D',
         customDarkModeValues,
         mean,
         stdDev,
         'dark',
       ),
       infoDark: generateColorScale(
-        '#0084C4',
+        colors.find((c) => c.name === 'info')?.hue || '#0084C4',
         customDarkModeValues,
         mean,
         stdDev,
         'dark',
       ),
       warningDark: generateColorScale(
-        '#E57E00',
+        colors.find((c) => c.name === 'warning')?.hue || '#E57E00',
         customDarkModeValues,
         mean,
         stdDev,
         'dark',
       ),
       dangerDark: generateColorScale(
-        '#E20337',
+        colors.find((c) => c.name === 'danger')?.hue || '#E20337',
         customDarkModeValues,
         mean,
         stdDev,
@@ -116,12 +134,13 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
     }
 
     return { lightColors, darkColors }
-  }
-
-  // Download color tokens in W3C format
+  } // Download color tokens in W3C format
   const handleDownload = () => {
     const { lightColors, darkColors } = generateColors()
+
+    // Format colors as tokens
     const tokenData = formatColorsAsTokens(lightColors, darkColors)
+
     const blob = new Blob([tokenData], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
 
@@ -145,6 +164,7 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
       darkModeValues: customDarkModeValues,
       mean,
       stdDev,
+      colors,
     }
 
     const configData = JSON.stringify(config, null, 2)
@@ -162,9 +182,7 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
       document.body.removeChild(a)
       URL.revokeObjectURL(url)
     }, 0)
-  }
-
-  // Upload and process configuration file
+  } // Upload and process configuration file
   const handleConfigUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (!files || files.length === 0) return
@@ -189,7 +207,11 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
         }
 
         // Send configuration back to parent component
-        onConfigUpload(config)
+        onConfigUpload({
+          ...config,
+          // Include colors if they exist in the config
+          colors: config.colors || colors,
+        })
       } catch (error) {
         console.error('Error parsing configuration file:', error)
         alert('Could not parse configuration file')

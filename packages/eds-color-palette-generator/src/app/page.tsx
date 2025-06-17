@@ -7,6 +7,13 @@ import { ColorScale } from '@/components/ColorScale'
 import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 
+// Define a type for color objects
+type ColorDefinition = {
+  name: string
+  hue: string
+  displayName?: string
+}
+
 export default function App() {
   const [mean, setMean] = useState(0.6)
   const [stdDev, setStdDev] = useState(2)
@@ -23,6 +30,35 @@ export default function App() {
   const [customDarkModeValues, setCustomDarkModeValues] = useState<number[]>(
     lightnessValuesInDarkMode,
   )
+
+  // Define colors in an array for easier management
+  const [colors, setColors] = useState<ColorDefinition[]>([
+    { name: 'accent', hue: '#007079', displayName: 'Accent' },
+    { name: 'neutral', hue: '#4A4A4A', displayName: 'Neutral' },
+    { name: 'success', hue: '#3FA13D', displayName: 'Success' },
+    { name: 'info', hue: '#0084C4', displayName: 'Info' },
+    { name: 'warning', hue: '#E57E00', displayName: 'Warning' },
+    { name: 'danger', hue: '#E20337', displayName: 'Danger' },
+  ])
+
+  // Function to add a new color
+  const addColor = (newColor: ColorDefinition) => {
+    setColors([...colors, newColor])
+  }
+
+  // Function to remove a color
+  const removeColor = (colorName: string) => {
+    setColors(colors.filter((color) => color.name !== colorName))
+  }
+
+  // Function to update a color's hue
+  const updateColorHue = (colorName: string, newHue: string) => {
+    setColors(
+      colors.map((color) =>
+        color.name === colorName ? { ...color, hue: newHue } : color,
+      ),
+    )
+  }
 
   // Update a specific lightness value
   const updateLightnessValue = (index: number, value: number) => {
@@ -49,59 +85,29 @@ export default function App() {
     darkModeValues: number[]
     mean: number
     stdDev: number
+    colors?: ColorDefinition[]
   }) => {
     setCustomLightModeValues(config.lightModeValues)
     setCustomDarkModeValues(config.darkModeValues)
     setMean(config.mean)
     setStdDev(config.stdDev)
+    if (config.colors) {
+      setColors(config.colors)
+    }
   }
 
-  const accent = generateColorScale(
-    '#007079',
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
-    mean,
-    stdDev,
-    colorScheme,
-  )
+  // Generate color scales for each color
+  const colorScales = colors.map((color) => ({
+    ...color,
+    scale: generateColorScale(
+      color.hue,
+      colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
+      mean,
+      stdDev,
+      colorScheme,
+    ),
+  }))
 
-  const neutral = generateColorScale(
-    '#4A4A4A',
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
-    mean,
-    stdDev,
-    colorScheme,
-  )
-
-  const success = generateColorScale(
-    '#3FA13D',
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
-    mean,
-    stdDev,
-    colorScheme,
-  )
-
-  const info = generateColorScale(
-    '#0084C4',
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
-    mean,
-    stdDev,
-    colorScheme,
-  )
-  const warning = generateColorScale(
-    '#E57E00',
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
-    mean,
-    stdDev,
-    colorScheme,
-  )
-
-  const danger = generateColorScale(
-    '#E20337',
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
-    mean,
-    stdDev,
-    colorScheme,
-  )
   return (
     <div
       data-theme={colorScheme}
@@ -196,6 +202,88 @@ export default function App() {
           </fieldset>
         </div>
       </div>
+
+      {/* Color management UI */}
+      <div className="max-w-3xl p-6 mx-auto mb-12">
+        <h2 className="mb-4 text-2xl font-medium">Manage Colors</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto border-collapse">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-800">
+                <th className="p-2 text-left">Name</th>
+                <th className="p-2 text-left">Hue</th>
+                <th className="p-2 text-left">Preview</th>
+                <th className="p-2 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {colors.map((color) => (
+                <tr
+                  key={color.name}
+                  className="border-b border-gray-200 dark:border-gray-800"
+                >
+                  <td className="p-2">
+                    <input
+                      type="text"
+                      className="w-full p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                      value={color.displayName || color.name}
+                      onChange={(e) => {
+                        const updatedColors = colors.map((c) =>
+                          c.name === color.name
+                            ? { ...c, displayName: e.target.value }
+                            : c,
+                        )
+                        setColors(updatedColors)
+                      }}
+                    />
+                  </td>
+                  <td className="p-2">
+                    <input
+                      type="text"
+                      className="w-full p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                      value={color.hue}
+                      onChange={(e) =>
+                        updateColorHue(color.name, e.target.value)
+                      }
+                    />
+                  </td>
+                  <td className="p-2">
+                    <div
+                      className="w-8 h-8 rounded"
+                      style={{ backgroundColor: color.hue }}
+                    ></div>
+                  </td>
+                  <td className="p-2 text-right">
+                    <button
+                      className="px-2 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-700"
+                      onClick={() => removeColor(color.name)}
+                      disabled={colors.length <= 1}
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-4">
+          <button
+            className="px-3 py-1 text-sm text-white bg-green-500 rounded hover:bg-green-700"
+            onClick={() => {
+              const newName = `color-${colors.length + 1}`
+              addColor({
+                name: newName,
+                hue: '#3B82F6',
+                displayName: `Color ${colors.length + 1}`,
+              })
+            }}
+          >
+            Add New Color
+          </button>
+        </div>
+      </div>
+
       <div className="grid gap-3 mb-2 grid-cols-14">
         <div className="col-span-2 border-b border-gray-200 dark:border-gray-800">
           background (1-2)
@@ -236,7 +324,6 @@ export default function App() {
               className="w-full text-center text-xs p-1 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
               style={{ maxWidth: '90%' }}
             />
-            {/* <span className="text-xs mt-1">{index + 1}</span> */}
           </div>
         ))}
       </div>
@@ -248,42 +335,25 @@ export default function App() {
           </div>
         ))}
       </div>
-      <ColorScale
-        colors={accent}
-        showContrast={showContrast}
-        contrastMethod={contrastMethod}
-      />
-      <ColorScale
-        colors={neutral}
-        showContrast={showContrast}
-        contrastMethod={contrastMethod}
-      />
-      <ColorScale
-        colors={info}
-        showContrast={showContrast}
-        contrastMethod={contrastMethod}
-      />
-      <ColorScale
-        colors={success}
-        showContrast={showContrast}
-        contrastMethod={contrastMethod}
-      />
-      <ColorScale
-        colors={warning}
-        showContrast={showContrast}
-        contrastMethod={contrastMethod}
-      />
-      <ColorScale
-        colors={danger}
-        showContrast={showContrast}
-        contrastMethod={contrastMethod}
-      />
+
+      {/* Render color scales dynamically */}
+      {colorScales.map((colorData) => (
+        <ColorScale
+          key={colorData.name}
+          colors={colorData.scale}
+          showContrast={showContrast}
+          contrastMethod={contrastMethod}
+          colorName={colorData.displayName || colorData.name}
+        />
+      ))}
+
       <TokenDownloader
         customLightModeValues={customLightModeValues}
         customDarkModeValues={customDarkModeValues}
         mean={mean}
         stdDev={stdDev}
         onConfigUpload={handleConfigUpload}
+        colors={colors}
       />
       <section style={{ maxWidth: '500px', margin: '0 auto 48px' }}>
         <p>
@@ -301,6 +371,10 @@ export default function App() {
           You can customize the lightness value for each step in the scale using
           the input fields above each column. The values range from 0 to 1,
           where 0 is black and 1 is white.
+        </p>
+        <p>
+          You can now also add, edit, and remove colors from the palette using
+          the color management section.
         </p>
       </section>
     </div>
