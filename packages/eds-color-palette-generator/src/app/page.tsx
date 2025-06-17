@@ -215,66 +215,77 @@ export default function App() {
         </div>
       </div>
 
-      {/* Color management UI */}
+      {/* Color management UI with CSS Grid */}
       <div className="max-w-3xl p-6 mx-auto mb-12">
         <h2 className="mb-4 text-2xl font-medium">Base Colors</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse">
-            <thead>
-              <tr className="border-b border-gray-200 dark:border-gray-800">
-                <th className="p-2 text-left">Name</th>
-                <th className="p-2 text-left">Hue</th>
-                <th className="p-2 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {colors.map((color) => (
-                <tr
-                  key={color.name}
-                  className="border-b border-gray-200 dark:border-gray-800"
-                >
-                  <td className="p-2">
-                    <input
-                      type="text"
-                      className="w-full p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
-                      value={color.name}
-                      onChange={(e) => {
-                        const updatedColors = colors.map((c) =>
-                          c === color ? { ...c, name: e.target.value } : c,
-                        )
-                        setColors(updatedColors)
-                      }}
-                    />
-                  </td>
-                  <td className="p-2">
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="color"
-                        className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
-                        value={color.hue}
-                        onChange={(e) =>
-                          updateColorHue(color.name, e.target.value)
-                        }
-                      />
-                    </div>
-                  </td>
-                  <td className="p-2 text-right">
-                    <button
-                      className="px-2 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-700"
-                      onClick={() => removeColor(color.name)}
-                      disabled={colors.length <= 1}
-                    >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+
+        {/* Header Row */}
+        <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-gray-200 dark:border-gray-800 pb-2 font-medium">
+          <div className="text-left">Name</div>
+          <div className="text-left">Hue</div>
+          <div className="text-right">Actions</div>
         </div>
+
+        {/* Color Rows */}
+        <div className="space-y-2">
+          {colors.map((color) => (
+            <div
+              key={color.name}
+              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-center p-2 border-b border-gray-200 dark:border-gray-800"
+            >
+              {/* Name Field */}
+              <div>
+                <input
+                  type="text"
+                  className="w-full p-2 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                  value={color.name}
+                  onChange={(e) => {
+                    const updatedColors = colors.map((c) =>
+                      c === color ? { ...c, name: e.target.value } : c,
+                    )
+                    setColors(updatedColors)
+                  }}
+                />
+              </div>
+
+              {/* Color Picker */}
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
+                  value={color.hue}
+                  onChange={(e) => updateColorHue(color.name, e.target.value)}
+                />
+                <input
+                  type="text"
+                  className="flex-1 p-2 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                  value={color.hue}
+                  onChange={(e) => updateColorHue(color.name, e.target.value)}
+                />
+                <div
+                  className="w-6 h-6 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: color.hue }}
+                ></div>
+              </div>
+
+              {/* Actions */}
+              <div className="text-right">
+                <button
+                  className="px-3 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-700"
+                  onClick={() => removeColor(color.name)}
+                  disabled={colors.length <= 1}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Add New Color Button */}
         <div className="mt-4">
           <button
-            className="px-3 py-1 text-sm text-white bg-green-500 rounded hover:bg-green-700"
+            className="px-4 py-2 text-sm text-white bg-green-500 rounded hover:bg-green-700"
             onClick={() => {
               // Generate a random color in hex format
               const randomColor =
