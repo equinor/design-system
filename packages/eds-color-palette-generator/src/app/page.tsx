@@ -16,16 +16,44 @@ export default function App() {
     'APCA',
   )
 
+  // Add state for custom lightness values
+  const [customLightModeValues, setCustomLightModeValues] = useState<number[]>(
+    lightnessValuesInLightMode,
+  )
+  const [customDarkModeValues, setCustomDarkModeValues] = useState<number[]>(
+    lightnessValuesInDarkMode,
+  )
+
+  // Update a specific lightness value
+  const updateLightnessValue = (index: number, value: number) => {
+    if (colorScheme === 'light') {
+      const newValues = [...customLightModeValues]
+      newValues[index] = value
+      setCustomLightModeValues(newValues)
+    } else {
+      const newValues = [...customDarkModeValues]
+      newValues[index] = value
+      setCustomDarkModeValues(newValues)
+    }
+  }
+
+  // Reset lightness values to defaults
+  const resetLightnessValues = () => {
+    setCustomLightModeValues(lightnessValuesInLightMode)
+    setCustomDarkModeValues(lightnessValuesInDarkMode)
+  }
+
   const accent = generateColorScale(
     '#007079',
-    lightnessValuesInLightMode,
+    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
+    colorScheme,
   )
 
   const accentDark = generateColorScale(
     '#007079',
-    lightnessValuesInDarkMode,
+    customDarkModeValues,
     mean,
     stdDev,
     'dark',
@@ -33,67 +61,72 @@ export default function App() {
 
   const neutral = generateColorScale(
     '#4A4A4A',
-    lightnessValuesInLightMode,
+    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
+    colorScheme,
   )
 
   const neutralDark = generateColorScale(
     '#435460',
-    lightnessValuesInDarkMode,
+    customDarkModeValues,
     mean,
     stdDev,
     'dark',
   )
   const success = generateColorScale(
     '#3FA13D',
-    lightnessValuesInLightMode,
+    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
+    colorScheme,
   )
   const successDark = generateColorScale(
     '#3FA13D',
-    lightnessValuesInDarkMode,
+    customDarkModeValues,
     mean,
     stdDev,
     'dark',
   )
   const info = generateColorScale(
     '#0084C4',
-    lightnessValuesInLightMode,
+    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
+    colorScheme,
   )
   const infoDark = generateColorScale(
     '#0084C4',
-    lightnessValuesInDarkMode,
+    customDarkModeValues,
     mean,
     stdDev,
     'dark',
   )
   const warning = generateColorScale(
     '#E57E00',
-    lightnessValuesInLightMode,
+    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
+    colorScheme,
   )
 
   const warningDark = generateColorScale(
     '#E57E00',
-    lightnessValuesInDarkMode,
+    customDarkModeValues,
     mean,
     stdDev,
     'dark',
   )
   const danger = generateColorScale(
     '#E20337',
-    lightnessValuesInLightMode,
+    colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
     mean,
     stdDev,
+    colorScheme,
   )
   const dangerDark = generateColorScale(
     '#E20337',
-    lightnessValuesInDarkMode,
+    customDarkModeValues,
     mean,
     stdDev,
     'dark',
@@ -181,6 +214,14 @@ export default function App() {
                 </div>
               </div>
             )}
+            <div className="mt-4">
+              <button
+                onClick={resetLightnessValues}
+                className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded"
+              >
+                Reset lightness values
+              </button>
+            </div>
           </fieldset>
         </div>
       </div>
@@ -201,6 +242,34 @@ export default function App() {
           base (12-14)
         </div>
       </div>
+
+      {/* Add lightness value inputs */}
+      <div className="grid grid-cols-14 gap-3 mb-2">
+        {(colorScheme === 'light'
+          ? customLightModeValues
+          : customDarkModeValues
+        ).map((value, index) => (
+          <div
+            key={`lightness-${index}`}
+            className="flex flex-col items-center"
+          >
+            <input
+              type="number"
+              min="0"
+              max="1"
+              step="0.01"
+              value={value}
+              onChange={(e) =>
+                updateLightnessValue(index, Number(e.target.value))
+              }
+              className="w-full text-center text-xs p-1 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+              style={{ maxWidth: '90%' }}
+            />
+            {/* <span className="text-xs mt-1">{index + 1}</span> */}
+          </div>
+        ))}
+      </div>
+
       <div className={`grid grid-cols-14 gap-3 mb-4 sticky top-0 z-10 `}>
         {Array.from({ length: 14 }).map((_, index) => (
           <div key={index} className="flex items-center justify-center">
@@ -304,6 +373,11 @@ export default function App() {
           We set mean to 0.6 as the initial value because we want to move the
           center of chroma in the gaussian curve a bit to the right so that we
           get more chroma on the right half
+        </p>
+        <p>
+          You can customize the lightness value for each step in the scale using
+          the input fields above each column. The values range from 0 to 1,
+          where 0 is black and 1 is white.
         </p>
       </section>
     </div>
