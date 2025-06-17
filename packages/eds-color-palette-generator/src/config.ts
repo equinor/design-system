@@ -2,20 +2,11 @@ import { APCA_CONTRAST_LEVELS } from '@/config/APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from '@/config/WCAG_CONTRAST_LEVELS'
 
 export const lightnessValuesInDarkMode = [
-  0.218, // --ld-1
-  0.253, // --ld-2
-  0.304, // --ld-3
-  0.356, // --ld-4
-  0.407, // --ld-5
-  0.433, // --ld-6
-  0.574, // --ld-7
-  0.7, // --ld-8
-  0.821, // --ld-12
-  0.947, // --ld-13
+  0.218, 0.253, 0.304, 0.356, 0.407, 0.433, 0.574, 0.7, 0.821, 0.947, 1,
 ]
 
 export const lightnessValuesInLightMode = [
-  1, 0.965, 0.91, 0.857, 0.804, 0.788, 0.584, 0.482, 0.39, 0.237,
+  1, 0.965, 0.91, 0.857, 0.804, 0.788, 0.584, 0.482, 0.39, 0.237, 1,
 ]
 
 type ColorPairRequirements = {
@@ -238,66 +229,66 @@ export const colorPairs: Array<ColorPair | null> = [
       },
     ],
   },
-  // solid 11
+  // accessible text 11
   {
     usedOnStep: [
-      {
-        stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_60,
-        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
-      }, // For UI elements
-      {
-        stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_60,
-        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
-      }, // For UI elements
-    ],
-  },
-  // solid 12 (hover)
-  {
-    usedOnStep: [
-      {
-        stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-      {
-        stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-    ],
-  },
-  // solid 13 (active)
-  {
-    usedOnStep: [
-      {
-        stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-      {
-        stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-    ],
-  },
-  // solid 14 (to see how colors 11-13 works together with all white) #ffff
-  {
-    usedOnStep: [
-      {
-        stepIndex: 10,
-        lc: APCA_CONTRAST_LEVELS.LC_60,
-        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
-      }, // For UI elements
       {
         stepIndex: 11,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+      }, // For UI elements
+      {
+        stepIndex: 12,
         lc: APCA_CONTRAST_LEVELS.LC_45,
         wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states
       {
-        stepIndex: 12,
+        stepIndex: 13,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+    ],
+  },
+  // solid 12
+  {
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+      }, // For UI elements
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+      }, // For UI elements
+    ],
+  },
+  // solid 13 (hover)
+  {
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+    ],
+  },
+  // solid 14 (active)
+  {
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_45,
+        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+      }, // For interactive states
+      {
+        stepIndex: 1,
         lc: APCA_CONTRAST_LEVELS.LC_45,
         wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states

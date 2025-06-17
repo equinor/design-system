@@ -194,11 +194,11 @@ export default function App() {
         <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
           border (6-8)
         </div>
-        <div className="col-span-2 border-b border-gray-200 dark:border-gray-800">
-          text (9-10)
+        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
+          text (9-11)
         </div>
-        <div className="col-span-4 border-b border-gray-200 dark:border-gray-800">
-          base (11-14)
+        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
+          base (12-14)
         </div>
       </div>
       <div className={`grid grid-cols-14 gap-3 mb-4 sticky top-0 z-10 `}>
