@@ -5,7 +5,6 @@ import { generateColorScale } from '../utils/color'
 type ColorDefinition = {
   name: string
   hue: string
-  displayName?: string
 }
 
 type TokenDownloaderProps = {

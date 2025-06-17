@@ -11,7 +11,6 @@ import { useColorScheme } from '@/context/ColorSchemeContext'
 type ColorDefinition = {
   name: string
   hue: string
-  displayName?: string
 }
 
 export default function App() {
@@ -33,12 +32,12 @@ export default function App() {
 
   // Define colors in an array for easier management
   const [colors, setColors] = useState<ColorDefinition[]>([
-    { name: 'accent', hue: '#007079', displayName: 'Accent' },
-    { name: 'neutral', hue: '#4A4A4A', displayName: 'Neutral' },
-    { name: 'success', hue: '#3FA13D', displayName: 'Success' },
-    { name: 'info', hue: '#0084C4', displayName: 'Info' },
-    { name: 'warning', hue: '#E57E00', displayName: 'Warning' },
-    { name: 'danger', hue: '#E20337', displayName: 'Danger' },
+    { name: 'accent', hue: '#007079' },
+    { name: 'neutral', hue: '#4A4A4A' },
+    { name: 'success', hue: '#3FA13D' },
+    { name: 'info', hue: '#0084C4' },
+    { name: 'warning', hue: '#E57E00' },
+    { name: 'danger', hue: '#E20337' },
   ])
 
   // Function to add a new color
@@ -226,12 +225,10 @@ export default function App() {
                     <input
                       type="text"
                       className="w-full p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
-                      value={color.displayName || color.name}
+                      value={color.name}
                       onChange={(e) => {
                         const updatedColors = colors.map((c) =>
-                          c.name === color.name
-                            ? { ...c, displayName: e.target.value }
-                            : c,
+                          c === color ? { ...c, name: e.target.value } : c,
                         )
                         setColors(updatedColors)
                       }}
@@ -271,11 +268,9 @@ export default function App() {
           <button
             className="px-3 py-1 text-sm text-white bg-green-500 rounded hover:bg-green-700"
             onClick={() => {
-              const newName = `color-${colors.length + 1}`
               addColor({
-                name: newName,
+                name: `Color ${colors.length + 1}`,
                 hue: '#3B82F6',
-                displayName: `Color ${colors.length + 1}`,
               })
             }}
           >
@@ -343,7 +338,7 @@ export default function App() {
           colors={colorData.scale}
           showContrast={showContrast}
           contrastMethod={contrastMethod}
-          colorName={colorData.displayName || colorData.name}
+          colorName={colorData.name}
         />
       ))}
 
