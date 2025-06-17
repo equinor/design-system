@@ -235,14 +235,24 @@ export default function App() {
                     />
                   </td>
                   <td className="p-2">
-                    <input
-                      type="text"
-                      className="w-full p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
-                      value={color.hue}
-                      onChange={(e) =>
-                        updateColorHue(color.name, e.target.value)
-                      }
-                    />
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="color"
+                        className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
+                        value={color.hue}
+                        onChange={(e) =>
+                          updateColorHue(color.name, e.target.value)
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="flex-1 p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                        value={color.hue}
+                        onChange={(e) =>
+                          updateColorHue(color.name, e.target.value)
+                        }
+                      />
+                    </div>
                   </td>
                   <td className="p-2">
                     <div
@@ -268,9 +278,15 @@ export default function App() {
           <button
             className="px-3 py-1 text-sm text-white bg-green-500 rounded hover:bg-green-700"
             onClick={() => {
+              // Generate a random color in hex format
+              const randomColor =
+                '#' +
+                Math.floor(Math.random() * 16777215)
+                  .toString(16)
+                  .padStart(6, '0')
               addColor({
                 name: `Color ${colors.length + 1}`,
-                hue: '#3B82F6',
+                hue: randomColor,
               })
             }}
           >

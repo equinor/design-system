@@ -73,7 +73,7 @@ export function generateColorScale(
       }
     }
 
-    // Add the base color 
+    // Add the base color
     const newBaseColor = new Color(baseColor)
     colors.push(newBaseColor.toString({ format: 'hex' }))
 
@@ -210,8 +210,10 @@ export function checkContrast(
   method: ContrastMethod,
 ): ContrastResult {
   try {
-    const fg = typeof foreground === 'string' ? new Color(foreground) : foreground
-    const bg = typeof background === 'string' ? new Color(background) : background
+    const fg =
+      typeof foreground === 'string' ? new Color(foreground) : foreground
+    const bg =
+      typeof background === 'string' ? new Color(background) : background
 
     const contrastValue = fg.contrast(bg, method)
     const thresholds = getThresholds(method)

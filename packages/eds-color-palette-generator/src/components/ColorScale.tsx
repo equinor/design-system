@@ -68,8 +68,11 @@ export function ColorScale({
                 <div className="flex flex-col h-full">
                   <ul className="space-y-1 text-[11px]">
                     {pairsWithSteps?.map((colorPair, colorPairIndex) => {
+                      const contrastArray = contrasts[i]
                       const contrastValue =
-                        contrasts[i]?.[colorPairIndex]?.contrastValue
+                        contrastArray && colorPairIndex < contrastArray.length
+                          ? contrastArray[colorPairIndex]?.contrastValue
+                          : undefined
                       let isContrastValid = false
 
                       if (contrastValue !== undefined) {

@@ -40,97 +40,124 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
   ],
 }) => {
   const generateColors = () => {
-    // Generate light mode colors with specific structure for the tokenFormatter
-    const lightColors = {
-      accent: generateColorScale(
-        colors.find((c) => c.name === 'accent')?.hue || '#007079',
-        customLightModeValues,
-        mean,
-        stdDev,
-        'light',
-      ),
-      neutral: generateColorScale(
-        colors.find((c) => c.name === 'neutral')?.hue || '#4A4A4A',
-        customLightModeValues,
-        mean,
-        stdDev,
-        'light',
-      ),
-      success: generateColorScale(
-        colors.find((c) => c.name === 'success')?.hue || '#3FA13D',
-        customLightModeValues,
-        mean,
-        stdDev,
-        'light',
-      ),
-      info: generateColorScale(
-        colors.find((c) => c.name === 'info')?.hue || '#0084C4',
-        customLightModeValues,
-        mean,
-        stdDev,
-        'light',
-      ),
-      warning: generateColorScale(
-        colors.find((c) => c.name === 'warning')?.hue || '#E57E00',
-        customLightModeValues,
-        mean,
-        stdDev,
-        'light',
-      ),
-      danger: generateColorScale(
-        colors.find((c) => c.name === 'danger')?.hue || '#E20337',
-        customLightModeValues,
-        mean,
-        stdDev,
-        'light',
-      ),
-    }
+    // Create objects with the required structure for formatColorsAsTokens
+    const lightColors: {
+      accent: string[];
+      neutral: string[];
+      success: string[];
+      info: string[];
+      warning: string[];
+      danger: string[];
+      [key: string]: string[];
+    } = {
+      accent: [],
+      neutral: [],
+      success: [],
+      info: [],
+      warning: [],
+      danger: [],
+    };
+    
+    const darkColors: {
+      accentDark: string[];
+      neutralDark: string[];
+      successDark: string[];
+      infoDark: string[];
+      warningDark: string[];
+      dangerDark: string[];
+      [key: string]: string[];
+    } = {
+      accentDark: [],
+      neutralDark: [],
+      successDark: [],
+      infoDark: [],
+      warningDark: [],
+      dangerDark: [],
+    };
 
-    // Generate dark mode colors
-    const darkColors = {
-      accentDark: generateColorScale(
-        colors.find((c) => c.name === 'accent')?.hue || '#007079',
-        customDarkModeValues,
-        mean,
-        stdDev,
-        'dark',
-      ),
-      neutralDark: generateColorScale(
-        colors.find((c) => c.name === 'neutral')?.hue || '#435460',
-        customDarkModeValues,
-        mean,
-        stdDev,
-        'dark',
-      ),
-      successDark: generateColorScale(
-        colors.find((c) => c.name === 'success')?.hue || '#3FA13D',
-        customDarkModeValues,
-        mean,
-        stdDev,
-        'dark',
-      ),
-      infoDark: generateColorScale(
-        colors.find((c) => c.name === 'info')?.hue || '#0084C4',
-        customDarkModeValues,
-        mean,
-        stdDev,
-        'dark',
-      ),
-      warningDark: generateColorScale(
-        colors.find((c) => c.name === 'warning')?.hue || '#E57E00',
-        customDarkModeValues,
-        mean,
-        stdDev,
-        'dark',
-      ),
-      dangerDark: generateColorScale(
-        colors.find((c) => c.name === 'danger')?.hue || '#E20337',
-        customDarkModeValues,
-        mean,
-        stdDev,
-        'dark',
-      ),
-    }
+    // Add any custom colors from our array to these objects
+    colors.forEach((colorDef) => {
+      try {
+        // For standard colors that match the expected keys, update directly
+        if (lightColors[colorDef.name] !== undefined) {
+          lightColors[colorDef.name] = generateColorScale(
+            colorDef.hue,
+            customLightModeValues,
+            mean,
+            stdDev,
+            'light'
+          );
+          
+          // The dark mode version appends "Dark" to the name
+          const darkKey = `${colorDef.name}Dark`;
+          if (darkColors[darkKey] !== undefined) {
+            darkColors[darkKey] = generateColorScale(
+              colorDef.hue,
+              customDarkModeValues,
+              mean,
+              stdDev,
+              'dark'
+            );
+          }
+        } else {
+          // For custom colors not in the standard keys, add them anyway
+          // (these won't be used by formatColorsAsTokens but will be in the configuration)
+          lightColors[colorDef.name] = generateColorScale(
+            colorDef.hue,
+            customLightModeValues,
+            mean,
+            stdDev,
+            'light'
+          );
+          darkColors[`${colorDef.name}Dark`] = generateColorScale(
+            colorDef.hue,
+            customDarkModeValues,
+            mean,
+            stdDev,
+            'dark'
+          );
+        }
+      } catch (error) {
+        console.error(`Error generating colors for ${colorDef.name}:`, error);
+        // Add fallback in case of error
+        const fallbackLight = Array(customLightModeValues.length + 3).fill('#808080');
+        const fallbackDark = Array(customDarkModeValues.length + 3).fill('#303030');
+        
+        if (lightColors[colorDef.name] !== undefined) {
+          lightColors[colorDef.name] = fallbackLight;
+          darkColors[`${colorDef.name}Dark`] = fallbackDark;
+        }
+      }
+    });
+    
+    // Ensure we have all the required colors with fallbacks if any are missing
+    const defaultHue = '#808080';
+    const requiredColors = ['accent', 'neutral', 'success', 'info', 'warning', 'danger'];
+    
+    requiredColors.forEach(color => {
+      if (!lightColors[color] || lightColors[color].length === 0) {
+        console.warn(`Missing required color: ${color}, using fallback`);
+        lightColors[color] = generateColorScale(
+          defaultHue,
+          customLightModeValues,
+          mean,
+          stdDev,
+          'light'
+        );
+      }
+      
+      const darkKey = `${color}Dark`;
+      if (!darkColors[darkKey] || darkColors[darkKey].length === 0) {
+        console.warn(`Missing required dark color: ${darkKey}, using fallback`);
+        darkColors[darkKey] = generateColorScale(
+          defaultHue,
+          customDarkModeValues,
+          mean,
+          stdDev,
+          'dark'
+        );
+      }
+    });
 
     return { lightColors, darkColors }
   } // Download color tokens in W3C format
