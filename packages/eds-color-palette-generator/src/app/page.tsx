@@ -18,6 +18,7 @@ export default function App() {
   const [stdDev, setStdDev] = useState(2)
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(false)
+  const [showLightnessInputs, setShowLightnessInputs] = useState(true)
   const [contrastMethod, setContrastMethod] = useState<'WCAG21' | 'APCA'>(
     'APCA',
   )
@@ -151,15 +152,27 @@ export default function App() {
 
           <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
             <legend className="mb-2 font-medium">Display Options</legend>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showContrast}
-                onChange={(e) => setShowContrast(e.target.checked)}
-                className="accent-current"
-              />
-              <span>Show contrast information</span>
-            </label>
+            <div className="space-y-3">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={showContrast}
+                  onChange={(e) => setShowContrast(e.target.checked)}
+                  className="accent-current"
+                />
+                <span>Show contrast information</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={showLightnessInputs}
+                  onChange={(e) => setShowLightnessInputs(e.target.checked)}
+                  className="accent-current"
+                />
+                <span>Show lightness value inputs</span>
+              </label>
+            </div>
 
             {showContrast && (
               <div className="mt-3 pl-6">
@@ -204,14 +217,13 @@ export default function App() {
 
       {/* Color management UI */}
       <div className="max-w-3xl p-6 mx-auto mb-12">
-        <h2 className="mb-4 text-2xl font-medium">Manage Colors</h2>
+        <h2 className="mb-4 text-2xl font-medium">Base Colors</h2>
         <div className="overflow-x-auto">
           <table className="w-full table-auto border-collapse">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-800">
                 <th className="p-2 text-left">Name</th>
                 <th className="p-2 text-left">Hue</th>
-                <th className="p-2 text-left">Preview</th>
                 <th className="p-2 text-right">Actions</th>
               </tr>
             </thead>
@@ -244,21 +256,7 @@ export default function App() {
                           updateColorHue(color.name, e.target.value)
                         }
                       />
-                      <input
-                        type="text"
-                        className="flex-1 p-1 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
-                        value={color.hue}
-                        onChange={(e) =>
-                          updateColorHue(color.name, e.target.value)
-                        }
-                      />
                     </div>
-                  </td>
-                  <td className="p-2">
-                    <div
-                      className="w-8 h-8 rounded"
-                      style={{ backgroundColor: color.hue }}
-                    ></div>
                   </td>
                   <td className="p-2 text-right">
                     <button
@@ -313,32 +311,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* Add lightness value inputs */}
-      <div className="grid grid-cols-14 gap-3 mb-2">
-        {(colorScheme === 'light'
-          ? customLightModeValues
-          : customDarkModeValues
-        ).map((value, index) => (
-          <div
-            key={`lightness-${index}`}
-            className="flex flex-col items-center"
-          >
-            <input
-              type="number"
-              min="0"
-              max="1"
-              step="0.01"
-              value={value}
-              onChange={(e) =>
-                updateLightnessValue(index, Number(e.target.value))
-              }
-              className="w-full text-center text-xs p-1 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
-              style={{ maxWidth: '90%' }}
-            />
-          </div>
-        ))}
-      </div>
-
       <div className={`grid grid-cols-14 gap-3 mb-4 sticky top-0 z-10 `}>
         {Array.from({ length: 14 }).map((_, index) => (
           <div key={index} className="flex items-center justify-center">
@@ -346,6 +318,33 @@ export default function App() {
           </div>
         ))}
       </div>
+      {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
+      {showLightnessInputs && (
+        <div className="grid grid-cols-14 gap-3 mb-2">
+          {(colorScheme === 'light'
+            ? customLightModeValues
+            : customDarkModeValues
+          ).map((value, index) => (
+            <div
+              key={`lightness-${index}`}
+              className="flex flex-col items-center"
+            >
+              <input
+                type="number"
+                min="0"
+                max="1"
+                step="0.01"
+                value={value}
+                onChange={(e) =>
+                  updateLightnessValue(index, Number(e.target.value))
+                }
+                className="w-full text-center text-xs p-1 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                style={{ maxWidth: '90%' }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Render color scales dynamically */}
       {colorScales.map((colorData) => (
@@ -376,12 +375,11 @@ export default function App() {
         <p>
           We set mean to 0.6 as the initial value because we want to move the
           center of chroma in the gaussian curve a bit to the right so that we
-          get more chroma on the right half
+          get more chroma on the right half.
         </p>
         <p>
           You can customize the lightness value for each step in the scale using
-          the input fields above each column. The values range from 0 to 1,
-          where 0 is black and 1 is white.
+          the input fields above each column. The values range from 0 to 1
         </p>
         <p>
           You can now also add, edit, and remove colors from the palette using

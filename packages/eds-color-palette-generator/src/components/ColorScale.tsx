@@ -50,7 +50,9 @@ export function ColorScale({
 
   return (
     <div className="mb-8">
-      {colorName && <h3 className="mb-2 font-medium text-lg">{colorName}</h3>}
+      {colorName && (
+        <h3 className="text-left mb-2 font-medium text-lg">{colorName}</h3>
+      )}
       <div className="grid gap-3 mb-4 grid-cols-14">
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)

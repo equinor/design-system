@@ -42,13 +42,13 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
   const generateColors = () => {
     // Create objects with the required structure for formatColorsAsTokens
     const lightColors: {
-      accent: string[];
-      neutral: string[];
-      success: string[];
-      info: string[];
-      warning: string[];
-      danger: string[];
-      [key: string]: string[];
+      accent: string[]
+      neutral: string[]
+      success: string[]
+      info: string[]
+      warning: string[]
+      danger: string[]
+      [key: string]: string[]
     } = {
       accent: [],
       neutral: [],
@@ -56,16 +56,16 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
       info: [],
       warning: [],
       danger: [],
-    };
-    
+    }
+
     const darkColors: {
-      accentDark: string[];
-      neutralDark: string[];
-      successDark: string[];
-      infoDark: string[];
-      warningDark: string[];
-      dangerDark: string[];
-      [key: string]: string[];
+      accentDark: string[]
+      neutralDark: string[]
+      successDark: string[]
+      infoDark: string[]
+      warningDark: string[]
+      dangerDark: string[]
+      [key: string]: string[]
     } = {
       accentDark: [],
       neutralDark: [],
@@ -73,7 +73,7 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
       infoDark: [],
       warningDark: [],
       dangerDark: [],
-    };
+    }
 
     // Add any custom colors from our array to these objects
     colors.forEach((colorDef) => {
@@ -85,19 +85,19 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
             customLightModeValues,
             mean,
             stdDev,
-            'light'
-          );
-          
+            'light',
+          )
+
           // The dark mode version appends "Dark" to the name
-          const darkKey = `${colorDef.name}Dark`;
+          const darkKey = `${colorDef.name}Dark`
           if (darkColors[darkKey] !== undefined) {
             darkColors[darkKey] = generateColorScale(
               colorDef.hue,
               customDarkModeValues,
               mean,
               stdDev,
-              'dark'
-            );
+              'dark',
+            )
           }
         } else {
           // For custom colors not in the standard keys, add them anyway
@@ -107,57 +107,68 @@ const TokenDownloader: React.FC<TokenDownloaderProps> = ({
             customLightModeValues,
             mean,
             stdDev,
-            'light'
-          );
+            'light',
+          )
           darkColors[`${colorDef.name}Dark`] = generateColorScale(
             colorDef.hue,
             customDarkModeValues,
             mean,
             stdDev,
-            'dark'
-          );
+            'dark',
+          )
         }
       } catch (error) {
-        console.error(`Error generating colors for ${colorDef.name}:`, error);
+        console.error(`Error generating colors for ${colorDef.name}:`, error)
         // Add fallback in case of error
-        const fallbackLight = Array(customLightModeValues.length + 3).fill('#808080');
-        const fallbackDark = Array(customDarkModeValues.length + 3).fill('#303030');
-        
+        const fallbackLight = Array(customLightModeValues.length + 3).fill(
+          '#808080',
+        )
+        const fallbackDark = Array(customDarkModeValues.length + 3).fill(
+          '#303030',
+        )
+
         if (lightColors[colorDef.name] !== undefined) {
-          lightColors[colorDef.name] = fallbackLight;
-          darkColors[`${colorDef.name}Dark`] = fallbackDark;
+          lightColors[colorDef.name] = fallbackLight
+          darkColors[`${colorDef.name}Dark`] = fallbackDark
         }
       }
-    });
-    
+    })
+
     // Ensure we have all the required colors with fallbacks if any are missing
-    const defaultHue = '#808080';
-    const requiredColors = ['accent', 'neutral', 'success', 'info', 'warning', 'danger'];
-    
-    requiredColors.forEach(color => {
+    const defaultHue = '#808080'
+    const requiredColors = [
+      'accent',
+      'neutral',
+      'success',
+      'info',
+      'warning',
+      'danger',
+    ]
+
+    requiredColors.forEach((color) => {
       if (!lightColors[color] || lightColors[color].length === 0) {
-        console.warn(`Missing required color: ${color}, using fallback`);
+        console.warn(`Missing required color: ${color}, using fallback`)
         lightColors[color] = generateColorScale(
           defaultHue,
           customLightModeValues,
           mean,
           stdDev,
-          'light'
-        );
+          'light',
+        )
       }
-      
-      const darkKey = `${color}Dark`;
+
+      const darkKey = `${color}Dark`
       if (!darkColors[darkKey] || darkColors[darkKey].length === 0) {
-        console.warn(`Missing required dark color: ${darkKey}, using fallback`);
+        console.warn(`Missing required dark color: ${darkKey}, using fallback`)
         darkColors[darkKey] = generateColorScale(
           defaultHue,
           customDarkModeValues,
           mean,
           stdDev,
-          'dark'
-        );
+          'dark',
+        )
       }
-    });
+    })
 
     return { lightColors, darkColors }
   } // Download color tokens in W3C format
