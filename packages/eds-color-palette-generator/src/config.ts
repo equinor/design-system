@@ -2,11 +2,11 @@ import { APCA_CONTRAST_LEVELS } from '@/config/APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from '@/config/WCAG_CONTRAST_LEVELS'
 
 export const lightnessValuesInDarkMode = [
-  0.218, 0.253, 0.304, 0.356, 0.407, 0.433, 0.574, 0.7, 0.821, 0.947, 1,
+  0.15, 0.253, 0.44, 0.356, 0.407, 0.433, 0.574, 0.7, 0.84, 0.947, 1,
 ]
 
 export const lightnessValuesInLightMode = [
-  1, 0.965, 0.91, 0.857, 0.804, 0.788, 0.584, 0.482, 0.39, 0.237, 1,
+  1, 0.965, 0.91, 0.857, 0.804, 0.789, 0.584, 0.482, 0.35, 0.237, 1,
 ]
 
 type ColorPairRequirements = {
@@ -214,17 +214,17 @@ export const colorPairs: Array<ColorPair | null> = [
       },
       {
         stepIndex: 2,
-        lc: APCA_CONTRAST_LEVELS.LC_90,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       },
       {
         stepIndex: 3,
-        lc: APCA_CONTRAST_LEVELS.LC_90,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       },
       {
         stepIndex: 4,
-        lc: APCA_CONTRAST_LEVELS.LC_90,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       },
     ],
@@ -254,12 +254,12 @@ export const colorPairs: Array<ColorPair | null> = [
     usedOnStep: [
       {
         stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_60,
+        lc: APCA_CONTRAST_LEVELS.LC_15,
         wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
       }, // For UI elements
       {
         stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_60,
+        lc: APCA_CONTRAST_LEVELS.LC_15,
         wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
       }, // For UI elements
     ],
@@ -269,12 +269,12 @@ export const colorPairs: Array<ColorPair | null> = [
     usedOnStep: [
       {
         stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
+        lc: APCA_CONTRAST_LEVELS.LC_15,
         wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states
       {
         stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
+        lc: APCA_CONTRAST_LEVELS.LC_15,
         wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states
     ],
@@ -284,12 +284,12 @@ export const colorPairs: Array<ColorPair | null> = [
     usedOnStep: [
       {
         stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
+        lc: APCA_CONTRAST_LEVELS.LC_15,
         wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states
       {
         stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
+        lc: APCA_CONTRAST_LEVELS.LC_15,
         wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states
     ],
