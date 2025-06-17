@@ -25,8 +25,8 @@ export function ColorScale({
   })
 
   return (
-    <div className="grid gap-3 mb-8 grid-cols-13">
-      {colors.map((color: string, i: number) => {
+    <div className="grid gap-3 mb-8 grid-cols-14">
+      {colors.map((color: any, i: number) => {
         const textColor = getTextColorForStep(colors, i + 1)
 
         const pairsWithSteps = colorPairs[i]?.usedOnStep
@@ -44,8 +44,11 @@ export function ColorScale({
                 <ul className="space-y-1 text-[11px]">
                   {pairsWithSteps?.map((colorPair, colorPairIndex) => {
                     const isContrastValid =
-                      contrasts[i][colorPairIndex].contrastValue >=
-                      colorPair.wcag.value
+                      contrastMethod === 'APCA'
+                        ? contrasts[i][colorPairIndex].contrastValue >=
+                          colorPair.lc.value
+                        : contrasts[i][colorPairIndex].contrastValue >=
+                          colorPair.wcag.value
                     const scoreColor = isContrastValid
                       ? 'text-green-500'
                       : 'text-red-500'
@@ -58,11 +61,10 @@ export function ColorScale({
                         <span>
                           <strong className={'font-mono ' + scoreColor}>
                             {contrastMethod === 'APCA' &&
-                              contrasts[i][colorPairIndex].contrastValue}
+                              `${contrasts[i][colorPairIndex].contrastValue} (${colorPair.lc.value})`}
                             {contrastMethod === 'WCAG21' &&
-                              `${contrasts[i][colorPairIndex].contrastValue}:1`}
+                              `${contrasts[i][colorPairIndex].contrastValue}:1 (${colorPair.wcag.value})`}
                           </strong>
-                          <span> ({colorPair.wcag.value})</span>
                         </span>
                       </li>
                     )
@@ -77,16 +79,17 @@ export function ColorScale({
   )
 }
 function getTextColorForStep(colors: string[], stepIndex: number): string {
-  // Steps 1-6 use the text step 9 color.
-  // Step 7-10 use the bg color
-  // Step 11-12 use the contrast color #fff
-
-  if (stepIndex <= 6) {
-    return colors[9]
-  }
   if (stepIndex >= 7 && stepIndex <= 10) {
-    return colors[0]
+    return colors[0] // background color
   }
 
-  return '#fff'
+  if (stepIndex === 11) {
+    return 'black' // base color
+  }
+
+  if (stepIndex >= 12) {
+    return colors[10] // contrast text
+  }
+
+  return colors[9] // default text
 }

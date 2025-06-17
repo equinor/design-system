@@ -53,9 +53,9 @@ export function generateColorScale(
 
   // Set lightness to 0.62 for base color in dark mode to ensure contrast against background and text
   const newBaseColor = new Color(baseColor)
-  if (colorScheme === 'dark') {
-    newBaseColor.set('oklch.l', 0.62)
-  }
+  // if (colorScheme === 'dark') {
+  //   newBaseColor.set('oklch.l', 0.62)
+  // }
 
   colors.push(newBaseColor.toString({ format: 'hex' }))
 
@@ -69,6 +69,7 @@ export function generateColorScale(
     colorScheme,
     amount: 0.25,
   })
+
   colors.push(solidHover)
   colors.push(solidActive)
 
