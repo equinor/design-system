@@ -76,6 +76,7 @@ export const Calendar = forwardRef(
               nextMonthDisabled={nextButtonProps.isDisabled}
               setShowYearPicker={setShowYearPicker}
               showYearPicker={showYearPicker}
+              yearPickerPage={yearPickerPage}
               setYearPickerPage={setYearPickerPage}
             />
           )}
