@@ -120,7 +120,6 @@ export default function App() {
           Accessible UI Color Palette
         </h1>
         <div className="flex items-center gap-3">
-          <ThemeToggle />
           <button
             onClick={() => setShowConfigPanel(!showConfigPanel)}
             className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 rounded-md hover:bg-gray-200 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -142,6 +141,7 @@ export default function App() {
             </svg>
             <span>Edit config</span>
           </button>
+          <ThemeToggle />
         </div>
       </div>
 
