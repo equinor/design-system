@@ -2,7 +2,7 @@
 import { colorPairs } from '@/config'
 import { checkContrast } from '@/utils/color'
 import Color from 'colorjs.io'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 type ColorScaleProps = {
   colors: string[]
@@ -68,38 +68,82 @@ export function ColorScale({
   contrastMethod = 'WCAG21',
   colorName,
 }: ColorScaleProps) {
-  // State for popover - track which color is showing the popover
-  const [activePopover, setActivePopover] = useState<number | null>(null)
+  // State to track the active dialog (index of the color) - only one can be active at a time
+  const [activeDialog, setActiveDialog] = useState<number | null>(null)
 
-  // Effect to handle clicking outside the popover and keyboard events
+  // Create refs for dialogs and their corresponding color elements
+  const dialogRefs = useRef<(HTMLDialogElement | null)[]>(
+    Array(colors.length).fill(null),
+  )
+  const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
+    Array(colors.length).fill(null),
+  )
+
+  // Styles are now imported from the dialog.css file
+
+  // Toggle dialog visibility
+  const toggleDialog = (index: number) => {
+    if (activeDialog === index) {
+      // Close the dialog if already open
+      const dialog = dialogRefs.current[index]
+      if (dialog) {
+        dialog.close()
+      }
+      setActiveDialog(null)
+    } else {
+      // Close any existing dialog first
+      if (activeDialog !== null) {
+        const previousDialog = dialogRefs.current[activeDialog]
+        if (previousDialog) {
+          previousDialog.close()
+        }
+      }
+
+      // Open the new dialog (centered by default via CSS)
+      const dialog = dialogRefs.current[index]
+      if (dialog) {
+        // Show the dialog - will be centered via CSS
+        dialog.showModal()
+        setActiveDialog(index)
+      }
+    }
+  }
+
+  // Close dialog function
+  const closeDialog = (index: number) => {
+    const dialog = dialogRefs.current[index]
+    if (dialog) {
+      dialog.close()
+      setActiveDialog(null)
+    }
+  }
+
+  // Handle dialog closing when it's closed via ESC key
+  const handleDialogClose = () => {
+    setActiveDialog(null)
+  }
+
+  // Effect to prevent dialog from closing when clicking inside it
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      // Close the popover when clicking outside
-      if (activePopover !== null) {
-        const target = event.target as HTMLElement
-        if (!target.closest('.color-scale-item')) {
-          setActivePopover(null)
+    const handleDialogClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (target.tagName === 'DIALOG' && activeDialog !== null) {
+        const currentDialogElement = dialogRefs.current[activeDialog]
+
+        if (currentDialogElement === target) {
+          event.stopPropagation()
         }
       }
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      // Close popover when pressing Escape key
-      if (event.key === 'Escape' && activePopover !== null) {
-        setActivePopover(null)
-      }
-    }
+    document.addEventListener('click', handleDialogClick)
 
-    // Add event listeners
-    document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('keydown', handleKeyDown)
-
-    // Clean up event listeners
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('click', handleDialogClick)
     }
-  }, [activePopover]) // Add dependency to ensure effect runs when activePopover changes
+  }, [activeDialog])
+
+  // No need for resize or scroll handlers since dialogs are always centered
 
   const contrasts = colors.map((color: string, i: number) => {
     const indexOfBackgroundColorThatPairs = colorPairs[i]?.usedOnStep
@@ -132,96 +176,112 @@ export function ColorScale({
           const textColor = getTextColorForStep(colors, i + 1)
           const pairsWithSteps = colorPairs[i]?.usedOnStep
           const oklchInfo = getOklchInfo(color, i)
-          const isPopoverActive = activePopover === i
+          const isDialogActive = activeDialog === i
 
           return (
             <div
               key={'color-step-' + i}
+              ref={(el) => {
+                colorElementRefs.current[i] = el
+              }}
               className={`color-scale-item rounded-lg p-3 transition-transform hover:shadow-lg relative cursor-pointer ${
                 !showContrast ? 'aspect-square' : 'min-h-[130px]'
               }`}
               style={{ backgroundColor: color, color: textColor }}
-              onClick={() => setActivePopover(isPopoverActive ? null : i)}
+              onClick={() => toggleDialog(i)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
-                  setActivePopover(isPopoverActive ? null : i)
+                  toggleDialog(i)
                 }
               }}
               tabIndex={0}
               role="button"
-              aria-expanded={isPopoverActive}
+              aria-expanded={isDialogActive}
               aria-label={`Color ${i + 1}: ${oklchInfo.hex}, Click for details`}
+              aria-controls={`color-dialog-${i}`}
             >
-              {/* Add step number label */}
-              <span className="absolute top-1 left-2 text-xs font-semibold opacity-70">
-                {i + 1}
-              </span>
+              {/* Native dialog for color information */}
+              <dialog
+                ref={(el) => {
+                  dialogRefs.current[i] = el
+                  return undefined
+                }}
+                id={`color-dialog-${i}`}
+                className="min-w-[220px] backdrop:bg-black/20"
+                style={{
+                  backgroundColor: colors[0],
+                  color: colors[9],
+                }}
+                onClose={handleDialogClose}
+                onClick={(e) => {
+                  // Close dialog only if clicking directly on the backdrop
+                  // (native dialog behavior is to close when clicking anywhere)
+                  const rect = e.currentTarget.getBoundingClientRect()
+                  const isInDialog =
+                    rect.top <= e.clientY &&
+                    e.clientY <= rect.bottom &&
+                    rect.left <= e.clientX &&
+                    e.clientX <= rect.right
 
-              {/* Color information popover */}
-              {isPopoverActive && (
-                <div
-                  className="absolute z-10 p-3 rounded-md shadow-lg min-w-[180px] -translate-x-1/2 left-1/2 top-full mt-2"
-                  style={{
-                    backgroundColor:
-                      i > colors.length / 2 ? colors[0] : colors[10],
-                    color: i > colors.length / 2 ? textColor : colors[0],
-                    border: `1px solid ${i > colors.length / 2 ? colors[5] : colors[7]}`,
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby={`color-details-heading-${i}`}
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <h4
-                      id={`color-details-heading-${i}`}
-                      className="font-medium"
-                    >
-                      Color Details
-                    </h4>
-                    <button
-                      className="w-5 h-5 flex items-center justify-center rounded-full hover:bg-black/10 focus:outline-none focus:ring-2"
-                      onClick={() => setActivePopover(null)}
-                      aria-label="Close details"
-                    >
-                      ✕
-                    </button>
-                  </div>
+                  // If click is inside the dialog, prevent default closing
+                  if (isInDialog) {
+                    e.stopPropagation()
+                  } else {
+                    closeDialog(i)
+                  }
+                }}
+              >
+                <div className="flex justify-between items-center mb-3">
+                  <h4
+                    id={`color-details-heading-${i}`}
+                    className="font-medium text-lg"
+                  >
+                    {colorName ? `${colorName} #${i + 1}` : `Color #${i + 1}`}
+                  </h4>
+                  <button
+                    className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-black/10 focus:outline-none focus:ring-2"
+                    onClick={() => closeDialog(i)}
+                    aria-label="Close details"
+                  >
+                    ✕
+                  </button>
+                </div>
 
-                  {/* Color sample */}
+                {/* Color sample */}
+                <div className="flex gap-4 mb-4">
                   <div
-                    className="w-full h-6 mb-2 rounded"
-                    style={{ backgroundColor: oklchInfo.hex }}
+                    className="w-16 h-16 rounded-lg border"
+                    style={{
+                      backgroundColor: oklchInfo.hex,
+                      borderColor: 'rgba(0,0,0,0.1)',
+                    }}
+                    aria-label={`Color sample: ${oklchInfo.hex}`}
                   ></div>
 
-                  <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 text-xs items-center">
-                    <span className="font-medium">HEX:</span>
-                    <div className="flex items-center gap-1">
-                      <span className="font-mono">{oklchInfo.hex}</span>
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(oklchInfo.hex)
-                          // Optional: Show a brief "copied" tooltip
-                          alert('Color code copied to clipboard!')
-                        }}
-                        className="ml-1 p-1 hover:bg-black/10 rounded focus:outline-none focus:ring-1"
-                        aria-label="Copy color code"
-                        title="Copy to clipboard"
-                      >
-                        📋
-                      </button>
+                  <div className="flex flex-col justify-center">
+                    <div className="font-mono text-base mb-2">
+                      {oklchInfo.hex}
                     </div>
-                    <span className="font-medium">Lightness:</span>
-                    <span className="font-mono">{oklchInfo.l}</span>
-                    <span className="font-medium">Chroma:</span>
-                    <span className="font-mono">{oklchInfo.c}</span>
-                    <span className="font-medium">Hue:</span>
-                    <span className="font-mono">{oklchInfo.h}°</span>
+                    {colorName && (
+                      <div className="text-sm opacity-75">{colorName}</div>
+                    )}
                   </div>
                 </div>
-              )}
 
+                <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm items-center border-t pt-3 mt-2">
+                  <span className="font-medium">OKLCH Format:</span>
+                  <div className="flex items-center font-mono">
+                    oklch({oklchInfo.l} {oklchInfo.c} {oklchInfo.h})
+                  </div>
+                  <span className="font-medium">Lightness:</span>
+                  <span className="font-mono">{oklchInfo.l}</span>
+                  <span className="font-medium">Chroma:</span>
+                  <span className="font-mono">{oklchInfo.c}</span>
+                  <span className="font-medium">Hue:</span>
+                  <span className="font-mono">{oklchInfo.h}°</span>
+                </div>
+              </dialog>
               {/* Contrast info - keep original functionality */}
               {showContrast && (
                 <div className="flex flex-col h-full pt-3">
