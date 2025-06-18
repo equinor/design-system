@@ -6,6 +6,7 @@ import TokenDownloader from '@/components/TokenDownloader'
 import { ColorScale } from '@/components/ColorScale'
 import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 // Define a type for color objects
 type ColorDefinition = {
@@ -19,6 +20,7 @@ export default function App() {
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(false)
   const [showLightnessInputs, setShowLightnessInputs] = useState(false)
+  const [showConfigPanel, setShowConfigPanel] = useState(false)
   const [contrastMethod, setContrastMethod] = useState<'WCAG21' | 'APCA'>(
     'APCA',
   )
@@ -113,108 +115,136 @@ export default function App() {
       data-theme={colorScheme}
       className="min-h-screen text-black bg-white App dark:text-white dark:bg-black"
     >
-      <h1 className="mb-8 text-4xl text-black dark:text-white">
-        Accessible UI Color Palette
-      </h1>
-      <div className="max-w-3xl p-6 mx-auto mb-12 ">
-        <div className="grid gap-6 md:grid-cols-2">
-          <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
-            <legend className="mb-2 font-medium">Gaussian Parameters</legend>
-            <div className="space-y-4">
-              <label className="block">
-                <span className="block mb-1 text-sm">Mean (center)</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={mean}
-                  onChange={(e) => setMean(Number(e.target.value))}
-                  className="w-full accent-current"
-                />
-                <span className="text-sm">{mean}</span>
-              </label>
-              <label className="block">
-                <span className="block mb-1 text-sm">Standard deviation</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  step="0.1"
-                  value={stdDev}
-                  onChange={(e) => setStdDev(Number(e.target.value))}
-                  className="w-full accent-current"
-                />
-                <span className="text-sm">{stdDev}</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
-            <legend className="mb-2 font-medium">Display Options</legend>
-            <div className="space-y-3">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={showContrast}
-                  onChange={(e) => setShowContrast(e.target.checked)}
-                  className="accent-current"
-                />
-                <span>Show contrast information</span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={showLightnessInputs}
-                  onChange={(e) => setShowLightnessInputs(e.target.checked)}
-                  className="accent-current"
-                />
-                <span>Show lightness value inputs</span>
-              </label>
-            </div>
-
-            {showContrast && (
-              <div className="mt-3 pl-6">
-                <p className="mb-2 text-sm">Contrast calculation method:</p>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="contrastMethod"
-                      value="WCAG21"
-                      checked={contrastMethod === 'WCAG21'}
-                      onChange={() => setContrastMethod('WCAG21')}
-                      className="accent-current"
-                    />
-                    <span>WCAG 2.1</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="contrastMethod"
-                      value="APCA"
-                      checked={contrastMethod === 'APCA'}
-                      onChange={() => setContrastMethod('APCA')}
-                      className="accent-current"
-                    />
-                    <span>APCA</span>
-                  </label>
-                </div>
-              </div>
-            )}
-            <div className="mt-4">
-              <button
-                onClick={resetLightnessValues}
-                className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded"
-              >
-                Reset lightness values
-              </button>
-            </div>
-          </fieldset>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl text-black dark:text-white">
+          Accessible UI Color Palette
+        </h1>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => setShowConfigPanel(!showConfigPanel)}
+            className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 rounded-md hover:bg-gray-200 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
+            title="Edit configuration"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>Edit config</span>
+          </button>
         </div>
       </div>
 
+      {showConfigPanel && (
+        <div className="max-w-3xl p-6 mx-auto mb-12 ">
+          <div className="grid gap-6 mb-8 md:grid-cols-2">
+            <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
+              <legend className="mb-2 font-medium">Gaussian Parameters</legend>
+              <div className="space-y-4">
+                <label className="block">
+                  <span className="block mb-1 text-sm">Mean (center)</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    value={mean}
+                    onChange={(e) => setMean(Number(e.target.value))}
+                    className="w-full accent-current"
+                  />
+                  <span className="text-sm">{mean}</span>
+                </label>
+                <label className="block">
+                  <span className="block mb-1 text-sm">Standard deviation</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="10"
+                    step="0.1"
+                    value={stdDev}
+                    onChange={(e) => setStdDev(Number(e.target.value))}
+                    className="w-full accent-current"
+                  />
+                  <span className="text-sm">{stdDev}</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
+              <legend className="mb-2 font-medium">Display Options</legend>
+              <div className="space-y-3">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={showContrast}
+                    onChange={(e) => setShowContrast(e.target.checked)}
+                    className="accent-current"
+                  />
+                  <span>Show contrast information</span>
+                </label>
+
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={showLightnessInputs}
+                    onChange={(e) => setShowLightnessInputs(e.target.checked)}
+                    className="accent-current"
+                  />
+                  <span>Show lightness value inputs</span>
+                </label>
+              </div>
+
+              {showContrast && (
+                <div className="mt-3 pl-6">
+                  <p className="mb-2 text-sm">Contrast calculation method:</p>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="contrastMethod"
+                        value="WCAG21"
+                        checked={contrastMethod === 'WCAG21'}
+                        onChange={() => setContrastMethod('WCAG21')}
+                        className="accent-current"
+                      />
+                      <span>WCAG 2.1</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="contrastMethod"
+                        value="APCA"
+                        checked={contrastMethod === 'APCA'}
+                        onChange={() => setContrastMethod('APCA')}
+                        className="accent-current"
+                      />
+                      <span>APCA</span>
+                    </label>
+                  </div>
+                </div>
+              )}
+              <div className="mt-4">
+                <button
+                  onClick={resetLightnessValues}
+                  className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded"
+                >
+                  Reset lightness values
+                </button>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      )}
       <div className="sticky top-0 z-10 bg-white dark:bg-black">
         <div className="grid gap-3 mb-2 grid-cols-14">
           <div className="col-span-2 border-b border-gray-300 dark:border-gray-800">
