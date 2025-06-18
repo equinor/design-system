@@ -2,7 +2,7 @@
 
 import { generateColorScale } from '../utils/color'
 import { useState } from 'react'
-import TokenDownloader from '@/components/TokenDownloader'
+import { formatColorsAsTokens } from '../utils/tokenFormatter'
 import { ColorScale } from '@/components/ColorScale'
 import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
@@ -144,11 +144,11 @@ export default function App() {
           <ThemeToggle />
         </div>
       </div>
-
+      {/* Config Panel */}
       {showConfigPanel && (
         <div className="max-w-3xl p-6 mx-auto mb-12 ">
           {/* Color management UI with CSS Grid */}
-          <div className="max-w-3xl p-6 mx-auto mb-12">
+          <div className="max-w-3xl p-6 mx-auto mb-12 border border-gray-200 rounded-lg dark:border-gray-800">
             {/* Header Row */}
             <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-gray-200 dark:border-gray-800 pb-2 font-medium">
               <div className="text-left">Name</div>
@@ -321,6 +321,169 @@ export default function App() {
               </div>
             </fieldset>
           </div>
+
+          {/* Configuration Import/Export Section */}
+          <div className="mt-6 p-6 border border-gray-200 rounded-lg dark:border-gray-800">
+            <h3 className="mb-4 font-medium">Configuration</h3>
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={() => {
+                  // Download configuration file
+                  const config = {
+                    lightModeValues: customLightModeValues,
+                    darkModeValues: customDarkModeValues,
+                    mean,
+                    stdDev,
+                    colors,
+                  }
+
+                  const configData = JSON.stringify(config, null, 2)
+                  const blob = new Blob([configData], {
+                    type: 'application/json',
+                  })
+                  const url = URL.createObjectURL(blob)
+
+                  const a = document.createElement('a')
+                  a.href = url
+                  a.download = 'color-palette-config.json'
+                  document.body.appendChild(a)
+                  a.click()
+
+                  // Clean up
+                  setTimeout(() => {
+                    document.body.removeChild(a)
+                    URL.revokeObjectURL(url)
+                  }, 0)
+                }}
+                className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded border-none text-sm cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600"
+              >
+                Download Configuration
+              </button>
+
+              <label className="inline-block px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">
+                <span>Upload Configuration</span>
+                <input
+                  type="file"
+                  className="hidden"
+                  accept=".json"
+                  onChange={(event) => {
+                    const files = event.target.files
+                    if (!files || files.length === 0) return
+
+                    const file = files[0]
+                    const reader = new FileReader()
+
+                    reader.onload = (e) => {
+                      try {
+                        const content = e.target?.result as string
+                        const config = JSON.parse(content)
+
+                        // Validate config format
+                        if (
+                          !config.lightModeValues ||
+                          !config.darkModeValues ||
+                          typeof config.mean !== 'number' ||
+                          typeof config.stdDev !== 'number'
+                        ) {
+                          alert('Invalid configuration file format')
+                          return
+                        }
+
+                        // Update with configuration
+                        handleConfigUpload({
+                          ...config,
+                          colors: config.colors || colors,
+                        })
+                      } catch (error) {
+                        console.error(
+                          'Error parsing configuration file:',
+                          error,
+                        )
+                        alert('Could not parse configuration file')
+                      }
+                    }
+
+                    reader.readAsText(file)
+
+                    // Reset the input
+                    event.target.value = ''
+                  }}
+                />
+              </label>
+              <button
+                onClick={() => {
+                  // Download color tokens
+                  // Create objects with the required structure
+                  const lightColors: Record<string, string[]> = {}
+                  const darkColors: Record<string, string[]> = {}
+
+                  // Add colors to objects
+                  colors.forEach((colorDef) => {
+                    lightColors[colorDef.name] = generateColorScale(
+                      colorDef.hue,
+                      customLightModeValues,
+                      mean,
+                      stdDev,
+                      'light',
+                    )
+
+                    darkColors[`${colorDef.name}Dark`] = generateColorScale(
+                      colorDef.hue,
+                      customDarkModeValues,
+                      mean,
+                      stdDev,
+                      'dark',
+                    )
+                  })
+
+                  // Extract the required standard colors for token formatter
+                  const standardLightColors = {
+                    accent: lightColors.accent || [],
+                    neutral: lightColors.neutral || [],
+                    success: lightColors.success || [],
+                    info: lightColors.info || [],
+                    warning: lightColors.warning || [],
+                    danger: lightColors.danger || [],
+                  }
+
+                  const standardDarkColors = {
+                    accentDark: darkColors.accentDark || [],
+                    neutralDark: darkColors.neutralDark || [],
+                    successDark: darkColors.successDark || [],
+                    infoDark: darkColors.infoDark || [],
+                    warningDark: darkColors.warningDark || [],
+                    dangerDark: darkColors.dangerDark || [],
+                  }
+
+                  // Format colors as tokens
+                  const tokenData = formatColorsAsTokens(
+                    standardLightColors,
+                    standardDarkColors,
+                  )
+
+                  const blob = new Blob([tokenData], {
+                    type: 'application/json',
+                  })
+                  const url = URL.createObjectURL(blob)
+
+                  const a = document.createElement('a')
+                  a.href = url
+                  a.download = 'color-tokens.json'
+                  document.body.appendChild(a)
+                  a.click()
+
+                  // Clean up
+                  setTimeout(() => {
+                    document.body.removeChild(a)
+                    URL.revokeObjectURL(url)
+                  }, 0)
+                }}
+                className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
+              >
+                Download Color Tokens (W3C Format)
+              </button>
+            </div>
+          </div>
         </div>
       )}
       <div className="sticky top-0 z-10 bg-white dark:bg-black">
@@ -389,14 +552,6 @@ export default function App() {
         />
       ))}
 
-      <TokenDownloader
-        customLightModeValues={customLightModeValues}
-        customDarkModeValues={customDarkModeValues}
-        mean={mean}
-        stdDev={stdDev}
-        onConfigUpload={handleConfigUpload}
-        colors={colors}
-      />
       <section style={{ maxWidth: '500px', margin: '0 auto 48px' }}>
         <p>
           The generator is using a gaussian function to calculate chroma based
