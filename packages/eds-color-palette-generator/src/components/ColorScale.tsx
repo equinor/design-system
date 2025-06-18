@@ -281,8 +281,82 @@ export function ColorScale({
                   <span className="font-medium">Hue:</span>
                   <span className="font-mono">{oklchInfo.h}°</span>
                 </div>
+
+                {/* Always show contrast information in the dialog */}
+                {pairsWithSteps && pairsWithSteps.length > 0 && (
+                  <div className="border-t pt-3 mt-3">
+                    <h5 className="font-medium mb-2">Contrast Information:</h5>
+                    <div className="max-h-[120px] overflow-y-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <th className="text-left py-1 pr-2">Color</th>
+                            <th className="text-right py-1">
+                              {contrastMethod} Contrast
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {pairsWithSteps.map((colorPair, colorPairIndex) => {
+                            const contrastArray = contrasts[i]
+                            const contrastValue =
+                              contrastArray &&
+                              colorPairIndex < contrastArray.length
+                                ? contrastArray[colorPairIndex]?.contrastValue
+                                : undefined
+
+                            let isContrastValid = false
+                            if (contrastValue !== undefined) {
+                              if (contrastMethod === 'APCA') {
+                                isContrastValid =
+                                  parseFloat(String(contrastValue)) >=
+                                  colorPair.lc.value
+                              } else {
+                                isContrastValid =
+                                  parseFloat(String(contrastValue)) >=
+                                  colorPair.wcag.value
+                              }
+                            }
+
+                            const scoreColor = isContrastValid
+                              ? 'text-green-500 dark:text-green-400'
+                              : 'text-red-500 dark:text-red-400'
+
+                            return (
+                              <tr
+                                key={`dialog-contrast-${colorPair.stepIndex}`}
+                                className="border-b border-gray-100 dark:border-gray-800"
+                              >
+                                <td className="py-1 pr-2 flex items-center gap-2">
+                                  <div
+                                    className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-700"
+                                    style={{
+                                      backgroundColor:
+                                        colors[colorPair.stepIndex],
+                                    }}
+                                  />
+                                  #{colorPair.stepIndex + 1}
+                                </td>
+                                <td className="text-right py-1">
+                                  <span className={`font-mono ${scoreColor}`}>
+                                    {contrastMethod === 'APCA' &&
+                                      contrastValue &&
+                                      `${contrastValue} (${colorPair.lc.value})`}
+                                    {contrastMethod === 'WCAG21' &&
+                                      contrastValue &&
+                                      `${contrastValue}:1 (${colorPair.wcag.value})`}
+                                  </span>
+                                </td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
               </dialog>
-              {/* Contrast info - keep original functionality */}
+              {/* Contrast info in the color cell - only when showContrast is true */}
               {showContrast && (
                 <div className="flex flex-col h-full pt-3">
                   <ul className="space-y-1 text-[11px]">
