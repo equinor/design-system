@@ -70,6 +70,18 @@ export const ConfigurationPanel = ({
                     return
                   }
 
+                  // Validate colors field
+                  if (
+                    !Array.isArray(config.colors) ||
+                    !config.colors.every(
+                      (color) =>
+                        typeof color.name === 'string' &&
+                        typeof color.hue === 'string'
+                    )
+                  ) {
+                    alert('Invalid colors field in configuration file')
+                    return
+                  }
                   // Update with configuration
                   onConfigUpload({
                     ...config,
