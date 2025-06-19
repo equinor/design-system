@@ -33,7 +33,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:^",
     "@tanstack/react-table": "^8.21.3",
-    "@tanstack/react-virtual": "^3.13.8"
+    "@tanstack/react-virtual": "^3.13.10"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
@@ -72,7 +72,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^8.6.14",
     "styled-components": "6.1.18",
-    "ts-jest": "29.3.3",
+    "ts-jest": "29.4.0",
     "ts-node": "10.9.2",
     "tsc-watch": "^6.2.1",
     "typescript": "~5.8.3"
