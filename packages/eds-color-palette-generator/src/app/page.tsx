@@ -98,6 +98,15 @@ export default function App() {
         <div className="max-w-3xl p-6 mx-auto mb-12 ">
           {/* Color management component */}
           <ColorManagement colors={colors} setColors={setColors} />
+          {/* Configuration Import/Export Section */}
+          <ConfigurationPanel
+            customLightModeValues={customLightModeValues}
+            customDarkModeValues={customDarkModeValues}
+            mean={mean}
+            stdDev={stdDev}
+            colors={colors}
+            onConfigUpload={handleConfigUpload}
+          />
 
           <div className="grid gap-6 mb-8 md:grid-cols-2">
             <GaussianParametersPanel
@@ -117,16 +126,6 @@ export default function App() {
               resetLightnessValues={resetLightnessValues}
             />
           </div>
-
-          {/* Configuration Import/Export Section */}
-          <ConfigurationPanel
-            customLightModeValues={customLightModeValues}
-            customDarkModeValues={customDarkModeValues}
-            mean={mean}
-            stdDev={stdDev}
-            colors={colors}
-            onConfigUpload={handleConfigUpload}
-          />
         </div>
       )}
 
@@ -155,25 +154,22 @@ export default function App() {
         />
       ))}
 
-      <section className="max-w-lg mx-auto mb-12">
-        <p>
+      <section className="mb-12">
+        <p className="mb-4">
           The generator is using a gaussian function to calculate chroma based
           on a predefined lightness for each step. We provide sensible defaults
           to mean and standard deviation, but also let you customize it to get
-          the optimal result for you.
-        </p>
-        <p>
-          We set mean to 0.6 as the initial value because we want to move the
-          center of chroma in the gaussian curve a bit to the right so that we
-          get more chroma on the right half.
+          the optimal result for you. We set mean to 0.6 as the initial value
+          because we want to move the center of chroma in the gaussian curve a
+          bit to the right so that we get more chroma on the right half.
         </p>
         <p>
           You can customize the lightness value for each step in the scale using
-          the input fields above each column. The values range from 0 to 1
+          the input fields above each column. The values range from 0 to 1.
         </p>
         <p>
           You can now also add, edit, and remove colors from the palette using
-          the color management section.
+          the color management section in the configuration panel.
         </p>
       </section>
     </div>

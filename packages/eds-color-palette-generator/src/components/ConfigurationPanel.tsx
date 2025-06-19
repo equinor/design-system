@@ -23,7 +23,7 @@ export const ConfigurationPanel = ({
   onConfigUpload,
 }: ConfigurationPanelProps) => {
   return (
-    <div className="mt-6 p-6 border border-gray-200 rounded-lg dark:border-gray-800">
+    <div className="my-6 p-6 border border-gray-200 rounded-lg dark:border-gray-800">
       <h3 className="mb-4 font-medium">Configuration</h3>
       <div className="flex flex-wrap gap-4">
         <button
