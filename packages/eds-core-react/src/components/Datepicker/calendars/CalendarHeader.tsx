@@ -11,6 +11,7 @@ import {
 import { CalendarDate } from '@internationalized/date'
 import { tokens } from '@equinor/eds-tokens'
 import { Dispatch, SetStateAction } from 'react'
+import { getPageYears } from '../utils/getPageYears'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -65,6 +66,7 @@ export function CalendarHeader({
   showYearPicker,
   setShowYearPicker,
   setYearPickerPage,
+  yearPickerPage,
 }: {
   state: CalendarState | RangeCalendarState
   title: string
@@ -73,14 +75,26 @@ export function CalendarHeader({
   showYearPicker: boolean
   setShowYearPicker: (showYearPicker: boolean) => void
   setYearPickerPage?: Dispatch<SetStateAction<number>>
+  yearPickerPage: number
 }) {
+  const years = getPageYears(state.focusedDate.year, yearPickerPage)
+  const backButtonDisabled =
+    showYearPicker && state.minValue
+      ? years[0] < state.minValue.year
+      : previousMonthDisabled
+
+  const nextButtonDisabled =
+    showYearPicker && state.maxValue
+      ? years[years.length - 1] > state.maxValue.year
+      : nextMonthDisabled
+
   return (
     <HeaderWrapper>
       <HeaderActions>
         <Button
           variant={'ghost_icon'}
           aria-label={'Previous month'}
-          disabled={previousMonthDisabled}
+          disabled={backButtonDisabled}
           onClick={() =>
             showYearPicker
               ? setYearPickerPage((page) => page - 1)
@@ -115,7 +129,7 @@ export function CalendarHeader({
               ? setYearPickerPage((page) => page + 1)
               : state.focusNextPage()
           }
-          disabled={nextMonthDisabled}
+          disabled={nextButtonDisabled}
           aria-label={'Next month'}
         >
           <Icon data={chevron_right} />

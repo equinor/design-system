@@ -10,6 +10,7 @@ import {
   useEffect,
   useRef,
 } from 'react'
+import { getPageYears } from '../utils/getPageYears'
 
 const Grid = styled.div`
   display: grid;
@@ -44,9 +45,6 @@ const GridColumn = styled.button<{ $active: boolean }>`
   }
 `
 
-const TOTAL_VISIBLE_YEARS = 36
-const RANGE_OFFSET = 30 / 2
-
 const GridFocusManager = ({
   year: selectedYear,
   setFocusedYear,
@@ -63,12 +61,7 @@ const GridFocusManager = ({
   const prevYear = useRef<number | undefined>()
   const navByKeyboard = useRef<boolean>(false)
 
-  const page = yearPickerPage * TOTAL_VISIBLE_YEARS
-
-  const years = Array.from(
-    { length: TOTAL_VISIBLE_YEARS },
-    (_, i) => i + (selectedYear + page - RANGE_OFFSET),
-  )
+  const years = getPageYears(selectedYear, yearPickerPage)
 
   useEffect(() => {
     if (prevYear.current === undefined) {
