@@ -86,7 +86,7 @@ export default function App() {
   return (
     <div
       data-theme={colorScheme}
-      className="min-h-screen text-black bg-white App dark:text-white dark:bg-black"
+      className="text-black bg-white dark:text-white dark:bg-black p-6"
     >
       <HeaderPanel
         showConfigPanel={showConfigPanel}

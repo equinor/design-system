@@ -184,7 +184,7 @@ export function ColorScale({
               ref={(el) => {
                 colorElementRefs.current[i] = el
               }}
-              className={`color-scale-item rounded-lg p-3 transition-transform hover:shadow-lg relative cursor-pointer ${
+              className={`color-scale-item rounded-lg p-3 transition-transform hover:scale-105 relative cursor-pointer ${
                 !showContrast ? 'aspect-square' : 'min-h-[130px]'
               }`}
               style={{ backgroundColor: color, color: textColor }}
@@ -263,13 +263,10 @@ export function ColorScale({
                     <div className="font-mono text-base mb-2">
                       {oklchInfo.hex}
                     </div>
-                    {colorName && (
-                      <div className="text-sm opacity-75">{colorName}</div>
-                    )}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm items-center border-t pt-3 mt-2">
+                <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
                   <span className="font-medium">OKLCH Format:</span>
                   <div className="flex items-center font-mono">
                     oklch({oklchInfo.l} {oklchInfo.c} {oklchInfo.h})
