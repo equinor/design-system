@@ -2,7 +2,7 @@
 import { colorPairs } from '@/config'
 import { checkContrast } from '@/utils/color'
 import Color from 'colorjs.io'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 type ColorScaleProps = {
   colors: string[]
@@ -143,23 +143,25 @@ export function ColorScale({
     }
   }, [activeDialog])
 
-  // No need for resize or scroll handlers since dialogs are always centered
+  // Memoize contrast calculations to only recalculate when colors or contrastMethod change
+  const contrasts = useMemo(() => {
+    return colors.map((color: string, i: number) => {
+      const indexOfBackgroundColorThatPairs = colorPairs[i]?.usedOnStep
+      if (!indexOfBackgroundColorThatPairs) return null
 
-  const contrasts = colors.map((color: string, i: number) => {
-    const indexOfBackgroundColorThatPairs = colorPairs[i]?.usedOnStep
-    if (!indexOfBackgroundColorThatPairs) return null
-    const contrastForAllBackgroundPairings = colorPairs[i]?.usedOnStep?.map(
-      (colorPair) => {
-        const contrastResult = checkContrast(
-          color,
-          colors[colorPair.stepIndex],
-          contrastMethod,
-        )
-        return contrastResult
-      },
-    )
-    return contrastForAllBackgroundPairings
-  })
+      const contrastForAllBackgroundPairings = colorPairs[i]?.usedOnStep?.map(
+        (colorPair) => {
+          const contrastResult = checkContrast(
+            color,
+            colors[colorPair.stepIndex],
+            contrastMethod,
+          )
+          return contrastResult
+        },
+      )
+      return contrastForAllBackgroundPairings
+    })
+  }, [colors, contrastMethod])
 
   return (
     <div className="mb-8">
