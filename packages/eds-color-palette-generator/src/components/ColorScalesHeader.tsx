@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ColorScalesHeader = () => {
   return (
-    <div className="sticky top-0 z-10 bg-white dark:bg-black">
+    <>
       <div className="grid gap-3 mb-2 grid-cols-14">
         <div className="col-span-2 border-b border-gray-300 dark:border-gray-800">
           background
@@ -28,6 +28,6 @@ export const ColorScalesHeader = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }

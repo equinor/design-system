@@ -130,17 +130,19 @@ export default function App() {
         </div>
       )}
 
-      <ColorScalesHeader />
+      <div className="sticky top-0 z-10 bg-white dark:bg-black p-1">
+        <ColorScalesHeader />
 
-      {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
-      {showLightnessInputs && (
-        <LightnessValueInputs
-          colorScheme={colorScheme}
-          customLightModeValues={customLightModeValues}
-          customDarkModeValues={customDarkModeValues}
-          updateLightnessValue={updateLightnessValue}
-        />
-      )}
+        {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
+        {showLightnessInputs && (
+          <LightnessValueInputs
+            colorScheme={colorScheme}
+            customLightModeValues={customLightModeValues}
+            customDarkModeValues={customDarkModeValues}
+            updateLightnessValue={updateLightnessValue}
+          />
+        )}
+      </div>
 
       {/* Render color scales dynamically */}
       {colorScales.map((colorData) => (
