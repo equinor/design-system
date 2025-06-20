@@ -2,308 +2,174 @@
 
 import { generateColorScale } from '../utils/color'
 import { useState } from 'react'
-import TokenDownloader from '@/components/TokenDownloader'
 import { ColorScale } from '@/components/ColorScale'
 import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
+import { HeaderPanel } from '@/components/HeaderPanel'
+import { ColorManagement } from '@/components/ColorManagement'
+import { GaussianParametersPanel } from '@/components/GaussianParametersPanel'
+import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
+import { ConfigurationPanel } from '@/components/ConfigurationPanel'
+import { LightnessValueInputs } from '@/components/LightnessValueInputs'
+import { ColorScalesHeader } from '@/components/ColorScalesHeader'
+import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
 
 export default function App() {
   const [mean, setMean] = useState(0.6)
   const [stdDev, setStdDev] = useState(2)
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(false)
-  const [contrastMethod, setContrastMethod] = useState<'WCAG21' | 'APCA'>(
-    'APCA',
+  const [showLightnessInputs, setShowLightnessInputs] = useState(false)
+  const [showConfigPanel, setShowConfigPanel] = useState(false)
+  const [contrastMethod, setContrastMethod] = useState<ContrastMethod>('APCA')
+
+  // Add state for custom lightness values
+  const [customLightModeValues, setCustomLightModeValues] = useState<number[]>(
+    lightnessValuesInLightMode,
+  )
+  const [customDarkModeValues, setCustomDarkModeValues] = useState<number[]>(
+    lightnessValuesInDarkMode,
   )
 
-  const accent = generateColorScale(
-    '#007079',
-    lightnessValuesInLightMode,
-    mean,
-    stdDev,
-  )
+  // Define colors in an array for easier management
+  const [colors, setColors] = useState<ColorDefinition[]>([
+    { name: 'accent', hue: '#007079' },
+    { name: 'neutral', hue: '#4A4A4A' },
+    { name: 'success', hue: '#3FA13D' },
+    { name: 'info', hue: '#0084C4' },
+    { name: 'warning', hue: '#E57E00' },
+    { name: 'danger', hue: '#E20337' },
+  ])
 
-  const accentDark = generateColorScale(
-    '#007079',
-    lightnessValuesInDarkMode,
-    mean,
-    stdDev,
-    'dark',
-  )
+  // Update a specific lightness value
+  const updateLightnessValue = (index: number, value: number) => {
+    if (colorScheme === 'light') {
+      const newValues = [...customLightModeValues]
+      newValues[index] = value
+      setCustomLightModeValues(newValues)
+    } else {
+      const newValues = [...customDarkModeValues]
+      newValues[index] = value
+      setCustomDarkModeValues(newValues)
+    }
+  }
 
-  const neutral = generateColorScale(
-    '#4A4A4A',
-    lightnessValuesInLightMode,
-    mean,
-    stdDev,
-  )
+  // Reset lightness values to defaults
+  const resetLightnessValues = () => {
+    setCustomLightModeValues(lightnessValuesInLightMode)
+    setCustomDarkModeValues(lightnessValuesInDarkMode)
+  }
 
-  const neutralDark = generateColorScale(
-    '#435460',
-    lightnessValuesInDarkMode,
-    mean,
-    stdDev,
-    'dark',
-  )
-  const success = generateColorScale(
-    '#3FA13D',
-    lightnessValuesInLightMode,
-    mean,
-    stdDev,
-  )
-  const successDark = generateColorScale(
-    '#3FA13D',
-    lightnessValuesInDarkMode,
-    mean,
-    stdDev,
-    'dark',
-  )
-  const info = generateColorScale(
-    '#0084C4',
-    lightnessValuesInLightMode,
-    mean,
-    stdDev,
-  )
-  const infoDark = generateColorScale(
-    '#0084C4',
-    lightnessValuesInDarkMode,
-    mean,
-    stdDev,
-    'dark',
-  )
-  const warning = generateColorScale(
-    '#E57E00',
-    lightnessValuesInLightMode,
-    mean,
-    stdDev,
-  )
+  // Handle configuration upload
+  const handleConfigUpload = (config: ConfigFile) => {
+    setCustomLightModeValues(config.lightModeValues)
+    setCustomDarkModeValues(config.darkModeValues)
+    setMean(config.mean)
+    setStdDev(config.stdDev)
+    if (config.colors) {
+      setColors(config.colors)
+    }
+  }
 
-  const warningDark = generateColorScale(
-    '#E57E00',
-    lightnessValuesInDarkMode,
-    mean,
-    stdDev,
-    'dark',
-  )
-  const danger = generateColorScale(
-    '#E20337',
-    lightnessValuesInLightMode,
-    mean,
-    stdDev,
-  )
-  const dangerDark = generateColorScale(
-    '#E20337',
-    lightnessValuesInDarkMode,
-    mean,
-    stdDev,
-    'dark',
-  )
+  // Generate color scales for each color
+  const colorScales = colors.map((color) => ({
+    ...color,
+    scale: generateColorScale(
+      color.hue,
+      colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
+      mean,
+      stdDev,
+      colorScheme,
+    ),
+  }))
+
   return (
     <div
       data-theme={colorScheme}
-      className="min-h-screen text-black bg-white App dark:text-white dark:bg-black"
+      className="text-black bg-white dark:text-white dark:bg-black p-6"
     >
-      <h1 className="mb-8 text-4xl text-black dark:text-white">
-        Accessible UI Color Palette
-      </h1>
-      <div className="max-w-3xl p-6 mx-auto mb-12 ">
-        <div className="grid gap-6 md:grid-cols-2">
-          <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
-            <legend className="mb-2 font-medium">Gaussian Parameters</legend>
-            <div className="space-y-4">
-              <label className="block">
-                <span className="block mb-1 text-sm">Mean (center)</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={mean}
-                  onChange={(e) => setMean(Number(e.target.value))}
-                  className="w-full accent-current"
-                />
-                <span className="text-sm">{mean}</span>
-              </label>
-              <label className="block">
-                <span className="block mb-1 text-sm">Standard deviation</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  step="0.1"
-                  value={stdDev}
-                  onChange={(e) => setStdDev(Number(e.target.value))}
-                  className="w-full accent-current"
-                />
-                <span className="text-sm">{stdDev}</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
-            <legend className="mb-2 font-medium">Display Options</legend>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showContrast}
-                onChange={(e) => setShowContrast(e.target.checked)}
-                className="accent-current"
-              />
-              <span>Show contrast information</span>
-            </label>
-
-            {showContrast && (
-              <div className="mt-3 pl-6">
-                <p className="mb-2 text-sm">Contrast calculation method:</p>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="contrastMethod"
-                      value="WCAG21"
-                      checked={contrastMethod === 'WCAG21'}
-                      onChange={() => setContrastMethod('WCAG21')}
-                      className="accent-current"
-                    />
-                    <span>WCAG 2.1</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="contrastMethod"
-                      value="APCA"
-                      checked={contrastMethod === 'APCA'}
-                      onChange={() => setContrastMethod('APCA')}
-                      className="accent-current"
-                    />
-                    <span>APCA</span>
-                  </label>
-                </div>
-              </div>
-            )}
-          </fieldset>
-        </div>
-      </div>
-      <div className="grid gap-3 mb-2 grid-cols-14">
-        <div className="col-span-2 border-b border-gray-200 dark:border-gray-800">
-          background (1-2)
-        </div>
-        <div className="col-span-3 pb-2 border-b border-gray-200 dark:border-gray-800">
-          surface (3-5)
-        </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          border (6-8)
-        </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          text (9-11)
-        </div>
-        <div className="col-span-3 border-b border-gray-200 dark:border-gray-800">
-          base (12-14)
-        </div>
-      </div>
-      <div className={`grid grid-cols-14 gap-3 mb-4 sticky top-0 z-10 `}>
-        {Array.from({ length: 14 }).map((_, index) => (
-          <div key={index} className="flex items-center justify-center">
-            {index + 1}
-          </div>
-        ))}
-      </div>
-      {colorScheme === 'light' ? (
-        <>
-          <ColorScale
-            colors={accent}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={neutral}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={info}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={success}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={warning}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={danger}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-        </>
-      ) : (
-        <>
-          <ColorScale
-            colors={accentDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={neutralDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={infoDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={successDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={warningDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-          <ColorScale
-            colors={dangerDark}
-            showContrast={showContrast}
-            contrastMethod={contrastMethod}
-          />
-        </>
-      )}
-      <TokenDownloader
-        lightColors={{
-          accent,
-          neutral,
-          success,
-          info,
-          warning,
-          danger,
-        }}
-        darkColors={{
-          accentDark,
-          neutralDark,
-          successDark,
-          infoDark,
-          warningDark,
-          dangerDark,
-        }}
+      <HeaderPanel
+        showConfigPanel={showConfigPanel}
+        setShowConfigPanel={setShowConfigPanel}
       />
-      <section style={{ maxWidth: '500px', margin: '0 auto 48px' }}>
-        <p>
+
+      {/* Config Panel */}
+      {showConfigPanel && (
+        <div className="max-w-3xl p-6 mx-auto mb-12 ">
+          {/* Color management component */}
+          <ColorManagement colors={colors} setColors={setColors} />
+          {/* Configuration Import/Export Section */}
+          <ConfigurationPanel
+            customLightModeValues={customLightModeValues}
+            customDarkModeValues={customDarkModeValues}
+            mean={mean}
+            stdDev={stdDev}
+            colors={colors}
+            onConfigUpload={handleConfigUpload}
+          />
+
+          <div className="grid gap-6 mb-8 md:grid-cols-2">
+            <GaussianParametersPanel
+              mean={mean}
+              stdDev={stdDev}
+              setMean={setMean}
+              setStdDev={setStdDev}
+            />
+
+            <DisplayOptionsPanel
+              showContrast={showContrast}
+              showLightnessInputs={showLightnessInputs}
+              contrastMethod={contrastMethod}
+              setShowContrast={setShowContrast}
+              setShowLightnessInputs={setShowLightnessInputs}
+              setContrastMethod={setContrastMethod}
+              resetLightnessValues={resetLightnessValues}
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="sticky top-0 z-10 bg-white dark:bg-black p-1">
+        <ColorScalesHeader />
+
+        {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
+        {showLightnessInputs && (
+          <LightnessValueInputs
+            colorScheme={colorScheme}
+            customLightModeValues={customLightModeValues}
+            customDarkModeValues={customDarkModeValues}
+            updateLightnessValue={updateLightnessValue}
+          />
+        )}
+      </div>
+
+      {/* Render color scales dynamically */}
+      {colorScales.map((colorData) => (
+        <ColorScale
+          key={colorData.name}
+          colors={colorData.scale}
+          showContrast={showContrast}
+          contrastMethod={contrastMethod}
+          colorName={colorData.name}
+        />
+      ))}
+
+      <section className="mb-12">
+        <p className="mb-4">
           The generator is using a gaussian function to calculate chroma based
           on a predefined lightness for each step. We provide sensible defaults
           to mean and standard deviation, but also let you customize it to get
-          the optimal result for you.
+          the optimal result for you. We set mean to 0.6 as the initial value
+          because we want to move the center of chroma in the gaussian curve a
+          bit to the right so that we get more chroma on the right half.
         </p>
         <p>
-          We set mean to 0.6 as the initial value because we want to move the
-          center of chroma in the gaussian curve a bit to the right so that we
-          get more chroma on the right half
+          You can customize the lightness value for each step in the scale using
+          the input fields above each column. The values range from 0 to 1.
+        </p>
+        <p>
+          You can now also add, edit, and remove colors from the palette using
+          the color management section in the configuration panel.
         </p>
       </section>
     </div>

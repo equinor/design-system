@@ -20,15 +20,21 @@ export function generateNextSolidColor({
   colorScheme,
   amount = 0.2,
 }: GenerateNextSolidColorProps): string {
-  if (colorScheme === 'dark') {
-    const baseLighten = new Color(baseColor)
-    baseLighten.lighten(amount)
-    return baseLighten.toString({ format: 'hex' })
-  }
+  try {
+    if (colorScheme === 'dark') {
+      const baseLighten = new Color(baseColor)
+      baseLighten.lighten(amount)
+      return baseLighten.toString({ format: 'hex' })
+    }
 
-  const baseDarken = new Color(baseColor)
-  baseDarken.darken(amount)
-  return baseDarken.toString({ format: 'hex' })
+    const baseDarken = new Color(baseColor)
+    baseDarken.darken(amount)
+    return baseDarken.toString({ format: 'hex' })
+  } catch (error) {
+    console.error('Error in generateNextSolidColor:', error)
+    // Return the original color if there's an error
+    return baseColor
+  }
 }
 
 export function generateColorScale(
@@ -38,42 +44,67 @@ export function generateColorScale(
   stdDev: number,
   colorScheme: 'light' | 'dark' = 'light',
 ): string[] {
-  const base = new Color(baseColor)
-  const colors: string[] = []
-  const steps = lightnessValues.length
+  // Validate the baseColor to ensure it's a proper color string
+  try {
+    // Create a Color object from the baseColor
+    const base = new Color(baseColor)
+    const colors: string[] = []
+    const steps = lightnessValues.length
 
-  for (let i = 0; i < steps; i++) {
-    const lightness = lightnessValues[i]
-    const color = new Color(base)
-    const chroma = gaussian(lightness, mean, stdDev) * color.to('oklch').c
-    color.set('oklch.l', lightness)
-    color.set('oklch.c', chroma)
-    colors.push(color.toString({ format: 'hex' }))
+    // Clone the base color for each step to avoid mutation issues
+    for (let i = 0; i < steps; i++) {
+      try {
+        const lightness = lightnessValues[i]
+        // Create a new color instance for each step to avoid mutation issues
+        const color = new Color(base.toString({ format: 'hex' }))
+        // Convert to OKLCH to get the chroma value
+        const oklchColor = color.to('oklch')
+        // Calculate new chroma based on gaussian function
+        const chroma = gaussian(lightness, mean, stdDev) * oklchColor.c
+        // Apply new lightness and chroma values
+        color.set('oklch.l', lightness)
+        color.set('oklch.c', chroma)
+        // Add to colors array as hex string
+        colors.push(color.toString({ format: 'hex' }))
+      } catch (error) {
+        console.error(`Error generating color for step ${i}:`, error)
+        // Fallback to a default color if there's an error
+        colors.push('#808080') // Default to gray if there's an error
+      }
+    }
+
+    // Add the base color
+    const newBaseColor = new Color(baseColor)
+    colors.push(newBaseColor.toString({ format: 'hex' }))
+
+    // Generate hover and active colors
+    try {
+      const solidHover = generateNextSolidColor({
+        baseColor,
+        colorScheme,
+        amount: 0.15,
+      })
+      const solidActive = generateNextSolidColor({
+        baseColor,
+        colorScheme,
+        amount: 0.25,
+      })
+
+      colors.push(solidHover)
+      colors.push(solidActive)
+    } catch (error) {
+      console.error('Error generating hover/active colors:', error)
+      // Add fallbacks
+      colors.push(baseColor)
+      colors.push(baseColor)
+    }
+
+    return colors
+  } catch (error) {
+    console.error('Error in generateColorScale:', error)
+    // Return a default color scale if there's an error with the base color
+    return Array(lightnessValues.length + 3).fill('#808080')
   }
-
-  // Set lightness to 0.62 for base color in dark mode to ensure contrast against background and text
-  const newBaseColor = new Color(baseColor)
-  // if (colorScheme === 'dark') {
-  //   newBaseColor.set('oklch.l', 0.62)
-  // }
-
-  colors.push(newBaseColor.toString({ format: 'hex' }))
-
-  const solidHover = generateNextSolidColor({
-    baseColor,
-    colorScheme,
-    amount: 0.15,
-  })
-  const solidActive = generateNextSolidColor({
-    baseColor,
-    colorScheme,
-    amount: 0.25,
-  })
-
-  colors.push(solidHover)
-  colors.push(solidActive)
-
-  return colors
 }
 
 /**
@@ -178,37 +209,69 @@ export function checkContrast(
   background: string | Color,
   method: ContrastMethod,
 ): ContrastResult {
-  const fg = typeof foreground === 'string' ? new Color(foreground) : foreground
-  const bg = typeof background === 'string' ? new Color(background) : background
+  try {
+    const fg =
+      typeof foreground === 'string' ? new Color(foreground) : foreground
+    const bg =
+      typeof background === 'string' ? new Color(background) : background
 
-  const contrastValue = fg.contrast(bg, method)
-  const thresholds = getThresholds(method)
-  const contrast = method === 'APCA' ? Math.abs(contrastValue) : contrastValue
+    const contrastValue = fg.contrast(bg, method)
+    const thresholds = getThresholds(method)
+    const contrast = method === 'APCA' ? Math.abs(contrastValue) : contrastValue
 
-  return {
-    contrastValue:
-      method === 'APCA' ? contrast.toFixed(0) : contrast.toFixed(1),
-    fluentText: {
-      preferred: contrast >= thresholds.fluentText.preferred,
-      minimum: contrast >= thresholds.fluentText.minimum,
-      threshold: thresholds.fluentText,
-    },
-    contentText: {
-      preferred: contrast >= thresholds.bodyText.preferred,
-      minimum: contrast >= thresholds.bodyText.minimum,
-      threshold: thresholds.bodyText,
-    },
-    headlines: {
-      minimum: contrast >= thresholds.headlines.minimum,
-      threshold: thresholds.headlines,
-    },
-    spotReadable: {
-      minimum: contrast >= thresholds.spotReadable.minimum,
-      threshold: thresholds.spotReadable,
-    },
-    nonText: {
-      minimum: contrast >= thresholds.nonText.minimum,
-      threshold: thresholds.nonText,
-    },
+    return {
+      contrastValue:
+        method === 'APCA' ? contrast.toFixed(0) : contrast.toFixed(1),
+      fluentText: {
+        preferred: contrast >= thresholds.fluentText.preferred,
+        minimum: contrast >= thresholds.fluentText.minimum,
+        threshold: thresholds.fluentText,
+      },
+      contentText: {
+        preferred: contrast >= thresholds.bodyText.preferred,
+        minimum: contrast >= thresholds.bodyText.minimum,
+        threshold: thresholds.bodyText,
+      },
+      headlines: {
+        minimum: contrast >= thresholds.headlines.minimum,
+        threshold: thresholds.headlines,
+      },
+      spotReadable: {
+        minimum: contrast >= thresholds.spotReadable.minimum,
+        threshold: thresholds.spotReadable,
+      },
+      nonText: {
+        minimum: contrast >= thresholds.nonText.minimum,
+        threshold: thresholds.nonText,
+      },
+    }
+  } catch (error) {
+    console.error('Error in checkContrast:', error)
+    // Return default values in case of error
+    return {
+      contrastValue: '0',
+      fluentText: {
+        preferred: false,
+        minimum: false,
+        threshold: getThresholds(method).fluentText,
+      },
+      contentText: {
+        preferred: false,
+        minimum: false,
+        threshold: getThresholds(method).bodyText,
+      },
+      headlines: {
+        minimum: false,
+        threshold: getThresholds(method).headlines,
+      },
+      spotReadable: {
+        minimum: false,
+        threshold: getThresholds(method).spotReadable,
+      },
+      nonText: {
+        minimum: false,
+        threshold: getThresholds(method).nonText,
+      },
+    }
   }
 }
