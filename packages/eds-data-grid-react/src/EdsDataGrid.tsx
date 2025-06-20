@@ -38,7 +38,8 @@ import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableFooterRow } from './components/TableFooterRow'
 import { TableRow } from './components/TableRow'
 import {
-  addPxSuffixIfInputHasNoPrefix, isFirefox,
+  addPxSuffixIfInputHasNoPrefix,
+  isFirefox,
   logDevelopmentWarningOfPropUse,
 } from './utils'
 import { mergeRefs } from '@equinor/eds-utils'
