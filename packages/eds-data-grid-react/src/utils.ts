@@ -43,3 +43,10 @@ export function logDevelopmentWarningOfPropUse(
     }
   }
 }
+
+export const isFirefox = () => {
+  return (
+    typeof window !== 'undefined' &&
+    navigator.userAgent.indexOf('Firefox') !== -1
+  )
+}

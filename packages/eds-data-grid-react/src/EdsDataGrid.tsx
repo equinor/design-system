@@ -38,7 +38,7 @@ import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableFooterRow } from './components/TableFooterRow'
 import { TableRow } from './components/TableRow'
 import {
-  addPxSuffixIfInputHasNoPrefix,
+  addPxSuffixIfInputHasNoPrefix, isFirefox,
   logDevelopmentWarningOfPropUse,
 } from './utils'
 import { mergeRefs } from '@equinor/eds-utils'
@@ -387,11 +387,9 @@ function EdsDataGridInner<T>(
     getScrollElement: () => parentRef.current,
     estimateSize,
     //measure dynamic row height, except in firefox because it measures table border height incorrectly
-    measureElement:
-      typeof window !== 'undefined' &&
-      navigator.userAgent.indexOf('Firefox') === -1
-        ? (element) => element?.getBoundingClientRect().height
-        : undefined,
+    measureElement: isFirefox()
+      ? undefined
+      : (element) => element?.getBoundingClientRect().height,
   })
   if (rowVirtualizerInstanceRef) rowVirtualizerInstanceRef.current = virtualizer
 
