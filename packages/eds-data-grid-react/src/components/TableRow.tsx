@@ -28,7 +28,7 @@ export function TableRow<T>({
   return (
     <StyledTableRow
       data-index={virtualItem?.index}
-      ref={(node) => rowVirtualizer && rowVirtualizer.measureElement(node)} //measure dynamic row height
+      ref={(node) => node && rowVirtualizer?.measureElement(node)} //measure dynamic row height
       style={{
         ...(rowStyle?.(row) ?? {}),
       }}
