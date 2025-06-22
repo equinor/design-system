@@ -59,7 +59,7 @@ While the design system itself lives in [Figma][], this repository contains impl
 Would you like to contribute? Awesome! 👏
 
 We use a fork and pull-request workflow, so start with forking the repository on Github, then either open it in Gitpod or clone your fork locally.  
-Checkout Github docs on [how to work with forks](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks)
+Check out Github docs on [how to work with forks](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks)
 
 ### Use [Gitpod](https://www.gitpod.io/) and develop in the browser
 
