@@ -28,7 +28,7 @@ jobs:
         with:
           repository: 'equinor/design-system-cdn'
           ref: main
-          ssh-key: ${{ secrets.CDN_REPO_PRIVATE_KEY }}
+          ssh-key: ${{ secrets.TEST_GITHUB_CDN_ACCESS }}
       - name: Az CLI login 🔑 # Using federated credential
         uses: azure/login@v1
         with:
