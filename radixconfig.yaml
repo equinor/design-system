@@ -1,0 +1,18 @@
+apiVersion: radix.equinor.com/v1
+kind: RadixApplication
+metadata:
+  name: eds-colour-palette-generator
+spec:
+  build:
+    useBuildKit: false
+  environments:
+    - name: prod
+  components:
+    - name: web
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
+  dnsAppAlias:
+    environment: prod
+    component: web
