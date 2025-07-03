@@ -9,6 +9,7 @@ spec:
     - name: prod
   components:
     - name: web
+      src: ./packages/eds-color-palette-generator
       publicPort: http
       ports:
         - name: http
