@@ -7,7 +7,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t equinor/color-palette-generator .",
+    "docker:run": "docker run -p 3000:3000 equinor/color-palette-generator"
   },
   "dependencies": {
     "colorjs.io": "^0.5.2",
