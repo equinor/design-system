@@ -10,6 +10,9 @@ spec:
     - name: prod
       build:
         from: feat/thalse-3847-finalise-color-generator
+    - name: dev
+      build:
+        from: feat/thalse-3847-finalise-color-generator
   components:
     - name: web
       src: ./packages/eds-color-palette-generator

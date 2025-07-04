@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test'
+import 'dotenv/config'
 
 test('should change color name and hex', async ({ page }) => {
-  await page.goto('http://localhost:3000/')
+  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
   await page.getByTestId('config-button').click()
   await page.getByTestId('color-name-input-0').click()
   await page.getByTestId('color-name-input-0').fill('brand')
