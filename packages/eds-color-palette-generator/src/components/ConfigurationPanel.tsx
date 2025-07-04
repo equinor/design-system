@@ -6,8 +6,8 @@ import {
 } from '@/utils/configurationUtils'
 
 type ConfigurationPanelProps = {
-  customLightModeValues: number[]
-  customDarkModeValues: number[]
+  lightModeValues: number[]
+  darkModeValues: number[]
   mean: number
   stdDev: number
   colors: ColorDefinition[]
@@ -15,8 +15,8 @@ type ConfigurationPanelProps = {
 }
 
 export const ConfigurationPanel = ({
-  customLightModeValues,
-  customDarkModeValues,
+  lightModeValues,
+  darkModeValues,
   mean,
   stdDev,
   colors,
@@ -29,8 +29,8 @@ export const ConfigurationPanel = ({
         <button
           onClick={() =>
             downloadConfiguration(
-              customLightModeValues,
-              customDarkModeValues,
+              lightModeValues,
+              darkModeValues,
               mean,
               stdDev,
               colors,
@@ -104,8 +104,8 @@ export const ConfigurationPanel = ({
           onClick={() =>
             downloadColorTokens(
               colors,
-              customLightModeValues,
-              customDarkModeValues,
+              lightModeValues,
+              darkModeValues,
               mean,
               stdDev,
             )

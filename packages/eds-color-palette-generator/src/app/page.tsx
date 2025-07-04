@@ -23,40 +23,64 @@ export default function App() {
   const [showConfigPanel, setShowConfigPanel] = useState(false)
   const [contrastMethod, setContrastMethod] = useState<ContrastMethod>('APCA')
 
-  // Add state for custom lightness values
-  const [customLightModeValues, setCustomLightModeValues] = useState<number[]>(
+  // Add state for lightness values
+  const [lightModeValues, setLightModeValues] = useState<number[]>(
     config.lightModeValues,
   )
-  const [customDarkModeValues, setCustomDarkModeValues] = useState<number[]>(
+  const [darkModeValues, setDarkModeValues] = useState<number[]>(
     config.darkModeValues,
   )
 
   // Define colors in an array for easier management
   const [colors, setColors] = useState<ColorDefinition[]>(config.colors)
 
+  const updateColorName = (index: number, newName: string) => {
+    setColors(
+      colors.map((color, i) =>
+        i === index ? { ...color, name: newName } : color,
+      ),
+    )
+  }
+
+  const updateColorHue = (index: number, newHue: string) => {
+    setColors(
+      colors.map((color, i) =>
+        i === index ? { ...color, hue: newHue } : color,
+      ),
+    )
+  }
+
+  const removeColor = (index: number) => {
+    setColors(colors.filter((_, i) => i !== index))
+  }
+
+  const addColor = (newColor: ColorDefinition) => {
+    setColors([...colors, newColor])
+  }
+
   // Update a specific lightness value
   const updateLightnessValue = (index: number, value: number) => {
     if (colorScheme === 'light') {
-      const newValues = [...customLightModeValues]
+      const newValues = [...lightModeValues]
       newValues[index] = value
-      setCustomLightModeValues(newValues)
+      setLightModeValues(newValues)
     } else {
-      const newValues = [...customDarkModeValues]
+      const newValues = [...darkModeValues]
       newValues[index] = value
-      setCustomDarkModeValues(newValues)
+      setDarkModeValues(newValues)
     }
   }
 
   // Reset lightness values to defaults
   const resetLightnessValues = () => {
-    setCustomLightModeValues(config.lightModeValues)
-    setCustomDarkModeValues(config.darkModeValues)
+    setLightModeValues(config.lightModeValues)
+    setDarkModeValues(config.darkModeValues)
   }
 
   // Handle configuration upload
   const handleConfigUpload = (config: ConfigFile) => {
-    setCustomLightModeValues(config.lightModeValues)
-    setCustomDarkModeValues(config.darkModeValues)
+    setLightModeValues(config.lightModeValues)
+    setDarkModeValues(config.darkModeValues)
     setMean(config.mean)
     setStdDev(config.stdDev)
     if (config.colors) {
@@ -69,7 +93,7 @@ export default function App() {
     ...color,
     scale: generateColorScale(
       color.hue,
-      colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
+      colorScheme === 'light' ? lightModeValues : darkModeValues,
       mean,
       stdDev,
       colorScheme,
@@ -90,11 +114,17 @@ export default function App() {
       {showConfigPanel && (
         <div className="max-w-3xl p-6 mx-auto mb-12 ">
           {/* Color management component */}
-          <ColorManagement colors={colors} setColors={setColors} />
+          <ColorManagement
+            colors={colors}
+            onUpdateColorName={updateColorName}
+            onUpdateColorHue={updateColorHue}
+            onRemoveColor={removeColor}
+            onAddColor={addColor}
+          />
           {/* Configuration Import/Export Section */}
           <ConfigurationPanel
-            customLightModeValues={customLightModeValues}
-            customDarkModeValues={customDarkModeValues}
+            lightModeValues={lightModeValues}
+            darkModeValues={darkModeValues}
             mean={mean}
             stdDev={stdDev}
             colors={colors}
@@ -129,8 +159,8 @@ export default function App() {
         {showLightnessInputs && (
           <LightnessValueInputs
             colorScheme={colorScheme}
-            customLightModeValues={customLightModeValues}
-            customDarkModeValues={customDarkModeValues}
+            lightModeValues={lightModeValues}
+            darkModeValues={darkModeValues}
             updateLightnessValue={updateLightnessValue}
           />
         )}
