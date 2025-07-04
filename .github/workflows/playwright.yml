@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      PLAYWRIGHT_URL: https://eds-colour-palette-generator.app.radix.equinor.com/
+      PLAYWRIGHT_URL: https://web-eds-colour-palette-generator-dev.radix.equinor.com/
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
