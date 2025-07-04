@@ -182,6 +182,9 @@ export function ColorScale({
 
           return (
             <div
+              data-testid={
+                colorName ? `color-step-${colorName}-${i}` : `color-step-${i}`
+              }
               key={'color-step-' + i}
               ref={(el) => {
                 colorElementRefs.current[i] = el

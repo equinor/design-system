@@ -41,6 +41,7 @@ export const ColorManagement = ({
                   className="w-full p-2 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
                   value={color.name}
                   onChange={(e) => onUpdateColorName(index, e.target.value)}
+                  data-testid={`color-name-input-${index}`}
                 />
               </div>
 
@@ -51,6 +52,7 @@ export const ColorManagement = ({
                   className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
                   value={color.hex}
                   onChange={(e) => onUpdateColorHex(index, e.target.value)}
+                  data-testid={`color-hex-input-${index}`}
                 />
               </div>
 
@@ -60,6 +62,7 @@ export const ColorManagement = ({
                   className="px-3 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-700"
                   onClick={() => onRemoveColor(index)}
                   disabled={colors.length <= 1}
+                  data-testid={`remove-color-button-${index}`}
                 >
                   Remove
                 </button>
@@ -83,6 +86,7 @@ export const ColorManagement = ({
                 hex: randomColor,
               })
             }}
+            data-testid="add-color-button"
           >
             Add New Color
           </button>
