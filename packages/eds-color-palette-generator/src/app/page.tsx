@@ -42,10 +42,10 @@ export default function App() {
     )
   }
 
-  const updateColorHue = (index: number, newHue: string) => {
+  const updateColorHex = (index: number, newHex: string) => {
     setColors(
       colors.map((color, i) =>
-        i === index ? { ...color, hue: newHue } : color,
+        i === index ? { ...color, hex: newHex } : color,
       ),
     )
   }
@@ -92,7 +92,7 @@ export default function App() {
   const colorScales = colors.map((color) => ({
     ...color,
     scale: generateColorScale(
-      color.hue,
+      color.hex,
       colorScheme === 'light' ? lightModeValues : darkModeValues,
       mean,
       stdDev,
@@ -117,7 +117,7 @@ export default function App() {
           <ColorManagement
             colors={colors}
             onUpdateColorName={updateColorName}
-            onUpdateColorHue={updateColorHue}
+            onUpdateColorHex={updateColorHex}
             onRemoveColor={removeColor}
             onAddColor={addColor}
           />

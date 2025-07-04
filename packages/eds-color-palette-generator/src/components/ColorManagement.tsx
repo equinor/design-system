@@ -3,7 +3,7 @@ import { ColorDefinition } from '@/types'
 type ColorManagementProps = {
   colors: ColorDefinition[]
   onUpdateColorName: (index: number, newName: string) => void
-  onUpdateColorHue: (index: number, newHue: string) => void
+  onUpdateColorHex: (index: number, newHex: string) => void
   onRemoveColor: (index: number) => void
   onAddColor: (newColor: ColorDefinition) => void
 }
@@ -11,7 +11,7 @@ type ColorManagementProps = {
 export const ColorManagement = ({
   colors,
   onUpdateColorName,
-  onUpdateColorHue,
+  onUpdateColorHex,
   onRemoveColor,
   onAddColor,
 }: ColorManagementProps) => {
@@ -49,8 +49,8 @@ export const ColorManagement = ({
                 <input
                   type="color"
                   className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
-                  value={color.hue}
-                  onChange={(e) => onUpdateColorHue(index, e.target.value)}
+                  value={color.hex}
+                  onChange={(e) => onUpdateColorHex(index, e.target.value)}
                 />
               </div>
 
@@ -80,7 +80,7 @@ export const ColorManagement = ({
                   .padStart(6, '0')
               onAddColor({
                 name: `color-${colors.length + 1}`,
-                hue: randomColor,
+                hex: randomColor,
               })
             }}
           >

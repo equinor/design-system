@@ -27,16 +27,6 @@ export const DisplayOptionsPanel = ({
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
-            checked={showContrast}
-            onChange={(e) => setShowContrast(e.target.checked)}
-            className="accent-current"
-          />
-          <span>Show contrast information</span>
-        </label>
-
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
             checked={showLightnessInputs}
             onChange={(e) => setShowLightnessInputs(e.target.checked)}
             className="accent-current"
@@ -45,9 +35,18 @@ export const DisplayOptionsPanel = ({
         </label>
       </div>
 
+      <label className="flex items-center gap-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={showContrast}
+          onChange={(e) => setShowContrast(e.target.checked)}
+          className="accent-current"
+        />
+        <span>Show contrast information</span>
+      </label>
       {showContrast && (
         <div className="mt-3 pl-6">
-          <p className="mb-2 text-sm">Contrast calculation method:</p>
+          <p className="mb-2 text-sm">Contrast calculation method</p>
           <div className="flex gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
               <input

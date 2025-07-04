@@ -76,7 +76,7 @@ export const ConfigurationPanel = ({
                     !config.colors.every(
                       (color: ColorDefinition) =>
                         typeof color.name === 'string' &&
-                        typeof color.hue === 'string',
+                        typeof color.hex === 'string',
                     )
                   ) {
                     alert('Invalid colors field in configuration file')

@@ -8,27 +8,27 @@
   "colors": [
     {
       "name": "accent",
-      "hue": "#007079"
+      "hex": "#007079"
     },
     {
       "name": "neutral",
-      "hue": "#4A4A4A"
+      "hex": "#4A4A4A"
     },
     {
       "name": "success",
-      "hue": "#3FA13D"
+      "hex": "#3FA13D"
     },
     {
       "name": "info",
-      "hue": "#0084C4"
+      "hex": "#0084C4"
     },
     {
       "name": "warning",
-      "hue": "#E57E00"
+      "hex": "#E57E00"
     },
     {
       "name": "danger",
-      "hue": "#E20337"
+      "hex": "#E20337"
     }
   ]
 }

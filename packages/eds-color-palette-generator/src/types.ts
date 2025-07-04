@@ -2,7 +2,7 @@ export type ColorValue = string
 
 export type ColorDefinition = {
   name: string
-  hue: string
+  hex: string
 }
 
 export type ConfigFile = {
