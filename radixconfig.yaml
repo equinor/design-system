@@ -9,10 +9,10 @@ spec:
   environments:
     - name: prod
       build:
-        from: feat/thalse-3847-finalise-color-generator
+        from: develop
     - name: dev
       build:
-        from: feat/thalse-3847-finalise-color-generator
+        from: feature/*, feature-*, feat/*, feat-*, refactor/*, refactor-*, hotfix/*, hotfix-*, bugfix/*, bugfix-*, chore/*, chore-*, task/*, task-*
   components:
     - name: web
       src: ./packages/eds-color-palette-generator
