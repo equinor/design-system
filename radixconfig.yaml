@@ -4,7 +4,8 @@ metadata:
   name: eds-colour-palette-generator
 spec:
   build:
-    useBuildKit: false
+    useBuildKit: true
+    useBuildCache: true
   environments:
     - name: prod
       build:
