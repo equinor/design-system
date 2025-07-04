@@ -3,7 +3,6 @@
 import { generateColorScale } from '../utils/color'
 import { useState } from 'react'
 import { ColorScale } from '@/components/ColorScale'
-import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
 import { ColorManagement } from '@/components/ColorManagement'
@@ -13,10 +12,11 @@ import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
+import config from '@/config/config.json'
 
 export default function App() {
-  const [mean, setMean] = useState(0.6)
-  const [stdDev, setStdDev] = useState(2)
+  const [mean, setMean] = useState(config.mean)
+  const [stdDev, setStdDev] = useState(config.stdDev)
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(false)
   const [showLightnessInputs, setShowLightnessInputs] = useState(false)
@@ -25,21 +25,14 @@ export default function App() {
 
   // Add state for custom lightness values
   const [customLightModeValues, setCustomLightModeValues] = useState<number[]>(
-    lightnessValuesInLightMode,
+    config.lightModeValues,
   )
   const [customDarkModeValues, setCustomDarkModeValues] = useState<number[]>(
-    lightnessValuesInDarkMode,
+    config.darkModeValues,
   )
 
   // Define colors in an array for easier management
-  const [colors, setColors] = useState<ColorDefinition[]>([
-    { name: 'accent', hue: '#007079' },
-    { name: 'neutral', hue: '#4A4A4A' },
-    { name: 'success', hue: '#3FA13D' },
-    { name: 'info', hue: '#0084C4' },
-    { name: 'warning', hue: '#E57E00' },
-    { name: 'danger', hue: '#E20337' },
-  ])
+  const [colors, setColors] = useState<ColorDefinition[]>(config.colors)
 
   // Update a specific lightness value
   const updateLightnessValue = (index: number, value: number) => {
@@ -56,8 +49,8 @@ export default function App() {
 
   // Reset lightness values to defaults
   const resetLightnessValues = () => {
-    setCustomLightModeValues(lightnessValuesInLightMode)
-    setCustomDarkModeValues(lightnessValuesInDarkMode)
+    setCustomLightModeValues(config.lightModeValues)
+    setCustomDarkModeValues(config.darkModeValues)
   }
 
   // Handle configuration upload
