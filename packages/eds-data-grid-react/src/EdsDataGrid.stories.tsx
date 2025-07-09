@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   Checkbox,
   Divider,
   EdsProvider,
@@ -40,6 +41,7 @@ import {
 import { data, summaryData } from './stories/data'
 import { Virtualizer } from './types'
 import { external_link } from '@equinor/eds-icons'
+import { ClickableCell } from './components/ClickableCell'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -298,6 +300,128 @@ export const RowSelection: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 RowSelection.args = {
   columnResizeMode: 'onChange',
 } satisfies Partial<EdsDataGridProps<Photo>>
+
+export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const [clickedCell, setClickedCell] = useState<string | null>(null)
+
+  const clickableColumns = [
+    helper.accessor('id', {
+      header: 'ID',
+      cell: ({ getValue }) => (
+        <ClickableCell
+          onClick={() => setClickedCell(`ID: ${getValue()}`)}
+          ariaLabel={`View details for ID ${getValue()}`}
+        >
+          {getValue()}
+        </ClickableCell>
+      ),
+      id: 'id',
+      size: 100,
+    }),
+    helper.accessor('title', {
+      header: 'Title',
+      cell: ({ getValue }) => (
+        <ClickableCell
+          onClick={() => setClickedCell(`Title: ${getValue()}`)}
+          ariaLabel={`Open ${getValue()}`}
+          // variant="subtle"
+        >
+          {getValue()}
+        </ClickableCell>
+      ),
+      id: 'title',
+      size: 300,
+    }),
+    helper.accessor('url', {
+      header: 'URL',
+      cell: ({ getValue }) => (
+        <ClickableCell
+          onClick={() => window.open(getValue(), '_blank')}
+          ariaLabel={`Open link ${getValue()}`}
+          // variant="ghost"
+        >
+          Open Link
+        </ClickableCell>
+      ),
+      id: 'url',
+      size: 150,
+    }),
+    // Regular columns
+    ...columns.slice(2, 4),
+  ]
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Card style={{ padding: '16px', backgroundColor: '#f8f9fa' }}>
+        <Typography variant="h6">🖱️ Clickable Cells Demo</Typography>
+        <Typography variant="body_short">
+          Click cells in the first three columns to see different interaction
+          patterns. Each variant shows different hover and focus behaviors.
+        </Typography>
+      </Card>
+
+      {clickedCell && (
+        <Card style={{ padding: '16px', backgroundColor: '#e3f2fd' }}>
+          <Typography variant="body_short">
+            <strong>Last clicked:</strong> {clickedCell}
+          </Typography>
+          <Button
+            variant="ghost"
+            onClick={() => setClickedCell(null)}
+            style={{ marginTop: '8px' }}
+          >
+            Clear
+          </Button>
+        </Card>
+      )}
+
+      <EdsDataGrid {...args} columns={clickableColumns} />
+    </div>
+  )
+}
+
+ClickableCells.args = {
+  ...Introduction.args,
+}
+
+ClickableCells.parameters = {
+  docs: {
+    description: {
+      story: `
+This example demonstrates the \`ClickableCell\` component for creating accessible, interactive table cells.
+
+**Features:**
+- **Accessibility first**: Proper button semantics, keyboard navigation, screen reader support
+- **Visual variants**: \`default\`, \`subtle\`, and \`ghost\` for different interaction styles
+- **EDS design tokens**: Consistent with EDS theming and density modes
+- **Flexible styling**: Hover effects, focus states, and responsive design
+
+**Usage Pattern:**
+\`\`\`typescript
+{
+  cell: ({ getValue }) => (
+    <ClickableCell
+      onClick={() => doSomething()}
+      ariaLabel="Descriptive action label"
+      variant="default"
+    >
+      {getValue()}
+    </ClickableCell>
+  )
+}
+\`\`\`
+
+**When to use:**
+- Navigation to detail views
+- Quick actions (edit, copy, share)
+- External links
+- Modal triggers
+
+Always provide descriptive \`ariaLabel\` props for accessibility!
+      `,
+    },
+  },
+}
 
 const SimpleMenu = ({
   text,
