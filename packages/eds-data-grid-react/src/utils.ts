@@ -43,3 +43,16 @@ export function logDevelopmentWarningOfPropUse(
     }
   }
 }
+
+export const isFirefox = () => {
+  return (
+    typeof window !== 'undefined' &&
+    navigator.userAgent.indexOf('Firefox') !== -1
+  )
+}
+
+export const getMeasureElementHandler = () => {
+  return isFirefox()
+    ? undefined
+    : (element: HTMLTableRowElement) => element?.getBoundingClientRect().height
+}

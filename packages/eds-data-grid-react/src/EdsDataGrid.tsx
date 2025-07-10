@@ -39,6 +39,7 @@ import { TableFooterRow } from './components/TableFooterRow'
 import { TableRow } from './components/TableRow'
 import {
   addPxSuffixIfInputHasNoPrefix,
+  getMeasureElementHandler,
   logDevelopmentWarningOfPropUse,
 } from './utils'
 import { mergeRefs } from '@equinor/eds-utils'
@@ -382,10 +383,12 @@ function EdsDataGridInner<T>(
     return density === 'compact' ? 32 : 48
   }, [density])
 
-  const virtualizer = useVirtualizer({
+  const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: table.getRowModel().rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize,
+    //measure dynamic row height, except in firefox because it measures table border height incorrectly
+    measureElement: getMeasureElementHandler(),
   })
   if (rowVirtualizerInstanceRef) rowVirtualizerInstanceRef.current = virtualizer
 
@@ -489,6 +492,8 @@ function EdsDataGridInner<T>(
                   const row = table.getRowModel().rows[virtualItem.index]
                   return (
                     <TableRow
+                      virtualItem={virtualItem}
+                      rowVirtualizer={virtualizer}
                       key={virtualItem.index}
                       row={row}
                       onContextMenu={

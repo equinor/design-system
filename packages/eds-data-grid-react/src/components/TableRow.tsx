@@ -5,10 +5,13 @@ import styled from 'styled-components'
 import { useTableContext } from '../EdsDataGridContext'
 import { EdsDataGridProps } from '../EdsDataGridProps'
 import { TableBodyCell } from './TableBodyCell'
+import { VirtualItem, Virtualizer } from '@tanstack/react-virtual'
 
 type Props<T> = {
   row: Row<T>
   onCellClick?: EdsDataGridProps<T>['onCellClick']
+  rowVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableRowElement>
+  virtualItem?: VirtualItem
 } & HTMLAttributes<HTMLTableRowElement>
 
 export function TableRow<T>({
@@ -17,11 +20,15 @@ export function TableRow<T>({
   onClick,
   onDoubleClick,
   onContextMenu,
+  rowVirtualizer,
+  virtualItem,
 }: Props<T>) {
   const { rowClass, rowStyle } = useTableContext()
 
   return (
     <StyledTableRow
+      data-index={virtualItem?.index}
+      ref={(node) => node && rowVirtualizer?.measureElement(node)} //measure dynamic row height
       style={{
         ...(rowStyle?.(row) ?? {}),
       }}
