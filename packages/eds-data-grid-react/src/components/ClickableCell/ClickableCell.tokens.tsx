@@ -14,6 +14,7 @@ const {
       focus: { rgba: focusColor },
     },
   },
+  interactions: { focused: outline },
 } = tokens
 
 export type ClickableCellToken = ComponentToken
@@ -30,17 +31,41 @@ export const clickableCell: ClickableCellToken = {
     vertical: 'inherit',
     horizontal: 'inherit',
   },
+  //  states: {
+  //   hover: {
+  //     border: {
+  //       type: 'border',
+  //       width: '1px',
+  //       color: 'transparent',
+  //       style: 'solid',
+  //     },
+  //   },
+  //   focus: {
+  //     outline: {
+  //       type: 'outline',
+  //       offset: '3px',
+  //       style: 'dashed',
+  //       color: outline.color,
+  //       width: outline.width,
+  //     },
+  //   },
   states: {
     hover: {
-      background: hoverBackgroundColor,
+      outline: {
+        type: 'outline',
+        offset: '-1px',
+        style: 'dashed',
+        color: outline.color,
+        width: outline.width,
+      },
     },
     focus: {
       outline: {
         type: 'outline',
-        color: focusColor,
-        width: '2px',
-        style: 'solid',
-        offset: '-2px',
+        offset: '-1px',
+        style: 'dashed',
+        color: outline.color,
+        width: outline.width,
       },
     },
   },
