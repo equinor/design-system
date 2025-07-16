@@ -10,6 +10,7 @@ import {
   RefAttributes,
   cloneElement,
   Children as ReactChildren,
+  isValidElement,
 } from 'react'
 import styled from 'styled-components'
 import { mergeRefs } from '@equinor/eds-utils'
@@ -96,22 +97,25 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     [arrowNavigating, tabsFocused],
   )
 
-  const Tabs = ReactChildren.map(
-    children,
-    (child: TabChild, $index: number) => {
-      const childProps = child.props as TabChild
+  const Tabs =
+    ReactChildren.map(children, (child, $index) => {
+      if (!isValidElement(child)) {
+        return null
+      }
+      const tabChild = child as TabChild
+      const childProps = tabChild.props as TabChild
       const controlledActive = childProps.value
       const isActive = controlledActive
         ? controlledActive === activeTab
         : $index === activeTab
 
       const tabRef = isActive
-        ? mergeRefs<HTMLButtonElement>(child.ref, selectedTabRef)
-        : child.ref
+        ? mergeRefs<HTMLButtonElement>(tabChild.ref, selectedTabRef)
+        : tabChild.ref
 
       if (isActive) currentTab.current = $index
 
-      return cloneElement(child, {
+      return cloneElement(tabChild, {
         id: `${tabsId}-tab-${$index + 1}`,
         'aria-controls': `${tabsId}-panel-${$index + 1}`,
         active: isActive,
@@ -119,8 +123,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
         onClick: () => handleChange($index),
         ref: tabRef,
       })
-    },
-  )
+    }) ?? []
 
   const focusableChildren: number[] = Tabs.filter((child: TabChild) => {
     const childProps = child.props as TabChild

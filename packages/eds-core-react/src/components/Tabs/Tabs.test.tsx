@@ -175,4 +175,34 @@ describe('Tabs', () => {
     expect(screen.getByTestId(tablist)).toBeDefined()
     expect(screen.getByTestId(tabpanels)).toBeDefined()
   })
+  it("Doesn't crash if null-child is provided to Tabs.List or Tabs.Panels", () => {
+    const tablist = 'tablist'
+    const tabpanels = 'tabpanels'
+    render(
+      <Tabs>
+        <Tabs.List data-testid={tablist}>
+          <Tabs.Tab>First</Tabs.Tab>
+          {null}
+        </Tabs.List>
+        <Tabs.Panels data-testid={tabpanels}>
+          <Tabs.Panel>Second</Tabs.Panel>
+          {null}
+        </Tabs.Panels>
+      </Tabs>,
+    )
+    expect(screen.getByTestId(tablist)).toBeDefined()
+    expect(screen.getByTestId(tabpanels)).toBeDefined()
+  })
+  it("Doesn't crash if only null-child is provided to Tabs.List or Tabs.Panels", () => {
+    const tablist = 'tablist'
+    const tabpanels = 'tabpanels'
+    render(
+      <Tabs>
+        <Tabs.List data-testid={tablist}>{null}</Tabs.List>
+        <Tabs.Panels data-testid={tabpanels}>{null}</Tabs.Panels>
+      </Tabs>,
+    )
+    expect(screen.getByTestId(tablist)).toBeDefined()
+    expect(screen.getByTestId(tabpanels)).toBeDefined()
+  })
 })

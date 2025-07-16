@@ -5,6 +5,7 @@ import {
   HTMLAttributes,
   cloneElement,
   Children as ReactChildren,
+  isValidElement,
 } from 'react'
 import { TabsContext } from './Tabs.context'
 
@@ -18,9 +19,10 @@ const TabPanels = forwardRef<HTMLDivElement, TabPanelsProps>(function TabPanels(
 ) {
   const { activeTab, tabsId } = useContext(TabsContext)
 
-  const Panels = ReactChildren.map(children, (child: ReactElement, $index) => {
-    if (conditionalRender && activeTab !== $index) return null
-    return cloneElement(child, {
+  const Panels = ReactChildren.map(children, (child, $index) => {
+    if (!isValidElement(child) || (conditionalRender && activeTab !== $index))
+      return null
+    return cloneElement(child as ReactElement, {
       id: `${tabsId}-panel-${$index + 1}`,
       'aria-labelledby': `${tabsId}-tab-${$index + 1}`,
       hidden: activeTab !== $index,
