@@ -1,12 +1,6 @@
 import React, { ButtonHTMLAttributes, useState } from 'react'
 import styled, { css } from 'styled-components'
-import {
-  bordersTemplate,
-  outlineTemplate,
-  // spacingsTemplate,
-  // useToken,
-  // OverridableComponent,
-} from '@equinor/eds-utils'
+import { bordersTemplate, outlineTemplate } from '@equinor/eds-utils'
 import { clickableCell, type ClickableCellToken } from './ClickableCell.tokens'
 
 export type ClickableCellProps = {
@@ -57,10 +51,8 @@ const StyledButton = styled.button<StyledButtonProps>(
 
       ${bordersTemplate($token.border)}
 
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          background: ${$isSelected ? active?.background : hover?.background};
-        }
+      &:hover {
+        background: ${$isSelected ? active?.background : hover?.background};
       }
 
       &:focus {
@@ -78,20 +70,16 @@ const StyledButton = styled.button<StyledButtonProps>(
 
       &:active {
         background: ${active?.background};
-        outline: ${focus?.outline?.width} solid ${focus?.outline?.color};
-        outline-offset: ${focus?.outline?.offset || 0};
       }
 
       &:focus:active {
         background: ${active?.background};
-        outline: ${focus?.outline?.width} solid ${focus?.outline?.color};
-        outline-offset: ${focus?.outline?.offset || 0};
       }
 
       ${$isSelected &&
       css`
-        outline: ${focus?.outline?.width} solid ${focus?.outline?.color};
-        outline-offset: ${focus?.outline?.offset || 0};
+        background: ${active?.background};
+        ${outlineTemplate(focus?.outline)}
       `}
     `
   },
@@ -101,7 +89,7 @@ const CellWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 0; /* Remove padding from wrapper */
+  padding: 0;
 `
 
 export function ClickableCell({
@@ -126,8 +114,8 @@ export function ClickableCell({
   }
 
   const handleBlur = () => {
-    // Reset selection when button loses focus
-    setIsSelected(false)
+    // Reset selection when button loses focus, but keep for a short time to see the effect
+    setTimeout(() => setIsSelected(false), 150)
   }
 
   return (

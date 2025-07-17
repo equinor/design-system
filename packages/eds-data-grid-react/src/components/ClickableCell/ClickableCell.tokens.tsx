@@ -31,26 +31,9 @@ export const clickableCell: ClickableCellToken = {
     vertical: 'inherit',
     horizontal: 'inherit',
   },
-  //  states: {
-  //   hover: {
-  //     border: {
-  //       type: 'border',
-  //       width: '1px',
-  //       color: 'transparent',
-  //       style: 'solid',
-  //     },
-  //   },
-  //   focus: {
-  //     outline: {
-  //       type: 'outline',
-  //       offset: '3px',
-  //       style: 'dashed',
-  //       color: outline.color,
-  //       width: outline.width,
-  //     },
-  //   },
   states: {
     hover: {
+      background: 'rgba(220, 220, 220, 0.4)',
       outline: {
         type: 'outline',
         offset: '-1px',
@@ -67,6 +50,9 @@ export const clickableCell: ClickableCellToken = {
         color: outline.color,
         width: outline.width,
       },
+    },
+    active: {
+      background: 'rgba(200, 200, 200, 0.5)',
     },
   },
 }
