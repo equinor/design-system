@@ -33,7 +33,7 @@ export const clickableCell: ClickableCellToken = {
   },
   states: {
     hover: {
-      background: 'rgba(220, 220, 220, 0.4)',
+      background: hoverBackgroundColor,
       outline: {
         type: 'outline',
         offset: '-1px',
@@ -52,7 +52,7 @@ export const clickableCell: ClickableCellToken = {
       },
     },
     active: {
-      background: 'rgba(200, 200, 200, 0.5)',
+      background: focusColor,
     },
   },
 }
