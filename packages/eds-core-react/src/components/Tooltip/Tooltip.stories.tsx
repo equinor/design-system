@@ -9,7 +9,7 @@ import {
   EdsProvider,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { explore } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Tooltip.docs.mdx'

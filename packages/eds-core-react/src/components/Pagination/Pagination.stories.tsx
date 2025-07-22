@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Pagination, PaginationProps, Button } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import page from './Pagination.docs.mdx'
 
 const meta: Meta<typeof Pagination> = {

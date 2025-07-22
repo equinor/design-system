@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Progress, StarProgressProps, Button } from '../../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { useMockProgress } from '../../../stories'
 import { Stack } from './../../../../.storybook/components'
 import page from './Star.docs.mdx'

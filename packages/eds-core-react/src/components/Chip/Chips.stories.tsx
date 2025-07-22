@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions'
+import { action } from 'storybook/actions'
 import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { save } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Chips.docs.mdx'

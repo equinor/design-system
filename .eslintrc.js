@@ -16,6 +16,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:prettier/recommended',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   plugins: ['prettier', 'import'],
   rules: {

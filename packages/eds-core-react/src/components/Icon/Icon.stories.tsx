@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import * as icons from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'

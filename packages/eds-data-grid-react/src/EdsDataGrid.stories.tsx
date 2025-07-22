@@ -12,8 +12,8 @@ import {
   useEds,
 } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
-import { action } from '@storybook/addon-actions'
-import { Meta, StoryFn } from '@storybook/react'
+import { action } from 'storybook/actions'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { Column, ExpandedState, Row } from '@tanstack/react-table'
 import {
   CSSProperties,

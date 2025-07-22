@@ -8,7 +8,7 @@ import {
 } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
 import styled from 'styled-components'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 
 Icon.add({ save })
 

@@ -9,9 +9,9 @@ import {
   Density,
 } from '../..'
 import styled from 'styled-components'
-import { action } from '@storybook/addon-actions'
+import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
 import page from './Checkbox.docs.mdx'

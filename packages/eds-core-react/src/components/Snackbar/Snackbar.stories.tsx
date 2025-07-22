@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Snackbar, SnackbarProps, Button } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Snackbar.docs.mdx'
 

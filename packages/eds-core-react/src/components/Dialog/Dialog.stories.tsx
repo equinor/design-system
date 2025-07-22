@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useArgs } from '@storybook/preview-api'
+import { useArgs } from 'storybook/preview-api'
 import {
   Dialog,
   DialogProps,
@@ -10,7 +10,7 @@ import {
   Snackbar,
 } from '../..'
 import styled from 'styled-components'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Dialog.docs.mdx'
 

@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Checkbox } from '../Checkbox'
-import { StoryFn, Meta } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
+import { StoryFn, Meta } from '@storybook/react-vite'
+import { action } from 'storybook/actions'
 import { useForm, Controller } from 'react-hook-form'
 import {
   Typography,
