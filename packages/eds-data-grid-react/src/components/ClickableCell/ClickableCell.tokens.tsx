@@ -11,7 +11,7 @@ const {
     },
     interactive: {
       table__cell__fill_hover: { rgba: hoverBackgroundColor },
-      focus: { rgba: focusColor },
+      table__cell__fill_activated: { rgba: activeBackgroundColor },
     },
   },
   interactions: { focused: outline },
@@ -37,7 +37,7 @@ export const clickableCell: ClickableCellToken = {
       outline: {
         type: 'outline',
         offset: '-1px',
-        style: 'dashed',
+        style: 'solid',
         color: outline.color,
         width: outline.width,
       },
@@ -46,13 +46,20 @@ export const clickableCell: ClickableCellToken = {
       outline: {
         type: 'outline',
         offset: '-1px',
-        style: 'dashed',
+        style: 'solid',
         color: outline.color,
         width: outline.width,
       },
     },
     active: {
-      background: focusColor,
+      background: activeBackgroundColor,
+      outline: {
+        type: 'outline',
+        offset: '-1px',
+        style: 'solid',
+        color: outline.color,
+        width: outline.width,
+      },
     },
   },
 }

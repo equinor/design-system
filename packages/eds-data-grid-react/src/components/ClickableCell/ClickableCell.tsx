@@ -33,10 +33,11 @@ const StyledButton = styled.button<StyledButtonProps>(
 
       background: ${$isSelected ? active?.background : 'transparent'};
       border: none;
-      padding: 8px;
+      padding: var(--eds_table__cell__padding_x, 16px);
       margin: 0;
       cursor: pointer;
       outline: none;
+      z-index: 1;
 
       font-family: inherit;
       font-size: inherit;
@@ -70,6 +71,7 @@ const StyledButton = styled.button<StyledButtonProps>(
 
       &:active {
         background: ${active?.background};
+        ${outlineTemplate(focus?.outline)}
       }
 
       &:focus:active {

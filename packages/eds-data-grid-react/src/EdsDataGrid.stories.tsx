@@ -42,6 +42,7 @@ import { data, summaryData } from './stories/data'
 import { Virtualizer } from './types'
 import { external_link } from '@equinor/eds-icons'
 import { ClickableCell } from './components/ClickableCell'
+import styled from 'styled-components'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -350,78 +351,45 @@ export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
     ...columns.slice(2, 4),
   ]
 
+  const cellStyle = (row: Row<Photo>, columnId: string): CSSProperties => {
+    // Removes padding for cells using ClickableCell
+    if (['id', 'title', 'url'].includes(columnId)) {
+      return { padding: 0 }
+    }
+    return {}
+  }
+
+  const StoryWrapper = styled.div`
+    tr:hover {
+      background-color: transparent !important;
+    }
+  `
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Card style={{ padding: '16px', backgroundColor: '#f8f9fa' }}>
-        <Typography variant="h6">🖱️ Clickable Cells Demo</Typography>
-        <Typography variant="body_short">
-          Click cells in the first three columns to see different interaction
-          patterns. Each variant shows different hover and focus behaviors.
-        </Typography>
-      </Card>
-
-      {clickedCell && (
-        <Card style={{ padding: '16px', backgroundColor: '#e3f2fd' }}>
-          <Typography variant="body_short">
-            <strong>Last clicked:</strong> {clickedCell}
-          </Typography>
-          <Button
-            variant="ghost"
-            onClick={() => setClickedCell(null)}
-            style={{ marginTop: '8px' }}
-          >
-            Clear
-          </Button>
-        </Card>
-      )}
-
-      <EdsDataGrid {...args} columns={clickableColumns} />
-    </div>
+    <StoryWrapper>
+      <Typography>Click a cell to select and deselect.</Typography>
+      <Divider />
+      <pre>
+        clickedCell=
+        {JSON.stringify(clickedCell, null, 2)}
+      </pre>
+      <EdsDataGrid {...args} columns={clickableColumns} cellStyle={cellStyle} />
+    </StoryWrapper>
   )
 }
 
 ClickableCells.args = {
-  ...Introduction.args,
+  rows: data,
+  onRowClick: undefined,
 }
 
-ClickableCells.parameters = {
-  docs: {
-    description: {
-      story: `
-This example demonstrates the \`ClickableCell\` component for creating accessible, interactive table cells.
-
-**Features:**
-- **Accessibility first**: Proper button semantics, keyboard navigation, screen reader support
-- **Visual variants**: \`default\`, \`subtle\`, and \`ghost\` for different interaction styles
-- **EDS design tokens**: Consistent with EDS theming and density modes
-- **Flexible styling**: Hover effects, focus states, and responsive design
-
-**Usage Pattern:**
-\`\`\`typescript
-{
-  cell: ({ getValue }) => (
-    <ClickableCell
-      onClick={() => doSomething()}
-      ariaLabel="Descriptive action label"
-      variant="default"
-    >
-      {getValue()}
-    </ClickableCell>
-  )
-}
-\`\`\`
-
-**When to use:**
-- Navigation to detail views
-- Quick actions (edit, copy, share)
-- External links
-- Modal triggers
-
-Always provide descriptive \`ariaLabel\` props for accessibility!
-      `,
-    },
-  },
-}
+// ClickableCells.parameters = {
+//   docs: {
+//     description: {
+//       story: ,
+//     },
+//   },
+// }
 
 const SimpleMenu = ({
   text,
