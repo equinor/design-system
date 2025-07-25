@@ -1,6 +1,5 @@
 import {
   Button,
-  Card,
   Checkbox,
   Divider,
   EdsProvider,
@@ -302,6 +301,12 @@ RowSelection.args = {
   columnResizeMode: 'onChange',
 } satisfies Partial<EdsDataGridProps<Photo>>
 
+const StoryWrapper = styled.div`
+  tr:hover {
+    background-color: transparent !important;
+  }
+`
+
 export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
   const [clickedCell, setClickedCell] = useState<string | null>(null)
 
@@ -316,7 +321,7 @@ export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
           {getValue()}
         </ClickableCell>
       ),
-      id: 'id',
+      id: 'clickable_id',
       size: 100,
     }),
     helper.accessor('title', {
@@ -324,46 +329,47 @@ export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
       cell: ({ getValue }) => (
         <ClickableCell
           onClick={() => setClickedCell(`Title: ${getValue()}`)}
-          ariaLabel={`Open ${getValue()}`}
-          // variant="subtle"
+          ariaLabel={`Edit ${getValue()}`}
         >
           {getValue()}
         </ClickableCell>
       ),
-      id: 'title',
+      id: 'clickable_title',
       size: 300,
     }),
-    helper.accessor('url', {
-      header: 'URL',
-      cell: ({ getValue }) => (
+    helper.accessor('albumId', {
+      header: 'Actions',
+      cell: ({ row }) => (
         <ClickableCell
-          onClick={() => window.open(getValue(), '_blank')}
-          ariaLabel={`Open link ${getValue()}`}
-          // variant="ghost"
+          onClick={() => setClickedCell(`Actions for row ${row.original.id}`)}
+          ariaLabel={`More actions for ${row.original.title}`}
         >
-          Open Link
+          ⚙️ Actions
         </ClickableCell>
       ),
-      id: 'url',
+      id: 'clickable_actions',
       size: 150,
     }),
-    // Regular columns
-    ...columns.slice(2, 4),
+    {
+      ...columns[2],
+      id: `regular_${columns[2].id}_${Date.now()}`,
+    },
+    {
+      ...columns[3],
+      id: `regular_${columns[3].id}_${Date.now() + 1}`,
+    },
   ]
 
   const cellStyle = (row: Row<Photo>, columnId: string): CSSProperties => {
-    // Removes padding for cells using ClickableCell
-    if (['id', 'title', 'url'].includes(columnId)) {
+    if (
+      ['clickable_id', 'clickable_title', 'clickable_actions'].includes(
+        columnId,
+      )
+    ) {
       return { padding: 0 }
     }
     return {}
   }
-
-  const StoryWrapper = styled.div`
-    tr:hover {
-      background-color: transparent !important;
-    }
-  `
 
   return (
     <StoryWrapper>
@@ -382,14 +388,6 @@ ClickableCells.args = {
   rows: data,
   onRowClick: undefined,
 }
-
-// ClickableCells.parameters = {
-//   docs: {
-//     description: {
-//       story: ,
-//     },
-//   },
-// }
 
 const SimpleMenu = ({
   text,
