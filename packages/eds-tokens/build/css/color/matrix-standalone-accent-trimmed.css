@@ -3,7 +3,7 @@
  */
 
 :root {
-  --eds-color-accent-background-app: light-dark(#ffffff, #131c1d);
+  --eds-color-accent-background-app: #ffffff;
   --eds-color-accent-background-subtle: light-dark(#e8f7f8, #172527);
   --eds-color-accent-surface-element: light-dark(#cfe7e9, #1d3335);
   --eds-color-accent-surface-element-hover: light-dark(#b5d8db, #204246);

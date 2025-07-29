@@ -65,7 +65,7 @@
 }
 
 [data-color-appearance="accent"] {
-  --eds-color-background-app: light-dark(#fff, #131c1d);
+  --eds-color-background-app: #fff;
   --eds-color-background-subtle: light-dark(#e8f7f8, #172527);
   --eds-color-surface-element: light-dark(#cfe7e9, #1d3335);
   --eds-color-surface-element-hover: light-dark(#b5d8db, #204246);

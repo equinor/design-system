@@ -1,7 +1,7 @@
 {
   "background-app": {
     "$type": "color",
-    "$value": "{accent.background-default}",
+    "$value": "#ffffff",
     "$description": "",
     "$extensions": {
       "com.figma": {
