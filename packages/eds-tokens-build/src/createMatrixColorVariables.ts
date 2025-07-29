@@ -15,7 +15,7 @@ export async function createMatrixColorVariables({
   tokensDir,
   colorBuildPath,
   coreTokensDirName = '9Jody75rpiDhyTgNm3xOHd',
-  colorMatrixTokensDirName = 'l61klzmHcRrHVk7Ag0eLGn',
+  colorMatrixTokensDirName = 'ZrJNpIhcHprG9bFpHlHcWa',
   prefix,
   fileNames = {
     colorScheme: {
@@ -23,12 +23,12 @@ export async function createMatrixColorVariables({
       light: '🌗 Color scheme.Light.json',
     },
     appearance: {
-      accent: '🎨 Appearance.Accent.json',
-      neutral: '🎨 Appearance.Neutral.json',
-      danger: '🎨 Appearance.Danger.json',
-      success: '🎨 Appearance.Success.json',
-      warning: '🎨 Appearance.Warning.json',
-      info: '🎨 Appearance.Info.json',
+      accent: 'Semantic Dynamic.Accent.json',
+      neutral: 'Semantic Dynamic.Neutral.json',
+      danger: 'Semantic Dynamic.Danger.json',
+      success: 'Semantic Dynamic.Success.json',
+      warning: 'Semantic Dynamic.Warning.json',
+      info: 'Semantic Dynamic.Info.json',
     },
   },
 }: {

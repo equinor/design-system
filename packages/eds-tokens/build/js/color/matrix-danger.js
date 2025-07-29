@@ -2,16 +2,17 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BACKGROUND_APP = "#ffffff";
-export const BACKGROUND_SUBTLE = "#ffeae8";
-export const SURFACE_ELEMENT = "#ffd0ce";
-export const SURFACE_ELEMENT_HOVER = "#ffb6b3";
-export const SURFACE_ELEMENT_ACTIVE = "#ff9a99";
-export const BORDER_SEPARATOR = "#ff9190";
-export const BORDER_ELEMENT = "#e40d39";
-export const BORDER_ELEMENT_HOVER = "#b20029";
-export const SOLID_COMPONENT = "#e20337";
-export const SOLID_COMPONENT_HOVER = "#bd0023";
-export const SOLID_COMPONENT_ACTIVE = "#a0001b";
-export const TEXT_LOW_CONTRAST = "#7d1a23";
-export const TEXT_HIGH_CONTRAST = "#311515";
+export const BACKGROUND_CANVAS = "#ffffff";
+export const BACKGROUND_SURFACE = "#ffeae8";
+export const BACKGROUND_FILL_SECONDARY_DEFAULT = "#ffd0ce";
+export const BACKGROUND_FILL_SECONDARY_HOVER = "#ffb6b3";
+export const BACKGROUND_FILL_SECONDARY_ACTIVE = "#ff9a99";
+export const BACKGROUND_FILL_PRIMARY_DEFAULT = "#e20337";
+export const BACKGROUND_FILL_PRIMARY_HOVER = "#bd0023";
+export const BACKGROUND_FILL_PRIMARY_ACTIVE = "#a0001b";
+export const TEXT_PRIMARY = "#311515";
+export const TEXT_SECONDARY = "#7d1a23";
+export const TEXT_ON_PRIMARY = "#ffffff";
+export const BORDER_SUBTLE = "#ff9190";
+export const BORDER_MEDIUM = "#e40d39";
+export const BORDER_STRONG = "#b20029";
