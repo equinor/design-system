@@ -1,14 +1,6 @@
 import { APCA_CONTRAST_LEVELS } from '@/config/APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from '@/config/WCAG_CONTRAST_LEVELS'
 
-export const lightnessValuesInDarkMode = [
-  0.15, 0.25, 0.45, 0.48, 0.5, 0.63, 0.66, 0.68, 0.92, 0.94, 1,
-]
-
-export const lightnessValuesInLightMode = [
-  1, 0.96, 0.88, 0.84, 0.8, 0.7, 0.6, 0.5, 0.35, 0.237, 1,
-]
-
 type ColorPairRequirements = {
   stepIndex: number
   lc: (typeof APCA_CONTRAST_LEVELS)[keyof typeof APCA_CONTRAST_LEVELS]

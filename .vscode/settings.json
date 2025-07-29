@@ -41,6 +41,7 @@
     "lightningcss",
     "OKLCH",
     "Overridable",
-    "Topbar"
+    "Topbar",
+    "turbopack"
   ]
 }

@@ -3,7 +3,7 @@ import React from 'react'
 export const ColorScalesHeader = () => {
   return (
     <>
-      <div className="grid gap-3 mb-2 grid-cols-14">
+      <div className="grid gap-3 mb-2 grid-cols-14 text-center">
         <div className="col-span-2 border-b border-gray-300 dark:border-gray-800">
           background
         </div>

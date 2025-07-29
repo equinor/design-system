@@ -56,7 +56,7 @@ export const downloadColorTokens = (
   // Add colors to objects
   colors.forEach((colorDef) => {
     lightColors[colorDef.name] = generateColorScale(
-      colorDef.hue,
+      colorDef.hex,
       customLightModeValues,
       mean,
       stdDev,
@@ -64,7 +64,7 @@ export const downloadColorTokens = (
     )
 
     darkColors[`${colorDef.name}Dark`] = generateColorScale(
-      colorDef.hue,
+      colorDef.hex,
       customDarkModeValues,
       mean,
       stdDev,

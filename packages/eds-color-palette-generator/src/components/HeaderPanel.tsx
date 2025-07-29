@@ -20,6 +20,7 @@ export const HeaderPanel = ({
           onClick={() => setShowConfigPanel(!showConfigPanel)}
           className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 rounded-md hover:bg-gray-200 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Open configuration panel"
+          data-testid="config-button"
         >
           ⚙️ Config
         </button>

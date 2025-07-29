@@ -2,19 +2,18 @@ import React from 'react'
 
 type LightnessValueInputsProps = {
   colorScheme: 'light' | 'dark'
-  customLightModeValues: number[]
-  customDarkModeValues: number[]
+  lightModeValues: number[]
+  darkModeValues: number[]
   updateLightnessValue: (index: number, value: number) => void
 }
 
 export const LightnessValueInputs = ({
   colorScheme,
-  customLightModeValues,
-  customDarkModeValues,
+  lightModeValues,
+  darkModeValues,
   updateLightnessValue,
 }: LightnessValueInputsProps) => {
-  const values =
-    colorScheme === 'light' ? customLightModeValues : customDarkModeValues
+  const values = colorScheme === 'light' ? lightModeValues : darkModeValues
 
   return (
     <div className="grid grid-cols-14 gap-3 mb-2">

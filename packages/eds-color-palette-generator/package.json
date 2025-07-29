@@ -7,7 +7,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t equinor/color-palette-generator .",
+    "docker:run": "docker run -p 3000:3000 equinor/color-palette-generator",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:ui:debug": "playwright test --debug",
+    "test:codegen": "playwright codegen"
   },
   "dependencies": {
     "colorjs.io": "^0.5.2",
@@ -17,10 +23,12 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.53.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
+    "dotenv": "^17.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4",

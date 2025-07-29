@@ -3,7 +3,6 @@
 import { generateColorScale } from '../utils/color'
 import { useState } from 'react'
 import { ColorScale } from '@/components/ColorScale'
-import { lightnessValuesInDarkMode, lightnessValuesInLightMode } from '@/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
 import { ColorManagement } from '@/components/ColorManagement'
@@ -13,57 +12,75 @@ import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
+import config from '@/config/config.json'
 
 export default function App() {
-  const [mean, setMean] = useState(0.6)
-  const [stdDev, setStdDev] = useState(2)
+  const [mean, setMean] = useState(config.mean)
+  const [stdDev, setStdDev] = useState(config.stdDev)
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(false)
   const [showLightnessInputs, setShowLightnessInputs] = useState(false)
   const [showConfigPanel, setShowConfigPanel] = useState(false)
   const [contrastMethod, setContrastMethod] = useState<ContrastMethod>('APCA')
 
-  // Add state for custom lightness values
-  const [customLightModeValues, setCustomLightModeValues] = useState<number[]>(
-    lightnessValuesInLightMode,
+  // Add state for lightness values
+  const [lightModeValues, setLightModeValues] = useState<number[]>(
+    config.lightModeValues,
   )
-  const [customDarkModeValues, setCustomDarkModeValues] = useState<number[]>(
-    lightnessValuesInDarkMode,
+  const [darkModeValues, setDarkModeValues] = useState<number[]>(
+    config.darkModeValues,
   )
 
   // Define colors in an array for easier management
-  const [colors, setColors] = useState<ColorDefinition[]>([
-    { name: 'accent', hue: '#007079' },
-    { name: 'neutral', hue: '#4A4A4A' },
-    { name: 'success', hue: '#3FA13D' },
-    { name: 'info', hue: '#0084C4' },
-    { name: 'warning', hue: '#E57E00' },
-    { name: 'danger', hue: '#E20337' },
-  ])
+  const [colors, setColors] = useState<ColorDefinition[]>(config.colors)
+
+  const updateColorName = (index: number, newName: string) => {
+    setColors(
+      colors.map((color, i) =>
+        i === index ? { ...color, name: newName } : color,
+      ),
+    )
+  }
+
+  const updateColorHex = (index: number, newHex: string) => {
+    setColors(
+      colors.map((color, i) =>
+        i === index ? { ...color, hex: newHex } : color,
+      ),
+    )
+  }
+
+  const removeColor = (index: number) => {
+    setColors(colors.filter((_, i) => i !== index))
+  }
+
+  const addColor = (newColor: ColorDefinition) => {
+    setColors([...colors, newColor])
+  }
 
   // Update a specific lightness value
   const updateLightnessValue = (index: number, value: number) => {
     if (colorScheme === 'light') {
-      const newValues = [...customLightModeValues]
+      const newValues = [...lightModeValues]
       newValues[index] = value
-      setCustomLightModeValues(newValues)
+      setLightModeValues(newValues)
     } else {
-      const newValues = [...customDarkModeValues]
+      const newValues = [...darkModeValues]
       newValues[index] = value
-      setCustomDarkModeValues(newValues)
+      setDarkModeValues(newValues)
     }
   }
 
   // Reset lightness values to defaults
   const resetLightnessValues = () => {
-    setCustomLightModeValues(lightnessValuesInLightMode)
-    setCustomDarkModeValues(lightnessValuesInDarkMode)
+    setLightModeValues(config.lightModeValues)
+    setDarkModeValues(config.darkModeValues)
   }
 
   // Handle configuration upload
   const handleConfigUpload = (config: ConfigFile) => {
-    setCustomLightModeValues(config.lightModeValues)
-    setCustomDarkModeValues(config.darkModeValues)
+    setLightModeValues(config.lightModeValues)
+    setDarkModeValues(config.darkModeValues)
     setMean(config.mean)
     setStdDev(config.stdDev)
     if (config.colors) {
@@ -75,8 +92,8 @@ export default function App() {
   const colorScales = colors.map((color) => ({
     ...color,
     scale: generateColorScale(
-      color.hue,
-      colorScheme === 'light' ? customLightModeValues : customDarkModeValues,
+      color.hex,
+      colorScheme === 'light' ? lightModeValues : darkModeValues,
       mean,
       stdDev,
       colorScheme,
@@ -97,11 +114,17 @@ export default function App() {
       {showConfigPanel && (
         <div className="max-w-3xl p-6 mx-auto mb-12 ">
           {/* Color management component */}
-          <ColorManagement colors={colors} setColors={setColors} />
+          <ColorManagement
+            colors={colors}
+            onUpdateColorName={updateColorName}
+            onUpdateColorHex={updateColorHex}
+            onRemoveColor={removeColor}
+            onAddColor={addColor}
+          />
           {/* Configuration Import/Export Section */}
           <ConfigurationPanel
-            customLightModeValues={customLightModeValues}
-            customDarkModeValues={customDarkModeValues}
+            lightModeValues={lightModeValues}
+            darkModeValues={darkModeValues}
             mean={mean}
             stdDev={stdDev}
             colors={colors}
@@ -136,8 +159,8 @@ export default function App() {
         {showLightnessInputs && (
           <LightnessValueInputs
             colorScheme={colorScheme}
-            customLightModeValues={customLightModeValues}
-            customDarkModeValues={customDarkModeValues}
+            lightModeValues={lightModeValues}
+            darkModeValues={darkModeValues}
             updateLightnessValue={updateLightnessValue}
           />
         )}

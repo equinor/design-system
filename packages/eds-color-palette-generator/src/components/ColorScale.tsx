@@ -1,5 +1,5 @@
 'use client'
-import { colorPairs } from '@/config'
+import { colorPairs } from '@/config/color-pairs'
 import { checkContrast } from '@/utils/color'
 import Color from 'colorjs.io'
 import { useState, useEffect, useRef, useMemo } from 'react'
@@ -182,6 +182,9 @@ export function ColorScale({
 
           return (
             <div
+              data-testid={
+                colorName ? `color-step-${colorName}-${i}` : `color-step-${i}`
+              }
               key={'color-step-' + i}
               ref={(el) => {
                 colorElementRefs.current[i] = el
@@ -269,7 +272,7 @@ export function ColorScale({
                 </div>
 
                 <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
-                  <span className="font-medium">OKLCH Format:</span>
+                  <span className="font-medium">OKLCH:</span>
                   <div className="flex items-center font-mono">
                     oklch({oklchInfo.l} {oklchInfo.c} {oklchInfo.h})
                   </div>
