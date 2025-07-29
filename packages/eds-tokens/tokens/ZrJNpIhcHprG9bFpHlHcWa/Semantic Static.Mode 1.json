@@ -13,7 +13,7 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-default)"
+              "WEB": "var(--eds-color-text-neutral-primary)"
             }
           }
         }
@@ -30,7 +30,7 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-subtle)"
+              "WEB": "var(--eds-color-text-neutral-secondary)"
             }
           }
         }
@@ -47,7 +47,7 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-on-strong)"
+              "WEB": "var(--eds-color-text-neutral-on-strong)"
             }
           }
         }
@@ -66,7 +66,7 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-accent-default)"
+              "WEB": "var(--eds-color-text-accent-primary)"
             }
           }
         }
@@ -83,7 +83,7 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-accent-subtle)"
+              "WEB": "var(--eds-color-text-accent-secondary)"
             }
           }
         }
@@ -102,7 +102,7 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-info-default)"
+              "WEB": "var(--eds-color-text-info-primary)"
             }
           }
         }
@@ -119,30 +119,13 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-info-subtle)"
+              "WEB": "var(--eds-color-text-info-secondary)"
             }
           }
         }
       }
     },
     "success": {
-      "secondary": {
-        "$type": "color",
-        "$value": "{eds.color.text-success-secondary}",
-        "$description": "Used for text and icons",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "SHAPE_FILL",
-              "TEXT_FILL"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-text-success-subtle)"
-            }
-          }
-        }
-      },
       "primary": {
         "$type": "color",
         "$value": "{eds.color.text-success-primary}",
@@ -155,16 +138,14 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-success-default)"
+              "WEB": "var(--eds-color-text-success-primary)"
             }
           }
         }
-      }
-    },
-    "warning": {
+      },
       "secondary": {
         "$type": "color",
-        "$value": "{eds.color.text-warning-secondary}",
+        "$value": "{eds.color.text-success-secondary}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -174,11 +155,13 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-warning-subtle)"
+              "WEB": "var(--eds-color-text-success-secondary)"
             }
           }
         }
-      },
+      }
+    },
+    "warning": {
       "primary": {
         "$type": "color",
         "$value": "{eds.color.text-warning-primary}",
@@ -191,16 +174,14 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-warning-default)"
+              "WEB": "var(--eds-color-text-warning-primary)"
             }
           }
         }
-      }
-    },
-    "danger": {
+      },
       "secondary": {
         "$type": "color",
-        "$value": "{eds.color.text-danger-secondary}",
+        "$value": "{eds.color.text-warning-secondary}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -210,11 +191,13 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-danger-subtle)"
+              "WEB": "var(--eds-color-text-warning-secondary)"
             }
           }
         }
-      },
+      }
+    },
+    "danger": {
       "primary": {
         "$type": "color",
         "$value": "{eds.color.text-danger-primary}",
@@ -227,7 +210,24 @@
               "TEXT_FILL"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-danger-default)"
+              "WEB": "var(--eds-color-text-danger-primary)"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{eds.color.text-danger-secondary}",
+        "$description": "Used for text and icons",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-color-text-danger-secondary)"
             }
           }
         }
@@ -246,7 +246,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-canvas-neutral)"
+            }
           }
         }
       },
@@ -260,7 +262,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-canvas-accent)"
+            }
           }
         }
       },
@@ -274,7 +278,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-canvas-info)"
+            }
           }
         }
       },
@@ -288,7 +294,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-canvas-success)"
+            }
           }
         }
       },
@@ -302,7 +310,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-canvas-warning)"
+            }
           }
         }
       },
@@ -316,7 +326,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-canvas-danger)"
+            }
           }
         }
       }
@@ -332,7 +344,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-surface-neutral)"
+            }
           }
         }
       },
@@ -346,7 +360,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-surface-accent)"
+            }
           }
         }
       },
@@ -360,7 +376,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-surface-info)"
+            }
           }
         }
       },
@@ -374,7 +392,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-surface-success)"
+            }
           }
         }
       },
@@ -388,7 +408,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-surface-warning)"
+            }
           }
         }
       },
@@ -402,7 +424,9 @@
             "scopes": [
               "ALL_SCOPES"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--eds-color-background-surface-danger)"
+            }
           }
         }
       }
@@ -421,7 +445,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-strong)"
+                "WEB": "var(--eds-color-background-fill-neutral-primary-default)"
               }
             }
           }
@@ -438,7 +462,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-strong-hover)"
+                "WEB": "var(--eds-color-background-fill-neutral-primary-hover)"
               }
             }
           }
@@ -455,7 +479,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-strong-active)"
+                "WEB": "var(--eds-color-background-fill-neutral-primary-active)"
               }
             }
           }
@@ -472,7 +496,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-default)"
+                "WEB": "var(--eds-color-background-fill-neutral-secondary-default)"
               }
             }
           }
@@ -489,7 +513,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-default-hover)"
+                "WEB": "var(--eds-color-background-fill-neutral-secondary-hover)"
               }
             }
           }
@@ -506,7 +530,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-default-active)"
+                "WEB": "var(--eds-color-background-fill-neutral-secondary-active)"
               }
             }
           }
@@ -525,7 +549,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-strong)"
+                "WEB": "var(--eds-color-background-fill-accent-primary-default)"
               }
             }
           }
@@ -542,7 +566,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-strong-hover)"
+                "WEB": "var(--eds-color-background-fill-accent-primary-hover)"
               }
             }
           }
@@ -559,7 +583,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-strong-active)"
+                "WEB": "var(--eds-color-background-fill-accent-primary-active)"
               }
             }
           }
@@ -576,7 +600,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-default)"
+                "WEB": "var(--eds-color-background-fill-accent-secondary-default)"
               }
             }
           }
@@ -593,7 +617,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-default-hover)"
+                "WEB": "var(--eds-color-background-fill-accent-secondary-hover)"
               }
             }
           }
@@ -610,7 +634,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-default-active)"
+                "WEB": "var(--eds-color-background-fill-accent-secondary-active)"
               }
             }
           }
@@ -629,7 +653,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-default)"
+                "WEB": "var(--eds-color-background-fill-info-secondary-default)"
               }
             }
           }
@@ -646,7 +670,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-default-hover)"
+                "WEB": "var(--eds-color-background-fill-info-secondary-hover)"
               }
             }
           }
@@ -663,7 +687,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-default-active)"
+                "WEB": "var(--eds-color-background-fill-info-secondary-active)"
               }
             }
           }
@@ -680,7 +704,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-strong)"
+                "WEB": "var(--eds-color-background-fill-info-primary-default)"
               }
             }
           }
@@ -697,7 +721,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-strong-hover)"
+                "WEB": "var(--eds-color-background-fill-info-primary-hover)"
               }
             }
           }
@@ -714,7 +738,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-strong-active)"
+                "WEB": "var(--eds-color-background-fill-info-primary-hover)"
               }
             }
           }
@@ -733,7 +757,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-strong)"
+                "WEB": "var(--eds-color-background-fill-success-primary-default)"
               }
             }
           }
@@ -750,7 +774,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-strong-hover)"
+                "WEB": "var(--eds-color-background-fill-success-primary-hover)"
               }
             }
           }
@@ -767,7 +791,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-strong-active)"
+                "WEB": "var(--eds-color-background-fill-success-primary-active)"
               }
             }
           }
@@ -784,7 +808,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-default)"
+                "WEB": "var(--eds-color-background-fill-success-secondary-default)"
               }
             }
           }
@@ -801,7 +825,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-default-hover)"
+                "WEB": "var(--eds-color-background-fill-success-secondary-hover)"
               }
             }
           }
@@ -818,7 +842,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-default-active)"
+                "WEB": "var(--eds-color-background-fill-success-secondary-active)"
               }
             }
           }
@@ -837,7 +861,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-strong)"
+                "WEB": "var(--eds-color-background-fill-warning-primary-default)"
               }
             }
           }
@@ -854,7 +878,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-strong-hover)"
+                "WEB": "var(--eds-color-background-fill-warning-primary-hover)"
               }
             }
           }
@@ -871,7 +895,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-strong-active)"
+                "WEB": "var(--eds-color-background-fill-warning-primary-active)"
               }
             }
           }
@@ -888,7 +912,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-default)"
+                "WEB": "var(--eds-color-background-fill-warning-secondary-default)"
               }
             }
           }
@@ -905,7 +929,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-default-hover)"
+                "WEB": "var(--eds-color-background-fill-warning-secondary-hover)"
               }
             }
           }
@@ -922,7 +946,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-default-active)"
+                "WEB": "var(--eds-color-background-fill-warning-secondary-active)"
               }
             }
           }
@@ -941,7 +965,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-strong)"
+                "WEB": "var(--eds-color-background-fill-danger-primary-default)"
               }
             }
           }
@@ -958,7 +982,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-strong-hover)"
+                "WEB": "var(--eds-color-background-fill-danger-primary-hover)"
               }
             }
           }
@@ -975,7 +999,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-strong-active)"
+                "WEB": "var(--eds-color-background-fill-danger-primary-active)"
               }
             }
           }
@@ -992,7 +1016,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-default)"
+                "WEB": "var(--eds-color-background-fill-danger-secondary-default)"
               }
             }
           }
@@ -1009,7 +1033,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-default-hover)"
+                "WEB": "var(--eds-color-background-fill-danger-secondary-hover)"
               }
             }
           }
@@ -1026,7 +1050,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-default-active)"
+                "WEB": "var(--eds-color-background-fill-danger-secondary-active)"
               }
             }
           }
@@ -1047,7 +1071,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-subtle)"
+              "WEB": "var(--eds-color-border-neutral-subtle)"
             }
           }
         }
@@ -1063,7 +1087,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-default)"
+              "WEB": "var(--eds-color-border-neutral-medium)"
             }
           }
         }
@@ -1079,7 +1103,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-strong)"
+              "WEB": "var(--eds-color-border-neutral-strong)"
             }
           }
         }
@@ -1113,7 +1137,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-accent-default)"
+              "WEB": "var(--eds-color-border-accent-medium)"
             }
           }
         }
@@ -1163,7 +1187,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-info-default)"
+              "WEB": "var(--eds-color-border-info-medium)"
             }
           }
         }
@@ -1213,7 +1237,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-success-default)"
+              "WEB": "var(--eds-color-border-success-medium)"
             }
           }
         }
@@ -1263,7 +1287,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-warning-default)"
+              "WEB": "var(--eds-color-border-warning-medium)"
             }
           }
         }
@@ -1313,7 +1337,7 @@
               "STROKE_COLOR"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-border-danger-default)"
+              "WEB": "var(--eds-color-border-danger-medium)"
             }
           }
         }
