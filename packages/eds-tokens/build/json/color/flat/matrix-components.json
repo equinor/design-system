@@ -1,0 +1,15 @@
+{
+  "eds-app-color-background-base": "#f3f3f3",
+  "eds-app-color-background-layer-1": "#ffffff",
+  "eds-app-color-background-layer-2": "#ffffff",
+  "eds-app-color-background-elevated": "#ffffff",
+  "eds-button-color-background-disabled": "#7b7b7b",
+  "eds-button-color-border-disabled": "#bababa",
+  "eds-button-color-text-disabled": "#7b7b7b",
+  "eds-input-color-background": "#f3f3f3",
+  "eds-input-color-border-disabled": "#bababa",
+  "eds-input-color-text-disabled": "#7b7b7b",
+  "eds-link-color-text": "#144a6b",
+  "eds-focus-ring-color-border": "#0083c3",
+  "eds-overlay-color-background": "#7b7b7b"
+}

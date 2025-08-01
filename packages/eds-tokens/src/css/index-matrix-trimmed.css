@@ -7,7 +7,7 @@
 @import 'color/matrix-info-trimmed.css';
 @import 'color/matrix-warning-trimmed.css';
 @import 'color/matrix-danger-trimmed.css';
-/* @import 'color/matrix-functional-trimmed.css'; */
+@import 'color/matrix-components-trimmed.css';
 
 @import 'spacing-setup.css';
 @import 'spacing/spacing-trimmed.css';

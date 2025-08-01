@@ -150,6 +150,22 @@
   --eds-color-text-inverse: light-dark(#fff, #fff);
 }
 
+:root {
+  --eds-app-color-background-base: light-dark(#f3f3f3, #0e0f10);
+  --eds-app-color-background-layer-1: light-dark(#fff, #181a1c);
+  --eds-app-color-background-layer-2: light-dark(#fff, #202325);
+  --eds-app-color-background-elevated: light-dark(#fff, #2a3033);
+  --eds-button-color-background-disabled: light-dark(#7b7b7b, #697b88);
+  --eds-button-color-border-disabled: light-dark(#bababa, #47525b);
+  --eds-button-color-text-disabled: light-dark(#7b7b7b, #697b88);
+  --eds-input-color-background: light-dark(#f3f3f3, #2a3033);
+  --eds-input-color-border-disabled: light-dark(#bababa, #47525b);
+  --eds-input-color-text-disabled: light-dark(#7b7b7b, #697b88);
+  --eds-link-color-text: light-dark(#144a6b, #99cbf0);
+  --eds-focus-ring-color-border: light-dark(#0083c3, #0080c0);
+  --eds-overlay-color-background: light-dark(#7b7b7b, #202325);
+}
+
 :root, [data-density] {
   --density: var(--eds--spacious);
   --eds--comfortable: var(--density, );

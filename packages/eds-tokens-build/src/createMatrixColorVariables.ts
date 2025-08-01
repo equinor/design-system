@@ -88,24 +88,27 @@ export async function createMatrixColorVariables({
   const outputReferences = false
   const include = [COLOR_BRAND_SOURCE, COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE]
 
-  const functional = _extend({
+  const components = _extend({
     source: [COLOR_MATRIX_COLOR_SCHEME_LIGHT_SOURCE],
     filter: (token) => {
       return (
-        token.name.includes('functional') &&
-        !token.name.includes('light') &&
-        !token.name.includes('dark')
+        token.name.includes('app') ||
+        token.name.includes('button') ||
+        token.name.includes('input') ||
+        token.name.includes('link') ||
+        token.name.includes('focus-ring') ||
+        token.name.includes('overlay')
       )
     },
-    fileName: 'matrix-functional',
-    prefix,
+    fileName: 'matrix-components',
+    // prefix,
     include,
     buildPath: colorBuildPath,
     outputReferences,
     transforms,
   })
 
-  await functional.buildAllPlatforms()
+  await components.buildAllPlatforms()
 
   const accent = _extend({
     source: [COLOR_MATRIX_ACCENT_SOURCE],
