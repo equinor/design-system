@@ -2,19 +2,24 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const EDS_COLOR_TEXT_NEUTRAL_PRIMARY = "#eaeef1";
-export const EDS_COLOR_TEXT_NEUTRAL_SECONDARY = "#bcc6ce";
-export const EDS_COLOR_TEXT_NEUTRAL_ON_STRONG = "#ffffff";
-export const EDS_COLOR_TEXT_ACCENT_PRIMARY = "#e0f1f3";
-export const EDS_COLOR_TEXT_ACCENT_SECONDARY = "#a2ced2";
-export const EDS_COLOR_TEXT_SUCCESS_PRIMARY = "#e0f4de";
-export const EDS_COLOR_TEXT_SUCCESS_SECONDARY = "#a2d49f";
-export const EDS_COLOR_TEXT_INFO_PRIMARY = "#dcf1ff";
-export const EDS_COLOR_TEXT_INFO_SECONDARY = "#99cbf0";
-export const EDS_COLOR_TEXT_WARNING_PRIMARY = "#ffe8d6";
-export const EDS_COLOR_TEXT_WARNING_SECONDARY = "#f1b78a";
-export const EDS_COLOR_TEXT_DANGER_PRIMARY = "#ffe1df";
-export const EDS_COLOR_TEXT_DANGER_SECONDARY = "#ffa3a1";
+export const EDS_COLOR_TEXT_NEUTRAL_DEFAULT = "#eaeef1";
+export const EDS_COLOR_TEXT_NEUTRAL_SUBTLE = "#bcc6ce";
+export const EDS_COLOR_TEXT_NEUTRAL_INVERSE = "#ffffff";
+export const EDS_COLOR_TEXT_ACCENT_DEFAULT = "#e0f1f3";
+export const EDS_COLOR_TEXT_ACCENT_SUBTLE = "#a2ced2";
+export const EDS_COLOR_TEXT_ACCENT_INVERSE = "#ffffff";
+export const EDS_COLOR_TEXT_SUCCESS_DEFAULT = "#e0f4de";
+export const EDS_COLOR_TEXT_SUCCESS_SUBTLE = "#a2d49f";
+export const EDS_COLOR_TEXT_SUCCESS_INVERSE = "#ffffff";
+export const EDS_COLOR_TEXT_INFO_DEFAULT = "#dcf1ff";
+export const EDS_COLOR_TEXT_INFO_SUBTLE = "#99cbf0";
+export const EDS_COLOR_TEXT_INFO_INVERSE = "#ffffff";
+export const EDS_COLOR_TEXT_WARNING_DEFAULT = "#ffe8d6";
+export const EDS_COLOR_TEXT_WARNING_SUBTLE = "#f1b78a";
+export const EDS_COLOR_TEXT_WARNING_INVERSE = "#ffffff";
+export const EDS_COLOR_TEXT_DANGER_DEFAULT = "#ffe1df";
+export const EDS_COLOR_TEXT_DANGER_SUBTLE = "#ffa3a1";
+export const EDS_COLOR_TEXT_DANGER_INVERSE = "#ffffff";
 export const EDS_COLOR_BACKGROUND_CANVAS_NEUTRAL = "#181a1c";
 export const EDS_COLOR_BACKGROUND_SURFACE_NEUTRAL = "#202325";
 export const EDS_COLOR_BACKGROUND_FILL_NEUTRAL_SECONDARY_DEFAULT = "#2a3033";

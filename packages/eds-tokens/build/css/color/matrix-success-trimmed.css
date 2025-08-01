@@ -5,16 +5,16 @@
 [data-color-appearance="success"] {
   --eds-color-background-canvas: light-dark(#ffffff, #131d12);
   --eds-color-background-surface: light-dark(#e8f9e6, #172716);
-  --eds-color-background-fill-secondary-default: light-dark(#cfeacc, #1d361c);
-  --eds-color-background-fill-secondary-hover: light-dark(#b5ddb2, #20461f);
-  --eds-color-background-fill-secondary-active: light-dark(#99d095, #21571f);
   --eds-color-background-fill-primary-default: light-dark(#3fa13d, #3fa13d);
   --eds-color-background-fill-primary-hover: light-dark(#1a841c, #5ebf5b);
   --eds-color-background-fill-primary-active: light-dark(#007100, #73d46f);
-  --eds-color-text-primary: light-dark(#152215, #e0f4de);
-  --eds-color-text-secondary: light-dark(#21511f, #a2d49f);
-  --eds-color-text-on-primary: #ffffff;
+  --eds-color-background-fill-secondary-default: light-dark(#cfeacc, #1d361c);
+  --eds-color-background-fill-secondary-hover: light-dark(#b5ddb2, #20461f);
+  --eds-color-background-fill-secondary-active: light-dark(#99d095, #21571f);
   --eds-color-border-subtle: light-dark(#91cc8d, #20601f);
   --eds-color-border-medium: light-dark(#2f932e, #2c902c);
   --eds-color-border-strong: light-dark(#20711f, #62b55e);
+  --eds-color-text-default: light-dark(#152215, #e0f4de);
+  --eds-color-text-subtle: light-dark(#21511f, #a2d49f);
+  --eds-color-text-inverse: light-dark(#ffffff, #ffffff);
 }

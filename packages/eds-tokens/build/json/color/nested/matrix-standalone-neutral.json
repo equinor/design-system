@@ -3,26 +3,26 @@
     "canvas": "#ffffff",
     "surface": "#f3f3f3",
     "fill": {
-      "secondary": {
-        "default": "#e1e1e1",
-        "hover": "#d0d0d0",
-        "active": "#bfbfbf"
-      },
       "primary": {
         "default": "#4a4a4a",
         "hover": "#3a3a3a",
         "active": "#2f2f2f"
+      },
+      "secondary": {
+        "default": "#e1e1e1",
+        "hover": "#d0d0d0",
+        "active": "#bfbfbf"
       }
     }
-  },
-  "text": {
-    "primary": "#1e1e1e",
-    "secondary": "#454545",
-    "on-primary": "#ffffff"
   },
   "border": {
     "subtle": "#bababa",
     "medium": "#7b7b7b",
     "strong": "#5e5e5e"
+  },
+  "text": {
+    "default": "#1e1e1e",
+    "subtle": "#454545",
+    "inverse": "#ffffff"
   }
 }

@@ -1,16 +1,16 @@
 {
   "background-canvas": "#ffffff",
   "background-surface": "#e8f9e6",
-  "background-fill-secondary-default": "#cfeacc",
-  "background-fill-secondary-hover": "#b5ddb2",
-  "background-fill-secondary-active": "#99d095",
   "background-fill-primary-default": "#3fa13d",
   "background-fill-primary-hover": "#1a841c",
   "background-fill-primary-active": "#007100",
-  "text-primary": "#152215",
-  "text-secondary": "#21511f",
-  "text-on-primary": "#ffffff",
+  "background-fill-secondary-default": "#cfeacc",
+  "background-fill-secondary-hover": "#b5ddb2",
+  "background-fill-secondary-active": "#99d095",
   "border-subtle": "#91cc8d",
   "border-medium": "#2f932e",
-  "border-strong": "#20711f"
+  "border-strong": "#20711f",
+  "text-default": "#152215",
+  "text-subtle": "#21511f",
+  "text-inverse": "#ffffff"
 }

@@ -5,16 +5,16 @@
 :root {
   --eds-color-success-background-canvas: light-dark(#ffffff, #131d12);
   --eds-color-success-background-surface: light-dark(#e8f9e6, #172716);
-  --eds-color-success-background-fill-secondary-default: light-dark(#cfeacc, #1d361c);
-  --eds-color-success-background-fill-secondary-hover: light-dark(#b5ddb2, #20461f);
-  --eds-color-success-background-fill-secondary-active: light-dark(#99d095, #21571f);
   --eds-color-success-background-fill-primary-default: light-dark(#3fa13d, #3fa13d);
   --eds-color-success-background-fill-primary-hover: light-dark(#1a841c, #5ebf5b);
   --eds-color-success-background-fill-primary-active: light-dark(#007100, #73d46f);
-  --eds-color-success-text-primary: light-dark(#152215, #e0f4de);
-  --eds-color-success-text-secondary: light-dark(#21511f, #a2d49f);
-  --eds-color-success-text-on-primary: #ffffff;
+  --eds-color-success-background-fill-secondary-default: light-dark(#cfeacc, #1d361c);
+  --eds-color-success-background-fill-secondary-hover: light-dark(#b5ddb2, #20461f);
+  --eds-color-success-background-fill-secondary-active: light-dark(#99d095, #21571f);
   --eds-color-success-border-subtle: light-dark(#91cc8d, #20601f);
   --eds-color-success-border-medium: light-dark(#2f932e, #2c902c);
   --eds-color-success-border-strong: light-dark(#20711f, #62b55e);
+  --eds-color-success-text-default: light-dark(#152215, #e0f4de);
+  --eds-color-success-text-subtle: light-dark(#21511f, #a2d49f);
+  --eds-color-success-text-inverse: light-dark(#ffffff, #ffffff);
 }

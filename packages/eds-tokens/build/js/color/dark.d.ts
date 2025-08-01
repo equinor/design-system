@@ -2,19 +2,24 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const EDS_COLOR_TEXT_NEUTRAL_PRIMARY: string;
-export const EDS_COLOR_TEXT_NEUTRAL_SECONDARY: string;
-export const EDS_COLOR_TEXT_NEUTRAL_ON_STRONG: string;
-export const EDS_COLOR_TEXT_ACCENT_PRIMARY: string;
-export const EDS_COLOR_TEXT_ACCENT_SECONDARY: string;
-export const EDS_COLOR_TEXT_SUCCESS_PRIMARY: string;
-export const EDS_COLOR_TEXT_SUCCESS_SECONDARY: string;
-export const EDS_COLOR_TEXT_INFO_PRIMARY: string;
-export const EDS_COLOR_TEXT_INFO_SECONDARY: string;
-export const EDS_COLOR_TEXT_WARNING_PRIMARY: string;
-export const EDS_COLOR_TEXT_WARNING_SECONDARY: string;
-export const EDS_COLOR_TEXT_DANGER_PRIMARY: string;
-export const EDS_COLOR_TEXT_DANGER_SECONDARY: string;
+export const EDS_COLOR_TEXT_NEUTRAL_DEFAULT: string;
+export const EDS_COLOR_TEXT_NEUTRAL_SUBTLE: string;
+export const EDS_COLOR_TEXT_NEUTRAL_INVERSE: string;
+export const EDS_COLOR_TEXT_ACCENT_DEFAULT: string;
+export const EDS_COLOR_TEXT_ACCENT_SUBTLE: string;
+export const EDS_COLOR_TEXT_ACCENT_INVERSE: string;
+export const EDS_COLOR_TEXT_SUCCESS_DEFAULT: string;
+export const EDS_COLOR_TEXT_SUCCESS_SUBTLE: string;
+export const EDS_COLOR_TEXT_SUCCESS_INVERSE: string;
+export const EDS_COLOR_TEXT_INFO_DEFAULT: string;
+export const EDS_COLOR_TEXT_INFO_SUBTLE: string;
+export const EDS_COLOR_TEXT_INFO_INVERSE: string;
+export const EDS_COLOR_TEXT_WARNING_DEFAULT: string;
+export const EDS_COLOR_TEXT_WARNING_SUBTLE: string;
+export const EDS_COLOR_TEXT_WARNING_INVERSE: string;
+export const EDS_COLOR_TEXT_DANGER_DEFAULT: string;
+export const EDS_COLOR_TEXT_DANGER_SUBTLE: string;
+export const EDS_COLOR_TEXT_DANGER_INVERSE: string;
 export const EDS_COLOR_BACKGROUND_CANVAS_NEUTRAL: string;
 export const EDS_COLOR_BACKGROUND_SURFACE_NEUTRAL: string;
 export const EDS_COLOR_BACKGROUND_FILL_NEUTRAL_SECONDARY_DEFAULT: string;

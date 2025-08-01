@@ -3,19 +3,24 @@
  */
 
 :root, [data-color-scheme="light"] {
-  --eds-color-text-neutral-on-strong: #ffffff;
-  --eds-color-text-neutral-primary: var(--eds-color-neutral-light-13);
-  --eds-color-text-neutral-secondary: var(--eds-color-neutral-light-12);
-  --eds-color-text-accent-primary: var(--eds-color-brand-moss-green-light-13);
-  --eds-color-text-accent-secondary: var(--eds-color-brand-moss-green-light-12);
-  --eds-color-text-success-primary: var(--eds-color-utility-green-light-13);
-  --eds-color-text-success-secondary: var(--eds-color-utility-green-light-12);
-  --eds-color-text-info-primary: var(--eds-color-utility-blue-light-13);
-  --eds-color-text-info-secondary: var(--eds-color-utility-blue-light-12);
-  --eds-color-text-warning-primary: var(--eds-color-utility-yellow-light-13);
-  --eds-color-text-warning-secondary: var(--eds-color-utility-yellow-light-12);
-  --eds-color-text-danger-primary: var(--eds-color-utility-red-light-13);
-  --eds-color-text-danger-secondary: var(--eds-color-utility-red-light-12);
+  --eds-color-text-neutral-inverse: #ffffff;
+  --eds-color-text-accent-inverse: #ffffff;
+  --eds-color-text-success-inverse: #ffffff;
+  --eds-color-text-info-inverse: #ffffff;
+  --eds-color-text-warning-inverse: #ffffff;
+  --eds-color-text-danger-inverse: #ffffff;
+  --eds-color-text-neutral-default: var(--eds-color-neutral-light-13);
+  --eds-color-text-neutral-subtle: var(--eds-color-neutral-light-12);
+  --eds-color-text-accent-default: var(--eds-color-brand-moss-green-light-13);
+  --eds-color-text-accent-subtle: var(--eds-color-brand-moss-green-light-12);
+  --eds-color-text-success-default: var(--eds-color-utility-green-light-13);
+  --eds-color-text-success-subtle: var(--eds-color-utility-green-light-12);
+  --eds-color-text-info-default: var(--eds-color-utility-blue-light-13);
+  --eds-color-text-info-subtle: var(--eds-color-utility-blue-light-12);
+  --eds-color-text-warning-default: var(--eds-color-utility-yellow-light-13);
+  --eds-color-text-warning-subtle: var(--eds-color-utility-yellow-light-12);
+  --eds-color-text-danger-default: var(--eds-color-utility-red-light-13);
+  --eds-color-text-danger-subtle: var(--eds-color-utility-red-light-12);
   --eds-color-background-canvas-neutral: var(--eds-color-neutral-light-1);
   --eds-color-background-surface-neutral: var(--eds-color-neutral-light-2);
   --eds-color-background-fill-neutral-secondary-default: var(--eds-color-neutral-light-3);

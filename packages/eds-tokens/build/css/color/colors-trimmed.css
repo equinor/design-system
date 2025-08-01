@@ -3,19 +3,24 @@
  */
 
 :root {
-  --eds-color-text-neutral-primary: light-dark(#1e1e1e, #eaeef1);
-  --eds-color-text-neutral-secondary: light-dark(#454545, #bcc6ce);
-  --eds-color-text-neutral-on-strong: light-dark(#ffffff, #ffffff);
-  --eds-color-text-accent-primary: light-dark(#152122, #e0f1f3);
-  --eds-color-text-accent-secondary: light-dark(#214d51, #a2ced2);
-  --eds-color-text-success-primary: light-dark(#152215, #e0f4de);
-  --eds-color-text-success-secondary: light-dark(#21511f, #a2d49f);
-  --eds-color-text-info-primary: light-dark(#13202a, #dcf1ff);
-  --eds-color-text-info-secondary: light-dark(#144a6b, #99cbf0);
-  --eds-color-text-warning-primary: light-dark(#2a1b0f, #ffe8d6);
-  --eds-color-text-warning-secondary: light-dark(#693600, #f1b78a);
-  --eds-color-text-danger-primary: light-dark(#311515, #ffe1df);
-  --eds-color-text-danger-secondary: light-dark(#7d1a23, #ffa3a1);
+  --eds-color-text-neutral-default: light-dark(#1e1e1e, #eaeef1);
+  --eds-color-text-neutral-subtle: light-dark(#454545, #bcc6ce);
+  --eds-color-text-neutral-inverse: light-dark(#ffffff, #ffffff);
+  --eds-color-text-accent-default: light-dark(#152122, #e0f1f3);
+  --eds-color-text-accent-subtle: light-dark(#214d51, #a2ced2);
+  --eds-color-text-accent-inverse: light-dark(#ffffff, #ffffff);
+  --eds-color-text-success-default: light-dark(#152215, #e0f4de);
+  --eds-color-text-success-subtle: light-dark(#21511f, #a2d49f);
+  --eds-color-text-success-inverse: light-dark(#ffffff, #ffffff);
+  --eds-color-text-info-default: light-dark(#13202a, #dcf1ff);
+  --eds-color-text-info-subtle: light-dark(#144a6b, #99cbf0);
+  --eds-color-text-info-inverse: light-dark(#ffffff, #ffffff);
+  --eds-color-text-warning-default: light-dark(#2a1b0f, #ffe8d6);
+  --eds-color-text-warning-subtle: light-dark(#693600, #f1b78a);
+  --eds-color-text-warning-inverse: light-dark(#ffffff, #ffffff);
+  --eds-color-text-danger-default: light-dark(#311515, #ffe1df);
+  --eds-color-text-danger-subtle: light-dark(#7d1a23, #ffa3a1);
+  --eds-color-text-danger-inverse: light-dark(#ffffff, #ffffff);
   --eds-color-background-canvas-neutral: light-dark(#ffffff, #181a1c);
   --eds-color-background-surface-neutral: light-dark(#f3f3f3, #202325);
   --eds-color-background-fill-neutral-secondary-default: light-dark(#e1e1e1, #2a3033);

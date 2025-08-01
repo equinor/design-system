@@ -3,19 +3,24 @@
  */
 
 [data-color-scheme="dark"] {
-  --eds-color-text-neutral-primary: #eaeef1;
-  --eds-color-text-neutral-secondary: #bcc6ce;
-  --eds-color-text-neutral-on-strong: #ffffff;
-  --eds-color-text-accent-primary: #e0f1f3;
-  --eds-color-text-accent-secondary: #a2ced2;
-  --eds-color-text-success-primary: #e0f4de;
-  --eds-color-text-success-secondary: #a2d49f;
-  --eds-color-text-info-primary: #dcf1ff;
-  --eds-color-text-info-secondary: #99cbf0;
-  --eds-color-text-warning-primary: #ffe8d6;
-  --eds-color-text-warning-secondary: #f1b78a;
-  --eds-color-text-danger-primary: #ffe1df;
-  --eds-color-text-danger-secondary: #ffa3a1;
+  --eds-color-text-neutral-default: #eaeef1;
+  --eds-color-text-neutral-subtle: #bcc6ce;
+  --eds-color-text-neutral-inverse: #ffffff;
+  --eds-color-text-accent-default: #e0f1f3;
+  --eds-color-text-accent-subtle: #a2ced2;
+  --eds-color-text-accent-inverse: #ffffff;
+  --eds-color-text-success-default: #e0f4de;
+  --eds-color-text-success-subtle: #a2d49f;
+  --eds-color-text-success-inverse: #ffffff;
+  --eds-color-text-info-default: #dcf1ff;
+  --eds-color-text-info-subtle: #99cbf0;
+  --eds-color-text-info-inverse: #ffffff;
+  --eds-color-text-warning-default: #ffe8d6;
+  --eds-color-text-warning-subtle: #f1b78a;
+  --eds-color-text-warning-inverse: #ffffff;
+  --eds-color-text-danger-default: #ffe1df;
+  --eds-color-text-danger-subtle: #ffa3a1;
+  --eds-color-text-danger-inverse: #ffffff;
   --eds-color-background-canvas-neutral: #181a1c;
   --eds-color-background-surface-neutral: #202325;
   --eds-color-background-fill-neutral-secondary-default: #2a3033;
