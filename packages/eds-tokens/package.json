@@ -84,7 +84,11 @@
     "update-figma:spacing-modes": "sync-tokens-to-figma --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma": "pnpm run update-figma:primitives && pnpm run update-figma:themes",
     "update-tokens:foundations": "sync-figma-to-tokens --file-key GnovDpL3UV6X51Ot7Kv6Im",
-    "update-figma:foundations": "sync-tokens-to-figma --file-key GnovDpL3UV6X51Ot7Kv6Im"
+    "update-figma:foundations": "sync-tokens-to-figma --file-key GnovDpL3UV6X51Ot7Kv6Im",
+    "update-tokens:color-static": "sync-figma-to-tokens --file-key OWxw2XogDLUt1aCvcDFXPw",
+    "update-figma:color-static": "sync-tokens-to-figma --file-key OWxw2XogDLUt1aCvcDFXPw",
+    "update-tokens:color-dynamic": "sync-figma-to-tokens --file-key nyPaQ3QnI1UAcxKW4a0d2c",
+    "update-figma:color-dynamic": "sync-tokens-to-figma --file-key nyPaQ3QnI1UAcxKW4a0d2c"
   },
   "keywords": [
     "eds",
