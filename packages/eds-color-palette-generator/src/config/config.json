@@ -7,27 +7,27 @@
   "stdDev": 2,
   "colors": [
     {
-      "name": "accent",
+      "name": "Moss Green",
       "hex": "#007079"
     },
     {
-      "name": "neutral",
+      "name": "Gray",
       "hex": "#4A4A4A"
     },
     {
-      "name": "success",
+      "name": "Green",
       "hex": "#3FA13D"
     },
     {
-      "name": "info",
+      "name": "Blue",
       "hex": "#0084C4"
     },
     {
-      "name": "warning",
+      "name": "Orange",
       "hex": "#E57E00"
     },
     {
-      "name": "danger",
+      "name": "Red",
       "hex": "#E20337"
     }
   ]

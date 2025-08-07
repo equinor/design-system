@@ -5,57 +5,14 @@ export type TokenGroup = {
 }
 
 export function formatColorsAsTokens(
-  lightColors: {
-    accent: ColorValue[]
-    neutral: ColorValue[]
-    success: ColorValue[]
-    info: ColorValue[]
-    warning: ColorValue[]
-    danger: ColorValue[]
-  },
-  darkColors: {
-    accentDark: ColorValue[]
-    neutralDark: ColorValue[]
-    successDark: ColorValue[]
-    infoDark: ColorValue[]
-    warningDark: ColorValue[]
-    dangerDark: ColorValue[]
-  },
+  colors: Record<string, ColorValue[]>,
 ): string {
-  const tokens = {
-    eds: {
-      color: {
-        neutral: {
-          light: formatColorScale(lightColors.neutral),
-          dark: formatColorScale(darkColors.neutralDark),
-        },
-        utility: {
-          red: {
-            light: formatColorScale(lightColors.danger),
-            dark: formatColorScale(darkColors.dangerDark),
-          },
-          yellow: {
-            light: formatColorScale(lightColors.warning),
-            dark: formatColorScale(darkColors.warningDark),
-          },
-          green: {
-            light: formatColorScale(lightColors.success),
-            dark: formatColorScale(darkColors.successDark),
-          },
-          blue: {
-            light: formatColorScale(lightColors.info),
-            dark: formatColorScale(darkColors.infoDark),
-          },
-        },
-        brand: {
-          'moss-green': {
-            light: formatColorScale(lightColors.accent),
-            dark: formatColorScale(darkColors.accentDark),
-          },
-        },
-      },
-    },
-  }
+  const tokens: Record<string, TokenGroup> = {}
+
+  // Create tokens for each color in the record
+  Object.entries(colors).forEach(([colorName, colorScale]) => {
+    tokens[colorName] = formatColorScale(colorScale)
+  })
 
   return JSON.stringify(tokens, null, 2)
 }
