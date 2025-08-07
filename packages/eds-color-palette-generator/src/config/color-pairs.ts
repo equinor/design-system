@@ -221,23 +221,43 @@ export const colorPairs: Array<ColorPair | null> = [
       },
     ],
   },
-  // accessible text 11
+  // text contrast-subtle 11
   {
     usedOnStep: [
       {
-        stepIndex: 11,
+        stepIndex: 12,
         lc: APCA_CONTRAST_LEVELS.LC_60,
-        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For UI elements
       {
-        stepIndex: 12,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+        stepIndex: 13,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For interactive states
       {
+        stepIndex: 14,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For interactive states
+    ],
+  },
+  // text contrast-strong text 11
+  {
+    usedOnStep: [
+      {
+        stepIndex: 12,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For UI elements
+      {
         stepIndex: 13,
-        lc: APCA_CONTRAST_LEVELS.LC_45,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For interactive states
+      {
+        stepIndex: 14,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For interactive states
     ],
   },

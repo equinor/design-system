@@ -22,19 +22,17 @@ type OklchInfo = {
 
 // Function to determine text color for steps
 function getTextColorForStep(colors: string[], stepIndex: number): string {
-  if (stepIndex >= 7 && stepIndex <= 10) {
+  if (stepIndex === 9 || stepIndex === 10) {
     return colors[0] // background color
   }
-
-  if (stepIndex === 11) {
-    return 'black' // base color
+  if (stepIndex === 10 || stepIndex === 11) {
+    return colors[9] // secondary text color
+  }
+  if (stepIndex > 12) {
+    return colors[11] // contrast text
   }
 
-  if (stepIndex >= 12) {
-    return colors[10] // contrast text
-  }
-
-  return colors[9] // default text
+  return colors[8] // default text
 }
 
 // Convert hex color to OKLCH format
@@ -173,7 +171,7 @@ export function ColorScale({
           {colorName}
         </h3>
       )}
-      <div className="grid gap-3 mb-4 grid-cols-14">
+      <div className="grid gap-3 mb-4 grid-cols-15">
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)
           const pairsWithSteps = colorPairs[i]?.usedOnStep

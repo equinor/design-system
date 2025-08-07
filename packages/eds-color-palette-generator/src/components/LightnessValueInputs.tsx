@@ -16,7 +16,7 @@ export const LightnessValueInputs = ({
   const values = colorScheme === 'light' ? lightModeValues : darkModeValues
 
   return (
-    <div className="grid grid-cols-14 gap-3 mb-2">
+    <div className="grid grid-cols-15 gap-3 mb-2">
       {values.map((value, index) => (
         <div key={`lightness-${index}`} className="flex flex-col items-center">
           <input
