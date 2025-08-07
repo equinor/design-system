@@ -20,13 +20,13 @@ export function formatColorsAsTokens(
 function formatColorScale(colors: ColorValue[]): TokenGroup {
   const result: TokenGroup = {}
 
-  const start = colors.slice(0, 8)
-  const textColors = colors.slice(8, 10)
-  const solidColors = colors.slice(10, 13)
+  // const start = colors.slice(0, 8)
+  // const textColors = colors.slice(8, 10)
+  // const solidColors = colors.slice(10, 13)
 
-  const newArray = [...start, ...solidColors, ...textColors]
+  // const newArray = [...start, ...solidColors, ...textColors]
 
-  newArray.forEach((color, index) => {
+  colors.forEach((color, index) => {
     result[`${index + 1}`] = {
       $type: 'color',
       $value: color,
