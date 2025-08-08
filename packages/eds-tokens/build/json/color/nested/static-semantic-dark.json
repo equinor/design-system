@@ -2,16 +2,16 @@
   "Background": {
     "Neutral": {
       "Default": "#0b0b0b",
-      "Subtle": "#222",
+      "Subtle": "#222222",
       "Medium": {
-        "Default": "#555",
+        "Default": "#555555",
         "Hover": "#5d5d5d",
         "Active": "#636363"
       },
       "Strong": {
         "Default": "#4a4a4a",
         "Hover": "#5b5b5b",
-        "Active": "#666"
+        "Active": "#666666"
       }
     },
     "Accent": {

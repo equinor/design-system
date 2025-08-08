@@ -1,7 +1,7 @@
 {
   "Background": {
     "Neutral": {
-      "Default": "#fff",
+      "Default": "#ffffff",
       "Subtle": "#f2f2f2",
       "Medium": {
         "Default": "#d7d7d7",
@@ -15,7 +15,7 @@
       }
     },
     "Accent": {
-      "Default": "#fff",
+      "Default": "#ffffff",
       "Subtle": "#d7fafd",
       "Medium": {
         "Default": "#ace3e9",
@@ -29,7 +29,7 @@
       }
     },
     "Success": {
-      "Default": "#fff",
+      "Default": "#ffffff",
       "Subtle": "#d7ffd3",
       "Medium": {
         "Default": "#aceba8",
@@ -43,7 +43,7 @@
       }
     },
     "Info": {
-      "Default": "#fff",
+      "Default": "#ffffff",
       "Subtle": "#d8f7ff",
       "Medium": {
         "Default": "#a2e0ff",
@@ -57,7 +57,7 @@
       }
     },
     "Warning": {
-      "Default": "#fff",
+      "Default": "#ffffff",
       "Subtle": "#ffead0",
       "Medium": {
         "Default": "#ffc791",
@@ -71,7 +71,7 @@
       }
     },
     "Danger": {
-      "Default": "#fff",
+      "Default": "#ffffff",
       "Subtle": "#ffe7e6",
       "Medium": {
         "Default": "#ffc1bf",
@@ -121,38 +121,38 @@
     "Neutral": {
       "Default": "#3a3a3a",
       "Strong": "#1e1e1e",
-      "Contrast subtle": "#eee",
-      "Contrast strong": "#fff"
+      "Contrast subtle": "#eeeeee",
+      "Contrast strong": "#ffffff"
     },
     "Accent": {
       "Default": "#303d3f",
       "Strong": "#1b1f20",
       "Contrast subtle": "#d1f7fb",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Success": {
       "Default": "#303f2e",
       "Strong": "#1b201b",
       "Contrast subtle": "#d1fcce",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Info": {
       "Default": "#2d3d49",
       "Strong": "#1b1f23",
       "Contrast subtle": "#d2f4ff",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Warning": {
       "Default": "#493628",
       "Strong": "#231d19",
       "Contrast subtle": "#ffe6c9",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Danger": {
       "Default": "#52302f",
       "Strong": "#261c1b",
       "Contrast subtle": "#ffe3e1",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     }
   }
 }

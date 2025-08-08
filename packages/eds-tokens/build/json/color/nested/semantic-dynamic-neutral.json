@@ -10,7 +10,7 @@
       "Hover": "#3a3a3a",
       "Active": "#2f2f2f"
     },
-    "Default": "#fff",
+    "Default": "#ffffff",
     "Subtle": "#f2f2f2"
   },
   "Border": {
@@ -21,7 +21,7 @@
   "Text": {
     "Default": "#3a3a3a",
     "Strong": "#1e1e1e",
-    "Contrast subtle": "#eee",
-    "Contrast strong": "#fff"
+    "Contrast subtle": "#eeeeee",
+    "Contrast strong": "#ffffff"
   }
 }

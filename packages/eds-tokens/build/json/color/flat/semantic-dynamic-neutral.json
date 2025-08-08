@@ -5,13 +5,13 @@
   "background-strong-default": "#4a4a4a",
   "background-strong-hover": "#3a3a3a",
   "background-strong-active": "#2f2f2f",
-  "background-default": "#fff",
+  "background-default": "#ffffff",
   "background-subtle": "#f2f2f2",
   "border-subtle": "#9e9e9e",
   "border-medium": "#808080",
   "border-strong": "#636363",
   "text-default": "#3a3a3a",
   "text-strong": "#1e1e1e",
-  "text-contrast-subtle": "#eee",
-  "text-contrast-strong": "#fff"
+  "text-contrast-subtle": "#eeeeee",
+  "text-contrast-strong": "#ffffff"
 }

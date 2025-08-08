@@ -10,7 +10,7 @@
       "Hover": "#bd0023",
       "Active": "#a0001b"
     },
-    "Default": "#fff",
+    "Default": "#ffffff",
     "Subtle": "#ffe7e6"
   },
   "Border": {
@@ -22,6 +22,6 @@
     "Default": "#52302f",
     "Strong": "#261c1b",
     "Contrast subtle": "#ffe3e1",
-    "Contrast strong": "#fff"
+    "Contrast strong": "#ffffff"
   }
 }

@@ -626,6 +626,7 @@
   --eds-typography-ui-body-6xl-font-weight-lighter: var(--eds--spacious, var(--eds-type-scale-inter-1100-font-weight-lighter)) var(--eds--comfortable, var(--eds-type-scale-inter-1000-font-weight-lighter));
   --eds-typography-ui-body-6xl-font-weight-normal: var(--eds--spacious, var(--eds-type-scale-inter-1100-font-weight-normal)) var(--eds--comfortable, var(--eds-type-scale-inter-1000-tracking-normal));
   --eds-typography-ui-body-6xl-font-weight-bolder: var(--eds--spacious, var(--eds-type-scale-inter-1100-font-weight-bolder)) var(--eds--comfortable, var(--eds-type-scale-inter-1000-font-weight-bolder));
+  --eds-typography-header-font-family: var(--eds-font-family-equinor);
   --eds-typography-header-xs-font-size: var(--eds--spacious, var(--eds-type-scale-equinor-200-font-size)) var(--eds--comfortable, var(--eds-type-scale-equinor-100-font-size));
   --eds-typography-header-xs-tracking-tight: var(--eds--spacious, var(--eds-type-scale-equinor-200-tracking-tight)) var(--eds--comfortable, var(--eds-type-scale-equinor-100-tracking-tight));
   --eds-typography-header-xs-tracking-normal: var(--eds--spacious, var(--eds-type-scale-equinor-200-tracking-normal)) var(--eds--comfortable, var(--eds-type-scale-equinor-100-tracking-normal));
@@ -633,7 +634,6 @@
   --eds-typography-header-xs-font-weight-lighter: var(--eds--spacious, var(--eds-type-scale-equinor-200-font-weight-lighter)) var(--eds--comfortable, var(--eds-type-scale-equinor-100-font-weight-lighter));
   --eds-typography-header-xs-font-weight-normal: var(--eds--spacious, var(--eds-type-scale-equinor-200-font-weight-normal)) var(--eds--comfortable, var(--eds-type-scale-equinor-100-font-weight-normal));
   --eds-typography-header-xs-font-weight-bolder: var(--eds--spacious, var(--eds-type-scale-equinor-200-font-weight-bolder)) var(--eds--comfortable, var(--eds-type-scale-equinor-100-font-weight-bolder));
-  --eds-typography-header-font-family: var(--eds-font-family-equinor);
   --eds-typography-header-sm-font-size: var(--eds--spacious, var(--eds-type-scale-equinor-300-font-size)) var(--eds--comfortable, var(--eds-type-scale-equinor-200-font-size));
   --eds-typography-header-sm-tracking-tight: var(--eds--spacious, var(--eds-type-scale-equinor-300-tracking-tight)) var(--eds--comfortable, var(--eds-type-scale-equinor-200-tracking-tight));
   --eds-typography-header-sm-tracking-normal: var(--eds--spacious, var(--eds-type-scale-equinor-300-tracking-normal)) var(--eds--comfortable, var(--eds-type-scale-equinor-200-tracking-normal));

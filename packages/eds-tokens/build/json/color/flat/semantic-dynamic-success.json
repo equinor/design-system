@@ -5,7 +5,7 @@
   "background-strong-default": "#3fa13d",
   "background-strong-hover": "#1a841c",
   "background-strong-active": "#007100",
-  "background-default": "#fff",
+  "background-default": "#ffffff",
   "background-subtle": "#d7ffd3",
   "border-subtle": "#57b854",
   "border-medium": "#439640",
@@ -13,5 +13,5 @@
   "text-default": "#303f2e",
   "text-strong": "#1b201b",
   "text-contrast-subtle": "#d1fcce",
-  "text-contrast-strong": "#fff"
+  "text-contrast-strong": "#ffffff"
 }
