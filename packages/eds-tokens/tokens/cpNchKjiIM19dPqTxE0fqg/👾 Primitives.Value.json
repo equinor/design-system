@@ -625,6 +625,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 8,
@@ -728,6 +756,34 @@
         "font-size": {
           "$type": "number",
           "$value": 10.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 0,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -853,6 +909,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": -0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": -1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 8,
@@ -956,6 +1040,34 @@
         "font-size": {
           "$type": "number",
           "$value": 14,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 2,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1081,6 +1193,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 12,
@@ -1184,6 +1324,34 @@
         "font-size": {
           "$type": "number",
           "$value": 18.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": -0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": -1,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1309,6 +1477,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 16,
@@ -1412,6 +1608,34 @@
         "font-size": {
           "$type": "number",
           "$value": 24.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 2,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1537,6 +1761,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 20,
@@ -1651,6 +1903,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 24,
@@ -1754,6 +2034,34 @@
         "font-size": {
           "$type": "number",
           "$value": 37,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1881,6 +2189,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 2,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 8,
@@ -1984,6 +2320,34 @@
         "font-size": {
           "$type": "number",
           "$value": 12,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2109,6 +2473,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 8,
@@ -2212,6 +2604,34 @@
         "font-size": {
           "$type": "number",
           "$value": 16,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 2,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2337,6 +2757,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 12,
@@ -2440,6 +2888,34 @@
         "font-size": {
           "$type": "number",
           "$value": 21,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": -0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": -1,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2565,6 +3041,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 16,
@@ -2668,6 +3172,34 @@
         "font-size": {
           "$type": "number",
           "$value": 27.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": -0.5,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": -1,
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2793,6 +3325,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 20,
@@ -2907,6 +3467,34 @@
             }
           }
         },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 2,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
         "cap-height-rounded": {
           "$type": "number",
           "$value": 24,
@@ -3010,6 +3598,34 @@
         "font-size": {
           "$type": "number",
           "$value": 42,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-centred": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "padding-baselined": {
+          "$type": "number",
+          "$value": 2,
           "$description": "",
           "$extensions": {
             "com.figma": {

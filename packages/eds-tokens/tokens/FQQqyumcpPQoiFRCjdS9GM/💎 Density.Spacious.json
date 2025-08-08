@@ -2645,6 +2645,20 @@
       }
     },
     "header": {
+      "font-family": {
+        "$type": "string",
+        "$value": "{font-family.equinor}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
       "xs": {
         "font-size": {
           "$type": "number",
@@ -2788,20 +2802,6 @@
               "scopes": [],
               "codeSyntax": {}
             }
-          }
-        }
-      },
-      "font-family": {
-        "$type": "string",
-        "$value": "{font-family.equinor}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
           }
         }
       },
