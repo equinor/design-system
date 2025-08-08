@@ -160,14 +160,39 @@
         border-bottom: none;
       }
 
+      .color-swatches {
+        display: flex;
+        gap: var(--eds-spacing-inline-xs);
+        margin-right: var(--eds-spacing-inline-md);
+        flex-shrink: 0;
+      }
+
       .color-swatch {
         width: 40px;
         height: 40px;
         border-radius: var(--eds-spacing-border-radius-rounded);
         border: var(--eds-sizing-stroke-thin) solid
           var(--eds-color-border-neutral-medium);
-        margin-right: var(--eds-spacing-inline-md);
         flex-shrink: 0;
+      }
+
+      .color-swatch.small {
+        width: 30px;
+        height: 30px;
+      }
+
+      .color-state-label {
+        font-size: var(--eds-typography-ui-body-xs-font-size);
+        color: var(--eds-color-text-neutral-subtle);
+        text-align: center;
+        margin-top: var(--eds-spacing-stack-3-xs);
+        opacity: 0.7;
+      }
+
+      .color-swatch-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .color-info {
@@ -414,63 +439,173 @@
           <div class="color-category">
             <h3>Background</h3>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="bg-default-swatch"
-                style="background: var(--eds-color-background-neutral-default)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-default-swatch"
+                    style="
+                      background: var(--eds-color-background-neutral-default);
+                    "
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="bg-default-name">
                   --eds-color-background-neutral-default
                 </div>
-                <div class="color-value">Primary background</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="bg-subtle-swatch"
-                style="background: var(--eds-color-background-neutral-subtle)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-subtle-swatch"
+                    style="
+                      background: var(--eds-color-background-neutral-subtle);
+                    "
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="bg-subtle-name">
                   --eds-color-background-neutral-subtle
                 </div>
-                <div class="color-value">Subtle background</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="bg-medium-swatch"
-                style="
-                  background: var(
-                    --eds-color-background-neutral-medium-default
-                  );
-                "
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-medium-default-swatch"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-medium-default
+                      );
+                    "
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
-                <div class="color-name" id="bg-medium-name">
+                <div class="color-name" id="bg-medium-default-name">
                   --eds-color-background-neutral-medium-default
                 </div>
-                <div class="color-value">Medium background</div>
+                <div class="color-value">Medium background default</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="bg-strong-swatch"
-                style="
-                  background: var(
-                    --eds-color-background-neutral-strong-default
-                  );
-                "
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-medium-hover-swatch"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-medium-hover
+                      );
+                    "
+                  ></div>
+                  <div class="color-state-label">hover</div>
+                </div>
+              </div>
               <div class="color-info">
-                <div class="color-name" id="bg-strong-name">
+                <div class="color-name" id="bg-medium-hover-name">
+                  --eds-color-background-neutral-medium-hover
+                </div>
+                <div class="color-value">Medium background hover</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-medium-active-swatch"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-medium-active
+                      );
+                    "
+                  ></div>
+                  <div class="color-state-label">active</div>
+                </div>
+              </div>
+              <div class="color-info">
+                <div class="color-name" id="bg-medium-active-name">
+                  --eds-color-background-neutral-medium-active
+                </div>
+                <div class="color-value">Medium background active</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-strong-default-swatch"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-strong-default
+                      );
+                    "
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
+              <div class="color-info">
+                <div class="color-name" id="bg-strong-default-name">
                   --eds-color-background-neutral-strong-default
                 </div>
-                <div class="color-value">Strong background</div>
+                <div class="color-value">Strong background default</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-strong-hover-swatch"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-strong-hover
+                      );
+                    "
+                  ></div>
+                  <div class="color-state-label">hover</div>
+                </div>
+              </div>
+              <div class="color-info">
+                <div class="color-name" id="bg-strong-hover-name">
+                  --eds-color-background-neutral-strong-hover
+                </div>
+                <div class="color-value">Strong background hover</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="bg-strong-active-swatch"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-strong-active
+                      );
+                    "
+                  ></div>
+                  <div class="color-state-label">active</div>
+                </div>
+              </div>
+              <div class="color-info">
+                <div class="color-name" id="bg-strong-active-name">
+                  --eds-color-background-neutral-strong-active
+                </div>
+                <div class="color-value">Strong background active</div>
               </div>
             </div>
           </div>
@@ -478,42 +613,54 @@
           <div class="color-category">
             <h3>Border</h3>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="border-subtle-swatch"
-                style="background: var(--eds-color-border-neutral-subtle)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="border-subtle-swatch"
+                    style="background: var(--eds-color-border-neutral-subtle)"
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="border-subtle-name">
                   --eds-color-border-neutral-subtle
                 </div>
-                <div class="color-value">Subtle borders</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="border-medium-swatch"
-                style="background: var(--eds-color-border-neutral-medium)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="border-medium-swatch"
+                    style="background: var(--eds-color-border-neutral-medium)"
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="border-medium-name">
                   --eds-color-border-neutral-medium
                 </div>
-                <div class="color-value">Medium borders</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="border-strong-swatch"
-                style="background: var(--eds-color-border-neutral-strong)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="border-strong-swatch"
+                    style="background: var(--eds-color-border-neutral-strong)"
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="border-strong-name">
                   --eds-color-border-neutral-strong
                 </div>
-                <div class="color-value">Strong borders</div>
               </div>
             </div>
           </div>
@@ -521,59 +668,75 @@
           <div class="color-category">
             <h3>Text</h3>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="text-subtle-swatch"
-                style="background: var(--eds-color-text-neutral-subtle)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="text-subtle-swatch"
+                    style="background: var(--eds-color-text-neutral-subtle)"
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="text-subtle-name">
                   --eds-color-text-neutral-subtle
                 </div>
-                <div class="color-value">Default text</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="text-strong-swatch"
-                style="background: var(--eds-color-text-neutral-strong)"
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="text-strong-swatch"
+                    style="background: var(--eds-color-text-neutral-strong)"
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="text-strong-name">
                   --eds-color-text-neutral-strong
                 </div>
-                <div class="color-value">Strong text</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="text-contrast-subtle-swatch"
-                style="
-                  background: var(--eds-color-text-neutral-contrast-subtle);
-                "
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="text-contrast-subtle-swatch"
+                    style="
+                      background: var(--eds-color-text-neutral-contrast-subtle);
+                    "
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="text-contrast-subtle-name">
                   --eds-color-text-neutral-contrast-subtle
                 </div>
-                <div class="color-value">Contrast subtle</div>
               </div>
             </div>
             <div class="color-item">
-              <div
-                class="color-swatch"
-                id="text-contrast-strong-swatch"
-                style="
-                  background: var(--eds-color-text-neutral-contrast-strong);
-                "
-              ></div>
+              <div class="color-swatches">
+                <div class="color-swatch-container">
+                  <div
+                    class="color-swatch"
+                    id="text-contrast-strong-swatch"
+                    style="
+                      background: var(--eds-color-text-neutral-contrast-strong);
+                    "
+                  ></div>
+                  <div class="color-state-label">default</div>
+                </div>
+              </div>
               <div class="color-info">
                 <div class="color-name" id="text-contrast-strong-name">
                   --eds-color-text-neutral-contrast-strong
                 </div>
-                <div class="color-value">Contrast strong</div>
               </div>
             </div>
           </div>
@@ -619,15 +782,33 @@
         bgSubtleSwatch.style.background = `var(--eds-color-background-${appearance}-subtle)`
         bgSubtleName.textContent = `--eds-color-background-${appearance}-subtle`
 
-        const bgMediumSwatch = document.getElementById('bg-medium-swatch')
-        const bgMediumName = document.getElementById('bg-medium-name')
+        const bgMediumSwatch = document.getElementById(
+          'bg-medium-default-swatch',
+        )
+        const bgMediumName = document.getElementById('bg-medium-default-name')
+        const bgMediumHoverSwatch = document.getElementById(
+          'bg-medium-hover-swatch',
+        )
+        const bgMediumActiveSwatch = document.getElementById(
+          'bg-medium-active-swatch',
+        )
         bgMediumSwatch.style.background = `var(--eds-color-background-${appearance}-medium-default)`
         bgMediumName.textContent = `--eds-color-background-${appearance}-medium-default`
+        bgMediumHoverSwatch.style.background = `var(--eds-color-background-${appearance}-medium-hover)`
+        bgMediumActiveSwatch.style.background = `var(--eds-color-background-${appearance}-medium-active)`
 
-        const bgStrong = document.getElementById('bg-strong-swatch')
-        const bgStrongName = document.getElementById('bg-strong-name')
+        const bgStrong = document.getElementById('bg-strong-default-swatch')
+        const bgStrongName = document.getElementById('bg-strong-default-name')
+        const bgStrongHoverSwatch = document.getElementById(
+          'bg-strong-hover-swatch',
+        )
+        const bgStrongActiveSwatch = document.getElementById(
+          'bg-strong-active-swatch',
+        )
         bgStrong.style.background = `var(--eds-color-background-${appearance}-strong-default)`
         bgStrongName.textContent = `--eds-color-background-${appearance}-strong-default`
+        bgStrongHoverSwatch.style.background = `var(--eds-color-background-${appearance}-strong-hover)`
+        bgStrongActiveSwatch.style.background = `var(--eds-color-background-${appearance}-strong-active)`
 
         // Update border colors
         const borderSubtleSwatch = document.getElementById(
