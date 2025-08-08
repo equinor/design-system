@@ -1,7 +1,6 @@
 @import 'color-setup.css';
 @import 'registered-properties.css';
-@import 'color/light-foundation-verbose.css';
-@import 'color/dark-foundation-verbose.css';
+@import 'color/foundation.css';
 @import 'color/light-semantic-verbose.css';
 @import 'color/dark-semantic-verbose.css';
 @import 'spacing-setup.css';

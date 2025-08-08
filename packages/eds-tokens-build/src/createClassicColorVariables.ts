@@ -38,24 +38,6 @@ export async function createClassicColorVariables({
     'Semantic.Mode 1.json',
   )
 
-  const lightColorFoundation = _extend({
-    source: [FOUNDATION_COLOR_LIGHT_FILE],
-    buildPath: colorBuildPath,
-    fileName: 'light-foundation',
-    selector: ':root, [data-color-scheme="light"]',
-    prefix: PREFIX,
-    outputReferences: true,
-  })
-
-  const darkColorFoundation = _extend({
-    source: [FOUNDATION_COLOR_DARK_FILE],
-    buildPath: colorBuildPath,
-    fileName: 'dark-foundation',
-    selector: '[data-color-scheme="dark"]',
-    prefix: PREFIX,
-    outputReferences: true,
-  })
-
   const FILTER = (token: TransformedToken) =>
     includeTokenFilter(token, ['Semantic'])
 
@@ -103,8 +85,6 @@ export async function createClassicColorVariables({
     outputReferences: false,
   })
 
-  await lightColorFoundation.buildAllPlatforms()
-  await darkColorFoundation.buildAllPlatforms()
   await lightColorSemanticVerbose.buildAllPlatforms()
   await lightColorSemanticTrimmed.buildAllPlatforms()
   await darkColorSemanticVerbose.buildAllPlatforms()

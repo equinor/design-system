@@ -10,6 +10,7 @@ import {
   fontQuote,
   pxFormatted,
   pxToRem,
+  createFoundationColorVariables,
   createClassicColorVariables,
   createMatrixColorVariables,
   createSpacingAndTypographyVariables,
@@ -30,7 +31,7 @@ export async function generate() {
   console.info('Running Style Dictionary build script')
   console.info('Tokens directory:', TOKENS_DIR_FILE_PATH)
 
-  const colorBuildPath = 'color/'
+  const colorBuildPath = `color/`
 
   const cssTransforms = [
     'name/kebab',
@@ -39,10 +40,11 @@ export async function generate() {
     FONT_QUOTE_NAME,
   ]
 
-  await createMatrixColorVariables({
+  await createFoundationColorVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
+    cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,
-    prefix: 'eds-color',
+    cssTransforms,
   })
 
   await createClassicColorVariables({
@@ -51,6 +53,13 @@ export async function generate() {
     colorBuildPath: colorBuildPath,
     cssTransforms,
   })
+
+  await createMatrixColorVariables({
+    tokensDir: TOKENS_DIR_FILE_PATH,
+    colorBuildPath: colorBuildPath,
+    prefix: 'eds-color',
+  })
+
   await createSpacingAndTypographyVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
