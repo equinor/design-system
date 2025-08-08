@@ -1,0 +1,96 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-scheme="dark"] {
+  --eds-color-background-neutral-default: #0b0b0b;
+  --eds-color-background-neutral-subtle: #222222;
+  --eds-color-background-neutral-medium-default: #555555;
+  --eds-color-background-neutral-medium-hover: #5d5d5d;
+  --eds-color-background-neutral-medium-active: #636363;
+  --eds-color-background-neutral-strong-default: #4a4a4a;
+  --eds-color-background-neutral-strong-hover: #5b5b5b;
+  --eds-color-background-neutral-strong-active: #666666;
+  --eds-color-background-accent-default: #0a0b0b;
+  --eds-color-background-accent-subtle: #1e2323;
+  --eds-color-background-accent-medium-default: #3b5c5f;
+  --eds-color-background-accent-medium-hover: #3d656a;
+  --eds-color-background-accent-medium-active: #3e6c71;
+  --eds-color-background-accent-strong-default: #007079;
+  --eds-color-background-accent-strong-hover: #2a868f;
+  --eds-color-background-accent-strong-active: #3c959f;
+  --eds-color-background-success-default: #0a0c0a;
+  --eds-color-background-success-subtle: #1e231e;
+  --eds-color-background-success-medium-default: #3b6039;
+  --eds-color-background-success-medium-hover: #3d6b3a;
+  --eds-color-background-success-medium-active: #3e723b;
+  --eds-color-background-success-strong-default: #3fa13d;
+  --eds-color-background-success-strong-hover: #5ebf5b;
+  --eds-color-background-success-strong-active: #73d46f;
+  --eds-color-background-info-default: #0a0b0c;
+  --eds-color-background-info-subtle: #1d2226;
+  --eds-color-background-info-medium-default: #335a75;
+  --eds-color-background-info-medium-hover: #336383;
+  --eds-color-background-info-medium-active: #32698e;
+  --eds-color-background-info-strong-default: #0084c4;
+  --eds-color-background-info-strong-hover: #349fe1;
+  --eds-color-background-info-strong-active: #4bb2f5;
+  --eds-color-background-warning-default: #0c0b0a;
+  --eds-color-background-warning-subtle: #27201b;
+  --eds-color-background-warning-medium-default: #744a28;
+  --eds-color-background-warning-medium-hover: #835024;
+  --eds-color-background-warning-medium-active: #8d5320;
+  --eds-color-background-warning-strong-default: #e57e00;
+  --eds-color-background-warning-strong-hover: #ff9f3e;
+  --eds-color-background-warning-strong-active: #ffc185;
+  --eds-color-background-danger-default: #0d0a0a;
+  --eds-color-background-danger-subtle: #2a1e1e;
+  --eds-color-background-danger-medium-default: #86393b;
+  --eds-color-background-danger-medium-hover: #983a3d;
+  --eds-color-background-danger-medium-active: #a43a3f;
+  --eds-color-background-danger-strong-default: #e20337;
+  --eds-color-background-danger-strong-hover: #ff3c51;
+  --eds-color-background-danger-strong-active: #ff666d;
+  --eds-color-border-neutral-subtle: #898989;
+  --eds-color-border-neutral-medium: #929292;
+  --eds-color-border-neutral-strong: #989898;
+  --eds-color-border-accent-subtle: #4697a0;
+  --eds-color-border-accent-medium: #4ba1aa;
+  --eds-color-border-accent-strong: #50a8b1;
+  --eds-color-border-success-subtle: #46a044;
+  --eds-color-border-success-medium: #4caa49;
+  --eds-color-border-success-strong: #51b14e;
+  --eds-color-border-info-subtle: #2e92ce;
+  --eds-color-border-info-medium: #339bdb;
+  --eds-color-border-info-strong: #38a1e3;
+  --eds-color-border-warning-subtle: #cc6d00;
+  --eds-color-border-warning-medium: #d87400;
+  --eds-color-border-warning-strong: #e07a00;
+  --eds-color-border-danger-subtle: #f0384b;
+  --eds-color-border-danger-medium: #ff3e51;
+  --eds-color-border-danger-strong: #ff4356;
+  --eds-color-text-neutral-default: #e4e4e4; /** Used for text and icons */
+  --eds-color-text-neutral-strong: #ebebeb; /** Used for text and icons */
+  --eds-color-text-neutral-contrast-subtle: #121212; /** Text or icons against colored backgrounds */
+  --eds-color-text-neutral-contrast-strong: #030303; /** Text or icons against colored backgrounds */
+  --eds-color-text-accent-default: #c2eef3; /** Used for text and icons */
+  --eds-color-text-accent-strong: #ccf4f8; /** Used for text and icons */
+  --eds-color-text-accent-contrast-subtle: #101212; /** Text or icons against colored backgrounds */
+  --eds-color-text-accent-contrast-strong: #030303; /** Text or icons against colored backgrounds */
+  --eds-color-text-success-default: #c2f5be; /** Used for text and icons */
+  --eds-color-text-success-strong: #ccfac9; /** Used for text and icons */
+  --eds-color-text-success-contrast-subtle: #101210; /** Text or icons against colored backgrounds */
+  --eds-color-text-success-contrast-strong: #030303; /** Text or icons against colored backgrounds */
+  --eds-color-text-info-default: #beebff; /** Used for text and icons */
+  --eds-color-text-info-strong: #cbf1ff; /** Used for text and icons */
+  --eds-color-text-info-contrast-subtle: #101213; /** Text or icons against colored backgrounds */
+  --eds-color-text-info-contrast-strong: #030304; /** Text or icons against colored backgrounds */
+  --eds-color-text-warning-default: #ffd9b2; /** Used for text and icons */
+  --eds-color-text-warning-strong: #ffe2c1; /** Used for text and icons */
+  --eds-color-text-warning-contrast-subtle: #14110f; /** Text or icons against colored backgrounds */
+  --eds-color-text-warning-contrast-strong: #040303; /** Text or icons against colored backgrounds */
+  --eds-color-text-danger-default: #ffd5d2; /** Used for text and icons */
+  --eds-color-text-danger-strong: #ffdedc; /** Used for text and icons */
+  --eds-color-text-danger-contrast-subtle: #151010; /** Text or icons against colored backgrounds */
+  --eds-color-text-danger-contrast-strong: #040303; /** Text or icons against colored backgrounds */
+}

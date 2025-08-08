@@ -1,165 +1,112 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
-import { readJsonFiles } from '@equinor/eds-tokens-sync'
-import fs from 'fs'
 import path from 'path'
-import { StyleDictionary } from 'style-dictionary-utils'
-import type { TransformedToken } from 'style-dictionary/types'
-import { outputReferencesTransformed } from 'style-dictionary/utils'
-import { includeTokenFilter } from './filter/includeTokenFilter'
-import { createLightDarkTransform } from './transform/lightDark'
 import { _extend } from './utils'
+import type { TransformedToken } from 'style-dictionary/types'
+import { includeTokenFilter } from './filter/includeTokenFilter'
 
 export async function createClassicColorVariables({
   tokensDir,
-  cssBuildPath,
   colorBuildPath,
-  cssTransforms,
 }: {
   tokensDir: string
   cssBuildPath: string
   colorBuildPath: string
   cssTransforms: string[]
 }) {
-  const darkColorSchemeCollectionFile = '🌗 Color scheme.Dark.json'
-  const lightColorSchemeCollectionFile = '🌗 Color scheme.Light.json'
-  const coreColorCollectionFile = 'Core.Mode 1.json'
-
-  const COLOR_TOKENS_DIR = path.join(tokensDir, 'ZrJNpIhcHprG9bFpHlHcWa')
-  const COLOR_BRAND_DIR = path.join(tokensDir, '9Jody75rpiDhyTgNm3xOHd')
-  const COLOR_BRAND_SOURCE = path.join(COLOR_BRAND_DIR, coreColorCollectionFile)
-
-  const darkTokens = readJsonFiles([
-    path.join(
-      tokensDir,
-      'ZrJNpIhcHprG9bFpHlHcWa',
-      darkColorSchemeCollectionFile,
-    ),
-  ])
-
-  const lightDarkTransform = createLightDarkTransform({
-    name: 'lightDark',
-    darkTokensObject: darkTokens[darkColorSchemeCollectionFile],
-  })
-
-  StyleDictionary.registerTransform(lightDarkTransform)
-
-  console.info('COLOR_BRAND_SOURCE:', COLOR_BRAND_SOURCE)
-  console.info('File exists:', fs.existsSync(COLOR_BRAND_SOURCE))
-
-  const COLOR_LIGHT_SOURCE = path.join(
-    COLOR_TOKENS_DIR,
-    lightColorSchemeCollectionFile,
+  const PREFIX = 'eds-color'
+  const FOUNDATION_COLOR_TOKENS_DIR = path.join(
+    tokensDir,
+    'GnovDpL3UV6X51Ot7Kv6Im',
   )
 
-  const COLOR_DARK_SOURCE = path.join(
-    COLOR_TOKENS_DIR,
-    darkColorSchemeCollectionFile,
+  const FOUNDATION_COLOR_LIGHT_FILE = path.join(
+    FOUNDATION_COLOR_TOKENS_DIR,
+    '🌗 Color scheme.Light.json',
   )
 
-  const primitives = _extend({
-    source: [COLOR_BRAND_SOURCE],
+  const FOUNDATION_COLOR_DARK_FILE = path.join(
+    FOUNDATION_COLOR_TOKENS_DIR,
+    '🌗 Color scheme.Dark.json',
+  )
+
+  const SEMANTIC_COLOR_TOKENS_DIR = path.join(
+    tokensDir,
+    'OWxw2XogDLUt1aCvcDFXPw',
+  )
+
+  const SEMANTIC_COLOR_TOKENS_FILE = path.join(
+    SEMANTIC_COLOR_TOKENS_DIR,
+    'Semantic.Mode 1.json',
+  )
+
+  const lightColorFoundation = _extend({
+    source: [FOUNDATION_COLOR_LIGHT_FILE],
     buildPath: colorBuildPath,
-    fileName: 'primitives',
-    outputReferences: false, // The primitives should not reference other tokens. This can always be false.
-    transforms: cssTransforms,
+    fileName: 'light-foundation',
+    selector: ':root, [data-color-scheme="light"]',
+    prefix: PREFIX,
+    outputReferences: true,
   })
 
-  const lightMode = _extend({
-    include: [COLOR_BRAND_SOURCE],
-    source: [COLOR_LIGHT_SOURCE],
-    filter: (token) => includeTokenFilter(token, ['Light']),
+  const darkColorFoundation = _extend({
+    source: [FOUNDATION_COLOR_DARK_FILE],
     buildPath: colorBuildPath,
-    fileName: 'light',
+    fileName: 'dark-foundation',
+    selector: '[data-color-scheme="dark"]',
+    prefix: PREFIX,
+    outputReferences: true,
+  })
+
+  const FILTER = (token: TransformedToken) =>
+    includeTokenFilter(token, ['Semantic'])
+
+  const lightColorSemanticVerbose = _extend({
+    source: [SEMANTIC_COLOR_TOKENS_FILE],
+    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    filter: FILTER,
+    buildPath: colorBuildPath,
+    prefix: PREFIX,
+    fileName: 'light-semantic',
     selector: ':root, [data-color-scheme="light"]',
     outputReferences: true,
   })
 
-  const darkMode = _extend({
-    include: [COLOR_BRAND_SOURCE],
-    source: [COLOR_DARK_SOURCE],
-    filter: (token) => includeTokenFilter(token, ['Dark']),
+  const lightColorSemanticTrimmed = _extend({
+    source: [SEMANTIC_COLOR_TOKENS_FILE],
+    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    filter: FILTER,
     buildPath: colorBuildPath,
-    fileName: 'dark',
-    selector: '[data-color-scheme="dark"]',
-    outputReferences: true,
-  })
-
-  const lightModeTrimmed = _extend({
-    include: [COLOR_BRAND_SOURCE],
-    source: [COLOR_LIGHT_SOURCE],
-    filter: (token) => includeTokenFilter(token, ['Light']),
-    buildPath: colorBuildPath,
-    fileName: 'light',
+    prefix: PREFIX,
+    fileName: 'light-semantic',
     selector: ':root, [data-color-scheme="light"]',
     outputReferences: false,
   })
 
-  const darkModeTrimmed = _extend({
-    include: [COLOR_BRAND_SOURCE],
-    source: [COLOR_DARK_SOURCE],
-    filter: (token) => includeTokenFilter(token, ['Dark']),
+  const darkColorSemanticVerbose = _extend({
+    source: [SEMANTIC_COLOR_TOKENS_FILE],
+    include: [FOUNDATION_COLOR_DARK_FILE],
+    filter: FILTER,
     buildPath: colorBuildPath,
-    fileName: 'dark',
+    prefix: PREFIX,
+    fileName: 'dark-semantic',
+    selector: '[data-color-scheme="dark"]',
+    outputReferences: true,
+  })
+
+  const darkColorSemanticTrimmed = _extend({
+    source: [SEMANTIC_COLOR_TOKENS_FILE],
+    include: [FOUNDATION_COLOR_DARK_FILE],
+    filter: FILTER,
+    buildPath: colorBuildPath,
+    prefix: PREFIX,
+    fileName: 'dark-semantic',
     selector: '[data-color-scheme="dark"]',
     outputReferences: false,
   })
 
-  const lightDarkColorsTrimmed = new StyleDictionary({
-    include: [COLOR_BRAND_SOURCE],
-    source: [COLOR_LIGHT_SOURCE],
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        buildPath: path.join(cssBuildPath, colorBuildPath),
-        transforms: ['name/kebab', 'color/css', 'lightDark'],
-        files: [
-          {
-            filter: (token: TransformedToken) =>
-              includeTokenFilter(token, ['Light']),
-            destination: 'colors-trimmed.css',
-            format: 'css/variables',
-            options: {
-              outputReferences: false, // The trimmed colors should not reference other tokens
-            },
-          },
-        ],
-      },
-    },
-  })
-
-  const lightDarkColorsVerbose = new StyleDictionary({
-    include: [COLOR_BRAND_SOURCE],
-    source: [COLOR_LIGHT_SOURCE],
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        buildPath: path.join(cssBuildPath, colorBuildPath),
-        transforms: ['name/kebab', 'color/css', 'lightDark'],
-        files: [
-          {
-            filter: (token: TransformedToken) =>
-              includeTokenFilter(token, ['Light']),
-            destination: 'colors-verbose.css',
-            format: 'css/variables',
-            options: {
-              outputReferences: outputReferencesTransformed,
-            },
-          },
-        ],
-      },
-    },
-  })
-
-  await primitives.buildAllPlatforms()
-  await lightMode.buildAllPlatforms()
-  await lightModeTrimmed.buildAllPlatforms()
-  await darkMode.buildAllPlatforms()
-  await darkModeTrimmed.buildAllPlatforms()
-  await lightDarkColorsVerbose.buildAllPlatforms()
-  await lightDarkColorsTrimmed.buildAllPlatforms()
+  await lightColorFoundation.buildAllPlatforms()
+  await darkColorFoundation.buildAllPlatforms()
+  await lightColorSemanticVerbose.buildAllPlatforms()
+  await lightColorSemanticTrimmed.buildAllPlatforms()
+  await darkColorSemanticVerbose.buildAllPlatforms()
+  await darkColorSemanticTrimmed.buildAllPlatforms()
 }
