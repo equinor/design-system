@@ -14,7 +14,7 @@ export const BORDER_SUBTLE: string;
 export const BORDER_MEDIUM: string;
 export const BORDER_STRONG: string;
 /** Used for text and icons */
-export const TEXT_DEFAULT: string;
+export const TEXT_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_STRONG: string;
 /** Text or icons against colored backgrounds */

@@ -69,7 +69,7 @@ export const BORDER_DANGER_SUBTLE: string;
 export const BORDER_DANGER_MEDIUM: string;
 export const BORDER_DANGER_STRONG: string;
 /** Used for text and icons */
-export const TEXT_NEUTRAL_DEFAULT: string;
+export const TEXT_NEUTRAL_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_NEUTRAL_STRONG: string;
 /** Text or icons against colored backgrounds */
@@ -77,7 +77,7 @@ export const TEXT_NEUTRAL_CONTRAST_SUBTLE: string;
 /** Text or icons against colored backgrounds */
 export const TEXT_NEUTRAL_CONTRAST_STRONG: string;
 /** Used for text and icons */
-export const TEXT_ACCENT_DEFAULT: string;
+export const TEXT_ACCENT_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_ACCENT_STRONG: string;
 /** Text or icons against colored backgrounds */
@@ -85,7 +85,7 @@ export const TEXT_ACCENT_CONTRAST_SUBTLE: string;
 /** Text or icons against colored backgrounds */
 export const TEXT_ACCENT_CONTRAST_STRONG: string;
 /** Used for text and icons */
-export const TEXT_SUCCESS_DEFAULT: string;
+export const TEXT_SUCCESS_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_SUCCESS_STRONG: string;
 /** Text or icons against colored backgrounds */
@@ -93,7 +93,7 @@ export const TEXT_SUCCESS_CONTRAST_SUBTLE: string;
 /** Text or icons against colored backgrounds */
 export const TEXT_SUCCESS_CONTRAST_STRONG: string;
 /** Used for text and icons */
-export const TEXT_INFO_DEFAULT: string;
+export const TEXT_INFO_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_INFO_STRONG: string;
 /** Text or icons against colored backgrounds */
@@ -101,7 +101,7 @@ export const TEXT_INFO_CONTRAST_SUBTLE: string;
 /** Text or icons against colored backgrounds */
 export const TEXT_INFO_CONTRAST_STRONG: string;
 /** Used for text and icons */
-export const TEXT_WARNING_DEFAULT: string;
+export const TEXT_WARNING_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_WARNING_STRONG: string;
 /** Text or icons against colored backgrounds */
@@ -109,7 +109,7 @@ export const TEXT_WARNING_CONTRAST_SUBTLE: string;
 /** Text or icons against colored backgrounds */
 export const TEXT_WARNING_CONTRAST_STRONG: string;
 /** Used for text and icons */
-export const TEXT_DANGER_DEFAULT: string;
+export const TEXT_DANGER_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_DANGER_STRONG: string;
 /** Text or icons against colored backgrounds */

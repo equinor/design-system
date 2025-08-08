@@ -14,7 +14,7 @@
   --eds-color-border-subtle: var(--eds-color-blue-6);
   --eds-color-border-medium: var(--eds-color-blue-7);
   --eds-color-border-strong: var(--eds-color-blue-8);
-  --eds-color-text-default: var(--eds-color-blue-9); /** Used for text and icons */
+  --eds-color-text-subtle: var(--eds-color-blue-9); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-blue-10); /** Used for text and icons */
   --eds-color-text-contrast-subtle: var(--eds-color-blue-11); /** Text or icons against colored backgrounds */
   --eds-color-text-contrast-strong: var(--eds-color-blue-12); /** Text or icons against colored backgrounds */

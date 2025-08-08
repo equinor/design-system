@@ -184,7 +184,7 @@
     }
   },
   "Text": {
-    "Default": {
+    "Subtle": {
       "$type": "color",
       "$value": "{Moss Green.9}",
       "$description": "Used for text and icons",

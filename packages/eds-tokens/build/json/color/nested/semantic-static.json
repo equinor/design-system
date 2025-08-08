@@ -119,37 +119,37 @@
   },
   "Text": {
     "Neutral": {
-      "Default": "#3a3a3a",
+      "Subtle": "#3a3a3a",
       "Strong": "#1e1e1e",
       "Contrast subtle": "#eeeeee",
       "Contrast strong": "#ffffff"
     },
     "Accent": {
-      "Default": "#303d3f",
+      "Subtle": "#303d3f",
       "Strong": "#1b1f20",
       "Contrast subtle": "#d1f7fb",
       "Contrast strong": "#ffffff"
     },
     "Success": {
-      "Default": "#303f2e",
+      "Subtle": "#303f2e",
       "Strong": "#1b201b",
       "Contrast subtle": "#d1fcce",
       "Contrast strong": "#ffffff"
     },
     "Info": {
-      "Default": "#2d3d49",
+      "Subtle": "#2d3d49",
       "Strong": "#1b1f23",
       "Contrast subtle": "#d2f4ff",
       "Contrast strong": "#ffffff"
     },
     "Warning": {
-      "Default": "#493628",
+      "Subtle": "#493628",
       "Strong": "#231d19",
       "Contrast subtle": "#ffe6c9",
       "Contrast strong": "#ffffff"
     },
     "Danger": {
-      "Default": "#52302f",
+      "Subtle": "#52302f",
       "Strong": "#261c1b",
       "Contrast subtle": "#ffe3e1",
       "Contrast strong": "#ffffff"

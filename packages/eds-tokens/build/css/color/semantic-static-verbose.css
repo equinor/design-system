@@ -69,27 +69,27 @@
   --eds-color-border-danger-subtle: var(--eds-color-red-6);
   --eds-color-border-danger-medium: var(--eds-color-red-7);
   --eds-color-border-danger-strong: var(--eds-color-red-8);
-  --eds-color-text-neutral-default: var(--eds-color-gray-9); /** Used for text and icons */
+  --eds-color-text-neutral-subtle: var(--eds-color-gray-9); /** Used for text and icons */
   --eds-color-text-neutral-strong: var(--eds-color-gray-10); /** Used for text and icons */
   --eds-color-text-neutral-contrast-subtle: var(--eds-color-gray-11); /** Text or icons against colored backgrounds */
   --eds-color-text-neutral-contrast-strong: var(--eds-color-gray-12); /** Text or icons against colored backgrounds */
-  --eds-color-text-accent-default: var(--eds-color-moss-green-9); /** Used for text and icons */
+  --eds-color-text-accent-subtle: var(--eds-color-moss-green-9); /** Used for text and icons */
   --eds-color-text-accent-strong: var(--eds-color-moss-green-10); /** Used for text and icons */
   --eds-color-text-accent-contrast-subtle: var(--eds-color-moss-green-11); /** Text or icons against colored backgrounds */
   --eds-color-text-accent-contrast-strong: var(--eds-color-moss-green-12); /** Text or icons against colored backgrounds */
-  --eds-color-text-success-default: var(--eds-color-green-9); /** Used for text and icons */
+  --eds-color-text-success-subtle: var(--eds-color-green-9); /** Used for text and icons */
   --eds-color-text-success-strong: var(--eds-color-green-10); /** Used for text and icons */
   --eds-color-text-success-contrast-subtle: var(--eds-color-green-11); /** Text or icons against colored backgrounds */
   --eds-color-text-success-contrast-strong: var(--eds-color-green-12); /** Text or icons against colored backgrounds */
-  --eds-color-text-info-default: var(--eds-color-blue-9); /** Used for text and icons */
+  --eds-color-text-info-subtle: var(--eds-color-blue-9); /** Used for text and icons */
   --eds-color-text-info-strong: var(--eds-color-blue-10); /** Used for text and icons */
   --eds-color-text-info-contrast-subtle: var(--eds-color-blue-11); /** Text or icons against colored backgrounds */
   --eds-color-text-info-contrast-strong: var(--eds-color-blue-12); /** Text or icons against colored backgrounds */
-  --eds-color-text-warning-default: var(--eds-color-orange-9); /** Used for text and icons */
+  --eds-color-text-warning-subtle: var(--eds-color-orange-9); /** Used for text and icons */
   --eds-color-text-warning-strong: var(--eds-color-orange-10); /** Used for text and icons */
   --eds-color-text-warning-contrast-subtle: var(--eds-color-orange-11); /** Text or icons against colored backgrounds */
   --eds-color-text-warning-contrast-strong: var(--eds-color-orange-12); /** Text or icons against colored backgrounds */
-  --eds-color-text-danger-default: var(--eds-color-red-9); /** Used for text and icons */
+  --eds-color-text-danger-subtle: var(--eds-color-red-9); /** Used for text and icons */
   --eds-color-text-danger-strong: var(--eds-color-red-10); /** Used for text and icons */
   --eds-color-text-danger-contrast-subtle: var(--eds-color-red-11); /** Text or icons against colored backgrounds */
   --eds-color-text-danger-contrast-strong: var(--eds-color-red-12); /** Text or icons against colored backgrounds */

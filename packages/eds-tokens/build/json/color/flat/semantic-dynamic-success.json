@@ -10,7 +10,7 @@
   "border-subtle": "#57b854",
   "border-medium": "#439640",
   "border-strong": "#3e723b",
-  "text-default": "#303f2e",
+  "text-subtle": "#303f2e",
   "text-strong": "#1b201b",
   "text-contrast-subtle": "#d1fcce",
   "text-contrast-strong": "#ffffff"

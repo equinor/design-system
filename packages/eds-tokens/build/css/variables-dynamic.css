@@ -153,7 +153,7 @@
   --eds-color-border-subtle: var(--eds-color-gray-6);
   --eds-color-border-medium: var(--eds-color-gray-7);
   --eds-color-border-strong: var(--eds-color-gray-8);
-  --eds-color-text-default: var(--eds-color-gray-9);
+  --eds-color-text-subtle: var(--eds-color-gray-9);
   --eds-color-text-strong: var(--eds-color-gray-10);
   --eds-color-text-contrast-subtle: var(--eds-color-gray-11);
   --eds-color-text-contrast-strong: var(--eds-color-gray-12);
@@ -171,7 +171,7 @@
   --eds-color-border-subtle: var(--eds-color-moss-green-6);
   --eds-color-border-medium: var(--eds-color-moss-green-7);
   --eds-color-border-strong: var(--eds-color-moss-green-8);
-  --eds-color-text-default: var(--eds-color-moss-green-9);
+  --eds-color-text-subtle: var(--eds-color-moss-green-9);
   --eds-color-text-strong: var(--eds-color-moss-green-10);
   --eds-color-text-contrast-subtle: var(--eds-color-moss-green-11);
   --eds-color-text-contrast-strong: var(--eds-color-moss-green-12);
@@ -189,7 +189,7 @@
   --eds-color-border-subtle: var(--eds-color-green-6);
   --eds-color-border-medium: var(--eds-color-green-7);
   --eds-color-border-strong: var(--eds-color-green-8);
-  --eds-color-text-default: var(--eds-color-green-9);
+  --eds-color-text-subtle: var(--eds-color-green-9);
   --eds-color-text-strong: var(--eds-color-green-10);
   --eds-color-text-contrast-subtle: var(--eds-color-green-11);
   --eds-color-text-contrast-strong: var(--eds-color-green-12);
@@ -207,7 +207,7 @@
   --eds-color-border-subtle: var(--eds-color-blue-6);
   --eds-color-border-medium: var(--eds-color-blue-7);
   --eds-color-border-strong: var(--eds-color-blue-8);
-  --eds-color-text-default: var(--eds-color-blue-9);
+  --eds-color-text-subtle: var(--eds-color-blue-9);
   --eds-color-text-strong: var(--eds-color-blue-10);
   --eds-color-text-contrast-subtle: var(--eds-color-blue-11);
   --eds-color-text-contrast-strong: var(--eds-color-blue-12);
@@ -225,7 +225,7 @@
   --eds-color-border-subtle: var(--eds-color-orange-6);
   --eds-color-border-medium: var(--eds-color-orange-7);
   --eds-color-border-strong: var(--eds-color-orange-8);
-  --eds-color-text-default: var(--eds-color-orange-9);
+  --eds-color-text-subtle: var(--eds-color-orange-9);
   --eds-color-text-strong: var(--eds-color-orange-10);
   --eds-color-text-contrast-subtle: var(--eds-color-orange-11);
   --eds-color-text-contrast-strong: var(--eds-color-orange-12);
@@ -243,7 +243,7 @@
   --eds-color-border-subtle: var(--eds-color-red-6);
   --eds-color-border-medium: var(--eds-color-red-7);
   --eds-color-border-strong: var(--eds-color-red-8);
-  --eds-color-text-default: var(--eds-color-red-9);
+  --eds-color-text-subtle: var(--eds-color-red-9);
   --eds-color-text-strong: var(--eds-color-red-10);
   --eds-color-text-contrast-subtle: var(--eds-color-red-11);
   --eds-color-text-contrast-strong: var(--eds-color-red-12);

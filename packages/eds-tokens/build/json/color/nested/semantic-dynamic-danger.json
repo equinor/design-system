@@ -19,7 +19,7 @@
     "Strong": "#a43a3f"
   },
   "Text": {
-    "Default": "#52302f",
+    "Subtle": "#52302f",
     "Strong": "#261c1b",
     "Contrast subtle": "#ffe3e1",
     "Contrast strong": "#ffffff"

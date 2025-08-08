@@ -1109,7 +1109,7 @@
   },
   "Text": {
     "Neutral": {
-      "Default": {
+      "Subtle": {
         "$type": "color",
         "$value": "{Gray.9}",
         "$description": "Used for text and icons",
@@ -1175,7 +1175,7 @@
       }
     },
     "Accent": {
-      "Default": {
+      "Subtle": {
         "$type": "color",
         "$value": "{Moss Green.9}",
         "$description": "Used for text and icons",
@@ -1241,7 +1241,7 @@
       }
     },
     "Success": {
-      "Default": {
+      "Subtle": {
         "$type": "color",
         "$value": "{Green.9}",
         "$description": "Used for text and icons",
@@ -1307,7 +1307,7 @@
       }
     },
     "Info": {
-      "Default": {
+      "Subtle": {
         "$type": "color",
         "$value": "{Blue.9}",
         "$description": "Used for text and icons",
@@ -1373,7 +1373,7 @@
       }
     },
     "Warning": {
-      "Default": {
+      "Subtle": {
         "$type": "color",
         "$value": "{Orange.9}",
         "$description": "Used for text and icons",
@@ -1439,7 +1439,7 @@
       }
     },
     "Danger": {
-      "Default": {
+      "Subtle": {
         "$type": "color",
         "$value": "{Red.9}",
         "$description": "Used for text and icons",

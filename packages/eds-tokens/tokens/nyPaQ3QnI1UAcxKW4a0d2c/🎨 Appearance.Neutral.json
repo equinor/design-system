@@ -184,7 +184,7 @@
     }
   },
   "Text": {
-    "Default": {
+    "Subtle": {
       "$type": "color",
       "$value": "{Gray.9}",
       "$description": "Used for text and icons",
