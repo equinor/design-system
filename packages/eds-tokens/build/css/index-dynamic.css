@@ -1,0 +1,12 @@
+@import 'registered-properties.css';
+@import 'color-setup.css';
+@import 'color/foundation.css';
+@import 'color/semantic-dynamic-neutral-verbose.css';
+@import 'color/semantic-dynamic-accent-verbose.css';
+@import 'color/semantic-dynamic-success-verbose.css';
+@import 'color/semantic-dynamic-info-verbose.css';
+@import 'color/semantic-dynamic-warning-verbose.css';
+@import 'color/semantic-dynamic-danger-verbose.css';
+
+@import 'spacing-setup.css';
+@import 'spacing/spacing-trimmed.css';

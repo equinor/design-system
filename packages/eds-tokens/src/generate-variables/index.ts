@@ -11,8 +11,8 @@ import {
   pxFormatted,
   pxToRem,
   createFoundationColorVariables,
-  createClassicColorVariables,
-  createMatrixColorVariables,
+  createStaticColorVariables,
+  createDynamicColorVariables,
   createSpacingAndTypographyVariables,
 } from '@equinor/eds-tokens-build'
 
@@ -47,17 +47,18 @@ export async function generate() {
     cssTransforms,
   })
 
-  await createClassicColorVariables({
+  await createStaticColorVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,
     cssTransforms,
   })
 
-  await createMatrixColorVariables({
+  await createDynamicColorVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
+    cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,
-    prefix: 'eds-color',
+    cssTransforms,
   })
 
   await createSpacingAndTypographyVariables({
