@@ -1,5 +1,5 @@
 import { StyleDictionary as s } from "style-dictionary-utils";
-import { pxFormatted as n, pxTransform as i, pxToRem as c, fontQuote as l, createFoundationColorVariables as T, PX_TO_REM_NAME as m, PX_FORMATTED_NAME as u, FONT_QUOTE_NAME as d, createStaticColorVariables as f, createDynamicColorVariables as p, createSpacingAndTypographyVariables as g } from "@equinor/eds-tokens-build";
+import { pxFormatted as n, pxTransform as i, pxToRem as c, fontQuote as l, createColorVariablesFoundation as T, PX_TO_REM_NAME as m, PX_FORMATTED_NAME as u, FONT_QUOTE_NAME as d, createColorVariablesStatic as f, createColorVariablesDynamic as p, createSpacingAndTypographyVariables as g } from "@equinor/eds-tokens-build";
 const a = `${process.cwd()}/build`, e = `${a}/css`, _ = `${a}/js`, E = `${a}/json`;
 s.registerTransform(n);
 s.registerTransform(i);

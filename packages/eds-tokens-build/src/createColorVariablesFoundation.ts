@@ -2,7 +2,7 @@ import path from 'path'
 import { _extend } from './utils'
 import { mergeLightDarkFoundation } from './utils/mergeLightDarkFoundation'
 
-export async function createFoundationColorVariables({
+export async function createColorVariablesFoundation({
   tokensDir,
   colorBuildPath,
 }: {

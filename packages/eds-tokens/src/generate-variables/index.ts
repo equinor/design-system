@@ -10,9 +10,9 @@ import {
   fontQuote,
   pxFormatted,
   pxToRem,
-  createFoundationColorVariables,
-  createStaticColorVariables,
-  createDynamicColorVariables,
+  createColorVariablesFoundation,
+  createColorVariablesStatic,
+  createColorVariablesDynamic,
   createSpacingAndTypographyVariables,
 } from '@equinor/eds-tokens-build'
 
@@ -40,21 +40,21 @@ export async function generate() {
     FONT_QUOTE_NAME,
   ]
 
-  await createFoundationColorVariables({
+  await createColorVariablesFoundation({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,
     cssTransforms,
   })
 
-  await createStaticColorVariables({
+  await createColorVariablesStatic({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,
     cssTransforms,
   })
 
-  await createDynamicColorVariables({
+  await createColorVariablesDynamic({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,

@@ -139,9 +139,6 @@
   --eds-color-red-13: light-dark(#e20337, #e20337);
   --eds-color-red-14: light-dark(#bd0023, #ff3c51);
   --eds-color-red-15: light-dark(#a0001b, #ff666d);
-}
-
-:root, [data-color-scheme="light"], [data-color-scheme="dark"] {
   --eds-color-background-neutral-default: var(--eds-color-gray-1);
   --eds-color-background-neutral-subtle: var(--eds-color-gray-2);
   --eds-color-background-neutral-medium-default: var(--eds-color-gray-3);

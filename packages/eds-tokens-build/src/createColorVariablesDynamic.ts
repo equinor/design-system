@@ -3,7 +3,7 @@ import { _extend } from './utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import { includeTokenFilter } from './filter/includeTokenFilter'
 
-export async function createDynamicColorVariables({
+export async function createColorVariablesDynamic({
   tokensDir,
   colorBuildPath,
 }: {
@@ -22,11 +22,6 @@ export async function createDynamicColorVariables({
     FOUNDATION_COLOR_TOKENS_DIR,
     '🌗 Color scheme.Light.json',
   )
-
-  // const FOUNDATION_COLOR_DARK_FILE = path.join(
-  //   FOUNDATION_COLOR_TOKENS_DIR,
-  //   '🌗 Color scheme.Dark.json',
-  // )
 
   const SEMANTIC_COLOR_TOKENS_DIR = path.join(
     tokensDir,

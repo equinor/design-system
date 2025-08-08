@@ -2,7 +2,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-[data-color-scheme="dark"] {
+:root {
   --eds-color-background-neutral-default: var(--eds-color-gray-1);
   --eds-color-background-neutral-subtle: var(--eds-color-gray-2);
   --eds-color-background-neutral-medium-default: var(--eds-color-gray-3);
