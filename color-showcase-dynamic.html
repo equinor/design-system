@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDS Dynamic Color Variables Showcase</title>
+    <link
+      rel="stylesheet"
+      href="packages/eds-tokens/build/css/variables-dynamic.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          var(--eds-typography-ui-body-font-family),
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        background: var(--eds-color-background-default);
+        color: var(--eds-color-text-subtle);
+        line-height: 1.6;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--eds-spacing-inline-md);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: var(--eds-spacing-stack-3-xl);
+        padding: var(--eds-spacing-stack-xl) 0;
+        border-bottom: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-subtle);
+      }
+
+      .header h1 {
+        font-family: var(--eds-typography-header-font-family);
+        font-size: var(--eds-typography-header-3xl-font-size);
+        font-weight: var(--eds-typography-header-3xl-font-weight-bolder);
+        margin-bottom: var(--eds-spacing-stack-sm);
+        color: var(--eds-color-text-strong);
+      }
+
+      .controls {
+        display: flex;
+        gap: var(--eds-spacing-inline-md);
+        justify-content: center;
+        margin-bottom: var(--eds-spacing-stack-xl);
+        flex-wrap: wrap;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--eds-spacing-stack-xs);
+        align-items: center;
+      }
+
+      .control-group label {
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
+        color: var(--eds-color-text-strong);
+      }
+
+      .btn {
+        padding: var(--eds-spacing-inset-sm-inline)
+          var(--eds-spacing-inset-md-inline);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-medium);
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        background: var(--eds-color-background-medium-default);
+        color: var(--eds-color-text-subtle);
+        cursor: pointer;
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        transition: all 0.2s ease;
+      }
+
+      .btn:hover {
+        background: var(--eds-color-background-medium-hover);
+      }
+
+      .btn:active {
+        background: var(--eds-color-background-medium-active);
+      }
+
+      .btn.active {
+        background: var(--eds-color-background-strong-default);
+        color: var(--eds-color-text-contrast-strong);
+        border-color: var(--eds-color-border-strong);
+      }
+
+      .section {
+        margin-bottom: var(--eds-spacing-stack-3-xl);
+      }
+
+      .section h2 {
+        font-family: var(--eds-typography-header-font-family);
+        font-size: var(--eds-typography-header-xl-font-size);
+        font-weight: var(--eds-typography-header-xl-font-weight-bolder);
+        margin-bottom: var(--eds-spacing-stack-lg);
+        color: var(--eds-color-text-strong);
+        border-bottom: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-subtle);
+        padding-bottom: var(--eds-spacing-stack-xs);
+      }
+
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--eds-spacing-inline-lg);
+      }
+
+      .color-category {
+        background: var(--eds-color-background-subtle);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-subtle);
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        overflow: hidden;
+      }
+
+      .color-category h3 {
+        background: var(--eds-color-background-medium-default);
+        padding: var(--eds-spacing-inset-sm-inline)
+          var(--eds-spacing-inset-md-inline);
+        font-size: var(--eds-typography-ui-body-lg-font-size);
+        font-weight: var(--eds-typography-ui-body-lg-font-weight-bolder);
+        border-bottom: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-subtle);
+        text-transform: capitalize;
+      }
+
+      .color-item {
+        display: flex;
+        align-items: center;
+        padding: var(--eds-spacing-inset-sm-inline)
+          var(--eds-spacing-inset-md-inline);
+        border-bottom: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-subtle);
+      }
+
+      .color-item:last-child {
+        border-bottom: none;
+      }
+
+      .color-swatch {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-medium);
+        margin-right: var(--eds-spacing-inline-md);
+        flex-shrink: 0;
+      }
+
+      .color-info {
+        flex: 1;
+      }
+
+      .color-name {
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        margin-bottom: var(--eds-spacing-stack-3-xs);
+      }
+
+      .color-value {
+        font-size: var(--eds-typography-ui-body-xs-font-size);
+        color: var(--eds-color-text-subtle);
+        opacity: 0.8;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      }
+
+      .foundation-colors {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: var(--eds-spacing-inline-sm);
+        margin-bottom: var(--eds-spacing-stack-xl);
+      }
+
+      .foundation-color {
+        text-align: center;
+        padding: var(--eds-spacing-inset-md-inline);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-subtle);
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        background: var(--eds-color-background-subtle);
+      }
+
+      .foundation-color h4 {
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
+        margin-bottom: var(--eds-spacing-stack-sm);
+        text-transform: capitalize;
+      }
+
+      .foundation-swatch {
+        width: 100%;
+        height: 60px;
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-medium);
+        margin-bottom: var(--eds-spacing-stack-xs);
+      }
+
+      @media (max-width: 768px) {
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .color-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .foundation-colors {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>EDS Dynamic Color Variables Showcase</h1>
+        <p>Interactive demonstration of Equinor Design System color tokens</p>
+      </header>
+
+      <div class="controls">
+        <div class="control-group">
+          <label>Color Scheme</label>
+          <div>
+            <button class="btn active" onclick="setColorScheme('light')">
+              Light
+            </button>
+            <button class="btn" onclick="setColorScheme('dark')">Dark</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Appearance</label>
+          <div>
+            <button class="btn active" onclick="setAppearance('neutral')">
+              Neutral
+            </button>
+            <button class="btn" onclick="setAppearance('accent')">
+              Accent
+            </button>
+            <button class="btn" onclick="setAppearance('success')">
+              Success
+            </button>
+            <button class="btn" onclick="setAppearance('info')">Info</button>
+            <button class="btn" onclick="setAppearance('warning')">
+              Warning
+            </button>
+            <button class="btn" onclick="setAppearance('danger')">
+              Danger
+            </button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Density</label>
+          <div>
+            <button class="btn" onclick="setDensity('comfortable')">
+              Comfortable
+            </button>
+            <button class="btn active" onclick="setDensity('spacious')">
+              Spacious
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2>Foundation Colors</h2>
+        <div class="foundation-colors">
+          <div class="foundation-color">
+            <h4>Moss Green</h4>
+            <div
+              class="foundation-swatch"
+              style="background: var(--eds-color-moss-green-6)"
+            ></div>
+          </div>
+          <div class="foundation-color">
+            <h4>Gray</h4>
+            <div
+              class="foundation-swatch"
+              style="background: var(--eds-color-gray-6)"
+            ></div>
+          </div>
+          <div class="foundation-color">
+            <h4>Green</h4>
+            <div
+              class="foundation-swatch"
+              style="background: var(--eds-color-green-6)"
+            ></div>
+          </div>
+          <div class="foundation-color">
+            <h4>Blue</h4>
+            <div
+              class="foundation-swatch"
+              style="background: var(--eds-color-blue-6)"
+            ></div>
+          </div>
+          <div class="foundation-color">
+            <h4>Orange</h4>
+            <div
+              class="foundation-swatch"
+              style="background: var(--eds-color-orange-6)"
+            ></div>
+          </div>
+          <div class="foundation-color">
+            <h4>Red</h4>
+            <div
+              class="foundation-swatch"
+              style="background: var(--eds-color-red-6)"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Semantic Colors</h2>
+        <p
+          style="
+            margin-bottom: var(--eds-spacing-stack-lg);
+            color: var(--eds-color-text-subtle);
+          "
+        >
+          These colors change based on the selected appearance theme above.
+        </p>
+        <div class="color-grid">
+          <div class="color-category">
+            <h3>Background</h3>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-background-default)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-background-default</div>
+                <div class="color-value">Primary background</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-background-subtle)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-background-subtle</div>
+                <div class="color-value">Subtle background</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-background-medium-default)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">
+                  --eds-color-background-medium-default
+                </div>
+                <div class="color-value">Medium background</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-background-strong-default)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">
+                  --eds-color-background-strong-default
+                </div>
+                <div class="color-value">Strong background</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="color-category">
+            <h3>Border</h3>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-border-subtle)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-border-subtle</div>
+                <div class="color-value">Subtle borders</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-border-medium)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-border-medium</div>
+                <div class="color-value">Medium borders</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-border-strong)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-border-strong</div>
+                <div class="color-value">Strong borders</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="color-category">
+            <h3>Text</h3>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-text-subtle)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-text-subtle</div>
+                <div class="color-value">Default text</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-text-strong)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-text-strong</div>
+                <div class="color-value">Strong text</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-text-contrast-subtle)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-text-contrast-subtle</div>
+                <div class="color-value">Contrast subtle</div>
+              </div>
+            </div>
+            <div class="color-item">
+              <div
+                class="color-swatch"
+                style="background: var(--eds-color-text-contrast-strong)"
+              ></div>
+              <div class="color-info">
+                <div class="color-name">--eds-color-text-contrast-strong</div>
+                <div class="color-value">Contrast strong</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      let currentColorScheme = 'light'
+      let currentAppearance = 'neutral'
+      let currentDensity = 'spacious'
+
+      function setColorScheme(scheme) {
+        currentColorScheme = scheme
+        document.documentElement.setAttribute('data-color-scheme', scheme)
+        updateActiveButtons()
+      }
+
+      function setAppearance(appearance) {
+        currentAppearance = appearance
+        document.documentElement.setAttribute(
+          'data-color-appearance',
+          appearance,
+        )
+        updateActiveButtons()
+      }
+
+      function setDensity(density) {
+        currentDensity = density
+        document.documentElement.setAttribute('data-density', density)
+        updateActiveButtons()
+      }
+
+      function updateActiveButtons() {
+        // Remove active class from all buttons
+        document
+          .querySelectorAll('.btn')
+          .forEach((btn) => btn.classList.remove('active'))
+
+        // Add active class to current selections
+        document.querySelectorAll('.btn').forEach((btn) => {
+          const text = btn.textContent.toLowerCase()
+          if (
+            text === currentColorScheme ||
+            text === currentAppearance ||
+            text === currentDensity
+          ) {
+            btn.classList.add('active')
+          }
+        })
+      }
+
+      // Initialize
+      document.documentElement.setAttribute(
+        'data-color-scheme',
+        currentColorScheme,
+      )
+      document.documentElement.setAttribute(
+        'data-color-appearance',
+        currentAppearance,
+      )
+      document.documentElement.setAttribute('data-density', currentDensity)
+      updateActiveButtons()
+    </script>
+  </body>
+</html>
