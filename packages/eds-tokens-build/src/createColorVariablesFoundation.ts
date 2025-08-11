@@ -43,17 +43,17 @@ export async function createColorVariablesFoundation({
     buildPath: colorBuildPath,
     fileName: 'light-colors',
     selector: ':root',
-    outputReferences: true,
     prefix: PREFIX,
+    outputReferences: true,
   })
 
   const darkColors = _extend({
     source: [COLORS_DARK],
     buildPath: colorBuildPath,
     fileName: 'dark-colors',
-    selector: '[data-color-scheme="dark"]',
-    outputReferences: true,
+    selector: ':root',
     prefix: PREFIX,
+    outputReferences: true,
   })
 
   const lightColorScheme = _extend({
@@ -63,7 +63,7 @@ export async function createColorVariablesFoundation({
       includeTokenFilter(token, ['Color scheme']),
     buildPath: colorBuildPath,
     fileName: 'light-color-scheme',
-    selector: ':root, [data-color-scheme="light"]',
+    selector: '[data-color-scheme="light"]',
     prefix: PREFIX,
     outputReferences: true,
   })

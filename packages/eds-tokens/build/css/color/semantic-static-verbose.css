@@ -11,6 +11,8 @@
   --eds-color-background-neutral-strong-default: var(--eds-color-gray-13);
   --eds-color-background-neutral-strong-hover: var(--eds-color-gray-14);
   --eds-color-background-neutral-strong-active: var(--eds-color-gray-15);
+  --eds-color-background-accent-default: var(--eds-color-moss-green-1);
+  --eds-color-background-accent-subtle: var(--eds-color-moss-green-2);
   --eds-color-background-accent-medium-default: var(--eds-color-moss-green-3);
   --eds-color-background-accent-medium-hover: var(--eds-color-moss-green-4);
   --eds-color-background-accent-medium-active: var(--eds-color-moss-green-5);
@@ -91,6 +93,4 @@
   --eds-color-text-danger-strong: var(--eds-color-red-10); /** Used for text and icons */
   --eds-color-text-danger-contrast-subtle: var(--eds-color-red-11); /** Text or icons against colored backgrounds */
   --eds-color-text-danger-contrast-strong: var(--eds-color-red-12); /** Text or icons against colored backgrounds */
-  --eds-color-background-accent-default: var(--eds-color-moss-green-1);
-  --eds-color-background-accent-subtle: var(--eds-color-moss-green-2);
 }
