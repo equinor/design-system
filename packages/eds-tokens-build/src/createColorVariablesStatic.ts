@@ -18,6 +18,11 @@ export async function createColorVariablesStatic({
     'GnovDpL3UV6X51Ot7Kv6Im',
   )
 
+  const COLOR_LIGHT = path.join(
+    FOUNDATION_COLOR_TOKENS_DIR,
+    'Color Light.Mode 1.json',
+  )
+
   const FOUNDATION_COLOR_LIGHT_FILE = path.join(
     FOUNDATION_COLOR_TOKENS_DIR,
     '🌗 Color scheme.Light.json',
@@ -38,7 +43,7 @@ export async function createColorVariablesStatic({
 
   const semanticColors = _extend({
     source: [SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,

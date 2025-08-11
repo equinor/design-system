@@ -92,3 +92,7 @@ export const RED_12 = "#040303";
 export const RED_13 = "#e20337";
 export const RED_14 = "#ff3c51";
 export const RED_15 = "#ff666d";
+export const BACKGROUND_CANVAS = "#0b0b0b";
+export const BACKGROUND_SURFACE = "#222222";
+export const BACKGROUND_ELEVATED = "#555555";
+export const BACKGROUND_BACKDROP = "#222222";

@@ -6,11 +6,11 @@ export function mergeLightDarkFoundation({ prefix }: { prefix: string }) {
 
   const lightFoundationPath = path.join(
     outputDirectory,
-    'light-foundation-verbose.css',
+    'light-color-scheme-verbose.css',
   )
   const darkFoundationPath = path.join(
     outputDirectory,
-    'dark-foundation-verbose.css',
+    'dark-color-scheme-verbose.css',
   )
   const mergedFoundationPath = path.join(outputDirectory, 'foundation.css')
 

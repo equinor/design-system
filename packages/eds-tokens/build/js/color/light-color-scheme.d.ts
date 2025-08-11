@@ -92,3 +92,7 @@ export const RED_12: string;
 export const RED_13: string;
 export const RED_14: string;
 export const RED_15: string;
+export const BACKGROUND_CANVAS: string;
+export const BACKGROUND_SURFACE: string;
+export const BACKGROUND_ELEVATED: string;
+export const BACKGROUND_BACKDROP: string;

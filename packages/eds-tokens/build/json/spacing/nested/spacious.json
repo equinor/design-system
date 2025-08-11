@@ -246,7 +246,6 @@
       }
     },
     "header": {
-      "font-family": "Equinor",
       "xs": {
         "font-size": 12,
         "tracking-tight": -1.149999976158142,
@@ -258,6 +257,7 @@
         "lineheight-default": 16,
         "lineheight-squished": 12
       },
+      "font-family": "Equinor",
       "sm": {
         "font-size": 14,
         "tracking-tight": -1.3200000524520874,

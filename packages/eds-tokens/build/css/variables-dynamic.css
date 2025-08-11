@@ -49,8 +49,6 @@
 }
 
 :root {
-  --eds-color-moss-green-1: light-dark(#fff, #0a0b0b);
-  --eds-color-moss-green-2: light-dark(#d7fafd, #1e2323);
   --eds-color-moss-green-3: light-dark(#ace3e9, #3b5c5f);
   --eds-color-moss-green-4: light-dark(#97d8df, #3d656a);
   --eds-color-moss-green-5: light-dark(#82ccd4, #3e6c71);
@@ -139,6 +137,12 @@
   --eds-color-red-13: light-dark(#e20337, #e20337);
   --eds-color-red-14: light-dark(#bd0023, #ff3c51);
   --eds-color-red-15: light-dark(#a0001b, #ff666d);
+  --eds-color-moss-green-1: light-dark(var(--eds-color-light-moss-green-1), var(--eds-color-dark-moss-green-1));
+  --eds-color-moss-green-2: light-dark(var(--eds-color-light-moss-green-2), var(--eds-color-dark-moss-green-2));
+  --eds-color-background-canvas: light-dark(var(--eds-color-gray-2), var(--eds-color-gray-1));
+  --eds-color-background-surface: light-dark(var(--eds-color-gray-1), var(--eds-color-gray-2));
+  --eds-color-background-elevated: light-dark(var(--eds-color-gray-1), var(--eds-color-gray-3));
+  --eds-color-background-backdrop: light-dark(var(--eds-color-gray-7), var(--eds-color-gray-2));
 }
 
 :root, [data-color-appearance="neutral"] {
@@ -166,8 +170,6 @@
   --eds-color-background-strong-default: var(--eds-color-moss-green-13);
   --eds-color-background-strong-hover: var(--eds-color-moss-green-14);
   --eds-color-background-strong-active: var(--eds-color-moss-green-15);
-  --eds-color-background-default: var(--eds-color-moss-green-1);
-  --eds-color-background-subtle: var(--eds-color-moss-green-2);
   --eds-color-border-subtle: var(--eds-color-moss-green-6);
   --eds-color-border-medium: var(--eds-color-moss-green-7);
   --eds-color-border-strong: var(--eds-color-moss-green-8);
@@ -175,6 +177,8 @@
   --eds-color-text-strong: var(--eds-color-moss-green-10);
   --eds-color-text-contrast-subtle: var(--eds-color-moss-green-11);
   --eds-color-text-contrast-strong: var(--eds-color-moss-green-12);
+  --eds-color-background-default: var(--eds-color-moss-green-1);
+  --eds-color-background-subtle: var(--eds-color-moss-green-2);
 }
 
 [data-color-appearance="success"] {
@@ -437,7 +441,6 @@
   --eds-typography-ui-body-6xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
   --eds-typography-ui-body-6xl-lineheight-default: var(--eds--spacious, 2.5rem) var(--eds--comfortable, 2.25rem);
   --eds-typography-ui-body-6xl-lineheight-squished: var(--eds--spacious, 2.25rem) var(--eds--comfortable, 2rem);
-  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: var(--eds--spacious, .75rem) var(--eds--comfortable, .656rem);
   --eds-typography-header-xs-tracking-tight: var(--eds--spacious, -1.15px) var(--eds--comfortable, -.99px);
   --eds-typography-header-xs-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
@@ -447,6 +450,7 @@
   --eds-typography-header-xs-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
   --eds-typography-header-xs-lineheight-default: var(--eds--spacious, 1rem) var(--eds--comfortable, .75rem);
   --eds-typography-header-xs-lineheight-squished: var(--eds--spacious, .75rem) var(--eds--comfortable, .75rem);
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-sm-font-size: var(--eds--spacious, .875rem) var(--eds--comfortable, .75rem);
   --eds-typography-header-sm-tracking-tight: var(--eds--spacious, -1.32px) var(--eds--comfortable, -1.15px);
   --eds-typography-header-sm-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);

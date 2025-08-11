@@ -3,8 +3,6 @@
  */
 
 [data-color-scheme="dark"] {
-  --eds-color-moss-green-1: #0a0b0b;
-  --eds-color-moss-green-2: #1e2323;
   --eds-color-moss-green-3: #3b5c5f;
   --eds-color-moss-green-4: #3d656a;
   --eds-color-moss-green-5: #3e6c71;
@@ -93,4 +91,10 @@
   --eds-color-red-13: #e20337;
   --eds-color-red-14: #ff3c51;
   --eds-color-red-15: #ff666d;
+  --eds-color-moss-green-1: var(--eds-color-dark-moss-green-1);
+  --eds-color-moss-green-2: var(--eds-color-dark-moss-green-2);
+  --eds-color-background-canvas: var(--eds-color-gray-1);
+  --eds-color-background-surface: var(--eds-color-gray-2);
+  --eds-color-background-elevated: var(--eds-color-gray-3);
+  --eds-color-background-backdrop: var(--eds-color-gray-2);
 }

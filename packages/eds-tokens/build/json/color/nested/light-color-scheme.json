@@ -100,5 +100,11 @@
     "13": "#e20337",
     "14": "#bd0023",
     "15": "#a0001b"
+  },
+  "Background": {
+    "Canvas": "#f2f2f2",
+    "Surface": "#ffffff",
+    "Elevated": "#ffffff",
+    "Backdrop": "#808080"
   }
 }

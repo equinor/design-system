@@ -1,6 +1,8 @@
 import path from 'path'
 import { _extend } from './utils'
 import { mergeLightDarkFoundation } from './utils/mergeLightDarkFoundation'
+import { includeTokenFilter } from './filter/includeTokenFilter'
+import { TransformedToken } from 'style-dictionary/types'
 
 export async function createColorVariablesFoundation({
   tokensDir,
@@ -16,37 +18,72 @@ export async function createColorVariablesFoundation({
     tokensDir,
     'GnovDpL3UV6X51Ot7Kv6Im',
   )
+  const COLORS_LIGHT = path.join(
+    FOUNDATION_COLOR_TOKENS_DIR,
+    'Color Light.Mode 1.json',
+  )
 
-  const FOUNDATION_COLOR_LIGHT_FILE = path.join(
+  const COLORS_DARK = path.join(
+    FOUNDATION_COLOR_TOKENS_DIR,
+    'Color Dark.Mode 1.json',
+  )
+
+  const COLORS_LIGHT_SCHEME = path.join(
     FOUNDATION_COLOR_TOKENS_DIR,
     '🌗 Color scheme.Light.json',
   )
 
-  const FOUNDATION_COLOR_DARK_FILE = path.join(
+  const COLORS_DARK_SCHEME = path.join(
     FOUNDATION_COLOR_TOKENS_DIR,
     '🌗 Color scheme.Dark.json',
   )
 
-  const lightColorFoundation = _extend({
-    source: [FOUNDATION_COLOR_LIGHT_FILE],
+  const lightColors = _extend({
+    source: [COLORS_LIGHT],
     buildPath: colorBuildPath,
-    fileName: 'light-foundation',
+    fileName: 'light-colors',
+    selector: ':root',
+    outputReferences: true,
+    prefix: PREFIX,
+  })
+
+  const darkColors = _extend({
+    source: [COLORS_DARK],
+    buildPath: colorBuildPath,
+    fileName: 'dark-colors',
+    selector: '[data-color-scheme="dark"]',
+    outputReferences: true,
+    prefix: PREFIX,
+  })
+
+  const lightColorScheme = _extend({
+    source: [COLORS_LIGHT_SCHEME],
+    include: [COLORS_LIGHT],
+    filter: (token: TransformedToken) =>
+      includeTokenFilter(token, ['Color scheme']),
+    buildPath: colorBuildPath,
+    fileName: 'light-color-scheme',
     selector: ':root, [data-color-scheme="light"]',
     prefix: PREFIX,
     outputReferences: true,
   })
 
-  const darkColorFoundation = _extend({
-    source: [FOUNDATION_COLOR_DARK_FILE],
+  const darkColorScheme = _extend({
+    source: [COLORS_DARK_SCHEME],
+    include: [COLORS_DARK],
+    filter: (token: TransformedToken) =>
+      includeTokenFilter(token, ['Color scheme']),
     buildPath: colorBuildPath,
-    fileName: 'dark-foundation',
+    fileName: 'dark-color-scheme',
     selector: '[data-color-scheme="dark"]',
     prefix: PREFIX,
     outputReferences: true,
   })
 
-  await lightColorFoundation.buildAllPlatforms()
-  await darkColorFoundation.buildAllPlatforms()
+  await lightColors.buildAllPlatforms()
+  await darkColors.buildAllPlatforms()
+  await lightColorScheme.buildAllPlatforms()
+  await darkColorScheme.buildAllPlatforms()
 
   // Merge light and dark foundation files using light-dark() function
   mergeLightDarkFoundation({

@@ -88,5 +88,9 @@
   "red-12": "#ffffff",
   "red-13": "#e20337",
   "red-14": "#bd0023",
-  "red-15": "#a0001b"
+  "red-15": "#a0001b",
+  "background-canvas": "#f2f2f2",
+  "background-surface": "#ffffff",
+  "background-elevated": "#ffffff",
+  "background-backdrop": "#808080"
 }

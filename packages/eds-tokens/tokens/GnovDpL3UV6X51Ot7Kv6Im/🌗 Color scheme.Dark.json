@@ -2,7 +2,7 @@
   "Moss Green": {
     "1": {
       "$type": "color",
-      "$value": "#0a0b0b",
+      "$value": "{Dark.Moss Green.1}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -16,7 +16,7 @@
     },
     "2": {
       "$type": "color",
-      "$value": "#1e2323",
+      "$value": "{Dark.Moss Green.2}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -1259,6 +1259,64 @@
     "15": {
       "$type": "color",
       "$value": "#ff666d",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Background": {
+    "Canvas": {
+      "$type": "color",
+      "$value": "{Gray.1}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Surface": {
+      "$type": "color",
+      "$value": "{Gray.2}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Elevated": {
+      "$type": "color",
+      "$value": "{Gray.3}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Backdrop": {
+      "$type": "color",
+      "$value": "{Gray.2}",
       "$description": "",
       "$extensions": {
         "com.figma": {

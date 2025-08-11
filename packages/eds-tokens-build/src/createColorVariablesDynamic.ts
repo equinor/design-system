@@ -18,6 +18,11 @@ export async function createColorVariablesDynamic({
     'GnovDpL3UV6X51Ot7Kv6Im',
   )
 
+  const COLOR_LIGHT = path.join(
+    FOUNDATION_COLOR_TOKENS_DIR,
+    'Color Light.Mode 1.json',
+  )
+
   const FOUNDATION_COLOR_LIGHT_FILE = path.join(
     FOUNDATION_COLOR_TOKENS_DIR,
     '🌗 Color scheme.Light.json',
@@ -63,7 +68,7 @@ export async function createColorVariablesDynamic({
 
   const neutralColorSemanticVerbose = _extend({
     source: [NEUTRAL_SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,
@@ -74,7 +79,7 @@ export async function createColorVariablesDynamic({
 
   const accentColorSemanticVerbose = _extend({
     source: [ACCENT_SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,
@@ -85,7 +90,7 @@ export async function createColorVariablesDynamic({
 
   const successColorSemanticVerbose = _extend({
     source: [SUCCESS_SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,
@@ -96,7 +101,7 @@ export async function createColorVariablesDynamic({
 
   const infoColorSemanticVerbose = _extend({
     source: [INFO_SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,
@@ -107,7 +112,7 @@ export async function createColorVariablesDynamic({
 
   const warningColorSemanticVerbose = _extend({
     source: [WARNING_SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,
@@ -118,7 +123,7 @@ export async function createColorVariablesDynamic({
 
   const dangerColorSemanticVerbose = _extend({
     source: [DANGER_SEMANTIC_COLOR_TOKENS_FILE],
-    include: [FOUNDATION_COLOR_LIGHT_FILE],
+    include: [COLOR_LIGHT, FOUNDATION_COLOR_LIGHT_FILE],
     filter: FILTER,
     buildPath: colorBuildPath,
     prefix: PREFIX,

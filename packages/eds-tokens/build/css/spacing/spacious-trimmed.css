@@ -176,7 +176,6 @@
   --eds-typography-ui-body-6xl-font-weight-bolder: 500;
   --eds-typography-ui-body-6xl-lineheight-default: 2.5rem;
   --eds-typography-ui-body-6xl-lineheight-squished: 2.25rem;
-  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: 0.75rem;
   --eds-typography-header-xs-tracking-tight: -1.15px;
   --eds-typography-header-xs-tracking-normal: 0px;
@@ -186,6 +185,7 @@
   --eds-typography-header-xs-font-weight-bolder: 500;
   --eds-typography-header-xs-lineheight-default: 1rem;
   --eds-typography-header-xs-lineheight-squished: 0.75rem;
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-sm-font-size: 0.875rem;
   --eds-typography-header-sm-tracking-tight: -1.32px;
   --eds-typography-header-sm-tracking-normal: 0px;
