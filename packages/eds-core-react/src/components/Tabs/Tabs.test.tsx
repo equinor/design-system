@@ -205,4 +205,24 @@ describe('Tabs', () => {
     expect(screen.getByTestId(tablist)).toBeDefined()
     expect(screen.getByTestId(tabpanels)).toBeDefined()
   })
+  it('Calls onChange with value when provided, otherwise index', () => {
+    const handleChange = jest.fn()
+    render(
+      <Tabs activeTab="overview" onChange={handleChange}>
+        <Tabs.List>
+          <Tabs.Tab value="overview">Overview</Tabs.Tab>
+          <Tabs.Tab value="details">Details</Tabs.Tab>
+          <Tabs.Tab>Plain</Tabs.Tab>
+        </Tabs.List>
+      </Tabs>,
+    )
+
+    fireEvent.click(screen.getByText('Details'))
+    expect(handleChange).toHaveBeenLastCalledWith('details')
+
+    fireEvent.click(screen.getByText('Plain'))
+    expect(handleChange).toHaveBeenLastCalledWith(2)
+
+    expect(handleChange).toHaveBeenCalledTimes(2)
+  })
 })
