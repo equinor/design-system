@@ -789,26 +789,42 @@
         const bgMediumHoverSwatch = document.getElementById(
           'bg-medium-hover-swatch',
         )
+        const bgMediumHoverName = document.getElementById(
+          'bg-medium-hover-name',
+        )
         const bgMediumActiveSwatch = document.getElementById(
           'bg-medium-active-swatch',
+        )
+        const bgMediumActiveName = document.getElementById(
+          'bg-medium-active-name',
         )
         bgMediumSwatch.style.background = `var(--eds-color-background-${appearance}-medium-default)`
         bgMediumName.textContent = `--eds-color-background-${appearance}-medium-default`
         bgMediumHoverSwatch.style.background = `var(--eds-color-background-${appearance}-medium-hover)`
+        bgMediumHoverName.textContent = `--eds-color-background-${appearance}-medium-hover`
         bgMediumActiveSwatch.style.background = `var(--eds-color-background-${appearance}-medium-active)`
+        bgMediumActiveName.textContent = `--eds-color-background-${appearance}-medium-active`
 
         const bgStrong = document.getElementById('bg-strong-default-swatch')
         const bgStrongName = document.getElementById('bg-strong-default-name')
         const bgStrongHoverSwatch = document.getElementById(
           'bg-strong-hover-swatch',
         )
+        const bgStrongHoverName = document.getElementById(
+          'bg-strong-hover-name',
+        )
         const bgStrongActiveSwatch = document.getElementById(
           'bg-strong-active-swatch',
+        )
+        const bgStrongActiveName = document.getElementById(
+          'bg-strong-active-name',
         )
         bgStrong.style.background = `var(--eds-color-background-${appearance}-strong-default)`
         bgStrongName.textContent = `--eds-color-background-${appearance}-strong-default`
         bgStrongHoverSwatch.style.background = `var(--eds-color-background-${appearance}-strong-hover)`
+        bgStrongHoverName.textContent = `--eds-color-background-${appearance}-strong-hover`
         bgStrongActiveSwatch.style.background = `var(--eds-color-background-${appearance}-strong-active)`
+        bgStrongActiveName.textContent = `--eds-color-background-${appearance}-strong-active`
 
         // Update border colors
         const borderSubtleSwatch = document.getElementById(
