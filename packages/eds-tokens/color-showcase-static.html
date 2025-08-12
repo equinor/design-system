@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EDS Dynamic Color Variables Showcase</title>
-    <link
-      rel="stylesheet"
-      href="packages/eds-tokens/build/css/variables-dynamic.css"
-    />
+    <title>EDS Static Color Variables Showcase</title>
+    <link rel="stylesheet" href="build/css/variables-static.css" />
     <style>
       * {
         margin: 0;
@@ -22,8 +19,8 @@
           BlinkMacSystemFont,
           'Segoe UI',
           sans-serif;
-        background: var(--eds-color-background-default);
-        color: var(--eds-color-text-subtle);
+        background: var(--eds-color-background-neutral-default);
+        color: var(--eds-color-text-neutral-subtle);
         line-height: 1.6;
         transition:
           background-color 0.3s ease,
@@ -41,7 +38,7 @@
         margin-bottom: var(--eds-spacing-stack-3-xl);
         padding: var(--eds-spacing-stack-xl) 0;
         border-bottom: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-subtle);
+          var(--eds-color-border-neutral-subtle);
       }
 
       .header h1 {
@@ -49,7 +46,7 @@
         font-size: var(--eds-typography-header-3xl-font-size);
         font-weight: var(--eds-typography-header-3xl-font-weight-bolder);
         margin-bottom: var(--eds-spacing-stack-sm);
-        color: var(--eds-color-text-strong);
+        color: var(--eds-color-text-neutral-strong);
       }
 
       .controls {
@@ -70,34 +67,34 @@
       .control-group label {
         font-size: var(--eds-typography-ui-body-sm-font-size);
         font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
-        color: var(--eds-color-text-strong);
+        color: var(--eds-color-text-neutral-strong);
       }
 
       .btn {
         padding: var(--eds-spacing-inset-sm-inline)
           var(--eds-spacing-inset-md-inline);
         border: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-medium);
+          var(--eds-color-border-neutral-medium);
         border-radius: var(--eds-spacing-border-radius-rounded);
-        background: var(--eds-color-background-medium-default);
-        color: var(--eds-color-text-subtle);
+        background: var(--eds-color-background-neutral-medium-default);
+        color: var(--eds-color-text-neutral-subtle);
         cursor: pointer;
         font-size: var(--eds-typography-ui-body-sm-font-size);
         transition: all 0.2s ease;
       }
 
       .btn:hover {
-        background: var(--eds-color-background-medium-hover);
+        background: var(--eds-color-background-neutral-medium-hover);
       }
 
       .btn:active {
-        background: var(--eds-color-background-medium-active);
+        background: var(--eds-color-background-neutral-medium-active);
       }
 
       .btn.active {
-        background: var(--eds-color-background-strong-default);
-        color: var(--eds-color-text-contrast-strong);
-        border-color: var(--eds-color-border-strong);
+        background: var(--eds-color-background-neutral-strong-default);
+        color: var(--eds-color-text-neutral-contrast-strong);
+        border-color: var(--eds-color-border-neutral-strong);
       }
 
       .section {
@@ -109,10 +106,16 @@
         font-size: var(--eds-typography-header-xl-font-size);
         font-weight: var(--eds-typography-header-xl-font-weight-bolder);
         margin-bottom: var(--eds-spacing-stack-lg);
-        color: var(--eds-color-text-strong);
+        color: var(--eds-color-text-neutral-strong);
         border-bottom: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-subtle);
+          var(--eds-color-border-neutral-subtle);
         padding-bottom: var(--eds-spacing-stack-xs);
+      }
+
+      .section-description {
+        margin-bottom: var(--eds-spacing-stack-lg);
+        color: var(--eds-color-text-neutral-subtle);
+        font-size: var(--eds-typography-ui-body-md-font-size);
       }
 
       .color-grid {
@@ -122,22 +125,23 @@
       }
 
       .color-category {
-        background: var(--eds-color-background-subtle);
+        background: var(--eds-color-background-neutral-subtle);
         border: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-subtle);
+          var(--eds-color-border-neutral-subtle);
         border-radius: var(--eds-spacing-border-radius-rounded);
         overflow: hidden;
       }
 
       .color-category h3 {
-        background: var(--eds-color-background-medium-default);
+        background: var(--eds-color-background-neutral-medium-default);
         padding: var(--eds-spacing-inset-sm-inline)
           var(--eds-spacing-inset-md-inline);
         font-size: var(--eds-typography-ui-body-lg-font-size);
         font-weight: var(--eds-typography-ui-body-lg-font-weight-bolder);
         border-bottom: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-subtle);
+          var(--eds-color-border-neutral-subtle);
         text-transform: capitalize;
+        margin: 0;
       }
 
       .color-item {
@@ -146,7 +150,7 @@
         padding: var(--eds-spacing-inset-sm-inline)
           var(--eds-spacing-inset-md-inline);
         border-bottom: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-subtle);
+          var(--eds-color-border-neutral-subtle);
       }
 
       .color-item:last-child {
@@ -165,7 +169,7 @@
         height: 40px;
         border-radius: var(--eds-spacing-border-radius-rounded);
         border: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-medium);
+          var(--eds-color-border-neutral-medium);
         flex-shrink: 0;
       }
 
@@ -176,7 +180,7 @@
 
       .color-state-label {
         font-size: var(--eds-typography-ui-body-xs-font-size);
-        color: var(--eds-color-text-subtle);
+        color: var(--eds-color-text-neutral-subtle);
         text-align: center;
         margin-top: var(--eds-spacing-stack-3-xs);
         opacity: 0.7;
@@ -197,19 +201,19 @@
         font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
         font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
         margin-bottom: var(--eds-spacing-stack-3-xs);
-        color: var(--eds-color-text-strong);
+        color: var(--eds-color-text-neutral-strong);
       }
 
       .color-value {
         font-size: var(--eds-typography-ui-body-xs-font-size);
-        color: var(--eds-color-text-subtle);
+        color: var(--eds-color-text-neutral-subtle);
         font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
       }
 
       .foundation-colors {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: var(--eds-spacing-inline-sm);
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--eds-spacing-inline-lg);
         margin-bottom: var(--eds-spacing-stack-xl);
       }
 
@@ -217,16 +221,17 @@
         text-align: center;
         padding: var(--eds-spacing-inset-md-inline);
         border: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-subtle);
+          var(--eds-color-border-neutral-subtle);
         border-radius: var(--eds-spacing-border-radius-rounded);
-        background: var(--eds-color-background-subtle);
+        background: var(--eds-color-background-neutral-subtle);
       }
 
       .foundation-color h4 {
         font-size: var(--eds-typography-ui-body-sm-font-size);
         font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
-        margin-bottom: var(--eds-spacing-stack-sm);
+        margin: 0 0 var(--eds-spacing-stack-sm) 0;
         text-transform: capitalize;
+        color: var(--eds-color-text-neutral-strong);
       }
 
       .foundation-swatch {
@@ -234,8 +239,63 @@
         height: 60px;
         border-radius: var(--eds-spacing-border-radius-rounded);
         border: var(--eds-sizing-stroke-thin) solid
-          var(--eds-color-border-medium);
+          var(--eds-color-border-neutral-medium);
         margin-bottom: var(--eds-spacing-stack-xs);
+      }
+
+      .foundation-variable {
+        font-size: var(--eds-typography-ui-body-xs-font-size);
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        color: var(--eds-color-text-neutral-subtle);
+        display: block;
+      }
+
+      .appearance-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--eds-spacing-inline-lg);
+      }
+
+      .appearance-category {
+        background: var(--eds-color-background-neutral-subtle);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-neutral-subtle);
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        padding: var(--eds-spacing-inset-md-inline);
+      }
+
+      .appearance-title {
+        font-size: var(--eds-typography-ui-body-lg-font-size);
+        font-weight: var(--eds-typography-ui-body-lg-font-weight-bolder);
+        margin: 0 0 var(--eds-spacing-stack-md) 0;
+        text-transform: capitalize;
+        color: var(--eds-color-text-neutral-strong);
+        text-align: center;
+      }
+
+      .appearance-swatches {
+        display: flex;
+        flex-direction: column;
+        gap: var(--eds-spacing-stack-sm);
+      }
+
+      .appearance-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .appearance-label {
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        color: var(--eds-color-text-neutral-subtle);
+      }
+
+      .appearance-swatch {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-neutral-medium);
       }
 
       @media (max-width: 768px) {
@@ -249,7 +309,11 @@
         }
 
         .foundation-colors {
-          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+
+        .appearance-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -257,7 +321,7 @@
   <body>
     <div class="container">
       <header class="header">
-        <h1>EDS Dynamic Color Variables Showcase</h1>
+        <h1>EDS Static Color Variables Showcase</h1>
         <p>Interactive demonstration of Equinor Design System color tokens</p>
       </header>
 
@@ -272,7 +336,7 @@
           </div>
         </div>
         <div class="control-group">
-          <label>Appearance</label>
+          <label>Appearance Preview</label>
           <div>
             <button class="btn active" onclick="setAppearance('neutral')">
               Neutral
@@ -314,6 +378,7 @@
               class="foundation-swatch"
               style="background: var(--eds-color-moss-green-6)"
             ></div>
+            <code class="foundation-variable">--eds-color-moss-green-6</code>
           </div>
           <div class="foundation-color">
             <h4>Gray</h4>
@@ -321,6 +386,7 @@
               class="foundation-swatch"
               style="background: var(--eds-color-gray-6)"
             ></div>
+            <code class="foundation-variable">--eds-color-gray-6</code>
           </div>
           <div class="foundation-color">
             <h4>Green</h4>
@@ -328,6 +394,7 @@
               class="foundation-swatch"
               style="background: var(--eds-color-green-6)"
             ></div>
+            <code class="foundation-variable">--eds-color-green-6</code>
           </div>
           <div class="foundation-color">
             <h4>Blue</h4>
@@ -335,6 +402,7 @@
               class="foundation-swatch"
               style="background: var(--eds-color-blue-6)"
             ></div>
+            <code class="foundation-variable">--eds-color-blue-6</code>
           </div>
           <div class="foundation-color">
             <h4>Orange</h4>
@@ -342,6 +410,7 @@
               class="foundation-swatch"
               style="background: var(--eds-color-orange-6)"
             ></div>
+            <code class="foundation-variable">--eds-color-orange-6</code>
           </div>
           <div class="foundation-color">
             <h4>Red</h4>
@@ -349,21 +418,21 @@
               class="foundation-swatch"
               style="background: var(--eds-color-red-6)"
             ></div>
+            <code class="foundation-variable">--eds-color-red-6</code>
           </div>
         </div>
       </section>
 
       <section class="section">
         <h2>Semantic Colors</h2>
-        <p
-          style="
-            margin-bottom: var(--eds-spacing-stack-lg);
-            color: var(--eds-color-text-subtle);
-          "
-        >
-          These colors change based on the selected appearance theme above.
+        <p class="section-description">
+          These colors use specific appearance variants (e.g., -neutral-, -<span
+            id="current-appearance"
+            >neutral</span
+          >-) and automatically adapt to light/dark themes using the
+          light-dark() function.
         </p>
-        <div class="color-grid" id="semantic-colors-grid">
+        <div class="color-grid">
           <div class="color-category">
             <h3>Background</h3>
             <div class="color-item">
@@ -372,16 +441,17 @@
                   <div
                     class="color-swatch"
                     id="bg-default-swatch"
-                    style="background: var(--eds-color-background-default)"
+                    style="
+                      background: var(--eds-color-background-neutral-default);
+                    "
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-default-name">
-                  --eds-color-background-default
+                  --eds-color-background-neutral-default
                 </div>
-                <div class="color-value">Primary background</div>
               </div>
             </div>
             <div class="color-item">
@@ -390,16 +460,17 @@
                   <div
                     class="color-swatch"
                     id="bg-subtle-swatch"
-                    style="background: var(--eds-color-background-subtle)"
+                    style="
+                      background: var(--eds-color-background-neutral-subtle);
+                    "
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-subtle-name">
-                  --eds-color-background-subtle
+                  --eds-color-background-neutral-subtle
                 </div>
-                <div class="color-value">Subtle background</div>
               </div>
             </div>
             <div class="color-item">
@@ -409,7 +480,9 @@
                     class="color-swatch"
                     id="bg-medium-default-swatch"
                     style="
-                      background: var(--eds-color-background-medium-default);
+                      background: var(
+                        --eds-color-background-neutral-medium-default
+                      );
                     "
                   ></div>
                   <div class="color-state-label">default</div>
@@ -417,7 +490,7 @@
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-medium-default-name">
-                  --eds-color-background-medium-default
+                  --eds-color-background-neutral-medium-default
                 </div>
                 <div class="color-value">Medium background default</div>
               </div>
@@ -428,14 +501,18 @@
                   <div
                     class="color-swatch"
                     id="bg-medium-hover-swatch"
-                    style="background: var(--eds-color-background-medium-hover)"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-medium-hover
+                      );
+                    "
                   ></div>
                   <div class="color-state-label">hover</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-medium-hover-name">
-                  --eds-color-background-medium-hover
+                  --eds-color-background-neutral-medium-hover
                 </div>
                 <div class="color-value">Medium background hover</div>
               </div>
@@ -447,7 +524,9 @@
                     class="color-swatch"
                     id="bg-medium-active-swatch"
                     style="
-                      background: var(--eds-color-background-medium-active);
+                      background: var(
+                        --eds-color-background-neutral-medium-active
+                      );
                     "
                   ></div>
                   <div class="color-state-label">active</div>
@@ -455,7 +534,7 @@
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-medium-active-name">
-                  --eds-color-background-medium-active
+                  --eds-color-background-neutral-medium-active
                 </div>
                 <div class="color-value">Medium background active</div>
               </div>
@@ -467,7 +546,9 @@
                     class="color-swatch"
                     id="bg-strong-default-swatch"
                     style="
-                      background: var(--eds-color-background-strong-default);
+                      background: var(
+                        --eds-color-background-neutral-strong-default
+                      );
                     "
                   ></div>
                   <div class="color-state-label">default</div>
@@ -475,7 +556,7 @@
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-strong-default-name">
-                  --eds-color-background-strong-default
+                  --eds-color-background-neutral-strong-default
                 </div>
                 <div class="color-value">Strong background default</div>
               </div>
@@ -486,14 +567,18 @@
                   <div
                     class="color-swatch"
                     id="bg-strong-hover-swatch"
-                    style="background: var(--eds-color-background-strong-hover)"
+                    style="
+                      background: var(
+                        --eds-color-background-neutral-strong-hover
+                      );
+                    "
                   ></div>
                   <div class="color-state-label">hover</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-strong-hover-name">
-                  --eds-color-background-strong-hover
+                  --eds-color-background-neutral-strong-hover
                 </div>
                 <div class="color-value">Strong background hover</div>
               </div>
@@ -505,7 +590,9 @@
                     class="color-swatch"
                     id="bg-strong-active-swatch"
                     style="
-                      background: var(--eds-color-background-strong-active);
+                      background: var(
+                        --eds-color-background-neutral-strong-active
+                      );
                     "
                   ></div>
                   <div class="color-state-label">active</div>
@@ -513,7 +600,7 @@
               </div>
               <div class="color-info">
                 <div class="color-name" id="bg-strong-active-name">
-                  --eds-color-background-strong-active
+                  --eds-color-background-neutral-strong-active
                 </div>
                 <div class="color-value">Strong background active</div>
               </div>
@@ -528,14 +615,14 @@
                   <div
                     class="color-swatch"
                     id="border-subtle-swatch"
-                    style="background: var(--eds-color-border-subtle)"
+                    style="background: var(--eds-color-border-neutral-subtle)"
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="border-subtle-name">
-                  --eds-color-border-subtle
+                  --eds-color-border-neutral-subtle
                 </div>
               </div>
             </div>
@@ -545,14 +632,14 @@
                   <div
                     class="color-swatch"
                     id="border-medium-swatch"
-                    style="background: var(--eds-color-border-medium)"
+                    style="background: var(--eds-color-border-neutral-medium)"
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="border-medium-name">
-                  --eds-color-border-medium
+                  --eds-color-border-neutral-medium
                 </div>
               </div>
             </div>
@@ -562,14 +649,14 @@
                   <div
                     class="color-swatch"
                     id="border-strong-swatch"
-                    style="background: var(--eds-color-border-strong)"
+                    style="background: var(--eds-color-border-neutral-strong)"
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="border-strong-name">
-                  --eds-color-border-strong
+                  --eds-color-border-neutral-strong
                 </div>
               </div>
             </div>
@@ -583,14 +670,14 @@
                   <div
                     class="color-swatch"
                     id="text-subtle-swatch"
-                    style="background: var(--eds-color-text-subtle)"
+                    style="background: var(--eds-color-text-neutral-subtle)"
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="text-subtle-name">
-                  --eds-color-text-subtle
+                  --eds-color-text-neutral-subtle
                 </div>
               </div>
             </div>
@@ -600,14 +687,14 @@
                   <div
                     class="color-swatch"
                     id="text-strong-swatch"
-                    style="background: var(--eds-color-text-strong)"
+                    style="background: var(--eds-color-text-neutral-strong)"
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="text-strong-name">
-                  --eds-color-text-strong
+                  --eds-color-text-neutral-strong
                 </div>
               </div>
             </div>
@@ -617,14 +704,16 @@
                   <div
                     class="color-swatch"
                     id="text-contrast-subtle-swatch"
-                    style="background: var(--eds-color-text-contrast-subtle)"
+                    style="
+                      background: var(--eds-color-text-neutral-contrast-subtle);
+                    "
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="text-contrast-subtle-name">
-                  --eds-color-text-contrast-subtle
+                  --eds-color-text-neutral-contrast-subtle
                 </div>
               </div>
             </div>
@@ -634,14 +723,16 @@
                   <div
                     class="color-swatch"
                     id="text-contrast-strong-swatch"
-                    style="background: var(--eds-color-text-contrast-strong)"
+                    style="
+                      background: var(--eds-color-text-neutral-contrast-strong);
+                    "
                   ></div>
                   <div class="color-state-label">default</div>
                 </div>
               </div>
               <div class="color-info">
                 <div class="color-name" id="text-contrast-strong-name">
-                  --eds-color-text-contrast-strong
+                  --eds-color-text-neutral-contrast-strong
                 </div>
               </div>
             </div>
@@ -663,9 +754,7 @@
 
       function setAppearance(appearance) {
         currentAppearance = appearance
-        // Only set appearance on the semantic colors grid section
-        const semanticGrid = document.getElementById('semantic-colors-grid')
-        semanticGrid.setAttribute('data-color-appearance', appearance)
+        updateAppearanceVariables(appearance)
         updateActiveButtons()
       }
 
@@ -673,6 +762,117 @@
         currentDensity = density
         document.documentElement.setAttribute('data-density', density)
         updateActiveButtons()
+      }
+
+      function updateAppearanceVariables(appearance) {
+        // Update the description text
+        document.getElementById('current-appearance').textContent = appearance
+
+        // Update background colors
+        const bgDefaultSwatch = document.getElementById('bg-default-swatch')
+        const bgDefaultName = document.getElementById('bg-default-name')
+        bgDefaultSwatch.style.background = `var(--eds-color-background-${appearance}-default)`
+        bgDefaultName.textContent = `--eds-color-background-${appearance}-default`
+
+        const bgSubtleSwatch = document.getElementById('bg-subtle-swatch')
+        const bgSubtleName = document.getElementById('bg-subtle-name')
+        bgSubtleSwatch.style.background = `var(--eds-color-background-${appearance}-subtle)`
+        bgSubtleName.textContent = `--eds-color-background-${appearance}-subtle`
+
+        const bgMediumSwatch = document.getElementById(
+          'bg-medium-default-swatch',
+        )
+        const bgMediumName = document.getElementById('bg-medium-default-name')
+        const bgMediumHoverSwatch = document.getElementById(
+          'bg-medium-hover-swatch',
+        )
+        const bgMediumHoverName = document.getElementById(
+          'bg-medium-hover-name',
+        )
+        const bgMediumActiveSwatch = document.getElementById(
+          'bg-medium-active-swatch',
+        )
+        const bgMediumActiveName = document.getElementById(
+          'bg-medium-active-name',
+        )
+        bgMediumSwatch.style.background = `var(--eds-color-background-${appearance}-medium-default)`
+        bgMediumName.textContent = `--eds-color-background-${appearance}-medium-default`
+        bgMediumHoverSwatch.style.background = `var(--eds-color-background-${appearance}-medium-hover)`
+        bgMediumHoverName.textContent = `--eds-color-background-${appearance}-medium-hover`
+        bgMediumActiveSwatch.style.background = `var(--eds-color-background-${appearance}-medium-active)`
+        bgMediumActiveName.textContent = `--eds-color-background-${appearance}-medium-active`
+
+        const bgStrong = document.getElementById('bg-strong-default-swatch')
+        const bgStrongName = document.getElementById('bg-strong-default-name')
+        const bgStrongHoverSwatch = document.getElementById(
+          'bg-strong-hover-swatch',
+        )
+        const bgStrongHoverName = document.getElementById(
+          'bg-strong-hover-name',
+        )
+        const bgStrongActiveSwatch = document.getElementById(
+          'bg-strong-active-swatch',
+        )
+        const bgStrongActiveName = document.getElementById(
+          'bg-strong-active-name',
+        )
+        bgStrong.style.background = `var(--eds-color-background-${appearance}-strong-default)`
+        bgStrongName.textContent = `--eds-color-background-${appearance}-strong-default`
+        bgStrongHoverSwatch.style.background = `var(--eds-color-background-${appearance}-strong-hover)`
+        bgStrongHoverName.textContent = `--eds-color-background-${appearance}-strong-hover`
+        bgStrongActiveSwatch.style.background = `var(--eds-color-background-${appearance}-strong-active)`
+        bgStrongActiveName.textContent = `--eds-color-background-${appearance}-strong-active`
+
+        // Update border colors
+        const borderSubtleSwatch = document.getElementById(
+          'border-subtle-swatch',
+        )
+        const borderSubtleName = document.getElementById('border-subtle-name')
+        borderSubtleSwatch.style.background = `var(--eds-color-border-${appearance}-subtle)`
+        borderSubtleName.textContent = `--eds-color-border-${appearance}-subtle`
+
+        const borderMediumSwatch = document.getElementById(
+          'border-medium-swatch',
+        )
+        const borderMediumName = document.getElementById('border-medium-name')
+        borderMediumSwatch.style.background = `var(--eds-color-border-${appearance}-medium)`
+        borderMediumName.textContent = `--eds-color-border-${appearance}-medium`
+
+        const borderStrongSwatch = document.getElementById(
+          'border-strong-swatch',
+        )
+        const borderStrongName = document.getElementById('border-strong-name')
+        borderStrongSwatch.style.background = `var(--eds-color-border-${appearance}-strong)`
+        borderStrongName.textContent = `--eds-color-border-${appearance}-strong`
+
+        // Update text colors
+        const textSubtleSwatch = document.getElementById('text-subtle-swatch')
+        const textSubtleName = document.getElementById('text-subtle-name')
+        textSubtleSwatch.style.background = `var(--eds-color-text-${appearance}-subtle)`
+        textSubtleName.textContent = `--eds-color-text-${appearance}-subtle`
+
+        const textStrongSwatch = document.getElementById('text-strong-swatch')
+        const textStrongName = document.getElementById('text-strong-name')
+        textStrongSwatch.style.background = `var(--eds-color-text-${appearance}-strong)`
+        textStrongName.textContent = `--eds-color-text-${appearance}-strong`
+
+        const textContrastSubtleSwatch = document.getElementById(
+          'text-contrast-subtle-swatch',
+        )
+        const textContrastSubtleName = document.getElementById(
+          'text-contrast-subtle-name',
+        )
+        textContrastSubtleSwatch.style.background = `var(--eds-color-text-${appearance}-contrast-subtle)`
+        textContrastSubtleName.textContent = `--eds-color-text-${appearance}-contrast-subtle`
+
+        const textContrastStrongSwatch = document.getElementById(
+          'text-contrast-strong-swatch',
+        )
+        const textContrastStrongName = document.getElementById(
+          'text-contrast-strong-name',
+        )
+        textContrastStrongSwatch.style.background = `var(--eds-color-text-${appearance}-contrast-strong)`
+        textContrastStrongName.textContent = `--eds-color-text-${appearance}-contrast-strong`
       }
 
       function updateActiveButtons() {
@@ -700,9 +900,6 @@
         currentColorScheme,
       )
       document.documentElement.setAttribute('data-density', currentDensity)
-      // Set initial appearance only on semantic colors grid
-      const semanticGrid = document.getElementById('semantic-colors-grid')
-      semanticGrid.setAttribute('data-color-appearance', currentAppearance)
       updateActiveButtons()
     </script>
   </body>

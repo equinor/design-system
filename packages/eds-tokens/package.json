@@ -12,7 +12,6 @@
     },
     "./tokens.css": "./tokens.css",
     "./elements.css": "./elements.css",
-    "./css/color/foundation.css": "./build/css/color/foundation.min.css",
     "./css/variables-static.css": "./build/css/variables-static.min.css",
     "./css/variables-dynamic.css": "./build/css/variables-dynamic.min.css",
     "./css/spacing/primitives.css": "./build/css/spacing/primitives-trimmed.css",

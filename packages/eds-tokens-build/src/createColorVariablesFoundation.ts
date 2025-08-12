@@ -38,24 +38,6 @@ export async function createColorVariablesFoundation({
     '🌗 Color scheme.Dark.json',
   )
 
-  const lightColors = _extend({
-    source: [COLORS_LIGHT],
-    buildPath: colorBuildPath,
-    fileName: 'light-colors',
-    selector: ':root',
-    prefix: PREFIX,
-    outputReferences: true,
-  })
-
-  const darkColors = _extend({
-    source: [COLORS_DARK],
-    buildPath: colorBuildPath,
-    fileName: 'dark-colors',
-    selector: ':root',
-    prefix: PREFIX,
-    outputReferences: true,
-  })
-
   const lightColorScheme = _extend({
     source: [COLORS_LIGHT_SCHEME],
     include: [COLORS_LIGHT],
@@ -65,7 +47,7 @@ export async function createColorVariablesFoundation({
     fileName: 'light-color-scheme',
     selector: '[data-color-scheme="light"]',
     prefix: PREFIX,
-    outputReferences: true,
+    outputReferences: false,
   })
 
   const darkColorScheme = _extend({
@@ -77,11 +59,9 @@ export async function createColorVariablesFoundation({
     fileName: 'dark-color-scheme',
     selector: '[data-color-scheme="dark"]',
     prefix: PREFIX,
-    outputReferences: true,
+    outputReferences: false,
   })
 
-  await lightColors.buildAllPlatforms()
-  await darkColors.buildAllPlatforms()
   await lightColorScheme.buildAllPlatforms()
   await darkColorScheme.buildAllPlatforms()
 
