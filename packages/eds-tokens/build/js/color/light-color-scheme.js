@@ -96,3 +96,5 @@ export const BACKGROUND_CANVAS = "#f2f2f2";
 export const BACKGROUND_SURFACE = "#ffffff";
 export const BACKGROUND_ELEVATED = "#ffffff";
 export const BACKGROUND_BACKDROP = "#808080";
+export const BORDER_FOCUS = "#2d88c0";
+export const TEXT_LINK = "#0084c4";

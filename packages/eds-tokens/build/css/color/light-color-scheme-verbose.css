@@ -97,4 +97,6 @@
   --eds-color-background-surface: var(--eds-color-light-gray-1);
   --eds-color-background-elevated: var(--eds-color-light-gray-1);
   --eds-color-background-backdrop: var(--eds-color-light-gray-7);
+  --eds-color-border-focus: var(--eds-color-light-blue-7);
+  --eds-color-text-link: var(--eds-color-light-blue-13);
 }

@@ -7,7 +7,9 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["ALL_SCOPES"],
+          "scopes": [
+            "ALL_SCOPES"
+          ],
           "codeSyntax": {
             "WEB": "var(--eds-color-background-canvas)"
           }
@@ -21,7 +23,9 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["ALL_SCOPES"],
+          "scopes": [
+            "ALL_SCOPES"
+          ],
           "codeSyntax": {
             "WEB": "var(--eds-color-background-surface)"
           }
@@ -35,7 +39,9 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["ALL_SCOPES"],
+          "scopes": [
+            "ALL_SCOPES"
+          ],
           "codeSyntax": {
             "WEB": "var(--eds-color-background-elevated)"
           }
@@ -49,7 +55,9 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["ALL_SCOPES"],
+          "scopes": [
+            "ALL_SCOPES"
+          ],
           "codeSyntax": {
             "WEB": "var(--eds-color-background-backdrop)"
           }
@@ -60,12 +68,14 @@
   "Border": {
     "Focus": {
       "$type": "color",
-      "$value": "{Blue.7}",
+      "$value": "{Border.Focus}",
       "$description": "",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["ALL_SCOPES"],
+          "scopes": [
+            "ALL_SCOPES"
+          ],
           "codeSyntax": {
             "WEB": "var(--eds-color-border-focus)"
           }
@@ -76,12 +86,14 @@
   "Text": {
     "Link": {
       "$type": "color",
-      "$value": "{Blue.13}",
+      "$value": "{Text.Link}",
       "$description": "",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["ALL_SCOPES"],
+          "scopes": [
+            "ALL_SCOPES"
+          ],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-link)"
           }

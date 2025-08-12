@@ -92,5 +92,7 @@
   "background-canvas": "#f2f2f2",
   "background-surface": "#ffffff",
   "background-elevated": "#ffffff",
-  "background-backdrop": "#808080"
+  "background-backdrop": "#808080",
+  "border-focus": "#2d88c0",
+  "text-link": "#0084c4"
 }

@@ -106,5 +106,11 @@
     "Surface": "#ffffff",
     "Elevated": "#ffffff",
     "Backdrop": "#808080"
+  },
+  "Border": {
+    "Focus": "#2d88c0"
+  },
+  "Text": {
+    "Link": "#0084c4"
   }
 }

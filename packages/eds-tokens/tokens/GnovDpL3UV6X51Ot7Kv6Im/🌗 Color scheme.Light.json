@@ -1328,5 +1328,37 @@
         }
       }
     }
+  },
+  "Border": {
+    "Focus": {
+      "$type": "color",
+      "$value": "{Light.Blue.7}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "Text": {
+    "Link": {
+      "$type": "color",
+      "$value": "{Light.Blue.13}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
   }
 }
