@@ -5,19 +5,19 @@ export const ColorScalesHeader = () => {
     <>
       <div className="grid gap-3 mb-2 grid-cols-15 text-center">
         <div className="col-span-2 border-b border-gray-300 dark:border-gray-800">
-          background
+          Background [default, subtle]
         </div>
         <div className="col-span-3 pb-2 border-b border-gray-300 dark:border-gray-800">
-          background-fill-subtle
+          Background [medium]
         </div>
         <div className="col-span-3 border-b border-gray-300 dark:border-gray-800">
-          border
+          Border
         </div>
         <div className="col-span-4 border-b border-gray-300 dark:border-gray-800">
-          text
+          Text
         </div>
         <div className="col-span-3 border-b border-gray-300 dark:border-gray-800">
-          background-fill-strong
+          Background [strong]
         </div>
       </div>
 
