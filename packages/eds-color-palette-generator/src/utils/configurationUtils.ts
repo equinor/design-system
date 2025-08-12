@@ -63,7 +63,7 @@ export const downloadColorTokens = (
       'light',
     )
 
-    darkColors[`${colorDef.name}Dark`] = generateColorScale(
+    darkColors[colorDef.name] = generateColorScale(
       colorDef.hex,
       customDarkModeValues,
       mean,
@@ -72,45 +72,39 @@ export const downloadColorTokens = (
     )
   })
 
-  // Extract the required standard colors for token formatter
-  const standardLightColors = {
-    accent: lightColors.accent || [],
-    neutral: lightColors.neutral || [],
-    success: lightColors.success || [],
-    info: lightColors.info || [],
-    warning: lightColors.warning || [],
-    danger: lightColors.danger || [],
-  }
+  // Format and download light tokens
+  const lightTokenData = formatColorsAsTokens(lightColors)
 
-  const standardDarkColors = {
-    accentDark: darkColors.accentDark || [],
-    neutralDark: darkColors.neutralDark || [],
-    successDark: darkColors.successDark || [],
-    infoDark: darkColors.infoDark || [],
-    warningDark: darkColors.warningDark || [],
-    dangerDark: darkColors.dangerDark || [],
-  }
-
-  // Format colors as tokens
-  const tokenData = formatColorsAsTokens(
-    standardLightColors,
-    standardDarkColors,
-  )
-
-  const blob = new Blob([tokenData], {
+  const lightBlob = new Blob([lightTokenData], {
     type: 'application/json',
   })
-  const url = URL.createObjectURL(blob)
+  const lightUrl = URL.createObjectURL(lightBlob)
 
-  const a = document.createElement('a')
-  a.href = url
-  a.download = 'color-tokens.json'
-  document.body.appendChild(a)
-  a.click()
+  const lightAnchor = document.createElement('a')
+  lightAnchor.href = lightUrl
+  lightAnchor.download = 'color-tokens-light.json'
+  document.body.appendChild(lightAnchor)
+  lightAnchor.click()
+
+  // Format and download dark tokens
+  const darkTokenData = formatColorsAsTokens(darkColors)
+
+  const darkBlob = new Blob([darkTokenData], {
+    type: 'application/json',
+  })
+  const darkUrl = URL.createObjectURL(darkBlob)
+
+  const darkAnchor = document.createElement('a')
+  darkAnchor.href = darkUrl
+  darkAnchor.download = 'color-tokens-dark.json'
+  document.body.appendChild(darkAnchor)
+  darkAnchor.click()
 
   // Clean up
   setTimeout(() => {
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    document.body.removeChild(lightAnchor)
+    document.body.removeChild(darkAnchor)
+    URL.revokeObjectURL(lightUrl)
+    URL.revokeObjectURL(darkUrl)
   }, 0)
 }

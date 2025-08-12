@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-color-appearance="neutral"] {
+  --eds-color-background-medium-default: var(--eds-color-gray-3);
+  --eds-color-background-medium-hover: var(--eds-color-gray-4);
+  --eds-color-background-medium-active: var(--eds-color-gray-5);
+  --eds-color-background-strong-default: var(--eds-color-gray-13);
+  --eds-color-background-strong-hover: var(--eds-color-gray-14);
+  --eds-color-background-strong-active: var(--eds-color-gray-15);
+  --eds-color-background-default: var(--eds-color-gray-1);
+  --eds-color-background-subtle: var(--eds-color-gray-2);
+  --eds-color-border-subtle: var(--eds-color-gray-6);
+  --eds-color-border-medium: var(--eds-color-gray-7);
+  --eds-color-border-strong: var(--eds-color-gray-8);
+  --eds-color-text-subtle: var(--eds-color-gray-9); /** Used for text and icons */
+  --eds-color-text-strong: var(--eds-color-gray-10); /** Used for text and icons */
+  --eds-color-text-contrast-subtle: var(--eds-color-gray-11); /** Text or icons against colored backgrounds */
+  --eds-color-text-contrast-strong: var(--eds-color-gray-12); /** Text or icons against colored backgrounds */
+}

@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-appearance="danger"] {
+  --eds-color-background-medium-default: var(--eds-color-red-3);
+  --eds-color-background-medium-hover: var(--eds-color-red-4);
+  --eds-color-background-medium-active: var(--eds-color-red-5);
+  --eds-color-background-strong-default: var(--eds-color-red-13);
+  --eds-color-background-strong-hover: var(--eds-color-red-14);
+  --eds-color-background-strong-active: var(--eds-color-red-15);
+  --eds-color-background-default: var(--eds-color-red-1);
+  --eds-color-background-subtle: var(--eds-color-red-2);
+  --eds-color-border-subtle: var(--eds-color-red-6);
+  --eds-color-border-medium: var(--eds-color-red-7);
+  --eds-color-border-strong: var(--eds-color-red-8);
+  --eds-color-text-subtle: var(--eds-color-red-9); /** Used for text and icons */
+  --eds-color-text-strong: var(--eds-color-red-10); /** Used for text and icons */
+  --eds-color-text-contrast-subtle: var(--eds-color-red-11); /** Text or icons against colored backgrounds */
+  --eds-color-text-contrast-strong: var(--eds-color-red-12); /** Text or icons against colored backgrounds */
+}
