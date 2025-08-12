@@ -63,9 +63,9 @@
     "_build:css-min-dynamic": "lightningcss --minify --bundle ./build/css/variables-dynamic.css -o ./build/css/variables-dynamic.min.css",
     "_build:css-min-static": "lightningcss --minify --bundle ./build/css/variables-static.css -o ./build/css/variables-static.min.css",
     "_build:css-min": "pnpm run _build:css-min-static && pnpm run _build:css-min-dynamic",
-    "tokens-in-code:build:css": "pnpm run _prebuild:css-index && pnpm run _build:css && pnpm run _build:css-min",
-    "tokens-in-code:clean": "rimraf build",
-    "tokens-in-code:build": "pnpm run tokens-in-code:clean && pnpm run generate-variables && pnpm run tokens-in-code:build:css",
+    "build:css": "pnpm run _prebuild:css-index && pnpm run _build:css && pnpm run _build:css-min",
+    "clean": "rimraf build",
+    "build:variables": "pnpm run clean && pnpm run generate-variables && pnpm run build:css",
     "update-tokens:spacing-primitives": "sync-figma-to-tokens --file-key cpNchKjiIM19dPqTxE0fqg",
     "update-tokens:spacing-modes": "sync-figma-to-tokens --file-key FQQqyumcpPQoiFRCjdS9GM",
     "update-figma:spacing-primitives": "sync-tokens-to-figma --file-key cpNchKjiIM19dPqTxE0fqg",
@@ -76,7 +76,8 @@
     "update-figma:color-static": "sync-tokens-to-figma --file-key OWxw2XogDLUt1aCvcDFXPw",
     "update-tokens:color-dynamic": "sync-figma-to-tokens --file-key nyPaQ3QnI1UAcxKW4a0d2c",
     "update-figma:color-dynamic": "sync-tokens-to-figma --file-key nyPaQ3QnI1UAcxKW4a0d2c",
-    "update-tokens": "pnpm run update-tokens:foundations && pnpm run update-tokens:color-static && pnpm run update-tokens:color-dynamic && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes"
+    "update-tokens": "pnpm run update-tokens:foundations && pnpm run update-tokens:color-static && pnpm run update-tokens:color-dynamic && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
+    "update-figma": "pnpm run update-figma:foundations && pnpm run update-figma:color-static && pnpm run update-figma:color-dynamic && pnpm run update-figma:spacing-primitives && pnpm run update-figma:spacing-modes"
   },
   "keywords": [
     "eds",
