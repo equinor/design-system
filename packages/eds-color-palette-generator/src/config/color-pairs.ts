@@ -12,21 +12,21 @@ type ColorPair = {
 }
 
 export const colorPairs: Array<ColorPair | null> = [
-  // background 1
+  // background default 1
   {
     // usedOnStep: [
     //   { stepIndex: 9, lc: APCA_CONTRAST_LEVELS.LC_75, wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL.value }, // For readable text
     //   { stepIndex: 10, lc: APCA_CONTRAST_LEVELS.LC_60, wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL.value }, // For secondary text
     // ],
   },
-  // background 2
+  // background subtle 2
   {
     // usedOnStep: [
     //   { stepIndex: 9, lc: APCA_CONTRAST_LEVELS.LC_75, wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL.value }, // For readable text
     //   { stepIndex: 10, lc: APCA_CONTRAST_LEVELS.LC_60, wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL.value }, // For secondary text
     // ],
   },
-  // interactive 3
+  // background medium 3
   {
     usedOnStep: [
       {
@@ -41,7 +41,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For interactive elements
     ],
   },
-  // interactive 4
+  // background medium 4
   {
     usedOnStep: [
       {
@@ -56,7 +56,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For interactive elements
     ],
   },
-  // interactive 5
+  // background medium 5
   {
     usedOnStep: [
       {
@@ -161,7 +161,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For borders
     ],
   },
-  // accessible text 9
+  // text subtle 9
   {
     usedOnStep: [
       {
@@ -191,7 +191,7 @@ export const colorPairs: Array<ColorPair | null> = [
       },
     ],
   },
-  // accessible text 10
+  //  text strong 10
   {
     usedOnStep: [
       {
@@ -221,7 +221,7 @@ export const colorPairs: Array<ColorPair | null> = [
       },
     ],
   },
-  // text contrast-subtle 11
+  // text inverse-subtle 11
   {
     usedOnStep: [
       {
@@ -241,7 +241,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For interactive states
     ],
   },
-  // text contrast-strong text 11
+  // text inverse-strong text 11
   {
     usedOnStep: [
       {
@@ -261,7 +261,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For interactive states
     ],
   },
-  // solid 12
+  // background strong 12
   {
     usedOnStep: [
       {
@@ -276,7 +276,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For UI elements
     ],
   },
-  // solid 13 (hover)
+  // background strong 13 (hover)
   {
     usedOnStep: [
       {
@@ -291,7 +291,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For interactive states
     ],
   },
-  // solid 14 (active)
+  // background strong 14 (active)
   {
     usedOnStep: [
       {
