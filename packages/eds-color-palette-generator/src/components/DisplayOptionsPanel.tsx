@@ -4,24 +4,26 @@ import { ContrastMethod } from '@/types'
 type DisplayOptionsPanelProps = {
   showContrast: boolean
   showLightnessInputs: boolean
+  showGaussianParameters: boolean
   contrastMethod: ContrastMethod
   setShowContrast: React.Dispatch<React.SetStateAction<boolean>>
   setShowLightnessInputs: React.Dispatch<React.SetStateAction<boolean>>
+  setShowGaussianParameters: React.Dispatch<React.SetStateAction<boolean>>
   setContrastMethod: React.Dispatch<React.SetStateAction<ContrastMethod>>
-  resetLightnessValues: () => void
 }
 
 export const DisplayOptionsPanel = ({
   showContrast,
   showLightnessInputs,
+  showGaussianParameters,
   contrastMethod,
   setShowContrast,
   setShowLightnessInputs,
+  setShowGaussianParameters,
   setContrastMethod,
-  resetLightnessValues,
 }: DisplayOptionsPanelProps) => {
   return (
-    <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
+    <fieldset className="p-6 mb-4 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
       <legend className="mb-2 font-medium">Display Options</legend>
       <div className="space-y-3">
         <label className="flex items-center gap-2 cursor-pointer">
@@ -45,7 +47,7 @@ export const DisplayOptionsPanel = ({
         <span>Show contrast information</span>
       </label>
       {showContrast && (
-        <div className="mt-3 pl-6">
+        <div className="pl-6 mt-3">
           <p className="mb-2 text-sm">Contrast calculation method</p>
           <div className="flex gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
@@ -73,14 +75,15 @@ export const DisplayOptionsPanel = ({
           </div>
         </div>
       )}
-      <div className="mt-4">
-        <button
-          onClick={resetLightnessValues}
-          className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded"
-        >
-          Reset lightness values
-        </button>
-      </div>
+      <label className="flex items-center gap-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={showGaussianParameters}
+          onChange={(e) => setShowGaussianParameters(e.target.checked)}
+          className="accent-current"
+        />
+        <span>Show Gaussian parameters</span>
+      </label>
     </fieldset>
   )
 }

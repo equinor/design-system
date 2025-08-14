@@ -12,6 +12,7 @@ type ConfigurationPanelProps = {
   stdDev: number
   colors: ColorDefinition[]
   onConfigUpload: (config: ConfigFile) => void
+  onResetConfiguration: () => void
 }
 
 export const ConfigurationPanel = ({
@@ -21,9 +22,10 @@ export const ConfigurationPanel = ({
   stdDev,
   colors,
   onConfigUpload,
+  onResetConfiguration,
 }: ConfigurationPanelProps) => {
   return (
-    <div className="my-6 p-6 border border-gray-200 rounded-lg dark:border-gray-800">
+    <div className="p-6 my-6 border border-gray-200 rounded-lg dark:border-gray-800">
       <h3 className="mb-4 font-medium">Configuration</h3>
       <div className="flex flex-wrap gap-4">
         <button
@@ -36,12 +38,12 @@ export const ConfigurationPanel = ({
               colors,
             )
           }
-          className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded border-none text-sm cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600"
+          className="px-4 py-2 text-sm text-black bg-gray-200 border-none rounded cursor-pointer dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600"
         >
           Download Configuration
         </button>
 
-        <label className="inline-block px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">
+        <label className="inline-block px-4 py-2 text-sm text-black bg-gray-200 rounded cursor-pointer dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600">
           <span>Upload Configuration</span>
           <input
             type="file"
@@ -112,7 +114,14 @@ export const ConfigurationPanel = ({
           }
           className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
         >
-          Download Color Tokens (W3C Format)
+          Download Colour Tokens (W3C Format)
+        </button>
+
+        <button
+          onClick={onResetConfiguration}
+          className="px-4 py-2 text-sm text-white bg-red-600 border-none rounded cursor-pointer hover:bg-red-700"
+        >
+          Reset Configuration
         </button>
       </div>
     </div>

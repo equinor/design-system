@@ -1,7 +1,7 @@
 'use client'
 
 import { generateColorScale } from '../utils/color'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
@@ -12,27 +12,79 @@ import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
+import { localStorageUtils } from '@/utils/localStorage'
 import config from '@/config/config.json'
 
 export default function App() {
-  const [mean, setMean] = useState(config.mean)
-  const [stdDev, setStdDev] = useState(config.stdDev)
+  // Initialize state with values from localStorage or defaults
+  const [mean, setMean] = useState(() => localStorageUtils.getMean(config.mean))
+  const [stdDev, setStdDev] = useState(() =>
+    localStorageUtils.getStdDev(config.stdDev),
+  )
   const { colorScheme } = useColorScheme()
-  const [showContrast, setShowContrast] = useState(false)
-  const [showLightnessInputs, setShowLightnessInputs] = useState(false)
-  const [showConfigPanel, setShowConfigPanel] = useState(false)
-  const [contrastMethod, setContrastMethod] = useState<ContrastMethod>('APCA')
+  const [showContrast, setShowContrast] = useState(() =>
+    localStorageUtils.getShowContrast(false),
+  )
+  const [showLightnessInputs, setShowLightnessInputs] = useState(() =>
+    localStorageUtils.getShowLightnessInputs(false),
+  )
+  const [showGaussianParameters, setShowGaussianParameters] = useState(() =>
+    localStorageUtils.getShowGaussianParameters(false),
+  )
+  const [showConfigPanel, setShowConfigPanel] = useState(false) // Don't persist this one
+  const [contrastMethod, setContrastMethod] = useState<ContrastMethod>(() =>
+    localStorageUtils.getContrastMethod('APCA'),
+  )
 
   // Add state for lightness values
-  const [lightModeValues, setLightModeValues] = useState<number[]>(
-    config.lightModeValues,
+  const [lightModeValues, setLightModeValues] = useState(() =>
+    localStorageUtils.getLightModeValues(config.lightModeValues),
   )
-  const [darkModeValues, setDarkModeValues] = useState<number[]>(
-    config.darkModeValues,
+  const [darkModeValues, setDarkModeValues] = useState(() =>
+    localStorageUtils.getDarkModeValues(config.darkModeValues),
   )
 
   // Define colors in an array for easier management
-  const [colors, setColors] = useState<ColorDefinition[]>(config.colors)
+  const [colors, setColors] = useState<ColorDefinition[]>(() =>
+    localStorageUtils.getColors(config.colors),
+  )
+
+  // Save to localStorage whenever state changes
+  useEffect(() => {
+    localStorageUtils.setMean(mean)
+  }, [mean])
+
+  useEffect(() => {
+    localStorageUtils.setStdDev(stdDev)
+  }, [stdDev])
+
+  useEffect(() => {
+    localStorageUtils.setShowContrast(showContrast)
+  }, [showContrast])
+
+  useEffect(() => {
+    localStorageUtils.setShowLightnessInputs(showLightnessInputs)
+  }, [showLightnessInputs])
+
+  useEffect(() => {
+    localStorageUtils.setShowGaussianParameters(showGaussianParameters)
+  }, [showGaussianParameters])
+
+  useEffect(() => {
+    localStorageUtils.setContrastMethod(contrastMethod)
+  }, [contrastMethod])
+
+  useEffect(() => {
+    localStorageUtils.setLightModeValues(lightModeValues)
+  }, [lightModeValues])
+
+  useEffect(() => {
+    localStorageUtils.setDarkModeValues(darkModeValues)
+  }, [darkModeValues])
+
+  useEffect(() => {
+    localStorageUtils.setColors(colors)
+  }, [colors])
 
   const updateColorName = (index: number, newName: string) => {
     setColors(
@@ -71,10 +123,17 @@ export default function App() {
     }
   }
 
-  // Reset lightness values to defaults
-  const resetLightnessValues = () => {
+  // Reset only configuration settings (colors, Gaussian parameters, lightness values)
+  const resetConfiguration = () => {
+    // Clear only configuration-related localStorage items
+    localStorageUtils.clearConfiguration()
+
+    // Reset only configuration state to defaults
+    setMean(config.mean)
+    setStdDev(config.stdDev)
     setLightModeValues(config.lightModeValues)
     setDarkModeValues(config.darkModeValues)
+    setColors(config.colors)
   }
 
   // Handle configuration upload
@@ -103,7 +162,7 @@ export default function App() {
   return (
     <div
       data-theme={colorScheme}
-      className="text-black bg-white dark:text-white dark:bg-black p-6"
+      className="p-6 text-black bg-white dark:text-white dark:bg-black"
     >
       <HeaderPanel
         showConfigPanel={showConfigPanel}
@@ -113,6 +172,18 @@ export default function App() {
       {/* Config Panel */}
       {showConfigPanel && (
         <div className="max-w-3xl p-6 mx-auto mb-12 ">
+          {/* Display Options Panel */}
+          <DisplayOptionsPanel
+            showContrast={showContrast}
+            showLightnessInputs={showLightnessInputs}
+            showGaussianParameters={showGaussianParameters}
+            contrastMethod={contrastMethod}
+            setShowContrast={setShowContrast}
+            setShowLightnessInputs={setShowLightnessInputs}
+            setShowGaussianParameters={setShowGaussianParameters}
+            setContrastMethod={setContrastMethod}
+          />
+
           {/* Color management component */}
           <ColorManagement
             colors={colors}
@@ -121,6 +192,7 @@ export default function App() {
             onRemoveColor={removeColor}
             onAddColor={addColor}
           />
+
           {/* Configuration Import/Export Section */}
           <ConfigurationPanel
             lightModeValues={lightModeValues}
@@ -129,30 +201,22 @@ export default function App() {
             stdDev={stdDev}
             colors={colors}
             onConfigUpload={handleConfigUpload}
+            onResetConfiguration={resetConfiguration}
           />
 
-          <div className="grid gap-6 mb-8 md:grid-cols-2">
+          {/* Gaussian Parameters Panel - conditionally rendered */}
+          {showGaussianParameters && (
             <GaussianParametersPanel
               mean={mean}
               stdDev={stdDev}
               setMean={setMean}
               setStdDev={setStdDev}
             />
-
-            <DisplayOptionsPanel
-              showContrast={showContrast}
-              showLightnessInputs={showLightnessInputs}
-              contrastMethod={contrastMethod}
-              setShowContrast={setShowContrast}
-              setShowLightnessInputs={setShowLightnessInputs}
-              setContrastMethod={setContrastMethod}
-              resetLightnessValues={resetLightnessValues}
-            />
-          </div>
+          )}
         </div>
       )}
 
-      <div className="sticky top-0 z-10 bg-white dark:bg-black p-1">
+      <div className="sticky top-0 z-10 p-1 bg-white dark:bg-black">
         <ColorScalesHeader />
 
         {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
