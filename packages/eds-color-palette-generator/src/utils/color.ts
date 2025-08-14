@@ -9,40 +9,12 @@ export function gaussian(
   return Math.exp(exponent)
 }
 
-interface GenerateNextSolidColorProps {
-  baseColor: string
-  colorScheme: 'light' | 'dark'
-  amount?: number
-}
-
-export function generateNextSolidColor({
-  baseColor,
-  colorScheme,
-  amount = 0.2,
-}: GenerateNextSolidColorProps): string {
-  try {
-    if (colorScheme === 'dark') {
-      const baseLighten = new Color(baseColor)
-      baseLighten.lighten(amount)
-      return baseLighten.toString({ format: 'hex' })
-    }
-
-    const baseDarken = new Color(baseColor)
-    baseDarken.darken(amount)
-    return baseDarken.toString({ format: 'hex' })
-  } catch (error) {
-    console.error('Error in generateNextSolidColor:', error)
-    // Return the original color if there's an error
-    return baseColor
-  }
-}
-
 export function generateColorScale(
   baseColor: string,
   lightnessValues: number[],
   mean: number,
   stdDev: number,
-  colorScheme: 'light' | 'dark' = 'light',
+  colorScheme: 'light' | 'dark' = 'light', // eslint-disable-line @typescript-eslint/no-unused-vars
 ): string[] {
   // Validate the baseColor to ensure it's a proper color string
   try {
@@ -73,37 +45,11 @@ export function generateColorScale(
       }
     }
 
-    // Add the base color
-    const newBaseColor = new Color(baseColor)
-    colors.push(newBaseColor.toString({ format: 'hex' }))
-
-    // Generate hover and active colors
-    try {
-      const solidHover = generateNextSolidColor({
-        baseColor,
-        colorScheme,
-        amount: 0.15,
-      })
-      const solidActive = generateNextSolidColor({
-        baseColor,
-        colorScheme,
-        amount: 0.25,
-      })
-
-      colors.push(solidHover)
-      colors.push(solidActive)
-    } catch (error) {
-      console.error('Error generating hover/active colors:', error)
-      // Add fallbacks
-      colors.push(baseColor)
-      colors.push(baseColor)
-    }
-
     return colors
   } catch (error) {
     console.error('Error in generateColorScale:', error)
     // Return a default color scale if there's an error with the base color
-    return Array(lightnessValues.length + 3).fill('#808080')
+    return Array(lightnessValues.length).fill('#808080')
   }
 }
 

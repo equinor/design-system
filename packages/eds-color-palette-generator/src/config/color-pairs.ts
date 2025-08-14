@@ -11,6 +11,20 @@ type ColorPair = {
   usedOnStep?: Array<ColorPairRequirements>
 }
 
+export type StepLabel = {
+  title: string
+  span: number
+}
+
+export const stepLabels: StepLabel[] = [
+  { title: 'Background [default, subtle]', span: 2 },
+  { title: 'Background [medium]', span: 3 },
+  { title: 'Background [strong]', span: 3 },
+  { title: 'Border', span: 3 },
+  { title: 'Text default [subtle, strong]', span: 2 },
+  { title: 'Text inverse [subtle, strong]', span: 2 },
+]
+
 export const colorPairs: Array<ColorPair | null> = [
   // background default 1
   {
@@ -71,7 +85,52 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For interactive elements
     ],
   },
-  // border 6
+  // solid base 6
+  {
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For text on solid
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For text on solid
+    ],
+  },
+  // solid hover 7
+  {
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For text on solid hover
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For text on solid hover
+    ],
+  },
+  // solid active 8
+  {
+    usedOnStep: [
+      {
+        stepIndex: 0,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For text on solid active
+      {
+        stepIndex: 1,
+        lc: APCA_CONTRAST_LEVELS.LC_60,
+        wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      }, // For text on solid active
+    ],
+  },
+  // border 9
   {
     usedOnStep: [
       {
@@ -101,7 +160,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For borders
     ],
   },
-  // border 7
+  // border 10
   {
     usedOnStep: [
       {
@@ -131,7 +190,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For borders
     ],
   },
-  // border 8
+  // border 11
   {
     usedOnStep: [
       {
@@ -161,7 +220,7 @@ export const colorPairs: Array<ColorPair | null> = [
       }, // For borders
     ],
   },
-  // text subtle 9
+  // text subtle 12
   {
     usedOnStep: [
       {
@@ -191,7 +250,7 @@ export const colorPairs: Array<ColorPair | null> = [
       },
     ],
   },
-  //  text strong 10
+  //  text strong 13
   {
     usedOnStep: [
       {
@@ -221,88 +280,43 @@ export const colorPairs: Array<ColorPair | null> = [
       },
     ],
   },
-  // text inverse-subtle 11
+  // text inverse-subtle 14
   {
     usedOnStep: [
       {
-        stepIndex: 12,
+        stepIndex: 5,
         lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For UI elements
       {
-        stepIndex: 13,
+        stepIndex: 6,
         lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For interactive states
       {
-        stepIndex: 14,
+        stepIndex: 7,
         lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For interactive states
     ],
   },
-  // text inverse-strong text 11
+  // text inverse-strong 15
   {
     usedOnStep: [
       {
-        stepIndex: 12,
+        stepIndex: 5,
         lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For UI elements
       {
-        stepIndex: 13,
+        stepIndex: 6,
         lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
       }, // For interactive states
       {
-        stepIndex: 14,
+        stepIndex: 7,
         lc: APCA_CONTRAST_LEVELS.LC_60,
         wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
-      }, // For interactive states
-    ],
-  },
-  // background strong 12
-  {
-    usedOnStep: [
-      {
-        stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_15,
-        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
-      }, // For UI elements
-      {
-        stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_15,
-        wcag: WCAG_CONTRAST_LEVELS.AA_LARGE,
-      }, // For UI elements
-    ],
-  },
-  // background strong 13 (hover)
-  {
-    usedOnStep: [
-      {
-        stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_15,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-      {
-        stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_15,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-    ],
-  },
-  // background strong 14 (active)
-  {
-    usedOnStep: [
-      {
-        stepIndex: 0,
-        lc: APCA_CONTRAST_LEVELS.LC_15,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-      }, // For interactive states
-      {
-        stepIndex: 1,
-        lc: APCA_CONTRAST_LEVELS.LC_15,
-        wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
       }, // For interactive states
     ],
   },
