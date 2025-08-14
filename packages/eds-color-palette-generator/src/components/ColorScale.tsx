@@ -68,7 +68,7 @@ export function ColorScale({
 }: ColorScaleProps) {
   // State to track client-side rendering to avoid hydration issues
   const [isClient, setIsClient] = useState(false)
-  
+
   // State to track the active dialog (index of the color) - only one can be active at a time
   const [activeDialog, setActiveDialog] = useState<number | null>(null)
 
@@ -174,11 +174,9 @@ export function ColorScale({
     return (
       <div className="mb-8">
         {colorName && (
-          <h3 className="text-left mb-2 font-medium text-lg">
-            {colorName}
-          </h3>
+          <h3 className="mb-2 text-lg font-medium text-left">{colorName}</h3>
         )}
-        <div 
+        <div
           className="grid gap-3 mb-4"
           style={{ gridTemplateColumns: `repeat(15, minmax(0, 1fr))` }}
         >
@@ -199,7 +197,7 @@ export function ColorScale({
       {colorName && (
         <h3
           style={{ color: colors[8] || '#000000' }}
-          className="text-left mb-2 font-medium text-lg"
+          className="mb-2 text-lg font-medium text-left"
         >
           {colorName}
         </h3>
@@ -273,15 +271,15 @@ export function ColorScale({
                   }
                 }}
               >
-                <div className="flex justify-between items-center mb-3">
+                <div className="flex items-center justify-between mb-3">
                   <h4
                     id={`color-details-heading-${i}`}
-                    className="font-medium text-lg"
+                    className="text-lg font-medium"
                   >
                     {colorName ? `${colorName} #${i + 1}` : `Color #${i + 1}`}
                   </h4>
                   <button
-                    className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-black/10 focus:outline-none focus:ring-2"
+                    className="flex items-center justify-center rounded-full w-7 h-7 hover:bg-black/10 focus:outline-none focus:ring-2"
                     onClick={() => closeDialog(i)}
                     aria-label="Close details"
                   >
@@ -292,7 +290,7 @@ export function ColorScale({
                 {/* Color sample */}
                 <div className="flex gap-4 mb-4">
                   <div
-                    className="w-16 h-16 rounded-lg border"
+                    className="w-16 h-16 border rounded-lg"
                     style={{
                       backgroundColor: oklchInfo.hex,
                       borderColor: 'rgba(0,0,0,0.1)',
@@ -301,7 +299,7 @@ export function ColorScale({
                   ></div>
 
                   <div className="flex flex-col justify-center">
-                    <div className="font-mono text-base mb-2">
+                    <div className="mb-2 font-mono text-base">
                       {oklchInfo.hex}
                     </div>
                   </div>
@@ -322,14 +320,14 @@ export function ColorScale({
 
                 {/* Always show contrast information in the dialog */}
                 {pairsWithSteps && pairsWithSteps.length > 0 && (
-                  <div className="border-t pt-3 mt-3">
-                    <h5 className="font-medium mb-2">Contrast Information:</h5>
+                  <div className="pt-3 mt-3 border-t">
+                    <h5 className="mb-2 font-medium">Contrast Information:</h5>
                     <div className="max-h-[120px] overflow-y-auto">
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th className="text-left py-1 pr-2">Color</th>
-                            <th className="text-right py-1">
+                            <th className="py-1 pr-2 text-left">Color</th>
+                            <th className="py-1 text-right">
                               {contrastMethod} Contrast
                             </th>
                           </tr>
@@ -365,9 +363,9 @@ export function ColorScale({
                                 key={`dialog-contrast-${colorPair.stepIndex}`}
                                 className="border-b border-gray-100 dark:border-gray-800"
                               >
-                                <td className="py-1 pr-2 flex items-center gap-2">
+                                <td className="flex items-center gap-2 py-1 pr-2">
                                   <div
-                                    className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-700"
+                                    className="w-3 h-3 border border-gray-300 rounded-full dark:border-gray-700"
                                     style={{
                                       backgroundColor:
                                         colors[colorPair.stepIndex],
@@ -375,7 +373,7 @@ export function ColorScale({
                                   />
                                   #{colorPair.stepIndex + 1}
                                 </td>
-                                <td className="text-right py-1">
+                                <td className="py-1 text-right">
                                   <span className={`font-mono ${scoreColor}`}>
                                     {contrastMethod === 'APCA' &&
                                       contrastValue &&
