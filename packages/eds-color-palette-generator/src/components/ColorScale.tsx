@@ -66,6 +66,9 @@ export function ColorScale({
   contrastMethod = 'WCAG21',
   colorName,
 }: ColorScaleProps) {
+  // State to track client-side rendering to avoid hydration issues
+  const [isClient, setIsClient] = useState(false)
+  
   // State to track the active dialog (index of the color) - only one can be active at a time
   const [activeDialog, setActiveDialog] = useState<number | null>(null)
 
@@ -76,6 +79,11 @@ export function ColorScale({
   const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
     Array(colors.length).fill(null),
   )
+
+  // Set client-side flag after hydration
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Styles are now imported from the dialog.css file
 
@@ -161,17 +169,47 @@ export function ColorScale({
     })
   }, [colors, contrastMethod])
 
+  // Don't render on server to avoid hydration issues
+  if (!isClient) {
+    return (
+      <div className="mb-8">
+        {colorName && (
+          <h3 className="text-left mb-2 font-medium text-lg">
+            {colorName}
+          </h3>
+        )}
+        <div 
+          className="grid gap-3 mb-4"
+          style={{ gridTemplateColumns: `repeat(15, minmax(0, 1fr))` }}
+        >
+          {/* Placeholder elements during SSR */}
+          {Array.from({ length: 15 }, (_, i) => (
+            <div
+              key={`placeholder-${i}`}
+              className="rounded-lg p-3 bg-gray-200 dark:bg-gray-800 min-h-[130px]"
+            />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="mb-8">
       {colorName && (
         <h3
-          style={{ color: colors[8] }}
-          className={`text-left mb-2 font-medium text-lg`}
+          style={{ color: colors[8] || '#000000' }}
+          className="text-left mb-2 font-medium text-lg"
         >
           {colorName}
         </h3>
       )}
-      <div className="grid gap-3 mb-4 grid-cols-15">
+      <div
+        className="grid gap-3 mb-4"
+        style={{
+          gridTemplateColumns: `repeat(${colors.length}, minmax(0, 1fr))`,
+        }}
+      >
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)
           const pairsWithSteps = colorPairs[i]?.usedOnStep
