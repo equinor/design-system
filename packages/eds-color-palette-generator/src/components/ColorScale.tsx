@@ -202,12 +202,13 @@ export function ColorScale({
           const pairsWithSteps = step?.contrastWith || []
           const oklchInfo = getOklchInfo(color, i)
           const isDialogActive = activeDialog === i
+          const testId = colorName
+            ? `${colorName.replace(/\s+/g, '-').toLowerCase()}-${i}`
+            : `color-step-${i}`
 
           return (
             <div
-              data-testid={
-                colorName ? `color-step-${colorName}-${i}` : `color-step-${i}`
-              }
+              data-testid={testId}
               key={'color-step-' + i}
               ref={(el) => {
                 colorElementRefs.current[i] = el
