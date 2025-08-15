@@ -14,7 +14,6 @@ export function generateColorScale(
   lightnessValues: number[],
   mean: number,
   stdDev: number,
-  colorScheme: 'light' | 'dark' = 'light', // eslint-disable-line @typescript-eslint/no-unused-vars
 ): string[] {
   // Validate the baseColor to ensure it's a proper color string
   try {

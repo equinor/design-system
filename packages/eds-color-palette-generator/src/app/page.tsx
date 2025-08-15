@@ -1,7 +1,7 @@
 'use client'
 
 import { generateColorScale } from '../utils/color'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
@@ -13,7 +13,10 @@ import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
 import { localStorageUtils } from '@/utils/localStorage'
-import config from '@/config/config'
+import config, {
+  lightnessValuesInLightMode,
+  darknessValuesInDarkMode,
+} from '@/config/config'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -38,10 +41,10 @@ export default function App() {
 
   // Add state for lightness values
   const [lightModeValues, setLightModeValues] = useState(() =>
-    localStorageUtils.getLightModeValues(config.lightModeValues),
+    localStorageUtils.getLightModeValues(lightnessValuesInLightMode),
   )
   const [darkModeValues, setDarkModeValues] = useState(() =>
-    localStorageUtils.getDarkModeValues(config.darkModeValues),
+    localStorageUtils.getDarkModeValues(darknessValuesInDarkMode),
   )
 
   // Define colors in an array for easier management
@@ -131,8 +134,8 @@ export default function App() {
     // Reset only configuration state to defaults
     setMean(config.mean)
     setStdDev(config.stdDev)
-    setLightModeValues(config.lightModeValues)
-    setDarkModeValues(config.darkModeValues)
+    setLightModeValues(lightnessValuesInLightMode)
+    setDarkModeValues(darknessValuesInDarkMode)
     setColors(config.colors)
   }
 
@@ -147,17 +150,28 @@ export default function App() {
     }
   }
 
-  // Generate color scales for each color
-  const colorScales = colors.map((color) => ({
-    ...color,
-    scale: generateColorScale(
-      color.hex,
-      colorScheme === 'light' ? lightModeValues : darkModeValues,
-      mean,
-      stdDev,
-      colorScheme,
-    ),
-  }))
+  // Generate memoized color scales for light and dark modes separately
+  const lightColorScales = useMemo(
+    () =>
+      colors.map((color) => ({
+        ...color,
+        scale: generateColorScale(color.hex, lightModeValues, mean, stdDev),
+      })),
+    [colors, lightModeValues, mean, stdDev],
+  )
+
+  const darkColorScales = useMemo(
+    () =>
+      colors.map((color) => ({
+        ...color,
+        scale: generateColorScale(color.hex, darkModeValues, mean, stdDev),
+      })),
+    [colors, darkModeValues, mean, stdDev],
+  )
+
+  // Select the appropriate scales based on current color scheme
+  const currentColorScales =
+    colorScheme === 'light' ? lightColorScales : darkColorScales
 
   return (
     <div
@@ -231,7 +245,7 @@ export default function App() {
       </div>
 
       {/* Render color scales dynamically */}
-      {colorScales.map((colorData) => (
+      {currentColorScales.map((colorData) => (
         <ColorScale
           key={colorData.name}
           colors={colorData.scale}
