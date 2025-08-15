@@ -1,5 +1,5 @@
 import React from 'react'
-import { stepLabels } from '@/config/color-pairs'
+import { stepGroups } from '@/config/config'
 
 export const ColorScalesHeader = () => {
   const getColSpanClass = (span: number) => {
@@ -22,12 +22,12 @@ export const ColorScalesHeader = () => {
   return (
     <>
       <div className="grid gap-3 mb-2 grid-cols-15 text-center">
-        {stepLabels.map((label, index) => (
+        {stepGroups.map((group, index) => (
           <div
             key={index}
-            className={`${getColSpanClass(label.span)} border-b border-gray-300 dark:border-gray-800`}
+            className={`${getColSpanClass(group.span)} border-b border-gray-300 dark:border-gray-800`}
           >
-            {label.title}
+            {group.title}
           </div>
         ))}
       </div>

@@ -1,5 +1,5 @@
 'use client'
-import { colorPairs } from '@/config/color-pairs'
+import { colorPairs } from '@/config/config'
 import { checkContrast } from '@/utils/color'
 import Color from 'colorjs.io'
 import { useState, useEffect, useRef, useMemo } from 'react'
