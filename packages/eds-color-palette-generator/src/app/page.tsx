@@ -13,7 +13,7 @@ import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
 import { localStorageUtils } from '@/utils/localStorage'
-import config from '@/config/config.json'
+import config from '@/config/config'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
