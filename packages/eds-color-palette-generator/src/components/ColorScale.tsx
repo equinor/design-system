@@ -1,5 +1,5 @@
 'use client'
-import { colorPairs } from '@/config/config'
+import { PALETTE_STEPS, getStepIndex } from '@/config/config'
 import { checkContrast } from '@/utils/color'
 import Color from 'colorjs.io'
 import { useState, useEffect, useRef, useMemo } from 'react'
@@ -66,7 +66,7 @@ export function ColorScale({
   contrastMethod = 'WCAG21',
   colorName,
 }: ColorScaleProps) {
-  // State to track client-side rendering to avoid hydration issues
+  // State to track client-side rendering for contrast calculations
   const [isClient, setIsClient] = useState(false)
 
   // State to track the active dialog (index of the color) - only one can be active at a time
@@ -152,44 +152,32 @@ export function ColorScale({
   // Memoize contrast calculations to only recalculate when colors or contrastMethod change
   const contrasts = useMemo(() => {
     return colors.map((color: string, i: number) => {
-      const indexOfBackgroundColorThatPairs = colorPairs[i]?.usedOnStep
-      if (!indexOfBackgroundColorThatPairs) return null
+      const step = PALETTE_STEPS[i]
+      if (!step?.contrastWith || step.contrastWith.length === 0) return null
 
-      const contrastForAllBackgroundPairings = colorPairs[i]?.usedOnStep?.map(
-        (colorPair) => {
+      const contrastForAllBackgroundPairings = step.contrastWith
+        .map((contrastReq) => {
+          const targetStepIndex = getStepIndex(contrastReq.targetStep)(
+            PALETTE_STEPS,
+          )
+          if (targetStepIndex === -1) return null
+
           const contrastResult = checkContrast(
             color,
-            colors[colorPair.stepIndex],
+            colors[targetStepIndex],
             contrastMethod,
           )
           return contrastResult
-        },
-      )
+        })
+        .filter((result) => result !== null)
+
       return contrastForAllBackgroundPairings
     })
   }, [colors, contrastMethod])
 
-  // Don't render on server to avoid hydration issues
+  // Only render on client to avoid hydration issues
   if (!isClient) {
-    return (
-      <div className="mb-8">
-        {colorName && (
-          <h3 className="mb-2 text-lg font-medium text-left">{colorName}</h3>
-        )}
-        <div
-          className="grid gap-3 mb-4"
-          style={{ gridTemplateColumns: `repeat(15, minmax(0, 1fr))` }}
-        >
-          {/* Placeholder elements during SSR */}
-          {Array.from({ length: 15 }, (_, i) => (
-            <div
-              key={`placeholder-${i}`}
-              className="rounded-lg p-3 bg-gray-200 dark:bg-gray-800 min-h-[130px]"
-            />
-          ))}
-        </div>
-      </div>
-    )
+    return null
   }
 
   return (
@@ -210,7 +198,8 @@ export function ColorScale({
       >
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)
-          const pairsWithSteps = colorPairs[i]?.usedOnStep
+          const step = PALETTE_STEPS[i]
+          const pairsWithSteps = step?.contrastWith || []
           const oklchInfo = getOklchInfo(color, i)
           const isDialogActive = activeDialog === i
 
@@ -333,7 +322,12 @@ export function ColorScale({
                           </tr>
                         </thead>
                         <tbody>
-                          {pairsWithSteps.map((colorPair, colorPairIndex) => {
+                          {pairsWithSteps.map((contrastReq, colorPairIndex) => {
+                            const targetStepIndex = getStepIndex(
+                              contrastReq.targetStep,
+                            )(PALETTE_STEPS)
+                            if (targetStepIndex === -1) return null
+
                             const contrastArray = contrasts[i]
                             const contrastValue =
                               contrastArray &&
@@ -346,11 +340,11 @@ export function ColorScale({
                               if (contrastMethod === 'APCA') {
                                 isContrastValid =
                                   parseFloat(String(contrastValue)) >=
-                                  colorPair.lc.value
+                                  contrastReq.lc.value
                               } else {
                                 isContrastValid =
                                   parseFloat(String(contrastValue)) >=
-                                  colorPair.wcag.value
+                                  contrastReq.wcag.value
                               }
                             }
 
@@ -360,27 +354,26 @@ export function ColorScale({
 
                             return (
                               <tr
-                                key={`dialog-contrast-${colorPair.stepIndex}`}
+                                key={`dialog-contrast-${targetStepIndex}`}
                                 className="border-b border-gray-100 dark:border-gray-800"
                               >
                                 <td className="flex items-center gap-2 py-1 pr-2">
                                   <div
                                     className="w-3 h-3 border border-gray-300 rounded-full dark:border-gray-700"
                                     style={{
-                                      backgroundColor:
-                                        colors[colorPair.stepIndex],
+                                      backgroundColor: colors[targetStepIndex],
                                     }}
                                   />
-                                  #{colorPair.stepIndex + 1}
+                                  #{targetStepIndex + 1}
                                 </td>
                                 <td className="py-1 text-right">
                                   <span className={`font-mono ${scoreColor}`}>
                                     {contrastMethod === 'APCA' &&
                                       contrastValue &&
-                                      `${contrastValue} (${colorPair.lc.value})`}
+                                      `${contrastValue} (${contrastReq.lc.value})`}
                                     {contrastMethod === 'WCAG21' &&
                                       contrastValue &&
-                                      `${contrastValue}:1 (${colorPair.wcag.value})`}
+                                      `${contrastValue}:1 (${contrastReq.wcag.value})`}
                                   </span>
                                 </td>
                               </tr>
@@ -396,7 +389,12 @@ export function ColorScale({
               {showContrast && (
                 <div className="flex flex-col h-full pt-3">
                   <ul className="space-y-1 text-[11px]">
-                    {pairsWithSteps?.map((colorPair, colorPairIndex) => {
+                    {pairsWithSteps?.map((contrastReq, colorPairIndex) => {
+                      const targetStepIndex = getStepIndex(
+                        contrastReq.targetStep,
+                      )(PALETTE_STEPS)
+                      if (targetStepIndex === -1) return null
+
                       const contrastArray = contrasts[i]
                       const contrastValue =
                         contrastArray && colorPairIndex < contrastArray.length
@@ -408,11 +406,11 @@ export function ColorScale({
                         if (contrastMethod === 'APCA') {
                           isContrastValid =
                             parseFloat(String(contrastValue)) >=
-                            colorPair.lc.value
+                            contrastReq.lc.value
                         } else {
                           isContrastValid =
                             parseFloat(String(contrastValue)) >=
-                            colorPair.wcag.value
+                            contrastReq.wcag.value
                         }
                       }
 
@@ -421,18 +419,18 @@ export function ColorScale({
                         : 'text-red-500'
                       return (
                         <li
-                          key={`background-pairing-${colorPair.stepIndex}`}
+                          key={`background-pairing-${targetStepIndex}`}
                           className="flex items-center justify-between"
                         >
-                          <span>#{colorPair.stepIndex + 1}</span>
+                          <span>#{targetStepIndex + 1}</span>
                           <span>
                             <strong className={'font-mono ' + scoreColor}>
                               {contrastMethod === 'APCA' &&
                                 contrastValue &&
-                                `${contrastValue} (${colorPair.lc.value})`}
+                                `${contrastValue} (${contrastReq.lc.value})`}
                               {contrastMethod === 'WCAG21' &&
                                 contrastValue &&
-                                `${contrastValue}:1 (${colorPair.wcag.value})`}
+                                `${contrastValue}:1 (${contrastReq.wcag.value})`}
                             </strong>
                           </span>
                         </li>
