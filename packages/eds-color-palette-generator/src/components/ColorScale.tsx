@@ -72,6 +72,9 @@ export function ColorScale({
   // State to track the active dialog (index of the color) - only one can be active at a time
   const [activeDialog, setActiveDialog] = useState<number | null>(null)
 
+  // State to track which color's hex value was recently copied
+  const [copiedColorIndex, setCopiedColorIndex] = useState<number | null>(null)
+
   // Create refs for dialogs and their corresponding color elements
   const dialogRefs = useRef<(HTMLDialogElement | null)[]>(
     Array(colors.length).fill(null),
@@ -127,6 +130,28 @@ export function ColorScale({
   // Handle dialog closing when it's closed via ESC key
   const handleDialogClose = () => {
     setActiveDialog(null)
+  }
+
+  // Copy to clipboard function
+  const copyToClipboard = async (text: string, colorIndex: number) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedColorIndex(colorIndex)
+      // Reset the copied state after 2 seconds
+      setTimeout(() => setCopiedColorIndex(null), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      setCopiedColorIndex(colorIndex)
+      // Reset the copied state after 2 seconds
+      setTimeout(() => setCopiedColorIndex(null), 2000)
+    }
   }
 
   // Effect to prevent dialog from closing when clicking inside it
@@ -289,9 +314,49 @@ export function ColorScale({
                   ></div>
 
                   <div className="flex flex-col justify-center">
-                    <div className="mb-2 font-mono text-base">
-                      {oklchInfo.hex}
-                    </div>
+                    <button
+                      className="mb-2 font-mono text-base text-left hover:bg-black/10 dark:hover:bg-white/10 rounded px-2 py-1 -mx-2 transition-colors flex items-center gap-2 group"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        copyToClipboard(oklchInfo.hex, i)
+                      }}
+                      aria-label={`Copy ${oklchInfo.hex} to clipboard`}
+                    >
+                      <span>{oklchInfo.hex}</span>
+                      {copiedColorIndex === i ? (
+                        // Checkmark icon when copied
+                        <svg
+                          className="w-4 h-4 transition-opacity"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        // Copy icon (default state)
+                        <svg
+                          className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                          />
+                        </svg>
+                      )}
+                    </button>
                   </div>
                 </div>
 
