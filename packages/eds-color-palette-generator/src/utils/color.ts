@@ -1,4 +1,5 @@
 import Color from 'colorjs.io'
+import { APCAcontrast, sRGBtoY } from 'apca-w3'
 
 export function gaussian(
   x: number,
@@ -100,6 +101,37 @@ const APCAThresholds = {
 
 type ContrastMethod = 'WCAG21' | 'APCA'
 
+/**
+ * Helper function to calculate APCA contrast between two Color objects
+ * @param fg - Foreground Color object
+ * @param bg - Background Color object
+ * @returns APCA contrast value (always positive, absolute value)
+ */
+export function calculateAPCAContrast(fg: Color, bg: Color): number {
+  try {
+    // Convert Color objects to sRGB RGBA arrays with values 0-255
+    const fgRgba = fg
+      .to('srgb')
+      .coords.map((c) => c * 255)
+      .concat((fg.alpha || 1) * 255)
+    const bgRgba = bg
+      .to('srgb')
+      .coords.map((c) => c * 255)
+      .concat((bg.alpha || 1) * 255)
+
+    // Use sRGBtoY to convert to luminance, then calculate APCA contrast
+    const fgLuminance = sRGBtoY(fgRgba.slice(0, 3) as [number, number, number])
+    const bgLuminance = sRGBtoY(bgRgba.slice(0, 3) as [number, number, number])
+
+    // Return absolute value to always get positive LC values
+    const contrast = APCAcontrast(fgLuminance, bgLuminance)
+    return Math.abs(Number(contrast))
+  } catch (error) {
+    console.error('Error calculating APCA contrast:', error)
+    return 0
+  }
+}
+
 function getThresholds(method: ContrastMethod) {
   return method === 'WCAG21' ? WCAGThresholds : APCAThresholds
 }
@@ -160,9 +192,15 @@ export function checkContrast(
     const bg =
       typeof background === 'string' ? new Color(background) : background
 
-    const contrastValue = fg.contrast(bg, method)
+    let contrast: number
+
+    if (method === 'APCA') {
+      contrast = calculateAPCAContrast(fg, bg)
+    } else {
+      contrast = fg.contrast(bg, method)
+    }
+
     const thresholds = getThresholds(method)
-    const contrast = method === 'APCA' ? Math.abs(contrastValue) : contrastValue
 
     return {
       contrastValue:
