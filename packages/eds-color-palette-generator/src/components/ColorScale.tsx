@@ -262,7 +262,7 @@ export function ColorScale({
                   return undefined
                 }}
                 id={`color-dialog-${i}`}
-                className="min-w-[220px] backdrop:bg-black/20"
+                className="min-w-[220px] backdrop:bg-black/20 cursor-default"
                 style={{
                   backgroundColor: colors[0],
                   color: colors[9],
