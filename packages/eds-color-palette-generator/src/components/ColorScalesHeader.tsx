@@ -59,7 +59,10 @@ export const ColorScalesHeader = () => {
         {categoryGroups.map((group, index) => (
           <div
             key={index}
-            className={`col-span-${group.span} border-b border-gray-300 dark:border-gray-800`}
+            className="border-b border-gray-300 dark:border-gray-800"
+            style={{
+              gridColumn: `span ${group.span}`,
+            }}
           >
             {group.title}
           </div>
