@@ -264,12 +264,12 @@ export const BG_STRONG_DEFAULT: StepDefinition = {
     {
       targetStep: 'bg-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'bg-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
 }
@@ -285,12 +285,12 @@ export const BG_STRONG_HOVER: StepDefinition = {
     {
       targetStep: 'bg-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'bg-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
 }
@@ -306,12 +306,12 @@ export const BG_STRONG_ACTIVE: StepDefinition = {
     {
       targetStep: 'bg-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'bg-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
 }

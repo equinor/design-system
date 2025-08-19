@@ -376,12 +376,11 @@ export function ColorScale({
                 {/* Always show contrast information in the dialog */}
                 {pairsWithSteps && pairsWithSteps.length > 0 && (
                   <div className="pt-3 mt-3 border-t">
-                    <h5 className="mb-2 font-medium">Contrast Information:</h5>
                     <div className="max-h-[120px] overflow-y-auto">
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th className="py-1 pr-2 text-left">Color</th>
+                            <th className="py-1 pr-2 text-left">On step</th>
                             <th className="py-1 text-right">
                               {contrastMethod} Contrast
                             </th>
