@@ -258,7 +258,7 @@ export const BG_STRONG_DEFAULT: StepDefinition = {
   name: 'Background Strong Default',
   category: 'background-strong',
   variant: 'strong-default',
-  lightValue: 0.6,
+  lightValue: 0.5,
   darkValue: 0.78,
   contrastWith: [
     {
@@ -279,7 +279,7 @@ export const BG_STRONG_HOVER: StepDefinition = {
   name: 'Background Strong Hover',
   category: 'background-strong',
   variant: 'strong-hover',
-  lightValue: 0.58,
+  lightValue: 0.44,
   darkValue: 0.85,
   contrastWith: [
     {
@@ -300,7 +300,7 @@ export const BG_STRONG_ACTIVE: StepDefinition = {
   name: 'Background Strong Active',
   category: 'background-strong',
   variant: 'strong-active',
-  lightValue: 0.53,
+  lightValue: 0.42,
   darkValue: 0.92,
   contrastWith: [
     {
@@ -322,7 +322,7 @@ export const TEXT_SUBTLE: StepDefinition = {
   name: 'Text Subtle',
   category: 'text',
   variant: 'subtle',
-  lightValue: 0.5,
+  lightValue: 0.36,
   darkValue: 0.91,
   contrastWith: [
     {
@@ -358,7 +358,7 @@ export const TEXT_STRONG: StepDefinition = {
   name: 'Text Strong',
   category: 'text',
   variant: 'strong',
-  lightValue: 0.35,
+  lightValue: 0.32,
   darkValue: 0.99,
   contrastWith: [
     {
@@ -491,7 +491,7 @@ export const getStepIndex =
  * Palette configuration
  */
 export const config: PaletteConfig = {
-  mean: 0.7,
+  mean: 0.6,
   stdDev: 2,
   colors: [
     { name: 'Moss Green', hex: '#007079' },
