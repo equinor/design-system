@@ -3,7 +3,7 @@ import { Body as TableBody, BodyProps } from './Body'
 import { Cell as TableCell, CellProps } from './Cell'
 import { Head as TableHead, HeadProps } from './Head'
 import { Foot as TableFoot, FootProps } from './Foot'
-import { Row as tableRow, RowProps } from './Row'
+import { Row as TableRow, RowProps } from './Row'
 import { Caption as TableCaption, CaptionProps } from './Caption'
 
 type TableCompoundProps = typeof BaseTable & {
@@ -11,7 +11,7 @@ type TableCompoundProps = typeof BaseTable & {
   Cell: typeof TableCell
   Head: typeof TableHead
   Foot: typeof TableFoot
-  Row: typeof tableRow
+  Row: typeof TableRow
   Caption: typeof TableCaption
 }
 
@@ -21,7 +21,7 @@ Table.Body = TableBody
 Table.Cell = TableCell
 Table.Head = TableHead
 Table.Foot = TableFoot
-Table.Row = tableRow
+Table.Row = TableRow
 Table.Caption = TableCaption
 
 Table.Body.displayName = 'Table.Body'
@@ -37,7 +37,7 @@ export {
   TableCell,
   TableHead,
   TableFoot,
-  tableRow,
+  TableRow,
   TableCaption,
 }
 export type {
