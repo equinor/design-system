@@ -259,7 +259,7 @@ export function ColorScale({
                 className="min-w-[220px] backdrop:bg-black/20 cursor-default"
                 style={{
                   backgroundColor: colors[0],
-                  color: colors[9],
+                  color: colors[12],
                 }}
                 onClose={handleDialogClose}
                 onClick={(e) => {
