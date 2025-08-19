@@ -60,7 +60,6 @@ export const downloadColorTokens = (
       customLightModeValues,
       mean,
       stdDev,
-      'light',
     )
 
     darkColors[colorDef.name] = generateColorScale(
@@ -68,7 +67,6 @@ export const downloadColorTokens = (
       customDarkModeValues,
       mean,
       stdDev,
-      'dark',
     )
   })
 
