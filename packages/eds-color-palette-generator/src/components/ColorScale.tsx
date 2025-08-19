@@ -22,17 +22,11 @@ type OklchInfo = {
 
 // Function to determine text color for steps
 function getTextColorForStep(colors: string[], stepIndex: number): string {
-  if (stepIndex === 9 || stepIndex === 10) {
-    return colors[0] // background color
-  }
-  if (stepIndex === 10 || stepIndex === 11) {
-    return colors[9] // secondary text color
-  }
-  if (stepIndex > 12) {
-    return colors[11] // contrast text
+  if (stepIndex >= 9 && stepIndex <= 13) {
+    return colors[14] // text inverted strong
   }
 
-  return colors[8] // default text
+  return colors[12] // text strong
 }
 
 // Convert hex color to OKLCH format
@@ -291,7 +285,7 @@ export function ColorScale({
                     id={`color-details-heading-${i}`}
                     className="text-lg font-medium"
                   >
-                    {colorName ? `${colorName} #${i + 1}` : `Color #${i + 1}`}
+                    {colorName ? `${colorName} ${i + 1}` : `Color ${i + 1}`}
                   </h4>
                   <button
                     className="flex items-center justify-center rounded-full w-7 h-7 hover:bg-black/10 focus:outline-none focus:ring-2"
@@ -429,7 +423,7 @@ export function ColorScale({
                                       backgroundColor: colors[targetStepIndex],
                                     }}
                                   />
-                                  #{targetStepIndex + 1}
+                                  {targetStepIndex + 1}
                                 </td>
                                 <td className="py-1 text-right">
                                   <span className={`font-mono ${scoreColor}`}>
@@ -487,7 +481,7 @@ export function ColorScale({
                           key={`background-pairing-${targetStepIndex}`}
                           className="flex items-center justify-between"
                         >
-                          <span>#{targetStepIndex + 1}</span>
+                          <span>{targetStepIndex + 1}</span>
                           <span>
                             <strong className={'font-mono ' + scoreColor}>
                               {contrastMethod === 'APCA' &&
