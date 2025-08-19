@@ -355,10 +355,6 @@ export function ColorScale({
                 </div>
 
                 <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
-                  <span className="font-medium">OKLCH:</span>
-                  <div className="flex items-center font-mono">
-                    oklch({oklchInfo.l} {oklchInfo.c} {oklchInfo.h})
-                  </div>
                   <span className="font-medium">Lightness:</span>
                   <span className="font-mono">{oklchInfo.l}</span>
                   <span className="font-medium">Chroma:</span>
