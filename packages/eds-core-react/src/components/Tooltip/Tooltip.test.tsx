@@ -93,7 +93,7 @@ describe('Tooltip', () => {
     const tooltip = await screen.findByRole('tooltip')
     expect(tooltip).toBeInTheDocument()
   })
-  it('is not rendered when diabled', async () => {
+  it('is not rendered when disabled', async () => {
     render(
       <Tooltip title="Tooltip" placement="right-start" disabled>
         <div>Test</div>
