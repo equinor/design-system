@@ -694,11 +694,9 @@ function AutocompleteInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
             if (changes.selectedItem === AddSymbol) {
-              onAddNewOption(typedInputValue)
               return {
                 ...changes,
                 inputValue: '',
-                selectedItem: null,
               }
             }
             return {
