@@ -17,7 +17,7 @@ export type TabsProps = {
   /** The index of the active tab OR a string matching the value prop on the active tab */
   activeTab?: number | string
   /** The callback function for selecting a tab */
-  onChange?: (index: number) => void
+  onChange?: (value: number | string) => void
   /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
   /** adds scrollbar if tabs overflow on non-touch devices */
