@@ -1,4 +1,4 @@
-import { ColorDefinition } from '@/types'
+import { ColorDefinition, ColorFormat } from '@/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
 
@@ -48,6 +48,7 @@ export const downloadColorTokens = (
   customDarkModeValues: number[],
   mean: number,
   stdDev: number,
+  format: ColorFormat,
 ) => {
   // Create objects with the required structure
   const lightColors: Record<string, string[]> = {}
@@ -60,6 +61,7 @@ export const downloadColorTokens = (
       customLightModeValues,
       mean,
       stdDev,
+      format, // Use the user's selected format
     )
 
     darkColors[colorDef.name] = generateColorScale(
@@ -67,6 +69,7 @@ export const downloadColorTokens = (
       customDarkModeValues,
       mean,
       stdDev,
+      format, // Use the user's selected format
     )
   })
 

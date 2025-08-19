@@ -240,6 +240,7 @@ export default function App() {
             mean={mean}
             stdDev={stdDev}
             colors={colors}
+            colorFormat={colorFormat}
             onConfigUpload={handleConfigUpload}
             onResetConfiguration={resetConfiguration}
           />

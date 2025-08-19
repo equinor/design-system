@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorDefinition, ConfigFile } from '@/types'
+import { ColorDefinition, ConfigFile, ColorFormat } from '@/types'
 import {
   downloadColorTokens,
   downloadConfiguration,
@@ -11,6 +11,7 @@ type ConfigurationPanelProps = {
   mean: number
   stdDev: number
   colors: ColorDefinition[]
+  colorFormat: ColorFormat
   onConfigUpload: (config: ConfigFile) => void
   onResetConfiguration: () => void
 }
@@ -21,6 +22,7 @@ export const ConfigurationPanel = ({
   mean,
   stdDev,
   colors,
+  colorFormat,
   onConfigUpload,
   onResetConfiguration,
 }: ConfigurationPanelProps) => {
@@ -110,6 +112,7 @@ export const ConfigurationPanel = ({
               darkModeValues,
               mean,
               stdDev,
+              colorFormat,
             )
           }
           className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
