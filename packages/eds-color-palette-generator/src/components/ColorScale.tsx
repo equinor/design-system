@@ -38,7 +38,7 @@ function getOklchInfo(hexColor: string, index: number): OklchInfo {
     return {
       l: parseFloat(oklch.l.toFixed(3)),
       c: parseFloat(oklch.c.toFixed(3)),
-      h: parseFloat(oklch.h.toFixed(1)),
+      h: parseFloat((isNaN(oklch.h) ? 0 : oklch.h).toFixed(1)),
       hex: hexColor,
       index: index,
     }

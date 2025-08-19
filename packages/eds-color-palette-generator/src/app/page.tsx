@@ -11,7 +11,12 @@ import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
 import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
-import { ColorDefinition, ConfigFile, ContrastMethod } from '@/types'
+import {
+  ColorDefinition,
+  ConfigFile,
+  ContrastMethod,
+  ColorFormat,
+} from '@/types'
 import { localStorageUtils } from '@/utils/localStorage'
 import config, {
   lightnessValuesInLightMode,
@@ -37,6 +42,9 @@ export default function App() {
   const [showConfigPanel, setShowConfigPanel] = useState(false) // Don't persist this one
   const [contrastMethod, setContrastMethod] = useState<ContrastMethod>(() =>
     localStorageUtils.getContrastMethod('APCA'),
+  )
+  const [colorFormat, setColorFormat] = useState<ColorFormat>(() =>
+    localStorageUtils.getColorFormat('OKLCH'),
   )
 
   // Add state for lightness values
@@ -76,6 +84,10 @@ export default function App() {
   useEffect(() => {
     localStorageUtils.setContrastMethod(contrastMethod)
   }, [contrastMethod])
+
+  useEffect(() => {
+    localStorageUtils.setColorFormat(colorFormat)
+  }, [colorFormat])
 
   useEffect(() => {
     localStorageUtils.setLightModeValues(lightModeValues)
@@ -155,18 +167,30 @@ export default function App() {
     () =>
       colors.map((color) => ({
         ...color,
-        scale: generateColorScale(color.hex, lightModeValues, mean, stdDev),
+        scale: generateColorScale(
+          color.hex,
+          lightModeValues,
+          mean,
+          stdDev,
+          colorFormat,
+        ),
       })),
-    [colors, lightModeValues, mean, stdDev],
+    [colors, lightModeValues, mean, stdDev, colorFormat],
   )
 
   const darkColorScales = useMemo(
     () =>
       colors.map((color) => ({
         ...color,
-        scale: generateColorScale(color.hex, darkModeValues, mean, stdDev),
+        scale: generateColorScale(
+          color.hex,
+          darkModeValues,
+          mean,
+          stdDev,
+          colorFormat,
+        ),
       })),
-    [colors, darkModeValues, mean, stdDev],
+    [colors, darkModeValues, mean, stdDev, colorFormat],
   )
 
   // Select the appropriate scales based on current color scheme
@@ -192,10 +216,12 @@ export default function App() {
             showLightnessInputs={showLightnessInputs}
             showGaussianParameters={showGaussianParameters}
             contrastMethod={contrastMethod}
+            colorFormat={colorFormat}
             setShowContrast={setShowContrast}
             setShowLightnessInputs={setShowLightnessInputs}
             setShowGaussianParameters={setShowGaussianParameters}
             setContrastMethod={setContrastMethod}
+            setColorFormat={setColorFormat}
           />
 
           {/* Color management component */}

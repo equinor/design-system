@@ -14,3 +14,5 @@ export type ConfigFile = {
 }
 
 export type ContrastMethod = 'WCAG21' | 'APCA'
+
+export type ColorFormat = 'HEX' | 'OKLCH'

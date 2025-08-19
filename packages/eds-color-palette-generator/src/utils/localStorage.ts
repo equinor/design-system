@@ -1,4 +1,4 @@
-import { ColorDefinition, ContrastMethod } from '@/types'
+import { ColorDefinition, ContrastMethod, ColorFormat } from '@/types'
 
 // Keys for localStorage
 const STORAGE_KEYS = {
@@ -12,6 +12,7 @@ const STORAGE_KEYS = {
   SHOW_LIGHTNESS_INPUTS: 'colorPalette_showLightnessInputs',
   SHOW_GAUSSIAN_PARAMETERS: 'colorPalette_showGaussianParameters',
   CONTRAST_METHOD: 'colorPalette_contrastMethod',
+  COLOR_FORMAT: 'colorPalette_colorFormat',
 } as const
 
 // Generic localStorage utility functions
@@ -89,6 +90,11 @@ export const localStorageUtils = {
     getItem(STORAGE_KEYS.CONTRAST_METHOD, defaultValue),
   setContrastMethod: (value: ContrastMethod) =>
     setItem(STORAGE_KEYS.CONTRAST_METHOD, value),
+
+  getColorFormat: (defaultValue: ColorFormat) =>
+    getItem(STORAGE_KEYS.COLOR_FORMAT, defaultValue),
+  setColorFormat: (value: ColorFormat) =>
+    setItem(STORAGE_KEYS.COLOR_FORMAT, value),
 
   // Clear all stored data
   clearAll: () => {

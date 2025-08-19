@@ -1,5 +1,6 @@
 import Color from 'colorjs.io'
 import { APCAcontrast, sRGBtoY } from 'apca-w3'
+import { ColorFormat } from '@/types'
 
 export function gaussian(
   x: number,
@@ -15,6 +16,7 @@ export function generateColorScale(
   lightnessValues: number[],
   mean: number,
   stdDev: number,
+  format: ColorFormat = 'OKLCH',
 ): string[] {
   // Validate the baseColor to ensure it's a proper color string
   try {
@@ -36,12 +38,23 @@ export function generateColorScale(
         // Apply new lightness and chroma values
         color.set('oklch.l', lightness)
         color.set('oklch.c', chroma)
-        // Add to colors array as hex string
-        colors.push(color.toString({ format: 'hex' }))
+
+        // Format output based on the selected format
+        if (format === 'OKLCH') {
+          const oklch = color.to('oklch')
+          // Handle NaN hue for grayscale colors (set to 0)
+          const hue = isNaN(oklch.h) ? 0 : oklch.h
+          colors.push(
+            `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
+          )
+        } else {
+          // Default to HEX format
+          colors.push(color.toString({ format: 'hex' }))
+        }
       } catch (error) {
         console.error(`Error generating color for step ${i}:`, error)
         // Fallback to a default color if there's an error
-        colors.push('#808080') // Default to gray if there's an error
+        colors.push(format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080')
       }
     }
 
@@ -49,7 +62,8 @@ export function generateColorScale(
   } catch (error) {
     console.error('Error in generateColorScale:', error)
     // Return a default color scale if there's an error with the base color
-    return Array(lightnessValues.length).fill('#808080')
+    const fallbackColor = format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080'
+    return Array(lightnessValues.length).fill(fallbackColor)
   }
 }
 
