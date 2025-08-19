@@ -12,7 +12,7 @@ spec:
         from: develop
     - name: dev
       build:
-        from: feature/*, feature-*, feat/*, feat-*, refactor/*, refactor-*, hotfix/*, hotfix-*, bugfix/*, bugfix-*, chore/*, chore-*, task/*, task-*
+        from: feat/*
   components:
     - name: web
       src: ./packages/eds-color-palette-generator
