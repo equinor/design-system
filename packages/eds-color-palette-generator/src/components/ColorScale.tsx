@@ -11,7 +11,7 @@ type ColorScaleProps = {
   colorName?: string
 }
 
-// Type for color information in OKLCH format
+// Type for color information in OKLCH format!
 type OklchInfo = {
   l: number // lightness
   c: number // chroma
