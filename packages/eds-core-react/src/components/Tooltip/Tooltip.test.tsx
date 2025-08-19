@@ -93,6 +93,21 @@ describe('Tooltip', () => {
     const tooltip = await screen.findByRole('tooltip')
     expect(tooltip).toBeInTheDocument()
   })
+  it('is not rendered when diabled', async () => {
+    render(
+      <Tooltip title="Tooltip" placement="right-start" disabled>
+        <div>Test</div>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+
+    fireEvent.mouseEnter(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
+
+    const tooltip = screen.queryByRole('tooltip')
+    expect(tooltip).not.toBeInTheDocument()
+  })
   it('renders with a correct title', async () => {
     render(
       <Tooltip title="Tooltip" placement="right-start">
