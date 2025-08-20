@@ -12,7 +12,13 @@ export const HeaderPanel = ({
 }: HeaderPanelProps) => {
   return (
     <div className="flex items-center justify-between mb-8">
-      <h1 className="text-2xl">Accessible UI Color Palette</h1>
+      <div>
+        <h1 className="text-2xl">Accessible UI Colour Palette</h1>
+        <p className="text-md text-subtle">
+          Color palettes are generated using an algorithm for chroma calculation
+          with predefined lightness values.
+        </p>
+      </div>
       <div className="flex items-center gap-3">
         <button
           onClick={() => setShowConfigPanel(!showConfigPanel)}
