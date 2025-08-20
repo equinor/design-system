@@ -17,7 +17,7 @@ export const ColorManagement = ({
 }: ColorManagementProps) => {
   return (
     <fieldset className="p-6 space-y-4 border border-neutral-subtle rounded-lg">
-      <legend className="mb-2 font-medium">Colour configuration</legend>
+      <legend className="mb-2 font-medium">Colours</legend>
 
       <div className="max-w-3xl mx-auto">
         {/* Header Row */}
@@ -87,7 +87,7 @@ export const ColorManagement = ({
             }}
             data-testid="add-color-button"
           >
-            Add New Colour
+            Add
           </button>
         </div>
       </div>
