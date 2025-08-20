@@ -390,7 +390,7 @@ export const TEXT_STRONG: StepDefinition = {
 }
 
 export const TEXT_INV_SUBTLE: StepDefinition = {
-  id: 'text-inv-subtle',
+  id: 'text-inverse-subtle',
   name: 'Text Inverse Subtle',
   category: 'text',
   variant: 'inverse-subtle',
@@ -416,7 +416,7 @@ export const TEXT_INV_SUBTLE: StepDefinition = {
 }
 
 export const TEXT_INV_STRONG: StepDefinition = {
-  id: 'text-inv-strong',
+  id: 'text-inverse-strong',
   name: 'Text Inverse Strong',
   category: 'text',
   variant: 'inverse-strong',

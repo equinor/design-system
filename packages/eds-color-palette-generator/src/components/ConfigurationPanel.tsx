@@ -3,6 +3,7 @@ import { ColorDefinition, ConfigFile, ColorFormat } from '@/types'
 import {
   downloadColorTokens,
   downloadConfiguration,
+  downloadDesignSystemCSS,
 } from '@/utils/configurationUtils'
 
 type ConfigurationPanelProps = {
@@ -118,6 +119,13 @@ export const ConfigurationPanel = ({
           className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
         >
           Download Colour Tokens (W3C Format)
+        </button>
+
+        <button
+          onClick={() => downloadDesignSystemCSS(colors, mean, stdDev)}
+          className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#2d8f2a]"
+        >
+          Download CSS variables
         </button>
 
         <button
