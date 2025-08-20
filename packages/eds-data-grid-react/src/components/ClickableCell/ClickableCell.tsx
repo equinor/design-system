@@ -9,7 +9,7 @@ export type ClickableCellProps = {
   /** Click handler */
   onClick: () => void
   /** Accessible label for screen readers */
-  ariaLabel?: string
+  ariaLabel: string
   /** Indicates if the cell is selected */
   isSelected?: boolean
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'children'>
@@ -62,7 +62,6 @@ const StyledButton = styled.button<StyledButtonProps>(
 
       &:focus-visible {
         background: ${focus?.background};
-        ${outlineTemplate(focus?.outline)}
         z-index: 2; // Avoids outline overlap when hovering adjacent cell
       }
 

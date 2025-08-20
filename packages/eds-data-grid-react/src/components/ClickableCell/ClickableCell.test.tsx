@@ -94,17 +94,12 @@ describe('ClickableCell', () => {
       })
       const otherButton = screen.getByTestId('other')
 
-      // Click to select
       await user.click(clickableButton)
 
-      // Focus other element to trigger blur
       await user.click(otherButton)
 
-      // Advance timer to trigger selection reset
       jest.advanceTimersByTime(200)
-
-      // The selection state should be reset (this would be visible in actual styling)
-      expect(clickableButton).toBeInTheDocument() // Basic check that component is still there
+      expect(clickableButton).toBeInTheDocument()
     })
 
     it('becomes selected when Enter is pressed', async () => {
@@ -117,7 +112,6 @@ describe('ClickableCell', () => {
       await user.keyboard('{Enter}')
 
       expect(defaultProps.onClick).toHaveBeenCalled()
-      // Selection state is managed internally for styling
     })
 
     it('handles multiple rapid interactions', async () => {
@@ -126,7 +120,6 @@ describe('ClickableCell', () => {
 
       const button = screen.getByRole('button')
 
-      // Multiple rapid clicks
       await user.click(button)
       await user.click(button)
       await user.keyboard('{Enter}')
@@ -187,12 +180,10 @@ describe('ClickableCell', () => {
 
       const [button1, button2] = screen.getAllByRole('button')
 
-      // Test first button
       await user.click(button1)
       expect(onClick1).toHaveBeenCalledTimes(1)
       expect(onClick2).not.toHaveBeenCalled()
 
-      // Test second button
       await user.click(button2)
       expect(onClick2).toHaveBeenCalledTimes(1)
     })
@@ -213,7 +204,6 @@ describe('ClickableCell', () => {
 
       const buttons = screen.getAllByRole('button')
 
-      // Tab through buttons
       await user.tab()
       expect(buttons[0]).toHaveFocus()
 
@@ -254,7 +244,11 @@ describe('ClickableCell', () => {
     })
 
     it('handles empty or minimal content', () => {
-      render(<ClickableCell onClick={jest.fn()}> </ClickableCell>)
+      render(
+        <ClickableCell ariaLabel="TEST" onClick={jest.fn()}>
+          {' '}
+        </ClickableCell>,
+      )
 
       expect(screen.getByRole('button')).toBeInTheDocument()
     })
@@ -274,7 +268,6 @@ describe('ClickableCell', () => {
       const button = screen.getByRole('button', { name: 'Test button' })
       const input = screen.getByTestId('input')
 
-      // Focus and blur multiple times
       await user.click(button)
       await user.click(input)
       await user.click(button)
@@ -291,7 +284,6 @@ describe('ClickableCell', () => {
 
       const button = screen.getByRole('button')
 
-      // Multiple interactions to test state stability
       await user.click(button)
       jest.advanceTimersByTime(200)
       await user.keyboard('{Enter}')

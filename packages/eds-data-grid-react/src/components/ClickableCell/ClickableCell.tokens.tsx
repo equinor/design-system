@@ -11,6 +11,7 @@ const {
     },
     interactive: {
       table__cell__fill_hover: { rgba: hoverBackgroundColor },
+      table__cell__fill_hover: { rgba: focusBackgroundColor },
       table__cell__fill_activated: { rgba: activeBackgroundColor },
     },
   },
@@ -27,30 +28,12 @@ export const clickableCell: ClickableCellToken = {
     ...cellTypography,
     color: typographyColor,
   },
-  align: {
-    vertical: 'inherit',
-    horizontal: 'inherit',
-  },
   states: {
     hover: {
       background: hoverBackgroundColor,
-      outline: {
-        type: 'outline',
-        offset: '-1px',
-        style: 'solid',
-        color: outline.color,
-        width: outline.width,
-      },
     },
     focus: {
-      background: hoverBackgroundColor,
-      outline: {
-        type: 'outline',
-        offset: '-1px',
-        style: 'solid',
-        color: outline.color,
-        width: outline.width,
-      },
+      background: focusBackgroundColor,
     },
     active: {
       background: activeBackgroundColor,
