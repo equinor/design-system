@@ -51,7 +51,7 @@ export const ColorScalesHeader = () => {
   return (
     <>
       <div
-        className="grid gap-3 mb-2 text-center"
+        className="grid gap-3 mb-2 text-center text-subtle"
         style={{
           gridTemplateColumns: `repeat(${PALETTE_STEPS.length}, minmax(0, 1fr))`,
         }}

@@ -38,7 +38,7 @@ export const ColorManagement = ({
               <div>
                 <input
                   type="text"
-                  className="w-full p-2 text-sm bg-neutral-default border border-neutral-medium rounded"
+                  className="w-full p-2 text-sm bg-input border border-input rounded"
                   value={color.name}
                   onChange={(e) => onUpdateColorName(index, e.target.value)}
                   data-testid={`color-name-input-${index}`}

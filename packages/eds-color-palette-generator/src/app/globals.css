@@ -19,6 +19,14 @@
 }
 
 @theme inline {
+  --background-color-canvas: light-dark(
+    var(--color-gray-background-subtle),
+    var(--color-gray-background-default)
+  );
+  --background-color-surface: light-dark(
+    var(--color-gray-background-default),
+    var(--color-gray-background-subtle)
+  );
   --background-color-default: var(--color-gray-background-default);
   --background-color-subtle: var(--color-gray-background-subtle);
   --background-color-neutral-medium-default: var(
@@ -41,14 +49,17 @@
     --color-red-background-medium-active
   );
 
+  --background-color-input: var(--background-color-canvas);
+  --border-color-input: var(--color-gray-border-subtle);
+
   --border-color-neutral-subtle: var(--color-gray-border-subtle);
   --border-color-neutral-medium: var(--color-gray-border-medium);
   --border-color-neutral-strong: var(--color-gray-border-strong);
 
-  --color-text-strong: var(--color-gray-text-strong);
-  --color-text-subtle: var(--color-gray-text-subtle);
+  --text-color-strong: var(--color-gray-text-strong);
+  --text-color-subtle: var(--color-gray-text-subtle);
 
-  --color-text-default: var(--color-gray-text-strong);
+  --text-color-default: var(--color-gray-text-strong);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
