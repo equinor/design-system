@@ -14,7 +14,10 @@
 }
 
 :root {
-  --background: var(--color-gray-background-default);
+  --background: light-dark(
+    var(--color-gray-background-default),
+    var(--color-gray-background-subtle)
+  );
   --text: var(--color-gray-text-strong);
 }
 
@@ -27,8 +30,8 @@
     var(--color-gray-background-default),
     var(--color-gray-background-subtle)
   );
-  --background-color-default: var(--color-gray-background-default);
-  --background-color-subtle: var(--color-gray-background-subtle);
+  --background-color-default: var(--background);
+
   --background-color-neutral-medium-default: var(
     --color-gray-background-medium-default
   );
