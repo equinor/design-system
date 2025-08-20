@@ -16,7 +16,7 @@ export const HeaderPanel = ({
       <div className="flex items-center gap-3">
         <button
           onClick={() => setShowConfigPanel(!showConfigPanel)}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-neutral-medium hover:bg-neutral-medium-hover transition-colors rounded-md"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover transition-colors rounded-md"
           title="Open configuration panel"
           data-testid="config-button"
         >

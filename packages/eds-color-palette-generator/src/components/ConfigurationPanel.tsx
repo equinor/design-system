@@ -41,12 +41,12 @@ export const ConfigurationPanel = ({
               colors,
             )
           }
-          className="px-4 py-2 text-sm bg-neutral-medium hover:bg-neutral-medium-hover border-none rounded cursor-pointer"
+          className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border-none rounded cursor-pointer"
         >
           Download Configuration
         </button>
 
-        <label className="inline-block px-4 py-2 text-sm bg-neutral-medium hover:bg-neutral-medium-hover rounded cursor-pointer">
+        <label className="inline-block px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover rounded cursor-pointer">
           <span>Upload Configuration</span>
           <input
             type="file"
@@ -107,7 +107,7 @@ export const ConfigurationPanel = ({
         </label>
         <button
           onClick={onResetConfiguration}
-          className="px-4 py-2 text-sm bg-danger-strong hover:bg-danger-strong-hover text-danger-inverted border-none rounded cursor-pointer"
+          className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded cursor-pointer"
         >
           Reset Configuration
         </button>
@@ -122,7 +122,7 @@ export const ConfigurationPanel = ({
               colorFormat,
             )
           }
-          className="px-4 py-2 bg-primary-strong hover:bg-primary-strong-hover text-primary-inverted rounded border-none text-sm cursor-pointer"
+          className="px-4 py-2 bg-neutral-medium-default hover:bg-neutral-medium-hover rounded border-none text-sm cursor-pointer"
         >
           Download Colour Tokens (W3C Format)
         </button>
@@ -131,7 +131,7 @@ export const ConfigurationPanel = ({
           onClick={() =>
             downloadDesignSystemCSS(colors, mean, stdDev, colorFormat)
           }
-          className="px-4 py-2 bg-primary-strong hover:bg-primary-strong-hover text-primary-inverted rounded border-none text-sm cursor-pointer"
+          className="px-4 py-2 bg-neutral-medium-default hover:bg-neutral-medium-hover rounded border-none text-sm cursor-pointer"
         >
           Download CSS variables
         </button>

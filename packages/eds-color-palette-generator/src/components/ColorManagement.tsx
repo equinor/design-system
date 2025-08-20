@@ -59,7 +59,7 @@ export const ColorManagement = ({
               {/* Actions */}
               <div className="text-right">
                 <button
-                  className="px-3 py-1 text-xs bg-danger-strong hover:bg-danger-strong-hover text-danger-inverted rounded"
+                  className="px-3 py-1 text-xs bg-danger-medium-default hover:bg-danger-medium-hover rounded"
                   onClick={() => onRemoveColor(index)}
                   disabled={colors.length <= 1}
                   data-testid={`remove-color-button-${index}`}
@@ -74,7 +74,7 @@ export const ColorManagement = ({
         {/* Add New Color Button */}
         <div className="mt-4 text-left">
           <button
-            className="px-4 py-2 text-sm bg-primary-strong hover:bg-primary-strong-hover text-primary-inverted rounded"
+            className="px-4 py-2 text-sm bg-neutral-medium-hover hover:bg-neutral-medium-hover rounded"
             onClick={() => {
               const randomColor =
                 '#' +
