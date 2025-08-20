@@ -145,31 +145,6 @@ describe('ClickableCell', () => {
       expect(screen.getByRole('button')).toHaveFocus()
     })
 
-    // it('prevents default behavior for Enter and Space', async () => {
-    //   const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
-    //   const parentKeyDown = jest.fn()
-
-    //   render(
-    //     <button
-    //       type="button"
-    //       onKeyDown={parentKeyDown}
-    //       tabIndex={-1}
-    //       style={{ all: 'unset' }}
-    //     >
-    //       <ClickableCell {...defaultProps} />
-    //     </button>,
-    //   )
-
-    //   const button = screen.getByRole('button')
-    //   await user.tab()
-    //   expect(button).toHaveFocus()
-    //   await user.keyboard('{Enter}')
-    //   await user.keyboard(' ')
-
-    //   // Events should be prevented from bubbling
-    //   expect(parentKeyDown).not.toHaveBeenCalled()
-    // })
-
     it('supports custom aria-label', () => {
       const customLabel = 'Custom action button'
       render(<ClickableCell {...defaultProps} ariaLabel={customLabel} />)

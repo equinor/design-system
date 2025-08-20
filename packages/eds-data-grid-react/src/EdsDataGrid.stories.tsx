@@ -308,45 +308,61 @@ const StoryWrapper = styled.div`
 `
 
 export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
-  const [clickedCell, setClickedCell] = useState<string | null>(null)
+  const [selectedCell, setSelectedCell] = useState<string | null>(null)
+
+  const handleCellClick = (cellId: string) => {
+    setSelectedCell((prev) => (prev === cellId ? null : cellId))
+  }
 
   const clickableColumns = [
     helper.accessor('id', {
       header: 'ID',
-      cell: ({ getValue }) => (
-        <ClickableCell
-          onClick={() => setClickedCell(`ID: ${getValue()}`)}
-          ariaLabel={`View details for ID ${getValue()}`}
-        >
-          {getValue()}
-        </ClickableCell>
-      ),
+      cell: ({ getValue }) => {
+        const cellId = `id-${getValue()}`
+        return (
+          <ClickableCell
+            onClick={() => handleCellClick(cellId)}
+            isSelected={selectedCell === cellId}
+            ariaLabel={`View details for ID ${getValue()}`}
+          >
+            {getValue()}
+          </ClickableCell>
+        )
+      },
       id: 'clickable_id',
       size: 100,
     }),
     helper.accessor('title', {
       header: 'Title',
-      cell: ({ getValue }) => (
-        <ClickableCell
-          onClick={() => setClickedCell(`Title: ${getValue()}`)}
-          ariaLabel={`Edit ${getValue()}`}
-        >
-          {getValue()}
-        </ClickableCell>
-      ),
+      cell: ({ getValue }) => {
+        const cellId = `title-${getValue()}`
+        return (
+          <ClickableCell
+            onClick={() => handleCellClick(cellId)}
+            isSelected={selectedCell === cellId}
+            ariaLabel={`Edit ${getValue()}`}
+          >
+            {getValue()}
+          </ClickableCell>
+        )
+      },
       id: 'clickable_title',
       size: 300,
     }),
     helper.accessor('albumId', {
       header: 'Actions',
-      cell: ({ row }) => (
-        <ClickableCell
-          onClick={() => setClickedCell(`Actions for row ${row.original.id}`)}
-          ariaLabel={`More actions for ${row.original.title}`}
-        >
-          ⚙️ Actions
-        </ClickableCell>
-      ),
+      cell: ({ row }) => {
+        const cellId = `actions-${row.original.id}`
+        return (
+          <ClickableCell
+            onClick={() => handleCellClick(cellId)}
+            isSelected={selectedCell === cellId}
+            ariaLabel={`More actions for ${row.original.title}`}
+          >
+            ⚙️ Actions
+          </ClickableCell>
+        )
+      },
       id: 'clickable_actions',
       size: 150,
     }),
@@ -373,12 +389,11 @@ export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
   return (
     <StoryWrapper>
-      <Typography>Click a cell to select and deselect.</Typography>
+      <Typography>
+        Click cells to select/deselect. Only one cell can be selected at a time.
+      </Typography>
       <Divider />
-      <pre>
-        clickedCell=
-        {JSON.stringify(clickedCell, null, 2)}
-      </pre>
+      <pre>Selected cell: {JSON.stringify(selectedCell, null, 2)}</pre>
       <EdsDataGrid {...args} columns={clickableColumns} cellStyle={cellStyle} />
     </StoryWrapper>
   )
