@@ -62,7 +62,7 @@ export interface PaletteConfig {
 
 // Background steps (default/subtle)
 export const BG_DEFAULT: StepDefinition = {
-  id: 'bg-default',
+  id: 'background-default',
   name: 'Background Default',
   category: 'background',
   variant: 'default',
@@ -71,7 +71,7 @@ export const BG_DEFAULT: StepDefinition = {
 }
 
 export const BG_SUBTLE: StepDefinition = {
-  id: 'bg-subtle',
+  id: 'background-subtle',
   name: 'Background Subtle',
   category: 'background',
   variant: 'subtle',
@@ -81,7 +81,7 @@ export const BG_SUBTLE: StepDefinition = {
 
 // Background steps (medium - interactive states)
 export const BG_MEDIUM_DEFAULT: StepDefinition = {
-  id: 'bg-medium-default',
+  id: 'background-medium-default',
   name: 'Background Medium Default',
   category: 'background-medium',
   variant: 'medium-default',
@@ -89,12 +89,12 @@ export const BG_MEDIUM_DEFAULT: StepDefinition = {
   darkValue: 0.45,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -102,7 +102,7 @@ export const BG_MEDIUM_DEFAULT: StepDefinition = {
 }
 
 export const BG_MEDIUM_HOVER: StepDefinition = {
-  id: 'bg-medium-hover',
+  id: 'background-medium-hover',
   name: 'Background Medium Hover',
   category: 'background-medium',
   variant: 'medium-hover',
@@ -110,12 +110,12 @@ export const BG_MEDIUM_HOVER: StepDefinition = {
   darkValue: 0.48,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -123,7 +123,7 @@ export const BG_MEDIUM_HOVER: StepDefinition = {
 }
 
 export const BG_MEDIUM_ACTIVE: StepDefinition = {
-  id: 'bg-medium-active',
+  id: 'background-medium-active',
   name: 'Background Medium Active',
   category: 'background-medium',
   variant: 'medium-active',
@@ -131,12 +131,12 @@ export const BG_MEDIUM_ACTIVE: StepDefinition = {
   darkValue: 0.5,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -153,27 +153,27 @@ export const BORDER_SUBTLE: StepDefinition = {
   darkValue: 0.63,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-default',
+      targetStep: 'background-medium-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-hover',
+      targetStep: 'background-medium-hover',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-active',
+      targetStep: 'background-medium-active',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -189,27 +189,27 @@ export const BORDER_MEDIUM: StepDefinition = {
   darkValue: 0.66,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-default',
+      targetStep: 'background-medium-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-hover',
+      targetStep: 'background-medium-hover',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-active',
+      targetStep: 'background-medium-active',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -225,27 +225,27 @@ export const BORDER_STRONG: StepDefinition = {
   darkValue: 0.68,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-default',
+      targetStep: 'background-medium-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-hover',
+      targetStep: 'background-medium-hover',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-medium-active',
+      targetStep: 'background-medium-active',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -254,7 +254,7 @@ export const BORDER_STRONG: StepDefinition = {
 
 // Background steps (strong - interactive states)
 export const BG_STRONG_DEFAULT: StepDefinition = {
-  id: 'bg-strong-default',
+  id: 'background-strong-default',
   name: 'Background Strong Default',
   category: 'background-strong',
   variant: 'strong-default',
@@ -262,12 +262,12 @@ export const BG_STRONG_DEFAULT: StepDefinition = {
   darkValue: 0.78,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -275,7 +275,7 @@ export const BG_STRONG_DEFAULT: StepDefinition = {
 }
 
 export const BG_STRONG_HOVER: StepDefinition = {
-  id: 'bg-strong-hover',
+  id: 'background-strong-hover',
   name: 'Background Strong Hover',
   category: 'background-strong',
   variant: 'strong-hover',
@@ -283,12 +283,12 @@ export const BG_STRONG_HOVER: StepDefinition = {
   darkValue: 0.85,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -296,7 +296,7 @@ export const BG_STRONG_HOVER: StepDefinition = {
 }
 
 export const BG_STRONG_ACTIVE: StepDefinition = {
-  id: 'bg-strong-active',
+  id: 'background-strong-active',
   name: 'Background Strong Active',
   category: 'background-strong',
   variant: 'strong-active',
@@ -304,12 +304,12 @@ export const BG_STRONG_ACTIVE: StepDefinition = {
   darkValue: 0.92,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -326,27 +326,27 @@ export const TEXT_SUBTLE: StepDefinition = {
   darkValue: 0.91,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
     {
-      targetStep: 'bg-medium-default',
+      targetStep: 'background-medium-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
     {
-      targetStep: 'bg-medium-hover',
+      targetStep: 'background-medium-hover',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
     {
-      targetStep: 'bg-medium-active',
+      targetStep: 'background-medium-active',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
@@ -362,27 +362,27 @@ export const TEXT_STRONG: StepDefinition = {
   darkValue: 0.99,
   contrastWith: [
     {
-      targetStep: 'bg-default',
+      targetStep: 'background-default',
       lc: APCA_CONTRAST_LEVELS.LC_90,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-subtle',
+      targetStep: 'background-subtle',
       lc: APCA_CONTRAST_LEVELS.LC_90,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-medium-default',
+      targetStep: 'background-medium-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-medium-hover',
+      targetStep: 'background-medium-hover',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-medium-active',
+      targetStep: 'background-medium-active',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
@@ -398,17 +398,17 @@ export const TEXT_INV_SUBTLE: StepDefinition = {
   darkValue: 0.18,
   contrastWith: [
     {
-      targetStep: 'bg-strong-default',
+      targetStep: 'background-strong-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-strong-hover',
+      targetStep: 'background-strong-hover',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-strong-active',
+      targetStep: 'background-strong-active',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
@@ -424,17 +424,17 @@ export const TEXT_INV_STRONG: StepDefinition = {
   darkValue: 0.1,
   contrastWith: [
     {
-      targetStep: 'bg-strong-default',
+      targetStep: 'background-strong-default',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-strong-hover',
+      targetStep: 'background-strong-hover',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
-      targetStep: 'bg-strong-active',
+      targetStep: 'background-strong-active',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },

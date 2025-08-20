@@ -106,6 +106,12 @@ export const ConfigurationPanel = ({
           />
         </label>
         <button
+          onClick={onResetConfiguration}
+          className="px-4 py-2 text-sm text-white bg-red-600 border-none rounded cursor-pointer hover:bg-red-700"
+        >
+          Reset Configuration
+        </button>
+        <button
           onClick={() =>
             downloadColorTokens(
               colors,
@@ -122,17 +128,12 @@ export const ConfigurationPanel = ({
         </button>
 
         <button
-          onClick={() => downloadDesignSystemCSS(colors, mean, stdDev)}
-          className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#2d8f2a]"
+          onClick={() =>
+            downloadDesignSystemCSS(colors, mean, stdDev, colorFormat)
+          }
+          className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
         >
           Download CSS variables
-        </button>
-
-        <button
-          onClick={onResetConfiguration}
-          className="px-4 py-2 text-sm text-white bg-red-600 border-none rounded cursor-pointer hover:bg-red-700"
-        >
-          Reset Configuration
         </button>
       </div>
     </div>

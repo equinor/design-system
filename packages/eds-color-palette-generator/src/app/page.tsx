@@ -198,10 +198,7 @@ export default function App() {
     colorScheme === 'light' ? lightColorScales : darkColorScales
 
   return (
-    <div
-      data-theme={colorScheme}
-      className="p-6 text-black bg-white dark:text-white dark:bg-black"
-    >
+    <div data-theme={colorScheme} className="p-6 ">
       <HeaderPanel
         showConfigPanel={showConfigPanel}
         setShowConfigPanel={setShowConfigPanel}
@@ -257,7 +254,7 @@ export default function App() {
         </div>
       )}
 
-      <div className="sticky top-0 z-10 p-1 bg-white dark:bg-black">
+      <div className="sticky top-0 z-10 p-1 bg-default">
         <ColorScalesHeader />
 
         {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
