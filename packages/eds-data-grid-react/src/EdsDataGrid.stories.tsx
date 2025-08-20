@@ -394,8 +394,19 @@ export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 
   return (
     <StoryWrapper>
+      <Typography>Enables accessible interactive cells in DataGrid.</Typography>
+      <br />
       <Typography>
-        Click cells to select/deselect. Only one cell can be selected at a time.
+        <strong>Requirements:</strong> Use <code>padding: 0</code> in{' '}
+        <code>cellStyle</code> for clickable columns. Selection state must be
+        managed externally via <code>isSelected</code> prop and{' '}
+        <code>ariaLabel</code> is required for accessibility.
+      </Typography>
+      <br />
+      <Typography>
+        <strong>Try it:</strong> Click ID/Title/Actions cells to select. Use Tab
+        + Enter/Space for keyboard navigation. Row hover is disabled in this
+        demo to showcase cell-level hover states.
       </Typography>
       <Divider />
       <pre>Selected cell: {JSON.stringify(selectedCell, null, 2)}</pre>
