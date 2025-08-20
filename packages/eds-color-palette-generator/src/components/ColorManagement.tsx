@@ -71,10 +71,9 @@ export const ColorManagement = ({
           ))}
         </div>
 
-        {/* Add New Color Button */}
         <div className="mt-4 text-left">
           <button
-            className="px-4 py-2 text-sm bg-neutral-medium-hover hover:bg-neutral-medium-hover rounded"
+            className="px-4 py-2 text-sm text-contrast-strong bg-primary-default hover:bg-primary-hover rounded"
             onClick={() => {
               const randomColor =
                 '#' +
@@ -88,7 +87,7 @@ export const ColorManagement = ({
             }}
             data-testid="add-color-button"
           >
-            Add New Color
+            Add New Colour
           </button>
         </div>
       </div>

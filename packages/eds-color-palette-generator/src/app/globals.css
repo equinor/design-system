@@ -42,6 +42,16 @@
     --color-gray-background-medium-active
   );
 
+  --background-color-primary-default: var(
+    --color-moss-green-background-strong-default
+  );
+  --background-color-primary-hover: var(
+    --color-moss-green-background-strong-hover
+  );
+  --background-color-primary-active: var(
+    --color-moss-green-background-strong-active
+  );
+
   --background-color-danger-medium-default: var(
     --color-red-background-medium-default
   );
@@ -61,6 +71,9 @@
 
   --text-color-strong: var(--color-gray-text-strong);
   --text-color-subtle: var(--color-gray-text-subtle);
+
+  --text-color-contrast-strong: var(--color-gray-text-contrast-strong);
+  --text-color-contrast-subtle: var(--color-gray-text-contrast-subtle);
 
   --text-color-default: var(--color-gray-text-strong);
 
