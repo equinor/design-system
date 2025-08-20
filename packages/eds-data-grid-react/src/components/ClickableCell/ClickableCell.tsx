@@ -62,13 +62,15 @@ const StyledButton = styled.button<StyledButtonProps>(
 
       &:focus-visible {
         background: ${focus?.background};
+        ${outlineTemplate(focus?.outline)}
+        z-index: 2; // Avoids outline overlap when hovering adjacent cell
       }
 
       ${$isSelected &&
       css`
         background: ${active?.background};
         ${outlineTemplate(active?.outline)}
-        z-index: 10; // Avoids outline overlap when hovering adjacent cell
+        z-index: 3; // Avoids outline overlap when hovering adjacent cell
       `}
     `
   },

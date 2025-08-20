@@ -43,6 +43,7 @@ export const clickableCell: ClickableCellToken = {
       },
     },
     focus: {
+      background: hoverBackgroundColor,
       outline: {
         type: 'outline',
         offset: '-1px',
