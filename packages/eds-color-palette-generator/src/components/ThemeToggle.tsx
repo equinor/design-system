@@ -8,7 +8,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
-      className="p-2 transition-colors rounded-lg dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm"
+      className="p-2 transition-colors rounded-lg bg-neutral-subtle hover:bg-neutral-medium text-sm"
       title={
         colorScheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'
       }

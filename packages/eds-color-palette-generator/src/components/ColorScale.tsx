@@ -369,7 +369,7 @@ export function ColorScale({
                     <div className="max-h-[120px] overflow-y-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                          <tr className="border-b border-neutral-subtle">
                             <th className="py-1 pr-2 text-left">On step</th>
                             <th className="py-1 text-right">
                               {contrastMethod} Contrast
@@ -410,11 +410,11 @@ export function ColorScale({
                             return (
                               <tr
                                 key={`dialog-contrast-${targetStepIndex}`}
-                                className="border-b border-gray-100 dark:border-gray-800"
+                                className="border-b border-neutral-subtle"
                               >
                                 <td className="flex items-center gap-2 py-1 pr-2">
                                   <div
-                                    className="w-3 h-3 border border-gray-300 rounded-full dark:border-gray-700"
+                                    className="w-3 h-3 border border-neutral-subtle rounded-full"
                                     style={{
                                       backgroundColor: colors[targetStepIndex],
                                     }}

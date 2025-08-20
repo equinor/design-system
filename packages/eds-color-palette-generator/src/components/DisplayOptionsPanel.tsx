@@ -27,7 +27,7 @@ export const DisplayOptionsPanel = ({
   setColorFormat,
 }: DisplayOptionsPanelProps) => {
   return (
-    <fieldset className="p-6 mb-4 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
+    <fieldset className="p-6 mb-4 space-y-4 border border-neutral-subtle rounded-lg">
       <legend className="mb-2 font-medium">Options</legend>
 
       <div className="space-y-3">

@@ -19,21 +19,54 @@
 }
 
 @theme inline {
+  /* Neutral/Gray backgrounds */
   --color-bg-neutral-default: var(--color-gray-background-default);
   --color-bg-neutral-subtle: var(--color-gray-background-subtle);
+  --color-bg-neutral-medium: var(--color-gray-background-medium-default);
+  --color-bg-neutral-medium-hover: var(--color-gray-background-medium-hover);
+  --color-bg-neutral-medium-active: var(--color-gray-background-medium-active);
+
+  /* Neutral/Gray text */
   --color-text-neutral-strong: var(--color-gray-text-strong);
   --color-text-neutral-subtle: var(--color-gray-text-subtle);
-  --color-text-neutral-inverted-strong: var(--color-gray-text-inverted-strong);
-  --color-text-neutral-inverted-subtle: var(--color-gray-text-inverted-subtle);
+  --color-text-neutral-inverted-strong: var(--color-gray-text-contrast-strong);
+  --color-text-neutral-inverted-subtle: var(--color-gray-text-contrast-subtle);
 
-  --color-text-danger-strong: var(--color-red-text-strong);
-  --color-text-danger-subtle: var(--color-red-text-subtle);
+  /* Neutral/Gray borders */
+  --color-border-neutral-subtle: var(--color-gray-border-subtle);
+  --color-border-neutral-medium: var(--color-gray-border-medium);
+  --color-border-neutral-strong: var(--color-gray-border-strong);
 
+  /* Success/Green colors */
+  --color-bg-success-default: var(--color-green-background-default);
+  --color-bg-success-strong: var(--color-green-background-strong-default);
+  --color-bg-success-strong-hover: var(--color-green-background-strong-hover);
   --color-text-success-strong: var(--color-green-text-strong);
   --color-text-success-subtle: var(--color-green-text-subtle);
+  --color-text-success-inverted: var(--color-green-text-contrast-strong);
 
+  /* Danger/Red colors */
+  --color-bg-danger-default: var(--color-red-background-default);
+  --color-bg-danger-strong: var(--color-red-background-strong-default);
+  --color-bg-danger-strong-hover: var(--color-red-background-strong-hover);
+  --color-text-danger-strong: var(--color-red-text-strong);
+  --color-text-danger-subtle: var(--color-red-text-subtle);
+  --color-text-danger-inverted: var(--color-red-text-contrast-strong);
+
+  /* Primary/Moss Green colors */
+  --color-bg-primary-default: var(--color-moss-green-background-medium-default);
+  --color-bg-primary-strong: var(--color-moss-green-background-strong-default);
+  --color-bg-primary-strong-hover: var(
+    --color-moss-green-background-strong-hover
+  );
+  --color-text-primary-strong: var(--color-moss-green-text-strong);
+  --color-text-primary-inverted: var(--color-moss-green-text-contrast-strong);
+
+  /* Legacy support */
   --color-bg-default: var(--color-gray-background-default);
   --color-text-default: var(--color-gray-text-strong);
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

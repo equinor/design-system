@@ -28,7 +28,7 @@ export const ConfigurationPanel = ({
   onResetConfiguration,
 }: ConfigurationPanelProps) => {
   return (
-    <div className="p-6 my-6 border border-gray-200 rounded-lg dark:border-gray-800">
+    <div className="p-6 my-6 border border-neutral-subtle rounded-lg">
       <h3 className="mb-4 font-medium">Configuration</h3>
       <div className="flex flex-wrap gap-4">
         <button
@@ -41,12 +41,12 @@ export const ConfigurationPanel = ({
               colors,
             )
           }
-          className="px-4 py-2 text-sm text-black bg-gray-200 border-none rounded cursor-pointer dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600"
+          className="px-4 py-2 text-sm bg-neutral-medium hover:bg-neutral-medium-hover border-none rounded cursor-pointer"
         >
           Download Configuration
         </button>
 
-        <label className="inline-block px-4 py-2 text-sm text-black bg-gray-200 rounded cursor-pointer dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600">
+        <label className="inline-block px-4 py-2 text-sm bg-neutral-medium hover:bg-neutral-medium-hover rounded cursor-pointer">
           <span>Upload Configuration</span>
           <input
             type="file"
@@ -107,7 +107,7 @@ export const ConfigurationPanel = ({
         </label>
         <button
           onClick={onResetConfiguration}
-          className="px-4 py-2 text-sm text-white bg-red-600 border-none rounded cursor-pointer hover:bg-red-700"
+          className="px-4 py-2 text-sm bg-danger-strong hover:bg-danger-strong-hover text-danger-inverted border-none rounded cursor-pointer"
         >
           Reset Configuration
         </button>
@@ -122,7 +122,7 @@ export const ConfigurationPanel = ({
               colorFormat,
             )
           }
-          className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
+          className="px-4 py-2 bg-primary-strong hover:bg-primary-strong-hover text-primary-inverted rounded border-none text-sm cursor-pointer"
         >
           Download Colour Tokens (W3C Format)
         </button>
@@ -131,7 +131,7 @@ export const ConfigurationPanel = ({
           onClick={() =>
             downloadDesignSystemCSS(colors, mean, stdDev, colorFormat)
           }
-          className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
+          className="px-4 py-2 bg-primary-strong hover:bg-primary-strong-hover text-primary-inverted rounded border-none text-sm cursor-pointer"
         >
           Download CSS variables
         </button>

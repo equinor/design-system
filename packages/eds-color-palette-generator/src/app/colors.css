@@ -52,11 +52,11 @@
     oklch(0.32 0.032 204.6),
     oklch(0.99 0.013 204.6)
   );
-  --color-moss-green-text-inverse-subtle: light-dark(
+  --color-moss-green-text-contrast-subtle: light-dark(
     oklch(0.97 0.015 204.6),
     oklch(0.18 0.009 204.6)
   );
-  --color-moss-green-text-inverse-strong: light-dark(
+  --color-moss-green-text-contrast-strong: light-dark(
     oklch(0.99 0.013 204.6),
     oklch(0.1 0.004 204.6)
   );
@@ -92,11 +92,14 @@
   );
   --color-gray-text-subtle: light-dark(oklch(0.36 0 0), oklch(0.91 0 0));
   --color-gray-text-strong: light-dark(oklch(0.32 0 0), oklch(0.99 0 0));
-  --color-gray-text-inverse-subtle: light-dark(
+  --color-gray-text-contrast-subtle: light-dark(
     oklch(0.97 0 0),
     oklch(0.18 0 0)
   );
-  --color-gray-text-inverse-strong: light-dark(oklch(0.99 0 0), oklch(0.1 0 0));
+  --color-gray-text-contrast-strong: light-dark(
+    oklch(0.99 0 0),
+    oklch(0.1 0 0)
+  );
 
   --color-green-background-default: light-dark(
     oklch(1 0.022 143),
@@ -150,11 +153,11 @@
     oklch(0.32 0.062 143),
     oklch(0.99 0.025 143)
   );
-  --color-green-text-inverse-subtle: light-dark(
+  --color-green-text-contrast-subtle: light-dark(
     oklch(0.97 0.03 143),
     oklch(0.18 0.018 143)
   );
-  --color-green-text-inverse-strong: light-dark(
+  --color-green-text-contrast-strong: light-dark(
     oklch(0.99 0.025 143),
     oklch(0.1 0.007 143)
   );
@@ -211,11 +214,11 @@
     oklch(0.32 0.051 240.7),
     oklch(0.99 0.02 240.7)
   );
-  --color-blue-text-inverse-subtle: light-dark(
+  --color-blue-text-contrast-subtle: light-dark(
     oklch(0.97 0.025 240.7),
     oklch(0.18 0.015 240.7)
   );
-  --color-blue-text-inverse-strong: light-dark(
+  --color-blue-text-contrast-strong: light-dark(
     oklch(0.99 0.02 240.7),
     oklch(0.1 0.006 240.7)
   );
@@ -272,11 +275,11 @@
     oklch(0.32 0.062 58.7),
     oklch(0.99 0.025 58.7)
   );
-  --color-orange-text-inverse-subtle: light-dark(
+  --color-orange-text-contrast-subtle: light-dark(
     oklch(0.97 0.03 58.7),
     oklch(0.18 0.018 58.7)
   );
-  --color-orange-text-inverse-strong: light-dark(
+  --color-orange-text-contrast-strong: light-dark(
     oklch(0.99 0.025 58.7),
     oklch(0.1 0.007 58.7)
   );
@@ -333,11 +336,11 @@
     oklch(0.32 0.087 21.1),
     oklch(0.99 0.035 21.1)
   );
-  --color-red-text-inverse-subtle: light-dark(
+  --color-red-text-contrast-subtle: light-dark(
     oklch(0.97 0.042 21.1),
     oklch(0.18 0.026 21.1)
   );
-  --color-red-text-inverse-strong: light-dark(
+  --color-red-text-contrast-strong: light-dark(
     oklch(0.99 0.035 21.1),
     oklch(0.1 0.01 21.1)
   );

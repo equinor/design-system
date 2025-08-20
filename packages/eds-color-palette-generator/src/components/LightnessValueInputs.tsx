@@ -42,7 +42,7 @@ export const LightnessValueInputs = ({
             onChange={(e) =>
               updateLightnessValue(index, Number(e.target.value))
             }
-            className="w-full p-1 text-xs text-center bg-white border border-gray-300 rounded dark:border-gray-700 dark:bg-gray-800"
+            className="w-full p-1 text-xs text-center bg-neutral-default border border-neutral-subtle rounded"
             style={{ maxWidth: '90%' }}
           />
         </div>

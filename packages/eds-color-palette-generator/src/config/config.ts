@@ -389,11 +389,11 @@ export const TEXT_STRONG: StepDefinition = {
   ],
 }
 
-export const TEXT_INV_SUBTLE: StepDefinition = {
-  id: 'text-inverse-subtle',
-  name: 'Text Inverse Subtle',
+export const TEXT_CONTRAST_SUBTLE: StepDefinition = {
+  id: 'text-contrast-subtle',
+  name: 'Text Contrast Subtle',
   category: 'text',
-  variant: 'inverse-subtle',
+  variant: 'contrast-subtle',
   lightValue: 0.97,
   darkValue: 0.18,
   contrastWith: [
@@ -415,11 +415,11 @@ export const TEXT_INV_SUBTLE: StepDefinition = {
   ],
 }
 
-export const TEXT_INV_STRONG: StepDefinition = {
-  id: 'text-inverse-strong',
-  name: 'Text Inverse Strong',
+export const TEXT_CONTRAST_STRONG: StepDefinition = {
+  id: 'text-contrast-strong',
+  name: 'Text Contrast Strong',
   category: 'text',
-  variant: 'inverse-strong',
+  variant: 'contrast-strong',
   lightValue: 0.99,
   darkValue: 0.1,
   contrastWith: [
@@ -459,8 +459,8 @@ export const PALETTE_STEPS: StepDefinition[] = [
   BG_STRONG_ACTIVE,
   TEXT_SUBTLE,
   TEXT_STRONG,
-  TEXT_INV_SUBTLE,
-  TEXT_INV_STRONG,
+  TEXT_CONTRAST_SUBTLE,
+  TEXT_CONTRAST_STRONG,
 ]
 
 /**
