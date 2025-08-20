@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { bordersTemplate, outlineTemplate } from '@equinor/eds-utils'
+import { outlineTemplate } from '@equinor/eds-utils'
 import { clickableCell, type ClickableCellToken } from './ClickableCell.tokens'
 
 export type ClickableCellProps = {
@@ -52,8 +52,6 @@ const StyledButton = styled.button<StyledButtonProps>(
       align-items: center;
       justify-content: flex-start;
 
-      ${bordersTemplate($token.border)}
-
       &:hover {
         background: ${hover?.background};
       }
@@ -63,18 +61,14 @@ const StyledButton = styled.button<StyledButtonProps>(
       }
 
       &:focus-visible {
-        background: ${hover?.background};
+        background: ${focus?.background};
       }
-
-      // &:active {
-      //   background: ${active?.background};
-      //   ${outlineTemplate(focus?.outline)}
-      // }
 
       ${$isSelected &&
       css`
-        background: ${active?.background}; // Grønn bakgrunn
-        ${outlineTemplate(focus?.outline)}// Med outline
+        background: ${active?.background};
+        ${outlineTemplate(active?.outline)}
+        z-index: 10; // Avoids outline overlap when hovering adjacent cell
       `}
     `
   },
@@ -99,6 +93,7 @@ export function ClickableCell({
       <StyledButton
         onClick={onClick}
         aria-label={ariaLabel}
+        aria-pressed={isSelected}
         type="button"
         $token={clickableCell}
         $isSelected={isSelected}

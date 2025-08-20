@@ -302,7 +302,12 @@ RowSelection.args = {
 } satisfies Partial<EdsDataGridProps<Photo>>
 
 const StoryWrapper = styled.div`
+  table {
+    /* Gives space for cell outline on all sides */
+    margin: 4px;
+  }
   tr:hover {
+    /* Disable default row hover to let ClickableCell handle its own hover styling */
     background-color: transparent !important;
   }
 `
