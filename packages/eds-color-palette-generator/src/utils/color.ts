@@ -67,52 +67,6 @@ export function generateColorScale(
   }
 }
 
-/**
- * WCAG 2.1 contrast thresholds based on different text and UI categories
- */
-const WCAGThresholds = {
-  fluentText: {
-    preferred: 7, // Level AAA for normal text
-    minimum: 4.5, // Level AA for normal text
-  },
-  bodyText: {
-    preferred: 7, // Level AAA for normal text
-    minimum: 4.5, // Level AA for normal text
-  },
-  headlines: {
-    minimum: 3, // Level AA for large text (>=18.66px or 14px bold)
-  },
-  spotReadable: {
-    minimum: 3, // Level AA for large text and UI components
-  },
-  nonText: {
-    minimum: 3, // Level AA for non-text UI components
-  },
-} as const
-
-/**
- * APCA contrast thresholds based on different text and UI categories
- */
-const APCAThresholds = {
-  fluentText: {
-    preferred: 90, // For body text >=18px/300 or 14px/400, or non-body >=12px/400
-    minimum: 75, // For body text >=24px/300, 18px/400, 16px/500, 14px/700
-  },
-  bodyText: {
-    preferred: 75, // For important readable content
-    minimum: 60, // For non-body content text, ex: 24px/400, 18px/600, 16px/700
-  },
-  headlines: {
-    minimum: 45, // For large headlines (>=36px/400 or 24px/700) and detailed icons
-  },
-  spotReadable: {
-    minimum: 30, // Minimum for any other text, placeholders, and solid icons
-  },
-  nonText: {
-    minimum: 15, // Minimum for non-semantic elements like dividers (>=5px solid)
-  },
-} as const
-
 type ContrastMethod = 'WCAG21' | 'APCA'
 
 /**
@@ -146,46 +100,8 @@ export function calculateAPCAContrast(fg: Color, bg: Color): number {
   }
 }
 
-function getThresholds(method: ContrastMethod) {
-  return method === 'WCAG21' ? WCAGThresholds : APCAThresholds
-}
-
 type ContrastResult = {
   contrastValue: string
-  fluentText: {
-    preferred: boolean
-    minimum: boolean
-    threshold: {
-      preferred: number
-      minimum: number
-    }
-  }
-  contentText: {
-    preferred: boolean
-    minimum: boolean
-    threshold: {
-      preferred: number
-      minimum: number
-    }
-  }
-  headlines: {
-    minimum: boolean
-    threshold: {
-      minimum: number
-    }
-  }
-  spotReadable: {
-    minimum: boolean
-    threshold: {
-      minimum: number
-    }
-  }
-  nonText: {
-    minimum: boolean
-    threshold: {
-      minimum: number
-    }
-  }
 }
 
 /**
@@ -214,61 +130,15 @@ export function checkContrast(
       contrast = fg.contrast(bg, method)
     }
 
-    const thresholds = getThresholds(method)
-
     return {
       contrastValue:
         method === 'APCA' ? contrast.toFixed(0) : contrast.toFixed(1),
-      fluentText: {
-        preferred: contrast >= thresholds.fluentText.preferred,
-        minimum: contrast >= thresholds.fluentText.minimum,
-        threshold: thresholds.fluentText,
-      },
-      contentText: {
-        preferred: contrast >= thresholds.bodyText.preferred,
-        minimum: contrast >= thresholds.bodyText.minimum,
-        threshold: thresholds.bodyText,
-      },
-      headlines: {
-        minimum: contrast >= thresholds.headlines.minimum,
-        threshold: thresholds.headlines,
-      },
-      spotReadable: {
-        minimum: contrast >= thresholds.spotReadable.minimum,
-        threshold: thresholds.spotReadable,
-      },
-      nonText: {
-        minimum: contrast >= thresholds.nonText.minimum,
-        threshold: thresholds.nonText,
-      },
     }
   } catch (error) {
     console.error('Error in checkContrast:', error)
     // Return default values in case of error
     return {
       contrastValue: '0',
-      fluentText: {
-        preferred: false,
-        minimum: false,
-        threshold: getThresholds(method).fluentText,
-      },
-      contentText: {
-        preferred: false,
-        minimum: false,
-        threshold: getThresholds(method).bodyText,
-      },
-      headlines: {
-        minimum: false,
-        threshold: getThresholds(method).headlines,
-      },
-      spotReadable: {
-        minimum: false,
-        threshold: getThresholds(method).spotReadable,
-      },
-      nonText: {
-        minimum: false,
-        threshold: getThresholds(method).nonText,
-      },
     }
   }
 }
