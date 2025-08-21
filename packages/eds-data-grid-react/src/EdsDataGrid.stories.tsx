@@ -377,7 +377,11 @@ export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
     },
     {
       ...columns[3],
-      id: `regular_${columns[3].id}_${Date.now() + 1}`,
+      id: `regular_${columns[2].id}_static1`,
+    },
+    {
+      ...columns[3],
+      id: `regular_${columns[3].id}_static2`,
     },
   ]
 
