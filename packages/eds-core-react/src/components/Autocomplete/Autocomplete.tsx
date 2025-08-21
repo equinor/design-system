@@ -543,14 +543,12 @@ function AutocompleteInner<T>(
         return ''
       }
 
-      if (typeof item === 'object') {
-        if (optionLabel) {
-          return optionLabel(item)
-        } else {
-          throw new Error(
-            'Missing label. When using objects for options make sure to define the `optionLabel` property',
-          )
-        }
+      if (optionLabel) {
+        return optionLabel(item)
+      } else if (typeof item === 'object') {
+        throw new Error(
+          'Missing label. When using objects for options make sure to define the `optionLabel` property',
+        )
       }
 
       if (typeof item === 'string') {
