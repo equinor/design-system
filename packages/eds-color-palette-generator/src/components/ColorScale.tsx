@@ -1,6 +1,6 @@
 'use client'
 import { PALETTE_STEPS, getStepIndex } from '@/config/config'
-import { checkContrast } from '@/utils/color'
+import { getContrastScore } from '@/utils/color'
 import Color from 'colorjs.io'
 import { useState, useEffect, useRef, useMemo } from 'react'
 
@@ -181,7 +181,7 @@ export function ColorScale({
           )
           if (targetStepIndex === -1) return null
 
-          const contrastResult = checkContrast(
+          const contrastResult = getContrastScore(
             color,
             colors[targetStepIndex],
             contrastMethod,
@@ -387,7 +387,7 @@ export function ColorScale({
                             const contrastValue =
                               contrastArray &&
                               colorPairIndex < contrastArray.length
-                                ? contrastArray[colorPairIndex]?.contrastValue
+                                ? contrastArray[colorPairIndex]
                                 : undefined
 
                             let isContrastValid = false
@@ -453,7 +453,7 @@ export function ColorScale({
                       const contrastArray = contrasts[i]
                       const contrastValue =
                         contrastArray && colorPairIndex < contrastArray.length
-                          ? contrastArray[colorPairIndex]?.contrastValue
+                          ? contrastArray[colorPairIndex]
                           : undefined
                       let isContrastValid = false
 

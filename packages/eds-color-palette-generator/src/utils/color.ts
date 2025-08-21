@@ -1,5 +1,5 @@
-import Color from 'colorjs.io'
-import { APCAcontrast, sRGBtoY } from 'apca-w3'
+import Color, { Coords } from 'colorjs.io'
+import { APCAcontrast, displayP3toY } from 'apca-w3'
 import { ColorFormat } from '@/types'
 
 export function gaussian(
@@ -70,38 +70,18 @@ export function generateColorScale(
 type ContrastMethod = 'WCAG21' | 'APCA'
 
 /**
- * Helper function to calculate APCA contrast between two Color objects
- * @param fg - Foreground Color object
- * @param bg - Background Color object
- * @returns APCA contrast value (always positive, absolute value)
+ * Calculates APCA contrast score between two colors in P3
+ * @param foreground - Text/foreground color
+ * @param background - Background color
+ * @returns APCA contrast score rounded to the nearest integer
  */
-export function calculateAPCAContrast(fg: Color, bg: Color): number {
-  try {
-    // Convert Color objects to sRGB RGBA arrays with values 0-255
-    const fgRgba = fg
-      .to('srgb')
-      .coords.map((c) => c * 255)
-      .concat((fg.alpha || 1) * 255)
-    const bgRgba = bg
-      .to('srgb')
-      .coords.map((c) => c * 255)
-      .concat((bg.alpha || 1) * 255)
 
-    // Use sRGBtoY to convert to luminance, then calculate APCA contrast
-    const fgLuminance = sRGBtoY(fgRgba.slice(0, 3) as [number, number, number])
-    const bgLuminance = sRGBtoY(bgRgba.slice(0, 3) as [number, number, number])
+export const calculateApcaScore = (fg: Coords, bg: Coords): number => {
+  const fgY = displayP3toY(fg)
+  const bgY = displayP3toY(bg)
+  const contrast = APCAcontrast(fgY, bgY)
 
-    // Return absolute value to always get positive LC values
-    const contrast = APCAcontrast(fgLuminance, bgLuminance)
-    return Math.abs(Number(contrast))
-  } catch (error) {
-    console.error('Error calculating APCA contrast:', error)
-    return 0
-  }
-}
-
-type ContrastResult = {
-  contrastValue: string
+  return Math.abs(Math.round(Number(contrast)))
 }
 
 /**
@@ -111,34 +91,28 @@ type ContrastResult = {
  * @param method - Contrast calculation method ("WCAG21" or "APCA")
  * @returns Object with contrast value and pass/fail status for each category
  */
-export function checkContrast(
-  foreground: string | Color,
-  background: string | Color,
+export function getContrastScore(
+  foreground: string,
+  background: string,
   method: ContrastMethod,
-): ContrastResult {
+): string | number {
   try {
-    const fg =
-      typeof foreground === 'string' ? new Color(foreground) : foreground
-    const bg =
-      typeof background === 'string' ? new Color(background) : background
+    // Create Color objects from input strings (supports both HEX and OKLCH formats)
+    const fgColor = new Color(foreground)
+    const bgColor = new Color(background)
 
-    let contrast: number
+    // Convert to Display P3 to get RGB coordinates for P3 color space
+    const fgP3 = fgColor.to('p3')
+    const bgP3 = bgColor.to('p3')
 
     if (method === 'APCA') {
-      contrast = calculateAPCAContrast(fg, bg)
+      return calculateApcaScore(fgP3.coords, bgP3.coords)
     } else {
-      contrast = fg.contrast(bg, method)
-    }
-
-    return {
-      contrastValue:
-        method === 'APCA' ? contrast.toFixed(0) : contrast.toFixed(1),
+      return fgColor.contrast(bgColor, method).toFixed(1)
     }
   } catch (error) {
     console.error('Error in checkContrast:', error)
     // Return default values in case of error
-    return {
-      contrastValue: '0',
-    }
+    return '0'
   }
 }
