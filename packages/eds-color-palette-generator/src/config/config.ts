@@ -425,17 +425,17 @@ export const TEXT_CONTRAST_STRONG: StepDefinition = {
   contrastWith: [
     {
       targetStep: 'background-strong-default',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
+      lc: APCA_CONTRAST_LEVELS.LC_90,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
       targetStep: 'background-strong-hover',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
+      lc: APCA_CONTRAST_LEVELS.LC_90,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
     {
       targetStep: 'background-strong-active',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
+      lc: APCA_CONTRAST_LEVELS.LC_90,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
   ],
