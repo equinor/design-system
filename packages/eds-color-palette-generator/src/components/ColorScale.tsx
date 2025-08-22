@@ -29,6 +29,20 @@ function getTextColorForStep(colors: string[], stepIndex: number): string {
   return colors[12] // text strong
 }
 
+function getSystemTextColorClassNameForStep({
+  stepIndex,
+  status,
+}: {
+  stepIndex: number
+  status: 'success' | 'danger'
+}): string {
+  if (stepIndex >= 9 && stepIndex <= 13) {
+    return `text-${status}-contrast-subtle`
+  }
+
+  return `text-${status}-subtle`
+}
+
 // Convert hex color to OKLCH format
 function getOklchInfo(hexColor: string, index: number): OklchInfo {
   try {
@@ -404,8 +418,8 @@ export function ColorScale({
                             }
 
                             const scoreColor = isContrastValid
-                              ? 'text-green-500 dark:text-green-400'
-                              : 'text-red-500 dark:text-red-400'
+                              ? 'text-success-subtle'
+                              : 'text-danger-subtle'
 
                             return (
                               <tr
@@ -469,9 +483,12 @@ export function ColorScale({
                         }
                       }
 
-                      const scoreColor = isContrastValid
-                        ? 'text-green-500'
-                        : 'text-red-500'
+                      const status = isContrastValid ? 'success' : 'danger'
+                      const textStatusClassName =
+                        getSystemTextColorClassNameForStep({
+                          stepIndex: i + 1,
+                          status,
+                        })
                       return (
                         <li
                           key={`background-pairing-${targetStepIndex}`}
@@ -479,7 +496,9 @@ export function ColorScale({
                         >
                           <span>{targetStepIndex + 1}</span>
                           <span>
-                            <strong className={'font-mono ' + scoreColor}>
+                            <strong
+                              className={'font-mono ' + textStatusClassName}
+                            >
                               {contrastMethod === 'APCA' &&
                                 contrastValue &&
                                 `${contrastValue} (${contrastReq.lc.value})`}

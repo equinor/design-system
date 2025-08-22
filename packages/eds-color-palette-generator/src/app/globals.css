@@ -76,6 +76,15 @@
   --text-color-contrast-subtle: var(--color-gray-text-contrast-subtle);
 
   --text-color-default: var(--color-gray-text-strong);
+  --text-color-success-subtle: var(--color-green-text-subtle);
+  --text-color-success-strong: var(--color-green-text-strong);
+  --text-color-success-contrast-strong: var(--color-green-text-contrast-strong);
+  --text-color-success-contrast-subtle: var(--color-green-text-contrast-subtle);
+
+  --text-color-danger-subtle: var(--color-red-text-subtle);
+  --text-color-danger-strong: var(--color-red-text-strong);
+  --text-color-danger-contrast-strong: var(--color-red-text-contrast-strong);
+  --text-color-danger-contrast-subtle: var(--color-red-text-contrast-subtle);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
