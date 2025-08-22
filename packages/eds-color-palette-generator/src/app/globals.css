@@ -90,6 +90,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@source inline("text-success-{subtle,strong,contrast-{subtle,strong}}");
+@source inline("text-danger-{subtle,strong,contrast-{subtle,strong}}");
+
 html,
 body {
   min-height: 100vh;

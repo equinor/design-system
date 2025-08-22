@@ -322,7 +322,7 @@ export const TEXT_SUBTLE: StepDefinition = {
   name: 'Text Subtle',
   category: 'text',
   variant: 'subtle',
-  lightValue: 0.52,
+  lightValue: 0.4,
   darkValue: 0.91,
   contrastWith: [
     {
@@ -395,7 +395,7 @@ export const TEXT_CONTRAST_SUBTLE: StepDefinition = {
   category: 'text',
   variant: 'contrast-subtle',
   lightValue: 0.89,
-  darkValue: 0.18,
+  darkValue: 0.3,
   contrastWith: [
     {
       targetStep: 'background-strong-default',

@@ -45,7 +45,7 @@
     oklch(0.92 0.024 204.6)
   );
   --color-moss-green-text-subtle: light-dark(
-    oklch(0.52 0.078 204.6),
+    oklch(0.4 0.051 204.6),
     oklch(0.91 0.026 204.6)
   );
   --color-moss-green-text-strong: light-dark(
@@ -54,7 +54,7 @@
   );
   --color-moss-green-text-contrast-subtle: light-dark(
     oklch(0.89 0.03 204.6),
-    oklch(0.18 0.009 204.6)
+    oklch(0.3 0.028 204.6)
   );
   --color-moss-green-text-contrast-strong: light-dark(
     oklch(0.99 0.013 204.6),
@@ -90,11 +90,11 @@
     oklch(0.42 0 0),
     oklch(0.92 0 0)
   );
-  --color-gray-text-subtle: light-dark(oklch(0.52 0 0), oklch(0.91 0 0));
+  --color-gray-text-subtle: light-dark(oklch(0.4 0 0), oklch(0.91 0 0));
   --color-gray-text-strong: light-dark(oklch(0.32 0 0), oklch(0.99 0 0));
   --color-gray-text-contrast-subtle: light-dark(
     oklch(0.89 0 0),
-    oklch(0.18 0 0)
+    oklch(0.3 0 0)
   );
   --color-gray-text-contrast-strong: light-dark(
     oklch(0.99 0 0),
@@ -146,7 +146,7 @@
     oklch(0.92 0.046 143)
   );
   --color-green-text-subtle: light-dark(
-    oklch(0.52 0.153 143),
+    oklch(0.4 0.101 143),
     oklch(0.91 0.05 143)
   );
   --color-green-text-strong: light-dark(
@@ -155,7 +155,7 @@
   );
   --color-green-text-contrast-subtle: light-dark(
     oklch(0.89 0.058 143),
-    oklch(0.18 0.018 143)
+    oklch(0.3 0.054 143)
   );
   --color-green-text-contrast-strong: light-dark(
     oklch(0.99 0.025 143),
@@ -207,7 +207,7 @@
     oklch(0.92 0.038 240.7)
   );
   --color-blue-text-subtle: light-dark(
-    oklch(0.52 0.125 240.7),
+    oklch(0.4 0.082 240.7),
     oklch(0.91 0.041 240.7)
   );
   --color-blue-text-strong: light-dark(
@@ -216,7 +216,7 @@
   );
   --color-blue-text-contrast-subtle: light-dark(
     oklch(0.89 0.047 240.7),
-    oklch(0.18 0.015 240.7)
+    oklch(0.3 0.044 240.7)
   );
   --color-blue-text-contrast-strong: light-dark(
     oklch(0.99 0.02 240.7),
@@ -268,7 +268,7 @@
     oklch(0.92 0.046 58.7)
   );
   --color-orange-text-subtle: light-dark(
-    oklch(0.52 0.152 58.7),
+    oklch(0.4 0.1 58.7),
     oklch(0.91 0.05 58.7)
   );
   --color-orange-text-strong: light-dark(
@@ -277,7 +277,7 @@
   );
   --color-orange-text-contrast-subtle: light-dark(
     oklch(0.89 0.058 58.7),
-    oklch(0.18 0.018 58.7)
+    oklch(0.3 0.053 58.7)
   );
   --color-orange-text-contrast-strong: light-dark(
     oklch(0.99 0.025 58.7),
@@ -329,7 +329,7 @@
     oklch(0.92 0.064 21.1)
   );
   --color-red-text-subtle: light-dark(
-    oklch(0.52 0.214 21.1),
+    oklch(0.4 0.14 21.1),
     oklch(0.91 0.07 21.1)
   );
   --color-red-text-strong: light-dark(
@@ -338,7 +338,7 @@
   );
   --color-red-text-contrast-subtle: light-dark(
     oklch(0.89 0.081 21.1),
-    oklch(0.18 0.026 21.1)
+    oklch(0.3 0.075 21.1)
   );
   --color-red-text-contrast-strong: light-dark(
     oklch(0.99 0.035 21.1),
