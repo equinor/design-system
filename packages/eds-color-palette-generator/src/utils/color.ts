@@ -1,6 +1,6 @@
-import Color, { Coords } from 'colorjs.io'
-import { APCAcontrast, displayP3toY } from 'apca-w3'
+import Color from 'colorjs.io'
 import { ColorFormat } from '@/types'
+import { Algorithms } from 'colorjs.io/fn'
 
 export function gaussian(
   x: number,
@@ -67,51 +67,33 @@ export function generateColorScale(
   }
 }
 
-type ContrastMethod = 'WCAG21' | 'APCA'
-
 /**
- * Calculates APCA contrast score between two colors in P3
- * @param foreground - Text/foreground color
- * @param background - Background color
- * @returns APCA contrast score rounded to the nearest integer
+ * Calculates contrast between two colors using specified method
+ * @param foreground - Text/foreground color (OKLCH or HEX string)
+ * @param background - Background color (OKLCH or HEX string)
+ * @param algorithm - Contrast calculation algorithm ("WCAG21" or "APCA")
+ * @returns Contrast score as number or string
  */
-
-export const calculateApcaScore = (fg: Coords, bg: Coords): number => {
-  const fgY = displayP3toY(fg)
-  const bgY = displayP3toY(bg)
-  const contrast = APCAcontrast(fgY, bgY)
-
-  return Math.abs(Math.round(Number(contrast)))
-}
-
-/**
- * Calculates contrast between two colors using specified method and checks against categories
- * @param foreground - Text/foreground color
- * @param background - Background color
- * @param method - Contrast calculation method ("WCAG21" or "APCA")
- * @returns Object with contrast value and pass/fail status for each category
- */
-export function getContrastScore(
-  foreground: string,
-  background: string,
-  method: ContrastMethod,
-): string | number {
+export function contrast({
+  foreground,
+  background,
+  algorithm,
+}: {
+  foreground: string
+  background: string
+  algorithm: Algorithms
+}): string | number {
   try {
-    // Create Color objects from input strings (supports both HEX and OKLCH formats)
     const fgColor = new Color(foreground)
     const bgColor = new Color(background)
+    const decimals = algorithm === 'WCAG21' ? 2 : 0
 
-    // Convert to Display P3 to get RGB coordinates for P3 color space
-    const fgP3 = fgColor.to('p3')
-    const bgP3 = bgColor.to('p3')
-
-    if (method === 'APCA') {
-      return calculateApcaScore(fgP3.coords, bgP3.coords)
-    } else {
-      return fgColor.contrast(bgColor, method).toFixed(1)
-    }
+    // Remove all the decimals in the result
+    return Math.abs(Number(bgColor.contrast(fgColor, algorithm))).toFixed(
+      decimals,
+    )
   } catch (error) {
-    console.error('Error in checkContrast:', error)
+    console.error('Error calculating contrast:', error)
     // Return default values in case of error
     return '0'
   }
