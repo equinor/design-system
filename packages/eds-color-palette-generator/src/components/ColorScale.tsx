@@ -1,6 +1,6 @@
 'use client'
-import { colorPairs } from '@/config/color-pairs'
-import { checkContrast } from '@/utils/color'
+import { PALETTE_STEPS, getStepIndex } from '@/config/config'
+import { contrast } from '@/utils/color'
 import Color from 'colorjs.io'
 import { useState, useEffect, useRef, useMemo } from 'react'
 
@@ -11,7 +11,7 @@ type ColorScaleProps = {
   colorName?: string
 }
 
-// Type for color information in OKLCH format
+// Type for color information in OKLCH format!
 type OklchInfo = {
   l: number // lightness
   c: number // chroma
@@ -22,17 +22,25 @@ type OklchInfo = {
 
 // Function to determine text color for steps
 function getTextColorForStep(colors: string[], stepIndex: number): string {
-  if (stepIndex === 9 || stepIndex === 10) {
-    return colors[0] // background color
-  }
-  if (stepIndex === 10 || stepIndex === 11) {
-    return colors[9] // secondary text color
-  }
-  if (stepIndex > 12) {
-    return colors[11] // contrast text
+  if (stepIndex >= 9 && stepIndex <= 13) {
+    return colors[14] // text inverted strong
   }
 
-  return colors[8] // default text
+  return colors[12] // text strong
+}
+
+function getSystemTextColorClassNameForStep({
+  stepIndex,
+  status,
+}: {
+  stepIndex: number
+  status: 'success' | 'danger'
+}): string {
+  if (stepIndex >= 9 && stepIndex <= 13) {
+    return `text-${status}-contrast-subtle`
+  }
+
+  return `text-${status}-subtle`
 }
 
 // Convert hex color to OKLCH format
@@ -44,7 +52,7 @@ function getOklchInfo(hexColor: string, index: number): OklchInfo {
     return {
       l: parseFloat(oklch.l.toFixed(3)),
       c: parseFloat(oklch.c.toFixed(3)),
-      h: parseFloat(oklch.h.toFixed(1)),
+      h: parseFloat((isNaN(oklch.h) ? 0 : oklch.h).toFixed(1)),
       hex: hexColor,
       index: index,
     }
@@ -66,8 +74,14 @@ export function ColorScale({
   contrastMethod = 'WCAG21',
   colorName,
 }: ColorScaleProps) {
+  // State to track client-side rendering for contrast calculations
+  const [isClient, setIsClient] = useState(false)
+
   // State to track the active dialog (index of the color) - only one can be active at a time
   const [activeDialog, setActiveDialog] = useState<number | null>(null)
+
+  // State to track which color's hex value was recently copied
+  const [copiedColorIndex, setCopiedColorIndex] = useState<number | null>(null)
 
   // Create refs for dialogs and their corresponding color elements
   const dialogRefs = useRef<(HTMLDialogElement | null)[]>(
@@ -76,6 +90,11 @@ export function ColorScale({
   const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
     Array(colors.length).fill(null),
   )
+
+  // Set client-side flag after hydration
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Styles are now imported from the dialog.css file
 
@@ -121,6 +140,28 @@ export function ColorScale({
     setActiveDialog(null)
   }
 
+  // Copy to clipboard function
+  const copyToClipboard = async (text: string, colorIndex: number) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedColorIndex(colorIndex)
+      // Reset the copied state after 2 seconds
+      setTimeout(() => setCopiedColorIndex(null), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      setCopiedColorIndex(colorIndex)
+      // Reset the copied state after 2 seconds
+      setTimeout(() => setCopiedColorIndex(null), 2000)
+    }
+  }
+
   // Effect to prevent dialog from closing when clicking inside it
   useEffect(() => {
     const handleDialogClick = (event: MouseEvent) => {
@@ -144,45 +185,63 @@ export function ColorScale({
   // Memoize contrast calculations to only recalculate when colors or contrastMethod change
   const contrasts = useMemo(() => {
     return colors.map((color: string, i: number) => {
-      const indexOfBackgroundColorThatPairs = colorPairs[i]?.usedOnStep
-      if (!indexOfBackgroundColorThatPairs) return null
+      const step = PALETTE_STEPS[i]
+      if (!step?.contrastWith || step.contrastWith.length === 0) return null
 
-      const contrastForAllBackgroundPairings = colorPairs[i]?.usedOnStep?.map(
-        (colorPair) => {
-          const contrastResult = checkContrast(
-            color,
-            colors[colorPair.stepIndex],
-            contrastMethod,
+      const contrastForAllBackgroundPairings = step.contrastWith
+        .map((contrastReq) => {
+          const targetStepIndex = getStepIndex(contrastReq.targetStep)(
+            PALETTE_STEPS,
           )
+          if (targetStepIndex === -1) return null
+
+          const contrastResult = contrast({
+            foreground: color,
+            background: colors[targetStepIndex],
+            algorithm: contrastMethod,
+          })
           return contrastResult
-        },
-      )
+        })
+        .filter((result) => result !== null)
+
       return contrastForAllBackgroundPairings
     })
   }, [colors, contrastMethod])
+
+  // Only render on client to avoid hydration issues
+  if (!isClient) {
+    return null
+  }
 
   return (
     <div className="mb-8">
       {colorName && (
         <h3
-          style={{ color: colors[8] }}
-          className={`text-left mb-2 font-medium text-lg`}
+          style={{ color: colors[8] || '#000000' }}
+          className="mb-2 text-lg font-medium text-left"
         >
           {colorName}
         </h3>
       )}
-      <div className="grid gap-3 mb-4 grid-cols-15">
+      <div
+        className="grid gap-3 mb-4"
+        style={{
+          gridTemplateColumns: `repeat(${colors.length}, minmax(0, 1fr))`,
+        }}
+      >
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)
-          const pairsWithSteps = colorPairs[i]?.usedOnStep
+          const step = PALETTE_STEPS[i]
+          const pairsWithSteps = step?.contrastWith || []
           const oklchInfo = getOklchInfo(color, i)
           const isDialogActive = activeDialog === i
+          const testId = colorName
+            ? `${colorName.replace(/\s+/g, '-').toLowerCase()}-${i}`
+            : `color-step-${i}`
 
           return (
             <div
-              data-testid={
-                colorName ? `color-step-${colorName}-${i}` : `color-step-${i}`
-              }
+              data-testid={testId}
               key={'color-step-' + i}
               ref={(el) => {
                 colorElementRefs.current[i] = el
@@ -211,10 +270,10 @@ export function ColorScale({
                   return undefined
                 }}
                 id={`color-dialog-${i}`}
-                className="min-w-[220px] backdrop:bg-black/20"
+                className="min-w-[220px] backdrop:bg-black/20 cursor-default"
                 style={{
                   backgroundColor: colors[0],
-                  color: colors[9],
+                  color: colors[12],
                 }}
                 onClose={handleDialogClose}
                 onClick={(e) => {
@@ -235,15 +294,15 @@ export function ColorScale({
                   }
                 }}
               >
-                <div className="flex justify-between items-center mb-3">
+                <div className="flex items-center justify-between mb-3">
                   <h4
                     id={`color-details-heading-${i}`}
-                    className="font-medium text-lg"
+                    className="text-lg font-medium"
                   >
-                    {colorName ? `${colorName} #${i + 1}` : `Color #${i + 1}`}
+                    {colorName ? `${colorName} ${i + 1}` : `Color ${i + 1}`}
                   </h4>
                   <button
-                    className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-black/10 focus:outline-none focus:ring-2"
+                    className="flex items-center justify-center rounded-full w-7 h-7 hover:bg-black/10 focus:outline-none focus:ring-2"
                     onClick={() => closeDialog(i)}
                     aria-label="Close details"
                   >
@@ -254,7 +313,7 @@ export function ColorScale({
                 {/* Color sample */}
                 <div className="flex gap-4 mb-4">
                   <div
-                    className="w-16 h-16 rounded-lg border"
+                    className="w-16 h-16 border rounded-lg"
                     style={{
                       backgroundColor: oklchInfo.hex,
                       borderColor: 'rgba(0,0,0,0.1)',
@@ -263,17 +322,53 @@ export function ColorScale({
                   ></div>
 
                   <div className="flex flex-col justify-center">
-                    <div className="font-mono text-base mb-2">
-                      {oklchInfo.hex}
-                    </div>
+                    <button
+                      className="mb-2 font-mono text-base text-left hover:bg-black/10 dark:hover:bg-white/10 rounded px-2 py-1 -mx-2 transition-colors flex items-center gap-2 group"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        copyToClipboard(oklchInfo.hex, i)
+                      }}
+                      aria-label={`Copy ${oklchInfo.hex} to clipboard`}
+                    >
+                      <span>{oklchInfo.hex}</span>
+                      {copiedColorIndex === i ? (
+                        // Checkmark icon when copied
+                        <svg
+                          className="w-4 h-4 transition-opacity"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        // Copy icon (default state)
+                        <svg
+                          className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                          />
+                        </svg>
+                      )}
+                    </button>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
-                  <span className="font-medium">OKLCH:</span>
-                  <div className="flex items-center font-mono">
-                    oklch({oklchInfo.l} {oklchInfo.c} {oklchInfo.h})
-                  </div>
                   <span className="font-medium">Lightness:</span>
                   <span className="font-mono">{oklchInfo.l}</span>
                   <span className="font-medium">Chroma:</span>
@@ -282,27 +377,31 @@ export function ColorScale({
                   <span className="font-mono">{oklchInfo.h}°</span>
                 </div>
 
-                {/* Always show contrast information in the dialog */}
+                {/* Always show contrast score in the dialog */}
                 {pairsWithSteps && pairsWithSteps.length > 0 && (
-                  <div className="border-t pt-3 mt-3">
-                    <h5 className="font-medium mb-2">Contrast Information:</h5>
+                  <div className="pt-3 mt-3 border-t">
                     <div className="max-h-[120px] overflow-y-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="border-b border-gray-200 dark:border-gray-700">
-                            <th className="text-left py-1 pr-2">Color</th>
-                            <th className="text-right py-1">
+                          <tr className="border-b border-neutral-subtle">
+                            <th className="py-1 pr-2 text-left">On step</th>
+                            <th className="py-1 text-right">
                               {contrastMethod} Contrast
                             </th>
                           </tr>
                         </thead>
                         <tbody>
-                          {pairsWithSteps.map((colorPair, colorPairIndex) => {
+                          {pairsWithSteps.map((contrastReq, colorPairIndex) => {
+                            const targetStepIndex = getStepIndex(
+                              contrastReq.targetStep,
+                            )(PALETTE_STEPS)
+                            if (targetStepIndex === -1) return null
+
                             const contrastArray = contrasts[i]
                             const contrastValue =
                               contrastArray &&
                               colorPairIndex < contrastArray.length
-                                ? contrastArray[colorPairIndex]?.contrastValue
+                                ? contrastArray[colorPairIndex]
                                 : undefined
 
                             let isContrastValid = false
@@ -310,41 +409,40 @@ export function ColorScale({
                               if (contrastMethod === 'APCA') {
                                 isContrastValid =
                                   parseFloat(String(contrastValue)) >=
-                                  colorPair.lc.value
+                                  contrastReq.lc.value
                               } else {
                                 isContrastValid =
                                   parseFloat(String(contrastValue)) >=
-                                  colorPair.wcag.value
+                                  contrastReq.wcag.value
                               }
                             }
 
                             const scoreColor = isContrastValid
-                              ? 'text-green-500 dark:text-green-400'
-                              : 'text-red-500 dark:text-red-400'
+                              ? 'text-success-subtle'
+                              : 'text-danger-subtle'
 
                             return (
                               <tr
-                                key={`dialog-contrast-${colorPair.stepIndex}`}
-                                className="border-b border-gray-100 dark:border-gray-800"
+                                key={`dialog-contrast-${targetStepIndex}`}
+                                className="border-b border-neutral-subtle"
                               >
-                                <td className="py-1 pr-2 flex items-center gap-2">
+                                <td className="flex items-center gap-2 py-1 pr-2">
                                   <div
-                                    className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-700"
+                                    className="w-3 h-3 border border-neutral-subtle rounded-full"
                                     style={{
-                                      backgroundColor:
-                                        colors[colorPair.stepIndex],
+                                      backgroundColor: colors[targetStepIndex],
                                     }}
                                   />
-                                  #{colorPair.stepIndex + 1}
+                                  {targetStepIndex + 1}
                                 </td>
-                                <td className="text-right py-1">
+                                <td className="py-1 text-right">
                                   <span className={`font-mono ${scoreColor}`}>
                                     {contrastMethod === 'APCA' &&
                                       contrastValue &&
-                                      `${contrastValue} (${colorPair.lc.value})`}
+                                      `${contrastValue} (${contrastReq.lc.value})`}
                                     {contrastMethod === 'WCAG21' &&
                                       contrastValue &&
-                                      `${contrastValue}:1 (${colorPair.wcag.value})`}
+                                      `${contrastValue}:1 (${contrastReq.wcag.value})`}
                                   </span>
                                 </td>
                               </tr>
@@ -360,11 +458,16 @@ export function ColorScale({
               {showContrast && (
                 <div className="flex flex-col h-full pt-3">
                   <ul className="space-y-1 text-[11px]">
-                    {pairsWithSteps?.map((colorPair, colorPairIndex) => {
+                    {pairsWithSteps?.map((contrastReq, colorPairIndex) => {
+                      const targetStepIndex = getStepIndex(
+                        contrastReq.targetStep,
+                      )(PALETTE_STEPS)
+                      if (targetStepIndex === -1) return null
+
                       const contrastArray = contrasts[i]
                       const contrastValue =
                         contrastArray && colorPairIndex < contrastArray.length
-                          ? contrastArray[colorPairIndex]?.contrastValue
+                          ? contrastArray[colorPairIndex]
                           : undefined
                       let isContrastValid = false
 
@@ -372,31 +475,36 @@ export function ColorScale({
                         if (contrastMethod === 'APCA') {
                           isContrastValid =
                             parseFloat(String(contrastValue)) >=
-                            colorPair.lc.value
+                            contrastReq.lc.value
                         } else {
                           isContrastValid =
                             parseFloat(String(contrastValue)) >=
-                            colorPair.wcag.value
+                            contrastReq.wcag.value
                         }
                       }
 
-                      const scoreColor = isContrastValid
-                        ? 'text-green-500'
-                        : 'text-red-500'
+                      const status = isContrastValid ? 'success' : 'danger'
+                      const textStatusClassName =
+                        getSystemTextColorClassNameForStep({
+                          stepIndex: i + 1,
+                          status,
+                        })
                       return (
                         <li
-                          key={`background-pairing-${colorPair.stepIndex}`}
+                          key={`background-pairing-${targetStepIndex}`}
                           className="flex items-center justify-between"
                         >
-                          <span>#{colorPair.stepIndex + 1}</span>
+                          <span>{targetStepIndex + 1}</span>
                           <span>
-                            <strong className={'font-mono ' + scoreColor}>
+                            <strong
+                              className={'font-mono ' + textStatusClassName}
+                            >
                               {contrastMethod === 'APCA' &&
                                 contrastValue &&
-                                `${contrastValue} (${colorPair.lc.value})`}
+                                `${contrastValue} (${contrastReq.lc.value})`}
                               {contrastMethod === 'WCAG21' &&
                                 contrastValue &&
-                                `${contrastValue}:1 (${colorPair.wcag.value})`}
+                                `${contrastValue}:1 (${contrastReq.wcag.value})`}
                             </strong>
                           </span>
                         </li>

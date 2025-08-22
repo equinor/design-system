@@ -14,7 +14,7 @@ export const GaussianParametersPanel = ({
   setStdDev,
 }: GaussianParametersPanelProps) => {
   return (
-    <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
+    <fieldset className="p-6 space-y-4 border border-neutral-subtle rounded-lg">
       <legend className="mb-2 font-medium">Gaussian Parameters</legend>
       <div className="space-y-4">
         <label className="block">

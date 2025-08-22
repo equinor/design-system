@@ -1,30 +1,102 @@
 @import 'tailwindcss';
-
+@import './colors.css';
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root,
+[data-color-scheme='light'],
+.light {
+  color-scheme: light;
+}
+
+[data-color-scheme='dark'],
+.dark {
+  color-scheme: dark;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: light-dark(
+    var(--color-gray-background-default),
+    var(--color-gray-background-subtle)
+  );
+  --text: var(--color-gray-text-strong);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --background-color-canvas: light-dark(
+    var(--color-gray-background-subtle),
+    var(--color-gray-background-default)
+  );
+  --background-color-surface: light-dark(
+    var(--color-gray-background-default),
+    var(--color-gray-background-subtle)
+  );
+  --background-color-default: var(--background);
+
+  --background-color-neutral-medium-default: var(
+    --color-gray-background-medium-default
+  );
+  --background-color-neutral-medium-hover: var(
+    --color-gray-background-medium-hover
+  );
+  --background-color-neutral-medium-active: var(
+    --color-gray-background-medium-active
+  );
+
+  --background-color-primary-default: var(
+    --color-moss-green-background-strong-default
+  );
+  --background-color-primary-hover: var(
+    --color-moss-green-background-strong-hover
+  );
+  --background-color-primary-active: var(
+    --color-moss-green-background-strong-active
+  );
+
+  --background-color-danger-medium-default: var(
+    --color-red-background-medium-default
+  );
+  --background-color-danger-medium-hover: var(
+    --color-red-background-medium-hover
+  );
+  --background-color-danger-medium-active: var(
+    --color-red-background-medium-active
+  );
+
+  --background-color-input: var(--background-color-canvas);
+  --border-color-input: var(--color-gray-border-subtle);
+
+  --border-color-neutral-subtle: var(--color-gray-border-subtle);
+  --border-color-neutral-medium: var(--color-gray-border-medium);
+  --border-color-neutral-strong: var(--color-gray-border-strong);
+
+  --text-color-strong: var(--color-gray-text-strong);
+  --text-color-subtle: var(--color-gray-text-subtle);
+
+  --text-color-contrast-strong: var(--color-gray-text-contrast-strong);
+  --text-color-contrast-subtle: var(--color-gray-text-contrast-subtle);
+
+  --text-color-default: var(--color-gray-text-strong);
+  --text-color-success-subtle: var(--color-green-text-subtle);
+  --text-color-success-strong: var(--color-green-text-strong);
+  --text-color-success-contrast-strong: var(--color-green-text-contrast-strong);
+  --text-color-success-contrast-subtle: var(--color-green-text-contrast-subtle);
+
+  --text-color-danger-subtle: var(--color-red-text-subtle);
+  --text-color-danger-strong: var(--color-red-text-strong);
+  --text-color-danger-contrast-strong: var(--color-red-text-contrast-strong);
+  --text-color-danger-contrast-subtle: var(--color-red-text-contrast-subtle);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@source inline("text-success-{subtle,strong,contrast-{subtle,strong}}");
+@source inline("text-danger-{subtle,strong,contrast-{subtle,strong}}");
 
 html,
 body {
   min-height: 100vh;
   background: var(--background);
-  color: var(--foreground);
+  color: var(--text);
   font-family: var(--font-geist-sans);
 }

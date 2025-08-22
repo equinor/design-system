@@ -16,12 +16,12 @@ export const ColorManagement = ({
   onAddColor,
 }: ColorManagementProps) => {
   return (
-    <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
-      <legend className="mb-2 font-medium">Color Management</legend>
+    <fieldset className="p-6 space-y-4 border border-neutral-subtle rounded-lg">
+      <legend className="mb-2 font-medium">Colours</legend>
 
       <div className="max-w-3xl mx-auto">
         {/* Header Row */}
-        <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-gray-200 dark:border-gray-800 pb-2 font-medium">
+        <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-neutral-subtle pb-2 font-medium">
           <div className="text-left">Name</div>
           <div className="text-left">Colour</div>
           <div className="text-right">Action</div>
@@ -32,13 +32,13 @@ export const ColorManagement = ({
           {colors.map((color, index) => (
             <div
               key={`color-${index}`}
-              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-center p-2 border-b border-gray-200 dark:border-gray-800"
+              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-center p-2 border-b border-neutral-subtle"
             >
               {/* Name Field */}
               <div>
                 <input
                   type="text"
-                  className="w-full p-2 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                  className="w-full p-2 text-sm bg-input border border-input rounded"
                   value={color.name}
                   onChange={(e) => onUpdateColorName(index, e.target.value)}
                   data-testid={`color-name-input-${index}`}
@@ -49,7 +49,7 @@ export const ColorManagement = ({
               <div className="flex items-center gap-2">
                 <input
                   type="color"
-                  className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
+                  className="w-8 h-8 border border-neutral-medium rounded cursor-pointer"
                   value={color.hex}
                   onChange={(e) => onUpdateColorHex(index, e.target.value)}
                   data-testid={`color-hex-input-${index}`}
@@ -59,7 +59,7 @@ export const ColorManagement = ({
               {/* Actions */}
               <div className="text-right">
                 <button
-                  className="px-3 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-700"
+                  className="px-3 py-1 text-xs bg-danger-medium-default hover:bg-danger-medium-hover rounded"
                   onClick={() => onRemoveColor(index)}
                   disabled={colors.length <= 1}
                   data-testid={`remove-color-button-${index}`}
@@ -71,10 +71,9 @@ export const ColorManagement = ({
           ))}
         </div>
 
-        {/* Add New Color Button */}
-        <div className="text-left mt-4">
+        <div className="mt-4 text-left">
           <button
-            className="px-4 py-2 text-sm text-white bg-[#007079] rounded"
+            className="px-4 py-2 text-sm text-contrast-strong bg-primary-default hover:bg-primary-hover rounded"
             onClick={() => {
               const randomColor =
                 '#' +
@@ -88,7 +87,7 @@ export const ColorManagement = ({
             }}
             data-testid="add-color-button"
           >
-            Add New Color
+            Add
           </button>
         </div>
       </div>

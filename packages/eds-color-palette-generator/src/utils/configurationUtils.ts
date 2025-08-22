@@ -1,6 +1,7 @@
-import { ColorDefinition } from '@/types'
+import { ColorDefinition, ColorFormat } from '@/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
+import { PALETTE_STEPS, getLightnessValues } from '@/config/config'
 
 /**
  * Download the current configuration as a JSON file
@@ -48,6 +49,7 @@ export const downloadColorTokens = (
   customDarkModeValues: number[],
   mean: number,
   stdDev: number,
+  format: ColorFormat,
 ) => {
   // Create objects with the required structure
   const lightColors: Record<string, string[]> = {}
@@ -60,7 +62,7 @@ export const downloadColorTokens = (
       customLightModeValues,
       mean,
       stdDev,
-      'light',
+      format, // Use the user's selected format
     )
 
     darkColors[colorDef.name] = generateColorScale(
@@ -68,7 +70,7 @@ export const downloadColorTokens = (
       customDarkModeValues,
       mean,
       stdDev,
-      'dark',
+      format, // Use the user's selected format
     )
   })
 
@@ -106,5 +108,82 @@ export const downloadColorTokens = (
     document.body.removeChild(darkAnchor)
     URL.revokeObjectURL(lightUrl)
     URL.revokeObjectURL(darkUrl)
+  }, 0)
+}
+
+/**
+ * Generate CSS variables for design system colors using light-dark() function
+ */
+export const generateDesignSystemCSS = (
+  colors: ColorDefinition[],
+  mean: number = 0.7,
+  stdDev: number = 2,
+  colorFormat: ColorFormat,
+) => {
+  // Use the palette steps for lightness values
+  const lightModeValues = getLightnessValues('light')(PALETTE_STEPS)
+  const darkModeValues = getLightnessValues('dark')(PALETTE_STEPS)
+
+  // Generate CSS using light-dark() function
+  let css =
+    ':root {\n  /* Design system colors using light-dark() function */\n'
+
+  colors.forEach((colorDef) => {
+    const lightColorScale = generateColorScale(
+      colorDef.hex,
+      lightModeValues,
+      mean,
+      stdDev,
+      colorFormat,
+    )
+
+    const darkColorScale = generateColorScale(
+      colorDef.hex,
+      darkModeValues,
+      mean,
+      stdDev,
+      colorFormat,
+    )
+
+    const colorName = colorDef.name.toLowerCase().replace(/\s+/g, '-')
+
+    lightColorScale.forEach((lightColor, index) => {
+      const darkColor = darkColorScale[index]
+      const stepName = PALETTE_STEPS[index]?.id || `step-${index + 1}`
+      css += `  --color-${colorName}-${stepName}: light-dark(${lightColor}, ${darkColor});\n`
+    })
+    css += '\n'
+  })
+
+  css += '}\n'
+  return css
+}
+
+/**
+ * Download CSS variables for design system colors
+ */
+export const downloadDesignSystemCSS = (
+  colors: ColorDefinition[],
+  mean: number,
+  stdDev: number,
+  colorFormat: ColorFormat,
+) => {
+  const cssContent = generateDesignSystemCSS(colors, mean, stdDev, colorFormat)
+
+  const blob = new Blob([cssContent], {
+    type: 'text/css',
+  })
+  const url = URL.createObjectURL(blob)
+
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'colors.css'
+  document.body.appendChild(a)
+  a.click()
+
+  // Clean up
+  setTimeout(() => {
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
   }, 0)
 }

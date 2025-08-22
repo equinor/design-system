@@ -10,7 +10,7 @@ test('should change color name and hex', async ({ page }) => {
   await page.getByTestId('color-hex-input-0').click()
   await page.getByTestId('color-hex-input-0').fill('#ee7e17')
 
-  await expect(page.getByTestId('color-step-brand-11')).toMatchAriaSnapshot(
-    `- 'button /Color \\d+: #ee7e17, Click for details/'`,
+  await expect(page.getByTestId('brand-10')).toMatchAriaSnapshot(
+    '- \'button "Color 11: #9f561b, Click for details"\'',
   )
 })
