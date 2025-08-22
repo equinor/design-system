@@ -363,7 +363,7 @@ export function ColorScale({
                   <span className="font-mono">{oklchInfo.h}°</span>
                 </div>
 
-                {/* Always show contrast information in the dialog */}
+                {/* Always show contrast score in the dialog */}
                 {pairsWithSteps && pairsWithSteps.length > 0 && (
                   <div className="pt-3 mt-3 border-t">
                     <div className="max-h-[120px] overflow-y-auto">

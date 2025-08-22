@@ -75,11 +75,11 @@ export const DisplayOptionsPanel = ({
           onChange={(e) => setShowContrast(e.target.checked)}
           className="accent-current"
         />
-        <span>Show contrast information</span>
+        <span>Show contrast score</span>
       </label>
       {showContrast && (
         <div className="pl-6 mt-3">
-          <p className="mb-2 text-sm">Contrast calculation method</p>
+          <p className="mb-2 text-sm">Algorithm</p>
           <div className="flex gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
