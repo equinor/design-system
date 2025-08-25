@@ -140,8 +140,11 @@ function buildContrastTables() {
         '| Foreground | Background | Light APCA | Light WCAG | Dark APCA | Dark WCAG | Required APCA | Required WCAG |'
       const sep =
         '| ---------- | ---------- | ---------- | ----------- | --------- | --------- | ------------- | ------------- |'
-      const swatch = (hex: string, label?: string) =>
-        `<span style=\"display:inline-block;width:12px;height:12px;background:${hex};border:1px solid #999;border-radius:2px;vertical-align:middle;margin-left:4px;\" aria-label=\"${label || hex}\"></span>`
+      const normalizeHex = (h: string) => h.toUpperCase()
+      const swatch = (hex: string, label?: string) => {
+        const h = normalizeHex(hex)
+        return `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\" aria-label=\"${label || h}\" style=\"vertical-align:middle;margin-left:4px;\"><title>${label || h}</title><rect x=\"0.5\" y=\"0.5\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\" fill=\"${h}\" stroke=\"#999\"/></svg>`
+      }
       const toHex = (val: string): string => {
         try {
           return new Color(val).toString({ format: 'hex' })
