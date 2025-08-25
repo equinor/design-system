@@ -380,79 +380,77 @@ export function ColorScale({
                 {/* Always show contrast score in the dialog */}
                 {pairsWithSteps && pairsWithSteps.length > 0 && (
                   <div className="pt-3 mt-3 border-t">
-                    <div className="max-h-[120px] overflow-y-auto">
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="border-b border-neutral-subtle">
-                            <th className="py-1 pr-2 text-left">Pairs with</th>
-                            <th className="py-1 text-right">
-                              {contrastMethod === 'APCA' &&
-                                'Lightness contrast (Lc)'}
-                              {contrastMethod === 'WCAG21' && 'Contrast Ratio'}
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {pairsWithSteps.map((contrastReq, colorPairIndex) => {
-                            const targetStepIndex = getStepIndex(
-                              contrastReq.targetStep,
-                            )(PALETTE_STEPS)
-                            if (targetStepIndex === -1) return null
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-neutral-subtle">
+                          <th className="py-1 pr-2 text-left">Pairs with</th>
+                          <th className="py-1 text-right">
+                            {contrastMethod === 'APCA' &&
+                              'Lightness contrast (Lc)'}
+                            {contrastMethod === 'WCAG21' && 'Contrast Ratio'}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {pairsWithSteps.map((contrastReq, colorPairIndex) => {
+                          const targetStepIndex = getStepIndex(
+                            contrastReq.targetStep,
+                          )(PALETTE_STEPS)
+                          if (targetStepIndex === -1) return null
 
-                            const contrastArray = contrasts[i]
-                            const contrastValue =
-                              contrastArray &&
-                              colorPairIndex < contrastArray.length
-                                ? contrastArray[colorPairIndex]
-                                : undefined
+                          const contrastArray = contrasts[i]
+                          const contrastValue =
+                            contrastArray &&
+                            colorPairIndex < contrastArray.length
+                              ? contrastArray[colorPairIndex]
+                              : undefined
 
-                            let isContrastValid = false
-                            if (contrastValue !== undefined) {
-                              if (contrastMethod === 'APCA') {
-                                isContrastValid =
-                                  parseFloat(String(contrastValue)) >=
-                                  contrastReq.lc.value
-                              } else {
-                                isContrastValid =
-                                  parseFloat(String(contrastValue)) >=
-                                  contrastReq.wcag.value
-                              }
+                          let isContrastValid = false
+                          if (contrastValue !== undefined) {
+                            if (contrastMethod === 'APCA') {
+                              isContrastValid =
+                                parseFloat(String(contrastValue)) >=
+                                contrastReq.lc.value
+                            } else {
+                              isContrastValid =
+                                parseFloat(String(contrastValue)) >=
+                                contrastReq.wcag.value
                             }
+                          }
 
-                            const scoreColor = isContrastValid
-                              ? 'text-success-subtle'
-                              : 'text-danger-subtle'
+                          const scoreColor = isContrastValid
+                            ? 'text-success-subtle'
+                            : 'text-danger-subtle'
 
-                            return (
-                              <tr
-                                key={`dialog-contrast-${targetStepIndex}`}
-                                className="border-b border-neutral-subtle"
-                              >
-                                <td className="flex items-center gap-2 py-1 pr-2">
-                                  <div
-                                    className="w-3 h-3 border border-neutral-subtle rounded-full"
-                                    style={{
-                                      backgroundColor: colors[targetStepIndex],
-                                    }}
-                                  />
-                                  {targetStepIndex + 1}
-                                </td>
-                                <td className="py-1 text-right">
-                                  <span className={`font-mono ${scoreColor}`}>
-                                    {contrastMethod === 'APCA' &&
-                                      contrastValue &&
-                                      `${contrastValue} (${contrastReq.lc.value})`}
-                                    {contrastMethod === 'WCAG21' &&
-                                      contrastValue &&
-                                      `${contrastValue}:1 (${contrastReq.wcag.value})`}
-                                  </span>
-                                </td>
-                              </tr>
-                            )
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
+                          return (
+                            <tr
+                              key={`dialog-contrast-${targetStepIndex}`}
+                              className="border-b border-neutral-subtle"
+                            >
+                              <td className="flex items-center gap-2 py-1 pr-2">
+                                <div
+                                  className="w-3 h-3 border border-neutral-subtle rounded-full"
+                                  style={{
+                                    backgroundColor: colors[targetStepIndex],
+                                  }}
+                                />
+                                {targetStepIndex + 1}
+                              </td>
+                              <td className="py-1 text-right">
+                                <span className={`font-mono ${scoreColor}`}>
+                                  {contrastMethod === 'APCA' &&
+                                    contrastValue &&
+                                    `${contrastValue} (${contrastReq.lc.value})`}
+                                  {contrastMethod === 'WCAG21' &&
+                                    contrastValue &&
+                                    `${contrastValue}:1 (${contrastReq.wcag.value})`}
+                                </span>
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 )}
               </dialog>
