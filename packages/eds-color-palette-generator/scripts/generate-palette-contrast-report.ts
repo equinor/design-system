@@ -15,6 +15,7 @@ import config, {
   darknessValuesInDarkMode,
 } from '../src/config/config'
 import { generateColorScale, contrast } from '../src/utils/color'
+import Color from 'colorjs.io'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -130,20 +131,6 @@ function computeContrasts() {
   })
 }
 
-function buildScaleTables() {
-  const scales = buildScales()
-  return scales
-    .map((scale) => {
-      const header =
-        '| Step ID | Light Mode (OKLCH) | Dark Mode (OKLCH) |'
-      const sep = '| ------- | ------------------ | ----------------- |'
-      const lines = Object.entries(scale.mapping).map(
-        ([id, val]) => `| ${id} | ${val.light} | ${val.dark} |`,
-      )
-      return `### ${scale.name} (${scale.hex})\n\n${header}\n${sep}\n${lines.join('\n')}`
-    })
-    .join('\n\n')
-}
 
 function buildContrastTables() {
   const datasets = computeContrasts()
@@ -153,9 +140,20 @@ function buildContrastTables() {
         '| Foreground | Background | Light APCA | Light WCAG | Dark APCA | Dark WCAG | Required APCA | Required WCAG |'
       const sep =
         '| ---------- | ---------- | ---------- | ----------- | --------- | --------- | ------------- | ------------- |'
+      const swatch = (hex: string, label?: string) =>
+        `<span style=\"display:inline-block;width:12px;height:12px;background:${hex};border:1px solid #999;border-radius:2px;vertical-align:middle;margin-left:4px;\" aria-label=\"${label || hex}\"></span>`
+      const toHex = (val: string): string => {
+        try {
+          return new Color(val).toString({ format: 'hex' })
+        } catch {
+          return '#000000'
+        }
+      }
+      const pairSwatch = (light: string, dark: string, role: string) =>
+        `${swatch(toHex(light), role + ' light')} ${swatch(toHex(dark), role + ' dark')}`
       const lines = rows.map(
         (r) =>
-          `| ${r.foreground} | ${r.background} | ${r.lightApca}${r.lightApcaPass ? ' ✅' : ' ❌'} | ${r.lightWcag}${r.lightWcagPass ? ' ✅' : ' ❌'} | ${r.darkApca}${r.darkApcaPass ? ' ✅' : ' ❌'} | ${r.darkWcag}${r.darkWcagPass ? ' ✅' : ' ❌'} | ${r.requiredApca} | ${r.requiredWcag} |`,
+          `| ${r.foreground} ${pairSwatch(scale.mapping[r.foreground].light, scale.mapping[r.foreground].dark, 'foreground')} | ${r.background} ${pairSwatch(scale.mapping[r.background].light, scale.mapping[r.background].dark, 'background')} | ${r.lightApca}${r.lightApcaPass ? ' ✅' : ' ❌'} | ${r.lightWcag}${r.lightWcagPass ? ' ✅' : ' ❌'} | ${r.darkApca}${r.darkApcaPass ? ' ✅' : ' ❌'} | ${r.darkWcag}${r.darkWcagPass ? ' ✅' : ' ❌'} | ${r.requiredApca} | ${r.requiredWcag} |`,
       )
       const total = rows.length * 4
       const passed = rows.reduce(
@@ -175,7 +173,7 @@ function buildContrastTables() {
 
 function generate() {
   const date = new Date().toISOString().split('T')[0]
-  const content = `# Palette Contrast Report\n\nGenerated: ${date}\n\n## Color Scales\n\n${buildScaleTables()}\n\n## Contrast Values\n\n${buildContrastTables()}\n\n---\n\n_This document is auto-generated; update \`config.ts\` or \`color.ts\` to change source values._\n`
+  const content = `# Palette Contrast Report\n\nGenerated: ${date}\n\n## Contrast Values\n\n${buildContrastTables()}\n\n---\n\n_This document is auto-generated; update \`config.ts\` or \`color.ts\` to change source values._\n`
   fs.writeFileSync(outPath, content, 'utf8')
   console.log(`Contrast report generated -> ${path.relative(process.cwd(), outPath)}`)
 }
