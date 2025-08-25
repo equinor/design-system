@@ -185,7 +185,7 @@ export const BORDER_MEDIUM: StepDefinition = {
   name: 'Border Medium',
   category: 'border',
   variant: 'medium',
-  lightValue: 0.7,
+  lightValue: 0.73,
   darkValue: 0.66,
   contrastWith: [
     {
@@ -221,7 +221,7 @@ export const BORDER_STRONG: StepDefinition = {
   name: 'Border Strong',
   category: 'border',
   variant: 'strong',
-  lightValue: 0.66,
+  lightValue: 0.62,
   darkValue: 0.68,
   contrastWith: [
     {
@@ -246,6 +246,11 @@ export const BORDER_STRONG: StepDefinition = {
     },
     {
       targetStep: 'background-medium-active',
+      lc: APCA_CONTRAST_LEVELS.LC_15,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+    },
+    {
+      targetStep: 'border-medium',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
