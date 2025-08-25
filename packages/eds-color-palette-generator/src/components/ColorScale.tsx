@@ -270,7 +270,7 @@ export function ColorScale({
                   return undefined
                 }}
                 id={`color-dialog-${i}`}
-                className="min-w-[220px] backdrop:bg-black/20 cursor-default"
+                className="min-w-[320px] backdrop:bg-black/20 cursor-default"
                 style={{
                   backgroundColor: colors[0],
                   color: colors[12],
@@ -368,14 +368,14 @@ export function ColorScale({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
+                {/* <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
                   <span className="font-medium">Lightness:</span>
                   <span className="font-mono">{oklchInfo.l}</span>
                   <span className="font-medium">Chroma:</span>
                   <span className="font-mono">{oklchInfo.c}</span>
                   <span className="font-medium">Hue:</span>
                   <span className="font-mono">{oklchInfo.h}°</span>
-                </div>
+                </div> */}
 
                 {/* Always show contrast score in the dialog */}
                 {pairsWithSteps && pairsWithSteps.length > 0 && (
@@ -384,9 +384,11 @@ export function ColorScale({
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-neutral-subtle">
-                            <th className="py-1 pr-2 text-left">On step</th>
+                            <th className="py-1 pr-2 text-left">Pairs with</th>
                             <th className="py-1 text-right">
-                              {contrastMethod} Contrast
+                              {contrastMethod === 'APCA' &&
+                                'Lightness contrast (Lc)'}
+                              {contrastMethod === 'WCAG21' && 'Contrast Ratio'}
                             </th>
                           </tr>
                         </thead>
