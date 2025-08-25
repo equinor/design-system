@@ -8,7 +8,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { PALETTE_STEPS, StepDefinition } from '../src/config/config'
+import { PALETTE_STEPS } from '../src/config/config'
 import { APCA_CONTRAST_LEVELS } from '../src/config/APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from '../src/config/WCAG_CONTRAST_LEVELS'
 
@@ -33,15 +33,9 @@ function formatNumber(n: number, digits = 2) {
   return n.toFixed(digits)
 }
 
-function hasContrast(step: StepDefinition) {
-  return step.contrastWith && step.contrastWith.length > 0
-}
-
 function buildStepsTable() {
-  const header =
-    '| ID | Name | Category | Variant | Light (L) | Dark (L) | Contrast Reqs |'
-  const sep =
-    '| --- | ---- | -------- | ------- | --------- | -------- | ------------- |'
+  const header = '| ID | Name | Category | Variant | Light (L) | Dark (L) |'
+  const sep = '| --- | ---- | -------- | ------- | --------- | -------- |'
   const rows = PALETTE_STEPS.map((s) =>
     [
       s.id,
@@ -50,7 +44,6 @@ function buildStepsTable() {
       s.variant,
       formatNumber(s.lightValue, 2),
       formatNumber(s.darkValue, 2),
-      hasContrast(s) ? 'Yes' : '',
     ]
       .map((v) => mdEscape(String(v)))
       .join(' | '),

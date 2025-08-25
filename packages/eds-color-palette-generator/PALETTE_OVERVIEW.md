@@ -6,23 +6,23 @@ Generated: 2025-08-25
 
 ## Step Definitions
 
-| ID | Name | Category | Variant | Light (L) | Dark (L) | Contrast Reqs |
-| --- | ---- | -------- | ------- | --------- | -------- | ------------- |
-| background-default | Background Default | background | default | 1.00 | 0.15 |  |
-| background-subtle | Background Subtle | background | subtle | 0.96 | 0.25 |  |
-| background-medium-default | Background Medium Default | background-medium | medium-default | 0.88 | 0.45 | Yes |
-| background-medium-hover | Background Medium Hover | background-medium | medium-hover | 0.84 | 0.48 | Yes |
-| background-medium-active | Background Medium Active | background-medium | medium-active | 0.80 | 0.50 | Yes |
-| border-subtle | Border Subtle | border | subtle | 0.82 | 0.63 | Yes |
-| border-medium | Border Medium | border | medium | 0.70 | 0.66 | Yes |
-| border-strong | Border Strong | border | strong | 0.66 | 0.68 | Yes |
-| background-strong-default | Background Strong Default | background-strong | strong-default | 0.50 | 0.78 | Yes |
-| background-strong-hover | Background Strong Hover | background-strong | strong-hover | 0.44 | 0.85 | Yes |
-| background-strong-active | Background Strong Active | background-strong | strong-active | 0.42 | 0.92 | Yes |
-| text-subtle | Text Subtle | text | subtle | 0.40 | 0.91 | Yes |
-| text-strong | Text Strong | text | strong | 0.32 | 0.99 | Yes |
-| text-contrast-subtle | Text Contrast Subtle | text | contrast-subtle | 0.89 | 0.30 | Yes |
-| text-contrast-strong | Text Contrast Strong | text | contrast-strong | 0.99 | 0.10 | Yes |
+| ID | Name | Category | Variant | Light (L) | Dark (L) |
+| --- | ---- | -------- | ------- | --------- | -------- |
+| background-default | Background Default | background | default | 1.00 | 0.15 |
+| background-subtle | Background Subtle | background | subtle | 0.96 | 0.25 |
+| background-medium-default | Background Medium Default | background-medium | medium-default | 0.88 | 0.45 |
+| background-medium-hover | Background Medium Hover | background-medium | medium-hover | 0.84 | 0.48 |
+| background-medium-active | Background Medium Active | background-medium | medium-active | 0.80 | 0.50 |
+| border-subtle | Border Subtle | border | subtle | 0.82 | 0.63 |
+| border-medium | Border Medium | border | medium | 0.70 | 0.66 |
+| border-strong | Border Strong | border | strong | 0.66 | 0.68 |
+| background-strong-default | Background Strong Default | background-strong | strong-default | 0.50 | 0.78 |
+| background-strong-hover | Background Strong Hover | background-strong | strong-hover | 0.44 | 0.85 |
+| background-strong-active | Background Strong Active | background-strong | strong-active | 0.42 | 0.92 |
+| text-subtle | Text Subtle | text | subtle | 0.40 | 0.91 |
+| text-strong | Text Strong | text | strong | 0.32 | 0.99 |
+| text-contrast-subtle | Text Contrast Subtle | text | contrast-subtle | 0.89 | 0.30 |
+| text-contrast-strong | Text Contrast Strong | text | contrast-strong | 0.99 | 0.10 |
 
 ## Contrast Requirements (Foreground → Background)
 
