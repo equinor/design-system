@@ -421,7 +421,7 @@ export const TEXT_CONTRAST_STRONG: StepDefinition = {
   category: 'text',
   variant: 'contrast-strong',
   lightValue: 0.99,
-  darkValue: 0.1,
+  darkValue: 0.26,
   contrastWith: [
     {
       targetStep: 'background-strong-default',
