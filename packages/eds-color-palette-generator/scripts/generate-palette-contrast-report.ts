@@ -137,14 +137,9 @@ function buildContrastTables() {
   return datasets
     .map(({ scale, rows }) => {
       const header =
-        '| Foreground | Background | Light APCA | Light WCAG | Dark APCA | Dark WCAG | Required APCA | Required WCAG |'
+        '| Foreground | Background | Fg Light HEX | Fg Dark HEX | Bg Light HEX | Bg Dark HEX | Light APCA | Light WCAG | Dark APCA | Dark WCAG | Required APCA | Required WCAG |'
       const sep =
-        '| ---------- | ---------- | ---------- | ----------- | --------- | --------- | ------------- | ------------- |'
-      const normalizeHex = (h: string) => h.toUpperCase()
-      const swatch = (hex: string, label?: string) => {
-        const h = normalizeHex(hex)
-        return `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\" aria-label=\"${label || h}\" style=\"vertical-align:middle;margin-left:4px;\"><title>${label || h}</title><rect x=\"0.5\" y=\"0.5\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\" fill=\"${h}\" stroke=\"#999\"/></svg>`
-      }
+        '| ---------- | ---------- | ------------ | ----------- | ------------ | ----------- | ---------- | ----------- | --------- | --------- | ------------- | ------------- |'
       const toHex = (val: string): string => {
         try {
           return new Color(val).toString({ format: 'hex' })
@@ -152,11 +147,9 @@ function buildContrastTables() {
           return '#000000'
         }
       }
-      const pairSwatch = (light: string, dark: string, role: string) =>
-        `${swatch(toHex(light), role + ' light')} ${swatch(toHex(dark), role + ' dark')}`
       const lines = rows.map(
         (r) =>
-          `| ${r.foreground} ${pairSwatch(scale.mapping[r.foreground].light, scale.mapping[r.foreground].dark, 'foreground')} | ${r.background} ${pairSwatch(scale.mapping[r.background].light, scale.mapping[r.background].dark, 'background')} | ${r.lightApca}${r.lightApcaPass ? ' ✅' : ' ❌'} | ${r.lightWcag}${r.lightWcagPass ? ' ✅' : ' ❌'} | ${r.darkApca}${r.darkApcaPass ? ' ✅' : ' ❌'} | ${r.darkWcag}${r.darkWcagPass ? ' ✅' : ' ❌'} | ${r.requiredApca} | ${r.requiredWcag} |`,
+          `| ${r.foreground} | ${r.background} | ${toHex(scale.mapping[r.foreground].light)} | ${toHex(scale.mapping[r.foreground].dark)} | ${toHex(scale.mapping[r.background].light)} | ${toHex(scale.mapping[r.background].dark)} | ${r.lightApca}${r.lightApcaPass ? ' ✅' : ' ❌'} | ${r.lightWcag}${r.lightWcagPass ? ' ✅' : ' ❌'} | ${r.darkApca}${r.darkApcaPass ? ' ✅' : ' ❌'} | ${r.darkWcag}${r.darkWcagPass ? ' ✅' : ' ❌'} | ${r.requiredApca} | ${r.requiredWcag} |`,
       )
       const total = rows.length * 4
       const passed = rows.reduce(
