@@ -40,6 +40,8 @@ import {
 import { data, summaryData } from './stories/data'
 import { Virtualizer } from './types'
 import { external_link } from '@equinor/eds-icons'
+import { ClickableCell } from './components/ClickableCell'
+import styled from 'styled-components'
 
 const meta: Meta<typeof EdsDataGrid<Photo>> = {
   title: 'EDS Data grid',
@@ -298,6 +300,125 @@ export const RowSelection: StoryFn<EdsDataGridProps<Photo>> = (args) => {
 RowSelection.args = {
   columnResizeMode: 'onChange',
 } satisfies Partial<EdsDataGridProps<Photo>>
+
+const StoryWrapper = styled.div`
+  table {
+    /* Gives space for cell outline on all sides */
+    margin: 4px;
+  }
+  tr:hover {
+    /* Disable default row hover to let ClickableCell handle its own hover styling */
+    background-color: transparent !important;
+  }
+`
+
+export const ClickableCells: StoryFn<EdsDataGridProps<Photo>> = (args) => {
+  const [selectedCell, setSelectedCell] = useState<string | null>(null)
+
+  const handleCellClick = (cellId: string) => {
+    setSelectedCell((prev) => (prev === cellId ? null : cellId))
+  }
+
+  const clickableColumns = [
+    helper.accessor('id', {
+      header: 'ID',
+      cell: ({ getValue }) => {
+        const cellId = `id-${getValue()}`
+        return (
+          <ClickableCell
+            onClick={() => handleCellClick(cellId)}
+            isSelected={selectedCell === cellId}
+            ariaLabel={`View details for ID ${getValue()}`}
+          >
+            {getValue()}
+          </ClickableCell>
+        )
+      },
+      id: 'clickable_id',
+      size: 100,
+    }),
+    helper.accessor('title', {
+      header: 'Title',
+      cell: ({ getValue }) => {
+        const cellId = `title-${getValue()}`
+        return (
+          <ClickableCell
+            onClick={() => handleCellClick(cellId)}
+            isSelected={selectedCell === cellId}
+            ariaLabel={`Edit ${getValue()}`}
+          >
+            {getValue()}
+          </ClickableCell>
+        )
+      },
+      id: 'clickable_title',
+      size: 300,
+    }),
+    helper.accessor('albumId', {
+      header: 'Actions',
+      cell: ({ row }) => {
+        const cellId = `actions-${row.original.id}`
+        return (
+          <ClickableCell
+            onClick={() => handleCellClick(cellId)}
+            isSelected={selectedCell === cellId}
+            ariaLabel={`More actions for ${row.original.title}`}
+          >
+            ⚙️ Actions
+          </ClickableCell>
+        )
+      },
+      id: 'clickable_actions',
+      size: 150,
+    }),
+    {
+      ...columns[2],
+      id: `regular_${columns[2].id}_2`,
+    },
+    {
+      ...columns[3],
+      id: `regular_${columns[3].id}_3`,
+    },
+  ]
+
+  const cellStyle = (row: Row<Photo>, columnId: string): CSSProperties => {
+    if (
+      ['clickable_id', 'clickable_title', 'clickable_actions'].includes(
+        columnId,
+      )
+    ) {
+      return { padding: 0 }
+    }
+    return {}
+  }
+
+  return (
+    <StoryWrapper>
+      <Typography>Enables accessible interactive cells in DataGrid.</Typography>
+      <br />
+      <Typography>
+        <strong>Requirements:</strong> Use <code>padding: 0</code> in{' '}
+        <code>cellStyle</code> for clickable columns. Selection state must be
+        managed externally via <code>isSelected</code> prop and{' '}
+        <code>ariaLabel</code> is required for accessibility.
+      </Typography>
+      <br />
+      <Typography>
+        <strong>Try it:</strong> Click ID/Title/Actions cells to select. Use Tab
+        + Enter/Space for keyboard navigation. Row hover is disabled in this
+        demo to showcase cell-level hover states.
+      </Typography>
+      <Divider />
+      <pre>Selected cell: {JSON.stringify(selectedCell, null, 2)}</pre>
+      <EdsDataGrid {...args} columns={clickableColumns} cellStyle={cellStyle} />
+    </StoryWrapper>
+  )
+}
+
+ClickableCells.args = {
+  rows: data,
+  onRowClick: undefined,
+}
 
 const SimpleMenu = ({
   text,
