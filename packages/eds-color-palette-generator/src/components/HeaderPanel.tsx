@@ -13,10 +13,10 @@ export const HeaderPanel = ({
   return (
     <div className="flex items-center justify-between mb-8">
       <div>
-        <h1 className="text-2xl">Accessible UI Colour Palette</h1>
+        <h1 className="text-2xl">Accessible Colour Palette</h1>
         <p className="text-md text-subtle">
-          Color palettes are generated using an algorithm for chroma calculation
-          with predefined lightness values.
+          Colours are generated using an algorithm for chroma with predefined
+          lightness values and hues.
         </p>
       </div>
       <div className="flex items-center gap-3">
