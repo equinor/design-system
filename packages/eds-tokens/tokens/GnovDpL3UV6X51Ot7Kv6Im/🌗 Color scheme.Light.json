@@ -1271,20 +1271,6 @@
       }
     }
   },
-  "text-link": {
-    "$type": "color",
-    "$value": "{Light.Blue.13}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {}
-      }
-    }
-  },
   "background-canvas": {
     "$type": "color",
     "$value": "{Light.Gray.2}",
@@ -1344,6 +1330,20 @@
   "border-focus": {
     "$type": "color",
     "$value": "{Light.Blue.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "text-link": {
+    "$type": "color",
+    "$value": "{Light.Blue.13}",
     "$description": "",
     "$extensions": {
       "com.figma": {
