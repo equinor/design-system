@@ -53,7 +53,7 @@
     "Strong": {
       "Default": {
         "$type": "color",
-        "$value": "{Gray.13}",
+        "$value": "{Gray.9}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -69,7 +69,7 @@
       },
       "Hover": {
         "$type": "color",
-        "$value": "{Gray.14}",
+        "$value": "{Gray.10}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -85,7 +85,7 @@
       },
       "Active": {
         "$type": "color",
-        "$value": "{Gray.15}",
+        "$value": "{Gray.11}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -186,7 +186,7 @@
   "Text": {
     "Subtle": {
       "$type": "color",
-      "$value": "{Gray.9}",
+      "$value": "{Gray.12}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -202,7 +202,7 @@
     },
     "Strong": {
       "$type": "color",
-      "$value": "{Gray.10}",
+      "$value": "{Gray.13}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -218,7 +218,7 @@
     },
     "Contrast subtle": {
       "$type": "color",
-      "$value": "{Gray.11}",
+      "$value": "{Gray.14}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
@@ -234,7 +234,7 @@
     },
     "Contrast strong": {
       "$type": "color",
-      "$value": "{Gray.12}",
+      "$value": "{Gray.15}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {

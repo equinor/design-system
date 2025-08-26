@@ -58,7 +58,7 @@
   );
   --color-moss-green-text-contrast-strong: light-dark(
     oklch(0.99 0.013 204.6),
-    oklch(0.1 0.004 204.6)
+    oklch(0.26 0.02 204.6)
   );
 
   --color-gray-background-default: light-dark(oklch(1 0 0), oklch(0.15 0 0));
@@ -98,7 +98,7 @@
   );
   --color-gray-text-contrast-strong: light-dark(
     oklch(0.99 0 0),
-    oklch(0.1 0 0)
+    oklch(0.26 0 0)
   );
 
   --color-green-background-default: light-dark(
@@ -159,7 +159,7 @@
   );
   --color-green-text-contrast-strong: light-dark(
     oklch(0.99 0.025 143),
-    oklch(0.1 0.007 143)
+    oklch(0.26 0.039 143)
   );
 
   --color-blue-background-default: light-dark(
@@ -220,7 +220,7 @@
   );
   --color-blue-text-contrast-strong: light-dark(
     oklch(0.99 0.02 240.7),
-    oklch(0.1 0.006 240.7)
+    oklch(0.26 0.032 240.7)
   );
 
   --color-orange-background-default: light-dark(
@@ -281,7 +281,7 @@
   );
   --color-orange-text-contrast-strong: light-dark(
     oklch(0.99 0.025 58.7),
-    oklch(0.1 0.007 58.7)
+    oklch(0.26 0.039 58.7)
   );
 
   --color-red-background-default: light-dark(
@@ -342,6 +342,6 @@
   );
   --color-red-text-contrast-strong: light-dark(
     oklch(0.99 0.035 21.1),
-    oklch(0.1 0.01 21.1)
+    oklch(0.26 0.055 21.1)
   );
 }

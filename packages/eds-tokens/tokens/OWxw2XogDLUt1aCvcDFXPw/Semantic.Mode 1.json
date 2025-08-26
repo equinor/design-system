@@ -86,7 +86,7 @@
       "Strong": {
         "Default": {
           "$type": "color",
-          "$value": "{Gray.13}",
+          "$value": "{Gray.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -102,7 +102,7 @@
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Gray.14}",
+          "$value": "{Gray.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -118,7 +118,7 @@
         },
         "Active": {
           "$type": "color",
-          "$value": "{Gray.15}",
+          "$value": "{Gray.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -220,7 +220,7 @@
       "Strong": {
         "Default": {
           "$type": "color",
-          "$value": "{Moss Green.13}",
+          "$value": "{Moss Green.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -236,7 +236,7 @@
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Moss Green.14}",
+          "$value": "{Moss Green.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -252,7 +252,7 @@
         },
         "Active": {
           "$type": "color",
-          "$value": "{Moss Green.15}",
+          "$value": "{Moss Green.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -354,7 +354,7 @@
       "Strong": {
         "Default": {
           "$type": "color",
-          "$value": "{Green.13}",
+          "$value": "{Green.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -370,7 +370,7 @@
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Green.14}",
+          "$value": "{Green.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -386,7 +386,7 @@
         },
         "Active": {
           "$type": "color",
-          "$value": "{Green.15}",
+          "$value": "{Green.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -488,7 +488,7 @@
       "Strong": {
         "Default": {
           "$type": "color",
-          "$value": "{Blue.13}",
+          "$value": "{Blue.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -504,7 +504,7 @@
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Blue.14}",
+          "$value": "{Blue.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -520,7 +520,7 @@
         },
         "Active": {
           "$type": "color",
-          "$value": "{Blue.15}",
+          "$value": "{Blue.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -622,7 +622,7 @@
       "Strong": {
         "Default": {
           "$type": "color",
-          "$value": "{Orange.13}",
+          "$value": "{Orange.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -638,7 +638,7 @@
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Orange.14}",
+          "$value": "{Orange.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -654,7 +654,7 @@
         },
         "Active": {
           "$type": "color",
-          "$value": "{Orange.15}",
+          "$value": "{Orange.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -756,7 +756,7 @@
       "Strong": {
         "Default": {
           "$type": "color",
-          "$value": "{Red.13}",
+          "$value": "{Red.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -772,7 +772,7 @@
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Red.14}",
+          "$value": "{Red.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -788,7 +788,7 @@
         },
         "Active": {
           "$type": "color",
-          "$value": "{Red.15}",
+          "$value": "{Red.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1111,7 +1111,7 @@
     "Neutral": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Gray.9}",
+        "$value": "{Gray.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1127,7 +1127,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Gray.10}",
+        "$value": "{Gray.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1143,7 +1143,7 @@
       },
       "Contrast subtle": {
         "$type": "color",
-        "$value": "{Gray.11}",
+        "$value": "{Gray.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1159,7 +1159,7 @@
       },
       "Contrast strong": {
         "$type": "color",
-        "$value": "{Gray.12}",
+        "$value": "{Gray.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1177,7 +1177,7 @@
     "Accent": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Moss Green.9}",
+        "$value": "{Moss Green.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1193,7 +1193,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Moss Green.10}",
+        "$value": "{Moss Green.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1209,7 +1209,7 @@
       },
       "Contrast subtle": {
         "$type": "color",
-        "$value": "{Moss Green.11}",
+        "$value": "{Moss Green.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1225,7 +1225,7 @@
       },
       "Contrast strong": {
         "$type": "color",
-        "$value": "{Moss Green.12}",
+        "$value": "{Moss Green.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1243,7 +1243,7 @@
     "Success": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Green.9}",
+        "$value": "{Green.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1259,7 +1259,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Green.10}",
+        "$value": "{Green.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1275,7 +1275,7 @@
       },
       "Contrast subtle": {
         "$type": "color",
-        "$value": "{Green.11}",
+        "$value": "{Green.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1291,7 +1291,7 @@
       },
       "Contrast strong": {
         "$type": "color",
-        "$value": "{Green.12}",
+        "$value": "{Green.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1309,7 +1309,7 @@
     "Info": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Blue.9}",
+        "$value": "{Blue.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1325,7 +1325,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Blue.10}",
+        "$value": "{Blue.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1341,7 +1341,7 @@
       },
       "Contrast subtle": {
         "$type": "color",
-        "$value": "{Blue.11}",
+        "$value": "{Blue.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1357,7 +1357,7 @@
       },
       "Contrast strong": {
         "$type": "color",
-        "$value": "{Blue.12}",
+        "$value": "{Blue.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1375,7 +1375,7 @@
     "Warning": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Orange.9}",
+        "$value": "{Orange.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1391,7 +1391,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Orange.10}",
+        "$value": "{Orange.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1407,7 +1407,7 @@
       },
       "Contrast subtle": {
         "$type": "color",
-        "$value": "{Orange.11}",
+        "$value": "{Orange.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1423,7 +1423,7 @@
       },
       "Contrast strong": {
         "$type": "color",
-        "$value": "{Orange.12}",
+        "$value": "{Orange.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1441,7 +1441,7 @@
     "Danger": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Red.9}",
+        "$value": "{Red.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1457,7 +1457,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Red.10}",
+        "$value": "{Red.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1473,7 +1473,7 @@
       },
       "Contrast subtle": {
         "$type": "color",
-        "$value": "{Red.11}",
+        "$value": "{Red.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1489,7 +1489,7 @@
       },
       "Contrast strong": {
         "$type": "color",
-        "$value": "{Red.12}",
+        "$value": "{Red.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {

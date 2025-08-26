@@ -1,27 +1,27 @@
 {
   "Background": {
     "Medium": {
-      "Default": "#a2e0ff",
-      "Hover": "#88d4ff",
-      "Active": "#71c7ff"
+      "Default": "#baddf6",
+      "Hover": "#a4d1f2",
+      "Active": "#8dc5ee"
     },
     "Strong": {
-      "Default": "#0084c4",
-      "Hover": "#0069a7",
-      "Active": "#005892"
+      "Default": "#006aa0",
+      "Hover": "#085883",
+      "Active": "#0e5279"
     },
     "Default": "#ffffff",
-    "Subtle": "#d8f7ff"
+    "Subtle": "#e3f5ff"
   },
   "Border": {
-    "Subtle": "#3fa8ea",
-    "Medium": "#2d88c0",
-    "Strong": "#32698e"
+    "Subtle": "#99cbf0",
+    "Medium": "#63b0e6",
+    "Strong": "#1d8fcf"
   },
   "Text": {
-    "Subtle": "#2d3d49",
-    "Strong": "#1b1f23",
-    "Contrast subtle": "#d2f4ff",
-    "Contrast strong": "#ffffff"
+    "Subtle": "#124c70",
+    "Strong": "#18364a",
+    "Contrast subtle": "#c0e0f8",
+    "Contrast strong": "#f0feff"
   }
 }

@@ -86,7 +86,7 @@ export function contrast({
   try {
     const fgColor = new Color(foreground)
     const bgColor = new Color(background)
-    const decimals = algorithm === 'WCAG21' ? 2 : 0
+    const decimals = algorithm === 'WCAG21' ? 1 : 0
 
     // Remove all the decimals in the result
     return Math.abs(Number(bgColor.contrast(fgColor, algorithm))).toFixed(

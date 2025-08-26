@@ -30,6 +30,11 @@
     var(--color-gray-background-default),
     var(--color-gray-background-subtle)
   );
+
+  --background-color-elevated: light-dark(
+    var(--color-gray-background-default),
+    var(--color-gray-background-medium-default)
+  );
   --background-color-default: var(--background);
 
   --background-color-neutral-medium-default: var(
@@ -92,6 +97,7 @@
 
 @source inline("text-success-{subtle,strong,contrast-{subtle,strong}}");
 @source inline("text-danger-{subtle,strong,contrast-{subtle,strong}}");
+@source inline("bg-{elevated,default,canvas,surface}");
 
 html,
 body {
