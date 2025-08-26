@@ -1271,95 +1271,87 @@
       }
     }
   },
-  "Concept": {
-    "Background": {
-      "Canvas": {
-        "$type": "color",
-        "$value": "{Dark.Gray.1}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "Surface": {
-        "$type": "color",
-        "$value": "{Dark.Gray.2}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "Elevated": {
-        "$type": "color",
-        "$value": "{Dark.Gray.3}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "Backdrop": {
-        "$type": "color",
-        "$value": "{Dark.Gray.2}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
+  "text-link": {
+    "$type": "color",
+    "$value": "{Dark.Blue.13}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
       }
-    },
-    "Border": {
-      "Focus": {
-        "$type": "color",
-        "$value": "{Dark.Blue.7}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
+    }
+  },
+  "background-canvas": {
+    "$type": "color",
+    "$value": "{Dark.Gray.1}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
       }
-    },
-    "Text": {
-      "Link": {
-        "$type": "color",
-        "$value": "{Dark.Blue.13}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
-          }
-        }
+    }
+  },
+  "background-surface": {
+    "$type": "color",
+    "$value": "{Dark.Gray.2}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "background-elevated": {
+    "$type": "color",
+    "$value": "{Dark.Gray.3}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "background-backdrop": {
+    "$type": "color",
+    "$value": "{Dark.Gray.2}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "border-focus": {
+    "$type": "color",
+    "$value": "{Dark.Blue.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
       }
     }
   }

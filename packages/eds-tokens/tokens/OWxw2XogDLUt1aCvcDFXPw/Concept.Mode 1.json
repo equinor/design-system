@@ -2,7 +2,7 @@
   "Background": {
     "Canvas": {
       "$type": "color",
-      "$value": "{Concept.Background.Canvas}",
+      "$value": "{background-canvas}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -18,7 +18,7 @@
     },
     "Surface": {
       "$type": "color",
-      "$value": "{Concept.Background.Surface}",
+      "$value": "{background-surface}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -34,7 +34,7 @@
     },
     "Elevated": {
       "$type": "color",
-      "$value": "{Concept.Background.Elevated}",
+      "$value": "{background-elevated}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -50,7 +50,7 @@
     },
     "Backdrop": {
       "$type": "color",
-      "$value": "{Concept.Background.Backdrop}",
+      "$value": "{background-backdrop}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -68,7 +68,7 @@
   "Border": {
     "Focus": {
       "$type": "color",
-      "$value": "{Concept.Border.Focus}",
+      "$value": "{border-focus}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -86,7 +86,7 @@
   "Text": {
     "Link": {
       "$type": "color",
-      "$value": "{Concept.Text.Link}",
+      "$value": "{text-link}",
       "$description": "",
       "$extensions": {
         "com.figma": {
