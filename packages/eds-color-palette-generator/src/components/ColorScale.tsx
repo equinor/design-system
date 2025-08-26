@@ -224,7 +224,7 @@ export function ColorScale({
         </h3>
       )}
       <div
-        className="grid gap-3 mb-4"
+        className="grid gap-2 mb-4"
         style={{
           gridTemplateColumns: `repeat(${colors.length}, minmax(0, 1fr))`,
         }}
@@ -457,7 +457,7 @@ export function ColorScale({
               {/* Contrast info in the color cell - only when showContrast is true */}
               {showContrast && (
                 <div className="flex flex-col h-full pt-3">
-                  <ul className="space-y-1 text-[11px]">
+                  <ul className="space-y-1">
                     {pairsWithSteps?.map((contrastReq, colorPairIndex) => {
                       const targetStepIndex = getStepIndex(
                         contrastReq.targetStep,
