@@ -131,7 +131,6 @@ function computeContrasts() {
   })
 }
 
-
 function buildContrastTables() {
   const datasets = computeContrasts()
   return datasets
@@ -171,7 +170,9 @@ function generate() {
   const date = new Date().toISOString().split('T')[0]
   const content = `# Palette Contrast Report\n\nGenerated: ${date}\n\n## Contrast Values\n\n${buildContrastTables()}\n\n---\n\n_This document is auto-generated; update \`config.ts\` or \`color.ts\` to change source values._\n`
   fs.writeFileSync(outPath, content, 'utf8')
-  console.log(`Contrast report generated -> ${path.relative(process.cwd(), outPath)}`)
+  console.log(
+    `Contrast report generated -> ${path.relative(process.cwd(), outPath)}`,
+  )
 }
 
 generate()

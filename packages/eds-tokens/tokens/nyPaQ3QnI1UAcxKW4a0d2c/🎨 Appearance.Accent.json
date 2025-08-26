@@ -8,9 +8,7 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
+            "scopes": ["ALL_SCOPES"],
             "codeSyntax": {
               "WEB": "var(--eds-color-background-medium-default)"
             }
@@ -24,9 +22,7 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
+            "scopes": ["ALL_SCOPES"],
             "codeSyntax": {
               "WEB": "var(--eds-color-background-medium-hover)"
             }
@@ -40,9 +36,7 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
+            "scopes": ["ALL_SCOPES"],
             "codeSyntax": {
               "WEB": "var(--eds-color-background-medium-active)"
             }
@@ -53,14 +47,12 @@
     "Strong": {
       "Default": {
         "$type": "color",
-        "$value": "{Moss Green.13}",
+        "$value": "{Moss Green.9}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
+            "scopes": ["ALL_SCOPES"],
             "codeSyntax": {
               "WEB": "var(--eds-color-background-strong-default)"
             }
@@ -69,14 +61,12 @@
       },
       "Hover": {
         "$type": "color",
-        "$value": "{Moss Green.14}",
+        "$value": "{Moss Green.10}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
+            "scopes": ["ALL_SCOPES"],
             "codeSyntax": {
               "WEB": "var(--eds-color-background-strong-hover)"
             }
@@ -85,14 +75,12 @@
       },
       "Active": {
         "$type": "color",
-        "$value": "{Moss Green.15}",
+        "$value": "{Moss Green.11}",
         "$description": "",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
+            "scopes": ["ALL_SCOPES"],
             "codeSyntax": {
               "WEB": "var(--eds-color-background-strong-active)"
             }
@@ -107,9 +95,7 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-background-default)"
           }
@@ -123,9 +109,7 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-background-subtle)"
           }
@@ -141,9 +125,7 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-border-subtle)"
           }
@@ -157,9 +139,7 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-border-medium)"
           }
@@ -173,9 +153,7 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-border-strong)"
           }
@@ -186,14 +164,12 @@
   "Text": {
     "Subtle": {
       "$type": "color",
-      "$value": "{Moss Green.9}",
+      "$value": "{Moss Green.12}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-default)"
           }
@@ -202,14 +178,12 @@
     },
     "Strong": {
       "$type": "color",
-      "$value": "{Moss Green.10}",
+      "$value": "{Moss Green.13}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-strong)"
           }
@@ -218,14 +192,12 @@
     },
     "Contrast subtle": {
       "$type": "color",
-      "$value": "{Moss Green.11}",
+      "$value": "{Moss Green.14}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-contrast-subtle)"
           }
@@ -234,14 +206,12 @@
     },
     "Contrast strong": {
       "$type": "color",
-      "$value": "{Moss Green.12}",
+      "$value": "{Moss Green.15}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
+          "scopes": ["ALL_SCOPES"],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-contrast-strong)"
           }
