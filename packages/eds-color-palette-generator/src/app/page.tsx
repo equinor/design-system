@@ -22,6 +22,7 @@ import config, {
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
 } from '@/config/config'
+import { computeContrastSummary } from '@/utils/contrastSummary'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -197,6 +198,21 @@ export default function App() {
   const currentColorScales =
     colorScheme === 'light' ? lightColorScales : darkColorScales
 
+  // Client flag to avoid hydration mismatch
+  const [isClient, setIsClient] = useState(false)
+  useEffect(() => setIsClient(true), [])
+
+  const contrastSummary = useMemo(() => {
+    if (!isClient || !showContrast) {
+      return { passed: 0, total: 0, percentage: 0 }
+    }
+    return computeContrastSummary({
+      colorScales: currentColorScales,
+      contrastMethod,
+      enabled: showContrast,
+    })
+  }, [currentColorScales, contrastMethod, showContrast, isClient])
+
   return (
     <div data-theme={colorScheme} className="p-6 ">
       <HeaderPanel
@@ -256,7 +272,6 @@ export default function App() {
 
       <div className="sticky top-0 z-10 p-1 bg-default">
         <ColorScalesHeader />
-
         {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
         {showLightnessInputs && (
           <LightnessValueInputs
@@ -278,6 +293,16 @@ export default function App() {
           colorName={colorData.name}
         />
       ))}
+
+      {isClient && showContrast && contrastSummary.total > 0 && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-4 right-4 z-30 px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
+        >
+          {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
+        </div>
+      )}
     </div>
   )
 }
