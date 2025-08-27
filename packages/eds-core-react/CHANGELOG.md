@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.48.0] - 2025-08-27
+
+## Added
+
+- ✨ `Tabs` call onChange with provided value if present by @FredrikMWold in https://github.com/equinor/design-system/pull/3893
+- ✨ add disabled prop to `Tooltip` by @FredrikMWold in https://github.com/equinor/design-system/pull/3908
+- ✨`Autocomplete` allow option-label prop to be used without type of object by @magnh in https://github.com/equinor/design-system/pull/3915
+
+## Fixed
+
+- 🐛 `DatePicker` Disable back button in year range based on year, not month by @FredrikMWold in https://github.com/equinor/design-system/pull/3853
+- 🐛 `Tabs` now allow 'null' value as child element 'Tabs.List' and 'Tabs.Panel' by @AndreasPresthammer in https://github.com/equinor/design-system/pull/3878
+- 🐛 `Autocomplete` prevent `onAddNewOption` from being called twice in Strict Mode by @FredrikMWold in https://github.com/equinor/design-system/pull/3894
+- 🐛`Table` export table row with pascal case by @magnh in https://github.com/equinor/design-system/pull/3889
+
+## Changed
+
+- 📝 Added security policy info (#3856) by @torleifhalseth in https://github.com/equinor/design-system/pull/3857
+- 📝 Add comprehensive guidelines for project standards and component creation by @torleifhalseth in https://github.com/equinor/design-system/pull/3845
+- ⬆️ Upgrade dependencies by @pomfrida in https://github.com/equinor/design-system/pull/3858
+- 🐛 Fixed typo in README.md by @Richard-Persson in https://github.com/equinor/design-system/pull/3860
+- ⬆️ Upgrade dependencies by @pomfrida in https://github.com/equinor/design-system/pull/3881
+- ⬆️ Security upgrade nginx from 1.26.3-alpine to 1.29.1-alpine by @Hjaf in https://github.com/equinor/design-system/pull/3899
+- 📝 Update radixconfig.yaml by @emirgens in https://github.com/equinor/design-system/pull/3909
+- 🐛 fix: pnpm lock by @torleifhalseth in https://github.com/equinor/design-system/pull/3921
+
 ## [0.47.0] - 2025-06-13
 
 ## Fixed
@@ -756,7 +782,6 @@ Due to the introduction of the native `popover` attribute, downstream unit tests
 ### Added
 
 - `Menu` now supports keyhandling on anchor element for open & focus on `Enter`/`ArrowUp`/`ArrowDown` ([#1936](https://github.com/equinor/design-system/issues/1936))
-
   - Users now need to store anchor element in `useState` for correct re-renders & listening events
 
 ### Removed
