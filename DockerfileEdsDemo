@@ -51,17 +51,14 @@ RUN addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini
 
-# Copy the standalone output and static files from the demo build
-COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo/.next/standalone ./
-COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo/.next/static ./.next/static
+# Copy just the essential built files and node_modules
+COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo ./packages/eds-demo
+COPY --from=builder --chown="$USER":"$USER" /app/node_modules ./node_modules
 
 USER "$UID"
 
 EXPOSE 3000
 
-# Add health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
-
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["node", "server.js"]
+WORKDIR /app/packages/eds-demo
+CMD ["pnpm", "start"]
