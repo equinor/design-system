@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2025-08-27
+
+## Added
+
+- ✨ New `ClickableCell` component by @pomfrida in https://github.com/equinor/design-system/pull/3868
+
+## Fixed
+
+- 🐛 Virtual table and rows with dynamic height by @arkadiy93 in https://github.com/equinor/design-system/pull/3840
+
+## Changed
+
+- ⬆️ Upgrade dependencies by @pomfrida in https://github.com/equinor/design-system/pull/3881
+
 ## [0.8.1] - 2025-06-13
 
 ## Fixed
