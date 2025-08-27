@@ -1,44 +1,67 @@
-FROM node:18-alpine AS base
-RUN npm install -g pnpm
+# Use specific Node.js version for better reproducibility
+ARG NODE_VERSION=18.19.0-alpine3.18
+ARG PNPM_VERSION=9.15.0
+
+FROM node:${NODE_VERSION} AS base
+LABEL org.opencontainers.image.title="EDS Demo Application"
+LABEL org.opencontainers.image.description="Equinor Design System Demo Application"
+LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
+
+RUN npm install -g pnpm@${PNPM_VERSION}
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy workspace files and all packages for dependency resolution
+# Copy workspace configuration files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
-COPY packages/ ./packages/
 
-# Install all dependencies
-RUN pnpm install --no-frozen-lockfile
+# Copy only package.json files for better Docker layer caching
+COPY packages/eds-demo/package.json ./packages/eds-demo/
+COPY packages/eds-tokens/package.json ./packages/eds-tokens/
+COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
+COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
+
+# Install dependencies with frozen lockfile and clean cache
+RUN pnpm install --frozen-lockfile && \
+    pnpm store prune
 
 FROM base AS builder
 WORKDIR /app
 
-# Copy everything from deps (already includes packages/)
+# Copy dependencies and source code
 COPY --from=deps /app ./
+COPY packages/ ./packages/
 
-# Build dependencies and the demo app
-RUN pnpm --filter @equinor/eds-tokens-sync run build && \
-    pnpm --filter @equinor/eds-tokens-build run build && \
-    pnpm --filter @equinor/eds-tokens run build && \
+# Build variables & demo
+RUN pnpm run build:variables && \
     pnpm --filter eds-demo run build
 
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production PORT=3000
+ENV NODE_ENV=production \
+    PORT=3000 \
+    USER=nextjs \
+    UID=12345 \
+    NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup -S nextjs && \
-    adduser -S --uid 12345 nextjs && \
+# Create non-root user and install runtime dependencies
+RUN addgroup -S "$USER" && \
+    adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini && \
-    npm install -g pnpm
+    npm install -g pnpm@${PNPM_VERSION}
 
 # Copy the built workspace
-COPY --from=builder --chown=nextjs:nextjs /app ./
+COPY --from=builder --chown="$USER":"$USER" /app ./
 
-USER nextjs
+USER "$UID"
+
 EXPOSE 3000
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
 
 ENTRYPOINT ["/sbin/tini", "--"]
 WORKDIR /app/packages/eds-demo
