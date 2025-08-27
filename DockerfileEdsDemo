@@ -5,12 +5,9 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy workspace files and package.json files for dependency resolution
+# Copy workspace files and all packages for dependency resolution
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
-COPY packages/eds-demo/package.json ./packages/eds-demo/
-COPY packages/eds-tokens/package.json ./packages/eds-tokens/
-COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
-COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
+COPY packages/ ./packages/
 
 # Install all dependencies
 RUN pnpm install --no-frozen-lockfile
@@ -18,9 +15,8 @@ RUN pnpm install --no-frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 
-# Copy everything from deps and source code
+# Copy everything from deps (already includes packages/)
 COPY --from=deps /app ./
-COPY packages/ ./packages/
 
 # Build dependencies and the demo app
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
