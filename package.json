@@ -11,6 +11,7 @@
     "build": "pnpm run build:token-sync && pnpm run build:tokens-build && pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab",
     "build:core-react": "pnpm --filter @equinor/eds-core-react run build",
     "build:data-grid-react": "pnpm --filter ./packages/eds-data-grid-react run build",
+    "build:docs": "pnpm --filter ./apps/design-system-docs run build",
     "build:lab": "pnpm --filter @equinor/eds-lab-react run build",
     "build:utils": "pnpm --filter @equinor/eds-utils run build",
     "build:tokens": "pnpm --filter @equinor/eds-tokens run build",
