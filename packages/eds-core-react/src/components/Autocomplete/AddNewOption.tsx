@@ -4,6 +4,7 @@ import { forwardRef, LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { AutocompleteOptionLabel, StyledListItem } from './Option'
+import { input } from '../Input/Input.tokens'
 
 const StyledAddItemIcon = styled(Icon)<{ multiple: boolean }>(({
   multiple,
@@ -13,6 +14,10 @@ const StyledAddItemIcon = styled(Icon)<{ multiple: boolean }>(({
     color: ${tokens.colors.interactive.primary__resting.hex};
   `
 })
+
+const StyledPlaceholder = styled.span`
+  color: ${input.entities.placeholder.typography.color};
+`
 
 export type AutocompleteOptionProps = {
   value: string
@@ -30,15 +35,21 @@ function AddNewOptionInner(
     <StyledListItem
       ref={ref}
       $highlighted={highlighted}
-      aria-label={`Add new option: ${value}`}
       onClick={(e) => {
         onClick(e)
       }}
       {...other}
+      aria-label={`Add new option: ${value}`}
+      aria-live="polite"
+      aria-selected={false}
     >
       <StyledAddItemIcon multiple={multiple} data={add_box} />
       <AutocompleteOptionLabel $multiline={multiline}>
-        {value}
+        {value ? (
+          value
+        ) : (
+          <StyledPlaceholder>Type to add new options</StyledPlaceholder>
+        )}
       </AutocompleteOptionLabel>
     </StyledListItem>
   )
