@@ -46,14 +46,14 @@ ENV NODE_ENV=production \
     UID=12345 \
     NEXT_TELEMETRY_DISABLED=1
 
-# Create non-root user and install runtime dependencies
+# Create non-root user
 RUN addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
-    apk add --no-cache tini && \
-    npm install -g pnpm@${PNPM_VERSION}
+    apk add --no-cache tini
 
-# Copy the built workspace
-COPY --from=builder --chown="$USER":"$USER" /app ./
+# Copy the standalone output and static files from the demo build
+COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo/.next/standalone ./
+COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo/.next/static ./.next/static
 
 USER "$UID"
 
@@ -64,5 +64,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
 
 ENTRYPOINT ["/sbin/tini", "--"]
-WORKDIR /app/packages/eds-demo
-CMD ["pnpm", "start"]
+CMD ["node", "server.js"]
