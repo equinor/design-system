@@ -1,11 +1,5 @@
 # Figma
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-GETTING STARTED
-
-# Figma
-
 Figma is the selected tool for prototyping and design when using the Equinor design system (EDS).
 
 ## Getting access to Figma in Equinor

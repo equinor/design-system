@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 const config: Config = {
   title: 'Design System Documentation',
   tagline: 'for both mobile and web',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/equinor.png',
 
   // // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   // future: {
@@ -42,6 +42,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          breadcrumbs: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -71,78 +72,45 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg', //change to new eds social card
+    image: 'img/equinor.png', //change to new eds social card
     navbar: {
       title: 'Equinor Design System',
       logo: {
-        alt: 'eds Logo',
-        src: 'img/logo.svg', //TODO: replace with new eds logo
+        alt: 'Equinor hat Logo',
+        src: 'img/equinor.png',
       },
 
       items: [
         {
-          type: 'dropdown',
-          position: 'left',
-          label: 'EDS to the world',
-          items: [
-            {
-              type: 'docSidebar',
-              sidebarId: 'aboutSidebar',
-              label: 'About EDS',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'componentsSidebar',
-              label: 'Getting Started',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'foundationSidebar',
-              label: 'EDS Foundation',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'imagesSidebar',
-              label: 'Meet the Team',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'resourcesSidebar',
-              label: 'Resources',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'supportSidebar',
-              label: 'Support Channels',
-            },
-            // {
-            //   type: 'docSidebar',
-            //   sidebarId: 'packagesSidebar',
-            //   label: 'Packages',
-            // },
-            // {
-            //   type: 'docSidebar',
-            //   sidebarId: 'labReactSidebar',
-            //   label: 'EDS Lab React',
-            // },
-            // {
-            //   type: 'docSidebar',
-            //   sidebarId: 'tokensSidebar',
-            //   label: 'EDS Tokens',
-            // },
-            // {
-            //   type: 'docSidebar',
-            //   sidebarId: 'tokensBuildSidebar',
-            //   label: 'EDS Tokens Build',
-            // },
-            // {
-            //   type: 'docSidebar',
-            //   sidebarId: 'utilsSidebar',
-            //   label: 'EDS Utils',
-            // },
-          ],
+          type: 'docSidebar',
+          sidebarId: 'aboutSidebar',
+          label: 'About EDS',
+          position: 'right',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        {
+          type: 'docSidebar',
+          sidebarId: 'foundationSidebar',
+          label: 'Foundation',
+          position: 'right',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'componentsSidebar',
+          label: 'Components',
+          position: 'right',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'resourcesSidebar',
+          label: 'Resources',
+          position: 'right',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'supportSidebar',
+          label: 'Support',
+          position: 'right',
+        },
         {
           href: 'https://github.com/equinor/design-system',
           label: 'GitHub',
@@ -151,60 +119,17 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
+      logo: {
+        alt: 'Equinor Logo',
+        src: 'img/equinor.png',
+      },
       links: [
         {
-          title: 'Packages',
-          items: [
-            {
-              label: 'EDS Components',
-              to: 'design-system-docs/components/getting-started',
-            },
-            {
-              label: 'EDS Color Palette Generator',
-              to: 'design-system-docs/eds-color-palette-generator/introduction',
-            },
-            {
-              label: 'EDS Core React',
-              to: 'design-system-docs/eds-core-react/introduction',
-            },
-            {
-              label: 'EDS Data Grid React',
-              to: 'design-system-docs/eds-data-grid-react/introduction',
-            },
-            {
-              label: 'EDS Icons',
-              to: 'design-system-docs/eds-icons/introduction',
-            },
-            {
-              label: 'EDS Lab React',
-              to: 'design-system-docs/eds-lab-react/introduction',
-            },
-            {
-              label: 'EDS Tokens',
-              to: 'design-system-docs/eds-tokens/introduction',
-            },
-            {
-              label: 'EDS Tokens Build',
-              to: 'design-system-docs/eds-tokens-build/introduction',
-            },
-            {
-              label: 'EDS Utils',
-              to: 'design-system-docs/eds-utils/introduction',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/equinor/design-system',
-            }, // we can add our sharepoint and  Figma pages perhaps?
-          ],
+          title: 'Equinor',
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Equinor. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Equinor.`,
     },
     prism: {
       theme: prismThemes.github,

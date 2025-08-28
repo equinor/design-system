@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
@@ -11,20 +10,11 @@ import styles from './index.module.css'
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext()
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={clsx(styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
+        <Heading as="h2" className='hero__title'>{siteConfig.title}</Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="https://loop.equinor.com/en/stories/eds-design-system"
-          >
-            Loop story - &apos;How it all began&apos;
-          </Link>
-        </div>
+        <div className={styles.buttons}></div>
       </div>
     </header>
   )
@@ -35,38 +25,21 @@ function HomepageInfo() {
   return (
     <header>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          Equinor Design System
-        </Heading>
-        <p className="hero__subtitle">
+        <p>
           The EDS is the official design system of Equinor and is to be used
           when designing, prototyping and developing internal digital
           interfaces.
         </p>
-        <Heading as="h2" className="hero__subtitle">
-          {' '}
-          Getting started
-        </Heading>
-        <p className="hero__subtitle">
+        <Heading as="h4"> Getting started</Heading>
+        <p>
           EDS provides a collection of guidelines and reusable components that
           can be assembled in different combinations to design and build digital
           interfaces.
         </p>
-        <Heading as="h2" className="hero__subtitle">
-          {' '}
-          Our Foundation
-        </Heading>
-        <p className="hero__subtitle">
-          EDS&apos;s main goal is to enhance the usability for all users. ##
-          Community based EDS relies on its users and the EDS core team
-          maintains and provides support for you and are here to help. Don&apos
-          ;t hesitate to contact us if you have any questions or feedback.{' '}
-        </p>
-        <Heading as="h2" className="hero__subtitle">
-          {' '}
-          Community Based
-        </Heading>
-        <p className="hero__subtitle">
+        <Heading as="h4"> Our Foundation</Heading>
+        <p>EDS&apos;s main goal is to enhance the usability for all users.</p>
+        <Heading as="h4"> Community Based</Heading>
+        <p>
           EDS relies on its users and the EDS core team maintains and provides
           support for you and are here to help. Don&apos;t hesitate to contact
           us if you have any questions or feedback.{' '}
@@ -82,6 +55,14 @@ function HomepageInfo() {
             title="What makes working on EDS interesting"
             allowFullScreen
           ></iframe>
+        </div>
+        <div className={clsx('hero')} style={{ justifyContent: 'center' }}>
+          <Link
+            className="button button--secondary button--lg"
+            to="https://loop.equinor.com/en/stories/eds-design-system"
+          >
+            Loop story - &apos;How it all began&apos;
+          </Link>
         </div>
       </div>
     </header>

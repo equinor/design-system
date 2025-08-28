@@ -1,2 +1,2 @@
-# Resources · Equinor Design System
+# Resources
 
