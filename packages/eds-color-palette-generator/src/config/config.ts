@@ -85,17 +85,17 @@ export const BG_MEDIUM_DEFAULT: StepDefinition = {
   name: 'Background Medium Default',
   category: 'background-medium',
   variant: 'medium-default',
-  lightValue: 0.79,
-  darkValue: 0.6,
+  lightValue: 0.87,
+  darkValue: 0.47,
   contrastWith: [
     {
       targetStep: 'background-default',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
+      lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'background-subtle',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
+      lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
@@ -106,17 +106,17 @@ export const BG_MEDIUM_HOVER: StepDefinition = {
   name: 'Background Medium Hover',
   category: 'background-medium',
   variant: 'medium-hover',
-  lightValue: 0.7,
-  darkValue: 0.7,
+  lightValue: 0.8,
+  darkValue: 0.52,
   contrastWith: [
     {
       targetStep: 'background-default',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
+      lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'background-subtle',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
+      lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
@@ -127,17 +127,17 @@ export const BG_MEDIUM_ACTIVE: StepDefinition = {
   name: 'Background Medium Active',
   category: 'background-medium',
   variant: 'medium-active',
-  lightValue: 0.65,
-  darkValue: 0.8,
+  lightValue: 0.72,
+  darkValue: 0.58,
   contrastWith: [
     {
       targetStep: 'background-default',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
+      lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'background-subtle',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
+      lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
@@ -149,8 +149,8 @@ export const BORDER_SUBTLE: StepDefinition = {
   name: 'Border Subtle',
   category: 'border',
   variant: 'subtle',
-  lightValue: 0.86,
-  darkValue: 0.46,
+  lightValue: 0.84,
+  darkValue: 0.47,
   contrastWith: [
     {
       targetStep: 'background-default',
@@ -221,8 +221,8 @@ export const BORDER_STRONG: StepDefinition = {
   name: 'Border Strong',
   category: 'border',
   variant: 'strong',
-  lightValue: 0.62,
-  darkValue: 0.72,
+  lightValue: 0.52,
+  darkValue: 0.82,
   contrastWith: [
     {
       targetStep: 'background-default',

@@ -27,7 +27,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#92c5cb",
+        "$value": "#bbdbdf",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -39,7 +39,7 @@
       },
       "4": {
         "$type": "color",
-        "$value": "#62acb4",
+        "$value": "#97c8cd",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -51,7 +51,7 @@
       },
       "5": {
         "$type": "color",
-        "$value": "#499ea7",
+        "$value": "#6cb2b9",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -87,7 +87,7 @@
       },
       "8": {
         "$type": "color",
-        "$value": "#3c959e",
+        "$value": "#21767e",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -147,7 +147,7 @@
       },
       "13": {
         "$type": "color",
-        "$value": "#131d1e",
+        "$value": "#141f20",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -209,7 +209,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#bababa",
+        "$value": "#d4d4d4",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -221,7 +221,7 @@
       },
       "4": {
         "$type": "color",
-        "$value": "#9e9e9e",
+        "$value": "#bebebe",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -233,7 +233,7 @@
       },
       "5": {
         "$type": "color",
-        "$value": "#8f8f8f",
+        "$value": "#a4a4a4",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -269,7 +269,7 @@
       },
       "8": {
         "$type": "color",
-        "$value": "#868686",
+        "$value": "#696969",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -329,7 +329,7 @@
       },
       "13": {
         "$type": "color",
-        "$value": "#1b1b1b",
+        "$value": "#1d1d1d",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -391,7 +391,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#92cc8e",
+        "$value": "#bbe0b8",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -403,7 +403,7 @@
       },
       "4": {
         "$type": "color",
-        "$value": "#62b55e",
+        "$value": "#97cf93",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -415,7 +415,7 @@
       },
       "5": {
         "$type": "color",
-        "$value": "#4aa747",
+        "$value": "#6dba69",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -451,7 +451,7 @@
       },
       "8": {
         "$type": "color",
-        "$value": "#3c9e3b",
+        "$value": "#227e22",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -511,7 +511,7 @@
       },
       "13": {
         "$type": "color",
-        "$value": "#131e12",
+        "$value": "#142114",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -573,7 +573,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#87c2ed",
+        "$value": "#b5daf5",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -585,7 +585,7 @@
       },
       "4": {
         "$type": "color",
-        "$value": "#50a7e1",
+        "$value": "#8dc5ee",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -597,7 +597,7 @@
       },
       "5": {
         "$type": "color",
-        "$value": "#3198d7",
+        "$value": "#5cade5",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -633,7 +633,7 @@
       },
       "8": {
         "$type": "color",
-        "$value": "#1d8fcf",
+        "$value": "#0070a9",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -693,7 +693,7 @@
       },
       "13": {
         "$type": "color",
-        "$value": "#111c24",
+        "$value": "#121e27",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -755,7 +755,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#edaa75",
+        "$value": "#f6caaa",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -767,7 +767,7 @@
       },
       "4": {
         "$type": "color",
-        "$value": "#e08531",
+        "$value": "#eeae7c",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -779,7 +779,7 @@
       },
       "5": {
         "$type": "color",
-        "$value": "#d47200",
+        "$value": "#e38d42",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -815,7 +815,7 @@
       },
       "8": {
         "$type": "color",
-        "$value": "#cc6700",
+        "$value": "#a34e00",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -875,7 +875,7 @@
       },
       "13": {
         "$type": "color",
-        "$value": "#24170e",
+        "$value": "#27190e",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -937,7 +937,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#ff9291",
+        "$value": "#ffbcba",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -949,7 +949,7 @@
       },
       "4": {
         "$type": "color",
-        "$value": "#ff5b64",
+        "$value": "#ff9897",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -961,7 +961,7 @@
       },
       "5": {
         "$type": "color",
-        "$value": "#fa3c4f",
+        "$value": "#ff686e",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -997,7 +997,7 @@
       },
       "8": {
         "$type": "color",
-        "$value": "#f12844",
+        "$value": "#c6002d",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1057,7 +1057,7 @@
       },
       "13": {
         "$type": "color",
-        "$value": "#2a1313",
+        "$value": "#2e1414",
         "$description": "",
         "$extensions": {
           "com.figma": {

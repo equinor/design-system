@@ -1,7 +1,7 @@
 {
-  "background-medium-default": "#87c2ed",
-  "background-medium-hover": "#50a7e1",
-  "background-medium-active": "#3198d7",
+  "background-medium-default": "#b5daf5",
+  "background-medium-hover": "#8dc5ee",
+  "background-medium-active": "#5cade5",
   "background-strong-default": "#006aa0",
   "background-strong-hover": "#085883",
   "background-strong-active": "#0e5279",
@@ -9,9 +9,9 @@
   "background-subtle": "#e7f8ff",
   "border-subtle": "#a4d1f2",
   "border-medium": "#6fb6e9",
-  "border-strong": "#1d8fcf",
+  "border-strong": "#0070a9",
   "text-subtle": "#015e8d",
-  "text-strong": "#111c24",
+  "text-strong": "#121e27",
   "text-contrast-subtle": "#c5e3f9",
   "text-contrast-strong": "#f0feff"
 }

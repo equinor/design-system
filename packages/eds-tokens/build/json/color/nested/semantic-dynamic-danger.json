@@ -1,9 +1,9 @@
 {
   "Background": {
     "Medium": {
-      "Default": "#ff9291",
-      "Hover": "#ff5b64",
-      "Active": "#fa3c4f"
+      "Default": "#ffbcba",
+      "Hover": "#ff9897",
+      "Active": "#ff686e"
     },
     "Strong": {
       "Default": "#bc002a",
@@ -16,11 +16,11 @@
   "Border": {
     "Subtle": "#ffadab",
     "Medium": "#ff7a7d",
-    "Strong": "#f12844"
+    "Strong": "#c6002d"
   },
   "Text": {
     "Subtle": "#a50827",
-    "Strong": "#2a1313",
+    "Strong": "#2e1414",
     "Contrast subtle": "#ffcbc9",
     "Contrast strong": "#fff5f4"
   }
