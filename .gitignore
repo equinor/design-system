@@ -5,6 +5,9 @@ pnpm-debug.log
 .DS_Store
 # use pnpm
 package-lock.json
+# Prevent individual package lockfiles (use workspace lockfile in root)
+packages/*/pnpm-lock.yaml
+scripts/*/pnpm-lock.yaml
 yarn.lock
 .env
 # gatsby and docz
