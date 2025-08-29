@@ -669,6 +669,7 @@ function AutocompleteInner<T>(
     comboBoxProps = {
       ...comboBoxProps,
       onSelectedItemChange: (changes) => {
+        if (changes.selectedItem === AddSymbol) return
         if (onOptionsChange) {
           let { selectedItem } = changes
           if (itemCompare) {
