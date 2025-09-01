@@ -104,33 +104,6 @@ export function CheckmarkSelected({ className }: { className?: string }) {
   );
 }
 
-function Menu() {
-  return (
-    <div className="h-[184px] py-1 bg-white rounded shadow flex-col justify-start items-end flex">
-      <div className="inline-flex items-center self-stretch justify-between px-5 py-3 bg-white bg-opacity-0">
-        <div className="w-[71px] h-4 text-neutral-600 text-sm leading-none">
-          Tools
-        </div>
-      </div>
-      <div className="w-[111px] px-5 py-3 bg-slate-200 justify-between items-center inline-flex">
-        <div className="w-[71px] h-4 text-teal-700 text-sm leading-none">
-          Fields
-        </div>
-      </div>
-      <div className="w-[111px] px-5 py-3 bg-white bg-opacity-0 justify-between items-center inline-flex">
-        <div className="w-[71px] h-4 text-neutral-600 text-sm leading-none">
-          Reports
-        </div>
-      </div>
-      <div className="w-[111px] px-5 py-3 bg-white bg-opacity-0 justify-between items-center inline-flex">
-        <div className="w-[71px] h-4 text-neutral-600 text-sm leading-none">
-          Archived
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function Tab({
   children,
   className,

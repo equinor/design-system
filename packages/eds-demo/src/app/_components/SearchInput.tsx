@@ -9,6 +9,7 @@ export const SearchInput = ({ className, iconClass, ...rest }: Props) => {
   return (
     <div
       className={`max-w-[250px] w-[250px] h-[37px] px-3 py-2 justify-start items-center gap-3 flex ${className}`}
+      {...rest}
     >
       <div className="relative w-6 h-6">
         <svg
