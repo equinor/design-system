@@ -149,7 +149,6 @@ export const generateDesignSystemCSS = (
 
     lightColorScale.forEach((lightColor, index) => {
       const darkColor = darkColorScale[index]
-      const stepName = PALETTE_STEPS[index]?.id || `step-${index + 1}`
       css += `  --color-${colorName}-${index + 1}: light-dark(${lightColor}, ${darkColor});\n`
     })
     css += '\n'
