@@ -8,8 +8,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docker:build": "docker build -t equinor/color-palette-generator .",
-    "docker:run": "docker run -p 3000:3000 equinor/color-palette-generator",
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
