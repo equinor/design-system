@@ -1,7 +1,7 @@
 name: Color Palette Generator - Playwright Tests
 on:
   push:
-    branches: [develop, feat/*]
+    branches: [develop]
     paths:
       - 'packages/eds-color-palette-generator/**'
       - '.github/workflows/playwright.yml'
