@@ -86,10 +86,10 @@ export const DataTable = ({
           </TableHeader>
 
           {/* Render table data for each row */}
-          {tableData.map((row, rowIndex) => {
+          {tableData.map((row) => {
             return (
               <TableRow
-                key={`row-${rowIndex}`}
+                key={`row-${row.id}`}
                 className={`${row.active ? trActiveClass : ""}`}
               >
                 <TableDataCell className={tdClass}>

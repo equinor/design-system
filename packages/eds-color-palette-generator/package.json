@@ -27,14 +27,13 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.53.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "dotenv": "^17.0.1",
-    "eslint": "^9",
+    "eslint": "^8.57.1",
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4",
     "tsx": "^4.20.5",

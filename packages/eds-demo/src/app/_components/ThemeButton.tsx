@@ -1,29 +1,33 @@
 "use client";
 
-import {useState} from 'react'
+import { useState } from "react";
 
 export function ThemeButton() {
-  const [isDark, setIsDark] = useState<boolean>(false)
+  const [isDark, setIsDark] = useState<boolean>(false);
 
   const toggleTheme = (event: any) => {
     /* @ts-ignore */
     if (!document.startViewTransition) {
-      setIsDark(!isDark)
-      isDark ? document.body.style.colorScheme = 'light' : document.body.style.colorScheme = 'dark'
-      return
+      setIsDark(!isDark);
+      isDark
+        ? (document.body.style.colorScheme = "light")
+        : (document.body.style.colorScheme = "dark");
+      return;
     }
     const x = event?.clientX ?? window.innerWidth / 2;
     const y = event?.clientY ?? window.innerHeight / 2;
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),
       Math.max(y, window.innerHeight - y),
-    )
+    );
 
-  /* @ts-ignore */
+    /* @ts-ignore */
     const transition = document.startViewTransition(() => {
-      setIsDark(!isDark)
-      isDark ? document.body.style.colorScheme = 'light' : document.body.style.colorScheme = 'dark'
-    })
+      setIsDark(!isDark);
+      isDark
+        ? (document.body.style.colorScheme = "light")
+        : (document.body.style.colorScheme = "dark");
+    });
 
     transition.ready.then(() => {
       document.documentElement.animate(
@@ -33,12 +37,12 @@ export function ThemeButton() {
         ],
         {
           duration: 500,
-          easing: 'ease-in-out',
-          pseudoElement: '::view-transition-new(root)'
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
         },
-      )
-    })
-  }
+      );
+    });
+  };
 
   return (
     <button
