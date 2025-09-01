@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.53.2-jammy
+      image: mcr.microsoft.com/playwright:v1.55.0-jammy
     env:
       PLAYWRIGHT_URL: https://web-eds-colour-palette-generator-dev.radix.equinor.com/
     steps:
