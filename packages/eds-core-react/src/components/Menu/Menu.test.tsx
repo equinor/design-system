@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable testing-library/no-node-access */
 import { render, cleanup, screen, fireEvent, act, waitFor } from '../../test'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'
@@ -71,7 +72,6 @@ describe('Menu', () => {
     const container = screen.getByTestId('menu')
 
     await waitFor(() =>
-      // eslint-disable-next-line testing-library/no-node-access
       expect(container.parentElement).toHaveStyleRule('background', 'red'),
     )
   })
@@ -82,7 +82,7 @@ describe('Menu', () => {
       </TestMenu>,
     )
     const menuContainer = screen.getByRole('menu')
-    // eslint-disable-next-line testing-library/no-node-access
+
     const menuPaper = menuContainer.parentElement
     await waitFor(() => {
       expect(menuPaper).toBeDefined()
