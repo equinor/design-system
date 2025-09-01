@@ -1,2 +1,0 @@
-# Support · Equinor Design System
-

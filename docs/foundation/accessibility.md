@@ -1,2 +1,0 @@
-# Accessibility · Equinor Design System
-
