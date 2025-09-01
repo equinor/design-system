@@ -73,4 +73,4 @@ jobs:
         with:
           name: playwright-report
           path: packages/eds-color-palette-generator/playwright-report/
-          retention-days: 30
+          retention-days: 7
