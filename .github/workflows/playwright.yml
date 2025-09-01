@@ -1,7 +1,7 @@
 name: Color Palette Generator - Playwright Tests
 on:
   push:
-    branches: [develop, 'feat/**']
+    branches: [develop, feat/thalse-3847-finalise-color-generator]
     paths:
       - 'packages/eds-color-palette-generator/**'
       - '.github/workflows/playwright.yml'
@@ -22,7 +22,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: 'npm'
 
       - name: Install pnpm
         run: npm install -g pnpm
