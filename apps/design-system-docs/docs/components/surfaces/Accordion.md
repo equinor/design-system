@@ -1,11 +1,5 @@
 # Accordion
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
-
-# Accordion
-
 An _accordion_ allows users to collapse and expand sections of content.
 
 ## Usage

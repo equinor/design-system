@@ -1,11 +1,5 @@
 # Slider
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Slider
-
 A _slider_ is a flexible input that allows users to adjust predefined values.
 
   

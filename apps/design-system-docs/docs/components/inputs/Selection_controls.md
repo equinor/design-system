@@ -1,11 +1,5 @@
 # Selection controls
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Selection controls
-
 _Selection controls_ allow users to select options, make decisions and set preferences.
 
 ### Checkbox single

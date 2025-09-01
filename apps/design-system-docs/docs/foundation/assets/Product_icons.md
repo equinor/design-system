@@ -1,11 +1,5 @@
 # Product icons
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# Product icons
-
 Product icons communicate key themes and business areas in a clear, simple and branded style. They enhance visual communication, assist with navigation and reduce cognitive load. Product icons do not provide functional interaction---use system icons instead.
 
 ## Guidelines

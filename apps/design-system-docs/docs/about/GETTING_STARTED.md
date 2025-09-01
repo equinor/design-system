@@ -1,11 +1,5 @@
 # Designers
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-GETTING STARTED
-
-# Designers
-
 The Equinor Design System (EDS) will empower you to design consistently and prototype rapidly. It is the official interface library for all of Equinor’s internal digital interfaces
 
 ## Figma

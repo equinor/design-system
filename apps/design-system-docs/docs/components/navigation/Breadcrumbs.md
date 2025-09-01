@@ -1,11 +1,5 @@
 # Breadcrumbs
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Breadcrumbs
-
 _Breadcrumbs_ show the navigational path to users allowing them to navigate up the hierarchy.
 
 **More examples available in** **.**

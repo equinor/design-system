@@ -1,11 +1,5 @@
 # Progress indicators
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Progress indicators
-
 _Progress indicators_ are animated helpers that indicate waiting time as content loads.
 
 ### Circular

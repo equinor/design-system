@@ -1,11 +1,5 @@
 # Pagination
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Pagination
-
 _Pagination_ allows long sets of data or content to be divided into multiple pages with controls to navigate between these pages.
 
 ## Usage

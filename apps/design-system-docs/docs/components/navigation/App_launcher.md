@@ -1,11 +1,5 @@
 # App launcher
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# App launcher
-
 An _app launcher_ provides navigation for applications related to the application the user is currently viewing.
 
 ## Guidelines

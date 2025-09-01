@@ -1,11 +1,5 @@
 # Chip
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Chip
-
 _Chips_, also known as tags or badges, are advanced badges that represent discrete information.
 
 **More examples available in** **.**

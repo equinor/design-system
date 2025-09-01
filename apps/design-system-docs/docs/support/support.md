@@ -1,10 +1,4 @@
-# Support
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-# Support
-
-  
+# Support 
 
 ### Get in touch
 

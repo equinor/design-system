@@ -1,11 +1,5 @@
 # System icons
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# System icons
-
 System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
 
 ## Guidelines

@@ -1,7 +1,5 @@
 # Components
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
 Components are interactive building blocks for creating a user interface.
 
 Design components are designed in  (internal Equinor link)

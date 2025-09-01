@@ -1,11 +1,5 @@
 # Search
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Search
-
 _Search_ allows users to locate or refine content based on simple words or phrases.
 
 ### Default

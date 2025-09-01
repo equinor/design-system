@@ -1,11 +1,5 @@
 # Card
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
-
-# Card
-
 _A card_ displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways.
 
 ### Card with actions

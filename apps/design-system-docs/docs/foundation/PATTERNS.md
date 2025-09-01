@@ -1,14 +1,6 @@
-# Grid Alignment
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-PATTERNS
-
 # Grid alignment
 
 The organisation of space is key to every great design. By aligning your component to a grid, you will provide visual structure throughout your product.
-
-  
 
      
 

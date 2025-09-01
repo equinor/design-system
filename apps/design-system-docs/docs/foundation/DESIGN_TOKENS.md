@@ -1,11 +1,5 @@
 # Colour
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Colour
-
 The EDS's look and feel is light and airy. Colour helps show hierarchy, champion the Equinor brand and indicate interactivity.
 
 ## Guidelines

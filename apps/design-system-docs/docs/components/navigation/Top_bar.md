@@ -1,11 +1,5 @@
 # Top bar
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Top bar
-
 The _top bar_, also known as a header, displays navigation and actions relating to the interface.
 
 ## Guidelines

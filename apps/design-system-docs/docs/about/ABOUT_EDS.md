@@ -1,9 +1,5 @@
 # About EDS
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-# About EDS
-
 The Equinor design system (EDS) is Equinor's official design system and is to be used when designing, prototyping and developing internal digital interfaces.
 
 ## What is EDS

@@ -1,11 +1,5 @@
 # Side sheet
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
-
-# Side sheet
-
 A _side sheet_ is a a toggleable area that is anchored to the edge of the viewport with supplementary content.
 
 ## Usage

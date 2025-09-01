@@ -1,11 +1,5 @@
 # Sidebar
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Sidebar
-
 _Sidebar_  is used to display single level navigational destinations
 
 ## Guidelines

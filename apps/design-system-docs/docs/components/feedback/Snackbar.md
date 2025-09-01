@@ -1,11 +1,5 @@
 # Snackbar
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Snackbar
-
 _Snackbars_ provide brief temporary non-interrupting notifications at the bottom of the screen.
 
 ### Simple

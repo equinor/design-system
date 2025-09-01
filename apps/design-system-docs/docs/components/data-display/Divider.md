@@ -1,11 +1,5 @@
 # Divider
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Divider
-
 A _divider_ is a thin line that separates content into clear groups.
 
 **More examples available in** **.**

@@ -1,11 +1,5 @@
 # Link
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Link
-
 _Links_ are primarily used as interactive navigational elements, though they can also change how data is viewed.
 
 ## Guidelines

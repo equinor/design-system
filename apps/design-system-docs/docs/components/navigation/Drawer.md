@@ -1,11 +1,5 @@
 # Drawer
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Drawer
-
 A navigation _drawer_ displays categories of navigational links in a vertical column that can be scrolled.
 
 ## Guidelines

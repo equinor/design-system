@@ -1,11 +1,5 @@
 # Image placeholder
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# Image placeholder
-
 An image placeholder shows an image in a specific aspect ratio.
 
 ## Guidelines

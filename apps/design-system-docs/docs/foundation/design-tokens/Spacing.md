@@ -1,11 +1,5 @@
 # Spacing
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Spacing
-
 Every part of your interface should be intentional, this also includes spacing. While spacing is invisible, it gives air and readability to your interface.
 
 ## Guidelines

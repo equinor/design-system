@@ -1,11 +1,5 @@
 # Grid
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Grid
-
 A grid adapts to screen size and orientation to help keep layouts consistent.
 
 ## Guidelines

@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 
 const config: Config = {
   title: 'Design System Documentation',
-  tagline: 'for both mobile and web',
+  tagline: 'both for mobile and web',
   favicon: 'img/equinor.png',
 
   // // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -119,7 +119,7 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'light',
+      style: 'dark',
       logo: {
         alt: 'Equinor Logo',
         src: 'img/equinor.png',

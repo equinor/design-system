@@ -1,11 +1,5 @@
 # Autocomplete
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Autocomplete
-
 The _autocomplete_ (previously called select) component allows users to choose one or multiple items or options from a list.
 
 ## Guidelines

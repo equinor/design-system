@@ -1,11 +1,5 @@
 # Stepper
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Stepper
-
 _Steppers_ guide users through the steps of a task.
 
 ## Guidelines

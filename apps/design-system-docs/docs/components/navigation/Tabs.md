@@ -1,11 +1,5 @@
 # Tabs
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Tabs
-
 Tabs organise related content across different views to be quickly navigated.
 
   

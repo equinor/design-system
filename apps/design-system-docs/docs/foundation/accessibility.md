@@ -1,11 +1,5 @@
 # Accessibility
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-# Accessibility
-
-  
-
 All digital interfaces should be inclusive and accessible for everyone---regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.
 
 The UI components for all Equinor's internal digital interfaces are built to meet the  and  AA level requirements. While the components built are accessible, as a customer of the EDS there are things you need to remember when creating layouts and prototypes, and combining components

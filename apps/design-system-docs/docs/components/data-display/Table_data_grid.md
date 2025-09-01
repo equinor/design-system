@@ -1,11 +1,5 @@
 # Table data grid
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Table data grid
-
 _Table_ _data grids_ display data in a grid-like format with advanced functionalities.
 
 ## Guidelines

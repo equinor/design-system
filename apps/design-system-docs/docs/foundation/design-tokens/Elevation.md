@@ -1,11 +1,5 @@
 # Elevation
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Elevation
-
 Elevation is a visual effect that makes an element look like it's floating above the surface (using the z-axis).
 
 ## Guidelines

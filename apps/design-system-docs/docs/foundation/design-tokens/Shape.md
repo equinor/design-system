@@ -1,11 +1,5 @@
 # Shape
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Shape
-
 Components can have many different shapes. Establishing a common shape keeps consistency.
 
 ## Guidelines

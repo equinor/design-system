@@ -1,11 +1,5 @@
 # Menu
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Menu
-
 A _menu_, also known as a dropdown, is a temporary list of actions or functions.
 
 ### Compact

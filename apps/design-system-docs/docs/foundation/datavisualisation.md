@@ -1,9 +1,5 @@
 # Data Visualisation
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-# Data Visualisation
-
 A graphical presentation of information in a way that makes it easier to understand and process. It is usually interactive and allows for the user to draw their own conclusions about the data.
 
 ## Infographics

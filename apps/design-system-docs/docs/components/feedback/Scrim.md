@@ -1,11 +1,5 @@
 # Scrim
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Scrim
-
 A _scrim_ is a temporary visual effect that fades the general interface while allowing the user to focus on an overlay.
 
 ## Guidelines

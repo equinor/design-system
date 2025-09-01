@@ -1,11 +1,5 @@
 # Dialog
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Dialog
-
 _Dialogs_ display critical notifications and required actions.
 
 **More examples available in** **.**

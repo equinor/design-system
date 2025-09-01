@@ -1,11 +1,5 @@
 # Text field
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Text field
-
 A _text field_ lets users enter, interact and edit content, typically in forms and dialogs.
 
 ### Single line

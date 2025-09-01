@@ -1,11 +1,5 @@
 # Toolbar
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
-
-# Toolbar
-
 A _toolbar_ is a set of calls to action that allows users to apply changes and/or navigate in a page or product.
 
 ## Guidelines

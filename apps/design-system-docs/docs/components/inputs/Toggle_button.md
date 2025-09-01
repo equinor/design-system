@@ -1,11 +1,5 @@
 # Toggle button
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Toggle button
-
 _Toggle buttons_ allow users to select one of multiple options with a single click or tap.
 
 ## Guidelines

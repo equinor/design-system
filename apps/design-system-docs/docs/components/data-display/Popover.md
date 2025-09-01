@@ -1,11 +1,5 @@
 # Popover
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Popover
-
 A _popover_ is a floating card that provides more information or actions on hover or click.
 
 ### Activate on click

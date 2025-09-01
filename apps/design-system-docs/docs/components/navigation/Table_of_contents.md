@@ -1,11 +1,5 @@
 # Table of contents
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Table of contents
-
 _A table of contents_ is a list of hyperlinks that scroll to anchored text on the same page.
 
 ## Guidelines

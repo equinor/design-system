@@ -1,11 +1,5 @@
 # Date/time picker
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Date/time picker
-
 _Date/time pickers_ allows users to select a date and/or time, or a range of dates and/or times.
 
 ## Examples
