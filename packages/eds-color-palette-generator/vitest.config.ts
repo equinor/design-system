@@ -7,6 +7,14 @@ export default defineConfig({
     globals: true,
     include: ['src/**/*.{test,spec}.{js,ts}'],
     exclude: ['tests/**/*', 'node_modules/**/*'],
+    silent: false,
+    reporters: ['verbose'],
+    onConsoleLog(log, type) {
+      // Suppress expected error logs from color.js during tests
+      if (type === 'stderr' && log.includes('Error calculating contrast:')) {
+        return false
+      }
+    },
   },
   resolve: {
     alias: {

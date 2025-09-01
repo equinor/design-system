@@ -72,16 +72,19 @@ export function generateColorScale(
  * @param foreground - Text/foreground color (OKLCH or HEX string)
  * @param background - Background color (OKLCH or HEX string)
  * @param algorithm - Contrast calculation algorithm ("WCAG21" or "APCA")
+ * @param silent - Whether to suppress error logging (useful for tests)
  * @returns Contrast score as number or string
  */
 export function contrast({
   foreground,
   background,
   algorithm,
+  silent = false,
 }: {
   foreground: string
   background: string
   algorithm: Algorithms
+  silent?: boolean
 }): string | number {
   try {
     const fgColor = new Color(foreground)
@@ -93,7 +96,9 @@ export function contrast({
       decimals,
     )
   } catch (error) {
-    console.error('Error calculating contrast:', error)
+    if (!silent) {
+      console.error('Error calculating contrast:', error)
+    }
     // Return default values in case of error
     return '0'
   }

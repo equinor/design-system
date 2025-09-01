@@ -43,6 +43,7 @@ describe('Color Contrast Tests', () => {
       foreground: 'invalid-color',
       background: '#ffffff',
       algorithm: 'WCAG21',
+      silent: true,
     })
 
     expect(result).toBe('0')
@@ -258,7 +259,12 @@ describe('Edge Cases and Error Handling', () => {
     const foreground = 'oklch(invalid values)'
     const background = '#ffffff'
 
-    const result = contrast({ foreground, background, algorithm: 'APCA' })
+    const result = contrast({
+      foreground,
+      background,
+      algorithm: 'APCA',
+      silent: true,
+    })
 
     expect(result).toBe('0')
   })
@@ -268,6 +274,7 @@ describe('Edge Cases and Error Handling', () => {
       foreground: '',
       background: '#ffffff',
       algorithm: 'APCA',
+      silent: true,
     })
 
     expect(result).toBe('0')
@@ -296,7 +303,12 @@ describe('Edge Cases and Error Handling', () => {
     const foreground = 'oklch(0.2 0 NaN)' // Grayscale with NaN hue
     const background = 'oklch(0.8 0 180)' // Light gray
 
-    const result = contrast({ foreground, background, algorithm: 'APCA' })
+    const result = contrast({
+      foreground,
+      background,
+      algorithm: 'APCA',
+      silent: true,
+    })
 
     // Should handle gracefully and calculate based on lightness
     expect(typeof result).toBe('string')
