@@ -5,13 +5,16 @@ import { useState } from "react";
 export function ThemeButton() {
   const [isDark, setIsDark] = useState<boolean>(false);
 
-  const toggleTheme = (event: any) => {
-    /* @ts-ignore */
+  const toggleTheme = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - startViewTransition is not yet in TypeScript DOM types
     if (!document.startViewTransition) {
       setIsDark(!isDark);
-      isDark
-        ? (document.body.style.colorScheme = "light")
-        : (document.body.style.colorScheme = "dark");
+      if (isDark) {
+        document.body.style.colorScheme = "light";
+      } else {
+        document.body.style.colorScheme = "dark";
+      }
       return;
     }
     const x = event?.clientX ?? window.innerWidth / 2;
@@ -21,12 +24,15 @@ export function ThemeButton() {
       Math.max(y, window.innerHeight - y),
     );
 
-    /* @ts-ignore */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - startViewTransition is not yet in TypeScript DOM types
     const transition = document.startViewTransition(() => {
       setIsDark(!isDark);
-      isDark
-        ? (document.body.style.colorScheme = "light")
-        : (document.body.style.colorScheme = "dark");
+      if (isDark) {
+        document.body.style.colorScheme = "light";
+      } else {
+        document.body.style.colorScheme = "dark";
+      }
     });
 
     transition.ready.then(() => {
