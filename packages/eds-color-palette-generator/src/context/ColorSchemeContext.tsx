@@ -48,7 +48,7 @@ export function ColorSchemeProvider({
 
   useEffect(() => {
     // Update document class when color scheme changes
-    document.documentElement.classList.toggle('dark', colorScheme === 'dark')
+    document.documentElement.setAttribute('data-color-scheme', colorScheme)
     // Save to localStorage
     localStorageUtils.setColorScheme(colorScheme)
   }, [colorScheme])

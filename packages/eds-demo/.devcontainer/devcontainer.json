@@ -1,0 +1,20 @@
+/* spell-checker: disable */
+{
+  "image": "mcr.microsoft.com/devcontainers/javascript-node",
+  "hostRequirements": {
+    "cpus": 8,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "aaron-bond.better-comments",
+        "phoenisx.cssvar",
+        "csstools.postcss"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install && npm run dev"
+}

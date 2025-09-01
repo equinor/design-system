@@ -15,7 +15,13 @@ spec:
         from: feat/*
   components:
     - name: web
-      src: ./packages/eds-color-palette-generator
+      dockerfileName: DockerfileColorPaletteGenerator
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
+    - name: demo
+      dockerfileName: DockerfileEdsDemo
       publicPort: http
       ports:
         - name: http

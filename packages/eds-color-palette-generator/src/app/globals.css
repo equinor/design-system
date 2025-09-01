@@ -1,95 +1,92 @@
+@import '@equinor/eds-tokens/css/variables-static.css';
 @import 'tailwindcss';
-@import './colors.css';
-@custom-variant dark (&:where(.dark, .dark *));
-
-:root,
-[data-color-scheme='light'],
-.light {
-  color-scheme: light;
-}
-
-[data-color-scheme='dark'],
-.dark {
-  color-scheme: dark;
-}
+@custom-variant dark (&:where([data-color-scheme=dark], [data-color-scheme=dark] *));
 
 :root {
   --background: light-dark(
-    var(--color-gray-background-default),
-    var(--color-gray-background-subtle)
+    var(--eds-color-background-neutral-default),
+    var(--eds-color-background-neutral-subtle)
   );
-  --text: var(--color-gray-text-strong);
+  --text: var(--eds-color-text-neutral-strong);
 }
 
 @theme inline {
   --background-color-canvas: light-dark(
-    var(--color-gray-background-subtle),
-    var(--color-gray-background-default)
+    var(--eds-color-background-neutral-subtle),
+    var(--eds-color-background-neutral-default)
   );
   --background-color-surface: light-dark(
-    var(--color-gray-background-default),
-    var(--color-gray-background-subtle)
+    var(--eds-color-background-neutral-default),
+    var(--eds-color-background-neutral-subtle)
   );
 
   --background-color-elevated: light-dark(
-    var(--color-gray-background-default),
-    var(--color-gray-background-medium-default)
+    var(--eds-color-background-neutral-default),
+    var(--eds-color-background-neutral-medium-default)
   );
   --background-color-default: var(--background);
 
   --background-color-neutral-medium-default: var(
-    --color-gray-background-medium-default
+    --eds-color-background-neutral-medium-default
   );
   --background-color-neutral-medium-hover: var(
-    --color-gray-background-medium-hover
+    --eds-color-background-neutral-medium-hover
   );
   --background-color-neutral-medium-active: var(
-    --color-gray-background-medium-active
+    --eds-color-background-neutral-medium-active
   );
 
   --background-color-primary-default: var(
-    --color-moss-green-background-strong-default
+    --eds-color-background-accent-strong-default
   );
   --background-color-primary-hover: var(
-    --color-moss-green-background-strong-hover
+    --eds-color-background-accent-strong-hover
   );
   --background-color-primary-active: var(
-    --color-moss-green-background-strong-active
+    --eds-color-background-accent-strong-active
   );
 
   --background-color-danger-medium-default: var(
-    --color-red-background-medium-default
+    --eds-color-background-danger-medium-default
   );
   --background-color-danger-medium-hover: var(
-    --color-red-background-medium-hover
+    --eds-color-background-danger-medium-hover
   );
   --background-color-danger-medium-active: var(
-    --color-red-background-medium-active
+    --eds-color-background-danger-medium-active
   );
 
   --background-color-input: var(--background-color-canvas);
-  --border-color-input: var(--color-gray-border-subtle);
+  --border-color-input: var(--eds-color-border-neutral-subtle);
 
-  --border-color-neutral-subtle: var(--color-gray-border-subtle);
-  --border-color-neutral-medium: var(--color-gray-border-medium);
-  --border-color-neutral-strong: var(--color-gray-border-strong);
+  --border-color-neutral-subtle: var(--eds-color-border-neutral-subtle);
+  --border-color-neutral-medium: var(--eds-color-border-neutral-medium);
+  --border-color-neutral-strong: var(--eds-color-border-neutral-strong);
 
-  --text-color-strong: var(--color-gray-text-strong);
-  --text-color-subtle: var(--color-gray-text-subtle);
+  --text-color-strong: var(--eds-color-text-neutral-strong);
+  --text-color-subtle: var(--eds-color-text-neutral-subtle);
 
-  --text-color-contrast-strong: var(--color-gray-text-contrast-strong);
-  --text-color-contrast-subtle: var(--color-gray-text-contrast-subtle);
+  --text-color-contrast-strong: var(--eds-color-text-neutral-contrast-strong);
+  --text-color-contrast-subtle: var(--eds-color-text-neutral-contrast-subtle);
 
-  --text-color-default: var(--color-gray-text-strong);
-  --text-color-success-subtle: var(--color-green-text-subtle);
-  --text-color-success-strong: var(--color-green-text-strong);
-  --text-color-success-contrast-strong: var(--color-green-text-contrast-strong);
-  --text-color-success-contrast-subtle: var(--color-green-text-contrast-subtle);
+  --text-color-default: var(--eds-color-text-neutral-strong);
+  --text-color-success-subtle: var(--eds-color-text-success-subtle);
+  --text-color-success-strong: var(--eds-color-text-success-strong);
+  --text-color-success-contrast-strong: var(
+    --eds-color-text-success-contrast-strong
+  );
+  --text-color-success-contrast-subtle: var(
+    --eds-color-text-success-contrast-subtle
+  );
 
-  --text-color-danger-subtle: var(--color-red-text-subtle);
-  --text-color-danger-strong: var(--color-red-text-strong);
-  --text-color-danger-contrast-strong: var(--color-red-text-contrast-strong);
-  --text-color-danger-contrast-subtle: var(--color-red-text-contrast-subtle);
+  --text-color-danger-subtle: var(--eds-color-text-danger-subtle);
+  --text-color-danger-strong: var(--eds-color-text-danger-strong);
+  --text-color-danger-contrast-strong: var(
+    --eds-color-text-danger-contrast-strong
+  );
+  --text-color-danger-contrast-subtle: var(
+    --eds-color-text-danger-contrast-subtle
+  );
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
