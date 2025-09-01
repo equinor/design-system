@@ -9,11 +9,8 @@ export default defineConfig({
     exclude: ['tests/**/*', 'node_modules/**/*'],
     silent: false,
     reporters: ['verbose'],
-    onConsoleLog(log, type) {
-      // Suppress expected error logs from color.js during tests
-      if (type === 'stderr' && log.includes('Error calculating contrast:')) {
-        return false
       }
+      return true;
     },
   },
   resolve: {
