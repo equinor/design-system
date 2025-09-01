@@ -14,7 +14,7 @@ dialog {
     transform 0.2s;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  padding: 1rem;
+  padding: 1rem 1rem 2rem;
 
   /* Center dialog in the viewport */
   position: fixed;

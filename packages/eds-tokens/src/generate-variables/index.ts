@@ -10,8 +10,9 @@ import {
   fontQuote,
   pxFormatted,
   pxToRem,
-  createClassicColorVariables,
-  createMatrixColorVariables,
+  createColorVariablesFoundation,
+  createColorVariablesStatic,
+  createColorVariablesDynamic,
   createSpacingAndTypographyVariables,
 } from '@equinor/eds-tokens-build'
 
@@ -30,7 +31,7 @@ export async function generate() {
   console.info('Running Style Dictionary build script')
   console.info('Tokens directory:', TOKENS_DIR_FILE_PATH)
 
-  const colorBuildPath = 'color/'
+  const colorBuildPath = `color/`
 
   const cssTransforms = [
     'name/kebab',
@@ -39,18 +40,27 @@ export async function generate() {
     FONT_QUOTE_NAME,
   ]
 
-  await createMatrixColorVariables({
-    tokensDir: TOKENS_DIR_FILE_PATH,
-    colorBuildPath: colorBuildPath,
-    prefix: 'eds-color',
-  })
-
-  await createClassicColorVariables({
+  await createColorVariablesFoundation({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,
     colorBuildPath: colorBuildPath,
     cssTransforms,
   })
+
+  await createColorVariablesStatic({
+    tokensDir: TOKENS_DIR_FILE_PATH,
+    cssBuildPath: cssBuildPath,
+    colorBuildPath: colorBuildPath,
+    cssTransforms,
+  })
+
+  await createColorVariablesDynamic({
+    tokensDir: TOKENS_DIR_FILE_PATH,
+    cssBuildPath: cssBuildPath,
+    colorBuildPath: colorBuildPath,
+    cssTransforms,
+  })
+
   await createSpacingAndTypographyVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,
     cssBuildPath: cssBuildPath,

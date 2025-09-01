@@ -1,0 +1,27 @@
+{
+  "Background": {
+    "Medium": {
+      "Default": "#f6caaa",
+      "Hover": "#eeae7c",
+      "Active": "#e38d42"
+    },
+    "Strong": {
+      "Default": "#9b4900",
+      "Hover": "#813e00",
+      "Active": "#773a00"
+    },
+    "Default": "#fff",
+    "Subtle": "#fff1e2"
+  },
+  "Border": {
+    "Subtle": "#f3be97",
+    "Medium": "#e89959",
+    "Strong": "#a34e00"
+  },
+  "Text": {
+    "Subtle": "#8a4100",
+    "Strong": "#27190e",
+    "Contrast subtle": "#fad6bc",
+    "Contrast strong": "#fff8ec"
+  }
+}

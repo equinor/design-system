@@ -83,6 +83,8 @@ export type TooltipProps = {
   placement?: Placement
   /** Tooltip title */
   title?: ReactNode
+  /** Disable the tooltip */
+  disabled?: boolean
   /** Tooltip anchor element */
   children: React.ReactElement & React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
@@ -101,6 +103,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       children,
       style,
       enterDelay = 100,
+      disabled = false,
       portalContainer,
       ...rest
     },
@@ -226,6 +229,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       <>
         {shouldOpen &&
           open &&
+          !disabled &&
           createPortal(
             TooltipEl,
             portalContainer ?? rootElement ?? document.body,

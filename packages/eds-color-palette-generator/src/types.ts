@@ -2,7 +2,7 @@ export type ColorValue = string
 
 export type ColorDefinition = {
   name: string
-  hue: string
+  hex: string
 }
 
 export type ConfigFile = {
@@ -14,3 +14,5 @@ export type ConfigFile = {
 }
 
 export type ContrastMethod = 'WCAG21' | 'APCA'
+
+export type ColorFormat = 'HEX' | 'OKLCH'

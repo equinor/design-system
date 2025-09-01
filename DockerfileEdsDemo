@@ -1,0 +1,64 @@
+# Use specific Node.js version for better reproducibility
+ARG NODE_VERSION=18.19.0-alpine3.18
+ARG PNPM_VERSION=9.15.0
+
+FROM node:${NODE_VERSION} AS base
+LABEL org.opencontainers.image.title="EDS Demo Application"
+LABEL org.opencontainers.image.description="Equinor Design System Demo Application"
+LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
+
+RUN npm install -g pnpm@${PNPM_VERSION}
+
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Copy workspace configuration files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
+
+# Copy only package.json files for better Docker layer caching
+COPY packages/eds-demo/package.json ./packages/eds-demo/
+COPY packages/eds-tokens/package.json ./packages/eds-tokens/
+COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
+COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
+
+# Install dependencies with frozen lockfile and clean cache
+RUN pnpm install --frozen-lockfile && \
+    pnpm store prune
+
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies and source code
+COPY --from=deps /app ./
+COPY packages/ ./packages/
+
+# Build variables & demo
+RUN pnpm run build:variables && \
+    pnpm --filter eds-demo run build
+
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    PORT=3000 \
+    USER=nextjs \
+    UID=12345 \
+    NEXT_TELEMETRY_DISABLED=1
+
+# Create non-root user
+RUN addgroup -S "$USER" && \
+    adduser -S --uid "$UID" "$USER" && \
+    apk add --no-cache tini
+
+# Copy just the essential built files and node_modules
+COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo ./packages/eds-demo
+COPY --from=builder --chown="$USER":"$USER" /app/node_modules ./node_modules
+
+USER "$UID"
+
+EXPOSE 3000
+
+ENTRYPOINT ["/sbin/tini", "--"]
+WORKDIR /app/packages/eds-demo
+CMD ["pnpm", "start"]

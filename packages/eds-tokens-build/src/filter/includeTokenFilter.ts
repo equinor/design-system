@@ -3,16 +3,20 @@ import type { TransformedToken } from 'style-dictionary/types'
 export const includeTokenFilter = (
   token: TransformedToken,
   filePathSegmentsToInclude?: string[],
+  namesToExclude: string[] = [],
 ) => {
-  const namesToExclude = [
+  // Join name to _namesToExclude
+  const _namesToExclude = [
     'documentation',
     'padding-centred',
     'padding-baselined',
     'cap-height',
     'cap-rounded',
     'container',
+    ...namesToExclude,
   ]
-  const isExcluded = namesToExclude.some((nameToExclude) =>
+
+  const isExcluded = _namesToExclude.some((nameToExclude) =>
     token.name.includes(nameToExclude),
   )
   if (isExcluded) {

@@ -1,48 +1,53 @@
 import React from 'react'
-import { ColorDefinition, ConfigFile } from '@/types'
+import { ColorDefinition, ConfigFile, ColorFormat } from '@/types'
 import {
   downloadColorTokens,
   downloadConfiguration,
+  downloadDesignSystemCSS,
 } from '@/utils/configurationUtils'
 
 type ConfigurationPanelProps = {
-  customLightModeValues: number[]
-  customDarkModeValues: number[]
+  lightModeValues: number[]
+  darkModeValues: number[]
   mean: number
   stdDev: number
   colors: ColorDefinition[]
+  colorFormat: ColorFormat
   onConfigUpload: (config: ConfigFile) => void
+  onResetConfiguration: () => void
 }
 
 export const ConfigurationPanel = ({
-  customLightModeValues,
-  customDarkModeValues,
+  lightModeValues,
+  darkModeValues,
   mean,
   stdDev,
   colors,
+  colorFormat,
   onConfigUpload,
+  onResetConfiguration,
 }: ConfigurationPanelProps) => {
   return (
-    <div className="my-6 p-6 border border-gray-200 rounded-lg dark:border-gray-800">
-      <h3 className="mb-4 font-medium">Configuration</h3>
+    <div className="p-6 my-6 border border-neutral-subtle rounded-lg">
+      <h3 className="mb-4 font-medium"></h3>
       <div className="flex flex-wrap gap-4">
         <button
           onClick={() =>
             downloadConfiguration(
-              customLightModeValues,
-              customDarkModeValues,
+              lightModeValues,
+              darkModeValues,
               mean,
               stdDev,
               colors,
             )
           }
-          className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded border-none text-sm cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600"
+          className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border-none rounded cursor-pointer"
         >
-          Download Configuration
+          Download configuration
         </button>
 
-        <label className="inline-block px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">
-          <span>Upload Configuration</span>
+        <label className="inline-block px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover rounded cursor-pointer">
+          <span>Upload configuration</span>
           <input
             type="file"
             className="hidden"
@@ -74,9 +79,9 @@ export const ConfigurationPanel = ({
                   if (
                     !Array.isArray(config.colors) ||
                     !config.colors.every(
-                      (color) =>
+                      (color: ColorDefinition) =>
                         typeof color.name === 'string' &&
-                        typeof color.hue === 'string'
+                        typeof color.hex === 'string',
                     )
                   ) {
                     alert('Invalid colors field in configuration file')
@@ -101,18 +106,34 @@ export const ConfigurationPanel = ({
           />
         </label>
         <button
+          onClick={onResetConfiguration}
+          className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded cursor-pointer"
+        >
+          Reset configuration
+        </button>
+        <button
           onClick={() =>
             downloadColorTokens(
               colors,
-              customLightModeValues,
-              customDarkModeValues,
+              lightModeValues,
+              darkModeValues,
               mean,
               stdDev,
+              colorFormat,
             )
           }
-          className="px-4 py-2 bg-[#007079] text-white rounded border-none text-sm cursor-pointer hover:bg-[#005f66]"
+          className="px-4 py-2 bg-neutral-medium-default hover:bg-neutral-medium-hover rounded border-none text-sm cursor-pointer"
         >
-          Download Color Tokens (W3C Format)
+          Download colour tokens (W3C Format)
+        </button>
+
+        <button
+          onClick={() =>
+            downloadDesignSystemCSS(colors, mean, stdDev, colorFormat)
+          }
+          className="px-4 py-2 bg-neutral-medium-default hover:bg-neutral-medium-hover rounded border-none text-sm cursor-pointer"
+        >
+          Download CSS variables
         </button>
       </div>
     </div>

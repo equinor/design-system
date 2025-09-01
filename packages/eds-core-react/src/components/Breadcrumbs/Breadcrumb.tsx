@@ -39,7 +39,7 @@ export type BreadcrumbProps = {
    * truncate long labels based on this width */
   maxWidth?: number
   /** Children is breadcrumb text */
-  children: string
+  children: React.ReactNode
   /** Always show tooltip */
   forceTooltip?: boolean
   /** Override element type */
@@ -48,7 +48,7 @@ export type BreadcrumbProps = {
 
 export const Breadcrumb: OverridableSubComponent = forwardRef(
   function Breadcrumb(
-    { children, maxWidth, forceTooltip, href, as, ...other },
+    { children, maxWidth, forceTooltip, href, as, ...other }: BreadcrumbProps,
     ref,
   ) {
     const props: React.ComponentProps<typeof StyledTypography> = {
@@ -57,10 +57,11 @@ export const Breadcrumb: OverridableSubComponent = forwardRef(
       ref,
     }
 
-    const showTooltip = maxWidth > 0 || forceTooltip
+    const showTooltip =
+      (maxWidth !== undefined && maxWidth > 0) || forceTooltip === true
     const isHrefDefined = href !== undefined
 
-    const forwardedAs: ElementType = useMemo(
+    const forwardedAs = useMemo(
       () => (as ? as : isHrefDefined ? 'a' : 'span'),
       [as, isHrefDefined],
     )

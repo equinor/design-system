@@ -1,42 +1,48 @@
-import { StyleDictionary as o } from "style-dictionary-utils";
-import { pxFormatted as n, pxTransform as i, pxToRem as c, fontQuote as l, createMatrixColorVariables as T, createClassicColorVariables as f, PX_TO_REM_NAME as p, PX_FORMATTED_NAME as d, FONT_QUOTE_NAME as m, createSpacingAndTypographyVariables as u } from "@equinor/eds-tokens-build";
-const s = `${process.cwd()}/build`, a = `${s}/css`, b = `${s}/js`, E = `${s}/json`;
-o.registerTransform(n);
-o.registerTransform(i);
-o.registerTransform(c);
-o.registerTransform(l);
-async function g() {
-  const r = `${process.cwd()}/tokens`;
-  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", r);
-  const e = "color/", t = [
+import { StyleDictionary as s } from "style-dictionary-utils";
+import { pxFormatted as n, pxTransform as i, pxToRem as c, fontQuote as l, createColorVariablesFoundation as T, PX_TO_REM_NAME as m, PX_FORMATTED_NAME as u, FONT_QUOTE_NAME as d, createColorVariablesStatic as f, createColorVariablesDynamic as p, createSpacingAndTypographyVariables as g } from "@equinor/eds-tokens-build";
+const a = `${process.cwd()}/build`, e = `${a}/css`, _ = `${a}/js`, E = `${a}/json`;
+s.registerTransform(n);
+s.registerTransform(i);
+s.registerTransform(c);
+s.registerTransform(l);
+async function y() {
+  const o = `${process.cwd()}/tokens`;
+  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", o);
+  const t = "color/", r = [
     "name/kebab",
-    p,
-    d,
-    m
+    m,
+    u,
+    d
   ];
   await T({
-    tokensDir: r,
-    colorBuildPath: e,
-    prefix: "eds-color"
+    tokensDir: o,
+    cssBuildPath: e,
+    colorBuildPath: t,
+    cssTransforms: r
   }), await f({
-    tokensDir: r,
-    cssBuildPath: a,
-    colorBuildPath: e,
-    cssTransforms: t
-  }), await u({
-    tokensDir: r,
-    cssBuildPath: a,
-    cssTransforms: t
+    tokensDir: o,
+    cssBuildPath: e,
+    colorBuildPath: t,
+    cssTransforms: r
+  }), await p({
+    tokensDir: o,
+    cssBuildPath: e,
+    colorBuildPath: t,
+    cssTransforms: r
+  }), await g({
+    tokensDir: o,
+    cssBuildPath: e,
+    cssTransforms: r
   });
 }
-g().then(() => {
+y().then(() => {
   console.log("✅ Variables generated successfully");
-}).catch((r) => {
-  console.error("❌ Error generating color variables:", r);
+}).catch((o) => {
+  console.error("❌ Error generating color variables:", o);
 });
 export {
-  a as cssBuildPath,
-  g as generate,
-  b as jsBuildPath,
+  e as cssBuildPath,
+  y as generate,
+  _ as jsBuildPath,
   E as jsonBuildPath
 };

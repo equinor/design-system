@@ -1,41 +1,27 @@
-import React from 'react'
 import { ColorDefinition } from '@/types'
 
 type ColorManagementProps = {
   colors: ColorDefinition[]
-  setColors: React.Dispatch<React.SetStateAction<ColorDefinition[]>>
+  onUpdateColorName: (index: number, newName: string) => void
+  onUpdateColorHex: (index: number, newHex: string) => void
+  onRemoveColor: (index: number) => void
+  onAddColor: (newColor: ColorDefinition) => void
 }
 
 export const ColorManagement = ({
   colors,
-  setColors,
+  onUpdateColorName,
+  onUpdateColorHex,
+  onRemoveColor,
+  onAddColor,
 }: ColorManagementProps) => {
-  // Function to add a new color
-  const addColor = (newColor: ColorDefinition) => {
-    setColors([...colors, newColor])
-  }
-
-  // Function to remove a color
-  const removeColor = (colorName: string) => {
-    setColors(colors.filter((color) => color.name !== colorName))
-  }
-
-  // Function to update a color's hue
-  const updateColorHue = (colorName: string, newHue: string) => {
-    setColors(
-      colors.map((color) =>
-        color.name === colorName ? { ...color, hue: newHue } : color,
-      ),
-    )
-  }
-
   return (
-    <fieldset className="p-6 space-y-4 border border-gray-200 rounded-lg dark:border-gray-800">
-      <legend className="mb-2 font-medium">Color Management</legend>
+    <fieldset className="p-6 space-y-4 border border-neutral-subtle rounded-lg">
+      <legend className="mb-2 font-medium">Colours</legend>
 
       <div className="max-w-3xl mx-auto">
         {/* Header Row */}
-        <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-gray-200 dark:border-gray-800 pb-2 font-medium">
+        <div className="grid grid-cols-[1fr_1fr_auto] gap-4 mb-2 px-2 border-b border-neutral-subtle pb-2 font-medium">
           <div className="text-left">Name</div>
           <div className="text-left">Colour</div>
           <div className="text-right">Action</div>
@@ -43,23 +29,19 @@ export const ColorManagement = ({
 
         {/* Color Rows */}
         <div className="space-y-2">
-          {colors.map((color) => (
+          {colors.map((color, index) => (
             <div
-              key={color.name}
-              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-center p-2 border-b border-gray-200 dark:border-gray-800"
+              key={`color-${index}`}
+              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-center p-2 border-b border-neutral-subtle"
             >
               {/* Name Field */}
               <div>
                 <input
                   type="text"
-                  className="w-full p-2 text-sm border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800"
+                  className="w-full p-2 text-sm bg-input border border-input rounded"
                   value={color.name}
-                  onChange={(e) => {
-                    const updatedColors = colors.map((c) =>
-                      c === color ? { ...c, name: e.target.value } : c,
-                    )
-                    setColors(updatedColors)
-                  }}
+                  onChange={(e) => onUpdateColorName(index, e.target.value)}
+                  data-testid={`color-name-input-${index}`}
                 />
               </div>
 
@@ -67,18 +49,20 @@ export const ColorManagement = ({
               <div className="flex items-center gap-2">
                 <input
                   type="color"
-                  className="w-8 h-8 cursor-pointer border border-gray-300 dark:border-gray-700 rounded"
-                  value={color.hue}
-                  onChange={(e) => updateColorHue(color.name, e.target.value)}
+                  className="w-8 h-8 border border-neutral-medium rounded cursor-pointer"
+                  value={color.hex}
+                  onChange={(e) => onUpdateColorHex(index, e.target.value)}
+                  data-testid={`color-hex-input-${index}`}
                 />
               </div>
 
               {/* Actions */}
               <div className="text-right">
                 <button
-                  className="px-3 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-700"
-                  onClick={() => removeColor(color.name)}
+                  className="px-3 py-1 text-xs bg-danger-medium-default hover:bg-danger-medium-hover rounded"
+                  onClick={() => onRemoveColor(index)}
                   disabled={colors.length <= 1}
+                  data-testid={`remove-color-button-${index}`}
                 >
                   Remove
                 </button>
@@ -87,24 +71,23 @@ export const ColorManagement = ({
           ))}
         </div>
 
-        {/* Add New Color Button */}
-        <div className="text-left mt-4">
+        <div className="mt-4 text-left">
           <button
-            className="px-4 py-2 text-sm text-white bg-[#007079] rounded"
+            className="px-4 py-2 text-sm text-contrast-strong bg-primary-default hover:bg-primary-hover rounded"
             onClick={() => {
-              // Generate a random color in hex format
               const randomColor =
                 '#' +
                 Math.floor(Math.random() * 16777215)
                   .toString(16)
                   .padStart(6, '0')
-              addColor({
-                name: `Color ${colors.length + 1}`,
-                hue: randomColor,
+              onAddColor({
+                name: `color-${colors.length + 1}`,
+                hex: randomColor,
               })
             }}
+            data-testid="add-color-button"
           >
-            Add New Color
+            Add
           </button>
         </div>
       </div>

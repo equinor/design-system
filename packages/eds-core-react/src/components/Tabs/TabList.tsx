@@ -120,7 +120,10 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
         'aria-controls': `${tabsId}-panel-${$index + 1}`,
         active: isActive,
         $index,
-        onClick: () => handleChange($index),
+        onClick: () =>
+          handleChange(
+            controlledActive !== undefined ? controlledActive : $index,
+          ),
         ref: tabRef,
       })
     }) ?? []

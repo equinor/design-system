@@ -4,7 +4,7 @@ import { Variants } from './Tabs.types'
 type State = {
   variant: Variants
   scrollable: boolean
-  handleChange: (index: number) => void
+  handleChange: (value: number | string) => void
   activeTab: number | string
   tabsId: string
   tabsFocused: boolean
