@@ -26,6 +26,3 @@ spec:
       ports:
         - name: http
           port: 3000
-  dnsAppAlias:
-    environment: prod
-    component: web
