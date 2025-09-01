@@ -1,17 +1,6 @@
 @import '@equinor/eds-tokens/css/variables-static.css';
 @import 'tailwindcss';
-@custom-variant dark (&:where(.dark, .dark *));
-
-:root,
-[data-color-scheme='light'],
-.light {
-  color-scheme: light;
-}
-
-[data-color-scheme='dark'],
-.dark {
-  color-scheme: dark;
-}
+@custom-variant dark (&:where([data-color-scheme=dark], [data-color-scheme=dark] *));
 
 :root {
   --background: light-dark(

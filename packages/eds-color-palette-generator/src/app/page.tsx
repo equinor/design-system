@@ -214,7 +214,7 @@ export default function App() {
   }, [currentColorScales, contrastMethod, showContrast, isClient])
 
   return (
-    <div data-theme={colorScheme} className="p-6 ">
+    <div className="p-6 ">
       <HeaderPanel
         showConfigPanel={showConfigPanel}
         setShowConfigPanel={setShowConfigPanel}
