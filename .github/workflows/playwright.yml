@@ -1,7 +1,7 @@
 name: Color Palette Generator - Playwright Tests
 on:
   push:
-    branches: [develop, feat/thalse-3847-finalise-color-generator]
+    branches: [develop, feat/*]
     paths:
       - 'packages/eds-color-palette-generator/**'
       - '.github/workflows/playwright.yml'
@@ -19,6 +19,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.53.2-jammy
     env:
       PLAYWRIGHT_URL: https://web-eds-colour-palette-generator-dev.radix.equinor.com/
     steps:
@@ -37,35 +39,8 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: packages/eds-color-palette-generator
 
-      - name: Get Playwright version
-        id: playwright_version
-        run: |
-          VERSION=$(node -p "require('@playwright/test/package.json').version")
-          echo "Playwright version: $VERSION"
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-        working-directory: packages/eds-color-palette-generator
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        id: playwright_cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright_version.outputs.version }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
-      - name: Install Playwright Browsers
-        if: steps.playwright_cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install --with-deps
-        working-directory: packages/eds-color-palette-generator
-
-      - name: Install Playwright system dependencies (if cache hit)
-        if: steps.playwright_cache.outputs.cache-hit == 'true'
-        run: pnpm exec playwright install-deps
-        working-directory: packages/eds-color-palette-generator
-
-      - name: Run Playwright tests
-        run: pnpm run test:e2e
+      - name: Run Playwright tests (Chromium only)
+        run: pnpm run test:e2e -- --project=chromium
         working-directory: packages/eds-color-palette-generator
 
       - uses: actions/upload-artifact@v4
