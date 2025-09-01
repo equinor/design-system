@@ -1,13 +1,15 @@
 name: Color Palette Generator - Playwright Tests
 on:
   push:
-    branches: [develop, feat/thalse-3847-finalise-color-generator]
+    branches: [develop, 'feat/**']
     paths:
       - 'packages/eds-color-palette-generator/**'
+      - '.github/workflows/playwright.yml'
   pull_request:
     branches: [develop]
     paths:
       - 'packages/eds-color-palette-generator/**'
+      - '.github/workflows/playwright.yml'
 jobs:
   test:
     timeout-minutes: 60
@@ -16,20 +18,55 @@ jobs:
       PLAYWRIGHT_URL: https://web-eds-colour-palette-generator-dev.radix.equinor.com/
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: 'npm'
+
       - name: Install pnpm
         run: npm install -g pnpm
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
         working-directory: packages/eds-color-palette-generator
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm list @playwright/test --depth=0 --json | jq -r '.[] | .dependencies["@playwright/test"].version')" >> $GITHUB_OUTPUT
+        working-directory: packages/eds-color-palette-generator
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm exec playwright install --with-deps
         working-directory: packages/eds-color-palette-generator
+
+      - name: Install Playwright system dependencies (if cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps
+        working-directory: packages/eds-color-palette-generator
+
       - name: Run Playwright tests
         run: pnpm run test:e2e
         working-directory: packages/eds-color-palette-generator
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
