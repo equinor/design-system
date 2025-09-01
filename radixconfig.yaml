@@ -1,7 +1,7 @@
 apiVersion: radix.equinor.com/v1
 kind: RadixApplication
 metadata:
-  name: eds-colour-palette-generator
+  name: eds
 spec:
   build:
     useBuildKit: true
@@ -14,7 +14,7 @@ spec:
       build:
         from: feat/*
   components:
-    - name: web
+    - name: color-palette-generator
       dockerfileName: DockerfileColorPaletteGenerator
       publicPort: http
       ports:
