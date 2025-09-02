@@ -11,12 +11,8 @@ import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
 import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
-import {
-  ColorDefinition,
-  ConfigFile,
-  ContrastMethod,
-  ColorFormat,
-} from '@/types'
+import { ColorDefinition, ConfigFile, ContrastMethod, ColorFormat } from '@/types'
+import { arraysEqual, colorsEqual } from '@/utils/compare'
 import { localStorageUtils } from '@/utils/localStorage'
 import config, {
   lightnessValuesInLightMode,
@@ -202,6 +198,17 @@ export default function App() {
   const [isClient, setIsClient] = useState(false)
   useEffect(() => setIsClient(true), [])
 
+  // Determine if configuration differs from defaults (mean, stdDev, light/dark values, colors)
+  const isConfigDirty = useMemo(() => {
+    return (
+      mean !== config.mean ||
+      stdDev !== config.stdDev ||
+      !arraysEqual(lightModeValues, lightnessValuesInLightMode) ||
+      !arraysEqual(darkModeValues, darknessValuesInDarkMode) ||
+      !colorsEqual(colors, config.colors)
+    )
+  }, [mean, stdDev, lightModeValues, darkModeValues, colors])
+
   const contrastSummary = useMemo(() => {
     if (!isClient || !showContrast) {
       return { passed: 0, total: 0, percentage: 0 }
@@ -255,7 +262,6 @@ export default function App() {
             colors={colors}
             colorFormat={colorFormat}
             onConfigUpload={handleConfigUpload}
-            onResetConfiguration={resetConfiguration}
           />
 
           {/* Gaussian Parameters Panel - conditionally rendered */}
@@ -295,12 +301,25 @@ export default function App() {
       ))}
 
       {isClient && showContrast && contrastSummary.total > 0 && (
-        <div
-          role="status"
-          aria-live="polite"
-          className="fixed bottom-4 right-4 z-30 px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
-        >
-          {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
+        <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
+          <div
+            role="status"
+            aria-live="polite"
+            className="px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
+          >
+            {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
+          </div>
+          {isConfigDirty && (
+            <button
+              type="button"
+              onClick={resetConfiguration}
+              className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md cursor-pointer"
+              aria-label="Reset configuration changes"
+              title="Reset configuration changes"
+            >
+              Reset config changes
+            </button>
+          )}
         </div>
       )}
     </div>

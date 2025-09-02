@@ -186,7 +186,7 @@ export const BORDER_MEDIUM: StepDefinition = {
   category: 'border',
   variant: 'medium',
   lightValue: 0.75,
-  darkValue: 0.59,
+  darkValue: 0.61,
   contrastWith: [
     {
       targetStep: 'background-default',
@@ -198,11 +198,11 @@ export const BORDER_MEDIUM: StepDefinition = {
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
-    // {
-    //   targetStep: 'background-medium-default',
-    //   lc: APCA_CONTRAST_LEVELS.LC_15,
-    //   wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    // },
+    {
+      targetStep: 'background-medium-default',
+      lc: APCA_CONTRAST_LEVELS.LC_15,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+    },
     // {
     //   targetStep: 'background-medium-hover',
     //   lc: APCA_CONTRAST_LEVELS.LC_15,
@@ -222,7 +222,7 @@ export const BORDER_STRONG: StepDefinition = {
   category: 'border',
   variant: 'strong',
   lightValue: 0.52,
-  darkValue: 0.82,
+  darkValue: 0.76,
   contrastWith: [
     {
       targetStep: 'background-default',
@@ -234,16 +234,16 @@ export const BORDER_STRONG: StepDefinition = {
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
-    // {
-    //   targetStep: 'background-medium-default',
-    //   lc: APCA_CONTRAST_LEVELS.LC_30,
-    //   wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    // },
-    // {
-    //   targetStep: 'background-medium-hover',
-    //   lc: APCA_CONTRAST_LEVELS.LC_30,
-    //   wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    // },
+    {
+      targetStep: 'background-medium-default',
+      lc: APCA_CONTRAST_LEVELS.LC_30,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+    },
+    {
+      targetStep: 'background-medium-hover',
+      lc: APCA_CONTRAST_LEVELS.LC_30,
+      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
+    },
     // {
     //   targetStep: 'background-medium-active',
     //   lc: APCA_CONTRAST_LEVELS.LC_30,
@@ -327,7 +327,7 @@ export const TEXT_SUBTLE: StepDefinition = {
   name: 'Text Subtle',
   category: 'text',
   variant: 'subtle',
-  lightValue: 0.46,
+  lightValue: 0.42,
   darkValue: 0.91,
   contrastWith: [
     {
@@ -340,11 +340,11 @@ export const TEXT_SUBTLE: StepDefinition = {
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
-    // {
-    //   targetStep: 'background-medium-default',
-    //   lc: APCA_CONTRAST_LEVELS.LC_60,
-    //   wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    // },
+    {
+      targetStep: 'background-medium-default',
+      lc: APCA_CONTRAST_LEVELS.LC_60,
+      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
+    },
     // {
     //   targetStep: 'background-medium-hover',
     //   lc: APCA_CONTRAST_LEVELS.LC_60,
