@@ -4,9 +4,9 @@
       "Default": "#fff",
       "Subtle": "#f5f5f5",
       "Medium": {
-        "Default": "#d4d4d4",
-        "Hover": "#bebebe",
-        "Active": "#a4a4a4"
+        "Default": "#dedede",
+        "Hover": "#cecece",
+        "Active": "#bebebe"
       },
       "Strong": {
         "Default": "#636363",
@@ -18,9 +18,9 @@
       "Default": "#fff",
       "Subtle": "#eaf8fa",
       "Medium": {
-        "Default": "#bbdbdf",
-        "Hover": "#97c8cd",
-        "Active": "#6cb2b9"
+        "Default": "#cae4e7",
+        "Hover": "#b1d6da",
+        "Active": "#97c8cd"
       },
       "Strong": {
         "Default": "#206f77",
@@ -32,9 +32,9 @@
       "Default": "#fff",
       "Subtle": "#eafbe8",
       "Medium": {
-        "Default": "#bbe0b8",
-        "Hover": "#97cf93",
-        "Active": "#6dba69"
+        "Default": "#cae8c7",
+        "Hover": "#b1dbae",
+        "Active": "#97cf93"
       },
       "Strong": {
         "Default": "#207720",
@@ -46,9 +46,9 @@
       "Default": "#fff",
       "Subtle": "#e7f8ff",
       "Medium": {
-        "Default": "#b5daf5",
-        "Hover": "#8dc5ee",
-        "Active": "#5cade5"
+        "Default": "#c5e3f9",
+        "Hover": "#aad4f3",
+        "Active": "#8dc5ee"
       },
       "Strong": {
         "Default": "#006aa0",
@@ -60,9 +60,9 @@
       "Default": "#fff",
       "Subtle": "#fff1e2",
       "Medium": {
-        "Default": "#f6caaa",
-        "Hover": "#eeae7c",
-        "Active": "#e38d42"
+        "Default": "#fad6bc",
+        "Hover": "#f4c29d",
+        "Active": "#eeae7c"
       },
       "Strong": {
         "Default": "#9b4900",
@@ -74,9 +74,9 @@
       "Default": "#fff",
       "Subtle": "#ffecea",
       "Medium": {
-        "Default": "#ffbcba",
-        "Hover": "#ff9897",
-        "Active": "#ff686e"
+        "Default": "#ffcbc9",
+        "Hover": "#ffb2b0",
+        "Active": "#ff9897"
       },
       "Strong": {
         "Default": "#bc002a",
@@ -87,32 +87,32 @@
   },
   "Border": {
     "Neutral": {
-      "Subtle": "#cacaca",
+      "Subtle": "#d4d4d4",
       "Medium": "#aeaeae",
       "Strong": "#696969"
     },
     "Accent": {
-      "Subtle": "#acd3d7",
+      "Subtle": "#bbdbdf",
       "Medium": "#7cbac1",
       "Strong": "#21767e"
     },
     "Success": {
-      "Subtle": "#acd9a9",
+      "Subtle": "#bbe0b8",
       "Medium": "#7cc278",
       "Strong": "#227e22"
     },
     "Info": {
-      "Subtle": "#a4d1f2",
+      "Subtle": "#b5daf5",
       "Medium": "#6fb6e9",
       "Strong": "#0070a9"
     },
     "Warning": {
-      "Subtle": "#f3be97",
+      "Subtle": "#f6caaa",
       "Medium": "#e89959",
       "Strong": "#a34e00"
     },
     "Danger": {
-      "Subtle": "#ffadab",
+      "Subtle": "#ffbcba",
       "Medium": "#ff7a7d",
       "Strong": "#c6002d"
     }
@@ -122,37 +122,37 @@
       "Subtle": "#4d4d4d",
       "Strong": "#1d1d1d",
       "Contrast subtle": "#dedede",
-      "Contrast strong": "#fcfcfc"
+      "Contrast strong": "#fff"
     },
     "Accent": {
       "Subtle": "#20565c",
       "Strong": "#141f20",
       "Contrast subtle": "#cae4e7",
-      "Contrast strong": "#f3feff"
+      "Contrast strong": "#fff"
     },
     "Success": {
       "Subtle": "#215c1f",
       "Strong": "#142114",
       "Contrast subtle": "#cae8c7",
-      "Contrast strong": "#f3fff1"
+      "Contrast strong": "#fff"
     },
     "Info": {
       "Subtle": "#0e5279",
       "Strong": "#121e27",
       "Contrast subtle": "#c5e3f9",
-      "Contrast strong": "#f0feff"
+      "Contrast strong": "#fff"
     },
     "Warning": {
       "Subtle": "#773a00",
       "Strong": "#27190e",
       "Contrast subtle": "#fad6bc",
-      "Contrast strong": "#fff8ec"
+      "Contrast strong": "#fff"
     },
     "Danger": {
       "Subtle": "#8e1525",
       "Strong": "#2e1414",
       "Contrast subtle": "#ffcbc9",
-      "Contrast strong": "#fff5f4"
+      "Contrast strong": "#fff"
     }
   }
 }

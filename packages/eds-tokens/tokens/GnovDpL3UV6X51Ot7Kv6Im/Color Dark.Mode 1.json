@@ -27,7 +27,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#1f666d",
+        "$value": "#1f6369",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -63,7 +63,7 @@
       },
       "6": {
         "$type": "color",
-        "$value": "#1f666d",
+        "$value": "#1f6369",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -209,7 +209,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#5b5b5b",
+        "$value": "#585858",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -245,7 +245,7 @@
       },
       "6": {
         "$type": "color",
-        "$value": "#5b5b5b",
+        "$value": "#585858",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -391,7 +391,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#206d1f",
+        "$value": "#20691f",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -427,7 +427,7 @@
       },
       "6": {
         "$type": "color",
-        "$value": "#206d1f",
+        "$value": "#20691f",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -573,7 +573,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#006192",
+        "$value": "#015e8d",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -609,7 +609,7 @@
       },
       "6": {
         "$type": "color",
-        "$value": "#006192",
+        "$value": "#015e8d",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -755,7 +755,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#8f4200",
+        "$value": "#8a4100",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -791,7 +791,7 @@
       },
       "6": {
         "$type": "color",
-        "$value": "#8f4200",
+        "$value": "#8a4100",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -937,7 +937,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#ab0428",
+        "$value": "#a50827",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -973,7 +973,7 @@
       },
       "6": {
         "$type": "color",
-        "$value": "#ab0428",
+        "$value": "#a50827",
         "$description": "",
         "$extensions": {
           "com.figma": {

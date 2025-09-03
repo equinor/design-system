@@ -85,8 +85,8 @@ export const BG_MEDIUM_DEFAULT: StepDefinition = {
   name: 'Background Medium Default',
   category: 'background-medium',
   variant: 'medium-default',
-  lightValue: 0.87,
-  darkValue: 0.47,
+  lightValue: 0.9,
+  darkValue: 0.46,
   contrastWith: [
     {
       targetStep: 'background-default',
@@ -106,7 +106,7 @@ export const BG_MEDIUM_HOVER: StepDefinition = {
   name: 'Background Medium Hover',
   category: 'background-medium',
   variant: 'medium-hover',
-  lightValue: 0.8,
+  lightValue: 0.85,
   darkValue: 0.52,
   contrastWith: [
     {
@@ -127,7 +127,7 @@ export const BG_MEDIUM_ACTIVE: StepDefinition = {
   name: 'Background Medium Active',
   category: 'background-medium',
   variant: 'medium-active',
-  lightValue: 0.72,
+  lightValue: 0.8,
   darkValue: 0.58,
   contrastWith: [
     {
@@ -149,8 +149,8 @@ export const BORDER_SUBTLE: StepDefinition = {
   name: 'Border Subtle',
   category: 'border',
   variant: 'subtle',
-  lightValue: 0.84,
-  darkValue: 0.47,
+  lightValue: 0.87,
+  darkValue: 0.46,
   contrastWith: [
     {
       targetStep: 'background-default',
@@ -268,12 +268,12 @@ export const BG_STRONG_DEFAULT: StepDefinition = {
   contrastWith: [
     {
       targetStep: 'background-default',
-      lc: APCA_CONTRAST_LEVELS.LC_45,
+      lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'background-subtle',
-      lc: APCA_CONTRAST_LEVELS.LC_45,
+      lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
@@ -289,12 +289,12 @@ export const BG_STRONG_HOVER: StepDefinition = {
   contrastWith: [
     {
       targetStep: 'background-default',
-      lc: APCA_CONTRAST_LEVELS.LC_45,
+      lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
       targetStep: 'background-subtle',
-      lc: APCA_CONTRAST_LEVELS.LC_45,
+      lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
   ],
@@ -425,7 +425,7 @@ export const TEXT_CONTRAST_STRONG: StepDefinition = {
   name: 'Text Contrast Strong',
   category: 'text',
   variant: 'contrast-strong',
-  lightValue: 0.99,
+  lightValue: 1,
   darkValue: 0.1,
   contrastWith: [
     {
