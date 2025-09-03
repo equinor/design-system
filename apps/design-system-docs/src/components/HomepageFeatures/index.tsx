@@ -9,10 +9,14 @@ type FeatureItem = {
   description: ReactNode
 }
 
+import DocusaurusMountain from '@site/static/img/undraw_docusaurus_mountain.svg'
+import DocusaurusTree from '@site/static/img/undraw_docusaurus_tree.svg'
+import DocusaurusReact from '@site/static/img/undraw_docusaurus_react.svg'
+
 const FeatureList: FeatureItem[] = [
   {
     title: 'Resources',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: DocusaurusMountain,
     description: (
       <>
         Provides teams with easy-to-use resources, from React & Figma component
@@ -22,14 +26,14 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Documentation',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: DocusaurusReact,
     description: (
       <>Guidelines, principles and how-to&apos;s built on a common language</>
     ),
   },
   {
     title: 'Living',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: DocusaurusTree,
     description: (
       <>
         EDS is always evolving, invites collaboration and depends on
@@ -39,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Supported',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: DocusaurusMountain,
     description: <>EDS is supported by the EDS core team</>,
   },
 ]
@@ -58,13 +62,13 @@ function Feature({ title, Svg, description }: FeatureItem) {
   )
 }
 
-export default function HomepageFeatures(): ReactNode {
+export function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
