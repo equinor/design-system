@@ -7,6 +7,7 @@ on:
     paths:
       - 'apps/**'
       - 'packages/**'
+      - '.github/workflows/**'
   push:
     branches:
       - develop
@@ -19,7 +20,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages apps
+      checkout_paths: packages apps .github
   packages:
     name: Process packages
     runs-on: ubuntu-latest
