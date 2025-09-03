@@ -22,7 +22,7 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.55.0-jammy
     env:
-      PLAYWRIGHT_URL: https://web-eds-colour-palette-generator-dev.radix.equinor.com/
+      PLAYWRIGHT_URL: https://color-palette-generator-eds-dev.radix.equinor.com/
     steps:
       - uses: actions/checkout@v4
 

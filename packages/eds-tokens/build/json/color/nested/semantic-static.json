@@ -119,37 +119,37 @@
   },
   "Text": {
     "Neutral": {
-      "Subtle": "#585858",
+      "Subtle": "#4d4d4d",
       "Strong": "#1d1d1d",
       "Contrast subtle": "#dedede",
       "Contrast strong": "#fcfcfc"
     },
     "Accent": {
-      "Subtle": "#1f6369",
+      "Subtle": "#20565c",
       "Strong": "#141f20",
       "Contrast subtle": "#cae4e7",
       "Contrast strong": "#f3feff"
     },
     "Success": {
-      "Subtle": "#20691f",
+      "Subtle": "#215c1f",
       "Strong": "#142114",
       "Contrast subtle": "#cae8c7",
       "Contrast strong": "#f3fff1"
     },
     "Info": {
-      "Subtle": "#015e8d",
+      "Subtle": "#0e5279",
       "Strong": "#121e27",
       "Contrast subtle": "#c5e3f9",
       "Contrast strong": "#f0feff"
     },
     "Warning": {
-      "Subtle": "#8a4100",
+      "Subtle": "#773a00",
       "Strong": "#27190e",
       "Contrast subtle": "#fad6bc",
       "Contrast strong": "#fff8ec"
     },
     "Danger": {
-      "Subtle": "#a50827",
+      "Subtle": "#8e1525",
       "Strong": "#2e1414",
       "Contrast subtle": "#ffcbc9",
       "Contrast strong": "#fff5f4"
