@@ -428,8 +428,10 @@ function AutocompleteInner<T>(
   }, [allowSelectAll, multiple, typedInputValue])
 
   const availableItems = useMemo(() => {
+    if (showSelectAll && onAddNewOption)
+      return [AddSymbol as T, AllSymbol as T, ..._availableItems]
     if (showSelectAll) return [AllSymbol as T, ..._availableItems]
-    if (_availableItems.length === 0 && onAddNewOption) return [AddSymbol as T]
+    if (onAddNewOption) return [AddSymbol as T, ..._availableItems]
     return _availableItems
   }, [_availableItems, showSelectAll, onAddNewOption])
 
@@ -587,6 +589,7 @@ function AutocompleteInner<T>(
     items: availableItems as T[], //can not pass readonly type to downshift so we cast it to regular T[]
     initialSelectedItem: initialSelectedOptions[0],
     isItemDisabled(item) {
+      if (item === AddSymbol) return !typedInputValue.trim()
       return optionDisabled(item)
     },
     itemToKey,
@@ -642,7 +645,7 @@ function AutocompleteInner<T>(
           if (selectedItem != null && !optionDisabled(selectedItem)) {
             if (selectedItem === AllSymbol) {
               toggleAllSelected()
-            } else if (selectedItem === AddSymbol) {
+            } else if (selectedItem === AddSymbol && typedInputValue.trim()) {
               onAddNewOption?.(typedInputValue)
             } else if (multiple) {
               const shouldRemove = itemCompare
@@ -1012,6 +1015,7 @@ function AutocompleteInner<T>(
                 )
               }
               if (item === AddSymbol && onAddNewOption) {
+                const isDisabled = !typedInputValue.trim()
                 return (
                   <AddNewOption
                     key={'add-item'}
@@ -1037,7 +1041,7 @@ function AutocompleteInner<T>(
                       item,
                       index: index,
                     })}
-                    value={`${typedInputValue}`}
+                    value={typedInputValue.trim()}
                   />
                 )
               }
