@@ -127,7 +127,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               dateFormat={dateFormat}
               placeholderText={placeholder}
               id={id}
-              onKeyDown={(event) => {
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
                 // If you shift-tab while focusing the input-element, it should close the pop-over.
                 // Not currently supported by react-datepicker.
                 if (
