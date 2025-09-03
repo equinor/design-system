@@ -46,10 +46,14 @@ export interface StepDefinition {
  * Palette configuration interface
  */
 export interface PaletteConfig {
-  /** Gaussian distribution mean */
-  mean: number
-  /** Gaussian distribution standard deviation */
-  stdDev: number
+  /** Gaussian distribution mean for light */
+  meanLight: number
+  /** Gaussian distribution standard deviation for light */
+  stdDevLight: number
+  /** Gaussian distribution mean for dark */
+  meanDark: number
+  /** Gaussian distribution standard deviation for dark */
+  stdDevDark: number
   /** Available color definitions */
   colors: ColorDefinition[]
   /** Step definitions with semantic names and values */
@@ -150,7 +154,7 @@ export const BORDER_SUBTLE: StepDefinition = {
   category: 'border',
   variant: 'subtle',
   lightValue: 0.87,
-  darkValue: 0.46,
+  darkValue: 0.47,
   contrastWith: [
     {
       targetStep: 'background-default',
@@ -496,8 +500,10 @@ export const getStepIndex =
  * Palette configuration
  */
 export const config: PaletteConfig = {
-  mean: 0.6,
-  stdDev: 2,
+  meanLight: 0.6,
+  stdDevLight: 2,
+  meanDark: 0.7,
+  stdDevDark: 2,
   colors: [
     { name: 'Moss Green', hex: '#007079' },
     { name: 'Gray', hex: '#4A4A4A' },

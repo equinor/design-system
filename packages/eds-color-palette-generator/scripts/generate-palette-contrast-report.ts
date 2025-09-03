@@ -62,15 +62,15 @@ function buildScales() {
     const lightScale = generateColorScale(
       c.hex,
       lightSteps,
-      config.mean,
-      config.stdDev,
+      config.meanLight,
+      config.stdDevLight,
       'OKLCH',
     )
     const darkScale = generateColorScale(
       c.hex,
       darkSteps,
-      config.mean,
-      config.stdDev,
+      config.meanDark,
+      config.stdDevDark,
       'OKLCH',
     )
     const mapping: Record<string, { light: string; dark: string }> = {}

@@ -22,9 +22,17 @@ import { computeContrastSummary } from '@/utils/contrastSummary'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
-  const [mean, setMean] = useState(() => localStorageUtils.getMean(config.mean))
-  const [stdDev, setStdDev] = useState(() =>
-    localStorageUtils.getStdDev(config.stdDev),
+  const [meanLight, setMeanLight] = useState(() =>
+    localStorageUtils.getMeanLight(config.meanLight),
+  )
+  const [stdDevLight, setStdDevLight] = useState(() =>
+    localStorageUtils.getStdDevLight(config.stdDevLight),
+  )
+  const [meanDark, setMeanDark] = useState(() =>
+    localStorageUtils.getMeanDark(config.meanDark),
+  )
+  const [stdDevDark, setStdDevDark] = useState(() =>
+    localStorageUtils.getStdDevDark(config.stdDevDark),
   )
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(() =>
@@ -59,12 +67,20 @@ export default function App() {
 
   // Save to localStorage whenever state changes
   useEffect(() => {
-    localStorageUtils.setMean(mean)
-  }, [mean])
+    localStorageUtils.setMeanLight(meanLight)
+  }, [meanLight])
 
   useEffect(() => {
-    localStorageUtils.setStdDev(stdDev)
-  }, [stdDev])
+    localStorageUtils.setStdDevLight(stdDevLight)
+  }, [stdDevLight])
+
+  useEffect(() => {
+    localStorageUtils.setMeanDark(meanDark)
+  }, [meanDark])
+
+  useEffect(() => {
+    localStorageUtils.setStdDevDark(stdDevDark)
+  }, [stdDevDark])
 
   useEffect(() => {
     localStorageUtils.setShowContrast(showContrast)
@@ -141,21 +157,25 @@ export default function App() {
     localStorageUtils.clearConfiguration()
 
     // Reset only configuration state to defaults
-    setMean(config.mean)
-    setStdDev(config.stdDev)
+    setMeanLight(config.meanLight)
+    setStdDevLight(config.stdDevLight)
+    setMeanDark(config.meanDark)
+    setStdDevDark(config.stdDevDark)
     setLightModeValues(lightnessValuesInLightMode)
     setDarkModeValues(darknessValuesInDarkMode)
     setColors(config.colors)
   }
 
   // Handle configuration upload
-  const handleConfigUpload = (config: ConfigFile) => {
-    setLightModeValues(config.lightModeValues)
-    setDarkModeValues(config.darkModeValues)
-    setMean(config.mean)
-    setStdDev(config.stdDev)
-    if (config.colors) {
-      setColors(config.colors)
+  const handleConfigUpload = (cfg: ConfigFile) => {
+    setLightModeValues(cfg.lightModeValues)
+    setDarkModeValues(cfg.darkModeValues)
+    setMeanLight(cfg.meanLight)
+    setStdDevLight(cfg.stdDevLight)
+    setMeanDark(cfg.meanDark)
+    setStdDevDark(cfg.stdDevDark)
+    if (cfg.colors) {
+      setColors(cfg.colors)
     }
   }
 
@@ -167,12 +187,12 @@ export default function App() {
         scale: generateColorScale(
           color.hex,
           lightModeValues,
-          mean,
-          stdDev,
+          meanLight,
+          stdDevLight,
           colorFormat,
         ),
       })),
-    [colors, lightModeValues, mean, stdDev, colorFormat],
+    [colors, lightModeValues, meanLight, stdDevLight, colorFormat],
   )
 
   const darkColorScales = useMemo(
@@ -182,12 +202,12 @@ export default function App() {
         scale: generateColorScale(
           color.hex,
           darkModeValues,
-          mean,
-          stdDev,
+          meanDark,
+          stdDevDark,
           colorFormat,
         ),
       })),
-    [colors, darkModeValues, mean, stdDev, colorFormat],
+    [colors, darkModeValues, meanDark, stdDevDark, colorFormat],
   )
 
   // Select the appropriate scales based on current color scheme
@@ -201,13 +221,23 @@ export default function App() {
   // Determine if configuration differs from defaults (mean, stdDev, light/dark values, colors)
   const isConfigDirty = useMemo(() => {
     return (
-      mean !== config.mean ||
-      stdDev !== config.stdDev ||
+      meanLight !== config.meanLight ||
+      stdDevLight !== config.stdDevLight ||
+      meanDark !== config.meanDark ||
+      stdDevDark !== config.stdDevDark ||
       !arraysEqual(lightModeValues, lightnessValuesInLightMode) ||
       !arraysEqual(darkModeValues, darknessValuesInDarkMode) ||
       !colorsEqual(colors, config.colors)
     )
-  }, [mean, stdDev, lightModeValues, darkModeValues, colors])
+  }, [
+    meanLight,
+    stdDevLight,
+    meanDark,
+    stdDevDark,
+    lightModeValues,
+    darkModeValues,
+    colors,
+  ])
 
   const contrastSummary = useMemo(() => {
     if (!isClient || !showContrast) {
@@ -257,8 +287,10 @@ export default function App() {
           <ConfigurationPanel
             lightModeValues={lightModeValues}
             darkModeValues={darkModeValues}
-            mean={mean}
-            stdDev={stdDev}
+            meanLight={meanLight}
+            stdDevLight={stdDevLight}
+            meanDark={meanDark}
+            stdDevDark={stdDevDark}
             colors={colors}
             colorFormat={colorFormat}
             onConfigUpload={handleConfigUpload}
@@ -267,10 +299,14 @@ export default function App() {
           {/* Gaussian Parameters Panel - conditionally rendered */}
           {showGaussianParameters && (
             <GaussianParametersPanel
-              mean={mean}
-              stdDev={stdDev}
-              setMean={setMean}
-              setStdDev={setStdDev}
+              meanLight={meanLight}
+              stdDevLight={stdDevLight}
+              setMeanLight={setMeanLight}
+              setStdDevLight={setStdDevLight}
+              meanDark={meanDark}
+              stdDevDark={stdDevDark}
+              setMeanDark={setMeanDark}
+              setStdDevDark={setStdDevDark}
             />
           )}
         </div>

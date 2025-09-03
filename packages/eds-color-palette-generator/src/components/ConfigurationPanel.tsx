@@ -9,8 +9,10 @@ import {
 type ConfigurationPanelProps = {
   lightModeValues: number[]
   darkModeValues: number[]
-  mean: number
-  stdDev: number
+  meanLight: number
+  stdDevLight: number
+  meanDark: number
+  stdDevDark: number
   colors: ColorDefinition[]
   colorFormat: ColorFormat
   onConfigUpload: (config: ConfigFile) => void
@@ -19,8 +21,10 @@ type ConfigurationPanelProps = {
 export const ConfigurationPanel = ({
   lightModeValues,
   darkModeValues,
-  mean,
-  stdDev,
+  meanLight,
+  stdDevLight,
+  meanDark,
+  stdDevDark,
   colors,
   colorFormat,
   onConfigUpload,
@@ -34,8 +38,10 @@ export const ConfigurationPanel = ({
             downloadConfiguration(
               lightModeValues,
               darkModeValues,
-              mean,
-              stdDev,
+              meanLight,
+              stdDevLight,
+              meanDark,
+              stdDevDark,
               colors,
             )
           }
@@ -60,14 +66,33 @@ export const ConfigurationPanel = ({
               reader.onload = (e) => {
                 try {
                   const content = e.target?.result as string
-                  const config = JSON.parse(content)
+                  let config = JSON.parse(content)
+                  // Backwards compatibility: map legacy mean/stdDev to new fields
+                  if (
+                    typeof config.mean === 'number' &&
+                    typeof config.stdDev === 'number' &&
+                    (config.meanLight === undefined ||
+                      config.stdDevLight === undefined ||
+                      config.meanDark === undefined ||
+                      config.stdDevDark === undefined)
+                  ) {
+                    config = {
+                      ...config,
+                      meanLight: config.mean,
+                      stdDevLight: config.stdDev,
+                      meanDark: config.mean,
+                      stdDevDark: config.stdDev,
+                    }
+                  }
 
                   // Validate config format
                   if (
                     !config.lightModeValues ||
                     !config.darkModeValues ||
-                    typeof config.mean !== 'number' ||
-                    typeof config.stdDev !== 'number'
+                    typeof config.meanLight !== 'number' ||
+                    typeof config.stdDevLight !== 'number' ||
+                    typeof config.meanDark !== 'number' ||
+                    typeof config.stdDevDark !== 'number'
                   ) {
                     alert('Invalid configuration file format')
                     return
@@ -109,8 +134,10 @@ export const ConfigurationPanel = ({
               colors,
               lightModeValues,
               darkModeValues,
-              mean,
-              stdDev,
+              meanLight,
+              stdDevLight,
+              meanDark,
+              stdDevDark,
               colorFormat,
             )
           }
@@ -121,7 +148,14 @@ export const ConfigurationPanel = ({
 
         <button
           onClick={() =>
-            downloadDesignSystemCSS(colors, mean, stdDev, colorFormat)
+            downloadDesignSystemCSS(
+              colors,
+              meanLight,
+              stdDevLight,
+              meanDark,
+              stdDevDark,
+              colorFormat,
+            )
           }
           className="px-4 py-2 bg-neutral-medium-default hover:bg-neutral-medium-hover rounded border-none text-sm cursor-pointer"
         >
