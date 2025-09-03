@@ -246,7 +246,8 @@ const Container = styled.div`
   }
 `
 
-const StyledDatepicker = styled(DatePicker)`
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const StyledDatepicker = styled(DatePicker as any)`
   ${({ theme }) => css`
     height: 24px;
     font-family: ${theme.entities.title.typography.fontFamily};
