@@ -1,15 +1,7 @@
 name: Color Palette Generator - Playwright Tests
+# Disabled automatic triggers; keep manual run only
 on:
-  push:
-    branches: [develop]
-    paths:
-      - 'packages/eds-color-palette-generator/**'
-      - '.github/workflows/playwright.yml'
-  pull_request:
-    branches: [develop]
-    paths:
-      - 'packages/eds-color-palette-generator/**'
-      - '.github/workflows/playwright.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
