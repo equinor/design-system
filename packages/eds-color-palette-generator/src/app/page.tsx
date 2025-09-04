@@ -5,7 +5,6 @@ import { useState, useEffect, useMemo } from 'react'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
-import { ColorManagement } from '@/components/ColorManagement'
 import { GaussianParametersPanel } from '@/components/GaussianParametersPanel'
 import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
@@ -25,6 +24,7 @@ import {
 } from '@/config/config'
 import { computeContrastSummary } from '@/utils/contrastSummary'
 import { QuickActionsPopover } from '@/components/QuickActionsPopover'
+import { RotateCcw } from 'lucide-react'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -280,14 +280,7 @@ export default function App() {
             setColorFormat={setColorFormat}
           />
 
-          {/* Color management component */}
-          <ColorManagement
-            colors={colors}
-            onUpdateColorName={updateColorName}
-            onUpdateColorHex={updateColorHex}
-            onRemoveColor={removeColor}
-            onAddColor={addColor}
-          />
+          {/* Color management moved inline to each color scale */}
 
           {/* Gaussian Parameters Panel - conditionally rendered */}
           {showGaussianParameters && (
@@ -319,15 +312,30 @@ export default function App() {
       </div>
 
       {/* Render color scales dynamically */}
-      {currentColorScales.map((colorData) => (
+      {currentColorScales.map((colorData, index) => (
         <ColorScale
-          key={colorData.name}
+          key={index}
           colors={colorData.scale}
           showContrast={showContrast}
           contrastMethod={contrastMethod}
           colorName={colorData.name}
+          baseHex={colors[index]?.hex}
+          onRename={(name) => updateColorName(index, name)}
+          onChangeHex={(hex) => updateColorHex(index, hex)}
+          onRemove={() => removeColor(index)}
         />
       ))}
+
+      {/* Add new color button */}
+      <div className="my-6">
+        <button
+          type="button"
+          onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
+          className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border-none rounded-md cursor-pointer"
+        >
+          Add colour
+        </button>
+      </div>
 
       <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
         <QuickActionsPopover
@@ -351,18 +359,19 @@ export default function App() {
             >
               {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
             </div>
-            {isConfigDirty && (
-              <button
-                type="button"
-                onClick={resetConfiguration}
-                className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md cursor-pointer"
-                aria-label="Reset configuration changes"
-                title="Reset configuration changes"
-              >
-                Reset config changes
-              </button>
-            )}
           </>
+        )}
+        {isConfigDirty && (
+          <button
+            type="button"
+            onClick={resetConfiguration}
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md"
+            aria-label="Reset configuration changes"
+            title="Reset configuration changes"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>Reset</span>
+          </button>
         )}
       </div>
     </div>

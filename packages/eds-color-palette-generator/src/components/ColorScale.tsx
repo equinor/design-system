@@ -2,6 +2,7 @@
 import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
 import { contrast } from '@/utils/color'
+import { Trash, Pencil } from 'lucide-react'
 import Color from 'colorjs.io'
 import { useState, useEffect, useRef, useMemo } from 'react'
 
@@ -10,6 +11,10 @@ type ColorScaleProps = {
   showContrast?: boolean
   contrastMethod?: 'WCAG21' | 'APCA'
   colorName?: string
+  baseHex?: string
+  onRename?: (newName: string) => void
+  onChangeHex?: (newHex: string) => void
+  onRemove?: () => void
 }
 
 // Type for color information in OKLCH format!
@@ -74,6 +79,10 @@ export function ColorScale({
   showContrast = true,
   contrastMethod = 'WCAG21',
   colorName,
+  baseHex,
+  onRename,
+  onChangeHex,
+  onRemove,
 }: ColorScaleProps) {
   // State to track client-side rendering for contrast calculations
   const [isClient, setIsClient] = useState(false)
@@ -91,6 +100,7 @@ export function ColorScale({
   const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
     Array(colors.length).fill(null),
   )
+  const colorInputRef = useRef<HTMLInputElement | null>(null)
 
   // Set client-side flag after hydration
   useEffect(() => {
@@ -216,14 +226,43 @@ export function ColorScale({
 
   return (
     <div className="mb-8">
-      {colorName && (
-        <h3
+      <div className="flex items-center gap-2 mb-4">
+        <input
+          type="text"
+          value={colorName ?? ''}
+          onChange={(e) => onRename?.(e.target.value)}
+          placeholder="Color name"
+          className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong bg-default text-strong font-medium transition-colors"
           style={{ color: colors[8] || '#000000' }}
-          className="mb-2 text-lg font-medium text-left"
+        />
+        <input
+          ref={colorInputRef}
+          type="color"
+          value={baseHex || '#000000'}
+          onChange={(e) => onChangeHex?.(e.target.value)}
+          className="sr-only"
+          aria-label={`Pick base color for ${colorName ?? 'color'}`}
+          tabIndex={-1}
+        />
+        <button
+          type="button"
+          onClick={() => colorInputRef.current?.click()}
+          className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-medium-hover"
+          title="Edit base color"
+          aria-label="Edit base color"
         >
-          {colorName}
-        </h3>
-      )}
+          <Pencil className="w-4 h-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => onRemove?.()}
+          className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-medium-hover"
+          title="Remove color"
+          aria-label="Remove color"
+        >
+          <Trash className="w-4 h-4" />
+        </button>
+      </div>
       <div
         className="grid gap-2 mb-4"
         style={{

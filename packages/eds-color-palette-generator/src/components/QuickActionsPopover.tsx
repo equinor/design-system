@@ -55,7 +55,7 @@ export function QuickActionsPopover(props: Props) {
   }, [])
 
   const triggerClass =
-    'inline-flex items-center justify-center p-2 rounded-md border border-accent-strong bg-canvas hover:bg-accent-medium-hover transition-colors shadow-sm'
+    'inline-flex items-center justify-center p-2 rounded-md bg-accent-medium-default hover:bg-accent-medium-hover transition-colors shadow-sm'
 
   return (
     <div ref={rootRef} className="relative">
@@ -67,7 +67,7 @@ export function QuickActionsPopover(props: Props) {
         className={triggerClass}
         title="Import / Export"
       >
-        <Download className="w-5 h-5" />
+        <Download className="w-4 h-4" />
       </button>
 
       {open && (
