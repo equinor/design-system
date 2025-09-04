@@ -12,7 +12,7 @@ export const HeaderPanel = ({
   setShowConfigPanel,
 }: HeaderPanelProps) => {
   return (
-    <div className="flex items-center justify-between mb-8">
+    <div className="flex items-center justify-between mb-12">
       <div>
         <h1 className="text-2xl">Accessible Colour Palette</h1>
         <p className="text-md text-subtle">
@@ -28,7 +28,7 @@ export const HeaderPanel = ({
           data-testid="config-button"
         >
           <Settings className="w-4 h-4" />
-          <span>Config</span>
+          <span>Display</span>
         </button>
         <ThemeToggle />
       </div>

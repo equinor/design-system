@@ -18,6 +18,7 @@ type Props = {
   stdDevDark: number
   colors: ColorDefinition[]
   colorFormat: ColorFormat
+  setColorFormat: React.Dispatch<React.SetStateAction<ColorFormat>>
   onConfigUpload: (config: ConfigFile) => void
 }
 
@@ -31,6 +32,7 @@ export function QuickActionsPopover(props: Props) {
     stdDevDark,
     colors,
     colorFormat,
+    setColorFormat,
     onConfigUpload,
   } = props
 
@@ -84,6 +86,36 @@ export function QuickActionsPopover(props: Props) {
             <Upload className="w-4 h-4" />
             <span>Upload config</span>
           </button>
+          <div className="h-px bg-neutral-subtle my-1" />
+          <div className="px-3 py-2 text-sm text-subtle">Format</div>
+          <div className="px-2 pb-2">
+            <div className="inline-flex items-center rounded-md  bg-neutral-medium-default/40">
+              <button
+                type="button"
+                aria-pressed={colorFormat === 'OKLCH'}
+                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                  colorFormat === 'OKLCH'
+                    ? 'bg-default text-strong border border-neutral-subtle'
+                    : 'text-default hover:text-strong'
+                }`}
+                onClick={() => setColorFormat('OKLCH')}
+              >
+                OKLCH
+              </button>
+              <button
+                type="button"
+                aria-pressed={colorFormat === 'HEX'}
+                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                  colorFormat === 'HEX'
+                    ? 'bg-default text-strong border border-neutral-subtle'
+                    : 'text-default hover:text-strong'
+                }`}
+                onClick={() => setColorFormat('HEX')}
+              >
+                HEX
+              </button>
+            </div>
+          </div>
           <div className="h-px bg-neutral-subtle my-1" />
           <div className="px-3 py-2 text-sm text-subtle">Export</div>
           <button

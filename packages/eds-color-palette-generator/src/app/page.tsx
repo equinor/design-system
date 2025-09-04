@@ -347,6 +347,7 @@ export default function App() {
           stdDevDark={stdDevDark}
           colors={colors}
           colorFormat={colorFormat}
+          setColorFormat={setColorFormat}
           onConfigUpload={handleConfigUpload}
         />
 
