@@ -185,40 +185,53 @@ export default function App() {
     }
   }
 
-  // Generate memoized color scales for light and dark modes separately
-  const lightColorScales = useMemo(
+  // Efficiently memoize computed scales by hex-only dependencies
+  const hexKey = useMemo(() => colors.map((c) => c.hex).join('|'), [colors])
+  const lightScalesMemo = useMemo(
     () =>
-      colors.map((color) => ({
-        ...color,
-        scale: generateColorScale(
-          color.hex,
+      colors.map((c) =>
+        generateColorScale(
+          c.hex,
           lightModeValues,
           meanLight,
           stdDevLight,
           colorFormat,
         ),
-      })),
-    [colors, lightModeValues, meanLight, stdDevLight, colorFormat],
+      ),
+    // Only recompute when hexes or generation inputs change (not when names change)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [hexKey, lightModeValues, meanLight, stdDevLight, colorFormat],
   )
-
-  const darkColorScales = useMemo(
+  const darkScalesMemo = useMemo(
     () =>
-      colors.map((color) => ({
-        ...color,
-        scale: generateColorScale(
-          color.hex,
+      colors.map((c) =>
+        generateColorScale(
+          c.hex,
           darkModeValues,
           meanDark,
           stdDevDark,
           colorFormat,
         ),
-      })),
-    [colors, darkModeValues, meanDark, stdDevDark, colorFormat],
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [hexKey, darkModeValues, meanDark, stdDevDark, colorFormat],
+  )
+
+  // Combine fast: map names to memoized scales without recomputing heavy work on name edits
+  const lightColorScales = useMemo(
+    () => colors.map((c, i) => ({ ...c, scale: lightScalesMemo[i] })),
+    [colors, lightScalesMemo],
+  )
+  const darkColorScales = useMemo(
+    () => colors.map((c, i) => ({ ...c, scale: darkScalesMemo[i] })),
+    [colors, darkScalesMemo],
   )
 
   // Select the appropriate scales based on current color scheme
   const currentColorScales =
     colorScheme === 'light' ? lightColorScales : darkColorScales
+  const currentScalesOnly =
+    colorScheme === 'light' ? lightScalesMemo : darkScalesMemo
 
   // Client flag to avoid hydration mismatch
   const [isClient, setIsClient] = useState(false)
@@ -249,12 +262,14 @@ export default function App() {
     if (!isClient || !showContrast) {
       return { passed: 0, total: 0, percentage: 0 }
     }
+    // Only depend on scales (colors), not names or other metadata
+    const payload = currentScalesOnly.map((scale) => ({ scale }))
     return computeContrastSummary({
-      colorScales: currentColorScales,
+      colorScales: payload,
       contrastMethod,
       enabled: showContrast,
     })
-  }, [currentColorScales, contrastMethod, showContrast, isClient])
+  }, [currentScalesOnly, contrastMethod, showContrast, isClient])
 
   return (
     <div className="p-6 ">
@@ -362,7 +377,7 @@ export default function App() {
             </div>
           </>
         )}
-        {isConfigDirty && (
+        {isClient && isConfigDirty && (
           <button
             type="button"
             onClick={resetConfiguration}

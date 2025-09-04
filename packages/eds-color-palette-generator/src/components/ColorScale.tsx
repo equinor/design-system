@@ -4,7 +4,7 @@ import { getStepIndex } from '@/config/helpers'
 import { contrast } from '@/utils/color'
 import { Trash, Pencil } from 'lucide-react'
 import Color from 'colorjs.io'
-import { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 
 type ColorScaleProps = {
   colors: string[]
@@ -74,7 +74,7 @@ function getOklchInfo(hexColor: string, index: number): OklchInfo {
   }
 }
 
-export function ColorScale({
+function ColorScaleBase({
   colors,
   showContrast = true,
   contrastMethod = 'WCAG21',
@@ -560,3 +560,15 @@ export function ColorScale({
     </div>
   )
 }
+
+function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
+  return (
+    prev.colorName === next.colorName &&
+    prev.baseHex === next.baseHex &&
+    prev.showContrast === next.showContrast &&
+    prev.contrastMethod === next.contrastMethod &&
+    prev.colors === next.colors
+  )
+}
+
+export const ColorScale = React.memo(ColorScaleBase, areEqual)
