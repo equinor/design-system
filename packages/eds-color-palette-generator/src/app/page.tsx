@@ -272,85 +272,100 @@ export default function App() {
   }, [currentScalesOnly, contrastMethod, showContrast, isClient])
 
   return (
-    <div className="p-6 ">
-      <HeaderPanel
-        showConfigPanel={showConfigPanel}
-        setShowConfigPanel={setShowConfigPanel}
-      />
-
-      {/* Config Panel */}
-      {showConfigPanel && (
-        <div id="display-options-panel" className="max-w-3xl p-6 mx-auto mb-12 ">
-          {/* Display Options Panel */}
-          <DisplayOptionsPanel
-            showContrast={showContrast}
-            showLightnessInputs={showLightnessInputs}
-            showGaussianParameters={showGaussianParameters}
-            contrastMethod={contrastMethod}
-            colorFormat={colorFormat}
-            setShowContrast={setShowContrast}
-            setShowLightnessInputs={setShowLightnessInputs}
-            setShowGaussianParameters={setShowGaussianParameters}
-            setContrastMethod={setContrastMethod}
-            setColorFormat={setColorFormat}
-          />
-
-          {/* Color management moved inline to each color scale */}
-
-          {/* Gaussian Parameters Panel - conditionally rendered */}
-          {showGaussianParameters && (
-            <GaussianParametersPanel
-              meanLight={meanLight}
-              stdDevLight={stdDevLight}
-              setMeanLight={setMeanLight}
-              setStdDevLight={setStdDevLight}
-              meanDark={meanDark}
-              stdDevDark={stdDevDark}
-              setMeanDark={setMeanDark}
-              setStdDevDark={setStdDevDark}
-            />
-          )}
-        </div>
-      )}
-
-      <div className="sticky top-0 z-10 p-1 bg-default">
-        <ColorScalesHeader />
-        {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
-        {showLightnessInputs && (
-          <LightnessValueInputs
-            colorScheme={colorScheme}
-            lightModeValues={lightModeValues}
-            darkModeValues={darkModeValues}
-            updateLightnessValue={updateLightnessValue}
-          />
-        )}
-      </div>
-
-      {/* Render color scales dynamically */}
-      {currentColorScales.map((colorData, index) => (
-        <ColorScale
-          key={index}
-          colors={colorData.scale}
-          showContrast={showContrast}
-          contrastMethod={contrastMethod}
-          colorName={colorData.name}
-          baseHex={colors[index]?.hex}
-          onRename={(name) => updateColorName(index, name)}
-          onChangeHex={(hex) => updateColorHex(index, hex)}
-          onRemove={() => removeColor(index)}
+    <div className="min-h-screen bg-canvas text-default">
+      <header className="mx-auto max-w-7xl px-6 py-8">
+        <HeaderPanel
+          showConfigPanel={showConfigPanel}
+          setShowConfigPanel={setShowConfigPanel}
         />
-      ))}
+      </header>
 
-      {/* Add new color button */}
-      <div className="my-6">
-        <button
-          type="button"
-          onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
-          className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border-none rounded-md cursor-pointer"
-        >
-          Add colour
-        </button>
-      </div>
+      <main className="py-6">
+        {/* Config Panel */}
+        {showConfigPanel && (
+          <section className="mb-8">
+            <div
+              id="display-options-panel"
+              className="mx-auto max-w-7xl px-6 p-6 rounded-xl border border-neutral-subtle bg-surface"
+            >
+              <DisplayOptionsPanel
+                showContrast={showContrast}
+                showLightnessInputs={showLightnessInputs}
+                showGaussianParameters={showGaussianParameters}
+                contrastMethod={contrastMethod}
+                colorFormat={colorFormat}
+                setShowContrast={setShowContrast}
+                setShowLightnessInputs={setShowLightnessInputs}
+                setShowGaussianParameters={setShowGaussianParameters}
+                setContrastMethod={setContrastMethod}
+                setColorFormat={setColorFormat}
+              />
+
+              {showGaussianParameters && (
+                <div className="mt-6">
+                  <GaussianParametersPanel
+                    meanLight={meanLight}
+                    stdDevLight={stdDevLight}
+                    setMeanLight={setMeanLight}
+                    setStdDevLight={setStdDevLight}
+                    meanDark={meanDark}
+                    stdDevDark={stdDevDark}
+                    setMeanDark={setMeanDark}
+                    setStdDevDark={setStdDevDark}
+                  />
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Full-width sticky subheader after display options */}
+        <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md">
+          <div className="mx-auto max-w-7xl px-6 py-2">
+            <ColorScalesHeader />
+            {showLightnessInputs && (
+              <LightnessValueInputs
+                colorScheme={colorScheme}
+                lightModeValues={lightModeValues}
+                darkModeValues={darkModeValues}
+                updateLightnessValue={updateLightnessValue}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Render color scales dynamically */}
+        <section className="mt-6 space-y-6 mx-auto max-w-7xl px-6">
+          {currentColorScales.map((colorData, index) => (
+            <div
+              key={`scale-wrap-${index}`}
+              className="rounded-xl bg-surface p-4"
+            >
+              <ColorScale
+                colors={colorData.scale}
+                showContrast={showContrast}
+                contrastMethod={contrastMethod}
+                colorName={colorData.name}
+                baseHex={colors[index]?.hex}
+                onRename={(name) => updateColorName(index, name)}
+                onChangeHex={(hex) => updateColorHex(index, hex)}
+                onRemove={() => removeColor(index)}
+              />
+            </div>
+          ))}
+        </section>
+
+        {/* Add new color button */}
+        <div className="my-8 mx-auto max-w-7xl px-6">
+          <button
+            type="button"
+            onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
+            className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border border-neutral-subtle rounded-md cursor-pointer"
+          >
+            Add colour
+          </button>
+        </div>
+      </main>
 
       <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
         <QuickActionsPopover

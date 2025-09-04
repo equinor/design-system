@@ -12,10 +12,10 @@ export const HeaderPanel = ({
   setShowConfigPanel,
 }: HeaderPanelProps) => {
   return (
-    <div className="flex items-center justify-between mb-12">
+    <div className="flex items-center justify-between">
       <div>
-        <h1 className="text-2xl">Accessible Colour Palette</h1>
-        <p className="text-md text-subtle">
+        <h1 className="text-xl sm:text-2xl">Accessible Colour Palette</h1>
+        <p className="text-sm sm:text-md text-subtle">
           Colours are generated using an algorithm for chroma with predefined
           lightness values and hues.
         </p>

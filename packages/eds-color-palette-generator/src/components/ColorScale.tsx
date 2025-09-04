@@ -135,7 +135,7 @@ function ColorScaleBase({
               value={name ?? ''}
               onChange={(e) => onRename?.(e.target.value)}
               placeholder="Color name"
-              className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong bg-default text-strong font-medium transition-colors"
+              className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium transition-colors"
               style={{ color: headingColor }}
               aria-label="Color name"
             />
@@ -479,7 +479,9 @@ function ColorScaleBase({
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-neutral-subtle">
-                          <th scope="col" className="py-1 pr-2 text-left">Pairs with</th>
+                          <th scope="col" className="py-1 pr-2 text-left">
+                            Pairs with
+                          </th>
                           <th scope="col" className="py-1 text-right">
                             {contrastMethod === 'APCA' &&
                               'Lightness contrast (Lc)'}

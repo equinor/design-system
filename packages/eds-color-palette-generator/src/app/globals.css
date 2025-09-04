@@ -11,14 +11,8 @@
 }
 
 @theme inline {
-  --background-color-canvas: light-dark(
-    var(--eds-color-background-neutral-subtle),
-    var(--eds-color-background-neutral-default)
-  );
-  --background-color-surface: light-dark(
-    var(--eds-color-background-neutral-default),
-    var(--eds-color-background-neutral-subtle)
-  );
+  --background-color-canvas: var(--eds-color-background-canvas);
+  --background-color-surface: var(--eds-color-background-surface);
 
   --background-color-elevated: light-dark(
     var(--eds-color-background-neutral-default),
