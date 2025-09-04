@@ -4,7 +4,6 @@
  */
 export const isFirefox = (): boolean => {
   return (
-    typeof window !== 'undefined' &&
-    navigator.userAgent.includes('Firefox')
+    typeof window !== 'undefined' && navigator.userAgent.includes('Firefox')
   )
 }
