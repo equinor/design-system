@@ -5,26 +5,40 @@ import { useState, useEffect, useMemo } from 'react'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
-import { ColorManagement } from '@/components/ColorManagement'
 import { GaussianParametersPanel } from '@/components/GaussianParametersPanel'
 import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
-import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
-import { ColorDefinition, ConfigFile, ContrastMethod, ColorFormat } from '@/types'
+import {
+  ColorDefinition,
+  ConfigFile,
+  ContrastMethod,
+  ColorFormat,
+} from '@/types'
 import { arraysEqual, colorsEqual } from '@/utils/compare'
 import { localStorageUtils } from '@/utils/localStorage'
-import config, {
+import { paletteConfig as config } from '@/config/palette'
+import {
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
 } from '@/config/config'
 import { computeContrastSummary } from '@/utils/contrastSummary'
+import { QuickActionsPopover } from '@/components/QuickActionsPopover'
+import { RotateCcw } from 'lucide-react'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
-  const [mean, setMean] = useState(() => localStorageUtils.getMean(config.mean))
-  const [stdDev, setStdDev] = useState(() =>
-    localStorageUtils.getStdDev(config.stdDev),
+  const [meanLight, setMeanLight] = useState(() =>
+    localStorageUtils.getMeanLight(config.meanLight),
+  )
+  const [stdDevLight, setStdDevLight] = useState(() =>
+    localStorageUtils.getStdDevLight(config.stdDevLight),
+  )
+  const [meanDark, setMeanDark] = useState(() =>
+    localStorageUtils.getMeanDark(config.meanDark),
+  )
+  const [stdDevDark, setStdDevDark] = useState(() =>
+    localStorageUtils.getStdDevDark(config.stdDevDark),
   )
   const { colorScheme } = useColorScheme()
   const [showContrast, setShowContrast] = useState(() =>
@@ -59,12 +73,20 @@ export default function App() {
 
   // Save to localStorage whenever state changes
   useEffect(() => {
-    localStorageUtils.setMean(mean)
-  }, [mean])
+    localStorageUtils.setMeanLight(meanLight)
+  }, [meanLight])
 
   useEffect(() => {
-    localStorageUtils.setStdDev(stdDev)
-  }, [stdDev])
+    localStorageUtils.setStdDevLight(stdDevLight)
+  }, [stdDevLight])
+
+  useEffect(() => {
+    localStorageUtils.setMeanDark(meanDark)
+  }, [meanDark])
+
+  useEffect(() => {
+    localStorageUtils.setStdDevDark(stdDevDark)
+  }, [stdDevDark])
 
   useEffect(() => {
     localStorageUtils.setShowContrast(showContrast)
@@ -141,58 +163,75 @@ export default function App() {
     localStorageUtils.clearConfiguration()
 
     // Reset only configuration state to defaults
-    setMean(config.mean)
-    setStdDev(config.stdDev)
+    setMeanLight(config.meanLight)
+    setStdDevLight(config.stdDevLight)
+    setMeanDark(config.meanDark)
+    setStdDevDark(config.stdDevDark)
     setLightModeValues(lightnessValuesInLightMode)
     setDarkModeValues(darknessValuesInDarkMode)
     setColors(config.colors)
   }
 
   // Handle configuration upload
-  const handleConfigUpload = (config: ConfigFile) => {
-    setLightModeValues(config.lightModeValues)
-    setDarkModeValues(config.darkModeValues)
-    setMean(config.mean)
-    setStdDev(config.stdDev)
-    if (config.colors) {
-      setColors(config.colors)
+  const handleConfigUpload = (cfg: ConfigFile) => {
+    setLightModeValues(cfg.lightModeValues)
+    setDarkModeValues(cfg.darkModeValues)
+    setMeanLight(cfg.meanLight)
+    setStdDevLight(cfg.stdDevLight)
+    setMeanDark(cfg.meanDark)
+    setStdDevDark(cfg.stdDevDark)
+    if (cfg.colors) {
+      setColors(cfg.colors)
     }
   }
 
-  // Generate memoized color scales for light and dark modes separately
-  const lightColorScales = useMemo(
+  // Efficiently memoize computed scales by hex-only dependencies
+  const hexKey = useMemo(() => colors.map((c) => c.hex).join('|'), [colors])
+  const lightScalesMemo = useMemo(
     () =>
-      colors.map((color) => ({
-        ...color,
-        scale: generateColorScale(
-          color.hex,
+      colors.map((c) =>
+        generateColorScale(
+          c.hex,
           lightModeValues,
-          mean,
-          stdDev,
+          meanLight,
+          stdDevLight,
           colorFormat,
         ),
-      })),
-    [colors, lightModeValues, mean, stdDev, colorFormat],
+      ),
+    // Only recompute when hexes or generation inputs change (not when names change)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [hexKey, lightModeValues, meanLight, stdDevLight, colorFormat],
+  )
+  const darkScalesMemo = useMemo(
+    () =>
+      colors.map((c) =>
+        generateColorScale(
+          c.hex,
+          darkModeValues,
+          meanDark,
+          stdDevDark,
+          colorFormat,
+        ),
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [hexKey, darkModeValues, meanDark, stdDevDark, colorFormat],
   )
 
+  // Combine fast: map names to memoized scales without recomputing heavy work on name edits
+  const lightColorScales = useMemo(
+    () => colors.map((c, i) => ({ ...c, scale: lightScalesMemo[i] })),
+    [colors, lightScalesMemo],
+  )
   const darkColorScales = useMemo(
-    () =>
-      colors.map((color) => ({
-        ...color,
-        scale: generateColorScale(
-          color.hex,
-          darkModeValues,
-          mean,
-          stdDev,
-          colorFormat,
-        ),
-      })),
-    [colors, darkModeValues, mean, stdDev, colorFormat],
+    () => colors.map((c, i) => ({ ...c, scale: darkScalesMemo[i] })),
+    [colors, darkScalesMemo],
   )
 
   // Select the appropriate scales based on current color scheme
   const currentColorScales =
     colorScheme === 'light' ? lightColorScales : darkColorScales
+  const currentScalesOnly =
+    colorScheme === 'light' ? lightScalesMemo : darkScalesMemo
 
   // Client flag to avoid hydration mismatch
   const [isClient, setIsClient] = useState(false)
@@ -201,127 +240,173 @@ export default function App() {
   // Determine if configuration differs from defaults (mean, stdDev, light/dark values, colors)
   const isConfigDirty = useMemo(() => {
     return (
-      mean !== config.mean ||
-      stdDev !== config.stdDev ||
+      meanLight !== config.meanLight ||
+      stdDevLight !== config.stdDevLight ||
+      meanDark !== config.meanDark ||
+      stdDevDark !== config.stdDevDark ||
       !arraysEqual(lightModeValues, lightnessValuesInLightMode) ||
       !arraysEqual(darkModeValues, darknessValuesInDarkMode) ||
       !colorsEqual(colors, config.colors)
     )
-  }, [mean, stdDev, lightModeValues, darkModeValues, colors])
+  }, [
+    meanLight,
+    stdDevLight,
+    meanDark,
+    stdDevDark,
+    lightModeValues,
+    darkModeValues,
+    colors,
+  ])
 
   const contrastSummary = useMemo(() => {
     if (!isClient || !showContrast) {
       return { passed: 0, total: 0, percentage: 0 }
     }
+    // Only depend on scales (colors), not names or other metadata
+    const payload = currentScalesOnly.map((scale) => ({ scale }))
     return computeContrastSummary({
-      colorScales: currentColorScales,
+      colorScales: payload,
       contrastMethod,
       enabled: showContrast,
     })
-  }, [currentColorScales, contrastMethod, showContrast, isClient])
+  }, [currentScalesOnly, contrastMethod, showContrast, isClient])
 
   return (
-    <div className="p-6 ">
-      <HeaderPanel
-        showConfigPanel={showConfigPanel}
-        setShowConfigPanel={setShowConfigPanel}
-      />
+    <div className="min-h-screen bg-canvas text-default">
+      <header className="mx-auto max-w-7xl px-6 py-8">
+        <HeaderPanel
+          showConfigPanel={showConfigPanel}
+          setShowConfigPanel={setShowConfigPanel}
+        />
+      </header>
 
-      {/* Config Panel */}
-      {showConfigPanel && (
-        <div className="max-w-3xl p-6 mx-auto mb-12 ">
-          {/* Display Options Panel */}
-          <DisplayOptionsPanel
-            showContrast={showContrast}
-            showLightnessInputs={showLightnessInputs}
-            showGaussianParameters={showGaussianParameters}
-            contrastMethod={contrastMethod}
-            colorFormat={colorFormat}
-            setShowContrast={setShowContrast}
-            setShowLightnessInputs={setShowLightnessInputs}
-            setShowGaussianParameters={setShowGaussianParameters}
-            setContrastMethod={setContrastMethod}
-            setColorFormat={setColorFormat}
-          />
+      <main className="py-6">
+        {/* Config Panel */}
+        {showConfigPanel && (
+          <section className="mb-8">
+            <div
+              id="display-options-panel"
+              className="mx-auto max-w-7xl p-6 rounded-xl"
+            >
+              <div className="bg-surface px-4 py-6 rounded-xl">
+                <DisplayOptionsPanel
+                  showContrast={showContrast}
+                  showLightnessInputs={showLightnessInputs}
+                  showGaussianParameters={showGaussianParameters}
+                  contrastMethod={contrastMethod}
+                  colorFormat={colorFormat}
+                  setShowContrast={setShowContrast}
+                  setShowLightnessInputs={setShowLightnessInputs}
+                  setShowGaussianParameters={setShowGaussianParameters}
+                  setContrastMethod={setContrastMethod}
+                  setColorFormat={setColorFormat}
+                />
 
-          {/* Color management component */}
-          <ColorManagement
-            colors={colors}
-            onUpdateColorName={updateColorName}
-            onUpdateColorHex={updateColorHex}
-            onRemoveColor={removeColor}
-            onAddColor={addColor}
-          />
+                {showGaussianParameters && (
+                  <div className="mt-6">
+                    <GaussianParametersPanel
+                      meanLight={meanLight}
+                      stdDevLight={stdDevLight}
+                      setMeanLight={setMeanLight}
+                      setStdDevLight={setStdDevLight}
+                      meanDark={meanDark}
+                      stdDevDark={stdDevDark}
+                      setMeanDark={setMeanDark}
+                      setStdDevDark={setStdDevDark}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
-          {/* Configuration Import/Export Section */}
-          <ConfigurationPanel
-            lightModeValues={lightModeValues}
-            darkModeValues={darkModeValues}
-            mean={mean}
-            stdDev={stdDev}
-            colors={colors}
-            colorFormat={colorFormat}
-            onConfigUpload={handleConfigUpload}
-          />
-
-          {/* Gaussian Parameters Panel - conditionally rendered */}
-          {showGaussianParameters && (
-            <GaussianParametersPanel
-              mean={mean}
-              stdDev={stdDev}
-              setMean={setMean}
-              setStdDev={setStdDev}
-            />
-          )}
+        {/* Full-width sticky subheader after display options */}
+        <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md">
+          <div className="mx-auto max-w-7xl px-6 py-2">
+            <ColorScalesHeader />
+            {showLightnessInputs && (
+              <LightnessValueInputs
+                colorScheme={colorScheme}
+                lightModeValues={lightModeValues}
+                darkModeValues={darkModeValues}
+                updateLightnessValue={updateLightnessValue}
+              />
+            )}
+          </div>
         </div>
-      )}
 
-      <div className="sticky top-0 z-10 p-1 bg-default">
-        <ColorScalesHeader />
-        {/* Add lightness value inputs - conditionally rendered based on showLightnessInputs */}
-        {showLightnessInputs && (
-          <LightnessValueInputs
-            colorScheme={colorScheme}
-            lightModeValues={lightModeValues}
-            darkModeValues={darkModeValues}
-            updateLightnessValue={updateLightnessValue}
-          />
+        {/* Render color scales dynamically */}
+        <section className="mt-6 space-y-6 mx-auto max-w-7xl px-6">
+          {currentColorScales.map((colorData, index) => (
+            <div
+              key={`scale-wrap-${index}`}
+              className="rounded-xl bg-surface p-4"
+            >
+              <ColorScale
+                colors={colorData.scale}
+                showContrast={showContrast}
+                contrastMethod={contrastMethod}
+                colorName={colorData.name}
+                baseHex={colors[index]?.hex}
+                onRename={(name) => updateColorName(index, name)}
+                onChangeHex={(hex) => updateColorHex(index, hex)}
+                onRemove={() => removeColor(index)}
+              />
+            </div>
+          ))}
+        </section>
+
+        {/* Add new color button */}
+        <div className="my-8 mx-auto max-w-7xl px-6">
+          <button
+            type="button"
+            onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
+            className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border border-neutral-subtle rounded-md cursor-pointer"
+          >
+            Add colour
+          </button>
+        </div>
+      </main>
+
+      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
+        <QuickActionsPopover
+          lightModeValues={lightModeValues}
+          darkModeValues={darkModeValues}
+          meanLight={meanLight}
+          stdDevLight={stdDevLight}
+          meanDark={meanDark}
+          stdDevDark={stdDevDark}
+          colors={colors}
+          colorFormat={colorFormat}
+          setColorFormat={setColorFormat}
+          onConfigUpload={handleConfigUpload}
+        />
+
+        {isClient && showContrast && contrastSummary.total > 0 && (
+          <>
+            <div
+              role="status"
+              aria-live="polite"
+              className="px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
+            >
+              {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
+            </div>
+          </>
+        )}
+        {isClient && isConfigDirty && (
+          <button
+            type="button"
+            onClick={resetConfiguration}
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md"
+            aria-label="Reset configuration changes"
+            title="Reset configuration changes"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>Reset</span>
+          </button>
         )}
       </div>
-
-      {/* Render color scales dynamically */}
-      {currentColorScales.map((colorData) => (
-        <ColorScale
-          key={colorData.name}
-          colors={colorData.scale}
-          showContrast={showContrast}
-          contrastMethod={contrastMethod}
-          colorName={colorData.name}
-        />
-      ))}
-
-      {isClient && showContrast && contrastSummary.total > 0 && (
-        <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
-          <div
-            role="status"
-            aria-live="polite"
-            className="px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
-          >
-            {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
-          </div>
-          {isConfigDirty && (
-            <button
-              type="button"
-              onClick={resetConfiguration}
-              className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md cursor-pointer"
-              aria-label="Reset configuration changes"
-              title="Reset configuration changes"
-            >
-              Reset config changes
-            </button>
-          )}
-        </div>
-      )}
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import { ColorDefinition, ColorFormat } from '@/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
-import { PALETTE_STEPS, getLightnessValues } from '@/config/config'
+import { PALETTE_STEPS } from '@/config/config'
+import { getLightnessValues } from '@/config/helpers'
 
 /**
  * Download the current configuration as a JSON file
@@ -9,15 +10,19 @@ import { PALETTE_STEPS, getLightnessValues } from '@/config/config'
 export const downloadConfiguration = (
   customLightModeValues: number[],
   customDarkModeValues: number[],
-  mean: number,
-  stdDev: number,
+  meanLight: number,
+  stdDevLight: number,
+  meanDark: number,
+  stdDevDark: number,
   colors: ColorDefinition[],
 ) => {
   const config = {
     lightModeValues: customLightModeValues,
     darkModeValues: customDarkModeValues,
-    mean,
-    stdDev,
+    meanLight,
+    stdDevLight,
+    meanDark,
+    stdDevDark,
     colors,
   }
 
@@ -47,8 +52,10 @@ export const downloadColorTokens = (
   colors: ColorDefinition[],
   customLightModeValues: number[],
   customDarkModeValues: number[],
-  mean: number,
-  stdDev: number,
+  meanLight: number,
+  stdDevLight: number,
+  meanDark: number,
+  stdDevDark: number,
   format: ColorFormat,
 ) => {
   // Create objects with the required structure
@@ -60,16 +67,16 @@ export const downloadColorTokens = (
     lightColors[colorDef.name] = generateColorScale(
       colorDef.hex,
       customLightModeValues,
-      mean,
-      stdDev,
+      meanLight,
+      stdDevLight,
       format, // Use the user's selected format
     )
 
     darkColors[colorDef.name] = generateColorScale(
       colorDef.hex,
       customDarkModeValues,
-      mean,
-      stdDev,
+      meanDark,
+      stdDevDark,
       format, // Use the user's selected format
     )
   })
@@ -116,8 +123,10 @@ export const downloadColorTokens = (
  */
 export const generateDesignSystemCSS = (
   colors: ColorDefinition[],
-  mean: number = 0.7,
-  stdDev: number = 2,
+  meanLight: number = 0.7,
+  stdDevLight: number = 2,
+  meanDark: number = 0.7,
+  stdDevDark: number = 2,
   colorFormat: ColorFormat,
 ) => {
   // Use the palette steps for lightness values
@@ -132,16 +141,16 @@ export const generateDesignSystemCSS = (
     const lightColorScale = generateColorScale(
       colorDef.hex,
       lightModeValues,
-      mean,
-      stdDev,
+      meanLight,
+      stdDevLight,
       colorFormat,
     )
 
     const darkColorScale = generateColorScale(
       colorDef.hex,
       darkModeValues,
-      mean,
-      stdDev,
+      meanDark,
+      stdDevDark,
       colorFormat,
     )
 
@@ -163,11 +172,20 @@ export const generateDesignSystemCSS = (
  */
 export const downloadDesignSystemCSS = (
   colors: ColorDefinition[],
-  mean: number,
-  stdDev: number,
+  meanLight: number,
+  stdDevLight: number,
+  meanDark: number,
+  stdDevDark: number,
   colorFormat: ColorFormat,
 ) => {
-  const cssContent = generateDesignSystemCSS(colors, mean, stdDev, colorFormat)
+  const cssContent = generateDesignSystemCSS(
+    colors,
+    meanLight,
+    stdDevLight,
+    meanDark,
+    stdDevDark,
+    colorFormat,
+  )
 
   const blob = new Blob([cssContent], {
     type: 'text/css',

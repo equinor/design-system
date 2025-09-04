@@ -8,8 +8,10 @@ export type ColorDefinition = {
 export type ConfigFile = {
   lightModeValues: number[]
   darkModeValues: number[]
-  mean: number
-  stdDev: number
+  meanLight: number
+  stdDevLight: number
+  meanDark: number
+  stdDevDark: number
   colors?: ColorDefinition[]
 }
 
