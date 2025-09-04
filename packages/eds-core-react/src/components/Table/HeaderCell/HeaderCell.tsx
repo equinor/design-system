@@ -49,30 +49,17 @@ const StyledTableCell = styled.th((props: BaseProps) => {
 
   // Firefox specific workaround (bug in v142.0) - see issue #3910
   // Hardcoded padding values compensate for Firefox's incorrect table cell height calculation
-  const firefoxFix =
-    isFirefox() && $density === 'compact'
-      ? css`
-          vertical-align: top;
-          height: auto;
-          min-height: ${height};
+  const firefoxFix = isFirefox()
+    ? css`
+        vertical-align: top;
+        height: auto;
+        min-height: ${height};
 
-          > div {
-            /* 7px padding maintains visual consistency with other browsers in compact mode */
-            padding: 7px 0;
-          }
-        `
-      : isFirefox()
-        ? css`
-            vertical-align: top;
-            height: auto;
-            min-height: ${height};
-
-            > div {
-              /* 13px padding maintains visual consistency with other browsers in comfortable mode */
-              padding: 13px 0;
-            }
-          `
-        : css``
+        > div {
+          padding: ${$density === 'compact' ? '7px' : '13px'} 0;
+        }
+      `
+    : css``
 
   return css`
     min-height: ${height};
