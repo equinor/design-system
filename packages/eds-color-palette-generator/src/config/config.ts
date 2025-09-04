@@ -1,70 +1,19 @@
 // Configuration for color palette generator
 // Converted from JSON to TS to allow comments and prettier-ignore directives.
 
-import { ColorDefinition } from '@/types'
 import { APCA_CONTRAST_LEVELS } from './APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from './WCAG_CONTRAST_LEVELS'
+import { StepDefinition } from './types'
+import { getLightnessValues } from './helpers'
 
 /**
  * Contrast requirements for a step pairing
  */
-export interface ContrastRequirement {
-  /** Target step identifier */
-  targetStep: string
-  /** APCA contrast level */
-  lc: (typeof APCA_CONTRAST_LEVELS)[keyof typeof APCA_CONTRAST_LEVELS]
-  /** WCAG contrast level */
-  wcag: (typeof WCAG_CONTRAST_LEVELS)[keyof typeof WCAG_CONTRAST_LEVELS]
-}
-
-/**
- * Color palette step definition with contrast requirements
- */
-export interface StepDefinition {
-  /** Unique identifier for this step */
-  id: string
-  /** Display name for the step */
-  name: string
-  /** Step category */
-  category:
-    | 'background'
-    | 'background-medium'
-    | 'background-strong'
-    | 'border'
-    | 'text'
-  /** Step variant within category */
-  variant: string
-  /** Lightness value for light mode */
-  lightValue: number
-  /** Lightness value for dark mode */
-  darkValue: number
-  /** Contrast requirements (which steps this should have good contrast with) */
-  contrastWith?: ContrastRequirement[]
-}
-
-/**
- * Palette configuration interface
- */
-export interface PaletteConfig {
-  /** Gaussian distribution mean for light */
-  meanLight: number
-  /** Gaussian distribution standard deviation for light */
-  stdDevLight: number
-  /** Gaussian distribution mean for dark */
-  meanDark: number
-  /** Gaussian distribution standard deviation for dark */
-  stdDevDark: number
-  /** Available color definitions */
-  colors: ColorDefinition[]
-  /** Step definitions with semantic names and values */
-  steps: StepDefinition[]
-}
 
 /**
  * Individual step definitions using semantic IDs as constant names
  */
 
-// Background steps (default/subtle)
 export const BG_CANVAS: StepDefinition = {
   id: 'background-canvas',
   name: 'Background Canvas',
@@ -83,7 +32,6 @@ export const BG_SURFACE: StepDefinition = {
   darkValue: 0.25,
 }
 
-// Background steps (medium - interactive states)
 export const BG_MEDIUM_DEFAULT: StepDefinition = {
   id: 'background-medium-default',
   name: 'Background Medium Default',
@@ -132,7 +80,6 @@ export const BG_MEDIUM_ACTIVE: StepDefinition = {
   ],
 }
 
-// Border steps
 export const BORDER_SUBTLE: StepDefinition = {
   id: 'border-subtle',
   name: 'Border Subtle',
@@ -216,7 +163,6 @@ export const BORDER_STRONG: StepDefinition = {
   ],
 }
 
-// Background steps (strong - interactive states)
 export const BG_STRONG_DEFAULT: StepDefinition = {
   id: 'background-strong-default',
   name: 'Background Strong Default',
@@ -280,7 +226,6 @@ export const BG_STRONG_ACTIVE: StepDefinition = {
   ],
 }
 
-// Text steps
 export const TEXT_SUBTLE: StepDefinition = {
   id: 'text-subtle',
   name: 'Text Subtle',
@@ -407,53 +352,8 @@ export const PALETTE_STEPS: StepDefinition[] = [
   TEXT_CONTRAST_STRONG,
 ]
 
-/**
- * Extract lightness values for a specific mode
- */
-export const getLightnessValues =
-  (mode: 'light' | 'dark') =>
-  (steps: readonly StepDefinition[]): number[] =>
-    steps.map((step) => (mode === 'light' ? step.lightValue : step.darkValue))
-
-/**
- * Find step by ID
- */
-export const findStepById =
-  (id: string) =>
-  (steps: readonly StepDefinition[]): StepDefinition | undefined =>
-    steps.find((step) => step.id === id)
-
-/**
- * Get step index by ID
- */
-export const getStepIndex =
-  (id: string) =>
-  (steps: readonly StepDefinition[]): number =>
-    steps.findIndex((step) => step.id === id)
-
-/**
- * Palette configuration
- */
-export const config: PaletteConfig = {
-  meanLight: 0.6,
-  stdDevLight: 2,
-  meanDark: 0.7,
-  stdDevDark: 2,
-  colors: [
-    { name: 'Moss Green', hex: '#007079' },
-    { name: 'Gray', hex: '#4A4A4A' },
-    { name: 'Green', hex: '#3FA13D' },
-    { name: 'Blue', hex: '#0084C4' },
-    { name: 'Orange', hex: '#E57E00' },
-    { name: 'Red', hex: '#E20337' },
-  ],
-  steps: PALETTE_STEPS,
-}
-
 // Generated exports for backward compatibility and UI
 export const lightnessValuesInLightMode =
   getLightnessValues('light')(PALETTE_STEPS)
 export const darknessValuesInDarkMode =
   getLightnessValues('dark')(PALETTE_STEPS)
-
-export default config

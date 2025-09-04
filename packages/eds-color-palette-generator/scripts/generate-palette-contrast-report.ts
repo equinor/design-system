@@ -9,7 +9,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import config, {
+import { paletteConfig as config } from '../src/config/palette'
+import {
   PALETTE_STEPS,
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,

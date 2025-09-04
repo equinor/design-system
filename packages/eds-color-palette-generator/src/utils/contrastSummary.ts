@@ -1,4 +1,5 @@
-import { PALETTE_STEPS, getStepIndex } from '@/config/config'
+import { PALETTE_STEPS } from '@/config/config'
+import { getStepIndex } from '@/config/helpers'
 import { contrast } from '@/utils/color'
 import { ContrastMethod } from '@/types'
 

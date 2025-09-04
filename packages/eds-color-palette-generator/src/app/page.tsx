@@ -14,7 +14,8 @@ import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import { ColorDefinition, ConfigFile, ContrastMethod, ColorFormat } from '@/types'
 import { arraysEqual, colorsEqual } from '@/utils/compare'
 import { localStorageUtils } from '@/utils/localStorage'
-import config, {
+import { paletteConfig as config } from '@/config/palette'
+import {
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
 } from '@/config/config'

@@ -1,7 +1,8 @@
 import { ColorDefinition, ColorFormat } from '@/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
-import { PALETTE_STEPS, getLightnessValues } from '@/config/config'
+import { PALETTE_STEPS } from '@/config/config'
+import { getLightnessValues } from '@/config/helpers'
 
 /**
  * Download the current configuration as a JSON file
