@@ -280,7 +280,7 @@ export default function App() {
 
       {/* Config Panel */}
       {showConfigPanel && (
-        <div className="max-w-3xl p-6 mx-auto mb-12 ">
+        <div id="display-options-panel" className="max-w-3xl p-6 mx-auto mb-12 ">
           {/* Display Options Panel */}
           <DisplayOptionsPanel
             showContrast={showContrast}

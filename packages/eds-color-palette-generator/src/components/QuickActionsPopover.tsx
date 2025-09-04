@@ -39,6 +39,8 @@ export function QuickActionsPopover(props: Props) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const firstActionRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
@@ -56,6 +58,16 @@ export function QuickActionsPopover(props: Props) {
     }
   }, [])
 
+  useEffect(() => {
+    if (open) {
+      // Move focus inside the popover
+      setTimeout(() => firstActionRef.current?.focus(), 0)
+    } else {
+      // Restore focus to trigger when closing
+      setTimeout(() => triggerRef.current?.focus(), 0)
+    }
+  }, [open])
+
   const triggerClass =
     'inline-flex items-center justify-center p-2 rounded-md bg-accent-medium-default hover:bg-accent-medium-hover transition-colors shadow-sm'
 
@@ -63,23 +75,28 @@ export function QuickActionsPopover(props: Props) {
     <div ref={rootRef} className="relative">
       <button
         type="button"
-        aria-haspopup="menu"
+        aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={triggerClass}
         title="Import / Export"
+        aria-label="Import and export options"
+        aria-controls="quick-actions-popover"
+        ref={triggerRef}
       >
         <Download className="w-4 h-4" />
       </button>
 
       {open && (
         <div
-          role="menu"
+          id="quick-actions-popover"
           className="absolute bottom-12 right-0 w-64 rounded-lg border border-neutral-subtle bg-elevated shadow-lg overflow-hidden"
+          role="region"
+          aria-label="Quick actions"
         >
           <div className="px-3 py-2 text-sm text-subtle">Import</div>
           <button
-            role="menuitem"
+            ref={firstActionRef}
             className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover"
             onClick={() => fileInputRef.current?.click()}
           >
@@ -119,7 +136,6 @@ export function QuickActionsPopover(props: Props) {
           <div className="h-px bg-neutral-subtle my-1" />
           <div className="px-3 py-2 text-sm text-subtle">Export</div>
           <button
-            role="menuitem"
             className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover"
             onClick={() =>
               downloadConfiguration(
@@ -137,7 +153,6 @@ export function QuickActionsPopover(props: Props) {
             <span>Palette config</span>
           </button>
           <button
-            role="menuitem"
             className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover"
             onClick={() =>
               downloadDesignSystemCSS(
@@ -154,7 +169,6 @@ export function QuickActionsPopover(props: Props) {
             <span>CSS variables</span>
           </button>
           <button
-            role="menuitem"
             className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover"
             onClick={() =>
               downloadColorTokens(

@@ -137,6 +137,7 @@ function ColorScaleBase({
               placeholder="Color name"
               className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong bg-default text-strong font-medium transition-colors"
               style={{ color: headingColor }}
+              aria-label="Color name"
             />
             <input
               ref={colorInputRef}
@@ -369,6 +370,7 @@ function ColorScaleBase({
                   color: colors[12],
                 }}
                 onClose={handleDialogClose}
+                aria-labelledby={`color-details-heading-${i}`}
                 onClick={(e) => {
                   // Close dialog only if clicking directly on the backdrop
                   // (native dialog behavior is to close when clicking anywhere)
@@ -395,6 +397,7 @@ function ColorScaleBase({
                     {colorName ? `${colorName} ${i + 1}` : `Color ${i + 1}`}
                   </h4>
                   <button
+                    type="button"
                     className="flex items-center justify-center rounded-full w-7 h-7 hover:bg-black/10 focus:outline-none focus:ring-2"
                     onClick={() => closeDialog(i)}
                     aria-label="Close details"
@@ -476,8 +479,8 @@ function ColorScaleBase({
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-neutral-subtle">
-                          <th className="py-1 pr-2 text-left">Pairs with</th>
-                          <th className="py-1 text-right">
+                          <th scope="col" className="py-1 pr-2 text-left">Pairs with</th>
+                          <th scope="col" className="py-1 text-right">
                             {contrastMethod === 'APCA' &&
                               'Lightness contrast (Lc)'}
                             {contrastMethod === 'WCAG21' && 'Contrast Ratio'}
