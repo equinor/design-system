@@ -5,7 +5,7 @@
 [data-color-scheme="dark"] {
   --eds-color-moss-green-1: #0a0b0b;
   --eds-color-moss-green-2: #1e2323;
-  --eds-color-moss-green-3: #3b5f63;
+  --eds-color-moss-green-3: #3c6266;
   --eds-color-moss-green-4: #3e7378;
   --eds-color-moss-green-5: #41878e;
   --eds-color-moss-green-6: #3c6266;
@@ -20,7 +20,7 @@
   --eds-color-moss-green-15: #030303;
   --eds-color-gray-1: #0b0b0b;
   --eds-color-gray-2: #222222;
-  --eds-color-gray-3: #585858;
+  --eds-color-gray-3: #5b5b5b;
   --eds-color-gray-4: #696969;
   --eds-color-gray-5: #7a7a7a;
   --eds-color-gray-6: #5b5b5b;
@@ -35,7 +35,7 @@
   --eds-color-gray-15: #030303;
   --eds-color-green-1: #0a0c0a;
   --eds-color-green-2: #1e231e;
-  --eds-color-green-3: #3b6439;
+  --eds-color-green-3: #3c673a;
   --eds-color-green-4: #3e793c;
   --eds-color-green-5: #418e3e;
   --eds-color-green-6: #3c673a;
@@ -50,7 +50,7 @@
   --eds-color-green-15: #030303;
   --eds-color-blue-1: #0a0b0c;
   --eds-color-blue-2: #1d2226;
-  --eds-color-blue-3: #335d79;
+  --eds-color-blue-3: #33607e;
   --eds-color-blue-4: #316f98;
   --eds-color-blue-5: #2e82b7;
   --eds-color-blue-6: #33607e;
@@ -65,7 +65,7 @@
   --eds-color-blue-15: #030304;
   --eds-color-orange-1: #0c0b0a;
   --eds-color-orange-2: #27201b;
-  --eds-color-orange-3: #794c26;
+  --eds-color-orange-3: #7e4e25;
   --eds-color-orange-4: #97571b;
   --eds-color-orange-5: #b46201;
   --eds-color-orange-6: #7e4e25;
@@ -80,7 +80,7 @@
   --eds-color-orange-15: #040303;
   --eds-color-red-1: #0d0a0a;
   --eds-color-red-2: #2a1e1e;
-  --eds-color-red-3: #8c3a3c;
+  --eds-color-red-3: #923a3c;
   --eds-color-red-4: #b03940;
   --eds-color-red-5: #d43745;
   --eds-color-red-6: #923a3c;
@@ -95,7 +95,7 @@
   --eds-color-red-15: #040303;
   --eds-color-background-canvas: #0b0b0b;
   --eds-color-background-surface: #222222;
-  --eds-color-background-elevated: #585858;
+  --eds-color-background-elevated: #5b5b5b;
   --eds-color-background-backdrop: #222222;
   --eds-color-border-focus: #2d8bc5;
   --eds-color-text-link: #ecffff;

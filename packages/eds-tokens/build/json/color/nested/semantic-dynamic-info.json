@@ -1,7 +1,7 @@
 {
   "Background": {
     "Medium": {
-      "Default": "#c5e3f9",
+      "Default": "#c0e0f8",
       "Hover": "#aad4f3",
       "Active": "#8dc5ee"
     },
@@ -10,8 +10,8 @@
       "Hover": "#085883",
       "Active": "#0e5279"
     },
-    "Default": "#fff",
-    "Subtle": "#e7f8ff"
+    "Default": "#e7f8ff",
+    "Subtle": "#f0feff"
   },
   "Border": {
     "Subtle": "#b5daf5",

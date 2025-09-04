@@ -3,7 +3,7 @@
     "Moss Green": {
       "1": {
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#eaf8fa",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -15,7 +15,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#eaf8fa",
+        "$value": "#f3feff",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -27,7 +27,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#cae4e7",
+        "$value": "#c5e1e4",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -185,7 +185,7 @@
     "Gray": {
       "1": {
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#f5f5f5",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -197,7 +197,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#f5f5f5",
+        "$value": "#fcfcfc",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -209,7 +209,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#dedede",
+        "$value": "#dbdbdb",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -367,7 +367,7 @@
     "Green": {
       "1": {
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#eafbe8",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -379,7 +379,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#eafbe8",
+        "$value": "#f3fff1",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -391,7 +391,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#cae8c7",
+        "$value": "#c5e5c2",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -549,7 +549,7 @@
     "Blue": {
       "1": {
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#e7f8ff",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -561,7 +561,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#e7f8ff",
+        "$value": "#f0feff",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -573,7 +573,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#c5e3f9",
+        "$value": "#c0e0f8",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -731,7 +731,7 @@
     "Orange": {
       "1": {
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#fff1e2",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -743,7 +743,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#fff1e2",
+        "$value": "#fff8ec",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -755,7 +755,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#fad6bc",
+        "$value": "#f9d2b6",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -913,7 +913,7 @@
     "Red": {
       "1": {
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#ffecea",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -925,7 +925,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#ffecea",
+        "$value": "#fff5f4",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -937,7 +937,7 @@
       },
       "3": {
         "$type": "color",
-        "$value": "#ffcbc9",
+        "$value": "#ffc6c4",
         "$description": "",
         "$extensions": {
           "com.figma": {

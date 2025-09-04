@@ -3,9 +3,9 @@
  */
 
 [data-color-scheme="light"] {
-  --eds-color-moss-green-1: #ffffff;
-  --eds-color-moss-green-2: #eaf8fa;
-  --eds-color-moss-green-3: #cae4e7;
+  --eds-color-moss-green-1: #eaf8fa;
+  --eds-color-moss-green-2: #f3feff;
+  --eds-color-moss-green-3: #c5e1e4;
   --eds-color-moss-green-4: #b1d6da;
   --eds-color-moss-green-5: #97c8cd;
   --eds-color-moss-green-6: #bbdbdf;
@@ -18,9 +18,9 @@
   --eds-color-moss-green-13: #141f20;
   --eds-color-moss-green-14: #cae4e7;
   --eds-color-moss-green-15: #ffffff;
-  --eds-color-gray-1: #ffffff;
-  --eds-color-gray-2: #f5f5f5;
-  --eds-color-gray-3: #dedede;
+  --eds-color-gray-1: #f5f5f5;
+  --eds-color-gray-2: #fcfcfc;
+  --eds-color-gray-3: #dbdbdb;
   --eds-color-gray-4: #cecece;
   --eds-color-gray-5: #bebebe;
   --eds-color-gray-6: #d4d4d4;
@@ -33,9 +33,9 @@
   --eds-color-gray-13: #1d1d1d;
   --eds-color-gray-14: #dedede;
   --eds-color-gray-15: #ffffff;
-  --eds-color-green-1: #ffffff;
-  --eds-color-green-2: #eafbe8;
-  --eds-color-green-3: #cae8c7;
+  --eds-color-green-1: #eafbe8;
+  --eds-color-green-2: #f3fff1;
+  --eds-color-green-3: #c5e5c2;
   --eds-color-green-4: #b1dbae;
   --eds-color-green-5: #97cf93;
   --eds-color-green-6: #bbe0b8;
@@ -48,9 +48,9 @@
   --eds-color-green-13: #142114;
   --eds-color-green-14: #cae8c7;
   --eds-color-green-15: #ffffff;
-  --eds-color-blue-1: #ffffff;
-  --eds-color-blue-2: #e7f8ff;
-  --eds-color-blue-3: #c5e3f9;
+  --eds-color-blue-1: #e7f8ff;
+  --eds-color-blue-2: #f0feff;
+  --eds-color-blue-3: #c0e0f8;
   --eds-color-blue-4: #aad4f3;
   --eds-color-blue-5: #8dc5ee;
   --eds-color-blue-6: #b5daf5;
@@ -63,9 +63,9 @@
   --eds-color-blue-13: #121e27;
   --eds-color-blue-14: #c5e3f9;
   --eds-color-blue-15: #ffffff;
-  --eds-color-orange-1: #ffffff;
-  --eds-color-orange-2: #fff1e2;
-  --eds-color-orange-3: #fad6bc;
+  --eds-color-orange-1: #fff1e2;
+  --eds-color-orange-2: #fff8ec;
+  --eds-color-orange-3: #f9d2b6;
   --eds-color-orange-4: #f4c29d;
   --eds-color-orange-5: #eeae7c;
   --eds-color-orange-6: #f6caaa;
@@ -78,9 +78,9 @@
   --eds-color-orange-13: #27190e;
   --eds-color-orange-14: #fad6bc;
   --eds-color-orange-15: #ffffff;
-  --eds-color-red-1: #ffffff;
-  --eds-color-red-2: #ffecea;
-  --eds-color-red-3: #ffcbc9;
+  --eds-color-red-1: #ffecea;
+  --eds-color-red-2: #fff5f4;
+  --eds-color-red-3: #ffc6c4;
   --eds-color-red-4: #ffb2b0;
   --eds-color-red-5: #ff9897;
   --eds-color-red-6: #ffbcba;
@@ -93,9 +93,9 @@
   --eds-color-red-13: #2e1414;
   --eds-color-red-14: #ffcbc9;
   --eds-color-red-15: #ffffff;
-  --eds-color-background-canvas: #f5f5f5;
-  --eds-color-background-surface: #ffffff;
-  --eds-color-background-elevated: #ffffff;
+  --eds-color-background-canvas: #fcfcfc;
+  --eds-color-background-surface: #f5f5f5;
+  --eds-color-background-elevated: #f5f5f5;
   --eds-color-background-backdrop: #aeaeae;
   --eds-color-border-focus: #6fb6e9;
   --eds-color-text-link: #121e27;

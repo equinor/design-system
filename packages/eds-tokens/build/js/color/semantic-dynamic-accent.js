@@ -2,14 +2,14 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BACKGROUND_MEDIUM_DEFAULT = "#cae4e7";
+export const BACKGROUND_MEDIUM_DEFAULT = "#c5e1e4";
 export const BACKGROUND_MEDIUM_HOVER = "#b1d6da";
 export const BACKGROUND_MEDIUM_ACTIVE = "#97c8cd";
 export const BACKGROUND_STRONG_DEFAULT = "#206f77";
 export const BACKGROUND_STRONG_HOVER = "#205c62";
 export const BACKGROUND_STRONG_ACTIVE = "#20565c";
-export const BACKGROUND_DEFAULT = "#fff";
-export const BACKGROUND_SUBTLE = "#eaf8fa";
+export const BACKGROUND_DEFAULT = "#eaf8fa";
+export const BACKGROUND_SUBTLE = "#f3feff";
 export const BORDER_SUBTLE = "#bbdbdf";
 export const BORDER_MEDIUM = "#7cbac1";
 export const BORDER_STRONG = "#21767e";
