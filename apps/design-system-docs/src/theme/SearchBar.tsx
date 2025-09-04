@@ -10,12 +10,14 @@ type Props = WrapperProps<typeof SearchBarType>
 export default function SearchBarWrapper(props: Props): ReactNode {
   return (
     <>
-      <SearchBar
-        aria-label="sitewide"
-        id="search-normal"
-        placeholder="Search"
-        // onChange={handleOnChange}
-      />
+      <div className="search-bar">
+        <SearchBar
+          aria-label="sitewide"
+          id="search-normal"
+          placeholder="Search"
+          // onChange={handleOnChange}
+        />
+      </div>
     </>
   )
 }
