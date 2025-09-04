@@ -1327,6 +1327,20 @@
       }
     }
   },
+  "background-input": {
+    "$type": "color",
+    "$value": "{Dark.Gray.1}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
   "border-focus": {
     "$type": "color",
     "$value": "{Dark.Blue.7}",

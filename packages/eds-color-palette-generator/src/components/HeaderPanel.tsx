@@ -1,5 +1,6 @@
 import React from 'react'
 import { ThemeToggle } from './ThemeToggle'
+import { Settings } from 'lucide-react'
 
 type HeaderPanelProps = {
   showConfigPanel: boolean
@@ -11,22 +12,26 @@ export const HeaderPanel = ({
   setShowConfigPanel,
 }: HeaderPanelProps) => {
   return (
-    <div className="flex items-center justify-between mb-8">
+    <div className="flex items-center justify-between">
       <div>
-        <h1 className="text-2xl">Accessible Colour Palette</h1>
-        <p className="text-md text-subtle">
+        <h1 className="text-xl sm:text-2xl">Accessible Colour Palette</h1>
+        <p className="text-sm sm:text-md text-subtle">
           Colours are generated using an algorithm for chroma with predefined
           lightness values and hues.
         </p>
       </div>
       <div className="flex items-center gap-3">
         <button
+          type="button"
           onClick={() => setShowConfigPanel(!showConfigPanel)}
-          className="flex items-center gap-2 px-3 py-2 text-sm border border-neutral-subtle hover:bg-neutral-medium-hover transition-colors rounded-md"
+          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-medium-hover transition-colors rounded-md"
           title="Open configuration panel"
           data-testid="config-button"
+          aria-expanded={showConfigPanel}
+          aria-controls="display-options-panel"
         >
-          ⚙️ Config
+          <Settings className="w-4 h-4" />
+          <span>Display</span>
         </button>
         <ThemeToggle />
       </div>

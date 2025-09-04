@@ -27,36 +27,10 @@ export const DisplayOptionsPanel = ({
   setColorFormat,
 }: DisplayOptionsPanelProps) => {
   return (
-    <fieldset className="p-6 mb-4 space-y-4 border border-neutral-subtle rounded-lg">
-      <legend className="mb-2 font-medium">Options</legend>
+    <fieldset className="p-4 space-y-4">
+      <legend className="mb-2 font-medium">Display</legend>
 
-      <div className="space-y-3">
-        <p className="text-sm font-medium">Colour output format</p>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              name="colorFormat"
-              value="OKLCH"
-              checked={colorFormat === 'OKLCH'}
-              onChange={() => setColorFormat('OKLCH')}
-              className="accent-current"
-            />
-            <span>OKLCH</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              name="colorFormat"
-              value="HEX"
-              checked={colorFormat === 'HEX'}
-              onChange={() => setColorFormat('HEX')}
-              className="accent-current"
-            />
-            <span>HEX</span>
-          </label>
-        </div>
-      </div>
+      {/* Colour output format moved to QuickActionsPopover */}
       <div className="space-y-3">
         <label className="flex items-center gap-2 cursor-pointer">
           <input
@@ -65,7 +39,7 @@ export const DisplayOptionsPanel = ({
             onChange={(e) => setShowLightnessInputs(e.target.checked)}
             className="accent-current"
           />
-          <span>Show lightness value inputs</span>
+          <span>Lightness value inputs</span>
         </label>
       </div>
       <label className="flex items-center gap-2 cursor-pointer">
@@ -75,7 +49,7 @@ export const DisplayOptionsPanel = ({
           onChange={(e) => setShowContrast(e.target.checked)}
           className="accent-current"
         />
-        <span>Show contrast score</span>
+        <span>Contrast score</span>
       </label>
       {showContrast && (
         <div className="pl-6 mt-3">
@@ -113,7 +87,7 @@ export const DisplayOptionsPanel = ({
           onChange={(e) => setShowGaussianParameters(e.target.checked)}
           className="accent-current"
         />
-        <span>Show Gaussian parameters</span>
+        <span>Gaussian parameters</span>
       </label>
     </fieldset>
   )

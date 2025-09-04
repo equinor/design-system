@@ -5,13 +5,9 @@ on:
     branches:
       - develop
     paths:
-      - 'packages/eds-core-react/**'
-      - 'packages/eds-lab-react/**'
-      - 'packages/eds-data-grid-react/**'
-      - 'packages/eds-tokens-sync/**'
-      - 'packages/eds-tokens-build/**'
-      - 'packages/eds-tokens/**'
-      - 'packages/eds-icons/**'
+      - 'apps/**'
+      - 'packages/**'
+      - '.github/workflows/**'
   push:
     branches:
       - develop
@@ -24,7 +20,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages
+      checkout_paths: packages apps .github
   packages:
     name: Process packages
     runs-on: ubuntu-latest

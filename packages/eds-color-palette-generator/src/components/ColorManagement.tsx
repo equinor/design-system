@@ -42,6 +42,7 @@ export const ColorManagement = ({
                   value={color.name}
                   onChange={(e) => onUpdateColorName(index, e.target.value)}
                   data-testid={`color-name-input-${index}`}
+                  aria-label={`Color ${index + 1} name`}
                 />
               </div>
 
@@ -53,12 +54,14 @@ export const ColorManagement = ({
                   value={color.hex}
                   onChange={(e) => onUpdateColorHex(index, e.target.value)}
                   data-testid={`color-hex-input-${index}`}
+                  aria-label={`Color ${index + 1} value`}
                 />
               </div>
 
               {/* Actions */}
               <div className="text-right">
                 <button
+                  type="button"
                   className="px-3 py-1 text-xs bg-danger-medium-default hover:bg-danger-medium-hover rounded"
                   onClick={() => onRemoveColor(index)}
                   disabled={colors.length <= 1}
@@ -73,6 +76,7 @@ export const ColorManagement = ({
 
         <div className="mt-4 text-left">
           <button
+            type="button"
             className="px-4 py-2 text-sm text-contrast-strong bg-primary-default hover:bg-primary-hover rounded"
             onClick={() => {
               const randomColor =

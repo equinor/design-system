@@ -127,7 +127,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               dateFormat={dateFormat}
               placeholderText={placeholder}
               id={id}
-              onKeyDown={(event) => {
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
                 // If you shift-tab while focusing the input-element, it should close the pop-over.
                 // Not currently supported by react-datepicker.
                 if (
@@ -246,7 +246,8 @@ const Container = styled.div`
   }
 `
 
-const StyledDatepicker = styled(DatePicker)`
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const StyledDatepicker = styled(DatePicker as any)`
   ${({ theme }) => css`
     height: 24px;
     font-family: ${theme.entities.title.typography.fontFamily};

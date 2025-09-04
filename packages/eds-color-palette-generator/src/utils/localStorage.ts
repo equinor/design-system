@@ -2,8 +2,10 @@ import { ColorDefinition, ContrastMethod, ColorFormat } from '@/types'
 
 // Keys for localStorage
 const STORAGE_KEYS = {
-  MEAN: 'colorPalette_mean',
-  STD_DEV: 'colorPalette_stdDev',
+  MEAN_LIGHT: 'colorPalette_meanLight',
+  STD_DEV_LIGHT: 'colorPalette_stdDevLight',
+  MEAN_DARK: 'colorPalette_meanDark',
+  STD_DEV_DARK: 'colorPalette_stdDevDark',
   LIGHT_MODE_VALUES: 'colorPalette_lightModeValues',
   DARK_MODE_VALUES: 'colorPalette_darkModeValues',
   COLORS: 'colorPalette_colors',
@@ -41,12 +43,21 @@ function setItem<T>(key: string, value: T): void {
 // Specific functions for each configuration type
 export const localStorageUtils = {
   // Gaussian parameters
-  getMean: (defaultValue: number) => getItem(STORAGE_KEYS.MEAN, defaultValue),
-  setMean: (value: number) => setItem(STORAGE_KEYS.MEAN, value),
+  getMeanLight: (defaultValue: number) =>
+    getItem(STORAGE_KEYS.MEAN_LIGHT, defaultValue),
+  setMeanLight: (value: number) => setItem(STORAGE_KEYS.MEAN_LIGHT, value),
 
-  getStdDev: (defaultValue: number) =>
-    getItem(STORAGE_KEYS.STD_DEV, defaultValue),
-  setStdDev: (value: number) => setItem(STORAGE_KEYS.STD_DEV, value),
+  getStdDevLight: (defaultValue: number) =>
+    getItem(STORAGE_KEYS.STD_DEV_LIGHT, defaultValue),
+  setStdDevLight: (value: number) => setItem(STORAGE_KEYS.STD_DEV_LIGHT, value),
+
+  getMeanDark: (defaultValue: number) =>
+    getItem(STORAGE_KEYS.MEAN_DARK, defaultValue),
+  setMeanDark: (value: number) => setItem(STORAGE_KEYS.MEAN_DARK, value),
+
+  getStdDevDark: (defaultValue: number) =>
+    getItem(STORAGE_KEYS.STD_DEV_DARK, defaultValue),
+  setStdDevDark: (value: number) => setItem(STORAGE_KEYS.STD_DEV_DARK, value),
 
   // Lightness values
   getLightModeValues: (defaultValue: number[]) =>
@@ -110,8 +121,10 @@ export const localStorageUtils = {
     if (typeof window === 'undefined') return
 
     const configurationKeys = [
-      STORAGE_KEYS.MEAN,
-      STORAGE_KEYS.STD_DEV,
+      STORAGE_KEYS.MEAN_LIGHT,
+      STORAGE_KEYS.STD_DEV_LIGHT,
+      STORAGE_KEYS.MEAN_DARK,
+      STORAGE_KEYS.STD_DEV_DARK,
       STORAGE_KEYS.LIGHT_MODE_VALUES,
       STORAGE_KEYS.DARK_MODE_VALUES,
       STORAGE_KEYS.COLORS,

@@ -5,6 +5,8 @@ pnpm-debug.log
 .DS_Store
 # use pnpm
 package-lock.json
+packages/*/package-lock.yaml
+scripts/*/package-lock.yaml
 # Prevent individual package lockfiles (use workspace lockfile in root)
 packages/*/pnpm-lock.yaml
 scripts/*/pnpm-lock.yaml

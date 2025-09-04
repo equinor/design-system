@@ -88,18 +88,18 @@
     "@equinor/eds-tokens-build": "workspace:*",
     "@equinor/eds-tokens-sync": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@types/node": "^22.15.3",
+    "@types/node": "^22.18.0",
     "copyfiles": "^2.4.1",
-    "lightningcss-cli": "^1.29.3",
+    "lightningcss-cli": "^1.30.1",
     "prettier": "3.6.2",
     "rimraf": "^6.0.1",
-    "rollup": "^4.40.1",
+    "rollup": "^4.50.0",
     "rollup-plugin-delete": "^2.2.0",
-    "style-dictionary": "^4.4.0",
-    "style-dictionary-utils": "^4.0.5",
-    "typescript": "^5.8.3",
-    "vite": "^7.0.5"
+    "style-dictionary": "^5.0.3",
+    "style-dictionary-utils": "^4.1.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.3"
   }
 }

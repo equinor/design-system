@@ -1,14 +1,20 @@
 'use client'
-import { PALETTE_STEPS, getStepIndex } from '@/config/config'
+import { PALETTE_STEPS } from '@/config/config'
+import { getStepIndex } from '@/config/helpers'
 import { contrast } from '@/utils/color'
+import { Trash, Pencil } from 'lucide-react'
 import Color from 'colorjs.io'
-import { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 
 type ColorScaleProps = {
   colors: string[]
   showContrast?: boolean
   contrastMethod?: 'WCAG21' | 'APCA'
   colorName?: string
+  baseHex?: string
+  onRename?: (newName: string) => void
+  onChangeHex?: (newHex: string) => void
+  onRemove?: () => void
 }
 
 // Type for color information in OKLCH format!
@@ -68,11 +74,15 @@ function getOklchInfo(hexColor: string, index: number): OklchInfo {
   }
 }
 
-export function ColorScale({
+function ColorScaleBase({
   colors,
   showContrast = true,
   contrastMethod = 'WCAG21',
   colorName,
+  baseHex,
+  onRename,
+  onChangeHex,
+  onRemove,
 }: ColorScaleProps) {
   // State to track client-side rendering for contrast calculations
   const [isClient, setIsClient] = useState(false)
@@ -90,6 +100,90 @@ export function ColorScale({
   const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
     Array(colors.length).fill(null),
   )
+  const headingColor = colors[8] || '#000000'
+
+  // Stable, memoized header component to isolate frequent re-renders
+  const NameAndControls = React.useMemo(() => {
+    return React.memo(
+      function NameAndControlsInner({
+        name,
+        headingColor,
+        baseHex,
+        onRename,
+        onChangeHex,
+        onRemove,
+      }: {
+        name?: string
+        headingColor: string
+        baseHex?: string
+        onRename?: (n: string) => void
+        onChangeHex?: (h: string) => void
+        onRemove?: () => void
+      }) {
+        const colorInputRef = useRef<HTMLInputElement | null>(null)
+        const [localHex, setLocalHex] = useState(baseHex || '#000000')
+        const hexDebounceRef = useRef<number | null>(null)
+
+        useEffect(() => {
+          setLocalHex(baseHex || '#000000')
+        }, [baseHex])
+
+        return (
+          <div className="flex items-center gap-2 mb-4">
+            <input
+              type="text"
+              value={name ?? ''}
+              onChange={(e) => onRename?.(e.target.value)}
+              placeholder="Color name"
+              className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium transition-colors"
+              style={{ color: headingColor }}
+              aria-label="Color name"
+            />
+            <input
+              ref={colorInputRef}
+              type="color"
+              value={localHex}
+              onChange={(e) => {
+                const next = e.target.value
+                setLocalHex(next)
+                if (hexDebounceRef.current) {
+                  window.clearTimeout(hexDebounceRef.current)
+                }
+                hexDebounceRef.current = window.setTimeout(() => {
+                  onChangeHex?.(next)
+                }, 250)
+              }}
+              className="sr-only"
+              aria-label={`Pick base color for ${name ?? 'color'}`}
+              tabIndex={-1}
+            />
+            <button
+              type="button"
+              onClick={() => colorInputRef.current?.click()}
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-medium-hover"
+              title="Edit base color"
+              aria-label="Edit base color"
+            >
+              <Pencil className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => onRemove?.()}
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-medium-hover"
+              title="Remove color"
+              aria-label="Remove color"
+            >
+              <Trash className="w-4 h-4" />
+            </button>
+          </div>
+        )
+      },
+      (prev, next) =>
+        prev.name === next.name &&
+        prev.baseHex === next.baseHex &&
+        prev.headingColor === next.headingColor,
+    )
+  }, [])
 
   // Set client-side flag after hydration
   useEffect(() => {
@@ -215,14 +309,14 @@ export function ColorScale({
 
   return (
     <div className="mb-8">
-      {colorName && (
-        <h3
-          style={{ color: colors[8] || '#000000' }}
-          className="mb-2 text-lg font-medium text-left"
-        >
-          {colorName}
-        </h3>
-      )}
+      <NameAndControls
+        name={colorName}
+        headingColor={headingColor}
+        baseHex={baseHex}
+        onRename={onRename}
+        onChangeHex={onChangeHex}
+        onRemove={onRemove}
+      />
       <div
         className="grid gap-2 mb-4"
         style={{
@@ -276,6 +370,7 @@ export function ColorScale({
                   color: colors[12],
                 }}
                 onClose={handleDialogClose}
+                aria-labelledby={`color-details-heading-${i}`}
                 onClick={(e) => {
                   // Close dialog only if clicking directly on the backdrop
                   // (native dialog behavior is to close when clicking anywhere)
@@ -302,6 +397,7 @@ export function ColorScale({
                     {colorName ? `${colorName} ${i + 1}` : `Color ${i + 1}`}
                   </h4>
                   <button
+                    type="button"
                     className="flex items-center justify-center rounded-full w-7 h-7 hover:bg-black/10 focus:outline-none focus:ring-2"
                     onClick={() => closeDialog(i)}
                     aria-label="Close details"
@@ -383,8 +479,10 @@ export function ColorScale({
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-neutral-subtle">
-                          <th className="py-1 pr-2 text-left">Pairs with</th>
-                          <th className="py-1 text-right">
+                          <th scope="col" className="py-1 pr-2 text-left">
+                            Pairs with
+                          </th>
+                          <th scope="col" className="py-1 text-right">
                             {contrastMethod === 'APCA' &&
                               'Lightness contrast (Lc)'}
                             {contrastMethod === 'WCAG21' && 'Contrast Ratio'}
@@ -520,3 +618,15 @@ export function ColorScale({
     </div>
   )
 }
+
+function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
+  return (
+    prev.colorName === next.colorName &&
+    prev.baseHex === next.baseHex &&
+    prev.showContrast === next.showContrast &&
+    prev.contrastMethod === next.contrastMethod &&
+    prev.colors === next.colors
+  )
+}
+
+export const ColorScale = React.memo(ColorScaleBase, areEqual)

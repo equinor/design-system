@@ -9,7 +9,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import config, {
+import { paletteConfig as config } from '../src/config/palette'
+import {
   PALETTE_STEPS,
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
@@ -62,15 +63,15 @@ function buildScales() {
     const lightScale = generateColorScale(
       c.hex,
       lightSteps,
-      config.mean,
-      config.stdDev,
+      config.meanLight,
+      config.stdDevLight,
       'OKLCH',
     )
     const darkScale = generateColorScale(
       c.hex,
       darkSteps,
-      config.mean,
-      config.stdDev,
+      config.meanDark,
+      config.stdDevDark,
       'OKLCH',
     )
     const mapping: Record<string, { light: string; dark: string }> = {}
