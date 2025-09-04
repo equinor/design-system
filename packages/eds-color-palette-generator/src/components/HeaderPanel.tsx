@@ -1,5 +1,6 @@
 import React from 'react'
 import { ThemeToggle } from './ThemeToggle'
+import { Settings } from 'lucide-react'
 
 type HeaderPanelProps = {
   showConfigPanel: boolean
@@ -22,11 +23,12 @@ export const HeaderPanel = ({
       <div className="flex items-center gap-3">
         <button
           onClick={() => setShowConfigPanel(!showConfigPanel)}
-          className="flex items-center gap-2 px-3 py-2 text-sm border border-neutral-subtle hover:bg-neutral-medium-hover transition-colors rounded-md"
+          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-medium-hover transition-colors rounded-md"
           title="Open configuration panel"
           data-testid="config-button"
         >
-          ⚙️ Config
+          <Settings className="w-4 h-4" />
+          <span>Config</span>
         </button>
         <ThemeToggle />
       </div>
