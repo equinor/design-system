@@ -5,6 +5,7 @@ import {
   spacingsTemplate,
   bordersTemplate,
   useToken,
+  isFirefox,
 } from '@equinor/eds-utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 import { useEds } from '../../EdsProvider'
@@ -12,10 +13,11 @@ import { useEds } from '../../EdsProvider'
 type BaseProps = {
   theme: TableHeadToken
   $sticky: boolean
+  $density: 'comfortable' | 'compact'
 } & Pick<React.AriaAttributes, 'aria-sort'>
 
 const StyledTableCell = styled.th((props: BaseProps) => {
-  const { theme, $sticky } = props
+  const { theme, $sticky, $density } = props
   const { background, height, typography, spacings } = theme
   const activeToken = theme.states.active
   const ariaSort = props['aria-sort']
@@ -45,6 +47,33 @@ const StyledTableCell = styled.th((props: BaseProps) => {
     `
   }
 
+  // Firefox specific workaround (bug in v142.0) - see issue #3910
+  // Hardcoded padding values compensate for Firefox's incorrect table cell height calculation
+  const firefoxFix =
+    isFirefox() && props.$density === 'compact'
+      ? css`
+          vertical-align: top;
+          height: auto;
+          min-height: ${height};
+
+          > div {
+            /* 7px padding maintains visual consistency with other browsers in compact mode */
+            padding: 7px 0;
+          }
+        `
+      : isFirefox()
+        ? css`
+            vertical-align: top;
+            height: auto;
+            min-height: ${height};
+
+            > div {
+              /* 13px padding maintains visual consistency with other browsers in comfortable mode */
+              padding: 13px 0;
+            }
+          `
+        : css``
+
   return css`
     min-height: ${height};
     height: ${height};
@@ -55,6 +84,7 @@ const StyledTableCell = styled.th((props: BaseProps) => {
   ${bordersTemplate(theme.border)}
   ${sortStylingHover}
   ${sortStylingActive}
+  ${firefoxFix}
 
   ${$sticky
       ? css`
@@ -84,6 +114,7 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, CellProps>(
     const props = {
       ref,
       $sticky: sticky,
+      $density: density,
       ...rest,
     }
 
