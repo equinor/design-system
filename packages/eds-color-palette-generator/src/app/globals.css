@@ -36,6 +36,16 @@
     --eds-color-background-neutral-medium-active
   );
 
+  --background-color-accent-medium-default: var(
+    --eds-color-background-accent-medium-default
+  );
+  --background-color-accent-medium-hover: var(
+    --eds-color-background-accent-medium-hover
+  );
+  --background-color-accent-medium-active: var(
+    --eds-color-background-accent-medium-active
+  );
+
   --background-color-primary-default: var(
     --eds-color-background-accent-strong-default
   );
@@ -62,6 +72,10 @@
   --border-color-neutral-subtle: var(--eds-color-border-neutral-subtle);
   --border-color-neutral-medium: var(--eds-color-border-neutral-medium);
   --border-color-neutral-strong: var(--eds-color-border-neutral-strong);
+
+  --border-color-accent-subtle: var(--eds-color-border-accent-subtle);
+  --border-color-accent-medium: var(--eds-color-border-accent-medium);
+  --border-color-accent-strong: var(--eds-color-border-accent-strong);
 
   --text-color-strong: var(--eds-color-text-neutral-strong);
   --text-color-subtle: var(--eds-color-text-neutral-subtle);

@@ -8,10 +8,14 @@ import { HeaderPanel } from '@/components/HeaderPanel'
 import { ColorManagement } from '@/components/ColorManagement'
 import { GaussianParametersPanel } from '@/components/GaussianParametersPanel'
 import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
-import { ConfigurationPanel } from '@/components/ConfigurationPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
-import { ColorDefinition, ConfigFile, ContrastMethod, ColorFormat } from '@/types'
+import {
+  ColorDefinition,
+  ConfigFile,
+  ContrastMethod,
+  ColorFormat,
+} from '@/types'
 import { arraysEqual, colorsEqual } from '@/utils/compare'
 import { localStorageUtils } from '@/utils/localStorage'
 import { paletteConfig as config } from '@/config/palette'
@@ -20,6 +24,7 @@ import {
   darknessValuesInDarkMode,
 } from '@/config/config'
 import { computeContrastSummary } from '@/utils/contrastSummary'
+import { QuickActionsPopover } from '@/components/QuickActionsPopover'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -284,19 +289,6 @@ export default function App() {
             onAddColor={addColor}
           />
 
-          {/* Configuration Import/Export Section */}
-          <ConfigurationPanel
-            lightModeValues={lightModeValues}
-            darkModeValues={darkModeValues}
-            meanLight={meanLight}
-            stdDevLight={stdDevLight}
-            meanDark={meanDark}
-            stdDevDark={stdDevDark}
-            colors={colors}
-            colorFormat={colorFormat}
-            onConfigUpload={handleConfigUpload}
-          />
-
           {/* Gaussian Parameters Panel - conditionally rendered */}
           {showGaussianParameters && (
             <GaussianParametersPanel
@@ -337,28 +329,42 @@ export default function App() {
         />
       ))}
 
-      {isClient && showContrast && contrastSummary.total > 0 && (
-        <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
-          <div
-            role="status"
-            aria-live="polite"
-            className="px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
-          >
-            {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
-          </div>
-          {isConfigDirty && (
-            <button
-              type="button"
-              onClick={resetConfiguration}
-              className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md cursor-pointer"
-              aria-label="Reset configuration changes"
-              title="Reset configuration changes"
+      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
+        <QuickActionsPopover
+          lightModeValues={lightModeValues}
+          darkModeValues={darkModeValues}
+          meanLight={meanLight}
+          stdDevLight={stdDevLight}
+          meanDark={meanDark}
+          stdDevDark={stdDevDark}
+          colors={colors}
+          colorFormat={colorFormat}
+          onConfigUpload={handleConfigUpload}
+        />
+
+        {isClient && showContrast && contrastSummary.total > 0 && (
+          <>
+            <div
+              role="status"
+              aria-live="polite"
+              className="px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
             >
-              Reset config changes
-            </button>
-          )}
-        </div>
-      )}
+              {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
+            </div>
+            {isConfigDirty && (
+              <button
+                type="button"
+                onClick={resetConfiguration}
+                className="px-4 py-2 text-sm bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md cursor-pointer"
+                aria-label="Reset configuration changes"
+                title="Reset configuration changes"
+              >
+                Reset config changes
+              </button>
+            )}
+          </>
+        )}
+      </div>
     </div>
   )
 }
