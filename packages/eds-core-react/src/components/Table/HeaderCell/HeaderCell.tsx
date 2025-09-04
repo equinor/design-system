@@ -50,7 +50,7 @@ const StyledTableCell = styled.th((props: BaseProps) => {
   // Firefox specific workaround (bug in v142.0) - see issue #3910
   // Hardcoded padding values compensate for Firefox's incorrect table cell height calculation
   const firefoxFix =
-    isFirefox() && props.$density === 'compact'
+    isFirefox() && $density === 'compact'
       ? css`
           vertical-align: top;
           height: auto;
