@@ -170,11 +170,20 @@ nav.menu li a {
 .search-bar > div > div {
   background-color: var(--eds-color-background-neutral-subtle);
 }
+.search-bar > div > div:focus-within {
+  outline: var(--eds-color-background-accent-strong-default) 2px solid;
+}
+.search-bar > div > div svg {
+  color: var(--eds-color-text-neutral-default);
+}
 .search-bar > div > div button {
   color: var(--eds-color-background-accent-strong-default);
 }
 .search-bar > div > div > input {
   font-family: 'Inter', sans-serif;
+}
+.search-bar > div > div > input::placeholder {
+  color: var(--eds-color-border-neutral-subtle);
 }
 
 /* ======================================
