@@ -96,5 +96,6 @@ export const BACKGROUND_CANVAS: string;
 export const BACKGROUND_SURFACE: string;
 export const BACKGROUND_ELEVATED: string;
 export const BACKGROUND_BACKDROP: string;
+export const BACKGROUND_INPUT: string;
 export const BORDER_FOCUS: string;
 export const TEXT_LINK: string;

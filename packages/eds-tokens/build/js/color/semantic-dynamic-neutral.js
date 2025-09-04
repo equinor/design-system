@@ -16,4 +16,4 @@ export const BORDER_STRONG = "#696969";
 export const TEXT_SUBTLE = "#4d4d4d"; // Used for text and icons
 export const TEXT_STRONG = "#1d1d1d"; // Used for text and icons
 export const TEXT_CONTRAST_SUBTLE = "#dedede"; // Text or icons against colored backgrounds
-export const TEXT_CONTRAST_STRONG = "#fff"; // Text or icons against colored backgrounds
+export const TEXT_CONTRAST_STRONG = "#ffffff"; // Text or icons against colored backgrounds

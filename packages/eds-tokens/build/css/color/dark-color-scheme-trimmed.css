@@ -97,6 +97,7 @@
   --eds-color-background-surface: #222222;
   --eds-color-background-elevated: #5b5b5b;
   --eds-color-background-backdrop: #222222;
+  --eds-color-background-input: #0b0b0b;
   --eds-color-border-focus: #2d8bc5;
   --eds-color-text-link: #ecffff;
 }

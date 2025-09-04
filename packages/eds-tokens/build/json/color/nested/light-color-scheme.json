@@ -14,7 +14,7 @@
     "12": "#20565c",
     "13": "#141f20",
     "14": "#cae4e7",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Gray": {
     "1": "#f5f5f5",
@@ -31,7 +31,7 @@
     "12": "#4d4d4d",
     "13": "#1d1d1d",
     "14": "#dedede",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Green": {
     "1": "#eafbe8",
@@ -48,7 +48,7 @@
     "12": "#215c1f",
     "13": "#142114",
     "14": "#cae8c7",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Blue": {
     "1": "#e7f8ff",
@@ -65,7 +65,7 @@
     "12": "#0e5279",
     "13": "#121e27",
     "14": "#c5e3f9",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Orange": {
     "1": "#fff1e2",
@@ -82,7 +82,7 @@
     "12": "#773a00",
     "13": "#27190e",
     "14": "#fad6bc",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Red": {
     "1": "#ffecea",
@@ -99,12 +99,13 @@
     "12": "#8e1525",
     "13": "#2e1414",
     "14": "#ffcbc9",
-    "15": "#fff"
+    "15": "#ffffff"
   },
-  "background-canvas": "#fcfcfc",
-  "background-surface": "#f5f5f5",
-  "background-elevated": "#f5f5f5",
+  "background-canvas": "#f5f5f5",
+  "background-surface": "#fcfcfc",
+  "background-elevated": "#fcfcfc",
   "background-backdrop": "#aeaeae",
+  "background-input": "#f5f5f5",
   "border-focus": "#6fb6e9",
   "text-link": "#121e27"
 }

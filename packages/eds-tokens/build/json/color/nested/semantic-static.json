@@ -122,37 +122,37 @@
       "Subtle": "#4d4d4d",
       "Strong": "#1d1d1d",
       "Contrast subtle": "#dedede",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Accent": {
       "Subtle": "#20565c",
       "Strong": "#141f20",
       "Contrast subtle": "#cae4e7",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Success": {
       "Subtle": "#215c1f",
       "Strong": "#142114",
       "Contrast subtle": "#cae8c7",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Info": {
       "Subtle": "#0e5279",
       "Strong": "#121e27",
       "Contrast subtle": "#c5e3f9",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Warning": {
       "Subtle": "#773a00",
       "Strong": "#27190e",
       "Contrast subtle": "#fad6bc",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     },
     "Danger": {
       "Subtle": "#8e1525",
       "Strong": "#2e1414",
       "Contrast subtle": "#ffcbc9",
-      "Contrast strong": "#fff"
+      "Contrast strong": "#ffffff"
     }
   }
 }

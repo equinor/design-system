@@ -1273,7 +1273,7 @@
   },
   "background-canvas": {
     "$type": "color",
-    "$value": "{Light.Gray.2}",
+    "$value": "{Light.Gray.1}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1287,7 +1287,7 @@
   },
   "background-surface": {
     "$type": "color",
-    "$value": "{Light.Gray.1}",
+    "$value": "{Light.Gray.2}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1301,7 +1301,7 @@
   },
   "background-elevated": {
     "$type": "color",
-    "$value": "{Light.Gray.1}",
+    "$value": "{Light.Gray.2}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1316,6 +1316,20 @@
   "background-backdrop": {
     "$type": "color",
     "$value": "{Light.Gray.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "background-input": {
+    "$type": "color",
+    "$value": "{Light.Gray.1}",
     "$description": "",
     "$extensions": {
       "com.figma": {
