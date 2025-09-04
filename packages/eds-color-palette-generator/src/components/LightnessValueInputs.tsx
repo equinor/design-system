@@ -26,7 +26,7 @@ export const LightnessValueInputs = ({
 
   return (
     <div
-      className="grid gap-3 mb-3"
+      className="grid gap-3 mb-3 px-4"
       style={{
         gridTemplateColumns: `repeat(${values.length}, minmax(0, 1fr))`,
       }}

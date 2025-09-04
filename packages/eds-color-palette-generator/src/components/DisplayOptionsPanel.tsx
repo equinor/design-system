@@ -27,7 +27,7 @@ export const DisplayOptionsPanel = ({
   setColorFormat,
 }: DisplayOptionsPanelProps) => {
   return (
-    <fieldset className="p-6 mb-4 space-y-4 border border-neutral-subtle rounded-lg">
+    <fieldset className="p-4 space-y-4">
       <legend className="mb-2 font-medium">Display</legend>
 
       {/* Colour output format moved to QuickActionsPopover */}

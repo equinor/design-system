@@ -286,35 +286,37 @@ export default function App() {
           <section className="mb-8">
             <div
               id="display-options-panel"
-              className="mx-auto max-w-7xl px-6 p-6 rounded-xl border border-neutral-subtle bg-surface"
+              className="mx-auto max-w-7xl p-6 rounded-xl"
             >
-              <DisplayOptionsPanel
-                showContrast={showContrast}
-                showLightnessInputs={showLightnessInputs}
-                showGaussianParameters={showGaussianParameters}
-                contrastMethod={contrastMethod}
-                colorFormat={colorFormat}
-                setShowContrast={setShowContrast}
-                setShowLightnessInputs={setShowLightnessInputs}
-                setShowGaussianParameters={setShowGaussianParameters}
-                setContrastMethod={setContrastMethod}
-                setColorFormat={setColorFormat}
-              />
+              <div className="bg-surface px-4 py-6 rounded-xl">
+                <DisplayOptionsPanel
+                  showContrast={showContrast}
+                  showLightnessInputs={showLightnessInputs}
+                  showGaussianParameters={showGaussianParameters}
+                  contrastMethod={contrastMethod}
+                  colorFormat={colorFormat}
+                  setShowContrast={setShowContrast}
+                  setShowLightnessInputs={setShowLightnessInputs}
+                  setShowGaussianParameters={setShowGaussianParameters}
+                  setContrastMethod={setContrastMethod}
+                  setColorFormat={setColorFormat}
+                />
 
-              {showGaussianParameters && (
-                <div className="mt-6">
-                  <GaussianParametersPanel
-                    meanLight={meanLight}
-                    stdDevLight={stdDevLight}
-                    setMeanLight={setMeanLight}
-                    setStdDevLight={setStdDevLight}
-                    meanDark={meanDark}
-                    stdDevDark={stdDevDark}
-                    setMeanDark={setMeanDark}
-                    setStdDevDark={setStdDevDark}
-                  />
-                </div>
-              )}
+                {showGaussianParameters && (
+                  <div className="mt-6">
+                    <GaussianParametersPanel
+                      meanLight={meanLight}
+                      stdDevLight={stdDevLight}
+                      setMeanLight={setMeanLight}
+                      setStdDevLight={setStdDevLight}
+                      meanDark={meanDark}
+                      stdDevDark={stdDevDark}
+                      setMeanDark={setMeanDark}
+                      setStdDevDark={setStdDevDark}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </section>
         )}
