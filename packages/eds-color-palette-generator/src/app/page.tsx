@@ -121,27 +121,27 @@ export default function App() {
   }, [colors])
 
   const updateColorName = (index: number, newName: string) => {
-    setColors(
-      colors.map((color, i) =>
-        i === index ? { ...color, name: newName } : color,
-      ),
+    // Use functional update to avoid stale state when multiple edits occur quickly
+    setColors((prev) =>
+      prev.map((color, i) => (i === index ? { ...color, name: newName } : color)),
     )
   }
 
   const updateColorHex = (index: number, newHex: string) => {
-    setColors(
-      colors.map((color, i) =>
-        i === index ? { ...color, hex: newHex } : color,
-      ),
+    // Use functional update to avoid stale state when multiple edits occur quickly
+    setColors((prev) =>
+      prev.map((color, i) => (i === index ? { ...color, hex: newHex } : color)),
     )
   }
 
   const removeColor = (index: number) => {
-    setColors(colors.filter((_, i) => i !== index))
+    // Functional update for consistency and to avoid state races
+    setColors((prev) => prev.filter((_, i) => i !== index))
   }
 
   const addColor = (newColor: ColorDefinition) => {
-    setColors([...colors, newColor])
+    // Functional update for consistency and to avoid state races
+    setColors((prev) => [...prev, newColor])
   }
 
   // Update a specific lightness value
