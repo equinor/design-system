@@ -11,8 +11,13 @@ export interface ContrastRequirement {
 export interface StepDefinition {
   id: string
   name: string
-  category: 'background' | 'background-medium' | 'background-strong' | 'border' | 'text'
-  variant: string
+  category:
+    | 'Background'
+    | 'Background Fill Muted'
+    | 'Background Fill Emphasis'
+    | 'Border'
+    | 'Text'
+  variant?: string
   lightValue: number
   darkValue: number
   contrastWith?: ContrastRequirement[]
@@ -26,4 +31,3 @@ export interface PaletteConfig {
   colors: ColorDefinition[]
   steps: StepDefinition[]
 }
-

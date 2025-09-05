@@ -89,11 +89,9 @@
   "red-13": "#2e1414",
   "red-14": "#ffcbc9",
   "red-15": "#ffffff",
-  "background-canvas": "#f5f5f5",
-  "background-surface": "#fcfcfc",
-  "background-elevated": "#fcfcfc",
-  "background-backdrop": "#aeaeae",
-  "background-input": "#f5f5f5",
+  "bg-floating": "#fcfcfc",
+  "bg-backdrop": "#aeaeae",
+  "bg-input": "#f5f5f5",
   "border-focus": "#6fb6e9",
   "text-link": "#121e27"
 }

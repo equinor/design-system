@@ -93,11 +93,9 @@
   --eds-color-red-13: #2e1414;
   --eds-color-red-14: #ffcbc9;
   --eds-color-red-15: #ffffff;
-  --eds-color-background-canvas: #f5f5f5;
-  --eds-color-background-surface: #fcfcfc;
-  --eds-color-background-elevated: #fcfcfc;
-  --eds-color-background-backdrop: #aeaeae;
-  --eds-color-background-input: #f5f5f5;
+  --eds-color-bg-floating: #fcfcfc;
+  --eds-color-bg-backdrop: #aeaeae;
+  --eds-color-bg-input: #f5f5f5;
   --eds-color-border-focus: #6fb6e9;
   --eds-color-text-link: #121e27;
 }

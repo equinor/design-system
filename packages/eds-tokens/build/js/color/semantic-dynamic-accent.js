@@ -2,18 +2,18 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BACKGROUND_MEDIUM_DEFAULT = "#c5e1e4";
-export const BACKGROUND_MEDIUM_HOVER = "#b1d6da";
-export const BACKGROUND_MEDIUM_ACTIVE = "#97c8cd";
-export const BACKGROUND_STRONG_DEFAULT = "#206f77";
-export const BACKGROUND_STRONG_HOVER = "#205c62";
-export const BACKGROUND_STRONG_ACTIVE = "#20565c";
-export const BACKGROUND_DEFAULT = "#eaf8fa";
-export const BACKGROUND_SUBTLE = "#f3feff";
+export const BG_FILL_MUTED_DEFAULT = "#c5e1e4";
+export const BG_FILL_MUTED_HOVER = "#b1d6da";
+export const BG_FILL_MUTED_ACTIVE = "#97c8cd";
+export const BG_FILL_EMPHASIS_DEFAULT = "#206f77";
+export const BG_FILL_EMPHASIS_HOVER = "#205c62";
+export const BG_FILL_EMPHASIS_ACTIVE = "#20565c";
+export const BG_CANVAS = "#eaf8fa";
+export const BG_SURFACE = "#f3feff";
 export const BORDER_SUBTLE = "#bbdbdf";
 export const BORDER_MEDIUM = "#7cbac1";
 export const BORDER_STRONG = "#21767e";
 export const TEXT_SUBTLE = "#20565c"; // Used for text and icons
 export const TEXT_STRONG = "#141f20"; // Used for text and icons
-export const TEXT_CONTRAST_SUBTLE = "#cae4e7"; // Text or icons against colored backgrounds
-export const TEXT_CONTRAST_STRONG = "#ffffff"; // Text or icons against colored backgrounds
+export const TEXT_SUBTLE_ON_EMPHASIS = "#cae4e7"; // Text or icons against colored backgrounds
+export const TEXT_STRONG_ON_EMPHASIS = "#ffffff"; // Text or icons against colored backgrounds

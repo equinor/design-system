@@ -89,11 +89,9 @@
   --eds-color-red-13: light-dark(#2e1414, #fff5f4);
   --eds-color-red-14: light-dark(#ffcbc9, #492d2c);
   --eds-color-red-15: light-dark(#ffffff, #040303);
-  --eds-color-background-canvas: light-dark(#f5f5f5, #0b0b0b);
-  --eds-color-background-surface: light-dark(#fcfcfc, #222222);
-  --eds-color-background-elevated: light-dark(#fcfcfc, #5b5b5b);
-  --eds-color-background-backdrop: light-dark(#aeaeae, #222222);
-  --eds-color-background-input: light-dark(#f5f5f5, #0b0b0b);
+  --eds-color-bg-floating: light-dark(#fcfcfc, #5b5b5b);
+  --eds-color-bg-backdrop: light-dark(#aeaeae, #222222);
+  --eds-color-bg-input: light-dark(#f5f5f5, #0b0b0b);
   --eds-color-border-focus: light-dark(#6fb6e9, #2d8bc5);
   --eds-color-text-link: light-dark(#121e27, #ecffff);
 }
