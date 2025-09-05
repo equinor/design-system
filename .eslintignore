@@ -3,4 +3,5 @@ dist
 packages/eds-tokens/build
 packages/eds-tokens/build-generate-variables
 packages/eds-color-palette-generator
+packages/eds-tailwind/demo.html
 storybook-build
