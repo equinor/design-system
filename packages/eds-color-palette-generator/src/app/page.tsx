@@ -362,7 +362,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
-            className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border border-neutral-subtle rounded-md cursor-pointer"
+            className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-medium-hover active:bg-neutral-medium-active rounded-md cursor-pointer"
           >
             Add colour
           </button>

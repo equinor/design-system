@@ -38,7 +38,7 @@ export const ColorManagement = ({
               <div>
                 <input
                   type="text"
-                  className="w-full p-2 text-sm bg-input border border-input rounded"
+                  className="w-full p-2 text-sm bg-input border border-neutral-subtle rounded"
                   value={color.name}
                   onChange={(e) => onUpdateColorName(index, e.target.value)}
                   data-testid={`color-name-input-${index}`}
@@ -77,7 +77,7 @@ export const ColorManagement = ({
         <div className="mt-4 text-left">
           <button
             type="button"
-            className="px-4 py-2 text-sm text-contrast-strong bg-primary-default hover:bg-primary-hover rounded"
+            className="px-4 py-2 text-sm bg-neutral-strong-default hover:bg-accent-strong-hover rounded text-contrast-strong"
             onClick={() => {
               const randomColor =
                 '#' +
