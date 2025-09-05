@@ -18,7 +18,7 @@
   },
   "Gray": {
     "1": "#0b0b0b",
-    "2": "#222222",
+    "2": "#222",
     "3": "#5b5b5b",
     "4": "#696969",
     "5": "#7a7a7a",
@@ -101,11 +101,9 @@
     "14": "#492d2c",
     "15": "#040303"
   },
-  "background-canvas": "#0b0b0b",
-  "background-surface": "#222222",
-  "background-elevated": "#5b5b5b",
-  "background-backdrop": "#222222",
-  "background-input": "#0b0b0b",
+  "bg-floating": "#5b5b5b",
+  "bg-backdrop": "#222",
+  "bg-input": "#0b0b0b",
   "border-focus": "#2d8bc5",
   "text-link": "#ecffff"
 }

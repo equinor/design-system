@@ -2,14 +2,14 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BACKGROUND_MEDIUM_DEFAULT: string;
-export const BACKGROUND_MEDIUM_HOVER: string;
-export const BACKGROUND_MEDIUM_ACTIVE: string;
-export const BACKGROUND_STRONG_DEFAULT: string;
-export const BACKGROUND_STRONG_HOVER: string;
-export const BACKGROUND_STRONG_ACTIVE: string;
-export const BACKGROUND_DEFAULT: string;
-export const BACKGROUND_SUBTLE: string;
+export const BG_FILL_MUTED_DEFAULT: string;
+export const BG_FILL_MUTED_HOVER: string;
+export const BG_FILL_MUTED_ACTIVE: string;
+export const BG_FILL_EMPHASIS_DEFAULT: string;
+export const BG_FILL_EMPHASIS_HOVER: string;
+export const BG_FILL_EMPHASIS_ACTIVE: string;
+export const BG_CANVAS: string;
+export const BG_SURFACE: string;
 export const BORDER_SUBTLE: string;
 export const BORDER_MEDIUM: string;
 export const BORDER_STRONG: string;
@@ -18,6 +18,6 @@ export const TEXT_SUBTLE: string;
 /** Used for text and icons */
 export const TEXT_STRONG: string;
 /** Text or icons against colored backgrounds */
-export const TEXT_CONTRAST_SUBTLE: string;
+export const TEXT_SUBTLE_ON_EMPHASIS: string;
 /** Text or icons against colored backgrounds */
-export const TEXT_CONTRAST_STRONG: string;
+export const TEXT_STRONG_ON_EMPHASIS: string;

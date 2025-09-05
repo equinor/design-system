@@ -20,6 +20,7 @@
     "generate:palette-contrast-report": "tsx ./scripts/generate-palette-contrast-report.ts"
   },
   "dependencies": {
+    "@equinor/eds-tailwind": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "colorjs.io": "^0.5.2",
     "lucide-react": "^0.542.0",
