@@ -2,7 +2,7 @@
   "Bg": {
     "Neutral": {
       "Canvas": "#f5f5f5",
-      "Surface": "#fcfcfc",
+      "Surface": "#fff",
       "Fill Muted": {
         "Default": "#dbdbdb",
         "Hover": "#cecece",
@@ -16,7 +16,7 @@
     },
     "Accent": {
       "Canvas": "#eaf8fa",
-      "Surface": "#f3feff",
+      "Surface": "#f6ffff",
       "Fill Muted": {
         "Default": "#c5e1e4",
         "Hover": "#b1d6da",
@@ -30,7 +30,7 @@
     },
     "Success": {
       "Canvas": "#eafbe8",
-      "Surface": "#f3fff1",
+      "Surface": "#f6fff5",
       "Fill Muted": {
         "Default": "#c5e5c2",
         "Hover": "#b1dbae",
@@ -44,7 +44,7 @@
     },
     "Info": {
       "Canvas": "#e7f8ff",
-      "Surface": "#f0feff",
+      "Surface": "#f4ffff",
       "Fill Muted": {
         "Default": "#c0e0f8",
         "Hover": "#aad4f3",
@@ -58,7 +58,7 @@
     },
     "Warning": {
       "Canvas": "#fff1e2",
-      "Surface": "#fff8ec",
+      "Surface": "#fffcf0",
       "Fill Muted": {
         "Default": "#f9d2b6",
         "Hover": "#f4c29d",
@@ -72,7 +72,7 @@
     },
     "Danger": {
       "Canvas": "#ffecea",
-      "Surface": "#fff5f4",
+      "Surface": "#fff9f8",
       "Fill Muted": {
         "Default": "#ffc6c4",
         "Hover": "#ffb2b0",
@@ -119,40 +119,40 @@
   },
   "Text": {
     "Neutral": {
-      "Subtle": "#4d4d4d",
+      "Subtle": "#585858",
       "Strong": "#1d1d1d",
       "Subtle on emphasis": "#dedede",
-      "Strong on emphasis": "#ffffff"
+      "Strong on emphasis": "#fff"
     },
     "Accent": {
-      "Subtle": "#20565c",
+      "Subtle": "#1f6369",
       "Strong": "#141f20",
       "Subtle on emphasis": "#cae4e7",
-      "Strong on emphasis": "#ffffff"
+      "Strong on emphasis": "#fff"
     },
     "Success": {
-      "Subtle": "#215c1f",
+      "Subtle": "#20691f",
       "Strong": "#142114",
       "Subtle on emphasis": "#cae8c7",
-      "Strong on emphasis": "#ffffff"
+      "Strong on emphasis": "#fff"
     },
     "Info": {
-      "Subtle": "#0e5279",
+      "Subtle": "#015e8d",
       "Strong": "#121e27",
       "Subtle on emphasis": "#c5e3f9",
-      "Strong on emphasis": "#ffffff"
+      "Strong on emphasis": "#fff"
     },
     "Warning": {
-      "Subtle": "#773a00",
+      "Subtle": "#8a4100",
       "Strong": "#27190e",
       "Subtle on emphasis": "#fad6bc",
-      "Strong on emphasis": "#ffffff"
+      "Strong on emphasis": "#fff"
     },
     "Danger": {
-      "Subtle": "#8e1525",
+      "Subtle": "#a50827",
       "Strong": "#2e1414",
       "Subtle on emphasis": "#ffcbc9",
-      "Strong on emphasis": "#ffffff"
+      "Strong on emphasis": "#fff"
     }
   }
 }

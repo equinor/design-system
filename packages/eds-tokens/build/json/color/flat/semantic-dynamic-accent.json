@@ -6,12 +6,12 @@
   "bg-fill-emphasis-hover": "#205c62",
   "bg-fill-emphasis-active": "#20565c",
   "bg-canvas": "#eaf8fa",
-  "bg-surface": "#f3feff",
+  "bg-surface": "#f6ffff",
   "border-subtle": "#bbdbdf",
   "border-medium": "#7cbac1",
   "border-strong": "#21767e",
-  "text-subtle": "#20565c",
+  "text-subtle": "#1f6369",
   "text-strong": "#141f20",
   "text-subtle-on-emphasis": "#cae4e7",
-  "text-strong-on-emphasis": "#ffffff"
+  "text-strong-on-emphasis": "#fff"
 }

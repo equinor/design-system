@@ -13,7 +13,7 @@
       }
     },
     "Canvas": "#fff1e2",
-    "Surface": "#fff8ec"
+    "Surface": "#fffcf0"
   },
   "Border": {
     "Subtle": "#f6caaa",
@@ -21,9 +21,9 @@
     "Strong": "#a34e00"
   },
   "Text": {
-    "Subtle": "#773a00",
+    "Subtle": "#8a4100",
     "Strong": "#27190e",
     "Subtle on emphasis": "#fad6bc",
-    "Strong on emphasis": "#ffffff"
+    "Strong on emphasis": "#fff"
   }
 }

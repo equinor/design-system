@@ -14,9 +14,9 @@ import { getLightnessValues } from './helpers'
  * Individual step definitions using semantic IDs as constant names
  */
 
-export const BG: StepDefinition = {
+export const BG_CANVAS: StepDefinition = {
   id: 'bg-canvas',
-  name: 'Background',
+  name: 'Background Canvas',
   category: 'Background',
   lightValue: 0.97,
   darkValue: 0.15,
@@ -334,7 +334,7 @@ export const TEXT_STRONG_ON_EMPHASIS: StepDefinition = {
  */
 // prettier-ignore
 export const PALETTE_STEPS: StepDefinition[] = [
-  BG,
+  BG_CANVAS,
   BG_SURFACE,
   BG_FILL_MUTED_DEFAULT,
   BG_FILL_MUTED_HOVER,
