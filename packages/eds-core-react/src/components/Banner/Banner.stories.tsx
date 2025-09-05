@@ -51,7 +51,8 @@ export const Introduction: StoryFn<BannerProps> = (args) => {
   return (
     <Banner {...args}>
       <Banner.Message>
-        <Typography variant="h6">This is a test</Typography>
+        This tag is not being preserved yet. Click start preservation to enable
+        writing preservation records.
       </Banner.Message>
     </Banner>
   )
