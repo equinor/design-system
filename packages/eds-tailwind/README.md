@@ -14,4 +14,4 @@ This package exposes the EDS theme tokens and Tailwind `@theme` declarations as 
 @import '@equinor/eds-tailwind';
 ```
 
-The package also imports `@equinor/eds-tokens/css/variables-static.css` to make the CSS variables available.
+The package also imports `@equinor/eds-tokens/css/variables-static` to make the CSS variables available.
