@@ -1,0 +1,29 @@
+{
+  "name": "@equinor/eds-tailwind",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Tailwind CSS theme for Equinor Design System (EDS)",
+  "type": "module",
+  "files": [
+    "theme.css",
+    "README.md"
+  ],
+  "style": "theme.css",
+  "exports": {
+    ".": {
+      "style": "./theme.css",
+      "default": "./theme.css",
+      "import": "./theme.css"
+    },
+    "./theme.css": "./theme.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0 || ^4.1.0"
+  },
+  "dependencies": {
+    "@equinor/eds-tokens": "workspace:*"
+  }
+}

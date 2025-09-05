@@ -129,6 +129,9 @@ importers:
 
   packages/eds-color-palette-generator:
     dependencies:
+      '@equinor/eds-tailwind':
+        specifier: workspace:*
+        version: link:../eds-tailwind
       '@equinor/eds-tokens':
         specifier: workspace:*
         version: link:../eds-tokens
@@ -719,6 +722,15 @@ importers:
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
+
+  packages/eds-tailwind:
+    dependencies:
+      '@equinor/eds-tokens':
+        specifier: workspace:*
+        version: link:../eds-tokens
+      tailwindcss:
+        specifier: ^4.0.0 || ^4.1.0
+        version: 4.1.12
 
   packages/eds-tokens:
     devDependencies:

@@ -1,0 +1,181 @@
+@import '@equinor/eds-tokens/css/variables-static';
+
+/* Provide dark variant selector used by the theme */
+@custom-variant dark (&:where([data-color-scheme=dark], [data-color-scheme=dark] *));
+
+/* Root-level conveniences used by downstream apps */
+:root {
+  --background: light-dark(
+    var(--eds-color-background-neutral-subtle),
+    var(--eds-color-background-neutral-default)
+  );
+  --text: var(--eds-color-text-neutral-strong);
+}
+
+/* Tailwind v4 theme tokens based on EDS variables */
+@theme inline {
+  --background-color-default: var(--background);
+  --background-color-canvas: var(--eds-color-background-canvas);
+  --background-color-surface: var(--eds-color-background-surface);
+  --background-color-elevated: var(--eds-color-background-elevated);
+  --background-color-input: var(--eds-color-background-input);
+
+  --background-color-neutral-medium-default: var(
+    --eds-color-background-neutral-medium-default
+  );
+  --background-color-neutral-medium-hover: var(
+    --eds-color-background-neutral-medium-hover
+  );
+  --background-color-neutral-medium-active: var(
+    --eds-color-background-neutral-medium-active
+  );
+
+  --background-color-neutral-strong-default: var(
+    --eds-color-background-neutral-strong-default
+  );
+  --background-color-neutral-strong-hover: var(
+    --eds-color-background-neutral-strong-hover
+  );
+  --background-color-neutral-strong-active: var(
+    --eds-color-background-neutral-strong-active
+  );
+
+  --background-color-accent-medium-default: var(
+    --eds-color-background-accent-medium-default
+  );
+  --background-color-accent-medium-hover: var(
+    --eds-color-background-accent-medium-hover
+  );
+  --background-color-accent-medium-active: var(
+    --eds-color-background-accent-medium-active
+  );
+
+  --background-color-accent-strong-default: var(
+    --eds-color-background-accent-strong-default
+  );
+  --background-color-accent-strong-hover: var(
+    --eds-color-background-accent-strong-hover
+  );
+  --background-color-accent-strong-active: var(
+    --eds-color-background-accent-strong-active
+  );
+
+  --background-color-danger-medium-default: var(
+    --eds-color-background-danger-medium-default
+  );
+  --background-color-danger-medium-hover: var(
+    --eds-color-background-danger-medium-hover
+  );
+  --background-color-danger-medium-active: var(
+    --eds-color-background-danger-medium-active
+  );
+
+  --background-color-danger-strong-default: var(
+    --eds-color-background-danger-strong-default
+  );
+  --background-color-danger-strong-hover: var(
+    --eds-color-background-danger-strong-hover
+  );
+  --background-color-danger-strong-active: var(
+    --eds-color-background-danger-strong-active
+  );
+
+  --background-color-success-medium-default: var(
+    --eds-color-background-success-medium-default
+  );
+  --background-color-success-medium-hover: var(
+    --eds-color-background-success-medium-hover
+  );
+  --background-color-success-medium-active: var(
+    --eds-color-background-success-medium-active
+  );
+
+  --background-color-success-strong-default: var(
+    --eds-color-background-success-strong-default
+  );
+  --background-color-success-strong-hover: var(
+    --eds-color-background-success-strong-hover
+  );
+  --background-color-success-strong-active: var(
+    --eds-color-background-success-strong-active
+  );
+
+  --background-color-warning-medium-default: var(
+    --eds-color-background-warning-medium-default
+  );
+  --background-color-warning-medium-hover: var(
+    --eds-color-background-warning-medium-hover
+  );
+  --background-color-warning-medium-active: var(
+    --eds-color-background-warning-medium-active
+  );
+
+  --background-color-warning-strong-default: var(
+    --eds-color-background-warning-strong-default
+  );
+  --background-color-warning-strong-hover: var(
+    --eds-color-background-warning-strong-hover
+  );
+  --background-color-warning-strong-active: var(
+    --eds-color-background-warning-strong-active
+  );
+
+  --background-color-info-medium-default: var(
+    --eds-color-background-info-medium-default
+  );
+  --background-color-info-medium-hover: var(
+    --eds-color-background-info-medium-hover
+  );
+  --background-color-info-medium-active: var(
+    --eds-color-background-info-medium-active
+  );
+
+  --background-color-info-strong-default: var(
+    --eds-color-background-info-strong-default
+  );
+  --background-color-info-strong-hover: var(
+    --eds-color-background-info-strong-hover
+  );
+  --background-color-info-strong-active: var(
+    --eds-color-background-info-strong-active
+  );
+
+  --border-color-neutral-subtle: var(--eds-color-border-neutral-subtle);
+  --border-color-neutral-medium: var(--eds-color-border-neutral-medium);
+  --border-color-neutral-strong: var(--eds-color-border-neutral-strong);
+
+  --border-color-accent-subtle: var(--eds-color-border-accent-subtle);
+  --border-color-accent-medium: var(--eds-color-border-accent-medium);
+  --border-color-accent-strong: var(--eds-color-border-accent-strong);
+
+  --text-color-strong: var(--eds-color-text-neutral-strong);
+  --text-color-subtle: var(--eds-color-text-neutral-subtle);
+
+  --text-color-contrast-strong: var(--eds-color-text-neutral-contrast-strong);
+  --text-color-contrast-subtle: var(--eds-color-text-neutral-contrast-subtle);
+
+  --text-color-default: var(--eds-color-text-neutral-strong);
+  --text-color-success-subtle: var(--eds-color-text-success-subtle);
+  --text-color-success-strong: var(--eds-color-text-success-strong);
+  --text-color-success-contrast-strong: var(
+    --eds-color-text-success-contrast-strong
+  );
+  --text-color-success-contrast-subtle: var(
+    --eds-color-text-success-contrast-subtle
+  );
+
+  --text-color-danger-subtle: var(--eds-color-text-danger-subtle);
+  --text-color-danger-strong: var(--eds-color-text-danger-strong);
+  --text-color-danger-contrast-strong: var(
+    --eds-color-text-danger-contrast-strong
+  );
+  --text-color-danger-contrast-subtle: var(
+    --eds-color-text-danger-contrast-subtle
+  );
+}
+
+/* Expose sources for utility generation */
+@source inline("text-success-{subtle,strong,contrast-{subtle,strong}}");
+@source inline("text-danger-{subtle,strong,contrast-{subtle,strong}}");
+@source inline("text-{subtle,strong,contrast-{subtle,strong}}");
+@source inline("bg-{elevated,default,canvas,surface,input}");
