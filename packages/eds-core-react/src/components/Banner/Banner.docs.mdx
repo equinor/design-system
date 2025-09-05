@@ -67,17 +67,17 @@ Banners can supplement their message using a supporting icon.
 
 <Canvas of={ComponentStories.TextAndIconAndAction} />
 
-### Complex Banner Content (special cases)
+### Complex Content (special cases)
 
-While using string content for Banner.Message is the recommended approach for most use cases, there are situations where more complex content might be necessary. For these special cases, Banner.Content is created to support ReactNode children.
+While using string content for Banner.Message is the recommended approach for most use cases, there are situations where more complex content might be necessary. For these special cases, Banner support ReactNode as children, so you can nest them directly.
 
 <ul>
   <li>Use string content for Banner.Message whenever possible to maintain consistency and proper styling.</li>
-  <li>Only use Banner.Content when you have specific requirements that cannot be met with string content.</li>
-  <li>When using Banner.Content, be mindful of accessibility, responsive behavior, and Equinor design guidelines.</li>
+  <li>Only use complex content inside Banner when you have specific requirements that cannot be met with string content.</li>
+  <li>When using complex content in Banner, be mindful of accessibility, responsive behavior, and Equinor design guidelines.</li>
 </ul>
 
-Some examples where Banner.Content might be appropriate:
+Some examples where complex content inside Banner might be appropriate:
 - Content requiring specific formatting (bold text, code elements)
 - Content with structured information that benefits from hierarchical display
 - Content with links

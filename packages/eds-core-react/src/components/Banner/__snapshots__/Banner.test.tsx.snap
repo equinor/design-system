@@ -98,7 +98,7 @@ exports[`Banner Matches snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Banner with BannerContent Matches snapshot with BannerContent 1`] = `
+exports[`Banner with complex content Matches snapshot with complex content 1`] = `
 <DocumentFragment>
   .c0 {
   background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
@@ -174,14 +174,12 @@ exports[`Banner with BannerContent Matches snapshot with BannerContent 1`] = `
         </svg>
       </span>
       <div>
-        <div>
-          <strong>
-            Important update
-          </strong>
-          <p>
-            Complex content with HTML elements
-          </p>
-        </div>
+        <strong>
+          Important update
+        </strong>
+        <p>
+          Complex content with HTML elements
+        </p>
       </div>
     </div>
     <hr

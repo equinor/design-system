@@ -140,7 +140,7 @@ export const ComplexBannerContent: StoryFn<BannerProps> = () => (
       <Banner.Icon variant="warning">
         <Icon name="thumbs_down" />
       </Banner.Icon>
-      <Banner.Content>
+      <div>
         <Typography variant="body_short" style={{ fontWeight: 'bold' }}>
           Important update required
         </Typography>
@@ -161,7 +161,7 @@ export const ComplexBannerContent: StoryFn<BannerProps> = () => (
         >
           ComponentA, ComponentB, ComponentC
         </Typography>
-      </Banner.Content>
+      </div>
       <Banner.Actions>
         <Button>View details</Button>
       </Banner.Actions>
@@ -171,7 +171,7 @@ export const ComplexBannerContent: StoryFn<BannerProps> = () => (
       <Banner.Icon>
         <Icon name="thumbs_up" />
       </Banner.Icon>
-      <Banner.Content>
+      <div>
         <Typography variant="body_long">
           Project status:{' '}
           <Typography
@@ -204,7 +204,7 @@ export const ComplexBannerContent: StoryFn<BannerProps> = () => (
             </Typography>
           </Typography>
         </Typography>
-      </Banner.Content>
+      </div>
       <Banner.Actions>
         <Button>View dashboard</Button>
         <Button variant="outlined">Export report</Button>
