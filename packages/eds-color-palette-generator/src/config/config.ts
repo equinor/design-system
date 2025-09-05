@@ -15,7 +15,7 @@ import { getLightnessValues } from './helpers'
  */
 
 export const BG: StepDefinition = {
-  id: 'bg',
+  id: 'bg-canvas',
   name: 'Background',
   category: 'Background',
   lightValue: 0.97,
@@ -88,7 +88,7 @@ export const BORDER_SUBTLE: StepDefinition = {
   darkValue: 0.47,
   contrastWith: [
     {
-      targetStep: 'bg',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -109,17 +109,17 @@ export const BORDER_MEDIUM: StepDefinition = {
   darkValue: 0.61,
   contrastWith: [
     {
-      targetStep: 'background-canvas',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'background-surface',
+      targetStep: 'bg-surface',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'background-medium-default',
+      targetStep: 'bg-fill-muted-default',
       lc: APCA_CONTRAST_LEVELS.LC_15,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -135,22 +135,22 @@ export const BORDER_STRONG: StepDefinition = {
   darkValue: 0.76,
   contrastWith: [
     {
-      targetStep: 'background-canvas',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'background-surface',
+      targetStep: 'bg-surface',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'background-medium-default',
+      targetStep: 'bg-fill-muted-default',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
     {
-      targetStep: 'background-medium-hover',
+      targetStep: 'bg-fill-muted-hover',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -171,7 +171,7 @@ export const BG_FILL_EMPHASIS_DEFAULT: StepDefinition = {
   darkValue: 0.82,
   contrastWith: [
     {
-      targetStep: 'bg',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -192,7 +192,7 @@ export const BG_FILL_EMPHASIS_HOVER: StepDefinition = {
   darkValue: 0.88,
   contrastWith: [
     {
-      targetStep: 'bg',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -213,7 +213,7 @@ export const BG_FILL_EMPHASIS_ACTIVE: StepDefinition = {
   darkValue: 0.93,
   contrastWith: [
     {
-      targetStep: 'bg',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_30,
       wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
     },
@@ -234,7 +234,7 @@ export const TEXT_SUBTLE: StepDefinition = {
   darkValue: 0.91,
   contrastWith: [
     {
-      targetStep: 'bg',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_60,
       wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
     },
@@ -260,7 +260,7 @@ export const TEXT_STRONG: StepDefinition = {
   darkValue: 0.99,
   contrastWith: [
     {
-      targetStep: 'bg',
+      targetStep: 'bg-canvas',
       lc: APCA_CONTRAST_LEVELS.LC_90,
       wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
     },
