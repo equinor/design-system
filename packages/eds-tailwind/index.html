@@ -9,24 +9,18 @@
     <h1 class="text-2xl font-bold">EDS Tailwind utility classes</h1>
 
     <section>
-      <h2 class="text-xl font-bold mb-4">Background colors</h2>
-      <div
-        id="background-grid"
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-      ></div>
+      <h2 class="mb-4 text-xl font-bold">Background</h2>
+      <div id="background-grid" class="space-y-6"></div>
     </section>
 
     <section>
-      <h2 class="text-xl font-bold mb-4">Text colors</h2>
-      <div id="text-grid" class="flex flex-wrap gap-4"></div>
+      <h2 class="mb-4 text-xl font-bold">Text</h2>
+      <div id="text-grid" class="space-y-6"></div>
     </section>
 
     <section>
-      <h2 class="text-xl font-bold mb-4">Border colors</h2>
-      <div
-        id="border-grid"
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-      ></div>
+      <h2 class="mb-4 text-xl font-bold">Border</h2>
+      <div id="border-grid" class="space-y-6"></div>
     </section>
 
     <script>
@@ -40,7 +34,7 @@
       ]
 
       // Helper to create a swatch div
-      function createSwatch(cls, textColor = 'text-contrast-strong') {
+      function createSwatch(cls, textColor) {
         const el = document.createElement('div')
         el.className = `p-4 rounded ${textColor} ${cls}`
         el.textContent = cls
@@ -50,71 +44,84 @@
       // Backgrounds
       const backgroundContainer = document.getElementById('background-grid')
       const baseBackgrounds = [
-        'bg-default',
         'bg-canvas',
         'bg-surface',
         'bg-elevated',
         'bg-backdrop',
         'bg-input',
       ]
-      baseBackgrounds.forEach((cls) =>
-        backgroundContainer.appendChild(createSwatch(cls)),
-      )
+      const baseGrid = document.createElement('div')
+      baseGrid.className = 'grid grid-cols-3 md:grid-cols-6 gap-2'
+      baseBackgrounds.forEach((cls) => baseGrid.appendChild(createSwatch(cls)))
+      backgroundContainer.appendChild(baseGrid)
 
       for (const color of semanticColors) {
-        backgroundContainer.appendChild(createSwatch(`bg-${color}-default`))
-        backgroundContainer.appendChild(createSwatch(`bg-${color}-subtle`))
-        for (const level of ['medium', 'strong']) {
+        const group = document.createElement('div')
+        group.className = 'grid grid-cols-6 gap-2'
+        for (const fill of ['fill-muted', 'fill-emphasis']) {
           for (const state of ['default', 'hover', 'active']) {
-            backgroundContainer.appendChild(
-              createSwatch(`bg-${color}-${level}-${state}`),
-            )
+            const cls = `bg-${color}-${fill}-${state}`
+            const text =
+              fill === 'fill-emphasis'
+                ? 'text-strong-on-emphasis'
+                : 'text-strong'
+            group.appendChild(createSwatch(cls, text))
           }
         }
+        backgroundContainer.appendChild(group)
       }
 
       // Text colors
       const textContainer = document.getElementById('text-grid')
       const neutralText = [
-        'text-default',
         'text-subtle',
         'text-strong',
-        'text-contrast-subtle',
-        'text-contrast-strong',
+        'text-subtle-on-emphasis',
+        'text-strong-on-emphasis',
       ]
+      const neutralGroup = document.createElement('div')
+      neutralGroup.className = 'grid grid-cols-2 md:grid-cols-4 gap-2'
       for (const cls of neutralText) {
-        const isContrast = cls.includes('contrast')
+        const isOnEmphasis = cls.includes('-on-emphasis')
         const span = document.createElement('span')
-        span.className = `${cls} px-2 py-1 rounded ${isContrast ? 'bg-neutral-strong-default' : ''}`
+        span.className = `${cls} px-2 py-1 rounded ${isOnEmphasis ? 'bg-neutral-fill-emphasis-default' : ''}`
         span.textContent = cls
-        textContainer.appendChild(span)
+        neutralGroup.appendChild(span)
       }
+      textContainer.appendChild(neutralGroup)
+
       for (const color of semanticColors.filter((c) => c !== 'neutral')) {
+        const group = document.createElement('div')
+        group.className = 'grid grid-cols-2 md:grid-cols-4 gap-2'
         const classes = [
           `text-${color}-subtle`,
           `text-${color}-strong`,
-          `text-${color}-contrast-subtle`,
-          `text-${color}-contrast-strong`,
+          `text-${color}-subtle-on-emphasis`,
+          `text-${color}-strong-on-emphasis`,
         ]
         for (const cls of classes) {
-          const isContrast = cls.includes('contrast')
+          const isOnEmphasis = cls.includes('-on-emphasis')
           const span = document.createElement('span')
-          span.className = `${cls} px-2 py-1 rounded ${isContrast ? `bg-${color}-strong-default` : ''}`
+          span.className = `${cls} px-2 py-1 rounded ${isOnEmphasis ? `bg-${color}-fill-emphasis-default` : ''}`
           span.textContent = cls
-          textContainer.appendChild(span)
+          group.appendChild(span)
         }
+        textContainer.appendChild(group)
       }
 
       // Border colors
       const borderContainer = document.getElementById('border-grid')
       for (const color of semanticColors) {
+        const group = document.createElement('div')
+        group.className = 'grid grid-cols-3 gap-2'
         for (const weight of ['subtle', 'medium', 'strong']) {
           const cls = `border-${color}-${weight}`
           const el = document.createElement('div')
           el.className = `p-4 rounded border-2 ${cls}`
           el.textContent = cls
-          borderContainer.appendChild(el)
+          group.appendChild(el)
         }
+        borderContainer.appendChild(group)
       }
     </script>
   </body>

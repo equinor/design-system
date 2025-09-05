@@ -24,7 +24,7 @@ export const HeaderPanel = ({
         <button
           type="button"
           onClick={() => setShowConfigPanel(!showConfigPanel)}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-medium-hover transition-colors rounded-md"
+          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
           title="Open configuration panel"
           data-testid="config-button"
           aria-expanded={showConfigPanel}

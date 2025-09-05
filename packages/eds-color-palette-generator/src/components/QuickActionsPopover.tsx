@@ -69,7 +69,7 @@ export function QuickActionsPopover(props: Props) {
   }, [open])
 
   const triggerClass =
-    'inline-flex items-center justify-center p-2 rounded-md bg-neutral-strong-default hover:bg-neutral-strong-hover transition-colors shadow-sm text-contrast-strong'
+    'inline-flex items-center justify-center p-2 rounded-md bg-neutral-fill-emphasis-default hover:bg-neutral-fill-emphasis-hover transition-colors shadow-sm text-strong-on-emphasis'
 
   return (
     <div ref={rootRef} className="relative">
@@ -96,7 +96,7 @@ export function QuickActionsPopover(props: Props) {
         >
           <div className="px-3 py-2 text-sm text-subtle">Export</div>
           <button
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover rounded-md"
+            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
             onClick={() =>
               downloadConfiguration(
                 lightModeValues,
@@ -113,7 +113,7 @@ export function QuickActionsPopover(props: Props) {
             <span>Palette config</span>
           </button>
           <button
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover rounded-md"
+            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
             onClick={() =>
               downloadDesignSystemCSS(
                 colors,
@@ -129,7 +129,7 @@ export function QuickActionsPopover(props: Props) {
             <span>CSS variables</span>
           </button>
           <button
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover rounded-md"
+            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
             onClick={() =>
               downloadColorTokens(
                 colors,
@@ -149,16 +149,16 @@ export function QuickActionsPopover(props: Props) {
           <div className="px-3 py-2 text-sm text-subtle">Import</div>
           <button
             ref={firstActionRef}
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-medium-hover rounded-md"
+            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
             onClick={() => fileInputRef.current?.click()}
           >
             <Upload className="w-4 h-4" />
             <span>Upload config</span>
           </button>
-          <div className="h-px bg-neutral-subtle my-1" />
+          <div className="h-px bg-neutral-fill-muted-default my-1" />
           <div className="px-3 py-2 text-sm text-subtle">Format</div>
           <div className="px-2 pb-2">
-            <div className="inline-flex items-center rounded-md  bg-neutral-medium-default/40">
+            <div className="inline-flex items-center rounded-md  bg-neutral-fill-muted-default/40">
               <button
                 type="button"
                 aria-pressed={colorFormat === 'OKLCH'}

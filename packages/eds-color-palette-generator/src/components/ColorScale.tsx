@@ -43,7 +43,7 @@ function getSystemTextColorClassNameForStep({
   status: 'success' | 'danger'
 }): string {
   if (stepIndex >= 9 && stepIndex <= 13) {
-    return `text-${status}-contrast-subtle`
+    return `text-${status}-subtle-on-emphasis`
   }
 
   return `text-${status}-subtle`
@@ -160,7 +160,7 @@ function ColorScaleBase({
             <button
               type="button"
               onClick={() => colorInputRef.current?.click()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-medium-hover"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover"
               title="Edit base color"
               aria-label="Edit base color"
             >
@@ -169,7 +169,7 @@ function ColorScaleBase({
             <button
               type="button"
               onClick={() => onRemove?.()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-medium-hover"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-fill-muted-hover"
               title="Remove color"
               aria-label="Remove color"
             >

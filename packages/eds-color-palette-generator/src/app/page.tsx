@@ -362,7 +362,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
-            className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-medium-hover active:bg-neutral-medium-active rounded-md cursor-pointer"
+            className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
           >
             Add colour
           </button>
@@ -398,7 +398,7 @@ export default function App() {
           <button
             type="button"
             onClick={resetConfiguration}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-fill-muted-default hover:bg-danger-fill-muted-hover border-none rounded-md"
             aria-label="Reset configuration changes"
             title="Reset configuration changes"
           >
