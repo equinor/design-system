@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>EDS Tailwind utilities demo</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="p-4 space-y-8">
+    <h1 class="text-2xl font-bold">EDS Tailwind utility classes</h1>
+
+    <section>
+      <h2 class="text-xl font-bold mb-4">Background colors</h2>
+      <div
+        id="background-grid"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+      ></div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-4">Text colors</h2>
+      <div id="text-grid" class="flex flex-wrap gap-4"></div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-4">Border colors</h2>
+      <div
+        id="border-grid"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+      ></div>
+    </section>
+
+    <script>
+      const semanticColors = [
+        'neutral',
+        'accent',
+        'success',
+        'info',
+        'warning',
+        'danger',
+      ]
+
+      // Helper to create a swatch div
+      function createSwatch(cls, textColor = 'text-contrast-strong') {
+        const el = document.createElement('div')
+        el.className = `p-4 rounded ${textColor} ${cls}`
+        el.textContent = cls
+        return el
+      }
+
+      // Backgrounds
+      const backgroundContainer = document.getElementById('background-grid')
+      const baseBackgrounds = [
+        'bg-default',
+        'bg-canvas',
+        'bg-surface',
+        'bg-elevated',
+        'bg-backdrop',
+        'bg-input',
+      ]
+      baseBackgrounds.forEach((cls) =>
+        backgroundContainer.appendChild(createSwatch(cls)),
+      )
+
+      for (const color of semanticColors) {
+        backgroundContainer.appendChild(createSwatch(`bg-${color}-default`))
+        backgroundContainer.appendChild(createSwatch(`bg-${color}-subtle`))
+        for (const level of ['medium', 'strong']) {
+          for (const state of ['default', 'hover', 'active']) {
+            backgroundContainer.appendChild(
+              createSwatch(`bg-${color}-${level}-${state}`),
+            )
+          }
+        }
+      }
+
+      // Text colors
+      const textContainer = document.getElementById('text-grid')
+      const neutralText = [
+        'text-default',
+        'text-subtle',
+        'text-strong',
+        'text-contrast-subtle',
+        'text-contrast-strong',
+      ]
+      for (const cls of neutralText) {
+        const isContrast = cls.includes('contrast')
+        const span = document.createElement('span')
+        span.className = `${cls} px-2 py-1 rounded ${isContrast ? 'bg-neutral-strong-default' : ''}`
+        span.textContent = cls
+        textContainer.appendChild(span)
+      }
+      for (const color of semanticColors.filter((c) => c !== 'neutral')) {
+        const classes = [
+          `text-${color}-subtle`,
+          `text-${color}-strong`,
+          `text-${color}-contrast-subtle`,
+          `text-${color}-contrast-strong`,
+        ]
+        for (const cls of classes) {
+          const isContrast = cls.includes('contrast')
+          const span = document.createElement('span')
+          span.className = `${cls} px-2 py-1 rounded ${isContrast ? `bg-${color}-strong-default` : ''}`
+          span.textContent = cls
+          textContainer.appendChild(span)
+        }
+      }
+
+      // Border colors
+      const borderContainer = document.getElementById('border-grid')
+      for (const color of semanticColors) {
+        for (const weight of ['subtle', 'medium', 'strong']) {
+          const cls = `border-${color}-${weight}`
+          const el = document.createElement('div')
+          el.className = `p-4 rounded border-2 ${cls}`
+          el.textContent = cls
+          borderContainer.appendChild(el)
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -18,6 +18,7 @@
   --background-color-canvas: var(--eds-color-background-canvas);
   --background-color-surface: var(--eds-color-background-surface);
   --background-color-elevated: var(--eds-color-background-elevated);
+  --background-color-backdrop: var(--eds-color-background-backdrop);
   --background-color-input: var(--eds-color-background-input);
 
   --background-color-neutral-medium-default: var(
@@ -148,6 +149,22 @@
   --border-color-accent-medium: var(--eds-color-border-accent-medium);
   --border-color-accent-strong: var(--eds-color-border-accent-strong);
 
+  --border-color-success-subtle: var(--eds-color-border-success-subtle);
+  --border-color-success-medium: var(--eds-color-border-success-medium);
+  --border-color-success-strong: var(--eds-color-border-success-strong);
+
+  --border-color-info-subtle: var(--eds-color-border-info-subtle);
+  --border-color-info-medium: var(--eds-color-border-info-medium);
+  --border-color-info-strong: var(--eds-color-border-info-strong);
+
+  --border-color-warning-subtle: var(--eds-color-border-warning-subtle);
+  --border-color-warning-medium: var(--eds-color-border-warning-medium);
+  --border-color-warning-strong: var(--eds-color-border-warning-strong);
+
+  --border-color-danger-subtle: var(--eds-color-border-danger-subtle);
+  --border-color-danger-medium: var(--eds-color-border-danger-medium);
+  --border-color-danger-strong: var(--eds-color-border-danger-strong);
+
   --text-color-strong: var(--eds-color-text-neutral-strong);
   --text-color-subtle: var(--eds-color-text-neutral-subtle);
 
@@ -155,6 +172,14 @@
   --text-color-contrast-subtle: var(--eds-color-text-neutral-contrast-subtle);
 
   --text-color-default: var(--eds-color-text-neutral-strong);
+  --text-color-accent-subtle: var(--eds-color-text-accent-subtle);
+  --text-color-accent-strong: var(--eds-color-text-accent-strong);
+  --text-color-accent-contrast-strong: var(
+    --eds-color-text-accent-contrast-strong
+  );
+  --text-color-accent-contrast-subtle: var(
+    --eds-color-text-accent-contrast-subtle
+  );
   --text-color-success-subtle: var(--eds-color-text-success-subtle);
   --text-color-success-strong: var(--eds-color-text-success-strong);
   --text-color-success-contrast-strong: var(
@@ -162,6 +187,20 @@
   );
   --text-color-success-contrast-subtle: var(
     --eds-color-text-success-contrast-subtle
+  );
+
+  --text-color-info-subtle: var(--eds-color-text-info-subtle);
+  --text-color-info-strong: var(--eds-color-text-info-strong);
+  --text-color-info-contrast-strong: var(--eds-color-text-info-contrast-strong);
+  --text-color-info-contrast-subtle: var(--eds-color-text-info-contrast-subtle);
+
+  --text-color-warning-subtle: var(--eds-color-text-warning-subtle);
+  --text-color-warning-strong: var(--eds-color-text-warning-strong);
+  --text-color-warning-contrast-strong: var(
+    --eds-color-text-warning-contrast-strong
+  );
+  --text-color-warning-contrast-subtle: var(
+    --eds-color-text-warning-contrast-subtle
   );
 
   --text-color-danger-subtle: var(--eds-color-text-danger-subtle);
@@ -174,8 +213,6 @@
   );
 }
 
-/* Expose sources for utility generation */
-@source inline("text-success-{subtle,strong,contrast-{subtle,strong}}");
-@source inline("text-danger-{subtle,strong,contrast-{subtle,strong}}");
-@source inline("text-{subtle,strong,contrast-{subtle,strong}}");
-@source inline("bg-{elevated,default,canvas,surface,input}");
+@source inline("bg-{neutral,accent,success,info,warning,danger}-{medium,strong}-{default,hover,active}");
+@source inline("border-{neutral,accent,success,info,warning,danger}-{subtle,medium,strong}");
+@source inline("text-{neutral,accent,success,info,warning,danger}-{subtle,strong,contrast-strong,contrast-subtle}");
