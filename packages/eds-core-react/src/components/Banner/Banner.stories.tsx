@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/react'
 import { Stack } from '../../../.storybook/components/'
-import { Banner, Icon, Button, BannerProps } from '../..'
+import { Banner, Icon, Button, BannerProps, Typography } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 import page from './Banner.docs.mdx'
 
@@ -134,33 +134,34 @@ export const TextAndIconAndAction: StoryFn<BannerProps> = () => (
   </>
 )
 TextAndIconAndAction.storyName = 'Text and icon and actions'
-
-export const ComplexBannerMessage: StoryFn<BannerProps> = () => (
+export const ComplexBannerContent: StoryFn<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon variant="warning">
         <Icon name="thumbs_down" />
       </Banner.Icon>
-      <Banner.Message>
-        <div>
-          <strong>Important update required</strong>
-          <p style={{ margin: '4px 0' }}>
-            Your project contains{' '}
-            <a href="#deprecated">3 deprecated components</a> that need to be
-            updated before June 2025.
-          </p>
-          <code
-            style={{
-              background: '#f5f5f5',
-              padding: '2px 4px',
-              borderRadius: '2px',
-              fontSize: '0.9em',
-            }}
-          >
-            ComponentA, ComponentB, ComponentC
-          </code>
-        </div>
-      </Banner.Message>
+      <div>
+        <Typography variant="body_short" style={{ fontWeight: 'bold' }}>
+          Important update required
+        </Typography>
+        <Typography variant="body_long" style={{ margin: '4px 0' }}>
+          Your project contains{' '}
+          <a href="#deprecated">3 deprecated components</a> that need to be
+          updated before June 2025.
+        </Typography>
+        <Typography
+          variant="caption"
+          style={{
+            background: '#f5f5f5',
+            padding: '2px 4px',
+            borderRadius: '2px',
+            display: 'inline-block',
+            fontFamily: 'monospace',
+          }}
+        >
+          ComponentA, ComponentB, ComponentC
+        </Typography>
+      </div>
       <Banner.Actions>
         <Button>View details</Button>
       </Banner.Actions>
@@ -170,19 +171,40 @@ export const ComplexBannerMessage: StoryFn<BannerProps> = () => (
       <Banner.Icon>
         <Icon name="thumbs_up" />
       </Banner.Icon>
-      <Banner.Message>
-        <div>
+      <div>
+        <Typography variant="body_long">
           Project status:{' '}
-          <span style={{ color: 'green', fontWeight: 'bold' }}>Active</span>
-          <ul style={{ margin: '4px 0', paddingLeft: '20px' }}>
-            <li>Last updated: May 15, 2025</li>
-            <li>Contributors: 8</li>
-            <li>
-              Health check: <span style={{ color: 'green' }}>Passing</span>
-            </li>
-          </ul>
-        </div>
-      </Banner.Message>
+          <Typography
+            variant="body_long"
+            as="span"
+            style={{ color: 'green', fontWeight: 'bold' }}
+          >
+            Active
+          </Typography>
+        </Typography>
+        <Typography
+          variant="body_long"
+          as="ul"
+          style={{ margin: '4px 0', paddingLeft: '20px' }}
+        >
+          <Typography variant="body_long" as="li">
+            Last updated: May 15, 2025
+          </Typography>
+          <Typography variant="body_long" as="li">
+            Contributors: 8
+          </Typography>
+          <Typography variant="body_long" as="li">
+            Health check:{' '}
+            <Typography
+              variant="body_long"
+              as="span"
+              style={{ color: 'green' }}
+            >
+              Passing
+            </Typography>
+          </Typography>
+        </Typography>
+      </div>
       <Banner.Actions>
         <Button>View dashboard</Button>
         <Button variant="outlined">Export report</Button>
@@ -190,4 +212,4 @@ export const ComplexBannerMessage: StoryFn<BannerProps> = () => (
     </Banner>
   </>
 )
-ComplexBannerMessage.storyName = 'Complex Banner Message'
+ComplexBannerContent.storyName = 'Complex Banner Content'
