@@ -1,15 +1,7 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.test.base.json",
   "compilerOptions": {
-    "declaration": false,
-    "noEmit": true,
-    "isolatedModules": true,
     "baseUrl": ".",
-    "types": [
-      "jest",
-      "react",
-      "react-dom"
-    ],
     "typeRoots": [
       "./node_modules/@types"
     ],

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
-    "test": "tsc -p tsconfig.spec.json && jest",
+    "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
     "storybook": "storybook dev -p 9000 --ci",

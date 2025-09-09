@@ -1,16 +1,8 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.test.base.json",
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "module": "ESNext",
-    "types": [
-      "jest",
-      "react",
-      "react-dom"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "react": ["./node_modules/@types/react"],
       "react/*": ["./node_modules/@types/react/*"],
