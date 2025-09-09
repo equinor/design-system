@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { useThemeConfig } from '@docusaurus/theme-common'
 import FooterLinks from '@theme/Footer/Links'
 import FooterLogo from '@theme/Footer/Logo'
@@ -23,4 +21,4 @@ function Footer(): JSX.Element | null {
   )
 }
 
-export default memo(Footer)
+export default Footer
