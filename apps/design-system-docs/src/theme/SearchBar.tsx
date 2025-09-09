@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import React, { type ReactNode } from 'react'
 // import SearchBar from '@theme-original/SearchBar'
 import { Search as SearchBar } from '@equinor/eds-core-react'

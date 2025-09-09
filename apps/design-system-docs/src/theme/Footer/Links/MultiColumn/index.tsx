@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import clsx from 'clsx'
 import { ThemeClassNames } from '@docusaurus/theme-common'
 import LinkItem from '@theme/Footer/LinkItem'
@@ -33,8 +33,11 @@ function Column({ column }: { column: ColumnType }) {
     >
       {/* <div className="footer__title">{column.title}</div> */}
       <div className="footer__items clean-list">
-        {column.items.map((item, i) => (
-          <ColumnLinkItem key={i} item={item} />
+        {column.items.map((item) => (
+          <ColumnLinkItem
+            key={item.href ?? item.to ?? item.label ?? item.html}
+            item={item}
+          />
         ))}
       </div>
     </div>
@@ -44,8 +47,8 @@ function Column({ column }: { column: ColumnType }) {
 export default function FooterLinksMultiColumn({ columns }: Props): ReactNode {
   return (
     <div className="row footer__links">
-      {columns.map((column, i) => (
-        <Column key={i} column={column} />
+      {columns.map((column) => (
+        <Column key={column.title ?? column.className} column={column} />
       ))}
     </div>
   )

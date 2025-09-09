@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react'
+import { memo, type ReactNode } from 'react'
 
 import { useThemeConfig } from '@docusaurus/theme-common'
 import FooterLinks from '@theme/Footer/Links'
@@ -23,4 +23,4 @@ function Footer(): ReactNode {
   )
 }
 
-export default React.memo(Footer)
+export default memo(Footer)

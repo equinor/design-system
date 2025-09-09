@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
