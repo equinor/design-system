@@ -5,7 +5,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom", "styled-components"]
+    "types": ["jest", "@testing-library/jest-dom", "styled-components"]
   },
   "include": [
     "src/**/*.test.ts*", 
