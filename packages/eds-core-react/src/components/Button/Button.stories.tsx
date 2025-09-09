@@ -9,7 +9,7 @@ import {
   Snackbar,
   Tooltip,
 } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { menu, add, save, send, refresh } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'

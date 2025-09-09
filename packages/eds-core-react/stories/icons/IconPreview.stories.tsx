@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { HeaderMdx } from '@storybook/addon-docs'
 import styled from 'styled-components'
 import { Icon, Button, Typography, Search } from '../../src'

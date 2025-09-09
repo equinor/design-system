@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 import styled from 'styled-components'
-import { StoryObj, Meta } from '@storybook/react'
+import { StoryObj, Meta } from '@storybook/react-vite'
 import { Table, TableProps, Typography } from '@equinor/eds-core-react'
 import { data, multilineText, columns } from '../../stories/data'
 import { toCellValues } from '../../stories/toCellValues'

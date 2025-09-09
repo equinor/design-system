@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import styled from 'styled-components'
 import {
   Typography,

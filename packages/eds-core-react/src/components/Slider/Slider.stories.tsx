@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import { Label, Slider, SliderProps, Typography } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import styled from 'styled-components'
 import { Stack } from './../../../.storybook/components'
 import page from './Slider.docs.mdx'

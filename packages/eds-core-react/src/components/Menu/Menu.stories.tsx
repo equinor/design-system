@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { action } from '@storybook/addon-actions'
+import { action } from 'storybook/actions'
 import {
   Menu,
   MenuProps,
@@ -10,7 +10,7 @@ import {
   Density,
   Checkbox,
 } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Menu.docs.mdx'
 

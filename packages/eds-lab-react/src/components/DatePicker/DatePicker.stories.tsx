@@ -2,7 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import { useState } from 'react'
 import styled from 'styled-components'
-import { StoryObj, Meta } from '@storybook/react'
+import { StoryObj, Meta } from '@storybook/react-vite'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'
 import { DatePickerSelectHeader } from './DatePickerSelectHeader'

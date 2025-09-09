@@ -10,7 +10,7 @@ import {
 } from '../..'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
 import page from './Radio.docs.mdx'

@@ -23,7 +23,7 @@ import {
 } from '../..'
 import { toCellValues } from '../../stories/toCellValues'
 import { data, columns } from '../../stories/data'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import page from './SideSheet.docs.mdx'
 
 const icons = {

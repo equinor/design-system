@@ -1,4 +1,4 @@
-import type { StoryObj, Meta } from '@storybook/react'
+import type { StoryObj, Meta } from '@storybook/react-vite'
 import styled from 'styled-components'
 import { TimePicker, TimePickerProps } from './TimePicker'
 

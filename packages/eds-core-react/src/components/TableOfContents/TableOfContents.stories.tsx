@@ -1,5 +1,5 @@
 import { Icon, TableOfContents, Typography, TableOfContentsProps } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { subdirectory_arrow_right } from '@equinor/eds-icons'
 import page from './TableOfContents.docs.mdx'
 

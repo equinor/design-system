@@ -1,5 +1,5 @@
 import { Label, LabelProps, Input } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import page from './Label.docs.mdx'
 
 const meta: Meta<typeof Label> = {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { action } from '@storybook/addon-actions'
+import { action } from 'storybook/actions'
 import { Search, Button, SearchProps, EdsProvider, Density } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import page from './Search.docs.mdx'
 
 const meta: Meta<typeof Search> = {

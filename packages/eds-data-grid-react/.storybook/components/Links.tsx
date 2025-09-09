@@ -1,6 +1,6 @@
 import { Button } from '@equinor/eds-core-react'
 import { Stack } from './Stack'
-import { Unstyled } from '@storybook/blocks'
+import { Unstyled } from '@storybook/addon-docs/blocks'
 
 const FigmaIcon = () => (
   <svg

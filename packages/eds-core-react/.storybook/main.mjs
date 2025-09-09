@@ -2,36 +2,30 @@ const config = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
+
   stories: [
     '../src/**/*.@(mdx|stories.@(ts|tsx))',
     '../stories/**/*.@(mdx|stories.@(ts|tsx))',
   ],
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-links',
-    '@storybook/addon-actions',
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        docs: false,
-        actions: false,
-      },
-    },
-    {
-      name: '@storybook/addon-docs',
-      options: {},
-    },
-  ],
+
+  addons: ['@storybook/addon-a11y', '@storybook/addon-links', {
+    name: '@storybook/addon-docs',
+    options: {},
+  }],
+
   features: {
     interactionsDebugger: true,
     storyStoreV7: true,
+    actions: false
   },
+
   core: {},
 
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+
   refs: (config, { configType }) => {
     if (configType === 'DEVELOPMENT') {
       return {}
@@ -44,6 +38,7 @@ const config = {
       },
     }
   },
+
   managerHead: (head) => {
     if (process.env.NODE_ENV === 'development') {
       return head
@@ -53,6 +48,7 @@ const config = {
      ${head}
   `
   },
+
   async viteFinal(config) {
     return {
       ...config,
@@ -66,15 +62,11 @@ const config = {
           ...(config.optimizeDeps?.include ?? []),
           '@equinor/eds-utils',
           '@storybook/addon-docs/mdx-react-shim',
-          '@storybook/blocks',
+          '@storybook/addon-docs/blocks',
         ],
       },
     }
-  },
-
-  docs: {
-    autodocs: true,
-  },
+  }
 }
 
 export default config
