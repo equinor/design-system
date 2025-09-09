@@ -81,7 +81,7 @@ jobs:
       - name: Install pnpm
         id: install-pnpm
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: npm i --no-save pnpm@"<10.0.0"
+        run: npm i --no-save pnpm@"10"
       - name: Install dependencies recursively
         id: install-dependencies
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
