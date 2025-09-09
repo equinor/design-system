@@ -1,4 +1,4 @@
-import { Story as SBStory, StoryProps, Canvas } from '@storybook/addon-docs'
+import { Story as SBStory, StoryProps, Canvas } from '@storybook/blocks'
 
 export const Story = (props: StoryProps) => (
   <Canvas>
