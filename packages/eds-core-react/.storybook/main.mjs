@@ -8,15 +8,19 @@ const config = {
     '../stories/**/*.@(mdx|stories.@(ts|tsx))',
   ],
 
-  addons: ['@storybook/addon-a11y', '@storybook/addon-links', {
-    name: '@storybook/addon-docs',
-    options: {},
-  }],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-links',
+    {
+      name: '@storybook/addon-docs',
+      options: {},
+    },
+  ],
 
   features: {
     interactionsDebugger: true,
     storyStoreV7: true,
-    actions: false
+    actions: false,
   },
 
   core: {},
@@ -66,7 +70,7 @@ const config = {
         ],
       },
     }
-  }
+  },
 }
 
 export default config
