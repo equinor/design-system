@@ -38,6 +38,10 @@
     "prettier": "prettier . --write",
     "lint": "eslint"
   },
+  "engines": {
+    "pnpm": ">=8",
+    "node": ">=20.19.0 <22.0.0 || >=22.12.0"
+  },
   "devDependencies": {
     "@figma/rest-api-spec": "^0.33.0",
     "@types/node": "^22.18.0",
