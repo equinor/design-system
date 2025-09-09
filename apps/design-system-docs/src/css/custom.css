@@ -1,32 +1,292 @@
-@import url(https://cdn.eds.equinor.com/font/equinor-font.css);
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Equinor Design System - Docusaurus Custom CSS
+ * 
+ * This file contains custom styling for the Equinor Design System documentation
+ * built with Docusaurus. It overrides Infima variables (Docusaurus default styling)
+ * and applies EDS styling to various components.
  */
 
-/* You can override the default Infima variables here. */
+/* ======================================
+ * FONTS
+ * ====================================== */
+/* Equinor brand font */
+@import url(https://cdn.eds.equinor.com/font/equinor-font.css);
+
+/* TODO: This needs to be imported from Equinor CDN later */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ======================================
+ * ROOT VARIABLES - LIGHT THEME
+ * ====================================== */
 :root {
-  --ifm-font-family-base: 'Equinor';
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Typography */
+  --ifm-font-family-base: 'Inter';
+  --ifm-heading-font-family: 'Equinor';
+  --ifm-font-color-base: var(--eds-color-text-neutral-strong);
+
+  /* Primary colors based on EDS accent */
+  --ifm-color-primary: var(--eds-color-background-accent-strong-default);
+  --ifm-color-primary-dark: var(--eds-color-background-accent-strong-hover);
+  --ifm-color-primary-darker: var(--eds-color-background-accent-strong-active);
+  --ifm-color-primary-darkest: var(--eds-color-text-accent-strong);
+  --ifm-color-primary-light: var(--eds-color-background-accent-medium-active);
+  --ifm-color-primary-lighter: var(--eds-color-background-accent-medium-hover);
+  --ifm-color-primary-lightest: var(
+    --eds-color-background-accent-medium-default
+  );
+
+  /* Background and surface colors */
+  --ifm-background-color: var(--eds-color-background-canvas);
+  --ifm-background-surface-color: var(--eds-color-background-surface);
   --ifm-code-font-size: 95%;
+
+  /* General UI elements */
+  --ifm-hover-overlay: var(--eds-color-background-accent-subtle);
+  --ifm-global-radius: 4px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Navbar styling */
+  --ifm-navbar-height: 68px;
+  --ifm-navbar-link-color: var(--ifm-font-color-base);
+  --ifm-navbar-link-hover-color: var(--ifm-font-color-base);
+  --ifm-navbar-padding-vertical: 0;
+  --ifm-navbar-item-padding-vertical: 0;
+  --ifm-navbar-item-padding-horizontal: 1.5rem;
+
+  /* Menu and sidebar styling */
+  --ifm-menu-color: var(--ifm-font-color-base);
+  --ifm-menu-color-active: var(--ifm-color-primary);
+  --ifm-menu-color-background-active: var(--ifm-hover-overlay);
+  --ifm-menu-color-background-hover: var(--ifm-hover-overlay);
+  --ifm-menu-link-padding-horizontal: 1rem;
+  --ifm-menu-link-padding-vertical: 0.375rem;
+  --ifm-menu-link-sublist-icon-filter: none;
+
+  /* Table of contents */
+  --ifm-toc-padding-vertical: 0;
+  --ifm-toc-padding-horizontal: 0;
+
+  /* Breadcrumbs and footer */
+  --ifm-breadcrumb-separator: '';
+  --ifm-footer-padding-vertical: 1rem;
+  --ifm-footer-padding-horizontal: 1rem;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* ======================================
+ * GLOBAL STYLES
+ * ====================================== */
+* {
+  transition:
+    color 200ms ease-in,
+    background-color 200ms ease-in,
+    border 200ms ease-in;
+}
+
+/* ======================================
+ * SIDEBAR NAVIGATION
+ * ====================================== */
+nav.menu {
+  background-color: var(--ifm-background-surface-color);
+  border-right: var(--eds-color-border-neutral-subtle) 1px solid;
+  padding: 0;
+  /* UIBody - MD */
+  font-size: 0.875rem;
+  line-height: 0.75rem;
+}
+
+nav.menu .menu__list {
+  margin-top: 0;
+  padding: 0;
+}
+
+nav.menu li {
+  margin-top: 0;
+}
+
+.menu__list-item:not(:first-child) {
+  margin-top: 0;
+}
+
+.menu__link--active {
+  background-color: var(--ifm-hover-overlay) !important;
+}
+
+/* Sidebar menu items styling */
+nav.menu li div {
+  border-radius: 0;
+}
+
+nav.menu li a {
+  border-radius: 0;
+  padding: 1rem;
+}
+
+.theme-doc-sidebar-item-link-level-2 a {
+  padding-left: 2rem !important;
+}
+
+/* ======================================
+ * TOP NAVIGATION BAR
+ * ====================================== */
+.navbar {
+  box-shadow: unset;
+  border-bottom: var(--eds-color-border-neutral-subtle) 1px solid;
+}
+
+.navbar__brand {
+  font-family: 'Equinor', sans-serif;
+}
+
+.navbar__item {
+  padding: 1.75rem 1.5rem;
+  /* UIBody - MD */
+  font-size: 0.875rem;
+  line-height: 0.75rem;
+  box-shadow: 0px -1px 0px 0px var(--eds-color-border-neutral-subtle) inset;
+  transition:
+    box-shadow 150ms,
+    background-color 150ms;
+}
+
+.navbar__item:hover {
+  background-color: var(--ifm-hover-overlay);
+  color: var(----ifm-font-color-base);
+}
+
+.navbar__link--active {
+  box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset;
+}
+
+/* ======================================
+ * SEARCH BAR
+ * ====================================== */
+.search-bar > div > div {
+  border-radius: var(--ifm-global-radius);
+  box-shadow: 0px 0px 0px 1px var(--eds-color-border-neutral-subtle) inset;
+  border-bottom: unset;
+  padding: 0.25em 0.5em;
+}
+
+.search-bar > div > div {
+  background-color: var(--eds-color-background-neutral-subtle);
+}
+.search-bar > div > div:focus-within {
+  outline: var(--eds-color-background-accent-strong-default) 2px solid;
+}
+.search-bar > div > div svg {
+  color: var(--eds-color-text-neutral-default);
+}
+.search-bar > div > div button {
+  color: var(--eds-color-background-accent-strong-default);
+}
+.search-bar > div > div > input {
+  font-family: 'Inter', sans-serif;
+}
+.search-bar > div > div > input::placeholder {
+  color: var(--eds-color-border-neutral-subtle);
+}
+
+/* ======================================
+ * MAIN CONTENT AREA
+ * ====================================== */
+.theme-doc-markdown {
+  padding: 1.5rem;
+  background-color: var(--ifm-background-surface-color);
+  border: var(--eds-color-border-neutral-subtle) 1px solid;
+  border-radius: var(--ifm-global-radius);
+}
+
+/* ======================================
+ * TABLE OF CONTENTS
+ * ====================================== */
+.theme-doc-toc-desktop {
+  margin: 3rem 0 0 0;
+}
+
+.theme-doc-toc-desktop ul li ul .table-of-contents__link {
+  padding: 0.5rem 3rem;
+}
+
+.table-of-contents__link {
+  padding: 0.5rem 2rem;
+  transition: background-color 150ms ease-in-out;
+  position: relative;
+}
+
+.table-of-contents__link:hover {
+  background-color: var(--ifm-hover-overlay);
+}
+
+.table-of-contents__link--active {
+  background-color: var(--ifm-hover-overlay) !important;
+  position: relative;
+}
+
+/* Left border indicator for active TOC item */
+.table-of-contents__link:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  background-color: rgba(0, 0, 0, 0);
+  height: 100%;
+  width: 4px;
+  transition: background-color 150ms ease-in-out;
+}
+
+.table-of-contents__link--active:before {
+  background-color: var(--ifm-color-primary);
+}
+
+/* ======================================
+ * BREADCRUMBS
+ * ====================================== */
+.theme-doc-breadcrumbs .breadcrumbs__item:not(:last-child):after {
+  content: '/';
+}
+
+.theme-doc-breadcrumbs .breadcrumbs__item .breadcrumbs__link {
+  background-color: unset;
+}
+
+/* ======================================
+ * FOOTER
+ * ====================================== */
+.footer {
+  background-color: var(--ifm-color-primary);
+  color: var(--eds-color-text-accent-contrast-strong);
+}
+
+.footer .container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.footer__links {
+  margin: 0;
+}
+
+.footer__items {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Footer icons styling */
+.footer__items .footer__item a {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease-in-out;
+}
+
+.footer__items .footer__item a:hover {
+  background-color: var(--eds-color-background-accent-strong-hover);
+  border-radius: var(--ifm-global-radius);
+}
+
+.footer .footer__items .footer-icon svg {
+  fill: var(--eds-color-text-accent-contrast-strong);
 }
