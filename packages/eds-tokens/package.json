@@ -53,7 +53,6 @@
     "build": "rollup -c --bundleConfigAsCjs && pnpm run types",
     "dev": "rollup -c -w",
     "types": "tsc",
-    "test": "jest",
     "prettier:check": "prettier --check src/",
     "_prebuild:generate-variables:build": "vite build --config vite.generate-variables.config.ts",
     "generate-variables": "pnpm run _prebuild:generate-variables:build && node ./build-generate-variables/generate-variables.js",
