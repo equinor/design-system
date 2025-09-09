@@ -67,7 +67,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set ${{ env.INPUT_PATHS }}
+          git sparse-checkout set package.json pnpm-lock.yaml ${{ env.INPUT_PATHS }}
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -86,7 +86,6 @@ jobs:
         id: setup-pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.15.0
           run_install: false
       - name: Install dependencies recursively
         id: install-dependencies

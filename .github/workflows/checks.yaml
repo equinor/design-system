@@ -34,8 +34,6 @@ jobs:
           node-version: '22.12.0'
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - name: Install dependencies
         run: pnpm install
       - name: Use "setup" cache
