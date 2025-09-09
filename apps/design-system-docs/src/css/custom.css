@@ -10,14 +10,23 @@
  * FONTS
  * ====================================== */
 /* Equinor brand font */
+@import '@equinor/eds-tokens/css/variables-static';
 @import url(https://cdn.eds.equinor.com/font/equinor-font.css);
-
 /* TODO: This needs to be imported from Equinor CDN later */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 /* ======================================
  * ROOT VARIABLES - LIGHT THEME
  * ====================================== */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 :root {
   /* Typography */
   --ifm-font-family-base: 'Inter';
@@ -25,23 +34,21 @@
   --ifm-font-color-base: var(--eds-color-text-neutral-strong);
 
   /* Primary colors based on EDS accent */
-  --ifm-color-primary: var(--eds-color-background-accent-strong-default);
-  --ifm-color-primary-dark: var(--eds-color-background-accent-strong-hover);
-  --ifm-color-primary-darker: var(--eds-color-background-accent-strong-active);
-  --ifm-color-primary-darkest: var(--eds-color-text-accent-strong);
-  --ifm-color-primary-light: var(--eds-color-background-accent-medium-active);
-  --ifm-color-primary-lighter: var(--eds-color-background-accent-medium-hover);
-  --ifm-color-primary-lightest: var(
-    --eds-color-background-accent-medium-default
-  );
+  --ifm-color-primary: var(--eds-color-bg-accent-fill-emphasis-default);
+  --ifm-color-primary-dark: var(--eds-color-bg-accent-fill-emphasis-hover);
+  --ifm-color-primary-darker: var(--eds-color-bg-accent-fill-emphasis-active);
+  --ifm-color-primary-darkest: var(--eds-color-bg-accent-fill-emphasis);
+  --ifm-color-primary-light: var(--eds-color-bg-accent-fill-muted-active);
+  --ifm-color-primary-lighter: var(--eds-color-bg-accent-fill-muted-hover);
+  --ifm-color-primary-lightest: var(--eds-color-bg-accent-fill-muted-default);
 
   /* Background and surface colors */
-  --ifm-background-color: var(--eds-color-background-canvas);
-  --ifm-background-surface-color: var(--eds-color-background-surface);
+  --ifm-background-color: var(--eds-color-bg-neutral-canvas);
+  --ifm-background-surface-color: var(--eds-color-bg-neutral-surface);
   --ifm-code-font-size: 95%;
 
   /* General UI elements */
-  --ifm-hover-overlay: var(--eds-color-background-accent-subtle);
+  --ifm-hover-overlay: var(--eds-color-bg-accent-fill-muted-default);
   --ifm-global-radius: 4px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
@@ -168,16 +175,16 @@ nav.menu li a {
 }
 
 .search-bar > div > div {
-  background-color: var(--eds-color-background-neutral-subtle);
+  background-color: var(--eds-color-bg-neutral-fill-muted-defaul);
 }
 .search-bar > div > div:focus-within {
-  outline: var(--eds-color-background-accent-strong-default) 2px solid;
+  outline: var(--eds-color-bg-accent-fill-emphasis-default) 2px solid;
 }
 .search-bar > div > div svg {
-  color: var(--eds-color-text-neutral-default);
+  color: var(--eds-color-text-neutral-strong);
 }
 .search-bar > div > div button {
-  color: var(--eds-color-background-accent-strong-default);
+  color: var(--eds-color-bg-accent-emphasis-default);
 }
 .search-bar > div > div > input {
   font-family: 'Inter', sans-serif;
@@ -254,7 +261,7 @@ nav.menu li a {
  * ====================================== */
 .footer {
   background-color: var(--ifm-color-primary);
-  color: var(--eds-color-text-accent-contrast-strong);
+  color: var(--eds-color-text-accent-strong-on-emphasis);
 }
 
 .footer .container {
@@ -283,10 +290,10 @@ nav.menu li a {
 }
 
 .footer__items .footer__item a:hover {
-  background-color: var(--eds-color-background-accent-strong-hover);
+  background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
   border-radius: var(--ifm-global-radius);
 }
 
 .footer .footer__items .footer-icon svg {
-  fill: var(--eds-color-text-accent-contrast-strong);
+  fill: var(--eds-color-text-accent-strong-on-emphasis);
 }

@@ -42,7 +42,7 @@ const config: Config = {
           customCss: [
             './src/css/custom.css',
             // Add additional CSS files here
-            './src/css/eds_static.css',
+            //'./src/css/eds_static.css',
           ],
         },
       } satisfies Preset.Options,
