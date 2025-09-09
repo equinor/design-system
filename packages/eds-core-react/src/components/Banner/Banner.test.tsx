@@ -6,6 +6,7 @@ import { add } from '@equinor/eds-icons'
 import { Banner } from '.'
 import { Icon } from '../Icon'
 import * as tokens from './Banner.tokens'
+import { Typography } from '../Typography'
 
 Icon.add({ add })
 
@@ -143,5 +144,179 @@ describe('Banner', () => {
       'fill',
       warning.entities.icon.typography.color,
     )
+  })
+})
+describe('Banner with complex content', () => {
+  it('Matches snapshot with complex content', () => {
+    const { asFragment } = render(
+      <Banner>
+        <Banner.Icon>
+          <Icon data={add} />
+        </Banner.Icon>
+        <div>
+          <strong>Important update</strong>
+          <p>Complex content with HTML elements</p>
+        </div>
+      </Banner>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('Should pass a11y test with complex content', async () => {
+    const { container } = render(
+      <StyledBanner>
+        <Banner.Icon variant="warning">
+          <Icon name="add" />
+        </Banner.Icon>
+        <div>
+          <h3>Important update required</h3>
+          <p>
+            Your project contains{' '}
+            <a href="#deprecated">3 deprecated components</a> that need to be
+            updated.
+          </p>
+          <ul>
+            <li>ComponentA</li>
+            <li>ComponentB</li>
+          </ul>
+        </div>
+        <Banner.Actions>
+          <button type="button">View details</button>
+        </Banner.Actions>
+      </StyledBanner>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+
+  it('Has provided complex HTML content', () => {
+    const bannerHeading = 'Important Update'
+    const bannerText = 'Your project needs attention'
+    render(
+      <Banner>
+        <div>
+          <h3>{bannerHeading}</h3>
+          <p>{bannerText}</p>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+          </ul>
+        </div>
+      </Banner>,
+    )
+    expect(screen.getByText(bannerHeading)).toBeDefined()
+    expect(screen.getByText(bannerText)).toBeDefined()
+    expect(screen.getByRole('list')).toBeDefined()
+    expect(screen.getAllByRole('listitem')).toHaveLength(2)
+  })
+
+  it('Has complex content with Icon and Actions', () => {
+    const bannerText = 'Complex banner content'
+    const actionButtonText = 'Action button'
+    const iconTestId = 'banner-icon-test'
+    render(
+      <Banner>
+        <Banner.Icon>
+          <Icon name="add" data-testid={iconTestId} />
+        </Banner.Icon>
+        <div>
+          <strong>{bannerText}</strong>
+          <p>Additional paragraph content</p>
+        </div>
+        <Banner.Actions>
+          <button type="button">{actionButtonText}</button>
+        </Banner.Actions>
+      </Banner>,
+    )
+    expect(screen.getByText(bannerText)).toBeDefined()
+    expect(screen.getByText('Additional paragraph content')).toBeDefined()
+    expect(screen.getByText(actionButtonText)).toBeDefined()
+    expect(screen.getByTestId(iconTestId)).toBeDefined()
+  })
+
+  it('Allows nested HTML without DOM nesting warnings', () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+
+    render(
+      <Banner>
+        <div>
+          <h4>Nested content test</h4>
+          <p>
+            This paragraph contains <a href="/link">a link</a> and{' '}
+            <code>code elements</code>.
+          </p>
+          <ul>
+            <li>
+              List item with <strong>bold text</strong>
+            </li>
+          </ul>
+        </div>
+      </Banner>,
+    )
+
+    // Verify no validateDOMNesting warnings
+    const domNestingErrors = consoleSpy.mock.calls.filter((call) => {
+      return (
+        call.length > 0 &&
+        typeof call[0] === 'string' &&
+        call[0].includes('validateDOMNesting')
+      )
+    })
+    expect(domNestingErrors).toHaveLength(0)
+
+    consoleSpy.mockRestore()
+  })
+
+  it('Supports both simple text and complex content', () => {
+    render(
+      <div>
+        <Banner data-testid="simple-banner">
+          <Banner.Message>Simple text message</Banner.Message>
+        </Banner>
+
+        <Banner data-testid="complex-banner">
+          <div>
+            <h3>Complex HTML content</h3>
+            <p>With multiple elements</p>
+          </div>
+        </Banner>
+
+        <Banner data-testid="direct-text-banner">
+          Just plain text without wrapper
+        </Banner>
+      </div>,
+    )
+
+    expect(screen.getByText('Simple text message')).toBeDefined()
+    expect(screen.getByText('Complex HTML content')).toBeDefined()
+    expect(screen.getByText('With multiple elements')).toBeDefined()
+    expect(screen.getByText('Just plain text without wrapper')).toBeDefined()
+  })
+  it('Supports Typography components for styled text', () => {
+    render(
+      <Banner>
+        <Banner.Icon variant="warning">
+          <Icon data={add} />
+        </Banner.Icon>
+        <div>
+          <Typography variant="body_short" style={{ fontWeight: 'bold' }}>
+            Styled heading with Typography
+          </Typography>
+          <Typography variant="body_long">
+            Descriptive text using Typography component
+          </Typography>
+        </div>
+        <Banner.Actions>
+          <button type="button">View details</button>
+        </Banner.Actions>
+      </Banner>,
+    )
+
+    expect(
+      screen.getByText('Styled heading with Typography'),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText('Descriptive text using Typography component'),
+    ).toBeInTheDocument()
+    expect(screen.getByText('View details')).toBeInTheDocument()
   })
 })

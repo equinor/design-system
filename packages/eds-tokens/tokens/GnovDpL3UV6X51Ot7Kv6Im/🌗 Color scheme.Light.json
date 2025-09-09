@@ -1271,21 +1271,7 @@
       }
     }
   },
-  "background-canvas": {
-    "$type": "color",
-    "$value": "{Light.Gray.1}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {}
-      }
-    }
-  },
-  "background-surface": {
+  "bg-floating": {
     "$type": "color",
     "$value": "{Light.Gray.2}",
     "$description": "",
@@ -1299,21 +1285,7 @@
       }
     }
   },
-  "background-elevated": {
-    "$type": "color",
-    "$value": "{Light.Gray.2}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {}
-      }
-    }
-  },
-  "background-backdrop": {
+  "bg-backdrop": {
     "$type": "color",
     "$value": "{Light.Gray.7}",
     "$description": "",
@@ -1327,7 +1299,7 @@
       }
     }
   },
-  "background-input": {
+  "bg-input": {
     "$type": "color",
     "$value": "{Light.Gray.1}",
     "$description": "",

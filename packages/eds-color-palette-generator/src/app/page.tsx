@@ -121,27 +121,27 @@ export default function App() {
   }, [colors])
 
   const updateColorName = (index: number, newName: string) => {
-    setColors(
-      colors.map((color, i) =>
-        i === index ? { ...color, name: newName } : color,
-      ),
+    // Use functional update to avoid stale state when multiple edits occur quickly
+    setColors((prev) =>
+      prev.map((color, i) => (i === index ? { ...color, name: newName } : color)),
     )
   }
 
   const updateColorHex = (index: number, newHex: string) => {
-    setColors(
-      colors.map((color, i) =>
-        i === index ? { ...color, hex: newHex } : color,
-      ),
+    // Use functional update to avoid stale state when multiple edits occur quickly
+    setColors((prev) =>
+      prev.map((color, i) => (i === index ? { ...color, hex: newHex } : color)),
     )
   }
 
   const removeColor = (index: number) => {
-    setColors(colors.filter((_, i) => i !== index))
+    // Functional update for consistency and to avoid state races
+    setColors((prev) => prev.filter((_, i) => i !== index))
   }
 
   const addColor = (newColor: ColorDefinition) => {
-    setColors([...colors, newColor])
+    // Functional update for consistency and to avoid state races
+    setColors((prev) => [...prev, newColor])
   }
 
   // Update a specific lightness value
@@ -362,7 +362,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
-            className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border border-neutral-subtle rounded-md cursor-pointer"
+            className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
           >
             Add colour
           </button>
@@ -398,7 +398,7 @@ export default function App() {
           <button
             type="button"
             onClick={resetConfiguration}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-fill-muted-default hover:bg-danger-fill-muted-hover border-none rounded-md"
             aria-label="Reset configuration changes"
             title="Reset configuration changes"
           >

@@ -43,7 +43,7 @@ function getSystemTextColorClassNameForStep({
   status: 'success' | 'danger'
 }): string {
   if (stepIndex >= 9 && stepIndex <= 13) {
-    return `text-${status}-contrast-subtle`
+    return `text-${status}-subtle-on-emphasis`
   }
 
   return `text-${status}-subtle`
@@ -135,7 +135,7 @@ function ColorScaleBase({
               value={name ?? ''}
               onChange={(e) => onRename?.(e.target.value)}
               placeholder="Color name"
-              className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium transition-colors"
+              className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium"
               style={{ color: headingColor }}
               aria-label="Color name"
             />
@@ -160,7 +160,7 @@ function ColorScaleBase({
             <button
               type="button"
               onClick={() => colorInputRef.current?.click()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-medium-hover"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover"
               title="Edit base color"
               aria-label="Edit base color"
             >
@@ -169,7 +169,7 @@ function ColorScaleBase({
             <button
               type="button"
               onClick={() => onRemove?.()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-medium-hover"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-fill-muted-hover"
               title="Remove color"
               aria-label="Remove color"
             >
@@ -419,7 +419,7 @@ function ColorScaleBase({
 
                   <div className="flex flex-col justify-center">
                     <button
-                      className="mb-2 font-mono text-base text-left hover:bg-black/10 dark:hover:bg-white/10 rounded px-2 py-1 -mx-2 transition-colors flex items-center gap-2 group"
+                      className="mb-2 font-mono text-base text-left hover:bg-black/10 dark:hover:bg-white/10 rounded px-2 py-1 -mx-2 flex items-center gap-2 group"
                       onClick={(e) => {
                         e.stopPropagation()
                         copyToClipboard(oklchInfo.hex, i)

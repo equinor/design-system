@@ -1,84 +1,84 @@
 {
-  "Background": {
+  "Bg": {
     "Neutral": {
-      "Default": "#f5f5f5",
-      "Subtle": "#fcfcfc",
-      "Medium": {
+      "Canvas": "#f5f5f5",
+      "Surface": "#fff",
+      "Fill Muted": {
         "Default": "#dbdbdb",
         "Hover": "#cecece",
         "Active": "#bebebe"
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": "#636363",
         "Hover": "#525252",
         "Active": "#4d4d4d"
       }
     },
     "Accent": {
-      "Default": "#eaf8fa",
-      "Subtle": "#f3feff",
-      "Medium": {
+      "Canvas": "#eaf8fa",
+      "Surface": "#f6ffff",
+      "Fill Muted": {
         "Default": "#c5e1e4",
         "Hover": "#b1d6da",
         "Active": "#97c8cd"
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": "#206f77",
         "Hover": "#205c62",
         "Active": "#20565c"
       }
     },
     "Success": {
-      "Default": "#eafbe8",
-      "Subtle": "#f3fff1",
-      "Medium": {
+      "Canvas": "#eafbe8",
+      "Surface": "#f6fff5",
+      "Fill Muted": {
         "Default": "#c5e5c2",
         "Hover": "#b1dbae",
         "Active": "#97cf93"
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": "#207720",
         "Hover": "#20621f",
         "Active": "#215c1f"
       }
     },
     "Info": {
-      "Default": "#e7f8ff",
-      "Subtle": "#f0feff",
-      "Medium": {
+      "Canvas": "#e7f8ff",
+      "Surface": "#f4ffff",
+      "Fill Muted": {
         "Default": "#c0e0f8",
         "Hover": "#aad4f3",
         "Active": "#8dc5ee"
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": "#006aa0",
         "Hover": "#085883",
         "Active": "#0e5279"
       }
     },
     "Warning": {
-      "Default": "#fff1e2",
-      "Subtle": "#fff8ec",
-      "Medium": {
+      "Canvas": "#fff1e2",
+      "Surface": "#fffcf0",
+      "Fill Muted": {
         "Default": "#f9d2b6",
         "Hover": "#f4c29d",
         "Active": "#eeae7c"
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": "#9b4900",
         "Hover": "#813e00",
         "Active": "#773a00"
       }
     },
     "Danger": {
-      "Default": "#ffecea",
-      "Subtle": "#fff5f4",
-      "Medium": {
+      "Canvas": "#ffecea",
+      "Surface": "#fff9f8",
+      "Fill Muted": {
         "Default": "#ffc6c4",
         "Hover": "#ffb2b0",
         "Active": "#ff9897"
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": "#bc002a",
         "Hover": "#9a1026",
         "Active": "#8e1525"
@@ -119,40 +119,40 @@
   },
   "Text": {
     "Neutral": {
-      "Subtle": "#4d4d4d",
+      "Subtle": "#585858",
       "Strong": "#1d1d1d",
-      "Contrast subtle": "#dedede",
-      "Contrast strong": "#ffffff"
+      "Subtle on emphasis": "#dedede",
+      "Strong on emphasis": "#fff"
     },
     "Accent": {
-      "Subtle": "#20565c",
+      "Subtle": "#1f6369",
       "Strong": "#141f20",
-      "Contrast subtle": "#cae4e7",
-      "Contrast strong": "#ffffff"
+      "Subtle on emphasis": "#cae4e7",
+      "Strong on emphasis": "#fff"
     },
     "Success": {
-      "Subtle": "#215c1f",
+      "Subtle": "#20691f",
       "Strong": "#142114",
-      "Contrast subtle": "#cae8c7",
-      "Contrast strong": "#ffffff"
+      "Subtle on emphasis": "#cae8c7",
+      "Strong on emphasis": "#fff"
     },
     "Info": {
-      "Subtle": "#0e5279",
+      "Subtle": "#015e8d",
       "Strong": "#121e27",
-      "Contrast subtle": "#c5e3f9",
-      "Contrast strong": "#ffffff"
+      "Subtle on emphasis": "#c5e3f9",
+      "Strong on emphasis": "#fff"
     },
     "Warning": {
-      "Subtle": "#773a00",
+      "Subtle": "#8a4100",
       "Strong": "#27190e",
-      "Contrast subtle": "#fad6bc",
-      "Contrast strong": "#ffffff"
+      "Subtle on emphasis": "#fad6bc",
+      "Strong on emphasis": "#fff"
     },
     "Danger": {
-      "Subtle": "#8e1525",
+      "Subtle": "#a50827",
       "Strong": "#2e1414",
-      "Contrast subtle": "#ffcbc9",
-      "Contrast strong": "#ffffff"
+      "Subtle on emphasis": "#ffcbc9",
+      "Strong on emphasis": "#fff"
     }
   }
 }

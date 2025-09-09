@@ -18,6 +18,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.b
 
 # Copy only package.json files for better Docker layer caching
 COPY packages/eds-color-palette-generator/package.json ./packages/eds-color-palette-generator/
+COPY packages/eds-tailwind/package.json ./packages/eds-tailwind/
 COPY packages/eds-tokens/package.json ./packages/eds-tokens/
 COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
 COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/

@@ -1,17 +1,17 @@
 {
-  "background-medium-default": "#dbdbdb",
-  "background-medium-hover": "#cecece",
-  "background-medium-active": "#bebebe",
-  "background-strong-default": "#636363",
-  "background-strong-hover": "#525252",
-  "background-strong-active": "#4d4d4d",
-  "background-default": "#f5f5f5",
-  "background-subtle": "#fcfcfc",
+  "bg-fill-muted-default": "#dbdbdb",
+  "bg-fill-muted-hover": "#cecece",
+  "bg-fill-muted-active": "#bebebe",
+  "bg-fill-emphasis-default": "#636363",
+  "bg-fill-emphasis-hover": "#525252",
+  "bg-fill-emphasis-active": "#4d4d4d",
+  "bg-canvas": "#f5f5f5",
+  "bg-surface": "#fff",
   "border-subtle": "#d4d4d4",
   "border-medium": "#aeaeae",
   "border-strong": "#696969",
-  "text-subtle": "#4d4d4d",
+  "text-subtle": "#585858",
   "text-strong": "#1d1d1d",
-  "text-contrast-subtle": "#dedede",
-  "text-contrast-strong": "#ffffff"
+  "text-subtle-on-emphasis": "#dedede",
+  "text-strong-on-emphasis": "#fff"
 }

@@ -1,17 +1,19 @@
 {
-  "Background": {
-    "Medium": {
-      "Default": "#ffc6c4",
-      "Hover": "#ffb2b0",
-      "Active": "#ff9897"
+  "Bg": {
+    "Fill": {
+      "Muted": {
+        "Default": "#ffc6c4",
+        "Hover": "#ffb2b0",
+        "Active": "#ff9897"
+      },
+      "Emphasis": {
+        "Default": "#bc002a",
+        "Hover": "#9a1026",
+        "Active": "#8e1525"
+      }
     },
-    "Strong": {
-      "Default": "#bc002a",
-      "Hover": "#9a1026",
-      "Active": "#8e1525"
-    },
-    "Default": "#ffecea",
-    "Subtle": "#fff5f4"
+    "Canvas": "#ffecea",
+    "Surface": "#fff9f8"
   },
   "Border": {
     "Subtle": "#ffbcba",
@@ -19,9 +21,9 @@
     "Strong": "#c6002d"
   },
   "Text": {
-    "Subtle": "#8e1525",
+    "Subtle": "#a50827",
     "Strong": "#2e1414",
-    "Contrast subtle": "#ffcbc9",
-    "Contrast strong": "#ffffff"
+    "Subtle on emphasis": "#ffcbc9",
+    "Strong on emphasis": "#fff"
   }
 }

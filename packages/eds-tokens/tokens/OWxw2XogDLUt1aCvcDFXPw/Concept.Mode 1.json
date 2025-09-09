@@ -1,40 +1,8 @@
 {
-  "Background": {
-    "Canvas": {
+  "Bg": {
+    "Floating": {
       "$type": "color",
-      "$value": "{background-canvas}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-color-background-canvas)"
-          }
-        }
-      }
-    },
-    "Surface": {
-      "$type": "color",
-      "$value": "{background-surface}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-color-background-surface)"
-          }
-        }
-      }
-    },
-    "Elevated": {
-      "$type": "color",
-      "$value": "{background-elevated}",
+      "$value": "{bg-floating}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -50,7 +18,23 @@
     },
     "Backdrop": {
       "$type": "color",
-      "$value": "{background-backdrop}",
+      "$value": "{bg-backdrop}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-background-backdrop)"
+          }
+        }
+      }
+    },
+    "Input": {
+      "$type": "color",
+      "$value": "{bg-input}",
       "$description": "",
       "$extensions": {
         "com.figma": {
