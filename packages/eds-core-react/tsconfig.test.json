@@ -5,7 +5,20 @@
     "noEmit": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    "types": ["jest", "@testing-library/jest-dom", "styled-components"]
+    "types": [
+      "jest",
+      "react",
+      "react-dom"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "paths": {
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"],
+      "react-dom": ["./node_modules/@types/react-dom"],
+      "react-dom/*": ["./node_modules/@types/react-dom/*"]
+    }
   },
   "include": [
     "src/**/*.test.ts*", 
