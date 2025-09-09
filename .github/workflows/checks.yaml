@@ -38,8 +38,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22.12.0'
-      - name: Enable corepack (pnpm from packageManager)
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
       # Fallback if cache miss (shouldn’t happen as job needs: setup)
       - name: Fallback checkout (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
