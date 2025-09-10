@@ -1,41 +1,20 @@
 # Use specific Node.js version for better reproducibility
-ARG NODE_VERSION=22.12.0-alpine
-ARG PNPM_VERSION=10.15.0
+FROM docker.io/node:22.12.0-alpine AS build
 
-FROM node:${NODE_VERSION} AS base
 LABEL org.opencontainers.image.title="EDS Documentation Site"
 LABEL org.opencontainers.image.description="Equinor Design System Documentation Site"
 LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
 
-RUN npm install -g pnpm@${PNPM_VERSION}
-
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy workspace configuration files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json nginx.conf ./
+# Install pnpm globally
+RUN npm install -g pnpm@10.15.0
 
-# Copy only package.json files for better Docker layer caching
-COPY apps/design-system-docs/package.json ./apps/design-system-docs/
-COPY packages/eds-tokens/package.json ./packages/eds-tokens/
-COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
-COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
-COPY packages/eds-core-react/package.json ./packages/eds-core-react/
-COPY packages/eds-utils/package.json ./packages/eds-utils/
-COPY packages/eds-icons/package.json ./packages/eds-icons/
+# Copy everything else
+COPY . ./
 
-# Install dependencies with frozen lockfile and clean cache
-RUN pnpm install --frozen-lockfile && \
-    pnpm store prune
-
-FROM base AS builder
-WORKDIR /app
-
-# Copy dependencies and source code
-COPY --from=deps /app ./
-COPY packages/ ./packages/
-COPY apps/design-system-docs/ ./apps/design-system-docs/
+# Install dependencies
+RUN pnpm install --frozen-lockfile
 
 # Build all necessary dependencies and docs
 RUN pnpm run build:token-sync && \
@@ -46,30 +25,18 @@ RUN pnpm run build:token-sync && \
     pnpm run build:core-react && \
     pnpm run build:docs
 
-FROM nginx:alpine AS runner
-WORKDIR /usr/share/nginx/html
+# Use unprivileged nginx image for better security
+FROM nginxinc/nginx-unprivileged:stable-alpine
 
-ENV USER=nextjs \
-    UID=12345
+# Copy built documentation site with proper ownership
+COPY --chown=101 --from=build /app/apps/design-system-docs/build/ /usr/share/nginx/html/
 
-# Create non-root user/group matching the Demo (Alpine-compatible flags)
-RUN addgroup -S -g "$UID" "$USER" && \
-    adduser -D -H -s /sbin/nologin -G "$USER" -u "$UID" "$USER"
+# Copy nginx configuration
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built documentation site
-COPY --from=builder /app/apps/design-system-docs/build/ ./
-
-# Copy nginx config from builder stage (where we copied it earlier)
-COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
-
-# Ensure required directories exist and are writable by non-root user
-# Limit scope of chown to Nginx runtime and content dirs
-RUN mkdir -p /var/cache/nginx /var/run/nginx /var/log/nginx && \
-    chown -R "$USER":"$USER" /usr/share/nginx /var/cache/nginx /var/run/nginx /var/log/nginx
-
-# Run Nginx as non-root using a numeric UID (Radix runAsNonRoot compatible)
-USER "$UID"
+# Use the nginx user (UID 101)
+USER 101
 
 EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+# Default nginx command (nginx-unprivileged runs in foreground by default)
