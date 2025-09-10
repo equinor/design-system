@@ -34,8 +34,8 @@ import { Tabs } from '@equinor/eds-core-react'
 import { useState } from 'react'
 
 function TabsExample() {
-  const [activeTab, setActiveTab] = useState(0)
-  const handleChange = (index: number) => {
+  const [activeTab, setActiveTab] = useState<number | string>(0)
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 return (
