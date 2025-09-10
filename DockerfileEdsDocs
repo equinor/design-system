@@ -14,7 +14,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy workspace configuration files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json nginx.conf ./
 
 # Copy only package.json files for better Docker layer caching
 COPY apps/design-system-docs/package.json ./apps/design-system-docs/
@@ -59,8 +59,8 @@ RUN addgroup -S -g "$UID" "$USER" && \
 # Copy built documentation site
 COPY --from=builder /app/apps/design-system-docs/build/ ./
 
-# Use a dedicated nginx configuration inspired by the Radix example
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy nginx config from builder stage (where we copied it earlier)
+COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
 
 # Ensure required directories exist and are writable by non-root user
 # Limit scope of chown to Nginx runtime and content dirs
