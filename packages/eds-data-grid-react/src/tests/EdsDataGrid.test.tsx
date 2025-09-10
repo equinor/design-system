@@ -5,7 +5,10 @@ import { columns } from './columns'
 import { Data, data } from './data'
 
 function generateLargeDataset(multiplier: number): Array<Data> {
-  return Array(multiplier).fill(data).flat() as Array<Data>
+  return Array.from(
+    { length: multiplier * data.length },
+    (_, i) => data[i % data.length],
+  )
 }
 
 function getMaxUpdateErrors(
