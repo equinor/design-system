@@ -54,40 +54,6 @@ return (
 
 ```
 
-**Type handling for onChange callback:**
-
-**For existing implementations (migration needed):**
-```tsx
-// Before (this will cause TypeScript errors)
-const handleChange = (index: number) => {
-  setActiveTab(index)
-}
-
-// After (simple migration)
-const handleChange = (index: number | string) => {
-  setActiveTab(index) // TypeScript will ensure this works safely
-}
-```
-
-**For numeric-only implementations:**
-```tsx
-// If you only need numeric indices and want type safety
-const handleChange = (value: number | string) => {
-  if (typeof value === 'number') {
-    setActiveTab(value)
-  }
-}
-```
-
-**For mixed string/numeric values (e.g., with routers):**
-```tsx  
-const handleChange = (value: number | string) => {
-  setActiveTab(value) // Works with both types
-}
-```
-
-**Migration note:** The `onChange` callback has always supported both `number` and `string` values, but the documentation previously showed incorrect typing. Update your callback parameter type from `(index: number)` to `(index: number | string)` to resolve TypeScript errors.
-
 ## Examples
 
 ### States
