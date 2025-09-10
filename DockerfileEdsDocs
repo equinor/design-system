@@ -75,6 +75,13 @@ RUN echo 'server { \
     add_header X-Content-Type-Options "nosniff"; \
 }' > /etc/nginx/conf.d/default.conf
 
+# Ensure required directories exist and are writable by non-root user
+RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx && \
+    chown -R nginx:nginx /usr/share/nginx /var/cache/nginx /var/run /var/log/nginx /etc/nginx/conf.d
+
+# Run Nginx as non-root to satisfy runAsNonRoot
+USER nginx
+
 EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
