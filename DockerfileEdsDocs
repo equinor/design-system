@@ -49,8 +49,15 @@ RUN pnpm run build:token-sync && \
 FROM nginx:alpine AS runner
 WORKDIR /usr/share/nginx/html
 
-# Copy built documentation site
-COPY --from=builder /app/apps/design-system-docs/build/ ./
+ENV USER=nginx \
+    UID=12345
+
+# Create non-root user
+RUN addgroup -S "$USER" && \
+    adduser -S --uid "$UID" "$USER"
+
+# Copy built documentation site with correct ownership
+COPY --from=builder --chown="$USER":"$USER" /app/apps/design-system-docs/build/ ./
 
 # Create nginx configuration for serving static site
 RUN echo 'server { \
@@ -77,10 +84,10 @@ RUN echo 'server { \
 
 # Ensure required directories exist and are writable by non-root user
 RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx && \
-    chown -R nginx:nginx /usr/share/nginx /var/cache/nginx /var/run /var/log/nginx /etc/nginx/conf.d
+    chown -R "$USER":"$USER" /usr/share/nginx /var/cache/nginx /var/run /var/log/nginx
 
-# Run Nginx as non-root to satisfy runAsNonRoot
-USER nginx
+# Run Nginx as non-root using a numeric UID (Radix runAsNonRoot compatible)
+USER "$UID"
 
 EXPOSE 3000
 
