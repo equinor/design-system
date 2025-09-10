@@ -1,8 +1,7 @@
 {
   "extends": "../../tsconfig.test.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "types": ["@testing-library/jest-dom"],
+    "moduleResolution": "node",
     "paths": {
       "react": ["./node_modules/@types/react"],
       "react/*": ["./node_modules/@types/react/*"],
@@ -12,8 +11,11 @@
   },
   "include": [
     "src/**/*.test.ts*",
-    "./jest.setup.ts",
-    "src/components/styled.d.ts" // Make sure styled.d.ts is included for tests
+    "src/**/*.spec.ts*",
+    "src/**/*.test.js*",
+    "src/**/*.spec.js*",
+    "jest.config.ts",
+    "src/**/*.d.ts"
   ],
-  "exclude": ["node_modules", "src/**/*.stories.ts*", "src/stories", "src/test"]
+  "exclude": ["node_modules"]
 }

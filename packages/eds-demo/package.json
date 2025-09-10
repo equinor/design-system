@@ -15,8 +15,8 @@
     "@types/mdx": "^2.0.13",
     "github-markdown-css": "^5.8.1",
     "next": "^15.5.2",
-    "react": "^19",
-    "react-dom": "^19",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "remark-gfm": "^4.0.1",
     "@equinor/eds-tokens": "workspace:*"
   },

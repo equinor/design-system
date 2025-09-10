@@ -2,7 +2,7 @@
   "name": "@equinor/eds-figma-broker",
   "version": "1.0.0",
   "engines": {
-    "pnpm": ">=4",
+    "pnpm": ">=10",
     "node": ">=10.0.0"
   },
   "description": "",

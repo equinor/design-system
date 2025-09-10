@@ -47,7 +47,7 @@
     "vite-plugin-dts": "^3.9.1"
   },
   "engines": {
-    "pnpm": ">=8",
-    "node": ">=18.0.0"
+    "pnpm": ">=10",
+    "node": ">=22"
   }
 }
