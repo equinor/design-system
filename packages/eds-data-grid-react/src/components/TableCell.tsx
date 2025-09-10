@@ -25,6 +25,17 @@ export const TableCell = styled(Table.Cell)<{
     if (p.$sticky && p.$pinned) return 'z-index: 13'
     if (p.$sticky || p.$pinned) return 'z-index: 12'
   }};
+  ${(p) => {
+    // Ensure sticky/pinned elements maintain their borders by setting box-sizing and background
+    if (p.$sticky || p.$pinned) {
+      return `
+        box-sizing: border-box;
+        background-color: ${tokens.colors.interactive.table__header__fill_resting.rgba};
+        background-clip: padding-box;
+      `
+    }
+    return ''
+  }};
   &:hover ${ResizeInner} {
     background: ${tokens.colors.interactive.primary__hover.rgba};
     opacity: 1;

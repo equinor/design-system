@@ -20,7 +20,17 @@ const StyledCell = styled(Table.Cell)<{
     return ''
   }}
   z-index: ${(p) => (p.$pinned ? 11 : 'auto')};
-  background-color: inherit;
+  ${(p) => {
+    // Ensure pinned elements maintain their borders by setting box-sizing and background
+    if (p.$pinned) {
+      return `
+        box-sizing: border-box;
+        background-color: inherit;
+        background-clip: padding-box;
+      `
+    }
+    return 'background-color: inherit;'
+  }};
 `
 
 export function TableBodyCell<T>({ cell }: Props<T>) {
