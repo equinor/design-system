@@ -82,6 +82,12 @@ RUN echo 'server { \
     add_header X-Content-Type-Options "nosniff"; \
 }' > /etc/nginx/conf.d/default.conf
 
+# Adjust main nginx.conf for non-root runtime
+# - Remove/disable the user directive (irrelevant when not root)
+# - Move PID file into a writable subdir we own
+RUN sed -i 's/^user \.\+;/# user disabled for non-root;/' /etc/nginx/nginx.conf && \
+    sed -i 's|^pid .*;|pid /var/run/nginx/nginx.pid;|' /etc/nginx/nginx.conf
+
 # Ensure required directories exist and are writable by non-root user
 # Limit scope of chown to only Nginx dirs; route logs to stdout/stderr
 RUN mkdir -p /var/cache/nginx /var/run/nginx /var/log/nginx && \
