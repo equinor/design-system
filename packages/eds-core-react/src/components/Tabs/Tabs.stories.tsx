@@ -169,7 +169,7 @@ export const Widths: StoryFn<TabsProps> = () => {
 }
 
 export const WithPanels: StoryFn<TabsProps> = () => {
-  const [activeTab, setActiveTab] = useState<number | string>(1)
+  const [activeTab, setActiveTab] = useState(1)
 
   const handleChange = (index: number | string) => {
     setActiveTab(index)
@@ -262,7 +262,7 @@ Router.decorators = [
 
 export const WithSearch: StoryFn<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
-  const [activeTab, setActiveTab] = useState<number | string>(0)
+  const [activeTab, setActiveTab] = useState(0)
 
   const handleOnTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -311,7 +311,7 @@ WithSearch.storyName = 'With search'
 
 export const WithInputInPanel: StoryFn<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
-  const [activeTab, setActiveTab] = useState<number | string>(0)
+  const [activeTab, setActiveTab] = useState(0)
 
   const handleOnTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -363,7 +363,7 @@ export const WithInputInPanel: StoryFn<TabsProps> = () => {
 WithInputInPanel.storyName = 'With input in panel'
 
 export const WithStyledComponent: StoryFn<TabsProps> = () => {
-  const [activeTab, setActiveTab] = useState<number | string>(1)
+  const [activeTab, setActiveTab] = useState(1)
 
   const handleChange = (index: number | string) => {
     setActiveTab(index)
@@ -395,7 +395,7 @@ WithStyledComponent.storyName = 'With styled component'
 export const Overflow: StoryFn<TabsProps> = () => {
   const list = useRef<HTMLDivElement>(null)
   const debounceScroll = useRef<ReturnType<typeof setTimeout>>(null)
-  const [activeTab, setActiveTab] = useState<number | string>(0)
+  const [activeTab, setActiveTab] = useState(0)
   const [containerWidth, setContainerWidth] = useState(0)
   const [totalWidth, setTotalWidth] = useState(0)
   const [prevDisabled, setPrevDisabled] = useState(true)
@@ -504,7 +504,7 @@ export const Overflow: StoryFn<TabsProps> = () => {
 Overflow.storyName = 'Overflow with next/previous buttons'
 
 export const OverflowScroll: StoryFn<TabsProps> = () => {
-  const [activeTab, setActiveTab] = useState<number | string>(0)
+  const [activeTab, setActiveTab] = useState(0)
 
   const handleChange = (index: number | string) => {
     setActiveTab(index)
@@ -528,7 +528,7 @@ export const OverflowScroll: StoryFn<TabsProps> = () => {
 OverflowScroll.storyName = 'Overflow with default scrollbar'
 
 export const OverflowScrollStyled: StoryFn<TabsProps> = () => {
-  const [activeTab, setActiveTab] = useState<number | string>(0)
+  const [activeTab, setActiveTab] = useState(0)
 
   const handleChange = (index: number | string) => {
     setActiveTab(index)
