@@ -35,7 +35,7 @@ import { useState } from 'react'
 
 function TabsExample() {
   const [activeTab, setActiveTab] = useState(0)
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 return (

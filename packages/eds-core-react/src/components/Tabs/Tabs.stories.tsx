@@ -171,7 +171,7 @@ export const Widths: StoryFn<TabsProps> = () => {
 export const WithPanels: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -268,7 +268,7 @@ export const WithSearch: StoryFn<TabsProps> = () => {
     const value = event.target.value
     setSearchText(value)
   }
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -317,7 +317,7 @@ export const WithInputInPanel: StoryFn<TabsProps> = () => {
     const value = event.target.value
     setSearchText(value)
   }
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -365,7 +365,7 @@ WithInputInPanel.storyName = 'With input in panel'
 export const WithStyledComponent: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -401,7 +401,7 @@ export const Overflow: StoryFn<TabsProps> = () => {
   const [prevDisabled, setPrevDisabled] = useState(true)
   const [nextDisabled, setNextDisabled] = useState(false)
 
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -506,7 +506,7 @@ Overflow.storyName = 'Overflow with next/previous buttons'
 export const OverflowScroll: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -530,7 +530,7 @@ OverflowScroll.storyName = 'Overflow with default scrollbar'
 export const OverflowScrollStyled: StoryFn<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
