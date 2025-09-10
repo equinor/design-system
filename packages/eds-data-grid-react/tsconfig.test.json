@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.test.base.json",
   "compilerOptions": {
     "moduleResolution": "node",
-    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "react": ["./node_modules/@types/react"],
       "react/*": ["./node_modules/@types/react/*"],
@@ -11,16 +10,12 @@
     }
   },
   "include": [
+    "src/**/*.test.ts*",
+    "src/**/*.spec.ts*",
+    "src/**/*.test.js*",
+    "src/**/*.spec.js*",
     "jest.config.ts",
-    "src/**/*.test.ts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.tsx",
-    "src/**/*.spec.tsx",
-    "src/**/*.test.js",
-    "src/**/*.spec.js",
-    "src/**/*.test.jsx",
-    "src/**/*.spec.jsx",
     "src/**/*.d.ts"
   ],
-  "exclude": []
+  "exclude": ["node_modules"]
 }
