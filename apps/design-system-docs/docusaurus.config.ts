@@ -15,7 +15,7 @@ const config: Config = {
   // },
 
   url: 'https://equinor.github.io',
-  baseUrl: '/design-system/',
+  baseUrl: '/',
 
   organizationName: 'equinor',
   projectName: 'design-system',
