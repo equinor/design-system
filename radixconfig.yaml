@@ -12,7 +12,7 @@ spec:
         from: develop
     - name: dev
       build:
-        from: copilot/*
+        from: feat/*
   components:
     - name: color-palette-generator
       dockerfileName: DockerfileColorPaletteGenerator
