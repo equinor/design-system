@@ -1,6 +1,6 @@
 import { Table } from '@equinor/eds-core-react'
 import { Row } from '@tanstack/react-table'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useCallback, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { useTableContext } from '../EdsDataGridContext'
 import { EdsDataGridProps } from '../EdsDataGridProps'
@@ -24,11 +24,41 @@ export function TableRow<T>({
   virtualItem,
 }: Props<T>) {
   const { rowClass, rowStyle } = useTableContext()
+  const isMountedRef = useRef(true)
+
+  // Set mounted flag to false on unmount to prevent measurements during cleanup
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false
+    }
+  }, [])
+
+  // Create a stable ref callback that guards against calls during unmount
+  const measureRef = useCallback(
+    (node: HTMLTableRowElement | null) => {
+      // Only measure if we have a node, the component is still mounted, and we have a virtualizer
+      if (node && isMountedRef.current && rowVirtualizer) {
+        try {
+          rowVirtualizer.measureElement(node)
+        } catch (error) {
+          // Silently catch any errors during measurement to prevent crashes
+          // This can happen if the virtualizer is in an inconsistent state during unmount
+          if (process.env.NODE_ENV === 'development') {
+            console.warn(
+              'Failed to measure element during virtualization:',
+              error,
+            )
+          }
+        }
+      }
+    },
+    [rowVirtualizer],
+  )
 
   return (
     <StyledTableRow
       data-index={virtualItem?.index}
-      ref={(node) => node && rowVirtualizer?.measureElement(node)} //measure dynamic row height
+      ref={measureRef} //measure dynamic row height safely
       style={{
         ...(rowStyle?.(row) ?? {}),
       }}
