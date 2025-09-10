@@ -49,15 +49,15 @@ RUN pnpm run build:token-sync && \
 FROM nginx:alpine AS runner
 WORKDIR /usr/share/nginx/html
 
-ENV USER=nginx \
+ENV USER=nextjs \
     UID=12345
 
-# Create non-root user
-RUN addgroup -S "$USER" && \
-    adduser -S --uid "$UID" "$USER"
+# Create non-root user/group matching the Demo (Alpine-compatible flags)
+RUN addgroup -S -g "$UID" "$USER" && \
+    adduser -D -H -s /sbin/nologin -G "$USER" -u "$UID" "$USER"
 
-# Copy built documentation site with correct ownership
-COPY --from=builder --chown="$USER":"$USER" /app/apps/design-system-docs/build/ ./
+# Copy built documentation site
+COPY --from=builder /app/apps/design-system-docs/build/ ./
 
 # Create nginx configuration for serving static site
 RUN echo 'server { \
@@ -83,8 +83,11 @@ RUN echo 'server { \
 }' > /etc/nginx/conf.d/default.conf
 
 # Ensure required directories exist and are writable by non-root user
-RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx && \
-    chown -R "$USER":"$USER" /usr/share/nginx /var/cache/nginx /var/run /var/log/nginx
+# Limit scope of chown to only Nginx dirs; route logs to stdout/stderr
+RUN mkdir -p /var/cache/nginx /var/run/nginx /var/log/nginx && \
+    chown -R "$USER":"$USER" /usr/share/nginx /var/cache/nginx /var/run/nginx /var/log/nginx /etc/nginx/conf.d && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Run Nginx as non-root using a numeric UID (Radix runAsNonRoot compatible)
 USER "$UID"
