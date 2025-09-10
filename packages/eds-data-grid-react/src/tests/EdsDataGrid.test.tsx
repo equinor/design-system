@@ -4,6 +4,22 @@ import { EdsDataGrid } from '../EdsDataGrid'
 import { columns } from './columns'
 import { Data, data } from './data'
 
+function generateLargeDataset(multiplier: number): Array<Data> {
+  return Array(multiplier).fill(data).flat() as Array<Data>
+}
+
+function getMaxUpdateErrors(
+  consoleError: jest.MockedFunction<typeof console.error>,
+) {
+  return consoleError.mock.calls.filter((call: unknown[]) =>
+    call.some(
+      (arg: unknown) =>
+        typeof arg === 'string' &&
+        arg.includes('Maximum update depth exceeded'),
+    ),
+  )
+}
+
 describe('EdsDataGrid', () => {
   beforeEach(() => {
     class ResizeObserver {
@@ -425,10 +441,7 @@ describe('EdsDataGrid', () => {
     })
 
     it('should show virtual scroll if enabled', () => {
-      let manyRows: Array<Data> = []
-      for (let i = 0; i < 200; i++) {
-        manyRows = [...manyRows, ...data]
-      }
+      const manyRows = generateLargeDataset(200)
       render(
         <EdsDataGrid enableVirtual={true} columns={columns} rows={manyRows} />,
       )
@@ -523,14 +536,10 @@ describe('EdsDataGrid', () => {
     })
   })
 })
-
 describe('EdsDataGrid unmounting with virtualization', () => {
   it('should not crash when unmounting virtualized data grid', () => {
     // Create a larger dataset to trigger virtualization
-    let manyRows: Array<Data> = []
-    for (let i = 0; i < 100; i++) {
-      manyRows = [...manyRows, ...data]
-    }
+    const manyRows = generateLargeDataset(100)
 
     // Mock console.error to catch any maximum update depth errors
     const originalError = console.error
@@ -552,15 +561,7 @@ describe('EdsDataGrid unmounting with virtualization', () => {
       unmount()
 
       // Check that no maximum update depth errors were logged
-      const maxUpdateErrors = consoleError.mock.calls.filter(
-        (call: unknown[]) =>
-          call.some(
-            (arg: unknown) =>
-              typeof arg === 'string' &&
-              arg.includes('Maximum update depth exceeded'),
-          ),
-      )
-
+      const maxUpdateErrors = getMaxUpdateErrors(consoleError)
       expect(maxUpdateErrors).toHaveLength(0)
     } finally {
       console.error = originalError
@@ -569,10 +570,7 @@ describe('EdsDataGrid unmounting with virtualization', () => {
 
   it('should not crash when quickly mounting and unmounting virtualized data grid', () => {
     // Create a larger dataset to trigger virtualization
-    let manyRows: Array<Data> = []
-    for (let i = 0; i < 100; i++) {
-      manyRows = [...manyRows, ...data]
-    }
+    const manyRows = generateLargeDataset(100)
 
     // Mock console.error to catch any maximum update depth errors
     const originalError = console.error
@@ -595,15 +593,7 @@ describe('EdsDataGrid unmounting with virtualization', () => {
       }
 
       // Check that no maximum update depth errors were logged
-      const maxUpdateErrors = consoleError.mock.calls.filter(
-        (call: unknown[]) =>
-          call.some(
-            (arg: unknown) =>
-              typeof arg === 'string' &&
-              arg.includes('Maximum update depth exceeded'),
-          ),
-      )
-
+      const maxUpdateErrors = getMaxUpdateErrors(consoleError)
       expect(maxUpdateErrors).toHaveLength(0)
     } finally {
       console.error = originalError
@@ -612,10 +602,7 @@ describe('EdsDataGrid unmounting with virtualization', () => {
 
   it('should simulate tab navigation scenario from issue', () => {
     // Create large dataset to trigger virtualization
-    let manyRows: Array<Data> = []
-    for (let i = 0; i < 200; i++) {
-      manyRows = [...manyRows, ...data]
-    }
+    const manyRows = generateLargeDataset(200)
 
     // Mock console.error to catch any maximum update depth errors
     const originalError = console.error
@@ -640,15 +627,7 @@ describe('EdsDataGrid unmounting with virtualization', () => {
       unmount()
 
       // Ensure no infinite update loops were triggered
-      const maxUpdateErrors = consoleError.mock.calls.filter(
-        (call: unknown[]) =>
-          call.some(
-            (arg: unknown) =>
-              typeof arg === 'string' &&
-              arg.includes('Maximum update depth exceeded'),
-          ),
-      )
-
+      const maxUpdateErrors = getMaxUpdateErrors(consoleError)
       expect(maxUpdateErrors).toHaveLength(0)
     } finally {
       console.error = originalError
