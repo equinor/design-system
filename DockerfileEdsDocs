@@ -1,0 +1,80 @@
+# Use specific Node.js version for better reproducibility
+ARG NODE_VERSION=22.12.0-alpine
+ARG PNPM_VERSION=10.15.0
+
+FROM node:${NODE_VERSION} AS base
+LABEL org.opencontainers.image.title="EDS Documentation Site"
+LABEL org.opencontainers.image.description="Equinor Design System Documentation Site"
+LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
+
+RUN npm install -g pnpm@${PNPM_VERSION}
+
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Copy workspace configuration files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
+
+# Copy only package.json files for better Docker layer caching
+COPY apps/design-system-docs/package.json ./apps/design-system-docs/
+COPY packages/eds-tokens/package.json ./packages/eds-tokens/
+COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
+COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
+COPY packages/eds-core-react/package.json ./packages/eds-core-react/
+COPY packages/eds-utils/package.json ./packages/eds-utils/
+COPY packages/eds-icons/package.json ./packages/eds-icons/
+
+# Install dependencies with frozen lockfile and clean cache
+RUN pnpm install --frozen-lockfile && \
+    pnpm store prune
+
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies and source code
+COPY --from=deps /app ./
+COPY packages/ ./packages/
+COPY apps/design-system-docs/ ./apps/design-system-docs/
+
+# Build all necessary dependencies and docs
+RUN pnpm run build:token-sync && \
+    pnpm run build:tokens-build && \
+    pnpm run build:tokens && \
+    pnpm run build:utils && \
+    pnpm run build:icons && \
+    pnpm run build:core-react && \
+    pnpm run build:docs
+
+FROM nginx:alpine AS runner
+WORKDIR /usr/share/nginx/html
+
+# Copy built documentation site
+COPY --from=builder /app/apps/design-system-docs/build/ ./
+
+# Create nginx configuration for serving static site
+RUN echo 'server { \
+    listen 3000; \
+    server_name localhost; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    \
+    # Handle client-side routing \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+    \
+    # Cache static assets \
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ { \
+        expires 1y; \
+        add_header Cache-Control "public, immutable"; \
+    } \
+    \
+    # Security headers \
+    add_header X-Frame-Options "SAMEORIGIN"; \
+    add_header X-Content-Type-Options "nosniff"; \
+}' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 3000
+
+CMD ["nginx", "-g", "daemon off;"]
