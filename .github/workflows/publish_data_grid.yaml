@@ -11,6 +11,14 @@ on:
           - next
           - latest
         default: 'next'
+      environment:
+        description: 'Environment for Storybook (development | production)'
+        required: false
+        type: choice
+        options:
+          - development
+          - production
+        default: 'development'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
