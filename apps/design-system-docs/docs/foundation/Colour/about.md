@@ -1,6 +1,8 @@
 # About
 
-A gorgeous, accessible color system for user interfaces. The system is built on **semantic colours** – names that describe their intended usage. This ensures designers and developers speak the same language and helps keep interfaces consistent and accessible.
+The EDS colour system is designed to make interfaces clear, consistent, and accessible for everyone. The system is built on **semantic colours** – names that describe their intended usage.  This way, designers and developers share the same language and can work smoothly together.
+Each colour has a role, from text and borders to backgrounds and interactive states, so you don't have to guess which one to use. Behind the scenes, every pairing is tested with the APCA contrast algorithm to make sure readability and accessibility are built in — across both light and dark themes.
+In short: a colour system that’s thought through, tested, and ready to support your work.
 
 ## Semantic Categories
 
