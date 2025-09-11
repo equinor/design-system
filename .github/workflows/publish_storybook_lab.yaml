@@ -33,14 +33,23 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-production-lab-storybook
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Build packages
         id: build-packages
-        run: node_modules/.bin/pnpm run build
+        run: pnpm run build
       - name: Build Storybook
         id: build-storybook
         run: |
           echo Running build:storybook:lab!
-          node_modules/.bin/pnpm build:storybook:lab
+          pnpm build:storybook:lab
   publish-storybook:
     needs: [setup, packages]
     name: Build & Deploy Website
