@@ -1,4 +1,4 @@
-# Colour
+# Colour (Old)
 
 The EDS's look and feel is light and airy. Colour helps show hierarchy, champion the Equinor brand and indicate interactivity.
 
@@ -21,8 +21,6 @@ Energy Red is strategically not used for components in EDS since it is easy to m
 ### Dark mode
 
 Dark mode is only available in Figma at the moment.
-
-  
 
 #### Primary colours
 
@@ -90,8 +88,6 @@ The `Infographic Substitute` colours have been developed for enhanced legibili
 
 If it is needed to use additional interactive or infographic colours for domain-specific requirements, make sure to test the added colours for contrast. This is for domain-specific cases only, and new colours are not to be chosen based on personal preferences. Use high contrast colours, as this both increases general readability and includes the needs of users with impaired vision.
 
-
-
 # Design
 
 When expanded use tab to review current page headings and press enter or space to navigate to the selected section
@@ -106,10 +102,7 @@ The EDS's look and feel is light and airy. Colour helps show hierarchy, champion
 
 ### How to add
 
-1.  Locate the _layer_ in the **Layers Panel** that needs colour applied.
-    
+1.  Locate the *layer* in the **Layers Panel** that needs colour applied.
 2.  Locate the **Design** tab in the **Inspector Panel**.
-    
 3.  Under the **Fill** section, open the **Style library** menu to view the colour styles in order of relevance.
-    
 4.  Hover styles to see their names and supplemental information. Choose a style by clicking on the colour needed.

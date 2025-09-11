@@ -1,4 +1,4 @@
-# Colour
+# Colour (old)
 
 The EDS's look and feel is light and airy. Colour helps show hierarchy, champion the Equinor brand and indicate interactivity.
 
@@ -21,8 +21,6 @@ Energy Red is strategically not used for components in EDS since it is easy to m
 ### Dark mode
 
 Dark mode is only available in Figma at the moment.
-
-  
 
 #### Primary colours
 
@@ -89,8 +87,6 @@ The `Infographic Substitute` colours have been developed for enhanced legibili
 ### Exceptions for interactive and infographic colours only
 
 If it is needed to use additional interactive or infographic colours for domain-specific requirements, make sure to test the added colours for contrast. This is for domain-specific cases only, and new colours are not to be chosen based on personal preferences. Use high contrast colours, as this both increases general readability and includes the needs of users with impaired vision.
-
-
 
 # Elevation
 
@@ -182,8 +178,6 @@ Shadow
 
 Add notes
 
-
-
 # Grid
 
 When expanded use tab to review current page headings and press enter or space to navigate to the selected section
@@ -200,12 +194,9 @@ Screen size is determined by the device and the user's window size. The EDS grid
 
 ### Grid layouts
 
--   It is the responsibility of the designer to define a maximum width and choose the correct grid.
-    
--   It is up to the designer to make sure the design will scale correctly on all sizes. Start with a viewport that is the most common for the users. Make sure to test that the content will fit at smaller and larger viewports.
-    
--   It is the responsibility of the developers to implement the maximum width and use the grid as designed.
-    
+- It is the responsibility of the designer to define a maximum width and choose the correct grid.
+- It is up to the designer to make sure the design will scale correctly on all sizes. Start with a viewport that is the most common for the users. Make sure to test that the content will fit at smaller and larger viewports.
+- It is the responsibility of the developers to implement the maximum width and use the grid as designed.
 
 Tip: _Always remember to test designs and code by scaling the screen size or changing the orientation of the device._
 
@@ -219,56 +210,42 @@ When using a canvas navigation drawer or sidesheet, the content container could 
 
 The columns used in the grid are **fluid** in width. There is not a defined width.
 
--   `Grid/Large`
-    
-    -   Use in content areas that are between 840px and larger.
-        
--   `Grid/Medium`
-    
-    -   Use in content areas that are 600--839px.
-        
--   `Grid/Small`
-    
-    -   Use in content areas that are 0--599px.
-        
+- `Grid/Large`
+  - Use in content areas that are between 840px and larger.
+
+- `Grid/Medium`
+  - Use in content areas that are 600--839px.
+
+- `Grid/Small`
+  - Use in content areas that are 0--599px.
 
 ### Grid margins
 
 Grid margins are the space at the outer edge of the grid against the frame's edge. Grid styles are available with and without margins. It is up to the designer to decide which works best for your interface.
 
--   `Grid/Large`
-    
-    -   Margins are set to 32px.
-        
--   `Grid/Medium`
-    
-    -   Margins are set to 24px.
-        
--   `Grid/Small`
-    
-    -   Margins are set to 16px.
-        
+- `Grid/Large`
+  - Margins are set to 32px.
+
+- `Grid/Medium`
+  - Margins are set to 24px.
+
+- `Grid/Small`
+  - Margins are set to 16px.
 
 ### Grid gutters
 
 Grid gutters are the space in between the columns of the grid.
 
--   `Grid/Large`
-    
-    -   Gutters are set to 16px.
-        
--   `Grid/Medium`
-    
-    -   Gutters are set to 16px.
-        
--   `Grid/Small`
-    
-    -   Gutters are set to 8px.
-        
+- `Grid/Large`
+  - Gutters are set to 16px.
 
--   Visit  for more details on on how to use the grid together with components.
+- `Grid/Medium`
+  - Gutters are set to 16px.
 
+- `Grid/Small`
+  - Gutters are set to 8px.
 
+- Visit  for more details on on how to use the grid together with components.
 
 # Shape
 
@@ -368,8 +345,6 @@ Field
 
 Add notes
 
-
-
 # Spacing
 
 When expanded use tab to review current page headings and press enter or space to navigate to the selected section
@@ -386,12 +361,9 @@ Spacing is used to apply margin and padding across all platforms. The EDS has a 
 
 The spacers `XX Small` and `X Small` are only to be used inside of components, while the spacers `Small` up to `XXX Large` can be used both within and between components.
 
--   Always make sure to follow the  by having 8px of spacing between each clickbound.
-    
+- Always make sure to follow the  by having 8px of spacing between each clickbound.
 
 There are eight spacers to choose between: `XX Small`, `X Small`,  `Small`, `Medium`, `Large`, `X Large`, `XX Large` and `XXX Large`. The spacers `XX Small` and `X Small` are only to be used inside components, while the other spacers are to be used in layouts.
-
-
 
 # Typography
 
