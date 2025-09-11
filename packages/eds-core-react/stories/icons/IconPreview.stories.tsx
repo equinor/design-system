@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { HeaderMdx } from '@storybook/blocks'
+import { HeaderMdx } from '@storybook/addon-docs/blocks'
 import styled from 'styled-components'
 import { Icon, Button, Typography, Search } from '../../src'
 import { download, IconData } from '@equinor/eds-icons'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
+// @ts-expect-error: MDX import for Storybook docs
 import page from './IconPreview.docs.mdx'
 
 const meta: Meta = {
