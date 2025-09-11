@@ -6,7 +6,9 @@ In short: a colour system that’s thought through, tested, and ready to support
 
 ## Semantic Categories
 
-Colours are grouped into the following **semantic categories**:
+Each colour belongs to a **semantic category** that reflects its purpose — whether it’s highlighting information, giving feedback, or building the base layers of an interface.
+
+**Colours are grouped into the following categories:**
 
 - **Accent** – brand and highlight colours
 - **Neutral** – base and supporting colours
