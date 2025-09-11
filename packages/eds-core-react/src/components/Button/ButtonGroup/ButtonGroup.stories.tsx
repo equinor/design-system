@@ -8,8 +8,8 @@ import {
   Menu,
 } from '../../..'
 import { arrow_drop_down } from '@equinor/eds-icons'
-import { StoryFn, Meta } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
+import { StoryFn, Meta } from '@storybook/react-vite'
+import { action } from 'storybook/actions'
 import { Stack } from './../../../../.storybook/components'
 import page from './ButtonGroup.docs.mdx'
 

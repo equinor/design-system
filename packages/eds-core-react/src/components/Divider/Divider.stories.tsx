@@ -7,7 +7,7 @@ import {
   DividerProps,
   Typography,
 } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Divider.docs.mdx'
 

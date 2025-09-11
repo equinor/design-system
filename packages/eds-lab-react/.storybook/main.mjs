@@ -2,29 +2,21 @@ const config = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
+
   stories: [
     '../stories/docs/*.@(mdx|stories.@(ts|tsx))',
     '../src/**/*.@(mdx|stories.@(ts|tsx))',
     '../stories/**/*.@(mdx|stories.@(ts|tsx))',
   ],
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-links',
-    '@storybook/addon-actions',
-    '@storybook/addon-docs',
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        docs: false,
-        actions: false,
-      },
-    },
-  ],
+
+  addons: ['@storybook/addon-a11y', '@storybook/addon-links', '@storybook/addon-docs'],
   core: {},
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+
   async viteFinal(config) {
     return {
       ...config,
@@ -43,9 +35,10 @@ const config = {
       },
     }
   },
-  docs: {
-    autodocs: true,
-  },
+
+  features: {
+    actions: false
+  }
 }
 
 export default config

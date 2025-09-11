@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { TopBar, Icon, Search, TopbarProps, Typography } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import page from './TopBar.docs.mdx'
 
 import {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Progress, DotProgressProps, Typography, Button } from '../../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../../.storybook/components'
 import page from './Dots.docs.mdx'
 

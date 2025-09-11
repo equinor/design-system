@@ -1,6 +1,6 @@
 import { Progress, LinearProgressProps, Button } from '../../..'
 import { useState, useEffect, useRef } from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { useMockProgress } from '../../../stories'
 import { Stack } from './../../../../.storybook/components'
 import page from './Linear.docs.mdx'

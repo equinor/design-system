@@ -1,6 +1,6 @@
 import { Card, Divider, Typography, TypographyProps } from '../..'
 import styled from 'styled-components'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Typography.docs.mdx'
 import { tokens, Typography as TypographyType } from '@equinor/eds-tokens'

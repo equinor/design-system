@@ -8,7 +8,7 @@ import {
   Checkbox,
   Typography,
 } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './EdsProvider.docs.mdx'
 import { EdsProviderProps, useEds } from './eds.context'

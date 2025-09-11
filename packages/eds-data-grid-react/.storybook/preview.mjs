@@ -1,5 +1,6 @@
 const preview = {
   viewMode: 'docs',
+
   parameters: {
     options: {
       storySort: {
@@ -7,5 +8,7 @@ const preview = {
       },
     },
   },
+
+  tags: ['autodocs']
 }
 export default preview

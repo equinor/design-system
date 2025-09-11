@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Textarea, TextareaProps } from '../Textarea'
 import page from './Textarea.docs.mdx'
 

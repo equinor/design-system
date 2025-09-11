@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Progress, CircularProgressProps, Button, Typography } from '../../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { useMockProgress } from '../../../stories'
 import { Stack } from './../../../../.storybook/components'
 import page from './Circular.docs.mdx'

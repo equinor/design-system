@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Paper, PaperProps, Typography } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Paper.docs.mdx'
 

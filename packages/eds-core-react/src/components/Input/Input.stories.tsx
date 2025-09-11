@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { anchor, done } from '@equinor/eds-icons'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import styled from 'styled-components'

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import page from './NativeSelect.docs.mdx'
 
 const meta: Meta<typeof NativeSelect> = {
