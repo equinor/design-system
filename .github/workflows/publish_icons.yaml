@@ -39,9 +39,18 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-production-icons
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Build packages
         id: build-packages
-        run: node_modules/.bin/pnpm run build
+        run: pnpm run build
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
@@ -64,8 +73,8 @@ jobs:
       - name: Publish to npm
         id: publish-to-npm
         run: |
-          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
-          node_modules/.bin/pnpm --filter ./packages/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
+          pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          pnpm --filter ./packages/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
