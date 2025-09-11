@@ -14,6 +14,15 @@ pnpm add @equinor/eds-tokens
 import { tokens } from '@equinor/eds-tokens'
 ```
 
+CSS custom properties are also available:
+
+```css
+@import '@equinor/eds-tokens/css/variables-static.css'; /* or variables-dynamic.css */
+```
+
+`variables-static.css` exposes tokens with fixed values, while
+`variables-dynamic.css` includes dynamic semantic color tokens.
+
 ## Tokens
 
 - Clickbounds

@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.49.0] - 2025-09-11
+
+## Added
+
+- ✨ Always show "add new option" in Autocomplete when onAddNewOption is provided by @FredrikMWold in https://github.com/equinor/design-system/pull/3924
+
+## Fixed
+
+- 🐛 Autocomplete - Don't call onOptionsChange when clicking "Add new" by @FredrikMWold in https://github.com/equinor/design-system/pull/3932
+- 🐛 Table - Fix Firefox table header wrapping issue by @pomfrida in https://github.com/equinor/design-system/pull/3957
+- 🐛 Tabs documentation type mismatch - update onChange parameter from number to number | string by @Copilot @torleifhalseth in https://github.com/equinor/design-system/pull/3972
+
+## Changed
+
+- 📝 Banner - clarify complex content usage patterns and improve examples by @pomfrida in https://github.com/equinor/design-system/pull/3961
+- 🔥 Remove individual package lockfiles by @pomfrida in https://github.com/equinor/design-system/pull/3930
+- ⬆️ Upgrade dependencies in all packages by @pomfrida in https://github.com/equinor/design-system/pull/3933
+- ⬆️ Upgrade pnpm to v10 and node to v22 by @torleifhalseth in https://github.com/equinor/design-system/pull/3964
+- ⬆️ Storybook v9 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/3976
+
 ## [0.48.0] - 2025-08-27
 
 ## Added
