@@ -76,7 +76,8 @@ In addition to categories like backgrounds, borders, and text, EDS includes a fe
 
 ## Features
 
-- Contrast targets are based on the modern APCA contrast algorithm, which accurately predicts how human vision perceives text.
-- Automatic dark mode - Switching to dark theme is as simple as applying a class to a container. The system supports both **light** and **dark colour schemes**
-- Designed for user interfaces - Each colour is designed with a specific use case in mind, such as backgrounds, hover states, borders, overlays, or text.
-- Text colours are guaranteed to pass target contrast ratios against the corresponding background colours.
+The EDS colour system includes built-in features that make it easy to design and build accessible, consistent interfaces.
+- **Accessible by design** – Contrast targets are based on the APCA algorithm, which models how human vision perceives text on different backgrounds. This ensures readability you can trust.
+- **Light and dark themes** - Switching theme is as simple as applying a class to a container. Colours adapt automatically to keep contrast and clarity.
+- **Purpose-built** - Every colour has a defined role in the interface, from surfaces and borders to states and overlays.
+- **Reliable text contrast** – Text colours always meet their intended contrast target against the matching background.
