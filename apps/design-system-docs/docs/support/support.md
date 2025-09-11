@@ -6,9 +6,9 @@ We are here to help you make the most of the Equinor Design System. Whether you 
 
 If you have a question or need guidance, please reach out to the EDS core team:
 
-- Email: [eds-support@equinor.com](mailto:eds-support@equinor.com) (internal Equinor)
-- Teams: EDS Core Team (internal Equinor)
 - Slack: #eds-support (internal Equinor)
+- Teams: EDS Core Team (internal Equinor)
+- Email: [fg_eds@equinor.com](mailto:fg_eds@equinor.com) (internal Equinor)
 
 We aim to respond promptly and ensure you have the support you need.
 
