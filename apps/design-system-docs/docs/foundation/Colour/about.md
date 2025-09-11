@@ -25,7 +25,9 @@ Within each category, we have colours for:
 
 ## Backgrounds
 
-### Canvas & Surface
+Backgrounds form the foundation of an interface. They define layers, create depth, and ensure that text and components remain easy to read.
+
+### Available background roles:
 
 - **Canvas**: the application background.
 - **Surface**: placed on top of canvas to create **hierarchical depth** in layouts.
@@ -41,11 +43,19 @@ Background fill provide a **default, hover, and active** state variant.
 
 ## Borders
 
+Borders help separate content and add structure. They help organise content and guide focus without overwhelming the design.
+
+### Available border roles:
+
 - **Subtle** – separators, dividers, light structure
 - **Medium** – general borders and controls
 - **Strong** – emphasis or interactive elements
 
 ## Text
+
+Text colours ensure content is always readable and clear, no matter the background. They also create hierarchy, helping users distinguish what’s most important.
+
+### Available text roles:
 
 - **Strong** – default text colour in the application
 - **Subtle** – secondary text, hints, or less important content
@@ -54,7 +64,9 @@ Background fill provide a **default, hover, and active** state variant.
 
 ## Concepts
 
-Some tokens are **globally** used across the system:
+In addition to categories like backgrounds, borders, and text, EDS includes a few **global tokens** used across many components and patterns.
+
+### Some tokens are globally used across the system:
 
 - **bg-floating** – elements floating above surfaces (tooltips, menus)
 - **bg-backdrop** – dimming layer behind modals or overlays
