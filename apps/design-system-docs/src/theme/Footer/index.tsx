@@ -2,10 +2,6 @@ import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common'
 import GithubSvg from '../../images/github-logo.svg'
 import FigmaSvg from '../../images/figma-logo.svg'
 
-// import TwitterSvg from '../../images/twitter-logo.svg'
-// import SlackSvg from '../../images/slack-logo.svg'
-// import FacebookSvg from '../../images/facebook-logo.svg'
-
 import Link from '@docusaurus/Link'
 
 interface FooterColumnItem {
@@ -86,13 +82,7 @@ function Footer(): JSX.Element | null {
     <>
       <footer className="footer">
         <div className="footer__container">
-          <div
-            className="footer__copyright"
-            // Developer provided the HTML, so assume it's safe.
-            // eslint-disable-next-line react/no-danger
-          >
-            {copyright}
-          </div>
+          <div className="footer__copyright">{copyright}</div>
           {links && links.length > 0 && <FooterLinks links={links} />}
         </div>
       </footer>
