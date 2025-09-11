@@ -64,8 +64,6 @@ const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
                     rel="noopener noreferrer"
                   >
                     {icon}
-                    {/* Only for screen readers */}
-                    <span className="sr-only">(opens in new tab)</span>
                   </Link>
                 )
               })

@@ -89,25 +89,6 @@
     border 200ms ease-in;
 }
 
-/**
- * Screen Reader Only
- * 
- * Makes content visually hidden but still accessible to screen readers.
- * This utility class is used to hide content visually while keeping it accessible
- * to assistive technologies like screen readers, which is important for accessibility.
- */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* ======================================
  * SIDEBAR NAVIGATION
  * ====================================== */
