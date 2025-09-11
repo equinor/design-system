@@ -1,27 +1,39 @@
-# Support 
+# Support
 
-### Get in touch
+We are here to help you make the most of the Equinor Design System. Whether you are a developer, designer, QA, or part of a non-IT team, our support team is ready to assist you with advice, onboarding, questions, suggestions, and contributions.
 
-The  maintains and provides support for the EDS and are here to help.
+## How to Get Help
 
-They can assist with advice, onboarding, questions, improvement suggestions and incorporating contributions.
+If you have a question or need guidance, please reach out to the EDS core team:
 
-Get in touch with the EDS core team here:
+- Slack: #eds-support (internal Equinor)
+- Teams: EDS Core Team (internal Equinor)
+- Email: [fg_eds@equinor.com](mailto:fg_eds@equinor.com) (internal Equinor)
 
--    (internal Equinor)
-    
--   
--    (internal Equinor)
-    
+We aim to respond promptly and ensure you have the support you need.
 
-### Report a bug
+## Reporting Bugs
 
-GitHub users can create a  and fill out the bug template.
+If you find a bug, please let us know so we can address it quickly:
 
-Non-GitHub users can get in touch using the channels above.
+- GitHub users: [Create an issue](https://github.com/equinor/design-system/issues) and fill out the bug template.
+- Non-GitHub users: Contact us using the channels above.
 
-### Request a feature
+## Requesting Features
 
-GitHub users can create a  and fill out the feature request template.
+If you have an idea for a new feature or improvement:
 
-Non-GitHub users can get in touch using the channels above. Examples of feature requests can be added to  in Figma.
+- GitHub users: [Create a feature request](https://github.com/equinor/design-system/issues) and fill out the template.
+- Non-GitHub users: Share your ideas with us through email, Teams, or Slack. You can also add examples to the EDS Figma file.
+
+## Frequently Asked Questions
+
+Visit our FAQ section for answers to common questions and troubleshooting tips. If you cannot find what you need, please contact us directly.
+
+## Contributing and Feedback
+
+We welcome your feedback and contributions. If you would like to help improve the design system, please see our [contribution guide](https://github.com/equinor/design-system/blob/develop/CONTRIBUTING.md) or reach out to the team.
+
+---
+
+Thank you for helping us build a better design system. We look forward to supporting you and working together to create great user experiences.
