@@ -10,7 +10,14 @@ module.exports = {
     requireConfigFile: false,
     sourceType: 'module',
   },
-  extends: ['eslint:recommended', 'plugin:import/errors', 'plugin:import/warnings', 'plugin:prettier/recommended', 'prettier', 'plugin:storybook/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:prettier/recommended',
+    'prettier',
+    'plugin:storybook/recommended',
+  ],
   plugins: ['prettier', 'import'],
   rules: {
     'prettier/prettier': ['error'],
