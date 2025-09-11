@@ -1,6 +1,6 @@
 # Documentation Tone and Style
 
-Our documentation should sound consistent, clear and approachable. To achieve this, we've agreed on two official styles: Sprout-inspired and Minimalist. 
+Our documentation should sound consistent, clear and approachable. To achieve this, we've agreed on three official styles: Friendly-Professional and Minimalist and a blend of both. 
 These styles will be used as the foundation for all documentation.
 
 
@@ -56,3 +56,31 @@ Accessible: Language is simple, avoiding jargon and complex sentence structures.
 
 Overall, minimalist documentation prioritizes clarity, ease of use, and a clean reading experience,
 helping users find what they need quickly without distraction.
+
+
+
+# 3. Blend: Friendly-Minimalist Style
+
+The friendly-minimalist tone blends warmth and inclusivity with clarity and brevity.
+It aims to make documentation approachable and professional while keeping it concise and easy to scan.
+This style balances the supportive voice of Friendly-Professional with the streamlined efficiency of Minimalist, ensuring content is welcoming without being wordy.
+The goal is to create documentation that is accessible to all readers, reduces cognitive load, and still feels human.
+
+Its tone is:
+
+Approachable but concise: Content is warm and inclusive, but sentences are short and to the point.
+
+Clear and scannable: Uses paragraphs as the default, with bullet points or lists only when the content naturally calls for them (e.g., steps, rules).
+
+Professional yet friendly: The voice is confident and supportive, without being casual or playful.
+
+Efficient but contextual: Provides enough explanation to be clear to both IT and non-IT readers, while avoiding unnecessary detail.
+
+Active and direct: Sentences use active voice and straightforward phrasing.
+
+Consistent: Terminology, structure, and formatting remain uniform, ensuring readability.
+
+Oxford English: Always follows Oxford English spelling conventions (e.g., organise, recognise, analyse).
+
+Overall, the friendly-minimalist tone creates documentation that is both approachable and efficient —
+it supports readers with a professional, human voice while delivering information in a clean, concise way.
