@@ -89,6 +89,25 @@
     border 200ms ease-in;
 }
 
+/**
+ * Screen Reader Only
+ * 
+ * Makes content visually hidden but still accessible to screen readers.
+ * This utility class is used to hide content visually while keeping it accessible
+ * to assistive technologies like screen readers, which is important for accessibility.
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ======================================
  * SIDEBAR NAVIGATION
  * ====================================== */
@@ -264,9 +283,10 @@ nav.menu li a {
   color: var(--eds-color-text-accent-strong-on-emphasis);
 }
 
-.footer .container {
+.footer__container {
   display: flex;
   width: 100%;
+  max-width: none;
   justify-content: space-between;
 }
 
@@ -274,26 +294,31 @@ nav.menu li a {
   margin: 0;
 }
 
-.footer__items {
+.footer-links__group {
+  list-style: none;
   display: flex;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
   gap: 0.5rem;
 }
 
-/* Footer icons styling */
-.footer__items .footer__item a {
-  display: flex;
-  width: 2rem;
-  height: 2rem;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 150ms ease-in-out;
-}
-
-.footer__items .footer__item a:hover {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
+.footer-links__link {
   border-radius: var(--ifm-global-radius);
+  color: var(--eds-color-text-accent-strong-on-emphasis);
+  transition: background-color 150ms ease-in-out;
+  display: block;
+  padding: 0.25rem;
+}
+.footer-links__link:hover {
+  color: var(--eds-color-text-accent-strong-on-emphasis);
+  transition: background-color 150ms ease-in-out;
+  display: block;
+  background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
+}
+.footer-links__link svg {
+  fill: var(--eds-color-text-accent-strong-on-emphasis);
+  display: block;
 }
 
-.footer .footer__items .footer-icon svg {
-  fill: var(--eds-color-text-accent-strong-on-emphasis);
-}
+/*               className: 'footer-links__item__link--github', */

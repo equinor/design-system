@@ -1,23 +1,104 @@
-import { useThemeConfig } from '@docusaurus/theme-common'
-import FooterLinks from '@theme/Footer/Links'
-import FooterLogo from '@theme/Footer/Logo'
-import FooterCopyright from '@theme/Footer/Copyright'
-import FooterLayout from '@theme/Footer/Layout'
+import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common'
+import GithubSvg from '../../images/github-logo.svg'
+import FigmaSvg from '../../images/figma-logo.svg'
 
+// import TwitterSvg from '../../images/twitter-logo.svg'
+// import SlackSvg from '../../images/slack-logo.svg'
+// import FacebookSvg from '../../images/facebook-logo.svg'
+
+import Link from '@docusaurus/Link'
+
+interface FooterColumnItem {
+  label: string
+  items: FooterLinkItem[]
+}
+
+interface FooterLinksProps {
+  links: FooterColumnItem[] | FooterLinkItem[]
+}
+
+// Comprehensive class-based icon mapping
+const getIconComponent = (item: FooterLinkItem): JSX.Element | null => {
+  const className = item.className?.toLowerCase() || ''
+
+  if (className.includes('github')) {
+    return <GithubSvg />
+  }
+  if (className.includes('figma')) {
+    return <FigmaSvg />
+  }
+
+  return null
+}
+
+// Type guard to check if an item is a FooterColumnItem
+const isFooterColumnItem = (
+  item: FooterLinkItem | FooterColumnItem,
+): item is FooterColumnItem => {
+  return 'items' in item && Array.isArray((item as FooterColumnItem).items)
+}
+
+const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
+  return (
+    <nav className="footer-links" aria-label="Footer navigation links">
+      {links.map((linkItem: FooterLinkItem | FooterColumnItem) => (
+        <div key={`${linkItem.label}`} className="footer-links__group">
+          {isFooterColumnItem(linkItem) &&
+            linkItem.items
+              .map((item: FooterLinkItem) => {
+                const icon = getIconComponent(item)
+                if (!icon) {
+                  return null
+                }
+
+                return (
+                  <Link
+                    key={`${item.href || item.to}`}
+                    to={item.to || item.href}
+                    className={`footer-links__link ${item.className || ''}`}
+                    aria-label={
+                      (item.label || item.href || 'Social link') +
+                      ' (opens in new tab)'
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {icon}
+                    {/* Only for screen readers */}
+                    <span className="sr-only">(opens in new tab)</span>
+                  </Link>
+                )
+              })
+              .filter(Boolean)}
+        </div>
+      ))}
+    </nav>
+  )
+}
 function Footer(): JSX.Element | null {
   const { footer } = useThemeConfig()
+
   if (!footer) {
     return null
   }
-  const { copyright, links, logo, style } = footer
+  const { copyright, links } = footer
+  console.log(links)
 
   return (
-    <FooterLayout
-      style={style}
-      links={links && links.length > 0 && <FooterLinks links={links} />}
-      logo={logo && <FooterLogo logo={logo} />}
-      copyright={copyright && <FooterCopyright copyright={copyright} />}
-    />
+    <>
+      <footer className="footer">
+        <div className="footer__container">
+          <div
+            className="footer__copyright"
+            // Developer provided the HTML, so assume it's safe.
+            // eslint-disable-next-line react/no-danger
+          >
+            {copyright}
+          </div>
+          {links && links.length > 0 && <FooterLinks links={links} />}
+        </div>
+      </footer>
+    </>
   )
 }
 
