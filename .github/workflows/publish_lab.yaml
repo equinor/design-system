@@ -85,6 +85,15 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Publish to npm
         id: publish-to-npm
         run: |
@@ -109,6 +118,15 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Publish to npm
         id: publish-to-npm
         run: |
