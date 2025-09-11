@@ -29,7 +29,8 @@
     "eds-config-custom",
     "eds-tokens-sync",
     "eds-tokens-build",
-    "eds-color-palette-generator"
+    "eds-color-palette-generator",
+    "design-system-docs"
   ],
   "cSpell.words": [
     "APCA",
