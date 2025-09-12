@@ -78,14 +78,12 @@ function Footer(): JSX.Element | null {
   const { copyright, links } = footer
 
   return (
-    <>
       <footer className="footer">
         <div className="footer__container">
           <div className="footer__copyright">{copyright}</div>
           {links && links.length > 0 && <FooterLinks links={links} />}
         </div>
       </footer>
-    </>
   )
 }
 
