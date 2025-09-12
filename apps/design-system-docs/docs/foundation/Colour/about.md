@@ -4,6 +4,8 @@ The EDS colour system creates clear, consistent, and accessible interfaces. It u
 
 This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in both light and dark themes.
 
+**Note:** We generate all colours using our [colour palette generator](https://color-palette-generator-eds-prod.radix.equinor.com/). This tool ensures consistency across the design system and helps maintain our accessibility standards.
+
 ## Semantic Categories
 
 Each colour belongs to a category that reflects its purpose in the interface.
