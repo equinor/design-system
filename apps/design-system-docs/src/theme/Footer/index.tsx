@@ -36,18 +36,20 @@ const isFooterColumnItem = (
 
 const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
   // Prepare presentation object: only links with icons
-  const linkGroupsWithIcons = links.map((linkItem) => {
-    if (isFooterColumnItem(linkItem)) {
-      const itemsWithIcons = linkItem.items
-        .map((item) => {
-          const icon = getIconComponent(item);
-          return icon ? { ...item, icon } : null;
-        })
-        .filter(Boolean);
-      return { label: linkItem.label, items: itemsWithIcons };
-    }
-    return null;
-  }).filter(Boolean);
+  const linkGroupsWithIcons = links
+    .map((linkItem) => {
+      if (isFooterColumnItem(linkItem)) {
+        const itemsWithIcons = linkItem.items
+          .map((item) => {
+            const icon = getIconComponent(item)
+            return icon ? { ...item, icon } : null
+          })
+          .filter(Boolean)
+        return { label: linkItem.label, items: itemsWithIcons }
+      }
+      return null
+    })
+    .filter(Boolean)
 
   return (
     <nav className="footer-links" aria-label="Footer navigation links">
@@ -71,8 +73,8 @@ const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
         </div>
       ))}
     </nav>
-  );
-};
+  )
+}
 function Footer(): JSX.Element | null {
   const { footer } = useThemeConfig()
 
@@ -82,12 +84,12 @@ function Footer(): JSX.Element | null {
   const { copyright, links } = footer
 
   return (
-      <footer className="footer">
-        <div className="footer__container">
-          <div className="footer__copyright">{copyright}</div>
-          {links && links.length > 0 && <FooterLinks links={links} />}
-        </div>
-      </footer>
+    <footer className="footer">
+      <div className="footer__container">
+        <div className="footer__copyright">{copyright}</div>
+        {links && links.length > 0 && <FooterLinks links={links} />}
+      </div>
+    </footer>
   )
 }
 
