@@ -35,40 +35,44 @@ const isFooterColumnItem = (
 }
 
 const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
+  // Prepare presentation object: only links with icons
+  const linkGroupsWithIcons = links.map((linkItem) => {
+    if (isFooterColumnItem(linkItem)) {
+      const itemsWithIcons = linkItem.items
+        .map((item) => {
+          const icon = getIconComponent(item);
+          return icon ? { ...item, icon } : null;
+        })
+        .filter(Boolean);
+      return { label: linkItem.label, items: itemsWithIcons };
+    }
+    return null;
+  }).filter(Boolean);
+
   return (
     <nav className="footer-links" aria-label="Footer navigation links">
-      {links.map((linkItem: FooterLinkItem | FooterColumnItem) => (
-        <div key={`${linkItem.label}`} className="footer-links__group">
-          {isFooterColumnItem(linkItem) &&
-            linkItem.items
-              .map((item: FooterLinkItem) => {
-                const icon = getIconComponent(item)
-                if (!icon) {
-                  return null
-                }
-
-                return (
-                  <Link
-                    key={`${item.href || item.to}`}
-                    to={item.to || item.href}
-                    className={`footer-links__link ${item.className || ''}`}
-                    aria-label={
-                      (item.label || item.href || 'Social link') +
-                      ' (opens in new tab)'
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {icon}
-                  </Link>
-                )
-              })
-              .filter(Boolean)}
+      {linkGroupsWithIcons.map((group) => (
+        <div key={group.label} className="footer-links__group">
+          {group.items.map((item) => (
+            <Link
+              key={`${item.href || item.to}`}
+              to={item.to || item.href}
+              className={`footer-links__link ${item.className || ''}`}
+              aria-label={
+                (item.label || item.href || 'Social link') +
+                ' (opens in new tab)'
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {item.icon}
+            </Link>
+          ))}
         </div>
       ))}
     </nav>
-  )
-}
+  );
+};
 function Footer(): JSX.Element | null {
   const { footer } = useThemeConfig()
 
