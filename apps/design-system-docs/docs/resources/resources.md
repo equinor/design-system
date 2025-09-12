@@ -11,7 +11,6 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 ## Component Documentation
 
 - [Component Reference](../components/components.md) – Explore usage, props, and examples for all EDS components.
-- [Design Tokens](../foundation/DESIGN_TOKENS.md) – Use our colour, spacing, and typography tokens for consistent styling.
 
 ## Developer Guides
 
