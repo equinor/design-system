@@ -1,23 +1,23 @@
 # About
 
-The EDS colour system is designed to make interfaces clear, consistent, and accessible for everyone. The system is built on **semantic colours** – names that describe their intended usage.  This way, designers and developers share the same language and can work smoothly together.
-Each colour has a role, from text and borders to backgrounds and interactive states, so you don't have to guess which one to use. Behind the scenes, every pairing is tested with the APCA contrast algorithm to make sure readability and accessibility are built in — across both light and dark themes.
-In short: a colour system that’s thought through, tested, and ready to support your work.
+The EDS colour system creates clear, consistent, and accessible interfaces. It uses **semantic colours** — names that describe what each colour does rather than how it looks.
+
+This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in both light and dark themes.
 
 ## Semantic Categories
 
-Each colour belongs to a **semantic category** that reflects its purpose — whether it’s highlighting information, giving feedback, or building the base layers of an interface.
+Each colour belongs to a category that reflects its purpose in the interface.
 
-**Colours are grouped into the following categories:**
+**Colour categories:**
 
 - **Accent** – brand and highlight colours
 - **Neutral** – base and supporting colours
-- **Info** – for communication and neutral messages
+- **Info** – communication and neutral messages
 - **Success** – positive or confirming feedback
 - **Warning** – cautionary states
 - **Danger** – destructive or error states
 
-Within each category, we have colours for:
+**Each category includes colours for:**
 
 - **Background (bg)**
 - **Border**
@@ -25,59 +25,58 @@ Within each category, we have colours for:
 
 ## Backgrounds
 
-Backgrounds form the foundation of an interface. They define layers, create depth, and ensure that text and components remain easy to read.
+Backgrounds create the foundation of your interface. They define layers and ensure text remains readable.
 
-**Available background roles:**
+**Background roles:**
 
-- **Canvas**: the application background.
-- **Surface**: placed on top of canvas to create **hierarchical depth** in layouts.
+- **Canvas** – the main application background
+- **Surface** – placed on canvas to create depth in layouts
 
 ### Background Fill
 
-For **interactive elements** (e.g. buttons):
+For interactive elements like buttons:
 
-- **Muted** – toned down, less prominent
-- **Emphasis** – stronger, more prominent
+- **Muted** – subtle, less prominent
+- **Emphasis** – bold, more prominent
 
-Background fill provide a **default, hover, and active** state variant.
+Background fills include default, hover, and active state variants.
 
 ## Borders
 
-Borders help separate content and add structure. They help organise content and guide focus without overwhelming the design.
+Borders separate content and add structure. They organise information and guide focus without overwhelming the design.
 
-**Available border roles:**
+**Border roles:**
 
-- **Subtle** – separators, dividers, light structure
-- **Medium** – general borders and controls
+- **Subtle** – light separators and dividers
+- **Medium** – standard borders and controls
 - **Strong** – emphasis or interactive elements
 
 ## Text
 
-Text colours ensure content is always readable and clear, no matter the background. They also create hierarchy, helping users distinguish what’s most important.
+Text colours ensure content is readable and creates clear hierarchy.
 
-**Available text roles:**
+**Text roles:**
 
-- **Strong** – default text colour in the application
-- **Subtle** – secondary text, hints, or less important content
-- **Strong-on-emphasis** – for text placed on **emphasis backgrounds**
-- **Subtle-on-emphasis** – for secondary text on **emphasis backgrounds**
+- **Strong** – primary text in your application
+- **Subtle** – secondary text and less important content
+- **Strong-on-emphasis** – text on emphasis backgrounds
+- **Subtle-on-emphasis** – secondary text on emphasis backgrounds
 
 ## Concepts
 
-In addition to categories like backgrounds, borders, and text, EDS includes a few **global tokens** used across many components and patterns.
+In addition to the semantic categories, EDS includes a few **design decisions** used across components and patterns.
 
-**Some tokens are globally used across the system:**
-
-- **bg-floating** – elements floating above surfaces (tooltips, menus)
-- **bg-backdrop** – dimming layer behind modals or overlays
-- **bg-input** – input fields and form backgrounds
-- **border-focus** – focus ring for accessibility
+- **bg-floating** – floating elements like tooltips and menus
+- **bg-backdrop** – overlay layer behind modals
+- **bg-input** – input fields and forms
+- **border-focus** – focus rings for accessibility
 - **text-link** – default link colour
 
 ## Features
 
-The EDS colour system includes built-in features that make it easy to design and build accessible, consistent interfaces.
-- **Accessible by design** – Contrast targets are based on the APCA algorithm, which models how human vision perceives text on different backgrounds. This ensures readability you can trust.
-- **Light and dark themes** - Switching theme is as simple as applying a class to a container. Colours adapt automatically to keep contrast and clarity.
-- **Purpose-built** - Every colour has a defined role in the interface, from surfaces and borders to states and overlays.
-- **Reliable text contrast** – Text colours always meet their intended contrast target against the matching background.
+The colour system includes built-in features for accessible, consistent interfaces:
+
+- **Accessible by design** – Uses APCA contrast algorithm to model human vision and ensure reliable readability
+- **Light and dark themes** – Switch themes by applying a `data-colour-scheme=["light" | "dark"]` attribute.
+- **Purpose-built** – Every colour has a defined role in the interface
+- **Reliable contrast** – Text colours always meet contrast targets against matching backgrounds
