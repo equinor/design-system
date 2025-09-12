@@ -76,7 +76,6 @@ function Footer(): JSX.Element | null {
     return null
   }
   const { copyright, links } = footer
-  console.log(links)
 
   return (
     <>
