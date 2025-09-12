@@ -14,7 +14,17 @@ Uses abstraction with variable mode in Figma and data attribute in code to defin
 
 ### Static Approach
 
-Use specific semantic variables for each colour category:
+Install the EDS tokens package and import the static colour variables:
+
+```bash
+pnpm install @equinor/eds-tokens
+```
+
+```css
+@import '@equinor/eds-tokens/css/variables-static';
+```
+
+Use specific semantic variables:
 
 ```css
 .button-accent {
@@ -24,6 +34,16 @@ Use specific semantic variables for each colour category:
 ```
 
 ### Dynamic Approach
+
+Install the EDS tokens package and import the dynamic colour variables:
+
+```bash
+pnpm install @equinor/eds-tokens
+```
+
+```css
+@import '@equinor/eds-tokens/css/variables-dynamic';
+```
 
 Set the semantic category using `data-color-appearance` attribute, then use abstract variables:
 
@@ -42,11 +62,15 @@ Set the semantic category using `data-color-appearance` attribute, then use abst
 
 ### Static Approach
 
+Add the **EDS Colours (static)** library to your Figma file to access static colour variables.
+
 Each semantic category has a named variable:
 
 - Example: `Bg/Accent/Fill/Emphasis`
 
 ### Dynamic Approach
+
+Add the **EDS Colours (dynamic)** library to your Figma file to access dynamic colour variables.
 
 Use abstract colour names without semantic categories:
 
