@@ -2,7 +2,15 @@
 
 The EDS colour system creates clear, consistent, and accessible interfaces. It uses **semantic colours** — names that describe what each colour does rather than how it looks.
 
-This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in both light and dark themes.
+This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in both light and dark colour scheme.
+
+## Light and Dark Colour scheme
+
+The colour system supports light and dark colour scheme, ensuring consistent visual hierarchy and accessibility across all interface modes.
+
+| Light                                         | Dark                                        |
+| --------------------------------------------- | ------------------------------------------- |
+| ![Light theme colour palette](/img/light.png) | ![Dark theme colour palette](/img/dark.png) |
 
 **Note:** We generate all colours using our [colour palette generator](https://color-palette-generator-eds-prod.radix.equinor.com/). This tool ensures consistency across the design system and helps maintain our accessibility standards.
 
