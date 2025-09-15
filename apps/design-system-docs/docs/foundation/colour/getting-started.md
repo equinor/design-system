@@ -10,6 +10,8 @@ Each semantic category (accent, neutral, info, success, warning, danger) has its
 **Dynamic**:
 Uses abstraction with variable mode in Figma and data attribute in code to define semantic category
 
+**Note:** The variable mode in Figma and data attribute in code are foundational colour tools. They don't replace component properties or variants. Continue creating component variants using component properties as usual — these colour tools work alongside your existing component structure.
+
 ## For Developers
 
 ### Static Approach
