@@ -2,9 +2,9 @@
 
 The EDS colour system creates clear, consistent, and accessible interfaces. It uses **semantic colours** — names that describe what each colour does rather than how it looks.
 
-This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in both light and dark colour scheme.
+This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in light and dark colour scheme.
 
-## Light and Dark Colour scheme
+## Colour scheme
 
 The colour system supports light and dark colour scheme, ensuring consistent visual hierarchy and accessibility across all interface modes.
 
@@ -18,8 +18,6 @@ The colour system supports light and dark colour scheme, ensuring consistent vis
 
 Each colour belongs to a category that reflects its purpose in the interface.
 
-**Colour categories:**
-
 - **Accent** – brand and highlight colours
 - **Neutral** – base and supporting colours
 - **Info** – communication and neutral messages
@@ -27,17 +25,17 @@ Each colour belongs to a category that reflects its purpose in the interface.
 - **Warning** – cautionary states
 - **Danger** – destructive or error states
 
-**Each category includes colours for:**
+Each category includes colours for:
 
 - **Background (bg)**
 - **Border**
 - **Text**
 
-## Backgrounds
+## Background
 
-Backgrounds create the foundation of your interface. They define layers and ensure text remains readable.
+Background colours create the foundation of your interface. They define layers and ensure text remains readable.
 
-**Background roles:**
+**Roles:**
 
 - **Canvas** – the main application background
 - **Surface** – placed on canvas to create depth in layouts
@@ -55,7 +53,7 @@ Background fills include default, hover, and active state variants.
 
 Borders separate content and add structure. They organise information and guide focus without overwhelming the design.
 
-**Border roles:**
+**Roles:**
 
 - **Subtle** – light separators and dividers
 - **Medium** – standard borders and controls
@@ -65,7 +63,7 @@ Borders separate content and add structure. They organise information and guide 
 
 Text colours ensure content is readable and creates clear hierarchy.
 
-**Text roles:**
+**Roles:**
 
 - **Strong** – primary text in your application
 - **Subtle** – secondary text and less important content
