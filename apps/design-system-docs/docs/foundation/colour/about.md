@@ -2,17 +2,17 @@
 
 The EDS colour system creates clear, consistent, and accessible interfaces. It uses **semantic colours** — names that describe what each colour does rather than how it looks.
 
-This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in light and dark colour scheme.
+This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in light and dark colour schemes.
 
 ## Colour scheme
 
-The colour system supports light and dark colour scheme, ensuring consistent visual hierarchy and accessibility across all interface modes.
+The colour system supports light and dark colour schemes, ensuring consistent visual hierarchy and accessibility across all interface modes.
 
 | Light                                         | Dark                                        |
 | --------------------------------------------- | ------------------------------------------- |
 | ![Light theme colour palette](/img/light.png) | ![Dark theme colour palette](/img/dark.png) |
 
-**Note:** We generate all colours using our [colour palette generator](https://color-palette-generator-eds-prod.radix.equinor.com/). This tool ensures consistency across the design system and helps maintain our accessibility standards.
+**Note:** We generate all colours using our [colour palette generator](https://color-palette-generator-eds-prod.radix.equinor.com/). This tool ensures consistency and helps maintain accessibility standards.
 
 ## Semantic Categories
 
@@ -37,7 +37,7 @@ Background colours create the foundation of your interface. They define layers a
 
 **Roles:**
 
-- **Canvas** – the main application background
+- **Canvas** – main application background
 - **Surface** – placed on canvas to create depth in layouts
 
 ### Background Fill
@@ -51,7 +51,7 @@ Background fills include default, hover, and active state variants.
 
 ## Borders
 
-Borders separate content and add structure. They organise information and guide focus without overwhelming the design.
+Borders separate content and add structure. They organise information and guide focus.
 
 **Roles:**
 
@@ -61,7 +61,7 @@ Borders separate content and add structure. They organise information and guide 
 
 ## Text
 
-Text colours ensure content is readable and creates clear hierarchy.
+Text colours ensure content is readable and create clear hierarchy.
 
 **Roles:**
 
