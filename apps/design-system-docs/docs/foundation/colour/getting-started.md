@@ -60,6 +60,39 @@ Set the semantic category using `data-color-appearance` attribute, then use abst
 }
 ```
 
+### Colour Scheme Detection
+
+By default, the colour system detects light and dark colour schemes using the `data-color-scheme` attribute:
+
+```html
+<!-- Light theme (default) -->
+<html data-color-scheme="light"></html>
+<!-- Dark theme -->
+<html data-color-scheme="dark"></html>
+```
+
+**Custom selectors**: Extend this by defining your own selectors. For example, use `.light` and `.dark` classes:
+
+```css
+/* Override default colour scheme detection */
+.light {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+```
+
+Then use classes instead of data attributes:
+
+```html
+<!-- Light theme -->
+<html class="light"></html>
+<!-- Dark theme -->
+<html class="dark"></html>
+```
+
 ## For Designers
 
 ### Static Approach
