@@ -1,5 +1,5 @@
 # About
-How it looks :-) 
+
 The EDS colour system creates clear, consistent, and accessible interfaces. It uses **semantic colours** — names that describe what each colour does rather than how it looks.
 
 This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in light and dark colour schemes.
