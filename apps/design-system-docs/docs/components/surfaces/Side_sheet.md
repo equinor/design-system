@@ -1,51 +1,88 @@
+---
+title: Side sheet
+description: A temporary panel that surfaces supplemental content or actions alongside the primary view.
+tags: [surfaces, layout, contextual]
+---
+
 # Side sheet
 
-A _side sheet_ is a a toggleable area that is anchored to the edge of the viewport with supplementary content.
+The side sheet reveals supporting content without forcing a full page transition. We use it to keep users oriented while giving them space to review details, adjust settings, or apply filters.
 
-## Usage
+## When to Use
 
-Side sheets display content that is supplementary to the primary content. Side sheets can display a list of actions, filters, supplemental content and functionality. Content in side sheets can be broken into tabs.
+Use a side sheet when you need to:
 
- **More examples available in the** **.**
+- Show contextual details about a selected item
+- Provide filter, settings, or configuration tools beside primary content
+- Let users compare or edit information while keeping the main view visible
+- Stage multi-step secondary tasks without losing context
+
+Avoid it when:
+
+- The content is critical and requires full attention (use a full page)
+- The interaction blocks primary task flow (consider a modal or inline pattern)
+- You only need a small inline disclosure (use accordion or expandable section)
+
+## Structure
+
+Typical layout (top → bottom):
+
+- Header (title, optional description, close action)
+- Optional tabs or navigation (segmenting modes)
+- Scrollable content region
+- Supplemental actions (buttons, secondary controls)
+- Footer (primary / secondary actions) – optional
+
+Provide a persistent and predictable close affordance in the header. Keep action density reasonable to avoid cognitive overload.
 
 ## Guidelines
 
-Side sheets are not permanent so they should always have a way to be opened and closed. They are always to be anchored to the left of the viewport's right edge. They are to be full height, but can start under the  if it is visible. Side sheets can be elevated over content using `Elevation/Overlay`, or push primary content to share the same elevation.
+Do:
 
-The side sheet comes in multiple sizes:
+- Anchor consistently (usually right side in LTR layouts)
+- Provide clear close action (icon button with accessible label)
+- Keep width proportional to task complexity (avoid overly wide panels)
+- Maintain separation from main content (shadow or divider)
+- Persist unsaved state until explicitly dismissed or saved
 
+Don’t:
 
+- Nest multiple side sheets
+- Hide critical primary content beneath it without an alternative path
+- Use it for transient notifications (use toast or inline alert)
+- Overfill with unrelated settings
 
-# Design
+Responsive:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Collapse to full-width overlay on small screens if horizontal space is insufficient
+- Ensure focus order remains logical after layout shifts
 
-SURFACES
+Semantics & Naming:
 
-# Side sheet
+- Use a `aside` element when supplemental; use `section` if integral
+- Provide `aria-label` or heading for identification
 
-A _side sheet_ is a a toggleable area that is anchored to the edge of the viewport with supplementary content.
+## Accessibility
+
+- Focus: Move focus to the side sheet container or first focusable element when it opens; return focus to the triggering control when it closes
+- Dismissal: Support Escape key to close (if non-blocking)
+- Roles: Avoid dialog role unless modality is enforced; keep it non-modal when context must remain visible
+- Scroll: Prevent background scroll only if interaction risk exists; otherwise allow background awareness
+- Labels: Close button needs an accessible label (e.g., “Close side sheet”)
+- Announcements: If dynamic content loads, announce updates via polite live region if necessary
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **side sheet**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support / Next Steps
 
-# Code
+Need another size or interaction pattern? Reach out or open an issue. We evolve the side sheet together to keep it usable, accessible, and purposeful.
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+---
 
-SURFACES
-
-# Side sheet
-
-A _side sheet_ is a a toggleable area that is anchored to the edge of the viewport with supplementary content.
+Last reviewed: 2025-09-15

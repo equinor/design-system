@@ -1,8 +1,14 @@
+---
+title: Accordion
+description: Organises content into expandable sections to reduce clutter and improve scanability.
+tags: [surfaces, disclosure, content]
+---
+
 # Accordion
 
 The accordion component helps you organise content by allowing users to expand and collapse sections. This keeps pages tidy and makes information easy to scan.
 
-## When to Use an Accordion
+## When to Use
 
 Accordions are useful for grouping related information and reducing visual clutter. They give users control over which sections they view, making it easier to focus on what matters. However, avoid using accordions for critical information that should always be visible.
 
@@ -56,6 +62,6 @@ To add an accordion in Figma:
 
 For implementation details and usage examples, please refer to our [Storybook documentation](https://storybook.eds.equinor.com/?path=/docs/surfaces-accordion--docs).
 
----
+## Support / Next Steps
 
 If you have questions or need support, please visit our [Support page](../../support/support.md). We are here to help you organise your content and create accessible, user-friendly experiences.

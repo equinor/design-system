@@ -1,47 +1,83 @@
+---
+title: Toolbar
+description: Groups related actions so users can apply changes or switch context efficiently.
+tags: [actions, navigation, surfaces]
+---
+
 # Toolbar
 
-A _toolbar_ is a set of calls to action that allows users to apply changes and/or navigate in a page or product.
+We use the toolbar to gather related actions so people can apply changes or switch context efficiently. It provides a consistent home for primary and secondary commands—designed with care to support focused, predictable workflows.
+
+## When to Use
+
+Use it to:
+
+- Present a small, clear set of contextual actions
+- Keep common task actions visible while content updates
+- Offer utilities like filters, view toggles, or search
+
+Avoid when:
+
+- Only one action is needed (use a single button)
+- Actions belong inline with list or row items
+- Actions are rarely used (use a menu or overflow)
+
+## Structure
+
+- Container (toolbar region)
+- Leading area (title / context / navigation)
+- Primary actions group
+- Secondary actions group (filters, view, export)
+- Optional spacer (push utilities apart)
+- Overflow / more actions menu
+
+Keep ordering consistent across similar screens. Limit visible actions to essentials.
 
 ## Guidelines
 
-A toolbar is set to ensure a custom navigation or to apply changes into a page. These controls can have different functionalities.
+Do:
 
-EDS supports two types:
+- Use short, verb‑first labels
+- Group related actions with consistent spacing
+- Separate destructive actions clearly
+- Provide overflow on narrow widths
 
-Fixed
+Don’t:
 
-Add notes
+- Mix many button styles at once
+- Reorder actions across pages
+- Rely only on color to signal grouping
 
--   Fixed toolbar to be used full-width at the top of the page
+Responsive:
 
-  
+- Collapse secondary or low‑priority actions into overflow
+- Keep the primary action visible as long as space allows
 
-Freestanding
+Semantics & Naming:
 
-Add notes
+- Add `role="toolbar"` when grouping interactive controls
+- Provide an accessible label (e.g. `aria-label="Table actions"`)
 
--   Freestanding toolbar to be placed statically on a page. Width adapting to the content.
+## Accessibility
 
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
-
-# Toolbar
-
-A _toolbar_ is a set of calls to action that allows users to apply changes and/or navigate in a page or product.
+- Tab: Moves focus into and out of toolbar controls
+- Enter / Space: Activates focused button
+- Icon‑only buttons must have `aria-label`
+- Maintain required contrast for text and icons
+- Return focus to the trigger after closing overflow menus
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **toolbar**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
+
+For implementation details and usage examples, please refer to our Storybook documentation.
+
+## Support / Next Steps
+
+Need a variant or found a gap? Reach out or open an issue. We improve components together to keep them consistent, accessible, and reliable.
+
+---
+
+Last reviewed: 2025-09-15

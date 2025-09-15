@@ -1,95 +1,90 @@
-# Card
-
-_A card_ displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways.
-
-### Card with actions
-
-### Card with divider
-
-  
-
-### Card container
-
-The `container` is the only required block in a card. There are four available `card/container` options: 
-
-### Title
-
-There are eleven title blocks to choose between:
-
-### Rich media
-
-There are three rich media blocks to choose between: `rich-media/last` which is to be used when it is the last block, `rich-media/leading-image` which is to be used when it is the first block and `rich-media/middle` which is to be used when it is sandwiched between other blocks. 
-
-#### Content
-
-Rich media blocks can have:
-
--   Graphs
-    
--   Tables
-    
--   Images
-    
-    -   Within the grid when between blocks and full width when leading.
-        
--   Dividers
-    
-
-### Supplemental actions
-
-Supplemental actions are represented by buttons, icons, UI controls and supporting text. A rule of thumb is to place them at the bottom of a card. There are three supplemental action blocks to choose between: 
-
-#### Content
-
-Supplemental action blocks can have:
-
--   Supplemental actions
-    
--   Dividers
-    
-    -   Content that can be expanded should use full-width dividers, ignoring the horizontal spacing.
-        
--   Overflow menu
-    
--   UI controls
-    
--   Chips
-
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
+---
+title: Card
+description: A flexible container that groups related content and links to deeper detail.
+tags: [content, layout, surfaces]
+---
 
 # Card
 
-_A card_ displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways.
+Cards present a focused snapshot of a single subject and invite deeper exploration. We use them to group related content, highlight key information, and provide an accessible entry point into more detailed pages or flows.
+
+## When to Use
+
+Use a card when you need to:
+
+- Group related content (asset summary, document, person, dataset)
+- Provide a scannable preview with a clear navigation target
+- Combine media and text meaningfully
+- Display a collection in a grid or masonry layout
+
+Avoid cards when:
+
+- A plain text link or list row is enough
+- The layout is purely tabular (use a table pattern)
+- Content is navigational chrome (use navigation components)
+- The content mimics a full page (simplify or restructure)
+
+## Structure
+
+Common optional blocks (top → bottom):
+
+- Media (image / illustration / chart / thumbnail)
+- Eyebrow or meta label (category, status)
+- Title (primary clickable heading or link)
+- Supporting text (short description)
+- Metadata list (attributes, KPIs, tags)
+- Divider (separate content vs. actions—use sparingly)
+- Supplemental actions (buttons, icon buttons, overflow menu)
+- Secondary content (chips, progress, expandable details)
+
+Keep the primary interactive target clear. Avoid multiple competing navigation targets inside the same card unless hierarchy is obvious.
+
+## Guidelines
+
+Do:
+
+- Keep titles concise and scannable
+- Use consistent vertical spacing tokens
+- Provide alt text or empty alt for decorative media
+- Place secondary actions consistently (usually bottom or grouped)
+- Limit actions to those that reinforce the card’s purpose
+
+Don’t:
+
+- Overcrowd with long paragraphs
+- Duplicate the same link multiple times
+- Use decorative media that adds no meaning
+- Mix more than one primary action style
+
+Responsive:
+
+- Stack media above text on narrow screens
+- Collapse metadata into an inline list or overflow menu
+- Maintain consistent grid gaps and alignment
+
+Semantics & Naming:
+
+- Use `article` for standalone content or `li` within lists
+- Ensure only one interactive heading per card
+- Avoid nesting focusable elements inside a single large link
+
+## Accessibility
+
+- Landmark semantics: `article` or list semantics for collections
+- Images: meaningful `alt` text or empty alt if decorative
+- Avoid making the entire card a link if it contains buttons—prefer linking the title
+- Maintain visible focus states for all interactive elements
+- Do not rely on hover to reveal critical information
+- Provide accessible names for action groups (aria-label on button groups or menus)
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **card**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
-    
+## Code Example
 
-## **Do's and don'ts**
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support / Next Steps
 
-
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-SURFACES
-
-# Card
-
-_A card_ displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways.
+Need another variant or block? Reach out or open an issue. We improve the card pattern together so it stays purposeful, accessible, and consistent.
