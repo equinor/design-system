@@ -14,13 +14,15 @@ Uses abstraction with variable mode in Figma and data attribute in code to defin
 
 ## For Developers
 
-### Static Approach
-
-Install the EDS tokens package and import the static colour variables:
+Install the EDS tokens package:
 
 ```bash
 pnpm install @equinor/eds-tokens
 ```
+
+### Static Approach
+
+Import the static variables:
 
 ```css
 @import '@equinor/eds-tokens/css/variables-static';
@@ -29,7 +31,7 @@ pnpm install @equinor/eds-tokens
 Use specific semantic variables:
 
 ```css
-.button-accent {
+.button-primary {
   background-color: var(--eds-color-bg-accent-emphasis);
   color: var(--eds-color-text-accent-strong-on-emphasis);
 }
@@ -37,21 +39,26 @@ Use specific semantic variables:
 
 ### Dynamic Approach
 
-Install the EDS tokens package and import the dynamic colour variables:
-
-```bash
-pnpm install @equinor/eds-tokens
-```
+Import the dynamic variables:
 
 ```css
 @import '@equinor/eds-tokens/css/variables-dynamic';
 ```
 
-Set the semantic category using `data-color-appearance` attribute, then use abstract variables:
+Set the semantic category using the `data-color-appearance` attribute with any of these values:
+
+- `neutral` (default)
+- `accent`
+- `success`
+- `info`
+- `warning`
+- `danger`
 
 ```html
-<button data-color-appearance="success">Continue</button>
+<button data-color-appearance="accent">Continue</button>
 ```
+
+Use abstract variables:
 
 ```css
 .button {
