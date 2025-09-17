@@ -28,25 +28,50 @@ jobs:
             exit 1
           fi
 
-          # Check scopes if present (simple string matching)
+          # Check scopes if present
           if [[ $title == *"("* ]] && [[ $title == *")"* ]]; then
             echo "📦 Scope detected, validating..."
 
-            # List of valid scopes - check if any are in the title
+            # Extract scope content between parentheses
+            scope_content=$(echo "$title" | sed 's/.*(\([^)]*\)).*/\1/')
+            echo "  Extracted scopes: '$scope_content'"
+
+            # List of valid scopes
             valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker")
 
-            scope_found=false
-            for scope in "${valid_scopes[@]}"; do
-              if [[ $title == *"($scope"* ]] || [[ $title == *"$scope)"* ]] || [[ $title == *"$scope,"* ]]; then
-                echo "  ✅ Found valid scope: $scope"
-                scope_found=true
+            # Split by comma and check each scope
+            IFS=',' read -ra individual_scopes <<< "$scope_content"
+            all_valid=true
+
+            for scope in "${individual_scopes[@]}"; do
+              # Trim whitespace
+              scope=$(echo "$scope" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+              echo "  - Checking scope: '$scope'"
+
+              # Check if this scope is in valid list
+              scope_valid=false
+              for valid_scope in "${valid_scopes[@]}"; do
+                if [[ "$scope" == "$valid_scope" ]]; then
+                  scope_valid=true
+                  break
+                fi
+              done
+
+              if [[ $scope_valid == true ]]; then
+                echo "    ✅ Valid scope"
+              else
+                echo "    ❌ Invalid scope: '$scope'"
+                all_valid=false
               fi
             done
 
-            if [[ $scope_found == false ]]; then
-              echo "❌ No valid scopes found. Valid scopes:"
+            if [[ $all_valid == false ]]; then
+              echo ""
+              echo "❌ One or more invalid scopes found. Valid scopes:"
               printf "  - %s\n" "${valid_scopes[@]}"
               exit 1
+            else
+              echo "  ✅ All scopes are valid"
             fi
           else
             echo "📦 No scope (optional)"
