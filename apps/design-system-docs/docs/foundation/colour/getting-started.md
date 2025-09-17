@@ -109,7 +109,10 @@ You can use the EDS colour system in Figma with either **static** or **dynamic**
 
 Add the **EDS Colours (static)** library to your Figma file to access static variables. These variables are organised by semantic category, so you always see the category name in the variable itself.
 
-- Example: `Bg/Accent/Fill/Emphasis`
+**Example: Primary button (static)** 
+- **Background:** `Bg/Accent/Fill Emphasis/Default`
+- **Text::** `Text/Accent/Strong on Emphasis`
+
 
 Use this approach when you want to apply a colour directly from a specific category.
 
