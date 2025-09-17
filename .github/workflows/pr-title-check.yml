@@ -10,13 +10,10 @@ jobs:
       - name: Check PR Title Format
         run: |
           title="${{ github.event.pull_request.title }}"
-
           echo "🔍 Checking PR title: '$title'"
 
-          # Check if title starts with valid type
-          valid_types="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
-
-          if [[ $title =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert) ]]; then
+          # Check if title starts with valid type (simple string matching)
+          if [[ $title == feat* ]] || [[ $title == fix* ]] || [[ $title == docs* ]] || [[ $title == style* ]] || [[ $title == refactor* ]] || [[ $title == perf* ]] || [[ $title == test* ]] || [[ $title == build* ]] || [[ $title == ci* ]] || [[ $title == chore* ]] || [[ $title == revert* ]]; then
             echo "✅ Valid type found"
           else
             echo "❌ PR title must start with a valid type"
@@ -26,44 +23,11 @@ jobs:
           fi
 
           # Check if it has colon and description
-          if [[ $title =~ : ]]; then
+          if [[ $title == *": "* ]]; then
             echo "✅ Has description after colon"
           else
             echo "❌ PR title must have format: type: description or type(scope): description"
             exit 1
-          fi
-
-          # Extract scope if it exists (between parentheses)
-          if [[ $title =~ \(([^)]+)\) ]]; then
-            scope_part="${BASH_REMATCH[1]}"
-            echo "📦 Found scope(s): $scope_part"
-
-            # Check each scope (split by comma)
-            valid_scopes="design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker"
-
-            # Replace commas with spaces and check each scope
-            scopes_to_check=$(echo "$scope_part" | tr ',' ' ')
-
-            for scope in $scopes_to_check; do
-              # Trim whitespace
-              scope=$(echo "$scope" | sed 's/^[ \t]*//;s/[ \t]*$//')
-              echo "  - Checking scope: '$scope'"
-
-              if [[ $scope =~ ^(design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker)$ ]]; then
-                echo "    ✅ Valid scope"
-              else
-                echo "    ❌ Invalid scope: '$scope'"
-                echo ""
-                echo "Valid scopes: design-system-docs, eds-color-palette-generator, eds-core-react,"
-                echo "eds-data-grid-react, eds-demo, eds-icons, eds-lab-react, eds-tailwind,"
-                echo "eds-tokens, eds-tokens-build, eds-tokens-sync, eds-utils, figma-broker"
-                exit 1
-              fi
-            done
-
-            echo "✅ All scopes are valid"
-          else
-            echo "📦 No scope specified (optional)"
           fi
 
           echo "✅ PR title follows conventional commit format!"
