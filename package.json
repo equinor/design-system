@@ -74,5 +74,6 @@
     "typescript": "^5.9.2"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.15.0",
+  "version": "1.0.0"
 }
