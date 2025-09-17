@@ -102,13 +102,18 @@ Then use classes instead of data attributes:
 
 ## For Designers
 
+You can use the EDS colour system in Figma with either **static** or **dynamic** variables. Both options are available as shared libraries — just make sure you and your developers agree on which approach to use. 
+
+
 ### Static Approach
 
-Add the **EDS Colours (static)** library to your Figma file to access static colour variables.
-
-Each semantic category has a named variable:
+Add the **EDS Colours (static)** library to your Figma file to access static variables. These variables are organised by semantic category, so you always see the category name in the variable itself.
 
 - Example: `Bg/Accent/Fill/Emphasis`
+
+Use this approach when you want to apply a colour directly from a specific category.
+
+
 
 ### Dynamic Approach
 
