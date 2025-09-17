@@ -1,0 +1,25 @@
+{
+  "release-type": "node",
+  "packages": {
+    "packages/eds-utils": {},
+    "packages/eds-tokens": {},
+    "packages/eds-icons": {},
+    "packages/eds-core-react": {},
+    "packages/eds-data-grid-react": {},
+    "packages/eds-lab-react": {}
+  },
+  "pull-request-title-pattern": "chore: release ${component} ${version}",
+  "changelog-sections": [
+    { "type": "feat", "section": "Features" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "perf", "section": "Performance Improvements" },
+    { "type": "deps", "section": "Dependencies" },
+    { "type": "revert", "section": "Reverts" },
+    { "type": "docs", "section": "Documentation" },
+    { "type": "style", "section": "Styles" },
+    { "type": "refactor", "section": "Code Refactoring" },
+    { "type": "test", "section": "Tests" },
+    { "type": "build", "section": "Build System" },
+    { "type": "ci", "section": "Continuous Integration" }
+  ]
+}
