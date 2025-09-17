@@ -340,6 +340,9 @@ function AutocompleteInner<T>(
   props: AutocompleteProps<T>,
   ref: React.ForwardedRef<HTMLInputElement>,
 ) {
+  const [controlledHighlightedIndex, setControlledHighlightedIndex] =
+    useState<number>(0)
+  const [lastScrollOffset, setLastScrollOffset] = useState<number>(0)
   const {
     options = [],
     totalOptions,
@@ -434,6 +437,14 @@ function AutocompleteInner<T>(
     if (onAddNewOption) return [AddSymbol as T, ..._availableItems]
     return _availableItems
   }, [_availableItems, showSelectAll, onAddNewOption])
+
+  const getSelectedIndex = useCallback(
+    (selectedItem: (typeof availableItems)[0] | null) =>
+      availableItems.findIndex((item) =>
+        itemCompare ? itemCompare(item, selectedItem) : item === selectedItem,
+      ),
+    [availableItems, itemCompare],
+  )
 
   //issue 2304, update dataset when options are added dynamically
   useEffect(() => {
@@ -606,32 +617,38 @@ function AutocompleteInner<T>(
         }),
       )
     },
-    onHighlightedIndexChange({ highlightedIndex, type }) {
-      if (
-        type == useCombobox.stateChangeTypes.InputClick ||
-        (type == useCombobox.stateChangeTypes.InputKeyDownArrowDown &&
-          !isOpen) ||
-        (type == useCombobox.stateChangeTypes.InputKeyDownArrowUp && !isOpen)
-      ) {
-        //needs delay for dropdown to render before calling scroll
-        setTimeout(() => {
+    onHighlightedIndexChange({ highlightedIndex }) {
+      if (highlightedIndex >= 0 && rowVirtualizer.getVirtualItems) {
+        const visibleIndexes = rowVirtualizer
+          .getVirtualItems()
+          .map((v) => v.index)
+        if (!visibleIndexes.includes(highlightedIndex)) {
           rowVirtualizer.scrollToIndex(highlightedIndex, {
             align: allowSelectAll ? 'center' : 'auto',
           })
-        }, 1)
-      } else if (
-        type !== useCombobox.stateChangeTypes.ItemMouseMove &&
-        type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
-        highlightedIndex >= 0
-      ) {
-        rowVirtualizer.scrollToIndex(highlightedIndex, {
-          align: allowSelectAll ? 'center' : 'auto',
-        })
+        }
+      }
+      if (typeof rowVirtualizer.scrollOffset === 'number') {
+        setLastScrollOffset(rowVirtualizer.scrollOffset)
       }
     },
     onIsOpenChange: ({ selectedItem }) => {
       if (!multiple && selectedItem !== null) {
         setAvailableItems(options)
+        setTimeout(() => {
+          if (controlledHighlightedIndex === 0) {
+            rowVirtualizer.scrollToOffset?.(0)
+          } else if (rowVirtualizer.scrollToOffset && lastScrollOffset > 0) {
+            rowVirtualizer.scrollToOffset(lastScrollOffset)
+          }
+          const visibleIndexes =
+            rowVirtualizer.getVirtualItems?.().map((v) => v.index) || []
+          if (!visibleIndexes.includes(controlledHighlightedIndex)) {
+            rowVirtualizer.scrollToIndex(controlledHighlightedIndex, {
+              align: allowSelectAll ? 'center' : 'auto',
+            })
+          }
+        }, 10)
       }
     },
     onStateChange: ({ type, selectedItem }) => {
@@ -673,6 +690,8 @@ function AutocompleteInner<T>(
       ...comboBoxProps,
       onSelectedItemChange: (changes) => {
         if (changes.selectedItem === AddSymbol) return
+        const idx = getSelectedIndex(changes.selectedItem)
+        setControlledHighlightedIndex(idx >= 0 ? idx : 0)
         if (onOptionsChange) {
           let { selectedItem } = changes
           if (itemCompare) {
@@ -685,13 +704,14 @@ function AutocompleteInner<T>(
           })
         }
       },
-      stateReducer: (_, actionAndChanges) => {
+      stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
         switch (type) {
           case useCombobox.stateChangeTypes.InputClick:
             return {
               ...changes,
               isOpen: !(disabled || readOnly),
+              highlightedIndex: controlledHighlightedIndex,
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
@@ -701,8 +721,11 @@ function AutocompleteInner<T>(
                 inputValue: '',
               }
             }
+            const idx = getSelectedIndex(changes.selectedItem)
+            setControlledHighlightedIndex(idx >= 0 ? idx : 0)
             return {
               ...changes,
+              highlightedIndex: idx >= 0 ? idx : 0,
             }
           case useCombobox.stateChangeTypes.InputBlur:
             return {
@@ -717,6 +740,28 @@ function AutocompleteInner<T>(
               ...changes,
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
+            if (state.isOpen === false) {
+              return {
+                ...changes,
+                isOpen: true,
+                highlightedIndex: controlledHighlightedIndex,
+              }
+            }
+            return {
+              ...changes,
+              highlightedIndex: findNextIndex({
+                index: changes.highlightedIndex,
+                availableItems,
+                optionDisabled,
+                allDisabled,
+              }),
+            }
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             if (readOnly) {
               return {
@@ -726,14 +771,36 @@ function AutocompleteInner<T>(
             }
             return {
               ...changes,
-              highlightedIndex: findNextIndex<T>({
-                index: changes.highlightedIndex,
+              highlightedIndex: findNextIndex({
+                index: 0,
                 availableItems,
                 optionDisabled,
                 allDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+            if (readOnly) {
+              return {
+                ...changes,
+                isOpen: false,
+              }
+            }
+            if (state.isOpen === false) {
+              return {
+                ...changes,
+                isOpen: true,
+                highlightedIndex: controlledHighlightedIndex,
+              }
+            }
+            return {
+              ...changes,
+              highlightedIndex: findPrevIndex({
+                index: changes.highlightedIndex,
+                availableItems,
+                optionDisabled,
+                allDisabled,
+              }),
+            }
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
             if (readOnly) {
               return {
@@ -743,17 +810,17 @@ function AutocompleteInner<T>(
             }
             return {
               ...changes,
-              highlightedIndex: findPrevIndex<T>({
-                index: changes.highlightedIndex,
+              highlightedIndex: findPrevIndex({
+                index: availableItems.length - 1,
                 availableItems,
                 optionDisabled,
                 allDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
-            setSelectedItems([changes.selectedItem])
             return {
               ...changes,
+              highlightedIndex: controlledHighlightedIndex,
             }
           default:
             return changes
