@@ -37,7 +37,7 @@ jobs:
             echo "  Extracted scopes: '$scope_content'"
 
             # List of valid scopes, must be updated when new packages are added
-            valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker")
+            valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker" "devcontainer" "github" "build" "deps" "config" "docs")
 
             # Split by comma and check each scope
             IFS=',' read -ra individual_scopes <<< "$scope_content"

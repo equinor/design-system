@@ -77,6 +77,15 @@ Scopes correspond to the packages in our design system:
 - `eds-utils`
 - `figma-broker`
 
+### Infrastructure & Tooling
+
+- `devcontainer` - Development container configuration
+- `github` - GitHub workflows, templates, and configurations
+- `build` - Build system configuration
+- `deps` - Dependency management
+- `config` - General configuration files
+- `docs` - General documentation
+
 ### Multiple Scopes
 
 You can specify multiple scopes separated by commas:
