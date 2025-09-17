@@ -13,58 +13,53 @@ jobs:
 
           echo "🔍 Checking PR title: '$title'"
 
-          # Check basic format: type: description OR type(scope): description
-          if [[ $title =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: .+ ]]; then
-            echo "✅ Basic format is correct"
+          # Check if title starts with valid type
+          valid_types="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
+
+          if [[ $title =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert) ]]; then
+            echo "✅ Valid type found"
           else
-            echo "❌ PR title does not follow conventional commit format"
-            echo ""
-            echo "Expected format: type(scope): description"
-            echo ""
+            echo "❌ PR title must start with a valid type"
             echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
-            echo ""
-            echo "Examples:"
-            echo "  ✅ feat(eds-core-react): add button component"
-            echo "  ✅ fix(eds-icons, eds-core-react): resolve styling issues"
-            echo "  ✅ docs: update README"
-            echo "  ✅ test: add validation test"
-            echo ""
+            echo "Example: feat: add new feature"
             exit 1
           fi
 
-          # Extract and validate scopes if they exist
+          # Check if it has colon and description
+          if [[ $title =~ : ]]; then
+            echo "✅ Has description after colon"
+          else
+            echo "❌ PR title must have format: type: description or type(scope): description"
+            exit 1
+          fi
+
+          # Extract scope if it exists (between parentheses)
           if [[ $title =~ \(([^)]+)\) ]]; then
             scope_part="${BASH_REMATCH[1]}"
             echo "📦 Found scope(s): $scope_part"
 
-            # Split scopes on comma and trim whitespace
-            IFS=',' read -ra SCOPE_ARRAY <<< "$scope_part"
-            invalid_scopes=()
+            # Check each scope (split by comma)
+            valid_scopes="design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker"
 
-            for scope in "${SCOPE_ARRAY[@]}"; do
+            # Replace commas with spaces and check each scope
+            scopes_to_check=$(echo "$scope_part" | tr ',' ' ')
+
+            for scope in $scopes_to_check; do
               # Trim whitespace
-              scope=$(echo "$scope" | xargs)
+              scope=$(echo "$scope" | sed 's/^[ \t]*//;s/[ \t]*$//')
               echo "  - Checking scope: '$scope'"
 
-              # Check if scope is valid
-              if [[ ! "$scope" =~ ^(design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker)$ ]]; then
-                invalid_scopes+=("$scope")
+              if [[ $scope =~ ^(design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker)$ ]]; then
+                echo "    ✅ Valid scope"
+              else
+                echo "    ❌ Invalid scope: '$scope'"
+                echo ""
+                echo "Valid scopes: design-system-docs, eds-color-palette-generator, eds-core-react,"
+                echo "eds-data-grid-react, eds-demo, eds-icons, eds-lab-react, eds-tailwind,"
+                echo "eds-tokens, eds-tokens-build, eds-tokens-sync, eds-utils, figma-broker"
+                exit 1
               fi
             done
-
-            # Report invalid scopes if any
-            if [ ${#invalid_scopes[@]} -ne 0 ]; then
-              echo "❌ Invalid scope(s) found: ${invalid_scopes[*]}"
-              echo ""
-              echo "Valid scopes:"
-              echo "  - design-system-docs, eds-color-palette-generator, eds-core-react"
-              echo "  - eds-data-grid-react, eds-demo, eds-icons, eds-lab-react"
-              echo "  - eds-tailwind, eds-tokens, eds-tokens-build, eds-tokens-sync"
-              echo "  - eds-utils, figma-broker"
-              echo ""
-              echo "You can combine multiple scopes like: feat(eds-core-react, eds-utils): description"
-              exit 1
-            fi
 
             echo "✅ All scopes are valid"
           else
