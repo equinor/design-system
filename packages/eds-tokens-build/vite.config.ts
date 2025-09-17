@@ -18,7 +18,6 @@ export default defineConfig({
         'crypto',
         'style-dictionary',
         'style-dictionary-utils',
-        '@equinor/eds-tokens-sync',
       ],
     },
   },

@@ -33,42 +33,56 @@ const config = _extend({
 await config.buildAllPlatforms();
 ```
 
-### Color Tokens with Light/Dark Mode
+### Creating Light/Dark CSS colour variables
+
+Generate separate CSS files for light and dark themes using the color scheme pattern:
 
 ```typescript
 import { 
   _extend, 
-  createLightDarkTransform, 
-  includeTokenFilter 
+  includeTokenFilter,
+  mergeLightDarkFoundation 
 } from '@equinor/eds-tokens-build';
-import { readJsonFiles } from '@equinor/eds-tokens-sync';
-import { StyleDictionary } from 'style-dictionary-utils';
 
-// Read dark mode tokens
-const darkTokens = readJsonFiles(['tokens/dark-theme.json']);
-
-// Create and register light/dark transform
-const lightDarkTransform = createLightDarkTransform({
-  name: 'lightDarkMatrix',
-  darkTokensObject: darkTokens['dark-theme.json']
-});
-
-StyleDictionary.registerTransform(lightDarkTransform);
-
-// Build color tokens with light/dark support
-const colorConfig = _extend({
-  source: ['tokens/light-theme.json'],
-  include: ['tokens/core.json'],
+// Build light color scheme CSS variables
+const lightColorScheme = _extend({
+  source: ['tokens/light-color-scheme.json'],
+  include: ['tokens/light-colors.json'], // Core light colors
+  filter: (token) => includeTokenFilter(token, ['Color scheme']),
   buildPath: 'build/css/',
-  fileName: 'colors',
-  selector: ':root',
-  filter: (token) => includeTokenFilter(token, ['Color']),
-  transforms: ['name/kebab', 'color/css', 'lightDarkMatrix'],
-  outputReferences: true
+  fileName: 'light-color-scheme',
+  selector: '[data-color-scheme="light"]',
+  prefix: 'eds-color',
+  outputReferences: false,
 });
 
-await colorConfig.buildAllPlatforms();
+// Build dark color scheme CSS variables
+const darkColorScheme = _extend({
+  source: ['tokens/dark-color-scheme.json'],
+  include: ['tokens/dark-colors.json'], // Core dark colors
+  filter: (token) => includeTokenFilter(token, ['Color scheme']),
+  buildPath: 'build/css/',
+  fileName: 'dark-color-scheme',
+  selector: '[data-color-scheme="dark"]',
+  prefix: 'eds-color',
+  outputReferences: false,
+});
+
+await lightColorScheme.buildAllPlatforms();
+await darkColorScheme.buildAllPlatforms();
+
+// Merge into a single file using light-dark() CSS function
+mergeLightDarkFoundation({
+  prefix: 'eds-color',
+});
 ```
+
+This approach:
+- Uses `source` for the color scheme tokens (semantic colors like primary, secondary)
+- Uses `include` for the base color definitions (hex values, etc.)
+- Filters specifically for `['Color scheme']` tokens to avoid outputting all colors
+- Generates separate files for each theme with appropriate selectors
+- Merges them into a modern CSS file using the `light-dark()` function
 
 ### Typography Tokens
 
