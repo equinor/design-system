@@ -11,16 +11,10 @@ jobs:
         run: |
           title="${{ github.event.pull_request.title }}"
 
-          # Define allowed types
-          types="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
-
-          # Define allowed scopes
-          scopes="design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker"
-
           echo "🔍 Checking PR title: '$title'"
 
-          # Check if the title matches the pattern - emoji can be before OR after colon
-          if [[ ! $title =~ ^(\p{Emoji}\ )?(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?(!)?: .*$ ]]; then
+          # Check if the title matches the pattern - simplified regex without emoji pattern
+          if [[ ! $title =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?(!)?: .+ ]]; then
             echo "❌ PR title does not follow conventional commit format"
             echo ""
             echo "Expected format: type(scope): description"
