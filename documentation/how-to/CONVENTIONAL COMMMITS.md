@@ -61,7 +61,7 @@ type(scope): description
 
 ## Supported Scopes
 
-Scopes correspond to the packages in our design system:
+Scopes correspond to the **packages in our design system** and infrastructure & tooling:
 
 - `design-system-docs`
 - `eds-color-palette-generator`
@@ -77,7 +77,7 @@ Scopes correspond to the packages in our design system:
 - `eds-utils`
 - `figma-broker`
 
-### Infrastructure & Tooling
+#### Infrastructure & Tooling
 
 - `devcontainer` - Development container configuration
 - `github` - GitHub workflows, templates, and configurations
@@ -188,7 +188,7 @@ feat: add support for new package scope in PR validation
 
 ### Testing Changes
 
-Before merging workflow changes to main/develop:
+Before merging workflow changes to develop:
 
 1. **Create a feature branch** for workflow changes:
 
@@ -200,7 +200,7 @@ Before merging workflow changes to main/develop:
 
 3. **Test on the feature branch**:
    - Create a test branch from your feature branch
-   - Make a small change and create a PR **to your feature branch** (not main/develop)
+   - Make a small change and create a test PR **to your feature branch** (not develop)
    - Test with the new scope: `feat(new-scope): test validation`
    - Verify the workflow passes
 
@@ -209,7 +209,7 @@ Before merging workflow changes to main/develop:
    - Test existing scopes to ensure they still work
    - Test multiple scopes: `feat(new-scope, eds-core-react): combined test`
 
-5. **When all tests pass**, merge your feature branch to main/develop
+5. **When all tests pass**, open a PR to merge your feature branch to develop (delete test PR)
 
 **Why test on feature branch first?**
 
