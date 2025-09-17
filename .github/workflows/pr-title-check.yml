@@ -11,33 +11,28 @@ jobs:
         run: |
           title="${{ github.event.pull_request.title }}"
 
-          # Define allowed types
-          types="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
-
-          # Define allowed scopes
-          scopes="design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker"
-
           echo "🔍 Checking PR title: '$title'"
 
-          # Check if the title matches the pattern - emoji can be before OR after colon
-          if [[ ! $title =~ ^(\p{Emoji}\ )?(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?(!)?: .*$ ]]; then
+          # Check basic format: type: description OR type(scope): description
+          if [[ $title =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: .+ ]]; then
+            echo "✅ Basic format is correct"
+          else
             echo "❌ PR title does not follow conventional commit format"
             echo ""
             echo "Expected format: type(scope): description"
-            echo "Or with emoji: type(scope): 🎨 description"
             echo ""
             echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
             echo ""
             echo "Examples:"
             echo "  ✅ feat(eds-core-react): add button component"
             echo "  ✅ fix(eds-icons, eds-core-react): resolve styling issues"
-            echo "  ✅ docs: 📝 update README"
-            echo "  ✅ style(eds-tokens): 🎨 improve naming"
+            echo "  ✅ docs: update README"
+            echo "  ✅ test: add validation test"
             echo ""
             exit 1
           fi
 
-          # Extract scope if it exists
+          # Extract and validate scopes if they exist
           if [[ $title =~ \(([^)]+)\) ]]; then
             scope_part="${BASH_REMATCH[1]}"
             echo "📦 Found scope(s): $scope_part"
@@ -62,19 +57,10 @@ jobs:
               echo "❌ Invalid scope(s) found: ${invalid_scopes[*]}"
               echo ""
               echo "Valid scopes:"
-              echo "  - design-system-docs"
-              echo "  - eds-color-palette-generator"
-              echo "  - eds-core-react"
-              echo "  - eds-data-grid-react"
-              echo "  - eds-demo"
-              echo "  - eds-icons"
-              echo "  - eds-lab-react"
-              echo "  - eds-tailwind"
-              echo "  - eds-tokens"
-              echo "  - eds-tokens-build"
-              echo "  - eds-tokens-sync"
-              echo "  - eds-utils"
-              echo "  - figma-broker"
+              echo "  - design-system-docs, eds-color-palette-generator, eds-core-react"
+              echo "  - eds-data-grid-react, eds-demo, eds-icons, eds-lab-react"
+              echo "  - eds-tailwind, eds-tokens, eds-tokens-build, eds-tokens-sync"
+              echo "  - eds-utils, figma-broker"
               echo ""
               echo "You can combine multiple scopes like: feat(eds-core-react, eds-utils): description"
               exit 1
