@@ -4,57 +4,64 @@ A _menu_, also known as a dropdown, is a temporary list of actions or functions.
 
 ### Compact
 
-  
+---
+
+title: Menu
+description: Temporary list of contextual actions or functions triggered from another control.
+tags: [navigation, actions, overlay]
+
+---
+
+# Menu
+
+A menu (dropdown) is a temporary list of actions or functions.
+
+## When to Use
+
+To be added soon
+
+## Structure
+
+- Trigger control (button or icon button) – specifics incomplete in source (to be added soon)
+- Menu container (overlay)
+- Menu items (actions/functions)
+- Optional group dividers (full-width allowed)
+- Optional cascading submenu trigger (parent item)
+- Compact variant – details to be added soon
 
 ## Guidelines
 
-A menu should always be triggered from a  _(_using the `Ghost icon` or `Right icon` button) or from a . A menu can be dismissed by pressing `Escape` on the keyboard, clicking outside the menu, or by selecting an action or function in the menu. Full-bleed/full-width dividers are allowed to group content. Menus can be combined to create cascading menus allowing users to choose from a large variety of choices. These are organised by displaying menus with multiple levels of hierarchy. Cascading menus appear to the right of the parent and only on the left if there is no room for expansion on the right.
+A menu should always be triggered from another control (source text is incomplete; exact trigger patterns to be added soon). It can be dismissed by pressing `Escape`, clicking outside, or selecting an item. Full-width dividers may group related actions. Menus may cascade to expose hierarchical or extended sets of choices; cascading menus open to the right (or left if no space).
 
+Content:
 
+- Keep item labels as short as possible
+- Use meaningful labels that explain the function
+- Use active tense
+- Do not mix nouns and verbs within the same list
 
-# Design
+Do:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Group related actions with dividers when it clarifies meaning
+- Provide clear trigger affordance
 
-NAVIGATION
+Don’t:
 
-# Menu
+- Over-nest cascading levels (depth guidance to be added soon)
+- Rely only on iconography without labels (unless universally understood)
 
-A _menu_, also known as a dropdown, is a temporary list of actions or functions.
+## Accessibility
+
+Accessibility specifics (focus order, roles, aria attributes, submenu keyboard navigation) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  Locate the **Assets** tab in the **Layers Panel**.
-    
-2.  There are two ways to locate the `Menu` component needed
-    
-    1.  Use the search bar to search for a component grouping name or variation name.
-        
-    2.  Scroll through the folders list and open the grouping needed.
-        
-3.  Once the component is located, click and drag it into the frame/artboard
-    
+## Code Example
 
-### Content
+For implementation details and usage examples, please refer to our Storybook documentation.
 
--   Keep the item labels as short as possible.
-    
--   Use meaningful item labels that explain the function.
-    
--   Item labels should be in the active tense.
-    
--   Do not mix nouns and verbs. Pick one or the other.
+## Support
 
-
-
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Menu
-
-A _menu_, also known as a dropdown, is a temporary list of actions or functions.
+Further guidance on keyboard patterns, accessibility roles, and compact variant behavior will be added soon. Reach out if you need this sooner.

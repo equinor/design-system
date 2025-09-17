@@ -85,6 +85,6 @@ To be added soon
 
 For implementation details and usage examples, please refer to our Storybook documentation.
 
-## Support / Next Steps
+## Support
 
 Need another variant or block? Reach out or open an issue. We improve the card pattern together so it stays purposeful, accessible, and consistent.

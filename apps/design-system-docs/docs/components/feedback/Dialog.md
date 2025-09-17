@@ -1,49 +1,52 @@
+---
+title: Dialog
+description: Modal surface that interrupts workflow to present critical information or required decisions.
+tags: [feedback, modal, blocking]
+---
+
 # Dialog
 
-_Dialogs_ display critical notifications and required actions.
+Dialogs display critical notifications and required actions.
 
-**More examples available in** **.**
+## When to Use
+
+Use for urgent decisions, critical confirmations, or destructive actions. Avoid for low/medium priority messaging (use banner or snackbar). (Priority mapping details to be added soon.)
+
+## Structure
+
+- Overlay (scrim behind)
+- Container
+- Title (optional if clear from content)
+- Content body (message, form, etc.)
+- Action area (primary + optional secondary; never more than 2 actions)
+  Scrolling behavior (fixed header/footer with scrollable body) to be added soon.
 
 ## Guidelines
 
-A dialog is a modal window that appears over everything on the screen and always over a . Dialogs can appear without warning and require users to stop their current task so they should be used sparingly. The dialog disables all application functionality and requires an action to be taken in order to be dismissed.
+Blocks underlying interaction until user responds. Keep content concise; minimize scrolling. Actions must relate directly to the message. Use sparingly due to high interruption level.
 
-Dialogs can contain a Title, Content and Actions. A dialog can have one or two actions, but never a third. Actions should always be related to the message. Dialogs should try to avoid scrollable content. When scrolling is necessary, the title and actions are fixed and the content scrolls.
+Do:
 
-In the notification family, dialogs are the most interruptive.  deliver medium priority slightly interruptive notifications, and  deliver low priority un-interruptive notifications. Since dialogs are very disruptive, they should be used only in critical situations.
+- Provide a clear primary action
+- Use specific destructive action labels (e.g., Delete, not OK) – To be added soon
 
+Don’t:
 
+- Add tertiary actions in footer
+- Use for non-critical status updates
 
-# Design
+## Accessibility
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Dialog
-
-_Dialogs_ display critical notifications and required actions.
+Accessibility specifics (focus trapping, aria-modal, initial focus strategy, escape key handling) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **dialog**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Dialog
-
-_Dialogs_ display critical notifications and required actions.
+Guidance on responsive sizing, stacking modals prevention, and form validation inside dialogs will be added soon. Reach out if needed sooner.

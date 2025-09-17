@@ -1,49 +1,52 @@
+---
+title: Popover
+description: Floating contextual layer for supplemental information or lightweight actions.
+tags: [overlay, contextual]
+---
+
 # Popover
 
-A _popover_ is a floating card that provides more information or actions on hover or click.
+A popover is a floating card that provides more information or actions on hover or click.
 
-### Activate on click
+## When to Use
 
-### Activate on hover
+Use for lightweight, contextual supplemental content or small action groups. Avoid for critical decisions (use Dialog) or large structured content (use Side sheet or dedicated page). (More detailed criteria to be added soon.)
+
+## Structure
+
+- Trigger element
+- Popover container
+- Content area (text, actions)
+- Caret / pointer (directional indicator)
+- Optional close button (required if no other interactive element)
+  Size constraints (max width 560px, max height 80% viewport) retained from source.
 
 ## Guidelines
 
-Popovers provide excess or additional information that does not fit in the main content area. A popover always has an indicator (caret) towards the area in which it is attached. Popovers should never be wider than 560px and their height should not be taller than 80% of the screen.
+Popovers provide supplemental content not suited to the primary layout. Always include a directional caret pointing to the trigger area. Dismiss via close icon, ESC, outside click, selecting an action, or opening another popover. If no actions are present the close icon must be the first focusable element. Caret direction supports all sides. Additional spacing, animation, and stacking guidance to be added soon.
 
-To dismiss a popover, use the close icon, press the `ESC` key, open another popover or click outside the popover. If there are no actions in the popover, then the close icon should be the first focusable element.
+Do:
 
-**Caret** direction is available in all directions
+- Keep content concise
+- Ensure trigger remains visible while popover is open
 
+Don’t:
 
+- Nest multiple popovers excessively
+- Use for persistent content
 
-# Design
+## Accessibility
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Popover
-
-A _popover_ is a floating card that provides more information or actions on hover or click.
+Accessibility specifics (focus trap vs non-trap behavior, aria-expanded on trigger, aria-controls linkage, escape handling, pointer target area) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **popover**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Popover
-
-A _popover_ is a floating card that provides more information or actions on hover or click.
+Guidance on animation tokens, positioning collisions, and responsive behavior will be added soon. Reach out if needed earlier.

@@ -79,7 +79,7 @@ To be added soon
 
 For implementation details and usage examples, please refer to our Storybook documentation.
 
-## Support / Next Steps
+## Support
 
 Need another size or interaction pattern? Reach out or open an issue. We evolve the side sheet together to keep it usable, accessible, and purposeful.
 

@@ -74,7 +74,7 @@ To be added soon
 
 For implementation details and usage examples, please refer to our Storybook documentation.
 
-## Support / Next Steps
+## Support
 
 Need a variant or found a gap? Reach out or open an issue. We improve components together to keep them consistent, accessible, and reliable.
 

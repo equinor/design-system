@@ -1,83 +1,57 @@
+---
+title: Progress indicators
+description: Visual feedback showing loading status or ongoing processing, determinate or indeterminate.
+tags: [feedback, loading, progress]
+---
+
 # Progress indicators
 
-_Progress indicators_ are animated helpers that indicate waiting time as content loads.
+Progress indicators are animated helpers that indicate waiting time as content loads.
 
-### Circular
+## When to Use
 
-#### Indeterminate
+Use when an operation takes noticeable time. Use determinate when progress can be quantified; indeterminate when duration cannot be predicted. Avoid for near-instant actions. (Additional threshold guidance to be added soon.)
 
-#### Determinate
+## Structure
 
-### Dots
-
-### Linear
-
-#### Indeterminate
-
-#### Determinate
-
-### Star
-
-#### Indeterminate
-
-#### Determinate
+- Track / container (linear, circular, dots, star)
+- Indicator fill / animation
+- Optional label / percentage – To be added soon
+- Optional helper text – To be added soon
 
 ## Guidelines
 
-Progress indicators inform users about the current loading state giving them insight into the process. Progress indicators may be determinate or indeterminate.
+Determinate shows portion complete; indeterminate conveys ongoing processing without remaining time. Choose variant by context (specific variant placement details to be added soon).
 
-Determinate progress indicators indicate how long the process will take. They should be used once there is an estimate of wait time available.
+Variant intent:
 
-Indeterminate progress indicators indicate an unknown amount of time the process will take. They should be used when there is _not_ an estimated wait time available.
+- Linear: Emphasize area or section-level loading (e.g., page body, footer region, inline component)
+- Circular: Compact placeholder usage (icons, empty states) for short waits
+- Dots: Subtle inline or lightweight loading contexts – details to be added soon
+- Star: Splash screens / branded waiting only
 
-#### Linear
+Do:
 
-Linear progress indicators are great to focus attention to an area. They are great for places like empty pages, at the bottom of the , and in  and .
+- Switch from indeterminate to determinate once total progress known
+- Provide nearby context if animation may exceed a few seconds
 
-#### Circular
+Don’t:
 
-Circular progress indicators are great for places like icons and empty pages. They should be used for short waiting times.
+- Loop indeterminate endlessly without fallback messaging
+- Use multiple different indicator styles simultaneously in one view
 
-#### Dots
+## Accessibility
 
-Dot progress indicators are for use within .
-
-#### Star
-
-Star progress indicators are to be used on splash screens and empty pages only.
-
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Progress indicators
-
-_Progress indicators_ are animated helpers that indicate waiting time as content loads.
+Accessibility specifics (aria-valuenow / aria-valuemax for determinate, role="status" / polite live regions, reduced motion considerations) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **Progress Indicator**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Progress indicators
-
-_Progress indicators_ are animated helpers that indicate waiting time as content loads.
+Guidance on adaptive transitions, skeleton vs progress indicator selection, and motion reduction strategies will be added soon. Reach out if needed earlier.

@@ -1,43 +1,51 @@
+---
+title: Table of contents
+description: Lists anchored headings on the current page for quick in-page navigation.
+tags: [navigation, in-page]
+---
+
 # Table of contents
 
-_A table of contents_ is a list of hyperlinks that scroll to anchored text on the same page.
+A table of contents is a list of hyperlinks that scroll to anchored text on the same page.
+
+## When to Use
+
+Use when a page has multiple sections or is long enough that quick scanning and direct jumps improve usability. Avoid when content is very short or has only a single heading level. (More detailed criteria to be added soon.)
+
+## Structure
+
+- Container (may be sticky or inline)
+- List of anchor links (ordered by page hierarchy)
+- Current section indicator – To be added soon
+- Optional nested lists for subsections – To be added soon
+  Details on markup and heading level filtering to be added soon.
 
 ## Guidelines
 
-Table of contents, also known as _anchors_ or _article navigation_, link to anchored sections on a page. They always link to the current page. Table of contents can be placed either under the main heading and scroll away with the page, or to the right of the page's main content and be sticky.
+Also known as anchors or article navigation, links always point to sections within the current page. Placement options: directly under the main heading (scrolls with content) or to the right of the main content as a sticky element. Additional guidance on maximum depth, truncation, and collapsing subsections to be added soon.
 
+Do:
 
+- Reflect the actual heading order
+- Keep labels identical to on-page headings
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Invent labels not present in the content
+- Over-nest beyond meaningful hierarchy
 
-NAVIGATION
+## Accessibility
 
-# Table of contents
-
-_A table of contents_ is a list of hyperlinks that scroll to anchored text on the same page.
+Accessibility specifics (skip navigation relationship, aria-current/aria-selected for active section, focus handling on jump) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **table of contents**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the items as needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Table of contents
-
-_A table of contents_ is a list of hyperlinks that scroll to anchored text on the same page.
+Further guidance on active section tracking, scroll spy performance, and responsive placement will be added soon. Reach out if needed earlier.

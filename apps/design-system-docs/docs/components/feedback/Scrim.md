@@ -1,55 +1,49 @@
+---
+title: Scrim
+description: Translucent overlay that dims underlying UI to emphasize a foreground surface.
+tags: [feedback, overlay]
+---
+
 # Scrim
 
-A _scrim_ is a temporary visual effect that fades the general interface while allowing the user to focus on an overlay.
+A scrim is a temporary visual effect that fades the general interface while allowing focus on an overlay.
+
+## When to Use
+
+Use with modal or elevated overlay components (dialog, elevated navigation, side sheet) to direct attention. Avoid standalone use without a foreground surface. (Component pairing guidance to be added soon.)
+
+## Structure
+
+- Full-viewport backdrop layer
+- Optional blur / tint variant – To be added soon
+- Foreground surface (paired component) sits above
 
 ## Guidelines
 
-Always use a scrim with an overlay component such as a dialog, elevated  or elevated navigation  (mobile only).
+Always paired with an overlay. Clicking the scrim or pressing ESC closes the foreground surface (unless a blocking state). Focus moves appropriately afterward. Additional opacity tokens and theming variants to be added soon.
 
-#### Interactions
+Do:
 
-When the scrim is clicked on or the `Esc` key is pressed the overlay component will close, closing the scrim with it.
+- Ensure sufficient contrast for foreground content
+- Prevent interaction with background while active
 
-A `Scrim` shows behind all other surfaces in an app, displaying contextual and actionable content.
+Don’t:
 
--   The scrim’s back layer is persistent, displaying controls and content that relate to the front layer.
-    
--   The scrim focuses attention on one layer at a time.
-    
--   The scrim is displayed at full width and holds primary content.
-    
--   The scrim can be closed by either interacting with the front layer, using \`esc\` button or tapping a conceal affordance on either layer.
+- Stack multiple scrims
+- Use without a dismissal path
 
+## Accessibility
 
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Scrim
-
-A _scrim_ is a temporary visual effect that fades the general interface while allowing the user to focus on an overlay.
+Accessibility specifics (aria-hidden for background, focus return strategy, escape handling exceptions) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **Scrim**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Scrim
-
-A _scrim_ is a temporary visual effect that fades the general interface while allowing the user to focus on an overlay.
+Guidance on motion transitions, blur vs tint criteria, and non-dismissable (blocking) cases will be added soon. Reach out if needed earlier.

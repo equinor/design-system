@@ -1,43 +1,48 @@
+---
+title: Divider
+description: Thin visual separator that groups related content sections.
+tags: [layout, separation]
+---
+
 # Divider
 
-A _divider_ is a thin line that separates content into clear groups.
+A divider is a thin line that separates content into clear groups.
 
-**More examples available in** **.**
+## When to Use
+
+Use to visually separate related content blocks or logical sections. Avoid overuse which can create visual noise. (More detailed criteria to be added soon.)
+
+## Structure
+
+- Line rule (horizontal or vertical context dependent) – Vertical usage details to be added soon
+- Spacing above/below defined by layout tokens – To be added soon
 
 ## Guidelines
 
-Dividers are subtle ways to group sections, and can only be used in the colours `**UI Background/Default**`, `**UI Background/Light**` and `**UI Background/Medium**`. Dividers can be used full-width where allowed by parent container, or attached to a column's width.
+Dividers subtly group sections. Approved colors: UI Background/Default, UI Background/Light, UI Background/Medium. They may span full width or align to a column width. Additional guidance on density, theming, and responsive spacing to be added soon.
 
+Do:
 
+- Use sparingly to clarify grouping
+- Align with the content grid
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Stack multiple dividers without content
+- Use as a substitute for sufficient whitespace
 
-DATA DISPLAY
+## Accessibility
 
-# Divider
-
-A _divider_ is a thin line that separates content into clear groups.
+Purely decorative when used only as a visual boundary—should not add extraneous semantic elements. Additional guidance (role usage, high-contrast adjustments) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **divider**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Divider
-
-A _divider_ is a thin line that separates content into clear groups.
+Spacing tokens, vertical variant usage, and theming guidance will be added soon. Reach out if needed earlier.

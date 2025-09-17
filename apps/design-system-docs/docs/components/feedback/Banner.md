@@ -1,57 +1,52 @@
+---
+title: Banner
+description: Medium-priority notification with optional actions, shown at top of content area.
+tags: [feedback, notification]
+---
+
 # Banner
 
-_Banners_ display important notifications and related optional actions.
+Banners display important notifications and related optional actions.
 
-### Text and icon
+## When to Use
 
-### Text and action
+Use for medium‑priority notifications that may require acknowledgement or an optional action. Avoid for transient low-priority updates (use snackbar) or blocking/high-priority alerts (use dialog). (Priority mapping details to be added soon.)
 
-### Text, action and icon
+## Structure
+
+- Container (full-width within main content area)
+- Icon (optional)
+- Message text
+- Primary action (optional)
+- Secondary / dismiss action (optional)
+  Placement and responsive stacking rules to be added soon.
 
 ## Guidelines
 
-### Usage
+Communicate a change or error; require an action to dismiss when appropriate. May be fixed or scroll with content. Should span 100% of main content width but not overlap persistent side surfaces. Alternative names (alert bar, inline alert) to be added soon.
 
-Banners should communicate a change or error and require an action in order to be dismissed. Banners deliver medium priority information while  deliver low priority and  deliver high priority. Banners are meant to be slightly interruptive but not overly distracting.
+Do:
 
-### Placement
+- Keep message concise
+- Provide clear action wording
 
-Banners are always at the top of the page but below the . Banners can be fixed or scroll away with content. They should fill 100% of the width of the main content area. They are not to go over open  or fixed  but beside them.
+Don’t:
 
-Banners are also known as  or alerts.
+- Use for frequent, low-noise updates
+- Stack excessive banners (handling guidance to be added soon)
 
+## Accessibility
 
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Banner
-
-_Banners_ display important notifications and related optional actions.
+Accessibility specifics (role="alert" vs role="status" usage, focus management when injected, dismiss button labeling) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **Banner**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-FEEDBACK
-
-# Banner
-
-_Banners_ display important notifications and related optional actions.
+Guidance on stacking, auto-dismiss patterns, and theming variants will be added soon. Reach out if needed sooner.

@@ -1,43 +1,51 @@
+---
+title: Tooltip
+description: Provides brief contextual help or labels on hover, focus, or long press.
+tags: [information, assistive]
+---
+
 # Tooltip
 
-_Tooltips_ show when hovered, focused or long-pressed (touch), and display information such as a text label or a short description.
+Tooltips show when hovered, focused, or long-pressed and display a short label or description.
+
+## When to Use
+
+Use to clarify an icon, control, or truncated text without adding permanent on-screen noise. Avoid for critical information or actions required to complete a task. (More detailed criteria to be added soon.)
+
+## Structure
+
+- Trigger element
+- Tooltip container
+- Text content (single concise line preferred)
+- Pointer / caret (optional) – To be added soon
+  Positioning variants (top, right, bottom, left) – To be added soon
 
 ## Guidelines
 
-Tooltips disappear after the mouse is no longer hovering the target area, the focus has moved on or the long-press is released. The information provided should be very short and descriptive and explain icon meanings or differences between components.
+Tooltips disappear when hover ends, focus moves, or long press is released. Keep content short (target ≤80 characters, ideally single line). They should point or clearly relate to the triggering element.
 
-Tooltips should aim to have a single line of text that does not wrap, and is kept to under 80 characters in length. The position of the tooltip is flexible, and they should always point to the component to which they give information about.
+Do:
 
+- Use for clarification, not discovery of essential features
+- Ensure sufficient contrast
 
+Don’t:
 
-# Design
+- Place interactive elements inside tooltips
+- Depend on tooltip content for required instructions
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+## Accessibility
 
-DATA DISPLAY
-
-# Tooltip
-
-_Tooltips_ show when hovered, focused or long-pressed (touch), and display information such as a text label or a short description.
+Accessibility specifics (aria-describedby usage, focus management, touch delay, motion/exit timing) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **tooltip**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Tooltip
-
-_Tooltips_ show when hovered, focused or long-pressed (touch), and display information such as a text label or a short description.
+Guidance on delayed appearance, dismissal timing, and multi-line wrapping will be added soon. Reach out if needed earlier.

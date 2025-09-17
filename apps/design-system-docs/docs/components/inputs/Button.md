@@ -1,66 +1,51 @@
+---
+title: Button
+description: Triggers an immediate action or event on user interaction.
+tags: [input, action]
+---
+
 # Button
 
-_Buttons_ allow users to take action with a single click or tap.
+Buttons allow users to take action with a single click or tap.
 
-### Button
+## When to Use
 
-### Full width
+Use a button for initiating an action in the current context. Avoid when navigation is the primary intent (use a link). (Detailed decision matrix to be added soon.)
 
-  
+## Structure
+
+- Container (variant: contained, outlined, ghost)
+- Label text
+- Optional leading icon
+- Optional trailing icon
+- Optional full-width layout – To be added soon
 
 ## Guidelines
 
-EDS has `primary`, `secondary` and `danger` colour buttons available in the `contained`, `outlined` and `ghost` variations. All variations can have the following: an icon on the left, an icon on the right, an icon with no text and text only with no icon. When using an icon, it must be directly related to the action and label of the button.
+Variants: primary, secondary, danger across contained, outlined, ghost. Icons must have a direct relationship to the action. Provide clear, concise labels (verb-first where appropriate). Guidance on hierarchy (primary vs secondary placement) to be added soon.
 
-### Colours
+Do:
 
+- Use one primary button per view region
+- Keep labels short (≤3 words where possible)
 
+Don’t:
 
-# Design
+- Pair unrelated iconography
+- Stack multiple danger buttons together
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+## Accessibility
 
-INPUTS
-
-# Button
-
-_Buttons_ allow users to take action with a single click or tap.
+Accessibility specifics (focus states, disabled semantics, aria-pressed for toggle patterns, high contrast adaptations) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-     
+## Code Example
 
-Embed links from these tools and more
+For implementation details and usage examples, please refer to our Storybook documentation.
 
-1.  In Figma go to the **Assets Panel** and search for **button**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
-    
+## Support
 
-### Buttons in groups
-
-### Buttons and hierarchy
-
-### Button label
-
-### Danger button
-
-### Button with icons
-
-
-
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Button
-
-_Buttons_ allow users to take action with a single click or tap.
+Guidance on grouping, responsive sizing, and destructive confirmation patterns will be added soon. Reach out if needed sooner.

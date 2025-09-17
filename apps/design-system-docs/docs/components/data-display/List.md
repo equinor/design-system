@@ -1,49 +1,50 @@
+---
+title: List
+description: Organises related content items in ordered or unordered form.
+tags: [data-display, grouping]
+---
+
 # List
 
-_Lists_ organise information into related groups of content.
+Lists organise information into related groups of content.
 
-### Ordered
+## When to Use
 
-### Ordered from 15
+Use unordered lists when order is not important. Use ordered lists when sequence or hierarchy matters. (Additional criteria like semantic depth and accessibility patterns to be added soon.)
 
-### Unordered
+## Structure
 
-**More examples available in** **.**
+- Container (ul or ol)
+- List items (li)
+- Optional nested lists – To be added soon
+- Optional starting index (ordered from custom number)
 
 ## Guidelines
 
-Bulleted lists are used when order is not of importance. Numbered lists are used when order and hierarchy are needed.
+Bulleted lists are for unordered grouping. Numbered lists are for ordered processes or ranked items. Provide concise, parallel-structured items. Additional guidance on punctuation, capitalization, and nesting limits to be added soon.
 
+Do:
 
+- Keep items grammatically parallel
+- Use sentence case (unless proper nouns)
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Over-nest deeply (avoid more than 2 levels) – To be added soon
+- Mix ordered and unordered styles arbitrarily
 
-DATA DISPLAY
+## Accessibility
 
-# List
-
-_Lists_ organise information into related groups of content.
+Ensure correct semantic elements (`ul`, `ol`, `li`). Avoid inserting non-list elements that break hierarchy. Additional guidance (screen reader announcements for nested levels) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **lists**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# List
-
-_Lists_ organise information into related groups of content.
+Guidance on styling tokens, spacing, and nested list accessibility will be added soon. Reach out if needed earlier.

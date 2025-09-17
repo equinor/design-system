@@ -1,45 +1,60 @@
+---
+title: Stepper
+description: Guides users through a sequenced multi-step task, showing progress and current position.
+tags: [navigation, process, progress]
+---
+
 # Stepper
 
-_Steppers_ guide users through the steps of a task.
+Steppers guide users through the steps of a task.
+
+## When to Use
+
+Use when a task is multi-step, complex, or benefits from clear progress visibility. Avoid for simple single-step submissions. (More detailed criteria to be added soon.)
+
+## Structure
+
+- Container / stepper track
+- Individual step (icon or number + label)
+- Current step indicator
+- Completed step state
+- Optional description or helper text – To be added soon
+  Details on vertical vs horizontal variants to be added soon.
 
 ## Guidelines
 
-When a task is more advanced or complicated, visual help from a stepper lets the user know where they are in the current process.
+When a task is more advanced or complicated, the stepper gives users awareness of where they are in the process.
 
-## Content
+Content:
 
--   Avoid titles that are too long. Titles should be to the point and short, no more than three words if possible.
-    
--   Keep the item labels as short as possible.
-    
--   Use meaningful item labels that explain the function.
-    
--   Item labels should be in the active tense.
-    
--   Do not mix nouns and verbs. Pick one or the other.
-    
--   Always use icons that clearly communicate their intended purpose.
+- Avoid titles that are too long (aim ≤3 words)
+- Keep step labels concise and meaningful
+- Use active tense
+- Do not mix nouns and verbs across labels
+- Use icons that clearly communicate purpose
 
+Do:
 
+- Show a distinct current state vs completed vs upcoming
+- Keep label wording consistent in style
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Overload steps with long descriptive text
+- Change step order dynamically without feedback
 
-NAVIGATION
+## Accessibility
 
-# Stepper
+Accessibility specifics (aria orientation, labelling for current step, announcing progress changes) to be added soon.
 
-_Steppers_ guide users through the steps of a task.
+## Implementation in Figma
 
-## Implementations in Figma
+To be added soon
 
-### Instructions
+## Code Example
 
-1.  In Figma go to the **Assets Panel** and search for **Stepper**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+For implementation details and usage examples, please refer to our Storybook documentation.
+
+## Support
+
+Further guidance on error states, branching flows, and mobile condensation will be added soon. Reach out if needed sooner.

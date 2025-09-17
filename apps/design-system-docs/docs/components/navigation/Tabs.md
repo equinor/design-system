@@ -1,80 +1,52 @@
+---
+title: Tabs
+description: Switch between related content views of equal hierarchy within the same context.
+tags: [navigation, segmentation]
+---
+
 # Tabs
 
 Tabs organise related content across different views to be quickly navigated.
 
-  
+## When to Use
 
-### Default
+Use tabs when content sections share equal hierarchy and users need to switch quickly without changing page context. Avoid tabs for deep navigation, unrelated destinations, or long sequential workflows. (More detailed criteria to be added soon.)
 
-### With search
+## Structure
 
-**More examples available in** **.**
+- Tab list container
+- Individual tab (label, optional icon)
+- Active indicator / underline
+- Associated panel (one visible at a time)
+- Optional embedded search (as seen in “With search” variant)
+  Details on semantics and ARIA roles to be added soon.
 
 ## Guidelines
 
-Tabs allow for navigation between content that is related and has an equal hierarchy. Each tab's content should be noticeably different from the other. Tabs allow for information to be presented in a space-saving layout.
+Tabs allow navigation between related content of equal importance. Each tab’s content should be clearly distinct. Layout is space-efficient and keeps users oriented.
 
-### Width
+Width options:
 
-Tab width can be decided by three factors:
+1. Equally divide available width (only recommended for ≤4 tabs)
+2. Match widest tab for visual balance (ensure smaller layouts still show all tabs)
+3. Natural / min-width per tab to conserve space
 
-1.  The width of the space available being equally divided by the number of tabs. This method is only to be used for four tabs or less.
-    
-2.  The width of the widest tab determining the width of all the tabs to provide visual balance. This should be used with caution ensuring all tabs will be seen in smaller layouts.
-    
-3.  Each tab having its own minimum width to conserve space.
-    
+Labels: Provide clear direction; truncate only when necessary and show full text via tooltip. Active/inactive state styling details to be added soon.
 
-  
+Exceptions: If the Navigation Drawer is not used, tabs may appear in the Top Bar as primary navigation linking to otherwise unrelated pages (exception usage specifics to be added soon).
 
-### Content
+## Accessibility
 
-#### Labels
-
-Tab labels should provide clear and concise direction. Note that if the label is longer than the maximum width it will be truncated and should have a tooltip provided.
-
-## Exceptions
-
-If the `Navigation: Navigation Drawer` is not used, tabs may be used in the `Navigation: Top Bar` as the main navigation linking to unrelated pages.
-
-#### Active
-
-#### Inactive
-
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Tabs
-
-Tabs organise related content across different views to be quickly navigated.
-
-  
+Accessibility specifics (keyboard navigation order, arrow key behavior, focus management, aria-selected, aria-controls) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **tabs**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Tabs
-
-Tabs organise related content across different views to be quickly navigated.
+Further guidance on scrollable tab lists, overflow handling, and responsive collapsing will be added soon. Reach out if you need it sooner.

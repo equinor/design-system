@@ -1,57 +1,50 @@
+---
+title: Selection controls
+description: Checkbox, radio, and switch inputs for making choices and setting states.
+tags: [input, selection]
+---
+
 # Selection controls
 
-_Selection controls_ allow users to select options, make decisions and set preferences.
+Selection controls allow users to select options, make decisions, and set preferences.
 
-### Checkbox single
+## When to Use
 
-### Checkbox multiple
+Use checkboxes for independent multi-selection, radios for mutually exclusive single selection, and switches for immediate on/off state changes. Avoid mixing patterns in a single logical group. (Detailed usage matrix to be added soon.)
 
-### Radio single
+## Structure
 
-### Radio group
-
-  
-
-### Switch default
-
-### Switch small
+- Control (checkbox / radio / switch)
+- Label text (clickable region)
+- Optional helper / description – To be added soon
+- Optional group legend (fieldset) – To be added soon
 
 ## Guidelines
 
-Selection controls are to be visible and understandable at a quick glance. Selected options are more visible than unselected. Selection controls are always accompanied with a clear label. Make sure that the labels are surrounded with a `clickbound` that activates the selection control as well as the control itself.
+Controls must be clearly visible; selected state should be more prominent. Every control has an associated label with a click/tap target encompassing control + label. Additional spacing, grouping, and density guidance to be added soon.
 
+Do:
 
+- Use a fieldset + legend for grouped radios (accessibility)
+- Provide clear default state
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Use switches for form submissions requiring confirmation
+- Present a single radio on its own (use a checkbox instead)
 
-INPUTS
+## Accessibility
 
-# Selection controls
-
-_Selection controls_ allow users to select options, make decisions and set preferences.
+Accessibility specifics (fieldset/legend usage, aria-checked for custom styling, focus ring visibility, switch role semantics) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **selection controls**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Selection controls
-
-_Selection controls_ allow users to select options, make decisions and set preferences.
+Guidance on error messaging, nested groups, and indeterminate checkbox state will be added soon. Reach out if needed earlier.

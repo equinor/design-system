@@ -1,47 +1,51 @@
+---
+title: Slider
+description: Adjusts a numeric value or range along a continuous or stepped track.
+tags: [input, control]
+---
+
 # Slider
 
-A _slider_ is a flexible input that allows users to adjust predefined values.
+Sliders allow users to adjust predefined values.
 
-  
+## When to Use
 
-**More examples available in** **.**
+Use for quick adjustment of a numeric value or range when fine-grained precision is not critical. Avoid when exact values are required (use a text field or stepper). (Detailed criteria to be added soon.)
+
+## Structure
+
+- Track (continuous or stepped)
+- Thumb (single) or thumbs (range)
+- Optional ticks / marks – To be added soon
+- Value label / tooltip – To be added soon
+- Min/max labels – To be added soon
 
 ## Guidelines
 
-Sliders reflect values along a bar where users can select a single value or a range of values. Sliders reflect the current state of the values they control, and value changes are immediate to the content in which they belong.
+Displays current value along a bar; updates apply immediately. Range sliders allow selecting min and max bounds. Provide visible min/max context. Additional guidance on snapping, keyboard step, and vertical orientation to be added soon.
 
+Do:
 
+- Provide numeric alternative where precision matters
+- Ensure adequate thumb size for touch
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Use extremely small increments demanding fine motor control
+- Hide current value entirely (value presentation guidance to be added soon)
 
-INPUTS
+## Accessibility
 
-# Slider
-
-A _slider_ is a flexible input that allows users to adjust predefined values.
+Accessibility specifics (ARIA roles, aria-valuenow/aria-valuemin/aria-valuemax, keyboard arrow/page/home-end behavior) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **slider**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Slider
-
-A _slider_ is a flexible input that allows users to adjust predefined values.
+Guidance on dual-thumb overlap handling, tooltips, and reduced motion preferences will be added soon. Reach out if needed earlier.

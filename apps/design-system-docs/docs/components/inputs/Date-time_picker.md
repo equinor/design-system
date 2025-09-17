@@ -1,37 +1,56 @@
+---
+title: Date/time picker
+description: Allows selection of a date, time, or date/time range via interactive overlay.
+tags: [input, date-time]
+---
+
 # Date/time picker
 
-_Date/time pickers_ allows users to select a date and/or time, or a range of dates and/or times.
+Date/time pickers allow users to select a date and/or time, or a range of dates and times.
 
-## Examples
+## When to Use
+
+Use for scheduling, filtering by date/time, or specifying time-bound parameters. Avoid for vague temporal ranges (use predefined quick range chips) or when manual free text is more efficient for expert users. (Detailed decision guidance to be added soon.)
+
+## Structure
+
+- Trigger input (text field)
+- Overlay panel (calendar grid / time list)
+- Navigation controls (month/year selectors) – To be added soon
+- Range start/end highlight – To be added soon
+- Time selection list / input – To be added soon
+- Confirmation / apply actions (if not auto-apply) – To be added soon
 
 ## Guidelines
 
-Date pickers are tied to input fields, and are accessed through focusing on the input field by clicking or using the `tab` key. The date picker opens as an overlaying interactive calendar that allows the user to select a date or a range of dates. If a date is chosen, this is reflected in the input field.
+Activated on focus or click of the associated input. Calendar enables single date or range selection; time list enables precise time selection. Selected values reflect immediately in the input. Additional guidance on timezone handling, relative ranges, min/max constraints, and invalid date feedback to be added soon.
 
-Time pickers are tied to input fields, and are accessed through focusing on the input field by clicking or using the `tab` key. The time picker opens as an overlaying list of time that allows the user to select a specific time. If a time is chosen, this is reflected in the input field.
+Do:
 
-### Variant
+- Indicate range hover state during selection
+- Provide clear disabled styling for out-of-range dates
 
+Don’t:
 
+- Force manual typing when a structured picker is present
+- Overload with multiple mixed selection paradigms
 
-# Design
+## Accessibility
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Date/time picker
-
-_Date/time pickers_ allows users to select a date and/or time, or a range of dates and/or times.
+Accessibility specifics (grid role for calendar, keyboard navigation across days/months, announcing selected range, time list semantics) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **date picker**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
+
+For implementation details and usage examples, please refer to our Storybook documentation.
+
+## Support
+
+Guidance on internationalization (locales, first day of week), time zones, and range presets will be added soon. Reach out if needed earlier.
+
+---
+
+Last reviewed: 2025-09-17

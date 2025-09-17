@@ -62,6 +62,6 @@ To add an accordion in Figma:
 
 For implementation details and usage examples, please refer to our [Storybook documentation](https://storybook.eds.equinor.com/?path=/docs/surfaces-accordion--docs).
 
-## Support / Next Steps
+## Support
 
 If you have questions or need support, please visit our [Support page](../../support/support.md). We are here to help you organise your content and create accessible, user-friendly experiences.

@@ -1,54 +1,62 @@
+---
+title: App launcher
+description: Provides navigation between related applications in a suite.
+tags: [navigation, multi-app]
+---
+
 # App launcher
 
-An _app launcher_ provides navigation for applications related to the application the user is currently viewing.
+An app launcher provides navigation for applications related to the one the user is currently viewing. It helps users move between tools while staying oriented.
+
+## When to Use
+
+Use when:
+
+- Users need quick access to a defined set of related applications
+- You want to keep multi‑app workflows efficient
+
+Avoid when:
+
+- There is only one application
+- Links are unrelated or purely external
+
+## Structure
+
+- Container (navigation region)
+- Application item (icon + label)
+- Active state indicator
+- (Optional) grouping / sections – To be added soon
+- (Optional) overflow or expansion – To be added soon
 
 ## Guidelines
 
-An app launcher is used to organise navigation across different applications related or relevant to the current application. The current application shows as _active_ in the app launcher. Each application displayed has a `Product icon` as well as a label that gives clear and concise direction. Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided.
+An app launcher is used to organise navigation across related applications. The current application shows as active. Each application displays a product icon and a label. Truncated labels must expose the full text via tooltip.
 
+Do:
 
+- Keep labels concise
+- Use consistent product icons
+- Indicate only one active application
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+- Overload with rarely used destinations
+- Use inconsistent ordering between pages
 
-NAVIGATION
+## Accessibility
 
-# App launcher
-
-An _app launcher_ provides navigation for applications related to the application the user is currently viewing.
+- Provide an accessible label on the navigation container (e.g. aria-label) – To be added soon
+- Use aria-current for the active application – To be added soon
+- Ensure truncated labels have accessible tooltips – To be added soon
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **app launcher**.
-    
-2.  Drag and drop the component in your frame.
-    
+## Code Example
 
-###  How to use
+For implementation details and usage examples, please refer to our Storybook documentation.
 
-1.  Place the `Navigation: App launcher/Listing/Desktop` on your artboard, just under the `Top bar` aligned to the start of the application drawer button (use `System icons/Navigations/apps`).
-    
-2.  Toggle the grid layout on/off by using the following shortcut:
-    
-    1.  Mac: Control + G
-        
-    2.  PC: Ctrl + Shift + 4
-        
-3.  Locate the **Design** tab in the **Inspector Panel**.
-    
-4.  Under the **Alignment** section, set the alignment to "Align left".
-    
-5.  Under the **Constraints** section, set up the following constraints:
-    
-    1.  **Left**, **Top** and **Fix position when scrolling**.
-        
-6.  Drag the component to the height needed. As you drag, more _items_ will appear.
-    
-7.  Rename the labels to your needs.
-    
-8.  Toggle on/off the app buttons as needed.
-    
-9.  Make sure to change the active applications to the `Active` state.
+## Support
+
+Further guidance on grouping, responsive behavior, and overflow handling to be added soon. Reach out if you need these details sooner.

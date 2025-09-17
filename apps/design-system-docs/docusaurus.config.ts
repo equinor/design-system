@@ -54,7 +54,7 @@ const config: Config = {
       title: 'Equinor Design System',
       logo: {
         alt: 'Equinor hat Logo',
-        src: 'img/equinor_logo.svg',
+        src: 'img/eds-logo.svg',
       },
 
       items: [

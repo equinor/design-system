@@ -1,58 +1,58 @@
+---
+title: Chip
+description: Compact element representing an input, attribute, action, or filter state.
+tags: [data-display, selection, filters]
+---
+
 # Chip
 
-_Chips_, also known as tags or badges, are advanced badges that represent discrete information.
+Chips, also known as tags or badges, represent discrete information.
 
-**More examples available in** **.**
+## When to Use
+
+Use chips for lightweight selections, filters, user-generated inputs, or contextual actions. Avoid when a button, toggle, or checkbox expresses the intent more clearly. (More detailed criteria to be added soon.)
+
+## Structure
+
+- Container (pill shape)
+- Label text
+- Optional leading icon – To be added soon
+- Optional trailing icon / dismiss / action affordance – To be added soon
+- State styling (default, selected, disabled, focus) – To be added soon
 
 ## Guidelines
 
-Chips allow users to make selections, perform an action, input information and attributes, filter content and complete tasks. Chips can transform from free text or predefined text.
+Chips allow users to make selections, perform an action, input or display attributes, filter content, and complete tasks. They can originate from free text or predefined options.
 
+Do:
 
+- Keep labels short
+- Provide clear hover/focus and selected states
+- Use tooltips if truncating content (if ever) – To be added soon
 
-# Design
+Don’t:
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Chip
-
-_Chips_, also known as tags or badges, are advanced badges that represent discrete information.
-
-## Implementation in Figma
-
-### Instructions
-
-1.  In Figma go to the **Assets Panel** and search for **chip**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Choose the variant from the **Design Panel**.
-    
+- Overload with multiple icons
+- Use as a replacement for primary navigation
 
 ## Examples
 
-### Choice chip
+Choice chip: At least two predefined options; indicates a single selected value.
+Filter chip: Multiple predefined keywords; multiple can be selected or unselected.
+Action chip: Triggers contextual actions; not removable but may appear dynamically.
 
-Choice chips are used when there are at least two predefined options to choose between to signify the user's choice.
+## Accessibility
 
-### Filter chip
+Accessibility specifics (role usage, keyboard selection, aria-pressed vs checkbox semantics for filter chips) to be added soon.
 
-Multiple predefined keywords can be listed for the user to choose from. Multiple chips can be selected or unselected.
+## Implementation in Figma
 
-### Action chip
+To be added soon
 
-When there are at least two predefined options to choose between, action chips trigger actions related to the primary content. Action chips are not removable but can appear dynamically.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DATA DISPLAY
-
-# Chip
-
-_Chips_, also known as tags or badges, are advanced badges that represent discrete information.
+Guidance on density, overflow handling, removable vs non-removable semantics, and icon usage will be added soon. Reach out if you need it earlier.

@@ -1,37 +1,56 @@
+---
+title: Sidebar
+description: Provides a persistent, single-level navigation space with optional collapse.
+tags: [navigation]
+---
+
 # Sidebar
 
-_Sidebar_  is used to display single level navigational destinations
+The sidebar provides a persistent area for single‑level primary navigation. It helps users access core destinations from anywhere in the application and can optionally collapse to save horizontal space.
+
+## When to Use
+
+Use the sidebar when:
+
+- You have more than three primary destinations that must remain globally accessible.
+- Persistent wayfinding is important for productivity and orientation.
+- Optional collapse/expand improves content focus while retaining quick access.
+
+Avoid it when:
+
+- You have fewer than three destinations (use a simpler header or tabs).
+- The navigation is secondary or contextual.
+- Multi-level hierarchical navigation is required (a different pattern may be more suitable).
+
+## Structure
+
+- Container: Vertical navigation region (typically `nav` with an accessible label).
+- Navigation list: Single level of destinations.
+- Item: Icon + (optional) label text when expanded; icon only when collapsed.
+- Collapse/expand control (optional): Toggles between full and compact states.
+- Tooltip (collapsed mode): Reveals the destination label on hover/focus.
 
 ## Guidelines
 
-The sidebar will be permanently visible with optionally a collapse/expand functionality. In collapsed mode the destination items are represented with an icon only, and a tooltip should be used.
+- Keep it permanently visible; use collapse for space efficiency—not full hide.
+- In collapsed mode show only icons; always provide a tooltip for clarity.
+- Height should span the full viewport and not scroll—overflow destinations should be reconsidered.
+- Limit to primary destinations; avoid placing secondary or contextual links here.
+- Use clear, distinct icons that directly represent destinations.
+- Maintain consistent ordering; do not reorder dynamically.
 
-Its height should fill the height of the screen, and will not be scrollable.
+## Accessibility
 
-Sidebar should be used for more than 3 top level destinations that that need to be accessible anywhere in the app.
+To be added soon
 
-The sidebar Shouldn’t be used for secondary navigation destinations or less than 3 destinations.
+## Implementation in Figma
 
+To be added soon
 
+## Code Example
 
-# Design
+For implementation details and usage examples, please refer to our Storybook documentation.
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+## Support
 
-NAVIGATION
-
-# Sidebar
-
-_Sidebar_  is used to display single level navigational destinations
-
-## Implementations in Figma
-
-### Instructions
-
-1.  In Figma go to the **Assets Panel** and search for **Side bar**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+If you need guidance on multi-level navigation, responsive adaptation, or keyboard interaction patterns, reach out through our design system support channels. Additional accessibility notes will be added soon.

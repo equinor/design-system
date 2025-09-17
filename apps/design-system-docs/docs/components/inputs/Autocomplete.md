@@ -1,52 +1,51 @@
+---
+title: Autocomplete
+description: Input that filters and selects one or multiple options from a list.
+tags: [input, selection]
+---
+
 # Autocomplete
 
-The _autocomplete_ (previously called select) component allows users to choose one or multiple items or options from a list.
+The autocomplete component allows users to choose one or multiple options from a list.
+
+## When to Use
+
+Use when the option list is long or filtering helps discovery. Use single variant for one choice; multi variant for multiple selections. Avoid for very short static lists (use radio or select). (Criteria matrix to be added soon.)
+
+## Structure
+
+- Input field (text entry)
+- Dropdown/list overlay (filtered options)
+- Option item (label + optional icon) – To be added soon
+- Multi-selection tokens / chips – To be added soon
+- Clear / reset affordance – To be added soon
 
 ## Guidelines
 
-A select can be used in different settings:
+Supports filtering, sorting, and data submission contexts. Native select may be preferable in constrained environments. Single vs multi variants determine selection behavior. Additional guidance on async loading, empty states, and virtualization to be added soon.
 
--   to filter or sort content on a page
-    
--   to submit data
-    
+Do:
 
-The `autocomplete` variant is used to choose only one option from a list. The`autocomplete multi` variant is used if multiple choices can be applied.
+- Highlight matched text in results (implementation guidance to be added soon)
+- Provide keyboard navigation and typeahead
 
-A `native select` component is also available for implementation. We recommend using native autocomplete on products with limited space as it provides a better user experience.
+Don’t:
 
+- Overload with unrelated status messages inside list
+- Use multi selection without clear deselect affordance
 
+## Accessibility
 
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Autocomplete
-
-The _autocomplete_ (previously called select) component allows users to choose one or multiple items or options from a list.
+Accessibility specifics (combobox role, aria-expanded, active descendant, multi-select announcements) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **autocomplete**
-    
-2.  Drag and drop the component in your frame
-    
-3.  Rename and resize the component if needed
-    
-4.  Choose the variant from the **Design Panel**.
+## Code Example
 
+For implementation details and usage examples, please refer to our Storybook documentation.
 
+## Support
 
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Autocomplete
-
-The _autocomplete_ (previously called select) component allows users to choose one or multiple items or options from a list.
+Guidance on async search, debouncing strategy, and badge token overflow will be added soon. Reach out if needed earlier.

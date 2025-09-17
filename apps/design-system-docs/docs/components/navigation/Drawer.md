@@ -1,44 +1,66 @@
+---
+title: Drawer
+description: Displays categories of navigational links in a vertical column that can be scrolled.
+tags: [navigation, hierarchy, surfaces]
+---
+
 # Drawer
 
-A navigation _drawer_ displays categories of navigational links in a vertical column that can be scrolled.
+A navigation drawer displays categories of navigational links in a vertical column that can be scrolled. We use it to organize navigation with multiple groupings or levels, helping users move efficiently through complex content.
+
+## When to Use
+
+Use a navigation drawer when:
+
+- There are more sections than would fit in the top bar as tabs.
+- You need two or more levels of navigation hierarchy.
+- Navigation requires grouping or categorization.
+
+Avoid when:
+
+- Navigation is simple and fits in a top bar.
+- Only a single level of navigation is needed.
+
+(More detailed criteria to be added soon.)
+
+## Structure
+
+- Drawer container (navigation region)
+- Destination list items (links)
+- Group headings (optional)
+- Scrollable area
+- Active state indicator
+- Truncated labels with tooltips (for long labels)
+
+Details on markup and grouping to be added soon.
 
 ## Guidelines
 
-A navigation drawer is used to hold navigation with multiple groupings or many levels. Use a navigation drawer when the content has:
+Do:
 
--   more sections than would fit in the `Top bar` as tabs.
-    
--   two or more levels of navigation hierarchy.
-    
+- Provide clear and concise labels for navigation items.
+- Use tooltips for truncated labels.
+- Indicate the active section clearly.
 
-Navigation drawer labels should provide clear and concise direction. Note that if the label is longer than the maximum width it will be truncated and should have a tooltip provided.
+Don’t:
 
-  
+- Overload with rarely used destinations.
+- Use inconsistent ordering between pages.
 
-#### Drawer
+Responsive and accessibility guidelines to be added soon.
 
-#### Destination list item
+## Accessibility
 
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Drawer
-
-A navigation _drawer_ displays categories of navigational links in a vertical column that can be scrolled.
+Accessibility specifics (roles, aria attributes, keyboard behavior) to be added soon.
 
 ## Implementation in Figma
 
-### Instructions
+To be added soon
 
-1.  In Figma go to the **Assets Panel** and search for **Drawer**
-    
-2.  Drag and drop the component in your frame
-    
-3.  Rename and resize the **drawer** component if needed
-    
-4.  Choose the variant of the **destination items** from the **Design Panel**.
+## Code Example
+
+For implementation details and usage examples, please refer to our Storybook documentation.
+
+## Support
+
+Additional guidance on grouping, responsive behavior, and accessibility will be added soon. Reach out if you need this sooner.
