@@ -10,11 +10,11 @@ import {
   fontQuote,
   pxFormatted,
   pxToRem,
-  createColorVariablesFoundation,
-  createColorVariablesStatic,
-  createColorVariablesDynamic,
-  createSpacingAndTypographyVariables,
 } from '@equinor/eds-tokens-build'
+import { createColorVariablesFoundation } from './createColorVariablesFoundation'
+import { createColorVariablesStatic } from './createColorVariablesStatic'
+import { createColorVariablesDynamic } from './createColorVariablesDynamic'
+import { createSpacingAndTypographyVariables } from './createSpacingAndTypographyVariables'
 
 const outputDirectory = `${process.cwd()}/build`
 export const cssBuildPath = `${outputDirectory}/css`

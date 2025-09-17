@@ -1,7 +1,6 @@
 import path from 'path'
-import { _extend } from './utils'
+import { _extend, includeTokenFilter } from '@equinor/eds-tokens-build'
 import type { TransformedToken } from 'style-dictionary/types'
-import { includeTokenFilter } from './filter/includeTokenFilter'
 
 export async function createColorVariablesDynamic({
   tokensDir,

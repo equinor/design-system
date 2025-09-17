@@ -1,7 +1,9 @@
 import path from 'path'
-import { _extend } from './utils'
-import { mergeLightDarkFoundation } from './utils/mergeLightDarkFoundation'
-import { includeTokenFilter } from './filter/includeTokenFilter'
+import {
+  _extend,
+  includeTokenFilter,
+  mergeLightDarkFoundation,
+} from '@equinor/eds-tokens-build'
 import { TransformedToken } from 'style-dictionary/types'
 
 export async function createColorVariablesFoundation({

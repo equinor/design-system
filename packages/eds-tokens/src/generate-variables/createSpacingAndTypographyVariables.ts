@@ -4,17 +4,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { readJsonFiles } from '@equinor/eds-tokens-sync'
 import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import { outputReferencesTransformed } from 'style-dictionary/utils'
-import { includeTokenFilter } from './filter/includeTokenFilter'
-import { createDensitySpaceToggleTransform } from './transform/densitySpaceToggle'
-import { FONT_QUOTE_NAME } from './transform/fontQuote'
-import { PX_FORMATTED_NAME } from './transform/pxFormatted'
-import { PX_TO_REM_NAME } from './transform/pxToRem'
-import { _extend } from './utils'
+import {
+  _extend,
+  includeTokenFilter,
+  createDensitySpaceToggleTransform,
+  FONT_QUOTE_NAME,
+  PX_FORMATTED_NAME,
+  PX_TO_REM_NAME,
+} from '@equinor/eds-tokens-build'
+import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 export const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
