@@ -1,0 +1,88 @@
+name: PR Title Check
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Title Format
+        run: |
+          title="${{ github.event.pull_request.title }}"
+
+          # Define allowed types
+          types="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
+
+          # Define allowed scopes
+          scopes="design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker"
+
+          echo "🔍 Checking PR title: '$title'"
+
+          # Check if the title matches the pattern - emoji can be before OR after colon
+          if [[ ! $title =~ ^(\p{Emoji}\ )?(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?(!)?: .*$ ]]; then
+            echo "❌ PR title does not follow conventional commit format"
+            echo ""
+            echo "Expected format: type(scope): description"
+            echo "Or with emoji: type(scope): 🎨 description"
+            echo ""
+            echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+            echo ""
+            echo "Examples:"
+            echo "  ✅ feat(eds-core-react): add button component"
+            echo "  ✅ fix(eds-icons, eds-core-react): resolve styling issues"
+            echo "  ✅ docs: 📝 update README"
+            echo "  ✅ style(eds-tokens): 🎨 improve naming"
+            echo ""
+            exit 1
+          fi
+
+          # Extract scope if it exists
+          if [[ $title =~ \(([^)]+)\) ]]; then
+            scope_part="${BASH_REMATCH[1]}"
+            echo "📦 Found scope(s): $scope_part"
+
+            # Split scopes on comma and trim whitespace
+            IFS=',' read -ra SCOPE_ARRAY <<< "$scope_part"
+            invalid_scopes=()
+
+            for scope in "${SCOPE_ARRAY[@]}"; do
+              # Trim whitespace
+              scope=$(echo "$scope" | xargs)
+              echo "  - Checking scope: '$scope'"
+
+              # Check if scope is valid
+              if [[ ! "$scope" =~ ^(design-system-docs|eds-color-palette-generator|eds-core-react|eds-data-grid-react|eds-demo|eds-icons|eds-lab-react|eds-tailwind|eds-tokens|eds-tokens-build|eds-tokens-sync|eds-utils|figma-broker)$ ]]; then
+                invalid_scopes+=("$scope")
+              fi
+            done
+
+            # Report invalid scopes if any
+            if [ ${#invalid_scopes[@]} -ne 0 ]; then
+              echo "❌ Invalid scope(s) found: ${invalid_scopes[*]}"
+              echo ""
+              echo "Valid scopes:"
+              echo "  - design-system-docs"
+              echo "  - eds-color-palette-generator"
+              echo "  - eds-core-react"
+              echo "  - eds-data-grid-react"
+              echo "  - eds-demo"
+              echo "  - eds-icons"
+              echo "  - eds-lab-react"
+              echo "  - eds-tailwind"
+              echo "  - eds-tokens"
+              echo "  - eds-tokens-build"
+              echo "  - eds-tokens-sync"
+              echo "  - eds-utils"
+              echo "  - figma-broker"
+              echo ""
+              echo "You can combine multiple scopes like: feat(eds-core-react, eds-utils): description"
+              exit 1
+            fi
+
+            echo "✅ All scopes are valid"
+          else
+            echo "📦 No scope specified (optional)"
+          fi
+
+          echo "✅ PR title follows conventional commit format!"
