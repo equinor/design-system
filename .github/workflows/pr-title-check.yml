@@ -36,7 +36,7 @@ jobs:
             scope_content=$(echo "$title" | sed 's/.*(\([^)]*\)).*/\1/')
             echo "  Extracted scopes: '$scope_content'"
 
-            # List of valid scopes
+            # List of valid scopes, must be updated when new packages are added
             valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker")
 
             # Split by comma and check each scope
