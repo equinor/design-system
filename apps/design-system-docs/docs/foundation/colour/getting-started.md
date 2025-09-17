@@ -111,19 +111,33 @@ Add the **EDS Colours (static)** library to your Figma file to access static var
 
 **Example: Primary button (static)** 
 - **Background:** `Bg/Accent/Fill Emphasis/Default`
-- **Text::** `Text/Accent/Strong on Emphasis`
+- **Text:** `Text/Accent/Strong on Emphasis`
 
 
-Use this approach when you want to apply a colour directly from a specific category.
+
+ ![Primary button colours](/img/primarybutton-bg.png) 
+
+<p class="image-caption">The primary button uses the accent colour for its background and a strong contrasting text colour for accessibility.</p>
+
+
 
 
 
 ### Dynamic Approach
 
-Add the **EDS Colours (dynamic)** library to your Figma file to access dynamic colour variables.
+Add the **EDS Colours (dynamic)** library to your Figma file. Dynamic variables use abstract role names(Background, Text, Border). You then set the appearance separately in Figma. 
 
-Use abstract colour names without semantic categories:
+**Example: Primary button (dynamic)**
 
-- Example: `Bg/Fill/Emphasis`
-- Select the semantic category using the **Appearance variable mode** in Figma
-- This matches the `data-appearance-color` attribute that developers use in code
+1. Select your button in Figma.
+2. Apply the variables:
+  - **Background:** `Bg/Fill/Emphasis`
+  - **Text:** `Text/Strong on Emphasis`
+3. Open the **Appearance menu** and choose `Accent`.
+
+**Changing appearance in Figma**
+The power of the dynamic approach is that you can change the appearance without touching the roles.
+
+**How to change appearance:**
+
+
