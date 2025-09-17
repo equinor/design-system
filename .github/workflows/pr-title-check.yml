@@ -12,22 +12,44 @@ jobs:
           title="${{ github.event.pull_request.title }}"
           echo "🔍 Checking PR title: '$title'"
 
-          # Check if title starts with valid type (simple string matching)
+          # Check if title starts with valid type
           if [[ $title == feat* ]] || [[ $title == fix* ]] || [[ $title == docs* ]] || [[ $title == style* ]] || [[ $title == refactor* ]] || [[ $title == perf* ]] || [[ $title == test* ]] || [[ $title == build* ]] || [[ $title == ci* ]] || [[ $title == chore* ]] || [[ $title == revert* ]]; then
             echo "✅ Valid type found"
           else
-            echo "❌ PR title must start with a valid type"
-            echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
-            echo "Example: feat: add new feature"
+            echo "❌ Invalid type. Must start with: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
             exit 1
           fi
 
-          # Check if it has colon and description
+          # Check colon format
           if [[ $title == *": "* ]]; then
             echo "✅ Has description after colon"
           else
-            echo "❌ PR title must have format: type: description or type(scope): description"
+            echo "❌ Must have format: type: description or type(scope): description"
             exit 1
+          fi
+
+          # Check scopes if present (simple string matching)
+          if [[ $title == *"("* ]] && [[ $title == *")"* ]]; then
+            echo "📦 Scope detected, validating..."
+
+            # List of valid scopes - check if any are in the title
+            valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker")
+
+            scope_found=false
+            for scope in "${valid_scopes[@]}"; do
+              if [[ $title == *"($scope"* ]] || [[ $title == *"$scope)"* ]] || [[ $title == *"$scope,"* ]]; then
+                echo "  ✅ Found valid scope: $scope"
+                scope_found=true
+              fi
+            done
+
+            if [[ $scope_found == false ]]; then
+              echo "❌ No valid scopes found. Valid scopes:"
+              printf "  - %s\n" "${valid_scopes[@]}"
+              exit 1
+            fi
+          else
+            echo "📦 No scope (optional)"
           fi
 
           echo "✅ PR title follows conventional commit format!"
