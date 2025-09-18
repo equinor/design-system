@@ -17,8 +17,7 @@ COPY . ./
 RUN pnpm install --frozen-lockfile
 
 # Build all necessary dependencies and docs
-RUN pnpm run build:token-sync && \
-    pnpm run build:tokens-build && \
+RUN pnpm run build:tokens-build && \
     pnpm run build:tokens && \
     pnpm run build:utils && \
     pnpm run build:icons && \

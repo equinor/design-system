@@ -6,11 +6,11 @@ export { PX_TO_REM_NAME } from './transform/pxToRem'
 export { _extend } from './utils'
 export { createLightDarkTransform } from './transform/lightDark'
 export { PX_TRANSFORM_NAME } from './transform/pxTransform'
-export { createSpacingAndTypographyVariables } from './createSpacingAndTypographyVariables'
-export { createColorVariablesStatic } from './createColorVariablesStatic'
-export { createColorVariablesDynamic } from './createColorVariablesDynamic'
-export { createColorVariablesFoundation } from './createColorVariablesFoundation'
 export { fontQuote } from './transform/fontQuote'
 export { pxFormatted } from './transform/pxFormatted'
 export { pxToRem } from './transform/pxToRem'
 export { pxTransform } from './transform/pxTransform'
+export {
+  mergeLightDarkFoundation,
+  type MergeLightDarkOptions,
+} from './utils/mergeLightDarkFoundation'
