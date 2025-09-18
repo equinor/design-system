@@ -819,6 +819,7 @@ function AutocompleteInner<T>(
               }),
             }
           case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
+            setSelectedItems([changes.selectedItem])
             return {
               ...changes,
               highlightedIndex: controlledHighlightedIndex,
