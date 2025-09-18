@@ -1,0 +1,80 @@
+name: PR Title Check
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Title Format
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          echo "🔍 Checking PR title: '$title'"
+
+          # Check if title starts with valid type
+          if [[ $title == feat* ]] || [[ $title == fix* ]] || [[ $title == docs* ]] || [[ $title == style* ]] || [[ $title == refactor* ]] || [[ $title == perf* ]] || [[ $title == test* ]] || [[ $title == build* ]] || [[ $title == ci* ]] || [[ $title == chore* ]] || [[ $title == revert* ]]; then
+            echo "✅ Valid type found"
+          else
+            echo "❌ Invalid type. Must start with: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+            exit 1
+          fi
+
+          # Check colon format
+          if [[ $title == *": "* ]]; then
+            echo "✅ Has description after colon"
+          else
+            echo "❌ Must have format: type: description or type(scope): description"
+            exit 1
+          fi
+
+          # Check scopes if present
+          if [[ $title == *"("* ]] && [[ $title == *")"* ]]; then
+            echo "📦 Scope detected, validating..."
+
+            # Extract scope content between parentheses
+            scope_content=$(echo "$title" | sed 's/.*(\([^)]*\)).*/\1/')
+            echo "  Extracted scopes: '$scope_content'"
+
+            # List of valid scopes, must be updated when new packages are added
+            valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker" "devcontainer" "github" "build" "deps" "config" "docs")
+
+            # Split by comma and check each scope
+            IFS=',' read -ra individual_scopes <<< "$scope_content"
+            all_valid=true
+
+            for scope in "${individual_scopes[@]}"; do
+              # Trim whitespace
+              scope=$(echo "$scope" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+              echo "  - Checking scope: '$scope'"
+
+              # Check if this scope is in valid list
+              scope_valid=false
+              for valid_scope in "${valid_scopes[@]}"; do
+                if [[ "$scope" == "$valid_scope" ]]; then
+                  scope_valid=true
+                  break
+                fi
+              done
+
+              if [[ $scope_valid == true ]]; then
+                echo "    ✅ Valid scope"
+              else
+                echo "    ❌ Invalid scope: '$scope'"
+                all_valid=false
+              fi
+            done
+
+            if [[ $all_valid == false ]]; then
+              echo ""
+              echo "❌ One or more invalid scopes found. Valid scopes:"
+              printf "  - %s\n" "${valid_scopes[@]}"
+              exit 1
+            else
+              echo "  ✅ All scopes are valid"
+            fi
+          else
+            echo "📦 No scope (optional)"
+          fi
+
+          echo "✅ PR title follows conventional commit format!"
