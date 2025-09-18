@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 const config: Config = {
   title: 'Equinor Design System',
   tagline: 'both for mobile and web',
-  favicon: 'img/equinor.png',
+  favicon: 'img/eds-logo.svg',
 
   // // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   // future: {
@@ -49,12 +49,12 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/equinor.png', //change to new eds social card
+    image: 'img/equinor.png',
     navbar: {
       title: 'Equinor Design System',
       logo: {
-        alt: 'Equinor hat Logo',
-        src: 'img/equinor_logo.svg',
+        alt: 'Equinor type Logo',
+        src: 'img/eds-logo.svg',
       },
 
       items: [
