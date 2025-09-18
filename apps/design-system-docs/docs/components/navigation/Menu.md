@@ -1,20 +1,12 @@
-# Menu
-
-A _menu_, also known as a dropdown, is a temporary list of actions or functions.
-
-### Compact
-
 ---
-
 title: Menu
 description: Temporary list of contextual actions or functions triggered from another control.
 tags: [navigation, actions, overlay]
-
 ---
 
 # Menu
 
-A menu (dropdown) is a temporary list of actions or functions.
+A menu, also known as a dropdown, is a temporary list of actions or functions.
 
 ## When to Use
 
