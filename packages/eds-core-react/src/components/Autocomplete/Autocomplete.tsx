@@ -714,7 +714,7 @@ function AutocompleteInner<T>(
               highlightedIndex: controlledHighlightedIndex,
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick:
+          case useCombobox.stateChangeTypes.ItemClick: {
             if (changes.selectedItem === AddSymbol) {
               return {
                 ...changes,
@@ -727,6 +727,7 @@ function AutocompleteInner<T>(
               ...changes,
               highlightedIndex: idx >= 0 ? idx : 0,
             }
+          }
           case useCombobox.stateChangeTypes.InputBlur:
             return {
               ...changes,
