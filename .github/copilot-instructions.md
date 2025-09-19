@@ -19,6 +19,7 @@ Apply detailed guidelines from:
 - [React guidelines](./instructions/react.instructions.md)
 - [Styling guidelines](./instructions/styling.instructions.md)
 - [Figma component creation](./instructions/figma.instructions.md)
+- [Markdown guidelines](./instructions/markdown.instructions.md)
 
 ## Testing Requirements
 
