@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-tokens-build",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
@@ -16,6 +16,15 @@
     "url": "https://github.com/equinor/design-system/issues"
   },
   "type": "module",
+  "bin": {
+    "build-semantic-static-variables": "./dist/build-semantic-static-variables.js",
+    "build-semantic-dynamic-variables": "./dist/build-semantic-dynamic-variables.js",
+    "build-color-scheme-variables": "./dist/build-color-scheme-variables.js",
+    "generate-color-scheme-tokens": "./dist/generate-color-scheme-tokens.js",
+    "generate-semantic-tokens": "./dist/generate-semantic-tokens.js",
+    "generate-concept-tokens": "./dist/generate-concept-tokens.js",
+    "generate-dynamic-appearance-tokens": "./dist/generate-dynamic-appearance-tokens.js"
+  },
   "files": [
     "dist"
   ],
@@ -32,6 +41,7 @@
   "scripts": {
     "dev": "vite",
     "build": "pnpm run type-check && vite build",
+    "build:cli": "tsc -p tsconfig.cli.json",
     "prettier": "prettier ./src --write",
     "lint": "eslint",
     "type-check": "tsc --noEmit"
