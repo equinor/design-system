@@ -17,7 +17,7 @@ export const TopBar = ({
   ...rest
 }: Props) => {
   return (
-    <div className={className} {...rest}>
+    <header className={className} {...rest}>
       <div className="w-[243px] justify-start items-center gap-1 flex">
         <ActionButton>
           <svg
@@ -41,7 +41,10 @@ export const TopBar = ({
       </div>
       <div className="flex align-middle items-center">
         <SearchInput className={textInputClass} />
-        <div className="justify-start items-start gap-2 flex top-bar__actions">
+        <nav
+          aria-label="Header navigation"
+          className="justify-start items-start gap-2 flex top-bar__actions"
+        >
           <ActionButton>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -122,8 +125,8 @@ export const TopBar = ({
               />
             </svg>
           </ActionButton>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
