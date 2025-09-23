@@ -1,8 +1,7 @@
-#!/usr/bin/env node
 import { existsSync, mkdirSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { _extend } from '../utils/index'
+import { _extend } from '../utils'
 import { includeTokenFilter } from '../filter/includeTokenFilter'
 import { mergeLightDarkFoundation } from '../utils/mergeLightDarkFoundation'
 

@@ -17,19 +17,18 @@
   },
   "type": "module",
   "bin": {
-    "build-semantic-static-variables": "./dist/build-semantic-static-variables.js",
-    "build-semantic-dynamic-variables": "./dist/build-semantic-dynamic-variables.js",
-    "build-color-scheme-variables": "./dist/build-color-scheme-variables.js",
-    "generate-color-scheme-tokens": "./dist/generate-color-scheme-tokens.js",
-    "generate-semantic-tokens": "./dist/generate-semantic-tokens.js",
-    "generate-concept-tokens": "./dist/generate-concept-tokens.js",
-    "generate-dynamic-appearance-tokens": "./dist/generate-dynamic-appearance-tokens.js"
+    "build-semantic-static-variables": "./dist/scripts/build-semantic-static-variables.js",
+    "build-semantic-dynamic-variables": "./dist/scripts/build-semantic-dynamic-variables.js",
+    "build-color-scheme-variables": "./dist/scripts/build-color-scheme-variables.js",
+    "generate-color-scheme-tokens": "./dist/scripts/generate-color-scheme-tokens.js",
+    "generate-semantic-tokens": "./dist/scripts/generate-semantic-tokens.js",
+    "generate-concept-tokens": "./dist/scripts/generate-concept-tokens.js",
+    "generate-dynamic-appearance-tokens": "./dist/scripts/generate-dynamic-appearance-tokens.js"
   },
   "files": [
+    "bin",
     "dist"
   ],
-  "main": "./dist/eds-tokens-build.umd.cjs",
-  "module": "./dist/eds-tokens-build.js",
   "types": "./dist/main.d.ts",
   "exports": {
     ".": {
@@ -40,11 +39,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "pnpm run type-check && vite build",
-    "build:cli": "tsc -p tsconfig.cli.json",
-    "prettier": "prettier ./src --write",
-    "lint": "eslint",
-    "type-check": "tsc --noEmit"
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prettier": "prettier . --write",
+    "lint": "eslint"
   },
   "devDependencies": {
     "@types/node": "^22.18.0",
