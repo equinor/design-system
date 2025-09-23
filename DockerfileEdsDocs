@@ -17,8 +17,11 @@ COPY . ./
 RUN pnpm install --frozen-lockfile
 
 # Build all necessary dependencies and docs
-RUN pnpm run build:utils && \
+RUN pnpm run build:token-sync && \
+    pnpm run build:tokens-build && \
     pnpm run build:icons && \
+    pnpm run build:tokens && \
+    pnpm run build:utils && \
     pnpm run build:core-react && \
     pnpm run build:docs
 
