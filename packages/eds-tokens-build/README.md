@@ -19,7 +19,7 @@ This package provides utilities for building and transforming design tokens usin
 ### Basic Token Building
 
 ```typescript
-import { _extend, includeTokenFilter } from '@equinor/eds-tokens-build';
+import { _extend, includeTokenFilter } from '@equinor/eds-tokens-build'
 
 // Build basic tokens
 const config = _extend({
@@ -27,10 +27,10 @@ const config = _extend({
   buildPath: 'build/css/',
   fileName: 'spacing',
   filter: (token) => includeTokenFilter(token),
-  transforms: ['name/kebab', 'size/px']
-});
+  transforms: ['name/kebab', 'size/px'],
+})
 
-await config.buildAllPlatforms();
+await config.buildAllPlatforms()
 ```
 
 ### Creating Light/Dark CSS colour variables
@@ -38,11 +38,11 @@ await config.buildAllPlatforms();
 Generate separate CSS files for light and dark themes using the color scheme pattern:
 
 ```typescript
-import { 
-  _extend, 
+import {
+  _extend,
   includeTokenFilter,
-  mergeLightDarkFoundation 
-} from '@equinor/eds-tokens-build';
+  mergeLightDarkFoundation,
+} from '@equinor/eds-tokens-build'
 
 // Build light color scheme CSS variables
 const lightColorScheme = _extend({
@@ -54,7 +54,7 @@ const lightColorScheme = _extend({
   selector: '[data-color-scheme="light"]',
   prefix: 'eds-color',
   outputReferences: false,
-});
+})
 
 // Build dark color scheme CSS variables
 const darkColorScheme = _extend({
@@ -66,18 +66,19 @@ const darkColorScheme = _extend({
   selector: '[data-color-scheme="dark"]',
   prefix: 'eds-color',
   outputReferences: false,
-});
+})
 
-await lightColorScheme.buildAllPlatforms();
-await darkColorScheme.buildAllPlatforms();
+await lightColorScheme.buildAllPlatforms()
+await darkColorScheme.buildAllPlatforms()
 
 // Merge into a single file using light-dark() CSS function
 mergeLightDarkFoundation({
   prefix: 'eds-color',
-});
+})
 ```
 
 This approach:
+
 - Uses `source` for the color scheme tokens (semantic colors like primary, secondary)
 - Uses `include` for the base color definitions (hex values, etc.)
 - Filters specifically for `['Color scheme']` tokens to avoid outputting all colors
@@ -87,12 +88,12 @@ This approach:
 ### Typography Tokens
 
 ```typescript
-import { 
-  _extend, 
+import {
+  _extend,
   includeTokenFilter,
   PX_TO_REM_NAME,
-  FONT_QUOTE_NAME 
-} from '@equinor/eds-tokens-build';
+  FONT_QUOTE_NAME,
+} from '@equinor/eds-tokens-build'
 
 const typographyConfig = _extend({
   source: ['tokens/typography.json'],
@@ -101,31 +102,36 @@ const typographyConfig = _extend({
   selector: '[data-font-size="md"]',
   filter: (token) => includeTokenFilter(token, ['Font size']),
   transforms: ['name/kebab', PX_TO_REM_NAME, FONT_QUOTE_NAME],
-  outputReferences: true
-});
+  outputReferences: true,
+})
 
-await typographyConfig.buildAllPlatforms();
+await typographyConfig.buildAllPlatforms()
 ```
 
 ### Spacing Tokens
 
 ```typescript
-import { 
-  _extend, 
+import {
+  _extend,
   includeTokenFilter,
   PX_TRANSFORM_NAME,
-  PX_FORMATTED_NAME 
-} from '@equinor/eds-tokens-build';
+  PX_FORMATTED_NAME,
+} from '@equinor/eds-tokens-build'
 
 const spacingConfig = _extend({
   source: ['tokens/spacing.json'],
   buildPath: 'build/css/',
   fileName: 'spacing',
   filter: (token) => includeTokenFilter(token),
-  transforms: ['name/kebab', PX_TO_REM_NAME, PX_FORMATTED_NAME, PX_TRANSFORM_NAME]
-});
+  transforms: [
+    'name/kebab',
+    PX_TO_REM_NAME,
+    PX_FORMATTED_NAME,
+    PX_TRANSFORM_NAME,
+  ],
+})
 
-await spacingConfig.buildAllPlatforms();
+await spacingConfig.buildAllPlatforms()
 ```
 
 ## Available Transforms
@@ -144,6 +150,7 @@ The package provides several pre-configured transform constants:
 Creates a Style Dictionary configuration with EDS-specific defaults.
 
 **Parameters:**
+
 - `source: string[]` - Source token files
 - `buildPath: string` - Output directory
 - `fileName: string` - Output filename
@@ -158,6 +165,7 @@ Creates a Style Dictionary configuration with EDS-specific defaults.
 Filters tokens based on categories or general inclusion criteria.
 
 **Parameters:**
+
 - `token: object` - Token object to filter
 - `categories?: string[]` - Optional categories to filter by
 
@@ -166,6 +174,7 @@ Filters tokens based on categories or general inclusion criteria.
 Creates a transform for handling light/dark mode color tokens.
 
 **Parameters:**
+
 - `name: string` - Transform name
 - `darkTokensObject: object` - Dark mode token values
 

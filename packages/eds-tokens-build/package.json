@@ -17,9 +17,9 @@
   },
   "type": "module",
   "files": [
-    "bin",
     "dist"
   ],
+  "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "exports": {
     ".": {
@@ -39,17 +39,32 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:watch": "vite build --watch",
     "preview": "vite preview",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
     "prettier": "prettier . --write",
-    "lint": "eslint"
+    "prettier:check": "prettier . --check",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "engines": {
     "pnpm": ">=10",
     "node": ">=22"
   },
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "build-tools",
+    "css-variables",
+    "design-system",
+    "equinor",
+    "cli"
+  ],
   "devDependencies": {
     "@types/node": "^22.18.0",
     "prettier": "3.6.2",
+    "rimraf": "^6.0.1",
     "style-dictionary": "^5.0.3",
     "style-dictionary-utils": "^4.1.0",
     "typescript": "^5.9.2",
