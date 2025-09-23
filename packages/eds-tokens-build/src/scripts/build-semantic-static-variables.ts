@@ -1,5 +1,6 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
+import type { TransformedToken } from 'style-dictionary/types'
 import { _extend } from '../utils'
 import { includeTokenFilter } from '../filter/includeTokenFilter'
 
@@ -58,7 +59,8 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
   const semanticColors = _extend({
     source: [SEMANTIC_COLORS],
     include: [LIGHT_COLORS, LIGHT_SCHEME], // use one scheme to resolve references
-    filter: (token: any) => includeTokenFilter(token, ['Semantic']),
+    filter: (token: TransformedToken) =>
+      includeTokenFilter(token, ['Semantic']),
     buildPath: BUILD_PATH,
     prefix: COLOR_PREFIX,
     fileName: 'semantic',

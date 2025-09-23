@@ -8,7 +8,7 @@ import {
   DEFAULT_EXTENSIONS,
 } from './utils'
 
-type Json = Record<string, any>
+type Json = Record<string, unknown>
 
 // Derive a generic WEB var from placeholder structure: {area}-{name}
 function webVarFromPlaceholder(placeholder: string): string | undefined {
@@ -25,24 +25,27 @@ function extractPlaceholder(value: unknown): string | null {
 }
 
 function applyCodeSyntax(template: Json): Json {
-  function visit(node: any): any {
+  function visit(node: unknown): unknown {
     if (!isObject(node)) return node
+
+    const nodeObj = node
 
     // If this node looks like a token leaf
     if (
-      typeof node.$type === 'string' &&
-      Object.prototype.hasOwnProperty.call(node, '$value')
+      typeof nodeObj.$type === 'string' &&
+      Object.prototype.hasOwnProperty.call(nodeObj, '$value')
     ) {
-      const placeholder = extractPlaceholder(node.$value)
+      const placeholder = extractPlaceholder(nodeObj.$value)
       const webVar = placeholder
         ? webVarFromPlaceholder(placeholder)
         : undefined
       const codeSyntax = webVar ? { WEB: webVar } : {}
 
-      const prevExt = (node as any).$extensions ?? {}
-      const prevFigma = (prevExt && (prevExt as any)['com.figma']) || {}
+      const prevExt = (nodeObj.$extensions as Record<string, unknown>) ?? {}
+      const prevFigma =
+        (prevExt && (prevExt['com.figma'] as Record<string, unknown>)) || {}
       return {
-        ...node,
+        ...nodeObj,
         $extensions: {
           ...DEFAULT_EXTENSIONS,
           'com.figma': {
@@ -55,14 +58,14 @@ function applyCodeSyntax(template: Json): Json {
     }
 
     // Otherwise, recurse into object properties
-    const out: Record<string, any> = Array.isArray(node) ? [] : {}
-    for (const [k, v] of Object.entries(node)) {
+    const out: Record<string, unknown> = Array.isArray(nodeObj) ? {} : {}
+    for (const [k, v] of Object.entries(nodeObj)) {
       out[k] = visit(v)
     }
     return out
   }
 
-  return visit(template)
+  return visit(template) as Json
 }
 
 async function generate(cfg: TokenConfig) {
@@ -108,7 +111,8 @@ async function generate(cfg: TokenConfig) {
     const grp = groupLabel(area)
     const name = tokenLabel(rest.join('-'))
     if (!template[grp]) template[grp] = {}
-    ;(template[grp] as any)[name] = {
+    const group = template[grp] as Record<string, unknown>
+    group[name] = {
       $type: 'color',
       $value: `{${key}}`,
       $description: '',

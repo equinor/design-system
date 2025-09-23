@@ -45,7 +45,7 @@
     "typecheck": "tsc --noEmit",
     "prettier": "prettier . --write",
     "prettier:check": "prettier . --check",
-    "lint": "eslint",
+    "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint --fix"
   },
   "engines": {

@@ -106,13 +106,13 @@ export const DEFAULT_EXTENSIONS = {
   },
 }
 
-export async function writeJson(filePath: string, data: any) {
+export async function writeJson(filePath: string, data: unknown) {
   await mkdir(path.dirname(filePath), { recursive: true })
   const json = JSON.stringify(data, null, 2) + '\n'
   await writeFile(filePath, json, 'utf8')
 }
 
-export async function readJson<T = any>(filePath: string): Promise<T> {
+export async function readJson<T = unknown>(filePath: string): Promise<T> {
   const s = await readFile(filePath, 'utf8')
   return JSON.parse(s) as T
 }
@@ -157,10 +157,11 @@ export async function validatePaletteFamilies(
       foundationProjectId,
       'Color Light.Mode 1.json',
     )
-    const light = (await readJson<any>(lightPalettePath)) as any
-    const families = new Set(Object.keys(light?.Light || {}))
+    const light = await readJson<Record<string, unknown>>(lightPalettePath)
+    const lightData = light?.Light as Record<string, unknown> | undefined
+    const families = new Set(Object.keys(lightData || {}))
     for (const [semantic, palette] of Object.entries(mapping)) {
-      if (!families.has(palette)) {
+      if (!families.has(String(palette))) {
         console.warn(
           `[${scriptTag}] Warning: Palette family '${palette}' (mapped from semantic '${semantic}') was not found in Light palette.`,
         )

@@ -13,7 +13,7 @@ import {
 function generateAppearanceForPalette(
   paletteFamily: string,
   variablePrefix: string,
-): Record<string, any> {
+): Record<string, unknown> {
   const make = (ref: string, desc = '', web?: string) =>
     buildToken(ref, desc, web)
 
@@ -95,7 +95,7 @@ function generateAppearanceForPalette(
         textStrongOnEmphasis,
       ),
     },
-  } as Record<string, any>
+  } as Record<string, unknown>
 }
 
 async function generate(cfg: TokenConfig) {
@@ -127,15 +127,13 @@ async function generate(cfg: TokenConfig) {
   // Validate that mapped palette families exist in light palette (warning-only)
   await validatePaletteFamilies(
     foundationId,
-    mapping as Record<string, string>,
+    mapping,
     'generate-dynamic-appearance-tokens',
   )
 
   const outDir = path.join('tokens', dynamicId)
 
-  for (const [semantic, paletteFamily] of Object.entries(
-    mapping as Record<string, string>,
-  )) {
+  for (const [semantic, paletteFamily] of Object.entries(mapping)) {
     // File name with emoji prefix
     const fileName = `🎨 Appearance.${semantic}.json`
     const filePath = path.join(outDir, fileName)

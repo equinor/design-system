@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import type { TransformedToken } from 'style-dictionary/types'
 
 import { _extend } from '../utils'
 import { includeTokenFilter } from '../filter/includeTokenFilter'
@@ -81,7 +82,8 @@ async function buildDynamicAppearances(cfg: TokenConfig) {
       source: [entry.abs],
       include: [LIGHT_SCHEME, LIGHT_COLORS],
       // Only output Appearance tokens; keep scheme/aliases available for references
-      filter: (token: any) => includeTokenFilter(token, ['Appearance']),
+      filter: (token: TransformedToken) =>
+        includeTokenFilter(token, ['Appearance']),
       buildPath: BUILD_PATH,
       fileName,
       selector,

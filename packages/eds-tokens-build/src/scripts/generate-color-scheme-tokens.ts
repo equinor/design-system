@@ -9,7 +9,14 @@ import {
   writeJson,
 } from './utils'
 
-type Json = Record<string, any>
+type Json = Record<string, unknown>
+
+interface TokenValue {
+  $value?: unknown
+  $type?: string
+  $description?: string
+  $extensions?: Record<string, unknown>
+}
 
 function makeRef(mode: 'Light' | 'Dark', group: string, key: string) {
   return `{${mode}.${group}.${key}}`
@@ -50,9 +57,9 @@ function mirrorRefValue(value: string, targetMode: 'Light' | 'Dark'): string {
 function collectTopLevelExtras(
   obj: Json | undefined,
   groupKeys: Set<string>,
-): Record<string, any> {
+): Record<string, unknown> {
   if (!obj) return {}
-  const out: Record<string, any> = {}
+  const out: Record<string, unknown> = {}
   for (const [k, v] of Object.entries(obj)) {
     if (!groupKeys.has(k)) out[k] = v
   }
@@ -85,13 +92,14 @@ function mergeExtrasBothModes(
     let finalEntry = src
     if (!finalEntry && fallback && typeof fallback === 'object') {
       // Try to mirror the reference between modes if the $value is a token reference
-      const val = (fallback as any)?.$value
+      const tokenFallback = fallback as TokenValue
+      const val = tokenFallback.$value
       if (isRefString(val)) {
         finalEntry = {
-          $type: (fallback as any)?.$type ?? 'color',
+          $type: tokenFallback.$type ?? 'color',
           $value: mirrorRefValue(val, mode),
-          $description: (fallback as any)?.$description ?? '',
-          $extensions: (fallback as any)?.$extensions ?? DEFAULT_EXTENSIONS,
+          $description: tokenFallback.$description ?? '',
+          $extensions: tokenFallback.$extensions ?? DEFAULT_EXTENSIONS,
         }
       }
     }
@@ -167,7 +175,8 @@ function injectConceptsFromMappings(
     }
 
     if (!out[grpKey]) out[grpKey] = {}
-    ;(out[grpKey] as any)[tokenKey] = {
+    const group = out[grpKey] as Record<string, unknown>
+    group[tokenKey] = {
       $type: 'color',
       $value: resolved,
       $description: '',
@@ -201,8 +210,8 @@ async function generate(cfg: TokenConfig) {
 
   // Read palettes
   const [lightPalette, darkPalette] = await Promise.all([
-    readJson(LIGHT_COLORS),
-    readJson(DARK_COLORS),
+    readJson<Json>(LIGHT_COLORS),
+    readJson<Json>(DARK_COLORS),
   ])
 
   const lightRoot = lightPalette['Light'] as Json | undefined
@@ -232,10 +241,10 @@ async function generate(cfg: TokenConfig) {
 
   // Optionally merge non-group keys from existing scheme files to preserve custom tokens
   const existingLight = existsSync(LIGHT_SCHEME)
-    ? await readJson(LIGHT_SCHEME)
+    ? await readJson<Json>(LIGHT_SCHEME)
     : undefined
   const existingDark = existsSync(DARK_SCHEME)
-    ? await readJson(DARK_SCHEME)
+    ? await readJson<Json>(DARK_SCHEME)
     : undefined
 
   const groupKeys = new Set(Object.keys(lightRoot))

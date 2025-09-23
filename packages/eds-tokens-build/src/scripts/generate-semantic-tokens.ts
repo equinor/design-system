@@ -9,7 +9,7 @@ import {
   validatePaletteFamilies,
 } from './utils'
 
-type Json = Record<string, any>
+type Json = Record<string, unknown>
 
 function buildToken($value: string, $description = '', webVar?: string) {
   return {
@@ -118,7 +118,8 @@ function generateSemantic(
       'strong-on-emphasis',
     )
     // BG
-    sections.Bg[semantic] = {
+    const bgSection = sections.Bg as Record<string, unknown>
+    bgSection[semantic] = {
       Canvas: make(`{${palette}.1}`, '', bgCanvas),
       Surface: make(`{${palette}.2}`, '', bgSurface),
       'Fill Muted': {
@@ -134,14 +135,16 @@ function generateSemantic(
     }
 
     // BORDER
-    sections.Border[semantic] = {
+    const borderSection = sections.Border as Record<string, unknown>
+    borderSection[semantic] = {
       Subtle: make(`{${palette}.6}`, '', borderSubtle),
       Medium: make(`{${palette}.7}`, '', borderMedium),
       Strong: make(`{${palette}.8}`, '', borderStrong),
     }
 
     // TEXT
-    sections.Text[semantic] = {
+    const textSection = sections.Text as Record<string, unknown>
+    textSection[semantic] = {
       Subtle: make(`{${palette}.12}`, textDescriptions.Subtle, textSubtle),
       Strong: make(`{${palette}.13}`, textDescriptions.Strong, textStrong),
       'Subtle on emphasis': make(
@@ -188,16 +191,13 @@ async function generate(cfg: TokenConfig) {
   // Validate that mapped palette families exist in light palette (warning-only)
   await validatePaletteFamilies(
     foundationId,
-    mapping as Record<string, string>,
+    mapping,
     'generate-semantic-tokens',
   )
 
   const SEMANTIC_FILE = path.join('tokens', staticId, 'Semantic.Mode 1.json')
 
-  const semanticJson = generateSemantic(
-    mapping as Record<string, string>,
-    variablePrefix,
-  )
+  const semanticJson = generateSemantic(mapping, variablePrefix)
 
   await writeJson(SEMANTIC_FILE, semanticJson)
   console.log(
