@@ -17,7 +17,7 @@ COPY . ./
 RUN pnpm install --frozen-lockfile
 
 # Build all necessary dependencies and docs
-RUN pnpm run build:tokens-build && \
+RUN pnpm --filter @equinor/eds-tokens-build run build && \
     pnpm run build:tokens && \
     pnpm run build:utils && \
     pnpm run build:icons && \

@@ -32,8 +32,9 @@ WORKDIR /app
 COPY --from=deps /app ./
 COPY packages/ ./packages/
 
-# Build variables & demo
-RUN pnpm run build:variables && \
+# Build CLI tools first, then variables & demo
+RUN pnpm --filter @equinor/eds-tokens-build run build && \
+    pnpm run build:variables && \
     pnpm --filter eds-demo run build
 
 FROM base AS runner

@@ -33,8 +33,9 @@ WORKDIR /app
 COPY --from=deps /app ./
 COPY packages/ ./packages/
 
-# Build variables & generator
-RUN pnpm run build:variables && \
+# Build CLI tools first, then variables & generator
+RUN pnpm --filter @equinor/eds-tokens-build run build && \
+    pnpm run build:variables && \
     pnpm --filter eds-color-palette-generator run build
 
 FROM base AS runner
