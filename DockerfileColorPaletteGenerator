@@ -16,12 +16,7 @@ COPY . ./
 # Install dependencies first
 RUN pnpm install --frozen-lockfile
 
-# Build CLI tools first, then reinstall to create binary links, then build variables & generator
-RUN pnpm --filter @equinor/eds-tokens-sync run build && \
-    pnpm --filter @equinor/eds-tokens-build run build && \
-    pnpm install --frozen-lockfile && \
-    pnpm --filter @equinor/eds-tokens run build:variables && \
-    pnpm --filter eds-color-palette-generator run build
+RUN pnpm --filter eds-color-palette-generator run build
 
 FROM node:22.12.0-alpine AS runner
 WORKDIR /app

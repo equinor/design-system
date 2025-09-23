@@ -17,9 +17,7 @@ COPY . ./
 RUN pnpm install --frozen-lockfile
 
 # Build all necessary dependencies and docs
-RUN pnpm --filter @equinor/eds-tokens-build run build && \
-    pnpm run build:tokens && \
-    pnpm run build:utils && \
+RUN pnpm run build:utils && \
     pnpm run build:icons && \
     pnpm run build:core-react && \
     pnpm run build:docs
