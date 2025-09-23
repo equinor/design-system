@@ -37,7 +37,11 @@ COPY packages/ ./packages/
 # Build CLI tools first, then variables & generator
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
-    pnpm rebuild && \
+    cd packages/eds-tokens && \
+    sed -i 's/build-color-scheme-variables/node ..\/eds-tokens-build\/dist\/scripts\/build-color-scheme-variables.js/g' package.json && \
+    sed -i 's/build-semantic-static-variables/node ..\/eds-tokens-build\/dist\/scripts\/build-semantic-static-variables.js/g' package.json && \
+    sed -i 's/build-semantic-dynamic-variables/node ..\/eds-tokens-build\/dist\/scripts\/build-semantic-dynamic-variables.js/g' package.json && \
+    cd ../.. && \
     pnpm run build:variables && \
     pnpm --filter eds-color-palette-generator run build
 
