@@ -1,3 +1,4 @@
+@import url(https://cdn.eds.equinor.com/font/eds-uprights-vf.css);
 @import "tailwindcss";
 
 /* View transition for theme switch */
@@ -13,5 +14,14 @@
 }
 
 body {
-  font-family: var(--font-equinor);
+  font-family: Inter, sans-serif;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Equinor, sans-serif;
+  }
 }
