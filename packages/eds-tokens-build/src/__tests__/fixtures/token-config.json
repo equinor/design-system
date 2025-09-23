@@ -3,20 +3,35 @@
   "figmaProjectStaticId": "test-static",
   "figmaProjectDynamicId": "test-dynamic",
   "schemeTokensPrefix": "🌗 Color Scheme",
-  "variablePrefix": "test",
-  "buildPath": "color/",
+  "variablePrefix": "eds",
   "semanticColorCategories": {
-    "Accent": "Brand",
-    "Neutral": "Gray"
+    "Accent": "Moss Green",
+    "Neutral": "Gray",
+    "Info": "Blue",
+    "Success": "Green",
+    "Warning": "Orange",
+    "Danger": "Red"
   },
   "conceptColorGroups": {
-    "bg-floating": { 
-      "Light": "{Light.Gray.1}", 
-      "Dark": "{Dark.Gray.1}" 
+    "bg-floating": {
+      "Light": "{Light.Gray.2}",
+      "Dark": "{Dark.Gray.2}"
     },
-    "border-focus": { 
-      "Light": "{Light.Blue.7}", 
-      "Dark": "{Dark.Blue.7}" 
+    "bg-backdrop": {
+      "Light": "{Light.Gray.7}",
+      "Dark": "{Dark.Gray.7}"
+    },
+    "bg-input": {
+      "Light": "{Light.Gray.1}",
+      "Dark": "{Dark.Gray.1}"
+    },
+    "border-focus": {
+      "Light": "{Light.Blue.7}",
+      "Dark": "{Dark.Blue.7}"
+    },
+    "text-link": {
+      "Light": "{Light.Blue.13}",
+      "Dark": "{Dark.Blue.13}"
     }
   }
 }
