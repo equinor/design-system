@@ -41,7 +41,17 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['node:fs', 'node:fs/promises', 'node:path', 'node:process'], // Keep Node.js built-ins as external
+      external: [
+        'node:fs',
+        'node:fs/promises',
+        'node:path',
+        'node:process',
+        'path',
+        'style-dictionary',
+        'style-dictionary/types',
+        'style-dictionary/utils',
+        'style-dictionary-utils',
+      ], // Keep Node.js built-ins and external dependencies as external
       output: {
         banner: (chunk) => {
           // Add shebang for script files

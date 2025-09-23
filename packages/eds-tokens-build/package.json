@@ -16,6 +16,17 @@
     "url": "https://github.com/equinor/design-system/issues"
   },
   "type": "module",
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js"
+    }
+  },
   "bin": {
     "build-semantic-static-variables": "./dist/scripts/build-semantic-static-variables.js",
     "build-semantic-dynamic-variables": "./dist/scripts/build-semantic-dynamic-variables.js",
@@ -25,24 +36,16 @@
     "generate-concept-tokens": "./dist/scripts/generate-concept-tokens.js",
     "generate-dynamic-appearance-tokens": "./dist/scripts/generate-dynamic-appearance-tokens.js"
   },
-  "files": [
-    "bin",
-    "dist"
-  ],
-  "types": "./dist/main.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/main.d.ts",
-      "import": "./dist/eds-tokens-build.js",
-      "require": "./dist/eds-tokens-build.umd.cjs"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prettier": "prettier . --write",
     "lint": "eslint"
+  },
+  "engines": {
+    "pnpm": ">=10",
+    "node": ">=22"
   },
   "devDependencies": {
     "@types/node": "^22.18.0",
@@ -52,9 +55,5 @@
     "typescript": "^5.9.2",
     "vite": "^7.1.3",
     "vite-plugin-dts": "^3.9.1"
-  },
-  "engines": {
-    "pnpm": ">=10",
-    "node": ">=22"
   }
 }

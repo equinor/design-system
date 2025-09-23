@@ -71,7 +71,7 @@ async function buildColorScheme(cfg: TokenConfig) {
   const ensureDir = path.resolve('build/css', sanitizeSubdir(BUILD_PATH))
   if (!existsSync(ensureDir)) mkdirSync(ensureDir, { recursive: true })
   const outputDir = `${process.cwd()}/build/css/color/color-scheme`
-  mergeLightDarkFoundation({
+  await mergeLightDarkFoundation({
     prefix: COLOR_PREFIX,
     outputDirectory: outputDir,
     lightFileName: 'light-color-scheme-trimmed.css',
