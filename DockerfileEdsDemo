@@ -1,48 +1,33 @@
 # Use specific Node.js version for better reproducibility
-ARG NODE_VERSION=22.12.0-alpine
-ARG PNPM_VERSION=10.15.0
+FROM docker.io/node:22.12.0-alpine AS build
 
-FROM node:${NODE_VERSION} AS base
 LABEL org.opencontainers.image.title="EDS Demo Application"
 LABEL org.opencontainers.image.description="Equinor Design System Demo Application"
 LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
 
-RUN npm install -g pnpm@${PNPM_VERSION}
-
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy workspace configuration files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
+# Install pnpm globally
+RUN npm install -g pnpm@10.15.0
 
-# Copy only package.json files for better Docker layer caching
-COPY packages/eds-demo/package.json ./packages/eds-demo/
-COPY packages/eds-tokens/package.json ./packages/eds-tokens/
-COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
-COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
+# Copy everything
+COPY . ./
 
-# Install dependencies with frozen lockfile and clean cache
-RUN pnpm install --frozen-lockfile && \
-    pnpm store prune
-
-FROM base AS builder
-WORKDIR /app
-
-# Copy dependencies and source code
-COPY --from=deps /app ./
-COPY packages/ ./packages/
+# Install dependencies
+RUN pnpm install --frozen-lockfile
 
 # Build CLI tools first, then variables & demo
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
-    cd packages/eds-tokens && \
-    sed -i 's/build-color-scheme-variables/node ..\/eds-tokens-build\/dist\/scripts\/build-color-scheme-variables.js/g' package.json && \
-    sed -i 's/build-semantic-static-variables/node ..\/eds-tokens-build\/dist\/scripts\/build-semantic-static-variables.js/g' package.json && \
-    sed -i 's/build-semantic-dynamic-variables/node ..\/eds-tokens-build\/dist\/scripts\/build-semantic-dynamic-variables.js/g' package.json && \
-    cd ../.. && \
     pnpm run build:variables && \
     pnpm --filter eds-demo run build
+
+# Use specific Node.js version for better reproducibility  
+ARG NODE_VERSION=22.12.0-alpine
+ARG PNPM_VERSION=10.15.0
+
+FROM node:${NODE_VERSION} AS base
+RUN npm install -g pnpm@${PNPM_VERSION}
 
 FROM base AS runner
 WORKDIR /app
@@ -59,8 +44,8 @@ RUN addgroup -S "$USER" && \
     apk add --no-cache tini
 
 # Copy just the essential built files and node_modules
-COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo ./packages/eds-demo
-COPY --from=builder --chown="$USER":"$USER" /app/node_modules ./node_modules
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-demo ./packages/eds-demo
+COPY --chown="$USER":"$USER" --from=build /app/node_modules ./node_modules
 
 USER "$UID"
 
