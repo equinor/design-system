@@ -140,22 +140,22 @@
   --eds-color-text-strong-on-emphasis: var(--eds-color-moss-green-15);
 }
 
-[data-color-appearance="success"] {
-  --eds-color-bg-fill-muted-default: var(--eds-color-green-3);
-  --eds-color-bg-fill-muted-hover: var(--eds-color-green-4);
-  --eds-color-bg-fill-muted-active: var(--eds-color-green-5);
-  --eds-color-bg-fill-emphasis-default: var(--eds-color-green-9);
-  --eds-color-bg-fill-emphasis-hover: var(--eds-color-green-10);
-  --eds-color-bg-fill-emphasis-active: var(--eds-color-green-11);
-  --eds-color-bg-canvas: var(--eds-color-green-1);
-  --eds-color-bg-surface: var(--eds-color-green-2);
-  --eds-color-border-subtle: var(--eds-color-green-6);
-  --eds-color-border-medium: var(--eds-color-green-7);
-  --eds-color-border-strong: var(--eds-color-green-8);
-  --eds-color-text-subtle: var(--eds-color-green-12);
-  --eds-color-text-strong: var(--eds-color-green-13);
-  --eds-color-text-subtle-on-emphasis: var(--eds-color-green-14);
-  --eds-color-text-strong-on-emphasis: var(--eds-color-green-15);
+[data-color-appearance="danger"] {
+  --eds-color-bg-fill-muted-default: var(--eds-color-red-3);
+  --eds-color-bg-fill-muted-hover: var(--eds-color-red-4);
+  --eds-color-bg-fill-muted-active: var(--eds-color-red-5);
+  --eds-color-bg-fill-emphasis-default: var(--eds-color-red-9);
+  --eds-color-bg-fill-emphasis-hover: var(--eds-color-red-10);
+  --eds-color-bg-fill-emphasis-active: var(--eds-color-red-11);
+  --eds-color-bg-canvas: var(--eds-color-red-1);
+  --eds-color-bg-surface: var(--eds-color-red-2);
+  --eds-color-border-subtle: var(--eds-color-red-6);
+  --eds-color-border-medium: var(--eds-color-red-7);
+  --eds-color-border-strong: var(--eds-color-red-8);
+  --eds-color-text-subtle: var(--eds-color-red-12);
+  --eds-color-text-strong: var(--eds-color-red-13);
+  --eds-color-text-subtle-on-emphasis: var(--eds-color-red-14);
+  --eds-color-text-strong-on-emphasis: var(--eds-color-red-15);
 }
 
 [data-color-appearance="info"] {
@@ -176,6 +176,24 @@
   --eds-color-text-strong-on-emphasis: var(--eds-color-blue-15);
 }
 
+[data-color-appearance="success"] {
+  --eds-color-bg-fill-muted-default: var(--eds-color-green-3);
+  --eds-color-bg-fill-muted-hover: var(--eds-color-green-4);
+  --eds-color-bg-fill-muted-active: var(--eds-color-green-5);
+  --eds-color-bg-fill-emphasis-default: var(--eds-color-green-9);
+  --eds-color-bg-fill-emphasis-hover: var(--eds-color-green-10);
+  --eds-color-bg-fill-emphasis-active: var(--eds-color-green-11);
+  --eds-color-bg-canvas: var(--eds-color-green-1);
+  --eds-color-bg-surface: var(--eds-color-green-2);
+  --eds-color-border-subtle: var(--eds-color-green-6);
+  --eds-color-border-medium: var(--eds-color-green-7);
+  --eds-color-border-strong: var(--eds-color-green-8);
+  --eds-color-text-subtle: var(--eds-color-green-12);
+  --eds-color-text-strong: var(--eds-color-green-13);
+  --eds-color-text-subtle-on-emphasis: var(--eds-color-green-14);
+  --eds-color-text-strong-on-emphasis: var(--eds-color-green-15);
+}
+
 [data-color-appearance="warning"] {
   --eds-color-bg-fill-muted-default: var(--eds-color-orange-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-orange-4);
@@ -192,24 +210,6 @@
   --eds-color-text-strong: var(--eds-color-orange-13);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-orange-14);
   --eds-color-text-strong-on-emphasis: var(--eds-color-orange-15);
-}
-
-[data-color-appearance="danger"] {
-  --eds-color-bg-fill-muted-default: var(--eds-color-red-3);
-  --eds-color-bg-fill-muted-hover: var(--eds-color-red-4);
-  --eds-color-bg-fill-muted-active: var(--eds-color-red-5);
-  --eds-color-bg-fill-emphasis-default: var(--eds-color-red-9);
-  --eds-color-bg-fill-emphasis-hover: var(--eds-color-red-10);
-  --eds-color-bg-fill-emphasis-active: var(--eds-color-red-11);
-  --eds-color-bg-canvas: var(--eds-color-red-1);
-  --eds-color-bg-surface: var(--eds-color-red-2);
-  --eds-color-border-subtle: var(--eds-color-red-6);
-  --eds-color-border-medium: var(--eds-color-red-7);
-  --eds-color-border-strong: var(--eds-color-red-8);
-  --eds-color-text-subtle: var(--eds-color-red-12);
-  --eds-color-text-strong: var(--eds-color-red-13);
-  --eds-color-text-subtle-on-emphasis: var(--eds-color-red-14);
-  --eds-color-text-strong-on-emphasis: var(--eds-color-red-15);
 }
 
 @property --captured-size-1 {

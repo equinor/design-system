@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
 import { StyleDictionary } from 'style-dictionary-utils'
 import {
   pxTransform,
@@ -11,9 +8,7 @@ import {
   pxFormatted,
   pxToRem,
 } from '@equinor/eds-tokens-build'
-import { createColorVariablesFoundation } from './createColorVariablesFoundation'
-import { createColorVariablesStatic } from './createColorVariablesStatic'
-import { createColorVariablesDynamic } from './createColorVariablesDynamic'
+
 import { createSpacingAndTypographyVariables } from './createSpacingAndTypographyVariables'
 
 const outputDirectory = `${process.cwd()}/build`
@@ -31,35 +26,12 @@ export async function generate() {
   console.info('Running Style Dictionary build script')
   console.info('Tokens directory:', TOKENS_DIR_FILE_PATH)
 
-  const colorBuildPath = `color/`
-
   const cssTransforms = [
     'name/kebab',
     PX_TO_REM_NAME,
     PX_FORMATTED_NAME,
     FONT_QUOTE_NAME,
   ]
-
-  await createColorVariablesFoundation({
-    tokensDir: TOKENS_DIR_FILE_PATH,
-    cssBuildPath: cssBuildPath,
-    colorBuildPath: colorBuildPath,
-    cssTransforms,
-  })
-
-  await createColorVariablesStatic({
-    tokensDir: TOKENS_DIR_FILE_PATH,
-    cssBuildPath: cssBuildPath,
-    colorBuildPath: colorBuildPath,
-    cssTransforms,
-  })
-
-  await createColorVariablesDynamic({
-    tokensDir: TOKENS_DIR_FILE_PATH,
-    cssBuildPath: cssBuildPath,
-    colorBuildPath: colorBuildPath,
-    cssTransforms,
-  })
 
   await createSpacingAndTypographyVariables({
     tokensDir: TOKENS_DIR_FILE_PATH,

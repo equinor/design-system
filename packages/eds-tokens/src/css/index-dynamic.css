@@ -1,13 +1,5 @@
-@import 'color-setup.css';
-/* @import 'color/light-colors-verbose.css';
-@import 'color/dark-colors-verbose.css'; */
-@import 'color/foundation.css';
-@import 'color/semantic-dynamic-neutral-verbose.css';
-@import 'color/semantic-dynamic-accent-verbose.css';
-@import 'color/semantic-dynamic-success-verbose.css';
-@import 'color/semantic-dynamic-info-verbose.css';
-@import 'color/semantic-dynamic-warning-verbose.css';
-@import 'color/semantic-dynamic-danger-verbose.css';
+@import 'color/color-scheme/color-scheme.css';
+@import 'color/dynamic/variables.css';
 
 @import 'registered-properties.css';
 @import 'spacing-setup.css';

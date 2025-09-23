@@ -1,9 +1,6 @@
-@import 'color-setup.css';
-/* @import 'color/light-colors-verbose.css';
-@import 'color/dark-colors-verbose.css'; */
-@import 'color/foundation.css';
-@import 'color/semantic-static-verbose.css';
+@import 'color/color-scheme/color-scheme.css';
+@import 'color/static/variables.css';
+
 @import 'registered-properties.css';
 @import 'spacing-setup.css';
-@import 'spacing/primitives-trimmed.css';
-@import 'spacing/spacing-verbose.css';
+@import 'spacing/spacing-trimmed.css';
