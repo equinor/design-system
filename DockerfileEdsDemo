@@ -36,6 +36,7 @@ COPY packages/ ./packages/
 # Build CLI tools first, then variables & demo
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
+    pnpm install --offline && \
     pnpm run build:variables && \
     pnpm --filter eds-demo run build
 
