@@ -1,0 +1,550 @@
+{
+  "Dark": {
+    "Brand": {
+      "1": {
+        "$type": "color",
+        "$value": "#0c1a0e",
+        "$description": "Brand color step 1",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2": {
+        "$type": "color",
+        "$value": "#122b16",
+        "$description": "Brand color step 2",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3": {
+        "$type": "color",
+        "$value": "#1a3d1f",
+        "$description": "Brand color step 3",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "4": {
+        "$type": "color",
+        "$value": "#225028",
+        "$description": "Brand color step 4",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "5": {
+        "$type": "color",
+        "$value": "#2a6331",
+        "$description": "Brand color step 5",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "6": {
+        "$type": "color",
+        "$value": "#32773a",
+        "$description": "Brand color step 6",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "7": {
+        "$type": "color",
+        "$value": "#7fb069",
+        "$description": "Brand color step 7",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "8": {
+        "$type": "color",
+        "$value": "#4a9c52",
+        "$description": "Brand color step 8",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "9": {
+        "$type": "color",
+        "$value": "#5cb25c",
+        "$description": "Brand color step 9",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "10": {
+        "$type": "color",
+        "$value": "#6ec866",
+        "$description": "Brand color step 10",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "11": {
+        "$type": "color",
+        "$value": "#80df70",
+        "$description": "Brand color step 11",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "12": {
+        "$type": "color",
+        "$value": "#a4e894",
+        "$description": "Brand color step 12",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "13": {
+        "$type": "color",
+        "$value": "#c8f1b8",
+        "$description": "Brand color step 13",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "14": {
+        "$type": "color",
+        "$value": "#dcf6d4",
+        "$description": "Brand color step 14",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "15": {
+        "$type": "color",
+        "$value": "#e8f5e8",
+        "$description": "Brand color step 15",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "Gray": {
+      "1": {
+        "$type": "color",
+        "$value": "#111113",
+        "$description": "Gray color step 1",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2": {
+        "$type": "color",
+        "$value": "#191a1c",
+        "$description": "Gray color step 2",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3": {
+        "$type": "color",
+        "$value": "#222327",
+        "$description": "Gray color step 3",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "4": {
+        "$type": "color",
+        "$value": "#2a2d33",
+        "$description": "Gray color step 4",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "5": {
+        "$type": "color",
+        "$value": "#31363f",
+        "$description": "Gray color step 5",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "6": {
+        "$type": "color",
+        "$value": "#3a404c",
+        "$description": "Gray color step 6",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "7": {
+        "$type": "color",
+        "$value": "#9ca0aa",
+        "$description": "Gray color step 7",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "8": {
+        "$type": "color",
+        "$value": "#a9adb8",
+        "$description": "Gray color step 8",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "9": {
+        "$type": "color",
+        "$value": "#b6bac5",
+        "$description": "Gray color step 9",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "10": {
+        "$type": "color",
+        "$value": "#c3c7d2",
+        "$description": "Gray color step 10",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "11": {
+        "$type": "color",
+        "$value": "#d0d4df",
+        "$description": "Gray color step 11",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "12": {
+        "$type": "color",
+        "$value": "#dde1ec",
+        "$description": "Gray color step 12",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "13": {
+        "$type": "color",
+        "$value": "#eaeef9",
+        "$description": "Gray color step 13",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "14": {
+        "$type": "color",
+        "$value": "#f7fbff",
+        "$description": "Gray color step 14",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "15": {
+        "$type": "color",
+        "$value": "#fcfcfc",
+        "$description": "Gray color step 15",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "Blue": {
+      "1": {
+        "$type": "color",
+        "$value": "#0f1419",
+        "$description": "Blue color step 1",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2": {
+        "$type": "color",
+        "$value": "#0c1821",
+        "$description": "Blue color step 2",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3": {
+        "$type": "color",
+        "$value": "#0a1929",
+        "$description": "Blue color step 3",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "4": {
+        "$type": "color",
+        "$value": "#082f49",
+        "$description": "Blue color step 4",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "5": {
+        "$type": "color",
+        "$value": "#0c4a6e",
+        "$description": "Blue color step 5",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "6": {
+        "$type": "color",
+        "$value": "#075985",
+        "$description": "Blue color step 6",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "7": {
+        "$type": "color",
+        "$value": "#52a9ff",
+        "$description": "Blue color step 7",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "8": {
+        "$type": "color",
+        "$value": "#0284c7",
+        "$description": "Blue color step 8",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "9": {
+        "$type": "color",
+        "$value": "#0ea5e9",
+        "$description": "Blue color step 9",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "10": {
+        "$type": "color",
+        "$value": "#38bdf8",
+        "$description": "Blue color step 10",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "11": {
+        "$type": "color",
+        "$value": "#7dd3fc",
+        "$description": "Blue color step 11",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "12": {
+        "$type": "color",
+        "$value": "#bae6fd",
+        "$description": "Blue color step 12",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "13": {
+        "$type": "color",
+        "$value": "#cce7ff",
+        "$description": "Blue color step 13",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "14": {
+        "$type": "color",
+        "$value": "#e0f2fe",
+        "$description": "Blue color step 14",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "15": {
+        "$type": "color",
+        "$value": "#f0f9ff",
+        "$description": "Blue color step 15",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": ["ALL_SCOPES"],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}

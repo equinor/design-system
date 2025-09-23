@@ -1,0 +1,22 @@
+{
+  "figmaProjectFoundationId": "test-foundation",
+  "figmaProjectStaticId": "test-static",
+  "figmaProjectDynamicId": "test-dynamic",
+  "schemeTokensPrefix": "🌗 Color Scheme",
+  "variablePrefix": "test",
+  "buildPath": "color/",
+  "semanticColorCategories": {
+    "Accent": "Brand",
+    "Neutral": "Gray"
+  },
+  "conceptColorGroups": {
+    "bg-floating": { 
+      "Light": "{Light.Gray.1}", 
+      "Dark": "{Dark.Gray.1}" 
+    },
+    "border-focus": { 
+      "Light": "{Light.Blue.7}", 
+      "Dark": "{Dark.Blue.7}" 
+    }
+  }
+}
