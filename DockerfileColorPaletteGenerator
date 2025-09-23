@@ -13,12 +13,13 @@ RUN npm install -g pnpm@10.15.0
 # Copy everything
 COPY . ./
 
-# Install dependencies
+# Install dependencies first
 RUN pnpm install --frozen-lockfile
 
-# Build CLI tools first, then variables & generator
+# Build CLI tools first, then reinstall to create binary links, then build variables & generator
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
+    pnpm install --frozen-lockfile && \
     pnpm --filter @equinor/eds-tokens run build:variables && \
     pnpm --filter eds-color-palette-generator run build
 
