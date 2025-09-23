@@ -21,6 +21,7 @@ COPY packages/eds-color-palette-generator/package.json ./packages/eds-color-pale
 COPY packages/eds-tailwind/package.json ./packages/eds-tailwind/
 COPY packages/eds-tokens/package.json ./packages/eds-tokens/
 COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
+COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
 
 # Install dependencies with frozen lockfile and clean cache
 RUN pnpm install --frozen-lockfile && \
@@ -34,7 +35,8 @@ COPY --from=deps /app ./
 COPY packages/ ./packages/
 
 # Build CLI tools first, then variables & generator
-RUN pnpm --filter @equinor/eds-tokens-build run build && \
+RUN pnpm --filter @equinor/eds-tokens-sync run build && \
+    pnpm --filter @equinor/eds-tokens-build run build && \
     pnpm run build:variables && \
     pnpm --filter eds-color-palette-generator run build
 
