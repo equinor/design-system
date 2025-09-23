@@ -77,7 +77,14 @@
     "update-tokens:color-dynamic": "sync-figma-to-tokens --file-key nyPaQ3QnI1UAcxKW4a0d2c",
     "update-figma:color-dynamic": "sync-tokens-to-figma --file-key nyPaQ3QnI1UAcxKW4a0d2c",
     "update-tokens": "pnpm run update-tokens:foundations && pnpm run update-tokens:color-static && pnpm run update-tokens:color-dynamic && pnpm run update-tokens:spacing-primitives && pnpm run update-tokens:spacing-modes",
-    "update-figma": "pnpm run update-figma:foundations && pnpm run update-figma:color-static && pnpm run update-figma:color-dynamic && pnpm run update-figma:spacing-primitives && pnpm run update-figma:spacing-modes"
+    "update-figma": "pnpm run update-figma:foundations && pnpm run update-figma:color-static && pnpm run update-figma:color-dynamic && pnpm run update-figma:spacing-primitives && pnpm run update-figma:spacing-modes",
+    "build:variables:color-scheme": "build-color-scheme-variables",
+    "build:variables:semantic:static": "build-semantic-static-variables",
+    "build:variables:semantic:dynamic": "build-semantic-dynamic-variables",
+    "build:variables:all": "pnpm run build:variables:color-scheme && pnpm run build:variables:semantic:static && pnpm run build:variables:semantic:dynamic",
+    "setup:tokens:static": "generate-color-scheme-tokens && generate-semantic-tokens && generate-concept-tokens",
+    "setup:tokens:dynamic": "generate-color-scheme-tokens && generate-dynamic-appearance-tokens && generate-concept-tokens",
+    "setup:tokens:all": "generate-color-scheme-tokens && generate-semantic-tokens && generate-dynamic-appearance-tokens && generate-concept-tokens"
   },
   "keywords": [
     "eds",

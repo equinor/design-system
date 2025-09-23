@@ -1,0 +1,37 @@
+{
+  "figmaProjectFoundationId": "GnovDpL3UV6X51Ot7Kv6Im",
+  "figmaProjectStaticId": "OWxw2XogDLUt1aCvcDFXPw",
+  "figmaProjectDynamicId": "nyPaQ3QnI1UAcxKW4a0d2c",
+  "schemeTokensPrefix": "🌗 Color Scheme",
+  "variablePrefix": "eds",
+  "semanticColorCategories": {
+    "Accent": "Moss Green",
+    "Neutral": "Gray",
+    "Info": "Blue",
+    "Success": "Green",
+    "Warning": "Orange",
+    "Danger": "Red"
+  },
+  "conceptColorGroups": {
+    "bg-floating": {
+      "Light": "{Light.Gray.2}",
+      "Dark": "{Dark.Gray.2}"
+    },
+    "bg-backdrop": {
+      "Light": "{Light.Gray.7}",
+      "Dark": "{Dark.Gray.7}"
+    },
+    "bg-input": {
+      "Light": "{Light.Gray.1}",
+      "Dark": "{Dark.Gray.1}"
+    },
+    "border-focus": {
+      "Light": "{Light.Blue.7}",
+      "Dark": "{Dark.Blue.7}"
+    },
+    "text-link": {
+      "Light": "{Light.Blue.13}",
+      "Dark": "{Dark.Blue.13}"
+    }
+  }
+}
