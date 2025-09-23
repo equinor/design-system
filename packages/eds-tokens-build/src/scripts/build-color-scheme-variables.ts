@@ -2,16 +2,16 @@
 import { existsSync, mkdirSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { _extend } from '../src/utils/index.js'
-import { includeTokenFilter } from '../src/filter/includeTokenFilter.js'
-import { mergeLightDarkFoundation } from '../src/utils/mergeLightDarkFoundation.js'
+import { _extend } from '../utils/index'
+import { includeTokenFilter } from '../filter/includeTokenFilter'
+import { mergeLightDarkFoundation } from '../utils/mergeLightDarkFoundation'
 
-import type { TokenConfig } from './utils/index.js'
+import type { TokenConfig } from './utils'
 import {
   loadTokenConfig,
   sanitizeSubdir,
   cleanBuildOutputsForSubdir,
-} from './utils/index.js'
+} from './utils'
 
 async function buildColorScheme(cfg: TokenConfig) {
   const tokenConfig = cfg || {}

@@ -3,13 +3,8 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "dist",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2022",
-    "allowImportingTsExtensions": false,
     "declaration": false,
-    "sourceMap": false,
-    "rootDir": "."
+    "sourceMap": false
   },
-  "include": ["scripts/**/*.ts"]
+  "include": ["src/scripts/**/*.ts"]
 }

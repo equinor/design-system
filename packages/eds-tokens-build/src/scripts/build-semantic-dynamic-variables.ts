@@ -3,17 +3,17 @@ import { existsSync } from 'node:fs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-import { _extend } from '../src/utils/index.js'
-import { includeTokenFilter } from '../src/filter/includeTokenFilter.js'
+import { _extend } from '../utils'
+import { includeTokenFilter } from '../filter/includeTokenFilter'
 
-import type { TokenConfig } from './utils/index.js'
+import type { TokenConfig } from './utils'
 import {
   loadTokenConfig,
   sanitizeSubdir,
   slugifyAppearance,
   discoverAppearanceFiles,
   cleanBuildOutputsForSubdir,
-} from './utils/index.js'
+} from './utils'
 
 async function buildDynamicAppearances(cfg: TokenConfig) {
   const tokenConfig = cfg || {}
