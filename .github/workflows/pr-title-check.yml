@@ -13,10 +13,15 @@ jobs:
           title="${{ github.event.pull_request.title }}"
           echo "🔍 Checking PR title: '$title'"
 
-          # Fail fast if there is a space before '(' (e.g. "feat (scope): ...")
-          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]]+\( ]]; then
-            echo "❌ No space allowed before '('"
-            echo "   Use: 'type(scope): description' not 'type (scope): description'"
+          # Fail fast for any space after type (before '(' or ':')
+          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]] ]]; then
+            echo "❌ Invalid title: No space allowed after type"
+            echo "   Valid formats:"
+            echo "     • type: description"
+            echo "     • type(scope): description"
+            echo "   Invalid formats:"
+            echo "     • type : description"
+            echo "     • type (scope): description"
             exit 1
           fi
 
