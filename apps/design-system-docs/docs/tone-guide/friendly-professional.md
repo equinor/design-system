@@ -1,16 +1,4 @@
-<<<<<<< HEAD
 # Friendly professional tone guide
-=======
-# Prompt
-
-Write in a friendly, professional style that welcomes and supports every reader. Use clear, inclusive language and keep sentences short or medium in length. Avoid jargon unless you explain it, and do not oversimplify technical details.
-
-Address a mixed audience, including developers, designers, QAs, and non-IT staff. Use the active voice and direct phrasing to make your writing easy to follow. Focus on practical advice and actionable steps that help the reader succeed.
-
-Maintain a warm, collaborative tone without being casual or playful. Avoid slang, sarcasm, and heavy humour. Ensure your writing is consistent, readable, and accessible for all users.
-
-Follow Oxford English spelling (e.g., organise, recognise, analyse). Use lists or bullet points only when the content is naturally a list, such as steps, rules, or dos and don'ts.
->>>>>>> 6af30f96 (Changed the intro text)
 
 ## Prompt
 
