@@ -8,73 +8,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Title Format
+        shell: bash
         run: |
           title="${{ github.event.pull_request.title }}"
           echo "🔍 Checking PR title: '$title'"
 
-          # Check if title starts with valid type
-          if [[ $title == feat* ]] || [[ $title == fix* ]] || [[ $title == docs* ]] || [[ $title == style* ]] || [[ $title == refactor* ]] || [[ $title == perf* ]] || [[ $title == test* ]] || [[ $title == build* ]] || [[ $title == ci* ]] || [[ $title == chore* ]] || [[ $title == revert* ]]; then
-            echo "✅ Valid type found"
-          else
-            echo "❌ Invalid type. Must start with: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+          # Fail fast if there is a space before '(' (e.g. "feat (scope): ...")
+          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]]+\( ]]; then
+            echo "❌ No space allowed before '(' — use 'type(scope): ...'"
             exit 1
           fi
 
-          # Check colon format
-          if [[ $title == *": "* ]]; then
-            echo "✅ Has description after colon"
+          # Require either "type: desc" or "type(scope): desc"
+          re='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9][a-z0-9-]*(,[a-z0-9][a-z0-9-]*)*\))?(!)?: [^ ].+$'
+          if [[ "$title" =~ $re ]]; then
+            echo "✅ Title matches Conventional Commits"
           else
-            echo "❌ Must have format: type: description or type(scope): description"
+            echo "❌ Invalid title. Use 'type: desc' or 'type(scope): desc'"
+            echo "   Examples: 'feat: add X', 'feat(eds-tokens): add build scripts', 'feat(eds-tokens)!: switch pipeline'"
             exit 1
           fi
 
-          # Check scopes if present
-          if [[ $title == *"("* ]] && [[ $title == *")"* ]]; then
-            echo "📦 Scope detected, validating..."
+          # Optional: validate scope(s) if present
+          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\(([^\)]+)\) ]]; then
+            scope_content="${BASH_REMATCH[2]}"
+            echo "📦 Scope detected: '$scope_content'"
 
-            # Extract scope content between parentheses
-            scope_content=$(echo "$title" | sed 's/.*(\([^)]*\)).*/\1/')
-            echo "  Extracted scopes: '$scope_content'"
-
-            # List of valid scopes, must be updated when new packages are added
             valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker" "devcontainer" "github" "build" "deps" "config" "docs")
 
-            # Split by comma and check each scope
-            IFS=',' read -ra individual_scopes <<< "$scope_content"
+            IFS=',' read -ra scopes <<< "$scope_content"
             all_valid=true
-
-            for scope in "${individual_scopes[@]}"; do
-              # Trim whitespace
-              scope=$(echo "$scope" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-              echo "  - Checking scope: '$scope'"
-
-              # Check if this scope is in valid list
-              scope_valid=false
-              for valid_scope in "${valid_scopes[@]}"; do
-                if [[ "$scope" == "$valid_scope" ]]; then
-                  scope_valid=true
-                  break
-                fi
-              done
-
-              if [[ $scope_valid == true ]]; then
-                echo "    ✅ Valid scope"
-              else
-                echo "    ❌ Invalid scope: '$scope'"
-                all_valid=false
-              fi
+            for scope in "${scopes[@]}"; do
+              # no spaces are expected due to regex, but trim anyway
+              scope="$(echo "$scope" | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
+              found=false
+              for vs in "${valid_scopes[@]}"; do [[ "$scope" == "$vs" ]] && found=true && break; done
+              if ! $found; then echo "    ❌ Invalid scope: '$scope'"; all_valid=false; else echo "    ✅ $scope"; fi
             done
-
-            if [[ $all_valid == false ]]; then
+            if ! $all_valid; then
               echo ""
-              echo "❌ One or more invalid scopes found. Valid scopes:"
+              echo "❌ One or more invalid scopes. Valid scopes:"
               printf "  - %s\n" "${valid_scopes[@]}"
               exit 1
-            else
-              echo "  ✅ All scopes are valid"
             fi
           else
-            echo "📦 No scope (optional)"
+            echo "📦 No scope used (optional)"
           fi
 
-          echo "✅ PR title follows conventional commit format!"
+          echo "✅ PR title OK"
