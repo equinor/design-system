@@ -14,6 +14,115 @@ Running the build generates organised CSS files under `build/`:
   - **Dynamic**: `build/css/color/dynamic/variables.css` — switchable via data attributes
 - **Machine-readable formats**: JSON and JavaScript exports for programmatic use
 
+## System Architecture
+
+The token build system follows a pipeline approach where generation scripts create intermediate tokens, and build scripts transform them into CSS variables:
+
+```mermaid
+graph TB
+    %% Configuration
+    Config[token-config.json<br/>Configuration File]
+    
+    %% Input Token Files
+    subgraph "Input Token Files"
+        Foundation[tokens/foundation-id/<br/>Color Light.Mode 1.json<br/>Color Dark.Mode 1.json]
+        Static[tokens/static-id/<br/>Semantic.Mode 1.json]
+        Dynamic[tokens/dynamic-id/<br/>🎨 Appearance.*.json]
+    end
+    
+    %% Generation Scripts
+    subgraph "Generation Scripts"
+        GenColorScheme[generate-color-scheme-tokens<br/>Creates scheme files]
+        GenSemantic[generate-semantic-tokens<br/>Creates semantic definitions]
+        GenDynamic[generate-dynamic-appearance-tokens<br/>Creates appearance files]
+        GenConcept[generate-concept-tokens<br/>Adds concept mappings]
+    end
+    
+    %% Generated Token Files
+    subgraph "Generated Tokens"
+        SchemeTokens[🌗 Color Scheme.Light.json<br/>🌗 Color Scheme.Dark.json]
+        SemanticTokens[Enhanced semantic tokens]
+        AppearanceTokens[Appearance-based tokens]
+        ConceptTokens[Concept mappings]
+    end
+    
+    %% Build Scripts
+    subgraph "Build Scripts"
+        BuildColorScheme[build-color-scheme-variables<br/>Foundation CSS variables]
+        BuildStatic[build-semantic-static-variables<br/>Static semantic variables]
+        BuildDynamic[build-semantic-dynamic-variables<br/>Dynamic semantic variables]
+    end
+    
+    %% Output CSS Files
+    subgraph "Generated CSS"
+        ColorSchemeCSS[build/css/color/color-scheme/<br/>color-scheme.css<br/>light-color-scheme-trimmed.css<br/>dark-color-scheme-trimmed.css]
+        StaticCSS[build/css/color/static/<br/>variables.css]
+        DynamicCSS[build/css/color/dynamic/<br/>variables.css]
+    end
+    
+    %% User Implementation
+    subgraph "Usage Approaches"
+        StaticApproach[Static Approach<br/>Import foundation + static CSS<br/>Fixed semantic meanings]
+        DynamicApproach[Dynamic Approach<br/>Import foundation + dynamic CSS<br/>Switchable via data attributes]
+    end
+    
+    %% Relationships
+    Config --> GenColorScheme
+    Config --> GenSemantic  
+    Config --> GenDynamic
+    Config --> GenConcept
+    
+    Foundation --> GenColorScheme
+    Static --> GenSemantic
+    Dynamic --> GenDynamic
+    
+    GenColorScheme --> SchemeTokens
+    GenSemantic --> SemanticTokens
+    GenDynamic --> AppearanceTokens
+    GenConcept --> ConceptTokens
+    
+    SchemeTokens --> BuildColorScheme
+    Foundation --> BuildColorScheme
+    ConceptTokens --> BuildColorScheme
+    
+    SemanticTokens --> BuildStatic
+    SchemeTokens --> BuildStatic
+    
+    AppearanceTokens --> BuildDynamic
+    SchemeTokens --> BuildDynamic
+    
+    BuildColorScheme --> ColorSchemeCSS
+    BuildStatic --> StaticCSS
+    BuildDynamic --> DynamicCSS
+    
+    ColorSchemeCSS --> StaticApproach
+    StaticCSS --> StaticApproach
+    
+    ColorSchemeCSS --> DynamicApproach
+    DynamicCSS --> DynamicApproach
+    
+    %% Styling
+    classDef configFile fill:#e1f5fe
+    classDef inputFile fill:#f3e5f5
+    classDef generateScript fill:#e8f5e8
+    classDef buildScript fill:#fff3e0
+    classDef outputFile fill:#fce4ec
+    classDef approach fill:#f1f8e9
+    
+    class Config configFile
+    class Foundation,Static,Dynamic inputFile
+    class GenColorScheme,GenSemantic,GenDynamic,GenConcept generateScript
+    class BuildColorScheme,BuildStatic,BuildDynamic buildScript
+    class ColorSchemeCSS,StaticCSS,DynamicCSS outputFile
+    class StaticApproach,DynamicApproach approach
+```
+
+**Script Dependencies:**
+- **Generation scripts** create intermediate token files from your input tokens
+- **Build scripts** transform tokens into production-ready CSS variables
+- **Foundation colors** are required for both static and dynamic approaches
+- **Choose either static OR dynamic** approach for semantic colors
+
 ## Installation
 
 ```bash
