@@ -6,7 +6,10 @@ This approach helps designers and developers speak the same language. Every colo
 
 ## Colour scheme
 
-The colour system supports both light and dark colour schemes, helping you create clear hierarchy and accessible interfaces in any mode. Instead of a traditional linear scale, each colour step in EDS is chosen for a specific purpose. Transitions between colours are intentional, offering clear separation and strong contrast rather than a smooth gradient. This purposeful approach makes it easier for everyone to design and use interfaces that are clear, usable, and accessible.
+
+The colour system supports both light and dark colour schemes, helping you create clear hierarchy and accessible interfaces in any mode. Instead of a traditional linear scale, each colour step in EDS is chosen for a specific purpose such as backgounds, hover states, borders or text. Transitions between colours are intentional, offering clear separation and strong contrast rather than a smooth gradient.
+
+Each colour in the scale is designed to keep a consistent lightness, so different colours can be paired for elements like backgrounds, borders and text. This approach ensures you always get the right contrast and harmony, no matter which colour category you are working with (accent, info, warning ...).
 
 | Light                                         | Dark                                        |
 | --------------------------------------------- | ------------------------------------------- |
