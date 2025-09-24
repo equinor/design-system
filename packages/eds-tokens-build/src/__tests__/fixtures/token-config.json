@@ -3,9 +3,9 @@
   "figmaProjectStaticId": "test-static",
   "figmaProjectDynamicId": "test-dynamic",
   "schemeTokensPrefix": "🌗 Color Scheme",
-  "variablePrefix": "eds",
+  "variablePrefix": "x",
   "semanticColorCategories": {
-    "Accent": "Moss Green",
+    "Accent": "Orange",
     "Neutral": "Gray",
     "Info": "Blue",
     "Success": "Green",

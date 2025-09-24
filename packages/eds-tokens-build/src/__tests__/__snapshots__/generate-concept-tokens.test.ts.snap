@@ -1,4 +1,7 @@
-{
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Concept Token Generation > should generate concept tokens from color scheme tokens > concept.json 1`] = `
+"{
   "Bg": {
     "Floating": {
       "$type": "color",
@@ -11,7 +14,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-elevated)"
+            "WEB": "var(--color-bg-floating)"
           }
         }
       }
@@ -27,7 +30,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-backdrop)"
+            "WEB": "var(--color-bg-backdrop)"
           }
         }
       }
@@ -43,7 +46,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-backdrop)"
+            "WEB": "var(--color-bg-input)"
           }
         }
       }
@@ -61,7 +64,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-border-focus)"
+            "WEB": "var(--color-border-focus)"
           }
         }
       }
@@ -79,10 +82,12 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-text-link)"
+            "WEB": "var(--color-text-link)"
           }
         }
       }
     }
   }
 }
+"
+`;
