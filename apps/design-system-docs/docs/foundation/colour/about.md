@@ -1,12 +1,12 @@
 # About
 
-The EDS colour system creates clear, consistent, and accessible interfaces. It uses **semantic colours** — names that describe what each colour does rather than how it looks.
+The EDS colour system enables designers to create clear, consistent, and accessible interfaces. Colours are named for their role or purpose in the interface, following a **semantic** naming convention.
 
-This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We test all colour combinations with the APCA contrast algorithm to ensure they're readable and accessible in light and dark colour schemes.
+This approach helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it. We take an accessibility-first approach by using the APCA contrast algorithm to evaluate all colour combinations. APCA models human visual perception more accurately than traditional methods, helping us ensure that text and interface elements remain readable and accessible in both light and dark colour schemes.
 
 ## Colour scheme
 
-The colour system supports light and dark colour schemes, ensuring consistent visual hierarchy and accessibility across all interface modes.
+The colour system supports both light and dark colour schemes, helping you create clear hierarchy and accessible interfaces in any mode. Instead of a traditional linear scale, each colour step in EDS is chosen for a specific purpose. Transitions between colours are intentional, offering clear separation and strong contrast rather than a smooth gradient. This purposeful approach makes it easier for everyone to design and use interfaces that are clear, usable, and accessible.
 
 | Light                                         | Dark                                        |
 | --------------------------------------------- | ------------------------------------------- |
