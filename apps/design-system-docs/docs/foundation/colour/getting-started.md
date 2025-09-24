@@ -102,67 +102,59 @@ Then use classes instead of data attributes:
 
 ## For Designers
 
-You can use the EDS colour system in Figma with either **static** or **dynamic** variables. Both options are available as shared libraries — just make sure you and your developers agree on which approach to use. 
+You can use the EDS colour system in Figma with either **static** or **dynamic** variables. Both options are available as shared libraries, just make sure you and your developers agree on which approach to use. 
 
 
 ### Static Approach
 
-Add the **EDS Colours (static)** library to your Figma file to use static variables. These variables are grouped by semantic category, making it easy to find the right option for your design.
 
-**Example: Primary button (static)**
+Add the **EDS Colours (static)** library to your Figma file to use static variables. These are organised by category, so you can easily pick the colour you need. The static approach lets you choose from all colours, selecting the exact shade you want for each element.
+
+#### Example: Primary button (static)
 1. Select your button in Figma.
 2. Apply these variables:
   - Background: `Bg/Accent/Fill Emphasis/Default`
   - Text: `Text/Accent/Strong on Emphasis`
 
-![Primary button colours](/img/primary-button-bg.png)
+<img src="/img/primary-button-bg.png" alt="Primary button colours" width="600" />
 <p class="image-caption">The primary button uses Bg/Accent/Fill Emphasis/Default for its background and Text/Accent/Strong on Emphasis for its text colour.</p>
-
-
-
- ![Primary button colours](/img/primary-button-bg.png) 
-
-<p class="image-caption">The primary button uses the accent colour for its background and a strong contrasting text colour for accessibility.</p>
-
-
-
 
 
 ### Dynamic Approach
 
-Add the **EDS Colours (dynamic)** library to your Figma file to use dynamic variables. These variables use abstract role names, such as Background, Text, and Border. Set the appearance separately in Figma to match your needs.
 
-**Example: Primary button (dynamic)**
+Add the **EDS Colours (dynamic)** library to your Figma file to use dynamic variables. These use abstract role names, such as Background, Text, and Border. With the dynamic approach, you focus on contrast first, then select the colour or appearance that fits your context.
+
+#### Example: Primary button (dynamic)
+
+
 
 1. Select your button in Figma.
 2. Apply these variables:
   - Background: `Bg/Fill/Emphasis`
   - Text: `Text/Strong on Emphasis`
-3. Open the Appearance menu and choose `Accent`.
 
-![Primary button colours](/img/primary-button-bg.png)
+<img src="/img/primary-button-bg-dynamic.png" alt="Primary button colours" width="600" />
 <p class="image-caption">The primary button uses Bg/Fill/Emphasis for its background and Text/Strong on Emphasis for its text colour.</p>
+3. Open the Appearance menu and choose `Accent`.
 
 You can change the button’s appearance at any time without updating the roles.
 
-**To change appearance:**
+
+#### To change appearance:
 1. Select the button.
 2. In the Variables panel, open the Appearance dropdown.
 3. Choose Neutral, Accent, Info, Success, Warning, or Danger.
 
-![Primary button appearance dropdown](/img/primary-button-appearance.png)
+<img src="/img/primary-button-appearance.png" alt="Primary button appearance dropdown" width="600" />
 <p class="image-caption">Change the appearance using the dropdown in the Variables panel.</p>
-
-
 
 
 ### Light and Dark Colour Scheme
 
 Both static and dynamic variables work across light and dark modes. Switch between them in the **Variables panel**, and your button updates automatically.
 
-### Stay Aligned with Developers
 
-Every Figma variable has a matching code variable. This means the button you design is the button developers implement — as long as you both use the same approach.
 
 
 
