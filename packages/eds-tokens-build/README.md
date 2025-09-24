@@ -22,14 +22,14 @@ The token build system follows a pipeline approach where generation scripts crea
 graph TB
     %% Configuration
     Config[token-config.json<br/>Configuration File]
-    
+
     %% Input Token Files
     subgraph "Input Token Files"
         Foundation[tokens/foundation-id/<br/>Color Light.Mode 1.json<br/>Color Dark.Mode 1.json]
         Static[tokens/static-id/<br/>Semantic.Mode 1.json]
         Dynamic[tokens/dynamic-id/<br/>🎨 Appearance.*.json]
     end
-    
+
     %% Generation Scripts
     subgraph "Generation Scripts"
         GenColorScheme[generate-color-scheme-tokens<br/>Creates scheme files]
@@ -37,7 +37,7 @@ graph TB
         GenDynamic[generate-dynamic-appearance-tokens<br/>Creates appearance files]
         GenConcept[generate-concept-tokens<br/>Adds concept mappings]
     end
-    
+
     %% Generated Token Files
     subgraph "Generated Tokens"
         SchemeTokens[🌗 Color Scheme.Light.json<br/>🌗 Color Scheme.Dark.json]
@@ -45,62 +45,62 @@ graph TB
         AppearanceTokens[Appearance-based tokens]
         ConceptTokens[Concept mappings]
     end
-    
+
     %% Build Scripts
     subgraph "Build Scripts"
         BuildColorScheme[build-color-scheme-variables<br/>Foundation CSS variables]
         BuildStatic[build-semantic-static-variables<br/>Static semantic variables]
         BuildDynamic[build-semantic-dynamic-variables<br/>Dynamic semantic variables]
     end
-    
+
     %% Output CSS Files
     subgraph "Generated CSS"
         ColorSchemeCSS[build/css/color/color-scheme/<br/>color-scheme.css<br/>light-color-scheme-trimmed.css<br/>dark-color-scheme-trimmed.css]
         StaticCSS[build/css/color/static/<br/>variables.css]
         DynamicCSS[build/css/color/dynamic/<br/>variables.css]
     end
-    
+
     %% User Implementation
     subgraph "Usage Approaches"
         StaticApproach[Static Approach<br/>Import foundation + static CSS<br/>Fixed semantic meanings]
         DynamicApproach[Dynamic Approach<br/>Import foundation + dynamic CSS<br/>Switchable via data attributes]
     end
-    
+
     %% Relationships
     Config --> GenColorScheme
-    Config --> GenSemantic  
+    Config --> GenSemantic
     Config --> GenDynamic
     Config --> GenConcept
-    
+
     Foundation --> GenColorScheme
     Static --> GenSemantic
     Dynamic --> GenDynamic
-    
+
     GenColorScheme --> SchemeTokens
     GenSemantic --> SemanticTokens
     GenDynamic --> AppearanceTokens
     GenConcept --> ConceptTokens
-    
+
     SchemeTokens --> BuildColorScheme
     Foundation --> BuildColorScheme
     ConceptTokens --> BuildColorScheme
-    
+
     SemanticTokens --> BuildStatic
     SchemeTokens --> BuildStatic
-    
+
     AppearanceTokens --> BuildDynamic
     SchemeTokens --> BuildDynamic
-    
+
     BuildColorScheme --> ColorSchemeCSS
     BuildStatic --> StaticCSS
     BuildDynamic --> DynamicCSS
-    
+
     ColorSchemeCSS --> StaticApproach
     StaticCSS --> StaticApproach
-    
+
     ColorSchemeCSS --> DynamicApproach
     DynamicCSS --> DynamicApproach
-    
+
     %% Styling
     classDef configFile fill:#e1f5fe
     classDef inputFile fill:#f3e5f5
@@ -108,7 +108,7 @@ graph TB
     classDef buildScript fill:#fff3e0
     classDef outputFile fill:#fce4ec
     classDef approach fill:#f1f8e9
-    
+
     class Config configFile
     class Foundation,Static,Dynamic inputFile
     class GenColorScheme,GenSemantic,GenDynamic,GenConcept generateScript
@@ -118,6 +118,7 @@ graph TB
 ```
 
 **Script Dependencies:**
+
 - **Generation scripts** create intermediate token files from your input tokens
 - **Build scripts** transform tokens into production-ready CSS variables
 - **Foundation colors** are required for both static and dynamic approaches
@@ -139,7 +140,7 @@ pnpm add @equinor/eds-tokens-build
 // token-config.json
 {
   "figmaProjectFoundationId": "your-foundation-project-id",
-  "figmaProjectStaticId": "your-static-project-id", 
+  "figmaProjectStaticId": "your-static-project-id",
   "figmaProjectDynamicId": "your-dynamic-project-id",
   "variablePrefix": "eds"
 }
@@ -162,12 +163,12 @@ build-semantic-dynamic-variables
 
 ```css
 /* Foundation colours (required) */
-@import "./build/css/color/color-scheme/color-scheme.css";
+@import './build/css/color/color-scheme/color-scheme.css';
 
 /* Semantic colours (choose one approach) */
-@import "./build/css/color/static/variables.css";
+@import './build/css/color/static/variables.css';
 /* OR */
-@import "./build/css/color/dynamic/variables.css";
+@import './build/css/color/dynamic/variables.css';
 ```
 
 ## Token file structure
@@ -208,7 +209,7 @@ Create `token-config.json` at your project root with these settings:
     "Neutral": "Gray",
     "Info": "Blue",
     "Success": "Green",
-    "Warning": "Orange", 
+    "Warning": "Orange",
     "Danger": "Red"
   },
   "conceptColorGroups": {
@@ -237,24 +238,29 @@ Create `token-config.json` at your project root with these settings:
 The package provides these build commands:
 
 ### Foundation colours
+
 ```bash
 build-color-scheme-variables
 ```
+
 Generates the base colour scheme with automatic light/dark switching.
 
 ### Semantic colours (choose one approach)
 
 **Static approach** (fixed semantic meanings):
+
 ```bash
 build-semantic-static-variables
 ```
 
 **Dynamic approach** (switchable via data attributes):
+
 ```bash
-build-semantic-dynamic-variables  
+build-semantic-dynamic-variables
 ```
 
 ### Token generation
+
 ```bash
 generate-color-scheme-tokens     # Create foundation scheme files
 generate-semantic-tokens         # Create static semantic definitions
@@ -265,6 +271,7 @@ generate-concept-tokens          # Add concept mappings to schemes
 ### Command options
 
 Build commands accept these flags:
+
 - `--no-clean`: Don't remove existing build files first
 - `--skip-build`: Skip the token processing step
 - `--skip-combine`: Don't merge files into final CSS
@@ -277,10 +284,10 @@ Import both the foundation and static semantic variables:
 
 ```css
 /* Foundation colours with automatic light/dark switching */
-@import "./build/css/color/color-scheme/color-scheme.css";
+@import './build/css/color/color-scheme/color-scheme.css';
 
 /* Semantic variables under :root */
-@import "./build/css/color/static/variables.css";
+@import './build/css/color/static/variables.css';
 ```
 
 Use semantic variables in your components:
@@ -307,8 +314,8 @@ Use semantic variables in your components:
 Import foundation colours and dynamic variables:
 
 ```css
-@import "./build/css/color/color-scheme/color-scheme.css";
-@import "./build/css/color/dynamic/variables.css";
+@import './build/css/color/color-scheme/color-scheme.css';
+@import './build/css/color/dynamic/variables.css';
 ```
 
 Switch colour intentions using data attributes:
@@ -339,17 +346,20 @@ The data attribute automatically applies the correct colour intention.
 Generated variables follow these patterns:
 
 **Foundation colours:**
+
 - `--eds-color-gray-7`
 - `--eds-color-red-15`
 - `--eds-color-blue-9`
 
 **Semantic colours (static):**
+
 - `--eds-color-bg-neutral-canvas`
-- `--eds-color-bg-accent-surface`  
+- `--eds-color-bg-accent-surface`
 - `--eds-color-text-neutral-strong`
 - `--eds-color-border-success-subtle`
 
 **Semantic colours (dynamic):**
+
 - `--eds-color-bg-surface` (scoped by `[data-color-appearance]`)
 - `--eds-color-text-strong`
 - `--eds-color-border-subtle`
@@ -366,21 +376,25 @@ Import these separately and toggle themes with JavaScript if needed.
 ## Common issues
 
 **Missing project IDs error**
+
 - Check that your `token-config.json` has the correct project IDs
 - Verify the corresponding folders exist under `tokens/`
 
 **Wrong variable names**
+
 - Confirm your `variablePrefix` setting in the config
 - Variables will be named `--<prefix>-color-*`
 
 **Build not finding token files**
+
 - Ensure token files follow the exact naming pattern:
-  - `Color Light.Mode 1.json` and `Color Dark.Mode 1.json`  
+  - `Color Light.Mode 1.json` and `Color Dark.Mode 1.json`
   - `🌗 Color Scheme.Light.json` and `🌗 Color Scheme.Dark.json`
   - `Semantic.Mode 1.json`
   - `🎨 Appearance.*.json`
 
 **Browser doesn't support `light-dark()`**
+
 - Use the separate theme files instead
 - Implement theme switching with JavaScript and data attributes
 
