@@ -15,7 +15,8 @@ jobs:
 
           # Fail fast if there is a space before '(' (e.g. "feat (scope): ...")
           if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]]+\( ]]; then
-            echo "❌ No space allowed before '(' — use 'type(scope): ...'"
+            echo "❌ No space allowed before '('"
+            echo "   Use: 'type(scope): description' not 'type (scope): description'"
             exit 1
           fi
 
@@ -24,8 +25,15 @@ jobs:
           if [[ "$title" =~ $re ]]; then
             echo "✅ Title matches Conventional Commits"
           else
-            echo "❌ Invalid title. Use 'type: desc' or 'type(scope): desc'"
-            echo "   Examples: 'feat: add X', 'feat(eds-tokens): add build scripts', 'feat(eds-tokens)!: switch pipeline'"
+              echo "❌ Invalid title: Must follow conventional commit format"
+              echo "   Valid formats:"
+              echo "     • type: description"
+              echo "     • type(scope): description"
+              echo "     • type(scope)!: breaking change description"
+              echo "   Examples:"
+              echo "     • feat: add new component"
+              echo "     • fix(eds-tokens): resolve build issue"
+              echo "     • feat(core)!: remove deprecated API"
             exit 1
           fi
 
@@ -47,8 +55,10 @@ jobs:
             done
             if ! $all_valid; then
               echo ""
-              echo "❌ One or more invalid scopes. Valid scopes:"
-              printf "  - %s\n" "${valid_scopes[@]}"
+              echo "❌ Invalid scope(s): One or more scopes are not recognized"
+              echo "   Valid scopes:"
+              printf "     • %s\n" "${valid_scopes[@]}"
+              echo "   Use: 'type(valid-scope): description'"
               exit 1
             fi
           else
