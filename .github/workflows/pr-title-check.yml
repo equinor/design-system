@@ -14,18 +14,18 @@ jobs:
           echo "🔍 Checking PR title: '$title'"
 
           # Fail fast for spacing mistakes
-          # 1. Space after type (before '(' or ':')
-          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]] ]]; then
-            echo "❌ Invalid title: No space allowed after type"
+          # Check for any space before ':' (covers both "type :" and "type(scope) :")
+          if [[ "$title" =~ " :" ]]; then
+            echo "❌ Invalid title: No space allowed before ':'"
             echo "   Use: 'type: description' not 'type : description'"
-            echo "   Use: 'type(scope): description' not 'type (scope): description'"
+            echo "   Use: 'type(scope): description' not 'type(scope) : description'"
             exit 1
           fi
 
-          # 2. Space after scope (before ':')
-          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\([^)]+\)\ +: ]]; then
-            echo "❌ Invalid title: No space allowed after scope"
-            echo "   Use: 'type(scope): description' not 'type(scope) : description'"
+          # Check for space before '(' (e.g. "feat (scope)")
+          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]] ]] && [[ "$title" =~ \( ]]; then
+            echo "❌ Invalid title: No space allowed before '('"
+            echo "   Use: 'type(scope): description' not 'type (scope): description'"
             exit 1
           fi
 
