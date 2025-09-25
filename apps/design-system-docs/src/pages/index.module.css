@@ -4,20 +4,32 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 2rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
+.homepageInfo {
+  padding-bottom: 2rem;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 0 0 1rem 0;
   }
 }
 
-.buttons {
+.featureRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.videoGrid {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 16px;
 }

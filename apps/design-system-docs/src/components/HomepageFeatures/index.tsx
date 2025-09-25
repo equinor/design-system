@@ -9,42 +9,40 @@ type FeatureItem = {
   description: ReactNode
 }
 
-import DocusaurusMountain from '@site/static/img/undraw_docusaurus_mountain.svg'
-import DocusaurusTree from '@site/static/img/undraw_docusaurus_tree.svg'
-import DocusaurusReact from '@site/static/img/undraw_docusaurus_react.svg'
+import Designer from '../../../static/img/illustrations/designer_illu.svg'
+import Devices from '../../../static/img/illustrations/devices_illu.svg'
+import Puzzle from '../../../static/img/illustrations/puzzle_illu.svg'
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Resources',
-    Svg: DocusaurusMountain,
+    Svg: Puzzle,
     description: (
       <>
-        Provides teams with easy-to-use resources, from React & Figma component
-        libraries to icons, design tokens, colors, typography and more
+        Unified, production-ready assets: React & Figma components, design
+        tokens, icons, color, typography—kept continuously in sync
       </>
     ),
   },
   {
     title: 'Documentation',
-    Svg: DocusaurusReact,
-    description: (
-      <>Guidelines, principles and how-to&apos;s built on a common language</>
-    ),
-  },
-  {
-    title: 'Living',
-    Svg: DocusaurusTree,
+    Svg: Devices,
     description: (
       <>
-        EDS is always evolving, invites collaboration and depends on
-        contributions
+        Actionable guidelines, patterns and principles expressed in a shared
+        vocabulary to help teams build consistently
       </>
     ),
   },
   {
-    title: 'Supported',
-    Svg: DocusaurusMountain,
-    description: <>EDS is supported by the EDS core team</>,
+    title: 'Living',
+    Svg: Designer,
+    description: (
+      <>
+        Continuously evolving through real product feedback—open, collaborative
+        and driven by community contributions
+      </>
+    ),
   },
 ]
 
@@ -66,7 +64,7 @@ export function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={styles.featuresRow}>
           {FeatureList.map((props) => (
             <Feature key={props.title} {...props} />
           ))}
