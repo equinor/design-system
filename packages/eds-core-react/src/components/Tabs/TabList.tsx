@@ -58,13 +58,6 @@ const StyledTabList = styled.div.attrs(
 
 export type TabListProps = HTMLAttributes<HTMLDivElement>
 
-type TabChildProps = {
-  disabled?: boolean
-  $index?: number
-  value?: number | string
-  active?: boolean
-}
-
 const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   { children = [], ...props },
   ref,
@@ -100,22 +93,30 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
         return null
       }
 
-      const childProps = child.props as TabChildProps
+      type ChildPropsWithRef = {
+        value?: string | number
+        disabled?: boolean
+        ref?: React.Ref<HTMLButtonElement>
+        [key: string]: unknown
+      }
+
+      const childProps = child.props as ChildPropsWithRef
       const controlledActive = childProps.value
       const isActive = controlledActive
         ? controlledActive === activeTab
         : $index === activeTab
 
-      const childRef =
-        'ref' in child ? (child.ref as React.Ref<HTMLButtonElement>) : null
+      const childRef = childProps?.ref || null
       const tabRef =
         isActive && childRef
           ? mergeRefs<HTMLButtonElement>(childRef, selectedTabRef)
-          : childRef
+          : isActive
+            ? selectedTabRef
+            : childRef
 
       if (isActive) currentTab.current = $index
 
-      return cloneElement<TabChildProps>(child, {
+      return cloneElement(child, {
         id: `${tabsId}-tab-${$index + 1}`,
         'aria-controls': `${tabsId}-panel-${$index + 1}`,
         active: isActive,
@@ -125,14 +126,22 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
             controlledActive !== undefined ? controlledActive : $index,
           ),
         ref: tabRef,
-      } as Partial<TabChildProps>)
+      } as Record<string, unknown>)
     }) ?? []
 
   const focusableChildren: number[] = Tabs.filter((child: ReactElement) => {
-    const childProps = child.props as TabChildProps
+    type ChildPropsWithDisabled = {
+      disabled?: boolean
+      [key: string]: unknown
+    }
+    const childProps = child.props as ChildPropsWithDisabled
     return !childProps.disabled
   }).map((child: ReactElement) => {
-    const childProps = child.props as TabChildProps
+    type ChildPropsWithIndex = {
+      $index?: number
+      [key: string]: unknown
+    }
+    const childProps = child.props as ChildPropsWithIndex
     return childProps.$index
   })
 
