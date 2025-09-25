@@ -19,15 +19,6 @@ export type TokenConfig = {
         Dark?: string
       }
   >
-  /** Deprecated (back-compat): use conceptColorGroups instead */
-  conceptMappings?: Record<
-    string,
-    | string
-    | {
-        Light?: string
-        Dark?: string
-      }
-  >
 }
 
 export function loadTokenConfig(): TokenConfig {

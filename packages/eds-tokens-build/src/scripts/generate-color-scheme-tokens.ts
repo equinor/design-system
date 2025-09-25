@@ -231,12 +231,12 @@ async function generate(cfg: TokenConfig) {
   const withConceptsLight = injectConceptsFromMappings(
     generatedLight,
     'Light',
-    tokenConfig.conceptColorGroups || tokenConfig.conceptMappings,
+    tokenConfig.conceptColorGroups,
   )
   const withConceptsDark = injectConceptsFromMappings(
     generatedDark,
     'Dark',
-    tokenConfig.conceptColorGroups || tokenConfig.conceptMappings,
+    tokenConfig.conceptColorGroups,
   )
 
   // Optionally merge non-group keys from existing scheme files to preserve custom tokens

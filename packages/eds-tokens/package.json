@@ -55,6 +55,8 @@
     "build:variables:semantic:static": "build-semantic-static-variables",
     "build:variables:semantic:dynamic": "build-semantic-dynamic-variables",
     "build:variables:all-color": "pnpm run build:variables:color-scheme && pnpm run build:variables:semantic:static && pnpm run build:variables:semantic:dynamic",
+    "setup:tokens:color-scheme": "generate-color-scheme-tokens",
+    "setup:tokens:concept": "generate-concept-tokens",
     "setup:tokens:static": "generate-color-scheme-tokens && generate-semantic-tokens && generate-concept-tokens",
     "setup:tokens:dynamic": "generate-color-scheme-tokens && generate-dynamic-appearance-tokens && generate-concept-tokens",
     "setup:tokens:all-color": "generate-color-scheme-tokens && generate-semantic-tokens && generate-dynamic-appearance-tokens && generate-concept-tokens",
