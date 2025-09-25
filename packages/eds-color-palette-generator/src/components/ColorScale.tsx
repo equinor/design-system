@@ -2,7 +2,7 @@
 import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
 import { contrast } from '@/utils/color'
-import { Trash, Pencil } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import Color from 'colorjs.io'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 
@@ -15,6 +15,8 @@ type ColorScaleProps = {
   onRename?: (newName: string) => void
   onChangeHex?: (newHex: string) => void
   onRemove?: () => void
+  /** Stable identifier for testing - should not change when name/hex changes */
+  testId?: string
 }
 
 // Type for color information in OKLCH format!
@@ -83,6 +85,7 @@ function ColorScaleBase({
   onRename,
   onChangeHex,
   onRemove,
+  testId,
 }: ColorScaleProps) {
   // State to track client-side rendering for contrast calculations
   const [isClient, setIsClient] = useState(false)
@@ -112,6 +115,7 @@ function ColorScaleBase({
         onRename,
         onChangeHex,
         onRemove,
+        testId,
       }: {
         name?: string
         headingColor: string
@@ -119,6 +123,7 @@ function ColorScaleBase({
         onRename?: (n: string) => void
         onChangeHex?: (h: string) => void
         onRemove?: () => void
+        testId?: string
       }) {
         const colorInputRef = useRef<HTMLInputElement | null>(null)
         const [localHex, setLocalHex] = useState(baseHex || '#000000')
@@ -138,10 +143,11 @@ function ColorScaleBase({
               className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium"
               style={{ color: headingColor }}
               aria-label="Color name"
+              data-testid={testId ? `${testId}-input-name` : undefined}
             />
             <input
               ref={colorInputRef}
-              type="color"
+              type="text"
               value={localHex}
               onChange={(e) => {
                 const next = e.target.value
@@ -153,25 +159,20 @@ function ColorScaleBase({
                   onChangeHex?.(next)
                 }, 250)
               }}
-              className="sr-only"
-              aria-label={`Pick base color for ${name ?? 'color'}`}
-              tabIndex={-1}
+              placeholder="#000000"
+              className="px-3 py-1.5 w-24 font-mono text-sm rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface"
+              aria-label={`Base color hex value for ${name ?? 'color'}`}
+              pattern="^#[0-9A-Fa-f]{6}$"
+              title="Enter hex color (e.g., #FF0000)"
+              data-testid={testId ? `${testId}-input-hex` : undefined}
             />
             <button
               type="button"
-              onClick={() => colorInputRef.current?.click()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover print-hide"
-              title="Edit base color"
-              aria-label="Edit base color"
-            >
-              <Pencil className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
               onClick={() => onRemove?.()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-fill-muted-hover print-hide"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md border-neutral-subtle hover:bg-neutral-fill-muted-hover print-hide"
               title="Remove color"
               aria-label="Remove color"
+              data-testid={testId ? `${testId}-remove-button` : undefined}
             >
               <Trash className="w-4 h-4" />
             </button>
@@ -181,7 +182,8 @@ function ColorScaleBase({
       (prev, next) =>
         prev.name === next.name &&
         prev.baseHex === next.baseHex &&
-        prev.headingColor === next.headingColor,
+        prev.headingColor === next.headingColor &&
+        prev.testId === next.testId,
     )
   }, [])
 
@@ -316,21 +318,20 @@ function ColorScaleBase({
         onRename={onRename}
         onChangeHex={onChangeHex}
         onRemove={onRemove}
+        testId={testId}
       />
-      <div className="grid grid-cols-15 gap-2 mb-4 print:mb-0 print:gap-0">
+      <div className="grid gap-2 mb-4 grid-cols-15 print:mb-0 print:gap-0">
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)
           const step = PALETTE_STEPS[i]
           const pairsWithSteps = step?.contrastWith || []
           const oklchInfo = getOklchInfo(color, i)
           const isDialogActive = activeDialog === i
-          const testId = colorName
-            ? `${colorName.replace(/\s+/g, '-').toLowerCase()}-${i}`
-            : `color-step-${i}`
+          const stepTestId = testId ? `${testId}-step-${i}` : `color-step-${i}`
 
           return (
             <div
-              data-testid={testId}
+              data-testid={stepTestId}
               key={'color-step-' + i}
               ref={(el) => {
                 colorElementRefs.current[i] = el
@@ -414,7 +415,7 @@ function ColorScaleBase({
 
                   <div className="flex flex-col justify-center">
                     <button
-                      className="mb-2 font-mono text-base text-left hover:bg-black/10 dark:hover:bg-white/10 rounded px-2 py-1 -mx-2 flex items-center gap-2 group"
+                      className="flex items-center gap-2 px-2 py-1 mb-2 -mx-2 font-mono text-base text-left rounded hover:bg-black/10 dark:hover:bg-white/10 group"
                       onClick={(e) => {
                         e.stopPropagation()
                         copyToClipboard(oklchInfo.hex, i)
@@ -441,7 +442,7 @@ function ColorScaleBase({
                       ) : (
                         // Copy icon (default state)
                         <svg
-                          className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="w-4 h-4 transition-opacity opacity-0 group-hover:opacity-100"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -522,7 +523,7 @@ function ColorScaleBase({
                             >
                               <td className="flex items-center gap-2 py-1 pr-2">
                                 <div
-                                  className="w-3 h-3 border border-neutral-subtle rounded-full"
+                                  className="w-3 h-3 border rounded-full border-neutral-subtle"
                                   style={{
                                     backgroundColor: colors[targetStepIndex],
                                   }}
@@ -620,7 +621,8 @@ function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
     prev.baseHex === next.baseHex &&
     prev.showContrast === next.showContrast &&
     prev.contrastMethod === next.contrastMethod &&
-    prev.colors === next.colors
+    prev.colors === next.colors &&
+    prev.testId === next.testId
   )
 }
 
