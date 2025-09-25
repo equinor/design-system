@@ -274,7 +274,7 @@ const StyledDatepicker = styled(DatePicker as any)`
   `}
 `
 
-const CalendarIcon = styled(Icon)`
+const CalendarIcon = styled(Icon as any)`
   position: absolute;
   bottom: 7px;
   right: 6px;

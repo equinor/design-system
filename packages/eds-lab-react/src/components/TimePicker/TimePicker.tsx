@@ -36,7 +36,7 @@ type StyledListItemType = {
   active?: string
 }
 
-const StyledList = styled(List)`
+const StyledList = styled(List as any)`
   background-color: ${tokens.background};
   box-shadow: ${tokens.boxShadow};
   overflow-y: scroll;
@@ -91,11 +91,11 @@ const StyledInputWrapper = styled.div`
   position: relative;
 `
 
-const PaddedStyledListItem = styled(StyledListItem)`
+const PaddedStyledListItem = styled(StyledListItem as any)`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
 `
 
-const TimeIcon = styled(Icon)`
+const TimeIcon = styled(Icon as any)`
   position: absolute;
   z-index: 1;
   width: 18px;
