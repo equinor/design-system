@@ -191,7 +191,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const updatedChildren = cloneElement(children, {
       ...getReferenceProps({
         ref: anchorRef,
-        ...(children.props as HTMLAttributes<HTMLElement>),
+        ...children.props,
       }),
     })
 
