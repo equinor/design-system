@@ -51,7 +51,7 @@ const StyledList = styled(List as any)`
   z-index: 50;
 `
 
-const StyledListItem = styled(List.Item)<StyledListItemType>(({
+const StyledListItem = styled(List.Item as any)<StyledListItemType>(({
   theme,
   highlighted,
   active,
@@ -73,7 +73,7 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(({
   `
 })
 
-const StyledButton = styled(Button)(({
+const StyledButton = styled(Button as any)(({
   theme: {
     entities: { button },
   },
