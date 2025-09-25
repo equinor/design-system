@@ -1,9 +1,14 @@
 import React from 'react'
-import { render, screen, waitFor, RenderOptions } from '@testing-library/react'
+import {
+  render,
+  screen,
+  waitFor,
+  RenderOptions,
+  fireEvent,
+} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { SidebarLinkProps } from './index'
 import { home } from '@equinor/eds-icons'
-import userEvent from '@testing-library/user-event'
 import { SideBar } from '../'
 
 const defaultProps: SidebarLinkProps = {
@@ -48,7 +53,7 @@ describe('Sidebar link', () => {
     )
     const link = screen.getByTestId('sidebar-menu-item')
 
-    await userEvent.hover(link)
+    fireEvent.mouseEnter(link)
 
     await screen.findByRole('tooltip')
     expect(screen.getByRole('tooltip')).toHaveTextContent('Home')
@@ -66,7 +71,7 @@ describe('Sidebar link', () => {
     )
     const link = screen.getByTestId('sidebar-menu-item')
 
-    await userEvent.hover(link)
+    fireEvent.mouseEnter(link)
 
     await waitFor(() =>
       expect(screen.queryByRole('tooltip')).not.toBeInTheDocument(),
