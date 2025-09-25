@@ -15,7 +15,7 @@ type Props = Partial<DateFieldStateOptions>
  * A field that wraps segments for inputting a date / date-time
  */
 export const DateFieldSegments = forwardRef(
-  (props: Props, ref: RefObject<HTMLDivElement>) => {
+  (props: Props, ref: RefObject<HTMLDivElement | null>) => {
     const state = useDateFieldState({
       ...props,
       locale: props.locale,

@@ -6,8 +6,6 @@ import {
   useCallback,
   ReactElement,
   HTMLAttributes,
-  ButtonHTMLAttributes,
-  RefAttributes,
   cloneElement,
   Children as ReactChildren,
   isValidElement,
@@ -60,13 +58,12 @@ const StyledTabList = styled.div.attrs(
 
 export type TabListProps = HTMLAttributes<HTMLDivElement>
 
-type TabChild = {
+type TabChildProps = {
   disabled?: boolean
   $index?: number
   value?: number | string
-} & ButtonHTMLAttributes<HTMLButtonElement> &
-  RefAttributes<HTMLButtonElement> &
-  ReactElement
+  active?: boolean
+}
 
 const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   { children = [], ...props },
@@ -81,7 +78,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     tabsFocused,
   } = useContext(TabsContext)
 
-  const currentTab = useRef<number>()
+  const currentTab = useRef<number>(undefined)
 
   const [arrowNavigating, setArrowNavigating] = useState(false)
   const selectedTabRef = useCallback(
@@ -102,20 +99,23 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
       if (!isValidElement(child)) {
         return null
       }
-      const tabChild = child as TabChild
-      const childProps = tabChild.props as TabChild
+
+      const childProps = child.props as TabChildProps
       const controlledActive = childProps.value
       const isActive = controlledActive
         ? controlledActive === activeTab
         : $index === activeTab
 
-      const tabRef = isActive
-        ? mergeRefs<HTMLButtonElement>(tabChild.ref, selectedTabRef)
-        : tabChild.ref
+      const childRef =
+        'ref' in child ? (child.ref as React.Ref<HTMLButtonElement>) : null
+      const tabRef =
+        isActive && childRef
+          ? mergeRefs<HTMLButtonElement>(childRef, selectedTabRef)
+          : childRef
 
       if (isActive) currentTab.current = $index
 
-      return cloneElement(tabChild, {
+      return cloneElement<TabChildProps>(child, {
         id: `${tabsId}-tab-${$index + 1}`,
         'aria-controls': `${tabsId}-panel-${$index + 1}`,
         active: isActive,
@@ -125,14 +125,14 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
             controlledActive !== undefined ? controlledActive : $index,
           ),
         ref: tabRef,
-      })
+      } as Partial<TabChildProps>)
     }) ?? []
 
-  const focusableChildren: number[] = Tabs.filter((child: TabChild) => {
-    const childProps = child.props as TabChild
+  const focusableChildren: number[] = Tabs.filter((child: ReactElement) => {
+    const childProps = child.props as TabChildProps
     return !childProps.disabled
-  }).map((child: TabChild) => {
-    const childProps = child.props as TabChild
+  }).map((child: ReactElement) => {
+    const childProps = child.props as TabChildProps
     return childProps.$index
   })
 

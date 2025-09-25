@@ -14,14 +14,12 @@ import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
-import page from './Checkbox.docs.mdx'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Inputs/Selection Controls/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },
@@ -56,7 +54,7 @@ export const Introduction: StoryFn<CheckboxProps> = (args) => {
 export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
   // Use this to set the input to indeterminate = true as this must be done via JavaScript
   // (cannot use an HTML attribute for this)
-  const indeterminateRef = useRef()
+  const indeterminateRef = useRef(undefined)
   // State for controlled example
   const [checked, updateChecked] = useState(false)
   return (

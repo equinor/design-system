@@ -24,7 +24,7 @@ const Accordion = forwardRef<
 
   const AccordionItems = ReactChildren.map(children, (child, index) => {
     if (!child) return null
-    return cloneElement(child as ReactElement, {
+    return cloneElement(child as ReactElement<Record<string, unknown>>, {
       accordionId,
       index,
       headerLevel,
