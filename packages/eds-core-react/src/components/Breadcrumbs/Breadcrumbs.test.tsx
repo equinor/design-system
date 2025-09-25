@@ -7,7 +7,7 @@ import { Breadcrumbs } from '.'
 
 const { Breadcrumb } = Breadcrumbs
 
-// --- Mocks for målinger som ellipsis/Overflow + Floating UI ---
+// --- Mocks for ellipsis/Overflow + Floating UI ---
 const roMock = class {
   observe() {}
   unobserve() {}
@@ -15,10 +15,8 @@ const roMock = class {
 } as unknown as typeof ResizeObserver
 
 beforeAll(() => {
-  // ResizeObserver for Floating UI
   if (!window.ResizeObserver) window.ResizeObserver = roMock
 
-  // Sørg for at elementer ser "smale" ut, så scrollWidth > clientWidth
   Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
     configurable: true,
     get() {
@@ -31,7 +29,7 @@ beforeAll(() => {
       return 200 // > clientWidth => overflow
     },
   })
-  // Noen lib’er bruker BCR-bredde
+
   const rect = {
     x: 0,
     y: 0,
@@ -137,7 +135,6 @@ describe('Breadcrumbs', () => {
   })
 
   it('should crop the labels and have tooltip on hover when maxWidth is defined', async () => {
-    // Hvis Tooltip har delay, bruk fake timers
     jest.useFakeTimers()
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
 
@@ -153,7 +150,6 @@ describe('Breadcrumbs', () => {
     expect(first).toHaveStyle({ 'max-width': '30px' })
 
     await user.hover(first)
-    // match Tooltip delay (juster hvis deres default er annen)
     jest.advanceTimersByTime(600)
 
     const tooltip = await screen.findByRole('tooltip')
