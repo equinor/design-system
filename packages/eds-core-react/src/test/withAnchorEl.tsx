@@ -21,9 +21,12 @@ const AllTheProviders = ({ children }: { children: ReactNode }) => {
   }, [anchorRef])
 
   const updatedChildren = ReactChildren.map(children, (child) =>
-    cloneElement(child as ReactElement, {
-      anchorEl,
-    }),
+    cloneElement(
+      child as ReactElement<{ anchorEl?: HTMLButtonElement | null }>,
+      {
+        anchorEl,
+      },
+    ),
   ) as ReactNode
 
   return (

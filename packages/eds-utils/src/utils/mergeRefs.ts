@@ -1,14 +1,14 @@
-import type { MutableRefObject, RefCallback, LegacyRef } from 'react'
+import type { RefCallback, Ref } from 'react'
 
 export const mergeRefs = <T extends HTMLElement>(
-  ...refs: (MutableRefObject<T> | LegacyRef<T>)[]
+  ...refs: Ref<T>[]
 ): RefCallback<T> => {
   return (element) =>
     refs.forEach((ref) => {
       if (typeof ref === 'function') {
         ref(element)
       } else if (ref && typeof ref === 'object') {
-        ;(ref as MutableRefObject<T | null>).current = element
+        ;(ref as { current: T | null }).current = element
       }
     })
 }

@@ -12,7 +12,6 @@ import { data, columns, toCellValues } from '../../stories'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { explore } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
-import page from './Tooltip.docs.mdx'
 import { useState } from 'react'
 
 const meta: Meta<typeof Tooltip> = {
@@ -20,7 +19,6 @@ const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },
@@ -177,7 +175,13 @@ export const CustomRootElement: StoryFn<TooltipProps> = () => {
 
   return (
     <>
-      <div ref={(el) => setElement(el)}>#root</div>
+      <div
+        ref={(el) => {
+          setElement(el)
+        }}
+      >
+        #root
+      </div>
       <EdsProvider rootElement={element}>
         <Tooltip
           title={
@@ -187,7 +191,6 @@ export const CustomRootElement: StoryFn<TooltipProps> = () => {
           <Icon data={explore} />
         </Tooltip>
       </EdsProvider>
-
       <Tooltip
         title={
           'This tooltip renders within the #root div, but from portalContainer prop'
