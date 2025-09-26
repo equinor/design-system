@@ -4,13 +4,31 @@
   "figmaProjectDynamicId": "nyPaQ3QnI1UAcxKW4a0d2c",
   "schemeTokensPrefix": "🌗 Color Scheme",
   "variablePrefix": "eds",
-  "semanticColorCategories": {
-    "Accent": "Moss Green",
-    "Neutral": "Gray",
-    "Info": "Blue",
-    "Success": "Green",
-    "Warning": "Orange",
-    "Danger": "Red"
+  "colorSchemeConfig": {
+    "Accent": {
+      "Light": "Moss Green",
+      "Dark": "Moss Green"
+    },
+    "Neutral": {
+      "Light": "Gray",
+      "Dark": "North sea"
+    },
+    "Info": {
+      "Light": "Blue",
+      "Dark": "Blue"
+    },
+    "Success": {
+      "Light": "Green",
+      "Dark": "Green"
+    },
+    "Warning": {
+      "Light": "Orange",
+      "Dark": "Orange"
+    },
+    "Danger": {
+      "Light": "Red",
+      "Dark": "Red"
+    }
   },
   "conceptColorGroups": {
     "bg-floating": {

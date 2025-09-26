@@ -3,19 +3,19 @@
  */
 
 [data-color-appearance="success"] {
-  --eds-color-bg-fill-muted-default: var(--eds-color-green-3);
-  --eds-color-bg-fill-muted-hover: var(--eds-color-green-4);
-  --eds-color-bg-fill-muted-active: var(--eds-color-green-5);
-  --eds-color-bg-fill-emphasis-default: var(--eds-color-green-9);
-  --eds-color-bg-fill-emphasis-hover: var(--eds-color-green-10);
-  --eds-color-bg-fill-emphasis-active: var(--eds-color-green-11);
-  --eds-color-bg-canvas: var(--eds-color-green-1);
-  --eds-color-bg-surface: var(--eds-color-green-2);
-  --eds-color-border-subtle: var(--eds-color-green-6);
-  --eds-color-border-medium: var(--eds-color-green-7);
-  --eds-color-border-strong: var(--eds-color-green-8);
-  --eds-color-text-subtle: var(--eds-color-green-12); /** Used for text and icons */
-  --eds-color-text-strong: var(--eds-color-green-13); /** Used for text and icons */
-  --eds-color-text-subtle-on-emphasis: var(--eds-color-green-14); /** Text or icons against colored backgrounds */
-  --eds-color-text-strong-on-emphasis: var(--eds-color-green-15); /** Text or icons against colored backgrounds */
+  --eds-color-bg-fill-muted-default: var(--eds-color-success-3);
+  --eds-color-bg-fill-muted-hover: var(--eds-color-success-4);
+  --eds-color-bg-fill-muted-active: var(--eds-color-success-5);
+  --eds-color-bg-fill-emphasis-default: var(--eds-color-success-9);
+  --eds-color-bg-fill-emphasis-hover: var(--eds-color-success-10);
+  --eds-color-bg-fill-emphasis-active: var(--eds-color-success-11);
+  --eds-color-bg-canvas: var(--eds-color-success-1);
+  --eds-color-bg-surface: var(--eds-color-success-2);
+  --eds-color-border-subtle: var(--eds-color-success-6);
+  --eds-color-border-medium: var(--eds-color-success-7);
+  --eds-color-border-strong: var(--eds-color-success-8);
+  --eds-color-text-subtle: var(--eds-color-success-12); /** Used for text and icons */
+  --eds-color-text-strong: var(--eds-color-success-13); /** Used for text and icons */
+  --eds-color-text-subtle-on-emphasis: var(--eds-color-success-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-strong-on-emphasis: var(--eds-color-success-15); /** Text or icons against colored backgrounds */
 }

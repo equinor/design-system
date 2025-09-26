@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs'
 import path from 'node:path'
 
 import type { TokenConfig } from './utils'
@@ -11,101 +10,32 @@ import {
 
 type Json = Record<string, unknown>
 
-interface TokenValue {
-  $value?: unknown
-  $type?: string
-  $description?: string
-  $extensions?: Record<string, unknown>
-}
-
 function makeRef(mode: 'Light' | 'Dark', group: string, key: string) {
   return `{${mode}.${group}.${key}}`
 }
 
-function generateSchemeFromPalette(
+function generateSchemeFromColorConfig(
+  colorSchemeConfig: Record<string, { Light: string; Dark: string }>,
   paletteRoot: Json,
   mode: 'Light' | 'Dark',
 ): Json {
   const out: Json = {}
-  for (const groupName of Object.keys(paletteRoot)) {
-    const group = paletteRoot[groupName]
-    if (group && typeof group === 'object') {
+
+  for (const [semantic, paletteConfig] of Object.entries(colorSchemeConfig)) {
+    const paletteFamily = paletteConfig[mode]
+    const paletteGroup = paletteRoot[paletteFamily]
+
+    if (paletteGroup && typeof paletteGroup === 'object') {
       const groupOut: Json = {}
-      for (const key of Object.keys(group)) {
+      for (const key of Object.keys(paletteGroup)) {
         groupOut[key] = {
           $type: 'color',
-          $value: makeRef(mode, groupName, key),
+          $value: makeRef(mode, paletteFamily, key),
           $description: '',
           $extensions: DEFAULT_EXTENSIONS,
         }
       }
-      out[groupName] = groupOut
-    }
-  }
-  return out
-}
-
-function isRefString(v: unknown): v is string {
-  return typeof v === 'string' && /^\{(Light|Dark)\.[^}]+\}$/.test(v)
-}
-
-function mirrorRefValue(value: string, targetMode: 'Light' | 'Dark'): string {
-  if (targetMode === 'Light') return value.replace(/^\{Dark\./, '{Light.')
-  return value.replace(/^\{Light\./, '{Dark.')
-}
-
-function collectTopLevelExtras(
-  obj: Json | undefined,
-  groupKeys: Set<string>,
-): Record<string, unknown> {
-  if (!obj) return {}
-  const out: Record<string, unknown> = {}
-  for (const [k, v] of Object.entries(obj)) {
-    if (!groupKeys.has(k)) out[k] = v
-  }
-  return out
-}
-
-function mergeExtrasBothModes(
-  baseGenerated: Json,
-  existingLight: Json | undefined,
-  existingDark: Json | undefined,
-  mode: 'Light' | 'Dark',
-  groupKeys: Set<string>,
-): Json {
-  const out: Json = { ...baseGenerated }
-  const lightExtras = collectTopLevelExtras(existingLight, groupKeys)
-  const darkExtras = collectTopLevelExtras(existingDark, groupKeys)
-  const extraKeys = new Set([
-    ...Object.keys(lightExtras),
-    ...Object.keys(darkExtras),
-  ])
-
-  for (const key of extraKeys) {
-    // If this key was already generated (e.g., from concept template), do not override it with existing extras
-    if (Object.prototype.hasOwnProperty.call(out, key)) {
-      continue
-    }
-    const src = mode === 'Light' ? lightExtras[key] : darkExtras[key]
-    const fallback = mode === 'Light' ? darkExtras[key] : lightExtras[key]
-
-    let finalEntry = src
-    if (!finalEntry && fallback && typeof fallback === 'object') {
-      // Try to mirror the reference between modes if the $value is a token reference
-      const tokenFallback = fallback as TokenValue
-      const val = tokenFallback.$value
-      if (isRefString(val)) {
-        finalEntry = {
-          $type: tokenFallback.$type ?? 'color',
-          $value: mirrorRefValue(val, mode),
-          $description: tokenFallback.$description ?? '',
-          $extensions: tokenFallback.$extensions ?? DEFAULT_EXTENSIONS,
-        }
-      }
-    }
-
-    if (finalEntry) {
-      out[key] = finalEntry
+      out[semantic] = groupOut
     }
   }
   return out
@@ -223,44 +153,37 @@ async function generate(cfg: TokenConfig) {
     process.exit(1)
   }
 
-  // Generate from palette groups
-  const generatedLight = generateSchemeFromPalette(lightRoot, 'Light')
-  const generatedDark = generateSchemeFromPalette(darkRoot, 'Dark')
+  // Check that colorSchemeConfig is available
+  if (
+    !tokenConfig.colorSchemeConfig ||
+    Object.keys(tokenConfig.colorSchemeConfig).length === 0
+  ) {
+    console.error('Missing colorSchemeConfig in token-config.json.')
+    process.exit(1)
+  }
+
+  // Generate only semantic groups from colorSchemeConfig (no primitive colors)
+  const generatedLight = generateSchemeFromColorConfig(
+    tokenConfig.colorSchemeConfig,
+    lightRoot,
+    'Light',
+  )
+  const generatedDark = generateSchemeFromColorConfig(
+    tokenConfig.colorSchemeConfig,
+    darkRoot,
+    'Dark',
+  )
 
   // Inject concept groups (Bg/Border/Text/...) directly from conceptColorGroups
-  const withConceptsLight = injectConceptsFromMappings(
+  const finalLight = injectConceptsFromMappings(
     generatedLight,
     'Light',
     tokenConfig.conceptColorGroups,
   )
-  const withConceptsDark = injectConceptsFromMappings(
+  const finalDark = injectConceptsFromMappings(
     generatedDark,
     'Dark',
     tokenConfig.conceptColorGroups,
-  )
-
-  // Optionally merge non-group keys from existing scheme files to preserve custom tokens
-  const existingLight = existsSync(LIGHT_SCHEME)
-    ? await readJson<Json>(LIGHT_SCHEME)
-    : undefined
-  const existingDark = existsSync(DARK_SCHEME)
-    ? await readJson<Json>(DARK_SCHEME)
-    : undefined
-
-  const groupKeys = new Set(Object.keys(lightRoot))
-  const finalLight = mergeExtrasBothModes(
-    withConceptsLight,
-    existingLight,
-    existingDark,
-    'Light',
-    groupKeys,
-  )
-  const finalDark = mergeExtrasBothModes(
-    withConceptsDark,
-    existingLight,
-    existingDark,
-    'Dark',
-    groupKeys,
   )
 
   // Write outputs

@@ -10,12 +10,33 @@ import {
 
 type Json = Record<string, unknown>
 
-// Derive a generic WEB var from placeholder structure: {area}-{name}
+// Derive a generic WEB var from placeholder structure: {Area.Name}
 function webVarFromPlaceholder(placeholder: string): string | undefined {
-  const [area, ...rest] = placeholder.split('-')
-  if (!area || rest.length === 0) return undefined
-  const name = rest.join('-')
-  return `var(--color-${area}-${name})`
+  const parts = placeholder.split('.')
+  if (parts.length !== 2) return undefined
+  const [area, name] = parts
+  const areaLower = area.toLowerCase()
+  const nameLower = name.toLowerCase()
+
+  // Map to standard CSS variable naming convention
+  const areaMap: Record<string, string> = {
+    bg: 'bg',
+    border: 'border',
+    text: 'text',
+  }
+
+  const nameMap: Record<string, string> = {
+    floating: 'elevated',
+    backdrop: 'backdrop',
+    input: 'input',
+    focus: 'focus',
+    link: 'link',
+  }
+
+  const cssArea = areaMap[areaLower] || areaLower
+  const cssName = nameMap[nameLower] || nameLower
+
+  return `var(--eds-color-${cssArea}-${cssName})`
 }
 
 function extractPlaceholder(value: unknown): string | null {
@@ -80,8 +101,7 @@ async function generate(cfg: TokenConfig) {
     process.exit(1)
   }
 
-  const mappings =
-    tokenConfig.conceptColorGroups || tokenConfig.conceptMappings || {}
+  const mappings = tokenConfig.conceptColorGroups || {}
   if (!isObject(mappings) || Object.keys(mappings).length === 0) {
     console.error('Missing conceptColorGroups in token-config.json.')
     process.exit(1)
@@ -112,9 +132,13 @@ async function generate(cfg: TokenConfig) {
     const name = tokenLabel(rest.join('-'))
     if (!template[grp]) template[grp] = {}
     const group = template[grp] as Record<string, unknown>
+
+    // Reference the color scheme token path
+    // Since concept tokens should reference scheme tokens, we use the structure from color scheme files
+    // The concept tokens should reference like: Bg.Floating, Border.Focus, Text.Link
     group[name] = {
       $type: 'color',
-      $value: `{${key}}`,
+      $value: `{${grp}.${name}}`,
       $description: '',
       $extensions: DEFAULT_EXTENSIONS,
     }

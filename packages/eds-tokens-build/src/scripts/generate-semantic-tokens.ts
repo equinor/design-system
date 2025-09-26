@@ -40,7 +40,7 @@ function varName(prefix: string, area: string, intent: string, slot: string) {
 }
 
 function generateSemantic(
-  mapping: Record<string, string>,
+  colorSchemeConfig: Record<string, { Light: string; Dark: string }>,
   variablePrefix: string,
 ): Json {
   const make = (ref: string, desc = '', web?: string) =>
@@ -55,7 +55,7 @@ function generateSemantic(
     'Strong on emphasis': 'Text or icons against colored backgrounds',
   } as const
 
-  for (const [semantic, palette] of Object.entries(mapping)) {
+  for (const semantic of Object.keys(colorSchemeConfig)) {
     const intent = slug(semantic)
     // BG names
     const bgCanvas = varName(variablePrefix, 'bg', intent, 'canvas')
@@ -117,43 +117,46 @@ function generateSemantic(
       intent,
       'strong-on-emphasis',
     )
+
+    // Reference color scheme tokens directly by semantic name
+
     // BG
     const bgSection = sections.Bg as Record<string, unknown>
     bgSection[semantic] = {
-      Canvas: make(`{${palette}.1}`, '', bgCanvas),
-      Surface: make(`{${palette}.2}`, '', bgSurface),
+      Canvas: make(`{${semantic}.1}`, '', bgCanvas),
+      Surface: make(`{${semantic}.2}`, '', bgSurface),
       'Fill Muted': {
-        Default: make(`{${palette}.3}`, '', bgFillMutedDefault),
-        Hover: make(`{${palette}.4}`, '', bgFillMutedHover),
-        Active: make(`{${palette}.5}`, '', bgFillMutedActive),
+        Default: make(`{${semantic}.3}`, '', bgFillMutedDefault),
+        Hover: make(`{${semantic}.4}`, '', bgFillMutedHover),
+        Active: make(`{${semantic}.5}`, '', bgFillMutedActive),
       },
       'Fill Emphasis': {
-        Default: make(`{${palette}.9}`, '', bgFillEmphasisDefault),
-        Hover: make(`{${palette}.10}`, '', bgFillEmphasisHover),
-        Active: make(`{${palette}.11}`, '', bgFillEmphasisActive),
+        Default: make(`{${semantic}.9}`, '', bgFillEmphasisDefault),
+        Hover: make(`{${semantic}.10}`, '', bgFillEmphasisHover),
+        Active: make(`{${semantic}.11}`, '', bgFillEmphasisActive),
       },
     }
 
     // BORDER
     const borderSection = sections.Border as Record<string, unknown>
     borderSection[semantic] = {
-      Subtle: make(`{${palette}.6}`, '', borderSubtle),
-      Medium: make(`{${palette}.7}`, '', borderMedium),
-      Strong: make(`{${palette}.8}`, '', borderStrong),
+      Subtle: make(`{${semantic}.6}`, '', borderSubtle),
+      Medium: make(`{${semantic}.7}`, '', borderMedium),
+      Strong: make(`{${semantic}.8}`, '', borderStrong),
     }
 
     // TEXT
     const textSection = sections.Text as Record<string, unknown>
     textSection[semantic] = {
-      Subtle: make(`{${palette}.12}`, textDescriptions.Subtle, textSubtle),
-      Strong: make(`{${palette}.13}`, textDescriptions.Strong, textStrong),
+      Subtle: make(`{${semantic}.12}`, textDescriptions.Subtle, textSubtle),
+      Strong: make(`{${semantic}.13}`, textDescriptions.Strong, textStrong),
       'Subtle on emphasis': make(
-        `{${palette}.14}`,
+        `{${semantic}.14}`,
         textDescriptions['Subtle on emphasis'],
         textSubtleOnEmphasis,
       ),
       'Strong on emphasis': make(
-        `{${palette}.15}`,
+        `{${semantic}.15}`,
         textDescriptions['Strong on emphasis'],
         textStrongOnEmphasis,
       ),
@@ -180,24 +183,33 @@ async function generate(cfg: TokenConfig) {
     process.exit(1)
   }
 
-  const mapping = tokenConfig.semanticColorCategories
-  if (!isObject(mapping) || Object.keys(mapping).length === 0) {
-    console.error('Missing semanticColorCategories in token-config.json.')
+  const colorSchemeConfig = tokenConfig.colorSchemeConfig
+  if (
+    !isObject(colorSchemeConfig) ||
+    Object.keys(colorSchemeConfig).length === 0
+  ) {
+    console.error('Missing colorSchemeConfig in token-config.json.')
     process.exit(1)
   }
 
   const variablePrefix = (tokenConfig.variablePrefix ?? 'x').trim()
 
   // Validate that mapped palette families exist in light palette (warning-only)
+  const paletteValidationMap = Object.fromEntries(
+    Object.entries(colorSchemeConfig).map(([semantic, config]) => [
+      semantic,
+      config.Light,
+    ]),
+  )
   await validatePaletteFamilies(
     foundationId,
-    mapping,
+    paletteValidationMap,
     'generate-semantic-tokens',
   )
 
   const SEMANTIC_FILE = path.join('tokens', staticId, 'Semantic.Mode 1.json')
 
-  const semanticJson = generateSemantic(mapping, variablePrefix)
+  const semanticJson = generateSemantic(colorSchemeConfig, variablePrefix)
 
   await writeJson(SEMANTIC_FILE, semanticJson)
   console.log(

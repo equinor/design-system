@@ -4,7 +4,7 @@
       "Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Moss Green.3}",
+          "$value": "{Accent.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -13,14 +13,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-medium-default)"
+                "WEB": "var(--eds-color-bg-medium-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Moss Green.4}",
+          "$value": "{Accent.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -29,14 +29,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-medium-hover)"
+                "WEB": "var(--eds-color-bg-medium-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Moss Green.5}",
+          "$value": "{Accent.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -45,7 +45,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-medium-active)"
+                "WEB": "var(--eds-color-bg-medium-active)"
               }
             }
           }
@@ -54,7 +54,7 @@
       "Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Moss Green.9}",
+          "$value": "{Accent.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -63,14 +63,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-strong-default)"
+                "WEB": "var(--eds-color-bg-strong-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Moss Green.10}",
+          "$value": "{Accent.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -79,14 +79,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-strong-hover)"
+                "WEB": "var(--eds-color-bg-strong-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Moss Green.11}",
+          "$value": "{Accent.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -95,7 +95,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-strong-active)"
+                "WEB": "var(--eds-color-bg-strong-active)"
               }
             }
           }
@@ -104,7 +104,7 @@
     },
     "Canvas": {
       "$type": "color",
-      "$value": "{Moss Green.1}",
+      "$value": "{Accent.1}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -113,14 +113,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-default)"
+            "WEB": "var(--eds-color-bg-default)"
           }
         }
       }
     },
     "Surface": {
       "$type": "color",
-      "$value": "{Moss Green.2}",
+      "$value": "{Accent.2}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -129,7 +129,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-subtle)"
+            "WEB": "var(--eds-color-bg-subtle)"
           }
         }
       }
@@ -138,7 +138,7 @@
   "Border": {
     "Subtle": {
       "$type": "color",
-      "$value": "{Moss Green.6}",
+      "$value": "{Accent.6}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -154,7 +154,7 @@
     },
     "Medium": {
       "$type": "color",
-      "$value": "{Moss Green.7}",
+      "$value": "{Accent.7}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -170,7 +170,7 @@
     },
     "Strong": {
       "$type": "color",
-      "$value": "{Moss Green.8}",
+      "$value": "{Accent.8}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -188,7 +188,7 @@
   "Text": {
     "Subtle": {
       "$type": "color",
-      "$value": "{Moss Green.12}",
+      "$value": "{Accent.12}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -204,7 +204,7 @@
     },
     "Strong": {
       "$type": "color",
-      "$value": "{Moss Green.13}",
+      "$value": "{Accent.13}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -220,7 +220,7 @@
     },
     "Subtle on emphasis": {
       "$type": "color",
-      "$value": "{Moss Green.14}",
+      "$value": "{Accent.14}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
@@ -236,7 +236,7 @@
     },
     "Strong on emphasis": {
       "$type": "color",
-      "$value": "{Moss Green.15}",
+      "$value": "{Accent.15}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {

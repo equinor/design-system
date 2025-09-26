@@ -10,8 +10,8 @@ import {
   varName,
 } from './utils'
 
-function generateAppearanceForPalette(
-  paletteFamily: string,
+function generateAppearanceForSemantic(
+  semantic: string,
   variablePrefix: string,
 ): Record<string, unknown> {
   const make = (ref: string, desc = '', web?: string) =>
@@ -55,42 +55,34 @@ function generateAppearanceForPalette(
     Bg: {
       Fill: {
         Muted: {
-          Default: make(`{${paletteFamily}.3}`, '', bgFillMutedDefault),
-          Hover: make(`{${paletteFamily}.4}`, '', bgFillMutedHover),
-          Active: make(`{${paletteFamily}.5}`, '', bgFillMutedActive),
+          Default: make(`{${semantic}.3}`, '', bgFillMutedDefault),
+          Hover: make(`{${semantic}.4}`, '', bgFillMutedHover),
+          Active: make(`{${semantic}.5}`, '', bgFillMutedActive),
         },
         Emphasis: {
-          Default: make(`{${paletteFamily}.9}`, '', bgFillEmphasisDefault),
-          Hover: make(`{${paletteFamily}.10}`, '', bgFillEmphasisHover),
-          Active: make(`{${paletteFamily}.11}`, '', bgFillEmphasisActive),
+          Default: make(`{${semantic}.9}`, '', bgFillEmphasisDefault),
+          Hover: make(`{${semantic}.10}`, '', bgFillEmphasisHover),
+          Active: make(`{${semantic}.11}`, '', bgFillEmphasisActive),
         },
       },
-      Canvas: make(`{${paletteFamily}.1}`, '', bgCanvas),
-      Surface: make(`{${paletteFamily}.2}`, '', bgSurface),
+      Canvas: make(`{${semantic}.1}`, '', bgCanvas),
+      Surface: make(`{${semantic}.2}`, '', bgSurface),
     },
     Border: {
-      Subtle: make(`{${paletteFamily}.6}`, '', borderSubtle),
-      Medium: make(`{${paletteFamily}.7}`, '', borderMedium),
-      Strong: make(`{${paletteFamily}.8}`, '', borderStrong),
+      Subtle: make(`{${semantic}.6}`, '', borderSubtle),
+      Medium: make(`{${semantic}.7}`, '', borderMedium),
+      Strong: make(`{${semantic}.8}`, '', borderStrong),
     },
     Text: {
-      Subtle: make(
-        `{${paletteFamily}.12}`,
-        textDescriptions.Subtle,
-        textSubtle,
-      ),
-      Strong: make(
-        `{${paletteFamily}.13}`,
-        textDescriptions.Strong,
-        textStrong,
-      ),
+      Subtle: make(`{${semantic}.12}`, textDescriptions.Subtle, textSubtle),
+      Strong: make(`{${semantic}.13}`, textDescriptions.Strong, textStrong),
       'Subtle on emphasis': make(
-        `{${paletteFamily}.14}`,
+        `{${semantic}.14}`,
         textDescriptions['Subtle on emphasis'],
         textSubtleOnEmphasis,
       ),
       'Strong on emphasis': make(
-        `{${paletteFamily}.15}`,
+        `{${semantic}.15}`,
         textDescriptions['Strong on emphasis'],
         textStrongOnEmphasis,
       ),
@@ -116,30 +108,39 @@ async function generate(cfg: TokenConfig) {
     process.exit(1)
   }
 
-  const mapping = tokenConfig.semanticColorCategories
-  if (!isObject(mapping) || Object.keys(mapping).length === 0) {
-    console.error('Missing semanticColorCategories in token-config.json.')
+  const colorSchemeConfig = tokenConfig.colorSchemeConfig
+  if (
+    !isObject(colorSchemeConfig) ||
+    Object.keys(colorSchemeConfig).length === 0
+  ) {
+    console.error('Missing colorSchemeConfig in token-config.json.')
     process.exit(1)
   }
 
   const variablePrefix = (tokenConfig.variablePrefix ?? 'x').trim()
 
   // Validate that mapped palette families exist in light palette (warning-only)
+  const paletteValidationMap = Object.fromEntries(
+    Object.entries(colorSchemeConfig).map(([semantic, config]) => [
+      semantic,
+      config.Light,
+    ]),
+  )
   await validatePaletteFamilies(
     foundationId,
-    mapping,
+    paletteValidationMap,
     'generate-dynamic-appearance-tokens',
   )
 
   const outDir = path.join('tokens', dynamicId)
 
-  for (const [semantic, paletteFamily] of Object.entries(mapping)) {
+  for (const semantic of Object.keys(colorSchemeConfig)) {
     // File name with emoji prefix
     const fileName = `🎨 Appearance.${semantic}.json`
     const filePath = path.join(outDir, fileName)
 
-    const appearanceJson = generateAppearanceForPalette(
-      String(paletteFamily),
+    const appearanceJson = generateAppearanceForSemantic(
+      semantic,
       variablePrefix,
     )
 
