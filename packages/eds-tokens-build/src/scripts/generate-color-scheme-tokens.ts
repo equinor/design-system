@@ -41,25 +41,6 @@ function generateSchemeFromColorConfig(
   return out
 }
 
-function resolveConceptValue(
-  raw: string,
-  mode: 'Light' | 'Dark',
-  mappings?: TokenConfig['conceptColorGroups'],
-): string {
-  // raw can be a placeholder like {bg-floating} or already a ref like {Light.Gray.2}
-  const placeholderMatch = raw.match(/^\{([^}.]+(?:-[^}.]+)*)\}$/)
-  const refMatch = raw.match(/^\{(Light|Dark)\.[^}]+\}$/)
-  if (refMatch) return raw // already a ref
-  if (!placeholderMatch) return raw // not in braces, leave as-is
-  const key = placeholderMatch[1]
-  if (!mappings) return raw
-  const mapVal = mappings[key]
-  if (!mapVal) return raw
-  if (typeof mapVal === 'string') return mapVal // assume full ref string
-  const perMode = mapVal[mode]
-  return typeof perMode === 'string' ? perMode : raw
-}
-
 function injectConceptsFromMappings(
   generated: Json,
   mode: 'Light' | 'Dark',
@@ -68,45 +49,27 @@ function injectConceptsFromMappings(
   if (!mappings || Object.keys(mappings).length === 0) return generated
   const out: Json = { ...generated }
 
-  const groupLabel = (area: string) => {
-    const a = area.toLowerCase()
-    if (a === 'bg') return 'Bg'
-    if (a === 'border') return 'Border'
-    if (a === 'text') return 'Text'
-    return area.charAt(0).toUpperCase() + area.slice(1)
-  }
-  const tokenLabel = (slug: string) =>
-    slug
-      .split('-')
-      .filter(Boolean)
-      .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-      .join(' ')
-
   const cfg = loadTokenConfig()
   const varPrefix = (cfg.variablePrefix ?? 'x').trim()
   const buildVar = (suffix: string) => `var(--${varPrefix}-color-${suffix})`
 
   for (const key of Object.keys(mappings)) {
-    const [area, ...rest] = key.split('-')
-    if (!area || rest.length === 0) continue
-    const grpKey = groupLabel(area)
-    const tokenKey = tokenLabel(rest.join('-'))
-    const raw = `{${key}}`
-    const resolved = resolveConceptValue(raw, mode, mappings)
+    const mapVal = mappings[key]
+    if (!mapVal) continue
+
+    const resolved = typeof mapVal === 'string' ? mapVal : mapVal[mode]
     if (typeof resolved !== 'string') continue
 
-    const suffix = `${area.toLowerCase()}-${rest.join('-')}`
     const extensions = {
       ...DEFAULT_EXTENSIONS,
       'com.figma': {
         ...DEFAULT_EXTENSIONS['com.figma'],
-        codeSyntax: { WEB: buildVar(suffix) },
+        codeSyntax: { WEB: buildVar(key) },
       },
     }
 
-    if (!out[grpKey]) out[grpKey] = {}
-    const group = out[grpKey] as Record<string, unknown>
-    group[tokenKey] = {
+    // Output concept tokens using their original key names (e.g., "bg-floating")
+    out[key] = {
       $type: 'color',
       $value: resolved,
       $description: '',

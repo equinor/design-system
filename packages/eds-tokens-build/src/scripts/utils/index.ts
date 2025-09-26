@@ -9,7 +9,6 @@ export type TokenConfig = {
   schemeTokensPrefix?: string
   variablePrefix?: string
   buildPath?: string
-  semanticColorCategories?: Record<string, string>
   /** Color scheme configuration mapping semantic names to different palettes per mode */
   colorSchemeConfig?: Record<string, { Light: string; Dark: string }>
   /** Mappings for concept placeholders like {bg-floating} -> per-mode refs */

@@ -14,7 +14,7 @@ exports[`Concept Token Generation > should generate concept tokens from color sc
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--color-bg-floating)"
+            "WEB": "var(--x-color-bg-floating)"
           }
         }
       }
@@ -30,7 +30,7 @@ exports[`Concept Token Generation > should generate concept tokens from color sc
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--color-bg-backdrop)"
+            "WEB": "var(--x-color-bg-backdrop)"
           }
         }
       }
@@ -46,7 +46,7 @@ exports[`Concept Token Generation > should generate concept tokens from color sc
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--color-bg-input)"
+            "WEB": "var(--x-color-bg-input)"
           }
         }
       }
@@ -64,7 +64,7 @@ exports[`Concept Token Generation > should generate concept tokens from color sc
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--color-border-focus)"
+            "WEB": "var(--x-color-border-focus)"
           }
         }
       }
@@ -82,7 +82,7 @@ exports[`Concept Token Generation > should generate concept tokens from color sc
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--color-text-link)"
+            "WEB": "var(--x-color-text-link)"
           }
         }
       }

@@ -2,7 +2,7 @@
   "Bg": {
     "Floating": {
       "$type": "color",
-      "$value": "{Bg.Floating}",
+      "$value": "{bg-floating}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -11,14 +11,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-bg-elevated)"
+            "WEB": "var(--eds-color-bg-floating)"
           }
         }
       }
     },
     "Backdrop": {
       "$type": "color",
-      "$value": "{Bg.Backdrop}",
+      "$value": "{bg-backdrop}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -34,7 +34,7 @@
     },
     "Input": {
       "$type": "color",
-      "$value": "{Bg.Input}",
+      "$value": "{bg-input}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -52,7 +52,7 @@
   "Border": {
     "Focus": {
       "$type": "color",
-      "$value": "{Border.Focus}",
+      "$value": "{border-focus}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -70,7 +70,7 @@
   "Text": {
     "Link": {
       "$type": "color",
-      "$value": "{Text.Link}",
+      "$value": "{text-link}",
       "$description": "",
       "$extensions": {
         "com.figma": {

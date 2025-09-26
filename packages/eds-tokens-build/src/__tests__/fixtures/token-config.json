@@ -6,12 +6,12 @@
   "variablePrefix": "x",
   "colorSchemeConfig": {
     "Accent": {
-      "Light": "Moss Green",
-      "Dark": "Moss Green"
+      "Light": "Orange",
+      "Dark": "Orange"
     },
     "Neutral": {
       "Light": "Gray",
-      "Dark": "North sea"
+      "Dark": "Blue"
     },
     "Info": {
       "Light": "Blue",
@@ -30,7 +30,6 @@
       "Dark": "Red"
     }
   },
-
   "conceptColorGroups": {
     "bg-floating": {
       "Light": "{Light.Gray.2}",

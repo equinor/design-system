@@ -10,85 +10,6 @@ import {
 
 type Json = Record<string, unknown>
 
-// Derive a generic WEB var from placeholder structure: {Area.Name}
-function webVarFromPlaceholder(placeholder: string): string | undefined {
-  const parts = placeholder.split('.')
-  if (parts.length !== 2) return undefined
-  const [area, name] = parts
-  const areaLower = area.toLowerCase()
-  const nameLower = name.toLowerCase()
-
-  // Map to standard CSS variable naming convention
-  const areaMap: Record<string, string> = {
-    bg: 'bg',
-    border: 'border',
-    text: 'text',
-  }
-
-  const nameMap: Record<string, string> = {
-    floating: 'elevated',
-    backdrop: 'backdrop',
-    input: 'input',
-    focus: 'focus',
-    link: 'link',
-  }
-
-  const cssArea = areaMap[areaLower] || areaLower
-  const cssName = nameMap[nameLower] || nameLower
-
-  return `var(--eds-color-${cssArea}-${cssName})`
-}
-
-function extractPlaceholder(value: unknown): string | null {
-  if (typeof value !== 'string') return null
-  const m = value.match(/^\{([^}]+)\}$/)
-  return m ? m[1] : null
-}
-
-function applyCodeSyntax(template: Json): Json {
-  function visit(node: unknown): unknown {
-    if (!isObject(node)) return node
-
-    const nodeObj = node
-
-    // If this node looks like a token leaf
-    if (
-      typeof nodeObj.$type === 'string' &&
-      Object.prototype.hasOwnProperty.call(nodeObj, '$value')
-    ) {
-      const placeholder = extractPlaceholder(nodeObj.$value)
-      const webVar = placeholder
-        ? webVarFromPlaceholder(placeholder)
-        : undefined
-      const codeSyntax = webVar ? { WEB: webVar } : {}
-
-      const prevExt = (nodeObj.$extensions as Record<string, unknown>) ?? {}
-      const prevFigma =
-        (prevExt && (prevExt['com.figma'] as Record<string, unknown>)) || {}
-      return {
-        ...nodeObj,
-        $extensions: {
-          ...DEFAULT_EXTENSIONS,
-          'com.figma': {
-            ...DEFAULT_EXTENSIONS['com.figma'],
-            ...prevFigma,
-            codeSyntax,
-          },
-        },
-      }
-    }
-
-    // Otherwise, recurse into object properties
-    const out: Record<string, unknown> = Array.isArray(nodeObj) ? {} : {}
-    for (const [k, v] of Object.entries(nodeObj)) {
-      out[k] = visit(v)
-    }
-    return out
-  }
-
-  return visit(template) as Json
-}
-
 async function generate(cfg: TokenConfig) {
   const tokenConfig = cfg || {}
   const staticId = (tokenConfig.figmaProjectStaticId ?? '').trim()
@@ -107,7 +28,7 @@ async function generate(cfg: TokenConfig) {
     process.exit(1)
   }
 
-  // Build a template structure directly from conceptColorGroups keys
+  // Build a template structure with groups (Bg, Border, Text) but reference flat tokens
   // Example keys: bg-floating, border-focus, text-link
   const groupLabel = (area: string) => {
     const a = area.toLowerCase()
@@ -124,6 +45,9 @@ async function generate(cfg: TokenConfig) {
       .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
       .join(' ')
 
+  const varPrefix = (tokenConfig.variablePrefix ?? 'x').trim()
+  const buildVar = (suffix: string) => `var(--${varPrefix}-color-${suffix})`
+
   const template: Json = {}
   for (const key of Object.keys(mappings)) {
     const [area, ...rest] = key.split('-')
@@ -133,19 +57,21 @@ async function generate(cfg: TokenConfig) {
     if (!template[grp]) template[grp] = {}
     const group = template[grp] as Record<string, unknown>
 
-    // Reference the color scheme token path
-    // Since concept tokens should reference scheme tokens, we use the structure from color scheme files
-    // The concept tokens should reference like: Bg.Floating, Border.Focus, Text.Link
+    // Reference the flat token structure from color scheme files
+    // The concept tokens should reference the flat tokens like: {bg-floating}, {border-focus}, {text-link}
     group[name] = {
       $type: 'color',
-      $value: `{${grp}.${name}}`,
+      $value: `{${key}}`,
       $description: '',
-      $extensions: DEFAULT_EXTENSIONS,
+      $extensions: {
+        ...DEFAULT_EXTENSIONS,
+        'com.figma': {
+          ...DEFAULT_EXTENSIONS['com.figma'],
+          codeSyntax: { WEB: buildVar(key) },
+        },
+      },
     }
   }
-
-  // Apply WEB code syntax mapping per placeholder
-  const finalJson = applyCodeSyntax(template)
 
   // Write to both Static and Dynamic token folders (if configured)
   const outputs: string[] = []
@@ -155,7 +81,7 @@ async function generate(cfg: TokenConfig) {
     outputs.push(path.join('tokens', dynamicId, 'Concept.Mode 1.json'))
 
   await Promise.all(
-    outputs.map((out) => writeJson(out, finalJson).then(() => out)),
+    outputs.map((out) => writeJson(out, template).then(() => out)),
   )
 
   for (const out of outputs) {
