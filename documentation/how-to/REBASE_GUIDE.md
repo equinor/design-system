@@ -1,5 +1,7 @@
 # 🔄 How to Rebase Your Feature Branch onto `origin/develop`
 
+Make sure you're on the branch you want to update (replace `my-feature` with your actual branch name)
+
 Keeping your feature branch up to date with the latest `develop` branch helps:
 
 - ✅ Avoid merge conflicts
@@ -15,6 +17,7 @@ This guide walks you through the correct way to rebase using Git, step by step.
 - You are working in a local feature branch (e.g. `my-feature`)
 - The upstream integration branch is `origin/develop`
 - You have committed all your local changes
+- You can check your current branch with `git branch` or `git status`
 
 ---
 
@@ -104,20 +107,24 @@ git push --force-with-lease
 
 ```bash
 git fetch origin
-```
-
-```bash
-git checkout my-feature
-```
-
-```bash
+git checkout my-feature  # Replace 'my-feature' with your actual branch name
 git rebase origin/develop
 ```
+
+**If conflicts occur, resolve them and then run:**
 
 ```bash
 git add .
 git rebase --continue
 ```
+
+**Test your changes:**
+
+```bash
+# Run your tests or build process to ensure everything works
+```
+
+**After successful rebase and testing:**
 
 ```bash
 git push --force-with-lease

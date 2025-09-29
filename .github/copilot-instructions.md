@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This monorepo contains Equinor's Design System (EDS) - a component library and design tokens that implement Equinor's design language. The design system consists of multiple packages, including:
+This monorepo contains Equinor's Design System (EDS) - a component library and design tokens that implement Equinor's design language. The design system consists of multiple packages:
 
 - `@equinor/eds-core-react`: Core React components
 - `@equinor/eds-tokens`: Design tokens and variables
@@ -10,11 +10,16 @@ This monorepo contains Equinor's Design System (EDS) - a component library and d
 - `@equinor/eds-lab-react`: Experimental components
 - `@equinor/eds-data-grid-react`: Data grid component
 
-Apply the [global coding guidelines](./instructions/global-coding.instructions.md).
-Apply the [typeScript guidelines](./instructions/ts.instructions.md).
-Apply the [react guidelines](./instructions/react.instructions.md).
-Apply the [styling guidelines](./instructions/styling.instructions.md).
-Apply the [create component from figma instructions](./instructions/figma.instructions.md).
+## Code Style & Patterns
+
+Apply detailed guidelines from:
+
+- [Global coding standards](./instructions/global-coding.instructions.md)
+- [TypeScript guidelines](./instructions/ts.instructions.md)
+- [React guidelines](./instructions/react.instructions.md)
+- [Styling guidelines](./instructions/styling.instructions.md)
+- [Figma component creation](./instructions/figma.instructions.md)
+- [Markdown guidelines](./instructions/markdown.instructions.md)
 
 ## Testing Requirements
 

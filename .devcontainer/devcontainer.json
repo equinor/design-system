@@ -53,7 +53,8 @@
         "ionutvmi.path-autocomplete",
         "jock.svg",
         "github.vscode-pull-request-github",
-        "ms-azuretools.vscode-bicep"
+        "ms-azuretools.vscode-bicep",
+        "bierner.github-markdown-preview"
       ]
     }
   },
