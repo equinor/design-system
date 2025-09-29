@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs'
+import { writeFile, readFile } from 'node:fs/promises'
 import path from 'path'
 
 export interface MergeLightDarkOptions {
@@ -20,7 +20,7 @@ export interface MergeLightDarkOptions {
   outputFileName?: string
 }
 
-export function mergeLightDarkFoundation(options: MergeLightDarkOptions) {
+export async function mergeLightDarkFoundation(options: MergeLightDarkOptions) {
   const {
     prefix,
     lightFilePath,
@@ -40,8 +40,8 @@ export function mergeLightDarkFoundation(options: MergeLightDarkOptions) {
     outputFilePath || path.join(outputDirectory, outputFileName)
 
   try {
-    const lightContent = readFileSync(lightFoundationPath, 'utf-8')
-    const darkContent = readFileSync(darkFoundationPath, 'utf-8')
+    const lightContent = await readFile(lightFoundationPath, 'utf-8')
+    const darkContent = await readFile(darkFoundationPath, 'utf-8')
 
     // Extract CSS variables from light file (excluding the selector)
     const lightVarRegex = new RegExp(`--${prefix}-[^:]+:[^;]+;`, 'g')
@@ -89,7 +89,7 @@ ${mergedVariables.join('\n')}
 }
 `
 
-    writeFileSync(mergedFoundationPath, mergedContent, 'utf-8')
+    await writeFile(mergedFoundationPath, mergedContent, 'utf-8')
     // eslint-disable-next-line no-console
     console.log(
       `✓ Merged foundation colors with light-dark() function: ${mergedFoundationPath}`,

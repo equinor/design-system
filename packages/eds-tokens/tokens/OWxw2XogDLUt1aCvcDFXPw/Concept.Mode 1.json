@@ -11,7 +11,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-elevated)"
+            "WEB": "var(--eds-color-bg-floating)"
           }
         }
       }
@@ -27,7 +27,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-backdrop)"
+            "WEB": "var(--eds-color-bg-backdrop)"
           }
         }
       }
@@ -43,7 +43,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-backdrop)"
+            "WEB": "var(--eds-color-bg-input)"
           }
         }
       }

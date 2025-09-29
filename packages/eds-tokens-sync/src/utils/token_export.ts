@@ -54,7 +54,7 @@ export function tokenFilesFromLocalVariables(
 
     const collection = localVariableCollections[variable.variableCollectionId]
 
-    collection.modes.forEach((mode) => {
+    collection?.modes.forEach((mode) => {
       const fileName = `${collection.name}.${mode.name}.json`
 
       if (!tokenFiles[fileName]) {
