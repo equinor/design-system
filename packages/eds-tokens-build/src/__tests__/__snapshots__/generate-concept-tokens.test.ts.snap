@@ -1,0 +1,93 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Concept Token Generation > should generate concept tokens from color scheme tokens > concept.json 1`] = `
+"{
+  "Bg": {
+    "Floating": {
+      "$type": "color",
+      "$value": "{bg-floating}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--x-color-bg-floating)"
+          }
+        }
+      }
+    },
+    "Backdrop": {
+      "$type": "color",
+      "$value": "{bg-backdrop}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--x-color-bg-backdrop)"
+          }
+        }
+      }
+    },
+    "Input": {
+      "$type": "color",
+      "$value": "{bg-input}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--x-color-bg-input)"
+          }
+        }
+      }
+    }
+  },
+  "Border": {
+    "Focus": {
+      "$type": "color",
+      "$value": "{border-focus}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--x-color-border-focus)"
+          }
+        }
+      }
+    }
+  },
+  "Text": {
+    "Link": {
+      "$type": "color",
+      "$value": "{text-link}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--x-color-text-link)"
+          }
+        }
+      }
+    }
+  }
+}
+"
+`;

@@ -1,0 +1,55 @@
+{
+  "figmaProjectFoundationId": "test-foundation",
+  "figmaProjectStaticId": "test-static",
+  "figmaProjectDynamicId": "test-dynamic",
+  "schemeTokensPrefix": "🌗 Color Scheme",
+  "variablePrefix": "x",
+  "colorSchemeConfig": {
+    "Accent": {
+      "Light": "Orange",
+      "Dark": "Orange"
+    },
+    "Neutral": {
+      "Light": "Gray",
+      "Dark": "Blue"
+    },
+    "Info": {
+      "Light": "Blue",
+      "Dark": "Blue"
+    },
+    "Success": {
+      "Light": "Green",
+      "Dark": "Green"
+    },
+    "Warning": {
+      "Light": "Orange",
+      "Dark": "Orange"
+    },
+    "Danger": {
+      "Light": "Red",
+      "Dark": "Red"
+    }
+  },
+  "conceptColorGroups": {
+    "bg-floating": {
+      "Light": "{Light.Gray.2}",
+      "Dark": "{Dark.Gray.2}"
+    },
+    "bg-backdrop": {
+      "Light": "{Light.Gray.7}",
+      "Dark": "{Dark.Gray.7}"
+    },
+    "bg-input": {
+      "Light": "{Light.Gray.1}",
+      "Dark": "{Dark.Gray.1}"
+    },
+    "border-focus": {
+      "Light": "{Light.Blue.7}",
+      "Dark": "{Dark.Blue.7}"
+    },
+    "text-link": {
+      "Light": "{Light.Blue.13}",
+      "Dark": "{Dark.Blue.13}"
+    }
+  }
+}

@@ -265,19 +265,70 @@ export function generatePostVariablesPayload(
     [variableCollectionId: string]: { [variableName: string]: LocalVariable }
   } = {}
 
-  Object.values(localVariables.meta.variableCollections).forEach(
-    (collection) => {
-      if (localVariableCollectionsByName[collection.name]) {
-        throw new Error(
-          `Duplicate variable collection in file: ${collection.name}`,
-        )
-      }
-
-      localVariableCollectionsByName[collection.name] = collection
-    },
+  console.log(
+    'Processing variable collections from Figma API...',
+    Object.keys(localVariables.meta.variableCollections).length,
+    'collections found',
   )
 
+  // Separate collections for debugging purposes
+  const localCollections = Object.values(
+    localVariables.meta.variableCollections,
+  ).filter((collection) => !collection.remote)
+  const remoteCollections = Object.values(
+    localVariables.meta.variableCollections,
+  ).filter((collection) => collection.remote)
+  const allCollections = Object.values(localVariables.meta.variableCollections)
+
+  console.log(`📊 Collections summary:`)
+  console.log(`  - Local collections: ${localCollections.length}`)
+  console.log(`  - Remote collections: ${remoteCollections.length}`)
+  console.log(`  - Total collections to process: ${allCollections.length}`)
+
+  if (remoteCollections.length > 0) {
+    console.log(`\n🌐 Remote collections from libraries (will be processed):`)
+    remoteCollections.forEach((collection) => {
+      const modeCount = collection.modes ? collection.modes.length : 0
+      console.log(`  - "${collection.name}" (${modeCount} modes)`)
+    })
+    console.log('')
+  }
+
+  allCollections.forEach((collection) => {
+    const isRemote = collection.remote || false
+    const modeCount = collection.modes ? collection.modes.length : 0
+    const modeNames = collection.modes
+      ? collection.modes.map((m) => m.name).join(', ')
+      : 'none'
+
+    console.log(
+      `✅ Processing local collection: "${collection.name}" (ID: ${collection.id})`,
+      `\n  - Remote: ${isRemote}`,
+      `\n  - Modes (${modeCount}): ${modeNames}`,
+      `\n  - Default mode: ${collection.defaultModeId || 'none'}`,
+    )
+
+    if (localVariableCollectionsByName[collection.name]) {
+      throw new Error(
+        `❌ Duplicate collection name found: "${collection.name}"\n` +
+          `   First occurrence ID: ${localVariableCollectionsByName[collection.name].id}\n` +
+          `   Duplicate occurrence ID: ${collection.id}\n` +
+          `   Collection names must be unique across all collections (local and remote).`,
+      )
+    }
+
+    localVariableCollectionsByName[collection.name] = collection
+  })
+
+  // Process variables from all collections (both local and remote)
+  const allCollectionIds = new Set(allCollections.map((c) => c.id))
+
   Object.values(localVariables.meta.variables).forEach((variable) => {
+    // Process all variables (no filtering by collection type)
+    if (!allCollectionIds.has(variable.variableCollectionId)) {
+      return
+    }
+
     if (!localVariablesByCollectionAndName[variable.variableCollectionId]) {
       localVariablesByCollectionAndName[variable.variableCollectionId] = {}
     }
@@ -288,7 +339,7 @@ export function generatePostVariablesPayload(
   })
 
   console.log(
-    'Local variable collections in Figma file:',
+    'Variable collections in Figma file:',
     Object.keys(localVariableCollectionsByName),
   )
 

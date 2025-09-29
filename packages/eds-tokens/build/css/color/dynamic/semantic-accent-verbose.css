@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-appearance="accent"] {
+  --eds-color-bg-fill-muted-default: var(--eds-color-accent-3);
+  --eds-color-bg-fill-muted-hover: var(--eds-color-accent-4);
+  --eds-color-bg-fill-muted-active: var(--eds-color-accent-5);
+  --eds-color-bg-fill-emphasis-default: var(--eds-color-accent-9);
+  --eds-color-bg-fill-emphasis-hover: var(--eds-color-accent-10);
+  --eds-color-bg-fill-emphasis-active: var(--eds-color-accent-11);
+  --eds-color-bg-canvas: var(--eds-color-accent-1);
+  --eds-color-bg-surface: var(--eds-color-accent-2);
+  --eds-color-border-subtle: var(--eds-color-accent-6);
+  --eds-color-border-medium: var(--eds-color-accent-7);
+  --eds-color-border-strong: var(--eds-color-accent-8);
+  --eds-color-text-subtle: var(--eds-color-accent-12); /** Used for text and icons */
+  --eds-color-text-strong: var(--eds-color-accent-13); /** Used for text and icons */
+  --eds-color-text-subtle-on-emphasis: var(--eds-color-accent-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-strong-on-emphasis: var(--eds-color-accent-15); /** Text or icons against colored backgrounds */
+}
