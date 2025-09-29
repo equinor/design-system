@@ -1273,7 +1273,7 @@
   },
   "bg-floating": {
     "$type": "color",
-    "$value": "{Dark.Gray.2}",
+    "$value": "{Dark.North sea.2}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1289,7 +1289,7 @@
   },
   "bg-backdrop": {
     "$type": "color",
-    "$value": "{Dark.Gray.7}",
+    "$value": "{Dark.North sea.7}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1305,7 +1305,7 @@
   },
   "bg-input": {
     "$type": "color",
-    "$value": "{Dark.Gray.1}",
+    "$value": "{Dark.North sea.1}",
     "$description": "",
     "$extensions": {
       "com.figma": {

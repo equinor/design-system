@@ -33,15 +33,15 @@
   "conceptColorGroups": {
     "bg-floating": {
       "Light": "{Light.Gray.2}",
-      "Dark": "{Dark.Gray.2}"
+      "Dark": "{Dark.North sea.2}"
     },
     "bg-backdrop": {
       "Light": "{Light.Gray.7}",
-      "Dark": "{Dark.Gray.7}"
+      "Dark": "{Dark.North sea.7}"
     },
     "bg-input": {
       "Light": "{Light.Gray.1}",
-      "Dark": "{Dark.Gray.1}"
+      "Dark": "{Dark.North sea.1}"
     },
     "border-focus": {
       "Light": "{Light.Blue.7}",
