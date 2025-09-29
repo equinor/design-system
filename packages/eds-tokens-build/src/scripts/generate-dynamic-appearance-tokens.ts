@@ -25,20 +25,32 @@ function generateAppearanceForSemantic(
   } as const
 
   // Build WEB var names
-  const bgCanvas = varName(variablePrefix, 'bg', 'default')
-  const bgSurface = varName(variablePrefix, 'bg', 'subtle')
-  const bgFillMutedDefault = varName(variablePrefix, 'bg', 'medium-default')
-  const bgFillMutedHover = varName(variablePrefix, 'bg', 'medium-hover')
-  const bgFillMutedActive = varName(variablePrefix, 'bg', 'medium-active')
-  const bgFillEmphasisDefault = varName(variablePrefix, 'bg', 'strong-default')
-  const bgFillEmphasisHover = varName(variablePrefix, 'bg', 'strong-hover')
-  const bgFillEmphasisActive = varName(variablePrefix, 'bg', 'strong-active')
+  const bgCanvas = varName(variablePrefix, 'bg', 'canvas')
+  const bgSurface = varName(variablePrefix, 'bg', 'surface')
+  const bgFillMutedDefault = varName(variablePrefix, 'bg', 'fill-muted-default')
+  const bgFillMutedHover = varName(variablePrefix, 'bg', 'fill-muted-hover')
+  const bgFillMutedActive = varName(variablePrefix, 'bg', 'fill-muted-active')
+  const bgFillEmphasisDefault = varName(
+    variablePrefix,
+    'bg',
+    'fill-emphasis-default',
+  )
+  const bgFillEmphasisHover = varName(
+    variablePrefix,
+    'bg',
+    'fill-emphasis-hover',
+  )
+  const bgFillEmphasisActive = varName(
+    variablePrefix,
+    'bg',
+    'fill-emphasis-active',
+  )
 
   const borderSubtle = varName(variablePrefix, 'border', 'subtle')
   const borderMedium = varName(variablePrefix, 'border', 'medium')
   const borderStrong = varName(variablePrefix, 'border', 'strong')
 
-  const textSubtle = varName(variablePrefix, 'text', 'default')
+  const textSubtle = varName(variablePrefix, 'text', 'subtle')
   const textStrong = varName(variablePrefix, 'text', 'strong')
   const textSubtleOnEmphasis = varName(
     variablePrefix,
