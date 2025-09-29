@@ -1,128 +1,6 @@
 {
   "Density Aware": {
     "Spacing": {
-      "Inline": {
-        "4XS": {
-          "$type": "number",
-          "$value": "{spacing.inline.4XS}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "3XS": {
-          "$type": "number",
-          "$value": "{spacing.inline.3XS}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "2XS": {
-          "$type": "number",
-          "$value": "{spacing.inline.2XS}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "XS": {
-          "$type": "number",
-          "$value": "{spacing.inline.XS}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "SM": {
-          "$type": "number",
-          "$value": "{spacing.inline.SM}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "MD": {
-          "$type": "number",
-          "$value": "{spacing.inline.MD}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "LG": {
-          "$type": "number",
-          "$value": "{spacing.inline.LG}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "XL": {
-          "$type": "number",
-          "$value": "{spacing.inline.XL}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "2XL": {
-          "$type": "number",
-          "$value": "{spacing.inline.2XL}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        },
-        "3XL": {
-          "$type": "number",
-          "$value": "{spacing.inline.3XL}",
-          "$description": "",
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": false,
-              "scopes": [],
-              "codeSyntax": {}
-            }
-          }
-        }
-      },
       "Stack": {
         "4XS": {
           "$type": "number",
@@ -235,6 +113,128 @@
         "3XL": {
           "$type": "number",
           "$value": "{spacing.stack.3XL}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "Inline": {
+        "4XS": {
+          "$type": "number",
+          "$value": "{spacing.inline.4XS}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "3XS": {
+          "$type": "number",
+          "$value": "{spacing.inline.3XS}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "2XS": {
+          "$type": "number",
+          "$value": "{spacing.inline.2XS}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "XS": {
+          "$type": "number",
+          "$value": "{spacing.inline.XS}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "SM": {
+          "$type": "number",
+          "$value": "{spacing.inline.SM}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "MD": {
+          "$type": "number",
+          "$value": "{spacing.inline.MD}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "LG": {
+          "$type": "number",
+          "$value": "{spacing.inline.LG}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "XL": {
+          "$type": "number",
+          "$value": "{spacing.inline.XL}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "2XL": {
+          "$type": "number",
+          "$value": "{spacing.inline.2XL}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "3XL": {
+          "$type": "number",
+          "$value": "{spacing.inline.3XL}",
           "$description": "",
           "$extensions": {
             "com.figma": {

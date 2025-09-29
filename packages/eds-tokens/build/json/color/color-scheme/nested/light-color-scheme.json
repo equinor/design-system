@@ -1,4 +1,9 @@
 {
+  "bg-floating": "#ffffff",
+  "bg-backdrop": "#aeaeae",
+  "bg-input": "#f5f5f5",
+  "border-focus": "#6fb6e9",
+  "text-link": "#121e27",
   "Accent": {
     "1": "#eaf8fa",
     "2": "#f6ffff",
@@ -14,11 +19,11 @@
     "12": "#1f6369",
     "13": "#141f20",
     "14": "#cae4e7",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Neutral": {
     "1": "#f5f5f5",
-    "2": "#fff",
+    "2": "#ffffff",
     "3": "#dbdbdb",
     "4": "#cecece",
     "5": "#bebebe",
@@ -31,7 +36,7 @@
     "12": "#585858",
     "13": "#1d1d1d",
     "14": "#dedede",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Info": {
     "1": "#e7f8ff",
@@ -48,7 +53,7 @@
     "12": "#015e8d",
     "13": "#121e27",
     "14": "#c5e3f9",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Success": {
     "1": "#eafbe8",
@@ -65,7 +70,7 @@
     "12": "#20691f",
     "13": "#142114",
     "14": "#cae8c7",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Warning": {
     "1": "#fff1e2",
@@ -82,7 +87,7 @@
     "12": "#8a4100",
     "13": "#27190e",
     "14": "#fad6bc",
-    "15": "#fff"
+    "15": "#ffffff"
   },
   "Danger": {
     "1": "#ffecea",
@@ -99,11 +104,6 @@
     "12": "#a50827",
     "13": "#2e1414",
     "14": "#ffcbc9",
-    "15": "#fff"
-  },
-  "bg-floating": "#fff",
-  "bg-backdrop": "#aeaeae",
-  "bg-input": "#f5f5f5",
-  "border-focus": "#6fb6e9",
-  "text-link": "#121e27"
+    "15": "#ffffff"
+  }
 }

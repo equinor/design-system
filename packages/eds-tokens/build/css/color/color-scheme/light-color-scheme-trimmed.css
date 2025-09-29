@@ -3,6 +3,11 @@
  */
 
 [data-color-scheme="light"] {
+  --eds-color-bg-floating: #ffffff;
+  --eds-color-bg-backdrop: #aeaeae;
+  --eds-color-bg-input: #f5f5f5;
+  --eds-color-border-focus: #6fb6e9;
+  --eds-color-text-link: #121e27;
   --eds-color-accent-1: #eaf8fa;
   --eds-color-accent-2: #f6ffff;
   --eds-color-accent-3: #c5e1e4;
@@ -93,9 +98,4 @@
   --eds-color-danger-13: #2e1414;
   --eds-color-danger-14: #ffcbc9;
   --eds-color-danger-15: #ffffff;
-  --eds-color-bg-floating: #ffffff;
-  --eds-color-bg-backdrop: #aeaeae;
-  --eds-color-bg-input: #f5f5f5;
-  --eds-color-border-focus: #6fb6e9;
-  --eds-color-text-link: #121e27;
 }
