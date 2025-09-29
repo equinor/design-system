@@ -82,7 +82,7 @@ export const DataTable = ({
                 as="span"
                 size="sm"
                 baselineAligned={false}
-                weight="semibold"
+                weight="bolder"
               >
                 {column.label}
               </Typography>

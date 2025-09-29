@@ -40,7 +40,7 @@ export const TopBar = ({
           as="span"
           size="md"
           baselineAligned={false}
-          weight="medium"
+          weight="bolder"
           className={subtitleClass}
         >
           {subtitle}

@@ -1,7 +1,7 @@
 // src/app/_components/Typography.tsx
 import { ReactNode, HTMLAttributes, CSSProperties } from "react";
 
-type FontSize = "xs" | "sm" | "md" | "lg";
+type FontSize = "xs" | "sm" | "md" | "lg" | "xl";
 type LineHeight = "normal" | "squished";
 type As =
   | "p"
@@ -26,7 +26,7 @@ interface TypographyProps
   debug?: boolean;
   as?: As;
   className?: string;
-  weight?: "normal" | "medium" | "semibold" | "bold";
+  weight?: "lighter" | "normal" | "bolder";
 }
 
 /**
@@ -75,10 +75,9 @@ export function Typography({
 
   // Add font-weight if specified
   const fontWeights = {
+    lighter: 300,
     normal: 400,
-    medium: 500,
-    semibold: 600,
-    bold: 700,
+    bolder: 500,
   };
 
   const computedStyle: CSSProperties = {
@@ -120,7 +119,7 @@ export function Heading({
   level = 1,
   size = "lg",
   lineHeight = "squished",
-  weight = "semibold",
+  weight = "bolder",
   ...props
 }: HeadingProps) {
   return (
@@ -147,7 +146,7 @@ export function Heading({
  */
 export function Body({
   children,
-  size = "md",
+  size = "lg",
   ...props
 }: Omit<TypographyProps, "as">) {
   return (
@@ -167,7 +166,7 @@ export function Body({
  */
 export function Caption({
   children,
-  size = "sm",
+  size = "md",
   ...props
 }: Omit<TypographyProps, "as">) {
   return (
@@ -188,9 +187,9 @@ export function Caption({
  */
 export function Label({
   children,
-  size = "xs",
+  size = "sm",
   baselineAligned = false,
-  weight = "medium",
+  weight = "bolder",
   ...props
 }: Omit<TypographyProps, "as">) {
   return (
@@ -216,7 +215,7 @@ export function Label({
  */
 export function Strong({
   children,
-  weight = "semibold",
+  weight = "bolder",
   ...props
 }: Omit<TypographyProps, "as">) {
   return (

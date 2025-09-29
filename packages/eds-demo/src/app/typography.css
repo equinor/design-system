@@ -11,8 +11,6 @@
 
 :root {
   /* Boolean-like toggles using space toggle technique */
-  /* When a toggle is set to --TRUE (empty space), it activates */
-  /* When set to --FALSE (initial), it deactivates */
   --FALSE: initial;
   --TRUE: ;
 
@@ -23,33 +21,39 @@
   --is-font-size-sm: var(--FALSE);
   --is-font-size-md: var(--FALSE);
   --is-font-size-lg: var(--FALSE);
+  --is-font-size-xl: var(--FALSE);
 
-  /* Font size tokens (EDS 2.0 sizes) */
-  --font-size-lg: 16px;
-  --font-size-md: 14px;
-  --font-size-sm: 12px;
-  --font-size-xs: 10.5px;
+  /* Font size tokens from EDS (comfortable mode) */
+  --font-size-xs: 0.563rem; /* ~9px */
+  --font-size-sm: 0.656rem; /* ~10.5px */
+  --font-size-md: 0.75rem; /* 12px */
+  --font-size-lg: 0.875rem; /* 14px */
+  --font-size-xl: 1rem; /* 16px */
 
-  /* Normal line heights for each font size */
-  /* Provides comfortable reading spacing */
-  --font-size-lg-line-height-normal: 24px;
-  --font-size-md-line-height-normal: 20px;
-  --font-size-sm-line-height-normal: 16px;
-  --font-size-xs-line-height-normal: 16px;
+  /* Normal line heights (comfortable mode) */
+  --font-size-xs-line-height-normal: 0.75rem; /* 12px */
+  --font-size-sm-line-height-normal: 1rem; /* 16px */
+  --font-size-md-line-height-normal: 1rem; /* 16px */
+  --font-size-lg-line-height-normal: 1.25rem; /* 20px */
+  --font-size-xl-line-height-normal: 1.5rem; /* 24px */
 
-  /* Squished line heights for tighter layouts */
-  /* Useful for compact UI elements like buttons, badges, and dense lists */
-  --font-size-lg-line-height-squished: 20px;
-  --font-size-md-line-height-squished: 16px;
-  --font-size-sm-line-height-squished: 12px;
-  --font-size-xs-line-height-squished: 12px;
+  /* Squished line heights (comfortable mode) */
+  --font-size-xs-line-height-squished: 0.75rem; /* 12px */
+  --font-size-sm-line-height-squished: 0.75rem; /* 12px */
+  --font-size-md-line-height-squished: 0.75rem; /* 12px */
+  --font-size-lg-line-height-squished: 1rem; /* 16px */
+  --font-size-xl-line-height-squished: 1.25rem; /* 20px */
+
+  /* Font weights from EDS tokens */
+  --font-weight-lighter: 300;
+  --font-weight-normal: 400;
+  --font-weight-bolder: 500;
 }
 
 /* ============================================ */
 /* Data-attribute driven sizing */
 /* ============================================ */
 
-/* Activate font size toggles based on data attributes */
 [data-font-size="xs"] {
   --is-font-size-xs: var(--TRUE);
 }
@@ -66,12 +70,14 @@
   --is-font-size-lg: var(--TRUE);
 }
 
-/* Activate squished line-height mode */
+[data-font-size="xl"] {
+  --is-font-size-xl: var(--TRUE);
+}
+
 [data-line-height="squished"] {
   --is-line-height-squished: var(--TRUE);
 }
 
-/* Disable baseline alignment for optical centering */
 [data-not-baseline-aligned] {
   --is-not-baseline-aligned: var(--TRUE);
 }
@@ -82,58 +88,52 @@
 
 .type {
   /* Space toggle based conditional values for font sizes */
-  /* These resolve to the actual size value when their toggle is active */
   --_font-size-xs: var(--is-font-size-xs) var(--font-size-xs);
   --_font-size-sm: var(--is-font-size-sm) var(--font-size-sm);
   --_font-size-md: var(--is-font-size-md) var(--font-size-md);
   --_font-size-lg: var(--is-font-size-lg) var(--font-size-lg);
+  --_font-size-xl: var(--is-font-size-xl) var(--font-size-xl);
 
   /* Helper to check if NOT font-size-sm */
-  /* Used for padding calculations */
-  --_is-not-font-size-sm: var(--is-font-size-xs, var(--is-font-size-md, var(--is-font-size-lg)));
+  --_is-not-font-size-sm: var(--is-font-size-xs, var(--is-font-size-md, var(--is-font-size-lg, var(--is-font-size-xl))));
 
-  /* Select the correct font size based on which toggle is active */
-  /* Falls through the cascade until it finds an active value */
-  --font-size: var(--_font-size-xs, var(--_font-size-sm, var(--_font-size-md, var(--_font-size-lg))));
+  /* Select the correct font size */
+  --font-size: var(--_font-size-xs, var(--_font-size-sm, var(--_font-size-md, var(--_font-size-lg, var(--_font-size-xl)))));
 
   --_font-size: var(--font-size);
 
   /* Conditional line heights for squished mode */
-  /* These only resolve when both font size AND squished mode are active */
   --_font-size-xs-line-height-squished: var(--is-line-height-squished) var(--font-size-xs-line-height-squished);
   --_font-size-sm-line-height-squished: var(--is-line-height-squished) var(--font-size-sm-line-height-squished);
   --_font-size-md-line-height-squished: var(--is-line-height-squished) var(--font-size-md-line-height-squished);
   --_font-size-lg-line-height-squished: var(--is-line-height-squished) var(--font-size-lg-line-height-squished);
+  --_font-size-xl-line-height-squished: var(--is-line-height-squished) var(--font-size-xl-line-height-squished);
 
-  /* Select the correct line height based on font size and squished mode */
-  /* First checks if squished is active, otherwise falls back to normal */
+  /* Select the correct line height */
   --_font-size-xs-line-height: var(--is-font-size-xs) var(--_font-size-xs-line-height-squished, var(--font-size-xs-line-height-normal));
   --_font-size-sm-line-height: var(--is-font-size-sm) var(--_font-size-sm-line-height-squished, var(--font-size-sm-line-height-normal));
   --_font-size-md-line-height: var(--is-font-size-md) var(--_font-size-md-line-height-squished, var(--font-size-md-line-height-normal));
   --_font-size-lg-line-height: var(--is-font-size-lg) var(--_font-size-lg-line-height-squished, var(--font-size-lg-line-height-normal));
+  --_font-size-xl-line-height: var(--is-font-size-xl) var(--_font-size-xl-line-height-squished, var(--font-size-xl-line-height-normal));
 
   /* Final line height value */
-  --_line-height: var(--_font-size-xs-line-height, var(--_font-size-sm-line-height, var(--_font-size-md-line-height, var(--_font-size-lg-line-height))));
+  --_line-height: var(--_font-size-xs-line-height, var(--_font-size-sm-line-height, var(--_font-size-md-line-height, var(--_font-size-lg-line-height, var(--_font-size-xl-line-height)))));
 
   /* ============================================ */
   /* Ratio-based padding for optical alignment */
   /* ============================================ */
 
-  /* Calculate padding based on the difference between cap height and x-height */
-  /* Rounds to 4px grid for consistent baseline alignment */
   --_padding: calc(round(1cap, 4px) - 1ex);
 
   /* Centered padding for non-baseline-aligned text */
-  /* Used for UI components like buttons and badges */
   --_padding-top-centered: var(--_is-not-font-size-sm) var(--is-not-baseline-aligned) calc(var(--_padding) / 2 + (1cap - 1ex) / 2);
   --_padding-bottom-centered: var(--_is-not-font-size-sm) var(--is-not-baseline-aligned) calc(var(--_padding) / 2 - (1cap - 1ex) / 2);
 
   /* Final padding values */
-  /* Uses centered padding if not baseline-aligned, otherwise uses calculated padding */
   --_padding-top: var(--_padding-top-centered, var(--_padding));
   --_padding-bottom: var(--_padding-bottom-centered, 0);
 
-  /* Reset margin and set default padding to 0 */
+  /* Reset margin and default padding */
   margin: 0;
   padding: 0;
 
@@ -159,8 +159,7 @@
     }
   }
 
-  /* Debug mode: visualize bounding boxes */
-  /* Helpful for understanding text box trimming and padding */
+  /* Debug mode */
   &[data-debug] {
     background: color-mix(in oklch, limegreen, transparent 70%);
   }
