@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography } from "./Typography";
 
 type ButtonProps = {
   className?: string;
@@ -24,7 +25,9 @@ export const PrimaryButton = ({
       {...rest}
     >
       {icon}
-      <div className="text-sm leading-none">{children}</div>
+      <Typography as="span" size="sm" baselineAligned={false}>
+        {children}
+      </Typography>
     </button>
   );
 };
@@ -46,7 +49,9 @@ export const SecondaryButton = ({
       {...rest}
     >
       {icon}
-      <div className="text-sm leading-none">{children}</div>
+      <Typography as="span" size="sm" baselineAligned={false}>
+        {children}
+      </Typography>
     </button>
   );
 };

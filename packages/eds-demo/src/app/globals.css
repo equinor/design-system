@@ -1,4 +1,5 @@
 @import url(https://cdn.eds.equinor.com/font/eds-uprights-vf.css);
+@import "./typography.css";
 @import "tailwindcss";
 
 /* View transition for theme switch */
