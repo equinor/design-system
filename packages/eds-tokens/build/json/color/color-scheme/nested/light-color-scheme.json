@@ -101,15 +101,9 @@
     "14": "#ffcbc9",
     "15": "#fff"
   },
-  "Bg": {
-    "Floating": "#fff",
-    "Backdrop": "#aeaeae",
-    "Input": "#f5f5f5"
-  },
-  "Border": {
-    "Focus": "#6fb6e9"
-  },
-  "Text": {
-    "Link": "#121e27"
-  }
+  "bg-floating": "#fff",
+  "bg-backdrop": "#aeaeae",
+  "bg-input": "#f5f5f5",
+  "border-focus": "#6fb6e9",
+  "text-link": "#121e27"
 }
