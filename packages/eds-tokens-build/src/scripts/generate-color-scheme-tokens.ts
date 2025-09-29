@@ -47,8 +47,9 @@ function injectConceptsFromMappings(
   mappings?: TokenConfig['conceptColorGroups'],
 ): Json {
   if (!mappings || Object.keys(mappings).length === 0) return generated
-  const out: Json = { ...generated }
 
+  // Create concept tokens first
+  const conceptTokens: Json = {}
   const cfg = loadTokenConfig()
   const varPrefix = (cfg.variablePrefix ?? 'x').trim()
   const buildVar = (suffix: string) => `var(--${varPrefix}-color-${suffix})`
@@ -69,14 +70,16 @@ function injectConceptsFromMappings(
     }
 
     // Output concept tokens using their original key names (e.g., "bg-floating")
-    out[key] = {
+    conceptTokens[key] = {
       $type: 'color',
       $value: resolved,
       $description: '',
       $extensions: extensions,
     }
   }
-  return out
+
+  // Place concept tokens before other tokens
+  return { ...conceptTokens, ...generated }
 }
 
 async function generate(cfg: TokenConfig) {
