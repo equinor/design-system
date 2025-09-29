@@ -9,6 +9,7 @@ import {
 import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon } from "./ChipIcons";
 import { tableData } from "./tableData";
 import { ChipProps } from "./ChipProps";
+import { Typography } from "./Typography";
 
 type Props = {
   className?: string;
@@ -68,20 +69,23 @@ export const DataTable = ({
           key={column.id}
           className={`${
             column.id !== "checkbox" ? "grow" : ""
-          } inline-flex flex-col items-start justify-start  shrink basis-0`}
+          } inline-flex flex-col items-start justify-start shrink basis-0`}
         >
           <TableHeader
             data-color-appearance={column.active ? "accent" : undefined}
             className={`${thClass} ${column.active ? activeThClass : ""}`}
           >
             {column.id === "checkbox" ? (
-              <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
-                <div className="relative w-6 h-6">
-                  <CheckmarkUnselected className={checkmarkClass} />
-                </div>
-              </div>
+              <CheckmarkUnselected className={checkmarkClass} />
             ) : (
-              column.label
+              <Typography
+                as="span"
+                size="sm"
+                baselineAligned={false}
+                weight="semibold"
+              >
+                {column.label}
+              </Typography>
             )}
           </TableHeader>
 
@@ -93,45 +97,45 @@ export const DataTable = ({
                 className={`${row.active ? trActiveClass : ""}`}
               >
                 <TableDataCell className={tdClass}>
-                  {column.id === "checkbox" && (
-                    <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
-                      <div className="relative w-6 h-6">
-                        {row.selected ? (
-                          <CheckmarkSelected className={checkmarkClass} />
-                        ) : (
-                          <CheckmarkUnselected className={checkmarkClass} />
-                        )}
-                      </div>
-                    </div>
-                  )}
+                  {column.id === "checkbox" &&
+                    (row.selected ? (
+                      <CheckmarkSelected className={checkmarkClass} />
+                    ) : (
+                      <CheckmarkUnselected className={checkmarkClass} />
+                    ))}
 
                   {column.id === "id" && (
-                    <div className="h-5 text-sm leading-tight grow shrink basis-0">
+                    <Typography as="span" size="sm" baselineAligned={false}>
                       {row.id}
-                    </div>
+                    </Typography>
                   )}
 
                   {column.id === "person" && (
-                    <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
-                      <div className="self-stretch h-4 text-sm leading-none">
+                    <span className="inline-flex flex-col items-start justify-center gap-0.5">
+                      <Typography as="span" size="sm" baselineAligned={false}>
                         {row.person.name}
-                      </div>
-                      <div className="self-stretch h-4 text-xs leading-none tracking-tight underline">
+                      </Typography>
+                      <Typography
+                        as="span"
+                        size="xs"
+                        baselineAligned={false}
+                        className="underline"
+                      >
                         {row.person.email}
-                      </div>
-                    </div>
+                      </Typography>
+                    </span>
                   )}
 
                   {column.id === "position" && (
-                    <div className="h-5 text-sm leading-tight grow shrink basis-0">
+                    <Typography as="span" size="sm" baselineAligned={false}>
                       {row.position}
-                    </div>
+                    </Typography>
                   )}
 
                   {column.id === "location" && (
-                    <div className="h-5 text-sm leading-tight grow shrink basis-0">
+                    <Typography as="span" size="sm" baselineAligned={false}>
                       {row.location}
-                    </div>
+                    </Typography>
                   )}
 
                   {column.id === "status" && Chip && (
