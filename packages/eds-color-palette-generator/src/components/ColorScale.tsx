@@ -129,7 +129,7 @@ function ColorScaleBase({
         }, [baseHex])
 
         return (
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-4 print:mb-0">
             <input
               type="text"
               value={name ?? ''}
@@ -160,7 +160,7 @@ function ColorScaleBase({
             <button
               type="button"
               onClick={() => colorInputRef.current?.click()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover print-hide"
               title="Edit base color"
               aria-label="Edit base color"
             >
@@ -169,7 +169,7 @@ function ColorScaleBase({
             <button
               type="button"
               onClick={() => onRemove?.()}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-fill-muted-hover"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  border-neutral-subtle hover:bg-neutral-fill-muted-hover print-hide"
               title="Remove color"
               aria-label="Remove color"
             >
@@ -308,7 +308,7 @@ function ColorScaleBase({
   }
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 print:mb-0">
       <NameAndControls
         name={colorName}
         headingColor={headingColor}
@@ -317,12 +317,7 @@ function ColorScaleBase({
         onChangeHex={onChangeHex}
         onRemove={onRemove}
       />
-      <div
-        className="grid gap-2 mb-4"
-        style={{
-          gridTemplateColumns: `repeat(${colors.length}, minmax(0, 1fr))`,
-        }}
-      >
+      <div className="grid grid-cols-15 gap-2 mb-4 print:mb-0 print:gap-0">
         {colors.map((color: string, i: number) => {
           const textColor = getTextColorForStep(colors, i + 1)
           const step = PALETTE_STEPS[i]
@@ -340,7 +335,7 @@ function ColorScaleBase({
               ref={(el) => {
                 colorElementRefs.current[i] = el
               }}
-              className={`color-scale-item rounded-lg p-3 transition-transform hover:scale-105 relative cursor-pointer ${
+              className={`color-scale-item rounded-lg p-3 transition-transform hover:scale-105 relative cursor-pointer print:rounded-none ${
                 !showContrast ? 'aspect-square' : 'min-h-[130px]'
               }`}
               style={{ backgroundColor: color, color: textColor }}
@@ -554,7 +549,7 @@ function ColorScaleBase({
               </dialog>
               {/* Contrast info in the color cell - only when showContrast is true */}
               {showContrast && (
-                <div className="flex flex-col h-full pt-3">
+                <div className="flex flex-col h-full pt-3 print-hide">
                   <ul className="space-y-1">
                     {pairsWithSteps?.map((contrastReq, colorPairIndex) => {
                       const targetStepIndex = getStepIndex(

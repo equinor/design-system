@@ -123,7 +123,9 @@ export default function App() {
   const updateColorName = (index: number, newName: string) => {
     // Use functional update to avoid stale state when multiple edits occur quickly
     setColors((prev) =>
-      prev.map((color, i) => (i === index ? { ...color, name: newName } : color)),
+      prev.map((color, i) =>
+        i === index ? { ...color, name: newName } : color,
+      ),
     )
   }
 
@@ -273,7 +275,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-canvas text-default">
-      <header className="mx-auto max-w-7xl px-6 py-8">
+      <header className="mx-auto max-w-7xl px-6 py-8 print-hide">
         <HeaderPanel
           showConfigPanel={showConfigPanel}
           setShowConfigPanel={setShowConfigPanel}
@@ -283,12 +285,12 @@ export default function App() {
       <main className="py-6">
         {/* Config Panel */}
         {showConfigPanel && (
-          <section className="mb-8">
+          <section className="mb-8 print:mb-0">
             <div
               id="display-options-panel"
               className="mx-auto max-w-7xl p-6 rounded-xl"
             >
-              <div className="bg-surface px-4 py-6 rounded-xl">
+              <div className="bg-surface px-4 py-6 rounded-xl print-hide">
                 <DisplayOptionsPanel
                   showContrast={showContrast}
                   showLightnessInputs={showLightnessInputs}
@@ -322,7 +324,7 @@ export default function App() {
         )}
 
         {/* Full-width sticky subheader after display options */}
-        <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md">
+        <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md print-hide">
           <div className="mx-auto max-w-7xl px-6 py-2">
             <ColorScalesHeader />
             {showLightnessInputs && (
@@ -341,7 +343,7 @@ export default function App() {
           {currentColorScales.map((colorData, index) => (
             <div
               key={`scale-wrap-${index}`}
-              className="rounded-xl bg-surface p-4"
+              className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
             >
               <ColorScale
                 colors={colorData.scale}
@@ -358,7 +360,7 @@ export default function App() {
         </section>
 
         {/* Add new color button */}
-        <div className="my-8 mx-auto max-w-7xl px-6">
+        <div className="my-8 mx-auto max-w-7xl px-6 print-hide">
           <button
             type="button"
             onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
@@ -369,7 +371,7 @@ export default function App() {
         </div>
       </main>
 
-      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
+      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3 print-hide">
         <QuickActionsPopover
           lightModeValues={lightModeValues}
           darkModeValues={darkModeValues}
