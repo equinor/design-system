@@ -2,6 +2,11 @@
  * Do not edit directly, this file was auto-generated.
  */
 
+export const BG_FLOATING: string;
+export const BG_BACKDROP: string;
+export const BG_INPUT: string;
+export const BORDER_FOCUS: string;
+export const TEXT_LINK: string;
 export const ACCENT_1: string;
 export const ACCENT_2: string;
 export const ACCENT_3: string;
@@ -92,8 +97,3 @@ export const DANGER_12: string;
 export const DANGER_13: string;
 export const DANGER_14: string;
 export const DANGER_15: string;
-export const BG_FLOATING: string;
-export const BG_BACKDROP: string;
-export const BG_INPUT: string;
-export const BORDER_FOCUS: string;
-export const TEXT_LINK: string;
