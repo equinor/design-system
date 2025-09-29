@@ -2,6 +2,11 @@
  * Do not edit directly, this file was auto-generated.
  */
 
+export const BG_FLOATING = "#151617";
+export const BG_BACKDROP = "#738696";
+export const BG_INPUT = "#0b0b0b";
+export const BORDER_FOCUS = "#2d8bc5";
+export const TEXT_LINK = "#ecffff";
 export const ACCENT_1 = "#0a0b0b";
 export const ACCENT_2 = "#1e2323";
 export const ACCENT_3 = "#3c6266";
@@ -92,8 +97,3 @@ export const DANGER_12 = "#ffd0ce";
 export const DANGER_13 = "#fff5f4";
 export const DANGER_14 = "#492d2c";
 export const DANGER_15 = "#040303";
-export const BG_FLOATING = "#151617";
-export const BG_BACKDROP = "#738696";
-export const BG_INPUT = "#0b0b0b";
-export const BORDER_FOCUS = "#2d8bc5";
-export const TEXT_LINK = "#ecffff";
