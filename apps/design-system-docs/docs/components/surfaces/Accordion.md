@@ -1,61 +1,36 @@
 # Accordion
 
-The accordion component helps you organise content by allowing users to expand and collapse sections. This keeps pages tidy and makes information easy to scan.
+The accordion component helps us organise content by letting people expand and collapse sections so pages stay tidy and easy to scan.
 
-## When to Use an Accordion
+## When to Use
 
-Accordions are useful for grouping related information and reducing visual clutter. They give users control over which sections they view, making it easier to focus on what matters. However, avoid using accordions for critical information that should always be visible.
-
-**Consider using an accordion when:**
-
-- You want to group related information.
-- You need to reduce visual clutter on a page.
-- Users should be able to choose which sections to view.
+- Group related information while reducing visual clutter.
+- Let people choose which sections to view and focus on what matters.
+- Avoid using accordions for critical information that needs to stay visible.
 
 ## Structure
 
-An accordion is made up of a header area and a content area. The header is the clickable section that expands or collapses the content. The content area appears when the section is expanded.
+- Each accordion section has a header area and a content area.
+- The header is the interactive element that expands or collapses the section.
+- The content area appears when the section is expanded and holds the supporting information.
 
 ## Guidelines
 
-**Header area:**
-
-- Always 48px in height, whether expanded or collapsed.
-- Must include an action to expand or collapse the section.
-- You may add extra actions if needed.
-- The entire header is clickable for expand/collapse. Additional actions are triggered only by clicking directly on them.
-
-**Labels:**
-
-- Keep labels short and clear, ideally no more than three words.
-- If a label is too long, it will be truncated. Provide a tooltip or another method to show the full label.
-
-**Content area:**
-
-- When expanded, the content area should be at least 96px in height. There is no maximum height.
-- Users can expand multiple sections at the same time.
-- When navigating with a keyboard, use the tab key to move through headings and press enter or space to open a section.
+- Keep the header area 48px high, whether expanded or collapsed, and include a clear action to expand or collapse.
+- Make the entire header clickable for expand or collapse, while additional actions trigger only when clicked directly.
+- Allow room for extra actions when they support the experience.
+- Keep labels short and clear—ideally three words or fewer—and provide a tooltip or similar method when truncation occurs.
+- Ensure the content area is at least 96px high when expanded and allow multiple sections to be open at the same time.
 
 ## Accessibility
 
-Make sure all actions are keyboard accessible. Use clear labels and provide tooltips for truncated text. Maintain a logical tab order for easy navigation.
-
-When an accordion section is expanded, you can use the tab key to move through headings. Press enter or space to open the selected section. This ensures users can efficiently navigate and interact with accordion sections using a keyboard.
+Make every action keyboard accessible, maintain a logical tab order, and support tooltips for truncated text. When a section is expanded, people can use the tab key to move through headings and press enter or space to open the selected section.
 
 ## Implementation in Figma
 
-To add an accordion in Figma:
-
-1. Open the Assets Panel and search for "accordion".
+1. Open the **Assets Panel** and search for **accordion**.
 2. Drag and drop the component into your frame.
 3. Rename and resize it as needed.
-4. Select the desired variant from the Design Panel.
-<!-- Add link to Figma when the UI-User Interface board is redone-->
-
-## Code Example
+4. Select the desired variant from the **Design Panel**.
 
 For implementation details and usage examples, please refer to our [Storybook documentation](https://storybook.eds.equinor.com/?path=/docs/surfaces-accordion--docs).
-
----
-
-If you have questions or need support, please visit our [Support page](../../support/support.md). We are here to help you organise your content and create accessible, user-friendly experiences.
