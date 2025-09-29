@@ -133,23 +133,30 @@
   --_padding-top: var(--_padding-top-centered, var(--_padding));
   --_padding-bottom: var(--_padding-bottom-centered, 0);
 
-  /* Reset margin to prevent unexpected spacing */
+  /* Reset margin and set default padding to 0 */
   margin: 0;
+  padding: 0;
+
+  /* Apply typography properties */
+  font-family: Inter, sans-serif;
+  font-size: var(--_font-size);
+  line-height: var(--_line-height);
 
   /* ============================================ */
   /* Baseline grid alignment with text-box trim */
   /* ============================================ */
 
-  /* Only apply if browser supports text-box trimming */
-  /* This is a modern CSS feature for precise typography control */
-  @supports (text-box: trim-both cap alphabetic) {
-    /* Trim whitespace above and below text */
-    /* 'ex' aligns to x-height, 'alphabetic' to baseline */
-    text-box: trim-both ex alphabetic;
+  /* Only add padding and text-box trim for baseline-aligned elements */
+  &:not([data-not-baseline-aligned]) {
+    @supports (text-box: trim-both cap alphabetic) {
+      /* Trim whitespace above and below text */
+      /* 'ex' aligns to x-height, 'alphabetic' to baseline */
+      text-box: trim-both ex alphabetic;
 
-    /* Apply calculated padding for baseline grid alignment */
-    padding-top: var(--_padding-top);
-    padding-bottom: var(--_padding-bottom);
+      /* Apply calculated padding for baseline grid alignment */
+      padding-top: var(--_padding-top);
+      padding-bottom: var(--_padding-bottom);
+    }
   }
 
   /* Debug mode: visualize bounding boxes */
@@ -157,16 +164,12 @@
   &[data-debug] {
     background: color-mix(in oklch, limegreen, transparent 70%);
   }
-
-  /* Apply typography properties */
-  font-family: Inter, sans-serif;
-  font-size: var(--_font-size);
-  line-height: var(--_line-height);
 }
 
 /* ============================================ */
-/* Grid layouts */
+/* Helper class for grid layouts */
 /* ============================================ */
+
 .grid {
   display: grid;
   gap: 20px;

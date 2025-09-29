@@ -6,7 +6,6 @@
 ::view-transition-image-pair(root) {
   isolation: auto;
 }
-/* View transition for theme switch */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -30,4 +29,14 @@ h6 {
 button,
 a {
   cursor: pointer;
+}
+
+.app {
+  background-color: var(--eds-color-bg-canvas);
+  color: var(--eds-color-text-strong);
+}
+
+.top-bar,
+.sidebar {
+  background-color: var(--eds-color-bg-surface);
 }
