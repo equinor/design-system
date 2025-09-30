@@ -1,6 +1,12 @@
 import './team.css'
 
-export default function Team({ image, name, role }) {
+type TeamProps = {
+  image: string
+  name: string
+  role: string
+}
+
+export const Team = ({ image, name, role }: TeamProps) => {
   return (
     <div>
       <img src={image} className="circle" alt={name} />

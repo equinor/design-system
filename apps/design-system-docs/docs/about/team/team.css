@@ -1,7 +1,7 @@
 .img-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 80px;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 5rem;
 }
 .img-row img {
   width: 100%;
@@ -11,5 +11,5 @@
 }
 
 p {
-  margin: 0 0 3px;
+  margin: 0 0 0.2rem;
 }
