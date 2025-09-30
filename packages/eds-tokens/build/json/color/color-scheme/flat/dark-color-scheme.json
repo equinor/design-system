@@ -1,5 +1,5 @@
 {
-  "bg-floating": "#151617",
+  "bg-floating": "#202223",
   "bg-backdrop": "#738696",
   "bg-input": "#0b0b0b",
   "border-focus": "#2d8bc5",
@@ -20,7 +20,7 @@
   "accent-14": "#2c3839",
   "accent-15": "#030303",
   "neutral-1": "#0b0b0b",
-  "neutral-2": "#151617",
+  "neutral-2": "#202223",
   "neutral-3": "#525c65",
   "neutral-4": "#5d6b76",
   "neutral-5": "#6b7d8b",

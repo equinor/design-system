@@ -3,7 +3,7 @@
  */
 
 [data-color-scheme="dark"] {
-  --eds-color-bg-floating: #151617;
+  --eds-color-bg-floating: #202223;
   --eds-color-bg-backdrop: #738696;
   --eds-color-bg-input: #0b0b0b;
   --eds-color-border-focus: #2d8bc5;
@@ -24,7 +24,7 @@
   --eds-color-accent-14: #2c3839;
   --eds-color-accent-15: #030303;
   --eds-color-neutral-1: #0b0b0b;
-  --eds-color-neutral-2: #151617;
+  --eds-color-neutral-2: #202223;
   --eds-color-neutral-3: #525c65;
   --eds-color-neutral-4: #5d6b76;
   --eds-color-neutral-5: #6b7d8b;
