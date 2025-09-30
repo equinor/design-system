@@ -121,7 +121,7 @@ interface HeadingProps extends Omit<TypographyProps, "as"> {
  *
  * @example
  * <Heading level={1}>Main heading</Heading>
- * <Heading level={2} weight="semibold">Subheading</Heading>
+ * <Heading level={2} weight="bolder">Subheading</Heading>
  */
 export function Heading({
   children,
