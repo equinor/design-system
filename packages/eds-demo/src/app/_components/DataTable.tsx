@@ -1,11 +1,11 @@
 import React, { ComponentType } from "react";
 import {
   TableHeader,
-  TableDataCell,
   TableRow,
-  CheckmarkSelected,
+  TableDataCell,
   CheckmarkUnselected,
-} from ".";
+  CheckmarkSelected,
+} from "./index";
 import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon } from "./ChipIcons";
 import { tableData } from "./tableData";
 import { ChipProps } from "./ChipProps";
@@ -45,7 +45,7 @@ export const DataTable = ({
 }: Props) => {
   const columns = [
     { id: "checkbox", label: "", active: false },
-    { id: "id", label: "ID", active: false },
+    { id: "id", label: "Id", active: false },
     { id: "person", label: "Person", active: true },
     { id: "position", label: "Position", active: false },
     { id: "location", label: "Location", active: false },
@@ -76,7 +76,11 @@ export const DataTable = ({
             className={`${thClass} ${column.active ? activeThClass : ""}`}
           >
             {column.id === "checkbox" ? (
-              <CheckmarkUnselected className={checkmarkClass} />
+              <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
+                <div className="relative w-6 h-6">
+                  <CheckmarkUnselected className={checkmarkClass} />
+                </div>
+              </div>
             ) : (
               <Typography
                 as="span"
@@ -89,53 +93,67 @@ export const DataTable = ({
             )}
           </TableHeader>
 
-          {/* Render table data for each row */}
           {tableData.map((row) => {
             return (
               <TableRow
-                key={`row-${row.id}`}
+                key={row.id}
                 className={`${row.active ? trActiveClass : ""}`}
               >
                 <TableDataCell className={tdClass}>
-                  {column.id === "checkbox" &&
-                    (row.selected ? (
-                      <CheckmarkSelected className={checkmarkClass} />
-                    ) : (
-                      <CheckmarkUnselected className={checkmarkClass} />
-                    ))}
+                  {column.id === "checkbox" && (
+                    <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
+                      <div className="relative w-6 h-6">
+                        {row.selected ? (
+                          <CheckmarkSelected className={checkmarkClass} />
+                        ) : (
+                          <CheckmarkUnselected className={checkmarkClass} />
+                        )}
+                      </div>
+                    </div>
+                  )}
 
                   {column.id === "id" && (
-                    <Typography as="span" size="md" baselineAligned={false}>
-                      {row.id}
-                    </Typography>
+                    <div className="h-5 grow shrink basis-0">
+                      <Typography as="span" size="md" baselineAligned={false}>
+                        {row.id}
+                      </Typography>
+                    </div>
                   )}
 
                   {column.id === "person" && (
-                    <span className="inline-flex flex-col items-start justify-center gap-0.5">
-                      <Typography as="span" size="md" baselineAligned={false}>
-                        {row.person.name}
-                      </Typography>
-                      <Typography
-                        as="span"
-                        size="sm"
-                        baselineAligned={false}
-                        className="underline"
-                      >
-                        {row.person.email}
-                      </Typography>
-                    </span>
+                    <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
+                      <div className="self-stretch h-4">
+                        <Typography as="span" size="md" baselineAligned={false}>
+                          {row.person.name}
+                        </Typography>
+                      </div>
+                      <div className="self-stretch h-4">
+                        <Typography
+                          as="span"
+                          size="sm"
+                          baselineAligned={false}
+                          className="underline"
+                        >
+                          {row.person.email}
+                        </Typography>
+                      </div>
+                    </div>
                   )}
 
                   {column.id === "position" && (
-                    <Typography as="span" size="md" baselineAligned={false}>
-                      {row.position}
-                    </Typography>
+                    <div className="h-5 grow shrink basis-0">
+                      <Typography as="span" size="md" baselineAligned={false}>
+                        {row.position}
+                      </Typography>
+                    </div>
                   )}
 
                   {column.id === "location" && (
-                    <Typography as="span" size="md" baselineAligned={false}>
-                      {row.location}
-                    </Typography>
+                    <div className="h-5 grow shrink basis-0">
+                      <Typography as="span" size="md" baselineAligned={false}>
+                        {row.location}
+                      </Typography>
+                    </div>
                   )}
 
                   {column.id === "status" && Chip && (

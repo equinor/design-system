@@ -1,3 +1,5 @@
+import { Typography } from "./Typography";
+
 export function TableHeader({
   children,
   className,
@@ -119,7 +121,9 @@ export function Tab({
       className={`h-11 px-4 py-2 bg-opacity-0 justify-center items-center flex ${className}`}
       {...rest}
     >
-      {children}
+      <Typography as="span" size="md" baselineAligned={false} weight="normal">
+        {children}
+      </Typography>
     </div>
   );
 }
