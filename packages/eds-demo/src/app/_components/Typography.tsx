@@ -1,4 +1,3 @@
-// src/app/_components/Typography.tsx
 import { ReactNode, HTMLAttributes, CSSProperties } from "react";
 
 type FontSize =
