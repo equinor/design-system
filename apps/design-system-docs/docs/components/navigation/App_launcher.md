@@ -27,7 +27,5 @@ Each application entry is thoughtfully designed to communicate its purpose while
 
 ## Implementation in Figma
 
-### Instructions
-
 1. In Figma go to the **Assets Panel** and search for **app launcher**
 2. Drag and drop the component in your frame
