@@ -1,4 +1,4 @@
-import "@equinor/eds-tokens/css/variables-static.css";
+import "@equinor/eds-tokens/css/variables";
 import { Chip } from "./Chip";
 
 import styles from "./styles.module.css";
