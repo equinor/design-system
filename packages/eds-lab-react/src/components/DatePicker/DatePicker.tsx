@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   useState,
   useCallback,
@@ -273,7 +274,6 @@ const StyledDatepicker = styled(DatePicker as any)`
     }
   `}
 `
-
 const CalendarIcon = styled(Icon as any)`
   position: absolute;
   bottom: 7px;

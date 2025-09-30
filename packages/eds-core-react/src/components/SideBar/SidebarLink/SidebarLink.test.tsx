@@ -102,8 +102,9 @@ beforeAll(() => {
 
 afterAll(() => {
   if (!rafOrig) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
     delete (window as any).requestAnimationFrame
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
     delete (window as any).cancelAnimationFrame
   } else {
     window.requestAnimationFrame = rafOrig
