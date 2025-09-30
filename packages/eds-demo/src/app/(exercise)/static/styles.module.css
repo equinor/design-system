@@ -166,6 +166,10 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .text-input {
   background-color: var(--eds-color-bg-neutral-canvas);
   border: 1px solid var(--eds-color-border-neutral-medium);
+
+  &::placeholder {
+    color: var(--eds-color-text-neutral-subtle);
+  }
 }
 
 .sidebar-link--active {
