@@ -419,7 +419,7 @@ type Photo = {
 
 export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
-  const parentRef = useRef(undefined)
+  const parentRef = useRef<HTMLElement | null>(null)
 
   const estimateSize = useCallback(() => {
     return 48
@@ -546,7 +546,7 @@ export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
 
 export const VirtualScrolling: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
-  const parentRef = useRef(undefined)
+  const parentRef = useRef<HTMLElement | null>(null)
 
   const estimateSize = useCallback(() => {
     return 48

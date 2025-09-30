@@ -94,7 +94,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       onDateValueChange(dateValue)
     }, [dateValue, onDateValueChange])
 
-    const localRef = useRef<DatePicker | null>(undefined)
+    const localRef = useRef<DatePicker | null>(null)
     useImperativeHandle(ref, () => localRef.current)
 
     const customHeader =

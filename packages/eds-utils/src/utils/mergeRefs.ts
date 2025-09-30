@@ -8,7 +8,7 @@ export const mergeRefs = <T extends HTMLElement>(
       if (typeof ref === 'function') {
         ref(element)
       } else if (ref && typeof ref === 'object') {
-        ;(ref as { current: T | null }).current = element
+        ref.current = element
       }
     })
 }

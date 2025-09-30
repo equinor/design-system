@@ -54,7 +54,7 @@ export const Introduction: StoryFn<CheckboxProps> = (args) => {
 export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
   // Use this to set the input to indeterminate = true as this must be done via JavaScript
   // (cannot use an HTML attribute for this)
-  const indeterminateRef = useRef(undefined)
+  const indeterminateRef = useRef<HTMLElement | null>(null)
   // State for controlled example
   const [checked, updateChecked] = useState(false)
   return (

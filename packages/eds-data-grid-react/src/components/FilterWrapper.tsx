@@ -25,7 +25,7 @@ export function FilterWrapper<T = unknown>({
     .getPreFilteredRowModel()
     .flatRows[0]?.getValue(column.id)
   const [open, setOpen] = useState(false)
-  const filterIconRef = useRef<HTMLButtonElement | null>(undefined)
+  const filterIconRef = useRef<HTMLButtonElement | null>(null)
 
   const togglePopover = (event: MouseEvent) => {
     event.stopPropagation()

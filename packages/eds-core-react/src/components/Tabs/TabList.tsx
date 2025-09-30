@@ -71,7 +71,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     tabsFocused,
   } = useContext(TabsContext)
 
-  const currentTab = useRef<number>(undefined)
+  const currentTab = useRef<number>(0)
 
   const [arrowNavigating, setArrowNavigating] = useState(false)
   const selectedTabRef = useCallback(
