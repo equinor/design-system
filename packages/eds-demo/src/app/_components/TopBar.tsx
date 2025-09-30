@@ -38,7 +38,7 @@ export const TopBar = ({
         </ActionButton>
         <Typography
           as="span"
-          size="md"
+          size="lg"
           baselineAligned={false}
           weight="normal"
           className={subtitleClass}

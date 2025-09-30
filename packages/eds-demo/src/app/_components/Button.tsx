@@ -25,7 +25,7 @@ export const PrimaryButton = ({
       {...rest}
     >
       {icon}
-      <Typography as="span" size="sm" baselineAligned={false}>
+      <Typography as="span" size="md" weight="lighter" baselineAligned={false}>
         {children}
       </Typography>
     </button>
@@ -49,7 +49,7 @@ export const SecondaryButton = ({
       {...rest}
     >
       {icon}
-      <Typography as="span" size="sm" baselineAligned={false}>
+      <Typography as="span" size="md" weight="lighter" baselineAligned={false}>
         {children}
       </Typography>
     </button>
