@@ -17,32 +17,19 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Resources',
     Svg: Puzzle,
-    description: (
-      <>
-        Unified, production-ready assets: React & Figma components, design
-        tokens, icons, color, typography—kept continuously in sync
-      </>
-    ),
+    description: <> React/Figma components, tokens, icons, color palettes.</>,
   },
   {
     title: 'Documentation',
     Svg: Devices,
     description: (
-      <>
-        Actionable guidelines, patterns and principles expressed in a shared
-        vocabulary to help teams build consistently
-      </>
+      <>Guidelines, patterns, and principles for consistent builds.</>
     ),
   },
   {
     title: 'Living',
     Svg: Designer,
-    description: (
-      <>
-        Continuously evolving through real product feedback—open, collaborative
-        and driven by community contributions
-      </>
-    ),
+    description: <>Evolving with collaboration and community contributions.</>,
   },
 ]
 

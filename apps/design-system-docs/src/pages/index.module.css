@@ -27,9 +27,3 @@
   gap: 32px;
   flex-wrap: wrap;
 }
-.videoGrid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}

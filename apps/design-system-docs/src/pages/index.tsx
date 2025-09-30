@@ -70,18 +70,6 @@ function HomepageInfo() {
           docs, or explore Storybook examples to learn established patterns
           before building new ones.
         </p>
-        {/*         <div className={styles.videoGrid}>
-          <iframe
-            src="https://youtube.com/embed/M-G7JTp14Nw"
-            title="What is a design system"
-            allowFullScreen
-          ></iframe>
-          <iframe
-            src="https://www.youtube.com/embed/5my0W735TF4"
-            title="What makes working on EDS interesting"
-            allowFullScreen
-          ></iframe>
-        </div> */}
       </div>
     </header>
   )
