@@ -2,7 +2,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BG_FLOATING = "#151617";
+export const BG_FLOATING = "#202223";
 export const BG_BACKDROP = "#738696";
 export const BG_INPUT = "#0b0b0b";
 export const BORDER_FOCUS = "#2d8bc5";
@@ -23,7 +23,7 @@ export const ACCENT_13 = "#e6ffff";
 export const ACCENT_14 = "#2c3839";
 export const ACCENT_15 = "#030303";
 export const NEUTRAL_1 = "#0b0b0b";
-export const NEUTRAL_2 = "#151617";
+export const NEUTRAL_2 = "#202223";
 export const NEUTRAL_3 = "#525c65";
 export const NEUTRAL_4 = "#5d6b76";
 export const NEUTRAL_5 = "#6b7d8b";
