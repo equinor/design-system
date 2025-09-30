@@ -1,4 +1,9 @@
 {
+  "bg-floating": "#202223",
+  "bg-backdrop": "#738696",
+  "bg-input": "#0b0b0b",
+  "border-focus": "#2d8bc5",
+  "text-link": "#ecffff",
   "Accent": {
     "1": "#0a0b0b",
     "2": "#1e2323",
@@ -100,10 +105,5 @@
     "13": "#fff5f4",
     "14": "#492d2c",
     "15": "#040303"
-  },
-  "bg-floating": "#202223",
-  "bg-backdrop": "#738696",
-  "bg-input": "#0b0b0b",
-  "border-focus": "#2d8bc5",
-  "text-link": "#ecffff"
+  }
 }
