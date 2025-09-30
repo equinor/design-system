@@ -80,7 +80,7 @@ export const DataTable = ({
             ) : (
               <Typography
                 as="span"
-                size="sm"
+                size="md"
                 baselineAligned={false}
                 weight="bolder"
               >
@@ -105,19 +105,19 @@ export const DataTable = ({
                     ))}
 
                   {column.id === "id" && (
-                    <Typography as="span" size="sm" baselineAligned={false}>
+                    <Typography as="span" size="md" baselineAligned={false}>
                       {row.id}
                     </Typography>
                   )}
 
                   {column.id === "person" && (
                     <span className="inline-flex flex-col items-start justify-center gap-0.5">
-                      <Typography as="span" size="sm" baselineAligned={false}>
+                      <Typography as="span" size="md" baselineAligned={false}>
                         {row.person.name}
                       </Typography>
                       <Typography
                         as="span"
-                        size="xs"
+                        size="sm"
                         baselineAligned={false}
                         className="underline"
                       >
@@ -127,13 +127,13 @@ export const DataTable = ({
                   )}
 
                   {column.id === "position" && (
-                    <Typography as="span" size="sm" baselineAligned={false}>
+                    <Typography as="span" size="md" baselineAligned={false}>
                       {row.position}
                     </Typography>
                   )}
 
                   {column.id === "location" && (
-                    <Typography as="span" size="sm" baselineAligned={false}>
+                    <Typography as="span" size="md" baselineAligned={false}>
                       {row.location}
                     </Typography>
                   )}

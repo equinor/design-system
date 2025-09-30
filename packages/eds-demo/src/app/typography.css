@@ -1,4 +1,4 @@
-/* EDS 2.0 Typography System */
+/* EDS 2.0 Typography System - Full scale */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
@@ -22,27 +22,47 @@
   --is-font-size-md: var(--FALSE);
   --is-font-size-lg: var(--FALSE);
   --is-font-size-xl: var(--FALSE);
+  --is-font-size-2xl: var(--FALSE);
+  --is-font-size-3xl: var(--FALSE);
+  --is-font-size-4xl: var(--FALSE);
+  --is-font-size-5xl: var(--FALSE);
+  --is-font-size-6xl: var(--FALSE);
 
-  /* Font size tokens from EDS (comfortable mode) */
-  --font-size-xs: 0.563rem; /* ~9px */
-  --font-size-sm: 0.656rem; /* ~10.5px */
-  --font-size-md: 0.75rem; /* 12px */
-  --font-size-lg: 0.875rem; /* 14px */
-  --font-size-xl: 1rem; /* 16px */
+  /* Font size tokens - Full scale */
+  --font-size-xs: 0.656rem; /* 10.5px */
+  --font-size-sm: 0.75rem; /* 12px */
+  --font-size-md: 0.875rem; /* 14px */
+  --font-size-lg: 1rem; /* 16px */
+  --font-size-xl: 1.156rem; /* 18.5px */
+  --font-size-2xl: 1.313rem; /* 21px */
+  --font-size-3xl: 1.531rem; /* 24.5px */
+  --font-size-4xl: 1.75rem; /* 28px */
+  --font-size-5xl: 2rem; /* 32px */
+  --font-size-6xl: 2.313rem; /* 37px */
 
-  /* Normal line heights (comfortable mode) */
+  /* Normal line heights */
   --font-size-xs-line-height-normal: 0.75rem; /* 12px */
   --font-size-sm-line-height-normal: 1rem; /* 16px */
   --font-size-md-line-height-normal: 1rem; /* 16px */
   --font-size-lg-line-height-normal: 1.25rem; /* 20px */
   --font-size-xl-line-height-normal: 1.5rem; /* 24px */
+  --font-size-2xl-line-height-normal: 1.5rem; /* 24px */
+  --font-size-3xl-line-height-normal: 1.75rem; /* 28px */
+  --font-size-4xl-line-height-normal: 2rem; /* 32px */
+  --font-size-5xl-line-height-normal: 2rem; /* 32px */
+  --font-size-6xl-line-height-normal: 2.25rem; /* 36px */
 
-  /* Squished line heights (comfortable mode) */
+  /* Squished line heights */
   --font-size-xs-line-height-squished: 0.75rem; /* 12px */
   --font-size-sm-line-height-squished: 0.75rem; /* 12px */
   --font-size-md-line-height-squished: 0.75rem; /* 12px */
   --font-size-lg-line-height-squished: 1rem; /* 16px */
   --font-size-xl-line-height-squished: 1.25rem; /* 20px */
+  --font-size-2xl-line-height-squished: 1.25rem; /* 20px */
+  --font-size-3xl-line-height-squished: 1.5rem; /* 24px */
+  --font-size-4xl-line-height-squished: 1.75rem; /* 28px */
+  --font-size-5xl-line-height-squished: 1.75rem; /* 28px */
+  --font-size-6xl-line-height-squished: 2rem; /* 32px */
 
   /* Font weights from EDS tokens */
   --font-weight-lighter: 300;
@@ -74,6 +94,26 @@
   --is-font-size-xl: var(--TRUE);
 }
 
+[data-font-size="2xl"] {
+  --is-font-size-2xl: var(--TRUE);
+}
+
+[data-font-size="3xl"] {
+  --is-font-size-3xl: var(--TRUE);
+}
+
+[data-font-size="4xl"] {
+  --is-font-size-4xl: var(--TRUE);
+}
+
+[data-font-size="5xl"] {
+  --is-font-size-5xl: var(--TRUE);
+}
+
+[data-font-size="6xl"] {
+  --is-font-size-6xl: var(--TRUE);
+}
+
 [data-line-height="squished"] {
   --is-line-height-squished: var(--TRUE);
 }
@@ -93,12 +133,17 @@
   --_font-size-md: var(--is-font-size-md) var(--font-size-md);
   --_font-size-lg: var(--is-font-size-lg) var(--font-size-lg);
   --_font-size-xl: var(--is-font-size-xl) var(--font-size-xl);
+  --_font-size-2xl: var(--is-font-size-2xl) var(--font-size-2xl);
+  --_font-size-3xl: var(--is-font-size-3xl) var(--font-size-3xl);
+  --_font-size-4xl: var(--is-font-size-4xl) var(--font-size-4xl);
+  --_font-size-5xl: var(--is-font-size-5xl) var(--font-size-5xl);
+  --_font-size-6xl: var(--is-font-size-6xl) var(--font-size-6xl);
 
   /* Helper to check if NOT font-size-sm */
-  --_is-not-font-size-sm: var(--is-font-size-xs, var(--is-font-size-md, var(--is-font-size-lg, var(--is-font-size-xl))));
+  --_is-not-font-size-sm: var(--is-font-size-xs, var(--is-font-size-md, var(--is-font-size-lg, var(--is-font-size-xl, var(--is-font-size-2xl, var(--is-font-size-3xl, var(--is-font-size-4xl, var(--is-font-size-5xl, var(--is-font-size-6xl)))))))));
 
   /* Select the correct font size */
-  --font-size: var(--_font-size-xs, var(--_font-size-sm, var(--_font-size-md, var(--_font-size-lg, var(--_font-size-xl)))));
+  --font-size: var(--_font-size-xs, var(--_font-size-sm, var(--_font-size-md, var(--_font-size-lg, var(--_font-size-xl, var(--_font-size-2xl, var(--_font-size-3xl, var(--_font-size-4xl, var(--_font-size-5xl, var(--_font-size-6xl))))))))));
 
   --_font-size: var(--font-size);
 
@@ -108,6 +153,11 @@
   --_font-size-md-line-height-squished: var(--is-line-height-squished) var(--font-size-md-line-height-squished);
   --_font-size-lg-line-height-squished: var(--is-line-height-squished) var(--font-size-lg-line-height-squished);
   --_font-size-xl-line-height-squished: var(--is-line-height-squished) var(--font-size-xl-line-height-squished);
+  --_font-size-2xl-line-height-squished: var(--is-line-height-squished) var(--font-size-2xl-line-height-squished);
+  --_font-size-3xl-line-height-squished: var(--is-line-height-squished) var(--font-size-3xl-line-height-squished);
+  --_font-size-4xl-line-height-squished: var(--is-line-height-squished) var(--font-size-4xl-line-height-squished);
+  --_font-size-5xl-line-height-squished: var(--is-line-height-squished) var(--font-size-5xl-line-height-squished);
+  --_font-size-6xl-line-height-squished: var(--is-line-height-squished) var(--font-size-6xl-line-height-squished);
 
   /* Select the correct line height */
   --_font-size-xs-line-height: var(--is-font-size-xs) var(--_font-size-xs-line-height-squished, var(--font-size-xs-line-height-normal));
@@ -115,9 +165,23 @@
   --_font-size-md-line-height: var(--is-font-size-md) var(--_font-size-md-line-height-squished, var(--font-size-md-line-height-normal));
   --_font-size-lg-line-height: var(--is-font-size-lg) var(--_font-size-lg-line-height-squished, var(--font-size-lg-line-height-normal));
   --_font-size-xl-line-height: var(--is-font-size-xl) var(--_font-size-xl-line-height-squished, var(--font-size-xl-line-height-normal));
+  --_font-size-2xl-line-height: var(--is-font-size-2xl) var(--_font-size-2xl-line-height-squished, var(--font-size-2xl-line-height-normal));
+  --_font-size-3xl-line-height: var(--is-font-size-3xl) var(--_font-size-3xl-line-height-squished, var(--font-size-3xl-line-height-normal));
+  --_font-size-4xl-line-height: var(--is-font-size-4xl) var(--_font-size-4xl-line-height-squished, var(--font-size-4xl-line-height-normal));
+  --_font-size-5xl-line-height: var(--is-font-size-5xl) var(--_font-size-5xl-line-height-squished, var(--font-size-5xl-line-height-normal));
+  --_font-size-6xl-line-height: var(--is-font-size-6xl) var(--_font-size-6xl-line-height-squished, var(--font-size-6xl-line-height-normal));
 
   /* Final line height value */
-  --_line-height: var(--_font-size-xs-line-height, var(--_font-size-sm-line-height, var(--_font-size-md-line-height, var(--_font-size-lg-line-height, var(--_font-size-xl-line-height)))));
+  --_line-height: var(
+    --_font-size-xs-line-height,
+    var(
+      --_font-size-sm-line-height,
+      var(
+        --_font-size-md-line-height,
+        var(--_font-size-lg-line-height, var(--_font-size-xl-line-height, var(--_font-size-2xl-line-height, var(--_font-size-3xl-line-height, var(--_font-size-4xl-line-height, var(--_font-size-5xl-line-height, var(--_font-size-6xl-line-height)))))))
+      )
+    )
+  );
 
   /* ============================================ */
   /* Ratio-based padding for optical alignment */
@@ -149,11 +213,7 @@
   /* Only add padding and text-box trim for baseline-aligned elements */
   &:not([data-not-baseline-aligned]) {
     @supports (text-box: trim-both cap alphabetic) {
-      /* Trim whitespace above and below text */
-      /* 'ex' aligns to x-height, 'alphabetic' to baseline */
       text-box: trim-both ex alphabetic;
-
-      /* Apply calculated padding for baseline grid alignment */
       padding-top: var(--_padding-top);
       padding-bottom: var(--_padding-bottom);
     }

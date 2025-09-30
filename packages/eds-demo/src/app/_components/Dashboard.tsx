@@ -6,6 +6,7 @@ import { DataTable } from "@/app/_components/DataTable";
 import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
+import { Typography } from "./Typography";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -46,9 +47,15 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           />
 
           <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
-            <h1 className={`text-2xl leading-7 heading ${styles.heading}`}>
+            <Typography
+              as="h1"
+              size="4xl"
+              baselineAligned={false}
+              weight="lighter"
+              className={styles.heading}
+            >
               People
-            </h1>
+            </Typography>
           </header>
 
           <DataTable

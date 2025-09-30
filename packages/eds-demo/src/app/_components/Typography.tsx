@@ -1,7 +1,17 @@
 // src/app/_components/Typography.tsx
 import { ReactNode, HTMLAttributes, CSSProperties } from "react";
 
-type FontSize = "xs" | "sm" | "md" | "lg" | "xl";
+type FontSize =
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "2xl"
+  | "3xl"
+  | "4xl"
+  | "5xl"
+  | "6xl";
 type LineHeight = "normal" | "squished";
 type As =
   | "p"
@@ -119,7 +129,7 @@ export function Heading({
   level = 1,
   size = "lg",
   lineHeight = "squished",
-  weight = "bolder",
+  weight = "lighter",
   ...props
 }: HeadingProps) {
   return (
