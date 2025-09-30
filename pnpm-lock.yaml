@@ -478,8 +478,8 @@ importers:
   packages/eds-demo:
     dependencies:
       '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
+        specifier: ^0.10.0
+        version: 0.10.0
       '@mdx-js/loader':
         specifier: ^3.1.0
         version: 3.1.1(webpack@5.101.3)
@@ -2175,6 +2175,9 @@ packages:
 
   '@emotion/unitless@0.8.1':
     resolution: {integrity: sha512-KOEGMu6dmJZtpadb476IsZBclKvILjopjUii3V+7MnXIQCYh8W3NgNcgwo21n9LXZX6EDIKvqfjYxXebDwxKmQ==}
+
+  '@equinor/eds-tokens@0.10.0':
+    resolution: {integrity: sha512-oI7V8gZrrtP2aMOfimUn6WsB06KFJ5Dv0Qip9g/dcch0zHN5ZR8po1pJFis+Jjfi/OrYKRm7Kd+LcKCwtKSb6Q==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -13126,6 +13129,8 @@ snapshots:
   '@emotion/memoize@0.8.1': {}
 
   '@emotion/unitless@0.8.1': {}
+
+  '@equinor/eds-tokens@0.10.0': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
