@@ -7,11 +7,6 @@
 }
 
 :root {
-  --eds-color-bg-floating: light-dark(#fff, #151617);
-  --eds-color-bg-backdrop: light-dark(#aeaeae, #738696);
-  --eds-color-bg-input: light-dark(#f5f5f5, #0b0b0b);
-  --eds-color-border-focus: light-dark(#6fb6e9, #2d8bc5);
-  --eds-color-text-link: light-dark(#121e27, #ecffff);
   --eds-color-accent-1: light-dark(#eaf8fa, #0a0b0b);
   --eds-color-accent-2: light-dark(#f6ffff, #1e2323);
   --eds-color-accent-3: light-dark(#c5e1e4, #3c6266);
@@ -28,7 +23,7 @@
   --eds-color-accent-14: light-dark(#cae4e7, #2c3839);
   --eds-color-accent-15: light-dark(#fff, #030303);
   --eds-color-neutral-1: light-dark(#f5f5f5, #0b0b0b);
-  --eds-color-neutral-2: light-dark(#fff, #151617);
+  --eds-color-neutral-2: light-dark(#fff, #202223);
   --eds-color-neutral-3: light-dark(#dbdbdb, #525c65);
   --eds-color-neutral-4: light-dark(#cecece, #5d6b76);
   --eds-color-neutral-5: light-dark(#bebebe, #6b7d8b);
@@ -102,6 +97,11 @@
   --eds-color-danger-13: light-dark(#2e1414, #fff5f4);
   --eds-color-danger-14: light-dark(#ffcbc9, #492d2c);
   --eds-color-danger-15: light-dark(#fff, #040303);
+  --eds-color-bg-floating: light-dark(#fff, #202223);
+  --eds-color-bg-backdrop: light-dark(#aeaeae, #738696);
+  --eds-color-bg-input: light-dark(#f5f5f5, #0b0b0b);
+  --eds-color-border-focus: light-dark(#6fb6e9, #2d8bc5);
+  --eds-color-text-link: light-dark(#121e27, #ecffff);
 }
 
 :root, [data-color-appearance="neutral"] {
