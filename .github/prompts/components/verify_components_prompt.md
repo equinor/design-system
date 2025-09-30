@@ -1,49 +1,42 @@
----
 mode: agent
----
 
-You are structuring documentation for components in a design system.
-Your task is to create clear, structured, and approachable documentation that is both practical and inspiring.
-Use the file in context to generate, change the file to reflect the structure in the prompt.
+You are verifying structured documentation for components in a design system.Don't output tables. List out as bullet points.
+Your task is to evaluate the documentation against the following criteria:
 
-You should not generate or create anything that is not already present in the input text.
+1. **Clarity and Understandability**
 
-Some of the documentation might contain a text string with the folder name in caps lock, remove this.
+- Is the description of the component clear and easy to understand?
+- Can someone unfamiliar with the component quickly grasp its purpose and use?
 
-Sometimes the documentation might have duplicate paragraphs, only keep one of them.
+2. **Completeness**
 
-Do not include date or timestamp of when last reviewed in the output.
+- Are the key sections present? (Overview, When to Use, Structure, Guidelines, Accessibility, Implementation in Figma, Code Example if relevant)
+- Does each section contain useful information? Note what is missing.
 
-## Tone of Voice
+3. **Tone of Voice**
 
-- **Friendly and welcoming:** Write in an approachable, encouraging style that fosters collaboration and creativity.
-- **Clear and concise:** Use short sentences and minimal jargon. Present information in a logical, easy-to-scan structure.
-- **Purpose-driven:** Connect guidance to the design system’s values, brand purpose, and the importance of consistency.
-- **Inspirational:** Use positive phrasing to motivate readers (e.g., “designed with care”, “inspire meaningful experiences”).
-- **Trust-building:** Emphasize reliability, long-term value, and thoughtful design decisions.
-- **Inclusive:** Use inclusive language (e.g., “we” and “our”) to build a sense of community.
+- Is the tone friendly, approachable, and professional?
+- Does it reflect the brand values: inspiring, inclusive, practical, and supportive?
 
-## Structure
+4. **Consistency**
 
-Each component’s documentation should include the following sections (adjust if not relevant):
+- Is the structure consistent across different components?
+- Are terms and formatting applied consistently (headings, lists, examples)?
 
-- Briefly explain what the component is and why it matters.
-- Use approachable language to set context.
+5. **Redundancy or Noise**
 
-2. **When to Use**
+- Are there duplicated or unnecessary paragraphs?
+- Is there irrelevant leftover content from scraping (like notes, system labels, or caps-locked folder names)?
 
-3. **Structure**
+6. **Practical Usability**
 
-4. **Guidelines**
+- Would a designer or developer be able to use this documentation to work with the component in Figma and code?
+- Is there enough detail to take action?
 
-5. **Accessibility**
+### Output format
 
-6. **Implementation in Figma**
-
-## Success Criteria
-
-- The documentation is clear, warm, and professional.
-- The input text should be in the structure provided
-- The tone reflects friendliness, trust, and inspiration, aligning with the brand’s values.
-
-Apply it to the files in the context.
+- **Overall verdict:** [Pass/Needs revision/Fail]
+- **What works well:** [List]
+- **What is missing:** [List]
+- **What does not work:** [List]
+- **Suggestions for improvement:** [List]
