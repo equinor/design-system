@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography } from "./Typography";
 
 type Props = {
   className?: string;
