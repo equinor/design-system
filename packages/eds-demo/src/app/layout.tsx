@@ -1,4 +1,5 @@
 import "./globals.css";
+import { tokens } from "@equinor/eds-tokens";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

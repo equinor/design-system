@@ -45,6 +45,10 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .sidebar-link {
   color: var(--eds-color-text-neutral-subtle);
   border-bottom: 2px solid var(--eds-color-border-neutral-subtle);
+
+  &:hover {
+    background-color: var(--eds-color-bg-neutral-fill-muted-hover);
+  }
 }
 
 /* 
@@ -115,15 +119,21 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   color: var(--eds-color-text-neutral-subtle);
 
   &:hover {
-    background-color: var(--eds-color-bg-accent-fill-muted-default);
-    border-bottom: 2px solid var(--eds-color-border-neutral-medium);
-    color: var(--eds-color-text-neutral-strong);
+    background-color: var(--eds-color-bg-neutral-fill-muted-default);
+    border-bottom: 2px solid var(--eds-color-border-neutral-subtle);
+    color: var(--eds-color-text-neutral-subtle);
   }
 }
 
 .tab--current {
-  background-color: var(--eds-color-bg-accent-fill-muted-default);
-  border-bottom: 2px solid var(--eds-color-border-accent-strong);
+  border-bottom: 2px solid var(--eds-color-border-accent-medium);
+  color: var(--eds-color-text-accent-subtle);
+
+  &:hover {
+    background-color: unset;
+    border-bottom: 2px solid var(--eds-color-border-accent-medium);
+    color: var(--eds-color-text-accent-subtle);
+  }
 }
 
 /* Button */
@@ -159,7 +169,12 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 .sidebar-link--active {
   background-color: var(--eds-color-bg-accent-fill-muted-default);
+  color: var(--eds-color-text-accent-subtle);
   border-bottom: 2px solid var(--eds-color-border-accent-strong);
+
+  &:hover {
+    background-color: var(--eds-color-bg-accent-fill-muted-default);
+  }
 }
 
 /* Table */
