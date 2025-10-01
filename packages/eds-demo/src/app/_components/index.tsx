@@ -115,7 +115,7 @@ export function Tab({
   return (
     <a
       href=""
-      className={`cursor-default h-11 px-4 py-2  bg-opacity-0   justify-center items-center flex ${className}`}
+      className={`h-11 px-4 py-2  bg-opacity-0   justify-center items-center flex ${className}`}
       {...rest}
     >
       <div className="text-base font-medium leading-tight ">{children}</div>
