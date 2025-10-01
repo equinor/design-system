@@ -1,6 +1,12 @@
 # Sidebar
 
-_Sidebar_  is used to display single level navigational destinations
+Sidebar is used to display single level navigational destinations that create a reliable foundation for navigation. Designed with care, the sidebar helps users move confidently through applications while maintaining clear spatial orientation.
+
+## When to Use
+
+Sidebar should be used for more than 3 top level destinations that need to be accessible anywhere in the app. Use the sidebar when you need persistent navigation that remains visible and accessible throughout the user's journey.
+
+The sidebar shouldn't be used for secondary navigation destinations or less than 3 destinations.
 
 ## Guidelines
 
@@ -8,30 +14,15 @@ The sidebar will be permanently visible with optionally a collapse/expand functi
 
 Its height should fill the height of the screen, and will not be scrollable.
 
-Sidebar should be used for more than 3 top level destinations that that need to be accessible anywhere in the app.
+## Accessibility
 
-The sidebar Shouldn’t be used for secondary navigation destinations or less than 3 destinations.
+When expanded use tab to review current page headings and press enter or space to navigate to the selected section.
 
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Sidebar
-
-_Sidebar_  is used to display single level navigational destinations
-
-## Implementations in Figma
+## Implementation in Figma
 
 ### Instructions
 
-1.  In Figma go to the **Assets Panel** and search for **Side bar**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+1. In Figma go to the **Assets Panel** and search for **Side bar**.
+2. Drag and drop the component in your frame.
+3. Rename and resize the component if needed.
+4. Choose the variant from the **Design Panel**.

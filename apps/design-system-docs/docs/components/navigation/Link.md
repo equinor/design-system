@@ -1,33 +1,22 @@
 # Link
 
-Links are the go‑to component for navigation and data changes within our design system. They guide users to new content, help them explore related information, and keep interactions intuitive across every page.
+_Links_ are primarily used as interactive navigational elements, though they can also change how data is viewed.
 
 ## When to Use
 
-- In body text, ordered lists, or unordered lists as plain text.
-- When you need to move a user to another place or change how data is displayed.
-- Prefer links over buttons when the action is navigation; use a button for actions that stay on the same page or modify data directly.
-
-## Structure
-
-- Text only (no icons unless paired with an underline‑free style).
-- Underlined by default, colored in **Interactive**.
-- Can appear without an underline if an icon already signals interaction or to reduce visual clutter—though this may affect accessibility.
+A button is used when performing an action. Actions are almost always on the same page. A link is used when navigating to another place. If the action will change the data, use a button.
 
 ## Guidelines
 
-- Keep link text concise; avoid generic phrases like “Click here” or “Read more.”
-- Use meaningful labels that describe the destination.
-- When a link changes data, consider using a button instead for clarity.
+Links can be used on their own in body text, ordered lists or unordered lists, but always as text.
+
+Links are underlined and should always be in an `Interactive` colour.
+
+### Content
+
+- Keep link text as short as possible.
+- If possible, avoid terms like **Click here** or **Read more**--instead, use meaningful labels that explain the destination.
 
 ## Accessibility
 
-- Underlines help users identify links visually; removing them can hinder discoverability.
-- Ensure sufficient color contrast and focus styles so all users can interact comfortably.
-
-## Implementation in Figma
-
-- Add a text element with the **Interactive** style.
-- Apply an underline by default, or remove it when paired with an icon that signals interaction.
-
-Feel free to experiment while keeping these principles in mind—your links will guide users smoothly and confidently through their journey.
+The link style can be used without the underline when it is paired with an icon that implies interaction or when it causes unnecessary visual clutter. This does not meet all the accessibility guidelines, but it is sometimes more useful to not overload visually.

@@ -1,36 +1,42 @@
 # Accordion
 
-The accordion component helps us organise content by letting people expand and collapse sections so pages stay tidy and easy to scan.
+An accordion is a thoughtfully designed component that empowers users to collapse and expand sections of content, creating a clean and organized interface. Designed with care to help manage information density while maintaining usability, accordions inspire focused exploration and keep our pages scannable and purposeful.
 
 ## When to Use
 
-- Group related information while reducing visual clutter.
-- Let people choose which sections to view and focus on what matters.
-- Avoid using accordions for critical information that needs to stay visible.
+Use accordions when you need to present large amounts of related information in user-controlled sections. Accordions are perfect for grouping or organizing content that helps maintain order and scannability on a page, allowing users to focus on what matters most to them while keeping secondary information easily accessible.
 
 ## Structure
 
-- Each accordion section has a header area and a content area.
-- The header is the interactive element that expands or collapses the section.
-- The content area appears when the section is expanded and holds the supporting information.
+The accordion consists of:
+
+- **Header area** that serves as the interactive element for expanding and collapsing sections
+- **Content area** that appears when expanded, revealing detailed information
+- **Clear visual hierarchy** that guides users through their exploration
+
+Each accordion is composed of these essential elements working together to deliver information in digestible, user-controlled sections.
 
 ## Guidelines
 
-- Keep the header area 48px high, whether expanded or collapsed, and include a clear action to expand or collapse.
-- Make the entire header clickable for expand or collapse, while additional actions trigger only when clicked directly.
-- Allow room for extra actions when they support the experience.
-- Keep labels short and clear—ideally three words or fewer—and provide a tooltip or similar method when truncation occurs.
-- Ensure the content area is at least 96px high when expanded and allow multiple sections to be open at the same time.
+### Header area
 
-## Accessibility
+Whether expanded or collapsed, the header height must be 48px. The header area must contain one action indicating that the section expands or collapses and can contain additional actions. The expand/collapse functionality is tied to the entire header. Additional actions are triggered only by interacting directly with that action.
 
-Make every action keyboard accessible, maintain a logical tab order, and support tooltips for truncated text. When a section is expanded, people can use the tab key to move through headings and press enter or space to open the selected section.
+#### Labels
+
+Labels should be to the point, short and no more than three words. Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided.
+
+### Content area
+
+When the accordion is expanded, the minimum height for the content area is 96px. There is no maximum height for the content area.
+
+### Interaction
+
+Multiple sections can be expanded simultaneously.
 
 ## Implementation in Figma
 
-1. Open the **Assets Panel** and search for **accordion**.
-2. Drag and drop the component into your frame.
-3. Rename and resize it as needed.
-4. Select the desired variant from the **Design Panel**.
-
-For implementation details and usage examples, please refer to our [Storybook documentation](https://storybook.eds.equinor.com/?path=/docs/surfaces-accordion--docs).
+1. In Figma go to the **Assets Panel** and search for **accordion**
+2. Drag and drop the component in your frame
+3. Rename and resize the component if needed
+4. Choose the variant from the **Design Panel**
