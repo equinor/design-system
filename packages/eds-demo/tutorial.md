@@ -23,32 +23,32 @@ One update now controls all text colours.
 ### Video 2: UI Depth with Canvas & Surface (~2 min)
 
 **Intro (0:00–0:10)**  
-Use canvas and surface styles to show depth.
+Use canvas and surface colours to show depth and hierarchy.
 
 **Figma (0:10–1:30)**
 
-- Page frame: apply Canvas background.
-- Add a card: apply Surface.
-- Duplicate and set to Surface / Elevated for hierarchy.
-- Zoom out to show perceived depth.
+- Dashboard element: apply Canvas background.
+- Sidebar, Tab bar and Table: apply Surface.
+- Menu: apply the Floating concept colour
 
 **Recap (1:30–2:00)**  
-Canvas = base. Surface = elevation. Clear structure.
+Canvas = base background of your application to create depth and hierarchy.
+Surface = content background that sits on top of canvas. Clear structure.
+Floating = elements that are placed closest to the viewer and sits above both canvas and surface.
 
 ### Video 3: Chip Variants (~2 min)
 
 **Intro (0:00–0:10)**  
-Apply colour variants to Chips.
+Apply colour to chip variants.
 
 **Figma (0:10–1:30)**
 
 - Select the base chip component.
 - Apply Success, Info, Danger, Warning, and Neutral styles.
 - Show variants side by side.
-- Rename variants for clarity.
 
 **Recap (1:30–2:00)**  
-All variants use shared styles — easy to maintain.
+We are supporting common system state colours.
 
 ### Video 4: Tab Component (Hover + Active) (~2 min)
 
@@ -58,12 +58,11 @@ Define tab interaction states.
 **Figma (0:10–1:30)**
 
 - Default: Text / Neutral.
-- Hover variant: Surface / Subtle background.
+- Hover variant: Text / Subtle background.
 - Active variant: accent border + bold text.
-- Preview in prototype mode.
 
 **Recap (1:30–2:00)**  
-States now read clearly: neutral → hover → active.
+States now read clearly: default → hover → active.
 
 ### Video 5: Button Variants + States (~2 min)
 
@@ -117,15 +116,15 @@ Separate structural layers visually.
 
 **Figma DevMode (0:10–0:25)**
 
-- Page uses canvas.
-- Cards and content containers use surface.
-- Floating elements (menus, dialogues) sit above both.
+- Page: apply Canvas (base background).
+- Content containers (sidebar, tab bar, table): apply Surface.
+- Floating elements (menus, dialogues): Floating concept colour (sits above both).
 
 **Code (0:25–1:30)**
 
 - Base layout: `background: var(--colour-canvas);`
 - Content sections (sidebar, tab bar, table): `background: var(--colour-surface);`
-- Floating layer (where needed): elevated style token.
+- Floating layer (menus, overlays): elevated / floating token styles.
 
 **Result (1:30–2:00)**  
 Clear depth with minimal CSS.
@@ -137,16 +136,16 @@ Implement success, info, danger, warning, neutral.
 
 **Figma DevMode (0:10–0:25)**
 
-- Inspect each token pair.
+- Inspect each token pair (background + text).
 
 **Code (0:25–1:30)**
 
-- Example:  
+- Example:
   `.chip.success { background: var(--colour-success-bg); color: var(--colour-success-text); }`
-- Repeat for info, danger, warning, neutral.
+- Repeat for info, danger, warning, neutral using their token pairs.
 
 **Result (1:30–2:00)**  
-All variants aligned with tokens.
+All variants aligned with shared system state colour tokens.
 
 ### Video 4: Tab Component States (~2 min)
 
@@ -155,13 +154,16 @@ Add hover and active behaviour.
 
 **Figma DevMode (0:10–0:25)**
 
-- Review neutral text, hover background, active accent.
+- Review neutral text, subtle hover background, active accent (border + bold text).
 
 **Code (0:25–1:30)**
 
-- Default: `color: var(--colour-text-neutral);`
-- Hover: subtle surface background + stronger text (if required).
-- Active: accent border + bold text.
+- Default:
+  `.tab { color: var(--colour-text-neutral); border-bottom: 2px solid transparent; }`
+- Hover:
+  `.tab:hover { background: var(--colour-surface-subtle-hover); }`
+- Active:
+  `.tab[aria-selected="true"] { border-bottom: 2px solid var(--colour-accent-border); font-weight: 600; }`
 
 **Result (1:30–2:00)**  
 State cues: predictable and accessible.
@@ -173,23 +175,39 @@ Implement core variants.
 
 **Figma DevMode (0:10–0:25)**
 
-- Inspect primary, secondary, tertiary and their states.
+- Inspect base, primary, secondary, tertiary tokens + hover / active states.
 
 **Code (0:25–1:30)**
 
-- Base: structural padding, neutral text.
-- Primary: accent background + white text.
-- Secondary: neutral border + text.
-- Tertiary: text only.
-- Add hover / active: shade shift or subtle shadow.
+- Base:
+  `.button { padding: var(--space-2) var(--space-3); font: inherit; border-radius: var(--radius-sm); }`
+- Primary:
+  `.button.primary { background: var(--colour-accent-bg); color: var(--colour-text-on-accent); border: 1px solid var(--colour-accent-bg); }`
+  `.button.primary:hover { background: var(--colour-accent-bg-hover); }`
+  `.button.primary:active { background: var(--colour-accent-bg-active); }`
+- Secondary:
+  `.button.secondary { background: var(--colour-surface); color: var(--colour-text-neutral); border: 1px solid var(--colour-border-neutral); }`
+  `.button.secondary:hover { background: var(--colour-surface-hover); }`
+  `.button.secondary:active { background: var(--colour-surface-active); }`
+- Tertiary:
+  `.button.tertiary { background: transparent; color: var(--colour-text-neutral); border: 1px solid transparent; }`
+  `.button.tertiary:hover { background: var(--colour-surface-subtle-hover); }`
+  `.button.tertiary:active { background: var(--colour-surface-subtle-active); }`
+- Focus outline (shared):
+  `.button:focus-visible { outline: 2px solid var(--colour-focus-ring); outline-offset: 2px; }`
+- Disabled state (shared):
+  `.button:disabled { opacity: .5; cursor: not-allowed; }`
+
+Organise in code with a variant class + shared base styles for consistency.
 
 **Result (1:30–2:00)**  
-Variants support accent, neutral, danger tokens consistently.
+Reusable system powered by shared colour styles.
 
 **Series summary**
 
-- Fast, focused lessons.
-- Builds concept chain: global → depth → variants → states → system.
+- Mirrors the design series.
+- Fast concept chain: global → depth → variants → states → system.
+- Reinforces shared tokens & implementation patterns.
 
 ---
 
