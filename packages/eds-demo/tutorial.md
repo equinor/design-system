@@ -1,161 +1,196 @@
-# Video Tutorial
+# Video Tutorials
+
+Concise walkthroughs for designers and developers. Five videos per series (~2 minutes each). Total runtime: ~10 minutes per series.
 
 ## Design series
 
-### Video 1: Global Text Color Variable (~2 min)
+### Video 1: Global Text Colour Variable (~2 min)
 
-Intro (0:00–0:10)“Let’s set up a global text style so our typography stays consistent.”
-Figma (0:10–1:30)
+**Intro (0:00–0:10)**  
+Create a global text style for consistent typography.
+
+**Figma (0:10–1:30)**
 
 - Select a text element.
-- Apply a fill color (neutral).
-- Save it as a Color Style: “Text / Neutral”.
-- Apply this style to multiple text layers.
-- Quickly change the style → all instances update.
+- Apply a neutral fill colour.
+- Save it as a Colour Style: Text / Neutral.
+- Apply the style across multiple text layers.
+- Change the style once — all instances update.
 
-Recap (1:30–2:00)“Now our text colors are managed globally. One update fixes everything.”
+**Recap (1:30–2:00)**  
+One update now controls all text colours.
 
 ### Video 2: UI Depth with Canvas & Surface (~2 min)
 
-Intro (0:00–0:10)“Here’s how to use canvas and surface styles for depth in your designs.”
-Figma (0:10–1:30)
+**Intro (0:00–0:10)**  
+Use canvas and surface styles to show depth.
 
-- Show a page frame with a Canvas background style.
-- Add a card on top → apply Surface color style.
-- Duplicate card, change to Surface / Elevated for hierarchy.
-- Brief zoom-out to show depth visually.
+**Figma (0:10–1:30)**
 
-Recap (1:30–2:00)“Canvas for base, Surface for elevated elements -- a clear visual structure.”
+- Page frame: apply Canvas background.
+- Add a card: apply Surface.
+- Duplicate and set to Surface / Elevated for hierarchy.
+- Zoom out to show perceived depth.
+
+**Recap (1:30–2:00)**  
+Canvas = base. Surface = elevation. Clear structure.
 
 ### Video 3: Chip Variants (~2 min)
 
-Intro (0:00–0:10)“Now we’ll style Chips using color variants.”
-Figma (0:10–1:30)
+**Intro (0:00–0:10)**  
+Apply colour variants to Chips.
 
-- Select base chip component.
-- Apply Success, Info, Danger, Warning, Neutral color styles as fills.
-- Show them side by side.
-- Rename variants in the component panel.
+**Figma (0:10–1:30)**
 
-Recap (1:30–2:00)“All Chip variants are linked to styles -- easy to swap and consistent.”
+- Select the base chip component.
+- Apply Success, Info, Danger, Warning, and Neutral styles.
+- Show variants side by side.
+- Rename variants for clarity.
 
-### Video 4: Tab Component with Hover + Active States (~2 min)
+**Recap (1:30–2:00)**  
+All variants use shared styles — easy to maintain.
 
-Intro (0:00–0:10)“Let’s style Tab states directly in Figma.”
-Figma (0:10–1:30)
+### Video 4: Tab Component (Hover + Active) (~2 min)
 
-- Show default Tab with Text / Neutral.
-- Create a Hover variant → background set to Surface / Subtle.
-- Create an Active variant → accent border + bold text style.
-- Preview in prototype mode to show interaction.
+**Intro (0:00–0:10)**  
+Define tab interaction states.
 
-Recap (1:30–2:00)“Our Tabs now communicate state visually: neutral, hover, and active.”
+**Figma (0:10–1:30)**
+
+- Default: Text / Neutral.
+- Hover variant: Surface / Subtle background.
+- Active variant: accent border + bold text.
+- Preview in prototype mode.
+
+**Recap (1:30–2:00)**  
+States now read clearly: neutral → hover → active.
 
 ### Video 5: Button Variants + States (~2 min)
 
-Intro (0:00–0:10)“Finally, let’s style our Buttons with variants and states.”
-Figma (0:10–1:30)
+**Intro (0:00–0:10)**  
+Build a button system with variants and states.
 
-- Base button: neutral background + text.
-- Create variants:
-  - Primary (accent background, white text)
-  - Secondary (neutral border, neutral text)
-  - Tertiary (text only)
-- Add hover and active states by duplicating variants and swapping fills.
-- Organize with Variant Properties.
+**Figma (0:10–1:30)**
 
-Recap (1:30–2:00)“Now our Button system is complete, fully powered by shared color styles.”
+- Base: neutral background + text.
+- Add variants:
+  - Primary: accent background, white text.
+  - Secondary: neutral border, neutral text.
+  - Tertiary: text only.
+- Add hover and active states (swap fills / adjust emphasis).
+- Organise with Variant Properties.
 
-Total: ~10 minutes across 5 videos
+**Recap (1:30–2:00)**  
+Reusable system powered by shared colour styles.
 
-- Perfect balance with the developer series.
-- Designers see how to manage tokens and variants visually in Figma.
-- Developers see how to implement the same tokens in code.
+**Series summary**
+
+- Mirrors the developer series.
+- Designers learn token + variant management.
+- Foundation for implementation in code.
 
 ## Developer series
 
-### Video 1: Global Text Color Variable (~2 min)
+### Video 1: Global Text Colour Variable (~2 min)
 
-Intro (0:00–0:10)“Let’s set up a global text color variable so all text updates consistently.”
-Figma DevMode (0:10–0:25)
+**Intro (0:00–0:10)**  
+Define one variable for all neutral text.
 
-- Highlight text color in DevMode.
-- “Our base text uses neutral color. By defining it globally, any update will cascade.”
+**Figma DevMode (0:10–0:25)**
 
-Code (0:25–1:30)
+- Inspect the neutral text colour.
+- Centralising it ensures cascading updates.
 
-- Show :root { --color-text-neutral: #... }.
-- Apply it in a text component: color: var(--color-text-neutral);.
-- Show quick example: changing the variable updates multiple text elements.
+**Code (0:25–1:30)**
 
-Result + Recap (1:30–2:00)“Now we’ve got one source of truth for text color, easy to maintain and update.”
+- `:root { --colour-text-neutral: #...; }`
+- Apply: `color: var(--colour-text-neutral);`
+- Change once — many elements update.
+
+**Result (1:30–2:00)**  
+Single source of truth for text colour.
 
 ### Video 2: UI Depth with Canvas & Surface (~2 min)
 
-Intro (0:00–0:10)“In this video, we’ll apply canvas and surface colors to create depth.”
-Figma DevMode (0:10–0:25)
+**Intro (0:00–0:10)**  
+Separate structural layers visually.
 
-- Show background layers in design.
-- “Notice the page uses a canvas background, while cards use surface. There is also a third option for floating content that is placed on top of everything like popup menus and dialogs”
+**Figma DevMode (0:10–0:25)**
 
-Code (0:25–1:30)
+- Page uses canvas.
+- Cards and content containers use surface.
+- Floating elements (menus, dialogues) sit above both.
 
-- Apply canvas: background: var(--color-canvas);.
-- Apply surface for sidebar,tab-bar and table: background: var(--color-surface);.
+**Code (0:25–1:30)**
 
-Result + Recap (1:30–2:00)“Canvas for base, surface for sections with content and floating for elements on top of everything -- clear hierarchy, minimal effort.”
+- Base layout: `background: var(--colour-canvas);`
+- Content sections (sidebar, tab bar, table): `background: var(--colour-surface);`
+- Floating layer (where needed): elevated style token.
 
-### Video 3: Chip Variants (Success, Info, Danger, Warning, Neutral) (~2 min)
+**Result (1:30–2:00)**  
+Clear depth with minimal CSS.
 
-Intro (0:00–0:10)“Now let's style the Chip component with color variants.”
-Figma DevMode (0:10–0:25)
+### Video 3: Chip Variants (~2 min)
 
-- Highlight each chip color in DevMode.
-- “We've got success, info, danger, warning, and neutral.”
+**Intro (0:00–0:10)**  
+Implement success, info, danger, warning, neutral.
 
-Code (0:25–1:30)
+**Figma DevMode (0:10–0:25)**
 
-- Show variant classes like .chip.success, .chip.info, etc.
-- Apply background + text:.chip.success { background: var(--color-success-bg); color: var(--color-success-text); }
-- Repeat briefly for other variants.
+- Inspect each token pair.
 
-Result + Recap (1:30–2:00)“All five variants are consistent with our color tokens, ready to use in UI.”
+**Code (0:25–1:30)**
 
-### Video 4: Tab Component with Hover + Active States (~2 min)
+- Example:  
+  `.chip.success { background: var(--colour-success-bg); color: var(--colour-success-text); }`
+- Repeat for info, danger, warning, neutral.
 
-Intro (0:00–0:10)“Let's style our Tab component with hover and active states.”
-Figma DevMode (0:10–0:25)
+**Result (1:30–2:00)**  
+All variants aligned with tokens.
 
-- Highlight neutral text, hover background, and active border in DevMode.
+### Video 4: Tab Component States (~2 min)
 
-Code (0:25–1:30)
+**Intro (0:00–0:10)**  
+Add hover and active behaviour.
 
-- Default text: color: var(--color-text-neutral);.
-- Hover: background surface + stronger text.
+**Figma DevMode (0:10–0:25)**
+
+- Review neutral text, hover background, active accent.
+
+**Code (0:25–1:30)**
+
+- Default: `color: var(--colour-text-neutral);`
+- Hover: subtle surface background + stronger text (if required).
 - Active: accent border + bold text.
 
-Result + Recap (1:30–2:00)“Our Tab now matches the design: neutral base, subtle hover, accent active.”
+**Result (1:30–2:00)**  
+State cues: predictable and accessible.
 
 ### Video 5: Button Variants + States (~2 min)
 
-Intro (0:00–0:10)“Last one -- let's style Buttons with variants and states.”
-Figma DevMode (0:10–0:25)
+**Intro (0:00–0:10)**  
+Implement core variants.
 
-- Show primary, secondary, tertiary in DevMode.
-- Point out hover + active styles.
+**Figma DevMode (0:10–0:25)**
 
-Code (0:25–1:30)
+- Inspect primary, secondary, tertiary and their states.
 
-- Base button: padding, border, neutral text.
-- Add color tokens:
-  - Primary: accent background + white text.
-  - Secondary: neutral border + text.
-  - Tertiary: text only.
-- Add hover/active states: darken, lighten, or add subtle shadow.
+**Code (0:25–1:30)**
 
-Result + Recap (1:30–2:00)“All three variants now support accent, neutral, and danger colors -- consistent across states.”
+- Base: structural padding, neutral text.
+- Primary: accent background + white text.
+- Secondary: neutral border + text.
+- Tertiary: text only.
+- Add hover / active: shade shift or subtle shadow.
 
-Total series runtime: ~10 minutes
+**Result (1:30–2:00)**  
+Variants support accent, neutral, danger tokens consistently.
 
-- Each video is a self-contained, fast lesson.
-- Together, they show a clear progression: global → layout depth → simple component → interactive states → full button system.
+**Series summary**
+
+- Fast, focused lessons.
+- Builds concept chain: global → depth → variants → states → system.
+
+---
+
+Both series reinforce shared design tokens and implementation patterns.
