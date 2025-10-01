@@ -1,6 +1,6 @@
 mode: agent
 
-You are verifying structured documentation for components in a design system.Don't output tables. List out as bullet points.
+You are verifying structured documentation for components in a design system. Don't output tables. List out as bullet points.
 Your task is to evaluate the documentation against the following criteria:
 
 1. **Clarity and Understandability**
