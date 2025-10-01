@@ -17,7 +17,12 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Resources',
     Svg: Puzzle,
-    description: <> Comprehensive resources like React and Figma components, tokens, icons and colour palettes.</>,
+    description: (
+      <>
+        Comprehensive resources like React and Figma components, tokens,
+        iconsand colour palettes.
+      </>
+    ),
   },
   {
     title: 'Documentation',
