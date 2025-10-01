@@ -24,7 +24,7 @@
   },
   "peerDependencies": {
     "@equinor/eds-core-react": "workspace:>=0.42.0",
-    "react": ">=16.8",
+    "react": ">=19.0.0",
     "react-dom": ">=16.8",
     "styled-components": ">=5.1"
   },
