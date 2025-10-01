@@ -1,0 +1,15 @@
+.img-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 5rem;
+}
+.img-row img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+p {
+  margin: 0 0 0.2rem;
+}
