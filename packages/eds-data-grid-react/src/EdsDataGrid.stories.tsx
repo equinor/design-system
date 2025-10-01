@@ -22,9 +22,9 @@ import {
   useEffect,
   useRef,
   useState,
+  type JSX,
 } from 'react'
 import { EdsDataGrid } from './EdsDataGrid'
-import page from './EdsDataGrid.docs.mdx'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { FilterWrapper } from './components/FilterWrapper'
 import {
@@ -48,7 +48,6 @@ const meta: Meta<typeof EdsDataGrid<Photo>> = {
   component: EdsDataGrid,
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },

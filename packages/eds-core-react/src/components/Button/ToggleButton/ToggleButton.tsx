@@ -39,11 +39,11 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
     }, [selectedIndexes])
 
     function updateProps(
-      child: ReactElement,
+      child: ReactElement<AllHTMLAttributes<HTMLElement>>,
       isSelected: boolean,
       index: number,
     ) {
-      const childElement = child as ReactElement<AllHTMLAttributes<HTMLElement>>
+      const childElement = child
       if (isValidElement(child)) {
         const buttonProps: ButtonProps = {
           'aria-pressed': isSelected ? true : undefined,
@@ -63,7 +63,7 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
             }
           },
         }
-        return cloneElement(child as ReactElement, buttonProps)
+        return cloneElement(child, buttonProps)
       }
     }
 
@@ -77,7 +77,7 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
         if (isValidElement(child) && child.type === Tooltip) {
           const updatedGrandChildren = ReactChildren.map(
             childElement.props.children,
-            (grandChild: ReactElement) => {
+            (grandChild: ReactElement<AllHTMLAttributes<HTMLElement>>) => {
               return updateProps(grandChild, isSelected, index)
             },
           )

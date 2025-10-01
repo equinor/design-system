@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common'
 import GithubSvg from '../../images/github-logo.svg'
 import FigmaSvg from '../../images/figma-logo.svg'
 
 import Link from '@docusaurus/Link'
+
+import type { JSX } from 'react'
 
 interface FooterColumnItem {
   label: string

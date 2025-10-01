@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   useState,
   useCallback,
@@ -94,7 +95,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       onDateValueChange(dateValue)
     }, [dateValue, onDateValueChange])
 
-    const localRef = useRef<DatePicker | null>()
+    const localRef = useRef<DatePicker | null>(null)
     useImperativeHandle(ref, () => localRef.current)
 
     const customHeader =
@@ -273,8 +274,7 @@ const StyledDatepicker = styled(DatePicker as any)`
     }
   `}
 `
-
-const CalendarIcon = styled(Icon)`
+const CalendarIcon = styled(Icon as any)`
   position: absolute;
   bottom: 7px;
   right: 6px;

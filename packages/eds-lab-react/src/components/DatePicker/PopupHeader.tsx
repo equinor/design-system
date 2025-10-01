@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components'
 import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'
@@ -87,7 +88,7 @@ const HeaderControls = styled.div`
   grid-auto-flow: column;
 `
 
-const IconButton = styled(Button)`
+const IconButton = styled(Button as any)`
   padding: 0;
   margin: 0;
   line-height: 0;
@@ -101,11 +102,11 @@ const IconButton = styled(Button)`
   }
 `
 
-const HeaderTitle = styled(Typography)`
+const HeaderTitle = styled(Typography as any)`
   ${typographyTemplate(tokens.entities.title.typography)}
 `
 
-const TodayLabel = styled(Button)`
+const TodayLabel = styled(Button as any)`
   width: 100%;
 
   span {

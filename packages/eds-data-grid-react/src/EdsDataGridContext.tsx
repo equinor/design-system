@@ -29,7 +29,7 @@ export const EdsDataGridContext = createContext<Context<any>>({
 export function TableProvider<T>({
   children,
   ...props
-}: Context<T> & { children: ReactElement | Array<ReactElement> }) {
+}: Context<T> & { children: ReactElement | ReactElement[] }) {
   return (
     <EdsDataGridContext.Provider value={props}>
       {children}

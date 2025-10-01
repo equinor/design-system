@@ -57,7 +57,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       variant,
       ...props
     }: DatePickerProps,
-    forwardedRef: RefObject<HTMLDivElement>,
+    forwardedRef: RefObject<HTMLDivElement | null>,
   ) => {
     timezone = timezone ?? defaultTimezone
     formatOptions = formatOptions ?? {

@@ -80,7 +80,7 @@ export const Breadcrumb: OverridableSubComponent = forwardRef(
 
     return showTooltip ? (
       <Tooltip title={children} placement="top">
-        {crumb}
+        <span style={{ display: 'inline-block' }}>{crumb}</span>
       </Tooltip>
     ) : (
       crumb

@@ -5,6 +5,7 @@ import {
   HTMLAttributes,
   ReactNode,
   Children as ReactChildren,
+  type JSX,
 } from 'react'
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'

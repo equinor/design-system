@@ -4,6 +4,7 @@ import {
   ReactNode,
   MouseEvent,
   createContext,
+  type JSX,
 } from 'react'
 import type { FocusTarget } from './Menu.types'
 
