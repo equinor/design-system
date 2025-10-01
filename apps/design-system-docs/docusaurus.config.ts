@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 
 const config: Config = {
   title: 'Equinor Design System',
-  tagline: 'both for mobile and web',
+  tagline: 'for mobile and web',
   favicon: 'img/eds-logo.svg',
 
   // // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

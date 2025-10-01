@@ -113,12 +113,13 @@ export function Tab({
   className?: string;
 }) {
   return (
-    <div
-      className={`cursor-default h-11 px-4 py-2  bg-opacity-0   justify-center items-center flex ${className}`}
+    <a
+      href=""
+      className={`h-11 px-4 py-2  bg-opacity-0   justify-center items-center flex ${className}`}
       {...rest}
     >
       <div className="text-base font-medium leading-tight ">{children}</div>
-    </div>
+    </a>
   );
 }
 
@@ -131,11 +132,12 @@ export function SideBarLink({
   className?: string;
 }) {
   return (
-    <div
+    <a
+      href=""
       className={`self-stretch h-14 px-5 justify-between items-center inline-flex ${className}`}
       {...rest}
     >
       <div className="relative w-6 h-6">{children}</div>
-    </div>
+    </a>
   );
 }

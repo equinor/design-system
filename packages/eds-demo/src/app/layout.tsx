@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { equinorFont } from "@/fonts/equinorFont";
 
 export const metadata: Metadata = {
   title: "Equinor Design System Tokens",
@@ -15,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={equinorFont.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
