@@ -1,5 +1,27 @@
 .searchMainContainer input {
-  background-color: var(--eds-color-bg-neutral-fill-muted-defaul);
-  border-radius: 0.2rem;
-  border: 0.15rem solid #bebebe;
+  border-radius: var(--ifm-global-radius);
+  box-shadow: 0px 0px 0px 1px var(--eds-color-border-neutral-subtle) inset;
+  background-color: var(--eds-color-bg-neutral-canvas);
+}
+
+.searchMainContainer input::placeholder {
+  color: var(--eds-color-border-neutral-subtle);
+}
+
+/*The keyboard input container*/
+.searchMainContainer > div > div kbd {
+  background-color: unset;
+  border: unset;
+  box-shadow: unset;
+  padding: 0;
+  color: var(--eds-color-text-neutral-subtle);
+}
+
+/*The remove text button that shows up when input is in use*/
+.searchMainContainer button {
+  padding: 0 0.125rem !important;
+  cursor: pointer;
+}
+.searchMainContainer button:hover {
+  background-color: var(--eds-color-border-neutral-subtle);
 }

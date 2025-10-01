@@ -165,35 +165,6 @@ nav.menu li a {
 }
 
 /* ======================================
- * SEARCH BAR
- * ====================================== */
-.search-bar > div > div {
-  border-radius: var(--ifm-global-radius);
-  box-shadow: 0px 0px 0px 1px var(--eds-color-border-neutral-subtle) inset;
-  border-bottom: unset;
-  padding: 0.25em 0.5em;
-}
-
-.search-bar > div > div {
-  background-color: var(--eds-color-bg-neutral-fill-muted-defaul);
-}
-.search-bar > div > div:focus-within {
-  outline: var(--eds-color-bg-accent-fill-emphasis-default) 2px solid;
-}
-.search-bar > div > div svg {
-  color: var(--eds-color-text-neutral-strong);
-}
-.search-bar > div > div button {
-  color: var(--eds-color-bg-accent-emphasis-default);
-}
-.search-bar > div > div > input {
-  font-family: 'Inter', sans-serif;
-}
-.search-bar > div > div > input::placeholder {
-  color: var(--eds-color-border-neutral-subtle);
-}
-
-/* ======================================
  * MAIN CONTENT AREA
  * ====================================== */
 .theme-doc-markdown {
