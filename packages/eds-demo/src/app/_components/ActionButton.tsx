@@ -9,7 +9,7 @@ export const ActionButton = ({ className, children, ...rest }: Props) => {
   return (
     <button
       type="button"
-      className={`cursor-default select-none w-11 h-11 rounded-full justify-center items-center flex ${className}`}
+      className={`select-none w-11 h-11 rounded-full justify-center items-center flex ${className}`}
       {...rest}
     >
       <div className="relative w-6 h-6">{children}</div>
