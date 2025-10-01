@@ -40,7 +40,6 @@ export const TopBar = ({
           as="span"
           size="lg"
           baselineAligned={false}
-          weight="lighter"
           className={subtitleClass}
         >
           {subtitle}
