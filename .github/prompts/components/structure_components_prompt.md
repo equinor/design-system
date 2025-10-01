@@ -8,9 +8,13 @@ Use the file in context to generate, change the file to reflect the structure in
 
 You should not generate or create anything that is not already present in the input text.
 
+Do not create titles that is not present in the structure defined in this systems prompt.
+
 Some of the documentation might contain a text string with the folder name in caps lock, remove this.
 
 Sometimes the documentation might have duplicate paragraphs, only keep one of them.
+
+It should always contain header 1 title
 
 Do not include date or timestamp of when last reviewed in the output.
 
@@ -25,7 +29,9 @@ Do not include date or timestamp of when last reviewed in the output.
 
 ## Structure
 
-Each component’s documentation should include the following sections (adjust if not relevant):
+Each component’s documentation should include the following sections (adjust if not relevant, but do not add titles or sections not present in this list):
+
+1. [Component Title]
 
 - Briefly explain what the component is and why it matters.
 - Use approachable language to set context.
