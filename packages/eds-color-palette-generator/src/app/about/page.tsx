@@ -19,12 +19,12 @@ export default function AboutPage() {
             Back to generator
           </Link>
           <h1 className="text-3xl font-bold">
-            About the Color Palette Generator
+            About the Colour Palette Generator
           </h1>
           <p className="mt-2 text-neutral-subtle">
-            Learn how the generator creates harmonious color scales using
-            Gaussian distribution and the{' '}
-            <abbr title="Oklab Lightness Chroma Hue">OKLCH</abbr> color space.
+            Learn how this tool creates harmonious, accessible colour scales
+            using Gaussian distribution and the{' '}
+            <abbr title="Oklab Lightness Chroma Hue">OKLCH</abbr> colour space.
           </p>
         </div>
       </header>
@@ -114,18 +114,17 @@ export default function AboutPage() {
           <h2 className="mb-4 text-2xl font-bold">Overview</h2>
           <div className="prose prose-neutral dark:prose-invert max-w-none">
             <p>
-              The <abbr title="Equinor Design System">EDS</abbr> Color Palette
-              Generator creates consistent, accessible color scales for design
-              systems. It uses a mathematical approach based on the Gaussian
-              (bell curve) distribution to ensure colors maintain visual harmony
-              across different lightness levels.
+              The <abbr title="Equinor Design System">EDS</abbr> Colour Palette
+              Generator creates consistent, accessible colour scales for design
+              systems. It uses a Gaussian (bell curve) distribution to maintain
+              visual harmony across different lightness levels.
             </p>
             <p>
-              The generator works in the{' '}
-              <abbr title="Oklab Lightness Chroma Hue">OKLCH</abbr> color space,
-              which is perceptually uniform, meaning equal numerical changes
-              result in equal perceived color differences. This makes it ideal
-              for programmatic color generation.
+              The tool works in the{' '}
+              <abbr title="Oklab Lightness Chroma Hue">OKLCH</abbr> colour space
+              — a perceptually uniform model where equal numerical changes
+              produce equal perceived differences. This makes it ideal for
+              programmatic colour generation.
             </p>
           </div>
         </section>
@@ -139,32 +138,31 @@ export default function AboutPage() {
                 1. Define lightness values
               </h3>
               <p className="mb-4 text-neutral-subtle">
-                Each step in the color scale has a predefined lightness value,
-                carefully chosen to meet contrast requirements for different use
-                cases:
+                Each colour scale step has a predefined lightness value chosen
+                to meet contrast requirements:
               </p>
               <ul className="space-y-2 text-sm list-disc list-inside">
                 <li>
-                  <strong>Background colors:</strong> High lightness in light
-                  mode (0.97 - 0.999), low in dark mode (0.15 - 0.25)
+                  <strong>Background colours:</strong> High lightness in light
+                  mode (0.97–0.999), low in dark mode (0.15–0.25)
                 </li>
                 <li>
-                  <strong>Border colors:</strong> Mid-range lightness values for
-                  subtle to strong emphasis
+                  <strong>Border colours:</strong> Mid-range values for subtle
+                  to strong emphasis
                 </li>
                 <li>
-                  <strong>Fill colors:</strong> Values optimized for interactive
-                  elements
+                  <strong>Fill colours:</strong> Values optimised for
+                  interactive elements
                 </li>
                 <li>
-                  <strong>Text colors:</strong> Values ensuring{' '}
+                  <strong>Text colours:</strong> Values ensuring{' '}
                   <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>{' '}
                   AA/AAA compliance
                 </li>
               </ul>
               <p className="mt-4 text-sm text-neutral-subtle">
-                These lightness values are configured separately for light and
-                dark modes, ensuring optimal contrast in both contexts.
+                Lightness values are configured separately for light and dark
+                modes to ensure optimal contrast in both.
               </p>
             </div>
 
@@ -173,42 +171,41 @@ export default function AboutPage() {
                 2. Apply Gaussian distribution to chroma
               </h3>
               <p className="mb-4 text-neutral-subtle">
-                While lightness is fixed, chroma (color intensity) varies using
-                a Gaussian function. This creates a natural color progression
-                where colors are most vibrant at a specific lightness level (the
+                While lightness is fixed, chroma (colour intensity) varies using
+                a Gaussian function. This creates natural colour progression —
+                colours are most vibrant at a specific lightness level (the
                 mean) and gradually become more muted as you move away from it.
               </p>
               <div className="p-4 mb-4 font-mono text-sm border rounded border-neutral-subtle">
                 gaussian(x, mean, stdDev) = exp((-25 / stdDev) × (mean - x)²)
               </div>
               <p className="text-sm text-neutral-subtle">
-                The function outputs a multiplier between 0 and 1, which is
-                applied to the base color&apos;s chroma value at each step.
+                The function outputs a multiplier (0–1) applied to the base
+                colour&apos;s chroma at each step.
               </p>
             </div>
 
             <div className="p-6 rounded-lg bg-surface">
               <h3 className="mb-3 text-xl font-semibold">
-                3. Generate color scale
+                3. Generate colour scale
               </h3>
               <p className="mb-4 text-neutral-subtle">For each step:</p>
               <ol className="space-y-2 text-sm list-decimal list-inside">
-                <li>Take the base color and convert it to OKLCH color space</li>
+                <li>Convert the base colour to OKLCH colour space</li>
                 <li>Set the lightness to the predefined value for that step</li>
                 <li>
                   Calculate the chroma multiplier using the Gaussian function
                   with the step&apos;s lightness
                 </li>
                 <li>
-                  Apply the multiplier to the base color&apos;s chroma:
+                  Apply the multiplier to the base colour&apos;s chroma:
                   new_chroma = base_chroma × multiplier
                 </li>
-                <li>Keep the hue unchanged from the base color</li>
+                <li>Keep the hue unchanged from the base colour</li>
               </ol>
               <p className="mt-4 text-sm text-neutral-subtle">
-                This approach ensures that colors maintain their hue identity
-                while adapting their intensity to suit different lightness
-                levels.
+                This ensures colours maintain their hue identity while adapting
+                intensity to suit different lightness levels.
               </p>
             </div>
           </div>
@@ -220,8 +217,8 @@ export default function AboutPage() {
           <p className="mb-6 text-neutral-subtle">
             The bell curve determines how chroma is distributed across lightness
             values. Adjust the mean and standard deviation to see how they
-            affect the curve shape and, consequently, the color intensity at
-            different lightness levels.
+            affect curve shape and colour intensity at different lightness
+            levels.
           </p>
           <BellCurveVisualization />
         </section>
@@ -232,34 +229,34 @@ export default function AboutPage() {
             Interactive chroma distribution
           </h2>
           <p className="mb-6 text-neutral-subtle">
-            Experiment with different base colors and Gaussian parameters to see
-            how they affect the final color scale. The chart shows how chroma
-            varies across the lightness spectrum.
+            Experiment with different base colours and Gaussian parameters to
+            see how they affect the final colour scale. The chart shows how
+            chroma varies across the lightness spectrum.
           </p>
           <ChromaDistributionDemo />
         </section>
 
         {/* OKLCH Color Space */}
         <section id="oklch-color-space" className="scroll-mt-8">
-          <h2 className="mb-4 text-2xl font-bold">Why OKLCH color space?</h2>
+          <h2 className="mb-4 text-2xl font-bold">Why OKLCH colour space?</h2>
           <div className="p-6 rounded-lg bg-surface">
             <p className="mb-4">
               <abbr title="Oklab Lightness Chroma Hue">OKLCH</abbr> is a
-              cylindrical representation of the Oklab color space, designed to
+              cylindrical representation of the Oklab colour space, designed to
               be perceptually uniform. It has three components:
             </p>
             <dl className="space-y-4">
               <div>
                 <dt className="font-semibold">Lightness (L)</dt>
                 <dd className="ml-4 text-sm text-neutral-subtle">
-                  Ranges from 0 (black) to 1 (white). Perceptually uniform, so
-                  0.5 is truly medium lightness.
+                  Ranges from 0 (black) to 1 (white). Perceptually uniform — 0.5
+                  is truly medium lightness.
                 </dd>
               </div>
               <div>
                 <dt className="font-semibold">Chroma (C)</dt>
                 <dd className="ml-4 text-sm text-neutral-subtle">
-                  Color intensity or saturation. 0 is grayscale, higher values
+                  Colour intensity or saturation. 0 is greyscale, higher values
                   are more vibrant. Unlike{' '}
                   <abbr title="Hue Saturation Lightness">HSL</abbr>, chroma is
                   consistent across hues.
@@ -268,15 +265,15 @@ export default function AboutPage() {
               <div>
                 <dt className="font-semibold">Hue (H)</dt>
                 <dd className="ml-4 text-sm text-neutral-subtle">
-                  The color angle, from 0 to 360 degrees. Represents the basic
-                  color quality (red, green, blue, etc.).
+                  The colour angle (0–360 degrees). Represents the basic colour
+                  quality (red, green, blue, etc.).
                 </dd>
               </div>
             </dl>
             <p className="mt-4 text-sm text-neutral-subtle">
-              By manipulating lightness and chroma independently while keeping
-              hue constant, we can create color scales that look natural and
-              maintain consistent color relationships.
+              By adjusting lightness and chroma independently while keeping hue
+              constant, we create colour scales that look natural and maintain
+              consistent relationships.
             </p>
           </div>
         </section>
@@ -289,7 +286,7 @@ export default function AboutPage() {
               <h3 className="mb-3 text-lg font-semibold">Lightness values</h3>
               <p className="mb-3 text-sm text-neutral-subtle">
                 Each step has predefined lightness values for light and dark
-                modes. These values are based on:
+                modes, based on:
               </p>
               <ul className="space-y-1 text-sm list-disc list-inside text-neutral-subtle">
                 <li>
@@ -317,7 +314,7 @@ export default function AboutPage() {
                 <div>
                   <h4 className="text-sm font-medium">Mean</h4>
                   <p className="text-sm text-neutral-subtle">
-                    The lightness value where chroma is at maximum. Typically
+                    The lightness value where chroma reaches maximum. Typically
                     set to 0.6 for light mode and 0.7 for dark mode to ensure
                     vibrant mid-tones.
                   </p>
@@ -326,9 +323,8 @@ export default function AboutPage() {
                   <h4 className="text-sm font-medium">Standard deviation</h4>
                   <p className="text-sm text-neutral-subtle">
                     Controls how quickly chroma decreases away from the mean.
-                    Lower values create sharper peaks (more dramatic chroma
-                    variation), while higher values create gentler curves (more
-                    gradual changes).
+                    Lower values create sharper peaks (dramatic variation),
+                    higher values create gentler curves (gradual changes).
                   </p>
                 </div>
               </div>
@@ -343,12 +339,11 @@ export default function AboutPage() {
               </p>
               <ul className="mt-3 space-y-1 text-sm list-disc list-inside text-neutral-subtle">
                 <li>
-                  Dark mode typically needs higher chroma in lighter colors to
+                  Dark mode typically needs higher chroma in lighter colours to
                   maintain visibility
                 </li>
                 <li>
-                  Light mode benefits from more vibrant mid-tones but muted
-                  extremes
+                  Light mode benefits from vibrant mid-tones but muted extremes
                 </li>
                 <li>
                   Different background lightness ranges require different chroma
@@ -362,24 +357,23 @@ export default function AboutPage() {
         {/* Color Step Pairings and Contrast Requirements */}
         <section id="contrast-requirements" className="scroll-mt-8">
           <h2 className="mb-4 text-2xl font-bold">
-            Color step pairings and contrast requirements
+            Colour step pairings and contrast requirements
           </h2>
           <div className="mb-6 prose prose-neutral dark:prose-invert max-w-none">
             <p>
-              Each color step in the palette is designed to work with specific
-              other steps to ensure accessibility. The configuration defines
-              contrast requirements using both{' '}
+              Each colour step is designed to work with specific other steps to
+              ensure accessibility. The configuration defines contrast
+              requirements using both{' '}
               <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>{' '}
               (Accessible Perceptual Contrast Algorithm) and{' '}
               <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1
               standards.
             </p>
             <p>
-              These requirements are directly referenced from the configuration
-              file, ensuring that the documentation stays in sync with the
-              implementation. Each pairing specifies the minimum contrast levels
-              needed for different use cases, from subtle UI components to body
-              text.
+              These requirements come directly from the configuration file,
+              keeping documentation in sync with implementation. Each pairing
+              specifies minimum contrast levels for different use cases — from
+              subtle UI components to body text.
             </p>
           </div>
 
@@ -393,8 +387,8 @@ export default function AboutPage() {
                   </abbr>{' '}
                   Lc values:
                 </strong>{' '}
-                Range from 15 (decorative elements) to 90 (preferred body text).
-                Higher values indicate stronger contrast requirements.
+                Range from 15 (decorative elements) to 90 (body text). Higher
+                values mean stronger contrast requirements.
               </li>
               <li>
                 <strong>
@@ -413,26 +407,25 @@ export default function AboutPage() {
             <h3 className="mb-2 font-semibold">Key insights</h3>
             <ul className="space-y-1 list-disc list-inside text-neutral-subtle">
               <li>
-                <strong>Background steps</strong> (Canvas, Surface) require
-                minimal contrast between each other but high contrast with text
-                elements
+                <strong>Background steps</strong> (Canvas, Surface) need minimal
+                contrast between each other but high contrast with text elements
               </li>
               <li>
                 <strong>Fill elements</strong> have progressive contrast
-                requirements based on their emphasis level (muted vs. emphasis)
+                requirements based on emphasis level (muted vs. emphasis)
               </li>
               <li>
                 <strong>Border steps</strong> maintain visual hierarchy through
-                three distinct levels (subtle, medium, strong)
+                three levels (subtle, medium, strong)
               </li>
               <li>
-                <strong>Text elements</strong> have the strictest requirements,
-                with different levels for subtle text, strong text, and text on
+                <strong>Text elements</strong> have the strictest requirements —
+                different levels for subtle text, strong text, and text on
                 emphasis backgrounds
               </li>
               <li>
                 <strong>Interactive states</strong> (default, hover, active) are
-                differentiated through both lightness and contrast requirements
+                differentiated through lightness and contrast requirements
               </li>
             </ul>
           </div>
@@ -449,11 +442,11 @@ export default function AboutPage() {
                 </span>
                 <div>
                   <p className="font-medium">
-                    Start with a well-saturated base color
+                    Start with a well-saturated base colour
                   </p>
                   <p className="text-sm text-neutral-subtle">
-                    The Gaussian function scales down from the base chroma, so
-                    starting with higher chroma gives more flexibility.
+                    The Gaussian function scales down from the base chroma.
+                    Starting with higher chroma gives more flexibility.
                   </p>
                 </div>
               </li>
@@ -464,7 +457,7 @@ export default function AboutPage() {
                 <div>
                   <p className="font-medium">Test contrast ratios regularly</p>
                   <p className="text-sm text-neutral-subtle">
-                    Enable contrast checking to ensure all color combinations
+                    Enable contrast checking to ensure all colour combinations
                     meet accessibility requirements.
                   </p>
                 </div>
@@ -520,7 +513,9 @@ export default function AboutPage() {
                   rel="noopener noreferrer"
                   className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
-                  OKLCH in CSS: why we moved from RGB and HSL
+                  OKLCH in CSS: why we moved from{' '}
+                  <abbr title="Red Green Blue">RGB</abbr> and{' '}
+                  <abbr title="Hue Saturation Lightness">HSL</abbr>
                 </a>
               </li>
               <li>
