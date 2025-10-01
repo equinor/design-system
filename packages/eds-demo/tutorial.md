@@ -1,6 +1,6 @@
 # Video Tutorials
 
-Concise walkthroughs for designers and developers. Five videos per series (~2 minutes each). Total runtime per series: ~10 minutes.
+Concise walkthroughs for designers and developers. Four videos per series (~2–2.5 minutes each). Total runtime per series: ~9 minutes.
 
 This script uses the current semantic colour system vocabulary (Canvas, Surface, Floating, Fill Muted, Fill Emphasis, Text strong, Text subtle, Text strong on emphasis, Text subtle on emphasis, Border tiers, Focus) from the foundation docs (`about.md`, `getting-started.md`). It is defined to works with both implementation strategies:
 
@@ -13,53 +13,49 @@ Angle‑bracket placeholders (e.g. `<Text-Neutral-Strong>`, `<Bg-Canvas>`, `<Bg-
 
 ## Design series
 
-### Video 1: Global Text Role (~2 min)
+### Video 1: UI Layers & Global Text (Canvas, Surface, Floating + Text) (~2–2.5 min)
 
-**Intro (0:00–0:10)**  
-Define a single semantic role for primary body text: Neutral → Text → Strong.
+**Intro (0:00–0:15)**  
+Apply background depth using canvas, surface, floating backgrounds and apply the global default text.
 
-**Figma (0:10–1:30)**
+**Figma (0:15–1:50)**
 
-- Select representative text (paragraph / table cell).
+Text role setup:
+
+- Select representative body text, table cells, and any headings sharing the primary colour.
 - Apply semantic style: Text / Neutral / Strong.
-- (Optional) Save as a shared style / variable alias.
-- Apply across headings (if appropriate), body copy, data cells.
-- Change once to update everywhere (propagation demo).
+- Bulk‑apply to all matching textual elements.
 
-**Recap (1:30–2:00)**  
-One role centralises primary textual colour. No hex duplication.
+Layer setup:
 
-### Video 2: Depth Layers (Canvas, Surface, Floating) (~2 min)
+- Root frame / page background: `<Bg-Canvas>`.
+- Primary content containers / panels: `<Bg-Surface>`.
+- Elevated overlays (tooltip, dropdown, modal shell): `<Bg-Floating>`.
+- Quickly toggle theme / appearance to demonstrate automatic adaptation (no manual recolouring).
+
+Validation:
+
+- Contrast check body text against Canvas & Surface.
+- Ensure overlays remain distinct over underlying surfaces.
+
+**Recap (1:50–2:30)**  
+One text role + three background layers establish global readability and depth.
+
+### Video 2: Chip Variants (~2 min)
 
 **Intro (0:00–0:10)**  
-Establish visual depth layers with background roles.
+Map status variants using Fill Muted, Text Subtle and border strong roles per category.
 
 **Figma (0:10–1:30)**
 
-- Root frame / page: `<Bg-Canvas>`.
-- Primary content panels / cards: `<Bg-Surface>`.
-- Elevated overlays (tooltip / dropdown / modal shell): `<Bg-Floating>`.
-- Show quick theme / appearance toggle: layers adapt without editing each object.
+- Create a neutral chip
+- Duplicate for info / success / warning / danger
+- Show state for default, hover and active
 
 **Recap (1:30–2:00)**  
-Layer semantics drive depth—switch theme once, all layers resolve correctly.
+Consistent variable structure.
 
-### Video 3: Chip Variants (~2 min)
-
-**Intro (0:00–0:10)**  
-Map status variants using Fill Muted + Text Strong roles per category.
-
-**Figma (0:10–1:30)**
-
-- Create a neutral chip: background `<Bg-Neutral-Fill-Muted-Default>` + text `<Text-Neutral-Strong>`.
-- Duplicate for success / info / warning / danger: only swap category prefix.
-- (Optional) Show hover token placeholder: `<Bg-*-Fill-Muted-Hover>`.
-- Confirm consistent padding / typography unaffected by colour changes.
-
-**Recap (1:30–2:00)**  
-Consistent structure; variant identity lives in semantic colour selection only.
-
-### Video 4: Tabs & States (~2 min)
+### Video 3: Tabs & States (~2 min)
 
 **Intro (0:00–0:10)**  
 Use semantic roles for default, hover, and selected tab.
@@ -74,7 +70,7 @@ Use semantic roles for default, hover, and selected tab.
 **Recap (1:30–2:00)**  
 Interaction is described by stateful semantic roles—no manual colour overrides.
 
-### Video 5: Button Variants & States (~2 min)
+### Video 4: Button Variants & States (~2 min)
 
 **Intro (0:00–0:10)**  
 Compose base + primary + secondary + tertiary buttons with Fill Muted / Fill Emphasis / Surface + Focus border tokens.
@@ -98,39 +94,25 @@ Variant + state logic expressed entirely through semantic roles; design remains 
 
 ## Developer series
 
-Same five concepts; emphasise implementation and substitution of placeholders.
+Same four concepts; emphasise implementation and placeholder substitution.
 
-### Video 1: Global Text Role (~2 min)
+### Video 1: UI Layers & Global Text (Canvas, Surface, Floating + Text) (~2–2.5 min)
 
-**Intro (0:00–0:10)**  
-Establish `<Text-Neutral-Strong>` as a single source.
+**Intro (0:00–0:15)**  
+Define global text + depth layers together for a minimal, high‑impact semantic foundation.
 
-**Code (0:10–1:20)**
+**Code (0:15–1:45)**
 
 ```css
-/* Replace placeholders with your real tokens */
+/* Global text role */
 body,
 p,
 td,
 th {
   color: <Text-Neutral-Strong>;
 }
-```
 
-- Dynamic: `<Text-Neutral-Strong>` points to an abstract semantic layer resolved by appearance.
-- Static: placeholder maps directly to a category-specific variable.
-
-**Recap (1:20–2:00)**  
-Central definition removes scattered overrides.
-
-### Video 2: Depth Layers (Canvas, Surface, Floating) (~2 min)
-
-**Intro (0:00–0:10)**  
-Apply Canvas / Surface / Floating container roles.
-
-**Code (0:10–1:20)**
-
-```css
+/* Depth layers */
 html {
   background: <Bg-Canvas>;
 }
@@ -142,13 +124,16 @@ main {
 }
 ```
 
-- Dynamic: switching `data-color-appearance` (or theme root) remaps all three.
-- Static: each placeholder is a fixed semantic token.
+Implementation notes:
 
-**Recap (1:20–2:00)**  
-Depth changes by semantic remap—not manual find/replace.
+- Dynamic: appearance switch remaps all four roles automatically.
+- Static: placeholders point directly to category tokens.
+- Accessibility: verify contrast for `<Text-Neutral-Strong>` on both `<Bg-Canvas>` and `<Bg-Surface>`.
 
-### Video 3: Chip Variants (~2 min)
+**Recap (1:45–2:30)**  
+Four foundational roles (one text + three backgrounds) remove duplication and simplify future theming.
+
+### Video 2: Chip Variants (~2 min)
 
 **Intro (0:00–0:10)**  
 Generate category variants by prefix substitution.
@@ -188,7 +173,7 @@ Generate category variants by prefix substitution.
 **Recap (1:20–2:00)**  
 Structural CSS stays identical; only semantic placeholders change.
 
-### Video 4: Tabs & States (~2 min)
+### Video 3: Tabs & States (~2 min)
 
 **Intro (0:00–0:10)**  
 Express default / hover / selected through semantic tokens.
@@ -219,7 +204,7 @@ Express default / hover / selected through semantic tokens.
 **Recap (1:20–2:00)**  
 No raw hex; state logic isolated to semantic roles.
 
-### Video 5: Button Variants & States (~2 min)
+### Video 4: Button Variants & States (~2 min)
 
 **Intro (0:00–0:10)**  
 Combine variant + interaction + focus semantics.
@@ -316,7 +301,7 @@ Every variant + state uses an explicit semantic placeholder; switching strategy 
 
 ## Series summary (applies to both)
 
-Concept progression: Global Text → Depth → Variants → States → Composite Component.
+Concept progression: UI Layers & Global Text → Variants → States → Composite Component.
 
 Key principles reinforced:
 
