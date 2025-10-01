@@ -6,6 +6,8 @@ import Heading from '@theme/Heading'
 
 import styles from './index.module.css'
 
+import type { JSX } from 'react'
+
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext()
   return (

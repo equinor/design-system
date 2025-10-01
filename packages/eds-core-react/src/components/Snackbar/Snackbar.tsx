@@ -106,7 +106,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
     ref,
   ) {
     const [visible, setVisible] = useState(open)
-    const timer = useRef<ReturnType<typeof setTimeout>>()
+    const timer = useRef<ReturnType<typeof setTimeout>>(null)
 
     useEffect(() => {
       setVisible(open)
@@ -135,7 +135,9 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
           <PopoverDiv
             popover="manual"
             $placement={placement}
-            ref={(el) => el?.showPopover()}
+            ref={(el) => {
+              el?.showPopover()
+            }}
           >
             <StyledSnackbar role="alert" elevation="overlay" {...props}>
               {children}

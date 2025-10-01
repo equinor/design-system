@@ -18,7 +18,6 @@ import { arrow_down, arrow_up, accessible } from '@equinor/eds-icons'
 import { data, columns, Column, Data, SortDirection } from '../../stories/data'
 import { toCellValues } from '../../stories/toCellValues'
 import { Stack } from './../../../.storybook/components'
-import page from './Table.docs.mdx'
 
 Icon.add({ arrow_down, arrow_up })
 
@@ -30,7 +29,6 @@ const meta: Meta<typeof Table> = {
   subcomponents: { Caption, Head, Body, Cell, Row, Foot },
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },
@@ -40,7 +38,7 @@ const meta: Meta<typeof Table> = {
 
 export default meta
 
-export const introduction: StoryFn<TableProps> = (args) => {
+export const Introduction: StoryFn<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
 
   return (
@@ -75,7 +73,7 @@ export const introduction: StoryFn<TableProps> = (args) => {
   )
 }
 
-introduction.decorators = [
+Introduction.decorators = [
   (Story) => {
     return (
       <Stack direction="column" align="stretch">
@@ -421,7 +419,7 @@ type Photo = {
 
 export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
-  const parentRef = useRef()
+  const parentRef = useRef<HTMLElement | null>(null)
 
   const estimateSize = useCallback(() => {
     return 48
@@ -548,7 +546,7 @@ export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
 
 export const VirtualScrolling: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
-  const parentRef = useRef()
+  const parentRef = useRef<HTMLElement | null>(null)
 
   const estimateSize = useCallback(() => {
     return 48

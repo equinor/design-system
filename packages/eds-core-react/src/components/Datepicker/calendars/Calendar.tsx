@@ -34,7 +34,7 @@ export const Calendar = forwardRef(
        */
       Footer?: (props: HeaderFooterProps) => ReactNode
     } & AriaCalendarProps<DateValue>,
-    ref: RefObject<HTMLDivElement>,
+    ref: RefObject<HTMLDivElement | null>,
   ) => {
     const [showYearPicker, setShowYearPicker] = useState(false)
     const [yearPickerPage, setYearPickerPage] = useState(0)

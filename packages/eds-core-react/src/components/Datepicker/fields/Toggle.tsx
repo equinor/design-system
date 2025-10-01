@@ -1,6 +1,6 @@
 import { Icon } from '../../Icon'
 import { close, IconData } from '@equinor/eds-icons'
-import { KeyboardEvent } from 'react'
+import { KeyboardEvent, MouseEvent } from 'react'
 import { Button } from '../../Button/Button'
 import styled from 'styled-components'
 import { AriaButtonProps } from 'react-aria'
@@ -61,7 +61,7 @@ export const Toggle = ({
         disabled={disabled}
         aria-label={valueString ? `Change date, ${valueString}` : `Change date`}
         variant={'ghost_icon'}
-        onClick={(e) => {
+        onClick={(e: MouseEvent<HTMLButtonElement>) => {
           e.preventDefault()
           e.stopPropagation()
           setOpen(!open)

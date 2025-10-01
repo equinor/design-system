@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef, useEffect, useState } from 'react'
 import {
   useCombobox,
@@ -36,7 +37,7 @@ type StyledListItemType = {
   active?: string
 }
 
-const StyledList = styled(List)`
+const StyledList = styled(List as any)`
   background-color: ${tokens.background};
   box-shadow: ${tokens.boxShadow};
   overflow-y: scroll;
@@ -51,7 +52,7 @@ const StyledList = styled(List)`
   z-index: 50;
 `
 
-const StyledListItem = styled(List.Item)<StyledListItemType>(({
+const StyledListItem = styled(List.Item as any)<StyledListItemType>(({
   theme,
   highlighted,
   active,
@@ -73,7 +74,7 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(({
   `
 })
 
-const StyledButton = styled(Button)(({
+const StyledButton = styled(Button as any)(({
   theme: {
     entities: { button },
   },
@@ -91,11 +92,11 @@ const StyledInputWrapper = styled.div`
   position: relative;
 `
 
-const PaddedStyledListItem = styled(StyledListItem)`
+const PaddedStyledListItem = styled(StyledListItem as any)`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
 `
 
-const TimeIcon = styled(Icon)`
+const TimeIcon = styled(Icon as any)`
   position: absolute;
   z-index: 1;
   width: 18px;

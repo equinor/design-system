@@ -55,7 +55,7 @@ export const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
       return (
         (isValidElement(child) &&
           child.type === Icon &&
-          cloneElement(child as ReactElement, {
+          cloneElement(child as ReactElement<BannerIconProps>, {
             color,
           })) ||
         child

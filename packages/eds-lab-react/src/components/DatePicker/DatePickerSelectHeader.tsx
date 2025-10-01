@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { arrow_back, arrow_forward } from '@equinor/eds-icons'
@@ -90,13 +91,13 @@ const DatePickerSelectHeader: React.FC<ReactDatePickerCustomHeaderProps> = ({
   )
 }
 
-const MonthSelect = styled(NativeSelect)`
+const MonthSelect = styled(NativeSelect as any)`
   select {
     max-width: 110px;
   }
 `
 
-const YearSelect = styled(NativeSelect)`
+const YearSelect = styled(NativeSelect as any)`
   select {
     max-width: 95px;
   }
@@ -120,7 +121,7 @@ const HeaderControls = styled.div`
   grid-auto-flow: column;
 `
 
-const IconButton = styled(Button)`
+const IconButton = styled(Button as any)`
   padding: 0;
   margin: 0;
   line-height: 0;
