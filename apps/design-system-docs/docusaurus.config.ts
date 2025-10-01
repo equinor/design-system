@@ -89,6 +89,7 @@ const config: Config = {
       logo: {
         alt: 'Equinor type Logo',
         src: 'img/eds-logo.svg',
+        srcDark: 'img/eds-logo-dark.svg', // Dark mode logo
       },
 
       items: [
@@ -126,11 +127,6 @@ const config: Config = {
           type: 'search',
           position: 'right',
         },
-        /* {
-          href: 'https://github.com/equinor/design-system',
-          label: 'GitHub',
-          position: 'right',
-        }, */
       ],
     },
     footer: {
