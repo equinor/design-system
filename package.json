@@ -28,6 +28,7 @@
     "docu:clear": "pnpm --filter design-system-docs run clear",
     "docu:start": "pnpm --filter ./apps/design-system-docs run start",
     "docu:build": "pnpm --filter ./apps/design-system-docs run build",
+    "docu:serve": "pnpm --filter ./apps/design-system-docs run serve",
     "test": "pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab && pnpm run test:data-grid-react",
     "test:core-react": "pnpm --filter @equinor/eds-core-react run test",
     "test:data-grid-react": "pnpm --filter @equinor/eds-data-grid-react run test",

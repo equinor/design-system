@@ -34,6 +34,11 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          exclude:
+            process.env.NODE_ENV === 'production' ||
+            process.env.NODE_ENV === 'development'
+              ? ['**/tone-guide/**']
+              : [],
           breadcrumbs: true,
           editUrl:
             'https://github.com/equinor/design-system/tree/develop/apps/design-system-docs/shared',
@@ -45,6 +50,35 @@ const config: Config = {
           ],
         },
       } satisfies Preset.Options,
+    ],
+  ],
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        // Basic indexing
+        hashed: true,
+        indexDocs: true,
+        indexPages: true,
+        highlightSearchTermsOnTargetPage: true,
+        searchResultContextMaxLength: 50,
+
+        // Language and content
+        language: ['en'],
+        removeDefaultStopWordFilter: false,
+
+        // Advanced features
+        docsRouteBasePath: '/docs',
+
+        // UI customization
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        searchBarPosition: 'right',
+
+        // Performance
+        explicitSearchResultPath: false,
+        searchContextByPaths: [],
+      },
     ],
   ],
 

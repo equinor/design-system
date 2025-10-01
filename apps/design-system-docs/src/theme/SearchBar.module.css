@@ -1,0 +1,5 @@
+.searchMainContainer input {
+  background-color: var(--eds-color-bg-neutral-fill-muted-defaul);
+  border-radius: 0.2rem;
+  border: 0.15rem solid #bebebe;
+}
