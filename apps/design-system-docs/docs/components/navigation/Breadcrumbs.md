@@ -1,33 +1,44 @@
 # Breadcrumbs
 
-Breadcrumbs show the navigational path to users, letting them move up the hierarchy of a site or app. They help people understand where they are and how to return to previous levels.
+Breadcrumbs are navigational aids that show users their current location within a hierarchical structure, empowering them to navigate confidently up the hierarchy. Designed with care to provide clear wayfinding while maintaining visual simplicity, breadcrumbs inspire users to explore our applications with a strong sense of orientation and control.
 
 ## When to Use
 
-Use breadcrumbs whenever you have a multi‑level hierarchy that benefits from an explicit “back‑to” trail—such as e‑commerce categories, nested settings pages, or documentation trees.
+Use breadcrumbs when you need to help users understand their location within a multi-level navigation structure and provide easy access to parent pages. Breadcrumbs are perfect for deep hierarchical content where users benefit from knowing their path and having quick access to higher-level sections.
 
 ## Structure
 
-- **Placement** – Always in the upper‑left corner of the page, directly below any top‑bar elements (e.g., logo or main navigation).
-- **Length** – If a path is too long for one line, choose one of three options:
-  - **Auto‑collapse** – Show only the first and last items; use `…` to indicate omitted middle levels. Clicking the ellipses expands the full list.
-  - **Expanded breadcrumbs** – Wrap the trail onto two or more lines while keeping all items visible.
-  - **Truncation** – Shorten long labels to fit the available width, ending with an ellipsis (`…`). A tooltip appears on hover (or long‑press) to reveal the full label.
+The breadcrumbs consist of:
+
+- **Clickable links** that connect to actual pages, providing functional navigation
+- **Current page indicator** that shows the user's present location
+- **Visual separators** that create clear hierarchy and flow
+- **Responsive behavior** that adapts gracefully to different screen sizes and content lengths
+
+Each element works together to create a clear navigational path that guides users through our content hierarchy.
 
 ## Guidelines
 
-- Every breadcrumb link must be clickable and lead to a real page.
-- Keep the first and current/last items visible in auto‑collapsed mode.
-- Use `…` consistently for collapsed or truncated text.
-- When expanded, allow keyboard navigation: tab through each breadcrumb, then press **Enter** or **Space** to activate it.
+- All links in breadcrumbs must be clickable and connect to actual pages for functional navigation
+- Always place breadcrumbs in the uppermost left corner of the page, positioned below the main navigation
+- When breadcrumbs become too long for the available space, choose from three thoughtful solutions:
 
-## Accessibility
+### Auto-collapse
 
-- Provide clear focus states so keyboard users can see which item is active.
-- Include tooltips on hover/long‑press for truncated labels so screen reader and sighted users get the full text.
+Breadcrumbs can auto-collapse using ellipses (...) to indicate hidden middle pages. The first and current pages remain visible, and clicking the ellipses expands the full breadcrumb trail for complete context.
+
+### Expanded breadcrumbs
+
+Allow breadcrumbs to wrap naturally to two or more lines when space permits, maintaining full visibility of the navigation path.
+
+### Truncation
+
+Long individual labels can be truncated based on pixel width, always ending with ellipses to indicate additional content. Provide tooltips on hover or long press to reveal the complete label text.
 
 ## Implementation in Figma
 
-1. Open the **Assets Panel** and search for “breadcrumbs.”
-2. Drag the component onto your frame.
-3. In the **Design Panel**, choose the desired variant (auto‑collapsed, expanded, or truncated).
+### Instructions
+
+1. In Figma go to the **Assets Panel** and search for **breadcrumbs**
+2. Drag and drop the component in your frame
+3. Choose the variant from the **Design Panel**

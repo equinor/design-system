@@ -1,27 +1,33 @@
 # Side sheet
 
-A side sheet is a toggleable area anchored to the edge of the viewport that holds supplementary content.
+A side sheet is a thoughtfully designed toggleable area that anchors gracefully to the edge of the viewport, providing a dedicated space for supplementary content. Designed with care to enhance the user experience without overwhelming the primary interface, side sheets inspire efficient workflows while maintaining clear visual hierarchy and purposeful content organization.
 
 ## When to Use
 
-- Display content that is supplementary to the primary content.
-- Present a list of actions, filters, supplemental content, and functionality.
-- Break content into tabs when it helps people scan and focus.
+Use a side sheet when you want to provide easy access to supplementary content without disrupting the primary user experience. Side sheets are perfect for presenting contextual actions, filters, additional functionality, or organized content tabs that help users focus on what matters most while keeping supporting information readily accessible.
 
 ## Structure
 
-- Anchored to the edge of the viewport and aligned to the left of the viewport's right edge.
-- Full height, and can start under the if it is visible.
-- Comes in multiple sizes.
+The side sheet consists of carefully considered elements that work together harmoniously:
+
+- **Anchored positioning** that elegantly attaches to the viewport edge, aligned to the left of the right edge for optimal accessibility
+- **Full-height layout** that maximizes available space while respecting existing interface elements
+- **Flexible sizing options** with multiple sizes to accommodate different content needs
+- **Adaptive placement** that can start under existing navigation elements when present
+
+Each element is designed to create a seamless extension of your interface while maintaining clear boundaries and user orientation.
 
 ## Guidelines
 
-- Always provide a clear way to open and close the side sheet.
-- Elevate over content using `Elevation/Overlay`, or push primary content to share the same elevation.
+- Always provide clear and intuitive ways to open and close the side sheet, ensuring users feel confident in their ability to control the interface
+- Choose between elevation strategies based on your content needs:
+  - Use `Elevation/Overlay` to elevate the side sheet over primary content for temporary focus
+  - Push primary content to share the same elevation for more integrated, persistent workflows
+- Consider the content hierarchy and user flow when deciding which approach best serves your users' goals
 
 ## Accessibility
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section.
+Side sheets are designed with accessibility as a core principle to ensure all users can navigate and interact with supplementary content effectively. Implement proper focus management, keyboard navigation support, and clear screen reader announcements when the side sheet opens or closes.
 
 ## Implementation in Figma
 
