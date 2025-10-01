@@ -49,9 +49,8 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
             <Typography
               as="h1"
-              size="4xl"
+              size="5xl"
               baselineAligned={false}
-              weight="lighter"
               className={styles.heading}
             >
               People

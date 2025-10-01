@@ -1,7 +1,4 @@
 /* EDS 2.0 Typography System - Full scale */
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-
 /* Define CSS custom property for font-size that can be inherited */
 @property --font-size {
   inherits: true;
@@ -202,7 +199,7 @@
   padding: 0;
 
   /* Apply typography properties */
-  font-family: Inter, sans-serif;
+  font-family: inherit;
   font-size: var(--_font-size);
   line-height: var(--_line-height);
 

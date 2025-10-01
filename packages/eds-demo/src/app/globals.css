@@ -22,8 +22,14 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: Equinor, sans-serif;
+h6,
+h1.type,
+h2.type,
+h3.type,
+h4.type,
+h5.type,
+h6.type {
+  font-family: Equinor, sans-serif !important;
 }
 
 button,

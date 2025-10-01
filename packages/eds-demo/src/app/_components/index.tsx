@@ -121,7 +121,7 @@ export function Tab({
       className={`h-11 px-4 py-2 bg-opacity-0 justify-center items-center flex ${className}`}
       {...rest}
     >
-      <Typography as="span" size="md" baselineAligned={false} weight="normal">
+      <Typography as="span" size="lg" baselineAligned={false} weight="normal">
         {children}
       </Typography>
     </div>
