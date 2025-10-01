@@ -37,7 +37,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           buttonClass={styles["button--ghost-icon"]}
         />
 
-        <div className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">
+        <main className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">
           <TabBar
             className="justify-start items-start flex"
             tabs={tabs}
@@ -45,11 +45,11 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             currentTabClass={styles["tab--current"]}
           />
 
-          <div className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
-            <div className={`text-2xl leading-7 heading ${styles.heading}`}>
+          <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
+            <h1 className={`text-2xl leading-7 heading ${styles.heading}`}>
               People
-            </div>
-          </div>
+            </h1>
+          </header>
 
           <DataTable
             className={`self-stretch justify-start items-start gap-0.5 inline-flex ${styles["table"]}`}
@@ -98,7 +98,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
               Cancel
             </SecondaryButton>
           </ButtonGroup>
-        </div>
+        </main>
       </div>
     </div>
   );

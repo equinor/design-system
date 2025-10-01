@@ -7,12 +7,11 @@ type Props = {
 
 export const SearchInput = ({ className, iconClass, ...rest }: Props) => {
   return (
-    <div
-      className={`max-w-[250px] w-[250px] h-[37px] px-3 py-2 justify-start items-center gap-3 flex ${className}`}
-      {...rest}
-    >
-      <div className="relative w-6 h-6">
+    <div className="relative inline-block">
+      <span className="absolute top-1/2 left-2 transform -translate-y-1/2 w-6 h-6">
         <svg
+          aria-hidden="true"
+          focusable="false"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="25"
@@ -27,8 +26,14 @@ export const SearchInput = ({ className, iconClass, ...rest }: Props) => {
             fill="currentColor"
           />
         </svg>
-      </div>
-      <div className="text-base font-normal leading-tight">Search</div>
+      </span>
+      <input
+        type="search"
+        placeholder="Search"
+        aria-label="Search input"
+        className={`max-w-[250px] w-[250px] h-[37px] px-3 py-2 pl-10 text-base font-normal leading-tight ${className}`}
+        {...rest}
+      />
     </div>
   );
 };
