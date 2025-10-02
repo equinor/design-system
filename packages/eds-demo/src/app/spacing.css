@@ -1,0 +1,248 @@
+/* ============================================
+   EDS 2.0 SPACING SYSTEM
+   Based on CodePen: https://codepen.io/vnys/pen/emNmPwr
+   ============================================ */
+
+/* --- CSS Custom Properties for Spacing --- */
+@property --padding-inline {
+  inherits: false;
+  initial-value: 16px;
+  syntax: "<length>";
+}
+
+@property --padding-stack {
+  inherits: false;
+  initial-value: 12px;
+  syntax: "<length>";
+}
+
+@property --captured-size {
+  inherits: false;
+  initial-value: 0;
+  syntax: "<length>";
+}
+
+@property --font-size {
+  inherits: true;
+  initial-value: 16px;
+  syntax: "<length>";
+}
+
+/* --- Font Size Tokens ---
+:root {
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+
+  /* Baseline grid
+  --baseline-grid: 4px;
+}
+*/
+
+/* --- Base Spacing Component --- */
+.spacing-component {
+  /* Capture font size for calculations */
+  --_component-font-size: var(--font-size);
+  --captured-size: var(--_component-font-size);
+
+  /* Use CSS custom properties for padding */
+  --_padding-inline: var(--padding-inline);
+  --_padding-stack: var(--padding-stack);
+
+  padding: var(--padding-stack) var(--padding-inline);
+  font-size: var(--_component-font-size);
+
+  /* Golden ratio for gap (0.618) */
+  gap: round(0.618em, 0.5px);
+}
+
+/* --- Font Size Variants --- */
+[data-font-size="xs"] {
+  --font-size: var(--font-size-xs);
+}
+
+[data-font-size="sm"] {
+  --font-size: var(--font-size-sm);
+}
+
+[data-font-size="md"] {
+  --font-size: var(--font-size-md);
+}
+
+[data-font-size="lg"] {
+  --font-size: var(--font-size-lg);
+}
+
+[data-font-size="xl"] {
+  --font-size: var(--font-size-xl);
+}
+
+/* --- Padding Size Variants (XS) --- */
+[data-padding="xs"] {
+  --padding-inline: 8px;
+}
+
+[data-padding="xs"][data-ratio="squished"] {
+  --padding-stack: 6px;
+  /* Total height: ~6px + 6px + line-height = multiple of 4px */
+}
+
+[data-padding="xs"][data-ratio="squared"] {
+  --padding-stack: 8px;
+}
+
+[data-padding="xs"][data-ratio="stretched"] {
+  --padding-stack: 12px;
+}
+
+/* --- Padding Size Variants (SM) --- */
+[data-padding="sm"] {
+  --padding-inline: 12px;
+}
+
+[data-padding="sm"][data-ratio="squished"] {
+  --padding-stack: 8px;
+}
+
+[data-padding="sm"][data-ratio="squared"] {
+  --padding-stack: 12px;
+}
+
+[data-padding="sm"][data-ratio="stretched"] {
+  --padding-stack: 16px;
+}
+
+/* --- Padding Size Variants (MD) --- */
+[data-padding="md"] {
+  --padding-inline: 16px;
+}
+
+[data-padding="md"][data-ratio="squished"] {
+  --padding-stack: 12px;
+}
+
+[data-padding="md"][data-ratio="squared"] {
+  --padding-stack: 16px;
+}
+
+[data-padding="md"][data-ratio="stretched"] {
+  --padding-stack: 20px;
+}
+
+/* --- Padding Size Variants (LG) --- */
+[data-padding="lg"] {
+  --padding-inline: 20px;
+}
+
+[data-padding="lg"][data-ratio="squished"] {
+  --padding-stack: 16px;
+}
+
+[data-padding="lg"][data-ratio="squared"] {
+  --padding-stack: 20px;
+}
+
+[data-padding="lg"][data-ratio="stretched"] {
+  --padding-stack: 24px;
+}
+
+/* --- Baseline Grid Alignment --- */
+/* Text box trimming for precise alignment */
+[data-text-trim] {
+  /* Trim leading space above text */
+  &::before {
+    content: "";
+    display: block;
+    height: 0;
+    margin-block-start: calc(-0.3em);
+  }
+
+  /* Trim trailing space below text */
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    margin-block-end: calc(-0.3em);
+  }
+}
+
+/* Helper for off-grid elements that don't need alignment */
+[data-off-grid] {
+  /* Skip baseline grid alignment */
+  line-height: 1;
+}
+
+/* --- Debug Mode --- */
+[data-debug] {
+  /* Visualize padding inline (left/right) */
+  background-image:
+    repeating-linear-gradient(to left, transparent var(--_padding-inline), rgba(255, 0, 85, 0.3) var(--_padding-inline), rgba(255, 0, 85, 0.3) calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
+    repeating-linear-gradient(to right, transparent var(--_padding-inline), rgba(255, 0, 85, 0.3) var(--_padding-inline), rgba(255, 0, 85, 0.3) calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
+    /* Visualize padding stack (top/bottom) */
+      repeating-linear-gradient(to top, transparent var(--_padding-stack), rgba(255, 0, 85, 0.3) var(--_padding-stack), rgba(255, 0, 85, 0.3) calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
+    repeating-linear-gradient(to bottom, transparent var(--_padding-stack), rgba(255, 0, 85, 0.3) var(--_padding-stack), rgba(255, 0, 85, 0.3) calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
+    /* Visualize 4px baseline grid */ repeating-linear-gradient(to bottom, rgba(255, 0, 85, 0.1) 0, rgba(255, 0, 85, 0.1) 4px, transparent 4px, transparent 8px);
+}
+
+/* --- Icon Sizing (proportional to font size) --- */
+.icon {
+  /* Calculate icon size based on captured font size */
+  width: calc(24px * tan(atan2(var(--captured-size), 1px)) / 16);
+  height: calc(24px * tan(atan2(var(--captured-size), 1px)) / 16);
+
+  /* Optical alignment adjustments */
+  margin-block: -0.5em;
+  margin-inline: -0.2em;
+
+  fill: currentColor;
+}
+
+/* --- Layout Utilities --- */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, 16px);
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  gap: var(--inline-gap, 16px);
+  align-items: center;
+}
+
+/* Stack gap variants */
+.stack[data-gap="xs"] {
+  --stack-gap: 4px;
+}
+.stack[data-gap="sm"] {
+  --stack-gap: 8px;
+}
+.stack[data-gap="md"] {
+  --stack-gap: 16px;
+}
+.stack[data-gap="lg"] {
+  --stack-gap: 24px;
+}
+.stack[data-gap="xl"] {
+  --stack-gap: 32px;
+}
+
+/* Inline gap variants */
+.inline[data-gap="xs"] {
+  --inline-gap: 4px;
+}
+.inline[data-gap="sm"] {
+  --inline-gap: 8px;
+}
+.inline[data-gap="md"] {
+  --inline-gap: 16px;
+}
+.inline[data-gap="lg"] {
+  --inline-gap: 24px;
+}
+.inline[data-gap="xl"] {
+  --inline-gap: 32px;
+}

@@ -1,0 +1,144 @@
+/* ============================================
+   CSS GRID PATTERNS
+   ============================================ */
+
+/* --- Popover Grid Pattern --- */
+/* To position popovers/tooltips on a 3x3 grid */
+.popover-grid {
+  display: grid;
+  grid-template-columns: [start] auto [content] 1fr [end] auto;
+  grid-template-rows: [start] auto [content] 1fr [end] auto;
+  gap: var(--popover-gap, 0);
+  place-items: start;
+}
+
+.popover-grid > [data-position="top-left"] {
+  grid-column: start / content;
+  grid-row: start / content;
+}
+
+.popover-grid > [data-position="top-center"] {
+  grid-column: content;
+  grid-row: start / content;
+  justify-self: center;
+}
+
+.popover-grid > [data-position="top-right"] {
+  grid-column: content / end;
+  grid-row: start / content;
+  justify-self: end;
+}
+
+.popover-grid > [data-position="center-left"] {
+  grid-column: start / content;
+  grid-row: content;
+  align-self: center;
+}
+
+.popover-grid > [data-position="center"] {
+  grid-column: content;
+  grid-row: content;
+  justify-self: center;
+  align-self: center;
+}
+
+.popover-grid > [data-position="center-right"] {
+  grid-column: content / end;
+  grid-row: content;
+  justify-self: end;
+  align-self: center;
+}
+
+.popover-grid > [data-position="bottom-left"] {
+  grid-column: start / content;
+  grid-row: content / end;
+  align-self: end;
+}
+
+.popover-grid > [data-position="bottom-center"] {
+  grid-column: content;
+  grid-row: content / end;
+  justify-self: center;
+  align-self: end;
+}
+
+.popover-grid > [data-position="bottom-right"] {
+  grid-column: content / end;
+  grid-row: content / end;
+  justify-self: end;
+  align-self: end;
+}
+
+/* --- Sidebar Layout Pattern --- */
+.sidebar-layout {
+  display: grid;
+  grid-template-columns:
+    [sidebar-start] var(--sidebar-width, 280px)
+    [sidebar-end main-start] 1fr
+    [main-end];
+  gap: var(--layout-gap, 0);
+  min-height: 100vh;
+}
+
+.sidebar-layout[data-collapsed] {
+  --sidebar-width: var(--sidebar-collapsed-width, 64px);
+}
+
+@media (max-width: 768px) {
+  .sidebar-layout {
+    grid-template-columns: [main-start] 1fr [main-end];
+  }
+
+  .sidebar-layout > [data-sidebar] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width, 280px);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+  }
+
+  .sidebar-layout[data-sidebar-open] > [data-sidebar] {
+    transform: translateX(0);
+  }
+}
+
+/* --- Holy Grail Layout --- */
+/* Center content with max-width and full-width rows */
+.holy-grail {
+  display: grid;
+  grid-template-columns:
+    [full-start]
+    minmax(var(--spacing-md), 1fr)
+    [main-start]
+    minmax(0, var(--max-width, 1200px))
+    [main-end]
+    minmax(var(--spacing-md), 1fr)
+    [full-end];
+  grid-template-rows:
+    [header-start] auto
+    [header-end content-start] 1fr
+    [content-end footer-start] auto
+    [footer-end];
+}
+
+.holy-grail > header {
+  grid-column: full;
+  grid-row: header;
+}
+
+.holy-grail > main {
+  grid-column: main;
+  grid-row: content;
+}
+
+.holy-grail > footer {
+  grid-column: full;
+  grid-row: footer;
+}
+
+.holy-grail > [data-full-width] {
+  grid-column: full;
+}
