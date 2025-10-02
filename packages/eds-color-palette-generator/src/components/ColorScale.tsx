@@ -1,7 +1,7 @@
 'use client'
 import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
-import { contrast } from '@/utils/color'
+import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { Trash } from 'lucide-react'
 import Color from 'colorjs.io'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
@@ -127,11 +127,44 @@ function ColorScaleBase({
       }) {
         const colorInputRef = useRef<HTMLInputElement | null>(null)
         const [localHex, setLocalHex] = useState(baseHex || '#000000')
+        const [localColorInput, setLocalColorInput] = useState(
+          baseHex || '#000000',
+        )
+        const [isValidColor, setIsValidColor] = useState(true)
         const hexDebounceRef = useRef<number | null>(null)
 
         useEffect(() => {
           setLocalHex(baseHex || '#000000')
+          setLocalColorInput(baseHex || '#000000')
+          setIsValidColor(true)
         }, [baseHex])
+
+        const handleColorInputChange = (value: string) => {
+          setLocalColorInput(value)
+          const isValid = isValidColorFormat(value)
+          setIsValidColor(isValid)
+
+          if (isValid) {
+            const hexValue = parseColorToHex(value)
+            if (hexValue) {
+              setLocalHex(hexValue)
+              if (hexDebounceRef.current) {
+                window.clearTimeout(hexDebounceRef.current)
+              }
+              hexDebounceRef.current = window.setTimeout(() => {
+                onChangeHex?.(hexValue)
+              }, 250)
+            }
+          }
+        }
+
+        const handleColorInputBlur = () => {
+          if (!isValidColor) {
+            // Reset to last valid hex on blur if invalid
+            setLocalColorInput(localHex)
+            setIsValidColor(true)
+          }
+        }
 
         return (
           <div className="flex items-center gap-2 mb-4 print:mb-0">
@@ -145,6 +178,31 @@ function ColorScaleBase({
               aria-label="Color name"
               data-testid={testId ? `${testId}-input-name` : undefined}
             />
+            <div className="flex flex-col gap-1">
+              <input
+                type="text"
+                value={localColorInput}
+                onChange={(e) => handleColorInputChange(e.target.value)}
+                onBlur={handleColorInputBlur}
+                placeholder="HEX or OKLCH"
+                className={`px-3 py-1.5 text-sm rounded-md ${
+                  !isValidColor
+                    ? 'border-2 border-danger-fill-emphasis-default'
+                    : 'border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong'
+                } bg-input`}
+                aria-label={`Base color for ${name ?? 'color'}`}
+                aria-invalid={!isValidColor}
+                data-testid={`color-input-${name?.replace(/\s+/g, '-').toLowerCase() || 'unnamed'}`}
+              />
+              {!isValidColor && (
+                <span
+                  className="text-xs text-danger-subtle"
+                  data-testid={`color-format-error-${name?.replace(/\s+/g, '-').toLowerCase() || 'unnamed'}`}
+                >
+                  Colour format is not valid
+                </span>
+              )}
+            </div>
             <input
               ref={colorInputRef}
               type="text"
@@ -152,6 +210,8 @@ function ColorScaleBase({
               onChange={(e) => {
                 const next = e.target.value
                 setLocalHex(next)
+                setLocalColorInput(next)
+                setIsValidColor(true)
                 if (hexDebounceRef.current) {
                   window.clearTimeout(hexDebounceRef.current)
                 }
