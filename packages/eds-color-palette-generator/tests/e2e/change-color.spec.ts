@@ -139,3 +139,57 @@ test('should accept OKLCH with percentage lightness', async ({ page }) => {
   // Verify no error
   await expect(page.getByTestId('color-scale-0-format-error')).not.toBeVisible()
 })
+
+test('should accept RGB color format', async ({ page }) => {
+  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
+
+  const colorInput = page.getByTestId('color-scale-0-input-hex')
+
+  // Fill in RGB format
+  await colorInput.click()
+  await colorInput.fill('rgb(255, 0, 0)')
+
+  // Wait for processing
+  await page.waitForTimeout(300)
+
+  // Verify no error
+  await expect(
+    page.getByTestId('color-scale-0-format-error'),
+  ).not.toBeVisible()
+})
+
+test('should accept HSL color format', async ({ page }) => {
+  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
+
+  const colorInput = page.getByTestId('color-scale-0-input-hex')
+
+  // Fill in HSL format
+  await colorInput.click()
+  await colorInput.fill('hsl(0, 100%, 50%)')
+
+  // Wait for processing
+  await page.waitForTimeout(300)
+
+  // Verify no error
+  await expect(
+    page.getByTestId('color-scale-0-format-error'),
+  ).not.toBeVisible()
+})
+
+test('should accept named colors', async ({ page }) => {
+  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
+
+  const colorInput = page.getByTestId('color-scale-0-input-hex')
+
+  // Fill in named color
+  await colorInput.click()
+  await colorInput.fill('red')
+
+  // Wait for processing
+  await page.waitForTimeout(300)
+
+  // Verify no error
+  await expect(
+    page.getByTestId('color-scale-0-format-error'),
+  ).not.toBeVisible()
+})

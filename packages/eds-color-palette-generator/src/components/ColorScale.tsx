@@ -131,13 +131,23 @@ function ColorScaleBase({
           baseHex || '#000000',
         )
         const [isValidColor, setIsValidColor] = useState(true)
-        const hexDebounceRef = useRef<number | null>(null)
+        const debounceRef = useRef<number | null>(null)
 
         useEffect(() => {
           setLocalHex(baseHex || '#000000')
           setLocalColorInput(baseHex || '#000000')
           setIsValidColor(true)
         }, [baseHex])
+
+        // Reusable debounced color change handler
+        const debouncedColorChange = (value: string) => {
+          if (debounceRef.current) {
+            window.clearTimeout(debounceRef.current)
+          }
+          debounceRef.current = window.setTimeout(() => {
+            onChangeHex?.(value)
+          }, 250)
+        }
 
         const handleColorInputChange = (value: string) => {
           setLocalColorInput(value)
@@ -149,13 +159,8 @@ function ColorScaleBase({
             const hexValue = parseColorToHex(value)
             if (hexValue) {
               setLocalHex(hexValue)
-              if (hexDebounceRef.current) {
-                window.clearTimeout(hexDebounceRef.current)
-              }
-              hexDebounceRef.current = window.setTimeout(() => {
-                // Pass the original value to maintain OKLCH format
-                onChangeHex?.(value.trim())
-              }, 250)
+              // Pass the original value to maintain format (OKLCH, RGB, HSL, etc.)
+              debouncedColorChange(value.trim())
             }
           }
         }
@@ -186,7 +191,7 @@ function ColorScaleBase({
                 value={localColorInput}
                 onChange={(e) => handleColorInputChange(e.target.value)}
                 onBlur={handleColorInputBlur}
-                placeholder="HEX or OKLCH"
+                placeholder="Any color format"
                 className={`px-3 py-1.5 text-sm rounded-md ${
                   !isValidColor
                     ? 'border-2 border-danger-fill-emphasis-default'
@@ -214,12 +219,7 @@ function ColorScaleBase({
                 setLocalHex(next)
                 setLocalColorInput(next)
                 setIsValidColor(true)
-                if (hexDebounceRef.current) {
-                  window.clearTimeout(hexDebounceRef.current)
-                }
-                hexDebounceRef.current = window.setTimeout(() => {
-                  onChangeHex?.(next)
-                }, 250)
+                debouncedColorChange(next)
               }}
               className="sr-only"
               aria-label={`Pick base color for ${name ?? 'color'}`}

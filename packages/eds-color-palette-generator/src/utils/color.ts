@@ -3,7 +3,7 @@ import { ColorFormat } from '@/types'
 import { Algorithms } from 'colorjs.io/fn'
 
 /**
- * Validates if a string is a valid color format (HEX or OKLCH)
+ * Validates if a string is a valid color format supported by colorjs.io
  * @param input - Color string to validate
  * @returns true if valid, false otherwise
  */
@@ -14,20 +14,7 @@ export function isValidColorFormat(input: string): boolean {
 
   const trimmedInput = input.trim()
 
-  // Check for HEX format: #RGB, #RRGGBB, #RRGGBBAA
-  const hexRegex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/
-  if (hexRegex.test(trimmedInput)) {
-    return true
-  }
-
-  // Check for OKLCH format: oklch(L C H) or oklch(L C H / A)
-  const oklchRegex =
-    /^oklch\(\s*([0-9]*\.?[0-9]+%?)\s+([0-9]*\.?[0-9]+)\s+([0-9]*\.?[0-9]+)(?:\s*\/\s*([0-9]*\.?[0-9]+%?))?\s*\)$/i
-  if (oklchRegex.test(trimmedInput)) {
-    return true
-  }
-
-  // Try parsing with colorjs.io as a final check
+  // Use colorjs.io to validate any supported color format
   try {
     new Color(trimmedInput)
     return true

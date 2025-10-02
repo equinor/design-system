@@ -411,7 +411,29 @@ describe('Color Validation and Parsing', () => {
       expect(isValidColorFormat('oklch()')).toBe(false)
       expect(isValidColorFormat('oklch(invalid)')).toBe(false)
       expect(isValidColorFormat('')).toBe(false)
-      expect(isValidColorFormat('rgb(255, 0, 0)')).toBe(true) // RGB is valid via colorjs.io
+    })
+
+    test('should validate RGB format', () => {
+      expect(isValidColorFormat('rgb(255, 0, 0)')).toBe(true)
+      expect(isValidColorFormat('rgb(255 0 0)')).toBe(true)
+      expect(isValidColorFormat('rgba(255, 0, 0, 0.5)')).toBe(true)
+    })
+
+    test('should validate HSL format', () => {
+      expect(isValidColorFormat('hsl(0, 100%, 50%)')).toBe(true)
+      expect(isValidColorFormat('hsl(180 50% 50%)')).toBe(true)
+      expect(isValidColorFormat('hsla(0, 100%, 50%, 0.8)')).toBe(true)
+    })
+
+    test('should validate LAB format', () => {
+      expect(isValidColorFormat('lab(50% 40 50)')).toBe(true)
+      expect(isValidColorFormat('lab(80 -50 30)')).toBe(true)
+    })
+
+    test('should validate named colors', () => {
+      expect(isValidColorFormat('red')).toBe(true)
+      expect(isValidColorFormat('blue')).toBe(true)
+      expect(isValidColorFormat('transparent')).toBe(true)
     })
 
     test('should handle whitespace', () => {
@@ -471,6 +493,26 @@ describe('Color Validation and Parsing', () => {
     test('should handle null and undefined', () => {
       expect(parseColorToHex(null as unknown as string)).toBe(null)
       expect(parseColorToHex(undefined as unknown as string)).toBe(null)
+    })
+
+    test('should convert RGB to HEX', () => {
+      const result = parseColorToHex('rgb(255, 0, 0)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert HSL to HEX', () => {
+      const result = parseColorToHex('hsl(0, 100%, 50%)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert LAB to HEX', () => {
+      const result = parseColorToHex('lab(50% 40 50)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert named colors to HEX', () => {
+      const result = parseColorToHex('red')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
     })
   })
 })
