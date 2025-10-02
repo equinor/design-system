@@ -2,7 +2,7 @@
 import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
 import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
-import { Trash } from 'lucide-react'
+import { Trash, Pipette } from 'lucide-react'
 import Color from 'colorjs.io'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 
@@ -145,6 +145,7 @@ function ColorScaleBase({
           setIsValidColor(isValid)
 
           if (isValid) {
+            // Convert to HEX for the color picker, but pass original format to parent
             const hexValue = parseColorToHex(value)
             if (hexValue) {
               setLocalHex(hexValue)
@@ -152,7 +153,8 @@ function ColorScaleBase({
                 window.clearTimeout(hexDebounceRef.current)
               }
               hexDebounceRef.current = window.setTimeout(() => {
-                onChangeHex?.(hexValue)
+                // Pass the original value to maintain OKLCH format
+                onChangeHex?.(value.trim())
               }, 250)
             }
           }
@@ -160,8 +162,8 @@ function ColorScaleBase({
 
         const handleColorInputBlur = () => {
           if (!isValidColor) {
-            // Reset to last valid hex on blur if invalid
-            setLocalColorInput(localHex)
+            // Reset to last valid value on blur if invalid
+            setLocalColorInput(baseHex || '#000000')
             setIsValidColor(true)
           }
         }
@@ -226,6 +228,15 @@ function ColorScaleBase({
               title="Enter hex color (e.g., #FF0000)"
               data-testid={testId ? `${testId}-input-hex` : undefined}
             />
+            <button
+              type="button"
+              onClick={() => colorInputRef.current?.click()}
+              className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover print-hide"
+              title="Pick color"
+              aria-label="Pick color"
+            >
+              <Pipette className="w-4 h-4" />
+            </button>
             <button
               type="button"
               onClick={() => onRemove?.()}
