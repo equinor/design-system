@@ -7,8 +7,8 @@ test('should change color name and hex', async ({ page }) => {
   // Use stable test IDs that don't change when name changes
   await page.getByTestId('color-scale-0-input-name').fill('Brand')
 
-  await page.getByTestId('color-scale-0-input-hex').click()
-  await page.getByTestId('color-scale-0-input-hex').fill('#ee7e17')
+  await page.getByTestId('color-scale-0-input-color').click()
+  await page.getByTestId('color-scale-0-input-color').fill('#ee7e17')
 
   // Test the 11th color step (index 10) using stable test ID
   await expect(page.getByTestId('color-scale-0-step-10')).toMatchAriaSnapshot(
@@ -20,7 +20,7 @@ test('should accept OKLCH color format', async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
 
   // Get the first color input field using stable test ID
-  const colorInput = page.getByTestId('color-scale-0-input-hex')
+  const colorInput = page.getByTestId('color-scale-0-input-color')
 
   // Fill in OKLCH format
   await colorInput.click()
@@ -39,7 +39,7 @@ test('should accept OKLCH color format', async ({ page }) => {
 test('should accept HEX color format', async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
 
-  const colorInput = page.getByTestId('color-scale-0-input-hex')
+  const colorInput = page.getByTestId('color-scale-0-input-color')
 
   // Fill in HEX format
   await colorInput.click()
@@ -58,7 +58,7 @@ test('should accept HEX color format', async ({ page }) => {
 test('should show error for invalid color format', async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
 
-  const colorInput = page.getByTestId('color-scale-0-input-hex')
+  const colorInput = page.getByTestId('color-scale-0-input-color')
 
   // Fill in invalid format
   await colorInput.click()
@@ -80,7 +80,7 @@ test('should show error for invalid color format', async ({ page }) => {
 test('should reset to valid color on blur when invalid', async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
 
-  const colorInput = page.getByTestId('color-scale-0-input-hex')
+  const colorInput = page.getByTestId('color-scale-0-input-color')
 
   // Get the original valid value
   const originalValue = await colorInput.inputValue()
@@ -110,7 +110,10 @@ test('should reset to valid color on blur when invalid', async ({ page }) => {
 
 const colorFormatTests = [
   { name: 'should accept short HEX format', value: '#f00' },
-  { name: 'should accept OKLCH with percentage lightness', value: 'oklch(50% 0.2 180)' },
+  {
+    name: 'should accept OKLCH with percentage lightness',
+    value: 'oklch(50% 0.2 180)',
+  },
   { name: 'should accept RGB color format', value: 'rgb(255, 0, 0)' },
   { name: 'should accept HSL color format', value: 'hsl(0, 100%, 50%)' },
   { name: 'should accept named colors', value: 'red' },
@@ -119,10 +122,12 @@ const colorFormatTests = [
 for (const { name, value } of colorFormatTests) {
   test(name, async ({ page }) => {
     await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
-    const colorInput = page.getByTestId('color-scale-0-input-hex')
+    const colorInput = page.getByTestId('color-scale-0-input-color')
     await colorInput.click()
     await colorInput.fill(value)
     await page.waitForTimeout(300)
-    await expect(page.getByTestId('color-scale-0-format-error')).not.toBeVisible()
+    await expect(
+      page.getByTestId('color-scale-0-format-error'),
+    ).not.toBeVisible()
   })
 }

@@ -16,8 +16,7 @@ export function colorsEqual(
 ): boolean {
   if (a.length !== b.length) return false
   for (let i = 0; i < a.length; i++) {
-    if (a[i].name !== b[i].name || a[i].hex !== b[i].hex) return false
+    if (a[i].name !== b[i].name || a[i].value !== b[i].value) return false
   }
   return true
 }
-

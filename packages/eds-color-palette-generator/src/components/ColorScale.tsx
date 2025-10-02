@@ -11,11 +11,11 @@ type ColorScaleProps = {
   showContrast?: boolean
   contrastMethod?: 'WCAG21' | 'APCA'
   colorName?: string
-  baseHex?: string
+  baseColor?: string
   onRename?: (newName: string) => void
-  onChangeHex?: (newHex: string) => void
+  onChangeValue?: (newValue: string) => void
   onRemove?: () => void
-  /** Stable identifier for testing - should not change when name/hex changes */
+  /** Stable identifier for testing - should not change when name/value changes */
   testId?: string
 }
 
@@ -24,7 +24,7 @@ type OklchInfo = {
   l: number // lightness
   c: number // chroma
   h: number // hue
-  hex: string // original hex value
+  value: string // original color value
   index: number // color step index
 }
 
@@ -51,26 +51,26 @@ function getSystemTextColorClassNameForStep({
   return `text-${status}-subtle`
 }
 
-// Convert hex color to OKLCH format
-function getOklchInfo(hexColor: string, index: number): OklchInfo {
+// Convert color string to OKLCH format
+function getOklchInfo(colorValue: string, index: number): OklchInfo {
   try {
-    const color = new Color(hexColor)
+    const color = new Color(colorValue)
     const oklch = color.to('oklch')
 
     return {
       l: parseFloat(oklch.l.toFixed(3)),
       c: parseFloat(oklch.c.toFixed(3)),
       h: parseFloat((isNaN(oklch.h) ? 0 : oklch.h).toFixed(1)),
-      hex: hexColor,
+      value: colorValue,
       index: index,
     }
   } catch (error) {
-    console.error(`Error converting color ${hexColor} to OKLCH:`, error)
+    console.error(`Error converting color ${colorValue} to OKLCH:`, error)
     return {
       l: 0,
       c: 0,
       h: 0,
-      hex: hexColor,
+      value: colorValue,
       index: index,
     }
   }
@@ -81,9 +81,9 @@ function ColorScaleBase({
   showContrast = true,
   contrastMethod = 'WCAG21',
   colorName,
-  baseHex,
+  baseColor,
   onRename,
-  onChangeHex,
+  onChangeValue,
   onRemove,
   testId,
 }: ColorScaleProps) {
@@ -111,33 +111,33 @@ function ColorScaleBase({
       function NameAndControlsInner({
         name,
         headingColor,
-        baseHex,
+        baseColor,
         onRename,
-        onChangeHex,
+        onChangeValue,
         onRemove,
         testId,
       }: {
         name?: string
         headingColor: string
-        baseHex?: string
+        baseColor?: string
         onRename?: (n: string) => void
-        onChangeHex?: (h: string) => void
+        onChangeValue?: (v: string) => void
         onRemove?: () => void
         testId?: string
       }) {
         const colorInputRef = useRef<HTMLInputElement | null>(null)
-        const [localHex, setLocalHex] = useState(baseHex || '#000000')
+        const [localHex, setLocalHex] = useState(baseColor || '#000000')
         const [localColorInput, setLocalColorInput] = useState(
-          baseHex || '#000000',
+          baseColor || '#000000',
         )
         const [isValidColor, setIsValidColor] = useState(true)
         const debounceRef = useRef<number | null>(null)
 
         useEffect(() => {
-          setLocalHex(baseHex || '#000000')
-          setLocalColorInput(baseHex || '#000000')
+          setLocalHex(baseColor || '#000000')
+          setLocalColorInput(baseColor || '#000000')
           setIsValidColor(true)
-        }, [baseHex])
+        }, [baseColor])
 
         // Reusable debounced color change handler
         const debouncedColorChange = (value: string) => {
@@ -145,7 +145,7 @@ function ColorScaleBase({
             window.clearTimeout(debounceRef.current)
           }
           debounceRef.current = window.setTimeout(() => {
-            onChangeHex?.(value)
+            onChangeValue?.(value)
           }, 250)
         }
 
@@ -168,7 +168,7 @@ function ColorScaleBase({
         const handleColorInputBlur = () => {
           if (!isValidColor) {
             // Reset to last valid value on blur if invalid
-            setLocalColorInput(baseHex || '#000000')
+            setLocalColorInput(baseColor || '#000000')
             setIsValidColor(true)
           }
         }
@@ -199,7 +199,7 @@ function ColorScaleBase({
                 } bg-input`}
                 aria-label={`Base color for ${name ?? 'color'}`}
                 aria-invalid={!isValidColor}
-                data-testid={testId ? `${testId}-input-hex` : undefined}
+                data-testid={testId ? `${testId}-input-color` : undefined}
               />
               {!isValidColor && (
                 <span
@@ -250,7 +250,7 @@ function ColorScaleBase({
       },
       (prev, next) =>
         prev.name === next.name &&
-        prev.baseHex === next.baseHex &&
+        prev.baseColor === next.baseColor &&
         prev.headingColor === next.headingColor &&
         prev.testId === next.testId,
     )
@@ -383,9 +383,9 @@ function ColorScaleBase({
       <NameAndControls
         name={colorName}
         headingColor={headingColor}
-        baseHex={baseHex}
+        baseColor={baseColor}
         onRename={onRename}
-        onChangeHex={onChangeHex}
+        onChangeValue={onChangeValue}
         onRemove={onRemove}
         testId={testId}
       />
@@ -419,7 +419,7 @@ function ColorScaleBase({
               tabIndex={0}
               role="button"
               aria-expanded={isDialogActive}
-              aria-label={`Color ${i + 1}: ${oklchInfo.hex}, Click for details`}
+              aria-label={`Color ${i + 1}: ${oklchInfo.value}, Click for details`}
               aria-controls={`color-dialog-${i}`}
             >
               {/* Native dialog for color information */}
@@ -476,10 +476,10 @@ function ColorScaleBase({
                   <div
                     className="w-16 h-16 border rounded-lg"
                     style={{
-                      backgroundColor: oklchInfo.hex,
+                      backgroundColor: oklchInfo.value,
                       borderColor: 'rgba(0,0,0,0.1)',
                     }}
-                    aria-label={`Color sample: ${oklchInfo.hex}`}
+                    aria-label={`Color sample: ${oklchInfo.value}`}
                   ></div>
 
                   <div className="flex flex-col justify-center">
@@ -487,11 +487,11 @@ function ColorScaleBase({
                       className="flex items-center gap-2 px-2 py-1 mb-2 -mx-2 font-mono text-base text-left rounded hover:bg-black/10 dark:hover:bg-white/10 group"
                       onClick={(e) => {
                         e.stopPropagation()
-                        copyToClipboard(oklchInfo.hex, i)
+                        copyToClipboard(oklchInfo.value, i)
                       }}
-                      aria-label={`Copy ${oklchInfo.hex} to clipboard`}
+                      aria-label={`Copy ${oklchInfo.value} to clipboard`}
                     >
-                      <span>{oklchInfo.hex}</span>
+                      <span>{oklchInfo.value}</span>
                       {copiedColorIndex === i ? (
                         // Checkmark icon when copied
                         <svg
@@ -687,7 +687,7 @@ function ColorScaleBase({
 function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
   return (
     prev.colorName === next.colorName &&
-    prev.baseHex === next.baseHex &&
+    prev.baseColor === next.baseColor &&
     prev.showContrast === next.showContrast &&
     prev.contrastMethod === next.contrastMethod &&
     prev.colors === next.colors &&
