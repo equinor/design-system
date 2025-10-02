@@ -194,12 +194,12 @@ function ColorScaleBase({
                 } bg-input`}
                 aria-label={`Base color for ${name ?? 'color'}`}
                 aria-invalid={!isValidColor}
-                data-testid={`color-input-${name?.replace(/\s+/g, '-').toLowerCase() || 'unnamed'}`}
+                data-testid={testId ? `${testId}-input-hex` : undefined}
               />
               {!isValidColor && (
                 <span
                   className="text-xs text-danger-subtle"
-                  data-testid={`color-format-error-${name?.replace(/\s+/g, '-').toLowerCase() || 'unnamed'}`}
+                  data-testid={testId ? `${testId}-format-error` : undefined}
                 >
                   Colour format is not valid
                 </span>
@@ -234,6 +234,7 @@ function ColorScaleBase({
               className="inline-flex items-center justify-center w-8 h-8 rounded-md  hover:bg-neutral-fill-muted-hover print-hide"
               title="Pick color"
               aria-label="Pick color"
+              data-testid={testId ? `${testId}-color-picker` : undefined}
             >
               <Pipette className="w-4 h-4" />
             </button>
