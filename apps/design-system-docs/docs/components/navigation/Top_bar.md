@@ -1,6 +1,6 @@
 # Top bar
 
-The _top bar_, also known as a header, displays navigation and actions relating to the interface.
+The top bar, also known as a header, displays navigation and actions relating to the interface.
 
 ## Guidelines
 
