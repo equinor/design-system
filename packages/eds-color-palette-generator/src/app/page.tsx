@@ -351,6 +351,7 @@ export default function App() {
                 contrastMethod={contrastMethod}
                 colorName={colorData.name}
                 baseHex={colors[index]?.hex}
+                testId={`color-scale-${index}`}
                 onRename={(name) => updateColorName(index, name)}
                 onChangeHex={(hex) => updateColorHex(index, hex)}
                 onRemove={() => removeColor(index)}

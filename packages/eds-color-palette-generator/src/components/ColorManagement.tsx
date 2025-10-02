@@ -46,15 +46,18 @@ export const ColorManagement = ({
                 />
               </div>
 
-              {/* Color Picker */}
+              {/* Color Hex Input */}
               <div className="flex items-center gap-2">
                 <input
-                  type="color"
-                  className="w-8 h-8 border border-neutral-medium rounded cursor-pointer"
+                  type="text"
+                  className="w-full p-2 text-sm font-mono bg-input border border-neutral-subtle rounded"
                   value={color.hex}
                   onChange={(e) => onUpdateColorHex(index, e.target.value)}
                   data-testid={`color-hex-input-${index}`}
-                  aria-label={`Color ${index + 1} value`}
+                  aria-label={`Color ${index + 1} hex value`}
+                  placeholder="#000000"
+                  pattern="^#[0-9A-Fa-f]{6}$"
+                  title="Enter hex color (e.g., #FF0000)"
                 />
               </div>
 
