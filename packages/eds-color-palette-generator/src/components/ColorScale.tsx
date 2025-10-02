@@ -207,7 +207,7 @@ function ColorScaleBase({
             </div>
             <input
               ref={colorInputRef}
-              type="text"
+              type="color"
               value={localHex}
               onChange={(e) => {
                 const next = e.target.value
@@ -221,12 +221,9 @@ function ColorScaleBase({
                   onChangeHex?.(next)
                 }, 250)
               }}
-              placeholder="#000000"
-              className="px-3 py-1.5 w-24 font-mono text-sm rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface"
-              aria-label={`Base color hex value for ${name ?? 'color'}`}
-              pattern="^#[0-9A-Fa-f]{6}$"
-              title="Enter hex color (e.g., #FF0000)"
-              data-testid={testId ? `${testId}-input-hex` : undefined}
+              className="sr-only"
+              aria-label={`Pick base color for ${name ?? 'color'}`}
+              tabIndex={-1}
             />
             <button
               type="button"
