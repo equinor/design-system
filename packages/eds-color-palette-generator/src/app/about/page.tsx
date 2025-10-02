@@ -195,7 +195,7 @@ export default function AboutPage() {
                 <li>Set the lightness to the predefined value for that step</li>
                 <li>
                   Calculate the chroma multiplier using the Gaussian function
-                  with the step&apos;s lightness
+                  with the step's lightness
                 </li>
                 <li>
                   Apply the multiplier to the base colour&apos;s chroma:
