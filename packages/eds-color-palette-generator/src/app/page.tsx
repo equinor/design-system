@@ -129,10 +129,12 @@ export default function App() {
     )
   }
 
-  const updateColorHex = (index: number, newHex: string) => {
+  const updateColorValue = (index: number, newValue: string) => {
     // Use functional update to avoid stale state when multiple edits occur quickly
     setColors((prev) =>
-      prev.map((color, i) => (i === index ? { ...color, hex: newHex } : color)),
+      prev.map((color, i) =>
+        i === index ? { ...color, value: newValue } : color,
+      ),
     )
   }
 
@@ -187,28 +189,28 @@ export default function App() {
     }
   }
 
-  // Efficiently memoize computed scales by hex-only dependencies
-  const hexKey = useMemo(() => colors.map((c) => c.hex).join('|'), [colors])
+  // Efficiently memoize computed scales by value-only dependencies
+  const valueKey = useMemo(() => colors.map((c) => c.value).join('|'), [colors])
   const lightScalesMemo = useMemo(
     () =>
       colors.map((c) =>
         generateColorScale(
-          c.hex,
+          c.value,
           lightModeValues,
           meanLight,
           stdDevLight,
           colorFormat,
         ),
       ),
-    // Only recompute when hexes or generation inputs change (not when names change)
+    // Only recompute when color values or generation inputs change (not when names change)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hexKey, lightModeValues, meanLight, stdDevLight, colorFormat],
+    [valueKey, lightModeValues, meanLight, stdDevLight, colorFormat],
   )
   const darkScalesMemo = useMemo(
     () =>
       colors.map((c) =>
         generateColorScale(
-          c.hex,
+          c.value,
           darkModeValues,
           meanDark,
           stdDevDark,
@@ -216,7 +218,7 @@ export default function App() {
         ),
       ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hexKey, darkModeValues, meanDark, stdDevDark, colorFormat],
+    [valueKey, darkModeValues, meanDark, stdDevDark, colorFormat],
   )
 
   // Combine fast: map names to memoized scales without recomputing heavy work on name edits
@@ -350,10 +352,12 @@ export default function App() {
                 showContrast={showContrast}
                 contrastMethod={contrastMethod}
                 colorName={colorData.name}
-                baseHex={colors[index]?.hex}
+                baseColor={colors[index]?.value}
                 testId={`color-scale-${index}`}
                 onRename={(name) => updateColorName(index, name)}
-                onChangeHex={(hex) => updateColorHex(index, hex)}
+                onChangeValue={(value: string) =>
+                  updateColorValue(index, value)
+                }
                 onRemove={() => removeColor(index)}
               />
             </div>
@@ -364,7 +368,7 @@ export default function App() {
         <div className="my-8 mx-auto max-w-7xl px-6 print-hide">
           <button
             type="button"
-            onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
+            onClick={() => addColor({ name: 'New colour', value: '#888888' })}
             className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
           >
             Add colour

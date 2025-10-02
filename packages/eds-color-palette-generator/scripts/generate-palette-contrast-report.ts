@@ -61,14 +61,14 @@ function buildScales() {
   const darkSteps = darknessValuesInDarkMode
   return config.colors.map((c) => {
     const lightScale = generateColorScale(
-      c.hex,
+      c.value,
       lightSteps,
       config.meanLight,
       config.stdDevLight,
       'OKLCH',
     )
     const darkScale = generateColorScale(
-      c.hex,
+      c.value,
       darkSteps,
       config.meanDark,
       config.stdDevDark,
@@ -78,7 +78,7 @@ function buildScales() {
     PALETTE_STEPS.forEach((step, idx) => {
       mapping[step.id] = { light: lightScale[idx], dark: darkScale[idx] }
     })
-    return { name: c.name, hex: c.hex, mapping }
+    return { name: c.name, value: c.value, mapping }
   })
 }
 
@@ -162,7 +162,7 @@ function buildContrastTables() {
         0,
       )
       const summaryLine = `\n**Pass Summary:** ${passed}/${total} checks (${((passed / total) * 100).toFixed(1)}%)`
-      return `### ${scale.name} (${scale.hex})\n\n${header}\n${sep}\n${lines.join('\n')}${summaryLine}`
+      return `### ${scale.name} (${scale.value})\n\n${header}\n${sep}\n${lines.join('\n')}${summaryLine}`
     })
     .join('\n\n')
 }
