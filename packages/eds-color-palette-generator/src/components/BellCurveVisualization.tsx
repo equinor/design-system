@@ -111,7 +111,7 @@ export const BellCurveVisualization = ({
               textAnchor="middle"
               transform={`rotate(-90 ${pathData.padding - 25} ${pathData.height / 2})`}
             >
-              Chroma Multiplier
+              Chroma multiplier
             </text>
 
             {/* X-axis tick labels */}
