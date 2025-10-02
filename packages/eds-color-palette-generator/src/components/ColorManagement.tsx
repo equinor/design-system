@@ -1,4 +1,6 @@
 import { ColorDefinition } from '@/types'
+import { isValidColorFormat, parseColorToHex } from '@/utils/color'
+import { useState, useEffect } from 'react'
 
 type ColorManagementProps = {
   colors: ColorDefinition[]
@@ -15,6 +17,49 @@ export const ColorManagement = ({
   onRemoveColor,
   onAddColor,
 }: ColorManagementProps) => {
+  // Track local color input values and validation state for each color
+  const [colorInputs, setColorInputs] = useState<
+    Record<number, { value: string; isValid: boolean }>
+  >(
+    colors.reduce(
+      (acc, color, index) => ({
+        ...acc,
+        [index]: { value: color.hex, isValid: true },
+      }),
+      {},
+    ),
+  )
+
+  const handleColorInputChange = (index: number, value: string) => {
+    const isValid = isValidColorFormat(value)
+    setColorInputs((prev) => ({
+      ...prev,
+      [index]: { value, isValid },
+    }))
+
+    // Only update parent if valid
+    if (isValid) {
+      const hexValue = parseColorToHex(value)
+      if (hexValue) {
+        onUpdateColorHex(index, hexValue)
+      }
+    }
+  }
+
+  // Sync local state when colors prop changes (e.g., new color added)
+  useEffect(() => {
+    setColorInputs(
+      colors.reduce(
+        (acc, color, index) => ({
+          ...acc,
+          [index]: { value: color.hex, isValid: true },
+        }),
+        {},
+      ),
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [colors.length])
+
   return (
     <fieldset className="p-6 space-y-4 border border-neutral-subtle rounded-lg">
       <legend className="mb-2 font-medium">Colours</legend>
@@ -32,7 +77,7 @@ export const ColorManagement = ({
           {colors.map((color, index) => (
             <div
               key={`color-${index}`}
-              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-center p-2 border-b border-neutral-subtle"
+              className="grid grid-cols-[1fr_1fr_auto] gap-4 items-start p-2 border-b border-neutral-subtle"
             >
               {/* Name Field */}
               <div>
@@ -46,19 +91,41 @@ export const ColorManagement = ({
                 />
               </div>
 
-              {/* Color Hex Input */}
-              <div className="flex items-center gap-2">
+              {/* Color Input */}
+              <div className="flex flex-col gap-1">
                 <input
                   type="text"
-                  className="w-full p-2 text-sm font-mono bg-input border border-neutral-subtle rounded"
-                  value={color.hex}
-                  onChange={(e) => onUpdateColorHex(index, e.target.value)}
+                  className={`w-full p-2 text-sm bg-input rounded ${
+                    colorInputs[index]?.isValid === false
+                      ? 'border-2 border-danger-fill-emphasis-default'
+                      : 'border border-neutral-subtle'
+                  }`}
+                  value={colorInputs[index]?.value || color.hex}
+                  onChange={(e) =>
+                    handleColorInputChange(index, e.target.value)
+                  }
+                  onBlur={() => {
+                    // Reset to valid hex on blur if invalid
+                    if (colorInputs[index]?.isValid === false) {
+                      setColorInputs((prev) => ({
+                        ...prev,
+                        [index]: { value: color.hex, isValid: true },
+                      }))
+                    }
+                  }}
+                  placeholder="HEX or OKLCH format"
                   data-testid={`color-hex-input-${index}`}
-                  aria-label={`Color ${index + 1} hex value`}
-                  placeholder="#000000"
-                  pattern="^#[0-9A-Fa-f]{6}$"
-                  title="Enter hex color (e.g., #FF0000)"
+                  aria-label={`Color ${index + 1} value`}
+                  aria-invalid={colorInputs[index]?.isValid === false}
                 />
+                {colorInputs[index]?.isValid === false && (
+                  <span
+                    className="text-xs text-danger-subtle"
+                    data-testid={`color-format-error-${index}`}
+                  >
+                    Colour format is not valid
+                  </span>
+                )}
               </div>
 
               {/* Actions */}

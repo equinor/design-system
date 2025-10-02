@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { contrast } from './color'
+import { contrast, isValidColorFormat, parseColorToHex } from './color'
 
 describe('Color Contrast Tests', () => {
   test('should return APCA contrast score of 41 for specific OKLCH colors', () => {
@@ -370,5 +370,107 @@ describe('Real-world Color Combinations', () => {
     const result = contrast({ foreground, background, algorithm: 'WCAG21' })
 
     expect(Number(result)).toBeGreaterThan(3)
+  })
+})
+
+describe('Color Validation and Parsing', () => {
+  describe('isValidColorFormat', () => {
+    test('should validate HEX colors with 6 characters', () => {
+      expect(isValidColorFormat('#ff0000')).toBe(true)
+      expect(isValidColorFormat('#FFFFFF')).toBe(true)
+      expect(isValidColorFormat('#123abc')).toBe(true)
+    })
+
+    test('should validate HEX colors with 3 characters', () => {
+      expect(isValidColorFormat('#fff')).toBe(true)
+      expect(isValidColorFormat('#F00')).toBe(true)
+      expect(isValidColorFormat('#abc')).toBe(true)
+    })
+
+    test('should validate HEX colors with 8 characters (with alpha)', () => {
+      expect(isValidColorFormat('#ff0000ff')).toBe(true)
+      expect(isValidColorFormat('#FFFFFF80')).toBe(true)
+    })
+
+    test('should validate OKLCH format', () => {
+      expect(isValidColorFormat('oklch(0.5 0.2 180)')).toBe(true)
+      expect(isValidColorFormat('oklch(0.84 0.2 99.44)')).toBe(true)
+      expect(isValidColorFormat('oklch(1 0 0)')).toBe(true)
+      expect(isValidColorFormat('oklch(0.5 0.2 180 / 0.8)')).toBe(true)
+    })
+
+    test('should validate OKLCH with percentage lightness', () => {
+      expect(isValidColorFormat('oklch(50% 0.2 180)')).toBe(true)
+      expect(isValidColorFormat('oklch(100% 0 0)')).toBe(true)
+    })
+
+    test('should reject invalid formats', () => {
+      expect(isValidColorFormat('invalid')).toBe(false)
+      expect(isValidColorFormat('#gggggg')).toBe(false)
+      expect(isValidColorFormat('#ff')).toBe(false)
+      expect(isValidColorFormat('oklch()')).toBe(false)
+      expect(isValidColorFormat('oklch(invalid)')).toBe(false)
+      expect(isValidColorFormat('')).toBe(false)
+      expect(isValidColorFormat('rgb(255, 0, 0)')).toBe(true) // RGB is valid via colorjs.io
+    })
+
+    test('should handle whitespace', () => {
+      expect(isValidColorFormat('  #ff0000  ')).toBe(true)
+      expect(isValidColorFormat('  oklch(0.5 0.2 180)  ')).toBe(true)
+    })
+
+    test('should handle null and undefined', () => {
+      expect(isValidColorFormat(null as unknown as string)).toBe(false)
+      expect(isValidColorFormat(undefined as unknown as string)).toBe(false)
+    })
+  })
+
+  describe('parseColorToHex', () => {
+    test('should convert OKLCH to HEX', () => {
+      const result = parseColorToHex('oklch(0.5 0.2 180)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert OKLCH with high chroma to HEX', () => {
+      const result = parseColorToHex('oklch(0.84 0.2 99.44)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should keep HEX as HEX', () => {
+      const result = parseColorToHex('#ff0000')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should normalize short HEX to HEX format', () => {
+      const result = parseColorToHex('#f00')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should handle uppercase HEX', () => {
+      const result = parseColorToHex('#FF0000')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should return null for invalid input', () => {
+      expect(parseColorToHex('invalid')).toBe(null)
+      expect(parseColorToHex('#gggggg')).toBe(null)
+      expect(parseColorToHex('')).toBe(null)
+      expect(parseColorToHex('oklch(invalid)')).toBe(null)
+    })
+
+    test('should handle whitespace', () => {
+      const result = parseColorToHex('  #ff0000  ')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should handle OKLCH with zero chroma', () => {
+      const result = parseColorToHex('oklch(0.5 0 0)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should handle null and undefined', () => {
+      expect(parseColorToHex(null as unknown as string)).toBe(null)
+      expect(parseColorToHex(undefined as unknown as string)).toBe(null)
+    })
   })
 })

@@ -2,6 +2,64 @@ import Color from 'colorjs.io'
 import { ColorFormat } from '@/types'
 import { Algorithms } from 'colorjs.io/fn'
 
+/**
+ * Validates if a string is a valid color format (HEX or OKLCH)
+ * @param input - Color string to validate
+ * @returns true if valid, false otherwise
+ */
+export function isValidColorFormat(input: string): boolean {
+  if (!input || typeof input !== 'string') {
+    return false
+  }
+
+  const trimmedInput = input.trim()
+
+  // Check for HEX format: #RGB, #RRGGBB, #RRGGBBAA
+  const hexRegex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/
+  if (hexRegex.test(trimmedInput)) {
+    return true
+  }
+
+  // Check for OKLCH format: oklch(L C H) or oklch(L C H / A)
+  const oklchRegex =
+    /^oklch\(\s*([0-9]*\.?[0-9]+%?)\s+([0-9]*\.?[0-9]+)\s+([0-9]*\.?[0-9]+)(?:\s*\/\s*([0-9]*\.?[0-9]+%?))?\s*\)$/i
+  if (oklchRegex.test(trimmedInput)) {
+    return true
+  }
+
+  // Try parsing with colorjs.io as a final check
+  try {
+    new Color(trimmedInput)
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Converts a color string (OKLCH or HEX) to HEX format
+ * @param input - Color string in OKLCH or HEX format
+ * @returns HEX color string, or null if invalid
+ */
+export function parseColorToHex(input: string): string | null {
+  if (!input || typeof input !== 'string') {
+    return null
+  }
+
+  const trimmedInput = input.trim()
+
+  try {
+    const color = new Color(trimmedInput)
+    // Convert to sRGB first to ensure proper hex conversion
+    const srgbColor = color.to('srgb')
+    const hexString = srgbColor.toString({ format: 'hex' })
+    // Normalize the hex string to always be lowercase and 6 digits
+    return hexString.toLowerCase()
+  } catch {
+    return null
+  }
+}
+
 export function gaussian(
   x: number,
   mean: number = 0.6,
