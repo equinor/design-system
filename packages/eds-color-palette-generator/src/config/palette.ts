@@ -9,6 +9,7 @@ export const paletteConfig: PaletteConfig = {
   colors: [
     { name: 'Moss Green', hex: '#007079' },
     { name: 'Gray', hex: '#4A4A4A' },
+    { name: 'North sea', hex: '#243746' },
     { name: 'Green', hex: '#3FA13D' },
     { name: 'Blue', hex: '#0084C4' },
     { name: 'Orange', hex: '#E57E00' },

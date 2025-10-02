@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeToggle } from './ThemeToggle'
-import { Settings } from 'lucide-react'
+import { Settings, Info } from 'lucide-react'
+import Link from 'next/link'
 
 type HeaderPanelProps = {
   showConfigPanel: boolean
@@ -21,6 +22,14 @@ export const HeaderPanel = ({
         </p>
       </div>
       <div className="flex items-center gap-3">
+        <Link
+          href="/about"
+          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
+          title="Learn how the generator works"
+        >
+          <Info className="w-4 h-4" />
+          <span>About</span>
+        </Link>
         <button
           type="button"
           onClick={() => setShowConfigPanel(!showConfigPanel)}
