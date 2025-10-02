@@ -42,7 +42,7 @@ export function parseColorToHex(input: string): string | null {
     // Force alpha to 1 to ensure 6-digit hex output
     srgbColor.alpha = 1
     const hexString = srgbColor.toString({ format: 'hex' })
-    // Normalize the hex string to always be lowercase and 6 digits
+    // Normalize the hex string to always be lowercase
     return hexString.toLowerCase()
   } catch {
     return null
