@@ -181,7 +181,7 @@ export default function AboutPage() {
               </div>
               <p className="text-sm text-neutral-subtle">
                 The function outputs a multiplier (0–1) applied to the base
-                colour&apos;s chroma at each step.
+                colour's chroma at each step.
               </p>
             </div>
 
