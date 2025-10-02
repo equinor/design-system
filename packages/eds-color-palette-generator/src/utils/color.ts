@@ -24,8 +24,8 @@ export function isValidColorFormat(input: string): boolean {
 }
 
 /**
- * Converts a color string (OKLCH or HEX) to HEX format
- * @param input - Color string in OKLCH or HEX format
+ * Converts a color string (any format supported by colorjs.io, e.g. OKLCH, HEX, RGB, HSL, LAB, named colors, etc.) to HEX format
+ * @param input - Color string in any format supported by colorjs.io (OKLCH, HEX, RGB, HSL, LAB, named colors, etc.)
  * @returns HEX color string, or null if invalid
  */
 export function parseColorToHex(input: string): string | null {
