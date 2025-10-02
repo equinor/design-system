@@ -254,8 +254,8 @@ export const ChromaDistributionDemo = ({
         </code>
         <p className="mt-2 text-neutral-subtle">
           Where the Gaussian function outputs a multiplier between 0 and 1,
-          which scales the base color's chroma based on the lightness
-          value's distance from the mean.
+          which scales the base color&apos;s chroma based on the lightness
+          value&apos;s distance from the mean.
         </p>
       </div>
     </div>
