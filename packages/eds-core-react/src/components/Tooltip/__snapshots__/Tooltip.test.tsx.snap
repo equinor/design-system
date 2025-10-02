@@ -53,7 +53,7 @@ exports[`Tooltip Matches snapshot 1`] = `
 <div
   class="c0 eds-tooltip "
   data-floating-ui-focusable=""
-  id=":r0:"
+  id="«r0»"
   popover="manual"
   role="tooltip"
   style="position: absolute; top: 14px; left: 8px;"

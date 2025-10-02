@@ -3,14 +3,15 @@ import 'dotenv/config'
 
 test('should change color name and hex', async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
-  await page.getByTestId('config-button').click()
-  await page.getByTestId('color-name-input-0').click()
-  await page.getByTestId('color-name-input-0').fill('brand')
 
-  await page.getByTestId('color-hex-input-0').click()
-  await page.getByTestId('color-hex-input-0').fill('#ee7e17')
+  // Use stable test IDs that don't change when name changes
+  await page.getByTestId('color-scale-0-input-name').fill('Brand')
 
-  await expect(page.getByTestId('brand-10')).toMatchAriaSnapshot(
+  await page.getByTestId('color-scale-0-input-hex').click()
+  await page.getByTestId('color-scale-0-input-hex').fill('#ee7e17')
+
+  // Test the 11th color step (index 10) using stable test ID
+  await expect(page.getByTestId('color-scale-0-step-10')).toMatchAriaSnapshot(
     '- \'button "Color 11: oklch(0.420 0.113 54.7), Click for details"\'',
   )
 })

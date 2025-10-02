@@ -126,7 +126,7 @@ type Props = {
   setIsOpen: (open: boolean) => void
   label?: string
   calendar: ReactNode
-  pickerRef: RefObject<HTMLDivElement>
+  pickerRef: RefObject<HTMLDivElement | null>
   readonly: boolean
   extraProps?: GroupDOMAttributes
 } & InputWrapperProps
@@ -143,7 +143,7 @@ export const FieldWrapper = forwardRef(
       readonly,
       ...props
     }: Props,
-    ref: RefObject<HTMLDivElement>,
+    ref: RefObject<HTMLDivElement | null>,
   ) => {
     useEffect(() => {
       if (isOpen === false) {

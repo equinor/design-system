@@ -86,7 +86,8 @@ export type TooltipProps = {
   /** Disable the tooltip */
   disabled?: boolean
   /** Tooltip anchor element */
-  children: React.ReactElement & React.RefAttributes<HTMLElement>
+  children: React.ReactElement<HTMLAttributes<HTMLElement>> &
+    React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
   enterDelay?: number
   /** Portal container
@@ -190,7 +191,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const updatedChildren = cloneElement(children, {
       ...getReferenceProps({
         ref: anchorRef,
-        ...(children.props as HTMLAttributes<HTMLElement>),
+        ...children.props,
       }),
     })
 
