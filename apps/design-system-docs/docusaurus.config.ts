@@ -34,6 +34,11 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          exclude:
+            process.env.NODE_ENV === 'production' ||
+            process.env.NODE_ENV === 'development'
+              ? ['**/tone-guide/**']
+              : [],
           breadcrumbs: true,
           editUrl:
             'https://github.com/equinor/design-system/tree/develop/apps/design-system-docs/shared',
@@ -47,6 +52,35 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        // Basic indexing
+        hashed: true,
+        indexDocs: true,
+        indexPages: true,
+        highlightSearchTermsOnTargetPage: true,
+        searchResultContextMaxLength: 50,
+
+        // Language and content
+        language: ['en'],
+        removeDefaultStopWordFilter: false,
+
+        // Advanced features
+        docsRouteBasePath: '/docs',
+
+        // UI customization
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        searchBarPosition: 'right',
+
+        // Performance
+        explicitSearchResultPath: false,
+        searchContextByPaths: [],
+      },
+    ],
+  ],
 
   themeConfig: {
     image: 'img/equinor.png',
@@ -55,6 +89,7 @@ const config: Config = {
       logo: {
         alt: 'Equinor type Logo',
         src: 'img/eds-logo.svg',
+        srcDark: 'img/eds-logo-dark.svg', // Dark mode logo
       },
 
       items: [
@@ -92,11 +127,6 @@ const config: Config = {
           type: 'search',
           position: 'right',
         },
-        /* {
-          href: 'https://github.com/equinor/design-system',
-          label: 'GitHub',
-          position: 'right',
-        }, */
       ],
     },
     footer: {
