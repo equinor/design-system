@@ -66,7 +66,7 @@ Let's create a complete button system with primary, secondary, and tertiary vari
 - **Tertiary Button**: Design the text-only version for subtle interactions
 
 **Quick Recap (1:30–2:00)**
-Great We've now built a comprehensive button component system with three distinct variants and complete state coverage.
+Great! We've now built a comprehensive button component system with three distinct variants and complete state coverage.
 
 ---
 
