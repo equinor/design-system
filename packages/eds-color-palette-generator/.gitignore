@@ -10,3 +10,7 @@ node_modules/
 
 # TypeScript
 *.tsbuildinfo
+
+# Build output
+dist/
+output/

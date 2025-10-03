@@ -4,9 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "bin": {
+    "generate-colors": "./dist/cli/generate-colors.js"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:cli": "vite build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
@@ -41,6 +45,8 @@
     "tailwindcss": "^4.1.12",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
+    "vite": "^7.1.3",
+    "vite-plugin-dts": "^3.9.1",
     "vitest": "^3.2.4"
   }
 }
