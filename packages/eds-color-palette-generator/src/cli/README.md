@@ -35,6 +35,9 @@ The configuration file should be a JSON file with the following structure:
     { "name": "Gray", "value": "#4A4A4A" },
     { "name": "Blue", "value": "#0084C4" }
   ],
+  "colorFormat": "HEX",
+  "outputFileLight": "Color Light.Mode 1.json",
+  "outputFileDark": "Color Dark.Mode 1.json",
   "meanLight": 0.6,
   "stdDevLight": 2,
   "meanDark": 0.7,
@@ -48,6 +51,9 @@ The configuration file should be a JSON file with the following structure:
   - `value`: The hex color value
 
 **Optional fields:**
+- `colorFormat`: Output color format - either `"HEX"` or `"OKLCH"` (default: `"HEX"`)
+- `outputFileLight`: Custom filename for light mode tokens (default: `"Color Light.Mode 1.json"`)
+- `outputFileDark`: Custom filename for dark mode tokens (default: `"Color Dark.Mode 1.json"`)
 - `meanLight`: Mean value for the Gaussian distribution in light mode (default: 0.6)
 - `stdDevLight`: Standard deviation for the Gaussian distribution in light mode (default: 2)
 - `meanDark`: Mean value for the Gaussian distribution in dark mode (default: 0.7)
@@ -55,11 +61,43 @@ The configuration file should be a JSON file with the following structure:
 
 ### Output
 
-The tool generates two files:
-- `color.tokens.light.json`: Color tokens for light mode
-- `color.tokens.dark.json`: Color tokens for dark mode
+The tool generates two files with configurable names:
+- Default: `Color Light.Mode 1.json` - Color tokens for light mode
+- Default: `Color Dark.Mode 1.json` - Color tokens for dark mode
 
 Both files follow the W3C Design Tokens Community Group format and include all the semantic color steps defined in the palette configuration.
+
+#### Output Formats
+
+**HEX Format (default):**
+```json
+{
+  "Light": {
+    "Moss Green": {
+      "bg-canvas": {
+        "$type": "color",
+        "$value": "#f5fefe",
+        ...
+      }
+    }
+  }
+}
+```
+
+**OKLCH Format:**
+```json
+{
+  "Light": {
+    "Moss Green": {
+      "bg-canvas": {
+        "$type": "color",
+        "$value": "oklch(0.970 0.015 204.6)",
+        ...
+      }
+    }
+  }
+}
+```
 
 ## Example
 

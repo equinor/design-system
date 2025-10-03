@@ -28,14 +28,14 @@ describe('generate-colors CLI', () => {
     rmSync(configPath, { force: true })
   })
 
-  it('should generate light and dark color tokens', () => {
+  it('should generate light and dark color tokens with default HEX format', () => {
     // Run the CLI
     const cmd = `node ${cliPath} ${configPath} ${testDir}`
     execSync(cmd)
 
-    // Check that files were created
-    const lightTokensPath = join(testDir, 'color.tokens.light.json')
-    const darkTokensPath = join(testDir, 'color.tokens.dark.json')
+    // Check that files were created with new default names
+    const lightTokensPath = join(testDir, 'Color Light.Mode 1.json')
+    const darkTokensPath = join(testDir, 'Color Dark.Mode 1.json')
 
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
     const darkTokens = JSON.parse(readFileSync(darkTokensPath, 'utf-8'))
@@ -53,9 +53,51 @@ describe('generate-colors CLI', () => {
     expect(darkTokens.Dark).toHaveProperty('Gray')
     expect(darkTokens.Dark).toHaveProperty('Blue')
 
+    // Check HEX format (default)
+    const token = lightTokens.Light['Moss Green']['bg-canvas']
+    expect(token.$value).toMatch(/^#[0-9a-f]{6}$/i)
+
     // Snapshot test
-    expect(lightTokens).toMatchSnapshot()
-    expect(darkTokens).toMatchSnapshot()
+    expect(lightTokens).toMatchSnapshot('light-hex')
+    expect(darkTokens).toMatchSnapshot('dark-hex')
+  })
+
+  it('should generate tokens with OKLCH format when specified', () => {
+    const oklchConfig = {
+      colors: [
+        { name: 'Moss Green', value: '#007079' },
+        { name: 'Blue', value: '#0084C4' },
+      ],
+      colorFormat: 'OKLCH',
+    }
+
+    const oklchConfigPath = resolve(__dirname, '__test-oklch-config.json')
+    writeFileSync(
+      oklchConfigPath,
+      JSON.stringify(oklchConfig, null, 2),
+      'utf-8',
+    )
+
+    const oklchTestDir = resolve(__dirname, '__test-oklch-output__')
+    mkdirSync(oklchTestDir, { recursive: true })
+
+    // Run the CLI
+    const cmd = `node ${cliPath} ${oklchConfigPath} ${oklchTestDir}`
+    execSync(cmd)
+
+    const lightTokensPath = join(oklchTestDir, 'Color Light.Mode 1.json')
+    const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
+
+    // Check OKLCH format
+    const token = lightTokens.Light['Moss Green']['bg-canvas']
+    expect(token.$value).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+
+    // Snapshot test for OKLCH format
+    expect(lightTokens).toMatchSnapshot('light-oklch')
+
+    // Clean up
+    rmSync(oklchTestDir, { recursive: true, force: true })
+    rmSync(oklchConfigPath, { force: true })
   })
 
   it('should use custom gaussian parameters if provided', () => {
@@ -84,22 +126,58 @@ describe('generate-colors CLI', () => {
     const cmd = `node ${cliPath} ${customConfigPath} ${customTestDir}`
     execSync(cmd)
 
-    const lightTokensPath = join(customTestDir, 'color.tokens.light.json')
+    const lightTokensPath = join(customTestDir, 'Color Light.Mode 1.json')
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
 
     expect(lightTokens).toHaveProperty('Light')
     expect(lightTokens.Light).toHaveProperty('Test Color')
 
     // Snapshot test for custom params
-    expect(lightTokens).toMatchSnapshot()
+    expect(lightTokens).toMatchSnapshot('custom-params')
 
     // Clean up
     rmSync(customTestDir, { recursive: true, force: true })
     rmSync(customConfigPath, { force: true })
   })
 
+  it('should use custom output file names when specified', () => {
+    const customFileConfig = {
+      colors: [{ name: 'Test Color', value: '#0084C4' }],
+      outputFileLight: 'custom-light.json',
+      outputFileDark: 'custom-dark.json',
+    }
+
+    const customFileConfigPath = resolve(
+      __dirname,
+      '__test-custom-file-config.json',
+    )
+    writeFileSync(
+      customFileConfigPath,
+      JSON.stringify(customFileConfig, null, 2),
+      'utf-8',
+    )
+
+    const customFileTestDir = resolve(__dirname, '__test-custom-file-output__')
+    mkdirSync(customFileTestDir, { recursive: true })
+
+    // Run the CLI
+    const cmd = `node ${cliPath} ${customFileConfigPath} ${customFileTestDir}`
+    execSync(cmd)
+
+    // Check that custom file names were used
+    const lightTokensPath = join(customFileTestDir, 'custom-light.json')
+    const darkTokensPath = join(customFileTestDir, 'custom-dark.json')
+
+    expect(readFileSync(lightTokensPath, 'utf-8')).toBeTruthy()
+    expect(readFileSync(darkTokensPath, 'utf-8')).toBeTruthy()
+
+    // Clean up
+    rmSync(customFileTestDir, { recursive: true, force: true })
+    rmSync(customFileConfigPath, { force: true })
+  })
+
   it('should generate tokens with correct structure', () => {
-    const lightTokensPath = join(testDir, 'color.tokens.light.json')
+    const lightTokensPath = join(testDir, 'Color Light.Mode 1.json')
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
 
     // Check token structure for one color
@@ -119,7 +197,7 @@ describe('generate-colors CLI', () => {
     expect(token).toHaveProperty('$description')
     expect(token).toHaveProperty('$extensions')
 
-    // Check OKLCH format
-    expect(token.$value).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+    // Check HEX format (default)
+    expect(token.$value).toMatch(/^#[0-9a-f]{6}$/i)
   })
 })

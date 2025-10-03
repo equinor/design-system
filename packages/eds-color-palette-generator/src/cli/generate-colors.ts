@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { generateColorScale } from '../utils/color'
 import { PALETTE_STEPS } from '../config/config'
 import { getLightnessValues } from '../config/helpers'
-import { ColorDefinition } from '../types'
+import { ColorDefinition, ColorFormat } from '../types'
 
 interface PaletteConfigFile {
   colors: ColorDefinition[]
@@ -11,6 +11,9 @@ interface PaletteConfigFile {
   stdDevLight?: number
   meanDark?: number
   stdDevDark?: number
+  colorFormat?: ColorFormat
+  outputFileLight?: string
+  outputFileDark?: string
 }
 
 interface ColorToken {
@@ -82,6 +85,9 @@ function generateColors(configPath: string, outputDir: string) {
   const stdDevLight = config.stdDevLight ?? 2
   const meanDark = config.meanDark ?? 0.7
   const stdDevDark = config.stdDevDark ?? 2
+  const colorFormat = config.colorFormat ?? 'HEX'
+  const outputFileLight = config.outputFileLight ?? 'Color Light.Mode 1.json'
+  const outputFileDark = config.outputFileDark ?? 'Color Dark.Mode 1.json'
 
   // Get lightness values from PALETTE_STEPS
   const lightModeValues = getLightnessValues('light')(PALETTE_STEPS)
@@ -95,7 +101,7 @@ function generateColors(configPath: string, outputDir: string) {
       lightModeValues,
       meanLight,
       stdDevLight,
-      'OKLCH',
+      colorFormat,
     )
   })
 
@@ -107,7 +113,7 @@ function generateColors(configPath: string, outputDir: string) {
       darkModeValues,
       meanDark,
       stdDevDark,
-      'OKLCH',
+      colorFormat,
     )
   })
 
@@ -125,8 +131,8 @@ function generateColors(configPath: string, outputDir: string) {
   }
 
   // Write output files
-  const lightOutputPath = resolve(outputDir, 'color.tokens.light.json')
-  const darkOutputPath = resolve(outputDir, 'color.tokens.dark.json')
+  const lightOutputPath = resolve(outputDir, outputFileLight)
+  const darkOutputPath = resolve(outputDir, outputFileDark)
 
   try {
     writeFileSync(lightOutputPath, lightTokenData, 'utf-8')
