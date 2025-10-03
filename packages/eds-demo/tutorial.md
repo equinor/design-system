@@ -1,6 +1,6 @@
 # Video Tutorials
 
-Welcome to our friendly walkthroughs designed for both designers and developers! Each series consists of four bite-sized videos (~2–2.5 minutes each), making it easy to learn at our own pace. Total runtime per series: ~9 minutes.
+Welcome to our friendly walkthroughs designed for both designers and developers! Each series consists of four bite-sized videos (~2–2.5 minutes each), making it easy to learn at your own pace. Total runtime per series: ~9 minutes.
 
 These tutorials use our current color system vocabulary from the colour foundation docs (`about.md`, `getting-started.md`). The script works with the static and dynamic implementation strategy:
 
