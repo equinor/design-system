@@ -53,6 +53,7 @@
     "dev": "rollup -c -w",
     "types": "tsc",
     "prettier:check": "prettier --check src/",
+    "colors:generate": "generate-colors palette-config.json output",
     "build:variables:color-scheme": "build-color-scheme-variables",
     "build:variables:semantic:static": "build-semantic-static-variables",
     "build:variables:semantic:dynamic": "build-semantic-dynamic-variables",
@@ -96,6 +97,7 @@
     "design tokens"
   ],
   "devDependencies": {
+    "@equinor/eds-color-palette-generator": "workspace:*",
     "@equinor/eds-tokens-build": "workspace:*",
     "@equinor/eds-tokens-sync": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",

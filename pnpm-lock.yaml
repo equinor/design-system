@@ -726,6 +726,9 @@ importers:
 
   packages/eds-tokens:
     devDependencies:
+      '@equinor/eds-color-palette-generator':
+        specifier: workspace:*
+        version: link:../eds-color-palette-generator
       '@equinor/eds-tokens-build':
         specifier: workspace:*
         version: link:../eds-tokens-build
