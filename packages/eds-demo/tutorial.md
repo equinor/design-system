@@ -131,7 +131,7 @@ Let's code a complete button system with primary, secondary, and tertiary varian
   - Implement all essential states: initial, hover, active, focus, and disabled
 - **Secondary Button**: Code the outlined version for secondary actions
 - **Tertiary Button**: Create the text-only variant for subtle interactions
-- Now that we created these variants using the accent colour we will add support for a neutral and danger appearance.
+- Now that we created these variants using the accent colour, we will add support for a neutral and danger appearance.
 
 **Quick Recap (1:30–2:00)**
 Awesome! We've successfully implemented a comprehensive button system with three distinct variants and complete state coverage. Users will appreciate the consistent, professional interactions throughout the application.
