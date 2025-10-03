@@ -1,18 +1,140 @@
-name: Release Please
+name: Trigger Package Publishing
+
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
-      - fre/release-please # Test branch first
+      - develop
 
 permissions:
   contents: write
-  pull-requests: write
+  actions: write
 
 jobs:
-  release-please:
+  check-releases:
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'chore: release')
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.extract.outputs.packages }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract released packages from PR body and title
+        id: extract
+        run: |
+          echo "Extracting packages from release PR..."
+
+          # Parse PR body and title to find which packages were released
+          # Release-please includes package names and version changes
+          PR_BODY="${{ github.event.pull_request.body }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+
+          PACKAGES='[]'
+
+          # Check for package releases in PR body (look for version updates)
+          if echo "$PR_BODY" | grep -q "@equinor/eds-core-react"; then
+            PACKAGES=$(echo $PACKAGES | jq '. + ["core-react"]')
+            echo "Found eds-core-react release"
+          fi
+
+          if echo "$PR_BODY" | grep -q "@equinor/eds-lab-react"; then
+            PACKAGES=$(echo $PACKAGES | jq '. + ["lab-react"]')
+            echo "Found eds-lab-react release"
+          fi
+
+          if echo "$PR_BODY" | grep -q "@equinor/eds-data-grid-react"; then
+            PACKAGES=$(echo $PACKAGES | jq '. + ["data-grid-react"]')
+            echo "Found eds-data-grid-react release"
+          fi
+
+          if echo "$PR_BODY" | grep -q "@equinor/eds-icons"; then
+            PACKAGES=$(echo $PACKAGES | jq '. + ["icons"]')
+            echo "Found eds-icons release"
+          fi
+
+          if echo "$PR_BODY" | grep -q "@equinor/eds-tokens"; then
+            PACKAGES=$(echo $PACKAGES | jq '. + ["tokens"]')
+            echo "Found eds-tokens release"
+          fi
+
+          echo "packages=$PACKAGES" >> $GITHUB_OUTPUT
+          echo "Released packages: $PACKAGES"
+
+  trigger-core-react:
+    needs: check-releases
+    if: contains(needs.check-releases.outputs.packages, 'core-react')
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
-        with:
-          release-type: node
+      - name: Trigger core-react publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering publish-core-react workflow..."
+          gh workflow run publish_core_react.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest \
+            -f environment=production
+
+  trigger-lab-react:
+    needs: check-releases
+    if: contains(needs.check-releases.outputs.packages, 'lab-react')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger lab-react publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering publish-lab workflow..."
+          gh workflow run publish_lab.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest \
+            -f environment=production
+
+  trigger-data-grid-react:
+    needs: check-releases
+    if: contains(needs.check-releases.outputs.packages, 'data-grid-react')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data-grid-react publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering publish-data-grid workflow..."
+          gh workflow run publish_data_grid.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest \
+            -f environment=production
+
+  trigger-icons:
+    needs: check-releases
+    if: contains(needs.check-releases.outputs.packages, 'icons')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger icons publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering publish-icons workflow..."
+          gh workflow run publish_icons.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest
+
+  trigger-tokens:
+    needs: check-releases
+    if: contains(needs.check-releases.outputs.packages, 'tokens')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger tokens publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering publish-tokens workflow..."
+          gh workflow run publish_tokens.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest
