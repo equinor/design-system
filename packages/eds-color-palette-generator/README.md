@@ -72,7 +72,7 @@ Color palettes can be configured through:
 
 ## Testing
 
-Run tests with:
+Run unit tests with:
 
 ```bash
 pnpm test
@@ -83,6 +83,16 @@ Run end-to-end tests:
 ```bash
 pnpm test:e2e
 ```
+
+## Building
+
+Build the CLI tool:
+
+```bash
+pnpm build:cli
+```
+
+This will compile the TypeScript CLI script into a distributable JavaScript file in the `dist/` directory.
 
 ## Documentation
 
