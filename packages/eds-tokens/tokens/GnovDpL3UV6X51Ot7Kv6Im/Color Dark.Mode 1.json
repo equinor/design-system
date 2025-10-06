@@ -229,7 +229,7 @@
       },
       "2": {
         "$type": "color",
-        "$value": "#222",
+        "$value": "#222222",
         "$description": "",
         "$extensions": {
           "com.figma": {

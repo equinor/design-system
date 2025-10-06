@@ -326,7 +326,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#222",
+        "$value": "#222222",
       },
       "3": {
         "$description": "",
@@ -743,7 +743,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#ffffff",
       },
       "2": {
         "$description": "",
@@ -955,7 +955,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#ffffff",
       },
       "2": {
         "$description": "",
@@ -969,7 +969,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#ffffff",
       },
       "3": {
         "$description": "",
@@ -1167,7 +1167,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#ffffff",
       },
       "2": {
         "$description": "",
@@ -1817,7 +1817,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#fff",
+        "$value": "#ffffff",
       },
       "2": {
         "$description": "",
