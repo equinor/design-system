@@ -5,7 +5,7 @@ _Tables_ display data in a structured format.
 ## When to Use
 
 - Use tables if you are displaying information or data that will require minimal interaction such as editing or sorting.
-- Consider using a if the table is using advanced functionalities.
+- Consider using a **Table data grid** if the table is using advanced functionalities.
 - Use tables to let users compare information in rows and columns.
 
 ## Structure
@@ -62,7 +62,7 @@ Adjust the width of the header to fit the column width of the cells below, where
 
 Now you can either use auto layout or constraints.
 
-## Accessibility
+
 
 ## Implementation in Figma
 
@@ -120,3 +120,9 @@ Now you can either use auto layout or constraints.
 7. Make sure to name the new group.
 8. Locate the **Design** tab in the **Inspector Panel**.
 9. Under the **Constraints** section, set up constraints.
+
+
+## Code
+
+[View in Storybook](https://storybook.eds.equinor.com/index.html?path=/docs/data-display-table--docs)
+
