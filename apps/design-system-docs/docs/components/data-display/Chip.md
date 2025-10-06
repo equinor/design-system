@@ -10,18 +10,28 @@ Chips allow users to make selections, perform an action, input information and a
 
 Choice chips are used when there are at least two predefined options to choose between to signify the user's choice.
 
+![select chip](../assets/chip-select.jpg)
+
 ### Filter chip
 
 Multiple predefined keywords can be listed for the user to choose from. Multiple chips can be selected or unselected.
+
+![filer chip](../assets/chip-filter.jpg)
 
 ### Action chip
 
 When there are at least two predefined options to choose between, action chips trigger actions related to the primary content. Action chips are not removable but can appear dynamically.
 
+![action chip](../assets/chip-action.jpg)
+
 ## Implementation in Figma
 
 ### Instructions
 
-1. In Figma go to the **Assets Panel** and search for **chip**.
-2. Drag and drop the component in your frame.
-3. Choose the variant from the **Design Panel**.
+1. In Figma go to the **Assets Panel** and search for **chip**
+2. Drag and drop the component in your frame
+3. Choose the variant from the **Design Panel**
+
+## Code
+
+[View in Storybook](https://storybook.eds.equinor.com/index.html?path=/story/data-display-chips--docs)
