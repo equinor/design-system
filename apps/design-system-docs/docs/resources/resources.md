@@ -10,7 +10,8 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 
 ## Component Documentation
 
-- [Component Reference](../components/components.md) – Explore usage, props, and examples for all EDS components.
+<!--
+- [Component Reference](../web/components.md) – Explore usage, props, and examples for all EDS components. -->
 
 ## Developer Guides
 
