@@ -16,9 +16,10 @@ Let's explore how to create beautiful visual hierarchy in our UI! We'll use canv
 **Figma Walkthrough (0:15–1:50)**
 
 - Start by selecting our Dashboard frame and applying the canvas colour
-- Next, choose our top bar, sidebar, and table elements to apply the surface treatment
-- Now select our menu and apply the floating colour for that elevated look
+- Next, choose our top bar, sidebar, and table elements to apply the surface colour
+- Now select our menu and apply the floating colour for the elevated look
 - Finally, select our text elements to set up the default text color
+  - We use the strong text for content in the table and the subtle text colour in sidebar, top-bar and menu.
 
 **Quick Recap (1:50–2:30)**  
 Perfect! We've now created a clear visual hierarchy using our neutral canvas, surface, and floating concept colors. The best part? All our colors automatically adapt when switching between light and dark modes.
@@ -84,7 +85,8 @@ Let's code up that beautiful visual hierarchy! We'll implement canvas, surface, 
 - Start by applying canvas to our Dashboard container
 - Add surface styling to our top bar, sidebar, and table components
 - Implement floating for our menu to achieve that elevated effect
-- Set up default text colors for all our textual elements
+- Set up default text colors
+  - The strong text colour is used in content and the subtle text colour is used in sidebar, top-bar and menu.
 
 **Quick Recap (1:50–2:30)**
 Perfect! We've successfully implemented visual hierarchy using our neutral canvas, surface, and floating concept colors. The best part? The code automatically handles light and dark mode transitions.
