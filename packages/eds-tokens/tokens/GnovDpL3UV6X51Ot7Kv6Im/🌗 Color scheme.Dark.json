@@ -65,7 +65,7 @@
   },
   "text-link": {
     "$type": "color",
-    "$value": "{Dark.Blue.13}",
+    "$value": "{Dark.Blue.8}",
     "$description": "",
     "$extensions": {
       "com.figma": {
