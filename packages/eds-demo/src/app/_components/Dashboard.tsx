@@ -6,6 +6,7 @@ import { DataTable } from "@/app/_components/DataTable";
 import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
+import { Menu } from "@/app/_components/Menu";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -35,6 +36,13 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           activeLinkClass={styles["sidebar-link--active"]}
           iconClass={styles["sidebar-link__icon"]}
           buttonClass={styles["button--ghost-icon"]}
+        />
+        <Menu
+          id="sidebar-menu"
+          anchorName="sidebar-menu-anchor"
+          className={styles["menu"]}
+          menuItemClassName={styles["menu-item"]}
+          menuItemActiveClassName={styles["menu-item--active"]}
         />
 
         <main className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">

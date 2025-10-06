@@ -44,6 +44,8 @@ export const Sidebar = ({
         <SideBarLink
           data-color-appearance="accent"
           className={`${linkClass} ${activeLinkClass}`}
+          popoverTarget="sidebar-menu"
+          anchorName="sidebar-menu-anchor"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
