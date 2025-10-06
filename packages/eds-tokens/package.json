@@ -57,7 +57,7 @@
     "build:variables:semantic:static": "build-semantic-static-variables",
     "build:variables:semantic:dynamic": "build-semantic-dynamic-variables",
     "build:variables:color": "pnpm run build:variables:color-scheme && pnpm run build:variables:semantic:static && pnpm run build:variables:semantic:dynamic",
-    "generate:tokens:color-core": "generate-colors palette-config.json output",
+    "generate:tokens:color-core": "generate-colors palette-config.json tokens/GnovDpL3UV6X51Ot7Kv6Im",
     "generate:tokens:color-scheme": "generate-color-scheme-tokens",
     "generate:tokens:concept": "generate-concept-tokens",
     "generate:tokens:static": "generate-color-scheme-tokens && generate-semantic-tokens && generate-concept-tokens",

@@ -74,7 +74,7 @@ Both files follow the W3C Design Tokens Community Group format and include all t
 {
   "Light": {
     "Moss Green": {
-      "bg-canvas": {
+      "1": {
         "$type": "color",
         "$value": "#f5fefe",
         ...
@@ -89,7 +89,7 @@ Both files follow the W3C Design Tokens Community Group format and include all t
 {
   "Light": {
     "Moss Green": {
-      "bg-canvas": {
+      "1": {
         "$type": "color",
         "$value": "oklch(0.970 0.015 204.6)",
         ...

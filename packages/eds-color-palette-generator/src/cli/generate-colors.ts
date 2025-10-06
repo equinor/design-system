@@ -47,7 +47,7 @@ function formatColorTokens(
     const tokenGroup: ColorTokenGroup = {}
 
     colorScale.forEach((color, index) => {
-      const stepId = PALETTE_STEPS[index]?.id || `${index + 1}`
+      const stepId = `${index + 1}`
       tokenGroup[stepId] = {
         $type: 'color',
         $value: color,

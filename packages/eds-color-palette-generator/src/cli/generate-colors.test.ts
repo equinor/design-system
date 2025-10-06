@@ -54,7 +54,7 @@ describe('generate-colors CLI', () => {
     expect(darkTokens.Dark).toHaveProperty('Blue')
 
     // Check HEX format (default)
-    const token = lightTokens.Light['Moss Green']['bg-canvas']
+    const token = lightTokens.Light['Moss Green']['1']
     expect(token.$value).toMatch(/^#[0-9a-f]{6}$/i)
 
     // Snapshot test
@@ -89,7 +89,7 @@ describe('generate-colors CLI', () => {
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
 
     // Check OKLCH format
-    const token = lightTokens.Light['Moss Green']['bg-canvas']
+    const token = lightTokens.Light['Moss Green']['1']
     expect(token.$value).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
 
     // Snapshot test for OKLCH format
@@ -184,14 +184,13 @@ describe('generate-colors CLI', () => {
     const mossGreen = lightTokens.Light['Moss Green']
     expect(mossGreen).toBeDefined()
 
-    // Check that all expected step IDs are present
-    expect(mossGreen).toHaveProperty('bg-canvas')
-    expect(mossGreen).toHaveProperty('bg-surface')
-    expect(mossGreen).toHaveProperty('bg-fill-muted-default')
-    expect(mossGreen).toHaveProperty('text-strong')
+    // Check that all expected step IDs are present (1-15)
+    expect(mossGreen).toHaveProperty('1')
+    expect(mossGreen).toHaveProperty('2')
+    expect(mossGreen).toHaveProperty('15')
 
     // Check token format
-    const token = mossGreen['bg-canvas']
+    const token = mossGreen['1']
     expect(token).toHaveProperty('$type', 'color')
     expect(token).toHaveProperty('$value')
     expect(token).toHaveProperty('$description')
