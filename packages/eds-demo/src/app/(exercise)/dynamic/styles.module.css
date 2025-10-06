@@ -58,8 +58,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 */
 
 .button--ghost-icon {
-  color: var(--eds-color-text-strong);
-
   &:hover {
     background-color: var(--eds-color-bg-fill-muted-hover);
   }
