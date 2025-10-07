@@ -4,7 +4,5 @@
   "packages/eds-icons": "0.22.0",
   "packages/eds-lab-react": "0.7.9",
   "packages/eds-tokens": "0.10.0",
-  "packages/eds-tokens-build": "1.0.1",
-  "packages/eds-tokens-sync": "1.0.1",
   "packages/eds-utils": "0.9.0"
 }
