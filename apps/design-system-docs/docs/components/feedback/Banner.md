@@ -41,7 +41,7 @@ Banners are notification elements and should not be confused with *top bars*, wh
 
 ## Complex Content (special cases)
 
-While using string content for ``Banner.Message`` is the recommended approach for most use cases, there are situations where more complex content might be necessary. For these special cases, Banner support ReactNode as children, so you can nest them directly.
+While using string content for ``Banner.Message`` is the recommended approach for most use cases, there are situations where more complex content might be necessary. For these special cases, Banner supports ReactNode as children, so you can nest them directly.
 
 - Use string content for ``Banner.Message`` whenever possible to maintain consistency and proper styling.
 - Only use complex content inside Banner when you have specific requirements that cannot be met with string content.
