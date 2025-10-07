@@ -46,10 +46,6 @@ jobs:
       eds-lab-react--tag_name: ${{ steps.release.outputs['packages/eds-lab-react--tag_name'] }}
       eds-tokens--release_created: ${{ steps.release.outputs['packages/eds-tokens--release_created'] }}
       eds-tokens--tag_name: ${{ steps.release.outputs['packages/eds-tokens--tag_name'] }}
-      eds-tokens-build--release_created: ${{ steps.release.outputs['packages/eds-tokens-build--release_created'] }}
-      eds-tokens-build--tag_name: ${{ steps.release.outputs['packages/eds-tokens-build--tag_name'] }}
-      eds-tokens-sync--release_created: ${{ steps.release.outputs['packages/eds-tokens-sync--release_created'] }}
-      eds-tokens-sync--tag_name: ${{ steps.release.outputs['packages/eds-tokens-sync--tag_name'] }}
       eds-utils--release_created: ${{ steps.release.outputs['packages/eds-utils--release_created'] }}
       eds-utils--tag_name: ${{ steps.release.outputs['packages/eds-utils--tag_name'] }}
 
