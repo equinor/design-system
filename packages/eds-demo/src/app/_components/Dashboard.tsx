@@ -60,7 +60,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           </header>
 
           <DataTable
-            className={`self-stretch justify-start items-start gap-0.5 inline-flex ${styles["table"]}`}
+            className={`w-full table-fixed ${styles["table"]}`}
             thClass={styles["th"]}
             activeThClass={styles["th--active"]}
             tdClass={styles["td"]}
@@ -74,7 +74,6 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             chipDangerClass={styles["chip--danger"]}
             chipSuccessClass={styles["chip--success"]}
           />
-
           <ButtonGroup
             className="inline-flex items-center self-stretch justify-end h-9"
             // 💰 Add the data-color-appearance attribute to add colour
