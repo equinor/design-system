@@ -4,7 +4,8 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - develop
+      # - develop TODO: enable after testing
+      - fre/release-please
 
 permissions:
   contents: write
