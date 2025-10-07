@@ -2,40 +2,29 @@
 
 _Lists_ organise information into related groups of content.
 
-
-## Guidelines
-
-Bulleted lists are used when order is not of importance. Numbered lists are used when order and hierarchy are needed.
-
-## Usage
+## When to use
 Lists are a continuous group of text.
 
 - Lists should be sorted in logical ways that make content easy to scan
 - Lists present content in a way that makes it easy to identify
 
-## Accessibility
+### Structure
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+#### Unordered
+![list-unordered](../assets/list-unordered.jpg)
 
-### Variants
+#### Ordered
+![list-ordered](../assets/list-ordered.jpg)
 
-- Unordered
-- Ordered
-- With start option
+## Guidelines
 
+Bulleted lists are used when order is not of importance. Numbered lists are used when order and hierarchy are needed.
 
 ## Implementation in Figma
-
-### Instructions
 
 1. In Figma go to the **Assets Panel** and search for **lists**.
 2. Drag and drop the component in your frame.
 3. Choose the variant from the **Design Panel**.
-
-
-## Code
-
-[View in Storybook](https://storybook.eds.equinor.com/index.html?path=/docs/data-display-lists--docs)
 
 ## Do's and don'ts
 
