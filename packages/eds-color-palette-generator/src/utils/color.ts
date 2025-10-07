@@ -95,8 +95,20 @@ export function generateColorScale(
             `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
           )
         } else {
-          // Default to HEX format
-          colors.push(color.toString({ format: 'hex' }))
+          // Default to HEX format - ensure full 6-digit format
+          let hexColor = color.toString({ format: 'hex' })
+          // Expand shorthand hex (e.g., #fff -> #ffffff)
+          if (hexColor.length === 4) {
+            hexColor =
+              '#' +
+              hexColor[1] +
+              hexColor[1] +
+              hexColor[2] +
+              hexColor[2] +
+              hexColor[3] +
+              hexColor[3]
+          }
+          colors.push(hexColor)
         }
       } catch (error) {
         console.error(`Error generating color for step ${i}:`, error)

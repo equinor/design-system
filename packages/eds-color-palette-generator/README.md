@@ -10,9 +10,12 @@ An accessible color palette generator for the Equinor Design System. This tool c
 * **Light and dark mode support**: Separate configurations for optimal contrast in each mode
 * **Interactive configuration**: Adjust lightness values and Gaussian parameters in real-time
 * **Export/Import**: Save and share color palette configurations
+* **CLI tool**: Generate color tokens from configuration files
 * **About page**: Comprehensive documentation with interactive demos explaining how the generator works
 
 ## Getting Started
+
+### Web Interface
 
 First, run the development server:
 
@@ -23,6 +26,24 @@ pnpm dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the color palette generator.
 
 To learn how the generator works internally, visit the About page at [http://localhost:3000/about](http://localhost:3000/about).
+
+### CLI Tool
+
+Generate color tokens from a configuration file:
+
+```bash
+generate-colors [configPath] [outputDir]
+```
+
+See [src/cli/README.md](./src/cli/README.md) for detailed CLI documentation and examples.
+
+**Example:**
+
+```bash
+generate-colors examples/palette-config.json output/
+```
+
+This will generate `color.tokens.light.json` and `color.tokens.dark.json` files in the output directory.
 
 ## How It Works
 
@@ -51,7 +72,7 @@ Color palettes can be configured through:
 
 ## Testing
 
-Run tests with:
+Run unit tests with:
 
 ```bash
 pnpm test
@@ -62,6 +83,16 @@ Run end-to-end tests:
 ```bash
 pnpm test:e2e
 ```
+
+## Building
+
+Build the CLI tool:
+
+```bash
+pnpm build:cli
+```
+
+This will compile the TypeScript CLI script into a distributable JavaScript file in the `dist/` directory.
 
 ## Documentation
 
