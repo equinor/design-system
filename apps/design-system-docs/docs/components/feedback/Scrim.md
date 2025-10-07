@@ -34,11 +34,3 @@ When the scrim is clicked on or the `Esc` key is pressed the overlay component w
 1. In Figma go to the **Assets Panel** and search for **Scrim**.
 2. Drag and drop the component in your frame.
 3. Rename and resize the component if needed.
-   <<<<<<< HEAD
-   =======
-
-## Code
-
-[View in Storybook](https://storybook.eds.equinor.com/index.html?path=/docs/feedback-scrim--docs)
-
-> > > > > > > d84ca2f8 (added storybook iframe to all components, adjust size to fit better with component size)

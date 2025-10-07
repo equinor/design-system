@@ -86,12 +86,7 @@ Indeterminate progress indicators indicate an unknown amount of time the process
 
 ## Accessibility
 
-<<<<<<< HEAD
 Progress indicators have `role="progressbar"` and therefore either `aria-describedby` or `aria-label` should be included. Click the button with keyboard and a screen reader activated to test.
-=======
-Progress indicators have _role="progressbar"_ and therefore either `aria-describedby` or `aria-label` should be included. Click the button with keyboard and a screen reader activated to test.
-
-> > > > > > > d84ca2f8 (added storybook iframe to all components, adjust size to fit better with component size)
 
 ## Implementation in Figma
 
