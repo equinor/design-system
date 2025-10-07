@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.2](https://github.com/equinor/design-system/compare/eds-data-grid-react@0.9.1...eds-data-grid-react@v0.9.2) (2025-10-07)
+
+
+### 🔧 Chores
+
+* React 19 upgrade ([#4007](https://github.com/equinor/design-system/issues/4007)) ([645e090](https://github.com/equinor/design-system/commit/645e090d66eb7c1d864c8108497d19003e0cf24e))
+
 ## [0.9.1] - 2025-09-11
 
 ## Fixed

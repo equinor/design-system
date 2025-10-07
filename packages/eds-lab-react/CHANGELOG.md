@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0](https://github.com/equinor/design-system/compare/eds-lab-react@v0.7.9...eds-lab-react@v0.8.0) (2025-10-07)
+
+
+### ✨ Added
+
+* **datepicker:** Enable custom date-formats ([#3415](https://github.com/equinor/design-system/issues/3415)) ([2f91ed9](https://github.com/equinor/design-system/commit/2f91ed92797bdf42c682e421b86bbaf67247257f))
+
+
+### 🐛 Fixed
+
+* packages/eds-lab-react/Dockerfile.storybook to reduce vulnerabilities ([#3051](https://github.com/equinor/design-system/issues/3051)) ([6609b34](https://github.com/equinor/design-system/commit/6609b3489abcbcf9d163c7e43ba4d1c31fa5cc4c))
+* packages/eds-lab-react/Dockerfile.storybook to reduce vulnerabilities ([#3126](https://github.com/equinor/design-system/issues/3126)) ([b10df8a](https://github.com/equinor/design-system/commit/b10df8aa109cc30053c53e9a30460e43a182bd37))
+* packages/eds-lab-react/Dockerfile.storybook to reduce vulnerabilities ([#3276](https://github.com/equinor/design-system/issues/3276)) ([e8dd648](https://github.com/equinor/design-system/commit/e8dd648e5fa41d3ab63c6a416dd93d73a6f4fa00))
+* packages/eds-lab-react/Dockerfile.storybook to reduce vulnerabilities ([#3406](https://github.com/equinor/design-system/issues/3406)) ([8001e44](https://github.com/equinor/design-system/commit/8001e44397f373760a995b76e18ed470a919f1d0))
+* packages/eds-lab-react/Dockerfile.storybook to reduce vulnerabilities ([#3643](https://github.com/equinor/design-system/issues/3643)) ([f688713](https://github.com/equinor/design-system/commit/f688713f04852253155d86ec932ff695681db275))
+* packages/eds-lab-react/Dockerfile.storybook to reduce vulnerabilities ([#3729](https://github.com/equinor/design-system/issues/3729)) ([75c88a9](https://github.com/equinor/design-system/commit/75c88a9faa5e4f00ff2a07503fc89e8b34480dc1))
+
+
+### 🔧 Chores
+
+* :arrow_up: Upgrade dependencies ([#3795](https://github.com/equinor/design-system/issues/3795)) ([8b5b025](https://github.com/equinor/design-system/commit/8b5b02531eb11949bb85dba719849ed3801ae220))
+* ⬆️ Storybook v9 upgrade ([#3976](https://github.com/equinor/design-system/issues/3976)) ([fe76b10](https://github.com/equinor/design-system/commit/fe76b101e344d9dc6889562bb63730768125279f))
+* ⬆️ Upgrade dependencies ([#3824](https://github.com/equinor/design-system/issues/3824)) ([3519425](https://github.com/equinor/design-system/commit/35194255d59abbc12b66d2d29bd3446792570ab8))
+* ⬆️ Upgrade dependencies ([#3881](https://github.com/equinor/design-system/issues/3881)) ([23479f7](https://github.com/equinor/design-system/commit/23479f7c2eabfdc3bf12243b7904545277595431))
+* ⬆️ Upgrade dependencies in all packages ([#3933](https://github.com/equinor/design-system/issues/3933)) ([e67ed39](https://github.com/equinor/design-system/commit/e67ed398d3bc40004366eeff44dda8051691b2dd))
+* 🔖 Release eds-core-react, eds-data-grid-react, eds-lab-react, eds-tokens, eds-utils ([#3982](https://github.com/equinor/design-system/issues/3982)) ([f250771](https://github.com/equinor/design-system/commit/f2507710d68e926edf0b2a5164ce896984cb2e20))
+* 🔥 Remove individual package lockfiles ([#3930](https://github.com/equinor/design-system/issues/3930)) ([f813224](https://github.com/equinor/design-system/commit/f8132240a2c20ad54db54c2c38e53731852f8c7a))
+* React 19 upgrade ([#4007](https://github.com/equinor/design-system/issues/4007)) ([645e090](https://github.com/equinor/design-system/commit/645e090d66eb7c1d864c8108497d19003e0cf24e))
+* update dependencies ([#3783](https://github.com/equinor/design-system/issues/3783)) ([8fb9f2d](https://github.com/equinor/design-system/commit/8fb9f2d9f7c5ea420e67d34e981d9ed7cf694c50))
+* upgrade pnpm to v10 and node to v22 ([#3964](https://github.com/equinor/design-system/issues/3964)) ([d8b9848](https://github.com/equinor/design-system/commit/d8b98482913c76dff41f12ff4a1ee2425dcd9b6c))
+
+
+### 📦 Build System
+
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#3768](https://github.com/equinor/design-system/issues/3768)) ([61e4565](https://github.com/equinor/design-system/commit/61e4565dcf79e6ed5be9f0b0ac7d584bab61a52c))
+
 ## [0.7.9] - 2025-09-11
 
 ### Changed

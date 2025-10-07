@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0](https://github.com/equinor/design-system/compare/eds-tokens@0.10.0...eds-tokens@v0.11.0) (2025-10-07)
+
+
+### ✨ Added
+
+* **eds-tokens:** create and implement new build scripts ([#4004](https://github.com/equinor/design-system/issues/4004)) ([522baa3](https://github.com/equinor/design-system/commit/522baa375b0ca3f8343f2f441aa24ce9cd2efa58))
+* **eds-tokens:** update-tokens ([#4010](https://github.com/equinor/design-system/issues/4010)) ([8c1df55](https://github.com/equinor/design-system/commit/8c1df552fd33a8e5f209b13a72367a6f2b503d35))
+
+
+### ♻️ Refactoring
+
+* **eds-tokens:** tokens build sync setup ([#3993](https://github.com/equinor/design-system/issues/3993)) ([df07db9](https://github.com/equinor/design-system/commit/df07db924e2680f6edf828229b101bb38166be06))
+
+
+### 🔧 Chores
+
+* **eds-tokens:** update variables ([#4013](https://github.com/equinor/design-system/issues/4013)) ([c69429e](https://github.com/equinor/design-system/commit/c69429e888b05b3491135dc9aa29883220e9d7c0))
+
 ## [0.10.0] - 2025-09-11
 
 ### Added
