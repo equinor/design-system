@@ -22,7 +22,7 @@ A snackbar can contain a single action, a single text button that lets users tak
 
 ## Guidelines
 
-Snackbars provide an update on a process that has or will be performed. Snackbars deliver low priority information while *banners* deliver medium priority and *dialog* deliver high priority. Snackbars appear centered at the bottom of the screen and disappear without user interaction. On wider screens they are left-aligned. Snackbars appear on-screen between 5-10 seconds before dismissing themselves, so keep text short.
+Snackbars provide an update on a process that has or will be performed. Snackbars deliver low priority information while _banners_ deliver medium priority and _dialogs_ deliver high priority. Snackbars appear centered at the bottom of the screen and disappear without user interaction. On wider screens they are left-aligned. Snackbars appear on-screen between 5-10 seconds before dismissing themselves, so keep text short.
 
 Snackbars can have one action. This action should not be **Close** or **Dismiss** since snackbars disappear automatically. Actions such as **Undo** or **Retry** are acceptable. Snackbars can wrap up to two lines of text on smaller screens.
 
