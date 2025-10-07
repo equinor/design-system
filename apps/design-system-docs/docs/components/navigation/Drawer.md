@@ -1,44 +1,31 @@
 # Drawer
 
-A navigation _drawer_ displays categories of navigational links in a vertical column that can be scrolled.
+The drawer is a thoughtfully designed navigation component that displays categories of links in a vertical column, creating an organized and accessible experience when there are many items or multiple levels of hierarchy. Designed with care to keep navigation clear and scannable, drawers inspire confident exploration while maintaining our commitment to intuitive wayfinding.
+
+## When to Use
+
+Use a drawer when your content has more sections than would comfortably fit in the Top bar as tabs, or when you need to accommodate two or more levels of navigation hierarchy. Drawers are perfect for organizing complex navigation structures while keeping the interface clean and user-friendly.
+
+## Structure
+
+The drawer consists of carefully organized elements that work together seamlessly:
+
+- **Drawer container** that holds all categories and enables vertical scrolling when needed
+- **Destination list items** that represent each link within a category, featuring clear and descriptive labels
+
+When an item's label exceeds the maximum width, it is thoughtfully truncated with a tooltip providing the complete text for accessibility and usability.
 
 ## Guidelines
 
-A navigation drawer is used to hold navigation with multiple groupings or many levels. Use a navigation drawer when the content has:
-
--   more sections than would fit in the `Top bar` as tabs.
-    
--   two or more levels of navigation hierarchy.
-    
-
-Navigation drawer labels should provide clear and concise direction. Note that if the label is longer than the maximum width it will be truncated and should have a tooltip provided.
-
-  
-
-#### Drawer
-
-#### Destination list item
-
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-NAVIGATION
-
-# Drawer
-
-A navigation _drawer_ displays categories of navigational links in a vertical column that can be scrolled.
+- Use a navigation drawer to organize navigation with multiple groupings or many levels of hierarchy
+- Ensure navigation drawer labels are clear, concise, and meaningful to users
+- When labels exceed the maximum width, they must be truncated with tooltips providing the full text for complete accessibility
+- Organize categories logically to support user understanding and efficient navigation
+- Consider the scrollable nature of the container when planning content hierarchy
 
 ## Implementation in Figma
 
-### Instructions
-
-1.  In Figma go to the **Assets Panel** and search for **Drawer**
-    
-2.  Drag and drop the component in your frame
-    
-3.  Rename and resize the **drawer** component if needed
-    
-4.  Choose the variant of the **destination items** from the **Design Panel**.
+1. In Figma go to the **Assets Panel** and search for **Drawer**
+2. Drag and drop the component into your frame
+3. Rename and resize the drawer component if needed
+4. Choose the variant of the destination items from the **Design Panel**

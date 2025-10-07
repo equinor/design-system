@@ -1,8 +1,6 @@
 # Date/time picker
 
-_Date/time pickers_ allows users to select a date and/or time, or a range of dates and/or times.
-
-## Examples
+_Date/time pickers_ allows users to select a date and/or time, or a range of dates and/or times.
 
 ## Guidelines
 
@@ -10,28 +8,11 @@ Date pickers are tied to input fields, and are accessed through focusing on the 
 
 Time pickers are tied to input fields, and are accessed through focusing on the input field by clicking or using the `tab` key. The time picker opens as an overlaying list of time that allows the user to select a specific time. If a time is chosen, this is reflected in the input field.
 
-### Variant
-
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-INPUTS
-
-# Date/time picker
-
-_Date/time pickers_ allows users to select a date and/or time, or a range of dates and/or times.
-
 ## Implementation in Figma
 
 ### Instructions
 
-1.  In Figma go to the **Assets Panel** and search for **date picker**.
-    
-2.  Drag and drop the component in your frame.
-    
-3.  Rename and resize the component if needed.
-    
-4.  Choose the variant from the **Design Panel**.
+1. In Figma go to the **Assets Panel** and search for **date picker**.
+2. Drag and drop the component in your frame.
+3. Rename and resize the component if needed.
+4. Choose the variant from the **Design Panel**.
