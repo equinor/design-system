@@ -7,7 +7,7 @@ _Dialogs_ display critical notifications and required actions.
 Dialogs disable all app functionality when they appear, and remain on screen until confirmed, dismissed, or a required action has been taken. Dialogs are purposefully interruptive, so they should be used sparingly.
 
 - Dialogs **focus** user attention to ensure their content is addressed
-- Dialogs should be **direct** in communicating information and dedicated to completing a assignment
+- Dialogs should be **direct** in communicating information and dedicated to completing an assignment
 - Dialogs should appear in response to a user task or an action, with suitable or contextual information
 
 ## Variants
