@@ -2,9 +2,9 @@
 
 Components are interactive building blocks for creating a user interface.
 
-Design components are designed in  (internal Equinor link)
+Design components are designed in (internal Equinor link)
 
-A  is available for developed components.
+A is available for developed components.
 
 ## Status
 
@@ -12,10 +12,10 @@ We are currently implementing compact mode for all our components. Guidelines fo
 
 These components are already available in compact mode:
 
--   
--   
--   
--   
--   
+-
+-
+-
+-
+-
 
 ## Categories

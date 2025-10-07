@@ -58,4 +58,4 @@ For implementation details and usage examples, please refer to our [Storybook do
 
 ---
 
-If you have questions or need support, please visit our [Support page](../../support/support.md). We are here to help you organise your content and create accessible, user-friendly experiences.
+If you have questions or need support, please visit our [Support page](../../../support/support.md). We are here to help you organise your content and create accessible, user-friendly experiences.
