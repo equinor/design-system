@@ -1,10 +1,10 @@
 {
-  "packages/eds-core-react": "0.49.0",
-  "packages/eds-data-grid-react": "0.9.1",
-  "packages/eds-icons": "0.22.0",
-  "packages/eds-lab-react": "0.7.9",
-  "packages/eds-tokens": "0.10.0",
-  "packages/eds-tokens-build": "1.0.1",
-  "packages/eds-tokens-sync": "1.0.1",
-  "packages/eds-utils": "0.9.0"
+  "packages/eds-core-react": "0.49.1",
+  "packages/eds-data-grid-react": "0.9.2",
+  "packages/eds-icons": "0.22.1",
+  "packages/eds-lab-react": "0.8.0",
+  "packages/eds-tokens": "0.11.0",
+  "packages/eds-tokens-build": "1.1.0",
+  "packages/eds-tokens-sync": "1.1.0",
+  "packages/eds-utils": "0.9.1"
 }
