@@ -126,18 +126,30 @@ export function Tab({
 export function SideBarLink({
   children,
   className,
+  popoverTarget,
+  anchorName,
   ...rest
 }: {
   children?: React.ReactNode;
   className?: string;
+  popoverTarget?: string;
+  anchorName?: string;
 }) {
   return (
-    <a
-      href=""
+    <button
+      type="button"
+      popoverTarget={popoverTarget}
       className={`self-stretch h-14 px-5 justify-between items-center inline-flex ${className}`}
+      style={
+        anchorName
+          ? ({ anchorName: `--${anchorName}` } as React.CSSProperties)
+          : undefined
+      }
       {...rest}
     >
       <div className="relative w-6 h-6">{children}</div>
-    </a>
+    </button>
   );
 }
+
+export { Menu } from "./Menu";
