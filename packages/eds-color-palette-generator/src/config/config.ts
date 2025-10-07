@@ -36,7 +36,7 @@ export const BG_FILL_MUTED_DEFAULT: StepDefinition = {
   name: 'Background Fill Muted Default',
   category: 'Background Fill Muted',
   variant: 'default',
-  lightValue: 0.89,
+  lightValue: 0.91,
   darkValue: 0.47,
   contrastWith: [
     {
@@ -52,7 +52,7 @@ export const BG_FILL_MUTED_HOVER: StepDefinition = {
   name: 'Background Fill Muted Hover',
   category: 'Background Fill Muted',
   variant: 'hover',
-  lightValue: 0.85,
+  lightValue: 0.87,
   darkValue: 0.52,
   contrastWith: [
     {
@@ -68,7 +68,7 @@ export const BG_FILL_MUTED_ACTIVE: StepDefinition = {
   name: 'Background Fill Muted Active',
   category: 'Background Fill Muted',
   variant: 'active',
-  lightValue: 0.8,
+  lightValue: 0.82,
   darkValue: 0.58,
   contrastWith: [
     {

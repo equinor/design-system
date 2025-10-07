@@ -193,3 +193,18 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   background-color: var(--eds-color-bg-fill-muted-default);
   border-bottom: 2px solid var(--eds-color-border-strong);
 }
+
+/* Menu */
+
+.menu {
+  background-color: var(--eds-color-bg-floating);
+}
+
+.menu-item {
+  color: var(--eds-color-text-subtle);
+}
+
+.menu-item--active {
+  background-color: var(--eds-color-bg-fill-muted-default);
+  color: var(--eds-color-text-subtle);
+}
