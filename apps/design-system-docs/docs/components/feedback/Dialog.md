@@ -48,7 +48,7 @@ Most dialog content should avoid scrolling.
 
 ## Guidelines
 
-A dialog is a modal window that appears over everything on the screen and always over a . Dialogs can appear without warning and require users to stop their current task so they should be used sparingly. The dialog disables all application functionality and requires an action to be taken in order to be dismissed.
+A dialog is a modal window that appears over everything on the screen and always over a scrim. Dialogs can appear without warning and require users to stop their current task so they should be used sparingly. The dialog disables all application functionality and requires an action to be taken in order to be dismissed.
 
 Dialogs can contain a Title, Content and Actions. A dialog can have one or two actions, but never a third. Actions should always be related to the message. Dialogs should try to avoid scrollable content. When scrolling is necessary, the title and actions are fixed and the content scrolls.
 
