@@ -14,7 +14,7 @@ Dialogs disable all app functionality when they appear, and remain on screen unt
 
 #### Dismissable
 
-Closes the dialog on click outside and the ``Esc`` key
+Closes the dialog when clicking outside the dialog or pressing the `Esc` key.
 
 #### Text + action
 
