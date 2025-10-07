@@ -91,11 +91,17 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 */
 
 .tab {
+  border-bottom: 1px solid light-dark(#d4d4d4, #4a4a4a);
+  color: light-dark(black, white);
+
   &:hover {
+    background-color: light-dark(#e1e1e1, #333);
   }
 }
 
 .tab--current {
+  border-bottom: 2px solid light-dark(#696969, #ababab);
+  color: light-dark(black, white);
 }
 
 /* Button */
