@@ -1,0 +1,178 @@
+# Trigger Package Publishing Workflow
+#
+# This workflow automatically publishes packages to npm after a release PR is merged (release_please.yml).
+# It detects which packages had version changes and triggers the appropriate publish workflows.
+#
+# Flow:
+# 1. Release PR is merged → this workflow runs
+# 2. Checks which package.json files changed
+# 3. Triggers individual publish workflows only for changed packages
+# 4. Each publish workflow handles: building, testing, npm publish, and Storybook deployment
+
+name: Trigger Package Publishing
+
+# Trigger: Runs when a PR is closed (and merged) to the specified branch
+on:
+  pull_request:
+    types: [closed] # Only runs when PR is closed (includes both merged and manually closed)
+    branches:
+      # - develop  # TODO: enable after testing
+      - fre/release-please
+
+# Required permissions
+permissions:
+  contents: write # Needed to read repository content and check file changes
+  actions: write # Needed to trigger other workflows via gh CLI
+
+jobs:
+  # Job 1: Determine which packages need to be published
+  # Checks git diff to see which package.json files changed in the merged PR
+  check-releases:
+    # Only run if:
+    # 1. PR was actually merged (not just closed)
+    # 2. PR title contains "chore: release" (indicates it's a release-please PR)
+    if: |
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.title, 'chore: release')
+    runs-on: ubuntu-latest
+    # Expose outputs so downstream jobs can check which packages changed
+    outputs:
+      core-react: ${{ steps.check.outputs.core-react }}
+      lab-react: ${{ steps.check.outputs.lab-react }}
+      data-grid-react: ${{ steps.check.outputs.data-grid-react }}
+      icons: ${{ steps.check.outputs.icons }}
+      tokens: ${{ steps.check.outputs.tokens }}
+
+    steps:
+      # Checkout the repository with enough history to compare commits
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Fetch last 2 commits so we can diff HEAD~1 and HEAD
+
+      # Check which package.json files were modified in the merge
+      # For each package, sets output to 'true' if its package.json changed, 'false' otherwise
+      - name: Check which packages changed
+        id: check
+        run: |
+          # Compare HEAD~1 (before merge) with HEAD (after merge)
+          # grep -q returns 0 (success) if pattern is found, 1 if not found
+
+          # Check eds-core-react
+          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-core-react/package.json"; then
+            echo "core-react=true" >> $GITHUB_OUTPUT
+          else
+            echo "core-react=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check eds-lab-react
+          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-lab-react/package.json"; then
+            echo "lab-react=true" >> $GITHUB_OUTPUT
+          else
+            echo "lab-react=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check eds-data-grid-react
+          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-data-grid-react/package.json"; then
+            echo "data-grid-react=true" >> $GITHUB_OUTPUT
+          else
+            echo "data-grid-react=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check eds-icons
+          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-icons/package.json"; then
+            echo "icons=true" >> $GITHUB_OUTPUT
+          else
+            echo "icons=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check eds-tokens
+          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-tokens/package.json"; then
+            echo "tokens=true" >> $GITHUB_OUTPUT
+          else
+            echo "tokens=false" >> $GITHUB_OUTPUT
+          fi
+
+  # Job 2: Trigger core-react publish workflow
+  # Only runs if core-react package.json was changed
+  trigger-core-react:
+    needs: check-releases
+    if: needs.check-releases.outputs.core-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger core-react publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for gh CLI authentication
+        run: |
+          # Use GitHub CLI to trigger the publish workflow
+          gh workflow run publish_core_react.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest \              # Input: which npm dist-tag to use
+            -f environment=production        # Input: which Storybook environment to deploy
+
+  # Job 3: Trigger lab-react publish workflow
+  # Only runs if lab-react package.json was changed
+  trigger-lab-react:
+    needs: check-releases
+    if: needs.check-releases.outputs.lab-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger lab-react publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_lab.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest \
+            -f environment=production
+
+  # Job 4: Trigger data-grid-react publish workflow
+  # Only runs if data-grid-react package.json was changed
+  trigger-data-grid-react:
+    needs: check-releases
+    if: needs.check-releases.outputs.data-grid-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data-grid-react publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_data_grid.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest \
+            -f environment=production
+
+  # Job 5: Trigger icons publish workflow
+  # Only runs if icons package.json was changed
+  trigger-icons:
+    needs: check-releases
+    if: needs.check-releases.outputs.icons == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger icons publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_icons.yaml \
+            --repo ${{ github.repository }} \
+            --ref develop \
+            -f npm-tag=latest  # Icons don't have Storybook, so no environment input
+
+  # Job 6: Trigger tokens publish workflow
+  # Only runs if tokens package.json was changed
+  trigger-tokens:
+    needs: check-releases
+    if: needs.check-releases.outputs.tokens == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger tokens publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_tokens.yaml \
+            --repo ${{ github.repository }} \
+            --ref fre/release-please \
+            -f npm-tag=latest
