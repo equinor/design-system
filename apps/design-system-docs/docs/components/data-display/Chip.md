@@ -6,7 +6,16 @@ _Chips_, also known as tags or badges, are advanced badges that represent discre
 
 Chips allow users to make selections, perform an action, input information and attributes, filter content and complete tasks. Chips can transform from free text or predefined text.
 
-### Choice chip
+## When to Use
+Chips allow users to enter information, make selections, filter content, or trigger actions.
+
+- Chips are **compact** components that represent discrete information
+- Chips should be **relevant** to the content or task they represent
+- Chips should make tasks easier to complete, or content easier to sort
+
+### Variants
+
+#### Choice chip
 
 Choice chips are used when there are at least two predefined options to choose between to signify the user's choice.
 
