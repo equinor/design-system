@@ -4,38 +4,26 @@ _Tables_ display data in a structured format.
 
 ## When to Use
 
-- Use tables if you are displaying information or data that will require minimal interaction such as editing or sorting.
-- Consider using a **Table data grid** if the table is using advanced functionalities.
-- Use tables to let users compare information in rows and columns.
-
-## Structure
-
-### Simple table
-
-### Fixed table header
-
-### Compact table
-
-### Table sortable
-
-## Guidelines
+- Use tables if you are displaying information or data that will require minimal interaction such as editing or sorting
+- Consider using a **Table data grid** if the table is using advanced functionalities
+- Use tables to let users compare information in rows and columns
 
 **Table Caption**
 
-- Describes the whole content of a table.
-- Helps users find, navigate and understand tables.
+- Describes the whole content of a table
+- Helps users find, navigate and understand tables
 
 **Table Header**
 
-- Tells users what the rows and columns represent.
-- The header row can have icons and text.
-- Icons can be used for sorting columns as well as a alternative text.
+- Tells users what the rows and columns represent
+- The header row can have icons and text
+- Icons can be used for sorting columns as well as a alternative text
 
 **Table Cell**
 
-- The cell row can have icons, text, links, inputs, numbers, monospaced numbers and other custom content (by using the placeholder).
+- The cell row can have icons, text, links, inputs, numbers, monospaced numbers and other custom content (by using the placeholder)
 
-### Header
+#### Header
 
 The header row can have icons and text. Icons can be used for sorting columns as well as a text alternative.
 
@@ -43,7 +31,25 @@ Avoid labels that are too long. Titles should be to the point, short and no more
 
 The `Header` text component includes options for adding units and a placeholder icon for sorting icons. This component uses auto layout to place label text, icons and/or units with the correct spacing. Make sure to resize the component so that the spacing on the right is aligned to the most right part of the contents.
 
-### Cell
+## Variants
+
+- Header
+- Header custom icon
+- Header custom icon left
+- Header custom icon right
+- Header unit
+- Header unit custom icon left
+- Header unit custom icon right
+
+## States
+
+- Enabled
+- Focus
+- Active
+- Hover
+- Disabled
+
+#### Cell
 
 The cell row can have icons, text, links, inputs, numbers, monospaced numbers and other custom content (by using the placeholder). For cells containing numbers only, use `Cell numeric monospaced` for better readability, and easier comparison and scannability of numbers between rows.
 
@@ -62,11 +68,24 @@ Adjust the width of the header to fit the column width of the cells below, where
 
 Now you can either use auto layout or constraints.
 
+## Variants
 
+- Cell icon
+- Cell input
+- Cell numeric monospaced
+- Cell placeholder
+- Cell text
+
+## States
+
+- Enabled
+- Focus
+- Active
+- Disabled
+- Read only
+- Error
 
 ## Implementation in Figma
-
-### Instructions
 
 1. In Figma go to the **Assets Panel** and search for **table**.
 2. Drag and drop the components in your frame.
@@ -120,9 +139,4 @@ Now you can either use auto layout or constraints.
 7. Make sure to name the new group.
 8. Locate the **Design** tab in the **Inspector Panel**.
 9. Under the **Constraints** section, set up constraints.
-
-
-## Code
-
-[View in Storybook](https://storybook.eds.equinor.com/index.html?path=/docs/data-display-table--docs)
 
