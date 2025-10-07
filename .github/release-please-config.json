@@ -28,16 +28,6 @@
       "package-name": "@equinor/eds-tokens",
       "component": "eds-tokens"
     },
-    "packages/eds-tokens-build": {
-      "release-type": "node",
-      "package-name": "@equinor/eds-tokens-build",
-      "component": "eds-tokens-build"
-    },
-    "packages/eds-tokens-sync": {
-      "release-type": "node",
-      "package-name": "@equinor/eds-tokens-sync",
-      "component": "eds-tokens-sync"
-    },
     "packages/eds-utils": {
       "release-type": "node",
       "package-name": "@equinor/eds-utils",
