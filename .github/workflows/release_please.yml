@@ -1,116 +1,46 @@
-name: Trigger Package Publishing
+name: Release Please
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
-      # - develop TODO: enable after testing
-      - fre/release-please
+      # - develop  # TODO: enable after testing
+      - fre/release-please # Test branch
 
 permissions:
   contents: write
-  actions: write
+  pull-requests: write
 
 jobs:
-  check-releases:
-    if: |
-      github.event.pull_request.merged == true &&
-      contains(github.event.pull_request.title, 'chore: release')
+  release-please:
     runs-on: ubuntu-latest
     outputs:
-      core-react: ${{ steps.check.outputs.core-react }}
-      lab-react: ${{ steps.check.outputs.lab-react }}
-      data-grid-react: ${{ steps.check.outputs.data-grid-react }}
-      icons: ${{ steps.check.outputs.icons }}
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      eds-core-react--release_created: ${{ steps.release.outputs['packages/eds-core-react--release_created'] }}
+      eds-core-react--tag_name: ${{ steps.release.outputs['packages/eds-core-react--tag_name'] }}
+      eds-data-grid-react--release_created: ${{ steps.release.outputs['packages/eds-data-grid-react--release_created'] }}
+      eds-data-grid-react--tag_name: ${{ steps.release.outputs['packages/eds-data-grid-react--tag_name'] }}
+      eds-icons--release_created: ${{ steps.release.outputs['packages/eds-icons--release_created'] }}
+      eds-icons--tag_name: ${{ steps.release.outputs['packages/eds-icons--tag_name'] }}
+      eds-lab-react--release_created: ${{ steps.release.outputs['packages/eds-lab-react--release_created'] }}
+      eds-lab-react--tag_name: ${{ steps.release.outputs['packages/eds-lab-react--tag_name'] }}
+      eds-tokens--release_created: ${{ steps.release.outputs['packages/eds-tokens--release_created'] }}
+      eds-tokens--tag_name: ${{ steps.release.outputs['packages/eds-tokens--tag_name'] }}
+      eds-tokens-build--release_created: ${{ steps.release.outputs['packages/eds-tokens-build--release_created'] }}
+      eds-tokens-build--tag_name: ${{ steps.release.outputs['packages/eds-tokens-build--tag_name'] }}
+      eds-tokens-sync--release_created: ${{ steps.release.outputs['packages/eds-tokens-sync--release_created'] }}
+      eds-tokens-sync--tag_name: ${{ steps.release.outputs['packages/eds-tokens-sync--tag_name'] }}
+      eds-utils--release_created: ${{ steps.release.outputs['packages/eds-utils--release_created'] }}
+      eds-utils--tag_name: ${{ steps.release.outputs['packages/eds-utils--tag_name'] }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: google-github-actions/release-please-action@v4
+        id: release
         with:
-          fetch-depth: 2
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check which packages changed
-        id: check
+      - name: Print release outputs for debugging
+        if: ${{ steps.release.outputs.releases_created }}
         run: |
-          # Check if package.json files were modified in the PR
-          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-core-react/package.json"; then
-            echo "core-react=true" >> $GITHUB_OUTPUT
-          else
-            echo "core-react=false" >> $GITHUB_OUTPUT
-          fi
-
-          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-lab-react/package.json"; then
-            echo "lab-react=true" >> $GITHUB_OUTPUT
-          else
-            echo "lab-react=false" >> $GITHUB_OUTPUT
-          fi
-
-          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-data-grid-react/package.json"; then
-            echo "data-grid-react=true" >> $GITHUB_OUTPUT
-          else
-            echo "data-grid-react=false" >> $GITHUB_OUTPUT
-          fi
-
-          if git diff HEAD~1 HEAD --name-only | grep -q "packages/eds-icons/package.json"; then
-            echo "icons=true" >> $GITHUB_OUTPUT
-          else
-            echo "icons=false" >> $GITHUB_OUTPUT
-          fi
-
-  trigger-core-react:
-    needs: check-releases
-    if: needs.check-releases.outputs.core-react == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger core-react publish
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run publish-core-react.yml \
-            --repo ${{ github.repository }} \
-            --ref develop \
-            -f npm-tag=latest \
-            -f environment=production
-
-  trigger-lab-react:
-    needs: check-releases
-    if: needs.check-releases.outputs.lab-react == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger lab-react publish
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run publish-lab-react.yml \
-            --repo ${{ github.repository }} \
-            --ref develop \
-            -f npm-tag=latest \
-            -f environment=production
-
-  trigger-data-grid-react:
-    needs: check-releases
-    if: needs.check-releases.outputs.data-grid-react == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger data-grid-react publish
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run publish-data-grid-react.yml \
-            --repo ${{ github.repository }} \
-            --ref develop \
-            -f npm-tag=latest \
-            -f environment=production
-
-  trigger-icons:
-    needs: check-releases
-    if: needs.check-releases.outputs.icons == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger icons publish
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run publish-icons.yml \
-            --repo ${{ github.repository }} \
-            --ref develop \
-            -f npm-tag=latest
+          echo "Releases created!"
+          echo "${{ toJson(steps.release.outputs) }}"
