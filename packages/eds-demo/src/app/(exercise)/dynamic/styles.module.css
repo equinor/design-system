@@ -34,12 +34,12 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 }
 
 .top-bar {
-  border-bottom: 2px solid var(--eds-color-border-subtle);
+  border-bottom: 1px solid var(--eds-color-border-subtle);
   color: var(--eds-color-text-subtle);
 }
 
 .sidebar {
-  border-right: 2px solid var(--eds-color-border-subtle);
+  border-right: 1px solid var(--eds-color-border-subtle);
 }
 
 /* Sidebar link */
