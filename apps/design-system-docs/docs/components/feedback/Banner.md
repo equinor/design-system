@@ -62,7 +62,7 @@ Some examples where complex content inside Banner might be appropriate:
 
 ## Do's and don'ts
 
-✅  Use only one banner at the time
+✅  Use only one banner at a time
 
 ❌  Do not include links in the banner text
 
