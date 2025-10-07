@@ -9,7 +9,7 @@ A `Scrim` shows behind all other surfaces in an app, displaying contextual and a
 - The scrim's back layer is persistent, displaying controls and content that relate to the front layer
 - The scrim focuses attention on one layer at a time
 - The scrim is displayed at full width and holds primary content
-- The scrim can be closed by either interacting with the front layer, using `Esc` button or tapping a conceal affordance on either layer
+- The scrim can be closed by either interacting with the front layer, pressing the `Esc` key, or tapping a conceal affordance on either layer
 
 ## Guidelines
 
