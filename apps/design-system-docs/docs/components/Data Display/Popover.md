@@ -2,6 +2,18 @@
 
 A _popover_ is a floating card that provides more information or actions on hover or click.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=data-display-popover--introduction
+        "
+        width="100%"
+        height="300"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/data-display-popover--docs)
+
 ## When to Use
 
 Popovers provide excess or additional information that does not fit in the main content area.
@@ -9,11 +21,9 @@ Popovers provide excess or additional information that does not fit in the main 
 - A popover displays rich content in a non-modal dialog to describe or add additional information when users hover over, focus on, or click an interactive element
 - User can interact with popover content
 
-## Structure
+## Variants
 
-#### Activate ``onClick``
-
-#### Activate ``onHover``
+#### Activate `onHover`
 
 ![popover](../assets/popover.jpg)
 
@@ -39,8 +49,8 @@ It is recommended to use `trapFocus` in every Popover which contains active elem
 
 ## Do's and don'ts
 
-✅  Use sparingly
+✅ Use sparingly
 
-❌  Do not use for a single short line of text, use a tooltip instead
+❌ Do not use for a single short line of text, use a tooltip instead
 
-❌  Do not have multiple popovers open at the same time
+❌ Do not have multiple popovers open at the same time

@@ -2,6 +2,18 @@
 
 _Tables_ display data in a structured format.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=data-display-table--introduction
+        "
+        width="100%"
+        height="500"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/data-display-table--docs)
+
 ## When to Use
 
 - Use tables if you are displaying information or data that will require minimal interaction such as editing or sorting
@@ -139,4 +151,3 @@ Now you can either use auto layout or constraints.
 7. Make sure to name the new group.
 8. Locate the **Design** tab in the **Inspector Panel**.
 9. Under the **Constraints** section, set up constraints.
-
