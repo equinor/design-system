@@ -10,8 +10,6 @@ Time pickers are tied to input fields, and are accessed through focusing on the 
 
 ## Implementation in Figma
 
-### Instructions
-
 1. In Figma go to the **Assets Panel** and search for **date picker**.
 2. Drag and drop the component in your frame.
 3. Rename and resize the component if needed.
