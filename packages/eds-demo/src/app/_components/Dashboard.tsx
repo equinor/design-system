@@ -16,12 +16,15 @@ type Props = {
 export function Dashboard({ styles, Chip, ...rest }: Props) {
   const tabs = [
     { id: "projects", label: "Projects", isCurrent: false },
-    { id: "people", label: "People (current page)", isCurrent: true },
+    { id: "people", label: "People", isCurrent: true },
     { id: "locations", label: "Locations", isCurrent: false },
   ];
 
   return (
-    <div className={`flex mx-auto min-h-svh flex-col ${styles.app}`} {...rest}>
+    <div
+      className={`flex mx-auto min-h-svh flex-col ${styles.dashboard}`}
+      {...rest}
+    >
       <TopBar
         className={`self-stretch h-[57px] pl-2.5 pr-3.5 items-center justify-between gap-14 inline-flex ${styles["top-bar"]}`}
         subtitle="Application name – Subtitle"

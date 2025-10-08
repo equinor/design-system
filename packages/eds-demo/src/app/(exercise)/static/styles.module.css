@@ -15,14 +15,16 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 */
 
-.app {
+/* Dashboard */
+
+.dashboard {
   background-color: var(--eds-color-bg-neutral-canvas);
   color: var(--eds-color-text-neutral-strong);
 }
 
 /* 
   💰 The top bar and sidebar are typically placed on top of
-   the application base layer to provide visual hierarchy
+   the dashboard base layer to provide visual hierarchy
 */
 
 .top-bar,
