@@ -32,7 +32,7 @@ Tab labels should provide clear and concise direction. If the label is longer th
 
 If the `Navigation: Navigation Drawer` is not used, tabs may be used in the `Navigation: Top Bar` as the main navigation linking to unrelated pages.
 
-::: Info
+:::info
 To navigate using the keyboard use:
 - TAB to move from tab to tab panel.
 - SHIFT + TAB to go backwards.
