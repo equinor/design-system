@@ -15,13 +15,7 @@ When a task is more advanced or complicated, visual help from a stepper lets the
 - Do not mix nouns and verbs. Pick one or the other.
 - Always use icons that clearly communicate their intended purpose.
 
-## Accessibility
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section.
-
 ## Implementation in Figma
-
-### Instructions
 
 1. In Figma go to the **Assets Panel** and search for **Stepper**.
 2. Drag and drop the component in your frame.

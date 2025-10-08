@@ -25,10 +25,12 @@ Compact menus provide streamlined options for space-conscious interfaces.
 
 ## Implementation in Figma
 
-### Instructions
-
 1. Locate the **Assets** tab in the **Layers Panel**.
 2. There are two ways to locate the `Menu` component needed:
    1. Use the search bar to search for a component grouping name or variation name.
    2. Scroll through the folders list and open the grouping needed.
 3. Once the component is located, click and drag it into the frame/artboard.
+
+## Do's and don'ts
+
+❌  Do not use a menu with a scrim
