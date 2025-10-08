@@ -33,7 +33,7 @@ Text fields are used for long and short amounts of text. `Text inputs` are for a
 
 The component includes options for writing unit for the field and a placeholder icon. This component uses auto layout to place an icon and/or unit with the correct spacing next to each other.
 
-::: Note
+:::note
 While `type="number"` does provide native validation, the implementation is inconsistent across browsers. We instead recommend using custom validation.
 :::
 
