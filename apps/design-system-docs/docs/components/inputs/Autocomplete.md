@@ -9,15 +9,24 @@ A select can be used in different settings:
 - to filter or sort content on a page
 - to submit data
 
+## Structure
+
+- Autocomplete
+- Autocomplete multi
+
+![autocomplete](../assets/autocomplete.jpg)   ![autocomplete-multi](../assets/autocomplete-multi.jpg)
+
 ## Guidelines
 
 The `autocomplete` variant is used to choose only one option from a list. The `autocomplete multi` variant is used if multiple choices can be applied.
 
 A `native select` component is also available for implementation. We recommend using native autocomplete on products with limited space as it provides a better user experience.
 
-## Implementation in Figma
+## Accessibility
 
-### Instructions
+The property ``label`` is mandatory and makes sure you have a descriptive label for screen readers.
+
+## Implementation in Figma
 
 1. In Figma go to the **Assets Panel** and search for **autocomplete**
 2. Drag and drop the component in your frame
