@@ -2,6 +2,18 @@
 
 The _top bar_, also known as a header, displays navigation and actions relating to the interface.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=navigation-topbar--with-search-and-icons&viewMode=story
+        "
+        width="100%"
+        height="200"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/navigation-topbar--docs)
+
 ## When to use
 
 Top bars span the full width of the viewport and are always the topmost component on a page. The top bar does not scroll away, being a consistent guidepost to users.
@@ -36,8 +48,8 @@ The actions on the far-right are standard. This area is for the following common
 
 ## Do's and don'ts
 
-✅  Keep the top bar visible at all times
+✅ Keep the top bar visible at all times
 
-❌  Do not hide the top bar while scrolling
+❌ Do not hide the top bar while scrolling
 
-❌  Do not change the colour of the top bar
+❌ Do not change the colour of the top bar

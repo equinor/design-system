@@ -1,5 +1,7 @@
 # Stepper
 
+### Not in SB
+
 _Steppers_ guide users through the steps of a task, creating clear pathways that help users navigate complex processes with confidence and clarity.
 
 ## When to Use

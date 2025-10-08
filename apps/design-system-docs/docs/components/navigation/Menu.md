@@ -2,6 +2,18 @@
 
 A _menu_, also known as a dropdown, is a temporary list of actions or functions that creates organized pathways for user interactions. Designed with intention, menus help users navigate complex choices while maintaining a clean and focused interface.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=navigation-menu--introduction
+        "
+        width="100%"
+        height="250"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/navigation-menu--docs)
+
 ## When to Use
 
 Use menus to present a collection of related actions or navigation options that would otherwise clutter the interface. Menus are perfect when you need to offer multiple choices without overwhelming the primary content area.

@@ -2,6 +2,18 @@
 
 _Dialogs_ display critical notifications and required actions.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=open:!false;isDismissable:!false&id=feedback-dialog--introduction
+        "
+        width="100%"
+        height="500"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/feedback-dialog--docs)
+
 ## When to use
 
 Dialogs disable all app functionality when they appear, and remain on screen until confirmed, dismissed, or a required action has been taken. Dialogs are purposefully interruptive, so they should be used sparingly.
@@ -52,7 +64,7 @@ A dialog is a modal window that appears over everything on the screen and always
 
 Dialogs can contain a Title, Content and Actions. A dialog can have one or two actions, but never a third. Actions should always be related to the message. Dialogs should try to avoid scrollable content. When scrolling is necessary, the title and actions are fixed and the content scrolls.
 
-In the notification family, dialogs are the most interruptive. *Banners* deliver medium priority slightly interruptive notifications, and *snackbar* deliver low priority un-interruptive notifications. Since dialogs are very disruptive, they should be used only in critical situations.
+In the notification family, dialogs are the most interruptive. _Banners_ deliver medium priority slightly interruptive notifications, and _snackbar_ deliver low priority un-interruptive notifications. Since dialogs are very disruptive, they should be used only in critical situations.
 
 ## Implementation in Figma
 
@@ -61,7 +73,6 @@ In the notification family, dialogs are the most interruptive. *Banners* deliver
 3. Rename and resize the component if needed.
 4. Choose the variant from the **Design Panel**.
 
-
 ## Do's and don'ts
 
-❌  A dialog should never have more than two actions
+❌ A dialog should never have more than two actions

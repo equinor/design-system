@@ -14,9 +14,33 @@ _Selection controls_ allow users to select options, make decisions and set prefe
 
 The checkboxes makes it easy to compare available options. They have also been in user interfaces for a long time and should be used as expected.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-selection-controls-checkbox--introduction
+        "
+        width="100%"
+        height="80"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-selection-controls-checkbox--docs)
+
 #### Radio button
 
 Exposes all available options and makes it easy to compare available options.
+
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-selection-controls-radio--introduction
+        "
+        width="100%"
+        height="80"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-selection-controls-radio--docs)
 
 #### Switch
 
@@ -24,13 +48,25 @@ Exposes all available options and makes it easy to compare available options.
 - Immediately activate or deactivate something
 - Switches make it easy to compare available options
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-selection-controls-switch--introduction
+        "
+        width="100%"
+        height="80"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-selection-controls-switch--docs)
+
 ## Guidelines
 
 Selection controls are to be visible and understandable at a quick glance. Selected options are more visible than unselected. Selection controls are always accompanied with a clear label. Make sure that the labels are surrounded with a `clickbound` that activates the selection control as well as the control itself.
 
 ## Accessibility
 
-To comply with accessibility, a ``label`` is always required on inputs. In some cases though, a visual label is not desirable. In such cases ``aria-label`` or ``aria-labelledby`` should be used.
+To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used.
 
 ## Implementation in Figma
 
@@ -41,8 +77,8 @@ To comply with accessibility, a ``label`` is always required on inputs. In some 
 
 ## Do's and don'ts
 
-✅  Use same type checkbox in a group
+✅ Use same type checkbox in a group
 
-❌  Do not mix different selection controls within a grouped list
+❌ Do not mix different selection controls within a grouped list
 
-❌  Do not resize any of the selection controls
+❌ Do not resize any of the selection controls

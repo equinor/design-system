@@ -2,6 +2,16 @@
 
 A _side sheet_ is a thoughtfully designed toggleable area that anchors gracefully to the edge of the viewport, providing a dedicated space for supplementary content. Designed with care to enhance the user experience without overwhelming the primary interface, side sheets inspire efficient workflows while maintaining clear visual hierarchy and purposeful content organization.
 
+<iframe 
+        class="sb-iframe"
+        src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=surfaces-sidesheet--introduction"
+        width="100%"
+        height="500"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/surfaces-sidesheet--introduction)
+
 ## When to Use
 
 Use a side sheet when you want to provide easy access to supplementary content without disrupting the primary user experience. Side sheets are perfect for presenting contextual actions, filters, additional functionality, or organized content tabs that help users focus on what matters most while keeping supporting information readily accessible.
@@ -24,7 +34,7 @@ The side sheet comes in multiple sizes:
 Small, Medium, Large and X-Large
 
 ![Side sheet, medium size](../assets/side-sheet-m.jpg)
-*(Size: Medium)*
+_(Size: Medium)_
 
 ## Guidelines
 
@@ -47,6 +57,6 @@ Side sheets are designed with accessibility as a core principle to ensure all us
 
 ## Do's and don'ts
 
-❌  Do not remove the close icon
+❌ Do not remove the close icon
 
-❌  Do not use a left anchored side sheet if you are using a navigation drawer
+❌ Do not use a left anchored side sheet if you are using a navigation drawer

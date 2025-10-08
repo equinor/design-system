@@ -2,6 +2,18 @@
 
 The _autocomplete_ (previously called select) component allows users to choose one or multiple items or options from a list.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-autocomplete--introduction
+        "
+        width="100%"
+        height="400"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-autocomplete--docs)
+
 ## When to Use
 
 A select can be used in different settings:

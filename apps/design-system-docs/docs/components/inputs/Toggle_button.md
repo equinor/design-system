@@ -2,6 +2,18 @@
 
 _Toggle buttons_ allow users to select one of multiple options with a single click or tap.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-button-toggle--introduction
+        "
+        width="100%"
+        height="80"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-button-toggle--docs)
+
 ## Guidelines
 
 EDS has one set of primary toggle buttons with either an icon and no text, or text and no icon. When using an icon it must be directly related to the action of the button.

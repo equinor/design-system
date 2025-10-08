@@ -2,6 +2,18 @@
 
 _Buttons_ allow users to take action with a single click or tap.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-button-button--basic
+        "
+        width="100%"
+        height="80"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-button-button--docs)
+
 ## When to Use
 
 

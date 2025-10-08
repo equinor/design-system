@@ -2,6 +2,18 @@
 
 _Chips_, also known as tags or badges, are advanced badges that represent discrete information.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=data-display-chips--text
+        "
+        width="100%"
+        height="250"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/data-display-chips--docs)
+
 ## When to Use
 
 Chips allow users to enter information, make selections, filter content, or trigger actions.
@@ -42,6 +54,6 @@ Chips allow users to make selections, perform an action, input information and a
 
 ## Do's and don'ts
 
-✅  Chips can be used as status indicators
+✅ Chips can be used as status indicators
 
-❌  Do not use chips as a call-to-action
+❌ Do not use chips as a call-to-action

@@ -2,6 +2,16 @@
 
 An _accordion_ is a thoughtfully designed component that empowers users to collapse and expand sections of content, creating a clean and organized interface. Designed with care to help manage information density while maintaining usability, accordions inspire focused exploration and keep our pages scannable and purposeful.
 
+<iframe 
+        class="sb-iframe"
+        src="https://storybook.eds.equinor.com/iframe.html?viewMode=story&singleStory=true%22&globals=&args=&id=surfaces-accordion--introduction"
+        width="100%"
+        height="500"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/surfaces-accordion--docs)
+
 ## When to Use
 
 Use accordions when you need to present large amounts of related information in user-controlled sections. Accordions are perfect for grouping or organizing content that helps maintain order and scannability on a page, allowing users to focus on what matters most to them while keeping secondary information easily accessible.

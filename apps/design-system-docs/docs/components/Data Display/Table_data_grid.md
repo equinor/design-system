@@ -1,6 +1,8 @@
 # Table data grid
 
-_Table data grids_ display data in a grid-like format with advanced functionalities.
+## Not in SB
+
+_Table_ _data grids_ display data in a grid-like format with advanced functionalities.
 
 ## When to Use
 
@@ -20,4 +22,3 @@ The header row can have icons and text. Icons can be used for sorting columns as
 Avoid labels that are too long. Titles should be to the point, short and no more than three words. If the label is longer than the width available, it will be truncated and should have a tooltip provided. Labels should be aligned left except when numeric, then either left or right alignment is permitted.
 
 The header text component includes options for adding units and a placeholder icon for sorting icons. This component uses auto layout to place label text, icons and/or units with the correct spacing. Make sure to resize the component so that the spacing on the right is aligned to the most right part of the contents.
-

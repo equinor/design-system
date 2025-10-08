@@ -2,6 +2,18 @@
 
 Tabs organise related content across different views to be quickly navigated.
 
+<iframe 
+        class="sb-iframe"
+        src="
+       https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=navigation-tabs--introduction
+        "
+        width="100%"
+        height="200"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/navigation-tabs--docs)
+
 ## When to Use
 
 Tabs allow for navigation between content that is related and has an equal hierarchy. Each tab's content should be noticeably different from the other. Tabs allow for information to be presented in a space-saving layout.

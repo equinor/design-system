@@ -2,6 +2,16 @@
 
 _Breadcrumbs_ are navigational aids that show users their current location within a hierarchical structure, empowering them to navigate confidently up the hierarchy. Designed with care to provide clear wayfinding while maintaining visual simplicity, breadcrumbs inspire users to explore our applications with a strong sense of orientation and control.
 
+<iframe 
+        class="sb-iframe"
+        src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=navigation-breadcrumbs--introduction"
+        width="100%"
+        height="80"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/navigation-breadcrumbs--docs)
+
 ## When to Use
 
 Use breadcrumbs when you need to help users understand their location within a multi-level navigation structure and provide easy access to parent pages. Breadcrumbs are perfect for deep hierarchical content where users benefit from knowing their path and having quick access to higher-level sections.

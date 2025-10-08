@@ -14,17 +14,69 @@ _Progress indicators_ are animated helpers that indicate waiting time as content
 
 Circular progress indicators are great for places like icons and empty pages. They should be used for short waiting times. They can be applied directly to a surface, such as a button or card.
 
-#### Linear
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=color:primary&id=feedback-progress-indicators-circular--introduction
+        "
+        width="100%"
+        height="150"
+        frameborder="1"
+        ></iframe>
 
-Linear progress indicators are great to focus attention to an area. They are great for places like empty pages, at the bottom of the _top bar_, and in _cards_ and _lists_.
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/surfaces-card--docs)
 
 #### Dots
 
 Dot progress indicators are for use within _buttons_.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=feedback-progress-indicators-dots--introduction
+        "
+        width="100%"
+        height="150"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/feedback-progress-indicators-dots--docs&args=color:primary)
+
+Dot progress indicators are for use within _buttons_.
+
+#### Linear
+
+Linear progress indicators are great to focus attention to an area. They are great for places like empty pages, at the bottom of the _top bar_, and in _cards_ and _lists_.
+
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=feedback-progress-indicators-linear--introduction
+        "
+        width="100%"
+        height="150"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/feedback-progress-indicators-linear--docs)
+
+Linear progress indicators are great to focus attention to an area. They are great for places like empty pages, at the bottom of the _top bar_, and in cards and _lists_.
+
 #### Star
 
 Star progress indicators are to be used on splash screens and empty pages only. The Indeterminate star indicator spins along the invisible track.
+
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=feedback-progress-indicators-star--introduction
+        "
+        width="100%"
+        height="150"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/feedback-progress-indicators-star--docs)
 
 ## Guidelines
 
@@ -34,7 +86,12 @@ Indeterminate progress indicators indicate an unknown amount of time the process
 
 ## Accessibility
 
-Progress indicators have ``role="progressbar"`` and therefore either ``aria-describedby`` or ``aria-label`` should be included. Click the button with keyboard and a screen reader activated to test.
+<<<<<<< HEAD
+Progress indicators have `role="progressbar"` and therefore either `aria-describedby` or `aria-label` should be included. Click the button with keyboard and a screen reader activated to test.
+=======
+Progress indicators have _role="progressbar"_ and therefore either `aria-describedby` or `aria-label` should be included. Click the button with keyboard and a screen reader activated to test.
+
+> > > > > > > d84ca2f8 (added storybook iframe to all components, adjust size to fit better with component size)
 
 ## Implementation in Figma
 
@@ -45,4 +102,4 @@ Progress indicators have ``role="progressbar"`` and therefore either ``aria-desc
 
 ## Do's and don'ts
 
-✅  Progress indicators should be applied to all cases of a process in a consistent format.
+✅ Progress indicators should be applied to all cases of a process in a consistent format.

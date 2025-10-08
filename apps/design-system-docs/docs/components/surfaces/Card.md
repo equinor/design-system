@@ -2,6 +2,18 @@
 
 A _card_ is a thoughtfully designed container that displays content related to a single subject, creating an inviting entry point to more detailed information. Designed with care to organize information in digestible blocks, cards inspire users to explore content while maintaining visual clarity and purposeful navigation throughout our interfaces.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=surfaces-card--introduction
+        "
+        width="100%"
+        height="550"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/surfaces-card--docs)
+
 ## When to Use
 
 Use _cards_ when you want to present content in organized, scannable blocks that help users navigate information efficiently. Cards are perfect for displaying related content that benefits from clear boundaries and visual hierarchy, making complex information feel approachable and actionable.

@@ -1,5 +1,7 @@
 # Toolbar
 
+### Not in SB
+
 A toolbar is a thoughtfully designed set of calls to action that empowers users to apply changes and navigate efficiently within our applications. Designed with care to provide quick access to essential functions while maintaining a clean interface, toolbars help users accomplish their tasks with confidence and ease.
 
 ## When to Use

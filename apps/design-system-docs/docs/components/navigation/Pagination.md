@@ -2,6 +2,18 @@
 
 _Pagination_ allows long sets of data or content to be divided into multiple pages with controls to navigate between these pages. Designed with care, pagination creates manageable experiences that help users navigate through extensive content without feeling overwhelmed.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=navigation-pagination--introduction
+        "
+        width="100%"
+        height="100"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/navigation-pagination--docs)
+
 ## When to Use
 
 When content will take a long time to load or is better viewed in smaller sets, pagination can be used to divide this content into multiple pages. Pagination only loads one page at a time. Do not lazy load content as the user scrolls when using pagination.

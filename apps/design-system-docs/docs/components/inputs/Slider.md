@@ -2,6 +2,18 @@
 
 A _slider_ is a flexible input that allows users to adjust predefined values.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-slider--introduction
+        "
+        width="100%"
+        height="150"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-slider--docs)
+
 ## When to use
 
 Sliders reflect the current state of the settings they control.
@@ -32,10 +44,10 @@ Sliders reflect values along a bar where users can select a single value or a ra
 
 ## Do's and don'ts
 
-✅  Use a title for the slider
+✅ Use a title for the slider
 
-❌  Do not use a slider without a title indicating what slider controls
+❌ Do not use a slider without a title indicating what slider controls
 
-❌  Do not use ranges that are extremely different, e.g. 1-10000
+❌ Do not use ranges that are extremely different, e.g. 1-10000
 
-❌  Do not use ranges that are very small, e.g. 1-4
+❌ Do not use ranges that are very small, e.g. 1-4

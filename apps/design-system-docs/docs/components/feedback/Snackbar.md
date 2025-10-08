@@ -1,6 +1,18 @@
 # Snackbar
 
-_Snackbars_ provide brief temporary non-interrupting notifications at the bottom of the screen.
+*Snackbars* provide brief temporary non-interrupting notifications at the bottom of the screen.
+
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=feedback-snackbar--introduction
+        "
+        width="100%"
+        height="500"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/feedback-snackbar--docs&args=isDismissable:!true;open:!false)
 
 ## When to Use
 
@@ -22,7 +34,7 @@ A snackbar can contain a single action, a single text button that lets users tak
 
 ## Guidelines
 
-Snackbars provide an update on a process that has or will be performed. Snackbars deliver low priority information while _banners_ deliver medium priority and _dialogs_ deliver high priority. Snackbars appear centered at the bottom of the screen and disappear without user interaction. On wider screens they are left-aligned. Snackbars appear on-screen between 5-10 seconds before dismissing themselves, so keep text short.
+Snackbars provide an update on a process that has or will be performed. Snackbars deliver low priority information while *banners* deliver medium priority and *dialogs* deliver high priority. Snackbars appear centered at the bottom of the screen and disappear without user interaction. On wider screens they are left-aligned. Snackbars appear on-screen between 5-10 seconds before dismissing themselves, so keep text short.
 
 Snackbars can have one action. This action should not be **Close** or **Dismiss** since snackbars disappear automatically. Actions such as **Undo** or **Retry** are acceptable. Snackbars can wrap up to two lines of text on smaller screens.
 
@@ -34,7 +46,8 @@ Snackbars can have one action. This action should not be **Close** or **Dismiss*
 
 ## Do's and don'ts
 
-✅  Display only one snackbar at a time
+✅ Display only one snackbar at a time
 
-❌  Do not place a snackbar in front of frequently used touch targets or navigation
+❌ Do not place a snackbar in front of frequently used touch targets or navigation
 
+❌ Do not place a snackbar in front of frequently used touch targets or navigation.

@@ -1,5 +1,7 @@
 # Link
 
+### Not in SB
+
 _Links_ are primarily used as interactive navigational elements, though they can also change how data is viewed.
 
 ## When to Use

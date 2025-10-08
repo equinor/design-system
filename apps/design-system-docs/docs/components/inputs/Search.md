@@ -6,6 +6,18 @@ _Search_ allows users to locate or refine content based on simple words or phras
 
 _Search_ can be used as a primary way of discovering content.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-search--introduction
+        "
+        width="100%"
+        height="100"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/inputs-search--docs)
+
 ## Guidelines
 
 Users can type a term and press `Enter` to see the results. Auto-complete, recent searches, suggested searches and pre/post-scoping are available via the component.
@@ -22,7 +34,7 @@ Scoping allows users to narrow their search before they start. The scope can be 
 
 ## Accessibility
 
-Use either a ``label`` or ``aria-label`` for description of whats being searched, ``Search`` should be used inside a ``form``.
+Use either a `label` or `aria-label` for description of whats being searched, `Search` should be used inside a `form`.
 
 ## Implementation in Figma
 
