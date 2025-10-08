@@ -1,6 +1,6 @@
 # Side sheet
 
-A side sheet is a thoughtfully designed toggleable area that anchors gracefully to the edge of the viewport, providing a dedicated space for supplementary content. Designed with care to enhance the user experience without overwhelming the primary interface, side sheets inspire efficient workflows while maintaining clear visual hierarchy and purposeful content organization.
+A _side sheet_ is a thoughtfully designed toggleable area that anchors gracefully to the edge of the viewport, providing a dedicated space for supplementary content. Designed with care to enhance the user experience without overwhelming the primary interface, side sheets inspire efficient workflows while maintaining clear visual hierarchy and purposeful content organization.
 
 ## When to Use
 
@@ -16,6 +16,15 @@ The side sheet consists of carefully considered elements that work together harm
 - **Adaptive placement** that can start under existing navigation elements when present
 
 Each element is designed to create a seamless extension of your interface while maintaining clear boundaries and user orientation.
+
+### Sizes
+
+The side sheet comes in multiple sizes:
+
+Small, Medium, Large and X-Large
+
+![Side sheet, medium size](../assets/side-sheet-m.jpg)
+*(Size: Medium)*
 
 ## Guidelines
 
@@ -35,3 +44,9 @@ Side sheets are designed with accessibility as a core principle to ensure all us
 2. Drag and drop the component in your frame.
 3. Rename and resize the component if needed.
 4. Choose the variant from the **Design Panel**.
+
+## Do's and don'ts
+
+❌  Do not remove the close icon
+
+❌  Do not use a left anchored side sheet if you are using a navigation drawer
