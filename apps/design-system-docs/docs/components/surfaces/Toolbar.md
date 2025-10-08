@@ -17,6 +17,20 @@ The toolbar consists of:
 
 Our design system supports two distinct types to meet different use cases and spatial requirements.
 
+There are two types to choose from:
+
+#### Fixed
+
+To be used full-width at the top of the page.
+
+![toolbar-fixed](../assets/toolbar-fixed.jpg)
+
+#### Freestanding
+
+To be placed statically on a page. Width will adapt to the content.
+
+![toolbar-free](../assets/toolbar-free.jpg)
+
 ## Guidelines
 
 A toolbar is designed to ensure custom navigation or to apply changes within a page. These controls can have different functionalities depending on your needs.
