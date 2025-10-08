@@ -64,7 +64,7 @@ Button.Toggle sets `aria-pressed="bool"` according to the button state. You shou
 
 Compact mode is toggled using EdsProvider.
 
-::: Note
+:::note
 The compact mode should come with the possibility to switch to normal mode for accessibility reasons.
 :::
 
