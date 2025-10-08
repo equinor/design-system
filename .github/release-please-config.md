@@ -12,6 +12,14 @@ This document explains the configuration in `.github/release-please-config.json`
 
 Enables IDE autocomplete, validation, and inline documentation for the configuration file.
 
+### Bootstrap SHA
+
+```json
+"bootstrap-sha": "HEAD"
+```
+
+Tells release-please to start tracking releases from the current HEAD commit. This is used when setting up release-please for the first time in an existing repository with release history. I just remo
+
 ### Tag Separator
 
 ```json
