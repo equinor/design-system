@@ -18,7 +18,7 @@ export const TopBar = ({
 }: Props) => {
   return (
     <header className={className} {...rest}>
-      <div className="w-[243px] justify-start items-center gap-1 flex">
+      <div className="justify-start items-center gap-1 flex">
         <ActionButton>
           <svg
             xmlns="http://www.w3.org/2000/svg"

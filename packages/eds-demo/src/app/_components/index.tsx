@@ -104,25 +104,6 @@ export function CheckmarkSelected({ className }: { className?: string }) {
   );
 }
 
-export function Tab({
-  children,
-  className,
-  ...rest
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <a
-      href=""
-      className={`h-11 px-4 py-2  bg-opacity-0   justify-center items-center flex ${className}`}
-      {...rest}
-    >
-      <div className="text-base font-medium leading-tight ">{children}</div>
-    </a>
-  );
-}
-
 export function SideBarLink({
   children,
   className,
@@ -153,3 +134,4 @@ export function SideBarLink({
 }
 
 export { Menu } from "./Menu";
+export { Tab } from "./Tab";

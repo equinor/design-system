@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab } from ".";
+import { Tab } from "./Tab";
 
 type TabItem = {
   id: string;
