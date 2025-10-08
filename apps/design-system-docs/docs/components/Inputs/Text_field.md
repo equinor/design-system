@@ -2,6 +2,7 @@
 
 A _text field_ lets users enter, interact and edit content, typically in forms and dialogs.
 
+<iframe
         class="sb-iframe"
         src="
         https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=inputs-textfield--introduction
@@ -20,7 +21,6 @@ A _text field_ lets users enter, interact and edit content, typically in forms a
 - Text fields should stand out and point that users can input information
 - Text field states should be **clearly** distinguished from one another
 - Text fields should make it easy to understand the required information and to address any errors
-<iframe
 
 ## Structure
 

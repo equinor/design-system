@@ -16,7 +16,7 @@ _Buttons_ allow users to take action with a single click or tap.
 
 ## When to Use
 
-
+Use a button for a direct, immediate user action (submit, confirm, start, cancel, toggle) rather than for pure navigation or passive information.
 
 ## Structure
 
@@ -44,11 +44,11 @@ There are `primary`, `secondary` and `danger` colour buttons available in the `c
 
 #### Accessibility
 
-The ``aria-disabled`` attribute makes it possible to semantically disable the ``Button`` without hiding it from assistive technologies, such as screen readers. In EDS, the ``Button`` will be visually styled as disabled, but it is up to the developer to actually disable the button.
+The `aria-disabled` attribute makes it possible to semantically disable the `Button` without hiding it from assistive technologies, such as screen readers. In EDS, the `Button` will be visually styled as disabled, but it is up to the developer to actually disable the button.
 
 ### Toggle buttons
 
-``Toggle buttons`` allow users to select one of multiple options with a single click or tap.
+`Toggle buttons` allow users to select one of multiple options with a single click or tap.
 
 #### Guidelines
 
@@ -58,7 +58,7 @@ Toggle buttons group a set of related actions in one shared common container. O
 
 #### Accessibility
 
-Button.Toggle sets ``aria-pressed="bool"`` according to the button state. You should provide an accessible label with ``aria-label="label"``, ``aria-labelledby="id"`` or ``<label>``.
+Button.Toggle sets `aria-pressed="bool"` according to the button state. You should provide an accessible label with `aria-label="label"`, `aria-labelledby="id"` or `<label>`.
 
 #### Compact
 
@@ -67,8 +67,6 @@ Compact mode is toggled using EdsProvider.
 ::: Note
 The compact mode should come with the possibility to switch to normal mode for accessibility reasons.
 :::
-
-
 
 ## Implementation in Figma
 
@@ -79,20 +77,20 @@ The compact mode should come with the possibility to switch to normal mode for a
 
 ## Do's and don'ts
 
-✅  Buttons in groups should always have the same colour except if one of the buttons is disabled. Try and be as consistent as possible throughout the app
+✅ Buttons in groups should always have the same colour except if one of the buttons is disabled. Try and be as consistent as possible throughout the app
 
-✅  Use variants to differentiate hierarchy
+✅ Use variants to differentiate hierarchy
 
-✅  Danger buttons should always have an opposite order of what’s used in “positive” actions. This is used as an extra level of security in case the user acts with automatic choices. Therefore, if the user hits enter, the “cancel” button is pressed instead of “delete”
+✅ Danger buttons should always have an opposite order of what’s used in “positive” actions. This is used as an extra level of security in case the user acts with automatic choices. Therefore, if the user hits enter, the “cancel” button is pressed instead of “delete”
 
-✅  You can use an icon to help clarify an action. Always use icons that clearly communicate their intended purpose
+✅ You can use an icon to help clarify an action. Always use icons that clearly communicate their intended purpose
 
-❌  Do not apply the same colour to all the buttons in a group. Use variants (contained, outlined, ghost) to differentiate the hierarchy instead
+❌ Do not apply the same colour to all the buttons in a group. Use variants (contained, outlined, ghost) to differentiate the hierarchy instead
 
-❌  Do not use the same variant for all action buttons since the user needs to understand which call to action has the most emphasis
+❌ Do not use the same variant for all action buttons since the user needs to understand which call to action has the most emphasis
 
-❌  Do not wrap text over multiple lines. Scale the width to make the text fit on one line. Don´t adjust the height of the button
+❌ Do not wrap text over multiple lines. Scale the width to make the text fit on one line. Don´t adjust the height of the button
 
-❌  Do not assign the same order to danger buttons as the “positive” action button groups (primary + secondary), use the opposite (secondary + primary) instead
+❌ Do not assign the same order to danger buttons as the “positive” action button groups (primary + secondary), use the opposite (secondary + primary) instead
 
-❌  Do not use an icon that can mislead the main action
+❌ Do not use an icon that can mislead the main action
