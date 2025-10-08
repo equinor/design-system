@@ -30,10 +30,12 @@ jobs:
   check-releases:
     # Only run if:
     # 1. PR was actually merged (not just closed)
-    # 2. PR title contains "chore: release" (indicates it's a release-please PR)
+    # 2. PR title contains "chore: release" (indicates it's a release-please PR
+    # 3. PR only on develop branch
     if: |
       github.event.pull_request.merged == true &&
-      contains(github.event.pull_request.title, 'chore: release')
+      contains(github.event.pull_request.title, 'chore: release') &&
+      github.event.pull_request.base.ref == 'develop'
     runs-on: ubuntu-latest
     # Expose outputs so downstream jobs can check which packages changed
     outputs:
@@ -108,8 +110,8 @@ jobs:
           gh workflow run publish_core_react.yaml \
             --repo ${{ github.repository }} \
             --ref develop \
-            -f npm-tag=latest \              # Input: which npm dist-tag to use
-            -f environment=production        # Input: which Storybook environment to deploy
+            -f npm-tag=latest \
+            -f environment=production
 
   # Job 3: Trigger lab-react publish workflow
   # Only runs if lab-react package.json was changed
