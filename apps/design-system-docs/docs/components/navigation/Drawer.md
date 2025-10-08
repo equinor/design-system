@@ -1,6 +1,6 @@
 # Drawer
 
-The drawer is a thoughtfully designed navigation component that displays categories of links in a vertical column, creating an organized and accessible experience when there are many items or multiple levels of hierarchy. Designed with care to keep navigation clear and scannable, drawers inspire confident exploration while maintaining our commitment to intuitive wayfinding.
+The _drawer_ is a thoughtfully designed navigation component that displays categories of links in a vertical column, creating an organized and accessible experience when there are many items or multiple levels of hierarchy. Designed with care to keep navigation clear and scannable, drawers inspire confident exploration while maintaining our commitment to intuitive wayfinding.
 
 ## When to Use
 
@@ -29,3 +29,15 @@ When an item's label exceeds the maximum width, it is thoughtfully truncated wit
 2. Drag and drop the component into your frame
 3. Rename and resize the drawer component if needed
 4. Choose the variant of the destination items from the **Design Panel**
+
+## Do's and don'ts
+
+✅  Place drawer on the left side of the viewport
+
+✅  Truncate longer labels to fit on one line
+
+❌  Do not open or place on the right side of viewport
+
+❌  Do not shrink text size to fit a label on a single line
+
+❌  Do not wrap a label over two lines

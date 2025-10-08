@@ -20,3 +20,11 @@ Links are underlined and should always be in an `Interactive` colour.
 ## Accessibility
 
 The link style can be used without the underline when it is paired with an icon that implies interaction or when it causes unnecessary visual clutter. This does not meet all the accessibility guidelines, but it is sometimes more useful to not overload visually.
+
+## Do's and don'ts
+
+✅  Use links as navigational elements
+
+✅  Truncate longer labels to fit on one line
+
+❌  Do not use links for actions such as ``submit`` or ``create new``

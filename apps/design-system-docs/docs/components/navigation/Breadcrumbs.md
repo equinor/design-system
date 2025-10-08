@@ -1,6 +1,6 @@
 # Breadcrumbs
 
-Breadcrumbs are navigational aids that show users their current location within a hierarchical structure, empowering them to navigate confidently up the hierarchy. Designed with care to provide clear wayfinding while maintaining visual simplicity, breadcrumbs inspire users to explore our applications with a strong sense of orientation and control.
+_Breadcrumbs_ are navigational aids that show users their current location within a hierarchical structure, empowering them to navigate confidently up the hierarchy. Designed with care to provide clear wayfinding while maintaining visual simplicity, breadcrumbs inspire users to explore our applications with a strong sense of orientation and control.
 
 ## When to Use
 
@@ -23,22 +23,30 @@ Each element works together to create a clear navigational path that guides user
 - Always place breadcrumbs in the uppermost left corner of the page, positioned below the main navigation
 - When breadcrumbs become too long for the available space, choose from three thoughtful solutions:
 
-### Auto-collapse
+#### Auto-collapse
 
 Breadcrumbs can auto-collapse using ellipses (...) to indicate hidden middle pages. The first and current pages remain visible, and clicking the ellipses expands the full breadcrumb trail for complete context.
 
-### Expanded breadcrumbs
+#### Expanded breadcrumbs
 
 Allow breadcrumbs to wrap naturally to two or more lines when space permits, maintaining full visibility of the navigation path.
 
-### Truncation
+#### Truncation
 
 Long individual labels can be truncated based on pixel width, always ending with ellipses to indicate additional content. Provide tooltips on hover or long press to reveal the complete label text.
 
 ## Implementation in Figma
 
-### Instructions
-
 1. In Figma go to the **Assets Panel** and search for **breadcrumbs**
 2. Drag and drop the component in your frame
 3. Choose the variant from the **Design Panel**
+
+## Do's and don'ts
+
+✅  Use breadcrumbs in addition to main navigation
+
+✅  Use breadcrumbs with multi-level applications
+
+❌  Do not use breadcrumbs as main navigation
+
+❌  Do not use breadcrumbs for single-level applications
