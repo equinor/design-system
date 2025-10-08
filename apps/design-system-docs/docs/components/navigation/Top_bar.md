@@ -1,14 +1,16 @@
 # Top bar
 
-The top bar, also known as a header, displays navigation and actions relating to the interface.
+The _top bar_, also known as a header, displays navigation and actions relating to the interface.
 
-## Guidelines
+## When to use
 
 Top bars span the full width of the viewport and are always the topmost component on a page. The top bar does not scroll away, being a consistent guidepost to users.
 
 The top bar always has a title which is the same throughout the whole application group. A subtitle is allowed, this can be the same throughout the whole application group, or can be specific to sub-apps within the application.
 
 The top bar has one _optional_ main navigational icon button which is always to the far left. This icon can either open the `App launcher` or toggle the `Navigation Drawer`.
+
+## Guidelines
 
 The center block of the top bar can either be left empty, or custom content can be inserted into the placeholder.
 
@@ -27,9 +29,15 @@ The actions on the far-right are standard. This area is for the following common
 
 ## Implementation in Figma
 
-### Instructions
-
 1. In Figma go to the **Assets Panel** and search for **top bar**.
 2. Drag and drop the component in your frame.
 3. Rename and resize the component if needed.
 4. Choose the variant from the **Design Panel**.
+
+## Do's and don'ts
+
+✅  Keep the top bar visible at all times
+
+❌  Do not hide the top bar while scrolling
+
+❌  Do not change the colour of the top bar

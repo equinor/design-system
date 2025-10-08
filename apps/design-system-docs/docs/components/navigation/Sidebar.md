@@ -1,6 +1,6 @@
 # Sidebar
 
-Sidebar is used to display single level navigational destinations that create a reliable foundation for navigation. Designed with care, the sidebar helps users move confidently through applications while maintaining clear spatial orientation.
+_Sidebar_ is used to display single level navigational destinations that create a reliable foundation for navigation. Designed with care, the sidebar helps users move confidently through applications while maintaining clear spatial orientation.
 
 ## When to Use
 
@@ -14,13 +14,7 @@ The sidebar will be permanently visible with optionally a collapse/expand functi
 
 Its height should fill the height of the screen, and will not be scrollable.
 
-## Accessibility
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section.
-
 ## Implementation in Figma
-
-### Instructions
 
 1. In Figma go to the **Assets Panel** and search for **Side bar**.
 2. Drag and drop the component in your frame.

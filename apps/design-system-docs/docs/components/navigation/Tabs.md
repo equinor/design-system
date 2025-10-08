@@ -20,13 +20,15 @@ Tab labels should provide clear and concise direction. If the label is longer th
 
 If the `Navigation: Navigation Drawer` is not used, tabs may be used in the `Navigation: Top Bar` as the main navigation linking to unrelated pages.
 
-## Accessibility
+::: Info
+To navigate using the keyboard use:
+- TAB to move from tab to tab panel.
+- SHIFT + TAB to go backwards.
+- LEFT / RIGHT ARROW to move from between tabs (active tab must be focused).
+:::
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section.
 
 ## Implementation in Figma
-
-### Instructions
 
 1. In Figma go to the **Assets Panel** and search for **tabs**.
 2. Drag and drop the component in your frame.
