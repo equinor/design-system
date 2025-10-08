@@ -2,7 +2,20 @@
 
 _Lists_ organise information into related groups of content.
 
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=data-display-lists--introduction
+        "
+        width="100%"
+        height="200"
+        frameborder="1"
+        ></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/data-display-lists--docs)
+
 ## When to use
+
 Lists are a continuous group of text.
 
 - Lists should be sorted in logical ways that make content easy to scan
@@ -11,9 +24,11 @@ Lists are a continuous group of text.
 ### Structure
 
 #### Unordered
+
 ![list-unordered](../assets/list-unordered.jpg)
 
 #### Ordered
+
 ![list-ordered](../assets/list-ordered.jpg)
 
 ## Guidelines
@@ -28,8 +43,8 @@ Bulleted lists are used when order is not of importance. Numbered lists are used
 
 ## Do's and don'ts
 
-✅  Use list with one line text, ordered or unordered
+✅ Use list with one line text, ordered or unordered
 
-❌  Do not use lists to organise large amount of information, use a Table instead
+❌ Do not use lists to organise large amount of information, use a Table instead
 
-❌  Do not use lists as navigation
+❌ Do not use lists as navigation
