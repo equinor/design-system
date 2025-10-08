@@ -2,7 +2,15 @@
 
 _Tooltip_ show when hovered, focused or long-pressed (touch), and display information such as a text label or a short description.
 
-![tooltip](../assets/tooltip.jpg)
+<iframe 
+        class="sb-iframe"
+        src="
+        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=data-display-tooltip--introduction
+        "
+        width="100%"
+        height="150"
+        frameborder="1"
+        ></iframe>
 
 ## When to use
 
@@ -23,7 +31,7 @@ Keep in mind that if `Tooltip` is added to a non-focusable element, it is inacce
 
 ## Styling
 
-Tooltip have the classname ``eds-tooltip`` to make it easier to style the component globally, including tooltips built into other eds components such as ``Sidebar``. Individual tooltips can otherwise be styled with ``style``, ``className`` or ``styled(Tooltip)``.
+Tooltip have the classname `eds-tooltip` to make it easier to style the component globally, including tooltips built into other eds components such as `Sidebar`. Individual tooltips can otherwise be styled with `style`, `className` or `styled(Tooltip)`.
 
 ## Implementation in Figma
 
@@ -33,10 +41,10 @@ Tooltip have the classname ``eds-tooltip`` to make it easier to style the compon
 
 ## Do's and don'ts
 
-✅  Use single/short line of text
+✅ Use single/short line of text
 
-❌  Do not format the text, such as bold or italics
+❌ Do not format the text, such as bold or italics
 
-❌  Do not add images, such as avatars or icons
+❌ Do not add images, such as avatars or icons
 
-❌  Do not have links within tooltips
+❌ Do not have links within tooltips

@@ -214,6 +214,16 @@ nav.menu li a {
 }
 
 /* ======================================
+ * STORYBOOK IFRAME
+ * ====================================== */
+
+.sb-iframe {
+  border: var(--eds-color-border-neutral-subtle) 1px solid;
+  border-radius: var(--ifm-global-radius);
+  background-color: var(--eds-color-bg-neutral-surface);
+}
+
+/* ======================================
  * TABLE OF CONTENTS
  * ====================================== */
 .theme-doc-toc-desktop {
