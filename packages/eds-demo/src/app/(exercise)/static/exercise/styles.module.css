@@ -33,11 +33,11 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   color: light-dark(black, white);
 }
 
-.menu {
+.table {
   background-color: light-dark(white, black);
 }
 
-.table {
+.menu {
   background-color: light-dark(white, black);
 }
 
