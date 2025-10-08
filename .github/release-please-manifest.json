@@ -1,8 +1,8 @@
 {
-  "packages/eds-core-react": "0.49.0",
-  "packages/eds-data-grid-react": "0.9.1",
-  "packages/eds-icons": "0.22.0",
+  "packages/eds-core-react": "1.0.0",
+  "packages/eds-data-grid-react": "1.0.0",
+  "packages/eds-icons": "1.0.0",
   "packages/eds-lab-react": "0.7.9",
-  "packages/eds-tokens": "0.10.0",
-  "packages/eds-utils": "0.9.0"
+  "packages/eds-tokens": "1.0.0",
+  "packages/eds-utils": "1.0.0"
 }
