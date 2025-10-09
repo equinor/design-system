@@ -7,6 +7,7 @@ import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
 import { Menu } from "@/app/_components/Menu";
+import { Heading } from "./Typography";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -57,9 +58,14 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           />
 
           <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
-            <h1 className={`text-2xl leading-7 heading ${styles.heading}`}>
+            <Heading
+              level={1}
+              size="5xl"
+              isBaselineAligned={false}
+              className={styles.heading}
+            >
               People
-            </h1>
+            </Heading>
           </header>
 
           <DataTable

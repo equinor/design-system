@@ -1,3 +1,5 @@
+import { Typography } from "./Typography";
+
 export function TableHeader({
   children,
   className,
@@ -11,12 +13,11 @@ export function TableHeader({
       {...rest}
       className={`self-stretch px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
     >
-      <div className="h-5 text-sm leading-tight grow shrink basis-0">
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
+
 export function TableRow({
   children,
   className,
@@ -26,6 +27,7 @@ export function TableRow({
 }) {
   return <div className={`self-stretch ${className}`}>{children}</div>;
 }
+
 export function TableDataCell({
   className,
   children,
@@ -41,6 +43,7 @@ export function TableDataCell({
     </div>
   );
 }
+
 export function Chip({
   className,
   children,
@@ -85,6 +88,7 @@ export function CheckmarkUnselected({ className }: { className?: string }) {
     </svg>
   );
 }
+
 export function CheckmarkSelected({ className }: { className?: string }) {
   return (
     <svg

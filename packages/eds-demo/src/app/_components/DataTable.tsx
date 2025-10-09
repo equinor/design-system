@@ -1,8 +1,15 @@
 import React, { ComponentType } from "react";
-import { CheckmarkSelected, CheckmarkUnselected } from ".";
+import {
+  TableHeader,
+  TableRow,
+  TableDataCell,
+  CheckmarkUnselected,
+  CheckmarkSelected,
+} from "./index";
 import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon } from "./ChipIcons";
 import { tableData } from "./tableData";
 import { ChipProps } from "./ChipProps";
+import { Typography } from "./Typography";
 
 type Props = {
   className?: string;
@@ -40,7 +47,7 @@ export const DataTable = ({
 }: Props) => {
   const columns = [
     { id: "checkbox", label: "", active: false },
-    { id: "id", label: "ID", active: false },
+    { id: "id", label: "Id", active: false },
     { id: "person", label: "Person", active: true },
     { id: "position", label: "Position", active: false },
     { id: "location", label: "Location", active: false },
@@ -66,6 +73,8 @@ export const DataTable = ({
               data-debug
               key={column.id}
               className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left text-sm leading-tight grow shrink basis-0 cursor-pointer`}
+              // className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left grow shrink basis-0`}
+              data-color-appearance={column.active ? "accent" : undefined}
             >
               {idx === 0 ? (
                 <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
@@ -74,7 +83,14 @@ export const DataTable = ({
                   </div>
                 </div>
               ) : (
-                column.label
+                <Typography
+                  as="span"
+                  size="md"
+                  isBaselineAligned={false}
+                  weight="bolder"
+                >
+                  {column.label}
+                </Typography>
               )}
             </th>
           ))}
@@ -91,6 +107,7 @@ export const DataTable = ({
                 data-debug
                 key={`${row.id}-${column.id}`}
                 className={`${tdClass} px-4 py-1 text-sm leading-tight grow shrink basis-0 cursor-pointer`}
+                // className={`${tdClass} px-4 py-1 grow shrink basis-0`}
               >
                 {column.id === "checkbox" && (
                   <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
@@ -104,22 +121,49 @@ export const DataTable = ({
                   </div>
                 )}
 
-                {column.id === "id" && row.id}
+                {column.id === "id" && (
+                  <div className="h-5 grow shrink basis-0">
+                    <Typography as="span" size="md" isBaselineAligned={false}>
+                      {row.id}
+                    </Typography>
+                  </div>
+                )}
 
                 {column.id === "person" && (
                   <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
-                    <div className="self-stretch h-4 text-sm leading-none">
-                      {row.person.name}
+                    <div className="self-stretch h-4">
+                      <Typography as="span" size="md" isBaselineAligned={false}>
+                        {row.person.name}
+                      </Typography>
                     </div>
-                    <div className="self-stretch h-4 text-xs leading-none tracking-tight underline">
-                      {row.person.email}
+                    <div className="self-stretch h-4">
+                      <Typography
+                        as="span"
+                        size="sm"
+                        isBaselineAligned={false}
+                        className="underline"
+                      >
+                        {row.person.email}
+                      </Typography>
                     </div>
                   </div>
                 )}
 
-                {column.id === "position" && row.position}
+                {column.id === "position" && (
+                  <div className="h-5 grow shrink basis-0">
+                    <Typography as="span" size="md" isBaselineAligned={false}>
+                      {row.position}
+                    </Typography>
+                  </div>
+                )}
 
-                {column.id === "location" && row.location}
+                {column.id === "location" && (
+                  <div className="h-5 grow shrink basis-0">
+                    <Typography as="span" size="md" isBaselineAligned={false}>
+                      {row.location}
+                    </Typography>
+                  </div>
+                )}
 
                 {column.id === "status" && Chip && (
                   <div className="inline-flex">

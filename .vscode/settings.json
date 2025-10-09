@@ -32,7 +32,8 @@
     "eds-color-palette-generator",
     "design-system-docs",
     "github",
-    "config"
+    "config",
+    "eds-demo"
   ],
   "cSpell.words": [
     "APCA",
