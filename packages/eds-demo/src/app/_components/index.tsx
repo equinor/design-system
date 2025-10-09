@@ -64,7 +64,14 @@ export function Chip({
           <div className="relative w-4 h-4 icon">{icon}</div>
         </div>
       )}
-      <div className="text-xs leading-none tracking-tight">{children}</div>
+      <Typography
+        as="span"
+        size="sm"
+        isBaselineAligned={false}
+        style={{ marginTop: "0.5px" }}
+      >
+        {children}
+      </Typography>
     </div>
   );
 }
