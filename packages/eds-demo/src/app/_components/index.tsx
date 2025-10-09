@@ -73,6 +73,7 @@ export function CheckmarkUnselected({ className }: { className?: string }) {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      data-color-appearance="accent"
       className={`w-[18px] h-[18px] left-[3px] top-[3px] absolute ${className}`}
     >
       <path
@@ -92,6 +93,7 @@ export function CheckmarkSelected({ className }: { className?: string }) {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      data-color-appearance="accent"
       className={className}
     >
       <path
