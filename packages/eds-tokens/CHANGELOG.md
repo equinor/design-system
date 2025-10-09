@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2025-10-09
+
+This release aligns with the v1 release of our design system.
+No breaking changes or migration required.
+
+**Note:** We're moving from v0 to v1 to signal production stability across all packages in our monorepo.
+
+### Added
+
+- ✨ Create and implement new build scripts by @torleifhalseth in https://github.com/equinor/design-system/pull/4004
+- ✨ Update tokens by @torleifhalseth in https://github.com/equinor/design-system/pull/4010
+
+### Changed
+
+- 🔧 Tokens build sync setup by @torleifhalseth in https://github.com/equinor/design-system/pull/3993
+- 💄 Update variables by @torleifhalseth in https://github.com/equinor/design-system/pull/4013
+
 ## [0.10.0] - 2025-09-11
 
 ### Added
