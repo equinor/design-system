@@ -106,10 +106,13 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Button */
 
 .button--primary {
-  background-color: light-dark(black, white);
   color: light-dark(white, black);
+  background-color: light-dark(black, white);
 
   &:hover {
+  }
+
+  &:active {
   }
 }
 
@@ -118,6 +121,9 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   border-color: light-dark(black, white);
 
   &:hover {
+  }
+
+  &:active {
   }
 }
 

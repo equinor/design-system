@@ -113,11 +113,15 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Button */
 
 .button--primary {
-  background-color: var(--eds-color-bg-fill-emphasis-default);
   color: var(--eds-color-text-strong-on-emphasis);
+  background-color: var(--eds-color-bg-fill-emphasis-default);
 
   &:hover {
     background-color: var(--eds-color-bg-fill-emphasis-hover);
+  }
+
+  &:active {
+    background-color: var(--eds-color-bg-fill-emphasis-active);
   }
 }
 
@@ -127,6 +131,10 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
   &:hover {
     background-color: var(--eds-color-bg-fill-muted-hover);
+  }
+
+  &:active {
+    background-color: var(--eds-color-bg-fill-muted-active);
   }
 }
 
