@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2025-10-09
+
+**Note:** Due to technical debt and limited active components, we're keeping the lab package at v0.x while evaluating whether to deprecate it entirely. The styled-components implementation has React 19 compatibility issues requiring workarounds we're not comfortable promoting to v1.0.0.
+
+### Changed
+
+- chore: ⬆️ React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
+
 ## [0.7.9] - 2025-09-11
 
 ### Changed
