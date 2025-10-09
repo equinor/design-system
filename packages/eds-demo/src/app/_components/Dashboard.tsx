@@ -104,7 +104,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             >
               Save
             </PrimaryButton>
-            <SecondaryButton className={styles["button--outlined"]}>
+            <SecondaryButton className={styles["button--secondary"]}>
               Cancel
             </SecondaryButton>
           </ButtonGroup>
