@@ -1,6 +1,7 @@
 import React from "react";
 import { SearchInput } from "./SearchInput";
 import { ActionButton } from "./ActionButton";
+import { Typography } from "./Typography";
 
 type Props = {
   subtitle: string;
@@ -35,9 +36,14 @@ export const TopBar = ({
             />
           </svg>
         </ActionButton>
-        <div className={`text-base font-medium leading-tight ${subtitleClass}`}>
+        <Typography
+          as="span"
+          size="lg"
+          isBaselineAligned={false}
+          className={subtitleClass}
+        >
           {subtitle}
-        </div>
+        </Typography>
       </div>
       <div className="flex align-middle items-center">
         <SearchInput className={textInputClass} />
