@@ -118,6 +118,7 @@ export function SideBarLink({
 }) {
   return (
     <button
+      data-debug
       type="button"
       popoverTarget={popoverTarget}
       className={`self-stretch h-14 px-5 justify-between items-center inline-flex ${className}`}
