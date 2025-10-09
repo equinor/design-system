@@ -30,3 +30,15 @@ button,
 a {
   cursor: pointer;
 }
+
+/* Debug overlays for elements with data-debug, when parent body[data-debug="true"] is set */
+body[data-debug="true"] [data-debug] {
+  --_padding-inline: 24px;
+  --_padding-stack: 16px;
+  background-image:
+    repeating-linear-gradient(to left, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
+    repeating-linear-gradient(to right, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
+    repeating-linear-gradient(to top, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
+    repeating-linear-gradient(to bottom, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
+    repeating-linear-gradient(to bottom, #f002 0, #f002 4px, transparent 4px, transparent 8px);
+}
