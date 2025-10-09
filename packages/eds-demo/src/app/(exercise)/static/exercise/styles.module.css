@@ -90,6 +90,12 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   color: light-dark(black, white);
 }
 
+.chip--success {
+  background-color: light-dark(white, black);
+  border: 1px solid light-dark(black, white);
+  color: light-dark(black, white);
+}
+
 .chip--warning {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
@@ -97,12 +103,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 }
 
 .chip--danger {
-  background-color: light-dark(white, black);
-  border: 1px solid light-dark(black, white);
-  color: light-dark(black, white);
-}
-
-.chip--success {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
   color: light-dark(black, white);
