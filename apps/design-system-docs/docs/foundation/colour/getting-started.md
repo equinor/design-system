@@ -1,8 +1,10 @@
 # Getting Started
 
-The colour system works in two ways: **static** or **dynamic**. Choose one approach and use it consistently across design and development.
+The EDS colour foundation can be used in two ways through a **static** or **dynamic** approach.  
+They share the same colour values and accessibility logic but differ in how colours are applied and managed.
+Choose one approach and use it consistently across design and development.
 
-Using different approaches causes design and code to drift apart, making development harder. Each Figma variable has a matching code variable — keep them aligned.
+Using different approaches causes design and code to drift apart, making development harder. Each Figma variable has a matching code variable, keep them aligned.
 
 **Static**:
 Each semantic category (accent, neutral, info, success, warning, danger) has its own variable.
@@ -122,8 +124,10 @@ Add the **EDS Colours (static)** library to your Figma file to use static variab
 
 ### Dynamic Approach
 
+Add the **EDS Colours (dynamic)** library to your Figma file to access dynamic variables.  
+In the dynamic library, you only see **roles** such as Background, Text, and Border.  
+You apply these first, then choose the **appearance** (the colour category) using **modes** in the **Appearance panel**. With the dynamic approach, you focus on contrast first, then select the colour or appearance that fits your context.
 
-Add the **EDS Colours (dynamic)** library to your Figma file to use dynamic variables. These use abstract role names, such as Background, Text, and Border. With the dynamic approach, you focus on contrast first, then select the colour or appearance that fits your context.
 
 #### Example: Primary button (dynamic)
 
@@ -152,7 +156,9 @@ You can change the button’s appearance at any time without updating the roles.
 
 ### Light and Dark Colour Scheme
 
-Both static and dynamic variables work across light and dark modes. Switch between them in the **Variables panel**, and your button updates automatically.
+Both the static and dynamic libraries support **light** and **dark** modes.  
+Switch between them in the **Variables panel**, and your design updates automatically with the correct colour values and contrast.
+
 
 
 
