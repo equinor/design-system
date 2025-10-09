@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2025-10-09
 
+This release marks the data grid as **production-ready**. The v1.0.0 milestone signals API stability and our commitment to semantic versioning.
+
+### BREAKING CHANGES ⚠️
+
+- **React 19 Required**: This version requires React >= 19.0.0 and React DOM >= 19.0.0. Previous versions are not compatible with React 19, and this version is not compatible with React 18.
+
 ### Changed
 
 - chore: React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
