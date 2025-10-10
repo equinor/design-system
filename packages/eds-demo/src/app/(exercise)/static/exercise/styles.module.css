@@ -15,22 +15,26 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 */
 
-/* App */
+/* Dashboard */
 
-.app {
+.dashboard {
   background-color: light-dark(white, black);
   color: light-dark(black, white);
 }
 
 /* 
   💰 The top bar and sidebar are typically placed on top of
-   the application base layer to provide visual hierarchy
+   the dashboard base layer to provide visual hierarchy
 */
 
 .top-bar,
 .sidebar {
   background-color: light-dark(white, black);
   color: light-dark(black, white);
+}
+
+.table {
+  background-color: light-dark(white, black);
 }
 
 .menu {
@@ -43,12 +47,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 .sidebar {
   border-right: 1px solid light-dark(black, white);
-}
-
-/* Table */
-
-.table {
-  background-color: light-dark(white, black);
 }
 
 /*
@@ -92,6 +90,12 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   color: light-dark(black, white);
 }
 
+.chip--success {
+  background-color: light-dark(white, black);
+  border: 1px solid light-dark(black, white);
+  color: light-dark(black, white);
+}
+
 .chip--warning {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
@@ -99,12 +103,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 }
 
 .chip--danger {
-  background-color: light-dark(white, black);
-  border: 1px solid light-dark(black, white);
-  color: light-dark(black, white);
-}
-
-.chip--success {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
   color: light-dark(black, white);
@@ -131,18 +129,24 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Button */
 
 .button--primary {
-  background-color: light-dark(black, white);
   color: light-dark(white, black);
+  background-color: light-dark(black, white);
 
   &:hover {
   }
+
+  &:active {
+  }
 }
 
-.button--outlined {
+.button--secondary {
   color: light-dark(black, white);
   border-color: light-dark(black, white);
 
   &:hover {
+  }
+
+  &:active {
   }
 }
 
