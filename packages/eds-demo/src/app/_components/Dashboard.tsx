@@ -7,7 +7,6 @@ import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
 import { Menu } from "@/app/_components/Menu";
-import { DebugToggle } from "./DebugToggle";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
