@@ -32,8 +32,8 @@ a {
 }
 
 #debug:target [data-debug] {
-  --_padding-inline: var(--eds_spacing_medium);
-  --_padding-stack: var(--eds_spacing_medium);
+  --_padding-inline: 16px;
+  --_padding-stack: 16px;
   background-image:
     repeating-linear-gradient(to left, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
     repeating-linear-gradient(to right, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
