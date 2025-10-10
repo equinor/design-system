@@ -106,7 +106,6 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
               Cancel
             </SecondaryButton>
           </ButtonGroup>
-          <DebugToggle />
         </main>
       </div>
     </div>

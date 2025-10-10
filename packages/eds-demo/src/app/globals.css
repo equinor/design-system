@@ -31,9 +31,8 @@ a {
   cursor: pointer;
 }
 
-/* Debug overlays for elements with data-debug, when parent body[data-debug="true"] is set */
-body[data-debug="true"] [data-debug] {
-  --_padding-inline: 24px;
+#debug:target [data-debug] {
+  --_padding-inline: 16px;
   --_padding-stack: 16px;
   background-image:
     repeating-linear-gradient(to left, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
