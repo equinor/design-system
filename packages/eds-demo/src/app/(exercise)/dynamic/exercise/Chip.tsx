@@ -13,6 +13,7 @@ export const Chip: React.FC<ChipProps> = ({
     // 💰 Use the chip variant property to specify
     // the data-color-appearance attribute
     // like this: data-color-appearance={variant}
+    data-color-appearance={variant}
     className={className}
     icon={icon}
   >
