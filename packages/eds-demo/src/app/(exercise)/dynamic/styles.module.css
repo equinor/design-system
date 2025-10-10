@@ -15,16 +15,16 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 */
 
-/* App */
+/* Dashboard */
 
-.app {
+.dashboard {
   background-color: var(--eds-color-bg-canvas);
   color: var(--eds-color-text-strong);
 }
 
 /* 
   💰 The top bar and sidebar are typically placed on top of
-   the application base layer to provide visual hierarchy
+   the dashboard base layer to provide visual hierarchy
 */
 
 .top-bar,
@@ -113,20 +113,28 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Button */
 
 .button--primary {
-  background-color: var(--eds-color-bg-fill-emphasis-default);
   color: var(--eds-color-text-strong-on-emphasis);
+  background-color: var(--eds-color-bg-fill-emphasis-default);
 
   &:hover {
     background-color: var(--eds-color-bg-fill-emphasis-hover);
   }
+
+  &:active {
+    background-color: var(--eds-color-bg-fill-emphasis-active);
+  }
 }
 
-.button--outlined {
+.button--secondary {
   color: var(--eds-color-text-strong);
   border-color: var(--eds-color-border-strong);
 
   &:hover {
     background-color: var(--eds-color-bg-fill-muted-hover);
+  }
+
+  &:active {
+    background-color: var(--eds-color-bg-fill-muted-active);
   }
 }
 
@@ -162,7 +170,7 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Checkmark - Selected table row */
 
 .checkmark {
-  color: var(--eds-color-text-strong);
+  color: var(--eds-color-bg-fill-emphasis-default);
 }
 
 /* Table data cell in a selected row */

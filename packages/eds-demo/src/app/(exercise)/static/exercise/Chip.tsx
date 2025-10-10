@@ -14,7 +14,7 @@ export const Chip: React.FC<ChipProps> = ({
     // 💰 Use the chip variant property to specify
     // the chip variant style using className
     // like this: variantClassNames[variant]
-    className={className}
+    className={variantClassNames[variant]}
     icon={icon}
   >
     {label}
