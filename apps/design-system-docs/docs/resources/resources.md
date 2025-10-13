@@ -31,7 +31,9 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 
 ## External Resources
 
-- [Equinor Brand Assets](https://www.equinor.com/about-us/brand) – Official brand resources.
-- [Accessibility Tools](https://www.w3.org/WAI/test-evaluate/) – Tools for testing accessibility.
+- [Equinor Brand Assets](https://www.equinor.com/about-us/brand) – Official brand resources
+- [Accessibility Tools](https://www.w3.org/WAI/test-evaluate/) – Tools for testing accessibility
+- [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) - Equinor internal
+- [Equinor Media Bank](https://equinor.fotoware.cloud/fotoweb/) - Equinor internal
 
 If you have suggestions for new resources, please reach out via our support page. We are here to help you succeed and ensure you have everything you need to deliver great user experiences.
