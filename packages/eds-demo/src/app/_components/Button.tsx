@@ -18,7 +18,9 @@ export const PrimaryButton = ({
     <button
       data-debug
       type="button"
-      className={`select-none h-[36px] px-4 py-2.5 rounded border-opacity-0 justify-start gap-2 flex items-center button button--primary ${
+      data-padding-inline="sm"
+      data-padding-block="xs"
+      className={`select-none h-[36px] rounded border-opacity-0 justify-start gap-2 flex items-center button button--primary ${
         className || ""
       }`}
       onClick={onClick}
@@ -41,7 +43,9 @@ export const SecondaryButton = ({
     <button
       data-debug
       type="button"
-      className={`select-none h-[36px] px-4 py-2.5 bg-opacity-0 rounded border justify-start gap-2 flex items-center ${
+      data-padding-inline="sm"
+      data-padding-block="xs"
+      className={`select-none h-[36px] bg-opacity-0 rounded border justify-start gap-2 flex items-center ${
         className || ""
       }`}
       onClick={onClick}

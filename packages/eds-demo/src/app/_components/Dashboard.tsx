@@ -26,7 +26,8 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
       {...rest}
     >
       <TopBar
-        className={`self-stretch h-[57px] pl-2.5 pr-3.5 items-center justify-between gap-14 inline-flex ${styles["top-bar"]}`}
+        data-padding="xs"
+        className={`self-stretch h-[57px] items-center justify-between gap-14 inline-flex ${styles["top-bar"]}`}
         subtitle="Application name – Subtitle"
         subtitleClass={styles["subtitle"]}
         textInputClass={styles["text-input"]}
@@ -48,7 +49,10 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           menuItemActiveClassName={styles["menu-item--active"]}
         />
 
-        <main className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">
+        <main
+          data-padding="md"
+          className="inline-flex flex-col items-start self-stretch justify-start gap-6 grow shrink basis-0"
+        >
           <TabBar
             className="justify-start items-start flex"
             tabs={tabs}
@@ -56,7 +60,10 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             currentTabClass={styles["tab--current"]}
           />
 
-          <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
+          <header
+            data-padding-block="xs"
+            className="self-stretch h-9 flex-col justify-start items-start flex"
+          >
             <h1 className={`text-2xl leading-7 heading ${styles.heading}`}>
               People
             </h1>
