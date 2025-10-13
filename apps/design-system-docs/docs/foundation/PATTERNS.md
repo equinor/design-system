@@ -39,7 +39,7 @@ Contextual menus appear next to where a user right clicks. The menu displays a s
 
 # Placement and order
 
-In oder to place your objects and components correctly, you must always keep in mind the reading pattern of your user. Two types of patterns can be encountered: F and Z.
+In order to place your objects and components correctly, you must always keep in mind the reading pattern of your user. Two types of patterns can be encountered: F and Z.
  
 ## Reading patterns
 
