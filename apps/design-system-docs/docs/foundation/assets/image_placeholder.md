@@ -17,10 +17,17 @@ An image placeholder provides a space for the image before it is loaded, this is
 
 There are two avatar image placeholders to choose between: **Avatar/Circle** and **Avatar/Square corners**. Avatars can represent users or brands. If a user does not have an image to represent themselves, the user's initials can be used on a solid background.
 
+![circle](circle.png) - and - ![square corner](sqcorners.png)  
+
+
 ### Rounded corners
 
 There are five **Rounded corner** aspect ratios available for use: 1:1, 2:1, 4:3, 5:7 and 16:9. 
 
+![rounded corners](roundedcorners.jpeg)
+
 ### Straight corners
 
 There are five **Straight corner** aspect ratios available for use: 1:1, 2:1, 4:3, 5:7 and 16:9.
+
+![straight corners](straightcorners.jpeg)

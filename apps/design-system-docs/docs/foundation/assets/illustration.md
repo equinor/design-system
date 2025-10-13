@@ -12,4 +12,4 @@ Please refer to the Equinor brand guidelines (internal Equinor site) for compreh
 
 Our photo style is modern and authentic with a clear Nordic touch that reflects our brand character.
 
-Please refer to the Equinor brand guidelines (internal Equinor site) for detailed guidelines on using photography effectively in your projects. You can download Equinor photos from the internal asset library (internal Equinor site).
+Please refer to the [Equinor brand guidelines](https://communicationtoolbox.equinor.com/brandcenter/en/equinor/component/default/50420) (internal Equinor site) for detailed guidelines on using photography effectively in your projects. You can download Equinor photos from the internal asset library (internal Equinor site).
