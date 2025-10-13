@@ -4,31 +4,21 @@ System icons enhance interfaces by adding visual communication to actions, statu
 
 ## Guidelines
 
-The EDS system icons are built on a copy of the  provided open-source by Google. The icons have been customised and renamed for Equinor's use and are available in .
+The EDS system icons are built on a copy of the [outlined GMD icons](https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined) provided open-source by Google. The icons have been customised and renamed for Equinor's use and are available in EDS Storybook.
 
 There are over 600 icons available divided in logical categories to make them easy to find.
 
 Simple and clear icons require a strict underlying grid. The EDS icons are built on a 24x24px grid. System icons can be used in 24px and 16px sizes. However, when using compact mode the size of icons is 18px.
 
-**Don't**
+:::danger Don't
 
--   System icons are not to be used as product icons or as a favicon.
+-   System icons are not to be used as product icons or as a favicon
 
+:::
 
+## Design
 
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# System icons
-
-System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
-
-## Implementation in Figma
-
-### Instructions
+### Implementation in Figma
 
 1.  Locate the **Assets** tab in the **Layers Panel**.
     
@@ -44,29 +34,11 @@ System icons enhance interfaces by adding visual communication to actions, statu
 
 
 
-# Library
+## Library
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+All icons are available on EDS Storybook and can also be installed from NPM.
 
-ASSETS
-
-# System icons
-
-System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
-
-All icons are available on  and can also be installed from .
-
-
-
-# Contribution
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# System icons
-
-System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
+## Contribution
 
 Missing a system icon? You can make it following these simple guidelines.
 
@@ -75,17 +47,18 @@ Missing a system icon? You can make it following these simple guidelines.
 -   All icons should be understandable---regardless of language or location.
     
 
-## Style
+### Style
 
 Each icon needs to be reduced to its minimal form --- being bold, geometrical and symmetrical. To reflect the rounded corners of the logo, icons need to have rounded corners of 2px where possible; however, internal corners should be square and not rounded. To reflect the brand, icons use a consistent stroke of 2px --- this includes curves, angles and both interior and exterior strokes. The default icon is outline, a filled icon may be provided only if there is an outlined icon.
 
 The EDS icons are always facing forward and never rotated or dimensional. The icons are made for legibility and are not too literal or complex, neither are they overly playful or bubbly.
 
-**Exceptions**
+:::warning Exceptions
 
 Extremely complex shapes sometimes require complex details. The guidelines allow for subtle adjustments that help improve legibility of icons --- these adjustments are referred to as **optical corrections**. This exception allows for use of 1.5px internal or external strokes. Using this exception should be avoided if possible.
+:::
 
-## Making a new icon
+### Making a new icon
 
 -   Create an artboard that is 24x24px.
     
@@ -102,7 +75,7 @@ Extremely complex shapes sometimes require complex details. The guidelines allow
 -   If you end up using borders or the line tool (which is not recommended), make certain to outline (expand) your work.
     
 
-## Submitting your new icon
+### Submitting your new icon
 
 -   When your icon has been created, delete the `System icon grid` layer that you had locked.
     
