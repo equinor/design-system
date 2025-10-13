@@ -17,6 +17,7 @@ const MenuItem = ({
 }: MenuItemProps) => {
   return (
     <div
+      data-debug
       className={`box-border content-stretch flex flex-col items-start px-[20px] py-[16px] relative shrink-0 w-full ${active ? activeClassName : className}`}
     >
       <div className="box-border content-stretch flex items-center justify-center pb-0 pt-[2px] px-0 relative shrink-0">

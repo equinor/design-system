@@ -10,6 +10,7 @@ export function Tab({
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
+      data-debug
       href=""
       className={`h-11 px-4 py-2 justify-center items-center flex ${className}`}
       {...rest}

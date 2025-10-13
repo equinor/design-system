@@ -8,6 +8,7 @@ type Props = {
 export const ActionButton = ({ className, children, ...rest }: Props) => {
   return (
     <button
+      data-debug
       type="button"
       className={`select-none w-11 h-11 rounded-full justify-center items-center flex ${className}`}
       {...rest}
