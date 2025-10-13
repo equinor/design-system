@@ -2,36 +2,24 @@
 
 The organisation of space is key to every great design. By aligning your component to a grid, you will provide visual structure throughout your product.
 
-     
-
-Embed links from these tools and more
-
 ## Guidelines
 
-Using a grid as a starting point for your component implementation will help you arrange your content into structured proportions. You also have to keep in mind that EDS is based on an 8px ratio. This means that you always have to keep a minimum of 8px between objects and elements. Please read the  page for general guidelines.
+Using a grid as a starting point for your component implementation will help you arrange your content into structured proportions. You also have to keep in mind that EDS is based on an 8px ratio. This means that you always have to keep a minimum of 8px between objects and elements. Please read the [grid](./design-tokens/Grid.md) page for general guidelines.
 
 ## Best practices
 
-### Don’t
+:::danger Don’t
 
--   Do not use less than 8px between each components.
+-   Do not use less than 8px between components
     
--   If some of your objects are aligned to the grid do not set other objects off-grid.
-    
+-   If some of your objects are aligned to the grid do not set other objects off-grid
+:::    
 
 ### Align object within a frame
 
 As you have applied the grid size to your frame, you can use the columns to place your objects. It is recommended that you keep all your objects within the columns. In some cases you might need to be off-grid. You should then keep in mind the 8px ratio between elements.
 
 Grids can also be used inside components. Make sure you use the correct grid according to the size of your component. Those components can be imported in your frame where another grid size has been applied.
-
-
-
-# Inputs
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-PATTERNS
 
 # Inputs
 
@@ -49,24 +37,10 @@ Watch the short video below to learn how to make a multiselect dropdown menu. Al
 
 Contextual menus appear next to where a user right clicks. The menu displays a set of actions related to the object that has been selected, based on the application's current state.
 
-
-
-# Placement and order
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-PATTERNS
-
 # Placement and order
 
 In oder to place your objects and components correctly, you must always keep in mind the reading pattern of your user. Two types of patterns can be encountered: F and Z.
-
-  
-
-     
-
-Embed links from these tools and more
-
+ 
 ## Reading patterns
 
 ### The F reading pattern

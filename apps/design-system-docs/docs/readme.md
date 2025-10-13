@@ -1,7 +1,7 @@
 # EDS Documentation Contribution Guide
 
 Welcome! This guide explains how to contribute to the documentation in the `docs` folder.  
-Our documentation is published using [Docusaurus](https://docusaurus.io/), so please follow these guidelines for consistency, quality, and ease of maintenance.
+Our documentation is published using [Docusaurus][docusaurus], so please follow these guidelines for consistency, quality, and ease of maintenance.
 
 ---
 
@@ -84,6 +84,7 @@ sidebar_position: 1
 - [Markdown Guide](https://www.markdownguide.org/)
 - [EDS Design System](https://eds.equinor.com/)
 
+[docusaurus]: <https://docusaurus.io/docs> 
 ---
 
 Thank you for contributing to EDS
