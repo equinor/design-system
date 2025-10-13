@@ -269,7 +269,9 @@ nav.menu li a {
  * BREADCRUMBS
  * ====================================== */
 .theme-doc-breadcrumbs .breadcrumbs__item:not(:last-child):after {
-  content: '/';
+  content: '›';
+  margin: 0 0.5rem;
+  color: var(--ifm-breadcrumb-separator-color);
 }
 
 .theme-doc-breadcrumbs .breadcrumbs__item .breadcrumbs__link {
