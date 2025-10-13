@@ -95,8 +95,11 @@ export function generateColorScale(
             `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
           )
         } else {
-          // Default to HEX format - ensure full 6-digit format
-          let hexColor = color.toString({ format: 'hex' })
+          // Default to HEX format - convert to sRGB first to ensure proper conversion
+          const srgbColor = color.to('srgb')
+          // Force alpha to 1 to ensure 6-digit hex output
+          srgbColor.alpha = 1
+          let hexColor = srgbColor.toString({ format: 'hex' })
           // Expand shorthand hex (e.g., #fff -> #ffffff)
           if (hexColor.length === 4) {
             hexColor =
