@@ -52,6 +52,7 @@ export function ThemeButton() {
 
   return (
     <button
+      data-debug
       onClick={(e) => toggleTheme(e)}
       type="button"
       data-toggle-dark="dark"

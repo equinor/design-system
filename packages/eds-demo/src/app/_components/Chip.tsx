@@ -12,6 +12,7 @@ export const Chip: React.FC<ChipProps> = ({
 }) => {
   return (
     <BaseChip
+      data-debug
       // 💰 Use the chip variant property to specify the data-color-appearance attribute
       data-color-appearance={variant}
       // 💰 Use the className prop to apply additional styles
