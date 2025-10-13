@@ -118,6 +118,4 @@ Here are some resources to help validate your work:
 
 [The A11Y Project](https://a11yproject.com/)
 
-
-
 [WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"
