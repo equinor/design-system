@@ -16,6 +16,7 @@ export const PrimaryButton = ({
 }: ButtonProps) => {
   return (
     <button
+      data-debug
       type="button"
       className={`select-none h-[36px] px-4 py-2.5 rounded border-opacity-0 justify-start gap-2 flex items-center button button--primary ${
         className || ""
@@ -38,6 +39,7 @@ export const SecondaryButton = ({
 }: ButtonProps) => {
   return (
     <button
+      data-debug
       type="button"
       className={`select-none h-[36px] px-4 py-2.5 bg-opacity-0 rounded border justify-start gap-2 flex items-center ${
         className || ""

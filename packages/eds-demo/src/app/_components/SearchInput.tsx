@@ -28,6 +28,7 @@ export const SearchInput = ({ className, iconClass, ...rest }: Props) => {
         </svg>
       </span>
       <input
+        data-debug
         type="search"
         placeholder="Search"
         aria-label="Search input"
