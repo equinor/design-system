@@ -11,21 +11,21 @@ const sidebars: SidebarsConfig = {
       label: 'Getting Started',
       link: {
         type: 'doc',
-        id: 'about/getting-started/getting_started',
+        id: 'about/getting-started/intro',
       },
       collapsed: false,
       items: [
-        'about/getting-started/getting_started',
+        'about/getting-started/intro',
         {
           type: 'category',
           label: 'Design',
           link: {
             type: 'doc',
-            id: 'about/getting-started/design/design',
+            id: 'about/getting-started/design/index',
           },
           collapsed: false,
           items: [
-            'about/getting-started/design/design',
+            'about/getting-started/design/index',
             'about/getting-started/design/Figma',
           ],
         },
@@ -34,11 +34,11 @@ const sidebars: SidebarsConfig = {
           label: 'Develop',
           link: {
             type: 'doc',
-            id: 'about/getting-started/develop/develop',
+            id: 'about/getting-started/develop/index',
           },
           collapsed: false,
           items: [
-            'about/getting-started/develop/develop',
+            'about/getting-started/develop/index',
             'about/getting-started/develop/citizen_developers',
           ],
         },

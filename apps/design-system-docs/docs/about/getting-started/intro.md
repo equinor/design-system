@@ -1,4 +1,4 @@
-# Getting Started
+# Introduction
 
 Ready to start building with EDS?<br /><br />
 Whether you're designing in Figma, developing with React, or building solutions with low-code tools, we've created tailored guidance to help you succeed.
@@ -7,9 +7,9 @@ Choose your role below to jump straight into the resources and steps that matter
 
 ## Choose Your Path
 
-**As a designer**, you'll work with our Figma component libraries and design tokens. Access comprehensive documentation, usage guidelines, and accessibility considerations that help you create inclusive designs that translate smoothly to development. [Start your design journey ›](./design/design.md)
+**As a designer**, you'll work with our Figma component libraries and design tokens. Access comprehensive documentation, usage guidelines, and accessibility considerations that help you create inclusive designs that translate smoothly to development. [Start your design journey ›](./design/index.md)
 
-**As a developer**, install our React component library via `npm` and start building with production-ready components. You'll get full TypeScript support, thorough documentation, and practical examples for proper implementation. [Get coding with EDS ›](./develop/develop.md)
+**As a developer**, install our React component library via `npm` and start building with production-ready components. You'll get full TypeScript support, thorough documentation, and practical examples for proper implementation. [Get coding with EDS ›](./develop/index.md)
 
 **As a citizen developer**, explore our Power Platform templates and component libraries. Use ready-made templates for Power Apps and Power BI that follow EDS principles, helping you create professional solutions with familiar low-code tools. [Build with Power Platform ›](./develop/citizen_developers.md)
 

@@ -1,11 +1,12 @@
 ---
-title: Develop
+title: Developers
 hide_title: true
+sidebar_label: Overview
 ---
 
 import Prerequisites from '@site/src/components/Prerequisites';
 
-## Develop
+## Overview
 
 Welcome to building with EDS! Get production-ready React components, full TypeScript support, and everything you need to create consistent, accessible applications.
 
