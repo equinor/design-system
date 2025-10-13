@@ -8,27 +8,17 @@ The EDS product icons are built on top of the Equinor  guidelines for iconogra
 
 Product icons are used in app icons, app launchers and splash screens---always with the name of the product they represent. Simple and clear icons require a strict underlying grid. The EDS icons are built on a 48x48px grid. Product icons can scale up, but not down, depending on context in the grid shape.
 
-**Don't**
+:::danger Don't
 
--   Product icons are not to be used as system icons.
-    
--   Product icons are not used for marketing or decoration.
+-   Product icons are not to be used as system icons
+-   Product icons are not used for marketing or decoration
+
+:::
 
 
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# Product icons
-
-Product icons communicate key themes and business areas in a clear, simple and branded style. They enhance visual communication, assist with navigation and reduce cognitive load. Product icons do not provide functional interaction---use system icons instead.
+## Design
 
 ## Implementation in Figma
-
-### Instructions
 
 1.  Locate the **Assets** tab in the **Layers Panel**.
     
@@ -43,36 +33,18 @@ Product icons communicate key themes and business areas in a clear, simple and b
 4.  Hold `Shift` when resizing the `Product icon` to retain its aspect ratio.
 
 
+## Library
 
-# Library
+### Generic
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# Product icons
-
-Product icons communicate key themes and business areas in a clear, simple and branded style. They enhance visual communication, assist with navigation and reduce cognitive load. Product icons do not provide functional interaction---use system icons instead.
-
-## Generic
-
+![prod icon](genicon.png)  
 Placeholder product icon
 
-Add notes
+### Mobility
 
-## Mobility
+![mobility icons](mobility.jpeg)
 
-
-
-# Contribution
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-ASSETS
-
-# Product icons
-
-Product icons communicate key themes and business areas in a clear, simple and branded style. They enhance visual communication, assist with navigation and reduce cognitive load. Product icons do not provide functional interaction---use system icons instead.
+## Contribution
 
 Missing a product icon? You can make it following these simple guidelines.
 
@@ -83,7 +55,7 @@ Missing a product icon? You can make it following these simple guidelines.
 -   All icons should be understandable---regardless of language or location.
     
 
-## Style
+### Style
 
 Our icons are constructed using simple single-colour keylines. To reflect the rounded corners of the logo, product icons have rounded corners.
 
@@ -91,26 +63,22 @@ Each icon needs to be reduced to its minimal form---being bold, geometrical and 
 
 The EDS icons are always facing forward and never rotated or dimensional. The icons are made for legibility and are not too literal or complex, neither are they overly playful or bubbly.
 
-**Don'ts**
+:::danger Don'ts
 
--   Do not create product icons that are filled, always use outlines.
-    
--   Do not create product icons that contain multiple colours.
-    
--   Do not use multiple stroke weights.
-    
--   Do not apply square corners or square line ends.
-    
--   Do not create product icons with more than three objects.
-    
--   Do not create product icons with hands holding objects.
-    
+-   Do not create product icons that are filled, always use outlines  
+-   Do not create product icons that contain multiple colours
+-   Do not use multiple stroke weights
+-   Do not apply square corners or square line ends
+-   Do not create product icons with more than three objects
+-   Do not create product icons with hands holding objects
+:::    
 
-**Exceptions**
+:::warning Exceptions
 
 Optical corrections are not allowed in product icons.
+:::
 
-## Making a new icon
+### Making a new icon
 
 -   Create an artboard that is 48x48px.
     
@@ -127,7 +95,7 @@ Optical corrections are not allowed in product icons.
     -   If you're using borders or the line tool, be certain to outline (expand) the icon.
         
 
-## Submitting your new icon
+### Submitting your new icon
 
 -   When your icon has been created, delete the `Product icon grid` layer that you had locked.
     
