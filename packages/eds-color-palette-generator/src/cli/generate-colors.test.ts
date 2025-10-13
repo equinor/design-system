@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { resolve, join } from 'node:path'
-import { execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 
 describe('generate-colors CLI', () => {
   const testDir = resolve(__dirname, '__test-output__')
@@ -30,8 +30,7 @@ describe('generate-colors CLI', () => {
 
   it('should generate light and dark color tokens with default HEX format', () => {
     // Run the CLI
-    const cmd = `node ${cliPath} ${configPath} ${testDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, configPath, testDir])
 
     // Check that files were created with new default names
     const lightTokensPath = join(testDir, 'Color Light.Mode 1.json')
@@ -82,8 +81,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(oklchTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${oklchConfigPath} ${oklchTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, oklchConfigPath, oklchTestDir])
 
     const lightTokensPath = join(oklchTestDir, 'Color Light.Mode 1.json')
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
@@ -123,8 +121,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(customTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${customConfigPath} ${customTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, customConfigPath, customTestDir])
 
     const lightTokensPath = join(customTestDir, 'Color Light.Mode 1.json')
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
@@ -161,8 +158,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(customFileTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${customFileConfigPath} ${customFileTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, customFileConfigPath, customFileTestDir])
 
     // Check that custom file names were used
     const lightTokensPath = join(customFileTestDir, 'custom-light.json')
@@ -224,8 +220,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(oklchInputTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${oklchInputConfigPath} ${oklchInputTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, oklchInputConfigPath, oklchInputTestDir])
 
     const lightTokensPath = join(oklchInputTestDir, 'Color Light.Mode 1.json')
     const darkTokensPath = join(oklchInputTestDir, 'Color Dark.Mode 1.json')
