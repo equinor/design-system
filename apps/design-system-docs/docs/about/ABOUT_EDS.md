@@ -1,41 +1,63 @@
 # About EDS
 
-The Equinor design system (EDS) is Equinor's official design system and is to be used when designing, prototyping and developing internal digital interfaces.
+Welcome to **Equinor Design System**! We've built this design system to help you create consistent, accessible digital experiences at Equinor. Whether you're designing in Figma, developing with React, or managing projects, EDS provides the tools and guidance you need to succeed.
 
-## What is EDS
+We believe great design should be accessible to everyone, regardless of your technical background. Our system eliminates the need to recreate basic interface elements, so you can focus your expertise on solving real user problems and delivering exceptional experiences.
 
-The EDS provides a collection of guidelines and reusable components that can be assembled in different combinations to design and build digital interfaces. All design and code components are high-quality, production-grade and accessibility-tested. This allows Equinor to manage design at scale by creating a single source of truth for teams to design, prototype and develop.
+## Design Principles
 
-Using the EDS helps to ensure the Equinor brand and visual identity is applied when building digital interfaces. The EDS core team works together with Equinor's corporate brand team to make sure the EDS is aligned and consistent with the Equinor brand. Specific brand guidelines can be found at the Equinor  (internal Equinor link).
+These principles guide every decision we make in developing and maintaining EDS:
 
-## Goals
+**Flexible and adaptable**  
+Our components work together seamlessly whilst accommodating diverse use cases and requirements across different projects.
 
-**People first**
+**Accessible by design**  
+We prioritise inclusive design from the start, ensuring every element works for users of all abilities and supports assistive technologies.
 
-The EDS creates a visual UI language that is based on standard UI patterns for real people.
+**Purposeful interaction**  
+Motion and interactive elements serve clear functions, helping users understand and navigate interfaces without unnecessary decoration.
 
-**Efficient**
+**Cross-platform consistency**  
+Whether you're building for web, mobile, or desktop applications, EDS maintains the same visual language and interaction patterns.
 
-It's a reliable, working system that allows teams to focus their time on creating great experiences and solving complex logic.
+## Why EDS
 
-**Collaborative**
+EDS was created to support teams across Equinor in building better digital experiences more efficiently. We recognised opportunities to help teams work together more effectively whilst maintaining the high standards our users deserve.
 
-The EDS is open for all teams working with design and development at Equinor. Everyone is encouraged to contribute.
+**Shared foundation for efficiency** — EDS provides tested, reusable components that teams can build upon, eliminating the need to recreate similar solutions across different projects and allowing everyone to focus their expertise on solving unique user problems.
 
-## Principles
+**Centralised maintenance** — With components maintained centrally in one place, developers no longer need to spend time maintaining multiple versions of the same interface elements. This approach ensures consistent updates and bug fixes whilst freeing up valuable development time for teams to focus on innovative features and solving complex business challenges.
 
-**Flexible**
+**Unified brand experience** — We ensure that users have a consistent, professional experience as they navigate between different Equinor applications, strengthening trust and familiarity with our digital services.
 
-Built to be flexible. Its components are designed to work smoothly with each other.
+**Built-in accessibility** — Every component includes accessibility best practices from the start, helping teams create inclusive experiences that serve all users effectively and meet compliance standards.
 
-**Accessible**
+**Streamlined collaboration** — EDS provides shared tools and common terminology that enable designers and developers to work together seamlessly, reducing development time and improving communication.
 
-It's designed and developed to be accessible to everyone---regardless of their ability or situation.
+**Quality assurance** — Our centralised approach ensures that interface solutions are thoroughly tested and maintained, giving teams confidence in their implementations and reducing long-term maintenance overhead.
 
-**Meaningful motion**
+EDS serves as the foundation that empowers teams to create exceptional user experiences whilst working more efficiently and maintaining consistency across all of Equinor's digital touchpoints.
 
-Motion is used to focus attention and is not decorative.
+## What You Get
 
-**Cross-platform**
+EDS provides everything you need to build consistent, accessible interfaces:
 
-Maintains the same UI across platforms---using shared components, tokens and guidelines.
+- **React components** — Production-ready with full TypeScript support
+
+- **Design tokens** — Colours, typography, spacing, and motion guidelines
+
+- **Figma libraries** — Complete foundations, components, and patterns
+
+- **Icons and assets** — Comprehensive visual library
+
+- **Accessibility guidance** — Built-in best practices and compliance standards
+
+- **Implementation support** — Clear examples and practical guidance
+
+Start building immediately with tools designed for your workflow.
+
+## Support & Community
+
+Visit our [Support page](../support/support.md) for help channels, office hours, and direct access to our team.
+
+Your feedback helps us improve EDS for everyone — we'd love to hear from you!
