@@ -1,20 +1,8 @@
 /* ============================================
    EDS 2.0 Spacing System Implementation
-   Based on Figma documentation
+   Based on Figma documentation https://www.figma.com/design/ZSh11jqMpemjSCHaENayna/%F0%9F%93%98-EDS-2.0-Spacing---Typography-Documentation?m=auto&node-id=0-1&t=9PP6wcrOx10hwg21-1
+   Based on Codepen https://codepen.io/vnys/pen/emNmPwr
    ============================================ */
-
-/* CSS Custom Properties with @property for better type safety */
-@property --selectable-padding-inline {
-  inherits: false;
-  initial-value: 16px;
-  syntax: "<length>";
-}
-
-@property --selectable-padding-stack {
-  inherits: false;
-  initial-value: 12px;
-  syntax: "<length>";
-}
 
 /* ============================================
    Spacing Tokens
@@ -63,26 +51,6 @@
   --space-xxl: var(--space-28); /* 28px */
   --space-3xl: var(--space-32); /* 32px */
 
-  /* Container-specific tokens (using base values) */
-  --container-page-padding-inline: var(--space-32); /* 32px */
-  --container-page-padding-block: var(--space-32); /* 32px */
-
-  --container-section-padding-inline: var(--space-24); /* 24px */
-  --container-section-padding-block: var(--space-24); /* 24px */
-
-  --container-card-padding: var(--space-16); /* 16px */
-
-  /* Selectable component tokens (using base values) */
-  --selectable-sm-inline: var(--space-12); /* 12px */
-  --selectable-sm-squished: var(--space-8); /* 8px */
-  --selectable-sm-squared: var(--space-12); /* 12px */
-  --selectable-sm-stretched: var(--space-16); /* 16px */
-
-  --selectable-md-inline: var(--space-16); /* 16px */
-  --selectable-md-squished: var(--space-12); /* 12px */
-  --selectable-md-squared: var(--space-16); /* 16px */
-  --selectable-md-stretched: var(--space-20); /* 20px */
-
   /* Spacing between elements (using base values) */
   --spacing-items-tight: var(--space-8); /* 8px */
   --spacing-items-default: var(--space-16); /* 16px */
@@ -102,131 +70,49 @@
    ============================================ */
 
 .selectable {
-  /* Internal custom properties */
-  --_padding-inline: var(--selectable-padding-inline);
-  --_padding-stack: var(--selectable-padding-stack);
+  /* Base properties */
+  --_padding-inline: var(--selectable-padding-inline, var(--space-md));
+  --_padding-stack: var(--selectable-padding-stack, var(--space-sm));
 
-  /* Layout */
   display: grid;
   grid-auto-flow: column;
   gap: round(0.618em, 0.5px);
   place-items: center start;
   width: fit-content;
+  padding: var(--_padding-stack) var(--_padding-inline);
 
-  /* Apply padding */
-  padding: var(--selectable-padding-stack) var(--selectable-padding-inline);
-}
+  /* Size variants */
+  &[data-padding="xxs"] {
+    --selectable-padding-inline: var(--space-xxs);
+  }
+  &[data-padding="xs"] {
+    --selectable-padding-inline: var(--space-xs);
+  }
+  &[data-padding="sm"] {
+    --selectable-padding-inline: var(--space-sm);
+  }
+  &[data-padding="md"] {
+    --selectable-padding-inline: var(--space-md);
+  }
+  &[data-padding="lg"] {
+    --selectable-padding-inline: var(--space-lg);
+  }
+  &[data-padding="xl"] {
+    --selectable-padding-inline: var(--space-xl);
+  }
 
-/* Extra small selectable */
-.selectable[data-padding="xs"] {
-  --selectable-padding-inline: var(--space-xs);
-}
+  /* Ratio modifiers based on golden ratio relationships */
+  &[data-ratio="squished"] {
+    --selectable-padding-stack: calc(var(--selectable-padding-inline) * 0.67); /* 2:3 */
+  }
 
-.selectable[data-padding="xs"][data-ratio="squished"] {
-  --selectable-padding-stack: var(--space-xxs);
-}
+  &[data-ratio="squared"] {
+    --selectable-padding-stack: var(--selectable-padding-inline); /* 1:1 */
+  }
 
-.selectable[data-padding="xs"][data-ratio="squared"] {
-  --selectable-padding-stack: var(--space-xs);
-}
-
-.selectable[data-padding="xs"][data-ratio="stretched"] {
-  --selectable-padding-stack: var(--space-sm);
-}
-
-/* Small selectable */
-.selectable[data-padding="xxs"] {
-  --selectable-padding-inline: var(--space-xxs);
-}
-
-.selectable[data-padding="xxs"][data-ratio="squished"] {
-  --selectable-padding-stack: var(--space-3xs);
-}
-
-.selectable[data-padding="xxs"][data-ratio="squared"] {
-  --selectable-padding-stack: var(--space-xxs);
-}
-
-.selectable[data-padding="xxs"][data-ratio="stretched"] {
-  --selectable-padding-stack: var(--space-xs);
-}
-
-.selectable[data-padding="sm"] {
-  --selectable-padding-inline: var(--selectable-sm-inline);
-}
-
-.selectable[data-padding="sm"][data-ratio="squished"] {
-  --selectable-padding-stack: var(--selectable-sm-squished);
-}
-
-.selectable[data-padding="sm"][data-ratio="squared"] {
-  --selectable-padding-stack: var(--selectable-sm-squared);
-}
-
-.selectable[data-padding="sm"][data-ratio="stretched"] {
-  --selectable-padding-stack: var(--selectable-sm-stretched);
-}
-
-/* Medium selectable */
-.selectable[data-padding="md"] {
-  --selectable-padding-inline: var(--selectable-md-inline);
-}
-
-.selectable[data-padding="md"][data-ratio="squished"] {
-  --selectable-padding-stack: var(--selectable-md-squished);
-}
-
-.selectable[data-padding="md"][data-ratio="squared"] {
-  --selectable-padding-stack: var(--selectable-md-squared);
-}
-
-.selectable[data-padding="md"][data-ratio="stretched"] {
-  --selectable-padding-stack: var(--selectable-md-stretched);
-}
-
-/* Large selectable */
-.selectable[data-padding="lg"] {
-  --selectable-padding-inline: var(--space-lg);
-}
-
-.selectable[data-padding="lg"][data-ratio="squished"] {
-  --selectable-padding-stack: var(--space-md);
-}
-
-.selectable[data-padding="lg"][data-ratio="squared"] {
-  --selectable-padding-stack: var(--space-lg);
-}
-
-.selectable[data-padding="lg"][data-ratio="stretched"] {
-  --selectable-padding-stack: var(--space-xl);
-}
-
-/* Extra large selectable */
-.selectable[data-padding="xl"] {
-  --selectable-padding-inline: var(--space-xl);
-}
-
-.selectable[data-padding="xl"][data-ratio="squished"] {
-  --selectable-padding-stack: var(--space-lg);
-}
-
-.selectable[data-padding="xl"][data-ratio="squared"] {
-  --selectable-padding-stack: var(--space-xl);
-}
-
-.selectable[data-padding="xl"][data-ratio="stretched"] {
-  --selectable-padding-stack: var(--space-xxl);
-}
-
-/* Debug visualization */
-.selectable[data-debug],
-[data-debug] {
-  background-image:
-    repeating-linear-gradient(to left, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
-    repeating-linear-gradient(to right, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
-    repeating-linear-gradient(to top, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
-    repeating-linear-gradient(to bottom, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
-    repeating-linear-gradient(to bottom, #f002 0, #f002 4px, transparent 4px, transparent 8px);
+  &[data-ratio="stretched"] {
+    --selectable-padding-stack: calc(var(--selectable-padding-inline) * 1.5); /* 3:2 */
+  }
 }
 
 /* ============================================
@@ -358,234 +244,100 @@
 }
 
 /* ============================================
-   Container Padding (from Figma Containers section)
-   ============================================ */
-
-.container-page {
-  padding-inline: var(--container-page-padding-inline);
-  padding-block: var(--container-page-padding-block);
-}
-
-.container-section {
-  padding-inline: var(--container-section-padding-inline);
-  padding-block: var(--container-section-padding-block);
-}
-
-.container-card {
-  padding: var(--container-card-padding);
-}
-
-/* ============================================
    Stack & Inline Layout Primitives
    Spacing between elements
    ============================================ */
 
-/* Stack - vertical layout */
+/* Base gap system for all layout primitives */
+[class*="stack"],
+[class*="inline"],
+[class*="grid"] {
+  &[data-spacing="tight"] {
+    gap: var(--spacing-items-tight);
+  }
+  &[data-spacing="default"] {
+    gap: var(--spacing-items-default);
+  }
+  &[data-spacing="loose"] {
+    gap: var(--spacing-items-loose);
+  }
+
+  &[data-spacing="section-tight"] {
+    gap: var(--spacing-sections-tight);
+  }
+  &[data-spacing="section-default"] {
+    gap: var(--spacing-sections-default);
+  }
+  &[data-spacing="section-loose"] {
+    gap: var(--spacing-sections-loose);
+  }
+
+  /* Token-based spacing */
+  &[data-spacing="3xs"] {
+    gap: var(--space-3xs);
+  }
+  &[data-spacing="xxs"] {
+    gap: var(--space-xxs);
+  }
+  &[data-spacing="xs"] {
+    gap: var(--space-xs);
+  }
+  &[data-spacing="sm"] {
+    gap: var(--space-sm);
+  }
+  &[data-spacing="md"] {
+    gap: var(--space-md);
+  }
+  &[data-spacing="lg"] {
+    gap: var(--space-lg);
+  }
+  &[data-spacing="xl"] {
+    gap: var(--space-xl);
+  }
+  &[data-spacing="xxl"] {
+    gap: var(--space-xxl);
+  }
+  &[data-spacing="3xl"] {
+    gap: var(--space-3xl);
+  }
+}
+
 .stack {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-items-default);
 }
 
-.stack[data-spacing="tight"] {
-  gap: var(--spacing-items-tight);
-}
-
-.stack[data-spacing="default"] {
-  gap: var(--spacing-items-default);
-}
-
-.stack[data-spacing="loose"] {
-  gap: var(--spacing-items-loose);
-}
-
-/* Section spacing */
-.stack[data-spacing="section-tight"] {
-  gap: var(--spacing-sections-tight);
-}
-
-.stack[data-spacing="section-default"] {
-  gap: var(--spacing-sections-default);
-}
-
-.stack[data-spacing="section-loose"] {
-  gap: var(--spacing-sections-loose);
-}
-
-/* Token-based spacing */
-.stack[data-spacing="3xs"] {
-  gap: var(--space-3xs);
-}
-
-.stack[data-spacing="xxs"] {
-  gap: var(--space-xxs);
-}
-
-.stack[data-spacing="xs"] {
-  gap: var(--space-xs);
-}
-
-.stack[data-spacing="sm"] {
-  gap: var(--space-sm);
-}
-
-.stack[data-spacing="md"] {
-  gap: var(--space-md);
-}
-
-.stack[data-spacing="lg"] {
-  gap: var(--space-lg);
-}
-
-.stack[data-spacing="xl"] {
-  gap: var(--space-xl);
-}
-
-.stack[data-spacing="xxl"] {
-  gap: var(--space-xxl);
-}
-
-.stack[data-spacing="3xl"] {
-  gap: var(--space-3xl);
-}
-
-/* Inline - horizontal layout */
 .inline {
   display: flex;
   flex-direction: row;
-  gap: var(--spacing-items-default);
   flex-wrap: wrap;
-}
-
-.inline[data-spacing="tight"] {
-  gap: var(--spacing-items-tight);
-}
-
-.inline[data-spacing="default"] {
   gap: var(--spacing-items-default);
 }
-
-.inline[data-spacing="loose"] {
-  gap: var(--spacing-items-loose);
-}
-
-/* Token-based spacing */
-.inline[data-spacing="3xs"] {
-  gap: var(--space-3xs);
-}
-
-.inline[data-spacing="xxs"] {
-  gap: var(--space-xxs);
-}
-
-.inline[data-spacing="xs"] {
-  gap: var(--space-xs);
-}
-
-.inline[data-spacing="sm"] {
-  gap: var(--space-sm);
-}
-
-.inline[data-spacing="md"] {
-  gap: var(--space-md);
-}
-
-.inline[data-spacing="lg"] {
-  gap: var(--space-lg);
-}
-
-.inline[data-spacing="xl"] {
-  gap: var(--space-xl);
-}
-
-.inline[data-spacing="xxl"] {
-  gap: var(--space-xxl);
-}
-
-.inline[data-spacing="3xl"] {
-  gap: var(--space-3xl);
-}
-
-/* ============================================
-   Grid Layout Patterns
-   ============================================ */
 
 .grid {
   display: grid;
   gap: var(--spacing-items-default);
 }
 
-.grid[data-spacing="tight"] {
-  gap: var(--spacing-items-tight);
-}
-
-.grid[data-spacing="default"] {
-  gap: var(--spacing-items-default);
-}
-
-.grid[data-spacing="loose"] {
-  gap: var(--spacing-items-loose);
-}
-
-/* Token-based spacing */
-.grid[data-spacing="3xs"] {
-  gap: var(--space-3xs);
-}
-
-.grid[data-spacing="xxs"] {
-  gap: var(--space-xxs);
-}
-
-.grid[data-spacing="xs"] {
-  gap: var(--space-xs);
-}
-
-.grid[data-spacing="sm"] {
-  gap: var(--space-sm);
-}
-
-.grid[data-spacing="md"] {
-  gap: var(--space-md);
-}
-
-.grid[data-spacing="lg"] {
-  gap: var(--space-lg);
-}
-
-.grid[data-spacing="xl"] {
-  gap: var(--space-xl);
-}
-
-.grid[data-spacing="xxl"] {
-  gap: var(--space-xxl);
-}
-
-.grid[data-spacing="3xl"] {
-  gap: var(--space-3xl);
-}
-
-/* Responsive grid patterns */
+/* ============================================
+   Grid Layout Patterns
+   ============================================ */
 .grid-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
-
 .grid-auto-fill {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
-
-/* Fixed column grids */
 .grid-2-col {
   grid-template-columns: repeat(2, 1fr);
 }
-
 .grid-3-col {
   grid-template-columns: repeat(3, 1fr);
 }
-
 .grid-4-col {
   grid-template-columns: repeat(4, 1fr);
 }
-
 /* ============================================
    Baseline Grid Alignment
    ============================================ */
@@ -605,54 +357,32 @@
 
 .baseline-aligned {
   box-sizing: border-box;
-}
 
-.baseline-aligned[data-padding="3xs"] {
-  padding: var(--space-3xs); /* 2px */
-}
-
-.baseline-aligned[data-padding="xxs"] {
-  padding: var(--space-xxs); /* 4px = 1 × 4px */
-}
-
-.baseline-aligned[data-padding="xs"] {
-  padding: var(--space-xs); /* 8px = 2 × 4px */
-}
-
-.baseline-aligned[data-padding="sm"] {
-  padding: var(--space-sm); /* 12px = 3 × 4px */
-}
-
-.baseline-aligned[data-padding="md"] {
-  padding: var(--space-md); /* 16px = 4 × 4px */
-}
-
-.baseline-aligned[data-padding="lg"] {
-  padding: var(--space-lg); /* 20px = 5 × 4px */
-}
-
-.baseline-aligned[data-padding="xl"] {
-  padding: var(--space-xl); /* 24px = 6 × 4px */
-}
-
-.baseline-aligned[data-padding="xxl"] {
-  padding: var(--space-xxl); /* 28px = 7 × 4px */
-}
-
-.baseline-aligned[data-padding="3xl"] {
-  padding: var(--space-3xl); /* 32px = 8 × 4px */
-}
-
-/* ============================================
-   Responsive Spacing Modifiers
-   ============================================ */
-
-@media (min-width: 768px) {
-  .stack-md\:lg[data-spacing="md"] {
-    gap: var(--space-lg);
+  &[data-padding="3xs"] {
+    padding: var(--space-3xs);
   }
-
-  .inline-md\:lg[data-spacing="md"] {
-    gap: var(--space-lg);
+  &[data-padding="xxs"] {
+    padding: var(--space-xxs);
+  }
+  &[data-padding="xs"] {
+    padding: var(--space-xs);
+  }
+  &[data-padding="sm"] {
+    padding: var(--space-sm);
+  }
+  &[data-padding="md"] {
+    padding: var(--space-md);
+  }
+  &[data-padding="lg"] {
+    padding: var(--space-lg);
+  }
+  &[data-padding="xl"] {
+    padding: var(--space-xl);
+  }
+  &[data-padding="xxl"] {
+    padding: var(--space-xxl);
+  }
+  &[data-padding="3xl"] {
+    padding: var(--space-3xl);
   }
 }
