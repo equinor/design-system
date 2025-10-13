@@ -135,7 +135,7 @@ nav.menu li a {
 /* 1) Vertical guide lines for nested sidebar items */
 .theme-doc-sidebar-item-category > .menu__list {
   position: relative;
-  margin-left: 0.75rem; /* indent of children */
+  margin-left: 2.5rem; /* indent of children */
   padding-left: 0.5rem; /* space between line and text */
   border-left: 0.125rem solid var(--eds-color-border-neutral-subtle);
 }
@@ -149,7 +149,7 @@ nav.menu li a {
 .theme-doc-sidebar-item-category .menu__list::before {
   content: '';
   position: absolute;
-  left: -0.125rem; /* aligns with the border-left above */
+  left: -0.105rem; /* aligns with the border-left above */
   top: -0.375rem; /* small overlap above the first child */
   height: 0.375rem;
   border-left: 0.125rem solid var(--eds-color-border-neutral-subtle);
@@ -172,11 +172,7 @@ nav.menu li a {
 
 /* Base caret (closed state) — only the chevron pseudo-element */
 .menu__caret {
-  transform: scale(0.7);
-  transform-origin: center;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+  display: none !important;
 }
 
 /* ======================================
