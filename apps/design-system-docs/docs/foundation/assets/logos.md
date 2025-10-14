@@ -1,6 +1,6 @@
----
 title: Logos
 hide_title: true
+
 ---
 
 ## Logos
@@ -29,14 +29,15 @@ Use the favicon at 16px or 32px sizes specifically for browser tabs and bookmark
 
 ## Usage Guidelines
 
-**Do**
+:::info **Do**
 
 - Use the provided spacing built into each logo component
 - Maintain the minimum 48px height for the main logo
 - Choose appropriate colour variations (Energy Red or White) based on your background
 - Reserve logo usage for key branding moments in internal interfaces
+  :::
 
-**Don't**
+:::danger **Don't**
 
 - Use the logo in Energy Red over a Black background (poor contrast)
 - Place the logo over photography (reduces legibility)
@@ -44,6 +45,7 @@ Use the favicon at 16px or 32px sizes specifically for browser tabs and bookmark
 - Change proportions, rotate, or tilt the logo
 - Use the logo as a clickable link in internal interfaces (this can confuse users who might expect it to navigate to external sites)
 - Use the star symbol as an app icon (reserved for the main Equinor app)
+  :::
 
 ## External Usage
 

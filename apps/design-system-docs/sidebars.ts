@@ -21,9 +21,7 @@ const sidebars: SidebarsConfig = {
             type: 'doc',
             id: 'about/getting-started/design/index',
           },
-          items: [
-            'about/getting-started/design/Figma',
-          ],
+          items: ['about/getting-started/design/Figma'],
         },
         {
           type: 'category',
@@ -32,9 +30,7 @@ const sidebars: SidebarsConfig = {
             type: 'doc',
             id: 'about/getting-started/develop/index',
           },
-          items: [
-            'about/getting-started/develop/citizen_developers',
-          ],
+          items: ['about/getting-started/develop/citizen_developers'],
         },
 
         'about/getting-started/team_roles',
@@ -55,21 +51,14 @@ const sidebars: SidebarsConfig = {
       label: 'Colour',
       link: {
         type: 'doc',
-        id: 'foundation/colour/about',
+        id: 'foundation/colour/intro',
       },
-      collapsed: true,
-      items: ['foundation/colour/about', 'foundation/colour/getting-started'],
+      items: ['foundation/colour/intro', 'foundation/colour/getting_started'],
     },
     {
       type: 'category',
       label: 'Design Tokens',
-      link: {
-        type: 'doc',
-        id: 'foundation/design-tokens/about',
-      },
-      collapsed: true,
       items: [
-        'foundation/design-tokens/about',
         'foundation/design-tokens/grid',
         'foundation/design-tokens/elevation',
         'foundation/design-tokens/shape',
@@ -82,11 +71,6 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Assets',
-      link: {
-        type: 'generated-index',
-        slug: 'Assets',
-      },
-      collapsed: true,
       items: [
         'foundation/assets/image_placeholder',
         'foundation/assets/logos',

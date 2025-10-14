@@ -1,9 +1,6 @@
 ---
 title: Product Icons
-hide_title: true
 ---
-
-## Product Icons
 
 Product icons represent key themes and business areas with Equinor's visual identity. They help users identify and navigate between different products and services whilst maintaining consistent brand recognition.
 
@@ -21,26 +18,42 @@ Use product icons in app launchers, splash screens, and product identification c
 
 ## Usage Guidelines
 
-**Do**
+:::info **Do**
 
 - Use product icons with the product name they represent
 - Maintain the 48px minimum size for clarity
 - Follow the established grid system for consistency
 - Keep designs minimal, geometric, and symmetrical
-
-**Don't**
+:::
+:::danger **Don't**
 
 - Use product icons as system icons or for decoration
 - Scale product icons below their base grid size
 - Use product icons for marketing purposes
 - Create filled versions (always use outlines)
+:::
 
+:::warning Exceptions
+
+Optical corrections are not allowed in product icons.
+:::
 ## Using Product Icons in Figma
 
 1. Open the **Assets** tab in the Layers Panel
 2. Search for specific icons using the search bar or browse through organised folders
 3. Drag the icon component into your frame or artboard
 4. Hold **Shift** when resizing to maintain aspect ratio
+
+## Library
+
+### Generic
+
+![prod icon](genicon.png)  
+Placeholder product icon
+
+### Mobility
+
+![mobility icons](mobility.jpeg)
 
 ## Contributing New Product Icons
 
@@ -94,4 +107,3 @@ When your icon is ready:
 - Choose an appropriate category from existing library categories
 - Provide alternative names people might search for
 - Contact the EDS core team designers for guidance and submission
-

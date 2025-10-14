@@ -1,9 +1,9 @@
 ---
-title: Team & Roles
+title: Teams & Roles
 hide_title: true
 ---
 
-## Team & Roles
+## Teams & Roles
 
 As a team or project lead, you'll find the strategic guidance and practical support you need to successfully implement EDS across your projects and teams.
 

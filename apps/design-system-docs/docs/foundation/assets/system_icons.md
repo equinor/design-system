@@ -1,8 +1,10 @@
-# System icons
+---
+title: System Icons
+---
 
 System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
 
-## Guidelines
+## Usage Guidelines
 
 The EDS system icons are built on a copy of the [outlined GMD icons](https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined) provided open-source by Google. The icons have been customised and renamed for Equinor's use and are available in EDS Storybook.
 
@@ -18,7 +20,7 @@ Simple and clear icons require a strict underlying grid. The EDS icons are built
 
 ## Design
 
-### Implementation in Figma
+### Using Product Icons in Figma
 
 1.  Locate the **Assets** tab in the **Layers Panel**.
 2.  There are two ways to locate the `System icon` component needed:

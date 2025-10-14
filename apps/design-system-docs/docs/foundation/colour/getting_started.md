@@ -1,4 +1,6 @@
-# Getting Started
+---
+title: Getting Started
+---
 
 The EDS colour foundation can be used in two ways through a **static** or **dynamic** approach.  
 They share the same colour values and accessibility logic but differ in how colours are applied and managed.
