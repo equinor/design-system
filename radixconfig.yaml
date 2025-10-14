@@ -16,7 +16,7 @@ spec:
   dnsAppAlias:
     environment: prod
     compoent: docs
-  dnsAppAlias:
+  dnsAlias:
     - alias: eds
       environment: prod
       component: docs
