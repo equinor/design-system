@@ -95,7 +95,6 @@ const sidebars: SidebarsConfig = {
       },
       collapsed: true,
       items: [
-        'foundation/assets/icons',
         'foundation/assets/image_placeholder',
         'foundation/assets/logos',
         'foundation/assets/illustration',
