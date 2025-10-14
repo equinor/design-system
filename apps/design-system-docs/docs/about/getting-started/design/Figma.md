@@ -67,12 +67,6 @@ If you need to create a new team, read Figma's team creation guidelines first. C
 
 ## EDS Designer Sandbox
 
-The EDS designer sandbox in Figma provides a space for designers to share projects, ideas, and collaborate with the EDS core team.
+The EDS designer sandbox in Figma provides a collaborative space where designers can share projects, explore ideas, and connect with the EDS core team. This community-driven environment helps foster innovation and ensures the design system continues to evolve based on real user needs.
 
-**Get involved:**
-
-<!--- TODO: Add figma links when available--->
-
-- **[Visit the sandbox](/)** to explore and connect with other designers
-- **[Showcase your designs](/)** to share your work and get feedback from the community
-- **[Request new features](/)** to suggest components or improvements for the EDS system
+You can **[visit the sandbox](https://www.figma.com/design/hjpavZkeUoRfn1N7mhIniK/EDS-designer-sandbox?node-id=7517-2865&p=f&t=EDrTGNK3eP4VnxYq-11)** to explore ongoing projects and connect with other designers working with EDS. If you have ideas for new components or improvements to the design system, you can **[request new features](../../../support/support.md)** through our support channels.
