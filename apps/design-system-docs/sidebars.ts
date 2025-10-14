@@ -13,9 +13,7 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'about/getting-started/intro',
       },
-      collapsed: true,
       items: [
-        'about/getting-started/intro',
         {
           type: 'category',
           label: 'Design',
@@ -23,9 +21,7 @@ const sidebars: SidebarsConfig = {
             type: 'doc',
             id: 'about/getting-started/design/index',
           },
-          collapsed: true,
           items: [
-            'about/getting-started/design/index',
             'about/getting-started/design/Figma',
           ],
         },
@@ -36,9 +32,7 @@ const sidebars: SidebarsConfig = {
             type: 'doc',
             id: 'about/getting-started/develop/index',
           },
-          collapsed: true,
           items: [
-            'about/getting-started/develop/index',
             'about/getting-started/develop/citizen_developers',
           ],
         },

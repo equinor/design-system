@@ -145,15 +145,6 @@ nav.menu li a {
   --ifm-menu-color-background-hover: transparent;
 }
 
-/* Short top segment that visually connects the parent item to the child list */
-.theme-doc-sidebar-item-category .menu__list::before {
-  content: '';
-  position: absolute;
-  left: -0.125rem; /* aligns with the border-left above */
-  top: -0.375rem; /* small overlap above the first child */
-  height: 0.375rem;
-  border-left: 0.125rem solid var(--eds-color-border-neutral-subtle);
-}
 /* 3) Hover behavior: no bg, show underline */
 .menu__link:hover {
   background-color: transparent !important;
@@ -170,9 +161,14 @@ nav.menu li a {
   color: var(--ifm-color-primary) !important;
 }
 
-/* Base caret (closed state) — only the chevron pseudo-element */
+/* Make sidebar chevrons smaller and lighter */
 .menu__caret {
-  display: none !important;
+  transform: scale(0.7); /* 🔹 smaller chevron — adjust 0.6–0.8 to taste */
+  opacity: 0.6; /* 🔹 makes it lighter overall */
+  color: var(--ifm-color-emphasis-600); /* 🔹 or pick any token or hex */
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 /* ======================================

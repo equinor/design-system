@@ -1,10 +1,6 @@
 ---
-title: Designers
-hide_title: true
-sidebar_label: Overview
+title: Design
 ---
-
-## Overview
 
 You're ready to start designing with EDS. This guide helps you set up Figma access, understand our design workflow, and create your first designs with confidence.
 
