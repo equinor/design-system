@@ -4,10 +4,10 @@ Guide for using Release Please to automate releases in Equinor Design System.
 
 ## Quick Start
 
-1. Make conventional commits (see [CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md))
-2. Push to `develop` - Release Please creates/updates a release PR
+1. Use conventional commits (see [CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md))
+2. Merge PR to `develop` → Release Please creates/updates a release PR
 3. Review and merge the release PR
-4. Publishing happens automatically
+4. Publishing happens automatically (ensure the workflow is successful in Github Actions )
 5. Create GitHub releases manually (curate for end users)
 6. Rebase master from develop
 7. Announce in `#eds-design-system`
@@ -47,7 +47,9 @@ After release PR is merged:
 
 **Wrong version bump?**
 
-- `feat:` = minor, `fix:` = patch, `feat!:` = major
+- `feat!:` = major
+- `feat:` = minor
+- `fix:` = patch
 
 **Publishing failed?**
 
