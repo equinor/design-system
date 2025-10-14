@@ -8,6 +8,7 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 - [Brand Guidelines](https://communicationtoolbox.equinor.com/point/en/equinor/) – Learn about our brand colours, logos, and visual identity.
 - [Icon Library](../foundation/assets/Product_icons.md) – Download and use our system icons.
 
+
 ## Component Documentation
 
 - [Component Reference](../components/components.md) – Explore usage, props, and examples for all EDS components.
