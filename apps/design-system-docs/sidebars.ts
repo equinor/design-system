@@ -8,29 +8,37 @@ const sidebars: SidebarsConfig = {
     'about/about_eds',
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Basics',
       link: {
         type: 'doc',
-        id: 'about/getting-started/intro',
+        id: 'about/getting-started/getting_started',
       },
       items: [
+        'about/getting-started/getting_started',
         {
           type: 'category',
           label: 'Design',
           link: {
             type: 'doc',
-            id: 'about/getting-started/design/index',
+            id: 'about/getting-started/design/getting_started_design'
           },
-          items: ['about/getting-started/design/Figma'],
+          items: [
+            'about/getting-started/design/getting_started_design',
+            'about/getting-started/design/Figma',
+          ],
         },
         {
           type: 'category',
           label: 'Develop',
           link: {
             type: 'doc',
-            id: 'about/getting-started/develop/index',
+            id: 'about/getting-started/develop/getting_started_development'
           },
-          items: ['about/getting-started/develop/citizen_developers'],
+          items: [
+            'about/getting-started/develop/getting_started_development',
+            'about/getting-started/develop/citizen_developers',
+
+          ],
         },
 
         'about/getting-started/team_roles',
