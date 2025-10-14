@@ -55,9 +55,9 @@ Banners are notification elements and should not be confused with _top bars_, wh
 
 While using string content for `Banner.Message` is the recommended approach for most use cases, there are situations where more complex content might be necessary. For these special cases, Banner supports ReactNode as children, so you can nest them directly.
 
-- Use string content for `Banner.Message` whenever possible to maintain consistency and proper styling.
-- Only use complex content inside Banner when you have specific requirements that cannot be met with string content.
-- When using complex content in Banner, be mindful of accessibility, responsive behavior, and Equinor design guidelines.
+- Use string content for `Banner.Message` whenever possible to maintain consistency and proper styling
+- Only use complex content inside Banner when you have specific requirements that cannot be met with string content
+- When using complex content in Banner, be mindful of accessibility, responsive behavior, and Equinor design guidelines
 
 Some examples where complex content inside Banner might be appropriate:
 

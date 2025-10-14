@@ -3,16 +3,12 @@ The logo is used with care to brand interfaces.
 
 ## Guidelines
 
-For internal interfaces, the Equinor logo is used sparingly as users have already logged into the Equinor network. The logo, star symbol and favicon can be used in Energy red or White. Always use the logo spacing that is provided---it is built into each component. This ensures the logo maintains its visual integrity.
+For internal interfaces, the Equinor logo is used sparingly as users have already logged into the Equinor network. The logo, star symbol and favicon can be used in Energy red or White. Always use the logo spacing that is provided, it is built into each component. This ensures the logo maintains its visual integrity.
 
 :::danger Don't
-
 - Do not use the logo in Energy Red over a Black background.
-
 - Do not use the logo over photography.
-
 - Do not add any shadows, gradients, outlines or lighting effects.
-
 - Do not change the proportions, rotate or tilt the logo.
 :::
 

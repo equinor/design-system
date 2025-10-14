@@ -30,7 +30,7 @@ Built to be flexible. Its components are designed to work smoothly with each oth
 
 **Accessible**
 
-It's designed and developed to be accessible to everyone---regardless of their ability or situation.
+It's designed and developed to be accessible to everyone regardless of their ability or situation.
 
 **Meaningful motion**
 
@@ -38,4 +38,4 @@ Motion is used to focus attention and is not decorative.
 
 **Cross-platform**
 
-Maintains the same UI across platforms---using shared components, tokens and guidelines.
+Maintains the same UI across platforms using shared components, tokens and guidelines.

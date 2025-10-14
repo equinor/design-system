@@ -34,10 +34,10 @@ Custom content allowed:
 
 The actions on the far-right are standard. This area is for the following common actions within the application:
 
-- Fullscreen: Users can choose to launch the interface to be fullscreen.
-- Notifications: This opens a `Menu` for the user to see their notifications.
-- Accessibility: This opens a `Menu` with choices for the users to choose light/dark mode and their font size. _This button is mandatory to keep._
-- User profile: This opens a `Menu` where the user can see more account details and log out. _This button is mandatory to keep._
+- Fullscreen: Users can choose to launch the interface to be fullscreen
+- Notifications: This opens a `Menu` for the user to see their notifications
+- Accessibility: This opens a `Menu` with choices for the users to choose light/dark mode and their font size. _This button is mandatory to keep_
+- User profile: This opens a `Menu` where the user can see more account details and log out. _This button is mandatory to keep_
 
 ## Implementation in Figma
 

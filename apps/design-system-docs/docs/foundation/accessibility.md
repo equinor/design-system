@@ -8,13 +8,10 @@ The UI components for all Equinor's internal digital interfaces are built to mee
 
 Accessibility ensures that users of different abilities can understand, navigate, interact with and contribute to the digital interface in a meaningful way. This means:
 
--   Keyboard interaction alternatives for all mouse-based actions are provided.
-    
--   All button and input fields are properly identified.
-    
--   Images, SVGs and videos have text-based alternatives.
-    
--   All components are built to convey their identity, operation model and state to assistive technologies.
+-   Keyboard interaction alternatives for all mouse-based actions are provided
+-   All button and input fields are properly identified 
+-   Images, SVGs and videos have text-based alternatives
+-   All components are built to convey their identity, operation model and state to assistive technologies
     
 
 ## What are different abilities
@@ -22,28 +19,19 @@ Accessibility ensures that users of different abilities can understand, navigate
 There are many different types of abilities that need consideration:
 
 -   Age
-    
 -   Blindness
-    
 -   Low vision
-    
 -   Colour-blindness
-    
 -   Hearing disabilities
-    
 -   Physical disabilities
-    
 -   Cognitive disabilities
-    
 -   Situational disabilities (such as a broken arm)
     
 
 There are also different types of situations that need consideration:
 
 -   Physical location
-    
 -   Limited screen size
-    
 -   Lighting issues
     
 
@@ -74,9 +62,7 @@ Remember that text can be both visible and invisible `alt text`. Make sure all 
 Provide descriptive labels, action verbs are good.
 
 :::tip Here is an example
-
-Acceptable: **See all platforms** _Indicates what will happen_
-
+Acceptable: **See all platforms** _Indicates what will happen_  
 Not acceptable: **All platforms** _Does not indicate what will happen_
 :::
 
@@ -112,10 +98,10 @@ Please familiarise yourself with the guidelines from [WCAG 2.1][WCAG] and [Di
 
 Here are some resources to help validate your work:
 
-[WebAIM](https://webaim.org/)
+[WebAIM](https://webaim.org/)  
 
-[Are my colours accessible?](https://aremycolorsaccessible.com/)
+[Are my colours accessible?](https://aremycolorsaccessible.com/)  
 
-[The A11Y Project](https://a11yproject.com/)
+[The A11Y Project](https://a11yproject.com/)  
 
-[WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"
+[WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"  

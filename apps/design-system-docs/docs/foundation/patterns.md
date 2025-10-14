@@ -9,9 +9,7 @@ Using a grid as a starting point for your component implementation will help you
 ## Best practices
 
 :::danger Don’t
-
 -   Do not use less than 8px between components
-    
 -   If some of your objects are aligned to the grid do not set other objects off-grid
 :::    
 

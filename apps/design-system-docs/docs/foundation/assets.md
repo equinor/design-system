@@ -1,3 +1,9 @@
+
+# TO BE REMOVED
+
+--------
+
+
 # Image placeholder
 
 An image placeholder shows an image in a specific aspect ratio.
