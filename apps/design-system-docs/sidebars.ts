@@ -81,7 +81,6 @@ const sidebars: SidebarsConfig = {
         'foundation/design-tokens/shape',
         'foundation/design-tokens/spacing',
         'foundation/design-tokens/typography',
-        'foundation/design-tokens/grid',
       ],
     },
     'foundation/datavisualisation',
