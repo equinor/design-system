@@ -64,6 +64,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
 
           <DataTable
             className={`w-full table-fixed ${styles["table"]}`}
+            trClass={styles["tr"]}
             thClass={styles["th"]}
             activeThClass={styles["th--active"]}
             tdClass={styles["td"]}

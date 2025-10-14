@@ -175,6 +175,12 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   border-bottom: 1px solid var(--eds-color-border-subtle);
 }
 
+/* Table row - Hover state */
+
+.tr:hover .td {
+  background-color: var(--eds-color-bg-fill-muted-hover);
+}
+
 /* Checkmark - Selected table row */
 
 .checkmark {
@@ -193,14 +199,25 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   🐨 The table header cell is interactive and can be used to sort the table. Add some visual style.
 */
 .th {
-  background-color: var(--eds-color-bg-surface);
+  background-color: var(--eds-color-bg-fill-muted-default);
+  color: var(--eds-color-text-strong);
   border-bottom: 2px solid var(--eds-color-border-medium);
+
+  &:hover {
+    background-color: var(--eds-color-bg-fill-muted-hover);
+    border-bottom: 2px solid var(--eds-color-border-subtle);
+  }
 }
 
 /* 🐨 Add a visual indicator to the active table header cell. This is typically used to indicate sorting of the column in the table.  */
 .th--active {
   background-color: var(--eds-color-bg-fill-muted-default);
   border-bottom: 2px solid var(--eds-color-border-strong);
+
+  &:hover {
+    background-color: var(--eds-color-bg-fill-muted-default);
+    border-bottom: 2px solid var(--eds-color-border-strong);
+  }
 }
 
 /* Menu */
