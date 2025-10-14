@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1](https://github.com/equinor/design-system/compare/eds-core-react@1.0.0...eds-core-react@v1.0.1) (2025-10-14)
+
+
+### 🐛 Fixed
+
+* **eds-core-react:** sidebar links not showing tooltip when sidebar is collapsed ([#4068](https://github.com/equinor/design-system/issues/4068)) ([aa2622a](https://github.com/equinor/design-system/commit/aa2622aa6cd278560c0fa1b89203c336775f0f65))
+
+
+### 🔧 Chores
+
+* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+
 ## [1.0.0] - 2025-10-09
 
 This release marks a significant milestone: **EDS is now production-ready**. We're moving from v0 to v1 to signal stability and our commitment to semantic versioning going forward.
