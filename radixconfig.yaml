@@ -15,7 +15,7 @@ spec:
         from: feat/*
   dnsAppAlias:
     environment: prod
-    compoent: docs
+    component: docs
   dnsAlias:
     - alias: eds
       environment: prod
