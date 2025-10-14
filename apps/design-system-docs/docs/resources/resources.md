@@ -5,7 +5,7 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 ## Design Assets
 
 - [Figma Library](https://www.figma.com/) – Access our official design components and templates.
-- [Brand Guidelines](../foundation/ASSETS.md) – Learn about our brand colours, logos, and visual identity.
+- [Brand Guidelines](../foundation/assets/index.md) – Learn about our brand colours, logos, and visual identity.
 - [Icon Library](../foundation/assets/) – Download and use our system icons.
 
 ## Component Documentation
@@ -20,7 +20,7 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 
 ## Tutorials & How-To Guides
 
-- [Getting Started](../about/getting-started/getting_started.md) – Begin using the design system in your projects.
+- [Getting Started](../about/getting-started/intro.md) – Begin using the design system in your projects.
 - [Patterns](../foundation/patterns.md) – Review best practices and reusable patterns.
 
 ## Community & Support
