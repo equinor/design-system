@@ -217,7 +217,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Table data cell in a selected row */
 
 .tr--active .td {
-  background-color: var(--eds-color-bg-neutral-fill-muted-default);
 }
 
 /* Table header */
