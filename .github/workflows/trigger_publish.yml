@@ -16,8 +16,7 @@ on:
   pull_request:
     types: [closed] # Only runs when PR is closed (includes both merged and manually closed)
     branches:
-      # - develop
-      - fre/release-please
+      - develop
 
 # Required permissions
 permissions:
