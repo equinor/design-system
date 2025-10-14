@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility functions and hooks for the Equinor Design System",
   "sideEffects": false,
   "type": "module",
@@ -74,9 +74,9 @@
     "typescript": "^5.9.2"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19",
-    "styled-components": "^6"
+    "react": ">=19.0.0",
+    "react-dom": ">=16.8",
+    "styled-components": ">=5.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.28.3",

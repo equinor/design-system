@@ -5,17 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2025-10-09
+## [1.0.1](https://github.com/equinor/design-system/compare/eds-utils@1.0.0...eds-utils@v1.0.1) (2025-10-14)
 
-This release marks the utilities package as **production-ready**. The v1.0.0 milestone signals API stability and our commitment to semantic versioning.
 
-### BREAKING CHANGES ⚠️
+### 🐛 Fixed
 
-- **React 19 Required**: This version requires React >= 19.0.0. Previous versions are not compatible with React 19, and this version is not compatible with React 18.
+* **eds-core-react, eds-utils:** 🐛Table - Fix Firefox table header wrapping issue ([#3957](https://github.com/equinor/design-system/issues/3957)) ([a973b81](https://github.com/equinor/design-system/commit/a973b819fe36fd83870cbacccc4e102274a5a05b))
+* icon id for next.js ([#3706](https://github.com/equinor/design-system/issues/3706)) ([7e923a1](https://github.com/equinor/design-system/commit/7e923a11ca27172692ffe50e0471454a322ba3e7))
 
-### Changed
 
-- chore: React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
+### 🔧 Chores
+
+* :arrow_up: Upgrade dependencies ([#3795](https://github.com/equinor/design-system/issues/3795)) ([8b5b025](https://github.com/equinor/design-system/commit/8b5b02531eb11949bb85dba719849ed3801ae220))
+* ⬆️ Upgrade dependencies ([#3824](https://github.com/equinor/design-system/issues/3824)) ([3519425](https://github.com/equinor/design-system/commit/35194255d59abbc12b66d2d29bd3446792570ab8))
+* ⬆️ Upgrade dependencies ([#3881](https://github.com/equinor/design-system/issues/3881)) ([23479f7](https://github.com/equinor/design-system/commit/23479f7c2eabfdc3bf12243b7904545277595431))
+* ⬆️ Upgrade dependencies in all packages ([#3933](https://github.com/equinor/design-system/issues/3933)) ([e67ed39](https://github.com/equinor/design-system/commit/e67ed398d3bc40004366eeff44dda8051691b2dd))
+* 🔖 Release eds-core-react, eds-data-grid-react, eds-lab-react, eds-tokens, eds-utils ([#3982](https://github.com/equinor/design-system/issues/3982)) ([f250771](https://github.com/equinor/design-system/commit/f2507710d68e926edf0b2a5164ce896984cb2e20))
+* 🔥 Remove individual package lockfiles ([#3930](https://github.com/equinor/design-system/issues/3930)) ([f813224](https://github.com/equinor/design-system/commit/f8132240a2c20ad54db54c2c38e53731852f8c7a))
+* React 19 upgrade ([#4007](https://github.com/equinor/design-system/issues/4007)) ([645e090](https://github.com/equinor/design-system/commit/645e090d66eb7c1d864c8108497d19003e0cf24e))
+* update dependencies ([#3783](https://github.com/equinor/design-system/issues/3783)) ([8fb9f2d](https://github.com/equinor/design-system/commit/8fb9f2d9f7c5ea420e67d34e981d9ed7cf694c50))
+* upgrade pnpm to v10 and node to v22 ([#3964](https://github.com/equinor/design-system/issues/3964)) ([d8b9848](https://github.com/equinor/design-system/commit/d8b98482913c76dff41f12ff4a1ee2425dcd9b6c))
+
+
+### 📦 Build System
+
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#3768](https://github.com/equinor/design-system/issues/3768)) ([61e4565](https://github.com/equinor/design-system/commit/61e4565dcf79e6ed5be9f0b0ac7d584bab61a52c))
 
 ## [0.9.0] - 2025-09-11
 

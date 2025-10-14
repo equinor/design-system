@@ -5,31 +5,105 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2025-10-09
+## [1.1.0](https://github.com/equinor/design-system/compare/eds-core-react@1.0.0...eds-core-react@v1.1.0) (2025-10-14)
 
-This release marks a significant milestone: **EDS is now production-ready**. We're moving from v0 to v1 to signal stability and our commitment to semantic versioning going forward.
 
-### BREAKING CHANGES ⚠️
+### ✨ Added
 
-- **React 19 Required**: This version requires React >= 19.0.0 and React DOM >= 19.0.0. Previous versions of EDS are not compatible with React 19, and this version is not compatible with React 18.
+* allow React Node type for label props to allow it to be more customizable ([#3140](https://github.com/equinor/design-system/issues/3140)) ([2d2686d](https://github.com/equinor/design-system/commit/2d2686d411e2c25eb03f47fa78b1562b3fc07c2f))
+* **autocomplete:** Implement selectAll functionality ([#3245](https://github.com/equinor/design-system/issues/3245)) ([e15ce0e](https://github.com/equinor/design-system/commit/e15ce0e3a182daa605ccb1d66b8f2681fe11c6a4))
+* **autocomplete:** Possible solution for object-checking ([#3455](https://github.com/equinor/design-system/issues/3455)) ([13336b4](https://github.com/equinor/design-system/commit/13336b43e59ead785a338d6f4cf02d6254a49772))
+* **datepicker:** add datepicker to eds ([#3387](https://github.com/equinor/design-system/issues/3387)) ([f95dfd7](https://github.com/equinor/design-system/commit/f95dfd79476e3f9acb7d922d2709bada3d149082))
+* **datepicker:** Enable custom date-formats ([#3415](https://github.com/equinor/design-system/issues/3415)) ([2f91ed9](https://github.com/equinor/design-system/commit/2f91ed92797bdf42c682e421b86bbaf67247257f))
+* **datepickers:** Enable setting locale from prop.  ([#3626](https://github.com/equinor/design-system/issues/3626)) ([01184ec](https://github.com/equinor/design-system/commit/01184ec7d0bb3ee03e43845a835d42c500480250))
+* **eds-core-react:** :sparkles: Export Autocomplete Option Label ([#3799](https://github.com/equinor/design-system/issues/3799)) ([90ae716](https://github.com/equinor/design-system/commit/90ae7167e1ade634baad2dc037b7fc859e3c0b40))
+* **eds-core-react:** :sparkles: use locale prop for text and formats when it is defined ([#3690](https://github.com/equinor/design-system/issues/3690)) ([e2122f9](https://github.com/equinor/design-system/commit/e2122f94f4d95460c7ef55fbf868f5115c60b7be))
+* **eds-core-react:** ✨ Banner.Message - Allow ReactNode as children ([#3805](https://github.com/equinor/design-system/issues/3805)) ([5270f0c](https://github.com/equinor/design-system/commit/5270f0cb1c328bfe6cef2bd186f0c409d940f702))
+* **eds-core-react:** ✨ enhance Autocomplete onAddNewOption - stories, tests, and accessibility ([#3841](https://github.com/equinor/design-system/issues/3841)) ([e7955f8](https://github.com/equinor/design-system/commit/e7955f8a59fde232943e58fe83c2217b3d1f7d5e))
+* **eds-core-react:** add disabled prop to Tooltip ([#3908](https://github.com/equinor/design-system/issues/3908)) ([04c92af](https://github.com/equinor/design-system/commit/04c92af98206aa6920b975bee2fa18e14b0506ee))
+* **eds-core-react:** add support for adding new options in Autocomplete ([#3833](https://github.com/equinor/design-system/issues/3833)) ([d609525](https://github.com/equinor/design-system/commit/d609525261156415710bcf6b1d094150e205eb73))
+* **eds-core-react:** allow user to override total number of options in autocomplete placeholder text. ([5936d73](https://github.com/equinor/design-system/commit/5936d73f219043ecc7dbef9958c50f69618dee75))
+* **eds-core-react:** Autocomplete - always show "add new option" when onAddNewOption is provided ([#3924](https://github.com/equinor/design-system/issues/3924)) ([9ec6979](https://github.com/equinor/design-system/commit/9ec6979ee89c4a468947ae1d931dd4b62c66cc6a))
+* **eds-core-react:** Autocomplete: allow option-label prop to be used without type of object ([#3915](https://github.com/equinor/design-system/issues/3915)) ([7ef765b](https://github.com/equinor/design-system/commit/7ef765be2a517fe728dac01473cce841376b9dd8))
+* **eds-core-react:** onChange now receives the tab’s value (if set) instead of always its index, with index used as a fallback ([#3893](https://github.com/equinor/design-system/issues/3893)) ([42bb1df](https://github.com/equinor/design-system/commit/42bb1df3ea4f15e34cfdf04e9bccb8eacd401014))
+* **eds-data-grid:** add Table Footer component ([5f8015c](https://github.com/equinor/design-system/commit/5f8015c3817b7e9437d3436b65f37552be261da4))
+* make TextField id optional ([#3730](https://github.com/equinor/design-system/issues/3730)) ([df03b24](https://github.com/equinor/design-system/commit/df03b24c088cab6f352d45c66d0b4bde7a22d7a2))
+* Table footer in `eds-core-react` & `eds-data-grid-react` ([#3624](https://github.com/equinor/design-system/issues/3624)) ([5f8015c](https://github.com/equinor/design-system/commit/5f8015c3817b7e9437d3436b65f37552be261da4))
+* **tooltip:** Allow defining custom root element for tooltips ([#3696](https://github.com/equinor/design-system/issues/3696)) ([69e0a8c](https://github.com/equinor/design-system/commit/69e0a8c5f7ee44a7ed45647190bdd92edc403555))
 
-### Changed
 
-- chore: React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
+### 🐛 Fixed
+
+* Datetime-input is formatted with / instead of : ([#3450](https://github.com/equinor/design-system/issues/3450)) ([5a5aa68](https://github.com/equinor/design-system/commit/5a5aa68d4a3bcb123b6383104c7ba0deaaea0754))
+* **eds-core-react, eds-data-grid-react:** :bug: prevent triggering sorting on resize ([#3782](https://github.com/equinor/design-system/issues/3782)) ([066d91a](https://github.com/equinor/design-system/commit/066d91a32b5b0a0a7c8cf2b52a5e12df74cd8563))
+* **eds-core-react, eds-utils:** 🐛Table - Fix Firefox table header wrapping issue ([#3957](https://github.com/equinor/design-system/issues/3957)) ([a973b81](https://github.com/equinor/design-system/commit/a973b819fe36fd83870cbacccc4e102274a5a05b))
+* **eds-core-react:** :bug: Autocomplete, TextField: moves refs from containers to input element to fix scroll to field error with react hook form ([#3777](https://github.com/equinor/design-system/issues/3777)) ([984add7](https://github.com/equinor/design-system/commit/984add7297157782e092627e95a23eaf9e8cbaea))
+* **eds-core-react:** 🐛 Disable back button in year range based on year, not month ([#3853](https://github.com/equinor/design-system/issues/3853)) ([aaa78a3](https://github.com/equinor/design-system/commit/aaa78a352c892852ca5462328ec54eb2b3d93ed8))
+* **eds-core-react:** 🐛 Fix slider track disappearing on hover ([#3803](https://github.com/equinor/design-system/issues/3803)) ([8406dc0](https://github.com/equinor/design-system/commit/8406dc08df187c70afa8b93ea7291b3016f55003))
+* **eds-core-react:** allow button to become disabled when the as prop is used ([#3785](https://github.com/equinor/design-system/issues/3785)) ([a526c54](https://github.com/equinor/design-system/commit/a526c54726e2c0759cd98a807426bf44b66c3c06))
+* **eds-core-react:** allow menu to close without item onclick ([#3828](https://github.com/equinor/design-system/issues/3828)) ([1e2c935](https://github.com/equinor/design-system/commit/1e2c93525bec7b7ef74ff85989c3e39178068167))
+* **eds-core-react:** Autocomplete - don't call onOptionsChange when clicking "Add new" in single select ([#3932](https://github.com/equinor/design-system/issues/3932)) ([2521902](https://github.com/equinor/design-system/commit/2521902aae749a7b581e54c64c1afac109173db4))
+* **eds-core-react:** show number of selected items in placeholder text for autocomplete multiple when placeholder is provided and items are selected. ([#3813](https://github.com/equinor/design-system/issues/3813)) ([5936d73](https://github.com/equinor/design-system/commit/5936d73f219043ecc7dbef9958c50f69618dee75))
+* **eds-core-react:** Tabs now allow 'null' value as child element 'Tabs.List' and 'Tabs.Panel' ([#3878](https://github.com/equinor/design-system/issues/3878)) ([b67e3ea](https://github.com/equinor/design-system/commit/b67e3eaf85aa55ecc8ee094a369077ebfa66ffa1))
+* Fix localization test ([#3452](https://github.com/equinor/design-system/issues/3452)) ([238a428](https://github.com/equinor/design-system/commit/238a428f129949fac088bed7026b480b24e47a91))
+* fixes issue where sidebar default state always starts as closed ([#3672](https://github.com/equinor/design-system/issues/3672)) ([a44ad6b](https://github.com/equinor/design-system/commit/a44ad6b3bb2a2b7a5f7fcba6bbe4ba878e425d5f))
+* icon id for next.js ([#3706](https://github.com/equinor/design-system/issues/3706)) ([7e923a1](https://github.com/equinor/design-system/commit/7e923a11ca27172692ffe50e0471454a322ba3e7))
+* **Icon:** improve icon type definition by making it a descriminated union on name and data ([#3547](https://github.com/equinor/design-system/issues/3547)) ([47ebede](https://github.com/equinor/design-system/commit/47ebede5e1ce40d780f4c3629aa44281f83f036d))
+* improves type safty for autocomplete when optionLabel is required ([#3408](https://github.com/equinor/design-system/issues/3408)) ([89dd0df](https://github.com/equinor/design-system/commit/89dd0df678fefd5de9654281b4c6616be560755e))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3060](https://github.com/equinor/design-system/issues/3060)) ([8c949a8](https://github.com/equinor/design-system/commit/8c949a89df422f968d270c6f5570c23bdaf450aa))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3125](https://github.com/equinor/design-system/issues/3125)) ([d0c536c](https://github.com/equinor/design-system/commit/d0c536c90ab909c5e5de6d9975d3f6d814f76dcd))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3277](https://github.com/equinor/design-system/issues/3277)) ([0f71502](https://github.com/equinor/design-system/commit/0f715028007a1361c0b459ec677dd8c337880d65))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3404](https://github.com/equinor/design-system/issues/3404)) ([ae07500](https://github.com/equinor/design-system/commit/ae07500fbe5cd2b433585e7ea065fce03fc3bfaa))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3473](https://github.com/equinor/design-system/issues/3473)) ([57dfe5d](https://github.com/equinor/design-system/commit/57dfe5d0a037a524e22de42daa64c9d20b36acd2))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3686](https://github.com/equinor/design-system/issues/3686)) ([7685218](https://github.com/equinor/design-system/commit/7685218080cc3239b01a9518205cd3b93cb36eb3))
+* packages/eds-core-react/Dockerfile.storybook to reduce vulnerabilities ([#3766](https://github.com/equinor/design-system/issues/3766)) ([e803e31](https://github.com/equinor/design-system/commit/e803e31768e58a1a40220314dac84942e679c082))
+* removes 'item is:' console log from autocomplete ([#3788](https://github.com/equinor/design-system/issues/3788)) ([6b27643](https://github.com/equinor/design-system/commit/6b2764366621618aa9c5c35d0a4713aafd0aae8a))
+* **sidebar:** add aria-label to toggle button ([#3066](https://github.com/equinor/design-system/issues/3066)) ([e46bf1c](https://github.com/equinor/design-system/commit/e46bf1ced4eef3861e2bb6bec0c8743d13eb327b))
+* when using menu in a form, the form is submitted when clicking on a menu item if closeOnClcik is set to false ([#3660](https://github.com/equinor/design-system/issues/3660)) ([35f89ea](https://github.com/equinor/design-system/commit/35f89ea1569f28b0d1239c118c3b03b0547d55fa))
+
+
+### 📝 Changed
+
+* **eds-core-react:** 📝 Banner - clarify complex content usage patterns and improve examples ([#3961](https://github.com/equinor/design-system/issues/3961)) ([d3f1b74](https://github.com/equinor/design-system/commit/d3f1b743f8fb14f293577da92ac96e763eb5b3f9))
+* **eds-core-react:** 📝 Update Autocomplete story ([#3817](https://github.com/equinor/design-system/issues/3817)) ([a52270a](https://github.com/equinor/design-system/commit/a52270ae3fba7c08bdd82e23d65a2418db0b62da))
+
+
+### 🔧 Chores
+
+* :arrow_up: Upgrade dependencies ([#3795](https://github.com/equinor/design-system/issues/3795)) ([8b5b025](https://github.com/equinor/design-system/commit/8b5b02531eb11949bb85dba719849ed3801ae220))
+* ⬆️ Storybook v9 upgrade ([#3976](https://github.com/equinor/design-system/issues/3976)) ([fe76b10](https://github.com/equinor/design-system/commit/fe76b101e344d9dc6889562bb63730768125279f))
+* ⬆️ Upgrade dependencies ([#3824](https://github.com/equinor/design-system/issues/3824)) ([3519425](https://github.com/equinor/design-system/commit/35194255d59abbc12b66d2d29bd3446792570ab8))
+* ⬆️ Upgrade dependencies ([#3858](https://github.com/equinor/design-system/issues/3858)) ([4f20d86](https://github.com/equinor/design-system/commit/4f20d861c7a2bcf2e810fdc95d3ece80b7a0bd9b))
+* ⬆️ Upgrade dependencies ([#3881](https://github.com/equinor/design-system/issues/3881)) ([23479f7](https://github.com/equinor/design-system/commit/23479f7c2eabfdc3bf12243b7904545277595431))
+* ⬆️ Upgrade dependencies in all packages ([#3933](https://github.com/equinor/design-system/issues/3933)) ([e67ed39](https://github.com/equinor/design-system/commit/e67ed398d3bc40004366eeff44dda8051691b2dd))
+* 🔖 Release eds-core-react, eds-data-grid-react, eds-lab-react, eds-tokens, eds-utils ([#3982](https://github.com/equinor/design-system/issues/3982)) ([f250771](https://github.com/equinor/design-system/commit/f2507710d68e926edf0b2a5164ce896984cb2e20))
+* 🔥 Remove individual package lockfiles ([#3930](https://github.com/equinor/design-system/issues/3930)) ([f813224](https://github.com/equinor/design-system/commit/f8132240a2c20ad54db54c2c38e53731852f8c7a))
+* **eds-core-react, eds-data-grid-react:** 🔖 Release eds-core-react@0.45.1, eds-data-grid-react@0.7.7 ([#3792](https://github.com/equinor/design-system/issues/3792)) ([fd19cd5](https://github.com/equinor/design-system/commit/fd19cd50ad6b0d8945aceda76ab566d5cd9cae4a))
+* **eds-core-react, eds-data-grid-react:** 🔖 Release eds-core-react@0.46.0 and eds-data-grid-react@0.8.0 ([#3809](https://github.com/equinor/design-system/issues/3809)) ([1843474](https://github.com/equinor/design-system/commit/18434740c918e5511487b8a25b00ea1070587d61))
+* **eds-core-react, eds-data-grid-react:** 🔖 Release eds-core-react@0.47.0 and eds-data-grid-react@0.8.1 ([f795cb3](https://github.com/equinor/design-system/commit/f795cb34c1c688fb2385a70dd7845461ec1deb53))
+* extract Resizer and TableCell components ([5f8015c](https://github.com/equinor/design-system/commit/5f8015c3817b7e9437d3436b65f37552be261da4))
+* React 19 upgrade ([#4007](https://github.com/equinor/design-system/issues/4007)) ([645e090](https://github.com/equinor/design-system/commit/645e090d66eb7c1d864c8108497d19003e0cf24e))
+* update dependencies ([#3783](https://github.com/equinor/design-system/issues/3783)) ([8fb9f2d](https://github.com/equinor/design-system/commit/8fb9f2d9f7c5ea420e67d34e981d9ed7cf694c50))
+* upgrade pnpm to v10 and node to v22 ([#3964](https://github.com/equinor/design-system/issues/3964)) ([d8b9848](https://github.com/equinor/design-system/commit/d8b98482913c76dff41f12ff4a1ee2425dcd9b6c))
+
+
+### 📦 Build System
+
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#3768](https://github.com/equinor/design-system/issues/3768)) ([61e4565](https://github.com/equinor/design-system/commit/61e4565dcf79e6ed5be9f0b0ac7d584bab61a52c))
 
 ## [0.49.0] - 2025-09-11
 
-### Added
+## Added
 
 - ✨ Always show "add new option" in Autocomplete when onAddNewOption is provided by @FredrikMWold in https://github.com/equinor/design-system/pull/3924
 
-### Fixed
+## Fixed
 
 - 🐛 Autocomplete - Don't call onOptionsChange when clicking "Add new" by @FredrikMWold in https://github.com/equinor/design-system/pull/3932
 - 🐛 Table - Fix Firefox table header wrapping issue by @pomfrida in https://github.com/equinor/design-system/pull/3957
 - 🐛 Tabs documentation type mismatch - update onChange parameter from number to number | string by @Copilot @torleifhalseth in https://github.com/equinor/design-system/pull/3972
 
-### Changed
+## Changed
 
 - 📝 Banner - clarify complex content usage patterns and improve examples by @pomfrida in https://github.com/equinor/design-system/pull/3961
 - 🔥 Remove individual package lockfiles by @pomfrida in https://github.com/equinor/design-system/pull/3930
@@ -39,20 +113,20 @@ This release marks a significant milestone: **EDS is now production-ready**. We'
 
 ## [0.48.0] - 2025-08-27
 
-### Added
+## Added
 
 - ✨ `Tabs` call onChange with provided value if present by @FredrikMWold in https://github.com/equinor/design-system/pull/3893
 - ✨ add disabled prop to `Tooltip` by @FredrikMWold in https://github.com/equinor/design-system/pull/3908
 - ✨`Autocomplete` allow option-label prop to be used without type of object by @magnh in https://github.com/equinor/design-system/pull/3915
 
-### Fixed
+## Fixed
 
 - 🐛 `DatePicker` Disable back button in year range based on year, not month by @FredrikMWold in https://github.com/equinor/design-system/pull/3853
 - 🐛 `Tabs` now allow 'null' value as child element 'Tabs.List' and 'Tabs.Panel' by @AndreasPresthammer in https://github.com/equinor/design-system/pull/3878
 - 🐛 `Autocomplete` prevent `onAddNewOption` from being called twice in Strict Mode by @FredrikMWold in https://github.com/equinor/design-system/pull/3894
 - 🐛`Table` export table row with pascal case by @magnh in https://github.com/equinor/design-system/pull/3889
 
-### Changed
+## Changed
 
 - 📝 Added security policy info (#3856) by @torleifhalseth in https://github.com/equinor/design-system/pull/3857
 - 📝 Add comprehensive guidelines for project standards and component creation by @torleifhalseth in https://github.com/equinor/design-system/pull/3845
@@ -65,18 +139,18 @@ This release marks a significant milestone: **EDS is now production-ready**. We'
 
 ## [0.47.0] - 2025-06-13
 
-### Fixed
+## Fixed
 
 - 🐛 `Autocomplete`: Improvements to placeholder text by @FredrikMWold in https://github.com/equinor/design-system/pull/3813
 - 🐛 `Menu`: Ensure onClose is called when a MenuItem without onClick is clicked by @FredrikMWold in https://github.com/equinor/design-system/pull/3828
 
-### Added
+## Added
 
 - ✨`Autocomplete`: Add support for adding new options in Autocomplete by @FredrikMWold in https://github.com/equinor/design-system/pull/3833
 - 📝 `Autocomplete`: story example with the new totalOptions prop by @pomfrida in https://github.com/equinor/design-system/pull/3817
 - 📝 ♿ ✅ `Autocomplete`: enhance Autocomplete onAddNewOption - stories, tests, and accessibility by @pomfrida in https://github.com/equinor/design-system/pull/3841
 
-### BREAKING CHANGES ⚠️
+## BREAKING CHANGES ⚠️
 
 - ⬆️ `Autocomplete`: Upgraded TanStack Virtual dependency by @pomfrida in https://github.com/equinor/design-system/pull/3824
   Virtual items may not render immediately in test environments
