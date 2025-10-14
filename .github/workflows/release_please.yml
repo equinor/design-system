@@ -16,7 +16,7 @@ name: Release Please
 on:
   push:
     branches:
-      - develop
+      - fre/release-please
 
 # Permissions required for release-please to function
 permissions:
