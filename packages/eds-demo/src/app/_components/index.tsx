@@ -52,20 +52,17 @@ export function Chip({
   className,
   children,
   icon,
-  ratio = "squished",
   ...rest
 }: {
   className?: string;
   children?: React.ReactNode;
   icon?: React.ReactNode;
-  ratio?: "squished" | "squared" | "stretched";
 }) {
   return (
     <div
-      className={`selectable rounded-full ${className}`}
+      className={`chip rounded-full ${className}`}
       data-padding-inline="sm"
       data-padding-block="xxs"
-      data-ratio={ratio}
       {...rest}
     >
       {icon && <div className="relative w-4 h-4 icon">{icon}</div>}

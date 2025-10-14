@@ -101,17 +101,17 @@
     --selectable-padding-inline: var(--space-xl);
   }
 
-  /* Ratio modifiers based on golden ratio relationships */
+  /* Ratio modifiers */
   &[data-ratio="squished"] {
-    --selectable-padding-stack: calc(var(--selectable-padding-inline) * 0.67); /* 2:3 */
+    --selectable-padding-stack: calc(var(--_padding-inline) * 0.67); /* 2:3 */
   }
 
   &[data-ratio="squared"] {
-    --selectable-padding-stack: var(--selectable-padding-inline); /* 1:1 */
+    --selectable-padding-stack: var(--_padding-inline); /* 1:1 */
   }
 
   &[data-ratio="stretched"] {
-    --selectable-padding-stack: calc(var(--selectable-padding-inline) * 1.5); /* 3:2 */
+    --selectable-padding-stack: calc(var(--_padding-inline) * 1.5); /* 3:2 */
   }
 }
 
