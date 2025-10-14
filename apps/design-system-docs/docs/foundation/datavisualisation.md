@@ -4,7 +4,7 @@ A graphical presentation of information in a way that makes it easier to underst
 
 ## Infographics
 
-An infographic is very similar to a data visualisation since it too is a graphical presentation of information that is presented in a way that is easy to digest and understand. Infographics are more subjective though by telling a complete and premeditated story which guides the user to a particular conclusion. Refer to the Equinor  for guidelines on creating infographics.
+An infographic is very similar to a data visualisation since it too is a graphical presentation of information that is presented in a way that is easy to digest and understand. Infographics are more subjective though by telling a complete and premeditated story which guides the user to a particular conclusion. Refer to the [Equinor Brand Center](../resources/resources.md#resources for guidelines on creating infographics.
 
 ## Dashboards
 
@@ -52,9 +52,10 @@ Put thought into how the information is grouped on the dashboard based on the re
 -   Tabs can be used to guide the user to relevant views or pages. These should placed at the top, and no more than six should be used.
     
 -   Use whitespace to help group information and to declutter the page.
-    
-    -   For example, add 16px margin around the entire dashboard, 16px padding around content in a visual and 12-16px between visualisations.
-        
+
+:::tip For example
+Add 16px margin around the entire dashboard, 16px padding around content in a visual and 12-16px between visualisations.
+:::        
 -   Global filters should be grouped and placed together either on the top, left or right side of the dashboard. Filters applying to single visualisations should be placed close to the visualisation in which they apply to. Keep all filters and navigation in the same location throughout the dashboard.
     
 
@@ -64,7 +65,7 @@ When colour is used appropriately, it can draw the user’s attention to somethi
 
 It is not recommended to rely on colour alone, since some users can have trouble distinguishing certain colours (colour blindness).
 
--   Follow the  given by the EDS.
+-   Follow the [Colour guidelines](../foundation/accessibility.md#colour) given by the EDS.
     
 -   Keep bright and saturated colours to a minimum, only using them to highlight data requiring attention.
     
@@ -100,6 +101,8 @@ Visualisations should include the data and context necessary to communicate the 
 -   Avoid pie and donut charts as they can be misleading and difficult to interpret.
     
 
-## Recommended further reading
+:::info Recommended further reading
 
-Explore the books, blogs and articles written by data visualisation experts: Edward R. Tufte, Colin Ware, Wayne W. Eckerson, Stephen Few and Albert Cairo.
+Explore the books, blogs and articles written by data visualisation experts:  
+Edward R. Tufte, Colin Ware, Wayne W. Eckerson, Stephen Few and Albert Cairo.
+:::
