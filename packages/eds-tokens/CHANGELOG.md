@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/equinor/design-system/compare/eds-tokens@1.0.0...eds-tokens@v1.1.0) (2025-10-14)
+
+
+### ✨ Added
+
+* Adjust tokens and variables ([#3887](https://github.com/equinor/design-system/issues/3887)) ([9271064](https://github.com/equinor/design-system/commit/92710641e53fe094935dab991d83bf04d087a660))
+* **eds-color-palette-generator:** add CLI tool to generate color palettes ([#4033](https://github.com/equinor/design-system/issues/4033)) ([07ec1de](https://github.com/equinor/design-system/commit/07ec1de914c57820a04dfcf74da8b9ba324fdc7a))
+* **eds-tokens:** :sparkles: remove theme segment from the token and variable name ([#3834](https://github.com/equinor/design-system/issues/3834)) ([0eea345](https://github.com/equinor/design-system/commit/0eea345ccdb2493dce8fabdeaae63e5f9866a1b1))
+* **eds-tokens:** create and implement new build scripts ([#4004](https://github.com/equinor/design-system/issues/4004)) ([522baa3](https://github.com/equinor/design-system/commit/522baa375b0ca3f8343f2f441aa24ce9cd2efa58))
+* **eds-tokens:** update-tokens ([#4010](https://github.com/equinor/design-system/issues/4010)) ([8c1df55](https://github.com/equinor/design-system/commit/8c1df552fd33a8e5f209b13a72367a6f2b503d35))
+* new color tokens and variables in code ([#3733](https://github.com/equinor/design-system/issues/3733)) ([282330b](https://github.com/equinor/design-system/commit/282330b754c562ea79f0beac8beb7033679b208a))
+
+
+### 📝 Changed
+
+* **eds-demo:** initial tutorial ([#4031](https://github.com/equinor/design-system/issues/4031)) ([af0f71d](https://github.com/equinor/design-system/commit/af0f71db49e2248cfa24d9535c945cf4840e7807))
+
+
+### ♻️ Refactoring
+
+* **eds-tokens:** tokens build sync setup ([#3993](https://github.com/equinor/design-system/issues/3993)) ([df07db9](https://github.com/equinor/design-system/commit/df07db924e2680f6edf828229b101bb38166be06))
+
+
+### 🔧 Chores
+
+* ⬆️ Upgrade dependencies ([#3824](https://github.com/equinor/design-system/issues/3824)) ([3519425](https://github.com/equinor/design-system/commit/35194255d59abbc12b66d2d29bd3446792570ab8))
+* ⬆️ Upgrade dependencies ([#3881](https://github.com/equinor/design-system/issues/3881)) ([23479f7](https://github.com/equinor/design-system/commit/23479f7c2eabfdc3bf12243b7904545277595431))
+* ⬆️ Upgrade dependencies in all packages ([#3933](https://github.com/equinor/design-system/issues/3933)) ([e67ed39](https://github.com/equinor/design-system/commit/e67ed398d3bc40004366eeff44dda8051691b2dd))
+* 🔖 Release eds-core-react, eds-data-grid-react, eds-lab-react, eds-tokens, eds-utils ([#3982](https://github.com/equinor/design-system/issues/3982)) ([f250771](https://github.com/equinor/design-system/commit/f2507710d68e926edf0b2a5164ce896984cb2e20))
+* 🔥 Remove individual package lockfiles ([#3930](https://github.com/equinor/design-system/issues/3930)) ([f813224](https://github.com/equinor/design-system/commit/f8132240a2c20ad54db54c2c38e53731852f8c7a))
+* **eds-tokens:** update variables ([#4013](https://github.com/equinor/design-system/issues/4013)) ([c69429e](https://github.com/equinor/design-system/commit/c69429e888b05b3491135dc9aa29883220e9d7c0))
+* update dependencies ([#3783](https://github.com/equinor/design-system/issues/3783)) ([8fb9f2d](https://github.com/equinor/design-system/commit/8fb9f2d9f7c5ea420e67d34e981d9ed7cf694c50))
+* upgrade pnpm to v10 and node to v22 ([#3964](https://github.com/equinor/design-system/issues/3964)) ([d8b9848](https://github.com/equinor/design-system/commit/d8b98482913c76dff41f12ff4a1ee2425dcd9b6c))
+
 ## [0.10.0] - 2025-09-11
 
 ### Added
