@@ -15,7 +15,7 @@ Enables IDE autocomplete, validation, and inline documentation for the configura
 ### Bootstrap SHA
 
 ```json
-"bootstrap-sha": "f250771"
+"bootstrap-sha": "34443e16"
 ```
 
 One-time configuration pointing to the commit where v1.0.0 was manually released (all packages except eds-lab-react@0.8.0). After the first release-please PR is merged, this value is no longer used—release-please will automatically track releases via git tags. This prevents re-releasing already published versions from before release-please was set up.
