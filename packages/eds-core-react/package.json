@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": [
     "**/*.css"
