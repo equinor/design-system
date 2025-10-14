@@ -170,9 +170,14 @@ nav.menu li a {
   color: var(--ifm-color-primary) !important;
 }
 
-/* Base caret (closed state) — only the chevron pseudo-element */
+/* Make sidebar chevrons smaller and lighter */
 .menu__caret {
-  display: none !important;
+  transform: scale(0.7); /* 🔹 smaller chevron — adjust 0.6–0.8 to taste */
+  opacity: 0.6; /* 🔹 makes it lighter overall */
+  color: var(--ifm-color-emphasis-600); /* 🔹 or pick any token or hex */
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 /* ======================================

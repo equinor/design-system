@@ -20,7 +20,7 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 
 ## Tutorials & How-To Guides
 
-- [Getting Started](../about/getting-started/getting_started.md) – Begin using the design system in your projects.
+- [Getting Started](../about/getting-started/intro.md) – Begin using the design system in your projects.
 - [Patterns](../foundation/patterns.md) – Review best practices and reusable patterns.
 
 ## Community & Support
