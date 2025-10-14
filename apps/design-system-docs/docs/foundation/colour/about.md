@@ -1,17 +1,28 @@
 # About
 
-The EDS colour system enables designers to create clear, consistent, and accessible interfaces. Colours are named and organized for their role or purpose in the interface, following a **semantic** naming convention.
+The EDS colour foundation provides a clear, consistent, and accessible way to use colour across Equinor’s digital products.  
+It is built on **semantic colours**, named and organised by their *role and purpose* in the interface rather than by how they look.
 
-This approach means you choose a colour based on its function, not just how it looks. This makes it easier to use colours consistently across your work. It also helps designers and developers speak the same language. Every colour has a specific role, so you know exactly when to use it.
+This means you choose colours based on *function*, not *shade*.  
+It helps designers and developers speak the same language, keeps interfaces consistent, and makes it clear when and where to use each colour.
 
-We take an accessibility-first approach by using the APCA contrast algorithm to evaluate all colour combinations. APCA models human visual perception more accurately than traditional methods, helping us ensure that text and interface elements remain readable and accessible in both light and dark colour schemes.
+Accessibility is a core principle of the system, ensuring readable and inclusive colour combinations across both light and dark modes.
+
+
 
 ## Colour scheme
 
+ 
+The colour foundation supports both **light** and **dark** schemes, helping you create clear hierarchy and accessible interfaces in any mode.
 
-The colour system supports both light and dark colour schemes, helping you create clear hierarchy and accessible interfaces in any mode. Instead of a traditional linear scale, each colour step in EDS is chosen for a specific purpose such as backgounds, hover states, borders or text. Transitions between colours are intentional, offering clear separation and strong contrast rather than a smooth gradient.
+Instead of a traditional linear scale from light to dark, each EDS colour scale is built with **intentional steps in lightness** where each colour step is chosen for a specific purpose.  
+The steps jump rather than blend, creating clear contrast between key pairings such as text and background.  
+This step-based approach ensures that every combination has the right visual separation and contrast built in.
 
-Each colour in the scale is designed to keep a consistent lightness, so different colours can be paired for elements like backgrounds, borders and text. This approach ensures you always get the right contrast and harmony, no matter which colour category you are working with (accent, info, warning ...).
+Each step also keeps the same lightness level across all colour categories.  
+This means the relationship between colours stay consistent even when the hue changes.
+
+
 
 | Light                                         | Dark                                        |
 | --------------------------------------------- | ------------------------------------------- |
@@ -19,9 +30,11 @@ Each colour in the scale is designed to keep a consistent lightness, so differen
 
 **Note:** We generate all colours using our [colour palette generator](https://color-palette-generator-eds-prod.radix.equinor.com/). This tool ensures consistency and helps maintain accessibility standards.
 
-## Semantic Categories
 
-Each colour belongs to a category that reflects its purpose in the interface.
+## How it’s structured
+
+Each colour belongs to a **semantic category** that reflects its purpose in the interface.  
+The system includes six main categories:
 
 - **Accent** – brand and highlight colours
 - **Neutral** – base and supporting colours
@@ -36,12 +49,13 @@ Each category includes colours for:
 - **Border**
 - **Text**
 
+These groups define the **usage areas** of the colours. For example, colours in the *Text* group are designed specifically for text and icons, ensuring the right contrast and readability.
+
 ## Background
 
 Background colours create the foundation of your interface. They define layers and ensure text remains readable.
 
 **Roles:**
-
 - **Canvas** – main application background
 - **Surface** – placed on canvas to create depth in layouts
 
@@ -75,15 +89,34 @@ Text colours ensure content is readable and create clear hierarchy.
 - **Strong-on-emphasis** – text on emphasis backgrounds
 - **Subtle-on-emphasis** – secondary text on emphasis backgrounds
 
-## Concepts
+- **Background:** base layers and surfaces  
+- **Background Fill (Muted / Emphasis):** used for interactive elements such as buttons and selected states  
+- **Border:** outlines and separators  
+- **Text:** text and icons
 
-In addition to the semantic categories, EDS includes a few **design decisions** used across components and patterns.
+
+## Concepts (global roles)
+
+In addition to the semantic categories, EDS includes a **Concept** collection for global colours that sit outside the scales.
+The Concept collection covers cases where it does not make sense to have one colour per scale. 
+
+**Concept colours include:**
+
 
 - **bg-floating** – floating elements like tooltips and menus
 - **bg-backdrop** – overlay layer behind modals
 - **bg-input** – input fields and forms
 - **border-focus** – focus rings for accessibility
 - **text-link** – default link colour
+
+These concept colours complement the semantic system and ensure consistent handling of global interface elements.
+
+## Accessibility built in
+
+Accessibility is not an afterthought; it is at the core of the EDS colour foundation.  
+Each colour combination has been evaluated using the **APCA contrast algorithm** to ensure readability and harmony across all modes.  
+APCA models how the human eye perceives contrast and brightness more accurately than older contrast formulas, giving a truer picture of real-world legibility.
+
 
 ## Features
 
