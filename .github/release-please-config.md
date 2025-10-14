@@ -15,10 +15,12 @@ Enables IDE autocomplete, validation, and inline documentation for the configura
 ### Bootstrap SHA
 
 ```json
-"bootstrap-sha": "HEAD"
+"bootstrap-sha": "f250771"
 ```
 
-Tells release-please to start tracking releases from the current HEAD commit. This is used when setting up release-please for the first time in an existing repository with release history. I just remo
+One-time configuration pointing to the commit where v1.0.0 was manually released (all packages except eds-lab-react@0.8.0).
+After the first release-please PR is merged, this value is no longer used—release-please will automatically track releases via git tags.
+This prevents re-releasing already published versions from before release-please was set up.
 
 ### Tag Separator
 
