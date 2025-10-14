@@ -4,7 +4,7 @@ A graphical presentation of information in a way that makes it easier to underst
 
 ## Infographics
 
-An infographic is very similar to a data visualisation since it too is a graphical presentation of information that is presented in a way that is easy to digest and understand. Infographics are more subjective though by telling a complete and premeditated story which guides the user to a particular conclusion. Refer to the [Equinor Brand Center](../resources/resources.md#resources for guidelines on creating infographics.
+An infographic is very similar to a data visualisation since it too is a graphical presentation of information that is presented in a way that is easy to digest and understand. Infographics are more subjective though by telling a complete and premeditated story which guides the user to a particular conclusion. Refer to the [Equinor Brand Center](../resources/resources.md#resources) for guidelines on creating infographics.
 
 ## Dashboards
 
