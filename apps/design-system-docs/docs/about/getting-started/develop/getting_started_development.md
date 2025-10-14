@@ -1,9 +1,8 @@
 ---
-title: Develop
+title: Getting started with development
 ---
 
 import Prerequisites from '@site/src/components/Prerequisites';
-
 
 Welcome to building with EDS! Get production-ready React components, full TypeScript support, and everything you need to create consistent, accessible applications.
 

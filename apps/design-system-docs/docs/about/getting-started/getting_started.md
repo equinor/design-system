@@ -1,4 +1,4 @@
-# Introduction
+# Getting started
 
 Ready to start building with EDS?<br /><br />
 Whether you're designing in Figma, developing with React, or building solutions with low-code tools, we've created tailored guidance to help you succeed.
