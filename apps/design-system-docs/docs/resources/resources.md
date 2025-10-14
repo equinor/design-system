@@ -6,7 +6,7 @@ Welcome to the resources hub for the Equinor Design System. Here, you will find 
 
 - [Figma Library](https://www.figma.com/) – Access our official design components and templates.
 - [Brand Guidelines](https://communicationtoolbox.equinor.com/point/en/equinor/) – Learn about our brand colours, logos, and visual identity.
-- [Icon Library](../foundation/assets/) – Download and use our system icons.
+- [Icon Library](../foundation/assets/Product_icons.md) – Download and use our system icons.
 
 ## Component Documentation
 
