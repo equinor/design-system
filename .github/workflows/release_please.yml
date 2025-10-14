@@ -16,8 +16,7 @@ name: Release Please
 on:
   push:
     branches:
-      # - develop  # TODO: enable after testing
-      - fre/release-please # Test branch
+      - develop
 
 # Permissions required for release-please to function
 permissions:
@@ -55,10 +54,6 @@ jobs:
       - uses: googleapis/release-please-action@v4
         id: release # ID used to reference outputs in later steps
         with:
-          # TODO: remove after testing - specifies which branch to create PRs against
-          # Normally this would be inferred from the branch that triggered the workflow
-          target-branch: fre/release-please
-
           # Configuration files that define release behavior
           config-file: .github/release-please-config.json # How to handle releases (version bumping, changelog format, etc.)
           manifest-file: .github/release-please-manifest.json # Tracks current version of each package. This is updated automatically by release-please.
