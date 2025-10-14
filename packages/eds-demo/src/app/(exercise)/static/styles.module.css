@@ -129,6 +129,11 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .tab--current {
   border-bottom: 2px solid var(--eds-color-border-accent-strong);
   color: var(--eds-color-text-accent-subtle);
+
+  &:hover {
+    color: var(--eds-color-text-accent-subtle);
+    background-color: unset;
+  }
 }
 
 /* Button */
