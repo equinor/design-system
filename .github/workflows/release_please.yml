@@ -72,5 +72,6 @@ jobs:
       - name: Print release outputs for debugging
         if: ${{ steps.release.outputs.releases_created }}
         run: |
-          echo "Releases created!"
-          echo '${{ toJson(steps.release.outputs) }}'
+          echo "$RELEASE_OUTPUTS"
+        env:
+          RELEASE_OUTPUTS: ${{ toJson(steps.release.outputs) }}
