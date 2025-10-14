@@ -11,12 +11,15 @@
 
 name: Trigger Package Publishing
 
-# Trigger: Runs when a PR is closed (and merged) to the specified branch
+# Trigger: Runs when a PR is closed to develop, and includes changes in .release-please-manifest.json
+# Release Please updates this file on every version bump, so we use it to detect release PR merges
 on:
   pull_request:
-    types: [closed] # Only runs when PR is closed (includes both merged and manually closed)
+    types: [closed]
     branches:
       - develop
+    paths:
+      - '.release-please-manifest.json'
 
 # Required permissions
 permissions:
