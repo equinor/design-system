@@ -12,6 +12,14 @@ If you have a question or need guidance, please reach out to the EDS core team:
 
 We aim to respond promptly and ensure you have the support you need.
 
+## Community Support
+
+We provide multiple ways for you to connect with other EDS users and our team:
+
+- **Internal Channels** — Connect with other EDS users and our dedicated core team who are eager to help
+- **Office Hours** — Regular, friendly sessions where you can ask questions and share feedback in a supportive environment
+- **Documentation** — Comprehensive guides for all components and patterns, written with clarity and practical examples
+
 ## Reporting Bugs
 
 If you find a bug, please let us know so we can address it quickly:
@@ -26,9 +34,15 @@ If you have an idea for a new feature or improvement:
 - GitHub users: [Create a feature request](https://github.com/equinor/design-system/issues) and fill out the template.
 - Non-GitHub users: Share your ideas with us through email, Teams, or Slack. You can also add examples to the EDS Figma file.
 
-## Frequently Asked Questions
+## Common Questions
 
-Visit our FAQ section for answers to common questions and troubleshooting tips. If you cannot find what you need, please contact us directly.
+We understand that getting started with any new system can raise questions. Here are some common areas where we're ready to help:
+
+- **Installation Issues** — Our troubleshooting guides address the most frequent setup challenges
+- **Component Usage** — Explore our Storybook examples and detailed documentation to see components in action
+- **Best Practices** — Learn established patterns and proven approaches before building custom solutions
+
+If you cannot find what you need here, please contact us directly using the channels above.
 
 ## Contributing and Feedback
 
