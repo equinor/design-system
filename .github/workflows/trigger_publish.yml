@@ -35,38 +35,19 @@ jobs:
       - name: Validate PR status
         id: validate
         run: |
-          echo "## 🔍 Validation Check" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**PR Title:** \`${{ github.event.pull_request.title }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "**PR Merged:** ${{ github.event.pull_request.merged }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          # Check if PR was merged
+          # Check if PR was merged (not just closed)
           if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
-            echo "## ⏭️ Workflow Skipped: PR Not Merged" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "This PR was closed without merging. No packages will be published." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "💡 **If this was a mistake:** Re-open the PR and merge it to trigger publishing." >> $GITHUB_STEP_SUMMARY
             echo "should-publish=false" >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          # Check if this is a release PR
+          # Check if this is a release PR (title contains "chore: release")
           if [[ "${{ github.event.pull_request.title }}" != *"chore: release"* ]]; then
-            echo "## ℹ️ Workflow Skipped: Not a Release PR" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "This workflow only runs for release-please PRs (title must contain 'chore: release')." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "**Actual title:** \`${{ github.event.pull_request.title }}\`" >> $GITHUB_STEP_SUMMARY
             echo "should-publish=false" >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          # All checks passed
-          echo "## ✅ Validation Passed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "This is a merged release PR. Proceeding with package detection..." >> $GITHUB_STEP_SUMMARY
+          # All validation checks passed
           echo "should-publish=true" >> $GITHUB_OUTPUT
 
   # Job 1: Determine which packages need to be published
