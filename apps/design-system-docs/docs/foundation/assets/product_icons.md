@@ -24,19 +24,20 @@ Use product icons in app launchers, splash screens, and product identification c
 - Maintain the 48px minimum size for clarity
 - Follow the established grid system for consistency
 - Keep designs minimal, geometric, and symmetrical
-:::
-:::danger **Don't**
+  :::
+  :::danger **Don't**
 
 - Use product icons as system icons or for decoration
 - Scale product icons below their base grid size
 - Use product icons for marketing purposes
 - Create filled versions (always use outlines)
-:::
+  :::
 
 :::warning Exceptions
 
 Optical corrections are not allowed in product icons.
 :::
+
 ## Using Product Icons in Figma
 
 1. Open the **Assets** tab in the Layers Panel

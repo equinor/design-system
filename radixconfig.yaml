@@ -20,11 +20,11 @@ spec:
     - alias: eds
       environment: prod
       component: docs
-  # dnsExternalAlias:
-  #   - alias: eds.equinor.com
-  #     environment: prod
-  #     component: docs
-  #     useCertificateAutomation: true
+  dnsExternalAlias:
+    - alias: eds.equinor.com
+      environment: prod
+      component: docs
+      useCertificateAutomation: true
   components:
     - name: color-palette-generator
       dockerfileName: DockerfileColorPaletteGenerator

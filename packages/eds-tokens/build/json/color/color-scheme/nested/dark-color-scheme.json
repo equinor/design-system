@@ -3,7 +3,7 @@
   "bg-backdrop": "#738696",
   "bg-input": "#0b0b0b",
   "border-focus": "#2d8bc5",
-  "text-link": "#ecffff",
+  "text-link": "#5abbfb",
   "Accent": {
     "1": "#0a0b0b",
     "2": "#1e2323",
@@ -62,7 +62,7 @@
     "4": "#3e793c",
     "5": "#418e3e",
     "6": "#3c673a",
-    "7": "#439941",
+    "7": "#449941",
     "8": "#6eca6a",
     "9": "#8cdb87",
     "10": "#aceba8",

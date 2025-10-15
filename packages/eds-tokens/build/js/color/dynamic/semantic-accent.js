@@ -2,9 +2,9 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const BG_FILL_MUTED_DEFAULT = "#c5e1e4";
-export const BG_FILL_MUTED_HOVER = "#b1d6da";
-export const BG_FILL_MUTED_ACTIVE = "#97c8cd";
+export const BG_FILL_MUTED_DEFAULT = "#cfe7e9";
+export const BG_FILL_MUTED_HOVER = "#bbdbdf";
+export const BG_FILL_MUTED_ACTIVE = "#a2cdd2";
 export const BG_FILL_EMPHASIS_DEFAULT = "#206f77";
 export const BG_FILL_EMPHASIS_HOVER = "#205c62";
 export const BG_FILL_EMPHASIS_ACTIVE = "#20565c";

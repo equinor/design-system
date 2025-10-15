@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { resolve, join } from 'node:path'
-import { execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 
 describe('generate-colors CLI', () => {
   const testDir = resolve(__dirname, '__test-output__')
@@ -30,8 +30,7 @@ describe('generate-colors CLI', () => {
 
   it('should generate light and dark color tokens with default HEX format', () => {
     // Run the CLI
-    const cmd = `node ${cliPath} ${configPath} ${testDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, configPath, testDir])
 
     // Check that files were created with new default names
     const lightTokensPath = join(testDir, 'Color Light.Mode 1.json')
@@ -82,8 +81,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(oklchTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${oklchConfigPath} ${oklchTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, oklchConfigPath, oklchTestDir])
 
     const lightTokensPath = join(oklchTestDir, 'Color Light.Mode 1.json')
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
@@ -123,8 +121,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(customTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${customConfigPath} ${customTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, customConfigPath, customTestDir])
 
     const lightTokensPath = join(customTestDir, 'Color Light.Mode 1.json')
     const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
@@ -161,8 +158,7 @@ describe('generate-colors CLI', () => {
     mkdirSync(customFileTestDir, { recursive: true })
 
     // Run the CLI
-    const cmd = `node ${cliPath} ${customFileConfigPath} ${customFileTestDir}`
-    execSync(cmd)
+    execFileSync('node', [cliPath, customFileConfigPath, customFileTestDir])
 
     // Check that custom file names were used
     const lightTokensPath = join(customFileTestDir, 'custom-light.json')
@@ -198,5 +194,61 @@ describe('generate-colors CLI', () => {
 
     // Check HEX format (default)
     expect(token.$value).toMatch(/^#[0-9a-f]{6}$/i)
+  })
+
+  it('should convert OKLCH input colors to HEX format when colorFormat is HEX', () => {
+    const oklchInputConfig = {
+      colors: [
+        { name: 'Moss Green', value: 'oklch(0.4973 0.084851 204.553)' },
+        { name: 'Gray', value: 'oklch(0.4091 0 0)' },
+        { name: 'Blue', value: 'oklch(0.5857 0.135751 240.6802)' },
+      ],
+      colorFormat: 'HEX',
+    }
+
+    const oklchInputConfigPath = resolve(
+      __dirname,
+      '__test-oklch-input-config.json',
+    )
+    writeFileSync(
+      oklchInputConfigPath,
+      JSON.stringify(oklchInputConfig, null, 2),
+      'utf-8',
+    )
+
+    const oklchInputTestDir = resolve(__dirname, '__test-oklch-input-output__')
+    mkdirSync(oklchInputTestDir, { recursive: true })
+
+    // Run the CLI
+    execFileSync('node', [cliPath, oklchInputConfigPath, oklchInputTestDir])
+
+    const lightTokensPath = join(oklchInputTestDir, 'Color Light.Mode 1.json')
+    const darkTokensPath = join(oklchInputTestDir, 'Color Dark.Mode 1.json')
+
+    const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
+    const darkTokens = JSON.parse(readFileSync(darkTokensPath, 'utf-8'))
+
+    // Check that all colors are in HEX format
+    Object.keys(lightTokens.Light).forEach((colorName) => {
+      Object.keys(lightTokens.Light[colorName]).forEach((stepId) => {
+        const token = lightTokens.Light[colorName][stepId]
+        expect(token.$value).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    Object.keys(darkTokens.Dark).forEach((colorName) => {
+      Object.keys(darkTokens.Dark[colorName]).forEach((stepId) => {
+        const token = darkTokens.Dark[colorName][stepId]
+        expect(token.$value).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    // Snapshot test for OKLCH input with HEX output
+    expect(lightTokens).toMatchSnapshot('oklch-input-hex-output-light')
+    expect(darkTokens).toMatchSnapshot('oklch-input-hex-output-dark')
+
+    // Clean up
+    rmSync(oklchInputTestDir, { recursive: true, force: true })
+    rmSync(oklchInputConfigPath, { force: true })
   })
 })

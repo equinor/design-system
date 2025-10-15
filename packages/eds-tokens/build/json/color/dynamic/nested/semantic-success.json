@@ -2,9 +2,9 @@
   "Bg": {
     "Fill": {
       "Muted": {
-        "Default": "#c5e5c2",
-        "Hover": "#b1dbae",
-        "Active": "#97cf93"
+        "Default": "#cfeacc",
+        "Hover": "#bbe0b8",
+        "Active": "#a2d49e"
       },
       "Emphasis": {
         "Default": "#207720",
