@@ -1,9 +1,4 @@
----
-title: Citizen Developers
-hide_title: true
----
-
-## Citizen Developers
+# Citizen Developers
 
 You can create professional, brand-aligned solutions using low-code tools whilst maintaining the consistency and quality that EDS provides. Our Power Platform integration works seamlessly with the Microsoft 365 tools you already use daily.
 

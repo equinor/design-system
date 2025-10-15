@@ -20,7 +20,7 @@ const sidebars: SidebarsConfig = {
           label: 'Design',
           link: {
             type: 'doc',
-            id: 'about/getting-started/design/getting_started_design'
+            id: 'about/getting-started/design/getting_started_design',
           },
           items: [
             'about/getting-started/design/getting_started_design',
@@ -32,12 +32,11 @@ const sidebars: SidebarsConfig = {
           label: 'Develop',
           link: {
             type: 'doc',
-            id: 'about/getting-started/develop/getting_started_development'
+            id: 'about/getting-started/develop/getting_started_development',
           },
           items: [
             'about/getting-started/develop/getting_started_development',
             'about/getting-started/develop/citizen_developers',
-
           ],
         },
 
@@ -85,6 +84,7 @@ const sidebars: SidebarsConfig = {
         'foundation/assets/illustration',
         'foundation/assets/product_icons',
         'foundation/assets/system_icons',
+        'foundation/assets/photography',
       ],
     },
   ],
