@@ -29,9 +29,9 @@ function HomepageInfo() {
       <div className="container">
         <p>
           The Equinor Design System (EDS) helps you build consistent, accessible
-          digital products faster. Whether you're a developer, designer, or part
-          of any team, EDS provides the tools you need to create quality user
-          experiences.
+          digital products faster. Whether you&rsquo;re a developer, designer,
+          or part of any team, EDS provides the tools you need to create quality
+          user experiences.
         </p>
         <br />
         <Heading as="h2">What You Get</Heading>
@@ -56,7 +56,7 @@ function HomepageInfo() {
         <Heading as="h2">Need Help?</Heading>
         <p>
           Explore our documentation, browse Storybook examples, or reach out
-          through our support channels. We're here to help you succeed.
+          through our support channels. We&rsquo;re here to help you succeed.
         </p>
       </div>
     </header>

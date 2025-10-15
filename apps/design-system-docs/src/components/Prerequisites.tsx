@@ -1,5 +1,4 @@
 import React from 'react'
-// @ts-ignore
 import prerequisites from '../../prerequisites.json'
 
 interface PrerequisitesProps {
