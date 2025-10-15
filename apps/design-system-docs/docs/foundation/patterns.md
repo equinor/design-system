@@ -1,90 +1,48 @@
-# Grid alignment
+---
+title: Patterns
+---
 
-The organisation of space is key to every great design. By aligning your component to a grid, you will provide visual structure throughout your product.
+Effective design patterns help you create consistent, user-friendly interfaces by providing proven solutions to common design challenges. These patterns ensure your components work harmoniously together whilst maintaining visual structure throughout your product.
 
-     
+## Grid System and Spacing
 
-Embed links from these tools and more
+The organisation of space is fundamental to great design. By aligning your components to a grid system, you provide clear visual structure that helps users navigate and understand your interface more easily.
 
-## Guidelines
+EDS is built on an 8px ratio system, which means you should maintain a minimum of 8px spacing between objects and elements. This consistent spacing creates visual rhythm and helps establish clear relationships between interface elements.
 
-Using a grid as a starting point for your component implementation will help you arrange your content into structured proportions. You also have to keep in mind that EDS is based on an 8px ratio. This means that you always have to keep a minimum of 8px between objects and elements. Please read the  page for general guidelines.
+For comprehensive guidelines on implementing our grid system, please refer to the [grid documentation](./design-tokens/grid.md).
 
-## Best practices
+### Best Practices
 
-### Don’t
+:::info **Do**
 
--   Do not use less than 8px between each components.
-    
--   If some of your objects are aligned to the grid do not set other objects off-grid.
-    
+- Use the 8px minimum spacing between all components
+- Align objects within grid columns for consistency
+- Apply appropriate grid sizes based on your component dimensions
+  :::
+  :::danger **Don't**
 
-### Align object within a frame
+- Use spacing less than 8px between components
+- Mix on-grid and off-grid object placement without purpose
+- Ignore the grid system when positioning elements
+  :::
 
-As you have applied the grid size to your frame, you can use the columns to place your objects. It is recommended that you keep all your objects within the columns. In some cases you might need to be off-grid. You should then keep in mind the 8px ratio between elements.
+## Reading Patterns and Layout
 
-Grids can also be used inside components. Make sure you use the correct grid according to the size of your component. Those components can be imported in your frame where another grid size has been applied.
+Understanding how users scan and read content helps you place elements effectively. Two primary reading patterns guide interface design: F-pattern and Z-pattern scanning.
 
+The **F-shaped scanning pattern** occurs when users concentrate their attention at the top and left side of the page. Users typically read horizontally across the upper content area, then move down slightly and read across again in a shorter horizontal movement. This pattern works well for content-heavy interfaces and suggests placing primary actions and important information along the left side of your layout.
 
+The **Z-shaped pattern** traces how users scan pages from left to right, top to bottom. Users read horizontally across the top, then move diagonally down and left, followed by another horizontal movement across to the right. This pattern suits marketing pages and simple layouts, with primary actions positioned strategically along the Z-path.
 
-# Inputs
+For dialogue windows and modal interfaces, place primary buttons in the bottom right corner for easy access. Position supplemental actions on the opposite side of the dialogue from the main button group to create clear visual hierarchy and prevent accidental clicks.
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
+## Input Patterns
 
-PATTERNS
+Input fields and selection menus allow users to provide information and make choices within your interface. Consistent input patterns reduce cognitive load and improve usability across your application.
 
-# Inputs
+**Menus** (also known as dropdowns) display choice lists on temporary surfaces, allowing single or multiple selections. Create effective menus using the menu container and menu items components, triggered by user interaction with icons, buttons, or other controls. Ensure your menus are easily scannable, simple to interact with, and suited to your users' specific needs.
 
-Inputs are fields or menus that allow the user to write custom input or make a selection out of predefined choices.
+For **multiselect dropdown menus**, clearly indicate selected items using checkboxes or chips. Display selections within the field, inside the menu, or below the field based on your interface requirements and available space.
 
-## Menu
-
-A menu (also known as a dropdown) displays a list of choices on temporary surfaces allowing the user to make one or multiple selections. The elements needed to create a menu in Figma are the `menu container` and `menu items`. An interaction with an icon, button or other control is needed for the menu to appear. Menus should be easily scannable, easy to interact with and suited to the user's needs.
-
-## Multiselect dropdown menu
-
-Watch the short video below to learn how to make a multiselect dropdown menu. All the other dropdown menus in the example image above follow the same convention, and can easily be made by adding some extra components. The selected items could be shown with checkboxes or chips inside the field, inside the menu or below the field.
-
-## Contextual menu
-
-Contextual menus appear next to where a user right clicks. The menu displays a set of actions related to the object that has been selected, based on the application's current state.
-
-
-
-# Placement and order
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-PATTERNS
-
-# Placement and order
-
-In oder to place your objects and components correctly, you must always keep in mind the reading pattern of your user. Two types of patterns can be encountered: F and Z.
-
-  
-
-     
-
-Embed links from these tools and more
-
-## Reading patterns
-
-### The F reading pattern
-
-The F-shaped scanning pattern is characterised by many fixations concentrated at the top and the left side of the page.
-
-Users first read in a horizontal movement, usually across the upper part of the content area. They will then move down the page a bit and then read across in a second horizontal movement that typically covers a shorter area than the previous movement. This additional element forms the F’s lower bar.
-
-The main interaction should then be aligned on the left.
-
-### The Z reading pattern
-
-The Z-shaped scanning traces the route the human eye travels when they scan the page — left to right, top to bottom.
-
-Users first read in a horizontal movement, usually across the upper part of the content area. They will then move down and to the left side of the page creating a diagonal line, and then move back across to the right again forming a second horizontal line.
-
-The main interaction should then be aligned on the left.
-
-### Placement of buttons
-
-Buttons in dialog windows should in most cases be placed in the bottom right corner and supplemental actions should be placed on the opposite side of the dialog than the main button group.
+**Contextual menus** appear when users right-click, displaying actions related to the selected object based on your application's current state. Keep these menus focused and relevant to avoid overwhelming users with unnecessary options.
