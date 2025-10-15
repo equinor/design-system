@@ -4,17 +4,28 @@ Tailwind CSS theme for Equinor Design System (EDS).
 
 This package exposes the EDS theme tokens and Tailwind `@theme` declarations as plain CSS. Import it from your app-level stylesheet so Tailwind v4 can process the directives.
 
+## Installation
+
+```sh
+pnpm add @equinor/eds-tailwind @equinor/eds-tokens
+```
+
 ## Usage
 
 1. Ensure Tailwind v4 is configured in your app and that `@import "tailwindcss";` exists in your global stylesheet.
-2. Import the theme after Tailwind (order does not strictly matter, but keeping them together is convenient):
+2. Import the EDS tokens CSS variables **before** the EDS Tailwind theme:
 
 ```css
 @import 'tailwindcss';
+@import '@equinor/eds-tokens/css/variables';
 @import '@equinor/eds-tailwind';
 ```
 
-The package also imports `@equinor/eds-tokens/css/variables-static.css` to make the CSS variables available.
+:::note
+
+The `@equinor/eds-tokens/css/variables` import is required as it provides the CSS custom properties that the theme references. Importing it separately gives you control over where tokens are loaded and prevents duplicate imports if you're already using EDS tokens elsewhere in your application.
+
+:::
 
 ## Demo
 
