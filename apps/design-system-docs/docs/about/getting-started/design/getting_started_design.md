@@ -15,7 +15,7 @@ You'll need Figma access to work with EDS design components and libraries:
 
 **Join your design team** — Contact your team admin to join an existing team, or search for your team in Figma and request access.
 
-For detailed setup instructions, permissions guidance, and workspace organisation, see our [complete Figma guide](Figma.md).
+For detailed setup instructions, permissions guidance, and workspace organisation, see our [complete Figma guide](figma.md).
 
 ## Start Designing
 
@@ -47,7 +47,7 @@ Once you have Figma access, follow these specific steps to create your first EDS
 - Check that all interactive elements have proper spacing (minimum 44px touch targets)
 - Verify colour contrast meets accessibility standards
 
-For detailed component usage, workspace setup, file organisation, and advanced Figma techniques, see our [complete Figma guide](Figma.md).
+For detailed component usage, workspace setup, file organisation, and advanced Figma techniques, see our [complete Figma guide](figma.md).
 
 ## Next Steps
 
