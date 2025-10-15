@@ -80,4 +80,4 @@ Extremely complex shapes sometimes require complex details. The guidelines allow
 -   Pick a category for the icon to live under. Reference the library for current categories.
 -   Supply a list of alternative names that people might associate with your icon. This will help when searching.
 
-Get in tuch with the EDS core team designers for further assistance.
+Get in touch with the EDS core team designers for further assistance.
