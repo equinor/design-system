@@ -1,7 +1,7 @@
 {
-  "bg-fill-muted-default": "#dbdbdb",
-  "bg-fill-muted-hover": "#cecece",
-  "bg-fill-muted-active": "#bebebe",
+  "bg-fill-muted-default": "#e1e1e1",
+  "bg-fill-muted-hover": "#d4d4d4",
+  "bg-fill-muted-active": "#c4c4c4",
   "bg-fill-emphasis-default": "#636363",
   "bg-fill-emphasis-hover": "#525252",
   "bg-fill-emphasis-active": "#4d4d4d",

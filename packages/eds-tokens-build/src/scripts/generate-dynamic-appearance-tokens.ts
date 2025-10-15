@@ -55,12 +55,12 @@ function generateAppearanceForSemantic(
   const textSubtleOnEmphasis = varName(
     variablePrefix,
     'text',
-    'contrast-subtle',
+    'subtle-on-emphasis',
   )
   const textStrongOnEmphasis = varName(
     variablePrefix,
     'text',
-    'contrast-strong',
+    'strong-on-emphasis',
   )
 
   return {
