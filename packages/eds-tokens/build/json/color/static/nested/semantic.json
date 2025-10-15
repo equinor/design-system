@@ -4,9 +4,9 @@
       "Canvas": "#f5f5f5",
       "Surface": "#ffffff",
       "Fill Muted": {
-        "Default": "#dbdbdb",
-        "Hover": "#cecece",
-        "Active": "#bebebe"
+        "Default": "#e1e1e1",
+        "Hover": "#d4d4d4",
+        "Active": "#c4c4c4"
       },
       "Fill Emphasis": {
         "Default": "#636363",
@@ -18,9 +18,9 @@
       "Canvas": "#eaf8fa",
       "Surface": "#f6ffff",
       "Fill Muted": {
-        "Default": "#c5e1e4",
-        "Hover": "#b1d6da",
-        "Active": "#97c8cd"
+        "Default": "#cfe7e9",
+        "Hover": "#bbdbdf",
+        "Active": "#a2cdd2"
       },
       "Fill Emphasis": {
         "Default": "#206f77",
@@ -32,9 +32,9 @@
       "Canvas": "#eafbe8",
       "Surface": "#f6fff5",
       "Fill Muted": {
-        "Default": "#c5e5c2",
-        "Hover": "#b1dbae",
-        "Active": "#97cf93"
+        "Default": "#cfeacc",
+        "Hover": "#bbe0b8",
+        "Active": "#a2d49e"
       },
       "Fill Emphasis": {
         "Default": "#207720",
@@ -46,9 +46,9 @@
       "Canvas": "#e7f8ff",
       "Surface": "#f4ffff",
       "Fill Muted": {
-        "Default": "#c0e0f8",
-        "Hover": "#aad4f3",
-        "Active": "#8dc5ee"
+        "Default": "#cae6fa",
+        "Hover": "#b5daf5",
+        "Active": "#99cbf0"
       },
       "Fill Emphasis": {
         "Default": "#006aa0",
@@ -60,9 +60,9 @@
       "Canvas": "#fff1e2",
       "Surface": "#fffcf0",
       "Fill Muted": {
-        "Default": "#f9d2b6",
-        "Hover": "#f4c29d",
-        "Active": "#eeae7c"
+        "Default": "#fbdac1",
+        "Hover": "#f6caaa",
+        "Active": "#f0b689"
       },
       "Fill Emphasis": {
         "Default": "#9b4900",
@@ -74,9 +74,9 @@
       "Canvas": "#ffecea",
       "Surface": "#fff9f8",
       "Fill Muted": {
-        "Default": "#ffc6c4",
-        "Hover": "#ffb2b0",
-        "Active": "#ff9897"
+        "Default": "#ffd0ce",
+        "Hover": "#ffbcba",
+        "Active": "#ffa3a1"
       },
       "Fill Emphasis": {
         "Default": "#bc002a",
@@ -113,7 +113,7 @@
     },
     "Danger": {
       "Subtle": "#ffbcba",
-      "Medium": "#ff7a7d",
+      "Medium": "#ff7a7c",
       "Strong": "#c6002d"
     }
   },
