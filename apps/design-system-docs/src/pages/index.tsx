@@ -28,49 +28,35 @@ function HomepageInfo() {
     <header className={styles.homepageInfo}>
       <div className="container">
         <p>
-          Equinor Design System (EDS) is the single source of truth for
-          designing, prototyping, and building internal digital products at
-          Equinor. It reduces duplication, increases quality, and accelerates
-          delivery.
+          The Equinor Design System (EDS) helps you build consistent, accessible
+          digital products faster. Whether you're a developer, designer, or part
+          of any team, EDS provides the tools you need to create quality user
+          experiences.
         </p>
-        <Heading as="h4">Getting started</Heading>
+        <br />
+        <Heading as="h2">What You Get</Heading>
         <p>
-          Use our guidelines, tokens, icons, and React component libraries to
-          assemble consistent, accessible, and efficient user interfaces—without
-          reinventing patterns.
+          Guidelines, design tokens, icons, and React components that work
+          together seamlessly. No need to reinvent the wheel—focus on what makes
+          your product unique.
         </p>
-        <Heading as="h4">Our foundation</Heading>
+        <br />
+        <Heading as="h2">How It Works</Heading>
         <p>
-          EDS focuses on usability, accessibility, clarity, performance, and
-          long‑term maintainability to reduce complexity and improve user
-          experience for everyone.
+          Design in Figma using our libraries, then build with matching React
+          components. From concept to production, everything stays consistent.
         </p>
+        <br />
+        <Heading as="h2">Get Involved</Heading>
         <p>
-          Design tokens ensure visual consistency (spacing, color, typography,
-          motion) and enable theming across platforms.
+          Share feedback, report issues, or contribute improvements. Your input
+          helps make EDS better for everyone.
         </p>
-        <Heading as="h4">Community driven</Heading>
+        <br />
+        <Heading as="h2">Need Help?</Heading>
         <p>
-          The core team stewards the system, but its quality depends on adoption
-          and contribution. Share needs, report issues, and propose
-          improvements—feedback and contributions keep EDS healthy.
-        </p>
-        <p>You can:</p>
-        <ul>
-          <li>Open issues for gaps or bugs</li>
-          <li>Request new components (with rationale and use cases)</li>
-          <li>Contribute enhancements with tests and stories</li>
-        </ul>
-        <Heading as="h4">Design to production workflow</Heading>
-        <p>
-          Start in Figma with official EDS libraries, validate interactions,
-          then implement using the matching React components and tokens.
-        </p>
-        <Heading as="h4">Need help?</Heading>
-        <p>
-          Reach out via the internal support channel, consult the component
-          docs, or explore Storybook examples to learn established patterns
-          before building new ones.
+          Explore our documentation, browse Storybook examples, or reach out
+          through our support channels. We're here to help you succeed.
         </p>
       </div>
     </header>
