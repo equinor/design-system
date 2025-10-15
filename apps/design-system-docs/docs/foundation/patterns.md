@@ -10,7 +10,7 @@ The organisation of space is fundamental to great design. By aligning your compo
 
 EDS is built on an 8px ratio system, which means you should maintain a minimum of 8px spacing between objects and elements. This consistent spacing creates visual rhythm and helps establish clear relationships between interface elements.
 
-For comprehensive guidelines on implementing our grid system, please refer to the [grid documentation](./design-tokens/Grid.md).
+For comprehensive guidelines on implementing our grid system, please refer to the [grid documentation](./design-tokens/grid.md).
 
 ### Best Practices
 

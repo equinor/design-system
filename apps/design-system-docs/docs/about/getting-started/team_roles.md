@@ -8,8 +8,8 @@ As a team or project lead, you'll find the strategic guidance and practical supp
 
 **Direct team members to role-specific guides:**
 
-- **Designers** → [Figma setup and design workflows](design/index.md)
-- **Developers** → [Component installation and implementation](develop/index.md)
+- **Designers** → [Figma setup and design workflows](design/getting_started_design.md)
+- **Developers** → [Component installation and implementation](develop/getting_started_development.md)
 - **Citizen Developers** → [Low-code templates and Power Platform resources](develop//citizen_developers.md)
 
 **Plan your implementation approach:** Start with new projects rather than migrating existing work. This reduces risk and allows your team to build confidence with EDS components gradually.
