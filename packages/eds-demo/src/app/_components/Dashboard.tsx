@@ -7,6 +7,7 @@ import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
 import { Menu } from "@/app/_components/Menu";
+import { ActionButton } from "./ActionButton";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -85,7 +86,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             chipSuccessClass={styles["chip--success"]}
           />
           <ButtonGroup
-            className="inline-flex items-center self-stretch justify-end h-9"
+            className="inline-flex items-center self-stretch justify-end"
             // 💰 Add the data-color-appearance attribute to add colour
             data-color-appearance="accent"
           >
@@ -93,12 +94,10 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
               className={styles["button--primary"]}
               icon={
                 <svg
+                  className="selectable-icon"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="w-6 h-6"
                 >
                   <path
                     fillRule="evenodd"
@@ -114,6 +113,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             <SecondaryButton className={styles["button--secondary"]}>
               Cancel
             </SecondaryButton>
+            <ActionButton>Hri</ActionButton>
           </ButtonGroup>
         </main>
       </div>

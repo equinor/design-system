@@ -5,6 +5,29 @@
    ============================================ */
 
 /* ============================================
+   CSS Custom Properties for Selectable System
+   Required for icon scaling based on font-size
+   ============================================ */
+
+/* @property --selectable-padding-inline {
+  inherits: false;
+  initial-value: 16px;
+  syntax: <length>;
+}
+
+@property --selectable-padding-stack {
+  inherits: false;
+  initial-value: 12px;
+  syntax: <length>;
+} */
+
+@property --captured-size-1 {
+  inherits: false;
+  initial-value: 16;
+  syntax: "*";
+}
+
+/* ============================================
    Spacing Tokens
    ============================================ */
 :root {
@@ -62,57 +85,6 @@
 
   /* Baseline grid */
   --baseline: 4px;
-}
-
-/* ============================================
-   Selectable Component Pattern
-   For interactive elements: buttons, chips, tabs, menu items
-   ============================================ */
-
-.selectable {
-  /* Base properties */
-  --_padding-inline: var(--selectable-padding-inline, var(--space-md));
-  --_padding-stack: var(--selectable-padding-stack, var(--space-sm));
-
-  display: grid;
-  grid-auto-flow: column;
-  gap: round(0.618em, 0.5px);
-  place-items: center start;
-  width: fit-content;
-  padding: var(--_padding-stack) var(--_padding-inline);
-
-  /* Size variants */
-  &[data-padding="xxs"] {
-    --selectable-padding-inline: var(--space-xxs);
-  }
-  &[data-padding="xs"] {
-    --selectable-padding-inline: var(--space-xs);
-  }
-  &[data-padding="sm"] {
-    --selectable-padding-inline: var(--space-sm);
-  }
-  &[data-padding="md"] {
-    --selectable-padding-inline: var(--space-md);
-  }
-  &[data-padding="lg"] {
-    --selectable-padding-inline: var(--space-lg);
-  }
-  &[data-padding="xl"] {
-    --selectable-padding-inline: var(--space-xl);
-  }
-
-  /* Ratio modifiers */
-  &[data-ratio="squished"] {
-    --selectable-padding-stack: calc(var(--_padding-inline) * 0.67); /* 2:3 */
-  }
-
-  &[data-ratio="squared"] {
-    --selectable-padding-stack: var(--_padding-inline); /* 1:1 */
-  }
-
-  &[data-ratio="stretched"] {
-    --selectable-padding-stack: calc(var(--_padding-inline) * 1.5); /* 3:2 */
-  }
 }
 
 /* ============================================
@@ -338,6 +310,7 @@
 .grid-4-col {
   grid-template-columns: repeat(4, 1fr);
 }
+
 /* ============================================
    Baseline Grid Alignment
    ============================================ */
@@ -384,5 +357,101 @@
   }
   &[data-padding="3xl"] {
     padding: var(--space-3xl);
+  }
+}
+
+/* ============================================
+   Selectable Component Pattern
+   For interactive elements: buttons, chips, tabs, menu items
+   IMPORTANT: Placed last to override generic [data-padding] rules
+   ============================================ */
+
+.selectable {
+  /* Capture font-size for icon scaling */
+  --_selectable-font-size: 16px;
+  /* --captured-size-1: tan(atan2(var(--_selectable-font-size), 1px)); */
+  --captured-size-1: 16px;
+  font-size: 16px; /* Default font size */
+
+  /* Base properties */
+  --_padding-inline: var(--selectable-padding-inline);
+  --_padding-stack: var(--selectable-padding-stack);
+
+  display: grid;
+  grid-auto-flow: column;
+  gap: round(0.618em, 0.5px);
+  place-items: center start;
+  width: fit-content;
+  padding: var(--selectable-padding-stack) var(--selectable-padding-inline);
+
+  /* Size variants - using Figma values */
+  &[data-padding="xs"] {
+    --selectable-padding-inline: var(--space-xs); /* 8px */
+
+    &[data-ratio="squished"] {
+      --selectable-padding-stack: 6px; /* 6px from codepen example */
+    }
+
+    &[data-ratio="squared"] {
+      --selectable-padding-stack: var(--space-xs); /* 8px */
+    }
+
+    &[data-ratio="stretched"] {
+      --selectable-padding-stack: var(--space-sm); /* 12px */
+    }
+  }
+
+  &[data-padding="sm"] {
+    --selectable-padding-inline: var(--space-sm); /* 12px */
+
+    &[data-ratio="squished"] {
+      --selectable-padding-stack: var(--space-xs); /* 8px */
+    }
+
+    &[data-ratio="squared"] {
+      --selectable-padding-stack: var(--space-sm); /* 12px */
+    }
+
+    &[data-ratio="stretched"] {
+      --selectable-padding-stack: var(--space-md); /* 16px */
+    }
+  }
+
+  &[data-padding="md"] {
+    --selectable-padding-inline: var(--space-md); /* 16px */
+
+    &[data-ratio="squished"] {
+      --selectable-padding-stack: var(--space-sm); /* 12px */
+    }
+
+    &[data-ratio="squared"] {
+      --selectable-padding-stack: var(--space-md); /* 16px */
+    }
+
+    &[data-ratio="stretched"] {
+      --selectable-padding-stack: var(--space-lg); /* 20px */
+    }
+  }
+}
+
+/* ============================================
+   Icon Scaling System
+   Icons scale proportionally with font-size
+   ONLY for icons inside .selectable components
+   ============================================ */
+.selectable-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* width: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16); /* Did not work with Lightning CSS */
+  /* font-size: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16); */ /* Did not work with Lightning CSS */
+  width: 1.5em;
+  flex-shrink: 0;
+
+  /* Make SVG fill the container */
+  & > svg {
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
   }
 }
