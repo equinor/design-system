@@ -28,7 +28,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "colorjs.io": "^0.5.2",
     "lucide-react": "^0.542.0",
-    "next": "15.2.4",
+    "next": "15.4.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
