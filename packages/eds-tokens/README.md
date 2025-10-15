@@ -1,6 +1,6 @@
 # @equinor/eds-tokens
 
-[Design tokens] used in the Equinor Design System (EDS), such as colours, spacings and typography.
+[Design tokens] used in the <abbr title="Equinor Design System">EDS</abbr>, including colors, spacing, typography, and more. These tokens are synchronized with Figma variables and provide a single source of truth for design decisions across the design system.
 
 ## Installation
 
@@ -10,25 +10,136 @@ pnpm add @equinor/eds-tokens
 
 ## Usage
 
-```js 
-import { tokens } from '@equinor/eds-tokens'
-```
+The package provides two token systems:
 
-CSS custom properties are also available:
+* **CSS Variables (Recommended)** -- Modern, theme-aware design tokens synced from Figma
+* **Legacy Tokens** -- Original token format, still supported for backward compatibility
+
+---
+
+## CSS Variables (Recommended)
+
+The new token system uses CSS custom properties that automatically adapt to light and dark color schemes using the modern `light-dark()` function. These tokens are directly synced from Figma variables.
+
+### Using CSS Variables in CSS
+
+Import the variables stylesheet:
 
 ```css
 @import '@equinor/eds-tokens/css/variables';
 ```
 
-## Tokens
+Then use the CSS custom properties in your styles:
 
-- Clickbounds
-- Colors
-- Elevation
-- Shape
-- Spacing
-- Interaction states
-- Typography (`ot`, `woff` or `woff2` font required)
+```css
+.my-component {
+  background-color: var(--eds-color-bg-neutral-surface);
+  color: var(--eds-color-text-neutral-strong);
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  padding: var(--eds-spacing-inline-md);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+}
+```
+
+The variables automatically respond to color scheme changes:
+
+```css
+/* Applies to elements with data-color-scheme attribute */
+[data-color-scheme="dark"] {
+  /* Variables automatically use dark mode values */
+}
+
+/* Or use the native prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  /* Variables automatically use dark mode values */
+}
+```
+
+### Using variables in JavaScript/TypeScript
+
+For scenarios where you need variables in JavaScript:
+
+#### Semantic color variables
+
+```typescript
+// Import semantic color tokens
+import * as colors from '@equinor/eds-tokens/js/color/static/semantic'
+
+// Use the semantic color values
+const backgroundColor = colors.BG_NEUTRAL_SURFACE // "#ffffff"
+const accentColor = colors.BG_ACCENT_FILL_EMPHASIS_DEFAULT // "#206f77"
+const borderColor = colors.BORDER_INFO_MEDIUM // "#6fb6e9"
+const textColor = colors.TEXT_NEUTRAL_STRONG // "#1d1d1d"
+```
+
+#### Color Scheme Tokens (Light/Dark Values)
+
+For accessing raw light/dark color scheme values:
+
+```typescript
+// Import specific color scheme
+import * as lightColors from '@equinor/eds-tokens/js/color/color-scheme/light-color-scheme'
+import * as darkColors from '@equinor/eds-tokens/js/color/color-scheme/dark-color-scheme'
+
+// Use the color scheme values
+const lightBackground = lightColors.BG_FLOATING // "#ffffff"
+const darkBackground = darkColors.BG_FLOATING // "#202223"
+```
+
+#### Spacing Tokens
+
+```typescript
+// Import spacing values for different density modes
+import * as comfortableSpacing from '@equinor/eds-tokens/js/spacing/comfortable'
+import * as spaciousSpacing from '@equinor/eds-tokens/js/spacing/spacious'
+import * as primitiveSpacing from '@equinor/eds-tokens/js/spacing/primitives'
+
+// Use the values (numbers in pixels)
+const padding = comfortableSpacing.SPACING_INLINE_MD // 12
+const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED // 3
+```
+
+### Available Token Categories
+
+* **Colors** -- Semantic color tokens for backgrounds, text, borders, and states
+* **Spacing** -- Layout spacing including inline, stack, inset, and border radius
+* **Typography** -- Font sizes, line heights, and font families (requires font files)
+
+### Spacing Density Modes
+
+The spacing system supports different density modes:
+
+* `comfortable` -- Default density for most applications
+* `spacious` -- Increased spacing for better readability
+
+---
+
+## Legacy Tokens (Backward Compatible)
+
+The original token format is still available for existing applications. These tokens use a structured JavaScript object format.
+
+### Using Legacy Tokens in JavaScript/TypeScript
+
+```javascript
+import { tokens } from '@equinor/eds-tokens'
+
+// Access token values
+const primaryColor = tokens.colors.interactive.primary__resting.rgba
+const spacing = tokens.spacings.comfortable.medium
+const typography = tokens.typography.heading.h1
+```
+
+### Legacy Token Categories
+
+* Clickbounds
+* Colors
+* Elevation
+* Shape
+* Spacing
+* Interaction states
+* Typography (`ot`, `woff` or `woff2` font required)
+
+> We recommend migrating to CSS Variables for new projects to benefit from automatic theme support and better performance.
 
 [design tokens]: https://css-tricks.com/what-are-design-tokens/
 
