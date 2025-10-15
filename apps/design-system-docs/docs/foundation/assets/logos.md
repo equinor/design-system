@@ -1,6 +1,4 @@
-title: Logos
-
----
+# Logos
 
 The Equinor logo represents our brand identity and should be used thoughtfully across all interfaces to maintain visual consistency and brand recognition.
 

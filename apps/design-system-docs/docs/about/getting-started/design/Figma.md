@@ -1,9 +1,4 @@
----
-title: Figma
-hide_title: true
----
-
-## Figma
+# Figma
 
 Figma is the design and prototyping tool we use with EDS. This guide helps you get set up, understand permissions, and work effectively with EDS components.
 
