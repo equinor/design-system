@@ -1,39 +1,45 @@
 # Resources
 
-Welcome to the resources hub for the Equinor Design System. Here, you will find helpful links, tools, and guides to support your work, whether you are a developer, designer, QA, or part of a non-IT team. Our goal is to make it easy for you to access everything you need to create consistent, high-quality experiences.
+Find the tools, guides, and assets you need to work effectively with the Equinor Design System.
 
-## Design Assets
+## Internal References
 
-- [Figma Library](https://www.figma.com/) – Access our official design components and templates.
-- [Brand Guidelines](https://communicationtoolbox.equinor.com/point/en/equinor/) – Learn about our brand colours, logos, and visual identity.
-- [Icon Library](../foundation/assets/product_icons.md) – Download and use our system icons.
+- [Setup Guide](../about/getting-started/getting_started.md) – Begin using the design system
+- [Components](../components/components.md) – Usage, props, and examples for all EDS components
+- [Accessibility Guidelines](../foundation/accessibility.md) – Standards for accessible design
+- [System Icon Guidelines](../foundation/assets/system_icons.md) – System icons for download and use
+- [Product Icon Guidelines](../foundation/assets/product_icons.md) – Product icons for download and use
+- [Patterns](../foundation/patterns.md) – Best practices and reusable design patterns
 
-## Component Documentation
+## External References
 
-- [Component Reference](../components/components.md) – Explore usage, props, and examples for all EDS components.
+- [Code Repositories](https://github.com/equinor/design-system/) – Direct link to the EDS repositories
+- [Storybook](https://storybook.eds.equinor.com) – Direct link to the EDS Storybook
+- [Figma Library](https://www.figma.com/) – Official design components and templates
+- [Accessibility Tools](https://www.w3.org/WAI/test-evaluate/) – Testing and evaluation tools
 
-## Developer Guides
+## Equinor Resources
 
-<!-- - [API Documentation](../packages/eds-core-react/) – Find technical details and integration guides for our core packages. -->
+- [Equinor Brand Assets](https://www.equinor.com/about-us/our-brand) – Official brand resources
+- [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) – Internal brand tools, colours, logos, and visuals
+- [Equinor Media Bank](https://equinor.fotoware.cloud/fotoweb/) – Internal photo library
 
-- [Accessibility Guidelines](../foundation/accessibility.md) – Ensure your work meets accessibility standards.
+## Available Packages
 
-## Tutorials & How-To Guides
+| Name                         | Version | npm link                                                                          | Changelog                                                                                                    |
+| ---------------------------- | ------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| @equinor/eds-core-react      | 1.0.0   | [Eds core react](https://www.npmjs.com/package/@equinor/eds-core-react)           | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/CHANGELOG.md)      |
+| @equinor/eds-tokens          | 1.0.0   | [Eds tokens](https://www.npmjs.com/package/@equinor/eds-tokens)                   | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-tokens/CHANGELOG.md)          |
+| @equinor/eds-icons           | 1.0.0   | [Eds icons](https://www.npmjs.com/package/@equinor/eds-icons)                     | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-icons/CHANGELOG.md)           |
+| @equinor/eds-data-grid-react | 1.0.0   | [Eds data grid react](https://www.npmjs.com/package/@equinor/eds-data-grid-react) | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-data-grid-react/CHANGELOG.md) |
+| @equinor/eds-utils           | 1.0.0   | [Eds utils](https://www.npmjs.com/package/@equinor/eds-utils)                     | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-utils/CHANGELOG.md)           |
+| @equinor/eds-lab-react       | 0.8.0   | [Eds lab react](https://www.npmjs.com/package/@equinor/eds-lab-react)             | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-lab-react/CHANGELOG.md)       |
 
-- [Getting Started](../about/getting-started/getting_started.md) – Begin using the design system in your projects.
-- [Patterns](../foundation/patterns.md) – Review best practices and reusable patterns.
+## Versions and Release
 
-## Community & Support
+Each package follows independent **semantic versioning**.  
+You can view the latest version in the table above. For our full release notes, please see [Release notes](https://github.com/equinor/design-system/releases).
 
-- [Support](../support/support.md) – Get help or contact the team for questions.
-- [Contribute](https://github.com/equinor/design-system) – Learn how to contribute to the design system.
-- [Updates](https://github.com/equinor/design-system/releases) – Stay informed about new releases and improvements.
+## Need Help?
 
-## External Resources
-
-- [Equinor Brand Assets](https://www.equinor.com/about-us/brand) – Official brand resources
-- [Accessibility Tools](https://www.w3.org/WAI/test-evaluate/) – Tools for testing accessibility
-- [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) - Equinor internal
-- [Equinor Media Bank](https://equinor.fotoware.cloud/fotoweb/) - Equinor internal
-
-If you have suggestions for new resources, please reach out via our support page. We are here to help you succeed and ensure you have everything you need to deliver great user experiences.
+For questions, support, and contributions, visit our [support page](../support/support.md).
