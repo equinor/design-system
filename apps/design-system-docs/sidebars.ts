@@ -24,7 +24,7 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'about/getting-started/design/getting_started_design',
-            'about/getting-started/design/Figma',
+            'about/getting-started/design/figma',
           ],
         },
         {
@@ -66,11 +66,11 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Design Tokens',
       items: [
-        'foundation/design-tokens/Grid',
-        'foundation/design-tokens/Elevation',
-        'foundation/design-tokens/Shape',
-        'foundation/design-tokens/Spacing',
-        'foundation/design-tokens/Typography',
+        'foundation/design-tokens/grid',
+        'foundation/design-tokens/elevation',
+        'foundation/design-tokens/shape',
+        'foundation/design-tokens/spacing',
+        'foundation/design-tokens/typography',
       ],
     },
     'foundation/datavisualisation',
