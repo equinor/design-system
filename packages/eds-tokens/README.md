@@ -57,33 +57,26 @@ The variables automatically respond to color scheme changes:
 
 ### Using variables in JavaScript/TypeScript
 
-For scenarios where you need variables in JavaScript:
+For scenarios where you need colour variables in JavaScript:
 
-#### Semantic color variables
+#### Color Scheme Tokens
 
-```typescript
-// Import semantic color tokens
-import * as colors from '@equinor/eds-tokens/js/color/static/semantic'
-
-// Use the semantic color values
-const backgroundColor = colors.BG_NEUTRAL_SURFACE // "#ffffff"
-const accentColor = colors.BG_ACCENT_FILL_EMPHASIS_DEFAULT // "#206f77"
-const borderColor = colors.BORDER_INFO_MEDIUM // "#6fb6e9"
-const textColor = colors.TEXT_NEUTRAL_STRONG // "#1d1d1d"
-```
-
-#### Color Scheme Tokens (Light/Dark Values)
-
-For accessing raw light/dark color scheme values:
+Import the light and dark semantic color tokens:
 
 ```typescript
-// Import specific color scheme
-import * as lightColors from '@equinor/eds-tokens/js/color/color-scheme/light-color-scheme'
-import * as darkColors from '@equinor/eds-tokens/js/color/color-scheme/dark-color-scheme'
+// Import semantic color scheme tokens
+import * as lightSemantic from '@equinor/eds-tokens/js/color/color-scheme/light-semantic'
+import * as darkSemantic from '@equinor/eds-tokens/js/color/color-scheme/dark-semantic'
 
-// Use the color scheme values
-const lightBackground = lightColors.BG_FLOATING // "#ffffff"
-const darkBackground = darkColors.BG_FLOATING // "#202223"
+// Use semantic tokens with light/dark values
+const lightSurface = lightSemantic.BG_NEUTRAL_SURFACE // "#ffffff"
+const darkSurface = darkSemantic.BG_NEUTRAL_SURFACE // "#202223"
+
+const lightAccent = lightSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT // "#206f77"
+const darkAccent = darkSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT // "#206f77"
+
+const lightBorder = lightSemantic.BORDER_INFO_MEDIUM // "#6fb6e9"
+const darkBorder = darkSemantic.BORDER_INFO_MEDIUM // "#5c9fc9"
 ```
 
 #### Spacing Tokens

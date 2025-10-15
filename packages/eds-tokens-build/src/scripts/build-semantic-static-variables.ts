@@ -56,6 +56,7 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
   const PREFIX = tokenConfig.variablePrefix ?? 'x'
   const COLOR_PREFIX = PREFIX + '-color' // e.g. "x-color"
 
+  // Build static semantic tokens with light theme values and CSS variable references
   const semanticColors = _extend({
     source: [SEMANTIC_COLORS],
     include: [LIGHT_COLORS, LIGHT_SCHEME], // use one scheme to resolve references
@@ -69,6 +70,41 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
   })
 
   await semanticColors.buildAllPlatforms()
+
+  // Build semantic color scheme tokens with resolved light/dark values
+  const DARK_COLORS = path.join(TOKEN_BASE, 'Color Dark.Mode 1.json')
+  const DARK_SCHEME = path.join(TOKEN_BASE, `${SCHEME_TOKENS_PREFIX}.Dark.json`)
+  const SCHEME_BUILD_PATH = path.posix.join(
+    tokenConfig.buildPath ?? 'color/',
+    'color-scheme/',
+  )
+
+  const lightSemanticColors = _extend({
+    source: [SEMANTIC_COLORS],
+    include: [LIGHT_COLORS, LIGHT_SCHEME],
+    filter: (token: TransformedToken) =>
+      includeTokenFilter(token, ['Semantic']),
+    buildPath: SCHEME_BUILD_PATH,
+    fileName: 'light-semantic',
+    selector: '[data-color-scheme="light"]',
+    prefix: COLOR_PREFIX,
+    outputReferences: false,
+  })
+
+  const darkSemanticColors = _extend({
+    source: [SEMANTIC_COLORS],
+    include: [DARK_COLORS, DARK_SCHEME],
+    filter: (token: TransformedToken) =>
+      includeTokenFilter(token, ['Semantic']),
+    buildPath: SCHEME_BUILD_PATH,
+    fileName: 'dark-semantic',
+    selector: '[data-color-scheme="dark"]',
+    prefix: COLOR_PREFIX,
+    outputReferences: false,
+  })
+
+  await lightSemanticColors.buildAllPlatforms()
+  await darkSemanticColors.buildAllPlatforms()
 }
 
 async function combineColorsFromConfig(cfg: TokenConfig) {
