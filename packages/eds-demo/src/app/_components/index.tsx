@@ -74,7 +74,7 @@ export function CheckmarkUnselected({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       data-color-appearance="accent"
-      className={`w-[18px] h-[18px] left-[3px] top-[3px] absolute ${className}`}
+      className={`w-[18px] h-[18px] left-[0px] top-[3px] absolute ${className}`}
     >
       <path
         fillRule="evenodd"
@@ -94,7 +94,7 @@ export function CheckmarkSelected({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       data-color-appearance="accent"
-      className={className}
+      className={`w-[18px] h-[18px] left-[0px] top-[3px] absolute ${className}`}
     >
       <path
         fillRule="evenodd"
