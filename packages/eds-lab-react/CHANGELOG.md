@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1](https://github.com/equinor/design-system/compare/eds-lab-react@0.8.0...eds-lab-react@v0.8.1) (2025-10-16)
+
+
+### 🔧 Chores
+
+* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+
 ## [0.8.0] - 2025-10-09
 
 **Note:** Due to technical debt and limited active components, we're keeping the lab package at v0.x while evaluating whether to deprecate it entirely. The styled-components implementation has React 19 compatibility issues requiring workarounds we're not comfortable promoting to v1.0.0.
