@@ -15,17 +15,21 @@
       "default": "./theme.css",
       "import": "./theme.css"
     },
-    "./theme.css": "./theme.css"
+    "./theme.css": "./theme.css",
+    "./theme": {
+      "style": "./theme.css",
+      "default": "./theme.css",
+      "import": "./theme.css"
+    }
   },
   "sideEffects": [
     "**/*.css"
   ],
   "peerDependencies": {
+    "@equinor/eds-tokens": ">=1.0.0",
     "tailwindcss": ">=4.0.0 <5"
   },
-  "dependencies": {
-    "@equinor/eds-tokens": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "tailwindcss": "^4.1.13",

@@ -714,8 +714,8 @@ importers:
   packages/eds-tailwind:
     dependencies:
       '@equinor/eds-tokens':
-        specifier: workspace:*
-        version: link:../eds-tokens
+        specifier: '>=1.0.0'
+        version: 1.0.0
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.1.13
