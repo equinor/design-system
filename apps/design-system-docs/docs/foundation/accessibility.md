@@ -83,7 +83,7 @@ If you need to use additional colours for domain-specific requirements, charts o
 
 ### Navigation Order
 
-Place components on the page in order of importance, the order in which the element receives focus should be logical and predictable. Try to keep navigation to a minimum of steps and make all steps clear.
+Place components on the page in order of importance. The order in which the element receives focus should be logical and predictable. Try to keep navigation to a minimum of steps and make all steps clear.
 
 Try navigating your own solution by only using a keyboard. Can you navigate? Can you perform all the important tasks? Can you tell where the keyboard focus is? Do your items follow the order you think? Generally, focus travels up to down, left to right. Test it out by using your `tab` key.
 
