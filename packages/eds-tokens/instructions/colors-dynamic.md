@@ -45,10 +45,10 @@ Note: No semantic category (accent, neutral, etc.) in the variable name itself.
 Use the `data-color-appearance` attribute to set the semantic category:
 
 ```html
-<!-- Accent appearance (default) -->
+<!-- Accent appearance -->
 <button data-color-appearance="accent">Primary</button>
 
-<!-- Neutral appearance -->
+<!-- Neutral appearance (default) -->
 <button data-color-appearance="neutral">Secondary</button>
 
 <!-- Success appearance -->
