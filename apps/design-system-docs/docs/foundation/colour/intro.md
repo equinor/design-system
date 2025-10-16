@@ -1,18 +1,17 @@
-# About
+---
+title: Introduction
+---
 
 The EDS colour foundation provides a clear, consistent, and accessible way to use colour across Equinor’s digital products.  
-It is built on **semantic colours**, named and organised by their *role and purpose* in the interface rather than by how they look.
+It is built on **semantic colours**, named and organised by their _role and purpose_ in the interface rather than by how they look.
 
-This means you choose colours based on *function*, not *shade*.  
+This means you choose colours based on _function_, not _shade_.  
 It helps designers and developers speak the same language, keeps interfaces consistent, and makes it clear when and where to use each colour.
 
 Accessibility is a core principle of the system, ensuring readable and inclusive colour combinations across both light and dark modes.
 
-
-
 ## Colour scheme
 
- 
 The colour foundation supports both **light** and **dark** schemes, helping you create clear hierarchy and accessible interfaces in any mode.
 
 Instead of a traditional linear scale from light to dark, each EDS colour scale is built with **intentional steps in lightness** where each colour step is chosen for a specific purpose.  
@@ -22,14 +21,11 @@ This step-based approach ensures that every combination has the right visual sep
 Each step also keeps the same lightness level across all colour categories.  
 This means the relationship between colours stay consistent even when the hue changes.
 
-
-
 | Light                                         | Dark                                        |
 | --------------------------------------------- | ------------------------------------------- |
 | ![Light theme colour palette](/img/light.png) | ![Dark theme colour palette](/img/dark.png) |
 
 **Note:** We generate all colours using our [colour palette generator](https://color-palette-generator-eds-prod.radix.equinor.com/). This tool ensures consistency and helps maintain accessibility standards.
-
 
 ## How it’s structured
 
@@ -49,13 +45,14 @@ Each category includes colours for:
 - **Border**
 - **Text**
 
-These groups define the **usage areas** of the colours. For example, colours in the *Text* group are designed specifically for text and icons, ensuring the right contrast and readability.
+These groups define the **usage areas** of the colours. For example, colours in the _Text_ group are designed specifically for text and icons, ensuring the right contrast and readability.
 
 ## Background
 
 Background colours create the foundation of your interface. They define layers and ensure text remains readable.
 
 **Roles:**
+
 - **Canvas** – main application background
 - **Surface** – placed on canvas to create depth in layouts
 
@@ -89,19 +86,17 @@ Text colours ensure content is readable and create clear hierarchy.
 - **Strong-on-emphasis** – text on emphasis backgrounds
 - **Subtle-on-emphasis** – secondary text on emphasis backgrounds
 
-- **Background:** base layers and surfaces  
-- **Background Fill (Muted / Emphasis):** used for interactive elements such as buttons and selected states  
-- **Border:** outlines and separators  
+- **Background:** base layers and surfaces
+- **Background Fill (Muted / Emphasis):** used for interactive elements such as buttons and selected states
+- **Border:** outlines and separators
 - **Text:** text and icons
-
 
 ## Concepts (global roles)
 
 In addition to the semantic categories, EDS includes a **Concept** collection for global colours that sit outside the scales.
-The Concept collection covers cases where it does not make sense to have one colour per scale. 
+The Concept collection covers cases where it does not make sense to have one colour per scale.
 
 **Concept colours include:**
-
 
 - **bg-floating** – floating elements like tooltips and menus
 - **bg-backdrop** – overlay layer behind modals
@@ -116,7 +111,6 @@ These concept colours complement the semantic system and ensure consistent handl
 Accessibility is not an afterthought; it is at the core of the EDS colour foundation.  
 Each colour combination has been evaluated using the **APCA contrast algorithm** to ensure readability and harmony across all modes.  
 APCA models how the human eye perceives contrast and brightness more accurately than older contrast formulas, giving a truer picture of real-world legibility.
-
 
 ## Features
 

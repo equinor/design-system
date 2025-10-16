@@ -2,11 +2,13 @@ import type { ReactNode } from 'react'
 import clsx from 'clsx'
 import Heading from '@theme/Heading'
 import styles from './styles.module.css'
+import Link from '@docusaurus/Link'
 
 type FeatureItem = {
   title: string
   Svg: React.ComponentType<React.ComponentProps<'svg'>>
   description: ReactNode
+  link: string
 }
 
 import Designer from '../../../static/img/illustrations/designer_illu.svg'
@@ -19,10 +21,11 @@ const FeatureList: FeatureItem[] = [
     Svg: Puzzle,
     description: (
       <>
-        Comprehensive resources like React and Figma components, tokens,
-        iconsand colour palettes.
+        Comprehensive resources like React and Figma components, tokens, icons
+        and colour palettes.
       </>
     ),
+    link: 'docs/components',
   },
   {
     title: 'Documentation',
@@ -30,24 +33,28 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>Guidelines, patterns, and principles for consistent builds.</>
     ),
+    link: 'docs/foundation/accessibility',
   },
   {
     title: 'Living',
     Svg: Designer,
     description: <>Evolving with collaboration and community contributions.</>,
+    link: 'docs/support',
   },
 ]
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, link }: FeatureItem) {
   return (
     <div className={clsx('col col--3')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
+      <Link to={link} className={styles.featureLink}>
+        <div className="text--center">
+          <Svg className={styles.featureSvg} role="img" />
+        </div>
+        <div className="text--center padding-horiz--md">
+          <Heading as="h3">{title}</Heading>
+          <p>{description}</p>
+        </div>
+      </Link>
     </div>
   )
 }
