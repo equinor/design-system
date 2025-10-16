@@ -66,7 +66,7 @@ function generatePackageTable(packages) {
           ? 'N/A'
           : `[changelog](${pkg.changelogLink})`
 
-      return `| ${pkg.name} | ${pkg.version} | [npm](${pkg.npmLink}) | ${changelogCell} |`
+      return `| ${pkg.name} | ${pkg.version} | [${pkg.name}](${pkg.npmLink}) | ${changelogCell} |`
     })
     .join('\n')
 

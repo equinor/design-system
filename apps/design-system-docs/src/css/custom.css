@@ -62,6 +62,7 @@
 
   /* Menu and sidebar styling */
   --ifm-menu-color: var(--ifm-font-color-base);
+  --ifm-menu-vertical-line-color: var(--eds-color-border-neutral-subtle);
   --ifm-menu-color-active: var(--ifm-color-primary);
   --ifm-menu-color-background-active: var(--ifm-hover-overlay);
   --ifm-menu-color-background-hover: var(--ifm-hover-overlay);
@@ -137,7 +138,7 @@ nav.menu li a {
   position: relative;
   margin-left: 2.5rem; /* indent of children */
   padding-left: 0.5rem; /* space between line and text */
-  border-left: 0.125rem solid var(--eds-color-border-neutral-subtle);
+  border-left: 0.125rem solid var(--ifm-menu-vertical-line-color);
 }
 
 /* 2) Make level-1 categories (with children) ignore hover background via token */
@@ -149,9 +150,9 @@ nav.menu li a {
 .menu__link:hover {
   background-color: transparent !important;
   text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-decoration-color: var(--eds-color-border-neutral-subtle);
-  text-underline-offset: 2px;
+  text-decoration-thickness: 0.125rem;
+  text-decoration-color: var(--ifm-menu-vertical-line-color) !important;
+  text-underline-offset: 0.125rem;
 }
 
 /* 4) Active link: no bg, keep prominent text color */
