@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/equinor/design-system/compare/eds-tokens@1.0.0...eds-tokens@v1.1.0) (2025-10-16)
+
+
+### ✨ Added
+
+* **eds-color-palette-generator,eds-tokens,eds-tokens-build:** use oklch in the palette config ([#4081](https://github.com/equinor/design-system/issues/4081)) ([186cc5f](https://github.com/equinor/design-system/commit/186cc5f5866c71f5aa2a0e4ed0dddb2a82a892f2))
+* **eds-tokens, eds-demo, eds-tailwind:** use single css variables export ([#4098](https://github.com/equinor/design-system/issues/4098)) ([15689fb](https://github.com/equinor/design-system/commit/15689fbd0b7df201be3be1a4f5774a5f44e6403e))
+
 ## [1.0.0] - 2025-10-09
 
 This release aligns with the v1 release of our design system.
