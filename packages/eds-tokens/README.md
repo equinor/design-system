@@ -228,7 +228,7 @@ The semantic variable references the first segment (collection) in the variable.
 
 ### Tokens in code
 
-The color scheme collection variables support all the combinations of modes in the different collections and are used to generate tokens in code. All the combinations of modes in different collections must be provided here so that the code syntax matches tokens in the code..
+The color scheme collection variables support all the combinations of modes in the different collections and are used to generate tokens in code. All the combinations of modes in different collections must be provided here so that the code syntax matches tokens in the code.
 
 
 ### How to setup variable collections in Figma
