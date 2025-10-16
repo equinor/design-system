@@ -10,7 +10,7 @@
  * FONTS
  * ====================================== */
 /* Equinor brand font */
-@import '@equinor/eds-tokens/css/variables-static';
+@import '@equinor/eds-tokens/css/variables';
 @import url(https://cdn.eds.equinor.com/font/equinor-font.css);
 /* TODO: This needs to be imported from Equinor CDN later */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
