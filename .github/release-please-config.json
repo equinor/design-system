@@ -75,7 +75,6 @@
   ],
 
   "release-search-depth": 500,
-  "skip-github-release": true,
   "changelog-path": "CHANGELOG.md",
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": false,
