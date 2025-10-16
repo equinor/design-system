@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link'
 
 type FeatureItem = {
   title: string
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>
+  Svg: any
   description: ReactNode
   link: string
 }
@@ -38,7 +38,9 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Living',
     Svg: Designer,
-    description: <>Evolving with collaboration and community contributions.</>,
+    description: (
+      <>Evolving with collaboration and community contributions.</>
+    ),
     link: 'docs/support',
   },
 ]
