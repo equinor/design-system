@@ -55,7 +55,7 @@ Use specific semantic variables in your styles:
 
 ### Interactive States
 
-Background fill muted an emphasis include state variants for hover and active:
+Background fill-muted and fill-emphasis include state variants for hover and active:
 
 ```css
 .button {
