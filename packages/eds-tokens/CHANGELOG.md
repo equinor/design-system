@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.0...eds-tokens@v1.1.1) (2025-10-16)
+
+
+### 📝 Changed
+
+* **eds-tokens:** update docs to trigger publish of package ([e73d676](https://github.com/equinor/design-system/commit/e73d6765aa471a2ae7f3c633c89c4ad21b7bdfa0))
+
 ## [1.1.0](https://github.com/equinor/design-system/compare/eds-tokens@1.0.0...eds-tokens@v1.1.0) (2025-10-16)
 
 
