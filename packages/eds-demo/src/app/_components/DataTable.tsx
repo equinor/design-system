@@ -7,7 +7,7 @@ import { ChipProps } from "./ChipProps";
 type Props = {
   className?: string;
   thClass: string;
-  trClass?: string;
+  trClass: string;
   activeThClass?: string;
   tdClass: string;
   trActiveClass: string;
@@ -66,7 +66,6 @@ export const DataTable = ({
               data-debug
               key={column.id}
               className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left text-sm leading-tight grow shrink basis-0 cursor-pointer`}
-              /*data-color-appearance={column.active ? "accent" : undefined}*/
             >
               {idx === 0 ? (
                 <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
