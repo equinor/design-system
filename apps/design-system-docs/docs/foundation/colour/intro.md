@@ -10,6 +10,9 @@ It helps designers and developers speak the same language, keeps interfaces cons
 
 Accessibility is a core principle of the system, ensuring readable and inclusive colour combinations across both light and dark modes.
 
+<iframe src="https://statoilsrm.sharepoint.com/sites/Designsystem/_layouts/15/embed.aspx?UniqueId=218a2b04-df60-46ee-bd8a-b3e6b638e966&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="100%" height="480" frameborder="0" scrolling="no" allowfullscreen title="Colour foundation intro.mp4"></iframe>
+[Link to introduction video](https://statoilsrm.sharepoint.com/:l:/r/sites/Designsystem/Lists/Foundations%20%20Colour%20%20Tutorial%20%20Static%20%20Design?e=bKgbeA)
+
 ## Colour scheme
 
 The colour foundation supports both **light** and **dark** schemes, helping you create clear hierarchy and accessible interfaces in any mode.

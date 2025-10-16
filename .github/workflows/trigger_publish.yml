@@ -19,7 +19,7 @@ on:
     branches:
       - develop
     paths:
-      - '.release-please-manifest.json'
+      - '.github/release-please-manifest.json'
 
 # Required permissions
 permissions:

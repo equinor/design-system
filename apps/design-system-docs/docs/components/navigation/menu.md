@@ -30,10 +30,10 @@ Compact menus provide streamlined options for space-conscious interfaces.
 
 ### Content
 
-- Keep the item labels as short as possible.
-- Use meaningful item labels that explain the function.
-- Item labels should be in the active tense.
-- Do not mix nouns and verbs. Pick one or the other.
+- Keep the item labels as short as possible
+- Use meaningful item labels that explain the function
+- Item labels should be in the active tense
+- Do not mix nouns and verbs. Pick one or the other
 
 ## Implementation in Figma
 
