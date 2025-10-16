@@ -32,7 +32,8 @@ export const SearchInput = ({ className, iconClass, ...rest }: Props) => {
         type="search"
         placeholder="Search"
         aria-label="Search input"
-        className={`max-w-[250px] w-[250px] h-[37px] px-3 py-2 pl-10 text-base font-normal leading-tight ${className}`}
+        data-padding-block="xs"
+        className={`max-w-[250px] w-[250px] h-[37px] px-3 pl-10 text-base font-normal leading-tight ${className}`}
         {...rest}
       />
     </div>

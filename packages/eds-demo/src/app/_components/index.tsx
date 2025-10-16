@@ -9,7 +9,9 @@ export function TableHeader({
   return (
     <div
       {...rest}
-      className={`self-stretch px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
+      data-padding-inline="sm"
+      data-padding-block="xs"
+      className={`self-stretch justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
     >
       <div className="h-5 text-sm leading-tight grow shrink basis-0">
         {children}
@@ -17,6 +19,7 @@ export function TableHeader({
     </div>
   );
 }
+
 export function TableRow({
   children,
   className,
@@ -26,6 +29,7 @@ export function TableRow({
 }) {
   return <div className={`self-stretch ${className}`}>{children}</div>;
 }
+
 export function TableDataCell({
   className,
   children,
@@ -35,12 +39,15 @@ export function TableDataCell({
 }) {
   return (
     <div
-      className={`w-full px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
+      data-padding-inline="sm"
+      data-padding-block="xs"
+      className={`w-full justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
     >
       {children}
     </div>
   );
 }
+
 export function Chip({
   className,
   children,
@@ -53,18 +60,17 @@ export function Chip({
 }) {
   return (
     <div
-      className={`px-2 py-1 rounded-[100px] justify-center items-center gap-1 flex ${className}`}
+      className={`chip rounded-full ${className}`}
+      data-padding-inline="sm"
+      data-padding-block="xxs"
       {...rest}
     >
-      {icon && (
-        <div className="flex items-center justify-center w-3 h-4 gap-1">
-          <div className="relative w-4 h-4 icon">{icon}</div>
-        </div>
-      )}
+      {icon && <div className="relative w-4 h-4 icon">{icon}</div>}
       <div className="text-xs leading-none tracking-tight">{children}</div>
     </div>
   );
 }
+
 export function CheckmarkUnselected({ className }: { className?: string }) {
   return (
     <svg
@@ -85,6 +91,7 @@ export function CheckmarkUnselected({ className }: { className?: string }) {
     </svg>
   );
 }
+
 export function CheckmarkSelected({ className }: { className?: string }) {
   return (
     <svg
@@ -123,7 +130,8 @@ export function SideBarLink({
       data-debug
       type="button"
       popoverTarget={popoverTarget}
-      className={`self-stretch h-14 px-5 justify-between items-center inline-flex ${className}`}
+      data-padding-inline="sm"
+      className={`self-stretch h-14 justify-center items-center inline-flex ${className}`}
       style={
         anchorName
           ? ({ anchorName: `--${anchorName}` } as React.CSSProperties)

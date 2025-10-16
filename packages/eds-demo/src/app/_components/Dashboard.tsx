@@ -7,6 +7,7 @@ import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
 import { Menu } from "@/app/_components/Menu";
+import { ActionButton } from "./ActionButton";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -26,7 +27,8 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
       {...rest}
     >
       <TopBar
-        className={`self-stretch h-[57px] pl-2.5 pr-3.5 items-center justify-between gap-14 inline-flex ${styles["top-bar"]}`}
+        data-padding="xs"
+        className={`self-stretch h-[57px] items-center justify-between gap-14 inline-flex ${styles["top-bar"]}`}
         subtitle="Application name – Subtitle"
         subtitleClass={styles["subtitle"]}
         textInputClass={styles["text-input"]}
@@ -48,7 +50,10 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           menuItemActiveClassName={styles["menu-item--active"]}
         />
 
-        <main className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">
+        <main
+          data-padding="md"
+          className="inline-flex flex-col items-start self-stretch justify-start gap-6 grow shrink basis-0"
+        >
           <TabBar
             className="justify-start items-start flex"
             tabs={tabs}
@@ -56,7 +61,10 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             currentTabClass={styles["tab--current"]}
           />
 
-          <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
+          <header
+            data-padding-block="xs"
+            className="self-stretch h-9 flex-col justify-start items-start flex"
+          >
             <h1 className={`text-2xl leading-7 heading ${styles.heading}`}>
               People
             </h1>
@@ -78,7 +86,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             chipSuccessClass={styles["chip--success"]}
           />
           <ButtonGroup
-            className="inline-flex items-center self-stretch justify-end h-9"
+            className="inline-flex items-center self-stretch justify-end"
             // 💰 Add the data-color-appearance attribute to add colour
             data-color-appearance="accent"
           >
@@ -86,12 +94,10 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
               className={styles["button--primary"]}
               icon={
                 <svg
+                  className="selectable-icon"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="w-6 h-6"
                 >
                   <path
                     fillRule="evenodd"
@@ -107,6 +113,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             <SecondaryButton className={styles["button--secondary"]}>
               Cancel
             </SecondaryButton>
+            <ActionButton>Hri</ActionButton>
           </ButtonGroup>
         </main>
       </div>
