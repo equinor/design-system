@@ -1,20 +1,17 @@
 # Accessibility
 
-All digital interfaces should be inclusive and accessible for everyone---regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.
+All digital interfaces should be inclusive and accessible for everyone, regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.
 
-The UI components for all Equinor's internal digital interfaces are built to meet the  and  AA level requirements. While the components built are accessible, as a customer of the EDS there are things you need to remember when creating layouts and prototypes, and combining components
+The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [uutilsynet](https://www.uutilsynet.no/) AA level requirements. While the components built are accessible, as a customer of the EDS there are things you need to remember when creating layouts and prototypes, and combining components
 
 ## What is accessibility?
 
 Accessibility ensures that users of different abilities can understand, navigate, interact with and contribute to the digital interface in a meaningful way. This means:
 
--   Keyboard interaction alternatives for all mouse-based actions are provided.
-    
--   All button and input fields are properly identified.
-    
--   Images, SVGs and videos have text-based alternatives.
-    
--   All components are built to convey their identity, operation model and state to assistive technologies.
+-   Keyboard interaction alternatives for all mouse-based actions are provided
+-   All button and input fields are properly identified 
+-   Images, SVGs and videos have text-based alternatives
+-   All components are built to convey their identity, operation model and state to assistive technologies
     
 
 ## What are different abilities
@@ -22,31 +19,21 @@ Accessibility ensures that users of different abilities can understand, navigate
 There are many different types of abilities that need consideration:
 
 -   Age
-    
 -   Blindness
-    
 -   Low vision
-    
 -   Colour-blindness
-    
 -   Hearing disabilities
-    
 -   Physical disabilities
-    
 -   Cognitive disabilities
-    
 -   Situational disabilities (such as a broken arm)
     
 
 There are also different types of situations that need consideration:
 
 -   Physical location
-    
 -   Limited screen size
-    
 -   Lighting issues
     
-
 ## Guidelines
 
 ### Spacing
@@ -71,13 +58,12 @@ Remember that text can be both visible and invisible `alt text`. Make sure all 
 
 ### Call to actions
 
-Provide descriptive labels---action verbs are good.
+Provide descriptive labels, action verbs are good.
 
-Here is an example:
-
-Acceptable: **See all platforms** _Indicates what will happen_
-
+:::tip Here is an example
+Acceptable: **See all platforms** _Indicates what will happen_  
 Not acceptable: **All platforms** _Does not indicate what will happen_
+:::
 
 If a button's text says "See all platforms", make sure you send the user to a page with all platforms. Be consistent with how you use verbs and which terms you use.
 
@@ -97,16 +83,24 @@ If you need to use additional colours for domain-specific requirements, charts o
 
 ### Navigation Order
 
-Place components on the page in order of importance---the order in which the element receives focus should be logical and predictable. Try to keep navigation to a minimum of steps and make all steps clear.
+Place components on the page in order of importance, the order in which the element receives focus should be logical and predictable. Try to keep navigation to a minimum of steps and make all steps clear.
 
 Try navigating your own solution by only using a keyboard. Can you navigate? Can you perform all the important tasks? Can you tell where the keyboard focus is? Do your items follow the order you think? Generally, focus travels up to down, left to right. Test it out by using your `tab` key.
 
 ### Validating your work
 
-The EDS is only a foundation for accessible design and development. Accessibility is the responsibility of the entire team---designers and developers have specific responsibilities listed in the related sections.
+The EDS is only a foundation for accessible design and development. Accessibility is the responsibility of the entire team, designers and developers have specific responsibilities listed in the related sections.
 
-Please familiarise yourself with the guidelines from  and  to verify your interfaces meet the AA level requirements.
+Please familiarise yourself with the guidelines from [WCAG 2.1][WCAG] and [Difi](https://www.digdir.no/) to verify your interfaces meet the AA level requirements.
 
 #### Tools and resources
 
 Here are some resources to help validate your work:
+
+[WebAIM](https://webaim.org/)  
+
+[Are my colours accessible?](https://aremycolorsaccessible.com/)  
+
+[The A11Y Project](https://a11yproject.com/)  
+
+[WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"  
