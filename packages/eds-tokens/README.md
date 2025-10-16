@@ -2,6 +2,9 @@
 
 [Design tokens] used in the <abbr title="Equinor Design System">EDS</abbr>, including colors, spacing, typography, and more. These tokens are synchronized with Figma variables and provide a single source of truth for design decisions across the design system.
 
+
+> For <abbr title="Large Language Model">LLM</abbr> instructions on using colors, see the [instructions/colors.md](./instructions/colors.md), or jump directly to the [static](./instructions/colors-static.md) or [dynamic](./instructions/colors-dynamic.md) instructions.
+
 ## Installation
 
 ```sh
@@ -89,6 +92,41 @@ import * as spaciousSpacing from '@equinor/eds-tokens/js/spacing/spacious'
 // Use the values (numbers in pixels)
 const padding = comfortableSpacing.SPACING_INLINE_MD
 const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
+```
+
+### Importing variables as JSON
+
+The variables are available in two formats:
+
+* **Flat format** (`/flat/`) -- Simple key-value pairs for easy access
+* **Nested format** (`/nested/`) -- Hierarchical structure matching the token naming
+
+* The semantic color tokens are available for light and dark color schemes.
+
+* `light-semantic.json` / `dark-semantic.json` -- Semantic color tokens for each color scheme
+
+#### Flat Format
+
+```typescript
+// Import flat format tokens
+import lightSemanticFlat from '@equinor/eds-tokens/json/color/color-scheme/flat/light-semantic.json'
+import darkSemanticFlat from '@equinor/eds-tokens/json/color/color-scheme/flat/dark-semantic.json'
+
+// Access values directly
+const lightSurface = lightSemanticFlat['bg-neutral-surface'] // "#ffffff"
+const darkSurface = darkSemanticFlat['bg-neutral-surface'] // "#262626"
+```
+
+#### Nested Format
+
+```typescript
+// Import nested format tokens
+import lightSemanticNested from '@equinor/eds-tokens/json/color/color-scheme/nested/light-semantic.json'
+import darkSemanticNested from '@equinor/eds-tokens/json/color/color-scheme/nested/dark-semantic.json'
+
+// Access values via hierarchical structure
+const lightSurface = lightSemanticNested.bg.neutral.surface // "#ffffff"
+const darkSurface = darkSemanticNested.bg.neutral.surface // "#262626"
 ```
 
 ### Available Token Categories
