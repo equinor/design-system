@@ -130,6 +130,8 @@ For breaking changes, add an exclamation mark before the colon:
 ✅ `feat!: remove deprecated button props`
 ✅ `refactor(eds-core-react)!: change component API`
 
+_This ensures that Release Please will mark the next release as a major release._
+
 ## Enforcement
 
 - The GitHub Action runs automatically when you open, edit, or update a PR

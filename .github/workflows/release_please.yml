@@ -1,0 +1,72 @@
+# Release Please Workflow
+#
+# This workflow automates the release process by:
+# 1. Analyzing conventional commits since the last release
+# 2. Determining appropriate version bumps (major/minor/patch)
+# 3. Creating/updating a release PR with version bumps and CHANGELOGs
+# 4. Triggering automated npm publishing when the release PR is merged (trigger_publish.yml)
+#
+# Note: Release-please creates/updates ONE release PR that accumulates changes.
+# It does NOT create a release on every push - releases only happen when you merge the PR.
+
+name: Release Please
+
+# Trigger: Run on every push to develop branch
+# This keeps the release PR up-to-date with latest changes
+on:
+  push:
+    branches:
+      - develop
+
+# Permissions required for release-please to function
+permissions:
+  contents: write # Needed to: create releases, update files, create tags
+  pull-requests: write # Needed to: create and update release PRs
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+
+    # Expose outputs to make them available for other workflows
+    # These outputs can be used by downstream jobs or workflows (like trigger-publish.yml)
+    # Each package gets two outputs: whether it was released and what tag was created
+    outputs:
+      # Global: true if ANY package was released
+      releases_created: ${{ steps.release.outputs.releases_created }}
+
+      # Per-package outputs for conditional logic in downstream workflows
+      eds-core-react--release_created: ${{ steps.release.outputs['packages/eds-core-react--release_created'] }}
+      eds-core-react--tag_name: ${{ steps.release.outputs['packages/eds-core-react--tag_name'] }}
+      eds-data-grid-react--release_created: ${{ steps.release.outputs['packages/eds-data-grid-react--release_created'] }}
+      eds-data-grid-react--tag_name: ${{ steps.release.outputs['packages/eds-data-grid-react--tag_name'] }}
+      eds-icons--release_created: ${{ steps.release.outputs['packages/eds-icons--release_created'] }}
+      eds-icons--tag_name: ${{ steps.release.outputs['packages/eds-icons--tag_name'] }}
+      eds-lab-react--release_created: ${{ steps.release.outputs['packages/eds-lab-react--release_created'] }}
+      eds-lab-react--tag_name: ${{ steps.release.outputs['packages/eds-lab-react--tag_name'] }}
+      eds-tokens--release_created: ${{ steps.release.outputs['packages/eds-tokens--release_created'] }}
+      eds-tokens--tag_name: ${{ steps.release.outputs['packages/eds-tokens--tag_name'] }}
+      eds-utils--release_created: ${{ steps.release.outputs['packages/eds-utils--release_created'] }}
+      eds-utils--tag_name: ${{ steps.release.outputs['packages/eds-utils--tag_name'] }}
+
+    steps:
+      # Main step: Run the release-please action
+      # This does the heavy lifting of analyzing commits and managing releases
+      - uses: googleapis/release-please-action@v4
+        id: release # ID used to reference outputs in later steps
+        with:
+          # Configuration files that define release behavior
+          config-file: .github/release-please-config.json # How to handle releases (version bumping, changelog format, etc.)
+          manifest-file: .github/release-please-manifest.json # Tracks current version of each package. This is updated automatically by release-please.
+
+          # GitHub token for authentication
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Debug step: Log all outputs when releases are actually created
+      # Only runs when release PR is merged and releases are created
+      # Useful for debugging and understanding what release-please did
+      - name: Print release outputs for debugging
+        if: ${{ steps.release.outputs.releases_created }}
+        run: |
+          echo "$RELEASE_OUTPUTS"
+        env:
+          RELEASE_OUTPUTS: ${{ toJson(steps.release.outputs) }}
