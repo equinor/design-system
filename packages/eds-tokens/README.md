@@ -69,14 +69,14 @@ import * as lightSemantic from '@equinor/eds-tokens/js/color/color-scheme/light-
 import * as darkSemantic from '@equinor/eds-tokens/js/color/color-scheme/dark-semantic'
 
 // Use semantic tokens with light/dark values
-const lightSurface = lightSemantic.BG_NEUTRAL_SURFACE // "#ffffff"
-const darkSurface = darkSemantic.BG_NEUTRAL_SURFACE // "#202223"
+const lightSurface = lightSemantic.BG_NEUTRAL_SURFACE
+const darkSurface = darkSemantic.BG_NEUTRAL_SURFACE
 
-const lightAccent = lightSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT // "#206f77"
-const darkAccent = darkSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT // "#206f77"
+const lightAccent = lightSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT
+const darkAccent = darkSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT
 
-const lightBorder = lightSemantic.BORDER_INFO_MEDIUM // "#6fb6e9"
-const darkBorder = darkSemantic.BORDER_INFO_MEDIUM // "#5c9fc9"
+const lightBorder = lightSemantic.BORDER_INFO_MEDIUM
+const darkBorder = darkSemantic.BORDER_INFO_MEDIUM
 ```
 
 #### Spacing Tokens
@@ -85,11 +85,10 @@ const darkBorder = darkSemantic.BORDER_INFO_MEDIUM // "#5c9fc9"
 // Import spacing values for different density modes
 import * as comfortableSpacing from '@equinor/eds-tokens/js/spacing/comfortable'
 import * as spaciousSpacing from '@equinor/eds-tokens/js/spacing/spacious'
-import * as primitiveSpacing from '@equinor/eds-tokens/js/spacing/primitives'
 
 // Use the values (numbers in pixels)
-const padding = comfortableSpacing.SPACING_INLINE_MD // 12
-const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED // 3
+const padding = comfortableSpacing.SPACING_INLINE_MD
+const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
 ```
 
 ### Available Token Categories
