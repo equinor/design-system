@@ -20,12 +20,12 @@ Static variable names follow this pattern:
 --eds-color-[role]-[semantic category]-[priority]-[state]
 ```
 
-**Example variable names:**
+> **Note:** The `[state]` suffix (e.g., `-default`, `-hover`, `-active`) is only present for certain roles, such as background fill. For text and border variables, the state is typically omitted.
 
-- `--eds-color-bg-accent-fill-emphasis` -- Accent semantic category
-- `--eds-color-bg-neutral-fill-muted` -- Neutral semantic category
-- `--eds-color-border-danger-medium` -- Danger semantic category
-- `--eds-color-text-success-strong` -- Success semantic category
+- `--eds-color-bg-accent-fill-emphasis-default` -- Accent semantic category (background fill, with default state)
+- `--eds-color-bg-neutral-fill-muted-default` -- Neutral semantic category (background fill, with default state)
+- `--eds-color-border-danger-medium` -- Danger semantic category (border, no state)
+- `--eds-color-text-success-strong` -- Success semantic category (text, no state)
 
 ## CSS Variables
 
