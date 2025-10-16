@@ -1,0 +1,158 @@
+{
+  "Bg": {
+    "Neutral": {
+      "Canvas": "#f5f5f5",
+      "Surface": "#ffffff",
+      "Fill Muted": {
+        "Default": "#e1e1e1",
+        "Hover": "#d4d4d4",
+        "Active": "#c4c4c4"
+      },
+      "Fill Emphasis": {
+        "Default": "#636363",
+        "Hover": "#525252",
+        "Active": "#4d4d4d"
+      }
+    },
+    "Accent": {
+      "Canvas": "#eaf8fa",
+      "Surface": "#f6ffff",
+      "Fill Muted": {
+        "Default": "#cfe7e9",
+        "Hover": "#bbdbdf",
+        "Active": "#a2cdd2"
+      },
+      "Fill Emphasis": {
+        "Default": "#206f77",
+        "Hover": "#205c62",
+        "Active": "#20565c"
+      }
+    },
+    "Success": {
+      "Canvas": "#eafbe8",
+      "Surface": "#f6fff5",
+      "Fill Muted": {
+        "Default": "#cfeacc",
+        "Hover": "#bbe0b8",
+        "Active": "#a2d49e"
+      },
+      "Fill Emphasis": {
+        "Default": "#207720",
+        "Hover": "#20621f",
+        "Active": "#215c1f"
+      }
+    },
+    "Info": {
+      "Canvas": "#e7f8ff",
+      "Surface": "#f4ffff",
+      "Fill Muted": {
+        "Default": "#cae6fa",
+        "Hover": "#b5daf5",
+        "Active": "#99cbf0"
+      },
+      "Fill Emphasis": {
+        "Default": "#006aa0",
+        "Hover": "#085883",
+        "Active": "#0e5279"
+      }
+    },
+    "Warning": {
+      "Canvas": "#fff1e2",
+      "Surface": "#fffcf0",
+      "Fill Muted": {
+        "Default": "#fbdac1",
+        "Hover": "#f6caaa",
+        "Active": "#f0b689"
+      },
+      "Fill Emphasis": {
+        "Default": "#9b4900",
+        "Hover": "#813e00",
+        "Active": "#773a00"
+      }
+    },
+    "Danger": {
+      "Canvas": "#ffecea",
+      "Surface": "#fff9f8",
+      "Fill Muted": {
+        "Default": "#ffd0ce",
+        "Hover": "#ffbcba",
+        "Active": "#ffa3a1"
+      },
+      "Fill Emphasis": {
+        "Default": "#bc002a",
+        "Hover": "#9a1026",
+        "Active": "#8e1525"
+      }
+    }
+  },
+  "Border": {
+    "Neutral": {
+      "Subtle": "#d4d4d4",
+      "Medium": "#aeaeae",
+      "Strong": "#696969"
+    },
+    "Accent": {
+      "Subtle": "#bbdbdf",
+      "Medium": "#7cbac1",
+      "Strong": "#21767e"
+    },
+    "Success": {
+      "Subtle": "#bbe0b8",
+      "Medium": "#7cc278",
+      "Strong": "#227e22"
+    },
+    "Info": {
+      "Subtle": "#b5daf5",
+      "Medium": "#6fb6e9",
+      "Strong": "#0070a9"
+    },
+    "Warning": {
+      "Subtle": "#f6caaa",
+      "Medium": "#e89959",
+      "Strong": "#a34e00"
+    },
+    "Danger": {
+      "Subtle": "#ffbcba",
+      "Medium": "#ff7a7c",
+      "Strong": "#c6002d"
+    }
+  },
+  "Text": {
+    "Neutral": {
+      "Subtle": "#585858",
+      "Strong": "#1d1d1d",
+      "Subtle on emphasis": "#dedede",
+      "Strong on emphasis": "#ffffff"
+    },
+    "Accent": {
+      "Subtle": "#1f6369",
+      "Strong": "#141f20",
+      "Subtle on emphasis": "#cae4e7",
+      "Strong on emphasis": "#ffffff"
+    },
+    "Success": {
+      "Subtle": "#20691f",
+      "Strong": "#142114",
+      "Subtle on emphasis": "#cae8c7",
+      "Strong on emphasis": "#ffffff"
+    },
+    "Info": {
+      "Subtle": "#015e8d",
+      "Strong": "#121e27",
+      "Subtle on emphasis": "#c5e3f9",
+      "Strong on emphasis": "#ffffff"
+    },
+    "Warning": {
+      "Subtle": "#8a4100",
+      "Strong": "#27190e",
+      "Subtle on emphasis": "#fad6bc",
+      "Strong on emphasis": "#ffffff"
+    },
+    "Danger": {
+      "Subtle": "#a50827",
+      "Strong": "#2e1414",
+      "Subtle on emphasis": "#ffcbc9",
+      "Strong on emphasis": "#ffffff"
+    }
+  }
+}

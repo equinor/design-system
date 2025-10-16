@@ -1,0 +1,96 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-color-scheme="light"] {
+  --eds-color-bg-neutral-canvas: #f5f5f5;
+  --eds-color-bg-neutral-surface: #ffffff;
+  --eds-color-bg-neutral-fill-muted-default: #e1e1e1;
+  --eds-color-bg-neutral-fill-muted-hover: #d4d4d4;
+  --eds-color-bg-neutral-fill-muted-active: #c4c4c4;
+  --eds-color-bg-neutral-fill-emphasis-default: #636363;
+  --eds-color-bg-neutral-fill-emphasis-hover: #525252;
+  --eds-color-bg-neutral-fill-emphasis-active: #4d4d4d;
+  --eds-color-bg-accent-canvas: #eaf8fa;
+  --eds-color-bg-accent-surface: #f6ffff;
+  --eds-color-bg-accent-fill-muted-default: #cfe7e9;
+  --eds-color-bg-accent-fill-muted-hover: #bbdbdf;
+  --eds-color-bg-accent-fill-muted-active: #a2cdd2;
+  --eds-color-bg-accent-fill-emphasis-default: #206f77;
+  --eds-color-bg-accent-fill-emphasis-hover: #205c62;
+  --eds-color-bg-accent-fill-emphasis-active: #20565c;
+  --eds-color-bg-success-canvas: #eafbe8;
+  --eds-color-bg-success-surface: #f6fff5;
+  --eds-color-bg-success-fill-muted-default: #cfeacc;
+  --eds-color-bg-success-fill-muted-hover: #bbe0b8;
+  --eds-color-bg-success-fill-muted-active: #a2d49e;
+  --eds-color-bg-success-fill-emphasis-default: #207720;
+  --eds-color-bg-success-fill-emphasis-hover: #20621f;
+  --eds-color-bg-success-fill-emphasis-active: #215c1f;
+  --eds-color-bg-info-canvas: #e7f8ff;
+  --eds-color-bg-info-surface: #f4ffff;
+  --eds-color-bg-info-fill-muted-default: #cae6fa;
+  --eds-color-bg-info-fill-muted-hover: #b5daf5;
+  --eds-color-bg-info-fill-muted-active: #99cbf0;
+  --eds-color-bg-info-fill-emphasis-default: #006aa0;
+  --eds-color-bg-info-fill-emphasis-hover: #085883;
+  --eds-color-bg-info-fill-emphasis-active: #0e5279;
+  --eds-color-bg-warning-canvas: #fff1e2;
+  --eds-color-bg-warning-surface: #fffcf0;
+  --eds-color-bg-warning-fill-muted-default: #fbdac1;
+  --eds-color-bg-warning-fill-muted-hover: #f6caaa;
+  --eds-color-bg-warning-fill-muted-active: #f0b689;
+  --eds-color-bg-warning-fill-emphasis-default: #9b4900;
+  --eds-color-bg-warning-fill-emphasis-hover: #813e00;
+  --eds-color-bg-warning-fill-emphasis-active: #773a00;
+  --eds-color-bg-danger-canvas: #ffecea;
+  --eds-color-bg-danger-surface: #fff9f8;
+  --eds-color-bg-danger-fill-muted-default: #ffd0ce;
+  --eds-color-bg-danger-fill-muted-hover: #ffbcba;
+  --eds-color-bg-danger-fill-muted-active: #ffa3a1;
+  --eds-color-bg-danger-fill-emphasis-default: #bc002a;
+  --eds-color-bg-danger-fill-emphasis-hover: #9a1026;
+  --eds-color-bg-danger-fill-emphasis-active: #8e1525;
+  --eds-color-border-neutral-subtle: #d4d4d4;
+  --eds-color-border-neutral-medium: #aeaeae;
+  --eds-color-border-neutral-strong: #696969;
+  --eds-color-border-accent-subtle: #bbdbdf;
+  --eds-color-border-accent-medium: #7cbac1;
+  --eds-color-border-accent-strong: #21767e;
+  --eds-color-border-success-subtle: #bbe0b8;
+  --eds-color-border-success-medium: #7cc278;
+  --eds-color-border-success-strong: #227e22;
+  --eds-color-border-info-subtle: #b5daf5;
+  --eds-color-border-info-medium: #6fb6e9;
+  --eds-color-border-info-strong: #0070a9;
+  --eds-color-border-warning-subtle: #f6caaa;
+  --eds-color-border-warning-medium: #e89959;
+  --eds-color-border-warning-strong: #a34e00;
+  --eds-color-border-danger-subtle: #ffbcba;
+  --eds-color-border-danger-medium: #ff7a7c;
+  --eds-color-border-danger-strong: #c6002d;
+  --eds-color-text-neutral-subtle: #585858; /** Used for text and icons */
+  --eds-color-text-neutral-strong: #1d1d1d; /** Used for text and icons */
+  --eds-color-text-neutral-subtle-on-emphasis: #dedede; /** Text or icons against colored backgrounds */
+  --eds-color-text-neutral-strong-on-emphasis: #ffffff; /** Text or icons against colored backgrounds */
+  --eds-color-text-accent-subtle: #1f6369; /** Used for text and icons */
+  --eds-color-text-accent-strong: #141f20; /** Used for text and icons */
+  --eds-color-text-accent-subtle-on-emphasis: #cae4e7; /** Text or icons against colored backgrounds */
+  --eds-color-text-accent-strong-on-emphasis: #ffffff; /** Text or icons against colored backgrounds */
+  --eds-color-text-success-subtle: #20691f; /** Used for text and icons */
+  --eds-color-text-success-strong: #142114; /** Used for text and icons */
+  --eds-color-text-success-subtle-on-emphasis: #cae8c7; /** Text or icons against colored backgrounds */
+  --eds-color-text-success-strong-on-emphasis: #ffffff; /** Text or icons against colored backgrounds */
+  --eds-color-text-info-subtle: #015e8d; /** Used for text and icons */
+  --eds-color-text-info-strong: #121e27; /** Used for text and icons */
+  --eds-color-text-info-subtle-on-emphasis: #c5e3f9; /** Text or icons against colored backgrounds */
+  --eds-color-text-info-strong-on-emphasis: #ffffff; /** Text or icons against colored backgrounds */
+  --eds-color-text-warning-subtle: #8a4100; /** Used for text and icons */
+  --eds-color-text-warning-strong: #27190e; /** Used for text and icons */
+  --eds-color-text-warning-subtle-on-emphasis: #fad6bc; /** Text or icons against colored backgrounds */
+  --eds-color-text-warning-strong-on-emphasis: #ffffff; /** Text or icons against colored backgrounds */
+  --eds-color-text-danger-subtle: #a50827; /** Used for text and icons */
+  --eds-color-text-danger-strong: #2e1414; /** Used for text and icons */
+  --eds-color-text-danger-subtle-on-emphasis: #ffcbc9; /** Text or icons against colored backgrounds */
+  --eds-color-text-danger-strong-on-emphasis: #ffffff; /** Text or icons against colored backgrounds */
+}
