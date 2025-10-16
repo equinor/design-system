@@ -24,6 +24,14 @@ Install the EDS tokens package:
 pnpm install @equinor/eds-tokens
 ```
 
+### Tutorials
+
+We've made a set of tutorials explaining how to use the static and dynamic colour approaches:
+
+[Tutorial - Static](https://statoilsrm.sharepoint.com/:l:/r/sites/Designsystem/Lists/Foundations%20%20Colour%20%20Tutorial%20%20Static%20%20Code?e=4czX9H)
+
+[Tutorial - Dynamic](https://statoilsrm.sharepoint.com/:l:/r/sites/Designsystem/Lists/Foundations%20%20Colour%20%20Tutorial%20%20Static%20%20Design?e=j1CqWz)
+
 ### Static Approach
 
 Import the static variables:
@@ -106,23 +114,30 @@ Then use classes instead of data attributes:
 
 ## For Designers
 
-You can use the EDS colour system in Figma with either **static** or **dynamic** variables. Both options are available as shared libraries, just make sure you and your developers agree on which approach to use. 
+You can use the EDS colour system in Figma with either **static** or **dynamic** variables. Both options are available as shared libraries, just make sure you and your developers agree on which approach to use.
 
+### Tutorials
+
+We've made a set of tutorials explaining how to use the static and dynamic colour libraries in Figma:
+
+[Tutorial - Static library in Figma](https://statoilsrm.sharepoint.com/:l:/r/sites/Designsystem/Lists/EDS%20Colours%20%20Design?e=ro9l1d)
+
+[Tutorial - Dynamic library in Figma](https://statoilsrm.sharepoint.com/:l:/r/sites/Designsystem/Lists/Colour%20tutorial%20%20Dynamic%20%20Design?e=1QAf2t)
 
 ### Static Approach
-
 
 Add the **EDS Colours (static)** library to your Figma file to use static variables. These are organised by category, so you can easily pick the colour you need. The static approach lets you choose from all colours, selecting the exact shade you want for each element.
 
 #### Example: Primary button (static)
+
 1. Select your button in Figma.
 2. Apply these variables:
-  - Background: `Bg/Accent/Fill Emphasis/Default`
-  - Text: `Text/Accent/Strong on Emphasis`
+
+- Background: `Bg/Accent/Fill Emphasis/Default`
+- Text: `Text/Accent/Strong on Emphasis`
 
 <img src="/img/primary-button-bg.png" alt="Primary button colours" width="600" />
 <p class="image-caption">The primary button uses Bg/Accent/Fill Emphasis/Default for its background and Text/Accent/Strong on Emphasis for its text colour.</p>
-
 
 ### Dynamic Approach
 
@@ -130,15 +145,13 @@ Add the **EDS Colours (dynamic)** library to your Figma file to access dynamic v
 In the dynamic library, you only see **roles** such as Background, Text, and Border.  
 You apply these first, then choose the **appearance** (the colour category) using **modes** in the **Appearance panel**. With the dynamic approach, you focus on contrast first, then select the colour or appearance that fits your context.
 
-
 #### Example: Primary button (dynamic)
-
-
 
 1. Select your button in Figma.
 2. Apply these variables:
-  - Background: `Bg/Fill/Emphasis`
-  - Text: `Text/Strong on Emphasis`
+
+- Background: `Bg/Fill/Emphasis`
+- Text: `Text/Strong on Emphasis`
 
 <img src="/img/primary-button-bg-dynamic.png" alt="Primary button colours" width="600" />
 <p class="image-caption">The primary button uses Bg/Fill/Emphasis for its background and Text/Strong on Emphasis for its text colour.</p>
@@ -146,8 +159,8 @@ You apply these first, then choose the **appearance** (the colour category) usin
 
 You can change the button’s appearance at any time without updating the roles.
 
-
 #### To change appearance:
+
 1. Select the button.
 2. In the Variables panel, open the Appearance dropdown.
 3. Choose Neutral, Accent, Info, Success, Warning, or Danger.
@@ -155,14 +168,7 @@ You can change the button’s appearance at any time without updating the roles.
 <img src="/img/primary-button-appearance.png" alt="Primary button appearance dropdown" width="600" />
 <p class="image-caption">Change the appearance using the dropdown in the Variables panel.</p>
 
-
 ### Light and Dark Colour Scheme
 
 Both the static and dynamic libraries support **light** and **dark** modes.  
 Switch between them in the **Variables panel**, and your design updates automatically with the correct colour values and contrast.
-
-
-
-
-
-
