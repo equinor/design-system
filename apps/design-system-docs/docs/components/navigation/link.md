@@ -16,8 +16,8 @@ Links are underlined and should always be in an `Interactive` colour.
 
 ### Content
 
-- Keep link text as short as possible.
-- If possible, avoid terms like **Click here** or **Read more**--instead, use meaningful labels that explain the destination.
+- Keep link text as short as possible
+- If possible, avoid terms like **Click here** or **Read more**--instead, use meaningful labels that explain the destination
 
 ## Accessibility
 

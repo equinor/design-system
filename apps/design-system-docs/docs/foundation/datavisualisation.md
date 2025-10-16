@@ -1,10 +1,9 @@
 # Data Visualisation
-
 A graphical presentation of information in a way that makes it easier to understand and process. It is usually interactive and allows for the user to draw their own conclusions about the data.
 
 ## Infographics
 
-An infographic is very similar to a data visualisation since it too is a graphical presentation of information that is presented in a way that is easy to digest and understand. Infographics are more subjective though by telling a complete and premeditated story which guides the user to a particular conclusion. Refer to the Equinor  for guidelines on creating infographics.
+An infographic is very similar to a data visualisation since it too is a graphical presentation of information that is presented in a way that is easy to digest and understand. Infographics are more subjective though by telling a complete and premeditated story which guides the user to a particular conclusion. Refer to the [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) for guidelines on creating infographics.
 
 ## Dashboards
 
@@ -14,23 +13,15 @@ A dashboard is a combination of data visualisations arranged on a screen which c
 
 Data accuracy is the top priority. Data must be displayed correctly and in a way that does not mislead the user.
 
--   Be careful how missing, null and zero data are displayed.
-    
--   Use visual techniques to effectively highlight and draw the user’s attention to the most important data.
-    
--   Focus on presenting the information needed in the most simple and clear way.
-    
--   Provide adequate context in the form of labels, data values or units to aide in interpretation of the data.
-    
+-   Be careful how missing, null and zero data are displayed
+-   Use visual techniques to effectively highlight and draw the user’s attention to the most important data
+-   Focus on presenting the information needed in the most simple and clear way
+-   Provide adequate context in the form of labels, data values or units to aide in interpretation of the data
 -   Add supplemental data when necessary to provide the correct context to understand the data. Examples are targets, trends, budgets, YTD, averages, etc.
-    
--   Enable users to drill-down with context to perform further analysis away from the dashboard.
-    
--   Sort data for easier comparisons.
-    
--   Minimise use of decimals where they are not relevant or don’t add value.
-    
--   Take time to understand the data and data formatting so that visuals can be created accordingly with regards to spacing, text/numbers lengths, legends and colouring.
+-   Enable users to drill-down with context to perform further analysis away from the dashboard
+-   Sort data for easier comparisons
+-   Minimise use of decimals where they are not relevant or don’t add value
+-   Take time to understand the data and data formatting so that visuals can be created accordingly with regards to spacing, text/numbers lengths, legends and colouring
     
 
 ### Layout
@@ -39,23 +30,19 @@ To help draw the user's attention to the most important information, the informa
 
 Put thought into how the information is grouped on the dashboard based on the relationships of the data and the desired flow for the user. Keep in mind that users naturally assume that elements located near each other are related. They will also perceive that elements that visually look similar (size, shape, colour) are related even if they are not located near each other.
 
--   Use the Equinor typeface when possible, otherwise use Arial.
-    
--   Use a screen size ratio of 16:9.
-    
--   The dashboard should be confined to a single screen without scrolling.
-    
--   Distribute content evenly over the width and height of the dashboard. This enables the user to see the whole picture at once.
-    
--   There should always be an overall dashboard title located at the top.
-    
--   Tabs can be used to guide the user to relevant views or pages. These should placed at the top, and no more than six should be used.
-    
--   Use whitespace to help group information and to declutter the page.
-    
-    -   For example, add 16px margin around the entire dashboard, 16px padding around content in a visual and 12-16px between visualisations.
-        
--   Global filters should be grouped and placed together either on the top, left or right side of the dashboard. Filters applying to single visualisations should be placed close to the visualisation in which they apply to. Keep all filters and navigation in the same location throughout the dashboard.
+-   Use the Equinor typeface when possible, otherwise use Arial
+-   Use a screen size ratio of 16:9
+-   The dashboard should be confined to a single screen without scrolling
+-   Distribute content evenly over the width and height of the dashboard. This enables the user to see the whole picture at once
+-   There should always be an overall dashboard title located at the top
+-   Tabs can be used to guide the user to relevant views or pages. These should placed at the top, and no more than six should be used
+-   Use whitespace to help group information and to declutter the page
+
+:::tip For example
+Add 16px margin around the entire dashboard, 16px padding around content in a visual and 12-16px between visualisations.
+:::  
+
+Global filters should be grouped and placed together either on the top, left or right side of the dashboard. Filters applying to single visualisations should be placed close to the visualisation in which they apply to. Keep all filters and navigation in the same location throughout the dashboard.
     
 
 ### Colour
@@ -64,42 +51,29 @@ When colour is used appropriately, it can draw the user’s attention to somethi
 
 It is not recommended to rely on colour alone, since some users can have trouble distinguishing certain colours (colour blindness).
 
--   Follow the  given by the EDS.
-    
--   Keep bright and saturated colours to a minimum, only using them to highlight data requiring attention.
-    
--   Make sure that colours used on a dashboard consist of one palette of colours, do not mix from different palettes.
-    
--   Visuals can have a white or light background colour but use a non-white background colour for the overall dashboard.
-    
+-   Follow the [Colour guidelines](../foundation/accessibility.md#colour) given by the EDS
+-   Keep bright and saturated colours to a minimum, only using them to highlight data requiring attention
+-   Make sure that colours used on a dashboard consist of one palette of colours, do not mix from different palettes
+-   Visuals can have a white or light background colour but use a non-white background colour for the overall dashboard
 -   Be aware that changes in data can occur after the initial creation of a visual, and that this might affect colouring.
     
-
 ### Data visualisation types
 
 It is important to understand the different types of visuals available in order to choose the right visual for the intended purpose.
 
 Visualisations should include the data and context necessary to communicate the intended information in a clear and effective way.
 
--   Be consistent with labelling and data formatting. Always label axes, show units and add a title.
+-   Be consistent with labelling and data formatting. Always label axes, show units and add a title
+-   Be aware of the scaling used and that it conveys the data correctly
+-   The vertical (y-axis) for a bar chart should usually start at zero. The starting point in other chart types should be reasonable for the data
+-   Avoid 3D, background images, animations or other unnecessary effects that reduce comprehension
+-   Ensure the user is not being misled. For example, parts of a whole should always add up to 100
+-   Use visual cues like arrows, colour or text to help users interpret the data
+-   Enhance the data pixels and reduce unnecessary non-data pixels (gridlines, borders, certain fill colours, etc.)
+-   Add a means for the user to interact with the data such as filters, slicers, sorting and drill-down possibilities
+-   Avoid pie and donut charts as they can be misleading and difficult to interpret
     
--   Be aware of the scaling used and that it conveys the data correctly.
-    
--   The vertical (y-axis) for a bar chart should usually start at zero. The starting point in other chart types should be reasonable for the data.
-    
--   Avoid 3D, background images, animations or other unnecessary effects that reduce comprehension.
-    
--   Ensure the user is not being misled. For example, parts of a whole should always add up to 100.
-    
--   Use visual cues like arrows, colour or text to help users interpret the data.
-    
--   Enhance the data pixels and reduce unnecessary non-data pixels (gridlines, borders, certain fill colours, etc).
-    
--   Add a means for the user to interact with the data such as filters, slicers, sorting and drill-down possibilities.
-    
--   Avoid pie and donut charts as they can be misleading and difficult to interpret.
-    
-
-## Recommended further reading
-
-Explore the books, blogs and articles written by data visualisation experts: Edward R. Tufte, Colin Ware, Wayne W. Eckerson, Stephen Few and Albert Cairo.
+:::info Recommended further reading
+Explore the books, blogs and articles written by data visualisation experts:  
+Edward R. Tufte, Colin Ware, Wayne W. Eckerson, Stephen Few and Albert Cairo.
+:::

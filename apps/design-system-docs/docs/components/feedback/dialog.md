@@ -30,8 +30,8 @@ Closes the dialog when clicking outside the dialog or pressing the `Esc` key.
 
 #### Text + action
 
-- A dialog can have one or two actions, but never a third.
-- Actions should always be related to the message.
+- A dialog can have one or two actions, but never a third
+- Actions should always be related to the message
 
 ![dialog-text](../assets/dialog-text-action.jpg)
 

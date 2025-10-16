@@ -10,12 +10,12 @@ When a task is more advanced or complicated, visual help from a stepper lets the
 
 ## Guidelines
 
-- Avoid titles that are too long. Titles should be to the point and short, no more than three words if possible.
-- Keep the item labels as short as possible.
-- Use meaningful item labels that explain the function.
-- Item labels should be in the active tense.
-- Do not mix nouns and verbs. Pick one or the other.
-- Always use icons that clearly communicate their intended purpose.
+- Avoid titles that are too long. Titles should be to the point and short, no more than three words if possible
+- Keep the item labels as short as possible
+- Use meaningful item labels that explain the function
+- Item labels should be in the active tense
+- Do not mix nouns and verbs. Pick one or the other
+- Always use icons that clearly communicate their intended purpose
 
 ## Implementation in Figma
 

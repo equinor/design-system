@@ -67,10 +67,10 @@ The cell row can have icons, text, links, inputs, numbers, monospaced numbers an
 
 Colour usage:
 
-- `Text+static icons/Default` for icons that are not interactive.
-- `Interactive Primary/Resting` for icons that are interactive, like checkboxes.
-- `Interactive/Disabled/Text` for disabled state and icons that are not interactive.
-- `Interactive/Disabled/Fill` for disabled state and icons that are interactive, like checkboxes.
+- `Text+static icons/Default` for icons that are not interactive
+- `Interactive Primary/Resting` for icons that are interactive, like checkboxes
+- `Interactive/Disabled/Text` for disabled state and icons that are not interactive
+- `Interactive/Disabled/Fill` for disabled state and icons that are interactive, like checkboxes
 
 If a cell input is used in a column made out of `cell numeric monospaced` components, the text should be aligned to the right to match the alignment of the other cells in the column.
 
