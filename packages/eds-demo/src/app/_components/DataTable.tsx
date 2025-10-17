@@ -7,6 +7,7 @@ import { ChipProps } from "./ChipProps";
 type Props = {
   className?: string;
   thClass: string;
+  trClass: string;
   activeThClass?: string;
   tdClass: string;
   trActiveClass: string;
@@ -23,6 +24,7 @@ type Props = {
 export const DataTable = ({
   className,
   thClass,
+  trClass,
   activeThClass,
   tdClass,
   trActiveClass,
@@ -63,8 +65,7 @@ export const DataTable = ({
             <th
               data-debug
               key={column.id}
-              className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left text-sm leading-tight grow shrink basis-0`}
-              data-color-appearance={column.active ? "accent" : undefined}
+              className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left text-sm leading-tight grow shrink basis-0 cursor-pointer`}
             >
               {idx === 0 ? (
                 <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
@@ -83,13 +84,13 @@ export const DataTable = ({
         {tableData.map((row) => (
           <tr
             key={`row-${row.id}`}
-            className={`${row.active ? trActiveClass : ""}`}
+            className={`${trClass} ${row.active ? trActiveClass : ""}`}
           >
             {columns.map((column) => (
               <td
                 data-debug
                 key={`${row.id}-${column.id}`}
-                className={`${tdClass} px-4 py-1 text-sm leading-tight grow shrink basis-0`}
+                className={`${tdClass} px-4 py-1 text-sm leading-tight grow shrink basis-0 cursor-pointer`}
               >
                 {column.id === "checkbox" && (
                   <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">

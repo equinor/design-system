@@ -99,7 +99,7 @@ export const Sidebar = ({
         </SideBarLink>
       </nav>
       <ActionButton
-        className={`self-stretch h-14 w-14 px-5 rounded-full justify-between items-center flex ${buttonClass}`}
+        className={`h-14 w-14 px-5 rounded-full justify-center items-center flex self-center ${buttonClass}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
