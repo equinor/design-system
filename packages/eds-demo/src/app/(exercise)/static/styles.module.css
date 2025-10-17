@@ -48,7 +48,7 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 .sidebar-link {
   color: var(--eds-color-text-neutral-subtle);
-  border-bottom: 2px solid var(--eds-color-border-neutral-subtle);
+  border-bottom: 1px solid var(--eds-color-border-neutral-subtle);
 
   &:hover {
     background-color: var(--eds-color-bg-neutral-fill-muted-hover);
@@ -61,7 +61,7 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 .button--ghost-icon {
   &:hover {
-    background-color: var(--eds-color-bg-accent-fill-muted-hover);
+    background-color: var(--eds-color-bg-neutral-fill-muted-hover);
   }
 }
 
@@ -80,6 +80,7 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 .table {
   background-color: var(--eds-color-bg-neutral-surface);
+  border-collapse: collapse;
 }
 
 /* Chip */
@@ -129,6 +130,11 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .tab--current {
   border-bottom: 2px solid var(--eds-color-border-accent-strong);
   color: var(--eds-color-text-accent-subtle);
+
+  &:hover {
+    color: var(--eds-color-text-accent-subtle);
+    background-color: unset;
+  }
 }
 
 /* Button */
@@ -168,10 +174,14 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .text-input {
   background-color: var(--eds-color-bg-neutral-canvas);
   border: 1px solid var(--eds-color-border-neutral-medium);
-  color: var(--eds-color-text-neutral-strong);
+  color: var(--eds-color-text-neutral-subtle);
 
   &::placeholder {
     color: var(--eds-color-text-neutral-subtle);
+  }
+
+  &:hover {
+    border-color: var(--eds-color-border-neutral-strong);
   }
 }
 
@@ -191,6 +201,31 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .td {
   background-color: var(--eds-color-bg-neutral-surface);
   border-bottom: 1px solid var(--eds-color-border-neutral-subtle);
+  position: relative;
+
+  /* Create visual gaps using pseudo-elements while maintaining full-width backgrounds */
+
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -1px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--eds-color-bg-neutral-surface);
+    z-index: 1;
+  }
+}
+
+/* Table row - Hover state */
+
+.tr:hover .td {
+  background-color: var(--eds-color-bg-neutral-fill-muted-hover);
+
+  /* Hide the white gaps on hover */
+  &:not(:last-child)::after {
+    background-color: var(--eds-color-bg-neutral-fill-muted-hover);
+  }
 }
 
 /* Checkmark - Selected table row */
@@ -202,7 +237,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 /* Table data cell in a selected row */
 
 .tr--active .td {
-  background-color: var(--eds-color-bg-neutral-fill-muted-default);
 }
 
 /* Table header */
@@ -211,14 +245,32 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   🐨 The table header cell is interactive and can be used to sort the table. Add some visual style.
 */
 .th {
-  background-color: var(--eds-color-bg-neutral-surface);
+  background-color: var(--eds-color-bg-neutral-fill-muted-default);
+  color: var(--eds-color-text-neutral-strong);
   border-bottom: 2px solid var(--eds-color-border-neutral-medium);
+  position: relative;
+
+  &:hover {
+    background-color: var(--eds-color-bg-neutral-fill-muted-hover);
+    border-bottom: 2px solid var(--eds-color-border-neutral-subtle);
+  }
+
+  /* Create visual gaps using pseudo-elements while maintaining full-width backgrounds */
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -1px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--eds-color-bg-neutral-surface);
+    z-index: 1;
+  }
 }
 
 /* 🐨 Add a visual indicator to the active table header cell. This is typically used to indicate sorting of the column in the table.  */
+
 .th--active {
-  background-color: var(--eds-color-bg-accent-fill-muted-default);
-  border-bottom: 2px solid var(--eds-color-border-accent-strong);
 }
 
 /* Menu */
