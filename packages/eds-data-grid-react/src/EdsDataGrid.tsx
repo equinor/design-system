@@ -5,6 +5,7 @@ import {
   ColumnFiltersState,
   ColumnPinningState,
   ColumnSizingState,
+  ExpandedState,
   PaginationState,
   RowSelectionState,
   SortingState,
@@ -23,6 +24,7 @@ import { useVirtualizer } from '@tanstack/react-virtual'
 import {
   CSSProperties,
   forwardRef,
+  Fragment,
   HTMLAttributes,
   useCallback,
   useEffect,
@@ -34,6 +36,7 @@ import {
 import styled from 'styled-components'
 import { TableProvider } from './EdsDataGridContext'
 import { EdsDataGridProps } from './EdsDataGridProps'
+import { DetailsPanelRow } from './components/DetailsPanelRow'
 import { TableHeaderRow } from './components/TableHeaderRow'
 import { TableFooterRow } from './components/TableFooterRow'
 import { TableRow } from './components/TableRow'
@@ -105,6 +108,7 @@ function EdsDataGridInner<T>(
     onCellClick,
     enableFooter,
     enableSortingRemoval,
+    renderDetailPanel,
     ...rest
   }: EdsDataGridProps<T> & HTMLAttributes<HTMLDivElement>,
   ref: ForwardedRef<HTMLDivElement>,
@@ -145,6 +149,19 @@ function EdsDataGridInner<T>(
     pageSize: pageSize ?? 25,
   })
 
+  const [internalExpandedState, setInternalExpandedState] =
+    useState<ExpandedState>(expansionState ?? {})
+  const handleExpandedChange = useCallback(
+    (updaterOrValue: React.SetStateAction<ExpandedState>) => {
+      if (setExpansionState) {
+        setExpansionState(updaterOrValue)
+      } else {
+        setInternalExpandedState(updaterOrValue)
+      }
+    },
+    [setExpansionState],
+  )
+
   useEffect(() => {
     if (virtualHeight) {
       console.warn(
@@ -172,6 +189,10 @@ function EdsDataGridInner<T>(
   useEffect(() => {
     setInternalRowSelectionState(rowSelectionState ?? selectedRows ?? {})
   }, [rowSelectionState, selectedRows])
+
+  useEffect(() => {
+    setInternalExpandedState(expansionState ?? {})
+  }, [expansionState])
 
   /**
    * By default, the filter-function accepts single-value filters. This adds multi-filter functionality out of the box.
@@ -259,10 +280,10 @@ function EdsDataGridInner<T>(
       rowSelection: internalRowSelectionState,
       columnOrder: columnOrderState,
       columnSizing: columnSizing ?? internalColumnSize,
-      expanded: expansionState,
+      expanded: internalExpandedState,
     },
     getSubRows: getSubRows,
-    onExpandedChange: setExpansionState,
+    onExpandedChange: handleExpandedChange,
     getExpandedRowModel: getExpandedRowModel(),
     onSortingChange: (changes) => {
       if (onSortingChange) {
@@ -490,29 +511,38 @@ function EdsDataGridInner<T>(
 
                 {virtualRows.map((virtualItem) => {
                   const row = table.getRowModel().rows[virtualItem.index]
+                  if (!row) {
+                    return null
+                  }
                   return (
-                    <TableRow
-                      virtualItem={virtualItem}
-                      rowVirtualizer={virtualizer}
-                      key={virtualItem.index}
-                      row={row}
-                      onContextMenu={
-                        onRowContextMenu
-                          ? (event) => onRowContextMenu(row, event)
-                          : undefined
-                      }
-                      onClick={
-                        onRowClick
-                          ? (event) => onRowClick(row, event)
-                          : undefined
-                      }
-                      onDoubleClick={
-                        onRowDoubleClick
-                          ? (event) => onRowDoubleClick(row, event)
-                          : undefined
-                      }
-                      onCellClick={onCellClick}
-                    />
+                    <Fragment key={virtualItem.index}>
+                      <TableRow
+                        virtualItem={virtualItem}
+                        rowVirtualizer={virtualizer}
+                        row={row}
+                        onContextMenu={
+                          onRowContextMenu
+                            ? (event) => onRowContextMenu(row, event)
+                            : undefined
+                        }
+                        onClick={
+                          onRowClick
+                            ? (event) => onRowClick(row, event)
+                            : undefined
+                        }
+                        onDoubleClick={
+                          onRowDoubleClick
+                            ? (event) => onRowDoubleClick(row, event)
+                            : undefined
+                        }
+                        onCellClick={onCellClick}
+                      />
+                      <DetailsPanelRow
+                        row={row}
+                        getColSpan={() => table.getFlatHeaders().length}
+                        renderDetailPanel={renderDetailPanel}
+                      />
+                    </Fragment>
                   )
                 })}
 
@@ -532,11 +562,9 @@ function EdsDataGridInner<T>(
               </>
             )}
             {!enableVirtual &&
-              table
-                .getRowModel()
-                .rows.map((row) => (
+              table.getRowModel().rows.map((row) => (
+                <Fragment key={row.id}>
                   <TableRow
-                    key={row.id}
                     row={row}
                     onContextMenu={
                       onRowContextMenu
@@ -548,7 +576,13 @@ function EdsDataGridInner<T>(
                     }
                     onCellClick={onCellClick}
                   />
-                ))}
+                  <DetailsPanelRow
+                    row={row}
+                    getColSpan={() => table.getFlatHeaders().length}
+                    renderDetailPanel={renderDetailPanel}
+                  />
+                </Fragment>
+              ))}
           </Table.Body>
           {enableFooter && (
             <Table.Foot sticky={stickyFooter} data-testid="eds-grid-footer">
