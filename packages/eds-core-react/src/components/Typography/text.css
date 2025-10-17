@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@property --font-size {
+  inherits: true;
+  initial-value: 16px;
+  syntax: <length>;
+}
+
+/* Composite typography styles - reset browser defaults */
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.body-large,
+.body,
+.body-small,
+.caption,
+.overline {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+:root {
+  /* Font sizes */
+  --font-size-xs: 10.5px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 32px;
+  --font-size-5xl: 40px;
+  --font-size-6xl: 48px;
+
+  /* Line heights - default (comfortable) */
+  --line-height-xs-default: 16px;
+  --line-height-sm-default: 16px;
+  --line-height-md-default: 20px;
+  --line-height-lg-default: 24px;
+  --line-height-xl-default: 28px;
+  --line-height-2xl-default: 28px;
+  --line-height-3xl-default: 32px;
+  --line-height-4xl-default: 40px;
+  --line-height-5xl-default: 48px;
+  --line-height-6xl-default: 56px;
+
+  /* Line heights - squished (compact) */
+  --line-height-xs-squished: 12px;
+  --line-height-sm-squished: 12px;
+  --line-height-md-squished: 16px;
+  --line-height-lg-squished: 20px;
+  --line-height-xl-squished: 24px;
+  --line-height-2xl-squished: 24px;
+  --line-height-3xl-squished: 28px;
+  --line-height-4xl-squished: 36px;
+  --line-height-5xl-squished: 44px;
+  --line-height-6xl-squished: 52px;
+}
+
+/* Base typography styles */
+.text {
+  margin: 0;
+  font-family: Inter, sans-serif;
+}
+
+/* Font size classes with default line heights */
+.text-xs {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs-default);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm-default);
+}
+
+.text-md {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md-default);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg-default);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl-default);
+}
+
+.text-2xl {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl-default);
+}
+
+.text-3xl {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl-default);
+}
+
+.text-4xl {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-4xl-default);
+}
+
+.text-5xl {
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-5xl-default);
+}
+
+.text-6xl {
+  font-size: var(--font-size-6xl);
+  line-height: var(--line-height-6xl-default);
+}
+
+/* Line height squished variants (only override when needed) */
+.line-height-squished.text-xs {
+  line-height: var(--line-height-xs-squished);
+}
+
+.line-height-squished.text-sm {
+  line-height: var(--line-height-sm-squished);
+}
+
+.line-height-squished.text-md {
+  line-height: var(--line-height-md-squished);
+}
+
+.line-height-squished.text-lg {
+  line-height: var(--line-height-lg-squished);
+}
+
+.line-height-squished.text-xl {
+  line-height: var(--line-height-xl-squished);
+}
+
+.line-height-squished.text-2xl {
+  line-height: var(--line-height-2xl-squished);
+}
+
+.line-height-squished.text-3xl {
+  line-height: var(--line-height-3xl-squished);
+}
+
+.line-height-squished.text-4xl {
+  line-height: var(--line-height-4xl-squished);
+}
+
+.line-height-squished.text-5xl {
+  line-height: var(--line-height-5xl-squished);
+}
+
+.line-height-squished.text-6xl {
+  line-height: var(--line-height-6xl-squished);
+}
+
+/* Font weight variants */
+.font-lighter {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-bolder {
+  font-weight: 600;
+}
+
+/* Baseline alignment - progressive enhancement with text-box-trim */
+@supports (text-box: trim-both cap alphabetic) {
+  .text-baseline-grid,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  .body-large,
+  .body,
+  .body-small,
+  .caption,
+  .overline {
+    text-box: trim-both ex alphabetic;
+    padding-top: calc(round(1cap, 4px) - 1ex);
+    padding-bottom: 0;
+  }
+
+  .text-baseline-center {
+    text-box: trim-both ex alphabetic;
+    padding-top: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
+    padding-bottom: calc((round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2);
+  }
+}
+
+/* Composite typography styles */
+.h1 {
+  font-size: var(--font-size-6xl);
+  line-height: var(--line-height-6xl-default);
+  font-weight: 600;
+}
+
+.h2 {
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-5xl-default);
+  font-weight: 600;
+}
+
+.h3 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-4xl-default);
+  font-weight: 600;
+}
+
+.h4 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl-default);
+  font-weight: 600;
+}
+
+.h5 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl-default);
+  font-weight: 600;
+}
+
+.h6 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl-default);
+  font-weight: 600;
+}
+
+.body-large {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg-default);
+  font-weight: 400;
+}
+
+.body {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md-default);
+  font-weight: 400;
+}
+
+.body-small {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm-default);
+  font-weight: 400;
+}
+
+.caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs-default);
+  font-weight: 400;
+}
+
+.overline {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm-default);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Debug helper */
+.text[data-debug] {
+  background: color-mix(in oklch, limegreen, transparent 70%);
+}
