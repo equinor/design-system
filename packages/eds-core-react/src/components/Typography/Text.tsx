@@ -3,37 +3,53 @@ import {
   TextProps,
   HeadingProps,
   ParagraphProps,
-  SpanProps,
+  FontFamily,
+  FontSize,
+  LineHeight,
+  BaselineAlignment,
+  FontWeight,
+  Tracking,
 } from './Text.types'
 import './text.css'
 
-const buildClassName = (
-  baseClass: string,
-  size?: string,
-  lineHeight?: string,
-  baseline?: string,
-  weight?: string,
-  variant?: string,
-  className?: string,
-  debug?: boolean,
-): string => {
-  const classes = [baseClass]
+type BuildClassNameParams = {
+  family: FontFamily
+  size: FontSize
+  lineHeight?: LineHeight
+  baseline?: BaselineAlignment
+  weight?: FontWeight
+  tracking?: Tracking
+  className?: string
+}
 
-  if (variant) {
-    classes.push(variant)
-  } else {
-    if (size) {
-      classes.push(`text-${size}`)
-    }
-    if (lineHeight) {
-      classes.push(`line-height-${lineHeight}`)
-    }
-    if (baseline) {
-      classes.push(`text-baseline-${baseline}`)
-    }
-    if (weight) {
-      classes.push(`font-${weight}`)
-    }
+const buildClassName = ({
+  family,
+  size,
+  lineHeight,
+  baseline,
+  weight,
+  tracking,
+  className,
+}: BuildClassNameParams): string => {
+  const classes = []
+
+  if (family) {
+    classes.push(`font-family-${family}`)
+  }
+  if (size) {
+    classes.push(`text-${size}`)
+  }
+  if (lineHeight) {
+    classes.push(`line-height-${lineHeight}`)
+  }
+  if (baseline) {
+    classes.push(`text-baseline-${baseline}`)
+  }
+  if (weight) {
+    classes.push(`font-${weight}`)
+  }
+  if (tracking) {
+    classes.push(`tracking-${tracking}`)
   }
 
   if (className) {
@@ -46,16 +62,18 @@ const buildClassName = (
 /**
  * Text component for flexible typography with baseline grid support.
  *
- * Can be used with individual props (size, lineHeight, baseline, weight)
+ * Can be used with individual props (family, size, lineHeight, baseline, weight, tracking)
  * or with a predefined variant.
  */
 export const Text = forwardRef<HTMLElement, TextProps>(
   (
     {
+      family,
       size,
       lineHeight,
       baseline,
       weight,
+      tracking,
       variant,
       debug,
       className,
@@ -65,16 +83,15 @@ export const Text = forwardRef<HTMLElement, TextProps>(
     ref,
   ) => {
     const Component = 'span'
-    const combinedClassName = buildClassName(
-      'text',
+    const combinedClassName = buildClassName({
+      family,
       size,
       lineHeight,
       baseline,
       weight,
-      variant,
+      tracking,
       className,
-      debug,
-    )
+    })
 
     return (
       <Component
@@ -91,16 +108,35 @@ export const Text = forwardRef<HTMLElement, TextProps>(
 
 Text.displayName = 'Text'
 
+const getHeadingSize = (as: HeadingProps['as']): FontSize => {
+  switch (as) {
+    case 'h1':
+      return '6xl'
+    case 'h2':
+      return '5xl'
+    case 'h3':
+      return '4xl'
+    case 'h4':
+      return '3xl'
+    case 'h5':
+      return '2xl'
+    case 'h6':
+      return 'xl'
+    default:
+      return '6xl'
+  }
+}
+
 /**
  * Heading component (h1-h6) with typography support.
+ * Always uses the header font family. Size and line-height are opinionated and not configurable.
  */
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   (
     {
-      size,
-      lineHeight,
       baseline,
       weight,
+      tracking,
       debug,
       className,
       children,
@@ -109,40 +145,27 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     },
     ref,
   ) => {
-    const combinedClassName = buildClassName(
-      'text',
-      size,
-      lineHeight,
+    const combinedClassName = buildClassName({
+      family: 'header',
+      size: getHeadingSize(as),
       baseline,
       weight,
-      undefined,
+      tracking,
       className,
-      debug,
+    })
+
+    const Component = as
+
+    return (
+      <Component
+        ref={ref}
+        className={combinedClassName}
+        data-debug={debug ? '' : undefined}
+        {...rest}
+      >
+        {children}
+      </Component>
     )
-
-    const props = {
-      ref,
-      className: combinedClassName,
-      'data-debug': debug ? '' : undefined,
-      ...rest,
-    }
-
-    switch (as) {
-      case 'h1':
-        return <h1 {...props}>{children}</h1>
-      case 'h2':
-        return <h2 {...props}>{children}</h2>
-      case 'h3':
-        return <h3 {...props}>{children}</h3>
-      case 'h4':
-        return <h4 {...props}>{children}</h4>
-      case 'h5':
-        return <h5 {...props}>{children}</h5>
-      case 'h6':
-        return <h6 {...props}>{children}</h6>
-      default:
-        return <h1 {...props}>{children}</h1>
-    }
   },
 )
 
@@ -153,19 +176,28 @@ Heading.displayName = 'Heading'
  */
 export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   (
-    { size, lineHeight, baseline, weight, debug, className, children, ...rest },
-    ref,
-  ) => {
-    const combinedClassName = buildClassName(
-      'text',
+    {
       size,
       lineHeight,
       baseline,
       weight,
-      undefined,
-      className,
+      tracking,
       debug,
-    )
+      className,
+      children,
+      ...rest
+    },
+    ref,
+  ) => {
+    const combinedClassName = buildClassName({
+      family: 'ui',
+      size,
+      lineHeight,
+      baseline,
+      weight,
+      tracking,
+      className,
+    })
 
     return (
       <p
@@ -181,37 +213,3 @@ export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
 )
 
 Paragraph.displayName = 'Paragraph'
-
-/**
- * Span component with typography support.
- */
-export const Span = forwardRef<HTMLSpanElement, SpanProps>(
-  (
-    { size, lineHeight, baseline, weight, debug, className, children, ...rest },
-    ref,
-  ) => {
-    const combinedClassName = buildClassName(
-      'text',
-      size,
-      lineHeight,
-      baseline,
-      weight,
-      undefined,
-      className,
-      debug,
-    )
-
-    return (
-      <span
-        ref={ref}
-        className={combinedClassName}
-        data-debug={debug ? '' : undefined}
-        {...rest}
-      >
-        {children}
-      </span>
-    )
-  },
-)
-
-Span.displayName = 'Span'

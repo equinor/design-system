@@ -1,476 +1,693 @@
+import { Text, Heading, Paragraph } from './Text'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { Text, Heading, Paragraph, Span } from './Text'
+import { Stack } from '../../../.storybook/components'
+import type { TextProps, HeadingProps, ParagraphProps } from './Text.types'
+import styled from 'styled-components'
 
-const meta: Meta<typeof Text> = {
-  title: 'Typography/Text',
-  component: Text,
+const ComparisonGrid = styled.div`
+  display: grid;
+  gap: 24px;
+  margin: 16px 0;
+`
+
+const ComparisonRow = styled.div`
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 12px;
+  background: #f7f7f7;
+  border-radius: 4px;
+`
+
+const Label = styled(Text).attrs({
+  family: 'ui',
+  size: 'xs',
+  weight: 'bolder',
+})`
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+`
+
+const meta: Meta = {
+  title: 'Typography/Text Components',
   parameters: {
-    layout: 'padded',
+    docs: {
+      description: {
+        component:
+          'Flexible typography components with baseline grid support and comprehensive styling options.',
+      },
+      source: {
+        excludeDecorators: true,
+      },
+    },
   },
+  decorators: [
+    (Story) => (
+      <Stack>
+        <Story />
+      </Stack>
+    ),
+  ],
 }
 
 export default meta
 
-export const Sizes: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Text size="xs">Extra small text (xs)</Text>
-    <Text size="sm">Small text (sm)</Text>
-    <Text size="md">Medium text (md)</Text>
-    <Text size="lg">Large text (lg)</Text>
-    <Text size="xl">Extra large text (xl)</Text>
-    <Text size="2xl">2xl text</Text>
-    <Text size="3xl">3xl text</Text>
-    <Text size="4xl">4xl text</Text>
-    <Text size="5xl">5xl text</Text>
-    <Text size="6xl">6xl text</Text>
-  </div>
-)
-
-export const LineHeights: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-    <div>
-      <h3>Default Line Height</h3>
-      <Text size="lg" lineHeight="default">
-        This is text with default line height. It provides comfortable reading
-        with more vertical space. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit.
-      </Text>
-    </div>
-    <div>
-      <h3>Squished Line Height</h3>
-      <Text size="lg" lineHeight="squished">
-        This is text with squished line height. It's more compact and takes less
-        vertical space. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      </Text>
-    </div>
-  </div>
-)
-
-export const BaselineAlignment: StoryFn<typeof Text> = () => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '20px',
-      background:
-        'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px)',
-    }}
-  >
-    <Text size="lg" baseline="grid">
-      Text aligned to baseline grid (4px)
-    </Text>
-    <Text size="lg" baseline="center">
-      Text with centered baseline
-    </Text>
-    <Text size="md" baseline="grid">
-      Medium text on baseline grid
-    </Text>
-  </div>
-)
-
-export const FontWeights: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Text size="lg" weight="lighter">
-      Lighter weight text (300)
-    </Text>
-    <Text size="lg" weight="normal">
-      Normal weight text (400)
-    </Text>
-    <Text size="lg" weight="bolder">
-      Bolder weight text (600)
-    </Text>
-  </div>
-)
-
-export const Combined: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Text size="3xl" lineHeight="default" baseline="grid" weight="bolder">
-      Large, bold text on baseline grid
-    </Text>
-    <Text size="md" lineHeight="squished" baseline="grid" weight="normal">
-      Medium, normal text with squished line height
-    </Text>
-    <Text size="sm" lineHeight="default" baseline="center" weight="lighter">
-      Small, light text with centered baseline
-    </Text>
-  </div>
-)
-
-export const Variants: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Text variant="h1">Heading 1</Text>
-    <Text variant="h2">Heading 2</Text>
-    <Text variant="h3">Heading 3</Text>
-    <Text variant="h4">Heading 4</Text>
-    <Text variant="h5">Heading 5</Text>
-    <Text variant="h6">Heading 6</Text>
-    <Text variant="body-large">Body Large Text</Text>
-    <Text variant="body">Body Text</Text>
-    <Text variant="body-small">Body Small Text</Text>
-    <Text variant="caption">Caption Text</Text>
-    <Text variant="overline">Overline Text</Text>
-  </div>
-)
-
-export const Headings: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Heading as="h1" size="6xl" weight="bolder" baseline="grid">
-      Heading 1 (h1)
-    </Heading>
-    <Heading as="h2" size="5xl" weight="bolder" baseline="grid">
-      Heading 2 (h2)
-    </Heading>
-    <Heading as="h3" size="4xl" weight="bolder" baseline="grid">
-      Heading 3 (h3)
-    </Heading>
-    <Heading as="h4" size="3xl" weight="bolder" baseline="grid">
-      Heading 4 (h4)
-    </Heading>
-    <Heading as="h5" size="2xl" weight="bolder" baseline="grid">
-      Heading 5 (h5)
-    </Heading>
-    <Heading as="h6" size="xl" weight="bolder" baseline="grid">
-      Heading 6 (h6)
-    </Heading>
-  </div>
-)
-
-export const Paragraphs: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Paragraph size="lg" baseline="grid">
-      This is a large paragraph. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
+export const Introduction: StoryFn = () => (
+  <section>
+    <Heading as="h2">Text Components Overview</Heading>
+    <Paragraph>
+      The typography system includes three main components: Text, Heading, and
+      Paragraph. Each component provides different levels of control and
+      semantic meaning.
     </Paragraph>
-    <Paragraph size="md" baseline="grid">
-      This is a medium paragraph. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
+    <Paragraph>
+      <strong>Text:</strong> A flexible inline component with full control over
+      font family, size, and other properties.
     </Paragraph>
-    <Paragraph size="sm" baseline="grid">
-      This is a small paragraph. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
+    <Paragraph>
+      <strong>Heading:</strong> Semantic heading component (h1-h6) that always
+      uses the header font family.
     </Paragraph>
-  </div>
+    <Paragraph>
+      <strong>Paragraph:</strong> Block-level component that always uses the UI
+      font family.
+    </Paragraph>
+  </section>
 )
 
-export const InlineText: StoryFn<typeof Text> = () => (
-  <Paragraph size="md">
-    This is a paragraph with <Span weight="bolder">bold inline text</Span> and{' '}
-    <Span size="lg" weight="lighter">
-      larger lighter text
-    </Span>{' '}
-    mixed together.
+export const HeadingPlayground: StoryFn<HeadingProps> = (args) => (
+  <Heading {...args}>The quick brown fox jumps over the lazy dog</Heading>
+)
+HeadingPlayground.storyName = 'Heading - Interactive'
+HeadingPlayground.args = {
+  as: 'h2',
+  weight: 'normal',
+  tracking: 'normal',
+  baseline: undefined,
+  debug: false,
+}
+HeadingPlayground.argTypes = {
+  as: {
+    control: { type: 'select' },
+    options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    description: 'HTML heading level',
+  },
+  weight: {
+    control: { type: 'select' },
+    options: ['lighter', 'normal', 'bolder'],
+    description: 'Font weight',
+  },
+  tracking: {
+    control: { type: 'select' },
+    options: ['tight', 'normal', 'loose'],
+    description: 'Letter spacing (tracking)',
+  },
+  baseline: {
+    control: { type: 'select' },
+    options: [undefined, 'grid', 'center'],
+    description: 'Baseline alignment strategy',
+  },
+  debug: {
+    control: { type: 'boolean' },
+    description: 'Enable debug mode to visualize text box',
+  },
+}
+
+export const HeadingComparison: StoryFn = () => (
+  <div>
+    <Heading as="h3" style={{ marginBottom: '24px' }}>
+      Heading Level Comparison
+    </Heading>
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>H1</Label>
+        <Heading as="h1">The quick brown fox jumps over the lazy dog</Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>H2</Label>
+        <Heading as="h2">The quick brown fox jumps over the lazy dog</Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>H3</Label>
+        <Heading as="h3">The quick brown fox jumps over the lazy dog</Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>H4</Label>
+        <Heading as="h4">The quick brown fox jumps over the lazy dog</Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>H5</Label>
+        <Heading as="h5">The quick brown fox jumps over the lazy dog</Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>H6</Label>
+        <Heading as="h6">The quick brown fox jumps over the lazy dog</Heading>
+      </ComparisonRow>
+    </ComparisonGrid>
+
+    <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
+      Font Weight Comparison
+    </Heading>
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>Lighter</Label>
+        <Heading as="h2" weight="lighter">
+          The quick brown fox jumps over the lazy dog
+        </Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Normal</Label>
+        <Heading as="h2" weight="normal">
+          The quick brown fox jumps over the lazy dog
+        </Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Bolder</Label>
+        <Heading as="h2" weight="bolder">
+          The quick brown fox jumps over the lazy dog
+        </Heading>
+      </ComparisonRow>
+    </ComparisonGrid>
+
+    <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
+      Letter Spacing (Tracking) Comparison
+    </Heading>
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>Tight</Label>
+        <Heading as="h2" tracking="tight">
+          The quick brown fox jumps over the lazy dog
+        </Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Normal</Label>
+        <Heading as="h2" tracking="normal">
+          The quick brown fox jumps over the lazy dog
+        </Heading>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Loose</Label>
+        <Heading as="h2" tracking="loose">
+          The quick brown fox jumps over the lazy dog
+        </Heading>
+      </ComparisonRow>
+    </ComparisonGrid>
+  </div>
+)
+HeadingComparison.storyName = 'Heading - All Variants'
+HeadingComparison.parameters = {
+  docs: {
+    description: {
+      story:
+        'A comprehensive comparison of all heading levels, font weights, and letter spacing options. Use this to understand the visual hierarchy and styling options available.',
+    },
+  },
+}
+
+export const ParagraphPlayground: StoryFn<ParagraphProps> = (args) => (
+  <Paragraph {...args}>
+    The quick brown fox jumps over the lazy dog. This is sample text to
+    demonstrate paragraph styling with various options. Typography is a critical
+    component of any design system, providing the foundation for readable and
+    accessible content.
   </Paragraph>
 )
+ParagraphPlayground.storyName = 'Paragraph - Interactive'
+ParagraphPlayground.args = {
+  size: 'md',
+  lineHeight: 'default',
+  weight: 'normal',
+  tracking: 'normal',
+  baseline: undefined,
+  debug: false,
+}
+ParagraphPlayground.argTypes = {
+  size: {
+    control: { type: 'select' },
+    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
+    description: 'Font size',
+  },
+  lineHeight: {
+    control: { type: 'select' },
+    options: ['default', 'squished'],
+    description: 'Line height variant',
+  },
+  weight: {
+    control: { type: 'select' },
+    options: ['lighter', 'normal', 'bolder'],
+    description: 'Font weight',
+  },
+  tracking: {
+    control: { type: 'select' },
+    options: ['tight', 'normal', 'loose'],
+    description: 'Letter spacing (tracking)',
+  },
+  baseline: {
+    control: { type: 'select' },
+    options: [undefined, 'grid', 'center'],
+    description: 'Baseline alignment strategy',
+  },
+  debug: {
+    control: { type: 'boolean' },
+    description: 'Enable debug mode to visualize text box',
+  },
+}
 
-export const Debug: StoryFn<typeof Text> = () => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '20px',
-      background:
-        'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px)',
-    }}
-  >
-    <Text size="3xl" baseline="grid" debug>
-      Text with debug mode enabled
-    </Text>
-    <Text size="lg" baseline="grid" debug>
-      Shows the text box boundaries
-    </Text>
-    <Text size="md" baseline="center" debug>
-      Helps visualize alignment
-    </Text>
-  </div>
-)
-
-export const ButtonAlignment: StoryFn<typeof Text> = () => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '32px',
-      background:
-        'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px)',
-      padding: '20px',
-    }}
-  >
-    <div>
-      <h3>Baseline Grid (aligns to 4px grid)</h3>
-      <button
-        style={{
-          padding: '12px 24px',
-          background: 'transparent',
-          color: '#000',
-          border: '2px solid #007079',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}
-      >
-        <Text size="md" baseline="grid" debug>
-          Button Text Grid
-        </Text>
-      </button>
-    </div>
-
-    <div>
-      <h3>Baseline Center (vertically centered)</h3>
-      <button
-        style={{
-          padding: '12px 24px',
-          background: 'transparent',
-          color: '#000',
-          border: '2px solid #007079',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}
-      >
-        <Text size="md" baseline="center" debug>
-          Button Text Center
-        </Text>
-      </button>
-    </div>
-
-    <div>
-      <h3>Comparison Side by Side</h3>
-      <div style={{ display: 'flex', gap: '16px' }}>
-        <button
-          style={{
-            padding: '12px 24px',
-            background: 'transparent',
-            color: '#000',
-            border: '2px solid #007079',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          <Text size="md" baseline="center" lineHeight="squished" debug>
-            Grid - Click me
-          </Text>
-        </button>
-        <button
-          style={{
-            padding: '12px 24px',
-            background: 'transparent',
-            color: '#000',
-            border: '2px solid #007079',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          <Text size="md" baseline="center" lineHeight="squished" debug>
-            Center - Click me
-          </Text>
-        </button>
-      </div>
-      <p style={{ marginTop: '12px', fontSize: '14px', color: '#6f6f6f' }}>
-        Notice how <strong>baseline-center</strong> provides better visual
-        balance within the button container, while{' '}
-        <strong>baseline-grid</strong> aligns to the external 4px grid system.
-      </p>
-    </div>
-  </div>
-)
-
-export const TypographicHierarchy: StoryFn<typeof Text> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-    <Heading as="h1" size="6xl" weight="bolder" baseline="grid">
-      Design System Typography
-    </Heading>
-    <Paragraph size="lg" baseline="grid">
-      A comprehensive typography system that maintains a consistent 4px baseline
-      grid throughout the interface.
-    </Paragraph>
-    <Heading as="h2" size="4xl" weight="bolder" baseline="grid">
-      Key Features
-    </Heading>
-    <Paragraph size="md" baseline="grid">
-      The typography system includes multiple size variants, line height
-      options, and baseline alignment strategies. Each element is designed to
-      work harmoniously within the grid system.
-    </Paragraph>
-    <Heading as="h3" size="3xl" weight="bolder" baseline="grid">
-      Usage Guidelines
-    </Heading>
-    <Paragraph size="md" baseline="grid">
-      Use the <Span weight="bolder">size</Span> prop to control text size,{' '}
-      <Span weight="bolder">lineHeight</Span> for spacing between lines, and{' '}
-      <Span weight="bolder">baseline</Span> for alignment strategy.
-    </Paragraph>
-    <Text variant="caption">
-      Caption text provides supplementary information
-    </Text>
-  </div>
-)
-
-export const AllVariants: StoryFn<typeof Text> = () => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '32px',
-      background:
-        'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px)',
-      padding: '20px',
-    }}
-  >
-    <section>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <h2 className="h1">Heading Variants (Composite Classes)</h2>
-        <div className="h1">H1 - 48px / 56px / 600</div>
-        <div className="h2">H2 - 40px / 48px / 600</div>
-        <div className="h3">H3 - 32px / 40px / 600</div>
-        <div className="h4">H4 - 24px / 32px / 600</div>
-        <div className="h5">H5 - 20px / 28px / 600</div>
-        <div className="h6">H6 - 18px / 28px / 600</div>
-      </div>
-    </section>
-    <section>
-      <h2>Body Text Variants</h2>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div className="body-large">
-          Body Large - 16px / 24px / 400 - Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit.
-        </div>
-        <div className="body">
-          Body - 14px / 20px / 400 - Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit.
-        </div>
-        <div className="body-small">
-          Body Small - 12px / 16px / 400 - Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit.
-        </div>
-        <div className="caption">
-          Caption - 10.5px / 16px / 400 - Supplementary information text
-        </div>
-        <div className="overline">
-          OVERLINE - 12PX / 16PX / 600 - UPPERCASE LABELS
-        </div>
-      </div>
-    </section>
-  </div>
-)
-
-export const PopoverExample: StoryFn<typeof Text> = () => {
-  const dialogStyle: React.CSSProperties = {
-    position: 'relative',
-    border: '1px solid #000',
-    borderRadius: '4px',
-    padding: '0',
-    maxWidth: '16em',
-    boxShadow: 'none',
-    background: 'white',
-  }
-
-  const containerStyle: React.CSSProperties = {
-    padding: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: '16px',
-    borderBottom: '1px solid #000',
-    background:
-      'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(255,0,0,0.1) 3px, rgba(255,0,0,0.1) 4px)',
-  }
-
-  const contentContainerStyle: React.CSSProperties = {
-    padding: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-    background:
-      'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(255,0,0,0.1) 3px, rgba(255,0,0,0.1) 4px)',
-  }
-
-  const buttonGroupStyle: React.CSSProperties = {
-    display: 'flex',
-    gap: '16px',
-  }
-
-  const buttonStyle: React.CSSProperties = {
-    padding: '12px 16px',
-    background: 'transparent',
-    color: '#000',
-    border: '1px solid #000',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-  }
-
-  const iconButtonStyle: React.CSSProperties = {
-    padding: '0',
-    background: 'transparent',
-    border: 'none',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '36px',
-    height: '36px',
-    marginInline: '-12px',
-    marginBlock: ' -12px',
-  }
+export const ParagraphComparison: StoryFn = () => {
+  const sampleText = 'The quick brown fox jumps over the lazy dog.'
 
   return (
-    <div style={{ padding: '40px', background: '#f5f5f5' }}>
-      <div style={dialogStyle}>
-        <div style={containerStyle}>
-          <Heading as="h2" size="lg" baseline="grid" debug>
-            Popover label
-          </Heading>
-          <button
-            className="text-md"
-            style={iconButtonStyle}
-            aria-label="close popover"
-          >
-            <svg className="icon" viewBox="0 0 24 24">
-              <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" />
-            </svg>
-          </button>
-        </div>
-        <div style={contentContainerStyle}>
-          <Text size="lg" lineHeight="squished" baseline="grid">
-            Are you sure you want to delete this item?
-          </Text>
-          <div style={buttonGroupStyle}>
-            <button
-              style={buttonStyle}
-              className="text-md line-height-squished"
-            >
-              <svg className="icon" viewBox="0 0 24 24">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59Z"
-                />
-              </svg>
-              <Text baseline="center" debug>
-                Delete
-              </Text>
-            </button>
-            <button
-              style={buttonStyle}
-              className="text-md line-height-squished"
-            >
-              <Text baseline="center" debug>
-                Cancel
-              </Text>
-            </button>
-          </div>
-        </div>
-      </div>
-      <p style={{ marginTop: '20px', fontSize: '14px', color: '#6f6f6f' }}>
-        This example demonstrates the difference between{' '}
-        <strong>baseline-grid</strong> (used for headings and body text) and{' '}
-        <strong>baseline-center</strong> (used for button labels). Notice how
-        button text uses <code>baseline="center"</code> for better optical
-        centering within the button container.
-      </p>
+    <div>
+      <Heading as="h3" style={{ marginBottom: '24px' }}>
+        Size Comparison
+      </Heading>
+      <ComparisonGrid>
+        <ComparisonRow>
+          <Label>XS</Label>
+          <Paragraph size="xs">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>SM</Label>
+          <Paragraph size="sm">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>MD (Default)</Label>
+          <Paragraph size="md">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>LG</Label>
+          <Paragraph size="lg">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>XL</Label>
+          <Paragraph size="xl">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>2XL</Label>
+          <Paragraph size="2xl">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>3XL</Label>
+          <Paragraph size="3xl">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>4XL</Label>
+          <Paragraph size="4xl">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>5XL</Label>
+          <Paragraph size="5xl">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>6XL</Label>
+          <Paragraph size="6xl">{sampleText}</Paragraph>
+        </ComparisonRow>
+      </ComparisonGrid>
+
+      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
+        Line Height Comparison
+      </Heading>
+      <ComparisonGrid>
+        <ComparisonRow>
+          <Label>Default</Label>
+          <Paragraph lineHeight="default">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>Squished</Label>
+          <Paragraph lineHeight="squished">{sampleText}</Paragraph>
+        </ComparisonRow>
+      </ComparisonGrid>
+
+      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
+        Font Weight Comparison
+      </Heading>
+      <ComparisonGrid>
+        <ComparisonRow>
+          <Label>Lighter</Label>
+          <Paragraph weight="lighter">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>Normal</Label>
+          <Paragraph weight="normal">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>Bolder</Label>
+          <Paragraph weight="bolder">{sampleText}</Paragraph>
+        </ComparisonRow>
+      </ComparisonGrid>
+
+      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
+        Letter Spacing (Tracking) Comparison
+      </Heading>
+      <ComparisonGrid>
+        <ComparisonRow>
+          <Label>Tight</Label>
+          <Paragraph tracking="tight">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>Normal</Label>
+          <Paragraph tracking="normal">{sampleText}</Paragraph>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>Loose</Label>
+          <Paragraph tracking="loose">{sampleText}</Paragraph>
+        </ComparisonRow>
+      </ComparisonGrid>
     </div>
   )
+}
+ParagraphComparison.storyName = 'Paragraph - All Variants'
+ParagraphComparison.parameters = {
+  docs: {
+    description: {
+      story:
+        'A comprehensive comparison of all paragraph sizes, line heights, font weights, and letter spacing options.',
+    },
+  },
+}
+
+export const TextPlayground: StoryFn<TextProps> = (args) => (
+  <Text {...args}>The quick brown fox jumps over the lazy dog</Text>
+)
+TextPlayground.storyName = 'Text - Interactive'
+TextPlayground.args = {
+  family: 'ui',
+  size: 'md',
+  lineHeight: 'default',
+  weight: 'normal',
+  tracking: 'normal',
+  baseline: undefined,
+  debug: false,
+}
+TextPlayground.argTypes = {
+  family: {
+    control: { type: 'select' },
+    options: ['ui', 'header'],
+    description: 'Font family',
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
+    description: 'Font size',
+  },
+  lineHeight: {
+    control: { type: 'select' },
+    options: ['default', 'squished'],
+    description: 'Line height variant',
+  },
+  weight: {
+    control: { type: 'select' },
+    options: ['lighter', 'normal', 'bolder'],
+    description: 'Font weight',
+  },
+  tracking: {
+    control: { type: 'select' },
+    options: ['tight', 'normal', 'loose'],
+    description: 'Letter spacing (tracking)',
+  },
+  baseline: {
+    control: { type: 'select' },
+    options: [undefined, 'grid', 'center'],
+    description: 'Baseline alignment strategy',
+  },
+  debug: {
+    control: { type: 'boolean' },
+    description: 'Enable debug mode to visualize text box',
+  },
+}
+
+export const TextSizeScale: StoryFn = () => {
+  const sampleText = 'The quick brown fox'
+
+  return (
+    <div>
+      <Heading as="h3" style={{ marginBottom: '24px' }}>
+        UI Font Family - Size Scale
+      </Heading>
+      <ComparisonGrid>
+        <ComparisonRow>
+          <Label>XS</Label>
+          <Text family="ui" size="xs">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>SM</Label>
+          <Text family="ui" size="sm">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>MD</Label>
+          <Text family="ui" size="md">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>LG</Label>
+          <Text family="ui" size="lg">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>XL</Label>
+          <Text family="ui" size="xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>2XL</Label>
+          <Text family="ui" size="2xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>3XL</Label>
+          <Text family="ui" size="3xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>4XL</Label>
+          <Text family="ui" size="4xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>5XL</Label>
+          <Text family="ui" size="5xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>6XL</Label>
+          <Text family="ui" size="6xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+      </ComparisonGrid>
+
+      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
+        Header Font Family - Size Scale
+      </Heading>
+      <ComparisonGrid>
+        <ComparisonRow>
+          <Label>XS</Label>
+          <Text family="header" size="xs">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>SM</Label>
+          <Text family="header" size="sm">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>MD</Label>
+          <Text family="header" size="md">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>LG</Label>
+          <Text family="header" size="lg">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>XL</Label>
+          <Text family="header" size="xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>2XL</Label>
+          <Text family="header" size="2xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>3XL</Label>
+          <Text family="header" size="3xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>4XL</Label>
+          <Text family="header" size="4xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>5XL</Label>
+          <Text family="header" size="5xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+        <ComparisonRow>
+          <Label>6XL</Label>
+          <Text family="header" size="6xl">
+            {sampleText}
+          </Text>
+        </ComparisonRow>
+      </ComparisonGrid>
+    </div>
+  )
+}
+TextSizeScale.storyName = 'Text - Size Scale'
+TextSizeScale.parameters = {
+  docs: {
+    description: {
+      story:
+        'Complete size scale for both UI and header font families. This helps understand the typographic hierarchy.',
+    },
+  },
+}
+
+export const InlineTextStyling: StoryFn = () => (
+  <Stack>
+    <Paragraph>
+      The Text component can be used for inline styling. For example,{' '}
+      <Text family="ui" size="lg" weight="bolder">
+        emphasized content
+      </Text>{' '}
+      or{' '}
+      <Text family="ui" size="sm" weight="lighter">
+        de-emphasized content
+      </Text>
+      . You can mix{' '}
+      <Text family="header" size="xl" weight="bolder">
+        header font
+      </Text>{' '}
+      with regular text for maximum flexibility.
+    </Paragraph>
+  </Stack>
+)
+InlineTextStyling.storyName = 'Text - Inline Usage'
+
+export const RealWorldExample: StoryFn = () => (
+  <section>
+    <Heading as="h1" weight="bolder">
+      Design System Documentation
+    </Heading>
+    <Paragraph size="lg" lineHeight="default">
+      Welcome to the Equinor Design System typography components. This system
+      provides flexible, accessible, and beautiful typography for your
+      applications.
+    </Paragraph>
+
+    <Heading as="h2" weight="normal">
+      Getting Started
+    </Heading>
+    <Paragraph>
+      The typography system is built on a foundation of design tokens that
+      ensure consistency across all components. Each component has been
+      carefully crafted to work together seamlessly.
+    </Paragraph>
+
+    <Heading as="h3" weight="normal">
+      Key Features
+    </Heading>
+    <Paragraph>
+      <Text family="ui" weight="bolder">
+        Baseline Grid Alignment:
+      </Text>{' '}
+      All text components support precise alignment to a 4px baseline grid for
+      consistent vertical rhythm.
+    </Paragraph>
+    <Paragraph>
+      <Text family="ui" weight="bolder">
+        Flexible Typography:
+      </Text>{' '}
+      Control font family, size, weight, line height, and letter spacing to
+      achieve your desired design.
+    </Paragraph>
+    <Paragraph>
+      <Text family="ui" weight="bolder">
+        Accessibility First:
+      </Text>{' '}
+      All components are built with WCAG 2.1 AA compliance in mind.
+    </Paragraph>
+
+    <Heading as="h3" weight="normal">
+      Usage Guidelines
+    </Heading>
+    <Paragraph>
+      Use{' '}
+      <Text family="ui" weight="bolder">
+        Heading
+      </Text>{' '}
+      components for page and section titles. They always use the header font
+      family for visual distinction.
+    </Paragraph>
+    <Paragraph>
+      Use{' '}
+      <Text family="ui" weight="bolder">
+        Paragraph
+      </Text>{' '}
+      components for body content. They always use the UI font family optimized
+      for readability.
+    </Paragraph>
+    <Paragraph size="sm" weight="lighter">
+      For more information, visit our complete documentation.
+    </Paragraph>
+  </section>
+)
+RealWorldExample.storyName = 'Real World Example'
+RealWorldExample.parameters = {
+  docs: {
+    description: {
+      story:
+        'A practical example showing how different typography components work together in a documentation page layout.',
+    },
+  },
+}
+
+export const Debug: StoryFn = () => (
+  <Stack>
+    <Paragraph>
+      Enable debug mode to visualize text box trimming and baseline alignment:
+    </Paragraph>
+    <Heading as="h2" debug>
+      Heading with Debug Mode
+    </Heading>
+    <Paragraph debug>
+      This paragraph has debug mode enabled, showing the text box with a
+      background color to help visualize alignment and spacing.
+    </Paragraph>
+    <Text family="ui" size="lg" debug>
+      Text component with debug mode
+    </Text>
+  </Stack>
+)
+Debug.parameters = {
+  docs: {
+    description: {
+      story:
+        'Debug mode adds a visual background to help developers understand text box alignment and spacing.',
+    },
+  },
 }
