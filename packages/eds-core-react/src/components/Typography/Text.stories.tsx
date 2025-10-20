@@ -48,6 +48,29 @@ const GridBackground = styled.div`
   }
 `
 
+const RealWorldGrid = styled.section`
+  display: grid;
+  gap: 16px; /* 4px grid: 16px = 4 * 4px */
+
+  /* Nested sections with 24px gap */
+  & > * + h2 {
+    margin-top: 24px;
+  }
+
+  & > * + h3 {
+    margin-top: 20px;
+  }
+`
+
+const IntroductionGrid = styled.section`
+  display: grid;
+  gap: 16px;
+
+  & > h2 {
+    margin-bottom: 4px;
+  }
+`
+
 const meta: Meta = {
   title: 'Typography/Text Components',
   parameters: {
@@ -73,7 +96,7 @@ const meta: Meta = {
 export default meta
 
 export const Introduction: StoryFn = () => (
-  <section>
+  <IntroductionGrid>
     <Heading as="h2">Text Components Overview</Heading>
     <Paragraph>
       The typography system includes three main components: Text, Heading, and
@@ -92,7 +115,7 @@ export const Introduction: StoryFn = () => (
       <strong>Paragraph:</strong> Block-level component that always uses the UI
       font family.
     </Paragraph>
-  </section>
+  </IntroductionGrid>
 )
 
 export const HeadingPlayground: StoryFn<HeadingProps> = (args) => {
@@ -765,7 +788,7 @@ export const InlineTextStyling: StoryFn = () => (
 InlineTextStyling.storyName = 'Text - Inline Usage'
 
 export const RealWorldExample: StoryFn = () => (
-  <section>
+  <RealWorldGrid>
     <Heading as="h1" weight="bolder">
       Design System Documentation
     </Heading>
@@ -865,14 +888,134 @@ export const RealWorldExample: StoryFn = () => (
     <Paragraph size="sm" weight="lighter">
       For more information, visit our complete documentation.
     </Paragraph>
-  </section>
+  </RealWorldGrid>
 )
 RealWorldExample.storyName = 'Real World Example'
 RealWorldExample.parameters = {
   docs: {
     description: {
       story:
-        'A practical example showing how different typography components work together in a documentation page layout.',
+        'A practical example showing how different typography components work together in a documentation page layout. All spacing follows the 4px baseline grid (16px, 20px, 24px).',
+    },
+  },
+}
+
+export const RealWorldWithGrid: StoryFn = () => (
+  <GridBackground>
+    <RealWorldGrid>
+      <Heading as="h1" weight="bolder" debug>
+        Design System Documentation
+      </Heading>
+      <Paragraph size="lg" lineHeight="default" debug>
+        Welcome to the Equinor Design System typography components. This system
+        provides flexible, accessible, and beautiful typography for your
+        applications.
+      </Paragraph>
+
+      <Heading as="h2" weight="normal" debug>
+        Getting Started
+      </Heading>
+      <Paragraph debug>
+        The typography system is built on a foundation of design tokens that
+        ensure consistency across all components. Each component has been
+        carefully crafted to work together seamlessly.
+      </Paragraph>
+
+      <Heading as="h3" weight="normal" debug>
+        Key Features
+      </Heading>
+      <Paragraph debug>
+        <Text
+          family="ui"
+          weight="bolder"
+          baseline="grid"
+          tracking="normal"
+          lineHeight="default"
+          size="md"
+          debug
+        >
+          Baseline Grid Alignment:
+        </Text>{' '}
+        All text components support precise alignment to a 4px baseline grid for
+        consistent vertical rhythm.
+      </Paragraph>
+      <Paragraph debug>
+        <Text
+          family="ui"
+          weight="bolder"
+          baseline="grid"
+          tracking="normal"
+          lineHeight="default"
+          size="md"
+          debug
+        >
+          Flexible Typography:
+        </Text>{' '}
+        Control font family, size, weight, line height, and letter spacing to
+        achieve your desired design.
+      </Paragraph>
+      <Paragraph debug>
+        <Text
+          family="ui"
+          weight="bolder"
+          baseline="grid"
+          tracking="normal"
+          lineHeight="default"
+          size="md"
+          debug
+        >
+          Accessibility First:
+        </Text>{' '}
+        All components are built with WCAG 2.1 AA compliance in mind.
+      </Paragraph>
+
+      <Heading as="h3" weight="normal" debug>
+        Usage Guidelines
+      </Heading>
+      <Paragraph debug>
+        Use{' '}
+        <Text
+          family="ui"
+          weight="bolder"
+          baseline="grid"
+          tracking="normal"
+          lineHeight="default"
+          size="md"
+          debug
+        >
+          Heading
+        </Text>{' '}
+        components for page and section titles. They always use the header font
+        family for visual distinction.
+      </Paragraph>
+      <Paragraph debug>
+        Use{' '}
+        <Text
+          family="ui"
+          weight="bolder"
+          baseline="grid"
+          tracking="normal"
+          lineHeight="default"
+          size="md"
+          debug
+        >
+          Paragraph
+        </Text>{' '}
+        components for body content. They always use the UI font family
+        optimized for readability.
+      </Paragraph>
+      <Paragraph size="sm" weight="lighter" debug>
+        For more information, visit our complete documentation.
+      </Paragraph>
+    </RealWorldGrid>
+  </GridBackground>
+)
+RealWorldWithGrid.storyName = 'Real World Example - With Grid'
+RealWorldWithGrid.parameters = {
+  docs: {
+    description: {
+      story:
+        'Same as the Real World Example, but with the 4px baseline grid visible and debug mode enabled. Notice how all text baselines and spacing align perfectly to the grid lines.',
     },
   },
 }
