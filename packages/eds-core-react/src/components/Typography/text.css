@@ -21,12 +21,6 @@
 .caption,
 .overline {
   margin: 0;
-  padding: 0;
-  font-family: Inter, sans-serif;
-  font-weight: normal;
-  font-style: normal;
-  text-transform: none;
-  letter-spacing: normal;
 }
 
 :root {
@@ -78,101 +72,100 @@
   --font-size: var(--font-size-xs);
   font-size: var(--font-size);
   line-height: var(--line-height-xs-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-xs-squished);
+  }
 }
 
 .text-sm {
   --font-size: var(--font-size-sm);
   font-size: var(--font-size);
   line-height: var(--line-height-sm-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-sm-squished);
+  }
 }
 
 .text-md {
   --font-size: var(--font-size-md);
   font-size: var(--font-size);
   line-height: var(--line-height-md-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-md-squished);
+  }
 }
 
 .text-lg {
   --font-size: var(--font-size-lg);
   font-size: var(--font-size);
   line-height: var(--line-height-lg-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-lg-squished);
+  }
 }
 
 .text-xl {
   --font-size: var(--font-size-xl);
   font-size: var(--font-size);
   line-height: var(--line-height-xl-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-xl-squished);
+  }
 }
 
 .text-2xl {
   --font-size: var(--font-size-2xl);
   font-size: var(--font-size);
   line-height: var(--line-height-2xl-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-2xl-squished);
+  }
 }
 
 .text-3xl {
   --font-size: var(--font-size-3xl);
   font-size: var(--font-size);
   line-height: var(--line-height-3xl-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-3xl-squished);
+  }
 }
 
 .text-4xl {
   --font-size: var(--font-size-4xl);
   font-size: var(--font-size);
   line-height: var(--line-height-4xl-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-4xl-squished);
+  }
 }
 
 .text-5xl {
   --font-size: var(--font-size-5xl);
   font-size: var(--font-size);
   line-height: var(--line-height-5xl-default);
+
+  &.line-height-squished {
+    line-height: var(--line-height-5xl-squished);
+  }
 }
 
 .text-6xl {
   --font-size: var(--font-size-6xl);
   font-size: var(--font-size);
   line-height: var(--line-height-6xl-default);
-}
 
-/* Line height squished variants (only override when needed) */
-.line-height-squished.text-xs {
-  line-height: var(--line-height-xs-squished);
-}
-
-.line-height-squished.text-sm {
-  line-height: var(--line-height-sm-squished);
-}
-
-.line-height-squished.text-md {
-  line-height: var(--line-height-md-squished);
-}
-
-.line-height-squished.text-lg {
-  line-height: var(--line-height-lg-squished);
-}
-
-.line-height-squished.text-xl {
-  line-height: var(--line-height-xl-squished);
-}
-
-.line-height-squished.text-2xl {
-  line-height: var(--line-height-2xl-squished);
-}
-
-.line-height-squished.text-3xl {
-  line-height: var(--line-height-3xl-squished);
-}
-
-.line-height-squished.text-4xl {
-  line-height: var(--line-height-4xl-squished);
-}
-
-.line-height-squished.text-5xl {
-  line-height: var(--line-height-5xl-squished);
-}
-
-.line-height-squished.text-6xl {
-  line-height: var(--line-height-6xl-squished);
+  &.line-height-squished {
+    line-height: var(--line-height-6xl-squished);
+  }
 }
 
 /* Font weight variants */
@@ -244,6 +237,31 @@
   }
 }
 
+/* Debug helper */
+.text[data-debug] {
+  background: color-mix(in oklch, limegreen, transparent 70%);
+}
+
+/* Icon sizing within text elements - adjusts based on font-size */
+.text,
+.text-xs,
+.text-sm,
+.text-md,
+.text-lg,
+.text-xl,
+.text-2xl,
+.text-3xl,
+.text-4xl,
+.text-5xl,
+.text-6xl {
+  & .icon {
+    width: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
+    font-size: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
+    margin-block: -0.5em;
+    margin-inline: -0.2em;
+  }
+}
+
 /* Composite typography styles */
 .h1 {
   font-size: var(--font-size-6xl);
@@ -311,27 +329,4 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-}
-
-/* Debug helper */
-.text[data-debug] {
-  background: color-mix(in oklch, limegreen, transparent 70%);
-}
-
-/* Icon sizing within text elements - adjusts based on font-size */
-.text .icon,
-.text-xs .icon,
-.text-sm .icon,
-.text-md .icon,
-.text-lg .icon,
-.text-xl .icon,
-.text-2xl .icon,
-.text-3xl .icon,
-.text-4xl .icon,
-.text-5xl .icon,
-.text-6xl .icon {
-  width: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
-  font-size: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
-  margin-block: -0.5em;
-  margin-inline: -0.2em;
 }
