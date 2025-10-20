@@ -1,8 +1,12 @@
 import { Text, Heading, Paragraph } from './Text'
+import { Icon } from '../Icon'
+import * as icons from '@equinor/eds-icons'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../.storybook/components'
 import type { TextProps, HeadingProps, ParagraphProps } from './Text.types'
 import styled from 'styled-components'
+
+Icon.add(icons)
 
 const ComparisonGrid = styled.div`
   display: grid;
@@ -14,7 +18,7 @@ const ComparisonRow = styled.div`
   display: grid;
   grid-template-columns: 150px 1fr;
   gap: 16px;
-  align-items: baseline;
+  align-items: center;
   padding: 12px;
   background: #f7f7f7;
   border-radius: 4px;
@@ -69,6 +73,40 @@ const IntroductionGrid = styled.section`
   & > h2 {
     margin-bottom: 4px;
   }
+`
+
+// Example button component using text classes directly
+const Button = styled.button<{ $size?: string }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+
+  /* Apply text size to the button container */
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &:active {
+    background: #e5e5e5;
+  }
+`
+
+// Container for demonstrating icon alignment
+const IconTextContainer = styled.div<{ $size?: string }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+
+  /* Apply text size to the container */
+  ${({ $size }) =>
+    $size && `font-size: var(--eds-typography-ui-body-${$size}-font-size);`}
 `
 
 const meta: Meta = {
@@ -1056,6 +1094,472 @@ Debug.parameters = {
     description: {
       story:
         'Debug mode adds a visual background to help developers understand text box alignment and spacing.',
+    },
+  },
+}
+
+export const IconsAsTextSiblings: StoryFn = () => (
+  <Stack>
+    <Heading as="h3" style={{ marginBottom: '24px' }}>
+      Icons as Siblings to Text Elements
+    </Heading>
+    <Paragraph style={{ marginBottom: '16px' }}>
+      The <code>.icon</code> class is designed for icons that are{' '}
+      <strong>siblings</strong> to text elements within a container. The parent
+      container defines the font size using <code>text-[size]</code> classes,
+      and both the text (with <code>text-baseline-center</code>) and icon (with{' '}
+      <code>.icon</code>) adapt automatically.
+    </Paragraph>
+
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>XS</Label>
+        <IconTextContainer $size="xs" className="font-family-ui text-xs">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>SM</Label>
+        <IconTextContainer $size="sm" className="font-family-ui text-sm">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>MD</Label>
+        <IconTextContainer $size="md" className="font-family-ui text-md">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>LG</Label>
+        <IconTextContainer $size="lg" className="font-family-ui text-lg">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>XL</Label>
+        <IconTextContainer $size="xl" className="font-family-ui text-xl">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>2XL</Label>
+        <IconTextContainer $size="2xl" className="font-family-ui text-2xl">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>3XL</Label>
+        <IconTextContainer $size="3xl" className="font-family-ui text-3xl">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>4XL</Label>
+        <IconTextContainer $size="4xl" className="font-family-ui text-4xl">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>5XL</Label>
+        <IconTextContainer $size="5xl" className="font-family-ui text-5xl">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>6XL</Label>
+        <IconTextContainer $size="6xl" className="font-family-ui text-6xl">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save your work</span>
+        </IconTextContainer>
+      </ComparisonRow>
+    </ComparisonGrid>
+  </Stack>
+)
+IconsAsTextSiblings.storyName = 'Icons as Text Siblings - Size Scale'
+IconsAsTextSiblings.parameters = {
+  docs: {
+    description: {
+      story:
+        'Icons as siblings to text elements. The parent container sets the font-size, and both icon and text adapt. This is the correct pattern for buttons, links, and other interactive elements.',
+    },
+  },
+}
+
+export const ButtonsWithIcons: StoryFn = () => (
+  <Stack>
+    <Heading as="h3" style={{ marginBottom: '24px' }}>
+      Button Components with Icons
+    </Heading>
+    <Paragraph style={{ marginBottom: '16px' }}>
+      Buttons are a common use case where icons and text are siblings. The
+      button element defines the size, and both icon and text inherit from it.
+    </Paragraph>
+
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>Small</Label>
+        <Button $size="sm" className="font-family-ui text-sm">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save</span>
+        </Button>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Medium</Label>
+        <Button $size="md" className="font-family-ui text-md">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save</span>
+        </Button>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Large</Label>
+        <Button $size="lg" className="font-family-ui text-lg">
+          <Icon name="save" className="icon" />
+          <span className="text-baseline-center">Save</span>
+        </Button>
+      </ComparisonRow>
+    </ComparisonGrid>
+
+    <Heading as="h4" style={{ marginTop: '24px', marginBottom: '16px' }}>
+      Icon Positions in Buttons
+    </Heading>
+
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>Leading Icon</Label>
+        <Button $size="md" className="font-family-ui text-md">
+          <Icon name="add" className="icon" />
+          <span className="text-baseline-center">Add Item</span>
+        </Button>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Trailing Icon</Label>
+        <Button $size="md" className="font-family-ui text-md">
+          <span className="text-baseline-center">Next</span>
+          <Icon name="arrow_forward" className="icon" />
+        </Button>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Icon Only</Label>
+        <Button
+          $size="md"
+          className="font-family-ui text-md"
+          style={{ padding: '8px' }}
+          aria-label="Delete"
+        >
+          <Icon name="delete_to_trash" className="icon" />
+        </Button>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Both Sides</Label>
+        <Button $size="md" className="font-family-ui text-md">
+          <Icon name="star_outlined" className="icon" />
+          <span className="text-baseline-center">Favorite</span>
+          <Icon name="chevron_down" className="icon" />
+        </Button>
+      </ComparisonRow>
+    </ComparisonGrid>
+  </Stack>
+)
+ButtonsWithIcons.storyName = 'Buttons with Icons'
+ButtonsWithIcons.parameters = {
+  docs: {
+    description: {
+      story:
+        'Common button patterns with icons. The button element uses text-[size] classes, and children use .icon and .text-baseline-center for proper alignment.',
+    },
+  },
+}
+
+export const IconTextAlignment: StoryFn = () => (
+  <Stack>
+    <Heading as="h3" style={{ marginBottom: '24px' }}>
+      Icon and Text Alignment Patterns
+    </Heading>
+    <Paragraph style={{ marginBottom: '16px' }}>
+      Different alignment strategies for different use cases. The{' '}
+      <code>text-baseline-center</code> class centers text within its container,
+      which is ideal for pairing with icons in flex containers.
+    </Paragraph>
+
+    <ComparisonGrid>
+      <ComparisonRow>
+        <Label>Center Aligned</Label>
+        <div
+          className="font-family-ui text-lg"
+          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+        >
+          <Icon name="info_circle" className="icon" />
+          <span className="text-baseline-center">Information message</span>
+        </div>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>With Link</Label>
+        <a
+          href="#"
+          className="font-family-ui text-md"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+        >
+          <Icon name="link" className="icon" />
+          <span className="text-baseline-center">External link</span>
+          <Icon name="external_link" className="icon" />
+        </a>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>List Item</Label>
+        <div
+          className="font-family-ui text-md"
+          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+        >
+          <Icon name="check_circle_outlined" className="icon" />
+          <span className="text-baseline-center">
+            Task completed successfully
+          </span>
+        </div>
+      </ComparisonRow>
+      <ComparisonRow>
+        <Label>Badge/Chip</Label>
+        <div
+          className="font-family-ui text-sm"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '4px 12px',
+            background: '#e3f2fd',
+            borderRadius: '16px',
+          }}
+        >
+          <Icon name="account_circle" className="icon" />
+          <span className="text-baseline-center">John Doe</span>
+          <Icon name="close" className="icon" />
+        </div>
+      </ComparisonRow>
+    </ComparisonGrid>
+  </Stack>
+)
+IconTextAlignment.storyName = 'Icon and Text Alignment'
+IconTextAlignment.parameters = {
+  docs: {
+    description: {
+      story:
+        'Various patterns showing how icons and text work together as siblings in different UI contexts.',
+    },
+  },
+}
+
+export const IconAlignmentWithGrid: StoryFn = () => (
+  <GridBackground>
+    <Stack>
+      <Heading as="h3" debug style={{ marginBottom: '24px' }}>
+        Icon Alignment with Baseline Grid
+      </Heading>
+      <Paragraph debug style={{ marginBottom: '16px' }}>
+        When icons are siblings to text with <code>text-baseline-center</code>,
+        they maintain visual harmony with the baseline grid system.
+      </Paragraph>
+
+      <div
+        className="font-family-ui text-md"
+        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+        data-debug
+      >
+        <Icon name="info_circle" className="icon" />
+        <span className="text-baseline-center" data-debug>
+          Medium text with centered baseline
+        </span>
+      </div>
+
+      <div
+        className="font-family-ui text-lg"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginTop: '16px',
+        }}
+        data-debug
+      >
+        <Icon name="warning_outlined" className="icon" />
+        <span className="text-baseline-center" data-debug>
+          Large text with centered baseline
+        </span>
+      </div>
+
+      <div
+        className="font-family-ui text-sm"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginTop: '16px',
+        }}
+        data-debug
+      >
+        <Icon name="check" className="icon" />
+        <span className="text-baseline-center" data-debug>
+          Small text with centered baseline
+        </span>
+      </div>
+
+      <Button
+        $size="md"
+        className="font-family-ui text-md"
+        style={{ marginTop: '16px' }}
+        data-debug
+      >
+        <Icon name="save" className="icon" />
+        <span className="text-baseline-center" data-debug>
+          Button with icon
+        </span>
+      </Button>
+    </Stack>
+  </GridBackground>
+)
+IconAlignmentWithGrid.storyName = 'Icon Alignment with Grid'
+IconAlignmentWithGrid.parameters = {
+  docs: {
+    description: {
+      story:
+        'Debug mode showing how icon and text siblings align to the baseline grid. The text-baseline-center class centers text within its container for optical alignment with icons.',
+    },
+  },
+}
+
+export const UsageExamples: StoryFn = () => (
+  <Stack>
+    <Heading as="h3" style={{ marginBottom: '24px' }}>
+      Real-World Usage Examples
+    </Heading>
+
+    <Heading as="h4" style={{ marginBottom: '12px' }}>
+      Navigation Menu
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <a
+        href="#"
+        className="font-family-ui text-md"
+        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+      >
+        <Icon name="home" className="icon" />
+        <span className="text-baseline-center">Home</span>
+      </a>
+      <a
+        href="#"
+        className="font-family-ui text-md"
+        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+      >
+        <Icon name="dashboard" className="icon" />
+        <span className="text-baseline-center">Dashboard</span>
+      </a>
+      <a
+        href="#"
+        className="font-family-ui text-md"
+        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+      >
+        <Icon name="settings" className="icon" />
+        <span className="text-baseline-center">Settings</span>
+      </a>
+    </div>
+
+    <Heading as="h4" style={{ marginTop: '24px', marginBottom: '12px' }}>
+      Action Buttons
+    </Heading>
+    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      <Button $size="md" className="font-family-ui text-md">
+        <Icon name="save" className="icon" />
+        <span className="text-baseline-center">Save</span>
+      </Button>
+      <Button $size="md" className="font-family-ui text-md">
+        <Icon name="file_description" className="icon" />
+        <span className="text-baseline-center">Export</span>
+      </Button>
+      <Button $size="md" className="font-family-ui text-md">
+        <Icon name="delete_to_trash" className="icon" />
+        <span className="text-baseline-center">Delete</span>
+      </Button>
+      <Button $size="md" className="font-family-ui text-md">
+        <span className="text-baseline-center">Share</span>
+        <Icon name="share" className="icon" />
+      </Button>
+    </div>
+
+    <Heading as="h4" style={{ marginTop: '24px', marginBottom: '12px' }}>
+      Status Messages
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div
+        className="font-family-ui text-md"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          color: '#2e7d32',
+        }}
+      >
+        <Icon name="check_circle_outlined" className="icon" />
+        <span className="text-baseline-center">
+          Your changes have been saved
+        </span>
+      </div>
+      <div
+        className="font-family-ui text-md"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          color: '#ed6c02',
+        }}
+      >
+        <Icon name="warning_outlined" className="icon" />
+        <span className="text-baseline-center">
+          Please review before submitting
+        </span>
+      </div>
+      <div
+        className="font-family-ui text-md"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          color: '#d32f2f',
+        }}
+      >
+        <Icon name="error_outlined" className="icon" />
+        <span className="text-baseline-center">An error has occurred</span>
+      </div>
+      <div
+        className="font-family-ui text-md"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          color: '#0288d1',
+        }}
+      >
+        <Icon name="info_circle" className="icon" />
+        <span className="text-baseline-center">
+          Updates available for download
+        </span>
+      </div>
+    </div>
+  </Stack>
+)
+UsageExamples.storyName = 'Real-World Usage Examples'
+UsageExamples.parameters = {
+  docs: {
+    description: {
+      story:
+        'Practical examples of icons and text as siblings in common UI patterns: navigation, buttons, and status messages.',
     },
   },
 }

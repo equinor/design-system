@@ -806,20 +806,10 @@
 }
 
 /* Icon sizing within text elements - adjusts based on font-size */
-.text-xs,
-.text-sm,
-.text-md,
-.text-lg,
-.text-xl,
-.text-2xl,
-.text-3xl,
-.text-4xl,
-.text-5xl,
-.text-6xl {
-  & .icon {
-    width: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
-    font-size: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
-    margin-block: -0.5em;
-    margin-inline: -0.2em;
-  }
+.icon {
+  width: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
+  height: auto;
+  font-size: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
+  margin-block: -0.5em;
+  margin-inline: -0.2em;
 }
