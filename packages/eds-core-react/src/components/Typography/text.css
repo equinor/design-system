@@ -1,3 +1,5 @@
+/* TODO: Update to reference the font-size, line-height and font-weight design tokens from @eds-tokens/variables */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 @property --font-size {
@@ -73,52 +75,62 @@
 
 /* Font size classes with default line heights */
 .text-xs {
-  font-size: var(--font-size-xs);
+  --font-size: var(--font-size-xs);
+  font-size: var(--font-size);
   line-height: var(--line-height-xs-default);
 }
 
 .text-sm {
-  font-size: var(--font-size-sm);
+  --font-size: var(--font-size-sm);
+  font-size: var(--font-size);
   line-height: var(--line-height-sm-default);
 }
 
 .text-md {
-  font-size: var(--font-size-md);
+  --font-size: var(--font-size-md);
+  font-size: var(--font-size);
   line-height: var(--line-height-md-default);
 }
 
 .text-lg {
-  font-size: var(--font-size-lg);
+  --font-size: var(--font-size-lg);
+  font-size: var(--font-size);
   line-height: var(--line-height-lg-default);
 }
 
 .text-xl {
-  font-size: var(--font-size-xl);
+  --font-size: var(--font-size-xl);
+  font-size: var(--font-size);
   line-height: var(--line-height-xl-default);
 }
 
 .text-2xl {
-  font-size: var(--font-size-2xl);
+  --font-size: var(--font-size-2xl);
+  font-size: var(--font-size);
   line-height: var(--line-height-2xl-default);
 }
 
 .text-3xl {
-  font-size: var(--font-size-3xl);
+  --font-size: var(--font-size-3xl);
+  font-size: var(--font-size);
   line-height: var(--line-height-3xl-default);
 }
 
 .text-4xl {
-  font-size: var(--font-size-4xl);
+  --font-size: var(--font-size-4xl);
+  font-size: var(--font-size);
   line-height: var(--line-height-4xl-default);
 }
 
 .text-5xl {
-  font-size: var(--font-size-5xl);
+  --font-size: var(--font-size-5xl);
+  font-size: var(--font-size);
   line-height: var(--line-height-5xl-default);
 }
 
 .text-6xl {
-  font-size: var(--font-size-6xl);
+  --font-size: var(--font-size-6xl);
+  font-size: var(--font-size);
   line-height: var(--line-height-6xl-default);
 }
 
@@ -191,12 +203,42 @@
   .caption,
   .overline {
     text-box: trim-both ex alphabetic;
+    /* 
+     * Goal: Align text to the 4px baseline grid for consistent vertical rhythm
+     * 
+     * This ensures all text elements align to a consistent baseline across the page,
+     * creating visual harmony and structure throughout the interface.
+     * 
+     * How it works:
+     * - text-box: trim-both ex alphabetic removes browser's default line-height spacing
+     * - padding-top: Adds calculated space to snap the baseline to the nearest 4px grid line
+     * - padding-bottom: 0 keeps the bottom edge tight to the alphabetic baseline
+     * - round(1cap, 4px): Rounds cap height to the nearest 4px for grid alignment
+     * 
+     * Result: Text baselines align to 4px intervals (0px, 4px, 8px, 12px, etc.)
+     * This makes spacing between text elements predictable and visually balanced.
+     */
     padding-top: calc(round(1cap, 4px) - 1ex);
     padding-bottom: 0;
   }
 
   .text-baseline-center {
     text-box: trim-both ex alphabetic;
+    /* 
+     * Goal: Keep the total height of the text element aligned to the 4px baseline grid
+     * 
+     * This padding calculation ensures that after trimming the text box, the total
+     * element height (text + padding) is a multiple of 4px. This maintains visual
+     * consistency with the rest of the design system's vertical rhythm.
+     * 
+     * How it works:
+     * - round(1cap, 4px): Rounds the cap height to nearest 4px increment
+     * - We adjust padding to compensate for the difference between cap and x-height
+     * - Padding is distributed evenly above and below for optical centering
+     * 
+     * Result: Total height snaps to 4px grid (16px, 20px, 24px, etc.) while
+     * maintaining centered appearance within UI elements like buttons and badges.
+     */
     padding-top: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
     padding-bottom: calc((round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2);
   }
@@ -274,4 +316,22 @@
 /* Debug helper */
 .text[data-debug] {
   background: color-mix(in oklch, limegreen, transparent 70%);
+}
+
+/* Icon sizing within text elements - adjusts based on font-size */
+.text .icon,
+.text-xs .icon,
+.text-sm .icon,
+.text-md .icon,
+.text-lg .icon,
+.text-xl .icon,
+.text-2xl .icon,
+.text-3xl .icon,
+.text-4xl .icon,
+.text-5xl .icon,
+.text-6xl .icon {
+  width: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
+  font-size: calc(24px * tan(atan2(var(--font-size), 1px)) / 16);
+  margin-block: -0.5em;
+  margin-inline: -0.2em;
 }

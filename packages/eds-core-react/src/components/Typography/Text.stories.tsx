@@ -247,7 +247,7 @@ export const ButtonAlignment: StoryFn<typeof Text> = () => (
             cursor: 'pointer',
           }}
         >
-          <Text size="md" baseline="grid" debug>
+          <Text size="md" baseline="center" lineHeight="squished" debug>
             Grid - Click me
           </Text>
         </button>
@@ -261,7 +261,7 @@ export const ButtonAlignment: StoryFn<typeof Text> = () => (
             cursor: 'pointer',
           }}
         >
-          <Text size="md" baseline="center" debug>
+          <Text size="md" baseline="center" lineHeight="squished" debug>
             Center - Click me
           </Text>
         </button>
@@ -353,3 +353,124 @@ export const AllVariants: StoryFn<typeof Text> = () => (
     </section>
   </div>
 )
+
+export const PopoverExample: StoryFn<typeof Text> = () => {
+  const dialogStyle: React.CSSProperties = {
+    position: 'relative',
+    border: '1px solid #000',
+    borderRadius: '4px',
+    padding: '0',
+    maxWidth: '16em',
+    boxShadow: 'none',
+    background: 'white',
+  }
+
+  const containerStyle: React.CSSProperties = {
+    padding: '16px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '16px',
+    borderBottom: '1px solid #000',
+    background:
+      'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(255,0,0,0.1) 3px, rgba(255,0,0,0.1) 4px)',
+  }
+
+  const contentContainerStyle: React.CSSProperties = {
+    padding: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    background:
+      'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(255,0,0,0.1) 3px, rgba(255,0,0,0.1) 4px)',
+  }
+
+  const buttonGroupStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '16px',
+  }
+
+  const buttonStyle: React.CSSProperties = {
+    padding: '12px 16px',
+    background: 'transparent',
+    color: '#000',
+    border: '1px solid #000',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  }
+
+  const iconButtonStyle: React.CSSProperties = {
+    padding: '0',
+    background: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '36px',
+    height: '36px',
+    marginInline: '-12px',
+    marginBlock: ' -12px',
+  }
+
+  return (
+    <div style={{ padding: '40px', background: '#f5f5f5' }}>
+      <div style={dialogStyle}>
+        <div style={containerStyle}>
+          <Heading as="h2" size="lg" baseline="grid" debug>
+            Popover label
+          </Heading>
+          <button
+            className="text-md"
+            style={iconButtonStyle}
+            aria-label="close popover"
+          >
+            <svg className="icon" viewBox="0 0 24 24">
+              <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" />
+            </svg>
+          </button>
+        </div>
+        <div style={contentContainerStyle}>
+          <Text size="lg" lineHeight="squished" baseline="grid">
+            Are you sure you want to delete this item?
+          </Text>
+          <div style={buttonGroupStyle}>
+            <button
+              style={buttonStyle}
+              className="text-md line-height-squished"
+            >
+              <svg className="icon" viewBox="0 0 24 24">
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59Z"
+                />
+              </svg>
+              <Text baseline="center" debug>
+                Delete
+              </Text>
+            </button>
+            <button
+              style={buttonStyle}
+              className="text-md line-height-squished"
+            >
+              <Text baseline="center" debug>
+                Cancel
+              </Text>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p style={{ marginTop: '20px', fontSize: '14px', color: '#6f6f6f' }}>
+        This example demonstrates the difference between{' '}
+        <strong>baseline-grid</strong> (used for headings and body text) and{' '}
+        <strong>baseline-center</strong> (used for button labels). Notice how
+        button text uses <code>baseline="center"</code> for better optical
+        centering within the button container.
+      </p>
+    </div>
+  )
+}
