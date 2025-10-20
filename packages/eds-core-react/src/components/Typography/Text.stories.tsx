@@ -144,7 +144,7 @@ HeadingPlayground.argTypes = {
   },
   tracking: {
     control: { type: 'select' },
-    options: ['tight', 'normal', 'loose'],
+    options: ['tight', 'normal', 'wide'],
     description: 'Letter spacing (tracking)',
   },
   debug: {
@@ -226,8 +226,8 @@ export const HeadingComparison: StoryFn = () => (
         </Heading>
       </ComparisonRow>
       <ComparisonRow>
-        <Label>Loose</Label>
-        <Heading as="h2" tracking="loose">
+        <Label>Wide</Label>
+        <Heading as="h2" tracking="wide">
           The quick brown fox jumps over the lazy dog
         </Heading>
       </ComparisonRow>
@@ -386,8 +386,8 @@ export const ParagraphComparison: StoryFn = () => {
           <Paragraph tracking="normal">{sampleText}</Paragraph>
         </ComparisonRow>
         <ComparisonRow>
-          <Label>Loose</Label>
-          <Paragraph tracking="loose">{sampleText}</Paragraph>
+          <Label>Wide</Label>
+          <Paragraph tracking="wide">{sampleText}</Paragraph>
         </ComparisonRow>
       </ComparisonGrid>
     </div>

@@ -20,7 +20,7 @@ export type BaselineAlignment = 'grid' | 'center'
 
 export type FontWeight = 'lighter' | 'normal' | 'bolder'
 
-export type Tracking = 'tight' | 'normal' | 'loose'
+export type Tracking = 'tight' | 'normal' | 'wide'
 
 export type TypographyVariant =
   | 'h1'
