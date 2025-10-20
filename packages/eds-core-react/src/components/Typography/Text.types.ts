@@ -37,19 +37,17 @@ export type TypographyVariant =
 
 export type TextProps = {
   /** Font family */
-  family?: FontFamily
+  family: FontFamily
   /** Size of the text */
-  size?: FontSize
+  size: FontSize
   /** Line height variant */
-  lineHeight?: LineHeight
+  lineHeight: LineHeight
   /** Baseline alignment strategy */
-  baseline?: BaselineAlignment
+  baseline: BaselineAlignment
   /** Font weight */
-  weight?: FontWeight
+  weight: FontWeight
   /** Letter spacing (tracking) */
-  tracking?: Tracking
-  /** Predefined typography variant (overrides individual props) */
-  variant?: TypographyVariant
+  tracking: Tracking
   /** Enable debug mode to visualize text box */
   debug?: boolean
   /** Children to render */
@@ -58,11 +56,16 @@ export type TextProps = {
 
 export type HeadingProps = Omit<
   TextProps,
-  'variant' | 'size' | 'lineHeight' | 'family'
-> & {
-  /** HTML element to render as */
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-} & HTMLAttributes<HTMLHeadingElement>
+  'size' | 'lineHeight' | 'family' | 'baseline' | 'weight' | 'tracking'
+> &
+  Partial<Pick<TextProps, 'weight' | 'tracking'>> & {
+    /** HTML element to render as */
+    as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  } & HTMLAttributes<HTMLHeadingElement>
 
-export type ParagraphProps = Omit<TextProps, 'variant' | 'family'> &
+export type ParagraphProps = Omit<
+  TextProps,
+  'family' | 'baseline' | 'size' | 'lineHeight' | 'weight' | 'tracking'
+> &
+  Partial<Pick<TextProps, 'size' | 'lineHeight' | 'weight' | 'tracking'>> &
   HTMLAttributes<HTMLParagraphElement>

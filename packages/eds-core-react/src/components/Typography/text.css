@@ -801,7 +801,7 @@
 }
 
 /* Debug helper */
-.text[data-debug] {
+[data-debug] {
   background: color-mix(in oklch, limegreen, transparent 70%);
 }
 

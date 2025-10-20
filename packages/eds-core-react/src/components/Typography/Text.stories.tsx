@@ -20,11 +20,14 @@ const ComparisonRow = styled.div`
   border-radius: 4px;
 `
 
-const Label = styled(Text).attrs({
+const Label = styled(Text).attrs<Partial<TextProps>>({
   family: 'ui',
   size: 'xs',
   weight: 'bolder',
-})`
+  lineHeight: 'default',
+  baseline: 'grid',
+  tracking: 'normal',
+})<Partial<TextProps>>`
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #666;
@@ -85,7 +88,6 @@ HeadingPlayground.args = {
   as: 'h2',
   weight: 'normal',
   tracking: 'normal',
-  baseline: undefined,
   debug: false,
 }
 HeadingPlayground.argTypes = {
@@ -103,11 +105,6 @@ HeadingPlayground.argTypes = {
     control: { type: 'select' },
     options: ['tight', 'normal', 'loose'],
     description: 'Letter spacing (tracking)',
-  },
-  baseline: {
-    control: { type: 'select' },
-    options: [undefined, 'grid', 'center'],
-    description: 'Baseline alignment strategy',
   },
   debug: {
     control: { type: 'boolean' },
@@ -220,7 +217,6 @@ ParagraphPlayground.args = {
   lineHeight: 'default',
   weight: 'normal',
   tracking: 'normal',
-  baseline: undefined,
   debug: false,
 }
 ParagraphPlayground.argTypes = {
@@ -243,11 +239,6 @@ ParagraphPlayground.argTypes = {
     control: { type: 'select' },
     options: ['tight', 'normal', 'loose'],
     description: 'Letter spacing (tracking)',
-  },
-  baseline: {
-    control: { type: 'select' },
-    options: [undefined, 'grid', 'center'],
-    description: 'Baseline alignment strategy',
   },
   debug: {
     control: { type: 'boolean' },
@@ -378,7 +369,7 @@ TextPlayground.args = {
   lineHeight: 'default',
   weight: 'normal',
   tracking: 'normal',
-  baseline: undefined,
+  baseline: 'grid',
   debug: false,
 }
 TextPlayground.argTypes = {
@@ -409,7 +400,7 @@ TextPlayground.argTypes = {
   },
   baseline: {
     control: { type: 'select' },
-    options: [undefined, 'grid', 'center'],
+    options: ['grid', 'center'],
     description: 'Baseline alignment strategy',
   },
   debug: {
@@ -429,61 +420,131 @@ export const TextSizeScale: StoryFn = () => {
       <ComparisonGrid>
         <ComparisonRow>
           <Label>XS</Label>
-          <Text family="ui" size="xs">
+          <Text
+            family="ui"
+            size="xs"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>SM</Label>
-          <Text family="ui" size="sm">
+          <Text
+            family="ui"
+            size="sm"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>MD</Label>
-          <Text family="ui" size="md">
+          <Text
+            family="ui"
+            size="md"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>LG</Label>
-          <Text family="ui" size="lg">
+          <Text
+            family="ui"
+            size="lg"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>XL</Label>
-          <Text family="ui" size="xl">
+          <Text
+            family="ui"
+            size="xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>2XL</Label>
-          <Text family="ui" size="2xl">
+          <Text
+            family="ui"
+            size="2xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>3XL</Label>
-          <Text family="ui" size="3xl">
+          <Text
+            family="ui"
+            size="3xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>4XL</Label>
-          <Text family="ui" size="4xl">
+          <Text
+            family="ui"
+            size="4xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>5XL</Label>
-          <Text family="ui" size="5xl">
+          <Text
+            family="ui"
+            size="5xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>6XL</Label>
-          <Text family="ui" size="6xl">
+          <Text
+            family="ui"
+            size="6xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
@@ -495,61 +556,131 @@ export const TextSizeScale: StoryFn = () => {
       <ComparisonGrid>
         <ComparisonRow>
           <Label>XS</Label>
-          <Text family="header" size="xs">
+          <Text
+            family="header"
+            size="xs"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>SM</Label>
-          <Text family="header" size="sm">
+          <Text
+            family="header"
+            size="sm"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>MD</Label>
-          <Text family="header" size="md">
+          <Text
+            family="header"
+            size="md"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>LG</Label>
-          <Text family="header" size="lg">
+          <Text
+            family="header"
+            size="lg"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>XL</Label>
-          <Text family="header" size="xl">
+          <Text
+            family="header"
+            size="xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>2XL</Label>
-          <Text family="header" size="2xl">
+          <Text
+            family="header"
+            size="2xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>3XL</Label>
-          <Text family="header" size="3xl">
+          <Text
+            family="header"
+            size="3xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>4XL</Label>
-          <Text family="header" size="4xl">
+          <Text
+            family="header"
+            size="4xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>5XL</Label>
-          <Text family="header" size="5xl">
+          <Text
+            family="header"
+            size="5xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
         <ComparisonRow>
           <Label>6XL</Label>
-          <Text family="header" size="6xl">
+          <Text
+            family="header"
+            size="6xl"
+            lineHeight="default"
+            baseline="grid"
+            tracking="normal"
+            weight="normal"
+          >
             {sampleText}
           </Text>
         </ComparisonRow>
@@ -571,15 +702,36 @@ export const InlineTextStyling: StoryFn = () => (
   <Stack>
     <Paragraph>
       The Text component can be used for inline styling. For example,{' '}
-      <Text family="ui" size="lg" weight="bolder">
+      <Text
+        family="ui"
+        size="lg"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+      >
         emphasized content
       </Text>{' '}
       or{' '}
-      <Text family="ui" size="sm" weight="lighter">
+      <Text
+        family="ui"
+        size="sm"
+        weight="lighter"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+      >
         de-emphasized content
       </Text>
       . You can mix{' '}
-      <Text family="header" size="xl" weight="bolder">
+      <Text
+        family="header"
+        size="xl"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+      >
         header font
       </Text>{' '}
       with regular text for maximum flexibility.
@@ -612,21 +764,42 @@ export const RealWorldExample: StoryFn = () => (
       Key Features
     </Heading>
     <Paragraph>
-      <Text family="ui" weight="bolder">
+      <Text
+        family="ui"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+        size="md"
+      >
         Baseline Grid Alignment:
       </Text>{' '}
       All text components support precise alignment to a 4px baseline grid for
       consistent vertical rhythm.
     </Paragraph>
     <Paragraph>
-      <Text family="ui" weight="bolder">
+      <Text
+        family="ui"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+        size="md"
+      >
         Flexible Typography:
       </Text>{' '}
       Control font family, size, weight, line height, and letter spacing to
       achieve your desired design.
     </Paragraph>
     <Paragraph>
-      <Text family="ui" weight="bolder">
+      <Text
+        family="ui"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+        size="md"
+      >
         Accessibility First:
       </Text>{' '}
       All components are built with WCAG 2.1 AA compliance in mind.
@@ -637,7 +810,14 @@ export const RealWorldExample: StoryFn = () => (
     </Heading>
     <Paragraph>
       Use{' '}
-      <Text family="ui" weight="bolder">
+      <Text
+        family="ui"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+        size="md"
+      >
         Heading
       </Text>{' '}
       components for page and section titles. They always use the header font
@@ -645,7 +825,14 @@ export const RealWorldExample: StoryFn = () => (
     </Paragraph>
     <Paragraph>
       Use{' '}
-      <Text family="ui" weight="bolder">
+      <Text
+        family="ui"
+        weight="bolder"
+        baseline="grid"
+        tracking="normal"
+        lineHeight="default"
+        size="md"
+      >
         Paragraph
       </Text>{' '}
       components for body content. They always use the UI font family optimized
@@ -678,7 +865,15 @@ export const Debug: StoryFn = () => (
       This paragraph has debug mode enabled, showing the text box with a
       background color to help visualize alignment and spacing.
     </Paragraph>
-    <Text family="ui" size="lg" debug>
+    <Text
+      family="ui"
+      size="lg"
+      lineHeight="default"
+      baseline="grid"
+      weight="normal"
+      tracking="normal"
+      debug
+    >
       Text component with debug mode
     </Text>
   </Stack>

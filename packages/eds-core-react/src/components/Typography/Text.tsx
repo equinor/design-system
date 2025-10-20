@@ -15,8 +15,8 @@ import './text.css'
 type BuildClassNameParams = {
   family: FontFamily
   size: FontSize
+  baseline: BaselineAlignment
   lineHeight?: LineHeight
-  baseline?: BaselineAlignment
   weight?: FontWeight
   tracking?: Tracking
   className?: string
@@ -70,11 +70,10 @@ export const Text = forwardRef<HTMLElement, TextProps>(
     {
       family,
       size,
-      lineHeight,
       baseline,
+      lineHeight,
       weight,
       tracking,
-      variant,
       debug,
       className,
       children,
@@ -86,8 +85,8 @@ export const Text = forwardRef<HTMLElement, TextProps>(
     const combinedClassName = buildClassName({
       family,
       size,
-      lineHeight,
       baseline,
+      lineHeight,
       weight,
       tracking,
       className,
@@ -134,9 +133,8 @@ const getHeadingSize = (as: HeadingProps['as']): FontSize => {
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   (
     {
-      baseline,
-      weight,
-      tracking,
+      weight = 'normal',
+      tracking = 'normal',
       debug,
       className,
       children,
@@ -148,7 +146,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     const combinedClassName = buildClassName({
       family: 'header',
       size: getHeadingSize(as),
-      baseline,
+      baseline: 'grid',
       weight,
       tracking,
       className,
@@ -177,11 +175,10 @@ Heading.displayName = 'Heading'
 export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   (
     {
-      size,
-      lineHeight,
-      baseline,
-      weight,
-      tracking,
+      size = 'md',
+      lineHeight = 'default',
+      weight = 'normal',
+      tracking = 'normal',
       debug,
       className,
       children,
@@ -191,9 +188,9 @@ export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   ) => {
     const combinedClassName = buildClassName({
       family: 'ui',
-      size,
+      baseline: 'grid',
       lineHeight,
-      baseline,
+      size,
       weight,
       tracking,
       className,
