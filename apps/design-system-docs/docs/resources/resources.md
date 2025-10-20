@@ -23,6 +23,7 @@ Find the tools, guides, and assets you need to work effectively with the Equinor
 - [Equinor Brand Assets](https://www.equinor.com/about-us/our-brand) – Official brand resources
 - [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) – Internal brand tools, colours, logos, and visuals
 - [Equinor Media Bank](https://equinor.fotoware.cloud/fotoweb/) – Internal photo library
+- [Brand Management - WR2633](https://docmap.equinor.com/Docmap/page/doc/dmDocIndex.html?DOCID=1000034875) - Work process requirements related to Equinor brand assignments such as advertising, media buying, sponsorship, exhibitions and events, employer branding, design and digital services.
 
 ## Available Packages
 
