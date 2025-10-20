@@ -29,8 +29,23 @@ const Label = styled(Text).attrs<Partial<TextProps>>({
   tracking: 'normal',
 })<Partial<TextProps>>`
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   color: #666;
+`
+
+const GridBackground = styled.div`
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 0, 0, 0.1) 3px,
+    rgba(255, 0, 0, 0.1) 4px
+  );
+  padding: 24px;
+
+  /* Debug mode styling for text elements */
+  [data-debug] {
+    background: color-mix(in oklch, limegreen, transparent 84%);
+  }
 `
 
 const meta: Meta = {
@@ -80,9 +95,12 @@ export const Introduction: StoryFn = () => (
   </section>
 )
 
-export const HeadingPlayground: StoryFn<HeadingProps> = (args) => (
-  <Heading {...args}>The quick brown fox jumps over the lazy dog</Heading>
-)
+export const HeadingPlayground: StoryFn<HeadingProps> = (args) => {
+  const content = (
+    <Heading {...args}>The quick brown fox jumps over the lazy dog</Heading>
+  )
+  return args.debug ? <GridBackground>{content}</GridBackground> : content
+}
 HeadingPlayground.storyName = 'Heading - Interactive'
 HeadingPlayground.args = {
   as: 'h2',
@@ -203,14 +221,17 @@ HeadingComparison.parameters = {
   },
 }
 
-export const ParagraphPlayground: StoryFn<ParagraphProps> = (args) => (
-  <Paragraph {...args}>
-    The quick brown fox jumps over the lazy dog. This is sample text to
-    demonstrate paragraph styling with various options. Typography is a critical
-    component of any design system, providing the foundation for readable and
-    accessible content.
-  </Paragraph>
-)
+export const ParagraphPlayground: StoryFn<ParagraphProps> = (args) => {
+  const content = (
+    <Paragraph {...args}>
+      The quick brown fox jumps over the lazy dog. This is sample text to
+      demonstrate paragraph styling with various options. Typography is a
+      critical component of any design system, providing the foundation for
+      readable and accessible content.
+    </Paragraph>
+  )
+  return args.debug ? <GridBackground>{content}</GridBackground> : content
+}
 ParagraphPlayground.storyName = 'Paragraph - Interactive'
 ParagraphPlayground.args = {
   size: 'md',
@@ -359,9 +380,12 @@ ParagraphComparison.parameters = {
   },
 }
 
-export const TextPlayground: StoryFn<TextProps> = (args) => (
-  <Text {...args}>The quick brown fox jumps over the lazy dog</Text>
-)
+export const TextPlayground: StoryFn<TextProps> = (args) => {
+  const content = (
+    <Text {...args}>The quick brown fox jumps over the lazy dog</Text>
+  )
+  return args.debug ? <GridBackground>{content}</GridBackground> : content
+}
 TextPlayground.storyName = 'Text - Interactive'
 TextPlayground.args = {
   family: 'ui',
@@ -856,26 +880,32 @@ RealWorldExample.parameters = {
 export const Debug: StoryFn = () => (
   <Stack>
     <Paragraph>
-      Enable debug mode to visualize text box trimming and baseline alignment:
+      Enable debug mode to visualize text box trimming and baseline alignment.
+      The red grid lines show the 4px baseline grid:
     </Paragraph>
-    <Heading as="h2" debug>
-      Heading with Debug Mode
-    </Heading>
-    <Paragraph debug>
-      This paragraph has debug mode enabled, showing the text box with a
-      background color to help visualize alignment and spacing.
-    </Paragraph>
-    <Text
-      family="ui"
-      size="lg"
-      lineHeight="default"
-      baseline="grid"
-      weight="normal"
-      tracking="normal"
-      debug
-    >
-      Text component with debug mode
-    </Text>
+    <GridBackground>
+      <Stack>
+        <Heading as="h2" debug>
+          Heading with Debug Mode
+        </Heading>
+        <Paragraph debug>
+          This paragraph has debug mode enabled, showing the text box with a
+          background color to help visualize alignment and spacing. Notice how
+          the text aligns to the 4px grid.
+        </Paragraph>
+        <Text
+          family="ui"
+          size="lg"
+          lineHeight="default"
+          baseline="grid"
+          weight="normal"
+          tracking="normal"
+          debug
+        >
+          Text component with debug mode
+        </Text>
+      </Stack>
+    </GridBackground>
   </Stack>
 )
 Debug.parameters = {

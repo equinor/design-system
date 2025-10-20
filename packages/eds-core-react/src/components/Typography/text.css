@@ -6,6 +6,11 @@
   syntax: <length>;
 }
 
+.font-family-ui,
+.font-family-header {
+  margin: 0;
+}
+
 /* Typography scale - organized by font family */
 .font-family-ui {
   font-family: var(--eds-typography-ui-body-font-family), sans-serif;
@@ -798,11 +803,6 @@
     padding-top: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
     padding-bottom: calc((round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2);
   }
-}
-
-/* Debug helper */
-[data-debug] {
-  background: color-mix(in oklch, limegreen, transparent 70%);
 }
 
 /* Icon sizing within text elements - adjusts based on font-size */
