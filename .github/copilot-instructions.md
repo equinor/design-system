@@ -21,6 +21,14 @@ Apply detailed guidelines from:
 - [Figma component creation](./instructions/figma.instructions.md)
 - [Markdown guidelines](./instructions/markdown.instructions.md)
 
+### Color System
+
+The <abbr title="Equinor Design System">EDS</abbr> provides two color approaches. Choose one and use it consistently:
+
+- [Color System Introduction](../packages/eds-tokens/instructions/colors.md) -- Overview of semantic categories, approaches, and accessibility
+- [Static Color Approach](../packages/eds-tokens/instructions/colors-static.md) -- Explicit semantic variables for fixed meanings
+- [Dynamic Color Approach](../packages/eds-tokens/instructions/colors-dynamic.md) -- Abstract role variables with runtime appearance switching
+
 ## Testing Requirements
 
 - All components and features should be thoroughly tested
