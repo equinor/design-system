@@ -1,49 +1,5 @@
 import { Typography } from "./Typography";
 
-export function TableHeader({
-  children,
-  className,
-  ...rest
-}: {
-  children?: React.ReactNode;
-  className: string;
-}) {
-  return (
-    <div
-      {...rest}
-      className={`self-stretch px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function TableRow({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className: string;
-}) {
-  return <div className={`self-stretch ${className}`}>{children}</div>;
-}
-
-export function TableDataCell({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <div
-      className={`w-full px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
-
 export function Chip({
   className,
   children,
@@ -68,7 +24,7 @@ export function Chip({
         as="span"
         size="sm"
         isBaselineAligned={false}
-        style={{ marginTop: "0.5px" }}
+        style={{ marginTop: "1px" }}
       >
         {children}
       </Typography>

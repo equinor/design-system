@@ -1,11 +1,5 @@
 import React, { ComponentType } from "react";
-import {
-  TableHeader,
-  TableRow,
-  TableDataCell,
-  CheckmarkUnselected,
-  CheckmarkSelected,
-} from "./index";
+import { CheckmarkUnselected, CheckmarkSelected } from "./index";
 import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon } from "./ChipIcons";
 import { tableData } from "./tableData";
 import { ChipProps } from "./ChipProps";
@@ -72,8 +66,7 @@ export const DataTable = ({
             <th
               data-debug
               key={column.id}
-              className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left text-sm leading-tight grow shrink basis-0 cursor-pointer`}
-              // className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left grow shrink basis-0`}
+              className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left grow shrink basis-0 cursor-pointer`}
               data-color-appearance={column.active ? "accent" : undefined}
             >
               {idx === 0 ? (
@@ -106,8 +99,7 @@ export const DataTable = ({
               <td
                 data-debug
                 key={`${row.id}-${column.id}`}
-                className={`${tdClass} px-4 py-1 text-sm leading-tight grow shrink basis-0 cursor-pointer`}
-                // className={`${tdClass} px-4 py-1 grow shrink basis-0`}
+                className={`${tdClass} px-4 py-1 leading-tight grow shrink basis-0 cursor-pointer`}
               >
                 {column.id === "checkbox" && (
                   <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
