@@ -12,14 +12,14 @@
   "exports": {
     ".": {
       "style": "./theme.css",
-      "default": "./theme.css",
-      "import": "./theme.css"
+      "import": "./theme.css",
+      "default": "./theme.css"
     },
     "./theme.css": "./theme.css",
     "./theme": {
       "style": "./theme.css",
-      "default": "./theme.css",
-      "import": "./theme.css"
+      "import": "./theme.css",
+      "default": "./theme.css"
     }
   },
   "sideEffects": [
