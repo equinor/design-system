@@ -9,7 +9,7 @@ import {
   HeadingLevelComparison,
   WeightComparison,
   TrackingComparison,
-} from './Text.stories.shared'
+} from './Typography.stories.shared'
 
 const meta: Meta = {
   title: 'Typography/Heading',

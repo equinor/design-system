@@ -10,7 +10,7 @@ import {
   LineHeightComparison,
   WeightComparison,
   TrackingComparison,
-} from './Text.stories.shared'
+} from './Typography.stories.shared'
 
 const meta: Meta = {
   title: 'Typography/Paragraph',

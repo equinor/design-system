@@ -1,4 +1,3 @@
-import { Text, Heading, Paragraph } from './Text'
 import { Icon } from '../Icon'
 import * as icons from '@equinor/eds-icons'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -14,12 +13,15 @@ import {
   ComparisonGrid,
   ComparisonRow,
   Label,
-} from './Text.stories.shared'
+} from './Typography.stories.shared'
+import { Heading } from './Heading'
+import { Paragraph } from './Paragraph'
+import { TypographyNext as Typography } from './Typography.new'
 
 Icon.add(icons)
 
 const meta: Meta = {
-  title: 'Typography/UI Patterns',
+  title: 'Typography/Patterns',
   parameters: {
     docs: {
       description: {
@@ -89,7 +91,7 @@ export const RealWorldExample: StoryFn = () => (
       Key Features
     </Heading>
     <Paragraph>
-      <Text
+      <Typography
         family="ui"
         weight="bolder"
         baseline="grid"
@@ -98,12 +100,12 @@ export const RealWorldExample: StoryFn = () => (
         size="md"
       >
         Baseline Grid Alignment:
-      </Text>{' '}
+      </Typography>{' '}
       All text components support precise alignment to a 4px baseline grid for
       consistent vertical rhythm.
     </Paragraph>
     <Paragraph>
-      <Text
+      <Typography
         family="ui"
         weight="bolder"
         baseline="grid"
@@ -112,12 +114,12 @@ export const RealWorldExample: StoryFn = () => (
         size="md"
       >
         Flexible Typography:
-      </Text>{' '}
+      </Typography>{' '}
       Control font family, size, weight, line height, and letter spacing to
       achieve your desired design.
     </Paragraph>
     <Paragraph>
-      <Text
+      <Typography
         family="ui"
         weight="bolder"
         baseline="grid"
@@ -126,7 +128,7 @@ export const RealWorldExample: StoryFn = () => (
         size="md"
       >
         Accessibility First:
-      </Text>{' '}
+      </Typography>{' '}
       All components are built with WCAG 2.1 AA compliance in mind.
     </Paragraph>
 
@@ -135,7 +137,7 @@ export const RealWorldExample: StoryFn = () => (
     </Heading>
     <Paragraph>
       Use{' '}
-      <Text
+      <Typography
         family="ui"
         weight="bolder"
         baseline="grid"
@@ -144,13 +146,13 @@ export const RealWorldExample: StoryFn = () => (
         size="md"
       >
         Heading
-      </Text>{' '}
+      </Typography>{' '}
       components for page and section titles. They always use the header font
       family for visual distinction.
     </Paragraph>
     <Paragraph>
       Use{' '}
-      <Text
+      <Typography
         family="ui"
         weight="bolder"
         baseline="grid"
@@ -159,7 +161,7 @@ export const RealWorldExample: StoryFn = () => (
         size="md"
       >
         Paragraph
-      </Text>{' '}
+      </Typography>{' '}
       components for body content. They always use the UI font family optimized
       for readability.
     </Paragraph>
@@ -202,7 +204,7 @@ export const RealWorldWithGrid: StoryFn = () => (
         Key Features
       </Heading>
       <Paragraph debug>
-        <Text
+        <Typography
           family="ui"
           weight="bolder"
           baseline="grid"
@@ -212,12 +214,12 @@ export const RealWorldWithGrid: StoryFn = () => (
           debug
         >
           Baseline Grid Alignment:
-        </Text>{' '}
+        </Typography>{' '}
         All text components support precise alignment to a 4px baseline grid for
         consistent vertical rhythm.
       </Paragraph>
       <Paragraph debug>
-        <Text
+        <Typography
           family="ui"
           weight="bolder"
           baseline="grid"
@@ -227,12 +229,12 @@ export const RealWorldWithGrid: StoryFn = () => (
           debug
         >
           Flexible Typography:
-        </Text>{' '}
+        </Typography>{' '}
         Control font family, size, weight, line height, and letter spacing to
         achieve your desired design.
       </Paragraph>
       <Paragraph debug>
-        <Text
+        <Typography
           family="ui"
           weight="bolder"
           baseline="grid"
@@ -242,7 +244,7 @@ export const RealWorldWithGrid: StoryFn = () => (
           debug
         >
           Accessibility First:
-        </Text>{' '}
+        </Typography>{' '}
         All components are built with WCAG 2.1 AA compliance in mind.
       </Paragraph>
 
@@ -251,7 +253,7 @@ export const RealWorldWithGrid: StoryFn = () => (
       </Heading>
       <Paragraph debug>
         Use{' '}
-        <Text
+        <Typography
           family="ui"
           weight="bolder"
           baseline="grid"
@@ -261,13 +263,13 @@ export const RealWorldWithGrid: StoryFn = () => (
           debug
         >
           Heading
-        </Text>{' '}
+        </Typography>{' '}
         components for page and section titles. They always use the header font
         family for visual distinction.
       </Paragraph>
       <Paragraph debug>
         Use{' '}
-        <Text
+        <Typography
           family="ui"
           weight="bolder"
           baseline="grid"
@@ -277,7 +279,7 @@ export const RealWorldWithGrid: StoryFn = () => (
           debug
         >
           Paragraph
-        </Text>{' '}
+        </Typography>{' '}
         components for body content. They always use the UI font family
         optimized for readability.
       </Paragraph>
