@@ -1,8 +1,10 @@
 /* eslint-disable no-undef */
-import { fireEvent, render, screen, act } from '@testing-library/react'
+import { fireEvent, render, screen, act, cleanup } from '@testing-library/react'
 import { axe } from 'jest-axe'
+import '@testing-library/jest-dom'
 import styled from 'styled-components'
 import { Tooltip, Button } from '../../'
+import { createRef } from 'react'
 
 const StyledTooltip = styled(Tooltip)`
   background: red;
@@ -20,6 +22,9 @@ beforeAll(() => {
 })
 
 describe('Tooltip', () => {
+  afterEach(() => {
+    cleanup()
+  })
   it('Matches snapshot', async () => {
     render(
       <Tooltip title="Tooltip" enterDelay={0}>
@@ -76,7 +81,7 @@ describe('Tooltip', () => {
     await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const tooltip = await screen.findByRole('tooltip')
-    expect(tooltip).toHaveStyleRule('background', 'red')
+    expect(tooltip).toHaveStyle('background: red')
   })
   it('is visible when content is being hovered', async () => {
     render(
@@ -173,5 +178,29 @@ describe('Tooltip', () => {
     await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     expect(handler).toBeCalled()
+  })
+  it('should render correctly when the wrapped component has a ref', async () => {
+    const buttonRef = createRef<HTMLButtonElement>()
+    render(
+      <Tooltip title="Tooltip" enterDelay={0}>
+        <Button ref={buttonRef}>Test</Button>
+      </Tooltip>,
+    )
+
+    const button = screen.getByText('Test')
+
+    fireEvent.focus(button)
+
+    expect(await screen.findByRole('tooltip')).toBeInTheDocument()
+  })
+  it('should forward refs to the wrapped component', async () => {
+    const ref = createRef()
+    render(
+      <Tooltip title="Tooltip">
+        <Button ref={ref}>Test</Button>
+      </Tooltip>,
+    )
+
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement)
   })
 })
