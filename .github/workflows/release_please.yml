@@ -11,12 +11,12 @@
 
 name: Release Please
 
-# Trigger: Run on every push to develop branch
+# Trigger: Run on every push to main branch
 # This keeps the release PR up-to-date with latest changes
 on:
   push:
     branches:
-      - develop
+      - main
 
 # Permissions required for release-please to function
 permissions:

@@ -9,7 +9,7 @@ spec:
   environments:
     - name: prod
       build:
-        from: develop
+        from: main
     - name: dev
       build:
         from: feat/*

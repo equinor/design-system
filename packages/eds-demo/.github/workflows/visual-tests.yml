@@ -6,7 +6,6 @@ on:
       - "packages/eds-demo/**"
   push:
     branches:
-      - develop
       - main
     paths:
       - "packages/eds-demo/**"
