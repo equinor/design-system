@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { defineConfig } from 'vitest/config'
 import path from 'path'
 
