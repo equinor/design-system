@@ -11,10 +11,21 @@ A new and improved typography system is now available! The new system provides:
 * **Better performance** and smaller bundle size
 * **Improved accessibility** features
 
+### Required: Import the stylesheet
+
+The new typography components require the EDS stylesheet to work correctly. Import it once in your application's root or main file:
+
+```tsx
+import '@equinor/eds-core-react/style.css'
+```
+
+This stylesheet includes all typography styles with support for font families, sizes, weights, line heights, letter spacing, and baseline alignment.
+
 **Get started:**
 
 ```tsx
 import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
+import '@equinor/eds-core-react/style.css' // Required
 
 <Heading as="h1">Welcome</Heading>
 <Paragraph>This uses the new typography system.</Paragraph>
