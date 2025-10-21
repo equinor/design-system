@@ -27,7 +27,7 @@ describe('Tooltip', () => {
   })
   it('Matches snapshot', async () => {
     render(
-      <Tooltip title="Tooltip" enterDelay={0}>
+      <Tooltip title="Tooltip" enterDelay={0} id="test-tooltip">
         <span>Test</span>
       </Tooltip>,
     )
