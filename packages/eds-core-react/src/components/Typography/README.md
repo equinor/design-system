@@ -1,6 +1,30 @@
 # Typography
 
-Typography component used to help render typography in EDS
+Typography components used to help render typography in <abbr title="Equinor Design System">EDS</abbr>.
+
+## The next-generation typography system is now available
+
+A new and improved typography system is now available! The new system provides:
+
+* **Three specialized components**: `TypographyNext`, `Heading`, and `Paragraph`
+* **Baseline grid alignment** for consistent vertical rhythm
+* **Better performance** and smaller bundle size
+* **Improved accessibility** features
+
+**Get started:**
+
+```tsx
+import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
+
+<Heading as="h1">Welcome</Heading>
+<Paragraph>This uses the new typography system.</Paragraph>
+<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
+  Flexible inline text
+</Typography>
+```
+---
+
+## Current Typography Component
 
 ## Usage
 
