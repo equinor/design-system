@@ -41,6 +41,7 @@
     "dist/*",
     "build/*",
     "commonjs/*",
+    "instructions/*",
     "tokens.css",
     "elements.css"
   ],
