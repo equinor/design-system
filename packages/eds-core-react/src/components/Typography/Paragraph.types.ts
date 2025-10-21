@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react'
-import { FontSize, LineHeight, FontWeight, Tracking } from './typography-types'
+import { FontSize, LineHeight, FontWeight, Tracking } from './types'
 
 export type ParagraphProps = {
   /** Size of the text */

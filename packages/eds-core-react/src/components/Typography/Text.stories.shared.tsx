@@ -1,6 +1,9 @@
-import { Text, Heading, Paragraph } from './Text'
+// import { Text, Heading, Paragraph } from './Text'
 import { Icon } from '../Icon'
-import type { TextProps } from './Text.types'
+import { Heading } from './Heading'
+import { Paragraph } from './Paragraph'
+import { TypographyNext } from './Typography.new'
+import type { TypographyNextProps } from './Typography.new.types'
 import styled from 'styled-components'
 
 // Constants
@@ -37,16 +40,19 @@ export const ComparisonRow = styled.div`
   padding: 12px;
   background: #f7f7f7;
   border-radius: 4px;
+  //
 `
 
-export const Label = styled(Text).attrs<Partial<TextProps>>({
-  family: 'ui',
-  size: 'xs',
-  weight: 'bolder',
-  lineHeight: 'default',
-  baseline: 'grid',
-  tracking: 'normal',
-})<Partial<TextProps>>`
+export const Label = styled(TypographyNext).attrs<Partial<TypographyNextProps>>(
+  {
+    family: 'ui',
+    size: 'xs',
+    weight: 'bolder',
+    lineHeight: 'default',
+    baseline: 'grid',
+    // tracking: 'normal',
+  },
+)<Partial<TypographyNextProps>>`
   text-transform: uppercase;
   color: #666;
 `
@@ -175,6 +181,7 @@ export const WeightComparison = ({
         key={weight}
         label={weight.charAt(0).toUpperCase() + weight.slice(1)}
       >
+        {/* @ts-expect-error - componentProps may contain 'as' for Heading */}
         <Component {...componentProps} weight={weight}>
           {text}
         </Component>
@@ -197,6 +204,7 @@ export const TrackingComparison = ({
         key={tracking}
         label={tracking.charAt(0).toUpperCase() + tracking.slice(1)}
       >
+        {/* @ts-expect-error - componentProps may contain 'as' for Heading */}
         <Component {...componentProps} tracking={tracking}>
           {text}
         </Component>
@@ -210,13 +218,12 @@ export const SizeComparison = ({
   text = SAMPLE_TEXT,
   ...componentProps
 }: {
-  component: typeof Paragraph | typeof Text
+  component: typeof Paragraph
   text?: string
 } & Record<string, unknown>) => (
   <>
     {SIZES.map((size) => (
       <ComparisonRowItem key={size} label={size.toUpperCase()}>
-        {/* @ts-expect-error - size prop is valid for both components */}
         <Component {...componentProps} size={size}>
           {text}
         </Component>

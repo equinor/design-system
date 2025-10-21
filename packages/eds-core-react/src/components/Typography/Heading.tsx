@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { HeadingProps } from './Heading.types'
-import { FontSize } from './typography-types'
-import { buildClassName } from './typography-utils'
+import { FontSize } from './types'
+import { createTypographyClassNames } from './utils'
 
 const getHeadingSize = (as: HeadingProps['as']): FontSize => {
   switch (as) {
@@ -23,23 +23,15 @@ const getHeadingSize = (as: HeadingProps['as']): FontSize => {
 }
 
 /**
- * Heading component (h1-h6) with typography support.
- * Always uses the header font family. Size and line-height are opinionated and not configurable.
+ * Heading component for semantic headings (h1-h6).
+ * Uses the design system's typography styles for headings.
  */
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   (
-    {
-      weight = 'normal',
-      tracking = 'normal',
-      debug,
-      className,
-      children,
-      as = 'h1',
-      ...rest
-    },
+    { weight = 'normal', tracking = 'normal', debug, className, as, ...rest },
     ref,
   ) => {
-    const combinedClassName = buildClassName({
+    const typographyClassNames = createTypographyClassNames({
       family: 'header',
       size: getHeadingSize(as),
       baseline: 'grid',
@@ -53,12 +45,10 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     return (
       <Component
         ref={ref}
-        className={combinedClassName}
+        className={typographyClassNames}
         data-debug={debug ? '' : undefined}
         {...rest}
-      >
-        {children}
-      </Component>
+      />
     )
   },
 )

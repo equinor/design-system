@@ -1,7 +1,7 @@
-import { Heading } from './Text'
+import { Heading } from './Heading'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../.storybook/components'
-import type { HeadingProps } from './Text.types'
+import type { HeadingProps } from './Heading.types'
 import {
   SAMPLE_TEXT,
   GridBackground,

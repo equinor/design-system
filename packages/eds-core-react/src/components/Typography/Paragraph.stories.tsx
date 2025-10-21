@@ -1,7 +1,7 @@
-import { Paragraph } from './Text'
+import { Paragraph } from './Paragraph'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../.storybook/components'
-import type { ParagraphProps } from './Text.types'
+import type { ParagraphProps } from './Paragraph.types'
 import {
   SAMPLE_TEXT,
   GridBackground,
@@ -66,7 +66,7 @@ Playground.argTypes = {
   },
   tracking: {
     control: { type: 'select' },
-    options: ['tight', 'normal', 'loose'],
+    options: ['tight', 'normal', 'wide'],
     description: 'Letter spacing (tracking)',
   },
   debug: {

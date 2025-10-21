@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import postcssImport from 'postcss-import'
 import commonjs from '@rollup/plugin-commonjs'
 import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
@@ -53,5 +54,19 @@ export default [
       },
       { file: './dist/eds-core-react.cjs', format: 'cjs', interop: 'auto' },
     ],
+  },
+  {
+    input: './src/style.css',
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+        extract: 'style.css',
+        minimize: !isDevelopment,
+        plugins: [postcssImport()],
+      }),
+    ],
+    output: {
+      dir: 'dist',
+    },
   },
 ]

@@ -1,9 +1,9 @@
 import { HTMLAttributes } from 'react'
-import { FontWeight, Tracking } from './typography-types'
+import { FontWeight, Tracking } from './types'
 
 export type HeadingProps = {
   /** HTML heading element to render */
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   /** Font weight */
   weight?: FontWeight
   /** Letter spacing (tracking) */

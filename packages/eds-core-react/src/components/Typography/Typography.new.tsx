@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { TypographyNextProps } from './Typography.new.types'
-import { buildClassName } from './typography-utils'
+import { createTypographyClassNames } from './utils'
 
 /**
  * TypographyNext component for flexible typography with baseline grid support.
@@ -41,7 +41,7 @@ export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
     ref,
   ) => {
     const Component = 'span'
-    const combinedClassName = buildClassName({
+    const combinedClassName = createTypographyClassNames({
       family,
       size,
       baseline,

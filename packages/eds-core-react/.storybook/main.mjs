@@ -59,6 +59,11 @@ const config = {
       resolve: {
         ...config.resolve,
         dedupe: ['styled-components'],
+        alias: {
+          ...config.resolve?.alias,
+          '@equinor/eds-core-react/style.css': '/dist/style.css',
+          '@equinor/eds-core-react/style': '/dist/style.css',
+        },
       },
       optimizeDeps: {
         ...config.optimizeDeps,

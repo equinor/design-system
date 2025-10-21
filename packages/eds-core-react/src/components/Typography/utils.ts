@@ -5,9 +5,9 @@ import {
   BaselineAlignment,
   FontWeight,
   Tracking,
-} from './typography-types'
+} from './types'
 
-type BuildClassNameParams = {
+type CreateTypographyClassNamesParams = {
   family?: FontFamily
   size?: FontSize
   baseline?: BaselineAlignment
@@ -20,7 +20,7 @@ type BuildClassNameParams = {
 /**
  * Builds a className string from typography properties
  */
-export const buildClassName = ({
+export const createTypographyClassNames = ({
   family,
   size,
   lineHeight,
@@ -28,7 +28,7 @@ export const buildClassName = ({
   weight,
   tracking,
   className,
-}: BuildClassNameParams): string => {
+}: CreateTypographyClassNamesParams): string => {
   const classes: string[] = []
 
   if (family) {

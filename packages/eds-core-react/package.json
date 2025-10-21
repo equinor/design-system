@@ -25,6 +25,14 @@
   "files": [
     "dist/*"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/eds-core-react.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
     "test": "tsc -p tsconfig.test.json && jest",
@@ -63,6 +71,7 @@
     "jest-styled-components": "^7.2.0",
     "js-file-download": "^0.4.12",
     "postcss": "^8.5.6",
+    "postcss-import": "^16.1.1",
     "ramda": "^0.31.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

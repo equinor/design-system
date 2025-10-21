@@ -1,6 +1,4 @@
 export * from './Typography'
-export * from './Text'
-export * from './Text.types'
 
 export { TypographyNext } from './Typography.new'
 export { Heading } from './Heading'
@@ -19,4 +17,4 @@ export type {
   BaselineAlignment,
   FontWeight,
   Tracking,
-} from './typography-types'
+} from './types'

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { ParagraphProps } from './Paragraph.types'
-import { buildClassName } from './typography-utils'
+import { createTypographyClassNames } from './utils'
 
 /**
  * Paragraph component with typography support.
@@ -19,7 +19,7 @@ export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
     },
     ref,
   ) => {
-    const combinedClassName = buildClassName({
+    const typographyClassNames = createTypographyClassNames({
       family: 'ui',
       baseline: 'grid',
       lineHeight,
@@ -32,7 +32,7 @@ export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
     return (
       <p
         ref={ref}
-        className={combinedClassName}
+        className={typographyClassNames}
         data-debug={debug ? '' : undefined}
         {...rest}
       >

@@ -6,7 +6,7 @@ import {
   BaselineAlignment,
   FontWeight,
   Tracking,
-} from './typography-types'
+} from './types'
 
 export type TypographyNextProps = {
   /** Font family */
@@ -35,4 +35,4 @@ export type {
   BaselineAlignment,
   FontWeight,
   Tracking,
-} from './typography-types'
+} from './types'
