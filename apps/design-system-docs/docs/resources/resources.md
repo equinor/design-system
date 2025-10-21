@@ -27,15 +27,14 @@ Find the tools, guides, and assets you need to work effectively with the Equinor
 
 ## Available Packages
 
-| Name                         | Version | npm link                                                                                   | Changelog                                                                                                    |
-| ---------------------------- | ------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| @equinor/eds-core-react      | 1.0.1   | [@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react)           | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/CHANGELOG.md)      |
-| @equinor/eds-tokens          | 1.1.2   | [@equinor/eds-tokens](https://www.npmjs.com/package/@equinor/eds-tokens)                   | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-tokens/CHANGELOG.md)          |
-| @equinor/eds-icons           | 1.0.0   | [@equinor/eds-icons](https://www.npmjs.com/package/@equinor/eds-icons)                     | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-icons/CHANGELOG.md)           |
-| @equinor/eds-data-grid-react | 1.0.1   | [@equinor/eds-data-grid-react](https://www.npmjs.com/package/@equinor/eds-data-grid-react) | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-data-grid-react/CHANGELOG.md) |
-| @equinor/eds-utils           | 1.0.1   | [@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)                     | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-utils/CHANGELOG.md)           |
-| @equinor/eds-lab-react       | 0.8.1   | [@equinor/eds-lab-react](https://www.npmjs.com/package/@equinor/eds-lab-react)             | [changelog](https://github.com/equinor/design-system/blob/develop/packages/eds-lab-react/CHANGELOG.md)       |
-
+| Name | Version | npm link | Changelog |
+|------|---------|----------|-----------|
+| @equinor/eds-core-react | 1.0.1 | [@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-core-react/CHANGELOG.md) |
+| @equinor/eds-tokens | 1.1.2 | [@equinor/eds-tokens](https://www.npmjs.com/package/@equinor/eds-tokens) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/CHANGELOG.md) |
+| @equinor/eds-icons | 1.0.0 | [@equinor/eds-icons](https://www.npmjs.com/package/@equinor/eds-icons) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-icons/CHANGELOG.md) |
+| @equinor/eds-data-grid-react | 1.0.1 | [@equinor/eds-data-grid-react](https://www.npmjs.com/package/@equinor/eds-data-grid-react) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-data-grid-react/CHANGELOG.md) |
+| @equinor/eds-utils | 1.0.1 | [@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-utils/CHANGELOG.md) |
+| @equinor/eds-lab-react | 0.8.1 | [@equinor/eds-lab-react](https://www.npmjs.com/package/@equinor/eds-lab-react) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-lab-react/CHANGELOG.md) |
 ## Versions and Release
 
 Each package follows independent **semantic versioning**.  

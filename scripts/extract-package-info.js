@@ -33,7 +33,7 @@ function extractPackageInfo() {
           'https://github.com/equinor/design-system'
         const directory =
           packageJson.repository?.directory || `packages/${packageName}`
-        changelogLink = `${repoUrl.replace('.git', '')}/blob/develop/${directory}/CHANGELOG.md`
+        changelogLink = `${repoUrl.replace('.git', '')}/blob/main/${directory}/CHANGELOG.md`
       }
 
       packages.push({

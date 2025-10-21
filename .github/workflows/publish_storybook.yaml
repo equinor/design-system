@@ -3,20 +3,20 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment for the core-react storybook'
+        description: "Environment for the core-react storybook"
         required: false
         type: choice
         options:
           - development
           - production
-        default: 'development'
+        default: "development"
   push:
     branches:
-      - develop
+      - main
     paths:
-      - 'packages/eds-core-react/**'
-      - 'packages/eds-tokens/**'
-      - 'packages/eds-icons/**'
+      - "packages/eds-core-react/**"
+      - "packages/eds-tokens/**"
+      - "packages/eds-icons/**"
 permissions:
   id-token: write
 env:
@@ -53,7 +53,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.12.0'
+          node-version: "22.12.0"
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v4
@@ -86,9 +86,9 @@ jobs:
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
         with:
-          enabled-static-website: 'true'
-          folder: 'packages/eds-core-react/storybook-build'
-          public-access-policy: 'container'
+          enabled-static-website: "true"
+          folder: "packages/eds-core-react/storybook-build"
+          public-access-policy: "container"
           connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
