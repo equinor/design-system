@@ -1,12 +1,13 @@
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { useDeprecationWarning } from './useDeprecationWarning'
 
 describe('useDeprecationWarning', () => {
-  let consoleWarnSpy: jest.SpyInstance
+  let consoleWarnSpy: ReturnType<typeof vi.spyOn>
   const originalEnv = process.env.NODE_ENV
 
   beforeEach(() => {
-    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation()
+    consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
   })
 
   afterEach(() => {

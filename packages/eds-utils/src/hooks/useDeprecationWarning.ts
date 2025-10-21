@@ -38,10 +38,10 @@ export const useDeprecationWarning = (
     }
 
     // Check Vite/browser environment (for Storybook and browser builds)
-    // @ts-expect-error - import.meta.env is available in Vite but not standard in TypeScript
+    // Using type assertion as import.meta.env is a Vite-specific extension
     if (
       typeof import.meta !== 'undefined' &&
-      import.meta.env?.MODE === 'development'
+      (import.meta as { env?: { MODE?: string } }).env?.MODE === 'development'
     ) {
       isDevelopment = true
     }
