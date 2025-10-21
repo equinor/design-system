@@ -344,15 +344,15 @@ export const ButtonsWithIcons: StoryFn = () => (
 
     <ComparisonGrid>
       <ButtonRow label="Small" size="sm">
-        <Icon name="save" className="icon" />
+        <Icon name="save" className="text-icon" />
         <span className="text-baseline-center">Save</span>
       </ButtonRow>
       <ButtonRow label="Medium" size="md">
-        <Icon name="save" className="icon" />
+        <Icon name="save" className="text-icon" />
         <span className="text-baseline-center">Save</span>
       </ButtonRow>
       <ButtonRow label="Large" size="lg">
-        <Icon name="save" className="icon" />
+        <Icon name="save" className="text-icon" />
         <span className="text-baseline-center">Save</span>
       </ButtonRow>
     </ComparisonGrid>
@@ -363,12 +363,12 @@ export const ButtonsWithIcons: StoryFn = () => (
 
     <ComparisonGrid>
       <ButtonRow label="Leading Icon" size="md">
-        <Icon name="add" className="icon" />
+        <Icon name="add" className="text-icon" />
         <span className="text-baseline-center">Add Item</span>
       </ButtonRow>
       <ButtonRow label="Trailing Icon" size="md">
         <span className="text-baseline-center">Next</span>
-        <Icon name="arrow_forward" className="icon" />
+        <Icon name="arrow_forward" className="text-icon" />
       </ButtonRow>
       <ButtonRow
         label="Icon Only"
@@ -376,12 +376,12 @@ export const ButtonsWithIcons: StoryFn = () => (
         style={{ padding: '8px' }}
         aria-label="Delete"
       >
-        <Icon name="delete_to_trash" className="icon" />
+        <Icon name="delete_to_trash" className="text-icon" />
       </ButtonRow>
       <ButtonRow label="Both Sides" size="md">
-        <Icon name="star_outlined" className="icon" />
+        <Icon name="star_outlined" className="text-icon" />
         <span className="text-baseline-center">Favorite</span>
-        <Icon name="chevron_down" className="icon" />
+        <Icon name="chevron_down" className="text-icon" />
       </ButtonRow>
     </ComparisonGrid>
   </Stack>
@@ -413,7 +413,7 @@ export const IconTextAlignment: StoryFn = () => (
           className="font-family-ui text-lg"
           style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
         >
-          <Icon name="info_circle" className="icon" />
+          <Icon name="info_circle" className="text-icon" />
           <span className="text-baseline-center">Information message</span>
         </div>
       </ComparisonRow>
@@ -424,9 +424,9 @@ export const IconTextAlignment: StoryFn = () => (
           className="font-family-ui text-md"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
         >
-          <Icon name="link" className="icon" />
+          <Icon name="link" className="text-icon" />
           <span className="text-baseline-center">External link</span>
-          <Icon name="external_link" className="icon" />
+          <Icon name="external_link" className="text-icon" />
         </a>
       </ComparisonRow>
       <ComparisonRow>
@@ -435,7 +435,7 @@ export const IconTextAlignment: StoryFn = () => (
           className="font-family-ui text-md"
           style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
         >
-          <Icon name="check_circle_outlined" className="icon" />
+          <Icon name="check_circle_outlined" className="text-icon" />
           <span className="text-baseline-center">
             Task completed successfully
           </span>
@@ -454,9 +454,9 @@ export const IconTextAlignment: StoryFn = () => (
             borderRadius: '16px',
           }}
         >
-          <Icon name="account_circle" className="icon" />
+          <Icon name="account_circle" className="text-icon" />
           <span className="text-baseline-center">John Doe</span>
-          <Icon name="close" className="icon" />
+          <Icon name="close" className="text-icon" />
         </div>
       </ComparisonRow>
     </ComparisonGrid>
@@ -487,7 +487,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
         data-debug
       >
-        <Icon name="info_circle" className="icon" />
+        <Icon name="info_circle" className="text-icon" />
         <span className="text-baseline-center" data-debug>
           Medium text with centered baseline
         </span>
@@ -503,7 +503,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
         }}
         data-debug
       >
-        <Icon name="warning_outlined" className="icon" />
+        <Icon name="warning_outlined" className="text-icon" />
         <span className="text-baseline-center" data-debug>
           Large text with centered baseline
         </span>
@@ -519,7 +519,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
         }}
         data-debug
       >
-        <Icon name="check" className="icon" />
+        <Icon name="check" className="text-icon" />
         <span className="text-baseline-center" data-debug>
           Small text with centered baseline
         </span>
@@ -531,7 +531,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
         style={{ marginTop: '16px' }}
         data-debug
       >
-        <Icon name="save" className="icon" />
+        <Icon name="save" className="text-icon" />
         <span className="text-baseline-center" data-debug>
           Button with icon
         </span>
@@ -563,7 +563,7 @@ export const UsageExamples: StoryFn = () => (
         className="font-family-ui text-md"
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        <Icon name="home" className="icon" />
+        <Icon name="home" className="text-icon" />
         <span className="text-baseline-center">Home</span>
       </a>
       <a
@@ -571,7 +571,7 @@ export const UsageExamples: StoryFn = () => (
         className="font-family-ui text-md"
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        <Icon name="dashboard" className="icon" />
+        <Icon name="dashboard" className="text-icon" />
         <span className="text-baseline-center">Dashboard</span>
       </a>
       <a
@@ -579,7 +579,7 @@ export const UsageExamples: StoryFn = () => (
         className="font-family-ui text-md"
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        <Icon name="settings" className="icon" />
+        <Icon name="settings" className="text-icon" />
         <span className="text-baseline-center">Settings</span>
       </a>
     </div>
@@ -589,20 +589,20 @@ export const UsageExamples: StoryFn = () => (
     </Heading>
     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
       <Button $size="md" className="font-family-ui text-md">
-        <Icon name="save" className="icon" />
+        <Icon name="save" className="text-icon" />
         <span className="text-baseline-center">Save</span>
       </Button>
       <Button $size="md" className="font-family-ui text-md">
-        <Icon name="file_description" className="icon" />
+        <Icon name="file_description" className="text-icon" />
         <span className="text-baseline-center">Export</span>
       </Button>
       <Button $size="md" className="font-family-ui text-md">
-        <Icon name="delete_to_trash" className="icon" />
+        <Icon name="delete_to_trash" className="text-icon" />
         <span className="text-baseline-center">Delete</span>
       </Button>
       <Button $size="md" className="font-family-ui text-md">
         <span className="text-baseline-center">Share</span>
-        <Icon name="share" className="icon" />
+        <Icon name="share" className="text-icon" />
       </Button>
     </div>
 
@@ -619,7 +619,7 @@ export const UsageExamples: StoryFn = () => (
           color: '#2e7d32',
         }}
       >
-        <Icon name="check_circle_outlined" className="icon" />
+        <Icon name="check_circle_outlined" className="text-icon" />
         <span className="text-baseline-center">
           Your changes have been saved
         </span>
@@ -633,7 +633,7 @@ export const UsageExamples: StoryFn = () => (
           color: '#ed6c02',
         }}
       >
-        <Icon name="warning_outlined" className="icon" />
+        <Icon name="warning_outlined" className="text-icon" />
         <span className="text-baseline-center">
           Please review before submitting
         </span>
@@ -647,7 +647,7 @@ export const UsageExamples: StoryFn = () => (
           color: '#d32f2f',
         }}
       >
-        <Icon name="error_outlined" className="icon" />
+        <Icon name="error_outlined" className="text-icon" />
         <span className="text-baseline-center">An error has occurred</span>
       </div>
       <div
@@ -659,7 +659,7 @@ export const UsageExamples: StoryFn = () => (
           color: '#0288d1',
         }}
       >
-        <Icon name="info_circle" className="icon" />
+        <Icon name="info_circle" className="text-icon" />
         <span className="text-baseline-center">
           Updates available for download
         </span>
