@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography } from "./Typography";
 
 type ButtonProps = {
   className?: string;
@@ -18,14 +19,16 @@ export const PrimaryButton = ({
     <button
       data-debug
       type="button"
-      className={`select-none h-[36px] px-4 py-2.5 rounded border-opacity-0 justify-start gap-2 flex items-center button button--primary ${
+      className={`select-none h-[36px] px-4 rounded border-opacity-0 justify-center gap-2 flex items-center button button--primary ${
         className || ""
       }`}
       onClick={onClick}
       {...rest}
     >
       {icon}
-      <div className="text-sm leading-none">{children}</div>
+      <Typography as="span" size="md" isBaselineAligned={false}>
+        {children}
+      </Typography>
     </button>
   );
 };
@@ -41,14 +44,16 @@ export const SecondaryButton = ({
     <button
       data-debug
       type="button"
-      className={`select-none h-[36px] px-4 py-2.5 bg-opacity-0 rounded border justify-start gap-2 flex items-center ${
+      className={`select-none h-[36px] px-4 bg-opacity-0 rounded border justify-start gap-2 flex items-center ${
         className || ""
       }`}
       onClick={onClick}
       {...rest}
     >
       {icon}
-      <div className="text-sm leading-none">{children}</div>
+      <Typography as="span" size="md" isBaselineAligned={false}>
+        {children}
+      </Typography>
     </button>
   );
 };

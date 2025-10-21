@@ -1,46 +1,5 @@
-export function TableHeader({
-  children,
-  className,
-  ...rest
-}: {
-  children?: React.ReactNode;
-  className: string;
-}) {
-  return (
-    <div
-      {...rest}
-      className={`self-stretch px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
-    >
-      <div className="h-5 text-sm leading-tight grow shrink basis-0">
-        {children}
-      </div>
-    </div>
-  );
-}
-export function TableRow({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className: string;
-}) {
-  return <div className={`self-stretch ${className}`}>{children}</div>;
-}
-export function TableDataCell({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <div
-      className={`w-full px-4 py-1 justify-start items-center gap-2 inline-flex min-h-[44px] ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
+import { Typography } from "./Typography";
+
 export function Chip({
   className,
   children,
@@ -61,7 +20,14 @@ export function Chip({
           <div className="relative w-4 h-4 icon">{icon}</div>
         </div>
       )}
-      <div className="text-xs leading-none tracking-tight">{children}</div>
+      <Typography
+        as="span"
+        size="sm"
+        isBaselineAligned={false}
+        style={{ marginTop: "1px" }}
+      >
+        {children}
+      </Typography>
     </div>
   );
 }
@@ -85,6 +51,7 @@ export function CheckmarkUnselected({ className }: { className?: string }) {
     </svg>
   );
 }
+
 export function CheckmarkSelected({ className }: { className?: string }) {
   return (
     <svg
