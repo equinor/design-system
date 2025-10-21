@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.2...eds-tokens@v1.1.3) (2025-10-21)
+
+
+### 📝 Changed
+
+* **eds-tokens:** add info about importing json files and how to use the dynamic and static approach in your project ([#4120](https://github.com/equinor/design-system/issues/4120)) ([62742b9](https://github.com/equinor/design-system/commit/62742b9028ac721afcafc16323e33274ac08ec6f))
+
 ## [1.1.2](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.1...eds-tokens@v1.1.2) (2025-10-16)
 
 
