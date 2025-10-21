@@ -29,7 +29,8 @@
     "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/test/**/*"
   ],
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
@@ -57,6 +58,7 @@
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-jest": "^29.7.0",
     "jsdom": "^26.0.0",
     "js-file-download": "^0.4.12",
     "ramda": "^0.31.3",
