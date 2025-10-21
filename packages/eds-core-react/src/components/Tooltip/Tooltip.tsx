@@ -8,6 +8,7 @@ import {
   useMemo,
   useEffect,
   ReactNode,
+  ReactElement,
 } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
@@ -136,9 +137,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ],
       whileElementsMounted: autoUpdate,
     })
-    const anchorRef = useMemo(
-      () => mergeRefs<HTMLElement>(refs.setReference, children?.ref),
-      [refs.setReference, children?.ref],
+    const mergedAnchorRef = useMemo(
+      () => mergeRefs<HTMLElement>(refs.setReference),
+      [refs.setReference],
     )
     const tooltipRef = useMemo(
       () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
@@ -188,11 +189,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     })
 
-    const updatedChildren = cloneElement(children, {
-      ...getReferenceProps({
-        ...children.props,
-        ref: anchorRef,
-      }),
+    const updatedChildren = cloneElement(children as ReactElement<any>, {
+      ...getReferenceProps(children.props),
+      ref: mergeRefs(
+        (children as ReactElement<any>).props.ref,
+        mergedAnchorRef,
+      ),
     })
 
     useEffect(() => {
@@ -228,6 +230,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
+        {updatedChildren}
         {shouldOpen &&
           open &&
           !disabled &&
@@ -235,7 +238,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             TooltipEl,
             portalContainer ?? rootElement ?? document.body,
           )}
-        {updatedChildren}
       </>
     )
   },
