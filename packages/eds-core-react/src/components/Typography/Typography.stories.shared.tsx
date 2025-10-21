@@ -119,7 +119,62 @@ export const Button = styled.button<{ $size?: string }>`
 export const IconTextContainer = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 8px;
+`
+
+export const ShowcaseGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+`
+
+export const ShowcaseCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+`
+
+export const ShowcaseItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+`
+
+export const UsageSection = styled.section`
+  display: grid;
+  gap: 32px;
+  margin: 24px 0;
+`
+
+export const UsageCategory = styled.div`
+  display: grid;
+  gap: 16px;
+`
+
+export const CategoryHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #dcdcdc;
+`
+
+export const GridShowcaseWrapper = styled.div`
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
 `
 
 // Helper Components

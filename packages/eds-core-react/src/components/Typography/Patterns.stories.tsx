@@ -13,6 +13,13 @@ import {
   ComparisonGrid,
   ComparisonRow,
   Label,
+  ShowcaseGrid,
+  ShowcaseCard,
+  ShowcaseItem,
+  UsageSection,
+  UsageCategory,
+  CategoryHeader,
+  GridShowcaseWrapper,
 } from './Typography.stories.shared'
 import { Heading } from './Heading'
 import { Paragraph } from './Paragraph'
@@ -473,205 +480,448 @@ IconTextAlignment.parameters = {
 
 export const IconAlignmentWithGrid: StoryFn = () => (
   <GridBackground>
-    <Stack>
-      <Heading as="h3" debug style={{ marginBottom: '24px' }}>
+    <GridShowcaseWrapper>
+      <Heading as="h3" debug style={{ marginBottom: '16px' }}>
         Icon Alignment with Baseline Grid
       </Heading>
-      <Paragraph debug style={{ marginBottom: '16px' }}>
+      <Paragraph debug style={{ marginBottom: '24px' }}>
         When icons are siblings to text with <code>text-baseline-center</code>,
-        they maintain visual harmony with the baseline grid system.
+        they maintain visual harmony with the baseline grid system. All spacing
+        follows the 4px grid (8px, 12px, 16px, 20px, 24px).
       </Paragraph>
 
-      <div
-        className="font-family-ui text-md"
-        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-        data-debug
-      >
-        <Icon name="info_circle" className="text-icon" />
-        <span className="text-baseline-center" data-debug>
-          Medium text with centered baseline
-        </span>
-      </div>
+      <ShowcaseGrid>
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Extra Small (xs)</Label>
+          </CategoryHeader>
+          <ShowcaseItem className="font-family-ui text-xs" data-debug>
+            <Icon name="check" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Extra small text
+            </span>
+          </ShowcaseItem>
+        </ShowcaseCard>
 
-      <div
-        className="font-family-ui text-lg"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          marginTop: '16px',
-        }}
-        data-debug
-      >
-        <Icon name="warning_outlined" className="text-icon" />
-        <span className="text-baseline-center" data-debug>
-          Large text with centered baseline
-        </span>
-      </div>
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Small (sm)</Label>
+          </CategoryHeader>
+          <ShowcaseItem className="font-family-ui text-sm" data-debug>
+            <Icon name="check" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Small text with icon
+            </span>
+          </ShowcaseItem>
+        </ShowcaseCard>
 
-      <div
-        className="font-family-ui text-sm"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          marginTop: '16px',
-        }}
-        data-debug
-      >
-        <Icon name="check" className="text-icon" />
-        <span className="text-baseline-center" data-debug>
-          Small text with centered baseline
-        </span>
-      </div>
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Medium (md)</Label>
+          </CategoryHeader>
+          <ShowcaseItem className="font-family-ui text-md" data-debug>
+            <Icon name="info_circle" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Medium text with icon
+            </span>
+          </ShowcaseItem>
+        </ShowcaseCard>
 
-      <Button
-        $size="md"
-        className="font-family-ui text-md"
-        style={{ marginTop: '16px' }}
-        data-debug
-      >
-        <Icon name="save" className="text-icon" />
-        <span className="text-baseline-center" data-debug>
-          Button with icon
-        </span>
-      </Button>
-    </Stack>
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Large (lg)</Label>
+          </CategoryHeader>
+          <ShowcaseItem className="font-family-ui text-lg" data-debug>
+            <Icon name="warning_outlined" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Large text with icon
+            </span>
+          </ShowcaseItem>
+        </ShowcaseCard>
+
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Extra Large (xl)</Label>
+          </CategoryHeader>
+          <ShowcaseItem className="font-family-ui text-xl" data-debug>
+            <Icon name="star_filled" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Extra large text
+            </span>
+          </ShowcaseItem>
+        </ShowcaseCard>
+
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Button Component</Label>
+          </CategoryHeader>
+          <Button $size="md" className="font-family-ui text-md" data-debug>
+            <Icon name="save" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Save Document
+            </span>
+          </Button>
+        </ShowcaseCard>
+
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Icon Before & After</Label>
+          </CategoryHeader>
+          <ShowcaseItem className="font-family-ui text-md" data-debug>
+            <Icon name="arrow_back" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Navigate
+            </span>
+            <Icon name="arrow_forward" className="text-icon" />
+          </ShowcaseItem>
+        </ShowcaseCard>
+
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Badge/Chip Component</Label>
+          </CategoryHeader>
+          <div
+            className="font-family-ui text-sm"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 12px',
+              background: '#e3f2fd',
+              borderRadius: '16px',
+            }}
+            data-debug
+          >
+            <Icon name="account_circle" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              User Badge
+            </span>
+            <Icon name="close" className="text-icon" />
+          </div>
+        </ShowcaseCard>
+
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Link with Icons</Label>
+          </CategoryHeader>
+          <a
+            href="https://example.com"
+            className="font-family-ui text-md"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+            data-debug
+          >
+            <Icon name="link" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              External Link
+            </span>
+            <Icon name="external_link" className="text-icon" />
+          </a>
+        </ShowcaseCard>
+
+        <ShowcaseCard>
+          <CategoryHeader>
+            <Label>Status Indicator</Label>
+          </CategoryHeader>
+          <ShowcaseItem
+            className="font-family-ui text-md"
+            style={{ color: '#2e7d32' }}
+            data-debug
+          >
+            <Icon name="check_circle_outlined" className="text-icon" />
+            <span className="text-baseline-center" data-debug>
+              Success state
+            </span>
+          </ShowcaseItem>
+        </ShowcaseCard>
+      </ShowcaseGrid>
+    </GridShowcaseWrapper>
   </GridBackground>
 )
 IconAlignmentWithGrid.parameters = {
   docs: {
     description: {
       story:
-        'Debug mode showing how icon and text siblings align to the baseline grid. The text-baseline-center class centers text within its container for optical alignment with icons.',
+        'Debug mode showing how icon and text siblings align to the baseline grid. The text-baseline-center class centers text within its container for optical alignment with icons. Grid layout with cards showcasing different sizes and patterns, all following the 4px grid system.',
     },
   },
 }
 
 export const UsageExamples: StoryFn = () => (
-  <Stack>
-    <Heading as="h3" style={{ marginBottom: '24px' }}>
+  <GridShowcaseWrapper>
+    <Heading as="h3" style={{ marginBottom: '16px' }}>
       Real-World Usage Examples
     </Heading>
+    <Paragraph style={{ marginBottom: '32px' }}>
+      Practical examples organized by category, demonstrating common UI patterns
+      with icons and text. All spacing follows the 4px grid system.
+    </Paragraph>
 
-    <Heading as="h4" style={{ marginBottom: '12px' }}>
-      Navigation Menu
-    </Heading>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <a
-        href="https://example.com"
-        className="font-family-ui text-md"
-        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-      >
-        <Icon name="home" className="text-icon" />
-        <span className="text-baseline-center">Home</span>
-      </a>
-      <a
-        href="https://example.com"
-        className="font-family-ui text-md"
-        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-      >
-        <Icon name="dashboard" className="text-icon" />
-        <span className="text-baseline-center">Dashboard</span>
-      </a>
-      <a
-        href="https://example.com"
-        className="font-family-ui text-md"
-        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-      >
-        <Icon name="settings" className="text-icon" />
-        <span className="text-baseline-center">Settings</span>
-      </a>
-    </div>
+    <UsageSection>
+      <UsageCategory>
+        <CategoryHeader>
+          <Heading as="h4">Navigation Menu</Heading>
+          <Paragraph size="sm" weight="lighter">
+            Icons paired with text for navigation items
+          </Paragraph>
+        </CategoryHeader>
+        <ShowcaseCard>
+          <ShowcaseItem>
+            <a
+              href="https://example.com"
+              className="font-family-ui text-md"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <Icon name="home" className="text-icon" />
+              <span className="text-baseline-center">Home</span>
+            </a>
+          </ShowcaseItem>
+          <ShowcaseItem>
+            <a
+              href="https://example.com"
+              className="font-family-ui text-md"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <Icon name="dashboard" className="text-icon" />
+              <span className="text-baseline-center">Dashboard</span>
+            </a>
+          </ShowcaseItem>
+          <ShowcaseItem>
+            <a
+              href="https://example.com"
+              className="font-family-ui text-md"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <Icon name="settings" className="text-icon" />
+              <span className="text-baseline-center">Settings</span>
+            </a>
+          </ShowcaseItem>
+          <ShowcaseItem>
+            <a
+              href="https://example.com"
+              className="font-family-ui text-md"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <Icon name="library_books" className="text-icon" />
+              <span className="text-baseline-center">Documentation</span>
+            </a>
+          </ShowcaseItem>
+        </ShowcaseCard>
+      </UsageCategory>
 
-    <Heading as="h4" style={{ marginTop: '24px', marginBottom: '12px' }}>
-      Action Buttons
-    </Heading>
-    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-      <Button $size="md" className="font-family-ui text-md">
-        <Icon name="save" className="text-icon" />
-        <span className="text-baseline-center">Save</span>
-      </Button>
-      <Button $size="md" className="font-family-ui text-md">
-        <Icon name="file_description" className="text-icon" />
-        <span className="text-baseline-center">Export</span>
-      </Button>
-      <Button $size="md" className="font-family-ui text-md">
-        <Icon name="delete_to_trash" className="text-icon" />
-        <span className="text-baseline-center">Delete</span>
-      </Button>
-      <Button $size="md" className="font-family-ui text-md">
-        <span className="text-baseline-center">Share</span>
-        <Icon name="share" className="text-icon" />
-      </Button>
-    </div>
+      <UsageCategory>
+        <CategoryHeader>
+          <Heading as="h4">Action Buttons</Heading>
+          <Paragraph size="sm" weight="lighter">
+            Common button patterns with leading and trailing icons
+          </Paragraph>
+        </CategoryHeader>
+        <ShowcaseGrid>
+          <ShowcaseCard>
+            <Label>Primary Actions</Label>
+            <Button $size="md" className="font-family-ui text-md">
+              <Icon name="save" className="text-icon" />
+              <span className="text-baseline-center">Save</span>
+            </Button>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Secondary Actions</Label>
+            <Button $size="md" className="font-family-ui text-md">
+              <Icon name="file_description" className="text-icon" />
+              <span className="text-baseline-center">Export</span>
+            </Button>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Destructive Actions</Label>
+            <Button $size="md" className="font-family-ui text-md">
+              <Icon name="delete_to_trash" className="text-icon" />
+              <span className="text-baseline-center">Delete</span>
+            </Button>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Trailing Icon</Label>
+            <Button $size="md" className="font-family-ui text-md">
+              <span className="text-baseline-center">Share</span>
+              <Icon name="share" className="text-icon" />
+            </Button>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Navigation</Label>
+            <Button $size="md" className="font-family-ui text-md">
+              <span className="text-baseline-center">Next</span>
+              <Icon name="arrow_forward" className="text-icon" />
+            </Button>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Icon Only</Label>
+            <Button
+              $size="md"
+              className="font-family-ui text-md"
+              style={{ padding: '8px' }}
+              aria-label="More options"
+            >
+              <Icon name="more_vertical" className="text-icon" />
+            </Button>
+          </ShowcaseCard>
+        </ShowcaseGrid>
+      </UsageCategory>
 
-    <Heading as="h4" style={{ marginTop: '24px', marginBottom: '12px' }}>
-      Status Messages
-    </Heading>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      <div
-        className="font-family-ui text-md"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#2e7d32',
-        }}
-      >
-        <Icon name="check_circle_outlined" className="text-icon" />
-        <span className="text-baseline-center">
-          Your changes have been saved
-        </span>
-      </div>
-      <div
-        className="font-family-ui text-md"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#ed6c02',
-        }}
-      >
-        <Icon name="warning_outlined" className="text-icon" />
-        <span className="text-baseline-center">
-          Please review before submitting
-        </span>
-      </div>
-      <div
-        className="font-family-ui text-md"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#d32f2f',
-        }}
-      >
-        <Icon name="error_outlined" className="text-icon" />
-        <span className="text-baseline-center">An error has occurred</span>
-      </div>
-      <div
-        className="font-family-ui text-md"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#0288d1',
-        }}
-      >
-        <Icon name="info_circle" className="text-icon" />
-        <span className="text-baseline-center">
-          Updates available for download
-        </span>
-      </div>
-    </div>
-  </Stack>
+      <UsageCategory>
+        <CategoryHeader>
+          <Heading as="h4">Status Messages</Heading>
+          <Paragraph size="sm" weight="lighter">
+            Feedback messages with contextual icons and colors
+          </Paragraph>
+        </CategoryHeader>
+        <ShowcaseGrid>
+          <ShowcaseCard>
+            <Label>Success</Label>
+            <ShowcaseItem
+              className="font-family-ui text-md"
+              style={{ color: '#2e7d32' }}
+            >
+              <Icon name="check_circle_outlined" className="text-icon" />
+              <span className="text-baseline-center">
+                Changes saved successfully
+              </span>
+            </ShowcaseItem>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Warning</Label>
+            <ShowcaseItem
+              className="font-family-ui text-md"
+              style={{ color: '#ed6c02' }}
+            >
+              <Icon name="warning_outlined" className="text-icon" />
+              <span className="text-baseline-center">
+                Please review before submitting
+              </span>
+            </ShowcaseItem>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Error</Label>
+            <ShowcaseItem
+              className="font-family-ui text-md"
+              style={{ color: '#d32f2f' }}
+            >
+              <Icon name="error_outlined" className="text-icon" />
+              <span className="text-baseline-center">
+                An error has occurred
+              </span>
+            </ShowcaseItem>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Information</Label>
+            <ShowcaseItem
+              className="font-family-ui text-md"
+              style={{ color: '#0288d1' }}
+            >
+              <Icon name="info_circle" className="text-icon" />
+              <span className="text-baseline-center">
+                Updates available for download
+              </span>
+            </ShowcaseItem>
+          </ShowcaseCard>
+        </ShowcaseGrid>
+      </UsageCategory>
+
+      <UsageCategory>
+        <CategoryHeader>
+          <Heading as="h4">Interactive Elements</Heading>
+          <Paragraph size="sm" weight="lighter">
+            Links, list items, and chips with icon integration
+          </Paragraph>
+        </CategoryHeader>
+        <ShowcaseGrid>
+          <ShowcaseCard>
+            <Label>External Link</Label>
+            <a
+              href="https://example.com"
+              className="font-family-ui text-md"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+              <Icon name="link" className="text-icon" />
+              <span className="text-baseline-center">External link</span>
+              <Icon name="external_link" className="text-icon" />
+            </a>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Download Link</Label>
+            <a
+              href="https://example.com"
+              className="font-family-ui text-md"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <Icon name="download" className="text-icon" />
+              <span className="text-baseline-center">Download PDF</span>
+            </a>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Checklist Item</Label>
+            <ShowcaseItem className="font-family-ui text-md">
+              <Icon name="check_circle_outlined" className="text-icon" />
+              <span className="text-baseline-center">Task completed</span>
+            </ShowcaseItem>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>User Badge</Label>
+            <div
+              className="font-family-ui text-sm"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 12px',
+                background: '#e3f2fd',
+                borderRadius: '16px',
+              }}
+            >
+              <Icon name="account_circle" className="text-icon" />
+              <span className="text-baseline-center">John Doe</span>
+              <Icon name="close" className="text-icon" />
+            </div>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>Tag/Category</Label>
+            <div
+              className="font-family-ui text-sm"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 12px',
+                background: '#f3e5f5',
+                borderRadius: '16px',
+              }}
+            >
+              <Icon name="sun" className="text-icon" />
+              <span className="text-baseline-center">Design System</span>
+            </div>
+          </ShowcaseCard>
+          <ShowcaseCard>
+            <Label>File Item</Label>
+            <ShowcaseItem className="font-family-ui text-md">
+              <Icon name="download" className="text-icon" />
+              <span className="text-baseline-center">document.pdf</span>
+            </ShowcaseItem>
+          </ShowcaseCard>
+        </ShowcaseGrid>
+      </UsageCategory>
+    </UsageSection>
+  </GridShowcaseWrapper>
 )
 UsageExamples.parameters = {
   docs: {
     description: {
       story:
-        'Practical examples of icons and text as siblings in common UI patterns: navigation, buttons, and status messages.',
+        'Practical examples of icons and text as siblings in common UI patterns, organized by category using CSS Grid. All spacing follows the 4px grid system (8px, 12px, 16px, 20px, 24px, 32px). Cards provide visual grouping and context for each example.',
     },
   },
 }

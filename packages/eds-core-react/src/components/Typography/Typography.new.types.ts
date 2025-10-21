@@ -26,13 +26,3 @@ export type TypographyNextProps = {
   /** Children to render */
   children?: React.ReactNode
 } & HTMLAttributes<HTMLElement>
-
-// Re-export shared types for convenience
-export type {
-  FontFamily,
-  FontSize,
-  LineHeight,
-  BaselineAlignment,
-  FontWeight,
-  Tracking,
-} from './types'
