@@ -186,7 +186,7 @@ export function Caption({
 /**
  * Label component for form labels and tags
  *
- * Uses extra small size (12px) by default with bolder weight
+ * Uses small size (12px) by default with bolder weight
  * Not baseline-aligned for better optical centering in UI components
  *
  * @example
