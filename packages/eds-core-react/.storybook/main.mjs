@@ -64,7 +64,6 @@ const config = {
         ...config.optimizeDeps,
         include: [
           ...(config.optimizeDeps?.include ?? []),
-          '@equinor/eds-utils',
           '@storybook/addon-docs/mdx-react-shim',
           '@storybook/addon-docs/blocks',
         ],
