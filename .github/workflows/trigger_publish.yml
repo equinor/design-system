@@ -11,15 +11,15 @@
 
 name: Trigger Package Publishing
 
-# Trigger: Runs when a PR is closed to develop, and includes changes in .release-please-manifest.json
+# Trigger: Runs when a PR is closed to main, and includes changes in .release-please-manifest.json
 # Release Please updates this file on every version bump, so we use it to detect release PR merges
 on:
   pull_request:
     types: [closed]
     branches:
-      - develop
+      - main
     paths:
-      - '.github/release-please-manifest.json'
+      - ".github/release-please-manifest.json"
 
 # Required permissions
 permissions:
@@ -80,7 +80,7 @@ jobs:
         run: |
           # Use PR base and head SHAs for accurate diff
           # This works correctly regardless of merge strategy (squash/merge/rebase)
-          # - base.sha: commit where PR branched from develop
+          # - base.sha: commit where PR branched from main
           # - head.sha: latest commit in PR branch before merge
           # This ensures we capture ALL changes in the PR, not just the merge commit
           BASE_SHA="${{ github.event.pull_request.base.sha }}"
@@ -178,7 +178,7 @@ jobs:
           # Use GitHub CLI to trigger the publish workflow
           gh workflow run publish_core_react.yaml \
             --repo ${{ github.repository }} \
-            --ref develop \
+            --ref main \
             -f npm-tag=latest \
             -f environment=production
         # Allow other packages to continue even if this one fails
@@ -206,7 +206,7 @@ jobs:
         run: |
           gh workflow run publish_lab.yaml \
             --repo ${{ github.repository }} \
-            --ref develop \
+            --ref main \
             -f npm-tag=latest \
             -f environment=production
         continue-on-error: true
@@ -233,7 +233,7 @@ jobs:
         run: |
           gh workflow run publish_data_grid.yaml \
             --repo ${{ github.repository }} \
-            --ref develop \
+            --ref main \
             -f npm-tag=latest \
             -f environment=production
         continue-on-error: true
@@ -260,7 +260,7 @@ jobs:
         run: |
           gh workflow run publish_icons.yaml \
             --repo ${{ github.repository }} \
-            --ref develop \
+            --ref main \
             -f npm-tag=latest
         continue-on-error: true
 
@@ -286,7 +286,7 @@ jobs:
         run: |
           gh workflow run publish_tokens.yaml \
             --repo ${{ github.repository }} \
-            --ref develop \
+            --ref main \
             -f npm-tag=latest
         continue-on-error: true
 

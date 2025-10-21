@@ -3,14 +3,14 @@ on:
   workflow_dispatch:
   pull_request:
     branches:
-      - develop
+      - main
     paths:
-      - 'apps/**'
-      - 'packages/**'
-      - '.github/workflows/**'
+      - "apps/**"
+      - "packages/**"
+      - ".github/workflows/**"
   push:
     branches:
-      - develop
+      - main
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
@@ -37,7 +37,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.12.0'
+          node-version: "22.12.0"
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
       # Fallback if cache miss (shouldn’t happen as job needs: setup)

@@ -41,7 +41,7 @@ const config: Config = {
               : [],
           breadcrumbs: true,
           editUrl:
-            'https://github.com/equinor/design-system/tree/develop/apps/design-system-docs/shared',
+            'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
         },
         theme: {
           customCss: [

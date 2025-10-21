@@ -86,7 +86,7 @@ This release marks the data grid as **production-ready**. The v1.0.0 milestone s
 
 ### Fixed
 
-- 🐛 Add [effect](https://github.com/equinor/design-system/blob/develop/packages/eds-data-grid-react/src/EdsDataGrid.tsx#L385-L391) to recalculate virtualization when density changes
+- 🐛 Add [effect](https://github.com/equinor/design-system/blob/main/packages/eds-data-grid-react/src/EdsDataGrid.tsx#L385-L391) to recalculate virtualization when density changes
 
 ## [0.7.5] - 2025-01-17
 
