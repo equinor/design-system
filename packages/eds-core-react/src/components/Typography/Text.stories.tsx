@@ -8,6 +8,25 @@ import styled from 'styled-components'
 
 Icon.add(icons)
 
+const SAMPLE_TEXT = 'The quick brown fox jumps over the lazy dog'
+const SIZES = [
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+] as const
+const WEIGHTS = ['lighter', 'normal', 'bolder'] as const
+const TRACKING_OPTIONS = ['tight', 'normal', 'wide'] as const
+const LINE_HEIGHTS = ['default', 'squished'] as const
+const HEADING_LEVELS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const
+
+// Styled Components
 const ComparisonGrid = styled.div`
   display: grid;
   gap: 24px;
@@ -99,15 +118,169 @@ const Button = styled.button<{ $size?: string }>`
 `
 
 // Container for demonstrating icon alignment
-const IconTextContainer = styled.div<{ $size?: string }>`
+const IconTextContainer = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
-
-  /* Apply text size to the container */
-  ${({ $size }) =>
-    $size && `font-size: var(--eds-typography-ui-body-${$size}-font-size);`}
 `
+
+// Helper Components
+const ComparisonSection = ({
+  title,
+  marginTop,
+  children,
+}: {
+  title: string
+  marginTop?: string
+  children: React.ReactNode
+}) => (
+  <>
+    <Heading as="h3" style={{ marginTop, marginBottom: '24px' }}>
+      {title}
+    </Heading>
+    <ComparisonGrid>{children}</ComparisonGrid>
+  </>
+)
+
+const ComparisonRowItem = ({
+  label,
+  children,
+}: {
+  label: string
+  children: React.ReactNode
+}) => (
+  <ComparisonRow>
+    <Label>{label}</Label>
+    {children}
+  </ComparisonRow>
+)
+
+const HeadingLevelComparison = ({ text = SAMPLE_TEXT }: { text?: string }) => (
+  <>
+    {HEADING_LEVELS.map((level) => (
+      <ComparisonRowItem key={level} label={level.toUpperCase()}>
+        <Heading as={level}>{text}</Heading>
+      </ComparisonRowItem>
+    ))}
+  </>
+)
+
+const WeightComparison = ({
+  component: Component,
+  text = SAMPLE_TEXT,
+  ...componentProps
+}: {
+  component: typeof Heading | typeof Paragraph
+  text?: string
+} & Record<string, unknown>) => (
+  <>
+    {WEIGHTS.map((weight) => (
+      <ComparisonRowItem
+        key={weight}
+        label={weight.charAt(0).toUpperCase() + weight.slice(1)}
+      >
+        <Component {...componentProps} weight={weight}>
+          {text}
+        </Component>
+      </ComparisonRowItem>
+    ))}
+  </>
+)
+
+const TrackingComparison = ({
+  component: Component,
+  text = SAMPLE_TEXT,
+  ...componentProps
+}: {
+  component: typeof Heading | typeof Paragraph
+  text?: string
+} & Record<string, unknown>) => (
+  <>
+    {TRACKING_OPTIONS.map((tracking) => (
+      <ComparisonRowItem
+        key={tracking}
+        label={tracking.charAt(0).toUpperCase() + tracking.slice(1)}
+      >
+        <Component {...componentProps} tracking={tracking}>
+          {text}
+        </Component>
+      </ComparisonRowItem>
+    ))}
+  </>
+)
+
+const SizeComparison = ({
+  component: Component,
+  text = SAMPLE_TEXT,
+  ...componentProps
+}: {
+  component: typeof Paragraph | typeof Text
+  text?: string
+} & Record<string, unknown>) => (
+  <>
+    {SIZES.map((size) => (
+      <ComparisonRowItem key={size} label={size.toUpperCase()}>
+        {/* @ts-expect-error - size prop is valid for both components */}
+        <Component {...componentProps} size={size}>
+          {text}
+        </Component>
+      </ComparisonRowItem>
+    ))}
+  </>
+)
+
+const LineHeightComparison = ({ text = SAMPLE_TEXT }: { text?: string }) => (
+  <>
+    {LINE_HEIGHTS.map((lineHeight) => (
+      <ComparisonRowItem
+        key={lineHeight}
+        label={lineHeight.charAt(0).toUpperCase() + lineHeight.slice(1)}
+      >
+        <Paragraph lineHeight={lineHeight}>{text}</Paragraph>
+      </ComparisonRowItem>
+    ))}
+  </>
+)
+
+const IconTextRow = ({
+  label,
+  size,
+  text = 'Save your work',
+  iconName = 'save',
+}: {
+  label: string
+  size: (typeof SIZES)[number]
+  text?: string
+  iconName?: string
+}) => (
+  <ComparisonRowItem label={label}>
+    <IconTextContainer className={`font-family-ui text-${size}`}>
+      <Icon name={iconName} className="icon" />
+      <span className="text-baseline-center">{text}</span>
+    </IconTextContainer>
+  </ComparisonRowItem>
+)
+
+const ButtonRow = ({
+  label,
+  size,
+  children,
+  ...extraProps
+}: {
+  label: string
+  size: string
+  children: React.ReactNode
+} & Record<string, unknown>) => (
+  <ComparisonRowItem label={label}>
+    <Button
+      $size={size}
+      className={`font-family-ui text-${size}`}
+      {...extraProps}
+    >
+      {children}
+    </Button>
+  </ComparisonRowItem>
+)
 
 const meta: Meta = {
   title: 'Typography/Text Components',
@@ -156,11 +329,12 @@ export const Introduction: StoryFn = () => (
   </IntroductionGrid>
 )
 
-export const HeadingPlayground: StoryFn<HeadingProps> = (args) => {
-  const content = (
-    <Heading {...args}>The quick brown fox jumps over the lazy dog</Heading>
-  )
-  return args.debug ? <GridBackground>{content}</GridBackground> : content
+export const HeadingPlayground: StoryFn<HeadingProps> = ({
+  debug,
+  ...args
+}) => {
+  const content = <Heading {...args}>{SAMPLE_TEXT}</Heading>
+  return debug ? <GridBackground>{content}</GridBackground> : content
 }
 HeadingPlayground.storyName = 'Heading - Interactive'
 HeadingPlayground.args = {
@@ -193,83 +367,20 @@ HeadingPlayground.argTypes = {
 
 export const HeadingComparison: StoryFn = () => (
   <div>
-    <Heading as="h3" style={{ marginBottom: '24px' }}>
-      Heading Level Comparison
-    </Heading>
-    <ComparisonGrid>
-      <ComparisonRow>
-        <Label>H1</Label>
-        <Heading as="h1">The quick brown fox jumps over the lazy dog</Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>H2</Label>
-        <Heading as="h2">The quick brown fox jumps over the lazy dog</Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>H3</Label>
-        <Heading as="h3">The quick brown fox jumps over the lazy dog</Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>H4</Label>
-        <Heading as="h4">The quick brown fox jumps over the lazy dog</Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>H5</Label>
-        <Heading as="h5">The quick brown fox jumps over the lazy dog</Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>H6</Label>
-        <Heading as="h6">The quick brown fox jumps over the lazy dog</Heading>
-      </ComparisonRow>
-    </ComparisonGrid>
+    <ComparisonSection title="Heading Level Comparison">
+      <HeadingLevelComparison />
+    </ComparisonSection>
 
-    <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
-      Font Weight Comparison
-    </Heading>
-    <ComparisonGrid>
-      <ComparisonRow>
-        <Label>Lighter</Label>
-        <Heading as="h2" weight="lighter">
-          The quick brown fox jumps over the lazy dog
-        </Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Normal</Label>
-        <Heading as="h2" weight="normal">
-          The quick brown fox jumps over the lazy dog
-        </Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Bolder</Label>
-        <Heading as="h2" weight="bolder">
-          The quick brown fox jumps over the lazy dog
-        </Heading>
-      </ComparisonRow>
-    </ComparisonGrid>
+    <ComparisonSection title="Font Weight Comparison" marginTop="48px">
+      <WeightComparison component={Heading} as="h2" />
+    </ComparisonSection>
 
-    <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
-      Letter Spacing (Tracking) Comparison
-    </Heading>
-    <ComparisonGrid>
-      <ComparisonRow>
-        <Label>Tight</Label>
-        <Heading as="h2" tracking="tight">
-          The quick brown fox jumps over the lazy dog
-        </Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Normal</Label>
-        <Heading as="h2" tracking="normal">
-          The quick brown fox jumps over the lazy dog
-        </Heading>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Wide</Label>
-        <Heading as="h2" tracking="wide">
-          The quick brown fox jumps over the lazy dog
-        </Heading>
-      </ComparisonRow>
-    </ComparisonGrid>
+    <ComparisonSection
+      title="Letter Spacing (Tracking) Comparison"
+      marginTop="48px"
+    >
+      <TrackingComparison component={Heading} as="h2" />
+    </ComparisonSection>
   </div>
 )
 HeadingComparison.storyName = 'Heading - All Variants'
@@ -282,16 +393,12 @@ HeadingComparison.parameters = {
   },
 }
 
-export const ParagraphPlayground: StoryFn<ParagraphProps> = (args) => {
-  const content = (
-    <Paragraph {...args}>
-      The quick brown fox jumps over the lazy dog. This is sample text to
-      demonstrate paragraph styling with various options. Typography is a
-      critical component of any design system, providing the foundation for
-      readable and accessible content.
-    </Paragraph>
-  )
-  return args.debug ? <GridBackground>{content}</GridBackground> : content
+export const ParagraphPlayground: StoryFn<ParagraphProps> = ({
+  debug,
+  ...args
+}) => {
+  const content = <Paragraph {...args}>{SAMPLE_TEXT}</Paragraph>
+  return debug ? <GridBackground>{content}</GridBackground> : content
 }
 ParagraphPlayground.storyName = 'Paragraph - Interactive'
 ParagraphPlayground.args = {
@@ -328,109 +435,28 @@ ParagraphPlayground.argTypes = {
   },
 }
 
-export const ParagraphComparison: StoryFn = () => {
-  const sampleText = 'The quick brown fox jumps over the lazy dog.'
+export const ParagraphComparison: StoryFn = () => (
+  <div>
+    <ComparisonSection title="Size Comparison">
+      <SizeComparison component={Paragraph} />
+    </ComparisonSection>
 
-  return (
-    <div>
-      <Heading as="h3" style={{ marginBottom: '24px' }}>
-        Size Comparison
-      </Heading>
-      <ComparisonGrid>
-        <ComparisonRow>
-          <Label>XS</Label>
-          <Paragraph size="xs">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>SM</Label>
-          <Paragraph size="sm">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>MD (Default)</Label>
-          <Paragraph size="md">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>LG</Label>
-          <Paragraph size="lg">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>XL</Label>
-          <Paragraph size="xl">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>2XL</Label>
-          <Paragraph size="2xl">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>3XL</Label>
-          <Paragraph size="3xl">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>4XL</Label>
-          <Paragraph size="4xl">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>5XL</Label>
-          <Paragraph size="5xl">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>6XL</Label>
-          <Paragraph size="6xl">{sampleText}</Paragraph>
-        </ComparisonRow>
-      </ComparisonGrid>
+    <ComparisonSection title="Line Height Comparison" marginTop="48px">
+      <LineHeightComparison text={SAMPLE_TEXT} />
+    </ComparisonSection>
 
-      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
-        Line Height Comparison
-      </Heading>
-      <ComparisonGrid>
-        <ComparisonRow>
-          <Label>Default</Label>
-          <Paragraph lineHeight="default">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>Squished</Label>
-          <Paragraph lineHeight="squished">{sampleText}</Paragraph>
-        </ComparisonRow>
-      </ComparisonGrid>
+    <ComparisonSection title="Font Weight Comparison" marginTop="48px">
+      <WeightComparison component={Paragraph} />
+    </ComparisonSection>
 
-      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
-        Font Weight Comparison
-      </Heading>
-      <ComparisonGrid>
-        <ComparisonRow>
-          <Label>Lighter</Label>
-          <Paragraph weight="lighter">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>Normal</Label>
-          <Paragraph weight="normal">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>Bolder</Label>
-          <Paragraph weight="bolder">{sampleText}</Paragraph>
-        </ComparisonRow>
-      </ComparisonGrid>
-
-      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
-        Letter Spacing (Tracking) Comparison
-      </Heading>
-      <ComparisonGrid>
-        <ComparisonRow>
-          <Label>Tight</Label>
-          <Paragraph tracking="tight">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>Normal</Label>
-          <Paragraph tracking="normal">{sampleText}</Paragraph>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>Wide</Label>
-          <Paragraph tracking="wide">{sampleText}</Paragraph>
-        </ComparisonRow>
-      </ComparisonGrid>
-    </div>
-  )
-}
+    <ComparisonSection
+      title="Letter Spacing (Tracking) Comparison"
+      marginTop="48px"
+    >
+      <TrackingComparison component={Paragraph} />
+    </ComparisonSection>
+  </div>
+)
 ParagraphComparison.storyName = 'Paragraph - All Variants'
 ParagraphComparison.parameters = {
   docs: {
@@ -441,11 +467,9 @@ ParagraphComparison.parameters = {
   },
 }
 
-export const TextPlayground: StoryFn<TextProps> = (args) => {
-  const content = (
-    <Text {...args}>The quick brown fox jumps over the lazy dog</Text>
-  )
-  return args.debug ? <GridBackground>{content}</GridBackground> : content
+export const TextPlayground: StoryFn<TextProps> = ({ debug, ...args }) => {
+  const content = <Text {...args}>{SAMPLE_TEXT}</Text>
+  return debug ? <GridBackground>{content}</GridBackground> : content
 }
 TextPlayground.storyName = 'Text - Interactive'
 TextPlayground.args = {
@@ -494,285 +518,33 @@ TextPlayground.argTypes = {
   },
 }
 
-export const TextSizeScale: StoryFn = () => {
-  const sampleText = 'The quick brown fox'
+export const TextSizeScale: StoryFn = () => (
+  <div>
+    <ComparisonSection title="UI Font Family - Size Scale">
+      <SizeComparison
+        component={Text}
+        family="ui"
+        lineHeight="default"
+        baseline="grid"
+        tracking="normal"
+        weight="normal"
+        text={SAMPLE_TEXT}
+      />
+    </ComparisonSection>
 
-  return (
-    <div>
-      <Heading as="h3" style={{ marginBottom: '24px' }}>
-        UI Font Family - Size Scale
-      </Heading>
-      <ComparisonGrid>
-        <ComparisonRow>
-          <Label>XS</Label>
-          <Text
-            family="ui"
-            size="xs"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>SM</Label>
-          <Text
-            family="ui"
-            size="sm"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>MD</Label>
-          <Text
-            family="ui"
-            size="md"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>LG</Label>
-          <Text
-            family="ui"
-            size="lg"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>XL</Label>
-          <Text
-            family="ui"
-            size="xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>2XL</Label>
-          <Text
-            family="ui"
-            size="2xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>3XL</Label>
-          <Text
-            family="ui"
-            size="3xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>4XL</Label>
-          <Text
-            family="ui"
-            size="4xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>5XL</Label>
-          <Text
-            family="ui"
-            size="5xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>6XL</Label>
-          <Text
-            family="ui"
-            size="6xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-      </ComparisonGrid>
-
-      <Heading as="h3" style={{ marginTop: '48px', marginBottom: '24px' }}>
-        Header Font Family - Size Scale
-      </Heading>
-      <ComparisonGrid>
-        <ComparisonRow>
-          <Label>XS</Label>
-          <Text
-            family="header"
-            size="xs"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>SM</Label>
-          <Text
-            family="header"
-            size="sm"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>MD</Label>
-          <Text
-            family="header"
-            size="md"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>LG</Label>
-          <Text
-            family="header"
-            size="lg"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>XL</Label>
-          <Text
-            family="header"
-            size="xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>2XL</Label>
-          <Text
-            family="header"
-            size="2xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>3XL</Label>
-          <Text
-            family="header"
-            size="3xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>4XL</Label>
-          <Text
-            family="header"
-            size="4xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>5XL</Label>
-          <Text
-            family="header"
-            size="5xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-        <ComparisonRow>
-          <Label>6XL</Label>
-          <Text
-            family="header"
-            size="6xl"
-            lineHeight="default"
-            baseline="grid"
-            tracking="normal"
-            weight="normal"
-          >
-            {sampleText}
-          </Text>
-        </ComparisonRow>
-      </ComparisonGrid>
-    </div>
-  )
-}
+    <ComparisonSection title="Header Font Family - Size Scale" marginTop="48px">
+      <SizeComparison
+        component={Text}
+        family="header"
+        lineHeight="default"
+        baseline="grid"
+        tracking="normal"
+        weight="normal"
+        text={SAMPLE_TEXT}
+      />
+    </ComparisonSection>
+  </div>
+)
 TextSizeScale.storyName = 'Text - Size Scale'
 TextSizeScale.parameters = {
   docs: {
@@ -928,7 +700,6 @@ export const RealWorldExample: StoryFn = () => (
     </Paragraph>
   </RealWorldGrid>
 )
-RealWorldExample.storyName = 'Real World Example'
 RealWorldExample.parameters = {
   docs: {
     description: {
@@ -1058,46 +829,6 @@ RealWorldWithGrid.parameters = {
   },
 }
 
-export const Debug: StoryFn = () => (
-  <Stack>
-    <Paragraph>
-      Enable debug mode to visualize text box trimming and baseline alignment.
-      The red grid lines show the 4px baseline grid:
-    </Paragraph>
-    <GridBackground>
-      <Stack>
-        <Heading as="h2" debug>
-          Heading with Debug Mode
-        </Heading>
-        <Paragraph debug>
-          This paragraph has debug mode enabled, showing the text box with a
-          background color to help visualize alignment and spacing. Notice how
-          the text aligns to the 4px grid.
-        </Paragraph>
-        <Text
-          family="ui"
-          size="lg"
-          lineHeight="default"
-          baseline="grid"
-          weight="normal"
-          tracking="normal"
-          debug
-        >
-          Text component with debug mode
-        </Text>
-      </Stack>
-    </GridBackground>
-  </Stack>
-)
-Debug.parameters = {
-  docs: {
-    description: {
-      story:
-        'Debug mode adds a visual background to help developers understand text box alignment and spacing.',
-    },
-  },
-}
-
 export const IconsAsTextSiblings: StoryFn = () => (
   <Stack>
     <Heading as="h3" style={{ marginBottom: '24px' }}>
@@ -1112,76 +843,14 @@ export const IconsAsTextSiblings: StoryFn = () => (
     </Paragraph>
 
     <ComparisonGrid>
-      <ComparisonRow>
-        <Label>XS</Label>
-        <IconTextContainer $size="xs" className="font-family-ui text-xs">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>SM</Label>
-        <IconTextContainer $size="sm" className="font-family-ui text-sm">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>MD</Label>
-        <IconTextContainer $size="md" className="font-family-ui text-md">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>LG</Label>
-        <IconTextContainer $size="lg" className="font-family-ui text-lg">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>XL</Label>
-        <IconTextContainer $size="xl" className="font-family-ui text-xl">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>2XL</Label>
-        <IconTextContainer $size="2xl" className="font-family-ui text-2xl">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>3XL</Label>
-        <IconTextContainer $size="3xl" className="font-family-ui text-3xl">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>4XL</Label>
-        <IconTextContainer $size="4xl" className="font-family-ui text-4xl">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>5XL</Label>
-        <IconTextContainer $size="5xl" className="font-family-ui text-5xl">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>6XL</Label>
-        <IconTextContainer $size="6xl" className="font-family-ui text-6xl">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save your work</span>
-        </IconTextContainer>
-      </ComparisonRow>
+      {SIZES.map((size) => (
+        <IconTextRow
+          key={size}
+          label={size.toUpperCase()}
+          size={size}
+          text="Save your work"
+        />
+      ))}
     </ComparisonGrid>
   </Stack>
 )
@@ -1206,27 +875,18 @@ export const ButtonsWithIcons: StoryFn = () => (
     </Paragraph>
 
     <ComparisonGrid>
-      <ComparisonRow>
-        <Label>Small</Label>
-        <Button $size="sm" className="font-family-ui text-sm">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save</span>
-        </Button>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Medium</Label>
-        <Button $size="md" className="font-family-ui text-md">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save</span>
-        </Button>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Large</Label>
-        <Button $size="lg" className="font-family-ui text-lg">
-          <Icon name="save" className="icon" />
-          <span className="text-baseline-center">Save</span>
-        </Button>
-      </ComparisonRow>
+      <ButtonRow label="Small" size="sm">
+        <Icon name="save" className="icon" />
+        <span className="text-baseline-center">Save</span>
+      </ButtonRow>
+      <ButtonRow label="Medium" size="md">
+        <Icon name="save" className="icon" />
+        <span className="text-baseline-center">Save</span>
+      </ButtonRow>
+      <ButtonRow label="Large" size="lg">
+        <Icon name="save" className="icon" />
+        <span className="text-baseline-center">Save</span>
+      </ButtonRow>
     </ComparisonGrid>
 
     <Heading as="h4" style={{ marginTop: '24px', marginBottom: '16px' }}>
@@ -1234,39 +894,27 @@ export const ButtonsWithIcons: StoryFn = () => (
     </Heading>
 
     <ComparisonGrid>
-      <ComparisonRow>
-        <Label>Leading Icon</Label>
-        <Button $size="md" className="font-family-ui text-md">
-          <Icon name="add" className="icon" />
-          <span className="text-baseline-center">Add Item</span>
-        </Button>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Trailing Icon</Label>
-        <Button $size="md" className="font-family-ui text-md">
-          <span className="text-baseline-center">Next</span>
-          <Icon name="arrow_forward" className="icon" />
-        </Button>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Icon Only</Label>
-        <Button
-          $size="md"
-          className="font-family-ui text-md"
-          style={{ padding: '8px' }}
-          aria-label="Delete"
-        >
-          <Icon name="delete_to_trash" className="icon" />
-        </Button>
-      </ComparisonRow>
-      <ComparisonRow>
-        <Label>Both Sides</Label>
-        <Button $size="md" className="font-family-ui text-md">
-          <Icon name="star_outlined" className="icon" />
-          <span className="text-baseline-center">Favorite</span>
-          <Icon name="chevron_down" className="icon" />
-        </Button>
-      </ComparisonRow>
+      <ButtonRow label="Leading Icon" size="md">
+        <Icon name="add" className="icon" />
+        <span className="text-baseline-center">Add Item</span>
+      </ButtonRow>
+      <ButtonRow label="Trailing Icon" size="md">
+        <span className="text-baseline-center">Next</span>
+        <Icon name="arrow_forward" className="icon" />
+      </ButtonRow>
+      <ButtonRow
+        label="Icon Only"
+        size="md"
+        style={{ padding: '8px' }}
+        aria-label="Delete"
+      >
+        <Icon name="delete_to_trash" className="icon" />
+      </ButtonRow>
+      <ButtonRow label="Both Sides" size="md">
+        <Icon name="star_outlined" className="icon" />
+        <span className="text-baseline-center">Favorite</span>
+        <Icon name="chevron_down" className="icon" />
+      </ButtonRow>
     </ComparisonGrid>
   </Stack>
 )
@@ -1305,7 +953,7 @@ export const IconTextAlignment: StoryFn = () => (
       <ComparisonRow>
         <Label>With Link</Label>
         <a
-          href="#"
+          href="https://example.com"
           className="font-family-ui text-md"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
         >
@@ -1446,7 +1094,7 @@ export const UsageExamples: StoryFn = () => (
     </Heading>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
       <a
-        href="#"
+        href="https://example.com"
         className="font-family-ui text-md"
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
@@ -1454,7 +1102,7 @@ export const UsageExamples: StoryFn = () => (
         <span className="text-baseline-center">Home</span>
       </a>
       <a
-        href="#"
+        href="https://example.com"
         className="font-family-ui text-md"
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
@@ -1462,7 +1110,7 @@ export const UsageExamples: StoryFn = () => (
         <span className="text-baseline-center">Dashboard</span>
       </a>
       <a
-        href="#"
+        href="https://example.com"
         className="font-family-ui text-md"
         style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
