@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react'
-import { FontWeight, Tracking } from './types'
+import { FontWeight, LineHeight, Tracking } from './types'
 
 export type HeadingProps = {
   /** HTML heading element to render */
@@ -8,6 +8,8 @@ export type HeadingProps = {
   weight?: FontWeight
   /** Letter spacing (tracking) */
   tracking?: Tracking
+  /** Line height variant */
+  lineHeight?: LineHeight
   /** Enable debug mode to visualize text box */
   debug?: boolean
   /** Children to render */

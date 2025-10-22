@@ -28,13 +28,22 @@ const getHeadingSize = (as: HeadingProps['as']): FontSize => {
  */
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   (
-    { weight = 'normal', tracking = 'normal', debug, className, as, ...rest },
+    {
+      lineHeight = 'default',
+      weight = 'normal',
+      tracking = 'normal',
+      debug,
+      className,
+      as,
+      ...rest
+    },
     ref,
   ) => {
     const typographyClassNames = createTypographyClassNames({
       family: 'header',
-      size: getHeadingSize(as),
       baseline: 'grid',
+      lineHeight,
+      size: getHeadingSize(as),
       weight,
       tracking,
       className,
