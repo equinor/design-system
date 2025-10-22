@@ -1,4 +1,24 @@
-Follow these steps to ensure a smooth and consistent release process.
+# Release Process
+
+> **Note:** This documentation describes the legacy manual release process. For the current automated process using Release Please, see [AUTOMATED_RELEASE.md](./AUTOMATED_RELEASE.md).
+
+## Current Automated Process (Release Please)
+
+The release process is now largely automated using Release Please. See [AUTOMATED_RELEASE.md](./AUTOMATED_RELEASE.md) for the complete guide.
+
+**Quick overview:**
+
+1. Use conventional commits during development
+2. Release Please automatically creates release PRs
+3. Review and merge the release PR
+4. Publishing and GitHub releases happen automatically
+5. Manual steps: rebase master, announce release
+
+## Legacy Manual Process
+
+The following steps describe the old manual release process, kept for reference:
+
+---
 
 ## 1. Create a Release Ticket
 
@@ -19,12 +39,10 @@ Follow these steps to ensure a smooth and consistent release process.
 
 - Navigate to the **code** section on GitHub and go to [**Releases**](https://github.com/equinor/design-system/releases).
 - Click [**Draft New Release**](https://github.com/equinor/design-system/releases/new).
-
   - **Name the Release**: Use the naming convention `eds-core-react@[version]`. Replace `[version]` with the new version number.
   - **Version number** Look at the [commit history](https://github.com/equinor/design-system/commits/develop/) to define what [sem version](https://semver.org/) we should use in the release.
   - **Tag Creation**: Select **Create a new tag on publish** and use the same value as release name.
   - **Generate Release Notes**:
-
     - Automatically generate the release notes.
     - Copy and paste the generated notes into the `CHANGELOG.md` file in your new release branch.
     - Filter out commits unrelated to the release, such as updated dev dependencies, changes to GitHub actions, etc.
@@ -82,10 +100,10 @@ Follow these steps to ensure a smooth and consistent release process.
   git checkout master
   ```
 
-- Rebase `master` with the latest changes from `develop`:
+- Rebase `master` with the latest changes from `main`:
 
   ```bash
-  git rebase develop
+  git rebase main
   ```
 
 - Push the updates to the remote repository:
