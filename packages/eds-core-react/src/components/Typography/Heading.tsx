@@ -40,7 +40,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   ) => {
     return (
       <TypographyNext
-        ref={ref as React.Ref<HTMLHeadingElement>}
+        ref={ref}
         as={as}
         family="header"
         baseline="grid"

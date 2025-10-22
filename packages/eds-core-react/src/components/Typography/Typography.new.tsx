@@ -66,7 +66,7 @@ export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
 
     return (
       <Component
-        ref={ref as React.Ref<HTMLSpanElement>}
+        ref={ref}
         className={combinedClassName}
         data-debug={debug ? '' : undefined}
         {...rest}

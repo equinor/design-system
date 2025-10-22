@@ -20,7 +20,7 @@ export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   ) => {
     return (
       <TypographyNext
-        ref={ref as React.Ref<HTMLParagraphElement>}
+        ref={ref}
         as="p"
         family="ui"
         baseline="grid"
