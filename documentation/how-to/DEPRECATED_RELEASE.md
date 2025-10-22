@@ -1,11 +1,7 @@
-# Deprecated Release Process
+# ⚠️ DEPRECATED: Legacy Manual Release Process
 
 > **Note:** This documentation describes the legacy manual release process.
 > The release process is now largely automated using Release Please. See [AUTOMATED_RELEASE.md](./AUTOMATED_RELEASE.md) for the complete guide.
-
----
-
-## Legacy Manual Process
 
 The following steps describe the old manual release process, kept for reference:
 
