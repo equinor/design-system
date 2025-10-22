@@ -8,7 +8,6 @@ Guide for the automated release process in Equinor Design System using Release P
 - [Quick Start](#quick-start)
 - [How It Works](#how-it-works)
 - [Understanding Release PRs](#understanding-release-prs)
-- [Branch Strategy](#branch-strategy)
 - [Manual Steps After Release](#manual-steps-after-release)
 - [GitHub Releases](#github-releases)
 - [Troubleshooting](#troubleshooting)
@@ -81,33 +80,6 @@ When Release Please detects releasable changes, it creates a special PR with the
 - **One PR for all packages** - Don't expect separate PRs per package
 - **Accumulative** - PR updates automatically with new commits until merged
 - - **No manual editing** - Don't edit the PR content manually; it will be overwritten
-
-## Branch Strategy
-
-Our repository uses a dual-branch strategy:
-
-### Development Flow
-
-- **`main`** - Primary development branch where Release Please monitors for changes
-- **`master`** - Production branch that mirrors published releases
-
-### How It Works
-
-1. **Development** happens on feature branches merged to `main`
-2. **Release Please** monitors `main` and creates release PRs targeting `main`
-3. **After release** - manually rebase `master` from `main` to keep them in sync
-
-### Why Two Branches?
-
-- **`main`** allows continuous development while release process runs
-- **`master`** provides a stable reference point for published releases
-- **Separation** prevents conflicts between ongoing development and release process
-
-### Branch Permissions
-
-- Anyone with write access can merge to `main`
-- Release PR merging should be done by maintainers
-- `master` should only be updated via rebase, never direct commits
 
 ## Manual Steps After Release
 
