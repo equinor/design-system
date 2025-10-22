@@ -48,15 +48,19 @@ type SharedTextFieldProps = {
   inputRef?: ForwardedRef<HTMLInputElement>
   /** Textarea ref when multiline is set to `true` */
   textareaRef?: ForwardedRef<HTMLTextAreaElement>
-  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
-  multiline?: boolean
 }
 
-export type TextFieldProps = SharedTextFieldProps &
-  (
-    | TextareaHTMLAttributes<HTMLTextAreaElement>
-    | InputHTMLAttributes<HTMLInputElement>
-  )
+type TextFieldInputProps = SharedTextFieldProps & {
+  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
+  multiline?: false
+} & InputHTMLAttributes<HTMLInputElement>
+
+type TextFieldTextareaProps = SharedTextFieldProps & {
+  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
+  multiline: true
+} & TextareaHTMLAttributes<HTMLTextAreaElement>
+
+export type TextFieldProps = TextFieldInputProps | TextFieldTextareaProps
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
