@@ -36,11 +36,15 @@ export const ChromaDistributionDemo = ({
       const base = new Color(baseColor)
       const oklchBase = base.to('oklch')
       const baseChroma = oklchBase.c
+      // Use DEFAULT_MAX_CHROMA for actual chroma calculation to match generateColorScale
+      const DEFAULT_MAX_CHROMA = 0.37
 
       return lightnessValues.map((lightness) => {
         const multiplier = gaussian(lightness, mean, stdDev)
-        const chroma = multiplier * baseChroma
-        return { lightness, chroma, multiplier, baseChroma }
+        // Calculate actual chroma used in the scale (using DEFAULT_MAX_CHROMA)
+        const actualChroma =
+          baseChroma < 0.001 ? 0 : multiplier * DEFAULT_MAX_CHROMA
+        return { lightness, chroma: actualChroma, multiplier, baseChroma }
       })
     } catch {
       return []
@@ -109,10 +113,15 @@ export const ChromaDistributionDemo = ({
 
           {chromaData.length > 0 && (
             <div className="bg-surface rounded-lg p-4 text-sm">
-              <p className="font-medium mb-2">Base color properties:</p>
+              <p className="font-medium mb-2">Color scale properties:</p>
               <ul className="space-y-1 text-neutral-subtle">
-                <li>Base chroma: {chromaData[0].baseChroma.toFixed(3)}</li>
-                <li>Max chroma in scale: {maxChroma.toFixed(3)}</li>
+                <li>
+                  Base color chroma: {chromaData[0].baseChroma.toFixed(3)}
+                </li>
+                <li>
+                  Max chroma (constant): {maxChroma.toFixed(3)} (same for all
+                  colors)
+                </li>
                 <li>
                   Peak at lightness:{' '}
                   {chromaData
