@@ -5,7 +5,7 @@
 #
 # Flow:
 # 1. Release PR is merged → this workflow runs
-# 2. Checks which package.json files changed
+# 2. Checks which package versions changed in .release-please-manifest.json
 # 3. Triggers individual publish workflows only for changed packages
 # 4. Each publish workflow handles: building, testing, npm publish, and Storybook deployment
 
@@ -19,7 +19,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/release-please-manifest.json"
+      - '.github/release-please-manifest.json'
 
 # Required permissions
 permissions:
@@ -53,7 +53,7 @@ jobs:
           echo "should-publish=true" >> $GITHUB_OUTPUT
 
   # Job 1: Determine which packages need to be published
-  # Checks git diff to see which package.json files changed in the merged PR
+  # Checks the release-please-manifest.json to see which packages had version changes
   check-releases:
     needs: validate-release
     if: needs.validate-release.outputs.should-publish == 'true'
@@ -67,43 +67,35 @@ jobs:
       tokens: ${{ steps.check.outputs.tokens }}
 
     steps:
-      # Checkout the repository with full PR history
+      # Checkout the repository - we only need the current state
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch full history to ensure we can diff properly
+          fetch-depth: 2 # Fetch last 2 commits to compare
 
-      # Check which package.json files were modified in the merge
-      # For each package, sets output to 'true' if its package.json changed, 'false' otherwise
+      # Check which packages had version changes in release-please-manifest.json
+      # This is more reliable than checking package.json files directly
       - name: Check which packages changed
         id: check
         run: |
-          # Use PR base and head SHAs for accurate diff
-          # This works correctly regardless of merge strategy (squash/merge/rebase)
-          # - base.sha: commit where PR branched from main
-          # - head.sha: latest commit in PR branch before merge
-          # This ensures we capture ALL changes in the PR, not just the merge commit
-          BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
-
           echo "## 📝 Detecting Package Changes" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Comparing: \`$BASE_SHA...$HEAD_SHA\`" >> $GITHUB_STEP_SUMMARY
+          echo "Analyzing changes in .release-please-manifest.json" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
-          # Get list of changed files
-          CHANGED_FILES=$(git diff --name-only $BASE_SHA $HEAD_SHA)
+          # Get the diff of the manifest file from the merge commit
+          MANIFEST_DIFF=$(git diff HEAD^ HEAD -- .github/release-please-manifest.json)
 
-          echo "### Changed files:" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo "$CHANGED_FILES" >> $GITHUB_STEP_SUMMARY
+          echo "### Manifest changes:" >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          echo "$MANIFEST_DIFF" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Package detection results:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
           # Check eds-core-react
-          if echo "$CHANGED_FILES" | grep -q "packages/eds-core-react/package.json"; then
+          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-core-react":'; then
             echo "core-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-core-react changed"
             echo "- ✅ **eds-core-react** changed" >> $GITHUB_STEP_SUMMARY
@@ -114,7 +106,7 @@ jobs:
           fi
 
           # Check eds-lab-react
-          if echo "$CHANGED_FILES" | grep -q "packages/eds-lab-react/package.json"; then
+          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-lab-react":'; then
             echo "lab-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-lab-react changed"
             echo "- ✅ **eds-lab-react** changed" >> $GITHUB_STEP_SUMMARY
@@ -125,7 +117,7 @@ jobs:
           fi
 
           # Check eds-data-grid-react
-          if echo "$CHANGED_FILES" | grep -q "packages/eds-data-grid-react/package.json"; then
+          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-data-grid-react":'; then
             echo "data-grid-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-data-grid-react changed"
             echo "- ✅ **eds-data-grid-react** changed" >> $GITHUB_STEP_SUMMARY
@@ -136,7 +128,7 @@ jobs:
           fi
 
           # Check eds-icons
-          if echo "$CHANGED_FILES" | grep -q "packages/eds-icons/package.json"; then
+          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-icons":'; then
             echo "icons=true" >> $GITHUB_OUTPUT
             echo "✅ eds-icons changed"
             echo "- ✅ **eds-icons** changed" >> $GITHUB_STEP_SUMMARY
@@ -147,7 +139,7 @@ jobs:
           fi
 
           # Check eds-tokens
-          if echo "$CHANGED_FILES" | grep -q "packages/eds-tokens/package.json"; then
+          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-tokens":'; then
             echo "tokens=true" >> $GITHUB_OUTPUT
             echo "✅ eds-tokens changed"
             echo "- ✅ **eds-tokens** changed" >> $GITHUB_STEP_SUMMARY

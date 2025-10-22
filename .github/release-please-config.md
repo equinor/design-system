@@ -162,18 +162,14 @@ Ensures that breaking changes (indicated by `BREAKING CHANGE:` in commit message
 
 ## GitHub Release Configuration
 
-```json
-"skip-github-release": true
-```
-
-When `true`, release-please will NOT automatically create GitHub releases when the release PR is merged. This means:
+By default, release-please automatically creates GitHub releases when the release PR is merged. This means:
 
 - Release PRs are created automatically ✅
 - Version bumps happen automatically ✅
 - CHANGELOGs are updated automatically ✅
-- GitHub releases must be created manually ❌
+- GitHub releases are created automatically ✅
 
-Set to `false` if you want automatic GitHub release creation.
+The releases include all commit types from the changelog (features, fixes, docs, chores, CI/CD, build system updates, etc.). If you want to skip automatic GitHub release creation, you can add `"skip-github-release": true` to the configuration.
 
 ## How It Works Together
 
@@ -186,7 +182,7 @@ Set to `false` if you want automatic GitHub release creation.
 4. **Team reviews and merges the PR**
 5. **Automatic publish workflow triggers** (separate workflow)
 6. **Packages are published to npm**
-7. **GitHub releases are created manually** (because `skip-github-release: true`)
+7. **GitHub releases are created automatically**
 
 ## Multi-Package Example
 
@@ -205,7 +201,7 @@ Release-please will create ONE PR that:
 - Bumps `eds-tokens` from 0.10.0 → 0.11.0
 - Updates all three CHANGELOGs
 
-When merged, three separate GitHub releases will be created (if `skip-github-release: false`).
+When merged, three separate GitHub releases will be created automatically.
 
 ## Commit Scope Matching
 
@@ -227,6 +223,7 @@ feat(eds-icons, eds-core-react): ...  → both packages
 - **Manifest**: `.github/release-please-manifest.json` (tracks current versions)
 - **Workflow**: `.github/workflows/release-please.yml` (triggers release-please)
 - **Publish**: `.github/workflows/trigger-publish.yml` (publishes after release)
+- **Automated release documentation**: `../documentation/how-to/AUTOMATED_RELEASE.md`
 
 ## Useful Links
 
