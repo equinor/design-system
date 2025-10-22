@@ -1,18 +1,9 @@
-# Release Process
+# Deprecated Release Process
 
-> **Note:** This documentation describes the legacy manual release process. For the current automated process using Release Please, see [AUTOMATED_RELEASE.md](./AUTOMATED_RELEASE.md).
+> **Note:** This documentation describes the legacy manual release process.
+> The release process is now largely automated using Release Please. See [AUTOMATED_RELEASE.md](./AUTOMATED_RELEASE.md) for the complete guide.
 
-## Current Automated Process (Release Please)
-
-The release process is now largely automated using Release Please. See [AUTOMATED_RELEASE.md](./AUTOMATED_RELEASE.md) for the complete guide.
-
-**Quick overview:**
-
-1. Use conventional commits during development
-2. Release Please automatically creates release PRs
-3. Review and merge the release PR
-4. Publishing and GitHub releases happen automatically
-5. Manual steps: rebase master, announce release
+---
 
 ## Legacy Manual Process
 
