@@ -1,3 +1,15 @@
+/*
+ * Registered custom property for font-size values
+ * 
+ * This @property declaration registers --font-size as a typed CSS custom property,
+ * enabling proper unit handling in calc() expressions. This is essential for the
+ * .text-icon sizing calculations, which use tan(atan2(var(--font-size), 1px)) to
+ * extract the numeric value from the font-size for proportional icon scaling.
+ * 
+ * Without this registration, the browser would treat --font-size as an untyped string,
+ * preventing the mathematical operations needed for responsive icon sizing based on
+ * the current text size.
+ */
 @property --font-size {
   inherits: true;
   initial-value: 16px;
