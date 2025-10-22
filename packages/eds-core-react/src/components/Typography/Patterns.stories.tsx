@@ -33,7 +33,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          'Real-world examples and patterns for using typography components with icons, buttons, and other UI elements.',
+          'Examples and patterns for using typography components with icons, buttons, and other UI elements.',
       },
       source: {
         excludeDecorators: true,
@@ -300,7 +300,7 @@ RealWorldWithGrid.parameters = {
   docs: {
     description: {
       story:
-        'Same as the Real World Example, but with the 4px baseline grid visible and debug mode enabled. Notice how all text baselines and spacing align perfectly to the grid lines.',
+        'Same as the example, but with the 4px baseline grid visible and debug mode enabled. Notice how all text baselines and spacing align perfectly to the grid lines.',
     },
   },
 }
@@ -308,7 +308,7 @@ RealWorldWithGrid.parameters = {
 export const IconsAsTextSiblings: StoryFn = () => (
   <Stack>
     <Heading as="h3" style={{ marginBottom: '24px' }}>
-      Icons as Siblings to Text Elements
+      Icons as siblings to text elements
     </Heading>
     <Paragraph style={{ marginBottom: '16px' }}>
       The <code>.icon</code> class is designed for icons that are{' '}
@@ -429,7 +429,12 @@ export const IconTextAlignment: StoryFn = () => (
         <a
           href="https://example.com"
           className="font-family-ui text-md"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+            color: 'var(--eds-color-text-link)',
+          }}
         >
           <Icon name="link" className="text-icon" />
           <span className="text-baseline-center">External link</span>
@@ -607,7 +612,12 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <a
             href="https://example.com"
             className="font-family-ui text-md"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: 'var(--eds-color-text-link)',
+            }}
             data-debug
           >
             <Icon name="link" className="text-icon" />
@@ -649,7 +659,7 @@ IconAlignmentWithGrid.parameters = {
 export const UsageExamples: StoryFn = () => (
   <GridShowcaseWrapper>
     <Heading as="h3" style={{ marginBottom: '16px' }}>
-      Real-World Usage Examples
+      Usage Examples
     </Heading>
     <Paragraph style={{ marginBottom: '32px' }}>
       Practical examples organized by category, demonstrating common UI patterns
@@ -669,7 +679,12 @@ export const UsageExamples: StoryFn = () => (
             <a
               href="https://example.com"
               className="font-family-ui text-md"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--eds-color-text-link)',
+              }}
             >
               <Icon name="home" className="text-icon" />
               <span className="text-baseline-center">Home</span>
@@ -679,7 +694,12 @@ export const UsageExamples: StoryFn = () => (
             <a
               href="https://example.com"
               className="font-family-ui text-md"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--eds-color-text-link)',
+              }}
             >
               <Icon name="dashboard" className="text-icon" />
               <span className="text-baseline-center">Dashboard</span>
@@ -689,7 +709,12 @@ export const UsageExamples: StoryFn = () => (
             <a
               href="https://example.com"
               className="font-family-ui text-md"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--eds-color-text-link)',
+              }}
             >
               <Icon name="settings" className="text-icon" />
               <span className="text-baseline-center">Settings</span>
@@ -699,7 +724,12 @@ export const UsageExamples: StoryFn = () => (
             <a
               href="https://example.com"
               className="font-family-ui text-md"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--eds-color-text-link)',
+              }}
             >
               <Icon name="library_books" className="text-icon" />
               <span className="text-baseline-center">Documentation</span>
@@ -777,7 +807,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>Success</Label>
             <ShowcaseItem
               className="font-family-ui text-md"
-              style={{ color: '#2e7d32' }}
+              style={{ color: 'var(--eds-color-text-success-subtle)' }}
             >
               <Icon name="check_circle_outlined" className="text-icon" />
               <span className="text-baseline-center">
@@ -789,7 +819,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>Warning</Label>
             <ShowcaseItem
               className="font-family-ui text-md"
-              style={{ color: '#ed6c02' }}
+              style={{ color: 'var(--eds-color-text-warning-subtle)' }}
             >
               <Icon name="warning_outlined" className="text-icon" />
               <span className="text-baseline-center">
@@ -801,7 +831,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>Error</Label>
             <ShowcaseItem
               className="font-family-ui text-md"
-              style={{ color: '#d32f2f' }}
+              style={{ color: 'var(--eds-color-text-danger-subtle)' }}
             >
               <Icon name="error_outlined" className="text-icon" />
               <span className="text-baseline-center">
@@ -813,7 +843,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>Information</Label>
             <ShowcaseItem
               className="font-family-ui text-md"
-              style={{ color: '#0288d1' }}
+              style={{ color: 'var(--eds-color-text-info-subtle)' }}
             >
               <Icon name="info_circle" className="text-icon" />
               <span className="text-baseline-center">
@@ -841,6 +871,7 @@ export const UsageExamples: StoryFn = () => (
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '4px',
+                color: 'var(--eds-color-text-link)',
               }}
             >
               <Icon name="link" className="text-icon" />
@@ -857,6 +888,7 @@ export const UsageExamples: StoryFn = () => (
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
+                color: 'var(--eds-color-text-link)',
               }}
             >
               <Icon name="download" className="text-icon" />

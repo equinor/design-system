@@ -20,12 +20,11 @@ The new typography system provides baseline grid alignment for consistent vertic
 
 ## Usage
 
-Import the components with aliasing for a seamless experience:
+Import the TypographyNext component with alias for a seamless experience:
 
 \`\`\`tsx
 import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
 
-// Use the components
 <Heading as="h1">Welcome</Heading>
 <Paragraph size="lg">This is a paragraph with the new typography system.</Paragraph>
 <Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
@@ -33,13 +32,13 @@ import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-c
 </Typography>
 \`\`\`
 
-### Migration Timeline
+### Proposed migration timeline
 
 1. **Now**: Use the new components with aliasing (\`TypographyNext as Typography\`)
 2. **Parallel support**: 6-12 months of both systems supported
 3. **Next major version**: \`TypographyNext\` becomes the default \`Typography\` export
 
-### Key Differences from Current Typography
+### Key Differences from current typography
 
 * **Component names**: Two opinionated semantic components -  \`Heading\`, and \`Paragraph\`
 * **Baseline alignment**: Built-in support for baseline grid alignment

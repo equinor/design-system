@@ -161,7 +161,7 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
   ) {
     useDeprecationWarning(
       'The Typography component is deprecated and will be removed in a future version. ' +
-        'Please migrate to the new Text, Heading, or Paragraph components. ' +
+        'Please migrate to the new TypographyNext, Heading, or Paragraph component. ' +
         'See the documentation for migration details.',
       'Typography',
     )
