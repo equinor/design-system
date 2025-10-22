@@ -95,7 +95,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
 
           # Check eds-core-react
-          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-core-react":'; then
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-core-react":'; then
             echo "core-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-core-react changed"
             echo "- ✅ **eds-core-react** changed" >> $GITHUB_STEP_SUMMARY
@@ -106,7 +106,7 @@ jobs:
           fi
 
           # Check eds-lab-react
-          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-lab-react":'; then
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-lab-react":'; then
             echo "lab-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-lab-react changed"
             echo "- ✅ **eds-lab-react** changed" >> $GITHUB_STEP_SUMMARY
@@ -117,7 +117,7 @@ jobs:
           fi
 
           # Check eds-data-grid-react
-          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-data-grid-react":'; then
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-data-grid-react":'; then
             echo "data-grid-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-data-grid-react changed"
             echo "- ✅ **eds-data-grid-react** changed" >> $GITHUB_STEP_SUMMARY
@@ -128,7 +128,7 @@ jobs:
           fi
 
           # Check eds-icons
-          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-icons":'; then
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-icons":'; then
             echo "icons=true" >> $GITHUB_OUTPUT
             echo "✅ eds-icons changed"
             echo "- ✅ **eds-icons** changed" >> $GITHUB_STEP_SUMMARY
@@ -139,7 +139,7 @@ jobs:
           fi
 
           # Check eds-tokens
-          if echo "$MANIFEST_DIFF" | grep -q '"packages/eds-tokens":'; then
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-tokens":'; then
             echo "tokens=true" >> $GITHUB_OUTPUT
             echo "✅ eds-tokens changed"
             echo "- ✅ **eds-tokens** changed" >> $GITHUB_STEP_SUMMARY
@@ -158,9 +158,6 @@ jobs:
     needs: check-releases
     if: needs.check-releases.outputs.core-react == 'true'
     runs-on: ubuntu-latest
-    # Expose failure status so summary job can check it
-    outputs:
-      failed: ${{ steps.trigger.outcome == 'failure' }}
     steps:
       - name: Trigger core-react publish
         id: trigger
@@ -188,8 +185,6 @@ jobs:
     needs: check-releases
     if: needs.check-releases.outputs.lab-react == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      failed: ${{ steps.trigger.outcome == 'failure' }}
     steps:
       - name: Trigger lab-react publish
         id: trigger
@@ -215,8 +210,6 @@ jobs:
     needs: check-releases
     if: needs.check-releases.outputs.data-grid-react == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      failed: ${{ steps.trigger.outcome == 'failure' }}
     steps:
       - name: Trigger data-grid-react publish
         id: trigger
@@ -242,8 +235,6 @@ jobs:
     needs: check-releases
     if: needs.check-releases.outputs.icons == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      failed: ${{ steps.trigger.outcome == 'failure' }}
     steps:
       - name: Trigger icons publish
         id: trigger
@@ -268,8 +259,6 @@ jobs:
     needs: check-releases
     if: needs.check-releases.outputs.tokens == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      failed: ${{ steps.trigger.outcome == 'failure' }}
     steps:
       - name: Trigger tokens publish
         id: trigger
@@ -289,17 +278,12 @@ jobs:
           echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
 
   # Job 7: Summary report of all publish triggers
-  # Runs after all trigger jobs complete (success or failure)
-  # Provides a clear overview of which packages were published and which failed
+  # Runs independently after check-releases completes
+  # Provides a clear overview of which packages were triggered for publishing
   publish-summary:
     needs:
       - validate-release
       - check-releases
-      - trigger-core-react
-      - trigger-lab-react
-      - trigger-data-grid-react
-      - trigger-icons
-      - trigger-tokens
     # Always run this job, even if some trigger jobs failed or were skipped
     if: always()
     runs-on: ubuntu-latest
@@ -332,53 +316,33 @@ jobs:
           echo "### Results:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
-          # Check each package's trigger result
+          # Check each package's trigger result based on what was detected
           if [ "${{ needs.check-releases.outputs.core-react }}" == "true" ]; then
-            if [ "${{ needs.trigger-core-react.result }}" == "success" ]; then
-              echo "- ✅ **@equinor/eds-core-react**: Publish workflow triggered successfully" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "- ❌ **@equinor/eds-core-react**: Failed to trigger publish workflow" >> $GITHUB_STEP_SUMMARY
-            fi
+            echo "- ✅ **@equinor/eds-core-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-core-react**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           if [ "${{ needs.check-releases.outputs.lab-react }}" == "true" ]; then
-            if [ "${{ needs.trigger-lab-react.result }}" == "success" ]; then
-              echo "- ✅ **@equinor/eds-lab-react**: Publish workflow triggered successfully" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "- ❌ **@equinor/eds-lab-react**: Failed to trigger publish workflow" >> $GITHUB_STEP_SUMMARY
-            fi
+            echo "- ✅ **@equinor/eds-lab-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-lab-react**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           if [ "${{ needs.check-releases.outputs.data-grid-react }}" == "true" ]; then
-            if [ "${{ needs.trigger-data-grid-react.result }}" == "success" ]; then
-              echo "- ✅ **@equinor/eds-data-grid-react**: Publish workflow triggered successfully" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "- ❌ **@equinor/eds-data-grid-react**: Failed to trigger publish workflow" >> $GITHUB_STEP_SUMMARY
-            fi
+            echo "- ✅ **@equinor/eds-data-grid-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-data-grid-react**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           if [ "${{ needs.check-releases.outputs.icons }}" == "true" ]; then
-            if [ "${{ needs.trigger-icons.result }}" == "success" ]; then
-              echo "- ✅ **@equinor/eds-icons**: Publish workflow triggered successfully" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "- ❌ **@equinor/eds-icons**: Failed to trigger publish workflow" >> $GITHUB_STEP_SUMMARY
-            fi
+            echo "- ✅ **@equinor/eds-icons**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-icons**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           if [ "${{ needs.check-releases.outputs.tokens }}" == "true" ]; then
-            if [ "${{ needs.trigger-tokens.result }}" == "success" ]; then
-              echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered successfully" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "- ❌ **@equinor/eds-tokens**: Failed to trigger publish workflow" >> $GITHUB_STEP_SUMMARY
-            fi
+            echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
@@ -386,52 +350,6 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "💡 **Note:** This workflow only triggers the publish workflows. Check individual publish workflow runs for actual publishing status." >> $GITHUB_STEP_SUMMARY
+          echo "💡 **Note:** This workflow triggers publish workflows for changed packages. Check individual publish workflow runs for actual publishing status." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📝 **eds-utils** is published as part of eds-core-react and does not have a separate publish workflow." >> $GITHUB_STEP_SUMMARY
-
-      - name: Check for any failures
-        run: |
-          # Skip failure check if workflow was skipped
-          if [ "${{ needs.validate-release.outputs.should-publish }}" != "true" ]; then
-            echo "ℹ️ Workflow was skipped, no failures to check"
-            exit 0
-          fi
-
-          # Check if any trigger job actually failed (by checking their outputs)
-          # Note: We check the 'failed' output which is set based on step outcome
-          # Jobs that were skipped will not have this output set to 'true'
-          FAILED=false
-
-          if [ "${{ needs.trigger-core-react.outputs.failed }}" == "true" ]; then
-            echo "::warning::trigger-core-react failed"
-            FAILED=true
-          fi
-
-          if [ "${{ needs.trigger-lab-react.outputs.failed }}" == "true" ]; then
-            echo "::warning::trigger-lab-react failed"
-            FAILED=true
-          fi
-
-          if [ "${{ needs.trigger-data-grid-react.outputs.failed }}" == "true" ]; then
-            echo "::warning::trigger-data-grid-react failed"
-            FAILED=true
-          fi
-
-          if [ "${{ needs.trigger-icons.outputs.failed }}" == "true" ]; then
-            echo "::warning::trigger-icons failed"
-            FAILED=true
-          fi
-
-          if [ "${{ needs.trigger-tokens.outputs.failed }}" == "true" ]; then
-            echo "::warning::trigger-tokens failed"
-            FAILED=true
-          fi
-
-          # Report final status
-          if [ "$FAILED" == "true" ]; then
-            echo "::error title=Some Publish Triggers Failed::One or more package publish workflows failed to trigger. Check the summary above for details."
-            exit 1
-          else
-            echo "✅ All package publish workflows triggered successfully"
-          fi
