@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { fireEvent, render, screen, act, cleanup } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import '@testing-library/jest-dom'
 import styled from 'styled-components'
@@ -22,9 +22,6 @@ beforeAll(() => {
 })
 
 describe('Tooltip', () => {
-  afterEach(() => {
-    cleanup()
-  })
   it('Matches snapshot', async () => {
     render(
       <Tooltip title="Tooltip" enterDelay={0}>
@@ -196,7 +193,7 @@ describe('Tooltip', () => {
 
     expect(await screen.findByRole('tooltip')).toBeInTheDocument()
   })
-  it('should forward refs to the wrapped component', async () => {
+  it('should forward refs to the wrapped component', () => {
     const ref = createRef()
     render(
       <Tooltip title="Tooltip">
