@@ -14,7 +14,7 @@
       "react-dom": ["./node_modules/@types/react-dom/index.d.ts"]
     },
     "typeRoots": ["./node_modules", "./node_modules/@types"],
-    "types": ["react", "react-dom"]
+    "types": ["react", "react-dom", "mdx"]
   },
   "include": ["./src/**/*.ts*"],
   "exclude": ["node_modules", "./src/**/*.test.tsx", "./src/**/*.test.ts"]
