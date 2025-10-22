@@ -22,11 +22,24 @@ import { createTypographyClassNames } from './utils'
  * >
  *   Flexible inline text
  * </Typography>
+ *
+ * <Typography
+ *   as="h1"
+ *   family="header"
+ *   size="3xl"
+ *   lineHeight="squished"
+ *   baseline="grid"
+ *   weight="bolder"
+ *   tracking="tight"
+ * >
+ *   Page heading
+ * </Typography>
  * ```
  */
 export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
   (
     {
+      as = 'span',
       family,
       size,
       baseline,
@@ -40,7 +53,7 @@ export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
     },
     ref,
   ) => {
-    const Component = 'span'
+    const Component = as
     const combinedClassName = createTypographyClassNames({
       family,
       size,

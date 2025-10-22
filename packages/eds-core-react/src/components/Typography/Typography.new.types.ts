@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, ElementType } from 'react'
 import {
   FontFamily,
   FontSize,
@@ -21,6 +21,8 @@ export type TypographyNextProps = {
   weight: FontWeight
   /** Letter spacing (tracking) */
   tracking: Tracking
+  /** Semantic HTML element to render. Defaults to 'span' */
+  as?: ElementType
   /** Enable debug mode to visualize text box */
   debug?: boolean
   /** Children to render */
