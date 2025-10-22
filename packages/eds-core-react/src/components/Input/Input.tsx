@@ -6,6 +6,7 @@ import {
   CSSProperties,
   ElementType,
   ComponentPropsWithoutRef,
+  InputHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
 import {
