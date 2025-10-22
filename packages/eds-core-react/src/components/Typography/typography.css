@@ -45,7 +45,7 @@
       letter-spacing: var(--eds-typography-ui-body-xs-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-xs-tracking-loose);
     }
   }
@@ -82,7 +82,7 @@
       letter-spacing: var(--eds-typography-ui-body-sm-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-sm-tracking-loose);
     }
   }
@@ -119,7 +119,7 @@
       letter-spacing: var(--eds-typography-ui-body-md-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-md-tracking-loose);
     }
   }
@@ -156,7 +156,7 @@
       letter-spacing: var(--eds-typography-ui-body-lg-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-lg-tracking-loose);
     }
   }
@@ -193,7 +193,7 @@
       letter-spacing: var(--eds-typography-ui-body-xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-xl-tracking-loose);
     }
   }
@@ -230,7 +230,7 @@
       letter-spacing: var(--eds-typography-ui-body-2xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-2xl-tracking-loose);
     }
   }
@@ -267,7 +267,7 @@
       letter-spacing: var(--eds-typography-ui-body-3xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-3xl-tracking-loose);
     }
   }
@@ -304,7 +304,7 @@
       letter-spacing: var(--eds-typography-ui-body-4xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-4xl-tracking-loose);
     }
   }
@@ -341,7 +341,7 @@
       letter-spacing: var(--eds-typography-ui-body-5xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-5xl-tracking-loose);
     }
   }
@@ -378,7 +378,7 @@
       letter-spacing: var(--eds-typography-ui-body-6xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-ui-body-6xl-tracking-loose);
     }
   }
@@ -419,7 +419,7 @@
       letter-spacing: var(--eds-typography-header-xs-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-xs-tracking-loose);
     }
   }
@@ -456,7 +456,7 @@
       letter-spacing: var(--eds-typography-header-sm-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-sm-tracking-loose);
     }
   }
@@ -493,7 +493,7 @@
       letter-spacing: var(--eds-typography-header-md-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-md-tracking-loose);
     }
   }
@@ -530,7 +530,7 @@
       letter-spacing: var(--eds-typography-header-lg-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-lg-tracking-loose);
     }
   }
@@ -567,7 +567,7 @@
       letter-spacing: var(--eds-typography-header-xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-xl-tracking-loose);
     }
   }
@@ -604,7 +604,7 @@
       letter-spacing: var(--eds-typography-header-2xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-2xl-tracking-loose);
     }
   }
@@ -641,7 +641,7 @@
       letter-spacing: var(--eds-typography-header-3xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-3xl-tracking-loose);
     }
   }
@@ -678,7 +678,7 @@
       letter-spacing: var(--eds-typography-header-4xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-4xl-tracking-loose);
     }
   }
@@ -715,7 +715,7 @@
       letter-spacing: var(--eds-typography-header-5xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-5xl-tracking-loose);
     }
   }
@@ -752,7 +752,7 @@
       letter-spacing: var(--eds-typography-header-6xl-tracking-normal);
     }
 
-    &.tracking-loose {
+    &.tracking-wide {
       letter-spacing: var(--eds-typography-header-6xl-tracking-loose);
     }
   }
