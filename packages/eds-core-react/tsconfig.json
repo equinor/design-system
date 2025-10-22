@@ -13,7 +13,11 @@
       "react": ["./node_modules/@types/react/index.d.ts"],
       "react-dom": ["./node_modules/@types/react-dom/index.d.ts"]
     },
-    "typeRoots": ["./node_modules", "./node_modules/@types"],
+    "typeRoots": [
+      "./node_modules",
+      "./node_modules/@types",
+      "./src/components"
+    ],
     "types": ["react", "react-dom"]
   },
   "include": ["./src/**/*.ts*"],
