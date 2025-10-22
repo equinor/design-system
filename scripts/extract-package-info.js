@@ -86,6 +86,7 @@ function updateResourcesFile(newPackageTable) {
 
   try {
     let content = readFileSync(resourcesPath, 'utf8')
+    const originalContent = content
 
     // Replace the existing Available Packages section
     const packageSectionRegex = /## Available Packages[\s\S]*?(?=\n## |\n$)/
@@ -96,11 +97,20 @@ function updateResourcesFile(newPackageTable) {
       console.warn(
         'Warning: Could not find Available Packages section to replace',
       )
-      return
+      return { updated: false, hasChanges: false }
     }
 
-    writeFileSync(resourcesPath, content, 'utf8')
-    console.log('✅ Successfully updated package information in resources.md')
+    // Check if content actually changed
+    const hasChanges = originalContent !== content
+
+    if (hasChanges) {
+      writeFileSync(resourcesPath, content, 'utf8')
+      console.log('✅ Successfully updated package information in resources.md')
+      return { updated: true, hasChanges: true }
+    } else {
+      console.log('ℹ️  Package information is already up-to-date')
+      return { updated: false, hasChanges: false }
+    }
   } catch (error) {
     console.error('Error updating resources file:', error.message)
     process.exit(1)
@@ -119,11 +129,21 @@ function main() {
 
   console.log(
     `Found ${packages.length} packages:`,
-    packages.map((p) => p.name).join(', '),
+    packages.map((p) => `${p.name}@${p.version}`).join(', '),
   )
 
   const newPackageTable = generatePackageTable(packages)
-  updateResourcesFile(newPackageTable)
+  const result = updateResourcesFile(newPackageTable)
+
+  // Exit with code 1 if there were changes (useful for CI/CD)
+  // Exit with code 0 if no changes (normal operation)
+  if (result.hasChanges) {
+    console.log('🔄 Package documentation has been updated')
+    process.exit(1) // Non-zero exit indicates changes were made
+  } else {
+    console.log('✨ Package documentation is current')
+    process.exit(0) // Zero exit indicates no changes needed
+  }
 }
 
 main()
