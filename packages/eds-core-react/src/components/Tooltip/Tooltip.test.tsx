@@ -27,7 +27,7 @@ describe('Tooltip', () => {
   })
   it('Matches snapshot', async () => {
     render(
-      <Tooltip title="Tooltip" enterDelay={0} id="test-tooltip">
+      <Tooltip title="Tooltip" enterDelay={0}>
         <span>Test</span>
       </Tooltip>,
     )
@@ -35,6 +35,9 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
     fireEvent.mouseEnter(content)
     const tooltip = await screen.findByRole('tooltip')
+
+    // Remove the auto-generated ID to make snapshot deterministic
+    tooltip.removeAttribute('id')
     expect(tooltip).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
