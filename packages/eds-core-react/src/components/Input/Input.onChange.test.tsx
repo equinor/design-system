@@ -3,7 +3,7 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import { Input } from './Input'
 
 describe('Input onChange typing', () => {
-  it('Should properly type onChange event for Input', () => {
+  it('Allows onChange handler without manual event type annotation', () => {
     let capturedValue = ''
 
     render(
@@ -11,8 +11,7 @@ describe('Input onChange typing', () => {
         Test Input
         <Input
           onChange={(event) => {
-            // This should work without manual typing
-            // event.target.value should be properly typed as string
+            // TypeScript infers event type automatically
             capturedValue = event.target.value
           }}
         />
@@ -25,7 +24,7 @@ describe('Input onChange typing', () => {
     expect(capturedValue).toBe('input value')
   })
 
-  it('Should properly type onFocus event for Input', () => {
+  it('Allows onFocus handler without manual event type annotation', () => {
     let focusCalled = false
 
     render(
@@ -33,8 +32,7 @@ describe('Input onChange typing', () => {
         Test Focus
         <Input
           onFocus={(event) => {
-            // This should work without manual typing
-            // event should be properly typed as FocusEvent<HTMLInputElement>
+            // TypeScript infers event type automatically
             focusCalled = true
             expect(event.target).toBeInstanceOf(HTMLInputElement)
           }}
