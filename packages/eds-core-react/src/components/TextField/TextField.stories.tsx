@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import { TextField, Icon, EdsProvider, Button, Density } from '../..'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import {
@@ -638,7 +638,8 @@ export const Validation: Story = () => {
         inputIcon={
           isValid ? undefined : <Icon data={error_filled} title="error" />
         }
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event) => {
+          // TypeScript automatically infers event type - no manual annotation needed!
           setIsValid(
             event.target.checkValidity() && !isNaN(Number(event.target.value)),
           )
