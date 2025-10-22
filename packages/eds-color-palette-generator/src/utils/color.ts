@@ -49,6 +49,13 @@ export function parseColorToHex(input: string): string | null {
   }
 }
 
+/**
+ * Default maximum chroma value used for color scale generation.
+ * This constant ensures consistent chroma values across different colors at the same step.
+ * Value chosen to accommodate most vibrant colors while staying within displayable gamut.
+ */
+export const DEFAULT_MAX_CHROMA = 0.37
+
 export function gaussian(
   x: number,
   mean: number = 0.6,
@@ -72,16 +79,22 @@ export function generateColorScale(
     const colors: string[] = []
     const steps = lightnessValues.length
 
+    // Get the base color's chroma to check if it's grayscale
+    const baseOklch = base.to('oklch')
+    const isGrayscale = baseOklch.c < 0.001 // Treat very low chroma as grayscale
+
     // Clone the base color for each step to avoid mutation issues
     for (let i = 0; i < steps; i++) {
       try {
         const lightness = lightnessValues[i]
         // Create a new color instance for each step to avoid mutation issues
         const color = new Color(base.toString({ format: 'hex' }))
-        // Convert to OKLCH to get the chroma value
-        const oklchColor = color.to('oklch')
         // Calculate new chroma based on gaussian function
-        const chroma = gaussian(lightness, mean, stdDev) * oklchColor.c
+        // Use DEFAULT_MAX_CHROMA constant to ensure consistent chroma across all colors at the same step
+        // Exception: if the base color is grayscale (chroma ≈ 0), keep it grayscale
+        const chroma = isGrayscale
+          ? 0
+          : gaussian(lightness, mean, stdDev) * DEFAULT_MAX_CHROMA
         // Apply new lightness and chroma values
         color.set('oklch.l', lightness)
         color.set('oklch.c', chroma)

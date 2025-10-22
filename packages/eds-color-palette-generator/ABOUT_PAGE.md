@@ -156,10 +156,12 @@ This function produces a bell curve where:
 For each color step:
 
 ```typescript
-chroma = gaussian(lightness, mean, stdDev) × baseChroma
+chroma = gaussian(lightness, mean, stdDev) × DEFAULT_MAX_CHROMA
 ```
 
-The Gaussian function outputs a multiplier (0 to 1) that scales the base color's chroma.
+Where `DEFAULT_MAX_CHROMA` is a constant (0.37) that ensures all colors have the same chroma value at each step, regardless of the base color's original saturation. This creates visual consistency across different hues in the color palette.
+
+The Gaussian function outputs a multiplier (0 to 1) that scales the maximum chroma value based on the distance from the mean lightness.
 
 ### Configuration References
 

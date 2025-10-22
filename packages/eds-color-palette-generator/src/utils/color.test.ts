@@ -690,6 +690,57 @@ describe('generateColorScale', () => {
         expect(color).toMatch(/oklch\([0-9.]+\s+0\.000\s+[0-9.]+\)/)
       })
     })
+
+    test('should generate consistent chroma values across different colors at the same step', () => {
+      // Test with three different colors that have different base chroma values
+      const colors = [
+        { name: 'Red', value: 'oklch(0.5 0.2 30)' }, // Higher chroma
+        { name: 'Blue', value: 'oklch(0.5 0.15 250)' }, // Lower chroma
+        { name: 'Green', value: 'oklch(0.5 0.18 150)' }, // Medium chroma
+      ]
+
+      const lightnessValues = [0.2, 0.4, 0.5, 0.6, 0.8]
+      const mean = 0.6
+      const stdDev = 2
+
+      // Generate scales for all colors
+      const scales = colors.map((colorDef) =>
+        generateColorScale(
+          colorDef.value,
+          lightnessValues,
+          mean,
+          stdDev,
+          'OKLCH',
+        ),
+      )
+
+      // For each step, verify that all colors have the same chroma value
+      lightnessValues.forEach((_, stepIndex) => {
+        const chromaValues = scales.map((scale) => {
+          const color = scale[stepIndex]
+          const match = color.match(/oklch\([0-9.]+\s+([0-9.]+)/)
+          return match ? parseFloat(match[1]) : 0
+        })
+
+        // All chroma values at this step should be the same
+        const firstChroma = chromaValues[0]
+        chromaValues.forEach((chroma) => {
+          expect(chroma).toBeCloseTo(firstChroma, 3)
+        })
+
+        // Also verify the chroma is as expected from the gaussian function
+        // (for non-grayscale colors)
+        if (firstChroma > 0) {
+          const lightness = lightnessValues[stepIndex]
+          const expectedMultiplier = Math.exp(
+            (-25 / stdDev) * Math.pow(mean * -1 + lightness, 2),
+          )
+          // DEFAULT_MAX_CHROMA is 0.37
+          const expectedChroma = expectedMultiplier * 0.37
+          expect(firstChroma).toBeCloseTo(expectedChroma, 2)
+        }
+      })
+    })
   })
 
   describe('Error handling', () => {

@@ -250,12 +250,13 @@ export const ChromaDistributionDemo = ({
           <strong>Chroma calculation formula:</strong>
         </p>
         <code className="block border border-neutral-subtle p-2 rounded font-mono text-xs">
-          chroma = gaussian(lightness, mean, stdDev) × baseChroma
+          chroma = gaussian(lightness, mean, stdDev) × DEFAULT_MAX_CHROMA
         </code>
         <p className="mt-2 text-neutral-subtle">
           Where the Gaussian function outputs a multiplier between 0 and 1,
-          which scales the base color&apos;s chroma based on the lightness
-          value&apos;s distance from the mean.
+          which scales the maximum chroma constant (0.37) based on the
+          lightness value&apos;s distance from the mean. This ensures
+          consistent chroma values across all colors at the same step.
         </p>
       </div>
     </div>
