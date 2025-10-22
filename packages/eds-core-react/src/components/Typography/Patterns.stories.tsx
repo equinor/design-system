@@ -55,13 +55,13 @@ export const Introduction: StoryFn = () => (
   <IntroductionGrid>
     <Heading as="h2">Text Components Overview</Heading>
     <Paragraph>
-      The typography system includes three main components: Typography, Heading, and
-      Paragraph. Each component provides different levels of control and
+      The typography system includes three main components: Typography, Heading,
+      and Paragraph. Each component provides different levels of control and
       semantic meaning.
     </Paragraph>
     <Paragraph>
-      <strong>Typography:</strong> A flexible inline component with full control over
-      font family, size, and other properties.
+      <strong>Typography:</strong> A flexible inline component with full control
+      over font family, size, and other properties.
     </Paragraph>
     <Paragraph>
       <strong>Heading:</strong> Semantic heading component (h1-h6) that always
