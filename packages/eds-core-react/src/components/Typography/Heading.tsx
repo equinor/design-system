@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { HeadingProps } from './Heading.types'
 import { FontSize } from './types'
-import { createTypographyClassNames } from './utils'
+import { TypographyNext } from './Typography.new'
 
 const getHeadingSize = (as: HeadingProps['as']): FontSize => {
   switch (as) {
@@ -33,29 +33,22 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       weight = 'normal',
       tracking = 'normal',
       debug,
-      className,
       as,
       ...rest
     },
     ref,
   ) => {
-    const typographyClassNames = createTypographyClassNames({
-      family: 'header',
-      baseline: 'grid',
-      lineHeight,
-      size: getHeadingSize(as),
-      weight,
-      tracking,
-      className,
-    })
-
-    const Component = as
-
     return (
-      <Component
-        ref={ref}
-        className={typographyClassNames}
-        data-debug={debug ? '' : undefined}
+      <TypographyNext
+        ref={ref as React.Ref<HTMLHeadingElement>}
+        as={as}
+        family="header"
+        baseline="grid"
+        size={getHeadingSize(as)}
+        lineHeight={lineHeight}
+        weight={weight}
+        tracking={tracking}
+        debug={debug}
         {...rest}
       />
     )

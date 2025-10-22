@@ -1,43 +1,36 @@
 import { forwardRef } from 'react'
 import { ParagraphProps } from './Paragraph.types'
-import { createTypographyClassNames } from './utils'
+import { TypographyNext } from './Typography.new'
 
 /**
- * Paragraph component with typography support.
+ * Paragraph component for rendering text paragraphs.
+ * Uses the design system's typography styles for UI text.
  */
 export const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   (
     {
-      size = 'md',
+      size = 'lg',
       lineHeight = 'default',
       weight = 'normal',
       tracking = 'normal',
       debug,
-      className,
-      children,
       ...rest
     },
     ref,
   ) => {
-    const typographyClassNames = createTypographyClassNames({
-      family: 'ui',
-      baseline: 'grid',
-      lineHeight,
-      size,
-      weight,
-      tracking,
-      className,
-    })
-
     return (
-      <p
-        ref={ref}
-        className={typographyClassNames}
-        data-debug={debug ? '' : undefined}
+      <TypographyNext
+        ref={ref as React.Ref<HTMLParagraphElement>}
+        as="p"
+        family="ui"
+        baseline="grid"
+        size={size}
+        lineHeight={lineHeight}
+        weight={weight}
+        tracking={tracking}
+        debug={debug}
         {...rest}
-      >
-        {children}
-      </p>
+      />
     )
   },
 )
