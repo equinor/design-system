@@ -1,4 +1,3 @@
-// import { Text, Heading, Paragraph } from './Text'
 import { Icon } from '../Icon'
 import { Heading } from './Heading'
 import { Paragraph } from './Paragraph'

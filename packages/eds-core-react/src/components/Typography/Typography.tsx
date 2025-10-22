@@ -131,14 +131,14 @@ export type TypographyProps = {
 
 /**
  * @deprecated Typography component is deprecated and will be removed in a future version.
- * Please use the new Text, Heading, or Paragraph components instead.
+ * Please use the new Typography, Heading, or Paragraph components instead.
  *
  * Migration guide:
  * - For headings: Use `<Heading as="h1|h2|h3|h4|h5|h6">` instead of `<Typography variant="h1|h2|h3|h4|h5|h6">`
  * - For paragraphs: Use `<Paragraph>` instead of `<Typography variant="body_short|body_long">`
- * - For inline text: Use `<Text>` for more flexible text styling
+ * - For inline text: Use `<Typography>` for more flexible text styling
  *
- * @see {@link Text}
+ * @see {@link TypographyNext}
  * @see {@link Heading}
  * @see {@link Paragraph}
  */
