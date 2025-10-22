@@ -189,13 +189,17 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     })
 
-    const updatedChildren = cloneElement(children as ReactElement<any>, {
-      ...getReferenceProps(children.props),
-      ref: mergeRefs(
-        (children as ReactElement<any>).props.ref,
-        mergedAnchorRef,
-      ),
-    })
+    const updatedChildren = cloneElement(
+      children as ReactElement<any>, // eslint-disable-line @typescript-eslint/no-explicit-any
+      {
+        ...getReferenceProps(children.props),
+        ref: mergeRefs(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+          (children as ReactElement<any>).props.ref,
+          mergedAnchorRef,
+        ),
+      },
+    )
 
     useEffect(() => {
       if (!elements.floating) return
