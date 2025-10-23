@@ -39,6 +39,10 @@
     "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
+    "test:visual": "playwright test",
+    "test:visual:ui": "playwright test --ui",
+    "test:visual:update": "playwright test --update-snapshots",
+    "test:visual:report": "playwright show-report",
     "storybook": "storybook dev -p 9000 --ci",
     "build:storybook": "storybook build -o storybook-build",
     "types": "tsc -p tsconfig.build.json"
@@ -50,6 +54,7 @@
     "react"
   ],
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
