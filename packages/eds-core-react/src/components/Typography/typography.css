@@ -17,108 +17,131 @@
 }
 
 /* Reset typography margin */
+[data-font-family],
 .font-family-ui,
 .font-family-header {
   margin: 0;
 }
 
 /* Font family setup */
+[data-font-family='ui'],
 .font-family-ui {
   font-family: var(--eds-typography-ui-body-font-family), sans-serif;
 }
 
+[data-font-family='header'],
 .font-family-header {
   font-family: var(--eds-typography-header-font-family), sans-serif;
 }
 
 /* Shared typography styles for UI and Header font families */
+[data-font-family],
 :is(.font-family-ui, .font-family-header) {
   /* Font size setup with CSS custom property */
+  &[data-text-size='xs'],
   &.text-xs {
     --font-size: var(--_font-size-xs);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='sm'],
   &.text-sm {
     --font-size: var(--_font-size-sm);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='md'],
   &.text-md {
     --font-size: var(--_font-size-md);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='lg'],
   &.text-lg {
     --font-size: var(--_font-size-lg);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='xl'],
   &.text-xl {
     --font-size: var(--_font-size-xl);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='2xl'],
   &.text-2xl {
     --font-size: var(--_font-size-2xl);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='3xl'],
   &.text-3xl {
     --font-size: var(--_font-size-3xl);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='4xl'],
   &.text-4xl {
     --font-size: var(--_font-size-4xl);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='5xl'],
   &.text-5xl {
     --font-size: var(--_font-size-5xl);
     font-size: var(--font-size);
   }
 
+  &[data-text-size='6xl'],
   &.text-6xl {
     --font-size: var(--_font-size-6xl);
     font-size: var(--font-size);
   }
 
+  &[data-line-height='default'],
   &.line-height-default {
     line-height: var(--_line-height-default);
   }
 
+  &[data-line-height='squished'],
   &.line-height-squished {
     line-height: var(--_line-height-squished);
   }
 
+  &[data-font-weight='lighter'],
   &.font-lighter {
     font-weight: var(--_font-weight-lighter);
   }
 
+  &[data-font-weight='normal'],
   &.font-normal {
     font-weight: var(--_font-weight-normal);
   }
 
+  &[data-font-weight='bolder'],
   &.font-bolder {
     font-weight: var(--_font-weight-bolder);
   }
 
+  &[data-tracking='tight'],
   &.tracking-tight {
     letter-spacing: var(--_tracking-tight);
   }
 
+  &[data-tracking='normal'],
   &.tracking-normal {
     letter-spacing: var(--_tracking-normal);
   }
 
+  &[data-tracking='wide'],
   &.tracking-wide {
     letter-spacing: var(--_tracking-wide);
   }
 }
 
-/* UI Body font size mappings */
+[data-font-family='ui'],
 .font-family-ui {
+  &[data-text-size='xs'],
   &.text-xs {
     --_font-size-xs: var(--eds-typography-ui-body-xs-font-size);
     --_line-height-default: var(--eds-typography-ui-body-xs-lineheight-default);
@@ -135,6 +158,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-xs-tracking-loose);
   }
 
+  &[data-text-size='sm'],
   &.text-sm {
     --_font-size-sm: var(--eds-typography-ui-body-sm-font-size);
     --_line-height-default: var(--eds-typography-ui-body-sm-lineheight-default);
@@ -151,6 +175,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-sm-tracking-loose);
   }
 
+  &[data-text-size='md'],
   &.text-md {
     --_font-size-md: var(--eds-typography-ui-body-md-font-size);
     --_line-height-default: var(--eds-typography-ui-body-md-lineheight-default);
@@ -167,6 +192,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-md-tracking-loose);
   }
 
+  &[data-text-size='lg'],
   &.text-lg {
     --_font-size-lg: var(--eds-typography-ui-body-lg-font-size);
     --_line-height-default: var(--eds-typography-ui-body-lg-lineheight-default);
@@ -183,6 +209,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-lg-tracking-loose);
   }
 
+  &[data-text-size='xl'],
   &.text-xl {
     --_font-size-xl: var(--eds-typography-ui-body-xl-font-size);
     --_line-height-default: var(--eds-typography-ui-body-xl-lineheight-default);
@@ -199,6 +226,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-xl-tracking-loose);
   }
 
+  &[data-text-size='2xl'],
   &.text-2xl {
     --_font-size-2xl: var(--eds-typography-ui-body-2xl-font-size);
     --_line-height-default: var(
@@ -217,6 +245,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-2xl-tracking-loose);
   }
 
+  &[data-text-size='3xl'],
   &.text-3xl {
     --_font-size-3xl: var(--eds-typography-ui-body-3xl-font-size);
     --_line-height-default: var(
@@ -235,6 +264,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-3xl-tracking-loose);
   }
 
+  &[data-text-size='4xl'],
   &.text-4xl {
     --_font-size-4xl: var(--eds-typography-ui-body-4xl-font-size);
     --_line-height-default: var(
@@ -253,6 +283,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-4xl-tracking-loose);
   }
 
+  &[data-text-size='5xl'],
   &.text-5xl {
     --_font-size-5xl: var(--eds-typography-ui-body-5xl-font-size);
     --_line-height-default: var(
@@ -271,6 +302,7 @@
     --_tracking-wide: var(--eds-typography-ui-body-5xl-tracking-loose);
   }
 
+  &[data-text-size='6xl'],
   &.text-6xl {
     --_font-size-6xl: var(--eds-typography-ui-body-6xl-font-size);
     --_line-height-default: var(
@@ -290,8 +322,9 @@
   }
 }
 
-/* Header font size mappings */
+[data-font-family='header'],
 .font-family-header {
+  &[data-text-size='xs'],
   &.text-xs {
     --_font-size-xs: var(--eds-typography-header-xs-font-size);
     --_line-height-default: var(--eds-typography-header-xs-lineheight-default);
@@ -306,6 +339,7 @@
     --_tracking-wide: var(--eds-typography-header-xs-tracking-loose);
   }
 
+  &[data-text-size='sm'],
   &.text-sm {
     --_font-size-sm: var(--eds-typography-header-sm-font-size);
     --_line-height-default: var(--eds-typography-header-sm-lineheight-default);
@@ -320,6 +354,7 @@
     --_tracking-wide: var(--eds-typography-header-sm-tracking-loose);
   }
 
+  &[data-text-size='md'],
   &.text-md {
     --_font-size-md: var(--eds-typography-header-md-font-size);
     --_line-height-default: var(--eds-typography-header-md-lineheight-default);
@@ -334,6 +369,7 @@
     --_tracking-wide: var(--eds-typography-header-md-tracking-loose);
   }
 
+  &[data-text-size='lg'],
   &.text-lg {
     --_font-size-lg: var(--eds-typography-header-lg-font-size);
     --_line-height-default: var(--eds-typography-header-lg-lineheight-default);
@@ -348,6 +384,7 @@
     --_tracking-wide: var(--eds-typography-header-lg-tracking-loose);
   }
 
+  &[data-text-size='xl'],
   &.text-xl {
     --_font-size-xl: var(--eds-typography-header-xl-font-size);
     --_line-height-default: var(--eds-typography-header-xl-lineheight-default);
@@ -362,6 +399,7 @@
     --_tracking-wide: var(--eds-typography-header-xl-tracking-loose);
   }
 
+  &[data-text-size='2xl'],
   &.text-2xl {
     --_font-size-2xl: var(--eds-typography-header-2xl-font-size);
     --_line-height-default: var(--eds-typography-header-2xl-lineheight-default);
@@ -378,6 +416,7 @@
     --_tracking-wide: var(--eds-typography-header-2xl-tracking-loose);
   }
 
+  &[data-text-size='3xl'],
   &.text-3xl {
     --_font-size-3xl: var(--eds-typography-header-3xl-font-size);
     --_line-height-default: var(--eds-typography-header-3xl-lineheight-default);
@@ -394,6 +433,7 @@
     --_tracking-wide: var(--eds-typography-header-3xl-tracking-loose);
   }
 
+  &[data-text-size='4xl'],
   &.text-4xl {
     --_font-size-4xl: var(--eds-typography-header-4xl-font-size);
     --_line-height-default: var(--eds-typography-header-4xl-lineheight-default);
@@ -410,6 +450,7 @@
     --_tracking-wide: var(--eds-typography-header-4xl-tracking-loose);
   }
 
+  &[data-text-size='5xl'],
   &.text-5xl {
     --_font-size-5xl: var(--eds-typography-header-5xl-font-size);
     --_line-height-default: var(--eds-typography-header-5xl-lineheight-default);
@@ -426,6 +467,7 @@
     --_tracking-wide: var(--eds-typography-header-5xl-tracking-loose);
   }
 
+  &[data-text-size='6xl'],
   &.text-6xl {
     --_font-size-6xl: var(--eds-typography-header-6xl-font-size);
     --_line-height-default: var(--eds-typography-header-6xl-lineheight-default);
@@ -445,6 +487,7 @@
 
 /* Baseline alignment - progressive enhancement with text-box-trim */
 @supports (text-box: trim-both cap alphabetic) {
+  [data-baseline='grid'],
   .text-baseline-grid {
     text-box: trim-both ex alphabetic;
     /* 
@@ -466,6 +509,7 @@
     padding-bottom: 0;
   }
 
+  [data-baseline='center'],
   .text-baseline-center {
     text-box: trim-both ex alphabetic;
     /* 
