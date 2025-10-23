@@ -11,9 +11,12 @@ import {
   TrackingComparison,
 } from './Typography.stories.shared'
 
-const meta: Meta = {
+const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
   component: Heading,
+  args: {
+    as: 'h1',
+  },
   parameters: {
     docs: {
       description: {

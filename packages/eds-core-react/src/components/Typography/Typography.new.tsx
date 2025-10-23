@@ -7,6 +7,9 @@ import { TypographyNextProps } from './Typography.new.types'
  * Provides full control over typography properties including family, size,
  * lineHeight, baseline alignment, weight, and tracking.
  *
+ * **Display behavior:** Elements render as `display: block` by default for
+ * text-box trimming and baseline grid alignment. Override with CSS if needed.
+ *
  * @example
  * ```tsx
  * import { TypographyNext as Typography } from '@equinor/eds-core-react'
@@ -19,7 +22,7 @@ import { TypographyNextProps } from './Typography.new.types'
  *   weight="normal"
  *   tracking="normal"
  * >
- *   Flexible inline text
+ *   Text content (renders as block-level by default)
  * </Typography>
  *
  * <Typography

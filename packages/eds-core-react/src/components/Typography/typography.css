@@ -16,11 +16,15 @@
   syntax: '<length>';
 }
 
-/* Reset typography margin */
+/* Reset typography margin and set display mode */
 [data-font-family],
 .font-ui,
 .font-heading {
   margin: 0;
+  /* 
+   * Block display required for text-box trimming and baseline grid alignment.
+   */
+  display: block;
 }
 
 /* Font family setup */
