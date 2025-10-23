@@ -315,7 +315,7 @@ export const IconTextRow = ({
   iconName?: string
 }) => (
   <ComparisonRowItem label={label}>
-    <IconTextContainer className={`font-family-ui text-${size}`}>
+    <IconTextContainer className={`font-ui text-${size}`}>
       <Icon name={iconName} className="text-icon" />
       <span className="text-baseline-center">{text}</span>
     </IconTextContainer>
@@ -333,11 +333,7 @@ export const ButtonRow = ({
   children: React.ReactNode
 } & Record<string, unknown>) => (
   <ComparisonRowItem label={label}>
-    <Button
-      $size={size}
-      className={`font-family-ui text-${size}`}
-      {...extraProps}
-    >
+    <Button $size={size} className={`font-ui text-${size}`} {...extraProps}>
       {children}
     </Button>
   </ComparisonRowItem>

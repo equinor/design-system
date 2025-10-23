@@ -18,25 +18,25 @@
 
 /* Reset typography margin */
 [data-font-family],
-.font-family-ui,
-.font-family-header {
+.font-ui,
+.font-heading {
   margin: 0;
 }
 
 /* Font family setup */
 [data-font-family='ui'],
-.font-family-ui {
+.font-ui {
   font-family: var(--eds-typography-ui-body-font-family), sans-serif;
 }
 
 [data-font-family='header'],
-.font-family-header {
+.font-heading {
   font-family: var(--eds-typography-header-font-family), sans-serif;
 }
 
 /* Shared typography styles for UI and Header font families */
 [data-font-family],
-:is(.font-family-ui, .font-family-header) {
+:is(.font-ui, .font-heading) {
   /* Font size setup with CSS custom property */
   &[data-text-size='xs'],
   &.text-xs {
@@ -140,7 +140,7 @@
 }
 
 [data-font-family='ui'],
-.font-family-ui {
+.font-ui {
   &[data-text-size='xs'],
   &.text-xs {
     --_font-size-xs: var(--eds-typography-ui-body-xs-font-size);
@@ -323,7 +323,7 @@
 }
 
 [data-font-family='header'],
-.font-family-header {
+.font-heading {
   &[data-text-size='xs'],
   &.text-xs {
     --_font-size-xs: var(--eds-typography-header-xs-font-size);

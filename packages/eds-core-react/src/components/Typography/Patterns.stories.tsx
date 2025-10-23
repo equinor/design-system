@@ -417,7 +417,7 @@ export const IconTextAlignment: StoryFn = () => (
       <ComparisonRow>
         <Label>Center Aligned</Label>
         <div
-          className="font-family-ui text-lg"
+          className="font-ui text-lg"
           style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
         >
           <Icon name="info_circle" className="text-icon" />
@@ -428,7 +428,7 @@ export const IconTextAlignment: StoryFn = () => (
         <Label>With Link</Label>
         <a
           href="https://example.com"
-          className="font-family-ui text-md"
+          className="font-ui text-md"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -444,7 +444,7 @@ export const IconTextAlignment: StoryFn = () => (
       <ComparisonRow>
         <Label>List Item</Label>
         <div
-          className="font-family-ui text-md"
+          className="font-ui text-md"
           style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
         >
           <Icon name="check_circle_outlined" className="text-icon" />
@@ -456,7 +456,7 @@ export const IconTextAlignment: StoryFn = () => (
       <ComparisonRow>
         <Label>Badge/Chip</Label>
         <div
-          className="font-family-ui text-sm"
+          className="font-ui text-sm"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -500,7 +500,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Extra Small (xs)</Label>
           </CategoryHeader>
-          <ShowcaseItem className="font-family-ui text-xs" data-debug>
+          <ShowcaseItem className="font-ui text-xs" data-debug>
             <Icon name="check" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Extra small text
@@ -512,7 +512,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Small (sm)</Label>
           </CategoryHeader>
-          <ShowcaseItem className="font-family-ui text-sm" data-debug>
+          <ShowcaseItem className="font-ui text-sm" data-debug>
             <Icon name="check" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Small text with icon
@@ -524,7 +524,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Medium (md)</Label>
           </CategoryHeader>
-          <ShowcaseItem className="font-family-ui text-md" data-debug>
+          <ShowcaseItem className="font-ui text-md" data-debug>
             <Icon name="info_circle" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Medium text with icon
@@ -536,7 +536,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Large (lg)</Label>
           </CategoryHeader>
-          <ShowcaseItem className="font-family-ui text-lg" data-debug>
+          <ShowcaseItem className="font-ui text-lg" data-debug>
             <Icon name="warning_outlined" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Large text with icon
@@ -548,7 +548,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Extra Large (xl)</Label>
           </CategoryHeader>
-          <ShowcaseItem className="font-family-ui text-xl" data-debug>
+          <ShowcaseItem className="font-ui text-xl" data-debug>
             <Icon name="star_filled" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Extra large text
@@ -560,7 +560,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Button Component</Label>
           </CategoryHeader>
-          <Button $size="md" className="font-family-ui text-md" data-debug>
+          <Button $size="md" className="font-ui text-md" data-debug>
             <Icon name="save" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Save Document
@@ -572,7 +572,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           <CategoryHeader>
             <Label>Icon Before & After</Label>
           </CategoryHeader>
-          <ShowcaseItem className="font-family-ui text-md" data-debug>
+          <ShowcaseItem className="font-ui text-md" data-debug>
             <Icon name="arrow_back" className="text-icon" />
             <span className="text-baseline-center" data-debug>
               Navigate
@@ -586,7 +586,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
             <Label>Badge/Chip Component</Label>
           </CategoryHeader>
           <div
-            className="font-family-ui text-sm"
+            className="font-ui text-sm"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -611,7 +611,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
           </CategoryHeader>
           <a
             href="https://example.com"
-            className="font-family-ui text-md"
+            className="font-ui text-md"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -633,7 +633,7 @@ export const IconAlignmentWithGrid: StoryFn = () => (
             <Label>Status Indicator</Label>
           </CategoryHeader>
           <ShowcaseItem
-            className="font-family-ui text-md"
+            className="font-ui text-md"
             style={{ color: '#2e7d32' }}
             data-debug
           >
@@ -678,7 +678,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseItem>
             <a
               href="https://example.com"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -693,7 +693,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseItem>
             <a
               href="https://example.com"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -708,7 +708,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseItem>
             <a
               href="https://example.com"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -723,7 +723,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseItem>
             <a
               href="https://example.com"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -748,35 +748,35 @@ export const UsageExamples: StoryFn = () => (
         <ShowcaseGrid>
           <ShowcaseCard>
             <Label>Primary Actions</Label>
-            <Button $size="md" className="font-family-ui text-md">
+            <Button $size="md" className="font-ui text-md">
               <Icon name="save" className="text-icon" />
               <span className="text-baseline-center">Save</span>
             </Button>
           </ShowcaseCard>
           <ShowcaseCard>
             <Label>Secondary Actions</Label>
-            <Button $size="md" className="font-family-ui text-md">
+            <Button $size="md" className="font-ui text-md">
               <Icon name="file_description" className="text-icon" />
               <span className="text-baseline-center">Export</span>
             </Button>
           </ShowcaseCard>
           <ShowcaseCard>
             <Label>Destructive Actions</Label>
-            <Button $size="md" className="font-family-ui text-md">
+            <Button $size="md" className="font-ui text-md">
               <Icon name="delete_to_trash" className="text-icon" />
               <span className="text-baseline-center">Delete</span>
             </Button>
           </ShowcaseCard>
           <ShowcaseCard>
             <Label>Trailing Icon</Label>
-            <Button $size="md" className="font-family-ui text-md">
+            <Button $size="md" className="font-ui text-md">
               <span className="text-baseline-center">Share</span>
               <Icon name="share" className="text-icon" />
             </Button>
           </ShowcaseCard>
           <ShowcaseCard>
             <Label>Navigation</Label>
-            <Button $size="md" className="font-family-ui text-md">
+            <Button $size="md" className="font-ui text-md">
               <span className="text-baseline-center">Next</span>
               <Icon name="arrow_forward" className="text-icon" />
             </Button>
@@ -785,7 +785,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>Icon Only</Label>
             <Button
               $size="md"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{ padding: '8px' }}
               aria-label="More options"
             >
@@ -806,7 +806,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseCard>
             <Label>Success</Label>
             <ShowcaseItem
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{ color: 'var(--eds-color-text-success-subtle)' }}
             >
               <Icon name="check_circle_outlined" className="text-icon" />
@@ -818,7 +818,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseCard>
             <Label>Warning</Label>
             <ShowcaseItem
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{ color: 'var(--eds-color-text-warning-subtle)' }}
             >
               <Icon name="warning_outlined" className="text-icon" />
@@ -830,7 +830,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseCard>
             <Label>Error</Label>
             <ShowcaseItem
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{ color: 'var(--eds-color-text-danger-subtle)' }}
             >
               <Icon name="error_outlined" className="text-icon" />
@@ -842,7 +842,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseCard>
             <Label>Information</Label>
             <ShowcaseItem
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{ color: 'var(--eds-color-text-info-subtle)' }}
             >
               <Icon name="info_circle" className="text-icon" />
@@ -866,7 +866,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>External Link</Label>
             <a
               href="https://example.com"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -883,7 +883,7 @@ export const UsageExamples: StoryFn = () => (
             <Label>Download Link</Label>
             <a
               href="https://example.com"
-              className="font-family-ui text-md"
+              className="font-ui text-md"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -897,7 +897,7 @@ export const UsageExamples: StoryFn = () => (
           </ShowcaseCard>
           <ShowcaseCard>
             <Label>Checklist Item</Label>
-            <ShowcaseItem className="font-family-ui text-md">
+            <ShowcaseItem className="font-ui text-md">
               <Icon name="check_circle_outlined" className="text-icon" />
               <span className="text-baseline-center">Task completed</span>
             </ShowcaseItem>
@@ -905,7 +905,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseCard>
             <Label>User Badge</Label>
             <div
-              className="font-family-ui text-sm"
+              className="font-ui text-sm"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -923,7 +923,7 @@ export const UsageExamples: StoryFn = () => (
           <ShowcaseCard>
             <Label>Tag/Category</Label>
             <div
-              className="font-family-ui text-sm"
+              className="font-ui text-sm"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -939,7 +939,7 @@ export const UsageExamples: StoryFn = () => (
           </ShowcaseCard>
           <ShowcaseCard>
             <Label>File Item</Label>
-            <ShowcaseItem className="font-family-ui text-md">
+            <ShowcaseItem className="font-ui text-md">
               <Icon name="download" className="text-icon" />
               <span className="text-baseline-center">document.pdf</span>
             </ShowcaseItem>

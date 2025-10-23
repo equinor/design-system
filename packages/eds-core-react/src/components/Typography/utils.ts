@@ -32,7 +32,7 @@ export const createTypographyClassNames = ({
   const classes: string[] = []
 
   if (family) {
-    classes.push(`font-family-${family}`)
+    classes.push(`font-${family}`)
   }
   if (size) {
     classes.push(`text-${size}`)
