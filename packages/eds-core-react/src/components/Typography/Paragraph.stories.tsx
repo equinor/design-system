@@ -38,41 +38,12 @@ const meta: Meta = {
 export default meta
 
 export const Playground: StoryFn<ParagraphProps> = ({ debug, ...args }) => {
-  const content = <Paragraph {...args}>{SAMPLE_TEXT}</Paragraph>
+  const content = (
+    <Paragraph {...args} debug={debug}>
+      {SAMPLE_TEXT}
+    </Paragraph>
+  )
   return debug ? <GridBackground>{content}</GridBackground> : content
-}
-Playground.args = {
-  size: 'md',
-  lineHeight: 'default',
-  weight: 'normal',
-  tracking: 'normal',
-  debug: false,
-}
-Playground.argTypes = {
-  size: {
-    control: { type: 'select' },
-    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
-    description: 'Font size',
-  },
-  lineHeight: {
-    control: { type: 'select' },
-    options: ['default', 'squished'],
-    description: 'Line height variant',
-  },
-  weight: {
-    control: { type: 'select' },
-    options: ['lighter', 'normal', 'bolder'],
-    description: 'Font weight',
-  },
-  tracking: {
-    control: { type: 'select' },
-    options: ['tight', 'normal', 'wide'],
-    description: 'Letter spacing (tracking)',
-  },
-  debug: {
-    control: { type: 'boolean' },
-    description: 'Enable debug mode to visualize text box',
-  },
 }
 
 export const AllVariants: StoryFn = () => (

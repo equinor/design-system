@@ -37,35 +37,12 @@ const meta: Meta = {
 export default meta
 
 export const Playground: StoryFn<HeadingProps> = ({ debug, ...args }) => {
-  const content = <Heading {...args}>{SAMPLE_TEXT}</Heading>
+  const content = (
+    <Heading {...args} debug={debug}>
+      {SAMPLE_TEXT}
+    </Heading>
+  )
   return debug ? <GridBackground>{content}</GridBackground> : content
-}
-Playground.args = {
-  as: 'h2',
-  weight: 'normal',
-  tracking: 'normal',
-  debug: false,
-}
-Playground.argTypes = {
-  as: {
-    control: { type: 'select' },
-    options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    description: 'HTML heading level',
-  },
-  weight: {
-    control: { type: 'select' },
-    options: ['lighter', 'normal', 'bolder'],
-    description: 'Font weight',
-  },
-  tracking: {
-    control: { type: 'select' },
-    options: ['tight', 'normal', 'wide'],
-    description: 'Letter spacing (tracking)',
-  },
-  debug: {
-    control: { type: 'boolean' },
-    description: 'Enable debug mode to visualize text box',
-  },
 }
 
 export const AllVariants: StoryFn = () => (
