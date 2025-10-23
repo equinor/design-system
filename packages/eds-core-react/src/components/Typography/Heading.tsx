@@ -29,7 +29,7 @@ const getHeadingSize = (as: HeadingProps['as']): FontSize => {
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   (
     {
-      lineHeight = 'default',
+      lineHeight = 'squished',
       weight = 'normal',
       tracking = 'normal',
       debug,
