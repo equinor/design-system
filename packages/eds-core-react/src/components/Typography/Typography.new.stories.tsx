@@ -67,54 +67,14 @@ export const Playground: StoryFn<TypographyNextProps> = ({
   debug,
   ...args
 }) => {
-  const content = <TypographyNext {...args}>{SAMPLE_TEXT}</TypographyNext>
+  const content = (
+    <TypographyNext {...args} debug={debug}>
+      {SAMPLE_TEXT}
+    </TypographyNext>
+  )
   return debug ? <GridBackground>{content}</GridBackground> : content
 }
-Playground.args = {
-  family: 'ui',
-  size: 'md',
-  lineHeight: 'default',
-  weight: 'normal',
-  tracking: 'normal',
-  baseline: 'grid',
-  debug: false,
-}
-Playground.argTypes = {
-  family: {
-    control: { type: 'select' },
-    options: ['ui', 'header'],
-    description: 'Font family',
-  },
-  size: {
-    control: { type: 'select' },
-    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
-    description: 'Font size',
-  },
-  lineHeight: {
-    control: { type: 'select' },
-    options: ['default', 'squished'],
-    description: 'Line height variant',
-  },
-  weight: {
-    control: { type: 'select' },
-    options: ['lighter', 'normal', 'bolder'],
-    description: 'Font weight',
-  },
-  tracking: {
-    control: { type: 'select' },
-    options: ['tight', 'normal', 'wide'],
-    description: 'Letter spacing (tracking)',
-  },
-  baseline: {
-    control: { type: 'select' },
-    options: ['grid', 'center'],
-    description: 'Baseline alignment strategy',
-  },
-  debug: {
-    control: { type: 'boolean' },
-    description: 'Enable debug mode to visualize text box',
-  },
-}
+
 Playground.parameters = {
   docs: {
     description: {

@@ -48,7 +48,6 @@ export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
       tracking,
       debug,
       className,
-      children,
       ...rest
     },
     ref,
@@ -70,9 +69,7 @@ export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
         className={combinedClassName}
         data-debug={debug ? '' : undefined}
         {...rest}
-      >
-        {children}
-      </Component>
+      />
     )
   },
 )

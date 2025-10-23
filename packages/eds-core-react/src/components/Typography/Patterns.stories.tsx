@@ -74,7 +74,7 @@ export const Introduction: StoryFn = () => (
   </IntroductionGrid>
 )
 
-export const RealWorldExample: StoryFn = () => (
+export const Examples: StoryFn = () => (
   <RealWorldGrid>
     <Heading as="h1" weight="bolder">
       Design System Documentation
@@ -177,7 +177,7 @@ export const RealWorldExample: StoryFn = () => (
     </Paragraph>
   </RealWorldGrid>
 )
-RealWorldExample.parameters = {
+Examples.parameters = {
   docs: {
     description: {
       story:
@@ -186,7 +186,7 @@ RealWorldExample.parameters = {
   },
 }
 
-export const RealWorldWithGrid: StoryFn = () => (
+export const ExampleWithGrid: StoryFn = () => (
   <GridBackground>
     <RealWorldGrid>
       <Heading as="h1" weight="bolder" debug>
@@ -296,7 +296,7 @@ export const RealWorldWithGrid: StoryFn = () => (
     </RealWorldGrid>
   </GridBackground>
 )
-RealWorldWithGrid.parameters = {
+ExampleWithGrid.parameters = {
   docs: {
     description: {
       story:
