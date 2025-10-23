@@ -27,18 +27,19 @@ Find the tools, guides, and assets you need to work effectively with the Equinor
 
 ## Available Packages
 
-| Name | Version | npm link | Changelog |
-|------|---------|----------|-----------|
-| @equinor/eds-core-react | 1.0.2 | [@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-core-react/CHANGELOG.md) |
-| @equinor/eds-tokens | 1.1.3 | [@equinor/eds-tokens](https://www.npmjs.com/package/@equinor/eds-tokens) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/CHANGELOG.md) |
-| @equinor/eds-icons | 1.0.0 | [@equinor/eds-icons](https://www.npmjs.com/package/@equinor/eds-icons) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-icons/CHANGELOG.md) |
-| @equinor/eds-data-grid-react | 1.0.2 | [@equinor/eds-data-grid-react](https://www.npmjs.com/package/@equinor/eds-data-grid-react) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-data-grid-react/CHANGELOG.md) |
-| @equinor/eds-utils | 1.0.1 | [@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-utils/CHANGELOG.md) |
-| @equinor/eds-lab-react | 0.8.1 | [@equinor/eds-lab-react](https://www.npmjs.com/package/@equinor/eds-lab-react) | [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-lab-react/CHANGELOG.md) |
+| Package                                                                                                                                                                                                | Changelog                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| [![core](https://img.shields.io/npm/v/@equinor/eds-core-react?color=%23c3f3d2&label=%40equinor%2Feds-core-react&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-core-react)                     | [eds-core-react changelog](https://github.com/equinor/design-system/blob/main/packages/eds-core-react/CHANGELOG.md)           |
+| [![icons](https://img.shields.io/npm/v/@equinor/eds-icons?color=%23c3f3d2&label=%40equinor%2Feds-icons&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-icons)                                   | [eds-icons changelog](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/CHANGELOG.md)                    |
+| [![tokens](https://img.shields.io/npm/v/@equinor/eds-tokens?color=%23c3f3d2&label=%40equinor%2Feds-tokens&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-tokens)                               | [eds-tokens changelog](https://github.com/equinor/design-system/blob/main/packages/eds-icons/CHANGELOG.md)                    |
+| [![data-grid](https://img.shields.io/npm/v/@equinor/eds-data-grid-react?color=%23c3f3d2&label=%40equinor%2Feds-data-grid-react&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-data-grid-react) | [eds-data-grid-react changelog](https://github.com/equinor/design-system/blob/main/packages/eds-data-grid-react/CHANGELOG.md) |
+| [![lab](https://img.shields.io/npm/v/@equinor/eds-lab-react?color=%23c3f3d2&label=%40equinor%2Feds-lab-react&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-lab-react)                         | [eds-lab-react changelog](https://github.com/equinor/design-system/blob/main/packages/eds-lab-react/CHANGELOG.md)             |
+| [![utils](https://img.shields.io/npm/v/@equinor/eds-utils?color=%23c3f3d2&label=%40equinor%2Feds-utils&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-utils)                                   | [eds-utils changelog](https://github.com/equinor/design-system/blob/main/packages/eds-utils/CHANGELOG.md)                     |
+
 ## Versions and Release
 
 Each package follows independent **semantic versioning**.  
-You can view the latest version in the table above. For our full release notes, please see [Release notes](https://github.com/equinor/design-system/releases).
+The latest versions are shown in the badges above, which update automatically from npm. For our full release notes, please see [Release notes](https://github.com/equinor/design-system/releases).
 
 ## Need Help?
 
