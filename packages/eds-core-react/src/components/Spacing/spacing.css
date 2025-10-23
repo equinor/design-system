@@ -1,0 +1,332 @@
+/* 
+ * EDS Spacing Utilities
+ * 
+ * This file provides utility classes for applying consistent spacing throughout the design system.
+ * Spacing follows a systematic approach based on the 4px baseline grid.
+ * 
+ * Categories:
+ * - Inline spacing: Horizontal spacing between elements
+ * - Stack spacing: Vertical spacing between stacked elements
+ * - Inset spacing: Padding within elements (inline and stack variations)
+ * - Border radius: Corner rounding values
+ * 
+ * Each spacing value supports density modes (spacious/comfortable) through CSS variables.
+ */
+
+/* Inline spacing - Horizontal spacing between elements */
+.spacing-inline-4xs {
+  --spacing-value: var(--eds-spacing-inline-4-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-3xs {
+  --spacing-value: var(--eds-spacing-inline-3-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-2xs {
+  --spacing-value: var(--eds-spacing-inline-2-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-xs {
+  --spacing-value: var(--eds-spacing-inline-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-sm {
+  --spacing-value: var(--eds-spacing-inline-sm);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-md {
+  --spacing-value: var(--eds-spacing-inline-md);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-lg {
+  --spacing-value: var(--eds-spacing-inline-lg);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-xl {
+  --spacing-value: var(--eds-spacing-inline-xl);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-2xl {
+  --spacing-value: var(--eds-spacing-inline-2-xl);
+  gap: var(--spacing-value);
+}
+
+.spacing-inline-3xl {
+  --spacing-value: var(--eds-spacing-inline-3-xl);
+  gap: var(--spacing-value);
+}
+
+/* Stack spacing - Vertical spacing between stacked elements */
+.spacing-stack-4xs {
+  --spacing-value: var(--eds-spacing-stack-4-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-3xs {
+  --spacing-value: var(--eds-spacing-stack-3-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-2xs {
+  --spacing-value: var(--eds-spacing-stack-2-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-xs {
+  --spacing-value: var(--eds-spacing-stack-xs);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-sm {
+  --spacing-value: var(--eds-spacing-stack-sm);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-md {
+  --spacing-value: var(--eds-spacing-stack-md);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-lg {
+  --spacing-value: var(--eds-spacing-stack-lg);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-xl {
+  --spacing-value: var(--eds-spacing-stack-xl);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-2xl {
+  --spacing-value: var(--eds-spacing-stack-2-xl);
+  gap: var(--spacing-value);
+}
+
+.spacing-stack-3xl {
+  --spacing-value: var(--eds-spacing-stack-3-xl);
+  gap: var(--spacing-value);
+}
+
+/* Inset spacing - Padding within elements */
+
+/* Extra small inset */
+.spacing-inset-xs-inline {
+  padding-inline: var(--eds-spacing-inset-xs-inline);
+}
+
+.spacing-inset-xs-stack-squished {
+  padding-block: var(--eds-spacing-inset-xs-stack-squished);
+}
+
+.spacing-inset-xs-stack-squared {
+  padding-block: var(--eds-spacing-inset-xs-stack-squared);
+}
+
+.spacing-inset-xs-stack-stretched {
+  padding-block: var(--eds-spacing-inset-xs-stack-stretched);
+}
+
+.spacing-inset-xs-squished {
+  padding-inline: var(--eds-spacing-inset-xs-inline);
+  padding-block: var(--eds-spacing-inset-xs-stack-squished);
+}
+
+.spacing-inset-xs-squared {
+  padding-inline: var(--eds-spacing-inset-xs-inline);
+  padding-block: var(--eds-spacing-inset-xs-stack-squared);
+}
+
+.spacing-inset-xs-stretched {
+  padding-inline: var(--eds-spacing-inset-xs-inline);
+  padding-block: var(--eds-spacing-inset-xs-stack-stretched);
+}
+
+/* Small inset */
+.spacing-inset-sm-inline {
+  padding-inline: var(--eds-spacing-inset-sm-inline);
+}
+
+.spacing-inset-sm-stack-squished {
+  padding-block: var(--eds-spacing-inset-sm-stack-squished);
+}
+
+.spacing-inset-sm-stack-squared {
+  padding-block: var(--eds-spacing-inset-sm-stack-squared);
+}
+
+.spacing-inset-sm-stack-stretched {
+  padding-block: var(--eds-spacing-inset-sm-stack-stretched);
+}
+
+.spacing-inset-sm-squished {
+  padding-inline: var(--eds-spacing-inset-sm-inline);
+  padding-block: var(--eds-spacing-inset-sm-stack-squished);
+}
+
+.spacing-inset-sm-squared {
+  padding-inline: var(--eds-spacing-inset-sm-inline);
+  padding-block: var(--eds-spacing-inset-sm-stack-squared);
+}
+
+.spacing-inset-sm-stretched {
+  padding-inline: var(--eds-spacing-inset-sm-inline);
+  padding-block: var(--eds-spacing-inset-sm-stack-stretched);
+}
+
+/* Medium inset */
+.spacing-inset-md-inline {
+  padding-inline: var(--eds-spacing-inset-md-inline);
+}
+
+.spacing-inset-md-stack-squished {
+  padding-block: var(--eds-spacing-inset-md-stack-squished);
+}
+
+.spacing-inset-md-stack-squared {
+  padding-block: var(--eds-spacing-inset-md-stack-squared);
+}
+
+.spacing-inset-md-stack-stretched {
+  padding-block: var(--eds-spacing-inset-md-stack-stretched);
+}
+
+.spacing-inset-md-squished {
+  padding-inline: var(--eds-spacing-inset-md-inline);
+  padding-block: var(--eds-spacing-inset-md-stack-squished);
+}
+
+.spacing-inset-md-squared {
+  padding-inline: var(--eds-spacing-inset-md-inline);
+  padding-block: var(--eds-spacing-inset-md-stack-squared);
+}
+
+.spacing-inset-md-stretched {
+  padding-inline: var(--eds-spacing-inset-md-inline);
+  padding-block: var(--eds-spacing-inset-md-stack-stretched);
+}
+
+/* Large inset */
+.spacing-inset-lg-inline {
+  padding-inline: var(--eds-spacing-inset-lg-inline);
+}
+
+.spacing-inset-lg-stack-squished {
+  padding-block: var(--eds-spacing-inset-lg-stack-squished);
+}
+
+.spacing-inset-lg-stack-squared {
+  padding-block: var(--eds-spacing-inset-lg-stack-squared);
+}
+
+.spacing-inset-lg-stack-stretched {
+  padding-block: var(--eds-spacing-inset-lg-stack-stretched);
+}
+
+.spacing-inset-lg-squished {
+  padding-inline: var(--eds-spacing-inset-lg-inline);
+  padding-block: var(--eds-spacing-inset-lg-stack-squished);
+}
+
+.spacing-inset-lg-squared {
+  padding-inline: var(--eds-spacing-inset-lg-inline);
+  padding-block: var(--eds-spacing-inset-lg-stack-squared);
+}
+
+.spacing-inset-lg-stretched {
+  padding-inline: var(--eds-spacing-inset-lg-inline);
+  padding-block: var(--eds-spacing-inset-lg-stack-stretched);
+}
+
+/* Extra large inset */
+.spacing-inset-xl-inline {
+  padding-inline: var(--eds-spacing-inset-xl-inline);
+}
+
+.spacing-inset-xl-stack-squished {
+  padding-block: var(--eds-spacing-inset-xl-stack-squished);
+}
+
+.spacing-inset-xl-stack-squared {
+  padding-block: var(--eds-spacing-inset-xl-stack-squared);
+}
+
+.spacing-inset-xl-stack-stretched {
+  padding-block: var(--eds-spacing-inset-xl-stack-stretched);
+}
+
+.spacing-inset-xl-squished {
+  padding-inline: var(--eds-spacing-inset-xl-inline);
+  padding-block: var(--eds-spacing-inset-xl-stack-squished);
+}
+
+.spacing-inset-xl-squared {
+  padding-inline: var(--eds-spacing-inset-xl-inline);
+  padding-block: var(--eds-spacing-inset-xl-stack-squared);
+}
+
+.spacing-inset-xl-stretched {
+  padding-inline: var(--eds-spacing-inset-xl-inline);
+  padding-block: var(--eds-spacing-inset-xl-stack-stretched);
+}
+
+/* Border radius utilities */
+.spacing-border-radius-rounded {
+  border-radius: var(--eds-spacing-border-radius-rounded);
+}
+
+.spacing-border-radius-pill {
+  border-radius: var(--eds-spacing-border-radius-pill);
+}
+
+.spacing-border-radius-none {
+  border-radius: var(--eds-spacing-border-radius-none);
+}
+
+/* Icon spacing utilities */
+.spacing-icon-gap-xs {
+  gap: var(--eds-spacing-icon-xs-gap-horizontal);
+}
+
+.spacing-icon-gap-sm {
+  gap: var(--eds-spacing-icon-sm-gap-horizontal);
+}
+
+.spacing-icon-gap-md {
+  gap: var(--eds-spacing-icon-md-gap-horizontal);
+}
+
+.spacing-icon-gap-lg {
+  gap: var(--eds-spacing-icon-lg-gap-horizontal);
+}
+
+.spacing-icon-gap-xl {
+  gap: var(--eds-spacing-icon-xl-gap-horizontal);
+}
+
+.spacing-icon-gap-2xl {
+  gap: var(--eds-spacing-icon-2xl-gap-horizontal);
+}
+
+.spacing-icon-gap-3xl {
+  gap: var(--eds-spacing-icon-3xl-gap-horizontal);
+}
+
+.spacing-icon-gap-4xl {
+  gap: var(--eds-spacing-icon-4xl-gap-horizontal);
+}
+
+.spacing-icon-gap-5xl {
+  gap: var(--eds-spacing-icon-5xl-gap-horizontal);
+}
+
+.spacing-icon-gap-6xl {
+  gap: var(--eds-spacing-icon-6xl-gap-horizontal);
+}
