@@ -1,10 +1,9 @@
 import { Breadcrumbs, BreadcrumbsProps, Checkbox, Icon } from '../..'
 import { chevron_right } from '@equinor/eds-icons'
 import { useState, ChangeEvent } from 'react'
-import { action } from '@storybook/addon-actions'
-import { StoryFn, Meta } from '@storybook/react'
+import { action } from 'storybook/actions'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
-import page from './Breadcrumbs.docs.mdx'
 import styled from 'styled-components'
 
 const meta: Meta<typeof Breadcrumbs> = {
@@ -15,7 +14,6 @@ const meta: Meta<typeof Breadcrumbs> = {
   },
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
         type: 'code',

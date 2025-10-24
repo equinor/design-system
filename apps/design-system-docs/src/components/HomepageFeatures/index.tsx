@@ -2,62 +2,59 @@ import type { ReactNode } from 'react'
 import clsx from 'clsx'
 import Heading from '@theme/Heading'
 import styles from './styles.module.css'
+import Link from '@docusaurus/Link'
 
 type FeatureItem = {
   title: string
   Svg: React.ComponentType<React.ComponentProps<'svg'>>
   description: ReactNode
+  link: string
 }
 
-import DocusaurusMountain from '@site/static/img/undraw_docusaurus_mountain.svg'
-import DocusaurusTree from '@site/static/img/undraw_docusaurus_tree.svg'
-import DocusaurusReact from '@site/static/img/undraw_docusaurus_react.svg'
+import Designer from '../../../static/img/illustrations/designer_illu.svg'
+import Devices from '../../../static/img/illustrations/devices_illu.svg'
+import Puzzle from '../../../static/img/illustrations/puzzle_illu.svg'
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Resources',
-    Svg: DocusaurusMountain,
+    Svg: Puzzle,
     description: (
       <>
-        Provides teams with easy-to-use resources, from React & Figma component
-        libraries to icons, design tokens, colors, typography and more
+        Comprehensive resources like React and Figma components, tokens, icons
+        and colour palettes.
       </>
     ),
+    link: 'docs/components',
   },
   {
     title: 'Documentation',
-    Svg: DocusaurusReact,
+    Svg: Devices,
     description: (
-      <>Guidelines, principles and how-to&apos;s built on a common language</>
+      <>Guidelines, patterns, and principles for consistent builds.</>
     ),
+    link: 'docs/foundation/accessibility',
   },
   {
     title: 'Living',
-    Svg: DocusaurusTree,
-    description: (
-      <>
-        EDS is always evolving, invites collaboration and depends on
-        contributions
-      </>
-    ),
-  },
-  {
-    title: 'Supported',
-    Svg: DocusaurusMountain,
-    description: <>EDS is supported by the EDS core team</>,
+    Svg: Designer,
+    description: <>Evolving with collaboration and community contributions.</>,
+    link: 'docs/support',
   },
 ]
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, link }: FeatureItem) {
   return (
     <div className={clsx('col col--3')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
+      <Link to={link} className={styles.featureLink}>
+        <div className="text--center">
+          <Svg className={styles.featureSvg} role="img" />
+        </div>
+        <div className="text--center padding-horiz--md">
+          <Heading as="h3">{title}</Heading>
+          <p>{description}</p>
+        </div>
+      </Link>
     </div>
   )
 }
@@ -66,7 +63,7 @@ export function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={styles.featuresRow}>
           {FeatureList.map((props) => (
             <Feature key={props.title} {...props} />
           ))}

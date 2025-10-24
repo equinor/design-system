@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-utils",
-  "version": "0.8.8",
+  "version": "1.0.1",
   "description": "Utility functions and hooks for the Equinor Design System",
   "sideEffects": false,
   "type": "module",
@@ -55,8 +55,8 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/ramda": "^0.30.2",
-    "@types/react": "^18.3.24",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
     "babel-jest": "^29.7.0",
     "babel-plugin-styled-components": "^2.1.4",
     "jest": "^29.7.0",
@@ -64,8 +64,8 @@
     "jest-styled-components": "^7.2.0",
     "js-file-download": "^0.4.12",
     "ramda": "^0.31.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-is": "^18.3.1",
     "rollup": "^4.50.0",
     "rollup-plugin-delete": "^2.2.0",
@@ -74,9 +74,9 @@
     "typescript": "^5.9.2"
   },
   "peerDependencies": {
-    "react": ">=16.8",
-    "react-dom": ">=16.8",
-    "styled-components": ">=5.1"
+    "react": "^19",
+    "react-dom": "^19",
+    "styled-components": "^6"
   },
   "dependencies": {
     "@babel/runtime": "^7.28.3",

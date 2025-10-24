@@ -1,16 +1,19 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.test.base.json",
   "compilerOptions": {
-    "declaration": false,
-    "noEmit": true,
-    "isolatedModules": true,
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom", "styled-components"]
+    "types": ["@testing-library/jest-dom"],
+    "paths": {
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"],
+      "react-dom": ["./node_modules/@types/react-dom"],
+      "react-dom/*": ["./node_modules/@types/react-dom/*"]
+    }
   },
   "include": [
-    "src/**/*.test.ts*", 
+    "src/**/*.test.ts*",
     "./jest.setup.ts",
-    "src/components/styled.d.ts"  // Make sure styled.d.ts is included for tests
+    "src/components/styled.d.ts" // Make sure styled.d.ts is included for tests
   ],
   "exclude": ["node_modules", "src/**/*.stories.ts*", "src/stories", "src/test"]
 }

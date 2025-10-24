@@ -1,6 +1,7 @@
 import React from "react";
 import { SearchInput } from "./SearchInput";
 import { ActionButton } from "./ActionButton";
+import { Typography } from "./Typography";
 
 type Props = {
   subtitle: string;
@@ -17,8 +18,8 @@ export const TopBar = ({
   ...rest
 }: Props) => {
   return (
-    <div className={className} {...rest}>
-      <div className="w-[243px] justify-start items-center gap-1 flex">
+    <header className={className} {...rest}>
+      <div className="justify-start items-center gap-1 flex">
         <ActionButton>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,13 +36,21 @@ export const TopBar = ({
             />
           </svg>
         </ActionButton>
-        <div className={`text-base font-medium leading-tight ${subtitleClass}`}>
+        <Typography
+          as="span"
+          size="lg"
+          isBaselineAligned={false}
+          className={subtitleClass}
+        >
           {subtitle}
-        </div>
+        </Typography>
       </div>
       <div className="flex align-middle items-center">
         <SearchInput className={textInputClass} />
-        <div className="justify-start items-start gap-2 flex top-bar__actions">
+        <nav
+          aria-label="Header navigation"
+          className="justify-start items-start gap-2 flex top-bar__actions"
+        >
           <ActionButton>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -122,8 +131,8 @@ export const TopBar = ({
               />
             </svg>
           </ActionButton>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };

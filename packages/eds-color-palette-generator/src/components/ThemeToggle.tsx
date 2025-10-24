@@ -30,7 +30,7 @@ export function ThemeToggle() {
     <div
       role="radiogroup"
       aria-label="Theme"
-      className="inline-flex rounded-lg bg-neutral-medium-default/40  border-neutral-subtle"
+      className="inline-flex rounded-lg bg-neutral-fill-muted-default/40  border-neutral-subtle"
       onKeyDown={onKeyDown}
     >
       <button

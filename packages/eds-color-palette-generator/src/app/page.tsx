@@ -121,27 +121,31 @@ export default function App() {
   }, [colors])
 
   const updateColorName = (index: number, newName: string) => {
-    setColors(
-      colors.map((color, i) =>
+    // Use functional update to avoid stale state when multiple edits occur quickly
+    setColors((prev) =>
+      prev.map((color, i) =>
         i === index ? { ...color, name: newName } : color,
       ),
     )
   }
 
-  const updateColorHex = (index: number, newHex: string) => {
-    setColors(
-      colors.map((color, i) =>
-        i === index ? { ...color, hex: newHex } : color,
+  const updateColorValue = (index: number, newValue: string) => {
+    // Use functional update to avoid stale state when multiple edits occur quickly
+    setColors((prev) =>
+      prev.map((color, i) =>
+        i === index ? { ...color, value: newValue } : color,
       ),
     )
   }
 
   const removeColor = (index: number) => {
-    setColors(colors.filter((_, i) => i !== index))
+    // Functional update for consistency and to avoid state races
+    setColors((prev) => prev.filter((_, i) => i !== index))
   }
 
   const addColor = (newColor: ColorDefinition) => {
-    setColors([...colors, newColor])
+    // Functional update for consistency and to avoid state races
+    setColors((prev) => [...prev, newColor])
   }
 
   // Update a specific lightness value
@@ -185,28 +189,28 @@ export default function App() {
     }
   }
 
-  // Efficiently memoize computed scales by hex-only dependencies
-  const hexKey = useMemo(() => colors.map((c) => c.hex).join('|'), [colors])
+  // Efficiently memoize computed scales by value-only dependencies
+  const valueKey = useMemo(() => colors.map((c) => c.value).join('|'), [colors])
   const lightScalesMemo = useMemo(
     () =>
       colors.map((c) =>
         generateColorScale(
-          c.hex,
+          c.value,
           lightModeValues,
           meanLight,
           stdDevLight,
           colorFormat,
         ),
       ),
-    // Only recompute when hexes or generation inputs change (not when names change)
+    // Only recompute when color values or generation inputs change (not when names change)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hexKey, lightModeValues, meanLight, stdDevLight, colorFormat],
+    [valueKey, lightModeValues, meanLight, stdDevLight, colorFormat],
   )
   const darkScalesMemo = useMemo(
     () =>
       colors.map((c) =>
         generateColorScale(
-          c.hex,
+          c.value,
           darkModeValues,
           meanDark,
           stdDevDark,
@@ -214,7 +218,7 @@ export default function App() {
         ),
       ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hexKey, darkModeValues, meanDark, stdDevDark, colorFormat],
+    [valueKey, darkModeValues, meanDark, stdDevDark, colorFormat],
   )
 
   // Combine fast: map names to memoized scales without recomputing heavy work on name edits
@@ -273,7 +277,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-canvas text-default">
-      <header className="mx-auto max-w-7xl px-6 py-8">
+      <header className="mx-auto max-w-7xl px-6 py-8 print-hide">
         <HeaderPanel
           showConfigPanel={showConfigPanel}
           setShowConfigPanel={setShowConfigPanel}
@@ -283,12 +287,12 @@ export default function App() {
       <main className="py-6">
         {/* Config Panel */}
         {showConfigPanel && (
-          <section className="mb-8">
+          <section className="mb-8 print:mb-0">
             <div
               id="display-options-panel"
               className="mx-auto max-w-7xl p-6 rounded-xl"
             >
-              <div className="bg-surface px-4 py-6 rounded-xl">
+              <div className="bg-surface px-4 py-6 rounded-xl print-hide">
                 <DisplayOptionsPanel
                   showContrast={showContrast}
                   showLightnessInputs={showLightnessInputs}
@@ -322,7 +326,7 @@ export default function App() {
         )}
 
         {/* Full-width sticky subheader after display options */}
-        <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md">
+        <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md print-hide">
           <div className="mx-auto max-w-7xl px-6 py-2">
             <ColorScalesHeader />
             {showLightnessInputs && (
@@ -341,16 +345,19 @@ export default function App() {
           {currentColorScales.map((colorData, index) => (
             <div
               key={`scale-wrap-${index}`}
-              className="rounded-xl bg-surface p-4"
+              className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
             >
               <ColorScale
                 colors={colorData.scale}
                 showContrast={showContrast}
                 contrastMethod={contrastMethod}
                 colorName={colorData.name}
-                baseHex={colors[index]?.hex}
+                baseColor={colors[index]?.value}
+                testId={`color-scale-${index}`}
                 onRename={(name) => updateColorName(index, name)}
-                onChangeHex={(hex) => updateColorHex(index, hex)}
+                onChangeValue={(value: string) =>
+                  updateColorValue(index, value)
+                }
                 onRemove={() => removeColor(index)}
               />
             </div>
@@ -358,18 +365,18 @@ export default function App() {
         </section>
 
         {/* Add new color button */}
-        <div className="my-8 mx-auto max-w-7xl px-6">
+        <div className="my-8 mx-auto max-w-7xl px-6 print-hide">
           <button
             type="button"
-            onClick={() => addColor({ name: 'New colour', hex: '#888888' })}
-            className="px-4 py-2 text-sm bg-neutral-medium-default hover:bg-neutral-medium-hover border border-neutral-subtle rounded-md cursor-pointer"
+            onClick={() => addColor({ name: 'New colour', value: '#888888' })}
+            className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
           >
             Add colour
           </button>
         </div>
       </main>
 
-      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3">
+      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3 print-hide">
         <QuickActionsPopover
           lightModeValues={lightModeValues}
           darkModeValues={darkModeValues}
@@ -398,7 +405,7 @@ export default function App() {
           <button
             type="button"
             onClick={resetConfiguration}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-medium-default hover:bg-danger-medium-hover border-none rounded-md"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-fill-muted-default hover:bg-danger-fill-muted-hover border-none rounded-md"
             aria-label="Reset configuration changes"
             title="Reset configuration changes"
           >

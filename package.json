@@ -18,16 +18,19 @@
     "build:tokens": "pnpm --filter @equinor/eds-tokens run build",
     "build:tokens-build": "pnpm --filter @equinor/eds-tokens-build run build",
     "build:token-sync": "pnpm --filter @equinor/eds-tokens-sync run build",
-    "build:variables": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run build:variables",
+    "build:variables": "pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run build:variables",
     "update:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens run update-tokens",
     "update:figma": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens run update-figma",
     "build:icons": "pnpm --filter @equinor/eds-icons run build",
     "build:storybook": "pnpm --filter @equinor/eds-core-react run build:storybook",
     "build:storybook:lab": "pnpm --filter @equinor/eds-lab-react run build:storybook",
     "build:storybook:data-grid": "pnpm --filter ./packages/eds-data-grid-react run build:storybook",
+    "demo:dev": "pnpm --filter eds-demo run dev",
     "docu:clear": "pnpm --filter design-system-docs run clear",
     "docu:start": "pnpm --filter ./apps/design-system-docs run start",
-    "docu:build": "pnpm --filter ./apps/design-system-docs run build",
+    "docu:build": "node scripts/extract-prerequisites.js && node scripts/extract-package-info.js && pnpm --filter ./apps/design-system-docs run build",
+    "docu:prerequisites": "node scripts/extract-prerequisites.js",
+    "docu:serve": "pnpm --filter ./apps/design-system-docs run serve",
     "test": "pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab && pnpm run test:data-grid-react",
     "test:core-react": "pnpm --filter @equinor/eds-core-react run test",
     "test:data-grid-react": "pnpm --filter @equinor/eds-data-grid-react run test",
@@ -74,5 +77,5 @@
     "typescript": "^5.9.2"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
-  "packageManager": "pnpm@9.15.0+sha1.8bfdb6d72b4d5fdf87d21d27f2bfbe2b21dd2629"
+  "packageManager": "pnpm@10.15.0"
 }

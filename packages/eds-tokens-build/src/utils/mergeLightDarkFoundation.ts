@@ -1,22 +1,47 @@
-import { readFileSync, writeFileSync } from 'fs'
+import { writeFile, readFile } from 'node:fs/promises'
 import path from 'path'
 
-export function mergeLightDarkFoundation({ prefix }: { prefix: string }) {
-  const outputDirectory = `${process.cwd()}/build/css/color`
+export interface MergeLightDarkOptions {
+  /** CSS variable prefix to match (e.g., 'eds-color') */
+  prefix: string
+  /** Path to the light theme CSS file */
+  lightFilePath?: string
+  /** Path to the dark theme CSS file */
+  darkFilePath?: string
+  /** Output path for the merged CSS file */
+  outputFilePath?: string
+  /** Base output directory (used if specific file paths are not provided) */
+  outputDirectory?: string
+  /** Light file name pattern (used if lightFilePath is not provided) */
+  lightFileName?: string
+  /** Dark file name pattern (used if darkFilePath is not provided) */
+  darkFileName?: string
+  /** Output file name (used if outputFilePath is not provided) */
+  outputFileName?: string
+}
 
-  const lightFoundationPath = path.join(
-    outputDirectory,
-    'light-color-scheme-trimmed.css',
-  )
-  const darkFoundationPath = path.join(
-    outputDirectory,
-    'dark-color-scheme-trimmed.css',
-  )
-  const mergedFoundationPath = path.join(outputDirectory, 'foundation.css')
+export async function mergeLightDarkFoundation(options: MergeLightDarkOptions) {
+  const {
+    prefix,
+    lightFilePath,
+    darkFilePath,
+    outputFilePath,
+    outputDirectory = `${process.cwd()}/build/css/color`,
+    lightFileName = 'light-color-scheme-trimmed.css',
+    darkFileName = 'dark-color-scheme-trimmed.css',
+    outputFileName = 'foundation.css',
+  } = options
+
+  const lightFoundationPath =
+    lightFilePath || path.join(outputDirectory, lightFileName)
+  const darkFoundationPath =
+    darkFilePath || path.join(outputDirectory, darkFileName)
+  const mergedFoundationPath =
+    outputFilePath || path.join(outputDirectory, outputFileName)
 
   try {
-    const lightContent = readFileSync(lightFoundationPath, 'utf-8')
-    const darkContent = readFileSync(darkFoundationPath, 'utf-8')
+    const lightContent = await readFile(lightFoundationPath, 'utf-8')
+    const darkContent = await readFile(darkFoundationPath, 'utf-8')
 
     // Extract CSS variables from light file (excluding the selector)
     const lightVarRegex = new RegExp(`--${prefix}-[^:]+:[^;]+;`, 'g')
@@ -64,7 +89,7 @@ ${mergedVariables.join('\n')}
 }
 `
 
-    writeFileSync(mergedFoundationPath, mergedContent, 'utf-8')
+    await writeFile(mergedFoundationPath, mergedContent, 'utf-8')
     // eslint-disable-next-line no-console
     console.log(
       `✓ Merged foundation colors with light-dark() function: ${mergedFoundationPath}`,

@@ -5,38 +5,77 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.0.1...eds-data-grid-react@v1.0.2) (2025-10-22)
+
+
+### 🔧 Chores
+
+* Rename follow-up ([#4129](https://github.com/equinor/design-system/issues/4129)) ([cae9fc0](https://github.com/equinor/design-system/commit/cae9fc0b3d32394da8d89ddb09c747142dd66f38))
+
+## [1.0.1](https://github.com/equinor/design-system/compare/eds-data-grid-react@1.0.0...eds-data-grid-react@v1.0.1) (2025-10-16)
+
+
+### 🔧 Chores
+
+* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+
+## [1.0.0] - 2025-10-09
+
+This release marks the data grid as **production-ready**. The v1.0.0 milestone signals API stability and our commitment to semantic versioning.
+
+### BREAKING CHANGES ⚠️
+
+- **React 19 Required**: This version requires React >= 19.0.0 and React DOM >= 19.0.0. Previous versions are not compatible with React 19, and this version is not compatible with React 18.
+
+### Changed
+
+- chore: React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
+
+## [0.9.1] - 2025-09-11
+
+### Fixed
+
+- 🐛 Fix virtualization unmount crash in data grid when navigating away from tabs by @Copilot @torleifhalseth @pomfrida in https://github.com/equinor/design-system/pull/3969
+
+### Changed
+
+- 🔥 Remove individual package lockfiles by @pomfrida in https://github.com/equinor/design-system/pull/3930
+- ⬆️ Upgrade dependencies in all packages by @pomfrida in https://github.com/equinor/design-system/pull/3933
+- ⬆️ Upgrade pnpm to v10 and node to v22 by @torleifhalseth in https://github.com/equinor/design-system/pull/3964
+- ⬆️ Storybook v9 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/3976
+
 ## [0.9.0] - 2025-08-27
 
-## Added
+### Added
 
 - ✨ New `ClickableCell` component by @pomfrida in https://github.com/equinor/design-system/pull/3868
 
-## Fixed
+### Fixed
 
 - 🐛 Virtual table and rows with dynamic height by @arkadiy93 in https://github.com/equinor/design-system/pull/3840
 
-## Changed
+### Changed
 
 - ⬆️ Upgrade dependencies by @pomfrida in https://github.com/equinor/design-system/pull/3881
 
 ## [0.8.1] - 2025-06-13
 
-## Fixed
+### Fixed
 
 - 🐛 Fix sticky-ness of grouped headers by @yusijs in https://github.com/equinor/design-system/pull/3830
 
 ## [0.8.0] - 2025-05-19
 
-## Fixed
+### Fixed
 
 - 🐛 Fix Storybook docs page error by @pomfrida in https://github.com/equinor/design-system/pull/3797
 - 🐛 Add mockup to test @pomfrida in https://github.com/equinor/design-system/pull/3802
 
-## Added
+### Added
 
 - ✨ Enable external filters, hide filter-icon when not active by @yusijs in https://github.com/equinor/design-system/pull/3764
 
-## Changed
+### Changed
 
 - 🔥 Remove redundant placeholder in DebouncedInput by @pomfrida in https://github.com/equinor/design-system/pull/3807
 
@@ -54,7 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- 🐛 Add [effect](https://github.com/equinor/design-system/blob/develop/packages/eds-data-grid-react/src/EdsDataGrid.tsx#L385-L391) to recalculate virtualization when density changes
+- 🐛 Add [effect](https://github.com/equinor/design-system/blob/main/packages/eds-data-grid-react/src/EdsDataGrid.tsx#L385-L391) to recalculate virtualization when density changes
 
 ## [0.7.5] - 2025-01-17
 

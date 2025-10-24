@@ -1,6 +1,4 @@
-/* eslint-disable import/no-default-export */
 import clsx from 'clsx'
-import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import { HomepageFeatures } from '@site/src/components/HomepageFeatures'
@@ -8,12 +6,14 @@ import Heading from '@theme/Heading'
 
 import styles from './index.module.css'
 
+import type { JSX } from 'react'
+
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext()
   return (
     <header className={clsx(styles.heroBanner)}>
       <div className="container">
-        <Heading as="h2" className="hero__title">
+        <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -25,47 +25,39 @@ function HomepageHeader() {
 
 function HomepageInfo() {
   return (
-    <header>
+    <header className={styles.homepageInfo}>
       <div className="container">
         <p>
-          The EDS is the official design system of Equinor and is to be used
-          when designing, prototyping and developing internal digital
-          interfaces.
+          The Equinor Design System (EDS) helps you build consistent, accessible
+          digital products faster. Whether you&rsquo;re a developer, designer,
+          or part of any team, EDS provides the tools you need to create quality
+          user experiences.
         </p>
-        <Heading as="h4"> Getting started</Heading>
+        <br />
+        <Heading as="h2">What You Get</Heading>
         <p>
-          EDS provides a collection of guidelines and reusable components that
-          can be assembled in different combinations to design and build digital
-          interfaces.
+          Guidelines, design tokens, icons, and React components that work
+          together seamlessly. No need to reinvent the wheel—focus on what makes
+          your product unique.
         </p>
-        <Heading as="h4"> Our Foundation</Heading>
-        <p>EDS&apos;s main goal is to enhance the usability for all users.</p>
-        <Heading as="h4"> Community Based</Heading>
+        <br />
+        <Heading as="h2">How It Works</Heading>
         <p>
-          EDS relies on its users and the EDS core team maintains and provides
-          support for you and are here to help. Don&apos;t hesitate to contact
-          us if you have any questions or feedback.{' '}
+          Design in Figma using our libraries, then build with matching React
+          components. From concept to production, everything stays consistent.
         </p>
-        <div className={styles.buttons}>
-          <iframe
-            src="https://youtube.com/embed/M-G7JTp14Nw"
-            title="What is a design system"
-            allowFullScreen
-          ></iframe>
-          <iframe
-            src="https://www.youtube.com/embed/5my0W735TF4"
-            title="What makes working on EDS interesting"
-            allowFullScreen
-          ></iframe>
-        </div>
-        <div className={clsx('hero')} style={{ justifyContent: 'center' }}>
-          <Link
-            className="button button--secondary button--lg"
-            to="https://loop.equinor.com/en/stories/eds-design-system"
-          >
-            Loop story - &apos;How it all began&apos;
-          </Link>
-        </div>
+        <br />
+        <Heading as="h2">Get Involved</Heading>
+        <p>
+          Share feedback, report issues, or contribute improvements. Your input
+          helps make EDS better for everyone.
+        </p>
+        <br />
+        <Heading as="h2">Need Help?</Heading>
+        <p>
+          Explore our documentation, browse Storybook examples, or reach out
+          through our support channels. We&rsquo;re here to help you succeed.
+        </p>
       </div>
     </header>
   )
@@ -75,13 +67,13 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
-      <HomepageInfo />
       <main>
         <HomepageFeatures />
+        <HomepageInfo />
       </main>
     </Layout>
   )

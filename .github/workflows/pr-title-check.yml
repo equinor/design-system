@@ -1,0 +1,77 @@
+name: PR Title Check
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Title Format
+        shell: bash
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          echo "🔍 Checking PR title: '$title'"
+
+          # Fail fast for spacing mistakes
+          # Check for any space before ':' (covers both "type :" and "type(scope) :")
+          if [[ "$title" =~ " :" ]]; then
+            echo "❌ Invalid title: No space allowed before ':'"
+            echo "   Use: 'type: description' not 'type : description'"
+            echo "   Use: 'type(scope): description' not 'type(scope) : description'"
+            exit 1
+          fi
+
+          # Check for space before '(' (e.g. "feat (scope)")
+          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)[[:space:]] ]] && [[ "$title" =~ \( ]]; then
+            echo "❌ Invalid title: No space allowed before '('"
+            echo "   Use: 'type(scope): description' not 'type (scope): description'"
+            exit 1
+          fi
+
+          # Require either "type: desc" or "type(scope): desc"
+          re='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9][a-zA-Z0-9_-]*(,[a-zA-Z0-9][a-zA-Z0-9_-]*)*\))?(!)?: +[^ ].+$'
+          if [[ "$title" =~ $re ]]; then
+            echo "✅ Title matches Conventional Commits"
+          else
+            echo "❌ Invalid title: Must follow conventional commit format"
+            echo "   Valid formats:"
+            echo "     • type: description"
+            echo "     • type(scope): description"
+            echo "     • type(scope)!: breaking change description"
+            echo "   Examples:"
+            echo "     • feat: add new component"
+            echo "     • fix(eds-tokens): resolve build issue"
+            echo "     • feat(core)!: remove deprecated API"
+            exit 1
+          fi
+
+          # Optional: validate scope(s) if present
+          if [[ "$title" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\(([^\)]+)\) ]]; then
+            scope_content="${BASH_REMATCH[2]}"
+            echo "📦 Scope detected: '$scope_content'"
+
+            valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker" "devcontainer" "github" "build" "deps" "config" "docs")
+
+            IFS=',' read -ra scopes <<< "$scope_content"
+            all_valid=true
+            for scope in "${scopes[@]}"; do
+              # no spaces are expected due to regex, but trim anyway
+              scope="$(echo "$scope" | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
+              found=false
+              for vs in "${valid_scopes[@]}"; do [[ "$scope" == "$vs" ]] && found=true && break; done
+              if ! $found; then echo "    ❌ Invalid scope: '$scope'"; all_valid=false; else echo "    ✅ $scope"; fi
+            done
+            if ! $all_valid; then
+              echo ""
+              echo "❌ Invalid scope(s): One or more scopes are not recognized"
+              echo "   Valid scopes:"
+              printf "     • %s\n" "${valid_scopes[@]}"
+              echo "   Use: 'type(valid-scope): description'"
+              exit 1
+            fi
+          else
+            echo "📦 No scope used (optional)"
+          fi
+
+          echo "✅ PR title OK"

@@ -9,10 +9,22 @@ spec:
   environments:
     - name: prod
       build:
-        from: develop
+        from: main
     - name: dev
       build:
         from: feat/*
+  dnsAppAlias:
+    environment: prod
+    component: docs
+  dnsAlias:
+    - alias: eds
+      environment: prod
+      component: docs
+  dnsExternalAlias:
+    - alias: eds.equinor.com
+      environment: prod
+      component: docs
+      useCertificateAutomation: true
   components:
     - name: color-palette-generator
       dockerfileName: DockerfileColorPaletteGenerator
@@ -22,6 +34,12 @@ spec:
           port: 3000
     - name: demo
       dockerfileName: DockerfileEdsDemo
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
+    - name: docs
+      dockerfileName: DockerfileEdsDocs
       publicPort: http
       ports:
         - name: http

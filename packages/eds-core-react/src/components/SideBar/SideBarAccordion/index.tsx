@@ -314,10 +314,12 @@ export const SideBarAccordion = forwardRef<
         onClose={closeMenu}
         anchorEl={anchorEl}
       >
-        {Children.map(children, (child: ReactElement) => {
-          const item = child as ReactElement<AccordionItemProps>
-          return <Menu.Item {...child.props}>{item.props.label}</Menu.Item>
-        })}
+        {Children.map(
+          children,
+          (child: ReactElement<SidebarAccordionProps>) => {
+            return <Menu.Item {...child.props}>{child.props.label}</Menu.Item>
+          },
+        )}
       </Menu>
     </>
   )

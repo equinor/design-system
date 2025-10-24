@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Checkout cdn repo 🛎️
         id: checkout-cdn-repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: 'equinor/design-system-cdn'
           ref: main

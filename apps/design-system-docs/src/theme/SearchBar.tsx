@@ -1,17 +1,13 @@
-/* eslint-disable import/no-default-export */
 import React, { type ReactNode } from 'react'
-// import SearchBar from '@theme-original/SearchBar'
-import { Search as SearchBar } from '@equinor/eds-core-react'
+import SearchBar from '@theme-original/SearchBar'
+import styles from './SearchBar.module.css'
 
 export default function SearchBarWrapper(): ReactNode {
   return (
     <>
-      <SearchBar
-        aria-label="sitewide"
-        id="search-normal"
-        placeholder="Search"
-        // onChange={handleOnChange}
-      />
+      <div className={`search-bar ${styles.searchMainContainer}`}>
+        <SearchBar />
+      </div>
     </>
   )
 }

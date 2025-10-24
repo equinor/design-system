@@ -1,0 +1,17 @@
+{
+  "bg-fill-muted-default": "#cae6fa",
+  "bg-fill-muted-hover": "#b5daf5",
+  "bg-fill-muted-active": "#99cbf0",
+  "bg-fill-emphasis-default": "#006aa0",
+  "bg-fill-emphasis-hover": "#085883",
+  "bg-fill-emphasis-active": "#0e5279",
+  "bg-canvas": "#e7f8ff",
+  "bg-surface": "#f4ffff",
+  "border-subtle": "#b5daf5",
+  "border-medium": "#6fb6e9",
+  "border-strong": "#0070a9",
+  "text-subtle": "#015e8d",
+  "text-strong": "#121e27",
+  "text-subtle-on-emphasis": "#c5e3f9",
+  "text-strong-on-emphasis": "#ffffff"
+}

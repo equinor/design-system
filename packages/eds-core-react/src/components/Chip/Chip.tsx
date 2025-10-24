@@ -195,7 +195,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
 
   const resizedChildren = ReactChildren.map(
     children,
-    (child: React.ReactElement) => {
+    (child: React.ReactElement<Record<string, unknown>>) => {
       // We force size on Icon & Avatar component
       if (child.props) {
         return cloneElement(child, {

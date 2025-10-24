@@ -1,0 +1,96 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-color-bg-neutral-canvas: var(--eds-color-neutral-1);
+  --eds-color-bg-neutral-surface: var(--eds-color-neutral-2);
+  --eds-color-bg-neutral-fill-muted-default: var(--eds-color-neutral-3);
+  --eds-color-bg-neutral-fill-muted-hover: var(--eds-color-neutral-4);
+  --eds-color-bg-neutral-fill-muted-active: var(--eds-color-neutral-5);
+  --eds-color-bg-neutral-fill-emphasis-default: var(--eds-color-neutral-9);
+  --eds-color-bg-neutral-fill-emphasis-hover: var(--eds-color-neutral-10);
+  --eds-color-bg-neutral-fill-emphasis-active: var(--eds-color-neutral-11);
+  --eds-color-bg-accent-canvas: var(--eds-color-accent-1);
+  --eds-color-bg-accent-surface: var(--eds-color-accent-2);
+  --eds-color-bg-accent-fill-muted-default: var(--eds-color-accent-3);
+  --eds-color-bg-accent-fill-muted-hover: var(--eds-color-accent-4);
+  --eds-color-bg-accent-fill-muted-active: var(--eds-color-accent-5);
+  --eds-color-bg-accent-fill-emphasis-default: var(--eds-color-accent-9);
+  --eds-color-bg-accent-fill-emphasis-hover: var(--eds-color-accent-10);
+  --eds-color-bg-accent-fill-emphasis-active: var(--eds-color-accent-11);
+  --eds-color-bg-success-canvas: var(--eds-color-success-1);
+  --eds-color-bg-success-surface: var(--eds-color-success-2);
+  --eds-color-bg-success-fill-muted-default: var(--eds-color-success-3);
+  --eds-color-bg-success-fill-muted-hover: var(--eds-color-success-4);
+  --eds-color-bg-success-fill-muted-active: var(--eds-color-success-5);
+  --eds-color-bg-success-fill-emphasis-default: var(--eds-color-success-9);
+  --eds-color-bg-success-fill-emphasis-hover: var(--eds-color-success-10);
+  --eds-color-bg-success-fill-emphasis-active: var(--eds-color-success-11);
+  --eds-color-bg-info-canvas: var(--eds-color-info-1);
+  --eds-color-bg-info-surface: var(--eds-color-info-2);
+  --eds-color-bg-info-fill-muted-default: var(--eds-color-info-3);
+  --eds-color-bg-info-fill-muted-hover: var(--eds-color-info-4);
+  --eds-color-bg-info-fill-muted-active: var(--eds-color-info-5);
+  --eds-color-bg-info-fill-emphasis-default: var(--eds-color-info-9);
+  --eds-color-bg-info-fill-emphasis-hover: var(--eds-color-info-10);
+  --eds-color-bg-info-fill-emphasis-active: var(--eds-color-info-11);
+  --eds-color-bg-warning-canvas: var(--eds-color-warning-1);
+  --eds-color-bg-warning-surface: var(--eds-color-warning-2);
+  --eds-color-bg-warning-fill-muted-default: var(--eds-color-warning-3);
+  --eds-color-bg-warning-fill-muted-hover: var(--eds-color-warning-4);
+  --eds-color-bg-warning-fill-muted-active: var(--eds-color-warning-5);
+  --eds-color-bg-warning-fill-emphasis-default: var(--eds-color-warning-9);
+  --eds-color-bg-warning-fill-emphasis-hover: var(--eds-color-warning-10);
+  --eds-color-bg-warning-fill-emphasis-active: var(--eds-color-warning-11);
+  --eds-color-bg-danger-canvas: var(--eds-color-danger-1);
+  --eds-color-bg-danger-surface: var(--eds-color-danger-2);
+  --eds-color-bg-danger-fill-muted-default: var(--eds-color-danger-3);
+  --eds-color-bg-danger-fill-muted-hover: var(--eds-color-danger-4);
+  --eds-color-bg-danger-fill-muted-active: var(--eds-color-danger-5);
+  --eds-color-bg-danger-fill-emphasis-default: var(--eds-color-danger-9);
+  --eds-color-bg-danger-fill-emphasis-hover: var(--eds-color-danger-10);
+  --eds-color-bg-danger-fill-emphasis-active: var(--eds-color-danger-11);
+  --eds-color-border-neutral-subtle: var(--eds-color-neutral-6);
+  --eds-color-border-neutral-medium: var(--eds-color-neutral-7);
+  --eds-color-border-neutral-strong: var(--eds-color-neutral-8);
+  --eds-color-border-accent-subtle: var(--eds-color-accent-6);
+  --eds-color-border-accent-medium: var(--eds-color-accent-7);
+  --eds-color-border-accent-strong: var(--eds-color-accent-8);
+  --eds-color-border-success-subtle: var(--eds-color-success-6);
+  --eds-color-border-success-medium: var(--eds-color-success-7);
+  --eds-color-border-success-strong: var(--eds-color-success-8);
+  --eds-color-border-info-subtle: var(--eds-color-info-6);
+  --eds-color-border-info-medium: var(--eds-color-info-7);
+  --eds-color-border-info-strong: var(--eds-color-info-8);
+  --eds-color-border-warning-subtle: var(--eds-color-warning-6);
+  --eds-color-border-warning-medium: var(--eds-color-warning-7);
+  --eds-color-border-warning-strong: var(--eds-color-warning-8);
+  --eds-color-border-danger-subtle: var(--eds-color-danger-6);
+  --eds-color-border-danger-medium: var(--eds-color-danger-7);
+  --eds-color-border-danger-strong: var(--eds-color-danger-8);
+  --eds-color-text-neutral-subtle: var(--eds-color-neutral-12); /** Used for text and icons */
+  --eds-color-text-neutral-strong: var(--eds-color-neutral-13); /** Used for text and icons */
+  --eds-color-text-neutral-subtle-on-emphasis: var(--eds-color-neutral-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-neutral-strong-on-emphasis: var(--eds-color-neutral-15); /** Text or icons against colored backgrounds */
+  --eds-color-text-accent-subtle: var(--eds-color-accent-12); /** Used for text and icons */
+  --eds-color-text-accent-strong: var(--eds-color-accent-13); /** Used for text and icons */
+  --eds-color-text-accent-subtle-on-emphasis: var(--eds-color-accent-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-accent-strong-on-emphasis: var(--eds-color-accent-15); /** Text or icons against colored backgrounds */
+  --eds-color-text-success-subtle: var(--eds-color-success-12); /** Used for text and icons */
+  --eds-color-text-success-strong: var(--eds-color-success-13); /** Used for text and icons */
+  --eds-color-text-success-subtle-on-emphasis: var(--eds-color-success-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-success-strong-on-emphasis: var(--eds-color-success-15); /** Text or icons against colored backgrounds */
+  --eds-color-text-info-subtle: var(--eds-color-info-12); /** Used for text and icons */
+  --eds-color-text-info-strong: var(--eds-color-info-13); /** Used for text and icons */
+  --eds-color-text-info-subtle-on-emphasis: var(--eds-color-info-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-info-strong-on-emphasis: var(--eds-color-info-15); /** Text or icons against colored backgrounds */
+  --eds-color-text-warning-subtle: var(--eds-color-warning-12); /** Used for text and icons */
+  --eds-color-text-warning-strong: var(--eds-color-warning-13); /** Used for text and icons */
+  --eds-color-text-warning-subtle-on-emphasis: var(--eds-color-warning-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-warning-strong-on-emphasis: var(--eds-color-warning-15); /** Text or icons against colored backgrounds */
+  --eds-color-text-danger-subtle: var(--eds-color-danger-12); /** Used for text and icons */
+  --eds-color-text-danger-strong: var(--eds-color-danger-13); /** Used for text and icons */
+  --eds-color-text-danger-subtle-on-emphasis: var(--eds-color-danger-14); /** Text or icons against colored backgrounds */
+  --eds-color-text-danger-strong-on-emphasis: var(--eds-color-danger-15); /** Text or icons against colored backgrounds */
+}

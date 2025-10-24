@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1](https://github.com/equinor/design-system/compare/eds-utils@1.0.0...eds-utils@v1.0.1) (2025-10-16)
+
+
+### 🔧 Chores
+
+* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+
+## [1.0.0] - 2025-10-09
+
+This release marks the utilities package as **production-ready**. The v1.0.0 milestone signals API stability and our commitment to semantic versioning.
+
+### BREAKING CHANGES ⚠️
+
+- **React 19 Required**: This version requires React >= 19.0.0. Previous versions are not compatible with React 19, and this version is not compatible with React 18.
+
+### Changed
+
+- chore: React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
+
+## [0.9.0] - 2025-09-11
+
+### Added
+
+- ✨ Added a Firefox detection util by @pomfrida in https://github.com/equinor/design-system/pull/3957
+
+### Changed
+
+- 🔥 Remove individual package lockfiles by @pomfrida in https://github.com/equinor/design-system/pull/3930
+- ⬆️ Upgrade dependencies in all packages by @pomfrida in https://github.com/equinor/design-system/pull/3933
+- ⬆️ Upgrade pnpm to v10 and node to v22 by @torleifhalseth in https://github.com/equinor/design-system/pull/3964
+
 ## [0.8.8] - 2025-08-27
 
 ### Changed

@@ -1,8 +1,8 @@
 {
-  "Background": {
-    "Canvas": {
+  "Bg": {
+    "Floating": {
       "$type": "color",
-      "$value": "{background-canvas}",
+      "$value": "{bg-floating}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -11,46 +11,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-canvas)"
-          }
-        }
-      }
-    },
-    "Surface": {
-      "$type": "color",
-      "$value": "{background-surface}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-color-background-surface)"
-          }
-        }
-      }
-    },
-    "Elevated": {
-      "$type": "color",
-      "$value": "{background-elevated}",
-      "$description": "",
-      "$extensions": {
-        "com.figma": {
-          "hiddenFromPublishing": false,
-          "scopes": [
-            "ALL_SCOPES"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-color-background-elevated)"
+            "WEB": "var(--eds-color-bg-floating)"
           }
         }
       }
     },
     "Backdrop": {
       "$type": "color",
-      "$value": "{background-backdrop}",
+      "$value": "{bg-backdrop}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -59,7 +27,23 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-backdrop)"
+            "WEB": "var(--eds-color-bg-backdrop)"
+          }
+        }
+      }
+    },
+    "Input": {
+      "$type": "color",
+      "$value": "{bg-input}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-bg-input)"
           }
         }
       }

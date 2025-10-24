@@ -1,0 +1,355 @@
+# Trigger Package Publishing Workflow
+#
+# This workflow automatically publishes packages to npm after a release PR is merged (release_please.yml).
+# It detects which packages had version changes and triggers the appropriate publish workflows.
+#
+# Flow:
+# 1. Release PR is merged → this workflow runs
+# 2. Checks which package versions changed in .release-please-manifest.json
+# 3. Triggers individual publish workflows only for changed packages
+# 4. Each publish workflow handles: building, testing, npm publish, and Storybook deployment
+
+name: Trigger Package Publishing
+
+# Trigger: Runs when a PR is closed to main, and includes changes in .release-please-manifest.json
+# Release Please updates this file on every version bump, so we use it to detect release PR merges
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths:
+      - '.github/release-please-manifest.json'
+
+# Required permissions
+permissions:
+  contents: read # Needed to read repository content and check file changes
+  actions: write # Needed to trigger other workflows via gh CLI
+
+jobs:
+  # Job 0: Validate that this is actually a merged release PR
+  # This job acts as a gate-keeper to provide clear feedback when workflow is skipped
+  validate-release:
+    runs-on: ubuntu-latest
+    outputs:
+      should-publish: ${{ steps.validate.outputs.should-publish }}
+    steps:
+      - name: Validate PR status
+        id: validate
+        run: |
+          # Check if PR was merged (not just closed)
+          if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
+            echo "should-publish=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check if this is a release PR (title contains "chore: release")
+          if [[ "${{ github.event.pull_request.title }}" != *"chore: release"* ]]; then
+            echo "should-publish=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # All validation checks passed
+          echo "should-publish=true" >> $GITHUB_OUTPUT
+
+  # Job 1: Determine which packages need to be published
+  # Checks the release-please-manifest.json to see which packages had version changes
+  check-releases:
+    needs: validate-release
+    if: needs.validate-release.outputs.should-publish == 'true'
+    runs-on: ubuntu-latest
+    # Expose outputs so downstream jobs can check which packages changed
+    outputs:
+      core-react: ${{ steps.check.outputs.core-react }}
+      lab-react: ${{ steps.check.outputs.lab-react }}
+      data-grid-react: ${{ steps.check.outputs.data-grid-react }}
+      icons: ${{ steps.check.outputs.icons }}
+      tokens: ${{ steps.check.outputs.tokens }}
+
+    steps:
+      # Checkout the repository - we only need the current state
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Fetch last 2 commits to compare
+
+      # Check which packages had version changes in release-please-manifest.json
+      # This is more reliable than checking package.json files directly
+      - name: Check which packages changed
+        id: check
+        run: |
+          echo "## 📝 Detecting Package Changes" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Analyzing changes in .release-please-manifest.json" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Get the diff of the manifest file from the merge commit
+          MANIFEST_DIFF=$(git diff HEAD^ HEAD -- .github/release-please-manifest.json)
+
+          echo "### Manifest changes:" >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          echo "$MANIFEST_DIFF" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Package detection results:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Check eds-core-react
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-core-react":'; then
+            echo "core-react=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-core-react changed"
+            echo "- ✅ **eds-core-react** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "core-react=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-core-react unchanged"
+            echo "- ⏭️ **eds-core-react** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check eds-lab-react
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-lab-react":'; then
+            echo "lab-react=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-lab-react changed"
+            echo "- ✅ **eds-lab-react** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "lab-react=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-lab-react unchanged"
+            echo "- ⏭️ **eds-lab-react** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check eds-data-grid-react
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-data-grid-react":'; then
+            echo "data-grid-react=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-data-grid-react changed"
+            echo "- ✅ **eds-data-grid-react** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "data-grid-react=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-data-grid-react unchanged"
+            echo "- ⏭️ **eds-data-grid-react** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check eds-icons
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-icons":'; then
+            echo "icons=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-icons changed"
+            echo "- ✅ **eds-icons** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "icons=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-icons unchanged"
+            echo "- ⏭️ **eds-icons** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check eds-tokens
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-tokens":'; then
+            echo "tokens=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-tokens changed"
+            echo "- ✅ **eds-tokens** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "tokens=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-tokens unchanged"
+            echo "- ⏭️ **eds-tokens** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📝 **Note:** eds-utils is published as part of eds-core-react" >> $GITHUB_STEP_SUMMARY
+
+  # Job 2: Trigger core-react publish workflow
+  # Only runs if core-react package.json was changed
+  trigger-core-react:
+    needs: check-releases
+    if: needs.check-releases.outputs.core-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger core-react publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for gh CLI authentication
+        run: |
+          # Use GitHub CLI to trigger the publish workflow
+          gh workflow run publish_core_react.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest \
+            -f environment=production
+        # Allow other packages to continue even if this one fails
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Core React Publish Failed::Failed to trigger publish workflow for @equinor/eds-core-react"
+          echo "❌ Failed to trigger core-react publish workflow" >> $GITHUB_STEP_SUMMARY
+
+  # Job 3: Trigger lab-react publish workflow
+  # Only runs if lab-react package.json was changed
+  trigger-lab-react:
+    needs: check-releases
+    if: needs.check-releases.outputs.lab-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger lab-react publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_lab.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest \
+            -f environment=production
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Lab React Publish Failed::Failed to trigger publish workflow for @equinor/eds-lab-react"
+          echo "❌ Failed to trigger lab-react publish workflow" >> $GITHUB_STEP_SUMMARY
+
+  # Job 4: Trigger data-grid-react publish workflow
+  # Only runs if data-grid-react package.json was changed
+  trigger-data-grid-react:
+    needs: check-releases
+    if: needs.check-releases.outputs.data-grid-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger data-grid-react publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_data_grid.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest \
+            -f environment=production
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Data Grid React Publish Failed::Failed to trigger publish workflow for @equinor/eds-data-grid-react"
+          echo "❌ Failed to trigger data-grid-react publish workflow" >> $GITHUB_STEP_SUMMARY
+
+  # Job 5: Trigger icons publish workflow
+  # Only runs if icons package.json was changed
+  trigger-icons:
+    needs: check-releases
+    if: needs.check-releases.outputs.icons == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger icons publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_icons.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Icons Publish Failed::Failed to trigger publish workflow for @equinor/eds-icons"
+          echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
+
+  # Job 6: Trigger tokens publish workflow
+  # Only runs if tokens package.json was changed
+  trigger-tokens:
+    needs: check-releases
+    if: needs.check-releases.outputs.tokens == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger tokens publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_tokens.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Tokens Publish Failed::Failed to trigger publish workflow for @equinor/eds-tokens"
+          echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
+
+  # Job 7: Summary report of all publish triggers
+  # Runs independently after check-releases completes
+  # Provides a clear overview of which packages were triggered for publishing
+  publish-summary:
+    needs:
+      - validate-release
+      - check-releases
+    # Always run this job, even if some trigger jobs failed or were skipped
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate summary report
+        run: |
+          # Check if workflow was skipped due to validation failure
+          if [ "${{ needs.validate-release.outputs.should-publish }}" != "true" ]; then
+            echo "## ⏭️ Publish Workflow Skipped" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
+              echo "**Reason:** PR was closed without merging." >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "💡 To publish packages, re-open and merge the release PR." >> $GITHUB_STEP_SUMMARY
+            else
+              echo "**Reason:** PR is not a release PR (title must contain 'chore: release')." >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "**PR Title:** \`${{ github.event.pull_request.title }}\`" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            exit 0
+          fi
+
+          # Normal summary for successful runs
+          echo "## 📦 Package Publish Trigger Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This workflow triggered publish workflows for packages that had version changes." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Results:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Check each package's trigger result based on what was detected
+          if [ "${{ needs.check-releases.outputs.core-react }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-core-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-core-react**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.check-releases.outputs.lab-react }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-lab-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-lab-react**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.check-releases.outputs.data-grid-react }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-data-grid-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-data-grid-react**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.check-releases.outputs.icons }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-icons**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-icons**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.check-releases.outputs.tokens }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "💡 **Note:** This workflow triggers publish workflows for changed packages. Check individual publish workflow runs for actual publishing status." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📝 **eds-utils** is published as part of eds-core-react and does not have a separate publish workflow." >> $GITHUB_STEP_SUMMARY

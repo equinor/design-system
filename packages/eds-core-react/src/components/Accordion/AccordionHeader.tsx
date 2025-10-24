@@ -144,9 +144,12 @@ export type AccordionHeaderProps = {
 } & AccordionProps &
   HTMLAttributes<HTMLButtonElement>
 
-type AccordionChild = {
+type AccordionChild = ReactElement<{
+  isExpanded?: boolean
+  disabled?: boolean
+}> & {
   type: { displayName: string }
-} & ReactElement
+}
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
   function AccordionHeader(

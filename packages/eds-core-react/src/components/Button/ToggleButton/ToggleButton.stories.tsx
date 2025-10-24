@@ -1,4 +1,4 @@
-import { useState, ComponentProps } from 'react'
+import { useState, ComponentProps, type JSX } from 'react'
 import { Button, ToggleButtonProps, Icon, Tooltip } from '../../..'
 import {
   save,
@@ -9,9 +9,8 @@ import {
   alarm,
   timer,
 } from '@equinor/eds-icons'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../../.storybook/components'
-import page from './ToggleButton.docs.mdx'
 
 const meta: Meta<typeof Button.Toggle> = {
   title: 'Inputs/Button/Toggle',
@@ -21,7 +20,6 @@ const meta: Meta<typeof Button.Toggle> = {
   },
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },

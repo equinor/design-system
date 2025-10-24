@@ -8,6 +8,8 @@ import {
   cloneElement,
 } from 'react'
 import type { AccordionProps } from './Accordion.types'
+import type { AccordionHeaderProps } from './AccordionHeader'
+import type { AccordionPanelProps } from './AccordionPanel'
 
 export type AccordionItemProps = {
   index?: number
@@ -40,38 +42,43 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
     ref,
   ) {
     const [expanded, setExpanded] = useState(isExpanded)
-    const controlled = onExpandedChange != undefined
+    const controlled = onExpandedChange !== undefined
     const activeExpandedState = controlled ? isExpanded : expanded
 
     const toggleExpanded = () => {
+      if (disabled) return
+
       if (controlled) {
-        onExpandedChange(!isExpanded)
+        onExpandedChange?.(!isExpanded)
       } else {
         setExpanded(!expanded)
       }
     }
 
-    const Children = ReactChildren.map(children, (child, childIndex) => {
-      const headerId = `${accordionId}-header-${index + 1}`
-      const panelId = `${accordionId}-panel-${index + 1}`
+    const processedChildren = ReactChildren.map(
+      children,
+      (child, childIndex) => {
+        const headerId = `${accordionId}-header-${index + 1}`
+        const panelId = `${accordionId}-panel-${index + 1}`
 
-      return childIndex === 0
-        ? cloneElement(child as ReactElement, {
-            isExpanded: activeExpandedState,
-            toggleExpanded,
-            id: headerId,
-            panelId,
-            headerLevel,
-            chevronPosition,
-            parentIndex: index,
-            disabled,
-          })
-        : cloneElement(child as ReactElement, {
-            hidden: !activeExpandedState,
-            id: panelId,
-            headerId,
-          })
-    })
+        return childIndex === 0
+          ? cloneElement(child as ReactElement<AccordionHeaderProps>, {
+              isExpanded: activeExpandedState,
+              toggleExpanded,
+              id: headerId,
+              panelId,
+              headerLevel,
+              chevronPosition,
+              parentIndex: index,
+              disabled,
+            })
+          : cloneElement(child as ReactElement<AccordionPanelProps>, {
+              hidden: !activeExpandedState,
+              id: panelId,
+              headerId,
+            })
+      },
+    )
 
     useEffect(() => {
       if (!controlled) {
@@ -81,7 +88,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 
     return (
       <div {...props} ref={ref}>
-        {Children}
+        {processedChildren}
       </div>
     )
   },

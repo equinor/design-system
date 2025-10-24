@@ -6,6 +6,8 @@ import { DataTable } from "@/app/_components/DataTable";
 import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
+import { Menu } from "@/app/_components/Menu";
+import { Heading } from "./Typography";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -15,12 +17,15 @@ type Props = {
 export function Dashboard({ styles, Chip, ...rest }: Props) {
   const tabs = [
     { id: "projects", label: "Projects", isCurrent: false },
-    { id: "people", label: "People (current page)", isCurrent: true },
+    { id: "people", label: "People", isCurrent: true },
     { id: "locations", label: "Locations", isCurrent: false },
   ];
 
   return (
-    <div className={`flex mx-auto min-h-svh flex-col ${styles.app}`} {...rest}>
+    <div
+      className={`flex mx-auto min-h-svh flex-col ${styles.dashboard}`}
+      {...rest}
+    >
       <TopBar
         className={`self-stretch h-[57px] pl-2.5 pr-3.5 items-center justify-between gap-14 inline-flex ${styles["top-bar"]}`}
         subtitle="Application name – Subtitle"
@@ -36,8 +41,15 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           iconClass={styles["sidebar-link__icon"]}
           buttonClass={styles["button--ghost-icon"]}
         />
+        <Menu
+          id="sidebar-menu"
+          anchorName="sidebar-menu-anchor"
+          className={styles["menu"]}
+          menuItemClassName={styles["menu-item"]}
+          menuItemActiveClassName={styles["menu-item--active"]}
+        />
 
-        <div className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">
+        <main className="inline-flex flex-col items-start self-stretch justify-start gap-6 p-8 grow shrink basis-0">
           <TabBar
             className="justify-start items-start flex"
             tabs={tabs}
@@ -45,14 +57,20 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             currentTabClass={styles["tab--current"]}
           />
 
-          <div className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
-            <div className={`text-2xl leading-7 heading ${styles.heading}`}>
+          <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
+            <Heading
+              level={1}
+              size="5xl"
+              isBaselineAligned={false}
+              className={styles.heading}
+            >
               People
-            </div>
-          </div>
+            </Heading>
+          </header>
 
           <DataTable
-            className={`self-stretch justify-start items-start gap-0.5 inline-flex ${styles["table"]}`}
+            className={`w-full table-fixed ${styles["table"]}`}
+            trClass={styles["tr"]}
             thClass={styles["th"]}
             activeThClass={styles["th--active"]}
             tdClass={styles["td"]}
@@ -66,7 +84,6 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             chipDangerClass={styles["chip--danger"]}
             chipSuccessClass={styles["chip--success"]}
           />
-
           <ButtonGroup
             className="inline-flex items-center self-stretch justify-end h-9"
             // 💰 Add the data-color-appearance attribute to add colour
@@ -94,11 +111,11 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             >
               Save
             </PrimaryButton>
-            <SecondaryButton className={styles["button--outlined"]}>
+            <SecondaryButton className={styles["button--secondary"]}>
               Cancel
             </SecondaryButton>
           </ButtonGroup>
-        </div>
+        </main>
       </div>
     </div>
   );

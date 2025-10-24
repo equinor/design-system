@@ -107,15 +107,6 @@ export const localStorageUtils = {
   setColorFormat: (value: ColorFormat) =>
     setItem(STORAGE_KEYS.COLOR_FORMAT, value),
 
-  // Clear all stored data
-  clearAll: () => {
-    if (typeof window === 'undefined') return
-
-    Object.values(STORAGE_KEYS).forEach((key) => {
-      localStorage.removeItem(key)
-    })
-  },
-
   // Clear only configuration-related data (colors, Gaussian parameters, lightness values)
   clearConfiguration: () => {
     if (typeof window === 'undefined') return

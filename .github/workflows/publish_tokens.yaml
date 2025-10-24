@@ -5,6 +5,10 @@ on:
       npm-tag:
         description: 'Tag for npm package (next | latest)'
         required: true
+        type: choice
+        options:
+          - next
+          - latest
         default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -38,9 +42,18 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-production-tokens
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Build packages
         id: build-packages
-        run: node_modules/.bin/pnpm run build
+        run: pnpm run build
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
@@ -61,11 +74,20 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-production-tokens
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Publish to npm
         id: publish-to-npm
         run: |
-          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
-          node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+          pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:

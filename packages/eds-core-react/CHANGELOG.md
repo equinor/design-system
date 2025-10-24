@@ -5,22 +5,78 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.1...eds-core-react@v1.0.2) (2025-10-22)
+
+
+### 🐛 Fixed
+
+* **eds-core-react:** 🐛 Update Tooltip component to use mergeRefs ([#4130](https://github.com/equinor/design-system/issues/4130)) ([a7f42ce](https://github.com/equinor/design-system/commit/a7f42cee4e1287bcfba90007ca7544dfef18bf12))
+
+
+### 🔧 Chores
+
+* Rename follow-up ([#4129](https://github.com/equinor/design-system/issues/4129)) ([cae9fc0](https://github.com/equinor/design-system/commit/cae9fc0b3d32394da8d89ddb09c747142dd66f38))
+
+## [1.0.1](https://github.com/equinor/design-system/compare/eds-core-react@1.0.0...eds-core-react@v1.0.1) (2025-10-16)
+
+
+### 🐛 Fixed
+
+* **eds-core-react:** sidebar links not showing tooltip when sidebar is collapsed ([#4068](https://github.com/equinor/design-system/issues/4068)) ([aa2622a](https://github.com/equinor/design-system/commit/aa2622aa6cd278560c0fa1b89203c336775f0f65))
+
+
+### 🔧 Chores
+
+* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+
+## [1.0.0] - 2025-10-09
+
+This release marks a significant milestone: **EDS is now production-ready**. We're moving from v0 to v1 to signal stability and our commitment to semantic versioning going forward.
+
+### BREAKING CHANGES ⚠️
+
+- **React 19 Required**: This version requires React >= 19.0.0 and React DOM >= 19.0.0. Previous versions of EDS are not compatible with React 19, and this version is not compatible with React 18.
+
+### Changed
+
+- chore: React 19 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/4007
+
+## [0.49.0] - 2025-09-11
+
+### Added
+
+- ✨ Always show "add new option" in Autocomplete when onAddNewOption is provided by @FredrikMWold in https://github.com/equinor/design-system/pull/3924
+
+### Fixed
+
+- 🐛 Autocomplete - Don't call onOptionsChange when clicking "Add new" by @FredrikMWold in https://github.com/equinor/design-system/pull/3932
+- 🐛 Table - Fix Firefox table header wrapping issue by @pomfrida in https://github.com/equinor/design-system/pull/3957
+- 🐛 Tabs documentation type mismatch - update onChange parameter from number to number | string by @Copilot @torleifhalseth in https://github.com/equinor/design-system/pull/3972
+
+### Changed
+
+- 📝 Banner - clarify complex content usage patterns and improve examples by @pomfrida in https://github.com/equinor/design-system/pull/3961
+- 🔥 Remove individual package lockfiles by @pomfrida in https://github.com/equinor/design-system/pull/3930
+- ⬆️ Upgrade dependencies in all packages by @pomfrida in https://github.com/equinor/design-system/pull/3933
+- ⬆️ Upgrade pnpm to v10 and node to v22 by @torleifhalseth in https://github.com/equinor/design-system/pull/3964
+- ⬆️ Storybook v9 upgrade by @pomfrida in https://github.com/equinor/design-system/pull/3976
+
 ## [0.48.0] - 2025-08-27
 
-## Added
+### Added
 
 - ✨ `Tabs` call onChange with provided value if present by @FredrikMWold in https://github.com/equinor/design-system/pull/3893
 - ✨ add disabled prop to `Tooltip` by @FredrikMWold in https://github.com/equinor/design-system/pull/3908
 - ✨`Autocomplete` allow option-label prop to be used without type of object by @magnh in https://github.com/equinor/design-system/pull/3915
 
-## Fixed
+### Fixed
 
 - 🐛 `DatePicker` Disable back button in year range based on year, not month by @FredrikMWold in https://github.com/equinor/design-system/pull/3853
 - 🐛 `Tabs` now allow 'null' value as child element 'Tabs.List' and 'Tabs.Panel' by @AndreasPresthammer in https://github.com/equinor/design-system/pull/3878
 - 🐛 `Autocomplete` prevent `onAddNewOption` from being called twice in Strict Mode by @FredrikMWold in https://github.com/equinor/design-system/pull/3894
 - 🐛`Table` export table row with pascal case by @magnh in https://github.com/equinor/design-system/pull/3889
 
-## Changed
+### Changed
 
 - 📝 Added security policy info (#3856) by @torleifhalseth in https://github.com/equinor/design-system/pull/3857
 - 📝 Add comprehensive guidelines for project standards and component creation by @torleifhalseth in https://github.com/equinor/design-system/pull/3845
@@ -33,18 +89,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.47.0] - 2025-06-13
 
-## Fixed
+### Fixed
 
 - 🐛 `Autocomplete`: Improvements to placeholder text by @FredrikMWold in https://github.com/equinor/design-system/pull/3813
 - 🐛 `Menu`: Ensure onClose is called when a MenuItem without onClick is clicked by @FredrikMWold in https://github.com/equinor/design-system/pull/3828
 
-## Added
+### Added
 
 - ✨`Autocomplete`: Add support for adding new options in Autocomplete by @FredrikMWold in https://github.com/equinor/design-system/pull/3833
 - 📝 `Autocomplete`: story example with the new totalOptions prop by @pomfrida in https://github.com/equinor/design-system/pull/3817
 - 📝 ♿ ✅ `Autocomplete`: enhance Autocomplete onAddNewOption - stories, tests, and accessibility by @pomfrida in https://github.com/equinor/design-system/pull/3841
 
-## BREAKING CHANGES ⚠️
+### BREAKING CHANGES ⚠️
 
 - ⬆️ `Autocomplete`: Upgraded TanStack Virtual dependency by @pomfrida in https://github.com/equinor/design-system/pull/3824
   Virtual items may not render immediately in test environments

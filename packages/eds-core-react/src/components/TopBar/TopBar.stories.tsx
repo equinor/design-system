@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { TopBar, Icon, Search, TopbarProps, Typography } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
-import page from './TopBar.docs.mdx'
+import { StoryFn, Meta } from '@storybook/react-vite'
 
 import {
   account_circle,
@@ -10,6 +9,8 @@ import {
   fullscreen,
   apps,
 } from '@equinor/eds-icons'
+
+import type { JSX } from 'react'
 
 const meta: Meta<typeof TopBar> = {
   title: 'Navigation/TopBar',
@@ -20,9 +21,7 @@ const meta: Meta<typeof TopBar> = {
     Actions: TopBar.Actions,
   },
   parameters: {
-    docs: {
-      page,
-    },
+    docs: {},
   },
 }
 

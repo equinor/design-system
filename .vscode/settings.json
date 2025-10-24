@@ -29,7 +29,11 @@
     "eds-config-custom",
     "eds-tokens-sync",
     "eds-tokens-build",
-    "eds-color-palette-generator"
+    "eds-color-palette-generator",
+    "design-system-docs",
+    "github",
+    "config",
+    "eds-demo"
   ],
   "cSpell.words": [
     "APCA",

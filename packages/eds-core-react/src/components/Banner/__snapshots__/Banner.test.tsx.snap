@@ -97,3 +97,94 @@ exports[`Banner Matches snapshot 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Banner with complex content Matches snapshot with complex content 1`] = `
+<DocumentFragment>
+  .c0 {
+  background: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.14);
+}
+
+.c4 {
+  border: none;
+  background-color: var(--eds_ui_background__light, rgba(247, 247, 247, 1));
+  margin-top: 16px;
+  margin-bottom: calc(16px - 1px);
+  height: 1px;
+}
+
+.c3 {
+  transform: none;
+}
+
+.c2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background-color: var(--eds_infographic_primary__moss_green_13, rgba(222, 237, 238, 1));
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+}
+
+.c1 {
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  display: grid;
+  grid-template-columns: min-content 1fr auto;
+  align-items: center;
+  background-color: var(--eds_ui_background__default, rgba(255, 255, 255, 1));
+}
+
+.c5 {
+  margin: 0;
+  height: 2px;
+}
+
+<div
+    class="c0"
+    role="alert"
+  >
+    <div
+      class="c1"
+    >
+      <span
+        class="c2"
+      >
+        <svg
+          aria-hidden="true"
+          class="c3"
+          fill="var(--eds_infographic_primary__moss_green_100, rgba(0, 112, 121, 1))"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class=""
+            clip-rule="evenodd"
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div>
+        <strong>
+          Important update
+        </strong>
+        <p>
+          Complex content with HTML elements
+        </p>
+      </div>
+    </div>
+    <hr
+      class="c4 c5"
+    />
+  </div>
+</DocumentFragment>
+`;

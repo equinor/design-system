@@ -48,9 +48,9 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 | Package | Status | Version |
 |--|--|--|
-| [Core React](https://github.com/equinor/design-system/tree/develop/packages/eds-core-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react) |
-| [Tokens](https://github.com/equinor/design-system/tree/develop/packages/eds-tokens) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-tokens)](https://www.npmjs.com/package/@equinor/eds-tokens)|
-| [Icons](https://github.com/equinor/design-system/tree/develop/packages/eds-icons) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-icons)](https://www.npmjs.com/package/@equinor/eds-icons)|
+| [Core React](https://github.com/equinor/design-system/tree/main/packages/eds-core-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react) |
+| [Tokens](https://github.com/equinor/design-system/tree/main/packages/eds-tokens) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-tokens)](https://www.npmjs.com/package/@equinor/eds-tokens)|
+| [Icons](https://github.com/equinor/design-system/tree/main/packages/eds-icons) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-icons)](https://www.npmjs.com/package/@equinor/eds-icons)|
 
 
 

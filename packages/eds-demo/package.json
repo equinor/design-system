@@ -6,21 +6,25 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:update": "playwright test --update-snapshots"
   },
   "dependencies": {
+    "@equinor/eds-tokens": "workspace:*",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.5.2",
     "@types/mdx": "^2.0.13",
     "github-markdown-css": "^5.8.1",
     "next": "^15.5.2",
-    "react": "^19",
-    "react-dom": "^19",
-    "remark-gfm": "^4.0.1",
-    "@equinor/eds-tokens": "workspace:*"
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^24",
     "@types/react": "^19",

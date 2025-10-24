@@ -6,8 +6,6 @@ import {
   useCallback,
   ReactElement,
   HTMLAttributes,
-  ButtonHTMLAttributes,
-  RefAttributes,
   cloneElement,
   Children as ReactChildren,
   isValidElement,
@@ -60,14 +58,6 @@ const StyledTabList = styled.div.attrs(
 
 export type TabListProps = HTMLAttributes<HTMLDivElement>
 
-type TabChild = {
-  disabled?: boolean
-  $index?: number
-  value?: number | string
-} & ButtonHTMLAttributes<HTMLButtonElement> &
-  RefAttributes<HTMLButtonElement> &
-  ReactElement
-
 const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   { children = [], ...props },
   ref,
@@ -81,7 +71,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     tabsFocused,
   } = useContext(TabsContext)
 
-  const currentTab = useRef<number>()
+  const currentTab = useRef<number>(0)
 
   const [arrowNavigating, setArrowNavigating] = useState(false)
   const selectedTabRef = useCallback(
@@ -102,20 +92,31 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
       if (!isValidElement(child)) {
         return null
       }
-      const tabChild = child as TabChild
-      const childProps = tabChild.props as TabChild
+
+      type ChildPropsWithRef = {
+        value?: string | number
+        disabled?: boolean
+        ref?: React.Ref<HTMLButtonElement>
+        [key: string]: unknown
+      }
+
+      const childProps = child.props as ChildPropsWithRef
       const controlledActive = childProps.value
       const isActive = controlledActive
         ? controlledActive === activeTab
         : $index === activeTab
 
-      const tabRef = isActive
-        ? mergeRefs<HTMLButtonElement>(tabChild.ref, selectedTabRef)
-        : tabChild.ref
+      const childRef = childProps?.ref || null
+      const tabRef =
+        isActive && childRef
+          ? mergeRefs<HTMLButtonElement>(childRef, selectedTabRef)
+          : isActive
+            ? selectedTabRef
+            : childRef
 
       if (isActive) currentTab.current = $index
 
-      return cloneElement(tabChild, {
+      return cloneElement(child, {
         id: `${tabsId}-tab-${$index + 1}`,
         'aria-controls': `${tabsId}-panel-${$index + 1}`,
         active: isActive,
@@ -125,14 +126,22 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
             controlledActive !== undefined ? controlledActive : $index,
           ),
         ref: tabRef,
-      })
+      } as Record<string, unknown>)
     }) ?? []
 
-  const focusableChildren: number[] = Tabs.filter((child: TabChild) => {
-    const childProps = child.props as TabChild
+  const focusableChildren: number[] = Tabs.filter((child: ReactElement) => {
+    type ChildPropsWithDisabled = {
+      disabled?: boolean
+      [key: string]: unknown
+    }
+    const childProps = child.props as ChildPropsWithDisabled
     return !childProps.disabled
-  }).map((child: TabChild) => {
-    const childProps = child.props as TabChild
+  }).map((child: ReactElement) => {
+    type ChildPropsWithIndex = {
+      $index?: number
+      [key: string]: unknown
+    }
+    const childProps = child.props as ChildPropsWithIndex
     return childProps.$index
   })
 

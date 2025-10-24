@@ -12,8 +12,8 @@ import {
   useEds,
 } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
-import { action } from '@storybook/addon-actions'
-import { Meta, StoryFn } from '@storybook/react'
+import { action } from 'storybook/actions'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { Column, ExpandedState, Row } from '@tanstack/react-table'
 import {
   CSSProperties,
@@ -22,9 +22,9 @@ import {
   useEffect,
   useRef,
   useState,
+  type JSX,
 } from 'react'
 import { EdsDataGrid } from './EdsDataGrid'
-import page from './EdsDataGrid.docs.mdx'
 import { EdsDataGridProps } from './EdsDataGridProps'
 import { FilterWrapper } from './components/FilterWrapper'
 import {
@@ -48,7 +48,6 @@ const meta: Meta<typeof EdsDataGrid<Photo>> = {
   component: EdsDataGrid,
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },

@@ -1,43 +1,25 @@
 # Use specific Node.js version for better reproducibility
-ARG NODE_VERSION=18.19.0-alpine3.18
-ARG PNPM_VERSION=9.15.0
+FROM docker.io/node:22.12.0-alpine AS build
 
-FROM node:${NODE_VERSION} AS base
 LABEL org.opencontainers.image.title="EDS Demo Application"
 LABEL org.opencontainers.image.description="Equinor Design System Demo Application"
 LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
 
-RUN npm install -g pnpm@${PNPM_VERSION}
-
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy workspace configuration files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml babel.config.cjs tsconfig.base.json ./
+# Install pnpm globally
+RUN npm install -g pnpm@10.15.0
 
-# Copy only package.json files for better Docker layer caching
-COPY packages/eds-demo/package.json ./packages/eds-demo/
-COPY packages/eds-tokens/package.json ./packages/eds-tokens/
-COPY packages/eds-tokens-build/package.json ./packages/eds-tokens-build/
-COPY packages/eds-tokens-sync/package.json ./packages/eds-tokens-sync/
+# Copy everything
+COPY . ./
 
-# Install dependencies with frozen lockfile and clean cache
-RUN pnpm install --frozen-lockfile && \
-    pnpm store prune
+# Install dependencies first
+RUN pnpm install --frozen-lockfile
 
-FROM base AS builder
-WORKDIR /app
+# Build CLI tools first, then reinstall to create binary links, then build variables & demo
+RUN pnpm --filter eds-demo run build
 
-# Copy dependencies and source code
-COPY --from=deps /app ./
-COPY packages/ ./packages/
-
-# Build variables & demo
-RUN pnpm run build:variables && \
-    pnpm --filter eds-demo run build
-
-FROM base AS runner
+FROM node:22.12.0-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \
@@ -46,14 +28,15 @@ ENV NODE_ENV=production \
     UID=12345 \
     NEXT_TELEMETRY_DISABLED=1
 
-# Create non-root user
-RUN addgroup -S "$USER" && \
+# Install pnpm and create non-root user
+RUN npm install -g pnpm@10.15.0 && \
+    addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini
 
 # Copy just the essential built files and node_modules
-COPY --from=builder --chown="$USER":"$USER" /app/packages/eds-demo ./packages/eds-demo
-COPY --from=builder --chown="$USER":"$USER" /app/node_modules ./node_modules
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-demo ./packages/eds-demo
+COPY --chown="$USER":"$USER" --from=build /app/node_modules ./node_modules
 
 USER "$UID"
 

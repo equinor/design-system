@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { InputWrapper, InputWrapperProps, Input } from '../..'
 
 const meta: Meta<typeof InputWrapper> = {

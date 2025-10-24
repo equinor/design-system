@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-data-grid-react",
-  "version": "0.9.0",
+  "version": "1.0.2",
   "description": "A feature-rich data-grid written in React, implementing the Equinor Design System",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
-    "test": "tsc -p tsconfig.spec.json && jest",
+    "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
     "storybook": "storybook dev -p 9000 --ci",
@@ -23,10 +23,10 @@
     "email": "fg_eds@equinor.com"
   },
   "peerDependencies": {
-    "@equinor/eds-core-react": "workspace:>=0.42.0",
-    "react": ">=16.8",
-    "react-dom": ">=16.8",
-    "styled-components": ">=5.1"
+    "react": "^19",
+    "react-dom": "^19",
+    "styled-components": "^6",
+    "@equinor/eds-core-react": "^1"
   },
   "dependencies": {
     "@equinor/eds-icons": "workspace:^",
@@ -39,15 +39,10 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@storybook/addon-a11y": "^8.6.14",
-    "@storybook/addon-actions": "^8.6.14",
-    "@storybook/addon-docs": "^8.6.14",
-    "@storybook/addon-essentials": "^8.6.14",
-    "@storybook/addon-links": "^8.6.14",
-    "@storybook/blocks": "^8.6.14",
-    "@storybook/preview-api": "^8.6.14",
-    "@storybook/react": "^8.6.14",
-    "@storybook/react-vite": "^8.6.14",
+    "@storybook/addon-a11y": "^9.1.5",
+    "@storybook/addon-docs": "^9.1.5",
+    "@storybook/addon-links": "^9.1.5",
+    "@storybook/react-vite": "^9.1.5",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "16.3.0",
@@ -55,22 +50,23 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^22.18.0",
     "@types/ramda": "^0.30.2",
-    "@types/react": "^18.3.24",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
     "babel-plugin-styled-components": "^2.1.4",
+    "eslint-plugin-storybook": "9.1.5",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-styled-components": "^7.2.0",
     "js-file-download": "^0.4.12",
     "postcss": "^8.5.6",
     "ramda": "^0.31.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",
     "rollup": "^4.50.0",
     "rollup-plugin-delete": "^2.2.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "^8.6.14",
+    "storybook": "^9.1.5",
     "styled-components": "6.1.19",
     "ts-jest": "29.4.0",
     "ts-node": "10.9.2",
@@ -81,7 +77,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/equinor/design-system",
-    "directory": "packages/eds-core-react"
+    "directory": "packages/eds-data-grid-react"
   },
   "bugs": {
     "url": "https://github.com/equinor/design-system/issues"

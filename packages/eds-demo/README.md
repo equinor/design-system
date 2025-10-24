@@ -20,6 +20,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Testing
+
+This project includes visual regression tests using Playwright.
+
+### Running Tests
+
+```bash
+# Run all visual tests
+npm run test:e2e
+
+# Run tests in UI mode (interactive)
+npm run test:e2e:ui
+
+# Update baseline screenshots
+npm run test:e2e:update
+```
+
+For more information about testing, see [tests/README.md](./tests/README.md).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

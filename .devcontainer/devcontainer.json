@@ -9,7 +9,7 @@
     // Append -bullseye or -buster to pin to an OS version.
     // Use -bullseye variants on local on arm64/Apple Silicon.
     "args": {
-      "VARIANT": "18-bullseye"
+      "VARIANT": "22-bullseye"
     }
   },
   "customizations": {
@@ -54,7 +54,8 @@
         "jock.svg",
         "github.vscode-pull-request-github",
         "ms-azuretools.vscode-bicep",
-        "bierner.markdown-mermaid"
+        "bierner.markdown-mermaid",
+        "bierner.github-markdown-preview"
       ]
     }
   },

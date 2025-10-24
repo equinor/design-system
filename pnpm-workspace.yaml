@@ -1,4 +1,7 @@
 packages:
-  - 'scripts/**'
-  - 'packages/**'
-  - 'apps/**'
+  - scripts/**
+  - packages/**
+  - apps/**
+
+onlyBuiltDependencies:
+  - lightningcss-cli

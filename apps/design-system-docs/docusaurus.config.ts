@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import { themes as prismThemes } from 'prism-react-renderer'
 import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
@@ -6,9 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic'
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Design System Documentation',
-  tagline: 'both for mobile and web',
-  favicon: 'img/equinor.png',
+  title: 'Equinor Design System',
+  // tagline: 'for mobile and web', Since there is no mobile components for now, we'll temporarily remove this line
+  favicon: 'img/eds-logo.svg',
 
   // // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   // future: {
@@ -16,7 +15,7 @@ const config: Config = {
   // },
 
   url: 'https://equinor.github.io',
-  baseUrl: '/design-system/',
+  baseUrl: '/',
 
   organizationName: 'equinor',
   projectName: 'design-system',
@@ -35,24 +34,62 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          exclude:
+            process.env.NODE_ENV === 'production' ||
+            process.env.NODE_ENV === 'development'
+              ? ['**/tone-guide/**']
+              : [],
           breadcrumbs: true,
           editUrl:
-            'https://github.com/equinor/design-system/tree/develop/apps/design-system-docs/shared',
+            'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: [
+            './src/css/custom.css',
+            // Add additional CSS files here
+          ],
         },
       } satisfies Preset.Options,
     ],
   ],
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        // Basic indexing
+        hashed: true,
+        indexDocs: true,
+        indexPages: true,
+        highlightSearchTermsOnTargetPage: true,
+        searchResultContextMaxLength: 50,
+
+        // Language and content
+        language: ['en'],
+        removeDefaultStopWordFilter: false,
+
+        // Advanced features
+        docsRouteBasePath: '/docs',
+
+        // UI customization
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        searchBarPosition: 'right',
+
+        // Performance
+        explicitSearchResultPath: false,
+        searchContextByPaths: [],
+      },
+    ],
+  ],
 
   themeConfig: {
-    image: 'img/equinor.png', //change to new eds social card
+    image: 'img/equinor.png',
     navbar: {
       title: 'Equinor Design System',
       logo: {
-        alt: 'Equinor hat Logo',
-        src: 'img/equinor.png',
+        alt: 'Equinor type Logo',
+        src: 'img/eds-logo.svg',
+        srcDark: 'img/eds-logo-dark.svg', // Dark mode logo
       },
 
       items: [
@@ -87,24 +124,29 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/equinor/design-system',
-          label: 'GitHub',
+          type: 'search',
           position: 'right',
         },
       ],
     },
     footer: {
-      style: 'dark',
-      logo: {
-        alt: 'Equinor Logo',
-        src: 'img/equinor.png',
-      },
       links: [
         {
-          title: 'Equinor',
+          items: [
+            {
+              to: 'https://www.figma.com/',
+              label: 'EDS Figma',
+              className: 'figma',
+            },
+            {
+              to: 'https://www.github.com/equinor/design-system',
+              label: 'EDS Github',
+              className: 'github',
+            },
+          ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Equinor.`,
+      copyright: `Equinor ${new Date().getFullYear()} `,
     },
     prism: {
       theme: prismThemes.github,

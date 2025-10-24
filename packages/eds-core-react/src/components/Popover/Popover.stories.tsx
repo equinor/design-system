@@ -25,7 +25,7 @@ import {
   turbine,
   waves,
 } from '@equinor/eds-icons'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import { Stack } from './../../../.storybook/components'
 import page from './Popover.docs.mdx'
 

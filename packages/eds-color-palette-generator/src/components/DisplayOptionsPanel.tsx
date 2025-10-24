@@ -14,6 +14,7 @@ type DisplayOptionsPanelProps = {
   setColorFormat: React.Dispatch<React.SetStateAction<ColorFormat>>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const DisplayOptionsPanel = ({
   showContrast,
   showLightnessInputs,
@@ -26,6 +27,9 @@ export const DisplayOptionsPanel = ({
   setContrastMethod,
   setColorFormat,
 }: DisplayOptionsPanelProps) => {
+  // mark intentionally unused props as used for linting
+  void colorFormat
+  void setColorFormat
   return (
     <fieldset className="p-4 space-y-4">
       <legend className="mb-2 font-medium">Display</legend>

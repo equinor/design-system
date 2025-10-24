@@ -1,4 +1,4 @@
-import "@equinor/eds-tokens/css/variables-static.css";
+import "@equinor/eds-tokens/css/variables";
 import styles from "./styles.module.css";
 import { Dashboard } from "@/app/_components/Dashboard";
 import { Metadata } from "next";

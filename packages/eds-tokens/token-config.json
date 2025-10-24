@@ -1,0 +1,55 @@
+{
+  "figmaProjectFoundationId": "GnovDpL3UV6X51Ot7Kv6Im",
+  "figmaProjectStaticId": "OWxw2XogDLUt1aCvcDFXPw",
+  "figmaProjectDynamicId": "nyPaQ3QnI1UAcxKW4a0d2c",
+  "schemeTokensPrefix": "🌗 Color Scheme",
+  "variablePrefix": "eds",
+  "colorSchemeConfig": {
+    "Accent": {
+      "Light": "Moss Green",
+      "Dark": "Moss Green"
+    },
+    "Neutral": {
+      "Light": "Gray",
+      "Dark": "North sea"
+    },
+    "Info": {
+      "Light": "Blue",
+      "Dark": "Blue"
+    },
+    "Success": {
+      "Light": "Green",
+      "Dark": "Green"
+    },
+    "Warning": {
+      "Light": "Orange",
+      "Dark": "Orange"
+    },
+    "Danger": {
+      "Light": "Red",
+      "Dark": "Red"
+    }
+  },
+  "conceptColorGroups": {
+    "bg-floating": {
+      "Light": "{Light.Gray.2}",
+      "Dark": "{Dark.North sea.2}"
+    },
+    "bg-backdrop": {
+      "Light": "{Light.Gray.7}",
+      "Dark": "{Dark.North sea.7}"
+    },
+    "bg-input": {
+      "Light": "{Light.Gray.1}",
+      "Dark": "{Dark.North sea.1}"
+    },
+    "border-focus": {
+      "Light": "{Light.Blue.7}",
+      "Dark": "{Dark.Blue.7}"
+    },
+    "text-link": {
+      "Light": "{Light.Blue.8}",
+      "Dark": "{Dark.Blue.8}"
+    }
+  }
+}

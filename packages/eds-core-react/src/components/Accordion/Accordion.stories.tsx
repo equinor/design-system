@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { action } from '@storybook/addon-actions'
+import { action } from 'storybook/actions'
 import { Accordion, Button, Icon, AccordionProps } from '../..'
-import { StoryFn, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react-vite'
 import {
   attach_file,
   notifications,

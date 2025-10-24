@@ -1,6 +1,9 @@
 # @equinor/eds-tokens
 
-[Design tokens] used in the Equinor Design System (EDS), such as colours, spacings and typography.
+[Design tokens] used in the <abbr title="Equinor Design System">EDS</abbr>, including colors, spacing, typography, and more. These tokens are synchronized with Figma variables and provide a single source of truth for design decisions across the design system.
+
+
+> For <abbr title="Large Language Model">LLM</abbr> instructions on using colors, see the [instructions/colors.md](./instructions/colors.md), or jump directly to the [static](./instructions/colors-static.md) or [dynamic](./instructions/colors-dynamic.md) instructions.
 
 ## Installation
 
@@ -10,19 +13,163 @@ pnpm add @equinor/eds-tokens
 
 ## Usage
 
-```js 
-import { tokens } from '@equinor/eds-tokens'
+The package provides two token systems:
+
+* **CSS Variables (Recommended)** -- Modern, theme-aware design tokens synced from Figma
+* **Legacy Tokens** -- Original token format, still supported for backward compatibility
+
+---
+
+## CSS Variables (Recommended)
+
+The new token system uses CSS custom properties that automatically adapt to light and dark color schemes using the modern `light-dark()` function. These tokens are directly synced from Figma variables.
+
+### Using CSS Variables in CSS
+
+Import the variables stylesheet:
+
+```css
+@import '@equinor/eds-tokens/css/variables';
 ```
 
-## Tokens
+Then use the CSS custom properties in your styles:
 
-- Clickbounds
-- Colors
-- Elevation
-- Shape
-- Spacing
-- Interaction states
-- Typography (`ot`, `woff` or `woff2` font required)
+```css
+.my-component {
+  background-color: var(--eds-color-bg-neutral-surface);
+  color: var(--eds-color-text-neutral-strong);
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  padding: var(--eds-spacing-inline-md);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+}
+```
+
+The variables automatically respond to color scheme changes:
+
+```css
+/* Applies to elements with data-color-scheme attribute */
+[data-color-scheme="dark"] {
+  /* Variables automatically use dark mode values */
+}
+
+/* Or use the native prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  /* Variables automatically use dark mode values */
+}
+```
+
+### Using variables in JavaScript/TypeScript
+
+For scenarios where you need colour variables in JavaScript:
+
+#### Color Scheme Tokens
+
+Import the light and dark semantic color tokens:
+
+```typescript
+// Import semantic color scheme tokens
+import * as lightSemantic from '@equinor/eds-tokens/js/color/color-scheme/light-semantic'
+import * as darkSemantic from '@equinor/eds-tokens/js/color/color-scheme/dark-semantic'
+
+// Use semantic tokens with light/dark values
+const lightSurface = lightSemantic.BG_NEUTRAL_SURFACE
+const darkSurface = darkSemantic.BG_NEUTRAL_SURFACE
+
+const lightAccent = lightSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT
+const darkAccent = darkSemantic.BG_ACCENT_FILL_EMPHASIS_DEFAULT
+
+const lightBorder = lightSemantic.BORDER_INFO_MEDIUM
+const darkBorder = darkSemantic.BORDER_INFO_MEDIUM
+```
+
+#### Spacing Tokens
+
+```typescript
+// Import spacing values for different density modes
+import * as comfortableSpacing from '@equinor/eds-tokens/js/spacing/comfortable'
+import * as spaciousSpacing from '@equinor/eds-tokens/js/spacing/spacious'
+
+// Use the values (numbers in pixels)
+const padding = comfortableSpacing.SPACING_INLINE_MD
+const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
+```
+
+### Importing variables as JSON
+
+The variables are available in two formats:
+
+* **Flat format** (`/flat/`) -- Simple key-value pairs for easy access
+* **Nested format** (`/nested/`) -- Hierarchical structure matching the token naming
+
+* The semantic color tokens are available for light and dark color schemes.
+
+* `light-semantic.json` / `dark-semantic.json` -- Semantic color tokens for each color scheme
+
+#### Flat Format
+
+```typescript
+// Import flat format tokens
+import lightSemanticFlat from '@equinor/eds-tokens/json/color/color-scheme/flat/light-semantic.json'
+import darkSemanticFlat from '@equinor/eds-tokens/json/color/color-scheme/flat/dark-semantic.json'
+
+// Access values directly
+const lightSurface = lightSemanticFlat['bg-neutral-surface'] // "#ffffff"
+const darkSurface = darkSemanticFlat['bg-neutral-surface'] // "#262626"
+```
+
+#### Nested Format
+
+```typescript
+// Import nested format tokens
+import lightSemanticNested from '@equinor/eds-tokens/json/color/color-scheme/nested/light-semantic.json'
+import darkSemanticNested from '@equinor/eds-tokens/json/color/color-scheme/nested/dark-semantic.json'
+
+// Access values via hierarchical structure
+const lightSurface = lightSemanticNested.bg.neutral.surface // "#ffffff"
+const darkSurface = darkSemanticNested.bg.neutral.surface // "#262626"
+```
+
+### Available Token Categories
+
+* **Colors** -- Semantic color tokens for backgrounds, text, borders, and states
+* **Spacing** -- Layout spacing including inline, stack, inset, and border radius
+* **Typography** -- Font sizes, line heights, and font families (requires font files)
+
+### Spacing Density Modes
+
+The spacing system supports different density modes:
+
+* `comfortable` -- Default density for most applications
+* `spacious` -- Increased spacing for better readability
+
+---
+
+## Legacy Tokens (Backward Compatible)
+
+The original token format is still available for existing applications. These tokens use a structured JavaScript object format.
+
+### Using Legacy Tokens in JavaScript/TypeScript
+
+```javascript
+import { tokens } from '@equinor/eds-tokens'
+
+// Access token values
+const primaryColor = tokens.colors.interactive.primary__resting.rgba
+const spacing = tokens.spacings.comfortable.medium
+const typography = tokens.typography.heading.h1
+```
+
+### Legacy Token Categories
+
+* Clickbounds
+* Colors
+* Elevation
+* Shape
+* Spacing
+* Interaction states
+* Typography (`ot`, `woff` or `woff2` font required)
+
+> We recommend migrating to CSS Variables for new projects to benefit from automatic theme support and better performance.
 
 [design tokens]: https://css-tricks.com/what-are-design-tokens/
 
@@ -115,11 +262,11 @@ pnpm run update-figma
 
 ### How the variables are setup with references between collections
 
-The semantic variable references the first segment (collection) in the variable. For example, the first segment is “appearance” for the action variables. Variables defined in appearance point to the next segment, which for action variables would be prominence. In the prominence collection, we define a variable for each of the appearance modes so that these are represented in the context of each prominence mode. The variables in the “prominence” collection point to variables in the state collection, and again, we represent all the prominence modes as new variables in the state collection. For action variables, the journey ends here, and the variables in the state collection point to the light/dark color scheme variables in the color scheme collection. 
+The semantic variable references the first segment (collection) in the variable. For example, the first segment is “appearance” for the action variables. Variables defined in appearance point to the next segment, which for action variables would be prominence. In the prominence collection, we define a variable for each of the appearance modes so that these are represented in the context of each prominence mode. The variables in the “prominence” collection point to variables in the state collection, and again, we represent all the prominence modes as new variables in the state collection. For action variables, the journey ends here, and the variables in the state collection point to the light/dark color scheme variables in the color scheme collection.
 
 ### Tokens in code
 
-The color scheme collection variables support all the combinations of modes in the different collections and are used to generate tokens in code. All the combinations of modes in different collections must be provided here so that the code syntax matches tokens in the code. 
+The color scheme collection variables support all the combinations of modes in the different collections and are used to generate tokens in code. All the combinations of modes in different collections must be provided here so that the code syntax matches tokens in the code.
 
 
 ### How to setup variable collections in Figma

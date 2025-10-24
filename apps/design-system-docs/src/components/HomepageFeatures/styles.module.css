@@ -1,11 +1,36 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 0 0 2rem 0;
   width: 100%;
+}
+
+.featureLink {
+  color: inherit !important;
+  text-decoration: none !important;
+  display: block;
+}
+
+.featureLink:hover {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .featureSvg {
   height: 200px;
   width: 200px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.featureSvg:hover {
+  transform: scale(1.1);
+}
+
+.featuresRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
 }

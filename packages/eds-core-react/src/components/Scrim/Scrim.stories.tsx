@@ -1,7 +1,7 @@
 import { Button, Scrim, ScrimProps, SideSheet } from '../..'
 import { useState } from 'react'
-import { StoryFn, Meta } from '@storybook/react'
-import { useArgs } from '@storybook/preview-api'
+import { StoryFn, Meta } from '@storybook/react-vite'
+import { useArgs } from 'storybook/preview-api'
 import { Stack } from './../../../.storybook/components'
 import page from './Scrim.docs.mdx'
 

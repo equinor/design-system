@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { useRef, useEffect, useState, Fragment } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import { Tabs } from '.'
 
@@ -11,8 +12,12 @@ const TabsWithRefs = () => {
   const inactiveRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    activeRef.current.textContent = 'Active tab'
-    inactiveRef.current.textContent = 'Inactive tab'
+    if (activeRef?.current) {
+      activeRef.current.textContent = 'Active tab'
+    }
+    if (inactiveRef?.current) {
+      inactiveRef.current.textContent = 'Inactive tab'
+    }
   }, [])
 
   return (
@@ -30,11 +35,11 @@ const TabsWithPanels = ({
   selectedTabIndex = 0,
 }: {
   // eslint-disable-next-line react/require-default-props
-  selectedTabIndex?: number
+  selectedTabIndex?: number | string
 }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 
@@ -107,15 +112,15 @@ describe('Tabs', () => {
   })
   it('Switches tabpanel when tab is clicked', () => {
     render(<TabsWithPanels />)
-    const targetTab = screen.queryByText('Tab two')
+    const targetTab = screen.getByText('Tab two')
     fireEvent.click(targetTab)
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
     expect(screen.queryByText('Panel two')).toBeVisible()
   })
   it('Switches tabpanel when arrow key is clicked', () => {
     render(<TabsWithPanels />)
-    const targetTab = screen.queryByText('Tab two')
-    const tablist = screen.queryByRole('tablist')
+    const targetTab = screen.getByText('Tab two')
+    const tablist = screen.getByRole('tablist')
     fireEvent.keyDown(tablist, {
       key: 'ArrowRight',
     })
@@ -123,8 +128,8 @@ describe('Tabs', () => {
   })
   it('Skips disabled tabs when navigating using arrowkeys', () => {
     render(<TabsWithPanels selectedTabIndex={1} />)
-    const targetTab = screen.queryByText('Tab one')
-    const tablist = screen.queryByRole('tablist')
+    const targetTab = screen.getByText('Tab one')
+    const tablist = screen.getByRole('tablist')
     fireEvent.keyDown(tablist, {
       key: 'ArrowRight',
     })

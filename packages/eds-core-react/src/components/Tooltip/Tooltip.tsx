@@ -8,6 +8,7 @@ import {
   useMemo,
   useEffect,
   ReactNode,
+  ReactElement,
 } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
@@ -86,7 +87,8 @@ export type TooltipProps = {
   /** Disable the tooltip */
   disabled?: boolean
   /** Tooltip anchor element */
-  children: React.ReactElement & React.RefAttributes<HTMLElement>
+  children: React.ReactElement<HTMLAttributes<HTMLElement>> &
+    React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
   enterDelay?: number
   /** Portal container
@@ -135,9 +137,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ],
       whileElementsMounted: autoUpdate,
     })
-    const anchorRef = useMemo(
-      () => mergeRefs<HTMLElement>(refs.setReference, children?.ref),
-      [refs.setReference, children?.ref],
+    const mergedAnchorRef = useMemo(
+      () => mergeRefs<HTMLElement>(refs.setReference),
+      [refs.setReference],
     )
     const tooltipRef = useMemo(
       () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
@@ -187,12 +189,17 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     })
 
-    const updatedChildren = cloneElement(children, {
-      ...getReferenceProps({
-        ref: anchorRef,
-        ...(children.props as HTMLAttributes<HTMLElement>),
-      }),
-    })
+    const updatedChildren = cloneElement(
+      children as ReactElement<any>, // eslint-disable-line @typescript-eslint/no-explicit-any
+      {
+        ...getReferenceProps(children.props),
+        ref: mergeRefs(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+          (children as ReactElement<any>).props.ref,
+          mergedAnchorRef,
+        ),
+      },
+    )
 
     useEffect(() => {
       if (!elements.floating) return
@@ -227,6 +234,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
+        {updatedChildren}
         {shouldOpen &&
           open &&
           !disabled &&
@@ -234,7 +242,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             TooltipEl,
             portalContainer ?? rootElement ?? document.body,
           )}
-        {updatedChildren}
       </>
     )
   },

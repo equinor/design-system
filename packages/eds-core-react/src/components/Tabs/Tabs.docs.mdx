@@ -1,5 +1,5 @@
 import { Links } from './../../../.storybook/components'
-import { Primary, Canvas, Meta, Controls } from '@storybook/blocks'
+import { Primary, Canvas, Meta, Controls } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './Tabs.stories'
 
 <Meta of={ComponentStories} />
@@ -35,7 +35,7 @@ import { useState } from 'react'
 
 function TabsExample() {
   const [activeTab, setActiveTab] = useState(0)
-  const handleChange = (index: number) => {
+  const handleChange = (index: number | string) => {
     setActiveTab(index)
   }
 return (

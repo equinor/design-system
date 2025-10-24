@@ -1,108 +1,110 @@
 {
-  "Background": {
-    "Medium": {
-      "Default": {
-        "$type": "color",
-        "$value": "{Blue.3}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-background-medium-default)"
+  "Bg": {
+    "Fill": {
+      "Muted": {
+        "Default": {
+          "$type": "color",
+          "$value": "{Info.3}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-muted-default)"
+              }
+            }
+          }
+        },
+        "Hover": {
+          "$type": "color",
+          "$value": "{Info.4}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-muted-hover)"
+              }
+            }
+          }
+        },
+        "Active": {
+          "$type": "color",
+          "$value": "{Info.5}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-muted-active)"
+              }
             }
           }
         }
       },
-      "Hover": {
-        "$type": "color",
-        "$value": "{Blue.4}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-background-medium-hover)"
+      "Emphasis": {
+        "Default": {
+          "$type": "color",
+          "$value": "{Info.9}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-emphasis-default)"
+              }
             }
           }
-        }
-      },
-      "Active": {
-        "$type": "color",
-        "$value": "{Blue.5}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-background-medium-active)"
+        },
+        "Hover": {
+          "$type": "color",
+          "$value": "{Info.10}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-emphasis-hover)"
+              }
+            }
+          }
+        },
+        "Active": {
+          "$type": "color",
+          "$value": "{Info.11}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-emphasis-active)"
+              }
             }
           }
         }
       }
     },
-    "Strong": {
-      "Default": {
-        "$type": "color",
-        "$value": "{Blue.9}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-background-strong-default)"
-            }
-          }
-        }
-      },
-      "Hover": {
-        "$type": "color",
-        "$value": "{Blue.10}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-background-strong-hover)"
-            }
-          }
-        }
-      },
-      "Active": {
-        "$type": "color",
-        "$value": "{Blue.11}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-color-background-strong-active)"
-            }
-          }
-        }
-      }
-    },
-    "Default": {
+    "Canvas": {
       "$type": "color",
-      "$value": "{Blue.1}",
+      "$value": "{Info.1}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -111,14 +113,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-default)"
+            "WEB": "var(--eds-color-bg-canvas)"
           }
         }
       }
     },
-    "Subtle": {
+    "Surface": {
       "$type": "color",
-      "$value": "{Blue.2}",
+      "$value": "{Info.2}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -127,7 +129,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-background-subtle)"
+            "WEB": "var(--eds-color-bg-surface)"
           }
         }
       }
@@ -136,7 +138,7 @@
   "Border": {
     "Subtle": {
       "$type": "color",
-      "$value": "{Blue.6}",
+      "$value": "{Info.6}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -152,7 +154,7 @@
     },
     "Medium": {
       "$type": "color",
-      "$value": "{Blue.7}",
+      "$value": "{Info.7}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -168,7 +170,7 @@
     },
     "Strong": {
       "$type": "color",
-      "$value": "{Blue.8}",
+      "$value": "{Info.8}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -186,7 +188,7 @@
   "Text": {
     "Subtle": {
       "$type": "color",
-      "$value": "{Blue.12}",
+      "$value": "{Info.12}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -195,14 +197,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-text-default)"
+            "WEB": "var(--eds-color-text-subtle)"
           }
         }
       }
     },
     "Strong": {
       "$type": "color",
-      "$value": "{Blue.13}",
+      "$value": "{Info.13}",
       "$description": "Used for text and icons",
       "$extensions": {
         "com.figma": {
@@ -216,9 +218,9 @@
         }
       }
     },
-    "Contrast subtle": {
+    "Subtle on emphasis": {
       "$type": "color",
-      "$value": "{Blue.14}",
+      "$value": "{Info.14}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
@@ -227,14 +229,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-text-contrast-subtle)"
+            "WEB": "var(--eds-color-text-subtle-on-emphasis)"
           }
         }
       }
     },
-    "Contrast strong": {
+    "Strong on emphasis": {
       "$type": "color",
-      "$value": "{Blue.15}",
+      "$value": "{Info.15}",
       "$description": "Text or icons against colored backgrounds",
       "$extensions": {
         "com.figma": {
@@ -243,7 +245,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-text-contrast-strong)"
+            "WEB": "var(--eds-color-text-strong-on-emphasis)"
           }
         }
       }

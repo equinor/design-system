@@ -15,7 +15,12 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.20.2'
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Use "setup" cache
         id: setup-cache
         uses: actions/cache@v4
@@ -25,7 +30,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-sync-tokens-to-figma
       - name: Sync tokens to Figma file
-        run: node_modules/.bin/pnpm run update:figma
+        run: pnpm run update:figma
         env:
           FILE_KEY: ${{ github.event.inputs.file_key }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}

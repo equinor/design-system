@@ -1,0 +1,29 @@
+{
+  "Bg": {
+    "Fill": {
+      "Muted": {
+        "Default": "#cae6fa",
+        "Hover": "#b5daf5",
+        "Active": "#99cbf0"
+      },
+      "Emphasis": {
+        "Default": "#006aa0",
+        "Hover": "#085883",
+        "Active": "#0e5279"
+      }
+    },
+    "Canvas": "#e7f8ff",
+    "Surface": "#f4ffff"
+  },
+  "Border": {
+    "Subtle": "#b5daf5",
+    "Medium": "#6fb6e9",
+    "Strong": "#0070a9"
+  },
+  "Text": {
+    "Subtle": "#015e8d",
+    "Strong": "#121e27",
+    "Subtle on emphasis": "#c5e3f9",
+    "Strong on emphasis": "#ffffff"
+  }
+}

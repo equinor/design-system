@@ -1,27 +1,49 @@
-# Support 
+# Support
 
-### Get in touch
+We're here to help you succeed with the Equinor Design System. Whether you're a developer, designer, QA professional, or part of a non-IT team, our support team is ready to assist you with guidance, onboarding, troubleshooting, and everything in between.
 
-The  maintains and provides support for the EDS and are here to help.
+## How to Get Help
 
-They can assist with advice, onboarding, questions, improvement suggestions and incorporating contributions.
+When you have questions or need guidance, please reach out to our EDS core team through any of these channels:
 
-Get in touch with the EDS core team here:
+- **Slack:** #eds-design-system (internal Equinor)
+- **Teams:** EDS Core Team (internal Equinor)  
+- **Email:** [fg_eds@equinor.com](mailto:fg_eds@equinor.com) (internal Equinor)
+- **Viva Engage:** [EDS Community](https://web.yammer.com/main/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiI2OTUyOTIxNDk3NiJ9/all) (internal Equinor)
 
--    (internal Equinor)
-    
--   
--    (internal Equinor)
-    
+We aim to respond promptly and ensure you have the support you need.
 
-### Report a bug
+## Community Support
 
-GitHub users can create a  and fill out the bug template.
+We provide several ways for you to connect with other EDS users and our team:
 
-Non-GitHub users can get in touch using the channels above.
+- **Internal Channels** — Join our channels to connect with fellow users and our dedicated core team who are eager to help
+- **Business Hours Support** — Our team is available during regular office hours to provide timely assistance and guidance
+- **Documentation** — Access comprehensive guides for all components and patterns, written with clarity and practical examples
 
-### Request a feature
+## Common Questions and Quick Help
 
-GitHub users can create a  and fill out the feature request template.
+We understand that getting started with any new system can raise questions. Here are some common areas where we're ready to support you:
 
-Non-GitHub users can get in touch using the channels above. Examples of feature requests can be added to  in Figma.
+- **Installation Issues** — Get help with npm package installation, dependency conflicts, TypeScript configuration, and build setup problems
+- **Component Usage** — Explore our Storybook examples and detailed documentation to see components in action with real-world scenarios  
+- **Best Practices** — Review our established patterns and proven approaches before building custom solutions
+
+If you can't find what you need in our resources, please contact us directly using the channels above.
+
+## Report Issues and Request Features
+
+Found a bug or have an idea for improvement? We'd love to hear from you:
+
+- **GitHub users:** [Create an issue or feature request](https://github.com/equinor/design-system/issues) using the appropriate template
+- **Non-GitHub users:** Share your feedback through email, Teams, or Slack, or add examples to our EDS Figma file
+
+## Contributing and Feedback
+
+We welcome your feedback and contributions wholeheartedly. Your input helps us build a better design system that serves everyone's needs effectively.
+
+If you'd like to contribute directly to the design system, please see our [contribution guide](https://github.com/equinor/design-system/#contributions) for detailed information on how to get started. You can also reach out to our team directly to discuss your ideas and how you can contribute.
+
+---
+
+Thank you for being part of our design system community. We look forward to supporting you and working together to create exceptional user experiences.

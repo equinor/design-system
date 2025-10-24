@@ -1,9 +1,9 @@
 {
-  "Background": {
+  "Bg": {
     "Neutral": {
-      "Default": {
+      "Canvas": {
         "$type": "color",
-        "$value": "{Gray.1}",
+        "$value": "{Neutral.1}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -12,14 +12,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-neutral-default)"
+              "WEB": "var(--eds-color-bg-neutral-canvas)"
             }
           }
         }
       },
-      "Subtle": {
+      "Surface": {
         "$type": "color",
-        "$value": "{Gray.2}",
+        "$value": "{Neutral.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -28,15 +28,15 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-neutral-subtle)"
+              "WEB": "var(--eds-color-bg-neutral-surface)"
             }
           }
         }
       },
-      "Medium": {
+      "Fill Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Gray.3}",
+          "$value": "{Neutral.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -45,14 +45,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-neutral-medium-default)"
+                "WEB": "var(--eds-color-bg-neutral-fill-muted-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Gray.4}",
+          "$value": "{Neutral.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -61,14 +61,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-neutral-medium-hover)"
+                "WEB": "var(--eds-color-bg-neutral-fill-muted-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Gray.5}",
+          "$value": "{Neutral.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -77,16 +77,16 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-neutral-medium-active)"
+                "WEB": "var(--eds-color-bg-neutral-fill-muted-active)"
               }
             }
           }
         }
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Gray.9}",
+          "$value": "{Neutral.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -95,14 +95,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-neutral-strong-default)"
+                "WEB": "var(--eds-color-bg-neutral-fill-emphasis-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Gray.10}",
+          "$value": "{Neutral.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -111,14 +111,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-neutral-strong-hover)"
+                "WEB": "var(--eds-color-bg-neutral-fill-emphasis-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Gray.11}",
+          "$value": "{Neutral.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -127,7 +127,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-neutral-strong-active)"
+                "WEB": "var(--eds-color-bg-neutral-fill-emphasis-active)"
               }
             }
           }
@@ -135,9 +135,9 @@
       }
     },
     "Accent": {
-      "Default": {
+      "Canvas": {
         "$type": "color",
-        "$value": "{Moss Green.1}",
+        "$value": "{Accent.1}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -146,14 +146,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-accent-default)"
+              "WEB": "var(--eds-color-bg-accent-canvas)"
             }
           }
         }
       },
-      "Subtle": {
+      "Surface": {
         "$type": "color",
-        "$value": "{Moss Green.2}",
+        "$value": "{Accent.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -162,15 +162,15 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-accent-subtle)"
+              "WEB": "var(--eds-color-bg-accent-surface)"
             }
           }
         }
       },
-      "Medium": {
+      "Fill Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Moss Green.3}",
+          "$value": "{Accent.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -179,14 +179,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-medium-default)"
+                "WEB": "var(--eds-color-bg-accent-fill-muted-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Moss Green.4}",
+          "$value": "{Accent.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -195,14 +195,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-medium-hover)"
+                "WEB": "var(--eds-color-bg-accent-fill-muted-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Moss Green.5}",
+          "$value": "{Accent.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -211,16 +211,16 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-medium-active)"
+                "WEB": "var(--eds-color-bg-accent-fill-muted-active)"
               }
             }
           }
         }
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Moss Green.9}",
+          "$value": "{Accent.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -229,14 +229,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-strong-default)"
+                "WEB": "var(--eds-color-bg-accent-fill-emphasis-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Moss Green.10}",
+          "$value": "{Accent.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -245,14 +245,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-strong-hover)"
+                "WEB": "var(--eds-color-bg-accent-fill-emphasis-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Moss Green.11}",
+          "$value": "{Accent.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -261,7 +261,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-accent-strong-active)"
+                "WEB": "var(--eds-color-bg-accent-fill-emphasis-active)"
               }
             }
           }
@@ -269,9 +269,9 @@
       }
     },
     "Success": {
-      "Default": {
+      "Canvas": {
         "$type": "color",
-        "$value": "{Green.1}",
+        "$value": "{Success.1}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -280,14 +280,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-success-default)"
+              "WEB": "var(--eds-color-bg-success-canvas)"
             }
           }
         }
       },
-      "Subtle": {
+      "Surface": {
         "$type": "color",
-        "$value": "{Green.2}",
+        "$value": "{Success.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -296,15 +296,15 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-success-subtle)"
+              "WEB": "var(--eds-color-bg-success-surface)"
             }
           }
         }
       },
-      "Medium": {
+      "Fill Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Green.3}",
+          "$value": "{Success.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -313,14 +313,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-medium-default)"
+                "WEB": "var(--eds-color-bg-success-fill-muted-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Green.4}",
+          "$value": "{Success.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -329,14 +329,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-medium-hover)"
+                "WEB": "var(--eds-color-bg-success-fill-muted-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Green.5}",
+          "$value": "{Success.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -345,16 +345,16 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-medium-active)"
+                "WEB": "var(--eds-color-bg-success-fill-muted-active)"
               }
             }
           }
         }
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Green.9}",
+          "$value": "{Success.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -363,14 +363,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-strong-default)"
+                "WEB": "var(--eds-color-bg-success-fill-emphasis-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Green.10}",
+          "$value": "{Success.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -379,14 +379,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-strong-hover)"
+                "WEB": "var(--eds-color-bg-success-fill-emphasis-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Green.11}",
+          "$value": "{Success.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -395,7 +395,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-success-strong-active)"
+                "WEB": "var(--eds-color-bg-success-fill-emphasis-active)"
               }
             }
           }
@@ -403,9 +403,9 @@
       }
     },
     "Info": {
-      "Default": {
+      "Canvas": {
         "$type": "color",
-        "$value": "{Blue.1}",
+        "$value": "{Info.1}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -414,14 +414,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-info-default)"
+              "WEB": "var(--eds-color-bg-info-canvas)"
             }
           }
         }
       },
-      "Subtle": {
+      "Surface": {
         "$type": "color",
-        "$value": "{Blue.2}",
+        "$value": "{Info.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -430,15 +430,15 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-info-subtle)"
+              "WEB": "var(--eds-color-bg-info-surface)"
             }
           }
         }
       },
-      "Medium": {
+      "Fill Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Blue.3}",
+          "$value": "{Info.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -447,14 +447,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-medium-default)"
+                "WEB": "var(--eds-color-bg-info-fill-muted-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Blue.4}",
+          "$value": "{Info.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -463,14 +463,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-medium-hover)"
+                "WEB": "var(--eds-color-bg-info-fill-muted-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Blue.5}",
+          "$value": "{Info.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -479,16 +479,16 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-medium-active)"
+                "WEB": "var(--eds-color-bg-info-fill-muted-active)"
               }
             }
           }
         }
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Blue.9}",
+          "$value": "{Info.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -497,14 +497,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-strong-default)"
+                "WEB": "var(--eds-color-bg-info-fill-emphasis-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Blue.10}",
+          "$value": "{Info.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -513,14 +513,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-strong-hover)"
+                "WEB": "var(--eds-color-bg-info-fill-emphasis-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Blue.11}",
+          "$value": "{Info.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -529,7 +529,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-info-strong-active)"
+                "WEB": "var(--eds-color-bg-info-fill-emphasis-active)"
               }
             }
           }
@@ -537,9 +537,9 @@
       }
     },
     "Warning": {
-      "Default": {
+      "Canvas": {
         "$type": "color",
-        "$value": "{Orange.1}",
+        "$value": "{Warning.1}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -548,14 +548,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-warning-default)"
+              "WEB": "var(--eds-color-bg-warning-canvas)"
             }
           }
         }
       },
-      "Subtle": {
+      "Surface": {
         "$type": "color",
-        "$value": "{Orange.2}",
+        "$value": "{Warning.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -564,15 +564,15 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-warning-subtle)"
+              "WEB": "var(--eds-color-bg-warning-surface)"
             }
           }
         }
       },
-      "Medium": {
+      "Fill Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Orange.3}",
+          "$value": "{Warning.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -581,14 +581,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-medium-default)"
+                "WEB": "var(--eds-color-bg-warning-fill-muted-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Orange.4}",
+          "$value": "{Warning.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -597,14 +597,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-medium-hover)"
+                "WEB": "var(--eds-color-bg-warning-fill-muted-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Orange.5}",
+          "$value": "{Warning.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -613,16 +613,16 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-medium-active)"
+                "WEB": "var(--eds-color-bg-warning-fill-muted-active)"
               }
             }
           }
         }
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Orange.9}",
+          "$value": "{Warning.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -631,14 +631,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-strong-default)"
+                "WEB": "var(--eds-color-bg-warning-fill-emphasis-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Orange.10}",
+          "$value": "{Warning.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -647,14 +647,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-strong-hover)"
+                "WEB": "var(--eds-color-bg-warning-fill-emphasis-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Orange.11}",
+          "$value": "{Warning.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -663,7 +663,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-warning-strong-active)"
+                "WEB": "var(--eds-color-bg-warning-fill-emphasis-active)"
               }
             }
           }
@@ -671,9 +671,9 @@
       }
     },
     "Danger": {
-      "Default": {
+      "Canvas": {
         "$type": "color",
-        "$value": "{Red.1}",
+        "$value": "{Danger.1}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -682,14 +682,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-danger-default)"
+              "WEB": "var(--eds-color-bg-danger-canvas)"
             }
           }
         }
       },
-      "Subtle": {
+      "Surface": {
         "$type": "color",
-        "$value": "{Red.2}",
+        "$value": "{Danger.2}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -698,15 +698,15 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-background-danger-subtle)"
+              "WEB": "var(--eds-color-bg-danger-surface)"
             }
           }
         }
       },
-      "Medium": {
+      "Fill Muted": {
         "Default": {
           "$type": "color",
-          "$value": "{Red.3}",
+          "$value": "{Danger.3}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -715,14 +715,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-medium-default)"
+                "WEB": "var(--eds-color-bg-danger-fill-muted-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Red.4}",
+          "$value": "{Danger.4}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -731,14 +731,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-medium-hover)"
+                "WEB": "var(--eds-color-bg-danger-fill-muted-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Red.5}",
+          "$value": "{Danger.5}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -747,16 +747,16 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-medium-active)"
+                "WEB": "var(--eds-color-bg-danger-fill-muted-active)"
               }
             }
           }
         }
       },
-      "Strong": {
+      "Fill Emphasis": {
         "Default": {
           "$type": "color",
-          "$value": "{Red.9}",
+          "$value": "{Danger.9}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -765,14 +765,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-strong-default)"
+                "WEB": "var(--eds-color-bg-danger-fill-emphasis-default)"
               }
             }
           }
         },
         "Hover": {
           "$type": "color",
-          "$value": "{Red.10}",
+          "$value": "{Danger.10}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -781,14 +781,14 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-strong-hover)"
+                "WEB": "var(--eds-color-bg-danger-fill-emphasis-hover)"
               }
             }
           }
         },
         "Active": {
           "$type": "color",
-          "$value": "{Red.11}",
+          "$value": "{Danger.11}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -797,7 +797,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-background-danger-strong-active)"
+                "WEB": "var(--eds-color-bg-danger-fill-emphasis-active)"
               }
             }
           }
@@ -809,7 +809,7 @@
     "Neutral": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Gray.6}",
+        "$value": "{Neutral.6}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -825,7 +825,7 @@
       },
       "Medium": {
         "$type": "color",
-        "$value": "{Gray.7}",
+        "$value": "{Neutral.7}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -841,7 +841,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Gray.8}",
+        "$value": "{Neutral.8}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -859,7 +859,7 @@
     "Accent": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Moss Green.6}",
+        "$value": "{Accent.6}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -875,7 +875,7 @@
       },
       "Medium": {
         "$type": "color",
-        "$value": "{Moss Green.7}",
+        "$value": "{Accent.7}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -891,7 +891,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Moss Green.8}",
+        "$value": "{Accent.8}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -909,7 +909,7 @@
     "Success": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Green.6}",
+        "$value": "{Success.6}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -925,7 +925,7 @@
       },
       "Medium": {
         "$type": "color",
-        "$value": "{Green.7}",
+        "$value": "{Success.7}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -941,7 +941,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Green.8}",
+        "$value": "{Success.8}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -959,7 +959,7 @@
     "Info": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Blue.6}",
+        "$value": "{Info.6}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -975,7 +975,7 @@
       },
       "Medium": {
         "$type": "color",
-        "$value": "{Blue.7}",
+        "$value": "{Info.7}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -991,7 +991,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Blue.8}",
+        "$value": "{Info.8}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1009,7 +1009,7 @@
     "Warning": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Orange.6}",
+        "$value": "{Warning.6}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1025,7 +1025,7 @@
       },
       "Medium": {
         "$type": "color",
-        "$value": "{Orange.7}",
+        "$value": "{Warning.7}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1041,7 +1041,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Orange.8}",
+        "$value": "{Warning.8}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1059,7 +1059,7 @@
     "Danger": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Red.6}",
+        "$value": "{Danger.6}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1075,7 +1075,7 @@
       },
       "Medium": {
         "$type": "color",
-        "$value": "{Red.7}",
+        "$value": "{Danger.7}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1091,7 +1091,7 @@
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Red.8}",
+        "$value": "{Danger.8}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1111,7 +1111,7 @@
     "Neutral": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Gray.12}",
+        "$value": "{Neutral.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1120,14 +1120,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-neutral-default)"
+              "WEB": "var(--eds-color-text-neutral-subtle)"
             }
           }
         }
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Gray.13}",
+        "$value": "{Neutral.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1141,9 +1141,9 @@
           }
         }
       },
-      "Contrast subtle": {
+      "Subtle on emphasis": {
         "$type": "color",
-        "$value": "{Gray.14}",
+        "$value": "{Neutral.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1152,14 +1152,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-neutral-contrast-subtle)"
+              "WEB": "var(--eds-color-text-neutral-subtle-on-emphasis)"
             }
           }
         }
       },
-      "Contrast strong": {
+      "Strong on emphasis": {
         "$type": "color",
-        "$value": "{Gray.15}",
+        "$value": "{Neutral.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1168,7 +1168,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-neutral-contrast-strong)"
+              "WEB": "var(--eds-color-text-neutral-strong-on-emphasis)"
             }
           }
         }
@@ -1177,7 +1177,7 @@
     "Accent": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Moss Green.12}",
+        "$value": "{Accent.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1186,14 +1186,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-accent-default)"
+              "WEB": "var(--eds-color-text-accent-subtle)"
             }
           }
         }
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Moss Green.13}",
+        "$value": "{Accent.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1207,9 +1207,9 @@
           }
         }
       },
-      "Contrast subtle": {
+      "Subtle on emphasis": {
         "$type": "color",
-        "$value": "{Moss Green.14}",
+        "$value": "{Accent.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1218,14 +1218,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-accent-contrast-subtle)"
+              "WEB": "var(--eds-color-text-accent-subtle-on-emphasis)"
             }
           }
         }
       },
-      "Contrast strong": {
+      "Strong on emphasis": {
         "$type": "color",
-        "$value": "{Moss Green.15}",
+        "$value": "{Accent.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1234,7 +1234,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-accent-contrast-strong)"
+              "WEB": "var(--eds-color-text-accent-strong-on-emphasis)"
             }
           }
         }
@@ -1243,7 +1243,7 @@
     "Success": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Green.12}",
+        "$value": "{Success.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1252,14 +1252,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-success-default)"
+              "WEB": "var(--eds-color-text-success-subtle)"
             }
           }
         }
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Green.13}",
+        "$value": "{Success.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1273,9 +1273,9 @@
           }
         }
       },
-      "Contrast subtle": {
+      "Subtle on emphasis": {
         "$type": "color",
-        "$value": "{Green.14}",
+        "$value": "{Success.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1284,14 +1284,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-success-contrast-subtle)"
+              "WEB": "var(--eds-color-text-success-subtle-on-emphasis)"
             }
           }
         }
       },
-      "Contrast strong": {
+      "Strong on emphasis": {
         "$type": "color",
-        "$value": "{Green.15}",
+        "$value": "{Success.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1300,7 +1300,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-success-contrast-strong)"
+              "WEB": "var(--eds-color-text-success-strong-on-emphasis)"
             }
           }
         }
@@ -1309,7 +1309,7 @@
     "Info": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Blue.12}",
+        "$value": "{Info.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1318,14 +1318,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-info-default)"
+              "WEB": "var(--eds-color-text-info-subtle)"
             }
           }
         }
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Blue.13}",
+        "$value": "{Info.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1339,9 +1339,9 @@
           }
         }
       },
-      "Contrast subtle": {
+      "Subtle on emphasis": {
         "$type": "color",
-        "$value": "{Blue.14}",
+        "$value": "{Info.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1350,14 +1350,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-info-contrast-subtle)"
+              "WEB": "var(--eds-color-text-info-subtle-on-emphasis)"
             }
           }
         }
       },
-      "Contrast strong": {
+      "Strong on emphasis": {
         "$type": "color",
-        "$value": "{Blue.15}",
+        "$value": "{Info.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1366,7 +1366,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-info-contrast-strong)"
+              "WEB": "var(--eds-color-text-info-strong-on-emphasis)"
             }
           }
         }
@@ -1375,7 +1375,7 @@
     "Warning": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Orange.12}",
+        "$value": "{Warning.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1384,14 +1384,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-warning-default)"
+              "WEB": "var(--eds-color-text-warning-subtle)"
             }
           }
         }
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Orange.13}",
+        "$value": "{Warning.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1405,9 +1405,9 @@
           }
         }
       },
-      "Contrast subtle": {
+      "Subtle on emphasis": {
         "$type": "color",
-        "$value": "{Orange.14}",
+        "$value": "{Warning.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1416,14 +1416,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-warning-contrast-subtle)"
+              "WEB": "var(--eds-color-text-warning-subtle-on-emphasis)"
             }
           }
         }
       },
-      "Contrast strong": {
+      "Strong on emphasis": {
         "$type": "color",
-        "$value": "{Orange.15}",
+        "$value": "{Warning.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1432,7 +1432,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-warning-contrast-strong)"
+              "WEB": "var(--eds-color-text-warning-strong-on-emphasis)"
             }
           }
         }
@@ -1441,7 +1441,7 @@
     "Danger": {
       "Subtle": {
         "$type": "color",
-        "$value": "{Red.12}",
+        "$value": "{Danger.12}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1450,14 +1450,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-danger-default)"
+              "WEB": "var(--eds-color-text-danger-subtle)"
             }
           }
         }
       },
       "Strong": {
         "$type": "color",
-        "$value": "{Red.13}",
+        "$value": "{Danger.13}",
         "$description": "Used for text and icons",
         "$extensions": {
           "com.figma": {
@@ -1471,9 +1471,9 @@
           }
         }
       },
-      "Contrast subtle": {
+      "Subtle on emphasis": {
         "$type": "color",
-        "$value": "{Red.14}",
+        "$value": "{Danger.14}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1482,14 +1482,14 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-danger-contrast-subtle)"
+              "WEB": "var(--eds-color-text-danger-subtle-on-emphasis)"
             }
           }
         }
       },
-      "Contrast strong": {
+      "Strong on emphasis": {
         "$type": "color",
-        "$value": "{Red.15}",
+        "$value": "{Danger.15}",
         "$description": "Text or icons against colored backgrounds",
         "$extensions": {
           "com.figma": {
@@ -1498,7 +1498,7 @@
               "ALL_SCOPES"
             ],
             "codeSyntax": {
-              "WEB": "var(--eds-color-text-danger-contrast-strong)"
+              "WEB": "var(--eds-color-text-danger-strong-on-emphasis)"
             }
           }
         }

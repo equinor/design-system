@@ -2,6 +2,53 @@ import Color from 'colorjs.io'
 import { ColorFormat } from '@/types'
 import { Algorithms } from 'colorjs.io/fn'
 
+/**
+ * Validates if a string is a valid color format supported by colorjs.io
+ * @param input - Color string to validate
+ * @returns true if valid, false otherwise
+ */
+export function isValidColorFormat(input: string): boolean {
+  if (!input || typeof input !== 'string') {
+    return false
+  }
+
+  const trimmedInput = input.trim()
+
+  // Use colorjs.io to validate any supported color format
+  try {
+    new Color(trimmedInput)
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Converts a color string (any format supported by colorjs.io, e.g. OKLCH, HEX, RGB, HSL, LAB, named colors, etc.) to HEX format
+ * @param input - Color string in any format supported by colorjs.io (OKLCH, HEX, RGB, HSL, LAB, named colors, etc.)
+ * @returns HEX color string, or null if invalid
+ */
+export function parseColorToHex(input: string): string | null {
+  if (!input || typeof input !== 'string') {
+    return null
+  }
+
+  const trimmedInput = input.trim()
+
+  try {
+    const color = new Color(trimmedInput)
+    // Convert to sRGB first to ensure proper hex conversion
+    const srgbColor = color.to('srgb')
+    // Force alpha to 1 to ensure 6-digit hex output
+    srgbColor.alpha = 1
+    const hexString = srgbColor.toString({ format: 'hex' })
+    // Normalize the hex string to always be lowercase
+    return hexString.toLowerCase()
+  } catch {
+    return null
+  }
+}
+
 export function gaussian(
   x: number,
   mean: number = 0.6,
@@ -48,8 +95,23 @@ export function generateColorScale(
             `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
           )
         } else {
-          // Default to HEX format
-          colors.push(color.toString({ format: 'hex' }))
+          // Default to HEX format - convert to sRGB first to ensure proper conversion
+          const srgbColor = color.to('srgb')
+          // Force alpha to 1 to ensure 6-digit hex output
+          srgbColor.alpha = 1
+          let hexColor = srgbColor.toString({ format: 'hex' })
+          // Expand shorthand hex (e.g., #fff -> #ffffff)
+          if (hexColor.length === 4) {
+            hexColor =
+              '#' +
+              hexColor[1] +
+              hexColor[1] +
+              hexColor[2] +
+              hexColor[2] +
+              hexColor[3] +
+              hexColor[3]
+          }
+          colors.push(hexColor)
         }
       } catch (error) {
         console.error(`Error generating color for step ${i}:`, error)

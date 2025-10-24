@@ -1,5 +1,10 @@
 import { describe, expect, test } from 'vitest'
-import { contrast } from './color'
+import {
+  contrast,
+  isValidColorFormat,
+  parseColorToHex,
+  generateColorScale,
+} from './color'
 
 describe('Color Contrast Tests', () => {
   test('should return APCA contrast score of 41 for specific OKLCH colors', () => {
@@ -370,5 +375,346 @@ describe('Real-world Color Combinations', () => {
     const result = contrast({ foreground, background, algorithm: 'WCAG21' })
 
     expect(Number(result)).toBeGreaterThan(3)
+  })
+})
+
+describe('Color Validation and Parsing', () => {
+  describe('isValidColorFormat', () => {
+    test('should validate HEX colors with 6 characters', () => {
+      expect(isValidColorFormat('#ff0000')).toBe(true)
+      expect(isValidColorFormat('#FFFFFF')).toBe(true)
+      expect(isValidColorFormat('#123abc')).toBe(true)
+    })
+
+    test('should validate HEX colors with 3 characters', () => {
+      expect(isValidColorFormat('#fff')).toBe(true)
+      expect(isValidColorFormat('#F00')).toBe(true)
+      expect(isValidColorFormat('#abc')).toBe(true)
+    })
+
+    test('should validate HEX colors with 8 characters (with alpha)', () => {
+      expect(isValidColorFormat('#ff0000ff')).toBe(true)
+      expect(isValidColorFormat('#FFFFFF80')).toBe(true)
+    })
+
+    test('should validate OKLCH format', () => {
+      expect(isValidColorFormat('oklch(0.5 0.2 180)')).toBe(true)
+      expect(isValidColorFormat('oklch(0.84 0.2 99.44)')).toBe(true)
+      expect(isValidColorFormat('oklch(1 0 0)')).toBe(true)
+      expect(isValidColorFormat('oklch(0.5 0.2 180 / 0.8)')).toBe(true)
+    })
+
+    test('should validate OKLCH with percentage lightness', () => {
+      expect(isValidColorFormat('oklch(50% 0.2 180)')).toBe(true)
+      expect(isValidColorFormat('oklch(100% 0 0)')).toBe(true)
+    })
+
+    test('should reject invalid formats', () => {
+      expect(isValidColorFormat('invalid')).toBe(false)
+      expect(isValidColorFormat('#gggggg')).toBe(false)
+      expect(isValidColorFormat('#ff')).toBe(false)
+      expect(isValidColorFormat('oklch()')).toBe(false)
+      expect(isValidColorFormat('oklch(invalid)')).toBe(false)
+      expect(isValidColorFormat('')).toBe(false)
+    })
+
+    test('should validate RGB format', () => {
+      expect(isValidColorFormat('rgb(255, 0, 0)')).toBe(true)
+      expect(isValidColorFormat('rgb(255 0 0)')).toBe(true)
+      expect(isValidColorFormat('rgba(255, 0, 0, 0.5)')).toBe(true)
+    })
+
+    test('should validate HSL format', () => {
+      expect(isValidColorFormat('hsl(0, 100%, 50%)')).toBe(true)
+      expect(isValidColorFormat('hsl(180 50% 50%)')).toBe(true)
+      expect(isValidColorFormat('hsla(0, 100%, 50%, 0.8)')).toBe(true)
+    })
+
+    test('should validate LAB format', () => {
+      expect(isValidColorFormat('lab(50% 40 50)')).toBe(true)
+      expect(isValidColorFormat('lab(80 -50 30)')).toBe(true)
+    })
+
+    test('should validate named colors', () => {
+      expect(isValidColorFormat('red')).toBe(true)
+      expect(isValidColorFormat('blue')).toBe(true)
+      expect(isValidColorFormat('transparent')).toBe(true)
+    })
+
+    test('should handle whitespace', () => {
+      expect(isValidColorFormat('  #ff0000  ')).toBe(true)
+      expect(isValidColorFormat('  oklch(0.5 0.2 180)  ')).toBe(true)
+    })
+
+    test('should handle null and undefined', () => {
+      expect(isValidColorFormat(null as unknown as string)).toBe(false)
+      expect(isValidColorFormat(undefined as unknown as string)).toBe(false)
+    })
+  })
+
+  describe('parseColorToHex', () => {
+    test('should convert OKLCH to HEX', () => {
+      const result = parseColorToHex('oklch(0.5 0.2 180)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert OKLCH with high chroma to HEX', () => {
+      const result = parseColorToHex('oklch(0.84 0.2 99.44)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should keep HEX as HEX', () => {
+      const result = parseColorToHex('#ff0000')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should normalize short HEX to HEX format', () => {
+      const result = parseColorToHex('#f00')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should handle uppercase HEX', () => {
+      const result = parseColorToHex('#FF0000')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should return null for invalid input', () => {
+      expect(parseColorToHex('invalid')).toBe(null)
+      expect(parseColorToHex('#gggggg')).toBe(null)
+      expect(parseColorToHex('')).toBe(null)
+      expect(parseColorToHex('oklch(invalid)')).toBe(null)
+    })
+
+    test('should handle whitespace', () => {
+      const result = parseColorToHex('  #ff0000  ')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should handle OKLCH with zero chroma', () => {
+      const result = parseColorToHex('oklch(0.5 0 0)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should handle null and undefined', () => {
+      expect(parseColorToHex(null as unknown as string)).toBe(null)
+      expect(parseColorToHex(undefined as unknown as string)).toBe(null)
+    })
+
+    test('should convert RGB to HEX', () => {
+      const result = parseColorToHex('rgb(255, 0, 0)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert HSL to HEX', () => {
+      const result = parseColorToHex('hsl(0, 100%, 50%)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert LAB to HEX', () => {
+      const result = parseColorToHex('lab(50% 40 50)')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+
+    test('should convert named colors to HEX', () => {
+      const result = parseColorToHex('red')
+      expect(result).toMatch(/^#[0-9a-f]{3,6}$/)
+    })
+  })
+})
+
+describe('generateColorScale', () => {
+  const testLightnessValues = [0.2, 0.4, 0.6, 0.8]
+
+  describe('HEX format output', () => {
+    test('should generate HEX colors from OKLCH input', () => {
+      const baseColor = 'oklch(0.4973 0.084851 204.553)'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    test('should generate HEX colors from HEX input', () => {
+      const baseColor = '#007079'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    test('should generate HEX colors from RGB input', () => {
+      const baseColor = 'rgb(0, 112, 121)'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    test('should generate grayscale HEX colors from grayscale OKLCH input', () => {
+      const baseColor = 'oklch(0.4091 0 0)'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+  })
+
+  describe('OKLCH format output', () => {
+    test('should generate OKLCH colors from OKLCH input', () => {
+      const baseColor = 'oklch(0.4973 0.084851 204.553)'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+
+    test('should generate OKLCH colors from HEX input', () => {
+      const baseColor = '#007079'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+  })
+
+  describe('Color scale behavior', () => {
+    test('should vary lightness across scale', () => {
+      const baseColor = 'oklch(0.5 0.1 180)'
+      const lightnessValues = [0.2, 0.4, 0.6, 0.8]
+      const scale = generateColorScale(
+        baseColor,
+        lightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      // Parse lightness from each OKLCH color
+      const lightnesses = scale.map((color) => {
+        const match = color.match(/oklch\(([0-9.]+)/)
+        return match ? parseFloat(match[1]) : 0
+      })
+
+      // Lightness should match input values
+      lightnesses.forEach((l, i) => {
+        expect(l).toBeCloseTo(lightnessValues[i], 2)
+      })
+    })
+
+    test('should apply gaussian function to chroma', () => {
+      const baseColor = 'oklch(0.5 0.2 180)'
+      const lightnessValues = [0.2, 0.6, 0.9]
+      const mean = 0.6
+      const stdDev = 2
+
+      const scale = generateColorScale(
+        baseColor,
+        lightnessValues,
+        mean,
+        stdDev,
+        'OKLCH',
+      )
+
+      // Parse chroma from each OKLCH color
+      const chromas = scale.map((color) => {
+        const match = color.match(/oklch\([0-9.]+\s+([0-9.]+)/)
+        return match ? parseFloat(match[1]) : 0
+      })
+
+      // Chroma at mean lightness should be highest
+      const chromaAtMean = chromas[1] // lightness 0.6
+      const chromaAway = chromas[0] // lightness 0.2
+
+      expect(chromaAtMean).toBeGreaterThan(chromaAway)
+    })
+
+    test('should handle grayscale colors (zero chroma)', () => {
+      const baseColor = 'oklch(0.5 0 0)'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+0\.000\s+[0-9.]+\)/)
+      })
+    })
+  })
+
+  describe('Error handling', () => {
+    test('should handle invalid base color gracefully', () => {
+      const invalidColor = 'invalid-color'
+      const scale = generateColorScale(
+        invalidColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      // Should return fallback colors
+      scale.forEach((color) => {
+        expect(color).toBe('#808080')
+      })
+    })
+
+    test('should handle empty lightness array', () => {
+      const baseColor = '#007079'
+      const scale = generateColorScale(baseColor, [], 0.6, 2, 'HEX')
+
+      expect(scale).toHaveLength(0)
+    })
   })
 })

@@ -58,7 +58,7 @@ const GridFocusManager = ({
 }) => {
   const focusManager = useFocusManager()
 
-  const prevYear = useRef<number | undefined>()
+  const prevYear = useRef<number | null>(null)
   const navByKeyboard = useRef<boolean>(false)
 
   const years = getPageYears(selectedYear, yearPickerPage)

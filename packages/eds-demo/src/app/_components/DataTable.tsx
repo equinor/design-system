@@ -1,18 +1,14 @@
 import React, { ComponentType } from "react";
-import {
-  TableHeader,
-  TableDataCell,
-  TableRow,
-  CheckmarkSelected,
-  CheckmarkUnselected,
-} from ".";
+import { CheckmarkUnselected, CheckmarkSelected } from "./index";
 import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon } from "./ChipIcons";
 import { tableData } from "./tableData";
 import { ChipProps } from "./ChipProps";
+import { Typography } from "./Typography";
 
 type Props = {
   className?: string;
   thClass: string;
+  trClass: string;
   activeThClass?: string;
   tdClass: string;
   trActiveClass: string;
@@ -29,6 +25,7 @@ type Props = {
 export const DataTable = ({
   className,
   thClass,
+  trClass,
   activeThClass,
   tdClass,
   trActiveClass,
@@ -44,7 +41,7 @@ export const DataTable = ({
 }: Props) => {
   const columns = [
     { id: "checkbox", label: "", active: false },
-    { id: "id", label: "ID", active: false },
+    { id: "id", label: "Id", active: false },
     { id: "person", label: "Person", active: true },
     { id: "position", label: "Position", active: false },
     { id: "location", label: "Location", active: false },
@@ -62,79 +59,106 @@ export const DataTable = ({
   };
 
   return (
-    <div className={className} {...rest}>
-      {columns.map((column) => (
-        <div
-          key={column.id}
-          className={`${
-            column.id !== "checkbox" ? "grow" : ""
-          } inline-flex flex-col items-start justify-start  shrink basis-0`}
-        >
-          <TableHeader
-            data-color-appearance={column.active ? "accent" : undefined}
-            className={`${thClass} ${column.active ? activeThClass : ""}`}
-          >
-            {column.id === "checkbox" ? (
-              <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
-                <div className="relative w-6 h-6">
-                  <CheckmarkUnselected className={checkmarkClass} />
+    <table className={className} {...rest}>
+      <thead className="">
+        <tr className="self-stretch min-h-[44px] flex-inline">
+          {columns.map((column, idx) => (
+            <th
+              data-debug
+              key={column.id}
+              className={`${thClass} ${column.active ? activeThClass : ""} ${idx === 0 ? "w-12" : "w-1/5"} self-stretch font-normal h-[44px] px-4 py-1 justify-start text-left grow shrink basis-0 cursor-pointer`}
+              data-color-appearance={column.active ? "accent" : undefined}
+            >
+              {idx === 0 ? (
+                <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
+                  <div className="relative w-6 h-6">
+                    <CheckmarkUnselected className={checkmarkClass} />
+                  </div>
                 </div>
-              </div>
-            ) : (
-              column.label
-            )}
-          </TableHeader>
-
-          {/* Render table data for each row */}
-          {tableData.map((row) => {
-            return (
-              <TableRow
-                key={`row-${row.id}`}
-                className={`${row.active ? trActiveClass : ""}`}
+              ) : (
+                <Typography
+                  as="span"
+                  size="md"
+                  isBaselineAligned={false}
+                  weight="bolder"
+                >
+                  {column.label}
+                </Typography>
+              )}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map((row) => (
+          <tr
+            key={`row-${row.id}`}
+            className={`${trClass} ${row.active ? trActiveClass : ""}`}
+          >
+            {columns.map((column) => (
+              <td
+                data-debug
+                key={`${row.id}-${column.id}`}
+                className={`${tdClass} px-4 py-1 leading-tight grow shrink basis-0 cursor-pointer`}
               >
-                <TableDataCell className={tdClass}>
-                  {column.id === "checkbox" && (
-                    <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
-                      <div className="relative w-6 h-6">
-                        {row.selected ? (
-                          <CheckmarkSelected className={checkmarkClass} />
-                        ) : (
-                          <CheckmarkUnselected className={checkmarkClass} />
-                        )}
-                      </div>
+                {column.id === "checkbox" && (
+                  <div className="w-[18px] h-[18px] justify-start items-center gap-1 flex">
+                    <div className="relative w-6 h-6">
+                      {row.selected ? (
+                        <CheckmarkSelected className={checkmarkClass} />
+                      ) : (
+                        <CheckmarkUnselected className={checkmarkClass} />
+                      )}
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {column.id === "id" && (
-                    <div className="h-5 text-sm leading-tight grow shrink basis-0">
+                {column.id === "id" && (
+                  <div className="h-5 grow shrink basis-0">
+                    <Typography as="span" size="md" isBaselineAligned={false}>
                       {row.id}
-                    </div>
-                  )}
+                    </Typography>
+                  </div>
+                )}
 
-                  {column.id === "person" && (
-                    <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
-                      <div className="self-stretch h-4 text-sm leading-none">
+                {column.id === "person" && (
+                  <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
+                    <div className="self-stretch h-4">
+                      <Typography as="span" size="md" isBaselineAligned={false}>
                         {row.person.name}
-                      </div>
-                      <div className="self-stretch h-4 text-xs leading-none tracking-tight underline">
+                      </Typography>
+                    </div>
+                    <div className="self-stretch h-4">
+                      <Typography
+                        as="span"
+                        size="sm"
+                        isBaselineAligned={false}
+                        className="underline"
+                      >
                         {row.person.email}
-                      </div>
+                      </Typography>
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {column.id === "position" && (
-                    <div className="h-5 text-sm leading-tight grow shrink basis-0">
+                {column.id === "position" && (
+                  <div className="h-5 grow shrink basis-0">
+                    <Typography as="span" size="md" isBaselineAligned={false}>
                       {row.position}
-                    </div>
-                  )}
+                    </Typography>
+                  </div>
+                )}
 
-                  {column.id === "location" && (
-                    <div className="h-5 text-sm leading-tight grow shrink basis-0">
+                {column.id === "location" && (
+                  <div className="h-5 grow shrink basis-0">
+                    <Typography as="span" size="md" isBaselineAligned={false}>
                       {row.location}
-                    </div>
-                  )}
+                    </Typography>
+                  </div>
+                )}
 
-                  {column.id === "status" && Chip && (
+                {column.id === "status" && Chip && (
+                  <div className="inline-flex">
                     <Chip
                       variant={row.status.type}
                       label={row.status.label}
@@ -147,13 +171,13 @@ export const DataTable = ({
                         success: chipSuccessClass,
                       }}
                     />
-                  )}
-                </TableDataCell>
-              </TableRow>
-            );
-          })}
-        </div>
-      ))}
-    </div>
+                  </div>
+                )}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };

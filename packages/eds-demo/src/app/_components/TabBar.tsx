@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab } from ".";
+import { Tab } from "./Tab";
 
 type TabItem = {
   id: string;
@@ -22,7 +22,7 @@ export const TabBar = ({
   ...rest
 }: Props) => {
   return (
-    <div className={className} {...rest}>
+    <nav aria-label="Content navigation" className={className} {...rest}>
       {tabs.map((tab) => (
         <Tab
           key={tab.id}
@@ -32,6 +32,6 @@ export const TabBar = ({
           {tab.label}
         </Tab>
       ))}
-    </div>
+    </nav>
   );
 };

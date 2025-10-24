@@ -8,27 +8,36 @@ Helpful Emoji 🐨 💰 💯
 
 */
 
-/* 
+/*
 
 🐨 Add styles to the components using the CSS variables.
 Use Dev Mode in Figma to inspect elements and find the variable name.
 
 */
 
-/* App */
+/* Dashboard */
 
-.app {
+.dashboard {
   background-color: light-dark(white, black);
   color: light-dark(black, white);
 }
 
-/* 
+/*
   💰 The top bar and sidebar are typically placed on top of
-   the application base layer to provide visual hierarchy
+   the dashboard base layer to provide visual hierarchy
 */
 
 .top-bar,
 .sidebar {
+  background-color: light-dark(white, black);
+  color: light-dark(black, white);
+}
+
+.table {
+  background-color: light-dark(white, black);
+}
+
+.menu {
   background-color: light-dark(white, black);
 }
 
@@ -40,12 +49,6 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   border-right: 1px solid light-dark(black, white);
 }
 
-/* Table */
-
-.table {
-  background-color: light-dark(white, black);
-}
-
 /*
   🐨 The sidebar link is interactive and can be used to navigate to different sections of the application. Add some visual style.
 */
@@ -53,7 +56,7 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 .sidebar-link {
 }
 
-/* 
+/*
   💰 The ghost-icon button is used for actions in the top bar and bottom of sidebar
 */
 
@@ -70,8 +73,8 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 }
 
 /* Chip */
-/* 
-  💰 The chip is used to display information in a compact way. 
+/*
+  💰 The chip is used to display information in a compact way.
   It can be used to display status, tags, or other information.
 */
 
@@ -82,6 +85,12 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 }
 
 .chip--info {
+  background-color: light-dark(white, black);
+  border: 1px solid light-dark(black, white);
+  color: light-dark(black, white);
+}
+
+.chip--success {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
   color: light-dark(black, white);
@@ -99,39 +108,45 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
   color: light-dark(black, white);
 }
 
-.chip--success {
-  background-color: light-dark(white, black);
-  border: 1px solid light-dark(black, white);
-  color: light-dark(black, white);
-}
-
-/* 
+/*
   💰 The tab is used to navigate between content in the main frame
 */
 
 .tab {
+  border-bottom: 1px solid light-dark(#d4d4d4, #4a4a4a);
+  color: light-dark(black, white);
+
   &:hover {
+    background-color: light-dark(#e1e1e1, #333);
   }
 }
 
 .tab--current {
+  border-bottom: 2px solid light-dark(black, white);
+  color: light-dark(black, white);
 }
 
 /* Button */
 
 .button--primary {
-  background-color: light-dark(black, white);
   color: light-dark(white, black);
+  background-color: light-dark(black, white);
 
   &:hover {
   }
+
+  &:active {
+  }
 }
 
-.button--outlined {
+.button--secondary {
   color: light-dark(black, white);
   border-color: light-dark(black, white);
 
   &:hover {
+  }
+
+  &:active {
   }
 }
 
@@ -170,7 +185,7 @@ Use Dev Mode in Figma to inspect elements and find the variable name.
 
 /* Table header */
 
-/* 
+/*
   🐨 The table header cell is interactive and can be used to sort the table. Add some visual style.
 */
 .th {

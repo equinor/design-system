@@ -19,8 +19,11 @@ export const Sidebar = ({
   ...rest
 }: Props) => {
   return (
-    <div className={className} {...rest}>
-      <div className="flex flex-col items-start self-stretch justify-start h-56">
+    <aside className={className} {...rest}>
+      <nav
+        aria-label="Sidebar navigation"
+        className="flex flex-col items-start self-stretch justify-start h-56"
+      >
         <SideBarLink className={linkClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +44,8 @@ export const Sidebar = ({
         <SideBarLink
           data-color-appearance="accent"
           className={`${linkClass} ${activeLinkClass}`}
+          popoverTarget="sidebar-menu"
+          anchorName="sidebar-menu-anchor"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,9 +97,9 @@ export const Sidebar = ({
             />
           </svg>
         </SideBarLink>
-      </div>
+      </nav>
       <ActionButton
-        className={`self-stretch h-14 w-14 px-5 rounded-full justify-between items-center flex ${buttonClass}`}
+        className={`h-14 w-14 px-5 rounded-full justify-center items-center flex self-center ${buttonClass}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -111,6 +116,6 @@ export const Sidebar = ({
           />
         </svg>
       </ActionButton>
-    </div>
+    </aside>
   );
 };

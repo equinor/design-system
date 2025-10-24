@@ -67,7 +67,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set ${{ env.INPUT_PATHS }}
+          git sparse-checkout set package.json pnpm-lock.yaml ${{ env.INPUT_PATHS }}
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -77,15 +77,20 @@ jobs:
         with:
           path: |
             ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
-      - name: Install pnpm
-        id: install-pnpm
-        # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: npm i --no-save pnpm@"<10.0.0"
+          key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('pnpm-lock.yaml') }}
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Install dependencies recursively
         id: install-dependencies
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: node_modules/.bin/pnpm i --force
+        run: pnpm install --force
       - id: cache-files
         name: Cache files
         uses: actions/cache@v4

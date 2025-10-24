@@ -1,4 +1,4 @@
-import "@equinor/eds-tokens/css/variables-dynamic.css";
+import "@equinor/eds-tokens/css/variables";
 import styles from "./styles.module.css";
 import { Chip } from "@/app/_components/Chip";
 import { Dashboard } from "@/app/_components/Dashboard";
