@@ -331,8 +331,7 @@ export const Compact: StoryObj<ButtonProps> = {
         <CSSButton variant="outlined">Outlined</CSSButton>
         <CSSButton variant="ghost">Ghost</CSSButton>
         <CSSButton variant="ghost_icon">
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-          <Icon data={menu} title="Ghost icon menu"></Icon>
+          <Icon name="menu" title="Menu"></Icon>
         </CSSButton>
       </Wrapper>
     </EdsProvider>
