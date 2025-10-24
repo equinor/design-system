@@ -1,2 +1,5 @@
 export { InputWrapper } from './InputWrapper'
 export type { InputWrapperProps } from './InputWrapper'
+export { useInputField } from './useInputField'
+export type { InputFieldConfig, UseInputFieldReturn } from './useInputField'
+export type { BaseInputFieldProps } from './types'

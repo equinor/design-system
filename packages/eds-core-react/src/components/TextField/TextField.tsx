@@ -1,42 +1,26 @@
+import { InputHTMLAttributes, forwardRef, ForwardedRef } from 'react'
 import {
-  ReactNode,
-  InputHTMLAttributes,
-  forwardRef,
-  ForwardedRef,
-} from 'react'
-import { useId } from '@equinor/eds-utils'
-import { InputWrapper } from '../InputWrapper'
+  InputWrapper,
+  useInputField,
+  BaseInputFieldProps,
+} from '../InputWrapper'
 import { Input } from '../Input'
-import type { Variants } from '../types'
 
-type SharedTextFieldProps = {
-  /** Variants */
-  variant?: Variants
-  /** Input unique id. If this is not provided, one will be generated */
-  id?: string
-  /** Label text */
-  label?: ReactNode
-  /** Meta text */
-  meta?: ReactNode
+type TextFieldSpecificProps = {
   /** Unit text */
   unit?: string
-  /** Helper text */
-  helperText?: string
-  /** InputIcon */
-  inputIcon?: ReactNode
-  /** HelperIcon */
-  helperIcon?: ReactNode
   /** Input ref */
   inputRef?: ForwardedRef<HTMLInputElement>
 }
 
-export type TextFieldProps = SharedTextFieldProps &
+export type TextFieldProps = BaseInputFieldProps &
+  TextFieldSpecificProps &
   InputHTMLAttributes<HTMLInputElement>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
     {
-      id: _id,
+      id,
       label,
       meta,
       unit,
@@ -53,14 +37,26 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     },
     ref,
   ) {
-    const id = useId(_id, 'input')
-    const helperTextId = useId(null, 'helpertext')
+    const { ariaProps, containerProps, labelProps, helperProps } =
+      useInputField({
+        id,
+        label,
+        meta,
+        helperText,
+        helperIcon,
+        variant,
+        disabled,
+        className,
+        style,
+        elementType: 'input',
+      })
+
     const hasRightAdornments = Boolean(unit || inputIcon)
-    let fieldProps = {
-      'aria-invalid': variant === 'error' || undefined,
+
+    const fieldProps = {
+      ...ariaProps,
       disabled,
       placeholder,
-      id,
       variant,
       rightAdornments: hasRightAdornments && (
         <>
@@ -70,40 +66,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ),
       ref: ref || inputRef,
       ...other,
-    }
-
-    let helperProps = {
-      id: null,
-      text: helperText,
-      icon: helperIcon,
-      disabled,
-    }
-
-    const containerProps = {
-      className,
-      style: {
-        width: '100%',
-        ...style,
-      },
-      color: variant,
-    }
-
-    const labelProps = {
-      htmlFor: id,
-      label,
-      meta,
-      disabled,
-    }
-
-    if (helperText) {
-      fieldProps = {
-        'aria-describedby': helperTextId,
-        ...fieldProps,
-      }
-      helperProps = {
-        ...helperProps,
-        id: helperTextId,
-      }
     }
 
     return (
