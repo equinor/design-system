@@ -33,7 +33,10 @@
     "design-system-docs",
     "github",
     "config",
-    "eds-demo"
+    "eds-demo",
+    "devcontainer",
+    "build",
+    "deps"
   ],
   "cSpell.words": [
     "APCA",
