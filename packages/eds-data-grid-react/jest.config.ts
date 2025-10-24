@@ -16,6 +16,7 @@ const config: Config = {
   transformIgnorePatterns: [
     'node_modules/(?!(\\.pnpm|ramda|@equinor/eds-core-react)/)',
   ],
+  testPathIgnorePatterns: ['/dist/'],
 
   moduleNameMapper: {
     '\\.(css)$':

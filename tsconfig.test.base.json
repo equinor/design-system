@@ -4,6 +4,7 @@
     "declaration": false,
     "noEmit": true,
     "isolatedModules": true,
-    "types": ["react", "react-dom", "jest"]
+    "types": ["react", "react-dom", "jest"],
+    "checkJs": false
   }
 }

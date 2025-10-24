@@ -162,5 +162,16 @@ module.exports = {
         'import/no-default-export': ['off'],
       },
     },
+    // Config files that require default exports (Playwright, Vite, etc.)
+    {
+      files: [
+        '**/playwright.config.ts',
+        '**/vite.config.ts',
+        '**/vitest.config.ts',
+      ],
+      rules: {
+        'import/no-default-export': ['off'],
+      },
+    },
   ],
 }

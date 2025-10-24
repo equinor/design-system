@@ -2,6 +2,86 @@
 
 exports[`Color Scheme Token Generation > should generate light and dark color scheme tokens from foundation colors > color-scheme-dark.json 1`] = `
 "{
+  "bg-floating": {
+    "$type": "color",
+    "$value": "{Dark.Gray.2}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--x-color-bg-floating)"
+        }
+      }
+    }
+  },
+  "bg-backdrop": {
+    "$type": "color",
+    "$value": "{Dark.Gray.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--x-color-bg-backdrop)"
+        }
+      }
+    }
+  },
+  "bg-input": {
+    "$type": "color",
+    "$value": "{Dark.Gray.1}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--x-color-bg-input)"
+        }
+      }
+    }
+  },
+  "border-focus": {
+    "$type": "color",
+    "$value": "{Dark.Blue.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--x-color-border-focus)"
+        }
+      }
+    }
+  },
+  "text-link": {
+    "$type": "color",
+    "$value": "{Dark.Blue.13}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--x-color-text-link)"
+        }
+      }
+    }
+  },
   "Accent": {
     "1": {
       "$type": "color",
@@ -1273,10 +1353,16 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
         }
       }
     }
-  },
+  }
+}
+"
+`;
+
+exports[`Color Scheme Token Generation > should generate light and dark color scheme tokens from foundation colors > color-scheme-light.json 1`] = `
+"{
   "bg-floating": {
     "$type": "color",
-    "$value": "{Dark.Gray.2}",
+    "$value": "{Light.Gray.2}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1292,7 +1378,7 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
   },
   "bg-backdrop": {
     "$type": "color",
-    "$value": "{Dark.Gray.7}",
+    "$value": "{Light.Gray.7}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1308,7 +1394,7 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
   },
   "bg-input": {
     "$type": "color",
-    "$value": "{Dark.Gray.1}",
+    "$value": "{Light.Gray.1}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1324,7 +1410,7 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
   },
   "border-focus": {
     "$type": "color",
-    "$value": "{Dark.Blue.7}",
+    "$value": "{Light.Blue.7}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1340,7 +1426,7 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
   },
   "text-link": {
     "$type": "color",
-    "$value": "{Dark.Blue.13}",
+    "$value": "{Light.Blue.13}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -1353,13 +1439,7 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
         }
       }
     }
-  }
-}
-"
-`;
-
-exports[`Color Scheme Token Generation > should generate light and dark color scheme tokens from foundation colors > color-scheme-light.json 1`] = `
-"{
+  },
   "Accent": {
     "1": {
       "$type": "color",
@@ -2628,86 +2708,6 @@ exports[`Color Scheme Token Generation > should generate light and dark color sc
             "ALL_SCOPES"
           ],
           "codeSyntax": {}
-        }
-      }
-    }
-  },
-  "bg-floating": {
-    "$type": "color",
-    "$value": "{Light.Gray.2}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {
-          "WEB": "var(--x-color-bg-floating)"
-        }
-      }
-    }
-  },
-  "bg-backdrop": {
-    "$type": "color",
-    "$value": "{Light.Gray.7}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {
-          "WEB": "var(--x-color-bg-backdrop)"
-        }
-      }
-    }
-  },
-  "bg-input": {
-    "$type": "color",
-    "$value": "{Light.Gray.1}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {
-          "WEB": "var(--x-color-bg-input)"
-        }
-      }
-    }
-  },
-  "border-focus": {
-    "$type": "color",
-    "$value": "{Light.Blue.7}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {
-          "WEB": "var(--x-color-border-focus)"
-        }
-      }
-    }
-  },
-  "text-link": {
-    "$type": "color",
-    "$value": "{Light.Blue.13}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {
-          "WEB": "var(--x-color-text-link)"
         }
       }
     }

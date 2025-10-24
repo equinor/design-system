@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { forwardRef, createRef } from 'react'
 import { mergeRefs } from './mergeRefs'
@@ -10,7 +11,7 @@ Component.displayName = 'Component'
 
 describe('useCombinedRefs', () => {
   it('calls function ref with correct payload', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     render(<Component data-testid="component" ref={callback} />)
 
     expect(callback).toHaveBeenCalledWith(screen.getByTestId('component'))

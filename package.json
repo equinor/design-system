@@ -1,8 +1,9 @@
 {
   "name": "eds",
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:all": "pnpm run lint .",
+    "lint:all:fast": "pnpm run lint:docs && pnpm run lint:core-react && pnpm run lint:data-grid-react && pnpm run lint:lab && pnpm run lint:utils",
     "lint:docs": "pnpm run lint ./apps/design-system-docs",
     "lint:core-react": "pnpm run lint ./packages/eds-core-react",
     "lint:data-grid-react": "pnpm run lint ./packages/eds-data-grid-react",

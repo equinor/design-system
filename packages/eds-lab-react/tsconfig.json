@@ -8,7 +8,12 @@
     "isolatedModules": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom"]
+    "types": ["@testing-library/jest-dom"],
+    "skipLibCheck": true,
+    "paths": {
+      "@equinor/eds-core-react": ["../eds-core-react/src"],
+      "@equinor/eds-core-react/*": ["../eds-core-react/src/*"]
+    }
   },
   "include": ["./src/**/*", "./jest.setup.ts"],
   "exclude": ["node_modules"]

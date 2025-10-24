@@ -25,11 +25,24 @@
   "files": [
     "dist/*"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/eds-core-react.cjs"
+    },
+    "./style": "./dist/style.css",
+    "./style.css": "./dist/style.css"
+  },
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
+    "test:visual": "playwright test",
+    "test:visual:ui": "playwright test --ui",
+    "test:visual:update": "playwright test --update-snapshots",
+    "test:visual:report": "playwright show-report",
     "storybook": "storybook dev -p 9000 --ci",
     "build:storybook": "storybook build -o storybook-build",
     "types": "tsc -p tsconfig.build.json"
@@ -41,6 +54,7 @@
     "react"
   ],
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -53,6 +67,8 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.5.2",
     "@types/jest": "^29.5.14",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^24.9.1",
     "@types/ramda": "^0.30.2",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
@@ -63,6 +79,7 @@
     "jest-styled-components": "^7.2.0",
     "js-file-download": "^0.4.12",
     "postcss": "^8.5.6",
+    "postcss-import": "^16.1.1",
     "ramda": "^0.31.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

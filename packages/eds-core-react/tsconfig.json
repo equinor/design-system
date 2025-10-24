@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "moduleResolution": "node",
     "declaration": true,
     "declarationDir": "./dist/types",
     "noEmit": false,
@@ -9,13 +8,9 @@
     "isolatedModules": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "paths": {
-      "react": ["./node_modules/@types/react/index.d.ts"],
-      "react-dom": ["./node_modules/@types/react-dom/index.d.ts"]
-    },
     "typeRoots": ["./node_modules", "./node_modules/@types"],
-    "types": ["react", "react-dom"]
+    "types": ["react", "react-dom", "mdx", "node"]
   },
-  "include": ["./src/**/*.ts*"],
+  "include": ["./src/**/*.ts*", "./*.config.ts"],
   "exclude": ["node_modules", "./src/**/*.test.tsx", "./src/**/*.test.ts"]
 }

@@ -2,11 +2,12 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import styled from 'styled-components'
 import { Icon } from '@equinor/eds-core-react'
-import { save } from '@equinor/eds-icons'
+import * as icons from '@equinor/eds-icons'
 import { CSSButton } from './Button'
 import React from 'react'
 
-Icon.add({ save })
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+Icon.add(icons)
 
 const StyledButton = styled(CSSButton)`
   position: relative;
@@ -32,7 +33,7 @@ describe('Button', () => {
     expect(screen.getByLabelText('save me test')).toBeInTheDocument()
     expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
-      save.svgPathData,
+      icons.save.svgPathData,
     )
   })
   it('Can extend the css for the component', () => {
@@ -88,7 +89,7 @@ describe('Button', () => {
     expect(screen.getByLabelText('save')).toBeInTheDocument()
     expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
-      save.svgPathData,
+      icons.save.svgPathData,
     )
   })
   it('Renders as a link when href prop is defined', () => {

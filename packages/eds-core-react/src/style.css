@@ -1,0 +1,4 @@
+/* EDS Core React - Main Stylesheet */
+/* This file aggregates all component styles */
+
+@import './components/Typography/typography.css';

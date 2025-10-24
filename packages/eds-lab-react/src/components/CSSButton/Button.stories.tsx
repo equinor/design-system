@@ -3,9 +3,10 @@ import { Icon, EdsProvider } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { StoryFn, StoryObj, Meta } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
-import { menu, save } from '@equinor/eds-icons'
+import * as icons from '@equinor/eds-icons'
 
-Icon.add({ save })
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+Icon.add(icons)
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -330,7 +331,7 @@ export const Compact: StoryObj<ButtonProps> = {
         <CSSButton variant="outlined">Outlined</CSSButton>
         <CSSButton variant="ghost">Ghost</CSSButton>
         <CSSButton variant="ghost_icon">
-          <Icon data={menu} title="Ghost icon menu"></Icon>
+          <Icon name="menu" title="Menu"></Icon>
         </CSSButton>
       </Wrapper>
     </EdsProvider>

@@ -9,6 +9,7 @@ import {
   typographyTemplate,
   outlineTemplate,
   OverridableComponent,
+  useDeprecationWarning,
 } from '@equinor/eds-utils'
 import {
   quickVariants,
@@ -128,6 +129,19 @@ export type TypographyProps = {
   lines?: number
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
+/**
+ * @deprecated Typography component is deprecated and will be removed in a future version.
+ * Please use the new Typography, Heading, or Paragraph components instead.
+ *
+ * Migration guide:
+ * - For headings: Use `<Heading as="h1|h2|h3|h4|h5|h6">` instead of `<Typography variant="h1|h2|h3|h4|h5|h6">`
+ * - For paragraphs: Use `<Paragraph>` instead of `<Typography variant="body_short|body_long">`
+ * - For inline text: Use `<Typography>` for more flexible text styling
+ *
+ * @see {@link TypographyNext}
+ * @see {@link Heading}
+ * @see {@link Paragraph}
+ */
 export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
   forwardRef(function Typography(
     {
@@ -145,6 +159,13 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
     },
     ref,
   ) {
+    useDeprecationWarning(
+      'The Typography component is deprecated and will be removed in a future version. ' +
+        'Please migrate to the new TypographyNext, Heading, or Paragraph component. ' +
+        'See the documentation for migration details.',
+      'Typography',
+    )
+
     const as: ElementType = providedAs
       ? providedAs
       : getElementType(variant, link)
