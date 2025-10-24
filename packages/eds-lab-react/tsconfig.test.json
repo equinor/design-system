@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.test.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
+      "@equinor/eds-core-react": ["../eds-core-react/src"],
+      "@equinor/eds-core-react/*": ["../eds-core-react/src/*"],
       "react": ["./node_modules/@types/react"],
       "react/*": ["./node_modules/@types/react/*"],
       "react-dom": ["./node_modules/@types/react-dom"],
@@ -17,5 +17,5 @@
     "./jest.setup.ts",
     "./styled.d.ts" // Make sure styled.d.ts is included for tests"
   ],
-  "exclude": ["node_modules", "src/**/*.stories.ts*", "src/stories", "src/test"]
+  "exclude": ["node_modules", "dist", "src/**/*.stories.ts*", "src/stories", "src/test"]
 }
