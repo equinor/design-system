@@ -1,12 +1,10 @@
 import { Links } from './../../../.storybook/components'
-import { Primary, Controls, Meta } from '@storybook/addon-docs/blocks'
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './Textarea.stories'
 
 <Meta of={ComponentStories} />
 
 # Textarea
-
-⚠️ Helper component - currently only for internal use. Use `Textfield` with `multiline`
 
 
 <Links 
@@ -20,7 +18,71 @@ import * as ComponentStories from './Textarea.stories'
 
 ## Usage
 
+`Textarea` is a multi-line text field, useful for larger amounts of text.
+
 <ul>
     <li>In its simplest form is a multi-line text-field, useful for larger amounts of text.</li>
     <li>**Label text** - every <code>Textarea</code> should have a label.</li>
 </ul>
+
+```tsx
+import { Textarea } from '@equinor/eds-core-react'
+
+<Textarea />
+```
+
+## Examples
+
+<ul>
+  <li>
+    **Label text** informs users as to what information is requested for the textarea.
+    Every textarea should have a label.
+  </li>
+  <li>
+    **Helper text** gives additional guidance about the input field, such as how
+    it will be used. It should only take up a single line.
+  </li>
+</ul>
+
+### Multiline
+
+Basic multiline textarea with configurable rows.
+
+<Canvas of={ComponentStories.Multiline} />
+
+### Multiline with `rowsMax`
+
+The textarea will auto-resize up to the maximum number of rows specified.
+
+<Canvas of={ComponentStories.MultilineRowsMax} />
+
+### Multiline with fixed height
+
+Note that a multiline with fixed `height` overwrites the `rows` property. `rowsMax` overwrites fixed `height`,
+so it is not recommended to use those together.
+
+<Canvas of={ComponentStories.MultilineFixedHeight} />
+
+### With icon
+
+<Canvas of={ComponentStories.WithIcon} />
+
+### Variants
+
+Examples of validation states. You can add the icon in the helper text or inside the textarea, but not in both places.
+
+<Canvas of={ComponentStories.Variants} />
+
+### Read only
+
+<Canvas of={ComponentStories.ReadOnly} />
+
+### Disabled
+
+<Canvas of={ComponentStories.Disabled} />
+
+### Compact
+
+Compact `Textarea` uses `EdsProvider`
+
+<Canvas of={ComponentStories.Compact} />

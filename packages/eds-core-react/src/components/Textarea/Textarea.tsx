@@ -4,35 +4,65 @@ import {
   TextareaHTMLAttributes,
   useCallback,
   CSSProperties,
+  ForwardedRef,
 } from 'react'
 import * as tokens from '../Input/Input.tokens'
 import { mergeRefs, useAutoResize } from '@equinor/eds-utils'
-import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 import { Input } from '../Input'
+import {
+  InputWrapper,
+  useInputField,
+  BaseInputFieldProps,
+} from '../InputWrapper'
 
 const { input } = tokens
 
-export type TextareaProps = {
-  /** Placeholder */
-  placeholder?: string
-  /** Variant */
-  variant?: Variants
-  /** Disabled state */
-  disabled?: boolean
-  /** Type */
-  type?: string
-  /** Read Only */
-  readOnly?: boolean
+type TextareaSpecificProps = {
   /** Specifies max rows for multiline  */
   rowsMax?: number
-} & TextareaHTMLAttributes<HTMLTextAreaElement>
+  /** Textarea ref */
+  textareaRef?: ForwardedRef<HTMLTextAreaElement>
+}
+
+export type TextareaProps = BaseInputFieldProps &
+  TextareaSpecificProps &
+  TextareaHTMLAttributes<HTMLTextAreaElement>
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    { variant, disabled = false, type = 'text', rowsMax, ...other },
+    {
+      id,
+      label,
+      meta,
+      helperText,
+      placeholder,
+      disabled,
+      className,
+      variant,
+      inputIcon,
+      helperIcon,
+      style,
+      rowsMax,
+      textareaRef,
+      ...other
+    },
     ref,
   ) {
+    const { ariaProps, containerProps, labelProps, helperProps } =
+      useInputField({
+        id,
+        label,
+        meta,
+        helperText,
+        helperIcon,
+        variant,
+        disabled,
+        className,
+        style,
+        elementType: 'textarea',
+      })
+
     const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
     const { density } = useEds()
     const spacings =
@@ -48,37 +78,46 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const padding = parseInt(top) + parseInt(bottom)
     const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
     useAutoResize(textareaEl, rowsMax ? maxHeight : null)
-    const combinedRef = useCallback(
-      () => mergeRefs<HTMLTextAreaElement>(ref, setTextareaEl),
-      [setTextareaEl, ref],
-    )()
 
-    const inputProps = {
-      ref: combinedRef,
-      type,
-      disabled,
-      variant,
-      ...other,
-    }
+    const combinedRef = useCallback(
+      () => mergeRefs<HTMLTextAreaElement>(ref || textareaRef, setTextareaEl),
+      [setTextareaEl, ref, textareaRef],
+    )()
 
     const leftAdornmentStyles = {
       style: { alignItems: 'flex-start' },
     }
-    const rigthAdornmentStyles = {
+    const rightAdornmentStyles = {
       style: {
         alignItems: 'flex-start',
         pointerEvents: 'none' as CSSProperties['pointerEvents'],
       },
     }
 
+    const hasRightAdornments = Boolean(inputIcon)
+
+    const fieldProps = {
+      ...ariaProps,
+      disabled,
+      placeholder,
+      variant,
+      rightAdornments: hasRightAdornments && inputIcon,
+      rightAdornmentsProps: rightAdornmentStyles,
+      leftAdornmentsProps: leftAdornmentStyles,
+      as: 'textarea' as const,
+      ref: combinedRef,
+      style: { height: 'auto' },
+      ...other,
+    }
+
     return (
-      <Input
-        as="textarea"
-        rightAdornmentsProps={rigthAdornmentStyles}
-        leftAdornmentsProps={leftAdornmentStyles}
-        style={{ height: 'auto' }}
-        {...inputProps}
-      />
+      <InputWrapper
+        helperProps={helperProps}
+        labelProps={labelProps}
+        {...containerProps}
+      >
+        <Input {...fieldProps} />
+      </InputWrapper>
     )
   },
 )
