@@ -2,7 +2,7 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
-import del from 'rollup-plugin-delete'
+
 import pkg from './package.json'
 
 const environment = process.env.NODE_ENV
@@ -10,6 +10,8 @@ const environment = process.env.NODE_ENV
 const isDevelopment = environment === 'development'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
+
+const del = require('rollup-plugin-delete').default
 
 export default [
   {
