@@ -113,7 +113,7 @@ describe('readJsonFiles', () => {
         'tokens/collection1.mode1.2.json',
         'tokens/collection1.mode1.3.json',
       ])
-    }).toThrowError(
+    }).toThrow(
       'Duplicate collection and mode in file: tokens/collection1.mode1.2.json',
     )
   })
@@ -125,7 +125,7 @@ describe('readJsonFiles', () => {
         'tokens/collection2.mode1.json',
         'foo.json',
       ])
-    }).toThrowError(
+    }).toThrow(
       'Invalid tokens file name: foo.json. File names must be in the format: {collectionName}.{modeName}.json',
     )
   })
@@ -142,9 +142,7 @@ describe('readJsonFiles', () => {
   it('handles empty files', () => {
     expect(() => {
       readJsonFiles(['empty_file.mode1.json'])
-    }).toThrowError(
-      'Invalid tokens file: empty_file.mode1.json. File is empty.',
-    )
+    }).toThrow('Invalid tokens file: empty_file.mode1.json. File is empty.')
   })
 })
 
@@ -887,7 +885,7 @@ describe('generatePostVariablesPayload', () => {
 
     expect(() => {
       generatePostVariablesPayload(tokensByFile, localVariablesResponse)
-    }).toThrowError(
+    }).toThrow(
       `Cannot update remote variable "var1" in collection "collection"`,
     )
   })
@@ -1015,7 +1013,7 @@ describe('generatePostVariablesPayload', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       generatePostVariablesPayload(tokensByFile, localVariablesResponse)
-    }).toThrowError('Invalid token $type: fontWeight')
+    }).toThrow('Invalid token $type: fontWeight')
   })
 
   it('throws on duplicate variable collections in the Figma file', () => {
@@ -1068,6 +1066,6 @@ describe('generatePostVariablesPayload', () => {
 
     expect(() => {
       generatePostVariablesPayload(tokensByFile, localVariablesResponse)
-    }).toThrowError('Duplicate variable collection in file: collection')
+    }).toThrow('Duplicate variable collection in file: collection')
   })
 })
