@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.2...eds-core-react@v1.1.0) (2025-10-24)
+
+
+### ✨ Added
+
+* **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
+* use npm badges to update package versions in documentation ([#4141](https://github.com/equinor/design-system/issues/4141)) ([ffd20ba](https://github.com/equinor/design-system/commit/ffd20bab35011a169f4fdb3f72f500b5755bae9d))
+
+
+### 🐛 Fixed
+
+* **eds-core-react:** update storybook version ([22a21fd](https://github.com/equinor/design-system/commit/22a21fdcdf7c76e514e523752466fd6b9b3d763f))
+* Update Card.docs.mdx ([7fc1205](https://github.com/equinor/design-system/commit/7fc1205b3c7bb2358f666524346027ccb7a52a92))
+
 ## [1.0.2](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.1...eds-core-react@v1.0.2) (2025-10-22)
 
 
