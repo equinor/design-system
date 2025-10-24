@@ -60,7 +60,8 @@ For detailed explanations and interactive demonstrations, see the [About page](h
 * **Mean**: The lightness value where chroma is at maximum (center of the bell curve)
 * **Standard deviation**: Controls how quickly chroma decreases away from the mean
 * **Lightness**: Predefined values for each step based on accessibility requirements
-* **Chroma**: Calculated as `gaussian(lightness, mean, stdDev) × baseChroma`
+* **Chroma**: Calculated as `gaussian(lightness, mean, stdDev) × DEFAULT_MAX_CHROMA`
+* **DEFAULT_MAX_CHROMA**: A constant value (0.37) ensuring consistent chroma across all colors at the same step
 
 ## Configuration
 
