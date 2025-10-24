@@ -17,4 +17,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   testEnvironment: 'jest-environment-jsdom',
   transformIgnorePatterns: ['node_modules/(?!.pnpm|ramda)'],
+  testPathIgnorePatterns: ['/dist/'],
 }
