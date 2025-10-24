@@ -31,9 +31,6 @@ function extractPrerequisites() {
   const coreReactPkg = readPackageJson(
     path.join(rootDir, 'packages/eds-core-react/package.json'),
   )
-  const docsPkg = readPackageJson(
-    path.join(rootDir, 'apps/design-system-docs/package.json'),
-  )
   const rootPkg = readPackageJson(path.join(rootDir, 'package.json'))
 
   // Read .nvmrc for Node.js version

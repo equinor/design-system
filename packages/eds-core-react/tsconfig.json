@@ -18,8 +18,8 @@
       "./node_modules/@types",
       "./src/components"
     ],
-    "types": ["react", "react-dom", "mdx"]
+    "types": ["react", "react-dom", "mdx", "node"]
   },
-  "include": ["./src/**/*.ts*"],
+  "include": ["./src/**/*.ts*", "./*.config.ts"],
   "exclude": ["node_modules", "./src/**/*.test.tsx", "./src/**/*.test.ts"]
 }
