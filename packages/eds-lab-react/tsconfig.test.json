@@ -17,5 +17,11 @@
     "./jest.setup.ts",
     "./styled.d.ts" // Make sure styled.d.ts is included for tests"
   ],
-  "exclude": ["node_modules", "dist", "src/**/*.stories.ts*", "src/stories", "src/test"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.stories.ts*",
+    "src/stories",
+    "src/test"
+  ]
 }

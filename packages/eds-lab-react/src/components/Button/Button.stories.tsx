@@ -6,11 +6,12 @@ import {
   EdsProvider,
   Density,
 } from '@equinor/eds-core-react'
-import { save } from '@equinor/eds-icons'
+import * as icons from '@equinor/eds-icons'
 import styled from 'styled-components'
 import { StoryFn, Meta } from '@storybook/react-vite'
 
-Icon.add({ save })
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+Icon.add(icons)
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -37,6 +38,7 @@ const meta: Meta<typeof Button> = {
 export default meta
 
 export const Default: StoryFn<ButtonProps> = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -70,6 +72,7 @@ export const Default: StoryFn<ButtonProps> = () => {
         <br />
         multiline
       </Button>
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
       <EdsProvider density={density}>
         <Button variant="outlined">Compact</Button>
         <Button variant="outlined">

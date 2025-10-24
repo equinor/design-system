@@ -21,8 +21,10 @@ export default meta
 
 export const Default: StoryObj<TableProps> = {
   render: (args) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const cellValues = toCellValues([...data, multilineText], columns)
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const CellNoWrap = styled(Table.Cell)`
       white-space: nowrap;
     `
