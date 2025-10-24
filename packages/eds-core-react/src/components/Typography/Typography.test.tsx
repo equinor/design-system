@@ -58,7 +58,7 @@ describe('Typography', () => {
 
     expect(() => {
       render(<Typography variant="label">Test</Typography>)
-    }).toThrowError()
+    }).toThrow()
 
     jest.clearAllMocks()
   })
