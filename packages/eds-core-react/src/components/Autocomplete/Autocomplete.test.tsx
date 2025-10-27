@@ -102,11 +102,16 @@ describe('Autocomplete', () => {
       expect(optionsList).toBeInTheDocument()
     })
 
-    // Removing auto-generated IDs for deterministic snapshot
+    // For snapshot testing, we need to remove auto-generated IDs to ensure deterministic results
+    // This is a legitimate use case for direct DOM access in testing
+    // TODO: remove eslint-disable when Testing Library provides better alternatives for snapshot testing
+    // eslint-disable-next-line testing-library/no-node-access
     optionsList.removeAttribute('id')
+    // eslint-disable-next-line testing-library/no-node-access
     optionsList.removeAttribute('aria-labelledby')
 
-    // Removing ID from all option elements
+    // Remove auto-generated IDs from option elements for consistent snapshots
+    // eslint-disable-next-line testing-library/no-node-access
     const options = optionsList.querySelectorAll('[role="option"]')
     options.forEach((option) => {
       option.removeAttribute('id')
@@ -543,6 +548,8 @@ describe('Autocomplete', () => {
 
     const autocomplete = await screen.findByTestId('styled-autocomplete')
 
+    // CSS testing requires access to container - this is a legitimate testing pattern
+    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyle('margin: 3px')
     expect(autocomplete.nodeName).toBe('INPUT')
   })

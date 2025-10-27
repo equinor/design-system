@@ -173,5 +173,16 @@ module.exports = {
         'import/no-default-export': ['off'],
       },
     },
+    // Exception for Next.js
+    {
+      files: [
+        '**/app/**/page.tsx',
+        '**/app/**/layout.tsx',
+        '**/tailwind.config.ts',
+      ],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
   ],
 }

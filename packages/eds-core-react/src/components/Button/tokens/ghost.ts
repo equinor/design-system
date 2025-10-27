@@ -37,7 +37,7 @@ export const primary: ButtonToken = mergeDeepRight(button, {
       },
     },
   },
-}) as ButtonToken
+})
 
 export const secondary = mergeDeepRight(primary, {
   typography: {

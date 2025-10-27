@@ -35,6 +35,7 @@ export function ThemeButton() {
       }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     transition.ready.then(() => {
       document.documentElement.animate(
         [
