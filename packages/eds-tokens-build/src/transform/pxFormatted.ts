@@ -16,7 +16,7 @@ export const pxFormatted: Transform = {
     const isNumber = token.$type === 'number'
     if (!isNumber) return false
 
-    const pxMatchers = ['tracking-tight', 'tracking-normal', 'tracking-loose']
+    const pxMatchers = ['tracking-tight', 'tracking-normal', 'tracking-wide']
     return (
       token?.path?.length > 0 &&
       pxMatchers.some((metric) => token.path.includes(metric))

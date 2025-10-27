@@ -1242,9 +1242,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.100.tracking-loose}",
+          "$value": "{type-scale.inter.100.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1388,9 +1388,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.tracking-loose}",
+          "$value": "{type-scale.inter.200.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1548,9 +1548,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.tracking-loose}",
+          "$value": "{type-scale.inter.300.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1694,9 +1694,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.tracking-loose}",
+          "$value": "{type-scale.inter.400.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1840,9 +1840,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.500.tracking-loose}",
+          "$value": "{type-scale.inter.500.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1986,9 +1986,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.tracking-loose}",
+          "$value": "{type-scale.inter.600.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2132,9 +2132,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.tracking-loose}",
+          "$value": "{type-scale.inter.700.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2278,9 +2278,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.tracking-loose}",
+          "$value": "{type-scale.inter.800.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2424,9 +2424,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.tracking-loose}",
+          "$value": "{type-scale.inter.900.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2570,9 +2570,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.tracking-loose}",
+          "$value": "{type-scale.inter.1000.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2645,6 +2645,20 @@
       }
     },
     "header": {
+      "font-family": {
+        "$type": "string",
+        "$value": "{font-family.equinor}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
       "xs": {
         "font-size": {
           "$type": "number",
@@ -2718,9 +2732,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.100.tracking-loose}",
+          "$value": "{type-scale.equinor.100.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2788,20 +2802,6 @@
               "scopes": [],
               "codeSyntax": {}
             }
-          }
-        }
-      },
-      "font-family": {
-        "$type": "string",
-        "$value": "{font-family.equinor}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
           }
         }
       },
@@ -2878,9 +2878,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.tracking-loose}",
+          "$value": "{type-scale.equinor.200.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3024,9 +3024,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.tracking-loose}",
+          "$value": "{type-scale.equinor.300.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3170,9 +3170,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.tracking-loose}",
+          "$value": "{type-scale.equinor.400.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3316,9 +3316,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-loose}",
+          "$value": "{type-scale.equinor.500.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3462,9 +3462,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.tracking-loose}",
+          "$value": "{type-scale.equinor.600.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3608,9 +3608,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.tracking-loose}",
+          "$value": "{type-scale.equinor.700.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3754,9 +3754,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.tracking-loose}",
+          "$value": "{type-scale.equinor.800.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3900,9 +3900,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.tracking-loose}",
+          "$value": "{type-scale.equinor.900.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4046,9 +4046,9 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.tracking-loose}",
+          "$value": "{type-scale.equinor.1000.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
