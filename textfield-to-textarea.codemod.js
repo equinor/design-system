@@ -18,9 +18,7 @@ module.exports = function transformer(file, api) {
   let hasChanges = false
 
   // Track if we need to update imports
-  let hasTextFieldMultiline = false
   let hasTextFieldSingleLine = false
-  let textFieldImportPath = null
   let changeCount = 0
   let textareaRefRenames = 0
 
@@ -53,9 +51,7 @@ module.exports = function transformer(file, api) {
         return false
       })
 
-      if (hasMultiline) {
-        hasTextFieldMultiline = true
-      } else {
+      if (!hasMultiline) {
         hasTextFieldSingleLine = true
       }
 
@@ -67,9 +63,6 @@ module.exports = function transformer(file, api) {
   textFieldsWithMultiline.forEach((path) => {
     const openingElement = path.value.openingElement
     const closingElement = path.value.closingElement
-
-    // Get the line number for better reporting
-    const lineNumber = path.value.loc?.start.line
 
     // Change component name from TextField to Textarea
     openingElement.name.name = 'Textarea'
@@ -112,7 +105,6 @@ module.exports = function transformer(file, api) {
         )
       })
       .forEach((path) => {
-        textFieldImportPath = path.value.source.value
         const specifiers = path.value.specifiers || []
 
         // Check if Textarea is already imported
