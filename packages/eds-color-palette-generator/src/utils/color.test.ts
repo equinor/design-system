@@ -691,7 +691,7 @@ describe('generateColorScale', () => {
       })
     })
 
-    test('should generate consistent chroma values across different colors at the same step', () => {
+    test('should generate consistent chroma values across different colors at the same step when maxChroma is provided', () => {
       // Test with three different colors that have different base chroma values
       const colors = [
         { name: 'Red', value: 'oklch(0.5 0.2 30)' }, // Higher chroma
@@ -702,8 +702,9 @@ describe('generateColorScale', () => {
       const lightnessValues = [0.2, 0.4, 0.5, 0.6, 0.8]
       const mean = 0.6
       const stdDev = 2
+      const maxChroma = 0.37 // Use a consistent max chroma value
 
-      // Generate scales for all colors
+      // Generate scales for all colors with the same maxChroma
       const scales = colors.map((colorDef) =>
         generateColorScale(
           colorDef.value,
@@ -711,6 +712,7 @@ describe('generateColorScale', () => {
           mean,
           stdDev,
           'OKLCH',
+          maxChroma,
         ),
       )
 
@@ -735,8 +737,8 @@ describe('generateColorScale', () => {
           const expectedMultiplier = Math.exp(
             (-25 / stdDev) * Math.pow(mean * -1 + lightness, 2),
           )
-          // DEFAULT_MAX_CHROMA is 0.37
-          const expectedChroma = expectedMultiplier * 0.37
+          // Chroma should be the multiplier times the provided maxChroma
+          const expectedChroma = expectedMultiplier * maxChroma
           expect(firstChroma).toBeCloseTo(expectedChroma, 2)
         }
       })

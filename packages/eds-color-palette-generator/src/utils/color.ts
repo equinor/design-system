@@ -50,11 +50,65 @@ export function parseColorToHex(input: string): string | null {
 }
 
 /**
- * Default maximum chroma value used for color scale generation.
- * This constant ensures consistent chroma values across different colors at the same step.
- * Value chosen to accommodate most vibrant colors while staying within displayable gamut.
+ * Threshold below which a color is considered low-saturation for averaging purposes.
  */
-export const DEFAULT_MAX_CHROMA = 0.37
+const LOW_SATURATION_THRESHOLD = 0.05
+
+/**
+ * Checks if a color has low saturation based on its chroma value.
+ * @param chroma - The chroma value from OKLCH color space
+ * @returns true if the color has low saturation (chroma < LOW_SATURATION_THRESHOLD)
+ */
+export function isLowSaturation(chroma: number): boolean {
+  return chroma < LOW_SATURATION_THRESHOLD
+}
+
+/**
+ * Calculates the average chroma from an array of base colors.
+ * Filters out low-saturation colors and returns the average chroma value
+ * of the remaining colors. This can be used to ensure consistent chroma across a color palette.
+ *
+ * @param baseColors - Array of color strings in any format supported by colorjs.io
+ * @returns Average chroma value, or undefined if no valid colors found
+ *
+ * @example
+ * const colors = ['#ff0000', '#00ff00', '#0000ff', '#808080']
+ * const avgChroma = calculateAverageChroma(colors)
+ * // Returns average chroma of red, green, and blue (grayscale and low saturation colors are excluded)
+ */
+export function calculateAverageChroma(
+  baseColors: string[],
+): number | undefined {
+  if (!baseColors || baseColors.length === 0) {
+    return undefined
+  }
+
+  const chromaValues: number[] = []
+
+  for (const colorString of baseColors) {
+    try {
+      const color = new Color(colorString)
+      const oklch = color.to('oklch')
+
+      // Filter out low saturation colors
+      if (!isLowSaturation(oklch.c)) {
+        chromaValues.push(oklch.c)
+      }
+    } catch (error) {
+      // Skip invalid colors
+      console.warn(`Skipping invalid color: ${colorString}`, error)
+    }
+  }
+
+  // If no valid saturated colors found, return default
+  if (chromaValues.length === 0) {
+    return undefined
+  }
+
+  // Calculate and return the average chroma
+  const sum = chromaValues.reduce((acc, val) => acc + val, 0)
+  return sum / chromaValues.length
+}
 
 export function gaussian(
   x: number,
@@ -65,12 +119,36 @@ export function gaussian(
   return Math.exp(exponent)
 }
 
+/**
+ * Generates a color scale based on a base color with consistent chroma across steps.
+ * Uses a gaussian function to distribute chroma values, with grayscale colors preserved.
+ *
+ * @param baseColor - Base color string in any format supported by colorjs.io
+ * @param lightnessValues - Array of lightness values (0-1) for each step in the scale
+ * @param mean - Mean value for the gaussian distribution (default 0.6)
+ * @param stdDev - Standard deviation for the gaussian distribution (default 2)
+ * @param format - Output format: 'OKLCH' or 'HEX' (default 'OKLCH')
+ * @param maxChroma - Maximum chroma value to use in the scale (default: uses base color's chroma)
+ *                   Can be calculated using calculateAverageChroma() for palette consistency
+ * @returns Array of color strings in the specified format
+ *
+ * @example
+ * // Using base color's chroma
+ * const colors = generateColorScale('#ff0000', [0.2, 0.4, 0.6, 0.8], 0.6, 2)
+ *
+ * @example
+ * // Using calculated average chroma from palette for consistency
+ * const baseColors = ['#ff0000', '#00ff00', '#0000ff']
+ * const avgChroma = calculateAverageChroma(baseColors)
+ * const redScale = generateColorScale('#ff0000', [0.2, 0.4, 0.6, 0.8], 0.6, 2, 'OKLCH', avgChroma)
+ */
 export function generateColorScale(
   baseColor: string,
   lightnessValues: number[],
   mean: number,
   stdDev: number,
   format: ColorFormat = 'OKLCH',
+  maxChroma?: number | undefined,
 ): string[] {
   // Validate the baseColor to ensure it's a proper color string
   try {
@@ -81,7 +159,7 @@ export function generateColorScale(
 
     // Get the base color's chroma to check if it's grayscale
     const baseOklch = base.to('oklch')
-    const isGrayscale = baseOklch.c < 0.001 // Treat very low chroma as grayscale
+    const baseIsLowSaturation = isLowSaturation(baseOklch.c)
 
     // Clone the base color for each step to avoid mutation issues
     for (let i = 0; i < steps; i++) {
@@ -90,11 +168,12 @@ export function generateColorScale(
         // Create a new color instance for each step to avoid mutation issues
         const color = new Color(base.toString({ format: 'hex' }))
         // Calculate new chroma based on gaussian function
-        // Use DEFAULT_MAX_CHROMA constant to ensure consistent chroma across all colors at the same step
-        // Exception: if the base color is grayscale (chroma ≈ 0), keep it grayscale
-        const chroma = isGrayscale
-          ? 0
-          : gaussian(lightness, mean, stdDev) * DEFAULT_MAX_CHROMA
+        // Use maxChroma parameter to ensure consistent chroma across all colors at the same step
+        // Exception: if the base color is low saturation (chroma < LOW_SATURATION_THRESHOLD), keep it low saturation
+        const baseChroma = color.to('oklch').c
+        const chroma = baseIsLowSaturation
+          ? baseChroma
+          : gaussian(lightness, mean, stdDev) * (maxChroma ?? baseChroma)
         // Apply new lightness and chroma values
         color.set('oklch.l', lightness)
         color.set('oklch.c', chroma)
