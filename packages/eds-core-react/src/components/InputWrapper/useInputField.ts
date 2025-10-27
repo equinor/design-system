@@ -11,9 +11,7 @@ export type InputFieldConfig = BaseInputFieldProps & {
   style?: React.CSSProperties
 }
 
-export type UseInputFieldOptions = InputFieldConfig & {
-  elementType: 'input' | 'textarea'
-}
+export type UseInputFieldOptions = InputFieldConfig
 
 export type UseInputFieldReturn = {
   fieldId: string
@@ -46,7 +44,6 @@ export const useInputField = ({
   disabled,
   className,
   style,
-  elementType,
 }: UseInputFieldOptions): UseInputFieldReturn => {
   const generatedFieldId = useId()
   const generatedHelperTextId = useId()

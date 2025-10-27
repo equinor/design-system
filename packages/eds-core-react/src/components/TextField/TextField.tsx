@@ -48,7 +48,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         disabled,
         className,
         style,
-        elementType: 'input',
       })
 
     const hasRightAdornments = Boolean(unit || inputIcon)

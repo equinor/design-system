@@ -67,7 +67,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         disabled,
         className,
         style,
-        elementType: 'textarea',
       })
 
     const textareaRef = useRef<HTMLTextAreaElement>(null)
