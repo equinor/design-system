@@ -99,9 +99,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.xs.tracking-loose}",
+        "$value": "{typography.ui-body.xs.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -245,9 +245,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.sm.tracking-loose}",
+        "$value": "{typography.ui-body.sm.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -391,9 +391,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.md.tracking-loose}",
+        "$value": "{typography.ui-body.md.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -537,9 +537,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.lg.tracking-loose}",
+        "$value": "{typography.ui-body.lg.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -683,9 +683,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.xl.tracking-loose}",
+        "$value": "{typography.ui-body.xl.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -829,9 +829,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.2xl.tracking-loose}",
+        "$value": "{typography.ui-body.2xl.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -975,9 +975,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.3xl.tracking-loose}",
+        "$value": "{typography.ui-body.3xl.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1121,9 +1121,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.4xl.tracking-loose}",
+        "$value": "{typography.ui-body.4xl.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1267,7 +1267,7 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
         "$value": "{typography.ui-body.5xl.font-weight-lighter}",
         "$description": "",
@@ -1413,9 +1413,9 @@
           }
         }
       },
-      "tracking-loose": {
+      "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.6xl.tracking-loose}",
+        "$value": "{typography.ui-body.6xl.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {

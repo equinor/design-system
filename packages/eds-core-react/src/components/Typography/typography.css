@@ -159,7 +159,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-xs-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-xs-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-xs-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-xs-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-xs-tracking-wide);
   }
 
   &[data-text-size='sm'],
@@ -176,7 +176,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-sm-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-sm-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-sm-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-sm-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-sm-tracking-wide);
   }
 
   &[data-text-size='md'],
@@ -193,7 +193,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-md-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-md-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-md-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-md-tracking-wide);
   }
 
   &[data-text-size='lg'],
@@ -210,7 +210,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-lg-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-lg-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-lg-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-lg-tracking-wide);
   }
 
   &[data-text-size='xl'],
@@ -227,7 +227,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-xl-tracking-wide);
   }
 
   &[data-text-size='2xl'],
@@ -246,7 +246,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-2xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-2xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-2xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-2xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-2xl-tracking-wide);
   }
 
   &[data-text-size='3xl'],
@@ -265,7 +265,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-3xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-3xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-3xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-3xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-3xl-tracking-wide);
   }
 
   &[data-text-size='4xl'],
@@ -284,7 +284,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-4xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-4xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-4xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-4xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-4xl-tracking-wide);
   }
 
   &[data-text-size='5xl'],
@@ -303,7 +303,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-5xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-5xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-5xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-5xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-5xl-tracking-wide);
   }
 
   &[data-text-size='6xl'],
@@ -322,7 +322,7 @@
     --_font-weight-bolder: var(--eds-typography-ui-body-6xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-ui-body-6xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-ui-body-6xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-ui-body-6xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-ui-body-6xl-tracking-wide);
   }
 }
 
@@ -340,7 +340,7 @@
     --_font-weight-bolder: var(--eds-typography-header-xs-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-xs-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-xs-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-xs-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-xs-tracking-wide);
   }
 
   &[data-text-size='sm'],
@@ -355,7 +355,7 @@
     --_font-weight-bolder: var(--eds-typography-header-sm-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-sm-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-sm-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-sm-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-sm-tracking-wide);
   }
 
   &[data-text-size='md'],
@@ -370,7 +370,7 @@
     --_font-weight-bolder: var(--eds-typography-header-md-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-md-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-md-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-md-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-md-tracking-wide);
   }
 
   &[data-text-size='lg'],
@@ -385,7 +385,7 @@
     --_font-weight-bolder: var(--eds-typography-header-lg-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-lg-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-lg-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-lg-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-lg-tracking-wide);
   }
 
   &[data-text-size='xl'],
@@ -400,7 +400,7 @@
     --_font-weight-bolder: var(--eds-typography-header-xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-xl-tracking-wide);
   }
 
   &[data-text-size='2xl'],
@@ -417,7 +417,7 @@
     --_font-weight-bolder: var(--eds-typography-header-2xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-2xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-2xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-2xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-2xl-tracking-wide);
   }
 
   &[data-text-size='3xl'],
@@ -434,7 +434,7 @@
     --_font-weight-bolder: var(--eds-typography-header-3xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-3xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-3xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-3xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-3xl-tracking-wide);
   }
 
   &[data-text-size='4xl'],
@@ -451,7 +451,7 @@
     --_font-weight-bolder: var(--eds-typography-header-4xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-4xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-4xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-4xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-4xl-tracking-wide);
   }
 
   &[data-text-size='5xl'],
@@ -468,7 +468,7 @@
     --_font-weight-bolder: var(--eds-typography-header-5xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-5xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-5xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-5xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-5xl-tracking-wide);
   }
 
   &[data-text-size='6xl'],
@@ -485,7 +485,7 @@
     --_font-weight-bolder: var(--eds-typography-header-6xl-font-weight-bolder);
     --_tracking-tight: var(--eds-typography-header-6xl-tracking-tight);
     --_tracking-normal: var(--eds-typography-header-6xl-tracking-normal);
-    --_tracking-wide: var(--eds-typography-header-6xl-tracking-loose);
+    --_tracking-wide: var(--eds-typography-header-6xl-tracking-wide);
   }
 }
 

@@ -88,7 +88,7 @@
   --eds-typography-ui-body-xs-font-size: var(--eds--spacious, 0.656rem) var(--eds--comfortable, 0.563rem);
   --eds-typography-ui-body-xs-tracking-tight: var(--eds--spacious, -1.15px) var(--eds--comfortable, -0.99px);
   --eds-typography-ui-body-xs-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-xs-tracking-loose: var(--eds--spacious, 1.15px) var(--eds--comfortable, 0.99px);
+  --eds-typography-ui-body-xs-tracking-wide: var(--eds--spacious, 1.15px) var(--eds--comfortable, 0.99px);
   --eds-typography-ui-body-xs-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-xs-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-xs-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -97,7 +97,7 @@
   --eds-typography-ui-body-sm-font-size: var(--eds--spacious, 0.75rem) var(--eds--comfortable, 0.656rem);
   --eds-typography-ui-body-sm-tracking-tight: var(--eds--spacious, -1.32px) var(--eds--comfortable, -1.15px);
   --eds-typography-ui-body-sm-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-sm-tracking-loose: var(--eds--spacious, 1.32px) var(--eds--comfortable, 1.15px);
+  --eds-typography-ui-body-sm-tracking-wide: var(--eds--spacious, 1.32px) var(--eds--comfortable, 1.15px);
   --eds-typography-ui-body-sm-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-sm-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-sm-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -107,7 +107,7 @@
   --eds-typography-ui-body-md-font-size: var(--eds--spacious, 0.875rem) var(--eds--comfortable, 0.75rem);
   --eds-typography-ui-body-md-tracking-tight: var(--eds--spacious, -1.54px) var(--eds--comfortable, -1.32px);
   --eds-typography-ui-body-md-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-md-tracking-loose: var(--eds--spacious, 1.54px) var(--eds--comfortable, 1.32px);
+  --eds-typography-ui-body-md-tracking-wide: var(--eds--spacious, 1.54px) var(--eds--comfortable, 1.32px);
   --eds-typography-ui-body-md-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-md-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-md-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -116,7 +116,7 @@
   --eds-typography-ui-body-lg-font-size: var(--eds--spacious, 1rem) var(--eds--comfortable, 0.875rem);
   --eds-typography-ui-body-lg-tracking-tight: var(--eds--spacious, -1.76px) var(--eds--comfortable, -1.54px);
   --eds-typography-ui-body-lg-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-lg-tracking-loose: var(--eds--spacious, 1.76px) var(--eds--comfortable, 1.54px);
+  --eds-typography-ui-body-lg-tracking-wide: var(--eds--spacious, 1.76px) var(--eds--comfortable, 1.54px);
   --eds-typography-ui-body-lg-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-lg-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-lg-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -125,7 +125,7 @@
   --eds-typography-ui-body-xl-font-size: var(--eds--spacious, 1.156rem) var(--eds--comfortable, 1rem);
   --eds-typography-ui-body-xl-tracking-tight: var(--eds--spacious, -1.76px) var(--eds--comfortable, -1.76px);
   --eds-typography-ui-body-xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-xl-tracking-loose: var(--eds--spacious, 2.035px) var(--eds--comfortable, 1.76px);
+  --eds-typography-ui-body-xl-tracking-wide: var(--eds--spacious, 2.035px) var(--eds--comfortable, 1.76px);
   --eds-typography-ui-body-xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -134,7 +134,7 @@
   --eds-typography-ui-body-2xl-font-size: var(--eds--spacious, 1.313rem) var(--eds--comfortable, 1.156rem);
   --eds-typography-ui-body-2xl-tracking-tight: var(--eds--spacious, -2.31px) var(--eds--comfortable, -1.76px);
   --eds-typography-ui-body-2xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-2xl-tracking-loose: var(--eds--spacious, 2.31px) var(--eds--comfortable, 2.035px);
+  --eds-typography-ui-body-2xl-tracking-wide: var(--eds--spacious, 2.31px) var(--eds--comfortable, 2.035px);
   --eds-typography-ui-body-2xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-2xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-2xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -143,7 +143,7 @@
   --eds-typography-ui-body-3xl-font-size: var(--eds--spacious, 1.531rem) var(--eds--comfortable, 1.313rem);
   --eds-typography-ui-body-3xl-tracking-tight: var(--eds--spacious, -2.695px) var(--eds--comfortable, -2.31px);
   --eds-typography-ui-body-3xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-3xl-tracking-loose: var(--eds--spacious, 2.695px) var(--eds--comfortable, 2.31px);
+  --eds-typography-ui-body-3xl-tracking-wide: var(--eds--spacious, 2.695px) var(--eds--comfortable, 2.31px);
   --eds-typography-ui-body-3xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-3xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-3xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -152,7 +152,7 @@
   --eds-typography-ui-body-4xl-font-size: var(--eds--spacious, 1.75rem) var(--eds--comfortable, 1.531rem);
   --eds-typography-ui-body-4xl-tracking-tight: var(--eds--spacious, -3.08px) var(--eds--comfortable, -2.695px);
   --eds-typography-ui-body-4xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-4xl-tracking-loose: var(--eds--spacious, 3.08px) var(--eds--comfortable, 2.695px);
+  --eds-typography-ui-body-4xl-tracking-wide: var(--eds--spacious, 3.08px) var(--eds--comfortable, 2.695px);
   --eds-typography-ui-body-4xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-4xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-4xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -161,7 +161,7 @@
   --eds-typography-ui-body-5xl-font-size: var(--eds--spacious, 2rem) var(--eds--comfortable, 1.75rem);
   --eds-typography-ui-body-5xl-tracking-tight: var(--eds--spacious, -3.52px) var(--eds--comfortable, -3.08px);
   --eds-typography-ui-body-5xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-5xl-tracking-loose: var(--eds--spacious, 3.52px) var(--eds--comfortable, 3.08px);
+  --eds-typography-ui-body-5xl-tracking-wide: var(--eds--spacious, 3.52px) var(--eds--comfortable, 3.08px);
   --eds-typography-ui-body-5xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-5xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-ui-body-5xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -170,26 +170,26 @@
   --eds-typography-ui-body-6xl-font-size: var(--eds--spacious, 2.313rem) var(--eds--comfortable, 2rem);
   --eds-typography-ui-body-6xl-tracking-tight: var(--eds--spacious, -4.07px) var(--eds--comfortable, -3.52px);
   --eds-typography-ui-body-6xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-ui-body-6xl-tracking-loose: var(--eds--spacious, 4.07px) var(--eds--comfortable, 3.52px);
+  --eds-typography-ui-body-6xl-tracking-wide: var(--eds--spacious, 4.07px) var(--eds--comfortable, 3.52px);
   --eds-typography-ui-body-6xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-ui-body-6xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 0px);
   --eds-typography-ui-body-6xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
   --eds-typography-ui-body-6xl-lineheight-default: var(--eds--spacious, 2.5rem) var(--eds--comfortable, 2.25rem);
   --eds-typography-ui-body-6xl-lineheight-squished: var(--eds--spacious, 2.25rem) var(--eds--comfortable, 2rem);
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: var(--eds--spacious, 0.75rem) var(--eds--comfortable, 0.656rem);
   --eds-typography-header-xs-tracking-tight: var(--eds--spacious, -1.15px) var(--eds--comfortable, -0.99px);
   --eds-typography-header-xs-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-xs-tracking-loose: var(--eds--spacious, 1.15px) var(--eds--comfortable, 0.99px);
+  --eds-typography-header-xs-tracking-wide: var(--eds--spacious, 1.15px) var(--eds--comfortable, 0.99px);
   --eds-typography-header-xs-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-xs-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-xs-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
   --eds-typography-header-xs-lineheight-default: var(--eds--spacious, 1rem) var(--eds--comfortable, 0.75rem);
   --eds-typography-header-xs-lineheight-squished: var(--eds--spacious, 0.75rem) var(--eds--comfortable, 0.75rem);
-  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-sm-font-size: var(--eds--spacious, 0.875rem) var(--eds--comfortable, 0.75rem);
   --eds-typography-header-sm-tracking-tight: var(--eds--spacious, -1.32px) var(--eds--comfortable, -1.15px);
   --eds-typography-header-sm-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-sm-tracking-loose: var(--eds--spacious, 1.32px) var(--eds--comfortable, 1.15px);
+  --eds-typography-header-sm-tracking-wide: var(--eds--spacious, 1.32px) var(--eds--comfortable, 1.15px);
   --eds-typography-header-sm-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-sm-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-sm-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -198,7 +198,7 @@
   --eds-typography-header-md-font-size: var(--eds--spacious, 1rem) var(--eds--comfortable, 0.875rem);
   --eds-typography-header-md-tracking-tight: var(--eds--spacious, -1.54px) var(--eds--comfortable, -1.32px);
   --eds-typography-header-md-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-md-tracking-loose: var(--eds--spacious, 1.54px) var(--eds--comfortable, 1.32px);
+  --eds-typography-header-md-tracking-wide: var(--eds--spacious, 1.54px) var(--eds--comfortable, 1.32px);
   --eds-typography-header-md-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-md-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-md-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -207,7 +207,7 @@
   --eds-typography-header-lg-font-size: var(--eds--spacious, 1.125rem) var(--eds--comfortable, 1rem);
   --eds-typography-header-lg-tracking-tight: var(--eds--spacious, -1.76px) var(--eds--comfortable, -1.54px);
   --eds-typography-header-lg-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-lg-tracking-loose: var(--eds--spacious, 1.76px) var(--eds--comfortable, 1.54px);
+  --eds-typography-header-lg-tracking-wide: var(--eds--spacious, 1.76px) var(--eds--comfortable, 1.54px);
   --eds-typography-header-lg-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-lg-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-lg-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -216,7 +216,7 @@
   --eds-typography-header-xl-font-size: var(--eds--spacious, 1.313rem) var(--eds--comfortable, 1.125rem);
   --eds-typography-header-xl-tracking-tight: var(--eds--spacious, -1.76px) var(--eds--comfortable, -1.76px);
   --eds-typography-header-xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-xl-tracking-loose: var(--eds--spacious, 2.035px) var(--eds--comfortable, 1.76px);
+  --eds-typography-header-xl-tracking-wide: var(--eds--spacious, 2.035px) var(--eds--comfortable, 1.76px);
   --eds-typography-header-xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -225,7 +225,7 @@
   --eds-typography-header-2xl-font-size: var(--eds--spacious, 1.5rem) var(--eds--comfortable, 1.313rem);
   --eds-typography-header-2xl-tracking-tight: var(--eds--spacious, -2.31px) var(--eds--comfortable, -1.76px);
   --eds-typography-header-2xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-2xl-tracking-loose: var(--eds--spacious, 2.31px) var(--eds--comfortable, 2.035px);
+  --eds-typography-header-2xl-tracking-wide: var(--eds--spacious, 2.31px) var(--eds--comfortable, 2.035px);
   --eds-typography-header-2xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-2xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-2xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -234,7 +234,7 @@
   --eds-typography-header-3xl-font-size: var(--eds--spacious, 1.719rem) var(--eds--comfortable, 1.5rem);
   --eds-typography-header-3xl-tracking-tight: var(--eds--spacious, -2.695px) var(--eds--comfortable, -2.31px);
   --eds-typography-header-3xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-3xl-tracking-loose: var(--eds--spacious, 2.695px) var(--eds--comfortable, 2.31px);
+  --eds-typography-header-3xl-tracking-wide: var(--eds--spacious, 2.695px) var(--eds--comfortable, 2.31px);
   --eds-typography-header-3xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-3xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-3xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -243,7 +243,7 @@
   --eds-typography-header-4xl-font-size: var(--eds--spacious, 1.969rem) var(--eds--comfortable, 1.719rem);
   --eds-typography-header-4xl-tracking-tight: var(--eds--spacious, -3.08px) var(--eds--comfortable, -2.695px);
   --eds-typography-header-4xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-4xl-tracking-loose: var(--eds--spacious, 3.08px) var(--eds--comfortable, 2.695px);
+  --eds-typography-header-4xl-tracking-wide: var(--eds--spacious, 3.08px) var(--eds--comfortable, 2.695px);
   --eds-typography-header-4xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-4xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-4xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -252,7 +252,7 @@
   --eds-typography-header-5xl-font-size: var(--eds--spacious, 2.281rem) var(--eds--comfortable, 1.969rem);
   --eds-typography-header-5xl-tracking-tight: var(--eds--spacious, -3.52px) var(--eds--comfortable, -3.08px);
   --eds-typography-header-5xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-5xl-tracking-loose: var(--eds--spacious, 3.52px) var(--eds--comfortable, 3.08px);
+  --eds-typography-header-5xl-tracking-wide: var(--eds--spacious, 3.52px) var(--eds--comfortable, 3.08px);
   --eds-typography-header-5xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-5xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-5xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
@@ -261,7 +261,7 @@
   --eds-typography-header-6xl-font-size: var(--eds--spacious, 2.625rem) var(--eds--comfortable, 2.281rem);
   --eds-typography-header-6xl-tracking-tight: var(--eds--spacious, -4.07px) var(--eds--comfortable, -3.52px);
   --eds-typography-header-6xl-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
-  --eds-typography-header-6xl-tracking-loose: var(--eds--spacious, 4.07px) var(--eds--comfortable, 3.52px);
+  --eds-typography-header-6xl-tracking-wide: var(--eds--spacious, 4.07px) var(--eds--comfortable, 3.52px);
   --eds-typography-header-6xl-font-weight-lighter: var(--eds--spacious, 300) var(--eds--comfortable, 300);
   --eds-typography-header-6xl-font-weight-normal: var(--eds--spacious, 400) var(--eds--comfortable, 400);
   --eds-typography-header-6xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);

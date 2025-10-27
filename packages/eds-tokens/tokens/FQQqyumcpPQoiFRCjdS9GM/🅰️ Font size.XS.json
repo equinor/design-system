@@ -85,9 +85,9 @@
       }
     }
   },
-  "tracking-loose": {
+  "tracking-wide": {
     "$type": "number",
-    "$value": "{Font family.XS.tracking-loose}",
+    "$value": "{Font family.XS.tracking-wide}",
     "$description": "",
     "$extensions": {
       "com.figma": {

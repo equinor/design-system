@@ -695,7 +695,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 0.9900000095367432,
           "$description": "",
@@ -837,7 +837,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.149999976158142,
           "$description": "",
@@ -979,7 +979,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.3200000524520874,
           "$description": "",
@@ -1121,7 +1121,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.5399999618530273,
           "$description": "",
@@ -1263,7 +1263,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.7599999904632568,
           "$description": "",
@@ -1405,7 +1405,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 2.0350000858306885,
           "$description": "",
@@ -1547,7 +1547,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 2.309999942779541,
           "$description": "",
@@ -1689,7 +1689,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 2.694999933242798,
           "$description": "",
@@ -1831,7 +1831,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 3.0799999237060547,
           "$description": "",
@@ -1973,7 +1973,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 3.5199999809265137,
           "$description": "",
@@ -2115,7 +2115,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 4.070000171661377,
           "$description": "",
@@ -2259,7 +2259,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 0.9900000095367432,
           "$description": "",
@@ -2401,7 +2401,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.149999976158142,
           "$description": "",
@@ -2543,7 +2543,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.3200000524520874,
           "$description": "",
@@ -2685,7 +2685,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.5399999618530273,
           "$description": "",
@@ -2827,7 +2827,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 1.7599999904632568,
           "$description": "",
@@ -2969,7 +2969,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 2.0350000858306885,
           "$description": "",
@@ -3111,7 +3111,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 2.309999942779541,
           "$description": "",
@@ -3253,7 +3253,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 2.694999933242798,
           "$description": "",
@@ -3395,7 +3395,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 3.0799999237060547,
           "$description": "",
@@ -3537,7 +3537,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 3.5199999809265137,
           "$description": "",
@@ -3679,7 +3679,7 @@
             }
           }
         },
-        "tracking-loose": {
+        "tracking-wide": {
           "$type": "number",
           "$value": 4.070000171661377,
           "$description": "",
