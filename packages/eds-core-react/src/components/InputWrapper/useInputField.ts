@@ -1,4 +1,4 @@
-import { useId } from '@equinor/eds-utils'
+import { useId } from 'react'
 import type { LabelProps } from '../Label/Label'
 import type { HelperTextProps } from './HelperText/HelperText'
 import type { BaseInputFieldProps } from './types'
@@ -37,7 +37,7 @@ export type UseInputFieldReturn = {
  * for IDs, labels, helper text, and ARIA attributes
  */
 export const useInputField = ({
-  id: _id,
+  id,
   label,
   meta,
   helperText,
@@ -48,8 +48,12 @@ export const useInputField = ({
   style,
   elementType,
 }: UseInputFieldOptions): UseInputFieldReturn => {
-  const fieldId = useId(_id, elementType)
-  const helperTextId = useId(null, 'helpertext')
+  const generatedFieldId = useId()
+  const generatedHelperTextId = useId()
+
+  // Use provided ID or fall back to generated one
+  const fieldId = id ?? generatedFieldId
+  const helperTextId = generatedHelperTextId
   const hasHelperText = Boolean(helperText)
 
   const containerProps = {

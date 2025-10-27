@@ -9,7 +9,8 @@ import {
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 import { token as tabsToken } from './Tabs.tokens'
-import { useId, useToken, mergeRefs } from '@equinor/eds-utils'
+import { useId } from 'react'
+import { useToken, mergeRefs } from '@equinor/eds-utils'
 import { ThemeProvider } from 'styled-components'
 import { useEds } from '../EdsProvider'
 
@@ -37,7 +38,8 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   },
   ref,
 ) {
-  const tabsId = useId(id, 'tabs')
+  const generatedTabsId = useId()
+  const tabsId = id ?? generatedTabsId
   const tabsRef = useRef<HTMLDivElement>(null)
   const combinedTabsRef = useMemo(
     () => mergeRefs<HTMLDivElement>(tabsRef, ref),

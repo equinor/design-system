@@ -8,7 +8,8 @@ import {
 import { ThemeProvider } from 'styled-components'
 import type { AccordionProps } from './Accordion.types'
 import { accordion as tokens } from './Accordion.tokens'
-import { useId, useToken } from '@equinor/eds-utils'
+import { useId } from 'react'
+import { useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
 const Accordion = forwardRef<
@@ -18,7 +19,8 @@ const Accordion = forwardRef<
   { headerLevel = 'h2', chevronPosition = 'left', children, id, ...props },
   ref,
 ) {
-  const accordionId = useId(id, 'accordion')
+  const generatedAccordionId = useId()
+  const accordionId = id ?? generatedAccordionId
   const { density } = useEds()
   const token = useToken({ density }, tokens)
 

@@ -101,7 +101,7 @@ exports[`Accordion Matches snapshot 1`] = `
         class="c0"
       >
         <button
-          aria-controls="eds-accordion-1-panel-1"
+          aria-controls="«r0»-panel-1"
           aria-expanded="true"
           class="c1"
           data-testid="header1"
@@ -133,9 +133,9 @@ exports[`Accordion Matches snapshot 1`] = `
         </button>
       </h2>
       <div
-        aria-labelledby="eds-accordion-1-header-1"
+        aria-labelledby="«r0»-header-1"
         class="c5"
-        id="eds-accordion-1-panel-1"
+        id="«r0»-panel-1"
         role="region"
       >
         Details 1
