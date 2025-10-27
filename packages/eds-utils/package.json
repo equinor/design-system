@@ -73,7 +73,8 @@
     "styled-components": "6.1.19",
     "typescript": "^5.9.3",
     "vite": "^7.1.12",
-    "vitest": "^4.0.2"
+    "vitest": "^4.0.2",
+    "@vitejs/plugin-react": "^4.3.4"
   },
   "peerDependencies": {
     "react": "^19",

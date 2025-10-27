@@ -80,9 +80,7 @@ exports[`Autocomplete Matches snapshot 1`] = `
 }
 
 <ul
-  aria-labelledby="downshift-«r0»-label"
   class="c0 c1"
-  id="downshift-«r0»-menu"
   role="listbox"
   style="max-height: 300px;"
 >
@@ -98,7 +96,6 @@ exports[`Autocomplete Matches snapshot 1`] = `
     aria-setsize="3"
     class="c2"
     data-index="0"
-    id="downshift-«r0»-item-0"
     role="option"
     style="transform: translateY(0px); height: 48px;"
   >
@@ -116,7 +113,6 @@ exports[`Autocomplete Matches snapshot 1`] = `
     aria-setsize="3"
     class="c2"
     data-index="1"
-    id="downshift-«r0»-item-1"
     role="option"
     style="transform: translateY(48px); height: 48px;"
   >
@@ -134,7 +130,6 @@ exports[`Autocomplete Matches snapshot 1`] = `
     aria-setsize="3"
     class="c2"
     data-index="2"
-    id="downshift-«r0»-item-2"
     role="option"
     style="transform: translateY(96px); height: 48px;"
   >

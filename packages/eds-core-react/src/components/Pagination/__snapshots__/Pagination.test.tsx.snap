@@ -175,6 +175,7 @@ exports[`Pagination Matches snapshot 1`] = `
           aria-current="1"
           aria-label="Current page, page 1"
           class="c3"
+          style="background: var(--eds_interactive_primary__selected_highlight, rgba(230, 250, 236, 1));"
           tabindex="0"
           type="button"
         >

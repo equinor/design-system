@@ -27,17 +27,16 @@ import { Paper, Icon, Label } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGB)
 
-type ReactDatePickerComponentProps = Pick<
-  ReactDatePickerProps,
-  | 'className'
-  | 'dateFormat'
-  | 'popperPlacement'
-  | 'locale'
-  | 'renderCustomHeader'
-  | 'minDate'
-  | 'maxDate'
-  | 'readOnly'
->
+type ReactDatePickerComponentProps = {
+  className?: string
+  dateFormat?: string
+  popperPlacement?: ReactDatePickerProps['popperPlacement']
+  locale?: string
+  renderCustomHeader?: ReactDatePickerProps['renderCustomHeader']
+  minDate?: Date
+  maxDate?: Date
+  readOnly?: boolean
+}
 
 export type DatePickerProps = {
   id: string
@@ -59,7 +58,7 @@ export type DatePickerRefProps = ReactDatePicker &
     isCalendarOpen: () => boolean
   }
 
-const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   function DatePicker(
     {
       label,
@@ -280,5 +279,3 @@ const CalendarIcon = styled(Icon as any)`
   right: 6px;
   pointer-events: none;
 `
-
-export { ReactDatePicker as DatePicker }
