@@ -20,6 +20,7 @@
     "build:tokens-build": "pnpm --filter @equinor/eds-tokens-build run build",
     "build:token-sync": "pnpm --filter @equinor/eds-tokens-sync run build",
     "build:variables": "pnpm --filter @equinor/eds-tokens-build run build && pnpm --filter @equinor/eds-tokens run build:variables",
+    "chore:update-tokens-and-build-variables": "pnpm run update:tokens && pnpm run build:variables",
     "update:tokens": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens run update-tokens",
     "update:figma": "pnpm --filter @equinor/eds-tokens-sync run build && pnpm --filter @equinor/eds-tokens run update-figma",
     "build:icons": "pnpm --filter @equinor/eds-icons run build",
