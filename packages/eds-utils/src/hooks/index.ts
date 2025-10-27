@@ -1,6 +1,5 @@
 export { useOutsideClick } from './useOutsideClick'
 export { useGlobalKeyPress } from './useGlobalKeyPress'
-export { useId } from './useId'
 export { useIsMounted } from './useMountedRef'
 export { useAutoResize } from './useAutoResize'
 export * from './useToken'
