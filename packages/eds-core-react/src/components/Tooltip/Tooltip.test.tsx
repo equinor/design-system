@@ -177,7 +177,7 @@ describe('Tooltip', () => {
     fireEvent.focus(button)
     await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
-    expect(handler).toBeCalled()
+    expect(handler).toHaveBeenCalled()
   })
   it('should render correctly when the wrapped component has a ref', async () => {
     const buttonRef = createRef<HTMLButtonElement>()

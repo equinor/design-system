@@ -8,10 +8,10 @@ import {
   useImperativeHandle,
   useEffect,
 } from 'react'
-import DatePicker, {
+import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
   registerLocale,
-  ReactDatePickerProps,
+  DatePickerProps as ReactDatePickerProps,
 } from 'react-datepicker'
 import { enGB } from 'date-fns/locale'
 import styled, {
@@ -51,7 +51,7 @@ export type DatePickerProps = {
 } & InputHTMLAttributes<HTMLInputElement> &
   ReactDatePickerComponentProps
 
-export type DatePickerRefProps = DatePicker &
+export type DatePickerRefProps = ReactDatePicker &
   InputHTMLAttributes<HTMLInputElement> & {
     setBlur: () => void
     setFocus: () => void
@@ -59,7 +59,7 @@ export type DatePickerRefProps = DatePicker &
     isCalendarOpen: () => boolean
   }
 
-const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
+const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   function DatePicker(
     {
       label,
@@ -95,8 +95,8 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       onDateValueChange(dateValue)
     }, [dateValue, onDateValueChange])
 
-    const localRef = useRef<DatePicker | null>(null)
-    useImperativeHandle(ref, () => localRef.current)
+    const localRef = useRef<ReactDatePicker | null>(null)
+    useImperativeHandle(ref, () => localRef.current?.input as HTMLInputElement)
 
     const customHeader =
       renderCustomHeader ||
@@ -248,7 +248,7 @@ const Container = styled.div`
 `
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StyledDatepicker = styled(DatePicker as any)`
+const StyledDatepicker = styled(ReactDatePicker as any)`
   ${({ theme }) => css`
     height: 24px;
     font-family: ${theme.entities.title.typography.fontFamily};
