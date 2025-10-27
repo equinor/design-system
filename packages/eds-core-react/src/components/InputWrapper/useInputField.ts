@@ -11,8 +11,6 @@ export type InputFieldConfig = BaseInputFieldProps & {
   style?: React.CSSProperties
 }
 
-export type UseInputFieldOptions = InputFieldConfig
-
 export type UseInputFieldReturn = {
   fieldId: string
   helperTextId: string | null
@@ -44,7 +42,7 @@ export const useInputField = ({
   disabled,
   className,
   style,
-}: UseInputFieldOptions): UseInputFieldReturn => {
+}: InputFieldConfig): UseInputFieldReturn => {
   const generatedFieldId = useId()
   const generatedHelperTextId = useId()
 
