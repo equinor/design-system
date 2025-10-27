@@ -1,10 +1,9 @@
 import {
   forwardRef,
-  useState,
+  useRef,
   TextareaHTMLAttributes,
-  useCallback,
+  useMemo,
   CSSProperties,
-  ForwardedRef,
 } from 'react'
 import * as tokens from '../Input/Input.tokens'
 import { mergeRefs, useAutoResize } from '@equinor/eds-utils'
@@ -18,11 +17,20 @@ import {
 
 const { input } = tokens
 
+const leftAdornmentStyles = {
+  style: { alignItems: 'flex-start' as const },
+}
+
+const rightAdornmentStyles = {
+  style: {
+    alignItems: 'flex-start' as const,
+    pointerEvents: 'none' as CSSProperties['pointerEvents'],
+  },
+}
+
 type TextareaSpecificProps = {
   /** Specifies max rows for multiline  */
   rowsMax?: number
-  /** Textarea ref */
-  textareaRef?: ForwardedRef<HTMLTextAreaElement>
 }
 
 export type TextareaProps = BaseInputFieldProps &
@@ -44,7 +52,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       helperIcon,
       style,
       rowsMax,
-      textareaRef,
       ...other
     },
     ref,
@@ -63,45 +70,33 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         elementType: 'textarea',
       })
 
-    const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
     const { density } = useEds()
     const spacings =
       density === 'compact' ? input.modes.compact.spacings : input.spacings
     const { lineHeight } = tokens.input.typography
     const { top, bottom } = spacings
-    let fontSize = 16
 
-    if (textareaEl) {
-      fontSize = parseInt(window.getComputedStyle(textareaEl).fontSize)
-    }
+    // Calculate maxHeight if rowsMax is provided
+    // Using default fontSize of 16px for initial calculation
+    // useAutoResize will handle actual resizing based on element's scrollHeight
+    const maxHeight = rowsMax
+      ? parseFloat(lineHeight) * 16 * rowsMax + parseInt(top) + parseInt(bottom)
+      : null
 
-    const padding = parseInt(top) + parseInt(bottom)
-    const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
-    useAutoResize(textareaEl, rowsMax ? maxHeight : null)
+    useAutoResize(textareaRef.current, maxHeight)
 
-    const combinedRef = useCallback(
-      () => mergeRefs<HTMLTextAreaElement>(ref || textareaRef, setTextareaEl),
-      [setTextareaEl, ref, textareaRef],
-    )()
-
-    const leftAdornmentStyles = {
-      style: { alignItems: 'flex-start' },
-    }
-    const rightAdornmentStyles = {
-      style: {
-        alignItems: 'flex-start',
-        pointerEvents: 'none' as CSSProperties['pointerEvents'],
-      },
-    }
-
-    const hasRightAdornments = Boolean(inputIcon)
+    const combinedRef = useMemo(
+      () => mergeRefs<HTMLTextAreaElement>(ref, textareaRef),
+      [ref],
+    )
 
     const fieldProps = {
       ...ariaProps,
       disabled,
       placeholder,
       variant,
-      rightAdornments: hasRightAdornments && inputIcon,
+      rightAdornments: inputIcon,
       rightAdornmentsProps: rightAdornmentStyles,
       leftAdornmentsProps: leftAdornmentStyles,
       as: 'textarea' as const,

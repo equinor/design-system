@@ -59,7 +59,6 @@ const meta: Meta<typeof Textarea> = {
       description:
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
-    textareaRef: { control: { type: null } },
   },
   decorators: [
     (Story) => {
@@ -93,7 +92,7 @@ export const MultilineRowsMax: StoryFn<TextareaProps> = () => (
   <Textarea
     id="storybook-multiline-three"
     label="Multiline with max 10 rows"
-    rows={3}
+    rows={1}
     rowsMax={10}
   />
 )
