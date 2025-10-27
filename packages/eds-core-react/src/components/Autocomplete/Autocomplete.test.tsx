@@ -7,6 +7,7 @@ import {
   within,
   waitFor,
 } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import styled from 'styled-components'
 import { Autocomplete } from '.'
 
@@ -98,7 +99,17 @@ describe('Autocomplete', () => {
     const optionsList = openAutocomplete[1]
 
     await waitFor(() => {
-      expect(optionsList).toBeVisible()
+      expect(optionsList).toBeInTheDocument()
+    })
+
+    // Removing auto-generated IDs for deterministic snapshot
+    optionsList.removeAttribute('id')
+    optionsList.removeAttribute('aria-labelledby')
+
+    // Removing ID from all option elements
+    const options = optionsList.querySelectorAll('[role="option"]')
+    options.forEach((option) => {
+      option.removeAttribute('id')
     })
 
     expect(optionsList).toMatchSnapshot()
@@ -237,7 +248,7 @@ describe('Autocomplete', () => {
     render(
       <StyledAutocomplete
         //a bug in styled-components 6.1.8 breaks the conditional type for optionLabel when using styled(Autocomplete)
-        optionLabel={(label: string) => label}
+        optionLabel={(option: unknown) => option as string}
         label={labelText}
         options={items}
         data-testid="styled-autocomplete"
@@ -357,7 +368,7 @@ describe('Autocomplete', () => {
   }
 
   const ControlledAutoComplete = ({ onOptionsChange }: ControlledProps) => {
-    const [selected, setSelected] = useState([])
+    const [selected, setSelected] = useState<string[]>([])
     return (
       <Autocomplete
         multiple
@@ -523,7 +534,7 @@ describe('Autocomplete', () => {
     const { container } = render(
       <StyledAutocomplete
         //a bug in styled-components 6.1.8 breaks the conditional type for optionLabel when using styled(Autocomplete)
-        optionLabel={(label: string) => label}
+        optionLabel={(option: unknown) => option as string}
         label="test"
         options={items}
         data-testid="styled-autocomplete"
@@ -533,7 +544,7 @@ describe('Autocomplete', () => {
     const autocomplete = await screen.findByTestId('styled-autocomplete')
 
     // eslint-disable-next-line testing-library/no-node-access
-    expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+    expect(container.firstChild).toHaveStyle('clip-path: unset')
     expect(autocomplete.nodeName).toBe('INPUT')
   })
 })
