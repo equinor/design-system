@@ -82,6 +82,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.28.4",
-    "@equinor/eds-tokens": "workspace:*"
+    "@equinor/eds-tokens": "workspace:^"
   }
 }

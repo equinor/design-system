@@ -26,7 +26,7 @@
     "**/*.css"
   ],
   "peerDependencies": {
-    "@equinor/eds-tokens": ">=1.0.0",
+    "@equinor/eds-tokens": "workspace:^",
     "tailwindcss": ">=4.0.0 <5"
   },
   "devDependencies": {

@@ -88,8 +88,8 @@
   ],
   "devDependencies": {
     "@equinor/eds-color-palette-generator": "workspace:*",
-    "@equinor/eds-tokens-build": "workspace:*",
-    "@equinor/eds-tokens-sync": "workspace:*",
+    "@equinor/eds-tokens-build": "workspace:^",
+    "@equinor/eds-tokens-sync": "workspace:^",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-commonjs": "^28.0.8",
     "@rollup/plugin-node-resolve": "^16.0.3",
