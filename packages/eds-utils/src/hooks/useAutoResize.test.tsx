@@ -32,9 +32,7 @@ describe('useAutoResize', () => {
     })
 
     // Trigger resize
-    act(() => {
-      fireEvent.keyUp(textarea, { key: 'Enter' })
-    })
+    fireEvent.keyUp(textarea, { key: 'Enter' })
 
     // Should cap at maxHeight and show scroll
     expect(textarea.style.height).toBe('200px')
@@ -56,9 +54,7 @@ describe('useAutoResize', () => {
     })
 
     // Trigger resize
-    act(() => {
-      fireEvent.keyUp(textarea, { key: 'Enter' })
-    })
+    fireEvent.keyUp(textarea, { key: 'Enter' })
 
     // Should resize to fit content
     expect(textarea.style.height).toBe('150px')
@@ -70,9 +66,7 @@ describe('useAutoResize', () => {
     const textarea = screen.getByTestId('textarea')
 
     // Trigger resize attempt
-    act(() => {
-      fireEvent.keyUp(textarea, { key: 'Enter' })
-    })
+    fireEvent.keyUp(textarea, { key: 'Enter' })
 
     // Should remain unchanged when no maxHeight
     expect(textarea.style.height).toBe('')
