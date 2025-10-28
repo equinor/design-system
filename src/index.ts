@@ -17,7 +17,6 @@ export * from "./components/Menu";
 export * from "./components/Progress";
 export * from "./components/ProgressIndicator";
 export * from "./components/Portal";
-export { alert } from "./components/Dialog";
 export * from "./components/Environment";
 export * from "./components/ErrorBoundary";
 export * from "./components/SelectionControls";
@@ -33,3 +32,16 @@ export * from "./hooks/useEDS";
 export * from "./hooks/useStyles";
 export * from "./hooks/useToken";
 export * from "./hooks/useBreakpoint";
+
+
+// Add to src/index.ts
+export * from "./components/Scrim";
+export * from "./components/Dialog"; // Full export instead of just { alert }
+
+// Add missing hooks
+export * from "./hooks/useDynamicStyle";
+export * from "./hooks/useDynamicStyleSheet";  
+export * from "./hooks/useValidChildren";
+
+// Add utilities
+export * from "./utils/types";
