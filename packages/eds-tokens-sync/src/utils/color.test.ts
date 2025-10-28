@@ -66,12 +66,12 @@ describe('parseColor', () => {
   })
 
   it('handles invalid hex values', () => {
-    expect(() => parseColor('#')).toThrowError('Invalid color format')
-    expect(() => parseColor('#0')).toThrowError('Invalid color format')
-    expect(() => parseColor('#00')).toThrowError('Invalid color format')
-    expect(() => parseColor('#0000000')).toThrowError('Invalid color format')
-    expect(() => parseColor('#000000000')).toThrowError('Invalid color format')
-    expect(() => parseColor('#hhh')).toThrowError('Invalid color format')
+    expect(() => parseColor('#')).toThrow('Invalid color format')
+    expect(() => parseColor('#0')).toThrow('Invalid color format')
+    expect(() => parseColor('#00')).toThrow('Invalid color format')
+    expect(() => parseColor('#0000000')).toThrow('Invalid color format')
+    expect(() => parseColor('#000000000')).toThrow('Invalid color format')
+    expect(() => parseColor('#hhh')).toThrow('Invalid color format')
   })
 })
 

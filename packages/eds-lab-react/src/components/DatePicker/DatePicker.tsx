@@ -8,10 +8,10 @@ import {
   useImperativeHandle,
   useEffect,
 } from 'react'
-import DatePicker, {
+import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
   registerLocale,
-  ReactDatePickerProps,
+  DatePickerProps as ReactDatePickerProps,
 } from 'react-datepicker'
 import { enGB } from 'date-fns/locale'
 import styled, {
@@ -27,17 +27,16 @@ import { Paper, Icon, Label } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGB)
 
-type ReactDatePickerComponentProps = Pick<
-  ReactDatePickerProps,
-  | 'className'
-  | 'dateFormat'
-  | 'popperPlacement'
-  | 'locale'
-  | 'renderCustomHeader'
-  | 'minDate'
-  | 'maxDate'
-  | 'readOnly'
->
+type ReactDatePickerComponentProps = {
+  className?: string
+  dateFormat?: string
+  popperPlacement?: ReactDatePickerProps['popperPlacement']
+  locale?: string
+  renderCustomHeader?: ReactDatePickerProps['renderCustomHeader']
+  minDate?: Date
+  maxDate?: Date
+  readOnly?: boolean
+}
 
 export type DatePickerProps = {
   id: string
@@ -51,7 +50,7 @@ export type DatePickerProps = {
 } & InputHTMLAttributes<HTMLInputElement> &
   ReactDatePickerComponentProps
 
-export type DatePickerRefProps = DatePicker &
+export type DatePickerRefProps = ReactDatePicker &
   InputHTMLAttributes<HTMLInputElement> & {
     setBlur: () => void
     setFocus: () => void
@@ -59,7 +58,7 @@ export type DatePickerRefProps = DatePicker &
     isCalendarOpen: () => boolean
   }
 
-const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   function DatePicker(
     {
       label,
@@ -95,8 +94,8 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       onDateValueChange(dateValue)
     }, [dateValue, onDateValueChange])
 
-    const localRef = useRef<DatePicker | null>(null)
-    useImperativeHandle(ref, () => localRef.current)
+    const localRef = useRef<ReactDatePicker | null>(null)
+    useImperativeHandle(ref, () => localRef.current?.input as HTMLInputElement)
 
     const customHeader =
       renderCustomHeader ||
@@ -248,7 +247,7 @@ const Container = styled.div`
 `
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StyledDatepicker = styled(DatePicker as any)`
+const StyledDatepicker = styled(ReactDatePicker as any)`
   ${({ theme }) => css`
     height: 24px;
     font-family: ${theme.entities.title.typography.fontFamily};
@@ -280,5 +279,3 @@ const CalendarIcon = styled(Icon as any)`
   right: 6px;
   pointer-events: none;
 `
-
-export { ReactDatePicker as DatePicker }

@@ -15,12 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "del": "^8.0.0",
-    "dotenv": "^16.6.1",
+    "del": "^8.0.1",
+    "dotenv": "^17.2.3",
     "node-fetch": "^3.3.2",
     "prettier": "3.6.2",
-    "ramda": "^0.31.3",
-    "svgo": "^3.3.2"
+    "ramda": "^0.32.0",
+    "svgo": "^4.0.0"
   },
   "nodemonConfig": {
     "ignore": [

@@ -1,5 +1,4 @@
 import { tokens } from '@equinor/eds-tokens'
-import { ButtonToken } from '../Button.types'
 import { button } from './button'
 
 import { mergeDeepRight } from 'ramda'
@@ -41,7 +40,7 @@ export const primary = mergeDeepRight(button, {
       background: primaryHoverColor,
     },
   },
-}) as ButtonToken
+})
 export const secondary = mergeDeepRight(primary, {
   background: secondaryColor,
   border: {
@@ -55,7 +54,7 @@ export const secondary = mergeDeepRight(primary, {
       },
     },
   },
-}) as ButtonToken
+})
 
 export const danger = mergeDeepRight(primary, {
   background: dangerColor,
@@ -70,4 +69,4 @@ export const danger = mergeDeepRight(primary, {
       },
     },
   },
-}) as ButtonToken
+})

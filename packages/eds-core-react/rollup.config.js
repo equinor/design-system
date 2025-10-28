@@ -6,7 +6,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
 import del from 'rollup-plugin-delete'
-import pkg from './package.json'
+
+import pkg from './package.json' with { type: 'json' }
 
 const environment = process.env.NODE_ENV
 

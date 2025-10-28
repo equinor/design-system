@@ -5,6 +5,13 @@
   "main": "dist/icons.cjs",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/icons.cjs"
+    }
+  },
   "license": "Apache-2.0",
   "author": {
     "name": "EDS Core Team",
@@ -24,7 +31,7 @@
     "commonjs/*"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc",
+    "build": "rollup -c && tsc",
     "dev": "rollup -c -w",
     "types": "tsc"
   },
@@ -35,11 +42,11 @@
     "icons"
   ],
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "rollup": "^4.50.0",
-    "rollup-plugin-delete": "^2.2.0",
-    "typescript": "^5.9.2"
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^28.0.8",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "rollup": "^4.52.5",
+    "rollup-plugin-delete": "^3.0.1",
+    "typescript": "^5.9.3"
   }
 }
