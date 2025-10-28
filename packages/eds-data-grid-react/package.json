@@ -1,12 +1,18 @@
 {
   "name": "@equinor/eds-data-grid-react",
   "version": "1.0.2",
-  "type": "module",
   "description": "A feature-rich data-grid written in React, implementing the Equinor Design System",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
   "main": "dist/eds-data-grid-react.cjs",
   "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/eds-data-grid-react.cjs"
+    }
+  },
   "files": [
     "dist/*"
   ],

@@ -1,7 +1,6 @@
 {
   "name": "@equinor/eds-lab-react",
   "version": "0.8.1",
-  "type": "module",
   "description": "The lab for the Equinor Design System",
   "sideEffects": [
     "**/*.css"
@@ -9,6 +8,13 @@
   "types": "dist/types/index.d.ts",
   "main": "dist/eds-lab-react.cjs",
   "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/eds-lab-react.cjs"
+    }
+  },
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",

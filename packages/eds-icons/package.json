@@ -1,11 +1,17 @@
 {
   "name": "@equinor/eds-icons",
   "version": "1.0.0",
-  "type": "module",
   "description": "Icons from the Equinor Design System",
   "main": "dist/icons.cjs",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/icons.cjs"
+    }
+  },
   "license": "Apache-2.0",
   "author": {
     "name": "EDS Core Team",
