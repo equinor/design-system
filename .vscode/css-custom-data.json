@@ -1,0 +1,9 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@property",
+      "description": "CSS Houdini @property rule"
+    }
+  ]
+}

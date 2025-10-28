@@ -15,6 +15,9 @@ export function Tab({
       data-debug
       href="#"
       className={`h-11 px-4 py-2 justify-center items-center flex ${className}`}
+      data-padding-inline="sm"
+      data-padding-block="xs"
+      // className={`h-11 bg-opacity-0 justify-center items-center flex ${className}`}
       {...rest}
     >
       <div className="text-base font-normal leading-tight">{children}</div>

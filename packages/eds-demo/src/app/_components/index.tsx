@@ -12,7 +12,9 @@ export function Chip({
 }) {
   return (
     <div
-      className={`px-2 py-1 rounded-[100px] justify-center items-center gap-1 flex ${className}`}
+      className={`chip rounded-full ${className}`}
+      data-padding-inline="sm"
+      data-padding-block="xxs"
       {...rest}
     >
       {icon && (
@@ -31,6 +33,7 @@ export function Chip({
     </div>
   );
 }
+
 export function CheckmarkUnselected({ className }: { className?: string }) {
   return (
     <svg
@@ -90,7 +93,8 @@ export function SideBarLink({
       data-debug
       type="button"
       popoverTarget={popoverTarget}
-      className={`self-stretch h-14 px-5 justify-between items-center inline-flex ${className}`}
+      data-padding-inline="sm"
+      className={`self-stretch h-14 justify-center items-center inline-flex ${className}`}
       style={
         anchorName
           ? ({ anchorName: `--${anchorName}` } as React.CSSProperties)

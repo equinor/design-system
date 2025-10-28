@@ -160,6 +160,7 @@ export const DataTable = ({
                 {column.id === "status" && Chip && (
                   <div className="inline-flex">
                     <Chip
+                      data-ratio="squished"
                       variant={row.status.type}
                       label={row.status.label}
                       className={chipClass}

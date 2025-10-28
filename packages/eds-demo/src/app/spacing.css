@@ -1,0 +1,457 @@
+/* ============================================
+   EDS 2.0 Spacing System Implementation
+   Based on Figma documentation https://www.figma.com/design/ZSh11jqMpemjSCHaENayna/%F0%9F%93%98-EDS-2.0-Spacing---Typography-Documentation?m=auto&node-id=0-1&t=9PP6wcrOx10hwg21-1
+   Based on Codepen https://codepen.io/vnys/pen/emNmPwr
+   ============================================ */
+
+/* ============================================
+   CSS Custom Properties for Selectable System
+   Required for icon scaling based on font-size
+   ============================================ */
+
+/* @property --selectable-padding-inline {
+  inherits: false;
+  initial-value: 16px;
+  syntax: <length>;
+}
+
+@property --selectable-padding-stack {
+  inherits: false;
+  initial-value: 12px;
+  syntax: <length>;
+} */
+
+@property --captured-size-1 {
+  inherits: false;
+  initial-value: 16;
+  syntax: "*";
+}
+
+/* ============================================
+   Spacing Tokens
+   ============================================ */
+:root {
+  /*
+    BASE SPACING VALUES (primitives)
+
+    These are the foundational values. Use numeric names that match pixel values.
+
+    WHY WE KEEP BOTH LAYERS:
+    1. Single source of truth: Change one value, update entire system
+    2. Future flexibility: Can remap semantic names without touching components
+    3. Designer alignment: Easy to sync with Figma updates
+    4. Mathematical clarity: Numeric scale shows proportional relationships
+
+    Example: If design changes "small" from 12px to 10px, we just change:
+    --space-sm: var(--space-10) instead of updating every component.
+  */
+  --space-0: 0; /* 0px */
+  --space-2: 0.125rem; /* 2px */
+  --space-4: 0.25rem; /* 4px */
+  --space-8: 0.5rem; /* 8px */
+  --space-12: 0.75rem; /* 12px */
+  --space-16: 1rem; /* 16px */
+  --space-20: 1.25rem; /* 20px */
+  --space-24: 1.5rem; /* 24px */
+  --space-28: 1.75rem; /* 28px */
+  --space-32: 2rem; /* 32px */
+  --space-48: 3rem; /* 48px */
+
+  /*
+    SEMANTIC SPACING TOKENS
+
+    Use these in your code, not the base values.
+    These map to base values but provide meaningful names.
+  */
+  --space-none: var(--space-0); /* 0px */
+  --space-3xs: var(--space-2); /* 2px */
+  --space-xxs: var(--space-4); /* 4px */
+  --space-xs: var(--space-8); /* 8px */
+  --space-sm: var(--space-12); /* 12px */
+  --space-md: var(--space-16); /* 16px */
+  --space-lg: var(--space-20); /* 20px */
+  --space-xl: var(--space-24); /* 24px */
+  --space-xxl: var(--space-28); /* 28px */
+  --space-3xl: var(--space-32); /* 32px */
+
+  /* Spacing between elements (using base values) */
+  --spacing-items-tight: var(--space-8); /* 8px */
+  --spacing-items-default: var(--space-16); /* 16px */
+  --spacing-items-loose: var(--space-24); /* 24px */
+
+  --spacing-sections-tight: var(--space-24); /* 24px */
+  --spacing-sections-default: var(--space-32); /* 32px */
+  --spacing-sections-loose: var(--space-48); /* 48px */
+
+  /* Baseline grid */
+  --baseline: 4px;
+}
+
+/* ============================================
+   Data-Attribute Driven Padding System
+   Generic spacing for containers and layouts
+   ============================================ */
+
+/* Basic padding - all sides */
+[data-padding="none"] {
+  padding: var(--space-none);
+}
+
+[data-padding="3xs"] {
+  padding: var(--space-3xs);
+}
+
+[data-padding="xxs"] {
+  padding: var(--space-xxs);
+}
+
+[data-padding="xs"] {
+  padding: var(--space-xs);
+}
+
+[data-padding="sm"] {
+  padding: var(--space-sm);
+}
+
+[data-padding="md"] {
+  padding: var(--space-md);
+}
+
+[data-padding="lg"] {
+  padding: var(--space-lg);
+}
+
+[data-padding="xl"] {
+  padding: var(--space-xl);
+}
+
+[data-padding="xxl"] {
+  padding: var(--space-xxl);
+}
+
+[data-padding="3xl"] {
+  padding: var(--space-3xl);
+}
+
+/* Directional padding - vertical only */
+[data-padding-block="none"] {
+  padding-block: var(--space-none);
+}
+
+[data-padding-block="3xs"] {
+  padding-block: var(--space-3xs);
+}
+
+[data-padding-block="xxs"] {
+  padding-block: var(--space-xxs);
+}
+
+[data-padding-block="xs"] {
+  padding-block: var(--space-xs);
+}
+
+[data-padding-block="sm"] {
+  padding-block: var(--space-sm);
+}
+
+[data-padding-block="md"] {
+  padding-block: var(--space-md);
+}
+
+[data-padding-block="lg"] {
+  padding-block: var(--space-lg);
+}
+
+[data-padding-block="xl"] {
+  padding-block: var(--space-xl);
+}
+
+[data-padding-block="xxl"] {
+  padding-block: var(--space-xxl);
+}
+
+[data-padding-block="3xl"] {
+  padding-block: var(--space-3xl);
+}
+
+/* Directional padding - horizontal only */
+[data-padding-inline="none"] {
+  padding-inline: var(--space-none);
+}
+
+[data-padding-inline="3xs"] {
+  padding-inline: var(--space-3xs);
+}
+
+[data-padding-inline="xxs"] {
+  padding-inline: var(--space-xxs);
+}
+
+[data-padding-inline="xs"] {
+  padding-inline: var(--space-xs);
+}
+
+[data-padding-inline="sm"] {
+  padding-inline: var(--space-sm);
+}
+
+[data-padding-inline="md"] {
+  padding-inline: var(--space-md);
+}
+
+[data-padding-inline="lg"] {
+  padding-inline: var(--space-lg);
+}
+
+[data-padding-inline="xl"] {
+  padding-inline: var(--space-xl);
+}
+
+[data-padding-inline="xxl"] {
+  padding-inline: var(--space-xxl);
+}
+
+[data-padding-inline="3xl"] {
+  padding-inline: var(--space-3xl);
+}
+
+/* ============================================
+   Stack & Inline Layout Primitives
+   Spacing between elements
+   ============================================ */
+
+/* Base gap system for all layout primitives */
+[class*="stack"],
+[class*="inline"],
+[class*="grid"] {
+  &[data-spacing="tight"] {
+    gap: var(--spacing-items-tight);
+  }
+  &[data-spacing="default"] {
+    gap: var(--spacing-items-default);
+  }
+  &[data-spacing="loose"] {
+    gap: var(--spacing-items-loose);
+  }
+
+  &[data-spacing="section-tight"] {
+    gap: var(--spacing-sections-tight);
+  }
+  &[data-spacing="section-default"] {
+    gap: var(--spacing-sections-default);
+  }
+  &[data-spacing="section-loose"] {
+    gap: var(--spacing-sections-loose);
+  }
+
+  /* Token-based spacing */
+  &[data-spacing="3xs"] {
+    gap: var(--space-3xs);
+  }
+  &[data-spacing="xxs"] {
+    gap: var(--space-xxs);
+  }
+  &[data-spacing="xs"] {
+    gap: var(--space-xs);
+  }
+  &[data-spacing="sm"] {
+    gap: var(--space-sm);
+  }
+  &[data-spacing="md"] {
+    gap: var(--space-md);
+  }
+  &[data-spacing="lg"] {
+    gap: var(--space-lg);
+  }
+  &[data-spacing="xl"] {
+    gap: var(--space-xl);
+  }
+  &[data-spacing="xxl"] {
+    gap: var(--space-xxl);
+  }
+  &[data-spacing="3xl"] {
+    gap: var(--space-3xl);
+  }
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-items-default);
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-items-default);
+}
+
+.grid {
+  display: grid;
+  gap: var(--spacing-items-default);
+}
+
+/* ============================================
+   Grid Layout Patterns
+   ============================================ */
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.grid-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.grid-2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-3-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-4-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ============================================
+   Baseline Grid Alignment
+   ============================================ */
+
+.text-trim {
+  display: block;
+  text-box-trim: both;
+  text-box-edge: cap alphabetic;
+}
+
+@supports not (text-box-trim: both) {
+  .text-trim {
+    margin-block-start: -0.25em;
+    margin-block-end: -0.25em;
+  }
+}
+
+.baseline-aligned {
+  box-sizing: border-box;
+
+  &[data-padding="3xs"] {
+    padding: var(--space-3xs);
+  }
+  &[data-padding="xxs"] {
+    padding: var(--space-xxs);
+  }
+  &[data-padding="xs"] {
+    padding: var(--space-xs);
+  }
+  &[data-padding="sm"] {
+    padding: var(--space-sm);
+  }
+  &[data-padding="md"] {
+    padding: var(--space-md);
+  }
+  &[data-padding="lg"] {
+    padding: var(--space-lg);
+  }
+  &[data-padding="xl"] {
+    padding: var(--space-xl);
+  }
+  &[data-padding="xxl"] {
+    padding: var(--space-xxl);
+  }
+  &[data-padding="3xl"] {
+    padding: var(--space-3xl);
+  }
+}
+
+/* ============================================
+   Selectable Component Pattern
+   For interactive elements: buttons, chips, tabs, menu items
+   IMPORTANT: Placed last to override generic [data-padding] rules
+   ============================================ */
+
+.selectable {
+  /* Capture font-size for icon scaling */
+  --_selectable-font-size: 16px;
+  /* --captured-size-1: tan(atan2(var(--_selectable-font-size), 1px)); */
+  --captured-size-1: 16px;
+  font-size: 16px; /* Default font size */
+
+  /* Base properties */
+  --_padding-inline: var(--selectable-padding-inline);
+  --_padding-stack: var(--selectable-padding-stack);
+
+  display: grid;
+  grid-auto-flow: column;
+  gap: round(0.618em, 0.5px);
+  place-items: center start;
+  width: fit-content;
+  padding: var(--selectable-padding-stack) var(--selectable-padding-inline);
+
+  /* Size variants - using Figma values */
+  &[data-padding="xs"] {
+    --selectable-padding-inline: var(--space-xs); /* 8px */
+
+    &[data-ratio="squished"] {
+      --selectable-padding-stack: 6px; /* 6px from codepen example */
+    }
+
+    &[data-ratio="squared"] {
+      --selectable-padding-stack: var(--space-xs); /* 8px */
+    }
+
+    &[data-ratio="stretched"] {
+      --selectable-padding-stack: var(--space-sm); /* 12px */
+    }
+  }
+
+  &[data-padding="sm"] {
+    --selectable-padding-inline: var(--space-sm); /* 12px */
+
+    &[data-ratio="squished"] {
+      --selectable-padding-stack: var(--space-xs); /* 8px */
+    }
+
+    &[data-ratio="squared"] {
+      --selectable-padding-stack: var(--space-sm); /* 12px */
+    }
+
+    &[data-ratio="stretched"] {
+      --selectable-padding-stack: var(--space-md); /* 16px */
+    }
+  }
+
+  &[data-padding="md"] {
+    --selectable-padding-inline: var(--space-md); /* 16px */
+
+    &[data-ratio="squished"] {
+      --selectable-padding-stack: var(--space-sm); /* 12px */
+    }
+
+    &[data-ratio="squared"] {
+      --selectable-padding-stack: var(--space-md); /* 16px */
+    }
+
+    &[data-ratio="stretched"] {
+      --selectable-padding-stack: var(--space-lg); /* 20px */
+    }
+  }
+}
+
+/* ============================================
+   Icon Scaling System
+   Icons scale proportionally with font-size
+   ONLY for icons inside .selectable components
+   ============================================ */
+.selectable-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* width: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16); /* Did not work with Lightning CSS */
+  /* font-size: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16); */ /* Did not work with Lightning CSS */
+  width: 1.5em;
+  flex-shrink: 0;
+
+  /* Make SVG fill the container */
+  & > svg {
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
+  }
+}

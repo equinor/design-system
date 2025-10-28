@@ -11,6 +11,7 @@
     "[Dd]ockerfile*": "dockerfile",
     "docker-compose*": "yaml"
   },
+  "css.customData": [".vscode/css-custom-data.json"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "prettier.prettierPath": "",
