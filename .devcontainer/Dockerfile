@@ -1,4 +1,4 @@
-ARG VARIANT="16-bullseye"
+ARG VARIANT="20-bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.
