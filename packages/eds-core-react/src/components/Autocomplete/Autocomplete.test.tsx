@@ -88,7 +88,9 @@ const StyledAutocomplete = styled(Autocomplete)`
 
 describe('Autocomplete', () => {
   it('Matches snapshot', async () => {
-    render(<Autocomplete options={items} label={labelText} />)
+    const { container } = render(
+      <Autocomplete options={items} label={labelText} />,
+    )
 
     const autocomplete = screen.getAllByLabelText(labelText)
     const input = autocomplete[0]
@@ -102,22 +104,21 @@ describe('Autocomplete', () => {
       expect(optionsList).toBeInTheDocument()
     })
 
-    // For snapshot testing, we need to remove auto-generated IDs to ensure deterministic results
-    // This is a legitimate use case for direct DOM access in testing
-    // TODO: remove eslint-disable when Testing Library provides better alternatives for snapshot testing
-    // eslint-disable-next-line testing-library/no-node-access
-    optionsList.removeAttribute('id')
-    // eslint-disable-next-line testing-library/no-node-access
-    optionsList.removeAttribute('aria-labelledby')
+    // Replace auto-generated IDs with static values for deterministic snapshots
+    const htmlString = container.innerHTML
+    const normalizedHtml = htmlString
+      .replace(/id="downshift-[^"]*"/g, 'id="downshift-test-id"')
+      .replace(
+        /aria-labelledby="downshift-[^"]*"/g,
+        'aria-labelledby="downshift-test-label-id"',
+      )
+      .replace(
+        /aria-controls="downshift-[^"]*"/g,
+        'aria-controls="downshift-test-controls"',
+      )
+      .replace(/for="downshift-[^"]*"/g, 'for="downshift-test-id"')
 
-    // Remove auto-generated IDs from option elements for consistent snapshots
-    // eslint-disable-next-line testing-library/no-node-access
-    const options = optionsList.querySelectorAll('[role="option"]')
-    options.forEach((option) => {
-      option.removeAttribute('id')
-    })
-
-    expect(optionsList).toMatchSnapshot()
+    expect(normalizedHtml).toMatchSnapshot()
   })
   it('Has provided label', async () => {
     render(<Autocomplete label={labelText} options={items} />)
