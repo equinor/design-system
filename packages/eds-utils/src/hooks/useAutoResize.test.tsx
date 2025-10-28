@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { useAutoResize } from './useAutoResize'
 
 const TestComponent = ({ maxHeight, ...rest }: { maxHeight?: number }) => {
