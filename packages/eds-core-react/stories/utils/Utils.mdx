@@ -21,8 +21,8 @@ npm install @equinor/eds-utils
 Used to resize `teaxtarea` element on `keyup` until the optionally provided `maxHeight`, and then adds overflow auto.
 
 ```ts
-function useAutoResize(
-  targetEl: HTMLElement,
+function useAutoResize<T extends HTMLElement = HTMLElement>(
+  targetRef: RefObject<T>,
   maxHeight?: number,
 ): void;
 ```

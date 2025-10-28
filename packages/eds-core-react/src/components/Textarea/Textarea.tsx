@@ -83,7 +83,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ? parseFloat(lineHeight) * 16 * rowsMax + parseInt(top) + parseInt(bottom)
       : null
 
-    useAutoResize(textareaRef.current, maxHeight)
+    useAutoResize(textareaRef, maxHeight)
 
     const combinedRef = useMemo(
       () => mergeRefs<HTMLTextAreaElement>(ref, textareaRef),

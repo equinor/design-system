@@ -1,12 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, RefObject } from 'react'
 
-export const useAutoResize = (
-  // Target element to resize
-  targetEl: HTMLElement,
+export const useAutoResize = <T extends HTMLElement = HTMLElement>(
+  // Target element ref to resize
+  targetRef: RefObject<T>,
   // Height in pixels
   maxHeight?: number,
 ): void => {
   useEffect(() => {
+    const targetEl = targetRef.current
+    if (!targetEl || !maxHeight) return
+
     const handleResize = () => {
       targetEl.style.height = 'auto'
       const { scrollHeight, clientHeight } = targetEl
@@ -27,13 +30,11 @@ export const useAutoResize = (
       }
     }
 
-    if (targetEl && maxHeight) {
-      handleResize()
-      targetEl.addEventListener('keyup', handleResize, true)
-    }
+    handleResize()
+    targetEl.addEventListener('keyup', handleResize, true)
 
     return () => {
-      targetEl?.removeEventListener('keyup', handleResize, true)
+      targetEl.removeEventListener('keyup', handleResize, true)
     }
-  }, [targetEl, maxHeight])
+  }, [targetRef, maxHeight])
 }
