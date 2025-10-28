@@ -6,6 +6,7 @@ import {
   CSSProperties,
   ElementType,
   ComponentPropsWithoutRef,
+  InputHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
 import {
@@ -120,6 +121,7 @@ const RightAdornments = styled(Adornments)(
     padding-right: ${$token.entities.adornment.spacings.right};
   `,
 )
+
 type StyledProps = {
   $token: InputToken
   $paddingLeft?: string
@@ -157,7 +159,10 @@ export type InputProps = {
 }
 
 export const Input: OverridableComponent<InputProps, HTMLInputElement> =
-  forwardRef<HTMLInputElement, InputProps>(function Input(
+  forwardRef<
+    HTMLInputElement,
+    InputProps & InputHTMLAttributes<HTMLInputElement>
+  >(function Input(
     {
       variant,
       disabled = false,
@@ -171,6 +176,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       rightAdornmentsProps,
       leftAdornmentsWidth,
       rightAdornmentsWidth,
+      as = 'input',
       ...other
     },
     ref,
@@ -213,7 +219,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       readOnly,
       $token: token,
       style: {
-        resize: 'none',
+        resize: 'none' as const,
       },
       ...other,
     }
