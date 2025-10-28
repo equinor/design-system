@@ -1,11 +1,9 @@
 import { render, screen, fireEvent, act } from '@testing-library/react'
-import { useRef } from 'react'
 import { useAutoResize } from './useAutoResize'
 
 const TestComponent = ({ maxHeight, ...rest }: { maxHeight?: number }) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
-  useAutoResize(textareaRef, maxHeight)
-  return <textarea ref={textareaRef} style={{ resize: 'none' }} {...rest} />
+  const autoResizeRef = useAutoResize<HTMLTextAreaElement>(maxHeight)
+  return <textarea ref={autoResizeRef} style={{ resize: 'none' }} {...rest} />
 }
 
 describe('useAutoResize', () => {

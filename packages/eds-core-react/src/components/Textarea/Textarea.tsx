@@ -1,6 +1,5 @@
 import {
   forwardRef,
-  useRef,
   TextareaHTMLAttributes,
   useMemo,
   CSSProperties,
@@ -69,7 +68,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         style,
       })
 
-    const textareaRef = useRef<HTMLTextAreaElement>(null)
     const { density } = useEds()
     const spacings =
       density === 'compact' ? input.modes.compact.spacings : input.spacings
@@ -83,11 +81,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ? parseFloat(lineHeight) * 16 * rowsMax + parseInt(top) + parseInt(bottom)
       : null
 
-    useAutoResize(textareaRef, maxHeight)
+    const autoResizeRef = useAutoResize<HTMLTextAreaElement>(maxHeight)
 
     const combinedRef = useMemo(
-      () => mergeRefs<HTMLTextAreaElement>(ref, textareaRef),
-      [ref],
+      () => mergeRefs<HTMLTextAreaElement>(ref, autoResizeRef),
+      [ref, autoResizeRef],
     )
 
     const fieldProps = {
