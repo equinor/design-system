@@ -1,6 +1,7 @@
 {
   "name": "@equinor/eds-icons",
   "version": "1.0.0",
+  "type": "module",
   "description": "Icons from the Equinor Design System",
   "main": "dist/icons.cjs",
   "module": "dist/esm/index.js",
@@ -24,7 +25,7 @@
     "commonjs/*"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc",
+    "build": "rollup -c && tsc",
     "dev": "rollup -c -w",
     "types": "tsc"
   },

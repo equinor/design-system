@@ -33,7 +33,7 @@
     "src/test/**/*"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
+    "build": "rollup -c && tsc -p tsconfig.build.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "types": "tsc -p tsconfig.build.json"

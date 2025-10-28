@@ -1,6 +1,7 @@
 {
   "name": "@equinor/eds-core-react",
   "version": "1.0.2",
+  "type": "module",
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": [
     "**/*.css"
@@ -35,7 +36,7 @@
     "./style.css": "./dist/style.css"
   },
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tsc -p tsconfig.build.json",
+    "build": "rollup -c && tsc -p tsconfig.build.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",

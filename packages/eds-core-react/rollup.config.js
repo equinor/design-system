@@ -5,16 +5,15 @@ import postcssImport from 'postcss-import'
 import commonjs from '@rollup/plugin-commonjs'
 import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
+import del from 'rollup-plugin-delete'
 
-import pkg from './package.json'
+import pkg from './package.json' with { type: 'json' }
 
 const environment = process.env.NODE_ENV
 
 const isDevelopment = environment === 'development'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
-
-const del = require('rollup-plugin-delete').default
 
 export default [
   {

@@ -1,10 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
+import del from 'rollup-plugin-delete'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
-
-const del = require('rollup-plugin-delete').default
 
 // eslint-disable-next-line import/no-default-export
 export default [
