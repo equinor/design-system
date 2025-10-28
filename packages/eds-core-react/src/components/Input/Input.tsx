@@ -176,7 +176,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       rightAdornmentsProps,
       leftAdornmentsWidth,
       rightAdornmentsWidth,
-      as = 'input',
       ...other
     },
     ref,
