@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import '../src/components/Typography/spacing.css'
+import './spacing.css'
 import './Spacing.stories.css'
 
 const meta: Meta = {
