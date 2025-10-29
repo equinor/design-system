@@ -18,13 +18,14 @@ npm install @equinor/eds-utils
 ### useAutoResize
 
 
-Used to resize `teaxtarea` element on `keyup` until the optionally provided `maxHeight`, and then adds overflow auto.
+Used to resize `textarea` element on `keyup` until the optionally provided `maxHeight`, and then adds overflow auto.
+
+Returns a callback ref that should be passed to the target element.
 
 ```ts
-function useAutoResize(
-  targetEl: HTMLElement,
+function useAutoResize<T extends HTMLElement = HTMLElement>(
   maxHeight?: number,
-): void;
+): RefCallback<T>;
 ```
 
 ### mergeRefs

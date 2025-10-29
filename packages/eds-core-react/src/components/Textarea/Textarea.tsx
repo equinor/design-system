@@ -1,84 +1,115 @@
 import {
   forwardRef,
-  useState,
   TextareaHTMLAttributes,
-  useCallback,
+  useMemo,
   CSSProperties,
 } from 'react'
 import * as tokens from '../Input/Input.tokens'
 import { mergeRefs, useAutoResize } from '@equinor/eds-utils'
-import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 import { Input } from '../Input'
+import {
+  InputWrapper,
+  useInputField,
+  BaseInputFieldProps,
+} from '../InputWrapper'
 
 const { input } = tokens
 
-export type TextareaProps = {
-  /** Placeholder */
-  placeholder?: string
-  /** Variant */
-  variant?: Variants
-  /** Disabled state */
-  disabled?: boolean
-  /** Type */
-  type?: string
-  /** Read Only */
-  readOnly?: boolean
+const leftAdornmentStyles = {
+  style: { alignItems: 'flex-start' as const },
+}
+
+const rightAdornmentStyles = {
+  style: {
+    alignItems: 'flex-start' as const,
+    pointerEvents: 'none' as CSSProperties['pointerEvents'],
+  },
+}
+
+type TextareaSpecificProps = {
   /** Specifies max rows for multiline  */
   rowsMax?: number
-} & TextareaHTMLAttributes<HTMLTextAreaElement>
+}
+
+export type TextareaProps = BaseInputFieldProps &
+  TextareaSpecificProps &
+  TextareaHTMLAttributes<HTMLTextAreaElement>
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    { variant, disabled = false, type = 'text', rowsMax, ...other },
+    {
+      id,
+      label,
+      meta,
+      helperText,
+      placeholder,
+      disabled,
+      className,
+      variant,
+      inputIcon,
+      helperIcon,
+      style,
+      rowsMax,
+      ...other
+    },
     ref,
   ) {
-    const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
+    const { ariaProps, containerProps, labelProps, helperProps } =
+      useInputField({
+        id,
+        label,
+        meta,
+        helperText,
+        helperIcon,
+        variant,
+        disabled,
+        className,
+        style,
+      })
+
     const { density } = useEds()
     const spacings =
       density === 'compact' ? input.modes.compact.spacings : input.spacings
     const { lineHeight } = tokens.input.typography
     const { top, bottom } = spacings
-    let fontSize = 16
 
-    if (textareaEl) {
-      fontSize = parseInt(window.getComputedStyle(textareaEl).fontSize)
-    }
+    // Calculate maxHeight if rowsMax is provided
+    // Using default fontSize of 16px for initial calculation
+    // useAutoResize will handle actual resizing based on element's scrollHeight
+    const maxHeight = rowsMax
+      ? parseFloat(lineHeight) * 16 * rowsMax + parseInt(top) + parseInt(bottom)
+      : null
 
-    const padding = parseInt(top) + parseInt(bottom)
-    const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
-    useAutoResize(textareaEl, rowsMax ? maxHeight : null)
-    const combinedRef = useCallback(
-      () => mergeRefs<HTMLTextAreaElement>(ref, setTextareaEl),
-      [setTextareaEl, ref],
-    )()
+    const autoResizeRef = useAutoResize<HTMLTextAreaElement>(maxHeight)
 
-    const inputProps = {
-      ref: combinedRef,
-      type,
+    const combinedRef = useMemo(
+      () => mergeRefs<HTMLTextAreaElement>(ref, autoResizeRef),
+      [ref, autoResizeRef],
+    )
+
+    const fieldProps = {
+      ...ariaProps,
       disabled,
+      placeholder,
       variant,
+      rightAdornments: inputIcon,
+      rightAdornmentsProps: rightAdornmentStyles,
+      leftAdornmentsProps: leftAdornmentStyles,
+      as: 'textarea' as const,
+      ref: combinedRef,
+      style: { height: 'auto' },
       ...other,
     }
 
-    const leftAdornmentStyles = {
-      style: { alignItems: 'flex-start' },
-    }
-    const rigthAdornmentStyles = {
-      style: {
-        alignItems: 'flex-start',
-        pointerEvents: 'none' as CSSProperties['pointerEvents'],
-      },
-    }
-
     return (
-      <Input
-        as="textarea"
-        rightAdornmentsProps={rigthAdornmentStyles}
-        leftAdornmentsProps={leftAdornmentStyles}
-        style={{ height: 'auto' }}
-        {...inputProps}
-      />
+      <InputWrapper
+        helperProps={helperProps}
+        labelProps={labelProps}
+        {...containerProps}
+      >
+        <Input {...fieldProps} />
+      </InputWrapper>
     )
   },
 )

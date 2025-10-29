@@ -5,14 +5,10 @@ import {
   ReactElement,
   useMemo,
   useState,
+  useId,
 } from 'react'
 import styled, { css } from 'styled-components'
-import {
-  bordersTemplate,
-  outlineTemplate,
-  mergeRefs,
-  useId,
-} from '@equinor/eds-utils'
+import { bordersTemplate, outlineTemplate, mergeRefs } from '@equinor/eds-utils'
 import {
   arrow_drop_down,
   IconData,
@@ -182,7 +178,8 @@ export const SideBarAccordion = forwardRef<
   },
   ref,
 ) {
-  const accordionId: string = useId(id, 'accordion')
+  const generatedAccordionId = useId()
+  const accordionId: string = id ?? generatedAccordionId
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
   const [accordionIsOpen, setAccordionIsOpen] = useState<boolean>(isExpanded)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
