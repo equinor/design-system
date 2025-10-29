@@ -94,7 +94,7 @@
     "@babel/runtime": "^7.28.4",
     "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-icons": "workspace:^",
-    "@equinor/eds-tokens": "workspace:*",
+    "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "@types/react-datepicker": "^7.0.0",
     "date-fns": "^4.1.0",
