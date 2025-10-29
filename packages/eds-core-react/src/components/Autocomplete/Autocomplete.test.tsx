@@ -736,7 +736,6 @@ describe('Autocomplete: Add new options feature', () => {
   })
 })
 
-
 describe('Autocomplete: Scroll position and navigation memory', () => {
   const longItemsList = Array.from({ length: 20 }, (_, i) => `Option ${i + 1}`)
   const uniqueLabelText = 'Scroll test autocomplete'
@@ -772,7 +771,9 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
     }
     fireEvent.keyDown(input, { key: 'Enter' })
 
-    await waitFor(() => expect(screen.queryByRole('option')).not.toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.queryByRole('option')).not.toBeInTheDocument(),
+    )
     expect(input).toHaveValue('Option 5')
 
     // Reopen - should maintain selection
@@ -788,7 +789,7 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
         options={longItemsList}
         multiple={false}
         selectedOptions={['Option 5']}
-      />
+      />,
     )
 
     const input = screen.getByRole('combobox')
@@ -798,18 +799,18 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
     await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
 
     // Wait for scroll restoration (component uses 10ms setTimeout for scroll positioning)
-    await new Promise(resolve => setTimeout(resolve, 50))
+    await new Promise((resolve) => setTimeout(resolve, 50))
 
     // Get current highlighted option ID
     const currentHighlightedId = input.getAttribute('aria-activedescendant')
     expect(currentHighlightedId).toBeTruthy()
-    
+
     // Verify the selected option (Option 5) is visible in the dropdown
     expect(screen.getByRole('option', { name: 'Option 5' })).toBeDefined()
 
     // Test arrow down navigation from current position
     fireEvent.keyDown(input, { key: 'ArrowDown' })
-    
+
     await waitFor(() => {
       const newHighlightedId = input.getAttribute('aria-activedescendant')
       expect(newHighlightedId).not.toBe(currentHighlightedId)
@@ -818,7 +819,9 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
     // Test arrow up navigation goes back
     fireEvent.keyDown(input, { key: 'ArrowUp' })
     await waitFor(() => {
-      expect(input.getAttribute('aria-activedescendant')).toBe(currentHighlightedId)
+      expect(input.getAttribute('aria-activedescendant')).toBe(
+        currentHighlightedId,
+      )
     })
   })
 
@@ -828,7 +831,7 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
         label={uniqueLabelText}
         options={longItemsList}
         multiple={false}
-      />
+      />,
     )
 
     const input = screen.getByRole('combobox')
@@ -838,7 +841,9 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
     expect(input).toHaveAttribute('aria-activedescendant')
 
     fireEvent.keyDown(input, { key: 'Escape' })
-    await waitFor(() => expect(screen.queryByRole('option')).not.toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.queryByRole('option')).not.toBeInTheDocument(),
+    )
 
     fireEvent.click(input)
     await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
@@ -851,7 +856,7 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
         label={uniqueLabelText}
         options={longItemsList}
         multiple={true}
-      />
+      />,
     )
 
     const input = screen.getByRole('combobox')
@@ -896,7 +901,9 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
     await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
 
     fireEvent.keyDown(input, { key: 'Escape' })
-    await waitFor(() => expect(screen.queryByRole('option')).not.toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.queryByRole('option')).not.toBeInTheDocument(),
+    )
 
     fireEvent.click(input)
     await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
