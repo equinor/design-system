@@ -42,6 +42,8 @@ The density mode can be controlled via the \`data-density\` attribute on a paren
 
 ## Usage
 
+### Utility Classes
+
 Apply spacing classes directly to elements:
 
 \`\`\`tsx
@@ -58,6 +60,37 @@ For inset spacing:
   Click me
 </button>
 \`\`\`
+
+### Data Attributes
+
+Use data attributes for dynamic spacing control:
+
+\`\`\`tsx
+<div data-spacing-stack="md">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+\`\`\`
+
+For inset spacing with data attributes:
+
+\`\`\`tsx
+<button 
+  data-spacing-inset-size="md" 
+  data-spacing-inset-variation="squared"
+>
+  Click me
+</button>
+\`\`\`
+
+#### Available Data Attributes
+
+- \`data-spacing-inline\`: Horizontal gap spacing (values: 4xs to 3xl)
+- \`data-spacing-stack\`: Vertical gap spacing (values: 4xs to 3xl)
+- \`data-spacing-inset-size\`: Inset padding size (values: xs, sm, md, lg, xl)
+- \`data-spacing-inset-variation\`: Inset padding style (values: inline, stack-squished, stack-squared, stack-stretched, squished, squared, stretched)
+- \`data-spacing-border-radius\`: Corner radius (values: none, rounded, pill)
+- \`data-spacing-icon-gap\`: Icon-text gap (values: xs to 6xl)
         `,
       },
     },
@@ -572,6 +605,143 @@ export const DensityModes: Story = {
             <div className="spacing-demo-box" />
             <div className="spacing-demo-box" />
             <div className="spacing-demo-box" />
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+}
+
+export const DataAttributeAPI: Story = {
+  render: () => (
+    <div className="spacing-demo-container">
+      <h3 className="spacing-demo-heading">Data Attribute API</h3>
+      <p className="spacing-demo-text">
+        The spacing system supports data attributes for dynamic spacing control,
+        similar to the typography system. This is particularly useful for
+        component libraries and dynamic UIs.
+      </p>
+
+      <div>
+        <h4 className="spacing-demo-subheading">Inline Spacing</h4>
+        <p className="spacing-demo-label">
+          Use <code>data-spacing-inline</code> attribute
+        </p>
+        <div className="spacing-demo-box-container" data-spacing-inline="md">
+          <div className="spacing-demo-box" />
+          <div className="spacing-demo-box" />
+          <div className="spacing-demo-box" />
+        </div>
+      </div>
+
+      <div>
+        <h4 className="spacing-demo-subheading">Stack Spacing</h4>
+        <p className="spacing-demo-label">
+          Use <code>data-spacing-stack</code> attribute
+        </p>
+        <div
+          className="spacing-demo-box-container-column"
+          data-spacing-stack="sm"
+        >
+          <div className="spacing-demo-box-horizontal" />
+          <div className="spacing-demo-box-horizontal" />
+          <div className="spacing-demo-box-horizontal" />
+        </div>
+      </div>
+
+      <div>
+        <h4 className="spacing-demo-subheading">Inset Spacing</h4>
+        <p className="spacing-demo-label">
+          Use <code>data-spacing-inset-size</code> and{' '}
+          <code>data-spacing-inset-variation</code> attributes
+        </p>
+        <div className="spacing-demo-row">
+          <div
+            className="spacing-demo-inset"
+            data-spacing-inset-size="sm"
+            data-spacing-inset-variation="squished"
+          >
+            Squished
+          </div>
+          <div
+            className="spacing-demo-inset"
+            data-spacing-inset-size="md"
+            data-spacing-inset-variation="squared"
+          >
+            Squared
+          </div>
+          <div
+            className="spacing-demo-inset"
+            data-spacing-inset-size="lg"
+            data-spacing-inset-variation="stretched"
+          >
+            Stretched
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 className="spacing-demo-subheading">Border Radius</h4>
+        <p className="spacing-demo-label">
+          Use <code>data-spacing-border-radius</code> attribute
+        </p>
+        <div className="spacing-demo-row">
+          <div
+            className="spacing-demo-border-none"
+            data-spacing-border-radius="none"
+          >
+            None
+          </div>
+          <div
+            className="spacing-demo-border-rounded"
+            data-spacing-border-radius="rounded"
+          >
+            Rounded
+          </div>
+          <div
+            className="spacing-demo-border-pill"
+            data-spacing-border-radius="pill"
+          >
+            Pill
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 className="spacing-demo-subheading">Complete Example</h4>
+        <p className="spacing-demo-label">
+          Building a card using data attributes
+        </p>
+        <div
+          className="spacing-demo-card"
+          data-spacing-inset-size="lg"
+          data-spacing-inset-variation="squared"
+          data-spacing-border-radius="rounded"
+        >
+          <div className="spacing-demo-card-content" data-spacing-stack="md">
+            <h4 className="spacing-demo-card-title">Data Attribute Card</h4>
+            <p className="spacing-demo-card-text">
+              This card is built entirely using data attributes instead of
+              utility classes, providing a cleaner API for dynamic UIs.
+            </p>
+            <div className="spacing-demo-card-actions" data-spacing-inline="sm">
+              <button
+                className="spacing-demo-button-primary"
+                data-spacing-inset-size="sm"
+                data-spacing-inset-variation="squished"
+                data-spacing-border-radius="rounded"
+              >
+                Primary
+              </button>
+              <button
+                className="spacing-demo-button-secondary"
+                data-spacing-inset-size="sm"
+                data-spacing-inset-variation="squished"
+                data-spacing-border-radius="rounded"
+              >
+                Secondary
+              </button>
+            </div>
           </div>
         </div>
       </div>

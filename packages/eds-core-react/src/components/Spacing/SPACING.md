@@ -10,6 +10,15 @@ Spacing is a fundamental aspect of visual design that rivals color in its freque
 - **Density control** -- Supports spacious and comfortable density modes
 - **Intentional design** -- Uses semantic concepts (stack, inline, inset) rather than arbitrary values
 
+## API Options
+
+The spacing system provides two ways to apply spacing:
+
+1. **Utility Classes** - Traditional CSS class-based approach
+2. **Data Attributes** - Semantic attribute-based approach for dynamic UIs
+
+Both approaches use the same underlying token system and produce identical results.
+
 ## Core Concepts
 
 The spacing system is organized around five primary concepts, inspired by [Nathan Curtis's "Space in Design Systems"](https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62):
@@ -20,7 +29,25 @@ Horizontal spacing between elements arranged side-by-side. Use inline spacing fo
 
 **CSS Classes:** `.spacing-inline-{size}`
 
+**Data Attribute:** `data-spacing-inline="{size}"`
+
 **Available sizes:** `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+**Examples:**
+
+```html
+<!-- Using CSS classes -->
+<div class="spacing-inline-md">
+  <button>Save</button>
+  <button>Cancel</button>
+</div>
+
+<!-- Using data attributes -->
+<div data-spacing-inline="md">
+  <button>Save</button>
+  <button>Cancel</button>
+</div>
+```
 
 ### 2. Stack Spacing
 
@@ -28,7 +55,25 @@ Vertical spacing between elements stacked on top of each other. Use stack spacin
 
 **CSS Classes:** `.spacing-stack-{size}`
 
+**Data Attribute:** `data-spacing-stack="{size}"`
+
 **Available sizes:** `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+**Examples:**
+
+```html
+<!-- Using CSS classes -->
+<div class="spacing-stack-sm">
+  <p>First paragraph</p>
+  <p>Second paragraph</p>
+</div>
+
+<!-- Using data attributes -->
+<div data-spacing-stack="sm">
+  <p>First paragraph</p>
+  <p>Second paragraph</p>
+</div>
+```
 
 ### 3. Inset Spacing
 
@@ -40,13 +85,29 @@ Equal padding on all sides, creating a balanced feel.
 
 **CSS Classes:** `.spacing-inset-{size}-squared`
 
+**Data Attributes:** `data-spacing-inset-size="{size}" data-spacing-inset-variation="squared"`
+
 **Available sizes:** `xs`, `sm`, `md`, `lg`, `xl`
+
+**Examples:**
+
+```html
+<!-- Using CSS classes -->
+<button class="spacing-inset-md-squared">Click me</button>
+
+<!-- Using data attributes -->
+<button data-spacing-inset-size="md" data-spacing-inset-variation="squared">
+  Click me
+</button>
+```
 
 #### Squished
 
 Reduced vertical padding (typically 50% of horizontal), ideal for compact elements like buttons and table cells.
 
 **CSS Classes:** `.spacing-inset-{size}-squished`
+
+**Data Attributes:** `data-spacing-inset-size="{size}" data-spacing-inset-variation="squished"`
 
 **Available sizes:** `xs`, `sm`, `md`, `lg`, `xl`
 
@@ -56,14 +117,16 @@ Increased vertical padding, suitable for form inputs and text areas that need mo
 
 **CSS Classes:** `.spacing-inset-{size}-stretched`
 
+**Data Attributes:** `data-spacing-inset-size="{size}" data-spacing-inset-variation="stretched"`
+
 **Available sizes:** `xs`, `sm`, `md`, `lg`, `xl`
 
 #### Directional Inset
 
 Apply padding only horizontally or vertically:
 
-- **Inline only:** `.spacing-inset-{size}-inline` (horizontal padding)
-- **Stack only:** `.spacing-inset-{size}-stack-{variation}` (vertical padding with squared/squished/stretched)
+- **Inline only:** `.spacing-inset-{size}-inline` or `data-spacing-inset-size="{size}" data-spacing-inset-variation="inline"` (horizontal padding)
+- **Stack only:** `.spacing-inset-{size}-stack-{variation}` or `data-spacing-inset-size="{size}" data-spacing-inset-variation="stack-{variation}"` (vertical padding with squared/squished/stretched)
 
 ### 4. Border Radius
 
@@ -75,30 +138,75 @@ Corner rounding for visual polish and hierarchy.
 - `.spacing-border-radius-pill` -- Fully rounded (1000px)
 - `.spacing-border-radius-none` -- No rounding (0)
 
+**Data Attribute:** `data-spacing-border-radius="{value}"`
+
+**Available values:** `none`, `rounded`, `pill`
+
+**Examples:**
+
+```html
+<!-- Using CSS classes -->
+<button class="spacing-border-radius-rounded">Click me</button>
+
+<!-- Using data attributes -->
+<button data-spacing-border-radius="rounded">Click me</button>
+```
+
 ### 5. Icon Spacing
 
 Specialized spacing for icon-text pairings, ensuring proper visual balance between icons and adjacent text.
 
 **CSS Classes:** `.spacing-icon-gap-{size}`
 
+**Data Attribute:** `data-spacing-icon-gap="{size}"`
+
 **Available sizes:** `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`
+
+**Examples:**
+
+```html
+<!-- Using CSS classes -->
+<div class="spacing-icon-gap-md" style="display: flex; align-items: center;">
+  <Icon name="home" />
+  <span>Home</span>
+</div>
+
+<!-- Using data attributes -->
+<div data-spacing-icon-gap="md" style="display: flex; align-items: center;">
+  <Icon name="home" />
+  <span>Home</span>
+</div>
+```
 
 ## Usage Guidelines
 
 ### Basic Usage
 
-Apply spacing utilities directly to container elements that use CSS Flexbox or Grid:
+Apply spacing utilities directly to container elements that use CSS Flexbox or Grid using either utility classes or data attributes:
 
 ```jsx
-// Inline spacing - horizontal button group
+// Inline spacing - horizontal button group (using classes)
 <div className="spacing-inline-sm" style={{ display: 'flex' }}>
   <Button>Cancel</Button>
   <Button>Save</Button>
   <Button>Submit</Button>
 </div>
 
-// Stack spacing - vertical form fields
+// Inline spacing - horizontal button group (using data attributes)
+<div data-spacing-inline="sm" style={{ display: 'flex' }}>
+  <Button>Cancel</Button>
+  <Button>Save</Button>
+  <Button>Submit</Button>
+</div>
+
+// Stack spacing - vertical form fields (using classes)
 <div className="spacing-stack-md" style={{ display: 'flex', flexDirection: 'column' }}>
+  <TextField label="Name" />
+  <TextField label="Email" />
+</div>
+
+// Stack spacing - vertical form fields (using data attributes)
+<div data-spacing-stack="md" style={{ display: 'flex', flexDirection: 'column' }}>
   <TextField label="Name" />
   <TextField label="Email" />
   <TextField label="Message" />
