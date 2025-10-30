@@ -142,6 +142,102 @@ The spacing system supports different density modes:
 * `comfortable` -- Default density for most applications
 * `spacious` -- Increased spacing for better readability
 
+### Foundation CSS (Variables + Typography)
+
+The foundation stylesheet combines CSS variables and typography styles in a single import. This is recommended for applications using the EDS typography system.
+
+#### Import Foundation CSS
+
+```css
+@import '@equinor/eds-tokens/css/foundation';
+```
+
+Or in JavaScript/TypeScript:
+
+```tsx
+import '@equinor/eds-tokens/css/foundation.css'
+```
+
+The foundation stylesheet includes:
+
+* **CSS Variables** -- All design tokens (colors, spacing, typography variables)
+* **Typography Styles** -- Complete typography system with:
+  * Font family setup (UI and Header fonts)
+  * Font size utilities (`text-xs`, `text-sm`, `text-md`, etc.)
+  * Line height utilities (`line-height-default`, `line-height-squished`)
+  * Font weight utilities (`font-lighter`, `font-normal`, `font-bolder`)
+  * Letter spacing utilities (`tracking-tight`, `tracking-normal`, `tracking-wide`)
+  * Baseline grid alignment (`text-baseline-grid`, `text-baseline-center`)
+  * Icon sizing utilities (`.text-icon`)
+
+#### Using Typography Classes
+
+The foundation CSS provides utility classes and data attributes for typography:
+
+```html
+<!-- Using data attributes -->
+<div data-font-family="ui" data-text-size="md" data-line-height="default">
+  UI font text
+</div>
+
+<div data-font-family="header" data-text-size="xl" data-font-weight="bolder">
+  Header font text
+</div>
+
+<!-- Using utility classes -->
+<div class="font-ui text-md line-height-default">
+  UI font text
+</div>
+
+<div class="font-heading text-xl font-bolder">
+  Header font text
+</div>
+
+<!-- Baseline grid alignment -->
+<div class="font-ui text-md text-baseline-grid">
+  Aligned to 4px baseline grid
+</div>
+```
+
+#### Typography Components
+
+When using EDS React components, the foundation CSS is typically imported via the component library:
+
+```tsx
+import '@equinor/eds-core-react/style.css'
+// This imports the foundation CSS automatically
+```
+
+For standalone usage or custom implementations, import directly from `@equinor/eds-tokens`:
+
+```tsx
+import '@equinor/eds-tokens/css/foundation.css'
+```
+
+#### Typography Variables
+
+The typography system uses CSS custom properties that are automatically set based on the font family and size:
+
+```css
+.my-custom-text {
+  /* Use typography variables */
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-lineheight-default);
+  font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+  letter-spacing: var(--eds-typography-ui-body-md-tracking-normal);
+}
+```
+
+#### Baseline Grid Alignment
+
+The foundation CSS includes baseline grid alignment for consistent vertical rhythm:
+
+* `text-baseline-grid` -- Aligns text baseline to 4px grid intervals
+* `text-baseline-center` -- Centers text vertically while maintaining 4px grid alignment
+
+These utilities use modern CSS features (`text-box-trim`) and gracefully degrade in older browsers.
+
 ---
 
 ## Legacy Tokens (Backward Compatible)

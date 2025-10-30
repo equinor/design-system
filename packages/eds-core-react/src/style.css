@@ -1,4 +1,5 @@
 /* EDS Core React - Main Stylesheet */
 /* This file aggregates all component styles */
 
-@import './components/Typography/typography.css';
+/* Import foundation CSS from eds-tokens (includes variables and typography) */
+@import '@equinor/eds-tokens/css/foundation';
