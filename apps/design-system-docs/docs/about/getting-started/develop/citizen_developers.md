@@ -37,9 +37,9 @@ We offer light-themed templates covering common business scenarios, with pre-con
 
 **Preview the template**: [Power BI Preview](http://apps.equinor.com/edspbi)
 
-**Template available**: [Power BI EDS Template (PBIX)](./assets/eds-pbi-template-v2.pbix)
+**Template available**: [Power BI EDS Template (PBIX)](pathname:///assets/eds-pbi-template-v2.pbix)
 
-**Theme available**: [Power BI EDS Theme (JSON)](./assets/eds-pbi-theme-v2.json)
+**Theme available**: [Power BI EDS Theme (JSON)](pathname:///assets/eds-pbi-theme-v2.json)
 
 We're continuously expanding this collection with more examples and scenarios to support your diverse reporting needs.
 
