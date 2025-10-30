@@ -77,6 +77,23 @@ jobs:
         with:
           name: storybook-build
           path: packages/eds-core-react/storybook-build
+
+      # DEBUG: Sjekk hva som ble lastet ned
+      - name: Debug - List downloaded files
+        run: |
+          echo "=== Downloaded files ==="
+          ls -la packages/eds-core-react/storybook-build/
+          echo ""
+          echo "=== Checking index.json for TypographyNext ==="
+          if grep -q "typography-typographynext" packages/eds-core-react/storybook-build/index.json; then
+            echo "✅ TypographyNext FOUND in index.json"
+          else
+            echo "❌ TypographyNext NOT FOUND in index.json"
+          fi
+          echo ""
+          echo "=== Checking for Typography.new.stories file ==="
+          ls -la packages/eds-core-react/storybook-build/assets/ | grep -i "typography.new" || echo "No Typography.new files found"
+
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
