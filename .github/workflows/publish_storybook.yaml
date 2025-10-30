@@ -3,20 +3,20 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: "Environment for the core-react storybook"
+        description: 'Environment for the core-react storybook'
         required: false
         type: choice
         options:
           - development
           - production
-        default: "development"
+        default: 'development'
   push:
     branches:
       - main
     paths:
-      - "packages/eds-core-react/**"
-      - "packages/eds-tokens/**"
-      - "packages/eds-icons/**"
+      - 'packages/eds-core-react/**'
+      - 'packages/eds-tokens/**'
+      - 'packages/eds-icons/**'
 permissions:
   id-token: write
 env:
@@ -42,18 +42,10 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-      - name: Use "dist" cache
-        id: use-dist-cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22.12.0"
+          node-version: '22.12.0'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v4
@@ -67,6 +59,12 @@ jobs:
         run: |
           echo Running build:storybook!
           pnpm build:storybook
+      - name: Upload storybook build
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-build
+          path: packages/eds-core-react/storybook-build
+          retention-days: 1
   publish-storybook:
     needs: [setup, packages]
     name: Build & Deploy Website
@@ -74,21 +72,18 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
-      - name: Use cache with storybook files
-        id: use-cache-storybook
-        uses: actions/cache@v4
+      - name: Download storybook build
+        uses: actions/download-artifact@v4
         with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react-storybook
+          name: storybook-build
+          path: packages/eds-core-react/storybook-build
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
         with:
-          enabled-static-website: "true"
-          folder: "packages/eds-core-react/storybook-build"
-          public-access-policy: "container"
+          enabled-static-website: 'true'
+          folder: 'packages/eds-core-react/storybook-build'
+          public-access-policy: 'container'
           connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
