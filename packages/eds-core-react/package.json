@@ -5,7 +5,7 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "main": "dist/eds-core-react.cjs",
   "module": "dist/esm/index.js",
   "license": "MIT",
@@ -27,7 +27,7 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/types/src/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
     },
