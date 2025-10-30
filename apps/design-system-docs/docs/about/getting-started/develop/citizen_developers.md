@@ -16,7 +16,6 @@ We've made it straightforward to begin building with EDS. You can be up and runn
 ### Power Apps
 
 <!-- markdownlint-disable-next-line MD033 -->
-
 We offer a Power Apps canvas app template with pre‑configured components, layout, theming, and interaction patterns aligned to the <abbr title="Equinor Design System">EDS</abbr> guidelines as far as the platform allows. Embedded in‑app documentation covers usage, configuration, accessibility, and extension points so you can adapt safely without breaking consistency.
 
 - Uses EDS colour, spacing, and typography tokens where technically supported

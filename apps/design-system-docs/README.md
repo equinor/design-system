@@ -15,6 +15,7 @@ yarn start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+> Note: If you encounter any issues in devcontainers, try running the command with the following flag: `--host 127.0.0.1`
 
 ## Build
 
