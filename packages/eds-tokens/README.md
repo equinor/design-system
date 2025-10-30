@@ -142,9 +142,11 @@ The spacing system supports different density modes:
 * `comfortable` -- Default density for most applications
 * `spacious` -- Increased spacing for better readability
 
-### Foundation CSS (Variables + Typography)
+### Foundation CSS (Typography)
 
-The foundation stylesheet combines CSS variables and typography styles in a single import. This is recommended for applications using the EDS typography system.
+The foundation stylesheet provides typography styles for the EDS typography system. This includes utility classes and data attributes for font families, sizes, weights, line heights, letter spacing, and baseline alignment.
+
+> **Note:** The foundation CSS only includes typography styles. For CSS variables (colors, spacing, typography variables), import `@equinor/eds-tokens/css/variables` separately.
 
 #### Import Foundation CSS
 
@@ -160,7 +162,6 @@ import '@equinor/eds-tokens/css/foundation.css'
 
 The foundation stylesheet includes:
 
-* **CSS Variables** -- All design tokens (colors, spacing, typography variables)
 * **Typography Styles** -- Complete typography system with:
   * Font family setup (UI and Header fonts)
   * Font size utilities (`text-xs`, `text-sm`, `text-md`, etc.)
@@ -169,6 +170,13 @@ The foundation stylesheet includes:
   * Letter spacing utilities (`tracking-tight`, `tracking-normal`, `tracking-wide`)
   * Baseline grid alignment (`text-baseline-grid`, `text-baseline-center`)
   * Icon sizing utilities (`.text-icon`)
+
+> **For EDS React components:** When using `@equinor/eds-core-react`, you need to import both the CSS variables and foundation CSS:
+>
+> ```tsx
+> import '@equinor/eds-tokens/css/variables.css'
+> import '@equinor/eds-tokens/css/foundation.css'
+> ```
 
 #### Using Typography Classes
 
@@ -199,24 +207,9 @@ The foundation CSS provides utility classes and data attributes for typography:
 </div>
 ```
 
-#### Typography Components
-
-When using EDS React components, the foundation CSS is typically imported via the component library:
-
-```tsx
-import '@equinor/eds-core-react/style.css'
-// This imports the foundation CSS automatically
-```
-
-For standalone usage or custom implementations, import directly from `@equinor/eds-tokens`:
-
-```tsx
-import '@equinor/eds-tokens/css/foundation.css'
-```
-
 #### Typography Variables
 
-The typography system uses CSS custom properties that are automatically set based on the font family and size:
+The typography system uses CSS custom properties that are automatically set based on the font family and size. These variables are provided by the CSS variables stylesheet (`@equinor/eds-tokens/css/variables`):
 
 ```css
 .my-custom-text {

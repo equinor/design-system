@@ -1,8 +1,5 @@
-/* EDS Foundation Stylesheet */
-/* This file combines CSS variables and typography styles */
-
-/* Import CSS variables - includes colors, spacing, and typography variables */
-@import './index-variables.css';
+/* EDS Foundation Stylesheet - Typography */
+/* This file includes typography styles for the EDS typography system */
 
 /* Import typography styles */
 @import './typography.css';
