@@ -5,50 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.2...eds-core-react@v1.1.0) (2025-10-29)
+## [1.1.1](https://github.com/equinor/design-system/compare/eds-core-react@v1.1.0...eds-core-react@v1.1.1) (2025-10-31)
 
+### 🐛 Fixed
+
+- 🐛 Autocomplete - should start at selected index and preserve scroll position ([#3996](https://github.com/equinor/design-system/issues/3996)) ([d5d51a7](https://github.com/equinor/design-system/commit/d5d51a790d5f2fe98c747e7ff9b37041997d44c6))
+- Corrected tsconfig.build.json to ensure proper type declaration structure ([#4172](https://github.com/equinor/design-system/issues/4172)) ([f1d07e2](https://github.com/equinor/design-system/commit/f1d07e24298a939d22a7832c8d1107f8d8d0a7de))
+
+### 🔧 Chores
+
+- ensure index.json is properly overwritten during Storybook deployment ([#4179](https://github.com/equinor/design-system/issues/4179)) ([3950502](https://github.com/equinor/design-system/commit/395050206c908dd144e906b581242d6499388748))
+- GitHub Workflow cleanup ([#4177](https://github.com/equinor/design-system/issues/4177)) ([20923f6](https://github.com/equinor/design-system/commit/20923f6dd017afccc63a6fed401b51955ab14792))
+
+## [1.1.0](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.2...eds-core-react@v1.1.0) (2025-10-29)
 
 ### ✨ Added
 
-* **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
-* use npm badges to update package versions in documentation ([#4141](https://github.com/equinor/design-system/issues/4141)) ([ffd20ba](https://github.com/equinor/design-system/commit/ffd20bab35011a169f4fdb3f72f500b5755bae9d))
-
+- **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
+- use npm badges to update package versions in documentation ([#4141](https://github.com/equinor/design-system/issues/4141)) ([ffd20ba](https://github.com/equinor/design-system/commit/ffd20bab35011a169f4fdb3f72f500b5755bae9d))
 
 ### 🐛 Fixed
 
-* **eds-core-react:** update storybook version ([22a21fd](https://github.com/equinor/design-system/commit/22a21fdcdf7c76e514e523752466fd6b9b3d763f))
-* Update Card.docs.mdx ([7fc1205](https://github.com/equinor/design-system/commit/7fc1205b3c7bb2358f666524346027ccb7a52a92))
-* Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
-
+- **eds-core-react:** update storybook version ([22a21fd](https://github.com/equinor/design-system/commit/22a21fdcdf7c76e514e523752466fd6b9b3d763f))
+- Update Card.docs.mdx ([7fc1205](https://github.com/equinor/design-system/commit/7fc1205b3c7bb2358f666524346027ccb7a52a92))
+- Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
 
 ### 🔧 Chores
 
-* ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
-* **eds-tokens:** update tokens and generate variables ([#4151](https://github.com/equinor/design-system/issues/4151)) ([da830e0](https://github.com/equinor/design-system/commit/da830e0839e807edb9ffef74dc0b9e05f2b90e08)), closes [#4138](https://github.com/equinor/design-system/issues/4138)
+- ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
+- **eds-tokens:** update tokens and generate variables ([#4151](https://github.com/equinor/design-system/issues/4151)) ([da830e0](https://github.com/equinor/design-system/commit/da830e0839e807edb9ffef74dc0b9e05f2b90e08)), closes [#4138](https://github.com/equinor/design-system/issues/4138)
 
 ## [1.0.2](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.1...eds-core-react@v1.0.2) (2025-10-22)
 
-
 ### 🐛 Fixed
 
-* **eds-core-react:** 🐛 Update Tooltip component to use mergeRefs ([#4130](https://github.com/equinor/design-system/issues/4130)) ([a7f42ce](https://github.com/equinor/design-system/commit/a7f42cee4e1287bcfba90007ca7544dfef18bf12))
-
+- **eds-core-react:** 🐛 Update Tooltip component to use mergeRefs ([#4130](https://github.com/equinor/design-system/issues/4130)) ([a7f42ce](https://github.com/equinor/design-system/commit/a7f42cee4e1287bcfba90007ca7544dfef18bf12))
 
 ### 🔧 Chores
 
-* Rename follow-up ([#4129](https://github.com/equinor/design-system/issues/4129)) ([cae9fc0](https://github.com/equinor/design-system/commit/cae9fc0b3d32394da8d89ddb09c747142dd66f38))
+- Rename follow-up ([#4129](https://github.com/equinor/design-system/issues/4129)) ([cae9fc0](https://github.com/equinor/design-system/commit/cae9fc0b3d32394da8d89ddb09c747142dd66f38))
 
 ## [1.0.1](https://github.com/equinor/design-system/compare/eds-core-react@1.0.0...eds-core-react@v1.0.1) (2025-10-16)
 
-
 ### 🐛 Fixed
 
-* **eds-core-react:** sidebar links not showing tooltip when sidebar is collapsed ([#4068](https://github.com/equinor/design-system/issues/4068)) ([aa2622a](https://github.com/equinor/design-system/commit/aa2622aa6cd278560c0fa1b89203c336775f0f65))
-
+- **eds-core-react:** sidebar links not showing tooltip when sidebar is collapsed ([#4068](https://github.com/equinor/design-system/issues/4068)) ([aa2622a](https://github.com/equinor/design-system/commit/aa2622aa6cd278560c0fa1b89203c336775f0f65))
 
 ### 🔧 Chores
 
-* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+- 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
 
 ## [1.0.0] - 2025-10-09
 
