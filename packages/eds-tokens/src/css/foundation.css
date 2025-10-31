@@ -1,0 +1,13 @@
+/* 
+* EDS Foundation
+* 
+* This file aggregates foundation utility classes for applying consistent design tokens throughout the design system.
+* 
+* Currently includes:
+* - Spacing foundation: Inline, stack, inset, border radius, and icon spacing
+* - Typography foundation: Font family, size, weight, line height, letter spacing, and baseline alignment
+* 
+*/
+
+@import './spacing.css';
+@import './typography.css';

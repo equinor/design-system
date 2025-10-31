@@ -30,9 +30,7 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
-    },
-    "./style": "./dist/style.css",
-    "./style.css": "./dist/style.css"
+    }
   },
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",

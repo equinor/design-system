@@ -142,6 +142,197 @@ The spacing system supports different density modes:
 * `comfortable` -- Default density for most applications
 * `spacious` -- Increased spacing for better readability
 
+### Foundation CSS (Typography & Spacing)
+
+The foundation stylesheet provides typography and spacing styles for the EDS design system. This includes utility classes and data attributes for:
+
+* **Typography:** Font families, sizes, weights, line heights, letter spacing, and baseline alignment
+* **Spacing:** Inline spacing, stack spacing, inset spacing (padding), border radius, and icon spacing
+
+> **Note:** The foundation CSS includes typography and spacing utility classes. For CSS variables (colors, spacing variables, typography variables), import `@equinor/eds-tokens/css/variables` separately.
+
+#### Import Foundation CSS
+
+```css
+@import '@equinor/eds-tokens/css/foundation';
+```
+
+Or in JavaScript/TypeScript:
+
+```tsx
+import '@equinor/eds-tokens/css/foundation.css'
+```
+
+The foundation stylesheet includes:
+
+* **Typography Styles** -- Complete typography system with:
+  * Font family setup (UI and Header fonts)
+  * Font size utilities (`text-xs`, `text-sm`, `text-md`, etc.)
+  * Line height utilities (`line-height-default`, `line-height-squished`)
+  * Font weight utilities (`font-lighter`, `font-normal`, `font-bolder`)
+  * Letter spacing utilities (`tracking-tight`, `tracking-normal`, `tracking-wide`)
+  * Baseline grid alignment (`text-baseline-grid`, `text-baseline-center`)
+  * Icon sizing utilities (`.text-icon`)
+
+* **Spacing Utilities** -- Complete spacing system with:
+  * Inline spacing utilities (`spacing-inline-xs`, `spacing-inline-sm`, `spacing-inline-md`, etc.) for horizontal spacing between elements
+  * Stack spacing utilities (`spacing-stack-xs`, `spacing-stack-sm`, `spacing-stack-md`, etc.) for vertical spacing between stacked elements
+  * Inset spacing utilities (`spacing-inset-xs-inline`, `spacing-inset-md-squared`, etc.) for padding within elements
+  * Border radius utilities (`spacing-border-radius-rounded`, `spacing-border-radius-pill`, `spacing-border-radius-none`)
+  * Icon spacing utilities (`spacing-icon-gap-xs`, `spacing-icon-gap-sm`, etc.) for spacing between icons and text
+
+> **For EDS React components:** When using `@equinor/eds-core-react`, you need to import both the CSS variables and foundation CSS:
+>
+> ```tsx
+> import '@equinor/eds-tokens/css/variables.css'
+> import '@equinor/eds-tokens/css/foundation.css'
+> ```
+
+#### Using Typography Classes
+
+The foundation CSS provides utility classes and data attributes for typography:
+
+```html
+<!-- Using data attributes -->
+<div data-font-family="ui" data-text-size="md" data-line-height="default">
+  UI font text
+</div>
+
+<div data-font-family="header" data-text-size="xl" data-font-weight="bolder">
+  Header font text
+</div>
+
+<!-- Using utility classes -->
+<div class="font-ui text-md line-height-default">
+  UI font text
+</div>
+
+<div class="font-heading text-xl font-bolder">
+  Header font text
+</div>
+
+<!-- Baseline grid alignment -->
+<div class="font-ui text-md text-baseline-grid">
+  Aligned to 4px baseline grid
+</div>
+```
+
+#### Using Spacing Classes
+
+The foundation CSS provides utility classes and data attributes for spacing:
+
+```html
+<!-- Inline spacing - horizontal spacing between elements -->
+<div class="spacing-inline-md">
+  <!-- Uses gap property for horizontal spacing -->
+  <span>Item 1</span>
+  <span>Item 2</span>
+</div>
+
+<!-- Or using data attributes -->
+<div data-spacing-inline="md">
+  <span>Item 1</span>
+  <span>Item 2</span>
+</div>
+
+<!-- Stack spacing - vertical spacing between stacked elements -->
+<div class="spacing-stack-lg">
+  <!-- Uses gap property for vertical spacing -->
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+<!-- Or using data attributes -->
+<div data-spacing-stack="lg">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+<!-- Inset spacing - padding within elements -->
+<div class="spacing-inset-md-squared">
+  <!-- Padding both inline and block -->
+  Content with padding
+</div>
+
+<div class="spacing-inset-sm-inline">
+  <!-- Padding only inline (horizontal) -->
+  Content with horizontal padding
+</div>
+
+<div class="spacing-inset-xs-stack-squished">
+  <!-- Padding only block (vertical), squished variant -->
+  Content with vertical padding
+</div>
+
+<!-- Using data attributes for inset -->
+<div data-spacing-inset-size="md" data-spacing-inset-variation="squared">
+  Content with padding
+</div>
+
+<!-- Border radius -->
+<div class="spacing-border-radius-rounded">
+  Rounded corners
+</div>
+
+<div class="spacing-border-radius-pill">
+  Pill-shaped (fully rounded)
+</div>
+
+<!-- Icon spacing -->
+<div class="spacing-icon-gap-md">
+  <icon />Text with icon
+</div>
+```
+
+#### Spacing Variables
+
+The spacing system uses CSS custom properties that automatically adapt to density modes (comfortable/spacious). These variables are provided by the CSS variables stylesheet (`@equinor/eds-tokens/css/variables`):
+
+```css
+.my-custom-layout {
+  /* Use spacing variables */
+  gap: var(--eds-spacing-inline-md);
+  padding-inline: var(--eds-spacing-inset-md-inline);
+  padding-block: var(--eds-spacing-inset-md-stack-squared);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+}
+
+.my-flex-container {
+  display: flex;
+  gap: var(--eds-spacing-inline-lg);
+}
+
+.my-stacked-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-stack-md);
+}
+```
+
+#### Typography Variables
+
+The typography system uses CSS custom properties that are automatically set based on the font family and size. These variables are provided by the CSS variables stylesheet (`@equinor/eds-tokens/css/variables`):
+
+```css
+.my-custom-text {
+  /* Use typography variables */
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-lineheight-default);
+  font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+  letter-spacing: var(--eds-typography-ui-body-md-tracking-normal);
+}
+```
+
+#### Baseline Grid Alignment
+
+The foundation CSS includes baseline grid alignment for consistent vertical rhythm:
+
+* `text-baseline-grid` -- Aligns text baseline to 4px grid intervals
+* `text-baseline-center` -- Centers text vertically while maintaining 4px grid alignment
+
+These utilities use modern CSS features (`text-box-trim`) and gracefully degrade in older browsers.
+
 ---
 
 ## Legacy Tokens (Backward Compatible)

@@ -11,21 +11,29 @@ A new and improved typography system is now available! The new system provides:
 * **Better performance** and smaller bundle size
 * **Improved accessibility** features
 
-### Required: Import the stylesheet
+### Required: Import the stylesheets
 
-The new typography components require the EDS stylesheet to work correctly. Import it once in your application's root or main file:
+The new typography components require both CSS variables and typography styles to work correctly. Import both from `@equinor/eds-tokens`:
 
 ```tsx
-import '@equinor/eds-core-react/style.css'
+import '@equinor/eds-tokens/css/variables.css'
+import '@equinor/eds-tokens/css/foundation.css'
 ```
 
+**Why both?**
+- **Variables CSS** provides all design tokens including typography variables (font sizes, line heights, etc.)
+- **Foundation CSS** provides typography utility classes and styles (font families, baseline alignment, etc.)
+
 This stylesheet includes all typography styles with support for font families, sizes, weights, line heights, letter spacing, and baseline alignment.
+
+> **Note:** Typography styles are part of the `@equinor/eds-tokens` package. See the [eds-tokens README](../../../../packages/eds-tokens/README.md#foundation-css-typography) for more details about typography utilities and CSS variables.
 
 **Get started:**
 
 ```tsx
 import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
-import '@equinor/eds-core-react/style.css' // Required
+import '@equinor/eds-tokens/css/variables.css' // Required - design tokens
+import '@equinor/eds-tokens/css/foundation.css' // Required - typography styles
 
 <Heading as="h1">Welcome</Heading>
 <Paragraph>This uses the new typography system.</Paragraph>
