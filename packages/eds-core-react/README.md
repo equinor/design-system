@@ -27,13 +27,6 @@ npm install typescript --save-dev
 
 EDS Core React components require both CSS variables and typography styles to work correctly. Import both stylesheets from `@equinor/eds-tokens`:
 
-```tsx
-import '@equinor/eds-tokens/css/variables.css'
-import '@equinor/eds-tokens/css/foundation.css'
-```
-
-Or using CSS imports:
-
 ```css
 @import '@equinor/eds-tokens/css/variables';
 @import '@equinor/eds-tokens/css/foundation';
@@ -41,7 +34,7 @@ Or using CSS imports:
 
 **Why both?**
 - **Variables CSS** (`/css/variables`) provides all design tokens (colors, spacing, typography variables)
-- **Foundation CSS** (`/css/foundation`) provides typography utility classes and styles for the typography system
+- **Foundation CSS** (`/css/foundation`) provides typography and spacing utility classes used in our components.
 
 For more information about the typography system, see the [Typography component documentation](./src/components/Typography/README.md).
 
