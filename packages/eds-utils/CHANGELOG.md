@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/equinor/design-system/compare/eds-utils@v1.1.0...eds-utils@v2.0.0) (2025-10-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134))
+
+### 🐛 Fixed
+
+* **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134)) ([72c5f78](https://github.com/equinor/design-system/commit/72c5f78c1eba95beeb1e4363b3808168f3683745))
+
 ## [1.1.0](https://github.com/equinor/design-system/compare/eds-utils@v1.0.1...eds-utils@v1.1.0) (2025-10-29)
 
 
