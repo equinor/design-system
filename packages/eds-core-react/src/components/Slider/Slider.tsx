@@ -15,8 +15,7 @@ import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
-import { useId } from 'react'
-import { bordersTemplate } from '@equinor/eds-utils'
+import { bordersTemplate, useId } from '@equinor/eds-utils'
 
 const {
   entities: { track, handle, dot, output },
@@ -465,14 +464,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const generatedInputIdA = useId()
-  const generatedInputIdB = useId()
-  const generatedInputId = useId()
-
-  let inputIdA = generatedInputIdA
-  let inputIdB = generatedInputIdB
-  let inputId = generatedInputId
-
+  let inputIdA = useId(null, 'inputA')
+  let inputIdB = useId(null, 'inputB')
+  let inputId = useId(null, 'thumb')
   if (rest['id']) {
     const overrideId = rest['id']
     inputIdA = `${overrideId}-thumb-a`

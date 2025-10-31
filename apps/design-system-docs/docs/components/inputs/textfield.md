@@ -24,11 +24,12 @@ A _text field_ lets users enter, interact and edit content, typically in forms a
 
 ## Structure
 
-- Single line input field
+- Single line
+- Multiline
 
 ## Guidelines
 
-The `TextField` component is designed for single-line text input. For multiline text input, please use the [Textarea](https://storybook.eds.equinor.com/?path=/docs/inputs-textarea--docs) component instead.
+Text fields are used for long and short amounts of text. `Text inputs` are for a single line of text while `text areas` are for more than a single line of text.
 
 The component includes options for writing unit for the field and a placeholder icon. This component uses auto layout to place an icon and/or unit with the correct spacing next to each other.
 

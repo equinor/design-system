@@ -1,45 +1,39 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-export const useAutoResize = <T extends HTMLElement = HTMLElement>(
+export const useAutoResize = (
+  // Target element to resize
+  targetEl: HTMLElement,
   // Height in pixels
   maxHeight?: number,
-) => {
-  const [element, setElement] = useState<T | null>(null)
-
-  const refCallback = useCallback((node: T | null) => {
-    setElement(node)
-  }, [])
-
+): void => {
   useEffect(() => {
-    if (!element || !maxHeight) return
-
     const handleResize = () => {
-      element.style.height = 'auto'
-      const { scrollHeight, clientHeight } = element
+      targetEl.style.height = 'auto'
+      const { scrollHeight, clientHeight } = targetEl
       let newHeight = clientHeight
 
       if (maxHeight > newHeight) {
         newHeight = Math.min(maxHeight, Math.max(scrollHeight, newHeight))
 
         if (scrollHeight > maxHeight) {
-          element.style.overflow = 'auto'
+          targetEl.style.overflow = 'auto'
         } else {
-          element.style.overflow = 'hidden'
+          targetEl.style.overflow = 'hidden'
         }
 
         if (newHeight > clientHeight) {
-          element.style.height = `${newHeight}px`
+          targetEl.style.height = `${newHeight}px`
         }
       }
     }
 
-    handleResize()
-    element.addEventListener('keyup', handleResize, true)
+    if (targetEl && maxHeight) {
+      handleResize()
+      targetEl.addEventListener('keyup', handleResize, true)
+    }
 
     return () => {
-      element.removeEventListener('keyup', handleResize, true)
+      targetEl?.removeEventListener('keyup', handleResize, true)
     }
-  }, [element, maxHeight])
-
-  return refCallback
+  }, [targetEl, maxHeight])
 }

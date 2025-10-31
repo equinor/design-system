@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from 'react'
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { TextField, Icon, EdsProvider, Button, Density } from '../..'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import {
@@ -6,7 +6,9 @@ import {
   warning_filled,
   error_filled,
   info_circle,
+  comment,
   done,
+  comment_important,
 } from '@equinor/eds-icons'
 import { Controller, useForm } from 'react-hook-form'
 import { Stack } from '../../../.storybook/components'
@@ -17,7 +19,9 @@ const icons = {
   thumbs_up,
   warning_filled,
   error_filled,
+  comment,
   done,
+  comment_important,
 }
 
 Icon.add(icons)
@@ -61,6 +65,7 @@ const meta: Meta<typeof TextField> = {
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
     inputRef: { control: { type: null } },
+    textareaRef: { control: { type: null } },
   },
   decorators: [
     (Story) => {
@@ -161,6 +166,41 @@ Types.decorators = [
   },
 ]
 
+export const Multiline: Story = () => (
+  <TextField id="storybook-multiline" label="Multiline" multiline rows={3} />
+)
+
+export const MultilineRowsMax: Story = () => (
+  <TextField
+    id="storybook-multiline-three"
+    label="Multiline with max 10 rows"
+    multiline
+    rows={3}
+    rowsMax={10}
+  />
+)
+
+export const MultilineFixedHeight: Story = () => (
+  <TextField
+    id="storybook-multiline-fixedheight"
+    defaultValue="Lorem Ipsum is simply dummy text of the printing and
+    typesetting industry. Lorem Ipsum has been the industry's
+    standard dummy text ever since the 1500s, when an unknown
+    printer took a galley of type and scrambled it to make a
+    type specimen book. It has survived not only five centuries,
+    but also the leap into electronic typesetting,
+    remaining essentially unchanged. It has survived not only five centuries,
+    but also the leap into electronic typesetting,
+    remaining essentially unchanged. It has survived not only five centuries,
+    but also the leap into electronic typesetting,
+    remaining essentially unchanged."
+    label="Multiline with fixed height"
+    multiline
+    style={{ height: '100px' }}
+  />
+)
+MultilineFixedHeight.storyName = 'Multiline with fixed height'
+
 export const WithUnit: Story = () => (
   <>
     <TextField
@@ -199,26 +239,53 @@ WithUnit.decorators = [
 export const WithIcons: Story = () => {
   const [icon, setIcon] = useState(true)
   return (
-    <div>
-      <Button
-        variant="outlined"
-        onClick={() => setIcon(!icon)}
-        style={{ marginBottom: '16px' }}
-      >
-        Toggle Icon
-      </Button>
+    <>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={() => setIcon(!icon)}
+          style={{ marginBottom: '16px' }}
+        >
+          Toggle Icon
+        </Button>
+        <TextField
+          id="icons-text"
+          type="date"
+          defaultValue="Input text"
+          label="Label text"
+          meta="Meta"
+          helperText="Helper Text"
+          inputIcon={icon && <Icon name="done" title="Done" />}
+        />
+      </div>
       <TextField
-        id="icons-text"
-        type="date"
-        defaultValue="Input text"
-        label="Label text"
-        meta="Meta"
-        helperText="Helper Text"
-        inputIcon={icon && <Icon name="done" title="Done" />}
+        id="storybook-multiline-two"
+        placeholder="Placeholder text that spans multiple lines"
+        label="With icon"
+        multiline
+        rows={3}
+        inputIcon={<Icon name="comment" title="Comment" />}
       />
-    </div>
+    </>
   )
 }
+WithIcons.storyName = 'With icons'
+WithIcons.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, auto)',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Datepicker: Story = () => (
   <>
@@ -231,6 +298,7 @@ export const Datepicker: Story = () => (
     />
   </>
 )
+Datepicker.storyName = 'Datepicker'
 Datepicker.decorators = [
   (Story) => {
     return (
@@ -268,6 +336,16 @@ export const Variants: Story = () => (
       inputIcon={<Icon name="error_filled" title="Error" />}
     />
     <TextField
+      id="multi-error"
+      defaultValue="Input value that spans multiple lines"
+      label="Multiline"
+      multiline
+      rows={3}
+      helperText="Validation error"
+      variant="error"
+      helperIcon={<Icon name="error_filled" title="Error" size={16} />}
+    />
+    <TextField
       id="storybook-warning"
       placeholder="Placeholder text"
       label="Single line"
@@ -281,6 +359,16 @@ export const Variants: Story = () => (
       placeholder="Placeholder text"
       label="Warning"
       meta="Meta"
+      helperText="Helper/warning text"
+      variant="warning"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
+    <TextField
+      id="multi-warning-two"
+      defaultValue="Input value that spans multiple lines"
+      label="Multiline"
+      multiline
+      rows={3}
       helperText="Helper/warning text"
       variant="warning"
       inputIcon={<Icon name="warning_filled" title="Warning" />}
@@ -302,6 +390,16 @@ export const Variants: Story = () => (
       helperText="Helper text"
       variant="success"
       inputIcon={<Icon name="thumbs_up" title="Success" />}
+    />
+    <TextField
+      id="multi-success"
+      defaultValue="Input value that spans multiple lines"
+      label="Multiline"
+      multiline
+      rows={3}
+      helperText="Helper text"
+      variant="success"
+      helperIcon={<Icon name="thumbs_up" title="Success" size={16} />}
     />
   </>
 )
@@ -347,6 +445,34 @@ export const ReadOnly: Story = () => (
       helperText="helper text"
       inputIcon={<Icon name="thumbs_up" title="Success" />}
     />
+    <TextField
+      id="storybook-multi-readonly"
+      label="Read only"
+      placeholder="Placeholder text that spans multiple lines"
+      multiline
+      readOnly
+      rows={3}
+    />
+    <TextField
+      id="storybook-multi-readonly"
+      label="Read only"
+      defaultValue="Input value that spans multiple lines"
+      meta="Meta"
+      multiline
+      readOnly
+      rows={3}
+    />
+    <TextField
+      id="storybook-multi-readonly"
+      label="Read only icon"
+      defaultValue="Input value that spans multiple lines"
+      multiline
+      variant="error"
+      readOnly
+      rows={3}
+      helperText="helper text"
+      inputIcon={<Icon name="error_filled" title="Error" />}
+    />
   </>
 )
 ReadOnly.storyName = 'Read only'
@@ -368,15 +494,27 @@ ReadOnly.decorators = [
 ]
 
 export const Disabled: Story = () => (
-  <TextField
-    id="storybook-unit-four"
-    placeholder="500"
-    label="Disabled price"
-    unit="$"
-    meta="Meta"
-    disabled
-    helperText="Helper Text"
-  />
+  <>
+    <TextField
+      id="storybook-unit-four"
+      placeholder="500"
+      label="Disabled price"
+      unit="$"
+      meta="Meta"
+      disabled
+      helperText="Helper Text"
+    />
+    <TextField
+      id="storybook-multiline-two"
+      defaultValue="Write a comment that spans multiple lines"
+      label="Comment"
+      multiline
+      disabled
+      rows={3}
+      helperText="helper text"
+      inputIcon={<Icon name="comment_important" title="Comment important" />}
+    />
+  </>
 )
 Disabled.decorators = [
   (Story) => {
@@ -416,6 +554,16 @@ export const Compact: Story = () => {
           helperText="Helper information text over several lines so that it breaks"
         />
       </div>
+      <TextField
+        id="compact-textfield-multiline"
+        placeholder="Placeholder text that spans multiple lines as much as is possible."
+        label="Multiline"
+        multiline
+        rowsMax={10}
+        variant="warning"
+        inputIcon={<Icon name="warning_filled" title="Warning" />}
+        helperText="Helper information text thats very very very loooonooooooong"
+      />
     </EdsProvider>
   )
 }
@@ -490,8 +638,7 @@ export const Validation: Story = () => {
         inputIcon={
           isValid ? undefined : <Icon data={error_filled} title="error" />
         }
-        onChange={(event) => {
-          // TypeScript automatically infers event type - no manual annotation needed!
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setIsValid(
             event.target.checkValidity() && !isNaN(Number(event.target.value)),
           )

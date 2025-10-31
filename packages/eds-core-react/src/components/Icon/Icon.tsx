@@ -1,5 +1,5 @@
 import type { IconData } from '@equinor/eds-icons'
-import { useId } from 'react'
+import { useId } from '@equinor/eds-utils'
 import { Ref, SVGProps, forwardRef } from 'react'
 import styled from 'styled-components'
 import type { Name } from './Icon.types'
@@ -128,7 +128,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   }
 
   // Accessibility
-  const titleId = useId()
+  const titleId = useId(null, `${icon.prefix}-${icon.name}`)
   if (title) {
     svgProps = {
       ...svgProps,
