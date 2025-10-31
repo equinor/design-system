@@ -78,7 +78,6 @@ jobs:
           name: storybook-build
           path: packages/eds-core-react/storybook-build
 
-      # DEBUG: Sjekk hva som ble lastet ned
       - name: Debug - List downloaded files
         run: |
           echo "=== Downloaded files ==="
@@ -94,20 +93,41 @@ jobs:
           echo "=== Checking for Typography.new.stories file ==="
           ls -la packages/eds-core-react/storybook-build/assets/ | grep -i "typography.new" || echo "No Typography.new files found"
 
-      - name: Deploy the website
-        id: deploy-website
-        uses: tibor19/static-website-deploy@v2
+      - name: Az CLI login 🔑
+        uses: azure/login@v1
         with:
-          enabled-static-website: 'true'
-          folder: 'packages/eds-core-react/storybook-build'
-          public-access-policy: 'container'
-          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
+          client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
+          tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
+          allow-no-subscriptions: true
+
+      - name: Deploy to Azure Blob Storage 🚀
+        id: deploy-website
+        run: |
+          # Extract storage account name from connection string
+          STORAGE_ACCOUNT=$(echo "${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}" | grep -oP 'AccountName=\K[^;]+')
+
+          echo "Deploying to storage account: $STORAGE_ACCOUNT"
+
+          az storage blob upload-batch \
+            --account-name "$STORAGE_ACCOUNT" \
+            --destination '$web' \
+            --source packages/eds-core-react/storybook-build \
+            --overwrite \
+            --auth-mode login
+
+          echo "✅ Deployment completed successfully"
+
+      - name: logout 🔓
+        run: az logout
+        if: always()
+
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+
   purge-cdn:
     if: github.event.inputs.environment == 'production'
     needs: [publish-storybook]
