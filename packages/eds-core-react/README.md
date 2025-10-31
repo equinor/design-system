@@ -25,7 +25,7 @@ npm install typescript --save-dev
 
 ### Required Stylesheets
 
-EDS Core React components require both CSS variables and typography styles to work correctly. Import both stylesheets from `@equinor/eds-tokens`:
+EDS Core React components require css variables and foundation styles for typography and spacing. Import both stylesheets from `@equinor/eds-tokens`:
 
 ```css
 @import '@equinor/eds-tokens/css/variables';
