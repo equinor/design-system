@@ -1,6 +1,6 @@
 'use client'
 
-import { generateColorScale } from '../utils/color'
+import { calculateAverageChroma, generateColorScale } from '../utils/color'
 import { useState, useEffect, useMemo } from 'react'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
@@ -189,6 +189,10 @@ export default function App() {
     }
   }
 
+  const avgChroma = useMemo(() => {
+    return calculateAverageChroma(colors.map((c) => c.value))
+  }, [colors])
+
   // Efficiently memoize computed scales by value-only dependencies
   const valueKey = useMemo(() => colors.map((c) => c.value).join('|'), [colors])
   const lightScalesMemo = useMemo(
@@ -200,6 +204,7 @@ export default function App() {
           meanLight,
           stdDevLight,
           colorFormat,
+          avgChroma,
         ),
       ),
     // Only recompute when color values or generation inputs change (not when names change)
@@ -215,6 +220,7 @@ export default function App() {
           meanDark,
           stdDevDark,
           colorFormat,
+          avgChroma,
         ),
       ),
     // eslint-disable-next-line react-hooks/exhaustive-deps

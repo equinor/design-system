@@ -16,7 +16,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#0a0b0c",
+        "$value": "#080c0e",
       },
       "10": {
         "$description": "",
@@ -86,7 +86,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#2a3741",
+        "$value": "#0d3954",
       },
       "15": {
         "$description": "",
@@ -114,7 +114,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#1d2226",
+        "$value": "#14242e",
       },
       "3": {
         "$description": "",
@@ -128,7 +128,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#33607e",
+        "$value": "#00619f",
       },
       "4": {
         "$description": "",
@@ -142,7 +142,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#316f98",
+        "$value": "#0070b5",
       },
       "5": {
         "$description": "",
@@ -156,7 +156,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#2e82b7",
+        "$value": "#0082d0",
       },
       "6": {
         "$description": "",
@@ -170,7 +170,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#33607e",
+        "$value": "#00619f",
       },
       "7": {
         "$description": "",
@@ -184,7 +184,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#2d8bc5",
+        "$value": "#008cdd",
       },
       "8": {
         "$description": "",
@@ -198,7 +198,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#5abbfb",
+        "$value": "#33bcff",
       },
       "9": {
         "$description": "",
@@ -212,7 +212,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#7dceff",
+        "$value": "#74ceff",
       },
     },
     "Gray": {
@@ -440,7 +440,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#0a0b0b",
+        "$value": "#070c0d",
       },
       "10": {
         "$description": "",
@@ -454,7 +454,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#ace3e9",
+        "$value": "#00f5ff",
       },
       "11": {
         "$description": "",
@@ -468,7 +468,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#c7f1f6",
+        "$value": "#78ffff",
       },
       "12": {
         "$description": "",
@@ -482,7 +482,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#bcebf1",
+        "$value": "#48fcff",
       },
       "13": {
         "$description": "",
@@ -496,7 +496,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#e6ffff",
+        "$value": "#d8ffff",
       },
       "14": {
         "$description": "",
@@ -510,7 +510,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#2c3839",
+        "$value": "#003f45",
       },
       "15": {
         "$description": "",
@@ -524,7 +524,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#030303",
+        "$value": "#020404",
       },
       "2": {
         "$description": "",
@@ -538,7 +538,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#1e2323",
+        "$value": "#0f2628",
       },
       "3": {
         "$description": "",
@@ -552,7 +552,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#3c6266",
+        "$value": "#006a75",
       },
       "4": {
         "$description": "",
@@ -566,7 +566,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#3e7378",
+        "$value": "#007a86",
       },
       "5": {
         "$description": "",
@@ -580,7 +580,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#41878e",
+        "$value": "#008d9b",
       },
       "6": {
         "$description": "",
@@ -594,7 +594,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#3c6266",
+        "$value": "#006a75",
       },
       "7": {
         "$description": "",
@@ -608,7 +608,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#439199",
+        "$value": "#0097a6",
       },
       "8": {
         "$description": "",
@@ -622,7 +622,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#6ec0c9",
+        "$value": "#00cbdd",
       },
       "9": {
         "$description": "",
@@ -636,7 +636,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#8cd2da",
+        "$value": "#00e0f4",
       },
     },
   },
@@ -659,7 +659,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#e7f8ff",
+        "$value": "#dff9ff",
       },
       "10": {
         "$description": "",
@@ -673,7 +673,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#085883",
+        "$value": "#005892",
       },
       "11": {
         "$description": "",
@@ -687,7 +687,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#0e5279",
+        "$value": "#00528a",
       },
       "12": {
         "$description": "",
@@ -701,7 +701,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#015e8d",
+        "$value": "#005e9b",
       },
       "13": {
         "$description": "",
@@ -715,7 +715,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#121e27",
+        "$value": "#001f39",
       },
       "14": {
         "$description": "",
@@ -729,7 +729,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#c5e3f9",
+        "$value": "#b0e6ff",
       },
       "15": {
         "$description": "",
@@ -757,7 +757,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#f4ffff",
+        "$value": "#f1ffff",
       },
       "3": {
         "$description": "",
@@ -771,7 +771,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#cae6fa",
+        "$value": "#b7e8ff",
       },
       "4": {
         "$description": "",
@@ -785,7 +785,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#b5daf5",
+        "$value": "#9bddff",
       },
       "5": {
         "$description": "",
@@ -799,7 +799,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#99cbf0",
+        "$value": "#74ceff",
       },
       "6": {
         "$description": "",
@@ -813,7 +813,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#b5daf5",
+        "$value": "#9bddff",
       },
       "7": {
         "$description": "",
@@ -827,7 +827,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#6fb6e9",
+        "$value": "#1fb9ff",
       },
       "8": {
         "$description": "",
@@ -841,7 +841,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#0070a9",
+        "$value": "#0070b5",
       },
       "9": {
         "$description": "",
@@ -855,7 +855,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#006aa0",
+        "$value": "#006aac",
       },
     },
     "Gray": {
@@ -1083,7 +1083,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#eaf8fa",
+        "$value": "#c0ffff",
       },
       "10": {
         "$description": "",
@@ -1097,7 +1097,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#205c62",
+        "$value": "#00616b",
       },
       "11": {
         "$description": "",
@@ -1111,7 +1111,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#20565c",
+        "$value": "#005a64",
       },
       "12": {
         "$description": "",
@@ -1125,7 +1125,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#1f6369",
+        "$value": "#006771",
       },
       "13": {
         "$description": "",
@@ -1139,7 +1139,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#141f20",
+        "$value": "#00242a",
       },
       "14": {
         "$description": "",
@@ -1153,7 +1153,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#cae4e7",
+        "$value": "#6cf5ff",
       },
       "15": {
         "$description": "",
@@ -1181,7 +1181,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#f6ffff",
+        "$value": "#e5ffff",
       },
       "3": {
         "$description": "",
@@ -1195,7 +1195,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#cfe7e9",
+        "$value": "#7cf7ff",
       },
       "4": {
         "$description": "",
@@ -1209,7 +1209,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#bbdbdf",
+        "$value": "#00f0ff",
       },
       "5": {
         "$description": "",
@@ -1223,7 +1223,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#a2cdd2",
+        "$value": "#00e0f4",
       },
       "6": {
         "$description": "",
@@ -1237,7 +1237,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#bbdbdf",
+        "$value": "#00f0ff",
       },
       "7": {
         "$description": "",
@@ -1251,7 +1251,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#7cbac1",
+        "$value": "#00c7d9",
       },
       "8": {
         "$description": "",
@@ -1265,7 +1265,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#21767e",
+        "$value": "#007a86",
       },
       "9": {
         "$description": "",
@@ -1279,7 +1279,7 @@ exports[`generate-colors CLI > should convert OKLCH input colors to HEX format w
           },
         },
         "$type": "color",
-        "$value": "#206f77",
+        "$value": "#00737f",
       },
     },
   },
@@ -1302,7 +1302,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#0a0b0c",
+        "$value": "#080c0e",
       },
       "10": {
         "$description": "",
@@ -1372,7 +1372,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#2a3741",
+        "$value": "#0d3954",
       },
       "15": {
         "$description": "",
@@ -1400,7 +1400,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#1d2226",
+        "$value": "#14242e",
       },
       "3": {
         "$description": "",
@@ -1414,7 +1414,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#33607e",
+        "$value": "#00619f",
       },
       "4": {
         "$description": "",
@@ -1428,7 +1428,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#316f98",
+        "$value": "#0070b5",
       },
       "5": {
         "$description": "",
@@ -1442,7 +1442,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#2e82b7",
+        "$value": "#0082d0",
       },
       "6": {
         "$description": "",
@@ -1456,7 +1456,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#33607e",
+        "$value": "#00619f",
       },
       "7": {
         "$description": "",
@@ -1470,7 +1470,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#2d8bc5",
+        "$value": "#008cdd",
       },
       "8": {
         "$description": "",
@@ -1484,7 +1484,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#5abbfb",
+        "$value": "#33bcff",
       },
       "9": {
         "$description": "",
@@ -1498,7 +1498,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#7dceff",
+        "$value": "#74ceff",
       },
     },
     "Gray": {
@@ -1726,7 +1726,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#0a0b0b",
+        "$value": "#070c0d",
       },
       "10": {
         "$description": "",
@@ -1740,7 +1740,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#ace3e9",
+        "$value": "#00f5ff",
       },
       "11": {
         "$description": "",
@@ -1754,7 +1754,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#c7f1f6",
+        "$value": "#78ffff",
       },
       "12": {
         "$description": "",
@@ -1768,7 +1768,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#bcebf1",
+        "$value": "#48fcff",
       },
       "13": {
         "$description": "",
@@ -1782,7 +1782,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#e6ffff",
+        "$value": "#d8ffff",
       },
       "14": {
         "$description": "",
@@ -1796,7 +1796,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#2c3839",
+        "$value": "#003f45",
       },
       "15": {
         "$description": "",
@@ -1810,7 +1810,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#030303",
+        "$value": "#020404",
       },
       "2": {
         "$description": "",
@@ -1824,7 +1824,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#1e2323",
+        "$value": "#0f2628",
       },
       "3": {
         "$description": "",
@@ -1838,7 +1838,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#3c6266",
+        "$value": "#006a75",
       },
       "4": {
         "$description": "",
@@ -1852,7 +1852,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#3e7378",
+        "$value": "#007a86",
       },
       "5": {
         "$description": "",
@@ -1866,7 +1866,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#41878e",
+        "$value": "#008d9b",
       },
       "6": {
         "$description": "",
@@ -1880,7 +1880,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#3c6266",
+        "$value": "#006a75",
       },
       "7": {
         "$description": "",
@@ -1894,7 +1894,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#439199",
+        "$value": "#0097a6",
       },
       "8": {
         "$description": "",
@@ -1908,7 +1908,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#6ec0c9",
+        "$value": "#00cbdd",
       },
       "9": {
         "$description": "",
@@ -1922,7 +1922,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#8cd2da",
+        "$value": "#00e0f4",
       },
     },
   },
@@ -1945,7 +1945,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#e7f8ff",
+        "$value": "#dff9ff",
       },
       "10": {
         "$description": "",
@@ -1959,7 +1959,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#085883",
+        "$value": "#005892",
       },
       "11": {
         "$description": "",
@@ -1973,7 +1973,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#0e5279",
+        "$value": "#00528a",
       },
       "12": {
         "$description": "",
@@ -1987,7 +1987,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#015e8d",
+        "$value": "#005e9b",
       },
       "13": {
         "$description": "",
@@ -2001,7 +2001,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#121e27",
+        "$value": "#001f39",
       },
       "14": {
         "$description": "",
@@ -2015,7 +2015,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#c5e3f9",
+        "$value": "#b0e6ff",
       },
       "15": {
         "$description": "",
@@ -2043,7 +2043,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#f4ffff",
+        "$value": "#f1ffff",
       },
       "3": {
         "$description": "",
@@ -2057,7 +2057,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#cae6fa",
+        "$value": "#b7e8ff",
       },
       "4": {
         "$description": "",
@@ -2071,7 +2071,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#b5daf5",
+        "$value": "#9bddff",
       },
       "5": {
         "$description": "",
@@ -2085,7 +2085,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#99cbf0",
+        "$value": "#74ceff",
       },
       "6": {
         "$description": "",
@@ -2099,7 +2099,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#b5daf5",
+        "$value": "#9bddff",
       },
       "7": {
         "$description": "",
@@ -2113,7 +2113,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#6fb6e9",
+        "$value": "#1fb9ff",
       },
       "8": {
         "$description": "",
@@ -2127,7 +2127,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#0070a9",
+        "$value": "#0070b5",
       },
       "9": {
         "$description": "",
@@ -2141,7 +2141,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#006aa0",
+        "$value": "#006aac",
       },
     },
     "Gray": {
@@ -2369,7 +2369,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#eaf8fa",
+        "$value": "#c0ffff",
       },
       "10": {
         "$description": "",
@@ -2383,7 +2383,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#205c62",
+        "$value": "#00616b",
       },
       "11": {
         "$description": "",
@@ -2397,7 +2397,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#20565c",
+        "$value": "#005a64",
       },
       "12": {
         "$description": "",
@@ -2411,7 +2411,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#1f6369",
+        "$value": "#006771",
       },
       "13": {
         "$description": "",
@@ -2425,7 +2425,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#141f20",
+        "$value": "#00242a",
       },
       "14": {
         "$description": "",
@@ -2439,7 +2439,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#cae4e7",
+        "$value": "#6cf5ff",
       },
       "15": {
         "$description": "",
@@ -2467,7 +2467,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#f6ffff",
+        "$value": "#e5ffff",
       },
       "3": {
         "$description": "",
@@ -2481,7 +2481,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#cfe7e9",
+        "$value": "#7cf7ff",
       },
       "4": {
         "$description": "",
@@ -2495,7 +2495,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#bbdbdf",
+        "$value": "#00f0ff",
       },
       "5": {
         "$description": "",
@@ -2509,7 +2509,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#a2cdd2",
+        "$value": "#00e0f4",
       },
       "6": {
         "$description": "",
@@ -2523,7 +2523,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#bbdbdf",
+        "$value": "#00f0ff",
       },
       "7": {
         "$description": "",
@@ -2537,7 +2537,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#7cbac1",
+        "$value": "#00c7d9",
       },
       "8": {
         "$description": "",
@@ -2551,7 +2551,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#21767e",
+        "$value": "#007a86",
       },
       "9": {
         "$description": "",
@@ -2565,7 +2565,7 @@ exports[`generate-colors CLI > should generate light and dark color tokens with 
           },
         },
         "$type": "color",
-        "$value": "#206f77",
+        "$value": "#00737f",
       },
     },
   },
@@ -2588,7 +2588,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.970 0.025 240.7)",
+        "$value": "oklch(0.970 0.067 240.7)",
       },
       "10": {
         "$description": "",
@@ -2602,7 +2602,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.440 0.099 240.7)",
+        "$value": "oklch(0.440 0.269 240.7)",
       },
       "11": {
         "$description": "",
@@ -2616,7 +2616,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.420 0.091 240.7)",
+        "$value": "oklch(0.420 0.247 240.7)",
       },
       "12": {
         "$description": "",
@@ -2630,7 +2630,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.460 0.106 240.7)",
+        "$value": "oklch(0.460 0.290 240.7)",
       },
       "13": {
         "$description": "",
@@ -2644,7 +2644,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.230 0.025 240.7)",
+        "$value": "oklch(0.230 0.067 240.7)",
       },
       "14": {
         "$description": "",
@@ -2658,7 +2658,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.900 0.044 240.7)",
+        "$value": "oklch(0.900 0.120 240.7)",
       },
       "15": {
         "$description": "",
@@ -2672,7 +2672,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(1.000 0.018 240.7)",
+        "$value": "oklch(1.000 0.050 240.7)",
       },
       "2": {
         "$description": "",
@@ -2686,7 +2686,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.999 0.019 240.7)",
+        "$value": "oklch(0.999 0.051 240.7)",
       },
       "3": {
         "$description": "",
@@ -2700,7 +2700,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.910 0.041 240.7)",
+        "$value": "oklch(0.910 0.111 240.7)",
       },
       "4": {
         "$description": "",
@@ -2714,7 +2714,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.870 0.055 240.7)",
+        "$value": "oklch(0.870 0.149 240.7)",
       },
       "5": {
         "$description": "",
@@ -2728,7 +2728,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.820 0.074 240.7)",
+        "$value": "oklch(0.820 0.202 240.7)",
       },
       "6": {
         "$description": "",
@@ -2742,7 +2742,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.870 0.055 240.7)",
+        "$value": "oklch(0.870 0.149 240.7)",
       },
       "7": {
         "$description": "",
@@ -2756,7 +2756,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.750 0.102 240.7)",
+        "$value": "oklch(0.750 0.279 240.7)",
       },
       "8": {
         "$description": "",
@@ -2770,7 +2770,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.520 0.125 240.7)",
+        "$value": "oklch(0.520 0.342 240.7)",
       },
       "9": {
         "$description": "",
@@ -2784,7 +2784,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.500 0.120 240.7)",
+        "$value": "oklch(0.500 0.327 240.7)",
       },
     },
     "Moss Green": {
@@ -2800,7 +2800,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.970 0.015 204.6)",
+        "$value": "oklch(0.970 0.067 204.6)",
       },
       "10": {
         "$description": "",
@@ -2814,7 +2814,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.440 0.062 204.6)",
+        "$value": "oklch(0.440 0.269 204.6)",
       },
       "11": {
         "$description": "",
@@ -2828,7 +2828,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.420 0.057 204.6)",
+        "$value": "oklch(0.420 0.247 204.6)",
       },
       "12": {
         "$description": "",
@@ -2842,7 +2842,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.460 0.066 204.6)",
+        "$value": "oklch(0.460 0.290 204.6)",
       },
       "13": {
         "$description": "",
@@ -2856,7 +2856,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.230 0.015 204.6)",
+        "$value": "oklch(0.230 0.067 204.6)",
       },
       "14": {
         "$description": "",
@@ -2870,7 +2870,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.900 0.028 204.6)",
+        "$value": "oklch(0.900 0.120 204.6)",
       },
       "15": {
         "$description": "",
@@ -2884,7 +2884,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(1.000 0.011 204.6)",
+        "$value": "oklch(1.000 0.050 204.6)",
       },
       "2": {
         "$description": "",
@@ -2898,7 +2898,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.999 0.012 204.6)",
+        "$value": "oklch(0.999 0.051 204.6)",
       },
       "3": {
         "$description": "",
@@ -2912,7 +2912,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.910 0.026 204.6)",
+        "$value": "oklch(0.910 0.111 204.6)",
       },
       "4": {
         "$description": "",
@@ -2926,7 +2926,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.870 0.034 204.6)",
+        "$value": "oklch(0.870 0.149 204.6)",
       },
       "5": {
         "$description": "",
@@ -2940,7 +2940,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.820 0.046 204.6)",
+        "$value": "oklch(0.820 0.202 204.6)",
       },
       "6": {
         "$description": "",
@@ -2954,7 +2954,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.870 0.034 204.6)",
+        "$value": "oklch(0.870 0.149 204.6)",
       },
       "7": {
         "$description": "",
@@ -2968,7 +2968,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.750 0.064 204.6)",
+        "$value": "oklch(0.750 0.279 204.6)",
       },
       "8": {
         "$description": "",
@@ -2982,7 +2982,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.520 0.078 204.6)",
+        "$value": "oklch(0.520 0.342 204.6)",
       },
       "9": {
         "$description": "",
@@ -2996,7 +2996,7 @@ exports[`generate-colors CLI > should generate tokens with OKLCH format when spe
           },
         },
         "$type": "color",
-        "$value": "oklch(0.500 0.075 204.6)",
+        "$value": "oklch(0.500 0.327 204.6)",
       },
     },
   },
@@ -3019,7 +3019,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#f9f4f3",
+        "$value": "#fbf3f1",
       },
       "10": {
         "$description": "",
@@ -3047,7 +3047,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#9c0000",
+        "$value": "#9b0000",
       },
       "12": {
         "$description": "",
@@ -3075,7 +3075,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#390905",
+        "$value": "#430000",
       },
       "14": {
         "$description": "",
@@ -3089,7 +3089,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#eadad7",
+        "$value": "#efd8d4",
       },
       "15": {
         "$description": "",
@@ -3103,7 +3103,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#ffffff",
+        "$value": "#fffefd",
       },
       "2": {
         "$description": "",
@@ -3117,7 +3117,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#fffefd",
+        "$value": "#fffdfc",
       },
       "3": {
         "$description": "",
@@ -3131,7 +3131,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#ecdedb",
+        "$value": "#f0dcd9",
       },
       "4": {
         "$description": "",
@@ -3145,7 +3145,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#e5ceca",
+        "$value": "#ecccc6",
       },
       "5": {
         "$description": "",
@@ -3159,7 +3159,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#e1b9b3",
+        "$value": "#edb4ab",
       },
       "6": {
         "$description": "",
@@ -3173,7 +3173,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#e5ceca",
+        "$value": "#ecccc6",
       },
       "7": {
         "$description": "",
@@ -3187,7 +3187,7 @@ exports[`generate-colors CLI > should use custom gaussian parameters if provided
           },
         },
         "$type": "color",
-        "$value": "#e2988d",
+        "$value": "#f58c7d",
       },
       "8": {
         "$description": "",

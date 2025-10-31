@@ -39,8 +39,9 @@ export const ChromaDistributionDemo = ({
 
       return lightnessValues.map((lightness) => {
         const multiplier = gaussian(lightness, mean, stdDev)
-        const chroma = multiplier * baseChroma
-        return { lightness, chroma, multiplier, baseChroma }
+        // Calculate actual chroma used in the scale (using base color's chroma)
+        const actualChroma = baseChroma < 0.001 ? 0 : multiplier * baseChroma
+        return { lightness, chroma: actualChroma, multiplier, baseChroma }
       })
     } catch {
       return []
@@ -109,10 +110,15 @@ export const ChromaDistributionDemo = ({
 
           {chromaData.length > 0 && (
             <div className="bg-surface rounded-lg p-4 text-sm">
-              <p className="font-medium mb-2">Base color properties:</p>
+              <p className="font-medium mb-2">Color scale properties:</p>
               <ul className="space-y-1 text-neutral-subtle">
-                <li>Base chroma: {chromaData[0].baseChroma.toFixed(3)}</li>
-                <li>Max chroma in scale: {maxChroma.toFixed(3)}</li>
+                <li>
+                  Base color chroma: {chromaData[0].baseChroma.toFixed(3)}
+                </li>
+                <li>
+                  Max chroma (constant): {maxChroma.toFixed(3)} (same for all
+                  colors)
+                </li>
                 <li>
                   Peak at lightness:{' '}
                   {chromaData
@@ -255,7 +261,8 @@ export const ChromaDistributionDemo = ({
         <p className="mt-2 text-neutral-subtle">
           Where the Gaussian function outputs a multiplier between 0 and 1,
           which scales the base color&apos;s chroma based on the lightness
-          value&apos;s distance from the mean.
+          value&apos;s distance from the mean. This preserves the relative
+          vibrancy of each color while ensuring smooth transitions.
         </p>
       </div>
     </div>
