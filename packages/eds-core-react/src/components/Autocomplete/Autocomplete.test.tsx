@@ -735,3 +735,179 @@ describe('Autocomplete: Add new options feature', () => {
     expect(addOption).not.toBeInTheDocument()
   })
 })
+
+describe('Autocomplete: Scroll position and navigation memory', () => {
+  const longItemsList = Array.from({ length: 20 }, (_, i) => `Option ${i + 1}`)
+  const uniqueLabelText = 'Scroll test autocomplete'
+
+  it('Maintains selected option when reopening single-select', async () => {
+    const AutocompleteWithState = () => {
+      const [selectedItem, setSelectedItem] = useState<string | null>(null)
+
+      return (
+        <Autocomplete
+          label={uniqueLabelText}
+          options={longItemsList}
+          multiple={false}
+          selectedOptions={selectedItem ? [selectedItem] : []}
+          onOptionsChange={(changes) => {
+            if (changes.selectedItems.length > 0) {
+              setSelectedItem(changes.selectedItems[0])
+            }
+          }}
+        />
+      )
+    }
+
+    render(<AutocompleteWithState />)
+    const input = screen.getByRole('combobox')
+
+    // Open autocomplete and select option 5
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+
+    for (let i = 0; i < 4; i++) {
+      fireEvent.keyDown(input, { key: 'ArrowDown' })
+    }
+    fireEvent.keyDown(input, { key: 'Enter' })
+
+    await waitFor(() =>
+      expect(screen.queryByRole('option')).not.toBeInTheDocument(),
+    )
+    expect(input).toHaveValue('Option 5')
+
+    // Reopen - should maintain selection
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+    expect(input).toHaveValue('Option 5')
+  })
+
+  it('Keyboard navigation works correctly with preselected option', async () => {
+    render(
+      <Autocomplete
+        label={uniqueLabelText}
+        options={longItemsList}
+        multiple={false}
+        selectedOptions={['Option 5']}
+      />,
+    )
+
+    const input = screen.getByRole('combobox')
+    expect(input).toHaveValue('Option 5')
+
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+
+    // Wait for scroll restoration (component uses 10ms setTimeout for scroll positioning)
+    await new Promise((resolve) => setTimeout(resolve, 50))
+
+    // Get current highlighted option ID
+    const currentHighlightedId = input.getAttribute('aria-activedescendant')
+    expect(currentHighlightedId).toBeTruthy()
+
+    // Verify the selected option (Option 5) is visible in the dropdown
+    expect(screen.getByRole('option', { name: 'Option 5' })).toBeDefined()
+
+    // Test arrow down navigation from current position
+    fireEvent.keyDown(input, { key: 'ArrowDown' })
+
+    await waitFor(() => {
+      const newHighlightedId = input.getAttribute('aria-activedescendant')
+      expect(newHighlightedId).not.toBe(currentHighlightedId)
+    })
+
+    // Test arrow up navigation goes back
+    fireEvent.keyDown(input, { key: 'ArrowUp' })
+    await waitFor(() => {
+      expect(input.getAttribute('aria-activedescendant')).toBe(
+        currentHighlightedId,
+      )
+    })
+  })
+
+  it('Handles empty selection correctly', async () => {
+    render(
+      <Autocomplete
+        label={uniqueLabelText}
+        options={longItemsList}
+        multiple={false}
+      />,
+    )
+
+    const input = screen.getByRole('combobox')
+
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+    expect(input).toHaveAttribute('aria-activedescendant')
+
+    fireEvent.keyDown(input, { key: 'Escape' })
+    await waitFor(() =>
+      expect(screen.queryByRole('option')).not.toBeInTheDocument(),
+    )
+
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+    expect(input).toHaveAttribute('aria-activedescendant')
+  })
+
+  it('Multiselect behavior remains unchanged', async () => {
+    render(
+      <Autocomplete
+        label={uniqueLabelText}
+        options={longItemsList}
+        multiple={true}
+      />,
+    )
+
+    const input = screen.getByRole('combobox')
+
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+
+    fireEvent.keyDown(input, { key: 'ArrowDown' })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    fireEvent.keyDown(input, { key: 'ArrowDown' })
+    fireEvent.keyDown(input, { key: 'Enter' })
+
+    expect(screen.getAllByRole('option')).toHaveLength(20)
+    expect(input).toHaveAttribute('placeholder', '2/20 selected')
+  })
+
+  it('Preserves behavior across open/close cycles', async () => {
+    const AutocompleteWithState = () => {
+      const [selectedItem, setSelectedItem] = useState<string>('Option 8')
+
+      return (
+        <Autocomplete
+          label={uniqueLabelText}
+          options={longItemsList}
+          multiple={false}
+          selectedOptions={[selectedItem]}
+          onOptionsChange={(changes) => {
+            if (changes.selectedItems.length > 0) {
+              setSelectedItem(changes.selectedItems[0])
+            }
+          }}
+        />
+      )
+    }
+
+    render(<AutocompleteWithState />)
+    const input = screen.getByRole('combobox')
+
+    expect(input).toHaveValue('Option 8')
+
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+
+    fireEvent.keyDown(input, { key: 'Escape' })
+    await waitFor(() =>
+      expect(screen.queryByRole('option')).not.toBeInTheDocument(),
+    )
+
+    fireEvent.click(input)
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(20))
+
+    expect(input).toHaveValue('Option 8')
+  })
+})
