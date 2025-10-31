@@ -102,18 +102,16 @@ jobs:
 
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
-          # Extract storage account name from connection string
-          STORAGE_ACCOUNT=$(echo "${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}" | grep -oP 'AccountName=\K[^;]+')
-
-          echo "Deploying to storage account: $STORAGE_ACCOUNT"
+          echo "Deploying to Azure Blob Storage..."
 
           az storage blob upload-batch \
-            --account-name "$STORAGE_ACCOUNT" \
             --destination '$web' \
             --source packages/eds-core-react/storybook-build \
             --overwrite \
-            --auth-mode login
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
 
           echo "✅ Deployment completed successfully"
 
