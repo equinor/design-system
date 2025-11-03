@@ -23,6 +23,21 @@ npm install typescript --save-dev
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
 ```
 
+### Required Stylesheets
+
+EDS Core React components require css variables and foundation styles for typography and spacing. Import both stylesheets from `@equinor/eds-tokens`:
+
+```css
+@import '@equinor/eds-tokens/css/variables';
+@import '@equinor/eds-tokens/css/foundation';
+```
+
+**Why both?**
+- **Variables CSS** (`/css/variables`) provides all design tokens (colors, spacing, typography variables)
+- **Foundation CSS** (`/css/foundation`) provides typography and spacing utility classes used in our components.
+
+For more information about the typography system, see the [Typography component documentation](./src/components/Typography/README.md).
+
 ## Usage
 
 ```jsx
