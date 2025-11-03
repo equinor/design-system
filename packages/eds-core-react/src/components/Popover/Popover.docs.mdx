@@ -33,14 +33,14 @@ import { Popover } from '@equinor/eds-core-react'
 
 const Demo = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+    
     const handleOpen = () => {
       setIsOpen(true)
     }
     const handleClose = () => {
       setIsOpen(false)
     }
-
-    const referenceElement = useRef<HTMLButtonElement>(null)
 
     return (
         <>
@@ -49,7 +49,7 @@ const Demo = () => {
         id="default-popover-anchor"
         aria-controls="default-popover"
         aria-expanded={isOpen}
-        ref={referenceElement}
+        ref={setAnchorEl}
         onClick={handleOpen}
       >
         Trigger Popover
@@ -58,7 +58,7 @@ const Demo = () => {
       <Popover
         open={isOpen}
         id="default-popover"
-        anchorEl={referenceElement.current}
+        anchorEl={anchorEl}
         onClose={handleClose}
         trapFocus
       >

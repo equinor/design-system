@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {
   Autocomplete,
@@ -63,6 +63,7 @@ export default meta
 
 export const Introduction: StoryFn<PopoverProps> = (args) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const handleOpen = () => {
     setIsOpen(true)
@@ -71,8 +72,6 @@ export const Introduction: StoryFn<PopoverProps> = (args) => {
   const handleClose = () => {
     setIsOpen(false)
   }
-
-  const referenceElement = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
@@ -85,7 +84,7 @@ export const Introduction: StoryFn<PopoverProps> = (args) => {
       <Button
         aria-haspopup
         aria-expanded={isOpen}
-        ref={referenceElement}
+        ref={setAnchorEl}
         onClick={handleOpen}
       >
         Open popover
@@ -94,7 +93,7 @@ export const Introduction: StoryFn<PopoverProps> = (args) => {
       <Popover
         open={isOpen}
         {...args}
-        anchorEl={referenceElement.current}
+        anchorEl={anchorEl}
         onClose={handleClose}
       >
         <Popover.Header>
@@ -127,7 +126,7 @@ Introduction.decorators = [
 
 export const ActivateOnClick: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
@@ -137,14 +136,14 @@ export const ActivateOnClick: StoryFn<PopoverProps> = () => {
       <Button
         aria-haspopup
         aria-expanded={isOpen}
-        ref={anchorRef}
+        ref={setAnchorEl}
         onClick={openPopover}
       >
         Click to activate
       </Button>
 
       <Popover
-        anchorEl={anchorRef.current}
+        anchorEl={anchorEl}
         onClose={closePopover}
         open={isOpen}
         placement="top"
@@ -163,7 +162,7 @@ ActivateOnClick.storyName = 'Activate onClick'
 
 export const ActivateOnHover: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   let timer: ReturnType<typeof setTimeout> = null
 
   const openPopover = () => setIsOpen(true)
@@ -185,7 +184,7 @@ export const ActivateOnHover: StoryFn<PopoverProps> = () => {
       <Button
         aria-haspopup
         aria-expanded={isOpen}
-        ref={anchorRef}
+        ref={setAnchorEl}
         onMouseOver={handleHover}
         onFocus={openPopover}
         onBlur={handleClose}
@@ -194,7 +193,7 @@ export const ActivateOnHover: StoryFn<PopoverProps> = () => {
       </Button>
 
       <Popover
-        anchorEl={anchorRef.current}
+        anchorEl={anchorEl}
         onClose={handleClose}
         open={isOpen}
         placement="top"
@@ -213,7 +212,7 @@ ActivateOnHover.storyName = 'Activate onHover'
 
 export const WithCloseButton: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
@@ -223,14 +222,14 @@ export const WithCloseButton: StoryFn<PopoverProps> = () => {
       <Button
         aria-haspopup
         aria-expanded={isOpen}
-        ref={anchorRef}
+        ref={setAnchorEl}
         onClick={openPopover}
       >
         Open popover
       </Button>
 
       <Popover
-        anchorEl={anchorRef.current}
+        anchorEl={anchorEl}
         onClose={closePopover}
         open={isOpen}
         placement="top"
@@ -272,7 +271,7 @@ export const PersistentPopover: StoryFn<PopoverProps> = () => {
   ]
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
@@ -282,7 +281,7 @@ export const PersistentPopover: StoryFn<PopoverProps> = () => {
       <Button
         aria-haspopup
         aria-expanded={isOpen}
-        ref={anchorRef}
+        ref={setAnchorEl}
         onClick={openPopover}
       >
         Open popover
@@ -290,7 +289,7 @@ export const PersistentPopover: StoryFn<PopoverProps> = () => {
 
       <Popover
         aria-expanded={isOpen}
-        anchorEl={anchorRef.current}
+        anchorEl={anchorEl}
         open={isOpen}
         placement="top"
         trapFocus
@@ -376,7 +375,7 @@ const StyledButton = styled(Button)`
 `
 export const AppLauncher: StoryFn<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
@@ -387,14 +386,14 @@ export const AppLauncher: StoryFn<PopoverProps> = () => {
         aria-haspopup
         aria-expanded={isOpen}
         aria-label="app launcher"
-        ref={anchorRef}
+        ref={setAnchorEl}
         variant="ghost_icon"
         onClick={openPopover}
       >
         <Icon data={apps} />
       </Button>
       <Popover
-        anchorEl={anchorRef.current}
+        anchorEl={anchorEl}
         open={isOpen}
         onClose={closePopover}
         placement="top"

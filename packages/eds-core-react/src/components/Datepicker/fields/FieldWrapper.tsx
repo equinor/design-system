@@ -7,6 +7,7 @@ import {
   ReactNode,
   RefObject,
   useEffect,
+  useState,
 } from 'react'
 import { InputWrapper, InputWrapperProps } from '../../InputWrapper'
 import { Popover } from '../../Popover'
@@ -145,6 +146,14 @@ export const FieldWrapper = forwardRef(
     }: Props,
     ref: RefObject<HTMLDivElement | null>,
   ) => {
+    const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+      if (ref && typeof ref !== 'function' && ref.current) {
+        setAnchorEl(ref.current)
+      }
+    }, [ref])
+
     useEffect(() => {
       if (isOpen === false) {
         // Focus the first segment in the input field
@@ -175,7 +184,7 @@ export const FieldWrapper = forwardRef(
         <Popover
           open={isOpen ?? false}
           onClose={() => setIsOpen(false)}
-          anchorEl={ref.current}
+          anchorEl={anchorEl}
           placement={'bottom-start'}
         >
           {calendar}
