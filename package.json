@@ -35,6 +35,7 @@
     "docu:serve": "pnpm --filter ./apps/design-system-docs run serve",
     "palette:dev": "pnpm --filter @equinor/eds-color-palette-generator dev",
     "palette:build": "pnpm --filter @equinor/eds-color-palette-generator build",
+    "palette:build:cli": "pnpm --filter @equinor/eds-color-palette-generator build:cli",
     "palette:start": "pnpm --filter @equinor/eds-color-palette-generator start",
     "palette:lint": "pnpm --filter @equinor/eds-color-palette-generator lint",
     "palette:test": "pnpm --filter @equinor/eds-color-palette-generator test:run",
