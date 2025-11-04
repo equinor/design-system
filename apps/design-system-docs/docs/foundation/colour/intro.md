@@ -10,8 +10,10 @@ It helps designers and developers speak the same language, keeps interfaces cons
 
 Accessibility is a core principle of the system, ensuring readable and inclusive colour combinations across both light and dark modes.
 
-<iframe src="https://statoilsrm.sharepoint.com/sites/Designsystem/_layouts/15/embed.aspx?UniqueId=218a2b04-df60-46ee-bd8a-b3e6b638e966&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="100%" height="480" frameborder="0" scrolling="no" allowfullscreen title="Colour foundation intro.mp4"></iframe>
-[Link to introduction video](https://statoilsrm.sharepoint.com/:l:/r/sites/Designsystem/Lists/Foundations%20%20Colour%20%20Tutorial%20%20Static%20%20Design?e=bKgbeA)
+<iframe src="https://statoilsrm.sharepoint.com/sites/Designsystem/_layouts/15/embed.aspx?UniqueId=b4080d97-494b-44f5-a85f-d9fa25adc76c&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="Colour foundation intro.mp4"></iframe>
+
+[Link to introduction video](https://statoilsrm.sharepoint.com/:v:/r/sites/Designsystem/Open%20library/Tutorials/Colour%20foundation%20intro.mp4?csf=1&web=1&e=Yfjhui&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+
 
 ## Colour scheme
 
