@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, LabelHTMLAttributes } from 'react'
 
 export type CheckboxProps = {
   /** Label for the checkbox */
@@ -9,4 +9,6 @@ export type CheckboxProps = {
    * set the native element to indeterminate yourself.
    */
   indeterminate?: boolean
+  /** Props to apply to the label element (when label prop is provided) */
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>
 } & InputHTMLAttributes<HTMLInputElement>
