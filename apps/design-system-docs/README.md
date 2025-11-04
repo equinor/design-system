@@ -80,7 +80,6 @@ Run ESLint to check for code quality issues in the documentation site.
 The documentation site includes:
 
 * **docs/** -- Documentation content in Markdown and MDX format
-* **blog/** -- Blog posts and updates
 * **src/** -- Custom React components and pages
 * **static/** -- Static assets like images and files
 * **docusaurus.config.ts** -- Docusaurus configuration
