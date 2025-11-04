@@ -122,4 +122,41 @@ describe('Checkbox.new', () => {
     const label = checkbox.closest('.checkbox')
     expect(label).toHaveClass('checkbox--disabled')
   })
+
+  it('should apply data-* attributes to input element when using label', () => {
+    render(
+      <Checkbox
+        label="Test Label"
+        data-testid="test-checkbox"
+        data-analytics="track-checkbox"
+      />,
+    )
+
+    const input = screen.getByRole('checkbox')
+    expect(input).toHaveAttribute('data-testid', 'test-checkbox')
+    expect(input).toHaveAttribute('data-analytics', 'track-checkbox')
+  })
+
+  it('should apply labelProps to label element', () => {
+    const { container } = render(
+      <Checkbox
+        label="Test Label"
+        data-testid="test-checkbox-input"
+        labelProps={
+          {
+            'data-testid': 'test-checkbox-label',
+            'data-analytics': 'checkbox-wrapper',
+          } as React.LabelHTMLAttributes<HTMLLabelElement>
+        }
+      />,
+    )
+
+    const input = screen.getByRole('checkbox')
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const label = container.querySelector('[data-testid="test-checkbox-label"]')
+
+    expect(input).toHaveAttribute('data-testid', 'test-checkbox-input')
+    expect(label).toHaveAttribute('data-testid', 'test-checkbox-label')
+    expect(label).toHaveAttribute('data-analytics', 'checkbox-wrapper')
+  })
 })
