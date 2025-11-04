@@ -23,19 +23,19 @@
 
 [data-spacing-inline='4xs'],
 .spacing-inline-4xs {
-  --spacing-value: var(--eds-spacing-inline-4-xs);
+  --spacing-value: var(--eds-spacing-inline-4xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-inline='3xs'],
 .spacing-inline-3xs {
-  --spacing-value: var(--eds-spacing-inline-3-xs);
+  --spacing-value: var(--eds-spacing-inline-3xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-inline='2xs'],
 .spacing-inline-2xs {
-  --spacing-value: var(--eds-spacing-inline-2-xs);
+  --spacing-value: var(--eds-spacing-inline-2xs);
   gap: var(--spacing-value);
 }
 
@@ -71,13 +71,13 @@
 
 [data-spacing-inline='2xl'],
 .spacing-inline-2xl {
-  --spacing-value: var(--eds-spacing-inline-2-xl);
+  --spacing-value: var(--eds-spacing-inline-2xl);
   gap: var(--spacing-value);
 }
 
 [data-spacing-inline='3xl'],
 .spacing-inline-3xl {
-  --spacing-value: var(--eds-spacing-inline-3-xl);
+  --spacing-value: var(--eds-spacing-inline-3xl);
   gap: var(--spacing-value);
 }
 
@@ -87,19 +87,19 @@
 
 [data-spacing-stack='4xs'],
 .spacing-stack-4xs {
-  --spacing-value: var(--eds-spacing-stack-4-xs);
+  --spacing-value: var(--eds-spacing-stack-4xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-stack='3xs'],
 .spacing-stack-3xs {
-  --spacing-value: var(--eds-spacing-stack-3-xs);
+  --spacing-value: var(--eds-spacing-stack-3xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-stack='2xs'],
 .spacing-stack-2xs {
-  --spacing-value: var(--eds-spacing-stack-2-xs);
+  --spacing-value: var(--eds-spacing-stack-2xs);
   gap: var(--spacing-value);
 }
 
@@ -135,13 +135,13 @@
 
 [data-spacing-stack='2xl'],
 .spacing-stack-2xl {
-  --spacing-value: var(--eds-spacing-stack-2-xl);
+  --spacing-value: var(--eds-spacing-stack-2xl);
   gap: var(--spacing-value);
 }
 
 [data-spacing-stack='3xl'],
 .spacing-stack-3xl {
-  --spacing-value: var(--eds-spacing-stack-3-xl);
+  --spacing-value: var(--eds-spacing-stack-3xl);
   gap: var(--spacing-value);
 }
 
