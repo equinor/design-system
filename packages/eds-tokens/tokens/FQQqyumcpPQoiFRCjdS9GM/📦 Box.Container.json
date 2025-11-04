@@ -25,7 +25,7 @@
   },
   "Gap horisontal": {
     "$type": "number",
-    "$value": "{spacing.inline.MD}",
+    "$value": "{spacing.inline.md}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -37,7 +37,7 @@
   },
   "Gap vertical": {
     "$type": "number",
-    "$value": "{spacing.stack.MD}",
+    "$value": "{spacing.stack.md}",
     "$description": "",
     "$extensions": {
       "com.figma": {

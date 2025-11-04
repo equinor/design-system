@@ -6,16 +6,14 @@
     "$extensions": {
       "com.figma": {
         "hiddenFromPublishing": true,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
+        "scopes": ["ALL_SCOPES"],
         "codeSyntax": {}
       }
     }
   },
   "Padding horizontal": {
     "$type": "number",
-    "$value": "{Density Aware.Spacing.Inline.MD}",
+    "$value": "{spacing.inline.md}",
     "$description": "",
     "$extensions": {
       "com.figma": {

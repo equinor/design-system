@@ -6,16 +6,14 @@
     "$extensions": {
       "com.figma": {
         "hiddenFromPublishing": true,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
+        "scopes": ["ALL_SCOPES"],
         "codeSyntax": {}
       }
     }
   },
   "Letter spacing": {
     "$type": "number",
-    "$value": "{tracking-loose}",
+    "$value": "{tracking-wide}",
     "$description": "",
     "$extensions": {
       "com.figma": {

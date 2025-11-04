@@ -6,16 +6,14 @@
     "$extensions": {
       "com.figma": {
         "hiddenFromPublishing": true,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
+        "scopes": ["ALL_SCOPES"],
         "codeSyntax": {}
       }
     }
   },
   "Gap vertical": {
     "$type": "number",
-    "$value": "{Density Aware.Spacing.Stack.LG}",
+    "$value": "{spacing.stack.lg}",
     "$description": "",
     "$extensions": {
       "com.figma": {

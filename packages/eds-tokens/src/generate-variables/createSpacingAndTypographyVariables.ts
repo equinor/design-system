@@ -216,19 +216,10 @@ export async function createSpacingAndTypographyVariables({
   await densityAllTrimmed.buildAllPlatforms()
   await densityAllVerbose.buildAllPlatforms()
 
-  // Create new css variable files to support spacing variables with proportions (squished, squared, stretched)
-  // The tokens in the space proportion files reference the density aware tokens, so we need to include the density aware tokens in the source
-  // and the density aware tokens reference the spacing primitives
-  // there is also multiple tokens referencing the Figma values
   const FIGMA_SPECIFIC_TOKENS_SOURCE = path.join(
     tokensDir,
     FILE_KEY_SPACING,
     '⛔️ Figma.Value.json',
-  )
-  const DENSITY_AWARE_SOURCE = path.join(
-    tokensDir,
-    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-    '💎 Density Aware.True.json',
   )
 
   const SPACING_PROPORTIONS_SQUARED_SOURCE = path.join(
@@ -251,7 +242,6 @@ export async function createSpacingAndTypographyVariables({
       include: [
         SPACING_PRIMITIVE_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
-        DENSITY_AWARE_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
       ],
       source: [sourcePath],
@@ -300,7 +290,6 @@ export async function createSpacingAndTypographyVariables({
       include: [
         SPACING_PRIMITIVE_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
-        DENSITY_AWARE_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         SPACING_PROPORTIONS_SQUARED_SOURCE,
       ],

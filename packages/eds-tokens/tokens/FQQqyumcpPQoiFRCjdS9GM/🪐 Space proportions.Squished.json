@@ -3,7 +3,7 @@
     "XS": {
       "Inline": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.XS.Inline}",
+        "$value": "{spacing.inset.xs.inline}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -15,7 +15,7 @@
       },
       "Stack": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.XS.Stack Squished}",
+        "$value": "{spacing.inset.xs.stack-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -29,7 +29,7 @@
     "SM": {
       "Inline": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.SM.Inline}",
+        "$value": "{spacing.inset.sm.inline}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -41,7 +41,7 @@
       },
       "Stack": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.SM.Stack Squished}",
+        "$value": "{spacing.inset.sm.stack-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -55,7 +55,7 @@
     "MD": {
       "Inline": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.MD.Inline}",
+        "$value": "{spacing.inset.md.inline}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -67,7 +67,7 @@
       },
       "Stack": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.MD.Stack Squished}",
+        "$value": "{spacing.inset.md.stack-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -81,7 +81,7 @@
     "LG": {
       "Inline": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.LG.Inline}",
+        "$value": "{spacing.inset.lg.inline}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -93,7 +93,7 @@
       },
       "Stack": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.LG.Stack Squished}",
+        "$value": "{spacing.inset.lg.stack-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -107,7 +107,7 @@
     "XL": {
       "Inline": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.XL.Inline}",
+        "$value": "{spacing.inset.xl.inline}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -119,7 +119,7 @@
       },
       "Stack": {
         "$type": "number",
-        "$value": "{Density Aware.Spacing.Inset.XL.Stack Squished}",
+        "$value": "{spacing.inset.xl.stack-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {

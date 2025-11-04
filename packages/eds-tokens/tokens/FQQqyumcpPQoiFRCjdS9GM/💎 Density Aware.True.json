@@ -4,7 +4,7 @@
       "Inline": {
         "4XS": {
           "$type": "number",
-          "$value": "{spacing.inline.4XS}",
+          "$value": "{spacing.inline.4xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -16,7 +16,7 @@
         },
         "3XS": {
           "$type": "number",
-          "$value": "{spacing.inline.3XS}",
+          "$value": "{spacing.inline.3xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -28,7 +28,7 @@
         },
         "2XS": {
           "$type": "number",
-          "$value": "{spacing.inline.2XS}",
+          "$value": "{spacing.inline.2xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -40,7 +40,7 @@
         },
         "XS": {
           "$type": "number",
-          "$value": "{spacing.inline.XS}",
+          "$value": "{spacing.inline.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -52,7 +52,7 @@
         },
         "SM": {
           "$type": "number",
-          "$value": "{spacing.inline.SM}",
+          "$value": "{spacing.inline.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -64,7 +64,7 @@
         },
         "MD": {
           "$type": "number",
-          "$value": "{spacing.inline.MD}",
+          "$value": "{spacing.inline.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -76,7 +76,7 @@
         },
         "LG": {
           "$type": "number",
-          "$value": "{spacing.inline.LG}",
+          "$value": "{spacing.inline.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -88,7 +88,7 @@
         },
         "XL": {
           "$type": "number",
-          "$value": "{spacing.inline.XL}",
+          "$value": "{spacing.inline.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -100,7 +100,7 @@
         },
         "2XL": {
           "$type": "number",
-          "$value": "{spacing.inline.2XL}",
+          "$value": "{spacing.inline.2xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -112,7 +112,7 @@
         },
         "3XL": {
           "$type": "number",
-          "$value": "{spacing.inline.3XL}",
+          "$value": "{spacing.inline.3xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -126,7 +126,7 @@
       "Stack": {
         "4XS": {
           "$type": "number",
-          "$value": "{spacing.stack.4XS}",
+          "$value": "{spacing.stack.4xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -138,7 +138,7 @@
         },
         "3XS": {
           "$type": "number",
-          "$value": "{spacing.stack.3XS}",
+          "$value": "{spacing.stack.3xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -150,7 +150,7 @@
         },
         "2XS": {
           "$type": "number",
-          "$value": "{spacing.stack.2XS}",
+          "$value": "{spacing.stack.2xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -162,7 +162,7 @@
         },
         "XS": {
           "$type": "number",
-          "$value": "{spacing.stack.XS}",
+          "$value": "{spacing.stack.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -174,7 +174,7 @@
         },
         "SM": {
           "$type": "number",
-          "$value": "{spacing.stack.SM}",
+          "$value": "{spacing.stack.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -186,7 +186,7 @@
         },
         "MD": {
           "$type": "number",
-          "$value": "{spacing.stack.MD}",
+          "$value": "{spacing.stack.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -198,7 +198,7 @@
         },
         "LG": {
           "$type": "number",
-          "$value": "{spacing.stack.LG}",
+          "$value": "{spacing.stack.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -210,7 +210,7 @@
         },
         "XL": {
           "$type": "number",
-          "$value": "{spacing.stack.XL}",
+          "$value": "{spacing.stack.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -222,7 +222,7 @@
         },
         "2XL": {
           "$type": "number",
-          "$value": "{spacing.stack.2XL}",
+          "$value": "{spacing.stack.2xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -234,7 +234,7 @@
         },
         "3XL": {
           "$type": "number",
-          "$value": "{spacing.stack.3XL}",
+          "$value": "{spacing.stack.3xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
