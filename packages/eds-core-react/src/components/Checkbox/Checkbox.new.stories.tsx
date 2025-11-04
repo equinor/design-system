@@ -36,7 +36,17 @@ const meta: Meta<typeof Checkbox> = {
 export default meta
 
 const UnstyledList = ({ children, ...props }) => (
-  <ul style={{ margin: 0, padding: 0, listStyleType: 'none' }} {...props}>
+  <ul
+    style={{
+      margin: 0,
+      padding: 0,
+      listStyleType: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1rem',
+    }}
+    {...props}
+  >
     {children}
   </ul>
 )

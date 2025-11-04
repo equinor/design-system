@@ -20,6 +20,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       className,
       style,
+      labelProps,
       ...rest
     },
     ref,
@@ -114,7 +115,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     if (label) {
       return (
-        <label className={wrapperClasses} style={style}>
+        <label className={wrapperClasses} style={style} {...labelProps}>
           {checkboxInput}
           <TypographyNext
             as="span"

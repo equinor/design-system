@@ -35,6 +35,12 @@ exports[`Checkbox.new Matches snapshot 1`] = `
     </span>
     <span
       class="checkbox__label"
+      data-baseline="center"
+      data-font-family="ui"
+      data-font-weight="normal"
+      data-line-height="squished"
+      data-text-size="lg"
+      data-tracking="normal"
     >
       checkbox
     </span>
