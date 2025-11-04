@@ -7,7 +7,7 @@ This documentation website is built using [Docusaurus](https://docusaurus.io/), 
 Before you begin, ensure you have the following installed:
 
 * **Node.js** -- Version 16.15 or compatible
-* **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm`)
+* **pnpm** -- Version 10.15.0 or higher (install globally with `npm install -g pnpm`)
 
 ## Important Note
 
@@ -79,11 +79,11 @@ Run ESLint to check for code quality issues in the documentation site.
 
 The documentation site includes:
 
-* **docs/** — Documentation content in Markdown and MDX format
-* **blog/** — Blog posts and updates
-* **src/** — Custom React components and pages
-* **static/** — Static assets like images and files
-* **docusaurus.config.ts** — Docusaurus configuration
+* **docs/** -- Documentation content in Markdown and MDX format
+* **blog/** -- Blog posts and updates
+* **src/** -- Custom React components and pages
+* **static/** -- Static assets like images and files
+* **docusaurus.config.ts** -- Docusaurus configuration
 
 ## Writing Documentation
 
@@ -98,19 +98,19 @@ When adding or updating documentation:
 
 When creating content for the documentation site, choose the appropriate tone guide:
 
-* [Friendly Professional](./docs/tone-guide/friendly-professional.md) — Default for most documentation
-* [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) — Concise but approachable
-* [Minimalist](./docs/tone-guide/minimalist.md) — Essential information only
+* [Friendly Professional](./docs/tone-guide/friendly-professional.md) -- Default for most documentation
+* [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) -- Concise but approachable
+* [Minimalist](./docs/tone-guide/minimalist.md) -- Essential information only
 
 ## Technology Stack
 
 The documentation site uses:
 
-* **Docusaurus** — Static site generator
-* **React** — UI framework
-* **TypeScript** — Type-safe JavaScript
-* **MDX** — Markdown with React components
-* **EDS Tokens & Components** — Equinor Design System packages
+* **Docusaurus** -- Static site generator
+* **React** -- UI framework
+* **TypeScript** -- Type-safe JavaScript
+* **MDX** -- Markdown with React components
+* **EDS Tokens & Components** -- Equinor Design System packages
 
 ## Troubleshooting
 
