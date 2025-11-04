@@ -6,7 +6,9 @@
     "$extensions": {
       "com.figma": {
         "hiddenFromPublishing": true,
-        "scopes": ["ALL_SCOPES"],
+        "scopes": [
+          "ALL_SCOPES"
+        ],
         "codeSyntax": {}
       }
     }
