@@ -9,12 +9,23 @@
  * - Stack spacing: Vertical spacing between stacked elements
  * - Inset spacing: Padding within elements (inline and stack variations)
  * - Border radius: Corner rounding values
+ * - Selectable space: Padding for selectable elements (buttons, cards, etc.)
  * 
  * Each spacing value supports density modes (spacious/comfortable) through CSS variables.
+ * 
+ * Selectable Space:
+ * The selectable space utilities provide padding that responds to both density, selectable space and space proportions.
+ * Used in combination with the following data attributes:
+ * - data-selectable-space: Sets the size (xs, sm, md, lg, xl)
+ * - data-space-proportions: Sets the proportion mode (squished, squared, stretched)
+ * 
+ * The utility applies both padding-inline and padding-block using CSS variables that are calculated
+ * based on the combination of density, selectable space, and space proportions.
  * 
  * Usage:
  * - Utility classes: <div class="spacing-stack-md">
  * - Data attributes: <div data-spacing-stack="md">
+ * - Selectable space: <div data-selectable-spacing data-selectable-space="md" data-space-proportions="squared">
  */
 
 /* ============================================ */
@@ -415,4 +426,15 @@
 [data-spacing-icon-gap='6xl'],
 .spacing-icon-gap-6xl {
   gap: var(--eds-spacing-icon-6xl-gap-horizontal);
+}
+
+/* ============================================ */
+/* Selectable space utilities - Padding for selectable elements */
+/* Used in combination with data-selectable-space="[size]" and data-space-proportions="[proportion]" attributes */
+/* ============================================ */
+
+[data-selectable-spacing],
+.selectable-spacing {
+  padding-inline: var(--eds-selectable-spacing-inline);
+  padding-block: var(--eds-selectable-spacing-stack);
 }
