@@ -167,6 +167,7 @@ module.exports = {
       files: [
         '**/playwright.config.ts',
         '**/vite.config.ts',
+        '**/vite.*.config.ts',
         '**/vitest.config.ts',
       ],
       rules: {
