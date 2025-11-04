@@ -1,0 +1,175 @@
+@import '@equinor/eds-tokens/css/variables';
+@import '@equinor/eds-tokens/css/foundation';
+
+/* Custom properties for checkbox-specific sizes */
+:root {
+  /* Hover circle size - smaller than 48px touch target for visual balance */
+  --checkbox-hover-size: 40px;
+}
+
+[data-density='compact'] {
+  --checkbox-hover-size: 32px;
+}
+
+/* Checkbox wrapper/label */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eds-spacing-inline-sm);
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox--disabled {
+  cursor: not-allowed;
+}
+
+/* Checkbox input wrapper */
+.checkbox__input-wrapper {
+  display: inline-grid;
+  grid: [input] 1fr / [input] 1fr;
+  position: relative;
+  isolation: isolate;
+  padding: var(--eds-spacing-inset-xs-squared);
+}
+
+/* Hover circle background */
+.checkbox__input-wrapper::before {
+  content: '';
+  position: absolute;
+  width: var(--checkbox-hover-size);
+  aspect-ratio: 1/1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .checkbox__input-wrapper:hover::before {
+    background-color: var(--eds-color-bg-accent-fill-muted-default);
+  }
+
+  .checkbox--disabled .checkbox__input-wrapper:hover::before {
+    background-color: transparent;
+  }
+}
+
+/* Native checkbox input */
+.checkbox__input {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: input;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  /* Scale to 48px touch target - fixed size for accessibility requirement */
+  transform: scale(calc(48px / 24px));
+}
+
+.checkbox__input:disabled {
+  cursor: not-allowed;
+}
+
+.checkbox__input:focus {
+  outline: none;
+}
+
+/* Focus styles */
+.checkbox__input[data-focus-visible-added]:focus ~ .checkbox__icon,
+.checkbox__input:focus-visible ~ .checkbox__icon {
+  outline: 2px dashed var(--eds-color-border-focus);
+  outline-offset: var(--eds-spacing-inline-xs);
+}
+
+/* Compact mode focus */
+[data-density='comfortable']
+  .checkbox__input[data-focus-visible-added]:focus
+  ~ .checkbox__icon,
+[data-density='comfortable'] .checkbox__input:focus-visible ~ .checkbox__icon {
+  outline-offset: var(--eds-spacing-inline-3-xs);
+}
+
+/* SVG icon */
+.checkbox__icon {
+  grid-area: input;
+  pointer-events: none;
+  /* Fixed 24px - standard EDS icon size */
+  width: 24px;
+  height: 24px;
+  fill: var(--eds-color-border-accent-strong);
+  border-radius: var(--eds-shape-corner-medium);
+  position: relative;
+  z-index: 2;
+}
+
+.checkbox__icon--disabled {
+  fill: var(--eds-color-text-neutral-subtle);
+}
+
+/* Icon paths visibility */
+.checkbox__icon-path--checked {
+  display: none;
+}
+
+.checkbox__input:checked ~ .checkbox__icon .checkbox__icon-path--checked {
+  display: inline;
+}
+
+.checkbox__input:checked ~ .checkbox__icon .checkbox__icon-path--unchecked {
+  display: none;
+}
+
+.checkbox__input:not(:checked) ~ .checkbox__icon .checkbox__icon-path--checked {
+  display: none;
+}
+
+.checkbox__input:not(:checked)
+  ~ .checkbox__icon
+  .checkbox__icon-path--unchecked {
+  display: inline;
+}
+
+/* Indeterminate state */
+.checkbox__icon-path--indeterminate {
+  display: none;
+}
+
+.checkbox__input[data-indeterminate='true']
+  ~ .checkbox__icon
+  .checkbox__icon-path--indeterminate {
+  display: inline;
+}
+
+.checkbox__input[data-indeterminate='true']
+  ~ .checkbox__icon
+  .checkbox__icon-path--checked,
+.checkbox__input[data-indeterminate='true']
+  ~ .checkbox__icon
+  .checkbox__icon-path--unchecked {
+  display: none;
+}
+
+/* Label text */
+.checkbox__label {
+  color: var(--eds-color-text-neutral-strong);
+  user-select: none;
+}
+
+.checkbox__label--disabled {
+  color: var(--eds-color-text-neutral-subtle);
+}
+
+/* Compact density mode */
+[data-density='compact'] .checkbox__input-wrapper {
+  padding: var(--eds-spacing-inset-2-xs-squared);
+}
+
+[data-density='compact'] .checkbox__input {
+  /* Maintain 48px touch target in compact mode for accessibility */
+  transform: scale(calc(48px / 24px));
+}
