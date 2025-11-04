@@ -877,3 +877,67 @@
   --eds-typography-header-6xl-lineheight-default: 2.25rem;
   --eds-typography-header-6xl-lineheight-squished: 2rem;
 }
+
+[data-space-proportions="squished"] {
+  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-squished);
+  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-squished);
+  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-squished);
+  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-squished);
+  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-squished);
+}
+
+[data-space-proportions="squared"] {
+  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-squared);
+  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-squared);
+  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-squared);
+  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-squared);
+  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-squared);
+}
+
+[data-space-proportions="stretched"] {
+  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-stretched);
+  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-stretched);
+  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-stretched);
+  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-stretched);
+  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-stretched);
+}
+
+[data-selectable-space="xs"] {
+  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xs-inline);
+  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xs-stack);
+}
+
+[data-selectable-space="sm"] {
+  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-sm-inline);
+  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-sm-stack);
+}
+
+[data-selectable-space="md"] {
+  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-md-inline);
+  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-md-stack);
+}
+
+[data-selectable-space="lg"] {
+  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-lg-inline);
+  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-lg-stack);
+}
+
+[data-selectable-space="xl"] {
+  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xl-inline);
+  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xl-stack);
+}

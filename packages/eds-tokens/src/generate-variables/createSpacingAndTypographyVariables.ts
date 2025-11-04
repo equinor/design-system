@@ -13,7 +13,7 @@ import {
 import { readJsonFiles } from '@equinor/eds-tokens-sync'
 
 export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
-export const FILE_KEY_TYPOGRAPHY_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
+export const FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
 export async function createSpacingAndTypographyVariables({
   tokensDir,
@@ -40,19 +40,19 @@ export async function createSpacingAndTypographyVariables({
   )
   const DENSITY_SPACIOUS_SOURCE = path.join(
     tokensDir,
-    FILE_KEY_TYPOGRAPHY_MODES,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
     '💎 Density.Spacious.json',
   )
   const DENSITY_COMFORTABLE_SOURCE = path.join(
     tokensDir,
-    FILE_KEY_TYPOGRAPHY_MODES,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
     '💎 Density.Comfortable.json',
   )
 
   const spacingComfortableTokens = readJsonFiles([
     path.join(
       tokensDir,
-      FILE_KEY_TYPOGRAPHY_MODES,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
       '💎 Density.Comfortable.json',
     ),
   ])
@@ -215,4 +215,124 @@ export async function createSpacingAndTypographyVariables({
   await densityComfortableTrimmed.buildAllPlatforms()
   await densityAllTrimmed.buildAllPlatforms()
   await densityAllVerbose.buildAllPlatforms()
+
+  // Create new css variable files to support spacing variables with proportions (squished, squared, stretched)
+  // The tokens in the space proportion files reference the density aware tokens, so we need to include the density aware tokens in the source
+  // and the density aware tokens reference the spacing primitives
+  // there is also multiple tokens referencing the Figma values
+  const FIGMA_SPECIFIC_TOKENS_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY_SPACING,
+    '⛔️ Figma.Value.json',
+  )
+  const DENSITY_AWARE_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+    '💎 Density Aware.True.json',
+  )
+
+  const SPACING_PROPORTIONS_SQUARED_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+    '🪐 Space proportions.Squared.json',
+  )
+
+  const proportionConfigs = ['Squished', 'Squared', 'Stretched'] as const
+
+  const createProportionsDictionary = (proportion: string) => {
+    const proportionLower = proportion.toLowerCase()
+    const sourcePath = path.join(
+      tokensDir,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+      `🪐 Space proportions.${proportion}.json`,
+    )
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_AWARE_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+      ],
+      source: [sourcePath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, spacingBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                includeTokenFilter(token, [proportion]),
+              destination: `space-proportions-${proportionLower}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-space-proportions="${proportionLower}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const proportionsDictionaries = proportionConfigs.map((proportion) =>
+    createProportionsDictionary(proportion),
+  )
+
+  await Promise.all(
+    proportionsDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
+
+  const sizeConfigs = ['XS', 'SM', 'MD', 'LG', 'XL'] as const
+
+  const createSelectableSpaceDictionary = (size: string) => {
+    const sizeLower = size.toLowerCase()
+    const sourcePath = path.join(
+      tokensDir,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+      `🪐 Selectable space.${size}.json`,
+    )
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_AWARE_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+        SPACING_PROPORTIONS_SQUARED_SOURCE,
+      ],
+      source: [sourcePath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, spacingBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                includeTokenFilter(token, [size]),
+              destination: `selectable-space-${sizeLower}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-selectable-space="${sizeLower}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const selectableSpaceDictionaries = sizeConfigs.map((size) =>
+    createSelectableSpaceDictionary(size),
+  )
+
+  await Promise.all(
+    selectableSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
 }
