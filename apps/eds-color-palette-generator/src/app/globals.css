@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@import '@equinor/eds-tailwind';
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-geist-sans);
+}
