@@ -3,14 +3,14 @@
  */
 
 [data-space-proportions="squared"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-squared);
-  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-squared);
-  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-squared);
-  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-squared);
-  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-squared);
+  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squared);
+  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squared);
+  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squared);
+  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squared);
+  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squared);
 }

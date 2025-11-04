@@ -365,26 +365,26 @@
   --eds-spacing-icon-5xl-gap-vertical: 1.25rem;
   --eds-spacing-icon-6xl-gap-horizontal: 1.438rem;
   --eds-spacing-icon-6xl-gap-vertical: 1.438rem;
-  --eds-spacing-inline-4-xs: .125rem;
-  --eds-spacing-inline-3-xs: .25rem;
-  --eds-spacing-inline-2-xs: .375rem;
+  --eds-spacing-inline-4xs: .125rem;
+  --eds-spacing-inline-3xs: .25rem;
+  --eds-spacing-inline-2xs: .375rem;
   --eds-spacing-inline-xs: .5rem;
   --eds-spacing-inline-sm: .75rem;
   --eds-spacing-inline-md: 1rem;
   --eds-spacing-inline-lg: 1.25rem;
   --eds-spacing-inline-xl: 1.5rem;
-  --eds-spacing-inline-2-xl: 1.75rem;
-  --eds-spacing-inline-3-xl: 2rem;
-  --eds-spacing-stack-4-xs: .125rem;
-  --eds-spacing-stack-3-xs: .25rem;
-  --eds-spacing-stack-2-xs: .375rem;
+  --eds-spacing-inline-2xl: 1.75rem;
+  --eds-spacing-inline-3xl: 2rem;
+  --eds-spacing-stack-4xs: .125rem;
+  --eds-spacing-stack-3xs: .25rem;
+  --eds-spacing-stack-2xs: .375rem;
   --eds-spacing-stack-xs: .5rem;
   --eds-spacing-stack-sm: .75rem;
   --eds-spacing-stack-md: 1rem;
   --eds-spacing-stack-lg: 1.25rem;
   --eds-spacing-stack-xl: 1.5rem;
-  --eds-spacing-stack-2-xl: 1.75rem;
-  --eds-spacing-stack-3-xl: 2rem;
+  --eds-spacing-stack-2xl: 1.75rem;
+  --eds-spacing-stack-3xl: 2rem;
   --eds-spacing-border-radius-rounded: .25rem;
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
@@ -632,26 +632,26 @@
   --eds-spacing-icon-5xl-gap-vertical: 1.094rem;
   --eds-spacing-icon-6xl-gap-horizontal: 1.25rem;
   --eds-spacing-icon-6xl-gap-vertical: 1.25rem;
-  --eds-spacing-inline-4-xs: .063rem;
-  --eds-spacing-inline-3-xs: .125rem;
-  --eds-spacing-inline-2-xs: .25rem;
+  --eds-spacing-inline-4xs: .063rem;
+  --eds-spacing-inline-3xs: .125rem;
+  --eds-spacing-inline-2xs: .25rem;
   --eds-spacing-inline-xs: .375rem;
   --eds-spacing-inline-sm: .5rem;
   --eds-spacing-inline-md: .75rem;
   --eds-spacing-inline-lg: 1rem;
   --eds-spacing-inline-xl: 1.25rem;
-  --eds-spacing-inline-2-xl: 1.5rem;
-  --eds-spacing-inline-3-xl: 1.75rem;
-  --eds-spacing-stack-4-xs: .063rem;
-  --eds-spacing-stack-3-xs: .125rem;
-  --eds-spacing-stack-2-xs: .25rem;
+  --eds-spacing-inline-2xl: 1.5rem;
+  --eds-spacing-inline-3xl: 1.75rem;
+  --eds-spacing-stack-4xs: .063rem;
+  --eds-spacing-stack-3xs: .125rem;
+  --eds-spacing-stack-2xs: .25rem;
   --eds-spacing-stack-xs: .375rem;
   --eds-spacing-stack-sm: .5rem;
   --eds-spacing-stack-md: .75rem;
   --eds-spacing-stack-lg: 1rem;
   --eds-spacing-stack-xl: 1.25rem;
-  --eds-spacing-stack-2-xl: 1.5rem;
-  --eds-spacing-stack-3-xl: 1.75rem;
+  --eds-spacing-stack-2xl: 1.5rem;
+  --eds-spacing-stack-3xl: 1.75rem;
   --eds-spacing-border-radius-rounded: .188rem;
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
@@ -879,42 +879,42 @@
 }
 
 [data-space-proportions="squished"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-squished);
-  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-squished);
-  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-squished);
-  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-squished);
-  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-squished);
+  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squished);
+  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squished);
+  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squished);
+  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squished);
+  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squished);
 }
 
 [data-space-proportions="squared"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-squared);
-  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-squared);
-  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-squared);
-  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-squared);
-  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-squared);
+  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squared);
+  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squared);
+  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squared);
+  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squared);
+  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squared);
 }
 
 [data-space-proportions="stretched"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-density-aware-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-density-aware-spacing-inset-xs-stack-stretched);
-  --eds-spacing-proportions-sm-inline: var(--eds-density-aware-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-density-aware-spacing-inset-sm-stack-stretched);
-  --eds-spacing-proportions-md-inline: var(--eds-density-aware-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-density-aware-spacing-inset-md-stack-stretched);
-  --eds-spacing-proportions-lg-inline: var(--eds-density-aware-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-density-aware-spacing-inset-lg-stack-stretched);
-  --eds-spacing-proportions-xl-inline: var(--eds-density-aware-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-density-aware-spacing-inset-xl-stack-stretched);
+  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
+  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-stretched);
+  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
+  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-stretched);
+  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
+  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-stretched);
+  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
+  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-stretched);
+  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
+  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-stretched);
 }
 
 [data-selectable-space="xs"] {
