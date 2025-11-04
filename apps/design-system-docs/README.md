@@ -14,14 +14,8 @@ Before you begin, ensure you have the following installed:
 This documentation site is part of the EDS monorepo. All commands should be run from the **root directory** of the monorepo, not from this directory.
 
 If you haven't already, start by setting up the monorepo:
-
-```bash
-# Navigate to the root directory
-cd ../..
-
-# Install dependencies and build packages
-pnpm run init
-```
+- First navigate to the root directory
+- Then install dependencies and build packages by running `pnpm run init`
 
 ## Available Commands
 
