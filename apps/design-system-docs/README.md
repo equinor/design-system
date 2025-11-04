@@ -6,7 +6,7 @@ This documentation website is built using [Docusaurus](https://docusaurus.io/), 
 
 Before you begin, ensure you have the following installed:
 
-* **Node.js** — Version 16.15 or compatible
+* **Node.js** -- Version 16.15 or compatible
 * **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm`)
 
 ## Important Note
