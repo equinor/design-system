@@ -34,7 +34,7 @@ Start by importing the template, reviewing the built‑in guidance, and then tai
 
 We offer light-themed templates covering common business scenarios, with pre-configured charts, layouts, and styling that align with EDS principles. These templates ensure your dashboards maintain consistent visual presentation across all your business intelligence solutions.
 
-**Preview the template**: [Power BI Preview](http://apps.equinor.com/edspbi)
+**Preview the template**: [Power BI Preview](https://apps.equinor.com/edspbi)
 
 **Template available**: [Power BI EDS Template (PBIX)](pathname:///assets/eds-pbi-template-v2.pbix)
 
