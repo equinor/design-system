@@ -214,6 +214,96 @@ export const SelectablePadding: Story = {
   },
 }
 
+export const ContainerPadding: Story = {
+  render: () => {
+    const proportions = ['squished', 'squared', 'stretched'] as const
+
+    return (
+      <DemoSection
+        title="Container Padding"
+        description="The .container-p utility provides padding for container elements that responds to space proportions. Requires the data-space-proportions attribute."
+      >
+        <div className="flex flex-row flex-wrap items-start container-gap-x">
+          {proportions.map((proportion) => (
+            <div
+              key={proportion}
+              className="flex flex-col items-start selectable-gap-x"
+            >
+              <Paragraph className="mb-2">
+                <strong>
+                  {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
+                </strong>
+                <br />
+                <code>data-space-proportions=&quot;{proportion}&quot;</code>
+              </Paragraph>
+              <div
+                data-space-proportions={proportion}
+                className="container-p spacing-demo-box"
+              >
+                <Typography
+                  family="ui"
+                  size="md"
+                  baseline="grid"
+                  lineHeight="default"
+                  weight="normal"
+                  tracking="normal"
+                >
+                  Container
+                </Typography>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DemoSection>
+    )
+  },
+}
+
+export const PagePadding: Story = {
+  render: () => {
+    const proportions = ['squished', 'squared', 'stretched'] as const
+
+    return (
+      <DemoSection
+        title="Page Padding"
+        description="The .page-p utility provides padding for page-level elements that responds to space proportions. Requires the data-space-proportions attribute."
+      >
+        <div className="flex flex-row flex-wrap items-start container-gap-x">
+          {proportions.map((proportion) => (
+            <div
+              key={proportion}
+              className="flex flex-col items-start selectable-gap-x"
+            >
+              <Paragraph className="mb-2">
+                <strong>
+                  {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
+                </strong>
+                <br />
+                <code>data-space-proportions=&quot;{proportion}&quot;</code>
+              </Paragraph>
+              <div
+                data-space-proportions={proportion}
+                className="page-p spacing-demo-box"
+              >
+                <Typography
+                  family="ui"
+                  size="md"
+                  baseline="grid"
+                  lineHeight="default"
+                  weight="normal"
+                  tracking="normal"
+                >
+                  Page
+                </Typography>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DemoSection>
+    )
+  },
+}
+
 export const DensityModes: Story = {
   render: () => {
     const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
@@ -223,7 +313,7 @@ export const DensityModes: Story = {
     return (
       <DemoSection
         title="Density Modes"
-        description="Selectable padding adapts to density modes (spacious/comfortable) set via the data-density attribute on a parent element."
+        description="Padding adapts to density modes (spacious/comfortable) set via the data-density attribute on a parent element."
       >
         {densities.map((density) => (
           <div key={density} className="flex flex-col page-gap-y">
@@ -384,96 +474,6 @@ export const DirectionalPadding: Story = {
       </DemoSection>
     </div>
   ),
-}
-
-export const ContainerPadding: Story = {
-  render: () => {
-    const proportions = ['squished', 'squared', 'stretched'] as const
-
-    return (
-      <DemoSection
-        title="Container Padding"
-        description="The .container-p utility provides padding for container elements that responds to space proportions. Requires the data-space-proportions attribute."
-      >
-        <div className="flex flex-row flex-wrap items-start container-gap-x">
-          {proportions.map((proportion) => (
-            <div
-              key={proportion}
-              className="flex flex-col items-start selectable-gap-x"
-            >
-              <Paragraph className="mb-2">
-                <strong>
-                  {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
-                </strong>
-                <br />
-                <code>data-space-proportions=&quot;{proportion}&quot;</code>
-              </Paragraph>
-              <div
-                data-space-proportions={proportion}
-                className="container-p spacing-demo-box"
-              >
-                <Typography
-                  family="ui"
-                  size="md"
-                  baseline="grid"
-                  lineHeight="default"
-                  weight="normal"
-                  tracking="normal"
-                >
-                  Container
-                </Typography>
-              </div>
-            </div>
-          ))}
-        </div>
-      </DemoSection>
-    )
-  },
-}
-
-export const PagePadding: Story = {
-  render: () => {
-    const proportions = ['squished', 'squared', 'stretched'] as const
-
-    return (
-      <DemoSection
-        title="Page Padding"
-        description="The .page-p utility provides padding for page-level elements that responds to space proportions. Requires the data-space-proportions attribute."
-      >
-        <div className="flex flex-row flex-wrap items-start container-gap-x">
-          {proportions.map((proportion) => (
-            <div
-              key={proportion}
-              className="flex flex-col items-start selectable-gap-x"
-            >
-              <Paragraph className="mb-2">
-                <strong>
-                  {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
-                </strong>
-                <br />
-                <code>data-space-proportions=&quot;{proportion}&quot;</code>
-              </Paragraph>
-              <div
-                data-space-proportions={proportion}
-                className="page-p spacing-demo-box"
-              >
-                <Typography
-                  family="ui"
-                  size="md"
-                  baseline="grid"
-                  lineHeight="default"
-                  weight="normal"
-                  tracking="normal"
-                >
-                  Page
-                </Typography>
-              </div>
-            </div>
-          ))}
-        </div>
-      </DemoSection>
-    )
-  },
 }
 
 export const PracticalExamples: Story = {
