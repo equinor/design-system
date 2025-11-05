@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, ChangeEvent } from 'react'
-import { Typography, Button, EdsProvider, Table, Density } from '../..'
+import { Typography, Button, Table } from '../..'
 import { Checkbox } from './Checkbox.new'
 import type { CheckboxProps } from './Checkbox.new.types'
 import { action } from 'storybook/actions'
@@ -257,20 +257,21 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
 WithFormsControl.storyName = 'Example with React Hook Form'
 
 export const Compact: StoryFn<CheckboxProps> = () => {
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('comfortable')
-  }, [density])
-
   return (
-    <EdsProvider density={density}>
+    <div data-density="comfortable">
       <Checkbox label="I am compact" />
       <Checkbox label="I am also compact" defaultChecked />
       <Checkbox label="I am compact and disabled" disabled />
-    </EdsProvider>
+    </div>
   )
+}
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact mode is activated by adding `data-density="comfortable"` to a parent element. The density attribute is inherited by all child components.',
+    },
+  },
 }
 
 export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
