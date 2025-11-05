@@ -7,20 +7,6 @@
   gap: 2rem;
 }
 
-.spacing-demo-row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.spacing-demo-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 120px;
-}
-
 .spacing-demo-density-section {
   display: flex;
   flex-direction: column;
@@ -31,11 +17,6 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.spacing-demo-flex {
-  display: flex;
-  flex-direction: row;
 }
 
 /* Typography styles */
@@ -64,17 +45,6 @@
 }
 
 /* Box demo styles */
-.spacing-demo-box-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.spacing-demo-box-container-column {
-  display: flex;
-  flex-direction: column;
-}
-
 .spacing-demo-box {
   width: 40px;
   height: 40px;
@@ -87,68 +57,6 @@
   height: 40px;
   background-color: var(--eds-color-bg-accent-fill-emphasis-default);
   border: 1px solid var(--eds-color-border-accent-strong);
-}
-
-/* Inset demo styles */
-.spacing-demo-inset {
-  display: inline-block;
-  background-color: var(--eds-color-bg-neutral-fill-muted-default);
-  border: 1px solid var(--eds-color-border-neutral-medium);
-  color: var(--eds-color-text-neutral-strong);
-  text-align: center;
-  white-space: nowrap;
-}
-
-/* Border radius demo styles */
-.spacing-demo-border-none,
-.spacing-demo-border-rounded,
-.spacing-demo-border-pill {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--eds-color-bg-neutral-fill-muted-default);
-  border: 1px solid var(--eds-color-border-neutral-medium);
-  color: var(--eds-color-text-neutral-strong);
-  text-align: center;
-  font-size: 0.875rem;
-}
-
-/* Icon demo styles */
-.spacing-demo-icon {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.spacing-demo-icon-box {
-  width: 1em;
-  height: 1em;
-  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
-  border: 1px solid var(--eds-color-border-accent-strong);
-  flex-shrink: 0;
-}
-
-.spacing-demo-icon-xs {
-  font-size: 0.75rem;
-}
-
-.spacing-demo-icon-sm {
-  font-size: 0.875rem;
-}
-
-.spacing-demo-icon-md {
-  font-size: 1rem;
-}
-
-.spacing-demo-icon-lg {
-  font-size: 1.125rem;
-}
-
-.spacing-demo-icon-xl {
-  font-size: 1.25rem;
-}
-
-.spacing-demo-icon-2xl {
-  font-size: 1.5rem;
 }
 
 /* Button demo styles */
@@ -178,11 +86,6 @@
   max-width: 400px;
 }
 
-.spacing-demo-card-content {
-  display: flex;
-  flex-direction: column;
-}
-
 .spacing-demo-card-title {
   margin: 0;
   font-size: 1.125rem;
@@ -194,80 +97,6 @@
   margin: 0;
   font-size: 0.875rem;
   color: var(--eds-color-text-neutral-subtle);
-}
-
-.spacing-demo-card-actions {
-  display: flex;
-  flex-direction: row;
-}
-
-/* Form demo styles */
-.spacing-demo-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-}
-
-.spacing-demo-form-field {
-  display: flex;
-  flex-direction: column;
-}
-
-.spacing-demo-form-label {
-  margin: 0 0 0.25rem 0;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--eds-color-text-neutral-strong);
-}
-
-.spacing-demo-form-input {
-  background-color: var(--eds-color-bg-input);
-  border: 1px solid var(--eds-color-border-neutral-medium);
-  color: var(--eds-color-text-neutral-strong);
-  font-size: 0.875rem;
-  outline: none;
-}
-
-.spacing-demo-form-input:focus {
-  border-color: var(--eds-color-border-focus);
-}
-
-.spacing-demo-form-submit {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-  border: 1px solid var(--eds-color-border-accent-strong);
-  cursor: pointer;
-}
-
-.spacing-demo-form-submit:hover {
-  opacity: 0.9;
-}
-
-/* Navigation demo styles */
-.spacing-demo-nav {
-  background-color: var(--eds-color-bg-neutral-surface);
-  border: 1px solid var(--eds-color-border-neutral-medium);
-  max-width: 200px;
-}
-
-.spacing-demo-nav-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-}
-
-.spacing-demo-nav-item {
-  display: block;
-  padding: 0.5rem;
-  color: var(--eds-color-text-link);
-  text-decoration: none;
-  font-size: 0.875rem;
-}
-
-.spacing-demo-nav-item:hover {
-  background-color: var(--eds-color-bg-neutral-fill-muted-default);
 }
 
 /* Selectable space demo styles */
