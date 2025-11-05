@@ -788,7 +788,7 @@ export const SelectableSpace: Story = {
                   <div
                     data-selectable-space={size}
                     data-space-proportions={proportion}
-                    className="selectable-spacing spacing-demo-selectable-box"
+                    className="selectable-padding spacing-demo-selectable-box"
                   />
                 </div>
               ))}
@@ -847,7 +847,7 @@ export const SelectableSpaceDensityComparison: Story = {
                         <div
                           data-selectable-space={size}
                           data-space-proportions={proportion}
-                          className="selectable-spacing spacing-demo-selectable-box"
+                          className="selectable-padding spacing-demo-selectable-box"
                         >
                           {size}
                         </div>
