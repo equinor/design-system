@@ -6,6 +6,7 @@ import {
   checkbox_indeterminate,
 } from '@equinor/eds-icons'
 import { TypographyNext } from '../Typography'
+import { useEds } from '../EdsProvider'
 import type { CheckboxProps } from './Checkbox.new.types'
 import './checkbox.new.css'
 
@@ -25,10 +26,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     },
     ref,
   ) {
+    const { density } = useEds()
     const internalRef = useRef<HTMLInputElement>(null)
     const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
 
-    // Set indeterminate state via JavaScript (can't be done via HTML attribute)
     useEffect(() => {
       if (inputRef.current) {
         inputRef.current.indeterminate = indeterminate
@@ -115,7 +116,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     if (label) {
       return (
-        <label className={wrapperClasses} style={style} {...labelProps}>
+        <label
+          className={wrapperClasses}
+          style={style}
+          data-density={density}
+          {...labelProps}
+        >
           {checkboxInput}
           <TypographyNext
             as="span"
@@ -134,7 +140,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <span className={wrapperClasses} style={style}>
+      <span className={wrapperClasses} style={style} data-density={density}>
         {checkboxInput}
       </span>
     )
