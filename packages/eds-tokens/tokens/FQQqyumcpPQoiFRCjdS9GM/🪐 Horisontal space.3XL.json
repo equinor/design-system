@@ -15,7 +15,7 @@
   },
   "Padding horizontal": {
     "$type": "number",
-    "$value": "{Density Aware.Spacing.Inline.3XL}",
+    "$value": "{spacing.inline.3xl}",
     "$description": "",
     "$extensions": {
       "com.figma": {

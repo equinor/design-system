@@ -15,7 +15,7 @@
   },
   "Gap vertical": {
     "$type": "number",
-    "$value": "{Density Aware.Spacing.Stack.2XS}",
+    "$value": "{spacing.stack.2xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {

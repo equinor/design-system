@@ -114,7 +114,7 @@
     },
     "Horisontal gap": {
       "$type": "number",
-      "$value": "{spacing.inline.XS}",
+      "$value": "{spacing.inline.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -130,7 +130,7 @@
     },
     "Vertical gap": {
       "$type": "number",
-      "$value": "{spacing.stack.XS}",
+      "$value": "{spacing.stack.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -180,7 +180,7 @@
     },
     "Horisontal gap": {
       "$type": "number",
-      "$value": "{spacing.inline.MD}",
+      "$value": "{spacing.inline.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -196,7 +196,7 @@
     },
     "Vertical gap": {
       "$type": "number",
-      "$value": "{spacing.stack.MD}",
+      "$value": "{spacing.stack.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -246,7 +246,7 @@
     },
     "Horisontal gap": {
       "$type": "number",
-      "$value": "{spacing.inline.XL}",
+      "$value": "{spacing.inline.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -262,7 +262,7 @@
     },
     "Vertical gap": {
       "$type": "number",
-      "$value": "{spacing.stack.XL}",
+      "$value": "{spacing.stack.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {

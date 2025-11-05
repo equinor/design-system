@@ -95,7 +95,8 @@
   "peerDependencies": {
     "react": "^19",
     "react-dom": "^19",
-    "styled-components": "^6"
+    "styled-components": "^6",
+    "@equinor/eds-tokens": "^2"
   },
   "dependencies": {
     "@babel/runtime": "^7.28.4",

@@ -15,7 +15,7 @@
   },
   "Gap horizontal": {
     "$type": "number",
-    "$value": "{Density Aware.Spacing.Inline.2XS}",
+    "$value": "{spacing.inline.2xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {
