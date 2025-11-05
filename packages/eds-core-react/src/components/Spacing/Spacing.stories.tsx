@@ -746,6 +746,124 @@ export const DataAttributeAPI: Story = {
   ),
 }
 
+export const SelectableSpace: Story = {
+  render: () => {
+    const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+    const proportions = ['squished', 'squared', 'stretched'] as const
+
+    return (
+      <div className="spacing-demo-selectable-container">
+        <div>
+          <h3 className="spacing-demo-heading">Selectable Space Utilities</h3>
+          <p className="spacing-demo-text">
+            Selectable space utilities provide padding that responds to density,
+            selectable space size, and space proportions. Requires both{' '}
+            <code>data-selectable-space</code> and{' '}
+            <code>data-space-proportions</code> attributes.
+          </p>
+        </div>
+
+        {sizes.map((size) => (
+          <div key={size} className="spacing-demo-selectable-section">
+            <h4 className="spacing-demo-subheading">
+              Size: <strong>{size.toUpperCase()}</strong>
+            </h4>
+            <div className="spacing-demo-selectable-row">
+              {proportions.map((proportion) => (
+                <div
+                  key={`${size}-${proportion}`}
+                  className="spacing-demo-selectable-item"
+                >
+                  <p className="spacing-demo-label">
+                    <strong>
+                      {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
+                    </strong>
+                    <br />
+                    <code>
+                      data-selectable-space="{size}"
+                      <br />
+                      data-space-proportions="{proportion}"
+                    </code>
+                  </p>
+                  <div
+                    data-selectable-space={size}
+                    data-space-proportions={proportion}
+                    className="selectable-spacing spacing-demo-selectable-box"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  },
+}
+
+export const SelectableSpaceDensityComparison: Story = {
+  render: () => {
+    const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+    const proportions = ['squished', 'squared', 'stretched'] as const
+    const densities = ['spacious', 'comfortable'] as const
+
+    return (
+      <div className="spacing-demo-selectable-container">
+        <div>
+          <h3 className="spacing-demo-heading">
+            Selectable Space with Density Modes
+          </h3>
+          <p className="spacing-demo-text">
+            Selectable space adapts to density modes (spacious/comfortable) set
+            via the <code>data-density</code> attribute.
+          </p>
+        </div>
+
+        {densities.map((density) => (
+          <div key={density} className="spacing-demo-density-section">
+            <h3 className="spacing-demo-heading">
+              {density.charAt(0).toUpperCase() + density.slice(1)} Mode
+            </h3>
+            <div
+              className="spacing-demo-density-container"
+              data-density={density}
+            >
+              {sizes.map((size) => (
+                <div key={size} className="spacing-demo-selectable-section">
+                  <h4 className="spacing-demo-subheading">
+                    Size: <strong>{size.toUpperCase()}</strong>
+                  </h4>
+                  <div className="spacing-demo-selectable-row">
+                    {proportions.map((proportion) => (
+                      <div
+                        key={`${density}-${size}-${proportion}`}
+                        className="spacing-demo-selectable-item"
+                      >
+                        <p className="spacing-demo-label">
+                          <strong>
+                            {proportion.charAt(0).toUpperCase() +
+                              proportion.slice(1)}
+                          </strong>
+                        </p>
+                        <div
+                          data-selectable-space={size}
+                          data-space-proportions={proportion}
+                          className="selectable-spacing spacing-demo-selectable-box"
+                        >
+                          {size}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  },
+}
+
 export const Examples: Story = {
   render: () => (
     <div className="spacing-demo-container">

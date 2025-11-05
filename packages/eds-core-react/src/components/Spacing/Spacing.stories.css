@@ -269,3 +269,43 @@
 .spacing-demo-nav-item:hover {
   background-color: var(--eds-color-bg-neutral-fill-muted-default);
 }
+
+/* Selectable space demo styles */
+.spacing-demo-selectable-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.spacing-demo-selectable-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.spacing-demo-selectable-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.spacing-demo-selectable-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 150px;
+  align-items: flex-start;
+}
+
+.spacing-demo-selectable-box {
+  display: inline-block;
+  background-color: var(--eds-color-bg-accent-fill-muted-default);
+  border: 1px solid var(--eds-color-border-accent-medium);
+  color: var(--eds-color-text-accent-strong);
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+  max-width: 100%;
+}

@@ -23,6 +23,8 @@
   --eds-spacing-icon-5xl-gap-vertical: 1.25rem;
   --eds-spacing-icon-6xl-gap-horizontal: 1.438rem;
   --eds-spacing-icon-6xl-gap-vertical: 1.438rem;
+  --eds-spacing-border-radius-pill: 62.5rem;
+  --eds-spacing-border-radius-none: 0rem;
   --eds-spacing-inline-4xs: 0.125rem;
   --eds-spacing-inline-3xs: 0.25rem;
   --eds-spacing-inline-2xs: 0.375rem;
@@ -43,8 +45,6 @@
   --eds-spacing-stack-xl: 1.5rem;
   --eds-spacing-stack-2xl: 1.75rem;
   --eds-spacing-stack-3xl: 2rem;
-  --eds-spacing-border-radius-pill: 62.5rem;
-  --eds-spacing-border-radius-none: 0rem;
   --eds-sizing-icon-xs: 1rem;
   --eds-sizing-icon-sm: 1.125rem;
   --eds-sizing-icon-md: 1.25rem;
@@ -156,7 +156,6 @@
   --eds-typography-ui-body-6xl-font-weight-lighter: var(--eds-type-scale-inter-1100-font-weight-lighter);
   --eds-typography-ui-body-6xl-font-weight-normal: var(--eds-type-scale-inter-1100-font-weight-normal);
   --eds-typography-ui-body-6xl-font-weight-bolder: var(--eds-type-scale-inter-1100-font-weight-bolder);
-  --eds-typography-header-font-family: var(--eds-font-family-equinor);
   --eds-typography-header-xs-font-size: var(--eds-type-scale-equinor-200-font-size);
   --eds-typography-header-xs-tracking-tight: var(--eds-type-scale-equinor-200-tracking-tight);
   --eds-typography-header-xs-tracking-normal: var(--eds-type-scale-equinor-200-tracking-normal);
@@ -164,6 +163,7 @@
   --eds-typography-header-xs-font-weight-lighter: var(--eds-type-scale-equinor-200-font-weight-lighter);
   --eds-typography-header-xs-font-weight-normal: var(--eds-type-scale-equinor-200-font-weight-normal);
   --eds-typography-header-xs-font-weight-bolder: var(--eds-type-scale-equinor-200-font-weight-bolder);
+  --eds-typography-header-font-family: var(--eds-font-family-equinor);
   --eds-typography-header-sm-font-size: var(--eds-type-scale-equinor-300-font-size);
   --eds-typography-header-sm-tracking-tight: var(--eds-type-scale-equinor-300-tracking-tight);
   --eds-typography-header-sm-tracking-normal: var(--eds-type-scale-equinor-300-tracking-normal);

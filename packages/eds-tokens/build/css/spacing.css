@@ -9,12 +9,23 @@
  * - Stack spacing: Vertical spacing between stacked elements
  * - Inset spacing: Padding within elements (inline and stack variations)
  * - Border radius: Corner rounding values
+ * - Selectable space: Padding for selectable elements (buttons, cards, etc.)
  * 
  * Each spacing value supports density modes (spacious/comfortable) through CSS variables.
+ * 
+ * Selectable Space:
+ * The selectable space utilities provide padding that responds to both density, selectable space and space proportions.
+ * Used in combination with the following data attributes:
+ * - data-selectable-space: Sets the size (xs, sm, md, lg, xl)
+ * - data-space-proportions: Sets the proportion mode (squished, squared, stretched)
+ * 
+ * The utility applies both padding-inline and padding-block using CSS variables that are calculated
+ * based on the combination of density, selectable space, and space proportions.
  * 
  * Usage:
  * - Utility classes: <div class="spacing-stack-md">
  * - Data attributes: <div data-spacing-stack="md">
+ * - Selectable space: <div data-selectable-spacing data-selectable-space="md" data-space-proportions="squared">
  */
 
 /* ============================================ */
@@ -23,19 +34,19 @@
 
 [data-spacing-inline='4xs'],
 .spacing-inline-4xs {
-  --spacing-value: var(--eds-spacing-inline-4-xs);
+  --spacing-value: var(--eds-spacing-inline-4xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-inline='3xs'],
 .spacing-inline-3xs {
-  --spacing-value: var(--eds-spacing-inline-3-xs);
+  --spacing-value: var(--eds-spacing-inline-3xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-inline='2xs'],
 .spacing-inline-2xs {
-  --spacing-value: var(--eds-spacing-inline-2-xs);
+  --spacing-value: var(--eds-spacing-inline-2xs);
   gap: var(--spacing-value);
 }
 
@@ -71,13 +82,13 @@
 
 [data-spacing-inline='2xl'],
 .spacing-inline-2xl {
-  --spacing-value: var(--eds-spacing-inline-2-xl);
+  --spacing-value: var(--eds-spacing-inline-2xl);
   gap: var(--spacing-value);
 }
 
 [data-spacing-inline='3xl'],
 .spacing-inline-3xl {
-  --spacing-value: var(--eds-spacing-inline-3-xl);
+  --spacing-value: var(--eds-spacing-inline-3xl);
   gap: var(--spacing-value);
 }
 
@@ -87,19 +98,19 @@
 
 [data-spacing-stack='4xs'],
 .spacing-stack-4xs {
-  --spacing-value: var(--eds-spacing-stack-4-xs);
+  --spacing-value: var(--eds-spacing-stack-4xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-stack='3xs'],
 .spacing-stack-3xs {
-  --spacing-value: var(--eds-spacing-stack-3-xs);
+  --spacing-value: var(--eds-spacing-stack-3xs);
   gap: var(--spacing-value);
 }
 
 [data-spacing-stack='2xs'],
 .spacing-stack-2xs {
-  --spacing-value: var(--eds-spacing-stack-2-xs);
+  --spacing-value: var(--eds-spacing-stack-2xs);
   gap: var(--spacing-value);
 }
 
@@ -135,13 +146,13 @@
 
 [data-spacing-stack='2xl'],
 .spacing-stack-2xl {
-  --spacing-value: var(--eds-spacing-stack-2-xl);
+  --spacing-value: var(--eds-spacing-stack-2xl);
   gap: var(--spacing-value);
 }
 
 [data-spacing-stack='3xl'],
 .spacing-stack-3xl {
-  --spacing-value: var(--eds-spacing-stack-3-xl);
+  --spacing-value: var(--eds-spacing-stack-3xl);
   gap: var(--spacing-value);
 }
 
@@ -415,4 +426,15 @@
 [data-spacing-icon-gap='6xl'],
 .spacing-icon-gap-6xl {
   gap: var(--eds-spacing-icon-6xl-gap-horizontal);
+}
+
+/* ============================================ */
+/* Selectable space utilities - Padding for selectable elements */
+/* Used in combination with data-selectable-space="[size]" and data-space-proportions="[proportion]" attributes */
+/* ============================================ */
+
+[data-selectable-spacing],
+.selectable-spacing {
+  padding-inline: var(--eds-selectable-spacing-inline);
+  padding-block: var(--eds-selectable-spacing-stack);
 }

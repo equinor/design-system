@@ -42,30 +42,6 @@
         "gap-vertical": 23
       }
     },
-    "inline": {
-      "4xs": 2,
-      "3xs": 4,
-      "2xs": 6,
-      "xs": 8,
-      "sm": 12,
-      "md": 16,
-      "lg": 20,
-      "xl": 24,
-      "2xl": 28,
-      "3xl": 32
-    },
-    "stack": {
-      "4xs": 2,
-      "3xs": 4,
-      "2xs": 6,
-      "xs": 8,
-      "sm": 12,
-      "md": 16,
-      "lg": 20,
-      "xl": 24,
-      "2xl": 28,
-      "3xl": 32
-    },
     "border-radius": {
       "rounded": 4,
       "pill": 1000,
@@ -102,6 +78,30 @@
         "stack-squared": 24,
         "stack-stretched": 28
       }
+    },
+    "inline": {
+      "4xs": 2,
+      "3xs": 4,
+      "2xs": 6,
+      "xs": 8,
+      "sm": 12,
+      "md": 16,
+      "lg": 20,
+      "xl": 24,
+      "2xl": 28,
+      "3xl": 32
+    },
+    "stack": {
+      "4xs": 2,
+      "3xs": 4,
+      "2xs": 6,
+      "xs": 8,
+      "sm": 12,
+      "md": 16,
+      "lg": 20,
+      "xl": 24,
+      "2xl": 28,
+      "3xl": 32
     }
   },
   "sizing": {
@@ -246,7 +246,6 @@
       }
     },
     "header": {
-      "font-family": "Equinor",
       "xs": {
         "font-size": 12,
         "tracking-tight": -1.149999976158142,
@@ -258,6 +257,7 @@
         "lineheight-default": 16,
         "lineheight-squished": 12
       },
+      "font-family": "Equinor",
       "sm": {
         "font-size": 14,
         "tracking-tight": -1.3200000524520874,
