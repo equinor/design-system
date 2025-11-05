@@ -196,7 +196,7 @@ export const CompactTable: StoryFn<TableProps> = () => {
     }
   }
 
-  const referenceElement = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   return (
     <>
@@ -204,7 +204,7 @@ export const CompactTable: StoryFn<TableProps> = () => {
         <TopBar.Header>Compact table with switcher</TopBar.Header>
         <TopBar.Actions>
           <Button
-            ref={referenceElement}
+            ref={setAnchorEl}
             variant="ghost_icon"
             id="menuButton"
             aria-controls="menu-on-button"
@@ -219,7 +219,7 @@ export const CompactTable: StoryFn<TableProps> = () => {
             id="menu-on-button"
             open={isOpen}
             aria-labelledby="menuButton"
-            anchorEl={referenceElement.current}
+            anchorEl={anchorEl}
             onClose={closeMenu}
           >
             <Menu.Section title="Density">
@@ -419,7 +419,7 @@ type Photo = {
 
 export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
-  const parentRef = useRef<HTMLElement | null>(null)
+  const parentRef = useRef<HTMLDivElement | null>(null)
 
   const estimateSize = useCallback(() => {
     return 48
@@ -546,7 +546,7 @@ export const VirtualScrollingWithFixedFooter: StoryFn<TableProps> = () => {
 
 export const VirtualScrolling: StoryFn<TableProps> = () => {
   const [data, setData] = useState<Array<Photo>>([])
-  const parentRef = useRef<HTMLElement | null>(null)
+  const parentRef = useRef<HTMLDivElement | null>(null)
 
   const estimateSize = useCallback(() => {
     return 48

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import styled from 'styled-components'
 import {
@@ -69,7 +69,8 @@ export const TestPage: StoryFn = () => {
   const [density, setDensity] =
     useState<EdsProviderProps['density']>('comfortable')
   const [menuAnchorRef, setMenuAnchorRef] = useState<HTMLButtonElement>(null)
-  const popverAnchorRef = useRef<HTMLButtonElement>(null)
+  const [popverAnchorRef, setPopoverAnchorRef] =
+    useState<HTMLButtonElement | null>(null)
 
   const openMenu = () => {
     setOpenMenu(true)
@@ -150,7 +151,7 @@ export const TestPage: StoryFn = () => {
               aria-haspopup
               aria-controls="popover"
               aria-expanded={isPopoverOpen}
-              ref={popverAnchorRef}
+              ref={setPopoverAnchorRef}
               onClick={() => setPopoverOpen(true)}
             >
               Show Popover
@@ -159,7 +160,7 @@ export const TestPage: StoryFn = () => {
             <Popover
               open={isPopoverOpen}
               id="popover"
-              anchorEl={popverAnchorRef.current}
+              anchorEl={popverAnchorRef}
               onClose={() => setPopoverOpen(false)}
             >
               <Popover.Header>
