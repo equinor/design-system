@@ -103,10 +103,10 @@ describe('Checkbox.new', () => {
 
   it('Can be indeterminate', () => {
     render(<Checkbox label="Indeterminate checkbox" indeterminate />)
-    const checkbox = screen.getByLabelText(
-      'Indeterminate checkbox',
-    ) as HTMLInputElement
-    expect(checkbox.indeterminate).toBe(true)
+    const checkbox = screen.getByRole('checkbox', {
+      name: 'Indeterminate checkbox',
+    })
+    expect(checkbox).toHaveAttribute('data-indeterminate', 'true')
   })
 
   it('Renders without label', () => {
