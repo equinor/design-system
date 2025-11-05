@@ -24,7 +24,7 @@ We offer a Power Apps canvas app template with pre‑configured components, layo
 - Exposes clearly named components for reuse and replacement
 - Documents customisation boundaries and recommended extension steps
 
-Start by importing the template, reviewing the built‑in guidance, and then tailoring the documented configuration areas to keep solutions maintainable and compliant.
+Start by importing the template, reviewing the built-in guidance, and then tailoring the documented configuration areas to keep solutions maintainable and compliant.
 
 **Preview the template**: [Canvas Apps Template](https://apps.equinor.com/edspowerapps) (Equinor users only)
 
