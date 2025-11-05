@@ -2,14 +2,92 @@
 
 exports[`Search Matches snapshot 1`] = `
 <DocumentFragment>
-  .c1 {
+  .c4 {
   transform: none;
 }
 
-.c0 input[type='search']::-webkit-search-decoration,
-.c0 input[type='search']::-webkit-search-cancel-button,
-.c0 input[type='search']::-webkit-search-results-button,
-.c0 input[type='search']::-webkit-search-results-decoration {
+.c0 {
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
+  position: relative;
+  height: 36px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+  background: var(--eds-input-background,var(--eds_ui_background__light, rgba(247, 247, 247, 1)));
+  outline: 1px solid transparent;
+  outline-offset: 0px;
+}
+
+.c0:focus-within {
+  box-shadow: none;
+  outline: 2px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
+  outline-offset: 0px;
+}
+
+.c0>input {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.c5 {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding-left: 40px;
+  padding-top: 6px;
+  padding-right: 40px;
+  padding-bottom: 6px;
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  line-height: 1.500em;
+  outline: none;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.c5::placeholder {
+  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
+}
+
+.c5:disabled {
+  color: var(--eds-input-color);
+  cursor: not-allowed;
+}
+
+.c2 {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  color: var(--eds-input-adornment-color);
+}
+
+.c3 {
+  left: 0;
+  padding-left: 8px;
+}
+
+.c6 {
+  right: 0;
+  padding-right: 8px;
+}
+
+.c1 input[type='search']::-webkit-search-decoration,
+.c1 input[type='search']::-webkit-search-cancel-button,
+.c1 input[type='search']::-webkit-search-results-button,
+.c1 input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
@@ -18,16 +96,14 @@ exports[`Search Matches snapshot 1`] = `
     role="search"
   >
     <div
-      class="eds-input   c0"
-      style="--eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); --placeholder-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --focus-outline-width: 2px; --focus-outline-style: solid; --focus-outline-color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)); --focus-outline-offset: 0px; height: 36px; width: 100%; box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); background: var(--eds-input-background, var(--eds_ui_background__light, rgba(247, 247, 247, 1))); outline: 1px solid transparent; outline-offset: 0px;"
+      class="c0 c1"
     >
       <div
-        class="eds-adornment eds-left"
-        style="top: 6px; bottom: 6px; padding-left: 8px; margin: 0px; color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); font-family: Equinor; font-size: 0.75rem; font-weight: 500; line-height: 1.333em;"
+        class="c2 c3"
       >
         <svg
           aria-hidden="true"
-          class="c1"
+          class="c4"
           fill="currentColor"
           height="18px"
           viewBox="0 0 18 18"
@@ -45,13 +121,12 @@ exports[`Search Matches snapshot 1`] = `
         </svg>
       </div>
       <input
-        class="eds-field"
-        style="padding: 6px 40px 6px 40px; margin: 0px; color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); font-family: Equinor; font-size: 1rem; font-weight: 400; line-height: 1.5em; letter-spacing: 0.025em;"
+        class="c5"
+        style="resize: none;"
         type="text"
       />
       <div
-        class="eds-adornment eds-right"
-        style="top: 6px; bottom: 6px; padding-right: 8px; margin: 0px; color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); font-family: Equinor; font-size: 0.75rem; font-weight: 500; line-height: 1.333em;"
+        class="c2 c6"
       />
     </div>
   </div>

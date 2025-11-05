@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
+import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
 
@@ -42,9 +43,10 @@ describe('Input', () => {
     // eslint-disable-next-line testing-library/no-node-access
     const inputWrapper = screen.getByLabelText(label).parentElement
 
-    expect(inputWrapper).toHaveStyle({
-      outline: `${tokens.input.outline.width} solid ${tokens.success.outline.color}`,
-    })
+    expect(inputWrapper).toHaveStyleRule(
+      'outline',
+      `${tokens.input.outline.width} solid ${tokens.success.outline.color}`,
+    )
   })
 
   it('Has correct outline on input when variant is warning', () => {
@@ -58,9 +60,10 @@ describe('Input', () => {
     // eslint-disable-next-line testing-library/no-node-access
     const inputWrapper = screen.getByLabelText(label).parentElement
 
-    expect(inputWrapper).toHaveStyle({
-      outline: `${tokens.input.outline.width} solid ${tokens.warning.outline.color}`,
-    })
+    expect(inputWrapper).toHaveStyleRule(
+      'outline',
+      `${tokens.input.outline.width} solid ${tokens.warning.outline.color}`,
+    )
   })
 
   it('Has correct outline on input when variant is error', () => {
@@ -74,27 +77,28 @@ describe('Input', () => {
     // eslint-disable-next-line testing-library/no-node-access
     const inputWrapper = screen.getByLabelText(label).parentElement
 
-    expect(inputWrapper).toHaveStyle({
-      outline: `${tokens.input.outline.width} solid ${tokens.error.outline.color}`,
-    })
+    expect(inputWrapper).toHaveStyleRule(
+      'outline',
+      `${tokens.input.outline.width} solid ${tokens.error.outline.color}`,
+    )
   })
 
+  const StyledInput = styled(Input)`
+    margin-top: 48px;
+  `
   it('Can extend the css of the component', () => {
     render(
-      <Input
+      <StyledInput
         id="test-css-extend"
         variant="error"
         value="textfield"
         readOnly
-        className="custom-input"
-        style={{ marginTop: '48px' }}
       />,
     )
 
     // eslint-disable-next-line testing-library/no-node-access
     const inputWrapper = screen.getByDisplayValue('textfield').parentElement
 
-    expect(inputWrapper).toHaveStyle({ marginTop: '48px' })
-    expect(inputWrapper).toHaveClass('custom-input')
+    expect(inputWrapper).toHaveStyleRule('margin-top', '48px')
   })
 })
