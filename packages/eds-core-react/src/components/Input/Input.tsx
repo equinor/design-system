@@ -8,126 +8,12 @@ import {
   ComponentPropsWithoutRef,
   InputHTMLAttributes,
 } from 'react'
-import styled, { css } from 'styled-components'
-import {
-  typographyMixin,
-  spacingsTemplate,
-  outlineTemplate,
-  useToken,
-  OverridableComponent,
-} from '@equinor/eds-utils'
+import { useToken, OverridableComponent } from '@equinor/eds-utils'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
 import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
-
-const Container = styled.div<StyledProps>(({ $token, disabled, readOnly }) => {
-  const { states, entities } = $token
-
-  return css`
-    --eds-input-adornment-color: ${entities.adornment.typography.color};
-    --eds-input-color: ${$token.typography.color};
-
-    position: relative;
-    height: ${$token.height};
-    width: ${$token.width};
-    display: flex;
-    flex-direction: row;
-    border: none;
-    box-sizing: border-box;
-    box-shadow: ${$token.boxShadow};
-    background: var(--eds-input-background, ${$token.background});
-    ${outlineTemplate($token.outline)}
-
-    &:focus-within {
-      --eds-input-adornment-color: ${entities.adornment?.states.focus?.outline
-        .color};
-
-      box-shadow: none;
-      ${outlineTemplate(states.focus.outline)}
-    }
-
-    ${disabled &&
-    css`
-      --eds-input-adornment-color: ${states.disabled.typography.color};
-      --eds-input-color: ${states.disabled.typography.color};
-      cursor: not-allowed;
-      box-shadow: none;
-    `}
-    ${readOnly &&
-    css({
-      background: states.readOnly.background,
-      boxShadow: states.readOnly.boxShadow,
-    })}
-    & > input {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  `
-})
-
-const StyledInput = styled.input<StyledProps>(
-  ({ $token, $paddingLeft, $paddingRight }) => {
-    return css`
-      width: 100%;
-      border: none;
-      background: transparent;
-      ${spacingsTemplate($token.spacings)}
-      ${typographyMixin($token.typography)}
-      outline: none;
-
-      padding-left: ${$paddingLeft};
-      padding-right: ${$paddingRight};
-
-      &::placeholder {
-        color: ${$token.entities.placeholder.typography.color};
-      }
-
-      &:disabled {
-        color: var(--eds-input-color);
-        cursor: not-allowed;
-      }
-    `
-  },
-)
-
-type AdornmentProps = {
-  $token: InputToken
-}
-
-const Adornments = styled.div<AdornmentProps>(({ $token }) => {
-  return css`
-    position: absolute;
-    top: ${$token.spacings.top};
-    bottom: ${$token.spacings.bottom};
-    display: flex;
-    align-items: center;
-    ${typographyMixin($token.entities.adornment.typography)}
-    color: var(--eds-input-adornment-color);
-  `
-})
-
-const LeftAdornments = styled(Adornments)(
-  ({ $token }) => css`
-    left: 0;
-    padding-left: ${$token.entities.adornment.spacings.left};
-  `,
-)
-
-const RightAdornments = styled(Adornments)(
-  ({ $token }) => css`
-    right: 0;
-    padding-right: ${$token.entities.adornment.spacings.right};
-  `,
-)
-
-type StyledProps = {
-  $token: InputToken
-  $paddingLeft?: string
-  $paddingRight?: string
-} & Required<Pick<InputProps, 'readOnly' | 'disabled'>>
-
+import './Input.css'
 export type InputProps = {
   /** Placeholder */
   placeholder?: string
@@ -176,6 +62,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       rightAdornmentsProps,
       leftAdornmentsWidth,
       rightAdornmentsWidth,
+      as: ElementComponent = 'input',
       ...other
     },
     ref,
@@ -211,55 +98,142 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       _token,
     ])()
 
-    const inputProps = {
-      ref,
-      type,
-      disabled,
-      readOnly,
-      $token: token,
-      style: {
-        resize: 'none' as const,
-      },
-      ...other,
+    const { states, entities } = token
+
+    // Build focus state data for CSS custom properties
+    const focusOutline = states.focus.outline
+    const focusAdornmentColor = entities.adornment?.states.focus?.outline.color
+
+    // Build container styles
+    const containerStyles: CSSProperties = {
+      '--eds-input-adornment-color': entities.adornment.typography.color,
+      '--eds-input-color': token.typography.color,
+      '--placeholder-color': entities.placeholder.typography.color,
+      '--focus-outline-width': focusOutline.width,
+      '--focus-outline-style': focusOutline.style,
+      '--focus-outline-color': focusOutline.color,
+      '--focus-outline-offset': focusOutline.offset,
+      '--focus-adornment-color': focusAdornmentColor,
+      height: token.height,
+      width: token.width,
+      boxShadow: token.boxShadow,
+      background: `var(--eds-input-background, ${token.background})`,
+      outline: `${token.outline.width} ${token.outline.style} ${token.outline.color}`,
+      outlineOffset: token.outline.offset,
+      ...style,
+    } as CSSProperties
+
+    if (disabled) {
+      containerStyles['--eds-input-adornment-color'] =
+        states.disabled.typography.color
+      containerStyles['--eds-input-color'] = states.disabled.typography.color
     }
 
-    const containerProps = {
-      disabled,
-      readOnly,
-      className,
-      style,
-      $token: token,
+    if (readOnly) {
+      containerStyles.background = states.readOnly.background
+      containerStyles.boxShadow = states.readOnly.boxShadow
     }
 
-    const _leftAdornmentProps = {
-      ...leftAdornmentsProps,
-      ref: setLeftAdornmentsRef,
-      $token: token,
+    // Build input field styles
+    const inputTypography = token.typography
+    const inputStyles: CSSProperties = {
+      paddingTop: token.spacings.top,
+      paddingBottom: token.spacings.bottom,
+      paddingLeft: token.spacings.left,
+      paddingRight: token.spacings.right,
+      margin: 0,
+      color: inputTypography.color,
+      fontFamily: inputTypography.fontFamily,
+      fontSize: inputTypography.fontSize,
+      fontWeight: inputTypography.fontWeight,
+      lineHeight: inputTypography.lineHeight,
     }
-    const _rightAdornmentProps = {
-      ...rightAdornmentsProps,
-      ref: setRightAdornmentsRef,
-      $token: token,
+
+    if (inputTypography.fontStyle) {
+      inputStyles.fontStyle = inputTypography.fontStyle
+    }
+    if (inputTypography.letterSpacing) {
+      inputStyles.letterSpacing = inputTypography.letterSpacing
+    }
+    if (inputTypography.textTransform) {
+      inputStyles.textTransform = inputTypography.textTransform as CSSProperties['textTransform']
+    }
+
+    // Build adornments typography styles
+    const adornmentTypography = entities.adornment.typography
+    const adornmentTypographyStyles: CSSProperties = {
+      margin: 0,
+      color: adornmentTypography.color,
+      fontFamily: adornmentTypography.fontFamily,
+      fontSize: adornmentTypography.fontSize,
+      fontWeight: adornmentTypography.fontWeight,
+      lineHeight: adornmentTypography.lineHeight,
+    }
+
+    if (adornmentTypography.fontStyle) {
+      adornmentTypographyStyles.fontStyle = adornmentTypography.fontStyle
+    }
+    if (adornmentTypography.letterSpacing) {
+      adornmentTypographyStyles.letterSpacing =
+        adornmentTypography.letterSpacing
+    }
+
+    // Build left adornments styles
+    const leftAdornmentsStyles: CSSProperties = {
+      top: token.spacings.top,
+      bottom: token.spacings.bottom,
+      paddingLeft: entities.adornment.spacings.left,
+      ...adornmentTypographyStyles,
+    }
+
+    // Build right adornments styles
+    const rightAdornmentsStyles: CSSProperties = {
+      top: token.spacings.top,
+      bottom: token.spacings.bottom,
+      paddingRight: entities.adornment.spacings.right,
+      ...adornmentTypographyStyles,
     }
 
     return (
-      // Not using <ThemeProvider> because of cascading styling messing with adornments
-      <Container {...containerProps}>
+      <div
+        className={`eds-input ${disabled ? 'eds-disabled' : ''} ${readOnly ? 'eds-readonly' : ''} ${className || ''}`}
+        style={containerStyles}
+      >
         {leftAdornments ? (
-          <LeftAdornments {..._leftAdornmentProps}>
+          <div
+            {...leftAdornmentsProps}
+            ref={setLeftAdornmentsRef}
+            className="eds-adornment eds-left"
+            style={{
+              ...leftAdornmentsStyles,
+              ...leftAdornmentsProps?.style,
+            }}
+          >
             {leftAdornments}
-          </LeftAdornments>
+          </div>
         ) : null}
-        <StyledInput
-          $paddingLeft={token.spacings.left}
-          $paddingRight={token.spacings.right}
-          {...inputProps}
+        <ElementComponent
+          ref={ref}
+          type={type}
+          disabled={disabled}
+          readOnly={readOnly}
+          className="eds-field"
+          style={inputStyles}
+          {...other}
         />
         {rightAdornments ? (
-          <RightAdornments {..._rightAdornmentProps}>
+          <div
+            {...rightAdornmentsProps}
+            ref={setRightAdornmentsRef}
+            className="eds-adornment eds-right"
+            style={{
+              ...rightAdornmentsStyles,
+              ...rightAdornmentsProps?.style,
+            }}
+          >
             {rightAdornments}
-          </RightAdornments>
+          </div>
         ) : null}
-      </Container>
+      </div>
     )
   })

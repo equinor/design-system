@@ -28,61 +28,6 @@ exports[`TextField Matches snapshot 1`] = `
   margin-right: 8px;
 }
 
-.c3 {
-  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
-  --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
-  position: relative;
-  height: 36px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  border: none;
-  box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
-  background: var(--eds-input-background,var(--eds_ui_background__light, rgba(247, 247, 247, 1)));
-  outline: 1px solid transparent;
-  outline-offset: 0px;
-}
-
-.c3:focus-within {
-  box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
-  outline-offset: 0px;
-}
-
-.c3>input {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.c4 {
-  width: 100%;
-  border: none;
-  background: transparent;
-  padding-left: 8px;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-bottom: 6px;
-  font-family: Equinor;
-  font-size: 1.000rem;
-  font-weight: 400;
-  letter-spacing: 0.025em;
-  line-height: 1.500em;
-  outline: none;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.c4::placeholder {
-  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
-}
-
-.c4:disabled {
-  color: var(--eds-input-color);
-  cursor: not-allowed;
-}
-
 <div
     class=""
     style="width: 100%;"
@@ -98,12 +43,13 @@ exports[`TextField Matches snapshot 1`] = `
       </span>
     </label>
     <div
-      class="c3"
+      class="eds-input   "
+      style="--eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); --placeholder-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --focus-outline-width: 2px; --focus-outline-style: solid; --focus-outline-color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)); --focus-outline-offset: 0px; height: 36px; width: 100%; box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); background: var(--eds-input-background, var(--eds_ui_background__light, rgba(247, 247, 247, 1))); outline: 1px solid transparent; outline-offset: 0px;"
     >
       <input
-        class="c4"
+        class="eds-field"
         id="textfield"
-        style="resize: none;"
+        style="padding: 6px 8px 6px 8px; margin: 0px; color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); font-family: Equinor; font-size: 1rem; font-weight: 400; line-height: 1.5em; letter-spacing: 0.025em;"
         type="text"
       />
     </div>

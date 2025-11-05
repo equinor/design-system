@@ -2,71 +2,14 @@
 
 exports[`Input Matches snapshot 1`] = `
 <DocumentFragment>
-  .c0 {
-  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
-  --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1));
-  position: relative;
-  height: 36px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  border: none;
-  box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
-  background: var(--eds-input-background,var(--eds_ui_background__light, rgba(247, 247, 247, 1)));
-  outline: 1px solid transparent;
-  outline-offset: 0px;
-  background: transparent;
-  box-shadow: none;
-}
-
-.c0:focus-within {
-  box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
-  outline-offset: 0px;
-}
-
-.c0>input {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.c1 {
-  width: 100%;
-  border: none;
-  background: transparent;
-  padding-left: 8px;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-bottom: 6px;
-  font-family: Equinor;
-  font-size: 1.000rem;
-  font-weight: 400;
-  letter-spacing: 0.025em;
-  line-height: 1.500em;
-  outline: none;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.c1::placeholder {
-  color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1));
-}
-
-.c1:disabled {
-  color: var(--eds-input-color);
-  cursor: not-allowed;
-}
-
-<div
-    class="c0"
-    readonly=""
+  <div
+    class="eds-input  eds-readonly "
+    style="--eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); --placeholder-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --focus-outline-width: 2px; --focus-outline-style: solid; --focus-outline-color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)); --focus-outline-offset: 0px; height: 36px; width: 100%; box-shadow: none; background: transparent; outline: 1px solid transparent; outline-offset: 0px;"
   >
     <input
-      class="c1"
+      class="eds-field"
       readonly=""
-      style="resize: none;"
+      style="padding: 6px 8px 6px 8px; margin: 0px; color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); font-family: Equinor; font-size: 1rem; font-weight: 400; line-height: 1.5em; letter-spacing: 0.025em;"
       type="text"
       value="input value"
     />
