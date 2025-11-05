@@ -178,7 +178,13 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
           </>
         ) : (
           <div>
-            <fieldset>
+            <fieldset
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+              }}
+            >
               <legend>What's your favourites?</legend>
               <CheckboxWrapper>
                 <Checkbox
@@ -213,15 +219,17 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
                 />
               </CheckboxWrapper>
             </fieldset>
-            <Checkbox
-              name="agree"
-              label="I understand that these preferences will not be saved*"
-              id="agree"
-              aria-invalid={errors.agree ? 'true' : 'false'}
-              aria-describedby="error-name-required"
-              aria-required
-              {...register('agree', { required: true })}
-            />
+            <div style={{ marginTop: '1rem' }}>
+              <Checkbox
+                name="agree"
+                label="I understand that these preferences will not be saved*"
+                id="agree"
+                aria-invalid={errors.agree ? 'true' : 'false'}
+                aria-describedby="error-name-required"
+                aria-required
+                {...register('agree', { required: true })}
+              />
+            </div>
             <span
               role="alert"
               id="error-name-required"
