@@ -780,9 +780,9 @@ export const SelectableSpace: Story = {
                     </strong>
                     <br />
                     <code>
-                      data-selectable-space="{size}"
+                      data-selectable-space=&quot;{size}&quot;
                       <br />
-                      data-space-proportions="{proportion}"
+                      data-space-proportions=&quot;{proportion}&quot;
                     </code>
                   </p>
                   <div
