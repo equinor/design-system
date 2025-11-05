@@ -6,7 +6,6 @@ import {
   checkbox_indeterminate,
 } from '@equinor/eds-icons'
 import { TypographyNext } from '../Typography'
-import { useEds } from '../EdsProvider'
 import type { CheckboxProps } from './Checkbox.new.types'
 import './checkbox.new.css'
 
@@ -26,7 +25,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     },
     ref,
   ) {
-    const { density } = useEds()
     const internalRef = useRef<HTMLInputElement>(null)
     const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
 
@@ -116,12 +114,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     if (label) {
       return (
-        <label
-          className={wrapperClasses}
-          style={style}
-          data-density={density}
-          {...labelProps}
-        >
+        <label className={wrapperClasses} style={style} {...labelProps}>
           {checkboxInput}
           <TypographyNext
             as="span"
@@ -140,7 +133,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <span className={wrapperClasses} style={style} data-density={density}>
+      <span className={wrapperClasses} style={style}>
         {checkboxInput}
       </span>
     )
