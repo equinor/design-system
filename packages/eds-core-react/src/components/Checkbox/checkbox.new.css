@@ -86,7 +86,17 @@
   outline-offset: var(--eds-spacing-inline-xs);
 }
 
-/* Compact mode focus */
+/* Compact density mode */
+[data-density='compact'] .checkbox__input-wrapper {
+  padding: var(--eds-spacing-inset-2-xs-squared);
+}
+
+[data-density='compact'] .checkbox__input {
+  /* Maintain 48px touch target in compact mode for accessibility */
+  transform: scale(calc(48px / 24px));
+}
+
+/* Density mode focus */
 [data-density='comfortable']
   .checkbox__input[data-focus-visible-added]:focus
   ~ .checkbox__icon,
@@ -162,14 +172,4 @@
 
 .checkbox__label--disabled {
   color: var(--eds-color-text-neutral-subtle);
-}
-
-/* Compact density mode */
-[data-density='compact'] .checkbox__input-wrapper {
-  padding: var(--eds-spacing-inset-2-xs-squared);
-}
-
-[data-density='compact'] .checkbox__input {
-  /* Maintain 48px touch target in compact mode for accessibility */
-  transform: scale(calc(48px / 24px));
 }
