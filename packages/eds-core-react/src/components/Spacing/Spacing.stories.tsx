@@ -90,7 +90,7 @@ export const SelectablePadding: Story = {
     const proportions = ['squished', 'squared', 'stretched'] as const
 
     return (
-      <div className="spacing-demo-selectable-container">
+      <div className="font-ui spacing-demo-selectable-container">
         <div>
           <h3 className="spacing-demo-heading">Selectable Padding</h3>
           <p className="spacing-demo-text">
@@ -147,7 +147,7 @@ export const DensityModes: Story = {
     const densities = ['spacious', 'comfortable'] as const
 
     return (
-      <div className="spacing-demo-selectable-container">
+      <div className="font-ui spacing-demo-selectable-container">
         <div>
           <h3 className="spacing-demo-heading">Density Modes</h3>
           <p className="spacing-demo-text">
@@ -204,7 +204,7 @@ export const DensityModes: Story = {
 
 export const GapUtilities: Story = {
   render: () => (
-    <div className="spacing-demo-container">
+    <div className="font-ui spacing-demo-container">
       <div>
         <h3 className="spacing-demo-heading">Selectable Gap</h3>
         <p className="spacing-demo-text">
@@ -303,7 +303,7 @@ export const GapUtilities: Story = {
 
 export const DirectionalGaps: Story = {
   render: () => (
-    <div className="spacing-demo-container">
+    <div className="font-ui spacing-demo-container">
       <div>
         <h3 className="spacing-demo-heading">Horizontal Gap Only</h3>
         <p className="spacing-demo-text">
@@ -352,7 +352,7 @@ export const DirectionalGaps: Story = {
 
 export const DirectionalPadding: Story = {
   render: () => (
-    <div className="spacing-demo-container">
+    <div className="font-ui spacing-demo-container">
       <div>
         <h3 className="spacing-demo-heading">Horizontal Padding Only</h3>
         <p className="spacing-demo-text">
@@ -386,7 +386,7 @@ export const DirectionalPadding: Story = {
 
 export const PracticalExamples: Story = {
   render: () => (
-    <div className="spacing-demo-container">
+    <div className="font-ui spacing-demo-container">
       <div>
         <h3 className="spacing-demo-heading">Button Group</h3>
         <div
