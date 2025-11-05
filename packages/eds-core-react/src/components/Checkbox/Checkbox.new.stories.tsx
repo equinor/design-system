@@ -185,7 +185,7 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
                 gap: '1rem',
               }}
             >
-              <legend>What's your favourites?</legend>
+              <legend>What&apos;s your favourites?</legend>
               <CheckboxWrapper>
                 <Checkbox
                   name="favourites"
@@ -246,7 +246,7 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
               Hey you! This field is required
             </span>
             <div style={{ padding: '1rem' }}>
-              <Button type="submit">I'm done</Button>
+              <Button type="submit">I&apos;m done</Button>
             </div>
           </div>
         )}
