@@ -305,9 +305,53 @@
   gap: var(--eds-spacing-icon-6xl-gap-horizontal);
 }
 
-[data-selectable-spacing], .selectable-spacing {
+[data-selectable-padding], .selectable-p {
   padding-inline: var(--eds-selectable-spacing-inline);
   padding-block: var(--eds-selectable-spacing-stack);
+}
+
+.selectable-px {
+  padding-inline: var(--eds-selectable-spacing-inline);
+}
+
+.selectable-py {
+  padding-block: var(--eds-selectable-spacing-stack);
+}
+
+.selectable-gap {
+  gap: var(--eds-spacing-inline-xs) var(--eds-spacing-stack-xs);
+}
+
+.selectable-gap-x {
+  gap: var(--eds-spacing-inline-xs);
+}
+
+.selectable-gap-y {
+  gap: var(--eds-spacing-stack-xs);
+}
+
+.container-gap {
+  gap: var(--eds-spacing-inline-md) var(--eds-spacing-stack-md);
+}
+
+.container-gap-x {
+  gap: var(--eds-spacing-inline-md);
+}
+
+.container-gap-y {
+  gap: var(--eds-spacing-stack-md);
+}
+
+.page-gap {
+  gap: var(--eds-spacing-inline-xl) var(--eds-spacing-stack-xl);
+}
+
+.page-gap-x {
+  gap: var(--eds-spacing-inline-xl);
+}
+
+.page-gap-y {
+  gap: var(--eds-spacing-stack-xl);
 }
 
 @property --font-size {
