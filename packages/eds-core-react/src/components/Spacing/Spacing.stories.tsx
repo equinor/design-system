@@ -28,6 +28,28 @@ These padding utilities respond to:
 - Selectable space size (\`data-selectable-space\`: xs/sm/md/lg/xl)
 - Space proportions (\`data-space-proportions\`: squished/squared/stretched)
 
+### Container Padding
+
+Padding utilities for container elements:
+
+* **\`.container-p\`**: Applies both horizontal and vertical padding
+* **\`.container-px\`**: Horizontal padding only
+* **\`.container-py\`**: Vertical padding only
+
+These padding utilities respond to:
+- Space proportions (\`data-space-proportions\`: squished/squared/stretched)
+
+### Page Padding
+
+Padding utilities for page-level elements:
+
+* **\`.page-p\`**: Applies both horizontal and vertical padding
+* **\`.page-px\`**: Horizontal padding only
+* **\`.page-py\`**: Vertical padding only
+
+These padding utilities respond to:
+- Space proportions (\`data-space-proportions\`: squished/squared/stretched)
+
 ### Gap Utilities
 
 Gap spacing for layout containers:
@@ -362,6 +384,96 @@ export const DirectionalPadding: Story = {
       </DemoSection>
     </div>
   ),
+}
+
+export const ContainerPadding: Story = {
+  render: () => {
+    const proportions = ['squished', 'squared', 'stretched'] as const
+
+    return (
+      <DemoSection
+        title="Container Padding"
+        description="The .container-p utility provides padding for container elements that responds to space proportions. Requires the data-space-proportions attribute."
+      >
+        <div className="flex flex-row flex-wrap items-start container-gap-x">
+          {proportions.map((proportion) => (
+            <div
+              key={proportion}
+              className="flex flex-col items-start selectable-gap-x"
+            >
+              <Paragraph className="mb-2">
+                <strong>
+                  {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
+                </strong>
+                <br />
+                <code>data-space-proportions=&quot;{proportion}&quot;</code>
+              </Paragraph>
+              <div
+                data-space-proportions={proportion}
+                className="container-p spacing-demo-box"
+              >
+                <Typography
+                  family="ui"
+                  size="md"
+                  baseline="grid"
+                  lineHeight="default"
+                  weight="normal"
+                  tracking="normal"
+                >
+                  Container
+                </Typography>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DemoSection>
+    )
+  },
+}
+
+export const PagePadding: Story = {
+  render: () => {
+    const proportions = ['squished', 'squared', 'stretched'] as const
+
+    return (
+      <DemoSection
+        title="Page Padding"
+        description="The .page-p utility provides padding for page-level elements that responds to space proportions. Requires the data-space-proportions attribute."
+      >
+        <div className="flex flex-row flex-wrap items-start container-gap-x">
+          {proportions.map((proportion) => (
+            <div
+              key={proportion}
+              className="flex flex-col items-start selectable-gap-x"
+            >
+              <Paragraph className="mb-2">
+                <strong>
+                  {proportion.charAt(0).toUpperCase() + proportion.slice(1)}
+                </strong>
+                <br />
+                <code>data-space-proportions=&quot;{proportion}&quot;</code>
+              </Paragraph>
+              <div
+                data-space-proportions={proportion}
+                className="page-p spacing-demo-box"
+              >
+                <Typography
+                  family="ui"
+                  size="md"
+                  baseline="grid"
+                  lineHeight="default"
+                  weight="normal"
+                  tracking="normal"
+                >
+                  Page
+                </Typography>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DemoSection>
+    )
+  },
 }
 
 export const PracticalExamples: Story = {

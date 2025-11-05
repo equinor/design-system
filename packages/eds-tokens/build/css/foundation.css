@@ -23,6 +23,19 @@
   gap: var(--eds-spacing-stack-xs);
 }
 
+.container-p {
+  padding-inline: var(--eds-spacing-proportions-md-inline);
+  padding-block: var(--eds-spacing-proportions-md-stack);
+}
+
+.container-px {
+  padding-inline: var(--eds-spacing-proportions-md-inline);
+}
+
+.container-py {
+  padding-block: var(--eds-spacing-proportions-md-stack);
+}
+
 .container-gap {
   gap: var(--eds-spacing-inline-md) var(--eds-spacing-stack-md);
 }
@@ -33,6 +46,19 @@
 
 .container-gap-y {
   gap: var(--eds-spacing-stack-md);
+}
+
+.page-p {
+  padding-inline: var(--eds-spacing-proportions-xl-inline);
+  padding-block: var(--eds-spacing-proportions-xl-stack);
+}
+
+.page-px {
+  padding-inline: var(--eds-spacing-proportions-xl-inline);
+}
+
+.page-py {
+  padding-block: var(--eds-spacing-proportions-xl-stack);
 }
 
 .page-gap {

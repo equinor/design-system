@@ -16,10 +16,22 @@
  * - .selectable-gap-x: Horizontal gap only
  * - .selectable-gap-y: Vertical gap only
  * 
+ * Container Padding:
+ * - .container-p: Padding for container elements
+ *   Responds to space proportions.
+ * - .container-px: Horizontal padding only
+ * - .container-py: Vertical padding only
+ * 
  * Container Gap:
  * - .container-gap: Gap spacing for container elements
  * - .container-gap-x: Horizontal gap only
  * - .container-gap-y: Vertical gap only
+ * 
+ * Page Padding:
+ * - .page-p: Padding for page-level elements
+ *   Responds to space proportions.
+ * - .page-px: Horizontal padding only
+ * - .page-py: Vertical padding only
  * 
  * Page Gap:
  * - .page-gap: Gap spacing for page-level elements
@@ -53,6 +65,19 @@
   gap: var(--eds-spacing-stack-xs);
 }
 
+.container-p {
+  padding-inline: var(--eds-spacing-proportions-md-inline);
+  padding-block: var(--eds-spacing-proportions-md-stack);
+}
+
+.container-px {
+  padding-inline: var(--eds-spacing-proportions-md-inline);
+}
+
+.container-py {
+  padding-block: var(--eds-spacing-proportions-md-stack);
+}
+
 .container-gap {
   gap: var(--eds-spacing-inline-md) var(--eds-spacing-stack-md);
 }
@@ -63,6 +88,19 @@
 
 .container-gap-y {
   gap: var(--eds-spacing-stack-md);
+}
+
+.page-p {
+  padding-inline: var(--eds-spacing-proportions-xl-inline);
+  padding-block: var(--eds-spacing-proportions-xl-stack);
+}
+
+.page-px {
+  padding-inline: var(--eds-spacing-proportions-xl-inline);
+}
+
+.page-py {
+  padding-block: var(--eds-spacing-proportions-xl-stack);
 }
 
 .page-gap {
