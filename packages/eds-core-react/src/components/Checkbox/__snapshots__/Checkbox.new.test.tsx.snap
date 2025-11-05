@@ -4,6 +4,7 @@ exports[`Checkbox.new Matches snapshot 1`] = `
 <DocumentFragment>
   <label
     class="checkbox"
+    data-density="comfortable"
   >
     <span
       class="checkbox__input-wrapper"
