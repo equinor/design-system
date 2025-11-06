@@ -16,8 +16,9 @@ COPY . ./
 # Install dependencies first
 RUN pnpm install --frozen-lockfile
 
-# Build CLI tools first, then reinstall to create binary links, then build variables & demo
-RUN pnpm --filter eds-demo run build
+# Build tokens (which is a required dependency for demo), then build demo
+RUN pnpm --filter @equinor/eds-tokens run build && \
+    pnpm --filter eds-demo run build
 
 FROM node:22.12.0-alpine AS runner
 WORKDIR /app
@@ -34,8 +35,9 @@ RUN npm install -g pnpm@10.15.0 && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini
 
-# Copy just the essential built files and node_modules
-COPY --chown="$USER":"$USER" --from=build /app/packages/eds-demo ./packages/eds-demo
+# Copy just the essential built files, workspace dependencies, and node_modules
+COPY --chown="$USER":"$USER" --from=build /app/apps/eds-demo ./apps/eds-demo
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens ./packages/eds-tokens
 COPY --chown="$USER":"$USER" --from=build /app/node_modules ./node_modules
 
 USER "$UID"
@@ -43,5 +45,5 @@ USER "$UID"
 EXPOSE 3000
 
 ENTRYPOINT ["/sbin/tini", "--"]
-WORKDIR /app/packages/eds-demo
+WORKDIR /app/apps/eds-demo
 CMD ["pnpm", "start"]

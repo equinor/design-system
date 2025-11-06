@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type Metadata from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@equinor/eds-tokens/css/variables'
 import './globals.css'
