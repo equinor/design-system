@@ -4,10 +4,19 @@
 /* Checkbox wrapper/label */
 .checkbox {
   display: inline-flex;
-  align-items: center;
-  gap: var(--eds-spacing-inline-sm);
+  flex-direction: column;
+  align-items: flex-start;
   cursor: pointer;
   position: relative;
+  /* Default hover size */
+  --checkbox-hover-size: 40px;
+}
+
+/* Label wrapper contains checkbox + label text */
+.checkbox__label-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eds-spacing-inline-sm);
 }
 
 /* Spacious density mode (default/comfortable in TypeScript) */
@@ -22,6 +31,10 @@
 
 .checkbox--disabled {
   cursor: not-allowed;
+}
+
+.checkbox--error {
+  cursor: pointer;
 }
 
 /* Checkbox input wrapper */
@@ -57,12 +70,20 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .checkbox__input-wrapper:hover::before {
+  .checkbox__label-wrapper:hover .checkbox__input-wrapper::before {
     background-color: var(--eds-color-bg-accent-fill-muted-default);
   }
 
-  .checkbox--disabled .checkbox__input-wrapper:hover::before {
+  .checkbox--disabled
+    .checkbox__label-wrapper:hover
+    .checkbox__input-wrapper::before {
     background-color: transparent;
+  }
+
+  .checkbox--error
+    .checkbox__label-wrapper:hover
+    .checkbox__input-wrapper::before {
+    background-color: var(--eds-color-bg-danger-fill-muted-default);
   }
 }
 
@@ -127,6 +148,10 @@
   fill: var(--eds-color-text-neutral-subtle);
 }
 
+.checkbox__icon--error {
+  fill: var(--eds-color-border-danger-strong);
+}
+
 /* Icon paths visibility */
 .checkbox__icon-path--checked {
   display: none;
@@ -178,4 +203,29 @@
 
 .checkbox__label--disabled {
   color: var(--eds-color-text-neutral-subtle);
+}
+
+.checkbox__label--error {
+  color: var(--eds-color-text-neutral-strong);
+}
+
+/* Error label container */
+.checkbox__error-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eds-spacing-inline-2-xs);
+  margin-left: calc(24px + var(--eds-spacing-inline-sm));
+}
+
+/* Error icon */
+.checkbox__error-icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--eds-color-text-danger-strong);
+  flex-shrink: 0;
+}
+
+/* Error text */
+.checkbox__error-text {
+  color: var(--eds-color-text-danger-strong);
 }

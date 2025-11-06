@@ -9,6 +9,8 @@ export type CheckboxProps = {
    * set the native element to indeterminate yourself.
    */
   indeterminate?: boolean
+  /** Error message to display below the checkbox. When set, the checkbox will be in error state. */
+  errorLabel?: string
   /** Props to apply to the label element (when label prop is provided) */
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>
 } & InputHTMLAttributes<HTMLInputElement>
