@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 /**
  * Hook to check if the component has mounted on the client.
@@ -22,12 +22,9 @@ import { useState, useEffect } from 'react'
 export function useMounted(): boolean {
   const [isMounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    // Use setTimeout to avoid synchronous setState in useEffect
-    const timeoutId = setTimeout(() => {
-      setMounted(true)
-    }, 0)
-    return () => clearTimeout(timeoutId)
+  useLayoutEffect(() => {
+    // eslint-disable-next-line
+    setMounted(true)
   }, [])
 
   return isMounted
