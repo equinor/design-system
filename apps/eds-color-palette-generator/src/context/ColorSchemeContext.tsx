@@ -19,19 +19,21 @@ export function ColorSchemeProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
-
-  useEffect(() => {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
     // Check for saved preference first, then system preference
-    const savedScheme = localStorageUtils.getColorScheme('light')
-    if (savedScheme) {
-      setColorScheme(savedScheme)
-    } else {
+    if (typeof window !== 'undefined') {
+      const savedScheme = localStorageUtils.getColorScheme('light')
+      if (savedScheme) {
+        return savedScheme
+      }
       // Check system preference on mount if no saved preference
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      setColorScheme(mediaQuery.matches ? 'dark' : 'light')
+      return mediaQuery.matches ? 'dark' : 'light'
     }
+    return 'light'
+  })
 
+  useEffect(() => {
     // Listen for system changes (but don't override saved preference automatically)
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handler = (e: MediaQueryListEvent) => {

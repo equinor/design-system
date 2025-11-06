@@ -39,10 +39,8 @@ export const downloadConfiguration = (
   a.click()
 
   // Clean up
-  setTimeout(() => {
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }, 0)
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 }
 
 /**
@@ -110,12 +108,10 @@ export const downloadColorTokens = (
   darkAnchor.click()
 
   // Clean up
-  setTimeout(() => {
-    document.body.removeChild(lightAnchor)
-    document.body.removeChild(darkAnchor)
-    URL.revokeObjectURL(lightUrl)
-    URL.revokeObjectURL(darkUrl)
-  }, 0)
+  document.body.removeChild(lightAnchor)
+  document.body.removeChild(darkAnchor)
+  URL.revokeObjectURL(lightUrl)
+  URL.revokeObjectURL(darkUrl)
 }
 
 /**
@@ -199,8 +195,6 @@ export const downloadDesignSystemCSS = (
   a.click()
 
   // Clean up
-  setTimeout(() => {
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }, 0)
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 }

@@ -136,14 +136,17 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
 
-  packages/eds-color-palette-generator:
+  apps/eds-color-palette-generator:
     dependencies:
       '@equinor/eds-tailwind':
         specifier: workspace:^
-        version: link:../eds-tailwind
+        version: link:../../packages/eds-tailwind
       '@equinor/eds-tokens':
         specifier: workspace:^
-        version: link:../eds-tokens
+        version: link:../../packages/eds-tokens
+      '@equinor/eds-utils':
+        specifier: workspace:^
+        version: link:../../packages/eds-utils
       colorjs.io:
         specifier: ^0.5.2
         version: 0.5.2
@@ -163,6 +166,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3.3.1
         version: 3.3.1
+      '@next/eslint-plugin-next':
+        specifier: 16.0.0
+        version: 16.0.0
       '@playwright/test':
         specifier: ^1.56.1
         version: 1.56.1
@@ -746,7 +752,7 @@ importers:
     devDependencies:
       '@equinor/eds-color-palette-generator':
         specifier: workspace:^
-        version: link:../eds-color-palette-generator
+        version: link:../../apps/eds-color-palette-generator
       '@equinor/eds-tokens-build':
         specifier: workspace:^
         version: link:../eds-tokens-build
@@ -11093,7 +11099,7 @@ snapshots:
 
   '@babel/generator@7.28.3':
     dependencies:
-      '@babel/parser': 7.28.3
+      '@babel/parser': 7.28.5
       '@babel/types': 7.28.2
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.30
@@ -11914,7 +11920,7 @@ snapshots:
   '@babel/template@7.27.2':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/parser': 7.28.3
+      '@babel/parser': 7.28.5
       '@babel/types': 7.28.2
 
   '@babel/traverse@7.28.3':
@@ -11949,7 +11955,7 @@ snapshots:
       '@babel/parser': 7.28.5
       '@babel/template': 7.27.2
       '@babel/types': 7.28.5
-      debug: 4.4.1
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -13374,7 +13380,7 @@ snapshots:
   '@eslint/eslintrc@3.3.1':
     dependencies:
       ajv: 6.12.6
-      debug: 4.4.1
+      debug: 4.4.3
       espree: 10.4.0
       globals: 14.0.0
       ignore: 5.3.2
@@ -17882,7 +17888,7 @@ snapshots:
       get-tsconfig: 4.10.1
       is-bun-module: 2.0.0
       stable-hash: 0.0.5
-      tinyglobby: 0.2.14
+      tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.38.0(jiti@2.6.1))
@@ -18079,7 +18085,7 @@ snapshots:
   eslint-plugin-react-hooks@7.0.1(eslint@9.38.0(jiti@2.6.1)):
     dependencies:
       '@babel/core': 7.28.5
-      '@babel/parser': 7.28.4
+      '@babel/parser': 7.28.5
       eslint: 9.38.0(jiti@2.6.1)
       hermes-parser: 0.25.1
       zod: 4.1.12
@@ -19706,7 +19712,7 @@ snapshots:
       jest-message-util: 30.2.0
       jest-util: 30.2.0
       pretty-format: 30.2.0
-      semver: 7.7.2
+      semver: 7.7.3
       synckit: 0.11.11
     transitivePeerDependencies:
       - supports-color
@@ -20101,7 +20107,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.2
+      semver: 7.7.3
 
   make-error@1.3.6: {}
 
@@ -22530,7 +22536,7 @@ snapshots:
     dependencies:
       '@img/colour': 1.0.0
       detect-libc: 2.1.2
-      semver: 7.7.2
+      semver: 7.7.3
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.34.4
       '@img/sharp-darwin-x64': 0.34.4
