@@ -4,6 +4,7 @@ import {
   checkbox,
   checkbox_outline,
   checkbox_indeterminate,
+  warning_outlined,
 } from '@equinor/eds-icons'
 import { TypographyNext } from '../Typography'
 import type { CheckboxProps } from './Checkbox.new.types'
@@ -18,6 +19,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       label,
       disabled = false,
       indeterminate = false,
+      errorLabel,
       className,
       style,
       labelProps,
@@ -34,20 +36,25 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       }
     }, [indeterminate, inputRef])
 
+    const hasError = !!errorLabel
+
     const wrapperClasses = classNames(
       'checkbox',
       disabled && 'checkbox--disabled',
+      hasError && 'checkbox--error',
       className,
     )
 
     const labelClasses = classNames(
       'checkbox__label',
       disabled && 'checkbox__label--disabled',
+      hasError && 'checkbox__label--error',
     )
 
     const iconClasses = classNames(
       'checkbox__icon',
       disabled && 'checkbox__icon--disabled',
+      hasError && 'checkbox__icon--error',
     )
 
     const checkboxInput = (
@@ -56,6 +63,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           aria-checked={indeterminate ? 'mixed' : rest.checked}
           aria-disabled={disabled || undefined}
+          aria-invalid={hasError || undefined}
           className="checkbox__input"
           disabled={disabled}
           ref={inputRef}
@@ -115,19 +123,53 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     if (label) {
       return (
         <label className={wrapperClasses} style={style} {...labelProps}>
-          {checkboxInput}
-          <TypographyNext
-            as="span"
-            family="ui"
-            size="lg"
-            baseline="center"
-            lineHeight="squished"
-            weight="normal"
-            tracking="normal"
-            className={labelClasses}
-          >
-            {label}
-          </TypographyNext>
+          <span className="checkbox__label-wrapper">
+            {checkboxInput}
+            <TypographyNext
+              as="span"
+              family="ui"
+              size="lg"
+              baseline="center"
+              lineHeight="squished"
+              weight="normal"
+              tracking="normal"
+              className={labelClasses}
+            >
+              {label}
+            </TypographyNext>
+          </span>
+          {errorLabel && (
+            <span className="checkbox__error-label">
+              <svg
+                className="checkbox__error-icon"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d={
+                    Array.isArray(warning_outlined.svgPathData)
+                      ? warning_outlined.svgPathData.join(' ')
+                      : warning_outlined.svgPathData
+                  }
+                />
+              </svg>
+              <TypographyNext
+                as="span"
+                family="ui"
+                size="sm"
+                baseline="center"
+                lineHeight="squished"
+                weight="normal"
+                tracking="normal"
+                className="checkbox__error-text"
+              >
+                {errorLabel}
+              </TypographyNext>
+            </span>
+          )}
         </label>
       )
     }
