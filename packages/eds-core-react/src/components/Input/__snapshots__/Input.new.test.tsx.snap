@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Input (New) Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="eds-input eds-input--readonly"
+    style="--eds-input-adornment-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --eds-input-color: var(--eds_text__static_icons__default, rgba(61, 61, 61, 1)); --eds-input-placeholder-color: var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --eds-input-height: 36px; --eds-input-width: 100%; --eds-input-background: var(--eds_ui_background__light, rgba(247, 247, 247, 1)); --eds-input-box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary, rgba(111, 111, 111, 1)); --eds-input-outline-width: 1px; --eds-input-outline-color: transparent; --eds-input-outline-style: solid; --eds-input-outline-offset: 0px; --eds-input-focus-outline-width: 2px; --eds-input-focus-outline-color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1)); --eds-input-focus-outline-style: solid; --eds-input-focus-outline-offset: 0px; --eds-input-readonly-background: transparent; --eds-input-readonly-box-shadow: none;"
+  >
+    <input
+      class="eds-field"
+      readonly=""
+      style="font-family: Equinor; font-size: 1rem; font-weight: 400; line-height: 1.5em; padding: 6px 8px 6px 8px; resize: none;"
+      type="text"
+      value="input value"
+    />
+  </div>
+</DocumentFragment>
+`;

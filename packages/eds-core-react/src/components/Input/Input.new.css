@@ -1,0 +1,81 @@
+@layer eds-components {
+  /* Container */
+  .eds-input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    height: var(--eds-input-height);
+    width: var(--eds-input-width);
+    background: var(--eds-input-background);
+    border: none;
+    box-shadow: var(--eds-input-box-shadow);
+    outline: var(--eds-input-outline-width) var(--eds-input-outline-style)
+      var(--eds-input-outline-color);
+    outline-offset: var(--eds-input-outline-offset);
+  }
+
+  /* Container states */
+  .eds-input:focus-within {
+    --eds-input-adornment-color: var(--eds-input-adornment-focus-color);
+    box-shadow: none;
+    outline: var(--eds-input-focus-outline-width)
+      var(--eds-input-focus-outline-style) var(--eds-input-focus-outline-color);
+    outline-offset: var(--eds-input-focus-outline-offset);
+  }
+
+  .eds-input--disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .eds-input--readonly {
+    background: var(--eds-input-readonly-background);
+    box-shadow: var(--eds-input-readonly-box-shadow);
+  }
+
+  /* Input/Textarea field */
+  .eds-field {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: var(--eds-input-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .eds-field::placeholder {
+    color: var(--eds-input-placeholder-color);
+  }
+
+  /* Disabled field - override browser defaults for consistent styling */
+  .eds-field:disabled {
+    color: var(--eds-input-color);
+    cursor: not-allowed;
+    opacity: 1;
+    -webkit-text-fill-color: var(--eds-input-color);
+  }
+
+  /* Disabled placeholder - prevent WebKit from changing color */
+  .eds-field:disabled::placeholder {
+    -webkit-text-fill-color: var(--eds-input-placeholder-color);
+  }
+
+  /* Adornments (icons, text, buttons on left/right) */
+  .eds-adornment {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    color: var(--eds-input-adornment-color);
+  }
+
+  .eds-adornment--left {
+    left: 0;
+  }
+
+  .eds-adornment--right {
+    right: 0;
+  }
+}
