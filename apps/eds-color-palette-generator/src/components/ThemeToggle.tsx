@@ -3,10 +3,12 @@
 import { useCallback } from 'react'
 import type { KeyboardEvent } from 'react'
 import { useColorScheme } from '@/context/ColorSchemeContext'
+import { useMounted } from '@/hooks/useMounted'
 import { Sun, Moon } from 'lucide-react'
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme()
+  const isMounted = useMounted()
 
   const selectLight = useCallback(
     () => setColorScheme('light'),
@@ -24,6 +26,40 @@ export function ThemeToggle() {
       e.preventDefault()
       selectDark()
     }
+  }
+
+  // Return a placeholder with the same structure during SSR to avoid layout shift
+  if (!isMounted) {
+    return (
+      <div
+        role="radiogroup"
+        aria-label="Theme"
+        className="inline-flex rounded-lg bg-neutral-fill-muted-default/40  border-neutral-subtle"
+      >
+        <button
+          type="button"
+          role="radio"
+          aria-checked={false}
+          aria-label="Light theme"
+          className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors text-default"
+          disabled
+        >
+          <Sun className="w-4 h-4" />
+          <span>Light</span>
+        </button>
+        <button
+          type="button"
+          role="radio"
+          aria-checked={false}
+          aria-label="Dark theme"
+          className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors text-default"
+          disabled
+        >
+          <Moon className="w-4 h-4" />
+          <span>Dark</span>
+        </button>
+      </div>
+    )
   }
 
   return (

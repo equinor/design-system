@@ -2,6 +2,7 @@
 
 import { generateColorScale } from '../utils/color'
 import { useState, useEffect, useMemo } from 'react'
+import { useMounted } from '@/hooks/useMounted'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
@@ -238,8 +239,7 @@ export default function App() {
     colorScheme === 'light' ? lightScalesMemo : darkScalesMemo
 
   // Client flag to avoid hydration mismatch
-  const [isClient, setIsClient] = useState(false)
-  useEffect(() => setIsClient(true), [])
+  const isMounted = useMounted()
 
   // Determine if configuration differs from defaults (mean, stdDev, light/dark values, colors)
   const isConfigDirty = useMemo(() => {
@@ -263,7 +263,7 @@ export default function App() {
   ])
 
   const contrastSummary = useMemo(() => {
-    if (!isClient || !showContrast) {
+    if (!isMounted || !showContrast) {
       return { passed: 0, total: 0, percentage: 0 }
     }
     // Only depend on scales (colors), not names or other metadata
@@ -273,7 +273,7 @@ export default function App() {
       contrastMethod,
       enabled: showContrast,
     })
-  }, [currentScalesOnly, contrastMethod, showContrast, isClient])
+  }, [currentScalesOnly, contrastMethod, showContrast, isMounted])
 
   return (
     <div className="min-h-screen bg-canvas text-default">
@@ -341,39 +341,45 @@ export default function App() {
         </div>
 
         {/* Render color scales dynamically */}
-        <section className="mt-6 space-y-6 mx-auto max-w-7xl px-6">
-          {currentColorScales.map((colorData, index) => (
-            <div
-              key={`scale-wrap-${index}`}
-              className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
-            >
-              <ColorScale
-                colors={colorData.scale}
-                showContrast={showContrast}
-                contrastMethod={contrastMethod}
-                colorName={colorData.name}
-                baseColor={colors[index]?.value}
-                testId={`color-scale-${index}`}
-                onRename={(name) => updateColorName(index, name)}
-                onChangeValue={(value: string) =>
-                  updateColorValue(index, value)
-                }
-                onRemove={() => removeColor(index)}
-              />
-            </div>
-          ))}
-        </section>
+        {isMounted && (
+          <>
+            <section className="mt-6 space-y-6 mx-auto max-w-7xl px-6">
+              {currentColorScales.map((colorData, index) => (
+                <div
+                  key={`scale-wrap-${index}`}
+                  className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
+                >
+                  <ColorScale
+                    colors={colorData.scale}
+                    showContrast={showContrast}
+                    contrastMethod={contrastMethod}
+                    colorName={colorData.name}
+                    baseColor={colors[index]?.value}
+                    testId={`color-scale-${index}`}
+                    onRename={(name) => updateColorName(index, name)}
+                    onChangeValue={(value: string) =>
+                      updateColorValue(index, value)
+                    }
+                    onRemove={() => removeColor(index)}
+                  />
+                </div>
+              ))}
+            </section>
 
-        {/* Add new color button */}
-        <div className="my-8 mx-auto max-w-7xl px-6 print-hide">
-          <button
-            type="button"
-            onClick={() => addColor({ name: 'New colour', value: '#888888' })}
-            className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
-          >
-            Add colour
-          </button>
-        </div>
+            {/* Add new color button */}
+            <div className="my-8 mx-auto max-w-7xl px-6 print-hide">
+              <button
+                type="button"
+                onClick={() =>
+                  addColor({ name: 'New colour', value: '#888888' })
+                }
+                className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
+              >
+                Add colour
+              </button>
+            </div>
+          </>
+        )}
       </main>
 
       <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3 print-hide">
@@ -390,7 +396,7 @@ export default function App() {
           onConfigUpload={handleConfigUpload}
         />
 
-        {isClient && showContrast && contrastSummary.total > 0 && (
+        {isMounted && showContrast && contrastSummary.total > 0 && (
           <>
             <div
               role="status"
@@ -401,7 +407,7 @@ export default function App() {
             </div>
           </>
         )}
-        {isClient && isConfigDirty && (
+        {isMounted && isConfigDirty && (
           <button
             type="button"
             onClick={resetConfiguration}

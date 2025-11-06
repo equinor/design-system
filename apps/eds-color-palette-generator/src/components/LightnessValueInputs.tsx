@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { useMounted } from '@/hooks/useMounted'
 
 type LightnessValueInputsProps = {
   colorScheme: 'light' | 'dark'
@@ -13,14 +14,10 @@ export const LightnessValueInputs = ({
   darkModeValues,
   updateLightnessValue,
 }: LightnessValueInputsProps) => {
-  const [isClient, setIsClient] = useState(false)
+  const isMounted = useMounted()
   const values = colorScheme === 'light' ? lightModeValues : darkModeValues
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  if (!isClient) {
+  if (!isMounted) {
     return null
   }
 

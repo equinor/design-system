@@ -14,7 +14,7 @@ type DisplayOptionsPanelProps = {
   setColorFormat: React.Dispatch<React.SetStateAction<ColorFormat>>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 export const DisplayOptionsPanel = ({
   showContrast,
   showLightnessInputs,

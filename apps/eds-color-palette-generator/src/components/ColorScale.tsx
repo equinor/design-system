@@ -4,7 +4,8 @@ import { getStepIndex } from '@/config/helpers'
 import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { Trash, Pipette } from 'lucide-react'
 import Color from 'colorjs.io'
-import React, { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useRef, useMemo, useEffect } from 'react'
+import { useMounted } from '@/hooks/useMounted'
 
 type ColorScaleProps = {
   colors: string[]
@@ -88,7 +89,7 @@ function ColorScaleBase({
   testId,
 }: ColorScaleProps) {
   // State to track client-side rendering for contrast calculations
-  const [isClient, setIsClient] = useState(false)
+  const isMounted = useMounted()
 
   // State to track the active dialog (index of the color) - only one can be active at a time
   const [activeDialog, setActiveDialog] = useState<number | null>(null)
@@ -126,6 +127,7 @@ function ColorScaleBase({
         testId?: string
       }) {
         const colorInputRef = useRef<HTMLInputElement | null>(null)
+        const prevBaseColorRef = useRef<string | undefined>(baseColor)
         const [localHex, setLocalHex] = useState(baseColor || '#000000')
         const [localColorInput, setLocalColorInput] = useState(
           baseColor || '#000000',
@@ -133,10 +135,18 @@ function ColorScaleBase({
         const [isValidColor, setIsValidColor] = useState(true)
         const debounceRef = useRef<number | null>(null)
 
+        // Update local state when baseColor prop changes, but avoid synchronous setState
         useEffect(() => {
-          setLocalHex(baseColor || '#000000')
-          setLocalColorInput(baseColor || '#000000')
-          setIsValidColor(true)
+          if (prevBaseColorRef.current !== baseColor) {
+            prevBaseColorRef.current = baseColor
+            // Use setTimeout to avoid synchronous setState warning
+            const timeoutId = setTimeout(() => {
+              setLocalHex(baseColor || '#000000')
+              setLocalColorInput(baseColor || '#000000')
+              setIsValidColor(true)
+            }, 0)
+            return () => clearTimeout(timeoutId)
+          }
         }, [baseColor])
 
         // Reusable debounced color change handler
@@ -256,11 +266,6 @@ function ColorScaleBase({
     )
   }, [])
 
-  // Set client-side flag after hydration
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
   // Styles are now imported from the dialog.css file
 
   // Toggle dialog visibility
@@ -374,7 +379,7 @@ function ColorScaleBase({
   }, [colors, contrastMethod])
 
   // Only render on client to avoid hydration issues
-  if (!isClient) {
+  if (!isMounted) {
     return null
   }
 
