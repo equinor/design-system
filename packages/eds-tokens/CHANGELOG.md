@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.4...eds-tokens@v2.0.0) (2025-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200))
+* **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173))
+
+### ✨ Added
+
+* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200)) ([7621866](https://github.com/equinor/design-system/commit/7621866194f67d4118167285e9209c5a5194217c))
+* **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173)) ([0a20351](https://github.com/equinor/design-system/commit/0a20351e68d61334f877bc6ef0a05fcfc1c99c95))
+
 ## [1.1.4](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.3...eds-tokens@v1.1.4) (2025-10-29)
 
 
