@@ -1,17 +1,9 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.203.0/containers/typescript-node
+// For configuration details, see https://containers.dev/implementors/json_reference/
 {
   "name": "Node.js & TypeScript",
   "runArgs": ["--init"],
-  "build": {
-    "dockerfile": "Dockerfile",
-    // Update 'VARIANT' to pick a Node version: 16, 14, 12.
-    // Append -bullseye or -buster to pin to an OS version.
-    // Use -bullseye variants on local on arm64/Apple Silicon.
-    "args": {
-      "VARIANT": "22-bullseye"
-    }
-  },
+  // https://github.com/devcontainers/images/tree/main/src/typescript-node
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bullseye",
   "customizations": {
     "vscode": {
       "settings": {
@@ -70,15 +62,13 @@
       "onAutoForward": "notify"
     }
   },
-  "onCreateCommand": "pnpm install && pnpm recursive install --filter ./packages",
+  "onCreateCommand": "npm install -g pnpm gitmoji-cli && pnpm install && pnpm recursive install --filter ./packages",
   "remoteUser": "node",
   "features": {
-    "docker-in-docker": "20.10",
-    "docker-from-docker": "20.10",
-    "git": "latest",
+    "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {},
     "github-cli": "latest",
-    "ghcr.io/devcontainers/features/sshd:1": {
-      "version": "latest"
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22.12.0"
     }
   }
 }
