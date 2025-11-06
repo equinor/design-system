@@ -5,7 +5,7 @@ import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { Trash, Pipette } from 'lucide-react'
 import Color from 'colorjs.io'
 import React, { useState, useRef, useMemo, useEffect } from 'react'
-import { useMounted } from '@/hooks/useMounted'
+import { useIsMounted } from '@equinor/eds-utils'
 
 type ColorScaleProps = {
   colors: string[]
@@ -89,7 +89,7 @@ function ColorScaleBase({
   testId,
 }: ColorScaleProps) {
   // State to track client-side rendering for contrast calculations
-  const isMounted = useMounted()
+  const isMounted = useIsMounted()
 
   // State to track the active dialog (index of the color) - only one can be active at a time
   const [activeDialog, setActiveDialog] = useState<number | null>(null)

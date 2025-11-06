@@ -144,6 +144,9 @@ importers:
       '@equinor/eds-tokens':
         specifier: workspace:^
         version: link:../../packages/eds-tokens
+      '@equinor/eds-utils':
+        specifier: workspace:^
+        version: link:../../packages/eds-utils
       colorjs.io:
         specifier: ^0.5.2
         version: 0.5.2

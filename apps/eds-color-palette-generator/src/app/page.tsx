@@ -2,7 +2,7 @@
 
 import { generateColorScale } from '../utils/color'
 import { useState, useEffect, useMemo } from 'react'
-import { useMounted } from '@/hooks/useMounted'
+import { useIsMounted } from '@equinor/eds-utils'
 import { ColorScale } from '@/components/ColorScale'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { HeaderPanel } from '@/components/HeaderPanel'
@@ -239,7 +239,7 @@ export default function App() {
     colorScheme === 'light' ? lightScalesMemo : darkScalesMemo
 
   // Client flag to avoid hydration mismatch
-  const isMounted = useMounted()
+  const isMounted = useIsMounted()
 
   // Determine if configuration differs from defaults (mean, stdDev, light/dark values, colors)
   const isConfigDirty = useMemo(() => {

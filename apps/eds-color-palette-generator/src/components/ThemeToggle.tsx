@@ -3,12 +3,12 @@
 import { useCallback } from 'react'
 import type { KeyboardEvent } from 'react'
 import { useColorScheme } from '@/context/ColorSchemeContext'
-import { useMounted } from '@/hooks/useMounted'
+import { useIsMounted } from '@equinor/eds-utils'
 import { Sun, Moon } from 'lucide-react'
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme()
-  const isMounted = useMounted()
+  const isMounted = useIsMounted()
 
   const selectLight = useCallback(
     () => setColorScheme('light'),

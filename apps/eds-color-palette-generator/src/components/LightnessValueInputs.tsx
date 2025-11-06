@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMounted } from '@/hooks/useMounted'
+import { useIsMounted } from '@equinor/eds-utils'
 
 type LightnessValueInputsProps = {
   colorScheme: 'light' | 'dark'
@@ -14,7 +14,7 @@ export const LightnessValueInputs = ({
   darkModeValues,
   updateLightnessValue,
 }: LightnessValueInputsProps) => {
-  const isMounted = useMounted()
+  const isMounted = useIsMounted()
   const values = colorScheme === 'light' ? lightModeValues : darkModeValues
 
   if (!isMounted) {
