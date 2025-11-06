@@ -8,14 +8,13 @@ Screen size is determined by the device and the user's window size. The EDS grid
 
 ### Grid layouts
 
--   It is the responsibility of the designer to define a maximum width and choose the correct grid.
+-   It is the responsibility of the designer to define a maximum width and choose the correct grid
+-   It is up to the designer to make sure the design will scale correctly on all sizes. Start with a viewport that is the most common for the users. Make sure to test that the content will fit at smaller and larger viewports
+-   It is the responsibility of the developers to implement the maximum width and use the grid as designed
     
--   It is up to the designer to make sure the design will scale correctly on all sizes. Start with a viewport that is the most common for the users. Make sure to test that the content will fit at smaller and larger viewports.
-    
--   It is the responsibility of the developers to implement the maximum width and use the grid as designed.
-    
-
-Tip: _Always remember to test designs and code by scaling the screen size or changing the orientation of the device._
+:::tip Tip
+Always remember to test designs and code by scaling the screen size or changing the orientation of the device.
+:::
 
 ### Grid influencers
 
@@ -74,23 +73,13 @@ Grid gutters are the space in between the columns of the grid.
     -   Gutters are set to 8px.
         
 
--   Visit  for more details on on how to use the grid together with components.
-
-
+:::info More information
+Visit [grid patterns](../patterns.md#grid-system-and-spacing) for more details on on how to use the grid together with components.
+:::
 
 # Design
 
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Grid
-
-A grid adapts to screen size and orientation to help keep layouts consistent.
-
-## Figma
-
-### How to add
+## Implementation in Figma
 
 1.  Click `A` or `F`on the keyboard to open the predefined list of frame sizes.
     
