@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/equinor/design-system/compare/eds-core-react@v1.1.0...eds-core-react@v2.0.0) (2025-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200))
+* **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173))
+* **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134))
+
+### ✨ Added
+
+* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200)) ([7621866](https://github.com/equinor/design-system/commit/7621866194f67d4118167285e9209c5a5194217c))
+* **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173)) ([0a20351](https://github.com/equinor/design-system/commit/0a20351e68d61334f877bc6ef0a05fcfc1c99c95))
+
+
+### 🐛 Fixed
+
+* Corrected tsconfig.build.json to ensure proper type declaration structure ([#4172](https://github.com/equinor/design-system/issues/4172)) ([f1d07e2](https://github.com/equinor/design-system/commit/f1d07e24298a939d22a7832c8d1107f8d8d0a7de))
+* **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134)) ([72c5f78](https://github.com/equinor/design-system/commit/72c5f78c1eba95beeb1e4363b3808168f3683745))
+* **eds-core-react:** 🐛 Autocomplete - should start at selected index and preserve scroll position ([#3996](https://github.com/equinor/design-system/issues/3996)) ([d5d51a7](https://github.com/equinor/design-system/commit/d5d51a790d5f2fe98c747e7ff9b37041997d44c6))
+* update stories to use callback refs instead ([#4195](https://github.com/equinor/design-system/issues/4195)) ([3492802](https://github.com/equinor/design-system/commit/34928027b8b486e2d22fc41cae6bdd8a50693da6))
+
+
+### 🔧 Chores
+
+* ensure index.json is properly overwritten during Storybook deployment ([#4179](https://github.com/equinor/design-system/issues/4179)) ([3950502](https://github.com/equinor/design-system/commit/395050206c908dd144e906b581242d6499388748))
+
 ## [1.1.0](https://github.com/equinor/design-system/compare/eds-core-react@v1.0.2...eds-core-react@v1.1.0) (2025-10-29)
 
 
