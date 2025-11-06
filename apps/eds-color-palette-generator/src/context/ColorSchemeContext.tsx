@@ -19,7 +19,6 @@ export function ColorSchemeProvider({
 }: {
   children: React.ReactNode
 }) {
-  // Initialize state with a function to avoid synchronous setState in useEffect
   const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
     // Check for saved preference first, then system preference
     if (typeof window !== 'undefined') {

@@ -28,7 +28,6 @@ export function ThemeToggle() {
     }
   }
 
-  // Return a placeholder with the same structure during SSR to avoid layout shift
   if (!isMounted) {
     return (
       <div
