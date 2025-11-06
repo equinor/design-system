@@ -88,7 +88,6 @@ function ColorScaleBase({
   onRemove,
   testId,
 }: ColorScaleProps) {
-  // State to track client-side rendering for contrast calculations
   const isMounted = useIsMounted()
 
   // State to track the active dialog (index of the color) - only one can be active at a time
@@ -135,17 +134,12 @@ function ColorScaleBase({
         const [isValidColor, setIsValidColor] = useState(true)
         const debounceRef = useRef<number | null>(null)
 
-        // Update local state when baseColor prop changes, but avoid synchronous setState
         useEffect(() => {
           if (prevBaseColorRef.current !== baseColor) {
             prevBaseColorRef.current = baseColor
-            // Use setTimeout to avoid synchronous setState warning
-            const timeoutId = setTimeout(() => {
-              setLocalHex(baseColor || '#000000')
-              setLocalColorInput(baseColor || '#000000')
-              setIsValidColor(true)
-            }, 0)
-            return () => clearTimeout(timeoutId)
+            setLocalHex(baseColor || '#000000')
+            setLocalColorInput(baseColor || '#000000')
+            setIsValidColor(true)
           }
         }, [baseColor])
 
