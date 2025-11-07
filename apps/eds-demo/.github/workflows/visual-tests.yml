@@ -3,12 +3,12 @@ name: Visual Regression Tests
 on:
   pull_request:
     paths:
-      - "packages/eds-demo/**"
+      - "apps/eds-demo/**"
   push:
     branches:
       - main
     paths:
-      - "packages/eds-demo/**"
+      - "apps/eds-demo/**"
 
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/eds-demo
+        working-directory: apps/eds-demo
 
     steps:
       - name: Checkout code
@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: packages/eds-demo/playwright-report/
+          path: apps/eds-demo/playwright-report/
           retention-days: 30
 
       - name: Upload test failures
@@ -55,5 +55,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: packages/eds-demo/test-results/
+          path: apps/eds-demo/test-results/
           retention-days: 30
