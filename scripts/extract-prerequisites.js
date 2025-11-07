@@ -42,8 +42,18 @@ function extractPrerequisites() {
     console.warn('Could not read .nvmrc, using default Node.js version')
   }
 
+  // Extract pnpm version from root package.json packageManager field
+  let pnpmVersion = '10.0.0'
+  if (rootPkg?.packageManager) {
+    const pnpmMatch = rootPkg.packageManager.match(/pnpm@([\d.]+)/)
+    if (pnpmMatch) {
+      pnpmVersion = pnpmMatch[1]
+    }
+  }
+
   const prerequisites = {
     nodejs: nodeVersion,
+    pnpm: pnpmVersion,
     react: 'Unknown',
     typescript: 'Unknown',
     reactDom: 'Unknown',
@@ -80,13 +90,21 @@ function generatePrerequisitesDoc(prerequisites) {
   return `Node.js ${prerequisites.nodejs}+, React ${prerequisites.react}+, TypeScript ${prerequisites.typescript}+ (recommended)`
 }
 
+function generateReadmePrerequisites(prerequisites) {
+  return `* **Node.js** — Version ${prerequisites.nodejs} or compatible
+* **pnpm** — Version ${prerequisites.pnpm} or higher (install globally with \`npm install -g pnpm@${prerequisites.pnpm}\`)
+* **Git** — For version control`
+}
+
 // Main execution
 if (require.main === module) {
+  const rootDir = path.resolve(__dirname, '..')
   const prerequisites = extractPrerequisites()
 
   console.log('Extracted Prerequisites:')
   console.log('=======================')
-  console.log(`Node.js: ${prerequisites.nodejs}+`)
+  console.log(`Node.js: ${prerequisites.nodejs}`)
+  console.log(`pnpm: ${prerequisites.pnpm}+`)
   console.log(`React: ${prerequisites.react}+`)
   console.log(`React DOM: ${prerequisites.reactDom}+`)
   console.log(`TypeScript: ${prerequisites.typescript}+ (recommended)`)
@@ -94,16 +112,61 @@ if (require.main === module) {
   console.log('For documentation:')
   console.log(generatePrerequisitesDoc(prerequisites))
 
-  // Optionally write to a JSON file for Docusaurus to import
-  const outputPath = path.join(
-    __dirname,
-    '..',
-    'apps',
-    'design-system-docs',
-    'prerequisites.json',
-  )
+  // Write prerequisites to JSON file
+  const outputPath = path.join(rootDir, 'prerequisites.json')
   fs.writeFileSync(outputPath, JSON.stringify(prerequisites, null, 2))
   console.log(`\nPrerequisites written to: ${outputPath}`)
+
+  // Update README.md with extracted prerequisites
+  updateReadme(prerequisites, rootDir)
 }
 
-module.exports = { extractPrerequisites, generatePrerequisitesDoc }
+function updateReadme(prerequisites, rootDir) {
+  const readmePath = path.join(rootDir, 'README.md')
+
+  // Read README.md
+  let readme
+  try {
+    readme = fs.readFileSync(readmePath, 'utf8')
+  } catch (error) {
+    console.warn('Could not read README.md:', error.message)
+    return
+  }
+
+  // Generate the new prerequisites list
+  const newPrerequisites = generateReadmePrerequisites(prerequisites)
+
+  // Match the entire prerequisites list (all three bullet points)
+  // Note: Using — (en dash) not - (hyphen)
+  const prerequisitesListPattern =
+    /\* \*\*Node\.js\*\* — [^\n]+\n\* \*\*pnpm\*\* — [^\n]+\n\* \*\*Git\*\* — [^\n]+/
+
+  // Replace with new prerequisites
+  const updatedReadme = readme.replace(
+    prerequisitesListPattern,
+    newPrerequisites,
+  )
+
+  // Check if replacement was successful
+  if (updatedReadme === readme) {
+    console.warn('Warning: Prerequisites list pattern not found in README.md')
+    console.warn(
+      'The README may need manual updating or the pattern has changed',
+    )
+    return
+  }
+
+  // Write updated README
+  try {
+    fs.writeFileSync(readmePath, updatedReadme, 'utf8')
+    console.log('\n✓ README.md updated successfully')
+  } catch (error) {
+    console.warn('Could not write README.md:', error.message)
+  }
+}
+
+module.exports = {
+  extractPrerequisites,
+  generatePrerequisitesDoc,
+  generateReadmePrerequisites,
+}
