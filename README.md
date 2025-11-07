@@ -168,7 +168,7 @@ pnpm docu:start
 # Start demo application
 pnpm demo:dev
 
-# Start colour palette generator
+# Start color palette generator
 pnpm palette:dev
 ```
 
@@ -380,7 +380,7 @@ We currently don’t support the font-display property, so if that’s something
 
 ## Logo
 
-When it comes to the Equinor logo, we have two versions – primary and horizontal – and you pick the colour with a fragment identifier in the url. The following example uses the primary logo in red, other colour options are white and black – with black being the default if you omit the fragment identifier.
+When it comes to the Equinor logo, we have two versions – primary and horizontal – and you pick the color with a fragment identifier in the url. The following example uses the primary logo in red, other color options are white and black – with black being the default if you omit the fragment identifier.
 
 ### Usage
 

@@ -97,30 +97,6 @@ function generateReadmePrerequisites(prerequisites) {
 * **Git** — For version control`
 }
 
-// Main execution
-if (require.main === module) {
-  const prerequisites = extractPrerequisites()
-
-  console.log('Extracted Prerequisites:')
-  console.log('=======================')
-  console.log(`Node.js: ${prerequisites.nodejs}`)
-  console.log(`pnpm: ${prerequisites.pnpm}+`)
-  console.log(`React: ${prerequisites.react}+`)
-  console.log(`React DOM: ${prerequisites.reactDom}+`)
-  console.log(`TypeScript: ${prerequisites.typescript}+ (recommended)`)
-  console.log()
-  console.log('For documentation:')
-  console.log(generatePrerequisitesDoc(prerequisites))
-
-  // Write prerequisites to JSON file
-  const outputPath = path.join(rootDir, 'prerequisites.json')
-  fs.writeFileSync(outputPath, JSON.stringify(prerequisites, null, 2))
-  console.log(`\nPrerequisites written to: ${outputPath}`)
-
-  // Update README.md with extracted prerequisites
-  updateReadme(prerequisites, rootDir)
-}
-
 function updateReadme(prerequisites, rootDir) {
   const readmePath = path.join(rootDir, 'README.md')
 
@@ -166,8 +142,33 @@ function updateReadme(prerequisites, rootDir) {
   }
 }
 
+// Main execution
+if (require.main === module) {
+  const prerequisites = extractPrerequisites()
+
+  console.log('Extracted Prerequisites:')
+  console.log('=======================')
+  console.log(`Node.js: ${prerequisites.nodejs}`)
+  console.log(`pnpm: ${prerequisites.pnpm}+`)
+  console.log(`React: ${prerequisites.react}+`)
+  console.log(`React DOM: ${prerequisites.reactDom}+`)
+  console.log(`TypeScript: ${prerequisites.typescript}+ (recommended)`)
+  console.log()
+  console.log('For documentation:')
+  console.log(generatePrerequisitesDoc(prerequisites))
+
+  // Write prerequisites to JSON file
+  const outputPath = path.join(rootDir, 'prerequisites.json')
+  fs.writeFileSync(outputPath, JSON.stringify(prerequisites, null, 2))
+  console.log(`\nPrerequisites written to: ${outputPath}`)
+
+  // Update README.md with extracted prerequisites
+  updateReadme(prerequisites, rootDir)
+}
+
 module.exports = {
   extractPrerequisites,
   generatePrerequisitesDoc,
   generateReadmePrerequisites,
+  updateReadme,
 }
