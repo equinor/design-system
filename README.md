@@ -19,7 +19,7 @@ This is a monorepo containing both published packages and applications:
 apps/                    # Applications (not published to npm)
   design-system-docs/    # Documentation website (Docusaurus)
   eds-demo/              # Component demo application (Next.js)
-  eds-color-palette-generator/  # Colour palette generation tool
+  eds-color-palette-generator/  # Color palette generation tool
 packages/                # Published npm packages
   eds-core-react/        # React component library
   eds-tokens/            # Design tokens
@@ -97,7 +97,7 @@ These applications are part of the monorepo but are not published to npm.
 |-------------|---------|---------------|
 | [Documentation](./apps/design-system-docs) | EDS documentation website built with Docusaurus | `pnpm docu:start` |
 | [Demo](./apps/eds-demo) | Component showcase and examples using Next.js | `pnpm demo:dev` |
-| [Colour Palette Generator](./apps/eds-color-palette-generator) | Tool for generating accessible colour palettes | `pnpm palette:dev` |
+| [Color Palette Generator](./apps/eds-color-palette-generator) | Tool for generating accessible color palettes | `pnpm palette:dev` |
 
 ## Prerequisites
 
@@ -176,7 +176,7 @@ pnpm palette:dev
 
 We use [Storybook](https://storybook.js.org/) as a development environment.
 
-Start Storybook on localhost:6006 by running the following command from root:
+Start Storybook on localhost:9000 by running the following command from root:
 
 ```bash
 pnpm run storybook
@@ -397,7 +397,7 @@ We support the most up to date version of evergreen browsers (browsers that auto
 
 ### Port already in use
 
-If you get an error that port 6006 (Storybook), 3000 (demo/docs), or other ports are already in use, you can either:
+If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports are already in use, you can either:
 - Stop the process using that port
 - Change the port in the respective configuration file
 

@@ -8,6 +8,9 @@
 const fs = require('fs')
 const path = require('path')
 
+// Define root directory once at module level
+const rootDir = path.resolve(__dirname, '..')
+
 function readPackageJson(packagePath) {
   try {
     const content = fs.readFileSync(packagePath, 'utf8')
@@ -25,8 +28,6 @@ function extractVersionRequirement(versionString) {
 }
 
 function extractPrerequisites() {
-  const rootDir = path.resolve(__dirname, '..')
-
   // Read key package.json files
   const coreReactPkg = readPackageJson(
     path.join(rootDir, 'packages/eds-core-react/package.json'),
@@ -98,7 +99,6 @@ function generateReadmePrerequisites(prerequisites) {
 
 // Main execution
 if (require.main === module) {
-  const rootDir = path.resolve(__dirname, '..')
   const prerequisites = extractPrerequisites()
 
   console.log('Extracted Prerequisites:')
@@ -136,15 +136,16 @@ function updateReadme(prerequisites, rootDir) {
   // Generate the new prerequisites list
   const newPrerequisites = generateReadmePrerequisites(prerequisites)
 
-  // Match the entire prerequisites list (all three bullet points)
-  // Note: Using — (en dash) not - (hyphen)
-  const prerequisitesListPattern =
-    /\* \*\*Node\.js\*\* — [^\n]+\n\* \*\*pnpm\*\* — [^\n]+\n\* \*\*Git\*\* — [^\n]+/
+  // Match prerequisites section: find all bullet points after Prerequisites heading
+  // This pattern matches from the heading through any content until it finds bullet points,
+  // then captures all consecutive bullet point lines
+  const prerequisitesSectionPattern =
+    /(## Prerequisites[\s\S]*?)((?:\* \*\*[^\n]+\n?)+)/
 
-  // Replace with new prerequisites
+  // Replace the prerequisites bullet list, preserving everything before it
   const updatedReadme = readme.replace(
-    prerequisitesListPattern,
-    newPrerequisites,
+    prerequisitesSectionPattern,
+    (match, beforeBullets, bullets) => beforeBullets + newPrerequisites + '\n',
   )
 
   // Check if replacement was successful
