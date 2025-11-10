@@ -109,7 +109,7 @@ Before you begin, ensure you have the following installed:
   Source: prerequisites.json (generated from .nvmrc and package.json)
 -->
 
-* **Node.js** — Version 22.12.0 or higher
+* **Node.js** — Version 22.12.0 or compatible
 * **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm@10.15.0`)
 * **Git** — For version control
 
