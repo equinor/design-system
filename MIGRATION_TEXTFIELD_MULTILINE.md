@@ -179,9 +179,8 @@ After migrating, ensure:
 
 If you encounter issues during migration:
 
-1. Check the [Textarea component documentation](#)
-2. Review the examples in this guide
-3. Create an issue on GitHub with details about your use case
+1. Review the examples in this guide
+2. Create an issue on GitHub with details about your use case
 
 ## API Reference
 
@@ -207,14 +206,3 @@ The following TextField-specific props are NOT available on Textarea:
 - `inputIcon` - Icons are not typical for textareas
 - `unit` - Units are not typical for textareas
 - `meta` - Use helperText instead
-
-## Timeline
-
-- **Version X.X.X**: multiline prop deprecated (warning in console)
-- **Version X.X.X**: multiline prop removed (this version)
-
-## Additional Resources
-
-- [Textarea Component Documentation](#)
-- [TextField Component Documentation](#)
-- [Design System Migration Guide](#)
