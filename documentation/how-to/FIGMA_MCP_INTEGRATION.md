@@ -23,12 +23,11 @@ Figma MCP enables direct integration between Figma and VS Code Copilot Chat, all
 ### 1. Enable Figma Dev Mode
 
 1. Open Figma Desktop
-2. Navigate to the **EDS Workspace**:
-   - Go to [EDS Workspace](https://www.figma.com/files/682286909510540417/workspace/1404734309303602976/directory/teams)
+2. Navigate to the [EDS Workspace](https://www.figma.com/files/682286909510540417/workspace/1404734309303602976/directory/teams):
    - For component migration work, focus on [EDS Core Components](https://www.figma.com/files/682286909510540417/project/328956212/Core-Components)
    - Open any of the component files (e.g., "Checkbox 2.0", "Button 2.0")
 3. **Enable Dev Mode**:
-   - Look for the "Dev Mode" toggle in the top-right corner of Figma
+   - Look for the "Dev Mode" toggle in the right side of the toolbar at the bottom of Figma
    - Click to enable it (should show a green indicator when active)
    - You'll see the interface change to show component specs and tokens
 
@@ -36,8 +35,8 @@ Figma MCP enables direct integration between Figma and VS Code Copilot Chat, all
 
 To confirm the MCP server is active:
 
-1. With Dev Mode enabled in Figma, check the bottom status bar
-2. You should see an indicator showing "MCP Server: Running" or similar
+1. With Dev Mode enabled in Figma, check the status bar in the right hand panel
+2. You should see an indicator showing "MCP Server: Enabled" with
 3. If you don't see this, try:
    - Refreshing the Figma file
    - Toggling Dev Mode off and on again
