@@ -9,7 +9,8 @@ Screen size is determined by the device and the user's window size. The EDS grid
 ### Grid layouts
 
 -   It is the responsibility of the designer to define a maximum width and choose the correct grid
--   It is up to the designer to make sure the design will scale correctly on all sizes. Start with a viewport that is the most common for the users. Make sure to test that the content will fit at smaller and larger viewports
+-   It is up to the designer to make sure the design will scale correctly on all sizes.
+-   Start with a viewport that is the most common for the users, make sure to test that the content will fit at smaller and larger viewports
 -   It is the responsibility of the developers to implement the maximum width and use the grid as designed
     
 :::tip Tip
@@ -27,57 +28,37 @@ When using a canvas navigation drawer or sidesheet, the content container could 
 The columns used in the grid are **fluid** in width. There is not a defined width.
 
 -   `Grid/Large`
-    
     -   Use in content areas that are between 840px and larger.
-        
 -   `Grid/Medium`
-    
     -   Use in content areas that are 600--839px.
-        
 -   `Grid/Small`
-    
     -   Use in content areas that are 0--599px.
-        
 
 ### Grid margins
 
 Grid margins are the space at the outer edge of the grid against the frame's edge. Grid styles are available with and without margins. It is up to the designer to decide which works best for your interface.
 
 -   `Grid/Large`
-    
     -   Margins are set to 32px.
-        
 -   `Grid/Medium`
-    
     -   Margins are set to 24px.
-        
 -   `Grid/Small`
-    
     -   Margins are set to 16px.
-        
 
 ### Grid gutters
 
 Grid gutters are the space in between the columns of the grid.
 
 -   `Grid/Large`
-    
     -   Gutters are set to 16px.
-        
 -   `Grid/Medium`
-    
     -   Gutters are set to 16px.
-        
 -   `Grid/Small`
-    
     -   Gutters are set to 8px.
-        
 
 :::info More information
-Visit [grid patterns](../patterns.md#grid-system-and-spacing) for more details on how to use the grid together with components.
+Visit [grid patterns](../patterns.md#grid-system-and-spacing) for more details on how to use the grid together with components
 :::
-
-# Design
 
 ## Implementation in Figma
 
