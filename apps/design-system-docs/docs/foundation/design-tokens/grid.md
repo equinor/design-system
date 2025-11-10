@@ -74,7 +74,7 @@ Grid gutters are the space in between the columns of the grid.
         
 
 :::info More information
-Visit [grid patterns](../patterns.md#grid-system-and-spacing) for more details on on how to use the grid together with components.
+Visit [grid patterns](../patterns.md#grid-system-and-spacing) for more details on how to use the grid together with components.
 :::
 
 # Design
