@@ -97,6 +97,32 @@ function generateReadmePrerequisites(prerequisites) {
 * **Git** — For version control`
 }
 
+/**
+ * Updates the README.md file with current prerequisite versions
+ *
+ * @param {Object} prerequisites - The extracted prerequisites object
+ * @param {string} prerequisites.nodejs - Node.js version
+ * @param {string} prerequisites.pnpm - pnpm version
+ * @param {string} rootDir - Absolute path to repository root
+ *
+ * @returns {void}
+ *
+ * @description
+ * This function:
+ * - Reads README.md from the repository root
+ * - Finds the Prerequisites section using a flexible regex pattern
+ * - Replaces the bullet list with updated versions
+ * - Writes the updated content back to README.md
+ *
+ * Error handling:
+ * - Warns and returns if README.md cannot be read
+ * - Warns and returns if the Prerequisites pattern is not found
+ * - Warns and returns if file write fails
+ *
+ * The regex pattern matches from "## Prerequisites" through any content
+ * until it finds bullet points, allowing flexibility for comments or
+ * description text between the heading and the list.
+ */
 function updateReadme(prerequisites, rootDir) {
   const readmePath = path.join(rootDir, 'README.md')
 
@@ -112,16 +138,17 @@ function updateReadme(prerequisites, rootDir) {
   // Generate the new prerequisites list
   const newPrerequisites = generateReadmePrerequisites(prerequisites)
 
-  // Match prerequisites section: find all bullet points after Prerequisites heading
-  // This pattern matches from the heading through any content until it finds bullet points,
-  // then captures all consecutive bullet point lines
-  const prerequisitesSectionPattern =
+  // Pattern explanation:
+  // Group 1: (## Prerequisites[\s\S]*?) - Captures heading and everything before bullets (non-greedy)
+  // Group 2: ((?:\* \*\*[^\n]+\n?)+) - Captures all consecutive bullet point lines
+  // This allows for HTML comments, descriptions, or other content between heading and bullets
+  const prerequisitesBulletListPattern =
     /(## Prerequisites[\s\S]*?)((?:\* \*\*[^\n]+\n?)+)/
 
   // Replace the prerequisites bullet list, preserving everything before it
   const updatedReadme = readme.replace(
-    prerequisitesSectionPattern,
-    (match, beforeBullets, bullets) => beforeBullets + newPrerequisites + '\n',
+    prerequisitesBulletListPattern,
+    (_, beforeBullets) => beforeBullets + newPrerequisites + '\n',
   )
 
   // Check if replacement was successful
