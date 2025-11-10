@@ -10,16 +10,39 @@ While the design system itself lives in [Figma][], this repository contains impl
 - [Figma](https://www.figma.com/files/682286909510540417/team/590517879490131675/EDS---Equinor-Design-System?fuid=677437722215124736)
 - [Storefront](https://eds.equinor.com)
 - [Slack](https://equinor.slack.com/archives/CJT20H1B9)
+
+## Repository structure
+
+This is a monorepo containing both published packages and applications:
+
+```
+apps/                    # Applications (not published to npm)
+  design-system-docs/    # Documentation website (Docusaurus)
+  eds-demo/              # Component demo application (Next.js)
+  eds-color-palette-generator/  # Color palette generation tool
+packages/                # Published npm packages
+  eds-core-react/        # React component library
+  eds-tokens/            # Design tokens
+  eds-icons/             # Icon library
+  eds-lab-react/         # Experimental components
+  eds-data-grid-react/   # Data grid component
+  eds-utils/             # Utility functions
+  eds-tailwind/          # Tailwind CSS plugin
+```
   
 ## Table of contents
 
 - [Equinor Design System](#equinor-design-system)
   - [Quick links](#quick-links)
   - [Table of contents](#table-of-contents)
+  - [Repository structure](#repository-structure)
   - [Status](#status)
+  - [Applications](#applications)
+  - [Prerequisites](#prerequisites)
   - [How to run](#how-to-run)
     - [Use Gitpod and develop in the browser](#use-gitpod-and-develop-in-the-browser)
     - [Clone and develop locally](#clone-and-develop-locally)
+    - [Common development commands](#common-development-commands)
     - [Work with the React components](#work-with-the-react-components)
   - [Figma](#figma)
   - [Storefront](#storefront)
@@ -32,13 +55,24 @@ While the design system itself lives in [Figma][], this repository contains impl
   - [Tokens](#tokens)
     - [Installation](#installation-2)
     - [Usage](#usage-2)
-  - [Fonts](#fonts)
+  - [Lab React](#lab-react)
+    - [Installation](#installation-3)
     - [Usage](#usage-3)
+  - [Data Grid](#data-grid)
+    - [Installation](#installation-4)
+    - [Usage](#usage-4)
+  - [Fonts](#fonts)
+    - [Usage](#usage-5)
     - [All the fonts](#all-the-fonts)
     - [Individual fonts](#individual-fonts)
   - [Logo](#logo)
-    - [Usage](#usage-4)
+    - [Usage](#usage-6)
   - [Browser support](#browser-support)
+  - [Troubleshooting](#troubleshooting)
+    - [Port already in use](#port-already-in-use)
+    - [Build failures](#build-failures)
+    - [Module not found errors](#module-not-found-errors)
+  - [License](#license)
   - [Contributions](#contributions)
   - [Get in touch](#get-in-touch)
 
@@ -51,6 +85,33 @@ While the design system itself lives in [Figma][], this repository contains impl
 | [Core React](https://github.com/equinor/design-system/tree/main/packages/eds-core-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react) |
 | [Tokens](https://github.com/equinor/design-system/tree/main/packages/eds-tokens) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-tokens)](https://www.npmjs.com/package/@equinor/eds-tokens)|
 | [Icons](https://github.com/equinor/design-system/tree/main/packages/eds-icons) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-icons)](https://www.npmjs.com/package/@equinor/eds-icons)|
+| [Lab React](https://github.com/equinor/design-system/tree/main/packages/eds-lab-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-lab-react)](https://www.npmjs.com/package/@equinor/eds-lab-react) |
+| [Data Grid React](https://github.com/equinor/design-system/tree/main/packages/eds-data-grid-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-data-grid-react)](https://www.npmjs.com/package/@equinor/eds-data-grid-react) |
+| [Utils](https://github.com/equinor/design-system/tree/main/packages/eds-utils) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-utils)](https://www.npmjs.com/package/@equinor/eds-utils) |
+
+## Applications
+
+These applications are part of the monorepo but are not published to npm.
+
+| Application | Purpose | Start Command |
+|-------------|---------|---------------|
+| [Documentation](./apps/design-system-docs) | EDS documentation website built with Docusaurus | `pnpm docu:start` |
+| [Demo](./apps/eds-demo) | Component showcase and examples using Next.js | `pnpm demo:dev` |
+| [Color Palette Generator](./apps/eds-color-palette-generator) | Tool for generating accessible color palettes | `pnpm palette:dev` |
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+<!-- 
+  Version numbers below are automatically extracted by scripts/extract-prerequisites.js
+  To update: run `pnpm run build` or `node scripts/extract-prerequisites.js`
+  Source: prerequisites.json (generated from .nvmrc and package.json)
+-->
+
+* **Node.js** — Version 22.12.0 or compatible
+* **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm@10.15.0`)
+* **Git** — For version control
 
 
 
@@ -67,33 +128,66 @@ Just prepend the url to your fork with https://gitpod.io/#, so for example https
 
 ### Clone and develop locally
 
-    $ git clone git@github.com:your-github-username/design-system
+```bash
+git clone git@github.com:your-github-username/design-system
+```
 
-We use [pnpm][] as the package manager, because it’s fast, space efficient, and has some very useful commands when working with a monorepo – so you should start off by installing it globally.
+We use [pnpm][] as the package manager, because it's fast, space efficient, and has some very useful commands when working with a monorepo.
 
-    $ npm install -g pnpm
+```bash
+npm install -g pnpm@10.15.0
+```
 
-Currently the project only runs on up to Node.js `v16.15`  
+Install dependencies and build all packages using our `init` script:
 
-Install dependencies & build using our `init` script:
-
-    $ cd design-system
-    $ pnpm run init
+```bash
+cd design-system
+pnpm run init
+```
 
 [pnpm]: https://pnpm.js.org
 
+### Common development commands
+
+```bash
+# Build all packages
+pnpm build
+
+# Run all tests
+pnpm test
+
+# Lint entire codebase
+pnpm lint:all
+
+# Start Storybook for component development
+pnpm storybook
+
+# Start documentation site
+pnpm docu:start
+
+# Start demo application
+pnpm demo:dev
+
+# Start color palette generator
+pnpm palette:dev
+```
+
 ### Work with the React components
-We use [storybook](https://storybook.js.org/) as a development environment.
 
-Start storybook on localhost:9000 by running the following command from root:
+We use [Storybook](https://storybook.js.org/) as a development environment.
 
-    $ pnpm run storybook
+Start Storybook on localhost:9000 by running the following command from root:
 
+```bash
+pnpm run storybook
+```
 
-Run tests once or by watching
+Run tests once or by watching:
 
-    $ pnpm run test:core-react 
-    $ pnpm run test:watch:core-react 
+```bash
+pnpm run test:core-react 
+pnpm run test:watch:core-react 
+``` 
 
 ## Figma
 
@@ -197,20 +291,85 @@ header.textContent = 'Some header'
 document.body.appendChild(header)
 ```
 
+## Lab React
 
-## Fonts
+Experimental React components that are still in development. These components may undergo breaking changes and are not recommended for production use until they are moved to the Core React library.
 
-The Equinor typeface is available from the EDS CDN. 
+### Installation
+
+```sh
+npm install @equinor/eds-lab-react styled-components
+```
+
+If you use TypeScript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
+```
 
 ### Usage
 
-### All the fonts
+```jsx
+import { Stepper } from '@equinor/eds-lab-react'
+
+<Stepper activeStepIndex={0}>
+  <Stepper.Step>Step 1</Stepper.Step>
+  <Stepper.Step>Step 2</Stepper.Step>
+</Stepper>
+```
+
+See our [Storybook](https://storybook.eds.equinor.com/) for more examples and available components.
+
+## Data Grid
+
+A powerful data grid component built with AG Grid, providing sorting, filtering, and other advanced table features.
+
+### Installation
+
+```sh
+npm install @equinor/eds-data-grid-react ag-grid-react
+```
+
+If you use TypeScript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
+```
+
+### Usage
+
+```jsx
+import { EdsProvider, DataGrid } from '@equinor/eds-data-grid-react'
+
+const columnDefs = [
+  { field: 'name' },
+  { field: 'age' },
+]
+
+const rowData = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+]
+
+<EdsProvider>
+  <DataGrid columnDefs={columnDefs} rowData={rowData} />
+</EdsProvider>
+```
+
+See the [package documentation](https://github.com/equinor/design-system/tree/main/packages/eds-data-grid-react) for more details.
+
+
+## Fonts
+
+The Equinor typeface is available from the EDS CDN.
+
+### Usage
+
+#### All the fonts
 
 ```html
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
 ```
 
-### Individual fonts
+#### Individual fonts
 
 ```html
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-regular.css" />
@@ -221,7 +380,7 @@ We currently don’t support the font-display property, so if that’s something
 
 ## Logo
 
-When it comes to the Equinor logo, we have two versions – primary and horizontal – and you pick the colour with a fragment identifier in the url. The following example uses the primary logo in red, other colour options are white and black – with black being the default if you omit the fragment identifier.
+When it comes to the Equinor logo, we have two versions – primary and horizontal – and you pick the color with a fragment identifier in the url. The following example uses the primary logo in red, other color options are white and black – with black being the default if you omit the fragment identifier.
 
 ### Usage
 
@@ -234,10 +393,41 @@ When it comes to the Equinor logo, we have two versions – primary and horizont
 
 We support the most up to date version of evergreen browsers (browsers that auto-update), which means Chrome, Safari, Firefox and (Chromium) Edge.
 
+## Troubleshooting
+
+### Port already in use
+
+If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports are already in use, you can either:
+- Stop the process using that port
+- Change the port in the respective configuration file
+
+### Build failures
+
+If you encounter build failures:
+1. Ensure all dependencies are up to date: `pnpm install`
+2. Clean and rebuild: `pnpm clean && pnpm build`
+3. Make sure you're using the correct Node.js version (22.12.0)
+
+### Module not found errors
+
+If you see "Module not found" errors:
+- Run `pnpm run init` to install all dependencies and build packages
+- Ensure workspace dependencies are built before consuming packages
+
+## License
+
+The Equinor Design System is licensed under the [MIT License](./LICENSE).
 
 ## Contributions
 
-Contributions are welcome and encouraged! File bug reports and feature requests in Github issues, and [get in touch](#get-in-touch) with us if you want to help us out with implementing the components or have ideas for components we should include in the EDS.
+Contributions are welcome and encouraged! Here's how to contribute:
+
+1. **Report issues** — File bug reports and feature requests in [GitHub issues](https://github.com/equinor/design-system/issues)
+2. **Fork and develop** — Follow the [fork and pull-request workflow](#how-to-run) outlined above
+3. **Submit a pull request** — All changes must be reviewed and approved by the EDS team before merging
+4. **Follow conventions** — Use [conventional commits](./documentation/how-to/CONVENTIONAL_COMMITS.md) for your commit messages
+
+If you want to help implement components or have ideas for what we should include in the EDS, please get in touch with the team.
 
 ## Get in touch
 
