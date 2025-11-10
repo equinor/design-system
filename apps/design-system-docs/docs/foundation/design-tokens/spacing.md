@@ -9,7 +9,7 @@ Spacing is used to apply margin and padding across all platforms. The EDS has a 
 The spacers `XX Small` and `X Small` are only to be used inside of components, while the spacers `Small` up to `XXX Large` can be used both within and between components.
 
 :::info Guideline
-Always make sure to follow the  by having 8px of spacing between each clickbound.
+Always make sure to follow the guideline by having 8px of spacing between each clickbound.
 :::
     
 ### Variants
