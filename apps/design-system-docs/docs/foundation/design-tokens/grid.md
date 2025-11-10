@@ -81,7 +81,7 @@ Visit [grid patterns](../patterns.md#grid-system-and-spacing) for more details
 
 ## Implementation in Figma
 
-1.  Click `A` or `F`on the keyboard to open the predefined list of frame sizes.
+1.  Click `A` or `F` on the keyboard to open the predefined list of frame sizes.
     
 2.  Locate the **Design** tab in the **Inspector Panel**.
     
