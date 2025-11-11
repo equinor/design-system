@@ -8,24 +8,15 @@ Spacing is used to apply margin and padding across all platforms. The EDS has a 
 
 The spacers `XX Small` and `X Small` are only to be used inside of components, while the spacers `Small` up to `XXX Large` can be used both within and between components.
 
--   Always make sure to follow the  by having 8px of spacing between each clickbound.
+:::info Guideline
+Always make sure to follow the guideline by having 8px of spacing between each clickbound.
+:::
     
+### Variants
 
 There are eight spacers to choose between: `XX Small`, `X Small`,  `Small`, `Medium`, `Large`, `X Large`, `XX Large` and `XXX Large`. The spacers `XX Small` and `X Small` are only to be used inside components, while the other spacers are to be used in layouts.
 
-
-
-# Usage
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Spacing
-
-Every part of your interface should be intentional, this also includes spacing. While spacing is invisible, it gives air and readability to your interface.
-
-## Figma
+## Implementation in Figma
 
 ### How to add
 
