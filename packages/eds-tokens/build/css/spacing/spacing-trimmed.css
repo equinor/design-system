@@ -176,6 +176,7 @@
   --eds-typography-ui-body-6xl-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
   --eds-typography-ui-body-6xl-lineheight-default: var(--eds--spacious, 2.5rem) var(--eds--comfortable, 2.25rem);
   --eds-typography-ui-body-6xl-lineheight-squished: var(--eds--spacious, 2.25rem) var(--eds--comfortable, 2rem);
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: var(--eds--spacious, 0.75rem) var(--eds--comfortable, 0.656rem);
   --eds-typography-header-xs-tracking-tight: var(--eds--spacious, -1.15px) var(--eds--comfortable, -0.99px);
   --eds-typography-header-xs-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
@@ -185,7 +186,6 @@
   --eds-typography-header-xs-font-weight-bolder: var(--eds--spacious, 500) var(--eds--comfortable, 500);
   --eds-typography-header-xs-lineheight-default: var(--eds--spacious, 1rem) var(--eds--comfortable, 0.75rem);
   --eds-typography-header-xs-lineheight-squished: var(--eds--spacious, 0.75rem) var(--eds--comfortable, 0.75rem);
-  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-sm-font-size: var(--eds--spacious, 0.875rem) var(--eds--comfortable, 0.75rem);
   --eds-typography-header-sm-tracking-tight: var(--eds--spacious, -1.32px) var(--eds--comfortable, -1.15px);
   --eds-typography-header-sm-tracking-normal: var(--eds--spacious, 0px) var(--eds--comfortable, 0px);
