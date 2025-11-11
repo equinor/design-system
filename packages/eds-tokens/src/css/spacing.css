@@ -5,8 +5,6 @@
   fixed and does not adjust to the proportions or space attributes.
 */
 :root {
-  --eds-selectable-spacing-inline: var(--eds-selectable-spacing-inline);
-  --eds-selectable-spacing-stack: var(--eds-selectable-spacing-stack);
   --eds-selectable-gap-inline: var(--eds-spacing-inline-xs);
   --eds-selectable-gap-stack: var(--eds-spacing-stack-xs);
 
