@@ -37,7 +37,8 @@
 }
 
 [data-font-family='header'] {
-  --eds-typography-font-family: var(--eds-typography-header-font-family);
+  --eds-typography-font-family:
+    var(--eds-typography-header-font-family), sans-serif;
 }
 
 [data-font-family='ui'] {
@@ -212,8 +213,7 @@
   }
 }
 
-[data-font-family='header'],
-.font-heading {
+[data-font-family='header'] {
   &[data-text-size='xs'] {
     --_font-size-xs: var(--eds-typography-header-xs-font-size);
     --_line-height-default: var(--eds-typography-header-xs-lineheight-default);
@@ -366,8 +366,7 @@
 }
 
 /* Shared typography styles for UI and Header font families */
-[data-font-family],
-:is(.font-ui, .font-heading) {
+[data-font-family] {
   /* Font size setup with CSS custom property */
   &[data-text-size='xs'] {
     --eds-typography-font-size: var(--_font-size-xs);
