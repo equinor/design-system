@@ -58,10 +58,51 @@ export async function createSpacingAndTypographyVariables({
 
   StyleDictionary.registerTransform(densitySpaceToggleTransform)
 
-  const densitySpaciousTrimmed = new StyleDictionary({
+  const outputDirectory = path.resolve(process.cwd(), 'build')
+  const jsBuildPath = path.join(outputDirectory, 'js')
+  const jsonBuildPath = path.join(outputDirectory, 'json')
+
+  const densitySpaciousFilter = (token: TransformedToken) =>
+    includeTokenFilter(token, ['Density', 'Spacious'])
+  const densityComfortableFilter = (token: TransformedToken) =>
+    includeTokenFilter(token, ['Density', 'Comfortable'])
+
+  const spacious = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
+      ts: {
+        transforms: ['name/constant'],
+        buildPath: jsBuildPath,
+        files: [
+          {
+            filter: densitySpaciousFilter,
+            destination: 'spacing/spacious.js',
+            format: 'javascript/es6',
+          },
+          {
+            filter: densitySpaciousFilter,
+            format: 'typescript/es6-declarations',
+            destination: 'spacing/spacious.d.ts',
+          },
+        ],
+      },
+      json: {
+        buildPath: jsonBuildPath,
+        transforms: ['name/kebab'],
+        files: [
+          {
+            filter: densitySpaciousFilter,
+            destination: 'spacing/flat/spacious.json',
+            format: 'json/flat',
+          },
+          {
+            filter: densitySpaciousFilter,
+            destination: 'spacing/nested/spacious.json',
+            format: 'json/nested',
+          },
+        ],
+      },
       css: {
         transformGroup: 'css',
         prefix,
@@ -71,7 +112,7 @@ export async function createSpacingAndTypographyVariables({
           {
             filter: (token: TransformedToken) =>
               includeTokenFilter(token, ['Density', 'Spacious']),
-            destination: 'spacious-trimmed.css',
+            destination: 'spacious.css',
             format: 'css/variables',
             options: {
               selector: ':root, [data-density="spacious"]',
@@ -83,10 +124,42 @@ export async function createSpacingAndTypographyVariables({
     },
   })
 
-  const densityComfortableTrimmed = new StyleDictionary({
+  const comfortable = new StyleDictionary({
     include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     platforms: {
+      ts: {
+        transforms: ['name/constant'],
+        buildPath: jsBuildPath,
+        files: [
+          {
+            filter: densityComfortableFilter,
+            destination: 'spacing/comfortable.js',
+            format: 'javascript/es6',
+          },
+          {
+            filter: densityComfortableFilter,
+            format: 'typescript/es6-declarations',
+            destination: 'spacing/comfortable.d.ts',
+          },
+        ],
+      },
+      json: {
+        buildPath: jsonBuildPath,
+        transforms: ['name/kebab'],
+        files: [
+          {
+            filter: densityComfortableFilter,
+            destination: 'spacing/flat/comfortable.json',
+            format: 'json/flat',
+          },
+          {
+            filter: densityComfortableFilter,
+            destination: 'spacing/nested/comfortable.json',
+            format: 'json/nested',
+          },
+        ],
+      },
       css: {
         transformGroup: 'css',
         prefix,
@@ -96,7 +169,7 @@ export async function createSpacingAndTypographyVariables({
           {
             filter: (token: TransformedToken) =>
               includeTokenFilter(token, ['Density', 'Comfortable']),
-            destination: 'comfortable-trimmed.css',
+            destination: 'comfortable.css',
             format: 'css/variables',
             options: {
               selector: '[data-density="comfortable"]',
@@ -108,8 +181,8 @@ export async function createSpacingAndTypographyVariables({
     },
   })
 
-  await densitySpaciousTrimmed.buildAllPlatforms()
-  await densityComfortableTrimmed.buildAllPlatforms()
+  await spacious.buildAllPlatforms()
+  await comfortable.buildAllPlatforms()
 
   const FIGMA_SPECIFIC_TOKENS_SOURCE = path.join(
     tokensDir,

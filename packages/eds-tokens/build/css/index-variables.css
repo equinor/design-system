@@ -2,8 +2,8 @@
 @import 'color/static/variables.css';
 @import 'color/dynamic/variables.css';
 
-@import 'spacing/spacious-trimmed.css';
-@import 'spacing/comfortable-trimmed.css';
+@import 'spacing/spacious.css';
+@import 'spacing/comfortable.css';
 
 @import 'spacing/space-proportions-squished.css';
 @import 'spacing/space-proportions-squared.css';
