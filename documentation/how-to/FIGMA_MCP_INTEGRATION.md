@@ -31,7 +31,7 @@ Figma MCP enables direct integration between Figma and VS Code Copilot Chat, all
    - Click to enable it (should show a green indicator when active)
    - You'll see the interface change to show component specs and tokens
 
-### 1.5. Verify MCP Server is Running
+### 2. Verify MCP Server is Running
 
 To confirm the MCP server is active:
 
@@ -42,7 +42,7 @@ To confirm the MCP server is active:
    - Toggling Dev Mode off and on again
    - Restarting Figma Desktop
 
-### 2. Configure VS Code
+### 3. Configure VS Code
 
 The repository includes MCP configuration in `.vscode/mcp.json`:
 
@@ -59,7 +59,7 @@ The repository includes MCP configuration in `.vscode/mcp.json`:
 
 This configuration connects to Figma Desktop's local MCP server when Dev Mode is active.
 
-### 3. Start Integration
+### 4. Start Integration
 
 1. Ensure Figma Desktop is running with Dev Mode enabled on a Core Components file
 2. Open VS Code in the design-system repository
@@ -67,7 +67,7 @@ This configuration connects to Figma Desktop's local MCP server when Dev Mode is
 4. Test the connection by asking: "Can you access Figma?"
 5. The Figma MCP server should automatically connect and respond
 
-### 4. Test Your Setup
+### 5. Test Your Setup
 
 Try these commands to verify everything works:
 
