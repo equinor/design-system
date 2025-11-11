@@ -27,7 +27,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-${selectable-space}-stack-${space-proportions}"
+            "WEB": "var(--eds-selectable-spacing-stack)"
           }
         }
       }
@@ -42,9 +42,7 @@
           "scopes": [
             "WIDTH_HEIGHT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-icon-${icon-size}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -58,9 +56,7 @@
           "scopes": [
             "WIDTH_HEIGHT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-icon-${icon-size}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -74,9 +70,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-icon-${icon-size}-gap-horizontal"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -90,9 +84,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-icon-${icon-size}-gap-vertical"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -106,9 +98,7 @@
           "scopes": [
             "WIDTH_HEIGHT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-selectable-${size}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -123,7 +113,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inline-xs"
+            "WEB": "var(--eds-selectable-gap-inline)"
           }
         }
       }
@@ -139,7 +129,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-stack-xs"
+            "WEB": "var(--eds-selectable-gap-stack)"
           }
         }
       }
@@ -157,7 +147,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-md-inline"
+            "WEB": "var(--eds-container-spacing-inline)"
           }
         }
       }
@@ -173,7 +163,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-md-stack-${space-proportions}"
+            "WEB": "var(--eds-container-spacing-stack)"
           }
         }
       }
@@ -189,7 +179,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inline-md"
+            "WEB": "var(--eds-container-gap-inline)"
           }
         }
       }
@@ -205,14 +195,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-stack-md"
+            "WEB": "var(--eds-container-gap-stack)"
           }
         }
       }
     }
   },
   "Page": {
-    "Horisontal padding": {
+    "Horizontal padding": {
       "$type": "number",
       "$value": "{Page.Spacing.Inline}",
       "$description": "",
@@ -223,7 +213,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-xl-inline"
+            "WEB": "var(--eds-page-spacing-inline)"
           }
         }
       }
@@ -239,12 +229,12 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-xl-stack-${space-proportions}"
+            "WEB": "var(--eds-page-spacing-stack)"
           }
         }
       }
     },
-    "Horisontal gap": {
+    "Horizontal gap": {
       "$type": "number",
       "$value": "{spacing.inline.xl}",
       "$description": "",
@@ -255,7 +245,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inline-xl"
+            "WEB": "var(--eds-page-gap-inline)"
           }
         }
       }
@@ -271,14 +261,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-stack-xl"
+            "WEB": "var(--eds-page-gap-stack)"
           }
         }
       }
     }
   },
   "Generic": {
-    "Horisontal padding": {
+    "Horizontal padding": {
       "$type": "number",
       "$value": "{Padding horizontal}",
       "$description": "",
@@ -288,9 +278,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-inline-${horisontal-space}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -304,13 +292,11 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-stack-${vertical-space}"
-          }
+          "codeSyntax": {}
         }
       }
     },
-    "Horisontal gap": {
+    "Horizontal gap": {
       "$type": "number",
       "$value": "{Gap horizontal}",
       "$description": "",
@@ -320,9 +306,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-inline-${horisontal-gap}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -336,9 +320,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-stack-${vertical-gap}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -352,9 +334,7 @@
           "scopes": [
             "CORNER_RADIUS"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-border-radius-${border-radius}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -368,15 +348,13 @@
           "scopes": [
             "STROKE_FLOAT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-stroke-${stroke}"
-          }
+          "codeSyntax": {}
         }
       }
     }
   },
   "Typography": {
-    "Font famiily": {
+    "Font family": {
       "$type": "string",
       "$value": "{Font family}",
       "$description": "",
@@ -387,7 +365,7 @@
             "FONT_FAMILY"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-font-family"
+            "WEB": "var(--eds-typography-font-family)"
           }
         }
       }
@@ -403,12 +381,12 @@
             "FONT_SIZE"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-font-size"
+            "WEB": "var(--eds-typography-font-size)"
           }
         }
       }
     },
-    "Lineheight": {
+    "Line height": {
       "$type": "number",
       "$value": "{Lineheight}",
       "$description": "",
@@ -419,7 +397,7 @@
             "LINE_HEIGHT"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-line-height-${lineheight}"
+            "WEB": "var(--eds-typography-line-height)"
           }
         }
       }
@@ -435,7 +413,7 @@
             "LETTER_SPACING"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-tracking-${letter-spacing}"
+            "WEB": "var(--eds-typography-tracking)"
           }
         }
       }
@@ -479,7 +457,7 @@
             "FONT_STYLE"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-font-weight-${font-weight}}"
+            "WEB": "var(--eds-typography-font-weight)"
           }
         }
       }
