@@ -5,7 +5,7 @@ applyTo: '**/*.md'
 # Markdown Guidelines
 
 - Use `#` for top-level headings, `##` for second-level headings, and so on.
-- Use asterisk (`*`) for lists instead of hyphen.
+- Use hyphen (`-`) for lists instead of asterisk.
 - Use endash (`--`) instead of emdash (`---`).
 - Use <abbr> tags for abbreviations, e.g., `<abbr title="Equinor Design System">EDS</abbr>`.
 - Use Github flavoured markdown
