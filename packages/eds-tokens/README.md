@@ -167,11 +167,11 @@ The foundation stylesheet includes:
 
 * **Typography Styles** -- Complete typography system with:
   * Font family setup (UI and Header fonts)
-  * Font size utilities (`text-xs`, `text-sm`, `text-md`, etc.)
-  * Line height utilities (`line-height-default`, `line-height-squished`)
-  * Font weight utilities (`font-lighter`, `font-normal`, `font-bolder`)
-  * Letter spacing utilities (`tracking-tight`, `tracking-normal`, `tracking-wide`)
-  * Baseline grid alignment (`text-baseline-grid`, `text-baseline-center`)
+  * Font size data attributes (`[data-text-size='xs']`, `[data-text-size='sm']`, etc.)
+  * Line height data attributes (`[data-line-height='default']`, `[data-line-height='squished']`)
+  * Font weight data attributes (`[data-font-weight='lighter']`, `[data-font-weight='normal']`, `[data-font-weight='bolder']`)
+  * Letter spacing data attributes (`[data-tracking='tight']`, `[data-tracking='normal']`, `[data-tracking='wide']`)
+  * Baseline grid alignment (`[data-baseline='grid']`, `[data-baseline='center']`)
   * Icon sizing utilities (`.text-icon`)
 
 * **Spacing Utilities** -- Complete spacing system with:
@@ -188,9 +188,9 @@ The foundation stylesheet includes:
 > import '@equinor/eds-tokens/css/foundation.css'
 > ```
 
-#### Using Typography Classes
+#### Using Typography Data Attributes
 
-The foundation CSS provides utility classes and data attributes for typography:
+The foundation CSS provides data attributes for typography:
 
 ```html
 <!-- Using data attributes -->
@@ -202,17 +202,8 @@ The foundation CSS provides utility classes and data attributes for typography:
   Header font text
 </div>
 
-<!-- Using utility classes -->
-<div class="font-ui text-md line-height-default">
-  UI font text
-</div>
-
-<div class="font-heading text-xl font-bolder">
-  Header font text
-</div>
-
 <!-- Baseline grid alignment -->
-<div class="font-ui text-md text-baseline-grid">
+<div data-font-family="ui" data-text-size="md" data-baseline="grid">
   Aligned to 4px baseline grid
 </div>
 ```
