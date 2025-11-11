@@ -15,3 +15,6 @@
 @import 'spacing/selectable-space-md.css';
 @import 'spacing/selectable-space-lg.css';
 @import 'spacing/selectable-space-xl.css';
+
+@import './spacing.css';
+@import './typography.css';
