@@ -8,7 +8,7 @@ Extracts design decisions into [design tokens] from Figma using the [Figma Web A
 ## Usage
 
 ### Setup
-**Important!** You need edit access in the [Assets](https://www.figma.com/design/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=86-3715&t=NZZqKuNzEaHkQDa6-0) file in figma to be able to run the scripts.
+**Important!** You need edit access in the [Assets](https://www.figma.com/design/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=86-3715&t=NZZqKuNzEaHkQDa6-0) file in Figma to be able to run the scripts.
 
 1. Go to Figma and generate a new personal access token (Found under your account settings)
 2. Add an `.env` file in the root of `figma-broker` or if you are using Codespaces, go to `Github Settings` → `Codespaces` and create a new secret. Give it the name `FIGMA_TOKEN`, paste your token as value, and select `equinor/design-system` in the repository access select menu. If you use Gitpod, type `eval $(gp env -e FIGMA_TOKEN=your-token)` in the terminal. Skip the `$` if you’re using Fish.
