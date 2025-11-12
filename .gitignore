@@ -4,6 +4,7 @@ node_modules
 pnpm-debug.log
 .DS_Store
 # use pnpm
+.pnpm-store
 package-lock.json
 packages/*/package-lock.yaml
 scripts/*/package-lock.yaml

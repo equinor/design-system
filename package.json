@@ -33,7 +33,7 @@
     "demo:lint": "pnpm --filter eds-demo run lint",
     "demo:test:e2e": "pnpm --filter eds-demo run test:e2e",
     "docu:clear": "pnpm --filter design-system-docs run clear",
-    "docu:start": "pnpm --filter ./apps/design-system-docs run start",
+    "docu:start": "pnpm --filter ./apps/design-system-docs run start --host 0.0.0.0",
     "docu:build": "node scripts/extract-prerequisites.js && pnpm --filter ./apps/design-system-docs run build",
     "docu:prerequisites": "node scripts/extract-prerequisites.js",
     "docu:serve": "pnpm --filter ./apps/design-system-docs run serve",
