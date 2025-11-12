@@ -6,9 +6,11 @@ import * as ComponentStories from './Input.new.stories'
 
 # Input (EDS 2.0)
 
-**New version** of the Input component using vanilla CSS instead of styled-components.
+**New version** of the Input component using vanilla CSS and EDS 2.0 tokens.
 
-Is intended to use if you need to more flexibility than the wrapped TextField or select components give.
+This component uses the **dynamic color approach** from `@equinor/eds-tokens`, allowing semantic context changes via the `data-color-appearance` attribute without modifying component code.
+
+Intended to use if you need more flexibility than the wrapped TextField or select components give.
 
 <Links 
     ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#input"
@@ -27,7 +29,52 @@ import { InputNew } from '@equinor/eds-core-react'
 <InputNew />
 ```
 
-> **Note:** This component is functionally identical to the original `Input` but uses vanilla CSS instead of styled-components. Teams can migrate gradually by importing `InputNew` instead of `Input`.
+> **Note:** This component is functionally identical to the original `Input` but uses vanilla CSS with EDS 2.0 tokens instead of styled-components. Teams can migrate gradually by importing `InputNew` instead of `Input`.
+
+### EDS 2.0 Token System
+
+This component uses the **EDS 2.0 token system** with fixed spacing values:
+* **Size:** XS (8px horizontal padding)
+* **Proportions:** Stretched (50% more vertical padding)
+* **Font size:** LG (16px)
+
+Control the visual state using the `variant` prop:
+
+```tsx
+{/* Default - neutral appearance */}
+<InputNew />
+
+{/* Different variants */}
+<InputNew variant="success" />  {/* Green outline */}
+<InputNew variant="warning" />  {/* Orange outline */}
+<InputNew variant="error" />    {/* Red outline */}
+```
+
+### Density
+
+The component respects the parent's `data-density` attribute for overall spacing density:
+
+* **spacious** - Default, more comfortable spacing
+* **comfortable** - More compact spacing
+
+Wrap the input in a container with `data-density` or use `EdsProvider`:
+
+```tsx
+{/* Spacious (default) */}
+<div>
+  <InputNew />
+</div>
+
+{/* Comfortable */}
+<div data-density="comfortable">
+  <InputNew />
+</div>
+
+{/* With EdsProvider */}
+<EdsProvider density="comfortable">
+  <InputNew />
+</EdsProvider>
+```
 
 ## Examples
 
@@ -55,9 +102,9 @@ It's important to link the `Input` to the corresponding label.
 
 <Canvas of={ComponentStories.Accessiblity} />
 
-### Compact
+### Density
 
-Compact `Input` using `EdsProvider`.
+Demonstrates spacious (default) and comfortable density modes using the `data-density` attribute.
 
 <Canvas of={ComponentStories.Compact} />
 
@@ -71,7 +118,7 @@ Compact `Input` using `EdsProvider`.
 
 ### Override input background color
 
-Use custom property `--eds-input-background` to change the background color of the input field.
+Use the EDS 2.0 token `--eds-color-bg-input` to change the background color of the input field.
 
 <Canvas of={ComponentStories.OverrideBackground} />
 
@@ -90,3 +137,11 @@ import { InputNew as Input } from '@equinor/eds-core-react'
 ```
 
 All props remain the same, so no code changes are needed beyond the import statement.
+
+### Key Differences
+
+* **Styling:** Vanilla CSS with CSS custom properties instead of styled-components
+* **Tokens:** Uses EDS 2.0 color and spacing tokens from `@equinor/eds-tokens`
+* **Spacing:** Fixed spacing values (XS size + stretched proportions) aligned with Figma design
+* **Density:** Respects parent `data-density` attribute for comfortable/spacious modes
+* **Performance:** Lighter bundle size without styled-components runtime
