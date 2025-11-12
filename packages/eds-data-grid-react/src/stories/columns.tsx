@@ -1,8 +1,8 @@
-import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import styled from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
 import { Button, Icon, Typography } from '@equinor/eds-core-react'
 import { chevron_down, chevron_right } from '@equinor/eds-icons'
+import { tokens } from '@equinor/eds-tokens'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import styled from 'styled-components'
 
 export type Photo = {
   albumId: number
@@ -152,6 +152,59 @@ export const expandColumns: Array<ColumnDef<PostComment>> = [
           </Button>
         )}{' '}
         {getValue()}
+      </div>
+    ),
+  }),
+  postHelper.accessor('userId', {
+    header: 'User#',
+    id: 'userId',
+    size: 150,
+  }),
+  postHelper.accessor('title', {
+    header: 'Title',
+    id: 'title',
+    size: 250,
+  }),
+  postHelper.accessor('body', {
+    header: 'Body',
+    cell: (cell) => (
+      <Typography
+        variant={'cell_text'}
+        group={'table'}
+        style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+      >
+        {cell.getValue().substring(0, 60)}...
+      </Typography>
+    ),
+    id: 'body',
+    size: 250,
+  }),
+]
+
+export const rowDetailPanelColumns: Array<ColumnDef<PostComment>> = [
+  postHelper.display({
+    id: 'expand',
+    size: 200,
+    header: ({ table }) => (
+      <Button
+        variant={'ghost_icon'}
+        onClick={table.getToggleAllRowsExpandedHandler()}
+      >
+        <Icon
+          data={table.getIsAllRowsExpanded() ? chevron_down : chevron_right}
+        />
+      </Button>
+    ),
+    cell: ({ row }) => (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Button variant="ghost_icon" onClick={() => row.toggleExpanded()}>
+          <Icon data={row.getIsExpanded() ? chevron_down : chevron_right} />
+        </Button>
       </div>
     ),
   }),
