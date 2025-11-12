@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { anchor, done } from '@equinor/eds-icons'
 import { Input as InputNew } from './Input.new'
-import type { InputProps } from './Input.new'
-import { Label, EdsProvider, Density } from '../..'
+import type { InputProps } from './Input.new.types'
+import { Label } from '../..'
 import { Stack } from './../../../.storybook/components'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
-import styled from 'styled-components'
 import page from './Input.new.docs.mdx'
 
 const icons = {
@@ -42,6 +41,10 @@ export default meta
 
 export const Introduction: StoryFn<InputProps> = (args) => {
   return <InputNew {...args} />
+}
+
+Introduction.args = {
+  placeholder: 'Placeholder text',
 }
 
 export const Types: StoryFn<InputProps> = () => (
@@ -134,21 +137,27 @@ export const Accessiblity: StoryFn<InputProps> = () => {
   )
 }
 
-export const Compact: StoryFn<InputProps> = () => {
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <Label htmlFor="input-new-compact" label="Compact" />
-      <InputNew type="text" id="input-new-compact" />
-    </EdsProvider>
-  )
-}
+export const Compact: StoryFn<InputProps> = () => (
+  <>
+    <div data-density="spacious">
+      <Label htmlFor="input-new-spacious" label="Spacious (default)" />
+      <InputNew
+        id="input-new-spacious"
+        placeholder="Spacious density"
+        autoComplete="off"
+      />
+    </div>
+    <div data-density="comfortable">
+      <Label htmlFor="input-new-comfortable" label="Comfortable (compact)" />
+      <InputNew
+        id="input-new-comfortable"
+        placeholder="Comfortable density"
+        autoComplete="off"
+      />
+    </div>
+  </>
+)
+Compact.storyName = 'Density'
 Compact.decorators = [
   (Story) => {
     return (
@@ -158,11 +167,6 @@ Compact.decorators = [
     )
   },
 ]
-
-const SmallButton = styled(Button)`
-  height: 24px;
-  width: 24px;
-`
 
 export const WithIcons: StoryFn<InputProps> = () => {
   const [icon, setIcon] = useState(true)
@@ -220,13 +224,20 @@ WithIcons.decorators = [
 
 export const WithAdornments: StoryFn<InputProps> = () => {
   return (
-    <EdsProvider>
+    <>
       <Label htmlFor="input-new-adornments-default" label="Default" />
       <InputNew
         type="text"
         id="input-new-adornments-default"
         placeholder="Placeholder text Placeholder text"
-        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        leftAdornments={
+          <Button
+            variant="ghost_icon"
+            style={{ height: '24px', width: '24px' }}
+          >
+            IT
+          </Button>
+        }
         rightAdornments={
           <>
             unit
@@ -239,7 +250,14 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         id="input-new-adornments-error"
         variant="error"
-        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        leftAdornments={
+          <Button
+            variant="ghost_icon"
+            style={{ height: '24px', width: '24px' }}
+          >
+            IT
+          </Button>
+        }
         rightAdornments={
           <>
             unit
@@ -252,7 +270,14 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         id="input-new-adornments-warning"
         variant="warning"
-        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        leftAdornments={
+          <Button
+            variant="ghost_icon"
+            style={{ height: '24px', width: '24px' }}
+          >
+            IT
+          </Button>
+        }
         rightAdornments={
           <>
             unit
@@ -265,7 +290,14 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         id="input-new-adornments-success"
         variant="success"
-        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        leftAdornments={
+          <Button
+            variant="ghost_icon"
+            style={{ height: '24px', width: '24px' }}
+          >
+            IT
+          </Button>
+        }
         rightAdornments={
           <>
             unit
@@ -281,9 +313,13 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         placeholder="Placeholder text Placeholder text"
         value="Some text Some textSome textSome text"
         leftAdornments={
-          <SmallButton disabled variant="ghost_icon">
+          <Button
+            disabled
+            variant="ghost_icon"
+            style={{ height: '24px', width: '24px' }}
+          >
             IT
-          </SmallButton>
+          </Button>
         }
         rightAdornments={
           <>
@@ -297,7 +333,14 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         id="input-new-adornments-readonly"
         readOnly
-        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        leftAdornments={
+          <Button
+            variant="ghost_icon"
+            style={{ height: '24px', width: '24px' }}
+          >
+            IT
+          </Button>
+        }
         rightAdornments={
           <>
             unit
@@ -305,7 +348,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-    </EdsProvider>
+    </>
   )
 }
 
@@ -316,7 +359,7 @@ export const Casted: StoryFn<InputProps> = (args) => {
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
     <InputNew
-      style={{ '--eds-input-background': '#fff' } as React.CSSProperties}
+      style={{ '--eds-color-bg-input': '#fff' } as React.CSSProperties}
       {...args}
     />
   )
