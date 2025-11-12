@@ -10,6 +10,9 @@
   position: relative;
   /* Default hover size */
   --checkbox-hover-size: 40px;
+  /* CSS custom properties for colors - can be overridden externally */
+  --checkbox-icon-color: var(--eds-color-border-accent-strong);
+  --checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-default);
 }
 
 /* Label wrapper contains checkbox + label text */
@@ -35,6 +38,9 @@
 
 .checkbox--error {
   cursor: pointer;
+  /* Override colors for error state */
+  --checkbox-icon-color: var(--eds-color-border-danger-strong);
+  --checkbox-hover-color: var(--eds-color-bg-danger-fill-muted-default);
 }
 
 /* Checkbox input wrapper */
@@ -71,19 +77,13 @@
 
 @media (hover: hover) and (pointer: fine) {
   .checkbox__label-wrapper:hover .checkbox__input-wrapper::before {
-    background-color: var(--eds-color-bg-accent-fill-muted-default);
+    background-color: var(--checkbox-hover-color);
   }
 
   .checkbox--disabled
     .checkbox__label-wrapper:hover
     .checkbox__input-wrapper::before {
     background-color: transparent;
-  }
-
-  .checkbox--error
-    .checkbox__label-wrapper:hover
-    .checkbox__input-wrapper::before {
-    background-color: var(--eds-color-bg-danger-fill-muted-default);
   }
 }
 
@@ -138,7 +138,7 @@
   /* Fixed 24px - standard EDS icon size */
   width: 24px;
   height: 24px;
-  fill: var(--eds-color-border-accent-strong);
+  fill: var(--checkbox-icon-color);
   border-radius: var(--eds-shape-corner-medium);
   position: relative;
   z-index: 2;
@@ -148,9 +148,7 @@
   fill: var(--eds-color-text-neutral-subtle);
 }
 
-.checkbox__icon--error {
-  fill: var(--eds-color-border-danger-strong);
-}
+/* Remove --error modifier, use CSS variable override instead */
 
 /* Icon paths visibility */
 .checkbox__icon-path--checked {
@@ -203,29 +201,4 @@
 
 .checkbox__label--disabled {
   color: var(--eds-color-text-neutral-subtle);
-}
-
-.checkbox__label--error {
-  color: var(--eds-color-text-neutral-strong);
-}
-
-/* Error label container */
-.checkbox__error-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--eds-spacing-inline-2-xs);
-  margin-left: calc(24px + var(--eds-spacing-inline-sm));
-}
-
-/* Error icon */
-.checkbox__error-icon {
-  width: 16px;
-  height: 16px;
-  fill: var(--eds-color-text-danger-strong);
-  flex-shrink: 0;
-}
-
-/* Error text */
-.checkbox__error-text {
-  color: var(--eds-color-text-danger-strong);
 }
