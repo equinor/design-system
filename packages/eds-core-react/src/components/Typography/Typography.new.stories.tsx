@@ -3,10 +3,17 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../.storybook/components'
 import type { TypographyNextProps } from './Typography.new.types'
 import { SAMPLE_TEXT, GridBackground } from './Typography.stories.shared'
+import { Icon } from '../..'
+import * as icons from '@equinor/eds-icons'
+
+Icon.add(icons)
 
 const meta: Meta = {
   title: 'Typography/TypographyNext',
   component: TypographyNext,
+  args: {
+    family: 'ui',
+  },
   parameters: {
     docs: {
       description: {
@@ -36,7 +43,6 @@ import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-c
 
 1. **Now**: Use the new components with aliasing (\`TypographyNext as Typography\`)
 2. **Parallel support**: 6-12 months of both systems supported
-3. **Next major version**: \`TypographyNext\` becomes the default \`Typography\` export
 
 ### Key Differences from current typography
 
@@ -80,6 +86,94 @@ Playground.parameters = {
     description: {
       story:
         'The TypographyNext component provides full control over typography properties. Use it for inline text with specific styling needs.',
+    },
+  },
+}
+
+export const WithIcons: StoryFn = () => {
+  const iconTextStyle: React.CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: 'round(0.618em, 0.5px)',
+    placeItems: 'center start',
+    width: 'fit-content',
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <TypographyNext
+        family="ui"
+        size="xs"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> Extra small text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="sm"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> Small text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="md"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> Medium text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="lg"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> Large text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="xl"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> Extra large text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="2xl"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> 2XL heading text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="3xl"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> 3XL heading text with icon
+      </TypographyNext>
+      <TypographyNext
+        family="ui"
+        size="4xl"
+        baseline="grid"
+        style={iconTextStyle}
+      >
+        <Icon name="save" className="text-icon" /> 4XL heading text with icon
+      </TypographyNext>
+    </div>
+  )
+}
+
+WithIcons.parameters = {
+  docs: {
+    description: {
+      story:
+        "Icons can be used alongside TypographyNext by applying the `.text-icon` class. The icon will automatically adapt its size based on the typography component's font-size using CSS custom properties. The icon scales proportionally with the text size.",
     },
   },
 }
