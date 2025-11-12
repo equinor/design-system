@@ -2,7 +2,6 @@ import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import {
-  _extend,
   includeTokenFilter,
   createDensitySpaceToggleTransform,
 } from '@equinor/eds-tokens-build'
