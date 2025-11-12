@@ -1,4 +1,5 @@
 import './preview.css'
+import '../src/styles.css'
 
 const preview = {
   viewMode: 'docs',
@@ -24,6 +25,6 @@ const preview = {
     },
   },
 
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 export default preview

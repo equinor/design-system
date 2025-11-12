@@ -1,0 +1,4 @@
+/* Global styles for @equinor/eds-core-react */
+
+/* Component styles */
+@import './components/Input/Input.new.css';
