@@ -28,7 +28,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages apps
+      checkout_paths: packages apps scripts
   packages:
     name: Process packages
     runs-on: ubuntu-latest

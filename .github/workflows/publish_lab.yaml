@@ -28,7 +28,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages
+      checkout_paths: packages scripts
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
     name: Process packages
