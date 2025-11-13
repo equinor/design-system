@@ -15,7 +15,6 @@ const SBCard = styled(Card)`
 const meta: Meta<typeof Typography> = {
   title: 'Typography/Typography',
   component: Typography,
-  tags: ['deprecated'],
   argTypes: {
     variant: { control: { type: null } },
     group: { control: { type: null } },
@@ -38,10 +37,6 @@ const meta: Meta<typeof Typography> = {
         excludeDecorators: true,
       },
     },
-    status: {
-      type: 'deprecated',
-    },
-    badges: ['deprecated'],
   },
   decorators: [
     (Story) => {
