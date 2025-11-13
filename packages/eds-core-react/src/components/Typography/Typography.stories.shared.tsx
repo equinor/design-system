@@ -1,4 +1,3 @@
-import { Icon } from '../Icon'
 import { Heading } from './Heading'
 import { Paragraph } from './Paragraph'
 import { TypographyNext } from './Typography.new'
@@ -301,25 +300,6 @@ export const LineHeightComparison = ({
       </ComparisonRowItem>
     ))}
   </>
-)
-
-export const IconTextRow = ({
-  label,
-  size,
-  text = 'Save your work',
-  iconName = 'save',
-}: {
-  label: string
-  size: (typeof SIZES)[number]
-  text?: string
-  iconName?: string
-}) => (
-  <ComparisonRowItem label={label}>
-    <IconTextContainer className={`font-ui text-${size}`}>
-      <Icon name={iconName} className="eds-typography-text-icon" />
-      <span className="text-baseline-center">{text}</span>
-    </IconTextContainer>
-  </ComparisonRowItem>
 )
 
 export const ButtonRow = ({

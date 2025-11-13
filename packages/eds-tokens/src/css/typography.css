@@ -1,12 +1,12 @@
 /*
  * Registered custom property for font-size values
  * 
- * This @property declaration registers --font-size as a typed CSS custom property,
+ * This @property declaration registers --eds-typography-font-size as a typed CSS custom property,
  * enabling proper unit handling in calc() expressions. This is essential for the
- * .eds-typography-text-icon sizing calculations, which use tan(atan2(var(--font-size), 1px)) to
+ * text-icon sizing calculations, which use tan(atan2(var(--eds-typography-font-size), 1px)) to
  * extract the numeric value from the font-size for proportional icon scaling.
  * 
- * Without this registration, the browser would treat --font-size as an untyped string,
+ * Without this registration, the browser would treat --eds-typography-font-size as an untyped string,
  * preventing the mathematical operations needed for responsive icon sizing based on
  * the current text size.
  */
@@ -484,13 +484,4 @@
     padding-top: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
     padding-bottom: calc((round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2);
   }
-}
-
-/* Icon sizing within text elements - adjusts based on font-size */
-.eds-typography-text-icon {
-  width: calc(24px * tan(atan2(var(--eds-typography-font-size), 1px)) / 16);
-  height: auto;
-  font-size: calc(24px * tan(atan2(var(--eds-typography-font-size), 1px)) / 16);
-  margin-block: -0.5em;
-  margin-inline: -0.2em;
 }
