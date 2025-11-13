@@ -316,7 +316,7 @@ export const IconTextRow = ({
 }) => (
   <ComparisonRowItem label={label}>
     <IconTextContainer className={`font-ui text-${size}`}>
-      <Icon name={iconName} className="text-icon" />
+      <Icon name={iconName} className="eds-typography-text-icon" />
       <span className="text-baseline-center">{text}</span>
     </IconTextContainer>
   </ComparisonRowItem>

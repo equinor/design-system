@@ -107,7 +107,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> Extra small text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> Extra small
+        text with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -115,7 +116,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> Small text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> Small text
+        with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -123,7 +125,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> Medium text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> Medium text
+        with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -131,7 +134,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> Large text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> Large text
+        with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -139,7 +143,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> Extra large text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> Extra large
+        text with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -147,7 +152,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> 2XL heading text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> 2XL heading
+        text with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -155,7 +161,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> 3XL heading text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> 3XL heading
+        text with icon
       </TypographyNext>
       <TypographyNext
         family="ui"
@@ -163,7 +170,8 @@ export const WithIcons: StoryFn = () => {
         baseline="grid"
         style={iconTextStyle}
       >
-        <Icon name="save" className="text-icon" /> 4XL heading text with icon
+        <Icon name="save" className="eds-typography-text-icon" /> 4XL heading
+        text with icon
       </TypographyNext>
     </div>
   )
@@ -173,7 +181,61 @@ WithIcons.parameters = {
   docs: {
     description: {
       story:
-        "Icons can be used alongside TypographyNext by applying the `.text-icon` class. The icon will automatically adapt its size based on the typography component's font-size using CSS custom properties. The icon scales proportionally with the text size.",
+        "Icons can be used alongside TypographyNext by applying the `.eds-typography-text-icon` class. The icon will automatically adapt its size based on the typography component's font-size using CSS custom properties. The icon scales proportionally with the text size.",
+    },
+  },
+}
+
+export const AsLink: StoryFn = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="md"
+        baseline="grid"
+      >
+        Link to EDS documentation
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="lg"
+        baseline="grid"
+      >
+        Large link text
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="sm"
+        baseline="grid"
+      >
+        Small link text
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        family="ui"
+        size="md"
+        baseline="grid"
+      >
+        External link (opens in new tab)
+      </TypographyNext>
+    </div>
+  )
+}
+
+AsLink.parameters = {
+  docs: {
+    description: {
+      story:
+        'TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop. All standard anchor attributes are supported, such as `target` and `rel` for external links.',
     },
   },
 }

@@ -3,7 +3,7 @@
  * 
  * This @property declaration registers --font-size as a typed CSS custom property,
  * enabling proper unit handling in calc() expressions. This is essential for the
- * .text-icon sizing calculations, which use tan(atan2(var(--font-size), 1px)) to
+ * .eds-typography-text-icon sizing calculations, which use tan(atan2(var(--font-size), 1px)) to
  * extract the numeric value from the font-size for proportional icon scaling.
  * 
  * Without this registration, the browser would treat --font-size as an untyped string,
@@ -487,7 +487,7 @@
 }
 
 /* Icon sizing within text elements - adjusts based on font-size */
-.text-icon {
+.eds-typography-text-icon {
   width: calc(24px * tan(atan2(var(--eds-typography-font-size), 1px)) / 16);
   height: auto;
   font-size: calc(24px * tan(atan2(var(--eds-typography-font-size), 1px)) / 16);

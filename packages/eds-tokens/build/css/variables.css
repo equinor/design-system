@@ -1269,7 +1269,7 @@
   }
 }
 
-.text-icon {
+.eds-typography-text-icon {
   width: calc(24px * tan(atan2(var(--eds-typography-font-size), 1px)) / 16);
   height: auto;
   font-size: calc(24px * tan(atan2(var(--eds-typography-font-size), 1px)) / 16);
