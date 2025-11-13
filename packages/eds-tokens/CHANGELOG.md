@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.0.0...eds-tokens@v3.0.0) (2025-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **eds-tokens:** update codeSyntax of the spacing and typography tokens ([#4227](https://github.com/equinor/design-system/issues/4227))
+
+### ✨ Added
+
+* **eds-tokens:** update codeSyntax of the spacing and typography tokens ([#4227](https://github.com/equinor/design-system/issues/4227)) ([31a6abc](https://github.com/equinor/design-system/commit/31a6abc2d99aa9e6877358718ff57ad6d19be7b3))
+
+
+### 🐛 Fixed
+
+* **eds-core-react:** rename text-icon className to eds-typography-text-icon to prevent conflicts and support using typography component as link ([#4233](https://github.com/equinor/design-system/issues/4233)) ([9069372](https://github.com/equinor/design-system/commit/906937262b7cf395a03d1867170791d046fd4734))
+
+
+### 🔧 Chores
+
+* **eds-core:** remove old unused variable collections ([26214af](https://github.com/equinor/design-system/commit/26214af425b5b63e6e2d668eaee3f32c6e765da8))
+
 ## [2.0.0](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.4...eds-tokens@v2.0.0) (2025-11-06)
 
 
