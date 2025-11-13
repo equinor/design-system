@@ -5,81 +5,69 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.0.0...eds-tokens@v3.0.0) (2025-11-13)
+## [2.0.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.0.0...eds-tokens@v2.0.1) (2025-11-13)
 
-
-### ⚠ BREAKING CHANGES
-
-* **eds-tokens:** update codeSyntax of the spacing and typography tokens ([#4227](https://github.com/equinor/design-system/issues/4227))
+- **eds-tokens:** update codeSyntax of the spacing and typography tokens ([#4227](https://github.com/equinor/design-system/issues/4227))
 
 ### ✨ Added
 
-* **eds-tokens:** update codeSyntax of the spacing and typography tokens ([#4227](https://github.com/equinor/design-system/issues/4227)) ([31a6abc](https://github.com/equinor/design-system/commit/31a6abc2d99aa9e6877358718ff57ad6d19be7b3))
-
+- **eds-tokens:** update codeSyntax of the spacing and typography tokens ([#4227](https://github.com/equinor/design-system/issues/4227)) ([31a6abc](https://github.com/equinor/design-system/commit/31a6abc2d99aa9e6877358718ff57ad6d19be7b3))
 
 ### 🐛 Fixed
 
-* **eds-core-react:** rename text-icon className to eds-typography-text-icon to prevent conflicts and support using typography component as link ([#4233](https://github.com/equinor/design-system/issues/4233)) ([9069372](https://github.com/equinor/design-system/commit/906937262b7cf395a03d1867170791d046fd4734))
-
+- **eds-core-react:** rename text-icon className to eds-typography-text-icon to prevent conflicts and support using typography component as link ([#4233](https://github.com/equinor/design-system/issues/4233)) ([9069372](https://github.com/equinor/design-system/commit/906937262b7cf395a03d1867170791d046fd4734))
 
 ### 🔧 Chores
 
-* **eds-core:** remove old unused variable collections ([26214af](https://github.com/equinor/design-system/commit/26214af425b5b63e6e2d668eaee3f32c6e765da8))
+- **eds-core:** remove old unused variable collections ([26214af](https://github.com/equinor/design-system/commit/26214af425b5b63e6e2d668eaee3f32c6e765da8))
 
 ## [2.0.0](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.4...eds-tokens@v2.0.0) (2025-11-06)
 
-
 ### ⚠ BREAKING CHANGES
 
-* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200))
-* **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173))
+- **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200))
+- **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173))
 
 ### ✨ Added
 
-* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200)) ([7621866](https://github.com/equinor/design-system/commit/7621866194f67d4118167285e9209c5a5194217c))
-* **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173)) ([0a20351](https://github.com/equinor/design-system/commit/0a20351e68d61334f877bc6ef0a05fcfc1c99c95))
+- **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200)) ([7621866](https://github.com/equinor/design-system/commit/7621866194f67d4118167285e9209c5a5194217c))
+- **eds-tokens,eds-core-react:** move typography css foundation and remove core style ([#4173](https://github.com/equinor/design-system/issues/4173)) ([0a20351](https://github.com/equinor/design-system/commit/0a20351e68d61334f877bc6ef0a05fcfc1c99c95))
 
 ## [1.1.4](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.3...eds-tokens@v1.1.4) (2025-10-29)
 
-
 ### 🐛 Fixed
 
-* Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
-
+- Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
 
 ### 🔧 Chores
 
-* ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
-* **eds-tokens:** update tokens and generate variables ([#4151](https://github.com/equinor/design-system/issues/4151)) ([da830e0](https://github.com/equinor/design-system/commit/da830e0839e807edb9ffef74dc0b9e05f2b90e08)), closes [#4138](https://github.com/equinor/design-system/issues/4138)
+- ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
+- **eds-tokens:** update tokens and generate variables ([#4151](https://github.com/equinor/design-system/issues/4151)) ([da830e0](https://github.com/equinor/design-system/commit/da830e0839e807edb9ffef74dc0b9e05f2b90e08)), closes [#4138](https://github.com/equinor/design-system/issues/4138)
 
 ## [1.1.3](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.2...eds-tokens@v1.1.3) (2025-10-22)
 
-
 ### 📝 Changed
 
-* **eds-tokens:** add info about importing json files and how to use the dynamic and static approach in your project ([#4120](https://github.com/equinor/design-system/issues/4120)) ([62742b9](https://github.com/equinor/design-system/commit/62742b9028ac721afcafc16323e33274ac08ec6f))
+- **eds-tokens:** add info about importing json files and how to use the dynamic and static approach in your project ([#4120](https://github.com/equinor/design-system/issues/4120)) ([62742b9](https://github.com/equinor/design-system/commit/62742b9028ac721afcafc16323e33274ac08ec6f))
 
 ## [1.1.2](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.1...eds-tokens@v1.1.2) (2025-10-16)
 
-
 ### 📝 Changed
 
-* **eds-tokens:** edit docs to trigger publish action ([28b6263](https://github.com/equinor/design-system/commit/28b62633913566eda3e7df313a213fd53e46880a))
+- **eds-tokens:** edit docs to trigger publish action ([28b6263](https://github.com/equinor/design-system/commit/28b62633913566eda3e7df313a213fd53e46880a))
 
 ## [1.1.1](https://github.com/equinor/design-system/compare/eds-tokens@v1.1.0...eds-tokens@v1.1.1) (2025-10-16)
 
-
 ### 📝 Changed
 
-* **eds-tokens:** update docs to trigger publish of package ([e73d676](https://github.com/equinor/design-system/commit/e73d6765aa471a2ae7f3c633c89c4ad21b7bdfa0))
+- **eds-tokens:** update docs to trigger publish of package ([e73d676](https://github.com/equinor/design-system/commit/e73d6765aa471a2ae7f3c633c89c4ad21b7bdfa0))
 
 ## [1.1.0](https://github.com/equinor/design-system/compare/eds-tokens@1.0.0...eds-tokens@v1.1.0) (2025-10-16)
 
-
 ### ✨ Added
 
-* **eds-color-palette-generator,eds-tokens,eds-tokens-build:** use oklch in the palette config ([#4081](https://github.com/equinor/design-system/issues/4081)) ([186cc5f](https://github.com/equinor/design-system/commit/186cc5f5866c71f5aa2a0e4ed0dddb2a82a892f2))
-* **eds-tokens, eds-demo, eds-tailwind:** use single css variables export ([#4098](https://github.com/equinor/design-system/issues/4098)) ([15689fb](https://github.com/equinor/design-system/commit/15689fbd0b7df201be3be1a4f5774a5f44e6403e))
+- **eds-color-palette-generator,eds-tokens,eds-tokens-build:** use oklch in the palette config ([#4081](https://github.com/equinor/design-system/issues/4081)) ([186cc5f](https://github.com/equinor/design-system/commit/186cc5f5866c71f5aa2a0e4ed0dddb2a82a892f2))
+- **eds-tokens, eds-demo, eds-tailwind:** use single css variables export ([#4098](https://github.com/equinor/design-system/issues/4098)) ([15689fb](https://github.com/equinor/design-system/commit/15689fbd0b7df201be3be1a4f5774a5f44e6403e))
 
 ## [1.0.0] - 2025-10-09
 
