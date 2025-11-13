@@ -34,9 +34,9 @@ import { InputNew } from '@equinor/eds-core-react'
 ### EDS 2.0 Token System
 
 This component uses the **EDS 2.0 token system** with fixed spacing values:
-* **Size:** XS (8px horizontal padding)
-* **Proportions:** Stretched (50% more vertical padding)
-* **Font size:** LG (16px)
+- **Size:** XS (8px horizontal padding)
+- **Proportions:** Stretched (50% more vertical padding)
+- **Font size:** LG (16px)
 
 Control the visual state using the `variant` prop:
 
@@ -54,8 +54,8 @@ Control the visual state using the `variant` prop:
 
 The component respects the parent's `data-density` attribute for overall spacing density:
 
-* **spacious** - Default, more comfortable spacing
-* **comfortable** - More compact spacing
+- **spacious** - Default, more comfortable spacing
+- **comfortable** - More compact spacing
 
 Wrap the input in a container with `data-density` or use `EdsProvider`:
 
@@ -100,7 +100,7 @@ This is the native type property and here is a small selection of examples of al
 
 It's important to link the `Input` to the corresponding label.
 
-<Canvas of={ComponentStories.Accessiblity} />
+<Canvas of={ComponentStories.Accessibility} />
 
 ### Density
 
@@ -140,8 +140,8 @@ All props remain the same, so no code changes are needed beyond the import state
 
 ### Key Differences
 
-* **Styling:** Vanilla CSS with CSS custom properties instead of styled-components
-* **Tokens:** Uses EDS 2.0 color and spacing tokens from `@equinor/eds-tokens`
-* **Spacing:** Fixed spacing values (XS size + stretched proportions) aligned with Figma design
-* **Density:** Respects parent `data-density` attribute for comfortable/spacious modes
-* **Performance:** Lighter bundle size without styled-components runtime
+- **Styling:** Vanilla CSS with CSS custom properties instead of styled-components
+- **Tokens:** Uses EDS 2.0 color and spacing tokens from `@equinor/eds-tokens`
+- **Spacing:** Fixed spacing values (XS size + stretched proportions) aligned with Figma design
+- **Density:** Respects parent `data-density` attribute for comfortable/spacious modes
+- **Performance:** Lighter bundle size without styled-components runtime

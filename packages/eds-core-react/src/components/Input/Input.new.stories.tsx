@@ -128,7 +128,7 @@ export const ReadOnly: StoryFn<InputProps> = () => (
 )
 ReadOnly.storyName = 'Read only'
 
-export const Accessiblity: StoryFn<InputProps> = () => {
+export const Accessibility: StoryFn<InputProps> = () => {
   return (
     <>
       <Label htmlFor="input-new-a11y" label="I use the htmlFor prop" />
