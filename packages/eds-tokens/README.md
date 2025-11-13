@@ -142,7 +142,7 @@ const darkSurface = darkSemanticNested.bg.neutral.surface // "#262626"
   * Font weight data attributes (`[data-font-weight='lighter']`, `[data-font-weight='normal']`, `[data-font-weight='bolder']`)
   * Letter spacing data attributes (`[data-tracking='tight']`, `[data-tracking='normal']`, `[data-tracking='wide']`)
   * Baseline grid alignment (`[data-baseline='grid']`, `[data-baseline='center']`)
-  * Icon sizing utilities (`.text-icon`)
+  * Icon sizing utilities (`.eds-typography-text-icon`)
 
 
 #### Using Typography variables
