@@ -105,10 +105,28 @@ jobs:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
           echo "Deleting all existing blobs in container '$web'..."
-          az storage blob delete-batch \
+          # Try delete-batch first (faster), fallback to individual deletion if it fails
+          if ! timeout 60 az storage blob delete-batch \
             --source '$web' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --pattern '*' || echo "No blobs to delete or container is empty, continuing..."
+            --pattern '*' 2>/dev/null; then
+            echo "delete-batch failed or timed out, using individual deletion..."
+            # Fallback: list and delete individually
+            az storage blob list \
+              --container-name '$web' \
+              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+              --query '[].name' \
+              --output tsv | \
+            while read blob_name; do
+              if [ -n "$blob_name" ]; then
+                az storage blob delete \
+                  --container-name '$web' \
+                  --name "$blob_name" \
+                  --connection-string "$AZURE_STORAGE_CONNECTION_STRING" 2>/dev/null || true
+              fi
+            done
+          fi
+          echo "✅ Blob deletion completed"
 
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
