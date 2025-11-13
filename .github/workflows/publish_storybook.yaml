@@ -104,29 +104,57 @@ jobs:
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
-          echo "Deleting all existing blobs in container '$web'..."
-          # Try delete-batch first (faster), fallback to individual deletion if it fails
-          if ! timeout 60 az storage blob delete-batch \
-            --source '$web' \
+          echo "Deleting all existing blobs in container '\$web'..."
+
+          # First, verify we can access the container
+          echo "Verifying container access..."
+          BLOB_COUNT=$(az storage blob list \
+            --container-name '$web' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --pattern '*' 2>/dev/null; then
-            echo "delete-batch failed or timed out, using individual deletion..."
-            # Fallback: list and delete individually
-            az storage blob list \
-              --container-name '$web' \
-              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-              --query '[].name' \
-              --output tsv | \
-            while read blob_name; do
-              if [ -n "$blob_name" ]; then
-                az storage blob delete \
-                  --container-name '$web' \
-                  --name "$blob_name" \
-                  --connection-string "$AZURE_STORAGE_CONNECTION_STRING" 2>/dev/null || true
-              fi
-            done
+            --query 'length(@)' \
+            --output tsv 2>&1)
+
+          if [ $? -ne 0 ]; then
+            echo "❌ Error accessing container: $BLOB_COUNT"
+            exit 1
           fi
-          echo "✅ Blob deletion completed"
+
+          echo "Found $BLOB_COUNT blobs to delete"
+
+          # Delete all blobs - use individual deletion for reliability
+          # This ensures we can see progress and handle errors properly
+          DELETED=0
+          az storage blob list \
+            --container-name '$web' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query '[].name' \
+            --output tsv | \
+          while read blob_name; do
+            if [ -n "$blob_name" ]; then
+              echo "Deleting: $blob_name"
+              if az storage blob delete \
+                --container-name '$web' \
+                --name "$blob_name" \
+                --connection-string "$AZURE_STORAGE_CONNECTION_STRING" 2>&1; then
+                DELETED=$((DELETED + 1))
+              else
+                echo "⚠️ Failed to delete: $blob_name"
+              fi
+            fi
+          done
+
+          # Verify deletion
+          REMAINING=$(az storage blob list \
+            --container-name '$web' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query 'length(@)' \
+            --output tsv)
+
+          echo "✅ Blob deletion completed. Remaining blobs: $REMAINING"
+
+          if [ "$REMAINING" -gt 0 ]; then
+            echo "⚠️ Warning: $REMAINING blobs still remain in container"
+          fi
 
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
@@ -135,13 +163,34 @@ jobs:
         run: |
           echo "Deploying to Azure Blob Storage..."
 
+          # Verify source directory exists and has content
+          if [ ! -d "packages/eds-core-react/storybook-build" ]; then
+            echo "❌ Error: storybook-build directory not found"
+            exit 1
+          fi
+
+          FILE_COUNT=$(find packages/eds-core-react/storybook-build -type f | wc -l)
+          echo "Uploading $FILE_COUNT files..."
+
           az storage blob upload-batch \
             --destination '$web' \
             --source packages/eds-core-react/storybook-build \
             --overwrite \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
 
-          echo "✅ Deployment completed successfully"
+          if [ $? -ne 0 ]; then
+            echo "❌ Upload failed"
+            exit 1
+          fi
+
+          # Verify upload
+          UPLOADED=$(az storage blob list \
+            --container-name '$web' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query 'length(@)' \
+            --output tsv)
+
+          echo "✅ Deployment completed successfully. Total blobs in container: $UPLOADED"
 
       - name: logout 🔓
         run: az logout
