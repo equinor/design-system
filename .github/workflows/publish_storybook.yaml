@@ -100,15 +100,15 @@ jobs:
           tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
           allow-no-subscriptions: true
 
-      - name: Delete old index.json to force overwrite 🗑️
+      - name: Delete all existing blobs to ensure clean deployment 🗑️
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
-          echo "Deleting old index.json..."
-          az storage blob delete \
-            --container-name '$web' \
-            --name index.json \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" || echo "index.json didn't exist, continuing..."
+          echo "Deleting all existing blobs in container '$web'..."
+          az storage blob delete-batch \
+            --source '$web' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --pattern '*' || echo "No blobs to delete or container is empty, continuing..."
 
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
@@ -137,11 +137,10 @@ jobs:
         if: failure()
 
   purge-cdn:
-    if: github.event.inputs.environment == 'production'
     needs: [publish-storybook]
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
-      environment: production
+      environment: ${{ github.event.inputs.environment || 'development' }}
       endpoint: storybook
