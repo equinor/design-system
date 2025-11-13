@@ -39,42 +39,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            echo "Purging Storybook CDN endpoint..."
-            echo "Environment: ${{ inputs.environment }}"
-            echo "Profile: ${{ env.AZURE_CDN_PROFILE_NAME }}"
-            echo "Endpoint: ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }}"
-            echo "Resource Group: ${{ env.AZURE_RESOURCE_GROUP }}"
-
-            # Verify endpoint exists before purging
-            echo "Verifying endpoint exists..."
-            if ! az cdn endpoint show \
-              --profile-name "${{ env.AZURE_CDN_PROFILE_NAME }}" \
-              --name "${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }}" \
-              --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
-              --query name -o tsv > /dev/null 2>&1; then
-              echo "❌ Error: CDN endpoint '${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }}' not found!"
-              echo "Available endpoints:"
-              az cdn endpoint list \
-                --profile-name "${{ env.AZURE_CDN_PROFILE_NAME }}" \
-                --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
-                --query '[].name' -o table || true
-              exit 1
-            fi
-
-            echo "✅ Endpoint verified, purging cache..."
-            az cdn endpoint purge \
-              --content-paths "/*" \
-              --profile-name "${{ env.AZURE_CDN_PROFILE_NAME }}" \
-              --name "${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }}" \
-              --resource-group "${{ env.AZURE_RESOURCE_GROUP }}"
-
-            if [ $? -eq 0 ]; then
-              echo "✅ CDN purge initiated successfully"
-              echo "Note: Purge may take a few minutes to propagate"
-            else
-              echo "❌ CDN purge failed"
-              exit 1
-            fi
+            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --name ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
       - name: logout 🔓
         run: |
           az logout
