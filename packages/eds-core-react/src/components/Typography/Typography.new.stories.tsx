@@ -89,3 +89,57 @@ Playground.parameters = {
     },
   },
 }
+
+export const AsLink: StoryFn = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="md"
+        baseline="grid"
+      >
+        Link to EDS documentation
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="lg"
+        baseline="grid"
+      >
+        Large link text
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="sm"
+        baseline="grid"
+      >
+        Small link text
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        family="ui"
+        size="md"
+        baseline="grid"
+      >
+        External link (opens in new tab)
+      </TypographyNext>
+    </div>
+  )
+}
+
+AsLink.parameters = {
+  docs: {
+    description: {
+      story:
+        'TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop. All standard anchor attributes are supported, such as `target` and `rel` for external links.',
+    },
+  },
+}
