@@ -33,13 +33,13 @@ jobs:
           az extension add -n front-door || az extension update -n front-door
       - name: Purge CDN endpoint 🚮
         if: inputs.endpoint == 'artefacts'
-        uses: azure/CLI@v1
+        uses: azure/cli@v2
         with:
           inlineScript: |
             az afd endpoint purge --content-paths "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --endpoint-name ${{ env.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
       - name: Purge Storybook endpoint 🚮
         if: inputs.endpoint == 'storybook'
-        uses: azure/CLI@v1
+        uses: azure/cli@v2
         with:
           inlineScript: |
             az afd endpoint purge --content-paths "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --endpoint-name ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}

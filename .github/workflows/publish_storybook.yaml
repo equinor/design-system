@@ -104,46 +104,27 @@ jobs:
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
-          echo "Deleting all existing blobs in container '\$web'..."
-
-          # First, verify we can access the container
-          echo "Verifying container access..."
+          set -euo pipefail
+          echo "Checking existing blobs in container '\$web'..."
           BLOB_COUNT=$(az storage blob list \
             --container-name '$web' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
             --query 'length(@)' \
-            --output tsv 2>&1)
+            --output tsv)
 
-          if [ $? -ne 0 ]; then
-            echo "❌ Error accessing container: $BLOB_COUNT"
-            exit 1
+          if [ "$BLOB_COUNT" -eq 0 ]; then
+            echo "Container already empty."
+          else
+            echo "Deleting $BLOB_COUNT blobs..."
+            az storage blob delete-batch \
+              --source '$web' \
+              --pattern "*" \
+              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+              --no-progress \
+              --output none
+            echo "Deletion request submitted."
           fi
 
-          echo "Found $BLOB_COUNT blobs to delete"
-
-          # Delete all blobs - use individual deletion for reliability
-          # This ensures we can see progress and handle errors properly
-          DELETED=0
-          az storage blob list \
-            --container-name '$web' \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --query '[].name' \
-            --output tsv | \
-          while read blob_name; do
-            if [ -n "$blob_name" ]; then
-              echo "Deleting: $blob_name"
-              if az storage blob delete \
-                --container-name '$web' \
-                --name "$blob_name" \
-                --connection-string "$AZURE_STORAGE_CONNECTION_STRING" 2>&1; then
-                DELETED=$((DELETED + 1))
-              else
-                echo "⚠️ Failed to delete: $blob_name"
-              fi
-            fi
-          done
-
-          # Verify deletion
           REMAINING=$(az storage blob list \
             --container-name '$web' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
@@ -151,10 +132,6 @@ jobs:
             --output tsv)
 
           echo "✅ Blob deletion completed. Remaining blobs: $REMAINING"
-
-          if [ "$REMAINING" -gt 0 ]; then
-            echo "⚠️ Warning: $REMAINING blobs still remain in container"
-          fi
 
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
