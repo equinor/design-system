@@ -33,13 +33,13 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --name ${{ env.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
+            az afd endpoint purge --content-paths "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --endpoint-name ${{ env.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
       - name: Purge Storybook endpoint 🚮
         if: inputs.endpoint == 'storybook'
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --name ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
+            az afd endpoint purge --content-paths "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --endpoint-name ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
       - name: logout 🔓
         run: |
           az logout
