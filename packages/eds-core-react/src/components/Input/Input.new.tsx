@@ -18,8 +18,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       style,
       leftAdornmentsProps,
       rightAdornmentsProps,
+      leftAdornmentsWidth,
+      rightAdornmentsWidth,
       as: Component = 'input',
-      'data-testid': dataTestId,
       ...inputProps
     },
     ref,
@@ -29,8 +30,11 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       useState<HTMLDivElement>()
 
     // Calculate dynamic padding based on adornment widths
-    const leftWidth = leftAdornmentsRef ? leftAdornmentsRef.clientWidth : 0
-    const rightWidth = rightAdornmentsRef ? rightAdornmentsRef.clientWidth : 0
+    // Use manual width if provided, otherwise auto-measure from DOM
+    const leftWidth =
+      leftAdornmentsWidth ?? (leftAdornmentsRef?.clientWidth || 0)
+    const rightWidth =
+      rightAdornmentsWidth ?? (rightAdornmentsRef?.clientWidth || 0)
 
     // Map variant to color appearance (internal use only)
     const colorAppearance =
@@ -67,7 +71,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
         data-color-appearance={colorAppearance}
         data-selectable-space={selectableSpace}
         data-space-proportions={spaceProportions}
-        data-testid={dataTestId}
       >
         {leftAdornments && (
           <div

@@ -121,48 +121,55 @@ describe('Input (New)', () => {
   describe('EDS 2.0 Token System', () => {
     describe('Variant mapping to color appearance', () => {
       it('Sets neutral appearance by default when no variant specified', () => {
-        render(<Input id="test-default" data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input id="test-default" />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
       })
 
       it('Sets success appearance when variant is success', () => {
-        render(<Input variant="success" data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input variant="success" />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-color-appearance', 'success')
       })
 
       it('Sets warning appearance when variant is warning', () => {
-        render(<Input variant="warning" data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input variant="warning" />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-color-appearance', 'warning')
       })
 
       it('Maps error variant to danger appearance', () => {
-        render(<Input variant="error" data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input variant="error" />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-color-appearance', 'danger')
       })
     })
 
     describe('Fixed EDS 2.0 spacing (internal)', () => {
       it('Always sets data-selectable-space to xs', () => {
-        render(<Input data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-selectable-space', 'xs')
       })
 
       it('Always sets data-space-proportions to stretched', () => {
-        render(<Input data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-space-proportions', 'stretched')
       })
     })
 
     describe('Density (data-density)', () => {
       it('Does not set data-density attribute (controlled by parent)', () => {
-        render(<Input data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).not.toHaveAttribute('data-density')
       })
 
@@ -191,8 +198,9 @@ describe('Input (New)', () => {
 
     describe('Integration with foundation.css', () => {
       it('Applies correct CSS classes for styling hooks', () => {
-        render(<Input className="test-class" data-testid="input-wrapper" />)
-        const wrapper = screen.getByTestId('input-wrapper')
+        render(<Input className="test-class" />)
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveClass('eds-input')
         expect(wrapper).toHaveClass('test-class')
       })
@@ -201,6 +209,57 @@ describe('Input (New)', () => {
         render(<Input value="test" readOnly />)
         const field = screen.getByDisplayValue('test')
         expect(field).toHaveClass('eds-field')
+      })
+    })
+
+    describe('Adornment width props', () => {
+      it('Accepts leftAdornmentsWidth prop for manual width override', () => {
+        render(
+          <Input
+            leftAdornments={<span>Icon</span>}
+            leftAdornmentsWidth={32}
+            placeholder="test"
+          />,
+        )
+        const input = screen.getByPlaceholderText('test')
+        expect(input).toHaveStyle({
+          paddingLeft:
+            'calc(var(--eds-selectable-spacing-inline) + 32px)',
+        })
+      })
+
+      it('Accepts rightAdornmentsWidth prop for manual width override', () => {
+        render(
+          <Input
+            rightAdornments={<span>Icon</span>}
+            rightAdornmentsWidth={48}
+            placeholder="test"
+          />,
+        )
+        const input = screen.getByPlaceholderText('test')
+        expect(input).toHaveStyle({
+          paddingRight:
+            'calc(var(--eds-selectable-spacing-inline) + 48px)',
+        })
+      })
+
+      it('Uses manual widths over auto-measured widths when both present', () => {
+        render(
+          <Input
+            leftAdornments={<span>Left</span>}
+            rightAdornments={<span>Right</span>}
+            leftAdornmentsWidth={24}
+            rightAdornmentsWidth={24}
+            placeholder="test"
+          />,
+        )
+        const input = screen.getByPlaceholderText('test')
+        expect(input).toHaveStyle({
+          paddingLeft:
+            'calc(var(--eds-selectable-spacing-inline) + 24px)',
+          paddingRight:
+            'calc(var(--eds-selectable-spacing-inline) + 24px)',
+        })
       })
     })
   })

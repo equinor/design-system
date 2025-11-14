@@ -22,12 +22,14 @@ export type InputProps = {
   leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
   /** Right adornments props */
   rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
+  /** Manually specify left adornments width. The width will be auto-measured if not defined */
+  leftAdornmentsWidth?: number
+  /** Manually specify right adornments width. The width will be auto-measured if not defined */
+  rightAdornmentsWidth?: number
   /** Cast the input to another element */
   as?: ElementComponent
   /** Additional CSS class names to apply to the container */
   className?: string
   /** Inline styles to apply to the container */
   style?: CSSProperties
-  /** Test ID for testing */
-  'data-testid'?: string
 }
