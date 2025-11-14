@@ -8,7 +8,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     InputProps & InputHTMLAttributes<HTMLInputElement>
   >(function Input(
     {
-      variant,
+      invalid = false,
       disabled = false,
       type = 'text',
       leftAdornments,
@@ -36,9 +36,8 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const rightWidth =
       rightAdornmentsWidth ?? (rightAdornmentsRef?.clientWidth || 0)
 
-    // Map variant to color appearance (internal use only)
-    const colorAppearance =
-      variant === 'error' ? 'danger' : variant || 'neutral'
+    // Map invalid state to color appearance (internal use only)
+    const colorAppearance = invalid ? 'danger' : 'neutral'
 
     // Fixed EDS 2.0 spacing values (internal - not exposed to users)
     const selectableSpace = 'xs'
@@ -49,7 +48,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       className,
       disabled && 'eds-input--disabled',
       readOnly && 'eds-input--readonly',
-      variant && `eds-input--${variant}`,
+      invalid && 'eds-input--invalid',
     ]
       .filter(Boolean)
       .join(' ')
@@ -68,7 +67,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       <div
         className={containerClasses}
         style={style}
-        data-color-appearance={colorAppearance}
+        data-color-appearance={disabled ? 'neutral' : colorAppearance}
         data-selectable-space={selectableSpace}
         data-space-proportions={spaceProportions}
       >
@@ -77,6 +76,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             {...leftAdornmentsProps}
             ref={setLeftAdornmentsRef}
             className="eds-adornment eds-adornment--left"
+            data-color-appearance="neutral"
           >
             {leftAdornments}
           </div>
@@ -97,6 +97,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             {...rightAdornmentsProps}
             ref={setRightAdornmentsRef}
             className="eds-adornment eds-adornment--right"
+            data-color-appearance="neutral"
           >
             {rightAdornments}
           </div>
