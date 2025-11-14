@@ -137,6 +137,7 @@ jobs:
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
+          set -euo pipefail
           echo "Deploying to Azure Blob Storage..."
 
           # Verify source directory exists and has content
@@ -153,11 +154,6 @@ jobs:
             --source packages/eds-core-react/storybook-build \
             --overwrite \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
-
-          if [ $? -ne 0 ]; then
-            echo "❌ Upload failed"
-            exit 1
-          fi
 
           # Verify upload
           UPLOADED=$(az storage blob list \
