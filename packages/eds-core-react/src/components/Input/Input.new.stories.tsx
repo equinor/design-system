@@ -64,7 +64,7 @@ export const Types: StoryFn<InputProps> = () => (
   </>
 )
 
-export const Variants: StoryFn<InputProps> = () => (
+export const ValidationStates: StoryFn<InputProps> = () => (
   <>
     <div>
       <Label htmlFor="input-new-default" label="Default" />
@@ -75,34 +75,17 @@ export const Variants: StoryFn<InputProps> = () => (
       />
     </div>
     <div>
-      <Label htmlFor="input-new-success" label="Success" />
+      <Label htmlFor="input-new-invalid" label="Invalid" />
       <InputNew
-        id="input-new-success"
+        id="input-new-invalid"
         placeholder="Placeholder text"
         autoComplete="off"
-        variant="success"
-      />
-    </div>
-    <div>
-      <Label htmlFor="input-new-warning" label="Warning" />
-      <InputNew
-        id="input-new-warning"
-        placeholder="Placeholder text"
-        autoComplete="off"
-        variant="warning"
-      />
-    </div>
-    <div>
-      <Label htmlFor="input-new-error" label="Error" />
-      <InputNew
-        id="input-new-error"
-        placeholder="Placeholder text"
-        autoComplete="off"
-        variant="error"
+        invalid
       />
     </div>
   </>
 )
+ValidationStates.storyName = 'Validation States'
 
 export const Disabled: StoryFn<InputProps> = () => (
   <>
@@ -123,7 +106,7 @@ Disabled.decorators = [
 export const ReadOnly: StoryFn<InputProps> = () => (
   <>
     <Label htmlFor="input-new-readonly" label="Read only" />
-    <InputNew id="input-new-readonly" placeholder="Placeholder text" readOnly />
+    <InputNew id="input-new-readonly" defaultValue="Read only value" readOnly />
   </>
 )
 ReadOnly.storyName = 'Read only'
@@ -245,51 +228,11 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-new-adornments-error" label="Error" />
+      <Label htmlFor="input-new-adornments-invalid" label="Invalid" />
       <InputNew
         type="text"
-        id="input-new-adornments-error"
-        variant="error"
-        leftAdornments={
-          <Button
-            variant="ghost_icon"
-            style={{ height: '24px', width: '24px' }}
-          >
-            IT
-          </Button>
-        }
-        rightAdornments={
-          <>
-            unit
-            <Icon data={anchor} size={18}></Icon>
-          </>
-        }
-      />
-      <Label htmlFor="input-new-adornments-warning" label="Warning" />
-      <InputNew
-        type="text"
-        id="input-new-adornments-warning"
-        variant="warning"
-        leftAdornments={
-          <Button
-            variant="ghost_icon"
-            style={{ height: '24px', width: '24px' }}
-          >
-            IT
-          </Button>
-        }
-        rightAdornments={
-          <>
-            unit
-            <Icon data={anchor} size={18}></Icon>
-          </>
-        }
-      />
-      <Label htmlFor="input-new-adornments-success" label="Success" />
-      <InputNew
-        type="text"
-        id="input-new-adornments-success"
-        variant="success"
+        id="input-new-adornments-invalid"
+        invalid
         leftAdornments={
           <Button
             variant="ghost_icon"
@@ -373,3 +316,112 @@ OverrideBackground.decorators = [
     )
   },
 ]
+
+export const ColorSchemes: StoryFn<InputProps> = () => {
+  return (
+    <div
+      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}
+    >
+      {/* Light mode */}
+      <div
+        data-color-scheme="light"
+        style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      >
+        <h3 style={{ marginTop: 0 }}>Light Mode</h3>
+        <div>
+          <Label htmlFor="input-light-default" label="Default" />
+          <InputNew
+            id="input-light-default"
+            placeholder="Placeholder text"
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-light-filled" label="With value" />
+          <InputNew
+            id="input-light-filled"
+            defaultValue="Input value"
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-light-invalid" label="Invalid" />
+          <InputNew
+            id="input-light-invalid"
+            defaultValue="Invalid value"
+            invalid
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-light-readonly" label="Read only" />
+          <InputNew
+            id="input-light-readonly"
+            defaultValue="Read only value"
+            readOnly
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-light-disabled" label="Disabled" />
+          <InputNew
+            id="input-light-disabled"
+            placeholder="Placeholder text"
+            disabled
+          />
+        </div>
+      </div>
+
+      {/* Dark mode */}
+      <div
+        data-color-scheme="dark"
+        style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      >
+        <h3 style={{ marginTop: 0, color: 'var(--eds-color-text-strong)' }}>
+          Dark Mode
+        </h3>
+        <div>
+          <Label htmlFor="input-dark-default" label="Default" />
+          <InputNew
+            id="input-dark-default"
+            placeholder="Placeholder text"
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-dark-filled" label="With value" />
+          <InputNew
+            id="input-dark-filled"
+            defaultValue="Input value"
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-dark-invalid" label="Invalid" />
+          <InputNew
+            id="input-dark-invalid"
+            defaultValue="Invalid value"
+            invalid
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-dark-readonly" label="Read only" />
+          <InputNew
+            id="input-dark-readonly"
+            defaultValue="Read only value"
+            readOnly
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Label htmlFor="input-dark-disabled" label="Disabled" />
+          <InputNew
+            id="input-dark-disabled"
+            placeholder="Placeholder text"
+            disabled
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+ColorSchemes.storyName = 'Light & Dark Mode'
