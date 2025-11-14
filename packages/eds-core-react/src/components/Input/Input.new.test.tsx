@@ -196,7 +196,7 @@ describe('Input (New)', () => {
       })
     })
 
-    describe('Integration with foundation.css', () => {
+    describe('CSS classes and styling', () => {
       it('Applies correct CSS classes for styling hooks', () => {
         render(<Input className="test-class" />)
         // eslint-disable-next-line testing-library/no-node-access
