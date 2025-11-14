@@ -32,7 +32,6 @@ ENV NODE_ENV=production \
     UID=12345 \
     NEXT_TELEMETRY_DISABLED=1
 
-    
 # Install pnpm and create non-root user
 RUN npm install -g pnpm@10.15.0 && \
     addgroup -S "$USER" && \
