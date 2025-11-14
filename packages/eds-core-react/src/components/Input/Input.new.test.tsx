@@ -223,8 +223,7 @@ describe('Input (New)', () => {
         )
         const input = screen.getByPlaceholderText('test')
         expect(input).toHaveStyle({
-          paddingLeft:
-            'calc(var(--eds-selectable-spacing-inline) + 32px)',
+          paddingLeft: 'calc(var(--eds-selectable-spacing-inline) + 32px)',
         })
       })
 
@@ -238,8 +237,7 @@ describe('Input (New)', () => {
         )
         const input = screen.getByPlaceholderText('test')
         expect(input).toHaveStyle({
-          paddingRight:
-            'calc(var(--eds-selectable-spacing-inline) + 48px)',
+          paddingRight: 'calc(var(--eds-selectable-spacing-inline) + 48px)',
         })
       })
 
@@ -255,10 +253,8 @@ describe('Input (New)', () => {
         )
         const input = screen.getByPlaceholderText('test')
         expect(input).toHaveStyle({
-          paddingLeft:
-            'calc(var(--eds-selectable-spacing-inline) + 24px)',
-          paddingRight:
-            'calc(var(--eds-selectable-spacing-inline) + 24px)',
+          paddingLeft: 'calc(var(--eds-selectable-spacing-inline) + 24px)',
+          paddingRight: 'calc(var(--eds-selectable-spacing-inline) + 24px)',
         })
       })
     })
