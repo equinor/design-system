@@ -120,7 +120,6 @@ jobs:
               --source '$web' \
               --pattern "*" \
               --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-              --no-progress \
               --output none
             echo "Deletion request submitted."
           fi
