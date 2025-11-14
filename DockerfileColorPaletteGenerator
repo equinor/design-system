@@ -16,7 +16,12 @@ COPY . ./
 # Install dependencies first
 RUN pnpm install --frozen-lockfile
 
-RUN pnpm --filter eds-color-palette-generator run build
+# Build workspace dependencies, then build the app
+RUN pnpm --filter @equinor/eds-tokens-sync run build && \
+    pnpm --filter @equinor/eds-tokens-build run build && \
+    pnpm --filter @equinor/eds-tokens run build && \
+    pnpm --filter @equinor/eds-utils run build && \
+    pnpm --filter eds-color-palette-generator run build
 
 FROM node:22.12.0-alpine AS runner
 WORKDIR /app
@@ -27,20 +32,24 @@ ENV NODE_ENV=production \
     UID=12345 \
     NEXT_TELEMETRY_DISABLED=1
 
+    
 # Install pnpm and create non-root user
 RUN npm install -g pnpm@10.15.0 && \
     addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini
 
-# Copy just the essential built files and node_modules
-COPY --chown="$USER":"$USER" --from=build /app/packages/eds-color-palette-generator ./packages/eds-color-palette-generator
+# Copy just the essential built files, workspace dependencies, and node_modules
+COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator ./apps/eds-color-palette-generator
+COPY --chown="$USER":"$USER" --from=build /app/packages ./packages
 COPY --chown="$USER":"$USER" --from=build /app/node_modules ./node_modules
+COPY --chown="$USER":"$USER" --from=build /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --chown="$USER":"$USER" --from=build /app/package.json ./package.json
 
 USER "$UID"
 
 EXPOSE 3000
 
 ENTRYPOINT ["/sbin/tini", "--"]
-WORKDIR /app/packages/eds-color-palette-generator
+WORKDIR /app/apps/eds-color-palette-generator
 CMD ["pnpm", "start"]
