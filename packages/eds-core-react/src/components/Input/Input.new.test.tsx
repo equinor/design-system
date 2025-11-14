@@ -31,21 +31,9 @@ describe('Input (New)', () => {
     expect(inputElement).toHaveValue(value)
   })
 
-  it('Renders input with success variant', () => {
-    render(<Input aria-label="Success input" variant="success" />)
-    const input = screen.getByRole('textbox', { name: 'Success input' })
-    expect(input).toBeInTheDocument()
-  })
-
-  it('Renders input with warning variant', () => {
-    render(<Input aria-label="Warning input" variant="warning" />)
-    const input = screen.getByRole('textbox', { name: 'Warning input' })
-    expect(input).toBeInTheDocument()
-  })
-
-  it('Renders input with error variant', () => {
-    render(<Input aria-label="Error input" variant="error" />)
-    const input = screen.getByRole('textbox', { name: 'Error input' })
+  it('Renders input with invalid state', () => {
+    render(<Input aria-label="Invalid input" invalid />)
+    const input = screen.getByRole('textbox', { name: 'Invalid input' })
     expect(input).toBeInTheDocument()
   })
 
@@ -53,7 +41,7 @@ describe('Input (New)', () => {
     render(
       <Input
         id="test-css-extend"
-        variant="error"
+        invalid
         value="textfield"
         className="custom-class"
         style={{ marginTop: '48px' }}
@@ -119,30 +107,16 @@ describe('Input (New)', () => {
   })
 
   describe('EDS 2.0 Token System', () => {
-    describe('Variant mapping to color appearance', () => {
-      it('Sets neutral appearance by default when no variant specified', () => {
+    describe('Invalid state mapping to color appearance', () => {
+      it('Sets neutral appearance by default when not invalid', () => {
         render(<Input id="test-default" />)
         // eslint-disable-next-line testing-library/no-node-access
         const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
       })
 
-      it('Sets success appearance when variant is success', () => {
-        render(<Input variant="success" />)
-        // eslint-disable-next-line testing-library/no-node-access
-        const wrapper = screen.getByDisplayValue('').parentElement
-        expect(wrapper).toHaveAttribute('data-color-appearance', 'success')
-      })
-
-      it('Sets warning appearance when variant is warning', () => {
-        render(<Input variant="warning" />)
-        // eslint-disable-next-line testing-library/no-node-access
-        const wrapper = screen.getByDisplayValue('').parentElement
-        expect(wrapper).toHaveAttribute('data-color-appearance', 'warning')
-      })
-
-      it('Maps error variant to danger appearance', () => {
-        render(<Input variant="error" />)
+      it('Maps invalid state to danger appearance', () => {
+        render(<Input invalid />)
         // eslint-disable-next-line testing-library/no-node-access
         const wrapper = screen.getByDisplayValue('').parentElement
         expect(wrapper).toHaveAttribute('data-color-appearance', 'danger')

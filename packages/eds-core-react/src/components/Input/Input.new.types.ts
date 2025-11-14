@@ -1,13 +1,12 @@
 import { ReactNode, CSSProperties, ComponentPropsWithoutRef } from 'react'
-import type { Variants } from '../types'
 
 type ElementComponent = 'input' | 'textarea'
 
 export type InputProps = {
   /** Placeholder */
   placeholder?: string
-  /** Variant */
-  variant?: Variants
+  /** Invalid state - shows error styling */
+  invalid?: boolean
   /** Disabled state */
   disabled?: boolean
   /** Type */

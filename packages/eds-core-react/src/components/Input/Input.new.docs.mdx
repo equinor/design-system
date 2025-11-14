@@ -38,16 +38,14 @@ This component uses the **EDS 2.0 token system** with fixed spacing values:
 - **Proportions:** Stretched (50% more vertical padding)
 - **Font size:** LG (16px)
 
-Control the visual state using the `variant` prop:
+Control the validation state using the `invalid` prop:
 
 ```tsx
 {/* Default - neutral appearance */}
 <InputNew />
 
-{/* Different variants */}
-<InputNew variant="success" />  {/* Green outline */}
-<InputNew variant="warning" />  {/* Orange outline */}
-<InputNew variant="error" />    {/* Red outline */}
+{/* Invalid state */}
+<InputNew invalid />  {/* Red border for validation errors */}
 ```
 
 ### Density
@@ -84,9 +82,9 @@ This is the native type property and here is a small selection of examples of al
 
 <Canvas of={ComponentStories.Types} />
 
-### Variants
+### Validation States
 
-<Canvas of={ComponentStories.Variants} />
+<Canvas of={ComponentStories.ValidationStates} />
 
 ### Disabled
 
@@ -107,6 +105,31 @@ It's important to link the `Input` to the corresponding label.
 Demonstrates spacious (default) and comfortable density modes using the `data-density` attribute.
 
 <Canvas of={ComponentStories.Compact} />
+
+### Light & Dark Mode
+
+The Input component automatically adapts to light and dark color schemes using the `data-color-scheme` attribute. All color tokens adjust accordingly to maintain proper contrast and readability.
+
+<Canvas of={ComponentStories.ColorSchemes} />
+
+Set the color scheme on a parent element or use `EdsProvider`:
+
+```tsx
+{/* Light mode (default) */}
+<div data-color-scheme="light">
+  <InputNew />
+</div>
+
+{/* Dark mode */}
+<div data-color-scheme="dark">
+  <InputNew />
+</div>
+
+{/* With EdsProvider */}
+<EdsProvider colorScheme="dark">
+  <InputNew />
+</EdsProvider>
+```
 
 ### With Adornments
 
