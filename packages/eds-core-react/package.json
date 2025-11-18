@@ -32,8 +32,8 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
     },
-    "./styles.css": "./build/styles.css",
-    "./styles.min.css": "./build/styles.min.css"
+    "./index.css": "./build/index.css",
+    "./index.min.css": "./build/index.min.css"
   },
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",

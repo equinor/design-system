@@ -58,11 +58,11 @@ export default [
     ],
   },
   {
-    input: './src/styles.css',
+    input: './src/index.css',
     plugins: [
       postcss({
         extensions: ['.css'],
-        extract: 'styles.css',
+        extract: 'index.css',
         minimize: false,
         sourceMap: false,
         plugins: [postcssImport()],
@@ -74,11 +74,11 @@ export default [
     },
   },
   {
-    input: './src/styles.css',
+    input: './src/index.css',
     plugins: [
       postcss({
         extensions: ['.css'],
-        extract: 'styles.min.css',
+        extract: 'index.min.css',
         minimize: true,
         sourceMap: false,
         plugins: [postcssImport()],

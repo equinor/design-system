@@ -97,7 +97,7 @@
   }
 
   /* Force neutral colors for adornments even when parent has invalid state */
-  [data-color-appearance] .eds-adornment {
+  .eds-input[data-color-appearance] .eds-adornment {
     color: var(--eds-color-text-subtle);
   }
 
