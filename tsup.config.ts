@@ -9,22 +9,11 @@ export default defineConfig((options) => ({
   format: "esm",
   bundle: !options.watch,
   tsconfig: "./tsconfig.json",
-  external: [
-    "@expo/vector-icons",
-    "react",
-    "react-native",
-    "react-native-svg",
-    "react-native-reanimated",
-    "react-native-gesture-handler",
-    "expo-font"
-  ],
   loader: {
-    ".otf": "file",
-    ".jsx": "jsx",
+    ".otf": "copy",
   },
   esbuildOptions(options) {
     options.assetNames = "assets/fonts/[name]";
-    options.jsx = "automatic";
   },
   async onSuccess() {
     // In watch mode we will build using this function.
@@ -39,6 +28,4 @@ export default defineConfig((options) => ({
       "--declaration",
     ]);
   },
-}
-)
-);
+}));
