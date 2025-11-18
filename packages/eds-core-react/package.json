@@ -23,7 +23,8 @@
     "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "build/*"
   ],
   "exports": {
     ".": {
