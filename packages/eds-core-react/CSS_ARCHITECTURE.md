@@ -1,75 +1,71 @@
-# Global CSS Architecture
+# CSS Architecture
 
 ## Overview
 
-Component CSS is now centralized in a global `styles.css` file to prevent duplicate CSS imports when users consume the library.
+Component CSS is centralized in `src/styles.css` to prevent duplicate imports and enable automatic tree-shaking.
 
 ## Structure
 
 ```
 src/
-├── styles.css                    # Global CSS entry point
-├── index.ts                      # Imports styles.css once
+├── styles.css          # Imports all component CSS
+├── index.ts            # Imports styles.css once
 └── components/
     └── Input/
-        ├── Input.new.tsx         # No CSS import
-        └── Input.new.css         # Styles imported via styles.css
+        ├── Input.new.tsx     # No CSS import
+        └── Input.new.css     # Styles defined here
 ```
 
 ## How It Works
 
-1. **Component CSS files** (`Input.new.css`) contain the styles
-2. **Global styles.css** imports all component CSS files
-3. **Main index.ts** imports `styles.css` once
-4. **Users** get all CSS automatically when they import any component
+1. Component CSS files contain the styles
+2. `src/styles.css` imports all component CSS with `@import`
+3. `src/index.ts` imports `styles.css` once
+4. Users get all CSS automatically when importing components
 
-## Benefits
+## Adding Components
 
-✅ **No duplicate CSS** - CSS is imported once at the package level  
-✅ **Automatic tree-shaking** - Bundlers can optimize unused CSS  
-✅ **Better performance** - Single CSS import instead of per-component  
-✅ **Easier maintenance** - All CSS imports in one place  
+When creating a component with CSS:
 
-## Adding New Components
-
-When creating a new component with CSS:
-
-1. Create the component CSS file (e.g., `Button.new.css`)
-2. Add import to `src/styles.css`:
+1. Create `Button.new.css` in component directory
+2. Add to `src/styles.css`:
    ```css
    @import './components/Button/Button.new.css';
    ```
-3. **Do NOT** import CSS in the component `.tsx` file
+3. **Never** import CSS in `.tsx` files
 
-## Storybook Configuration
+## Build
 
-The `.storybook/preview.mjs` imports the global CSS file:
+Rollup builds CSS with PostCSS to bundle all `@import` statements:
 
-```javascript
-import './preview.css'
-import '../src/styles.css'  // Global component styles
-```
+- **Input**: `src/styles.css`
+- **Output**: 
+  - `build/styles.css` (3.5KB formatted)
+  - `build/styles.min.css` (2.1KB minified)
 
-This ensures all component styles are available in Storybook stories.
+## Usage
 
-## User Consumption
-
-Users automatically get all CSS when importing components:
+Import components normally -- CSS is included automatically:
 
 ```tsx
-// This imports both the component AND all CSS
 import { InputNew } from '@equinor/eds-core-react'
 ```
 
-Alternatively, users can import just the CSS if needed:
+Or import CSS separately if needed:
 
 ```tsx
-import '@equinor/eds-core-react/styles.css'
+import '@equinor/eds-core-react/styles.css'      // Development
+import '@equinor/eds-core-react/styles.min.css'  // Production
 ```
 
-## Package Configuration
+## Configuration
 
-The `package.json` includes:
+**package.json**:
+- `"sideEffects": ["**/*.css"]` -- Preserves CSS during tree-shaking
+- `"files": ["dist/*", "build/*"]` -- Publishes JS and CSS
+- Exports CSS at `./styles.css` and `./styles.min.css`
 
-- `"sideEffects": ["**/*.css"]` - Preserves CSS imports during tree-shaking
-- `"./styles.css": "./dist/esm/styles.css"` - Exports CSS separately if needed
+**Storybook** (`.storybook/preview.mjs`):
+```javascript
+import '../src/styles.css'  // Global component styles
+```
