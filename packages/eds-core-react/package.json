@@ -23,7 +23,8 @@
     "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "build/*"
   ],
   "exports": {
     ".": {
@@ -31,7 +32,8 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
     },
-    "./styles.css": "./dist/esm/styles.css"
+    "./styles.css": "./build/styles.css",
+    "./styles.min.css": "./build/styles.min.css"
   },
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",
