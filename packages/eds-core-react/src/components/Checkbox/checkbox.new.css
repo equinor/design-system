@@ -8,7 +8,7 @@
   cursor: pointer;
   position: relative;
   /* Default hover size */
-  --checkbox-hover-size: 40px;
+  --checkbox-hover-size: 48px;
   /* CSS custom properties for colors - can be overridden externally */
   --checkbox-icon-color: var(--eds-color-border-accent-strong);
   --checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-default);
@@ -18,17 +18,18 @@
 .checkbox__label-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: var(--eds-selectable-gap-inline);
+  gap: 16px;
 }
 
 /* Spacious density mode (default/comfortable in TypeScript) */
+
 .checkbox[data-density='spacious'] {
-  --checkbox-hover-size: 40px;
+  --checkbox-hover-size: 48px;
 }
 
 /* Compact density mode (compact in TypeScript) */
 .checkbox[data-density='comfortable'] {
-  --checkbox-hover-size: 32px;
+  --checkbox-hover-size: 40px;
 }
 
 .checkbox--disabled {
@@ -75,13 +76,15 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .checkbox__label-wrapper:hover .checkbox__input-wrapper::before {
+  .checkbox__label-wrapper:hover .checkbox__input-wrapper::before,
+  .checkbox:hover .checkbox__input-wrapper::before {
     background-color: var(--checkbox-hover-color);
   }
 
   .checkbox--disabled
     .checkbox__label-wrapper:hover
-    .checkbox__input-wrapper::before {
+    .checkbox__input-wrapper::before,
+  .checkbox--disabled:hover .checkbox__input-wrapper::before {
     background-color: transparent;
   }
 }
