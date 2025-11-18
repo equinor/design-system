@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef, ChangeEvent } from 'react'
-import { Typography, Button, Table } from '../..'
-import { Checkbox } from './Checkbox.new'
-import type { CheckboxProps } from './Checkbox.new.types'
 import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
+import { Typography, Button, Table } from '../..'
+import { Field } from '../Field'
+import { ValidationMessage } from '../ValidationMessage'
+import { Checkbox } from './Checkbox.new'
+import type { CheckboxProps } from './Checkbox.new.types'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Inputs/Selection Controls/Checkbox.new',
@@ -353,7 +355,10 @@ export const ErrorState: StoryFn<CheckboxProps> = () => {
       />
       <Typography
         variant="caption"
-        style={{ marginTop: '0.5rem', color: 'var(--eds-color-text-danger-strong)' }}
+        style={{
+          marginTop: '0.5rem',
+          color: 'var(--eds-color-text-danger-strong)',
+        }}
       >
         {!checked && 'You must accept the terms and conditions'}
       </Typography>
@@ -369,3 +374,32 @@ ErrorState.parameters = {
     },
   },
 }
+
+export const WithField: StoryFn<CheckboxProps> = () => {
+  const [accepted, setAccepted] = useState(false)
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setAccepted(event.target.checked)
+  }
+
+  return (
+    <Field required>
+      <Field.Label>Bruksvilkår</Field.Label>
+      <Field.Description>
+        Du må godta vilkårene for å fortsette.
+      </Field.Description>
+      <Checkbox
+        label="Jeg bekrefter at jeg har lest og forstått vilkårene"
+        checked={accepted}
+        onChange={onChange}
+        error={!accepted}
+      />
+      {!accepted && (
+        <ValidationMessage>
+          Du må godta bruksvilkårene før du kan gå videre
+        </ValidationMessage>
+      )}
+    </Field>
+  )
+}
+WithField.storyName = 'Field integration'

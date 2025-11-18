@@ -40,4 +40,6 @@ export * from './components/Autocomplete'
 export * from './components/InputWrapper'
 export * from './components/SideBar'
 export * from './components/Datepicker'
+export * from './components/Field'
+export * from './components/ValidationMessage'
 /* eslint-enable */
