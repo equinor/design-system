@@ -19,7 +19,7 @@
 .checkbox__label-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: var(--eds-spacing-inline-sm);
+  gap: var(--eds-selectable-gap-inline);
 }
 
 /* Spacious density mode (default/comfortable in TypeScript) */
@@ -200,5 +200,5 @@
 }
 
 .checkbox__label--disabled {
-  color: var(--eds-color-text-neutral-subtle);
+  color: var(--eds-color-border-neutral-medium);
 }
