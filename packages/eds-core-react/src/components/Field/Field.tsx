@@ -35,7 +35,7 @@ const enhanceControl = (
     disabled,
   }: EnhancedControlOptions,
 ) => {
-  const elementProps = element.props as Record<string, unknown>
+  const elementProps = element.props
   const mergedId = (elementProps.id as string | undefined) ?? controlId
   const describedByProp = elementProps['aria-describedby'] as string | undefined
   const ariaInvalidProp = elementProps['aria-invalid'] as boolean | undefined
