@@ -123,7 +123,7 @@ export function createColorWithGaussianChroma(
 
 /**
  * Generates a color scale by interpolating between multiple anchor colors at specific steps
- * @param anchors - Array of color anchors with step positions
+ * @param anchors - Array of color anchors with step positions (1-15, must be unique)
  * @param lightnessValues - Array of target lightness values for each step
  * @param mean - Mean value for Gaussian chroma adjustment
  * @param stdDev - Standard deviation for Gaussian chroma adjustment
