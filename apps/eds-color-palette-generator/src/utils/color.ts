@@ -161,10 +161,7 @@ export function generateColorScaleWithInterpolation(
         if (sortedAnchors[j].step <= currentStep) {
           lowerAnchor = sortedAnchors[j]
         }
-        if (
-          sortedAnchors[j].step >= currentStep &&
-          sortedAnchors[j].step < upperAnchor.step
-        ) {
+        if (sortedAnchors[j].step >= currentStep) {
           upperAnchor = sortedAnchors[j]
           break
         }
