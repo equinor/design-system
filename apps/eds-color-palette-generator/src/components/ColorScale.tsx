@@ -382,6 +382,14 @@ function ColorScaleBase({
           if (field === 'value' && typeof newValue === 'string') {
             newAnchors[index] = { ...newAnchors[index], value: newValue }
           } else if (field === 'step' && typeof newValue === 'number') {
+            // Check for duplicate step values
+            const isDuplicateStep = anchors.some(
+              (a, i) => i !== index && a.step === newValue
+            )
+            if (isDuplicateStep) {
+              window.alert('Step value already used by another anchor. Please choose a unique step.')
+              return
+            }
             newAnchors[index] = { ...newAnchors[index], step: newValue }
           }
           onChangeAnchors(newAnchors)
