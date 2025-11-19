@@ -1,4 +1,5 @@
 /* Global styles for @equinor/eds-core-react */
+@import '@equinor/eds-tokens/css/variables';
 
 /* Component styles */
 @import './components/Checkbox/checkbox.new.css';

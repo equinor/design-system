@@ -56,7 +56,7 @@ describe('Checkbox.new', () => {
     const checkbox = screen.getByLabelText('checkbox-test')
     expect(checkbox).toBeInTheDocument()
     // eslint-disable-next-line testing-library/no-node-access
-    const label = checkbox.closest('.checkbox')
+    const label = checkbox.closest('.eds-checkbox')
     expect(label).toHaveClass('custom-checkbox')
   })
 
@@ -119,7 +119,7 @@ describe('Checkbox.new', () => {
     render(<Checkbox label="Disabled checkbox" disabled />)
     const checkbox = screen.getByLabelText('Disabled checkbox')
     // eslint-disable-next-line testing-library/no-node-access
-    const label = checkbox.closest('.checkbox')
+    const label = checkbox.closest('.eds-checkbox')
     expect(label).toHaveAttribute('data-disabled', 'true')
   })
 
