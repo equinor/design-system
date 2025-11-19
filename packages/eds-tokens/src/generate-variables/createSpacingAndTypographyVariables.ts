@@ -195,6 +195,38 @@ export async function createSpacingAndTypographyVariables({
     '🪐 Space proportions.Squared.json',
   )
 
+  const SEMANTIC_TOKENS_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+    '🗣️ Semantic.Mode 1.json',
+  )
+
+  const CONTAINER_SPACE_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+    '🪐 Container space.Default.json',
+  )
+
+  const PAGE_SPACE_SOURCE = path.join(
+    tokensDir,
+    FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+    '🪐 Page.Default.json',
+  )
+
+  // Gap token sources needed for semantic tokens
+  const GAP_SOURCES = ['XS', 'SM', 'MD', 'LG', 'XL'].flatMap((size) => [
+    path.join(
+      tokensDir,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+      `🪐 Horisontal gap.${size}.json`,
+    ),
+    path.join(
+      tokensDir,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+      `🪐 Vertical gap.${size}.json`,
+    ),
+  ])
+
   const proportionConfigs = ['Squished', 'Squared', 'Stretched'] as const
 
   const createProportionsDictionary = (proportion: string) => {
@@ -205,13 +237,20 @@ export async function createSpacingAndTypographyVariables({
       `🪐 Space proportions.${proportion}.json`,
     )
 
+    // Squared is the default, so it gets both :root and [data-space-proportions="squared"] selectors
+    const selector =
+      proportion === 'Squared'
+        ? ':root, [data-space-proportions="squared"]'
+        : `[data-space-proportions="${proportionLower}"]`
+
     return new StyleDictionary({
       include: [
         SPACING_PRIMITIVE_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
+        ...GAP_SOURCES,
       ],
-      source: [sourcePath],
+      source: [sourcePath, CONTAINER_SPACE_SOURCE, PAGE_SPACE_SOURCE],
       platforms: {
         css: {
           transformGroup: 'css',
@@ -220,12 +259,34 @@ export async function createSpacingAndTypographyVariables({
           transforms: cssTransforms,
           files: [
             {
-              filter: (token: TransformedToken) =>
-                includeTokenFilter(token, [proportion]),
+              filter: (token: TransformedToken) => {
+                // Include proportion tokens (e.g., Spacing proportions.XS.Inline)
+                if (includeTokenFilter(token, [proportion])) return true
+
+                // Include Container.Spacing tokens
+                if (
+                  token.path &&
+                  token.path[0] === 'Container' &&
+                  token.path[1] === 'Spacing'
+                ) {
+                  return true
+                }
+
+                // Include Page.Spacing tokens
+                if (
+                  token.path &&
+                  token.path[0] === 'Page' &&
+                  token.path[1] === 'Spacing'
+                ) {
+                  return true
+                }
+
+                return false
+              },
               destination: `space-proportions-${proportionLower}.css`,
               format: 'css/variables',
               options: {
-                selector: `[data-space-proportions="${proportionLower}"]`,
+                selector,
                 outputReferences: true,
               },
             },
@@ -253,6 +314,12 @@ export async function createSpacingAndTypographyVariables({
       `🪐 Selectable space.${size}.json`,
     )
 
+    // XS is the default, so it gets both :root and [data-selectable-space="xs"] selectors
+    const selector =
+      size === 'XS'
+        ? ':root, [data-selectable-space="xs"]'
+        : `[data-selectable-space="${sizeLower}"]`
+
     return new StyleDictionary({
       include: [
         SPACING_PRIMITIVE_SOURCE,
@@ -274,7 +341,7 @@ export async function createSpacingAndTypographyVariables({
               destination: `selectable-space-${sizeLower}.css`,
               format: 'css/variables',
               options: {
-                selector: `[data-selectable-space="${sizeLower}"]`,
+                selector,
                 outputReferences: true,
               },
             },

@@ -13,4 +13,8 @@
   --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-stretched);
   --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
   --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-stretched);
+  --eds-container-spacing-inline: var(--eds-spacing-proportions-md-inline);
+  --eds-container-spacing-stack: var(--eds-spacing-proportions-md-stack);
+  --eds-page-spacing-inline: var(--eds-spacing-proportions-xl-inline);
+  --eds-page-spacing-stack: var(--eds-spacing-proportions-xl-stack);
 }
