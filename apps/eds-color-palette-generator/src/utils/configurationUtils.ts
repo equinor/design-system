@@ -62,8 +62,15 @@ export const downloadColorTokens = (
 
   // Add colors to objects
   colors.forEach((colorDef) => {
+    // Support both legacy single value and new anchor format
+    const colorInput = colorDef.anchors || colorDef.value
+    if (!colorInput) {
+      console.warn(`Skipping color ${colorDef.name}: no value or anchors`)
+      return
+    }
+
     lightColors[colorDef.name] = generateColorScale(
-      colorDef.value,
+      colorInput,
       customLightModeValues,
       meanLight,
       stdDevLight,
@@ -71,7 +78,7 @@ export const downloadColorTokens = (
     )
 
     darkColors[colorDef.name] = generateColorScale(
-      colorDef.value,
+      colorInput,
       customDarkModeValues,
       meanDark,
       stdDevDark,
@@ -134,8 +141,15 @@ export const generateDesignSystemCSS = (
     ':root {\n  /* Design system colors using light-dark() function */\n'
 
   colors.forEach((colorDef) => {
+    // Support both legacy single value and new anchor format
+    const colorInput = colorDef.anchors || colorDef.value
+    if (!colorInput) {
+      console.warn(`Skipping color ${colorDef.name}: no value or anchors`)
+      return
+    }
+
     const lightColorScale = generateColorScale(
-      colorDef.value,
+      colorInput,
       lightModeValues,
       meanLight,
       stdDevLight,
@@ -143,7 +157,7 @@ export const generateDesignSystemCSS = (
     )
 
     const darkColorScale = generateColorScale(
-      colorDef.value,
+      colorInput,
       darkModeValues,
       meanDark,
       stdDevDark,

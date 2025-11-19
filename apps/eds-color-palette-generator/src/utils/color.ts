@@ -1,5 +1,5 @@
 import Color from 'colorjs.io'
-import { ColorFormat } from '@/types'
+import { ColorFormat, ColorAnchor } from '@/types'
 import { Algorithms } from 'colorjs.io/fn'
 
 /**
@@ -58,13 +58,159 @@ export function gaussian(
   return Math.exp(exponent)
 }
 
-export function generateColorScale(
-  baseColor: string,
+/**
+ * Generates a color scale by interpolating between multiple anchor colors at specific steps
+ * @param anchors - Array of color anchors with step positions
+ * @param lightnessValues - Array of target lightness values for each step
+ * @param mean - Mean value for Gaussian chroma adjustment
+ * @param stdDev - Standard deviation for Gaussian chroma adjustment
+ * @param format - Output color format (OKLCH or HEX)
+ * @returns Array of color strings in the specified format
+ */
+export function generateColorScaleWithInterpolation(
+  anchors: ColorAnchor[],
   lightnessValues: number[],
   mean: number,
   stdDev: number,
   format: ColorFormat = 'OKLCH',
 ): string[] {
+  // Validate anchors
+  if (!anchors || anchors.length === 0) {
+    throw new Error('At least one anchor is required')
+  }
+
+  // Sort anchors by step to ensure correct interpolation order
+  const sortedAnchors = [...anchors].sort((a, b) => a.step - b.step)
+
+  const colors: string[] = []
+  const steps = lightnessValues.length
+
+  try {
+    for (let i = 0; i < steps; i++) {
+      const currentStep = i + 1 // Steps are 1-indexed
+      const targetLightness = lightnessValues[i]
+
+      // Find the surrounding anchors for this step
+      let lowerAnchor = sortedAnchors[0]
+      let upperAnchor = sortedAnchors[sortedAnchors.length - 1]
+
+      for (let j = 0; j < sortedAnchors.length; j++) {
+        if (sortedAnchors[j].step <= currentStep) {
+          lowerAnchor = sortedAnchors[j]
+        }
+        if (
+          sortedAnchors[j].step >= currentStep &&
+          sortedAnchors[j].step < upperAnchor.step
+        ) {
+          upperAnchor = sortedAnchors[j]
+          break
+        }
+      }
+
+      // If current step matches an anchor exactly, use it directly (no interpolation needed)
+      const exactAnchor = sortedAnchors.find((a) => a.step === currentStep)
+
+      let interpolatedColor: Color
+
+      if (exactAnchor) {
+        // Use the exact anchor color
+        interpolatedColor = new Color(exactAnchor.value)
+      } else if (lowerAnchor.step === upperAnchor.step) {
+        // Only one anchor or all anchors at same step
+        interpolatedColor = new Color(lowerAnchor.value)
+      } else {
+        // Interpolate between lower and upper anchors
+        const color1 = new Color(lowerAnchor.value)
+        const color2 = new Color(upperAnchor.value)
+
+        // Create a range in OKLCH space with shorter hue interpolation
+        const range = color1.range(color2, {
+          space: 'oklch',
+          hue: 'shorter',
+        })
+
+        // Calculate interpolation factor (0 to 1)
+        const stepRange = upperAnchor.step - lowerAnchor.step
+        const stepOffset = currentStep - lowerAnchor.step
+        const t = stepOffset / stepRange
+
+        // Get the interpolated color
+        interpolatedColor = range(t)
+      }
+
+      // Convert to OKLCH to extract and modify values
+      const oklchColor = interpolatedColor.to('oklch')
+
+      // Get the interpolated hue and base chroma
+      const interpolatedHue = isNaN(oklchColor.h) ? 0 : oklchColor.h
+      const baseChroma = oklchColor.c
+
+      // Apply Gaussian function to chroma based on target lightness
+      const adjustedChroma =
+        gaussian(targetLightness, mean, stdDev) * baseChroma
+
+      // Create the final color with target lightness and adjusted chroma
+      const finalColor = new Color('oklch', [
+        targetLightness,
+        adjustedChroma,
+        interpolatedHue,
+      ])
+
+      // Format output based on the selected format
+      if (format === 'OKLCH') {
+        const oklch = finalColor.to('oklch')
+        const hue = isNaN(oklch.h) ? 0 : oklch.h
+        colors.push(
+          `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
+        )
+      } else {
+        // Default to HEX format
+        const srgbColor = finalColor.to('srgb')
+        srgbColor.alpha = 1
+        let hexColor = srgbColor.toString({ format: 'hex' })
+        // Expand shorthand hex
+        if (hexColor.length === 4) {
+          hexColor =
+            '#' +
+            hexColor[1] +
+            hexColor[1] +
+            hexColor[2] +
+            hexColor[2] +
+            hexColor[3] +
+            hexColor[3]
+        }
+        colors.push(hexColor)
+      }
+    }
+
+    return colors
+  } catch (error) {
+    console.error('Error in generateColorScaleWithInterpolation:', error)
+    // Return a default color scale if there's an error
+    const fallbackColor = format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080'
+    return Array(lightnessValues.length).fill(fallbackColor)
+  }
+}
+
+export function generateColorScale(
+  baseColor: string | ColorAnchor[],
+  lightnessValues: number[],
+  mean: number,
+  stdDev: number,
+  format: ColorFormat = 'OKLCH',
+): string[] {
+  // Check if we're dealing with multiple anchors
+  if (Array.isArray(baseColor)) {
+    return generateColorScaleWithInterpolation(
+      baseColor,
+      lightnessValues,
+      mean,
+      stdDev,
+      format,
+    )
+  }
+
+  // Original single-color logic
   // Validate the baseColor to ensure it's a proper color string
   try {
     // Create a Color object from the baseColor

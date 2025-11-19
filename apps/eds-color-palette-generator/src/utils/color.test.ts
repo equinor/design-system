@@ -718,3 +718,262 @@ describe('generateColorScale', () => {
     })
   })
 })
+
+describe('generateColorScaleWithInterpolation', () => {
+  const testLightnessValues = Array.from(
+    { length: 15 },
+    (_, i) => 0.2 + (i / 14) * 0.6,
+  )
+
+  describe('Basic interpolation', () => {
+    test('should interpolate between two anchors', () => {
+      const anchors = [
+        { value: 'oklch(0.65 0.09 200)', step: 1 },
+        { value: 'oklch(0.4973 0.084851 204.553)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+
+    test('should generate HEX format when requested', () => {
+      const anchors = [
+        { value: 'oklch(0.65 0.09 200)', step: 1 },
+        { value: 'oklch(0.5 0.08 210)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    test('should use exact anchor colors at anchor steps', () => {
+      const anchors = [
+        { value: 'oklch(0.65 0.09 200)', step: 1 },
+        { value: 'oklch(0.5 0.08 210)', step: 8 },
+        { value: 'oklch(0.35 0.07 220)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      // At step 1 (index 0), should use first anchor's hue
+      const firstColor = scale[0]
+      expect(firstColor).toContain('200')
+
+      // At step 15 (index 14), should use last anchor's hue
+      const lastColor = scale[14]
+      expect(lastColor).toContain('220')
+    })
+  })
+
+  describe('Multiple anchors', () => {
+    test('should interpolate smoothly between three anchors', () => {
+      const anchors = [
+        { value: 'oklch(0.7 0.1 0)', step: 1 },
+        { value: 'oklch(0.5 0.15 180)', step: 8 },
+        { value: 'oklch(0.3 0.1 360)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+
+      // Middle step should be influenced by middle anchor
+      const middleColor = scale[7]
+      expect(middleColor).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+    })
+
+    test('should handle anchors in unsorted order', () => {
+      const anchors = [
+        { value: 'oklch(0.3 0.1 360)', step: 15 },
+        { value: 'oklch(0.7 0.1 0)', step: 1 },
+        { value: 'oklch(0.5 0.15 180)', step: 8 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+  })
+
+  describe('Edge cases', () => {
+    test('should handle single anchor', () => {
+      const anchors = [{ value: 'oklch(0.5 0.1 180)', step: 8 }]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      // All colors should have same hue since there's only one anchor
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+180.0\)/)
+      })
+    })
+
+    test('should handle anchors at same step', () => {
+      const anchors = [
+        { value: 'oklch(0.5 0.1 180)', step: 8 },
+        { value: 'oklch(0.6 0.12 190)', step: 8 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+
+    test('should throw error for empty anchor array', () => {
+      expect(() => {
+        generateColorScale([], testLightnessValues, 0.6, 2, 'OKLCH')
+      }).toThrow('At least one anchor is required')
+    })
+  })
+
+  describe('Gaussian chroma application', () => {
+    test('should apply gaussian function to chroma', () => {
+      const anchors = [
+        { value: 'oklch(0.5 0.2 180)', step: 1 },
+        { value: 'oklch(0.5 0.2 180)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      // Extract chroma values
+      const chromas = scale.map((color) => {
+        const match = color.match(/oklch\([0-9.]+\s+([0-9.]+)/)
+        return match ? parseFloat(match[1]) : 0
+      })
+
+      // Chroma should vary due to gaussian function
+      const uniqueChromas = new Set(chromas)
+      expect(uniqueChromas.size).toBeGreaterThan(1)
+    })
+  })
+
+  describe('Hue interpolation', () => {
+    test('should interpolate hue using shorter path', () => {
+      const anchors = [
+        { value: 'oklch(0.5 0.1 350)', step: 1 },
+        { value: 'oklch(0.5 0.1 10)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+
+      // Extract hues
+      const hues = scale.map((color) => {
+        const match = color.match(/oklch\([0-9.]+\s+[0-9.]+\s+([0-9.]+)\)/)
+        return match ? parseFloat(match[1]) : 0
+      })
+
+      // First and last hues should be close to anchor hues
+      expect(hues[0]).toBeCloseTo(350, 0)
+      expect(hues[14]).toBeCloseTo(10, 0)
+
+      // Middle hue should go through 360/0 (shorter path)
+      // rather than going backwards through 180
+      const middleHue = hues[7]
+      expect(middleHue).toBeGreaterThanOrEqual(340)
+    })
+  })
+
+  describe('Integration with legacy format', () => {
+    test('should work with both string and anchor array inputs', () => {
+      const singleColorScale = generateColorScale(
+        'oklch(0.5 0.1 180)',
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      const anchorScale = generateColorScale(
+        [{ value: 'oklch(0.5 0.1 180)', step: 8 }],
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(singleColorScale).toHaveLength(15)
+      expect(anchorScale).toHaveLength(15)
+      // Both should produce valid OKLCH colors
+      singleColorScale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+      anchorScale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+  })
+})
