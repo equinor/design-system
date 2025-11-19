@@ -1,0 +1,6 @@
+/* Global styles for @equinor/eds-core-react */
+
+/* Component styles */
+@import './components/Checkbox/checkbox.new.css';
+@import './components/Field/field.css';
+@import './components/ValidationMessage/validation-message.css';
