@@ -1,10 +1,14 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import postcssImport from 'postcss-import'
 import commonjs from '@rollup/plugin-commonjs'
 import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
 import del from 'rollup-plugin-delete'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 
 import pkg from './package.json' with { type: 'json' }
 
@@ -30,12 +34,15 @@ const watchConfig = {
 
 const createPlugins = (includeDelete = false) => [
   preserveDirective(),
-  ...(includeDelete ? [del({ targets: 'dist/*', runOnce: true })] : []),
+  ...(includeDelete
+    ? [del({ targets: ['dist/*', 'build/*'], runOnce: true })]
+    : []),
   resolve({ extensions }),
   commonjs(),
   postcss({
     extensions: ['.css'],
     extract: false,
+    inject: false,
   }),
   babel({
     babelHelpers: 'runtime',
@@ -74,5 +81,52 @@ export default [
       createEsmOutput(),
       { file: './dist/index.next.cjs', format: 'cjs', interop: 'auto' },
     ],
+  },
+  // EDS 2.0 CSS bundle (unminified)
+  {
+    input: './src/index.css',
+    plugins: [
+      del({ targets: 'build/*', runOnce: true }),
+      postcss({
+        extensions: ['.css'],
+        extract: 'index.css',
+        minimize: false,
+        plugins: [
+          postcssImport({
+            resolve: (id) => {
+              // Resolve @equinor packages from node_modules
+              if (id.startsWith('@equinor/')) {
+                return require.resolve(id)
+              }
+              return id
+            },
+          }),
+        ],
+      }),
+    ],
+    output: { dir: 'build', format: 'es' },
+  },
+  // EDS 2.0 CSS bundle (minified)
+  {
+    input: './src/index.css',
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+        extract: 'index.min.css',
+        minimize: true,
+        plugins: [
+          postcssImport({
+            resolve: (id) => {
+              if (id.startsWith('@equinor/')) {
+                return require.resolve(id)
+              }
+              return id
+            },
+          }),
+        ],
+      }),
+      del({ targets: 'build/*.js', hook: 'writeBundle' }),
+    ],
+    output: { dir: 'build', format: 'es' },
   },
 ]
