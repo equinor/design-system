@@ -1,8 +1,24 @@
-import { ColorDefinition, ColorFormat } from '@/types'
+import { ColorDefinition, ColorFormat, ColorAnchor } from '@/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
 import { PALETTE_STEPS } from '@/config/config'
 import { getLightnessValues } from '@/config/helpers'
+
+/**
+ * Helper function to get color input from a ColorDefinition
+ * @param colorDef - Color definition object
+ * @returns The color input (anchors array or value string)
+ * @throws Error if both anchors and value are missing
+ */
+function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
+  const colorInput = colorDef.anchors || colorDef.value
+  if (!colorInput) {
+    throw new Error(
+      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please provide at least one to generate color tokens.`,
+    )
+  }
+  return colorInput
+}
 
 /**
  * Download the current configuration as a JSON file
@@ -62,12 +78,7 @@ export const downloadColorTokens = (
 
   // Add colors to objects
   colors.forEach((colorDef) => {
-    // Support both legacy single value and new anchor format
-    const colorInput = colorDef.anchors || colorDef.value
-    if (!colorInput) {
-      console.warn(`Skipping color ${colorDef.name}: no value or anchors`)
-      return
-    }
+    const colorInput = getColorInput(colorDef)
 
     lightColors[colorDef.name] = generateColorScale(
       colorInput,
@@ -141,12 +152,7 @@ export const generateDesignSystemCSS = (
     ':root {\n  /* Design system colors using light-dark() function */\n'
 
   colors.forEach((colorDef) => {
-    // Support both legacy single value and new anchor format
-    const colorInput = colorDef.anchors || colorDef.value
-    if (!colorInput) {
-      console.warn(`Skipping color ${colorDef.name}: no value or anchors`)
-      return
-    }
+    const colorInput = getColorInput(colorDef)
 
     const lightColorScale = generateColorScale(
       colorInput,

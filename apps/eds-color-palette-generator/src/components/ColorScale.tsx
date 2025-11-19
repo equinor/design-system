@@ -36,7 +36,7 @@ type OklchInfo = {
 type AnchorColorInputProps = {
   index: number
   anchor: ColorAnchor
-  anchorsLength: number
+  anchors: ColorAnchor[]
   onUpdateAnchor: (
     index: number,
     field: 'value' | 'step',
@@ -49,13 +49,12 @@ type AnchorColorInputProps = {
 function AnchorColorInput({
   index,
   anchor,
-  anchorsLength,
+  anchors,
   onUpdateAnchor,
   onRemoveAnchor,
   testId,
 }: AnchorColorInputProps) {
   const colorInputRef = useRef<HTMLInputElement | null>(null)
-  const prevAnchorValueRef = useRef<string>(anchor.value)
   const [localHex, setLocalHex] = useState(() => {
     try {
       return parseColorToHex(anchor.value) || '#000000'
@@ -66,20 +65,6 @@ function AnchorColorInput({
   const [localColorInput, setLocalColorInput] = useState(anchor.value)
   const [isValidColor, setIsValidColor] = useState(true)
   const debounceRef = useRef<number | null>(null)
-
-  // Update local state when anchor value changes from parent
-  useEffect(() => {
-    if (prevAnchorValueRef.current !== anchor.value) {
-      prevAnchorValueRef.current = anchor.value
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setLocalColorInput(anchor.value)
-      const hexValue = parseColorToHex(anchor.value)
-      if (hexValue) {
-        setLocalHex(hexValue)
-        setIsValidColor(true)
-      }
-    }
-  }, [anchor.value])
 
   const handleColorInputChange = (value: string) => {
     setLocalColorInput(value)
@@ -111,7 +96,7 @@ function AnchorColorInput({
 
   return (
     <div className="flex items-center gap-2">
-      {anchorsLength > 1 && (
+      {anchors.length > 1 && (
         <select
           value={anchor.step}
           onChange={(e) =>
@@ -188,7 +173,7 @@ function AnchorColorInput({
       >
         <Pipette className="w-4 h-4" />
       </button>
-      {anchorsLength > 1 && (
+      {anchors.length > 1 && (
         <button
           type="button"
           onClick={() => onRemoveAnchor(index)}
@@ -399,6 +384,13 @@ function ColorScaleBase({
           if (!anchors || !onChangeAnchors) return
           // Find an available step (one that's not already used)
           const usedSteps = anchors.map((a) => a.step)
+          
+          // Check if all 15 steps are already used
+          if (usedSteps.length >= 15) {
+            window.alert('All 15 steps are already in use. Remove an anchor before adding a new one.')
+            return
+          }
+          
           let newStep = 8 // Default to middle step
           for (let i = 1; i <= 15; i++) {
             if (!usedSteps.includes(i)) {
@@ -519,10 +511,10 @@ function ColorScaleBase({
               <div className="space-y-2">
                 {anchors.map((anchor, index) => (
                   <AnchorColorInput
-                    key={index}
+                    key={`${index}-${anchor.value}-${anchor.step}`}
                     index={index}
                     anchor={anchor}
-                    anchorsLength={anchors.length}
+                    anchors={anchors}
                     onUpdateAnchor={handleUpdateAnchor}
                     onRemoveAnchor={handleRemoveAnchor}
                     testId={testId}

@@ -147,10 +147,8 @@ export default function App() {
     setColors((prev) =>
       prev.map((color, i) => {
         if (i === index) {
-          // Remove the single value when using anchors
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { value, ...rest } = color
-          return { ...rest, anchors: newAnchors }
+          // When using anchors, remove the legacy value field
+          return { name: color.name, anchors: newAnchors }
         }
         return color
       }),

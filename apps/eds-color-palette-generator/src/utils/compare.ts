@@ -10,6 +10,9 @@ export function arraysEqual(a: number[], b: number[]): boolean {
 }
 
 // Shallow equality for ColorDefinition arrays (order-sensitive)
+// Note: According to the type definition, a ColorDefinition should have either
+// 'value' or 'anchors', but not both. This function compares both fields for
+// robustness. If both are present, 'anchors' takes precedence in the application.
 export function colorsEqual(
   a: ColorDefinition[],
   b: ColorDefinition[],
