@@ -15,7 +15,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
     return (
       <label
         ref={ref}
-        className={classNames('field__label', className)}
+        className={classNames('eds-field__label', className)}
         htmlFor={rest.htmlFor ?? controlId}
         data-disabled={disabled ? 'true' : undefined}
         {...rest}
@@ -28,11 +28,11 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
           lineHeight="default"
           weight="bolder"
           tracking="normal"
-          className="field__label-text"
+          className="eds-field__label-text"
         >
           {children}
           {showIndicator && (
-            <span aria-hidden="true" className="field__required-indicator">
+            <span aria-hidden="true" className="eds-field__required-indicator">
               *
             </span>
           )}
