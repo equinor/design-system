@@ -35,22 +35,20 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       }
     }, [indeterminate, inputRef])
 
-    const wrapperClasses = classNames(
-      'checkbox',
-      disabled && 'checkbox--disabled',
-      error && 'checkbox--error',
-      className,
-    )
+    const baseWrapperClass = classNames('checkbox', className)
 
-    const labelClasses = classNames(
-      'checkbox__label',
-      disabled && 'checkbox__label--disabled',
-    )
+    const labelClasses = classNames('checkbox__label')
 
-    const iconClasses = classNames(
-      'checkbox__icon',
-      disabled && 'checkbox__icon--disabled',
-    )
+    const iconClasses = classNames('checkbox__icon')
+
+    const sharedWrapperProps: Record<string, unknown> = {
+      style,
+      'data-disabled': disabled ? 'true' : undefined,
+    }
+
+    if (error) {
+      sharedWrapperProps['data-color-appearance'] = 'danger'
+    }
 
     const checkboxInput = (
       <span className="checkbox__input-wrapper">
@@ -116,8 +114,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     )
 
     if (label) {
+      const { className: labelClassName, ...restLabelProps } = labelProps ?? {}
+
       return (
-        <label className={wrapperClasses} style={style} {...labelProps}>
+        <label
+          className={classNames(baseWrapperClass, labelClassName)}
+          {...sharedWrapperProps}
+          {...restLabelProps}
+        >
           <span className="checkbox__label-wrapper">
             {checkboxInput}
             <TypographyNext
@@ -138,7 +142,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <span className={wrapperClasses} style={style}>
+      <span className={baseWrapperClass} {...sharedWrapperProps}>
         {checkboxInput}
       </span>
     )

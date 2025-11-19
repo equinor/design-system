@@ -12,6 +12,33 @@
   /* CSS custom properties for colors - can be overridden externally */
   --checkbox-icon-color: var(--eds-color-border-accent-strong);
   --checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-default);
+  --checkbox-label-color: var(--eds-color-text-neutral-strong);
+  --checkbox-label-disabled-color: var(--eds-color-text-neutral-subtle);
+}
+
+.checkbox[data-color-appearance='neutral'] {
+  --checkbox-icon-color: var(--eds-color-border-neutral-strong);
+  --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-default);
+}
+
+.checkbox[data-color-appearance='success'] {
+  --checkbox-icon-color: var(--eds-color-border-success-strong);
+  --checkbox-hover-color: var(--eds-color-bg-success-fill-muted-default);
+}
+
+.checkbox[data-color-appearance='info'] {
+  --checkbox-icon-color: var(--eds-color-border-info-strong);
+  --checkbox-hover-color: var(--eds-color-bg-info-fill-muted-default);
+}
+
+.checkbox[data-color-appearance='warning'] {
+  --checkbox-icon-color: var(--eds-color-border-warning-strong);
+  --checkbox-hover-color: var(--eds-color-bg-warning-fill-muted-default);
+}
+
+.checkbox[data-color-appearance='danger'] {
+  --checkbox-icon-color: var(--eds-color-border-danger-strong);
+  --checkbox-hover-color: var(--eds-color-bg-danger-fill-muted-default);
 }
 
 /* Label wrapper contains checkbox + label text */
@@ -32,15 +59,8 @@
   --checkbox-hover-size: 40px;
 }
 
-.checkbox--disabled {
+.checkbox[data-disabled='true'] {
   cursor: not-allowed;
-}
-
-.checkbox--error {
-  cursor: pointer;
-  /* Override colors for error state */
-  --checkbox-icon-color: var(--eds-color-border-danger-strong);
-  --checkbox-hover-color: var(--eds-color-bg-danger-fill-muted-default);
 }
 
 /* Checkbox input wrapper */
@@ -81,10 +101,10 @@
     background-color: var(--checkbox-hover-color);
   }
 
-  .checkbox--disabled
+  .checkbox[data-disabled='true']
     .checkbox__label-wrapper:hover
     .checkbox__input-wrapper::before,
-  .checkbox--disabled:hover .checkbox__input-wrapper::before {
+  .checkbox[data-disabled='true']:hover .checkbox__input-wrapper::before {
     background-color: transparent;
   }
 }
@@ -146,7 +166,7 @@
   z-index: 2;
 }
 
-.checkbox__icon--disabled {
+.checkbox[data-disabled='true'] .checkbox__icon {
   fill: var(--eds-color-text-neutral-subtle);
 }
 
@@ -195,10 +215,10 @@
 
 /* Label text */
 .checkbox__label {
-  color: var(--eds-color-text-neutral-strong);
+  color: var(--checkbox-label-color);
   user-select: none;
 }
 
-.checkbox__label--disabled {
-  color: var(--eds-color-border-neutral-medium);
+.checkbox[data-disabled='true'] .checkbox__label {
+  color: var(--checkbox-label-disabled-color);
 }
