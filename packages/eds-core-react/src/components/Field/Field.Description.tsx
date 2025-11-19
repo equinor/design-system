@@ -27,7 +27,7 @@ export const FieldDescription = forwardRef<
       baseline="grid"
       lineHeight="default"
       tracking="normal"
-      className={classNames('field__description', className)}
+      className={classNames('eds-field__description', className)}
       {...rest}
     >
       {children}

@@ -1,4 +1,7 @@
 /* eslint-disable import/no-default-export */
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { createRequire } from 'node:module'
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import postcssImport from 'postcss-import'
@@ -12,6 +15,29 @@ import pkg from './package.json' with { type: 'json' }
 const environment = process.env.NODE_ENV
 
 const isDevelopment = environment === 'development'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const require = createRequire(import.meta.url)
+
+const resolveCssImport = (id, basedir) => {
+  try {
+    return require.resolve(id, {
+      paths: [
+        basedir,
+        path.resolve(__dirname, 'node_modules'),
+        path.resolve(process.cwd(), 'node_modules'),
+      ],
+    })
+  } catch {
+    return path.resolve(basedir, id)
+  }
+}
+
+const createPostcssImportPlugin = () =>
+  postcssImport({
+    resolve: resolveCssImport,
+  })
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 
@@ -39,6 +65,7 @@ export default [
         extensions: ['.css'],
         extract: false,
         inject: false,
+        plugins: [createPostcssImportPlugin()],
       }),
       babel({
         babelHelpers: 'runtime',
@@ -65,7 +92,7 @@ export default [
         extract: 'index.css',
         minimize: false,
         sourceMap: false,
-        plugins: [postcssImport()],
+        plugins: [createPostcssImportPlugin()],
       }),
     ],
     output: {
@@ -81,7 +108,7 @@ export default [
         extract: 'index.min.css',
         minimize: true,
         sourceMap: false,
-        plugins: [postcssImport()],
+        plugins: [createPostcssImportPlugin()],
       }),
       del({ targets: 'build/*.js', hook: 'writeBundle' }),
     ],

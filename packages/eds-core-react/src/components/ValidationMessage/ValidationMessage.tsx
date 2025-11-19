@@ -29,9 +29,9 @@ export const ValidationMessage = forwardRef<
   }, [fieldContext, resolvedId, tone])
 
   const combinedClassName = classNames(
-    'validation-message',
-    `validation-message--${tone}`,
-    fieldContext ? 'field__validation' : undefined,
+    'eds-validation-message',
+    `eds-validation-message--${tone}`,
+    fieldContext ? 'eds-field__validation' : undefined,
     className,
   )
 
@@ -50,7 +50,7 @@ export const ValidationMessage = forwardRef<
         baseline="grid"
         lineHeight="default"
         tracking="normal"
-        className="validation-message__text"
+        className="eds-validation-message__text"
       >
         {children}
       </TypographyNext>

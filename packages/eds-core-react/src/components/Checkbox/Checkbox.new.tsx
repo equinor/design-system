@@ -34,11 +34,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       }
     }, [indeterminate, inputRef])
 
-    const baseWrapperClass = classNames('checkbox', className)
+    const baseWrapperClass = classNames('eds-checkbox', className)
 
-    const labelClasses = classNames('checkbox__label')
+    const labelClasses = classNames('eds-checkbox__label')
 
-    const iconClasses = classNames('checkbox__icon')
+    const iconClasses = classNames('eds-checkbox__icon')
 
     const sharedWrapperProps: Record<string, unknown> = {
       style,
@@ -50,13 +50,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     const checkboxInput = (
-      <span className="checkbox__input-wrapper">
+      <span className="eds-checkbox__input-wrapper">
         <input
           type="checkbox"
           aria-checked={indeterminate ? 'mixed' : rest.checked}
           aria-disabled={disabled || undefined}
           aria-invalid={error || undefined}
-          className="checkbox__input"
+          className="eds-checkbox__input"
           disabled={disabled}
           ref={inputRef}
           data-indeterminate={indeterminate}
@@ -70,7 +70,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-hidden="true"
           >
             <path
-              className="checkbox__icon-path checkbox__icon-path--indeterminate"
+              className="eds-checkbox__icon-path eds-checkbox__icon-path--indeterminate"
               fillRule="evenodd"
               clipRule="evenodd"
               d={
@@ -88,7 +88,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-hidden="true"
           >
             <path
-              className="checkbox__icon-path checkbox__icon-path--checked"
+              className="eds-checkbox__icon-path eds-checkbox__icon-path--checked"
               fillRule="evenodd"
               clipRule="evenodd"
               d={
@@ -98,7 +98,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               }
             />
             <path
-              className="checkbox__icon-path checkbox__icon-path--unchecked"
+              className="eds-checkbox__icon-path eds-checkbox__icon-path--unchecked"
               fillRule="evenodd"
               clipRule="evenodd"
               d={
@@ -121,7 +121,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {...sharedWrapperProps}
           {...restLabelProps}
         >
-          <span className="checkbox__label-wrapper">
+          <span className="eds-checkbox__label-wrapper">
             {checkboxInput}
             <TypographyNext
               as="span"

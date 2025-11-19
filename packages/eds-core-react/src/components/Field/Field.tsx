@@ -194,7 +194,7 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
     if (!controlHandled) {
       controlHandled = true
       return (
-        <div className="field__control">
+        <div className="eds-field__control">
           {enhanceControl(element, {
             controlId: resolvedControlId,
             describedBy,
@@ -215,7 +215,7 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
         id={id}
         ref={ref}
         style={style}
-        className={classNames('field', className)}
+        className={classNames('eds-field', className)}
         data-layout={layout}
         data-disabled={disabled ? 'true' : undefined}
         data-invalid={hasDangerValidation ? 'true' : undefined}

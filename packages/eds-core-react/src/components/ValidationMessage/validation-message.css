@@ -1,6 +1,4 @@
-@import '@equinor/eds-tokens/css/variables';
-
-.validation-message {
+.eds-validation-message {
   --validation-message-color: var(--eds-color-text-danger-strong);
   display: inline-flex;
   align-items: flex-start;
@@ -8,18 +6,18 @@
   color: var(--validation-message-color);
 }
 
-.validation-message__text {
+.eds-validation-message__text {
   color: inherit;
 }
 
-.validation-message--warning {
+.eds-validation-message--warning {
   --validation-message-color: var(--eds-color-text-warning-strong);
 }
 
-.validation-message--success {
+.eds-validation-message--success {
   --validation-message-color: var(--eds-color-text-success-strong);
 }
 
-.validation-message--info {
+.eds-validation-message--info {
   --validation-message-color: var(--eds-color-text-info-strong);
 }
