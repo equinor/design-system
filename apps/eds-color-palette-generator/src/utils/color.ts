@@ -59,6 +59,69 @@ export function gaussian(
 }
 
 /**
+ * Helper function to format a Color object as a string in the specified format
+ * @param color - Color.js Color object
+ * @param format - Output format (OKLCH or HEX)
+ * @returns Formatted color string
+ * @internal - Exported for testing purposes
+ */
+export function formatColorAsString(color: Color, format: ColorFormat): string {
+  if (format === 'OKLCH') {
+    const oklch = color.to('oklch')
+    const hue = isNaN(oklch.h) ? 0 : oklch.h
+    return `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`
+  } else {
+    // Default to HEX format
+    const srgbColor = color.to('srgb')
+    srgbColor.alpha = 1
+    let hexColor = srgbColor.toString({ format: 'hex' })
+    // Expand shorthand hex (e.g., #fff -> #ffffff)
+    if (hexColor.length === 4) {
+      hexColor =
+        '#' +
+        hexColor[1] +
+        hexColor[1] +
+        hexColor[2] +
+        hexColor[2] +
+        hexColor[3] +
+        hexColor[3]
+    }
+    return hexColor
+  }
+}
+
+/**
+ * Helper function to get fallback color based on format
+ * @param format - Output format (OKLCH or HEX)
+ * @returns Fallback color string
+ * @internal - Exported for testing purposes
+ */
+export function getFallbackColor(format: ColorFormat): string {
+  return format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080'
+}
+
+/**
+ * Helper function to create a color with adjusted chroma using Gaussian function
+ * @param lightness - Target lightness value
+ * @param chroma - Base chroma value
+ * @param hue - Hue value
+ * @param mean - Mean value for Gaussian function
+ * @param stdDev - Standard deviation for Gaussian function
+ * @returns Color object with adjusted values
+ * @internal - Exported for testing purposes
+ */
+export function createColorWithGaussianChroma(
+  lightness: number,
+  chroma: number,
+  hue: number,
+  mean: number,
+  stdDev: number,
+): Color {
+  const adjustedChroma = gaussian(lightness, mean, stdDev) * chroma
+  return new Color('oklch', [lightness, adjustedChroma, hue])
+}
+
+/**
  * Generates a color scale by interpolating between multiple anchor colors at specific steps
  * @param anchors - Array of color anchors with step positions
  * @param lightnessValues - Array of target lightness values for each step
@@ -145,50 +208,24 @@ export function generateColorScaleWithInterpolation(
       const interpolatedHue = isNaN(oklchColor.h) ? 0 : oklchColor.h
       const baseChroma = oklchColor.c
 
-      // Apply Gaussian function to chroma based on target lightness
-      const adjustedChroma =
-        gaussian(targetLightness, mean, stdDev) * baseChroma
-
-      // Create the final color with target lightness and adjusted chroma
-      const finalColor = new Color('oklch', [
+      // Create the final color with Gaussian-adjusted chroma
+      const finalColor = createColorWithGaussianChroma(
         targetLightness,
-        adjustedChroma,
+        baseChroma,
         interpolatedHue,
-      ])
+        mean,
+        stdDev,
+      )
 
-      // Format output based on the selected format
-      if (format === 'OKLCH') {
-        const oklch = finalColor.to('oklch')
-        const hue = isNaN(oklch.h) ? 0 : oklch.h
-        colors.push(
-          `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
-        )
-      } else {
-        // Default to HEX format
-        const srgbColor = finalColor.to('srgb')
-        srgbColor.alpha = 1
-        let hexColor = srgbColor.toString({ format: 'hex' })
-        // Expand shorthand hex
-        if (hexColor.length === 4) {
-          hexColor =
-            '#' +
-            hexColor[1] +
-            hexColor[1] +
-            hexColor[2] +
-            hexColor[2] +
-            hexColor[3] +
-            hexColor[3]
-        }
-        colors.push(hexColor)
-      }
+      // Format and add to array
+      colors.push(formatColorAsString(finalColor, format))
     }
 
     return colors
   } catch (error) {
     console.error('Error in generateColorScaleWithInterpolation:', error)
     // Return a default color scale if there's an error
-    const fallbackColor = format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080'
-    return Array(lightnessValues.length).fill(fallbackColor)
+    return Array(lightnessValues.length).fill(getFallbackColor(format))
   }
 }
 
@@ -224,45 +261,26 @@ export function generateColorScale(
         const lightness = lightnessValues[i]
         // Create a new color instance for each step to avoid mutation issues
         const color = new Color(base.toString({ format: 'hex' }))
-        // Convert to OKLCH to get the chroma value
+        // Convert to OKLCH to get the chroma and hue values
         const oklchColor = color.to('oklch')
-        // Calculate new chroma based on gaussian function
-        const chroma = gaussian(lightness, mean, stdDev) * oklchColor.c
-        // Apply new lightness and chroma values
-        color.set('oklch.l', lightness)
-        color.set('oklch.c', chroma)
+        const baseChroma = oklchColor.c
+        const hue = isNaN(oklchColor.h) ? 0 : oklchColor.h
 
-        // Format output based on the selected format
-        if (format === 'OKLCH') {
-          const oklch = color.to('oklch')
-          // Handle NaN hue for grayscale colors (set to 0)
-          const hue = isNaN(oklch.h) ? 0 : oklch.h
-          colors.push(
-            `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`,
-          )
-        } else {
-          // Default to HEX format - convert to sRGB first to ensure proper conversion
-          const srgbColor = color.to('srgb')
-          // Force alpha to 1 to ensure 6-digit hex output
-          srgbColor.alpha = 1
-          let hexColor = srgbColor.toString({ format: 'hex' })
-          // Expand shorthand hex (e.g., #fff -> #ffffff)
-          if (hexColor.length === 4) {
-            hexColor =
-              '#' +
-              hexColor[1] +
-              hexColor[1] +
-              hexColor[2] +
-              hexColor[2] +
-              hexColor[3] +
-              hexColor[3]
-          }
-          colors.push(hexColor)
-        }
+        // Create the final color with Gaussian-adjusted chroma
+        const finalColor = createColorWithGaussianChroma(
+          lightness,
+          baseChroma,
+          hue,
+          mean,
+          stdDev,
+        )
+
+        // Format and add to array
+        colors.push(formatColorAsString(finalColor, format))
       } catch (error) {
         console.error(`Error generating color for step ${i}:`, error)
         // Fallback to a default color if there's an error
-        colors.push(format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080')
+        colors.push(getFallbackColor(format))
       }
     }
 
@@ -270,8 +288,7 @@ export function generateColorScale(
   } catch (error) {
     console.error('Error in generateColorScale:', error)
     // Return a default color scale if there's an error with the base color
-    const fallbackColor = format === 'OKLCH' ? 'oklch(0.5 0.0 0.0)' : '#808080'
-    return Array(lightnessValues.length).fill(fallbackColor)
+    return Array(lightnessValues.length).fill(getFallbackColor(format))
   }
 }
 
