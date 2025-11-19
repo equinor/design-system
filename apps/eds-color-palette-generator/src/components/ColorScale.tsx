@@ -462,7 +462,7 @@ function ColorScaleBase({
                         testId ? `${testId}-format-error` : undefined
                       }
                     >
-                      Colour format is not valid
+                      Color format is not valid
                     </span>
                   )}
                 </div>
