@@ -242,4 +242,3 @@ describe('colorsEqual', () => {
     })
   })
 })
-

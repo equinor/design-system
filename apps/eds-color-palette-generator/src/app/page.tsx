@@ -26,6 +26,7 @@ import {
 import { computeContrastSummary } from '@/utils/contrastSummary'
 import { QuickActionsPopover } from '@/components/QuickActionsPopover'
 import { RotateCcw } from 'lucide-react'
+import { FALLBACK_GRAY_COLOR } from '@/utils/constants'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -147,7 +148,8 @@ export default function App() {
     setColors((prev) =>
       prev.map((color, i) => {
         if (i === index) {
-          // When using anchors, remove the legacy value field
+          // Intentionally remove the legacy 'value' field when migrating to anchors
+          // to prevent ambiguity between single-color and multi-anchor formats
           return { name: color.name, anchors: newAnchors }
         }
         return color
@@ -227,7 +229,7 @@ export default function App() {
         const colorInput = c.anchors || c.value
         if (!colorInput) {
           // Fallback for missing data
-          return Array(lightModeValues.length).fill('#808080')
+          return Array(lightModeValues.length).fill(FALLBACK_GRAY_COLOR)
         }
         return generateColorScale(
           colorInput,
@@ -248,7 +250,7 @@ export default function App() {
         const colorInput = c.anchors || c.value
         if (!colorInput) {
           // Fallback for missing data
-          return Array(darkModeValues.length).fill('#808080')
+          return Array(darkModeValues.length).fill(FALLBACK_GRAY_COLOR)
         }
         return generateColorScale(
           colorInput,

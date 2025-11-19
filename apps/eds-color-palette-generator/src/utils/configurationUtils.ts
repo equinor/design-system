@@ -14,7 +14,7 @@ function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
   const colorInput = colorDef.anchors || colorDef.value
   if (!colorInput) {
     throw new Error(
-      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please provide at least one to generate color tokens.`,
+      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please add either a 'value' property with a single color or an 'anchors' array with color anchor points.`,
     )
   }
   return colorInput
