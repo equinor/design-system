@@ -15,7 +15,6 @@ import { FieldDescription } from './Field.Description'
 import type { FieldProps } from './Field.types'
 import { FieldLabel } from './Field.Label'
 import { classNames, mergeSpaceSeparated } from './field.utils'
-import './field.css'
 
 type EnhancedControlOptions = {
   controlId: string

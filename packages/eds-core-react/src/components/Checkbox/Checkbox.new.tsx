@@ -7,7 +7,6 @@ import {
 } from '@equinor/eds-icons'
 import { TypographyNext } from '../Typography'
 import type { CheckboxProps } from './Checkbox.new.types'
-import './checkbox.new.css'
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
   classes.filter(Boolean).join(' ')

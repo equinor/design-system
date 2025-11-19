@@ -1,7 +1,6 @@
 import { forwardRef, useEffect, useId } from 'react'
 import { TypographyNext } from '../Typography'
 import type { ValidationMessageProps } from './ValidationMessage.types'
-import './validation-message.css'
 import { useOptionalFieldContext } from '../Field/Field.context'
 
 const classNames = (...classes: (string | false | undefined)[]) =>
