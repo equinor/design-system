@@ -121,11 +121,19 @@ function AnchorColorInput({
           aria-label={`Step for anchor ${index + 1}`}
           data-testid={testId ? `${testId}-anchor-${index}-step` : undefined}
         >
-          {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => (
-            <option key={step} value={step}>
-              Step {step}
-            </option>
-          ))}
+          {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => {
+            // Find if this step is used by another anchor
+            const isUsed =
+              anchors.some(
+                (a, idx) => a.step === step && idx !== index
+              );
+            return (
+              <option key={step} value={step} disabled={isUsed}>
+                Step {step}
+                {isUsed ? ' (used)' : ''}
+              </option>
+            );
+          })}
         </select>
       )}
       <div className="flex flex-col gap-1 flex-1">
