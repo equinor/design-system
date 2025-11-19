@@ -32,6 +32,170 @@ type OklchInfo = {
   index: number // color step index
 }
 
+// Reusable component for anchor color input with picker
+type AnchorColorInputProps = {
+  index: number
+  anchor: ColorAnchor
+  anchorsLength: number
+  onUpdateAnchor: (
+    index: number,
+    field: 'value' | 'step',
+    newValue: string | number,
+  ) => void
+  onRemoveAnchor: (index: number) => void
+  testId?: string
+}
+
+function AnchorColorInput({
+  index,
+  anchor,
+  anchorsLength,
+  onUpdateAnchor,
+  onRemoveAnchor,
+  testId,
+}: AnchorColorInputProps) {
+  const colorInputRef = useRef<HTMLInputElement | null>(null)
+  const prevAnchorValueRef = useRef<string>(anchor.value)
+  const [localHex, setLocalHex] = useState(() => {
+    try {
+      return parseColorToHex(anchor.value) || '#000000'
+    } catch {
+      return '#000000'
+    }
+  })
+  const [localColorInput, setLocalColorInput] = useState(anchor.value)
+  const [isValidColor, setIsValidColor] = useState(true)
+  const debounceRef = useRef<number | null>(null)
+
+  // Update local state when anchor value changes from parent
+  useEffect(() => {
+    if (prevAnchorValueRef.current !== anchor.value) {
+      prevAnchorValueRef.current = anchor.value
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLocalColorInput(anchor.value)
+      const hexValue = parseColorToHex(anchor.value)
+      if (hexValue) {
+        setLocalHex(hexValue)
+        setIsValidColor(true)
+      }
+    }
+  }, [anchor.value])
+
+  const handleColorInputChange = (value: string) => {
+    setLocalColorInput(value)
+    const isValid = isValidColorFormat(value)
+    setIsValidColor(isValid)
+
+    if (isValid) {
+      const hexValue = parseColorToHex(value)
+      if (hexValue) {
+        setLocalHex(hexValue)
+        // Debounce the parent update
+        if (debounceRef.current) {
+          window.clearTimeout(debounceRef.current)
+        }
+        debounceRef.current = window.setTimeout(() => {
+          onUpdateAnchor(index, 'value', value.trim())
+        }, 250)
+      }
+    }
+  }
+
+  const handleColorInputBlur = () => {
+    if (!isValidColor) {
+      // Reset to last valid value on blur if invalid
+      setLocalColorInput(anchor.value)
+      setIsValidColor(true)
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      {anchorsLength > 1 && (
+        <select
+          value={anchor.step}
+          onChange={(e) =>
+            onUpdateAnchor(index, 'step', parseInt(e.target.value))
+          }
+          className="px-2 py-1.5 text-sm rounded-md border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong bg-input"
+          aria-label={`Step for anchor ${index + 1}`}
+          data-testid={testId ? `${testId}-anchor-${index}-step` : undefined}
+        >
+          {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => (
+            <option key={step} value={step}>
+              Step {step}
+            </option>
+          ))}
+        </select>
+      )}
+      <div className="flex flex-col gap-1 flex-1">
+        <input
+          type="text"
+          value={localColorInput}
+          onChange={(e) => handleColorInputChange(e.target.value)}
+          onBlur={handleColorInputBlur}
+          placeholder="Color value"
+          className={`px-3 py-1.5 text-sm rounded-md ${
+            !isValidColor
+              ? 'border-2 border-danger-fill-emphasis-default'
+              : 'border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong'
+          } bg-input`}
+          aria-label={`Color value for anchor ${index + 1}`}
+          aria-invalid={!isValidColor}
+          data-testid={testId ? `${testId}-anchor-${index}-value` : undefined}
+        />
+        {!isValidColor && (
+          <span
+            className="text-xs text-danger-subtle"
+            data-testid={
+              testId ? `${testId}-anchor-${index}-format-error` : undefined
+            }
+          >
+            Colour format is not valid
+          </span>
+        )}
+      </div>
+      <input
+        ref={colorInputRef}
+        type="color"
+        value={localHex}
+        onChange={(e) => {
+          const next = e.target.value
+          setLocalHex(next)
+          setLocalColorInput(next)
+          setIsValidColor(true)
+          onUpdateAnchor(index, 'value', next)
+        }}
+        className="sr-only"
+        aria-label={`Pick color for anchor ${index + 1}`}
+        tabIndex={-1}
+      />
+      <button
+        type="button"
+        onClick={() => colorInputRef.current?.click()}
+        className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
+        title="Pick color"
+        aria-label={`Pick color for anchor ${index + 1}`}
+        data-testid={testId ? `${testId}-anchor-${index}-picker` : undefined}
+      >
+        <Pipette className="w-4 h-4" />
+      </button>
+      {anchorsLength > 1 && (
+        <button
+          type="button"
+          onClick={() => onRemoveAnchor(index)}
+          className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
+          title="Remove anchor"
+          aria-label={`Remove anchor ${index + 1}`}
+          data-testid={testId ? `${testId}-anchor-${index}-remove` : undefined}
+        >
+          <X className="w-4 h-4" />
+        </button>
+      )}
+    </div>
+  )
+}
+
 // Function to determine text color for steps
 function getTextColorForStep(colors: string[], stepIndex: number): string {
   if (stepIndex >= 9 && stepIndex <= 13) {
@@ -338,60 +502,15 @@ function ColorScaleBase({
             {isAnchorMode && anchors && (
               <div className="space-y-2">
                 {anchors.map((anchor, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <select
-                      value={anchor.step}
-                      onChange={(e) =>
-                        handleUpdateAnchor(
-                          index,
-                          'step',
-                          parseInt(e.target.value),
-                        )
-                      }
-                      className="px-2 py-1.5 text-sm rounded-md border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong bg-input"
-                      aria-label={`Step for anchor ${index + 1}`}
-                      data-testid={
-                        testId ? `${testId}-anchor-${index}-step` : undefined
-                      }
-                    >
-                      {Array.from({ length: 15 }, (_, i) => i + 1).map(
-                        (step) => (
-                          <option key={step} value={step}>
-                            Step {step}
-                          </option>
-                        ),
-                      )}
-                    </select>
-                    <input
-                      type="text"
-                      value={anchor.value}
-                      onChange={(e) =>
-                        handleUpdateAnchor(index, 'value', e.target.value)
-                      }
-                      placeholder="Color value"
-                      className="flex-1 px-3 py-1.5 text-sm rounded-md border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong bg-input"
-                      aria-label={`Color value for anchor ${index + 1}`}
-                      data-testid={
-                        testId ? `${testId}-anchor-${index}-value` : undefined
-                      }
-                    />
-                    {anchors.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveAnchor(index)}
-                        className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
-                        title="Remove anchor"
-                        aria-label={`Remove anchor ${index + 1}`}
-                        data-testid={
-                          testId
-                            ? `${testId}-anchor-${index}-remove`
-                            : undefined
-                        }
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
+                  <AnchorColorInput
+                    key={index}
+                    index={index}
+                    anchor={anchor}
+                    anchorsLength={anchors.length}
+                    onUpdateAnchor={handleUpdateAnchor}
+                    onRemoveAnchor={handleRemoveAnchor}
+                    testId={testId}
+                  />
                 ))}
                 <button
                   type="button"
