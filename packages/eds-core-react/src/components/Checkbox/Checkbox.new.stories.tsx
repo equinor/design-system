@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, ChangeEvent } from 'react'
+import { useState, useRef, ChangeEvent } from 'react'
+import type { LabelHTMLAttributes } from 'react'
 import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
@@ -17,7 +18,7 @@ const meta: Meta<typeof Checkbox> = {
     docs: {
       description: {
         component:
-          'New Checkbox component using vanilla CSS and EDS foundation tokens. Supports compact mode, dark mode, and all accessibility features.',
+          'New Checkbox component using vanilla CSS and EDS foundation tokens. Consumers control tone and density via `data-*` attributes on the wrapper element',
       },
       source: {
         excludeDecorators: true,
@@ -59,8 +60,28 @@ const CheckboxWrapper = ({ children, ...props }) => (
   </div>
 )
 
+const labelData = (
+  attributes: Record<`data-${string}`, string | undefined>,
+): LabelHTMLAttributes<HTMLLabelElement> => attributes
+
+const appearances = [
+  'accent',
+  'neutral',
+  'success',
+  'info',
+  'warning',
+  'danger',
+] as const
+
 export const Introduction: StoryFn<CheckboxProps> = (args) => {
-  return <Checkbox label="Play with me" {...args} />
+  const accentLabelProps = labelData({
+    'data-color-appearance': 'accent',
+    'data-density': 'spacious',
+  })
+
+  return (
+    <Checkbox label="Play with me" labelProps={accentLabelProps} {...args} />
+  )
 }
 
 export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
@@ -260,26 +281,56 @@ WithFormsControl.storyName = 'Example with React Hook Form'
 
 export const Compact: StoryFn<CheckboxProps> = () => {
   return (
-    <div data-density="comfortable">
-      <UnstyledList>
-        <li>
-          <Checkbox label="I am compact" />
-        </li>
-        <li>
-          <Checkbox label="I am also compact" defaultChecked />
-        </li>
-        <li>
-          <Checkbox label="I am compact and disabled" disabled />
-        </li>
-      </UnstyledList>
-    </div>
+    <UnstyledList>
+      <li>
+        <Checkbox
+          label="I am compact"
+          labelProps={labelData({ 'data-density': 'comfortable' })}
+        />
+      </li>
+      <li>
+        <Checkbox
+          label="I am also compact"
+          defaultChecked
+          labelProps={labelData({ 'data-density': 'comfortable' })}
+        />
+      </li>
+      <li>
+        <Checkbox
+          label="I am compact and disabled"
+          disabled
+          labelProps={labelData({ 'data-density': 'comfortable' })}
+        />
+      </li>
+    </UnstyledList>
   )
 }
 Compact.parameters = {
   docs: {
     description: {
       story:
-        'Compact mode is activated by adding `data-density="comfortable"` to a parent element. The density attribute is inherited by all child components.',
+        'Set `data-density="comfortable"` on the wrapper (`labelProps`) to switch to the compact touch area.',
+    },
+  },
+}
+
+export const Appearances: StoryFn = () => (
+  <UnstyledList>
+    {appearances.map((appearance) => (
+      <li key={appearance}>
+        <Checkbox
+          label={`Appearance: ${appearance}`}
+          labelProps={labelData({ 'data-color-appearance': appearance })}
+        />
+      </li>
+    ))}
+  </UnstyledList>
+)
+Appearances.parameters = {
+  docs: {
+    description: {
+      story:
+        'Apply different tones by setting `data-color-appearance` on the wrapper element via `labelProps`.',
     },
   },
 }
