@@ -3,5 +3,5 @@
  */
 
 [data-vertical-gap="2xl"] {
-  --eds-generic-gap-vertical: var(--eds-spacing-vertical-3xl);
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-2xl);
 }

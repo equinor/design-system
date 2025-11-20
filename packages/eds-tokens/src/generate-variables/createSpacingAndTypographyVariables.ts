@@ -411,7 +411,7 @@ export async function createSpacingAndTypographyVariables({
     selectableSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
   )
 
-  const gapSizeConfigs = [
+  const genericSizeConfigs = [
     'None',
     '4XS',
     '3XS',
@@ -425,29 +425,33 @@ export async function createSpacingAndTypographyVariables({
     '3XL',
   ] as const
 
-  const createGenericGapDictionary = (size: string) => {
+  const createGenericSpacingDictionary = (
+    type: 'gap' | 'space',
+    size: string,
+  ) => {
     const sizeLower = size.toLowerCase()
-    const horizontalGapPath = path.join(
+    const typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1)
+    const horizontalPath = path.join(
       tokensDir,
       FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      `🪐 Horizontal gap.${size}.json`,
+      `🪐 Horizontal ${type}.${size}.json`,
     )
-    const verticalGapPath = path.join(
+    const verticalPath = path.join(
       tokensDir,
       FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      `🪐 Vertical gap.${size}.json`,
+      `🪐 Vertical ${type}.${size}.json`,
     )
 
     // XS is the default, so it gets both :root and size-specific selectors
     const horizontalSelector =
       size === 'XS'
-        ? ':root, [data-horizontal-gap="xs"]'
-        : `[data-horizontal-gap="${sizeLower}"]`
+        ? `:root, [data-horizontal-${type}="xs"]`
+        : `[data-horizontal-${type}="${sizeLower}"]`
 
     const verticalSelector =
       size === 'XS'
-        ? ':root, [data-vertical-gap="xs"]'
-        : `[data-vertical-gap="${sizeLower}"]`
+        ? `:root, [data-vertical-${type}="xs"]`
+        : `[data-vertical-${type}="${sizeLower}"]`
 
     return new StyleDictionary({
       include: [
@@ -455,7 +459,7 @@ export async function createSpacingAndTypographyVariables({
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
       ],
-      source: [horizontalGapPath, verticalGapPath],
+      source: [horizontalPath, verticalPath],
       platforms: {
         css: {
           transformGroup: 'css',
@@ -465,8 +469,8 @@ export async function createSpacingAndTypographyVariables({
           files: [
             {
               filter: (token: TransformedToken) =>
-                token.path && token.path[0] === 'generic-gap-horizontal',
-              destination: `generic-gap-horizontal-${sizeLower}.css`,
+                token.path && token.path[0] === `generic-${type}-horizontal`,
+              destination: `generic-${type}-horizontal-${sizeLower}.css`,
               format: 'css/variables',
               options: {
                 selector: horizontalSelector,
@@ -475,8 +479,8 @@ export async function createSpacingAndTypographyVariables({
             },
             {
               filter: (token: TransformedToken) =>
-                token.path && token.path[0] === 'generic-gap-vertical',
-              destination: `generic-gap-vertical-${sizeLower}.css`,
+                token.path && token.path[0] === `generic-${type}-vertical`,
+              destination: `generic-${type}-vertical-${sizeLower}.css`,
               format: 'css/variables',
               options: {
                 selector: verticalSelector,
@@ -489,13 +493,18 @@ export async function createSpacingAndTypographyVariables({
     })
   }
 
-  const genericGapDictionaries = gapSizeConfigs.map((size) =>
-    createGenericGapDictionary(size),
+  const genericGapDictionaries = genericSizeConfigs.map((size) =>
+    createGenericSpacingDictionary('gap', size),
   )
 
-  await Promise.all(
-    genericGapDictionaries.map((dict) => dict.buildAllPlatforms()),
+  const genericSpaceDictionaries = genericSizeConfigs.map((size) =>
+    createGenericSpacingDictionary('space', size),
   )
+
+  await Promise.all([
+    ...genericGapDictionaries.map((dict) => dict.buildAllPlatforms()),
+    ...genericSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
+  ])
 
   // Generate semantic space and gap variables directly from the semantic tokens file
   // Only default modes are included for variable collections (e.g., Font size.XS, Font family.UI Body)

@@ -977,7 +977,99 @@
 }
 
 [data-vertical-gap="2xl"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-2xl);
+}
+
+[data-vertical-gap="3xl"] {
   --eds-generic-gap-vertical: var(--eds-spacing-vertical-3xl);
+}
+
+[data-horizontal-space="none"] {
+  --eds-generic-space-horizontal: 0;
+}
+
+[data-horizontal-space="4xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-4xs);
+}
+
+[data-horizontal-space="3xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-3xs);
+}
+
+[data-horizontal-space="2xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-2xs);
+}
+
+:root, [data-horizontal-space="xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-xs);
+}
+
+[data-horizontal-space="sm"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-sm);
+}
+
+[data-horizontal-space="md"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-md);
+}
+
+[data-horizontal-space="lg"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-lg);
+}
+
+[data-horizontal-space="xl"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-xl);
+}
+
+[data-horizontal-space="2xl"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-2xl);
+}
+
+[data-horizontal-space="3xl"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-3xl);
+}
+
+[data-vertical-space="none"] {
+  --eds-generic-space-vertical: 0;
+}
+
+[data-vertical-space="4xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-4xs);
+}
+
+[data-vertical-space="3xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-3xs);
+}
+
+[data-vertical-space="2xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-2xs);
+}
+
+:root, [data-vertical-space="xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-xs);
+}
+
+[data-vertical-space="sm"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-sm);
+}
+
+[data-vertical-space="md"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-md);
+}
+
+[data-vertical-space="lg"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-lg);
+}
+
+[data-vertical-space="xl"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-xl);
+}
+
+[data-vertical-space="2xl"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-2xl);
+}
+
+[data-vertical-space="3xl"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-3xl);
 }
 
 :root {
