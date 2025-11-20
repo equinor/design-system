@@ -25,8 +25,10 @@
         ],
         "codeSyntax": {}
       }
-    },
-    "XS": {
+    }
+  },
+  "font-family-size": {
+    "xs": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.xs.font-size}",
@@ -172,7 +174,7 @@
         }
       }
     },
-    "SM": {
+    "sm": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.sm.font-size}",
@@ -318,7 +320,7 @@
         }
       }
     },
-    "MD": {
+    "md": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.md.font-size}",
@@ -464,7 +466,7 @@
         }
       }
     },
-    "LG": {
+    "lg": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.lg.font-size}",
@@ -610,7 +612,7 @@
         }
       }
     },
-    "XL": {
+    "xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.xl.font-size}",
@@ -756,7 +758,7 @@
         }
       }
     },
-    "2XL": {
+    "2xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.2xl.font-size}",
@@ -902,7 +904,7 @@
         }
       }
     },
-    "3XL": {
+    "3xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.3xl.font-size}",
@@ -1048,7 +1050,7 @@
         }
       }
     },
-    "4XL": {
+    "4xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.4xl.font-size}",
@@ -1194,7 +1196,7 @@
         }
       }
     },
-    "5XL": {
+    "5xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.5xl.font-size}",
@@ -1340,7 +1342,7 @@
         }
       }
     },
-    "6XL": {
+    "6xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.ui-body.6xl.font-size}",

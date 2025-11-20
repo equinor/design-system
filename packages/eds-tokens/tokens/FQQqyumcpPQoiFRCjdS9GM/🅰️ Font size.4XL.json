@@ -15,7 +15,7 @@
   },
   "font-size": {
     "$type": "number",
-    "$value": "{Font family.4XL.font-size}",
+    "$value": "{font-family-size.4xl.font-size}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -27,7 +27,7 @@
   },
   "padding-centred": {
     "$type": "number",
-    "$value": "{Font family.4XL.padding-centred}",
+    "$value": "{font-family-size.4xl.padding-centred}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -39,7 +39,7 @@
   },
   "padding-baselined": {
     "$type": "number",
-    "$value": "{Font family.4XL.padding-baselined}",
+    "$value": "{font-family-size.4xl.padding-baselined}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -51,7 +51,7 @@
   },
   "cap-height-rounded": {
     "$type": "number",
-    "$value": "{Font family.4XL.cap-height-rounded}",
+    "$value": "{font-family-size.4xl.cap-height-rounded}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -63,7 +63,7 @@
   },
   "tracking-tight": {
     "$type": "number",
-    "$value": "{Font family.4XL.tracking-tight}",
+    "$value": "{font-family-size.4xl.tracking-tight}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -75,7 +75,7 @@
   },
   "tracking-normal": {
     "$type": "number",
-    "$value": "{Font family.4XL.tracking-normal}",
+    "$value": "{font-family-size.4xl.tracking-normal}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -87,7 +87,7 @@
   },
   "tracking-wide": {
     "$type": "number",
-    "$value": "{Font family.4XL.tracking-wide}",
+    "$value": "{font-family-size.4xl.tracking-wide}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -99,7 +99,7 @@
   },
   "font-weight-lighter": {
     "$type": "number",
-    "$value": "{Font family.4XL.font-weight-lighter}",
+    "$value": "{font-family-size.4xl.font-weight-lighter}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -111,7 +111,7 @@
   },
   "font-weight-normal": {
     "$type": "number",
-    "$value": "{Font family.4XL.font-weight-normal}",
+    "$value": "{font-family-size.4xl.font-weight-normal}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -123,7 +123,7 @@
   },
   "font-weight-bolder": {
     "$type": "number",
-    "$value": "{Font family.4XL.font-weight-bolder}",
+    "$value": "{font-family-size.4xl.font-weight-bolder}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -135,7 +135,7 @@
   },
   "lineheight-default": {
     "$type": "number",
-    "$value": "{Font family.4XL.lineheight-default}",
+    "$value": "{font-family-size.4xl.lineheight-default}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -147,7 +147,7 @@
   },
   "lineheight-squished": {
     "$type": "number",
-    "$value": "{Font family.4XL.lineheight-squished}",
+    "$value": "{font-family-size.4xl.lineheight-squished}",
     "$description": "",
     "$extensions": {
       "com.figma": {
