@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-selectable-gap-horizontal: var(--eds-spacing-horizontal-xs);
+  --eds-selectable-gap-vertical: var(--eds-spacing-vertical-xs);
+  --eds-container-gap-horizontal: var(--eds-spacing-horizontal-md);
+  --eds-container-gap-vertical: var(--eds-spacing-vertical-md);
+  --eds-page-gap-horizontal: var(--eds-spacing-horizontal-xl);
+  --eds-page-gap-vertical: var(--eds-spacing-vertical-xl);
+}

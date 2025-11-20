@@ -411,14 +411,14 @@ export async function createSpacingAndTypographyVariables({
     selectableSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
   )
 
-  // Generate semantic gap variables directly from the semantic tokens file
+  // Generate semantic space and gap variables directly from the semantic tokens file
   // Only default modes are included for variable collections (e.g., Font size.XS, Font family.UI Body)
   // Other modes are built separately and controlled via data-attributes
   // Reference chain: {font-size} → {Font family.XS.font-size} → {typography.ui-body.xs.font-size} → {type-scale.inter.200.font-size} → value
   // All dependency tokens are included in the include array to allow StyleDictionary to resolve references
   // Note: BOX_FILES are NOT included here because they define tokens at the root level (e.g., "Stroke")
   // which conflict with the semantic tokens file structure
-  const semanticGapsDict = new StyleDictionary({
+  const semanticGapDict = new StyleDictionary({
     include: [
       SPACING_PRIMITIVE_SOURCE, // type-scale.inter/equinor primitives
       FIGMA_SPECIFIC_TOKENS_SOURCE, // figma.type-scale values
@@ -462,8 +462,8 @@ export async function createSpacingAndTypographyVariables({
               const component = token.path[0]
               const property = token.path[1]
 
-              // Filter for gap tokens from the semantic tokens file
-              // Token names follow pattern: "Gap horizontal" / "Gap vertical" (noun first, then direction)
+              // Filter for gap and space tokens from the semantic tokens file
+              // Token names follow pattern: "Gap horizontal" / "Gap vertical" / "Space horizontal" / "Space vertical" (noun first, then direction)
               const isSelectableGap =
                 component === 'Selectable' &&
                 (property === 'Gap horizontal' || property === 'Gap vertical')
@@ -473,15 +473,10 @@ export async function createSpacingAndTypographyVariables({
               const isPageGap =
                 component === 'Page' &&
                 (property === 'Gap horizontal' || property === 'Gap vertical')
-              const isGenericGap =
-                component === 'Generic' &&
-                (property === 'Gap horizontal' || property === 'Gap vertical')
 
-              return (
-                isSelectableGap || isContainerGap || isPageGap || isGenericGap
-              )
+              return isSelectableGap || isContainerGap || isPageGap
             },
-            destination: 'semantic-spacing-gaps.css',
+            destination: 'semantic-spacing-gap.css',
             format: 'css/variables',
             options: {
               selector: ':root',
@@ -493,5 +488,5 @@ export async function createSpacingAndTypographyVariables({
     },
   })
 
-  await semanticGapsDict.buildAllPlatforms()
+  await semanticGapDict.buildAllPlatforms()
 }

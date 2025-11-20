@@ -1,41 +1,41 @@
-import { StyleDictionary as c } from "style-dictionary-utils";
-import { createDensitySpaceToggleTransform as so, includeTokenFilter as p, pxFormatted as eo, pxTransform as to, pxToRem as no, fontQuote as ao, PX_TO_REM_NAME as io, PX_FORMATTED_NAME as ro, FONT_QUOTE_NAME as co } from "@equinor/eds-tokens-build";
+import { StyleDictionary as r } from "style-dictionary-utils";
+import { createDensitySpaceToggleTransform as so, includeTokenFilter as p, pxFormatted as to, pxTransform as eo, pxToRem as no, fontQuote as ao, PX_TO_REM_NAME as io, PX_FORMATTED_NAME as ro, FONT_QUOTE_NAME as co } from "@equinor/eds-tokens-build";
 import o from "path";
 import { readJsonFiles as lo } from "@equinor/eds-tokens-sync";
-const b = "cpNchKjiIM19dPqTxE0fqg", r = "FQQqyumcpPQoiFRCjdS9GM";
+const b = "cpNchKjiIM19dPqTxE0fqg", i = "FQQqyumcpPQoiFRCjdS9GM";
 async function po({
-  tokensDir: t,
+  tokensDir: e,
   cssBuildPath: l,
   cssTransforms: f
 }) {
   const j = "spacing/", u = o.join(
-    t,
+    e,
     b,
     "👾 Primitives.Value.json"
   ), P = o.join(
-    t,
+    e,
     b,
     "⛔️ Figma.Value.json"
   ), S = o.join(
-    t,
-    r,
+    e,
+    i,
     "💎 Density.Spacious.json"
   ), A = o.join(
-    t,
-    r,
+    e,
+    i,
     "💎 Density.Comfortable.json"
-  ), D = lo([
+  ), y = lo([
     o.join(
-      t,
-      r,
+      e,
+      i,
       "💎 Density.Comfortable.json"
     )
   ]), h = so({
     name: "densitySpaceToggle",
-    tokens: D["💎 Density.Comfortable.json"]
+    tokens: y["💎 Density.Comfortable.json"]
   });
-  c.registerTransform(h);
-  const g = o.resolve(process.cwd(), "build"), C = o.join(g, "js"), F = o.join(g, "json"), m = (e) => p(e, ["Density", "Spacious"]), d = (e) => p(e, ["Density", "Comfortable"]), y = new c({
+  r.registerTransform(h);
+  const g = o.resolve(process.cwd(), "build"), C = o.join(g, "js"), F = o.join(g, "json"), m = (t) => p(t, ["Density", "Spacious"]), d = (t) => p(t, ["Density", "Comfortable"]), R = new r({
     include: [u, P],
     source: [S],
     platforms: {
@@ -78,7 +78,7 @@ async function po({
         transforms: f,
         files: [
           {
-            filter: (e) => p(e, ["Density", "Spacious"]),
+            filter: (t) => p(t, ["Density", "Spacious"]),
             destination: "spacious.css",
             format: "css/variables",
             options: {
@@ -89,7 +89,7 @@ async function po({
         ]
       }
     }
-  }), R = new c({
+  }), L = new r({
     include: [u, P],
     source: [A],
     platforms: {
@@ -132,7 +132,7 @@ async function po({
         transforms: f,
         files: [
           {
-            filter: (e) => p(e, ["Density", "Comfortable"]),
+            filter: (t) => p(t, ["Density", "Comfortable"]),
             destination: "comfortable.css",
             format: "css/variables",
             options: {
@@ -144,28 +144,28 @@ async function po({
       }
     }
   });
-  await y.buildAllPlatforms(), await R.buildAllPlatforms();
+  await R.buildAllPlatforms(), await L.buildAllPlatforms();
   const _ = o.join(
-    t,
+    e,
     b,
     "⛔️ Figma.Value.json"
-  ), L = o.join(
-    t,
-    r,
-    "🪐 Space proportions.Squared.json"
   ), O = o.join(
-    t,
-    r,
+    e,
+    i,
+    "🪐 Space proportions.Squared.json"
+  ), G = o.join(
+    e,
+    i,
     "🗣️ Semantic.Mode 1.json"
   ), N = o.join(
-    t,
-    r,
+    e,
+    i,
     "🪐 Container space.Default.json"
   ), U = o.join(
-    t,
-    r,
+    e,
+    i,
     "🪐 Page space.Default.json"
-  ), s = o.join(t, r);
+  ), s = o.join(e, i);
   o.join(s, "📦 Box.Container.json"), o.join(s, "📦 Box.Generic.json"), o.join(s, "📦 Box.Page.json"), o.join(s, "📦 Box.Selectable.json");
   const M = [
     o.join(s, "🪐 Container space.Default.json"),
@@ -178,11 +178,11 @@ async function po({
     o.join(s, "🪐 Space proportions.Squared.json"),
     o.join(s, "🪐 Space proportions.Squished.json"),
     o.join(s, "🪐 Space proportions.Stretched.json")
-  ], w = o.join(s, "🅰️ Font size.XS.json"), v = [
+  ], w = o.join(s, "🅰️ Font size.XS.json"), x = [
     o.join(s, "🅰️ Font family.Header.json"),
     o.join(s, "🅰️ Font family.UI and Body.json"),
     o.join(s, "🅰️ Font family.UI Body.json")
-  ], x = o.join(s, "🅰️ Font weight.Normal.json"), X = o.join(
+  ], v = o.join(s, "🅰️ Font weight.Normal.json"), X = o.join(
     s,
     "🅰️ Font baseline.Centred.json"
   ), B = o.join(
@@ -191,28 +191,28 @@ async function po({
   ), $ = o.join(s, "🅰️ Lineheight.Default.json"), q = o.join(s, "〰️ Stroke.Thin.json"), H = o.join(
     s,
     "⭕️ Border radius.Rounded.json"
-  ), V = o.join(s, "🖼️ Icon size.XS.json"), z = o.join(s, "📐 Size.XS.json"), I = o.join(
+  ), V = o.join(s, "🖼️ Icon size.XS.json"), Y = o.join(s, "📐 Size.XS.json"), I = o.join(
     s,
     "🪐 Horizontal gap.XS.json"
-  ), G = o.join(s, "🪐 Vertical gap.XS.json"), Y = o.join(
+  ), D = o.join(s, "🪐 Vertical gap.XS.json"), z = o.join(
     s,
     "🪐 Horizontal space.XS.json"
   ), K = o.join(
     s,
     "🪐 Vertical space.XS.json"
-  ), Q = ["Squished", "Squared", "Stretched"], Z = (e) => {
-    const a = e.toLowerCase(), n = o.join(
-      t,
-      r,
-      `🪐 Space proportions.${e}.json`
-    ), E = e === "Squared" ? ':root, [data-space-proportions="squared"]' : `[data-space-proportions="${a}"]`;
-    return new c({
+  ), Q = ["Squished", "Squared", "Stretched"], Z = (t) => {
+    const c = t.toLowerCase(), n = o.join(
+      e,
+      i,
+      `🪐 Space proportions.${t}.json`
+    ), E = t === "Squared" ? ':root, [data-space-proportions="squared"]' : `[data-space-proportions="${c}"]`;
+    return new r({
       include: [
         u,
         _,
         S,
         I,
-        G
+        D
       ],
       source: [n, N, U],
       platforms: {
@@ -223,8 +223,8 @@ async function po({
           transforms: f,
           files: [
             {
-              filter: (i) => !!(p(i, [e]) || i.path && i.path[0] === "Container" && i.path[1] === "Spacing" || i.path && i.path[0] === "Page" && i.path[1] === "Spacing"),
-              destination: `space-proportions-${a}.css`,
+              filter: (a) => !!(p(a, [t]) || a.path && a.path[0] === "Container" && a.path[1] === "Spacing" || a.path && a.path[0] === "Page" && a.path[1] === "Spacing"),
+              destination: `space-proportions-${c}.css`,
               format: "css/variables",
               options: {
                 selector: E,
@@ -236,23 +236,23 @@ async function po({
       }
     });
   }, J = Q.map(
-    (e) => Z(e)
+    (t) => Z(t)
   );
   await Promise.all(
-    J.map((e) => e.buildAllPlatforms())
+    J.map((t) => t.buildAllPlatforms())
   );
-  const W = ["XS", "SM", "MD", "LG", "XL"], k = (e) => {
-    const a = e.toLowerCase(), n = o.join(
-      t,
-      r,
-      `🪐 Selectable space.${e}.json`
-    ), E = e === "XS" ? ':root, [data-selectable-space="xs"]' : `[data-selectable-space="${a}"]`;
-    return new c({
+  const W = ["XS", "SM", "MD", "LG", "XL"], k = (t) => {
+    const c = t.toLowerCase(), n = o.join(
+      e,
+      i,
+      `🪐 Selectable space.${t}.json`
+    ), E = t === "XS" ? ':root, [data-selectable-space="xs"]' : `[data-selectable-space="${c}"]`;
+    return new r({
       include: [
         u,
         _,
         S,
-        L
+        O
       ],
       source: [n],
       platforms: {
@@ -263,8 +263,8 @@ async function po({
           transforms: f,
           files: [
             {
-              filter: (i) => p(i, [e]),
-              destination: `selectable-space-${a}.css`,
+              filter: (a) => p(a, [t]),
+              destination: `selectable-space-${c}.css`,
               format: "css/variables",
               options: {
                 selector: E,
@@ -276,11 +276,11 @@ async function po({
       }
     });
   }, oo = W.map(
-    (e) => k(e)
+    (t) => k(t)
   );
   await Promise.all(
-    oo.map((e) => e.buildAllPlatforms())
-  ), await new c({
+    oo.map((t) => t.buildAllPlatforms())
+  ), await new r({
     include: [
       u,
       // type-scale.inter/equinor primitives
@@ -295,27 +295,27 @@ async function po({
       // Defines {Stroke.thickness} - References {sizing.stroke.thin} from DENSITY files
       H,
       V,
-      z,
+      Y,
       // Space tokens
       ...M,
       // Typography tokens
-      ...v,
+      ...x,
       // Include all Font family files for reference resolution
       w,
-      x,
+      v,
       X,
       B,
       $,
       // Gap and space tokens
       I,
-      G,
-      Y,
+      D,
+      z,
       K
     ],
     log: {
       verbosity: "verbose"
     },
-    source: [O],
+    source: [G],
     platforms: {
       css: {
         transformGroup: "css",
@@ -324,12 +324,12 @@ async function po({
         transforms: f,
         files: [
           {
-            filter: (e) => {
-              if (!e.path) return !1;
-              const a = e.path[0], n = e.path[1];
-              return a === "Selectable" && (n === "Gap horizontal" || n === "Gap vertical") || a === "Container" && (n === "Gap horizontal" || n === "Gap vertical") || a === "Page" && (n === "Gap horizontal" || n === "Gap vertical") || a === "Generic" && (n === "Gap horizontal" || n === "Gap vertical");
+            filter: (t) => {
+              if (!t.path) return !1;
+              const c = t.path[0], n = t.path[1];
+              return c === "Selectable" && (n === "Gap horizontal" || n === "Gap vertical") || c === "Container" && (n === "Gap horizontal" || n === "Gap vertical") || c === "Page" && (n === "Gap horizontal" || n === "Gap vertical");
             },
-            destination: "semantic-spacing-gaps.css",
+            destination: "semantic-spacing-gap.css",
             format: "css/variables",
             options: {
               selector: ":root",
@@ -341,15 +341,15 @@ async function po({
     }
   }).buildAllPlatforms();
 }
-const T = `${process.cwd()}/build`, fo = `${T}/css`, Ao = `${T}/js`, go = `${T}/json`;
-c.registerTransform(eo);
-c.registerTransform(to);
-c.registerTransform(no);
-c.registerTransform(ao);
+const T = `${process.cwd()}/build`, fo = `${T}/css`, Po = `${T}/js`, Ao = `${T}/json`;
+r.registerTransform(to);
+r.registerTransform(eo);
+r.registerTransform(no);
+r.registerTransform(ao);
 async function jo() {
-  const t = `${process.cwd()}/tokens`;
-  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", t), await po({
-    tokensDir: t,
+  const e = `${process.cwd()}/tokens`;
+  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", e), await po({
+    tokensDir: e,
     cssBuildPath: fo,
     cssTransforms: [
       "name/kebab",
@@ -361,12 +361,12 @@ async function jo() {
 }
 jo().then(() => {
   console.log("✅ Variables generated successfully");
-}).catch((t) => {
-  console.error("❌ Error generating color variables:", t);
+}).catch((e) => {
+  console.error("❌ Error generating color variables:", e);
 });
 export {
   fo as cssBuildPath,
   jo as generate,
-  Ao as jsBuildPath,
-  go as jsonBuildPath
+  Po as jsBuildPath,
+  Ao as jsonBuildPath
 };

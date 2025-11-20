@@ -326,46 +326,46 @@
   --eds-spacing-border-radius-rounded: .25rem;
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
-  --eds-spacing-inset-xs-inline: .5rem;
-  --eds-spacing-inset-xs-stack-squished: .375rem;
-  --eds-spacing-inset-xs-stack-squared: .5rem;
-  --eds-spacing-inset-xs-stack-stretched: .75rem;
-  --eds-spacing-inset-sm-inline: .75rem;
-  --eds-spacing-inset-sm-stack-squished: .5rem;
-  --eds-spacing-inset-sm-stack-squared: .75rem;
-  --eds-spacing-inset-sm-stack-stretched: 1rem;
-  --eds-spacing-inset-md-inline: 1rem;
-  --eds-spacing-inset-md-stack-squished: .75rem;
-  --eds-spacing-inset-md-stack-squared: 1rem;
-  --eds-spacing-inset-md-stack-stretched: 1.25rem;
-  --eds-spacing-inset-lg-inline: 1.25rem;
-  --eds-spacing-inset-lg-stack-squished: 1rem;
-  --eds-spacing-inset-lg-stack-squared: 1.25rem;
-  --eds-spacing-inset-lg-stack-stretched: 1.5rem;
-  --eds-spacing-inset-xl-inline: 1.5rem;
-  --eds-spacing-inset-xl-stack-squished: 1.25rem;
-  --eds-spacing-inset-xl-stack-squared: 1.5rem;
-  --eds-spacing-inset-xl-stack-stretched: 1.75rem;
-  --eds-spacing-inline-4xs: .125rem;
-  --eds-spacing-inline-3xs: .25rem;
-  --eds-spacing-inline-2xs: .375rem;
-  --eds-spacing-inline-xs: .5rem;
-  --eds-spacing-inline-sm: .75rem;
-  --eds-spacing-inline-md: 1rem;
-  --eds-spacing-inline-lg: 1.25rem;
-  --eds-spacing-inline-xl: 1.5rem;
-  --eds-spacing-inline-2xl: 1.75rem;
-  --eds-spacing-inline-3xl: 2rem;
-  --eds-spacing-stack-4xs: .125rem;
-  --eds-spacing-stack-3xs: .25rem;
-  --eds-spacing-stack-2xs: .375rem;
-  --eds-spacing-stack-xs: .5rem;
-  --eds-spacing-stack-sm: .75rem;
-  --eds-spacing-stack-md: 1rem;
-  --eds-spacing-stack-lg: 1.25rem;
-  --eds-spacing-stack-xl: 1.5rem;
-  --eds-spacing-stack-2xl: 1.75rem;
-  --eds-spacing-stack-3xl: 2rem;
+  --eds-spacing-inset-xs-horizontal: .5rem;
+  --eds-spacing-inset-xs-vertical-squished: .375rem;
+  --eds-spacing-inset-xs-vertical-squared: .5rem;
+  --eds-spacing-inset-xs-vertical-stretched: .75rem;
+  --eds-spacing-inset-sm-horizontal: .75rem;
+  --eds-spacing-inset-sm-vertical-squished: .5rem;
+  --eds-spacing-inset-sm-vertical-squared: .75rem;
+  --eds-spacing-inset-sm-vertical-stretched: 1rem;
+  --eds-spacing-inset-md-horizontal: 1rem;
+  --eds-spacing-inset-md-vertical-squished: .75rem;
+  --eds-spacing-inset-md-vertical-squared: 1rem;
+  --eds-spacing-inset-md-vertical-stretched: 1.25rem;
+  --eds-spacing-inset-lg-horizontal: 1.25rem;
+  --eds-spacing-inset-lg-vertical-squished: 1rem;
+  --eds-spacing-inset-lg-vertical-squared: 1.25rem;
+  --eds-spacing-inset-lg-vertical-stretched: 1.5rem;
+  --eds-spacing-inset-xl-horizontal: 1.5rem;
+  --eds-spacing-inset-xl-vertical-squished: 1.25rem;
+  --eds-spacing-inset-xl-vertical-squared: 1.5rem;
+  --eds-spacing-inset-xl-vertical-stretched: 1.75rem;
+  --eds-spacing-horizontal-4xs: .125rem;
+  --eds-spacing-horizontal-3xs: .25rem;
+  --eds-spacing-horizontal-2xs: .375rem;
+  --eds-spacing-horizontal-xs: .5rem;
+  --eds-spacing-horizontal-sm: .75rem;
+  --eds-spacing-horizontal-md: 1rem;
+  --eds-spacing-horizontal-lg: 1.25rem;
+  --eds-spacing-horizontal-xl: 1.5rem;
+  --eds-spacing-horizontal-2xl: 1.75rem;
+  --eds-spacing-horizontal-3xl: 2rem;
+  --eds-spacing-vertical-4xs: .125rem;
+  --eds-spacing-vertical-3xs: .25rem;
+  --eds-spacing-vertical-2xs: .375rem;
+  --eds-spacing-vertical-xs: .5rem;
+  --eds-spacing-vertical-sm: .75rem;
+  --eds-spacing-vertical-md: 1rem;
+  --eds-spacing-vertical-lg: 1.25rem;
+  --eds-spacing-vertical-xl: 1.5rem;
+  --eds-spacing-vertical-2xl: 1.75rem;
+  --eds-spacing-vertical-3xl: 2rem;
   --eds-sizing-icon-xs: 1rem;
   --eds-sizing-icon-sm: 1.125rem;
   --eds-sizing-icon-md: 1.25rem;
@@ -593,46 +593,46 @@
   --eds-spacing-border-radius-rounded: .188rem;
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
-  --eds-spacing-inset-xs-inline: .375rem;
-  --eds-spacing-inset-xs-stack-squished: .25rem;
-  --eds-spacing-inset-xs-stack-squared: .375rem;
-  --eds-spacing-inset-xs-stack-stretched: .5rem;
-  --eds-spacing-inset-sm-inline: .5rem;
-  --eds-spacing-inset-sm-stack-squished: .375rem;
-  --eds-spacing-inset-sm-stack-squared: .5rem;
-  --eds-spacing-inset-sm-stack-stretched: .75rem;
-  --eds-spacing-inset-md-inline: .75rem;
-  --eds-spacing-inset-md-stack-squished: .5rem;
-  --eds-spacing-inset-md-stack-squared: .75rem;
-  --eds-spacing-inset-md-stack-stretched: 1rem;
-  --eds-spacing-inset-lg-inline: 1rem;
-  --eds-spacing-inset-lg-stack-squished: .75rem;
-  --eds-spacing-inset-lg-stack-squared: 1rem;
-  --eds-spacing-inset-lg-stack-stretched: 1.25rem;
-  --eds-spacing-inset-xl-inline: 1.25rem;
-  --eds-spacing-inset-xl-stack-squished: 1rem;
-  --eds-spacing-inset-xl-stack-squared: 1.25rem;
-  --eds-spacing-inset-xl-stack-stretched: 1.5rem;
-  --eds-spacing-inline-4xs: .063rem;
-  --eds-spacing-inline-3xs: .125rem;
-  --eds-spacing-inline-2xs: .25rem;
-  --eds-spacing-inline-xs: .375rem;
-  --eds-spacing-inline-sm: .5rem;
-  --eds-spacing-inline-md: .75rem;
-  --eds-spacing-inline-lg: 1rem;
-  --eds-spacing-inline-xl: 1.25rem;
-  --eds-spacing-inline-2xl: 1.5rem;
-  --eds-spacing-inline-3xl: 1.75rem;
-  --eds-spacing-stack-4xs: .063rem;
-  --eds-spacing-stack-3xs: .125rem;
-  --eds-spacing-stack-2xs: .25rem;
-  --eds-spacing-stack-xs: .375rem;
-  --eds-spacing-stack-sm: .5rem;
-  --eds-spacing-stack-md: .75rem;
-  --eds-spacing-stack-lg: 1rem;
-  --eds-spacing-stack-xl: 1.25rem;
-  --eds-spacing-stack-2xl: 1.5rem;
-  --eds-spacing-stack-3xl: 1.75rem;
+  --eds-spacing-inset-xs-horizontal: .375rem;
+  --eds-spacing-inset-xs-vertical-squished: .25rem;
+  --eds-spacing-inset-xs-vertical-squared: .375rem;
+  --eds-spacing-inset-xs-vertical-stretched: .5rem;
+  --eds-spacing-inset-sm-horizontal: .5rem;
+  --eds-spacing-inset-sm-vertical-squished: .375rem;
+  --eds-spacing-inset-sm-vertical-squared: .5rem;
+  --eds-spacing-inset-sm-vertical-stretched: .75rem;
+  --eds-spacing-inset-md-horizontal: .75rem;
+  --eds-spacing-inset-md-vertical-squished: .5rem;
+  --eds-spacing-inset-md-vertical-squared: .75rem;
+  --eds-spacing-inset-md-vertical-stretched: 1rem;
+  --eds-spacing-inset-lg-horizontal: 1rem;
+  --eds-spacing-inset-lg-vertical-squished: .75rem;
+  --eds-spacing-inset-lg-vertical-squared: 1rem;
+  --eds-spacing-inset-lg-vertical-stretched: 1.25rem;
+  --eds-spacing-inset-xl-horizontal: 1.25rem;
+  --eds-spacing-inset-xl-vertical-squished: 1rem;
+  --eds-spacing-inset-xl-vertical-squared: 1.25rem;
+  --eds-spacing-inset-xl-vertical-stretched: 1.5rem;
+  --eds-spacing-horizontal-4xs: .063rem;
+  --eds-spacing-horizontal-3xs: .125rem;
+  --eds-spacing-horizontal-2xs: .25rem;
+  --eds-spacing-horizontal-xs: .375rem;
+  --eds-spacing-horizontal-sm: .5rem;
+  --eds-spacing-horizontal-md: .75rem;
+  --eds-spacing-horizontal-lg: 1rem;
+  --eds-spacing-horizontal-xl: 1.25rem;
+  --eds-spacing-horizontal-2xl: 1.5rem;
+  --eds-spacing-horizontal-3xl: 1.75rem;
+  --eds-spacing-vertical-4xs: .063rem;
+  --eds-spacing-vertical-3xs: .125rem;
+  --eds-spacing-vertical-2xs: .25rem;
+  --eds-spacing-vertical-xs: .375rem;
+  --eds-spacing-vertical-sm: .5rem;
+  --eds-spacing-vertical-md: .75rem;
+  --eds-spacing-vertical-lg: 1rem;
+  --eds-spacing-vertical-xl: 1.25rem;
+  --eds-spacing-vertical-2xl: 1.5rem;
+  --eds-spacing-vertical-3xl: 1.75rem;
   --eds-sizing-icon-xs: .875rem;
   --eds-sizing-icon-sm: 1rem;
   --eds-sizing-icon-md: 1.125rem;
@@ -837,80 +837,78 @@
 }
 
 [data-space-proportions="squished"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squished);
-  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squished);
-  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squished);
-  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squished);
-  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squished);
+  --eds-spacing-proportions-xs-horizontal: var(--eds-spacing-inset-xs-horizontal);
+  --eds-spacing-proportions-xs-vertical: var(--eds-spacing-inset-xs-vertical-squished);
+  --eds-spacing-proportions-sm-horizontal: var(--eds-spacing-inset-sm-horizontal);
+  --eds-spacing-proportions-sm-vertical: var(--eds-spacing-inset-sm-vertical-squished);
+  --eds-spacing-proportions-md-horizontal: var(--eds-spacing-inset-md-horizontal);
+  --eds-spacing-proportions-md-vertical: var(--eds-spacing-inset-md-vertical-squished);
+  --eds-spacing-proportions-lg-horizontal: var(--eds-spacing-inset-lg-horizontal);
+  --eds-spacing-proportions-lg-vertical: var(--eds-spacing-inset-lg-vertical-squished);
+  --eds-spacing-proportions-xl-horizontal: var(--eds-spacing-inset-xl-horizontal);
+  --eds-spacing-proportions-xl-vertical: var(--eds-spacing-inset-xl-vertical-squished);
 }
 
-[data-space-proportions="squared"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squared);
-  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squared);
-  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squared);
-  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squared);
-  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squared);
+:root, [data-space-proportions="squared"] {
+  --eds-spacing-proportions-xs-horizontal: var(--eds-spacing-inset-xs-horizontal);
+  --eds-spacing-proportions-xs-vertical: var(--eds-spacing-inset-xs-vertical-squared);
+  --eds-spacing-proportions-sm-horizontal: var(--eds-spacing-inset-sm-horizontal);
+  --eds-spacing-proportions-sm-vertical: var(--eds-spacing-inset-sm-vertical-squared);
+  --eds-spacing-proportions-md-horizontal: var(--eds-spacing-inset-md-horizontal);
+  --eds-spacing-proportions-md-vertical: var(--eds-spacing-inset-md-vertical-squared);
+  --eds-spacing-proportions-lg-horizontal: var(--eds-spacing-inset-lg-horizontal);
+  --eds-spacing-proportions-lg-vertical: var(--eds-spacing-inset-lg-vertical-squared);
+  --eds-spacing-proportions-xl-horizontal: var(--eds-spacing-inset-xl-horizontal);
+  --eds-spacing-proportions-xl-vertical: var(--eds-spacing-inset-xl-vertical-squared);
 }
 
 [data-space-proportions="stretched"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-stretched);
-  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-stretched);
-  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-stretched);
-  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-stretched);
-  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-stretched);
+  --eds-spacing-proportions-xs-horizontal: var(--eds-spacing-inset-xs-horizontal);
+  --eds-spacing-proportions-xs-vertical: var(--eds-spacing-inset-xs-vertical-stretched);
+  --eds-spacing-proportions-sm-horizontal: var(--eds-spacing-inset-sm-horizontal);
+  --eds-spacing-proportions-sm-vertical: var(--eds-spacing-inset-sm-vertical-stretched);
+  --eds-spacing-proportions-md-horizontal: var(--eds-spacing-inset-md-horizontal);
+  --eds-spacing-proportions-md-vertical: var(--eds-spacing-inset-md-vertical-stretched);
+  --eds-spacing-proportions-lg-horizontal: var(--eds-spacing-inset-lg-horizontal);
+  --eds-spacing-proportions-lg-vertical: var(--eds-spacing-inset-lg-vertical-stretched);
+  --eds-spacing-proportions-xl-horizontal: var(--eds-spacing-inset-xl-horizontal);
+  --eds-spacing-proportions-xl-vertical: var(--eds-spacing-inset-xl-vertical-stretched);
 }
 
-[data-selectable-space="xs"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xs-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xs-stack);
+:root, [data-selectable-space="xs"] {
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-xs-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-xs-vertical);
 }
 
 [data-selectable-space="sm"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-sm-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-sm-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-sm-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-sm-vertical);
 }
 
 [data-selectable-space="md"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-md-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-md-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-md-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-md-vertical);
 }
 
 [data-selectable-space="lg"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-lg-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-lg-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-lg-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-lg-vertical);
 }
 
 [data-selectable-space="xl"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xl-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xl-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-xl-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-xl-vertical);
 }
 
 :root {
-  --eds-selectable-gap-inline: var(--eds-spacing-inline-xs);
-  --eds-selectable-gap-stack: var(--eds-spacing-stack-xs);
-  --eds-container-spacing-inline: var(--eds-spacing-proportions-md-inline);
-  --eds-container-spacing-stack: var(--eds-spacing-proportions-md-stack);
-  --eds-container-gap-inline: var(--eds-spacing-inline-md);
-  --eds-container-gap-stack: var(--eds-spacing-stack-md);
-  --eds-page-spacing-inline: var(--eds-spacing-proportions-xl-inline);
-  --eds-page-spacing-stack: var(--eds-spacing-proportions-xl-stack);
-  --eds-page-gap-inline: var(--eds-spacing-inline-xl);
-  --eds-page-gap-stack: var(--eds-spacing-stack-xl);
+  --eds-selectable-gap-horizontal: var(--eds-spacing-horizontal-xs);
+  --eds-selectable-gap-vertical: var(--eds-spacing-vertical-xs);
+  --eds-container-gap-horizontal: var(--eds-spacing-horizontal-md);
+  --eds-container-gap-vertical: var(--eds-spacing-vertical-md);
+  --eds-page-gap-horizontal: var(--eds-spacing-horizontal-xl);
+  --eds-page-gap-vertical: var(--eds-spacing-vertical-xl);
+  --eds-generic-gap-horizontal: var(--eds-generic-gap-horizontal);
+  --eds-generic-gap-vertical: var(--eds-generic-gap-vertical);
 }
 
 @property --eds-typography-font-size {

@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-selectable-gap-horizontal: var(--eds-spacing-horizontal-xs);
+  --eds-selectable-gap-vertical: var(--eds-spacing-vertical-xs);
+  --eds-container-gap-horizontal: var(--eds-spacing-horizontal-md);
+  --eds-container-gap-vertical: var(--eds-spacing-vertical-md);
+  --eds-page-gap-horizontal: var(--eds-spacing-horizontal-xl);
+  --eds-page-gap-vertical: var(--eds-spacing-vertical-xl);
+  --eds-generic-space-horizontal: var(--eds-generic-space-horizontal);
+  --eds-generic-space-vertical: var(--eds-generic-space-vertical);
+  --eds-generic-gap-horizontal: var(--eds-generic-gap-horizontal);
+  --eds-generic-gap-vertical: var(--eds-generic-gap-vertical);
+  --eds-selectable-space-horizontal: var(--eds-selectable-space-horizontal); /** Some description */
+  --eds-selectable-space-vertical: var(--eds-selectable-space-vertical);
+  --eds-container-space-horizontal: var(--eds-container-space-horizontal);
+  --eds-container-space-vertical: var(--eds-container-space-vertical);
+  --eds-page-space-horizontal: var(--eds-page-space-horizontal);
+  --eds-page-space-vertical: var(--eds-page-space-vertical);
+}
