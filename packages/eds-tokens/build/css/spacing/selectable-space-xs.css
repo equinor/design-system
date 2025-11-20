@@ -3,6 +3,6 @@
  */
 
 :root, [data-selectable-space="xs"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xs-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xs-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-xs-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-xs-vertical);
 }

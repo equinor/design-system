@@ -49,37 +49,37 @@
     },
     "inset": {
       "xs": {
-        "inline": 8,
-        "stack-squished": 6,
-        "stack-squared": 8,
-        "stack-stretched": 12
+        "horizontal": 8,
+        "vertical-squished": 6,
+        "vertical-squared": 8,
+        "vertical-stretched": 12
       },
       "sm": {
-        "inline": 12,
-        "stack-squished": 8,
-        "stack-squared": 12,
-        "stack-stretched": 16
+        "horizontal": 12,
+        "vertical-squished": 8,
+        "vertical-squared": 12,
+        "vertical-stretched": 16
       },
       "md": {
-        "inline": 16,
-        "stack-squished": 12,
-        "stack-squared": 16,
-        "stack-stretched": 20
+        "horizontal": 16,
+        "vertical-squished": 12,
+        "vertical-squared": 16,
+        "vertical-stretched": 20
       },
       "lg": {
-        "inline": 20,
-        "stack-squished": 16,
-        "stack-squared": 20,
-        "stack-stretched": 24
+        "horizontal": 20,
+        "vertical-squished": 16,
+        "vertical-squared": 20,
+        "vertical-stretched": 24
       },
       "xl": {
-        "inline": 24,
-        "stack-squished": 20,
-        "stack-squared": 24,
-        "stack-stretched": 28
+        "horizontal": 24,
+        "vertical-squished": 20,
+        "vertical-squared": 24,
+        "vertical-stretched": 28
       }
     },
-    "inline": {
+    "horizontal": {
       "4xs": 2,
       "3xs": 4,
       "2xs": 6,
@@ -91,7 +91,7 @@
       "2xl": 28,
       "3xl": 32
     },
-    "stack": {
+    "vertical": {
       "4xs": 2,
       "3xs": 4,
       "2xs": 6,

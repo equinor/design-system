@@ -3,12 +3,12 @@
  */
 
 :root {
-  --eds-container-horisontal-gap: var(--eds-spacing-inline-md);
-  --eds-container-vertical-gap: var(--eds-spacing-stack-md);
-  --eds-page-horizontal-gap: var(--eds-spacing-inline-xl);
-  --eds-page-vertical-gap: var(--eds-spacing-stack-xl);
-  --eds-selectable-horisontal-gap: var(--eds-spacing-inline-xs);
-  --eds-selectable-vertical-gap: var(--eds-spacing-stack-xs);
+  --eds-selectable-horizontal-gap: var(--eds-spacing-horizontal-xs);
+  --eds-selectable-vertical-gap: var(--eds-spacing-vertical-xs);
+  --eds-container-horizontal-gap: var(--eds-spacing-horizontal-md);
+  --eds-container-vertical-gap: var(--eds-spacing-vertical-md);
+  --eds-page-horizontal-gap: var(--eds-spacing-horizontal-xl);
+  --eds-page-vertical-gap: var(--eds-spacing-vertical-xl);
   --eds-generic-horizontal-gap: var(--eds-gap-horizontal);
   --eds-generic-vertical-gap: var(--eds-gap-vertical);
 }

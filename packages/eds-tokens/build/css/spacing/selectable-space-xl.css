@@ -3,6 +3,6 @@
  */
 
 [data-selectable-space="xl"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xl-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xl-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-xl-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-xl-vertical);
 }
