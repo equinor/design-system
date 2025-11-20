@@ -1,0 +1,58 @@
+{
+  "Selectable": {
+    "gap": {
+      "inline": {
+        "$type": "number",
+        "$value": "{spacing.inline.xs}",
+        "$description": "Fixed horizontal gap for selectable elements"
+      },
+      "stack": {
+        "$type": "number",
+        "$value": "{spacing.stack.xs}",
+        "$description": "Fixed vertical gap for selectable elements"
+      }
+    }
+  },
+  "Container": {
+    "gap": {
+      "inline": {
+        "$type": "number",
+        "$value": "{spacing.inline.md}",
+        "$description": "Fixed horizontal gap for containers"
+      },
+      "stack": {
+        "$type": "number",
+        "$value": "{spacing.stack.md}",
+        "$description": "Fixed vertical gap for containers"
+      }
+    }
+  },
+  "Page": {
+    "gap": {
+      "inline": {
+        "$type": "number",
+        "$value": "{spacing.inline.xl}",
+        "$description": "Fixed horizontal gap for pages"
+      },
+      "stack": {
+        "$type": "number",
+        "$value": "{spacing.stack.xl}",
+        "$description": "Fixed vertical gap for pages"
+      }
+    }
+  },
+  "Generic": {
+    "gap": {
+      "inline": {
+        "$type": "number",
+        "$value": "{Gap horizontal}",
+        "$description": "Generic horizontal gap"
+      },
+      "stack": {
+        "$type": "number",
+        "$value": "{Gap vertical}",
+        "$description": "Generic vertical gap"
+      }
+    }
+  }
+}

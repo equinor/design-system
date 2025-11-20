@@ -213,19 +213,89 @@ export async function createSpacingAndTypographyVariables({
     '🪐 Page.Default.json',
   )
 
-  // Gap token sources needed for semantic tokens
-  const GAP_SOURCES = ['XS', 'SM', 'MD', 'LG', 'XL'].flatMap((size) => [
-    path.join(
-      tokensDir,
-      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      `🪐 Horisontal gap.${size}.json`,
-    ),
-    path.join(
-      tokensDir,
-      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      `🪐 Vertical gap.${size}.json`,
-    ),
-  ])
+  // Explicitly include all token files needed to resolve semantic token references
+  // Only default modes are included for variable collections (other modes built separately)
+  const MODES_DIR = path.join(tokensDir, FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES)
+
+  // Files without variable collection modes (include all)
+  const BOX_FILES = [
+    path.join(MODES_DIR, '📦 Box.Container.json'),
+    path.join(MODES_DIR, '📦 Box.Generic.json'),
+    path.join(MODES_DIR, '📦 Box.Page.json'),
+    path.join(MODES_DIR, '📦 Box.Selectable.json'),
+  ]
+
+  const SPACE_FILES = [
+    path.join(MODES_DIR, '🪐 Container space.Default.json'),
+    path.join(MODES_DIR, '🪐 Page.Default.json'),
+    path.join(MODES_DIR, '🪐 Selectable space.XS.json'),
+    path.join(MODES_DIR, '🪐 Selectable space.SM.json'),
+    path.join(MODES_DIR, '🪐 Selectable space.MD.json'),
+    path.join(MODES_DIR, '🪐 Selectable space.LG.json'),
+    path.join(MODES_DIR, '🪐 Selectable space.XL.json'),
+    path.join(MODES_DIR, '🪐 Space proportions.Squared.json'),
+    path.join(MODES_DIR, '🪐 Space proportions.Squished.json'),
+    path.join(MODES_DIR, '🪐 Space proportions.Stretched.json'),
+  ]
+
+  // Variable collections - only include default modes for most
+  // For Font family: include all files so StyleDictionary can resolve {Font family.XS.*} references
+  // (all Font family files define the same token paths, StyleDictionary needs to see at least one)
+  const FONT_SIZE_DEFAULT = path.join(MODES_DIR, '🅰️ Font size.XS.json')
+  const FONT_FAMILY_FILES = [
+    path.join(MODES_DIR, '🅰️ Font family.Header.json'),
+    path.join(MODES_DIR, '🅰️ Font family.UI and Body.json'),
+    path.join(MODES_DIR, '🅰️ Font family.UI Body.json'),
+  ]
+  const FONT_WEIGHT_DEFAULT = path.join(MODES_DIR, '🅰️ Font weight.Normal.json')
+  const FONT_BASELINE_DEFAULT = path.join(
+    MODES_DIR,
+    '🅰️ Font baseline.Centred.json',
+  )
+  const LETTER_SPACING_DEFAULT = path.join(
+    MODES_DIR,
+    '🅰️ Letter spacing.Normal.json',
+  )
+  const LINEHEIGHT_DEFAULT = path.join(MODES_DIR, '🅰️ Lineheight.Default.json')
+  const STROKE_DEFAULT = path.join(MODES_DIR, '〰️ Stroke.Thin.json')
+  const BORDER_RADIUS_DEFAULT = path.join(
+    MODES_DIR,
+    '⭕️ Border radius.Rounded.json',
+  )
+  const ICON_SIZE_DEFAULT = path.join(MODES_DIR, '🖼️ Icon size.XS.json')
+  const SIZE_DEFAULT = path.join(MODES_DIR, '📐 Size.XS.json')
+  const HORISONTAL_GAP_DEFAULT = path.join(
+    MODES_DIR,
+    '🪐 Horisontal gap.XS.json',
+  )
+  const VERTICAL_GAP_DEFAULT = path.join(MODES_DIR, '🪐 Vertical gap.XS.json')
+  const HORISONTAL_SPACE_DEFAULT = path.join(
+    MODES_DIR,
+    '🪐 Horisontal space.XS.json',
+  )
+  const VERTICAL_SPACE_DEFAULT = path.join(
+    MODES_DIR,
+    '🪐 Vertical space.XS.json',
+  )
+
+  const ALL_MODE_TOKEN_FILES = [
+    STROKE_DEFAULT,
+    ...BOX_FILES,
+    ...SPACE_FILES,
+    ...FONT_FAMILY_FILES, // Include all Font family files for reference resolution
+    FONT_SIZE_DEFAULT,
+    FONT_WEIGHT_DEFAULT,
+    FONT_BASELINE_DEFAULT,
+    LETTER_SPACING_DEFAULT,
+    LINEHEIGHT_DEFAULT,
+    BORDER_RADIUS_DEFAULT,
+    ICON_SIZE_DEFAULT,
+    SIZE_DEFAULT,
+    HORISONTAL_GAP_DEFAULT,
+    VERTICAL_GAP_DEFAULT,
+    HORISONTAL_SPACE_DEFAULT,
+    VERTICAL_SPACE_DEFAULT,
+  ]
 
   const proportionConfigs = ['Squished', 'Squared', 'Stretched'] as const
 
@@ -248,7 +318,8 @@ export async function createSpacingAndTypographyVariables({
         SPACING_PRIMITIVE_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
-        ...GAP_SOURCES,
+        HORISONTAL_GAP_DEFAULT,
+        VERTICAL_GAP_DEFAULT,
       ],
       source: [sourcePath, CONTAINER_SPACE_SOURCE, PAGE_SPACE_SOURCE],
       platforms: {
@@ -358,4 +429,66 @@ export async function createSpacingAndTypographyVariables({
   await Promise.all(
     selectableSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
   )
+
+  // Generate semantic gap variables directly from the semantic tokens file
+  // Only default modes are included for variable collections (e.g., Font size.XS, Font family.UI Body)
+  // Other modes are built separately and controlled via data-attributes
+  // Reference chain: {font-size} → {Font family.XS.font-size} → {typography.ui-body.xs.font-size} → {type-scale.inter.200.font-size} → value
+  // All dependency tokens are included in the include array to allow StyleDictionary to resolve references
+  const semanticGapsDict = new StyleDictionary({
+    include: [
+      SPACING_PRIMITIVE_SOURCE, // type-scale.inter/equinor primitives
+      FIGMA_SPECIFIC_TOKENS_SOURCE, // figma.type-scale values
+      DENSITY_SPACIOUS_SOURCE, // typography.ui-body/header values (needed for Font family references)
+      DENSITY_COMFORTABLE_SOURCE, // Additional density mode
+      ...ALL_MODE_TOKEN_FILES, // Default mode files only (Font size.XS, Font family.UI Body, etc.)
+    ],
+    source: [SEMANTIC_TOKENS_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
+        transforms: cssTransforms,
+        files: [
+          {
+            filter: (token: TransformedToken) => {
+              if (!token.path) return false
+
+              const component = token.path[0]
+              const property = token.path[1]
+
+              // Filter for gap tokens from the semantic tokens file
+              // Selectable/Container use "Horisontal gap" (misspelled) / "Vertical gap"
+              // Page/Generic use correct spelling "Horizontal gap" / "Vertical gap"
+              const isSelectableGap =
+                component === 'Selectable' &&
+                (property === 'Horisontal gap' || property === 'Vertical gap')
+              const isContainerGap =
+                component === 'Container' &&
+                (property === 'Horisontal gap' || property === 'Vertical gap')
+              const isPageGap =
+                component === 'Page' &&
+                (property === 'Horizontal gap' || property === 'Vertical gap')
+              const isGenericGap =
+                component === 'Generic' &&
+                (property === 'Horizontal gap' || property === 'Vertical gap')
+
+              return (
+                isSelectableGap || isContainerGap || isPageGap || isGenericGap
+              )
+            },
+            destination: 'semantic-spacing-gaps.css',
+            format: 'css/variables',
+            options: {
+              selector: ':root',
+              outputReferences: true,
+            },
+          },
+        ],
+      },
+    },
+  })
+
+  await semanticGapsDict.buildAllPlatforms()
 }

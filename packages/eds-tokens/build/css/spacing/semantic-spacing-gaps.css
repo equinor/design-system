@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --eds-selectable-gap-inline: var(--eds-spacing-inline-xs); /** Fixed horizontal gap for selectable elements */
+  --eds-selectable-gap-stack: var(--eds-spacing-stack-xs); /** Fixed vertical gap for selectable elements */
+  --eds-container-gap-inline: var(--eds-spacing-inline-md); /** Fixed horizontal gap for containers */
+  --eds-container-gap-stack: var(--eds-spacing-stack-md); /** Fixed vertical gap for containers */
+  --eds-page-gap-inline: var(--eds-spacing-inline-xl); /** Fixed horizontal gap for pages */
+  --eds-page-gap-stack: var(--eds-spacing-stack-xl); /** Fixed vertical gap for pages */
+  --eds-generic-gap-inline: var(--eds-gap-horizontal); /** Generic horizontal gap */
+  --eds-generic-gap-stack: var(--eds-gap-vertical); /** Generic vertical gap */
+}
