@@ -33,6 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       should-publish: ${{ steps.validate.outputs.should-publish }}
+      is-beta-release: ${{ steps.validate.outputs.is-beta-release }}
     steps:
       - name: Validate PR status
         id: validate
@@ -40,13 +41,22 @@ jobs:
           # Check if PR was merged (not just closed)
           if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
             echo "should-publish=false" >> $GITHUB_OUTPUT
+            echo "is-beta-release=false" >> $GITHUB_OUTPUT
             exit 0
           fi
 
           # Check if this is a release PR (title contains "chore: release")
           if [[ "${{ github.event.pull_request.title }}" != *"chore: release"* ]]; then
             echo "should-publish=false" >> $GITHUB_OUTPUT
+            echo "is-beta-release=false" >> $GITHUB_OUTPUT
             exit 0
+          fi
+
+          # Check if this is a beta release (contains "next" in title)
+          if [[ "${{ github.event.pull_request.title }}" == *"next"* ]]; then
+            echo "is-beta-release=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-beta-release=false" >> $GITHUB_OUTPUT
           fi
 
           # All validation checks passed
@@ -155,7 +165,7 @@ jobs:
   # Job 2: Trigger core-react publish workflow
   # Only runs if core-react package.json was changed
   trigger-core-react:
-    needs: check-releases
+    needs: [validate-release, check-releases]
     if: needs.check-releases.outputs.core-react == 'true'
     runs-on: ubuntu-latest
     steps:
@@ -164,12 +174,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for gh CLI authentication
         run: |
+          # Determine npm tag based on release type
+          if [ "${{ needs.validate-release.outputs.is-beta-release }}" == "true" ]; then
+            NPM_TAG="beta"
+          else
+            NPM_TAG="latest"
+          fi
+
           # Use GitHub CLI to trigger the publish workflow
+          # Note: Beta releases skip Storybook deployment (controlled in publish_core_react.yaml)
           gh workflow run publish_core_react.yaml \
             --repo ${{ github.repository }} \
             --ref main \
-            -f npm-tag=latest \
-            -f environment=production
+            -f npm-tag=$NPM_TAG
         # Allow other packages to continue even if this one fails
         continue-on-error: true
 

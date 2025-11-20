@@ -141,11 +141,14 @@ jobs:
           steps: ${{ toJson(steps) }}
         if: failure()
   publish-storybook:
+    # Skip Storybook deployment for beta releases - beta components are for early testing
+    # Users can run Storybook locally after installing @equinor/eds-core-react@beta
+    if: github.event.inputs.npm-tag != 'beta'
     needs: [setup, packages]
     name: Build & Deploy Website
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.event.inputs.environment || 'development' }}
+      name: ${{ github.event.inputs.npm-tag == 'next' && 'development' || 'production' }}
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
@@ -154,7 +157,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ github.sha }}-dist-core-react
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2
@@ -170,7 +173,8 @@ jobs:
           steps: ${{ toJson(steps) }}
         if: failure()
   purge-cdn:
-    if: github.event.inputs.environment == 'production'
+    # Only purge CDN for production releases (latest tag)
+    if: github.event.inputs.npm-tag == 'latest'
     needs: [publish-storybook]
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
