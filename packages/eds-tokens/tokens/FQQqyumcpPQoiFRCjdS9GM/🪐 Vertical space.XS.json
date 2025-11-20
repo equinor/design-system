@@ -15,7 +15,7 @@
   },
   "Padding vertical": {
     "$type": "number",
-    "$value": "{spacing.stack.xs}",
+    "$value": "{spacing.vertical.xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {

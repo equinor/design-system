@@ -658,9 +658,9 @@
     },
     "inset": {
       "xs": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.xs}",
+          "$value": "{spacing.horizontal.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -670,9 +670,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.2xs}",
+          "$value": "{spacing.vertical.2xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -682,9 +682,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.xs}",
+          "$value": "{spacing.vertical.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -694,9 +694,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.vertical.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -708,9 +708,9 @@
         }
       },
       "sm": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.sm}",
+          "$value": "{spacing.horizontal.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -720,9 +720,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.xs}",
+          "$value": "{spacing.vertical.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -732,9 +732,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.vertical.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -744,9 +744,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.md}",
+          "$value": "{spacing.vertical.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -758,9 +758,9 @@
         }
       },
       "md": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.md}",
+          "$value": "{spacing.horizontal.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -770,9 +770,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.vertical.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -782,9 +782,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.md}",
+          "$value": "{spacing.vertical.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -794,9 +794,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.lg}",
+          "$value": "{spacing.vertical.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -808,9 +808,9 @@
         }
       },
       "lg": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.lg}",
+          "$value": "{spacing.horizontal.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -820,9 +820,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.md}",
+          "$value": "{spacing.vertical.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -832,9 +832,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.lg}",
+          "$value": "{spacing.vertical.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -844,9 +844,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.xl}",
+          "$value": "{spacing.vertical.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -858,9 +858,9 @@
         }
       },
       "xl": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.xl}",
+          "$value": "{spacing.horizontal.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -870,9 +870,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.lg}",
+          "$value": "{spacing.vertical.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -882,9 +882,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.xl}",
+          "$value": "{spacing.vertical.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -894,9 +894,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.2xl}",
+          "$value": "{spacing.vertical.2xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -908,7 +908,7 @@
         }
       }
     },
-    "inline": {
+    "horizontal": {
       "4xs": {
         "$type": "number",
         "$value": 2,
@@ -1030,7 +1030,7 @@
         }
       }
     },
-    "stack": {
+    "vertical": {
       "4xs": {
         "$type": "number",
         "$value": 2,

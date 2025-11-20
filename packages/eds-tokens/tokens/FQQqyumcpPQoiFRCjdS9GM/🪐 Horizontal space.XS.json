@@ -15,7 +15,7 @@
   },
   "Padding horizontal": {
     "$type": "number",
-    "$value": "{spacing.inline.xs}",
+    "$value": "{spacing.horizontal.xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {

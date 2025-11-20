@@ -1,7 +1,7 @@
 {
   "Documentation": {
     "$type": "string",
-    "$value": "2XS",
+    "$value": "4XS",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -13,9 +13,9 @@
       }
     }
   },
-  "Gap horizontal": {
+  "Padding horizontal": {
     "$type": "number",
-    "$value": "{spacing.inline.2xs}",
+    "$value": "{spacing.horizontal.4xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {

@@ -1,8 +1,8 @@
 {
-  "selectable-space": {
+  "page-space": {
     "horizontal": {
       "$type": "number",
-      "$value": "{spacing-proportions.sm.horizontal}",
+      "$value": "{spacing-proportions.xl.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -14,7 +14,7 @@
     },
     "vertical": {
       "$type": "number",
-      "$value": "{spacing-proportions.sm.vertical}",
+      "$value": "{spacing-proportions.xl.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {

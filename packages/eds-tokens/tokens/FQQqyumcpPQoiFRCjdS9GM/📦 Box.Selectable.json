@@ -1,7 +1,7 @@
 {
   "Horisontal padding": {
     "$type": "number",
-    "$value": "{Selectable.Spacing.Inline}",
+    "$value": "{selectable-space.horizontal}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -13,7 +13,7 @@
   },
   "Vertical padding": {
     "$type": "number",
-    "$value": "{Selectable.Spacing.Stack}",
+    "$value": "{selectable-space.vertical}",
     "$description": "",
     "$extensions": {
       "com.figma": {

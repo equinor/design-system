@@ -15,7 +15,7 @@
   },
   "Gap vertical": {
     "$type": "number",
-    "$value": "{spacing.stack.xl}",
+    "$value": "{spacing.vertical.xl}",
     "$description": "",
     "$extensions": {
       "com.figma": {

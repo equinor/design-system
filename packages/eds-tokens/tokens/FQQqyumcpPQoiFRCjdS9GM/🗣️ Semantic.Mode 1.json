@@ -1,8 +1,8 @@
 {
   "Selectable": {
-    "Horisontal padding": {
+    "Horizontal padding": {
       "$type": "number",
-      "$value": "{Selectable.Spacing.Inline}",
+      "$value": "{selectable-space.horizontal}",
       "$description": "Some description",
       "$extensions": {
         "com.figma": {
@@ -18,7 +18,7 @@
     },
     "Vertical padding": {
       "$type": "number",
-      "$value": "{Selectable.Spacing.Stack}",
+      "$value": "{selectable-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -102,9 +102,9 @@
         }
       }
     },
-    "Horisontal gap": {
+    "Horizontal gap": {
       "$type": "number",
-      "$value": "{spacing.inline.xs}",
+      "$value": "{spacing.horizontal.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -120,7 +120,7 @@
     },
     "Vertical gap": {
       "$type": "number",
-      "$value": "{spacing.stack.xs}",
+      "$value": "{spacing.vertical.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -136,9 +136,9 @@
     }
   },
   "Container": {
-    "Horisontal padding": {
+    "Horizontal padding": {
       "$type": "number",
-      "$value": "{Container.Spacing.Inline}",
+      "$value": "{container-space.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -154,7 +154,7 @@
     },
     "Vertical padding": {
       "$type": "number",
-      "$value": "{Container.Spacing.Stack}",
+      "$value": "{container-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -168,9 +168,9 @@
         }
       }
     },
-    "Horisontal gap": {
+    "Horizontal gap": {
       "$type": "number",
-      "$value": "{spacing.inline.md}",
+      "$value": "{spacing.horizontal.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -186,7 +186,7 @@
     },
     "Vertical gap": {
       "$type": "number",
-      "$value": "{spacing.stack.md}",
+      "$value": "{spacing.vertical.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -204,7 +204,7 @@
   "Page": {
     "Horizontal padding": {
       "$type": "number",
-      "$value": "{Page.Spacing.Inline}",
+      "$value": "{page-space.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -220,7 +220,7 @@
     },
     "Vertical padding": {
       "$type": "number",
-      "$value": "{Page.Spacing.Stack}",
+      "$value": "{page-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -236,7 +236,7 @@
     },
     "Horizontal gap": {
       "$type": "number",
-      "$value": "{spacing.inline.xl}",
+      "$value": "{spacing.horizontal.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -252,7 +252,7 @@
     },
     "Vertical gap": {
       "$type": "number",
-      "$value": "{spacing.stack.xl}",
+      "$value": "{spacing.vertical.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {

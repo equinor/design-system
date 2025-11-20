@@ -210,7 +210,7 @@ export async function createSpacingAndTypographyVariables({
   const PAGE_SPACE_SOURCE = path.join(
     tokensDir,
     FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-    '🪐 Page.Default.json',
+    '🪐 Page space.Default.json',
   )
 
   // Explicitly include all token files needed to resolve semantic token references
@@ -227,7 +227,7 @@ export async function createSpacingAndTypographyVariables({
 
   const SPACE_FILES = [
     path.join(MODES_DIR, '🪐 Container space.Default.json'),
-    path.join(MODES_DIR, '🪐 Page.Default.json'),
+    path.join(MODES_DIR, '🪐 Page space.Default.json'),
     path.join(MODES_DIR, '🪐 Selectable space.XS.json'),
     path.join(MODES_DIR, '🪐 Selectable space.SM.json'),
     path.join(MODES_DIR, '🪐 Selectable space.MD.json'),
@@ -264,14 +264,14 @@ export async function createSpacingAndTypographyVariables({
   )
   const ICON_SIZE_DEFAULT = path.join(MODES_DIR, '🖼️ Icon size.XS.json')
   const SIZE_DEFAULT = path.join(MODES_DIR, '📐 Size.XS.json')
-  const HORISONTAL_GAP_DEFAULT = path.join(
+  const HORIZONTAL_GAP_DEFAULT = path.join(
     MODES_DIR,
-    '🪐 Horisontal gap.XS.json',
+    '🪐 Horizontal gap.XS.json',
   )
   const VERTICAL_GAP_DEFAULT = path.join(MODES_DIR, '🪐 Vertical gap.XS.json')
-  const HORISONTAL_SPACE_DEFAULT = path.join(
+  const HORIZONTAL_SPACE_DEFAULT = path.join(
     MODES_DIR,
-    '🪐 Horisontal space.XS.json',
+    '🪐 Horizontal space.XS.json',
   )
   const VERTICAL_SPACE_DEFAULT = path.join(
     MODES_DIR,
@@ -299,7 +299,7 @@ export async function createSpacingAndTypographyVariables({
         SPACING_PRIMITIVE_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
-        HORISONTAL_GAP_DEFAULT,
+        HORIZONTAL_GAP_DEFAULT,
         VERTICAL_GAP_DEFAULT,
       ],
       source: [sourcePath, CONTAINER_SPACE_SOURCE, PAGE_SPACE_SOURCE],
@@ -439,9 +439,9 @@ export async function createSpacingAndTypographyVariables({
       LETTER_SPACING_DEFAULT,
       LINEHEIGHT_DEFAULT,
       // Gap and space tokens
-      HORISONTAL_GAP_DEFAULT,
+      HORIZONTAL_GAP_DEFAULT,
       VERTICAL_GAP_DEFAULT,
-      HORISONTAL_SPACE_DEFAULT,
+      HORIZONTAL_SPACE_DEFAULT,
       VERTICAL_SPACE_DEFAULT,
     ],
     log: {
@@ -463,14 +463,13 @@ export async function createSpacingAndTypographyVariables({
               const property = token.path[1]
 
               // Filter for gap tokens from the semantic tokens file
-              // Selectable/Container use "Horisontal gap" (misspelled) / "Vertical gap"
-              // Page/Generic use correct spelling "Horizontal gap" / "Vertical gap"
+              // All components now use correct spelling "Horizontal gap" / "Vertical gap"
               const isSelectableGap =
                 component === 'Selectable' &&
-                (property === 'Horisontal gap' || property === 'Vertical gap')
+                (property === 'Horizontal gap' || property === 'Vertical gap')
               const isContainerGap =
                 component === 'Container' &&
-                (property === 'Horisontal gap' || property === 'Vertical gap')
+                (property === 'Horizontal gap' || property === 'Vertical gap')
               const isPageGap =
                 component === 'Page' &&
                 (property === 'Horizontal gap' || property === 'Vertical gap')
