@@ -411,6 +411,92 @@ export async function createSpacingAndTypographyVariables({
     selectableSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
   )
 
+  const gapSizeConfigs = [
+    'None',
+    '4XS',
+    '3XS',
+    '2XS',
+    'XS',
+    'SM',
+    'MD',
+    'LG',
+    'XL',
+    '2XL',
+    '3XL',
+  ] as const
+
+  const createGenericGapDictionary = (size: string) => {
+    const sizeLower = size.toLowerCase()
+    const horizontalGapPath = path.join(
+      tokensDir,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+      `🪐 Horizontal gap.${size}.json`,
+    )
+    const verticalGapPath = path.join(
+      tokensDir,
+      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+      `🪐 Vertical gap.${size}.json`,
+    )
+
+    // XS is the default, so it gets both :root and size-specific selectors
+    const horizontalSelector =
+      size === 'XS'
+        ? ':root, [data-horizontal-gap="xs"]'
+        : `[data-horizontal-gap="${sizeLower}"]`
+
+    const verticalSelector =
+      size === 'XS'
+        ? ':root, [data-vertical-gap="xs"]'
+        : `[data-vertical-gap="${sizeLower}"]`
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+      ],
+      source: [horizontalGapPath, verticalGapPath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, spacingBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                token.path && token.path[0] === 'generic-gap-horizontal',
+              destination: `generic-gap-horizontal-${sizeLower}.css`,
+              format: 'css/variables',
+              options: {
+                selector: horizontalSelector,
+                outputReferences: true,
+              },
+            },
+            {
+              filter: (token: TransformedToken) =>
+                token.path && token.path[0] === 'generic-gap-vertical',
+              destination: `generic-gap-vertical-${sizeLower}.css`,
+              format: 'css/variables',
+              options: {
+                selector: verticalSelector,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const genericGapDictionaries = gapSizeConfigs.map((size) =>
+    createGenericGapDictionary(size),
+  )
+
+  await Promise.all(
+    genericGapDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
+
   // Generate semantic space and gap variables directly from the semantic tokens file
   // Only default modes are included for variable collections (e.g., Font size.XS, Font family.UI Body)
   // Other modes are built separately and controlled via data-attributes

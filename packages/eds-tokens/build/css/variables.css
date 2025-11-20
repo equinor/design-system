@@ -900,6 +900,86 @@
   --eds-selectable-space-vertical: var(--eds-spacing-proportions-xl-vertical);
 }
 
+[data-horizontal-gap="none"] {
+  --eds-generic-gap-horizontal: 0;
+}
+
+[data-horizontal-gap="4xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-4xs);
+}
+
+[data-horizontal-gap="3xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-3xs);
+}
+
+[data-horizontal-gap="2xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-2xs);
+}
+
+:root, [data-horizontal-gap="xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-xs);
+}
+
+[data-horizontal-gap="sm"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-sm);
+}
+
+[data-horizontal-gap="md"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-md);
+}
+
+[data-horizontal-gap="lg"], [data-horizontal-gap="xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-lg);
+}
+
+[data-horizontal-gap="2xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-2xl);
+}
+
+[data-horizontal-gap="3xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-3xl);
+}
+
+[data-vertical-gap="none"] {
+  --eds-generic-gap-vertical: 0;
+}
+
+[data-vertical-gap="4xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-4xs);
+}
+
+[data-vertical-gap="3xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-3xs);
+}
+
+[data-vertical-gap="2xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-2xs);
+}
+
+:root, [data-vertical-gap="xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-xs);
+}
+
+[data-vertical-gap="sm"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-sm);
+}
+
+[data-vertical-gap="md"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-md);
+}
+
+[data-vertical-gap="lg"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-lg);
+}
+
+[data-vertical-gap="xl"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-xl);
+}
+
+[data-vertical-gap="2xl"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-3xl);
+}
+
 :root {
   --eds-selectable-gap-horizontal: var(--eds-spacing-horizontal-xs);
   --eds-selectable-gap-vertical: var(--eds-spacing-vertical-xs);
@@ -907,8 +987,6 @@
   --eds-container-gap-vertical: var(--eds-spacing-vertical-md);
   --eds-page-gap-horizontal: var(--eds-spacing-horizontal-xl);
   --eds-page-gap-vertical: var(--eds-spacing-vertical-xl);
-  --eds-generic-gap-horizontal: var(--eds-generic-gap-horizontal);
-  --eds-generic-gap-vertical: var(--eds-generic-gap-vertical);
 }
 
 @property --eds-typography-font-size {

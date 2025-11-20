@@ -15,5 +15,28 @@
 @import 'spacing/selectable-space-lg.css';
 @import 'spacing/selectable-space-xl.css';
 
-@import 'spacing/semantic-spacing-gaps.css';
+@import 'spacing/generic-gap-horizontal-none.css';
+@import 'spacing/generic-gap-horizontal-4xs.css';
+@import 'spacing/generic-gap-horizontal-3xs.css';
+@import 'spacing/generic-gap-horizontal-2xs.css';
+@import 'spacing/generic-gap-horizontal-xs.css';
+@import 'spacing/generic-gap-horizontal-sm.css';
+@import 'spacing/generic-gap-horizontal-md.css';
+@import 'spacing/generic-gap-horizontal-lg.css';
+@import 'spacing/generic-gap-horizontal-xl.css';
+@import 'spacing/generic-gap-horizontal-2xl.css';
+@import 'spacing/generic-gap-horizontal-3xl.css';
+
+@import 'spacing/generic-gap-vertical-none.css';
+@import 'spacing/generic-gap-vertical-4xs.css';
+@import 'spacing/generic-gap-vertical-3xs.css';
+@import 'spacing/generic-gap-vertical-2xs.css';
+@import 'spacing/generic-gap-vertical-xs.css';
+@import 'spacing/generic-gap-vertical-sm.css';
+@import 'spacing/generic-gap-vertical-md.css';
+@import 'spacing/generic-gap-vertical-lg.css';
+@import 'spacing/generic-gap-vertical-xl.css';
+@import 'spacing/generic-gap-vertical-2xl.css';
+
+@import 'spacing/semantic-spacing-gap.css';
 @import './typography.css';
