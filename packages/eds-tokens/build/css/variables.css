@@ -1073,6 +1073,10 @@
 }
 
 :root {
+  --eds-container-space-horizontal: var(--eds-spacing-proportions-md-horizontal);
+  --eds-container-space-vertical: var(--eds-spacing-proportions-md-vertical);
+  --eds-page-space-horizontal: var(--eds-spacing-proportions-xl-horizontal);
+  --eds-page-space-vertical: var(--eds-spacing-proportions-xl-vertical);
   --eds-selectable-gap-horizontal: var(--eds-spacing-horizontal-xs);
   --eds-selectable-gap-vertical: var(--eds-spacing-vertical-xs);
   --eds-container-gap-horizontal: var(--eds-spacing-horizontal-md);

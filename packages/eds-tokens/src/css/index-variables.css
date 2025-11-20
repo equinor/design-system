@@ -63,5 +63,8 @@
 @import 'spacing/generic-space-vertical-2xl.css';
 @import 'spacing/generic-space-vertical-3xl.css';
 
+@import 'spacing/container-space.css';
+@import 'spacing/page-space.css';
+
 @import 'spacing/semantic-spacing-gap.css';
 @import './typography.css';

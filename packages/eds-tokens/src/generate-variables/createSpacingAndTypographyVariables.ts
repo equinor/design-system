@@ -506,6 +506,73 @@ export async function createSpacingAndTypographyVariables({
     ...genericSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
   ])
 
+  // Generate container space variables
+  const containerSpaceDict = new StyleDictionary({
+    include: [
+      SPACING_PRIMITIVE_SOURCE,
+      FIGMA_SPECIFIC_TOKENS_SOURCE,
+      DENSITY_SPACIOUS_SOURCE,
+      SPACING_PROPORTIONS_SQUARED_SOURCE,
+    ],
+    source: [CONTAINER_SPACE_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
+        transforms: cssTransforms,
+        files: [
+          {
+            filter: (token: TransformedToken) =>
+              token.path && token.path[0] === 'container-space',
+            destination: 'container-space.css',
+            format: 'css/variables',
+            options: {
+              selector: ':root',
+              outputReferences: true,
+            },
+          },
+        ],
+      },
+    },
+  })
+
+  // Generate page space variables
+  const pageSpaceDict = new StyleDictionary({
+    include: [
+      SPACING_PRIMITIVE_SOURCE,
+      FIGMA_SPECIFIC_TOKENS_SOURCE,
+      DENSITY_SPACIOUS_SOURCE,
+      SPACING_PROPORTIONS_SQUARED_SOURCE,
+    ],
+    source: [PAGE_SPACE_SOURCE],
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix,
+        buildPath: path.join(cssBuildPath, spacingBuildPath),
+        transforms: cssTransforms,
+        files: [
+          {
+            filter: (token: TransformedToken) =>
+              token.path && token.path[0] === 'page-space',
+            destination: 'page-space.css',
+            format: 'css/variables',
+            options: {
+              selector: ':root',
+              outputReferences: true,
+            },
+          },
+        ],
+      },
+    },
+  })
+
+  await Promise.all([
+    containerSpaceDict.buildAllPlatforms(),
+    pageSpaceDict.buildAllPlatforms(),
+  ])
+
   // Generate semantic space and gap variables directly from the semantic tokens file
   // Only default modes are included for variable collections (e.g., Font size.XS, Font family.UI Body)
   // Other modes are built separately and controlled via data-attributes
