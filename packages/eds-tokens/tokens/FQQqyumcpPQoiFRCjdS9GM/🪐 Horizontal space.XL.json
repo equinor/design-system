@@ -13,7 +13,7 @@
       }
     }
   },
-  "Padding horizontal": {
+  "generic-space-horizontal": {
     "$type": "number",
     "$value": "{spacing.horizontal.xl}",
     "$description": "",

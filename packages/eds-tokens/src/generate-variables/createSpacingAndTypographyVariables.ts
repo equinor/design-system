@@ -463,19 +463,19 @@ export async function createSpacingAndTypographyVariables({
               const property = token.path[1]
 
               // Filter for gap tokens from the semantic tokens file
-              // All components now use correct spelling "Horizontal gap" / "Vertical gap"
+              // Token names follow pattern: "Gap horizontal" / "Gap vertical" (noun first, then direction)
               const isSelectableGap =
                 component === 'Selectable' &&
-                (property === 'Horizontal gap' || property === 'Vertical gap')
+                (property === 'Gap horizontal' || property === 'Gap vertical')
               const isContainerGap =
                 component === 'Container' &&
-                (property === 'Horizontal gap' || property === 'Vertical gap')
+                (property === 'Gap horizontal' || property === 'Gap vertical')
               const isPageGap =
                 component === 'Page' &&
-                (property === 'Horizontal gap' || property === 'Vertical gap')
+                (property === 'Gap horizontal' || property === 'Gap vertical')
               const isGenericGap =
                 component === 'Generic' &&
-                (property === 'Horizontal gap' || property === 'Vertical gap')
+                (property === 'Gap horizontal' || property === 'Gap vertical')
 
               return (
                 isSelectableGap || isContainerGap || isPageGap || isGenericGap

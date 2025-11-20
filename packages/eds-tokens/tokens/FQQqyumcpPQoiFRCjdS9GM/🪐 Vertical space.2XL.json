@@ -13,7 +13,7 @@
       }
     }
   },
-  "Padding vertical": {
+  "generic-space-vertical": {
     "$type": "number",
     "$value": "{spacing.vertical.2xl}",
     "$description": "",

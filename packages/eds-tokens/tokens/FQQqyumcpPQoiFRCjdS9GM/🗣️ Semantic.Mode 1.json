@@ -1,6 +1,6 @@
 {
   "Selectable": {
-    "Horizontal padding": {
+    "Space horizontal": {
       "$type": "number",
       "$value": "{selectable-space.horizontal}",
       "$description": "Some description",
@@ -16,7 +16,7 @@
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
       "$value": "{selectable-space.vertical}",
       "$description": "",
@@ -102,7 +102,7 @@
         }
       }
     },
-    "Horizontal gap": {
+    "Gap horizontal": {
       "$type": "number",
       "$value": "{spacing.horizontal.xs}",
       "$description": "",
@@ -118,7 +118,7 @@
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
       "$value": "{spacing.vertical.xs}",
       "$description": "",
@@ -136,7 +136,7 @@
     }
   },
   "Container": {
-    "Horizontal padding": {
+    "Space horizontal": {
       "$type": "number",
       "$value": "{container-space.horizontal}",
       "$description": "",
@@ -152,7 +152,7 @@
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
       "$value": "{container-space.vertical}",
       "$description": "",
@@ -168,7 +168,7 @@
         }
       }
     },
-    "Horizontal gap": {
+    "Gap horizontal": {
       "$type": "number",
       "$value": "{spacing.horizontal.md}",
       "$description": "",
@@ -184,7 +184,7 @@
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
       "$value": "{spacing.vertical.md}",
       "$description": "",
@@ -202,7 +202,7 @@
     }
   },
   "Page": {
-    "Horizontal padding": {
+    "Space horizontal": {
       "$type": "number",
       "$value": "{page-space.horizontal}",
       "$description": "",
@@ -218,7 +218,7 @@
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
       "$value": "{page-space.vertical}",
       "$description": "",
@@ -234,7 +234,7 @@
         }
       }
     },
-    "Horizontal gap": {
+    "Gap horizontal": {
       "$type": "number",
       "$value": "{spacing.horizontal.xl}",
       "$description": "",
@@ -250,7 +250,7 @@
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
       "$value": "{spacing.vertical.xl}",
       "$description": "",
@@ -268,9 +268,9 @@
     }
   },
   "Generic": {
-    "Horizontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Padding horizontal}",
+      "$value": "{generic-space-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -282,9 +282,9 @@
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Padding vertical}",
+      "$value": "{generic-space-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -296,9 +296,9 @@
         }
       }
     },
-    "Horizontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{Gap horizontal}",
+      "$value": "{generic-gap-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -310,9 +310,9 @@
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{Gap vertical}",
+      "$value": "{generic-gap-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
