@@ -142,6 +142,14 @@ export function generateColorScaleWithInterpolation(
     throw new Error('At least one anchor is required')
   }
 
+  // Validate step ranges (must be between 1 and 15)
+  const invalidSteps = anchors.filter((a) => a.step < 1 || a.step > 15)
+  if (invalidSteps.length > 0) {
+    throw new Error(
+      `Anchor steps must be between 1 and 15. Invalid steps: ${invalidSteps.map((a) => a.step).join(', ')}`,
+    )
+  }
+
   // Sort anchors by step to ensure correct interpolation order
   const sortedAnchors = [...anchors].sort((a, b) => a.step - b.step)
 

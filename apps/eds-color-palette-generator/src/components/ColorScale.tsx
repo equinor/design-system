@@ -2,6 +2,7 @@
 import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
 import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
+import { DEFAULT_ANCHOR_COLOR } from '@/utils/constants'
 import { Trash, Pipette, Plus, X } from 'lucide-react'
 import Color from 'colorjs.io'
 import React, { useState, useRef, useMemo, useEffect } from 'react'
@@ -32,6 +33,21 @@ type OklchInfo = {
   index: number // color step index
 }
 
+/**
+ * Helper function to check if a step value is already used by another anchor
+ * @param anchors - Array of color anchors
+ * @param stepValue - The step value to check
+ * @param excludeIndex - Index to exclude from the check (typically the current anchor being edited)
+ * @returns true if the step is already used by another anchor
+ */
+function isStepAlreadyUsed(
+  anchors: ColorAnchor[],
+  stepValue: number,
+  excludeIndex: number,
+): boolean {
+  return anchors.some((a, idx) => a.step === stepValue && idx !== excludeIndex)
+}
+
 // Reusable component for anchor color input with picker
 type AnchorColorInputProps = {
   index: number
@@ -46,6 +62,11 @@ type AnchorColorInputProps = {
   testId?: string
 }
 
+/**
+ * AnchorColorInput component for editing a single color anchor
+ * Provides inputs for color value and step position, along with a color picker
+ * @param props - Component props including anchor data and callbacks
+ */
 function AnchorColorInput({
   index,
   anchor,
@@ -108,16 +129,13 @@ function AnchorColorInput({
         >
           {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => {
             // Find if this step is used by another anchor
-            const isUsed =
-              anchors.some(
-                (a, idx) => a.step === step && idx !== index
-              );
+            const isUsed = isStepAlreadyUsed(anchors, step, index)
             return (
               <option key={step} value={step} disabled={isUsed}>
                 Step {step}
                 {isUsed ? ' (used)' : ''}
               </option>
-            );
+            )
           })}
         </select>
       )}
@@ -367,12 +385,13 @@ function ColorScaleBase({
           if (field === 'value' && typeof newValue === 'string') {
             newAnchors[index] = { ...newAnchors[index], value: newValue }
           } else if (field === 'step' && typeof newValue === 'number') {
-            // Check for duplicate step values
-            const isDuplicateStep = anchors.some(
-              (a, i) => i !== index && a.step === newValue
-            )
-            if (isDuplicateStep) {
-              window.alert('Step value already used by another anchor. Please choose a unique step.')
+            // Check for duplicate step values using helper function
+            if (isStepAlreadyUsed(anchors, newValue, index)) {
+              // Note: Using alert here. Consider replacing with a toast notification
+              // or inline error message for better UX in a future update
+              window.alert(
+                'Step value already used by another anchor. Please choose a unique step.',
+              )
               return
             }
             newAnchors[index] = { ...newAnchors[index], step: newValue }
@@ -384,13 +403,17 @@ function ColorScaleBase({
           if (!anchors || !onChangeAnchors) return
           // Find an available step (one that's not already used)
           const usedSteps = anchors.map((a) => a.step)
-          
+
           // Check if all 15 steps are already used
           if (usedSteps.length >= 15) {
-            window.alert('All 15 steps are already in use. Remove an anchor before adding a new one.')
+            // Note: Using alert here. Consider replacing with a toast notification
+            // or inline error message for better UX in a future update
+            window.alert(
+              'All 15 steps are already in use. Remove an anchor before adding a new one.',
+            )
             return
           }
-          
+
           let newStep = 8 // Default to middle step
           for (let i = 1; i <= 15; i++) {
             if (!usedSteps.includes(i)) {
@@ -400,7 +423,7 @@ function ColorScaleBase({
           }
           onChangeAnchors([
             ...anchors,
-            { value: anchors[0]?.value || '#888888', step: newStep },
+            { value: anchors[0]?.value || DEFAULT_ANCHOR_COLOR, step: newStep },
           ])
         }
 
@@ -537,6 +560,12 @@ function ColorScaleBase({
         )
       },
       (prev, next) => {
+        // Custom memo comparison function
+        // Note: Callback props (onRename, onChangeValue, etc.) are intentionally
+        // excluded from comparison. We only care about data changes that would
+        // affect the visual output. Callbacks are expected to be stable references
+        // from the parent component.
+
         // Check basic props
         if (
           prev.name !== next.name ||
@@ -989,6 +1018,13 @@ function ColorScaleBase({
   )
 }
 
+/**
+ * Custom memo comparison function for ColorScale component
+ * Note: Callback props (onRename, onChangeValue, onChangeAnchors, onRemove) are
+ * intentionally excluded from comparison. We only care about data changes that would
+ * affect the visual output. Callbacks are expected to be stable references from the
+ * parent component.
+ */
 function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
   // Check basic props
   if (

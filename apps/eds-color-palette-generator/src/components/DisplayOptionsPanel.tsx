@@ -14,7 +14,6 @@ type DisplayOptionsPanelProps = {
   setColorFormat: React.Dispatch<React.SetStateAction<ColorFormat>>
 }
 
- 
 export const DisplayOptionsPanel = ({
   showContrast,
   showLightnessInputs,
