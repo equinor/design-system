@@ -11,7 +11,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-${selectable-space}-inline"
+            "WEB": "var(--eds-selectable-spacing-inline)"
           }
         }
       }
