@@ -278,25 +278,6 @@ export async function createSpacingAndTypographyVariables({
     '🪐 Vertical space.XS.json',
   )
 
-  const ALL_MODE_TOKEN_FILES = [
-    STROKE_DEFAULT,
-    ...BOX_FILES,
-    ...SPACE_FILES,
-    ...FONT_FAMILY_FILES, // Include all Font family files for reference resolution
-    FONT_SIZE_DEFAULT,
-    FONT_WEIGHT_DEFAULT,
-    FONT_BASELINE_DEFAULT,
-    LETTER_SPACING_DEFAULT,
-    LINEHEIGHT_DEFAULT,
-    BORDER_RADIUS_DEFAULT,
-    ICON_SIZE_DEFAULT,
-    SIZE_DEFAULT,
-    HORISONTAL_GAP_DEFAULT,
-    VERTICAL_GAP_DEFAULT,
-    HORISONTAL_SPACE_DEFAULT,
-    VERTICAL_SPACE_DEFAULT,
-  ]
-
   const proportionConfigs = ['Squished', 'Squared', 'Stretched'] as const
 
   const createProportionsDictionary = (proportion: string) => {
@@ -435,14 +416,37 @@ export async function createSpacingAndTypographyVariables({
   // Other modes are built separately and controlled via data-attributes
   // Reference chain: {font-size} → {Font family.XS.font-size} → {typography.ui-body.xs.font-size} → {type-scale.inter.200.font-size} → value
   // All dependency tokens are included in the include array to allow StyleDictionary to resolve references
+  // Note: BOX_FILES are NOT included here because they define tokens at the root level (e.g., "Stroke")
+  // which conflict with the semantic tokens file structure
   const semanticGapsDict = new StyleDictionary({
     include: [
       SPACING_PRIMITIVE_SOURCE, // type-scale.inter/equinor primitives
       FIGMA_SPECIFIC_TOKENS_SOURCE, // figma.type-scale values
-      DENSITY_SPACIOUS_SOURCE, // typography.ui-body/header values (needed for Font family references)
+      DENSITY_SPACIOUS_SOURCE, // typography.ui-body/header values and sizing.stroke (needed for Font family and Stroke references)
       DENSITY_COMFORTABLE_SOURCE, // Additional density mode
-      ...ALL_MODE_TOKEN_FILES, // Default mode files only (Font size.XS, Font family.UI Body, etc.)
+      // Visual tokens - must come before other tokens that reference them
+      STROKE_DEFAULT, // Defines {Stroke.thickness} - References {sizing.stroke.thin} from DENSITY files
+      BORDER_RADIUS_DEFAULT,
+      ICON_SIZE_DEFAULT,
+      SIZE_DEFAULT,
+      // Space tokens
+      ...SPACE_FILES,
+      // Typography tokens
+      ...FONT_FAMILY_FILES, // Include all Font family files for reference resolution
+      FONT_SIZE_DEFAULT,
+      FONT_WEIGHT_DEFAULT,
+      FONT_BASELINE_DEFAULT,
+      LETTER_SPACING_DEFAULT,
+      LINEHEIGHT_DEFAULT,
+      // Gap and space tokens
+      HORISONTAL_GAP_DEFAULT,
+      VERTICAL_GAP_DEFAULT,
+      HORISONTAL_SPACE_DEFAULT,
+      VERTICAL_SPACE_DEFAULT,
     ],
+    log: {
+      verbosity: 'verbose',
+    },
     source: [SEMANTIC_TOKENS_SOURCE],
     platforms: {
       css: {

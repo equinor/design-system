@@ -3,12 +3,12 @@
  */
 
 :root {
-  --eds-selectable-gap-inline: var(--eds-spacing-inline-xs); /** Fixed horizontal gap for selectable elements */
-  --eds-selectable-gap-stack: var(--eds-spacing-stack-xs); /** Fixed vertical gap for selectable elements */
-  --eds-container-gap-inline: var(--eds-spacing-inline-md); /** Fixed horizontal gap for containers */
-  --eds-container-gap-stack: var(--eds-spacing-stack-md); /** Fixed vertical gap for containers */
-  --eds-page-gap-inline: var(--eds-spacing-inline-xl); /** Fixed horizontal gap for pages */
-  --eds-page-gap-stack: var(--eds-spacing-stack-xl); /** Fixed vertical gap for pages */
-  --eds-generic-gap-inline: var(--eds-gap-horizontal); /** Generic horizontal gap */
-  --eds-generic-gap-stack: var(--eds-gap-vertical); /** Generic vertical gap */
+  --eds-container-horisontal-gap: var(--eds-spacing-inline-md);
+  --eds-container-vertical-gap: var(--eds-spacing-stack-md);
+  --eds-page-horizontal-gap: var(--eds-spacing-inline-xl);
+  --eds-page-vertical-gap: var(--eds-spacing-stack-xl);
+  --eds-selectable-horisontal-gap: var(--eds-spacing-inline-xs);
+  --eds-selectable-vertical-gap: var(--eds-spacing-stack-xs);
+  --eds-generic-horizontal-gap: var(--eds-gap-horizontal);
+  --eds-generic-vertical-gap: var(--eds-gap-vertical);
 }

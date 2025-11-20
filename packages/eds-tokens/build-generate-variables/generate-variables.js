@@ -1,9 +1,9 @@
 import { StyleDictionary as c } from "style-dictionary-utils";
-import { createDensitySpaceToggleTransform as eo, includeTokenFilter as p, pxFormatted as no, pxTransform as ao, pxToRem as io, fontQuote as ro, PX_TO_REM_NAME as co, PX_FORMATTED_NAME as lo, FONT_QUOTE_NAME as po } from "@equinor/eds-tokens-build";
+import { createDensitySpaceToggleTransform as so, includeTokenFilter as p, pxFormatted as to, pxTransform as eo, pxToRem as no, fontQuote as ao, PX_TO_REM_NAME as io, PX_FORMATTED_NAME as ro, FONT_QUOTE_NAME as co } from "@equinor/eds-tokens-build";
 import o from "path";
-import { readJsonFiles as fo } from "@equinor/eds-tokens-sync";
+import { readJsonFiles as lo } from "@equinor/eds-tokens-sync";
 const b = "cpNchKjiIM19dPqTxE0fqg", r = "FQQqyumcpPQoiFRCjdS9GM";
-async function jo({
+async function po({
   tokensDir: e,
   cssBuildPath: l,
   cssTransforms: f
@@ -12,7 +12,7 @@ async function jo({
     e,
     b,
     "👾 Primitives.Value.json"
-  ), g = o.join(
+  ), T = o.join(
     e,
     b,
     "⛔️ Figma.Value.json"
@@ -20,23 +20,23 @@ async function jo({
     e,
     r,
     "💎 Density.Spacious.json"
-  ), A = o.join(
+  ), P = o.join(
     e,
     r,
     "💎 Density.Comfortable.json"
-  ), R = fo([
+  ), y = lo([
     o.join(
       e,
       r,
       "💎 Density.Comfortable.json"
     )
-  ]), h = eo({
+  ]), R = so({
     name: "densitySpaceToggle",
-    tokens: R["💎 Density.Comfortable.json"]
+    tokens: y["💎 Density.Comfortable.json"]
   });
-  c.registerTransform(h);
-  const P = o.resolve(process.cwd(), "build"), C = o.join(P, "js"), F = o.join(P, "json"), m = (t) => p(t, ["Density", "Spacious"]), d = (t) => p(t, ["Density", "Comfortable"]), G = new c({
-    include: [u, g],
+  c.registerTransform(R);
+  const A = o.resolve(process.cwd(), "build"), C = o.join(A, "js"), F = o.join(A, "json"), m = (t) => p(t, ["Density", "Spacious"]), d = (t) => p(t, ["Density", "Comfortable"]), L = new c({
+    include: [u, T],
     source: [S],
     platforms: {
       ts: {
@@ -89,9 +89,9 @@ async function jo({
         ]
       }
     }
-  }), N = new c({
-    include: [u, g],
-    source: [A],
+  }), O = new c({
+    include: [u, T],
+    source: [P],
     platforms: {
       ts: {
         transforms: ["name/constant"],
@@ -144,33 +144,30 @@ async function jo({
       }
     }
   });
-  await G.buildAllPlatforms(), await N.buildAllPlatforms();
+  await L.buildAllPlatforms(), await O.buildAllPlatforms();
   const _ = o.join(
     e,
     b,
     "⛔️ Figma.Value.json"
-  ), U = o.join(
+  ), h = o.join(
     e,
     r,
     "🪐 Space proportions.Squared.json"
-  ), M = o.join(
+  ), G = o.join(
     e,
     r,
     "🗣️ Semantic.Mode 1.json"
-  ), w = o.join(
+  ), N = o.join(
     e,
     r,
     "🪐 Container space.Default.json"
-  ), x = o.join(
+  ), U = o.join(
     e,
     r,
     "🪐 Page.Default.json"
-  ), s = o.join(e, r), X = [
-    o.join(s, "📦 Box.Container.json"),
-    o.join(s, "📦 Box.Generic.json"),
-    o.join(s, "📦 Box.Page.json"),
-    o.join(s, "📦 Box.Selectable.json")
-  ], H = [
+  ), s = o.join(e, r);
+  o.join(s, "📦 Box.Container.json"), o.join(s, "📦 Box.Generic.json"), o.join(s, "📦 Box.Page.json"), o.join(s, "📦 Box.Selectable.json");
+  const M = [
     o.join(s, "🪐 Container space.Default.json"),
     o.join(s, "🪐 Page.Default.json"),
     o.join(s, "🪐 Selectable space.XS.json"),
@@ -181,47 +178,29 @@ async function jo({
     o.join(s, "🪐 Space proportions.Squared.json"),
     o.join(s, "🪐 Space proportions.Squished.json"),
     o.join(s, "🪐 Space proportions.Stretched.json")
-  ], I = o.join(s, "🅰️ Font size.XS.json"), D = [
+  ], w = o.join(s, "🅰️ Font size.XS.json"), x = [
     o.join(s, "🅰️ Font family.Header.json"),
     o.join(s, "🅰️ Font family.UI and Body.json"),
     o.join(s, "🅰️ Font family.UI Body.json")
-  ], V = o.join(s, "🅰️ Font weight.Normal.json"), B = o.join(
+  ], H = o.join(s, "🅰️ Font weight.Normal.json"), V = o.join(
     s,
     "🅰️ Font baseline.Centred.json"
-  ), v = o.join(
+  ), X = o.join(
     s,
     "🅰️ Letter spacing.Normal.json"
-  ), $ = o.join(s, "🅰️ Lineheight.Default.json"), L = o.join(s, "〰️ Stroke.Thin.json"), q = o.join(
+  ), v = o.join(s, "🅰️ Lineheight.Default.json"), B = o.join(s, "〰️ Stroke.Thin.json"), $ = o.join(
     s,
     "⭕️ Border radius.Rounded.json"
-  ), K = o.join(s, "🖼️ Icon size.XS.json"), Y = o.join(s, "📐 Size.XS.json"), O = o.join(
+  ), q = o.join(s, "🖼️ Icon size.XS.json"), Y = o.join(s, "📐 Size.XS.json"), I = o.join(
     s,
     "🪐 Horisontal gap.XS.json"
-  ), y = o.join(s, "🪐 Vertical gap.XS.json"), Q = o.join(
+  ), D = o.join(s, "🪐 Vertical gap.XS.json"), K = o.join(
     s,
     "🪐 Horisontal space.XS.json"
-  ), z = o.join(
+  ), Q = o.join(
     s,
     "🪐 Vertical space.XS.json"
-  ), Z = [
-    L,
-    ...X,
-    ...H,
-    ...D,
-    // Include all Font family files for reference resolution
-    I,
-    V,
-    B,
-    v,
-    $,
-    q,
-    K,
-    Y,
-    O,
-    y,
-    Q,
-    z
-  ], J = ["Squished", "Squared", "Stretched"], W = (t) => {
+  ), z = ["Squished", "Squared", "Stretched"], Z = (t) => {
     const a = t.toLowerCase(), n = o.join(
       e,
       r,
@@ -232,10 +211,10 @@ async function jo({
         u,
         _,
         S,
-        O,
-        y
+        I,
+        D
       ],
-      source: [n, w, x],
+      source: [n, N, U],
       platforms: {
         css: {
           transformGroup: "css",
@@ -256,13 +235,13 @@ async function jo({
         }
       }
     });
-  }, k = J.map(
-    (t) => W(t)
+  }, J = z.map(
+    (t) => Z(t)
   );
   await Promise.all(
-    k.map((t) => t.buildAllPlatforms())
+    J.map((t) => t.buildAllPlatforms())
   );
-  const oo = ["XS", "SM", "MD", "LG", "XL"], so = (t) => {
+  const W = ["XS", "SM", "MD", "LG", "XL"], k = (t) => {
     const a = t.toLowerCase(), n = o.join(
       e,
       r,
@@ -273,7 +252,7 @@ async function jo({
         u,
         _,
         S,
-        U
+        h
       ],
       source: [n],
       platforms: {
@@ -296,37 +275,47 @@ async function jo({
         }
       }
     });
-  }, to = oo.map(
-    (t) => so(t)
+  }, oo = W.map(
+    (t) => k(t)
   );
   await Promise.all(
-    to.map((t) => t.buildAllPlatforms())
+    oo.map((t) => t.buildAllPlatforms())
   ), await new c({
-    log: { verbosity: "verbose" },
     include: [
       u,
       // type-scale.inter/equinor primitives
       _,
       // figma.type-scale values
       S,
-      // typography.ui-body/header values (needed for Font family references)
-      A,
+      // typography.ui-body/header values and sizing.stroke (needed for Font family and Stroke references)
+      P,
       // Additional density mode
-      ...Z
-      // Default mode files only (Font size.XS, Font family.UI Body, etc.)
-    ],
-    source: [
-      // Process dependency files first so tokens are available when resolving semantic token references
-      // Include all Font family files in source to ensure StyleDictionary can resolve {Font family.XS.*} references
-      // Token collisions are acceptable since we filter output to only gap tokens
-      ...D,
+      // Visual tokens - must come before other tokens that reference them
+      B,
+      // Defines {Stroke.thickness} - References {sizing.stroke.thin} from DENSITY files
+      $,
+      q,
+      Y,
+      // Space tokens
+      ...M,
+      // Typography tokens
+      ...x,
+      // Include all Font family files for reference resolution
+      w,
+      H,
+      V,
+      X,
+      v,
+      // Gap and space tokens
       I,
-      // Add to source so StyleDictionary can resolve {font-size} references
-      L,
-      // Add to source so StyleDictionary can resolve {Stroke.thickness} references
-      M
-      // Process semantic tokens last, after dependencies are loaded
+      D,
+      K,
+      Q
     ],
+    log: {
+      verbosity: "verbose"
+    },
+    source: [G],
     platforms: {
       css: {
         transformGroup: "css",
@@ -352,32 +341,32 @@ async function jo({
     }
   }).buildAllPlatforms();
 }
-const T = `${process.cwd()}/build`, uo = `${T}/css`, Co = `${T}/js`, Fo = `${T}/json`;
+const g = `${process.cwd()}/build`, fo = `${g}/css`, Po = `${g}/js`, Ao = `${g}/json`;
+c.registerTransform(to);
+c.registerTransform(eo);
 c.registerTransform(no);
 c.registerTransform(ao);
-c.registerTransform(io);
-c.registerTransform(ro);
-async function So() {
+async function jo() {
   const e = `${process.cwd()}/tokens`;
-  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", e), await jo({
+  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", e), await po({
     tokensDir: e,
-    cssBuildPath: uo,
+    cssBuildPath: fo,
     cssTransforms: [
       "name/kebab",
-      co,
-      lo,
-      po
+      io,
+      ro,
+      co
     ]
   });
 }
-So().then(() => {
+jo().then(() => {
   console.log("✅ Variables generated successfully");
 }).catch((e) => {
   console.error("❌ Error generating color variables:", e);
 });
 export {
-  uo as cssBuildPath,
-  So as generate,
-  Co as jsBuildPath,
-  Fo as jsonBuildPath
+  fo as cssBuildPath,
+  jo as generate,
+  Po as jsBuildPath,
+  Ao as jsonBuildPath
 };
