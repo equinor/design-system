@@ -507,6 +507,14 @@ export async function createSpacingAndTypographyVariables({
   ])
 
   // Generate container space variables
+  const spaceProportionSelectors = proportionConfigs.map(
+    (proportion) => `[data-space-proportions="${proportion.toLowerCase()}"]`,
+  )
+
+  const containerAndPageSelector = [':root', ...spaceProportionSelectors].join(
+    ', ',
+  )
+
   const containerSpaceDict = new StyleDictionary({
     include: [
       SPACING_PRIMITIVE_SOURCE,
@@ -528,7 +536,7 @@ export async function createSpacingAndTypographyVariables({
             destination: 'container-space.css',
             format: 'css/variables',
             options: {
-              selector: ':root',
+              selector: containerAndPageSelector,
               outputReferences: true,
             },
           },
@@ -559,7 +567,7 @@ export async function createSpacingAndTypographyVariables({
             destination: 'page-space.css',
             format: 'css/variables',
             options: {
-              selector: ':root',
+              selector: containerAndPageSelector,
               outputReferences: true,
             },
           },
