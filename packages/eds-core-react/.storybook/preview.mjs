@@ -22,6 +22,8 @@ const preview = {
           'Icons',
           ['Introduction', 'Preview', 'Icon'],
           '*',
+          'Next (EDS 2.0)',
+          ['Introduction', '*'],
           'Playground',
         ],
       },

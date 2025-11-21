@@ -14,3 +14,6 @@ export type {
   FieldIds,
   HelperMessageProps,
 } from './Field'
+
+export { Input } from './Input'
+export type { InputProps } from './Input'

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Input (New) Matches snapshot 1`] = `
+exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="eds-input eds-input--readonly"

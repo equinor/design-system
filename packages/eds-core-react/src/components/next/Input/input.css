@@ -64,7 +64,7 @@
 
   /* 
    * Disabled field - override browser defaults for consistent styling
-   * Safari applies default opacity and color to disabled inputs, so we need
+   * Safari applies a default opacity and color to disabled inputs, so we need
    * to explicitly set opacity: 1 and use -webkit-text-fill-color
    * Note: We don't rely on inherited color context, so this works consistently
    */

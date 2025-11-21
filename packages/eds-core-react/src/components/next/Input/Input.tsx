@@ -1,6 +1,6 @@
 import { forwardRef, useState, InputHTMLAttributes, CSSProperties } from 'react'
 import { OverridableComponent } from '@equinor/eds-utils'
-import type { InputProps } from './Input.new.types'
+import type { InputProps } from './Input.types'
 
 export const Input: OverridableComponent<InputProps, HTMLInputElement> =
   forwardRef<
