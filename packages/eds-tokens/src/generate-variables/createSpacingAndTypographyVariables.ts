@@ -2,6 +2,7 @@ import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import { includeTokenFilter } from '@equinor/eds-tokens-build'
+
 export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 export const FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
