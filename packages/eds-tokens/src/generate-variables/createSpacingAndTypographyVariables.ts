@@ -215,6 +215,10 @@ export async function createSpacingAndTypographyVariables({
   // For Font family: include all files so StyleDictionary can resolve {Font family.XS.*} references
   // (all Font family files define the same token paths, StyleDictionary needs to see at least one)
   const FONT_SIZE_DEFAULT = path.join(MODES_DIR, '🅰️ Font size.XS.json')
+  const FONT_FAMILY_DEFAULT = path.join(
+    MODES_DIR,
+    '🅰️ Font family.UI Body.json',
+  )
   const FONT_FAMILY_FILES = [
     path.join(MODES_DIR, '🅰️ Font family.Header.json'),
     path.join(MODES_DIR, '🅰️ Font family.UI and Body.json'),
@@ -631,4 +635,283 @@ export async function createSpacingAndTypographyVariables({
   })
 
   await semanticGapDict.buildAllPlatforms()
+
+  // =============================
+  // Typography Variable Generation
+  // =============================
+
+  const typographyBuildPath = 'typography/'
+
+  // Font Family configurations
+  const fontFamilyConfigs = [
+    { mode: 'Header', slug: 'header' },
+    { mode: 'UI and Body', slug: 'ui-body' },
+    { mode: 'UI Body', slug: 'ui-body-alt' },
+  ] as const
+
+  // Font Size configurations
+  const fontSizeConfigs = [
+    'XS',
+    'SM',
+    'MD',
+    'LG',
+    'XL',
+    '2XL',
+    '3XL',
+    '4XL',
+    '5XL',
+    '6XL',
+  ] as const
+
+  // Font Weight configurations
+  const fontWeightConfigs = [
+    { mode: 'Lighter', slug: 'lighter' },
+    { mode: 'Normal', slug: 'normal' },
+    { mode: 'Bolder', slug: 'bolder' },
+  ] as const
+
+  // Line Height configurations
+  const lineHeightConfigs = [
+    { mode: 'Default', slug: 'default' },
+    { mode: 'Squished', slug: 'squished' },
+  ] as const
+
+  // Letter Spacing configurations
+  const letterSpacingConfigs = [
+    { mode: 'Tight', slug: 'tight' },
+    { mode: 'Normal', slug: 'normal' },
+    { mode: 'Wide', slug: 'wide' },
+    { mode: 'Loose', slug: 'loose' },
+  ] as const
+
+  // Generate Font Family CSS files
+  const createFontFamilyDictionary = (familyConfig: {
+    mode: string
+    slug: string
+  }) => {
+    const { mode, slug } = familyConfig
+    const sourcePath = path.join(MODES_DIR, `🅰️ Font family.${mode}.json`)
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+      ],
+      source: [sourcePath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, typographyBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                includeTokenFilter(token, [mode]),
+              destination: `font-family-${slug}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-font-family="${slug}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const fontFamilyDictionaries = fontFamilyConfigs.map((config) =>
+    createFontFamilyDictionary(config),
+  )
+  await Promise.all(
+    fontFamilyDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
+
+  // Generate Font Size CSS files
+  const createFontSizeDictionary = (size: string) => {
+    const sourcePath = path.join(MODES_DIR, `🅰️ Font size.${size}.json`)
+    const sizeSlug = size.toLowerCase()
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+        ...FONT_FAMILY_FILES,
+      ],
+      source: [sourcePath],
+      log: {
+        verbosity: 'verbose',
+      },
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, typographyBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token) => includeTokenFilter(token, ['Font size', size]),
+              destination: `font-size-${sizeSlug}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-font-size="${sizeSlug}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const fontSizeDictionaries = fontSizeConfigs.map((size) =>
+    createFontSizeDictionary(size),
+  )
+  await Promise.all(
+    fontSizeDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
+
+  // Generate Font Weight CSS files
+  const createFontWeightDictionary = (weightConfig: {
+    mode: string
+    slug: string
+  }) => {
+    const { mode, slug } = weightConfig
+    const sourcePath = path.join(MODES_DIR, `🅰️ Font weight.${mode}.json`)
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+        FONT_FAMILY_DEFAULT,
+        FONT_SIZE_DEFAULT,
+      ],
+      source: [sourcePath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, typographyBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                token.path && token.path[0] === 'Font Weight',
+              destination: `font-weight-${slug}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-font-weight="${slug}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const fontWeightDictionaries = fontWeightConfigs.map((config) =>
+    createFontWeightDictionary(config),
+  )
+  await Promise.all(
+    fontWeightDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
+
+  // Generate Line Height CSS files
+  const createLineHeightDictionary = (heightConfig: {
+    mode: string
+    slug: string
+  }) => {
+    const { mode, slug } = heightConfig
+    const sourcePath = path.join(MODES_DIR, `🅰️ Lineheight.${mode}.json`)
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+        FONT_FAMILY_DEFAULT,
+        FONT_SIZE_DEFAULT,
+      ],
+      source: [sourcePath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, typographyBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                token.path && token.path[0] === 'Lineheight',
+              destination: `line-height-${slug}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-line-height="${slug}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const lineHeightDictionaries = lineHeightConfigs.map((config) =>
+    createLineHeightDictionary(config),
+  )
+  await Promise.all(
+    lineHeightDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
+
+  // Generate Letter Spacing CSS files
+  const createLetterSpacingDictionary = (spacingConfig: {
+    mode: string
+    slug: string
+  }) => {
+    const { mode, slug } = spacingConfig
+    const sourcePath = path.join(MODES_DIR, `🅰️ Letter spacing.${mode}.json`)
+
+    return new StyleDictionary({
+      include: [
+        SPACING_PRIMITIVE_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+        FONT_FAMILY_DEFAULT,
+        FONT_SIZE_DEFAULT,
+      ],
+      source: [sourcePath],
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          prefix,
+          buildPath: path.join(cssBuildPath, typographyBuildPath),
+          transforms: cssTransforms,
+          files: [
+            {
+              filter: (token: TransformedToken) =>
+                token.path && token.path[0] === 'Letter spacing',
+              destination: `letter-spacing-${slug}.css`,
+              format: 'css/variables',
+              options: {
+                selector: `[data-tracking="${slug}"]`,
+                outputReferences: true,
+              },
+            },
+          ],
+        },
+      },
+    })
+  }
+
+  const letterSpacingDictionaries = letterSpacingConfigs.map((config) =>
+    createLetterSpacingDictionary(config),
+  )
+  await Promise.all(
+    letterSpacingDictionaries.map((dict) => dict.buildAllPlatforms()),
+  )
 }

@@ -68,3 +68,35 @@
 
 @import 'spacing/semantic-spacing-gap.css';
 @import './typography.css';
+
+/* Typography: Font Family */
+@import 'typography/font-family-header.css';
+@import 'typography/font-family-ui-body.css';
+@import 'typography/font-family-ui-body-alt.css';
+
+/* Typography: Font Size */
+@import 'typography/font-size-xs.css';
+@import 'typography/font-size-sm.css';
+@import 'typography/font-size-md.css';
+@import 'typography/font-size-lg.css';
+@import 'typography/font-size-xl.css';
+@import 'typography/font-size-2xl.css';
+@import 'typography/font-size-3xl.css';
+@import 'typography/font-size-4xl.css';
+@import 'typography/font-size-5xl.css';
+@import 'typography/font-size-6xl.css';
+
+/* Typography: Font Weight */
+@import 'typography/font-weight-lighter.css';
+@import 'typography/font-weight-normal.css';
+@import 'typography/font-weight-bolder.css';
+
+/* Typography: Line Height */
+@import 'typography/line-height-default.css';
+@import 'typography/line-height-squished.css';
+
+/* Typography: Letter Spacing */
+@import 'typography/letter-spacing-tight.css';
+@import 'typography/letter-spacing-normal.css';
+@import 'typography/letter-spacing-wide.css';
+@import 'typography/letter-spacing-loose.css';

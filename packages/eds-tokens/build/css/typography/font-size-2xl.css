@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-font-size="2xl"] {
+  --eds-icon-size: var(--eds-sizing-icon-2xl);
+  --eds-gap-horizontal: var(--eds-spacing-icon-2xl-gap-horizontal);
+  --eds-gap-vertical: var(--eds-spacing-icon-2xl-gap-vertical);
+  --eds-font-size: var(--eds-font-family-size-2xl-font-size);
+  --eds-tracking-tight: var(--eds-font-family-size-2xl-tracking-tight);
+  --eds-tracking-normal: var(--eds-font-family-size-2xl-tracking-normal);
+  --eds-tracking-wide: var(--eds-font-family-size-2xl-tracking-wide);
+  --eds-font-weight-lighter: var(--eds-font-family-size-2xl-font-weight-lighter);
+  --eds-font-weight-normal: var(--eds-font-family-size-2xl-font-weight-normal);
+  --eds-font-weight-bolder: var(--eds-font-family-size-2xl-font-weight-bolder);
+  --eds-lineheight-default: var(--eds-font-family-size-2xl-lineheight-default);
+  --eds-lineheight-squished: var(--eds-font-family-size-2xl-lineheight-squished);
+}
