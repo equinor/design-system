@@ -8,6 +8,10 @@
  *
  * @packageDocumentation
  */
+'use client'
+
+// Import global CSS for next components
+import './index.css'
 
 // Re-export all next components
 export * from './components/next'

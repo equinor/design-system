@@ -1,0 +1,80 @@
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Input.stories'
+
+<Meta of={ComponentStories} />
+
+# Input
+
+Text input and textarea component for forms and user input.
+
+> **Note:** This is a [Next EDS 2.0 component](/docs/next-eds-2-0-introduction--docs). See the introduction guide for information about installation, usage, and the EDS 2.0 token system.
+
+Intended to be used if you need more flexibility than the wrapped TextField or select components provide.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#input"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/next/Input/Input.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Primary />
+<Controls />
+
+## Usage
+
+```tsx
+import { Input } from '@equinor/eds-core-react/next'
+
+<Input placeholder="Enter text" />
+```
+
+## Examples
+
+### Types
+
+This is the native type property and here is a small selection of examples of all the possible types.
+
+<Canvas of={ComponentStories.Types} />
+
+### Validation States
+
+<Canvas of={ComponentStories.ValidationStates} />
+
+### Disabled
+
+<Canvas of={ComponentStories.Disabled} />
+
+### Read only
+
+<Canvas of={ComponentStories.ReadOnly} />
+
+### Accessibility
+
+It's important to link the `Input` to the corresponding label.
+
+<Canvas of={ComponentStories.Accessibility} />
+
+### Density
+
+<Canvas of={ComponentStories.Compact} />
+
+### Light & Dark Mode
+
+<Canvas of={ComponentStories.ColorSchemes} />
+
+### With Adornments
+
+<Canvas of={ComponentStories.WithAdornments} />
+
+The component automatically measures adornment widths and adjusts padding accordingly. For performance optimization, you can manually specify widths using `leftAdornmentsWidth` and `rightAdornmentsWidth` props.
+
+### Casted as textarea
+
+<Canvas of={ComponentStories.Casted} />
+
+### Override input background color
+
+Use the EDS 2.0 token `--eds-color-bg-surface` to change the background color of the input field.
+
+<Canvas of={ComponentStories.OverrideBackground} />

@@ -3,3 +3,6 @@
 // Export all EDS 2.0 components here as they are added
 export { Placeholder } from './Placeholder'
 export type { PlaceholderProps } from './Placeholder'
+
+export { Input } from './Input'
+export type { InputProps } from './Input'
