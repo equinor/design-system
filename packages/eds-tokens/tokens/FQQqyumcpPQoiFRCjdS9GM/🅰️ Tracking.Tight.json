@@ -13,15 +13,17 @@
       }
     }
   },
-  "Letter spacing": {
-    "$type": "number",
-    "$value": "{tracking-tight}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [],
-        "codeSyntax": {}
+  "typography": {
+    "tracking": {
+      "$type": "number",
+      "$value": "{typography.tracking-tight}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
       }
     }
   }

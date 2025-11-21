@@ -3,16 +3,16 @@
  */
 
 [data-font-size="2xl"] {
-  --eds-icon-size: var(--eds-sizing-icon-2xl);
-  --eds-gap-horizontal: var(--eds-spacing-icon-2xl-gap-horizontal);
-  --eds-gap-vertical: var(--eds-spacing-icon-2xl-gap-vertical);
-  --eds-font-size: var(--eds-font-family-size-2xl-font-size);
-  --eds-tracking-tight: var(--eds-font-family-size-2xl-tracking-tight);
-  --eds-tracking-normal: var(--eds-font-family-size-2xl-tracking-normal);
-  --eds-tracking-wide: var(--eds-font-family-size-2xl-tracking-wide);
-  --eds-font-weight-lighter: var(--eds-font-family-size-2xl-font-weight-lighter);
-  --eds-font-weight-normal: var(--eds-font-family-size-2xl-font-weight-normal);
-  --eds-font-weight-bolder: var(--eds-font-family-size-2xl-font-weight-bolder);
-  --eds-lineheight-default: var(--eds-font-family-size-2xl-lineheight-default);
-  --eds-lineheight-squished: var(--eds-font-family-size-2xl-lineheight-squished);
+  --eds-typography-icon-size: var(--eds-sizing-icon-2xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-2xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-2xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-2xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-2xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-2xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-2xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-2xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-2xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-2xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-2xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-2xl-line-height-squished);
 }

@@ -3,5 +3,5 @@
  */
 
 [data-tracking="normal"] {
-  --eds-letter-spacing: var(--eds-tracking-normal);
+  --eds-typography-tracking: var(--eds-typography-tracking-normal);
 }

@@ -3,7 +3,7 @@
  */
 
 [data-font-family="header"] {
-  --eds-font-family: var(--eds-typography-header-font-family);
+  --eds-typography-font-family: var(--eds-typography-header-font-family);
   --eds-font-family-size-xs-font-size: var(--eds-typography-header-xs-font-size);
   --eds-font-family-size-xs-tracking-tight: var(--eds-typography-header-xs-tracking-tight);
   --eds-font-family-size-xs-tracking-normal: var(--eds-typography-header-xs-tracking-normal);
@@ -74,24 +74,24 @@
   --eds-font-family-size-6xl-font-weight-lighter: var(--eds-typography-header-6xl-font-weight-lighter);
   --eds-font-family-size-6xl-font-weight-normal: var(--eds-typography-header-6xl-font-weight-normal);
   --eds-font-family-size-6xl-font-weight-bolder: var(--eds-typography-header-6xl-font-weight-bolder);
-  --eds-font-family-size-xs-lineheight-default: var(--eds-typography-header-xs-lineheight-default);
-  --eds-font-family-size-xs-lineheight-squished: var(--eds-typography-header-xs-lineheight-squished);
-  --eds-font-family-size-sm-lineheight-default: var(--eds-typography-header-sm-lineheight-default);
-  --eds-font-family-size-sm-lineheight-squished: var(--eds-typography-header-sm-lineheight-squished);
-  --eds-font-family-size-md-lineheight-default: var(--eds-typography-header-md-lineheight-default);
-  --eds-font-family-size-md-lineheight-squished: var(--eds-typography-header-md-lineheight-squished);
-  --eds-font-family-size-lg-lineheight-default: var(--eds-typography-header-lg-lineheight-default);
-  --eds-font-family-size-lg-lineheight-squished: var(--eds-typography-header-lg-lineheight-squished);
-  --eds-font-family-size-xl-lineheight-default: var(--eds-typography-header-xl-lineheight-default);
-  --eds-font-family-size-xl-lineheight-squished: var(--eds-typography-header-xl-lineheight-squished);
-  --eds-font-family-size-2xl-lineheight-default: var(--eds-typography-header-2xl-lineheight-default);
-  --eds-font-family-size-2xl-lineheight-squished: var(--eds-typography-header-2xl-lineheight-squished);
-  --eds-font-family-size-3xl-lineheight-default: var(--eds-typography-header-3xl-lineheight-default);
-  --eds-font-family-size-3xl-lineheight-squished: var(--eds-typography-header-3xl-lineheight-default);
-  --eds-font-family-size-4xl-lineheight-default: var(--eds-typography-header-4xl-lineheight-default);
-  --eds-font-family-size-4xl-lineheight-squished: var(--eds-typography-header-4xl-lineheight-squished);
-  --eds-font-family-size-5xl-lineheight-default: var(--eds-typography-header-5xl-lineheight-default);
-  --eds-font-family-size-5xl-lineheight-squished: var(--eds-typography-header-5xl-lineheight-squished);
-  --eds-font-family-size-6xl-lineheight-default: var(--eds-typography-header-6xl-lineheight-default);
-  --eds-font-family-size-6xl-lineheight-squished: var(--eds-typography-header-6xl-lineheight-squished);
+  --eds-font-family-size-xs-line-height-default: var(--eds-typography-header-xs-line-height-default);
+  --eds-font-family-size-xs-line-height-squished: var(--eds-typography-header-xs-line-height-squished);
+  --eds-font-family-size-sm-line-height-default: var(--eds-typography-header-sm-line-height-default);
+  --eds-font-family-size-sm-line-height-squished: var(--eds-typography-header-sm-line-height-squished);
+  --eds-font-family-size-md-line-height-default: var(--eds-typography-header-md-line-height-default);
+  --eds-font-family-size-md-line-height-squished: var(--eds-typography-header-md-line-height-squished);
+  --eds-font-family-size-lg-line-height-default: var(--eds-typography-header-lg-line-height-default);
+  --eds-font-family-size-lg-line-height-squished: var(--eds-typography-header-lg-line-height-squished);
+  --eds-font-family-size-xl-line-height-default: var(--eds-typography-header-xl-line-height-default);
+  --eds-font-family-size-xl-line-height-squished: var(--eds-typography-header-xl-line-height-squished);
+  --eds-font-family-size-2xl-line-height-default: var(--eds-typography-header-2xl-line-height-default);
+  --eds-font-family-size-2xl-line-height-squished: var(--eds-typography-header-2xl-line-height-squished);
+  --eds-font-family-size-3xl-line-height-default: var(--eds-typography-header-3xl-line-height-default);
+  --eds-font-family-size-3xl-line-height-squished: var(--eds-typography-header-3xl-line-height-default);
+  --eds-font-family-size-4xl-line-height-default: var(--eds-typography-header-4xl-line-height-default);
+  --eds-font-family-size-4xl-line-height-squished: var(--eds-typography-header-4xl-line-height-squished);
+  --eds-font-family-size-5xl-line-height-default: var(--eds-typography-header-5xl-line-height-default);
+  --eds-font-family-size-5xl-line-height-squished: var(--eds-typography-header-5xl-line-height-squished);
+  --eds-font-family-size-6xl-line-height-default: var(--eds-typography-header-6xl-line-height-default);
+  --eds-font-family-size-6xl-line-height-squished: var(--eds-typography-header-6xl-line-height-squished);
 }

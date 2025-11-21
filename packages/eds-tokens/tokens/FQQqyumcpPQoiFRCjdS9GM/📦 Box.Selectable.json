@@ -25,7 +25,7 @@
   },
   "Gap horisontal": {
     "$type": "number",
-    "$value": "{gap-horizontal}",
+    "$value": "{typography.gap-horizontal}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -37,7 +37,7 @@
   },
   "Gap vertical": {
     "$type": "number",
-    "$value": "{gap-vertical}",
+    "$value": "{typography.gap-vertical}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -49,7 +49,7 @@
   },
   "Icon width": {
     "$type": "number",
-    "$value": "{icon-size}",
+    "$value": "{typography.icon-size}",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -61,7 +61,7 @@
   },
   "Icon container width": {
     "$type": "number",
-    "$value": "{icon-container-size}",
+    "$value": "{typography.icon-container-size}",
     "$description": "",
     "$extensions": {
       "com.figma": {

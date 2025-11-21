@@ -2,7 +2,7 @@
   "Icon": {
     "Size": {
       "$type": "number",
-      "$value": "{icon-size}",
+      "$value": "{typography.icon-size}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -14,7 +14,7 @@
     },
     "Container size": {
       "$type": "number",
-      "$value": "{icon-container-size}",
+      "$value": "{typography.icon-container-size}",
       "$description": "",
       "$extensions": {
         "com.figma": {

@@ -3,5 +3,5 @@
  */
 
 [data-font-weight="bolder"] {
-  --eds-font-weight: var(--eds-font-weight-bolder);
+  --eds-typography-font-weight: var(--eds-typography-font-weight-bolder);
 }

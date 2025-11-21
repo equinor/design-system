@@ -3,5 +3,5 @@
  */
 
 [data-font-weight="normal"] {
-  --eds-font-weight: var(--eds-font-weight-normal);
+  --eds-typography-font-weight: var(--eds-typography-font-weight-normal);
 }

@@ -3,5 +3,5 @@
  */
 
 [data-line-height="default"] {
-  --eds-lineheight: var(--eds-lineheight-default);
+  --eds-typography-line-height: var(--eds-typography-line-height-default);
 }

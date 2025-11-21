@@ -71,8 +71,7 @@
 
 /* Typography: Font Family */
 @import 'typography/font-family-header.css';
-@import 'typography/font-family-ui-body.css';
-@import 'typography/font-family-ui-body-alt.css';
+@import 'typography/font-family-ui.css';
 
 /* Typography: Font Size */
 @import 'typography/font-size-xs.css';
@@ -96,7 +95,7 @@
 @import 'typography/line-height-squished.css';
 
 /* Typography: Letter Spacing */
-@import 'typography/letter-spacing-tight.css';
-@import 'typography/letter-spacing-normal.css';
-@import 'typography/letter-spacing-wide.css';
-@import 'typography/letter-spacing-loose.css';
+@import 'typography/tracking-tight.css';
+@import 'typography/tracking-normal.css';
+@import 'typography/tracking-wide.css';
+@import 'typography/tracking-loose.css';

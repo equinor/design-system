@@ -62,7 +62,7 @@
     },
     "Icon + text gap ↔︎": {
       "$type": "number",
-      "$value": "{gap-horizontal}",
+      "$value": "{typography.gap-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -76,7 +76,7 @@
     },
     "Icon + text gap ↕︎": {
       "$type": "number",
-      "$value": "{gap-vertical}",
+      "$value": "{typography.gap-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -356,7 +356,7 @@
   "Typography": {
     "Font family": {
       "$type": "string",
-      "$value": "{Font family}",
+      "$value": "{typography.font-family}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -372,7 +372,7 @@
     },
     "Font size": {
       "$type": "number",
-      "$value": "{font-size}",
+      "$value": "{typography.font-size}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -388,7 +388,7 @@
     },
     "Line height": {
       "$type": "number",
-      "$value": "{Lineheight}",
+      "$value": "{typography.line-height}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -402,9 +402,9 @@
         }
       }
     },
-    "Letter spacing": {
+    "Tracking": {
       "$type": "number",
-      "$value": "{Letter spacing}",
+      "$value": "{typography.tracking}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -420,7 +420,7 @@
     },
     "Baseline adjust top": {
       "$type": "number",
-      "$value": "{Baseline.top}",
+      "$value": "{baseline.top}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -434,7 +434,7 @@
     },
     "Baseline adjust bottom": {
       "$type": "number",
-      "$value": "{Baseline.bottom}",
+      "$value": "{baseline.bottom}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -448,7 +448,7 @@
     },
     "Font weight": {
       "$type": "number",
-      "$value": "{Font Weight}",
+      "$value": "{typography.font-weight}",
       "$description": "",
       "$extensions": {
         "com.figma": {

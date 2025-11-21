@@ -3,5 +3,5 @@
  */
 
 [data-font-weight="lighter"] {
-  --eds-font-weight: var(--eds-font-weight-lighter);
+  --eds-typography-font-weight: var(--eds-typography-font-weight-lighter);
 }

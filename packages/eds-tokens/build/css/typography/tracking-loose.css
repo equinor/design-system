@@ -3,5 +3,5 @@
  */
 
 [data-tracking="loose"] {
-  --eds-letter-spacing: var(--eds-tracking-wide);
+  --eds-typography-tracking: var(--eds-typography-tracking-wide);
 }

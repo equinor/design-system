@@ -13,15 +13,17 @@
       }
     }
   },
-  "Lineheight": {
-    "$type": "number",
-    "$value": "{lineheight-default}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [],
-        "codeSyntax": {}
+  "typography": {
+    "line-height": {
+      "$type": "number",
+      "$value": "{typography.line-height-default}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
       }
     }
   }

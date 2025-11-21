@@ -17,7 +17,7 @@ export async function createSpacingAndTypographyVariables({
   const prefix = 'eds'
   const spacingBuildPath = 'spacing/'
 
-  const SPACING_PRIMITIVE_SOURCE = path.join(
+  const PRIMITIVES_SOURCE = path.join(
     tokensDir,
     FILE_KEY_SPACING,
     '👾 Primitives.Value.json',
@@ -48,7 +48,7 @@ export async function createSpacingAndTypographyVariables({
     includeTokenFilter(token, ['Density', 'Comfortable'])
 
   const spacious = new StyleDictionary({
-    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    include: [PRIMITIVES_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_SPACIOUS_SOURCE],
     platforms: {
       ts: {
@@ -105,7 +105,7 @@ export async function createSpacingAndTypographyVariables({
   })
 
   const comfortable = new StyleDictionary({
-    include: [SPACING_PRIMITIVE_SOURCE, DENSITY_FIGMA_SOURCE],
+    include: [PRIMITIVES_SOURCE, DENSITY_FIGMA_SOURCE],
     source: [DENSITY_COMFORTABLE_SOURCE],
     platforms: {
       ts: {
@@ -229,11 +229,11 @@ export async function createSpacingAndTypographyVariables({
     MODES_DIR,
     '🅰️ Font baseline.Centred.json',
   )
-  const LETTER_SPACING_DEFAULT = path.join(
+  const TRACKING_DEFAULT = path.join(MODES_DIR, '🅰️ Tracking.Normal.json')
+  const LINE_HEIGHT_DEFAULT = path.join(
     MODES_DIR,
-    '🅰️ Letter spacing.Normal.json',
+    '🅰️ Line height.Default.json',
   )
-  const LINEHEIGHT_DEFAULT = path.join(MODES_DIR, '🅰️ Lineheight.Default.json')
   const STROKE_DEFAULT = path.join(MODES_DIR, '〰️ Stroke.Thin.json')
   const BORDER_RADIUS_DEFAULT = path.join(
     MODES_DIR,
@@ -273,7 +273,7 @@ export async function createSpacingAndTypographyVariables({
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         HORIZONTAL_GAP_DEFAULT,
@@ -351,7 +351,7 @@ export async function createSpacingAndTypographyVariables({
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         SPACING_PROPORTIONS_SQUARED_SOURCE,
@@ -431,7 +431,7 @@ export async function createSpacingAndTypographyVariables({
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
       ],
@@ -493,7 +493,7 @@ export async function createSpacingAndTypographyVariables({
 
   const containerSpaceDict = new StyleDictionary({
     include: [
-      SPACING_PRIMITIVE_SOURCE,
+      PRIMITIVES_SOURCE,
       FIGMA_SPECIFIC_TOKENS_SOURCE,
       DENSITY_SPACIOUS_SOURCE,
       SPACING_PROPORTIONS_SQUARED_SOURCE,
@@ -524,7 +524,7 @@ export async function createSpacingAndTypographyVariables({
   // Generate page space variables
   const pageSpaceDict = new StyleDictionary({
     include: [
-      SPACING_PRIMITIVE_SOURCE,
+      PRIMITIVES_SOURCE,
       FIGMA_SPECIFIC_TOKENS_SOURCE,
       DENSITY_SPACIOUS_SOURCE,
       SPACING_PROPORTIONS_SQUARED_SOURCE,
@@ -566,7 +566,7 @@ export async function createSpacingAndTypographyVariables({
   // which conflict with the semantic tokens file structure
   const semanticGapDict = new StyleDictionary({
     include: [
-      SPACING_PRIMITIVE_SOURCE, // type-scale.inter/equinor primitives
+      PRIMITIVES_SOURCE, // type-scale.inter/equinor primitives
       FIGMA_SPECIFIC_TOKENS_SOURCE, // figma.type-scale values
       DENSITY_SPACIOUS_SOURCE, // typography.ui-body/header values and sizing.stroke (needed for Font family and Stroke references)
       DENSITY_COMFORTABLE_SOURCE, // Additional density mode
@@ -582,8 +582,8 @@ export async function createSpacingAndTypographyVariables({
       FONT_SIZE_DEFAULT,
       FONT_WEIGHT_DEFAULT,
       FONT_BASELINE_DEFAULT,
-      LETTER_SPACING_DEFAULT,
-      LINEHEIGHT_DEFAULT,
+      TRACKING_DEFAULT,
+      LINE_HEIGHT_DEFAULT,
       // Gap and space tokens
       HORIZONTAL_GAP_DEFAULT,
       VERTICAL_GAP_DEFAULT,
@@ -645,8 +645,7 @@ export async function createSpacingAndTypographyVariables({
   // Font Family configurations
   const fontFamilyConfigs = [
     { mode: 'Header', slug: 'header' },
-    { mode: 'UI and Body', slug: 'ui-body' },
-    { mode: 'UI Body', slug: 'ui-body-alt' },
+    { mode: 'UI Body', slug: 'ui' },
   ] as const
 
   // Font Size configurations
@@ -676,8 +675,8 @@ export async function createSpacingAndTypographyVariables({
     { mode: 'Squished', slug: 'squished' },
   ] as const
 
-  // Letter Spacing configurations
-  const letterSpacingConfigs = [
+  // Tracking configurations
+  const trackingConfig = [
     { mode: 'Tight', slug: 'tight' },
     { mode: 'Normal', slug: 'normal' },
     { mode: 'Wide', slug: 'wide' },
@@ -694,7 +693,7 @@ export async function createSpacingAndTypographyVariables({
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
       ],
@@ -736,7 +735,7 @@ export async function createSpacingAndTypographyVariables({
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         ...FONT_FAMILY_FILES,
@@ -784,7 +783,7 @@ export async function createSpacingAndTypographyVariables({
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         FONT_FAMILY_DEFAULT,
@@ -800,7 +799,7 @@ export async function createSpacingAndTypographyVariables({
           files: [
             {
               filter: (token: TransformedToken) =>
-                token.path && token.path[0] === 'Font Weight',
+                token.path && token.path[1] === 'font-weight',
               destination: `font-weight-${slug}.css`,
               format: 'css/variables',
               options: {
@@ -827,11 +826,11 @@ export async function createSpacingAndTypographyVariables({
     slug: string
   }) => {
     const { mode, slug } = heightConfig
-    const sourcePath = path.join(MODES_DIR, `🅰️ Lineheight.${mode}.json`)
+    const sourcePath = path.join(MODES_DIR, `🅰️ Line height.${mode}.json`)
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         FONT_FAMILY_DEFAULT,
@@ -847,7 +846,7 @@ export async function createSpacingAndTypographyVariables({
           files: [
             {
               filter: (token: TransformedToken) =>
-                token.path && token.path[0] === 'Lineheight',
+                token.path && token.path[1] === 'line-height',
               destination: `line-height-${slug}.css`,
               format: 'css/variables',
               options: {
@@ -868,17 +867,17 @@ export async function createSpacingAndTypographyVariables({
     lineHeightDictionaries.map((dict) => dict.buildAllPlatforms()),
   )
 
-  // Generate Letter Spacing CSS files
-  const createLetterSpacingDictionary = (spacingConfig: {
+  // Generate Tracking CSS files
+  const createTrackingDictionary = (spacingConfig: {
     mode: string
     slug: string
   }) => {
     const { mode, slug } = spacingConfig
-    const sourcePath = path.join(MODES_DIR, `🅰️ Letter spacing.${mode}.json`)
+    const sourcePath = path.join(MODES_DIR, `🅰️ Tracking.${mode}.json`)
 
     return new StyleDictionary({
       include: [
-        SPACING_PRIMITIVE_SOURCE,
+        PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         FONT_FAMILY_DEFAULT,
@@ -894,8 +893,8 @@ export async function createSpacingAndTypographyVariables({
           files: [
             {
               filter: (token: TransformedToken) =>
-                token.path && token.path[0] === 'Letter spacing',
-              destination: `letter-spacing-${slug}.css`,
+                token.path && token.path[1] === 'tracking',
+              destination: `tracking-${slug}.css`,
               format: 'css/variables',
               options: {
                 selector: `[data-tracking="${slug}"]`,
@@ -908,10 +907,10 @@ export async function createSpacingAndTypographyVariables({
     })
   }
 
-  const letterSpacingDictionaries = letterSpacingConfigs.map((config) =>
-    createLetterSpacingDictionary(config),
+  const trackingDictionaries = trackingConfig.map((config) =>
+    createTrackingDictionary(config),
   )
   await Promise.all(
-    letterSpacingDictionaries.map((dict) => dict.buildAllPlatforms()),
+    trackingDictionaries.map((dict) => dict.buildAllPlatforms()),
   )
 }
