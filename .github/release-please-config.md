@@ -259,12 +259,14 @@ feat(next): add Input component
 fix(next): fix Placeholder styling
 ```
 
-Release-please will create a separate PR for beta:
+Release-please will include beta changes in the release PR:
 
-- Title: `chore: release eds-core-react-next 2.0.1-beta.1`
+- Title includes "next": `chore: release eds-core-react-next 2.0.1-beta.1`
 - Bumps beta version: `2.0.1-beta.0` → `2.0.1-beta.1`
 - Updates `CHANGELOG.next.md`
-- Publishes to `@equinor/eds-core-react@beta`
+- When merged, publishes to `@equinor/eds-core-react@beta`
+
+**Note:** With `"separate-pull-requests": false`, both stable and beta changes can appear in the **same PR** if you have commits for both. The PR will contain updates to both `CHANGELOG.md` and `CHANGELOG.next.md`.
 
 ## Commit Scope Matching
 

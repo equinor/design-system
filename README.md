@@ -228,6 +228,35 @@ import { Button } from '@equinor/eds-core-react'
 
 See our [storybook](https://storybook.eds.equinor.com/) for more examples.
 
+### Beta Components (EDS 2.0 / Next)
+
+We're developing the next generation of EDS components under the `/next` entry point. These components are available as **beta releases** for early testing and feedback.
+
+#### Installation
+
+```sh
+# Install the beta version
+npm install @equinor/eds-core-react@beta
+```
+
+#### Usage
+
+```jsx
+// Import from the /next entry point
+import { ComponentName } from '@equinor/eds-core-react/next'
+```
+
+#### Important Notes
+
+- **Beta components are under active development** and may have breaking changes
+- **Not production-ready** until they graduate to the stable package
+- **Visible in Storybook** - browse components at [storybook.eds.equinor.com](https://storybook.eds.equinor.com/) under "EDS 2.0"
+- **Requires beta installation** - viewing in Storybook doesn't enable usage, you must install `@beta`
+- **Separate changelog** - see `CHANGELOG.next.md` for beta changes
+- **Feedback welcome** - help us improve before stable release!
+
+See the [Beta Release Guide](./packages/eds-core-react/BETA_RELEASE_GUIDE.md) for detailed information on the beta release workflow.
+
 ## Icons
 
 Built on a copy of the Outlined Material Design icons, the icons have been customised and renamed for Equinor’s use and supplemented with our own icons for Equinor specific domains.

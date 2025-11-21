@@ -141,9 +141,6 @@ jobs:
           steps: ${{ toJson(steps) }}
         if: failure()
   publish-storybook:
-    # Skip Storybook deployment for beta releases - beta components are for early testing
-    # Users can run Storybook locally after installing @equinor/eds-core-react@beta
-    if: github.event.inputs.npm-tag != 'beta'
     needs: [setup, packages]
     name: Build & Deploy Website
     runs-on: ubuntu-latest

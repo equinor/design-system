@@ -16,6 +16,8 @@ Guide for the automated release process in Equinor Design System using Release P
 
 ## Quick Start
 
+### Stable Releases
+
 1. **Use conventional commits** during development (see [CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md))
    - `feat(eds-core-react): add new button variant` → minor version bump
    - `fix(eds-icons): correct icon alignment` → patch version bump
@@ -35,6 +37,26 @@ Guide for the automated release process in Equinor Design System using Release P
 6. **Update master branch** - Rebase `main` onto `master`
 
 7. **Announce release** - Post in `#eds-design-system` Slack channel
+
+### Beta Releases (EDS 2.0 / Next)
+
+For components under development in the `/next` entry point:
+
+1. **Use `(next)` scope** in commits:
+   - `feat(next): add new Input component` → beta version bump
+   - `fix(next): correct Placeholder styling` → beta patch bump
+
+2. **Merge PR to `main`** → Release Please creates/updates a release PR
+   - May contain both stable and beta changes in one PR
+   - Beta changes update `CHANGELOG.next.md`, stable changes update `CHANGELOG.md`
+
+3. **Merge the release PR** → Publishes to `@equinor/eds-core-react@beta`
+   - All releases deploy to Storybook (beta components visible under "EDS 2.0")
+   - Users must install beta version to actually use the components
+
+4. **Test beta release**: `npm install @equinor/eds-core-react@beta`
+
+For complete details on beta workflow, graduation strategy, and breaking changes policy, see the [Beta Release Guide](../../packages/eds-core-react/BETA_RELEASE_GUIDE.md).
 
 ## How It Works
 

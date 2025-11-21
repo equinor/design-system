@@ -41,7 +41,7 @@ fix(eds-core-react): correct positioning logic
 ## How It Works
 
 1. **Commit with scope** -- Use `(next)` scope for beta components
-2. **Release Please creates PR** -- Separate PRs for stable vs beta
+2. **Release Please creates PR** -- One combined PR that may include both stable and beta changes
 3. **Merge PR** -- Triggers automated publishing
 4. **NPM publish** -- Beta goes to `@equinor/eds-core-react@beta`, stable to `@equinor/eds-core-react@latest`
 
@@ -67,26 +67,167 @@ import { Placeholder } from '@equinor/eds-core-react/next'
 
 ## Viewing Beta Components in Storybook
 
-Beta components are **not deployed** to any hosted Storybook instance. They are intended for early testing and development.
+Beta components are **visible in production Storybook** under the **"EDS 2.0"** section with "next" badges. This allows everyone to:
 
-To explore beta components in Storybook:
+- 👀 See what's coming in EDS 2.0
+- 📖 Read documentation and API specs
+- 🎨 View design implementations
+- 💬 Provide feedback before stable release
 
-1. Clone the repository: `git clone https://github.com/equinor/design-system.git`
-2. Install dependencies: `pnpm install`
-3. Run Storybook locally: `pnpm storybook`
+**To actually use these components**, you must install the beta version:
 
-Beta components will appear under the **"Next (Beta)"** group in the Storybook sidebar.
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+You can also run Storybook locally for development:
+
+```bash
+git clone https://github.com/equinor/design-system.git
+pnpm install
+pnpm storybook
+```
 
 ## Version Scheme
 
 Beta versions follow this pattern: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
 
-When components are promoted from beta to stable:
+## Graduation: Moving from Beta to Stable
 
-1. Remove from `/next` folder
-2. Move to main components
-3. Use regular commit scope (not `(next)`)
-4. Version continues from stable track
+Components graduate from `/next` to stable when they meet these criteria:
+
+### Graduation Criteria
+
+1. **Design finalized** - Component approved by EDS design team in Figma
+2. **Accessibility verified** - Meets WCAG 2.1 AA standards
+3. **API stable** - Component API is finalized and unlikely to change
+4. **Tested in production** - Successfully used in at least one real application
+5. **Documentation complete** - Storybook stories, props documentation, usage examples
+6. **Breaking changes resolved** - All known issues addressed
+
+### Graduation Process
+
+EDS 2.0 components will graduate as a **complete set** in a single major release (v3.0.0), rather than individually. This provides a cleaner migration path for users.
+
+#### Strategy: Batch Graduation
+
+**During Beta Development:**
+
+1. **Mark old components as deprecated immediately**:
+
+   ```typescript
+   // src/components/Button/Button.tsx (EDS 1.0)
+   /**
+    * @deprecated EDS 2.0 Button is available in beta.
+    * Install: npm install @equinor/eds-core-react@beta
+    * Import: import { Button } from '@equinor/eds-core-react/next'
+    *
+    * This component will be replaced in v3.0.0 when all EDS 2.0 components graduate.
+    */
+   export const Button = ...
+   ```
+
+2. **Communicate timeline in release notes and Slack**:
+   - "EDS 2.0 components are being developed under `/next`"
+   - "All EDS 2.0 components will graduate together in v3.0.0"
+   - "Test early by installing `@equinor/eds-core-react@beta`"
+
+3. **Keep `/next` folder structure during entire beta period**:
+   ```
+   components/
+     Button/          # EDS 1.0 (deprecated, but still works)
+     Typography/      # EDS 1.0 (deprecated, but still works)
+     next/
+       Button/        # EDS 2.0 (beta)
+       Typography/    # EDS 2.0 (beta)
+   ```
+
+**When All EDS 2.0 Components Are Ready:**
+
+1. **Create migration guide** with all breaking changes and API differences
+
+2. **Single major release (v3.0.0)**:
+
+   ```bash
+   # Remove all old EDS 1.0 components
+   git rm -r src/components/Button
+   git rm -r src/components/Typography
+   # ... remove all old components
+
+   # Move all EDS 2.0 components to main folder
+   git mv src/components/next/* src/components/
+   git rm -r src/components/next
+
+   # Update exports
+   # Remove: src/index.next.ts
+   # Update: src/index.ts with all new components
+   ```
+
+3. **Users only change import path** (no component name changes):
+
+   ```typescript
+   // Before (beta testing):
+   import { Button, Typography } from '@equinor/eds-core-react/next'
+
+   // After (v3.0.0):
+   import { Button, Typography } from '@equinor/eds-core-react'
+   ```
+
+4. **Create release with detailed migration guide**:
+
+   ```bash
+   git commit -m "feat(eds-core-react)!: graduate all EDS 2.0 components
+
+   BREAKING CHANGE: All components replaced with EDS 2.0 implementations.
+
+   - Button: API changes, see migration guide
+   - Typography: New props structure, see migration guide
+   ...
+
+   Migration guide: https://eds.equinor.com/migration/v3"
+   ```
+
+#### Benefits of Batch Graduation
+
+- ✅ **Simple migration** - Users only change import path once
+- ✅ **No component renaming** - Button stays Button throughout
+- ✅ **Clear timeline** - One major version bump, not gradual changes
+- ✅ **Better testing** - Users can test complete EDS 2.0 in beta
+- ✅ **Easier rollback** - If issues found, users stay on v2.x.x
+
+#### Timeline Example
+
+| Phase                | Version | Status                             | User Action                   |
+| -------------------- | ------- | ---------------------------------- | ----------------------------- |
+| Beta development     | 2.x.x   | EDS 1.0 stable, EDS 2.0 in `/next` | Optionally test beta          |
+| All components ready | 2.x.x   | Freeze EDS 1.0, finalize EDS 2.0   | Review migration guide        |
+| Major release        | 3.0.0   | EDS 2.0 only                       | Update imports, test, migrate |
+
+5. **Release**:
+   - Major version bump: `2.x.x` → `3.0.0`
+   - All EDS 2.0 components become the default
+   - Beta releases deprecated
+   - Migration guide published
+
+### After Graduation
+
+- Component remains in beta releases until next stable version
+- Users can migrate: `import { Component } from '@equinor/eds-core-react/next'` → `import { Component } from '@equinor/eds-core-react'`
+- Beta version can be deprecated once stable version is adopted
+
+### Breaking Changes Policy
+
+**Within `/next` (beta releases):**
+
+- ✅ Breaking changes are allowed and expected
+- ✅ Use regular `feat(next):` commits (no `!` needed)
+- ✅ Version bumps prerelease number: `beta.0` → `beta.1`
+
+**After graduation (stable releases):**
+
+- ⚠️ Breaking changes require major version bump
+- ⚠️ Follow semantic versioning strictly
+- ⚠️ Coordinate with team before introducing breaking changes
 
 ## CI/CD Flow
 
@@ -101,7 +242,7 @@ When components are promoted from beta to stable:
 3. **Trigger publish workflow**
    - Detects beta vs stable from PR title
    - Publishes to correct npm dist-tag
-   - Deploys Storybook (stable releases only -- beta skips deployment)
+   - Deploys Storybook (beta components visible in "EDS 2.0" section)
 
 ## Example Workflow
 
