@@ -367,7 +367,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Multiple Anchors Example */}
+              {/* Multiple Anchors Example - Using actual generated values from test snapshots */}
               <div>
                 <h4 className="mb-3 text-sm font-semibold">
                   Multiple anchors (interpolation approach)
@@ -378,7 +378,7 @@ export default function AboutPage() {
                       <div
                         className="w-8 h-8 border rounded border-neutral-subtle"
                         style={{
-                          backgroundColor: 'oklch(0.5915 0.0731 184.63)',
+                          backgroundColor: '#c0dbd6',
                         }}
                       />
                       <div className="text-sm">
@@ -394,7 +394,7 @@ export default function AboutPage() {
                       <div
                         className="w-8 h-8 border rounded border-neutral-subtle"
                         style={{
-                          backgroundColor: 'oklch(0.4973 0.084851 204.553)',
+                          backgroundColor: '#206f77',
                         }}
                       />
                       <div className="text-sm">
@@ -408,101 +408,89 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <p className="mb-3 text-xs text-neutral-subtle">
-                    Colours smoothly interpolate between anchors, then continue
-                    with Gaussian distribution from the last anchor:
+                    Colours smoothly interpolate between anchors in OKLCH space,
+                    with Gaussian chroma distribution applied:
                   </p>
                   <div className="flex gap-1">
                     <div
-                      className="flex-1 h-12 border rounded-l border-neutral-subtle"
-                      style={{ backgroundColor: '#d6eff2' }}
+                      className="flex-1 h-12 border-t border-b border-l rounded-l border-neutral-subtle"
+                      style={{ backgroundColor: '#ecf8f6' }}
                       title="Step 1"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#e8f7f9' }}
+                      style={{ backgroundColor: '#f8ffff' }}
                       title="Step 2"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#c4e4e8' }}
+                      style={{ backgroundColor: '#d2e6e3' }}
                       title="Step 3"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#b1d8dd' }}
+                      style={{ backgroundColor: '#c0dbd6' }}
                       title="Step 4"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#99cad1' }}
+                      style={{ backgroundColor: '#a8cdc7' }}
                       title="Step 5"
                     />
                     <div
                       className="flex-1 h-12 border-[3px] border-blue-500"
-                      style={{ backgroundColor: '#7cbcc4' }}
+                      style={{ backgroundColor: '#c0dbd6' }}
                       title="Step 6 (anchor)"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#60adb6' }}
+                      style={{ backgroundColor: '#83bab7' }}
                       title="Step 7"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#429da8' }}
+                      style={{ backgroundColor: '#277678' }}
                       title="Step 8"
                     />
                     <div
                       className="flex-1 h-12 border-[3px] border-blue-500"
-                      style={{ backgroundColor: '#1f8d9a' }}
+                      style={{ backgroundColor: '#206f77' }}
                       title="Step 9 (anchor)"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#1d7a85' }}
+                      style={{ backgroundColor: '#205c62' }}
                       title="Step 10"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#1b6871' }}
+                      style={{ backgroundColor: '#20565c' }}
                       title="Step 11"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#1a565d' }}
+                      style={{ backgroundColor: '#1f6369' }}
                       title="Step 12"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#0f2427' }}
+                      style={{ backgroundColor: '#141f20' }}
                       title="Step 13"
                     />
                     <div
                       className="flex-1 h-12 border-t border-b border-neutral-subtle"
-                      style={{ backgroundColor: '#b8dde2' }}
+                      style={{ backgroundColor: '#cae4e7' }}
                       title="Step 14"
                     />
                     <div
-                      className="flex-1 h-12 border rounded-r border-neutral-subtle"
-                      style={{ backgroundColor: '#ffffff' }}
+                      className="flex-1 h-12 border-t border-b border-r rounded-r border-neutral-subtle"
+                      style={{ backgroundColor: '#f7ffff' }}
                       title="Step 15"
                     />
                   </div>
                   <div className="relative flex mt-1 text-xs text-neutral-subtle">
-                    <span className="absolute left-0">1</span>
-                    <span
-                      className="absolute font-medium"
-                      style={{ left: 'calc(33.33% + 0.125rem)' }}
-                    >
-                      6
-                    </span>
-                    <span
-                      className="absolute font-medium"
-                      style={{ left: 'calc(53.33% + 0.125rem)' }}
-                    >
-                      9
-                    </span>
-                    <span className="absolute right-0">15</span>
+                    <span className="absolute left-[37.5%] font-medium">6</span>
+                    <span className="absolute left-[57.5%] font-medium">9</span>
                   </div>
                 </div>
               </div>

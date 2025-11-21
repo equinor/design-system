@@ -297,6 +297,51 @@ describe('generate-colors CLI', () => {
     rmSync(anchorsConfigPath, { force: true })
   })
 
+  it('should generate color scales using anchors at steps 6 and 9', () => {
+    const anchorsConfig = {
+      colors: [
+        {
+          name: 'Mid-Step Anchors',
+          anchors: [
+            { value: 'oklch(0.5915 0.0731 184.63)', step: 6 },
+            { value: 'oklch(0.4973 0.084851 204.553)', step: 9 },
+          ],
+        },
+      ],
+    }
+
+    const anchorsConfigPath = resolve(__dirname, '__test-mid-anchors-config.json')
+    writeFileSync(
+      anchorsConfigPath,
+      JSON.stringify(anchorsConfig, null, 2),
+      'utf-8',
+    )
+
+    const anchorsTestDir = resolve(__dirname, '__test-mid-anchors-output__')
+    mkdirSync(anchorsTestDir, { recursive: true })
+
+    // Run the CLI
+    execFileSync('node', [cliPath, anchorsConfigPath, anchorsTestDir])
+
+    const lightTokensPath = join(anchorsTestDir, 'Color Light.Mode 1.json')
+    const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
+
+    // Verify structure
+    expect(lightTokens).toHaveProperty('Light')
+    expect(lightTokens.Light).toHaveProperty('Mid-Step Anchors')
+
+    // Check that we have 15 steps
+    const tokens = lightTokens.Light['Mid-Step Anchors']
+    expect(Object.keys(tokens)).toHaveLength(15)
+
+    // Snapshot test
+    expect(lightTokens).toMatchSnapshot('anchors-mid-steps-light')
+
+    // Clean up
+    rmSync(anchorsTestDir, { recursive: true, force: true })
+    rmSync(anchorsConfigPath, { force: true })
+  })
+
   it('should handle mixed legacy (value) and new (anchors) color definitions', () => {
     const mixedConfig = {
       colors: [

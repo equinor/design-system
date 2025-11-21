@@ -1505,6 +1505,225 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
 }
 `;
 
+exports[`generate-colors CLI > should generate color scales using anchors at steps 6 and 9 > anchors-mid-steps-light 1`] = `
+{
+  "Light": {
+    "Mid-Step Anchors": {
+      "1": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#ecf8f6",
+      },
+      "10": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#205c62",
+      },
+      "11": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#20565c",
+      },
+      "12": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#1f6369",
+      },
+      "13": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#141f20",
+      },
+      "14": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#cae4e7",
+      },
+      "15": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#f7ffff",
+      },
+      "2": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#f8ffff",
+      },
+      "3": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#d2e6e3",
+      },
+      "4": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#c0dbd6",
+      },
+      "5": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#a8cdc7",
+      },
+      "6": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#c0dbd6",
+      },
+      "7": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#83bab7",
+      },
+      "8": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#277678",
+      },
+      "9": {
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {},
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES",
+            ],
+          },
+        },
+        "$type": "color",
+        "$value": "#206f77",
+      },
+    },
+  },
+}
+`;
+
 exports[`generate-colors CLI > should generate light and dark color tokens with default HEX format > dark-hex 1`] = `
 {
   "Dark": {
