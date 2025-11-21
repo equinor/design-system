@@ -9,6 +9,8 @@ const preview = {
         method: '',
         order: [
           'Introduction',
+          'EdsProvider',
+          'EDS 2.0 (beta)',
           'Data Display',
           'Feedback',
           'Inputs',
