@@ -13,6 +13,9 @@ spec:
     - name: dev
       build:
         from: feat/*
+    - name: generator
+      build:
+        from: feat/4246-add-optional-second-color-input-to-palette-generator
   dnsAppAlias:
     environment: prod
     component: docs
