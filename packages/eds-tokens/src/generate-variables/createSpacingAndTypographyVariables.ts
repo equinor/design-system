@@ -217,14 +217,6 @@ export async function createSpacingAndTypographyVariables({
   // Only default modes are included for variable collections (other modes built separately)
   const MODES_DIR = path.join(tokensDir, FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES)
 
-  // Files without variable collection modes (include all)
-  const BOX_FILES = [
-    path.join(MODES_DIR, '📦 Box.Container.json'),
-    path.join(MODES_DIR, '📦 Box.Generic.json'),
-    path.join(MODES_DIR, '📦 Box.Page.json'),
-    path.join(MODES_DIR, '📦 Box.Selectable.json'),
-  ]
-
   const SPACE_FILES = [
     path.join(MODES_DIR, '🪐 Container space.Default.json'),
     path.join(MODES_DIR, '🪐 Page space.Default.json'),
@@ -430,7 +422,6 @@ export async function createSpacingAndTypographyVariables({
     size: string,
   ) => {
     const sizeLower = size.toLowerCase()
-    const typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1)
     const horizontalPath = path.join(
       tokensDir,
       FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,

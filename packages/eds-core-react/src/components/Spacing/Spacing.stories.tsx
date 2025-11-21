@@ -10,8 +10,6 @@ const meta: Meta = {
 
 The Equinor Design System provides a comprehensive spacing system using CSS custom properties (variables) controlled by data attributes.
 
-## Spacing Concepts
-
 ### Selectable Space
 
 Padding for interactive elements like buttons. Uses \`--eds-selectable-space-horizontal\` and \`--eds-selectable-space-vertical\`.
@@ -63,6 +61,20 @@ Fixed at xl size (1.5rem horizontal in spacious mode).
 }
 \`\`\`
 
+### Generic Space
+
+Flexible padding/margin spacing. Uses \`--eds-generic-space-horizontal\` and \`--eds-generic-space-vertical\`.
+
+**Controlled by:**
+- \`data-horizontal-space\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
+- \`data-vertical-space\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
+
+\`\`\`css
+.my-element {
+  padding: var(--eds-generic-space-vertical) var(--eds-generic-space-horizontal);
+}
+\`\`\`
+
 ### Generic Gap
 
 Flexible gap spacing for layout containers. Uses \`--eds-generic-gap-horizontal\` and \`--eds-generic-gap-vertical\`.
@@ -78,23 +90,10 @@ Flexible gap spacing for layout containers. Uses \`--eds-generic-gap-horizontal\
 }
 \`\`\`
 
-### Generic Space
 
-Flexible padding/margin spacing. Uses \`--eds-generic-space-horizontal\` and \`--eds-generic-space-vertical\`.
+### Selectable, Container, and Page Gap
 
-**Controlled by:**
-- \`data-horizontal-space\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
-- \`data-vertical-space\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
-
-\`\`\`css
-.my-element {
-  padding: var(--eds-generic-space-vertical) var(--eds-generic-space-horizontal);
-}
-\`\`\`
-
-### Fixed Gap Variables
-
-Pre-configured gap values for common use cases:
+Pre-configured gap values for selectable, container, and page level elements:
 
 - \`--eds-selectable-gap-horizontal/vertical\`: xs spacing (0.5rem)
 - \`--eds-container-gap-horizontal/vertical\`: md spacing (1rem)
@@ -114,9 +113,7 @@ Pre-configured gap values for common use cases:
 
 export default meta
 
-type Story = StoryObj
-
-export const SelectableSpace: Story = {
+export const SelectableSpace: StoryObj = {
   render: () => {
     const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
     const proportions = ['squished', 'squared', 'stretched'] as const
@@ -162,7 +159,7 @@ export const SelectableSpace: Story = {
   },
 }
 
-export const ContainerSpace: Story = {
+export const ContainerSpace: StoryObj = {
   render: () => {
     const proportions = ['squished', 'squared', 'stretched'] as const
 
@@ -215,7 +212,7 @@ export const ContainerSpace: Story = {
   },
 }
 
-export const PageSpace: Story = {
+export const PageSpace: StoryObj = {
   render: () => {
     const proportions = ['squished', 'squared', 'stretched'] as const
 
@@ -268,7 +265,103 @@ export const PageSpace: Story = {
   },
 }
 
-export const GenericGap: Story = {
+export const SelectableContainerPageGap: StoryObj = {
+  render: () => (
+    <div>
+      <h2>Selectable, Container, and Page Gap</h2>
+      <p>
+        Pre-configured gap values for selectable, container, and page level
+        elements. These are fixed values and don&apos;t require data attributes.
+      </p>
+
+      <div className="spacing-demo-section">
+        <h3>Selectable Gap (xs = 0.5rem)</h3>
+        <p>Use for groups of buttons or interactive elements.</p>
+        <div className="selectable-gap-example">
+          <div className="spacing-demo-small-box">Button 1</div>
+          <div className="spacing-demo-small-box">Button 2</div>
+          <div className="spacing-demo-small-box">Button 3</div>
+          <div className="spacing-demo-small-box">Button 4</div>
+        </div>
+        <details style={{ marginTop: '1rem' }}>
+          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
+            View CSS
+          </summary>
+          <pre
+            style={{
+              background: '#f5f5f5',
+              padding: '1rem',
+              borderRadius: '4px',
+            }}
+          >
+            {`.button-group {
+  display: flex;
+  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
+}`}
+          </pre>
+        </details>
+      </div>
+
+      <div className="spacing-demo-section">
+        <h3>Container Gap (md = 1rem)</h3>
+        <p>Use for general container layouts.</p>
+        <div className="container-gap-example">
+          <div className="spacing-demo-box">Section 1</div>
+          <div className="spacing-demo-box">Section 2</div>
+          <div className="spacing-demo-box">Section 3</div>
+        </div>
+        <details style={{ marginTop: '1rem' }}>
+          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
+            View CSS
+          </summary>
+          <pre
+            style={{
+              background: '#f5f5f5',
+              padding: '1rem',
+              borderRadius: '4px',
+            }}
+          >
+            {`.container-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
+}`}
+          </pre>
+        </details>
+      </div>
+
+      <div className="spacing-demo-section">
+        <h3>Page Gap (xl = 1.5rem)</h3>
+        <p>Use for page-level layouts with larger spacing.</p>
+        <div className="page-gap-example">
+          <div className="spacing-demo-box">Page Section 1</div>
+          <div className="spacing-demo-box">Page Section 2</div>
+          <div className="spacing-demo-box">Page Section 3</div>
+        </div>
+        <details style={{ marginTop: '1rem' }}>
+          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
+            View CSS
+          </summary>
+          <pre
+            style={{
+              background: '#f5f5f5',
+              padding: '1rem',
+              borderRadius: '4px',
+            }}
+          >
+            {`.page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-page-gap-vertical) var(--eds-page-gap-horizontal);
+}`}
+          </pre>
+        </details>
+      </div>
+    </div>
+  ),
+}
+
+export const GenericGap: StoryObj = {
   render: () => {
     const sizes = [
       'none',
@@ -361,7 +454,7 @@ export const GenericGap: Story = {
   },
 }
 
-export const GenericSpace: Story = {
+export const GenericSpace: StoryObj = {
   render: () => {
     const sizes = ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const
 
@@ -435,106 +528,10 @@ export const GenericSpace: Story = {
   },
 }
 
-export const FixedGapVariables: Story = {
+export const Example: StoryObj = {
   render: () => (
     <div>
-      <h2>Fixed Gap Variables</h2>
-      <p>
-        Pre-configured gap values for common use cases. These are fixed values
-        and don&apos;t require data attributes.
-      </p>
-
-      <div className="spacing-demo-section">
-        <h3>Selectable Gap (xs = 0.5rem)</h3>
-        <p>Use for groups of buttons or interactive elements.</p>
-        <div className="selectable-gap-example">
-          <div className="spacing-demo-small-box">Button 1</div>
-          <div className="spacing-demo-small-box">Button 2</div>
-          <div className="spacing-demo-small-box">Button 3</div>
-          <div className="spacing-demo-small-box">Button 4</div>
-        </div>
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-            }}
-          >
-            {`.button-group {
-  display: flex;
-  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
-}`}
-          </pre>
-        </details>
-      </div>
-
-      <div className="spacing-demo-section">
-        <h3>Container Gap (md = 1rem)</h3>
-        <p>Use for general container layouts.</p>
-        <div className="container-gap-example">
-          <div className="spacing-demo-box">Section 1</div>
-          <div className="spacing-demo-box">Section 2</div>
-          <div className="spacing-demo-box">Section 3</div>
-        </div>
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-            }}
-          >
-            {`.container-layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
-}`}
-          </pre>
-        </details>
-      </div>
-
-      <div className="spacing-demo-section">
-        <h3>Page Gap (xl = 1.5rem)</h3>
-        <p>Use for page-level layouts with larger spacing.</p>
-        <div className="page-gap-example">
-          <div className="spacing-demo-box">Page Section 1</div>
-          <div className="spacing-demo-box">Page Section 2</div>
-          <div className="spacing-demo-box">Page Section 3</div>
-        </div>
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-            }}
-          >
-            {`.page-layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-page-gap-vertical) var(--eds-page-gap-horizontal);
-}`}
-          </pre>
-        </details>
-      </div>
-    </div>
-  ),
-}
-
-export const PracticalExample: Story = {
-  render: () => (
-    <div>
-      <h2>Practical Example: Button with Card Layout</h2>
+      <h2>Example: Button with Card Layout</h2>
       <p>
         Combining different spacing concepts for a complete component example.
       </p>
