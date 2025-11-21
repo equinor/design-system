@@ -6,3 +6,6 @@ export type { PlaceholderProps } from './Placeholder'
 
 export { Icon } from './Icon'
 export type { IconProps, IconSize, IconData, IconName } from './Icon'
+
+export { Input } from './Input'
+export type { InputProps } from './Input'

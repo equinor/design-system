@@ -2,70 +2,105 @@
 
 ## Overview
 
-Component CSS is centralized in `src/styles.css` to prevent duplicate imports and enable automatic tree-shaking.
+Next EDS 2.0 components use vanilla CSS with EDS 2.0 tokens. Component CSS is centralized in `src/index.css` to prevent duplicate imports and enable automatic tree-shaking.
+
+**Important:** Only Next EDS 2.0 components (in `src/components/next/`) use vanilla CSS. Stable components use styled-components and don't need CSS files.
 
 ## Structure
 
 ```
 src/
-├── styles.css          # Imports all component CSS
-├── index.ts            # Imports styles.css once
+├── index.css              # Imports all next/ component CSS
+├── index.ts               # Stable components (no CSS import)
+├── index.next.ts          # Imports index.css + exports next components
 └── components/
-    └── Input/
-        ├── Input.new.tsx     # No CSS import
-        └── Input.new.css     # Styles defined here
+    ├── Button/            # Stable component (styled-components)
+    │   └── Button.tsx
+    └── next/              # Next EDS 2.0 components (vanilla CSS)
+        └── Input/
+            ├── Input.tsx       # No CSS import
+            └── input.css       # Styles defined here
 ```
 
 ## How It Works
 
-1. Component CSS files contain the styles
-2. `src/styles.css` imports all component CSS with `@import`
-3. `src/index.ts` imports `styles.css` once
-4. Users get all CSS automatically when importing components
+1. Component CSS files contain the styles (e.g., `input.css`)
+2. `src/index.css` imports all next/ component CSS with `@import`
+3. `src/index.next.ts` imports `index.css` once
+4. Users importing from `@equinor/eds-core-react/next` get all CSS automatically
 
-## Adding Components
+## Adding Next EDS 2.0 Components
 
-When creating a component with CSS:
+When creating a new component in `components/next/`:
 
-1. Create `Button.new.css` in component directory
-2. Add to `src/styles.css`:
+1. Create `input.css` in component directory (lowercase with hyphens)
+2. Add to `src/index.css`:
    ```css
-   @import './components/Button/Button.new.css';
+   @import './components/next/Input/input.css';
    ```
 3. **Never** import CSS in `.tsx` files
+4. Export component from `src/index.next.ts`
 
 ## Build
 
 Rollup builds CSS with PostCSS to bundle all `@import` statements:
 
-- **Input**: `src/styles.css`
-- **Output**: 
-  - `build/styles.css` (3.5KB formatted)
-  - `build/styles.min.css` (2.1KB minified)
+- **Input**: `src/index.css`
+- **Output**:
+  - `build/index.css` (formatted)
+  - `build/index.min.css` (minified)
 
 ## Usage
 
-Import components normally -- CSS is included automatically:
+### Next EDS 2.0 Components
+
+Import from the `/next` subpath -- CSS is included automatically:
 
 ```tsx
-import { InputNew } from '@equinor/eds-core-react'
+import { Input } from '@equinor/eds-core-react/next'
 ```
 
 Or import CSS separately if needed:
 
 ```tsx
-import '@equinor/eds-core-react/styles.css'      // Development
-import '@equinor/eds-core-react/styles.min.css'  // Production
+import '@equinor/eds-core-react/index.css' // Development
+import '@equinor/eds-core-react/index.min.css' // Production
+```
+
+### Stable Components
+
+Import normally from the main package (no CSS needed):
+
+```tsx
+import { Button, Typography } from '@equinor/eds-core-react'
 ```
 
 ## Configuration
 
 **package.json**:
+
 - `"sideEffects": ["**/*.css"]` -- Preserves CSS during tree-shaking
 - `"files": ["dist/*", "build/*"]` -- Publishes JS and CSS
-- Exports CSS at `./styles.css` and `./styles.min.css`
+- Exports:
+  - `.` -- Stable components (main package)
+  - `./next` -- Next EDS 2.0 components (with CSS)
+  - `./index.css` and `./index.min.css` -- Next component styles
+
+**rollup.config.js**:
+
+Two entry points are built:
+
+1. `src/index.ts` → `dist/eds-core-react.cjs` (stable components)
+2. `src/index.next.ts` → `dist/next.cjs` (next components with CSS)
 
 **Storybook** (`.storybook/preview.mjs`):
+
 ```javascript
-import '../src/styles.css'  // Global component styles
+import '../src/index.css' // Next component styles
 ```
+
+## Naming Conventions
+
+- **CSS files:** lowercase with hyphens (e.g., `input.css`, `text-field.css`)
+- **Component files:** PascalCase (e.g., `Input.tsx`, `TextField.tsx`)
+- **Folder:** PascalCase matching component name (e.g., `Input/`, `TextField/`)
