@@ -58,6 +58,46 @@ export default [
     ],
   },
   {
+    input: ['./src/index.next.ts'],
+    external: [
+      /@babel\/runtime/,
+      'react/jsx-runtime',
+      ...Object.keys({
+        ...pkg.peerDependencies,
+        ...pkg.dependencies,
+      }),
+    ],
+    watch: {
+      clearScreen: true,
+      include: ['./src/**', './../tokens/**'],
+    },
+    plugins: [
+      preserveDirective(),
+      resolve({ extensions }),
+      commonjs(),
+      postcss({
+        extensions: ['.css'],
+        extract: false,
+        inject: false,
+      }),
+      babel({
+        babelHelpers: 'runtime',
+        extensions,
+        rootMode: 'upward',
+      }),
+    ],
+    output: [
+      {
+        dir: 'dist/esm',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        format: 'es',
+        sourcemap: isDevelopment,
+      },
+      { file: './dist/next.cjs', format: 'cjs', interop: 'auto' },
+    ],
+  },
+  {
     input: './src/index.css',
     plugins: [
       postcss({

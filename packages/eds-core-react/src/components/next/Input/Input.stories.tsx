@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { anchor, done } from '@equinor/eds-icons'
-import { Input as InputNew } from './Input.new'
-import type { InputProps } from './Input.new.types'
-import { Label } from '../..'
-import { Stack } from './../../../.storybook/components'
-import { Icon } from '../Icon'
-import { Button } from '../Button'
-import page from './Input.new.docs.mdx'
+import { Input } from './Input'
+import type { InputProps } from './Input.types'
+import { Label } from '../../Label'
+import { Stack } from './../../../../.storybook/components'
+import { Icon } from '../../Icon'
+import { Button } from '../../Button'
+import page from './Input.docs.mdx'
 
 const icons = {
   done,
@@ -15,9 +15,9 @@ const icons = {
 
 Icon.add(icons)
 
-const meta: Meta<typeof InputNew> = {
-  title: 'Inputs/Input (EDS 2.0)',
-  component: InputNew,
+const meta: Meta<typeof Input> = {
+  title: 'Next (EDS 2.0)/Input',
+  component: Input,
   parameters: {
     docs: {
       page,
@@ -40,7 +40,7 @@ const meta: Meta<typeof InputNew> = {
 export default meta
 
 export const Introduction: StoryFn<InputProps> = (args) => {
-  return <InputNew {...args} />
+  return <Input {...args} />
 }
 
 Introduction.args = {
@@ -50,16 +50,16 @@ Introduction.args = {
 export const Types: StoryFn<InputProps> = () => (
   <>
     <div>
-      <Label htmlFor="input-new-text" label="Text" />
-      <InputNew id="input-new-text" autoComplete="off" />
+      <Label htmlFor="input-next-text" label="Text" />
+      <Input id="input-next-text" autoComplete="off" />
     </div>
     <div>
-      <Label htmlFor="input-new-number" label="Number" />
-      <InputNew type="number" id="input-new-number" />
+      <Label htmlFor="input-next-number" label="Number" />
+      <Input type="number" id="input-next-number" />
     </div>
     <div>
-      <Label htmlFor="input-new-password" label="Password" />
-      <InputNew type="password" id="input-new-password" />
+      <Label htmlFor="input-next-password" label="Password" />
+      <Input type="password" id="input-next-password" />
     </div>
   </>
 )
@@ -67,17 +67,17 @@ export const Types: StoryFn<InputProps> = () => (
 export const ValidationStates: StoryFn<InputProps> = () => (
   <>
     <div>
-      <Label htmlFor="input-new-default" label="Default" />
-      <InputNew
-        id="input-new-default"
+      <Label htmlFor="input-next-default" label="Default" />
+      <Input
+        id="input-next-default"
         placeholder="Placeholder text"
         autoComplete="off"
       />
     </div>
     <div>
-      <Label htmlFor="input-new-invalid" label="Invalid" />
-      <InputNew
-        id="input-new-invalid"
+      <Label htmlFor="input-next-invalid" label="Invalid" />
+      <Input
+        id="input-next-invalid"
         placeholder="Placeholder text"
         autoComplete="off"
         invalid
@@ -89,8 +89,8 @@ ValidationStates.storyName = 'Validation States'
 
 export const Disabled: StoryFn<InputProps> = () => (
   <>
-    <Label htmlFor="input-new-disabled" label="Disabled" />
-    <InputNew id="input-new-disabled" placeholder="Placeholder text" disabled />
+    <Label htmlFor="input-next-disabled" label="Disabled" />
+    <Input id="input-next-disabled" placeholder="Placeholder text" disabled />
   </>
 )
 Disabled.decorators = [
@@ -105,8 +105,8 @@ Disabled.decorators = [
 
 export const ReadOnly: StoryFn<InputProps> = () => (
   <>
-    <Label htmlFor="input-new-readonly" label="Read only" />
-    <InputNew id="input-new-readonly" defaultValue="Read only value" readOnly />
+    <Label htmlFor="input-next-readonly" label="Read only" />
+    <Input id="input-next-readonly" defaultValue="Read only value" readOnly />
   </>
 )
 ReadOnly.storyName = 'Read only'
@@ -114,8 +114,8 @@ ReadOnly.storyName = 'Read only'
 export const Accessibility: StoryFn<InputProps> = () => {
   return (
     <>
-      <Label htmlFor="input-new-a11y" label="I use the htmlFor prop" />
-      <InputNew type="text" id="input-new-a11y" />
+      <Label htmlFor="input-next-a11y" label="I use the htmlFor prop" />
+      <Input type="text" id="input-next-a11y" />
     </>
   )
 }
@@ -123,17 +123,17 @@ export const Accessibility: StoryFn<InputProps> = () => {
 export const Compact: StoryFn<InputProps> = () => (
   <>
     <div data-density="spacious">
-      <Label htmlFor="input-new-spacious" label="Spacious (default)" />
-      <InputNew
-        id="input-new-spacious"
+      <Label htmlFor="input-next-spacious" label="Spacious (default)" />
+      <Input
+        id="input-next-spacious"
         placeholder="Spacious density"
         autoComplete="off"
       />
     </div>
     <div data-density="comfortable">
-      <Label htmlFor="input-new-comfortable" label="Comfortable (compact)" />
-      <InputNew
-        id="input-new-comfortable"
+      <Label htmlFor="input-next-comfortable" label="Comfortable (compact)" />
+      <Input
+        id="input-next-comfortable"
         placeholder="Comfortable density"
         autoComplete="off"
       />
@@ -163,20 +163,20 @@ export const WithIcons: StoryFn<InputProps> = () => {
         >
           Toggle Icon
         </Button>
-        <InputNew
-          id="input-new-icons-1"
+        <Input
+          id="input-next-icons-1"
           type="date"
           defaultValue="Input text"
           leftAdornments={icon && <Icon name="done" title="Done" />}
         />
-        <InputNew
-          id="input-new-icons-2"
+        <Input
+          id="input-next-icons-2"
           type="date"
           defaultValue="Input text"
           rightAdornments={icon && <Icon name="done" title="Done" />}
         />
-        <InputNew
-          id="input-new-icons-3"
+        <Input
+          id="input-next-icons-3"
           type="date"
           defaultValue="Input text"
           rightAdornments={icon && <Icon name="done" title="Done" />}
@@ -208,10 +208,10 @@ WithIcons.decorators = [
 export const WithAdornments: StoryFn<InputProps> = () => {
   return (
     <>
-      <Label htmlFor="input-new-adornments-default" label="Default" />
-      <InputNew
+      <Label htmlFor="input-next-adornments-default" label="Default" />
+      <Input
         type="text"
-        id="input-new-adornments-default"
+        id="input-next-adornments-default"
         placeholder="Placeholder text Placeholder text"
         leftAdornments={
           <Button
@@ -228,10 +228,10 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-new-adornments-invalid" label="Invalid" />
-      <InputNew
+      <Label htmlFor="input-next-adornments-invalid" label="Invalid" />
+      <Input
         type="text"
-        id="input-new-adornments-invalid"
+        id="input-next-adornments-invalid"
         invalid
         leftAdornments={
           <Button
@@ -248,10 +248,10 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-new-adornments-disabled" label="Disabled" />
-      <InputNew
+      <Label htmlFor="input-next-adornments-disabled" label="Disabled" />
+      <Input
         type="text"
-        id="input-new-adornments-disabled"
+        id="input-next-adornments-disabled"
         disabled
         placeholder="Placeholder text Placeholder text"
         value="Some text Some textSome textSome text"
@@ -271,10 +271,10 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-new-adornments-readonly" label="Readonly" />
-      <InputNew
+      <Label htmlFor="input-next-adornments-readonly" label="Readonly" />
+      <Input
         type="text"
-        id="input-new-adornments-readonly"
+        id="input-next-adornments-readonly"
         readOnly
         leftAdornments={
           <Button
@@ -296,12 +296,12 @@ export const WithAdornments: StoryFn<InputProps> = () => {
 }
 
 export const Casted: StoryFn<InputProps> = (args) => {
-  return <InputNew as="textarea" {...args} />
+  return <Input as="textarea" {...args} />
 }
 
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
-    <InputNew
+    <Input
       style={{ '--eds-color-bg-input': '#fff' } as React.CSSProperties}
       {...args}
     />
@@ -330,7 +330,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         <h3 style={{ marginTop: 0 }}>Light Mode</h3>
         <div>
           <Label htmlFor="input-light-default" label="Default" />
-          <InputNew
+          <Input
             id="input-light-default"
             placeholder="Placeholder text"
             autoComplete="off"
@@ -338,7 +338,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-light-filled" label="With value" />
-          <InputNew
+          <Input
             id="input-light-filled"
             defaultValue="Input value"
             autoComplete="off"
@@ -346,7 +346,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-light-invalid" label="Invalid" />
-          <InputNew
+          <Input
             id="input-light-invalid"
             defaultValue="Invalid value"
             invalid
@@ -355,7 +355,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-light-readonly" label="Read only" />
-          <InputNew
+          <Input
             id="input-light-readonly"
             defaultValue="Read only value"
             readOnly
@@ -363,7 +363,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-light-disabled" label="Disabled" />
-          <InputNew
+          <Input
             id="input-light-disabled"
             placeholder="Placeholder text"
             disabled
@@ -381,7 +381,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </h3>
         <div>
           <Label htmlFor="input-dark-default" label="Default" />
-          <InputNew
+          <Input
             id="input-dark-default"
             placeholder="Placeholder text"
             autoComplete="off"
@@ -389,7 +389,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-dark-filled" label="With value" />
-          <InputNew
+          <Input
             id="input-dark-filled"
             defaultValue="Input value"
             autoComplete="off"
@@ -397,7 +397,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-dark-invalid" label="Invalid" />
-          <InputNew
+          <Input
             id="input-dark-invalid"
             defaultValue="Invalid value"
             invalid
@@ -406,7 +406,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-dark-readonly" label="Read only" />
-          <InputNew
+          <Input
             id="input-dark-readonly"
             defaultValue="Read only value"
             readOnly
@@ -414,7 +414,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Label htmlFor="input-dark-disabled" label="Disabled" />
-          <InputNew
+          <Input
             id="input-dark-disabled"
             placeholder="Placeholder text"
             disabled

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
-import { Input } from './Input.new'
-import { EdsProvider } from '../EdsProvider'
+import { Input } from './Input'
+import { EdsProvider } from '../../EdsProvider'
 
-describe('Input (New)', () => {
+describe('Input (Next EDS 2.0)', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Input value="input value" readOnly />)
     expect(asFragment()).toMatchSnapshot()
