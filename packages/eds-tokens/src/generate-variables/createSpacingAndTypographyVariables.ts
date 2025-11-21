@@ -1,12 +1,7 @@
 import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
-import {
-  includeTokenFilter,
-  createDensitySpaceToggleTransform,
-} from '@equinor/eds-tokens-build'
-import { readJsonFiles } from '@equinor/eds-tokens-sync'
-
+import { includeTokenFilter } from '@equinor/eds-tokens-build'
 export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 export const FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
@@ -42,20 +37,6 @@ export async function createSpacingAndTypographyVariables({
     FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
     '💎 Density.Comfortable.json',
   )
-
-  const spacingComfortableTokens = readJsonFiles([
-    path.join(
-      tokensDir,
-      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      '💎 Density.Comfortable.json',
-    ),
-  ])
-  const densitySpaceToggleTransform = createDensitySpaceToggleTransform({
-    name: 'densitySpaceToggle',
-    tokens: spacingComfortableTokens['💎 Density.Comfortable.json'],
-  })
-
-  StyleDictionary.registerTransform(densitySpaceToggleTransform)
 
   const outputDirectory = path.resolve(process.cwd(), 'build')
   const jsBuildPath = path.join(outputDirectory, 'js')
