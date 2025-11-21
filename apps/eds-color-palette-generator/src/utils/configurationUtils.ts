@@ -21,6 +21,27 @@ function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
 }
 
 /**
+ * Simplifies color definitions by converting single-anchor arrays to legacy value format
+ * @param colors - Array of color definitions
+ * @returns Simplified color definitions (single anchors become value format)
+ */
+export function simplifyColorDefinitions(
+  colors: ColorDefinition[],
+): ColorDefinition[] {
+  return colors.map((color) => {
+    // If anchors array has exactly 1 element, convert to legacy value format
+    if (color.anchors && color.anchors.length === 1) {
+      return {
+        name: color.name,
+        value: color.anchors[0].value,
+      }
+    }
+    // Otherwise keep as is
+    return color
+  })
+}
+
+/**
  * Download the current configuration as a JSON file
  */
 export const downloadConfiguration = (
@@ -39,7 +60,7 @@ export const downloadConfiguration = (
     stdDevLight,
     meanDark,
     stdDevDark,
-    colors,
+    colors: simplifyColorDefinitions(colors),
   }
 
   const configData = JSON.stringify(config, null, 2)

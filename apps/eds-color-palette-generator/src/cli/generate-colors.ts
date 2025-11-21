@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { generateColorScale } from '../utils/color'
 import { PALETTE_STEPS } from '../config/config'
 import { getLightnessValues } from '../config/helpers'
-import { ColorDefinition, ColorFormat } from '../types'
+import { ColorDefinition, ColorFormat, ColorAnchor } from '../types'
 
 interface PaletteConfigFile {
   colors: ColorDefinition[]
@@ -68,6 +68,22 @@ function formatColorTokens(
   return JSON.stringify(output, null, 2)
 }
 
+/**
+ * Helper function to get color input from a ColorDefinition
+ * @param colorDef - Color definition object
+ * @returns The color input (anchors array or value string)
+ * @throws Error if both anchors and value are missing
+ */
+function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
+  const colorInput = colorDef.anchors || colorDef.value
+  if (!colorInput) {
+    throw new Error(
+      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please add either a 'value' property with a single color or an 'anchors' array with color anchor points.`,
+    )
+  }
+  return colorInput
+}
+
 function generateColors(configPath: string, outputDir: string) {
   // Read palette config
   let config: PaletteConfigFile
@@ -96,8 +112,9 @@ function generateColors(configPath: string, outputDir: string) {
   // Generate color scales for light mode
   const lightColors: Record<string, string[]> = {}
   config.colors.forEach((colorDef) => {
+    const colorInput = getColorInput(colorDef)
     lightColors[colorDef.name] = generateColorScale(
-      colorDef.value,
+      colorInput,
       lightModeValues,
       meanLight,
       stdDevLight,
@@ -108,8 +125,9 @@ function generateColors(configPath: string, outputDir: string) {
   // Generate color scales for dark mode
   const darkColors: Record<string, string[]> = {}
   config.colors.forEach((colorDef) => {
+    const colorInput = getColorInput(colorDef)
     darkColors[colorDef.name] = generateColorScale(
-      colorDef.value,
+      colorInput,
       darkModeValues,
       meanDark,
       stdDevDark,
