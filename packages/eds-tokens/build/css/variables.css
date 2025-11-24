@@ -928,8 +928,12 @@
   --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-md);
 }
 
-[data-horizontal-gap="lg"], [data-horizontal-gap="xl"] {
+[data-horizontal-gap="lg"] {
   --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-lg);
+}
+
+[data-horizontal-gap="xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-xl);
 }
 
 [data-horizontal-gap="2xl"] {

@@ -3,5 +3,5 @@
  */
 
 [data-horizontal-gap="xl"] {
-  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-lg);
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-xl);
 }
