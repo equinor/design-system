@@ -251,4 +251,168 @@ describe('generate-colors CLI', () => {
     rmSync(oklchInputTestDir, { recursive: true, force: true })
     rmSync(oklchInputConfigPath, { force: true })
   })
+
+  it('should generate color scales using anchors (interpolation)', () => {
+    const anchorsConfig = {
+      colors: [
+        {
+          name: 'Interpolated Green',
+          anchors: [
+            { value: 'oklch(0.5915 0.0731 184.63)', step: 6 },
+            { value: 'oklch(0.4973 0.084851 204.553)', step: 9 },
+          ],
+        },
+      ],
+    }
+
+    const anchorsConfigPath = resolve(__dirname, '__test-anchors-config.json')
+    writeFileSync(
+      anchorsConfigPath,
+      JSON.stringify(anchorsConfig, null, 2),
+      'utf-8',
+    )
+
+    const anchorsTestDir = resolve(__dirname, '__test-anchors-output__')
+    mkdirSync(anchorsTestDir, { recursive: true })
+
+    // Run the CLI
+    execFileSync('node', [cliPath, anchorsConfigPath, anchorsTestDir])
+
+    const lightTokensPath = join(anchorsTestDir, 'Color Light.Mode 1.json')
+    const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
+
+    // Verify structure
+    expect(lightTokens).toHaveProperty('Light')
+    expect(lightTokens.Light).toHaveProperty('Interpolated Green')
+
+    // Check that we have 15 steps
+    const greenTokens = lightTokens.Light['Interpolated Green']
+    expect(Object.keys(greenTokens)).toHaveLength(15)
+
+    // Snapshot test
+    expect(lightTokens).toMatchSnapshot('anchors-interpolation-light')
+
+    // Clean up
+    rmSync(anchorsTestDir, { recursive: true, force: true })
+    rmSync(anchorsConfigPath, { force: true })
+  })
+
+  it('should generate color scales using anchors at steps 6 and 9', () => {
+    const anchorsConfig = {
+      colors: [
+        {
+          name: 'Mid-Step Anchors',
+          anchors: [
+            { value: 'oklch(0.5915 0.0731 184.63)', step: 6 },
+            { value: 'oklch(0.4973 0.084851 204.553)', step: 9 },
+          ],
+        },
+      ],
+    }
+
+    const anchorsConfigPath = resolve(
+      __dirname,
+      '__test-mid-anchors-config.json',
+    )
+    writeFileSync(
+      anchorsConfigPath,
+      JSON.stringify(anchorsConfig, null, 2),
+      'utf-8',
+    )
+
+    const anchorsTestDir = resolve(__dirname, '__test-mid-anchors-output__')
+    mkdirSync(anchorsTestDir, { recursive: true })
+
+    // Run the CLI
+    execFileSync('node', [cliPath, anchorsConfigPath, anchorsTestDir])
+
+    const lightTokensPath = join(anchorsTestDir, 'Color Light.Mode 1.json')
+    const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
+
+    // Verify structure
+    expect(lightTokens).toHaveProperty('Light')
+    expect(lightTokens.Light).toHaveProperty('Mid-Step Anchors')
+
+    // Check that we have 15 steps
+    const tokens = lightTokens.Light['Mid-Step Anchors']
+    expect(Object.keys(tokens)).toHaveLength(15)
+
+    // Snapshot test
+    expect(lightTokens).toMatchSnapshot('anchors-mid-steps-light')
+
+    // Clean up
+    rmSync(anchorsTestDir, { recursive: true, force: true })
+    rmSync(anchorsConfigPath, { force: true })
+  })
+
+  it('should handle mixed legacy (value) and new (anchors) color definitions', () => {
+    const mixedConfig = {
+      colors: [
+        { name: 'Legacy Color', value: '#FF0000' },
+        {
+          name: 'New Color',
+          anchors: [
+            { value: '#0000FF', step: 1 },
+            { value: '#00FFFF', step: 15 },
+          ],
+        },
+      ],
+    }
+
+    const mixedConfigPath = resolve(__dirname, '__test-mixed-config.json')
+    writeFileSync(
+      mixedConfigPath,
+      JSON.stringify(mixedConfig, null, 2),
+      'utf-8',
+    )
+
+    const mixedTestDir = resolve(__dirname, '__test-mixed-output__')
+    mkdirSync(mixedTestDir, { recursive: true })
+
+    // Run the CLI
+    execFileSync('node', [cliPath, mixedConfigPath, mixedTestDir])
+
+    const lightTokensPath = join(mixedTestDir, 'Color Light.Mode 1.json')
+    const lightTokens = JSON.parse(readFileSync(lightTokensPath, 'utf-8'))
+
+    // Verify both colors are present
+    expect(lightTokens.Light).toHaveProperty('Legacy Color')
+    expect(lightTokens.Light).toHaveProperty('New Color')
+
+    // Both should have 15 steps
+    expect(Object.keys(lightTokens.Light['Legacy Color'])).toHaveLength(15)
+    expect(Object.keys(lightTokens.Light['New Color'])).toHaveLength(15)
+
+    // Snapshot test
+    expect(lightTokens).toMatchSnapshot('mixed-legacy-new-format')
+
+    // Clean up
+    rmSync(mixedTestDir, { recursive: true, force: true })
+    rmSync(mixedConfigPath, { force: true })
+  })
+
+  it('should throw error when color definition has neither value nor anchors', () => {
+    const invalidConfig = {
+      colors: [{ name: 'Invalid Color' }],
+    }
+
+    const invalidConfigPath = resolve(__dirname, '__test-invalid-config.json')
+    writeFileSync(
+      invalidConfigPath,
+      JSON.stringify(invalidConfig, null, 2),
+      'utf-8',
+    )
+
+    const invalidTestDir = resolve(__dirname, '__test-invalid-output__')
+    mkdirSync(invalidTestDir, { recursive: true })
+
+    // Run the CLI and expect it to fail
+    expect(() => {
+      execFileSync('node', [cliPath, invalidConfigPath, invalidTestDir])
+    }).toThrow()
+
+    // Clean up
+    rmSync(invalidTestDir, { recursive: true, force: true })
+    rmSync(invalidConfigPath, { force: true })
+  })
 })

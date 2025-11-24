@@ -1,8 +1,45 @@
-import { ColorDefinition, ColorFormat } from '@/types'
+import { ColorDefinition, ColorFormat, ColorAnchor } from '@/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
 import { PALETTE_STEPS } from '@/config/config'
 import { getLightnessValues } from '@/config/helpers'
+
+/**
+ * Helper function to get color input from a ColorDefinition
+ * @param colorDef - Color definition object
+ * @returns The color input (anchors array or value string)
+ * @throws Error if both anchors and value are missing
+ */
+function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
+  const colorInput = colorDef.anchors || colorDef.value
+  if (!colorInput) {
+    throw new Error(
+      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please add either a 'value' property with a single color or an 'anchors' array with color anchor points.`,
+    )
+  }
+  return colorInput
+}
+
+/**
+ * Simplifies color definitions by converting single-anchor arrays to legacy value format
+ * @param colors - Array of color definitions
+ * @returns Simplified color definitions (single anchors become value format)
+ */
+export function simplifyColorDefinitions(
+  colors: ColorDefinition[],
+): ColorDefinition[] {
+  return colors.map((color) => {
+    // If anchors array has exactly 1 element, convert to legacy value format
+    if (color.anchors && color.anchors.length === 1) {
+      return {
+        name: color.name,
+        value: color.anchors[0].value,
+      }
+    }
+    // Otherwise keep as is
+    return color
+  })
+}
 
 /**
  * Download the current configuration as a JSON file
@@ -23,7 +60,7 @@ export const downloadConfiguration = (
     stdDevLight,
     meanDark,
     stdDevDark,
-    colors,
+    colors: simplifyColorDefinitions(colors),
   }
 
   const configData = JSON.stringify(config, null, 2)
@@ -62,8 +99,10 @@ export const downloadColorTokens = (
 
   // Add colors to objects
   colors.forEach((colorDef) => {
+    const colorInput = getColorInput(colorDef)
+
     lightColors[colorDef.name] = generateColorScale(
-      colorDef.value,
+      colorInput,
       customLightModeValues,
       meanLight,
       stdDevLight,
@@ -71,7 +110,7 @@ export const downloadColorTokens = (
     )
 
     darkColors[colorDef.name] = generateColorScale(
-      colorDef.value,
+      colorInput,
       customDarkModeValues,
       meanDark,
       stdDevDark,
@@ -134,8 +173,10 @@ export const generateDesignSystemCSS = (
     ':root {\n  /* Design system colors using light-dark() function */\n'
 
   colors.forEach((colorDef) => {
+    const colorInput = getColorInput(colorDef)
+
     const lightColorScale = generateColorScale(
-      colorDef.value,
+      colorInput,
       lightModeValues,
       meanLight,
       stdDevLight,
@@ -143,7 +184,7 @@ export const generateDesignSystemCSS = (
     )
 
     const darkColorScale = generateColorScale(
-      colorDef.value,
+      colorInput,
       darkModeValues,
       meanDark,
       stdDevDark,

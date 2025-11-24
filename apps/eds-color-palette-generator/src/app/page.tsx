@@ -26,6 +26,7 @@ import {
 import { computeContrastSummary } from '@/utils/contrastSummary'
 import { QuickActionsPopover } from '@/components/QuickActionsPopover'
 import { RotateCcw } from 'lucide-react'
+import { FALLBACK_GRAY_COLOR } from '@/utils/constants'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -139,6 +140,23 @@ export default function App() {
     )
   }
 
+  const updateColorAnchors = (
+    index: number,
+    newAnchors: ColorDefinition['anchors'],
+  ) => {
+    // Update the anchors for a color
+    setColors((prev) =>
+      prev.map((color, i) => {
+        if (i === index) {
+          // Intentionally remove the legacy 'value' field when migrating to anchors
+          // to prevent ambiguity between single-color and multi-anchor formats
+          return { name: color.name, anchors: newAnchors }
+        }
+        return color
+      }),
+    )
+  }
+
   const removeColor = (index: number) => {
     // Functional update for consistency and to avoid state races
     setColors((prev) => prev.filter((_, i) => i !== index))
@@ -191,33 +209,57 @@ export default function App() {
   }
 
   // Efficiently memoize computed scales by value-only dependencies
-  const valueKey = useMemo(() => colors.map((c) => c.value).join('|'), [colors])
+  // Support both legacy single value and new anchor format
+  const valueKey = useMemo(
+    () =>
+      colors
+        .map((c) => {
+          if (c.anchors) {
+            return c.anchors.map((a) => `${a.step}:${a.value}`).join(',')
+          }
+          return c.value || ''
+        })
+        .join('|'),
+    [colors],
+  )
   const lightScalesMemo = useMemo(
     () =>
-      colors.map((c) =>
-        generateColorScale(
-          c.value,
+      colors.map((c) => {
+        // Use anchors if available, otherwise use single value
+        const colorInput = c.anchors || c.value
+        if (!colorInput) {
+          // Fallback for missing data
+          return Array(lightModeValues.length).fill(FALLBACK_GRAY_COLOR)
+        }
+        return generateColorScale(
+          colorInput,
           lightModeValues,
           meanLight,
           stdDevLight,
           colorFormat,
-        ),
-      ),
+        )
+      }),
     // Only recompute when color values or generation inputs change (not when names change)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [valueKey, lightModeValues, meanLight, stdDevLight, colorFormat],
   )
   const darkScalesMemo = useMemo(
     () =>
-      colors.map((c) =>
-        generateColorScale(
-          c.value,
+      colors.map((c) => {
+        // Use anchors if available, otherwise use single value
+        const colorInput = c.anchors || c.value
+        if (!colorInput) {
+          // Fallback for missing data
+          return Array(darkModeValues.length).fill(FALLBACK_GRAY_COLOR)
+        }
+        return generateColorScale(
+          colorInput,
           darkModeValues,
           meanDark,
           stdDevDark,
           colorFormat,
-        ),
-      ),
+        )
+      }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [valueKey, darkModeValues, meanDark, stdDevDark, colorFormat],
   )
@@ -355,10 +397,14 @@ export default function App() {
                     contrastMethod={contrastMethod}
                     colorName={colorData.name}
                     baseColor={colors[index]?.value}
+                    anchors={colors[index]?.anchors}
                     testId={`color-scale-${index}`}
                     onRename={(name) => updateColorName(index, name)}
                     onChangeValue={(value: string) =>
                       updateColorValue(index, value)
+                    }
+                    onChangeAnchors={(anchors) =>
+                      updateColorAnchors(index, anchors)
                     }
                     onRemove={() => removeColor(index)}
                   />

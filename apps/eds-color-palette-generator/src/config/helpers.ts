@@ -14,4 +14,3 @@ export const getStepIndex =
   (id: string) =>
   (steps: readonly StepDefinition[]): number =>
     steps.findIndex((step) => step.id === id)
-

@@ -1,8 +1,15 @@
 export type ColorValue = string
 
+export type ColorAnchor = {
+  value: string // color value (any format)
+  step: number // which step (1-15) this anchors to
+}
+
 export type ColorDefinition = {
   name: string
-  value: string
+  // Support both legacy single value and new anchor array
+  value?: string // legacy single color
+  anchors?: ColorAnchor[] // new multi-color with steps
 }
 
 export type ConfigFile = {

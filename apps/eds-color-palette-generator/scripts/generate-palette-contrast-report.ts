@@ -16,6 +16,7 @@ import {
   darknessValuesInDarkMode,
 } from '../src/config/config'
 import { generateColorScale, contrast } from '../src/utils/color'
+import { ColorDefinition, ColorAnchor } from '../src/types'
 import Color from 'colorjs.io'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -56,19 +57,33 @@ function getRequirements(): RequirementRow[] {
   return rows
 }
 
+/**
+ * Helper function to get color input from a ColorDefinition
+ */
+function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
+  const colorInput = colorDef.anchors || colorDef.value
+  if (!colorInput) {
+    throw new Error(
+      `Color "${colorDef.name}" is missing both 'anchors' and 'value'.`,
+    )
+  }
+  return colorInput
+}
+
 function buildScales() {
   const lightSteps = lightnessValuesInLightMode
   const darkSteps = darknessValuesInDarkMode
   return config.colors.map((c) => {
+    const colorInput = getColorInput(c)
     const lightScale = generateColorScale(
-      c.value,
+      colorInput,
       lightSteps,
       config.meanLight,
       config.stdDevLight,
       'OKLCH',
     )
     const darkScale = generateColorScale(
-      c.value,
+      colorInput,
       darkSteps,
       config.meanDark,
       config.stdDevDark,

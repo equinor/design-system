@@ -6,11 +6,12 @@ An accessible color palette generator for the Equinor Design System. This tool c
 
 * **Gaussian-based chroma distribution**: Colors maintain visual harmony using mathematical bell curves
 * **OKLCH color space**: Perceptually uniform color generation
+* **Multiple color anchors**: Support for interpolation between colors at specific steps for gradient-like scales
 * **Accessibility-focused**: Built-in contrast checking with APCA and WCAG methods
 * **Light and dark mode support**: Separate configurations for optimal contrast in each mode
 * **Interactive configuration**: Adjust lightness values and Gaussian parameters in real-time
 * **Export/Import**: Save and share color palette configurations
-* **CLI tool**: Generate color tokens from configuration files
+* **CLI tool**: Generate color tokens from configuration files (supports both single value and multiple anchors)
 * **About page**: Comprehensive documentation with interactive demos explaining how the generator works
 
 ## Getting Started
@@ -53,7 +54,12 @@ The generator uses a three-step process:
 2. **Apply Gaussian distribution**: Chroma (color intensity) varies using a bell curve, creating natural color progression
 3. **Generate color scale**: Colors are created in OKLCH space, maintaining hue while varying lightness and chroma
 
-For detailed explanations and interactive demonstrations, see the [About page](http://localhost:3000/about) or read [ABOUT_PAGE.md](./ABOUT_PAGE.md).
+### Single Value vs. Multiple Anchors
+
+* **Single value**: Provide one base color, and the generator applies Gaussian distribution across all steps
+* **Multiple anchors**: Define colors at specific steps (e.g., step 6 and step 9), and the generator interpolates smoothly between them in OKLCH space while still applying Gaussian chroma distribution
+
+For detailed explanations and interactive demonstrations showing the difference, see the [About page](http://localhost:3000/about) or read [ABOUT_PAGE.md](./ABOUT_PAGE.md).
 
 ## Key Concepts
 

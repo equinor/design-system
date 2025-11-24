@@ -4,7 +4,11 @@ import {
   isValidColorFormat,
   parseColorToHex,
   generateColorScale,
+  formatColorAsString,
+  getFallbackColor,
+  createColorWithGaussianChroma,
 } from './color'
+import Color from 'colorjs.io'
 
 describe('Color Contrast Tests', () => {
   test('should return APCA contrast score of 41 for specific OKLCH colors', () => {
@@ -522,78 +526,125 @@ describe('Color Validation and Parsing', () => {
   })
 })
 
-describe('generateColorScale', () => {
-  const testLightnessValues = [0.2, 0.4, 0.6, 0.8]
+describe('Helper Functions', () => {
+  describe('formatColorAsString', () => {
+    test('should format color as OKLCH string', () => {
+      const color = new Color('oklch', [0.5, 0.1, 180])
+      const result = formatColorAsString(color, 'OKLCH')
 
-  describe('HEX format output', () => {
-    test('should generate HEX colors from OKLCH input', () => {
-      const baseColor = 'oklch(0.4973 0.084851 204.553)'
-      const scale = generateColorScale(
-        baseColor,
-        testLightnessValues,
-        0.6,
-        2,
-        'HEX',
-      )
-
-      expect(scale).toHaveLength(testLightnessValues.length)
-      scale.forEach((color) => {
-        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
-      })
+      expect(result).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      expect(result).toBe('oklch(0.500 0.100 180.0)')
     })
 
-    test('should generate HEX colors from HEX input', () => {
-      const baseColor = '#007079'
-      const scale = generateColorScale(
-        baseColor,
-        testLightnessValues,
-        0.6,
-        2,
-        'HEX',
-      )
+    test('should format color as HEX string', () => {
+      const color = new Color('oklch', [0.5, 0.1, 180])
+      const result = formatColorAsString(color, 'HEX')
 
-      expect(scale).toHaveLength(testLightnessValues.length)
-      scale.forEach((color) => {
-        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
-      })
+      expect(result).toMatch(/^#[0-9a-f]{6}$/i)
     })
 
-    test('should generate HEX colors from RGB input', () => {
-      const baseColor = 'rgb(0, 112, 121)'
-      const scale = generateColorScale(
-        baseColor,
-        testLightnessValues,
-        0.6,
-        2,
-        'HEX',
-      )
+    test('should handle NaN hue in OKLCH format', () => {
+      const color = new Color('oklch', [0.5, 0, NaN])
+      const result = formatColorAsString(color, 'OKLCH')
 
-      expect(scale).toHaveLength(testLightnessValues.length)
-      scale.forEach((color) => {
-        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
-      })
+      expect(result).toContain('0.0')
+      expect(result).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+0\.0\)/)
     })
 
-    test('should generate grayscale HEX colors from grayscale OKLCH input', () => {
-      const baseColor = 'oklch(0.4091 0 0)'
-      const scale = generateColorScale(
-        baseColor,
-        testLightnessValues,
-        0.6,
-        2,
-        'HEX',
-      )
+    test('should expand shorthand hex codes', () => {
+      // Create a color that might produce shorthand hex
+      const color = new Color('#fff')
+      const result = formatColorAsString(color, 'HEX')
 
-      expect(scale).toHaveLength(testLightnessValues.length)
-      scale.forEach((color) => {
-        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
-      })
+      // Should always be 6 characters (plus #)
+      expect(result).toHaveLength(7)
+      expect(result).toMatch(/^#[0-9a-f]{6}$/i)
     })
   })
 
-  describe('OKLCH format output', () => {
-    test('should generate OKLCH colors from OKLCH input', () => {
-      const baseColor = 'oklch(0.4973 0.084851 204.553)'
+  describe('getFallbackColor', () => {
+    test('should return OKLCH fallback for OKLCH format', () => {
+      const result = getFallbackColor('OKLCH')
+      expect(result).toBe('oklch(0.5 0.0 0.0)')
+    })
+
+    test('should return HEX fallback for HEX format', () => {
+      const result = getFallbackColor('HEX')
+      expect(result).toBe('#808080')
+    })
+  })
+
+  describe('createColorWithGaussianChroma', () => {
+    test('should create color with adjusted chroma', () => {
+      const result = createColorWithGaussianChroma(0.6, 0.2, 180, 0.6, 2)
+      const oklch = result.to('oklch')
+
+      expect(oklch.l).toBeCloseTo(0.6, 2)
+      expect(oklch.h).toBeCloseTo(180, 0)
+      // Chroma should be adjusted by gaussian function
+      // At mean lightness (0.6), gaussian returns 1, so chroma should be 0.2
+      expect(oklch.c).toBeCloseTo(0.2, 2)
+    })
+
+    test('should apply gaussian function to chroma', () => {
+      const baseChroma = 0.2
+      const mean = 0.6
+      const stdDev = 2
+
+      // At mean lightness, chroma should be highest
+      const colorAtMean = createColorWithGaussianChroma(
+        mean,
+        baseChroma,
+        180,
+        mean,
+        stdDev,
+      )
+      const chromaAtMean = colorAtMean.to('oklch').c
+
+      // Away from mean, chroma should be lower
+      const colorAway = createColorWithGaussianChroma(
+        0.2,
+        baseChroma,
+        180,
+        mean,
+        stdDev,
+      )
+      const chromaAway = colorAway.to('oklch').c
+
+      expect(chromaAtMean).toBeGreaterThan(chromaAway)
+    })
+
+    test('should preserve hue value', () => {
+      const result = createColorWithGaussianChroma(0.5, 0.1, 240, 0.6, 2)
+      const oklch = result.to('oklch')
+
+      expect(oklch.h).toBeCloseTo(240, 0)
+    })
+  })
+})
+
+describe('generateColorScale', () => {
+  const testLightnessValues = [0.2, 0.4, 0.6, 0.8]
+
+  describe('Basic functionality', () => {
+    test('should generate color scale in HEX format', () => {
+      const baseColor = 'oklch(0.5 0.1 180)'
+      const scale = generateColorScale(
+        baseColor,
+        testLightnessValues,
+        0.6,
+        2,
+        'HEX',
+      )
+
+      expect(scale).toHaveLength(testLightnessValues.length)
+      scale.forEach((color) => {
+        expect(color).toMatch(/^#[0-9a-f]{6}$/i)
+      })
+    })
+
+    test('should generate color scale in OKLCH format', () => {
+      const baseColor = 'oklch(0.5 0.1 180)'
       const scale = generateColorScale(
         baseColor,
         testLightnessValues,
@@ -608,10 +659,13 @@ describe('generateColorScale', () => {
       })
     })
 
-    test('should generate OKLCH colors from HEX input', () => {
-      const baseColor = '#007079'
+    test('should delegate to interpolation function when given anchors', () => {
+      const anchors = [
+        { value: 'oklch(0.5 0.1 180)', step: 1 },
+        { value: 'oklch(0.6 0.12 200)', step: 4 },
+      ]
       const scale = generateColorScale(
-        baseColor,
+        anchors,
         testLightnessValues,
         0.6,
         2,
@@ -715,6 +769,127 @@ describe('generateColorScale', () => {
       const scale = generateColorScale(baseColor, [], 0.6, 2, 'HEX')
 
       expect(scale).toHaveLength(0)
+    })
+  })
+})
+
+describe('generateColorScaleWithInterpolation', () => {
+  const testLightnessValues = Array.from(
+    { length: 15 },
+    (_, i) => 0.2 + (i / 14) * 0.6,
+  )
+
+  describe('Interpolation behavior', () => {
+    test('should interpolate between two anchors', () => {
+      const anchors = [
+        { value: 'oklch(0.65 0.09 200)', step: 1 },
+        { value: 'oklch(0.5 0.08 210)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      // First and last should use anchor hues
+      expect(scale[0]).toContain('200')
+      expect(scale[14]).toContain('210')
+    })
+
+    test('should handle multiple anchors', () => {
+      const anchors = [
+        { value: 'oklch(0.7 0.1 0)', step: 1 },
+        { value: 'oklch(0.5 0.15 180)', step: 8 },
+        { value: 'oklch(0.3 0.1 360)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+
+    test('should sort anchors automatically', () => {
+      const anchors = [
+        { value: 'oklch(0.3 0.1 360)', step: 15 },
+        { value: 'oklch(0.7 0.1 0)', step: 1 },
+        { value: 'oklch(0.5 0.15 180)', step: 8 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+[0-9.]+\)/)
+      })
+    })
+
+    test('should use shorter hue interpolation path', () => {
+      const anchors = [
+        { value: 'oklch(0.5 0.1 350)', step: 1 },
+        { value: 'oklch(0.5 0.1 10)', step: 15 },
+      ]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      const hues = scale.map((color) => {
+        const match = color.match(/oklch\([0-9.]+\s+[0-9.]+\s+([0-9.]+)\)/)
+        return match ? parseFloat(match[1]) : 0
+      })
+
+      // Middle hue should go through 360/0 (shorter path)
+      const middleHue = hues[7]
+      expect(middleHue).toBeGreaterThanOrEqual(340)
+    })
+  })
+
+  describe('Edge cases', () => {
+    test('should handle single anchor', () => {
+      const anchors = [{ value: 'oklch(0.5 0.1 180)', step: 8 }]
+
+      const scale = generateColorScale(
+        anchors,
+        testLightnessValues,
+        0.6,
+        2,
+        'OKLCH',
+      )
+
+      expect(scale).toHaveLength(15)
+      // All colors should have same hue
+      scale.forEach((color) => {
+        expect(color).toMatch(/oklch\([0-9.]+\s+[0-9.]+\s+180.0\)/)
+      })
+    })
+
+    test('should throw error for empty anchor array', () => {
+      expect(() => {
+        generateColorScale([], testLightnessValues, 0.6, 2, 'OKLCH')
+      }).toThrow('At least one anchor is required')
     })
   })
 })

@@ -28,6 +28,8 @@ generate-colors examples/palette-config.json output/
 
 The configuration file should be a JSON file with the following structure:
 
+#### Single Value Format (Traditional)
+
 ```json
 {
   "colors": [
@@ -45,10 +47,40 @@ The configuration file should be a JSON file with the following structure:
 }
 ```
 
-**Required fields:**
+#### Multiple Anchors Format (Interpolation)
+
+```json
+{
+  "colors": [
+    {
+      "name": "Gradient Teal",
+      "anchors": [
+        { "value": "oklch(0.5915 0.0731 184.63)", "step": 6 },
+        { "value": "oklch(0.4973 0.084851 204.553)", "step": 9 }
+      ]
+    },
+    { "name": "Simple Gray", "value": "#4A4A4A" }
+  ],
+  "colorFormat": "HEX",
+  "meanLight": 0.6,
+  "stdDevLight": 2,
+  "meanDark": 0.7,
+  "stdDevDark": 2
+}
+```
+
+**Color definition formats:**
 - `colors`: An array of color definitions, each with:
-  - `name`: The name of the color
-  - `value`: The hex color value
+  - **Single value approach:**
+    - `name`: The name of the color
+    - `value`: The color value (HEX or OKLCH format)
+  - **Multiple anchors approach:**
+    - `name`: The name of the color
+    - `anchors`: An array of anchor points, each with:
+      - `value`: The color value at this step (HEX or OKLCH format)
+      - `step`: The step number (1-15) where this color should be anchored
+
+The generator will smoothly interpolate between anchors in OKLCH space while applying Gaussian chroma distribution. Both formats can be mixed in the same configuration file.
 
 **Optional fields:**
 - `colorFormat`: Output color format - either `"HEX"` or `"OKLCH"` (default: `"HEX"`)
