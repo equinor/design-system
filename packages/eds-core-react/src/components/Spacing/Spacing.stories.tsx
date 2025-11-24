@@ -1,6 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import './Spacing.stories.css'
 
+const SELECTABLE_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+const PROPORTIONS = ['squished', 'squared', 'stretched'] as const
+const DENSITIES = ['spacious', 'comfortable'] as const
+const GENERIC_SIZES = [
+  'none',
+  '4xs',
+  '3xs',
+  '2xs',
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+] as const
+
 const meta: Meta = {
   title: 'Foundation/Spacing',
   parameters: {
@@ -26,9 +43,7 @@ Padding for interactive elements like buttons. Uses \`--eds-selectable-space-hor
 \`\`\`
 
 \`\`\`html
-<div data-selectable-space="md" data-space-proportions="squished">
-  <button class="my-button">Button</button>
-</div>
+  <button class="my-button" data-selectable-space="md" data-space-proportions="squished">Button</button>
 \`\`\`
 
 ### Container Space
@@ -115,10 +130,6 @@ export default meta
 
 export const SelectableSpace: StoryObj = {
   render: () => {
-    const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
-    const proportions = ['squished', 'squared', 'stretched'] as const
-    const densities = ['spacious', 'comfortable'] as const
-
     return (
       <div>
         <h2>Selectable Space</h2>
@@ -127,15 +138,15 @@ export const SelectableSpace: StoryObj = {
           interactive elements like buttons and inputs.
         </p>
 
-        {densities.map((density) => (
+        {DENSITIES.map((density) => (
           <div key={density} className="spacing-demo-section">
             <h3>Density: {density}</h3>
             <div data-density={density}>
-              {sizes.map((size) => (
+              {SELECTABLE_SIZES.map((size) => (
                 <div key={size} className="spacing-demo-container">
                   <h4>Size: {size.toUpperCase()}</h4>
                   <div className="spacing-demo-row">
-                    {proportions.map((proportion) => (
+                    {PROPORTIONS.map((proportion) => (
                       <div key={proportion} className="spacing-demo-item">
                         <div className="spacing-demo-label">{proportion}</div>
                         <div
@@ -161,8 +172,6 @@ export const SelectableSpace: StoryObj = {
 
 export const ContainerSpace: StoryObj = {
   render: () => {
-    const proportions = ['squished', 'squared', 'stretched'] as const
-
     return (
       <div>
         <h2>Container Space</h2>
@@ -173,7 +182,7 @@ export const ContainerSpace: StoryObj = {
 
         <div className="spacing-demo-section">
           <div className="spacing-demo-row">
-            {proportions.map((proportion) => (
+            {PROPORTIONS.map((proportion) => (
               <div data-space-proportions={proportion} key={proportion}>
                 <div className="spacing-demo-item">
                   <div className="spacing-demo-label">{proportion}</div>
@@ -214,8 +223,6 @@ export const ContainerSpace: StoryObj = {
 
 export const PageSpace: StoryObj = {
   render: () => {
-    const proportions = ['squished', 'squared', 'stretched'] as const
-
     return (
       <div>
         <h2>Page Space</h2>
@@ -226,7 +233,7 @@ export const PageSpace: StoryObj = {
 
         <div className="spacing-demo-section">
           <div className="spacing-demo-row">
-            {proportions.map((proportion) => (
+            {PROPORTIONS.map((proportion) => (
               <div
                 key={proportion}
                 className="spacing-demo-item"
@@ -363,20 +370,6 @@ export const SelectableContainerPageGap: StoryObj = {
 
 export const GenericGap: StoryObj = {
   render: () => {
-    const sizes = [
-      'none',
-      '4xs',
-      '3xs',
-      '2xs',
-      'xs',
-      'sm',
-      'md',
-      'lg',
-      'xl',
-      '2xl',
-      '3xl',
-    ] as const
-
     return (
       <div>
         <h2>Generic Gap</h2>
@@ -388,7 +381,7 @@ export const GenericGap: StoryObj = {
         <div className="spacing-demo-section">
           <h3>Horizontal Gap</h3>
           <div className="spacing-demo-container">
-            {sizes.map((size) => (
+            {GENERIC_SIZES.map((size) => (
               <div key={size} className="spacing-demo-item">
                 <div className="spacing-demo-label">
                   data-horizontal-gap=&quot;{size}&quot;
@@ -409,7 +402,7 @@ export const GenericGap: StoryObj = {
         <div className="spacing-demo-section">
           <h3>Vertical Gap</h3>
           <div className="spacing-demo-row">
-            {['none', 'xs', 'md', 'xl', '3xl'].map((size) => (
+            {GENERIC_SIZES.map((size) => (
               <div key={size} className="spacing-demo-item">
                 <div className="spacing-demo-label">
                   data-vertical-gap=&quot;{size}&quot;
@@ -456,8 +449,6 @@ export const GenericGap: StoryObj = {
 
 export const GenericSpace: StoryObj = {
   render: () => {
-    const sizes = ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const
-
     return (
       <div>
         <h2>Generic Space</h2>
@@ -469,7 +460,7 @@ export const GenericSpace: StoryObj = {
         <div className="spacing-demo-section">
           <h3>Horizontal Space</h3>
           <div className="spacing-demo-container">
-            {sizes.map((size) => (
+            {GENERIC_SIZES.map((size) => (
               <div key={size} className="spacing-demo-item">
                 <div className="spacing-demo-label">
                   data-horizontal-space=&quot;{size}&quot;
@@ -487,7 +478,7 @@ export const GenericSpace: StoryObj = {
         <div className="spacing-demo-section">
           <h3>Vertical Space</h3>
           <div className="spacing-demo-row">
-            {['none', 'xs', 'md', 'xl'].map((size) => (
+            {GENERIC_SIZES.map((size) => (
               <div key={size} className="spacing-demo-item">
                 <div className="spacing-demo-label">
                   data-vertical-space=&quot;{size}&quot;
