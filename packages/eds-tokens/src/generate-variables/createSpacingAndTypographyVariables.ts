@@ -457,13 +457,6 @@ export async function createSpacingAndTypographyVariables({
   )
 
   // Generate container space variables
-  const spaceProportionSelectors = proportionConfigs.map(
-    (proportion) => `[data-space-proportions="${proportion.toLowerCase()}"]`,
-  )
-
-  const containerAndPageSelector = [':root', ...spaceProportionSelectors].join(
-    ', ',
-  )
 
   const commonInclude = [
     PRIMITIVES_SOURCE,
@@ -472,13 +465,17 @@ export async function createSpacingAndTypographyVariables({
     SPACING_PROPORTIONS_SQUARED_SOURCE,
   ]
 
+  // We include [data-space-proportions] in the selector to ensure semantic variables
+  // are reset when a new proportion context is created. This overrides any specific
+  // values inherited from parent elements, forcing the container/page space to
+  // re-bind to the new proportion logic.
   await buildCssDictionary({
     include: commonInclude,
     source: [CONTAINER_SPACE_SOURCE],
     buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
     transforms: cssTransforms,
     destination: 'container-space.css',
-    selector: containerAndPageSelector,
+    selector: ':root, [data-space-proportions]',
     filter: (token: TransformedToken) =>
       !!(token.path && token.path[0] === 'container-space'),
   })
@@ -489,7 +486,7 @@ export async function createSpacingAndTypographyVariables({
     buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
     transforms: cssTransforms,
     destination: 'page-space.css',
-    selector: containerAndPageSelector,
+    selector: ':root, [data-space-proportions]',
     filter: (token: TransformedToken) =>
       !!(token.path && token.path[0] === 'page-space'),
   })

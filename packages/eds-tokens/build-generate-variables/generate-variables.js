@@ -1,14 +1,14 @@
 import { StyleDictionary as P } from "style-dictionary-utils";
-import { includeTokenFilter as _, pxFormatted as go, pxTransform as ho, pxToRem as Eo, fontQuote as _o, PX_TO_REM_NAME as Po, PX_FORMATTED_NAME as Lo, FONT_QUOTE_NAME as Ao } from "@equinor/eds-tokens-build";
+import { includeTokenFilter as _, pxFormatted as mo, pxTransform as go, pxToRem as ho, fontQuote as Eo, PX_TO_REM_NAME as _o, PX_FORMATTED_NAME as Po, FONT_QUOTE_NAME as Lo } from "@equinor/eds-tokens-build";
 import o from "path";
-const T = "cpNchKjiIM19dPqTxE0fqg", j = "FQQqyumcpPQoiFRCjdS9GM", q = "eds", m = "spacing/", C = "typography/";
+const T = "cpNchKjiIM19dPqTxE0fqg", j = "FQQqyumcpPQoiFRCjdS9GM", v = "eds", m = "spacing/", F = "typography/";
 async function d({
   source: s,
   include: i = [],
   buildPath: r,
   destination: c,
   selector: g = ":root",
-  prefix: l = q,
+  prefix: l = v,
   transforms: h,
   filter: u,
   outputReferences: S = !0
@@ -37,14 +37,14 @@ async function d({
     }
   }).buildAllPlatforms();
 }
-async function z({
+async function H({
   source: s,
   include: i = [],
   jsBuildPath: r,
   jsonBuildPath: c,
   cssBuildPath: g,
   transforms: l,
-  prefix: h = q,
+  prefix: h = v,
   filter: u,
   name: S,
   selector: L
@@ -105,7 +105,7 @@ async function z({
     }
   }).buildAllPlatforms();
 }
-async function Co({
+async function Ao({
   tokensDir: s,
   cssBuildPath: i,
   cssTransforms: r
@@ -126,8 +126,8 @@ async function Co({
     s,
     j,
     "💎 Density.Comfortable.json"
-  ), u = o.resolve(process.cwd(), "build"), S = o.join(u, "js"), L = o.join(u, "json"), $ = (t) => _(t, ["Density", "Spacious"]), V = (t) => _(t, ["Density", "Comfortable"]);
-  await z({
+  ), u = o.resolve(process.cwd(), "build"), S = o.join(u, "js"), L = o.join(u, "json"), $ = (t) => _(t, ["Density", "Spacious"]), z = (t) => _(t, ["Density", "Comfortable"]);
+  await H({
     source: [l],
     include: [c, g],
     jsBuildPath: S,
@@ -137,14 +137,14 @@ async function Co({
     filter: $,
     name: "spacious",
     selector: ':root, [data-density="spacious"]'
-  }), await z({
+  }), await H({
     source: [h],
     include: [c, g],
     jsBuildPath: S,
     jsonBuildPath: L,
     cssBuildPath: i,
     transforms: r,
-    filter: V,
+    filter: z,
     name: "comfortable",
     selector: '[data-density="comfortable"]'
   });
@@ -156,7 +156,7 @@ async function Co({
     s,
     j,
     "🪐 Space proportions.Squared.json"
-  ), Y = o.join(
+  ), q = o.join(
     s,
     j,
     "🗣️ Semantic.Mode 1.json"
@@ -168,7 +168,7 @@ async function Co({
     s,
     j,
     "🪐 Page space.Default.json"
-  ), n = o.join(s, j), x = [
+  ), n = o.join(s, j), V = [
     o.join(n, "🪐 Container space.Default.json"),
     o.join(n, "🪐 Page space.Default.json"),
     o.join(n, "🪐 Selectable space.XS.json"),
@@ -179,34 +179,34 @@ async function Co({
     o.join(n, "🪐 Space proportions.Squared.json"),
     o.join(n, "🪐 Space proportions.Squished.json"),
     o.join(n, "🪐 Space proportions.Stretched.json")
-  ], F = o.join(n, "🅰️ Font size.XS.json"), I = o.join(
+  ], C = o.join(n, "🅰️ Font size.XS.json"), I = o.join(
     n,
     "🅰️ Font family.UI Body.json"
   ), N = [
     o.join(n, "🅰️ Font family.Header.json"),
     o.join(n, "🅰️ Font family.UI and Body.json"),
     o.join(n, "🅰️ Font family.UI Body.json")
-  ], K = o.join(n, "🅰️ Font weight.Normal.json"), Q = o.join(
+  ], Y = o.join(n, "🅰️ Font weight.Normal.json"), x = o.join(
     n,
     "🅰️ Font baseline.Centred.json"
-  ), Z = o.join(n, "🅰️ Tracking.Normal.json"), W = o.join(
+  ), K = o.join(n, "🅰️ Tracking.Normal.json"), Q = o.join(
     n,
     "🅰️ Line height.Default.json"
-  ), B = o.join(n, "〰️ Stroke.Thin.json"), J = o.join(
+  ), Z = o.join(n, "〰️ Stroke.Thin.json"), W = o.join(
     n,
     "⭕️ Border radius.Rounded.json"
-  ), k = o.join(n, "🖼️ Icon size.XS.json"), oo = o.join(n, "📐 Size.XS.json"), R = o.join(
+  ), B = o.join(n, "🖼️ Icon size.XS.json"), J = o.join(n, "📐 Size.XS.json"), R = o.join(
     n,
     "🪐 Horizontal gap.XS.json"
-  ), w = o.join(n, "🪐 Vertical gap.XS.json"), to = o.join(
+  ), G = o.join(n, "🪐 Vertical gap.XS.json"), k = o.join(
     n,
     "🪐 Horizontal space.XS.json"
-  ), no = o.join(
+  ), oo = o.join(
     n,
     "🪐 Vertical space.XS.json"
-  ), G = ["Squished", "Squared", "Stretched"];
+  ), to = ["Squished", "Squared", "Stretched"];
   await Promise.all(
-    G.map((t) => {
+    to.map((t) => {
       const e = t.toLowerCase(), a = o.join(
         s,
         j,
@@ -218,7 +218,7 @@ async function Co({
           f,
           l,
           R,
-          w
+          G
         ],
         source: [a, D, y],
         buildPath: o.join(i, m),
@@ -229,9 +229,9 @@ async function Co({
       });
     })
   );
-  const eo = ["XS", "SM", "MD", "LG", "XL"];
+  const no = ["XS", "SM", "MD", "LG", "XL"];
   await Promise.all(
-    eo.map((t) => {
+    no.map((t) => {
       const e = t.toLowerCase(), a = o.join(
         s,
         j,
@@ -253,7 +253,7 @@ async function Co({
       });
     })
   );
-  const ao = [
+  const eo = [
     "None",
     "4XS",
     "3XS",
@@ -265,7 +265,7 @@ async function Co({
     "XL",
     "2XL",
     "3XL"
-  ], U = async (t, e) => {
+  ], w = async (t, e) => {
     const a = e.toLowerCase(), E = o.join(
       s,
       j,
@@ -274,60 +274,56 @@ async function Co({
       s,
       j,
       `🪐 Vertical ${t}.${e}.json`
-    ), H = e === "XS" ? `:root, [data-horizontal-${t}="xs"]` : `[data-horizontal-${t}="${a}"]`, mo = e === "XS" ? `:root, [data-vertical-${t}="xs"]` : `[data-vertical-${t}="${a}"]`, v = [
+    ), X = e === "XS" ? `:root, [data-horizontal-${t}="xs"]` : `[data-horizontal-${t}="${a}"]`, fo = e === "XS" ? `:root, [data-vertical-${t}="xs"]` : `[data-vertical-${t}="${a}"]`, M = [
       c,
       f,
       l
     ];
     await d({
-      include: v,
+      include: M,
       source: [E],
       buildPath: o.join(i, m),
       transforms: r,
       destination: `generic-${t}-horizontal-${a}.css`,
-      selector: H,
+      selector: X,
       filter: (A) => !!(A.path && A.path[0] === `generic-${t}-horizontal`)
     }), await d({
-      include: v,
+      include: M,
       source: [p],
       buildPath: o.join(i, m),
       transforms: r,
       destination: `generic-${t}-vertical-${a}.css`,
-      selector: mo,
+      selector: fo,
       filter: (A) => !!(A.path && A.path[0] === `generic-${t}-vertical`)
     });
   };
   await Promise.all(
-    ao.flatMap((t) => [
-      U("gap", t),
-      U("space", t)
+    eo.flatMap((t) => [
+      w("gap", t),
+      w("space", t)
     ])
   );
-  const X = [":root", ...G.map(
-    (t) => `[data-space-proportions="${t.toLowerCase()}"]`
-  )].join(
-    ", "
-  ), M = [
+  const U = [
     c,
     f,
     l,
     O
   ];
   await d({
-    include: M,
+    include: U,
     source: [D],
     buildPath: o.join(i, m),
     transforms: r,
     destination: "container-space.css",
-    selector: X,
+    selector: ":root, [data-space-proportions]",
     filter: (t) => !!(t.path && t.path[0] === "container-space")
   }), await d({
-    include: M,
+    include: U,
     source: [y],
     buildPath: o.join(i, m),
     transforms: r,
     destination: "page-space.css",
-    selector: X,
+    selector: ":root, [data-space-proportions]",
     filter: (t) => !!(t.path && t.path[0] === "page-space")
   }), await d({
     include: [
@@ -335,23 +331,23 @@ async function Co({
       f,
       l,
       h,
-      B,
-      J,
-      k,
-      oo,
-      ...x,
-      ...N,
-      F,
-      K,
-      Q,
       Z,
       W,
+      B,
+      J,
+      ...V,
+      ...N,
+      C,
+      Y,
+      x,
+      K,
+      Q,
       R,
-      w,
-      to,
-      no
+      G,
+      k,
+      oo
     ],
-    source: [Y],
+    source: [q],
     buildPath: o.join(i, m),
     transforms: r,
     destination: "semantic-spacing-gap.css",
@@ -361,10 +357,10 @@ async function Co({
       return e === "Selectable" && (a === "Gap horizontal" || a === "Gap vertical") || e === "Container" && (a === "Gap horizontal" || a === "Gap vertical") || e === "Page" && (a === "Gap horizontal" || a === "Gap vertical");
     }
   });
-  const so = [
+  const ao = [
     { mode: "Header", slug: "header" },
     { mode: "UI Body", slug: "ui" }
-  ], io = [
+  ], so = [
     "XS",
     "SM",
     "MD",
@@ -375,19 +371,19 @@ async function Co({
     "4XL",
     "5XL",
     "6XL"
-  ], ro = [
+  ], io = [
     { mode: "Lighter", slug: "lighter" },
     { mode: "Normal", slug: "normal" },
     { mode: "Bolder", slug: "bolder" }
-  ], co = [
+  ], ro = [
     { mode: "Default", slug: "default" },
     { mode: "Squished", slug: "squished" }
-  ], lo = [
+  ], co = [
     { mode: "Tight", slug: "tight" },
     { mode: "Normal", slug: "normal" },
     { mode: "Wide", slug: "wide" },
     { mode: "Loose", slug: "loose" }
-  ], po = so.map(
+  ], lo = ao.map(
     ({ mode: t, slug: e }) => d({
       include: [
         c,
@@ -395,13 +391,13 @@ async function Co({
         l
       ],
       source: [o.join(n, `🅰️ Font family.${t}.json`)],
-      buildPath: o.join(i, C),
+      buildPath: o.join(i, F),
       transforms: r,
       destination: `font-family-${e}.css`,
       selector: `[data-font-family="${e}"]`,
       filter: (a) => _(a, [t])
     })
-  ), jo = io.map(
+  ), po = so.map(
     (t) => d({
       include: [
         c,
@@ -410,11 +406,27 @@ async function Co({
         ...N
       ],
       source: [o.join(n, `🅰️ Font size.${t}.json`)],
-      buildPath: o.join(i, C),
+      buildPath: o.join(i, F),
       transforms: r,
       destination: `font-size-${t.toLowerCase()}.css`,
       selector: `[data-font-size="${t.toLowerCase()}"]`,
       filter: (e) => _(e, ["Font size", t])
+    })
+  ), jo = io.map(
+    ({ mode: t, slug: e }) => d({
+      include: [
+        c,
+        f,
+        l,
+        I,
+        C
+      ],
+      source: [o.join(n, `🅰️ Font weight.${t}.json`)],
+      buildPath: o.join(i, F),
+      transforms: r,
+      destination: `font-weight-${e}.css`,
+      selector: `[data-font-weight="${e}"]`,
+      filter: (a) => !!(a.path && a.path[1] === "font-weight")
     })
   ), uo = ro.map(
     ({ mode: t, slug: e }) => d({
@@ -423,14 +435,14 @@ async function Co({
         f,
         l,
         I,
-        F
+        C
       ],
-      source: [o.join(n, `🅰️ Font weight.${t}.json`)],
-      buildPath: o.join(i, C),
+      source: [o.join(n, `🅰️ Line height.${t}.json`)],
+      buildPath: o.join(i, F),
       transforms: r,
-      destination: `font-weight-${e}.css`,
-      selector: `[data-font-weight="${e}"]`,
-      filter: (a) => !!(a.path && a.path[1] === "font-weight")
+      destination: `line-height-${e}.css`,
+      selector: `[data-line-height="${e}"]`,
+      filter: (a) => !!(a.path && a.path[1] === "line-height")
     })
   ), So = co.map(
     ({ mode: t, slug: e }) => d({
@@ -439,26 +451,10 @@ async function Co({
         f,
         l,
         I,
-        F
-      ],
-      source: [o.join(n, `🅰️ Line height.${t}.json`)],
-      buildPath: o.join(i, C),
-      transforms: r,
-      destination: `line-height-${e}.css`,
-      selector: `[data-line-height="${e}"]`,
-      filter: (a) => !!(a.path && a.path[1] === "line-height")
-    })
-  ), fo = lo.map(
-    ({ mode: t, slug: e }) => d({
-      include: [
-        c,
-        f,
-        l,
-        I,
-        F
+        C
       ],
       source: [o.join(n, `🅰️ Tracking.${t}.json`)],
-      buildPath: o.join(i, C),
+      buildPath: o.join(i, F),
       transforms: r,
       destination: `tracking-${e}.css`,
       selector: `[data-tracking="${e}"]`,
@@ -466,39 +462,39 @@ async function Co({
     })
   );
   await Promise.all([
+    ...lo,
     ...po,
     ...jo,
     ...uo,
-    ...So,
-    ...fo
+    ...So
   ]);
 }
-const b = `${process.cwd()}/build`, Fo = `${b}/css`, Do = `${b}/js`, yo = `${b}/json`;
+const b = `${process.cwd()}/build`, Fo = `${b}/css`, $o = `${b}/js`, Oo = `${b}/json`;
+P.registerTransform(mo);
 P.registerTransform(go);
 P.registerTransform(ho);
 P.registerTransform(Eo);
-P.registerTransform(_o);
-async function Io() {
+async function Co() {
   const s = `${process.cwd()}/tokens`;
-  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", s), await Co({
+  console.info("Running Style Dictionary build script"), console.info("Tokens directory:", s), await Ao({
     tokensDir: s,
     cssBuildPath: Fo,
     cssTransforms: [
       "name/kebab",
+      _o,
       Po,
-      Lo,
-      Ao
+      Lo
     ]
   });
 }
-Io().then(() => {
+Co().then(() => {
   console.log("✅ Variables generated successfully");
 }).catch((s) => {
   console.error("❌ Error generating color variables:", s);
 });
 export {
   Fo as cssBuildPath,
-  Io as generate,
-  Do as jsBuildPath,
-  yo as jsonBuildPath
+  Co as generate,
+  $o as jsBuildPath,
+  Oo as jsonBuildPath
 };

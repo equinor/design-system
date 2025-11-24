@@ -1076,7 +1076,7 @@
   --eds-generic-space-vertical: var(--eds-spacing-vertical-3xl);
 }
 
-:root, [data-space-proportions="squished"], [data-space-proportions="squared"], [data-space-proportions="stretched"] {
+:root, [data-space-proportions] {
   --eds-container-space-horizontal: var(--eds-spacing-proportions-md-horizontal);
   --eds-container-space-vertical: var(--eds-spacing-proportions-md-vertical);
   --eds-page-space-horizontal: var(--eds-spacing-proportions-xl-horizontal);

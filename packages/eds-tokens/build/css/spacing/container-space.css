@@ -2,7 +2,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-:root, [data-space-proportions="squished"], [data-space-proportions="squared"], [data-space-proportions="stretched"] {
+:root, [data-space-proportions] {
   --eds-container-space-horizontal: var(--eds-spacing-proportions-md-horizontal);
   --eds-container-space-vertical: var(--eds-spacing-proportions-md-vertical);
 }
