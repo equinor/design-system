@@ -6,6 +6,141 @@ import { includeTokenFilter } from '@equinor/eds-tokens-build'
 export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 export const FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
 
+const PREFIX = 'eds'
+const SPACING_BUILD_PATH = 'spacing/'
+const TYPOGRAPHY_BUILD_PATH = 'typography/'
+
+interface BaseOptions {
+  source: string[]
+  include?: string[]
+  transforms: string[]
+  prefix?: string
+}
+
+interface BuildCssOptions extends BaseOptions {
+  buildPath: string
+  destination: string
+  selector?: string
+  filter: (token: TransformedToken) => boolean
+  outputReferences?: boolean
+}
+
+async function buildCssDictionary({
+  source,
+  include = [],
+  buildPath,
+  destination,
+  selector = ':root',
+  prefix = PREFIX,
+  transforms,
+  filter,
+  outputReferences = true,
+}: BuildCssOptions) {
+  const sd = new StyleDictionary({
+    include,
+    source,
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        prefix,
+        buildPath,
+        transforms,
+        files: [
+          {
+            filter,
+            destination,
+            format: 'css/variables',
+            options: {
+              selector,
+              outputReferences,
+            },
+          },
+        ],
+      },
+    },
+  })
+  await sd.buildAllPlatforms()
+}
+
+interface BuildDensityOptions extends BaseOptions {
+  jsBuildPath: string
+  jsonBuildPath: string
+  cssBuildPath: string
+  filter: (token: TransformedToken) => boolean
+  name: string
+  selector: string
+}
+
+async function buildDensityDictionary({
+  source,
+  include = [],
+  jsBuildPath,
+  jsonBuildPath,
+  cssBuildPath,
+  transforms,
+  prefix = PREFIX,
+  filter,
+  name,
+  selector,
+}: BuildDensityOptions) {
+  const sd = new StyleDictionary({
+    include,
+    source,
+    platforms: {
+      ts: {
+        transforms: ['name/constant'],
+        buildPath: jsBuildPath,
+        files: [
+          {
+            filter,
+            destination: `spacing/${name}.js`,
+            format: 'javascript/es6',
+          },
+          {
+            filter,
+            format: 'typescript/es6-declarations',
+            destination: `spacing/${name}.d.ts`,
+          },
+        ],
+      },
+      json: {
+        buildPath: jsonBuildPath,
+        transforms: ['name/kebab'],
+        files: [
+          {
+            filter,
+            destination: `spacing/flat/${name}.json`,
+            format: 'json/flat',
+          },
+          {
+            filter,
+            destination: `spacing/nested/${name}.json`,
+            format: 'json/nested',
+          },
+        ],
+      },
+      css: {
+        transformGroup: 'css',
+        prefix,
+        buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+        transforms,
+        files: [
+          {
+            filter,
+            destination: `${name}.css`,
+            format: 'css/variables',
+            options: {
+              selector,
+              outputReferences: false,
+            },
+          },
+        ],
+      },
+    },
+  })
+  await sd.buildAllPlatforms()
+}
+
 export async function createSpacingAndTypographyVariables({
   tokensDir,
   cssBuildPath,
@@ -15,9 +150,6 @@ export async function createSpacingAndTypographyVariables({
   cssBuildPath: string
   cssTransforms: string[]
 }) {
-  const prefix = 'eds'
-  const spacingBuildPath = 'spacing/'
-
   const PRIMITIVES_SOURCE = path.join(
     tokensDir,
     FILE_KEY_SPACING,
@@ -48,122 +180,29 @@ export async function createSpacingAndTypographyVariables({
   const densityComfortableFilter = (token: TransformedToken) =>
     includeTokenFilter(token, ['Density', 'Comfortable'])
 
-  const spacious = new StyleDictionary({
-    include: [PRIMITIVES_SOURCE, DENSITY_FIGMA_SOURCE],
+  await buildDensityDictionary({
     source: [DENSITY_SPACIOUS_SOURCE],
-    platforms: {
-      ts: {
-        transforms: ['name/constant'],
-        buildPath: jsBuildPath,
-        files: [
-          {
-            filter: densitySpaciousFilter,
-            destination: 'spacing/spacious.js',
-            format: 'javascript/es6',
-          },
-          {
-            filter: densitySpaciousFilter,
-            format: 'typescript/es6-declarations',
-            destination: 'spacing/spacious.d.ts',
-          },
-        ],
-      },
-      json: {
-        buildPath: jsonBuildPath,
-        transforms: ['name/kebab'],
-        files: [
-          {
-            filter: densitySpaciousFilter,
-            destination: 'spacing/flat/spacious.json',
-            format: 'json/flat',
-          },
-          {
-            filter: densitySpaciousFilter,
-            destination: 'spacing/nested/spacious.json',
-            format: 'json/nested',
-          },
-        ],
-      },
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: path.join(cssBuildPath, spacingBuildPath),
-        transforms: cssTransforms,
-        files: [
-          {
-            filter: (token: TransformedToken) =>
-              includeTokenFilter(token, ['Density', 'Spacious']),
-            destination: 'spacious.css',
-            format: 'css/variables',
-            options: {
-              selector: ':root, [data-density="spacious"]',
-              outputReferences: false,
-            },
-          },
-        ],
-      },
-    },
-  })
-
-  const comfortable = new StyleDictionary({
     include: [PRIMITIVES_SOURCE, DENSITY_FIGMA_SOURCE],
-    source: [DENSITY_COMFORTABLE_SOURCE],
-    platforms: {
-      ts: {
-        transforms: ['name/constant'],
-        buildPath: jsBuildPath,
-        files: [
-          {
-            filter: densityComfortableFilter,
-            destination: 'spacing/comfortable.js',
-            format: 'javascript/es6',
-          },
-          {
-            filter: densityComfortableFilter,
-            format: 'typescript/es6-declarations',
-            destination: 'spacing/comfortable.d.ts',
-          },
-        ],
-      },
-      json: {
-        buildPath: jsonBuildPath,
-        transforms: ['name/kebab'],
-        files: [
-          {
-            filter: densityComfortableFilter,
-            destination: 'spacing/flat/comfortable.json',
-            format: 'json/flat',
-          },
-          {
-            filter: densityComfortableFilter,
-            destination: 'spacing/nested/comfortable.json',
-            format: 'json/nested',
-          },
-        ],
-      },
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: path.join(cssBuildPath, spacingBuildPath),
-        transforms: cssTransforms,
-        files: [
-          {
-            filter: (token: TransformedToken) =>
-              includeTokenFilter(token, ['Density', 'Comfortable']),
-            destination: 'comfortable.css',
-            format: 'css/variables',
-            options: {
-              selector: '[data-density="comfortable"]',
-              outputReferences: false,
-            },
-          },
-        ],
-      },
-    },
+    jsBuildPath,
+    jsonBuildPath,
+    cssBuildPath,
+    transforms: cssTransforms,
+    filter: densitySpaciousFilter,
+    name: 'spacious',
+    selector: ':root, [data-density="spacious"]',
   })
 
-  await spacious.buildAllPlatforms()
-  await comfortable.buildAllPlatforms()
+  await buildDensityDictionary({
+    source: [DENSITY_COMFORTABLE_SOURCE],
+    include: [PRIMITIVES_SOURCE, DENSITY_FIGMA_SOURCE],
+    jsBuildPath,
+    jsonBuildPath,
+    cssBuildPath,
+    transforms: cssTransforms,
+    filter: densityComfortableFilter,
+    name: 'comfortable',
+    selector: '[data-density="comfortable"]',
+  })
 
   const FIGMA_SPECIFIC_TOKENS_SOURCE = path.join(
     tokensDir,
@@ -258,135 +297,86 @@ export async function createSpacingAndTypographyVariables({
 
   const proportionConfigs = ['Squished', 'Squared', 'Stretched'] as const
 
-  const createProportionsDictionary = (proportion: string) => {
-    const proportionLower = proportion.toLowerCase()
-    const sourcePath = path.join(
-      tokensDir,
-      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      `🪐 Space proportions.${proportion}.json`,
-    )
-
-    // Squared is the default, so it gets both :root and [data-space-proportions="squared"] selectors
-    const selector =
-      proportion === 'Squared'
-        ? ':root, [data-space-proportions="squared"]'
-        : `[data-space-proportions="${proportionLower}"]`
-
-    return new StyleDictionary({
-      include: [
-        PRIMITIVES_SOURCE,
-        FIGMA_SPECIFIC_TOKENS_SOURCE,
-        DENSITY_SPACIOUS_SOURCE,
-        HORIZONTAL_GAP_DEFAULT,
-        VERTICAL_GAP_DEFAULT,
-      ],
-      source: [sourcePath, CONTAINER_SPACE_SOURCE, PAGE_SPACE_SOURCE],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, spacingBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) => {
-                // Include proportion tokens (e.g., Spacing proportions.XS.Inline)
-                if (includeTokenFilter(token, [proportion])) return true
-
-                // Include Container.Spacing tokens
-                if (
-                  token.path &&
-                  token.path[0] === 'Container' &&
-                  token.path[1] === 'Spacing'
-                ) {
-                  return true
-                }
-
-                // Include Page.Spacing tokens
-                if (
-                  token.path &&
-                  token.path[0] === 'Page' &&
-                  token.path[1] === 'Spacing'
-                ) {
-                  return true
-                }
-
-                return false
-              },
-              destination: `space-proportions-${proportionLower}.css`,
-              format: 'css/variables',
-              options: {
-                selector,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
-
-  const proportionsDictionaries = proportionConfigs.map((proportion) =>
-    createProportionsDictionary(proportion),
-  )
-
   await Promise.all(
-    proportionsDictionaries.map((dict) => dict.buildAllPlatforms()),
+    proportionConfigs.map((proportion) => {
+      const proportionLower = proportion.toLowerCase()
+      const sourcePath = path.join(
+        tokensDir,
+        FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+        `🪐 Space proportions.${proportion}.json`,
+      )
+
+      const selector =
+        proportion === 'Squared'
+          ? ':root, [data-space-proportions="squared"]'
+          : `[data-space-proportions="${proportionLower}"]`
+
+      return buildCssDictionary({
+        include: [
+          PRIMITIVES_SOURCE,
+          FIGMA_SPECIFIC_TOKENS_SOURCE,
+          DENSITY_SPACIOUS_SOURCE,
+          HORIZONTAL_GAP_DEFAULT,
+          VERTICAL_GAP_DEFAULT,
+        ],
+        source: [sourcePath, CONTAINER_SPACE_SOURCE, PAGE_SPACE_SOURCE],
+        buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+        transforms: cssTransforms,
+        destination: `space-proportions-${proportionLower}.css`,
+        selector,
+        filter: (token: TransformedToken) => {
+          if (includeTokenFilter(token, [proportion])) return true
+          if (
+            token.path &&
+            token.path[0] === 'Container' &&
+            token.path[1] === 'Spacing'
+          ) {
+            return true
+          }
+          if (
+            token.path &&
+            token.path[0] === 'Page' &&
+            token.path[1] === 'Spacing'
+          ) {
+            return true
+          }
+          return false
+        },
+      })
+    }),
   )
 
   const sizeConfigs = ['XS', 'SM', 'MD', 'LG', 'XL'] as const
 
-  const createSelectableSpaceDictionary = (size: string) => {
-    const sizeLower = size.toLowerCase()
-    const sourcePath = path.join(
-      tokensDir,
-      FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
-      `🪐 Selectable space.${size}.json`,
-    )
-
-    // XS is the default, so it gets both :root and [data-selectable-space="xs"] selectors
-    const selector =
-      size === 'XS'
-        ? ':root, [data-selectable-space="xs"]'
-        : `[data-selectable-space="${sizeLower}"]`
-
-    return new StyleDictionary({
-      include: [
-        PRIMITIVES_SOURCE,
-        FIGMA_SPECIFIC_TOKENS_SOURCE,
-        DENSITY_SPACIOUS_SOURCE,
-        SPACING_PROPORTIONS_SQUARED_SOURCE,
-      ],
-      source: [sourcePath],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, spacingBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) =>
-                includeTokenFilter(token, [size]),
-              destination: `selectable-space-${sizeLower}.css`,
-              format: 'css/variables',
-              options: {
-                selector,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
-
-  const selectableSpaceDictionaries = sizeConfigs.map((size) =>
-    createSelectableSpaceDictionary(size),
-  )
-
   await Promise.all(
-    selectableSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
+    sizeConfigs.map((size) => {
+      const sizeLower = size.toLowerCase()
+      const sourcePath = path.join(
+        tokensDir,
+        FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES,
+        `🪐 Selectable space.${size}.json`,
+      )
+
+      const selector =
+        size === 'XS'
+          ? ':root, [data-selectable-space="xs"]'
+          : `[data-selectable-space="${sizeLower}"]`
+
+      return buildCssDictionary({
+        include: [
+          PRIMITIVES_SOURCE,
+          FIGMA_SPECIFIC_TOKENS_SOURCE,
+          DENSITY_SPACIOUS_SOURCE,
+          SPACING_PROPORTIONS_SQUARED_SOURCE,
+        ],
+        source: [sourcePath],
+        buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+        transforms: cssTransforms,
+        destination: `selectable-space-${sizeLower}.css`,
+        selector,
+        filter: (token: TransformedToken) => includeTokenFilter(token, [size]),
+      })
+    }),
   )
 
   const genericSizeConfigs = [
@@ -403,7 +393,7 @@ export async function createSpacingAndTypographyVariables({
     '3XL',
   ] as const
 
-  const createGenericSpacingDictionary = (
+  const createGenericSpacingDictionary = async (
     type: 'gap' | 'space',
     size: string,
   ) => {
@@ -430,58 +420,41 @@ export async function createSpacingAndTypographyVariables({
         ? `:root, [data-vertical-${type}="xs"]`
         : `[data-vertical-${type}="${sizeLower}"]`
 
-    return new StyleDictionary({
-      include: [
-        PRIMITIVES_SOURCE,
-        FIGMA_SPECIFIC_TOKENS_SOURCE,
-        DENSITY_SPACIOUS_SOURCE,
-      ],
-      source: [horizontalPath, verticalPath],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, spacingBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) =>
-                token.path && token.path[0] === `generic-${type}-horizontal`,
-              destination: `generic-${type}-horizontal-${sizeLower}.css`,
-              format: 'css/variables',
-              options: {
-                selector: horizontalSelector,
-                outputReferences: true,
-              },
-            },
-            {
-              filter: (token: TransformedToken) =>
-                token.path && token.path[0] === `generic-${type}-vertical`,
-              destination: `generic-${type}-vertical-${sizeLower}.css`,
-              format: 'css/variables',
-              options: {
-                selector: verticalSelector,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
+    const include = [
+      PRIMITIVES_SOURCE,
+      FIGMA_SPECIFIC_TOKENS_SOURCE,
+      DENSITY_SPACIOUS_SOURCE,
+    ]
+
+    await buildCssDictionary({
+      include,
+      source: [horizontalPath],
+      buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `generic-${type}-horizontal-${sizeLower}.css`,
+      selector: horizontalSelector,
+      filter: (token: TransformedToken) =>
+        !!(token.path && token.path[0] === `generic-${type}-horizontal`),
+    })
+
+    await buildCssDictionary({
+      include,
+      source: [verticalPath],
+      buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `generic-${type}-vertical-${sizeLower}.css`,
+      selector: verticalSelector,
+      filter: (token: TransformedToken) =>
+        !!(token.path && token.path[0] === `generic-${type}-vertical`),
     })
   }
 
-  const genericGapDictionaries = genericSizeConfigs.map((size) =>
-    createGenericSpacingDictionary('gap', size),
+  await Promise.all(
+    genericSizeConfigs.flatMap((size) => [
+      createGenericSpacingDictionary('gap', size),
+      createGenericSpacingDictionary('space', size),
+    ]),
   )
-
-  const genericSpaceDictionaries = genericSizeConfigs.map((size) =>
-    createGenericSpacingDictionary('space', size),
-  )
-
-  await Promise.all([
-    ...genericGapDictionaries.map((dict) => dict.buildAllPlatforms()),
-    ...genericSpaceDictionaries.map((dict) => dict.buildAllPlatforms()),
-  ])
 
   // Generate container space variables
   const spaceProportionSelectors = proportionConfigs.map(
@@ -492,71 +465,34 @@ export async function createSpacingAndTypographyVariables({
     ', ',
   )
 
-  const containerSpaceDict = new StyleDictionary({
-    include: [
-      PRIMITIVES_SOURCE,
-      FIGMA_SPECIFIC_TOKENS_SOURCE,
-      DENSITY_SPACIOUS_SOURCE,
-      SPACING_PROPORTIONS_SQUARED_SOURCE,
-    ],
+  const commonInclude = [
+    PRIMITIVES_SOURCE,
+    FIGMA_SPECIFIC_TOKENS_SOURCE,
+    DENSITY_SPACIOUS_SOURCE,
+    SPACING_PROPORTIONS_SQUARED_SOURCE,
+  ]
+
+  await buildCssDictionary({
+    include: commonInclude,
     source: [CONTAINER_SPACE_SOURCE],
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: path.join(cssBuildPath, spacingBuildPath),
-        transforms: cssTransforms,
-        files: [
-          {
-            filter: (token: TransformedToken) =>
-              token.path && token.path[0] === 'container-space',
-            destination: 'container-space.css',
-            format: 'css/variables',
-            options: {
-              selector: containerAndPageSelector,
-              outputReferences: true,
-            },
-          },
-        ],
-      },
-    },
+    buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+    transforms: cssTransforms,
+    destination: 'container-space.css',
+    selector: containerAndPageSelector,
+    filter: (token: TransformedToken) =>
+      !!(token.path && token.path[0] === 'container-space'),
   })
 
-  // Generate page space variables
-  const pageSpaceDict = new StyleDictionary({
-    include: [
-      PRIMITIVES_SOURCE,
-      FIGMA_SPECIFIC_TOKENS_SOURCE,
-      DENSITY_SPACIOUS_SOURCE,
-      SPACING_PROPORTIONS_SQUARED_SOURCE,
-    ],
+  await buildCssDictionary({
+    include: commonInclude,
     source: [PAGE_SPACE_SOURCE],
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: path.join(cssBuildPath, spacingBuildPath),
-        transforms: cssTransforms,
-        files: [
-          {
-            filter: (token: TransformedToken) =>
-              token.path && token.path[0] === 'page-space',
-            destination: 'page-space.css',
-            format: 'css/variables',
-            options: {
-              selector: containerAndPageSelector,
-              outputReferences: true,
-            },
-          },
-        ],
-      },
-    },
+    buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+    transforms: cssTransforms,
+    destination: 'page-space.css',
+    selector: containerAndPageSelector,
+    filter: (token: TransformedToken) =>
+      !!(token.path && token.path[0] === 'page-space'),
   })
-
-  await Promise.all([
-    containerSpaceDict.buildAllPlatforms(),
-    pageSpaceDict.buildAllPlatforms(),
-  ])
 
   // Generate semantic space and gap variables directly from the semantic tokens file
   // Only default modes are included for variable collections (e.g., Font size.XS, Font family.UI Body)
@@ -565,92 +501,62 @@ export async function createSpacingAndTypographyVariables({
   // All dependency tokens are included in the include array to allow StyleDictionary to resolve references
   // Note: BOX_FILES are NOT included here because they define tokens at the root level (e.g., "Stroke")
   // which conflict with the semantic tokens file structure
-  const semanticGapDict = new StyleDictionary({
+  await buildCssDictionary({
     include: [
-      PRIMITIVES_SOURCE, // type-scale.inter/equinor primitives
-      FIGMA_SPECIFIC_TOKENS_SOURCE, // figma.type-scale values
-      DENSITY_SPACIOUS_SOURCE, // typography.ui-body/header values and sizing.stroke (needed for Font family and Stroke references)
-      DENSITY_COMFORTABLE_SOURCE, // Additional density mode
-      // Visual tokens - must come before other tokens that reference them
-      STROKE_DEFAULT, // Defines {Stroke.thickness} - References {sizing.stroke.thin} from DENSITY files
+      PRIMITIVES_SOURCE,
+      FIGMA_SPECIFIC_TOKENS_SOURCE,
+      DENSITY_SPACIOUS_SOURCE,
+      DENSITY_COMFORTABLE_SOURCE,
+      STROKE_DEFAULT,
       BORDER_RADIUS_DEFAULT,
       ICON_SIZE_DEFAULT,
       SIZE_DEFAULT,
-      // Space tokens
       ...SPACE_FILES,
-      // Typography tokens
-      ...FONT_FAMILY_FILES, // Include all Font family files for reference resolution
+      ...FONT_FAMILY_FILES,
       FONT_SIZE_DEFAULT,
       FONT_WEIGHT_DEFAULT,
       FONT_BASELINE_DEFAULT,
       TRACKING_DEFAULT,
       LINE_HEIGHT_DEFAULT,
-      // Gap and space tokens
       HORIZONTAL_GAP_DEFAULT,
       VERTICAL_GAP_DEFAULT,
       HORIZONTAL_SPACE_DEFAULT,
       VERTICAL_SPACE_DEFAULT,
     ],
-    log: {
-      verbosity: 'verbose',
-    },
     source: [SEMANTIC_TOKENS_SOURCE],
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: path.join(cssBuildPath, spacingBuildPath),
-        transforms: cssTransforms,
-        files: [
-          {
-            filter: (token: TransformedToken) => {
-              if (!token.path) return false
+    buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+    transforms: cssTransforms,
+    destination: 'semantic-spacing-gap.css',
+    filter: (token: TransformedToken) => {
+      if (!token.path) return false
 
-              const component = token.path[0]
-              const property = token.path[1]
+      const component = token.path[0]
+      const property = token.path[1]
 
-              // Filter for gap and space tokens from the semantic tokens file
-              // Token names follow pattern: "Gap horizontal" / "Gap vertical" / "Space horizontal" / "Space vertical" (noun first, then direction)
-              const isSelectableGap =
-                component === 'Selectable' &&
-                (property === 'Gap horizontal' || property === 'Gap vertical')
-              const isContainerGap =
-                component === 'Container' &&
-                (property === 'Gap horizontal' || property === 'Gap vertical')
-              const isPageGap =
-                component === 'Page' &&
-                (property === 'Gap horizontal' || property === 'Gap vertical')
+      const isSelectableGap =
+        component === 'Selectable' &&
+        (property === 'Gap horizontal' || property === 'Gap vertical')
+      const isContainerGap =
+        component === 'Container' &&
+        (property === 'Gap horizontal' || property === 'Gap vertical')
+      const isPageGap =
+        component === 'Page' &&
+        (property === 'Gap horizontal' || property === 'Gap vertical')
 
-              return isSelectableGap || isContainerGap || isPageGap
-            },
-            destination: 'semantic-spacing-gap.css',
-            format: 'css/variables',
-            options: {
-              selector: ':root',
-              outputReferences: true,
-            },
-          },
-        ],
-      },
+      return isSelectableGap || isContainerGap || isPageGap
     },
   })
-
-  await semanticGapDict.buildAllPlatforms()
 
   // =============================
   // Typography Variable Generation
   // =============================
 
-  const typographyBuildPath = 'typography/'
-
-  // Font Family configurations
-  const fontFamilyConfigs = [
+  const fontFamilyConfig = [
     { mode: 'Header', slug: 'header' },
     { mode: 'UI Body', slug: 'ui' },
   ] as const
 
-  // Font Size configurations
-  const fontSizeConfigs = [
+  const fontSizeConfig = [
     'XS',
     'SM',
     'MD',
@@ -663,20 +569,17 @@ export async function createSpacingAndTypographyVariables({
     '6XL',
   ] as const
 
-  // Font Weight configurations
-  const fontWeightConfigs = [
+  const fontWeightConfig = [
     { mode: 'Lighter', slug: 'lighter' },
     { mode: 'Normal', slug: 'normal' },
     { mode: 'Bolder', slug: 'bolder' },
   ] as const
 
-  // Line Height configurations
-  const lineHeightConfigs = [
+  const lineHeightConfig = [
     { mode: 'Default', slug: 'default' },
     { mode: 'Squished', slug: 'squished' },
   ] as const
 
-  // Tracking configurations
   const trackingConfig = [
     { mode: 'Tight', slug: 'tight' },
     { mode: 'Normal', slug: 'normal' },
@@ -684,105 +587,41 @@ export async function createSpacingAndTypographyVariables({
     { mode: 'Loose', slug: 'loose' },
   ] as const
 
-  // Generate Font Family CSS files
-  const createFontFamilyDictionary = (familyConfig: {
-    mode: string
-    slug: string
-  }) => {
-    const { mode, slug } = familyConfig
-    const sourcePath = path.join(MODES_DIR, `🅰️ Font family.${mode}.json`)
-
-    return new StyleDictionary({
+  const fontFamilyPromises = fontFamilyConfig.map(({ mode, slug }) =>
+    buildCssDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
       ],
-      source: [sourcePath],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, typographyBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) =>
-                includeTokenFilter(token, [mode]),
-              destination: `font-family-${slug}.css`,
-              format: 'css/variables',
-              options: {
-                selector: `[data-font-family="${slug}"]`,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
-
-  const fontFamilyDictionaries = fontFamilyConfigs.map((config) =>
-    createFontFamilyDictionary(config),
-  )
-  await Promise.all(
-    fontFamilyDictionaries.map((dict) => dict.buildAllPlatforms()),
+      source: [path.join(MODES_DIR, `🅰️ Font family.${mode}.json`)],
+      buildPath: path.join(cssBuildPath, TYPOGRAPHY_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `font-family-${slug}.css`,
+      selector: `[data-font-family="${slug}"]`,
+      filter: (token: TransformedToken) => includeTokenFilter(token, [mode]),
+    }),
   )
 
-  // Generate Font Size CSS files
-  const createFontSizeDictionary = (size: string) => {
-    const sourcePath = path.join(MODES_DIR, `🅰️ Font size.${size}.json`)
-    const sizeSlug = size.toLowerCase()
-
-    return new StyleDictionary({
+  const fontSizePromises = fontSizeConfig.map((size) =>
+    buildCssDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
         DENSITY_SPACIOUS_SOURCE,
         ...FONT_FAMILY_FILES,
       ],
-      source: [sourcePath],
-      log: {
-        verbosity: 'verbose',
-      },
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, typographyBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token) => includeTokenFilter(token, ['Font size', size]),
-              destination: `font-size-${sizeSlug}.css`,
-              format: 'css/variables',
-              options: {
-                selector: `[data-font-size="${sizeSlug}"]`,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
-
-  const fontSizeDictionaries = fontSizeConfigs.map((size) =>
-    createFontSizeDictionary(size),
-  )
-  await Promise.all(
-    fontSizeDictionaries.map((dict) => dict.buildAllPlatforms()),
+      source: [path.join(MODES_DIR, `🅰️ Font size.${size}.json`)],
+      buildPath: path.join(cssBuildPath, TYPOGRAPHY_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `font-size-${size.toLowerCase()}.css`,
+      selector: `[data-font-size="${size.toLowerCase()}"]`,
+      filter: (token) => includeTokenFilter(token, ['Font size', size]),
+    }),
   )
 
-  // Generate Font Weight CSS files
-  const createFontWeightDictionary = (weightConfig: {
-    mode: string
-    slug: string
-  }) => {
-    const { mode, slug } = weightConfig
-    const sourcePath = path.join(MODES_DIR, `🅰️ Font weight.${mode}.json`)
-
-    return new StyleDictionary({
+  const fontWeightPromises = fontWeightConfig.map(({ mode, slug }) =>
+    buildCssDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -790,46 +629,18 @@ export async function createSpacingAndTypographyVariables({
         FONT_FAMILY_DEFAULT,
         FONT_SIZE_DEFAULT,
       ],
-      source: [sourcePath],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, typographyBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) =>
-                token.path && token.path[1] === 'font-weight',
-              destination: `font-weight-${slug}.css`,
-              format: 'css/variables',
-              options: {
-                selector: `[data-font-weight="${slug}"]`,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
-
-  const fontWeightDictionaries = fontWeightConfigs.map((config) =>
-    createFontWeightDictionary(config),
-  )
-  await Promise.all(
-    fontWeightDictionaries.map((dict) => dict.buildAllPlatforms()),
+      source: [path.join(MODES_DIR, `🅰️ Font weight.${mode}.json`)],
+      buildPath: path.join(cssBuildPath, TYPOGRAPHY_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `font-weight-${slug}.css`,
+      selector: `[data-font-weight="${slug}"]`,
+      filter: (token: TransformedToken) =>
+        !!(token.path && token.path[1] === 'font-weight'),
+    }),
   )
 
-  // Generate Line Height CSS files
-  const createLineHeightDictionary = (heightConfig: {
-    mode: string
-    slug: string
-  }) => {
-    const { mode, slug } = heightConfig
-    const sourcePath = path.join(MODES_DIR, `🅰️ Line height.${mode}.json`)
-
-    return new StyleDictionary({
+  const lineHeightPromises = lineHeightConfig.map(({ mode, slug }) =>
+    buildCssDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -837,46 +648,18 @@ export async function createSpacingAndTypographyVariables({
         FONT_FAMILY_DEFAULT,
         FONT_SIZE_DEFAULT,
       ],
-      source: [sourcePath],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, typographyBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) =>
-                token.path && token.path[1] === 'line-height',
-              destination: `line-height-${slug}.css`,
-              format: 'css/variables',
-              options: {
-                selector: `[data-line-height="${slug}"]`,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
-
-  const lineHeightDictionaries = lineHeightConfigs.map((config) =>
-    createLineHeightDictionary(config),
-  )
-  await Promise.all(
-    lineHeightDictionaries.map((dict) => dict.buildAllPlatforms()),
+      source: [path.join(MODES_DIR, `🅰️ Line height.${mode}.json`)],
+      buildPath: path.join(cssBuildPath, TYPOGRAPHY_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `line-height-${slug}.css`,
+      selector: `[data-line-height="${slug}"]`,
+      filter: (token: TransformedToken) =>
+        !!(token.path && token.path[1] === 'line-height'),
+    }),
   )
 
-  // Generate Tracking CSS files
-  const createTrackingDictionary = (spacingConfig: {
-    mode: string
-    slug: string
-  }) => {
-    const { mode, slug } = spacingConfig
-    const sourcePath = path.join(MODES_DIR, `🅰️ Tracking.${mode}.json`)
-
-    return new StyleDictionary({
+  const trackingPromises = trackingConfig.map(({ mode, slug }) =>
+    buildCssDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -884,34 +667,21 @@ export async function createSpacingAndTypographyVariables({
         FONT_FAMILY_DEFAULT,
         FONT_SIZE_DEFAULT,
       ],
-      source: [sourcePath],
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          prefix,
-          buildPath: path.join(cssBuildPath, typographyBuildPath),
-          transforms: cssTransforms,
-          files: [
-            {
-              filter: (token: TransformedToken) =>
-                token.path && token.path[1] === 'tracking',
-              destination: `tracking-${slug}.css`,
-              format: 'css/variables',
-              options: {
-                selector: `[data-tracking="${slug}"]`,
-                outputReferences: true,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }
+      source: [path.join(MODES_DIR, `🅰️ Tracking.${mode}.json`)],
+      buildPath: path.join(cssBuildPath, TYPOGRAPHY_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `tracking-${slug}.css`,
+      selector: `[data-tracking="${slug}"]`,
+      filter: (token: TransformedToken) =>
+        !!(token.path && token.path[1] === 'tracking'),
+    }),
+  )
 
-  const trackingDictionaries = trackingConfig.map((config) =>
-    createTrackingDictionary(config),
-  )
-  await Promise.all(
-    trackingDictionaries.map((dict) => dict.buildAllPlatforms()),
-  )
+  await Promise.all([
+    ...fontFamilyPromises,
+    ...fontSizePromises,
+    ...fontWeightPromises,
+    ...lineHeightPromises,
+    ...trackingPromises,
+  ])
 }
