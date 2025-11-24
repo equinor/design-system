@@ -1,0 +1,28 @@
+{
+  "page-space": {
+    "horizontal": {
+      "$type": "number",
+      "$value": "{spacing-proportions.xl.horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "vertical": {
+      "$type": "number",
+      "$value": "{spacing-proportions.xl.vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

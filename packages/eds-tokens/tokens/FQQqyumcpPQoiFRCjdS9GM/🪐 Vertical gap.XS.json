@@ -13,9 +13,9 @@
       }
     }
   },
-  "Gap vertical": {
+  "generic-gap-vertical": {
     "$type": "number",
-    "$value": "{spacing.stack.xs}",
+    "$value": "{spacing.vertical.xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {

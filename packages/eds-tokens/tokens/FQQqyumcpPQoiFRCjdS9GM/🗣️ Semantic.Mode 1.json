@@ -1,8 +1,8 @@
 {
   "Selectable": {
-    "Horisontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Selectable.Spacing.Inline}",
+      "$value": "{selectable-space.horizontal}",
       "$description": "Some description",
       "$extensions": {
         "com.figma": {
@@ -11,14 +11,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-${selectable-space}-inline"
+            "WEB": "var(--eds-selectable-space-horizontal)"
           }
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Selectable.Spacing.Stack}",
+      "$value": "{selectable-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -27,7 +27,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-selectable-spacing-stack)"
+            "WEB": "var(--eds-selectable-space-vertical)"
           }
         }
       }
@@ -62,7 +62,7 @@
     },
     "Icon + text gap ↔︎": {
       "$type": "number",
-      "$value": "{gap-horizontal}",
+      "$value": "{typography.gap-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -76,7 +76,7 @@
     },
     "Icon + text gap ↕︎": {
       "$type": "number",
-      "$value": "{gap-vertical}",
+      "$value": "{typography.gap-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -102,9 +102,9 @@
         }
       }
     },
-    "Horisontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{spacing.inline.xs}",
+      "$value": "{spacing.horizontal.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -113,14 +113,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-selectable-gap-inline)"
+            "WEB": "var(--eds-selectable-gap-horizontal)"
           }
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{spacing.stack.xs}",
+      "$value": "{spacing.vertical.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -129,16 +129,16 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-selectable-gap-stack)"
+            "WEB": "var(--eds-selectable-gap-vertical)"
           }
         }
       }
     }
   },
   "Container": {
-    "Horisontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Container.Spacing.Inline}",
+      "$value": "{container-space.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -147,14 +147,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-container-spacing-inline)"
+            "WEB": "var(--eds-container-space-horizontal)"
           }
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Container.Spacing.Stack}",
+      "$value": "{container-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -163,14 +163,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-container-spacing-stack)"
+            "WEB": "var(--eds-container-space-vertical)"
           }
         }
       }
     },
-    "Horisontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{spacing.inline.md}",
+      "$value": "{spacing.horizontal.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -179,14 +179,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-container-gap-inline)"
+            "WEB": "var(--eds-container-gap-horizontal)"
           }
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{spacing.stack.md}",
+      "$value": "{spacing.vertical.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -195,16 +195,16 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-container-gap-stack)"
+            "WEB": "var(--eds-container-gap-vertical)"
           }
         }
       }
     }
   },
   "Page": {
-    "Horizontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Page.Spacing.Inline}",
+      "$value": "{page-space.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -213,14 +213,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-page-spacing-inline)"
+            "WEB": "var(--eds-page-space-horizontal)"
           }
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Page.Spacing.Stack}",
+      "$value": "{page-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -229,14 +229,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-page-spacing-stack)"
+            "WEB": "var(--eds-page-space-vertical)"
           }
         }
       }
     },
-    "Horizontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{spacing.inline.xl}",
+      "$value": "{spacing.horizontal.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -245,14 +245,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-page-gap-inline)"
+            "WEB": "var(--eds-page-gap-horizontal)"
           }
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{spacing.stack.xl}",
+      "$value": "{spacing.vertical.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -261,16 +261,16 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-page-gap-stack)"
+            "WEB": "var(--eds-page-gap-vertical)"
           }
         }
       }
     }
   },
   "Generic": {
-    "Horizontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Padding horizontal}",
+      "$value": "{generic-space-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -282,9 +282,9 @@
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Padding vertical}",
+      "$value": "{generic-space-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -296,9 +296,9 @@
         }
       }
     },
-    "Horizontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{Gap horizontal}",
+      "$value": "{generic-gap-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -310,9 +310,9 @@
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{Gap vertical}",
+      "$value": "{generic-gap-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -356,7 +356,7 @@
   "Typography": {
     "Font family": {
       "$type": "string",
-      "$value": "{Font family}",
+      "$value": "{typography.font-family}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -372,7 +372,7 @@
     },
     "Font size": {
       "$type": "number",
-      "$value": "{font-size}",
+      "$value": "{typography.font-size}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -388,7 +388,7 @@
     },
     "Line height": {
       "$type": "number",
-      "$value": "{Lineheight}",
+      "$value": "{typography.line-height}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -402,9 +402,9 @@
         }
       }
     },
-    "Letter spacing": {
+    "Tracking": {
       "$type": "number",
-      "$value": "{Letter spacing}",
+      "$value": "{typography.tracking}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -420,7 +420,7 @@
     },
     "Baseline adjust top": {
       "$type": "number",
-      "$value": "{Baseline.top}",
+      "$value": "{baseline.top}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -434,7 +434,7 @@
     },
     "Baseline adjust bottom": {
       "$type": "number",
-      "$value": "{Baseline.bottom}",
+      "$value": "{baseline.bottom}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -448,7 +448,7 @@
     },
     "Font weight": {
       "$type": "number",
-      "$value": "{Font Weight}",
+      "$value": "{typography.font-weight}",
       "$description": "",
       "$extensions": {
         "com.figma": {

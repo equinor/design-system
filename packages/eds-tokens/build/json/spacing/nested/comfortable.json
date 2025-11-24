@@ -1,4 +1,31 @@
 {
+  "sizing": {
+    "icon": {
+      "xs": 14,
+      "sm": 16,
+      "md": 18,
+      "lg": 20,
+      "xl": 24,
+      "2xl": 28,
+      "3xl": 32,
+      "4xl": 37,
+      "5xl": 42,
+      "6xl": 48
+    },
+    "selectable": {
+      "xs": 16,
+      "sm": 20,
+      "md": 24,
+      "lg": 36,
+      "xl": 44,
+      "2xl": 52
+    },
+    "stroke": {
+      "thin": 1,
+      "thick": 2,
+      "none": 0
+    }
+  },
   "spacing": {
     "icon": {
       "xs": {
@@ -49,37 +76,37 @@
     },
     "inset": {
       "xs": {
-        "inline": 6,
-        "stack-squished": 4,
-        "stack-squared": 6,
-        "stack-stretched": 8
+        "horizontal": 6,
+        "vertical-squished": 4,
+        "vertical-squared": 6,
+        "vertical-stretched": 8
       },
       "sm": {
-        "inline": 8,
-        "stack-squished": 6,
-        "stack-squared": 8,
-        "stack-stretched": 12
+        "horizontal": 8,
+        "vertical-squished": 6,
+        "vertical-squared": 8,
+        "vertical-stretched": 12
       },
       "md": {
-        "inline": 12,
-        "stack-squished": 8,
-        "stack-squared": 12,
-        "stack-stretched": 16
+        "horizontal": 12,
+        "vertical-squished": 8,
+        "vertical-squared": 12,
+        "vertical-stretched": 16
       },
       "lg": {
-        "inline": 16,
-        "stack-squished": 12,
-        "stack-squared": 16,
-        "stack-stretched": 20
+        "horizontal": 16,
+        "vertical-squished": 12,
+        "vertical-squared": 16,
+        "vertical-stretched": 20
       },
       "xl": {
-        "inline": 20,
-        "stack-squished": 16,
-        "stack-squared": 20,
-        "stack-stretched": 24
+        "horizontal": 20,
+        "vertical-squished": 16,
+        "vertical-squared": 20,
+        "vertical-stretched": 24
       }
     },
-    "inline": {
+    "horizontal": {
       "4xs": 1,
       "3xs": 2,
       "2xs": 4,
@@ -91,7 +118,7 @@
       "2xl": 24,
       "3xl": 28
     },
-    "stack": {
+    "vertical": {
       "4xs": 1,
       "3xs": 2,
       "2xs": 4,
@@ -102,33 +129,6 @@
       "xl": 20,
       "2xl": 24,
       "3xl": 28
-    }
-  },
-  "sizing": {
-    "icon": {
-      "xs": 14,
-      "sm": 16,
-      "md": 18,
-      "lg": 20,
-      "xl": 24,
-      "2xl": 28,
-      "3xl": 32,
-      "4xl": 37,
-      "5xl": 42,
-      "6xl": 48
-    },
-    "selectable": {
-      "xs": 16,
-      "sm": 20,
-      "md": 24,
-      "lg": 36,
-      "xl": 44,
-      "2xl": 52
-    },
-    "stroke": {
-      "thin": 1,
-      "thick": 2,
-      "none": 0
     }
   },
   "typography": {
@@ -141,8 +141,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 12,
-        "lineheight-squished": 12
+        "line-height-default": 12,
+        "line-height-squished": 12
       },
       "sm": {
         "font-size": 10.5,
@@ -152,8 +152,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 16,
-        "lineheight-squished": 12
+        "line-height-default": 16,
+        "line-height-squished": 12
       },
       "font-family": "Inter",
       "md": {
@@ -164,8 +164,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 16,
-        "lineheight-squished": 12
+        "line-height-default": 16,
+        "line-height-squished": 12
       },
       "lg": {
         "font-size": 14,
@@ -175,8 +175,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 20,
-        "lineheight-squished": 16
+        "line-height-default": 20,
+        "line-height-squished": 16
       },
       "xl": {
         "font-size": 16,
@@ -186,8 +186,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 24,
-        "lineheight-squished": 20
+        "line-height-default": 24,
+        "line-height-squished": 20
       },
       "2xl": {
         "font-size": 18.5,
@@ -197,8 +197,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 24,
-        "lineheight-squished": 20
+        "line-height-default": 24,
+        "line-height-squished": 20
       },
       "3xl": {
         "font-size": 21,
@@ -208,8 +208,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 28,
-        "lineheight-squished": 24
+        "line-height-default": 28,
+        "line-height-squished": 24
       },
       "4xl": {
         "font-size": 24.5,
@@ -219,8 +219,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 32,
-        "lineheight-squished": 28
+        "line-height-default": 32,
+        "line-height-squished": 28
       },
       "5xl": {
         "font-size": 28,
@@ -230,8 +230,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 32,
-        "lineheight-squished": 28
+        "line-height-default": 32,
+        "line-height-squished": 28
       },
       "6xl": {
         "font-size": 32,
@@ -241,8 +241,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 0,
         "font-weight-bolder": 500,
-        "lineheight-default": 36,
-        "lineheight-squished": 32
+        "line-height-default": 36,
+        "line-height-squished": 32
       }
     },
     "header": {
@@ -255,8 +255,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 12,
-        "lineheight-squished": 12
+        "line-height-default": 12,
+        "line-height-squished": 12
       },
       "sm": {
         "font-size": 12,
@@ -266,8 +266,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 16,
-        "lineheight-squished": 12
+        "line-height-default": 16,
+        "line-height-squished": 12
       },
       "md": {
         "font-size": 14,
@@ -277,8 +277,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 16,
-        "lineheight-squished": 12
+        "line-height-default": 16,
+        "line-height-squished": 12
       },
       "lg": {
         "font-size": 16,
@@ -288,8 +288,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 20,
-        "lineheight-squished": 16
+        "line-height-default": 20,
+        "line-height-squished": 16
       },
       "xl": {
         "font-size": 18,
@@ -299,8 +299,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 24,
-        "lineheight-squished": 20
+        "line-height-default": 24,
+        "line-height-squished": 20
       },
       "2xl": {
         "font-size": 21,
@@ -310,8 +310,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 24,
-        "lineheight-squished": 20
+        "line-height-default": 24,
+        "line-height-squished": 20
       },
       "3xl": {
         "font-size": 24,
@@ -321,8 +321,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 28,
-        "lineheight-squished": 24
+        "line-height-default": 28,
+        "line-height-squished": 24
       },
       "4xl": {
         "font-size": 27.5,
@@ -332,8 +332,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 32,
-        "lineheight-squished": 28
+        "line-height-default": 32,
+        "line-height-squished": 28
       },
       "5xl": {
         "font-size": 31.5,
@@ -343,8 +343,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 32,
-        "lineheight-squished": 28
+        "line-height-default": 32,
+        "line-height-squished": 28
       },
       "6xl": {
         "font-size": 36.5,
@@ -354,8 +354,8 @@
         "font-weight-lighter": 300,
         "font-weight-normal": 400,
         "font-weight-bolder": 500,
-        "lineheight-default": 36,
-        "lineheight-squished": 32
+        "line-height-default": 36,
+        "line-height-squished": 32
       }
     }
   }

@@ -1,80 +1,129 @@
 /* Demo-specific styles for Spacing stories */
 
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.items-start {
-  align-items: flex-start;
-}
-
-/* Margin-bottom utilities (4px grid) */
-.mb-2 {
-  margin-bottom: 0.5rem; /* 8px */
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem; /* 12px */
-}
-
-.mb-4 {
-  margin-bottom: 1rem; /* 16px */
-}
-
 .spacing-demo-box {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--eds-color-bg-accent-fill-muted-default);
   border: 1px solid var(--eds-color-border-accent-medium);
   color: var(--eds-color-text-accent-strong);
   text-align: center;
   white-space: nowrap;
   width: fit-content;
-  max-width: 100%;
+  min-width: 80px;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-.size-32 {
-  width: 32px;
-  height: 32px;
+.spacing-demo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.spacing-demo-button-primary,
-.spacing-demo-button-secondary {
-  border-width: 1px;
-  border-style: solid;
-  cursor: pointer;
+.spacing-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
 }
 
-.spacing-demo-button-primary {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-  border-color: var(--eds-color-border-accent-strong);
+.spacing-demo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.spacing-demo-button-secondary {
-  background-color: var(--eds-color-bg-neutral-surface);
+.spacing-demo-label {
+  font-size: 0.875rem;
   color: var(--eds-color-text-neutral-strong);
-  border-color: var(--eds-color-border-neutral-medium);
+  font-family: monospace;
 }
 
-.spacing-demo-button-primary:hover,
-.spacing-demo-button-secondary:hover {
-  opacity: 0.9;
+.spacing-demo-section {
+  margin-bottom: 3rem;
 }
 
-.spacing-demo-card {
-  background-color: var(--eds-color-bg-neutral-surface);
-  border: 1px solid var(--eds-color-border-neutral-medium);
-  max-width: 400px;
+/* Selectable space examples */
+.selectable-space-box {
+  padding: var(--eds-selectable-space-vertical)
+    var(--eds-selectable-space-horizontal);
+}
+
+/* Container space examples */
+.container-space-box {
+  padding: var(--eds-container-space-vertical)
+    var(--eds-container-space-horizontal);
+}
+
+/* Page space examples */
+.page-space-box {
+  padding: var(--eds-page-space-vertical) var(--eds-page-space-horizontal);
+}
+
+/* Generic gap examples */
+.generic-gap-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 0 var(--eds-generic-gap-horizontal);
+}
+
+.generic-gap-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-generic-gap-vertical) 0;
+}
+
+.generic-gap-both {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-generic-gap-vertical) var(--eds-generic-gap-horizontal);
+}
+
+/* Generic space examples */
+.generic-space-horizontal {
+  padding-left: var(--eds-generic-space-horizontal);
+  padding-right: var(--eds-generic-space-horizontal);
+}
+
+.generic-space-vertical {
+  padding-top: var(--eds-generic-space-vertical);
+  padding-bottom: var(--eds-generic-space-vertical);
+}
+
+.generic-space-both {
+  padding: var(--eds-generic-space-vertical) var(--eds-generic-space-horizontal);
+}
+
+/* Fixed gap examples */
+.selectable-gap-example {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
+}
+
+.container-gap-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
+}
+
+.page-gap-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-page-gap-vertical) var(--eds-page-gap-horizontal);
+}
+
+/* Small box for gap demonstrations */
+.spacing-demo-small-box {
+  width: 60px;
+  height: 40px;
+  background-color: var(--eds-color-bg-info-fill-muted-default);
+  border: 1px solid var(--eds-color-border-info-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--eds-color-text-info-strong);
 }

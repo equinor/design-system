@@ -1,0 +1,30 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "loose",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "typography": {
+    "tracking": {
+      "$type": "number",
+      "$value": "{typography.tracking-wide}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ Read the [changelog](https://github.com/equinor/design-system/blob/main/packages
 ## Installation
 
 ```sh
-npm install @equinor/eds-core-react @equinor/eds-tokens styled-components 
+npm install @equinor/eds-core-react styled-components 
 ```
 If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 ```sh

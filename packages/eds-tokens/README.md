@@ -39,7 +39,7 @@ Then use the CSS custom properties in your styles:
   background-color: var(--eds-color-bg-neutral-surface);
   color: var(--eds-color-text-neutral-strong);
   border: 1px solid var(--eds-color-border-neutral-subtle);
-  padding: var(--eds-selectable-spacing-stack) var(--eds-selectable-spacing-inline);
+  padding: var(--eds-selectable-space-vertical) var(--eds-selectable-space-horizontal);
   border-radius: var(--eds-spacing-border-radius-rounded);
 }
 ```
@@ -195,9 +195,9 @@ Adapt to `data-selectable-space` (xs/sm/md/lg/xl) and `data-space-proportions` (
 
 ```css
 .button {
-  padding-inline: var(--eds-selectable-spacing-inline);
-  padding-block: var(--eds-selectable-spacing-stack);
-  gap: var(--eds-selectable-gap-stack) var(--eds-selectable-gap-inline);
+  padding-inline: var(--eds-selectable-space-horizontal);
+  padding-block: var(--eds-selectable-space-vertical);
+  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
 }
 ```
 
@@ -213,9 +213,9 @@ Spacing values that adapt to `data-space-proportions`:
 
 ```css
 .container {
-  padding-inline: var(--eds-container-spacing-inline);
-  padding-block: var(--eds-container-spacing-stack);
-  gap: var(--eds-container-gap-inline) var(--eds-container-gap-stack);
+  padding-inline: var(--eds-container-space-horizontal);
+  padding-block: var(--eds-container-space-vertical);
+  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
 }
 ```
 
@@ -225,9 +225,9 @@ Spacing values that adapt to `data-space-proportions`:
 
 ```css
 .page {
-  padding-inline: var(--eds-page-spacing-inline);
-  padding-block: var(--eds-page-spacing-stack);
-  gap: var(--eds-page-gap-inline) var(--eds-page-gap-stack);
+  padding-inline: var(--eds-page-space-horizontal);
+  padding-block: var(--eds-page-space-vertical);
+  gap: var(--eds-page-gap-vertical) var(--eds-page-gap-horizontal);
 }
 ```
 

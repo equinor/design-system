@@ -15,5 +15,87 @@
 @import 'spacing/selectable-space-lg.css';
 @import 'spacing/selectable-space-xl.css';
 
-@import './spacing.css';
+@import 'spacing/generic-gap-horizontal-none.css';
+@import 'spacing/generic-gap-horizontal-4xs.css';
+@import 'spacing/generic-gap-horizontal-3xs.css';
+@import 'spacing/generic-gap-horizontal-2xs.css';
+@import 'spacing/generic-gap-horizontal-xs.css';
+@import 'spacing/generic-gap-horizontal-sm.css';
+@import 'spacing/generic-gap-horizontal-md.css';
+@import 'spacing/generic-gap-horizontal-lg.css';
+@import 'spacing/generic-gap-horizontal-xl.css';
+@import 'spacing/generic-gap-horizontal-2xl.css';
+@import 'spacing/generic-gap-horizontal-3xl.css';
+
+@import 'spacing/generic-gap-vertical-none.css';
+@import 'spacing/generic-gap-vertical-4xs.css';
+@import 'spacing/generic-gap-vertical-3xs.css';
+@import 'spacing/generic-gap-vertical-2xs.css';
+@import 'spacing/generic-gap-vertical-xs.css';
+@import 'spacing/generic-gap-vertical-sm.css';
+@import 'spacing/generic-gap-vertical-md.css';
+@import 'spacing/generic-gap-vertical-lg.css';
+@import 'spacing/generic-gap-vertical-xl.css';
+@import 'spacing/generic-gap-vertical-2xl.css';
+@import 'spacing/generic-gap-vertical-3xl.css';
+
+@import 'spacing/generic-space-horizontal-none.css';
+@import 'spacing/generic-space-horizontal-4xs.css';
+@import 'spacing/generic-space-horizontal-3xs.css';
+@import 'spacing/generic-space-horizontal-2xs.css';
+@import 'spacing/generic-space-horizontal-xs.css';
+@import 'spacing/generic-space-horizontal-sm.css';
+@import 'spacing/generic-space-horizontal-md.css';
+@import 'spacing/generic-space-horizontal-lg.css';
+@import 'spacing/generic-space-horizontal-xl.css';
+@import 'spacing/generic-space-horizontal-2xl.css';
+@import 'spacing/generic-space-horizontal-3xl.css';
+
+@import 'spacing/generic-space-vertical-none.css';
+@import 'spacing/generic-space-vertical-4xs.css';
+@import 'spacing/generic-space-vertical-3xs.css';
+@import 'spacing/generic-space-vertical-2xs.css';
+@import 'spacing/generic-space-vertical-xs.css';
+@import 'spacing/generic-space-vertical-sm.css';
+@import 'spacing/generic-space-vertical-md.css';
+@import 'spacing/generic-space-vertical-lg.css';
+@import 'spacing/generic-space-vertical-xl.css';
+@import 'spacing/generic-space-vertical-2xl.css';
+@import 'spacing/generic-space-vertical-3xl.css';
+
+@import 'spacing/container-space.css';
+@import 'spacing/page-space.css';
+
+@import 'spacing/semantic-spacing-gap.css';
 @import './typography.css';
+
+/* Typography: Font Family */
+@import 'typography/font-family-header.css';
+@import 'typography/font-family-ui.css';
+
+/* Typography: Font Size */
+@import 'typography/font-size-xs.css';
+@import 'typography/font-size-sm.css';
+@import 'typography/font-size-md.css';
+@import 'typography/font-size-lg.css';
+@import 'typography/font-size-xl.css';
+@import 'typography/font-size-2xl.css';
+@import 'typography/font-size-3xl.css';
+@import 'typography/font-size-4xl.css';
+@import 'typography/font-size-5xl.css';
+@import 'typography/font-size-6xl.css';
+
+/* Typography: Font Weight */
+@import 'typography/font-weight-lighter.css';
+@import 'typography/font-weight-normal.css';
+@import 'typography/font-weight-bolder.css';
+
+/* Typography: Line Height */
+@import 'typography/line-height-default.css';
+@import 'typography/line-height-squished.css';
+
+/* Typography: Letter Spacing */
+@import 'typography/tracking-tight.css';
+@import 'typography/tracking-normal.css';
+@import 'typography/tracking-wide.css';
+@import 'typography/tracking-loose.css';

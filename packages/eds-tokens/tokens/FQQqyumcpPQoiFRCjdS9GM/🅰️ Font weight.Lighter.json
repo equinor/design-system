@@ -1,13 +1,15 @@
 {
-  "Font Weight": {
-    "$type": "number",
-    "$value": "{font-weight-lighter}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": false,
-        "scopes": [],
-        "codeSyntax": {}
+  "typography": {
+    "font-weight": {
+      "$type": "number",
+      "$value": "{typography.font-weight-lighter}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
       }
     }
   }

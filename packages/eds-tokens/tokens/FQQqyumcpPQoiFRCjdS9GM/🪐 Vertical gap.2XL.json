@@ -1,7 +1,7 @@
 {
   "Documentation": {
     "$type": "string",
-    "$value": "3XL",
+    "$value": "2XL",
     "$description": "",
     "$extensions": {
       "com.figma": {
@@ -13,9 +13,9 @@
       }
     }
   },
-  "Gap vertical": {
+  "generic-gap-vertical": {
     "$type": "number",
-    "$value": "{spacing.stack.3xl}",
+    "$value": "{spacing.vertical.2xl}",
     "$description": "",
     "$extensions": {
       "com.figma": {

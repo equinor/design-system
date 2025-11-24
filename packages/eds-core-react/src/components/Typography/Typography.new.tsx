@@ -59,7 +59,7 @@ export const TypographyNext = forwardRef<HTMLElement, TypographyNextProps>(
       <Component
         ref={ref}
         data-font-family={family}
-        data-text-size={size}
+        data-font-size={size}
         data-baseline={baseline || undefined}
         data-line-height={lineHeight || undefined}
         data-font-weight={weight || undefined}
