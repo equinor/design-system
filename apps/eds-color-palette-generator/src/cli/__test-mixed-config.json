@@ -1,0 +1,21 @@
+{
+  "colors": [
+    {
+      "name": "Legacy Color",
+      "value": "#FF0000"
+    },
+    {
+      "name": "New Color",
+      "anchors": [
+        {
+          "value": "#0000FF",
+          "step": 1
+        },
+        {
+          "value": "#00FFFF",
+          "step": 15
+        }
+      ]
+    }
+  ]
+}
