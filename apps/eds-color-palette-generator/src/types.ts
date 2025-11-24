@@ -5,12 +5,9 @@ export type ColorAnchor = {
   step: number // which step (1-15) this anchors to
 }
 
-export type ColorDefinition = {
-  name: string
-  // Support both legacy single value and new anchor array
-  value?: string // legacy single color
-  anchors?: ColorAnchor[] // new multi-color with steps
-}
+export type ColorDefinition =
+  | { name: string; value: string }
+  | { name: string; anchors: ColorAnchor[] }
 
 export type ConfigFile = {
   lightModeValues: number[]

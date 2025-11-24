@@ -10,36 +10,43 @@ export function arraysEqual(a: number[], b: number[]): boolean {
 }
 
 // Shallow equality for ColorDefinition arrays (order-sensitive)
-// Note: According to the type definition, a ColorDefinition should have either
-// 'value' or 'anchors', but not both. If both are present in the data, this
-// comparison function checks both fields. In the application logic, 'anchors'
-// takes precedence when both are present.
+// ColorDefinition is a discriminated union with either 'value' or 'anchors'
 export function colorsEqual(
   a: ColorDefinition[],
   b: ColorDefinition[],
 ): boolean {
   if (a.length !== b.length) return false
   for (let i = 0; i < a.length; i++) {
+    const aItem = a[i]
+    const bItem = b[i]
+
     // Compare basic properties
-    if (a[i].name !== b[i].name || a[i].value !== b[i].value) return false
+    if (aItem.name !== bItem.name) return false
 
-    // Compare anchors (both presence and content)
-    const aAnchors = a[i].anchors
-    const bAnchors = b[i].anchors
+    // Check if both have the same discriminator
+    const aHasAnchors = 'anchors' in aItem
+    const bHasAnchors = 'anchors' in bItem
 
-    // Check if one has anchors and the other doesn't
-    if ((aAnchors && !bAnchors) || (!aAnchors && bAnchors)) return false
+    // If one has anchors and the other doesn't, they're different
+    if (aHasAnchors !== bHasAnchors) return false
 
     // If both have anchors, compare them
-    if (aAnchors && bAnchors) {
-      if (aAnchors.length !== bAnchors.length) return false
-      for (let j = 0; j < aAnchors.length; j++) {
+    if (aHasAnchors && bHasAnchors) {
+      // TypeScript knows both have anchors here
+      if (aItem.anchors.length !== bItem.anchors.length) return false
+      for (let j = 0; j < aItem.anchors.length; j++) {
         if (
-          aAnchors[j].step !== bAnchors[j].step ||
-          aAnchors[j].value !== bAnchors[j].value
+          aItem.anchors[j].step !== bItem.anchors[j].step ||
+          aItem.anchors[j].value !== bItem.anchors[j].value
         ) {
           return false
         }
+      }
+    } else {
+      // Both have value, compare them
+      // TypeScript knows both have value here
+      if (!aHasAnchors && !bHasAnchors) {
+        if (aItem.value !== bItem.value) return false
       }
     }
   }

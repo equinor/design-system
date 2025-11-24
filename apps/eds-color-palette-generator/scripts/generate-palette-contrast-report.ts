@@ -61,13 +61,7 @@ function getRequirements(): RequirementRow[] {
  * Helper function to get color input from a ColorDefinition
  */
 function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
-  const colorInput = colorDef.anchors || colorDef.value
-  if (!colorInput) {
-    throw new Error(
-      `Color "${colorDef.name}" is missing both 'anchors' and 'value'.`,
-    )
-  }
-  return colorInput
+  return 'anchors' in colorDef ? colorDef.anchors : colorDef.value
 }
 
 function buildScales() {
@@ -93,7 +87,11 @@ function buildScales() {
     PALETTE_STEPS.forEach((step, idx) => {
       mapping[step.id] = { light: lightScale[idx], dark: darkScale[idx] }
     })
-    return { name: c.name, value: c.value, mapping }
+    return {
+      name: c.name,
+      value: 'value' in c ? c.value : undefined,
+      mapping,
+    }
   })
 }
 

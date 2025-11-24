@@ -69,6 +69,8 @@ describe('Integration: Export Configuration Simplification', () => {
     // Multi-anchor stays as anchors
     const simplifiedAnchors = simplifyColorDefinitions(multiAnchorFormat)
     expect(simplifiedAnchors[0]).toHaveProperty('anchors')
-    expect(simplifiedAnchors[0].anchors).toHaveLength(2)
+    expect(
+      'anchors' in simplifiedAnchors[0] && simplifiedAnchors[0].anchors,
+    ).toHaveLength(2)
   })
 })

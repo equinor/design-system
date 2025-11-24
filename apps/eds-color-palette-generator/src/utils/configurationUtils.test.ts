@@ -114,7 +114,9 @@ describe('configurationUtils', () => {
       const simplified = simplifyColorDefinitions(colors)
 
       expect(simplified[0].name).toBe('My Special Color')
-      expect(simplified[0].value).toBe('oklch(0.5 0.1 180)')
+      expect('value' in simplified[0] && simplified[0].value).toBe(
+        'oklch(0.5 0.1 180)',
+      )
     })
   })
 })
