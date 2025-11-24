@@ -1302,7 +1302,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#eaf8fa",
+        "$value": "#ecf8f6",
       },
       "10": {
         "$description": "",
@@ -1316,7 +1316,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#005e67",
+        "$value": "#205c62",
       },
       "11": {
         "$description": "",
@@ -1330,7 +1330,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#045860",
+        "$value": "#20565c",
       },
       "12": {
         "$description": "",
@@ -1344,7 +1344,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#00656f",
+        "$value": "#1f6369",
       },
       "13": {
         "$description": "",
@@ -1358,7 +1358,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#112022",
+        "$value": "#141f20",
       },
       "14": {
         "$description": "",
@@ -1372,7 +1372,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#c3e5ea",
+        "$value": "#cae4e7",
       },
       "15": {
         "$description": "",
@@ -1386,7 +1386,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#ffffff",
+        "$value": "#f7ffff",
       },
       "2": {
         "$description": "",
@@ -1400,7 +1400,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#f6ffff",
+        "$value": "#f8ffff",
       },
       "3": {
         "$description": "",
@@ -1414,7 +1414,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#cee7ea",
+        "$value": "#d2e6e3",
       },
       "4": {
         "$description": "",
@@ -1428,7 +1428,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#b9dce0",
+        "$value": "#c0dbd6",
       },
       "5": {
         "$description": "",
@@ -1442,7 +1442,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#9eced4",
+        "$value": "#a8cdc7",
       },
       "6": {
         "$description": "",
@@ -1456,7 +1456,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#b8dce0",
+        "$value": "#c0dbd6",
       },
       "7": {
         "$description": "",
@@ -1470,7 +1470,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#73bcc4",
+        "$value": "#83bab7",
       },
       "8": {
         "$description": "",
@@ -1484,7 +1484,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#007883",
+        "$value": "#277678",
       },
       "9": {
         "$description": "",
@@ -1498,7 +1498,7 @@ exports[`generate-colors CLI > should generate color scales using anchors (inter
           },
         },
         "$type": "color",
-        "$value": "#00717c",
+        "$value": "#206f77",
       },
     },
   },

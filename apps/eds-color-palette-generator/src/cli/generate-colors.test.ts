@@ -258,8 +258,8 @@ describe('generate-colors CLI', () => {
         {
           name: 'Interpolated Green',
           anchors: [
-            { value: '#007079', step: 1 },
-            { value: '#00A8B8', step: 15 },
+            { value: 'oklch(0.5915 0.0731 184.63)', step: 6 },
+            { value: 'oklch(0.4973 0.084851 204.553)', step: 9 },
           ],
         },
       ],
