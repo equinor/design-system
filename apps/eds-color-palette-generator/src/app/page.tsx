@@ -12,6 +12,7 @@ import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import {
   ColorDefinition,
+  ColorAnchor,
   ConfigFile,
   ContrastMethod,
   ColorFormat,
@@ -139,10 +140,7 @@ export default function App() {
     )
   }
 
-  const updateColorAnchors = (
-    index: number,
-    newAnchors: Extract<ColorDefinition, { anchors: unknown }>['anchors'],
-  ) => {
+  const updateColorAnchors = (index: number, newAnchors: ColorAnchor[]) => {
     // Update the anchors for a color
     setColors((prev) =>
       prev.map((color, i) => {

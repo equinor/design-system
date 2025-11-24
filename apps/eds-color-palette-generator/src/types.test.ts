@@ -54,16 +54,26 @@ describe('ColorDefinition type', () => {
   })
 
   it('should work with type guards', () => {
-    const color: ColorDefinition = { name: 'Test', value: '#000000' }
-
-    if ('value' in color) {
-      // TypeScript knows color has value property
-      const val: string = color.value
-      expect(val).toBe('#000000')
-    } else {
-      // TypeScript knows color has anchors property
-      const anc: ColorAnchor[] = color.anchors
-      expect(anc).toBeDefined()
+    const processColor = (color: ColorDefinition): string => {
+      if ('value' in color) {
+        // TypeScript knows color has value property
+        return color.value
+      } else {
+        // TypeScript knows color has anchors property
+        return color.anchors.map((a) => a.value).join(',')
+      }
     }
+
+    const valueColor: ColorDefinition = { name: 'Test', value: '#000000' }
+    expect(processColor(valueColor)).toBe('#000000')
+
+    const anchorColor: ColorDefinition = {
+      name: 'Test',
+      anchors: [
+        { value: '#ff0000', step: 1 },
+        { value: '#00ff00', step: 15 },
+      ],
+    }
+    expect(processColor(anchorColor)).toBe('#ff0000,#00ff00')
   })
 })

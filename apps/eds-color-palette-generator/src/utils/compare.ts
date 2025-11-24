@@ -42,12 +42,11 @@ export function colorsEqual(
           return false
         }
       }
-    } else {
-      // Both have value, compare them
-      // TypeScript knows both have value here
-      if (!aHasAnchors && !bHasAnchors) {
-        if (aItem.value !== bItem.value) return false
-      }
+    }
+
+    // If both have value, compare them
+    if (!aHasAnchors && !bHasAnchors) {
+      if (aItem.value !== bItem.value) return false
     }
   }
   return true
