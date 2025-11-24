@@ -2,27 +2,27 @@
 
 _Generated overview of the current palette configuration (step values, contrast requirements, and reference contrast levels)._
 
-Generated: 2025-08-26
+Generated: 2025-11-24
 
 ## Step Definitions
 
 | ID | Name | Category | Variant | Light (L) | Dark (L) |
 | --- | ---- | -------- | ------- | --------- | -------- |
-| background-default | Background Default | background | default | 1.00 | 0.15 |
-| background-subtle | Background Subtle | background | subtle | 0.96 | 0.25 |
-| background-medium-default | Background Medium Default | background-medium | medium-default | 0.88 | 0.45 |
-| background-medium-hover | Background Medium Hover | background-medium | medium-hover | 0.84 | 0.48 |
-| background-medium-active | Background Medium Active | background-medium | medium-active | 0.80 | 0.50 |
-| border-subtle | Border Subtle | border | subtle | 0.82 | 0.63 |
-| border-medium | Border Medium | border | medium | 0.73 | 0.66 |
-| border-strong | Border Strong | border | strong | 0.62 | 0.68 |
-| background-strong-default | Background Strong Default | background-strong | strong-default | 0.50 | 0.78 |
-| background-strong-hover | Background Strong Hover | background-strong | strong-hover | 0.44 | 0.85 |
-| background-strong-active | Background Strong Active | background-strong | strong-active | 0.42 | 0.92 |
-| text-subtle | Text Subtle | text | subtle | 0.40 | 0.91 |
-| text-strong | Text Strong | text | strong | 0.32 | 0.99 |
-| text-contrast-subtle | Text Contrast Subtle | text | contrast-subtle | 0.89 | 0.30 |
-| text-contrast-strong | Text Contrast Strong | text | contrast-strong | 0.99 | 0.26 |
+| bg-canvas | Background Canvas | Background | undefined | 0.97 | 0.15 |
+| bg-surface | Background Surface | Background | surface | 1.00 | 0.25 |
+| bg-fill-muted-default | Background Fill Muted Default | Background Fill Muted | default | 0.91 | 0.47 |
+| bg-fill-muted-hover | Background Fill Muted Hover | Background Fill Muted | hover | 0.87 | 0.52 |
+| bg-fill-muted-active | Background Fill Muted Active | Background Fill Muted | active | 0.82 | 0.58 |
+| border-subtle | Border Subtle | Border | subtle | 0.87 | 0.47 |
+| border-medium | Border Medium | Border | medium | 0.75 | 0.61 |
+| border-strong | Border Strong | Border | strong | 0.52 | 0.76 |
+| bg-fill-emphasis-default | Background Fill Emphasis Default | Background Fill Emphasis | default | 0.50 | 0.82 |
+| bg-fill-emphasis-hover | Background Fill Emphasis Hover | Background Fill Emphasis | hover | 0.44 | 0.88 |
+| bg-fill-emphasis-active | Background Fill Emphasis Active | Background Fill Emphasis | active | 0.42 | 0.93 |
+| text-subtle | Text Subtle | Text | subtle | 0.46 | 0.91 |
+| text-strong | Text Strong | Text | strong | 0.23 | 0.99 |
+| text-subtle-on-emphasis | Text Subtle on Emphasis | Text | subtle-on-emphasis | 0.90 | 0.33 |
+| text-strong-on-emphasis | Text Strong on Emphasis | Text | strong-on-emphasis | 1.00 | 0.10 |
 
 ## Contrast Requirements (Foreground → Background)
 
@@ -30,50 +30,37 @@ _APCA LC value shown is the required Lightness Contrast. WCAG column shows level
 
 | Foreground | Background | APCA | WCAG |
 | --------------- | --------------- | ------- | ----------- |
-| background-medium-default | background-default | 15 | AA_LARGE (3) |
-| background-medium-default | background-subtle | 15 | AA_LARGE (3) |
-| background-medium-hover | background-default | 15 | AA_LARGE (3) |
-| background-medium-hover | background-subtle | 15 | AA_LARGE (3) |
-| background-medium-active | background-default | 15 | AA_LARGE (3) |
-| background-medium-active | background-subtle | 15 | AA_LARGE (3) |
-| border-subtle | background-default | 15 | AA_LARGE (3) |
-| border-subtle | background-subtle | 15 | AA_LARGE (3) |
-| border-subtle | background-medium-default | 15 | AA_LARGE (3) |
-| border-subtle | background-medium-hover | 15 | AA_LARGE (3) |
-| border-subtle | background-medium-active | 15 | AA_LARGE (3) |
-| border-medium | background-default | 15 | AA_LARGE (3) |
-| border-medium | background-subtle | 15 | AA_LARGE (3) |
-| border-medium | background-medium-default | 15 | AA_LARGE (3) |
-| border-medium | background-medium-hover | 15 | AA_LARGE (3) |
-| border-medium | background-medium-active | 15 | AA_LARGE (3) |
-| border-strong | background-default | 15 | AA_LARGE (3) |
-| border-strong | background-subtle | 15 | AA_LARGE (3) |
-| border-strong | background-medium-default | 15 | AA_LARGE (3) |
-| border-strong | background-medium-hover | 15 | AA_LARGE (3) |
-| border-strong | background-medium-active | 15 | AA_LARGE (3) |
+| bg-fill-muted-default | bg-surface | 15 | AA_LARGE (3) |
+| bg-fill-muted-hover | bg-surface | 15 | AA_LARGE (3) |
+| bg-fill-muted-active | bg-surface | 15 | AA_LARGE (3) |
+| border-subtle | bg-canvas | 15 | AA_LARGE (3) |
+| border-subtle | bg-surface | 15 | AA_LARGE (3) |
+| border-medium | bg-canvas | 30 | AA_LARGE (3) |
+| border-medium | bg-surface | 30 | AA_LARGE (3) |
+| border-medium | bg-fill-muted-default | 15 | AA_LARGE (3) |
+| border-strong | bg-canvas | 30 | AA_LARGE (3) |
+| border-strong | bg-surface | 30 | AA_LARGE (3) |
+| border-strong | bg-fill-muted-default | 30 | AA_LARGE (3) |
+| border-strong | bg-fill-muted-hover | 30 | AA_LARGE (3) |
 | border-strong | border-medium | 15 | AA_LARGE (3) |
-| background-strong-default | background-default | 45 | AA_LARGE (3) |
-| background-strong-default | background-subtle | 45 | AA_LARGE (3) |
-| background-strong-hover | background-default | 45 | AA_LARGE (3) |
-| background-strong-hover | background-subtle | 45 | AA_LARGE (3) |
-| background-strong-active | background-default | 30 | AA_LARGE (3) |
-| background-strong-active | background-subtle | 30 | AA_LARGE (3) |
-| text-subtle | background-default | 60 | AAA_LARGE (4.5) |
-| text-subtle | background-subtle | 60 | AAA_LARGE (4.5) |
-| text-subtle | background-medium-default | 60 | AAA_LARGE (4.5) |
-| text-subtle | background-medium-hover | 60 | AAA_LARGE (4.5) |
-| text-subtle | background-medium-active | 60 | AAA_LARGE (4.5) |
-| text-strong | background-default | 90 | AAA_NORMAL (7) |
-| text-strong | background-subtle | 90 | AAA_NORMAL (7) |
-| text-strong | background-medium-default | 60 | AAA_LARGE (4.5) |
-| text-strong | background-medium-hover | 60 | AAA_LARGE (4.5) |
-| text-strong | background-medium-active | 60 | AAA_LARGE (4.5) |
-| text-contrast-subtle | background-strong-default | 60 | AAA_LARGE (4.5) |
-| text-contrast-subtle | background-strong-hover | 60 | AAA_LARGE (4.5) |
-| text-contrast-subtle | background-strong-active | 60 | AAA_LARGE (4.5) |
-| text-contrast-strong | background-strong-default | 90 | AAA_NORMAL (7) |
-| text-contrast-strong | background-strong-hover | 90 | AAA_NORMAL (7) |
-| text-contrast-strong | background-strong-active | 90 | AAA_NORMAL (7) |
+| bg-fill-emphasis-default | bg-canvas | 30 | AA_LARGE (3) |
+| bg-fill-emphasis-default | bg-surface | 30 | AA_LARGE (3) |
+| bg-fill-emphasis-hover | bg-canvas | 30 | AA_LARGE (3) |
+| bg-fill-emphasis-hover | bg-surface | 30 | AA_LARGE (3) |
+| bg-fill-emphasis-active | bg-canvas | 30 | AA_LARGE (3) |
+| bg-fill-emphasis-active | bg-surface | 30 | AA_LARGE (3) |
+| text-subtle | bg-canvas | 60 | AAA_LARGE (4.5) |
+| text-subtle | bg-surface | 60 | AAA_LARGE (4.5) |
+| text-subtle | bg-fill-muted-default | 60 | AAA_LARGE (4.5) |
+| text-strong | bg-canvas | 90 | AAA_NORMAL (7) |
+| text-strong | bg-surface | 90 | AAA_NORMAL (7) |
+| text-strong | bg-fill-muted-default | 60 | AAA_LARGE (4.5) |
+| text-subtle-on-emphasis | bg-fill-emphasis-default | 60 | AAA_LARGE (4.5) |
+| text-subtle-on-emphasis | bg-fill-emphasis-hover | 60 | AAA_LARGE (4.5) |
+| text-subtle-on-emphasis | bg-fill-emphasis-active | 60 | AAA_LARGE (4.5) |
+| text-strong-on-emphasis | bg-fill-emphasis-default | 60 | AAA_NORMAL (7) |
+| text-strong-on-emphasis | bg-fill-emphasis-hover | 60 | AAA_NORMAL (7) |
+| text-strong-on-emphasis | bg-fill-emphasis-active | 60 | AAA_NORMAL (7) |
 
 ## APCA Contrast Levels Reference
 
