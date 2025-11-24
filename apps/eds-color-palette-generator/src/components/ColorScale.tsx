@@ -302,7 +302,17 @@ function ColorScaleBase({
   const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
     Array(colors.length).fill(null),
   )
+  const copiedTimeoutRef = useRef<number | null>(null)
   const headingColor = colors[8] || '#000000'
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (copiedTimeoutRef.current) {
+        clearTimeout(copiedTimeoutRef.current)
+      }
+    }
+  }, [])
 
   // Stable, memoized header component to isolate frequent re-renders
   const NameAndControls = React.useMemo(() => {
@@ -690,11 +700,19 @@ function ColorScaleBase({
 
   // Copy to clipboard function
   const copyToClipboard = async (text: string, colorIndex: number) => {
+    // Clear any existing timeout
+    if (copiedTimeoutRef.current) {
+      clearTimeout(copiedTimeoutRef.current)
+    }
+
     try {
       await navigator.clipboard.writeText(text)
       setCopiedColorIndex(colorIndex)
       // Reset the copied state after 2 seconds
-      setTimeout(() => setCopiedColorIndex(null), 2000)
+      copiedTimeoutRef.current = window.setTimeout(
+        () => setCopiedColorIndex(null),
+        2000,
+      )
     } catch (err) {
       console.error('Failed to copy to clipboard:', err)
       // Fallback for older browsers
@@ -706,7 +724,10 @@ function ColorScaleBase({
       document.body.removeChild(textArea)
       setCopiedColorIndex(colorIndex)
       // Reset the copied state after 2 seconds
-      setTimeout(() => setCopiedColorIndex(null), 2000)
+      copiedTimeoutRef.current = window.setTimeout(
+        () => setCopiedColorIndex(null),
+        2000,
+      )
     }
   }
 
