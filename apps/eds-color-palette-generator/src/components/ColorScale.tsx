@@ -316,6 +316,12 @@ function ColorScaleBase({
           baseColor || '#000000',
         )
         const [isValidColor, setIsValidColor] = useState(true)
+        const [duplicateStepError, setDuplicateStepError] = useState<
+          string | null
+        >(null)
+        const [maxAnchorsError, setMaxAnchorsError] = useState<string | null>(
+          null,
+        )
         const debounceRef = useRef<number | null>(null)
 
         // Determine if we're in anchor mode
@@ -387,13 +393,13 @@ function ColorScaleBase({
           } else if (field === 'step' && typeof newValue === 'number') {
             // Check for duplicate step values using helper function
             if (isStepAlreadyUsed(anchors, newValue, index)) {
-              // Note: Using alert here. Consider replacing with a toast notification
-              // or inline error message for better UX in a future update
-              window.alert(
+              setDuplicateStepError(
                 'Step value already used by another anchor. Please choose a unique step.',
               )
               return
             }
+            // Clear error when successful
+            setDuplicateStepError(null)
             newAnchors[index] = { ...newAnchors[index], step: newValue }
           }
           onChangeAnchors(newAnchors)
@@ -406,13 +412,14 @@ function ColorScaleBase({
 
           // Check if all 15 steps are already used
           if (usedSteps.length >= 15) {
-            // Note: Using alert here. Consider replacing with a toast notification
-            // or inline error message for better UX in a future update
-            window.alert(
+            setMaxAnchorsError(
               'All 15 steps are already in use. Remove an anchor before adding a new one.',
             )
             return
           }
+
+          // Clear error when successful
+          setMaxAnchorsError(null)
 
           let newStep = 8 // Default to middle step
           for (let i = 1; i <= 15; i++) {
@@ -543,6 +550,28 @@ function ColorScaleBase({
                     testId={testId}
                   />
                 ))}
+                {duplicateStepError && (
+                  <div
+                    className="text-xs text-danger-subtle px-2 py-1 bg-danger-fill-muted rounded-md"
+                    role="alert"
+                    data-testid={
+                      testId ? `${testId}-duplicate-step-error` : undefined
+                    }
+                  >
+                    {duplicateStepError}
+                  </div>
+                )}
+                {maxAnchorsError && (
+                  <div
+                    className="text-xs text-danger-subtle px-2 py-1 bg-danger-fill-muted rounded-md"
+                    role="alert"
+                    data-testid={
+                      testId ? `${testId}-max-anchors-error` : undefined
+                    }
+                  >
+                    {maxAnchorsError}
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={handleAddAnchor}

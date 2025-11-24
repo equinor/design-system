@@ -1,0 +1,12 @@
+{
+  "colors": [
+    {
+      "name": "Test Color",
+      "value": "#FF0000"
+    }
+  ],
+  "meanLight": 0.5,
+  "stdDevLight": 1.5,
+  "meanDark": 0.8,
+  "stdDevDark": 1.8
+}

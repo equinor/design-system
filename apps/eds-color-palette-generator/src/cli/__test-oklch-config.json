@@ -1,0 +1,13 @@
+{
+  "colors": [
+    {
+      "name": "Moss Green",
+      "value": "#007079"
+    },
+    {
+      "name": "Blue",
+      "value": "#0084C4"
+    }
+  ],
+  "colorFormat": "OKLCH"
+}
