@@ -310,7 +310,10 @@ describe('generate-colors CLI', () => {
       ],
     }
 
-    const anchorsConfigPath = resolve(__dirname, '__test-mid-anchors-config.json')
+    const anchorsConfigPath = resolve(
+      __dirname,
+      '__test-mid-anchors-config.json',
+    )
     writeFileSync(
       anchorsConfigPath,
       JSON.stringify(anchorsConfig, null, 2),
