@@ -10,7 +10,7 @@
  * preventing the mathematical operations needed for responsive icon sizing based on
  * the current text size.
  */
-@property --eds-font-size {
+@property --eds-typography-font-size {
   inherits: true;
   initial-value: 16px;
   syntax: '<length>';

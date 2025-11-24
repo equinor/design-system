@@ -1088,7 +1088,7 @@
   --eds-page-gap-vertical: var(--eds-spacing-vertical-xl);
 }
 
-@property --eds-font-size {
+@property --eds-typography-font-size {
   syntax: "<length>";
   inherits: true;
   initial-value: 16px;
