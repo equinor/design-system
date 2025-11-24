@@ -99,7 +99,15 @@ test('should clear duplicate step error when selecting a valid step', async ({
   await expect(errorMessage).toBeVisible()
 
   // Now select a different valid step
-  await secondAnchorStep.selectOption('8') // Use step 8 (assuming it's available)
+  // Find an available step by checking all options that are not disabled
+  const availableSteps = await page
+    .locator('select[data-testid="color-scale-0-anchor-1-step"] option:not([disabled])')
+    .all()
+  const availableStepValue = await availableSteps[0].getAttribute('value')
+  
+  if (availableStepValue && availableStepValue !== firstStepValue) {
+    await secondAnchorStep.selectOption(availableStepValue)
+  }
   await page.waitForTimeout(300)
 
   // Verify error disappears
