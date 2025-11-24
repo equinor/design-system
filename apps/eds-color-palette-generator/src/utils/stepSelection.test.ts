@@ -68,4 +68,31 @@ describe('findAvailableStep', () => {
     // This edge case should not happen in practice as the UI prevents adding more than 15 anchors
     expect(result).toBe(8)
   })
+
+  it('should clamp preferredStep to valid range when given invalid value', () => {
+    const usedSteps: number[] = []
+    // Test with negative number - should clamp to 1
+    const resultNegative = findAvailableStep(usedSteps, -5)
+    expect(resultNegative).toBe(1)
+
+    // Test with value above 15 - should clamp to 15
+    const resultHigh = findAvailableStep(usedSteps, 20)
+    expect(resultHigh).toBe(15)
+
+    // Test with 0 - should clamp to 1
+    const resultZero = findAvailableStep(usedSteps, 0)
+    expect(resultZero).toBe(1)
+  })
+
+  it('should clamp invalid preferredStep and still find available step', () => {
+    const usedSteps = [1, 2, 3] // Steps 1, 2, 3 are used
+    // Test with negative number - should clamp to 1, but 1 is used, so should find next available (4)
+    const resultNegative = findAvailableStep(usedSteps, -5)
+    expect(resultNegative).toBe(4)
+
+    // Test with value above 15 when 15 is used
+    const usedSteps2 = [15]
+    const resultHigh = findAvailableStep(usedSteps2, 20)
+    expect(resultHigh).toBe(1) // Should find first available
+  })
 })
