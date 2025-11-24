@@ -92,7 +92,8 @@ function AnchorColorInput({
   useEffect(() => {
     return () => {
       if (debounceRef.current) {
-        window.clearTimeout(debounceRef.current)
+        clearTimeout(debounceRef.current)
+        debounceRef.current = null
       }
     }
   }, [])
@@ -310,6 +311,7 @@ function ColorScaleBase({
     return () => {
       if (copiedTimeoutRef.current) {
         clearTimeout(copiedTimeoutRef.current)
+        copiedTimeoutRef.current = null
       }
     }
   }, [])
@@ -369,7 +371,8 @@ function ColorScaleBase({
         useEffect(() => {
           return () => {
             if (debounceRef.current) {
-              window.clearTimeout(debounceRef.current)
+              clearTimeout(debounceRef.current)
+              debounceRef.current = null
             }
           }
         }, [])
