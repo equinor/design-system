@@ -88,6 +88,15 @@ function AnchorColorInput({
   const [isValidColor, setIsValidColor] = useState(true)
   const debounceRef = useRef<number | null>(null)
 
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        window.clearTimeout(debounceRef.current)
+      }
+    }
+  }, [])
+
   const handleColorInputChange = (value: string) => {
     setLocalColorInput(value)
     const isValid = isValidColorFormat(value)
@@ -345,6 +354,15 @@ function ColorScaleBase({
             setIsValidColor(true)
           }
         }, [baseColor])
+
+        // Cleanup timeout on unmount
+        useEffect(() => {
+          return () => {
+            if (debounceRef.current) {
+              window.clearTimeout(debounceRef.current)
+            }
+          }
+        }, [])
 
         // Reusable debounced color change handler
         const debouncedColorChange = (value: string) => {
