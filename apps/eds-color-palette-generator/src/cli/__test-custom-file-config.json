@@ -1,0 +1,10 @@
+{
+  "colors": [
+    {
+      "name": "Test Color",
+      "value": "#0084C4"
+    }
+  ],
+  "outputFileLight": "custom-light.json",
+  "outputFileDark": "custom-dark.json"
+}

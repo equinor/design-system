@@ -131,7 +131,16 @@ function AnchorColorInput({
             // Find if this step is used by another anchor
             const isUsed = isStepAlreadyUsed(anchors, step, index)
             return (
-              <option key={step} value={step} disabled={isUsed}>
+              <option
+                key={step}
+                value={step}
+                disabled={isUsed}
+                aria-label={
+                  isUsed
+                    ? `Step ${step} (unavailable - already used by another anchor)`
+                    : `Step ${step}`
+                }
+              >
                 Step {step}
                 {isUsed ? ' (used)' : ''}
               </option>

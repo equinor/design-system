@@ -1,0 +1,17 @@
+{
+  "colors": [
+    {
+      "name": "Moss Green",
+      "value": "oklch(0.4973 0.084851 204.553)"
+    },
+    {
+      "name": "Gray",
+      "value": "oklch(0.4091 0 0)"
+    },
+    {
+      "name": "Blue",
+      "value": "oklch(0.5857 0.135751 240.6802)"
+    }
+  ],
+  "colorFormat": "HEX"
+}
