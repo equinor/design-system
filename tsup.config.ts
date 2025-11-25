@@ -2,8 +2,9 @@ import { spawnSync } from "child_process";
 import { defineConfig } from "tsup";
 
 export default defineConfig((options) => ({
-  entry: ["./src/**/*.ts?(x)", "!./src/types.d.ts", "!./src/__tests__/*"],
-  splitting: true,
+  entry: ["./src/index.ts"],
+  splitting: false,
+  minify: true,
   clean: true,
   dts: false,
   format: "esm",
