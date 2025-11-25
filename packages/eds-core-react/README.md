@@ -1,18 +1,50 @@
 # @equinor/eds-core-react
 
-Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
+React implementation of the Equinor Design System (EDS). Use it to build applications that follow the EDS guidelines and stay up to date with the latest components.
 
 Make sure to check out our [Storybook](https://storybook.eds.equinor.com/) for more examples!
 Read the [changelog](https://github.com/equinor/design-system/blob/main/packages/eds-core-react/CHANGELOG.md) for details on specific releases.
 
 ## Installation
 
-```sh
+### Stable Release (Recommended)
+
+```bash
 npm install @equinor/eds-core-react styled-components 
 ```
-If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
-```sh
+
+```typescript
+import { Button, Typography } from '@equinor/eds-core-react'
+```
+
+### Beta Release (EDS 2.0)
+
+⚠️ **Experimental** – For testing and feedback only. Not production-ready.
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+```typescript
+import { Button, Typography } from '@equinor/eds-core-react/next'
+```
+
+**Learn more:**
+- [Beta Release Guide](../../documentation/how-to/BETA_RELEASE.md)
+- [View beta components in Storybook](https://storybook.eds.equinor.com)
+
+### Additional Setup
+
+If you use TypeScript, make sure you have TypeScript >= 3.8 as a devDependency:
+
+```bash
 npm install typescript --save-dev
+```
+
+Install the design tokens and styled-components runtime to get the required styles:
+
+```bash
+npm install @equinor/eds-core-react @equinor/eds-tokens styled-components
 ```
 
 ### Fonts
@@ -116,3 +148,22 @@ render(<App />, document.getElementById('root'))
 - Tooltip
 - TopBar
 - Typography
+
+## Documentation
+
+- **Storybook**: https://storybook.eds.equinor.com
+- **Design System Docs**: https://eds.equinor.com
+- **Contributing**: [CONTRIBUTING.md](../../CONTRIBUTING.md)
+
+## Changelogs
+
+- **Stable**: [CHANGELOG.md](./CHANGELOG.md)
+- **Beta**: [CHANGELOG.next.md](./CHANGELOG.next.md)
+
+## Package Structure
+
+```
+@equinor/eds-core-react
+├── /                    # Stable components (EDS 1.0)
+└── /next                # Beta components (EDS 2.0)
+```

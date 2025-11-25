@@ -2,6 +2,15 @@
 
 This guide explains how beta releases work for EDS 2.0 components under the `/next` entry point.
 
+## Quick Reference
+
+| Action | Command |
+|--------|---------|
+| Install beta | `npm install @equinor/eds-core-react@beta` |
+| Import beta component | `import { Button } from '@equinor/eds-core-react/next'` |
+| Commit for beta | `feat(next): add new component` |
+| View beta versions | `npm view @equinor/eds-core-react versions \| grep beta` |
+
 ## Overview
 
 The EDS repository uses a **dual release strategy**:
@@ -73,6 +82,22 @@ Beta components are **visible in production Storybook** under the **"EDS 2.0"** 
 - 📖 Read documentation and API specs
 - 🎨 View design implementations
 - 💬 Provide feedback before stable release
+
+### Storybook Labeling Tips
+
+Add a visual indicator in story titles so teams immediately know the component is in beta. If you use `storybook-addon-badges`, you can also surface badges in the docs tab:
+
+```typescript
+// In component stories
+export default {
+   title: 'EDS 2.0 (beta)/Inputs/Button',
+   parameters: {
+      badges: ['beta', 'next'],
+   },
+}
+```
+
+Use consistent naming (e.g., `EDS 2.0 (beta)`) so search groups every beta story together.
 
 **To actually use these components**, you must install the beta version:
 
