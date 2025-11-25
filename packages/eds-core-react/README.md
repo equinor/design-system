@@ -30,8 +30,8 @@ import { Button, Typography } from '@equinor/eds-core-react/next'
 ```
 
 **Learn more:**
-- [Beta Release Guide](../../documentation/how-to/BETA_RELEASE.md)
-- [View beta components in Storybook](https://storybook.eds.equinor.com)
+- [Complete Beta Release Guide](../../documentation/how-to/BETA_RELEASE_GUIDE.md)
+- [Preview EDS 2.0 components in Storybook](https://storybook.eds.equinor.com)
 
 ### Additional Setup
 

@@ -4,12 +4,12 @@ This guide explains how beta releases work for EDS 2.0 components under the `/ne
 
 ## Quick Reference
 
-| Action | Command |
-|--------|---------|
-| Install beta | `npm install @equinor/eds-core-react@beta` |
-| Import beta component | `import { Button } from '@equinor/eds-core-react/next'` |
-| Commit for beta | `feat(next): add new component` |
-| View beta versions | `npm view @equinor/eds-core-react versions \| grep beta` |
+| Action                | Command                                                  |
+| --------------------- | -------------------------------------------------------- |
+| Install beta          | `npm install @equinor/eds-core-react@beta`               |
+| Import beta component | `import { Button } from '@equinor/eds-core-react/next'`  |
+| Commit for beta       | `feat(next): add new component`                          |
+| View beta versions    | `npm view @equinor/eds-core-react versions \| grep beta` |
 
 ## Overview
 
@@ -85,15 +85,15 @@ Beta components are **visible in production Storybook** under the **"EDS 2.0"** 
 
 ### Storybook Labeling Tips
 
-Add a visual indicator in story titles so teams immediately know the component is in beta. If you use `storybook-addon-badges`, you can also surface badges in the docs tab:
+Add a visual indicator in story titles so teams immediately know the component is in beta:
 
 ```typescript
 // In component stories
 export default {
-   title: 'EDS 2.0 (beta)/Inputs/Button',
-   parameters: {
-      badges: ['beta', 'next'],
-   },
+  title: 'EDS 2.0 (beta)/Inputs/Button',
+  parameters: {
+    badges: ['beta', 'next'],
+  },
 }
 ```
 
@@ -208,8 +208,6 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
    - Button: API changes, see migration guide
    - Typography: New props structure, see migration guide
    ...
-
-   Migration guide: https://eds.equinor.com/migration/v3"
    ```
 
 #### Benefits of Batch Graduation
