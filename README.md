@@ -255,7 +255,7 @@ import { ComponentName } from '@equinor/eds-core-react/next'
 - **Separate changelog** - see `CHANGELOG.next.md` for beta changes
 - **Feedback welcome** - help us improve before stable release!
 
-See the [Beta Release Guide](./packages/eds-core-react/BETA_RELEASE_GUIDE.md) for detailed information on the beta release workflow.
+See the [Beta Release Guide](./documentation/how-to/BETA_RELEASE_GUIDE.md) for detailed information on the beta release workflow.
 
 ## Icons
 

@@ -34,8 +34,10 @@ feat(next): add new TextInput component
 fix(next): correct Placeholder styling
 
 # Breaking changes
-feat(next)!: change Button API
+feat(next): change Button API
 ```
+
+> **Note:** Skip the conventional-commit `!` marker for beta components. Release Please treats `!` as a major-bump signal even for prereleases, so we call out breaking details in the description/body instead of using `!`.
 
 ### Stable Release (for existing components)
 
@@ -263,7 +265,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
    - Bumps version in manifest
 
 3. **Trigger publish workflow**
-   - Detects beta vs stable from PR title
+   - Detects beta vs stable by checking whether Release Please updated `CHANGELOG.md` (stable) or `CHANGELOG.next.md` (beta)
    - Publishes to correct npm dist-tag
    - Deploys Storybook (beta components visible in "EDS 2.0" section)
 
@@ -313,8 +315,8 @@ npm view @equinor/eds-core-react@beta version
 
 ### Wrong dist-tag applied
 
-- Check PR title contains "next" keyword
-- Review `trigger_publish.yml` workflow logs
+- Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `CHANGELOG.next.md` for beta)
+- Review `trigger_publish.yml` workflow logs (look for `detect-release` step output to see which changelog was detected)
 - Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@2.0.0-beta.1 beta`
 
 ### Components not found in `/next` import

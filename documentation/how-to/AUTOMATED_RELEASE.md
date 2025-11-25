@@ -56,7 +56,7 @@ For components under development in the `/next` entry point:
 
 4. **Test beta release**: `npm install @equinor/eds-core-react@beta`
 
-For complete details on beta workflow, graduation strategy, and breaking changes policy, see the [Beta Release Guide](../../packages/eds-core-react/BETA_RELEASE_GUIDE.md).
+For complete details on beta workflow, graduation strategy, and breaking changes policy, see the [Beta Release Guide](./BETA_RELEASE_GUIDE.md).
 
 ## How It Works
 

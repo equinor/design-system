@@ -312,7 +312,7 @@ feat(next): redesign Input 2.0 API (breaking)
 - **Workflow**: `.github/workflows/release-please.yml` (triggers release-please)
 - **Publish**: `.github/workflows/trigger-publish.yml` (publishes after release, handles beta detection)
 - **Automated release documentation**: `../documentation/how-to/AUTOMATED_RELEASE.md`
-- **Beta release guide**: `packages/eds-core-react/BETA_RELEASE_GUIDE.md` (detailed beta workflow)
+- **Beta release guide**: `documentation/how-to/BETA_RELEASE_GUIDE.md` (detailed beta workflow)
 
 ## Useful Links
 
