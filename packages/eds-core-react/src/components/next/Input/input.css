@@ -50,8 +50,8 @@
     font-size: var(--eds-typography-ui-body-lg-font-size);
     font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
     line-height: var(--eds-typography-ui-body-lg-lineheight-squished);
-    padding-block: var(--eds-selectable-spacing-stack);
-    padding-inline: var(--eds-selectable-spacing-inline);
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -85,8 +85,8 @@
    */
   .eds-adornment {
     position: absolute;
-    top: var(--eds-selectable-spacing-stack);
-    bottom: var(--eds-selectable-spacing-stack);
+    top: var(--eds-selectable-space-vertical);
+    bottom: var(--eds-selectable-space-vertical);
     display: flex;
     align-items: center;
     color: var(--eds-color-text-subtle);
@@ -103,11 +103,11 @@
 
   .eds-adornment--left {
     left: 0;
-    padding-left: var(--eds-selectable-spacing-inline);
+    padding-left: var(--eds-selectable-space-horizontal);
   }
 
   .eds-adornment--right {
     right: 0;
-    padding-right: var(--eds-selectable-spacing-inline);
+    padding-right: var(--eds-selectable-space-horizontal);
   }
 }
