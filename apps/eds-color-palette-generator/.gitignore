@@ -15,3 +15,7 @@ next-env.d.ts
 # Build output
 dist/
 output/
+
+# Test artifacts
+src/cli/__test-*.json
+src/cli/__test-*-output__/
