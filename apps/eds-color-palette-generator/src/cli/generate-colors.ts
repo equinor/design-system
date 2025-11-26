@@ -69,19 +69,40 @@ function formatColorTokens(
 }
 
 /**
+ * Validates a color definition has either value or anchors
+ * @param colorDef - Color definition object to validate
+ * @throws Error if color definition is invalid
+ */
+function validateColorDefinition(
+  colorDef: unknown,
+): asserts colorDef is ColorDefinition {
+  if (typeof colorDef !== 'object' || colorDef === null) {
+    throw new Error('Color definition must be an object')
+  }
+
+  const def = colorDef as Record<string, unknown>
+
+  if (!('name' in def) || typeof def.name !== 'string') {
+    throw new Error('Color definition must have a "name" property')
+  }
+
+  const hasValue = 'value' in def && typeof def.value === 'string'
+  const hasAnchors = 'anchors' in def && Array.isArray(def.anchors)
+
+  if (!hasValue && !hasAnchors) {
+    throw new Error(
+      `Color definition "${def.name}" must have either a "value" or "anchors" property`,
+    )
+  }
+}
+
+/**
  * Helper function to get color input from a ColorDefinition
  * @param colorDef - Color definition object
  * @returns The color input (anchors array or value string)
- * @throws Error if both anchors and value are missing
  */
 function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
-  const colorInput = colorDef.anchors || colorDef.value
-  if (!colorInput) {
-    throw new Error(
-      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please add either a 'value' property with a single color or an 'anchors' array with color anchor points.`,
-    )
-  }
-  return colorInput
+  return 'anchors' in colorDef ? colorDef.anchors : colorDef.value
 }
 
 function generateColors(configPath: string, outputDir: string) {
@@ -108,6 +129,11 @@ function generateColors(configPath: string, outputDir: string) {
   // Get lightness values from PALETTE_STEPS
   const lightModeValues = getLightnessValues('light')(PALETTE_STEPS)
   const darkModeValues = getLightnessValues('dark')(PALETTE_STEPS)
+
+  // Validate all color definitions
+  config.colors.forEach((colorDef) => {
+    validateColorDefinition(colorDef)
+  })
 
   // Generate color scales for light mode
   const lightColors: Record<string, string[]> = {}

@@ -392,6 +392,7 @@ describe('generate-colors CLI', () => {
   })
 
   it('should throw error when color definition has neither value nor anchors', () => {
+    // This config is intentionally invalid (missing value/anchors) to test runtime validation
     const invalidConfig = {
       colors: [{ name: 'Invalid Color' }],
     }

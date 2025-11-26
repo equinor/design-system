@@ -8,16 +8,9 @@ import { getLightnessValues } from '@/config/helpers'
  * Helper function to get color input from a ColorDefinition
  * @param colorDef - Color definition object
  * @returns The color input (anchors array or value string)
- * @throws Error if both anchors and value are missing
  */
 function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
-  const colorInput = colorDef.anchors || colorDef.value
-  if (!colorInput) {
-    throw new Error(
-      `Color "${colorDef.name}" is missing both 'anchors' and 'value'. Please add either a 'value' property with a single color or an 'anchors' array with color anchor points.`,
-    )
-  }
-  return colorInput
+  return 'anchors' in colorDef ? colorDef.anchors : colorDef.value
 }
 
 /**
@@ -30,7 +23,7 @@ export function simplifyColorDefinitions(
 ): ColorDefinition[] {
   return colors.map((color) => {
     // If anchors array has exactly 1 element, convert to legacy value format
-    if (color.anchors && color.anchors.length === 1) {
+    if ('anchors' in color && color.anchors.length === 1) {
       return {
         name: color.name,
         value: color.anchors[0].value,

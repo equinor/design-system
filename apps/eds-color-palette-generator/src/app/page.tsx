@@ -12,6 +12,7 @@ import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
 import {
   ColorDefinition,
+  ColorAnchor,
   ConfigFile,
   ContrastMethod,
   ColorFormat,
@@ -26,7 +27,6 @@ import {
 import { computeContrastSummary } from '@/utils/contrastSummary'
 import { QuickActionsPopover } from '@/components/QuickActionsPopover'
 import { RotateCcw } from 'lucide-react'
-import { FALLBACK_GRAY_COLOR } from '@/utils/constants'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -140,10 +140,7 @@ export default function App() {
     )
   }
 
-  const updateColorAnchors = (
-    index: number,
-    newAnchors: ColorDefinition['anchors'],
-  ) => {
+  const updateColorAnchors = (index: number, newAnchors: ColorAnchor[]) => {
     // Update the anchors for a color
     setColors((prev) =>
       prev.map((color, i) => {
@@ -214,10 +211,10 @@ export default function App() {
     () =>
       colors
         .map((c) => {
-          if (c.anchors) {
+          if ('anchors' in c) {
             return c.anchors.map((a) => `${a.step}:${a.value}`).join(',')
           }
-          return c.value || ''
+          return c.value
         })
         .join('|'),
     [colors],
@@ -226,11 +223,7 @@ export default function App() {
     () =>
       colors.map((c) => {
         // Use anchors if available, otherwise use single value
-        const colorInput = c.anchors || c.value
-        if (!colorInput) {
-          // Fallback for missing data
-          return Array(lightModeValues.length).fill(FALLBACK_GRAY_COLOR)
-        }
+        const colorInput = 'anchors' in c ? c.anchors : c.value
         return generateColorScale(
           colorInput,
           lightModeValues,
@@ -247,11 +240,7 @@ export default function App() {
     () =>
       colors.map((c) => {
         // Use anchors if available, otherwise use single value
-        const colorInput = c.anchors || c.value
-        if (!colorInput) {
-          // Fallback for missing data
-          return Array(darkModeValues.length).fill(FALLBACK_GRAY_COLOR)
-        }
+        const colorInput = 'anchors' in c ? c.anchors : c.value
         return generateColorScale(
           colorInput,
           darkModeValues,
@@ -386,30 +375,33 @@ export default function App() {
         {isMounted && (
           <>
             <section className="mt-6 space-y-6 mx-auto max-w-7xl px-6">
-              {currentColorScales.map((colorData, index) => (
-                <div
-                  key={`scale-wrap-${index}`}
-                  className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
-                >
-                  <ColorScale
-                    colors={colorData.scale}
-                    showContrast={showContrast}
-                    contrastMethod={contrastMethod}
-                    colorName={colorData.name}
-                    baseColor={colors[index]?.value}
-                    anchors={colors[index]?.anchors}
-                    testId={`color-scale-${index}`}
-                    onRename={(name) => updateColorName(index, name)}
-                    onChangeValue={(value: string) =>
-                      updateColorValue(index, value)
-                    }
-                    onChangeAnchors={(anchors) =>
-                      updateColorAnchors(index, anchors)
-                    }
-                    onRemove={() => removeColor(index)}
-                  />
-                </div>
-              ))}
+              {currentColorScales.map((colorData, index) => {
+                const color = colors[index]
+                return (
+                  <div
+                    key={`scale-wrap-${index}`}
+                    className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
+                  >
+                    <ColorScale
+                      colors={colorData.scale}
+                      showContrast={showContrast}
+                      contrastMethod={contrastMethod}
+                      colorName={colorData.name}
+                      baseColor={'value' in color ? color.value : undefined}
+                      anchors={'anchors' in color ? color.anchors : undefined}
+                      testId={`color-scale-${index}`}
+                      onRename={(name) => updateColorName(index, name)}
+                      onChangeValue={(value: string) =>
+                        updateColorValue(index, value)
+                      }
+                      onChangeAnchors={(anchors) =>
+                        updateColorAnchors(index, anchors)
+                      }
+                      onRemove={() => removeColor(index)}
+                    />
+                  </div>
+                )
+              })}
             </section>
 
             {/* Add new color button */}
