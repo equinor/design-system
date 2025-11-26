@@ -85,7 +85,7 @@ jobs:
             echo "- ⏭️ Stable changelog unchanged" >> $GITHUB_STEP_SUMMARY
           fi
 
-          if echo "$CHANGED_FILES" | grep -q '^packages/eds-core-react/CHANGELOG\.next\.md$'; then
+          if echo "$CHANGED_FILES" | grep -q '^packages/eds-core-react/src/components/next/CHANGELOG\.md$'; then
             echo "has-beta-release=true" >> $GITHUB_OUTPUT
             echo "- ✅ Beta changelog updated" >> $GITHUB_STEP_SUMMARY
           else
@@ -207,7 +207,8 @@ jobs:
           gh workflow run publish_core_react.yaml \
             --repo ${{ github.repository }} \
             --ref main \
-            -f npm-tag=latest
+            -f npm-tag=latest \
+            -f environment=production
         continue-on-error: true
 
       - name: Report failure
@@ -230,7 +231,8 @@ jobs:
           gh workflow run publish_core_react.yaml \
             --repo ${{ github.repository }} \
             --ref main \
-            -f npm-tag=beta
+            -f npm-tag=beta \
+            -f environment=production
         continue-on-error: true
 
       - name: Report failure

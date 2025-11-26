@@ -252,7 +252,7 @@ import { ComponentName } from '@equinor/eds-core-react/next'
 - **Not production-ready** until they graduate to the stable package
 - **Visible in Storybook** - browse components at [storybook.eds.equinor.com](https://storybook.eds.equinor.com/) under "EDS 2.0"
 - **Requires beta installation** - viewing in Storybook doesn't enable usage, you must install `@beta`
-- **Separate changelog** - see `CHANGELOG.next.md` for beta changes
+- **Separate changelog** - see `src/components/next/CHANGELOG.md` for beta changes
 - **Feedback welcome** - help us improve before stable release!
 
 See the [Beta Release Guide](./documentation/how-to/BETA_RELEASE_GUIDE.md) for detailed information on the beta release workflow.

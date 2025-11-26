@@ -48,7 +48,7 @@ For components under development in the `/next` entry point:
 
 2. **Merge PR to `main`** → Release Please creates/updates a release PR
    - May contain both stable and beta changes in one PR
-   - Beta changes update `CHANGELOG.next.md`, stable changes update `CHANGELOG.md`
+   - Beta changes update `src/components/next/CHANGELOG.md`, stable changes update `CHANGELOG.md`
 
 3. **Merge the release PR** → Publishes to `@equinor/eds-core-react@beta`
    - All releases deploy to Storybook (beta components visible under "EDS 2.0")

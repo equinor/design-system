@@ -80,18 +80,16 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 
 ```json
 "packages/eds-core-react/src/components/next": {
-  "release-type": "node",
-  "package-name": "@equinor/eds-core-react",
+  "release-type": "simple",
   "component": "eds-core-react-next",
   "prerelease-type": "beta",
-  "changelog-path": "../../../../CHANGELOG.next.md",
   "include-component-in-tag": false
 }
 ```
 
 - Only includes files in `src/components/next/`
 - Published to `@equinor/eds-core-react@beta`
-- Uses `CHANGELOG.next.md`
+- Uses `src/components/next/CHANGELOG.md`
 - Version format: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
 
 **Key Configuration Options:**
@@ -263,10 +261,10 @@ Release-please will include beta changes in the release PR:
 
 - Title includes "next": `chore: release eds-core-react-next 2.0.1-beta.1`
 - Bumps beta version: `2.0.1-beta.0` → `2.0.1-beta.1`
-- Updates `CHANGELOG.next.md`
+- Updates `src/components/next/CHANGELOG.md`
 - When merged, publishes to `@equinor/eds-core-react@beta`
 
-**Note:** With `"separate-pull-requests": false`, both stable and beta changes can appear in the **same PR** if you have commits for both. The PR will contain updates to both `CHANGELOG.md` and `CHANGELOG.next.md`.
+**Note:** With `"separate-pull-requests": false`, both stable and beta changes can appear in the **same PR** if you have commits for both. The PR will contain updates to both `CHANGELOG.md` and `src/components/next/CHANGELOG.md`.
 
 ## Commit Scope Matching
 

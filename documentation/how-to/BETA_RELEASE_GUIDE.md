@@ -59,7 +59,7 @@ fix(eds-core-react): correct positioning logic
 ## Changelogs
 
 - **Stable**: `CHANGELOG.md`
-- **Beta**: `CHANGELOG.next.md`
+- **Beta**: `src/components/next/CHANGELOG.md`
 
 ## Installing Beta Components
 
@@ -261,11 +261,11 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
    - Other scopes → Stable release PR
 
 2. **Merge release PR**
-   - Updates `CHANGELOG.next.md` or `CHANGELOG.md`
+   - Updates `src/components/next/CHANGELOG.md` (beta) or `CHANGELOG.md` (stable)
    - Bumps version in manifest
 
 3. **Trigger publish workflow**
-   - Detects beta vs stable by checking whether Release Please updated `CHANGELOG.md` (stable) or `CHANGELOG.next.md` (beta)
+   - Detects beta vs stable by checking whether Release Please updated `CHANGELOG.md` (stable) or `src/components/next/CHANGELOG.md` (beta)
    - Publishes to correct npm dist-tag
    - Deploys Storybook (beta components visible in "EDS 2.0" section)
 
@@ -315,7 +315,7 @@ npm view @equinor/eds-core-react@beta version
 
 ### Wrong dist-tag applied
 
-- Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `CHANGELOG.next.md` for beta)
+- Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `src/components/next/CHANGELOG.md` for beta)
 - Review `trigger_publish.yml` workflow logs (look for `detect-release` step output to see which changelog was detected)
 - Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@2.0.0-beta.1 beta`
 

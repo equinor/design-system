@@ -158,7 +158,7 @@ render(<App />, document.getElementById('root'))
 ## Changelogs
 
 - **Stable**: [CHANGELOG.md](./CHANGELOG.md)
-- **Beta**: [CHANGELOG.next.md](./CHANGELOG.next.md)
+- **Beta**: [CHANGELOG.md](./src/components/next/CHANGELOG.md)
 
 ## Package Structure
 
