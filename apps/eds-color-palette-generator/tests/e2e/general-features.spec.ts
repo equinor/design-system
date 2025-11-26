@@ -256,7 +256,8 @@ test.describe('Download Palette Config', () => {
     const firstColor = config.colors[0]
     expect(firstColor).toHaveProperty('name')
     expect(
-      firstColor.hasOwnProperty('value') || firstColor.hasOwnProperty('anchors'),
+      firstColor.hasOwnProperty('value') ||
+        firstColor.hasOwnProperty('anchors'),
     ).toBe(true)
 
     // Clean up
