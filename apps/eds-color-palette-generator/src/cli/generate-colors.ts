@@ -73,13 +73,15 @@ function formatColorTokens(
  * @param colorDef - Color definition object to validate
  * @throws Error if color definition is invalid
  */
-function validateColorDefinition(colorDef: unknown): asserts colorDef is ColorDefinition {
+function validateColorDefinition(
+  colorDef: unknown,
+): asserts colorDef is ColorDefinition {
   if (typeof colorDef !== 'object' || colorDef === null) {
     throw new Error('Color definition must be an object')
   }
 
   const def = colorDef as Record<string, unknown>
-  
+
   if (!('name' in def) || typeof def.name !== 'string') {
     throw new Error('Color definition must have a "name" property')
   }
