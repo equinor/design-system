@@ -3,6 +3,7 @@ import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
 import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { DEFAULT_ANCHOR_COLOR } from '@/utils/constants'
+import { findAvailableStep } from '@/utils/stepSelection'
 import { Trash, Pipette, Plus, X } from 'lucide-react'
 import Color from 'colorjs.io'
 import React, { useState, useRef, useMemo, useEffect } from 'react'
@@ -423,13 +424,7 @@ function ColorScaleBase({
             return
           }
 
-          let newStep = 8 // Default to middle step
-          for (let i = 1; i <= 15; i++) {
-            if (!usedSteps.includes(i)) {
-              newStep = i
-              break
-            }
-          }
+          const newStep = findAvailableStep(usedSteps)
           onChangeAnchors([
             ...anchors,
             { value: anchors[0]?.value || DEFAULT_ANCHOR_COLOR, step: newStep },
