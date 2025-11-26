@@ -94,6 +94,95 @@ test.describe('Reset Feature', () => {
   })
 })
 
+test.describe('Add Color Feature', () => {
+  test('should add a new color with default name and value', async ({
+    page,
+  }) => {
+    // Count initial number of color scales
+    const initialColorCount = await page
+      .locator('[data-testid^="color-scale-"][data-testid$="-input-name"]')
+      .count()
+
+    // Click the "Add colour" button
+    await page.getByTestId('add-color-button').click()
+
+    // Wait for the new color to be added
+    await page.waitForTimeout(300)
+
+    // There should be one more color now
+    const newColorCount = await page
+      .locator('[data-testid^="color-scale-"][data-testid$="-input-name"]')
+      .count()
+    expect(newColorCount).toBe(initialColorCount + 1)
+
+    // The new color should have the default name "New colour"
+    const newColorName = page.getByTestId(
+      `color-scale-${initialColorCount}-input-name`,
+    )
+    await expect(newColorName).toHaveValue('New colour')
+
+    // The new color should have the default value "#888888"
+    const newColorValue = page.getByTestId(
+      `color-scale-${initialColorCount}-input-color`,
+    )
+    await expect(newColorValue).toHaveValue('#888888')
+  })
+
+  test('should be able to modify newly added color', async ({ page }) => {
+    // Add a new color
+    await page.getByTestId('add-color-button').click()
+    await page.waitForTimeout(300)
+
+    // Get the index of the new color (last one)
+    const colorCount = await page
+      .locator('[data-testid^="color-scale-"][data-testid$="-input-name"]')
+      .count()
+    const newColorIndex = colorCount - 1
+
+    // Modify the name
+    const nameInput = page.getByTestId(
+      `color-scale-${newColorIndex}-input-name`,
+    )
+    await nameInput.fill('Custom Purple')
+
+    // Modify the color value
+    const colorInput = page.getByTestId(
+      `color-scale-${newColorIndex}-input-color`,
+    )
+    await colorInput.fill('#800080')
+
+    // Wait for changes to apply
+    await page.waitForTimeout(300)
+
+    // Verify the changes persisted
+    await expect(nameInput).toHaveValue('Custom Purple')
+    await expect(colorInput).toHaveValue('#800080')
+
+    // Verify the color scale rendered (check step 10)
+    const colorStep = page.getByTestId(`color-scale-${newColorIndex}-step-10`)
+    await expect(colorStep).toBeVisible()
+  })
+
+  test('should add multiple colors', async ({ page }) => {
+    // Count initial colors
+    const initialCount = await page
+      .locator('[data-testid^="color-scale-"][data-testid$="-input-name"]')
+      .count()
+
+    // Add 3 new colors
+    for (let i = 0; i < 3; i++) {
+      await page.getByTestId('add-color-button').click()
+      await page.waitForTimeout(200)
+    }
+
+    // Should have 3 more colors
+    const finalCount = await page
+      .locator('[data-testid^="color-scale-"][data-testid$="-input-name"]')
+      .count()
+    expect(finalCount).toBe(initialCount + 3)
+  })
+})
+
 test.describe('Delete Color Feature', () => {
   test('should delete a single color', async ({ page }) => {
     // Verify we have the Gray color (index 1)

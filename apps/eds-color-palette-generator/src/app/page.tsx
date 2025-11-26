@@ -412,6 +412,7 @@ export default function App() {
                   addColor({ name: 'New colour', value: '#888888' })
                 }
                 className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
+                data-testid="add-color-button"
               >
                 Add colour
               </button>
