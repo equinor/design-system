@@ -89,8 +89,25 @@ ValidationStates.storyName = 'Validation States'
 
 export const Disabled: StoryFn<InputProps> = () => (
   <>
-    <Label htmlFor="input-next-disabled" label="Disabled" />
-    <Input id="input-next-disabled" placeholder="Placeholder text" disabled />
+    <div>
+      <Label htmlFor="input-next-disabled" label="Disabled with value" />
+      <Input
+        id="input-next-disabled"
+        defaultValue="Disabled value"
+        disabled
+      />
+    </div>
+    <div>
+      <Label
+        htmlFor="input-next-disabled-placeholder"
+        label="Disabled with placeholder"
+      />
+      <Input
+        id="input-next-disabled-placeholder"
+        placeholder="Placeholder text"
+        disabled
+      />
+    </div>
   </>
 )
 Disabled.decorators = [
@@ -105,8 +122,21 @@ Disabled.decorators = [
 
 export const ReadOnly: StoryFn<InputProps> = () => (
   <>
-    <Label htmlFor="input-next-readonly" label="Read only" />
-    <Input id="input-next-readonly" defaultValue="Read only value" readOnly />
+    <div>
+      <Label htmlFor="input-next-readonly" label="Read only with value" />
+      <Input id="input-next-readonly" defaultValue="Read only value" readOnly />
+    </div>
+    <div>
+      <Label
+        htmlFor="input-next-readonly-placeholder"
+        label="Read only with placeholder"
+      />
+      <Input
+        id="input-next-readonly-placeholder"
+        placeholder="Placeholder text"
+        readOnly
+      />
+    </div>
   </>
 )
 ReadOnly.storyName = 'Read only'
@@ -232,6 +262,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
       <Input
         type="text"
         id="input-next-adornments-invalid"
+        defaultValue="Invalid value"
         invalid
         leftAdornments={
           <Button
@@ -275,6 +306,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
       <Input
         type="text"
         id="input-next-adornments-readonly"
+        defaultValue="Read only value"
         readOnly
         leftAdornments={
           <Button
@@ -302,7 +334,7 @@ export const Casted: StoryFn<InputProps> = (args) => {
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
     <Input
-      style={{ '--eds-color-bg-input': '#fff' } as React.CSSProperties}
+      style={{ '--eds-color-bg-canvas': '#fff' } as React.CSSProperties}
       {...args}
     />
   )
