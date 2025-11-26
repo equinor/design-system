@@ -11,14 +11,15 @@ export function findAvailableStep(
   // Ensure preferredStep is within valid range (1-15)
   const validPreferredStep = Math.max(1, Math.min(15, preferredStep))
 
+  // Convert usedSteps to Set for O(1) lookup performance
+  const usedStepsSet = new Set(usedSteps)
+
   // First, check if the preferred step is available
-  if (!usedSteps.includes(validPreferredStep)) {
+  if (!usedStepsSet.has(validPreferredStep)) {
     return validPreferredStep
   }
 
   // If not, search from step 1 to 15 for the first available step
-  // Convert usedSteps to Set for O(1) lookup performance
-  const usedStepsSet = new Set(usedSteps)
   for (let i = 1; i <= 15; i++) {
     if (!usedStepsSet.has(i)) {
       return i
