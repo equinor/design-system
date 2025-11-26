@@ -27,11 +27,11 @@
   .eds-input--disabled {
     cursor: not-allowed;
     color: var(--eds-color-border-medium);
-    border-color: var(--eds-color-border-subtle);
+    border-color: transparent;
   }
 
   .eds-input--readonly {
-    border-color: var(--eds-color-border-subtle);
+    border-color: transparent;
     color: var(--eds-color-text-subtle);
   }
 
