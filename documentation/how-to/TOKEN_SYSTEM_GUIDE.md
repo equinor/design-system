@@ -159,8 +159,8 @@ Typography tokens are currently handled separately and not synced from Figma:
 
 - Font families (UI: Inter, Header: Equinor)
 - Font sizes (xs through 6xl)
-- Font weights, line heights, letter spacing
-- Generated via `build:variables:typography-and-spacing` script
+- Font weights, line heights, letter spacing (tracking)
+- Build with `build:variables:typography-and-spacing` script
 
 ## Variable Collections and Modes
 
