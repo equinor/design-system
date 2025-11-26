@@ -61,7 +61,7 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
             <Heading
               level={1}
               size="5xl"
-              isBaselineAligned={false}
+              baseline="center"
               className={styles.heading}
             >
               People

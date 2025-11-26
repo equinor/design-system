@@ -39,7 +39,7 @@ export const TopBar = ({
         <Typography
           as="span"
           size="lg"
-          isBaselineAligned={false}
+          baseline="center"
           className={subtitleClass}
         >
           {subtitle}

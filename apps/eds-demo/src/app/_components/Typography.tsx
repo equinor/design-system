@@ -1,4 +1,4 @@
-import { ReactNode, HTMLAttributes, CSSProperties } from "react";
+import { ReactNode, HTMLAttributes } from "react";
 
 type FontSize =
   | "xs"
@@ -11,7 +11,9 @@ type FontSize =
   | "4xl"
   | "5xl"
   | "6xl";
-type LineHeight = "normal" | "squished";
+type LineHeight = "default" | "squished";
+type FontFamily = "header" | "ui";
+type Baseline = "grid" | "center";
 type As =
   | "p"
   | "span"
@@ -31,20 +33,21 @@ interface TypographyProps
   children: ReactNode;
   size?: FontSize;
   lineHeight?: LineHeight;
-  isBaselineAligned?: boolean;
+  baseline?: Baseline | false;
   debug?: boolean;
   as?: As;
   className?: string;
   weight?: "lighter" | "normal" | "bolder";
+  family?: FontFamily;
 }
 
 /**
- * Typography component using the EDS 2.0 typography system
+ * Typography component using the EDS 2.0 typography system from @equinor/eds-tokens
  *
  * Implements a data-attribute driven sizing system with:
  * - Baseline grid text alignment
- * - Space toggle based CSS custom properties
- * - Ratio-based padding calculations for optical alignment
+ * - Font family selection (header or ui)
+ * - Font size, weight, and line height controls
  *
  * @example
  * // Basic usage
@@ -55,8 +58,9 @@ interface TypographyProps
  * <Typography
  *   size="lg"
  *   lineHeight="squished"
- *   isBaselineAligned={false}
- *   weight="semibold"
+ *   baseline="center"
+ *   weight="bolder"
+ *   family="header"
  *   as="h2"
  * >
  *   Heading
@@ -65,39 +69,30 @@ interface TypographyProps
 export function Typography({
   children,
   size = "lg",
-  lineHeight = "normal",
-  isBaselineAligned = true,
+  lineHeight = "default",
+  baseline = "grid",
   debug = false,
   as: Component = "p",
   className = "",
-  weight,
+  weight = "normal",
+  family = "ui",
   style,
   ...props
 }: TypographyProps) {
-  // Build data attributes based on props
+  // Build data attributes based on props using EDS tokens system
   const dataAttributes = {
+    "data-font-family": family,
     "data-font-size": size,
+    "data-font-weight": weight,
     "data-line-height": lineHeight,
-    "data-baseline-aligned": isBaselineAligned,
+    ...(baseline && { "data-baseline": baseline }),
     ...(debug && { "data-debug": "" }),
-  };
-
-  // Add font-weight if specified
-  const fontWeights = {
-    lighter: 300,
-    normal: 400,
-    bolder: 500,
-  };
-
-  const computedStyle: CSSProperties = {
-    ...style,
-    ...(weight && { fontWeight: fontWeights[weight] }),
   };
 
   return (
     <Component
-      className={`type ${className}`}
-      style={computedStyle}
+      className={className || undefined}
+      style={style}
       {...dataAttributes}
       {...props}
     >
@@ -118,7 +113,7 @@ interface HeadingProps extends Omit<TypographyProps, "as"> {
  * Heading component for headings (H1-H6)
  *
  * Defaults to normal weight and squished line-height for compact headings
- * TODO: Consider default settings (these are just suggestions for the demo page)
+ * Uses "header" font family (Equinor) by default
  *
  * @example
  * <Heading level={1}>Main heading</Heading>
@@ -129,6 +124,7 @@ export function Heading({
   size = "lg",
   lineHeight = "squished",
   weight = "normal",
+  family = "header",
   ...props
 }: HeadingProps) {
   return (
@@ -137,6 +133,7 @@ export function Heading({
       size={size}
       lineHeight={lineHeight}
       weight={weight}
+      family={family}
       {...props}
     />
   );
@@ -145,7 +142,8 @@ export function Heading({
 /**
  * Body component for body text
  *
- * Uses large size (16px) by default with normal line-height
+ * Uses large size (16px) by default with default line-height
+ * Uses "ui" font family (Inter) by default
  *
  * @example
  * <Body>This is a regular text paragraph</Body>
@@ -166,7 +164,7 @@ export function Body({
 /**
  * Caption component for helper text and secondary information
  *
- * Uses small size (12px) by default
+ * Uses medium size (14px) by default
  *
  * @example
  * <Caption>Last updated: September 29, 2025</Caption>
@@ -187,7 +185,7 @@ export function Caption({
  * Label component for form labels and tags
  *
  * Uses small size (12px) by default with bolder weight
- * Not baseline-aligned for better optical centering in UI components
+ * Uses "center" baseline for better optical centering in UI components
  *
  * @example
  * <Label htmlFor="email">Email address</Label>
@@ -195,7 +193,7 @@ export function Caption({
 export function Label({
   children,
   size = "sm",
-  isBaselineAligned = false,
+  baseline = "center",
   weight = "bolder",
   ...props
 }: Omit<TypographyProps, "as">) {
@@ -203,7 +201,7 @@ export function Label({
     <Typography
       as="label"
       size={size}
-      isBaselineAligned={isBaselineAligned}
+      baseline={baseline}
       weight={weight}
       {...props}
     >
@@ -215,7 +213,7 @@ export function Label({
 /**
  * Strong component for emphasized text
  *
- * Uses semibold weight by default
+ * Uses bolder weight by default
  *
  * @example
  * <Strong>Important information</Strong>

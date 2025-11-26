@@ -79,7 +79,7 @@ export const DataTable = ({
                 <Typography
                   as="span"
                   size="md"
-                  isBaselineAligned={false}
+                  baseline="center"
                   weight="bolder"
                 >
                   {column.label}
@@ -115,7 +115,7 @@ export const DataTable = ({
 
                 {column.id === "id" && (
                   <div className="h-5 grow shrink basis-0">
-                    <Typography as="span" size="md" isBaselineAligned={false}>
+                    <Typography as="span" size="md" baseline="center">
                       {row.id}
                     </Typography>
                   </div>
@@ -124,7 +124,7 @@ export const DataTable = ({
                 {column.id === "person" && (
                   <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
                     <div className="self-stretch h-4">
-                      <Typography as="span" size="md" isBaselineAligned={false}>
+                      <Typography as="span" size="md" baseline="center">
                         {row.person.name}
                       </Typography>
                     </div>
@@ -132,7 +132,7 @@ export const DataTable = ({
                       <Typography
                         as="span"
                         size="sm"
-                        isBaselineAligned={false}
+                        baseline="center"
                         className="underline"
                       >
                         {row.person.email}
@@ -143,7 +143,7 @@ export const DataTable = ({
 
                 {column.id === "position" && (
                   <div className="h-5 grow shrink basis-0">
-                    <Typography as="span" size="md" isBaselineAligned={false}>
+                    <Typography as="span" size="md" baseline="center">
                       {row.position}
                     </Typography>
                   </div>
@@ -151,7 +151,7 @@ export const DataTable = ({
 
                 {column.id === "location" && (
                   <div className="h-5 grow shrink basis-0">
-                    <Typography as="span" size="md" isBaselineAligned={false}>
+                    <Typography as="span" size="md" baseline="center">
                       {row.location}
                     </Typography>
                   </div>

@@ -23,7 +23,7 @@ export function Chip({
       <Typography
         as="span"
         size="sm"
-        isBaselineAligned={false}
+        baseline="center"
         style={{ marginTop: "1px" }}
       >
         {children}
