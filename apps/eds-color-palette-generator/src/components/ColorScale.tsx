@@ -1,14 +1,12 @@
 'use client'
 import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
-import { contrast, isValidColorFormat, parseColorToHex } from '@/utils/color'
-import { DEFAULT_ANCHOR_COLOR } from '@/utils/constants'
-import { findAvailableStep } from '@/utils/stepSelection'
-import { Trash, Pipette, Plus, X } from 'lucide-react'
+import { contrast } from '@/utils/color'
 import Color from 'colorjs.io'
-import React, { useState, useRef, useMemo, useEffect } from 'react'
+import React, { useState, useRef, useMemo, useEffect, useCallback } from 'react'
 import { useIsMounted } from '@equinor/eds-utils'
 import { ColorAnchor } from '@/types'
+import { NameAndControls } from './NameAndControls'
 
 type ColorScaleProps = {
   colors: string[]
@@ -25,7 +23,7 @@ type ColorScaleProps = {
   testId?: string
 }
 
-// Type for color information in OKLCH format!
+// Type for color information in OKLCH format
 type OklchInfo = {
   l: number // lightness
   c: number // chroma
@@ -34,195 +32,11 @@ type OklchInfo = {
   index: number // color step index
 }
 
-/**
- * Helper function to check if a step value is already used by another anchor
- * @param anchors - Array of color anchors
- * @param stepValue - The step value to check
- * @param excludeIndex - Index to exclude from the check (typically the current anchor being edited)
- * @returns true if the step is already used by another anchor
- */
-function isStepAlreadyUsed(
-  anchors: ColorAnchor[],
-  stepValue: number,
-  excludeIndex: number,
-): boolean {
-  return anchors.some((a, idx) => a.step === stepValue && idx !== excludeIndex)
-}
-
-// Reusable component for anchor color input with picker
-type AnchorColorInputProps = {
-  index: number
-  anchor: ColorAnchor
-  anchors: ColorAnchor[]
-  onUpdateAnchor: (
-    index: number,
-    field: 'value' | 'step',
-    newValue: string | number,
-  ) => void
-  onRemoveAnchor: (index: number) => void
-  testId?: string
-}
-
-/**
- * AnchorColorInput component for editing a single color anchor
- * Provides inputs for color value and step position, along with a color picker
- * @param props - Component props including anchor data and callbacks
- */
-function AnchorColorInput({
-  index,
-  anchor,
-  anchors,
-  onUpdateAnchor,
-  onRemoveAnchor,
-  testId,
-}: AnchorColorInputProps) {
-  const colorInputRef = useRef<HTMLInputElement | null>(null)
-  const [localHex, setLocalHex] = useState(() => {
-    try {
-      return parseColorToHex(anchor.value) || '#000000'
-    } catch {
-      return '#000000'
-    }
-  })
-  const [localColorInput, setLocalColorInput] = useState(anchor.value)
-  const [isValidColor, setIsValidColor] = useState(true)
-  const debounceRef = useRef<number | null>(null)
-
-  const handleColorInputChange = (value: string) => {
-    setLocalColorInput(value)
-    const isValid = isValidColorFormat(value)
-    setIsValidColor(isValid)
-
-    if (isValid) {
-      const hexValue = parseColorToHex(value)
-      if (hexValue) {
-        setLocalHex(hexValue)
-        // Debounce the parent update
-        if (debounceRef.current) {
-          window.clearTimeout(debounceRef.current)
-        }
-        debounceRef.current = window.setTimeout(() => {
-          onUpdateAnchor(index, 'value', value.trim())
-        }, 250)
-      }
-    }
-  }
-
-  const handleColorInputBlur = () => {
-    if (!isValidColor) {
-      // Reset to last valid value on blur if invalid
-      setLocalColorInput(anchor.value)
-      setIsValidColor(true)
-    }
-  }
-
-  return (
-    <div className="flex items-center gap-2">
-      {anchors.length > 1 && (
-        <select
-          value={anchor.step}
-          onChange={(e) =>
-            onUpdateAnchor(index, 'step', parseInt(e.target.value))
-          }
-          className="px-2 py-1.5 text-sm rounded-md border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong bg-input"
-          aria-label={`Step for anchor ${index + 1}`}
-          data-testid={testId ? `${testId}-anchor-${index}-step` : undefined}
-        >
-          {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => {
-            // Find if this step is used by another anchor
-            const isUsed = isStepAlreadyUsed(anchors, step, index)
-            return (
-              <option
-                key={step}
-                value={step}
-                disabled={isUsed}
-                aria-label={
-                  isUsed
-                    ? `Step ${step} (unavailable - already used by another anchor)`
-                    : `Step ${step}`
-                }
-              >
-                Step {step}
-                {isUsed ? ' (used)' : ''}
-              </option>
-            )
-          })}
-        </select>
-      )}
-      <div className="flex flex-col gap-1 flex-1">
-        <input
-          type="text"
-          value={localColorInput}
-          onChange={(e) => handleColorInputChange(e.target.value)}
-          onBlur={handleColorInputBlur}
-          placeholder="Color value"
-          className={`px-3 py-1.5 text-sm rounded-md ${
-            !isValidColor
-              ? 'border-2 border-danger-fill-emphasis-default'
-              : 'border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong'
-          } bg-input`}
-          aria-label={`Color value for anchor ${index + 1}`}
-          aria-invalid={!isValidColor}
-          data-testid={testId ? `${testId}-anchor-${index}-value` : undefined}
-        />
-        {!isValidColor && (
-          <span
-            className="text-xs text-danger-subtle"
-            data-testid={
-              testId ? `${testId}-anchor-${index}-format-error` : undefined
-            }
-          >
-            Color format is not valid
-          </span>
-        )}
-      </div>
-      <input
-        ref={colorInputRef}
-        type="color"
-        value={localHex}
-        onChange={(e) => {
-          const next = e.target.value
-          setLocalHex(next)
-          setLocalColorInput(next)
-          setIsValidColor(true)
-          onUpdateAnchor(index, 'value', next)
-        }}
-        className="sr-only"
-        aria-label={`Pick color for anchor ${index + 1}`}
-        tabIndex={-1}
-      />
-      <button
-        type="button"
-        onClick={() => colorInputRef.current?.click()}
-        className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
-        title="Pick color"
-        aria-label={`Pick color for anchor ${index + 1}`}
-        data-testid={testId ? `${testId}-anchor-${index}-picker` : undefined}
-      >
-        <Pipette className="w-4 h-4" />
-      </button>
-      {anchors.length > 1 && (
-        <button
-          type="button"
-          onClick={() => onRemoveAnchor(index)}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
-          title="Remove anchor"
-          aria-label={`Remove anchor ${index + 1}`}
-          data-testid={testId ? `${testId}-anchor-${index}-remove` : undefined}
-        >
-          <X className="w-4 h-4" />
-        </button>
-      )}
-    </div>
-  )
-}
-
 // Function to determine text color for steps
 function getTextColorForStep(colors: string[], stepIndex: number): string {
   if (stepIndex >= 9 && stepIndex <= 13) {
     return colors[14] // text inverted strong
   }
-
   return colors[12] // text strong
 }
 
@@ -236,7 +50,6 @@ function getSystemTextColorClassNameForStep({
   if (stepIndex >= 9 && stepIndex <= 13) {
     return `text-${status}-subtle-on-emphasis`
   }
-
   return `text-${status}-subtle`
 }
 
@@ -286,419 +99,94 @@ function ColorScaleBase({
   // State to track which color's hex value was recently copied
   const [copiedColorIndex, setCopiedColorIndex] = useState<number | null>(null)
 
-  // Create refs for dialogs and their corresponding color elements
+  // Create refs for dialogs
   const dialogRefs = useRef<(HTMLDialogElement | null)[]>(
     Array(colors.length).fill(null),
   )
-  const colorElementRefs = useRef<(HTMLDivElement | null)[]>(
-    Array(colors.length).fill(null),
-  )
+  const copiedTimeoutRef = useRef<number | null>(null)
   const headingColor = colors[8] || '#000000'
 
-  // Stable, memoized header component to isolate frequent re-renders
-  const NameAndControls = React.useMemo(() => {
-    return React.memo(
-      function NameAndControlsInner({
-        name,
-        headingColor,
-        baseColor,
-        anchors,
-        onRename,
-        onChangeValue,
-        onChangeAnchors,
-        onRemove,
-        testId,
-      }: {
-        name?: string
-        headingColor: string
-        baseColor?: string
-        anchors?: ColorAnchor[]
-        onRename?: (n: string) => void
-        onChangeValue?: (v: string) => void
-        onChangeAnchors?: (anchors: ColorAnchor[]) => void
-        onRemove?: () => void
-        testId?: string
-      }) {
-        const colorInputRef = useRef<HTMLInputElement | null>(null)
-        const prevBaseColorRef = useRef<string | undefined>(baseColor)
-        const [localHex, setLocalHex] = useState(baseColor || '#000000')
-        const [localColorInput, setLocalColorInput] = useState(
-          baseColor || '#000000',
-        )
-        const [isValidColor, setIsValidColor] = useState(true)
-        const [duplicateStepError, setDuplicateStepError] = useState<
-          string | null
-        >(null)
-        const [maxAnchorsError, setMaxAnchorsError] = useState<string | null>(
-          null,
-        )
-        const debounceRef = useRef<number | null>(null)
-
-        // Determine if we're in anchor mode
-        const isAnchorMode = anchors && anchors.length > 0
-
-        useEffect(() => {
-          if (prevBaseColorRef.current !== baseColor) {
-            prevBaseColorRef.current = baseColor
-            setLocalHex(baseColor || '#000000')
-            setLocalColorInput(baseColor || '#000000')
-            setIsValidColor(true)
-          }
-        }, [baseColor])
-
-        // Reusable debounced color change handler
-        const debouncedColorChange = (value: string) => {
-          if (debounceRef.current) {
-            window.clearTimeout(debounceRef.current)
-          }
-          debounceRef.current = window.setTimeout(() => {
-            onChangeValue?.(value)
-          }, 250)
-        }
-
-        const handleColorInputChange = (value: string) => {
-          setLocalColorInput(value)
-          const isValid = isValidColorFormat(value)
-          setIsValidColor(isValid)
-
-          if (isValid) {
-            // Convert to HEX for the color picker, but pass original format to parent
-            const hexValue = parseColorToHex(value)
-            if (hexValue) {
-              setLocalHex(hexValue)
-              // Pass the original value to maintain format (OKLCH, RGB, HSL, etc.)
-              debouncedColorChange(value.trim())
-            }
-          }
-        }
-
-        const handleColorInputBlur = () => {
-          if (!isValidColor) {
-            // Reset to last valid value on blur if invalid
-            setLocalColorInput(baseColor || '#000000')
-            setIsValidColor(true)
-          }
-        }
-
-        // Anchor-related handlers
-        const handleAddSecondColor = () => {
-          // Convert from single value to anchor mode
-          if (baseColor && onChangeAnchors) {
-            onChangeAnchors([
-              { value: baseColor, step: 1 },
-              { value: baseColor, step: 15 },
-            ])
-          }
-        }
-
-        const handleUpdateAnchor = (
-          index: number,
-          field: 'value' | 'step',
-          newValue: string | number,
-        ) => {
-          if (!anchors || !onChangeAnchors) return
-          const newAnchors = [...anchors]
-          if (field === 'value' && typeof newValue === 'string') {
-            newAnchors[index] = { ...newAnchors[index], value: newValue }
-          } else if (field === 'step' && typeof newValue === 'number') {
-            // Check for duplicate step values using helper function
-            if (isStepAlreadyUsed(anchors, newValue, index)) {
-              setDuplicateStepError(
-                'Step value already used by another anchor. Please choose a unique step.',
-              )
-              return
-            }
-            // Clear error when successful
-            setDuplicateStepError(null)
-            newAnchors[index] = { ...newAnchors[index], step: newValue }
-          }
-          onChangeAnchors(newAnchors)
-        }
-
-        const handleAddAnchor = () => {
-          if (!anchors || !onChangeAnchors) return
-          // Find an available step (one that's not already used)
-          const usedSteps = anchors.map((a) => a.step)
-
-          // Check if all 15 steps are already used
-          if (usedSteps.length >= 15) {
-            setMaxAnchorsError(
-              'All 15 steps are already in use. Remove an anchor before adding a new one.',
-            )
-            return
-          }
-
-          // Clear error when successful
-          setMaxAnchorsError(null)
-          
-          const newStep = findAvailableStep(usedSteps)
-          onChangeAnchors([
-            ...anchors,
-            { value: anchors[0]?.value || DEFAULT_ANCHOR_COLOR, step: newStep },
-          ])
-        }
-
-        const handleRemoveAnchor = (index: number) => {
-          if (!anchors || !onChangeAnchors || anchors.length <= 1) return
-          const newAnchors = anchors.filter((_, i) => i !== index)
-          onChangeAnchors(newAnchors)
-        }
-
-        return (
-          <div className="mb-4 print:mb-0">
-            {/* Color name input (always shown) */}
-            <div className="flex items-center gap-2 mb-2">
-              <input
-                type="text"
-                value={name ?? ''}
-                onChange={(e) => onRename?.(e.target.value)}
-                placeholder="Color name"
-                className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium"
-                style={{ color: headingColor }}
-                aria-label="Color name"
-                data-testid={testId ? `${testId}-input-name` : undefined}
-              />
-              <button
-                type="button"
-                onClick={() => onRemove?.()}
-                className="inline-flex items-center justify-center w-8 h-8 rounded-md border-neutral-subtle hover:bg-neutral-fill-muted-hover print-hide"
-                title="Remove color"
-                aria-label="Remove color"
-                data-testid={testId ? `${testId}-remove-button` : undefined}
-              >
-                <Trash className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Single color mode (legacy) */}
-            {!isAnchorMode && (
-              <div className="flex items-center gap-2">
-                <div className="flex flex-col gap-1 flex-1">
-                  <input
-                    type="text"
-                    value={localColorInput}
-                    onChange={(e) => handleColorInputChange(e.target.value)}
-                    onBlur={handleColorInputBlur}
-                    placeholder="Any color format"
-                    className={`px-3 py-1.5 text-sm rounded-md ${
-                      !isValidColor
-                        ? 'border-2 border-danger-fill-emphasis-default'
-                        : 'border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong'
-                    } bg-input`}
-                    aria-label={`Base color for ${name ?? 'color'}`}
-                    aria-invalid={!isValidColor}
-                    data-testid={testId ? `${testId}-input-color` : undefined}
-                  />
-                  {!isValidColor && (
-                    <span
-                      className="text-xs text-danger-subtle"
-                      data-testid={
-                        testId ? `${testId}-format-error` : undefined
-                      }
-                    >
-                      Color format is not valid
-                    </span>
-                  )}
-                </div>
-                <input
-                  ref={colorInputRef}
-                  type="color"
-                  value={localHex}
-                  onChange={(e) => {
-                    const next = e.target.value
-                    setLocalHex(next)
-                    setLocalColorInput(next)
-                    setIsValidColor(true)
-                    debouncedColorChange(next)
-                  }}
-                  className="sr-only"
-                  aria-label={`Pick base color for ${name ?? 'color'}`}
-                  tabIndex={-1}
-                />
-                <button
-                  type="button"
-                  onClick={() => colorInputRef.current?.click()}
-                  className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
-                  title="Pick color"
-                  aria-label="Pick color"
-                  data-testid={testId ? `${testId}-color-picker` : undefined}
-                >
-                  <Pipette className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleAddSecondColor}
-                  className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover border border-neutral-subtle print-hide"
-                  title="Add second color"
-                  aria-label="Add second color"
-                  data-testid={
-                    testId ? `${testId}-add-second-color` : undefined
-                  }
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
-            {/* Anchor mode (multi-color) */}
-            {isAnchorMode && anchors && (
-              <div className="space-y-2">
-                {anchors.map((anchor, index) => (
-                  <AnchorColorInput
-                    key={`${index}-${anchor.value}-${anchor.step}`}
-                    index={index}
-                    anchor={anchor}
-                    anchors={anchors}
-                    onUpdateAnchor={handleUpdateAnchor}
-                    onRemoveAnchor={handleRemoveAnchor}
-                    testId={testId}
-                  />
-                ))}
-                {duplicateStepError && (
-                  <div
-                    className="text-xs text-danger-subtle px-2 py-1 bg-danger-fill-muted rounded-md"
-                    role="alert"
-                    data-testid={
-                      testId ? `${testId}-duplicate-step-error` : undefined
-                    }
-                  >
-                    {duplicateStepError}
-                  </div>
-                )}
-                {maxAnchorsError && (
-                  <div
-                    className="text-xs text-danger-subtle px-2 py-1 bg-danger-fill-muted rounded-md"
-                    role="alert"
-                    data-testid={
-                      testId ? `${testId}-max-anchors-error` : undefined
-                    }
-                  >
-                    {maxAnchorsError}
-                  </div>
-                )}
-                <button
-                  type="button"
-                  onClick={handleAddAnchor}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md hover:bg-neutral-fill-muted-hover border border-neutral-subtle print-hide"
-                  title="Add anchor"
-                  aria-label="Add anchor"
-                  data-testid={testId ? `${testId}-add-anchor` : undefined}
-                >
-                  <Plus className="w-4 h-4" />
-                  Add anchor
-                </button>
-              </div>
-            )}
-          </div>
-        )
-      },
-      (prev, next) => {
-        // Custom memo comparison function
-        // Note: Callback props (onRename, onChangeValue, etc.) are intentionally
-        // excluded from comparison. We only care about data changes that would
-        // affect the visual output. Callbacks are expected to be stable references
-        // from the parent component.
-
-        // Check basic props
-        if (
-          prev.name !== next.name ||
-          prev.baseColor !== next.baseColor ||
-          prev.headingColor !== next.headingColor ||
-          prev.testId !== next.testId
-        ) {
-          return false
-        }
-
-        // Check anchors - need deep comparison
-        const prevAnchors = prev.anchors
-        const nextAnchors = next.anchors
-
-        if (!prevAnchors && !nextAnchors) return true
-        if (!prevAnchors || !nextAnchors) return false
-        if (prevAnchors.length !== nextAnchors.length) return false
-
-        return prevAnchors.every(
-          (anchor, i) =>
-            anchor.value === nextAnchors[i].value &&
-            anchor.step === nextAnchors[i].step,
-        )
-      },
-    )
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (copiedTimeoutRef.current) {
+        clearTimeout(copiedTimeoutRef.current)
+      }
+    }
   }, [])
 
-  // Styles are now imported from the dialog.css file
-
   // Toggle dialog visibility
-  const toggleDialog = (index: number) => {
-    if (activeDialog === index) {
-      // Close the dialog if already open
-      const dialog = dialogRefs.current[index]
-      if (dialog) {
-        dialog.close()
-      }
-      setActiveDialog(null)
-    } else {
-      // Close any existing dialog first
-      if (activeDialog !== null) {
-        const previousDialog = dialogRefs.current[activeDialog]
-        if (previousDialog) {
-          previousDialog.close()
+  const toggleDialog = useCallback(
+    (index: number) => {
+      if (activeDialog === index) {
+        // Close the dialog if already open
+        dialogRefs.current[index]?.close()
+        setActiveDialog(null)
+      } else {
+        // Close any existing dialog first
+        if (activeDialog !== null) {
+          dialogRefs.current[activeDialog]?.close()
         }
-      }
 
-      // Open the new dialog (centered by default via CSS)
-      const dialog = dialogRefs.current[index]
-      if (dialog) {
-        // Show the dialog - will be centered via CSS
-        dialog.showModal()
+        // Open the new dialog
+        dialogRefs.current[index]?.showModal()
         setActiveDialog(index)
       }
-    }
-  }
+    },
+    [activeDialog],
+  )
 
   // Close dialog function
-  const closeDialog = (index: number) => {
-    const dialog = dialogRefs.current[index]
-    if (dialog) {
-      dialog.close()
-      setActiveDialog(null)
-    }
-  }
+  const closeDialog = useCallback((index: number) => {
+    dialogRefs.current[index]?.close()
+    setActiveDialog(null)
+  }, [])
 
   // Handle dialog closing when it's closed via ESC key
-  const handleDialogClose = () => {
+  const handleDialogClose = useCallback(() => {
     setActiveDialog(null)
-  }
+  }, [])
 
-  // Copy to clipboard function
-  const copyToClipboard = async (text: string, colorIndex: number) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopiedColorIndex(colorIndex)
-      // Reset the copied state after 2 seconds
-      setTimeout(() => setCopiedColorIndex(null), 2000)
-    } catch (err) {
-      console.error('Failed to copy to clipboard:', err)
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea')
-      textArea.value = text
-      document.body.appendChild(textArea)
-      textArea.select()
-      document.execCommand('copy')
-      document.body.removeChild(textArea)
-      setCopiedColorIndex(colorIndex)
-      // Reset the copied state after 2 seconds
-      setTimeout(() => setCopiedColorIndex(null), 2000)
-    }
-  }
+  // Copy to clipboard function - memoized
+  const copyToClipboard = useCallback(
+    async (text: string, colorIndex: number) => {
+      // Clear any existing timeout
+      if (copiedTimeoutRef.current) {
+        clearTimeout(copiedTimeoutRef.current)
+      }
 
-  // Effect to prevent dialog from closing when clicking inside it
+      try {
+        await navigator.clipboard.writeText(text)
+        setCopiedColorIndex(colorIndex)
+        copiedTimeoutRef.current = window.setTimeout(
+          () => setCopiedColorIndex(null),
+          2000,
+        )
+      } catch (err) {
+        console.error('Failed to copy to clipboard:', err)
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        document.body.appendChild(textArea)
+        textArea.select()
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+        setCopiedColorIndex(colorIndex)
+        copiedTimeoutRef.current = window.setTimeout(
+          () => setCopiedColorIndex(null),
+          2000,
+        )
+      }
+    },
+    [],
+  )
+
+  // Effect to handle clicking outside dialog to close it
   useEffect(() => {
     const handleDialogClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement
       if (target.tagName === 'DIALOG' && activeDialog !== null) {
         const currentDialogElement = dialogRefs.current[activeDialog]
-
         if (currentDialogElement === target) {
           event.stopPropagation()
         }
@@ -706,7 +194,6 @@ function ColorScaleBase({
     }
 
     document.addEventListener('click', handleDialogClick)
-
     return () => {
       document.removeEventListener('click', handleDialogClick)
     }
@@ -768,10 +255,7 @@ function ColorScaleBase({
           return (
             <div
               data-testid={stepTestId}
-              key={'color-step-' + i}
-              ref={(el) => {
-                colorElementRefs.current[i] = el
-              }}
+              key={`color-step-${i}`}
               className={`color-scale-item rounded-lg p-3 transition-transform hover:scale-105 relative cursor-pointer print:rounded-none ${
                 !showContrast ? 'aspect-square' : 'min-h-[130px]'
               }`}
@@ -793,7 +277,6 @@ function ColorScaleBase({
               <dialog
                 ref={(el) => {
                   dialogRefs.current[i] = el
-                  return undefined
                 }}
                 id={`color-dialog-${i}`}
                 className="min-w-[320px] backdrop:bg-black/20 cursor-default"
@@ -805,7 +288,6 @@ function ColorScaleBase({
                 aria-labelledby={`color-details-heading-${i}`}
                 onClick={(e) => {
                   // Close dialog only if clicking directly on the backdrop
-                  // (native dialog behavior is to close when clicking anywhere)
                   const rect = e.currentTarget.getBoundingClientRect()
                   const isInDialog =
                     rect.top <= e.clientY &&
@@ -813,7 +295,6 @@ function ColorScaleBase({
                     rect.left <= e.clientX &&
                     e.clientX <= rect.right
 
-                  // If click is inside the dialog, prevent default closing
                   if (isInDialog) {
                     e.stopPropagation()
                   } else {
@@ -847,7 +328,7 @@ function ColorScaleBase({
                       borderColor: 'rgba(0,0,0,0.1)',
                     }}
                     aria-label={`Color sample: ${oklchInfo.value}`}
-                  ></div>
+                  />
 
                   <div className="flex flex-col justify-center">
                     <button
@@ -860,7 +341,6 @@ function ColorScaleBase({
                     >
                       <span>{oklchInfo.value}</span>
                       {copiedColorIndex === i ? (
-                        // Checkmark icon when copied
                         <svg
                           className="w-4 h-4 transition-opacity"
                           fill="none"
@@ -876,7 +356,6 @@ function ColorScaleBase({
                           />
                         </svg>
                       ) : (
-                        // Copy icon (default state)
                         <svg
                           className="w-4 h-4 transition-opacity opacity-0 group-hover:opacity-100"
                           fill="none"
@@ -896,17 +375,8 @@ function ColorScaleBase({
                   </div>
                 </div>
 
-                {/* <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm text-left items-center border-t pt-3 mt-2">
-                  <span className="font-medium">Lightness:</span>
-                  <span className="font-mono">{oklchInfo.l}</span>
-                  <span className="font-medium">Chroma:</span>
-                  <span className="font-mono">{oklchInfo.c}</span>
-                  <span className="font-medium">Hue:</span>
-                  <span className="font-mono">{oklchInfo.h}°</span>
-                </div> */}
-
-                {/* Always show contrast score in the dialog */}
-                {pairsWithSteps && pairsWithSteps.length > 0 && (
+                {/* Contrast scores in dialog */}
+                {pairsWithSteps.length > 0 && (
                   <div className="pt-3 mt-3 border-t">
                     <table className="w-full text-sm">
                       <thead>
@@ -915,9 +385,9 @@ function ColorScaleBase({
                             Pairs with
                           </th>
                           <th scope="col" className="py-1 text-right">
-                            {contrastMethod === 'APCA' &&
-                              'Lightness contrast (Lc)'}
-                            {contrastMethod === 'WCAG21' && 'Contrast Ratio'}
+                            {contrastMethod === 'APCA'
+                              ? 'Lightness contrast (Lc)'
+                              : 'Contrast Ratio'}
                           </th>
                         </tr>
                       </thead>
@@ -937,15 +407,12 @@ function ColorScaleBase({
 
                           let isContrastValid = false
                           if (contrastValue !== undefined) {
-                            if (contrastMethod === 'APCA') {
-                              isContrastValid =
-                                parseFloat(String(contrastValue)) >=
-                                contrastReq.lc.value
-                            } else {
-                              isContrastValid =
-                                parseFloat(String(contrastValue)) >=
-                                contrastReq.wcag.value
-                            }
+                            const threshold =
+                              contrastMethod === 'APCA'
+                                ? contrastReq.lc.value
+                                : contrastReq.wcag.value
+                            isContrastValid =
+                              parseFloat(String(contrastValue)) >= threshold
                           }
 
                           const scoreColor = isContrastValid
@@ -968,12 +435,11 @@ function ColorScaleBase({
                               </td>
                               <td className="py-1 text-right">
                                 <span className={`font-mono ${scoreColor}`}>
-                                  {contrastMethod === 'APCA' &&
-                                    contrastValue &&
-                                    `${contrastValue} (${contrastReq.lc.value})`}
-                                  {contrastMethod === 'WCAG21' &&
-                                    contrastValue &&
-                                    `${contrastValue}:1 (${contrastReq.wcag.value})`}
+                                  {contrastMethod === 'APCA' && contrastValue
+                                    ? `${contrastValue} (${contrastReq.lc.value})`
+                                    : contrastValue
+                                      ? `${contrastValue}:1 (${contrastReq.wcag.value})`
+                                      : ''}
                                 </span>
                               </td>
                             </tr>
@@ -984,11 +450,12 @@ function ColorScaleBase({
                   </div>
                 )}
               </dialog>
+
               {/* Contrast info in the color cell - only when showContrast is true */}
               {showContrast && (
                 <div className="flex flex-col h-full pt-3 print-hide">
                   <ul className="space-y-1">
-                    {pairsWithSteps?.map((contrastReq, colorPairIndex) => {
+                    {pairsWithSteps.map((contrastReq, colorPairIndex) => {
                       const targetStepIndex = getStepIndex(
                         contrastReq.targetStep,
                       )(PALETTE_STEPS)
@@ -999,18 +466,15 @@ function ColorScaleBase({
                         contrastArray && colorPairIndex < contrastArray.length
                           ? contrastArray[colorPairIndex]
                           : undefined
-                      let isContrastValid = false
 
+                      let isContrastValid = false
                       if (contrastValue !== undefined) {
-                        if (contrastMethod === 'APCA') {
-                          isContrastValid =
-                            parseFloat(String(contrastValue)) >=
-                            contrastReq.lc.value
-                        } else {
-                          isContrastValid =
-                            parseFloat(String(contrastValue)) >=
-                            contrastReq.wcag.value
-                        }
+                        const threshold =
+                          contrastMethod === 'APCA'
+                            ? contrastReq.lc.value
+                            : contrastReq.wcag.value
+                        isContrastValid =
+                          parseFloat(String(contrastValue)) >= threshold
                       }
 
                       const status = isContrastValid ? 'success' : 'danger'
@@ -1019,6 +483,7 @@ function ColorScaleBase({
                           stepIndex: i + 1,
                           status,
                         })
+
                       return (
                         <li
                           key={`background-pairing-${targetStepIndex}`}
@@ -1027,14 +492,13 @@ function ColorScaleBase({
                           <span>{targetStepIndex + 1}</span>
                           <span>
                             <strong
-                              className={'font-mono ' + textStatusClassName}
+                              className={`font-mono ${textStatusClassName}`}
                             >
-                              {contrastMethod === 'APCA' &&
-                                contrastValue &&
-                                `${contrastValue} (${contrastReq.lc.value})`}
-                              {contrastMethod === 'WCAG21' &&
-                                contrastValue &&
-                                `${contrastValue}:1 (${contrastReq.wcag.value})`}
+                              {contrastMethod === 'APCA' && contrastValue
+                                ? `${contrastValue} (${contrastReq.lc.value})`
+                                : contrastValue
+                                  ? `${contrastValue}:1 (${contrastReq.wcag.value})`
+                                  : ''}
                             </strong>
                           </span>
                         </li>
@@ -1053,13 +517,10 @@ function ColorScaleBase({
 
 /**
  * Custom memo comparison function for ColorScale component
- * Note: Callback props (onRename, onChangeValue, onChangeAnchors, onRemove) are
- * intentionally excluded from comparison. We only care about data changes that would
- * affect the visual output. Callbacks are expected to be stable references from the
- * parent component.
+ * Note: Callback props are intentionally excluded from comparison.
+ * We only care about data changes that would affect the visual output.
  */
 function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
-  // Check basic props
   if (
     prev.colorName !== next.colorName ||
     prev.baseColor !== next.baseColor ||
@@ -1071,7 +532,6 @@ function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
     return false
   }
 
-  // Check anchors - need deep comparison
   const prevAnchors = prev.anchors
   const nextAnchors = next.anchors
 

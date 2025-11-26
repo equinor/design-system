@@ -2,97 +2,38 @@ import { describe, expect, it } from 'vitest'
 import { findAvailableStep } from './stepSelection'
 
 describe('findAvailableStep', () => {
-  it('should return preferred step 8 when no steps are used', () => {
-    const usedSteps: number[] = []
-    const result = findAvailableStep(usedSteps)
-    expect(result).toBe(8)
+  it('returns default preferred step 8 when no steps are used', () => {
+    expect(findAvailableStep([])).toBe(8)
   })
 
-  it('should return preferred step when it is available', () => {
-    const usedSteps = [1, 2, 3, 4, 5, 6, 7, 9, 10]
-    const result = findAvailableStep(usedSteps, 8)
-    expect(result).toBe(8)
+  it('returns preferred step when available', () => {
+    expect(findAvailableStep([1, 2, 3, 4, 5, 6, 7, 9, 10], 8)).toBe(8)
+    expect(findAvailableStep([1, 2, 3], 5)).toBe(5)
   })
 
-  it('should return first available step when preferred step is taken', () => {
-    const usedSteps = [8, 9, 10, 11, 12, 13, 14, 15]
-    const result = findAvailableStep(usedSteps, 8)
-    expect(result).toBe(1)
+  it('finds first available step when preferred is taken', () => {
+    expect(findAvailableStep([8, 9, 10, 11, 12, 13, 14, 15], 8)).toBe(1)
+    expect(findAvailableStep([1, 2, 3, 4, 5, 6, 7, 8], 8)).toBe(9)
   })
 
-  it('should return next available step when searching from step 1', () => {
-    const usedSteps = [1, 2, 3]
-    const result = findAvailableStep(usedSteps, 8)
-    expect(result).toBe(8)
-  })
-
-  it('should skip used steps and find the first available one', () => {
-    const usedSteps = [1, 2, 3, 4, 5, 6, 7, 8]
-    const result = findAvailableStep(usedSteps, 8)
-    expect(result).toBe(9)
-  })
-
-  it('should work with custom preferred step', () => {
-    const usedSteps = [1, 2, 3]
-    const result = findAvailableStep(usedSteps, 5)
-    expect(result).toBe(5)
-  })
-
-  it('should fall back to searching from 1 when custom preferred step is taken', () => {
-    const usedSteps = [5, 6, 7, 8, 9, 10]
-    const result = findAvailableStep(usedSteps, 5)
-    expect(result).toBe(1)
-  })
-
-  it('should handle edge case when all steps except one are used', () => {
+  it('finds the only remaining step when 14 are used', () => {
     const usedSteps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    const result = findAvailableStep(usedSteps, 8)
-    expect(result).toBe(15)
+    expect(findAvailableStep(usedSteps, 8)).toBe(15)
   })
 
-  it('should handle edge case with step 1 as preferred', () => {
-    const usedSteps = [2, 3, 4, 5]
-    const result = findAvailableStep(usedSteps, 1)
-    expect(result).toBe(1)
+  it('returns preferred step as fallback when all steps are used', () => {
+    const allUsed = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    expect(findAvailableStep(allUsed, 8)).toBe(8)
   })
 
-  it('should handle edge case with step 15 as preferred', () => {
-    const usedSteps = [1, 2, 3, 4]
-    const result = findAvailableStep(usedSteps, 15)
-    expect(result).toBe(15)
+  it('clamps invalid preferredStep values to valid range', () => {
+    expect(findAvailableStep([], -5)).toBe(1)
+    expect(findAvailableStep([], 0)).toBe(1)
+    expect(findAvailableStep([], 20)).toBe(15)
   })
 
-  it('should return preferred step as fallback when all steps are used', () => {
-    const usedSteps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-    const result = findAvailableStep(usedSteps, 8)
-    // This edge case should not happen in practice as the UI prevents adding more than 15 anchors
-    expect(result).toBe(8)
-  })
-
-  it('should clamp preferredStep to valid range when given invalid value', () => {
-    const usedSteps: number[] = []
-    // Test with negative number - should clamp to 1
-    const resultNegative = findAvailableStep(usedSteps, -5)
-    expect(resultNegative).toBe(1)
-
-    // Test with value above 15 - should clamp to 15
-    const resultHigh = findAvailableStep(usedSteps, 20)
-    expect(resultHigh).toBe(15)
-
-    // Test with 0 - should clamp to 1
-    const resultZero = findAvailableStep(usedSteps, 0)
-    expect(resultZero).toBe(1)
-  })
-
-  it('should clamp invalid preferredStep and still find available step', () => {
-    const usedSteps = [1, 2, 3] // Steps 1, 2, 3 are used
-    // Test with negative number - should clamp to 1, but 1 is used, so should find next available (4)
-    const resultNegative = findAvailableStep(usedSteps, -5)
-    expect(resultNegative).toBe(4)
-
-    // Test with value above 15 when 15 is used
-    const usedSteps2 = [15]
-    const resultHigh = findAvailableStep(usedSteps2, 20)
-    expect(resultHigh).toBe(1) // Should find first available
+  it('clamps and searches when clamped value is used', () => {
+    expect(findAvailableStep([1, 2, 3], -5)).toBe(4)
+    expect(findAvailableStep([15], 20)).toBe(1)
   })
 })

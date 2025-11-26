@@ -17,5 +17,4 @@ dist/
 output/
 
 # Test artifacts
-src/cli/__test-*.json
-src/cli/__test-*-output__/
+src/cli/__test-*
