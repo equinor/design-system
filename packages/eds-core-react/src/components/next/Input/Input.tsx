@@ -56,10 +56,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     // Inline styles for dynamic adornment spacing
     const fieldStyle: CSSProperties = {
       paddingLeft: leftWidth
-        ? `calc(var(--eds-selectable-spacing-inline) + ${leftWidth}px)`
+        ? `calc(var(--eds-selectable-space-horizontal) + ${leftWidth}px)`
         : undefined,
       paddingRight: rightWidth
-        ? `calc(var(--eds-selectable-spacing-inline) + ${rightWidth}px)`
+        ? `calc(var(--eds-selectable-space-horizontal) + ${rightWidth}px)`
         : undefined,
     }
 
