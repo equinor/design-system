@@ -87,7 +87,8 @@
   }
 
   /* Adornments (icons, text, buttons on left/right) 
-   * Always use neutral appearance regardless of parent invalid state
+   * Inherits color appearance from parent container
+   * Wrap text in <span data-color-appearance="neutral"> to keep text neutral
    */
   .eds-adornment {
     position: absolute;
@@ -102,8 +103,8 @@
     line-height: var(--eds-typography-ui-body-md-lineheight-default);
   }
 
-  /* Force neutral colors for adornments even when parent has invalid state */
-  [data-color-appearance] .eds-adornment {
+  /* Text with neutral appearance should use neutral text color */
+  .eds-adornment [data-color-appearance="neutral"] {
     color: var(--eds-color-text-subtle);
   }
 
