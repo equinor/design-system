@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0](https://github.com/equinor/design-system/compare/eds-lab-react@v0.9.0...eds-lab-react@v0.10.0) (2025-11-26)
+
+
+### ✨ Added
+
+* **eds-color-palette-generator:** fix memory leak from uncleaned debounce timeouts on unmount ([#4260](https://github.com/equinor/design-system/issues/4260)) ([b226edb](https://github.com/equinor/design-system/commit/b226edbc087b1f10ef0a2108d927939819fedc0e))
+
+
+### 🔧 Chores
+
+* release main ([#4254](https://github.com/equinor/design-system/issues/4254)) ([1313fa1](https://github.com/equinor/design-system/commit/1313fa1f2e2e908a8200f6b8f00e158ef88e917b))
+
 ## [0.9.0](https://github.com/equinor/design-system/compare/eds-lab-react@v0.8.1...eds-lab-react@v0.9.0) (2025-10-29)
 
 ### ✨ Added
