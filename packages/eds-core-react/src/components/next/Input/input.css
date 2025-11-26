@@ -7,9 +7,9 @@
     align-items: center;
     box-sizing: border-box;
     width: 100%;
-    background: var(--eds-color-bg-surface);
-    border: 1px solid var(--eds-color-border-medium);
-    border-radius: var(--eds-spacing-border-radius-rounded);
+    background: var(--eds-color-bg-canvas);
+    border: 1px solid var(--eds-color-border-subtle);
+    border-radius: var(--eds-spacing-border-radius-none);
   }
 
   /* Hover - only for enabled inputs */
@@ -32,6 +32,7 @@
 
   .eds-input--readonly {
     border-color: var(--eds-color-border-subtle);
+    color: var(--eds-color-text-subtle);
   }
 
   /* Invalid state - border color comes from data-color-appearance="danger" */
@@ -59,7 +60,7 @@
   }
 
   .eds-field::placeholder {
-    color: var(--eds-color-text-subtle);
+    color: var(--eds-color-text-strong);
   }
 
   /* 
@@ -69,15 +70,20 @@
    * Note: We don't rely on inherited color context, so this works consistently
    */
   .eds-input--disabled .eds-field {
-    color: var(--eds-color-text-subtle);
+    color: var(--eds-color-border-medium);
     cursor: not-allowed;
     opacity: 1;
-    -webkit-text-fill-color: var(--eds-color-text-subtle);
+    -webkit-text-fill-color: var(--eds-color-border-medium);
   }
 
   /* Disabled placeholder - maintain same color as disabled text */
   .eds-input--disabled .eds-field::placeholder {
-    -webkit-text-fill-color: var(--eds-color-text-subtle);
+    color: var(--eds-color-border-medium);
+    -webkit-text-fill-color: var(--eds-color-border-medium);
+  }
+
+  .eds-input--readonly .eds-field::placeholder {
+    color: var(--eds-color-text-subtle);
   }
 
   /* Adornments (icons, text, buttons on left/right) 
