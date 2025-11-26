@@ -92,7 +92,7 @@ function AnchorColorInput({
   useEffect(() => {
     return () => {
       if (debounceRef.current) {
-        clearTimeout(debounceRef.current)
+        window.clearTimeout(debounceRef.current)
         debounceRef.current = null
       }
     }
