@@ -253,7 +253,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            unit
+            <span data-color-appearance="neutral">unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -267,6 +267,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         leftAdornments={
           <Button
             variant="ghost_icon"
+            color="danger"
             style={{ height: '24px', width: '24px' }}
           >
             IT
@@ -274,7 +275,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            unit
+            <span data-color-appearance="neutral">unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -297,7 +298,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            unit
+            <span data-color-appearance="neutral">unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -318,7 +319,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            unit
+            <span data-color-appearance="neutral">unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
