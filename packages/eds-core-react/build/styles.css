@@ -9,9 +9,9 @@
     align-items: center;
     box-sizing: border-box;
     width: 100%;
-    background: var(--eds-color-bg-surface);
-    border: 1px solid var(--eds-color-border-medium);
-    border-radius: var(--eds-spacing-border-radius-rounded);
+    background: var(--eds-color-bg-canvas);
+    border: 1px solid var(--eds-color-border-subtle);
+    border-radius: var(--eds-spacing-border-radius-none);
   }
 
   /* Hover - only for enabled inputs */
@@ -29,11 +29,12 @@
   .eds-input--disabled {
     cursor: not-allowed;
     color: var(--eds-color-border-medium);
-    border-color: var(--eds-color-border-subtle);
+    border-color: transparent;
   }
 
   .eds-input--readonly {
-    border-color: var(--eds-color-border-subtle);
+    border-color: transparent;
+    color: var(--eds-color-text-subtle);
   }
 
   /* Invalid state - border color comes from data-color-appearance="danger" */
@@ -52,8 +53,8 @@
     font-size: var(--eds-typography-ui-body-lg-font-size);
     font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
     line-height: var(--eds-typography-ui-body-lg-lineheight-squished);
-    padding-block: var(--eds-selectable-spacing-stack);
-    padding-inline: var(--eds-selectable-spacing-inline);
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -61,7 +62,7 @@
   }
 
   .eds-field::placeholder {
-    color: var(--eds-color-text-subtle);
+    color: var(--eds-color-text-strong);
   }
 
   /* 
@@ -71,24 +72,30 @@
    * Note: We don't rely on inherited color context, so this works consistently
    */
   .eds-input--disabled .eds-field {
-    color: var(--eds-color-text-subtle);
+    color: var(--eds-color-border-medium);
     cursor: not-allowed;
     opacity: 1;
-    -webkit-text-fill-color: var(--eds-color-text-subtle);
+    -webkit-text-fill-color: var(--eds-color-border-medium);
   }
 
   /* Disabled placeholder - maintain same color as disabled text */
   .eds-input--disabled .eds-field::placeholder {
-    -webkit-text-fill-color: var(--eds-color-text-subtle);
+    color: var(--eds-color-border-medium);
+    -webkit-text-fill-color: var(--eds-color-border-medium);
+  }
+
+  .eds-input--readonly .eds-field::placeholder {
+    color: var(--eds-color-text-subtle);
   }
 
   /* Adornments (icons, text, buttons on left/right) 
-   * Always use neutral appearance regardless of parent invalid state
+   * Inherits color appearance from parent container
+   * Wrap text in <span data-color-appearance="neutral"> to keep text neutral
    */
   .eds-adornment {
     position: absolute;
-    top: var(--eds-selectable-spacing-stack);
-    bottom: var(--eds-selectable-spacing-stack);
+    top: var(--eds-selectable-space-vertical);
+    bottom: var(--eds-selectable-space-vertical);
     display: flex;
     align-items: center;
     color: var(--eds-color-text-subtle);
@@ -98,18 +105,18 @@
     line-height: var(--eds-typography-ui-body-md-lineheight-default);
   }
 
-  /* Force neutral colors for adornments even when parent has invalid state */
-  [data-color-appearance] .eds-adornment {
+  /* Text with neutral appearance should use neutral text color */
+  .eds-adornment [data-color-appearance="neutral"] {
     color: var(--eds-color-text-subtle);
   }
 
   .eds-adornment--left {
     left: 0;
-    padding-left: var(--eds-selectable-spacing-inline);
+    padding-left: var(--eds-selectable-space-horizontal);
   }
 
   .eds-adornment--right {
     right: 0;
-    padding-right: var(--eds-selectable-spacing-inline);
+    padding-right: var(--eds-selectable-space-horizontal);
   }
 }

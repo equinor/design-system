@@ -104,7 +104,7 @@
   }
 
   /* Text with neutral appearance should use neutral text color */
-  .eds-adornment [data-color-appearance="neutral"] {
+  .eds-adornment [data-color-appearance='neutral'] {
     color: var(--eds-color-text-subtle);
   }
 
