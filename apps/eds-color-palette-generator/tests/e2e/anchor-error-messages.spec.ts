@@ -104,7 +104,6 @@ test('should clear duplicate step error when selecting a valid step', async ({
     .locator('select[data-testid="color-scale-0-anchor-1-step"] option:not([disabled])')
     .all()
   const availableStepValue = await availableSteps[0].getAttribute('value')
-  
   if (availableStepValue && availableStepValue !== firstStepValue) {
     await secondAnchorStep.selectOption(availableStepValue)
   }
