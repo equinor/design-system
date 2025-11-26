@@ -85,17 +85,12 @@ export const ValidationStates: StoryFn<InputProps> = () => (
     </div>
   </>
 )
-ValidationStates.storyName = 'Validation States'
 
 export const Disabled: StoryFn<InputProps> = () => (
   <>
     <div>
       <Label htmlFor="input-next-disabled" label="Disabled with value" />
-      <Input
-        id="input-next-disabled"
-        defaultValue="Disabled value"
-        disabled
-      />
+      <Input id="input-next-disabled" defaultValue="Disabled value" disabled />
     </div>
     <div>
       <Label
