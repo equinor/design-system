@@ -76,7 +76,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             {...leftAdornmentsProps}
             ref={setLeftAdornmentsRef}
             className="eds-adornment eds-adornment--left"
-            data-color-appearance="neutral"
           >
             {leftAdornments}
           </div>
@@ -97,7 +96,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             {...rightAdornmentsProps}
             ref={setRightAdornmentsRef}
             className="eds-adornment eds-adornment--right"
-            data-color-appearance="neutral"
           >
             {rightAdornments}
           </div>
