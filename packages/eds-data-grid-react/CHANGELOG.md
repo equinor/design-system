@@ -5,43 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.1.0...eds-data-grid-react@v1.2.0) (2025-11-26)
-
-
-### ✨ Added
-
-* **eds-color-palette-generator:** fix memory leak from uncleaned debounce timeouts on unmount ([#4260](https://github.com/equinor/design-system/issues/4260)) ([b226edb](https://github.com/equinor/design-system/commit/b226edbc087b1f10ef0a2108d927939819fedc0e))
-
 ## [1.1.0](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.0.2...eds-data-grid-react@v1.1.0) (2025-10-29)
 
-
 ### ✨ Added
 
-* **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
-
+- **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
 
 ### 🐛 Fixed
 
-* Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
-
+- Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
 
 ### 🔧 Chores
 
-* ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
+- ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
 
 ## [1.0.2](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.0.1...eds-data-grid-react@v1.0.2) (2025-10-22)
 
-
 ### 🔧 Chores
 
-* Rename follow-up ([#4129](https://github.com/equinor/design-system/issues/4129)) ([cae9fc0](https://github.com/equinor/design-system/commit/cae9fc0b3d32394da8d89ddb09c747142dd66f38))
+- Rename follow-up ([#4129](https://github.com/equinor/design-system/issues/4129)) ([cae9fc0](https://github.com/equinor/design-system/commit/cae9fc0b3d32394da8d89ddb09c747142dd66f38))
 
 ## [1.0.1](https://github.com/equinor/design-system/compare/eds-data-grid-react@1.0.0...eds-data-grid-react@v1.0.1) (2025-10-16)
 
-
 ### 🔧 Chores
 
-* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+- 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
 
 ## [1.0.0] - 2025-10-09
 

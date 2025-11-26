@@ -7,11 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.0.1...eds-core-react@v2.1.0) (2025-11-26)
 
-
 ### ✨ Added
 
-* **eds-color-palette-generator:** fix memory leak from uncleaned debounce timeouts on unmount ([#4260](https://github.com/equinor/design-system/issues/4260)) ([b226edb](https://github.com/equinor/design-system/commit/b226edbc087b1f10ef0a2108d927939819fedc0e))
-* **eds-tokens:** generate spacing and typography variables ([#4250](https://github.com/equinor/design-system/issues/4250)) ([6a5ef2c](https://github.com/equinor/design-system/commit/6a5ef2cf7a3821fd67809123f20f5f647ca43935))
+- **eds-tokens:** generate spacing and typography variables ([#4250](https://github.com/equinor/design-system/issues/4250)) ([6a5ef2c](https://github.com/equinor/design-system/commit/6a5ef2cf7a3821fd67809123f20f5f647ca43935))
 
 ## [2.0.1](https://github.com/equinor/design-system/compare/eds-core-react@v2.0.0...eds-core-react@v2.0.1) (2025-11-13)
 
