@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchInput } from "./SearchInput";
 import { ActionButton } from "./ActionButton";
-import { Typography } from "./Typography";
+import { TypographyNext as Typography } from "@equinor/eds-core-react";
 
 type Props = {
   subtitle: string;
@@ -38,8 +38,12 @@ export const TopBar = ({
         </ActionButton>
         <Typography
           as="span"
+          family="ui"
           size="lg"
-          isBaselineAligned={false}
+          baseline="center"
+          lineHeight="default"
+          weight="normal"
+          tracking="normal"
           className={subtitleClass}
         >
           {subtitle}

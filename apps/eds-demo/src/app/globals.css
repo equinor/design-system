@@ -1,5 +1,5 @@
 @import url(https://cdn.eds.equinor.com/font/eds-uprights-vf.css);
-@import "./typography.css";
+@import "@equinor/eds-tokens/css/variables";
 @import "tailwindcss";
 
 /* View transition for theme switch */
@@ -11,19 +11,6 @@
   animation: none;
   mix-blend-mode: normal;
   display: block;
-}
-
-body {
-  font-family: Inter, sans-serif;
-}
-
-body h1.type,
-body h2.type,
-body h3.type,
-body h4.type,
-body h5.type,
-body h6.type {
-  font-family: Equinor, sans-serif;
 }
 
 button,

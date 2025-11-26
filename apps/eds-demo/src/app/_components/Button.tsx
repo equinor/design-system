@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "./Typography";
+import { TypographyNext as Typography } from "@equinor/eds-core-react";
 
 type ButtonProps = {
   className?: string;
@@ -26,7 +26,15 @@ export const PrimaryButton = ({
       {...rest}
     >
       {icon}
-      <Typography as="span" size="md" isBaselineAligned={false}>
+      <Typography
+        as="span"
+        family="ui"
+        size="md"
+        baseline="center"
+        lineHeight="default"
+        weight="normal"
+        tracking="normal"
+      >
         {children}
       </Typography>
     </button>
@@ -51,7 +59,15 @@ export const SecondaryButton = ({
       {...rest}
     >
       {icon}
-      <Typography as="span" size="md" isBaselineAligned={false}>
+      <Typography
+        as="span"
+        family="ui"
+        size="md"
+        baseline="center"
+        lineHeight="default"
+        weight="normal"
+        tracking="normal"
+      >
         {children}
       </Typography>
     </button>

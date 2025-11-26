@@ -3,7 +3,7 @@ import { CheckmarkUnselected, CheckmarkSelected } from "./index";
 import { InfoIcon, SuccessIcon, WarningIcon, ErrorIcon } from "./ChipIcons";
 import { tableData } from "./tableData";
 import { ChipProps } from "./ChipProps";
-import { Typography } from "./Typography";
+import { TypographyNext as Typography } from "@equinor/eds-core-react";
 
 type Props = {
   className?: string;
@@ -78,9 +78,12 @@ export const DataTable = ({
               ) : (
                 <Typography
                   as="span"
+                  family="ui"
                   size="md"
-                  isBaselineAligned={false}
+                  baseline="center"
+                  lineHeight="default"
                   weight="bolder"
+                  tracking="normal"
                 >
                   {column.label}
                 </Typography>
@@ -115,7 +118,15 @@ export const DataTable = ({
 
                 {column.id === "id" && (
                   <div className="h-5 grow shrink basis-0">
-                    <Typography as="span" size="md" isBaselineAligned={false}>
+                    <Typography
+                      as="span"
+                      family="ui"
+                      size="md"
+                      baseline="center"
+                      lineHeight="default"
+                      weight="normal"
+                      tracking="normal"
+                    >
                       {row.id}
                     </Typography>
                   </div>
@@ -124,15 +135,27 @@ export const DataTable = ({
                 {column.id === "person" && (
                   <div className="inline-flex flex-col items-start justify-center h-8 grow shrink basis-0">
                     <div className="self-stretch h-4">
-                      <Typography as="span" size="md" isBaselineAligned={false}>
+                      <Typography
+                        as="span"
+                        family="ui"
+                        size="md"
+                        baseline="center"
+                        lineHeight="default"
+                        weight="normal"
+                        tracking="normal"
+                      >
                         {row.person.name}
                       </Typography>
                     </div>
                     <div className="self-stretch h-4">
                       <Typography
                         as="span"
+                        family="ui"
                         size="sm"
-                        isBaselineAligned={false}
+                        baseline="center"
+                        lineHeight="default"
+                        weight="normal"
+                        tracking="normal"
                         className="underline"
                       >
                         {row.person.email}
@@ -143,7 +166,15 @@ export const DataTable = ({
 
                 {column.id === "position" && (
                   <div className="h-5 grow shrink basis-0">
-                    <Typography as="span" size="md" isBaselineAligned={false}>
+                    <Typography
+                      as="span"
+                      family="ui"
+                      size="md"
+                      baseline="center"
+                      lineHeight="default"
+                      weight="normal"
+                      tracking="normal"
+                    >
                       {row.position}
                     </Typography>
                   </div>
@@ -151,7 +182,15 @@ export const DataTable = ({
 
                 {column.id === "location" && (
                   <div className="h-5 grow shrink basis-0">
-                    <Typography as="span" size="md" isBaselineAligned={false}>
+                    <Typography
+                      as="span"
+                      family="ui"
+                      size="md"
+                      baseline="center"
+                      lineHeight="default"
+                      weight="normal"
+                      tracking="normal"
+                    >
                       {row.location}
                     </Typography>
                   </div>
