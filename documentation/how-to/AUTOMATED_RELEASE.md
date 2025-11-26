@@ -32,7 +32,7 @@ Guide for the automated release process in Equinor Design System using Release P
 
 5. **Verify publishing** - Check GitHub Actions workflows complete successfully
 
-6. **Update master branch** - Rebase `master` from `main`
+6. **Update master branch** - Rebase `main` onto `master`
 
 7. **Announce release** - Post in `#eds-design-system` Slack channel
 
@@ -93,7 +93,7 @@ While most of the release process is automated, these steps still need to be don
   git checkout master
   ```
 
-- Rebase `master` with the latest changes from `main`:
+- Rebase the latest changes from `main` onto `master`:
 
   ```bash
   git rebase main
