@@ -19,17 +19,6 @@ type NameAndControlsProps = {
   testId?: string
 }
 
-/**
- * Helper function to check if a step value is already used by another anchor
- */
-function isStepAlreadyUsed(
-  anchors: ColorAnchor[],
-  stepValue: number,
-  excludeIndex: number,
-): boolean {
-  return anchors.some((a, idx) => a.step === stepValue && idx !== excludeIndex)
-}
-
 // Use useLayoutEffect on client, useEffect on server (SSR safe)
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect
@@ -50,6 +39,7 @@ function NameAndControlsBase({
   const [localHex, setLocalHex] = useState(baseColor || '#000000')
   const [localColorInput, setLocalColorInput] = useState(baseColor || '#000000')
   const [isValidColor, setIsValidColor] = useState(true)
+  const [maxAnchorsError, setMaxAnchorsError] = useState<string | null>(null)
   const debounceRef = useRef<number | null>(null)
 
   // Determine if we're in anchor mode
@@ -135,12 +125,6 @@ function NameAndControlsBase({
     if (field === 'value' && typeof newValue === 'string') {
       newAnchors[index] = { ...newAnchors[index], value: newValue }
     } else if (field === 'step' && typeof newValue === 'number') {
-      if (isStepAlreadyUsed(anchors, newValue, index)) {
-        window.alert(
-          'Step value already used by another anchor. Please choose a unique step.',
-        )
-        return
-      }
       newAnchors[index] = { ...newAnchors[index], step: newValue }
     }
     onChangeAnchors(newAnchors)
@@ -151,11 +135,14 @@ function NameAndControlsBase({
     const usedSteps = anchors.map((a) => a.step)
 
     if (usedSteps.length >= 15) {
-      window.alert(
+      setMaxAnchorsError(
         'All 15 steps are already in use. Remove an anchor before adding a new one.',
       )
       return
     }
+
+    // Clear error when successful
+    setMaxAnchorsError(null)
 
     const newStep = findAvailableStep(usedSteps)
     onChangeAnchors([
@@ -270,6 +257,15 @@ function NameAndControlsBase({
               testId={testId}
             />
           ))}
+          {maxAnchorsError && (
+            <div
+              className="text-xs text-danger-subtle px-2 py-1 bg-danger-fill-muted rounded-md"
+              role="alert"
+              data-testid={testId ? `${testId}-max-anchors-error` : undefined}
+            >
+              {maxAnchorsError}
+            </div>
+          )}
           <button
             type="button"
             onClick={handleAddAnchor}
