@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Pipette, X } from 'lucide-react'
 import { isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { ColorAnchor } from '@/types'

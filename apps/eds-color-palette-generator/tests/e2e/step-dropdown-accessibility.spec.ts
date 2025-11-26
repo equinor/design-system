@@ -1,21 +1,27 @@
 import { test, expect } from '@playwright/test'
 import 'dotenv/config'
 
+// Clear localStorage before each test to ensure consistent state
+test.beforeEach(async ({ page }) => {
+  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
+  await page.evaluate(() => localStorage.clear())
+  await page.reload()
+})
+
 test.describe('Step Dropdown Accessibility', () => {
   test('should have accessible labels for step dropdown options', async ({
     page,
   }) => {
-    await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
-
+    // Use color-scale-1 (Gray) which starts in single-color mode
     // Click "Add second color" button to enter anchor mode
-    await page.getByTestId('color-scale-0-add-second-color').click()
+    await page.getByTestId('color-scale-1-add-second-color').click()
 
     // Wait for anchor mode to be active
     await page.waitForTimeout(300)
 
     // Verify that we have two anchors
-    const firstAnchorStep = page.getByTestId('color-scale-0-anchor-0-step')
-    const secondAnchorStep = page.getByTestId('color-scale-0-anchor-1-step')
+    const firstAnchorStep = page.getByTestId('color-scale-1-anchor-0-step')
+    const secondAnchorStep = page.getByTestId('color-scale-1-anchor-1-step')
 
     await expect(firstAnchorStep).toBeVisible()
     await expect(secondAnchorStep).toBeVisible()
@@ -36,16 +42,15 @@ test.describe('Step Dropdown Accessibility', () => {
   test('should have descriptive aria-labels for disabled step options', async ({
     page,
   }) => {
-    await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
-
+    // Use color-scale-1 (Gray) which starts in single-color mode
     // Click "Add second color" button to enter anchor mode
-    await page.getByTestId('color-scale-0-add-second-color').click()
+    await page.getByTestId('color-scale-1-add-second-color').click()
 
     // Wait for anchor mode to be active
     await page.waitForTimeout(300)
 
     // Get the first anchor's step dropdown
-    const firstAnchorStep = page.getByTestId('color-scale-0-anchor-0-step')
+    const firstAnchorStep = page.getByTestId('color-scale-1-anchor-0-step')
 
     // Get all option elements inside the first select
     const options = await firstAnchorStep.locator('option').all()
@@ -72,18 +77,17 @@ test.describe('Step Dropdown Accessibility', () => {
   test('should maintain aria-labels when adding more anchors', async ({
     page,
   }) => {
-    await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
-
+    // Use color-scale-1 (Gray) which starts in single-color mode
     // Enter anchor mode
-    await page.getByTestId('color-scale-0-add-second-color').click()
+    await page.getByTestId('color-scale-1-add-second-color').click()
     await page.waitForTimeout(300)
 
     // Add a third anchor
-    await page.getByTestId('color-scale-0-add-anchor').click()
+    await page.getByTestId('color-scale-1-add-anchor').click()
     await page.waitForTimeout(300)
 
     // Verify that all three anchors have accessible step dropdowns
-    const thirdAnchorStep = page.getByTestId('color-scale-0-anchor-2-step')
+    const thirdAnchorStep = page.getByTestId('color-scale-1-anchor-2-step')
     await expect(thirdAnchorStep).toBeVisible()
     await expect(thirdAnchorStep).toHaveAttribute(
       'aria-label',
@@ -112,14 +116,13 @@ test.describe('Step Dropdown Accessibility', () => {
   test('should show "(used)" text in option value for visual users', async ({
     page,
   }) => {
-    await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
-
+    // Use color-scale-1 (Gray) which starts in single-color mode
     // Enter anchor mode
-    await page.getByTestId('color-scale-0-add-second-color').click()
+    await page.getByTestId('color-scale-1-add-second-color').click()
     await page.waitForTimeout(300)
 
     // Get the first anchor's step dropdown
-    const firstAnchorStep = page.getByTestId('color-scale-0-anchor-0-step')
+    const firstAnchorStep = page.getByTestId('color-scale-1-anchor-0-step')
 
     // Get all option elements
     const options = await firstAnchorStep.locator('option').all()
