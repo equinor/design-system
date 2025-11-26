@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",
-    "test": "tsc -p tsconfig.test.json && jest",
+    "test": "tsc -p tsconfig.test.json && jest --ci",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
     "test:visual": "playwright test",
