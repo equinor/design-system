@@ -1,0 +1,111 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="EDS 2.0 (beta)/About" />
+
+# About EDS 2.0 (Beta)
+
+Welcome to the next generation of the Equinor Design System! 🎉
+
+## What is EDS 2.0?
+
+EDS 2.0 is a complete redesign of our component library, bringing:
+
+- ✨ **Updated design foundations** - New spacing scales, color system, and typography built with CSS variables
+- 🎨 **Pure CSS styling** - Moved away from styled-components to vanilla CSS
+- 🌗 **Flexible theming** - Support for dark mode and density modes (spacious/comfortable) via `data-*` attributes
+- 🎯 **Enhanced accessibility** - Improved WCAG 2.1 AA compliance across all components
+- 🚀 **Better performance** - Optimized with modern React patterns and reduced bundle size
+- 🔧 **Refined APIs** - Cleaner, more intuitive component interfaces
+
+<br />
+## Current Status: Beta
+
+All components in the **"EDS 2.0"** section are currently in **beta testing**. This means:
+
+- ⚠️ **Breaking changes may occur** - APIs are not yet finalized
+- 🧪 **Testing phase** - We're gathering feedback and iterating
+- 📝 **Documentation evolving** - Stories and examples are being refined
+- 🎨 **Design alignment ongoing** - Ensuring perfect match with Figma
+
+<br />
+## How to Use Beta Components
+
+<br />
+
+### 1. Browse in Storybook
+
+You can explore all EDS 2.0 components right here in Storybook! Components are organized under the **"EDS 2.0"** section in the sidebar.
+
+Each component has:
+- 📖 Interactive documentation
+- 🎮 Live playground to test props
+- 🎨 Design examples and use cases
+- 🔍 Code snippets for implementation
+
+### 2. Install Beta Version
+
+To actually use these components in your application, install the beta version:
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+### 3. Import from `/next` Entry Point
+
+```typescript
+import { Button, Typography } from '@equinor/eds-core-react/next'
+
+function MyApp() {
+  return (
+    <div>
+      <Typography>Welcome to EDS 2.0!</Typography>
+      <Button>Click me</Button>
+    </div>
+  )
+}
+```
+
+## When Will EDS 2.0 Be Stable?
+
+EDS 2.0 components will graduate to stable in a **single major release (v3.0.0)** when:
+
+- ✅ All components are implemented and tested
+- ✅ Design team has approved final implementations
+- ✅ Real-world usage has validated the APIs
+- ✅ Documentation and migration guides are complete
+
+This approach ensures:
+- 🎯 One clear migration point for all users
+- 📝 Complete migration guide covering all changes
+- 🔄 Simple import path change (no component renaming)
+<br />
+## Migration Path
+
+When EDS 2.0 graduates to stable:
+
+```typescript
+// Before (beta testing):
+import { Button } from '@equinor/eds-core-react/next'
+
+// After (v3.0.0 stable):
+import { Button } from '@equinor/eds-core-react'
+```
+
+That's it! No component name changes, just update the import path.
+<br />
+## Provide Feedback
+
+We'd love to hear your thoughts on EDS 2.0! Your feedback helps us create better components.
+
+- 💬 **Slack**: Join [#eds-design-system](https://equinor.slack.com/archives/CJT20H1B9)
+- 🐛 **Issues**: Report bugs on [GitHub](https://github.com/equinor/design-system/issues)
+<br />
+## Learn More
+
+- 📚 [Beta Release Guide](https://github.com/equinor/design-system/blob/main/documentation/how-to/BETA_RELEASE_GUIDE.md)
+- 🔄 [Release Process](https://github.com/equinor/design-system/blob/main/documentation/how-to/AUTOMATED_RELEASE.md)
+- 🎨 [Figma Designs](https://www.figma.com/files/682286909510540417/team/590517879490131675/EDS---Equinor-Design-System)
+
+---
+
+**Ready to explore?** Check out the components in the **"EDS 2.0"** section! 👈

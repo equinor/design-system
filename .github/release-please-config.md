@@ -49,12 +49,55 @@ Each package in the monorepo must be explicitly configured:
 
 We currently track these packages for releases:
 
-1. `@equinor/eds-core-react` - Core React component library
-2. `@equinor/eds-data-grid-react` - Data grid component
-3. `@equinor/eds-icons` - Icon library
-4. `@equinor/eds-lab-react` - Experimental components
-5. `@equinor/eds-tokens` - Design tokens and variables
-6. `@equinor/eds-utils` - Shared utilities
+1. `@equinor/eds-core-react` - Core React component library (stable)
+2. `@equinor/eds-core-react` (`/next` entry) - Beta components (published with `@beta` tag)
+3. `@equinor/eds-data-grid-react` - Data grid component
+4. `@equinor/eds-icons` - Icon library
+5. `@equinor/eds-lab-react` - Experimental components
+6. `@equinor/eds-tokens` - Design tokens and variables
+7. `@equinor/eds-utils` - Shared utilities
+
+### Dual Release Strategy for `@equinor/eds-core-react`
+
+The `eds-core-react` package uses a **dual release strategy** to support both stable and beta releases:
+
+**Stable Release** (`latest` tag):
+
+```json
+"packages/eds-core-react": {
+  "release-type": "node",
+  "package-name": "@equinor/eds-core-react",
+  "component": "eds-core-react",
+  "exclude-paths": ["src/components/next"]
+}
+```
+
+- Excludes `/next` folder from stable releases
+- Published to `@equinor/eds-core-react@latest`
+- Uses `CHANGELOG.md`
+
+**Beta Release** (`beta` tag):
+
+```json
+"packages/eds-core-react/src/components/next": {
+  "release-type": "simple",
+  "component": "eds-core-react-next",
+  "prerelease-type": "beta",
+  "include-component-in-tag": false
+}
+```
+
+- Only includes files in `src/components/next/`
+- Published to `@equinor/eds-core-react@beta`
+- Uses `src/components/next/CHANGELOG.md`
+- Version format: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
+
+**Key Configuration Options:**
+
+- `exclude-paths`: Prevents `/next` components from affecting stable releases
+- `prerelease-type: "beta"`: Adds `-beta.X` suffix to versions
+- `changelog-path`: Uses separate changelog for beta releases
+- `include-component-in-tag: false`: Prevents duplicate tags
 
 ## Pull Request Configuration
 
@@ -186,6 +229,8 @@ The releases include all commit types from the changelog (features, fixes, docs,
 
 ## Multi-Package Example
 
+### Stable + Multiple Packages
+
 If you make these commits:
 
 ```bash
@@ -203,27 +248,69 @@ Release-please will create ONE PR that:
 
 When merged, three separate GitHub releases will be created automatically.
 
+### Beta Release Example
+
+If you make these commits:
+
+```bash
+feat(next): add Input component
+fix(next): fix Placeholder styling
+```
+
+Release-please will include beta changes in the release PR:
+
+- Title includes "next": `chore: release eds-core-react-next 2.0.1-beta.1`
+- Bumps beta version: `2.0.1-beta.0` → `2.0.1-beta.1`
+- Updates `src/components/next/CHANGELOG.md`
+- When merged, publishes to `@equinor/eds-core-react@beta`
+
+**Note:** With `"separate-pull-requests": false`, both stable and beta changes can appear in the **same PR** if you have commits for both. The PR will contain updates to both `CHANGELOG.md` and `src/components/next/CHANGELOG.md`.
+
 ## Commit Scope Matching
 
 The `component` field must match commit scopes for release-please to detect which packages are affected:
 
 ```bash
-# These commits affect the corresponding packages:
-feat(eds-core-react): ...     → packages/eds-core-react
+# Stable releases:
+feat(eds-core-react): ...     → packages/eds-core-react (stable)
+fix(Button): ...              → packages/eds-core-react (stable)
 fix(eds-icons): ...           → packages/eds-icons
 docs(eds-tokens): ...         → packages/eds-tokens
+
+# Beta releases (use "next" scope):
+feat(next): ...               → packages/eds-core-react@beta
+fix(next): ...                → packages/eds-core-react@beta
 
 # Multiple packages in one commit:
 feat(eds-icons, eds-core-react): ...  → both packages
 ```
+
+### Beta Release Commits
+
+For components in the `/next` entry point, always use the `(next)` scope:
+
+```bash
+# Features
+feat(next): add Input 2.0 component
+
+# Bug fixes
+fix(next): correct Input 2.0 styling
+
+# Breaking changes - DO NOT use ! for beta
+feat(next): redesign Input 2.0 API (breaking)
+# NOT: feat(next)!: redesign Button API
+```
+
+**Important:** Avoid using `!` (breaking change marker) for beta releases. Beta components are experimental and breaking changes are expected. Using `!` would trigger a major version bump (e.g., `2.0.1-beta.0` → `3.0.0-beta.0`), which is unnecessary for components under development.
 
 ## Related Files
 
 - **Config**: `.github/release-please-config.json` (this documentation)
 - **Manifest**: `.github/release-please-manifest.json` (tracks current versions)
 - **Workflow**: `.github/workflows/release-please.yml` (triggers release-please)
-- **Publish**: `.github/workflows/trigger-publish.yml` (publishes after release)
+- **Publish**: `.github/workflows/trigger-publish.yml` (publishes after release, handles beta detection)
 - **Automated release documentation**: `../documentation/how-to/AUTOMATED_RELEASE.md`
+- **Beta release guide**: `documentation/how-to/BETA_RELEASE_GUIDE.md` (detailed beta workflow)
 
 ## Useful Links
 
