@@ -602,7 +602,7 @@ Utility: `src/utils/mergeLightDarkFoundation.ts`
   background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
 }
 
-.button-secondary:hover {
+.button--secondary:hover {
   background-color: var(--eds-color-bg-neutral-fill-muted-hover);
 }
 ```
