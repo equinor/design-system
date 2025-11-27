@@ -23,14 +23,22 @@
     "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "build/*"
   ],
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
-    }
+    },
+    "./next": {
+      "types": "./dist/types/index.next.d.ts",
+      "import": "./dist/esm/index.next.js",
+      "require": "./dist/next.cjs"
+    },
+    "./index.css": "./build/index.css",
+    "./index.min.css": "./build/index.min.css"
   },
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",

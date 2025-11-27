@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import postcssImport from 'postcss-import'
 import commonjs from '@rollup/plugin-commonjs'
 import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
@@ -31,12 +32,13 @@ export default [
     },
     plugins: [
       preserveDirective(),
-      del({ targets: 'dist/*', runOnce: true }),
+      del({ targets: ['dist/*', 'build/*'], runOnce: true }),
       resolve({ extensions }),
       commonjs(),
       postcss({
         extensions: ['.css'],
         extract: false,
+        inject: false,
       }),
       babel({
         babelHelpers: 'runtime',
@@ -54,5 +56,78 @@ export default [
       },
       { file: './dist/eds-core-react.cjs', format: 'cjs', interop: 'auto' },
     ],
+  },
+  {
+    input: ['./src/index.next.ts'],
+    external: [
+      /@babel\/runtime/,
+      'react/jsx-runtime',
+      ...Object.keys({
+        ...pkg.peerDependencies,
+        ...pkg.dependencies,
+      }),
+    ],
+    watch: {
+      clearScreen: true,
+      include: ['./src/**', './../tokens/**'],
+    },
+    plugins: [
+      preserveDirective(),
+      resolve({ extensions }),
+      commonjs(),
+      postcss({
+        extensions: ['.css'],
+        extract: false,
+        inject: false,
+      }),
+      babel({
+        babelHelpers: 'runtime',
+        extensions,
+        rootMode: 'upward',
+      }),
+    ],
+    output: [
+      {
+        dir: 'dist/esm',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        format: 'es',
+        sourcemap: isDevelopment,
+      },
+      { file: './dist/next.cjs', format: 'cjs', interop: 'auto' },
+    ],
+  },
+  {
+    input: './src/index.css',
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+        extract: 'index.css',
+        minimize: false,
+        sourceMap: false,
+        plugins: [postcssImport()],
+      }),
+    ],
+    output: {
+      dir: 'build',
+      format: 'es',
+    },
+  },
+  {
+    input: './src/index.css',
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+        extract: 'index.min.css',
+        minimize: true,
+        sourceMap: false,
+        plugins: [postcssImport()],
+      }),
+      del({ targets: 'build/*.js', hook: 'writeBundle' }),
+    ],
+    output: {
+      dir: 'build',
+      format: 'es',
+    },
   },
 ]
