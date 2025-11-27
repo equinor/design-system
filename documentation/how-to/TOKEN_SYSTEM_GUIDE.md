@@ -52,7 +52,7 @@ graph LR
 
 ### Keep It Simple
 
-**Simplicity is key**: If you add complexity in Figma (nested references, special naming), you'll need to handle it in the build system. Keep Figma variables straightforward and let the build system work as intended without to much customization.
+**Simplicity is key**: If you add complexity in Figma (nested references, special naming), you'll need to handle it in the build system. Keep Figma variables straightforward and let the build system work as intended without too much customization.
 
 ### Harmony in Practice
 
