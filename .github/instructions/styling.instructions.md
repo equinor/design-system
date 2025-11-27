@@ -48,7 +48,7 @@ DataGrid.tsx → data-grid.css
 .text-input {
   color: var(--eds-color-text-strong);
   background: var(--eds-color-bg-input);
-  border: 1px solid var(--eds-border-medium);
+  border: 1px solid var(--eds-color-border-medium);
 }
 ```
 
