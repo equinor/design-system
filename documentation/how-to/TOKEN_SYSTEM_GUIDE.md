@@ -1,6 +1,6 @@
 # Token System Guide
 
-This guide provides a comprehensive walkthrough of the <abbr title="Equinor Design System">EDS</abbr> token system -- from Figma setup through syncing, building, and implementation. It covers the complete token lifecycle and serves as documentation for working with design tokens in the EDS.
+This guide provides a comprehensive walkthrough of the <abbr title="Equinor Design System">EDS</abbr> token system – from Figma setup through syncing, building, and implementation. It covers the complete token lifecycle and serves as documentation for working with design tokens in the EDS.
 
 ## Table of Contents
 
