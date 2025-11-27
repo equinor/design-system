@@ -41,7 +41,9 @@ Each package in the monorepo must be explicitly configured:
 ```
 
 - **Path key** (`packages/eds-core-react`): The relative path from repo root to the package
-- **`release-type`**: Set to `"node"` for npm packages. This determines how version bumping works
+- **`release-type`**: Determines how release-please handles version bumping and changelog generation:
+  - `"node"` -- For standard npm packages with a `package.json`. Release-please reads/writes the version in `package.json` and generates changelogs based on conventional commits.
+  - `"simple"` -- For paths without a `package.json` (like subdirectories or non-npm releases). Uses a `version.txt` file to track versions. Used for the `/next` entry point since it's a subdirectory within `eds-core-react`, not a separate npm package.
 - **`package-name`**: The npm package name (with scope)
 - **`component`**: Used in git tags and must match the tag format. For `eds-core-react`, tags will be `eds-core-react@x.y.z`
 
@@ -87,6 +89,7 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 }
 ```
 
+- Uses `release-type: "simple"` because this is a subdirectory within `eds-core-react`, not a separate npm package with its own `package.json`. The `simple` release type tracks versions via `version.txt` instead of `package.json`.
 - Only includes files in `src/components/next/`
 - Published to `@equinor/eds-core-react@beta`
 - Uses `src/components/next/CHANGELOG.md`
