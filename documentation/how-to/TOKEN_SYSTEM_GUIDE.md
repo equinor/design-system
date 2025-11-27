@@ -1,6 +1,6 @@
 # Token System Guide
 
-This guide provides a comprehensive walkthrough of the <abbr title="Equinor Design System">EDS</abbr> token system -- from Figma setup through syncing, building, and implementation. It covers the complete token lifecycle and serves as the authoritative reference for working with design tokens in the EDS.
+This guide provides a comprehensive walkthrough of the <abbr title="Equinor Design System">EDS</abbr> token system -- from Figma setup through syncing, building, and implementation. It covers the complete token lifecycle and serves as documentation for working with design tokens in the EDS.
 
 ## Table of Contents
 
@@ -18,29 +18,26 @@ This guide provides a comprehensive walkthrough of the <abbr title="Equinor Desi
 
 ## Source of Truth
 
-### The Golden Rule: Figma is the Source of Truth
+### Figma
 
-Design tokens in the EDS originate in **Figma as Variable Collections**. This means:
+Design tokens in the EDS originate in **Figma as Variable Collections**. The token name and structure (build from groups, modes, and names) are defined in Figma.
 
-- ✅ Design tokens are **created and maintained in Figma**
-- ✅ Token values are defined in Figma variables
-- ✅ Code is **synced from Figma** to stay up-to-date
-- ❌ Do not manually edit token JSON files in `packages/eds-tokens/tokens/` unless you want to update existing variables in Figma
-- ❌ Do not create new tokens directly in code
+- Design tokens are **created and maintained in Figma**
+- Token values are defined in Figma variables
+- Code is **synced from Figma** to stay up-to-date
 
-**Why Figma?**
+### Tokens in code
 
-- Designers and developers work from the same source
-- Visual tools make color and spacing decisions easier
-- Changes propagate automatically to all consuming projects
-- Single source prevents drift between design and implementation
+- Token JSON files in `packages/eds-tokens/tokens/` are **generated from Figma**
+- Code builds (CSS, JS/TS, JSON) are generated from token JSON files
+- Using the Tokens in code to update values, descriptions and codeSyntax is very handy.
 
 ### Token Flow Overview
 
 ```mermaid
 graph LR
-    A[Figma Variables] -->|Sync| B[JSON Tokens]
-    B -->|Generate| C[Processed Tokens]
+    A[Figma Variables] -->|Sync| B[Tokens JSON]
+    B -->|Generate| C[Style dictionary]
     C -->|Build| D[CSS Variables]
     C -->|Build| E[JavaScript/TypeScript]
     C -->|Build| F[JSON Exports]
@@ -53,27 +50,9 @@ graph LR
     style F fill:#da1e28,color:#fff
 ```
 
-## Figma and Code Harmony
-
-### The 1-to-1 Principle
-
-The EDS token system maintains a **1-to-1 relationship** between Figma and code:
-
-| Figma Concept        | Code Equivalent     | Example                                                                           |
-| -------------------- | ------------------- | --------------------------------------------------------------------------------- | ------ |
-| Variable Collection  | Token JSON file     | `Semantic.Mode 1.json`                                                            |
-| Variable Mode        | Separate JSON file  | `Color Light.Mode 1.json`, `Color Dark.Mode 1.json`                               |
-| Variable Name        | CSS custom property | `bg/accent/fill-emphasis/default` → `--eds-color-bg-accent-fill-emphasis-default` |
-| Variable Reference   | Token reference     | `{Accent.9}` → `"{Accent.9}"` in JSON                                             |
-| Variable Mode Switch | `data-*` attribute  | Light/Dark mode → `data-color-scheme="light                                       | dark"` |
-
 ### Keep It Simple
 
-:::tip
-
-**Simplicity is key**: If you add complexity in Figma (nested references, conditional logic, special naming), you'll need to handle it in the build system. Keep Figma variables straightforward and let the build system do the heavy lifting.
-
-:::
+**Simplicity is key**: If you add complexity in Figma (nested references, special naming), you'll need to handle it in the build system. Keep Figma variables straightforward and let the build system work as intended without to much customization.
 
 ### Harmony in Practice
 
@@ -97,7 +76,7 @@ Color tokens define the visual palette and semantic color system.
 
 **Foundation Colors** (`GnovDpL3UV6X51Ot7Kv6Im`):
 
-- Base color palettes (Gray, Moss Green, Blue, Red, Orange, Green, etc.)
+- Base color palettes (Gray, North Sea, Moss Green, Blue, Red, Orange, Green, etc.)
 - Light and Dark variants for each palette
 - Location: `packages/eds-tokens/tokens/GnovDpL3UV6X51Ot7Kv6Im/`
 - Example: `Color Light.Mode 1.json`, `Color Dark.Mode 1.json`
@@ -218,11 +197,7 @@ Examples:
 - `💎 Density.Comfortable.json` -- Collection "💎 Density", Mode "Comfortable"
 - `🎨 Appearance.Accent.json` -- Collection "🎨 Appearance", Mode "Accent"
 
-:::warning
-
-Collection and mode names in Figma **must match exactly** to file names. Renaming in Figma requires renaming the JSON file.
-
-:::
+⚠️ Collection and mode names in Figma **must match exactly** to file names. Renaming in Figma requires renaming the JSON file.
 
 ### Variable References
 
@@ -256,7 +231,7 @@ graph TB
     A[Figma Variables API] <-->|sync-figma-to-tokens| B[Token JSON Files]
     B <-->|sync-tokens-to-figma| A
 
-    B -->|generate scripts| C[Generated Tokens]
+    B -->|generate scripts| C[Style dictionary]
     C -->|build scripts| D[CSS/JS/JSON Outputs]
 
     style A fill:#a259ff,color:#fff
@@ -278,11 +253,11 @@ pnpm run update-tokens
 
 This runs:
 
-- `update-tokens:foundations` -- Syncs foundation colors
-- `update-tokens:color-static` -- Syncs static semantic colors
-- `update-tokens:color-dynamic` -- Syncs dynamic appearance colors
-- `update-tokens:spacing-primitives` -- Syncs spacing primitives
-- `update-tokens:spacing-modes` -- Syncs spacing modes
+- `update-tokens:foundations` - Syncs foundation colors
+- `update-tokens:color-static` - Syncs static semantic colors
+- `update-tokens:color-dynamic` - Syncs dynamic appearance colors
+- `update-tokens:spacing-primitives` - Syncs spacing primitives
+- `update-tokens:spacing-modes` - Syncs spacing modes
 
 **Sync Individual Collections:**
 
@@ -313,7 +288,9 @@ CLI: `bin/sync-figma-to-tokens.js`
 
 ### Syncing from Code to Figma
 
-Use this when you need to **push token changes back to Figma** (rare, use with caution).
+Use this when you need to **push token changes back to Figma**
+💡 This works well to update token values and adding description and codeSyntax.
+💡 You can always use history in Figma to revert the changes
 
 ```bash
 cd packages/eds-tokens
@@ -335,12 +312,6 @@ pnpm run update-figma:color-static
 4. Posts changes to Figma API
 5. Updates variable values and references
 
-:::danger
-
-**Use with caution**: This can overwrite designer changes in Figma. Always coordinate with the design team before pushing to Figma.
-
-:::
-
 **Implementation:**
 
 Package: `@equinor/eds-tokens-sync`  
@@ -354,35 +325,6 @@ CLI: `bin/sync-tokens-to-figma.js`
 - ✅ Designers update color values
 - ✅ New variables are added in Figma
 - ✅ Variable names or structure changes
-- ✅ Before starting development work
-- ✅ Before creating a release
-
-**Sync from Code to Figma when:**
-
-- ⚠️ Automated token generation creates new variables
-- ⚠️ Bulk operations need to be applied
-- ⚠️ Restoring from a previous code version
-- ⚠️ **Always coordinate with design team first**
-
-### Sync Pitfalls
-
-:::warning Common Issues
-
-1. **Overwriting changes**: Syncing from Figma will overwrite any manual edits to JSON files
-2. **Lost references**: If you break reference chains, colors may become hard-coded values
-3. **Mode mismatches**: Changing mode names in Figma breaks the file mapping
-4. **API rate limits**: Syncing large collections repeatedly can hit Figma API limits
-5. **Token naming conflicts**: Duplicate variable names cause sync errors
-
-:::
-
-**Prevention:**
-
-- Always `git commit` before syncing to enable rollback
-- Test sync on a single collection first: `pnpm run update-tokens:foundations`
-- Check git diff after sync: `git diff packages/eds-tokens/tokens/`
-- Use Figma history to revert unwanted Figma changes
-- Never manually edit files in `tokens/` folders
 
 ## Building Tokens
 
@@ -416,60 +358,6 @@ graph LR
     style H fill:#8a3ffc,color:#fff
     style I fill:#8a3ffc,color:#fff
 ```
-
-### Generation Scripts
-
-Generation scripts create **intermediate tokens** from source tokens. These run before the build step.
-
-**Generate Color Scheme:**
-
-```bash
-cd packages/eds-tokens
-pnpm run generate:tokens:color-scheme
-```
-
-Creates `🌗 Color Scheme.Light.json` and `🌗 Color Scheme.Dark.json` by mapping semantic categories to foundation palettes using `token-config.json`:
-
-```json
-{
-  "colorSchemeConfig": {
-    "Accent": { "Light": "Moss Green", "Dark": "Moss Green" },
-    "Neutral": { "Light": "Gray", "Dark": "North sea" }
-  }
-}
-```
-
-**Implementation:**  
-Package: `@equinor/eds-tokens-build`  
-Script: `src/scripts/generate-color-scheme-tokens.ts`
-
-**Generate Static Semantic:**
-
-```bash
-pnpm run generate:tokens:static
-```
-
-Enhances static semantic tokens with concept colors. Runs:
-
-1. `generate-color-scheme-tokens`
-2. `generate-semantic-tokens`
-3. `generate-concept-tokens`
-
-**Generate Dynamic Appearance:**
-
-```bash
-pnpm run generate:tokens:dynamic
-```
-
-Creates appearance-based tokens for each mode (Accent, Neutral, Success, etc.). Runs:
-
-1. `generate-color-scheme-tokens`
-2. `generate-dynamic-appearance-tokens`
-3. `generate-concept-tokens`
-
-**Implementation:**  
-Package: `@equinor/eds-tokens-build`  
-Scripts: `src/scripts/generate-*.ts`
 
 ### Build Scripts
 
@@ -693,32 +581,39 @@ Utility: `src/utils/mergeLightDarkFoundation.ts`
 ```css
 /* All variables (minified) */
 @import '@equinor/eds-tokens/css/variables';
-
-/* Or specific categories */
-@import '@equinor/eds-tokens/build/css/color/color-scheme/index.css';
-@import '@equinor/eds-tokens/build/css/color/static/index.css';
-@import '@equinor/eds-tokens/build/css/spacing/index.css';
 ```
 
-**Static Approach Usage:**
+**Static Approach Example:**
 
 ```css
-.button-primary {
+.button--primary {
   background-color: var(--eds-color-bg-accent-fill-emphasis-default);
   color: var(--eds-color-text-accent-strong-on-emphasis);
   border: 1px solid var(--eds-color-border-accent-strong);
 }
 
-.button-primary:hover {
+.button--secondary {
+  background-color: var(--eds-color-bg-neutral-fill-muted-default);
+  color: var(--eds-color-text-neutral-strong);
+  border: 1px solid var(--eds-color-border-neutral-medium);
+}
+
+.button--primary:hover {
   background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
 }
 
-.button-primary:active {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-active);
+.button-secondary:hover {
+  background-color: var(--eds-color-bg-neutral-fill-muted-hover);
 }
 ```
 
-**Dynamic Approach Usage:**
+```html
+<!-- Static approach: Different classes for different semantics -->
+<button class="button--primary">Primary</button>
+<button class="button--secondary">Secondary</button>
+```
+
+**Dynamic Approach Example:**
 
 ```css
 .button {
@@ -726,100 +621,12 @@ Utility: `src/utils/mergeLightDarkFoundation.ts`
   color: var(--eds-color-text-strong-on-emphasis);
   border: 1px solid var(--eds-color-border-strong);
 }
-
-.button:hover {
-  background-color: var(--eds-color-bg-fill-emphasis-hover);
-}
 ```
 
 ```html
-<!-- Same CSS class, different appearances -->
+<!-- Dynamic approach: Same CSS class, different appearances -->
 <button class="button" data-color-appearance="accent">Primary</button>
 <button class="button" data-color-appearance="neutral">Secondary</button>
-<button class="button" data-color-appearance="success">Success</button>
-```
-
-### Data Attributes
-
-Data attributes control token variations at runtime.
-
-**Color System:**
-
-```html
-<!-- Theme switching -->
-<html data-color-scheme="light">
-  <html data-color-scheme="dark">
-    <!-- Dynamic appearance (for dynamic approach) -->
-    <div data-color-appearance="accent">
-      <div data-color-appearance="neutral">
-        <div data-color-appearance="info">
-          <div data-color-appearance="success">
-            <div data-color-appearance="warning">
-              <div data-color-appearance="danger"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </html>
-</html>
-```
-
-**Spacing System:**
-
-```html
-<!-- Density mode -->
-<div data-space-density="spacious">
-  <div data-space-density="comfortable">
-    <!-- Selectable element spacing -->
-    <button data-selectable-space="xs">
-      <button data-selectable-space="sm">
-        <button data-selectable-space="md">
-          <button data-selectable-space="lg">
-            <!-- Padding proportions -->
-            <div data-space-proportions="squished">
-              <div data-space-proportions="square">
-                <div data-space-proportions="stretched">
-                  <!-- Generic spacing -->
-                  <div data-space-gap-horizontal="md">
-                    <div data-space-gap-vertical="lg">
-                      <div data-space-inset-horizontal="sm">
-                        <div data-space-inset-vertical="md"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </button>
-        </button>
-      </button>
-    </button>
-  </div>
-</div>
-```
-
-**Typography System:**
-
-```html
-<!-- Font family -->
-<div data-typography-font-family="ui">
-  <div data-typography-font-family="header">
-    <!-- Font size -->
-    <div data-typography-font-size="xs">
-      <div data-typography-font-size="sm">
-        <div data-typography-font-size="md">
-          <!-- Font weight -->
-          <div data-typography-font-weight="regular">
-            <div data-typography-font-weight="medium">
-              <div data-typography-font-weight="bold"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 ```
 
 ### Figma Variable Modes
@@ -845,46 +652,6 @@ Figma Designer selects "Accent", "Neutral", "Success", etc. mode in the Dynamic 
 ```html
 <button data-color-appearance="accent"></button>
 ```
-
-**Key Difference:**
-
-- **Figma**: Mode selection happens at design time per frame/component
-- **Code**: Data attributes can be changed dynamically at runtime
-
-**Harmony:**
-
-Both systems achieve the same result -- Figma modes preview how different attribute values will look in the final implementation.
-
-### JavaScript/TypeScript Usage
-
-**Import:**
-
-```typescript
-import { colors } from '@equinor/eds-tokens'
-import type { ColorType } from '@equinor/eds-tokens'
-
-// Or specific exports
-import { interactive } from '@equinor/eds-tokens'
-```
-
-**Usage:**
-
-```typescript
-// Legacy token objects (for backward compatibility)
-const buttonColor = colors.interactive.primary__resting.hex
-
-// Modern approach: Use CSS variables in styles
-const styles = {
-  backgroundColor: 'var(--eds-color-bg-accent-fill-emphasis-default)',
-  color: 'var(--eds-color-text-accent-strong-on-emphasis)',
-}
-```
-
-:::tip
-
-**Prefer CSS variables**: The modern token system uses CSS variables for runtime theme switching. JavaScript imports provide the legacy token structure for backward compatibility but don't support dynamic theming.
-
-:::
 
 ## Figma API Setup
 
@@ -974,73 +741,17 @@ File keys are found in Figma URLs: `https://www.figma.com/design/[FILE_KEY]/...`
 
 ## Figma Library Workflow
 
-### Working Directly on "Main"
-
-The Figma API forces you to work directly on the **main Figma file** -- there's no branching like in Git.
-
-**Implications:**
-
-- ✅ Changes are immediately visible to all team members
-- ✅ No merge conflicts from parallel branches
-- ❌ No isolated workspace for experiments
-- ❌ Mistakes affect everyone immediately
-
-**Best Practices:**
-
-1. **Communicate changes** in team chat before major updates
-2. **Test locally** -- sync, generate, build, verify before pushing to Figma
-3. **Small iterations** -- make incremental changes, not massive overhauls
-4. **Document intent** -- add descriptions to variables explaining their purpose
-5. **Coordinate timing** -- don't update during active design work hours
-
 ### Using Figma History to Revert Changes
 
 Figma automatically saves version history. Use it to rollback unwanted changes.
 
-**Access History:**
-
-1. Open the Figma file
-2. Click File menu → "Show version history" (or `Cmd/Ctrl + Alt + H`)
-3. Browse timeline of changes
-4. Click "Restore this version" to rollback
-
-**When to Use History:**
-
-- ✅ Accidental variable deletion
-- ✅ Wrong values applied to variables
-- ✅ Sync from code introduced errors
-- ✅ Need to compare current vs previous state
-
-**Limitations:**
-
-- History shows file-level changes, not variable-level diffs
-- Can't cherry-pick specific variable changes
-- Restoring overwrites all current changes
-
 ### Saving Stable Versions
 
-Figma doesn't have explicit "save points", but you can create them:
-
-**Method 1: Named Versions**
+**Method: Named Versions**
 
 1. File menu → "Save to version history"
 2. Add descriptive name: "Stable color tokens - Pre spacing update"
 3. These appear prominently in history timeline
-
-**Method 2: Duplicate Files**
-
-For major experiments:
-
-1. Duplicate the entire Figma file
-2. Make changes in the duplicate
-3. Test sync and build with duplicate file key
-4. Merge back to main file when stable
-
-**Recommended Cadence:**
-
-- **Before major changes** -- "Pre [feature] update"
-- **After successful releases** -- "v2.0.1 token release"
-- **Monthly snapshots** -- "January 2025 stable"
 
 ### Handling Sync Conflicts
 
@@ -1077,25 +788,6 @@ git diff tokens/
 # Push to Figma (coordinate with design team first!)
 pnpm run update-figma
 ```
-
-**Scenario 3: Both Changed (Conflict)**
-
-Designer updated Figma, developer generated new tokens -- now they diverge.
-
-**Resolution:**
-
-1. **Determine source of truth** -- Usually Figma wins for manual updates
-2. **Sync from Figma** -- Overwrites local changes: `pnpm run update-tokens`
-3. **Re-run generation** -- Regenerate computed tokens: `pnpm run generate:tokens:all-color`
-4. **Verify build** -- Ensure no breakage: `pnpm run build:variables`
-5. **Commit carefully** -- Review all diffs before committing
-
-**Prevention:**
-
-- Always sync before generating tokens
-- Coordinate large changes with design team
-- Use Figma history to see what designers changed
-- Test builds immediately after sync
 
 ## Troubleshooting and Pitfalls
 
@@ -1231,63 +923,6 @@ These issues have been observed while using the `@equinor/eds-tokens-sync` bidir
 
 - Renaming or changing the “Code Syntax” casing in Figma effectively creates new variables when syncing from code to Figma.
 - Keep naming and casing consistent between Figma and code. Treat renames as migrations and clean up the old variables explicitly.
-
-### Build Pitfalls
-
-**Pitfall: Custom transforms not applied**
-
-**Cause:** Transform not registered with Style Dictionary instance.
-
-**Solution:** Check `createStyleDictionary()` in `@equinor/eds-tokens-build` includes your transform.
-
-**Pitfall: Token path doesn't match filter**
-
-**Cause:** `includeTokenFilter` expects specific path structure like `color/foundation/gray/1`.
-
-**Solution:** Ensure tokens follow path convention or update filter logic in `src/filter/includeTokenFilter.ts`.
-
-**Pitfall: CSS output has wrong selector**
-
-**Cause:** Build script selector configuration doesn't match usage pattern.
-
-**Solution:** Check build script (e.g., `build-semantic-static-variables.ts`) has correct selector like `[data-color-scheme="light"]`.
-
-**Pitfall: Variables don't cascade**
-
-**Cause:** CSS specificity or selector order causing variables not to apply.
-
-**Solution:** Import CSS files in correct order:
-
-```css
-/* 1. Foundation (base variables) */
-@import '@equinor/eds-tokens/build/css/color/color-scheme/index.css';
-
-/* 2. Semantic (references foundation) */
-@import '@equinor/eds-tokens/build/css/color/static/index.css';
-
-/* 3. Dynamic (references semantic) */
-@import '@equinor/eds-tokens/build/css/color/dynamic/index.css';
-```
-
-### Version Conflicts
-
-**Issue: Generated tokens conflict with manual changes**
-
-**Solution:** Don't manually edit generated files (prefixed with 🌗 or 🎨). They're recreated each generation.
-
-**Issue: Multiple versions of tokens package in node_modules**
-
-**Cause:** Different packages depend on different token versions.
-
-**Solution:**
-
-```bash
-# From monorepo root
-pnpm install --force
-
-# Check all packages use same version
-pnpm list @equinor/eds-tokens
-```
 
 ## Quick Reference
 
