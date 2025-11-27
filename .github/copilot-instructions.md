@@ -1,53 +1,24 @@
 # GitHub Copilot Instructions for Equinor Design System
 
-## Project Overview
+## Overview
 
-This monorepo contains Equinor's Design System (EDS) - a component library and design tokens that implement Equinor's design language. The design system consists of multiple packages:
+Equinor Design System (EDS) is a monorepo with component libraries and design tokens implementing Equinor's design language.
 
-- `@equinor/eds-core-react`: Core React components
-- `@equinor/eds-tokens`: Design tokens and variables
-- `@equinor/eds-icons`: Icon library
-- `@equinor/eds-lab-react`: Experimental components
-- `@equinor/eds-data-grid-react`: Data grid component
+## Packages
 
-## Code Style & Patterns
+- **`@equinor/eds-core-react`** - Main React component library (most development happens here)
+- **`@equinor/eds-tokens`** - Design tokens, CSS variables, and theming
+- **`@equinor/eds-icons`** - Icon library
+- **`@equinor/eds-lab-react`** - Experimental/WIP components
+- **`@equinor/eds-data-grid-react`** - Data grid component
 
-Apply detailed guidelines from:
+## Guidelines
 
-- [Global coding standards](./instructions/global-coding.instructions.md)
-- [TypeScript guidelines](./instructions/ts.instructions.md)
-- [React guidelines](./instructions/react.instructions.md)
-- [Styling guidelines](./instructions/styling.instructions.md)
-- [Figma component creation](./instructions/figma.instructions.md)
-- [Markdown guidelines](./instructions/markdown.instructions.md)
+- [Global standards](./instructions/global-coding.instructions.md) - Accessibility, naming, exports
+- [TypeScript](./instructions/ts.instructions.md) - Type patterns and testing
+- [React](./instructions/react.instructions.md) - Components, hooks, file structure
+- [Styling](./instructions/styling.instructions.md) - CSS, BEM, responsive design
+- [Figma](./instructions/figma.instructions.md) - Design-to-code workflow
+- [Markdown](./instructions/markdown.instructions.md) - Documentation format
 
-### Color System
-
-The <abbr title="Equinor Design System">EDS</abbr> provides two color approaches. Choose one and use it consistently:
-
-- [Color System Introduction](../packages/eds-tokens/instructions/colors.md) -- Overview of semantic categories, approaches, and accessibility
-- [Static Color Approach](../packages/eds-tokens/instructions/colors-static.md) -- Explicit semantic variables for fixed meanings
-- [Dynamic Color Approach](../packages/eds-tokens/instructions/colors-dynamic.md) -- Abstract role variables with runtime appearance switching
-
-## Testing Requirements
-
-- All components and features should be thoroughly tested
-- All components should have appropriate unit tests using Jest
-- Visual regression tests should be included where applicable
-- Test accessibility features explicitly
-- Include test cases for edge cases and error states
-
-## Documentation
-
-- All components should have Storybook stories
-- Include usage examples in documentation
-- Document all props, including types and default values
-- Add information about accessibility features
-- Provide guidance on common patterns and implementation details
-
-## PR and Code Review Process
-
-- Use conventional commits for commit messages
-- PRs should include tests and documentation
-- Link relevant Figma designs when applicable
-- Ensure changes pass all CI checks
+For color systems: See `packages/eds-tokens/instructions/colors.md`
