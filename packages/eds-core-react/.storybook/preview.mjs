@@ -11,6 +11,7 @@ const preview = {
           'Introduction',
           'EdsProvider',
           'EDS 2.0 (beta)',
+          ['About', '*'],
           'Data Display',
           'Feedback',
           'Inputs',
@@ -26,6 +27,6 @@ const preview = {
     },
   },
 
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 export default preview

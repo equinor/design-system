@@ -78,28 +78,27 @@ import { Placeholder } from '@equinor/eds-core-react/next'
 
 ## Viewing Beta Components in Storybook
 
-Beta components are **visible in production Storybook** under the **"EDS 2.0"** section with "next" badges. This allows everyone to:
+Beta components are **visible in production Storybook** under the **"EDS 2.0 (beta)"** section. This allows everyone to:
 
 - 👀 See what's coming in EDS 2.0
 - 📖 Read documentation and API specs
 - 🎨 View design implementations
 - 💬 Provide feedback before stable release
 
-### Storybook Labeling Tips
+### Storybook Naming Convention
 
-Add a visual indicator in story titles so teams immediately know the component is in beta:
+Use the `EDS 2.0 (beta)` prefix in story titles so teams immediately know the component is in beta:
 
 ```typescript
 // In component stories
 export default {
   title: 'EDS 2.0 (beta)/Inputs/Button',
-  parameters: {
-    badges: ['beta', 'next'],
-  },
+  component: Button,
+  tags: ['beta'],
 }
 ```
 
-Use consistent naming (e.g., `EDS 2.0 (beta)`) so search groups every beta story together.
+The `(beta)` suffix in the title provides a clear visual indicator in the sidebar, and the `tags` property enables filtering.
 
 **To actually use these components**, you must install the beta version:
 
