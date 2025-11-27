@@ -14,84 +14,61 @@ const isDevelopment = environment === 'development'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 
+// Shared configuration
+const external = [
+  /@babel\/runtime/,
+  'react/jsx-runtime',
+  ...Object.keys({
+    ...pkg.peerDependencies,
+    ...pkg.dependencies,
+  }),
+]
+
+const watch = {
+  clearScreen: true,
+  include: ['./src/**', './../tokens/**'],
+}
+
+const getPlugins = (additionalPlugins = []) => [
+  preserveDirective(),
+  ...additionalPlugins,
+  resolve({ extensions }),
+  commonjs(),
+  postcss({
+    extensions: ['.css'],
+    extract: false,
+  }),
+  babel({
+    babelHelpers: 'runtime',
+    extensions,
+    rootMode: 'upward',
+  }),
+]
+
+const getOutput = (cjsFile) => [
+  {
+    dir: 'dist/esm',
+    preserveModules: true,
+    preserveModulesRoot: 'src',
+    format: 'es',
+    sourcemap: isDevelopment,
+  },
+  { file: cjsFile, format: 'cjs', interop: 'auto' },
+]
+
 export default [
   {
     input: ['./src/index.ts'],
-    external: [
-      /@babel\/runtime/,
-      'react/jsx-runtime',
-      ...Object.keys({
-        ...pkg.peerDependencies,
-        ...pkg.dependencies,
-      }),
-    ],
-    watch: {
-      clearScreen: true,
-      include: ['./src/**', './../tokens/**'],
-    },
-    plugins: [
-      preserveDirective(),
-      del({ targets: 'dist/*', runOnce: true }),
-      resolve({ extensions }),
-      commonjs(),
-      postcss({
-        extensions: ['.css'],
-        extract: false,
-      }),
-      babel({
-        babelHelpers: 'runtime',
-        extensions,
-        rootMode: 'upward',
-      }),
-    ],
-    output: [
-      {
-        dir: 'dist/esm',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        format: 'es',
-        sourcemap: isDevelopment,
-      },
-      { file: './dist/eds-core-react.cjs', format: 'cjs', interop: 'auto' },
-    ],
+    external,
+    watch,
+    plugins: getPlugins([del({ targets: 'dist/*', runOnce: true })]),
+    output: getOutput('./dist/eds-core-react.cjs'),
   },
   {
     input: ['./src/index.next.ts'],
-    external: [
-      /@babel\/runtime/,
-      'react/jsx-runtime',
-      ...Object.keys({
-        ...pkg.peerDependencies,
-        ...pkg.dependencies,
-      }),
-    ],
-    watch: {
-      clearScreen: true,
-      include: ['./src/**', './../tokens/**'],
-    },
-    plugins: [
-      preserveDirective(),
-      resolve({ extensions }),
-      commonjs(),
-      postcss({
-        extensions: ['.css'],
-        extract: false,
-      }),
-      babel({
-        babelHelpers: 'runtime',
-        extensions,
-        rootMode: 'upward',
-      }),
-    ],
-    output: [
-      {
-        dir: 'dist/esm',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        format: 'es',
-        sourcemap: isDevelopment,
-      },
-      { file: './dist/index.next.cjs', format: 'cjs', interop: 'auto' },
-    ],
+    external,
+    watch,
+    plugins: getPlugins(),
+    output: getOutput('./dist/index.next.cjs'),
   },
 ]
