@@ -1,3 +1,4 @@
+import { TypographyNext as Typography } from "@equinor/eds-core-react";
 import React from "react";
 
 export function Tab({
@@ -17,7 +18,17 @@ export function Tab({
       className={`h-11 px-4 py-2 justify-center items-center flex ${className}`}
       {...rest}
     >
-      <div className="text-base font-normal leading-tight">{children}</div>
+      <Typography
+        as="span"
+        family="ui"
+        size="lg"
+        baseline="center"
+        lineHeight="default"
+        weight="normal"
+        tracking="normal"
+      >
+        {children}
+      </Typography>
     </a>
   );
 }

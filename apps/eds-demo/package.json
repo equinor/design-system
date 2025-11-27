@@ -12,6 +12,7 @@
     "test:e2e:update": "playwright test --update-snapshots"
   },
   "dependencies": {
+    "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",

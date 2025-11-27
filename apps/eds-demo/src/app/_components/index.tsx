@@ -1,4 +1,4 @@
-import { Typography } from "./Typography";
+import { TypographyNext as Typography } from "@equinor/eds-core-react";
 
 export function Chip({
   className,
@@ -22,8 +22,12 @@ export function Chip({
       )}
       <Typography
         as="span"
+        family="ui"
         size="sm"
-        isBaselineAligned={false}
+        baseline="center"
+        lineHeight="default"
+        weight="normal"
+        tracking="normal"
         style={{ marginTop: "1px" }}
       >
         {children}

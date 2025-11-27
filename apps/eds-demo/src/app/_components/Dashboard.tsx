@@ -7,7 +7,7 @@ import { PrimaryButton, SecondaryButton } from "@/app/_components/Button";
 import { ButtonGroup } from "@/app/_components/ButtonGroup";
 import { ChipProps } from "@/app/_components/ChipProps";
 import { Menu } from "@/app/_components/Menu";
-import { Heading } from "./Typography";
+import { TypographyNext as Typography } from "@equinor/eds-core-react";
 
 type Props = {
   styles: Readonly<{ [key: string]: string }>;
@@ -58,14 +58,18 @@ export function Dashboard({ styles, Chip, ...rest }: Props) {
           />
 
           <header className="self-stretch h-9 pt-[5px] pb-[3px] flex-col justify-start items-start flex">
-            <Heading
-              level={1}
-              size="5xl"
-              isBaselineAligned={false}
+            <Typography
+              as="h1"
+              family="header"
+              size="4xl"
+              baseline="grid"
+              lineHeight="squished"
+              weight="normal"
+              tracking="normal"
               className={styles.heading}
             >
               People
-            </Heading>
+            </Typography>
           </header>
 
           <DataTable
