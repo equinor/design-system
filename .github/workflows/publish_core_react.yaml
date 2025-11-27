@@ -154,7 +154,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-core-react
+          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
       - name: Deploy the website
         id: deploy-website
         uses: tibor19/static-website-deploy@v2

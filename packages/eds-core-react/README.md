@@ -41,7 +41,7 @@ If you use TypeScript, make sure you have TypeScript >= 3.8 as a devDependency:
 npm install typescript --save-dev
 ```
 
-Install the design tokens and styled-components runtime to get the required styles:
+For styling, install the design tokens (EDS 2.0 uses vanilla CSS, but `styled-components` is still required for EDS 1.0 components):
 
 ```bash
 npm install @equinor/eds-core-react @equinor/eds-tokens styled-components
