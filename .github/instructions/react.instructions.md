@@ -25,10 +25,10 @@ MyComponent/
 **Functional components with hooks:**
 
 ```typescript
-import { ComponentProps } from './MyComponent.types';
+import { MyComponentProps } from './MyComponent.types';
 import './my-component.css';
 
-export const MyComponent: React.FC<ComponentProps> = ({
+export const MyComponent: React.FC<MyComponentProps> = ({
   children,
   variant = 'default',
   ...props
