@@ -14,83 +14,64 @@ const isDevelopment = environment === 'development'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 
+const externalDeps = [
+  /@babel\/runtime/,
+  'react/jsx-runtime',
+  ...Object.keys({
+    ...pkg.peerDependencies,
+    ...pkg.dependencies,
+  }),
+]
+
+const watchConfig = {
+  clearScreen: true,
+  include: ['./src/**', './../tokens/**'],
+}
+
+const createPlugins = (includeDelete = false) => [
+  preserveDirective(),
+  ...(includeDelete ? [del({ targets: 'dist/*', runOnce: true })] : []),
+  resolve({ extensions }),
+  commonjs(),
+  postcss({
+    extensions: ['.css'],
+    extract: false,
+  }),
+  babel({
+    babelHelpers: 'runtime',
+    extensions,
+    rootMode: 'upward',
+  }),
+]
+
+const createEsmOutput = () => ({
+  dir: 'dist/esm',
+  preserveModules: true,
+  preserveModulesRoot: 'src',
+  format: 'es',
+  sourcemap: isDevelopment,
+})
+
 export default [
+  // Stable components (EDS 1.0)
   {
     input: ['./src/index.ts'],
-    external: [
-      /@babel\/runtime/,
-      'react/jsx-runtime',
-      ...Object.keys({
-        ...pkg.peerDependencies,
-        ...pkg.dependencies,
-      }),
-    ],
-    watch: {
-      clearScreen: true,
-      include: ['./src/**', './../tokens/**'],
-    },
-    plugins: [
-      preserveDirective(),
-      del({ targets: 'dist/*', runOnce: true }),
-      resolve({ extensions }),
-      commonjs(),
-      postcss({
-        extensions: ['.css'],
-        extract: false,
-      }),
-      babel({
-        babelHelpers: 'runtime',
-        extensions,
-        rootMode: 'upward',
-      }),
-    ],
+    external: externalDeps,
+    watch: watchConfig,
+    plugins: createPlugins(true),
     output: [
-      {
-        dir: 'dist/esm',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        format: 'es',
-        sourcemap: isDevelopment,
-      },
+      createEsmOutput(),
       { file: './dist/eds-core-react.cjs', format: 'cjs', interop: 'auto' },
     ],
   },
+  // Beta components (EDS 2.0)
   {
     input: ['./src/index.next.ts'],
-    external: [
-      /@babel\/runtime/,
-      'react/jsx-runtime',
-      ...Object.keys({
-        ...pkg.peerDependencies,
-        ...pkg.dependencies,
-      }),
-    ],
-    watch: {
-      clearScreen: true,
-      include: ['./src/**', './../tokens/**'],
-    },
-    plugins: [
-      preserveDirective(),
-      resolve({ extensions }),
-      commonjs(),
-      postcss({
-        extensions: ['.css'],
-        extract: false,
-      }),
-      babel({
-        babelHelpers: 'runtime',
-        extensions,
-        rootMode: 'upward',
-      }),
-    ],
+    external: externalDeps,
+    watch: watchConfig,
+    plugins: createPlugins(false),
     output: [
-      {
-        dir: 'dist/esm',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        format: 'es',
-        sourcemap: isDevelopment,
-      },
+      createEsmOutput(),
       { file: './dist/index.next.cjs', format: 'cjs', interop: 'auto' },
     ],
   },

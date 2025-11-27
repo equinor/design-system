@@ -41,12 +41,6 @@ If you use TypeScript, make sure you have TypeScript >= 3.8 as a devDependency:
 npm install typescript --save-dev
 ```
 
-For design tokens (required for CSS variables):
-
-```bash
-npm install @equinor/eds-tokens
-```
-
 ### Fonts
 
  The Equinor typeface is not included and needs to be added to the head of your project. Its available from the EDS CDN:

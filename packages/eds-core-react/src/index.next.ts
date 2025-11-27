@@ -1,5 +1,3 @@
-'use client'
-
 /**
  * EDS 2.0 Beta Components
  *
