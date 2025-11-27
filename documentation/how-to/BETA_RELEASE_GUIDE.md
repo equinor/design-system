@@ -282,7 +282,7 @@ git add .
 git commit -m "feat(next): add new Input component with validation"
 
 # 3. Push and create PR
-git push origin feat/add-new-input
+git push
 
 # 4. After PR merge, Release Please creates release PR
 # 5. Review and merge release PR
