@@ -20,7 +20,7 @@ This guide provides a comprehensive walkthrough of the <abbr title="Equinor Desi
 
 ### Figma
 
-Design tokens in the EDS originate in **Figma as Variable Collections**. The token name and structure (build from groups, modes, and names) are defined in Figma.
+Design tokens in the EDS originate in **Figma as Variable Collections**. The token name and structure (built from groups, modes, and names) are defined in Figma.
 
 - Design tokens are **created and maintained in Figma**
 - Token values are defined in Figma variables
