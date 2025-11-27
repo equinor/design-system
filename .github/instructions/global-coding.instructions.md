@@ -42,10 +42,15 @@ Use the global prettier config in the repository root. All files should pass Pre
 **Before submitting:**
 
 ```bash
-# Run linting
-pnpm lint:core-react
+# Run linting for all packages in the monorepo
+pnpm lint
 
-# Run tests
+# Run tests for all packages in the monorepo
+pnpm test
+
+# (Optional) To lint or test a specific package, use the package-specific script.
+# Example for core-react package:
+pnpm lint:core-react
 pnpm test:core-react
 
 # Format code
