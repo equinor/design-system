@@ -5,7 +5,6 @@ This guide provides a comprehensive walkthrough of the <abbr title="Equinor Desi
 ## Table of Contents
 
 - [Source of Truth](#source-of-truth)
-- [Figma and Code Harmony](#figma-and-code-harmony)
 - [Token Categories](#token-categories)
 - [Variable Collections and Modes](#variable-collections-and-modes)
 - [Token Sync Workflow](#token-sync-workflow)
