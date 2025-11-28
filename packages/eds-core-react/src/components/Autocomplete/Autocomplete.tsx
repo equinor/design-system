@@ -124,8 +124,8 @@ type IndexFinderType = <T,>({
   allDisabled,
 }: {
   index: number
-  optionDisabled: AutocompleteProps<T>['optionDisabled']
-  availableItems: AutocompleteProps<T>['options']
+  optionDisabled: (option: T) => boolean
+  availableItems: readonly T[]
   allDisabled?: boolean
   calc?: (n: number) => number
 }) => number
@@ -235,7 +235,7 @@ const defaultOptionDisabled = () => false
 // MARK: types
 export type AutocompleteChanges<T> = { selectedItems: T[] }
 
-export type AutocompleteProps<T> = {
+export type AutocompleteProps<T = string> = {
   /** List of options in dropdown */
   options: readonly T[]
   /** Total number of options */
@@ -293,8 +293,6 @@ export type AutocompleteProps<T> = {
   multiple?: boolean
   /** Add select-all option. Throws an error if true while multiple = false */
   allowSelectAll?: boolean
-  /**  Custom option label. NOTE: This is required when option is an object */
-  optionLabel?: (option: T) => string
   /**  Custom option template */
   optionComponent?: (option: T, isSelected: boolean) => ReactNode
   /** Disable option
@@ -333,7 +331,21 @@ export type AutocompleteProps<T> = {
    * Callback for clear all button
    */
   onClear?: () => void
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement> &
+  (T extends string | number
+    ? {
+        /**  Custom option label. NOTE: This is required when option is an object */
+        optionLabel?: (option: T) => string
+      }
+    : T extends object
+      ? {
+          /**  Custom option label. NOTE: This is required when option is an object */
+          optionLabel: (option: T) => string
+        }
+      : {
+          /**  Custom option label. NOTE: This is required when option is an object */
+          optionLabel?: (option: T) => string
+        })
 
 // MARK: component
 function AutocompleteInner<T>(
@@ -1224,7 +1236,7 @@ function AutocompleteInner<T>(
   )
 }
 // MARK: exported component
-export const Autocomplete = forwardRef(AutocompleteInner) as <T>(
+export const Autocomplete = forwardRef(AutocompleteInner) as <T = string>(
   props: AutocompleteProps<T> & {
     ref?: React.ForwardedRef<HTMLInputElement>
     /** @ignore */
