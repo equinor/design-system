@@ -29,7 +29,7 @@ Design tokens in the EDS originate in **Figma as Variable Collections**. The tok
 
 - Token JSON files in `packages/eds-tokens/tokens/` are **generated from Figma**
 - Code builds (CSS, JS/TS, JSON) are generated from token JSON files
-- Using the Tokens in code to update values, descriptions and codeSyntax is very handy.
+- Using the tokens in code to update values, descriptions and codeSyntax is very handy.
 
 ### Token Flow Overview
 
@@ -288,7 +288,7 @@ CLI: `bin/sync-figma-to-tokens.js`
 ### Syncing from Code to Figma
 
 Use this when you need to **push token changes back to Figma**
-💡 This works well to update token values and adding description and codeSyntax.
+💡 This works well to update token values and to add description and codeSyntax.
 💡 You can always use history in Figma to revert the changes
 
 ```bash
