@@ -675,11 +675,9 @@ Create or update `.env` file in `packages/eds-tokens/`:
 FIGMA_ACCESS_TOKEN=your_token_here
 ```
 
-:::danger
-
-**Never commit `.env` files**: The `.env` file is gitignored. Never commit tokens to the repository.
-
-:::
+> **Danger**
+>
+> **Never commit `.env` files**: The `.env` file is gitignored. Never commit tokens to the repository.
 
 ### Step 3: Test the Connection
 
@@ -873,55 +871,55 @@ pnpm run build:variables
 
 ### Sync Pitfalls
 
-:::warning Key Figma API Quirks and Bidirectional Sync Issues
-
-These issues have been observed while using the `@equinor/eds-tokens-sync` bidirectional sync (Figma ↔ code). They’re subtle and easy to hit during larger refactors.
-
-**Symptom: “Variable alias does not exist”**
-
-- Example messages:
-  - `Variable alias does not exist`
-  - `Invalid alias: X does not exist (variable: VariableID:3090:2998, mode: 3:3)`
-- Likely causes:
-  - Referencing a variable that lives in a different Figma library (remote alias) which the API cannot resolve at update time.
-  - Referencing a variable that is not returned by the Figma Variables API for the current file/mode.
-- How to diagnose:
-  - Query the Variables API for the failing file key with the LOCAL endpoint (preferred):
-    ```bash
-    export FILE_KEY=<failing_file_key>
-    curl -sS -H "X-Figma-Token: $FIGMA_ACCESS_TOKEN" \
-      https://api.figma.com/v1/files/$FILE_KEY/variables/local | jq '.'
-    ```
-  - If variables are published, you can also inspect:
-    ```bash
-    curl -sS -H "X-Figma-Token: $FIGMA_ACCESS_TOKEN" \
-      https://api.figma.com/v1/files/$FILE_KEY/variables/published | jq '.'
-    ```
-  - Prefer `/local` for our sync since variables do not need to be published to sync.
-- Remediation:
-  - Ensure the referenced variable exists in the same file (library) and mode you’re updating.
-  - If you deleted a variable that is still used, first detach usages in the file (Figma UI) before deleting; otherwise the API will continue surfacing references.
-  - Avoid cross-library references during code→Figma updates; consolidate references into a single library (see “Library consolidation decision”).
-
-**Symptom: “Invalid value: cannot set variable to itself”**
-
-- Example message: `Invalid value: cannot set variable to itself (variable: VariableID:5031:23, mode: 5031:0)`
-- Cause: A variable’s value (in a given mode) resolves back to itself (self-alias), often after renaming or remapping.
-- Fix: Break the cycle in Figma by pointing the variable to a concrete foundation value or a different reference.
-
-**Local vs Published variables endpoint differences**
-
-- The LOCAL endpoint is the correct target for our sync; variables do not need to be published.
-
-**Code→Figma sync can recreate unwanted collections/modes**
-
-- If your code still contains old collections/modes, pushing to Figma will reintroduce them (even if deleted in Figma).
-- Before `pnpm run update-figma`, remove obsolete collections/modes from `packages/eds-tokens/tokens/**` to avoid re-creation.
-
-**Casing changes create new variables**
-
-- Renaming or changing the “Code Syntax” casing in Figma effectively creates new variables when syncing from code to Figma.
-- Keep naming and casing consistent between Figma and code. Treat renames as migrations and clean up the old variables explicitly.
+> **Warning: Key Figma API Quirks and Bidirectional Sync Issues**
+>
+> These issues have been observed while using the `@equinor/eds-tokens-sync` bidirectional sync (Figma ↔ code). They’re subtle and easy to hit during larger refactors.
+>
+> **Symptom: “Variable alias does not exist”**
+>
+> - Example messages:
+>   - `Variable alias does not exist`
+>   - `Invalid alias: X does not exist (variable: VariableID:3090:2998, mode: 3:3)`
+> - Likely causes:
+>   - Referencing a variable that lives in a different Figma library (remote alias) which the API cannot resolve at update time.
+>   - Referencing a variable that is not returned by the Figma Variables API for the current file/mode.
+> - How to diagnose:
+>   - Query the Variables API for the failing file key with the LOCAL endpoint (preferred):
+>     ```bash
+>     export FILE_KEY=<failing_file_key>
+>     curl -sS -H "X-Figma-Token: $FIGMA_ACCESS_TOKEN" \
+>       https://api.figma.com/v1/files/$FILE_KEY/variables/local | jq '.'
+>     ```
+>   - If variables are published, you can also inspect:
+>     ```bash
+>     curl -sS -H "X-Figma-Token: $FIGMA_ACCESS_TOKEN" \
+>       https://api.figma.com/v1/files/$FILE_KEY/variables/published | jq '.'
+>     ```
+>   - Prefer `/local` for our sync since variables do not need to be published to sync.
+> - Remediation:
+>   - Ensure the referenced variable exists in the same file (library) and mode you’re updating.
+>   - If you deleted a variable that is still used, first detach usages in the file (Figma UI) before deleting; otherwise the API will continue surfacing references.
+>   - Avoid cross-library references during code→Figma updates; consolidate references into a single library (see “Library consolidation decision”).
+>
+> **Symptom: “Invalid value: cannot set variable to itself”**
+>
+> - Example message: `Invalid value: cannot set variable to itself (variable: VariableID:5031:23, mode: 5031:0)`
+> - Cause: A variable’s value (in a given mode) resolves back to itself (self-alias), often after renaming or remapping.
+> - Fix: Break the cycle in Figma by pointing the variable to a concrete foundation value or a different reference.
+>
+> **Local vs Published variables endpoint differences**
+>
+> - The LOCAL endpoint is the correct target for our sync; variables do not need to be published.
+>
+> **Code→Figma sync can recreate unwanted collections/modes**
+>
+> - If your code still contains old collections/modes, pushing to Figma will reintroduce them (even if deleted in Figma).
+> - Before `pnpm run update-figma`, remove obsolete collections/modes from `packages/eds-tokens/tokens/**` to avoid re-creation.
+>
+> **Casing changes create new variables**
+>
+> - Renaming or changing the “Code Syntax” casing in Figma effectively creates new variables when syncing from code to Figma.
+> - Keep naming and casing consistent between Figma and code. Treat renames as migrations and clean up the old variables explicitly.
 
 ## Quick Reference
 
