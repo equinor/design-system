@@ -43,7 +43,7 @@
     "dotenv": "^17.2.3",
     "eslint": "^9.38.0",
     "@next/eslint-plugin-next": "16.0.0",
-    "eslint-config-next": "16.0.0",
+    "eslint-config-next": "16.0.7",
     "tailwindcss": "^4.1.16",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
