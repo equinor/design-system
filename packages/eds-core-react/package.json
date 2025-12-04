@@ -30,6 +30,11 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
+    },
+    "./next": {
+      "types": "./dist/types/index.next.d.ts",
+      "import": "./dist/esm/index.next.js",
+      "require": "./dist/index.next.cjs"
     }
   },
   "scripts": {

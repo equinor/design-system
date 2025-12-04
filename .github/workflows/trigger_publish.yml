@@ -52,7 +52,48 @@ jobs:
           # All validation checks passed
           echo "should-publish=true" >> $GITHUB_OUTPUT
 
-  # Job 1: Determine which packages need to be published
+  # Job 1: Detect which release channels (stable/beta) were affected
+  # Looks for changelog edits in the merge commit
+  detect-release:
+    needs: validate-release
+    if: needs.validate-release.outputs.should-publish == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      has-stable-release: ${{ steps.detect.outputs.has-stable-release }}
+      has-beta-release: ${{ steps.detect.outputs.has-beta-release }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect release type
+        id: detect
+        run: |
+          CHANGED_FILES=$(git diff HEAD^ HEAD --name-only)
+
+          echo "Changed files:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$CHANGED_FILES" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          if echo "$CHANGED_FILES" | grep -q '^packages/eds-core-react/CHANGELOG\.md$'; then
+            echo "has-stable-release=true" >> $GITHUB_OUTPUT
+            echo "- ✅ Stable changelog updated" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "has-stable-release=false" >> $GITHUB_OUTPUT
+            echo "- ⏭️ Stable changelog unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if echo "$CHANGED_FILES" | grep -q '^packages/eds-core-react/src/components/next/CHANGELOG\.md$'; then
+            echo "has-beta-release=true" >> $GITHUB_OUTPUT
+            echo "- ✅ Beta changelog updated" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "has-beta-release=false" >> $GITHUB_OUTPUT
+            echo "- ⏭️ Beta changelog unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # Job 2: Determine which packages need publishing
   # Checks the release-please-manifest.json to see which packages had version changes
   check-releases:
     needs: validate-release
@@ -152,35 +193,56 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📝 **Note:** eds-utils is published as part of eds-core-react" >> $GITHUB_STEP_SUMMARY
 
-  # Job 2: Trigger core-react publish workflow
-  # Only runs if core-react package.json was changed
-  trigger-core-react:
-    needs: check-releases
-    if: needs.check-releases.outputs.core-react == 'true'
+  # Job 3: Trigger core-react stable publish workflow
+  trigger-core-react-stable:
+    needs: [validate-release, detect-release, check-releases]
+    if: needs.validate-release.outputs.should-publish == 'true' && needs.detect-release.outputs.has-stable-release == 'true' && needs.check-releases.outputs.core-react == 'true'
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger core-react publish
+      - name: Trigger core-react stable publish
         id: trigger
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for gh CLI authentication
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Use GitHub CLI to trigger the publish workflow
           gh workflow run publish_core_react.yaml \
             --repo ${{ github.repository }} \
             --ref main \
             -f npm-tag=latest \
             -f environment=production
-        # Allow other packages to continue even if this one fails
         continue-on-error: true
 
       - name: Report failure
         if: steps.trigger.outcome == 'failure'
         run: |
-          echo "::error title=Core React Publish Failed::Failed to trigger publish workflow for @equinor/eds-core-react"
-          echo "❌ Failed to trigger core-react publish workflow" >> $GITHUB_STEP_SUMMARY
+          echo "::error title=Core React Stable Publish Failed::Failed to trigger stable publish workflow for @equinor/eds-core-react"
+          echo "❌ Failed to trigger stable publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 3: Trigger lab-react publish workflow
-  # Only runs if lab-react package.json was changed
+  # Job 4: Trigger core-react beta publish workflow
+  trigger-core-react-beta:
+    needs: [validate-release, detect-release, check-releases]
+    if: needs.validate-release.outputs.should-publish == 'true' && needs.detect-release.outputs.has-beta-release == 'true' && needs.check-releases.outputs.core-react == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger core-react beta publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_core_react.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=beta \
+            -f environment=production
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Core React Beta Publish Failed::Failed to trigger beta publish workflow for @equinor/eds-core-react"
+          echo "❌ Failed to trigger beta publish workflow" >> $GITHUB_STEP_SUMMARY
+
+  # Job 5: Trigger lab-react publish workflow
+  # Only runs if the Release Please manifest bumped lab-react
   trigger-lab-react:
     needs: check-releases
     if: needs.check-releases.outputs.lab-react == 'true'
@@ -204,8 +266,8 @@ jobs:
           echo "::error title=Lab React Publish Failed::Failed to trigger publish workflow for @equinor/eds-lab-react"
           echo "❌ Failed to trigger lab-react publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 4: Trigger data-grid-react publish workflow
-  # Only runs if data-grid-react package.json was changed
+  # Job 6: Trigger data-grid-react publish workflow
+  # Only runs if the Release Please manifest bumped data-grid-react
   trigger-data-grid-react:
     needs: check-releases
     if: needs.check-releases.outputs.data-grid-react == 'true'
@@ -229,8 +291,8 @@ jobs:
           echo "::error title=Data Grid React Publish Failed::Failed to trigger publish workflow for @equinor/eds-data-grid-react"
           echo "❌ Failed to trigger data-grid-react publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 5: Trigger icons publish workflow
-  # Only runs if icons package.json was changed
+  # Job 7: Trigger icons publish workflow
+  # Only runs if the Release Please manifest bumped icons
   trigger-icons:
     needs: check-releases
     if: needs.check-releases.outputs.icons == 'true'
@@ -253,8 +315,8 @@ jobs:
           echo "::error title=Icons Publish Failed::Failed to trigger publish workflow for @equinor/eds-icons"
           echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 6: Trigger tokens publish workflow
-  # Only runs if tokens package.json was changed
+  # Job 8: Trigger tokens publish workflow
+  # Only runs if the Release Please manifest bumped tokens
   trigger-tokens:
     needs: check-releases
     if: needs.check-releases.outputs.tokens == 'true'
@@ -277,12 +339,13 @@ jobs:
           echo "::error title=Tokens Publish Failed::Failed to trigger publish workflow for @equinor/eds-tokens"
           echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 7: Summary report of all publish triggers
+  # Job 9: Summary report of all publish triggers
   # Runs independently after check-releases completes
   # Provides a clear overview of which packages were triggered for publishing
   publish-summary:
     needs:
       - validate-release
+      - detect-release
       - check-releases
     # Always run this job, even if some trigger jobs failed or were skipped
     if: always()
@@ -312,6 +375,22 @@ jobs:
           echo "## 📦 Package Publish Trigger Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "This workflow triggered publish workflows for packages that had version changes." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Release types detected" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ needs.detect-release.outputs.has-stable-release }}" == "true" ]; then
+            echo "- ✅ Stable changelog updated" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ Stable changelog unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.detect-release.outputs.has-beta-release }}" == "true" ]; then
+            echo "- ✅ Beta changelog updated" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ Beta changelog unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Results:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
