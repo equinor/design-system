@@ -1,0 +1,56 @@
+.eds-field {
+  --field-gap-block: 8px;
+  --field-gap-inline: 12px;
+  --field-label-color: var(--eds-color-text-neutral-strong);
+  --field-description-color: var(--eds-color-text-neutral-subtle);
+  display: grid;
+  grid-template-areas:
+    'label'
+    'control'
+    'description'
+    'validation';
+  gap: var(--field-gap-block);
+}
+
+.eds-field[data-layout='horizontal'] {
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'label control'
+    'label description'
+    'label validation';
+  column-gap: var(--field-gap-inline);
+}
+
+.eds-field__label {
+  grid-area: label;
+  display: inline-flex;
+  color: var(--field-label-color);
+  gap: var(--eds-spacing-inline-xs, 4px);
+}
+
+.eds-field__label-text {
+  color: inherit;
+}
+
+.eds-field__required-indicator {
+  color: var(--eds-color-text-danger-strong);
+}
+
+.eds-field__control {
+  grid-area: control;
+}
+
+.eds-field__description {
+  grid-area: description;
+  margin: 0;
+  color: var(--field-description-color);
+}
+
+.eds-field__validation {
+  grid-area: validation;
+}
+
+.eds-field[data-disabled='true'] {
+  --field-label-color: var(--eds-color-text-neutral-subtle);
+  --field-description-color: var(--eds-color-border-neutral-medium);
+}
