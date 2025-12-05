@@ -1,5 +1,5 @@
-# Use specific Node.js version for better reproducibility
-FROM docker.io/node:22.12.0-alpine AS build
+# Use latest Node.js 22 with Alpine for security patches
+FROM docker.io/node:22-alpine AS build
 
 LABEL org.opencontainers.image.title="EDS Demo Application"
 LABEL org.opencontainers.image.description="Equinor Design System Demo Application"
@@ -25,7 +25,7 @@ RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-core-react run build && \
     pnpm --filter eds-demo run build
 
-FROM node:22.12.0-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \
@@ -40,12 +40,20 @@ RUN npm install -g pnpm@10.15.0 && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini
 
-# Copy just the essential built files, workspace dependencies, and node_modules
-COPY --chown="$USER":"$USER" --from=build /app/apps/eds-demo ./apps/eds-demo
-COPY --chown="$USER":"$USER" --from=build /app/packages ./packages
-COPY --chown="$USER":"$USER" --from=build /app/node_modules ./node_modules
-COPY --chown="$USER":"$USER" --from=build /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
-COPY --chown="$USER":"$USER" --from=build /app/package.json ./package.json
+# Copy package files for production install
+COPY --chown="$USER":"$USER" package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY --chown="$USER":"$USER" apps/eds-demo/package.json ./apps/eds-demo/
+COPY --chown="$USER":"$USER" packages/eds-tokens/package.json ./packages/eds-tokens/
+COPY --chown="$USER":"$USER" packages/eds-core-react/package.json ./packages/eds-core-react/
+
+# Install only production dependencies
+RUN pnpm install --prod --frozen-lockfile
+
+# Copy built files
+COPY --chown="$USER":"$USER" --from=build /app/apps/eds-demo/.next ./apps/eds-demo/.next
+COPY --chown="$USER":"$USER" --from=build /app/apps/eds-demo/public ./apps/eds-demo/public
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-core-react/dist ./packages/eds-core-react/dist
 
 USER "$UID"
 
