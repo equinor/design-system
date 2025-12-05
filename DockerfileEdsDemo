@@ -1,5 +1,5 @@
-# Use latest Node.js 22 with Alpine for security patches
-FROM docker.io/node:22-alpine AS build
+# Use Node.js 22.12 with Alpine - allows patch updates while maintaining reproducibility
+FROM docker.io/node:22.12-alpine AS build
 
 LABEL org.opencontainers.image.title="EDS Demo Application"
 LABEL org.opencontainers.image.description="Equinor Design System Demo Application"
@@ -25,7 +25,7 @@ RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-core-react run build && \
     pnpm --filter eds-demo run build
 
-FROM node:22-alpine AS runner
+FROM node:22.12-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \
