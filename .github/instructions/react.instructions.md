@@ -61,7 +61,7 @@ export const MyComponent: React.FC<MyComponentProps> = ({
 
 - Components should be composable and nestable
 - Avoid tightly coupled dependencies
-- Use named exports only (see global coding standards)
+- Use named exports only
 - Keep components focused and simple
 - Implement error boundaries for error handling
 

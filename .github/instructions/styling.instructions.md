@@ -76,7 +76,7 @@ DataGrid.tsx → data-grid.css
 const StyledDiv = styled.div`...`;
 
 // ✅ Use CSS class
-<div className="button"></div>
+<div className="button">
 ```
 
 ## Best Practices
