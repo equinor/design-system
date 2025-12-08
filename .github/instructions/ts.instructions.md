@@ -7,7 +7,7 @@ applyTo: '**/*.ts,**/*.tsx'
 ## Type Definitions
 
 - **Interfaces over types** for object structures
-- **Union types** for constrained options (not string literals)
+- **Union types** for constrained options (e.g., `'primary' | 'secondary'` instead of `string`)
 - **Explicit typing** where clarity matters; inference for obvious cases
 - **Immutable data** (const, readonly properties)
 - **Avoid `any`** unless impossible; use `unknown` if needed
