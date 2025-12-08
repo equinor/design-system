@@ -16,10 +16,12 @@ COPY . ./
 # Install dependencies first
 RUN pnpm install --frozen-lockfile
 
-# Build only required workspace dependencies, then build the app
+# Build workspace dependencies in correct order, then build the app
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
     pnpm --filter @equinor/eds-tokens run build && \
+    pnpm --filter @equinor/eds-utils run build && \
+    pnpm --filter @equinor/eds-icons run build && \
     pnpm --filter @equinor/eds-core-react run build && \
     pnpm --filter eds-demo run build
 
