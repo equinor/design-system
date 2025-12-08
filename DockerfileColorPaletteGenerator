@@ -42,7 +42,6 @@ RUN npm install -g pnpm@10.15.0 && \
 COPY --chown="$USER":"$USER" package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY --chown="$USER":"$USER" apps/eds-color-palette-generator/package.json ./apps/eds-color-palette-generator/
 COPY --chown="$USER":"$USER" packages/eds-tokens/package.json ./packages/eds-tokens/
-COPY --chown="$USER":"$USER" packages/eds-tailwind/package.json ./packages/eds-tailwind/
 COPY --chown="$USER":"$USER" packages/eds-utils/package.json ./packages/eds-utils/
 
 # Install only production dependencies
@@ -51,7 +50,7 @@ RUN pnpm install --prod --frozen-lockfile
 # Copy built files
 COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator/.next ./apps/eds-color-palette-generator/.next
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
-COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tailwind/dist ./packages/eds-tailwind/dist
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tailwind/theme.css ./packages/eds-tailwind/theme.css
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-utils/dist ./packages/eds-utils/dist
 
 USER "$UID"
