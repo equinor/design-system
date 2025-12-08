@@ -66,7 +66,7 @@
   "devDependencies": {
     "@types/node": "^24.9.1",
     "prettier": "3.6.2",
-    "rimraf": "^6.0.1",
+    "rimraf": "^6.1.2",
     "style-dictionary": "^5.1.1",
     "style-dictionary-utils": "^4.1.0",
     "typescript": "^5.9.3",
