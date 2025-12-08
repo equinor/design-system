@@ -6,7 +6,9 @@ Typography presents hierarchy and organises information as clearly and efficient
 
 The Equinor typeface is the primary typeface and is available in four weights: `light`, `regular`, `medium` and `bold` with accompanying italics. Please do not use `light` in digital interfaces except in special cases where the font size is over 48px.
 
-_Note: Typography is called text styles in Figma._
+:::info Note
+Typography is called text styles in Figma.
+:::
 
 ### Paragraph length
 
@@ -30,19 +32,7 @@ The style `Body short` is used for short sentences containing around four word
 
 There are other typography styles that are used internally within components.
 
-
-
-# Design
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Typography
-
-Typography presents hierarchy and organises information as clearly and efficiently as possible.
-
-## Figma
+## Implementation in Figma
 
 ### How to add
 
@@ -54,14 +44,3 @@ Typography presents hierarchy and organises information as clearly and efficient
     
 4.  Choose a style by clicking on the style needed.
 
-
-
-# Code
-
-When expanded use tab to review current page headings and press enter or space to navigate to the selected section
-
-DESIGN TOKENS
-
-# Typography
-
-Typography presents hierarchy and organises information as clearly and efficiently as possible.

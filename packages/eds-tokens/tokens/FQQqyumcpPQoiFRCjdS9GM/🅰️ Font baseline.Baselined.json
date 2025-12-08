@@ -1,8 +1,8 @@
 {
-  "Baseline": {
+  "baseline": {
     "top": {
       "$type": "number",
-      "$value": "{padding-baselined}",
+      "$value": "{typography.padding-baselined}",
       "$description": "",
       "$extensions": {
         "com.figma": {

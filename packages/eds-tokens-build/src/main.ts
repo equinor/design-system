@@ -1,5 +1,4 @@
 export { includeTokenFilter } from './filter/includeTokenFilter'
-export { createDensitySpaceToggleTransform } from './transform/densitySpaceToggle'
 export { FONT_QUOTE_NAME } from './transform/fontQuote'
 export { PX_FORMATTED_NAME } from './transform/pxFormatted'
 export { PX_TO_REM_NAME } from './transform/pxToRem'

@@ -1,9 +1,9 @@
 {
-  "Spacing proportions": {
-    "XS": {
-      "Inline": {
+  "spacing-proportions": {
+    "xs": {
+      "horizontal": {
         "$type": "number",
-        "$value": "{spacing.inset.xs.inline}",
+        "$value": "{spacing.inset.xs.horizontal}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -13,9 +13,9 @@
           }
         }
       },
-      "Stack": {
+      "vertical": {
         "$type": "number",
-        "$value": "{spacing.inset.xs.stack-squished}",
+        "$value": "{spacing.inset.xs.vertical-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -26,10 +26,10 @@
         }
       }
     },
-    "SM": {
-      "Inline": {
+    "sm": {
+      "horizontal": {
         "$type": "number",
-        "$value": "{spacing.inset.sm.inline}",
+        "$value": "{spacing.inset.sm.horizontal}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -39,9 +39,9 @@
           }
         }
       },
-      "Stack": {
+      "vertical": {
         "$type": "number",
-        "$value": "{spacing.inset.sm.stack-squished}",
+        "$value": "{spacing.inset.sm.vertical-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -52,10 +52,10 @@
         }
       }
     },
-    "MD": {
-      "Inline": {
+    "md": {
+      "horizontal": {
         "$type": "number",
-        "$value": "{spacing.inset.md.inline}",
+        "$value": "{spacing.inset.md.horizontal}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -65,9 +65,9 @@
           }
         }
       },
-      "Stack": {
+      "vertical": {
         "$type": "number",
-        "$value": "{spacing.inset.md.stack-squished}",
+        "$value": "{spacing.inset.md.vertical-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -78,10 +78,10 @@
         }
       }
     },
-    "LG": {
-      "Inline": {
+    "lg": {
+      "horizontal": {
         "$type": "number",
-        "$value": "{spacing.inset.lg.inline}",
+        "$value": "{spacing.inset.lg.horizontal}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -91,9 +91,9 @@
           }
         }
       },
-      "Stack": {
+      "vertical": {
         "$type": "number",
-        "$value": "{spacing.inset.lg.stack-squished}",
+        "$value": "{spacing.inset.lg.vertical-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -104,10 +104,10 @@
         }
       }
     },
-    "XL": {
-      "Inline": {
+    "xl": {
+      "horizontal": {
         "$type": "number",
-        "$value": "{spacing.inset.xl.inline}",
+        "$value": "{spacing.inset.xl.horizontal}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -117,9 +117,9 @@
           }
         }
       },
-      "Stack": {
+      "vertical": {
         "$type": "number",
-        "$value": "{spacing.inset.xl.stack-squished}",
+        "$value": "{spacing.inset.xl.vertical-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {

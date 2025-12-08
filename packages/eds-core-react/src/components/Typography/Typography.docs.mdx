@@ -6,29 +6,6 @@ import * as ComponentStories from './Typography.stories'
 
 # Typography
 
-## ⚠️ Deprecated
-
-**This component is deprecated and will be removed in a future version.**
-
-
-### The next-generation typography system is now available:
-
-* **For headings**: Use `<Heading as="h1|h2|h3|h4|h5|h6">` instead of `<Typography variant="h1|h2|h3|h4|h5|h6">`
-* **For paragraphs**: Use `<Paragraph>` instead of `<Typography variant="body_short|body_long">`
-* **For inline text**: Use `<TypographyNext as Typography>` for flexible text styling with full typography control
-
-```tsx
-import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
-
-<Heading as="h1">Welcome</Heading>
-<Paragraph>This uses the new typography system.</Paragraph>
-<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
-  Flexible inline text
-</Typography>
-```
-
-See the [TypographyNext documentation](/docs/typography-typographynext--docs) and [Migration Guide](https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Typography/MIGRATION_GUIDE.md) for details.
-
 Presents hierarchy and organises information as clearly and efficiently as possible,
 therefore text sizes and styles were developed to balance content density and reading comfort.
 

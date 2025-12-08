@@ -3,10 +3,17 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../.storybook/components'
 import type { TypographyNextProps } from './Typography.new.types'
 import { SAMPLE_TEXT, GridBackground } from './Typography.stories.shared'
+import { Icon } from '../..'
+import * as icons from '@equinor/eds-icons'
+
+Icon.add(icons)
 
 const meta: Meta = {
   title: 'Typography/TypographyNext',
   component: TypographyNext,
+  args: {
+    family: 'ui',
+  },
   parameters: {
     docs: {
       description: {
@@ -36,7 +43,6 @@ import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-c
 
 1. **Now**: Use the new components with aliasing (\`TypographyNext as Typography\`)
 2. **Parallel support**: 6-12 months of both systems supported
-3. **Next major version**: \`TypographyNext\` becomes the default \`Typography\` export
 
 ### Key Differences from current typography
 
@@ -80,6 +86,60 @@ Playground.parameters = {
     description: {
       story:
         'The TypographyNext component provides full control over typography properties. Use it for inline text with specific styling needs.',
+    },
+  },
+}
+
+export const AsLink: StoryFn = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="md"
+        baseline="grid"
+      >
+        Link to EDS documentation
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="lg"
+        baseline="grid"
+      >
+        Large link text
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        family="ui"
+        size="sm"
+        baseline="grid"
+      >
+        Small link text
+      </TypographyNext>
+      <TypographyNext
+        as="a"
+        href="https://eds.equinor.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        family="ui"
+        size="md"
+        baseline="grid"
+      >
+        External link (opens in new tab)
+      </TypographyNext>
+    </div>
+  )
+}
+
+AsLink.parameters = {
+  docs: {
+    description: {
+      story:
+        'TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop. All standard anchor attributes are supported, such as `target` and `rel` for external links.',
     },
   },
 }

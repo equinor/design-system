@@ -13,9 +13,9 @@
       }
     }
   },
-  "Padding vertical": {
+  "generic-space-vertical": {
     "$type": "number",
-    "$value": "{spacing.stack.4xs}",
+    "$value": "{spacing.vertical.4xs}",
     "$description": "",
     "$extensions": {
       "com.figma": {

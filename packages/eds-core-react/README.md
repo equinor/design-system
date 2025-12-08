@@ -8,7 +8,7 @@ Read the [changelog](https://github.com/equinor/design-system/blob/main/packages
 ## Installation
 
 ```sh
-npm install @equinor/eds-core-react @equinor/eds-tokens styled-components 
+npm install @equinor/eds-core-react styled-components 
 ```
 If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 ```sh
@@ -20,23 +20,17 @@ npm install typescript --save-dev
  The Equinor typeface is not included and needs to be added to the head of your project. Its available from the EDS CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
 ```
 
 ### Required Stylesheets
 
-EDS Core React components require css variables and foundation styles for typography and spacing. Import both stylesheets from `@equinor/eds-tokens`:
+EDS Core React components require css variables (colors, spacing and typography).
 
 ```css
 @import '@equinor/eds-tokens/css/variables';
-@import '@equinor/eds-tokens/css/foundation';
 ```
 
-**Why both?**
-- **Variables CSS** (`/css/variables`) provides all design tokens (colors, spacing, typography variables)
-- **Foundation CSS** (`/css/foundation`) provides typography and spacing utility classes used in our components.
-
-For more information about the typography system, see the [Typography component documentation](./src/components/Typography/README.md).
 
 ## Usage
 

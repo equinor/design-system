@@ -19,7 +19,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}-setup-tokens
-      checkout_paths: packages
+      checkout_paths: packages apps scripts
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
     name: Process packages

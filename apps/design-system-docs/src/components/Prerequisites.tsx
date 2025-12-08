@@ -1,5 +1,5 @@
 import React from 'react'
-import prerequisites from '../../prerequisites.json'
+import prerequisites from '../../../../prerequisites.json'
 
 interface PrerequisitesProps {
   minimal?: boolean

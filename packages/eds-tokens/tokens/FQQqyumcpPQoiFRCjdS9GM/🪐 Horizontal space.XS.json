@@ -1,0 +1,28 @@
+{
+  "Documentation": {
+    "$type": "string",
+    "$value": "XS",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": true,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {}
+      }
+    }
+  },
+  "generic-space-horizontal": {
+    "$type": "number",
+    "$value": "{spacing.horizontal.xs}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

@@ -4,36 +4,13 @@ Typography components used to help render typography in <abbr title="Equinor Des
 
 ## The next-generation typography system is now available
 
-A new and improved typography system is now available! The new system provides:
-
-* **Three specialized components**: `TypographyNext`, `Heading`, and `Paragraph`
-* **Baseline grid alignment** for consistent vertical rhythm
-* **Better performance** and smaller bundle size
-* **Improved accessibility** features
-
-### Required: Import the stylesheets
-
-The new typography components require both CSS variables and typography styles to work correctly. Import both from `@equinor/eds-tokens`:
-
-```tsx
-import '@equinor/eds-tokens/css/variables.css'
-import '@equinor/eds-tokens/css/foundation.css'
-```
-
-**Why both?**
-- **Variables CSS** provides all design tokens including typography variables (font sizes, line heights, etc.)
-- **Foundation CSS** provides typography utility classes and styles (font families, baseline alignment, etc.)
-
-This stylesheet includes all typography styles with support for font families, sizes, weights, line heights, letter spacing, and baseline alignment.
-
-> **Note:** Typography styles are part of the `@equinor/eds-tokens` package. See the [eds-tokens README](../../../../packages/eds-tokens/README.md#foundation-css-typography) for more details about typography utilities and CSS variables.
+A new and improved typography system is now available!
 
 **Get started:**
 
 ```tsx
+import '@equinor/eds-tokens/css/variables.css'
 import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
-import '@equinor/eds-tokens/css/variables.css' // Required - design tokens
-import '@equinor/eds-tokens/css/foundation.css' // Required - typography styles
 
 <Heading as="h1">Welcome</Heading>
 <Paragraph>This uses the new typography system.</Paragraph>
@@ -43,7 +20,7 @@ import '@equinor/eds-tokens/css/foundation.css' // Required - typography styles
 ```
 ---
 
-## Current Typography Component
+## Current/Old/Deprecated Typography Component
 
 ## Usage
 

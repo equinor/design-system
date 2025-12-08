@@ -1,0 +1,30 @@
+@import url(https://cdn.eds.equinor.com/font/eds-uprights-vf.css);
+@import "@equinor/eds-tokens/css/variables";
+@import "tailwindcss";
+
+/* View transition for theme switch */
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+#debug:target [data-debug] {
+  --_padding-inline: 16px;
+  --_padding-stack: 16px;
+  background-image:
+    repeating-linear-gradient(to left, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
+    repeating-linear-gradient(to right, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
+    repeating-linear-gradient(to top, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
+    repeating-linear-gradient(to bottom, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
+    repeating-linear-gradient(to bottom, #f002 0, #f002 4px, transparent 4px, transparent 8px);
+}

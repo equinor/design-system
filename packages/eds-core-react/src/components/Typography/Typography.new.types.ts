@@ -1,4 +1,4 @@
-import { HTMLAttributes, ElementType } from 'react'
+import { HTMLAttributes, AnchorHTMLAttributes, ElementType } from 'react'
 import {
   FontFamily,
   FontSize,
@@ -35,4 +35,4 @@ export type TypographyNextProps = {
   /** Semantic HTML element to render. Defaults to 'span' */
   as?: ElementType
 } & BaseTypographyProps &
-  HTMLAttributes<HTMLElement>
+  (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)

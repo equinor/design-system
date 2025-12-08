@@ -28,7 +28,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages
+      checkout_paths: packages apps scripts
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -83,15 +83,15 @@ jobs:
           echo "=== Downloaded files ==="
           ls -la packages/eds-core-react/storybook-build/
           echo ""
-          echo "=== Checking index.json for TypographyNext ==="
-          if grep -q "typography-typographynext" packages/eds-core-react/storybook-build/index.json; then
-            echo "✅ TypographyNext FOUND in index.json"
+          echo "=== Checking index.json for Foundation/Spacing ==="
+          if grep -q "foundation-spacing--selectable-padding" packages/eds-core-react/storybook-build/index.json; then
+            echo "✅ Foundation/Spacing SelectablePadding FOUND in index.json"
           else
-            echo "❌ TypographyNext NOT FOUND in index.json"
+            echo "❌ Foundation/Spacing SelectablePadding NOT FOUND in index.json"
           fi
           echo ""
-          echo "=== Checking for Typography.new.stories file ==="
-          ls -la packages/eds-core-react/storybook-build/assets/ | grep -i "typography.new" || echo "No Typography.new files found"
+          echo "=== All Foundation/Spacing entries ==="
+          grep -o '"foundation-spacing--[^"]*"' packages/eds-core-react/storybook-build/index.json || echo "No Foundation/Spacing entries found"
 
       - name: Az CLI login 🔑
         uses: azure/login@v1
@@ -100,22 +100,54 @@ jobs:
           tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
           allow-no-subscriptions: true
 
-      - name: Delete old index.json to force overwrite 🗑️
+      - name: Delete all existing blobs to ensure clean deployment 🗑️
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
-          echo "Deleting old index.json..."
-          az storage blob delete \
+          set -euo pipefail
+          echo "Checking existing blobs in container '\$web'..."
+          BLOB_COUNT=$(az storage blob list \
             --container-name '$web' \
-            --name index.json \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" || echo "index.json didn't exist, continuing..."
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query 'length(@)' \
+            --output tsv)
+
+          if [ "$BLOB_COUNT" -eq 0 ]; then
+            echo "Container already empty."
+          else
+            echo "Deleting $BLOB_COUNT blobs..."
+            az storage blob delete-batch \
+              --source '$web' \
+              --pattern "*" \
+              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+              --output none
+            echo "Deletion request submitted."
+          fi
+
+          REMAINING=$(az storage blob list \
+            --container-name '$web' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query 'length(@)' \
+            --output tsv)
+
+          echo "✅ Blob deletion completed. Remaining blobs: $REMAINING"
 
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
         run: |
+          set -euo pipefail
           echo "Deploying to Azure Blob Storage..."
+
+          # Verify source directory exists and has content
+          if [ ! -d "packages/eds-core-react/storybook-build" ]; then
+            echo "❌ Error: storybook-build directory not found"
+            exit 1
+          fi
+
+          FILE_COUNT=$(find packages/eds-core-react/storybook-build -type f | wc -l)
+          echo "Uploading $FILE_COUNT files..."
 
           az storage blob upload-batch \
             --destination '$web' \
@@ -123,7 +155,14 @@ jobs:
             --overwrite \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
 
-          echo "✅ Deployment completed successfully"
+          # Verify upload
+          UPLOADED=$(az storage blob list \
+            --container-name '$web' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query 'length(@)' \
+            --output tsv)
+
+          echo "✅ Deployment completed successfully. Total blobs in container: $UPLOADED"
 
       - name: logout 🔓
         run: az logout
@@ -137,11 +176,10 @@ jobs:
         if: failure()
 
   purge-cdn:
-    if: github.event.inputs.environment == 'production'
     needs: [publish-storybook]
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
-      environment: production
+      environment: ${{ github.event.inputs.environment || 'development' }}
       endpoint: storybook

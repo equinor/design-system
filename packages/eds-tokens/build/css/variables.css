@@ -302,49 +302,26 @@
   --eds-color-text-strong-on-emphasis: var(--eds-color-warning-15);
 }
 
-@property --captured-size-1 {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0;
-}
-
-@property --captured-size-2 {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0;
-}
-
-@property --captured-size-3 {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0;
-}
-
-@property --captured-color-1 {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-
-@property --captured-color-2 {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-
-@property --captured-color-3 {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-
-@property --captured-color-4 {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-
 :root, [data-density="spacious"] {
+  --eds-sizing-icon-xs: 1rem;
+  --eds-sizing-icon-sm: 1.125rem;
+  --eds-sizing-icon-md: 1.25rem;
+  --eds-sizing-icon-lg: 1.5rem;
+  --eds-sizing-icon-xl: 1.75rem;
+  --eds-sizing-icon-2xl: 2rem;
+  --eds-sizing-icon-3xl: 2.313rem;
+  --eds-sizing-icon-4xl: 2.625rem;
+  --eds-sizing-icon-5xl: 3rem;
+  --eds-sizing-icon-6xl: 3.5rem;
+  --eds-sizing-selectable-xs: 1.25rem;
+  --eds-sizing-selectable-sm: 1.5rem;
+  --eds-sizing-selectable-md: 2.25rem;
+  --eds-sizing-selectable-lg: 2.75rem;
+  --eds-sizing-selectable-xl: 3.25rem;
+  --eds-sizing-selectable-2xl: 3.75rem;
+  --eds-sizing-stroke-thin: .063rem;
+  --eds-sizing-stroke-thick: .125rem;
+  --eds-sizing-stroke-none: 0rem;
   --eds-spacing-icon-xs-gap-horizontal: .406rem;
   --eds-spacing-icon-xs-gap-vertical: .406rem;
   --eds-spacing-icon-sm-gap-horizontal: .469rem;
@@ -368,65 +345,46 @@
   --eds-spacing-border-radius-rounded: .25rem;
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
-  --eds-spacing-inset-xs-inline: .5rem;
-  --eds-spacing-inset-xs-stack-squished: .375rem;
-  --eds-spacing-inset-xs-stack-squared: .5rem;
-  --eds-spacing-inset-xs-stack-stretched: .75rem;
-  --eds-spacing-inset-sm-inline: .75rem;
-  --eds-spacing-inset-sm-stack-squished: .5rem;
-  --eds-spacing-inset-sm-stack-squared: .75rem;
-  --eds-spacing-inset-sm-stack-stretched: 1rem;
-  --eds-spacing-inset-md-inline: 1rem;
-  --eds-spacing-inset-md-stack-squished: .75rem;
-  --eds-spacing-inset-md-stack-squared: 1rem;
-  --eds-spacing-inset-md-stack-stretched: 1.25rem;
-  --eds-spacing-inset-lg-inline: 1.25rem;
-  --eds-spacing-inset-lg-stack-squished: 1rem;
-  --eds-spacing-inset-lg-stack-squared: 1.25rem;
-  --eds-spacing-inset-lg-stack-stretched: 1.5rem;
-  --eds-spacing-inset-xl-inline: 1.5rem;
-  --eds-spacing-inset-xl-stack-squished: 1.25rem;
-  --eds-spacing-inset-xl-stack-squared: 1.5rem;
-  --eds-spacing-inset-xl-stack-stretched: 1.75rem;
-  --eds-spacing-inline-4xs: .125rem;
-  --eds-spacing-inline-3xs: .25rem;
-  --eds-spacing-inline-2xs: .375rem;
-  --eds-spacing-inline-xs: .5rem;
-  --eds-spacing-inline-sm: .75rem;
-  --eds-spacing-inline-md: 1rem;
-  --eds-spacing-inline-lg: 1.25rem;
-  --eds-spacing-inline-xl: 1.5rem;
-  --eds-spacing-inline-2xl: 1.75rem;
-  --eds-spacing-inline-3xl: 2rem;
-  --eds-spacing-stack-4xs: .125rem;
-  --eds-spacing-stack-3xs: .25rem;
-  --eds-spacing-stack-2xs: .375rem;
-  --eds-spacing-stack-xs: .5rem;
-  --eds-spacing-stack-sm: .75rem;
-  --eds-spacing-stack-md: 1rem;
-  --eds-spacing-stack-lg: 1.25rem;
-  --eds-spacing-stack-xl: 1.5rem;
-  --eds-spacing-stack-2xl: 1.75rem;
-  --eds-spacing-stack-3xl: 2rem;
-  --eds-sizing-icon-xs: 1rem;
-  --eds-sizing-icon-sm: 1.125rem;
-  --eds-sizing-icon-md: 1.25rem;
-  --eds-sizing-icon-lg: 1.5rem;
-  --eds-sizing-icon-xl: 1.75rem;
-  --eds-sizing-icon-2xl: 2rem;
-  --eds-sizing-icon-3xl: 2.313rem;
-  --eds-sizing-icon-4xl: 2.625rem;
-  --eds-sizing-icon-5xl: 3rem;
-  --eds-sizing-icon-6xl: 3.5rem;
-  --eds-sizing-selectable-xs: 1.25rem;
-  --eds-sizing-selectable-sm: 1.5rem;
-  --eds-sizing-selectable-md: 2.25rem;
-  --eds-sizing-selectable-lg: 2.75rem;
-  --eds-sizing-selectable-xl: 3.25rem;
-  --eds-sizing-selectable-2xl: 3.75rem;
-  --eds-sizing-stroke-thin: .063rem;
-  --eds-sizing-stroke-thick: .125rem;
-  --eds-sizing-stroke-none: 0rem;
+  --eds-spacing-inset-xs-horizontal: .5rem;
+  --eds-spacing-inset-xs-vertical-squished: .375rem;
+  --eds-spacing-inset-xs-vertical-squared: .5rem;
+  --eds-spacing-inset-xs-vertical-stretched: .75rem;
+  --eds-spacing-inset-sm-horizontal: .75rem;
+  --eds-spacing-inset-sm-vertical-squished: .5rem;
+  --eds-spacing-inset-sm-vertical-squared: .75rem;
+  --eds-spacing-inset-sm-vertical-stretched: 1rem;
+  --eds-spacing-inset-md-horizontal: 1rem;
+  --eds-spacing-inset-md-vertical-squished: .75rem;
+  --eds-spacing-inset-md-vertical-squared: 1rem;
+  --eds-spacing-inset-md-vertical-stretched: 1.25rem;
+  --eds-spacing-inset-lg-horizontal: 1.25rem;
+  --eds-spacing-inset-lg-vertical-squished: 1rem;
+  --eds-spacing-inset-lg-vertical-squared: 1.25rem;
+  --eds-spacing-inset-lg-vertical-stretched: 1.5rem;
+  --eds-spacing-inset-xl-horizontal: 1.5rem;
+  --eds-spacing-inset-xl-vertical-squished: 1.25rem;
+  --eds-spacing-inset-xl-vertical-squared: 1.5rem;
+  --eds-spacing-inset-xl-vertical-stretched: 1.75rem;
+  --eds-spacing-horizontal-4xs: .125rem;
+  --eds-spacing-horizontal-3xs: .25rem;
+  --eds-spacing-horizontal-2xs: .375rem;
+  --eds-spacing-horizontal-xs: .5rem;
+  --eds-spacing-horizontal-sm: .75rem;
+  --eds-spacing-horizontal-md: 1rem;
+  --eds-spacing-horizontal-lg: 1.25rem;
+  --eds-spacing-horizontal-xl: 1.5rem;
+  --eds-spacing-horizontal-2xl: 1.75rem;
+  --eds-spacing-horizontal-3xl: 2rem;
+  --eds-spacing-vertical-4xs: .125rem;
+  --eds-spacing-vertical-3xs: .25rem;
+  --eds-spacing-vertical-2xs: .375rem;
+  --eds-spacing-vertical-xs: .5rem;
+  --eds-spacing-vertical-sm: .75rem;
+  --eds-spacing-vertical-md: 1rem;
+  --eds-spacing-vertical-lg: 1.25rem;
+  --eds-spacing-vertical-xl: 1.5rem;
+  --eds-spacing-vertical-2xl: 1.75rem;
+  --eds-spacing-vertical-3xl: 2rem;
   --eds-typography-ui-body-xs-font-size: .656rem;
   --eds-typography-ui-body-xs-tracking-tight: -1.15px;
   --eds-typography-ui-body-xs-tracking-normal: 0px;
@@ -434,8 +392,8 @@
   --eds-typography-ui-body-xs-font-weight-lighter: 300;
   --eds-typography-ui-body-xs-font-weight-normal: 400;
   --eds-typography-ui-body-xs-font-weight-bolder: 500;
-  --eds-typography-ui-body-xs-lineheight-default: 1rem;
-  --eds-typography-ui-body-xs-lineheight-squished: .75rem;
+  --eds-typography-ui-body-xs-line-height-default: 1rem;
+  --eds-typography-ui-body-xs-line-height-squished: .75rem;
   --eds-typography-ui-body-sm-font-size: .75rem;
   --eds-typography-ui-body-sm-tracking-tight: -1.32px;
   --eds-typography-ui-body-sm-tracking-normal: 0px;
@@ -443,8 +401,8 @@
   --eds-typography-ui-body-sm-font-weight-lighter: 300;
   --eds-typography-ui-body-sm-font-weight-normal: 400;
   --eds-typography-ui-body-sm-font-weight-bolder: 500;
-  --eds-typography-ui-body-sm-lineheight-default: 1rem;
-  --eds-typography-ui-body-sm-lineheight-squished: .75rem;
+  --eds-typography-ui-body-sm-line-height-default: 1rem;
+  --eds-typography-ui-body-sm-line-height-squished: .75rem;
   --eds-typography-ui-body-font-family: "Inter";
   --eds-typography-ui-body-md-font-size: .875rem;
   --eds-typography-ui-body-md-tracking-tight: -1.54px;
@@ -453,8 +411,8 @@
   --eds-typography-ui-body-md-font-weight-lighter: 300;
   --eds-typography-ui-body-md-font-weight-normal: 400;
   --eds-typography-ui-body-md-font-weight-bolder: 500;
-  --eds-typography-ui-body-md-lineheight-default: 1.25rem;
-  --eds-typography-ui-body-md-lineheight-squished: 1rem;
+  --eds-typography-ui-body-md-line-height-default: 1.25rem;
+  --eds-typography-ui-body-md-line-height-squished: 1rem;
   --eds-typography-ui-body-lg-font-size: 1rem;
   --eds-typography-ui-body-lg-tracking-tight: -1.76px;
   --eds-typography-ui-body-lg-tracking-normal: 0px;
@@ -462,8 +420,8 @@
   --eds-typography-ui-body-lg-font-weight-lighter: 300;
   --eds-typography-ui-body-lg-font-weight-normal: 400;
   --eds-typography-ui-body-lg-font-weight-bolder: 500;
-  --eds-typography-ui-body-lg-lineheight-default: 1.5rem;
-  --eds-typography-ui-body-lg-lineheight-squished: 1.25rem;
+  --eds-typography-ui-body-lg-line-height-default: 1.5rem;
+  --eds-typography-ui-body-lg-line-height-squished: 1.25rem;
   --eds-typography-ui-body-xl-font-size: 1.156rem;
   --eds-typography-ui-body-xl-tracking-tight: -1.76px;
   --eds-typography-ui-body-xl-tracking-normal: 0px;
@@ -471,8 +429,8 @@
   --eds-typography-ui-body-xl-font-weight-lighter: 300;
   --eds-typography-ui-body-xl-font-weight-normal: 400;
   --eds-typography-ui-body-xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-xl-lineheight-default: 1.5rem;
-  --eds-typography-ui-body-xl-lineheight-squished: 1.25rem;
+  --eds-typography-ui-body-xl-line-height-default: 1.5rem;
+  --eds-typography-ui-body-xl-line-height-squished: 1.25rem;
   --eds-typography-ui-body-2xl-font-size: 1.313rem;
   --eds-typography-ui-body-2xl-tracking-tight: -2.31px;
   --eds-typography-ui-body-2xl-tracking-normal: 0px;
@@ -480,8 +438,8 @@
   --eds-typography-ui-body-2xl-font-weight-lighter: 300;
   --eds-typography-ui-body-2xl-font-weight-normal: 400;
   --eds-typography-ui-body-2xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-2xl-lineheight-default: 1.75rem;
-  --eds-typography-ui-body-2xl-lineheight-squished: 1.5rem;
+  --eds-typography-ui-body-2xl-line-height-default: 1.75rem;
+  --eds-typography-ui-body-2xl-line-height-squished: 1.5rem;
   --eds-typography-ui-body-3xl-font-size: 1.531rem;
   --eds-typography-ui-body-3xl-tracking-tight: -2.695px;
   --eds-typography-ui-body-3xl-tracking-normal: 0px;
@@ -489,8 +447,8 @@
   --eds-typography-ui-body-3xl-font-weight-lighter: 300;
   --eds-typography-ui-body-3xl-font-weight-normal: 400;
   --eds-typography-ui-body-3xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-3xl-lineheight-default: 2rem;
-  --eds-typography-ui-body-3xl-lineheight-squished: 1.75rem;
+  --eds-typography-ui-body-3xl-line-height-default: 2rem;
+  --eds-typography-ui-body-3xl-line-height-squished: 1.75rem;
   --eds-typography-ui-body-4xl-font-size: 1.75rem;
   --eds-typography-ui-body-4xl-tracking-tight: -3.08px;
   --eds-typography-ui-body-4xl-tracking-normal: 0px;
@@ -498,8 +456,8 @@
   --eds-typography-ui-body-4xl-font-weight-lighter: 300;
   --eds-typography-ui-body-4xl-font-weight-normal: 400;
   --eds-typography-ui-body-4xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-4xl-lineheight-default: 2rem;
-  --eds-typography-ui-body-4xl-lineheight-squished: 1.75rem;
+  --eds-typography-ui-body-4xl-line-height-default: 2rem;
+  --eds-typography-ui-body-4xl-line-height-squished: 1.75rem;
   --eds-typography-ui-body-5xl-font-size: 2rem;
   --eds-typography-ui-body-5xl-tracking-tight: -3.52px;
   --eds-typography-ui-body-5xl-tracking-normal: 0px;
@@ -507,8 +465,8 @@
   --eds-typography-ui-body-5xl-font-weight-lighter: 300;
   --eds-typography-ui-body-5xl-font-weight-normal: 400;
   --eds-typography-ui-body-5xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-5xl-lineheight-default: 2.25rem;
-  --eds-typography-ui-body-5xl-lineheight-squished: 2rem;
+  --eds-typography-ui-body-5xl-line-height-default: 2.25rem;
+  --eds-typography-ui-body-5xl-line-height-squished: 2rem;
   --eds-typography-ui-body-6xl-font-size: 2.313rem;
   --eds-typography-ui-body-6xl-tracking-tight: -4.07px;
   --eds-typography-ui-body-6xl-tracking-normal: 0px;
@@ -516,8 +474,9 @@
   --eds-typography-ui-body-6xl-font-weight-lighter: 300;
   --eds-typography-ui-body-6xl-font-weight-normal: 400;
   --eds-typography-ui-body-6xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-6xl-lineheight-default: 2.5rem;
-  --eds-typography-ui-body-6xl-lineheight-squished: 2.25rem;
+  --eds-typography-ui-body-6xl-line-height-default: 2.5rem;
+  --eds-typography-ui-body-6xl-line-height-squished: 2.25rem;
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: .75rem;
   --eds-typography-header-xs-tracking-tight: -1.15px;
   --eds-typography-header-xs-tracking-normal: 0px;
@@ -525,9 +484,8 @@
   --eds-typography-header-xs-font-weight-lighter: 300;
   --eds-typography-header-xs-font-weight-normal: 400;
   --eds-typography-header-xs-font-weight-bolder: 500;
-  --eds-typography-header-xs-lineheight-default: 1rem;
-  --eds-typography-header-xs-lineheight-squished: .75rem;
-  --eds-typography-header-font-family: "Equinor";
+  --eds-typography-header-xs-line-height-default: 1rem;
+  --eds-typography-header-xs-line-height-squished: .75rem;
   --eds-typography-header-sm-font-size: .875rem;
   --eds-typography-header-sm-tracking-tight: -1.32px;
   --eds-typography-header-sm-tracking-normal: 0px;
@@ -535,8 +493,8 @@
   --eds-typography-header-sm-font-weight-lighter: 300;
   --eds-typography-header-sm-font-weight-normal: 400;
   --eds-typography-header-sm-font-weight-bolder: 500;
-  --eds-typography-header-sm-lineheight-default: 1rem;
-  --eds-typography-header-sm-lineheight-squished: .75rem;
+  --eds-typography-header-sm-line-height-default: 1rem;
+  --eds-typography-header-sm-line-height-squished: .75rem;
   --eds-typography-header-md-font-size: 1rem;
   --eds-typography-header-md-tracking-tight: -1.54px;
   --eds-typography-header-md-tracking-normal: 0px;
@@ -544,8 +502,8 @@
   --eds-typography-header-md-font-weight-lighter: 300;
   --eds-typography-header-md-font-weight-normal: 400;
   --eds-typography-header-md-font-weight-bolder: 500;
-  --eds-typography-header-md-lineheight-default: 1.25rem;
-  --eds-typography-header-md-lineheight-squished: 1rem;
+  --eds-typography-header-md-line-height-default: 1.25rem;
+  --eds-typography-header-md-line-height-squished: 1rem;
   --eds-typography-header-lg-font-size: 1.125rem;
   --eds-typography-header-lg-tracking-tight: -1.76px;
   --eds-typography-header-lg-tracking-normal: 0px;
@@ -553,8 +511,8 @@
   --eds-typography-header-lg-font-weight-lighter: 300;
   --eds-typography-header-lg-font-weight-normal: 400;
   --eds-typography-header-lg-font-weight-bolder: 500;
-  --eds-typography-header-lg-lineheight-default: 1.5rem;
-  --eds-typography-header-lg-lineheight-squished: 1.25rem;
+  --eds-typography-header-lg-line-height-default: 1.5rem;
+  --eds-typography-header-lg-line-height-squished: 1.25rem;
   --eds-typography-header-xl-font-size: 1.313rem;
   --eds-typography-header-xl-tracking-tight: -1.76px;
   --eds-typography-header-xl-tracking-normal: 0px;
@@ -562,8 +520,8 @@
   --eds-typography-header-xl-font-weight-lighter: 300;
   --eds-typography-header-xl-font-weight-normal: 400;
   --eds-typography-header-xl-font-weight-bolder: 500;
-  --eds-typography-header-xl-lineheight-default: 1.5rem;
-  --eds-typography-header-xl-lineheight-squished: 1.25rem;
+  --eds-typography-header-xl-line-height-default: 1.5rem;
+  --eds-typography-header-xl-line-height-squished: 1.25rem;
   --eds-typography-header-2xl-font-size: 1.5rem;
   --eds-typography-header-2xl-tracking-tight: -2.31px;
   --eds-typography-header-2xl-tracking-normal: 0px;
@@ -571,8 +529,8 @@
   --eds-typography-header-2xl-font-weight-lighter: 300;
   --eds-typography-header-2xl-font-weight-normal: 400;
   --eds-typography-header-2xl-font-weight-bolder: 500;
-  --eds-typography-header-2xl-lineheight-default: 1.75rem;
-  --eds-typography-header-2xl-lineheight-squished: 1.5rem;
+  --eds-typography-header-2xl-line-height-default: 1.75rem;
+  --eds-typography-header-2xl-line-height-squished: 1.5rem;
   --eds-typography-header-3xl-font-size: 1.719rem;
   --eds-typography-header-3xl-tracking-tight: -2.695px;
   --eds-typography-header-3xl-tracking-normal: 0px;
@@ -580,8 +538,8 @@
   --eds-typography-header-3xl-font-weight-lighter: 300;
   --eds-typography-header-3xl-font-weight-normal: 400;
   --eds-typography-header-3xl-font-weight-bolder: 500;
-  --eds-typography-header-3xl-lineheight-default: 2rem;
-  --eds-typography-header-3xl-lineheight-squished: 1.75rem;
+  --eds-typography-header-3xl-line-height-default: 2rem;
+  --eds-typography-header-3xl-line-height-squished: 1.75rem;
   --eds-typography-header-4xl-font-size: 1.969rem;
   --eds-typography-header-4xl-tracking-tight: -3.08px;
   --eds-typography-header-4xl-tracking-normal: 0px;
@@ -589,8 +547,8 @@
   --eds-typography-header-4xl-font-weight-lighter: 300;
   --eds-typography-header-4xl-font-weight-normal: 400;
   --eds-typography-header-4xl-font-weight-bolder: 500;
-  --eds-typography-header-4xl-lineheight-default: 2rem;
-  --eds-typography-header-4xl-lineheight-squished: 1.75rem;
+  --eds-typography-header-4xl-line-height-default: 2rem;
+  --eds-typography-header-4xl-line-height-squished: 1.75rem;
   --eds-typography-header-5xl-font-size: 2.281rem;
   --eds-typography-header-5xl-tracking-tight: -3.52px;
   --eds-typography-header-5xl-tracking-normal: 0px;
@@ -598,8 +556,8 @@
   --eds-typography-header-5xl-font-weight-lighter: 300;
   --eds-typography-header-5xl-font-weight-normal: 400;
   --eds-typography-header-5xl-font-weight-bolder: 500;
-  --eds-typography-header-5xl-lineheight-default: 2.25rem;
-  --eds-typography-header-5xl-lineheight-squished: 2rem;
+  --eds-typography-header-5xl-line-height-default: 2.25rem;
+  --eds-typography-header-5xl-line-height-squished: 2rem;
   --eds-typography-header-6xl-font-size: 2.625rem;
   --eds-typography-header-6xl-tracking-tight: -4.07px;
   --eds-typography-header-6xl-tracking-normal: 0px;
@@ -607,11 +565,30 @@
   --eds-typography-header-6xl-font-weight-lighter: 300;
   --eds-typography-header-6xl-font-weight-normal: 400;
   --eds-typography-header-6xl-font-weight-bolder: 500;
-  --eds-typography-header-6xl-lineheight-default: 2.5rem;
-  --eds-typography-header-6xl-lineheight-squished: 2.25rem;
+  --eds-typography-header-6xl-line-height-default: 2.5rem;
+  --eds-typography-header-6xl-line-height-squished: 2.25rem;
 }
 
 [data-density="comfortable"] {
+  --eds-sizing-icon-xs: .875rem;
+  --eds-sizing-icon-sm: 1rem;
+  --eds-sizing-icon-md: 1.125rem;
+  --eds-sizing-icon-lg: 1.25rem;
+  --eds-sizing-icon-xl: 1.5rem;
+  --eds-sizing-icon-2xl: 1.75rem;
+  --eds-sizing-icon-3xl: 2rem;
+  --eds-sizing-icon-4xl: 2.313rem;
+  --eds-sizing-icon-5xl: 2.625rem;
+  --eds-sizing-icon-6xl: 3rem;
+  --eds-sizing-selectable-xs: 1rem;
+  --eds-sizing-selectable-sm: 1.25rem;
+  --eds-sizing-selectable-md: 1.5rem;
+  --eds-sizing-selectable-lg: 2.25rem;
+  --eds-sizing-selectable-xl: 2.75rem;
+  --eds-sizing-selectable-2xl: 3.25rem;
+  --eds-sizing-stroke-thin: .063rem;
+  --eds-sizing-stroke-thick: .125rem;
+  --eds-sizing-stroke-none: 0rem;
   --eds-spacing-icon-xs-gap-horizontal: .344rem;
   --eds-spacing-icon-xs-gap-vertical: .344rem;
   --eds-spacing-icon-sm-gap-horizontal: .406rem;
@@ -635,65 +612,46 @@
   --eds-spacing-border-radius-rounded: .188rem;
   --eds-spacing-border-radius-pill: 62.5rem;
   --eds-spacing-border-radius-none: 0rem;
-  --eds-spacing-inset-xs-inline: .375rem;
-  --eds-spacing-inset-xs-stack-squished: .25rem;
-  --eds-spacing-inset-xs-stack-squared: .375rem;
-  --eds-spacing-inset-xs-stack-stretched: .5rem;
-  --eds-spacing-inset-sm-inline: .5rem;
-  --eds-spacing-inset-sm-stack-squished: .375rem;
-  --eds-spacing-inset-sm-stack-squared: .5rem;
-  --eds-spacing-inset-sm-stack-stretched: .75rem;
-  --eds-spacing-inset-md-inline: .75rem;
-  --eds-spacing-inset-md-stack-squished: .5rem;
-  --eds-spacing-inset-md-stack-squared: .75rem;
-  --eds-spacing-inset-md-stack-stretched: 1rem;
-  --eds-spacing-inset-lg-inline: 1rem;
-  --eds-spacing-inset-lg-stack-squished: .75rem;
-  --eds-spacing-inset-lg-stack-squared: 1rem;
-  --eds-spacing-inset-lg-stack-stretched: 1.25rem;
-  --eds-spacing-inset-xl-inline: 1.25rem;
-  --eds-spacing-inset-xl-stack-squished: 1rem;
-  --eds-spacing-inset-xl-stack-squared: 1.25rem;
-  --eds-spacing-inset-xl-stack-stretched: 1.5rem;
-  --eds-spacing-inline-4xs: .063rem;
-  --eds-spacing-inline-3xs: .125rem;
-  --eds-spacing-inline-2xs: .25rem;
-  --eds-spacing-inline-xs: .375rem;
-  --eds-spacing-inline-sm: .5rem;
-  --eds-spacing-inline-md: .75rem;
-  --eds-spacing-inline-lg: 1rem;
-  --eds-spacing-inline-xl: 1.25rem;
-  --eds-spacing-inline-2xl: 1.5rem;
-  --eds-spacing-inline-3xl: 1.75rem;
-  --eds-spacing-stack-4xs: .063rem;
-  --eds-spacing-stack-3xs: .125rem;
-  --eds-spacing-stack-2xs: .25rem;
-  --eds-spacing-stack-xs: .375rem;
-  --eds-spacing-stack-sm: .5rem;
-  --eds-spacing-stack-md: .75rem;
-  --eds-spacing-stack-lg: 1rem;
-  --eds-spacing-stack-xl: 1.25rem;
-  --eds-spacing-stack-2xl: 1.5rem;
-  --eds-spacing-stack-3xl: 1.75rem;
-  --eds-sizing-icon-xs: .875rem;
-  --eds-sizing-icon-sm: 1rem;
-  --eds-sizing-icon-md: 1.125rem;
-  --eds-sizing-icon-lg: 1.25rem;
-  --eds-sizing-icon-xl: 1.5rem;
-  --eds-sizing-icon-2xl: 1.75rem;
-  --eds-sizing-icon-3xl: 2rem;
-  --eds-sizing-icon-4xl: 2.313rem;
-  --eds-sizing-icon-5xl: 2.625rem;
-  --eds-sizing-icon-6xl: 3rem;
-  --eds-sizing-selectable-xs: 1rem;
-  --eds-sizing-selectable-sm: 1.25rem;
-  --eds-sizing-selectable-md: 1.5rem;
-  --eds-sizing-selectable-lg: 2.25rem;
-  --eds-sizing-selectable-xl: 2.75rem;
-  --eds-sizing-selectable-2xl: 3.25rem;
-  --eds-sizing-stroke-thin: .063rem;
-  --eds-sizing-stroke-thick: .125rem;
-  --eds-sizing-stroke-none: 0rem;
+  --eds-spacing-inset-xs-horizontal: .375rem;
+  --eds-spacing-inset-xs-vertical-squished: .25rem;
+  --eds-spacing-inset-xs-vertical-squared: .375rem;
+  --eds-spacing-inset-xs-vertical-stretched: .5rem;
+  --eds-spacing-inset-sm-horizontal: .5rem;
+  --eds-spacing-inset-sm-vertical-squished: .375rem;
+  --eds-spacing-inset-sm-vertical-squared: .5rem;
+  --eds-spacing-inset-sm-vertical-stretched: .75rem;
+  --eds-spacing-inset-md-horizontal: .75rem;
+  --eds-spacing-inset-md-vertical-squished: .5rem;
+  --eds-spacing-inset-md-vertical-squared: .75rem;
+  --eds-spacing-inset-md-vertical-stretched: 1rem;
+  --eds-spacing-inset-lg-horizontal: 1rem;
+  --eds-spacing-inset-lg-vertical-squished: .75rem;
+  --eds-spacing-inset-lg-vertical-squared: 1rem;
+  --eds-spacing-inset-lg-vertical-stretched: 1.25rem;
+  --eds-spacing-inset-xl-horizontal: 1.25rem;
+  --eds-spacing-inset-xl-vertical-squished: 1rem;
+  --eds-spacing-inset-xl-vertical-squared: 1.25rem;
+  --eds-spacing-inset-xl-vertical-stretched: 1.5rem;
+  --eds-spacing-horizontal-4xs: .063rem;
+  --eds-spacing-horizontal-3xs: .125rem;
+  --eds-spacing-horizontal-2xs: .25rem;
+  --eds-spacing-horizontal-xs: .375rem;
+  --eds-spacing-horizontal-sm: .5rem;
+  --eds-spacing-horizontal-md: .75rem;
+  --eds-spacing-horizontal-lg: 1rem;
+  --eds-spacing-horizontal-xl: 1.25rem;
+  --eds-spacing-horizontal-2xl: 1.5rem;
+  --eds-spacing-horizontal-3xl: 1.75rem;
+  --eds-spacing-vertical-4xs: .063rem;
+  --eds-spacing-vertical-3xs: .125rem;
+  --eds-spacing-vertical-2xs: .25rem;
+  --eds-spacing-vertical-xs: .375rem;
+  --eds-spacing-vertical-sm: .5rem;
+  --eds-spacing-vertical-md: .75rem;
+  --eds-spacing-vertical-lg: 1rem;
+  --eds-spacing-vertical-xl: 1.25rem;
+  --eds-spacing-vertical-2xl: 1.5rem;
+  --eds-spacing-vertical-3xl: 1.75rem;
   --eds-typography-ui-body-xs-font-size: .563rem;
   --eds-typography-ui-body-xs-tracking-tight: -.99px;
   --eds-typography-ui-body-xs-tracking-normal: 0px;
@@ -701,8 +659,8 @@
   --eds-typography-ui-body-xs-font-weight-lighter: 300;
   --eds-typography-ui-body-xs-font-weight-normal: 400;
   --eds-typography-ui-body-xs-font-weight-bolder: 500;
-  --eds-typography-ui-body-xs-lineheight-default: .75rem;
-  --eds-typography-ui-body-xs-lineheight-squished: .75rem;
+  --eds-typography-ui-body-xs-line-height-default: .75rem;
+  --eds-typography-ui-body-xs-line-height-squished: .75rem;
   --eds-typography-ui-body-sm-font-size: .656rem;
   --eds-typography-ui-body-sm-tracking-tight: -1.15px;
   --eds-typography-ui-body-sm-tracking-normal: 0px;
@@ -710,8 +668,8 @@
   --eds-typography-ui-body-sm-font-weight-lighter: 300;
   --eds-typography-ui-body-sm-font-weight-normal: 400;
   --eds-typography-ui-body-sm-font-weight-bolder: 500;
-  --eds-typography-ui-body-sm-lineheight-default: 1rem;
-  --eds-typography-ui-body-sm-lineheight-squished: .75rem;
+  --eds-typography-ui-body-sm-line-height-default: 1rem;
+  --eds-typography-ui-body-sm-line-height-squished: .75rem;
   --eds-typography-ui-body-font-family: "Inter";
   --eds-typography-ui-body-md-font-size: .75rem;
   --eds-typography-ui-body-md-tracking-tight: -1.32px;
@@ -720,8 +678,8 @@
   --eds-typography-ui-body-md-font-weight-lighter: 300;
   --eds-typography-ui-body-md-font-weight-normal: 400;
   --eds-typography-ui-body-md-font-weight-bolder: 500;
-  --eds-typography-ui-body-md-lineheight-default: 1rem;
-  --eds-typography-ui-body-md-lineheight-squished: .75rem;
+  --eds-typography-ui-body-md-line-height-default: 1rem;
+  --eds-typography-ui-body-md-line-height-squished: .75rem;
   --eds-typography-ui-body-lg-font-size: .875rem;
   --eds-typography-ui-body-lg-tracking-tight: -1.54px;
   --eds-typography-ui-body-lg-tracking-normal: 0px;
@@ -729,8 +687,8 @@
   --eds-typography-ui-body-lg-font-weight-lighter: 300;
   --eds-typography-ui-body-lg-font-weight-normal: 400;
   --eds-typography-ui-body-lg-font-weight-bolder: 500;
-  --eds-typography-ui-body-lg-lineheight-default: 1.25rem;
-  --eds-typography-ui-body-lg-lineheight-squished: 1rem;
+  --eds-typography-ui-body-lg-line-height-default: 1.25rem;
+  --eds-typography-ui-body-lg-line-height-squished: 1rem;
   --eds-typography-ui-body-xl-font-size: 1rem;
   --eds-typography-ui-body-xl-tracking-tight: -1.76px;
   --eds-typography-ui-body-xl-tracking-normal: 0px;
@@ -738,8 +696,8 @@
   --eds-typography-ui-body-xl-font-weight-lighter: 300;
   --eds-typography-ui-body-xl-font-weight-normal: 400;
   --eds-typography-ui-body-xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-xl-lineheight-default: 1.5rem;
-  --eds-typography-ui-body-xl-lineheight-squished: 1.25rem;
+  --eds-typography-ui-body-xl-line-height-default: 1.5rem;
+  --eds-typography-ui-body-xl-line-height-squished: 1.25rem;
   --eds-typography-ui-body-2xl-font-size: 1.156rem;
   --eds-typography-ui-body-2xl-tracking-tight: -1.76px;
   --eds-typography-ui-body-2xl-tracking-normal: 0px;
@@ -747,8 +705,8 @@
   --eds-typography-ui-body-2xl-font-weight-lighter: 300;
   --eds-typography-ui-body-2xl-font-weight-normal: 400;
   --eds-typography-ui-body-2xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-2xl-lineheight-default: 1.5rem;
-  --eds-typography-ui-body-2xl-lineheight-squished: 1.25rem;
+  --eds-typography-ui-body-2xl-line-height-default: 1.5rem;
+  --eds-typography-ui-body-2xl-line-height-squished: 1.25rem;
   --eds-typography-ui-body-3xl-font-size: 1.313rem;
   --eds-typography-ui-body-3xl-tracking-tight: -2.31px;
   --eds-typography-ui-body-3xl-tracking-normal: 0px;
@@ -756,8 +714,8 @@
   --eds-typography-ui-body-3xl-font-weight-lighter: 300;
   --eds-typography-ui-body-3xl-font-weight-normal: 400;
   --eds-typography-ui-body-3xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-3xl-lineheight-default: 1.75rem;
-  --eds-typography-ui-body-3xl-lineheight-squished: 1.5rem;
+  --eds-typography-ui-body-3xl-line-height-default: 1.75rem;
+  --eds-typography-ui-body-3xl-line-height-squished: 1.5rem;
   --eds-typography-ui-body-4xl-font-size: 1.531rem;
   --eds-typography-ui-body-4xl-tracking-tight: -2.695px;
   --eds-typography-ui-body-4xl-tracking-normal: 0px;
@@ -765,8 +723,8 @@
   --eds-typography-ui-body-4xl-font-weight-lighter: 300;
   --eds-typography-ui-body-4xl-font-weight-normal: 400;
   --eds-typography-ui-body-4xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-4xl-lineheight-default: 2rem;
-  --eds-typography-ui-body-4xl-lineheight-squished: 1.75rem;
+  --eds-typography-ui-body-4xl-line-height-default: 2rem;
+  --eds-typography-ui-body-4xl-line-height-squished: 1.75rem;
   --eds-typography-ui-body-5xl-font-size: 1.75rem;
   --eds-typography-ui-body-5xl-tracking-tight: -3.08px;
   --eds-typography-ui-body-5xl-tracking-normal: 0px;
@@ -774,8 +732,8 @@
   --eds-typography-ui-body-5xl-font-weight-lighter: 300;
   --eds-typography-ui-body-5xl-font-weight-normal: 400;
   --eds-typography-ui-body-5xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-5xl-lineheight-default: 2rem;
-  --eds-typography-ui-body-5xl-lineheight-squished: 1.75rem;
+  --eds-typography-ui-body-5xl-line-height-default: 2rem;
+  --eds-typography-ui-body-5xl-line-height-squished: 1.75rem;
   --eds-typography-ui-body-6xl-font-size: 2rem;
   --eds-typography-ui-body-6xl-tracking-tight: -3.52px;
   --eds-typography-ui-body-6xl-tracking-normal: 0px;
@@ -783,8 +741,9 @@
   --eds-typography-ui-body-6xl-font-weight-lighter: 300;
   --eds-typography-ui-body-6xl-font-weight-normal: 0px;
   --eds-typography-ui-body-6xl-font-weight-bolder: 500;
-  --eds-typography-ui-body-6xl-lineheight-default: 2.25rem;
-  --eds-typography-ui-body-6xl-lineheight-squished: 2rem;
+  --eds-typography-ui-body-6xl-line-height-default: 2.25rem;
+  --eds-typography-ui-body-6xl-line-height-squished: 2rem;
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: .656rem;
   --eds-typography-header-xs-tracking-tight: -.99px;
   --eds-typography-header-xs-tracking-normal: 0px;
@@ -792,9 +751,8 @@
   --eds-typography-header-xs-font-weight-lighter: 300;
   --eds-typography-header-xs-font-weight-normal: 400;
   --eds-typography-header-xs-font-weight-bolder: 500;
-  --eds-typography-header-xs-lineheight-default: .75rem;
-  --eds-typography-header-xs-lineheight-squished: .75rem;
-  --eds-typography-header-font-family: "Equinor";
+  --eds-typography-header-xs-line-height-default: .75rem;
+  --eds-typography-header-xs-line-height-squished: .75rem;
   --eds-typography-header-sm-font-size: .75rem;
   --eds-typography-header-sm-tracking-tight: -1.15px;
   --eds-typography-header-sm-tracking-normal: 0px;
@@ -802,8 +760,8 @@
   --eds-typography-header-sm-font-weight-lighter: 300;
   --eds-typography-header-sm-font-weight-normal: 400;
   --eds-typography-header-sm-font-weight-bolder: 500;
-  --eds-typography-header-sm-lineheight-default: 1rem;
-  --eds-typography-header-sm-lineheight-squished: .75rem;
+  --eds-typography-header-sm-line-height-default: 1rem;
+  --eds-typography-header-sm-line-height-squished: .75rem;
   --eds-typography-header-md-font-size: .875rem;
   --eds-typography-header-md-tracking-tight: -1.32px;
   --eds-typography-header-md-tracking-normal: 0px;
@@ -811,8 +769,8 @@
   --eds-typography-header-md-font-weight-lighter: 300;
   --eds-typography-header-md-font-weight-normal: 400;
   --eds-typography-header-md-font-weight-bolder: 500;
-  --eds-typography-header-md-lineheight-default: 1rem;
-  --eds-typography-header-md-lineheight-squished: .75rem;
+  --eds-typography-header-md-line-height-default: 1rem;
+  --eds-typography-header-md-line-height-squished: .75rem;
   --eds-typography-header-lg-font-size: 1rem;
   --eds-typography-header-lg-tracking-tight: -1.54px;
   --eds-typography-header-lg-tracking-normal: 0px;
@@ -820,8 +778,8 @@
   --eds-typography-header-lg-font-weight-lighter: 300;
   --eds-typography-header-lg-font-weight-normal: 400;
   --eds-typography-header-lg-font-weight-bolder: 500;
-  --eds-typography-header-lg-lineheight-default: 1.25rem;
-  --eds-typography-header-lg-lineheight-squished: 1rem;
+  --eds-typography-header-lg-line-height-default: 1.25rem;
+  --eds-typography-header-lg-line-height-squished: 1rem;
   --eds-typography-header-xl-font-size: 1.125rem;
   --eds-typography-header-xl-tracking-tight: -1.76px;
   --eds-typography-header-xl-tracking-normal: 0px;
@@ -829,8 +787,8 @@
   --eds-typography-header-xl-font-weight-lighter: 300;
   --eds-typography-header-xl-font-weight-normal: 400;
   --eds-typography-header-xl-font-weight-bolder: 500;
-  --eds-typography-header-xl-lineheight-default: 1.5rem;
-  --eds-typography-header-xl-lineheight-squished: 1.25rem;
+  --eds-typography-header-xl-line-height-default: 1.5rem;
+  --eds-typography-header-xl-line-height-squished: 1.25rem;
   --eds-typography-header-2xl-font-size: 1.313rem;
   --eds-typography-header-2xl-tracking-tight: -1.76px;
   --eds-typography-header-2xl-tracking-normal: 0px;
@@ -838,8 +796,8 @@
   --eds-typography-header-2xl-font-weight-lighter: 300;
   --eds-typography-header-2xl-font-weight-normal: 400;
   --eds-typography-header-2xl-font-weight-bolder: 500;
-  --eds-typography-header-2xl-lineheight-default: 1.5rem;
-  --eds-typography-header-2xl-lineheight-squished: 1.25rem;
+  --eds-typography-header-2xl-line-height-default: 1.5rem;
+  --eds-typography-header-2xl-line-height-squished: 1.25rem;
   --eds-typography-header-3xl-font-size: 1.5rem;
   --eds-typography-header-3xl-tracking-tight: -2.31px;
   --eds-typography-header-3xl-tracking-normal: 0px;
@@ -847,8 +805,8 @@
   --eds-typography-header-3xl-font-weight-lighter: 300;
   --eds-typography-header-3xl-font-weight-normal: 400;
   --eds-typography-header-3xl-font-weight-bolder: 500;
-  --eds-typography-header-3xl-lineheight-default: 1.75rem;
-  --eds-typography-header-3xl-lineheight-squished: 1.5rem;
+  --eds-typography-header-3xl-line-height-default: 1.75rem;
+  --eds-typography-header-3xl-line-height-squished: 1.5rem;
   --eds-typography-header-4xl-font-size: 1.719rem;
   --eds-typography-header-4xl-tracking-tight: -2.695px;
   --eds-typography-header-4xl-tracking-normal: 0px;
@@ -856,8 +814,8 @@
   --eds-typography-header-4xl-font-weight-lighter: 300;
   --eds-typography-header-4xl-font-weight-normal: 400;
   --eds-typography-header-4xl-font-weight-bolder: 500;
-  --eds-typography-header-4xl-lineheight-default: 2rem;
-  --eds-typography-header-4xl-lineheight-squished: 1.75rem;
+  --eds-typography-header-4xl-line-height-default: 2rem;
+  --eds-typography-header-4xl-line-height-squished: 1.75rem;
   --eds-typography-header-5xl-font-size: 1.969rem;
   --eds-typography-header-5xl-tracking-tight: -3.08px;
   --eds-typography-header-5xl-tracking-normal: 0px;
@@ -865,8 +823,8 @@
   --eds-typography-header-5xl-font-weight-lighter: 300;
   --eds-typography-header-5xl-font-weight-normal: 400;
   --eds-typography-header-5xl-font-weight-bolder: 500;
-  --eds-typography-header-5xl-lineheight-default: 2rem;
-  --eds-typography-header-5xl-lineheight-squished: 1.75rem;
+  --eds-typography-header-5xl-line-height-default: 2rem;
+  --eds-typography-header-5xl-line-height-squished: 1.75rem;
   --eds-typography-header-6xl-font-size: 2.281rem;
   --eds-typography-header-6xl-tracking-tight: -3.52px;
   --eds-typography-header-6xl-tracking-normal: 0px;
@@ -874,70 +832,662 @@
   --eds-typography-header-6xl-font-weight-lighter: 300;
   --eds-typography-header-6xl-font-weight-normal: 400;
   --eds-typography-header-6xl-font-weight-bolder: 500;
-  --eds-typography-header-6xl-lineheight-default: 2.25rem;
-  --eds-typography-header-6xl-lineheight-squished: 2rem;
+  --eds-typography-header-6xl-line-height-default: 2.25rem;
+  --eds-typography-header-6xl-line-height-squished: 2rem;
 }
 
 [data-space-proportions="squished"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squished);
-  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squished);
-  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squished);
-  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squished);
-  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squished);
+  --eds-spacing-proportions-xs-horizontal: var(--eds-spacing-inset-xs-horizontal);
+  --eds-spacing-proportions-xs-vertical: var(--eds-spacing-inset-xs-vertical-squished);
+  --eds-spacing-proportions-sm-horizontal: var(--eds-spacing-inset-sm-horizontal);
+  --eds-spacing-proportions-sm-vertical: var(--eds-spacing-inset-sm-vertical-squished);
+  --eds-spacing-proportions-md-horizontal: var(--eds-spacing-inset-md-horizontal);
+  --eds-spacing-proportions-md-vertical: var(--eds-spacing-inset-md-vertical-squished);
+  --eds-spacing-proportions-lg-horizontal: var(--eds-spacing-inset-lg-horizontal);
+  --eds-spacing-proportions-lg-vertical: var(--eds-spacing-inset-lg-vertical-squished);
+  --eds-spacing-proportions-xl-horizontal: var(--eds-spacing-inset-xl-horizontal);
+  --eds-spacing-proportions-xl-vertical: var(--eds-spacing-inset-xl-vertical-squished);
 }
 
-[data-space-proportions="squared"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-squared);
-  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-squared);
-  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-squared);
-  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-squared);
-  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-squared);
+:root, [data-space-proportions="squared"] {
+  --eds-spacing-proportions-xs-horizontal: var(--eds-spacing-inset-xs-horizontal);
+  --eds-spacing-proportions-xs-vertical: var(--eds-spacing-inset-xs-vertical-squared);
+  --eds-spacing-proportions-sm-horizontal: var(--eds-spacing-inset-sm-horizontal);
+  --eds-spacing-proportions-sm-vertical: var(--eds-spacing-inset-sm-vertical-squared);
+  --eds-spacing-proportions-md-horizontal: var(--eds-spacing-inset-md-horizontal);
+  --eds-spacing-proportions-md-vertical: var(--eds-spacing-inset-md-vertical-squared);
+  --eds-spacing-proportions-lg-horizontal: var(--eds-spacing-inset-lg-horizontal);
+  --eds-spacing-proportions-lg-vertical: var(--eds-spacing-inset-lg-vertical-squared);
+  --eds-spacing-proportions-xl-horizontal: var(--eds-spacing-inset-xl-horizontal);
+  --eds-spacing-proportions-xl-vertical: var(--eds-spacing-inset-xl-vertical-squared);
 }
 
 [data-space-proportions="stretched"] {
-  --eds-spacing-proportions-xs-inline: var(--eds-spacing-inset-xs-inline);
-  --eds-spacing-proportions-xs-stack: var(--eds-spacing-inset-xs-stack-stretched);
-  --eds-spacing-proportions-sm-inline: var(--eds-spacing-inset-sm-inline);
-  --eds-spacing-proportions-sm-stack: var(--eds-spacing-inset-sm-stack-stretched);
-  --eds-spacing-proportions-md-inline: var(--eds-spacing-inset-md-inline);
-  --eds-spacing-proportions-md-stack: var(--eds-spacing-inset-md-stack-stretched);
-  --eds-spacing-proportions-lg-inline: var(--eds-spacing-inset-lg-inline);
-  --eds-spacing-proportions-lg-stack: var(--eds-spacing-inset-lg-stack-stretched);
-  --eds-spacing-proportions-xl-inline: var(--eds-spacing-inset-xl-inline);
-  --eds-spacing-proportions-xl-stack: var(--eds-spacing-inset-xl-stack-stretched);
+  --eds-spacing-proportions-xs-horizontal: var(--eds-spacing-inset-xs-horizontal);
+  --eds-spacing-proportions-xs-vertical: var(--eds-spacing-inset-xs-vertical-stretched);
+  --eds-spacing-proportions-sm-horizontal: var(--eds-spacing-inset-sm-horizontal);
+  --eds-spacing-proportions-sm-vertical: var(--eds-spacing-inset-sm-vertical-stretched);
+  --eds-spacing-proportions-md-horizontal: var(--eds-spacing-inset-md-horizontal);
+  --eds-spacing-proportions-md-vertical: var(--eds-spacing-inset-md-vertical-stretched);
+  --eds-spacing-proportions-lg-horizontal: var(--eds-spacing-inset-lg-horizontal);
+  --eds-spacing-proportions-lg-vertical: var(--eds-spacing-inset-lg-vertical-stretched);
+  --eds-spacing-proportions-xl-horizontal: var(--eds-spacing-inset-xl-horizontal);
+  --eds-spacing-proportions-xl-vertical: var(--eds-spacing-inset-xl-vertical-stretched);
 }
 
-[data-selectable-space="xs"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xs-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xs-stack);
+:root, [data-selectable-space="xs"] {
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-xs-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-xs-vertical);
 }
 
 [data-selectable-space="sm"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-sm-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-sm-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-sm-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-sm-vertical);
 }
 
 [data-selectable-space="md"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-md-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-md-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-md-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-md-vertical);
 }
 
 [data-selectable-space="lg"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-lg-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-lg-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-lg-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-lg-vertical);
 }
 
 [data-selectable-space="xl"] {
-  --eds-selectable-spacing-inline: var(--eds-spacing-proportions-xl-inline);
-  --eds-selectable-spacing-stack: var(--eds-spacing-proportions-xl-stack);
+  --eds-selectable-space-horizontal: var(--eds-spacing-proportions-xl-horizontal);
+  --eds-selectable-space-vertical: var(--eds-spacing-proportions-xl-vertical);
+}
+
+[data-horizontal-gap="none"] {
+  --eds-generic-gap-horizontal: 0;
+}
+
+[data-horizontal-gap="4xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-4xs);
+}
+
+[data-horizontal-gap="3xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-3xs);
+}
+
+[data-horizontal-gap="2xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-2xs);
+}
+
+:root, [data-horizontal-gap="xs"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-xs);
+}
+
+[data-horizontal-gap="sm"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-sm);
+}
+
+[data-horizontal-gap="md"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-md);
+}
+
+[data-horizontal-gap="lg"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-lg);
+}
+
+[data-horizontal-gap="xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-xl);
+}
+
+[data-horizontal-gap="2xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-2xl);
+}
+
+[data-horizontal-gap="3xl"] {
+  --eds-generic-gap-horizontal: var(--eds-spacing-horizontal-3xl);
+}
+
+[data-vertical-gap="none"] {
+  --eds-generic-gap-vertical: 0;
+}
+
+[data-vertical-gap="4xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-4xs);
+}
+
+[data-vertical-gap="3xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-3xs);
+}
+
+[data-vertical-gap="2xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-2xs);
+}
+
+:root, [data-vertical-gap="xs"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-xs);
+}
+
+[data-vertical-gap="sm"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-sm);
+}
+
+[data-vertical-gap="md"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-md);
+}
+
+[data-vertical-gap="lg"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-lg);
+}
+
+[data-vertical-gap="xl"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-xl);
+}
+
+[data-vertical-gap="2xl"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-2xl);
+}
+
+[data-vertical-gap="3xl"] {
+  --eds-generic-gap-vertical: var(--eds-spacing-vertical-3xl);
+}
+
+[data-horizontal-space="none"] {
+  --eds-generic-space-horizontal: 0;
+}
+
+[data-horizontal-space="4xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-4xs);
+}
+
+[data-horizontal-space="3xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-3xs);
+}
+
+[data-horizontal-space="2xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-2xs);
+}
+
+:root, [data-horizontal-space="xs"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-xs);
+}
+
+[data-horizontal-space="sm"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-sm);
+}
+
+[data-horizontal-space="md"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-md);
+}
+
+[data-horizontal-space="lg"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-lg);
+}
+
+[data-horizontal-space="xl"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-xl);
+}
+
+[data-horizontal-space="2xl"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-2xl);
+}
+
+[data-horizontal-space="3xl"] {
+  --eds-generic-space-horizontal: var(--eds-spacing-horizontal-3xl);
+}
+
+[data-vertical-space="none"] {
+  --eds-generic-space-vertical: 0;
+}
+
+[data-vertical-space="4xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-4xs);
+}
+
+[data-vertical-space="3xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-3xs);
+}
+
+[data-vertical-space="2xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-2xs);
+}
+
+:root, [data-vertical-space="xs"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-xs);
+}
+
+[data-vertical-space="sm"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-sm);
+}
+
+[data-vertical-space="md"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-md);
+}
+
+[data-vertical-space="lg"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-lg);
+}
+
+[data-vertical-space="xl"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-xl);
+}
+
+[data-vertical-space="2xl"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-2xl);
+}
+
+[data-vertical-space="3xl"] {
+  --eds-generic-space-vertical: var(--eds-spacing-vertical-3xl);
+}
+
+:root, [data-space-proportions] {
+  --eds-container-space-horizontal: var(--eds-spacing-proportions-md-horizontal);
+  --eds-container-space-vertical: var(--eds-spacing-proportions-md-vertical);
+  --eds-page-space-horizontal: var(--eds-spacing-proportions-xl-horizontal);
+  --eds-page-space-vertical: var(--eds-spacing-proportions-xl-vertical);
+}
+
+:root {
+  --eds-selectable-gap-horizontal: var(--eds-spacing-horizontal-xs);
+  --eds-selectable-gap-vertical: var(--eds-spacing-vertical-xs);
+  --eds-container-gap-horizontal: var(--eds-spacing-horizontal-md);
+  --eds-container-gap-vertical: var(--eds-spacing-vertical-md);
+  --eds-page-gap-horizontal: var(--eds-spacing-horizontal-xl);
+  --eds-page-gap-vertical: var(--eds-spacing-vertical-xl);
+}
+
+@property --eds-typography-font-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 16px;
+}
+
+[data-font-family] {
+  font-family: var(--eds-typography-font-family);
+  font-size: var(--eds-typography-font-size);
+  font-weight: var(--eds-typography-font-weight);
+  line-height: var(--eds-typography-line-height);
+  letter-spacing: var(--eds-typography-tracking);
+  margin: 0;
+  display: block;
+}
+
+@supports (text-box: trim-both cap alphabetic) {
+  [data-baseline="grid"] {
+    text-box: trim-both ex alphabetic;
+    padding-top: calc(round(1cap, 4px) - 1ex);
+    padding-bottom: 0;
+  }
+
+  [data-baseline="center"] {
+    text-box: trim-both ex alphabetic;
+    padding-top: calc(round(1cap, 4px) / 2 + .5cap - 1ex);
+    padding-bottom: calc(round(1cap, 4px) / 2 - .5cap);
+  }
+}
+
+[data-font-family="header"] {
+  --eds-typography-font-family: var(--eds-typography-header-font-family);
+  --eds-font-family-size-xs-font-size: var(--eds-typography-header-xs-font-size);
+  --eds-font-family-size-xs-tracking-tight: var(--eds-typography-header-xs-tracking-tight);
+  --eds-font-family-size-xs-tracking-normal: var(--eds-typography-header-xs-tracking-normal);
+  --eds-font-family-size-xs-tracking-wide: var(--eds-typography-header-xs-tracking-wide);
+  --eds-font-family-size-xs-font-weight-lighter: var(--eds-typography-header-xs-font-weight-lighter);
+  --eds-font-family-size-xs-font-weight-normal: var(--eds-typography-header-xs-font-weight-normal);
+  --eds-font-family-size-xs-font-weight-bolder: var(--eds-typography-header-xs-font-weight-bolder);
+  --eds-font-family-size-sm-font-size: var(--eds-typography-header-sm-font-size);
+  --eds-font-family-size-sm-tracking-tight: var(--eds-typography-header-sm-tracking-tight);
+  --eds-font-family-size-sm-tracking-normal: var(--eds-typography-header-sm-tracking-normal);
+  --eds-font-family-size-sm-tracking-wide: var(--eds-typography-header-sm-tracking-wide);
+  --eds-font-family-size-sm-font-weight-lighter: var(--eds-typography-header-sm-font-weight-lighter);
+  --eds-font-family-size-sm-font-weight-normal: var(--eds-typography-header-sm-font-weight-normal);
+  --eds-font-family-size-sm-font-weight-bolder: var(--eds-typography-header-sm-font-weight-bolder);
+  --eds-font-family-size-md-font-size: var(--eds-typography-header-md-font-size);
+  --eds-font-family-size-md-tracking-tight: var(--eds-typography-header-md-tracking-tight);
+  --eds-font-family-size-md-tracking-normal: var(--eds-typography-header-md-tracking-normal);
+  --eds-font-family-size-md-tracking-wide: var(--eds-typography-header-md-tracking-wide);
+  --eds-font-family-size-md-font-weight-lighter: var(--eds-typography-header-md-font-weight-lighter);
+  --eds-font-family-size-md-font-weight-normal: var(--eds-typography-header-md-font-weight-normal);
+  --eds-font-family-size-md-font-weight-bolder: var(--eds-typography-header-md-font-weight-bolder);
+  --eds-font-family-size-lg-font-size: var(--eds-typography-header-lg-font-size);
+  --eds-font-family-size-lg-tracking-tight: var(--eds-typography-header-lg-tracking-tight);
+  --eds-font-family-size-lg-tracking-normal: var(--eds-typography-header-lg-tracking-normal);
+  --eds-font-family-size-lg-tracking-wide: var(--eds-typography-header-lg-tracking-wide);
+  --eds-font-family-size-lg-font-weight-lighter: var(--eds-typography-header-lg-font-weight-lighter);
+  --eds-font-family-size-lg-font-weight-normal: var(--eds-typography-header-lg-font-weight-normal);
+  --eds-font-family-size-lg-font-weight-bolder: var(--eds-typography-header-lg-font-weight-bolder);
+  --eds-font-family-size-xl-font-size: var(--eds-typography-header-xl-font-size);
+  --eds-font-family-size-xl-tracking-tight: var(--eds-typography-header-xl-tracking-tight);
+  --eds-font-family-size-xl-tracking-normal: var(--eds-typography-header-xl-tracking-normal);
+  --eds-font-family-size-xl-tracking-wide: var(--eds-typography-header-xl-tracking-wide);
+  --eds-font-family-size-xl-font-weight-lighter: var(--eds-typography-header-xl-font-weight-lighter);
+  --eds-font-family-size-xl-font-weight-normal: var(--eds-typography-header-xl-font-weight-normal);
+  --eds-font-family-size-xl-font-weight-bolder: var(--eds-typography-header-xl-font-weight-bolder);
+  --eds-font-family-size-2xl-font-size: var(--eds-typography-header-2xl-font-size);
+  --eds-font-family-size-2xl-tracking-tight: var(--eds-typography-header-2xl-tracking-tight);
+  --eds-font-family-size-2xl-tracking-normal: var(--eds-typography-header-2xl-tracking-normal);
+  --eds-font-family-size-2xl-tracking-wide: var(--eds-typography-header-2xl-tracking-wide);
+  --eds-font-family-size-2xl-font-weight-lighter: var(--eds-typography-header-2xl-font-weight-lighter);
+  --eds-font-family-size-2xl-font-weight-normal: var(--eds-typography-header-2xl-font-weight-normal);
+  --eds-font-family-size-2xl-font-weight-bolder: var(--eds-typography-header-2xl-font-weight-bolder);
+  --eds-font-family-size-3xl-font-size: var(--eds-typography-header-3xl-font-size);
+  --eds-font-family-size-3xl-tracking-tight: var(--eds-typography-header-3xl-tracking-tight);
+  --eds-font-family-size-3xl-tracking-normal: var(--eds-typography-header-3xl-tracking-normal);
+  --eds-font-family-size-3xl-tracking-wide: var(--eds-typography-header-3xl-tracking-wide);
+  --eds-font-family-size-3xl-font-weight-lighter: var(--eds-typography-header-3xl-font-weight-lighter);
+  --eds-font-family-size-3xl-font-weight-normal: var(--eds-typography-header-3xl-font-weight-normal);
+  --eds-font-family-size-3xl-font-weight-bolder: var(--eds-typography-header-3xl-font-weight-bolder);
+  --eds-font-family-size-4xl-font-size: var(--eds-typography-header-4xl-font-size);
+  --eds-font-family-size-4xl-tracking-tight: var(--eds-typography-header-4xl-tracking-tight);
+  --eds-font-family-size-4xl-tracking-normal: var(--eds-typography-header-4xl-tracking-normal);
+  --eds-font-family-size-4xl-tracking-wide: var(--eds-typography-header-4xl-tracking-wide);
+  --eds-font-family-size-4xl-font-weight-lighter: var(--eds-typography-header-4xl-font-weight-lighter);
+  --eds-font-family-size-4xl-font-weight-normal: var(--eds-typography-header-4xl-font-weight-normal);
+  --eds-font-family-size-4xl-font-weight-bolder: var(--eds-typography-header-4xl-font-weight-bolder);
+  --eds-font-family-size-5xl-font-size: var(--eds-typography-header-5xl-font-size);
+  --eds-font-family-size-5xl-tracking-tight: var(--eds-typography-header-5xl-tracking-tight);
+  --eds-font-family-size-5xl-tracking-normal: var(--eds-typography-header-5xl-tracking-normal);
+  --eds-font-family-size-5xl-tracking-wide: var(--eds-typography-header-5xl-tracking-wide);
+  --eds-font-family-size-5xl-font-weight-lighter: var(--eds-typography-header-5xl-font-weight-lighter);
+  --eds-font-family-size-5xl-font-weight-normal: var(--eds-typography-header-5xl-font-weight-normal);
+  --eds-font-family-size-5xl-font-weight-bolder: var(--eds-typography-header-5xl-font-weight-bolder);
+  --eds-font-family-size-6xl-font-size: var(--eds-typography-header-6xl-font-size);
+  --eds-font-family-size-6xl-tracking-tight: var(--eds-typography-header-6xl-tracking-tight);
+  --eds-font-family-size-6xl-tracking-normal: var(--eds-typography-header-6xl-tracking-normal);
+  --eds-font-family-size-6xl-tracking-wide: var(--eds-typography-header-6xl-tracking-wide);
+  --eds-font-family-size-6xl-font-weight-lighter: var(--eds-typography-header-6xl-font-weight-lighter);
+  --eds-font-family-size-6xl-font-weight-normal: var(--eds-typography-header-6xl-font-weight-normal);
+  --eds-font-family-size-6xl-font-weight-bolder: var(--eds-typography-header-6xl-font-weight-bolder);
+  --eds-font-family-size-xs-line-height-default: var(--eds-typography-header-xs-line-height-default);
+  --eds-font-family-size-xs-line-height-squished: var(--eds-typography-header-xs-line-height-squished);
+  --eds-font-family-size-sm-line-height-default: var(--eds-typography-header-sm-line-height-default);
+  --eds-font-family-size-sm-line-height-squished: var(--eds-typography-header-sm-line-height-squished);
+  --eds-font-family-size-md-line-height-default: var(--eds-typography-header-md-line-height-default);
+  --eds-font-family-size-md-line-height-squished: var(--eds-typography-header-md-line-height-squished);
+  --eds-font-family-size-lg-line-height-default: var(--eds-typography-header-lg-line-height-default);
+  --eds-font-family-size-lg-line-height-squished: var(--eds-typography-header-lg-line-height-squished);
+  --eds-font-family-size-xl-line-height-default: var(--eds-typography-header-xl-line-height-default);
+  --eds-font-family-size-xl-line-height-squished: var(--eds-typography-header-xl-line-height-squished);
+  --eds-font-family-size-2xl-line-height-default: var(--eds-typography-header-2xl-line-height-default);
+  --eds-font-family-size-2xl-line-height-squished: var(--eds-typography-header-2xl-line-height-squished);
+  --eds-font-family-size-3xl-line-height-default: var(--eds-typography-header-3xl-line-height-default);
+  --eds-font-family-size-3xl-line-height-squished: var(--eds-typography-header-3xl-line-height-default);
+  --eds-font-family-size-4xl-line-height-default: var(--eds-typography-header-4xl-line-height-default);
+  --eds-font-family-size-4xl-line-height-squished: var(--eds-typography-header-4xl-line-height-squished);
+  --eds-font-family-size-5xl-line-height-default: var(--eds-typography-header-5xl-line-height-default);
+  --eds-font-family-size-5xl-line-height-squished: var(--eds-typography-header-5xl-line-height-squished);
+  --eds-font-family-size-6xl-line-height-default: var(--eds-typography-header-6xl-line-height-default);
+  --eds-font-family-size-6xl-line-height-squished: var(--eds-typography-header-6xl-line-height-squished);
+}
+
+[data-font-family="ui"] {
+  --eds-typography-font-family: var(--eds-typography-ui-body-font-family);
+  --eds-font-family-size-xs-font-size: var(--eds-typography-ui-body-xs-font-size);
+  --eds-font-family-size-xs-tracking-tight: var(--eds-typography-ui-body-xs-tracking-tight);
+  --eds-font-family-size-xs-tracking-normal: var(--eds-typography-ui-body-xs-tracking-normal);
+  --eds-font-family-size-xs-tracking-wide: var(--eds-typography-ui-body-xs-tracking-wide);
+  --eds-font-family-size-xs-font-weight-lighter: var(--eds-typography-ui-body-xs-font-weight-lighter);
+  --eds-font-family-size-xs-font-weight-normal: var(--eds-typography-ui-body-xs-font-weight-normal);
+  --eds-font-family-size-xs-font-weight-bolder: var(--eds-typography-ui-body-xs-font-weight-bolder);
+  --eds-font-family-size-sm-font-size: var(--eds-typography-ui-body-sm-font-size);
+  --eds-font-family-size-sm-tracking-tight: var(--eds-typography-ui-body-sm-tracking-tight);
+  --eds-font-family-size-sm-tracking-normal: var(--eds-typography-ui-body-sm-tracking-normal);
+  --eds-font-family-size-sm-tracking-wide: var(--eds-typography-ui-body-sm-tracking-wide);
+  --eds-font-family-size-sm-font-weight-lighter: var(--eds-typography-ui-body-sm-font-weight-lighter);
+  --eds-font-family-size-sm-font-weight-normal: var(--eds-typography-ui-body-sm-font-weight-normal);
+  --eds-font-family-size-sm-font-weight-bolder: var(--eds-typography-ui-body-sm-font-weight-bolder);
+  --eds-font-family-size-md-font-size: var(--eds-typography-ui-body-md-font-size);
+  --eds-font-family-size-md-tracking-tight: var(--eds-typography-ui-body-md-tracking-tight);
+  --eds-font-family-size-md-tracking-normal: var(--eds-typography-ui-body-md-tracking-normal);
+  --eds-font-family-size-md-tracking-wide: var(--eds-typography-ui-body-md-tracking-wide);
+  --eds-font-family-size-md-font-weight-lighter: var(--eds-typography-ui-body-md-font-weight-lighter);
+  --eds-font-family-size-md-font-weight-normal: var(--eds-typography-ui-body-md-font-weight-normal);
+  --eds-font-family-size-md-font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+  --eds-font-family-size-lg-font-size: var(--eds-typography-ui-body-lg-font-size);
+  --eds-font-family-size-lg-tracking-tight: var(--eds-typography-ui-body-lg-tracking-tight);
+  --eds-font-family-size-lg-tracking-normal: var(--eds-typography-ui-body-lg-tracking-normal);
+  --eds-font-family-size-lg-tracking-wide: var(--eds-typography-ui-body-lg-tracking-wide);
+  --eds-font-family-size-lg-font-weight-lighter: var(--eds-typography-ui-body-lg-font-weight-lighter);
+  --eds-font-family-size-lg-font-weight-normal: var(--eds-typography-ui-body-lg-font-weight-normal);
+  --eds-font-family-size-lg-font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+  --eds-font-family-size-xl-font-size: var(--eds-typography-ui-body-xl-font-size);
+  --eds-font-family-size-xl-tracking-tight: var(--eds-typography-ui-body-xl-tracking-tight);
+  --eds-font-family-size-xl-tracking-normal: var(--eds-typography-ui-body-xl-tracking-normal);
+  --eds-font-family-size-xl-tracking-wide: var(--eds-typography-ui-body-xl-tracking-wide);
+  --eds-font-family-size-xl-font-weight-lighter: var(--eds-typography-ui-body-xl-font-weight-lighter);
+  --eds-font-family-size-xl-font-weight-normal: var(--eds-typography-ui-body-xl-font-weight-normal);
+  --eds-font-family-size-xl-font-weight-bolder: var(--eds-typography-ui-body-xl-font-weight-bolder);
+  --eds-font-family-size-2xl-font-size: var(--eds-typography-ui-body-2xl-font-size);
+  --eds-font-family-size-2xl-tracking-tight: var(--eds-typography-ui-body-2xl-tracking-tight);
+  --eds-font-family-size-2xl-tracking-normal: var(--eds-typography-ui-body-2xl-tracking-normal);
+  --eds-font-family-size-2xl-tracking-wide: var(--eds-typography-ui-body-2xl-tracking-wide);
+  --eds-font-family-size-2xl-font-weight-lighter: var(--eds-typography-ui-body-2xl-font-weight-lighter);
+  --eds-font-family-size-2xl-font-weight-normal: var(--eds-typography-ui-body-2xl-font-weight-normal);
+  --eds-font-family-size-2xl-font-weight-bolder: var(--eds-typography-ui-body-2xl-font-weight-bolder);
+  --eds-font-family-size-3xl-font-size: var(--eds-typography-ui-body-3xl-font-size);
+  --eds-font-family-size-3xl-tracking-tight: var(--eds-typography-ui-body-3xl-tracking-tight);
+  --eds-font-family-size-3xl-tracking-normal: var(--eds-typography-ui-body-3xl-tracking-normal);
+  --eds-font-family-size-3xl-tracking-wide: var(--eds-typography-ui-body-3xl-tracking-wide);
+  --eds-font-family-size-3xl-font-weight-lighter: var(--eds-typography-ui-body-3xl-font-weight-lighter);
+  --eds-font-family-size-3xl-font-weight-normal: var(--eds-typography-ui-body-3xl-font-weight-normal);
+  --eds-font-family-size-3xl-font-weight-bolder: var(--eds-typography-ui-body-3xl-font-weight-bolder);
+  --eds-font-family-size-4xl-font-size: var(--eds-typography-ui-body-4xl-font-size);
+  --eds-font-family-size-4xl-tracking-tight: var(--eds-typography-ui-body-4xl-tracking-tight);
+  --eds-font-family-size-4xl-tracking-normal: var(--eds-typography-ui-body-4xl-tracking-normal);
+  --eds-font-family-size-4xl-tracking-wide: var(--eds-typography-ui-body-4xl-tracking-wide);
+  --eds-font-family-size-4xl-font-weight-lighter: var(--eds-typography-ui-body-4xl-font-weight-lighter);
+  --eds-font-family-size-4xl-font-weight-normal: var(--eds-typography-ui-body-4xl-font-weight-normal);
+  --eds-font-family-size-4xl-font-weight-bolder: var(--eds-typography-ui-body-4xl-font-weight-bolder);
+  --eds-font-family-size-5xl-font-size: var(--eds-typography-ui-body-5xl-font-size);
+  --eds-font-family-size-5xl-tracking-tight: var(--eds-typography-ui-body-5xl-tracking-tight);
+  --eds-font-family-size-5xl-tracking-normal: var(--eds-typography-ui-body-5xl-tracking-normal);
+  --eds-font-family-size-5xl-tracking-wide: var(--eds-typography-ui-body-5xl-font-weight-lighter);
+  --eds-font-family-size-5xl-font-weight-lighter: var(--eds-typography-ui-body-5xl-font-weight-lighter);
+  --eds-font-family-size-5xl-font-weight-normal: var(--eds-typography-ui-body-5xl-font-weight-normal);
+  --eds-font-family-size-5xl-font-weight-bolder: var(--eds-typography-ui-body-5xl-font-weight-bolder);
+  --eds-font-family-size-6xl-font-size: var(--eds-typography-ui-body-6xl-font-size);
+  --eds-font-family-size-6xl-tracking-tight: var(--eds-typography-ui-body-6xl-tracking-tight);
+  --eds-font-family-size-6xl-tracking-normal: var(--eds-typography-ui-body-6xl-tracking-normal);
+  --eds-font-family-size-6xl-tracking-wide: var(--eds-typography-ui-body-6xl-tracking-wide);
+  --eds-font-family-size-6xl-font-weight-lighter: var(--eds-typography-ui-body-6xl-font-weight-lighter);
+  --eds-font-family-size-6xl-font-weight-normal: var(--eds-typography-ui-body-6xl-font-weight-normal);
+  --eds-font-family-size-6xl-font-weight-bolder: var(--eds-typography-ui-body-6xl-font-weight-bolder);
+  --eds-font-family-size-xs-line-height-default: var(--eds-typography-ui-body-xs-line-height-default);
+  --eds-font-family-size-xs-line-height-squished: var(--eds-typography-ui-body-xs-line-height-squished);
+  --eds-font-family-size-sm-line-height-default: var(--eds-typography-ui-body-sm-line-height-default);
+  --eds-font-family-size-sm-line-height-squished: var(--eds-typography-ui-body-sm-line-height-squished);
+  --eds-font-family-size-md-line-height-default: var(--eds-typography-ui-body-md-line-height-default);
+  --eds-font-family-size-md-line-height-squished: var(--eds-typography-ui-body-md-line-height-squished);
+  --eds-font-family-size-lg-line-height-default: var(--eds-typography-ui-body-lg-line-height-default);
+  --eds-font-family-size-lg-line-height-squished: var(--eds-typography-ui-body-lg-line-height-squished);
+  --eds-font-family-size-xl-line-height-default: var(--eds-typography-ui-body-xl-line-height-default);
+  --eds-font-family-size-xl-line-height-squished: var(--eds-typography-ui-body-xl-line-height-squished);
+  --eds-font-family-size-2xl-line-height-default: var(--eds-typography-ui-body-2xl-line-height-default);
+  --eds-font-family-size-2xl-line-height-squished: var(--eds-typography-ui-body-2xl-line-height-squished);
+  --eds-font-family-size-3xl-line-height-default: var(--eds-typography-ui-body-3xl-line-height-default);
+  --eds-font-family-size-3xl-line-height-squished: var(--eds-typography-ui-body-3xl-line-height-squished);
+  --eds-font-family-size-4xl-line-height-default: var(--eds-typography-ui-body-4xl-line-height-default);
+  --eds-font-family-size-4xl-line-height-squished: var(--eds-typography-ui-body-4xl-line-height-squished);
+  --eds-font-family-size-5xl-line-height-default: var(--eds-typography-ui-body-5xl-line-height-default);
+  --eds-font-family-size-5xl-line-height-squished: var(--eds-typography-ui-body-5xl-line-height-squished);
+  --eds-font-family-size-6xl-line-height-default: var(--eds-typography-ui-body-6xl-line-height-default);
+  --eds-font-family-size-6xl-line-height-squished: var(--eds-typography-ui-body-6xl-line-height-squished);
+}
+
+[data-font-size="xs"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-xs);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-xs-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-xs-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-xs-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-xs-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-xs-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-xs-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-xs-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-xs-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-xs-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-xs-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-xs-line-height-squished);
+}
+
+[data-font-size="sm"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-sm);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-sm-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-sm-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-sm-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-sm-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-sm-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-sm-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-sm-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-sm-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-sm-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-sm-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-sm-line-height-squished);
+}
+
+[data-font-size="md"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-md);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-md-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-md-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-md-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-md-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-md-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-md-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-md-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-md-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-md-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-md-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-md-line-height-squished);
+}
+
+[data-font-size="lg"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-lg);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-lg-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-lg-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-lg-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-lg-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-lg-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-lg-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-lg-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-lg-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-lg-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-lg-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-lg-line-height-squished);
+}
+
+[data-font-size="xl"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-xl-line-height-squished);
+}
+
+[data-font-size="2xl"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-2xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-2xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-2xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-2xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-2xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-2xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-2xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-2xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-2xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-2xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-2xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-2xl-line-height-squished);
+}
+
+[data-font-size="3xl"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-3xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-3xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-3xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-3xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-3xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-3xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-3xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-3xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-3xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-3xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-3xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-3xl-line-height-squished);
+}
+
+[data-font-size="4xl"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-4xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-4xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-4xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-4xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-4xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-4xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-4xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-4xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-4xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-4xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-4xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-4xl-line-height-squished);
+}
+
+[data-font-size="5xl"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-5xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-5xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-5xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-5xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-5xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-5xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-5xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-5xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-5xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-5xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-5xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-5xl-line-height-squished);
+}
+
+[data-font-size="6xl"] {
+  --eds-typography-icon-size: var(--eds-sizing-icon-6xl);
+  --eds-typography-gap-horizontal: var(--eds-spacing-icon-6xl-gap-horizontal);
+  --eds-typography-gap-vertical: var(--eds-spacing-icon-6xl-gap-vertical);
+  --eds-typography-font-size: var(--eds-font-family-size-6xl-font-size);
+  --eds-typography-tracking-tight: var(--eds-font-family-size-6xl-tracking-tight);
+  --eds-typography-tracking-normal: var(--eds-font-family-size-6xl-tracking-normal);
+  --eds-typography-tracking-wide: var(--eds-font-family-size-6xl-tracking-wide);
+  --eds-typography-font-weight-lighter: var(--eds-font-family-size-6xl-font-weight-lighter);
+  --eds-typography-font-weight-normal: var(--eds-font-family-size-6xl-font-weight-normal);
+  --eds-typography-font-weight-bolder: var(--eds-font-family-size-6xl-font-weight-bolder);
+  --eds-typography-line-height-default: var(--eds-font-family-size-6xl-line-height-default);
+  --eds-typography-line-height-squished: var(--eds-font-family-size-6xl-line-height-squished);
+}
+
+[data-font-weight="lighter"] {
+  --eds-typography-font-weight: var(--eds-typography-font-weight-lighter);
+}
+
+[data-font-weight="normal"] {
+  --eds-typography-font-weight: var(--eds-typography-font-weight-normal);
+}
+
+[data-font-weight="bolder"] {
+  --eds-typography-font-weight: var(--eds-typography-font-weight-bolder);
+}
+
+[data-line-height="default"] {
+  --eds-typography-line-height: var(--eds-typography-line-height-default);
+}
+
+[data-line-height="squished"] {
+  --eds-typography-line-height: var(--eds-typography-line-height-squished);
+}
+
+[data-tracking="tight"] {
+  --eds-typography-tracking: var(--eds-typography-tracking-tight);
+}
+
+[data-tracking="normal"] {
+  --eds-typography-tracking: var(--eds-typography-tracking-normal);
+}
+
+[data-tracking="wide"], [data-tracking="loose"] {
+  --eds-typography-tracking: var(--eds-typography-tracking-wide);
 }

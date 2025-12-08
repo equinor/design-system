@@ -1,8 +1,8 @@
 {
   "Selectable": {
-    "Horisontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Selectable.Spacing.Inline}",
+      "$value": "{selectable-space.horizontal}",
       "$description": "Some description",
       "$extensions": {
         "com.figma": {
@@ -11,14 +11,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-${selectable-space}-inline"
+            "WEB": "var(--eds-selectable-space-horizontal)"
           }
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Selectable.Spacing.Stack}",
+      "$value": "{selectable-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -27,7 +27,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-${selectable-space}-stack-${space-proportions}"
+            "WEB": "var(--eds-selectable-space-vertical)"
           }
         }
       }
@@ -42,9 +42,7 @@
           "scopes": [
             "WIDTH_HEIGHT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-icon-${icon-size}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -58,15 +56,13 @@
           "scopes": [
             "WIDTH_HEIGHT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-icon-${icon-size}"
-          }
+          "codeSyntax": {}
         }
       }
     },
     "Icon + text gap ↔︎": {
       "$type": "number",
-      "$value": "{gap-horizontal}",
+      "$value": "{typography.gap-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -74,15 +70,13 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-icon-${icon-size}-gap-horizontal"
-          }
+          "codeSyntax": {}
         }
       }
     },
     "Icon + text gap ↕︎": {
       "$type": "number",
-      "$value": "{gap-vertical}",
+      "$value": "{typography.gap-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -90,9 +84,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-icon-${icon-size}-gap-vertical"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -106,15 +98,13 @@
           "scopes": [
             "WIDTH_HEIGHT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-selectable-${size}"
-          }
+          "codeSyntax": {}
         }
       }
     },
-    "Horisontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{spacing.inline.xs}",
+      "$value": "{spacing.horizontal.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -123,14 +113,14 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inline-xs"
+            "WEB": "var(--eds-selectable-gap-horizontal)"
           }
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{spacing.stack.xs}",
+      "$value": "{spacing.vertical.xs}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -139,16 +129,16 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-stack-xs"
+            "WEB": "var(--eds-selectable-gap-vertical)"
           }
         }
       }
     }
   },
   "Container": {
-    "Horisontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Container.Spacing.Inline}",
+      "$value": "{container-space.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -157,14 +147,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-md-inline"
+            "WEB": "var(--eds-container-space-horizontal)"
           }
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Container.Spacing.Stack}",
+      "$value": "{container-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -173,14 +163,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-md-stack-${space-proportions}"
+            "WEB": "var(--eds-container-space-vertical)"
           }
         }
       }
     },
-    "Horisontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{spacing.inline.md}",
+      "$value": "{spacing.horizontal.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -189,14 +179,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inline-md"
+            "WEB": "var(--eds-container-gap-horizontal)"
           }
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{spacing.stack.md}",
+      "$value": "{spacing.vertical.md}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -205,16 +195,16 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-stack-md"
+            "WEB": "var(--eds-container-gap-vertical)"
           }
         }
       }
     }
   },
   "Page": {
-    "Horisontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Page.Spacing.Inline}",
+      "$value": "{page-space.horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -223,14 +213,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-xl-inline"
+            "WEB": "var(--eds-page-space-horizontal)"
           }
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Page.Spacing.Stack}",
+      "$value": "{page-space.vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -239,14 +229,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inset-xl-stack-${space-proportions}"
+            "WEB": "var(--eds-page-space-vertical)"
           }
         }
       }
     },
-    "Horisontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{spacing.inline.xl}",
+      "$value": "{spacing.horizontal.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -255,14 +245,14 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-inline-xl"
+            "WEB": "var(--eds-page-gap-horizontal)"
           }
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{spacing.stack.xl}",
+      "$value": "{spacing.vertical.xl}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -271,16 +261,16 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "--eds-spacing-stack-xl"
+            "WEB": "var(--eds-page-gap-vertical)"
           }
         }
       }
     }
   },
   "Generic": {
-    "Horisontal padding": {
+    "Space horizontal": {
       "$type": "number",
-      "$value": "{Padding horizontal}",
+      "$value": "{generic-space-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -288,15 +278,13 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-inline-${horisontal-space}"
-          }
+          "codeSyntax": {}
         }
       }
     },
-    "Vertical padding": {
+    "Space vertical": {
       "$type": "number",
-      "$value": "{Padding vertical}",
+      "$value": "{generic-space-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -304,15 +292,13 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-stack-${vertical-space}"
-          }
+          "codeSyntax": {}
         }
       }
     },
-    "Horisontal gap": {
+    "Gap horizontal": {
       "$type": "number",
-      "$value": "{Gap horizontal}",
+      "$value": "{generic-gap-horizontal}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -320,15 +306,13 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-inline-${horisontal-gap}"
-          }
+          "codeSyntax": {}
         }
       }
     },
-    "Vertical gap": {
+    "Gap vertical": {
       "$type": "number",
-      "$value": "{Gap vertical}",
+      "$value": "{generic-gap-vertical}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -336,9 +320,7 @@
           "scopes": [
             "GAP"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-stack-${vertical-gap}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -352,9 +334,7 @@
           "scopes": [
             "CORNER_RADIUS"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-spacing-border-radius-${border-radius}"
-          }
+          "codeSyntax": {}
         }
       }
     },
@@ -368,17 +348,15 @@
           "scopes": [
             "STROKE_FLOAT"
           ],
-          "codeSyntax": {
-            "WEB": "--eds-sizing-stroke-${stroke}"
-          }
+          "codeSyntax": {}
         }
       }
     }
   },
   "Typography": {
-    "Font famiily": {
+    "Font family": {
       "$type": "string",
-      "$value": "{Font family}",
+      "$value": "{typography.font-family}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -387,14 +365,14 @@
             "FONT_FAMILY"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-font-family"
+            "WEB": "var(--eds-typography-font-family)"
           }
         }
       }
     },
     "Font size": {
       "$type": "number",
-      "$value": "{font-size}",
+      "$value": "{typography.font-size}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -403,14 +381,14 @@
             "FONT_SIZE"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-font-size"
+            "WEB": "var(--eds-typography-font-size)"
           }
         }
       }
     },
-    "Lineheight": {
+    "Line height": {
       "$type": "number",
-      "$value": "{Lineheight}",
+      "$value": "{typography.line-height}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -419,14 +397,14 @@
             "LINE_HEIGHT"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-line-height-${lineheight}"
+            "WEB": "var(--eds-typography-line-height)"
           }
         }
       }
     },
-    "Letter spacing": {
+    "Tracking": {
       "$type": "number",
-      "$value": "{Letter spacing}",
+      "$value": "{typography.tracking}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -435,14 +413,14 @@
             "LETTER_SPACING"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-tracking-${letter-spacing}"
+            "WEB": "var(--eds-typography-tracking)"
           }
         }
       }
     },
     "Baseline adjust top": {
       "$type": "number",
-      "$value": "{Baseline.top}",
+      "$value": "{baseline.top}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -456,7 +434,7 @@
     },
     "Baseline adjust bottom": {
       "$type": "number",
-      "$value": "{Baseline.bottom}",
+      "$value": "{baseline.bottom}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -470,7 +448,7 @@
     },
     "Font weight": {
       "$type": "number",
-      "$value": "{Font Weight}",
+      "$value": "{typography.font-weight}",
       "$description": "",
       "$extensions": {
         "com.figma": {
@@ -479,7 +457,7 @@
             "FONT_STYLE"
           ],
           "codeSyntax": {
-            "WEB": "--eds-typography-${font-family}-${font-size}-font-weight-${font-weight}}"
+            "WEB": "var(--eds-typography-font-weight)"
           }
         }
       }

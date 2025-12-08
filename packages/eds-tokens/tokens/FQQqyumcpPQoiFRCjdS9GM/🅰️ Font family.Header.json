@@ -13,20 +13,24 @@
       }
     }
   },
-  "Font family": {
-    "$type": "string",
-    "$value": "{typography.header.font-family}",
-    "$description": "",
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true,
-        "scopes": [
-          "ALL_SCOPES"
-        ],
-        "codeSyntax": {}
+  "typography": {
+    "font-family": {
+      "$type": "string",
+      "$value": "{typography.header.font-family}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {}
+        }
       }
-    },
-    "XS": {
+    }
+  },
+  "font-family-size": {
+    "xs": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.xs.font-size}",
@@ -147,9 +151,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.xs.lineheight-default}",
+        "$value": "{typography.header.xs.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -159,9 +163,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.xs.lineheight-squished}",
+        "$value": "{typography.header.xs.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -172,7 +176,7 @@
         }
       }
     },
-    "SM": {
+    "sm": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.sm.font-size}",
@@ -293,9 +297,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.sm.lineheight-default}",
+        "$value": "{typography.header.sm.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -305,9 +309,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.sm.lineheight-squished}",
+        "$value": "{typography.header.sm.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -318,7 +322,7 @@
         }
       }
     },
-    "MD": {
+    "md": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.md.font-size}",
@@ -439,9 +443,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.md.lineheight-default}",
+        "$value": "{typography.header.md.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -451,9 +455,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.md.lineheight-squished}",
+        "$value": "{typography.header.md.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -464,7 +468,7 @@
         }
       }
     },
-    "LG": {
+    "lg": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.lg.font-size}",
@@ -585,9 +589,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.lg.lineheight-default}",
+        "$value": "{typography.header.lg.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -597,9 +601,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.lg.lineheight-squished}",
+        "$value": "{typography.header.lg.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -610,7 +614,7 @@
         }
       }
     },
-    "XL": {
+    "xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.xl.font-size}",
@@ -731,9 +735,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.xl.lineheight-default}",
+        "$value": "{typography.header.xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -743,9 +747,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.xl.lineheight-squished}",
+        "$value": "{typography.header.xl.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -756,7 +760,7 @@
         }
       }
     },
-    "2XL": {
+    "2xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.2xl.font-size}",
@@ -877,9 +881,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.2xl.lineheight-default}",
+        "$value": "{typography.header.2xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -889,9 +893,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.2xl.lineheight-squished}",
+        "$value": "{typography.header.2xl.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -902,7 +906,7 @@
         }
       }
     },
-    "3XL": {
+    "3xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.3xl.font-size}",
@@ -1023,9 +1027,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.3xl.lineheight-default}",
+        "$value": "{typography.header.3xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1035,9 +1039,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.3xl.lineheight-default}",
+        "$value": "{typography.header.3xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1048,7 +1052,7 @@
         }
       }
     },
-    "4XL": {
+    "4xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.4xl.font-size}",
@@ -1169,9 +1173,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.4xl.lineheight-default}",
+        "$value": "{typography.header.4xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1181,9 +1185,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.4xl.lineheight-squished}",
+        "$value": "{typography.header.4xl.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1194,7 +1198,7 @@
         }
       }
     },
-    "5XL": {
+    "5xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.5xl.font-size}",
@@ -1315,9 +1319,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.5xl.lineheight-default}",
+        "$value": "{typography.header.5xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1327,9 +1331,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.5xl.lineheight-squished}",
+        "$value": "{typography.header.5xl.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1340,7 +1344,7 @@
         }
       }
     },
-    "6XL": {
+    "6xl": {
       "font-size": {
         "$type": "number",
         "$value": "{typography.header.6xl.font-size}",
@@ -1461,9 +1465,9 @@
           }
         }
       },
-      "lineheight-default": {
+      "line-height-default": {
         "$type": "number",
-        "$value": "{typography.header.6xl.lineheight-default}",
+        "$value": "{typography.header.6xl.line-height-default}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1473,9 +1477,9 @@
           }
         }
       },
-      "lineheight-squished": {
+      "line-height-squished": {
         "$type": "number",
-        "$value": "{typography.header.6xl.lineheight-squished}",
+        "$value": "{typography.header.6xl.line-height-squished}",
         "$description": "",
         "$extensions": {
           "com.figma": {

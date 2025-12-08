@@ -621,7 +621,7 @@
     "border-radius": {
       "rounded": {
         "$type": "number",
-        "$value": "{spacing.25}",
+        "$value": "{primitives.spacing.25}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -658,9 +658,9 @@
     },
     "inset": {
       "xs": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.xs}",
+          "$value": "{spacing.horizontal.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -670,9 +670,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.2xs}",
+          "$value": "{spacing.vertical.2xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -682,9 +682,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.xs}",
+          "$value": "{spacing.vertical.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -694,9 +694,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.vertical.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -708,9 +708,9 @@
         }
       },
       "sm": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.sm}",
+          "$value": "{spacing.horizontal.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -720,9 +720,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.xs}",
+          "$value": "{spacing.vertical.xs}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -732,9 +732,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.vertical.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -744,9 +744,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.md}",
+          "$value": "{spacing.vertical.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -758,9 +758,9 @@
         }
       },
       "md": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.md}",
+          "$value": "{spacing.horizontal.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -770,9 +770,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.sm}",
+          "$value": "{spacing.vertical.sm}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -782,9 +782,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.md}",
+          "$value": "{spacing.vertical.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -794,9 +794,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.lg}",
+          "$value": "{spacing.vertical.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -808,9 +808,9 @@
         }
       },
       "lg": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.lg}",
+          "$value": "{spacing.horizontal.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -820,9 +820,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.md}",
+          "$value": "{spacing.vertical.md}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -832,9 +832,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.lg}",
+          "$value": "{spacing.vertical.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -844,9 +844,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.xl}",
+          "$value": "{spacing.vertical.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -858,9 +858,9 @@
         }
       },
       "xl": {
-        "inline": {
+        "horizontal": {
           "$type": "number",
-          "$value": "{spacing.inline.xl}",
+          "$value": "{spacing.horizontal.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -870,9 +870,9 @@
             }
           }
         },
-        "stack-squished": {
+        "vertical-squished": {
           "$type": "number",
-          "$value": "{spacing.stack.lg}",
+          "$value": "{spacing.vertical.lg}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -882,9 +882,9 @@
             }
           }
         },
-        "stack-squared": {
+        "vertical-squared": {
           "$type": "number",
-          "$value": "{spacing.stack.xl}",
+          "$value": "{spacing.vertical.xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -894,9 +894,9 @@
             }
           }
         },
-        "stack-stretched": {
+        "vertical-stretched": {
           "$type": "number",
-          "$value": "{spacing.stack.2xl}",
+          "$value": "{spacing.vertical.2xl}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -908,7 +908,7 @@
         }
       }
     },
-    "inline": {
+    "horizontal": {
       "4xs": {
         "$type": "number",
         "$value": 2,
@@ -1030,7 +1030,7 @@
         }
       }
     },
-    "stack": {
+    "vertical": {
       "4xs": {
         "$type": "number",
         "$value": 2,
@@ -1172,7 +1172,7 @@
       "xs": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.font-size}",
+          "$value": "{primitives.type-scale.inter.200.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1220,7 +1220,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.200.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1232,7 +1232,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.200.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1244,7 +1244,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.200.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1256,7 +1256,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.200.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1268,7 +1268,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.200.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1280,7 +1280,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.200.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.200.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1290,9 +1290,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.200.default}",
+          "$value": "{primitives.lineheight-scale.200.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1302,9 +1302,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.200.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.200.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1318,7 +1318,7 @@
       "sm": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.font-size}",
+          "$value": "{primitives.type-scale.inter.300.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1366,7 +1366,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.300.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1378,7 +1378,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.300.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1390,7 +1390,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.300.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1402,7 +1402,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.300.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1414,7 +1414,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.300.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1426,7 +1426,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.300.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.300.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1436,9 +1436,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.300.default}",
+          "$value": "{primitives.lineheight-scale.300.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1448,9 +1448,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.300.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.300.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1463,7 +1463,7 @@
       },
       "font-family": {
         "$type": "string",
-        "$value": "{font-family.inter}",
+        "$value": "{primitives.font-family.inter}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -1478,7 +1478,7 @@
       "md": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.font-size}",
+          "$value": "{primitives.type-scale.inter.400.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1526,7 +1526,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.400.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1538,7 +1538,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.400.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1550,7 +1550,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.400.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1562,7 +1562,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.400.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1574,7 +1574,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.400.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1586,7 +1586,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.400.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.400.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1596,9 +1596,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.400.default}",
+          "$value": "{primitives.lineheight-scale.400.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1608,9 +1608,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.400.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.400.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1624,7 +1624,7 @@
       "lg": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.500.font-size}",
+          "$value": "{primitives.type-scale.inter.500.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1672,7 +1672,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.500.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1684,7 +1684,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.500.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1696,7 +1696,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.500.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1708,7 +1708,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.500.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1720,7 +1720,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.500.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1732,7 +1732,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.500.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1742,9 +1742,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.500.default}",
+          "$value": "{primitives.lineheight-scale.500.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1754,9 +1754,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.500.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.500.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1770,7 +1770,7 @@
       "xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.font-size}",
+          "$value": "{primitives.type-scale.inter.600.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1818,7 +1818,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.600.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1830,7 +1830,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.600.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1842,7 +1842,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.600.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1854,7 +1854,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.600.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1866,7 +1866,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.600.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1878,7 +1878,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.600.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.600.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1888,9 +1888,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.600.default}",
+          "$value": "{primitives.lineheight-scale.600.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1900,9 +1900,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.600.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.600.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1916,7 +1916,7 @@
       "2xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.font-size}",
+          "$value": "{primitives.type-scale.inter.700.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1964,7 +1964,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.700.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1976,7 +1976,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.700.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -1988,7 +1988,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.700.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2000,7 +2000,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.700.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2012,7 +2012,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.700.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2024,7 +2024,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.700.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.700.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2034,9 +2034,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.700.default}",
+          "$value": "{primitives.lineheight-scale.700.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2046,9 +2046,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.700.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.700.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2062,7 +2062,7 @@
       "3xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.font-size}",
+          "$value": "{primitives.type-scale.inter.800.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2110,7 +2110,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.800.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2122,7 +2122,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.800.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2134,7 +2134,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.800.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2146,7 +2146,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.800.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2158,7 +2158,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.800.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2170,7 +2170,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.800.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.800.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2180,9 +2180,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.800.default}",
+          "$value": "{primitives.lineheight-scale.800.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2192,9 +2192,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.800.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.800.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2208,7 +2208,7 @@
       "4xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.font-size}",
+          "$value": "{primitives.type-scale.inter.900.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2256,7 +2256,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.900.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2268,7 +2268,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.900.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2280,7 +2280,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.900.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2292,7 +2292,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.900.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2304,7 +2304,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.900.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2316,7 +2316,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.900.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.900.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2326,9 +2326,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.900.default}",
+          "$value": "{primitives.lineheight-scale.900.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2338,9 +2338,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.900.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.900.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2354,7 +2354,7 @@
       "5xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.font-size}",
+          "$value": "{primitives.type-scale.inter.1000.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2402,7 +2402,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.1000.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2414,7 +2414,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.1000.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2426,7 +2426,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.1000.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2438,7 +2438,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.1000.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2450,7 +2450,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.1000.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2462,7 +2462,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.1000.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.1000.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2472,9 +2472,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.1000.default}",
+          "$value": "{primitives.lineheight-scale.1000.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2484,9 +2484,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.1000.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.1000.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2500,7 +2500,7 @@
       "6xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.font-size}",
+          "$value": "{primitives.type-scale.inter.1100.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2548,7 +2548,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.tracking-tight}",
+          "$value": "{primitives.type-scale.inter.1100.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2560,7 +2560,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.tracking-normal}",
+          "$value": "{primitives.type-scale.inter.1100.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2572,7 +2572,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.tracking-wide}",
+          "$value": "{primitives.type-scale.inter.1100.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2584,7 +2584,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.font-weight-lighter}",
+          "$value": "{primitives.type-scale.inter.1100.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2596,7 +2596,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.font-weight-normal}",
+          "$value": "{primitives.type-scale.inter.1100.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2608,7 +2608,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.inter.1100.font-weight-bolder}",
+          "$value": "{primitives.type-scale.inter.1100.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2618,9 +2618,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.1100.default}",
+          "$value": "{primitives.lineheight-scale.1100.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2630,9 +2630,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.1100.squished}",
+          "$value": "{primitives.lineheight-scale.1100.squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2645,10 +2645,24 @@
       }
     },
     "header": {
+      "font-family": {
+        "$type": "string",
+        "$value": "{primitives.font-family.equinor}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
       "xs": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.font-size}",
+          "$value": "{primitives.type-scale.equinor.200.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2696,7 +2710,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.200.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2708,7 +2722,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.200.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2720,7 +2734,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.200.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2732,7 +2746,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.200.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2744,7 +2758,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.200.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2756,7 +2770,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.200.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.200.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2766,9 +2780,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.200.default}",
+          "$value": "{primitives.lineheight-scale.200.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2778,9 +2792,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.200.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.200.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2788,27 +2802,13 @@
               "scopes": [],
               "codeSyntax": {}
             }
-          }
-        }
-      },
-      "font-family": {
-        "$type": "string",
-        "$value": "{font-family.equinor}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {}
           }
         }
       },
       "sm": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.font-size}",
+          "$value": "{primitives.type-scale.equinor.300.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2856,7 +2856,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.300.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2868,7 +2868,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.300.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2880,7 +2880,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.300.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2892,7 +2892,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.300.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2904,7 +2904,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.300.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2916,7 +2916,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.300.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.300.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2926,9 +2926,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.300.default}",
+          "$value": "{primitives.lineheight-scale.300.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2938,9 +2938,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.300.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.300.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -2954,7 +2954,7 @@
       "md": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.font-size}",
+          "$value": "{primitives.type-scale.equinor.400.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3002,7 +3002,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.400.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3014,7 +3014,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.400.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3026,7 +3026,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.400.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3038,7 +3038,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.400.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3050,7 +3050,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.400.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3062,7 +3062,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.400.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.400.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3072,9 +3072,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.400.default}",
+          "$value": "{primitives.lineheight-scale.400.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3084,9 +3084,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.400.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.400.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3100,7 +3100,7 @@
       "lg": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-size}",
+          "$value": "{primitives.type-scale.equinor.500.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3148,7 +3148,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.500.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3160,7 +3160,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.500.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3172,7 +3172,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.500.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3184,7 +3184,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.500.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3196,7 +3196,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.500.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3208,7 +3208,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.500.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.500.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3218,9 +3218,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.500.default}",
+          "$value": "{primitives.lineheight-scale.500.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3230,9 +3230,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.500.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.500.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3246,7 +3246,7 @@
       "xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.font-size}",
+          "$value": "{primitives.type-scale.equinor.600.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3294,7 +3294,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.600.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3306,7 +3306,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.600.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3318,7 +3318,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.600.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3330,7 +3330,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.600.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3342,7 +3342,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.600.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3354,7 +3354,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.600.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.600.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3364,9 +3364,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.600.default}",
+          "$value": "{primitives.lineheight-scale.600.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3376,9 +3376,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.600.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.600.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3392,7 +3392,7 @@
       "2xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.font-size}",
+          "$value": "{primitives.type-scale.equinor.700.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3440,7 +3440,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.700.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3452,7 +3452,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.700.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3464,7 +3464,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.700.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3476,7 +3476,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.700.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3488,7 +3488,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.700.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3500,7 +3500,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.700.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.700.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3510,9 +3510,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.700.default}",
+          "$value": "{primitives.lineheight-scale.700.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3522,9 +3522,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.700.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.700.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3538,7 +3538,7 @@
       "3xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.font-size}",
+          "$value": "{primitives.type-scale.equinor.800.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3586,7 +3586,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.800.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3598,7 +3598,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.800.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3610,7 +3610,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.800.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3622,7 +3622,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.800.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3634,7 +3634,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.800.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3646,7 +3646,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.800.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.800.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3656,9 +3656,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.800.default}",
+          "$value": "{primitives.lineheight-scale.800.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3668,9 +3668,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.800.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.800.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3684,7 +3684,7 @@
       "4xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.font-size}",
+          "$value": "{primitives.type-scale.equinor.900.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3732,7 +3732,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.900.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3744,7 +3744,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.900.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3756,7 +3756,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.900.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3768,7 +3768,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.900.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3780,7 +3780,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.900.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3792,7 +3792,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.900.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.900.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3802,9 +3802,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.900.default}",
+          "$value": "{primitives.lineheight-scale.900.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3814,9 +3814,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.900.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.900.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3830,7 +3830,7 @@
       "5xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.font-size}",
+          "$value": "{primitives.type-scale.equinor.1000.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3878,7 +3878,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.1000.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3890,7 +3890,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.1000.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3902,7 +3902,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.1000.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3914,7 +3914,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.1000.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3926,7 +3926,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.1000.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3938,7 +3938,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1000.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.1000.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3948,9 +3948,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.1000.default}",
+          "$value": "{primitives.lineheight-scale.1000.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3960,9 +3960,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.1000.lineheight-squished}",
+          "$value": "{primitives.lineheight-scale.1000.lineheight-squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -3976,7 +3976,7 @@
       "6xl": {
         "font-size": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.font-size}",
+          "$value": "{primitives.type-scale.equinor.1100.font-size}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4024,7 +4024,7 @@
         },
         "tracking-tight": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.tracking-tight}",
+          "$value": "{primitives.type-scale.equinor.1100.tracking-tight}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4036,7 +4036,7 @@
         },
         "tracking-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.tracking-normal}",
+          "$value": "{primitives.type-scale.equinor.1100.tracking-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4048,7 +4048,7 @@
         },
         "tracking-wide": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.tracking-wide}",
+          "$value": "{primitives.type-scale.equinor.1100.tracking-wide}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4060,7 +4060,7 @@
         },
         "font-weight-lighter": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.font-weight-lighter}",
+          "$value": "{primitives.type-scale.equinor.1100.font-weight-lighter}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4072,7 +4072,7 @@
         },
         "font-weight-normal": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.font-weight-normal}",
+          "$value": "{primitives.type-scale.equinor.1100.font-weight-normal}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4084,7 +4084,7 @@
         },
         "font-weight-bolder": {
           "$type": "number",
-          "$value": "{type-scale.equinor.1100.font-weight-bolder}",
+          "$value": "{primitives.type-scale.equinor.1100.font-weight-bolder}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4094,9 +4094,9 @@
             }
           }
         },
-        "lineheight-default": {
+        "line-height-default": {
           "$type": "number",
-          "$value": "{lineheight-scale.1100.default}",
+          "$value": "{primitives.lineheight-scale.1100.default}",
           "$description": "",
           "$extensions": {
             "com.figma": {
@@ -4106,9 +4106,9 @@
             }
           }
         },
-        "lineheight-squished": {
+        "line-height-squished": {
           "$type": "number",
-          "$value": "{lineheight-scale.1100.squished}",
+          "$value": "{primitives.lineheight-scale.1100.squished}",
           "$description": "",
           "$extensions": {
             "com.figma": {

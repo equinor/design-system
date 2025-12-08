@@ -1,28 +1,26 @@
 {
-  "Selectable": {
-    "Spacing": {
-      "Inline": {
-        "$type": "number",
-        "$value": "{Spacing proportions.MD.Inline}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [],
-            "codeSyntax": {}
-          }
+  "selectable-space": {
+    "horizontal": {
+      "$type": "number",
+      "$value": "{spacing-proportions.md.horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
         }
-      },
-      "Stack": {
-        "$type": "number",
-        "$value": "{Spacing proportions.MD.Stack}",
-        "$description": "",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [],
-            "codeSyntax": {}
-          }
+      }
+    },
+    "vertical": {
+      "$type": "number",
+      "$value": "{spacing-proportions.md.vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
         }
       }
     }
