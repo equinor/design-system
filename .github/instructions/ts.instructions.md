@@ -2,31 +2,81 @@
 applyTo: '**/*.ts,**/*.tsx'
 ---
 
-# Project coding standards for TypeScript
+# TypeScript Guidelines
 
-## TypeScript Guidelines
+## Type Definitions
 
-- Follow functional programming principles where possible
-- Use interfaces for data structures and type definitions
-- Prefer immutable data (const, readonly)
-- Use optional chaining (?.) and nullish coalescing (??) operators
-- Use explicit typing rather than inference when appropriate
-- Extend existing type definitions where possible
-- Use union types for props with a limited set of options
-- Avoid using `any` unless absolutely necessary
-- Create reusable type definitions for common patterns
+- **Interfaces over types** for object structures
+- **Union types** for constrained options (e.g., `'primary' | 'secondary'` instead of `string`)
+- **Explicit typing** where clarity matters; inference for obvious cases
+- **Immutable data** (const, readonly properties)
+- **Avoid `any`** unless impossible; use `unknown` if needed
+- **Extend definitions** rather than duplicating
 
-## Testing Guidelines
+```typescript
+// ✅ Good
+interface ButtonProps {
+  variant: 'primary' | 'secondary'
+  disabled?: boolean
+}
 
-- Use Jest and Testing Library for component tests
-- Write descriptive test names that explain the expected behavior
-- Use consistent formatting within test blocks:
-  - No extra blank lines between render calls and assertions
-  - Group related assertions together without blank lines
-  - Include one blank line between test cases
-- Use Testing Library best practices:
-  - Test from the user's perspective
-  - Query elements by role, text, or test ID, not by class or tag
-  - Use `getBy*` for elements that should be in the document
-  - Use `queryBy*` for elements that may not be in the document
-- Format test files with the same Prettier rules as source files
+const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {}
+
+// ❌ Avoid
+type ButtonVariant = string
+const handleClick = (event: any) => {}
+```
+
+## Functional Programming
+
+- Pure functions where possible
+- Avoid state mutations
+- Optional chaining `?.` and nullish coalescing `??`
+- Prefer `const` over `let`
+
+## Testing
+
+**Testing Library priorities:**
+
+1. Query by role: `getByRole('button', { name: /submit/i })`
+2. Query by accessible name: `getByText('Submit')`
+3. Query by label: `getByLabelText('Username')`
+4. Last resort: `getByTestId('submit-btn')`
+
+**Test structure:**
+
+```typescript
+test('Button displays loading state when disabled', () => {
+  render(<Button disabled>Loading</Button>);
+  const button = screen.getByRole('button');
+  expect(button).toBeDisabled();
+});
+```
+
+**Formatting rules:**
+
+- No blank lines between render and assertions
+- Group related assertions together
+- One blank line between test cases
+- Descriptive test names explaining behavior
+
+**Coverage:**
+
+- User interactions (clicks, keyboard, focus)
+- Accessibility (ARIA, keyboard navigation)
+- Edge cases and error states
+- Props variations
+
+**Anti-patterns:**
+
+```typescript
+// ❌ Implementation testing
+test('state updates', () => {
+  // testing internal state, not user behavior
+})
+
+// ✅ Behavior testing
+test('Button shows success message when form is submitted', () => {
+  // testing what user sees
+})
+```
