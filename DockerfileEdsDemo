@@ -16,12 +16,10 @@ COPY . ./
 # Install dependencies first
 RUN pnpm install --frozen-lockfile
 
-# Build workspace dependencies in correct order, then build the app
+# Build only required workspace dependencies, then build the app
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
     pnpm --filter @equinor/eds-tokens run build && \
-    pnpm --filter @equinor/eds-utils run build && \
-    pnpm --filter @equinor/eds-icons run build && \
     pnpm --filter @equinor/eds-core-react run build && \
     pnpm --filter eds-demo run build
 
@@ -50,10 +48,9 @@ COPY --chown="$USER":"$USER" packages/eds-core-react/package.json ./packages/eds
 RUN pnpm install --prod --frozen-lockfile
 
 # Copy built files
-COPY --chown="$USER":"$USER" --from=build /apps/eds-demo/.next ./apps/eds-demo/.next
-COPY --chown="$USER":"$USER" --from=build /apps/eds-demo/public ./apps/eds-demo/public
-COPY --chown="$USER":"$USER" --from=build /packages/eds-tokens/dist ./packages/eds-tokens/dist
-COPY --chown="$USER":"$USER" --from=build /packages/eds-core-react/dist ./packages/eds-core-react/dist
+COPY --chown="$USER":"$USER" --from=build /app/apps/eds-demo/.next ./apps/eds-demo/.next
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-core-react/dist ./packages/eds-core-react/dist
 
 USER "$UID"
 
