@@ -63,7 +63,7 @@
     }
   },
   "onCreateCommand": "npm install -g pnpm gitmoji-cli && pnpm install && pnpm recursive install --filter ./packages",
-  // Install additional dependencies for axe linter, especially for devcontainers where the host is ARM-based (e.g., Macbook M1+).
+  // Install additional dependencies for axe linter, especially for devcontainers where the host is ARM-based (e.g., MacBook M1+).
   "postCreateCommand": "sudo dpkg --add-architecture amd64 && sudo apt-get update && sudo apt-get install -y libc6:amd64 libstdc++6:amd64 && sudo ln -sf /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2",
   "remoteUser": "node",
   "features": {
