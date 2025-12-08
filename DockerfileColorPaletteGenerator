@@ -50,7 +50,6 @@ RUN pnpm install --prod --frozen-lockfile
 
 # Copy built files
 COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator/.next ./apps/eds-color-palette-generator/.next
-COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator/public ./apps/eds-color-palette-generator/public
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tailwind/dist ./packages/eds-tailwind/dist
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-utils/dist ./packages/eds-utils/dist
