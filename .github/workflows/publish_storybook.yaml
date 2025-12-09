@@ -7,16 +7,9 @@ on:
         required: false
         type: choice
         options:
-          - development
           - production
-        default: 'development'
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/eds-core-react/**'
-      - 'packages/eds-tokens/**'
-      - 'packages/eds-icons/**'
+          - development
+        default: 'production'
 permissions:
   id-token: write
 env:
