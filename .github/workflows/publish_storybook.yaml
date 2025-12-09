@@ -7,9 +7,9 @@ on:
         required: false
         type: choice
         options:
-          - development
           - production
-        default: 'development'
+          - development
+        default: 'production'
   push:
     branches:
       - main
@@ -177,9 +177,12 @@ jobs:
 
   purge-cdn:
     needs: [publish-storybook]
+    # Only purge CDN for production. On push to main, environment is undefined,
+    # which correctly skips this job since dev storybook has no CDN.
+    if: github.event.inputs.environment == 'production'
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
-      environment: ${{ github.event.inputs.environment || 'development' }}
+      environment: production
       endpoint: storybook

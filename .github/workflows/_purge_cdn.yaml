@@ -8,19 +8,17 @@ on:
       endpoint:
         type: string
         default: artefacts
-# Because of limitations in how to set environment context when calling reusable workflows,
-# we are using ENV variables directly in this one. Not pretty, but it works.
-env:
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  AZURE_CDN_PROFILE_NAME: ${{ vars.AZURE_CDN_PROFILE_NAME }}
-  AZURE_CDN_ENDPOINT_NAME: ${{ vars.AZURE_CDN_ENDPOINT_NAME }}
-  AZURE_STORYBOOK_ENDPOINT_NAME: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
-  AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
 jobs:
   purge:
     name: Purge the cdn to refresh cache
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      AZURE_CDN_PROFILE_NAME: ${{ vars.AZURE_CDN_PROFILE_NAME }}
+      AZURE_CDN_ENDPOINT_NAME: ${{ vars.AZURE_CDN_ENDPOINT_NAME }}
+      AZURE_STORYBOOK_ENDPOINT_NAME: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
+      AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
     steps:
       - name: Az CLI login 🔑 # Using federated credential
         uses: azure/login@v1
