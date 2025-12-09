@@ -1,10 +1,72 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: design-system
+  name: design-system-packages
+  description: Equinor Design System (EDS) package library
   annotations:
     github.com/project-slug: equinor/design-system
 spec:
-  type: other
-  lifecycle: unknown
+  type: library
+  lifecycle: production
   owner: eds-core
+  system: EquinorDesignSystem
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: design-system-docs
+  description: Equinor Design System (EDS) is the official design system of Equinor
+  annotations:
+    github.com/project-slug: equinor/design-system
+spec:
+  type: website
+  lifecycle: production
+  owner: eds-core
+  system: EquinorDesignSystem
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: eds-demo
+  description: EDS Component showcase and examples using Next.js
+  annotations:
+    github.com/project-slug: equinor/design-system
+spec:
+  type: website
+  lifecycle: production
+  owner: eds-core
+  system: EquinorDesignSystem
+  
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: eds-color-palette-generator
+  description: EDS Tool for generating accessible color palettes
+  annotations:
+    github.com/project-slug: equinor/design-system
+spec:
+  type: tool
+  lifecycle: production
+  owner: eds-core
+  system: EquinorDesignSystem
+
+ ---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: eds-color-palette-generator
+  description: EDS Tool for generating accessible color palettes
+  annotations:
+    github.com/project-slug: equinor/design-system
+spec:
+  type: tool
+  lifecycle: production
+  owner: eds-core
+  system: EquinorDesignSystem
