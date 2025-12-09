@@ -3105,7 +3105,7 @@ export const aerial_drone: IconData = {
       prefix: 'eds',
       height: '24',
       width: '24',
-      svgPathData: 'M19 5a1 1 0 1 0 2 0h1a1 1 0 1 0 0-2h-1a1 1 0 1 0-2 0H5a1 1 0 0 0-2 0H2a1 1 0 0 0 0 2h1a1 1 0 0 0 2 0h2.204L9.03 8.032A2 2 0 0 0 10.743 9h2.836a2 2 0 0 0 1.761-1.053L16.925 5zM9.539 5h5.115l-1.075 2h-2.836zm6.42 4.96c-2.234 2.234-5.684 2.234-7.918 0l-1.415 1.414c3.016 3.016 7.732 3.016 10.748 0zM5.375 12.626c3.734 3.734 9.518 3.734 13.252 0l1.414 1.414c-4.515 4.516-11.565 4.516-16.08 0zm15.919 2.667c-5.235 5.234-13.351 5.234-18.586 0l-1.414 1.414c6.015 6.016 15.399 6.016 21.414 0z',
+      svgPathData: 'M22.707 16.707c-6.015 6.016-15.399 6.015-21.414 0l1.414-1.414c5.234 5.234 13.352 5.234 18.586 0zM20.04 14.04c-4.515 4.515-11.565 4.515-16.08 0l1.414-1.414c3.734 3.734 9.518 3.734 13.252 0zm-2.666-2.666c-3.015 3.015-7.732 3.015-10.747 0L8.041 9.96c2.234 2.234 5.685 2.234 7.919 0zM20 2a1 1 0 0 1 1 1h1a1 1 0 1 1 0 2h-1a1 1 0 1 1-2 0h-2.075L15.34 7.947A2 2 0 0 1 13.58 9h-2.837a2 2 0 0 1-1.713-.969L7.204 5H5a1 1 0 0 1-2 0H2a1 1 0 0 1 0-2h1a1 1 0 0 1 2 0h14a1 1 0 0 1 1-1m-9.257 5h2.836l1.075-2H9.54z',
       
     }
      
@@ -5857,7 +5857,7 @@ export const play: IconData = {
       prefix: 'eds',
       height: '24',
       width: '24',
-      svgPathData: 'm17.5 12-11 7V5zm-3.73 0L8.5 8.64v6.72z',
+      svgPathData: 'M19 12 8 19V5zm-3.73 0L10 8.64v6.72z',
       
     }
      
@@ -6050,12 +6050,30 @@ export const unfold_more: IconData = {
       
     }
      
+export const unfold_more_horizontal: IconData = {
+      name: 'unfold_more_horizontal',
+      prefix: 'eds',
+      height: '24',
+      width: '24',
+      svgPathData: 'M7.59 16.59 3 12l4.59-4.58L9 8.83 5.83 12 9 15.17zm8.82-.01L15 15.17 18.17 12 15 8.83l1.41-1.42L21 12z',
+      
+    }
+     
 export const unfold_less: IconData = {
       name: 'unfold_less',
       prefix: 'eds',
       height: '24',
       width: '24',
       svgPathData: 'm15.17 4 1.42 1.41L12 10 7.41 5.41 8.83 4 12 7.17zM8.83 20l-1.42-1.41L12 14l4.58 4.59L15.17 20 12 16.83z',
+      
+    }
+     
+export const unfold_less_horizontal: IconData = {
+      name: 'unfold_less_horizontal',
+      prefix: 'eds',
+      height: '24',
+      width: '24',
+      svgPathData: 'M5.41 16.58 4 15.17 7.17 12 4 8.83l1.41-1.42L10 12zm13.18.01L14 12l4.59-4.59L20 8.83 16.83 12 20 15.17z',
       
     }
      
