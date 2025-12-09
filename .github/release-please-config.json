@@ -12,8 +12,7 @@
     "packages/eds-core-react/src/components/next": {
       "release-type": "simple",
       "component": "eds-core-react-next",
-      "prerelease-type": "beta",
-      "include-component-in-tag": false
+      "prerelease-type": "beta"
     },
     "packages/eds-data-grid-react": {
       "release-type": "node",
