@@ -6,12 +6,15 @@
  *
  * Install: npm install @equinor/eds-core-react@beta
  *
+ * CSS is auto-injected. For SSR or manual control, import separately:
+ * import '@equinor/eds-core-react/next/index.css'
+ *
  * @packageDocumentation
  */
 'use client'
 
-// Import global CSS for next components
-import './index.css'
+// Import global CSS for next components (auto-injected)
+import './components/next/index.css'
 
 // Re-export all next components
 export * from './components/next'
