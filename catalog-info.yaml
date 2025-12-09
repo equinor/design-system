@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: design-system
+  annotations:
+    github.com/project-slug: equinor/design-system
+spec:
+  type: other
+  lifecycle: unknown
+  owner: eds-core
