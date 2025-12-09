@@ -1,5 +1,5 @@
-/* Styles for Next EDS 2.0 Components (vanilla CSS) */
-
+/* EDS 2.0 Next Components - Global CSS */
+/* This file imports all CSS for next/ components */
 @layer eds-components {
   /* Container - use neutral appearance by default */
   .eds-input {
@@ -106,7 +106,7 @@
   }
 
   /* Text with neutral appearance should use neutral text color */
-  .eds-adornment [data-color-appearance="neutral"] {
+  .eds-adornment [data-color-appearance='neutral'] {
     color: var(--eds-color-text-subtle);
   }
 
