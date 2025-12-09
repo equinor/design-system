@@ -55,18 +55,3 @@ spec:
   lifecycle: production
   owner: eds-core
   system: EquinorDesignSystem
-
----
-
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: eds-color-palette-generator
-  description: EDS Tool for generating accessible color palettes
-  annotations:
-    github.com/project-slug: equinor/design-system
-spec:
-  type: tool
-  lifecycle: production
-  owner: eds-core
-  system: EquinorDesignSystem
