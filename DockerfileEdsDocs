@@ -1,5 +1,5 @@
-# Use specific Node.js version for better reproducibility
-FROM docker.io/node:22.12.0-alpine AS build
+# Use Node.js 22.12 with Alpine - allows patch updates while maintaining reproducibility
+FROM docker.io/node:22.12-alpine AS build
 
 LABEL org.opencontainers.image.title="EDS Documentation Site"
 LABEL org.opencontainers.image.description="Equinor Design System Documentation Site"
