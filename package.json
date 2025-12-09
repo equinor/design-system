@@ -38,6 +38,7 @@
     "docu:clear": "pnpm --filter design-system-docs run clear",
     "docu:build": "pnpm run extract-prerequisites && pnpm --filter ./apps/design-system-docs run build",
     "docu:start": "pnpm --filter ./apps/design-system-docs run start --host 0.0.0.0",
+    "docu:serve": "pnpm --filter ./apps/design-system-docs run serve",
     "palette:dev": "pnpm --filter @equinor/eds-color-palette-generator dev",
     "palette:build": "pnpm --filter @equinor/eds-color-palette-generator build",
     "palette:build:cli": "pnpm --filter @equinor/eds-color-palette-generator build:cli",
