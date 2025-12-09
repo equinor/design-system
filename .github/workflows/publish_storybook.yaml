@@ -10,6 +10,13 @@ on:
           - production
           - development
         default: 'production'
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/eds-core-react/**'
+      - 'packages/eds-tokens/**'
+      - 'packages/eds-icons/**'
 permissions:
   id-token: write
 env:
