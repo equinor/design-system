@@ -82,8 +82,7 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 "packages/eds-core-react/src/components/next": {
   "release-type": "simple",
   "component": "eds-core-react-next",
-  "prerelease-type": "beta",
-  "include-component-in-tag": false
+  "prerelease-type": "beta"
 }
 ```
 
@@ -97,7 +96,6 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 - `exclude-paths`: Prevents `/next` components from affecting stable releases
 - `prerelease-type: "beta"`: Adds `-beta.X` suffix to versions
 - `changelog-path`: Uses separate changelog for beta releases
-- `include-component-in-tag: false`: Prevents duplicate tags
 
 ## Pull Request Configuration
 
