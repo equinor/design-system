@@ -177,6 +177,8 @@ jobs:
 
   purge-cdn:
     needs: [publish-storybook]
+    # Only purge CDN for production. On push to main, environment is undefined,
+    # which correctly skips this job since dev storybook has no CDN.
     if: github.event.inputs.environment == 'production'
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
