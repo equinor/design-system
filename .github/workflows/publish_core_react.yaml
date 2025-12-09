@@ -170,7 +170,8 @@ jobs:
           steps: ${{ toJson(steps) }}
         if: failure()
   purge-cdn:
-    if: github.event.inputs.environment == 'production'
+    # Only purge CDN for production releases (latest tag)
+    if: github.event.inputs.npm-tag == 'latest'
     needs: [publish-storybook]
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
