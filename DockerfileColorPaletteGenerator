@@ -1,5 +1,5 @@
-# Use specific Node.js version for better reproducibility
-FROM docker.io/node:22.12.0-alpine AS build
+# Use Node.js 22.12 with Alpine - allows patch updates while maintaining reproducibility
+FROM docker.io/node:22.12-alpine AS build
 
 LABEL org.opencontainers.image.title="EDS Color Palette Generator"
 LABEL org.opencontainers.image.description="Equinor Design System Color Palette Generator"
@@ -23,7 +23,7 @@ RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-utils run build && \
     pnpm --filter @equinor/eds-color-palette-generator run build
 
-FROM node:22.12.0-alpine AS runner
+FROM node:22.12-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \
@@ -38,12 +38,20 @@ RUN npm install -g pnpm@10.15.0 && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini
 
-# Copy just the essential built files, workspace dependencies, and node_modules
-COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator ./apps/eds-color-palette-generator
-COPY --chown="$USER":"$USER" --from=build /app/packages ./packages
-COPY --chown="$USER":"$USER" --from=build /app/node_modules ./node_modules
-COPY --chown="$USER":"$USER" --from=build /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
-COPY --chown="$USER":"$USER" --from=build /app/package.json ./package.json
+# Copy package files for production install
+COPY --chown="$USER":"$USER" package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY --chown="$USER":"$USER" apps/eds-color-palette-generator/package.json ./apps/eds-color-palette-generator/
+COPY --chown="$USER":"$USER" packages/eds-tokens/package.json ./packages/eds-tokens/
+COPY --chown="$USER":"$USER" packages/eds-utils/package.json ./packages/eds-utils/
+
+# Install only production dependencies
+RUN pnpm install --prod --frozen-lockfile
+
+# Copy built files
+COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator/.next ./apps/eds-color-palette-generator/.next
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tailwind/theme.css ./packages/eds-tailwind/theme.css
+COPY --chown="$USER":"$USER" --from=build /app/packages/eds-utils/dist ./packages/eds-utils/dist
 
 USER "$UID"
 
