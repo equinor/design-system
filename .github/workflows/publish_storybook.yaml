@@ -177,9 +177,10 @@ jobs:
 
   purge-cdn:
     needs: [publish-storybook]
+    if: github.event.inputs.environment == 'production'
     name: Purge cdn
     uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
-      environment: ${{ github.event.inputs.environment || 'development' }}
+      environment: production
       endpoint: storybook
