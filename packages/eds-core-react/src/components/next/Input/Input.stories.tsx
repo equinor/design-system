@@ -16,8 +16,9 @@ const icons = {
 Icon.add(icons)
 
 const meta: Meta<typeof Input> = {
-  title: 'Next (EDS 2.0)/Input',
+  title: 'EDS 2.0 (beta)/Input',
   component: Input,
+  tags: ['beta'],
   parameters: {
     docs: {
       page,
