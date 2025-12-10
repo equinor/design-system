@@ -3,7 +3,7 @@ import { Stack } from '../../../../.storybook/components'
 import { ValidationMessage } from './ValidationMessage'
 
 const meta: Meta<typeof ValidationMessage> = {
-  title: 'Next/ValidationMessage',
+  title: 'EDS 2.0 (beta)/ValidationMessage',
   component: ValidationMessage,
   decorators: [
     (Story) => (
