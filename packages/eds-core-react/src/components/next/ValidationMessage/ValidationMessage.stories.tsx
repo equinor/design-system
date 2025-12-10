@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
-import { Stack } from '../../../.storybook/components'
+import { Stack } from '../../../../.storybook/components'
 import { ValidationMessage } from './ValidationMessage'
 
 const meta: Meta<typeof ValidationMessage> = {
-  title: 'Inputs/Form/ValidationMessage',
+  title: 'Next/ValidationMessage',
   component: ValidationMessage,
   decorators: [
     (Story) => (

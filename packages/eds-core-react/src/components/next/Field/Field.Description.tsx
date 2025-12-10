@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useId } from 'react'
-import { TypographyNext } from '../Typography'
+import { TypographyNext } from '../../Typography'
 import { useFieldContext } from './Field.context'
 import type { FieldDescriptionProps } from './Field.types'
 import { classNames } from './field.utils'

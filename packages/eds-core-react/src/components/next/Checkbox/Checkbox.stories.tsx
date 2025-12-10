@@ -3,16 +3,16 @@ import type { LabelHTMLAttributes } from 'react'
 import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { data } from '../../stories/data'
-import { Stack } from './../../../.storybook/components'
-import { Typography, Button, Table } from '../..'
-import { Field } from '../Field/Field.new'
-import { ValidationMessage } from '../ValidationMessage/ValidationMessage.new'
-import { Checkbox } from './Checkbox.new'
-import type { CheckboxProps } from './Checkbox.new.types'
+import { data } from '../../../stories/data'
+import { Stack } from './../../../../.storybook/components'
+import { Typography, Button, Table } from '../../..'
+import { Field } from '../Field'
+import { ValidationMessage } from '../ValidationMessage'
+import { Checkbox } from './Checkbox'
+import type { CheckboxProps } from './Checkbox.types'
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Inputs/Selection Controls/Checkbox.new',
+  title: 'Next/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {

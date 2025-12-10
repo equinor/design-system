@@ -1,12 +1,12 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useMemo, useState, type CSSProperties, type ChangeEvent } from 'react'
-import { Stack } from '../../../.storybook/components'
+import { Stack } from '../../../../.storybook/components'
 import { Field } from './Field'
 import type { FieldProps } from './Field.types'
 import { ValidationMessage } from '../ValidationMessage'
 
 const meta: Meta<typeof Field> = {
-  title: 'Inputs/Form/Field',
+  title: 'Next/Field',
   component: Field,
   decorators: [
     (Story) => (
