@@ -2,6 +2,6 @@
 @import '@equinor/eds-tokens/css/variables';
 
 /* Component styles */
-@import './components/Checkbox/checkbox.new.css';
-@import './components/Field/field.css';
-@import './components/ValidationMessage/validation-message.css';
+@import './components/next/Checkbox/checkbox.css';
+@import './components/next/Field/field.css';
+@import './components/next/ValidationMessage/validation-message.css';
