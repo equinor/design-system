@@ -5,56 +5,59 @@
   align-items: flex-start;
   cursor: pointer;
   position: relative;
-  /* Default hover size */
-  --checkbox-hover-size: 48px;
-  /* CSS custom properties for colors - can be overridden externally */
+  /* Gap between checkbox and label */
+  --checkbox-gap: var(--eds-selectable-gap-horizontal);
+  /* Padding for the label wrapper */
+  --checkbox-padding-inline: var(--eds-selectable-space-horizontal);
+  --checkbox-padding-block: var(--eds-selectable-space-vertical);
+  /* Hover size from token - adapts to density automatically */
+  --checkbox-hover-size: var(--eds-sizing-selectable-md);
+  /* CSS custom properties for colors - matches Figma default (accent) */
   --checkbox-icon-color: var(--eds-color-border-accent-strong);
-  --checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-default);
-  --checkbox-label-color: var(--eds-color-text-neutral-strong);
-  --checkbox-label-disabled-color: var(--eds-color-text-neutral-subtle);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
+  --checkbox-label-color: var(--eds-color-text-strong);
+  --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
 }
 
 .eds-checkbox[data-color-appearance='neutral'] {
   --checkbox-icon-color: var(--eds-color-border-neutral-strong);
-  --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-default);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
+}
+
+.eds-checkbox[data-color-appearance='accent'] {
+  --checkbox-icon-color: var(--eds-color-border-accent-strong);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='success'] {
   --checkbox-icon-color: var(--eds-color-border-success-strong);
-  --checkbox-hover-color: var(--eds-color-bg-success-fill-muted-default);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='info'] {
   --checkbox-icon-color: var(--eds-color-border-info-strong);
-  --checkbox-hover-color: var(--eds-color-bg-info-fill-muted-default);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='warning'] {
   --checkbox-icon-color: var(--eds-color-border-warning-strong);
-  --checkbox-hover-color: var(--eds-color-bg-warning-fill-muted-default);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='danger'] {
   --checkbox-icon-color: var(--eds-color-border-danger-strong);
-  --checkbox-hover-color: var(--eds-color-bg-danger-fill-muted-default);
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 /* Label wrapper contains checkbox + label text */
 .eds-checkbox__label-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
-}
-
-/* Spacious density mode (default/comfortable in TypeScript) */
-
-.eds-checkbox[data-density='spacious'] {
-  --checkbox-hover-size: 48px;
-}
-
-/* Compact density mode (compact in TypeScript) */
-.eds-checkbox[data-density='comfortable'] {
-  --checkbox-hover-size: 40px;
+  gap: var(--checkbox-gap);
+  /* Figma: px/py from --eds-selectable-spacing-* */
+  padding-inline: var(--checkbox-padding-inline);
+  padding-block: var(--checkbox-padding-block);
+  border-radius: var(--eds-spacing-border-radius-rounded);
 }
 
 .eds-checkbox[data-disabled='true'] {
@@ -156,9 +159,9 @@
 .eds-checkbox__icon {
   grid-area: input;
   pointer-events: none;
-  /* Fixed 24px - standard EDS icon size */
-  width: 24px;
-  height: 24px;
+  /* Icon size adapts to density */
+  width: var(--eds-sizing-icon-lg);
+  height: var(--eds-sizing-icon-lg);
   fill: var(--checkbox-icon-color);
   border-radius: var(--eds-shape-corner-medium);
   position: relative;
@@ -166,7 +169,7 @@
 }
 
 .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-  fill: var(--eds-color-text-neutral-subtle);
+  fill: var(--eds-color-border-neutral-medium);
 }
 
 /* Icon paths visibility */
