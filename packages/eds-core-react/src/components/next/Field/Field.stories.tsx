@@ -6,7 +6,7 @@ import type { FieldProps } from './Field.types'
 import { ValidationMessage } from '../ValidationMessage'
 
 const meta: Meta<typeof Field> = {
-  title: 'EDS 2.0 (beta)/Field',
+  title: 'EDS 2.0 (beta)/Inputs/Form/Field',
   component: Field,
   decorators: [
     (Story) => (
