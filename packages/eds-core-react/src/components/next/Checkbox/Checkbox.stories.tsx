@@ -12,7 +12,7 @@ import { Checkbox } from './Checkbox'
 import type { CheckboxProps } from './Checkbox.types'
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Next/Checkbox',
+  title: 'EDS 2.0 (beta)/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {
