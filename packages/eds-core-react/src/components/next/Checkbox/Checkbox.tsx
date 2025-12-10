@@ -5,8 +5,8 @@ import {
   checkbox_outline,
   checkbox_indeterminate,
 } from '@equinor/eds-icons'
-import { TypographyNext } from '../Typography'
-import type { CheckboxProps } from './Checkbox.new.types'
+import { TypographyNext } from '../../Typography'
+import type { CheckboxProps } from './Checkbox.types'
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
   classes.filter(Boolean).join(' ')

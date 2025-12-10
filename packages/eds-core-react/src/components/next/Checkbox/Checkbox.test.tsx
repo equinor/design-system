@@ -4,7 +4,7 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { Checkbox } from './Checkbox.new'
+import { Checkbox } from './Checkbox'
 
 type ControlledProps = {
   onChange: () => void

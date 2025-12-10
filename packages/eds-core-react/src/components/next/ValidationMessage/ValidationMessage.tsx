@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useId } from 'react'
-import { TypographyNext } from '../Typography'
+import { TypographyNext } from '../../Typography'
 import type { ValidationMessageProps } from './ValidationMessage.types'
 import { useOptionalFieldContext } from '../Field/Field.context'
 
