@@ -12,6 +12,9 @@
   --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
   --checkbox-label-color: var(--eds-color-text-strong);
   --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
+  /* Padding from Figma for proper focus frame spacing */
+  padding-inline: var(--eds-selectable-spacing-inline, 16px);
+  padding-block: var(--eds-selectable-spacing-stack, 12px);
 }
 
 .eds-checkbox[data-color-appearance='neutral'] {
@@ -108,15 +111,17 @@
   outline: none;
 }
 
-/* Focus styles - applied to the label wrapper for visible focus frame around entire checkbox */
-.eds-checkbox:has(.eds-checkbox__input:focus-visible)
-  .eds-checkbox__label-wrapper,
-.eds-checkbox:has(.eds-checkbox__input[data-focus-visible-added]:focus)
-  .eds-checkbox__label-wrapper {
-  outline: 1px solid var(--eds-color-border-focus);
-  outline-offset: 10px;
-  /* TODO: Replace with focus frame corner radius token when available from Figma (--eds-focus-frame-corner-radius or similar) */
+/* Focus styles - applied to the wrapper for visible focus frame around entire checkbox */
+/* Using pseudo-element with border to match Figma's Focus Frame exactly */
+.eds-checkbox:has(.eds-checkbox__input:focus-visible)::after,
+.eds-checkbox:has(.eds-checkbox__input[data-focus-visible-added]:focus)::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid var(--eds-color-border-focus);
+  /* TODO: Replace with focus frame corner radius token when available from Figma */
   border-radius: 6px;
+  pointer-events: none;
 }
 
 /* SVG icon */
