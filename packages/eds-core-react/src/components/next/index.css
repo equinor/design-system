@@ -2,3 +2,4 @@
 /* This file imports all CSS for next/ components */
 
 @import './Input/input.css';
+@import './Label/label.css';

@@ -9,3 +9,6 @@ export type { IconProps, IconSize, IconData, IconName } from './Icon'
 
 export { Input } from './Input'
 export type { InputProps } from './Input'
+
+export { Label } from './Label'
+export type { LabelProps } from './Label'
