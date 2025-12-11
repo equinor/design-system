@@ -80,7 +80,12 @@ export const Introduction: StoryFn<CheckboxProps> = (args) => {
   })
 
   return (
-    <Checkbox label="Play with me" labelProps={accentLabelProps} {...args} />
+    <Checkbox
+      id="intro-checkbox"
+      label="Play with me"
+      labelProps={accentLabelProps}
+      {...args}
+    />
   )
 }
 
@@ -388,43 +393,43 @@ export const DarkMode: StoryFn<CheckboxProps> = () => {
 }
 DarkMode.storyName = 'Dark mode'
 
-export const ErrorState: StoryFn<CheckboxProps> = () => {
-  const [checked, setChecked] = useState(false)
+// export const ErrorState: StoryFn<CheckboxProps> = () => {
+//   const [checked, setChecked] = useState(false)
 
-  return (
-    <div>
-      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-        Check the box to see how the error state disappears when validated.
-      </Typography>
-      <Checkbox
-        label="I agree to the terms and conditions"
-        checked={checked}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setChecked(e.target.checked)
-        }
-        error={!checked}
-      />
-      <Typography
-        variant="caption"
-        style={{
-          marginTop: '0.5rem',
-          color: 'var(--eds-color-text-danger-strong)',
-        }}
-      >
-        {!checked && 'You must accept the terms and conditions'}
-      </Typography>
-    </div>
-  )
-}
-ErrorState.storyName = 'Error state'
-ErrorState.parameters = {
-  docs: {
-    description: {
-      story:
-        'Error state is shown by setting the `error` prop to true, which applies red styling to the checkbox. Error messages should be provided by a separate form field component. This is commonly used for required fields like accepting terms and conditions.',
-    },
-  },
-}
+//   return (
+//     <div>
+//       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
+//         Check the box to see how the error state disappears when validated.
+//       </Typography>
+//       <Checkbox
+//         label="I agree to the terms and conditions"
+//         checked={checked}
+//         onChange={(e: ChangeEvent<HTMLInputElement>) =>
+//           setChecked(e.target.checked)
+//         }
+//         error={!checked}
+//       />
+//       <Typography
+//         variant="caption"
+//         style={{
+//           marginTop: '0.5rem',
+//           color: 'var(--eds-color-text-danger-strong)',
+//         }}
+//       >
+//         {!checked && 'You must accept the terms and conditions'}
+//       </Typography>
+//     </div>
+//   )
+// }
+// ErrorState.storyName = 'Error state'
+// ErrorState.parameters = {
+//   docs: {
+//     description: {
+//       story:
+//         'Error state is shown by setting the `error` prop to true, which applies red styling to the checkbox. Error messages should be provided by a separate form field component. This is commonly used for required fields like accepting terms and conditions.',
+//     },
+//   },
+// }
 
 export const WithField: StoryFn<CheckboxProps> = () => {
   const [accepted, setAccepted] = useState(false)
@@ -436,9 +441,6 @@ export const WithField: StoryFn<CheckboxProps> = () => {
   return (
     <Field required>
       <Field.Label>Bruksvilkår</Field.Label>
-      <Field.Description>
-        Du må godta vilkårene for å fortsette.
-      </Field.Description>
       <Checkbox
         label="Jeg bekrefter at jeg har lest og forstått vilkårene"
         checked={accepted}

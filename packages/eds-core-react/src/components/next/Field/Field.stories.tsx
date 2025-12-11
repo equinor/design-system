@@ -58,7 +58,7 @@ Default.args = {
 
 export const OptionalField: StoryFn<FieldProps> = () => (
   <Field>
-    <Field.Label showRequiredIndicator={false}>Organisasjon</Field.Label>
+    <Field.Label showOptionalIndicator>Organisasjon</Field.Label>
     <Field.Description>Denne informasjonen er valgfri.</Field.Description>
     <input placeholder="Equinor ASA" style={inputStyles} />
   </Field>
@@ -93,4 +93,95 @@ export const HorizontalLayout: StoryFn<FieldProps> = () => (
     <input type="tel" placeholder="12345678" style={inputStyles} />
     <ValidationMessage tone="info">Eksempel: 12345678</ValidationMessage>
   </Field>
+)
+
+export const LabelOnly: StoryFn<FieldProps> = () => (
+  <Field>
+    <Field.Label>E-post</Field.Label>
+    <input type="email" placeholder="navn@example.com" style={inputStyles} />
+  </Field>
+)
+
+export const WithDescription: StoryFn<FieldProps> = () => (
+  <Field>
+    <Field.Label>Passord</Field.Label>
+    <Field.Description>
+      Passordet må være minst 8 tegn og inneholde tall og bokstaver.
+    </Field.Description>
+    <input type="password" style={inputStyles} />
+  </Field>
+)
+
+export const RequiredWithIndicator: StoryFn<FieldProps> = () => (
+  <Field required>
+    <Field.Label showRequiredIndicator>Fornavn</Field.Label>
+    <Field.Description>Ditt juridiske fornavn.</Field.Description>
+    <input placeholder="Ola" style={inputStyles} />
+  </Field>
+)
+
+export const DisabledField: StoryFn<FieldProps> = () => (
+  <Field disabled>
+    <Field.Label>Brukernavn</Field.Label>
+    <Field.Description>Kan ikke endres etter opprettelse.</Field.Description>
+    <input value="ola.nordmann" disabled style={inputStyles} />
+  </Field>
+)
+
+export const AllValidationTones: StoryFn<FieldProps> = () => (
+  <>
+    <Field>
+      <Field.Label>Danger</Field.Label>
+      <input defaultValue="ugyldig verdi" style={inputStyles} />
+      <ValidationMessage tone="danger">
+        Dette feltet inneholder en feil.
+      </ValidationMessage>
+    </Field>
+    <Field>
+      <Field.Label>Warning</Field.Label>
+      <input defaultValue="mulig problem" style={inputStyles} />
+      <ValidationMessage tone="warning">
+        Vær oppmerksom på denne verdien.
+      </ValidationMessage>
+    </Field>
+    <Field>
+      <Field.Label>Success</Field.Label>
+      <input defaultValue="gyldig verdi" style={inputStyles} />
+      <ValidationMessage tone="success">
+        Feltet er korrekt utfylt.
+      </ValidationMessage>
+    </Field>
+    <Field>
+      <Field.Label>Info</Field.Label>
+      <input placeholder="skriv noe..." style={inputStyles} />
+      <ValidationMessage tone="info">
+        Denne informasjonen er nyttig.
+      </ValidationMessage>
+    </Field>
+  </>
+)
+
+export const HorizontalOptional: StoryFn<FieldProps> = () => (
+  <Field layout="horizontal">
+    <Field.Label showOptionalIndicator>Mellomnavn</Field.Label>
+    <Field.Description>Valgfritt felt.</Field.Description>
+    <input placeholder="Eventuelt mellomnavn" style={inputStyles} />
+  </Field>
+)
+
+export const CombinedRequiredAndOptional: StoryFn<FieldProps> = () => (
+  <>
+    <Field required>
+      <Field.Label showRequiredIndicator>Fornavn</Field.Label>
+      <input placeholder="Ola" style={inputStyles} />
+    </Field>
+    <Field>
+      <Field.Label showOptionalIndicator>Mellomnavn</Field.Label>
+      <input placeholder="Eventuelt" style={inputStyles} />
+    </Field>
+    <Field required>
+      <Field.Label showRequiredIndicator>Etternavn</Field.Label>
+      <input placeholder="Nordmann" style={inputStyles} />
+    </Field>
+  </>
 )
