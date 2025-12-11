@@ -92,6 +92,14 @@
     "prettier": "3.6.2",
     "typescript": "^5.9.3"
   },
+  "pnpm": {
+    "overrides": {
+      "js-yaml@<3.14.2": ">=3.14.2",
+      "js-yaml@>=4.0.0 <4.1.1": ">=4.1.1",
+      "mdast-util-to-hast@<13.2.1": ">=13.2.1",
+      "glob@>=11.0.0 <11.1.0": ">=11.1.0"
+    }
+  },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
   "packageManager": "pnpm@10.15.0"
 }
