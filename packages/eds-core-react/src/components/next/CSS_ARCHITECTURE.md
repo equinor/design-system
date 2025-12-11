@@ -63,12 +63,12 @@ import '@equinor/eds-core-react/next/index.min.css'
 
 ## Build Output
 
-| File | Purpose |
-|------|---------|
+| File                     | Purpose                    |
+| ------------------------ | -------------------------- |
 | `dist/esm/index.next.js` | ESM with auto-injected CSS |
-| `dist/index.next.cjs` | CJS with auto-injected CSS |
-| `build/index.css` | Standalone CSS (for SSR) |
-| `build/index.min.css` | Minified CSS (for SSR) |
+| `dist/index.next.cjs`    | CJS with auto-injected CSS |
+| `build/index.css`        | Standalone CSS (for SSR)   |
+| `build/index.min.css`    | Minified CSS (for SSR)     |
 
 ## Package Exports
 
@@ -82,8 +82,8 @@ import '@equinor/eds-core-react/next/index.min.css'
 
 ## Naming Conventions
 
-| Type | Convention | Example |
-|------|------------|---------|
-| CSS files | lowercase-hyphen | `input.css`, `text-field.css` |
-| Components | PascalCase | `Input.tsx`, `TextField.tsx` |
-| Folders | PascalCase | `Input/`, `TextField/` |
+| Type       | Convention       | Example                       |
+| ---------- | ---------------- | ----------------------------- |
+| CSS files  | lowercase-hyphen | `input.css`, `text-field.css` |
+| Components | PascalCase       | `Input.tsx`, `TextField.tsx`  |
+| Folders    | PascalCase       | `Input/`, `TextField/`        |
