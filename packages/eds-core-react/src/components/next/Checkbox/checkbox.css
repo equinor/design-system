@@ -9,8 +9,8 @@
   --checkbox-hover-size: var(--eds-sizing-selectable-lg);
   /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
   --checkbox-icon-color: var(--eds-color-border-strong);
-  /* Use neutral hover color for all appearances - hover is interaction feedback, not semantic */
-  --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
+  /* Hover color from Figma - follows data-color-appearance */
+  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
   --checkbox-label-color: var(--eds-color-text-strong);
   --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
   /* Spacing activated via data-selectable-space and data-space-proportions on element */
@@ -105,9 +105,9 @@
 .eds-checkbox__icon {
   grid-area: input;
   pointer-events: none;
-  /* Icon size adapts to density */
-  width: var(--eds-sizing-icon-lg);
-  height: var(--eds-sizing-icon-lg);
+  /* Icon size follows font-size via data-font-size attribute */
+  width: var(--eds-typography-icon-size);
+  height: var(--eds-typography-icon-size);
   fill: var(--checkbox-icon-color);
   border-radius: var(--eds-shape-corner-medium);
   position: relative;
