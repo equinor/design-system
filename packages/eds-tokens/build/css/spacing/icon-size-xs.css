@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-icon-size="xs"] {
+  --eds-icon-size: var(--eds-sizing-icon-xs);
+  --eds-icon-container-size: var(--eds-sizing-icon-xs-container);
+}

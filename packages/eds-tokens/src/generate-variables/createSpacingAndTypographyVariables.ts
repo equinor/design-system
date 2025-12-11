@@ -584,6 +584,9 @@ export async function createSpacingAndTypographyVariables({
     { mode: 'Loose', slug: 'loose' },
   ] as const
 
+  // Icon Size variable collection modes
+  const iconSizeConfig = ['XS', 'SM', 'MD', 'LG', 'XL', '2XL'] as const
+
   const fontFamilyPromises = fontFamilyConfig.map(({ mode, slug }) =>
     buildCssDictionary({
       include: [
@@ -674,11 +677,37 @@ export async function createSpacingAndTypographyVariables({
     }),
   )
 
+  // Icon Size promises - generates --eds-icon-size and --eds-icon-container-size
+  // that reference the density tokens (--eds-sizing-icon-*)
+  const iconSizePromises = iconSizeConfig.map((size) => {
+    const sizeLower = size.toLowerCase()
+    const selector =
+      size === 'XS'
+        ? ':root, [data-icon-size="xs"]'
+        : `[data-icon-size="${sizeLower}"]`
+
+    return buildCssDictionary({
+      include: [
+        PRIMITIVES_SOURCE,
+        FIGMA_SPECIFIC_TOKENS_SOURCE,
+        DENSITY_SPACIOUS_SOURCE,
+      ],
+      source: [path.join(MODES_DIR, `🖼️ Icon size.${size}.json`)],
+      buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
+      transforms: cssTransforms,
+      destination: `icon-size-${sizeLower}.css`,
+      selector,
+      filter: (token: TransformedToken) =>
+        !!(token.path && token.path[0] === 'Icon'),
+    })
+  })
+
   await Promise.all([
     ...fontFamilyPromises,
     ...fontSizePromises,
     ...fontWeightPromises,
     ...lineHeightPromises,
     ...trackingPromises,
+    ...iconSizePromises,
   ])
 }

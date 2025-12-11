@@ -5,6 +5,14 @@
 @import 'spacing/spacious.css';
 @import 'spacing/comfortable.css';
 
+/* Icon Size */
+@import 'spacing/icon-size-xs.css';
+@import 'spacing/icon-size-sm.css';
+@import 'spacing/icon-size-md.css';
+@import 'spacing/icon-size-lg.css';
+@import 'spacing/icon-size-xl.css';
+@import 'spacing/icon-size-2xl.css';
+
 @import 'spacing/space-proportions-squished.css';
 @import 'spacing/space-proportions-squared.css';
 @import 'spacing/space-proportions-stretched.css';

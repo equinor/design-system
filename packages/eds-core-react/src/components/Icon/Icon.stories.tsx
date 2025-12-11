@@ -2,7 +2,7 @@ import { StoryFn, Meta } from '@storybook/react-vite'
 import * as icons from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
-import { Icon, IconProps } from '../..'
+import { Icon, IconProps, TypographyNext } from '../..'
 import page from './Icon.docs.mdx'
 
 Icon.add(icons)
@@ -55,6 +55,48 @@ export const Accessibility: StoryFn<IconProps> = () => (
   <Icon name="save" title="Save me!" />
 )
 
+export const IconContainer: StoryFn<IconProps> = () => (
+  <>
+    <div
+      data-icon-size="xl"
+      style={{
+        width: 'var(--eds-icon-container-size)',
+        height: 'var(--eds-icon-container-size)',
+        position: 'relative',
+      }}
+    >
+      <Icon
+        name="pizza"
+        style={{
+          width: 'var(--eds-icon-size)',
+          height: 'var(--eds-icon-size)',
+          position: 'absolute',
+          top: 'calc(50% - var(--eds-icon-size) / 2)',
+          left: 'calc(50% - var(--eds-icon-size) / 2)',
+        }}
+      />
+    </div>
+    <div
+      data-icon-size="xl"
+      style={{
+        width: 'var(--eds-icon-container-size)',
+        height: 'var(--eds-icon-container-size)',
+        display: 'flex',
+      }}
+    >
+      <Icon
+        name="pizza"
+        style={{
+          width: 'var(--eds-icon-size)',
+          height: 'var(--eds-icon-size)',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      />
+    </div>
+  </>
+)
+
 export const Color: StoryFn<IconProps> = () => (
   <>
     <Icon name="save" color={'red'} />
@@ -96,7 +138,6 @@ export const Custom: StoryFn<IconProps> = () => {
   }
   return (
     <>
-      <Icon data={customIcon} size={16} />
       <Icon data={customIcon} size={24} />
       <Icon data={customIcon} size={48} />
     </>

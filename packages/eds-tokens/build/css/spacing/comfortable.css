@@ -4,15 +4,25 @@
 
 [data-density="comfortable"] {
   --eds-sizing-icon-xs: 0.875rem;
+  --eds-sizing-icon-xs-container: 0.5rem;
   --eds-sizing-icon-sm: 1rem;
+  --eds-sizing-icon-sm-container: 0.5rem;
   --eds-sizing-icon-md: 1.125rem;
+  --eds-sizing-icon-md-container: 0.5rem;
   --eds-sizing-icon-lg: 1.25rem;
+  --eds-sizing-icon-lg-container: 0.75rem;
   --eds-sizing-icon-xl: 1.5rem;
+  --eds-sizing-icon-xl-container: 0.75rem;
   --eds-sizing-icon-2xl: 1.75rem;
+  --eds-sizing-icon-2xl-container: 0.75rem;
   --eds-sizing-icon-3xl: 2rem;
+  --eds-sizing-icon-3xl-container: 1rem;
   --eds-sizing-icon-4xl: 2.313rem;
+  --eds-sizing-icon-4xl-container: 1rem;
   --eds-sizing-icon-5xl: 2.625rem;
+  --eds-sizing-icon-5xl-container: 1.25rem;
   --eds-sizing-icon-6xl: 3rem;
+  --eds-sizing-icon-6xl-container: 1.5rem;
   --eds-sizing-selectable-xs: 1rem;
   --eds-sizing-selectable-sm: 1.25rem;
   --eds-sizing-selectable-md: 1.5rem;

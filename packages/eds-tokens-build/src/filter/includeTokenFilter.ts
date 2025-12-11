@@ -12,7 +12,6 @@ export const includeTokenFilter = (
     'padding-baselined',
     'cap-height',
     'cap-rounded',
-    'container',
     ...namesToExclude,
   ]
 

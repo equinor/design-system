@@ -2,15 +2,25 @@
   "sizing": {
     "icon": {
       "xs": 14,
+      "xs-container": 8,
       "sm": 16,
+      "sm-container": 8,
       "md": 18,
+      "md-container": 8,
       "lg": 20,
+      "lg-container": 12,
       "xl": 24,
+      "xl-container": 12,
       "2xl": 28,
+      "2xl-container": 12,
       "3xl": 32,
+      "3xl-container": 16,
       "4xl": 37,
+      "4xl-container": 16,
       "5xl": 42,
-      "6xl": 48
+      "5xl-container": 20,
+      "6xl": 48,
+      "6xl-container": 24
     },
     "selectable": {
       "xs": 16,
