@@ -1,4 +1,5 @@
 import './preview.css'
+import '../src/styles.css'
 
 const preview = {
   viewMode: 'docs',
@@ -21,6 +22,8 @@ const preview = {
           'Icons',
           ['Introduction', 'Preview', 'Icon'],
           '*',
+          'Next (EDS 2.0)',
+          ['Introduction', '*'],
           'Playground',
         ],
       },
