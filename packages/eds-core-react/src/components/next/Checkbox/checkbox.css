@@ -7,45 +7,22 @@
   position: relative;
   /* Hover size from token - use lg to match Figma 36px hover circle */
   --checkbox-hover-size: var(--eds-sizing-selectable-lg);
-  --checkbox-icon-color: var(--eds-color-border-accent-strong);
+  /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
+  --checkbox-icon-color: var(--eds-color-border-strong);
   /* Use neutral hover color for all appearances - hover is interaction feedback, not semantic */
   --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
   --checkbox-label-color: var(--eds-color-text-strong);
   --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
-  /* Padding from Figma for proper focus frame spacing */
-  padding-inline: var(--eds-selectable-spacing-inline, 16px);
-  padding-block: var(--eds-selectable-spacing-stack, 12px);
+  /* Spacing activated via data-selectable-space and data-space-proportions on element */
+  padding-inline: var(--eds-selectable-space-horizontal);
+  padding-block: var(--eds-selectable-space-vertical);
 }
 
-.eds-checkbox[data-color-appearance='neutral'] {
-  --checkbox-icon-color: var(--eds-color-border-neutral-strong);
-}
-
-.eds-checkbox[data-color-appearance='accent'] {
-  --checkbox-icon-color: var(--eds-color-border-accent-strong);
-}
-
-.eds-checkbox[data-color-appearance='success'] {
-  --checkbox-icon-color: var(--eds-color-border-success-strong);
-}
-
-.eds-checkbox[data-color-appearance='info'] {
-  --checkbox-icon-color: var(--eds-color-border-info-strong);
-}
-
-.eds-checkbox[data-color-appearance='warning'] {
-  --checkbox-icon-color: var(--eds-color-border-warning-strong);
-}
-
-.eds-checkbox[data-color-appearance='danger'] {
-  --checkbox-icon-color: var(--eds-color-border-danger-strong);
-}
-
-/* Label wrapper contains checkbox + label text */
+/* Label wrapper contains checkbox + label text - gap activated via data-horizontal-gap on element */
 .eds-checkbox__label-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--eds-generic-gap-horizontal);
 }
 
 .eds-checkbox[data-disabled='true'] {

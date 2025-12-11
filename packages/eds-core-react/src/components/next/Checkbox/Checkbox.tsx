@@ -43,10 +43,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const sharedWrapperProps: Record<string, unknown> = {
       style,
       'data-disabled': disabled ? 'true' : undefined,
-    }
-
-    if (error) {
-      sharedWrapperProps['data-color-appearance'] = 'danger'
+      'data-selectable-space': 'md',
+      'data-space-proportions': 'squished',
+      'data-color-appearance': error ? 'danger' : 'accent',
     }
 
     const checkboxInput = (
@@ -121,7 +120,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {...sharedWrapperProps}
           {...restLabelProps}
         >
-          <span className="eds-checkbox__label-wrapper">
+          <span
+            className="eds-checkbox__label-wrapper"
+            data-horizontal-gap="md"
+          >
             {checkboxInput}
             <TypographyNext
               as="span"
