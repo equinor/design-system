@@ -46,6 +46,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       'data-selectable-space': 'md',
       'data-space-proportions': 'squished',
       'data-color-appearance': error ? 'danger' : 'accent',
+      'data-font-size': 'lg',
     }
 
     const checkboxInput = (
