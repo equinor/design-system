@@ -6,11 +6,18 @@ import { classNames } from './field.utils'
 
 export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
   function FieldLabel(
-    { children, className, showRequiredIndicator = true, ...rest },
+    {
+      children,
+      className,
+      showRequiredIndicator = true,
+      showOptionalIndicator = false,
+      ...rest
+    },
     ref,
   ) {
     const { controlId, required, disabled } = useFieldContext()
-    const showIndicator = showRequiredIndicator && required
+    const showRequired = showRequiredIndicator && required
+    const showOptional = showOptionalIndicator && !required
 
     return (
       <label
@@ -20,23 +27,39 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
         data-disabled={disabled ? 'true' : undefined}
         {...rest}
       >
-        <TypographyNext
-          as="span"
-          family="ui"
-          size="md"
-          baseline="center"
-          lineHeight="default"
-          weight="bolder"
-          tracking="normal"
-          className="eds-field__label-text"
-        >
-          {children}
-          {showIndicator && (
+        <span className="eds-field__label-content">
+          <TypographyNext
+            as="span"
+            family="ui"
+            size="md"
+            baseline="center"
+            lineHeight="default"
+            weight="normal"
+            tracking="normal"
+            className="eds-field__label-text"
+          >
+            {children}
+          </TypographyNext>
+          {showRequired && (
             <span aria-hidden="true" className="eds-field__required-indicator">
               *
             </span>
           )}
-        </TypographyNext>
+          {showOptional && (
+            <TypographyNext
+              as="span"
+              family="ui"
+              size="sm"
+              baseline="center"
+              lineHeight="default"
+              weight="normal"
+              tracking="normal"
+              className="eds-field__optional-indicator"
+            >
+              (Optional)
+            </TypographyNext>
+          )}
+        </span>
       </label>
     )
   },

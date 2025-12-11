@@ -19,6 +19,8 @@ export type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
   children: ReactNode
   /** Toggle rendering of the required indicator */
   showRequiredIndicator?: boolean
+  /** Toggle rendering of the optional indicator when field is not required */
+  showOptionalIndicator?: boolean
 }
 
 export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {

@@ -5,59 +5,44 @@
   align-items: flex-start;
   cursor: pointer;
   position: relative;
-  /* Gap between checkbox and label */
-  --checkbox-gap: var(--eds-selectable-gap-horizontal);
-  /* Padding for the label wrapper */
-  --checkbox-padding-inline: var(--eds-selectable-space-horizontal);
-  --checkbox-padding-block: var(--eds-selectable-space-vertical);
-  /* Hover size from token - adapts to density automatically */
-  --checkbox-hover-size: var(--eds-sizing-selectable-md);
-  /* CSS custom properties for colors - matches Figma default (accent) */
+  /* Hover size from token - use lg to match Figma 36px hover circle */
+  --checkbox-hover-size: var(--eds-sizing-selectable-lg);
   --checkbox-icon-color: var(--eds-color-border-accent-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
+  /* Use neutral hover color for all appearances - hover is interaction feedback, not semantic */
+  --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
   --checkbox-label-color: var(--eds-color-text-strong);
   --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
 }
 
 .eds-checkbox[data-color-appearance='neutral'] {
   --checkbox-icon-color: var(--eds-color-border-neutral-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='accent'] {
   --checkbox-icon-color: var(--eds-color-border-accent-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='success'] {
   --checkbox-icon-color: var(--eds-color-border-success-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='info'] {
   --checkbox-icon-color: var(--eds-color-border-info-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='warning'] {
   --checkbox-icon-color: var(--eds-color-border-warning-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 .eds-checkbox[data-color-appearance='danger'] {
   --checkbox-icon-color: var(--eds-color-border-danger-strong);
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
 }
 
 /* Label wrapper contains checkbox + label text */
 .eds-checkbox__label-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: var(--checkbox-gap);
-  /* Figma: px/py from --eds-selectable-spacing-* */
-  padding-inline: var(--checkbox-padding-inline);
-  padding-block: var(--checkbox-padding-block);
-  border-radius: var(--eds-spacing-border-radius-rounded);
+  gap: 16px;
 }
 
 .eds-checkbox[data-disabled='true'] {
@@ -70,16 +55,6 @@
   grid: [input] 1fr / [input] 1fr;
   position: relative;
   isolation: isolate;
-}
-
-/* Spacious density padding */
-.eds-checkbox[data-density='spacious'] .eds-checkbox__input-wrapper {
-  padding: var(--eds-spacing-inset-xs-squared);
-}
-
-/* Compact density padding */
-.eds-checkbox[data-density='comfortable'] .eds-checkbox__input-wrapper {
-  padding: var(--eds-spacing-inset-2-xs-squared);
 }
 
 /* Hover circle background */
@@ -133,26 +108,15 @@
   outline: none;
 }
 
-/* Focus styles - spacious (default) */
-.eds-checkbox[data-density='spacious']
-  .eds-checkbox__input[data-focus-visible-added]:focus
-  ~ .eds-checkbox__icon,
-.eds-checkbox[data-density='spacious']
-  .eds-checkbox__input:focus-visible
-  ~ .eds-checkbox__icon {
-  outline: 2px dashed var(--eds-color-border-focus);
-  outline-offset: var(--eds-spacing-inline-xs);
-}
-
-/* Focus styles - compact */
-.eds-checkbox[data-density='comfortable']
-  .eds-checkbox__input[data-focus-visible-added]:focus
-  ~ .eds-checkbox__icon,
-.eds-checkbox[data-density='comfortable']
-  .eds-checkbox__input:focus-visible
-  ~ .eds-checkbox__icon {
-  outline: 2px dashed var(--eds-color-border-focus);
-  outline-offset: var(--eds-spacing-inline-3-xs);
+/* Focus styles - applied to the label wrapper for visible focus frame around entire checkbox */
+.eds-checkbox:has(.eds-checkbox__input:focus-visible)
+  .eds-checkbox__label-wrapper,
+.eds-checkbox:has(.eds-checkbox__input[data-focus-visible-added]:focus)
+  .eds-checkbox__label-wrapper {
+  outline: 1px solid var(--eds-color-border-focus);
+  outline-offset: 10px;
+  /* TODO: Replace with focus frame corner radius token when available from Figma (--eds-focus-frame-corner-radius or similar) */
+  border-radius: 6px;
 }
 
 /* SVG icon */
