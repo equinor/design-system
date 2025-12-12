@@ -1,0 +1,83 @@
+.eds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eds-spacing-horizontal-xs);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+  cursor: pointer;
+  border: none;
+  padding: var(--eds-selectable-space-vertical)
+    var(--eds-selectable-space-horizontal);
+  transition:
+    background-color 150ms ease-in-out,
+    border-color 150ms ease-in-out,
+    color 150ms ease-in-out;
+}
+
+.eds-button:focus-visible {
+  outline: 1px solid var(--eds-color-border-focus);
+  outline-offset: 1px;
+}
+/* Primary variant */
+.eds-button__primary {
+  background-color: var(--eds-color-bg-fill-emphasis-default);
+  color: var(--eds-color-text-strong-on-emphasis);
+}
+
+.eds-button__primary:hover:not(:disabled) {
+  background-color: var(--eds-color-bg-fill-emphasis-hover);
+}
+
+.eds-button__primary:active:not(:disabled) {
+  background-color: var(--eds-color-bg-fill-emphasis-active);
+}
+
+.eds-button__primary:disabled {
+  background-color: var(--eds-color-bg-fill-muted-default);
+  color: var(--eds-color-text-subtle);
+  cursor: not-allowed;
+}
+
+/* Outline variant */
+.eds-button__outline {
+  background-color: transparent;
+  color: var(--eds-color-text-strong);
+  border: 1px solid;
+  border-color: var(--eds-color-border-strong);
+}
+
+.eds-button__outline:hover:not(:disabled) {
+  background-color: var(--eds-color-bg-fill-muted-hover);
+}
+
+.eds-button__outline:active:not(:disabled) {
+  background-color: var(--eds-color-bg-fill-muted-active);
+}
+
+.eds-button__outline:disabled {
+  background-color: transparent;
+  color: var(--eds-color-text-subtle);
+  border-color: var(--eds-color-border-subtle);
+  cursor: not-allowed;
+}
+
+/* Ghost variant */
+.eds-button__ghost {
+  background-color: transparent;
+  color: var(--eds-color-text-strong);
+  border-color: transparent;
+}
+
+.eds-button__ghost:hover:not(:disabled) {
+  background-color: var(--eds-color-bg-fill-muted-hover);
+}
+
+.eds-button__ghost:active:not(:disabled) {
+  background-color: var(--eds-color-bg-fill-muted-active);
+}
+
+.eds-button__ghost:disabled {
+  background-color: transparent;
+  color: var(--eds-color-text-subtle);
+  cursor: not-allowed;
+}
