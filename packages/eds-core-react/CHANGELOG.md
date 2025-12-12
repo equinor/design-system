@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.1.0...eds-core-react@v2.2.0) (2025-12-11)
+
+
+### ✨ Added
+
+* new icons Horizontal unfold more + Horizontal unfold less  ([#4231](https://github.com/equinor/design-system/issues/4231)) ([df50b34](https://github.com/equinor/design-system/commit/df50b34446faba98880df1e8f847fab74f2ecb37))
+
+
+### 🐛 Fixed
+
+* unknown and high security alerts from radix. ([#4313](https://github.com/equinor/design-system/issues/4313)) ([3a9a666](https://github.com/equinor/design-system/commit/3a9a666f9188a1d0bee0f3ebcff1a7de8b03fe18))
+* update autocomplete types to require optionLabel when using objects and optional for strings/numbers ([#4279](https://github.com/equinor/design-system/issues/4279)) ([848c16f](https://github.com/equinor/design-system/commit/848c16f035da2480c99f24d635d54feaabc9a03a))
+
+
+### 🔧 Chores
+
+* add /next subpath + (beta) release please for next components ([#4251](https://github.com/equinor/design-system/issues/4251)) ([0184d22](https://github.com/equinor/design-system/commit/0184d223620328a51a8e7f0162a548dfe40feb1b))
+
 ## [2.1.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.0.1...eds-core-react@v2.1.0) (2025-11-26)
 
 ### ✨ Added
