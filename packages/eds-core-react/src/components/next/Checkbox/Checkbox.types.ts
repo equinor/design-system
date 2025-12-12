@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, LabelHTMLAttributes } from 'react'
+import { HTMLAttributes, InputHTMLAttributes, LabelHTMLAttributes } from 'react'
 
 export type CheckboxProps = {
   /** Label for the checkbox */
@@ -13,4 +13,8 @@ export type CheckboxProps = {
   error?: boolean
   /** Props to apply to the label element (when label prop is provided) */
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>
+  /** Props to apply to the wrapper element (span when no label, label when label is provided).
+   * Use this to override default data-attributes like data-color-appearance, data-selectable-space, etc.
+   */
+  wrapperProps?: HTMLAttributes<HTMLElement>
 } & InputHTMLAttributes<HTMLInputElement>

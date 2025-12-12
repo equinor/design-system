@@ -1,23 +1,10 @@
 .eds-validation-message {
-  --validation-message-color: var(--eds-color-text-danger-strong);
   display: inline-flex;
   align-items: flex-start;
-  gap: var(--eds-spacing-inline-xs, 4px);
-  color: var(--validation-message-color);
+  gap: var(--eds-generic-gap-horizontal);
+  color: var(--eds-color-text-strong);
 }
 
 .eds-validation-message__text {
   color: inherit;
-}
-
-.eds-validation-message--warning {
-  --validation-message-color: var(--eds-color-text-warning-strong);
-}
-
-.eds-validation-message--success {
-  --validation-message-color: var(--eds-color-text-success-strong);
-}
-
-.eds-validation-message--info {
-  --validation-message-color: var(--eds-color-text-info-strong);
 }

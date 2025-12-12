@@ -21,6 +21,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       className,
       style,
       labelProps,
+      wrapperProps,
       ...rest
     },
     ref,
@@ -47,6 +48,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       'data-space-proportions': 'squished',
       'data-color-appearance': error ? 'danger' : 'accent',
       'data-font-size': 'lg',
+      ...wrapperProps,
     }
 
     const checkboxInput = (

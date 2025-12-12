@@ -30,7 +30,6 @@ export const ValidationMessage = forwardRef<
 
   const combinedClassName = classNames(
     'eds-validation-message',
-    `eds-validation-message--${tone}`,
     fieldContext ? 'eds-field__validation' : undefined,
     className,
   )
@@ -41,6 +40,8 @@ export const ValidationMessage = forwardRef<
       role={resolvedRole}
       id={resolvedId}
       className={combinedClassName}
+      data-horizontal-gap="sm"
+      data-color-appearance={tone}
       {...rest}
     >
       <TypographyNext

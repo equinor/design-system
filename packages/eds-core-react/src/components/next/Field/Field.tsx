@@ -219,6 +219,8 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
         data-layout={layout}
         data-disabled={disabled ? 'true' : undefined}
         data-invalid={hasDangerValidation ? 'true' : undefined}
+        data-vertical-gap="xs"
+        data-horizontal-gap="sm"
         {...rest}
       >
         {content}
