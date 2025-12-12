@@ -6,6 +6,8 @@
   --eds-typography-icon-size: var(--eds-sizing-icon-xl);
   --eds-typography-gap-horizontal: var(--eds-spacing-icon-xl-gap-horizontal);
   --eds-typography-gap-vertical: var(--eds-spacing-icon-xl-gap-vertical);
+  --eds-typography-icon-container-padding-horizontal: var(--eds-sizing-icon-xl-container-padding-horisontal);
+  --eds-typography-icon-container-padding-vertical: var(--eds-sizing-icon-xl-container-padding-vertical);
   --eds-typography-font-size: var(--eds-font-family-size-xl-font-size);
   --eds-typography-tracking-tight: var(--eds-font-family-size-xl-tracking-tight);
   --eds-typography-tracking-normal: var(--eds-font-family-size-xl-tracking-normal);

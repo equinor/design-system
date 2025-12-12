@@ -2,15 +2,35 @@
   "sizing": {
     "icon": {
       "xs": 14,
+      "xs-container-padding-horisontal": -3.200000047683716,
+      "xs-container-padding-vertical": -3,
       "sm": 16,
+      "sm-container-padding-horisontal": -3.200000047683716,
+      "sm-container-padding-vertical": -4,
       "md": 18,
+      "md-container-padding-horisontal": -3.5999999046325684,
+      "md-container-padding-vertical": -5,
       "lg": 20,
+      "lg-container-padding-horisontal": -4,
+      "lg-container-padding-vertical": -4,
       "xl": 24,
+      "xl-container-padding-horisontal": -4.800000190734863,
+      "xl-container-padding-vertical": -6,
       "2xl": 28,
+      "2xl-container-padding-horisontal": -5.599999904632568,
+      "2xl-container-padding-vertical": -8,
       "3xl": 32,
+      "3xl-container-padding-horisontal": -6.400000095367432,
+      "3xl-container-padding-vertical": -8,
       "4xl": 37,
+      "4xl-container-padding-horisontal": -7.400000095367432,
+      "4xl-container-padding-vertical": -8.5,
       "5xl": 42,
-      "6xl": 48
+      "5xl-container-padding-horisontal": -8.399999618530273,
+      "5xl-container-padding-vertical": -11,
+      "6xl": 48,
+      "6xl-container-padding-horisontal": -9.600000381469727,
+      "6xl-container-padding-vertical": -11
     },
     "selectable": {
       "xs": 16,
@@ -239,14 +259,13 @@
         "tracking-normal": 0,
         "tracking-wide": 3.5199999809265137,
         "font-weight-lighter": 300,
-        "font-weight-normal": 0,
+        "font-weight-normal": 400,
         "font-weight-bolder": 500,
         "line-height-default": 36,
         "line-height-squished": 32
       }
     },
     "header": {
-      "font-family": "Equinor",
       "xs": {
         "font-size": 10.5,
         "tracking-tight": -0.9900000095367432,
@@ -258,6 +277,7 @@
         "line-height-default": 12,
         "line-height-squished": 12
       },
+      "font-family": "Equinor",
       "sm": {
         "font-size": 12,
         "tracking-tight": -1.149999976158142,

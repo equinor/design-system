@@ -12,13 +12,18 @@ export const includeTokenFilter = (
     'padding-baselined',
     'cap-height',
     'cap-rounded',
-    'container',
     ...namesToExclude,
   ]
 
-  const isExcluded = _namesToExclude.some((nameToExclude) =>
-    token.name.includes(nameToExclude),
-  )
+  // Special handling for 'container': exclude only if it's standalone (e.g., 'xs-container')
+  // but NOT if it's part of 'container-padding' (e.g., 'xs-container-padding-horizontal')
+  const isStandaloneContainer =
+    token.name.includes('container') && !token.name.includes('container-padding')
+
+  const isExcluded =
+    isStandaloneContainer ||
+    _namesToExclude.some((nameToExclude) => token.name.includes(nameToExclude))
+
   if (isExcluded) {
     return false
   }

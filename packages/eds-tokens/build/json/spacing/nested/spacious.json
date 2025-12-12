@@ -2,15 +2,35 @@
   "sizing": {
     "icon": {
       "xs": 16,
+      "xs-container-padding-horisontal": -3.200000047683716,
+      "xs-container-padding-vertical": -4,
       "sm": 18,
+      "sm-container-padding-horisontal": -3.5999999046325684,
+      "sm-container-padding-vertical": -5,
       "md": 20,
+      "md-container-padding-horisontal": -4,
+      "md-container-padding-vertical": -4,
       "lg": 24,
+      "lg-container-padding-horisontal": -4.800000190734863,
+      "lg-container-padding-vertical": -6,
       "xl": 28,
+      "xl-container-padding-horisontal": -5.599999904632568,
+      "xl-container-padding-vertical": -8,
       "2xl": 32,
+      "2xl-container-padding-horisontal": -6.400000095367432,
+      "2xl-container-padding-vertical": -8,
       "3xl": 37,
+      "3xl-container-padding-horisontal": -7.400000095367432,
+      "3xl-container-padding-vertical": -8.5,
       "4xl": 42,
+      "4xl-container-padding-horisontal": -8.399999618530273,
+      "4xl-container-padding-vertical": -11,
       "5xl": 48,
-      "6xl": 56
+      "5xl-container-padding-horisontal": -9.600000381469727,
+      "5xl-container-padding-vertical": -12,
+      "6xl": 56,
+      "6xl-container-padding-horisontal": -11.199999809265137,
+      "6xl-container-padding-vertical": -14
     },
     "selectable": {
       "xs": 20,
@@ -246,7 +266,6 @@
       }
     },
     "header": {
-      "font-family": "Equinor",
       "xs": {
         "font-size": 12,
         "tracking-tight": -1.149999976158142,
@@ -258,6 +277,7 @@
         "line-height-default": 16,
         "line-height-squished": 12
       },
+      "font-family": "Equinor",
       "sm": {
         "font-size": 14,
         "tracking-tight": -1.3200000524520874,

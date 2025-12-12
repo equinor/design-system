@@ -4,15 +4,35 @@
 
 [data-density="comfortable"] {
   --eds-sizing-icon-xs: 0.875rem;
+  --eds-sizing-icon-xs-container-padding-horisontal: -0.2em;
+  --eds-sizing-icon-xs-container-padding-vertical: -0.188em;
   --eds-sizing-icon-sm: 1rem;
+  --eds-sizing-icon-sm-container-padding-horisontal: -0.2em;
+  --eds-sizing-icon-sm-container-padding-vertical: -0.25em;
   --eds-sizing-icon-md: 1.125rem;
+  --eds-sizing-icon-md-container-padding-horisontal: -0.225em;
+  --eds-sizing-icon-md-container-padding-vertical: -0.313em;
   --eds-sizing-icon-lg: 1.25rem;
+  --eds-sizing-icon-lg-container-padding-horisontal: -0.25em;
+  --eds-sizing-icon-lg-container-padding-vertical: -0.25em;
   --eds-sizing-icon-xl: 1.5rem;
+  --eds-sizing-icon-xl-container-padding-horisontal: -0.3em;
+  --eds-sizing-icon-xl-container-padding-vertical: -0.375em;
   --eds-sizing-icon-2xl: 1.75rem;
+  --eds-sizing-icon-2xl-container-padding-horisontal: -0.35em;
+  --eds-sizing-icon-2xl-container-padding-vertical: -0.5em;
   --eds-sizing-icon-3xl: 2rem;
+  --eds-sizing-icon-3xl-container-padding-horisontal: -0.4em;
+  --eds-sizing-icon-3xl-container-padding-vertical: -0.5em;
   --eds-sizing-icon-4xl: 2.313rem;
+  --eds-sizing-icon-4xl-container-padding-horisontal: -0.463em;
+  --eds-sizing-icon-4xl-container-padding-vertical: -0.531em;
   --eds-sizing-icon-5xl: 2.625rem;
+  --eds-sizing-icon-5xl-container-padding-horisontal: -0.525em;
+  --eds-sizing-icon-5xl-container-padding-vertical: -0.688em;
   --eds-sizing-icon-6xl: 3rem;
+  --eds-sizing-icon-6xl-container-padding-horisontal: -0.6em;
+  --eds-sizing-icon-6xl-container-padding-vertical: -0.688em;
   --eds-sizing-selectable-xs: 1rem;
   --eds-sizing-selectable-sm: 1.25rem;
   --eds-sizing-selectable-md: 1.5rem;
@@ -172,11 +192,10 @@
   --eds-typography-ui-body-6xl-tracking-normal: 0px;
   --eds-typography-ui-body-6xl-tracking-wide: 3.52px;
   --eds-typography-ui-body-6xl-font-weight-lighter: 300;
-  --eds-typography-ui-body-6xl-font-weight-normal: 0px;
+  --eds-typography-ui-body-6xl-font-weight-normal: 400;
   --eds-typography-ui-body-6xl-font-weight-bolder: 500;
   --eds-typography-ui-body-6xl-line-height-default: 2.25rem;
   --eds-typography-ui-body-6xl-line-height-squished: 2rem;
-  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-xs-font-size: 0.656rem;
   --eds-typography-header-xs-tracking-tight: -0.99px;
   --eds-typography-header-xs-tracking-normal: 0px;
@@ -186,6 +205,7 @@
   --eds-typography-header-xs-font-weight-bolder: 500;
   --eds-typography-header-xs-line-height-default: 0.75rem;
   --eds-typography-header-xs-line-height-squished: 0.75rem;
+  --eds-typography-header-font-family: "Equinor";
   --eds-typography-header-sm-font-size: 0.75rem;
   --eds-typography-header-sm-tracking-tight: -1.15px;
   --eds-typography-header-sm-tracking-normal: 0px;

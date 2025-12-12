@@ -18,6 +18,22 @@ export const pxToRem: Transform = {
       return false
     }
 
+    // Skip if value is already transformed (string with unit)
+    if (typeof token.$value === 'string') {
+      return false
+    }
+
+    // Skip icon container padding tokens - they should use em instead of rem
+    const path = token?.path ?? []
+    const isSizingIconPath = path[0] === 'sizing' && path[1] === 'icon'
+    const hasContainerPadding = path.some(
+      (segment) =>
+        typeof segment === 'string' && segment.includes('container-padding'),
+    )
+    if (isSizingIconPath && hasContainerPadding) {
+      return false
+    }
+
     const matchingPathSegments = [
       'font',
       'size',

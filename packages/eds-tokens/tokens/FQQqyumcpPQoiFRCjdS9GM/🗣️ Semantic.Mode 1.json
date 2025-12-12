@@ -46,15 +46,29 @@
         }
       }
     },
-    "Icon container size": {
+    "Icon container padding ↔︎": {
       "$type": "number",
-      "$value": "{Icon.Container size}",
-      "$description": "",
+      "$value": "{Icon.Container padding horizontal}",
+      "$description": "Horizontal padding",
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
           "scopes": [
-            "WIDTH_HEIGHT"
+            "GAP"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Icon container padding ↕︎": {
+      "$type": "number",
+      "$value": "{Icon.Container padding vertical}",
+      "$description": "Vertical padding",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "GAP"
           ],
           "codeSyntax": {}
         }
@@ -459,6 +473,22 @@
           "codeSyntax": {
             "WEB": "var(--eds-typography-font-weight)"
           }
+        }
+      }
+    }
+  },
+  "Deprecated": {
+    "Icon container size ⛔️": {
+      "$type": "number",
+      "$value": "{Icon.Container size}",
+      "$description": "Do not use! Use Icon Container padding instead and no width / height.",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
         }
       }
     }

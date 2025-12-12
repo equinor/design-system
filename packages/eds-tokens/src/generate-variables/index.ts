@@ -4,9 +4,11 @@ import {
   PX_TO_REM_NAME,
   PX_FORMATTED_NAME,
   FONT_QUOTE_NAME,
+  ICON_CONTAINER_PADDING_TO_EM_NAME,
   fontQuote,
   pxFormatted,
   pxToRem,
+  iconContainerPaddingToEm,
 } from '@equinor/eds-tokens-build'
 
 import { createSpacingAndTypographyVariables } from './createSpacingAndTypographyVariables'
@@ -20,6 +22,7 @@ StyleDictionary.registerTransform(pxFormatted)
 StyleDictionary.registerTransform(pxTransform)
 StyleDictionary.registerTransform(pxToRem)
 StyleDictionary.registerTransform(fontQuote)
+StyleDictionary.registerTransform(iconContainerPaddingToEm)
 
 export async function generate() {
   const TOKENS_DIR_FILE_PATH = `${process.cwd()}/tokens`
@@ -28,6 +31,7 @@ export async function generate() {
 
   const cssTransforms = [
     'name/kebab',
+    ICON_CONTAINER_PADDING_TO_EM_NAME, // Must run before pxToRem to intercept icon container padding tokens
     PX_TO_REM_NAME,
     PX_FORMATTED_NAME,
     FONT_QUOTE_NAME,

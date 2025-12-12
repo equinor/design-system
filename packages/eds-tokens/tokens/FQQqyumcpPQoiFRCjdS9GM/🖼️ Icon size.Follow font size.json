@@ -23,6 +23,30 @@
           "codeSyntax": {}
         }
       }
+    },
+    "Container padding horizontal": {
+      "$type": "number",
+      "$value": "{typography.icon-container-padding-horizontal}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
+    },
+    "Container padding vertical": {
+      "$type": "number",
+      "$value": "{typography.icon-container-padding-vertical}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [],
+          "codeSyntax": {}
+        }
+      }
     }
   }
 }
