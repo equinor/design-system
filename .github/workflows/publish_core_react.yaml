@@ -129,6 +129,15 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           run_install: false
+      - name: Set beta version from version.txt
+        if: github.event.inputs.npm-tag == 'beta'
+        id: set-beta-version
+        run: |
+          BETA_VERSION=$(cat packages/eds-core-react/src/components/next/version.txt | tr -d '[:space:]')
+          echo "Beta version: $BETA_VERSION"
+          cd packages/eds-core-react
+          npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
+          echo "Updated package.json version to $BETA_VERSION"
       - name: Publish to npm
         id: publish-to-npm
         run: |
