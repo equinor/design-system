@@ -273,7 +273,7 @@ pnpm run update-tokens:spacing-modes
 
 **What Happens:**
 
-1. Connects to Figma REST API using `FIGMA_ACCESS_TOKEN` environment variable
+1. Connects to Figma REST API using `PERSONAL_ACCESS_TOKEN` environment variable (.env file in the eds-tokens package root)
 2. Fetches all variables from the specified file key
 3. Transforms Figma variables to W3C token format
 4. Writes JSON files to `tokens/[project-id]/[Collection].[Mode].json`
