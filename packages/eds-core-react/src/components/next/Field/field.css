@@ -1,18 +1,16 @@
 .eds-field {
-  /* Figma: gap between Label+Description and Control, and Control and Validation */
-  --field-gap-block: 8px;
-  --field-gap-inline: 12px;
-  /* Colors from Figma */
-  --field-label-color: var(--eds-color-text-strong);
-  --field-description-color: var(--eds-color-text-subtle);
-  --field-optional-color: var(--eds-color-text-subtle);
+  /* Gap activated via data-vertical-gap attribute on element */
   display: grid;
   grid-template-areas:
     'label'
     'description'
     'control'
     'validation';
-  gap: var(--field-gap-block);
+  gap: var(--eds-generic-gap-vertical);
+  /* Colors from Figma */
+  --field-label-color: var(--eds-color-text-strong);
+  --field-description-color: var(--eds-color-text-subtle);
+  --field-optional-color: var(--eds-color-text-subtle);
 }
 
 .eds-field[data-layout='horizontal'] {
@@ -21,7 +19,7 @@
     'label control'
     'description control'
     'validation validation';
-  column-gap: var(--field-gap-inline);
+  column-gap: var(--eds-generic-gap-horizontal);
 }
 
 .eds-field__label {
