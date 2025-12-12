@@ -9,8 +9,8 @@
   --checkbox-hover-size: var(--eds-sizing-selectable-lg);
   /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
   --checkbox-icon-color: var(--eds-color-border-strong);
-  /* Hover color from Figma - follows data-color-appearance */
-  --checkbox-hover-color: var(--eds-color-bg-fill-muted-hover);
+  /* Hover color is always accent - interaction feedback, not semantic */
+  --checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-hover);
   --checkbox-label-color: var(--eds-color-text-strong);
   --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
   /* Spacing activated via data-selectable-space and data-space-proportions on element */
