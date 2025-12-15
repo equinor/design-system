@@ -1,4 +1,5 @@
 import './preview.css'
+import '../src/index.css'
 
 const preview = {
   viewMode: 'docs',

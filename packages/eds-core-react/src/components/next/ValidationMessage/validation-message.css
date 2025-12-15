@@ -1,0 +1,10 @@
+.eds-validation-message {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--eds-generic-gap-horizontal);
+  color: var(--eds-color-text-strong);
+}
+
+.eds-validation-message__text {
+  color: inherit;
+}
