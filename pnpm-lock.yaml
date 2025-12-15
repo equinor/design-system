@@ -461,8 +461,8 @@ importers:
         version: 3.13.12(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@equinor/eds-core-react':
-        specifier: ^1
-        version: 1.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
+        specifier: ^2
+        version: 2.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
       '@rollup/plugin-babel':
         specifier: ^6.1.0
         version: 6.1.0(@babel/core@7.28.5)(@types/babel__core@7.20.5)(rollup@4.52.5)
@@ -2353,25 +2353,28 @@ packages:
   '@emotion/unitless@0.8.1':
     resolution: {integrity: sha512-KOEGMu6dmJZtpadb476IsZBclKvILjopjUii3V+7MnXIQCYh8W3NgNcgwo21n9LXZX6EDIKvqfjYxXebDwxKmQ==}
 
-  '@equinor/eds-core-react@1.0.0':
-    resolution: {integrity: sha512-GFXLdsgoeR0zE1MSFUWXolVTZXftx2EpvwfwUU04E81p3iu9GxZSH1QEanzEID4ZPkFyFbAaL7NSpukgNEUsCw==}
+  '@equinor/eds-core-react@2.2.0':
+    resolution: {integrity: sha512-1MFr3m8Ik7SO9hDMPAFrBmeDnzaTkNbAcJ/DCc6mYPbXjwBWJIgah21MfVhKsKluGo05pWmeVkNi/biTErtDcA==}
     peerDependencies:
-      react: '>=19.0.0'
-      react-dom: '>=16.8'
-      styled-components: '>=5.1'
+      react: ^19
+      react-dom: ^19
+      styled-components: ^6
 
-  '@equinor/eds-icons@1.0.0':
-    resolution: {integrity: sha512-G+XimxKCx1Ujnq9S6q0guhKfik4gAAh23NsUVVSz8gcUbgKXsjxnBD393kM/aScjS8TqSW4iFqI05xBdlVnNqA==}
+  '@equinor/eds-icons@1.1.0':
+    resolution: {integrity: sha512-ZeViQ0Ph/yQwjRlxDcUqHwkzgfslbWLasZKcKUI3LmawWJ6jaOIC3nhmA0A6D+Q/J0JQ2qb0J9Rya/0Sx0fCpQ==}
 
   '@equinor/eds-tokens@1.0.0':
     resolution: {integrity: sha512-0VhSPlwQ8yjL1Sk8RyfanO0fe06rUg1YldqPYZb2a2yRfZGaEaZf3USDuo8Ewi9VLQZRbjz+IhrJbdXZOXbNzQ==}
 
-  '@equinor/eds-utils@1.0.0':
-    resolution: {integrity: sha512-sUVgkGXaiynZ3dmE5eE92Z1kHq+0BxABNfnKGGT8T7Y4PyWkYHZt6WEeSlgT6WRwaOVO3dfuoDRfxNGwZYCWfg==}
+  '@equinor/eds-tokens@2.1.1':
+    resolution: {integrity: sha512-qz2O9PeYAFzFLbwF1emvuX+GFOnQVLi3v86JgTzuUz+2rpYKQ2Dw+8N8blpv1drlsJcWT09aj5QdyLOJu8AxpA==}
+
+  '@equinor/eds-utils@2.0.0':
+    resolution: {integrity: sha512-7VfLYkPA/qJst6HadcFXeLBhGiq3j1UaA5mW0zsIDurh/tesr+CziaXrPtopOfYJ5nIoQ9Zb0d6Mfx98XHLnjA==}
     peerDependencies:
-      react: '>=19.0.0'
-      react-dom: '>=16.8'
-      styled-components: '>=5.1'
+      react: ^19
+      react-dom: ^19
+      styled-components: ^6
 
   '@esbuild/aix-ppc64@0.25.9':
     resolution: {integrity: sha512-OaGtL73Jck6pBKjNIe24BnFE6agGl+6KxDtTfHhy1HmhthfKouEcOhqpSL64K4/0WCtbKFLOdzD/44cJ4k9opA==}
@@ -6054,11 +6057,6 @@ packages:
 
   downshift@9.0.10:
     resolution: {integrity: sha512-TP/iqV6bBok6eGD5tZ8boM8Xt7/+DZvnVNr8cNIhbAm2oUBd79Tudiccs2hbcV9p7xAgS/ozE7Hxy3a9QqS6Mw==}
-    peerDependencies:
-      react: '>=16.12.0'
-
-  downshift@9.0.8:
-    resolution: {integrity: sha512-59BWD7+hSUQIM1DeNPLirNNnZIO9qMdIK5GQ/Uo8q34gT4B78RBlb9dhzgnh0HfQTJj4T/JKYD8KoLAlMWnTsA==}
     peerDependencies:
       react: '>=16.12.0'
 
@@ -13484,12 +13482,12 @@ snapshots:
 
   '@emotion/unitless@0.8.1': {}
 
-  '@equinor/eds-core-react@1.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
+  '@equinor/eds-core-react@2.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
     dependencies:
       '@babel/runtime': 7.28.4
-      '@equinor/eds-icons': 1.0.0
-      '@equinor/eds-tokens': 1.0.0
-      '@equinor/eds-utils': 1.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
+      '@equinor/eds-icons': 1.1.0
+      '@equinor/eds-tokens': 2.1.1
+      '@equinor/eds-utils': 2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
       '@floating-ui/react': 0.27.16(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@internationalized/date': 3.10.0
       '@react-aria/utils': 3.31.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -13497,20 +13495,22 @@ snapshots:
       '@react-stately/datepicker': 3.15.2(react@19.2.0)
       '@react-types/shared': 3.32.1(react@19.2.0)
       '@tanstack/react-virtual': 3.13.12(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      downshift: 9.0.8(react@19.2.0)
+      downshift: 9.0.10(react@19.2.0)
       react: 19.2.0
       react-aria: 3.44.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-dom: 19.2.0(react@19.2.0)
       styled-components: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
 
-  '@equinor/eds-icons@1.0.0': {}
+  '@equinor/eds-icons@1.1.0': {}
 
   '@equinor/eds-tokens@1.0.0': {}
 
-  '@equinor/eds-utils@1.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
+  '@equinor/eds-tokens@2.1.1': {}
+
+  '@equinor/eds-utils@2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
     dependencies:
       '@babel/runtime': 7.28.4
-      '@equinor/eds-tokens': 1.0.0
+      '@equinor/eds-tokens': 2.1.1
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
       styled-components: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -18049,15 +18049,6 @@ snapshots:
   dotenv@17.2.3: {}
 
   downshift@9.0.10(react@19.2.0):
-    dependencies:
-      '@babel/runtime': 7.28.4
-      compute-scroll-into-view: 3.1.1
-      prop-types: 15.8.1
-      react: 19.2.0
-      react-is: 18.2.0
-      tslib: 2.8.1
-
-  downshift@9.0.8(react@19.2.0):
     dependencies:
       '@babel/runtime': 7.28.4
       compute-scroll-into-view: 3.1.1
