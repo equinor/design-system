@@ -1,0 +1,71 @@
+.eds-field {
+  /* Gap activated via data-vertical-gap attribute on element */
+  display: grid;
+  grid-template-areas:
+    'label'
+    'description'
+    'control'
+    'validation';
+  gap: var(--eds-generic-gap-vertical);
+  /* Colors from Figma */
+  --field-label-color: var(--eds-color-text-strong);
+  --field-description-color: var(--eds-color-text-subtle);
+  --field-optional-color: var(--eds-color-text-subtle);
+}
+
+.eds-field[data-layout='horizontal'] {
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'label control'
+    'description control'
+    'validation validation';
+  column-gap: var(--eds-generic-gap-horizontal);
+}
+
+.eds-field__label {
+  grid-area: label;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--field-label-color);
+  gap: var(--eds-selectable-space-horizontal);
+}
+
+.eds-field__label-content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eds-selectable-space-horizontal);
+}
+
+.eds-field__label-text {
+  color: inherit;
+}
+
+.eds-field__required-indicator {
+  color: var(--eds-color-text-danger-strong);
+}
+
+.eds-field__optional-indicator {
+  color: var(--field-optional-color);
+}
+
+.eds-field__control {
+  grid-area: control;
+}
+
+.eds-field__description {
+  grid-area: description;
+  margin: 0;
+  color: var(--field-description-color);
+}
+
+.eds-field__validation {
+  grid-area: validation;
+}
+
+.eds-field[data-disabled='true'] {
+  --field-label-color: var(--eds-color-text-subtle);
+  --field-description-color: var(--eds-color-border-neutral-medium);
+  --field-optional-color: var(--eds-color-border-neutral-medium);
+}
