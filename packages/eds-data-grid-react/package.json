@@ -30,7 +30,7 @@
     "email": "fg_eds@equinor.com"
   },
   "peerDependencies": {
-    "@equinor/eds-core-react": "^1",
+    "@equinor/eds-core-react": "^1 || ^2",
     "react": "^19",
     "react-dom": "^19",
     "styled-components": "^6"
@@ -43,7 +43,7 @@
     "@tanstack/react-virtual": "^3.13.12"
   },
   "devDependencies": {
-    "@equinor/eds-core-react": "^1",
+    "@equinor/eds-core-react": "^2",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-commonjs": "^28.0.8",
     "@rollup/plugin-node-resolve": "^16.0.3",
