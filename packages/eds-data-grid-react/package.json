@@ -30,7 +30,7 @@
     "email": "fg_eds@equinor.com"
   },
   "peerDependencies": {
-    "@equinor/eds-core-react": "^1 || ^2",
+    "@equinor/eds-core-react": ">=1 <3",
     "react": "^19",
     "react-dom": "^19",
     "styled-components": "^6"
