@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.2.0...eds-data-grid-react@v1.2.1) (2025-12-15)
+
+
+### 🐛 Fixed
+
+* **eds-data-grid-react:** update eds-core-react peerDependency to support v2 ([b8f59b9](https://github.com/equinor/design-system/commit/b8f59b9ceb73ee85a000e1b5fc27c6aae9885fab))
+
 ## [1.2.0](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.1.0...eds-data-grid-react@v1.2.0) (2025-12-11)
 
 
