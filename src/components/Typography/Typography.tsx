@@ -113,7 +113,7 @@ const themeStyles = EDSStyleSheet.create(
         const textStyle: TextStyle = {
             color: resolveColor(color, theme),
             ...typography,
-            fontFamily: resolveFontName(bold, italic, typography.fontFamily ?? "Equinor-Regular"),
+            fontFamily: resolveFontName(bold, italic, typography.fontFamily ?? "Inter"),
         };
         return {
             text: textStyle,
