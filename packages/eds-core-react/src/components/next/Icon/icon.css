@@ -9,20 +9,11 @@
   width: 1em;
   height: 1em;
 
-  /* Negative margins for optical alignment with text baseline (1.5em fallback) */
-  margin-block: -0.33em;
-  margin-inline: -0.13em;
-
-  flex-shrink: 0;
-}
-
-/*
- * When inside Typography (data-font-size), icon size comes from tokens.
- * Restore original working margins for Typography context.
- */
-[data-font-size] .icon {
+  /* Negative margins for optical alignment with text baseline */
   margin-block: -0.25em;
   margin-inline: -0.1em;
+
+  flex-shrink: 0;
 }
 
 /* Explicit size: fixed size from design tokens, no margins */
