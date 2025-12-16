@@ -1,6 +1,70 @@
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { save, add, warning_filled, info_circle } from '@equinor/eds-icons'
 import { Icon, IconProps } from '.'
+import { TypographyNext as Typography } from '../../Typography'
+import { CSSProperties, ReactNode } from 'react'
+
+/* Story helper components - keeps code preview clean */
+const Stack = ({
+  children,
+  direction = 'row',
+  gap = 16,
+  align,
+}: {
+  children: ReactNode
+  direction?: 'row' | 'column'
+  gap?: number
+  align?: CSSProperties['alignItems']
+}) => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: direction,
+      gap: `${gap}px`,
+      alignItems: align,
+    }}
+  >
+    {children}
+  </div>
+)
+
+const Box = ({
+  children,
+  bg,
+  padding = 8,
+}: {
+  children: ReactNode
+  bg?: boolean
+  padding?: number
+}) => (
+  <div
+    style={{
+      background: bg ? 'rgba(0,0,0,0.05)' : undefined,
+      padding: `${padding}px`,
+    }}
+  >
+    {children}
+  </div>
+)
+
+const Label = ({ children }: { children: ReactNode }) => (
+  <Typography family="ui" size="xs" baseline="grid" style={{ margin: '0 0 4px', color: '#666' }}>
+    {children}
+  </Typography>
+)
+
+const IconDemo = ({
+  children,
+  label,
+}: {
+  children: ReactNode
+  label: string
+}) => (
+  <div style={{ textAlign: 'center' }}>
+    <Label>{label}</Label>
+    {children}
+  </div>
+)
 
 const meta: Meta<typeof Icon> = {
   title: 'EDS 2.0 (beta)/Icon',
@@ -39,21 +103,28 @@ npm install @equinor/eds-core-react@beta
 
 \`\`\`tsx
 import { Icon } from '@equinor/eds-core-react/next'
+import { TypographyNext as Typography } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
 
-<Icon data={save} />
+// Auto-sized from Typography
+<Typography size="md">
+  Click <Icon data={save} /> to save
+</Typography>
+
+// Explicit size for standalone usage
+<Icon data={save} size="lg" />
 \`\`\`
 
 ## Sizing Priority
 
 1. **Explicit \`size\` prop** - Highest priority, uses \`--eds-sizing-icon-{size}\` tokens
-2. **Parent's \`data-font-size\`** - Inherits \`--eds-typography-icon-size\` from parent
+2. **Parent Typography** - Inherits \`--eds-typography-icon-size\` from Typography component
 3. **Dynamic fallback** - Uses \`1.5em\` for automatic scaling with font-size
 
 ## Key Features
 
 - **Token-based sizing** - Uses EDS design tokens for consistent sizing
-- **Automatic sizing** - Scales with parent's \`data-font-size\` attribute
+- **Automatic sizing** - Scales with parent Typography component
 - **Dynamic fallback** - Scales with font-size (1.5em) when no tokens are set
 - **Accessible** - WCAG 2.1 AA compliant with proper ARIA attributes
         `,
@@ -74,48 +145,38 @@ Introduction.args = {
 }
 
 export const ExplicitSizes: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <div style={{ textAlign: 'center' }}>
+  <Stack gap={16}>
+    <IconDemo label="xs (16px)">
       <Icon data={save} size="xs" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>xs (16px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="sm (18px)">
       <Icon data={save} size="sm" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>sm (18px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="md (20px)">
       <Icon data={save} size="md" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>md (20px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="lg (24px)">
       <Icon data={save} size="lg" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>lg (24px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="xl (28px)">
       <Icon data={save} size="xl" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>xl (28px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="2xl (32px)">
       <Icon data={save} size="2xl" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>2xl (32px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="3xl (37px)">
       <Icon data={save} size="3xl" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>3xl (37px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="4xl (42px)">
       <Icon data={save} size="4xl" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>4xl (42px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="5xl (48px)">
       <Icon data={save} size="5xl" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>5xl (48px)</p>
-    </div>
-    <div style={{ textAlign: 'center' }}>
+    </IconDemo>
+    <IconDemo label="6xl (56px)">
       <Icon data={save} size="6xl" />
-      <p style={{ fontSize: '12px', margin: '4px 0 0' }}>6xl (56px)</p>
-    </div>
-  </div>
+    </IconDemo>
+  </Stack>
 )
 ExplicitSizes.parameters = {
   docs: {
@@ -140,93 +201,51 @@ Use the \`size\` prop for explicit sizing. Maps to \`--eds-sizing-icon-{size}\` 
   },
 }
 
-export const AutoSizeFromDataFontSize: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-    <div
-      data-font-size="xs"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(0,0,0,0.05)',
-        padding: '8px',
-      }}
-    >
-      <Icon data={warning_filled} color="orange" />
-      <span>data-font-size="xs" - icon auto-sizes to match</span>
-    </div>
-    <div
-      data-font-size="sm"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(0,0,0,0.05)',
-        padding: '8px',
-      }}
-    >
-      <Icon data={warning_filled} color="orange" />
-      <span>data-font-size="sm" - icon auto-sizes to match</span>
-    </div>
-    <div
-      data-font-size="md"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(0,0,0,0.05)',
-        padding: '8px',
-      }}
-    >
-      <Icon data={warning_filled} color="orange" />
-      <span>data-font-size="md" - icon auto-sizes to match</span>
-    </div>
-    <div
-      data-font-size="lg"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(0,0,0,0.05)',
-        padding: '8px',
-      }}
-    >
-      <Icon data={warning_filled} color="orange" />
-      <span>data-font-size="lg" - icon auto-sizes to match</span>
-    </div>
-    <div
-      data-font-size="xl"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(0,0,0,0.05)',
-        padding: '8px',
-      }}
-    >
-      <Icon data={warning_filled} color="orange" />
-      <span>data-font-size="xl" - icon auto-sizes to match</span>
-    </div>
-    <div
-      data-font-size="2xl"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(0,0,0,0.05)',
-        padding: '8px',
-      }}
-    >
-      <Icon data={warning_filled} color="orange" />
-      <span>data-font-size="2xl" - icon auto-sizes to match</span>
-    </div>
-  </div>
+export const AutoSizeFromTypography: StoryFn<IconProps> = () => (
+  <Stack direction="column" gap={16}>
+    <Box bg padding={8}>
+      <Typography family="ui" size="xs" baseline="grid">
+        <Icon data={warning_filled} color="orange" /> Typography
+        size=&quot;xs&quot; - icon auto-sizes to match
+      </Typography>
+    </Box>
+    <Box bg padding={8}>
+      <Typography family="ui" size="sm" baseline="grid">
+        <Icon data={warning_filled} color="orange" /> Typography
+        size=&quot;sm&quot; - icon auto-sizes to match
+      </Typography>
+    </Box>
+    <Box bg padding={8}>
+      <Typography family="ui" size="md" baseline="grid">
+        <Icon data={warning_filled} color="orange" /> Typography
+        size=&quot;md&quot; - icon auto-sizes to match
+      </Typography>
+    </Box>
+    <Box bg padding={8}>
+      <Typography family="ui" size="lg" baseline="grid">
+        <Icon data={warning_filled} color="orange" /> Typography
+        size=&quot;lg&quot; - icon auto-sizes to match
+      </Typography>
+    </Box>
+    <Box bg padding={8}>
+      <Typography family="ui" size="xl" baseline="grid">
+        <Icon data={warning_filled} color="orange" /> Typography
+        size=&quot;xl&quot; - icon auto-sizes to match
+      </Typography>
+    </Box>
+    <Box bg padding={8}>
+      <Typography family="ui" size="2xl" baseline="grid">
+        <Icon data={warning_filled} color="orange" /> Typography
+        size=&quot;2xl&quot; - icon auto-sizes to match
+      </Typography>
+    </Box>
+  </Stack>
 )
-AutoSizeFromDataFontSize.parameters = {
+AutoSizeFromTypography.parameters = {
   docs: {
     description: {
       story: `
-Icons automatically inherit size from parent's \`data-font-size\` attribute via the \`--eds-typography-icon-size\` CSS variable.
+Icons automatically inherit size from \`Typography\` component via the \`--eds-typography-icon-size\` CSS variable.
 This is the recommended approach when using icons inline with text in EDS components.
       `,
     },
@@ -234,50 +253,42 @@ This is the recommended approach when using icons inline with text in EDS compon
 }
 
 export const DensityModes: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', gap: '48px' }}>
+  <Stack gap={48}>
     <div data-density="spacious">
       <h4 style={{ margin: '0 0 16px' }}>Spacious (default)</h4>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <div style={{ textAlign: 'center' }}>
+      <Stack gap={16}>
+        <IconDemo label="sm (18px)">
           <Icon data={save} size="sm" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>sm (18px)</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Icon data={save} size="md" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>md (20px)</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
+        </IconDemo>
+        <IconDemo label="lg (24px)">
           <Icon data={save} size="lg" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>lg (24px)</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Icon data={save} size="xl" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>xl (28px)</p>
-        </div>
-      </div>
+        </IconDemo>
+        <IconDemo label="2xl (32px)">
+          <Icon data={save} size="2xl" />
+        </IconDemo>
+        <IconDemo label="5xl (48px)">
+          <Icon data={save} size="5xl" />
+        </IconDemo>
+      </Stack>
     </div>
     <div data-density="comfortable">
       <h4 style={{ margin: '0 0 16px' }}>Comfortable (compact)</h4>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <div style={{ textAlign: 'center' }}>
+      <Stack gap={16}>
+        <IconDemo label="sm (16px)">
           <Icon data={save} size="sm" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>sm (16px)</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Icon data={save} size="md" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>md (18px)</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
+        </IconDemo>
+        <IconDemo label="lg (20px)">
           <Icon data={save} size="lg" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>lg (20px)</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Icon data={save} size="xl" />
-          <p style={{ fontSize: '12px', margin: '4px 0 0' }}>xl (24px)</p>
-        </div>
-      </div>
+        </IconDemo>
+        <IconDemo label="2xl (28px)">
+          <Icon data={save} size="2xl" />
+        </IconDemo>
+        <IconDemo label="5xl (42px)">
+          <Icon data={save} size="5xl" />
+        </IconDemo>
+      </Stack>
     </div>
-  </div>
+  </Stack>
 )
 DensityModes.parameters = {
   docs: {
@@ -295,7 +306,7 @@ This is controlled by CSS custom properties (\`--eds-sizing-icon-{size}\`) that 
 }
 
 export const DynamicFallback: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+  <Stack direction="column" gap={16}>
     <p style={{ fontSize: '14px', margin: 0 }}>
       <Icon data={info_circle} /> 14px font-size → ~21px icon (1.5em)
     </p>
@@ -311,7 +322,7 @@ export const DynamicFallback: StoryFn<IconProps> = () => (
     <p style={{ fontSize: '32px', margin: 0 }}>
       <Icon data={info_circle} /> 32px font-size → 48px icon (1.5em)
     </p>
-  </div>
+  </Stack>
 )
 DynamicFallback.parameters = {
   docs: {
@@ -325,12 +336,12 @@ This means icons are always 1.5x the surrounding font-size.
 }
 
 export const Color: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+  <Stack gap={16}>
     <Icon data={save} size="lg" color="red" />
     <Icon data={save} size="lg" color="green" />
     <Icon data={save} size="lg" color="blue" />
     <Icon data={save} size="lg" color="currentColor" />
-  </div>
+  </Stack>
 )
 Color.parameters = {
   docs: {
@@ -342,7 +353,7 @@ Color.parameters = {
 }
 
 export const Accessibility: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', gap: '32px' }}>
+  <Stack gap={32}>
     <div>
       <p>
         <strong>Decorative</strong> (hidden from screen readers):
@@ -361,7 +372,7 @@ export const Accessibility: StoryFn<IconProps> = () => (
         {'<Icon data={save} title="Save document" />'}
       </pre>
     </div>
-  </div>
+  </Stack>
 )
 Accessibility.parameters = {
   docs: {
@@ -373,49 +384,40 @@ Accessibility.parameters = {
 }
 
 export const InlineWithText: StoryFn<IconProps> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+  <Stack direction="column" gap={16}>
     <div>
       <h4 style={{ margin: '0 0 8px' }}>Inline text (no size prop)</h4>
-      <p style={{ background: 'rgba(0,0,0,0.05)', padding: '8px', margin: 0 }}>
-        Click <Icon data={save} /> to save or <Icon data={add} /> to add a new
-        item
-      </p>
-      <p style={{ fontSize: '12px', color: '#666', margin: '4px 0 0' }}>
-        Negative margins align icon with text baseline
-      </p>
+      <Box bg padding={8}>
+        <Typography family="ui" size="md" baseline="grid">
+          Click <Icon data={save} /> to save or <Icon data={add} /> to add a new
+          item
+        </Typography>
+      </Box>
+      <Label>Negative margins align icon with text baseline</Label>
     </div>
     <div>
       <h4 style={{ margin: '0 0 8px' }}>Flex layout (with size prop)</h4>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          background: 'rgba(0,0,0,0.05)',
-          padding: '8px',
-        }}
-      >
-        <Icon data={add} size="md" />
-        <span>Add new item</span>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          background: 'rgba(0,0,0,0.05)',
-          padding: '8px',
-          marginTop: '4px',
-        }}
-      >
-        <span>Save changes</span>
-        <Icon data={save} size="md" />
-      </div>
-      <p style={{ fontSize: '12px', color: '#666', margin: '4px 0 0' }}>
+      <Box bg padding={8}>
+        <Stack gap={8} align="center">
+          <Icon data={add} size="md" />
+          <Typography family="ui" size="md" baseline="grid">
+            Add new item
+          </Typography>
+        </Stack>
+      </Box>
+      <Box bg padding={8}>
+        <Stack gap={8} align="center">
+          <Typography family="ui" size="md" baseline="grid">
+            Save changes
+          </Typography>
+          <Icon data={save} size="md" />
+        </Stack>
+      </Box>
+      <Label>
         No margins when using size prop - layout controlled by flex gap
-      </p>
+      </Label>
     </div>
-  </div>
+  </Stack>
 )
 InlineWithText.parameters = {
   docs: {

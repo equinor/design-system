@@ -3,57 +3,65 @@
   --_size: var(--eds-typography-icon-size, 1.5em);
 
   width: var(--_size);
-  font-size: var(--_size);
+  height: var(--_size);
 
-  /* Negative margins relative to icon size (via font-size) */
+  /*
+   * Negative margins for optical alignment with text baseline.
+   * Default margins work with 1.5em fallback (icon = 1.5x font-size).
+   */
+  font-size: var(--_size);
   margin-block: -0.5em;
   margin-inline: -0.2em;
 
   flex-shrink: 0;
 }
 
+/*
+ * When inside Typography (data-font-size), icon size comes from tokens.
+ * Token ratio differs from 1.5x, so use smaller margins.
+ */
+[data-font-size] .icon {
+  margin-block: -0.25em;
+  margin-inline: -0.1em;
+}
+
 /* Explicit size: fixed size from design tokens, no margins */
 .icon[data-icon-size] {
+  --_explicit-size: var(--eds-sizing-icon-md); /* fallback */
+
+  width: var(--_explicit-size);
+  height: var(--_explicit-size);
   margin: 0;
-  font-size: inherit; /* Reset font-size, size controlled by width/height */
+  font-size: inherit;
 }
+
 .icon[data-icon-size='xs'] {
-  width: var(--eds-sizing-icon-xs);
-  height: var(--eds-sizing-icon-xs);
+  --_explicit-size: var(--eds-sizing-icon-xs);
 }
 .icon[data-icon-size='sm'] {
-  width: var(--eds-sizing-icon-sm);
-  height: var(--eds-sizing-icon-sm);
+  --_explicit-size: var(--eds-sizing-icon-sm);
 }
 .icon[data-icon-size='md'] {
-  width: var(--eds-sizing-icon-md);
-  height: var(--eds-sizing-icon-md);
+  --_explicit-size: var(--eds-sizing-icon-md);
 }
 .icon[data-icon-size='lg'] {
-  width: var(--eds-sizing-icon-lg);
-  height: var(--eds-sizing-icon-lg);
+  --_explicit-size: var(--eds-sizing-icon-lg);
 }
 .icon[data-icon-size='xl'] {
-  width: var(--eds-sizing-icon-xl);
-  height: var(--eds-sizing-icon-xl);
+  --_explicit-size: var(--eds-sizing-icon-xl);
 }
 .icon[data-icon-size='2xl'] {
-  width: var(--eds-sizing-icon-2xl);
-  height: var(--eds-sizing-icon-2xl);
+  --_explicit-size: var(--eds-sizing-icon-2xl);
 }
 .icon[data-icon-size='3xl'] {
-  width: var(--eds-sizing-icon-3xl);
-  height: var(--eds-sizing-icon-3xl);
+  --_explicit-size: var(--eds-sizing-icon-3xl);
 }
 .icon[data-icon-size='4xl'] {
-  width: var(--eds-sizing-icon-4xl);
-  height: var(--eds-sizing-icon-4xl);
+  --_explicit-size: var(--eds-sizing-icon-4xl);
 }
 .icon[data-icon-size='5xl'] {
-  width: var(--eds-sizing-icon-5xl);
-  height: var(--eds-sizing-icon-5xl);
+  --_explicit-size: var(--eds-sizing-icon-5xl);
 }
 .icon[data-icon-size='6xl'] {
-  width: var(--eds-sizing-icon-6xl);
-  height: var(--eds-sizing-icon-6xl);
+  --_explicit-size: var(--eds-sizing-icon-6xl);
 }
