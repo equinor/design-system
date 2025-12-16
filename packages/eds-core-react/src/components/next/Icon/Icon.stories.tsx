@@ -310,6 +310,67 @@ This is controlled by CSS custom properties (\`--eds-sizing-icon-{size}\`) that 
   },
 }
 
+export const TypographyWithDensity: StoryFn<IconProps> = () => (
+  <Stack gap={48}>
+    <div data-density="spacious">
+      <h4 style={{ margin: '0 0 16px' }}>Spacious (default)</h4>
+      <Stack direction="column" gap={8}>
+        <Box bg padding={8}>
+          <Typography family="ui" size="sm" baseline="grid">
+            <Icon data={warning_filled} color="orange" /> Typography sm + Icon
+            (spacious)
+          </Typography>
+        </Box>
+        <Box bg padding={8}>
+          <Typography family="ui" size="md" baseline="grid">
+            <Icon data={warning_filled} color="orange" /> Typography md + Icon
+            (spacious)
+          </Typography>
+        </Box>
+        <Box bg padding={8}>
+          <Typography family="ui" size="lg" baseline="grid">
+            <Icon data={warning_filled} color="orange" /> Typography lg + Icon
+            (spacious)
+          </Typography>
+        </Box>
+      </Stack>
+    </div>
+    <div data-density="comfortable">
+      <h4 style={{ margin: '0 0 16px' }}>Comfortable (compact)</h4>
+      <Stack direction="column" gap={8}>
+        <Box bg padding={8}>
+          <Typography family="ui" size="sm" baseline="grid">
+            <Icon data={warning_filled} color="orange" /> Typography sm + Icon
+            (comfortable)
+          </Typography>
+        </Box>
+        <Box bg padding={8}>
+          <Typography family="ui" size="md" baseline="grid">
+            <Icon data={warning_filled} color="orange" /> Typography md + Icon
+            (comfortable)
+          </Typography>
+        </Box>
+        <Box bg padding={8}>
+          <Typography family="ui" size="lg" baseline="grid">
+            <Icon data={warning_filled} color="orange" /> Typography lg + Icon
+            (comfortable)
+          </Typography>
+        </Box>
+      </Stack>
+    </div>
+  </Stack>
+)
+TypographyWithDensity.parameters = {
+  docs: {
+    description: {
+      story: `
+Icons inside Typography automatically adapt to both the typography size and density mode.
+The icon inherits \`--eds-typography-icon-size\` which changes based on \`data-font-size\` and \`data-density\`.
+      `,
+    },
+  },
+}
+
 export const DynamicFallback: StoryFn<IconProps> = () => (
   <Stack direction="column" gap={16}>
     <p style={{ fontSize: '14px', margin: 0 }}>

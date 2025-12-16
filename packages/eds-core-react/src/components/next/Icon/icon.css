@@ -1,24 +1,24 @@
 /* Inline with text: uses token from parent's data-font-size, or 1.5em fallback */
 .icon {
-  --_size: var(--eds-typography-icon-size, 1.5em);
-
-  width: var(--_size);
-  height: var(--_size);
-
   /*
-   * Negative margins for optical alignment with text baseline.
-   * Default margins work with 1.5em fallback (icon = 1.5x font-size).
+   * Set font-size first to establish the icon's size context.
+   * Then use 1em for width/height (relative to computed font-size).
+   * This avoids compound scaling (1.5em × 1.5em = 2.25em would be wrong).
    */
-  font-size: var(--_size);
-  margin-block: -0.5em;
-  margin-inline: -0.2em;
+  font-size: var(--eds-typography-icon-size, 1.5em);
+  width: 1em;
+  height: 1em;
+
+  /* Negative margins for optical alignment with text baseline (1.5em fallback) */
+  margin-block: -0.33em;
+  margin-inline: -0.13em;
 
   flex-shrink: 0;
 }
 
 /*
  * When inside Typography (data-font-size), icon size comes from tokens.
- * Token ratio differs from 1.5x, so use smaller margins.
+ * Restore original working margins for Typography context.
  */
 [data-font-size] .icon {
   margin-block: -0.25em;
