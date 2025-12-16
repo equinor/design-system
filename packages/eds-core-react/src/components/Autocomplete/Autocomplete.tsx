@@ -1,108 +1,35 @@
 import {
-  forwardRef,
-  useState,
-  HTMLAttributes,
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-  ReactNode,
-  EventHandler,
-  SyntheticEvent,
-  DOMAttributes,
-  FocusEvent,
-  useImperativeHandle,
-} from 'react'
-import {
-  useCombobox,
-  UseComboboxProps,
-  useMultipleSelection,
-  UseMultipleSelectionProps,
-} from 'downshift'
-import { pickBy, mergeWith } from 'ramda'
-import { HelperText as _HelperText } from '../InputWrapper/HelperText' /* TODO: Use InputWrapper instead of HelperText once the new token system is in place */
-import { useVirtualizer } from '@tanstack/react-virtual'
-import styled, { ThemeProvider, css } from 'styled-components'
-import { Button } from '../Button'
-import { List } from '../List'
-import { useEds } from '../EdsProvider'
-import { Label } from '../Label'
-import { Icon } from '../Icon'
-import { Input } from '../Input'
-import { Progress } from '../Progress'
-import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
-import {
-  AutocompleteToken,
-  multiSelect as multiSelectTokens,
-  selectTokens as selectTokens,
-} from './Autocomplete.tokens'
-import {
-  useToken,
-  bordersTemplate,
-  useIsomorphicLayoutEffect,
-} from '@equinor/eds-utils'
-import { AutocompleteOption } from './Option'
-import {
-  offset,
   flip,
-  size,
-  autoUpdate,
-  useFloating,
-  useInteractions,
   MiddlewareState,
+  offset,
+  size,
+  useFloating,
 } from '@floating-ui/react'
+import { HTMLAttributes, ReactNode } from 'react'
+import styled, { css, ThemeProvider } from 'styled-components'
+import { Button } from '../Button'
+import { HelperText as _HelperText } from '../InputWrapper/HelperText' /* TODO: Use InputWrapper instead of HelperText once the new token system is in place */
+import { Label } from '../Label'
 import { Variants } from '../types'
-import { AddNewOption } from './AddNewOption'
+import { AutocompleteContext } from './AutocompleteContext'
+import { MultipleInput } from './MultipleInput'
+import { OptionList } from './OptionList'
+import { SingleInput } from './SingleInput'
+import { useAutocomplete } from './useAutocomplete'
 
 const Container = styled.div`
   position: relative;
 `
 
-const AllSymbol = Symbol('Select all')
-const AddSymbol = Symbol('Add new')
-
-// MARK: styled components
-const StyledList = styled(List)(
-  ({ theme }) => css`
-    background-color: ${theme.background};
-    box-shadow: ${theme.boxShadow};
-    ${bordersTemplate(theme.border)}
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 0;
-    display: grid;
-    /* hack to fix clipping issue in firefox (#3170) */
-    @supports (-moz-appearance: none) {
-      scrollbar-width: thin;
-    }
-  `,
-)
-
-const StyledPopover = styled('div').withConfig({
-  shouldForwardProp: () => true, //workaround to avoid warning until popover gets added to react types
-})<{ popover: string }>`
-  inset: unset;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  &::backdrop {
-    background-color: transparent;
-  }
-`
+export const AllSymbol = Symbol('Select all')
+export const AddSymbol = Symbol('Add new')
 
 const HelperText = styled(_HelperText)`
   margin-top: 8px;
   margin-left: 8px;
 `
 
-const AutocompleteNoOptions = styled(AutocompleteOption)(
-  ({ theme }) => css`
-    color: ${theme.entities.noOptions.typography.color};
-  `,
-)
-
-const StyledButton = styled(Button)(
+export const StyledButton = styled(Button)(
   ({
     theme: {
       entities: { button },
@@ -112,126 +39,8 @@ const StyledButton = styled(Button)(
     width: ${button.height};
   `,
 )
-// MARK: outside functions
-// Typescript can struggle with parsing generic arrow functions in a .tsx file (see https://github.com/microsoft/TypeScript/issues/15713)
-// Workaround is to add a trailing , after T, which tricks the compiler, but also have to ignore prettier rule.
-// prettier-ignore
-type IndexFinderType = <T,>({
-  calc,
-  index,
-  optionDisabled,
-  availableItems,
-  allDisabled,
-}: {
-  index: number
-  optionDisabled: (option: T) => boolean
-  availableItems: readonly T[]
-  allDisabled?: boolean
-  calc?: (n: number) => number
-}) => number
 
-const findIndex: IndexFinderType = ({
-  calc,
-  index,
-  optionDisabled,
-  availableItems,
-}) => {
-  const nextItem = availableItems[index]
-  if (optionDisabled(nextItem) && index >= 0 && index < availableItems.length) {
-    const nextIndex = calc(index)
-    return findIndex({ calc, index: nextIndex, availableItems, optionDisabled })
-  }
-  return index
-}
-
-const isEvent = (val: unknown, key: string) =>
-  /^on[A-Z](.*)/.test(key) && typeof val === 'function'
-
-function mergeEventsFromRight(
-  props1: DOMAttributes<unknown>,
-  props2: DOMAttributes<unknown>,
-) {
-  const events1: Partial<DOMAttributes<unknown>> = pickBy(isEvent, props1)
-  const events2: Partial<DOMAttributes<unknown>> = pickBy(isEvent, props2)
-
-  return mergeWith(
-    (
-      event1: EventHandler<SyntheticEvent<unknown>>,
-      event2: EventHandler<SyntheticEvent<unknown>>,
-    ): EventHandler<SyntheticEvent<unknown>> => {
-      return (...args) => {
-        event1(...args)
-        event2(...args)
-      }
-    },
-    events1,
-    events2,
-  ) as Partial<DOMAttributes<unknown>>
-}
-
-const findNextIndex: IndexFinderType = ({
-  index,
-  optionDisabled,
-  availableItems,
-  allDisabled,
-}) => {
-  if (allDisabled) return 0
-  const options = {
-    index,
-    optionDisabled,
-    availableItems,
-    calc: (num: number) => num + 1,
-  }
-  const nextIndex = findIndex(options)
-
-  if (nextIndex > availableItems.length - 1) {
-    // jump to start of list
-    return findIndex({ ...options, index: 0 })
-  }
-
-  return nextIndex
-}
-
-const findPrevIndex: IndexFinderType = ({
-  index,
-  optionDisabled,
-  availableItems,
-  allDisabled,
-}) => {
-  if (allDisabled) return 0
-  const options = {
-    index,
-    optionDisabled,
-    availableItems,
-    calc: (num: number) => num - 1,
-  }
-
-  const prevIndex = findIndex(options)
-
-  if (prevIndex < 0) {
-    // jump to end of list
-    return findIndex({ ...options, index: availableItems.length - 1 })
-  }
-
-  return prevIndex
-}
-
-/*When a user clicks the StyledList scrollbar, the input looses focus which breaks downshift
- * keyboard navigation in the list. This code returns focus to the input on mouseUp
- */
-const handleListFocus = (e: FocusEvent<HTMLElement>) => {
-  e.preventDefault()
-  e.stopPropagation()
-  window?.addEventListener(
-    'mouseup',
-    () => {
-      ;(e.relatedTarget as HTMLInputElement)?.focus()
-    },
-    { once: true },
-  )
-}
-
-const defaultOptionDisabled = () => false
+export const defaultOptionDisabled = () => false
 // MARK: types
 export type AutocompleteChanges<T> = { selectedItems: T[] }
 
@@ -279,6 +88,10 @@ export type AutocompleteProps<T = string> = {
    * Note that this prop replaces the need for ```initialSelectedOptions```
    * The items that should be selected. */
   selectedOptions?: T[]
+  /** How selected items are displayed in the input field
+   * @default 'summary'
+   */
+  selectionDisplay?: 'chips' | 'summary'
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */
@@ -331,6 +144,7 @@ export type AutocompleteProps<T = string> = {
    * Callback for clear all button
    */
   onClear?: () => void
+  ref?: React.Ref<HTMLInputElement>
 } & HTMLAttributes<HTMLDivElement> &
   (T extends string | number
     ? {
@@ -348,610 +162,26 @@ export type AutocompleteProps<T = string> = {
         })
 
 // MARK: component
-function AutocompleteInner<T>(
-  props: AutocompleteProps<T>,
-  ref: React.ForwardedRef<HTMLInputElement>,
-) {
-  const [controlledHighlightedIndex, setControlledHighlightedIndex] =
-    useState<number>(0)
-  const [lastScrollOffset, setLastScrollOffset] = useState<number>(0)
+export function Autocomplete<T>({ ...props }: AutocompleteProps<T>) {
+  const autocompleteProps = useAutocomplete({ ...props, ref: props.ref })
   const {
-    options = [],
-    totalOptions,
-    label,
-    meta,
+    getLabelProps,
+    token,
+    tokens,
+    autoWidth,
     className,
     style,
-    disabled = false,
-    readOnly = false,
-    loading = false,
-    hideClearButton = false,
-    onOptionsChange,
-    onAddNewOption,
-    onInputChange,
-    selectedOptions: _selectedOptions,
+    label,
+    meta,
     multiple,
-    itemToKey: _itemToKey,
-    itemCompare: _itemCompare,
-    allowSelectAll,
-    initialSelectedOptions: _initialSelectedOptions = [],
-    optionDisabled = defaultOptionDisabled,
-    optionsFilter,
-    autoWidth,
-    placeholder,
-    optionLabel,
-    clearSearchOnChange = true,
-    multiline = false,
-    dropdownHeight = 300,
-    optionComponent,
-    helperText,
-    helperIcon,
-    noOptionsText = 'No options',
+    disabled,
     variant,
-    onClear,
-    ...other
-  } = props
-
-  const itemCompare = useMemo(() => {
-    if (_itemCompare && _itemToKey) {
-      console.error(
-        'Error: Specifying both itemCompare and itemToKey. itemCompare is deprecated, while itemToKey should be used instead of it. Please only use one.',
-      )
-      return _itemCompare
-    }
-    if (_itemToKey) {
-      return (o1: T, o2: T) => _itemToKey(o1) === _itemToKey(o2)
-    }
-    return _itemCompare
-  }, [_itemCompare, _itemToKey])
-
-  const itemToKey = useCallback(
-    (item: T) => {
-      return _itemToKey ? _itemToKey(item) : item
-    },
-    [_itemToKey],
-  )
-
-  // MARK: initializing data/setup
-  const selectedOptions = _selectedOptions
-    ? itemCompare
-      ? options.filter((item) =>
-          _selectedOptions.some((compare) => itemCompare(item, compare)),
-        )
-      : _selectedOptions
-    : undefined
-  const initialSelectedOptions = _initialSelectedOptions
-    ? itemCompare
-      ? options.filter((item) =>
-          _initialSelectedOptions.some((compare) => itemCompare(item, compare)),
-        )
-      : _initialSelectedOptions
-    : undefined
-
-  const isControlled = Boolean(selectedOptions)
-  const [inputOptions, setInputOptions] = useState(options)
-  const [_availableItems, setAvailableItems] = useState(inputOptions)
-  const [typedInputValue, setTypedInputValue] = useState<string>('')
-  const inputRef = useRef<HTMLInputElement>(null)
-  useImperativeHandle(ref, () => inputRef.current)
-
-  const showSelectAll = useMemo(() => {
-    if (!multiple && allowSelectAll) {
-      throw new Error(`allowSelectAll can only be used with multiple`)
-    }
-    return allowSelectAll && !typedInputValue
-  }, [allowSelectAll, multiple, typedInputValue])
-
-  const availableItems = useMemo(() => {
-    if (showSelectAll && onAddNewOption)
-      return [AddSymbol as T, AllSymbol as T, ..._availableItems]
-    if (showSelectAll) return [AllSymbol as T, ..._availableItems]
-    if (onAddNewOption) return [AddSymbol as T, ..._availableItems]
-    return _availableItems
-  }, [_availableItems, showSelectAll, onAddNewOption])
-
-  const getSelectedIndex = useCallback(
-    (selectedItem: (typeof availableItems)[0] | null) =>
-      availableItems.findIndex((item) =>
-        itemCompare ? itemCompare(item, selectedItem) : item === selectedItem,
-      ),
-    [availableItems, itemCompare],
-  )
-
-  //issue 2304, update dataset when options are added dynamically
-  useEffect(() => {
-    const availableHash = JSON.stringify(inputOptions)
-    const optionsHash = JSON.stringify(options)
-    if (availableHash !== optionsHash) {
-      setInputOptions(options)
-    }
-  }, [options, inputOptions])
-
-  useEffect(() => {
-    setAvailableItems(inputOptions)
-  }, [inputOptions])
-
-  const { density } = useEds()
-  const token = useToken(
-    { density },
-    multiple ? multiSelectTokens : selectTokens,
-  )
-  const tokens = token() as AutocompleteToken
-
-  let placeholderText = placeholder
-
-  let multipleSelectionProps: UseMultipleSelectionProps<T> = {
-    itemToKey,
-    initialSelectedItems: multiple
-      ? initialSelectedOptions
-      : initialSelectedOptions[0]
-        ? [initialSelectedOptions[0]]
-        : [],
-  }
-
-  if (multiple) {
-    multipleSelectionProps = {
-      ...multipleSelectionProps,
-      onSelectedItemsChange: (changes) => {
-        if (onOptionsChange) {
-          let selectedItems = changes.selectedItems.filter(
-            (item) => item !== AllSymbol || item !== AddSymbol,
-          )
-          if (itemCompare) {
-            selectedItems = inputOptions.filter((item) =>
-              selectedItems.some((compare) => itemCompare(item, compare)),
-            )
-          }
-          onOptionsChange({ selectedItems })
-        }
-      },
-    }
-
-    if (isControlled) {
-      multipleSelectionProps = {
-        ...multipleSelectionProps,
-        selectedItems: selectedOptions,
-      }
-    }
-  }
-
-  const {
-    getDropdownProps,
-    addSelectedItem,
-    removeSelectedItem,
-    selectedItems,
-    setSelectedItems,
-  } = useMultipleSelection(multipleSelectionProps)
-
-  // MARK: select all logic
-  const enabledItems = useMemo(() => {
-    const disabledItemsSet = new Set(inputOptions.filter(optionDisabled))
-    return inputOptions.filter((x) => !disabledItemsSet.has(x))
-  }, [inputOptions, optionDisabled])
-
-  const allDisabled = enabledItems.length === 0
-
-  const selectedDisabledItemsSet = useMemo(
-    () => new Set(selectedItems.filter((x) => x !== null && optionDisabled(x))),
-    [selectedItems, optionDisabled],
-  )
-
-  const selectedEnabledItems = useMemo(
-    () => selectedItems.filter((x) => !selectedDisabledItemsSet.has(x)),
-    [selectedItems, selectedDisabledItemsSet],
-  )
-
-  const allSelectedState = useMemo(() => {
-    if (!enabledItems || !selectedEnabledItems) return 'NONE'
-    if (enabledItems.length === selectedEnabledItems.length) return 'ALL'
-    if (
-      enabledItems.length != selectedEnabledItems.length &&
-      selectedEnabledItems.length > 0
-    )
-      return 'SOME'
-    return 'NONE'
-  }, [enabledItems, selectedEnabledItems])
-
-  const toggleAllSelected = () => {
-    if (selectedEnabledItems.length === enabledItems.length) {
-      setSelectedItems([...selectedDisabledItemsSet])
-    } else {
-      setSelectedItems([...enabledItems, ...selectedDisabledItemsSet])
-    }
-  }
-
-  // MARK: getLabel
-  const getLabel = useCallback(
-    (item: T) => {
-      //note: non strict check for null or undefined to allow 0
-      if (item == null) {
-        return ''
-      }
-
-      if (optionLabel) {
-        return optionLabel(item)
-      } else if (typeof item === 'object') {
-        throw new Error(
-          'Missing label. When using objects for options make sure to define the `optionLabel` property',
-        )
-      }
-
-      if (typeof item === 'string') {
-        return item
-      }
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string
-        return item?.toString()
-      } catch {
-        throw new Error(
-          'Unable to find label, make sure your are using options as documented',
-        )
-      }
-    },
-    [optionLabel],
-  )
-
-  // MARK: setup virtualizer
-  const scrollContainer = useRef<HTMLUListElement>(null)
-  const rowVirtualizer = useVirtualizer({
-    count: availableItems.length,
-    getScrollElement: () => scrollContainer.current,
-    estimateSize: useCallback(() => {
-      return parseInt(token().entities.label.minHeight)
-    }, [token]),
-    overscan: 25,
-  })
-
-  //https://github.com/TanStack/virtual/discussions/379#discussioncomment-3501037
-  useIsomorphicLayoutEffect(() => {
-    rowVirtualizer?.measure?.()
-  }, [rowVirtualizer, density])
-
-  // MARK: downshift state
-  let comboBoxProps: UseComboboxProps<T> = {
-    items: availableItems as T[], //can not pass readonly type to downshift so we cast it to regular T[]
-    initialSelectedItem: initialSelectedOptions[0],
-    isItemDisabled(item) {
-      if (item === AddSymbol) return !typedInputValue.trim()
-      return optionDisabled(item)
-    },
-    itemToKey,
-    itemToString: getLabel,
-    onInputValueChange: ({ inputValue }) => {
-      onInputChange && onInputChange(inputValue)
-      setAvailableItems(
-        options.filter((item) => {
-          if (optionsFilter) {
-            return optionsFilter(item, inputValue)
-          }
-
-          return getLabel(item).toLowerCase().includes(inputValue.toLowerCase())
-        }),
-      )
-    },
-    onHighlightedIndexChange({ highlightedIndex }) {
-      if (highlightedIndex >= 0 && rowVirtualizer.getVirtualItems) {
-        const visibleIndexes = rowVirtualizer
-          .getVirtualItems()
-          .map((v) => v.index)
-        if (!visibleIndexes.includes(highlightedIndex)) {
-          rowVirtualizer.scrollToIndex(highlightedIndex, {
-            align: allowSelectAll ? 'center' : 'auto',
-          })
-        }
-      }
-      if (typeof rowVirtualizer.scrollOffset === 'number') {
-        setLastScrollOffset(rowVirtualizer.scrollOffset)
-      }
-    },
-    onIsOpenChange: ({ selectedItem }) => {
-      if (!multiple && selectedItem !== null) {
-        setAvailableItems(options)
-        setTimeout(() => {
-          if (controlledHighlightedIndex === 0) {
-            rowVirtualizer.scrollToOffset?.(0)
-          } else if (rowVirtualizer.scrollToOffset && lastScrollOffset > 0) {
-            rowVirtualizer.scrollToOffset(lastScrollOffset)
-          }
-          const visibleIndexes =
-            rowVirtualizer.getVirtualItems?.().map((v) => v.index) || []
-          if (!visibleIndexes.includes(controlledHighlightedIndex)) {
-            rowVirtualizer.scrollToIndex(controlledHighlightedIndex, {
-              align: allowSelectAll ? 'center' : 'auto',
-            })
-          }
-        }, 10)
-      }
-    },
-    onStateChange: ({ type, selectedItem }) => {
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputChange:
-        case useCombobox.stateChangeTypes.InputBlur:
-          break
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-          //note: non strict check for null or undefined to allow 0
-          if (selectedItem != null && !optionDisabled(selectedItem)) {
-            if (selectedItem === AllSymbol) {
-              toggleAllSelected()
-            } else if (selectedItem === AddSymbol && typedInputValue.trim()) {
-              onAddNewOption?.(typedInputValue)
-            } else if (multiple) {
-              const shouldRemove = itemCompare
-                ? selectedItems.some((i) => itemCompare(selectedItem, i))
-                : selectedItems.includes(selectedItem)
-              if (shouldRemove) {
-                removeSelectedItem(selectedItem)
-              } else {
-                addSelectedItem(selectedItem)
-              }
-            } else {
-              setSelectedItems([selectedItem])
-            }
-          }
-
-          break
-        default:
-          break
-      }
-    },
-  }
-  // MARK: singleselect specific
-  if (!multiple) {
-    comboBoxProps = {
-      ...comboBoxProps,
-      onSelectedItemChange: (changes) => {
-        if (changes.selectedItem === AddSymbol) return
-        const idx = getSelectedIndex(changes.selectedItem)
-        setControlledHighlightedIndex(idx >= 0 ? idx : 0)
-        if (onOptionsChange) {
-          let { selectedItem } = changes
-          if (itemCompare) {
-            selectedItem = inputOptions.find((item) =>
-              itemCompare(item, selectedItem),
-            )
-          }
-          onOptionsChange({
-            selectedItems: selectedItem ? [selectedItem] : [],
-          })
-        }
-      },
-      stateReducer: (state, actionAndChanges) => {
-        const { changes, type } = actionAndChanges
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputClick:
-            return {
-              ...changes,
-              isOpen: !(disabled || readOnly),
-              highlightedIndex: controlledHighlightedIndex,
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick: {
-            if (changes.selectedItem === AddSymbol) {
-              return {
-                ...changes,
-                inputValue: '',
-              }
-            }
-            const idx = getSelectedIndex(changes.selectedItem)
-            setControlledHighlightedIndex(idx >= 0 ? idx : 0)
-            return {
-              ...changes,
-              highlightedIndex: idx >= 0 ? idx : 0,
-            }
-          }
-          case useCombobox.stateChangeTypes.InputBlur:
-            return {
-              ...changes,
-              inputValue: changes.selectedItem
-                ? getLabel(changes.selectedItem)
-                : '',
-            }
-          case useCombobox.stateChangeTypes.InputChange:
-            setTypedInputValue(changes.inputValue)
-            return {
-              ...changes,
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-            if (readOnly) {
-              return {
-                ...changes,
-                isOpen: false,
-              }
-            }
-            if (state.isOpen === false) {
-              return {
-                ...changes,
-                isOpen: true,
-                highlightedIndex: controlledHighlightedIndex,
-              }
-            }
-            return {
-              ...changes,
-              highlightedIndex: findNextIndex({
-                index: changes.highlightedIndex,
-                availableItems,
-                optionDisabled,
-                allDisabled,
-              }),
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownHome:
-            if (readOnly) {
-              return {
-                ...changes,
-                isOpen: false,
-              }
-            }
-            return {
-              ...changes,
-              highlightedIndex: findNextIndex({
-                index: 0,
-                availableItems,
-                optionDisabled,
-                allDisabled,
-              }),
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-            if (readOnly) {
-              return {
-                ...changes,
-                isOpen: false,
-              }
-            }
-            if (state.isOpen === false) {
-              return {
-                ...changes,
-                isOpen: true,
-                highlightedIndex: controlledHighlightedIndex,
-              }
-            }
-            return {
-              ...changes,
-              highlightedIndex: findPrevIndex({
-                index: changes.highlightedIndex,
-                availableItems,
-                optionDisabled,
-                allDisabled,
-              }),
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownEnd:
-            if (readOnly) {
-              return {
-                ...changes,
-                isOpen: false,
-              }
-            }
-            return {
-              ...changes,
-              highlightedIndex: findPrevIndex({
-                index: availableItems.length - 1,
-                availableItems,
-                optionDisabled,
-                allDisabled,
-              }),
-            }
-          case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
-            setSelectedItems([changes.selectedItem])
-            return {
-              ...changes,
-              highlightedIndex: controlledHighlightedIndex,
-            }
-          default:
-            return changes
-        }
-      },
-    }
-
-    if (isControlled) {
-      comboBoxProps = {
-        ...comboBoxProps,
-        selectedItem: selectedOptions[0] || null,
-      }
-    }
-  }
-  // MARK: multiselect specific
-  if (multiple) {
-    const showPlaceholder = placeholderText && selectedItems.length === 0
-    const optionCount = totalOptions || inputOptions.length
-    placeholderText = showPlaceholder
-      ? placeholderText
-      : `${selectedItems.length}/${optionCount} selected`
-
-    comboBoxProps = {
-      ...comboBoxProps,
-      selectedItem: null,
-      stateReducer: (state, actionAndChanges) => {
-        const { changes, type } = actionAndChanges
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputClick:
-            return {
-              ...changes,
-              isOpen: !(disabled || readOnly),
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-          case useCombobox.stateChangeTypes.InputKeyDownHome:
-            if (readOnly) {
-              return {
-                ...changes,
-                isOpen: false,
-              }
-            }
-            return {
-              ...changes,
-              highlightedIndex: findNextIndex<T>({
-                index: changes.highlightedIndex,
-                availableItems,
-                optionDisabled,
-                allDisabled,
-              }),
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-          case useCombobox.stateChangeTypes.InputKeyDownEnd:
-            if (readOnly) {
-              return {
-                ...changes,
-                isOpen: false,
-              }
-            }
-            return {
-              ...changes,
-              highlightedIndex: findPrevIndex<T>({
-                index: changes.highlightedIndex,
-                availableItems,
-                optionDisabled,
-                allDisabled,
-              }),
-            }
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick:
-            if (clearSearchOnChange) {
-              setTypedInputValue('')
-            }
-            return {
-              ...changes,
-              isOpen: true, // keep menu open after selection.
-              highlightedIndex: state.highlightedIndex,
-              inputValue: !clearSearchOnChange ? typedInputValue : '',
-            }
-          case useCombobox.stateChangeTypes.InputChange:
-            setTypedInputValue(changes.inputValue)
-            return {
-              ...changes,
-            }
-          case useCombobox.stateChangeTypes.InputBlur:
-            setTypedInputValue('')
-            return {
-              ...changes,
-              inputValue: '',
-            }
-          case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
-            return {
-              ...changes,
-              inputValue: !clearSearchOnChange
-                ? typedInputValue
-                : changes.inputValue,
-            }
-          default:
-            return changes
-        }
-      },
-    }
-  }
-
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getInputProps,
-    highlightedIndex,
-    getItemProps,
-    inputValue,
-    reset: resetCombobox,
-  } = useCombobox(comboBoxProps)
+    helperIcon,
+    helperText,
+  } = autocompleteProps
 
   // MARK: floating-ui setup
-  const { x, y, refs, update, strategy } = useFloating<HTMLInputElement>({
+  const floatingProps = useFloating<HTMLInputElement>({
     placement: 'bottom-start',
     middleware: [
       offset(4),
@@ -970,276 +200,32 @@ function AutocompleteInner<T>(
     ],
   })
 
-  const { getFloatingProps } = useInteractions([])
-
-  useEffect(() => {
-    if (refs.reference.current && refs.floating.current && isOpen) {
-      return autoUpdate(refs.reference.current, refs.floating.current, update)
-    }
-  }, [refs.reference, refs.floating, update, isOpen])
-
-  // MARK: popover toggle
-  useIsomorphicLayoutEffect(() => {
-    if (isOpen) {
-      refs.floating.current?.showPopover()
-    } else {
-      refs.floating.current?.hidePopover()
-    }
-  }, [isOpen, refs.floating])
-
-  const clear = () => {
-    if (onClear) onClear()
-    resetCombobox()
-    //dont clear items if they are selected and disabled
-    setSelectedItems([...selectedDisabledItemsSet])
-    setTypedInputValue('')
-    inputRef.current?.focus()
-  }
-  const showClearButton =
-    (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
-
-  const showNoOptions =
-    isOpen && !availableItems.length && noOptionsText.length > 0
-
-  const selectedItemsLabels = useMemo(
-    () => selectedItems.map(getLabel),
-    [selectedItems, getLabel],
-  )
-
-  // MARK: optionsList
-  const optionsList = (
-    <StyledPopover
-      popover="manual"
-      {...getFloatingProps({
-        ref: refs.setFloating,
-        onFocus: handleListFocus,
-        style: {
-          position: strategy,
-          top: y || 0,
-          left: x || 0,
-        },
-      })}
-    >
-      <StyledList
-        {...getMenuProps(
-          {
-            'aria-multiselectable': multiple ? 'true' : null,
-            ref: scrollContainer,
-            style: {
-              maxHeight: `${dropdownHeight}px`,
-            },
-          },
-          { suppressRefError: true },
-        )}
-      >
-        {showNoOptions && (
-          <AutocompleteNoOptions
-            value={noOptionsText}
-            multiple={false}
-            multiline={false}
-            highlighted={'false'}
-            isSelected={false}
-            isDisabled
-          />
-        )}
-        {isOpen && (
-          <li
-            key="total-size"
-            role="presentation"
-            style={{
-              height: `${rowVirtualizer.getTotalSize()}px`,
-              margin: '0',
-              gridArea: '1 / -1',
-            }}
-          />
-        )}
-        {!isOpen
-          ? null
-          : rowVirtualizer.getVirtualItems().map((virtualItem) => {
-              const index = virtualItem.index
-              const item = availableItems[index]
-              const label = getLabel(item)
-              const isDisabled = optionDisabled(item)
-              const isSelected = selectedItemsLabels.includes(label)
-              if (item === AllSymbol) {
-                return (
-                  <AutocompleteOption
-                    key={'select-all'}
-                    data-index={0}
-                    data-testid={'select-all'}
-                    value={'Select all'}
-                    aria-setsize={availableItems.length}
-                    multiple={true}
-                    isSelected={allSelectedState === 'ALL'}
-                    indeterminate={allSelectedState === 'SOME'}
-                    highlighted={
-                      highlightedIndex === index && !isDisabled
-                        ? 'true'
-                        : 'false'
-                    }
-                    isDisabled={false}
-                    multiline={multiline}
-                    onClick={toggleAllSelected}
-                    style={{
-                      position: 'sticky',
-                      top: 0,
-                      zIndex: 99,
-                    }}
-                    {...getItemProps({
-                      ...(multiline && {
-                        ref: rowVirtualizer.measureElement,
-                      }),
-                      item,
-                      index: index,
-                    })}
-                  />
-                )
-              }
-              if (item === AddSymbol && onAddNewOption) {
-                const isDisabled = !typedInputValue.trim()
-                return (
-                  <AddNewOption
-                    key={'add-item'}
-                    data-index={0}
-                    data-testid={'add-item'}
-                    aria-setsize={availableItems.length}
-                    multiple={multiple}
-                    highlighted={
-                      highlightedIndex === index && !isDisabled
-                        ? 'true'
-                        : 'false'
-                    }
-                    multiline={multiline}
-                    style={{
-                      position: 'sticky',
-                      top: 0,
-                      zIndex: 99,
-                    }}
-                    {...getItemProps({
-                      ...(multiline && {
-                        ref: rowVirtualizer.measureElement,
-                      }),
-                      item,
-                      index: index,
-                    })}
-                    value={typedInputValue.trim()}
-                  />
-                )
-              }
-              return (
-                <AutocompleteOption
-                  key={virtualItem.key}
-                  data-index={index}
-                  aria-setsize={availableItems.length}
-                  aria-posinset={index + 1}
-                  value={label}
-                  multiple={multiple}
-                  highlighted={
-                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
-                  }
-                  isSelected={isSelected}
-                  isDisabled={isDisabled}
-                  multiline={multiline}
-                  optionComponent={optionComponent?.(item, isSelected)}
-                  {...getItemProps({
-                    ...(multiline && {
-                      ref: rowVirtualizer.measureElement,
-                    }),
-                    item,
-                    index,
-                    style: {
-                      transform: `translateY(${virtualItem.start}px)`,
-                      ...(!multiline && {
-                        height: `${virtualItem.size}px`,
-                      }),
-                    },
-                  })}
-                />
-              )
-            })}
-      </StyledList>
-    </StyledPopover>
-  )
-
-  const inputProps = getInputProps(
-    getDropdownProps({
-      preventKeyAction: multiple ? isOpen : undefined,
-      disabled,
-      ref: inputRef,
-    }),
-  )
-  const consolidatedEvents = mergeEventsFromRight(other, inputProps)
-
   // MARK: input
   return (
-    <ThemeProvider theme={token}>
-      <Container className={className} style={style}>
-        <Label
-          {...getLabelProps()}
-          label={label}
-          meta={meta}
-          disabled={disabled}
-        />
-        <Container ref={refs.setReference}>
-          <Input
-            {...inputProps}
-            variant={variant}
-            placeholder={placeholderText}
-            readOnly={readOnly}
-            rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
-            rightAdornments={
-              <>
-                {loading && <Progress.Circular size={16} />}
-                {showClearButton && (
-                  <StyledButton
-                    variant="ghost_icon"
-                    disabled={disabled || readOnly}
-                    aria-label={'clear options'}
-                    title="clear"
-                    onClick={clear}
-                  >
-                    <Icon data={close} size={16} />
-                  </StyledButton>
-                )}
-                {!readOnly && (
-                  <StyledButton
-                    variant="ghost_icon"
-                    {...getToggleButtonProps({
-                      disabled: disabled || readOnly,
-                    })}
-                    aria-label={'toggle options'}
-                    title="open"
-                  >
-                    <Icon
-                      data={isOpen ? arrow_drop_up : arrow_drop_down}
-                    ></Icon>
-                  </StyledButton>
-                )}
-              </>
-            }
-            {...other}
-            {...consolidatedEvents}
+    <AutocompleteContext.Provider value={{ ...autocompleteProps }}>
+      <ThemeProvider theme={token}>
+        <Container className={className} style={style}>
+          <Label
+            {...getLabelProps()}
+            label={label}
+            meta={meta}
+            disabled={disabled}
           />
+          <Container ref={floatingProps.refs.setReference}>
+            {multiple ? <MultipleInput /> : <SingleInput />}
+          </Container>
+          {helperText && (
+            <HelperText
+              color={
+                variant ? tokens.variants[variant].typography.color : undefined
+              }
+              text={helperText}
+              icon={helperIcon}
+            />
+          )}
+          <OptionList {...floatingProps} />
         </Container>
-        {helperText && (
-          <HelperText
-            color={
-              variant ? tokens.variants[variant].typography.color : undefined
-            }
-            text={helperText}
-            icon={helperIcon}
-          />
-        )}
-        {optionsList}
-      </Container>
-    </ThemeProvider>
+      </ThemeProvider>
+    </AutocompleteContext.Provider>
   )
 }
-// MARK: exported component
-export const Autocomplete = forwardRef(AutocompleteInner) as <T = string>(
-  props: AutocompleteProps<T> & {
-    ref?: React.ForwardedRef<HTMLInputElement>
-    /** @ignore */
-    displayName?: string | undefined
-  },
-) => ReturnType<typeof AutocompleteInner>
