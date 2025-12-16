@@ -48,7 +48,12 @@ const Box = ({
 )
 
 const Label = ({ children }: { children: ReactNode }) => (
-  <Typography family="ui" size="xs" baseline="grid" style={{ margin: '0 0 4px', color: '#666' }}>
+  <Typography
+    family="ui"
+    size="xs"
+    baseline="grid"
+    style={{ margin: '0 0 4px', color: '#666' }}
+  >
     {children}
   </Typography>
 )
