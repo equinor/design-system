@@ -86,15 +86,6 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
   )
 }
 
-export const HorizontalLayout: StoryFn<FieldProps> = () => (
-  <Field layout="horizontal" required>
-    <Field.Label>Telefon</Field.Label>
-    <Field.Description>Oppgi nummer uten landskode.</Field.Description>
-    <input type="tel" placeholder="12345678" style={inputStyles} />
-    <ValidationMessage tone="info">Eksempel: 12345678</ValidationMessage>
-  </Field>
-)
-
 export const LabelOnly: StoryFn<FieldProps> = () => (
   <Field>
     <Field.Label>E-post</Field.Label>
@@ -129,7 +120,7 @@ export const DisabledField: StoryFn<FieldProps> = () => (
 )
 
 export const AllValidationTones: StoryFn<FieldProps> = () => (
-  <>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
     <Field>
       <Field.Label>Danger</Field.Label>
       <input defaultValue="ugyldig verdi" style={inputStyles} />
@@ -158,19 +149,11 @@ export const AllValidationTones: StoryFn<FieldProps> = () => (
         Denne informasjonen er nyttig.
       </ValidationMessage>
     </Field>
-  </>
-)
-
-export const HorizontalOptional: StoryFn<FieldProps> = () => (
-  <Field layout="horizontal">
-    <Field.Label showOptionalIndicator>Mellomnavn</Field.Label>
-    <Field.Description>Valgfritt felt.</Field.Description>
-    <input placeholder="Eventuelt mellomnavn" style={inputStyles} />
-  </Field>
+  </div>
 )
 
 export const CombinedRequiredAndOptional: StoryFn<FieldProps> = () => (
-  <>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
     <Field required>
       <Field.Label showRequiredIndicator>Fornavn</Field.Label>
       <input placeholder="Ola" style={inputStyles} />
@@ -183,5 +166,5 @@ export const CombinedRequiredAndOptional: StoryFn<FieldProps> = () => (
       <Field.Label showRequiredIndicator>Etternavn</Field.Label>
       <input placeholder="Nordmann" style={inputStyles} />
     </Field>
-  </>
+  </div>
 )

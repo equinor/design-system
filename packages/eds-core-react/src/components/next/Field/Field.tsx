@@ -84,7 +84,6 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
   {
     id,
     controlId,
-    layout = 'vertical',
     required = false,
     disabled = false,
     className,
@@ -216,7 +215,6 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
         ref={ref}
         style={style}
         className={classNames('eds-field', className)}
-        data-layout={layout}
         data-disabled={disabled ? 'true' : undefined}
         data-invalid={hasDangerValidation ? 'true' : undefined}
         data-vertical-gap="xs"
