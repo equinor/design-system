@@ -1,7 +1,7 @@
 {
-  "name": "@equinor/design-system-mobile-components",
+  "name": "@equinor/eds-mobile-components",
   "description": "A React Native component library implementing the Equinor Design System.",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "author": {
     "name": "Equinor Design System Mobile"
   },

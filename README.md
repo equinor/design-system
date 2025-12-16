@@ -5,7 +5,7 @@ A React Native component library implementing the [Equinor Design System](https:
 ## Installation
 
 ```bash
-pnpm add @equinor/design-system-mobile-components
+pnpm add "@equinor/eds-mobile-components"
 ```
 
 ### Peer dependencies
@@ -27,7 +27,7 @@ Make sure to follow the installation instructions for each:
 Load the fonts and assets required by the library in your root component, and wrap your app in the `EDSProvider`:
 
 ```tsx
-import { EDSProvider, useEDS } from "@equinor/design-system-mobile-components";
+import { EDSProvider, useEDS } from "@equinor/eds-mobile-components";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
@@ -62,7 +62,7 @@ Create stylesheets that respond to the current theme using `EDSStyleSheet`:
 import {
   EDSStyleSheet,
   useStyles,
-} from "@equinor/design-system-mobile-components";
+} from "@equinor/eds-mobile-components";
 
 const themeStyles = EDSStyleSheet.create((theme) => ({
   container: {
