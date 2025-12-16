@@ -1,35 +1,22 @@
 .eds-field {
-  /* Gap activated via data-vertical-gap attribute on element */
-  display: grid;
-  grid-template-areas:
-    'label'
-    'description'
-    'control'
-    'validation';
-  gap: var(--eds-generic-gap-vertical);
+  /* Layout from Figma: inline-flex, column, 8px gap */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   /* Colors from Figma */
   --field-label-color: var(--eds-color-text-strong);
   --field-description-color: var(--eds-color-text-subtle);
   --field-optional-color: var(--eds-color-text-subtle);
 }
 
-.eds-field[data-layout='horizontal'] {
-  grid-template-columns: auto 1fr;
-  grid-template-areas:
-    'label control'
-    'description control'
-    'validation validation';
-  column-gap: var(--eds-generic-gap-horizontal);
-}
-
 .eds-field__label {
-  grid-area: label;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   color: var(--field-label-color);
-  gap: var(--eds-selectable-space-horizontal);
+  gap: 4px;
 }
 
 .eds-field__label-content {
@@ -51,17 +38,16 @@
 }
 
 .eds-field__control {
-  grid-area: control;
+  width: 100%;
 }
 
 .eds-field__description {
-  grid-area: description;
   margin: 0;
   color: var(--field-description-color);
 }
 
 .eds-field__validation {
-  grid-area: validation;
+  /* Validation message styling */
 }
 
 .eds-field[data-disabled='true'] {
