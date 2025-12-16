@@ -1,0 +1,59 @@
+/* Inline with text: uses token from parent's data-font-size, or 1.5em fallback */
+.icon {
+  --_size: var(--eds-typography-icon-size, 1.5em);
+
+  width: var(--_size);
+  font-size: var(--_size);
+
+  /* Negative margins relative to icon size (via font-size) */
+  margin-block: -0.5em;
+  margin-inline: -0.2em;
+
+  flex-shrink: 0;
+}
+
+/* Explicit size: fixed size from design tokens, no margins */
+.icon[data-icon-size] {
+  margin: 0;
+  font-size: inherit; /* Reset font-size, size controlled by width/height */
+}
+.icon[data-icon-size='xs'] {
+  width: var(--eds-sizing-icon-xs);
+  height: var(--eds-sizing-icon-xs);
+}
+.icon[data-icon-size='sm'] {
+  width: var(--eds-sizing-icon-sm);
+  height: var(--eds-sizing-icon-sm);
+}
+.icon[data-icon-size='md'] {
+  width: var(--eds-sizing-icon-md);
+  height: var(--eds-sizing-icon-md);
+}
+.icon[data-icon-size='lg'] {
+  width: var(--eds-sizing-icon-lg);
+  height: var(--eds-sizing-icon-lg);
+}
+.icon[data-icon-size='xl'] {
+  width: var(--eds-sizing-icon-xl);
+  height: var(--eds-sizing-icon-xl);
+}
+.icon[data-icon-size='2xl'] {
+  width: var(--eds-sizing-icon-2xl);
+  height: var(--eds-sizing-icon-2xl);
+}
+.icon[data-icon-size='3xl'] {
+  width: var(--eds-sizing-icon-3xl);
+  height: var(--eds-sizing-icon-3xl);
+}
+.icon[data-icon-size='4xl'] {
+  width: var(--eds-sizing-icon-4xl);
+  height: var(--eds-sizing-icon-4xl);
+}
+.icon[data-icon-size='5xl'] {
+  width: var(--eds-sizing-icon-5xl);
+  height: var(--eds-sizing-icon-5xl);
+}
+.icon[data-icon-size='6xl'] {
+  width: var(--eds-sizing-icon-6xl);
+  height: var(--eds-sizing-icon-6xl);
+}
