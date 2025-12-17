@@ -1,0 +1,10 @@
+@layer eds-components {
+  .eds-validation-message {
+    margin: 0;
+    color: var(--eds-color-text-subtle);
+  }
+
+  .eds-validation-message--disabled {
+    color: var(--eds-color-border-medium);
+  }
+}
