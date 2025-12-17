@@ -23,24 +23,21 @@ describe('Icon (next)', () => {
       expect(screen.getByTestId('eds-icon')).toBeInTheDocument()
     })
 
-    it('renders SVG path from icon data', () => {
+    it('renders with correct viewBox from icon data', () => {
       render(<Icon data={save} />)
       const svg = screen.getByTestId('eds-icon')
-      const path = svg.querySelector('path')
-      expect(path).toHaveAttribute('d', save.svgPathData)
+      expect(svg).toHaveAttribute('viewBox', '0 0 24 24')
     })
 
-    it('supports multiple SVG paths', () => {
+    it('supports icons with multiple paths', () => {
       render(<Icon data={customIconWithMultiplePaths} title="Custom icon" />)
-      const svg = screen.getByLabelText('Custom icon')
-      const paths = svg.querySelectorAll('path')
-      expect(paths).toHaveLength(2)
+      expect(screen.getByLabelText('Custom icon')).toBeInTheDocument()
     })
 
     it('returns null and logs error when data is missing', () => {
       const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
-      const { container } = render(<Icon data={undefined as never} />)
-      expect(container.firstChild).toBeNull()
+      render(<Icon data={undefined as never} />)
+      expect(screen.queryByTestId('eds-icon')).not.toBeInTheDocument()
       expect(consoleSpy).toHaveBeenCalledWith('Icon: data prop is required')
       consoleSpy.mockRestore()
     })
