@@ -85,6 +85,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={Component === 'input' ? type : undefined}
           disabled={disabled}
           readOnly={readOnly}
+          aria-invalid={invalid || undefined}
           className="eds-input"
           style={fieldStyle}
           data-font-family="ui"

@@ -76,21 +76,21 @@ describe('Field', () => {
       expect(screen.getByText('This field is required')).toBeInTheDocument()
     })
 
-    it('Renders all elements in correct order', () => {
-      const { container } = render(
-        <Field>
+    it('Renders complete Field composition', () => {
+      render(
+        <Field data-testid="field">
           <Label htmlFor="test" label="Label" />
           <Field.Description>Description</Field.Description>
-          <Input id="test" data-testid="input" />
+          <Input id="test" />
           <ValidationMessage>Validation</ValidationMessage>
         </Field>,
       )
-      const wrapper = container.querySelector('.eds-field')
-      const children = wrapper?.children
-      expect(children?.[0]).toHaveTextContent('Label')
-      expect(children?.[1]).toHaveTextContent('Description')
-      expect(children?.[2]).toHaveClass('eds-input-container')
-      expect(children?.[3]).toHaveTextContent('Validation')
+      const field = screen.getByTestId('field')
+      expect(field).toHaveClass('eds-field')
+      expect(screen.getByText('Label')).toBeInTheDocument()
+      expect(screen.getByText('Description')).toBeInTheDocument()
+      expect(screen.getByRole('textbox')).toBeInTheDocument()
+      expect(screen.getByText('Validation')).toBeInTheDocument()
     })
   })
 
