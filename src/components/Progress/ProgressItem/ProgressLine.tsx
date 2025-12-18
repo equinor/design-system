@@ -20,14 +20,16 @@ type ProgressLineStyleProps = {
     status: ProgressStatus;
 };
 
-const tokenStyles = EDSStyleSheet.create((token, { status }: ProgressLineStyleProps) => ({
-    container: {
-        flexDirection: "column",
-        alignItems: "center",
-    },
-    line: {
-        flex: 1,
-        width: token.geometry.border.borderWidth,
-        backgroundColor: statusToColor(status, token),
-    },
-}));
+const tokenStyles = EDSStyleSheet.create(
+    (token, { status }: ProgressLineStyleProps) => ({
+        container: {
+            flexDirection: "column",
+            alignItems: "center",
+        },
+        line: {
+            flex: 1,
+            width: token.geometry.border.borderWidth,
+            backgroundColor: statusToColor(status, token),
+        },
+    })
+);

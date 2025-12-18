@@ -1,6 +1,13 @@
-import React, { ReactNode, forwardRef, useContext, useMemo, useRef } from "react";
+import React, {
+    ReactNode,
+    forwardRef,
+    useContext,
+    useMemo,
+    useRef,
+} from "react";
 import { View, ViewProps } from "react-native";
-import { Swipeable, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Pressable } from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 import Animated from "react-native-reanimated";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
@@ -66,10 +73,11 @@ export const Cell = forwardRef<View, React.PropsWithChildren<CellProps>>(
             children,
             ...rest
         },
-        ref,
+        ref
     ) => {
         const { isFirstCell, isLastCell } = useContext(CellGroupContext);
-        const { handlePressIn, handlePressOut, animatedStyle } = useFadeAnimation();
+        const { handlePressIn, handlePressOut, animatedStyle } =
+            useFadeAnimation();
         const styles = useStyles(themeStyle, { isFirstCell, isLastCell });
         const swipeableRef = useRef<Swipeable>(null);
         const swipeable = !!leftSwipeGroup || !!rightSwipeGroup;
@@ -81,18 +89,24 @@ export const Cell = forwardRef<View, React.PropsWithChildren<CellProps>>(
                 openRight: () => swipeableRef.current?.openRight(),
                 reset: () => swipeableRef.current?.reset(),
             }),
-            [swipeableRef],
+            [swipeableRef]
         );
 
         const cellContent = () => (
             <>
                 <View style={styles.contentContainer}>
-                    {leftAdornment && <View style={styles.adornment}>{leftAdornment}</View>}
+                    {leftAdornment && (
+                        <View style={styles.adornment}>{leftAdornment}</View>
+                    )}
 
                     <View style={styles.children}>
-                        <View style={{ flex: 1, justifyContent: "center" }}>{children}</View>
+                        <View style={{ flex: 1, justifyContent: "center" }}>
+                            {children}
+                        </View>
                     </View>
-                    {rightAdornment && <View style={styles.adornment}>{rightAdornment}</View>}
+                    {rightAdornment && (
+                        <View style={styles.adornment}>{rightAdornment}</View>
+                    )}
                 </View>
                 {!isLastCell && (
                     <View style={styles.dividerOuter}>
@@ -125,16 +139,19 @@ export const Cell = forwardRef<View, React.PropsWithChildren<CellProps>>(
 
                     <Animated.View style={[animatedStyle, { flex: 1 }]}>
                         {swipeable ? (
-                            <TouchableWithoutFeedback
+                            <Pressable
                                 disabled={!onPress}
                                 onPressIn={handlePressIn}
                                 onPressOut={handlePressOut}
                                 onPress={onPress}
                             >
                                 {cellContent()}
-                            </TouchableWithoutFeedback>
+                            </Pressable>
                         ) : (
-                            <PressableHighlight disabled={!onPress} onPress={onPress}>
+                            <PressableHighlight
+                                disabled={!onPress}
+                                onPress={onPress}
+                            >
                                 {cellContent()}
                             </PressableHighlight>
                         )}
@@ -175,52 +192,58 @@ export const Cell = forwardRef<View, React.PropsWithChildren<CellProps>>(
         ) : (
             renderCell()
         );
-    },
+    }
 );
 
 Cell.displayName = "Cell";
 
-const themeStyle = EDSStyleSheet.create((theme, props: CellGroupContextType) => ({
-    container: {
-        borderColor: theme.colors.border.medium,
-        borderBottomWidth: props.isLastCell ? theme.geometry.border.borderWidth : undefined,
-        borderTopWidth: props.isFirstCell ? theme.geometry.border.borderWidth : undefined,
-        backgroundColor: theme.colors.container.default,
-        minHeight: theme.geometry.dimension.cell.minHeight,
-        justifyContent: "center",
-    },
-    contentContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: theme.spacing.cell.gapHorizontal,
-        paddingHorizontal: theme.spacing.container.paddingHorizontal,
-        paddingVertical: theme.spacing.cell.paddingVertical,
-    },
-    adornment: {
-        flexDirection: "row",
-    },
-    dividerOuter: {
-        position: "absolute",
-        left: 0,
-        bottom: 0,
-        width: "100%",
-        paddingHorizontal: theme.spacing.container.paddingHorizontal,
-    },
-    dividerInner: {
-        height: theme.geometry.border.borderWidth,
-        backgroundColor: theme.colors.border.medium,
-    },
-    additionalSurface: {
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    verticalLine: {
-        borderRightWidth: theme.geometry.border.borderWidth,
-        borderColor: theme.colors.border.medium,
-        marginVertical: theme.spacing.menu.item.paddingVertical,
-    },
-    children: {
-        flex: 1,
-        flexDirection: "row",
-    },
-}));
+const themeStyle = EDSStyleSheet.create(
+    (theme, props: CellGroupContextType) => ({
+        container: {
+            borderColor: theme.colors.border.medium,
+            borderBottomWidth: props.isLastCell
+                ? theme.geometry.border.borderWidth
+                : undefined,
+            borderTopWidth: props.isFirstCell
+                ? theme.geometry.border.borderWidth
+                : undefined,
+            backgroundColor: theme.colors.container.default,
+            minHeight: theme.geometry.dimension.cell.minHeight,
+            justifyContent: "center",
+        },
+        contentContainer: {
+            flexDirection: "row",
+            alignItems: "center",
+            gap: theme.spacing.cell.gapHorizontal,
+            paddingHorizontal: theme.spacing.container.paddingHorizontal,
+            paddingVertical: theme.spacing.cell.paddingVertical,
+        },
+        adornment: {
+            flexDirection: "row",
+        },
+        dividerOuter: {
+            position: "absolute",
+            left: 0,
+            bottom: 0,
+            width: "100%",
+            paddingHorizontal: theme.spacing.container.paddingHorizontal,
+        },
+        dividerInner: {
+            height: theme.geometry.border.borderWidth,
+            backgroundColor: theme.colors.border.medium,
+        },
+        additionalSurface: {
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        verticalLine: {
+            borderRightWidth: theme.geometry.border.borderWidth,
+            borderColor: theme.colors.border.medium,
+            marginVertical: theme.spacing.menu.item.paddingVertical,
+        },
+        children: {
+            flex: 1,
+            flexDirection: "row",
+        },
+    })
+);

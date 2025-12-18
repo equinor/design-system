@@ -33,7 +33,7 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
             color,
             ...rest
         },
-        ref,
+        ref
     ) => {
         const styles = useStyles(themeStyles);
 
@@ -46,9 +46,17 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
 
         const SwitchAdornment =
             switchSize === "small" ? (
-                <Switch.Small active={isActive} onChange={onChange} disabled={disabled} />
+                <Switch.Small
+                    active={isActive}
+                    onChange={onChange}
+                    disabled={disabled}
+                />
             ) : (
-                <Switch active={isActive} onChange={onChange} disabled={disabled} />
+                <Switch
+                    active={isActive}
+                    onChange={onChange}
+                    disabled={disabled}
+                />
             );
 
         return (
@@ -80,12 +88,12 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
                 </View>
             </Cell>
         );
-    },
+    }
 );
 
 SwitchCell.displayName = "Cell.Switch";
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     contentContainer: {
         flex: 1,
         justifyContent: "center",

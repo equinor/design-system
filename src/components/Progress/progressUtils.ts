@@ -17,7 +17,7 @@ export const statusToIconName = (status: ProgressStatus): IconName => {
 
 export const statusToColor = (
     status: ProgressStatus,
-    token: WithoutThemeOptionValues<MasterToken>,
+    token: WithoutThemeOptionValues<MasterToken>
 ) => {
     switch (status) {
         case "inProgress":
@@ -32,11 +32,23 @@ export const statusToColor = (
     }
 };
 
-export const summarizeStatuses = (statuses: ProgressStatus[]): ProgressStatus => {
-    const statusPrecedence: ProgressStatus[] = ["error", "inProgress", "success", "notStarted"];
-    const precedenceReduced = statusPrecedence.filter(status => statuses.includes(status)).at(0);
+export const summarizeStatuses = (
+    statuses: ProgressStatus[]
+): ProgressStatus => {
+    const statusPrecedence: ProgressStatus[] = [
+        "error",
+        "inProgress",
+        "success",
+        "notStarted",
+    ];
+    const precedenceReduced = statusPrecedence
+        .filter((status) => statuses.includes(status))
+        .at(0);
     if (!precedenceReduced) return "notStarted";
-    if (precedenceReduced === "success" && statuses.some(status => status !== "success"))
+    if (
+        precedenceReduced === "success" &&
+        statuses.some((status) => status !== "success")
+    )
         return "inProgress";
     return precedenceReduced;
 };

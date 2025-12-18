@@ -12,7 +12,7 @@ const createStyleSheet = (style: ViewStyle | ImageStyle | TextStyle) =>
  */
 export const useDynamicStyle = (
     style: () => ViewStyle | ImageStyle | TextStyle,
-    dependencies: DependencyList,
+    dependencies: DependencyList
 ) => {
     const [currentStyle, setCurrentStyle] = useState(style());
     useMemo(() => {

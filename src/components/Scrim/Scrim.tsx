@@ -1,5 +1,10 @@
 import React, { PropsWithChildren } from "react";
-import { LayoutAnimation, Pressable, SafeAreaView, StyleSheet } from "react-native";
+import {
+    LayoutAnimation,
+    Pressable,
+    SafeAreaView,
+    StyleSheet,
+} from "react-native";
 import { Portal } from "../Portal";
 import { EDSStyleSheet } from "../../styling";
 import { useStyles } from "../../hooks/useStyles";
@@ -18,7 +23,10 @@ export type ScrimProps = PropsWithChildren<{
 export const Scrim = ({ isOpen, onPress, children }: ScrimProps) => {
     const styles = useStyles(themeStyles);
     if (!isOpen) return null;
-    LayoutAnimation.configureNext({ ...LayoutAnimation.Presets.spring, duration: 100 });
+    LayoutAnimation.configureNext({
+        ...LayoutAnimation.Presets.spring,
+        duration: 100,
+    });
     return (
         <Portal name="scrim">
             <Pressable style={styles.scrim} onPress={onPress}>
@@ -30,16 +38,16 @@ export const Scrim = ({ isOpen, onPress, children }: ScrimProps) => {
     );
 };
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     scrim: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: theme.colors.container.scrim,
         paddingHorizontal: theme.spacing.container.paddingHorizontal,
-        paddingVertical: theme.spacing.container.paddingVertical
+        paddingVertical: theme.spacing.container.paddingVertical,
     },
     safeAreaView: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
-    }
+        alignItems: "center",
+    },
 }));

@@ -17,5 +17,7 @@ export const EnvironmentProvider = ({
     currentEnvironment,
     children,
 }: PropsWithChildren<EnvironmentContextProps>) => (
-    <EnvironmentContext.Provider value={currentEnvironment}>{children}</EnvironmentContext.Provider>
+    <EnvironmentContext.Provider value={currentEnvironment}>
+        {children}
+    </EnvironmentContext.Provider>
 );

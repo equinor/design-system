@@ -32,13 +32,17 @@ export const ActionButtonsRow = ({
                 />
             ) : null}
             {shouldShowRetryButton && status === "error" ? (
-                <Button iconName="restart" title="Retry" onPress={handleRetryButtonPress} />
+                <Button
+                    iconName="restart"
+                    title="Retry"
+                    onPress={handleRetryButtonPress}
+                />
             ) : null}
         </View>
     );
 };
 
-const tokenStyles = EDSStyleSheet.create(token => ({
+const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
         flexDirection: "row",
         alignItems: "center",

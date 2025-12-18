@@ -16,7 +16,9 @@ function keyEquality(obj1: unknown, obj2: unknown) {
     return JSON.stringify(obj1Keys) === JSON.stringify(obj2Keys);
 }
 
-function isColorSchemeValuesObject(obj: unknown): obj is ColorSchemeValues<unknown> {
+function isColorSchemeValuesObject(
+    obj: unknown
+): obj is ColorSchemeValues<unknown> {
     const template: ColorSchemeValues<unknown> = {
         light: undefined as unknown,
         dark: undefined as unknown,
@@ -45,7 +47,10 @@ export function createTokenProxy(scheme: ColorScheme, density: Density): Token {
             const value: unknown = Reflect.get(target, property, receiver);
 
             if (typeof value === "object" && !Array.isArray(value) && !!value) {
-                if (isColorSchemeValuesObject(value) || isDensityValuesObject(value)) {
+                if (
+                    isColorSchemeValuesObject(value) ||
+                    isDensityValuesObject(value)
+                ) {
                     return (
                         (value as ColorSchemeValues<unknown>)[scheme] ??
                         (value as DensityValues<unknown>)[density]

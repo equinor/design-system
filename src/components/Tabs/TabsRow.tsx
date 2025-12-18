@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
-import { View } from "react-native";
-import { TabsChildrenType } from "./types";
-import { ScrollView } from "react-native-gesture-handler";
-import { EDSStyleSheet } from "../../styling";
+import { ScrollView, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet } from "../../styling";
 import { TabsContext } from "./TabsContext";
+import { TabsChildrenType } from "./types";
 
 type TabsRowProps = {
     activeTabIndex: number;
@@ -13,7 +12,12 @@ type TabsRowProps = {
     tabs: TabsChildrenType[];
 };
 
-export const TabsRow = ({ activeTabIndex, scrollable, onPressTab, tabs }: TabsRowProps) => {
+export const TabsRow = ({
+    activeTabIndex,
+    scrollable,
+    onPressTab,
+    tabs,
+}: TabsRowProps) => {
     const styles = useStyles(themeStyles);
 
     const tabPositions = useRef<Record<number, number | undefined>>({}).current;
@@ -32,7 +36,7 @@ export const TabsRow = ({ activeTabIndex, scrollable, onPressTab, tabs }: TabsRo
             <View
                 style={{ flex: 1 }}
                 key={index}
-                onLayout={event => {
+                onLayout={(event) => {
                     const { x } = event.nativeEvent.layout;
                     tabPositions[index] = x;
                 }}

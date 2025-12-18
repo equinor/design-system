@@ -18,8 +18,14 @@ const HEIGHT = 60;
 
 export const Switch = forwardRef<View, SwitchProps & ViewProps>(
     (
-        { color = "primary", onChange = () => null, active = false, disabled = false, ...rest },
-        ref,
+        {
+            color = "primary",
+            onChange = () => null,
+            active = false,
+            disabled = false,
+            ...rest
+        },
+        ref
     ) => {
         const styles = useStyles(themeStyles, {
             color,
@@ -29,7 +35,9 @@ export const Switch = forwardRef<View, SwitchProps & ViewProps>(
 
         const token = useToken();
 
-        const progressValue = useRef(new Animated.Value(active ? 1 : 0)).current;
+        const progressValue = useRef(
+            new Animated.Value(active ? 1 : 0)
+        ).current;
 
         const activeKnobAnimation = Animated.timing(progressValue, {
             toValue: 1,
@@ -100,14 +108,17 @@ export const Switch = forwardRef<View, SwitchProps & ViewProps>(
                     ></Animated.View>
 
                     <Animated.View
-                        style={{ position: "absolute", transform: [{ translateX: displacement }] }}
+                        style={{
+                            position: "absolute",
+                            transform: [{ translateX: displacement }],
+                        }}
                     >
                         <Paper elevation="raised" style={styles.knob} />
                     </Animated.View>
                 </View>
             </PressableHighlight>
         );
-    },
+    }
 );
 
 Switch.displayName = "Switch";
@@ -118,59 +129,65 @@ type ToggleStyleSheetProps = {
     disabled: boolean;
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: ToggleStyleSheetProps) => {
-    const { color, disabled, isActive } = props;
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: ToggleStyleSheetProps) => {
+        const { color, disabled, isActive } = props;
 
-    const activeBackgroundColor = theme.colors.interactive[color];
-    const inactiveBackgroundColor = theme.colors.interactive.disabled;
+        const activeBackgroundColor = theme.colors.interactive[color];
+        const inactiveBackgroundColor = theme.colors.interactive.disabled;
 
-    const knobColor = theme.colors.text.tertiary;
-    const disabledKnobColor = theme.colors.text.disabled;
-    const backgroundHeight = KNOB_SIZE * 0.5;
+        const knobColor = theme.colors.text.tertiary;
+        const disabledKnobColor = theme.colors.text.disabled;
+        const backgroundHeight = KNOB_SIZE * 0.5;
 
-    let backgroundColor = isActive ? activeBackgroundColor : inactiveBackgroundColor;
-    backgroundColor = disabled ? theme.colors.interactive.disabled : backgroundColor;
+        let backgroundColor = isActive
+            ? activeBackgroundColor
+            : inactiveBackgroundColor;
+        backgroundColor = disabled
+            ? theme.colors.interactive.disabled
+            : backgroundColor;
 
-    return {
-        toggleContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        pressableContainer: {
-            height: HEIGHT,
-            width: WIDTH,
-            padding: 7,
-            borderRadius: WIDTH / 2,
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-        },
-        statusBackground: {
-            flex: 1,
-            height: backgroundHeight,
-            borderRadius: KNOB_SIZE,
-            backgroundColor: theme.colors.interactive.pressedOverlay,
-        },
-        knob: {
-            width: KNOB_SIZE,
-            height: KNOB_SIZE,
-            borderRadius: KNOB_SIZE / 2,
-            backgroundColor: disabled
-                ? disabledKnobColor
-                : isActive
-                ? activeBackgroundColor
-                : knobColor,
-        },
-        animatedBackground: {
-            position: "absolute",
-            height: backgroundHeight,
-            borderRadius: KNOB_SIZE,
-            backgroundColor:
-                disabled || !isActive
-                    ? theme.colors.interactive.pressedOverlay
-                    : theme.colors.interactive.selectedHighlight,
+        return {
+            toggleContainer: {
+                flexDirection: "row",
+                alignItems: "center",
+            },
+            pressableContainer: {
+                height: HEIGHT,
+                width: WIDTH,
+                padding: 7,
+                borderRadius: WIDTH / 2,
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+            },
+            statusBackground: {
+                flex: 1,
+                height: backgroundHeight,
+                borderRadius: KNOB_SIZE,
+                backgroundColor: theme.colors.interactive.pressedOverlay,
+            },
+            knob: {
+                width: KNOB_SIZE,
+                height: KNOB_SIZE,
+                borderRadius: KNOB_SIZE / 2,
+                backgroundColor: disabled
+                    ? disabledKnobColor
+                    : isActive
+                      ? activeBackgroundColor
+                      : knobColor,
+            },
+            animatedBackground: {
+                position: "absolute",
+                height: backgroundHeight,
+                borderRadius: KNOB_SIZE,
+                backgroundColor:
+                    disabled || !isActive
+                        ? theme.colors.interactive.pressedOverlay
+                        : theme.colors.interactive.selectedHighlight,
 
-            width: WIDTH - KNOB_SIZE,
-        },
-    };
-});
+                width: WIDTH - KNOB_SIZE,
+            },
+        };
+    }
+);

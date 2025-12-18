@@ -21,10 +21,18 @@ export const CellSwipeItem = ({
             onPress={() => swipeableMethods && onPress?.(swipeableMethods)}
         >
             {iconName && (
-                <Icon name={iconName} style={styles.textStyle} size={title ? undefined : 28} />
+                <Icon
+                    name={iconName}
+                    style={styles.textStyle}
+                    size={title ? undefined : 28}
+                />
             )}
             {title && (
-                <Typography group="interactive" variant="button" style={styles.textStyle}>
+                <Typography
+                    group="interactive"
+                    variant="button"
+                    style={styles.textStyle}
+                >
                     {title}
                 </Typography>
             )}
@@ -32,18 +40,20 @@ export const CellSwipeItem = ({
     );
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: { color?: EDSColor }) => ({
-    container: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: theme.spacing.button.iconGap,
-        backgroundColor: props.color
-            ? theme.colors.interactive[props.color]
-            : theme.colors.interactive.primary,
-        paddingHorizontal: theme.spacing.element.paddingHorizontal,
-        paddingVertical: theme.spacing.element.paddingVertical,
-    },
-    textStyle: {
-        color: theme.colors.text.primaryInverted,
-    },
-}));
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: { color?: EDSColor }) => ({
+        container: {
+            flexDirection: "row",
+            alignItems: "center",
+            gap: theme.spacing.button.iconGap,
+            backgroundColor: props.color
+                ? theme.colors.interactive[props.color]
+                : theme.colors.interactive.primary,
+            paddingHorizontal: theme.spacing.element.paddingHorizontal,
+            paddingVertical: theme.spacing.element.paddingVertical,
+        },
+        textStyle: {
+            color: theme.colors.text.primaryInverted,
+        },
+    })
+);

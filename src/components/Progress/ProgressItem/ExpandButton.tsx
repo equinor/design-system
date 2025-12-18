@@ -7,7 +7,8 @@ type ExpandButtonProps = {
 };
 
 export const ExpandButton = ({ variant }: ExpandButtonProps) => {
-    const { status, numTotalTasks, isExpanded, setIsExpanded } = useProgressItemContext();
+    const { status, numTotalTasks, isExpanded, setIsExpanded } =
+        useProgressItemContext();
     return (
         status !== "notStarted" &&
         numTotalTasks > 0 && (

@@ -9,7 +9,10 @@ type RootModalProps = {
     onBackdropPress?: () => void;
 };
 
-export const RootModal = ({ onBackdropPress, children }: PropsWithChildren<RootModalProps>) => (
+export const RootModal = ({
+    onBackdropPress,
+    children,
+}: PropsWithChildren<RootModalProps>) => (
     <Portal name="root">
         {onBackdropPress ? (
             <Pressable
@@ -19,7 +22,10 @@ export const RootModal = ({ onBackdropPress, children }: PropsWithChildren<RootM
                 {children}
             </Pressable>
         ) : (
-            <View pointerEvents="box-none" style={{ ...StyleSheet.absoluteFillObject, zIndex: 1 }}>
+            <View
+                pointerEvents="box-none"
+                style={{ ...StyleSheet.absoluteFillObject, zIndex: 1 }}
+            >
                 {children}
             </View>
         )}

@@ -75,7 +75,7 @@ export const Button = forwardRef<View, ButtonProps>(
             onPressOut = () => null,
             ...rest
         },
-        ref,
+        ref
     ) => {
         const toggleData = useContext(ToggleButtonContext);
         const isToggleButton = !!toggleData;
@@ -98,7 +98,11 @@ export const Button = forwardRef<View, ButtonProps>(
                         <Icon name={iconName} color={styles.textStyle.color} />
                     </View>
                 )}
-                <Typography group="interactive" variant="button" style={styles.textStyle}>
+                <Typography
+                    group="interactive"
+                    variant="button"
+                    style={styles.textStyle}
+                >
                     {title}
                 </Typography>
                 {iconName && iconPosition === "trailing" && (
@@ -121,7 +125,11 @@ export const Button = forwardRef<View, ButtonProps>(
                     <View style={styles.labelContainer}>
                         {loading ? (
                             <DotProgress
-                                color={disabled || variant !== "contained" ? "primary" : "neutral"}
+                                color={
+                                    disabled || variant !== "contained"
+                                        ? "primary"
+                                        : "neutral"
+                                }
                                 size={12}
                             />
                         ) : (
@@ -131,7 +139,7 @@ export const Button = forwardRef<View, ButtonProps>(
                 </PressableHighlight>
             </View>
         );
-    },
+    }
 );
 
 Button.displayName = "Button";
@@ -146,57 +154,91 @@ type ButtonStyleSheetProps = {
     fullWidth: boolean;
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: ButtonStyleSheetProps) => {
-    const { color, isToggleButton, toggleStatus, groupData, disabled, fullWidth } = props;
-    let { variant } = props;
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: ButtonStyleSheetProps) => {
+        const {
+            color,
+            isToggleButton,
+            toggleStatus,
+            groupData,
+            disabled,
+            fullWidth,
+        } = props;
+        let { variant } = props;
 
-    variant = isToggleButton ? (toggleStatus ? "contained" : "outlined") : variant;
+        variant = isToggleButton
+            ? toggleStatus
+                ? "contained"
+                : "outlined"
+            : variant;
 
-    const backgroundColor = getBackgroundColorForButton(theme, variant, color, disabled);
-    let textColor =
-        variant === "contained"
-            ? theme.colors.text.primaryInverted
-            : theme.colors.interactive[color];
-    textColor = disabled ? theme.colors.text.disabled : textColor;
+        const backgroundColor = getBackgroundColorForButton(
+            theme,
+            variant,
+            color,
+            disabled
+        );
+        let textColor =
+            variant === "contained"
+                ? theme.colors.text.primaryInverted
+                : theme.colors.interactive[color];
+        textColor = disabled ? theme.colors.text.disabled : textColor;
 
-    const leftRadius = !groupData.isFirstItem ? 0 : theme.geometry.border.elementBorderRadius;
-    const rightRadius = !groupData.isLastItem ? 0 : theme.geometry.border.elementBorderRadius;
-    const outlinedPaddingReduction = variant === "outlined" ? theme.geometry.border.borderWidth : 0;
-    const outlinedHeightReduction = outlinedPaddingReduction * 2;
-    return {
-        colorContainer: {
-            backgroundColor,
-            borderTopLeftRadius: leftRadius,
-            borderBottomLeftRadius: leftRadius,
-            borderTopRightRadius: rightRadius,
-            borderBottomRightRadius: rightRadius,
-            borderColor: disabled ? theme.colors.text.disabled : theme.colors.interactive[color],
-            borderWidth: variant === "outlined" ? theme.geometry.border.borderWidth : undefined,
-            overflow: "hidden",
-        },
-        pressableContainer: {
-            minHeight: theme.geometry.dimension.button.minHeight - outlinedHeightReduction,
-            paddingHorizontal: theme.spacing.button.paddingHorizontal - outlinedPaddingReduction,
-            paddingVertical: theme.spacing.button.paddingVertical - outlinedPaddingReduction,
-            justifyContent: "center"
-        },
-        labelContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: theme.spacing.button.iconGap,
-        },
-        trailingIcon: {
-            flex: fullWidth ? 1 : undefined,
-            alignItems: fullWidth ? "flex-end" : undefined,
-        },
-        leadingIcon: {
-            flex: fullWidth ? 1 : undefined,
-            alignItems: fullWidth ? "flex-start" : undefined,
-        },
-        textStyle: {
-            color: textColor,
-            position: fullWidth ? "absolute" : undefined,
-        },
-    };
-});
+        const leftRadius = !groupData.isFirstItem
+            ? 0
+            : theme.geometry.border.elementBorderRadius;
+        const rightRadius = !groupData.isLastItem
+            ? 0
+            : theme.geometry.border.elementBorderRadius;
+        const outlinedPaddingReduction =
+            variant === "outlined" ? theme.geometry.border.borderWidth : 0;
+        const outlinedHeightReduction = outlinedPaddingReduction * 2;
+        return {
+            colorContainer: {
+                backgroundColor,
+                borderTopLeftRadius: leftRadius,
+                borderBottomLeftRadius: leftRadius,
+                borderTopRightRadius: rightRadius,
+                borderBottomRightRadius: rightRadius,
+                borderColor: disabled
+                    ? theme.colors.text.disabled
+                    : theme.colors.interactive[color],
+                borderWidth:
+                    variant === "outlined"
+                        ? theme.geometry.border.borderWidth
+                        : undefined,
+                overflow: "hidden",
+            },
+            pressableContainer: {
+                minHeight:
+                    theme.geometry.dimension.button.minHeight -
+                    outlinedHeightReduction,
+                paddingHorizontal:
+                    theme.spacing.button.paddingHorizontal -
+                    outlinedPaddingReduction,
+                paddingVertical:
+                    theme.spacing.button.paddingVertical -
+                    outlinedPaddingReduction,
+                justifyContent: "center",
+            },
+            labelContainer: {
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: theme.spacing.button.iconGap,
+            },
+            trailingIcon: {
+                flex: fullWidth ? 1 : undefined,
+                alignItems: fullWidth ? "flex-end" : undefined,
+            },
+            leadingIcon: {
+                flex: fullWidth ? 1 : undefined,
+                alignItems: fullWidth ? "flex-start" : undefined,
+            },
+            textStyle: {
+                color: textColor,
+                position: fullWidth ? "absolute" : undefined,
+            },
+        };
+    }
+);

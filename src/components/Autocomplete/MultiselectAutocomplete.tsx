@@ -1,13 +1,18 @@
 import React, { useMemo, useRef, useState } from "react";
-import { LayoutRectangle, TextInput, View, Platform } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+    LayoutRectangle,
+    Platform,
+    ScrollView,
+    TextInput,
+    View,
+} from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
 import { IconButton } from "../Button/IconButton";
 import { Menu } from "../Menu";
 import { TextField, TextFieldProps } from "../TextField";
-import { GenericAutocompleteProps } from "./types";
 import { Autocomplete } from "./Autocomplete";
+import { GenericAutocompleteProps } from "./types";
 
 type MultiselectAutocompleteProps<T> = {
     /**
@@ -29,16 +34,22 @@ export const MultiselectAutocomplete = <T,>({
 
     const filteredOptions = useMemo(
         () =>
-            options.filter(option => {
-                const transformedItem = transformItem ? transformItem(option) : (option as string);
-                return transformedItem.toLowerCase().includes(inputValue.toLowerCase());
+            options.filter((option) => {
+                const transformedItem = transformItem
+                    ? transformItem(option)
+                    : (option as string);
+                return transformedItem
+                    .toLowerCase()
+                    .includes(inputValue.toLowerCase());
             }),
-        [inputValue, options, transformItem],
+        [inputValue, options, transformItem]
     );
 
     const [isOptionsVisible, setIsOptionsVisible] = useState<boolean>(false);
     const inputRef = useRef<TextInput>(null);
-    const [inputLayout, setInputLayout] = useState<LayoutRectangle | undefined>();
+    const [inputLayout, setInputLayout] = useState<
+        LayoutRectangle | undefined
+    >();
     const styles = useStyles(themedStyles, { inputLayout });
 
     const handleMenuOpen = () => {
@@ -70,7 +81,9 @@ export const MultiselectAutocomplete = <T,>({
                 onPress={() => {
                     setInputValue("");
                     if (active) {
-                        return onSelect(selectedOptions.filter(o => o !== option));
+                        return onSelect(
+                            selectedOptions.filter((o) => o !== option)
+                        );
                     }
                     onSelect([...selectedOptions, option]);
                 }}
@@ -80,7 +93,7 @@ export const MultiselectAutocomplete = <T,>({
 
     return (
         <View
-            onLayout={event => {
+            onLayout={(event) => {
                 const layout = event.nativeEvent.layout;
                 setInputLayout(layout);
             }}
@@ -90,7 +103,7 @@ export const MultiselectAutocomplete = <T,>({
                 ref={inputRef}
                 {...restProps}
                 value={inputValue}
-                onChange={text => {
+                onChange={(text) => {
                     setInputValue(text);
                     setIsOptionsVisible(true);
                     if (text === "") {
@@ -124,7 +137,9 @@ export const MultiselectAutocomplete = <T,>({
                 }
                 placeholder={
                     selectedOptions.length
-                        ? selectedOptions.map(o => transformItem?.(o) ?? o).join(", ")
+                        ? selectedOptions
+                              .map((o) => transformItem?.(o) ?? o)
+                              .join(", ")
                         : "Choose an option"
                 }
             />
@@ -137,8 +152,11 @@ export const MultiselectAutocomplete = <T,>({
                     style={styles.menuContainer}
                 >
                     <ScrollView keyboardShouldPersistTaps="always">
-                        {filteredOptions.map(option =>
-                            renderMultiselectItem(option, selectedOptions?.includes(option)),
+                        {filteredOptions.map((option) =>
+                            renderMultiselectItem(
+                                option,
+                                selectedOptions?.includes(option)
+                            )
                         )}
                     </ScrollView>
                 </Menu>
@@ -164,5 +182,5 @@ const themedStyles = EDSStyleSheet.create(
         menuIcon: {
             marginRight: 3,
         },
-    }),
+    })
 );

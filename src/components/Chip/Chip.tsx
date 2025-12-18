@@ -55,8 +55,18 @@ export const Chip = ({
                 disabled={disabled || !onPress}
             >
                 <View style={styles.chipContent}>
-                    {iconName && <Icon name={iconName} size={ICON_SIZE} style={styles.text} />}
-                    <Typography style={styles.text} group="ui" variant="chipAndBadge">
+                    {iconName && (
+                        <Icon
+                            name={iconName}
+                            size={ICON_SIZE}
+                            style={styles.text}
+                        />
+                    )}
+                    <Typography
+                        style={styles.text}
+                        group="ui"
+                        variant="chipAndBadge"
+                    >
                         {title}
                     </Typography>
                     {onDelete && (
@@ -113,7 +123,10 @@ const themeStyles = EDSStyleSheet.create((theme, props: ChipTokenProps) => {
                 : variantToBackgroundColor[variant],
             borderRadius: 9999,
             borderColor: theme.colors.feedback.danger,
-            borderWidth: variant === "error" ? theme.geometry.border.borderWidth : undefined,
+            borderWidth:
+                variant === "error"
+                    ? theme.geometry.border.borderWidth
+                    : undefined,
             overflow: "hidden",
         },
         pressableContainer: {
@@ -126,7 +139,9 @@ const themeStyles = EDSStyleSheet.create((theme, props: ChipTokenProps) => {
             gap: theme.spacing.button.iconGap,
         },
         text: {
-            color: disabled ? theme.colors.text.disabled : variantToTextColor[variant],
+            color: disabled
+                ? theme.colors.text.disabled
+                : variantToTextColor[variant],
         },
         dummyElement: {
             width: ICON_SIZE,

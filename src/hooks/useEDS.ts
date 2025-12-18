@@ -11,15 +11,15 @@ import EquinorMediumItalic from "../assets/fonts/Equinor-MediumItalic.otf";
 import Inter from "../assets/fonts/Inter.otf";
 
 const fontMap = {
-  ...MaterialCommunityIcons.font,
-  "Equinor-Bold": EquinorBold as FontSource,
-  "Equinor-BoldItalic": EquinorBoldItalic as FontSource,
-  "Equinor-Italic": EquinorItalic as FontSource,
-  "Equinor-Light": EquinorLight as FontSource,
-  "Equinor-LightItalic": EquinorLightItalic as FontSource,
-  "Equinor-Medium": EquinorMedium as FontSource,
-  "Equinor-MediumItalic": EquinorMediumItalic as FontSource,
-  "Inter": Inter as FontSource,
+    ...MaterialCommunityIcons.font,
+    "Equinor-Bold": EquinorBold as FontSource,
+    "Equinor-BoldItalic": EquinorBoldItalic as FontSource,
+    "Equinor-Italic": EquinorItalic as FontSource,
+    "Equinor-Light": EquinorLight as FontSource,
+    "Equinor-LightItalic": EquinorLightItalic as FontSource,
+    "Equinor-Medium": EquinorMedium as FontSource,
+    "Equinor-MediumItalic": EquinorMediumItalic as FontSource,
+    Inter: Inter as FontSource,
 };
 
 /**
@@ -28,6 +28,6 @@ const fontMap = {
  * @returns A tuple array of the loading state in addition to any potential errors caught during asset initialization.
  */
 export const useEDS = () => {
-  const isLoaded = useFonts(fontMap);
-  return isLoaded;
+    const isLoaded = useFonts(fontMap);
+    return isLoaded;
 };

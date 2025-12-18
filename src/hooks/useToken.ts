@@ -11,7 +11,7 @@ export function useToken() {
     const context = useContext(EDSContext);
     if (!context) {
         throw new Error(
-            "useToken must be called within a EDSProvider. Did you forget to wrap your application in it?",
+            "useToken must be called within a EDSProvider. Did you forget to wrap your application in it?"
         );
     }
     return context.token;

@@ -63,7 +63,10 @@ export const NavigationCell = ({
 
     const renderAdornmentIcon = (iconName: IconName) => (
         <View style={styles.adornmentContainer}>
-            <Icon name={iconName} color={disabled ? "textDisabled" : undefined} />
+            <Icon
+                name={iconName}
+                color={disabled ? "textDisabled" : undefined}
+            />
         </View>
     );
 
@@ -96,7 +99,11 @@ export const NavigationCell = ({
 
     return (
         <Cell
-            leftAdornment={iconName ? renderAdornmentIcon(iconName ?? "dots-square") : undefined}
+            leftAdornment={
+                iconName
+                    ? renderAdornmentIcon(iconName ?? "dots-square")
+                    : undefined
+            }
             rightAdornment={renderAdornmentIcon("chevron-right")}
             onPress={disabled ? undefined : onPress}
             {...cellProps}
@@ -145,7 +152,7 @@ export const NavigationCell = ({
 
 NavigationCell.displayName = "Cell.Navigation";
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     contentContainer: {
         flexDirection: "row",
     },

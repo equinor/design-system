@@ -11,16 +11,17 @@ export type PaperProps = {
     elevation: Elevation;
 };
 
-export const Paper = forwardRef<View, React.PropsWithChildren<PaperProps & ViewProps>>(
-    ({ elevation = "none", children, ...rest }, ref) => {
-        const style = useStyles(themeStyles, elevation);
-        return (
-            <View ref={ref} {...rest} style={[style.container, rest.style]}>
-                {children}
-            </View>
-        );
-    },
-);
+export const Paper = forwardRef<
+    View,
+    React.PropsWithChildren<PaperProps & ViewProps>
+>(({ elevation = "none", children, ...rest }, ref) => {
+    const style = useStyles(themeStyles, elevation);
+    return (
+        <View ref={ref} {...rest} style={[style.container, rest.style]}>
+            {children}
+        </View>
+    );
+});
 
 Paper.displayName = "Paper";
 

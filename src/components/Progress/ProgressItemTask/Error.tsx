@@ -13,16 +13,28 @@ export const Error = ({ error }: ErrorProps) => {
     const styles = useStyles(tokenStyles);
     return (
         <View style={styles.container}>
-            <Typography variant="description" group="cell" color="textSecondary">
+            <Typography
+                variant="description"
+                group="cell"
+                color="textSecondary"
+            >
                 {error.message}
             </Typography>
             {error.code && (
-                <Typography variant="description" group="cell" color="textSecondary">
+                <Typography
+                    variant="description"
+                    group="cell"
+                    color="textSecondary"
+                >
                     {error.code}
                 </Typography>
             )}
             {error.suggestion && (
-                <Typography variant="description" group="cell" color="textSecondary">
+                <Typography
+                    variant="description"
+                    group="cell"
+                    color="textSecondary"
+                >
                     {error.suggestion}
                 </Typography>
             )}
@@ -30,7 +42,7 @@ export const Error = ({ error }: ErrorProps) => {
     );
 };
 
-const tokenStyles = EDSStyleSheet.create(token => ({
+const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
         flexDirection: "column",
         gap: token.spacing.spacer.small,

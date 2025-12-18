@@ -1,4 +1,10 @@
-import React, { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import React, {
+    ReactNode,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import { Cell } from "../Cell";
 import { Animated, View, ViewProps } from "react-native";
 import { Icon, IconName } from "../Icon";
@@ -77,7 +83,7 @@ export const AccordionItem = ({
     }, [expanded]);
 
     const toggleItem = () => {
-        setExpanded(state => !state);
+        setExpanded((state) => !state);
     };
 
     const ChevronView = () => (
@@ -92,7 +98,10 @@ export const AccordionItem = ({
     const IconView = () =>
         iconName && (
             <View style={styles.iconContainer}>
-                <Icon name={iconName} color={disabled ? "textTertiary" : "textPrimary"} />
+                <Icon
+                    name={iconName}
+                    color={disabled ? "textTertiary" : "textPrimary"}
+                />
             </View>
         );
 
@@ -100,15 +109,25 @@ export const AccordionItem = ({
         <>
             <View>
                 <Cell
-                    rightAdornment={chevronPosition === "right" ? ChevronView() : IconView()}
-                    leftAdornment={chevronPosition === "left" ? ChevronView() : IconView()}
+                    rightAdornment={
+                        chevronPosition === "right" ? ChevronView() : IconView()
+                    }
+                    leftAdornment={
+                        chevronPosition === "left" ? ChevronView() : IconView()
+                    }
                     onPress={disabled ? undefined : toggleItem}
                     style={styles.cellContainer}
                 >
                     <View style={styles.headerContainer}>
                         <Typography
                             variant="h6"
-                            color={disabled ? "textTertiary" : expanded ? "primary" : "textPrimary"}
+                            color={
+                                disabled
+                                    ? "textTertiary"
+                                    : expanded
+                                      ? "primary"
+                                      : "textPrimary"
+                            }
                             numberOfLines={1}
                         >
                             {title}
@@ -135,9 +154,14 @@ export const AccordionItem = ({
                             bottom: 0,
                             width: "100%",
                         }}
-                        onLayout={event => setContentHeight(event.nativeEvent.layout.height)}
+                        onLayout={(event) =>
+                            setContentHeight(event.nativeEvent.layout.height)
+                        }
                     >
-                        <View {...rest} style={[styles.contentContainer, rest.style]}>
+                        <View
+                            {...rest}
+                            style={[styles.contentContainer, rest.style]}
+                        >
                             {children}
                         </View>
                     </View>
@@ -147,37 +171,41 @@ export const AccordionItem = ({
     );
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: AccordionContextType) => {
-    const { isLastItem } = props;
-    return {
-        cellContainer: {
-            borderTopWidth: theme.geometry.border.borderWidth,
-            borderBottomWidth: isLastItem ? theme.geometry.border.borderWidth : undefined,
-        },
-        headerContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-            gap: theme.spacing.cell.gapHorizontal,
-            height: theme.geometry.dimension.cell.accordion.height,
-        },
-        contentContainer: {
-            backgroundColor: theme.colors.container.default,
-            paddingHorizontal: theme.spacing.container.paddingHorizontal,
-            paddingVertical: theme.spacing.container.paddingVertical,
-        },
-        iconContainer: {
-            justifyContent: "center",
-        },
-        dividerOuter: {
-            position: "absolute",
-            left: 0,
-            bottom: 0,
-            width: "100%",
-            paddingHorizontal: theme.spacing.container.paddingHorizontal,
-        },
-        dividerInner: {
-            height: theme.geometry.border.borderWidth,
-            backgroundColor: theme.colors.border.medium,
-        },
-    };
-});
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: AccordionContextType) => {
+        const { isLastItem } = props;
+        return {
+            cellContainer: {
+                borderTopWidth: theme.geometry.border.borderWidth,
+                borderBottomWidth: isLastItem
+                    ? theme.geometry.border.borderWidth
+                    : undefined,
+            },
+            headerContainer: {
+                flexDirection: "row",
+                alignItems: "center",
+                gap: theme.spacing.cell.gapHorizontal,
+                height: theme.geometry.dimension.cell.accordion.height,
+            },
+            contentContainer: {
+                backgroundColor: theme.colors.container.default,
+                paddingHorizontal: theme.spacing.container.paddingHorizontal,
+                paddingVertical: theme.spacing.container.paddingVertical,
+            },
+            iconContainer: {
+                justifyContent: "center",
+            },
+            dividerOuter: {
+                position: "absolute",
+                left: 0,
+                bottom: 0,
+                width: "100%",
+                paddingHorizontal: theme.spacing.container.paddingHorizontal,
+            },
+            dividerInner: {
+                height: theme.geometry.border.borderWidth,
+                backgroundColor: theme.colors.border.medium,
+            },
+        };
+    }
+);

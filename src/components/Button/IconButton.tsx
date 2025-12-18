@@ -50,7 +50,7 @@ export const IconButton = forwardRef<View, IconButtonProps & ViewProps>(
             onPress = () => null,
             ...rest
         },
-        ref,
+        ref
     ) => {
         const styles = useStyles(themeStyles, {
             color,
@@ -69,16 +69,24 @@ export const IconButton = forwardRef<View, IconButtonProps & ViewProps>(
                 >
                     {busy ? (
                         <CircularProgress
-                            color={disabled || variant !== "contained" ? "primary" : "neutral"}
+                            color={
+                                disabled || variant !== "contained"
+                                    ? "primary"
+                                    : "neutral"
+                            }
                             size={iconSize}
                         />
                     ) : (
-                        <Icon name={name} size={iconSize} color={styles.textStyle.color} />
+                        <Icon
+                            name={name}
+                            size={iconSize}
+                            color={styles.textStyle.color}
+                        />
                     )}
                 </PressableHighlight>
             </View>
         );
-    },
+    }
 );
 
 IconButton.displayName = "Button.Icon";
@@ -90,33 +98,45 @@ type IconButtonStyleSheetProps = {
     iconSize: number;
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: IconButtonStyleSheetProps) => {
-    const { color, disabled, variant, iconSize } = props;
-    const pressableContainerSize = iconSize * 1.8;
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: IconButtonStyleSheetProps) => {
+        const { color, disabled, variant, iconSize } = props;
+        const pressableContainerSize = iconSize * 1.8;
 
-    const backgroundColor = getBackgroundColorForButton(theme, variant, color, disabled);
-    let textColor =
-        variant === "contained"
-            ? theme.colors.text.primaryInverted
-            : theme.colors.interactive[color];
-    textColor = disabled ? theme.colors.text.disabled : textColor;
+        const backgroundColor = getBackgroundColorForButton(
+            theme,
+            variant,
+            color,
+            disabled
+        );
+        let textColor =
+            variant === "contained"
+                ? theme.colors.text.primaryInverted
+                : theme.colors.interactive[color];
+        textColor = disabled ? theme.colors.text.disabled : textColor;
 
-    return {
-        colorContainer: {
-            backgroundColor,
-            borderRadius: theme.geometry.dimension.button.minHeight / 2,
-            borderColor: disabled ? theme.colors.text.disabled : theme.colors.interactive[color],
-            borderWidth: variant === "outlined" ? theme.geometry.border.borderWidth : undefined,
-            overflow: "hidden",
-        },
-        pressableContainer: {
-            justifyContent: "center",
-            alignItems: "center",
-            width: pressableContainerSize,
-            height: pressableContainerSize,
-        },
-        textStyle: {
-            color: textColor,
-        },
-    };
-});
+        return {
+            colorContainer: {
+                backgroundColor,
+                borderRadius: theme.geometry.dimension.button.minHeight / 2,
+                borderColor: disabled
+                    ? theme.colors.text.disabled
+                    : theme.colors.interactive[color],
+                borderWidth:
+                    variant === "outlined"
+                        ? theme.geometry.border.borderWidth
+                        : undefined,
+                overflow: "hidden",
+            },
+            pressableContainer: {
+                justifyContent: "center",
+                alignItems: "center",
+                width: pressableContainerSize,
+                height: pressableContainerSize,
+            },
+            textStyle: {
+                color: textColor,
+            },
+        };
+    }
+);

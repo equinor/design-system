@@ -3,7 +3,12 @@ import { ProgressStatus } from "../types";
 
 describe("summarizeStatuses", () => {
     it("should return error if there is an error in the statuses", () => {
-        const statuses: ProgressStatus[] = ["error", "inProgress", "success", "notStarted"];
+        const statuses: ProgressStatus[] = [
+            "error",
+            "inProgress",
+            "success",
+            "notStarted",
+        ];
         const expectation: ProgressStatus = "error";
 
         const result = summarizeStatuses(statuses);
@@ -12,7 +17,11 @@ describe("summarizeStatuses", () => {
     });
 
     it("should return inProgress if there is an inProgress in the statuses and no error", () => {
-        const statuses: ProgressStatus[] = ["inProgress", "success", "notStarted"];
+        const statuses: ProgressStatus[] = [
+            "inProgress",
+            "success",
+            "notStarted",
+        ];
         const expectation: ProgressStatus = "inProgress";
 
         const result = summarizeStatuses(statuses);
@@ -30,7 +39,11 @@ describe("summarizeStatuses", () => {
     });
 
     it("should return notStarted if all statuses are notStarted", () => {
-        const statuses: ProgressStatus[] = ["notStarted", "notStarted", "notStarted"];
+        const statuses: ProgressStatus[] = [
+            "notStarted",
+            "notStarted",
+            "notStarted",
+        ];
         const expectation: ProgressStatus = "notStarted";
 
         const result = summarizeStatuses(statuses);

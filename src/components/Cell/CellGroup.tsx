@@ -47,7 +47,11 @@ export const CellGroup = ({
         <>
             <View style={styles.titleContainer}>
                 {title && (
-                    <Typography group="cell" variant="groupTitle" color="textTertiary">
+                    <Typography
+                        group="cell"
+                        variant="groupTitle"
+                        color="textTertiary"
+                    >
                         {title}
                     </Typography>
                 )}
@@ -67,12 +71,16 @@ export const CellGroup = ({
     );
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: CellGroupStyleProps) => ({
-    titleContainer: {
-        paddingHorizontal: theme.spacing.container.paddingHorizontal,
-        paddingBottom: props.hasTitle ? theme.spacing.cell.group.titleBottomPadding : undefined,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "flex-end",
-    },
-}));
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: CellGroupStyleProps) => ({
+        titleContainer: {
+            paddingHorizontal: theme.spacing.container.paddingHorizontal,
+            paddingBottom: props.hasTitle
+                ? theme.spacing.cell.group.titleBottomPadding
+                : undefined,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+        },
+    })
+);

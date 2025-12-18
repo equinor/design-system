@@ -35,8 +35,8 @@ export const DialogServiceProvider = () => {
                             button.style === "cancel"
                                 ? "secondary"
                                 : button.style === "destructive"
-                                ? "danger"
-                                : "primary"
+                                  ? "danger"
+                                  : "primary"
                         }
                         iconPosition="leading"
                         iconName={button.icon}

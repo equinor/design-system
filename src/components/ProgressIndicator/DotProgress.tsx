@@ -24,7 +24,13 @@ type DotProps = {
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const Dot = ({ radius: originalRadius, count, index, progress, ...circleProps }: DotProps) => {
+const Dot = ({
+    radius: originalRadius,
+    count,
+    index,
+    progress,
+    ...circleProps
+}: DotProps) => {
     const animatedProps = useAnimatedProps<CircleProps>(() => {
         const parts = 2;
         const wholeCount = count - 1 + 2 * parts;
@@ -33,12 +39,17 @@ const Dot = ({ radius: originalRadius, count, index, progress, ...circleProps }:
             (index + parts) / wholeCount,
             (index + 2 * parts) / wholeCount,
         ];
-        const radiusScale = interpolate(progress.value, inputs, [0.7, 1, 0.7], Extrapolation.CLAMP);
+        const radiusScale = interpolate(
+            progress.value,
+            inputs,
+            [0.7, 1, 0.7],
+            Extrapolation.CLAMP
+        );
         const opacityScale = interpolate(
             progress.value,
             inputs,
             [0.3, 1, 0.3],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
         );
         return {
             r: originalRadius * radiusScale,
@@ -46,7 +57,13 @@ const Dot = ({ radius: originalRadius, count, index, progress, ...circleProps }:
         };
     });
 
-    return <AnimatedCircle animatedProps={animatedProps} fill="black" {...circleProps} />;
+    return (
+        <AnimatedCircle
+            animatedProps={animatedProps}
+            fill="black"
+            {...circleProps}
+        />
+    );
 };
 
 export type DotProgressProps = {
@@ -60,7 +77,11 @@ export type DotProgressProps = {
     color?: "neutral" | "primary";
 } & ViewProps;
 
-export const DotProgress = ({ color, size: optionalSize, ...rest }: DotProgressProps) => {
+export const DotProgress = ({
+    color,
+    size: optionalSize,
+    ...rest
+}: DotProgressProps) => {
     const styles = useStyles(themeStyles, { color });
     const token = useToken();
 
@@ -71,7 +92,7 @@ export const DotProgress = ({ color, size: optionalSize, ...rest }: DotProgressP
                 duration: 1500,
                 easing: Easing.inOut(Easing.sin),
             }),
-            0,
+            0
         );
     }, [progress]);
 
@@ -118,14 +139,16 @@ DotProgress.displayName = "DotProgress";
 
 type CircularProgressStyleProps = Pick<DotProgressProps, "color">;
 
-const themeStyles = EDSStyleSheet.create((theme, props: CircularProgressStyleProps) => {
-    const color =
-        props.color === "neutral"
-            ? theme.colors.container.default
-            : theme.colors.interactive.primary;
-    return {
-        circle: {
-            color,
-        },
-    };
-});
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: CircularProgressStyleProps) => {
+        const color =
+            props.color === "neutral"
+                ? theme.colors.container.default
+                : theme.colors.interactive.primary;
+        return {
+            circle: {
+                color,
+            },
+        };
+    }
+);

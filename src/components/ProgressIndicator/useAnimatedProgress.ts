@@ -10,8 +10,13 @@ const DEFAULT_PROGRESS = 0.618033; // Golden angle / ratio, if anyone is interes
  * @param invertedDefaltProgress A boolean value indicating whether or not to invert the default progress value when no value is provided.
  * @returns An animated value that is animated towards the provided `value` argument.
  */
-export const useAnimatedProgress = (value?: number, invertedDefaltProgress = false) => {
-    const defaultProgress = invertedDefaltProgress ? 1 - DEFAULT_PROGRESS : DEFAULT_PROGRESS;
+export const useAnimatedProgress = (
+    value?: number,
+    invertedDefaltProgress = false
+) => {
+    const defaultProgress = invertedDefaltProgress
+        ? 1 - DEFAULT_PROGRESS
+        : DEFAULT_PROGRESS;
     const token = useToken();
     const progressValue = useSharedValue<number>(value ?? defaultProgress);
 

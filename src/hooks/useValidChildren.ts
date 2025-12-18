@@ -2,16 +2,22 @@ import React, { Children, isValidElement, useMemo } from "react";
 
 const getValidIndexes = (children: React.ReactNode) => {
     const childValidityArray: boolean[] = [];
-    Children.forEach(children, child => childValidityArray.push(isValidElement(child)));
+    Children.forEach(children, (child) =>
+        childValidityArray.push(isValidElement(child))
+    );
     return childValidityArray.reduce<number[]>(
-        (validIndexes, isValid, index) => (isValid ? validIndexes.concat(index) : validIndexes),
-        [],
+        (validIndexes, isValid, index) =>
+            isValid ? validIndexes.concat(index) : validIndexes,
+        []
     );
 };
 
 const getValidChildren = (children: React.ReactNode) => {
     const validChildrenArray: React.ReactNode[] = [];
-    Children.forEach(children, child => isValidElement(child) && validChildrenArray.push(child));
+    Children.forEach(
+        children,
+        (child) => isValidElement(child) && validChildrenArray.push(child)
+    );
     return validChildrenArray;
 };
 

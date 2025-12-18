@@ -61,8 +61,14 @@ export const Menu = ({
             <RootModal onBackdropPress={onClose}>
                 <View ref={refs.setFloating} style={floatingStyles}>
                     <PopInContainer>
-                        <Paper style={styles.paperStyle} elevation="temporaryNav">
-                            <View style={[styles.innerContainer, rest.style]} {...rest}>
+                        <Paper
+                            style={styles.paperStyle}
+                            elevation="temporaryNav"
+                        >
+                            <View
+                                style={[styles.innerContainer, rest.style]}
+                                {...rest}
+                            >
                                 <MenuContext.Provider
                                     value={{
                                         close: onClose,
@@ -79,7 +85,7 @@ export const Menu = ({
     );
 };
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     paperStyle: {
         borderRadius: theme.geometry.border.elementBorderRadius,
     },

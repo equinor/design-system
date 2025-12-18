@@ -67,9 +67,15 @@ const TypographyInner = <TGroup extends TypographyGroup>(
         children,
         ...rest
     }: TypographyProps<TGroup> & TextChildren,
-    ref?: LegacyRef<Text>,
+    ref?: LegacyRef<Text>
 ) => {
-    const styles = useStyles(themeStyles, { group, variant, bold, italic, color });
+    const styles = useStyles(themeStyles, {
+        group,
+        variant,
+        bold,
+        italic,
+        color,
+    });
 
     return (
         <Text {...rest} ref={ref} style={[styles.text, rest.style]}>
@@ -81,7 +87,7 @@ const TypographyInner = <TGroup extends TypographyGroup>(
 const resolveFontName = (
     bold: boolean | undefined,
     italic: boolean | undefined,
-    defaultName: string,
+    defaultName: string
 ) => {
     let fontName = defaultName;
     if (bold) {
@@ -98,7 +104,7 @@ const themeStyles = EDSStyleSheet.create(
         props: Pick<
             TypographyProps<TypographyGroup>,
             "group" | "variant" | "color" | "bold" | "italic"
-        >,
+        >
     ) => {
         const {
             group: group = "basic",
@@ -108,19 +114,27 @@ const themeStyles = EDSStyleSheet.create(
             italic,
         } = props;
 
-        const typography = (theme.typography as never)[group][variant] as TypographyStyle;
+        const typography = (theme.typography as never)[group][
+            variant
+        ] as TypographyStyle;
 
         const textStyle: TextStyle = {
             color: resolveColor(color, theme),
             ...typography,
-            fontFamily: resolveFontName(bold, italic, typography.fontFamily ?? "Inter"),
+            fontFamily: resolveFontName(
+                bold,
+                italic,
+                typography.fontFamily ?? "Inter"
+            ),
         };
         return {
             text: textStyle,
         };
-    },
+    }
 );
 
-export const Typography = forwardRef(TypographyInner) as <TGroup extends TypographyGroup>(
-    p: TypographyProps<TGroup> & TextChildren & TextProps,
+export const Typography = forwardRef(TypographyInner) as <
+    TGroup extends TypographyGroup,
+>(
+    p: TypographyProps<TGroup> & TextChildren & TextProps
 ) => React.ReactElement;

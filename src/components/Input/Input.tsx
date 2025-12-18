@@ -54,10 +54,14 @@ export const Input = forwardRef<TextInput, InputProps>(
             readOnly = false,
             ...rest
         },
-        ref,
+        ref
     ) => {
         const [isSelected, setIsSelected] = useState<boolean>(false);
-        const styles = useStyles(inputTokenStyles, { isSelected, variant, readOnly });
+        const styles = useStyles(inputTokenStyles, {
+            isSelected,
+            variant,
+            readOnly,
+        });
 
         const onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
             setIsSelected(true);
@@ -86,14 +90,16 @@ export const Input = forwardRef<TextInput, InputProps>(
                     style={[
                         styles.textInput,
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- this is appearanly available for web, but react native does not seem to recognize it
-                        Platform.OS === "web" ? ({ outline: "none" } as any) : {},
+                        Platform.OS === "web"
+                            ? ({ outline: "none" } as any)
+                            : {},
                         rest.style,
                     ]}
                 />
                 {rightAdornments}
             </View>
         );
-    },
+    }
 );
 
 Input.displayName = "Input";

@@ -29,7 +29,11 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
 
     return (
         <EDSContext.Provider
-            value={{ colorScheme: props.colorScheme, density: props.density, token }}
+            value={{
+                colorScheme: props.colorScheme,
+                density: props.density,
+                token,
+            }}
         >
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <PortalProvider>

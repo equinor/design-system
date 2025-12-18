@@ -1,4 +1,10 @@
-import React, { createContext, PropsWithChildren, useEffect, useMemo, useState } from "react";
+import React, {
+    createContext,
+    PropsWithChildren,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 import { ProgressStatus, ProgressTask } from "../../types";
 import { summarizeStatuses } from "../../progressUtils";
 
@@ -12,7 +18,8 @@ type ProgressItemContextValues = {
     setIsExpanded: (isExpanded: boolean) => void;
 };
 
-export const ProgressItemContext = createContext<ProgressItemContextValues | null>(null);
+export const ProgressItemContext =
+    createContext<ProgressItemContextValues | null>(null);
 
 type ProgressItemProviderProps = {
     status?: ProgressStatus;
@@ -29,16 +36,19 @@ export const ProgressItemProvider = ({
     const numTotalTasks = tasks.length;
 
     const numCompletedTasks = useMemo(
-        () => tasks.filter(task => task.status === "success").length,
-        [tasks],
+        () => tasks.filter((task) => task.status === "success").length,
+        [tasks]
     );
 
     const status = useMemo(() => {
-        const allStatuses = tasks.map(task => task.status);
+        const allStatuses = tasks.map((task) => task.status);
         return inputStatus ?? summarizeStatuses(allStatuses);
     }, [inputStatus, tasks]);
 
-    const failedTask = useMemo(() => tasks.find(task => task.status === "error"), [tasks]);
+    const failedTask = useMemo(
+        () => tasks.find((task) => task.status === "error"),
+        [tasks]
+    );
 
     useEffect(() => {
         if (status === "error" && tasks.length) {

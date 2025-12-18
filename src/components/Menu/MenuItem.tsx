@@ -60,7 +60,9 @@ export const MenuItem = ({
                 disabled={disabled}
             >
                 <View style={styles.contentContainer}>
-                    {iconName && <Icon name={iconName} style={styles.textStyle} />}
+                    {iconName && (
+                        <Icon name={iconName} style={styles.textStyle} />
+                    )}
                     <Typography style={styles.textStyle}>{title}</Typography>
                 </View>
             </PressableHighlight>
@@ -68,27 +70,32 @@ export const MenuItem = ({
     );
 };
 
-const themeStyles = EDSStyleSheet.create((theme, props: { active: boolean; disabled: boolean }) => {
-    const activeColor = props.active && theme.colors.text.menu.active;
-    const disabledColor = props.disabled && theme.colors.text.disabled;
-    return {
-        itemContainer: {
-            backgroundColor: props.active
-                ? theme.colors.interactive.selectedHighlight
-                : theme.colors.container.elevation.temporaryNav,
-        },
-        pressableContainer: {
-            paddingHorizontal: theme.spacing.menu.item.paddingHorizontal,
-            paddingVertical: theme.spacing.menu.item.paddingVertical,
-        },
-        textStyle: {
-            color: disabledColor || activeColor || theme.colors.text.menu.resting,
-        },
-        contentContainer: {
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignContent: "center",
-            gap: theme.spacing.menu.item.iconGap,
-        },
-    };
-});
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: { active: boolean; disabled: boolean }) => {
+        const activeColor = props.active && theme.colors.text.menu.active;
+        const disabledColor = props.disabled && theme.colors.text.disabled;
+        return {
+            itemContainer: {
+                backgroundColor: props.active
+                    ? theme.colors.interactive.selectedHighlight
+                    : theme.colors.container.elevation.temporaryNav,
+            },
+            pressableContainer: {
+                paddingHorizontal: theme.spacing.menu.item.paddingHorizontal,
+                paddingVertical: theme.spacing.menu.item.paddingVertical,
+            },
+            textStyle: {
+                color:
+                    disabledColor ||
+                    activeColor ||
+                    theme.colors.text.menu.resting,
+            },
+            contentContainer: {
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignContent: "center",
+                gap: theme.spacing.menu.item.iconGap,
+            },
+        };
+    }
+);

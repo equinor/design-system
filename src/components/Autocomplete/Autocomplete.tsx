@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { LayoutRectangle, TextInput, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { LayoutRectangle, ScrollView, TextInput, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
 import { IconButton } from "../Button/IconButton";
@@ -32,22 +31,30 @@ export const Autocomplete = <T,>({
             if (!item) return "";
             return transformItem?.(item) ?? (item as string);
         },
-        [transformItem],
+        [transformItem]
     );
-    const [inputValue, setInputValue] = useState<string>(internalTransform(selectedOption));
+    const [inputValue, setInputValue] = useState<string>(
+        internalTransform(selectedOption)
+    );
 
     const filteredOptions = useMemo(
         () =>
-            options.filter(option => {
-                const transformedItem = transformItem ? transformItem(option) : (option as string);
-                return transformedItem.toLowerCase().includes(inputValue.toLowerCase());
+            options.filter((option) => {
+                const transformedItem = transformItem
+                    ? transformItem(option)
+                    : (option as string);
+                return transformedItem
+                    .toLowerCase()
+                    .includes(inputValue.toLowerCase());
             }),
-        [inputValue, options, transformItem],
+        [inputValue, options, transformItem]
     );
 
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
     const inputRef = useRef<TextInput>(null);
-    const [inputLayout, setInputLayout] = useState<LayoutRectangle | undefined>();
+    const [inputLayout, setInputLayout] = useState<
+        LayoutRectangle | undefined
+    >();
     const styles = useStyles(themedStyles, { inputLayout });
 
     const handleMenuOpen = () => {
@@ -86,7 +93,7 @@ export const Autocomplete = <T,>({
 
     return (
         <View
-            onLayout={event => {
+            onLayout={(event) => {
                 const layout = event.nativeEvent.layout;
                 setInputLayout(layout);
             }}
@@ -96,7 +103,7 @@ export const Autocomplete = <T,>({
                 ref={inputRef}
                 {...restProps}
                 value={inputValue}
-                onChange={text => {
+                onChange={(text) => {
                     setInputValue(text);
                     setIsOptionsVisible(true);
                     if (text === "") {
@@ -139,7 +146,7 @@ export const Autocomplete = <T,>({
                     style={styles.menuContainer}
                 >
                     <ScrollView keyboardShouldPersistTaps="always">
-                        {filteredOptions.map(option => renderItem(option))}
+                        {filteredOptions.map((option) => renderItem(option))}
                     </ScrollView>
                 </Menu>
             )}
@@ -164,5 +171,5 @@ const themedStyles = EDSStyleSheet.create(
         menuIcon: {
             marginRight: 3,
         },
-    }),
+    })
 );

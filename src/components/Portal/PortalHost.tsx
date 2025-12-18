@@ -1,4 +1,10 @@
-import React, { PropsWithChildren, memo, useContext, useEffect, useMemo } from "react";
+import React, {
+    PropsWithChildren,
+    memo,
+    useContext,
+    useEffect,
+    useMemo,
+} from "react";
 import { PortalContext } from "./PortalContext";
 import { View, ViewProps } from "react-native";
 
@@ -27,7 +33,10 @@ const PortalHostComponent = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps -- adding methods to deps cause max recursion error
     }, [name]);
 
-    const host = useMemo(() => hosts.find(host => host.name === name), [hosts, name]);
+    const host = useMemo(
+        () => hosts.find((host) => host.name === name),
+        [hosts, name]
+    );
     return (
         <View {...rest}>
             {renderPortalsFirst && host?.node}

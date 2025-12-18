@@ -5,7 +5,7 @@ A React Native component library implementing the [Equinor Design System](https:
 ## Installation
 
 ```bash
-pnpm add "@equinor/eds-mobile-components"
+pnpm add @equinor/eds-mobile-components
 ```
 
 ### Peer dependencies
@@ -32,20 +32,20 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
 export default function App() {
-  const [hasLoadedEds, edsLoadError] = useEDS();
+    const [hasLoadedEds, edsLoadError] = useEDS();
 
-  if (!hasLoadedEds) {
-    return null;
-  }
+    if (!hasLoadedEds) {
+        return null;
+    }
 
-  return (
-    <SafeAreaProvider>
-      <EDSProvider colorScheme="light" density="phone">
-        <Navigation />
-        <StatusBar />
-      </EDSProvider>
-    </SafeAreaProvider>
-  );
+    return (
+        <SafeAreaProvider>
+            <EDSProvider colorScheme="light" density="phone">
+                <Navigation />
+                <StatusBar />
+            </EDSProvider>
+        </SafeAreaProvider>
+    );
 }
 ```
 
@@ -59,21 +59,18 @@ The `EDSProvider` gives you access to:
 Create stylesheets that respond to the current theme using `EDSStyleSheet`:
 
 ```tsx
-import {
-  EDSStyleSheet,
-  useStyles,
-} from "@equinor/eds-mobile-components";
+import { EDSStyleSheet, useStyles } from "@equinor/eds-mobile-components";
 
 const themeStyles = EDSStyleSheet.create((theme) => ({
-  container: {
-    backgroundColor: theme.colors.container.background,
-    borderRadius: theme.geometry.border.containerBorderRadius,
-  },
+    container: {
+        backgroundColor: theme.colors.container.background,
+        borderRadius: theme.geometry.border.containerBorderRadius,
+    },
 }));
 
 const MyComponent = () => {
-  const styles = useStyles(themeStyles);
-  return <View style={styles.container} />;
+    const styles = useStyles(themeStyles);
+    return <View style={styles.container} />;
 };
 ```
 
@@ -85,18 +82,18 @@ For conditional styling, pass additional props as a second argument:
 
 ```tsx
 const themeStyles = EDSStyleSheet.create(
-  (theme, props: { highlight?: boolean }) => ({
-    container: {
-      backgroundColor: props.highlight
-        ? theme.colors.interactive.primary
-        : theme.colors.container.background,
-    },
-  })
+    (theme, props: { highlight?: boolean }) => ({
+        container: {
+            backgroundColor: props.highlight
+                ? theme.colors.interactive.primary
+                : theme.colors.container.background,
+        },
+    })
 );
 
 const MyComponent = ({ highlight }: { highlight?: boolean }) => {
-  const styles = useStyles(themeStyles, { highlight });
-  return <View style={styles.container} />;
+    const styles = useStyles(themeStyles, { highlight });
+    return <View style={styles.container} />;
 };
 ```
 

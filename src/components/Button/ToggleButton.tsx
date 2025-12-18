@@ -20,10 +20,16 @@ export type ToggleButtonContextType =
       }
     | undefined;
 
-export const ToggleButtonContext = createContext<ToggleButtonContextType>(undefined);
+export const ToggleButtonContext =
+    createContext<ToggleButtonContextType>(undefined);
 
-export const ToggleButton = ({ activeIndex, children }: ToggleButtonProps & ViewProps) => {
-    const validChildren = useValidChildren(children) as StrictChildrenReactNode<ButtonGroupProps>[];
+export const ToggleButton = ({
+    activeIndex,
+    children,
+}: ToggleButtonProps & ViewProps) => {
+    const validChildren = useValidChildren(
+        children
+    ) as StrictChildrenReactNode<ButtonGroupProps>[];
     return (
         <ButtonGroup>
             {validChildren.map((child, index) => {

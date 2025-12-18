@@ -49,7 +49,9 @@ export const Radio = ({
                         : "radiobox-blank") as keyof typeof MaterialCommunityIcons.glyphMap
                 }
                 size={size}
-                color={disabled ? colors.interactive_disabled_light_text : color}
+                color={
+                    disabled ? colors.interactive_disabled_light_text : color
+                }
             />
         </PressableHighlight>
     );

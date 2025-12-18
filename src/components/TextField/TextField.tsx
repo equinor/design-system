@@ -40,20 +40,32 @@ export type TextFieldProps = {
 } & Omit<InputProps, "leftAdornment" | "rightAdornment">;
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
-    ({ unit, helperText, label, meta, helperIcon, inputIcon, ...rest }, ref) => {
+    (
+        { unit, helperText, label, meta, helperIcon, inputIcon, ...rest },
+        ref
+    ) => {
         const styles = useStyles(themeStyles, { variant: rest.variant });
         return (
             <View style={{ flexGrow: 1 }}>
-                {label && <Label style={styles.label} label={label} meta={meta} />}
+                {label && (
+                    <Label style={styles.label} label={label} meta={meta} />
+                )}
                 <Input
                     ref={ref}
                     rightAdornments={
                         <View style={styles.adornmentStyle}>
                             {inputIcon && (
-                                <Icon name={inputIcon} size={20} style={styles.iconColor} />
+                                <Icon
+                                    name={inputIcon}
+                                    size={20}
+                                    style={styles.iconColor}
+                                />
                             )}
                             {unit && (
-                                <Typography variant="label" color="textTertiary">
+                                <Typography
+                                    variant="label"
+                                    color="textTertiary"
+                                >
                                     {unit}
                                 </Typography>
                             )}
@@ -63,35 +75,49 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
                 />
                 {helperText && (
                     <View
-                        style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 8 }}
+                        style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            paddingHorizontal: 8,
+                        }}
                     >
                         {helperIcon && (
-                            <Icon name={helperIcon} size={20} style={styles.iconColor} />
+                            <Icon
+                                name={helperIcon}
+                                size={20}
+                                style={styles.iconColor}
+                            />
                         )}
                         <Label style={styles.label} label={helperText} />
                     </View>
                 )}
             </View>
         );
-    },
+    }
 );
 
 TextField.displayName = "TextField";
 
 type TextFieldStyleProps = Pick<TextFieldProps, "variant">;
-const themeStyles = EDSStyleSheet.create((theme, props: TextFieldStyleProps) => ({
-    adornmentStyle: {
-        justifyContent: "center",
-        paddingHorizontal: theme.spacing.textField.paddingHorizontal,
-        flexDirection: "row",
-        gap: theme.spacing.element.paddingHorizontal,
-        alignItems: "center",
-    },
-    label: {
-        paddingHorizontal: theme.spacing.textField.paddingHorizontal,
-        color: props.variant ? theme.colors.interactive[props.variant] : theme.colors.text.tertiary,
-    },
-    iconColor: {
-        color: props.variant ? theme.colors.interactive[props.variant] : theme.colors.text.primary,
-    },
-}));
+const themeStyles = EDSStyleSheet.create(
+    (theme, props: TextFieldStyleProps) => ({
+        adornmentStyle: {
+            justifyContent: "center",
+            paddingHorizontal: theme.spacing.textField.paddingHorizontal,
+            flexDirection: "row",
+            gap: theme.spacing.element.paddingHorizontal,
+            alignItems: "center",
+        },
+        label: {
+            paddingHorizontal: theme.spacing.textField.paddingHorizontal,
+            color: props.variant
+                ? theme.colors.interactive[props.variant]
+                : theme.colors.text.tertiary,
+        },
+        iconColor: {
+            color: props.variant
+                ? theme.colors.interactive[props.variant]
+                : theme.colors.text.primary,
+        },
+    })
+);

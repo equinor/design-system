@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { useSharedValue, withTiming, withRepeat } from "react-native-reanimated";
+import {
+    useSharedValue,
+    withTiming,
+    withRepeat,
+} from "react-native-reanimated";
 import { useToken } from "../../hooks/useToken";
 
 /**

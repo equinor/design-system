@@ -8,19 +8,14 @@
   "bugs": "https://github.com/equinor/design-system-mobile/issues",
   "dependencies": {
     "@floating-ui/react-native": "^0.10.7",
-    "react-error-boundary": "^6.0.0",
-    "react-native-worklets": "^0.5.1"
+    "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@react-native/babel-preset": "^0.73.21",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/react-native": "^12.3.0",
     "@types/react": "~19.0.10",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
     "eslint": "^9.25.0",
-    "react-test-renderer": "18.2.0",
     "tsup": "^8.5.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.0"
@@ -40,13 +35,13 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "expo-font": "~13.3.2",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-native": "0.79.6",
-    "react-native-gesture-handler": "~2.24.0",
-    "react-native-reanimated": "~3.19.4",
-    "react-native-svg": "15.11.2"
+    "expo-font": "^13.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-native": "^0.79.6",
+    "react-native-gesture-handler": "^2.24.0",
+    "react-native-reanimated": "^3.17.5",
+    "react-native-svg": "^15.11.2"
   },
   "scripts": {
     "build": "tsup-node && echo '\n ⚙️ Generating typescript declarations..' && tsc --project tsconfig.json --emitDeclarationOnly --declaration",

@@ -26,7 +26,8 @@ export const ProgressItemTask = ({ task }: ProgressItemTaskProps) => {
 
     const handleCopyTextButtonPress = () => {
         if (task?.error) {
-            task.onCopyTextButtonPress && task.onCopyTextButtonPress(task?.error);
+            task.onCopyTextButtonPress &&
+                task.onCopyTextButtonPress(task?.error);
         }
     };
 
@@ -38,18 +39,34 @@ export const ProgressItemTask = ({ task }: ProgressItemTaskProps) => {
                     <Typography
                         group="paragraph"
                         variant="body_short"
-                        bold={task.status === "error" || task.status === "inProgress"}
-                        color={task.status === "notStarted" ? "textTertiary" : "textPrimary"}
+                        bold={
+                            task.status === "error" ||
+                            task.status === "inProgress"
+                        }
+                        color={
+                            task.status === "notStarted"
+                                ? "textTertiary"
+                                : "textPrimary"
+                        }
                     >
                         {task.title}
                     </Typography>
                 </View>
-                {task.icon && <Icon color={task.iconColor ?? "secondary"} name={task.icon} />}
+                {task.icon && (
+                    <Icon
+                        color={task.iconColor ?? "secondary"}
+                        name={task.icon}
+                    />
+                )}
             </View>
             {taskHasError && task.error && <Error error={task.error} />}
             <ActionButtonsRow
-                shouldShowCopyTextButton={task.onCopyTextButtonPress !== undefined && taskHasError}
-                shouldShowRetryButton={task.onRetryButtonPress !== undefined && taskHasError}
+                shouldShowCopyTextButton={
+                    task.onCopyTextButtonPress !== undefined && taskHasError
+                }
+                shouldShowRetryButton={
+                    task.onRetryButtonPress !== undefined && taskHasError
+                }
                 handleCopyTextButtonPress={handleCopyTextButtonPress}
                 handleRetryButtonPress={handleRetryButtonPress}
             />
@@ -57,7 +74,7 @@ export const ProgressItemTask = ({ task }: ProgressItemTaskProps) => {
     );
 };
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     container: {
         gap: theme.spacing.element.paddingVertical,
     },

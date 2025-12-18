@@ -3,8 +3,13 @@ import { View } from "react-native";
 import { EDSStyleSheet } from "../../styling";
 import { useStyles } from "../../hooks/useStyles";
 
-export type DialogActionsProps = PropsWithChildren<{ align?: "left" | "right" }>;
-export const DialogActions = ({ align = "left", children }: DialogActionsProps) => {
+export type DialogActionsProps = PropsWithChildren<{
+    align?: "left" | "right";
+}>;
+export const DialogActions = ({
+    align = "left",
+    children,
+}: DialogActionsProps) => {
     const styles = useStyles(themeStyles, align);
     return (
         <>

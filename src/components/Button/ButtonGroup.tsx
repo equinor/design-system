@@ -25,7 +25,10 @@ export const ButtonGroupContext = createContext({
     isLastItem: true,
 } as ButtonGroupContextType);
 
-export const ButtonGroup = ({ vertical, children }: ButtonGroupProps & ViewProps) => {
+export const ButtonGroup = ({
+    vertical,
+    children,
+}: ButtonGroupProps & ViewProps) => {
     const validChildrenIndexes = useValidChildrenIndexes(children);
 
     return (

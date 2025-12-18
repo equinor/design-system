@@ -24,7 +24,12 @@ export const LinearProgress = ({ value, ...rest }: LinearProgressProps) => {
     const slideValue = useNoProgressAnimation();
 
     const progress = useDerivedValue(() => {
-        return interpolate(progressValue.value, [0, 1], [0, 1], Extrapolation.CLAMP);
+        return interpolate(
+            progressValue.value,
+            [0, 1],
+            [0, 1],
+            Extrapolation.CLAMP
+        );
     });
 
     const slideX = useDerivedValue(() => {
@@ -37,7 +42,12 @@ export const LinearProgress = ({ value, ...rest }: LinearProgressProps) => {
     }));
 
     return (
-        <View style={[{ borderRadius: STROKE_WIDTH / 2, overflow: "hidden" }, rest.style]}>
+        <View
+            style={[
+                { borderRadius: STROKE_WIDTH / 2, overflow: "hidden" },
+                rest.style,
+            ]}
+        >
             <Svg height={STROKE_WIDTH} width="100%">
                 <Rect
                     x="0"

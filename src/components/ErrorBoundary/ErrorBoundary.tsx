@@ -7,7 +7,10 @@ import {
 } from "react-error-boundary";
 import { ErrorBoundaryScreen } from "./ErrorBoundaryScreen";
 
-export type ErrorBoundaryProps = Pick<ReactErrorBoundaryProps, "onError" | "children">;
+export type ErrorBoundaryProps = Pick<
+    ReactErrorBoundaryProps,
+    "onError" | "children"
+>;
 
 /**
  * If you care about dark mode, the error boundary should be within an EDS provider. However, for maximum safety, we recommend wrapping the whole app in this component.
@@ -17,7 +20,10 @@ export type ErrorBoundaryProps = Pick<ReactErrorBoundaryProps, "onError" | "chil
 export function ErrorBoundary({ children, onError }: ErrorBoundaryProps) {
     const fallbackRender = ({ error, resetErrorBoundary }: FallbackProps) => (
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- any type comes from external library
-        <ErrorBoundaryScreen error={error} resetErrorBoundary={resetErrorBoundary} />
+        <ErrorBoundaryScreen
+            error={error}
+            resetErrorBoundary={resetErrorBoundary}
+        />
     );
     return (
         <ReactErrorBoundary onError={onError} fallbackRender={fallbackRender}>

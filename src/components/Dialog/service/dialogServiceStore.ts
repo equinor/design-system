@@ -49,7 +49,7 @@ const _getSnapshot = () => dialogContent;
 const _subscribe = (listener: Listener) => {
     listeners = [...listeners, listener];
     return () => {
-        listeners = listeners.filter(l => l !== listener);
+        listeners = listeners.filter((l) => l !== listener);
     };
 };
 
@@ -62,7 +62,7 @@ const _emitChange = () => {
 export const alert = (
     title: DialogContent["title"],
     message: DialogContent["message"],
-    buttons: DialogContent["buttons"],
+    buttons: DialogContent["buttons"]
 ) => {
     if (dialogContent === null) {
         dialogContent = { title, message, buttons };

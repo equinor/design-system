@@ -1,4 +1,10 @@
-import React, { PropsWithChildren, ReactNode, createContext, useCallback, useState } from "react";
+import React, {
+    PropsWithChildren,
+    ReactNode,
+    createContext,
+    useCallback,
+    useState,
+} from "react";
 
 export type PortalContextType = {
     /**
@@ -46,19 +52,19 @@ export const PortalProvider = ({ children }: PropsWithChildren) => {
 
     const registerHost = useCallback(
         (name: string) => {
-            if (hosts.find(host => host.name === name)) return;
-            setHosts(state => [...state, { name: name }]);
+            if (hosts.find((host) => host.name === name)) return;
+            setHosts((state) => [...state, { name: name }]);
         },
-        [hosts],
+        [hosts]
     );
 
     const unregisterHost = useCallback((name: string) => {
-        setHosts(state => state.filter(host => host.name !== name));
+        setHosts((state) => state.filter((host) => host.name !== name));
     }, []);
 
     const bindNode = useCallback((name: string, node: ReactNode) => {
-        setHosts(state =>
-            state.map(host => {
+        setHosts((state) =>
+            state.map((host) => {
                 if (host.name === name) {
                     return {
                         ...host,
@@ -67,7 +73,7 @@ export const PortalProvider = ({ children }: PropsWithChildren) => {
                 } else {
                     return host;
                 }
-            }),
+            })
         );
     }, []);
 
@@ -78,5 +84,9 @@ export const PortalProvider = ({ children }: PropsWithChildren) => {
         hosts,
     };
 
-    return <PortalContext.Provider value={contextOptions}>{children}</PortalContext.Provider>;
+    return (
+        <PortalContext.Provider value={contextOptions}>
+            {children}
+        </PortalContext.Provider>
+    );
 };

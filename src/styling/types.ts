@@ -3,14 +3,24 @@ import { TextStyle, ViewStyle } from "react-native";
 export type HexColorValue = `#${string}`;
 export type RGBAColorValue = `rgba(${string})`;
 export type RGBColorValue = `rgb(${string})`;
-export type EDSColor = "primary" | "secondary" | "warning" | "danger" | "success";
+export type EDSColor =
+    | "primary"
+    | "secondary"
+    | "warning"
+    | "danger"
+    | "success";
 export type EDSTextColor =
     | "textPrimary"
     | "textSecondary"
     | "textTertiary"
     | "textInverted"
     | "textDisabled";
-export type Color = HexColorValue | RGBAColorValue | RGBColorValue | EDSColor | EDSTextColor;
+export type Color =
+    | HexColorValue
+    | RGBAColorValue
+    | RGBColorValue
+    | EDSColor
+    | EDSTextColor;
 
 export type ColorScheme = "light" | "dark";
 export type Density = "tablet" | "phone";
@@ -27,9 +37,16 @@ export type TypographyVariantGroupMap = {
     navigation: "menuTab";
 };
 export type TypographyGroup = keyof TypographyVariantGroupMap;
-export type TypographyVariant<TKey extends TypographyGroup> = TypographyVariantGroupMap[TKey];
+export type TypographyVariant<TKey extends TypographyGroup> =
+    TypographyVariantGroupMap[TKey];
 
-export type Elevation = "raised" | "none" | "overlay" | "sticky" | "temporaryNav" | "aboveScrim";
+export type Elevation =
+    | "raised"
+    | "none"
+    | "overlay"
+    | "sticky"
+    | "temporaryNav"
+    | "aboveScrim";
 
 export type TypographyStyle = Pick<
     TextStyle,
@@ -45,7 +62,11 @@ export type TypographyStyle = Pick<
 >;
 export type ShadowStyle = Pick<
     ViewStyle,
-    "shadowColor" | "shadowOffset" | "shadowOpacity" | "shadowRadius" | "elevation"
+    | "shadowColor"
+    | "shadowOffset"
+    | "shadowOpacity"
+    | "shadowRadius"
+    | "elevation"
 >;
 
 export type MasterToken = {
@@ -247,10 +268,10 @@ export type WithoutThemeOptionValues<TToken> = {
     [K in keyof TToken]: TToken[K] extends ColorSchemeValues<infer U>
         ? U
         : TToken[K] extends DensityValues<infer V>
-        ? V
-        : TToken[K] extends object
-        ? WithoutThemeOptionValues<TToken[K]>
-        : TToken[K];
+          ? V
+          : TToken[K] extends object
+            ? WithoutThemeOptionValues<TToken[K]>
+            : TToken[K];
 };
 
 export type Token = WithoutThemeOptionValues<MasterToken>;

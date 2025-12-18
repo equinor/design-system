@@ -22,12 +22,14 @@ export const Progress = ({ children }: ProgressProps) => {
     return validChildren.map((child, index) => (
         <Fragment key={`progress-item-${index}`}>
             {child}
-            {index < validChildren.length - 1 && <View style={styles.divider} />}
+            {index < validChildren.length - 1 && (
+                <View style={styles.divider} />
+            )}
         </Fragment>
     ));
 };
 
-const tokenStyles = EDSStyleSheet.create(token => ({
+const tokenStyles = EDSStyleSheet.create((token) => ({
     divider: {
         marginHorizontal: token.spacing.container.paddingHorizontal,
         height: token.geometry.border.borderWidth,

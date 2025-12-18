@@ -23,10 +23,15 @@ export type TabsProps = {
     children?: TabsChildrenType[] | TabsChildrenType;
 };
 
-export const Tabs = ({ scrollable = false, initialActiveIndex = 0, children }: TabsProps) => {
+export const Tabs = ({
+    scrollable = false,
+    initialActiveIndex = 0,
+    children,
+}: TabsProps) => {
     const styles = useStyles(themeStyles);
 
-    const [activeTabIndex, setActiveTabIndex] = useState<number>(initialActiveIndex);
+    const [activeTabIndex, setActiveTabIndex] =
+        useState<number>(initialActiveIndex);
     const validChildren = useValidChildren(children) as TabsChildrenType[];
 
     const renderCurrentTabChild = () => {
@@ -52,7 +57,7 @@ export const Tabs = ({ scrollable = false, initialActiveIndex = 0, children }: T
     );
 };
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     tabRowBackdrop: {
         backgroundColor: theme.colors.container.default,
     },

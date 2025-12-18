@@ -26,14 +26,14 @@ export const PopInContainer = forwardRef<View, PropsWithChildren & ViewProps>(
                     {
                         transform: [{ scale }],
                         maxHeight: "100%",
-                        maxWidth: "100%"
+                        maxWidth: "100%",
                     },
                     rest.style,
                 ]}
-                >
+            >
                 {children}
             </Animated.View>
         );
-    },
+    }
 );
 PopInContainer.displayName = "PopInContainer";

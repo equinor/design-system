@@ -9,7 +9,10 @@ import { ProgressStatus, ProgressTask } from "../types";
 import { ActionButtonsRow } from "../ActionButtonsRow";
 import { ExpandableSection } from "./ExpandableSection";
 import { ExpandButton } from "./ExpandButton";
-import { ProgressItemProvider, useProgressItemContext } from "./ProgressItemContext";
+import {
+    ProgressItemProvider,
+    useProgressItemContext,
+} from "./ProgressItemContext";
 import { ProgressLine } from "./ProgressLine";
 import { Description } from "./Description";
 import { Title } from "./Title";
@@ -29,7 +32,9 @@ type ProgressItemPropsOptions =
           /**
            * Optional description to show under the progress task title. Can either be a string or a function that receives the number of completed tasks and the total number of tasks and returns a string.
            */
-          description?: string | ((completedTasks: number, totalTasks: number) => string);
+          description?:
+              | string
+              | ((completedTasks: number, totalTasks: number) => string);
       }
     | {
           /**
@@ -100,7 +105,8 @@ const WrappedProgressItem = ({
 
     const shouldPadBottomRow =
         (breakpoint === "xs" && !isExpanded && tasks.length) ||
-        (status === "error" && (!!onRetryButtonPress || !!onCopyTextButtonPress));
+        (status === "error" &&
+            (!!onRetryButtonPress || !!onCopyTextButtonPress));
 
     return (
         <View {...viewProps} style={[styles.container, viewProps.style]}>
@@ -113,7 +119,9 @@ const WrappedProgressItem = ({
                 <View style={styles.titleAndDescription}>
                     <View style={styles.titleRow}>
                         <Title title={title} />
-                        {breakpoint !== "xs" && <ExpandButton variant="ghost" />}
+                        {breakpoint !== "xs" && (
+                            <ExpandButton variant="ghost" />
+                        )}
                     </View>
                     {description && <Description description={description} />}
                 </View>
@@ -140,7 +148,9 @@ const WrappedProgressItem = ({
                     {breakpoint === "xs" && <ExpandButton variant="outlined" />}
                     <ActionButtonsRow
                         shouldShowRetryButton={onRetryButtonPress !== undefined}
-                        shouldShowCopyTextButton={onCopyTextButtonPress !== undefined}
+                        shouldShowCopyTextButton={
+                            onCopyTextButtonPress !== undefined
+                        }
                         handleRetryButtonPress={handleRetryButtonPress}
                         handleCopyTextButtonPress={handleRetryButtonPress}
                     />
@@ -156,40 +166,48 @@ type ProgressItemStyleProps = {
     breakpoint: Breakpoint;
 };
 
-const themeStyles = EDSStyleSheet.create((token, props: ProgressItemStyleProps) => ({
-    container: {
-        paddingHorizontal: token.spacing.container.paddingHorizontal,
-        paddingVertical: token.spacing.spacer.small,
-        flexDirection: "column",
-    },
-    progressTaskItemContainer: {
-        paddingVertical: token.spacing.element.paddingVertical,
-        gap: token.spacing.cell.gapHorizontal,
-    },
-    row: {
-        flexDirection: "row",
-    },
-    leftCol: {
-        width: ICON_SIZE,
-        marginRight: token.spacing.element.paddingHorizontal,
-    },
-    centered: {
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    buttonRow: {
-        flexDirection: "row",
-        gap: token.spacing.spacer.medium,
-    },
-    titleRow: {
-        height: props.breakpoint !== "xs" ? token.geometry.dimension.button.minHeight : undefined,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    titleAndDescription: {
-        flex: 1,
-        justifyContent: "center",
-        gap: props.breakpoint === "xs" ? token.spacing.element.paddingVertical : undefined,
-    },
-}));
+const themeStyles = EDSStyleSheet.create(
+    (token, props: ProgressItemStyleProps) => ({
+        container: {
+            paddingHorizontal: token.spacing.container.paddingHorizontal,
+            paddingVertical: token.spacing.spacer.small,
+            flexDirection: "column",
+        },
+        progressTaskItemContainer: {
+            paddingVertical: token.spacing.element.paddingVertical,
+            gap: token.spacing.cell.gapHorizontal,
+        },
+        row: {
+            flexDirection: "row",
+        },
+        leftCol: {
+            width: ICON_SIZE,
+            marginRight: token.spacing.element.paddingHorizontal,
+        },
+        centered: {
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        buttonRow: {
+            flexDirection: "row",
+            gap: token.spacing.spacer.medium,
+        },
+        titleRow: {
+            height:
+                props.breakpoint !== "xs"
+                    ? token.geometry.dimension.button.minHeight
+                    : undefined,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+        },
+        titleAndDescription: {
+            flex: 1,
+            justifyContent: "center",
+            gap:
+                props.breakpoint === "xs"
+                    ? token.spacing.element.paddingVertical
+                    : undefined,
+        },
+    })
+);

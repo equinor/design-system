@@ -48,14 +48,17 @@ export const ButtonCell = forwardRef<View, ButtonCellProps>(
             color = "primary",
             ...cellProps
         },
-        ref,
+        ref
     ) => {
         const styles = useStyles(themeStyles);
 
         const IconAdornment = () =>
             iconName && (
                 <View style={styles.iconContainer}>
-                    <Icon name={iconName} color={disabled ? "textDisabled" : color} />
+                    <Icon
+                        name={iconName}
+                        color={disabled ? "textDisabled" : color}
+                    />
                 </View>
             );
 
@@ -88,12 +91,12 @@ export const ButtonCell = forwardRef<View, ButtonCellProps>(
                 </View>
             </Cell>
         );
-    },
+    }
 );
 
 ButtonCell.displayName = "Cell.Button";
 
-const themeStyles = EDSStyleSheet.create(theme => ({
+const themeStyles = EDSStyleSheet.create((theme) => ({
     contentContainer: {
         justifyContent: "center",
         gap: theme.spacing.cell.content.titleDescriptionGap,

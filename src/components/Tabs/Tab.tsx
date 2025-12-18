@@ -55,11 +55,16 @@ const themeStyles = EDSStyleSheet.create((theme, props: TabItemStyleProps) => {
 
     const verticalPadding = theme.spacing.tabs.paddingVerical;
     const paddingTop = verticalPadding;
-    const paddingBottom = verticalPadding - theme.geometry.border.tabsBorderWidth;
+    const paddingBottom =
+        verticalPadding - theme.geometry.border.tabsBorderWidth;
 
     const disabledTextColor = disabled ? theme.colors.text.disabled : undefined;
-    const disabledBorderColor = disabled ? theme.colors.border.light : undefined;
-    const borderColor = isSelected ? theme.colors.interactive.primary : theme.colors.border.medium;
+    const disabledBorderColor = disabled
+        ? theme.colors.border.light
+        : undefined;
+    const borderColor = isSelected
+        ? theme.colors.interactive.primary
+        : theme.colors.border.medium;
 
     return {
         container: {
@@ -80,7 +85,9 @@ const themeStyles = EDSStyleSheet.create((theme, props: TabItemStyleProps) => {
         text: {
             color:
                 disabledTextColor ??
-                (isSelected ? theme.colors.interactive.primary : theme.colors.text.primary),
+                (isSelected
+                    ? theme.colors.interactive.primary
+                    : theme.colors.text.primary),
         },
     };
 });
