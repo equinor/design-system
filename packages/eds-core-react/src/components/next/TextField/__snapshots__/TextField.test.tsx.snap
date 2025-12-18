@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
+<div>
+  <div
+    class="eds-field"
+  >
+    <label
+      class="eds-label"
+      data-baseline="center"
+      data-font-family="ui"
+      data-font-size="lg"
+      data-line-height="squished"
+      for="test-id"
+    >
+      Label
+    </label>
+    <p
+      class="eds-field__description"
+      data-baseline="grid"
+      data-font-family="ui"
+      data-font-size="sm"
+      data-line-height="default"
+      id="test-id"
+    >
+      Description text
+    </p>
+    <div
+      class="eds-input-container"
+      data-color-appearance="neutral"
+      data-selectable-space="xs"
+      data-space-proportions="stretched"
+    >
+      <input
+        aria-describedby="test-id test-id"
+        class="eds-input"
+        data-font-family="ui"
+        data-font-size="lg"
+        data-line-height="squished"
+        id="test-id"
+        placeholder="Placeholder"
+        type="text"
+      />
+    </div>
+    <p
+      class="eds-validation-message"
+      data-baseline="grid"
+      data-font-family="ui"
+      data-font-size="sm"
+      data-line-height="default"
+      id="test-id"
+    >
+      Validation message
+    </p>
+  </div>
+</div>
+`;
