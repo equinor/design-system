@@ -1,5 +1,14 @@
 // src/components/next/index.ts
 
 // Export all EDS 2.0 components here as they are added
-export { Placeholder } from './Placeholder'
-export type { PlaceholderProps } from './Placeholder'
+export { Input } from './Input'
+export type { InputProps } from './Input'
+
+export { Label } from './Label'
+export type { LabelProps } from './Label'
+
+export { ValidationMessage } from './ValidationMessage'
+export type { ValidationMessageProps } from './ValidationMessage'
+
+export { Field } from './Field'
+export type { FieldProps } from './Field'

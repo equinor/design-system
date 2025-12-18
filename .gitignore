@@ -23,3 +23,6 @@ docz-fresh
 .size-snapshot.json
 storybook-build
 review.txt
+
+# Generated build files
+packages/eds-core-react/build/

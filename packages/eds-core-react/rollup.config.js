@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import postcssImport from 'postcss-import'
 import commonjs from '@rollup/plugin-commonjs'
 import { preserveDirective } from 'rollup-preserve-directives'
 import { babel } from '@rollup/plugin-babel'
@@ -74,5 +75,33 @@ export default [
       createEsmOutput(),
       { file: './dist/index.next.cjs', format: 'cjs', interop: 'auto' },
     ],
+  },
+  // EDS 2.0 CSS bundle (unminified)
+  {
+    input: './src/components/next/index.css',
+    plugins: [
+      del({ targets: 'build/*', runOnce: true }),
+      postcss({
+        extensions: ['.css'],
+        extract: 'index.css',
+        minimize: false,
+        plugins: [postcssImport()],
+      }),
+    ],
+    output: { dir: 'build', format: 'es' },
+  },
+  // EDS 2.0 CSS bundle (minified)
+  {
+    input: './src/components/next/index.css',
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+        extract: 'index.min.css',
+        minimize: true,
+        plugins: [postcssImport()],
+      }),
+      del({ targets: 'build/*.js', hook: 'writeBundle' }),
+    ],
+    output: { dir: 'build', format: 'es' },
   },
 ]
