@@ -1,10 +1,9 @@
 @layer eds-components {
-  /* Container - use neutral appearance by default */
-  .eds-input {
+  /* Container */
+  .eds-input-container {
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
     box-sizing: border-box;
     width: 100%;
     background: var(--eds-color-bg-canvas);
@@ -13,44 +12,87 @@
   }
 
   /* Hover - only for enabled inputs */
-  .eds-input:hover:not(.eds-input--disabled):not(.eds-input--readonly) {
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    ) {
     border-color: var(--eds-color-border-strong);
   }
 
-  /* Container states */
-  .eds-input:focus-within {
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    )
+    .eds-input {
+    color: var(--eds-color-text-strong);
+    -webkit-text-fill-color: var(--eds-color-text-strong);
+  }
+
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    )
+    .eds-input::placeholder {
+    color: var(--eds-color-text-strong);
+    -webkit-text-fill-color: var(--eds-color-text-strong);
+  }
+
+  .eds-input-container:focus-within {
     border-color: transparent;
     outline: 2px solid var(--eds-color-border-focus);
     outline-offset: -2px;
   }
 
-  .eds-input--disabled {
+  /* Disabled state */
+  .eds-input-container--disabled {
     cursor: not-allowed;
+    border-color: transparent;
+  }
+
+  .eds-input-container--disabled .eds-input {
     color: var(--eds-color-border-medium);
+    cursor: not-allowed;
+    opacity: 1;
+    -webkit-text-fill-color: var(--eds-color-border-medium);
+  }
+
+  .eds-input-container--disabled .eds-input::placeholder {
+    color: var(--eds-color-border-medium);
+    -webkit-text-fill-color: var(--eds-color-border-medium);
+  }
+
+  .eds-input-container--disabled .eds-adornment {
+    color: var(--eds-color-border-medium);
+  }
+
+  /* Readonly state */
+  .eds-input-container--readonly {
     border-color: transparent;
   }
 
-  .eds-input--readonly {
-    border-color: transparent;
-    color: var(--eds-color-text-subtle);
+  .eds-input-container--readonly .eds-input {
+    color: var(--eds-color-border-strong);
+    -webkit-text-fill-color: var(--eds-color-border-strong);
   }
 
-  /* Invalid state - border color comes from data-color-appearance="danger" */
-  .eds-input--invalid {
+  .eds-input-container--readonly .eds-input::placeholder {
+    color: var(--eds-color-border-strong);
+    -webkit-text-fill-color: var(--eds-color-border-strong);
+  }
+
+  /* Invalid state */
+  .eds-input-container--invalid {
     border-color: var(--eds-color-border-medium);
   }
 
-  /* Input/Textarea field */
-  .eds-field {
+  /* Input/Textarea element */
+  .eds-input {
     width: 100%;
     border: none;
     background: transparent;
     outline: none;
     color: var(--eds-color-text-strong);
-    font-family: var(--eds-typography-ui-body-font-family), sans-serif;
-    font-size: var(--eds-typography-ui-body-lg-font-size);
-    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
-    line-height: var(--eds-typography-ui-body-lg-lineheight-squished);
+    font-family: var(--eds-typography-font-family);
+    font-size: var(--eds-typography-font-size);
+    font-weight: var(--eds-typography-font-weight);
+    line-height: var(--eds-typography-line-height);
     padding-block: var(--eds-selectable-space-vertical);
     padding-inline: var(--eds-selectable-space-horizontal);
     overflow: hidden;
@@ -59,37 +101,11 @@
     resize: none;
   }
 
-  .eds-field::placeholder {
-    color: var(--eds-color-text-strong);
+  .eds-input::placeholder {
+    color: var(--eds-color-border-strong);
   }
 
-  /* 
-   * Disabled field - override browser defaults for consistent styling
-   * Safari applies a default opacity and color to disabled inputs, so we need
-   * to explicitly set opacity: 1 and use -webkit-text-fill-color
-   * Note: We don't rely on inherited color context, so this works consistently
-   */
-  .eds-input--disabled .eds-field {
-    color: var(--eds-color-border-medium);
-    cursor: not-allowed;
-    opacity: 1;
-    -webkit-text-fill-color: var(--eds-color-border-medium);
-  }
-
-  /* Disabled placeholder - maintain same color as disabled text */
-  .eds-input--disabled .eds-field::placeholder {
-    color: var(--eds-color-border-medium);
-    -webkit-text-fill-color: var(--eds-color-border-medium);
-  }
-
-  .eds-input--readonly .eds-field::placeholder {
-    color: var(--eds-color-text-subtle);
-  }
-
-  /* Adornments (icons, text, buttons on left/right) 
-   * Inherits color appearance from parent container
-   * Wrap text in <span data-color-appearance="neutral"> to keep text neutral
-   */
+  /* Adornments (icons, text, buttons on left/right) */
   .eds-adornment {
     position: absolute;
     top: var(--eds-selectable-space-vertical);
@@ -97,15 +113,10 @@
     display: flex;
     align-items: center;
     color: var(--eds-color-text-subtle);
-    font-family: var(--eds-typography-ui-body-font-family), sans-serif;
-    font-size: var(--eds-typography-ui-body-md-font-size);
-    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
-    line-height: var(--eds-typography-ui-body-md-lineheight-default);
-  }
-
-  /* Text with neutral appearance should use neutral text color */
-  .eds-adornment [data-color-appearance='neutral'] {
-    color: var(--eds-color-text-subtle);
+    font-family: var(--eds-typography-font-family);
+    font-size: var(--eds-typography-font-size);
+    font-weight: var(--eds-typography-font-weight);
+    line-height: var(--eds-typography-line-height);
   }
 
   .eds-adornment--left {

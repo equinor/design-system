@@ -221,32 +221,32 @@ describe('Input (Next EDS 2.0)', () => {
       it('Applies base class and custom className', () => {
         render(<Input className="test-class" />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input')
+        expect(wrapper).toHaveClass('eds-input-container')
         expect(wrapper).toHaveClass('test-class')
       })
 
-      it('Applies field class to input element', () => {
+      it('Applies input class to input element', () => {
         render(<Input value="test" readOnly />)
-        const field = screen.getByDisplayValue('test')
-        expect(field).toHaveClass('eds-field')
+        const input = screen.getByDisplayValue('test')
+        expect(input).toHaveClass('eds-input')
       })
 
       it('Applies disabled modifier class when disabled', () => {
         render(<Input disabled />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input--disabled')
+        expect(wrapper).toHaveClass('eds-input-container--disabled')
       })
 
       it('Applies readonly modifier class when readOnly', () => {
         render(<Input readOnly />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input--readonly')
+        expect(wrapper).toHaveClass('eds-input-container--readonly')
       })
 
       it('Applies invalid modifier class when invalid', () => {
         render(<Input invalid />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input--invalid')
+        expect(wrapper).toHaveClass('eds-input-container--invalid')
       })
     })
   })
