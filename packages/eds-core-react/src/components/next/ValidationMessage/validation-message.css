@@ -1,10 +1,27 @@
 .eds-validation-message {
   display: inline-flex;
   align-items: flex-start;
-  gap: 4px;
+  gap: var(--eds-generic-gap-horizontal);
   color: var(--eds-color-text-subtle);
 }
 
 .eds-validation-message__text {
   color: inherit;
+}
+
+/* Tone variants - using explicit selectors for reliability */
+.eds-validation-message[data-color-appearance='danger'] {
+  color: var(--eds-color-text-danger-strong);
+}
+
+.eds-validation-message[data-color-appearance='warning'] {
+  color: var(--eds-color-text-warning-strong);
+}
+
+.eds-validation-message[data-color-appearance='success'] {
+  color: var(--eds-color-text-success-strong);
+}
+
+.eds-validation-message[data-color-appearance='info'] {
+  color: var(--eds-color-text-info-strong);
 }

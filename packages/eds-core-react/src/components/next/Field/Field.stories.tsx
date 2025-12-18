@@ -168,3 +168,94 @@ export const CombinedRequiredAndOptional: StoryFn<FieldProps> = () => (
     </Field>
   </div>
 )
+
+const checkboxStyles: CSSProperties = {
+  width: '1.25rem',
+  height: '1.25rem',
+  accentColor: 'var(--eds-color-interactive-primary)',
+}
+
+export const WithCheckbox: StoryFn<FieldProps> = () => (
+  <Field>
+    <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+      <input type="checkbox" style={checkboxStyles} />
+      <span>
+        <span style={{ display: 'block' }}>Jeg godtar vilkårene</span>
+        <Field.Description>
+          Ved å huke av godtar du våre brukervilkår og personvernerklæring.
+        </Field.Description>
+      </span>
+    </label>
+  </Field>
+)
+
+export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
+  const [checked, setChecked] = useState(false)
+  const [showError, setShowError] = useState(false)
+
+  const handleSubmit = () => {
+    setShowError(!checked)
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Field>
+        <label
+          style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}
+        >
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={(e) => {
+              setChecked(e.target.checked)
+              setShowError(false)
+            }}
+            style={checkboxStyles}
+          />
+          <span>
+            <span style={{ display: 'block' }}>Jeg godtar vilkårene</span>
+            <Field.Description>
+              Du må godta vilkårene for å fortsette.
+            </Field.Description>
+          </span>
+        </label>
+        {showError && (
+          <ValidationMessage tone="danger">
+            Du må godta vilkårene før du kan fortsette.
+          </ValidationMessage>
+        )}
+      </Field>
+      <button onClick={handleSubmit} style={{ alignSelf: 'flex-start' }}>
+        Send inn
+      </button>
+    </div>
+  )
+}
+
+export const CheckboxGroup: StoryFn<FieldProps> = () => (
+  <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+    <legend style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
+      Velg interesser
+    </legend>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <Field>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <input type="checkbox" style={checkboxStyles} />
+          <span>Teknologi</span>
+        </label>
+      </Field>
+      <Field>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <input type="checkbox" style={checkboxStyles} />
+          <span>Design</span>
+        </label>
+      </Field>
+      <Field>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <input type="checkbox" style={checkboxStyles} />
+          <span>Bærekraft</span>
+        </label>
+      </Field>
+    </div>
+  </fieldset>
+)
