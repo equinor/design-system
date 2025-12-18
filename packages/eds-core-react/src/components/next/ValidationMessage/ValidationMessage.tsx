@@ -5,7 +5,7 @@ import { classNames } from '../Field/field.utils'
 import './validation-message.css'
 
 export const ValidationMessage = forwardRef<
-  HTMLDivElement,
+  HTMLParagraphElement,
   ValidationMessageProps
 >(function ValidationMessage(
   { tone = 'danger', children, className, role, ...rest },
@@ -14,27 +14,22 @@ export const ValidationMessage = forwardRef<
   const resolvedRole = role ?? (tone === 'danger' ? 'alert' : undefined)
 
   return (
-    <div
+    <TypographyNext
       ref={ref}
+      as="p"
+      family="ui"
+      size="md"
+      baseline="grid"
+      lineHeight="default"
+      tracking="normal"
       role={resolvedRole}
       data-field="validation"
-      data-horizontal-gap="sm"
       data-color-appearance={tone}
       className={classNames('eds-validation-message', className)}
       {...rest}
     >
-      <TypographyNext
-        as="span"
-        family="ui"
-        size="md"
-        baseline="grid"
-        lineHeight="default"
-        tracking="normal"
-        className="eds-validation-message__text"
-      >
-        {children}
-      </TypographyNext>
-    </div>
+      {children}
+    </TypographyNext>
   )
 })
 
