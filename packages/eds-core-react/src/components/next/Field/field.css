@@ -14,26 +14,11 @@
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  color: var(--field-label-color);
-  gap: var(--eds-generic-gap-horizontal);
-}
-
-.eds-field__label-content {
-  display: inline-flex;
-  align-items: center;
   gap: var(--eds-selectable-space-horizontal);
+  color: var(--field-label-color);
 }
 
-.eds-field__label-text {
-  color: inherit;
-}
-
-.eds-field__required-indicator {
-  color: var(--eds-color-text-danger-strong);
-}
-
-.eds-field__optional-indicator {
+.eds-field__indicator {
   color: var(--field-optional-color);
 }
 

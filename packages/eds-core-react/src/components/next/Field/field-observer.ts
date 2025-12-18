@@ -81,11 +81,22 @@ export function fieldObserver(fieldElement: HTMLElement | null) {
 
     setAttr(input, 'id', inputId)
     setAttr(input, 'aria-describedby', describedbyIds.join(' ').trim())
+
+    // Set aria-required if field is required
+    if (fieldElement.hasAttribute('data-required')) {
+      setAttr(input, 'aria-required', 'true')
+    }
   }
 
   const observer = createOptimizedMutationObserver(process)
   observer.observe(fieldElement, {
-    attributeFilter: ['id', 'for', 'aria-describedby', 'data-color-appearance'],
+    attributeFilter: [
+      'id',
+      'for',
+      'aria-describedby',
+      'data-color-appearance',
+      'data-required',
+    ],
     attributes: true,
     childList: true,
     subtree: true,

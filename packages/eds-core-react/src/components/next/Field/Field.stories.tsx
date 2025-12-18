@@ -39,29 +39,30 @@ const inputStyles: CSSProperties = {
   width: '100%',
 }
 
-export const Default: StoryFn<FieldProps> = (args) => (
-  <Field required {...args}>
-    <Field.Label>Etternavn</Field.Label>
-    <Field.Description>
-      Etternavnet kan ikke inneholde mellomrom.
-    </Field.Description>
-    <input defaultValue="Nordmann Svenske" style={inputStyles} />
+export const Default: StoryFn<FieldProps> = () => (
+  <Field>
+    <Field.Label>Last name</Field.Label>
+    <Field.Description>Last name cannot contain spaces.</Field.Description>
+    <input defaultValue="Smith Jones" style={inputStyles} />
     <ValidationMessage>
-      Du kan ikke ha mellomrom i etternavnet ditt
+      You cannot have spaces in your last name
     </ValidationMessage>
   </Field>
 )
 
-Default.args = {
-  required: true,
-}
-
-export const OptionalField: StoryFn<FieldProps> = () => (
-  <Field>
-    <Field.Label showOptionalIndicator>Organisasjon</Field.Label>
-    <Field.Description>Denne informasjonen er valgfri.</Field.Description>
-    <input placeholder="Equinor ASA" style={inputStyles} />
-  </Field>
+export const WithIndicator: StoryFn<FieldProps> = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <Field>
+      <Field.Label indicator="(Required)">First name</Field.Label>
+      <Field.Description>Your legal first name.</Field.Description>
+      <input placeholder="John" style={inputStyles} />
+    </Field>
+    <Field>
+      <Field.Label indicator="(Optional)">Organization</Field.Label>
+      <Field.Description>This information is optional.</Field.Description>
+      <input placeholder="Equinor ASA" style={inputStyles} />
+    </Field>
+  </div>
 )
 
 export const LiveValidation: StoryFn<FieldProps> = () => {
@@ -73,13 +74,13 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
   }
 
   return (
-    <Field required>
-      <Field.Label>Brukernavn</Field.Label>
-      <Field.Description>Velg minst fire tegn.</Field.Description>
+    <Field>
+      <Field.Label>Username</Field.Label>
+      <Field.Description>Choose at least four characters.</Field.Description>
       <input value={value} onChange={onChange} style={inputStyles} />
       {hasError && (
         <ValidationMessage>
-          Brukernavnet må bestå av minst fire tegn
+          Username must be at least four characters
         </ValidationMessage>
       )}
     </Field>
@@ -88,85 +89,27 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
 
 export const LabelOnly: StoryFn<FieldProps> = () => (
   <Field>
-    <Field.Label>E-post</Field.Label>
-    <input type="email" placeholder="navn@example.com" style={inputStyles} />
+    <Field.Label>Email</Field.Label>
+    <input type="email" placeholder="name@example.com" style={inputStyles} />
   </Field>
 )
 
 export const WithDescription: StoryFn<FieldProps> = () => (
   <Field>
-    <Field.Label>Passord</Field.Label>
+    <Field.Label>Password</Field.Label>
     <Field.Description>
-      Passordet må være minst 8 tegn og inneholde tall og bokstaver.
+      Password must be at least 8 characters and contain numbers and letters.
     </Field.Description>
     <input type="password" style={inputStyles} />
   </Field>
 )
 
-export const RequiredWithIndicator: StoryFn<FieldProps> = () => (
-  <Field required>
-    <Field.Label showRequiredIndicator>Fornavn</Field.Label>
-    <Field.Description>Ditt juridiske fornavn.</Field.Description>
-    <input placeholder="Ola" style={inputStyles} />
-  </Field>
-)
-
 export const DisabledField: StoryFn<FieldProps> = () => (
   <Field disabled>
-    <Field.Label>Brukernavn</Field.Label>
-    <Field.Description>Kan ikke endres etter opprettelse.</Field.Description>
-    <input value="ola.nordmann" disabled style={inputStyles} />
+    <Field.Label>Username</Field.Label>
+    <Field.Description>Cannot be changed after creation.</Field.Description>
+    <input value="john.doe" disabled style={inputStyles} />
   </Field>
-)
-
-export const AllValidationTones: StoryFn<FieldProps> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-    <Field>
-      <Field.Label>Danger</Field.Label>
-      <input defaultValue="ugyldig verdi" style={inputStyles} />
-      <ValidationMessage tone="danger">
-        Dette feltet inneholder en feil.
-      </ValidationMessage>
-    </Field>
-    <Field>
-      <Field.Label>Warning</Field.Label>
-      <input defaultValue="mulig problem" style={inputStyles} />
-      <ValidationMessage tone="warning">
-        Vær oppmerksom på denne verdien.
-      </ValidationMessage>
-    </Field>
-    <Field>
-      <Field.Label>Success</Field.Label>
-      <input defaultValue="gyldig verdi" style={inputStyles} />
-      <ValidationMessage tone="success">
-        Feltet er korrekt utfylt.
-      </ValidationMessage>
-    </Field>
-    <Field>
-      <Field.Label>Info</Field.Label>
-      <input placeholder="skriv noe..." style={inputStyles} />
-      <ValidationMessage tone="info">
-        Denne informasjonen er nyttig.
-      </ValidationMessage>
-    </Field>
-  </div>
-)
-
-export const CombinedRequiredAndOptional: StoryFn<FieldProps> = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-    <Field required>
-      <Field.Label showRequiredIndicator>Fornavn</Field.Label>
-      <input placeholder="Ola" style={inputStyles} />
-    </Field>
-    <Field>
-      <Field.Label showOptionalIndicator>Mellomnavn</Field.Label>
-      <input placeholder="Eventuelt" style={inputStyles} />
-    </Field>
-    <Field required>
-      <Field.Label showRequiredIndicator>Etternavn</Field.Label>
-      <input placeholder="Nordmann" style={inputStyles} />
-    </Field>
-  </div>
 )
 
 const checkboxStyles: CSSProperties = {
@@ -180,9 +123,9 @@ export const WithCheckbox: StoryFn<FieldProps> = () => (
     <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
       <input type="checkbox" style={checkboxStyles} />
       <span>
-        <span style={{ display: 'block' }}>Jeg godtar vilkårene</span>
+        <span style={{ display: 'block' }}>I accept the terms</span>
         <Field.Description>
-          Ved å huke av godtar du våre brukervilkår og personvernerklæring.
+          By checking this box you agree to our terms and privacy policy.
         </Field.Description>
       </span>
     </label>
@@ -213,20 +156,20 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
             style={checkboxStyles}
           />
           <span>
-            <span style={{ display: 'block' }}>Jeg godtar vilkårene</span>
+            <span style={{ display: 'block' }}>I accept the terms</span>
             <Field.Description>
-              Du må godta vilkårene for å fortsette.
+              You must accept the terms to continue.
             </Field.Description>
           </span>
         </label>
         {showError && (
           <ValidationMessage tone="danger">
-            Du må godta vilkårene før du kan fortsette.
+            You must accept the terms before continuing.
           </ValidationMessage>
         )}
       </Field>
       <button onClick={handleSubmit} style={{ alignSelf: 'flex-start' }}>
-        Send inn
+        Submit
       </button>
     </div>
   )
@@ -235,13 +178,13 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
 export const CheckboxGroup: StoryFn<FieldProps> = () => (
   <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
     <legend style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-      Velg interesser
+      Select interests
     </legend>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
       <Field>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <input type="checkbox" style={checkboxStyles} />
-          <span>Teknologi</span>
+          <span>Technology</span>
         </label>
       </Field>
       <Field>
@@ -253,7 +196,7 @@ export const CheckboxGroup: StoryFn<FieldProps> = () => (
       <Field>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <input type="checkbox" style={checkboxStyles} />
-          <span>Bærekraft</span>
+          <span>Sustainability</span>
         </label>
       </Field>
     </div>
