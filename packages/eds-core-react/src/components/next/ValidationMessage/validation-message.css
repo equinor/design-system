@@ -1,5 +1,11 @@
-.eds-validation-message {
-  margin: 0;
-  /* Uses --eds-color-text-strong which gets remapped by data-color-appearance */
-  color: var(--eds-color-text-strong);
+@layer eds-components {
+  .eds-validation-message {
+    margin: 0;
+    /* Uses --eds-color-text-strong which gets remapped by data-color-appearance */
+    color: var(--eds-color-text-strong);
+  }
+
+  .eds-validation-message--disabled {
+    color: var(--eds-color-text-subtle);
+  }
 }

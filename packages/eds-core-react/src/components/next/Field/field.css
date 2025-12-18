@@ -1,42 +1,44 @@
-.eds-field {
-  /* Layout from Figma: inline-flex, column, 8px gap */
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--eds-generic-gap-vertical);
-  /* Colors from Figma */
-  --field-label-color: var(--eds-color-text-strong);
-  --field-description-color: var(--eds-color-text-subtle);
-  --field-optional-color: var(--eds-color-text-subtle);
-}
+@layer eds-components {
+  .eds-field {
+    /* Layout from Figma: inline-flex, column, 8px gap */
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--eds-generic-gap-vertical);
+    /* Colors from Figma */
+    --field-label-color: var(--eds-color-text-strong);
+    --field-description-color: var(--eds-color-text-subtle);
+    --field-optional-color: var(--eds-color-text-subtle);
+  }
 
-.eds-field__label {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--eds-selectable-space-horizontal);
-  color: var(--field-label-color);
-}
+  .eds-field__label {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--eds-selectable-space-horizontal);
+    color: var(--field-label-color);
+  }
 
-.eds-field__indicator {
-  color: var(--field-optional-color);
-}
+  .eds-field__indicator {
+    color: var(--field-optional-color);
+  }
 
-.eds-field__control {
-  width: 100%;
-}
+  .eds-field__control {
+    width: 100%;
+  }
 
-.eds-field__description {
-  margin: 0;
-  color: var(--field-description-color);
-}
+  .eds-field__description {
+    margin: 0;
+    color: var(--field-description-color);
+  }
 
-.eds-field__validation {
-  /* Validation message styling */
-}
+  .eds-field__validation {
+    /* Validation message styling */
+  }
 
-.eds-field[data-disabled='true'] {
-  --field-label-color: var(--eds-color-text-subtle);
-  --field-description-color: var(--eds-color-border-neutral-medium);
-  --field-optional-color: var(--eds-color-border-neutral-medium);
+  .eds-field[data-disabled='true'] {
+    --field-label-color: var(--eds-color-text-subtle);
+    --field-description-color: var(--eds-color-border-neutral-medium);
+    --field-optional-color: var(--eds-color-border-neutral-medium);
+  }
 }

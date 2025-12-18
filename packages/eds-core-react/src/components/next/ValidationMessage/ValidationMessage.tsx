@@ -8,7 +8,7 @@ export const ValidationMessage = forwardRef<
   HTMLParagraphElement,
   ValidationMessageProps
 >(function ValidationMessage(
-  { tone = 'danger', children, className, role, ...rest },
+  { tone = 'danger', disabled = false, children, className, role, ...rest },
   ref,
 ) {
   const resolvedRole = role ?? (tone === 'danger' ? 'alert' : undefined)
@@ -24,8 +24,12 @@ export const ValidationMessage = forwardRef<
       tracking="normal"
       role={resolvedRole}
       data-field="validation"
-      data-color-appearance={tone}
-      className={classNames('eds-validation-message', className)}
+      data-color-appearance={disabled ? undefined : tone}
+      className={classNames(
+        'eds-validation-message',
+        disabled && 'eds-validation-message--disabled',
+        className,
+      )}
       {...rest}
     >
       {children}

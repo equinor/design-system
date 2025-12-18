@@ -1,0 +1,3 @@
+/* EDS 2.0 Next Components - CSS */
+@import './Field/field.css';
+@import './ValidationMessage/validation-message.css';
