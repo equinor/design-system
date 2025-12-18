@@ -5,7 +5,6 @@
 
   .eds-label__indicator {
     margin-inline-start: var(--eds-selectable-space-horizontal);
-    font-size: var(--eds-typography-font-size);
     color: var(--eds-color-text-subtle);
     vertical-align: middle;
   }
