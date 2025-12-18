@@ -134,43 +134,29 @@ export const WithCheckbox: StoryFn<FieldProps> = () => (
 
 export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
   const [checked, setChecked] = useState(false)
-  const [showError, setShowError] = useState(false)
-
-  const handleSubmit = () => {
-    setShowError(!checked)
-  }
+  const showError = !checked
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Field>
-        <label
-          style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}
-        >
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <input
             type="checkbox"
             checked={checked}
-            onChange={(e) => {
-              setChecked(e.target.checked)
-              setShowError(false)
-            }}
+            onChange={(e) => setChecked(e.target.checked)}
             style={checkboxStyles}
           />
-          <span>
-            <span style={{ display: 'block' }}>I accept the terms</span>
-            <Field.Description>
-              You must accept the terms to continue.
-            </Field.Description>
-          </span>
+          I accept the terms
         </label>
-        {showError && (
-          <ValidationMessage tone="danger">
-            You must accept the terms before continuing.
-          </ValidationMessage>
-        )}
+        {/* Use visibility to prevent layout shift when message appears/disappears */}
+        <ValidationMessage
+          role="alert"
+          style={{ visibility: showError ? 'visible' : 'hidden' }}
+        >
+          You must accept the terms before continuing.
+        </ValidationMessage>
       </Field>
-      <button onClick={handleSubmit} style={{ alignSelf: 'flex-start' }}>
-        Submit
-      </button>
+      <button style={{ alignSelf: 'flex-start' }}>Submit</button>
     </div>
   )
 }
