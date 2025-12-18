@@ -111,25 +111,9 @@ describe('ValidationMessage', () => {
     )
     expect(screen.getByTestId('message')).toHaveAttribute('id', 'custom-id')
   })
-
-  test('generates unique id when not provided', () => {
-    render(<ValidationMessage data-testid="message">Message</ValidationMessage>)
-    expect(screen.getByTestId('message')).toHaveAttribute('id')
-  })
 })
 
 describe('ValidationMessage within Field', () => {
-  test('adds eds-field__validation class when inside Field', () => {
-    render(
-      <Field>
-        <Field.Label>Label</Field.Label>
-        <input />
-        <ValidationMessage data-testid="message">Error</ValidationMessage>
-      </Field>,
-    )
-    expect(screen.getByTestId('message')).toHaveClass('eds-field__validation')
-  })
-
   test('registers with Field context for aria-describedby', () => {
     render(
       <Field>

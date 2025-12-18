@@ -113,7 +113,8 @@ describe('Field', () => {
     )
     const input = screen.getByTestId('input')
     const describedBy = input.getAttribute('aria-describedby') ?? ''
-    expect(describedBy.split(' ')).toHaveLength(2)
+    const ids = describedBy.split(' ').filter(Boolean)
+    expect(ids).toHaveLength(2)
   })
 
   test('forwards ref to wrapper div', () => {

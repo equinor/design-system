@@ -26,7 +26,7 @@ export const ValidationMessage = forwardRef<
       <TypographyNext
         as="span"
         family="ui"
-        size="sm"
+        size="md"
         baseline="grid"
         lineHeight="default"
         tracking="normal"

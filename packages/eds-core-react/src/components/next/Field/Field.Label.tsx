@@ -15,7 +15,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
         <TypographyNext
           as="span"
           family="ui"
-          size="md"
+          size="lg"
           baseline="center"
           lineHeight="default"
           weight="normal"
@@ -27,7 +27,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
           <TypographyNext
             as="span"
             family="ui"
-            size="sm"
+            size="md"
             baseline="center"
             lineHeight="default"
             weight="normal"
