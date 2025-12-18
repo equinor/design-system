@@ -15,3 +15,6 @@ export type { LabelProps } from './Label'
 
 export { ValidationMessage } from './ValidationMessage'
 export type { ValidationMessageProps } from './ValidationMessage'
+
+export { Field } from './Field'
+export type { FieldProps } from './Field'
