@@ -5,14 +5,14 @@ import React, {
     useRef,
     useState,
 } from "react";
-import { Cell } from "../Cell";
 import { Animated, View, ViewProps } from "react-native";
-import { Icon, IconName } from "../Icon";
-import { EDSStyleSheet } from "../../styling";
 import { useStyles } from "../../hooks/useStyles";
+import { useToken } from "../../hooks/useToken";
+import { EDSStyleSheet } from "../../styling";
+import { Cell } from "../Cell";
+import { Icon, IconName } from "../Icon";
 import { Typography } from "../Typography";
 import { AccordionContext, AccordionContextType } from "./Accordion";
-import { useToken } from "../../hooks/useToken";
 
 export type AccordionItemProps = {
     /**
@@ -78,8 +78,11 @@ export const AccordionItem = ({
     });
 
     useEffect(() => {
-        expanded ? _expandAnimation.start() : _retractAnimation.start();
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- adding animations to deps cause infinite loop glitch
+        if (expanded) {
+            _expandAnimation.start();
+        } else {
+            _retractAnimation.start();
+        }
     }, [expanded]);
 
     const toggleItem = () => {

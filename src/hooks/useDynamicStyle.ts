@@ -1,5 +1,5 @@
-import { useMemo, useState, DependencyList } from "react";
-import { ImageStyle, TextStyle, ViewStyle, StyleSheet } from "react-native";
+import { DependencyList, useMemo, useState } from "react";
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 const createStyleSheet = (style: ViewStyle | ImageStyle | TextStyle) =>
     StyleSheet.create({ __main: style }).__main;
@@ -18,7 +18,6 @@ export const useDynamicStyle = (
     useMemo(() => {
         const newStyle = createStyleSheet(style());
         setCurrentStyle(newStyle);
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- we only want to update when deps change
     }, dependencies);
     return currentStyle;
 };

@@ -59,7 +59,7 @@ export const Autocomplete = <T,>({
 
     const handleMenuOpen = () => {
         setIsOptionsVisible(true);
-        inputRef.current && inputRef.current.focus();
+        inputRef.current?.focus();
     };
     const handleMenuClose = () => {
         setIsOptionsVisible(false);
@@ -68,7 +68,7 @@ export const Autocomplete = <T,>({
         } else {
             setInputValue("");
         }
-        inputRef.current && inputRef.current.blur();
+        inputRef.current?.blur();
     };
     const handleClearText = () => {
         handleMenuClose();

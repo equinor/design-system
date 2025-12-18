@@ -1,10 +1,9 @@
 import React from "react";
-// eslint-disable-next-line import/named
 import { FallbackProps } from "react-error-boundary";
-import { View, SafeAreaView } from "react-native";
-import { Button } from "../Button";
-import { EDSStyleSheet } from "../../styling";
+import { SafeAreaView, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet } from "../../styling";
+import { Button } from "../Button";
 import { Typography } from "../Typography";
 
 export const ErrorBoundaryScreen = ({ resetErrorBoundary }: FallbackProps) => {

@@ -3,7 +3,7 @@ import type { Token } from "./types";
 
 export type ThemeDependentStyles<
     TProps = undefined,
-    TStyleSheet = StyleSheet.NamedStyles<any>,
+    TStyleSheet = StyleSheet.NamedStyles<unknown>,
 > = (
     /**
      * The will-be resolved theme.

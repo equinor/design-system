@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
+import { Icon, IconName } from "../Icon";
 import { PressableHighlight } from "../PressableHighlight";
 import { Typography } from "../Typography";
-import { Icon, IconName } from "../Icon";
 import { MenuContext } from "./Menu";
 
 export type MenuItemProps = {
@@ -48,7 +48,9 @@ export const MenuItem = ({
     const styles = useStyles(themeStyles, { active, disabled });
 
     const onPressItem = () => {
-        closeMenuOnClick && !disabled && menuContext.close();
+        if (closeMenuOnClick && !disabled) {
+            menuContext.close();
+        }
         onPress();
     };
 

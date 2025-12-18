@@ -41,9 +41,9 @@ export const summarizeStatuses = (
         "success",
         "notStarted",
     ];
-    const precedenceReduced = statusPrecedence
-        .filter((status) => statuses.includes(status))
-        .at(0);
+    const precedenceReduced = statusPrecedence.find((status) =>
+        statuses.includes(status)
+    );
     if (!precedenceReduced) return "notStarted";
     if (
         precedenceReduced === "success" &&

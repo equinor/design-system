@@ -1,4 +1,4 @@
-import { useMemo, DependencyList } from "react";
+import { DependencyList, useMemo } from "react";
 import { StyleSheet } from "react-native";
 
 const createStyleSheet = <
@@ -19,6 +19,5 @@ export const useDynamicStyleSheet = <
     style: () => T | StyleSheet.NamedStyles<T>,
     dependencies: DependencyList
 ) => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- we only want to update when deps change
     return useMemo(() => createStyleSheet(style()), dependencies);
 };

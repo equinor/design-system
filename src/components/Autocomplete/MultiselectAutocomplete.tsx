@@ -54,14 +54,14 @@ export const MultiselectAutocomplete = <T,>({
 
     const handleMenuOpen = () => {
         setIsOptionsVisible(true);
-        inputRef.current && inputRef.current.focus();
+        inputRef.current?.focus();
     };
     const handleMenuClose = () => {
         setIsOptionsVisible(false);
         if (selectedOptions) {
             setInputValue("");
         }
-        inputRef.current && inputRef.current.blur();
+        inputRef.current?.blur();
     };
     const handleClearText = () => {
         handleMenuClose();

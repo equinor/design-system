@@ -4,9 +4,9 @@ import { useStyles } from "../../../hooks/useStyles";
 import { EDSStyleSheet } from "../../../styling";
 import { Icon } from "../../Icon";
 import { Typography } from "../../Typography";
+import { ActionButtonsRow } from "../ActionButtonsRow";
 import { ProgressStatusIndicator } from "../ProgressStatusInducator";
 import { ProgressTask } from "../types";
-import { ActionButtonsRow } from "../ActionButtonsRow";
 import { Error } from "./Error";
 
 type ProgressItemTaskProps = {
@@ -20,14 +20,13 @@ export const ProgressItemTask = ({ task }: ProgressItemTaskProps) => {
 
     const handleRetryButtonPress = () => {
         if (taskHasError) {
-            task.onRetryButtonPress && task.onRetryButtonPress(task);
+            task.onRetryButtonPress?.(task);
         }
     };
 
     const handleCopyTextButtonPress = () => {
         if (task?.error) {
-            task.onCopyTextButtonPress &&
-                task.onCopyTextButtonPress(task?.error);
+            task.onCopyTextButtonPress?.(task.error);
         }
     };
 

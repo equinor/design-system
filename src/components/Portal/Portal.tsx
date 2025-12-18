@@ -14,14 +14,12 @@ export const Portal = ({ name, children }: PropsWithChildren<PortalProps>) => {
     useEffect(() => {
         registerHost(nameAsString);
         bindNode(nameAsString, children);
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- adding methods to deps cause max recursion depth error
     }, [children, name]);
 
     useEffect(() => {
         return () => {
             bindNode(nameAsString, null);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- adding methods to deps cause max recursion depth error
     }, [name]);
 
     return null;

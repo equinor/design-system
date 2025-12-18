@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import React from "react";
 import {
     FallbackProps,
@@ -19,8 +18,8 @@ export type ErrorBoundaryProps = Pick<
  */
 export function ErrorBoundary({ children, onError }: ErrorBoundaryProps) {
     const fallbackRender = ({ error, resetErrorBoundary }: FallbackProps) => (
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- any type comes from external library
         <ErrorBoundaryScreen
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             error={error}
             resetErrorBoundary={resetErrorBoundary}
         />

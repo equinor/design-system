@@ -140,12 +140,11 @@ const themeStyles = EDSStyleSheet.create(
         const disabledKnobColor = theme.colors.text.disabled;
         const backgroundHeight = KNOB_SIZE * 0.5;
 
-        let backgroundColor = isActive
-            ? activeBackgroundColor
-            : inactiveBackgroundColor;
-        backgroundColor = disabled
+        const backgroundColor = disabled
             ? theme.colors.interactive.disabled
-            : backgroundColor;
+            : isActive
+              ? activeBackgroundColor
+              : inactiveBackgroundColor;
 
         return {
             toggleContainer: {
@@ -165,7 +164,7 @@ const themeStyles = EDSStyleSheet.create(
                 flex: 1,
                 height: backgroundHeight,
                 borderRadius: KNOB_SIZE,
-                backgroundColor: theme.colors.interactive.pressedOverlay,
+                backgroundColor,
             },
             knob: {
                 width: KNOB_SIZE,

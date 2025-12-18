@@ -65,12 +65,12 @@ export const Input = forwardRef<TextInput, InputProps>(
 
         const onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
             setIsSelected(true);
-            rest.onFocus && rest.onFocus(e);
+            rest.onFocus?.(e);
         };
 
         const onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
             setIsSelected(false);
-            rest.onBlur && rest.onBlur(e);
+            rest.onBlur?.(e);
         };
 
         return (
@@ -89,9 +89,8 @@ export const Input = forwardRef<TextInput, InputProps>(
                     onBlur={onBlur}
                     style={[
                         styles.textInput,
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- this is appearanly available for web, but react native does not seem to recognize it
                         Platform.OS === "web"
-                            ? ({ outline: "none" } as any)
+                            ? ({ outline: "none" } as Record<string, string>)
                             : {},
                         rest.style,
                     ]}

@@ -5,8 +5,8 @@ import React, {
     useEffect,
     useMemo,
 } from "react";
-import { PortalContext } from "./PortalContext";
 import { View, ViewProps } from "react-native";
+import { PortalContext } from "./PortalContext";
 
 export type PortalHostProps = {
     /**
@@ -30,7 +30,6 @@ const PortalHostComponent = ({
     useEffect(() => {
         registerHost(name as string);
         return () => unregisterHost(name as string);
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- adding methods to deps cause max recursion error
     }, [name]);
 
     const host = useMemo(

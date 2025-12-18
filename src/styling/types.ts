@@ -192,9 +192,7 @@ export type MasterToken = {
                 minWidth: DensityValues<number>;
             };
         };
-        shadow: {
-            [TElev in Elevation]: ShadowStyle;
-        };
+        shadow: Record<Elevation, ShadowStyle>;
     };
     spacing: {
         container: {
@@ -251,9 +249,10 @@ export type MasterToken = {
         };
     };
     typography: {
-        [TGroup in TypographyGroup]: {
-            [TKey in TypographyVariant<TGroup>]: TypographyStyle;
-        };
+        [TGroup in TypographyGroup]: Record<
+            TypographyVariant<TGroup>,
+            TypographyStyle
+        >;
     };
     timing: {
         animation: {

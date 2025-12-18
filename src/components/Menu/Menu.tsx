@@ -1,12 +1,12 @@
-import { flip, offset, shift, useFloating } from "@floating-ui/react-native";
 import type { Placement } from "@floating-ui/react-native";
-import React, { createContext, useEffect } from "react";
+import { flip, offset, shift, useFloating } from "@floating-ui/react-native";
+import React, { createContext } from "react";
 import { View, ViewProps } from "react-native";
-import { EDSStyleSheet } from "../../styling";
-import { Paper } from "../Paper";
 import { useStyles } from "../../hooks/useStyles";
-import { RootModal } from "../_internal/RootModal";
+import { EDSStyleSheet } from "../../styling";
 import { PopInContainer } from "../_internal/PopInContainer";
+import { RootModal } from "../_internal/RootModal";
+import { Paper } from "../Paper";
 
 export type MenuProps = {
     /**

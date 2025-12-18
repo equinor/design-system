@@ -3,10 +3,12 @@ import { View, ViewProps } from "react-native";
 import { Breakpoint, useBreakpoint } from "../../../hooks/useBreakpoint";
 import { useStyles } from "../../../hooks/useStyles";
 import { EDSStyleSheet } from "../../../styling";
+import { Spacer } from "../../Spacer";
+import { ActionButtonsRow } from "../ActionButtonsRow";
 import { ProgressItemTask } from "../ProgressItemTask/ProgressItemTask";
 import { ProgressStatusIndicator } from "../ProgressStatusInducator";
 import { ProgressStatus, ProgressTask } from "../types";
-import { ActionButtonsRow } from "../ActionButtonsRow";
+import { Description } from "./Description";
 import { ExpandableSection } from "./ExpandableSection";
 import { ExpandButton } from "./ExpandButton";
 import {
@@ -14,9 +16,7 @@ import {
     useProgressItemContext,
 } from "./ProgressItemContext";
 import { ProgressLine } from "./ProgressLine";
-import { Description } from "./Description";
 import { Title } from "./Title";
-import { Spacer } from "../../Spacer";
 
 type ProgressItemPropsOptions =
     | {
@@ -90,7 +90,8 @@ const WrappedProgressItem = ({
     tasks = [],
     onRetryButtonPress,
     onCopyTextButtonPress,
-    status: _,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    status: _status,
     ...viewProps
 }: ProgressItemProps) => {
     const breakpoint = useBreakpoint();
@@ -99,7 +100,7 @@ const WrappedProgressItem = ({
 
     const handleRetryButtonPress = () => {
         if (failedTask) {
-            onRetryButtonPress && onRetryButtonPress(failedTask);
+            onRetryButtonPress?.(failedTask);
         }
     };
 
