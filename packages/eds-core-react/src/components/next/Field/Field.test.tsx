@@ -63,30 +63,6 @@ describe('Field', () => {
     expect(field).toHaveAttribute('data-disabled', 'true')
   })
 
-  test('sets aria-invalid when ValidationMessage with danger tone is present', () => {
-    render(
-      <Field>
-        <Field.Label>Email</Field.Label>
-        <input data-testid="input" />
-        <ValidationMessage tone="danger">Invalid email</ValidationMessage>
-      </Field>,
-    )
-    const input = screen.getByTestId('input')
-    expect(input).toHaveAttribute('aria-invalid', 'true')
-  })
-
-  test('does not set aria-invalid for non-danger tones', () => {
-    render(
-      <Field>
-        <Field.Label>Email</Field.Label>
-        <input data-testid="input" />
-        <ValidationMessage tone="warning">Check this</ValidationMessage>
-      </Field>,
-    )
-    const input = screen.getByTestId('input')
-    expect(input).not.toHaveAttribute('aria-invalid')
-  })
-
   test('links validation message via aria-describedby', () => {
     render(
       <Field>

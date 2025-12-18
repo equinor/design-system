@@ -12,7 +12,4 @@ export type {
 } from './Field'
 
 export { ValidationMessage } from './ValidationMessage'
-export type {
-  ValidationMessageProps,
-  ValidationMessageTone,
-} from './ValidationMessage'
+export type { ValidationMessageProps } from './ValidationMessage'
