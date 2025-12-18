@@ -44,11 +44,11 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const spaceProportions = 'stretched'
 
     const containerClasses = [
-      'eds-input',
+      'eds-input-container',
       className,
-      disabled && 'eds-input--disabled',
-      readOnly && 'eds-input--readonly',
-      invalid && 'eds-input--invalid',
+      disabled && 'eds-input-container--disabled',
+      readOnly && 'eds-input-container--readonly',
+      invalid && 'eds-input-container--invalid',
     ]
       .filter(Boolean)
       .join(' ')
@@ -85,8 +85,11 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={Component === 'input' ? type : undefined}
           disabled={disabled}
           readOnly={readOnly}
-          className="eds-field"
+          className="eds-input"
           style={fieldStyle}
+          data-font-family="ui"
+          data-font-size="lg"
+          data-line-height="squished"
           {...(inputProps as InputHTMLAttributes<
             HTMLInputElement | HTMLTextAreaElement
           >)}
