@@ -1,30 +1,15 @@
 import { forwardRef } from 'react'
 import { TypographyNext } from '../../Typography'
-import { useFieldContext } from './Field.context'
 import type { FieldLabelProps } from './Field.types'
 import { classNames } from './field.utils'
 
 export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
-  function FieldLabel(
-    {
-      children,
-      className,
-      showRequiredIndicator = true,
-      showOptionalIndicator = false,
-      ...rest
-    },
-    ref,
-  ) {
-    const { controlId, required, disabled } = useFieldContext()
-    const showRequired = showRequiredIndicator && required
-    const showOptional = showOptionalIndicator && !required
-
+  function FieldLabel({ children, className, indicator, ...rest }, ref) {
     return (
       <label
         ref={ref}
         className={classNames('eds-field__label', className)}
-        htmlFor={rest.htmlFor ?? controlId}
-        data-disabled={disabled ? 'true' : undefined}
+        data-field="label"
         {...rest}
       >
         <span className="eds-field__label-content">
@@ -40,12 +25,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
           >
             {children}
           </TypographyNext>
-          {showRequired && (
-            <span aria-hidden="true" className="eds-field__required-indicator">
-              *
-            </span>
-          )}
-          {showOptional && (
+          {indicator && (
             <TypographyNext
               as="span"
               family="ui"
@@ -54,9 +34,9 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
               lineHeight="default"
               weight="normal"
               tracking="normal"
-              className="eds-field__optional-indicator"
+              className="eds-field__indicator"
             >
-              (Optional)
+              {indicator}
             </TypographyNext>
           )}
         </span>
@@ -65,4 +45,5 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
   },
 )
 
+FieldLabel.displayName = 'Field.Label'
 FieldLabel.displayName = 'Field.Label'
