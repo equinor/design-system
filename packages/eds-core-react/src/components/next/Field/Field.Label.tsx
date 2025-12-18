@@ -6,38 +6,22 @@ import { classNames } from './field.utils'
 export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
   function FieldLabel({ children, className, indicator, ...rest }, ref) {
     return (
-      <label
+      <TypographyNext
         ref={ref}
-        className={classNames('eds-field__label', className)}
+        as="label"
+        family="ui"
+        size="lg"
+        baseline="center"
+        lineHeight="default"
+        weight="normal"
+        tracking="normal"
         data-field="label"
+        className={classNames('eds-field__label', className)}
         {...rest}
       >
-        <TypographyNext
-          as="span"
-          family="ui"
-          size="lg"
-          baseline="center"
-          lineHeight="default"
-          weight="normal"
-          tracking="normal"
-        >
-          {children}
-        </TypographyNext>
-        {indicator && (
-          <TypographyNext
-            as="span"
-            family="ui"
-            size="md"
-            baseline="center"
-            lineHeight="default"
-            weight="normal"
-            tracking="normal"
-            className="eds-field__indicator"
-          >
-            {indicator}
-          </TypographyNext>
-        )}
-      </label>
+        {children}
+        {indicator && <span className="eds-field__indicator">{indicator}</span>}
+      </TypographyNext>
     )
   },
 )

@@ -7,4 +7,4 @@ export type ValidationMessageProps = {
   tone?: ValidationMessageTone
   /** Validation content */
   children: ReactNode
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLParagraphElement>

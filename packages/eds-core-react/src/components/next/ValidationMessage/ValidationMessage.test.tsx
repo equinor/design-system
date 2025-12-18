@@ -97,10 +97,10 @@ describe('ValidationMessage', () => {
     )
   })
 
-  test('forwards ref to wrapper div', () => {
+  test('forwards ref to paragraph element', () => {
     const ref = { current: null }
     render(<ValidationMessage ref={ref}>Message</ValidationMessage>)
-    expect(ref.current).toBeInstanceOf(HTMLDivElement)
+    expect(ref.current).toBeInstanceOf(HTMLParagraphElement)
   })
 
   test('uses custom id when provided', () => {
