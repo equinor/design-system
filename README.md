@@ -1,50 +1,108 @@
-# Welcome to your Expo app 👋
+# EDS Mobile Storybook
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Storybook app for showcasing and testing [@equinor/eds-mobile-components](https://www.npmjs.com/package/@equinor/eds-mobile-components).
+
+This is an [Expo](https://expo.dev) project using [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [pnpm](https://pnpm.io/) (v10 or higher)
+- For iOS: [Xcode](https://developer.apple.com/xcode/) and CocoaPods
+- For Android: [Android Studio](https://developer.android.com/studio) with an emulator configured
 
 ## Get started
 
-1. Install dependencies
+1. From the **monorepo root**, install dependencies:
 
     ```bash
-    npm install
+    pnpm install
     ```
 
-2. Start the app
+2. Build the components package:
 
     ```bash
-    npx expo start
+    pnpm build
     ```
 
-In the output, you'll find options to open the app in a
+3. Run the storybook app:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+    ```bash
+    pnpm dev:storybook
+    ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. Press `i` to open in iOS Simulator or `a` for Android Emulator.
 
-## Get a fresh project
+### iOS Setup
 
-When you're ready, run:
+For iOS development, install CocoaPods dependencies:
 
 ```bash
-npm run reset-project
+cd apps/storybook/ios && pod install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Running on a Physical Device
+
+Use Expo's development build to run on a physical device:
+
+```bash
+# iOS
+pnpm dev:storybook -- --device
+
+# Or scan the QR code with the Expo Go app (limited functionality)
+```
+
+## Project Structure
+
+```
+apps/storybook/
+├── app/                    # Expo Router pages
+│   ├── _layout.tsx         # Root layout with EDSProvider
+│   └── (tabs)/
+│       ├── index.tsx       # Home screen
+│       └── components/     # Component showcase screens
+│           ├── buttons.tsx
+│           ├── cell.tsx
+│           └── ...
+├── codeSnippets/           # Code examples shown in the app
+├── components/             # Shared storybook components
+├── hooks/                  # Custom hooks (e.g., useCodeSnippet)
+└── ios/                    # Native iOS project
+```
+
+## Adding a New Component Screen
+
+1. Create a new file in `app/(tabs)/components/` (e.g., `mycomponent.tsx`)
+2. Add code snippets in `codeSnippets/mycomponent.ts`
+3. Register the screen in `app/(tabs)/components/_layout.tsx`
+4. Add it to the component list in `app/(tabs)/components/index.tsx`
+
+## Troubleshooting
+
+### "hapticpatternlibrary.plist couldn't be opened"
+
+This error appears in the iOS Simulator because it doesn't support haptic feedback. It's harmless and can be ignored—haptics work correctly on physical devices.
+
+### Pods out of sync
+
+If you encounter iOS build errors after updating dependencies:
+
+```bash
+cd apps/storybook/ios
+rm -rf Pods Podfile.lock
+pod install
+```
+
+### Metro bundler issues
+
+Clear the cache and restart:
+
+```bash
+pnpm dev:storybook -- --clear
+```
 
 ## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo documentation](https://docs.expo.dev/)
+- [EDS Mobile Components](../../packages/components/README.md)
+- [Equinor Design System](https://eds.equinor.com/)
