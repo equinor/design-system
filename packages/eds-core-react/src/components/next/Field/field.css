@@ -15,11 +15,11 @@
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--eds-selectable-space-horizontal);
     color: var(--field-label-color);
   }
 
   .eds-field__indicator {
+    margin-inline-start: var(--eds-selectable-space-horizontal);
     color: var(--field-optional-color);
   }
 

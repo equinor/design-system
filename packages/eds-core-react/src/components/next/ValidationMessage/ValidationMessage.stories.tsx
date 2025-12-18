@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { Stack } from '../../../../.storybook/components'
 import { ValidationMessage } from './ValidationMessage'
+import { Field } from '../Field'
 
 const meta: Meta<typeof ValidationMessage> = {
   title: 'EDS 2.0 (beta)/Inputs/Form/ValidationMessage',
@@ -16,7 +18,7 @@ const meta: Meta<typeof ValidationMessage> = {
     docs: {
       description: {
         component:
-          'ValidationMessage communicates problems, warnings, or status information associated with a field. The tone adjusts colors to match the semantic meaning.',
+          'ValidationMessage communicates problems or status information associated with a field.',
       },
     },
   },
@@ -26,29 +28,116 @@ export default meta
 
 type Story = StoryObj<typeof ValidationMessage>
 
-export const Danger: Story = {
+export const Default: Story = {
   args: {
     children: 'Please resolve the highlighted errors',
   },
 }
 
-export const Warning: Story = {
+export const Disabled: Story = {
   args: {
-    tone: 'warning',
-    children: 'Proceed with caution — check your selections',
+    disabled: true,
+    children: 'This field is disabled',
   },
 }
 
-export const Success: Story = {
-  args: {
-    tone: 'success',
-    children: 'All checks passed successfully',
+/**
+ * This example shows how ValidationMessage appears when form validation fails.
+ * Notice how the layout shifts when the message appears/disappears.
+ */
+export const PasswordValidation: Story = {
+  render: () => {
+    const [password, setPassword] = useState('')
+    const minLength = 8
+    const isValid = password.length >= minLength
+
+    return (
+      <Field>
+        <Field.Label indicator="(Required)">Password</Field.Label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{
+            padding: '8px 12px',
+            border: '1px solid var(--eds-color-border-neutral-medium)',
+            borderRadius: '4px',
+            width: '100%',
+          }}
+        />
+        {!isValid && password.length > 0 && (
+          <ValidationMessage role="alert">
+            Password must be at least {minLength} characters (currently{' '}
+            {password.length})
+          </ValidationMessage>
+        )}
+        <button
+          type="button"
+          style={{
+            marginTop: '8px',
+            padding: '8px 16px',
+            background: 'var(--eds-color-bg-accent-default)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Submit
+        </button>
+      </Field>
+    )
   },
 }
 
-export const Info: Story = {
-  args: {
-    tone: 'info',
-    children: 'Additional context is available for this field',
+/**
+ * To prevent layout shift, reserve space for the ValidationMessage using
+ * CSS `visibility: hidden` instead of conditional rendering.
+ * This keeps the message in the DOM but invisible.
+ */
+export const PasswordValidationNoLayoutShift: Story = {
+  render: () => {
+    const [password, setPassword] = useState('')
+    const minLength = 8
+    const isValid = password.length >= minLength
+    const showError = !isValid && password.length > 0
+
+    return (
+      <Field>
+        <Field.Label indicator="(Required)">Password</Field.Label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{
+            padding: '8px 12px',
+            border: '1px solid var(--eds-color-border-neutral-medium)',
+            borderRadius: '4px',
+            width: '100%',
+          }}
+        />
+        {/* Always render, use visibility to hide - no layout shift */}
+        <ValidationMessage
+          role="alert"
+          style={{ visibility: showError ? 'visible' : 'hidden' }}
+        >
+          Password must be at least {minLength} characters
+        </ValidationMessage>
+        <button
+          type="button"
+          style={{
+            marginTop: '8px',
+            padding: '8px 16px',
+            background: 'var(--eds-color-bg-accent-default)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Submit
+        </button>
+      </Field>
+    )
   },
 }
