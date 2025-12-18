@@ -9,7 +9,4 @@ export type {
   FieldDescriptionProps,
 } from './Field'
 
-export type {
-  ValidationMessageProps,
-  ValidationMessageTone,
-} from './ValidationMessage'
+export type { ValidationMessageProps } from './ValidationMessage'

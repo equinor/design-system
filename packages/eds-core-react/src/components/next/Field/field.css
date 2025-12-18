@@ -32,10 +32,6 @@
     color: var(--field-description-color);
   }
 
-  .eds-field__validation {
-    /* Validation message styling */
-  }
-
   .eds-field[data-disabled='true'] {
     --field-label-color: var(--eds-color-text-subtle);
     --field-description-color: var(--eds-color-border-neutral-medium);
