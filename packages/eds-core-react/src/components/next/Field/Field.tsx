@@ -7,7 +7,7 @@ import { classNames } from './field.utils'
 import { fieldObserver } from './field-observer'
 
 const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
-  { disabled = false, className, children, ...rest },
+  { required = false, disabled = false, className, children, ...rest },
   ref,
 ) {
   const fieldRef = useRef<HTMLDivElement>(null)
@@ -25,6 +25,7 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
     <div
       ref={setRefs}
       className={classNames('eds-field', className)}
+      data-required={required || undefined}
       data-disabled={disabled || undefined}
       {...rest}
     >

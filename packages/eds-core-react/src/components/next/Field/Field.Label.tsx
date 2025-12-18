@@ -12,38 +12,34 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
         data-field="label"
         {...rest}
       >
-        <span className="eds-field__label-content">
+        <TypographyNext
+          as="span"
+          family="ui"
+          size="md"
+          baseline="center"
+          lineHeight="default"
+          weight="normal"
+          tracking="normal"
+        >
+          {children}
+        </TypographyNext>
+        {indicator && (
           <TypographyNext
             as="span"
             family="ui"
-            size="md"
+            size="sm"
             baseline="center"
             lineHeight="default"
             weight="normal"
             tracking="normal"
-            className="eds-field__label-text"
+            className="eds-field__indicator"
           >
-            {children}
+            {indicator}
           </TypographyNext>
-          {indicator && (
-            <TypographyNext
-              as="span"
-              family="ui"
-              size="sm"
-              baseline="center"
-              lineHeight="default"
-              weight="normal"
-              tracking="normal"
-              className="eds-field__indicator"
-            >
-              {indicator}
-            </TypographyNext>
-          )}
-        </span>
+        )}
       </label>
     )
   },
 )
 
-FieldLabel.displayName = 'Field.Label'
 FieldLabel.displayName = 'Field.Label'

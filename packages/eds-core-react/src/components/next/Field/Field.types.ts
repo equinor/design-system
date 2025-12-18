@@ -1,6 +1,8 @@
 import type { HTMLAttributes, LabelHTMLAttributes, ReactNode } from 'react'
 
 export type FieldProps = {
+  /** Marks the field as required */
+  required?: boolean
   /** Disables all form controls within the field */
   disabled?: boolean
   /** Field content composed of label, description, control, and validation message */
