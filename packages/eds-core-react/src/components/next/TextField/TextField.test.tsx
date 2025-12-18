@@ -78,26 +78,24 @@ describe('TextField (Next EDS 2.0)', () => {
 
     it('Connects label to input via htmlFor', () => {
       render(<TextField label="Label" id="test-id" />)
-      const label = screen.getByText('Label').closest('label')
-      expect(label).toHaveAttribute('for', 'test-id')
+      // getByRole with name verifies label is properly connected to input
+      const input = screen.getByRole('textbox', { name: 'Label' })
+      expect(input).toHaveAttribute('id', 'test-id')
     })
 
     it('Generates id when not provided', () => {
       render(<TextField label="Label" />)
-      const input = screen.getByRole('textbox')
-      const label = screen.getByText('Label').closest('label')
+      // getByRole with name verifies label is properly connected to input
+      const input = screen.getByRole('textbox', { name: 'Label' })
       expect(input).toHaveAttribute('id')
-      expect(label).toHaveAttribute('for', input.getAttribute('id'))
     })
   })
 
   describe('States', () => {
     it('Applies invalid state to input', () => {
       render(<TextField label="Label" invalid />)
-      const container = screen
-        .getByRole('textbox')
-        .closest('.eds-input-container')
-      expect(container).toHaveClass('eds-input-container--invalid')
+      const input = screen.getByRole('textbox')
+      expect(input).toBeInvalid()
     })
 
     it('Applies disabled state', () => {
