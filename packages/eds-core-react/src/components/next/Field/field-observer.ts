@@ -8,7 +8,7 @@ export function fieldObserver(fieldElement: HTMLElement | null) {
 
   const elements = new Map<Element, string | null>()
   const typeCounter = new Map<string, number>()
-  const uuid = `:${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`
+  const uuid = `:${Date.now().toString(36)}${randomId(3)}`
   let input: Element | null = null
   let describedby = ''
 
@@ -107,6 +107,13 @@ const isInputLike = (node: unknown): node is HTMLInputElement =>
 
 const setAttr = (el: Element | null, name: string, value?: string | null) =>
   value ? el?.setAttribute(name, value) : el?.removeAttribute(name)
+
+// Generate cryptographically secure random string
+const randomId = (length: number): string => {
+  const bytes = new Uint8Array(length)
+  crypto.getRandomValues(bytes)
+  return Array.from(bytes, (b) => (b % 36).toString(36)).join('')
+}
 
 // Speed up MutationObserver by debouncing and only running when needed
 function createOptimizedMutationObserver(callback: MutationCallback) {
