@@ -10,7 +10,8 @@
   "type": "module",
   "scripts": {
     "tokens": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js tokens",
-    "assets": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js assets"
+    "assets": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js assets",
+    "icons": "node --no-warnings icons.js"
   },
   "author": "",
   "license": "ISC",
