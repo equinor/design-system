@@ -1,32 +1,43 @@
-import { forwardRef } from 'react'
+import { forwardRef, useEffect } from 'react'
 import { TypographyNext } from '../../Typography'
 import type { ValidationMessageProps } from './ValidationMessage.types'
-import { classNames } from '../Field/field.utils'
+import { useOptionalFieldContext } from '../Field/Field.context'
 import './validation-message.css'
 
 export const ValidationMessage = forwardRef<
   HTMLParagraphElement,
   ValidationMessageProps
 >(function ValidationMessage(
-  { disabled = false, children, className, role, ...rest },
+  { disabled = false, children, className, role, id: providedId, ...rest },
   ref,
 ) {
+  const fieldContext = useOptionalFieldContext()
+
+  useEffect(() => {
+    fieldContext?.setHasValidation(true)
+    return () => fieldContext?.setHasValidation(false)
+  }, [fieldContext])
+
+  const id = providedId ?? fieldContext?.validationId
+
   return (
     <TypographyNext
       ref={ref}
       as="p"
+      id={id}
       family="ui"
       size="md"
       baseline="grid"
       lineHeight="default"
       tracking="normal"
       role={role}
-      data-field="validation"
-      className={classNames(
+      className={[
         'eds-validation-message',
         disabled && 'eds-validation-message--disabled',
         className,
-      )}
+      ]
+        .filter(Boolean)
+        .join(' ')}
       {...rest}
     >
       {children}

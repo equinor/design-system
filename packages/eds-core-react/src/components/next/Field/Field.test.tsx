@@ -8,12 +8,16 @@ describe('Field', () => {
     render(
       <Field>
         <Field.Label>Email</Field.Label>
-        <input data-testid="input" />
+        <Field.Control>
+          <input data-testid="input" />
+        </Field.Control>
       </Field>,
     )
     const input = screen.getByTestId('input')
-    expect(screen.getByText('Email')).toBeInTheDocument()
+    const label = screen.getByText('Email')
+    expect(label).toBeInTheDocument()
     expect(input).toHaveAttribute('id')
+    expect(label).toHaveAttribute('for', input.id)
   })
 
   test('renders description and links it via aria-describedby', () => {
@@ -21,7 +25,9 @@ describe('Field', () => {
       <Field>
         <Field.Label>Password</Field.Label>
         <Field.Description>Must be at least 8 characters</Field.Description>
-        <input data-testid="input" />
+        <Field.Control>
+          <input data-testid="input" />
+        </Field.Control>
       </Field>,
     )
     const description = screen.getByText('Must be at least 8 characters')
@@ -34,7 +40,9 @@ describe('Field', () => {
     render(
       <Field required>
         <Field.Label>Name</Field.Label>
-        <input data-testid="input" />
+        <Field.Control>
+          <input data-testid="input" />
+        </Field.Control>
       </Field>,
     )
     const input = screen.getByTestId('input')
@@ -45,7 +53,9 @@ describe('Field', () => {
     render(
       <Field required data-testid="field">
         <Field.Label>Username</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     const field = screen.getByTestId('field')
@@ -56,7 +66,9 @@ describe('Field', () => {
     render(
       <Field disabled data-testid="field">
         <Field.Label>Username</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     const field = screen.getByTestId('field')
@@ -67,7 +79,9 @@ describe('Field', () => {
     render(
       <Field>
         <Field.Label>Email</Field.Label>
-        <input data-testid="input" />
+        <Field.Control>
+          <input data-testid="input" />
+        </Field.Control>
         <ValidationMessage data-testid="validation">
           Error message
         </ValidationMessage>
@@ -82,15 +96,25 @@ describe('Field', () => {
     render(
       <Field>
         <Field.Label>Password</Field.Label>
-        <Field.Description>Must be 8+ chars</Field.Description>
-        <input data-testid="input" />
-        <ValidationMessage>Too short</ValidationMessage>
+        <Field.Description data-testid="description">
+          Must be 8+ chars
+        </Field.Description>
+        <Field.Control>
+          <input data-testid="input" />
+        </Field.Control>
+        <ValidationMessage data-testid="validation">
+          Too short
+        </ValidationMessage>
       </Field>,
     )
     const input = screen.getByTestId('input')
+    const description = screen.getByTestId('description')
+    const validation = screen.getByTestId('validation')
     const describedBy = input.getAttribute('aria-describedby') ?? ''
     const ids = describedBy.split(' ').filter(Boolean)
     expect(ids).toHaveLength(2)
+    expect(describedBy).toContain(description.id)
+    expect(describedBy).toContain(validation.id)
   })
 
   test('forwards ref to wrapper div', () => {
@@ -98,7 +122,9 @@ describe('Field', () => {
     render(
       <Field ref={ref}>
         <Field.Label>Label</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     expect(ref.current).toBeInstanceOf(HTMLDivElement)
@@ -108,7 +134,9 @@ describe('Field', () => {
     render(
       <Field className="custom-class" data-testid="field">
         <Field.Label>Label</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     const field = screen.getByTestId('field')
@@ -121,7 +149,9 @@ describe('Field.Label', () => {
     render(
       <Field>
         <Field.Label indicator="(Required)">Required Field</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     expect(screen.getByText('(Required)')).toBeInTheDocument()
@@ -131,7 +161,9 @@ describe('Field.Label', () => {
     render(
       <Field>
         <Field.Label indicator="(Valgfritt)">Valgfritt felt</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     expect(screen.getByText('(Valgfritt)')).toBeInTheDocument()
@@ -141,7 +173,9 @@ describe('Field.Label', () => {
     render(
       <Field>
         <Field.Label>Field without indicator</Field.Label>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     expect(screen.queryByText('(Required)')).not.toBeInTheDocument()
@@ -155,7 +189,9 @@ describe('Field.Description', () => {
       <Field>
         <Field.Label>Label</Field.Label>
         <Field.Description>Help text</Field.Description>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     expect(screen.getByText('Help text')).toBeInTheDocument()
@@ -166,7 +202,9 @@ describe('Field.Description', () => {
       <Field>
         <Field.Label>Label</Field.Label>
         <Field.Description>Description</Field.Description>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     const description = screen.getByText('Description')
@@ -178,7 +216,9 @@ describe('Field.Description', () => {
       <Field>
         <Field.Label>Label</Field.Label>
         <Field.Description id="custom-desc">Description</Field.Description>
-        <input />
+        <Field.Control>
+          <input />
+        </Field.Control>
       </Field>,
     )
     expect(screen.getByText('Description')).toHaveAttribute('id', 'custom-desc')

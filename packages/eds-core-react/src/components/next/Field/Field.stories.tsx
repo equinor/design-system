@@ -43,7 +43,9 @@ export const Default: StoryFn<FieldProps> = () => (
   <Field>
     <Field.Label>Last name</Field.Label>
     <Field.Description>Last name cannot contain spaces.</Field.Description>
-    <input defaultValue="Smith Jones" style={inputStyles} />
+    <Field.Control>
+      <input defaultValue="Smith Jones" style={inputStyles} />
+    </Field.Control>
     <ValidationMessage>
       You cannot have spaces in your last name
     </ValidationMessage>
@@ -55,12 +57,16 @@ export const WithIndicator: StoryFn<FieldProps> = () => (
     <Field>
       <Field.Label indicator="(Required)">First name</Field.Label>
       <Field.Description>Your legal first name.</Field.Description>
-      <input placeholder="John" style={inputStyles} />
+      <Field.Control>
+        <input placeholder="John" style={inputStyles} />
+      </Field.Control>
     </Field>
     <Field>
       <Field.Label indicator="(Optional)">Organization</Field.Label>
       <Field.Description>This information is optional.</Field.Description>
-      <input placeholder="Equinor ASA" style={inputStyles} />
+      <Field.Control>
+        <input placeholder="Equinor ASA" style={inputStyles} />
+      </Field.Control>
     </Field>
   </div>
 )
@@ -77,7 +83,9 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
     <Field>
       <Field.Label>Username</Field.Label>
       <Field.Description>Choose at least four characters.</Field.Description>
-      <input value={value} onChange={onChange} style={inputStyles} />
+      <Field.Control>
+        <input value={value} onChange={onChange} style={inputStyles} />
+      </Field.Control>
       {hasError && (
         <ValidationMessage>
           Username must be at least four characters
@@ -90,7 +98,9 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
 export const LabelOnly: StoryFn<FieldProps> = () => (
   <Field>
     <Field.Label>Email</Field.Label>
-    <input type="email" placeholder="name@example.com" style={inputStyles} />
+    <Field.Control>
+      <input type="email" placeholder="name@example.com" style={inputStyles} />
+    </Field.Control>
   </Field>
 )
 
@@ -100,7 +110,9 @@ export const WithDescription: StoryFn<FieldProps> = () => (
     <Field.Description>
       Password must be at least 8 characters and contain numbers and letters.
     </Field.Description>
-    <input type="password" style={inputStyles} />
+    <Field.Control>
+      <input type="password" style={inputStyles} />
+    </Field.Control>
   </Field>
 )
 
@@ -108,7 +120,9 @@ export const DisabledField: StoryFn<FieldProps> = () => (
   <Field disabled>
     <Field.Label>Username</Field.Label>
     <Field.Description>Cannot be changed after creation.</Field.Description>
-    <input value="john.doe" disabled style={inputStyles} />
+    <Field.Control>
+      <input value="john.doe" disabled style={inputStyles} />
+    </Field.Control>
   </Field>
 )
 
@@ -120,14 +134,17 @@ const checkboxStyles: CSSProperties = {
 
 export const WithCheckbox: StoryFn<FieldProps> = () => (
   <Field>
-    <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-      <input type="checkbox" style={checkboxStyles} />
-      <span>
-        <span style={{ display: 'block' }}>I accept the terms</span>
-        <Field.Description>
-          By checking this box you agree to our terms and privacy policy.
-        </Field.Description>
-      </span>
+    <Field.Control>
+      <input type="checkbox" id="terms-checkbox" style={checkboxStyles} />
+    </Field.Control>
+    <label
+      htmlFor="terms-checkbox"
+      style={{ display: 'flex', flexDirection: 'column' }}
+    >
+      <span>I accept the terms</span>
+      <Field.Description>
+        By checking this box you agree to our terms and privacy policy.
+      </Field.Description>
     </label>
   </Field>
 )
@@ -167,24 +184,18 @@ export const CheckboxGroup: StoryFn<FieldProps> = () => (
       Select interests
     </legend>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-      <Field>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <input type="checkbox" style={checkboxStyles} />
-          <span>Technology</span>
-        </label>
-      </Field>
-      <Field>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <input type="checkbox" style={checkboxStyles} />
-          <span>Design</span>
-        </label>
-      </Field>
-      <Field>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <input type="checkbox" style={checkboxStyles} />
-          <span>Sustainability</span>
-        </label>
-      </Field>
+      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <input type="checkbox" style={checkboxStyles} />
+        <span>Technology</span>
+      </label>
+      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <input type="checkbox" style={checkboxStyles} />
+        <span>Design</span>
+      </label>
+      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <input type="checkbox" style={checkboxStyles} />
+        <span>Sustainability</span>
+      </label>
     </div>
   </fieldset>
 )

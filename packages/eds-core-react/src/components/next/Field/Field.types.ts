@@ -1,4 +1,9 @@
-import type { HTMLAttributes, LabelHTMLAttributes, ReactNode } from 'react'
+import type {
+  HTMLAttributes,
+  LabelHTMLAttributes,
+  ReactNode,
+  ReactElement,
+} from 'react'
 
 export type FieldProps = {
   /** Marks the field as required */
@@ -17,4 +22,9 @@ export type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
 
 export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode
+}
+
+export type FieldControlProps = HTMLAttributes<HTMLDivElement> & {
+  /** The form control element (input, select, textarea, etc.) */
+  children: ReactElement
 }
