@@ -70,12 +70,14 @@ export const PasswordValidation: StoryFn = () => {
   return (
     <Field>
       <Field.Label indicator="(Required)">Password</Field.Label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={inputStyles}
-      />
+      <Field.Control>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={inputStyles}
+        />
+      </Field.Control>
       {!isValid && password.length > 0 && (
         <ValidationMessage role="alert">
           Password must be at least {minLength} characters (currently{' '}
@@ -103,12 +105,14 @@ export const PasswordValidationNoLayoutShift: StoryFn = () => {
   return (
     <Field>
       <Field.Label indicator="(Required)">Password</Field.Label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={inputStyles}
-      />
+      <Field.Control>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={inputStyles}
+        />
+      </Field.Control>
       {/* Always render, use visibility to hide - no layout shift */}
       <ValidationMessage
         role="alert"

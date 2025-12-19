@@ -1,36 +1,47 @@
-import { forwardRef, useEffect, useRef } from 'react'
+import { forwardRef, useId, useState, useMemo } from 'react'
 import './field.css'
 import { FieldDescription } from './Field.Description'
+import { FieldControl } from './Field.Control'
 import type { FieldProps } from './Field.types'
 import { FieldLabel } from './Field.Label'
-import { classNames } from './field.utils'
-import { fieldObserver } from './field-observer'
+import { FieldContext, type FieldContextValue } from './Field.context'
 
 const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
   { required = false, disabled = false, className, children, ...rest },
   ref,
 ) {
-  const fieldRef = useRef<HTMLDivElement>(null)
+  const id = useId()
+  const [hasDescription, setHasDescription] = useState(false)
+  const [hasValidation, setHasValidation] = useState(false)
 
-  useEffect(() => fieldObserver(fieldRef.current), [])
-
-  // Merge refs
-  const setRefs = (node: HTMLDivElement | null) => {
-    fieldRef.current = node
-    if (typeof ref === 'function') ref(node)
-    else if (ref) ref.current = node
-  }
+  const contextValue = useMemo<FieldContextValue>(
+    () => ({
+      id,
+      labelId: `${id}-label`,
+      descriptionId: `${id}-description`,
+      validationId: `${id}-validation`,
+      required,
+      disabled,
+      hasDescription,
+      hasValidation,
+      setHasDescription,
+      setHasValidation,
+    }),
+    [id, required, disabled, hasDescription, hasValidation],
+  )
 
   return (
-    <div
-      ref={setRefs}
-      className={classNames('eds-field', className)}
-      data-required={required || undefined}
-      data-disabled={disabled || undefined}
-      {...rest}
-    >
-      {children}
-    </div>
+    <FieldContext.Provider value={contextValue}>
+      <div
+        ref={ref}
+        className={['eds-field', className].filter(Boolean).join(' ')}
+        data-required={required || undefined}
+        data-disabled={disabled || undefined}
+        {...rest}
+      >
+        {children}
+      </div>
+    </FieldContext.Provider>
   )
 })
 
@@ -39,9 +50,11 @@ FieldComponent.displayName = 'Field'
 type CompoundField = typeof FieldComponent & {
   Label: typeof FieldLabel
   Description: typeof FieldDescription
+  Control: typeof FieldControl
 }
 
 export const Field = FieldComponent as CompoundField
 
 Field.Label = FieldLabel
 Field.Description = FieldDescription
+Field.Control = FieldControl

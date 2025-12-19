@@ -57,7 +57,9 @@ describe('ValidationMessage within Field', () => {
     render(
       <Field>
         <Field.Label>Label</Field.Label>
-        <input data-testid="input" />
+        <Field.Control>
+          <input data-testid="input" />
+        </Field.Control>
         <ValidationMessage>Error message</ValidationMessage>
       </Field>,
     )
