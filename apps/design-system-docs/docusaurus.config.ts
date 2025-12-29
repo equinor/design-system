@@ -42,6 +42,12 @@ const config: Config = {
           breadcrumbs: true,
           editUrl:
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
+          versions: {
+            current: {
+              label: '2.0.0-wip', // Current version label
+              path: 'Next', // URL path for the current version
+            },
+          },
         },
         theme: {
           customCss: [
@@ -126,6 +132,11 @@ const config: Config = {
         {
           type: 'search',
           position: 'right',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'left',
+          dropdownActiveClassDisabled: true,
         },
       ],
     },
