@@ -9,6 +9,8 @@
  *   pnpm icons --force                   # Force fetch from Figma
  *   pnpm icons --only icon1,icon2,icon3  # Update only specific icons
  *   pnpm icons --force --only jacket,monopile
+ *   pnpm icons --debug                   # Enable debug logging
+ *   pnpm icons --dry-run                 # Show what would happen without writing
  *
  * Environment:
  *   FIGMA_TOKEN or PERSONAL_ACCESS_TOKEN in .env
@@ -39,15 +41,36 @@ const PATHS = {
 }
 
 // ============================================================================
+// Debug Logger
+// ============================================================================
+
+let DEBUG = false
+let DRY_RUN = false
+const debug = (msg) => DEBUG && console.info(`[DEBUG] ${msg}`)
+const dryRun = (msg) => DRY_RUN && console.info(`[DRY-RUN] ${msg}`)
+const timing = {}
+const startTimer = (name) => { timing[name] = Date.now() }
+const endTimer = (name) => {
+  const duration = ((Date.now() - timing[name]) / 1000).toFixed(2)
+  debug(`${name}: ${duration}s`)
+  return duration
+}
+// ============================================================================
 // Figma API
 // ============================================================================
 
 async function fetchFigmaFile(fileId) {
   const url = `https://api.figma.com/v1/files/${fileId}`
+  debug(`API: GET ${url}`)
+  startTimer('fetchFigmaFile')
+  
   const response = await fetch(url, {
     headers: { 'X-Figma-Token': FIGMA_TOKEN },
   })
 
+  debug(`API: Response ${response.status} ${response.statusText}`)
+  endTimer('fetchFigmaFile')
+  
   if (!response.ok) {
     throw new Error(`Failed to fetch Figma file: ${response.status}`)
   }
@@ -56,10 +79,16 @@ async function fetchFigmaFile(fileId) {
 
 async function fetchFigmaImageUrls(fileId, ids) {
   const url = `https://api.figma.com/v1/images/${fileId}?ids=${ids.join(',')}&format=svg`
+  debug(`API: GET /v1/images/... (${ids.length} icons)`)
+  startTimer('fetchFigmaImageUrls')
+  
   const response = await fetch(url, {
     headers: { 'X-Figma-Token': FIGMA_TOKEN },
   })
 
+  debug(`API: Response ${response.status} ${response.statusText}`)
+  endTimer('fetchFigmaImageUrls')
+  
   if (!response.ok) {
     throw new Error(`Failed to fetch image URLs: ${response.status}`)
   }
@@ -81,17 +110,23 @@ function ensureDir(dirPath) {
 
 async function getCachedOrFetch(fileId, forceRefresh) {
   const cachePath = path.join(PATHS.CACHE, `${fileId}.json`)
+  debug(`Cache path: ${cachePath}`)
 
   if (!forceRefresh && fs.existsSync(cachePath)) {
+    const stats = fs.statSync(cachePath)
+    const ageMinutes = Math.round((Date.now() - stats.mtimeMs) / 60000)
+    debug(`Cache: HIT (age: ${ageMinutes} minutes)`)
     console.info('📂 Using cached Figma file')
     const data = await fs.promises.readFile(cachePath, 'utf-8')
     return JSON.parse(data)
   }
 
+  debug(`Cache: MISS ${forceRefresh ? '(forced)' : '(not found)'}`)
   console.info('📥 Fetching file from Figma API...')
   const data = await fetchFigmaFile(fileId)
   ensureDir(PATHS.CACHE)
   await fs.promises.writeFile(cachePath, JSON.stringify(data, null, 2), 'utf-8')
+  debug(`Cache: Written ${(JSON.stringify(data).length / 1024).toFixed(0)}KB`)
   return data
 }
 
@@ -121,15 +156,22 @@ function toPathName(name) {
 function parseIconsFromFigmaFile(figmaData) {
   const groups = []
   const pages = figmaData.document?.children || []
+  
+  debug(`Parsing: Found ${pages.length} pages`)
 
   for (const page of pages) {
-    if (/^🚧/.test(page.name)) continue
+    if (/^🚧/.test(page.name)) {
+      debug(`Parsing: Skipping page "${page.name}" (WIP)`)
+      continue
+    }
     const pageName = page.name.toLowerCase().trim()
 
     // Only export system icons (matching old broker behavior)
     if (pageName === 'system icons') {
       const icons = []
       const groupName = 'system-icons'
+      let componentCount = 0
+      let componentSetCount = 0
 
       for (const frame of page.children || []) {
         if (frame.type !== 'FRAME') continue
@@ -137,6 +179,7 @@ function parseIconsFromFigmaFile(figmaData) {
 
         for (const child of frame.children || []) {
           if (child.type === 'COMPONENT') {
+            componentCount++
             icons.push({
               name: toSnakeCase(child.name),
               originalName: child.name, // Keep original Figma name for filtering
@@ -144,6 +187,7 @@ function parseIconsFromFigmaFile(figmaData) {
               group: frameGroup,
             })
           } else if (child.type === 'COMPONENT_SET') {
+            componentSetCount++
             // Only use default (24px) variant
             const defaultVariant = child.children?.find((c) =>
               /default/i.test(c.name),
@@ -159,6 +203,8 @@ function parseIconsFromFigmaFile(figmaData) {
           }
         }
       }
+      
+      debug(`Parsing: Page "${page.name}" has ${componentCount} components, ${componentSetCount} component sets`)
 
       if (icons.length > 0) {
         groups.push({ name: groupName, icons })
@@ -276,19 +322,26 @@ function writeSvgFiles(iconGroups) {
       // Write to subdirectory by icon group (e.g., "navigation", "ui-views")
       const iconPath = icon.group ? toPathName(icon.group) : ''
       const groupDir = path.join(PATHS.ASSETS_ICONS, group.name, iconPath)
-      ensureDir(groupDir)
-
       const filePath = path.join(groupDir, `${icon.name}.svg`)
+      
+      if (DRY_RUN) {
+        dryRun(`Would write: ${filePath}`)
+        continue
+      }
+      
+      ensureDir(groupDir)
+      debug(`Write: ${filePath}`)
       fs.writeFileSync(filePath, icon.svg + '\n', 'utf-8')
     }
+    const action = DRY_RUN ? 'Would write' : 'Wrote'
     console.info(
-      `   Wrote ${group.icons.length} SVGs to assets/icons/${group.name}/`,
+      `   ${action} ${group.icons.length} SVGs to assets/icons/${group.name}/`,
     )
   }
 }
 
 function writeJsonData(iconGroups) {
-  ensureDir(PATHS.STORYBOOK_ICONS)
+  if (!DRY_RUN) ensureDir(PATHS.STORYBOOK_ICONS)
 
   for (const group of iconGroups) {
     // Output as single JSON array file (same format as old figma-broker)
@@ -308,19 +361,25 @@ function writeJsonData(iconGroups) {
       }))
 
     const filePath = path.join(PATHS.STORYBOOK_ICONS, `${group.name}.json`)
-    fs.writeFileSync(
-      filePath,
-      JSON.stringify(iconsArray, null, 2) + '\n',
-      'utf-8',
-    )
+    const action = DRY_RUN ? 'Would write' : 'Wrote'
+    
+    if (DRY_RUN) {
+      dryRun(`Would write: ${filePath}`)
+    } else {
+      fs.writeFileSync(
+        filePath,
+        JSON.stringify(iconsArray, null, 2) + '\n',
+        'utf-8',
+      )
+    }
     console.info(
-      `   Wrote ${iconsArray.length} icons to stories/assets/icons/${group.name}.json`,
+      `   ${action} ${iconsArray.length} icons to stories/assets/icons/${group.name}.json`,
     )
   }
 }
 
 function writeTypeScriptData(iconGroups) {
-  ensureDir(PATHS.ICONS_SRC)
+  if (!DRY_RUN) ensureDir(PATHS.ICONS_SRC)
 
   const lines = [`import type { IconData } from './types'`, '']
 
@@ -339,10 +398,16 @@ function writeTypeScriptData(iconGroups) {
   }
 
   const filePath = path.join(PATHS.ICONS_SRC, 'data.ts')
-  fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
-
   const total = iconGroups.reduce((sum, g) => sum + g.icons.length, 0)
-  console.info(`   Wrote ${total} icons to packages/eds-icons/src/data.ts`)
+  const action = DRY_RUN ? 'Would write' : 'Wrote'
+  
+  if (DRY_RUN) {
+    dryRun(`Would write: ${filePath}`)
+  } else {
+    fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
+  }
+
+  console.info(`   ${action} ${total} icons to packages/eds-icons/src/data.ts`)
 }
 
 // ============================================================================
@@ -384,13 +449,19 @@ function mergeJsonData(iconGroups) {
         : existing
     )
     
-    fs.writeFileSync(
-      filePath,
-      JSON.stringify(mergedIcons, null, 2) + '\n',
-      'utf-8',
-    )
+    const action = DRY_RUN ? 'Would update' : 'Updated'
+    
+    if (DRY_RUN) {
+      dryRun(`Would update: ${filePath}`)
+    } else {
+      fs.writeFileSync(
+        filePath,
+        JSON.stringify(mergedIcons, null, 2) + '\n',
+        'utf-8',
+      )
+    }
     console.info(
-      `   Updated ${updatedIconsMap.size} icons in stories/assets/icons/${group.name}.json`,
+      `   ${action} ${updatedIconsMap.size} icons in stories/assets/icons/${group.name}.json`,
     )
   }
 }
@@ -429,9 +500,15 @@ function mergeTypeScriptData(iconGroups) {
     newContent = newContent.replace(regex, newExport)
   }
   
-  fs.writeFileSync(filePath, newContent, 'utf-8')
+  const action = DRY_RUN ? 'Would update' : 'Updated'
+  
+  if (DRY_RUN) {
+    dryRun(`Would update: ${filePath}`)
+  } else {
+    fs.writeFileSync(filePath, newContent, 'utf-8')
+  }
   console.info(
-    `   Updated ${updatedIcons.size} icons in packages/eds-icons/src/data.ts`,
+    `   ${action} ${updatedIcons.size} icons in packages/eds-icons/src/data.ts`,
   )
 }
 
@@ -442,6 +519,8 @@ function mergeTypeScriptData(iconGroups) {
 function parseArgs() {
   const args = argv.slice(2)
   const forceRefresh = args.includes('--force')
+  const debugMode = args.includes('--debug')
+  const dryRunMode = args.includes('--dry-run')
   
   // Parse --only flag: --only icon1,icon2,icon3
   const onlyIndex = args.indexOf('--only')
@@ -456,11 +535,27 @@ function parseArgs() {
     args[i - 1] !== '--only'
   ) || DEFAULT_FILE_ID
   
-  return { forceRefresh, onlyIcons, fileId }
+  return { forceRefresh, onlyIcons, fileId, debugMode, dryRunMode }
 }
 
 async function main() {
-  const { forceRefresh, onlyIcons, fileId } = parseArgs()
+  const { forceRefresh, onlyIcons, fileId, debugMode, dryRunMode } = parseArgs()
+  
+  // Enable debug and dry-run modes
+  DEBUG = debugMode
+  DRY_RUN = dryRunMode
+  startTimer('total')
+
+  // Debug: Token info
+  debug(`Token: ${FIGMA_TOKEN ? `✓ loaded (${FIGMA_TOKEN.length} chars, starts with "${FIGMA_TOKEN.slice(0, 10)}...")` : '✗ missing'}`)
+  debug(`File ID: ${fileId}`)
+  debug(`Force refresh: ${forceRefresh}`)
+  debug(`Only icons: ${onlyIcons ? onlyIcons.join(', ') : 'all'}`)
+  debug(`Dry run: ${dryRunMode}`)
+  
+  if (DRY_RUN) {
+    console.info('🔍 DRY RUN - No files will be written')
+  }
 
   if (!FIGMA_TOKEN) {
     console.error(
@@ -481,6 +576,7 @@ async function main() {
     // Filter to only specific icons if --only flag is provided
     if (onlyIcons && onlyIcons.length > 0) {
       console.info(`   Filtering to: ${onlyIcons.join(', ')}`)
+      const beforeCount = iconGroups.reduce((sum, g) => sum + g.icons.length, 0)
       iconGroups = iconGroups.map((group) => ({
         ...group,
         icons: group.icons.filter((icon) => 
@@ -491,6 +587,11 @@ async function main() {
           )
         ),
       })).filter((group) => group.icons.length > 0)
+      
+      // Debug: Show matched icons
+      const matchedNames = iconGroups.flatMap((g) => g.icons.map((i) => `${i.name} (${i.group})`))
+      debug(`Filter: Matched ${matchedNames.length}/${beforeCount} icons`)
+      matchedNames.forEach((n) => debug(`  - ${n}`))
     }
     
     const total = iconGroups.reduce((sum, g) => sum + g.icons.length, 0)
@@ -505,6 +606,7 @@ async function main() {
     const iconsWithSvg = await fetchAndOptimizeSvgs(iconGroups, fileId)
 
     console.info('💾 Writing output files...')
+    startTimer('writeFiles')
     writeSvgFiles(iconsWithSvg)
     
     // For partial updates, merge with existing JSON/TS data
@@ -515,11 +617,14 @@ async function main() {
       writeJsonData(iconsWithSvg)
       writeTypeScriptData(iconsWithSvg)
     }
+    endTimer('writeFiles')
 
     console.info('')
     console.info('✅ Done! Icons exported successfully.')
+    endTimer('total')
   } catch (error) {
     console.error('❌ Error:', error.message)
+    if (DEBUG) console.error(error.stack)
     process.exit(1)
   }
 }
