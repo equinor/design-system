@@ -384,15 +384,15 @@ pnpm icons --force
 
 #### Summary Table
 
-| Scenario                            | Command                     |
-| ----------------------------------- | --------------------------- |
-| Icon **paths/vectors** changed      | `pnpm icons` (cache is fine)|
-| Icon **added or removed**           | `pnpm icons --force`        |
-| Icon **renamed**                    | `pnpm icons --force`        |
-| Icon **moved to different group**   | `pnpm icons --force`        |
-| Testing script changes locally      | `pnpm icons`                |
-| Weekly/monthly full sync            | `pnpm icons --force`        |
-| Update specific icon only           | `pnpm icons --only jacket`  |
+| Scenario                          | Command                      |
+| --------------------------------- | ---------------------------- |
+| Icon **paths/vectors** changed    | `pnpm icons` (cache is fine) |
+| Icon **added or removed**         | `pnpm icons --force`         |
+| Icon **renamed**                  | `pnpm icons --force`         |
+| Icon **moved to different group** | `pnpm icons --force`         |
+| Testing script changes locally    | `pnpm icons`                 |
+| Weekly/monthly full sync          | `pnpm icons --force`         |
+| Update specific icon only         | `pnpm icons --only jacket`   |
 
 #### The Key Distinction
 

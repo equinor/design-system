@@ -574,16 +574,17 @@ async function fetchAndOptimizeSvgs(iconGroups, fileId) {
         let width = null
         let height = null
 
-        // SVGO plugin configuration
+        // SVGO plugin configuration for SVGO v4
+        // Note: In SVGO v4, removeViewBox is NOT part of preset-default
+        // (viewBox is preserved by default), so no override needed
         const plugins = [
           {
             // Apply default optimizations (minify, remove comments, etc.)
             name: 'preset-default',
             params: {
               overrides: {
-                // IMPORTANT: Keep viewBox for proper scaling
-                removeViewBox: false,
-                // Don't sort attributes (maintain consistency)
+                // Disable attribute sorting to preserve original order
+                // This prevents unnecessary diffs in version control
                 sortAttrs: false,
               },
             },
