@@ -5,8 +5,10 @@
  * Reuses dependencies from figma-broker package.
  *
  * Usage:
- *   pnpm export:icons           # Use cached Figma file
- *   pnpm export:icons -- true   # Force fetch from Figma
+ *   pnpm icons                           # Use cached Figma file
+ *   pnpm icons --force                   # Force fetch from Figma
+ *   pnpm icons --only icon1,icon2,icon3  # Update only specific icons
+ *   pnpm icons --force --only jacket,monopile
  *
  * Environment:
  *   FIGMA_TOKEN or PERSONAL_ACCESS_TOKEN in .env
@@ -25,7 +27,6 @@ dotenv.config({ path: path.join(__dirname, '.env') })
 // Configuration
 const DEFAULT_FILE_ID = 'BQjYMxdSdgRkdhKTDDU7L4KU'
 const FIGMA_TOKEN = process.env.FIGMA_TOKEN || process.env.PERSONAL_ACCESS_TOKEN
-
 const ROOT_DIR = path.resolve(__dirname, '../..')
 const PATHS = {
   CACHE: path.join(__dirname, 'raw'),
@@ -98,18 +99,23 @@ async function getCachedOrFetch(fileId, forceRefresh) {
 // Parse Icons
 // ============================================================================
 
-function toCamelCase(name) {
+function toSnakeCase(name) {
+  // Same logic as propName() in the old broker
+  // First replace hyphens with spaces (like old broker does before propName)
   return name
-    .replace(/-/g, ' ')
-    .replace(/[^a-zA-Z0-9 ]/g, '')
-    .split(' ')
-    .filter(Boolean)
-    .map((word, i) =>
-      i === 0
-        ? word.toLowerCase()
-        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-    )
-    .join('')
+    .replace(/-/g, ' ') // Hyphens to spaces first (old broker does this before propName)
+    .replace(/[|]|[.]|[–]|[—]|[+]|[,]/g, '') // Remove forbidden chars
+    .replace(/^[0-9]*/, '') // Remove leading numbers
+    .toLowerCase()
+    .trim()
+    .replace(/[\s+]|[:\s+]/g, '_') // Spaces to underscores
+    .replace(/[/]/g, '__') // Slashes to double underscores
+    .replace('___', '__')
+}
+
+function toPathName(name) {
+  // Same logic as pathName() in the old broker
+  return toSnakeCase(name).replace('__', '-').replace(/_/g, '-')
 }
 
 function parseIconsFromFigmaFile(figmaData) {
@@ -120,19 +126,22 @@ function parseIconsFromFigmaFile(figmaData) {
     if (/^🚧/.test(page.name)) continue
     const pageName = page.name.toLowerCase().trim()
 
-    if (pageName === 'system icons' || pageName === 'product icons') {
+    // Only export system icons (matching old broker behavior)
+    if (pageName === 'system icons') {
       const icons = []
-      const groupName =
-        pageName === 'system icons' ? 'system-icons' : 'product-icons'
+      const groupName = 'system-icons'
 
       for (const frame of page.children || []) {
         if (frame.type !== 'FRAME') continue
+        const frameGroup = frame.name // e.g., "UI views", "Navigation"
 
         for (const child of frame.children || []) {
           if (child.type === 'COMPONENT') {
             icons.push({
-              name: toCamelCase(child.name),
+              name: toSnakeCase(child.name),
+              originalName: child.name, // Keep original Figma name for filtering
               id: child.id,
+              group: frameGroup,
             })
           } else if (child.type === 'COMPONENT_SET') {
             // Only use default (24px) variant
@@ -141,8 +150,10 @@ function parseIconsFromFigmaFile(figmaData) {
             )
             if (defaultVariant) {
               icons.push({
-                name: toCamelCase(child.name),
+                name: toSnakeCase(child.name),
+                originalName: child.name, // Keep original Figma name for filtering
                 id: defaultVariant.id,
+                group: frameGroup,
               })
             }
           }
@@ -161,21 +172,6 @@ function parseIconsFromFigmaFile(figmaData) {
 // ============================================================================
 // Fetch & Optimize SVGs
 // ============================================================================
-
-const svgoConfig = {
-  plugins: [
-    {
-      name: 'preset-default',
-      params: {
-        overrides: {
-          sortAttrs: false,
-        },
-      },
-    },
-    { name: 'removeViewBox', active: false },
-    { name: 'removeAttrs', params: { attrs: '(fill)' } },
-  ],
-}
 
 function extractPathData(svg) {
   const matches = svg.match(/d="([^"]+)"/g) || []
@@ -210,16 +206,52 @@ async function fetchAndOptimizeSvgs(iconGroups, fileId) {
         process.stdout.write(
           `\r   Processing ${current}/${total}: ${icon.name.padEnd(30)}`,
         )
+        icon.url = url // Store the Figma URL
         const response = await fetch(url)
         const svgRaw = await response.text()
-        const result = optimize(svgRaw, svgoConfig)
 
-        const widthMatch = result.data.match(/width="([^"]+)"/)
-        const heightMatch = result.data.match(/height="([^"]+)"/)
+        // Use custom plugin to extract dimensions (same as old broker)
+        let width = null
+        let height = null
+        const plugins = [
+          {
+            name: 'preset-default',
+            params: {
+              overrides: {
+                removeViewBox: false,
+                sortAttrs: false,
+              },
+            },
+          },
+          {
+            name: 'removeAttrs',
+            params: {
+              attrs: '(fill)',
+            },
+          },
+          {
+            name: 'find-size',
+            fn: () => {
+              return {
+                element: {
+                  enter: (node, parentNode) => {
+                    if (parentNode.type === 'root') {
+                      width = node.attributes.width
+                      height = node.attributes.height
+                    }
+                  },
+                },
+              }
+            },
+          },
+        ]
+
+        const result = optimize(svgRaw, { plugins })
 
         icon.svg = result.data
-        icon.width = widthMatch?.[1] || '24'
-        icon.height = heightMatch?.[1] || '24'
+        icon.width = width || '24'
+        icon.height = height || '24'
+        icon.viewbox = `0 0 ${height} ${width}`
         icon.pathData = extractPathData(result.data)
       } catch (err) {
         console.warn(
@@ -239,11 +271,13 @@ async function fetchAndOptimizeSvgs(iconGroups, fileId) {
 
 function writeSvgFiles(iconGroups) {
   for (const group of iconGroups) {
-    const groupDir = path.join(PATHS.ASSETS_ICONS, group.name)
-    ensureDir(groupDir)
-
     for (const icon of group.icons) {
       if (!icon.svg) continue
+      // Write to subdirectory by icon group (e.g., "navigation", "ui-views")
+      const iconPath = icon.group ? toPathName(icon.group) : ''
+      const groupDir = path.join(PATHS.ASSETS_ICONS, group.name, iconPath)
+      ensureDir(groupDir)
+
       const filePath = path.join(groupDir, `${icon.name}.svg`)
       fs.writeFileSync(filePath, icon.svg + '\n', 'utf-8')
     }
@@ -254,27 +288,33 @@ function writeSvgFiles(iconGroups) {
 }
 
 function writeJsonData(iconGroups) {
-  for (const group of iconGroups) {
-    const groupDir = path.join(PATHS.STORYBOOK_ICONS, group.name)
-    ensureDir(groupDir)
+  ensureDir(PATHS.STORYBOOK_ICONS)
 
-    for (const icon of group.icons) {
-      if (!icon.pathData) continue
-      const jsonData = {
+  for (const group of iconGroups) {
+    // Output as single JSON array file (same format as old figma-broker)
+    const iconsArray = group.icons
+      .filter((icon) => icon.pathData)
+      .map((icon) => ({
         name: icon.name,
-        width: icon.width,
+        value: icon.svg,
+        id: icon.id,
+        url: icon.url || '',
+        path: icon.group ? toPathName(icon.group) : '',
+        group: icon.group || '',
+        viewbox: `0 0 ${icon.width} ${icon.height}`,
         height: icon.height,
+        width: icon.width,
         svgPathData: icon.pathData,
-      }
-      const filePath = path.join(groupDir, `${icon.name}.json`)
-      fs.writeFileSync(
-        filePath,
-        JSON.stringify(jsonData, null, 2) + '\n',
-        'utf-8',
-      )
-    }
+      }))
+
+    const filePath = path.join(PATHS.STORYBOOK_ICONS, `${group.name}.json`)
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify(iconsArray, null, 2) + '\n',
+      'utf-8',
+    )
     console.info(
-      `   Wrote ${group.icons.length} JSON files to stories/assets/icons/${group.name}/`,
+      `   Wrote ${iconsArray.length} icons to stories/assets/icons/${group.name}.json`,
     )
   }
 }
@@ -306,12 +346,121 @@ function writeTypeScriptData(iconGroups) {
 }
 
 // ============================================================================
+// Merge Functions (for partial updates with --only)
+// ============================================================================
+
+function mergeJsonData(iconGroups) {
+  for (const group of iconGroups) {
+    const filePath = path.join(PATHS.STORYBOOK_ICONS, `${group.name}.json`)
+    
+    // Read existing JSON
+    let existingIcons = []
+    if (fs.existsSync(filePath)) {
+      existingIcons = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    }
+    
+    // Create map of updated icons
+    const updatedIconsMap = new Map()
+    for (const icon of group.icons) {
+      if (!icon.pathData) continue
+      updatedIconsMap.set(icon.name, {
+        name: icon.name,
+        value: icon.svg,
+        id: icon.id,
+        url: icon.url || '',
+        path: icon.group ? toPathName(icon.group) : '',
+        group: icon.group || '',
+        viewbox: `0 0 ${icon.width} ${icon.height}`,
+        height: icon.height,
+        width: icon.width,
+        svgPathData: icon.pathData,
+      })
+    }
+    
+    // Merge: replace existing icons with updated ones
+    const mergedIcons = existingIcons.map((existing) =>
+      updatedIconsMap.has(existing.name) 
+        ? updatedIconsMap.get(existing.name) 
+        : existing
+    )
+    
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify(mergedIcons, null, 2) + '\n',
+      'utf-8',
+    )
+    console.info(
+      `   Updated ${updatedIconsMap.size} icons in stories/assets/icons/${group.name}.json`,
+    )
+  }
+}
+
+function mergeTypeScriptData(iconGroups) {
+  const filePath = path.join(PATHS.ICONS_SRC, 'data.ts')
+  
+  // Read existing file
+  let existingContent = ''
+  if (fs.existsSync(filePath)) {
+    existingContent = fs.readFileSync(filePath, 'utf-8')
+  }
+  
+  // Build updated icon exports
+  const updatedIcons = new Map()
+  for (const group of iconGroups) {
+    for (const icon of group.icons) {
+      if (!icon.pathData) continue
+      updatedIcons.set(icon.name, `export const ${icon.name}: IconData = {
+  name: '${icon.name}',
+  prefix: 'eds',
+  height: '${icon.height}',
+  width: '${icon.width}',
+  svgPathData: '${icon.pathData}',
+}`)
+    }
+  }
+  
+  // Replace each icon's export block in the file
+  let newContent = existingContent
+  for (const [name, newExport] of updatedIcons) {
+    const regex = new RegExp(
+      `export const ${name}: IconData = \\{[^}]+\\}`,
+      'g'
+    )
+    newContent = newContent.replace(regex, newExport)
+  }
+  
+  fs.writeFileSync(filePath, newContent, 'utf-8')
+  console.info(
+    `   Updated ${updatedIcons.size} icons in packages/eds-icons/src/data.ts`,
+  )
+}
+
+// ============================================================================
 // Main
 // ============================================================================
 
+function parseArgs() {
+  const args = argv.slice(2)
+  const forceRefresh = args.includes('--force')
+  
+  // Parse --only flag: --only icon1,icon2,icon3
+  const onlyIndex = args.indexOf('--only')
+  let onlyIcons = null
+  if (onlyIndex !== -1 && args[onlyIndex + 1]) {
+    onlyIcons = args[onlyIndex + 1].split(',').map((name) => name.trim().toLowerCase())
+  }
+  
+  // Find file ID (any arg that isn't a flag or flag value)
+  const fileId = args.find((arg, i) => 
+    !arg.startsWith('--') && 
+    args[i - 1] !== '--only'
+  ) || DEFAULT_FILE_ID
+  
+  return { forceRefresh, onlyIcons, fileId }
+}
+
 async function main() {
-  const fileId = argv[2] && argv[2] !== 'true' ? argv[2] : DEFAULT_FILE_ID
-  const forceRefresh = argv.includes('true') || argv.includes('--force')
+  const { forceRefresh, onlyIcons, fileId } = parseArgs()
 
   if (!FIGMA_TOKEN) {
     console.error(
@@ -327,16 +476,45 @@ async function main() {
     const figmaData = await getCachedOrFetch(fileId, forceRefresh)
 
     console.info('🔍 Parsing icons from Figma file...')
-    const iconGroups = parseIconsFromFigmaFile(figmaData)
+    let iconGroups = parseIconsFromFigmaFile(figmaData)
+    
+    // Filter to only specific icons if --only flag is provided
+    if (onlyIcons && onlyIcons.length > 0) {
+      console.info(`   Filtering to: ${onlyIcons.join(', ')}`)
+      iconGroups = iconGroups.map((group) => ({
+        ...group,
+        icons: group.icons.filter((icon) => 
+          onlyIcons.some((name) => 
+            // Match against original Figma name (with spaces) or converted name (snake_case)
+            icon.originalName.toLowerCase().includes(name) ||
+            icon.name.toLowerCase().includes(name)
+          )
+        ),
+      })).filter((group) => group.icons.length > 0)
+    }
+    
     const total = iconGroups.reduce((sum, g) => sum + g.icons.length, 0)
+    
+    if (total === 0) {
+      console.error('❌ No icons found matching the filter')
+      process.exit(1)
+    }
+    
     console.info(`   Found ${total} icons in ${iconGroups.length} groups`)
 
     const iconsWithSvg = await fetchAndOptimizeSvgs(iconGroups, fileId)
 
     console.info('💾 Writing output files...')
     writeSvgFiles(iconsWithSvg)
-    writeJsonData(iconsWithSvg)
-    writeTypeScriptData(iconsWithSvg)
+    
+    // For partial updates, merge with existing JSON/TS data
+    if (onlyIcons && onlyIcons.length > 0) {
+      mergeJsonData(iconsWithSvg)
+      mergeTypeScriptData(iconsWithSvg)
+    } else {
+      writeJsonData(iconsWithSvg)
+      writeTypeScriptData(iconsWithSvg)
+    }
 
     console.info('')
     console.info('✅ Done! Icons exported successfully.')
