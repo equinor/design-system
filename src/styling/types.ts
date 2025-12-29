@@ -20,7 +20,8 @@ export type Color =
     | RGBAColorValue
     | RGBColorValue
     | EDSColor
-    | EDSTextColor;
+    | EDSTextColor
+    | (string & {}); // Allows resolved theme colors (strings) while preserving autocomplete for named colors
 
 export type ColorScheme = "light" | "dark";
 export type Density = "tablet" | "phone";

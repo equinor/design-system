@@ -1,11 +1,11 @@
 import React from "react";
-import { useStyles } from "../../hooks/useStyles";
-import { Color, EDSStyleSheet } from "../../styling";
 import { View } from "react-native";
-import { Typography } from "../Typography";
-import { PressableHighlight } from "../PressableHighlight";
-import { Icon, IconName } from "../Icon";
+import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet } from "../../styling";
 import { Button } from "../Button";
+import { Icon, IconName } from "../Icon";
+import { PressableHighlight } from "../PressableHighlight";
+import { Typography } from "../Typography";
 
 export type ChipProps = {
     /**
@@ -97,13 +97,13 @@ type ChipTokenProps = Required<Pick<ChipProps, "variant" | "disabled">>;
 const themeStyles = EDSStyleSheet.create((theme, props: ChipTokenProps) => {
     const { variant, disabled } = props;
 
-    const variantToBackgroundColor: Record<typeof variant, Color> = {
+    const variantToBackgroundColor: Record<typeof variant, string> = {
         default: theme.colors.container.background,
         active: theme.colors.interactive.selectedHighlight,
         error: "rgba(0,0,0,0)",
     };
 
-    const variantToTextColor: Record<typeof variant, Color> = {
+    const variantToTextColor: Record<typeof variant, string> = {
         default: theme.colors.interactive.primary,
         active: theme.colors.interactive.primary,
         error: theme.colors.feedback.danger,

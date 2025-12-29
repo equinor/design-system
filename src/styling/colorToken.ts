@@ -2,15 +2,11 @@
 // Matches masterToken.colors structure while sourcing from EDS where possible
 
 import { colors } from "./colors";
-import { EDSSemanticJson } from "./edsTokenTypes";
+import {
+    darkSemantic as darkSemanticJson,
+    lightSemantic as lightSemanticJson,
+} from "./edsSemanticTokens.generated";
 import { ColorToken } from "./types";
-
-/* eslint-disable @typescript-eslint/no-require-imports */
-const lightSemanticJson =
-    require("@equinor/eds-tokens/build/json/color/color-scheme/nested/light-semantic.json") as EDSSemanticJson;
-const darkSemanticJson =
-    require("@equinor/eds-tokens/build/json/color/color-scheme/nested/dark-semantic.json") as EDSSemanticJson;
-/* eslint-enable @typescript-eslint/no-require-imports */
 
 // EDS Background tokens (camelCase accessors)
 const edsBg = {
@@ -75,6 +71,20 @@ const edsBg = {
         },
     },
     success: {
+        canvas: {
+            light: lightSemanticJson.Bg.Success.Canvas,
+            dark: darkSemanticJson.Bg.Success.Canvas,
+        },
+        surface: {
+            light: lightSemanticJson.Bg.Success.Surface,
+            dark: darkSemanticJson.Bg.Success.Surface,
+        },
+        fillMuted: {
+            default: {
+                light: lightSemanticJson.Bg.Success["Fill Muted"].Default,
+                dark: darkSemanticJson.Bg.Success["Fill Muted"].Default,
+            },
+        },
         fillEmphasis: {
             default: {
                 light: lightSemanticJson.Bg.Success["Fill Emphasis"].Default,
@@ -82,11 +92,69 @@ const edsBg = {
             },
         },
     },
+    info: {
+        canvas: {
+            light: lightSemanticJson.Bg.Info.Canvas,
+            dark: darkSemanticJson.Bg.Info.Canvas,
+        },
+        surface: {
+            light: lightSemanticJson.Bg.Info.Surface,
+            dark: darkSemanticJson.Bg.Info.Surface,
+        },
+        fillMuted: {
+            default: {
+                light: lightSemanticJson.Bg.Info["Fill Muted"].Default,
+                dark: darkSemanticJson.Bg.Info["Fill Muted"].Default,
+            },
+        },
+        fillEmphasis: {
+            default: {
+                light: lightSemanticJson.Bg.Info["Fill Emphasis"].Default,
+                dark: darkSemanticJson.Bg.Info["Fill Emphasis"].Default,
+            },
+        },
+    },
     danger: {
+        canvas: {
+            light: lightSemanticJson.Bg.Danger.Canvas,
+            dark: darkSemanticJson.Bg.Danger.Canvas,
+        },
+        surface: {
+            light: lightSemanticJson.Bg.Danger.Surface,
+            dark: darkSemanticJson.Bg.Danger.Surface,
+        },
+        fillMuted: {
+            default: {
+                light: lightSemanticJson.Bg.Danger["Fill Muted"].Default,
+                dark: darkSemanticJson.Bg.Danger["Fill Muted"].Default,
+            },
+        },
         fillEmphasis: {
             default: {
                 light: lightSemanticJson.Bg.Danger["Fill Emphasis"].Default,
                 dark: darkSemanticJson.Bg.Danger["Fill Emphasis"].Default,
+            },
+        },
+    },
+    accent: {
+        canvas: {
+            light: lightSemanticJson.Bg.Accent.Canvas,
+            dark: darkSemanticJson.Bg.Accent.Canvas,
+        },
+        surface: {
+            light: lightSemanticJson.Bg.Accent.Surface,
+            dark: darkSemanticJson.Bg.Accent.Surface,
+        },
+        fillMuted: {
+            default: {
+                light: lightSemanticJson.Bg.Accent["Fill Muted"].Default,
+                dark: darkSemanticJson.Bg.Accent["Fill Muted"].Default,
+            },
+        },
+        fillEmphasis: {
+            default: {
+                light: lightSemanticJson.Bg.Accent["Fill Emphasis"].Default,
+                dark: darkSemanticJson.Bg.Accent["Fill Emphasis"].Default,
             },
         },
     },
@@ -108,10 +176,74 @@ const edsBorder = {
             dark: darkSemanticJson.Border.Neutral.Strong,
         },
     },
+    accent: {
+        subtle: {
+            light: lightSemanticJson.Border.Accent.Subtle,
+            dark: darkSemanticJson.Border.Accent.Subtle,
+        },
+        medium: {
+            light: lightSemanticJson.Border.Accent.Medium,
+            dark: darkSemanticJson.Border.Accent.Medium,
+        },
+        strong: {
+            light: lightSemanticJson.Border.Accent.Strong,
+            dark: darkSemanticJson.Border.Accent.Strong,
+        },
+    },
+    success: {
+        subtle: {
+            light: lightSemanticJson.Border.Success.Subtle,
+            dark: darkSemanticJson.Border.Success.Subtle,
+        },
+        medium: {
+            light: lightSemanticJson.Border.Success.Medium,
+            dark: darkSemanticJson.Border.Success.Medium,
+        },
+        strong: {
+            light: lightSemanticJson.Border.Success.Strong,
+            dark: darkSemanticJson.Border.Success.Strong,
+        },
+    },
+    info: {
+        subtle: {
+            light: lightSemanticJson.Border.Info.Subtle,
+            dark: darkSemanticJson.Border.Info.Subtle,
+        },
+        medium: {
+            light: lightSemanticJson.Border.Info.Medium,
+            dark: darkSemanticJson.Border.Info.Medium,
+        },
+        strong: {
+            light: lightSemanticJson.Border.Info.Strong,
+            dark: darkSemanticJson.Border.Info.Strong,
+        },
+    },
     warning: {
         subtle: {
             light: lightSemanticJson.Border.Warning.Subtle,
             dark: darkSemanticJson.Border.Warning.Subtle,
+        },
+        medium: {
+            light: lightSemanticJson.Border.Warning.Medium,
+            dark: darkSemanticJson.Border.Warning.Medium,
+        },
+        strong: {
+            light: lightSemanticJson.Border.Warning.Strong,
+            dark: darkSemanticJson.Border.Warning.Strong,
+        },
+    },
+    danger: {
+        subtle: {
+            light: lightSemanticJson.Border.Danger.Subtle,
+            dark: darkSemanticJson.Border.Danger.Subtle,
+        },
+        medium: {
+            light: lightSemanticJson.Border.Danger.Medium,
+            dark: darkSemanticJson.Border.Danger.Medium,
+        },
+        strong: {
+            light: lightSemanticJson.Border.Danger.Strong,
+            dark: darkSemanticJson.Border.Danger.Strong,
         },
     },
 };
@@ -136,20 +268,94 @@ const edsText = {
             dark: darkSemanticJson.Text.Neutral["Strong on emphasis"],
         },
     },
-    danger: {
-        strong: {
-            light: lightSemanticJson.Text.Danger.Strong,
-            dark: darkSemanticJson.Text.Danger.Strong,
+    accent: {
+        subtle: {
+            light: lightSemanticJson.Text.Accent.Subtle,
+            dark: darkSemanticJson.Text.Accent.Subtle,
         },
+        strong: {
+            light: lightSemanticJson.Text.Accent.Strong,
+            dark: darkSemanticJson.Text.Accent.Strong,
+        },
+        subtleOnEmphasis: {
+            light: lightSemanticJson.Text.Accent["Subtle on emphasis"],
+            dark: darkSemanticJson.Text.Accent["Subtle on emphasis"],
+        },
+        strongOnEmphasis: {
+            light: lightSemanticJson.Text.Accent["Strong on emphasis"],
+            dark: darkSemanticJson.Text.Accent["Strong on emphasis"],
+        },
+    },
+    success: {
+        subtle: {
+            light: lightSemanticJson.Text.Success.Subtle,
+            dark: darkSemanticJson.Text.Success.Subtle,
+        },
+        strong: {
+            light: lightSemanticJson.Text.Success.Strong,
+            dark: darkSemanticJson.Text.Success.Strong,
+        },
+        subtleOnEmphasis: {
+            light: lightSemanticJson.Text.Success["Subtle on emphasis"],
+            dark: darkSemanticJson.Text.Success["Subtle on emphasis"],
+        },
+        strongOnEmphasis: {
+            light: lightSemanticJson.Text.Success["Strong on emphasis"],
+            dark: darkSemanticJson.Text.Success["Strong on emphasis"],
+        },
+    },
+    info: {
+        subtle: {
+            light: lightSemanticJson.Text.Info.Subtle,
+            dark: darkSemanticJson.Text.Info.Subtle,
+        },
+        strong: {
+            light: lightSemanticJson.Text.Info.Strong,
+            dark: darkSemanticJson.Text.Info.Strong,
+        },
+        subtleOnEmphasis: {
+            light: lightSemanticJson.Text.Info["Subtle on emphasis"],
+            dark: darkSemanticJson.Text.Info["Subtle on emphasis"],
+        },
+        strongOnEmphasis: {
+            light: lightSemanticJson.Text.Info["Strong on emphasis"],
+            dark: darkSemanticJson.Text.Info["Strong on emphasis"],
+        },
+    },
+    warning: {
+        subtle: {
+            light: lightSemanticJson.Text.Warning.Subtle,
+            dark: darkSemanticJson.Text.Warning.Subtle,
+        },
+        strong: {
+            light: lightSemanticJson.Text.Warning.Strong,
+            dark: darkSemanticJson.Text.Warning.Strong,
+        },
+        subtleOnEmphasis: {
+            light: lightSemanticJson.Text.Warning["Subtle on emphasis"],
+            dark: darkSemanticJson.Text.Warning["Subtle on emphasis"],
+        },
+        strongOnEmphasis: {
+            light: lightSemanticJson.Text.Warning["Strong on emphasis"],
+            dark: darkSemanticJson.Text.Warning["Strong on emphasis"],
+        },
+    },
+    danger: {
         subtle: {
             light: lightSemanticJson.Text.Danger.Subtle,
             dark: darkSemanticJson.Text.Danger.Subtle,
         },
-    },
-    warning: {
         strong: {
-            light: lightSemanticJson.Text.Warning.Strong,
-            dark: darkSemanticJson.Text.Warning.Strong,
+            light: lightSemanticJson.Text.Danger.Strong,
+            dark: darkSemanticJson.Text.Danger.Strong,
+        },
+        subtleOnEmphasis: {
+            light: lightSemanticJson.Text.Danger["Subtle on emphasis"],
+            dark: darkSemanticJson.Text.Danger["Subtle on emphasis"],
+        },
+        strongOnEmphasis: {
+            light: lightSemanticJson.Text.Danger["Strong on emphasis"],
+            dark: darkSemanticJson.Text.Danger["Strong on emphasis"],
         },
     },
 };
@@ -283,47 +489,25 @@ export const colorToken: ColorToken = {
         feedbackWarning: edsText.warning.strong, // EDS semantic warning text
     },
 
-    // Toast colors - custom from colors.ts
+    // Toast colors - using EDS semantic colors
+    // Background: Using Fill Muted for subtle background on toasts
+    // Text: Using Text.*.Subtle for readable text on muted backgrounds
     toast: {
         error: {
-            background: {
-                light: colors.toast_error_background_light,
-                dark: colors.toast_error_background_dark,
-            },
-            text: {
-                light: colors.toast_error_text_light,
-                dark: colors.toast_error_text_dark,
-            },
+            background: edsBg.danger.fillMuted.default, // EDS danger fill muted
+            text: edsText.danger.subtle, // EDS danger text subtle
         },
         success: {
-            background: {
-                light: colors.toast_success_background_light,
-                dark: colors.toast_success_background_dark,
-            },
-            text: {
-                light: colors.toast_success_text_light,
-                dark: colors.toast_success_text_dark,
-            },
+            background: edsBg.success.fillMuted.default, // EDS success fill muted
+            text: edsText.success.subtle, // EDS success text subtle
         },
         info: {
-            background: {
-                light: colors.toast_info_background_light,
-                dark: colors.toast_info_background_dark,
-            },
-            text: {
-                light: colors.toast_info_text_light,
-                dark: colors.toast_info_text_dark,
-            },
+            background: edsBg.info.fillMuted.default, // EDS info fill muted
+            text: edsText.info.subtle, // EDS info text subtle
         },
         warning: {
-            background: {
-                light: colors.toast_warning_background_light,
-                dark: colors.toast_warning_background_dark,
-            },
-            text: {
-                light: colors.toast_warning_text_light,
-                dark: colors.toast_warning_text_dark,
-            },
+            background: edsBg.warning.fillMuted.default, // EDS warning fill muted
+            text: edsText.warning.subtle, // EDS warning text subtle
         },
     },
 };

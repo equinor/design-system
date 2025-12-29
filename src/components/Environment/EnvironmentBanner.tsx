@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
+import { View } from "react-native";
+import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet } from "../../styling";
+import { Typography } from "../Typography";
 import {
     EnvironmentContext,
     EnvironmentContextProps,
 } from "./EnvironmentProvider";
-import { View } from "react-native";
-import { Typography } from "../Typography";
-import { EDSStyleSheet } from "../../styling";
-import { useStyles } from "../../hooks/useStyles";
 
 type EnvironmentStyleProps = Pick<
     EnvironmentContextProps,

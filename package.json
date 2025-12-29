@@ -1,56 +1,57 @@
 {
-  "name": "@equinor/eds-mobile-components",
-  "description": "A React Native component library implementing the Equinor Design System.",
-  "version": "0.1.0",
-  "author": {
-    "name": "Equinor Design System Mobile"
-  },
-  "bugs": "https://github.com/equinor/design-system-mobile/issues",
-  "dependencies": {
-    "@equinor/eds-tokens": "^2.1.1",
-    "@floating-ui/react-native": "^0.10.7",
-    "react-error-boundary": "^6.0.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.32.0",
-    "@types/react": "~19.0.10",
-    "@typescript-eslint/eslint-plugin": "^8.39.0",
-    "@typescript-eslint/parser": "^8.39.0",
-    "eslint": "^9.25.0",
-    "tsup": "^8.5.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.39.0"
-  },
-  "files": [
-    "CODE_OF_CONDUCT.md",
-    "LICENSE",
-    "CHANGELOG.md",
-    "dist"
-  ],
-  "homepage": "https://github.com/equinor/design-system-mobile/",
-  "keywords": [
-    "react native",
-    "typescript",
-    "ui"
-  ],
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "peerDependencies": {
-    "expo-font": "^13.3.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-native": "^0.79.6",
-    "react-native-gesture-handler": "^2.24.0",
-    "react-native-reanimated": "^3.17.5",
-    "react-native-svg": "^15.11.2"
-  },
-  "scripts": {
-    "build": "tsup-node && echo '\n ⚙️ Generating typescript declarations..' && tsc --project tsconfig.json --emitDeclarationOnly --declaration",
-    "clean": "rm -rf node_modules dist .turbo",
-    "dev": "tsup-node --watch --clean=false",
-    "lint": "eslint .",
-    "test": "jest"
-  },
-  "type": "module",
-  "types": "./dist/index.d.ts"
+    "name": "@equinor/eds-mobile-components",
+    "description": "A React Native component library implementing the Equinor Design System.",
+    "version": "0.1.0",
+    "author": {
+        "name": "Equinor Design System Mobile"
+    },
+    "bugs": "https://github.com/equinor/design-system-mobile/issues",
+    "dependencies": {
+        "@equinor/eds-tokens": "^2.1.1",
+        "@floating-ui/react-native": "^0.10.7",
+        "react-error-boundary": "^6.0.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.32.0",
+        "@types/react": "~19.0.10",
+        "@typescript-eslint/eslint-plugin": "^8.39.0",
+        "@typescript-eslint/parser": "^8.39.0",
+        "eslint": "^9.25.0",
+        "tsup": "^8.5.0",
+        "typescript": "~5.8.3",
+        "typescript-eslint": "^8.39.0"
+    },
+    "files": [
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "CHANGELOG.md",
+        "dist"
+    ],
+    "homepage": "https://github.com/equinor/design-system-mobile/",
+    "keywords": [
+        "react native",
+        "typescript",
+        "ui"
+    ],
+    "license": "MIT",
+    "main": "./dist/index.js",
+    "peerDependencies": {
+        "expo-font": "^13.3.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-native": "^0.79.6",
+        "react-native-gesture-handler": "^2.24.0",
+        "react-native-reanimated": "^3.17.5",
+        "react-native-svg": "^15.11.2"
+    },
+    "scripts": {
+        "generate-tokens": "node scripts/generate-eds-tokens.cjs",
+        "build": "pnpm generate-tokens && tsup-node && echo '\n ⚙️ Generating typescript declarations..' && tsc --project tsconfig.json --emitDeclarationOnly --declaration",
+        "clean": "rm -rf node_modules dist .turbo",
+        "dev": "pnpm generate-tokens && tsup-node --watch --clean=false",
+        "lint": "eslint .",
+        "test": "jest"
+    },
+    "type": "module",
+    "types": "./dist/index.d.ts"
 }
