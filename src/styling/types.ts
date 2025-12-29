@@ -68,90 +68,86 @@ export type ShadowStyle = Pick<
     | "shadowRadius"
     | "elevation"
 >;
+type ColorSchemeValue<T> = {
+    light: T;
+    dark: T;
+};
 
-export type MasterToken = {
-    colors: {
-        border: {
-            lighter: ColorSchemeValues<Color>;
-            light: ColorSchemeValues<Color>;
-            medium: ColorSchemeValues<Color>;
+export type ColorToken = {
+    border: {
+        lighter: ColorSchemeValue<string>;
+        light: ColorSchemeValue<string>;
+        medium: ColorSchemeValue<string>;
+    };
+    container: {
+        background: ColorSchemeValue<string>;
+        default: ColorSchemeValue<string>;
+        warning: ColorSchemeValue<string>;
+        elevation: {
+            none: ColorSchemeValue<string>;
+            aboveScrim: ColorSchemeValue<string>;
+            raised: ColorSchemeValue<string>;
+            overlay: ColorSchemeValue<string>;
+            sticky: ColorSchemeValue<string>;
+            temporaryNav: ColorSchemeValue<string>;
         };
-        container: {
-            background: ColorSchemeValues<Color>;
-            default: ColorSchemeValues<Color>;
-            warning: ColorSchemeValues<Color>;
-            elevation: {
-                none: ColorSchemeValues<Color>;
-                aboveScrim: ColorSchemeValues<Color>;
-                raised: ColorSchemeValues<Color>;
-                overlay: ColorSchemeValues<Color>;
-                sticky: ColorSchemeValues<Color>;
-                temporaryNav: ColorSchemeValues<Color>;
-            };
-            scrim: ColorSchemeValues<string>;
+        scrim: ColorSchemeValue<string>;
+    };
+    interactive: {
+        primary: ColorSchemeValue<string>;
+        secondary: ColorSchemeValue<string>;
+        success: ColorSchemeValue<string>;
+        warning: ColorSchemeValue<string>;
+        danger: ColorSchemeValue<string>;
+        disabled: ColorSchemeValue<string>;
+        pressedOverlay: ColorSchemeValue<string>;
+        selectedHighlight: ColorSchemeValue<string>;
+    };
+    feedback: {
+        success: ColorSchemeValue<string>;
+        warning: ColorSchemeValue<string>;
+        danger: ColorSchemeValue<string>;
+    };
+    environment: {
+        dev: ColorSchemeValue<string>;
+        test: ColorSchemeValue<string>;
+        qa: ColorSchemeValue<string>;
+        text: ColorSchemeValue<string>;
+    };
+    text: {
+        primary: ColorSchemeValue<string>;
+        secondary: ColorSchemeValue<string>;
+        tertiary: ColorSchemeValue<string>;
+        primaryInverted: ColorSchemeValue<string>;
+        disabled: ColorSchemeValue<string>;
+        danger: ColorSchemeValue<string>;
+        menu: {
+            resting: ColorSchemeValue<string>;
+            active: ColorSchemeValue<string>;
         };
-        interactive: {
-            primary: ColorSchemeValues<Color>;
-            secondary: ColorSchemeValues<Color>;
-            /**
-             * @deprecated 29.12.2023 - This will not be available 6 months after deprecation. Use `feedback.success` instead.
-             */
-            success: ColorSchemeValues<Color>;
-            /**
-             * @deprecated 29.12.2023 - This will not be available 6 months after deprecation. Use `feedback.warning` instead.
-             */
-            warning: ColorSchemeValues<Color>;
-            /**
-             * @deprecated 29.12.2023 - This will not be available 6 months after deprecation. Use `feedback.danger` instead.
-             */
-            danger: ColorSchemeValues<Color>;
-            disabled: ColorSchemeValues<Color>;
-            pressedOverlay: ColorSchemeValues<Color>;
-            selectedHighlight: ColorSchemeValues<Color>;
+        feedbackWarning: ColorSchemeValue<string>;
+    };
+    toast: {
+        error: {
+            background: ColorSchemeValue<string>;
+            text: ColorSchemeValue<string>;
         };
-        feedback: {
-            success: ColorSchemeValues<Color>;
-            warning: ColorSchemeValues<Color>;
-            danger: ColorSchemeValues<Color>;
+        info: {
+            background: ColorSchemeValue<string>;
+            text: ColorSchemeValue<string>;
         };
-        environment: {
-            dev: ColorSchemeValues<Color>;
-            test: ColorSchemeValues<Color>;
-            qa: ColorSchemeValues<Color>;
-            text: ColorSchemeValues<Color>;
+        warning: {
+            background: ColorSchemeValue<string>;
+            text: ColorSchemeValue<string>;
         };
-        toast: {
-            error: {
-                background: ColorSchemeValues<Color>;
-                text: ColorSchemeValues<Color>;
-            };
-            info: {
-                background: ColorSchemeValues<Color>;
-                text: ColorSchemeValues<Color>;
-            };
-            warning: {
-                background: ColorSchemeValues<Color>;
-                text: ColorSchemeValues<Color>;
-            };
-            success: {
-                background: ColorSchemeValues<Color>;
-                text: ColorSchemeValues<Color>;
-            };
-        };
-        text: {
-            primary: ColorSchemeValues<Color>;
-            secondary: ColorSchemeValues<Color>;
-            tertiary: ColorSchemeValues<Color>;
-            primaryInverted: ColorSchemeValues<Color>;
-            disabled: ColorSchemeValues<Color>;
-            danger: ColorSchemeValues<Color>;
-            menu: {
-                resting: ColorSchemeValues<Color>;
-                active: ColorSchemeValues<Color>;
-            };
-            feedbackWarning: ColorSchemeValues<Color>;
+        success: {
+            background: ColorSchemeValue<string>;
+            text: ColorSchemeValue<string>;
         };
     };
+};
+
+export type LayoutToken = {
     geometry: {
         border: {
             elementBorderRadius: number;
@@ -262,6 +258,10 @@ export type MasterToken = {
         };
     };
 };
+
+export type MasterToken = {
+    colors: ColorToken;
+} & LayoutToken;
 
 export type WithoutThemeOptionValues<TToken> = {
     [K in keyof TToken]: TToken[K] extends ColorSchemeValues<infer U>

@@ -1,5 +1,7 @@
 // These colors are from https://eds.equinor.com/0b0c666ab/p/78c75b-colour/b/708097
 export const colors = {
+    interactive_pressed_overlay_light: "#00000033", // rgba(0,0,0,0.2)
+    interactive_pressed_overlay_dark: "#FFFFFF33", // rgba(255,255,255,0.2)
     interactive_primary_light_resting: "#007079",
     interactive_primary_light_hover: "#004F55",
     interactive_primary_light_hover_alt: "#DEEDEE",
