@@ -54,7 +54,7 @@
  *   - TypeScript:    {repo}/packages/eds-icons/src/data.ts
  *
  * @module icons
- * @author Equinor Design System Team
+ * @author EDS Core Team
  */
 
 import { argv } from 'process'
