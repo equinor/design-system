@@ -175,6 +175,11 @@ export const FieldWrapper = forwardRef(
             ) {
               setIsOpen(true)
             }
+            if (event.key === 'Escape' && isOpen) {
+              event.stopPropagation()
+              event.preventDefault()
+              setIsOpen(false)
+            }
           }}
           {...props}
         >
@@ -184,6 +189,10 @@ export const FieldWrapper = forwardRef(
         <Popover
           open={isOpen ?? false}
           onClose={() => setIsOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key !== 'Escape') return
+            e.preventDefault()
+          }}
           anchorEl={anchorEl}
           placement={'bottom-start'}
         >
