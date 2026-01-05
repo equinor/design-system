@@ -88,6 +88,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           aria-invalid={invalid || undefined}
           className="eds-input"
           style={fieldStyle}
+          data-color-appearance="neutral"
           data-font-family="ui"
           data-font-size="lg"
           data-line-height="squished"
