@@ -6,11 +6,17 @@ import * as ComponentStories from './Input.stories'
 
 # Input
 
-Text input and textarea component for forms and user input.
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
 
-> **Note:** This is a [EDS 2.0 (beta) component](/docs/eds-2-0-beta-about--docs). See the introduction guide for information about installation, usage, and the EDS 2.0 token system.
+```bash
+npm install @equinor/eds-core-react@beta
+```
 
-Intended to be used if you need more flexibility than the wrapped TextField or select components provide.
+```tsx
+import { Input } from '@equinor/eds-core-react/next'
+```
+
+Text input and textarea component for forms and user input. Intended to be used if you need more flexibility than the wrapped TextField or select components provide.
 
 <Links
   ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#input"
@@ -49,11 +55,11 @@ This is the native type property and here is a small selection of examples of al
 
 <Canvas of={ComponentStories.ReadOnly} />
 
-### Accessibility
+### With Label
 
-It's important to link the `Input` to the corresponding label.
+When using Input with a visible label, use the `Field` component for proper spacing, or apply your own layout with CSS gap.
 
-<Canvas of={ComponentStories.Accessibility} />
+<Canvas of={ComponentStories.WithLabel} />
 
 ### Density
 

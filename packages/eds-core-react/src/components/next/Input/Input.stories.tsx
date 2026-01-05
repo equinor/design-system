@@ -4,6 +4,7 @@ import { anchor, done } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Label } from '../Label'
+import { Field } from '../Field'
 import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../../Icon'
 import { Button } from '../../Button'
@@ -50,60 +51,44 @@ Introduction.args = {
 
 export const Types: StoryFn<InputProps> = () => (
   <>
-    <div>
-      <Label htmlFor="input-next-text" label="Text" />
-      <Input id="input-next-text" autoComplete="off" />
-    </div>
-    <div>
-      <Label htmlFor="input-next-number" label="Number" />
-      <Input type="number" id="input-next-number" />
-    </div>
-    <div>
-      <Label htmlFor="input-next-password" label="Password" />
-      <Input type="password" id="input-next-password" />
-    </div>
+    <Input
+      aria-label="Text input"
+      placeholder="Text (default)"
+      autoComplete="off"
+    />
+    <Input aria-label="Number input" type="number" placeholder="Number" />
+    <Input aria-label="Password input" type="password" placeholder="Password" />
   </>
 )
 
 export const ValidationStates: StoryFn<InputProps> = () => (
   <>
-    <div>
-      <Label htmlFor="input-next-default" label="Default" />
-      <Input
-        id="input-next-default"
-        placeholder="Placeholder text"
-        autoComplete="off"
-      />
-    </div>
-    <div>
-      <Label htmlFor="input-next-invalid" label="Invalid" />
-      <Input
-        id="input-next-invalid"
-        placeholder="Placeholder text"
-        autoComplete="off"
-        invalid
-      />
-    </div>
+    <Input
+      aria-label="Default input"
+      placeholder="Default"
+      autoComplete="off"
+    />
+    <Input
+      aria-label="Invalid input"
+      placeholder="Invalid"
+      autoComplete="off"
+      invalid
+    />
   </>
 )
 
 export const Disabled: StoryFn<InputProps> = () => (
   <>
-    <div>
-      <Label htmlFor="input-next-disabled" label="Disabled with value" />
-      <Input id="input-next-disabled" defaultValue="Disabled value" disabled />
-    </div>
-    <div>
-      <Label
-        htmlFor="input-next-disabled-placeholder"
-        label="Disabled with placeholder"
-      />
-      <Input
-        id="input-next-disabled-placeholder"
-        placeholder="Placeholder text"
-        disabled
-      />
-    </div>
+    <Input
+      aria-label="Disabled with value"
+      defaultValue="Disabled value"
+      disabled
+    />
+    <Input
+      aria-label="Disabled with placeholder"
+      placeholder="Disabled placeholder"
+      disabled
+    />
   </>
 )
 Disabled.decorators = [
@@ -118,49 +103,58 @@ Disabled.decorators = [
 
 export const ReadOnly: StoryFn<InputProps> = () => (
   <>
-    <div>
-      <Label htmlFor="input-next-readonly" label="Read only with value" />
-      <Input id="input-next-readonly" defaultValue="Read only value" readOnly />
-    </div>
-    <div>
-      <Label
-        htmlFor="input-next-readonly-placeholder"
-        label="Read only with placeholder"
-      />
-      <Input
-        id="input-next-readonly-placeholder"
-        placeholder="Placeholder text"
-        readOnly
-      />
-    </div>
+    <Input
+      aria-label="Read only with value"
+      defaultValue="Read only value"
+      readOnly
+    />
+    <Input
+      aria-label="Read only with placeholder"
+      placeholder="Read only placeholder"
+      readOnly
+    />
   </>
 )
 ReadOnly.storyName = 'Read only'
 
-export const Accessibility: StoryFn<InputProps> = () => {
+export const WithLabel: StoryFn<InputProps> = () => {
   return (
     <>
-      <Label htmlFor="input-next-a11y" label="I use the htmlFor prop" />
-      <Input type="text" id="input-next-a11y" />
+      {/* Recommended: Use Field component */}
+      <Field>
+        <Label htmlFor="field-example" label="Using Field (recommended)" />
+        <Input id="field-example" placeholder="Field handles spacing" />
+      </Field>
+
+      {/* Alternative: Manual layout with CSS gap */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--eds-selectable-space-vertical)',
+        }}
+      >
+        <Label htmlFor="manual-example" label="Manual spacing with CSS gap" />
+        <Input id="manual-example" placeholder="Custom layout" />
+      </div>
     </>
   )
 }
+WithLabel.storyName = 'With Label'
 
 export const Compact: StoryFn<InputProps> = () => (
   <>
     <div data-density="spacious">
-      <Label htmlFor="input-next-spacious" label="Spacious (default)" />
       <Input
-        id="input-next-spacious"
-        placeholder="Spacious density"
+        aria-label="Spacious density"
+        placeholder="Spacious (default)"
         autoComplete="off"
       />
     </div>
     <div data-density="comfortable">
-      <Label htmlFor="input-next-comfortable" label="Comfortable (compact)" />
       <Input
-        id="input-next-comfortable"
-        placeholder="Comfortable density"
+        aria-label="Comfortable density"
+        placeholder="Comfortable (compact)"
         autoComplete="off"
       />
     </div>
@@ -234,11 +228,10 @@ WithIcons.decorators = [
 export const WithAdornments: StoryFn<InputProps> = () => {
   return (
     <>
-      <Label htmlFor="input-next-adornments-default" label="Default" />
       <Input
+        aria-label="Default with adornments"
         type="text"
-        id="input-next-adornments-default"
-        placeholder="Placeholder text Placeholder text"
+        placeholder="Default"
         leftAdornments={
           <Button
             variant="ghost_icon"
@@ -254,10 +247,9 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-next-adornments-invalid" label="Invalid" />
       <Input
+        aria-label="Invalid with adornments"
         type="text"
-        id="input-next-adornments-invalid"
         defaultValue="Invalid value"
         invalid
         leftAdornments={
@@ -276,13 +268,12 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-next-adornments-disabled" label="Disabled" />
       <Input
+        aria-label="Disabled with adornments"
         type="text"
-        id="input-next-adornments-disabled"
         disabled
-        placeholder="Placeholder text Placeholder text"
-        value="Some text Some textSome textSome text"
+        placeholder="Disabled"
+        value="Some text"
         leftAdornments={
           <Button
             disabled
@@ -299,10 +290,9 @@ export const WithAdornments: StoryFn<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="input-next-adornments-readonly" label="Readonly" />
       <Input
+        aria-label="Read only with adornments"
         type="text"
-        id="input-next-adornments-readonly"
         defaultValue="Read only value"
         readOnly
         leftAdornments={
@@ -354,101 +344,59 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
       {/* Light mode */}
       <div
         data-color-scheme="light"
-        style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+        style={{
+          padding: '24px',
+          background: 'var(--eds-color-bg-canvas)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+        }}
       >
-        <h3 style={{ marginTop: 0 }}>Light Mode</h3>
-        <div>
-          <Label htmlFor="input-light-default" label="Default" />
-          <Input
-            id="input-light-default"
-            placeholder="Placeholder text"
-            autoComplete="off"
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-light-filled" label="With value" />
-          <Input
-            id="input-light-filled"
-            defaultValue="Input value"
-            autoComplete="off"
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-light-invalid" label="Invalid" />
-          <Input
-            id="input-light-invalid"
-            defaultValue="Invalid value"
-            invalid
-            autoComplete="off"
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-light-readonly" label="Read only" />
-          <Input
-            id="input-light-readonly"
-            defaultValue="Read only value"
-            readOnly
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-light-disabled" label="Disabled" />
-          <Input
-            id="input-light-disabled"
-            placeholder="Placeholder text"
-            disabled
-          />
-        </div>
+        <h3 style={{ margin: 0 }}>Light Mode</h3>
+        <Input aria-label="Default" placeholder="Default" autoComplete="off" />
+        <Input
+          aria-label="With value"
+          defaultValue="With value"
+          autoComplete="off"
+        />
+        <Input
+          aria-label="Invalid"
+          defaultValue="Invalid"
+          invalid
+          autoComplete="off"
+        />
+        <Input aria-label="Read only" defaultValue="Read only" readOnly />
+        <Input aria-label="Disabled" placeholder="Disabled" disabled />
       </div>
 
       {/* Dark mode */}
       <div
         data-color-scheme="dark"
-        style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+        style={{
+          padding: '24px',
+          background: 'var(--eds-color-bg-canvas)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+        }}
       >
-        <h3 style={{ marginTop: 0, color: 'var(--eds-color-text-strong)' }}>
+        <h3 style={{ margin: 0, color: 'var(--eds-color-text-strong)' }}>
           Dark Mode
         </h3>
-        <div>
-          <Label htmlFor="input-dark-default" label="Default" />
-          <Input
-            id="input-dark-default"
-            placeholder="Placeholder text"
-            autoComplete="off"
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-dark-filled" label="With value" />
-          <Input
-            id="input-dark-filled"
-            defaultValue="Input value"
-            autoComplete="off"
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-dark-invalid" label="Invalid" />
-          <Input
-            id="input-dark-invalid"
-            defaultValue="Invalid value"
-            invalid
-            autoComplete="off"
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-dark-readonly" label="Read only" />
-          <Input
-            id="input-dark-readonly"
-            defaultValue="Read only value"
-            readOnly
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Label htmlFor="input-dark-disabled" label="Disabled" />
-          <Input
-            id="input-dark-disabled"
-            placeholder="Placeholder text"
-            disabled
-          />
-        </div>
+        <Input aria-label="Default" placeholder="Default" autoComplete="off" />
+        <Input
+          aria-label="With value"
+          defaultValue="With value"
+          autoComplete="off"
+        />
+        <Input
+          aria-label="Invalid"
+          defaultValue="Invalid"
+          invalid
+          autoComplete="off"
+        />
+        <Input aria-label="Read only" defaultValue="Read only" readOnly />
+        <Input aria-label="Disabled" placeholder="Disabled" disabled />
       </div>
     </div>
   )
