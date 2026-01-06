@@ -622,7 +622,7 @@ async function fetchAndOptimizeSvgs(iconGroups, fileId) {
         icon.svg = result.data
         icon.width = width || '24' // Default to 24 if not found
         icon.height = height || '24'
-        icon.viewbox = `0 0 ${height} ${width}`
+        icon.viewbox = `0 0 ${width} ${height}`
         icon.pathData = extractPathData(result.data)
       } catch (err) {
         // Log warning but continue processing other icons
