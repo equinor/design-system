@@ -10,6 +10,7 @@ exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
   >
     <input
       class="eds-input"
+      data-color-appearance="neutral"
       data-font-family="ui"
       data-font-size="lg"
       data-line-height="squished"
