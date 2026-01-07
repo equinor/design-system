@@ -19,7 +19,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       leftAdornmentsWidth,
       rightAdornmentsWidth,
       className,
-      style,
       as: Component = 'input',
       ...inputProps
     },
@@ -63,7 +62,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     return (
       <div
         className={containerClasses}
-        style={style}
         data-color-appearance={colorAppearance}
         data-selectable-space={selectableSpace}
         data-space-proportions={spaceProportions}

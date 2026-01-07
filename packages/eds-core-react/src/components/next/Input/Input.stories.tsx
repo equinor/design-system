@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { anchor, done } from '@equinor/eds-icons'
+import { anchor } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Label } from '../Label'
@@ -9,12 +8,6 @@ import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../../Icon'
 import { Button } from '../../Button'
 import page from './Input.docs.mdx'
-
-const icons = {
-  done,
-}
-
-Icon.add(icons)
 
 const meta: Meta<typeof Input> = {
   title: 'EDS 2.0 (beta)/Input',
@@ -26,6 +19,58 @@ const meta: Meta<typeof Input> = {
       source: {
         excludeDecorators: true,
       },
+    },
+  },
+  argTypes: {
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text',
+    },
+    invalid: {
+      control: 'boolean',
+      description: 'Invalid state - shows error styling',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disabled state',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    readOnly: {
+      control: 'boolean',
+      description: 'Read only state',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    type: {
+      control: 'select',
+      options: ['text', 'number', 'password', 'email', 'tel', 'url', 'date'],
+      description: 'Input type',
+      table: { defaultValue: { summary: 'text' } },
+    },
+    as: {
+      control: 'select',
+      options: ['input', 'textarea'],
+      description: 'Render as input or textarea',
+      table: { defaultValue: { summary: 'input' } },
+    },
+    leftAdornments: {
+      control: false,
+      description: 'Left adornments (icons, buttons, etc.)',
+    },
+    rightAdornments: {
+      control: false,
+      description: 'Right adornments (icons, buttons, etc.)',
+    },
+    leftAdornmentsWidth: {
+      control: 'number',
+      description: 'Manually specify left adornments width',
+    },
+    rightAdornmentsWidth: {
+      control: 'number',
+      description: 'Manually specify right adornments width',
+    },
+    className: {
+      table: { disable: true },
     },
   },
   decorators: [
@@ -47,6 +92,10 @@ export const Introduction: StoryFn<InputProps> = (args) => {
 
 Introduction.args = {
   placeholder: 'Placeholder text',
+  invalid: false,
+  disabled: false,
+  readOnly: false,
+  type: 'text',
 }
 
 export const Types: StoryFn<InputProps> = () => (
@@ -77,7 +126,7 @@ export const ValidationStates: StoryFn<InputProps> = () => (
   </>
 )
 
-export const Disabled: StoryFn<InputProps> = () => (
+export const States: StoryFn<InputProps> = () => (
   <>
     <Input
       aria-label="Disabled with value"
@@ -89,20 +138,6 @@ export const Disabled: StoryFn<InputProps> = () => (
       placeholder="Disabled placeholder"
       disabled
     />
-  </>
-)
-Disabled.decorators = [
-  (Story) => {
-    return (
-      <Stack direction="column" align="start">
-        <Story />
-      </Stack>
-    )
-  },
-]
-
-export const ReadOnly: StoryFn<InputProps> = () => (
-  <>
     <Input
       aria-label="Read only with value"
       defaultValue="Read only value"
@@ -115,7 +150,7 @@ export const ReadOnly: StoryFn<InputProps> = () => (
     />
   </>
 )
-ReadOnly.storyName = 'Read only'
+States.storyName = 'Disabled & Read only'
 
 export const WithLabel: StoryFn<InputProps> = () => {
   return (
@@ -161,69 +196,6 @@ export const Compact: StoryFn<InputProps> = () => (
   </>
 )
 Compact.storyName = 'Density'
-Compact.decorators = [
-  (Story) => {
-    return (
-      <Stack direction="column" align="start">
-        <Story />
-      </Stack>
-    )
-  },
-]
-
-export const WithIcons: StoryFn<InputProps> = () => {
-  const [icon, setIcon] = useState(true)
-  return (
-    <>
-      <div>
-        <Button
-          variant="outlined"
-          onClick={() => setIcon(!icon)}
-          style={{ marginBottom: '16px' }}
-        >
-          Toggle Icon
-        </Button>
-        <Input
-          id="input-next-icons-1"
-          type="date"
-          defaultValue="Input text"
-          leftAdornments={icon && <Icon name="done" title="Done" />}
-        />
-        <Input
-          id="input-next-icons-2"
-          type="date"
-          defaultValue="Input text"
-          rightAdornments={icon && <Icon name="done" title="Done" />}
-        />
-        <Input
-          id="input-next-icons-3"
-          type="date"
-          defaultValue="Input text"
-          rightAdornments={icon && <Icon name="done" title="Done" />}
-          leftAdornments={icon && <Icon name="done" title="Done" />}
-        />
-      </div>
-    </>
-  )
-}
-
-WithIcons.storyName = 'With icons'
-WithIcons.decorators = [
-  (Story) => {
-    return (
-      <Stack
-        align="baseline"
-        style={{
-          display: 'grid',
-          gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, auto)',
-        }}
-      >
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const WithAdornments: StoryFn<InputProps> = () => {
   return (
@@ -242,7 +214,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            <span data-color-appearance="neutral">unit</span>
+            <span>unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -255,7 +227,6 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         leftAdornments={
           <Button
             variant="ghost_icon"
-            color="danger"
             style={{ height: '24px', width: '24px' }}
           >
             IT
@@ -263,7 +234,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            <span data-color-appearance="neutral">unit</span>
+            <span>unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -285,7 +256,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            <span data-color-appearance="neutral">unit</span>
+            <span>unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -305,7 +276,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         }
         rightAdornments={
           <>
-            <span data-color-appearance="neutral">unit</span>
+            <span>unit</span>
             <Icon data={anchor} size={18} />
           </>
         }
@@ -320,10 +291,9 @@ export const Casted: StoryFn<InputProps> = (args) => {
 
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
-    <Input
-      style={{ '--eds-color-bg-canvas': '#fff' } as React.CSSProperties}
-      {...args}
-    />
+    <div style={{ '--eds-color-bg-canvas': '#fff' } as React.CSSProperties}>
+      <Input {...args} placeholder="Custom background" />
+    </div>
   )
 }
 OverrideBackground.decorators = [

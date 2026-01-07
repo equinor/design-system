@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties, ComponentPropsWithoutRef } from 'react'
+import { ReactNode, ComponentPropsWithoutRef } from 'react'
 
 type ElementComponent = 'input' | 'textarea'
 
@@ -29,6 +29,4 @@ export type InputProps = {
   as?: ElementComponent
   /** Additional CSS class names to apply to the container */
   className?: string
-  /** Inline styles to apply to the container */
-  style?: CSSProperties
 }
