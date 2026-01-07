@@ -59,16 +59,19 @@ const meta: Meta<typeof Input> = {
       control: false,
       description: 'Right adornments (icons, buttons, etc.)',
     },
-    leftAdornmentsWidth: {
-      control: 'number',
-      description: 'Manually specify left adornments width',
+    leftAdornmentsProps: {
+      control: false,
+      description:
+        'Props for left adornments container (className, data-*, etc.)',
     },
-    rightAdornmentsWidth: {
-      control: 'number',
-      description: 'Manually specify right adornments width',
+    rightAdornmentsProps: {
+      control: false,
+      description:
+        'Props for right adornments container (className, data-*, etc.)',
     },
     className: {
-      table: { disable: true },
+      control: 'text',
+      description: 'Additional CSS class names for the container',
     },
   },
   decorators: [

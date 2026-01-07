@@ -21,10 +21,6 @@ export type InputProps = {
   leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
   /** Props for right adornments container */
   rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
-  /** Manually specify left adornments width (auto-measured if not defined) */
-  leftAdornmentsWidth?: number
-  /** Manually specify right adornments width (auto-measured if not defined) */
-  rightAdornmentsWidth?: number
   /** Render as input or textarea */
   as?: ElementComponent
   /** Additional CSS class names */
