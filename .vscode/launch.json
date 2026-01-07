@@ -7,18 +7,10 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "export:tokens",
+      "name": "icons",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run-script", "export:tokens"],
-      "port": 33455
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "export:assets",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run-script", "export:assets"],
-      "port": 33455
+      "runtimeArgs": ["run-script", "icons"],
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
