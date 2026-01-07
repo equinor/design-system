@@ -9,8 +9,8 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
   >(function Input(
     {
       invalid = false,
-      disabled = false,
-      readOnly = false,
+      disabled,
+      readOnly,
       type = 'text',
       leftAdornments,
       rightAdornments,
@@ -49,7 +49,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       .filter(Boolean)
       .join(' ')
 
-    // Inline styles for dynamic adornment spacing
     const fieldStyle: CSSProperties = {
       paddingLeft: leftWidth
         ? `calc(var(--eds-selectable-space-horizontal) + ${leftWidth}px)`
@@ -78,7 +77,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
         )}
         <Component
           ref={ref as React.Ref<HTMLInputElement & HTMLTextAreaElement>}
-          type={Component === 'input' ? type : undefined}
+          type={type}
           disabled={disabled}
           readOnly={readOnly}
           aria-invalid={invalid || undefined}

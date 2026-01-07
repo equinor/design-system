@@ -3,30 +3,30 @@ import { ReactNode, ComponentPropsWithoutRef } from 'react'
 type ElementComponent = 'input' | 'textarea'
 
 export type InputProps = {
-  /** Placeholder */
+  /** Placeholder text */
   placeholder?: string
   /** Invalid state - shows error styling */
   invalid?: boolean
-  /** Disabled state */
+  /** Disables element */
   disabled?: boolean
-  /** Type */
+  /** Input type (e.g., "text", "number", "email", "password") */
   type?: string
-  /** Read Only */
+  /** Toggle read only state */
   readOnly?: boolean
-  /** Left adornments */
+  /** Left adornments (icons, buttons, etc.) */
   leftAdornments?: ReactNode
-  /** Right adornments */
+  /** Right adornments (icons, buttons, etc.) */
   rightAdornments?: ReactNode
-  /** Left adornments props */
+  /** Props for left adornments container */
   leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
-  /** Right adornments props */
+  /** Props for right adornments container */
   rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
-  /** Manually specify left adornments width. The width will be auto-measured if not defined */
+  /** Manually specify left adornments width (auto-measured if not defined) */
   leftAdornmentsWidth?: number
-  /** Manually specify right adornments width. The width will be auto-measured if not defined */
+  /** Manually specify right adornments width (auto-measured if not defined) */
   rightAdornmentsWidth?: number
-  /** Cast the input to another element */
+  /** Render as input or textarea */
   as?: ElementComponent
-  /** Additional CSS class names to apply to the container */
+  /** Additional CSS class names */
   className?: string
 }

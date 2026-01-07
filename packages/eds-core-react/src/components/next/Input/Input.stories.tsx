@@ -34,12 +34,10 @@ const meta: Meta<typeof Input> = {
     disabled: {
       control: 'boolean',
       description: 'Disabled state',
-      table: { defaultValue: { summary: 'false' } },
     },
     readOnly: {
       control: 'boolean',
       description: 'Read only state',
-      table: { defaultValue: { summary: 'false' } },
     },
     type: {
       control: 'select',
@@ -95,7 +93,6 @@ Introduction.args = {
   invalid: false,
   disabled: false,
   readOnly: false,
-  type: 'text',
 }
 
 export const Types: StoryFn<InputProps> = () => (
@@ -291,20 +288,19 @@ export const Casted: StoryFn<InputProps> = (args) => {
 
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
-    <div style={{ '--eds-color-bg-canvas': '#fff' } as React.CSSProperties}>
+    <div
+      style={
+        {
+          '--eds-color-neutral-1': '#fff',
+          padding: '24px',
+          background: '#f7f7f7',
+        } as React.CSSProperties
+      }
+    >
       <Input {...args} placeholder="Custom background" />
     </div>
   )
 }
-OverrideBackground.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ background: '#f7f7f7', padding: '32px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const ColorSchemes: StoryFn<InputProps> = () => {
   return (
