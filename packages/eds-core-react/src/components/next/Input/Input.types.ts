@@ -1,7 +1,5 @@
 import { ReactNode, ComponentPropsWithoutRef } from 'react'
 
-type ElementComponent = 'input' | 'textarea'
-
 export type InputProps = {
   /** Placeholder text */
   placeholder?: string
@@ -22,7 +20,7 @@ export type InputProps = {
   /** Props for right adornments container */
   rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
   /** Render as input or textarea */
-  as?: ElementComponent
+  as?: 'input' | 'textarea'
   /** Additional CSS class names */
   className?: string
 }
