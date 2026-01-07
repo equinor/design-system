@@ -333,7 +333,7 @@ function toSnakeCase(name) {
   return name
     .replace(/-/g, ' ') // Step 1: Hyphens to spaces
     .replace(/[|]|[.]|[–]|[—]|[+]|[,]/g, '') // Step 2: Remove forbidden chars
-    .replace(/^[0-9]*/, '') // Step 3: Remove leading numbers
+    .replace(/^[0-9]+/, '') // Step 3: Remove leading numbers
     .toLowerCase() // Step 4: Lowercase
     .trim() // Step 5: Trim whitespace
     .replace(/[\s+]|[:\s+]/g, '_') // Step 6: Spaces/colons to underscores
