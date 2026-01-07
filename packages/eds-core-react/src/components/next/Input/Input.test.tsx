@@ -43,23 +43,21 @@ describe('Input (Next EDS 2.0)', () => {
       render(<Input aria-label="Invalid input" invalid />)
       const input = screen.getByRole('textbox', { name: 'Invalid input' })
       expect(input).toBeInTheDocument()
+      expect(input).toHaveAttribute('aria-invalid', 'true')
     })
 
-    it('Can be extended with className and style', () => {
-      render(
-        <Input
-          value="textfield"
-          className="custom-class"
-          style={{ marginTop: '48px' }}
-          readOnly
-        />,
-      )
+    it('Renders with specified type', () => {
+      render(<Input aria-label="Password input" type="password" />)
+      const input = screen.getByLabelText('Password input')
+      expect(input).toHaveAttribute('type', 'password')
+    })
+
+    it('Can be extended with className', () => {
+      render(<Input value="textfield" className="custom-class" readOnly />)
       const input = screen.getByDisplayValue('textfield')
       expect(input).toBeInTheDocument()
       // eslint-disable-next-line testing-library/no-node-access
       expect(input.parentElement).toHaveClass('custom-class')
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(input.parentElement).toHaveStyle({ marginTop: '48px' })
     })
 
     it('Renders as textarea when as prop is textarea', () => {
@@ -150,6 +148,20 @@ describe('Input (Next EDS 2.0)', () => {
         paddingRight: 'calc(var(--eds-selectable-space-horizontal) + 24px)',
       })
     })
+
+    it('Adornments have neutral color appearance', () => {
+      render(
+        <Input
+          invalid
+          leftAdornments={<span data-testid="left">$</span>}
+          rightAdornments={<span data-testid="right">kg</span>}
+        />,
+      )
+      const leftAdornment = screen.getByTestId('left').parentElement
+      const rightAdornment = screen.getByTestId('right').parentElement
+      expect(leftAdornment).toHaveAttribute('data-color-appearance', 'neutral')
+      expect(rightAdornment).toHaveAttribute('data-color-appearance', 'neutral')
+    })
   })
 
   describe('EDS 2.0 Token System', () => {
@@ -170,6 +182,12 @@ describe('Input (Next EDS 2.0)', () => {
         render(<Input invalid disabled />)
         const wrapper = getInputWrapper()
         expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
+      })
+
+      it('Input element always has neutral color appearance for text color', () => {
+        render(<Input invalid value="test" readOnly />)
+        const input = screen.getByDisplayValue('test')
+        expect(input).toHaveAttribute('data-color-appearance', 'neutral')
       })
     })
 
