@@ -338,7 +338,7 @@ function toSnakeCase(name) {
     .trim() // Step 5: Trim whitespace
     .replace(/[\s+]|[:\s+]/g, '_') // Step 6: Spaces/colons to underscores
     .replace(/[/]/g, '__') // Step 7: Slashes to double underscores
-    .replace('___', '__') // Cleanup: Prevent triple underscores
+    .replace(/___/g, '__') // Cleanup: Prevent triple underscores
 }
 
 /**
@@ -350,13 +350,14 @@ function toSnakeCase(name) {
  * Examples:
  *   "UI Views"       -> "ui-views"
  *   "Communication + Feedback" -> "communication-feedback"
+ *   "UI/Settings/View" -> "ui-settings-view"
  *
  * @param {string} name - The original name (e.g., Figma frame name)
  * @returns {string} The converted kebab-case path name
  */
 function toPathName(name) {
   return toSnakeCase(name)
-    .replace('__', '-') // Double underscores to single hyphen
+    .replace(/__/g, '-') // Double underscores to single hyphen (global)
     .replace(/_/g, '-') // All underscores to hyphens
 }
 
