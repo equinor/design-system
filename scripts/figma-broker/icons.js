@@ -561,7 +561,7 @@ async function fetchAndOptimizeSvgs(iconGroups, fileId) {
       try {
         // Show progress counter (overwrites the same line)
         process.stdout.write(
-          `\r   Processing ${current}/${total}: ${icon.name.padEnd(30)}`,
+          `\r   Processing ${current}/${total}: ${icon.name.slice(0, 30).padEnd(30)}`,
         )
 
         // Store the URL for reference (included in JSON output)
