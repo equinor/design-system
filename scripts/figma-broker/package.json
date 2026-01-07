@@ -3,23 +3,17 @@
   "version": "1.0.0",
   "engines": {
     "pnpm": ">=10",
-    "node": ">=10.0.0"
+    "node": ">=18.0.0"
   },
-  "description": "",
-  "main": "index.js",
+  "description": "Extracts SVG icons from Figma for EDS",
   "type": "module",
   "scripts": {
-    "tokens": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js tokens",
-    "assets": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js assets"
+    "icons": "node --no-warnings icons.js"
   },
-  "author": "",
+  "author": "EDS Core Team",
   "license": "ISC",
   "dependencies": {
-    "del": "^8.0.1",
     "dotenv": "^17.2.3",
-    "node-fetch": "^3.3.2",
-    "prettier": "3.6.2",
-    "ramda": "^0.32.0",
     "svgo": "^4.0.0"
   },
   "nodemonConfig": {
