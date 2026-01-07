@@ -150,15 +150,17 @@ describe('Input (Next EDS 2.0)', () => {
     })
 
     it('Adornments have neutral color appearance', () => {
-      render(
+      const { container } = render(
         <Input
           invalid
-          leftAdornments={<span data-testid="left">$</span>}
-          rightAdornments={<span data-testid="right">kg</span>}
+          leftAdornments={<span>$</span>}
+          rightAdornments={<span>kg</span>}
         />,
       )
-      const leftAdornment = screen.getByTestId('left').parentElement
-      const rightAdornment = screen.getByTestId('right').parentElement
+      /* eslint-disable testing-library/no-container, testing-library/no-node-access */
+      const leftAdornment = container.querySelector('.eds-adornment--left')
+      const rightAdornment = container.querySelector('.eds-adornment--right')
+      /* eslint-enable testing-library/no-container, testing-library/no-node-access */
       expect(leftAdornment).toHaveAttribute('data-color-appearance', 'neutral')
       expect(rightAdornment).toHaveAttribute('data-color-appearance', 'neutral')
     })
