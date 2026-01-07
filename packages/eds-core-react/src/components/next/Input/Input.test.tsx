@@ -104,51 +104,6 @@ describe('Input (Next EDS 2.0)', () => {
       expect(screen.getByText('kg')).toBeInTheDocument()
     })
 
-    it('Applies leftAdornmentsWidth for manual padding override', () => {
-      render(
-        <Input
-          leftAdornments={<span>Icon</span>}
-          leftAdornmentsWidth={32}
-          placeholder="test"
-        />,
-      )
-      const input = screen.getByPlaceholderText('test')
-      expect(input).toHaveStyle({
-        paddingLeft: 'calc(var(--eds-selectable-space-horizontal) + 32px)',
-      })
-    })
-
-    it('Applies rightAdornmentsWidth for manual padding override', () => {
-      render(
-        <Input
-          rightAdornments={<span>Icon</span>}
-          rightAdornmentsWidth={48}
-          placeholder="test"
-        />,
-      )
-      const input = screen.getByPlaceholderText('test')
-      expect(input).toHaveStyle({
-        paddingRight: 'calc(var(--eds-selectable-space-horizontal) + 48px)',
-      })
-    })
-
-    it('Uses manual widths when both adornments are present', () => {
-      render(
-        <Input
-          leftAdornments={<span>Left</span>}
-          rightAdornments={<span>Right</span>}
-          leftAdornmentsWidth={24}
-          rightAdornmentsWidth={24}
-          placeholder="test"
-        />,
-      )
-      const input = screen.getByPlaceholderText('test')
-      expect(input).toHaveStyle({
-        paddingLeft: 'calc(var(--eds-selectable-space-horizontal) + 24px)',
-        paddingRight: 'calc(var(--eds-selectable-space-horizontal) + 24px)',
-      })
-    })
-
     it('Adornments have neutral color appearance', () => {
       const { container } = render(
         <Input

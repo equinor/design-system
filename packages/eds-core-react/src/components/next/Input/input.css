@@ -84,7 +84,8 @@
 
   /* Input/Textarea element */
   .eds-input {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     border: none;
     background: transparent;
     outline: none;
@@ -107,25 +108,22 @@
 
   /* Adornments (icons, text, buttons on left/right) */
   .eds-adornment {
-    position: absolute;
-    top: var(--eds-selectable-space-vertical);
-    bottom: var(--eds-selectable-space-vertical);
     display: flex;
     align-items: center;
+    gap: var(--eds-selectable-space-horizontal);
     color: var(--eds-color-text-subtle);
     font-family: var(--eds-typography-font-family);
     font-size: var(--eds-typography-font-size);
     font-weight: var(--eds-typography-font-weight);
     line-height: var(--eds-typography-line-height);
+    flex-shrink: 0;
   }
 
   .eds-adornment--left {
-    left: 0;
     padding-left: var(--eds-selectable-space-horizontal);
   }
 
   .eds-adornment--right {
-    right: 0;
     padding-right: var(--eds-selectable-space-horizontal);
   }
 }
