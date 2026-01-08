@@ -3,3 +3,10 @@
 // Export all EDS 2.0 components here as they are added
 export { Placeholder } from './Placeholder'
 export type { PlaceholderProps } from './Placeholder'
+
+export { Accordion, AccordionHeader, AccordionContent } from './Accordion'
+export type {
+  AccordionProps,
+  AccordionHeaderProps,
+  AccordionContentProps,
+} from './Accordion'

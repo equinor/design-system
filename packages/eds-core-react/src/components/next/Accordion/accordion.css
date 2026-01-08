@@ -1,0 +1,155 @@
+/* Accordion Component - Native <details> element styling */
+/* Based on Figma design: .⌘ Accordion internal component */
+
+/* ==========================================================================
+   Accordion (details element)
+   ========================================================================== */
+
+.accordion {
+  position: relative;
+  display: block;
+  background-color: var(--eds-color-bg-surface, #fff);
+  width: 100%;
+}
+
+/* Top border */
+.accordion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--eds-color-border-subtle, #d4d4d4);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Bottom border */
+.accordion::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--eds-color-border-subtle, #d4d4d4);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Accordion Header (summary element)
+   Maps to .⌘ Accordion internal Figma component
+   ========================================================================== */
+
+.accordion__header {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--eds-container-space-horizontal, 16px);
+  background-color: var(--eds-color-bg-surface, #fff);
+  border: none;
+  cursor: pointer;
+  list-style: none; /* Remove default marker */
+  transition: background-color 150ms ease-in-out;
+}
+
+/* Remove default marker in webkit browsers */
+.accordion__header::-webkit-details-marker {
+  display: none;
+}
+
+/* Hover state */
+.accordion__header:hover {
+  background-color: var(--eds-color-bg-fill-muted-hover, #d4d4d4);
+}
+
+/* Focus state */
+.accordion__header:focus {
+  outline: none;
+}
+
+/* Focus frame - hidden by default, shown on focus-visible */
+.accordion__focus-frame {
+  display: none;
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--eds-color-border-focus, #6fb6e9);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.accordion__header:focus-visible .accordion__focus-frame {
+  display: block;
+}
+
+/* Header title */
+.accordion__header-title {
+  flex: 1 1 0;
+  min-width: 1px;
+  font-family: var(--eds-typography-font-family, 'Inter', sans-serif);
+  font-size: var(--eds-typography-font-size, 16px);
+  font-weight: var(--eds-typography-font-weight, 500);
+  line-height: var(--eds-typography-line-height, 24px);
+  letter-spacing: var(--eds-typography-tracking, 0);
+  color: var(--eds-color-text-strong, #1d1d1d);
+  text-align: left;
+}
+
+/* Icon */
+.accordion__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--eds-color-icon-accent, #206f77);
+  transition: transform 150ms ease-in-out;
+}
+
+/* Icon rotation when open */
+.accordion[open] .accordion__icon {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Accordion Content - with open/close animation
+   ========================================================================== */
+
+/* Wrapper for CSS grid animation */
+.accordion__content-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 150ms ease-in-out;
+}
+
+.accordion[open] .accordion__content-wrapper {
+  grid-template-rows: 1fr;
+}
+
+/* Inner content - needs overflow hidden for animation */
+.accordion__content {
+  overflow: hidden;
+  padding: 0 var(--eds-container-space-horizontal, 16px);
+  font-family: var(--eds-typography-font-family, 'Inter', sans-serif);
+  font-size: var(--eds-typography-font-size, 16px);
+  font-weight: 400;
+  line-height: var(--eds-typography-line-height, 24px);
+  letter-spacing: var(--eds-typography-tracking, 0);
+  color: var(--eds-color-text-strong, #1d1d1d);
+}
+
+.accordion[open] .accordion__content {
+  padding: var(--eds-container-space-vertical, 16px)
+    var(--eds-container-space-horizontal, 16px);
+}
+
+/* ==========================================================================
+   Multiple accordions - hide duplicate borders
+   ========================================================================== */
+
+.accordion + .accordion::before {
+  display: none;
+}
