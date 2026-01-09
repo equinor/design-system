@@ -19,6 +19,11 @@ export type AccordionProps = {
    */
   onToggle?: (open: boolean) => void
   /**
+   * Disables the accordion - prevents interaction and applies muted styling.
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * Accordion content - should include Accordion.Header and Accordion.Content
    */
   children?: ReactNode
@@ -42,31 +47,57 @@ type AccordionComponent = typeof AccordionBase & {
  */
 const AccordionBase = forwardRef<HTMLDetailsElement, AccordionProps>(
   function Accordion(
-    { open, defaultOpen = false, onToggle, className, children, ...rest },
+    {
+      open,
+      defaultOpen = false,
+      onToggle,
+      disabled = false,
+      className,
+      children,
+      ...rest
+    },
     ref,
   ) {
     const detailsRef = useRef<HTMLDetailsElement>(null)
+    const wasOpenRef = useRef(defaultOpen)
     const isControlled = open !== undefined
 
     // Sync controlled state with DOM
     useEffect(() => {
       if (isControlled && detailsRef.current) {
         detailsRef.current.open = open
+        wasOpenRef.current = open
       }
     }, [open, isControlled])
 
     const handleToggle = (event: React.SyntheticEvent<HTMLDetailsElement>) => {
       const newOpen = event.currentTarget.open
 
+      // Prevent toggle when disabled - revert to previous state
+      if (disabled && detailsRef.current) {
+        detailsRef.current.open = wasOpenRef.current
+        return
+      }
+
+      // Update the tracked state
+      wasOpenRef.current = newOpen
+
       if (isControlled && detailsRef.current) {
         // Prevent native toggle in controlled mode
         detailsRef.current.open = open
+        wasOpenRef.current = !!open
       }
 
       onToggle?.(newOpen)
     }
 
-    const classNames = ['accordion', className].filter(Boolean).join(' ')
+    const classNames = [
+      'accordion',
+      disabled && 'accordion--disabled',
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ')
 
     return (
       <details
@@ -84,6 +115,8 @@ const AccordionBase = forwardRef<HTMLDetailsElement, AccordionProps>(
         className={classNames}
         open={isControlled ? open : defaultOpen || undefined}
         onToggle={handleToggle}
+        data-disabled={disabled || undefined}
+        aria-disabled={disabled || undefined}
         {...rest}
       >
         {children}

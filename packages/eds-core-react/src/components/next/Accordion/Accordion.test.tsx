@@ -116,4 +116,82 @@ describe('Accordion', () => {
     const details = screen.getByRole('group')
     expect(details).toHaveClass('accordion', 'custom-class')
   })
+
+  describe('disabled state', () => {
+    it('applies disabled class when disabled', () => {
+      render(
+        <Accordion disabled>
+          <Accordion.Header>Header</Accordion.Header>
+          <Accordion.Content>Content</Accordion.Content>
+        </Accordion>,
+      )
+      const details = screen.getByRole('group')
+      expect(details).toHaveClass('accordion--disabled')
+    })
+
+    it('has aria-disabled attribute when disabled', () => {
+      render(
+        <Accordion disabled>
+          <Accordion.Header>Header</Accordion.Header>
+          <Accordion.Content>Content</Accordion.Content>
+        </Accordion>,
+      )
+      const details = screen.getByRole('group')
+      expect(details).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('has data-disabled attribute when disabled', () => {
+      render(
+        <Accordion disabled>
+          <Accordion.Header>Header</Accordion.Header>
+          <Accordion.Content>Content</Accordion.Content>
+        </Accordion>,
+      )
+      const details = screen.getByRole('group')
+      expect(details).toHaveAttribute('data-disabled', 'true')
+    })
+
+    it('does not toggle when disabled and clicked', async () => {
+      const onToggle = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Accordion disabled onToggle={onToggle}>
+          <Accordion.Header>Header</Accordion.Header>
+          <Accordion.Content>Content</Accordion.Content>
+        </Accordion>,
+      )
+      const summary = screen.getByText('Header')
+      await user.click(summary)
+      expect(onToggle).not.toHaveBeenCalled()
+      const details = screen.getByRole('group')
+      expect(details).not.toHaveAttribute('open')
+    })
+
+    it('stays open when disabled and already open', async () => {
+      const user = userEvent.setup()
+      render(
+        <Accordion disabled defaultOpen>
+          <Accordion.Header>Header</Accordion.Header>
+          <Accordion.Content>Content</Accordion.Content>
+        </Accordion>,
+      )
+      const summary = screen.getByText('Header')
+      await user.click(summary)
+      const details = screen.getByRole('group')
+      expect(details).toHaveAttribute('open')
+    })
+
+    it('does not have disabled attributes when not disabled', () => {
+      render(
+        <Accordion>
+          <Accordion.Header>Header</Accordion.Header>
+          <Accordion.Content>Content</Accordion.Content>
+        </Accordion>,
+      )
+      const details = screen.getByRole('group')
+      expect(details).not.toHaveAttribute('aria-disabled')
+      expect(details).not.toHaveAttribute('data-disabled')
+      expect(details).not.toHaveClass('accordion--disabled')
+    })
+  })
 })

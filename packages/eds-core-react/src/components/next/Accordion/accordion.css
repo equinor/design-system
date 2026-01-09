@@ -153,3 +153,32 @@
 .accordion + .accordion::before {
   display: none;
 }
+
+/* ==========================================================================
+   Disabled state
+   Based on Figma: State=Disabled variant
+   ========================================================================== */
+
+.accordion--disabled {
+  pointer-events: none;
+}
+
+.accordion--disabled .accordion__header {
+  cursor: not-allowed;
+  pointer-events: auto; /* Allow cursor to show */
+}
+
+/* Disabled - no hover effect */
+.accordion--disabled .accordion__header:hover {
+  background-color: var(--eds-color-bg-surface, #fff);
+}
+
+/* Disabled text color - muted/subtle */
+.accordion--disabled .accordion__header-title {
+  color: var(--eds-color-text-subtle, #585858);
+}
+
+/* Disabled icon color - muted instead of accent */
+.accordion--disabled .accordion__icon {
+  color: var(--eds-color-text-subtle, #585858);
+}

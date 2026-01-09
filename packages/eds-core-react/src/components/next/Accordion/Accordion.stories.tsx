@@ -34,6 +34,10 @@ The Accordion component uses the native \`<details>\` element for built-in acces
       control: 'boolean',
       description: 'Initial open state (uncontrolled)',
     },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the accordion',
+    },
   },
 }
 
@@ -209,3 +213,69 @@ export const WithRichContent: StoryFn<AccordionProps> = () => {
   )
 }
 WithRichContent.storyName = 'With Rich Content'
+
+export const Disabled: StoryFn<AccordionProps> = () => {
+  return (
+    <>
+      <Accordion disabled>
+        <Accordion.Header>Disabled Accordion (Closed)</Accordion.Header>
+        <Accordion.Content>
+          <p>
+            This content is not accessible because the accordion is disabled.
+          </p>
+        </Accordion.Content>
+      </Accordion>
+      <Accordion disabled defaultOpen>
+        <Accordion.Header>Disabled Accordion (Open)</Accordion.Header>
+        <Accordion.Content>
+          <p>
+            This accordion was open when disabled. It cannot be closed by the
+            user.
+          </p>
+        </Accordion.Content>
+      </Accordion>
+      <Accordion>
+        <Accordion.Header>Enabled Accordion</Accordion.Header>
+        <Accordion.Content>
+          <p>This accordion is enabled and can be toggled normally.</p>
+        </Accordion.Content>
+      </Accordion>
+    </>
+  )
+}
+Disabled.storyName = 'Disabled State'
+
+export const AllStates: StoryFn<AccordionProps> = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0' }}>Default (Collapsed)</h4>
+        <Accordion>
+          <Accordion.Header>Accordion Header</Accordion.Header>
+          <Accordion.Content>
+            <p>Accordion content goes here.</p>
+          </Accordion.Content>
+        </Accordion>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0' }}>Expanded</h4>
+        <Accordion defaultOpen>
+          <Accordion.Header>Accordion Header</Accordion.Header>
+          <Accordion.Content>
+            <p>Accordion content goes here.</p>
+          </Accordion.Content>
+        </Accordion>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0' }}>Disabled</h4>
+        <Accordion disabled>
+          <Accordion.Header>Accordion Header</Accordion.Header>
+          <Accordion.Content>
+            <p>Accordion content goes here.</p>
+          </Accordion.Content>
+        </Accordion>
+      </div>
+    </div>
+  )
+}
+AllStates.storyName = 'All States'
