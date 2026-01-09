@@ -18,6 +18,10 @@ const meta: Meta<typeof TextField> = {
     label: {
       control: 'text',
     },
+    labelInfo: {
+      control: 'text',
+      description: 'Info tooltip content shown next to the label',
+    },
     optional: {
       control: 'boolean',
       description: 'Shows "(Optional)" indicator in the label',
@@ -199,3 +203,29 @@ export const FullExample: StoryFn<TextFieldProps> = () => (
   />
 )
 FullExample.storyName = 'Full Example'
+
+export const WithLabelInfo: StoryFn<TextFieldProps> = () => (
+  <>
+    <TextField
+      label="Email"
+      placeholder="user@example.com"
+      labelInfo="We'll use this email for account recovery and important notifications."
+    />
+    <TextField
+      label="API Key"
+      required
+      placeholder="Enter your API key"
+      labelInfo="You can find your API key in the developer settings of your account."
+    />
+    <TextField label="Username" optional placeholder="Without info tooltip" />
+  </>
+)
+WithLabelInfo.storyName = 'With Label Info Tooltip'
+WithLabelInfo.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `labelInfo` to provide additional context via a tooltip. Hover or focus the info icon to see the tooltip content.',
+    },
+  },
+}

@@ -5,16 +5,19 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
   <div
     class="eds-field"
   >
-    <label
+    <div
       class="eds-label"
-      data-baseline="center"
-      data-font-family="ui"
-      data-font-size="lg"
-      data-line-height="squished"
-      for="test-id"
     >
-      Label
-    </label>
+      <label
+        data-baseline="center"
+        data-font-family="ui"
+        data-font-size="lg"
+        data-line-height="squished"
+        for="test-id"
+      >
+        Label
+      </label>
+    </div>
     <p
       class="eds-field__description"
       data-baseline="grid"

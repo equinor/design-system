@@ -9,6 +9,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
     {
       label,
+      labelInfo,
       optional = false,
       required = false,
       requiredSilent = false,
@@ -42,6 +43,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           <Label
             htmlFor={id}
             label={label}
+            info={labelInfo}
             optional={optional}
             required={required}
           />

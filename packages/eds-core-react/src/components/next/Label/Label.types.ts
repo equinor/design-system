@@ -7,4 +7,6 @@ export type LabelProps = {
   optional?: boolean
   /** Mark field as required - shows "(Required)" */
   required?: boolean
+  /** Info tooltip content - shows (i) icon that displays tooltip on hover/focus */
+  info?: ReactNode
 } & LabelHTMLAttributes<HTMLLabelElement>
