@@ -1,5 +1,9 @@
 @layer eds-components {
   .eds-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     color: var(--eds-color-text-strong);
   }
 
@@ -7,6 +11,32 @@
     margin-inline-start: var(--eds-selectable-space-horizontal);
     font-size: var(--eds-typography-font-size);
     color: var(--eds-color-text-subtle);
-    vertical-align: middle;
+  }
+
+  .eds-label__info {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--eds-color-icon-subtle);
+    cursor: pointer;
+  }
+
+  .eds-label__info:hover,
+  .eds-label__info:focus-visible {
+    color: var(--eds-color-icon-info);
+  }
+
+  .eds-label__info:hover svg,
+  .eds-label__info:focus-visible svg {
+    background: var(--eds-color-bg-fill-muted-hover);
+    border-radius: var(--eds-spacing-border-radius-pill);
+  }
+
+  .eds-label__info:focus-visible {
+    outline: 2px solid var(--eds-color-focus);
+    outline-offset: 2px;
+    border-radius: var(--eds-spacing-border-radius-pill);
   }
 }

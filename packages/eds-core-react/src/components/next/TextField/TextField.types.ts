@@ -4,6 +4,8 @@ import type { InputProps } from '../Input/Input.types'
 export type TextFieldProps = {
   /** Label for the field */
   label?: ReactNode
+  /** Info tooltip content shown next to the label */
+  labelInfo?: ReactNode
   /** Mark field as optional - shows "(Optional)" */
   optional?: boolean
   /** Mark field as required - shows "(Required)" and sets required on input */
