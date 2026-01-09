@@ -3,7 +3,7 @@ import { Field } from './Field'
 import type { FieldProps } from './Field.types'
 import { Input } from '../Input'
 import { Label } from '../Label'
-import { ValidationMessage } from '../ValidationMessage'
+import { HelperMessage } from '../HelperMessage'
 import { Stack } from './../../../../.storybook/components'
 
 const meta: Meta<typeof Field> = {
@@ -22,11 +22,11 @@ npm install @equinor/eds-core-react@beta
 \`\`\`
 
 \`\`\`tsx
-import { Field, Input, Label, ValidationMessage } from '@equinor/eds-core-react/next'
+import { Field, Input, Label, HelperMessage } from '@equinor/eds-core-react/next'
 \`\`\`
 
 Field is a compound component that provides consistent layout and spacing for form fields.
-Use it together with Label, Field.Description, Input, and ValidationMessage.
+Use it together with Label, Field.Description, Input, and HelperMessage.
 
 For a simpler props-based API, use the TextField component.
         `,
@@ -51,7 +51,7 @@ export const Introduction: StoryFn<FieldProps> = () => (
     <Label htmlFor="field-intro" label="Label" />
     <Field.Description>Help with more details</Field.Description>
     <Input id="field-intro" placeholder="Placeholder" />
-    <ValidationMessage>Helper Message</ValidationMessage>
+    <HelperMessage>Helper Message</HelperMessage>
   </Field>
 )
 
@@ -60,7 +60,7 @@ export const WithOptionalLabel: StoryFn<FieldProps> = () => (
     <Label htmlFor="field-optional" label="Label" optional />
     <Field.Description>Help with more details</Field.Description>
     <Input id="field-optional" placeholder="Placeholder" />
-    <ValidationMessage>Helper Message</ValidationMessage>
+    <HelperMessage>Helper Message</HelperMessage>
   </Field>
 )
 WithOptionalLabel.storyName = 'With Optional Label'
@@ -70,7 +70,7 @@ export const WithRequiredLabel: StoryFn<FieldProps> = () => (
     <Label htmlFor="field-required" label="Label" required />
     <Field.Description>Help with more details</Field.Description>
     <Input id="field-required" placeholder="Placeholder" required />
-    <ValidationMessage>Helper Message</ValidationMessage>
+    <HelperMessage>Helper Message</HelperMessage>
   </Field>
 )
 WithRequiredLabel.storyName = 'With Required Label'
@@ -90,7 +90,7 @@ export const RequiredWithoutIndicator: StoryFn<FieldProps> = () => (
       This field is required but without visual indicator
     </Field.Description>
     <Input id="field-required-silent" placeholder="Placeholder" required />
-    <ValidationMessage>Helper Message</ValidationMessage>
+    <HelperMessage>Helper Message</HelperMessage>
   </Field>
 )
 RequiredWithoutIndicator.storyName = 'Required Without Indicator'
@@ -107,7 +107,7 @@ export const WithError: StoryFn<FieldProps> = () => (
   <Field>
     <Label htmlFor="field-error" label="Label" />
     <Input id="field-error" defaultValue="Invalid value" invalid />
-    <ValidationMessage>This field has an error</ValidationMessage>
+    <HelperMessage>This field has an error</HelperMessage>
   </Field>
 )
 WithError.storyName = 'With Error'
@@ -117,7 +117,7 @@ export const Disabled: StoryFn<FieldProps> = () => (
     <Label htmlFor="field-disabled" label="Label" />
     <Field.Description>Help with more details</Field.Description>
     <Input id="field-disabled" placeholder="Placeholder" disabled />
-    <ValidationMessage disabled>Helper Message</ValidationMessage>
+    <HelperMessage disabled>Helper Message</HelperMessage>
   </Field>
 )
 Disabled.storyName = 'Disabled'
@@ -130,11 +130,11 @@ export const WithAdornments: StoryFn<FieldProps> = () => (
       id="field-adornments"
       type="number"
       placeholder="0.00"
-      leftAdornments={<span data-color-appearance="neutral">$</span>}
-      rightAdornments={<span data-color-appearance="neutral">USD</span>}
+      leftText="$"
+      rightText="USD"
       required
     />
-    <ValidationMessage>Amount must be between $1 and $10,000</ValidationMessage>
+    <HelperMessage>Amount must be between $1 and $10,000</HelperMessage>
   </Field>
 )
 WithAdornments.storyName = 'With Adornments'

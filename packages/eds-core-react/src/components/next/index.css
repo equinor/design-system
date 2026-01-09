@@ -3,5 +3,5 @@
 
 @import './Field/field.css';
 @import './Label/label.css';
-@import './ValidationMessage/validation-message.css';
+@import './HelperMessage/helper-message.css';
 @import './Input/input.css';

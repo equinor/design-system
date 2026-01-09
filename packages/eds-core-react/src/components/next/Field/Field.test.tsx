@@ -3,7 +3,7 @@ import { axe } from 'jest-axe'
 import { Field } from './Field'
 import { Input } from '../Input'
 import { Label } from '../Label'
-import { ValidationMessage } from '../ValidationMessage'
+import { HelperMessage } from '../HelperMessage'
 
 describe('Field', () => {
   describe('Accessibility', () => {
@@ -17,19 +17,17 @@ describe('Field', () => {
       expect(await axe(container)).toHaveNoViolations()
     })
 
-    it('Should pass a11y test with description and validation message', async () => {
+    it('Should pass a11y test with description and helper message', async () => {
       const { container } = render(
         <Field>
           <Label htmlFor="test-input" label="Label" />
           <Field.Description id="desc-id">Help text</Field.Description>
           <Input
             id="test-input"
-            aria-describedby="desc-id validation-id"
+            aria-describedby="desc-id helper-id"
             placeholder="Placeholder"
           />
-          <ValidationMessage id="validation-id">
-            Validation text
-          </ValidationMessage>
+          <HelperMessage id="helper-id">Helper text</HelperMessage>
         </Field>,
       )
       expect(await axe(container)).toHaveNoViolations()
@@ -66,11 +64,11 @@ describe('Field', () => {
       expect(screen.getByText('Enter your username')).toBeInTheDocument()
     })
 
-    it('Renders ValidationMessage as child', () => {
+    it('Renders HelperMessage as child', () => {
       render(
         <Field>
           <Input />
-          <ValidationMessage>This field is required</ValidationMessage>
+          <HelperMessage>This field is required</HelperMessage>
         </Field>,
       )
       expect(screen.getByText('This field is required')).toBeInTheDocument()
@@ -82,7 +80,7 @@ describe('Field', () => {
           <Label htmlFor="test" label="Label" />
           <Field.Description>Description</Field.Description>
           <Input id="test" />
-          <ValidationMessage>Validation</ValidationMessage>
+          <HelperMessage>Helper</HelperMessage>
         </Field>,
       )
       const field = screen.getByTestId('field')
@@ -90,7 +88,7 @@ describe('Field', () => {
       expect(screen.getByText('Label')).toBeInTheDocument()
       expect(screen.getByText('Description')).toBeInTheDocument()
       expect(screen.getByRole('textbox')).toBeInTheDocument()
-      expect(screen.getByText('Validation')).toBeInTheDocument()
+      expect(screen.getByText('Helper')).toBeInTheDocument()
     })
   })
 

@@ -12,8 +12,8 @@ export type TextFieldProps = {
   requiredSilent?: boolean
   /** Descriptive text that provides additional context for the field */
   description?: ReactNode
-  /** Validation or helper message shown below the input */
-  validationMessage?: ReactNode
+  /** Helper or validation message shown below the input */
+  helperMessage?: ReactNode
   /** Unique identifier for the field */
   id?: string
 } & InputProps &
