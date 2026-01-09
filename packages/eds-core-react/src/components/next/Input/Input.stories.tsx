@@ -319,6 +319,83 @@ export const WithAdornments: StoryFn<InputProps> = () => {
   )
 }
 
+export const DensityWithAdornments: StoryFn<InputProps> = () => {
+  return (
+    <div
+      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}
+    >
+      {/* Spacious density */}
+      <div
+        data-density="spacious"
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+      >
+        <h3 style={{ margin: 0 }}>Spacious (default)</h3>
+        <Input
+          aria-label="Default spacious"
+          placeholder="Default"
+          leftText="https://"
+          leftAdornment={<Icon data={anchor} size={18} />}
+          rightText=".com"
+          rightAdornment={<Icon data={search} size={18} />}
+        />
+        <Input
+          aria-label="Invalid spacious"
+          defaultValue="invalid-url"
+          invalid
+          leftText="https://"
+          leftAdornment={<Icon data={anchor} size={18} />}
+          rightText=".com"
+          rightAdornment={<Icon data={search} size={18} />}
+        />
+        <Input
+          aria-label="Disabled spacious"
+          value="disabled-url"
+          disabled
+          leftText="https://"
+          leftAdornment={<Icon data={anchor} size={18} />}
+          rightText=".com"
+          rightAdornment={<Icon data={search} size={18} />}
+        />
+      </div>
+
+      {/* Comfortable density */}
+      <div
+        data-density="comfortable"
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+      >
+        <h3 style={{ margin: 0 }}>Comfortable (compact)</h3>
+        <Input
+          aria-label="Default comfortable"
+          placeholder="Default"
+          leftText="https://"
+          leftAdornment={<Icon data={anchor} size={18} />}
+          rightText=".com"
+          rightAdornment={<Icon data={search} size={18} />}
+        />
+        <Input
+          aria-label="Invalid comfortable"
+          defaultValue="invalid-url"
+          invalid
+          leftText="https://"
+          leftAdornment={<Icon data={anchor} size={18} />}
+          rightText=".com"
+          rightAdornment={<Icon data={search} size={18} />}
+        />
+        <Input
+          aria-label="Disabled comfortable"
+          value="disabled-url"
+          disabled
+          leftText="https://"
+          leftAdornment={<Icon data={anchor} size={18} />}
+          rightText=".com"
+          rightAdornment={<Icon data={search} size={18} />}
+        />
+      </div>
+    </div>
+  )
+}
+DensityWithAdornments.storyName = 'Density with Adornments'
+
 export const Casted: StoryFn<InputProps> = (args) => {
   return <Input as="textarea" {...args} />
 }
