@@ -56,10 +56,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           </span>
         )}
         {hasLeftAdornment && (
-          <div
-            className="eds-adornment eds-adornment--left"
-            data-font-size="lg"
-          >
+          <div className="eds-adornment">
             {leftAdornment && (
               <span className="eds-adornment__adornment">{leftAdornment}</span>
             )}
@@ -90,10 +87,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           >)}
         />
         {hasRightAdornment && (
-          <div
-            className="eds-adornment eds-adornment--right"
-            data-font-size="lg"
-          >
+          <div className="eds-adornment">
             {rightText && (
               <span
                 className="eds-adornment__text"

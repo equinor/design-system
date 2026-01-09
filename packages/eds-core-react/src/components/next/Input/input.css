@@ -4,11 +4,14 @@
     position: relative;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: var(--eds-selectable-gap-horizontal);
     box-sizing: border-box;
     width: 100%;
     background: var(--eds-color-bg-canvas);
     border: 1px solid var(--eds-color-border-subtle);
     border-radius: var(--eds-spacing-border-radius-none);
+    padding-inline: var(--eds-selectable-space-horizontal);
   }
 
   /* Hover - only for enabled inputs */
@@ -92,7 +95,7 @@
     outline: none;
     color: var(--eds-color-text-strong);
     padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-inline: 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -107,7 +110,6 @@
   .eds-error-icon {
     display: flex;
     align-items: center;
-    padding-inline-start: var(--eds-selectable-space-horizontal);
     color: var(--eds-color-text-subtle);
     flex-shrink: 0;
   }
@@ -116,21 +118,8 @@
   .eds-adornment {
     display: flex;
     align-items: center;
-    gap: var(--eds-typography-gap-horizontal);
+    gap: var(--eds-selectable-gap-horizontal);
     flex-shrink: 0;
-  }
-
-  .eds-adornment--left {
-    padding-inline-start: var(--eds-selectable-space-horizontal);
-  }
-
-  /* When error icon is present, left adornment doesn't need start padding */
-  .eds-error-icon + .eds-adornment--left {
-    padding-inline-start: 0;
-  }
-
-  .eds-adornment--right {
-    padding-inline-end: var(--eds-selectable-space-horizontal);
   }
 
   /* Adornment text (prefix/suffix) - always neutral color via data-color-appearance */
