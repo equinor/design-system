@@ -38,7 +38,7 @@ const meta: Meta<typeof TextField> = {
     description: {
       control: 'text',
     },
-    validationMessage: {
+    helperMessage: {
       control: 'text',
     },
     placeholder: {
@@ -67,7 +67,7 @@ npm install @equinor/eds-core-react@beta
 import { TextField } from '@equinor/eds-core-react/next'
 \`\`\`
 
-TextField is a pre-composed component that combines Label, FieldDescription, Input, and ValidationMessage. 
+TextField is a pre-composed component that combines Label, FieldDescription, Input, and HelperMessage. 
 For more flexibility, use the individual components via the Field composition pattern.
         `,
       },
@@ -94,7 +94,7 @@ Introduction.args = {
   label: 'Label',
   description: 'Help with more details',
   placeholder: 'Placeholder',
-  validationMessage: 'Helper Message',
+  helperMessage: 'Helper Message',
 }
 
 export const WithOptionalLabel: StoryFn<TextFieldProps> = () => (
@@ -141,14 +141,14 @@ export const WithDescription: StoryFn<TextFieldProps> = () => (
 )
 WithDescription.storyName = 'With Description'
 
-export const WithValidationMessage: StoryFn<TextFieldProps> = () => (
+export const WithHelperMessage: StoryFn<TextFieldProps> = () => (
   <TextField
     label="Label"
     placeholder="Placeholder"
-    validationMessage="Helper Message"
+    helperMessage="Helper Message"
   />
 )
-WithValidationMessage.storyName = 'With Validation Message'
+WithHelperMessage.storyName = 'With Helper Message'
 
 export const InvalidState: StoryFn<TextFieldProps> = () => (
   <TextField
@@ -156,7 +156,7 @@ export const InvalidState: StoryFn<TextFieldProps> = () => (
     placeholder="Placeholder"
     defaultValue="Invalid value"
     invalid
-    validationMessage="This field has an error"
+    helperMessage="This field has an error"
   />
 )
 InvalidState.storyName = 'Invalid State'
@@ -167,13 +167,13 @@ export const DisabledState: StoryFn<TextFieldProps> = () => (
       label="Label"
       placeholder="Placeholder"
       disabled
-      validationMessage="Helper Message"
+      helperMessage="Helper Message"
     />
     <TextField
       label="Label"
       defaultValue="Disabled with value"
       disabled
-      validationMessage="Helper Message"
+      helperMessage="Helper Message"
     />
   </>
 )
@@ -184,7 +184,7 @@ export const ReadOnlyState: StoryFn<TextFieldProps> = () => (
     label="Label"
     defaultValue="Read only value"
     readOnly
-    validationMessage="Helper Message"
+    helperMessage="Helper Message"
   />
 )
 ReadOnlyState.storyName = 'Read Only State'
@@ -195,7 +195,7 @@ export const FullExample: StoryFn<TextFieldProps> = () => (
     optional
     description="Help with more details"
     placeholder="Placeholder"
-    validationMessage="Helper Message"
+    helperMessage="Helper Message"
   />
 )
 FullExample.storyName = 'Full Example'

@@ -9,7 +9,7 @@ describe('TextField (Next EDS 2.0)', () => {
         label="Label"
         description="Description text"
         placeholder="Placeholder"
-        validationMessage="Validation message"
+        helperMessage="Helper message"
       />,
     )
     expect(container).toMatchSnapshot()
@@ -29,7 +29,7 @@ describe('TextField (Next EDS 2.0)', () => {
           label="Label"
           placeholder="Placeholder"
           invalid
-          validationMessage="Error message"
+          helperMessage="Error message"
         />,
       )
       expect(await axe(container)).toHaveNoViolations()
@@ -71,9 +71,9 @@ describe('TextField (Next EDS 2.0)', () => {
       expect(screen.getByText('Description text')).toBeInTheDocument()
     })
 
-    it('Renders validation message', () => {
-      render(<TextField label="Label" validationMessage="Validation text" />)
-      expect(screen.getByText('Validation text')).toBeInTheDocument()
+    it('Renders helper message', () => {
+      render(<TextField label="Label" helperMessage="Helper text" />)
+      expect(screen.getByText('Helper text')).toBeInTheDocument()
     })
 
     it('Connects label to input via htmlFor', () => {

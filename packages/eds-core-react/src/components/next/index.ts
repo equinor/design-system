@@ -21,8 +21,8 @@ export type { InputProps } from './Input'
 export { Label } from './Label'
 export type { LabelProps } from './Label'
 
-export { ValidationMessage } from './ValidationMessage'
-export type { ValidationMessageProps } from './ValidationMessage'
+export { HelperMessage } from './HelperMessage'
+export type { HelperMessageProps } from './HelperMessage'
 
 export { Field } from './Field'
 export type { FieldProps } from './Field'

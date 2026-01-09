@@ -1,6 +1,6 @@
 import { ReactNode, HTMLAttributes } from 'react'
 
-export type ValidationMessageProps = {
+export type HelperMessageProps = {
   /** Message content */
   children: ReactNode
   /** Disabled state */

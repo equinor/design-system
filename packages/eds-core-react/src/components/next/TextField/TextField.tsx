@@ -3,7 +3,7 @@ import type { TextFieldProps } from './TextField.types'
 import { Field } from '../Field'
 import { Input } from '../Input'
 import { Label } from '../Label'
-import { ValidationMessage } from '../ValidationMessage'
+import { HelperMessage } from '../HelperMessage'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
@@ -13,7 +13,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       required = false,
       requiredSilent = false,
       description,
-      validationMessage,
+      helperMessage,
       id: providedId,
       invalid = false,
       disabled = false,
@@ -23,21 +23,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ) {
     const generatedId = useId()
     const generatedDescriptionId = useId()
-    const generatedValidationId = useId()
+    const generatedHelperMessageId = useId()
 
     const id = providedId ?? generatedId
     const descriptionId = description ? generatedDescriptionId : undefined
-    const validationMessageId = validationMessage
-      ? generatedValidationId
-      : undefined
+    const helperMessageId = helperMessage ? generatedHelperMessageId : undefined
 
     // Both required and requiredSilent set HTML required, but only required shows text
     const isRequired = required || requiredSilent
 
-    // Combine IDs for aria-describedby (description first, then validation message)
+    // Combine IDs for aria-describedby (description first, then helper message)
     const ariaDescribedBy =
-      [descriptionId, validationMessageId].filter(Boolean).join(' ') ||
-      undefined
+      [descriptionId, helperMessageId].filter(Boolean).join(' ') || undefined
 
     return (
       <Field>
@@ -63,10 +60,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           aria-describedby={ariaDescribedBy}
           {...inputProps}
         />
-        {validationMessage && (
-          <ValidationMessage id={validationMessageId} disabled={disabled}>
-            {validationMessage}
-          </ValidationMessage>
+        {helperMessage && (
+          <HelperMessage id={helperMessageId} disabled={disabled}>
+            {helperMessage}
+          </HelperMessage>
         )}
       </Field>
     )

@@ -1,17 +1,17 @@
 import { forwardRef } from 'react'
-import type { ValidationMessageProps } from './ValidationMessage.types'
+import type { HelperMessageProps } from './HelperMessage.types'
 import { TypographyNext } from '../../Typography'
 
-export const ValidationMessage = forwardRef<
+export const HelperMessage = forwardRef<
   HTMLParagraphElement,
-  ValidationMessageProps
->(function ValidationMessage(
+  HelperMessageProps
+>(function HelperMessage(
   { children, disabled = false, className, ...rest },
   ref,
 ) {
   const classes = [
-    'eds-validation-message',
-    disabled && 'eds-validation-message--disabled',
+    'eds-helper-message',
+    disabled && 'eds-helper-message--disabled',
     className,
   ]
     .filter(Boolean)
