@@ -1,5 +1,5 @@
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { anchor } from '@equinor/eds-icons'
+import { anchor, search } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Label } from '../Label'
@@ -22,56 +22,102 @@ const meta: Meta<typeof Input> = {
     },
   },
   argTypes: {
+    // Core props
     placeholder: {
       control: 'text',
-      description: 'Placeholder text',
-    },
-    invalid: {
-      control: 'boolean',
-      description: 'Invalid state - shows error styling',
-      table: { defaultValue: { summary: 'false' } },
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disabled state',
-    },
-    readOnly: {
-      control: 'boolean',
-      description: 'Read only state',
+      description: 'Placeholder text displayed when input is empty',
+      table: {
+        category: 'Core',
+      },
     },
     type: {
       control: 'select',
       options: ['text', 'number', 'password', 'email', 'tel', 'url', 'date'],
-      description: 'Input type',
-      table: { defaultValue: { summary: 'text' } },
+      description: 'HTML input type attribute',
+      table: {
+        category: 'Core',
+        defaultValue: { summary: 'text' },
+      },
     },
     as: {
-      control: 'select',
+      control: 'radio',
       options: ['input', 'textarea'],
-      description: 'Render as input or textarea',
-      table: { defaultValue: { summary: 'input' } },
+      description: 'Render as single-line input or multi-line textarea',
+      table: {
+        category: 'Core',
+        defaultValue: { summary: 'input' },
+      },
     },
-    leftAdornments: {
-      control: false,
-      description: 'Left adornments (icons, buttons, etc.)',
+
+    // States
+    invalid: {
+      control: 'boolean',
+      description: 'Shows error styling with red border and adornment colors',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
     },
-    rightAdornments: {
-      control: false,
-      description: 'Right adornments (icons, buttons, etc.)',
+    disabled: {
+      control: 'boolean',
+      description: 'Disables input interaction',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
     },
-    leftAdornmentsProps: {
+    readOnly: {
+      control: 'boolean',
+      description: 'Makes input read-only (visible but not editable)',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+
+    // Adornments
+    leftText: {
+      control: 'text',
+      description:
+        'Text prefix on the left (e.g., "$", "https://"). Always neutral color.',
+      table: {
+        category: 'Adornments',
+      },
+    },
+    rightText: {
+      control: 'text',
+      description:
+        'Text suffix on the right (e.g., "kg", "%", "USD"). Always neutral color.',
+      table: {
+        category: 'Adornments',
+      },
+    },
+    leftAdornment: {
       control: false,
       description:
-        'Props for left adornments container (className, data-*, etc.)',
+        'ReactNode for left side (icons, buttons). Inherits state color (red when invalid).',
+      table: {
+        category: 'Adornments',
+        type: { summary: 'ReactNode' },
+      },
     },
-    rightAdornmentsProps: {
+    rightAdornment: {
       control: false,
       description:
-        'Props for right adornments container (className, data-*, etc.)',
+        'ReactNode for right side (icons, buttons). Inherits state color (red when invalid).',
+      table: {
+        category: 'Adornments',
+        type: { summary: 'ReactNode' },
+      },
     },
+
+    // Other
     className: {
       control: 'text',
       description: 'Additional CSS class names for the container',
+      table: {
+        category: 'Other',
+      },
     },
   },
   decorators: [
@@ -102,11 +148,15 @@ export const Types: StoryFn<InputProps> = () => (
   <>
     <Input
       aria-label="Text input"
-      placeholder="Text (default)"
+      defaultValue="Hello world"
       autoComplete="off"
     />
-    <Input aria-label="Number input" type="number" placeholder="Number" />
-    <Input aria-label="Password input" type="password" placeholder="Password" />
+    <Input aria-label="Number input" type="number" defaultValue="42" />
+    <Input
+      aria-label="Password input"
+      type="password"
+      defaultValue="secret123"
+    />
   </>
 )
 
@@ -201,85 +251,69 @@ export const WithAdornments: StoryFn<InputProps> = () => {
   return (
     <>
       <Input
-        aria-label="Default with adornments"
+        aria-label="With text prefix and suffix"
+        type="number"
+        placeholder="Amount"
+        leftText="$"
+        rightText="USD"
+      />
+      <Input
+        aria-label="With icon"
         type="text"
-        placeholder="Default"
-        leftAdornments={
+        placeholder="With icon"
+        rightAdornment={<Icon data={anchor} size={18} />}
+      />
+      <Input
+        aria-label="With button"
+        type="text"
+        placeholder="Search"
+        rightAdornment={
           <Button
             variant="ghost_icon"
             style={{ height: '24px', width: '24px' }}
           >
-            IT
+            <Icon data={search} size={18} />
           </Button>
-        }
-        rightAdornments={
-          <>
-            <span>unit</span>
-            <Icon data={anchor} size={18} />
-          </>
         }
       />
       <Input
-        aria-label="Invalid with adornments"
+        aria-label="Invalid with icon"
         type="text"
         defaultValue="Invalid value"
         invalid
-        leftAdornments={
+        rightAdornment={<Icon data={anchor} size={18} />}
+      />
+      <Input
+        aria-label="Invalid with text and adornment"
+        type="text"
+        defaultValue="invalid-url"
+        invalid
+        leftText="https://"
+        leftAdornment={<Icon data={anchor} size={18} />}
+        rightText=".com"
+      />
+      <Input
+        aria-label="Invalid with button"
+        type="text"
+        defaultValue="Invalid with button"
+        invalid
+        rightAdornment={
           <Button
             variant="ghost_icon"
+            color="danger"
             style={{ height: '24px', width: '24px' }}
           >
-            IT
+            <Icon data={search} size={18} />
           </Button>
-        }
-        rightAdornments={
-          <>
-            <span>unit</span>
-            <Icon data={anchor} size={18} />
-          </>
         }
       />
       <Input
         aria-label="Disabled with adornments"
         type="text"
         disabled
-        placeholder="Disabled"
-        value="Some text"
-        leftAdornments={
-          <Button
-            disabled
-            variant="ghost_icon"
-            style={{ height: '24px', width: '24px' }}
-          >
-            IT
-          </Button>
-        }
-        rightAdornments={
-          <>
-            <span>unit</span>
-            <Icon data={anchor} size={18} />
-          </>
-        }
-      />
-      <Input
-        aria-label="Read only with adornments"
-        type="text"
-        defaultValue="Read only value"
-        readOnly
-        leftAdornments={
-          <Button
-            variant="ghost_icon"
-            style={{ height: '24px', width: '24px' }}
-          >
-            IT
-          </Button>
-        }
-        rightAdornments={
-          <>
-            <span>unit</span>
-            <Icon data={anchor} size={18} />
-          </>
-        }
+        value="Disabled"
+        leftText="$"
+        rightAdornment={<Icon data={anchor} size={18} />}
       />
     </>
   )

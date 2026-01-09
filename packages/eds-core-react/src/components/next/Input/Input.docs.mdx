@@ -67,6 +67,10 @@ When using Input with a visible label, use the `Field` component for proper spac
 
 ### With Adornments
 
+Use `leftText` and `rightText` for prefix/suffix text (e.g., "$", "USD", "km"). These stay neutral color in all states.
+
+Use `leftAdornment` and `rightAdornment` for elements (icons, buttons, etc.) that should inherit state colors (e.g., red when invalid).
+
 <Canvas of={ComponentStories.WithAdornments} />
 
 ### Casted as textarea

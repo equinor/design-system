@@ -94,30 +94,59 @@ describe('Input (Next EDS 2.0)', () => {
   })
 
   describe('Adornments', () => {
-    it('Renders left adornments', () => {
-      render(<Input leftAdornments={<span>$</span>} value="100" readOnly />)
+    it('Renders left text', () => {
+      render(<Input leftText="$" value="100" readOnly />)
       expect(screen.getByText('$')).toBeInTheDocument()
     })
 
-    it('Renders right adornments', () => {
-      render(<Input rightAdornments={<span>kg</span>} value="50" readOnly />)
+    it('Renders right text', () => {
+      render(<Input rightText="kg" value="50" readOnly />)
       expect(screen.getByText('kg')).toBeInTheDocument()
     })
 
-    it('Adornments have neutral color appearance', () => {
+    it('Renders left adornment', () => {
+      render(
+        <Input
+          leftAdornment={<span data-testid="left-adornment">icon</span>}
+        />,
+      )
+      expect(screen.getByTestId('left-adornment')).toBeInTheDocument()
+    })
+
+    it('Renders right adornment', () => {
+      render(
+        <Input
+          rightAdornment={<span data-testid="right-adornment">icon</span>}
+        />,
+      )
+      expect(screen.getByTestId('right-adornment')).toBeInTheDocument()
+    })
+
+    it('Text has text class', () => {
+      const { container } = render(<Input leftText="$" rightText="kg" />)
+      /* eslint-disable testing-library/no-container, testing-library/no-node-access */
+      const leftText = container.querySelector('.eds-adornment__text')
+      const rightText = container.querySelectorAll('.eds-adornment__text')[1]
+      /* eslint-enable testing-library/no-container, testing-library/no-node-access */
+      expect(leftText).toBeInTheDocument()
+      expect(rightText).toBeInTheDocument()
+    })
+
+    it('Adornment has adornment class', () => {
       const { container } = render(
         <Input
-          invalid
-          leftAdornments={<span>$</span>}
-          rightAdornments={<span>kg</span>}
+          leftAdornment={<span>icon</span>}
+          rightAdornment={<span>icon</span>}
         />,
       )
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      const leftAdornment = container.querySelector('.eds-adornment--left')
-      const rightAdornment = container.querySelector('.eds-adornment--right')
+      const leftAdornment = container.querySelector('.eds-adornment__adornment')
+      const rightAdornment = container.querySelectorAll(
+        '.eds-adornment__adornment',
+      )[1]
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
-      expect(leftAdornment).toHaveAttribute('data-color-appearance', 'neutral')
-      expect(rightAdornment).toHaveAttribute('data-color-appearance', 'neutral')
+      expect(leftAdornment).toBeInTheDocument()
+      expect(rightAdornment).toBeInTheDocument()
     })
   })
 

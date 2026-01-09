@@ -1,4 +1,4 @@
-import { ReactNode, ComponentPropsWithoutRef } from 'react'
+import { ReactNode } from 'react'
 
 export type InputProps = {
   /** Placeholder text */
@@ -11,14 +11,14 @@ export type InputProps = {
   type?: string
   /** Toggle read only state */
   readOnly?: boolean
-  /** Left adornments (icons, buttons, etc.) */
-  leftAdornments?: ReactNode
-  /** Right adornments (icons, buttons, etc.) */
-  rightAdornments?: ReactNode
-  /** Props for left adornments container */
-  leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
-  /** Props for right adornments container */
-  rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
+  /** Text prefix on the left (e.g., "$", "USD") - always neutral color */
+  leftText?: string
+  /** Adornment on the left (icons, buttons, etc.) - inherits state color (red when invalid) */
+  leftAdornment?: ReactNode
+  /** Text suffix on the right (e.g., "km", "%") - always neutral color */
+  rightText?: string
+  /** Adornment on the right (icons, buttons, etc.) - inherits state color (red when invalid) */
+  rightAdornment?: ReactNode
   /** Render as input or textarea */
   as?: 'input' | 'textarea'
   /** Additional CSS class names */

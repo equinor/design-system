@@ -40,6 +40,11 @@
     outline-offset: -2px;
   }
 
+  /* Invalid focus state - red outline */
+  .eds-input-container--invalid:focus-within {
+    outline-color: var(--eds-color-border-strong);
+  }
+
   /* Disabled state */
   .eds-input-container--disabled {
     cursor: not-allowed;
@@ -56,10 +61,6 @@
   .eds-input-container--disabled .eds-input::placeholder {
     color: var(--eds-color-border-medium);
     -webkit-text-fill-color: var(--eds-color-border-medium);
-  }
-
-  .eds-input-container--disabled .eds-adornment {
-    color: var(--eds-color-border-medium);
   }
 
   /* Readonly state */
@@ -90,10 +91,6 @@
     background: transparent;
     outline: none;
     color: var(--eds-color-text-strong);
-    font-family: var(--eds-typography-font-family);
-    font-size: var(--eds-typography-font-size);
-    font-weight: var(--eds-typography-font-weight);
-    line-height: var(--eds-typography-line-height);
     padding-block: var(--eds-selectable-space-vertical);
     padding-inline: var(--eds-selectable-space-horizontal);
     overflow: hidden;
@@ -106,24 +103,79 @@
     color: var(--eds-color-border-strong);
   }
 
-  /* Adornments (icons, text, buttons on left/right) */
+  /* Error icon - separate from adornments */
+  .eds-error-icon {
+    display: flex;
+    align-items: center;
+    padding-inline-start: var(--eds-selectable-space-horizontal);
+    color: var(--eds-color-text-subtle);
+    flex-shrink: 0;
+  }
+
+  /* Adornments container */
   .eds-adornment {
     display: flex;
     align-items: center;
-    gap: var(--eds-selectable-space-horizontal);
-    color: var(--eds-color-text-subtle);
-    font-family: var(--eds-typography-font-family);
-    font-size: var(--eds-typography-font-size);
-    font-weight: var(--eds-typography-font-weight);
-    line-height: var(--eds-typography-line-height);
+    gap: var(--eds-typography-gap-horizontal);
     flex-shrink: 0;
   }
 
   .eds-adornment--left {
-    padding-left: var(--eds-selectable-space-horizontal);
+    padding-inline-start: var(--eds-selectable-space-horizontal);
+  }
+
+  /* When error icon is present, left adornment doesn't need start padding */
+  .eds-error-icon + .eds-adornment--left {
+    padding-inline-start: 0;
   }
 
   .eds-adornment--right {
-    padding-right: var(--eds-selectable-space-horizontal);
+    padding-inline-end: var(--eds-selectable-space-horizontal);
+  }
+
+  /* Adornment text (prefix/suffix) - always neutral color via data-color-appearance */
+  .eds-adornment__text {
+    display: inline; /* Override display: block from [data-font-family] */
+    color: var(--eds-color-text-subtle);
+  }
+
+  /* Adornment element (icons, buttons, etc.) - inherits state color (red when invalid) */
+  .eds-adornment__adornment {
+    display: flex;
+    align-items: center;
+    color: var(--eds-color-text-subtle);
+  }
+
+  /* Hover state for adornments - only for neutral state (not invalid) */
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    ):not(.eds-input-container--invalid)
+    .eds-adornment__text {
+    color: var(--eds-color-text-strong);
+  }
+
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    ):not(.eds-input-container--invalid)
+    .eds-adornment__adornment {
+    color: var(--eds-color-text-strong);
+  }
+
+  /* Disabled state for adornments */
+  .eds-input-container--disabled .eds-adornment__text {
+    color: var(--eds-color-border-medium);
+  }
+
+  .eds-input-container--disabled .eds-adornment__adornment {
+    color: var(--eds-color-border-medium);
+  }
+
+  /* Readonly state for adornments */
+  .eds-input-container--readonly .eds-adornment__text {
+    color: var(--eds-color-border-strong);
+  }
+
+  .eds-input-container--readonly .eds-adornment__adornment {
+    color: var(--eds-color-border-strong);
   }
 }

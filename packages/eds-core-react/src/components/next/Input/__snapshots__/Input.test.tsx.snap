@@ -5,6 +5,7 @@ exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
   <div
     class="eds-input-container eds-input-container--readonly"
     data-color-appearance="neutral"
+    data-line-height="squished"
     data-selectable-space="xs"
     data-space-proportions="stretched"
   >
@@ -13,7 +14,6 @@ exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
       data-color-appearance="neutral"
       data-font-family="ui"
       data-font-size="lg"
-      data-line-height="squished"
       readonly=""
       type="text"
       value="input value"

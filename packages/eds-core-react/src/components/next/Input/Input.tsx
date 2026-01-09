@@ -1,5 +1,7 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
 import { OverridableComponent } from '@equinor/eds-utils'
+import { error_filled } from '@equinor/eds-icons'
+import { Icon } from '../../Icon'
 import type { InputProps } from './Input.types'
 
 export const Input: OverridableComponent<InputProps, HTMLInputElement> =
@@ -12,10 +14,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       disabled,
       readOnly,
       type = 'text',
-      leftAdornments,
-      rightAdornments,
-      leftAdornmentsProps,
-      rightAdornmentsProps,
+      leftText,
+      leftAdornment,
+      rightText,
+      rightAdornment,
       className,
       as: Component = 'input',
       ...inputProps
@@ -25,6 +27,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const colorAppearance = invalid && !disabled ? 'danger' : 'neutral'
     const selectableSpace = 'xs'
     const spaceProportions = 'stretched'
+
+    const showErrorIcon = invalid && !disabled
+    const hasLeftAdornment = leftText || leftAdornment
+    const hasRightAdornment = rightText || rightAdornment
 
     const containerClasses = [
       'eds-input-container',
@@ -42,14 +48,31 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
         data-color-appearance={colorAppearance}
         data-selectable-space={selectableSpace}
         data-space-proportions={spaceProportions}
+        data-line-height="squished"
       >
-        {leftAdornments && (
+        {showErrorIcon && (
+          <span className="eds-error-icon">
+            <Icon data={error_filled} size={18} />
+          </span>
+        )}
+        {hasLeftAdornment && (
           <div
-            {...leftAdornmentsProps}
             className="eds-adornment eds-adornment--left"
-            data-color-appearance="neutral"
+            data-font-size="lg"
           >
-            {leftAdornments}
+            {leftAdornment && (
+              <span className="eds-adornment__adornment">{leftAdornment}</span>
+            )}
+            {leftText && (
+              <span
+                className="eds-adornment__text"
+                data-color-appearance="neutral"
+                data-font-family="ui"
+                data-font-size="lg"
+              >
+                {leftText}
+              </span>
+            )}
           </div>
         )}
         <Component
@@ -62,18 +85,28 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           data-color-appearance="neutral"
           data-font-family="ui"
           data-font-size="lg"
-          data-line-height="squished"
           {...(inputProps as InputHTMLAttributes<
             HTMLInputElement | HTMLTextAreaElement
           >)}
         />
-        {rightAdornments && (
+        {hasRightAdornment && (
           <div
-            {...rightAdornmentsProps}
             className="eds-adornment eds-adornment--right"
-            data-color-appearance="neutral"
+            data-font-size="lg"
           >
-            {rightAdornments}
+            {rightText && (
+              <span
+                className="eds-adornment__text"
+                data-color-appearance="neutral"
+                data-font-family="ui"
+                data-font-size="lg"
+              >
+                {rightText}
+              </span>
+            )}
+            {rightAdornment && (
+              <span className="eds-adornment__adornment">{rightAdornment}</span>
+            )}
           </div>
         )}
       </div>
