@@ -50,10 +50,11 @@ const inputStyles = {
 }
 
 /**
- * To prevent layout shift, use the `hidden` attribute instead of
- * conditional rendering. This keeps the message in the DOM but hidden.
+ * For accessible live validation, use conditional rendering inside a
+ * container with `role="alert"`. The wrapper stays in the DOM as an
+ * ARIA live region, ensuring screen readers announce changes.
  */
-export const PasswordValidationNoLayoutShift: StoryFn = () => {
+export const PasswordValidation: StoryFn = () => {
   const [password, setPassword] = useState('')
   const minLength = 8
   const isValid = password.length >= minLength
@@ -70,10 +71,14 @@ export const PasswordValidationNoLayoutShift: StoryFn = () => {
           style={inputStyles}
         />
       </Field.Control>
-      {/* Always render, use hidden to hide - no layout shift */}
-      <HelperMessage role="alert" hidden={!showError}>
-        Password must be at least {minLength} characters
-      </HelperMessage>
+      {/* Wrapper with role="alert" stays in DOM, content renders conditionally */}
+      <div role="alert">
+        {showError && (
+          <HelperMessage>
+            Password must be at least {minLength} characters
+          </HelperMessage>
+        )}
+      </div>
       <Button type="button">Submit</Button>
     </Field>
   )

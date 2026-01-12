@@ -70,6 +70,11 @@ export const WithIndicator: StoryFn<FieldProps> = () => (
   </div>
 )
 
+/**
+ * For accessible live validation, wrap conditional content in a container
+ * with `role="alert"`. The wrapper acts as an ARIA live region - screen
+ * readers will announce changes when content appears inside it.
+ */
 export const LiveValidation: StoryFn<FieldProps> = () => {
   const [value, setValue] = useState('')
   const hasError = useMemo(() => value.trim().length < 4, [value])
@@ -85,9 +90,13 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
       <Field.Control>
         <input value={value} onChange={onChange} style={inputStyles} />
       </Field.Control>
-      {hasError && (
-        <HelperMessage>Username must be at least four characters</HelperMessage>
-      )}
+      <div role="alert">
+        {hasError && (
+          <HelperMessage>
+            Username must be at least four characters
+          </HelperMessage>
+        )}
+      </div>
     </Field>
   )
 }
@@ -146,15 +155,9 @@ export const WithCheckbox: StoryFn<FieldProps> = () => (
 )
 
 /**
- * Demonstrates best practice for showing/hiding validation messages.
- *
- * Use the `hidden` attribute to toggle visibility while keeping the element
- * in the DOM. Combined with `role="alert"`, screen readers will announce
- * the message when it appears.
- *
- * **Two approaches:**
- * - `hidden={condition}` - Keeps element in DOM, good for stable IDs and aria-describedby
- * - Conditional rendering `{error && <HelperMessage>}` - Removes from DOM completely
+ * For accessible validation messages, use conditional rendering inside
+ * a container with `role="alert"`. The wrapper stays in the DOM as an
+ * ARIA live region, and screen readers will announce content changes.
  */
 export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
   const [checked, setChecked] = useState(false)
@@ -162,43 +165,28 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Field>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <Field position="start">
+        <Field.Control>
           <input
             type="checkbox"
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
             style={checkboxStyles}
           />
+        </Field.Control>
+        <Field.Label style={{ cursor: 'pointer' }}>
           I accept the terms
-        </label>
-        <HelperMessage role="alert" hidden={!showError}>
-          You must accept the terms before continuing.
-        </HelperMessage>
+        </Field.Label>
+        {/* Wrapper with role="alert" stays in DOM, content renders conditionally */}
+        <div role="alert">
+          {showError && (
+            <HelperMessage>
+              You must accept the terms before continuing.
+            </HelperMessage>
+          )}
+        </div>
       </Field>
       <Button>Submit</Button>
     </div>
   )
 }
-
-export const CheckboxGroup: StoryFn<FieldProps> = () => (
-  <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
-    <legend style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-      Select interests
-    </legend>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <input type="checkbox" style={checkboxStyles} />
-        <span>Technology</span>
-      </label>
-      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <input type="checkbox" style={checkboxStyles} />
-        <span>Design</span>
-      </label>
-      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <input type="checkbox" style={checkboxStyles} />
-        <span>Sustainability</span>
-      </label>
-    </div>
-  </fieldset>
-)

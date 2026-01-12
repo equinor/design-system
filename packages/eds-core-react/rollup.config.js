@@ -131,6 +131,7 @@ export default [
         sourceMap: false,
         plugins: [createPostcssImportPlugin()],
       }),
+      // Clean up generated JS files - only CSS output is needed
       del({ targets: 'build/*.js', hook: 'writeBundle' }),
     ],
     output: { dir: 'build', format: 'es' },

@@ -1,6 +1,5 @@
 /* Global styles for @equinor/eds-core-react */
 @import '@equinor/eds-tokens/css/variables';
 
-/* Component styles */
-@import './components/next/Field/field.css';
-@import './components/next/HelperMessage/helper-message.css';
+/* EDS 2.0 Next component styles */
+@import './components/next/index.css';

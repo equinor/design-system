@@ -26,10 +26,14 @@ export const FieldControl = forwardRef<HTMLDivElement, FieldControlProps>(
     const enhancedChild = isValidElement<Record<string, unknown>>(children)
       ? cloneElement(children, {
           ...children.props,
-          id,
-          'aria-describedby': describedBy || undefined,
-          'aria-required': required || undefined,
-          disabled: disabled || undefined,
+          id: children.props.id ?? id,
+          'aria-describedby':
+            [describedBy, children.props['aria-describedby']]
+              .filter(Boolean)
+              .join(' ') || undefined,
+          'aria-required':
+            children.props['aria-required'] ?? required ?? undefined,
+          disabled: children.props.disabled ?? disabled ?? undefined,
         })
       : children
 
