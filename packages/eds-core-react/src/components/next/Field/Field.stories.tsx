@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useMemo, useState, type CSSProperties, type ChangeEvent } from 'react'
 import { Stack } from '../../../../.storybook/components'
+import { Button } from '../../Button'
 import { Field } from './Field'
 import type { FieldProps } from './Field.types'
 import { HelperMessage } from '../HelperMessage'
@@ -144,6 +145,17 @@ export const WithCheckbox: StoryFn<FieldProps> = () => (
   </Field>
 )
 
+/**
+ * Demonstrates best practice for showing/hiding validation messages.
+ *
+ * Use the `hidden` attribute to toggle visibility while keeping the element
+ * in the DOM. Combined with `role="alert"`, screen readers will announce
+ * the message when it appears.
+ *
+ * **Two approaches:**
+ * - `hidden={condition}` - Keeps element in DOM, good for stable IDs and aria-describedby
+ * - Conditional rendering `{error && <HelperMessage>}` - Removes from DOM completely
+ */
 export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
   const [checked, setChecked] = useState(false)
   const showError = !checked
@@ -160,15 +172,11 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
           />
           I accept the terms
         </label>
-        {/* Use visibility to prevent layout shift when message appears/disappears */}
-        <HelperMessage
-          role="alert"
-          style={{ visibility: showError ? 'visible' : 'hidden' }}
-        >
+        <HelperMessage role="alert" hidden={!showError}>
           You must accept the terms before continuing.
         </HelperMessage>
       </Field>
-      <button style={{ alignSelf: 'flex-start' }}>Submit</button>
+      <Button>Submit</Button>
     </div>
   )
 }

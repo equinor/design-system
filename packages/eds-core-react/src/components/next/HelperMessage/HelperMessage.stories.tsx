@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Meta, StoryObj, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../../.storybook/components'
+import { Button } from '../../Button'
 import { HelperMessage } from './HelperMessage'
 import { Field } from '../Field'
 
@@ -48,53 +49,9 @@ const inputStyles = {
   width: '100%',
 }
 
-const buttonStyles = {
-  marginTop: '8px',
-  padding: '8px 16px',
-  background: 'var(--eds-color-bg-accent-default)',
-  color: 'white',
-  border: 'none',
-  borderRadius: '4px',
-  cursor: 'pointer',
-}
-
 /**
- * This example shows how HelperMessage appears when form validation fails.
- * Notice how the layout shifts when the message appears/disappears.
- */
-export const PasswordValidation: StoryFn = () => {
-  const [password, setPassword] = useState('')
-  const minLength = 8
-  const isValid = password.length >= minLength
-
-  return (
-    <Field>
-      <Field.Label indicator="(Required)">Password</Field.Label>
-      <Field.Control>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={inputStyles}
-        />
-      </Field.Control>
-      {!isValid && password.length > 0 && (
-        <HelperMessage role="alert">
-          Password must be at least {minLength} characters (currently{' '}
-          {password.length})
-        </HelperMessage>
-      )}
-      <button type="button" style={buttonStyles}>
-        Submit
-      </button>
-    </Field>
-  )
-}
-
-/**
- * To prevent layout shift, reserve space for the HelperMessage using
- * CSS `visibility: hidden` instead of conditional rendering.
- * This keeps the message in the DOM but invisible.
+ * To prevent layout shift, use the `hidden` attribute instead of
+ * conditional rendering. This keeps the message in the DOM but hidden.
  */
 export const PasswordValidationNoLayoutShift: StoryFn = () => {
   const [password, setPassword] = useState('')
@@ -113,16 +70,11 @@ export const PasswordValidationNoLayoutShift: StoryFn = () => {
           style={inputStyles}
         />
       </Field.Control>
-      {/* Always render, use visibility to hide - no layout shift */}
-      <HelperMessage
-        role="alert"
-        style={{ visibility: showError ? 'visible' : 'hidden' }}
-      >
+      {/* Always render, use hidden to hide - no layout shift */}
+      <HelperMessage role="alert" hidden={!showError}>
         Password must be at least {minLength} characters
       </HelperMessage>
-      <button type="button" style={buttonStyles}>
-        Submit
-      </button>
+      <Button type="button">Submit</Button>
     </Field>
   )
 }
