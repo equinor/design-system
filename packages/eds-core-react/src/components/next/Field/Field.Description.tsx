@@ -6,9 +6,21 @@ import { useFieldContext } from './Field.context'
 export const FieldDescription = forwardRef<
   HTMLParagraphElement,
   FieldDescriptionProps
->(function FieldDescription({ children, className, ...rest }, ref) {
+>(function FieldDescription(
+  { children, className, id: providedId, ...rest },
+  ref,
+) {
   const { descriptionId, setHasDescription, hasDescription } = useFieldContext()
   const hasRegistered = useRef(false)
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && providedId) {
+      console.warn(
+        'Field.Description: Custom "id" prop is ignored when used within a Field. ' +
+          'The id from Field context is used to keep aria-describedby in sync.',
+      )
+    }
+  }, [providedId])
 
   useEffect(() => {
     if (

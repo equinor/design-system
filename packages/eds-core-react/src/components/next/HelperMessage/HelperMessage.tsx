@@ -15,6 +15,15 @@ export const HelperMessage = forwardRef<
   const hasRegistered = useRef(false)
 
   useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && providedId && fieldContext) {
+      console.warn(
+        'HelperMessage: Custom "id" prop is ignored when used within a Field. ' +
+          'The id from Field context is used to keep aria-describedby in sync.',
+      )
+    }
+  }, [providedId, fieldContext])
+
+  useEffect(() => {
     if (
       process.env.NODE_ENV !== 'production' &&
       fieldContext?.hasHelperMessage &&
@@ -30,7 +39,8 @@ export const HelperMessage = forwardRef<
     return () => fieldContext?.setHasHelperMessage(false)
   }, [fieldContext])
 
-  const id = providedId ?? fieldContext?.helperMessageId
+  // Use context id when inside Field to keep aria-describedby in sync
+  const id = fieldContext?.helperMessageId ?? providedId
   // Inherit disabled from Field context if not explicitly set
   const isDisabled = disabled ?? fieldContext?.disabled ?? false
 
