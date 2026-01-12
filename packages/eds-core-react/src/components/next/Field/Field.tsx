@@ -19,22 +19,22 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
 ) {
   const id = useId()
   const [hasDescription, setHasDescription] = useState(false)
-  const [hasValidation, setHasValidation] = useState(false)
+  const [hasHelperMessage, setHasHelperMessage] = useState(false)
 
   const contextValue = useMemo<FieldContextValue>(
     () => ({
       id,
       labelId: `${id}-label`,
       descriptionId: `${id}-description`,
-      validationId: `${id}-validation`,
+      helperMessageId: `${id}-helper`,
       required,
       disabled,
       hasDescription,
-      hasValidation,
+      hasHelperMessage,
       setHasDescription,
-      setHasValidation,
+      setHasHelperMessage,
     }),
-    [id, required, disabled, hasDescription, hasValidation],
+    [id, required, disabled, hasDescription, hasHelperMessage],
   )
 
   return (

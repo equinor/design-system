@@ -17,7 +17,7 @@ export type FieldProps = {
    * - `end`: Label on the left, control on the right
    */
   position?: 'start' | 'end'
-  /** Field content composed of label, description, control, and validation message */
+  /** Field content composed of label, description, control, and helper message */
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 

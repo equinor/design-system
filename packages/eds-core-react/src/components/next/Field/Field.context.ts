@@ -7,20 +7,20 @@ export type FieldContextValue = {
   labelId: string
   /** ID for the description element (if present) */
   descriptionId: string
-  /** ID for the validation message (if present) */
-  validationId: string
+  /** ID for the helper message (if present) */
+  helperMessageId: string
   /** Whether the field is required */
   required: boolean
   /** Whether the field is disabled */
   disabled: boolean
   /** Register that description is present */
   hasDescription: boolean
-  /** Register that validation is present */
-  hasValidation: boolean
+  /** Register that helper message is present */
+  hasHelperMessage: boolean
   /** Set whether description is present */
   setHasDescription: (value: boolean) => void
-  /** Set whether validation is present */
-  setHasValidation: (value: boolean) => void
+  /** Set whether helper message is present */
+  setHasHelperMessage: (value: boolean) => void
 }
 
 export const FieldContext = createContext<FieldContextValue | null>(null)

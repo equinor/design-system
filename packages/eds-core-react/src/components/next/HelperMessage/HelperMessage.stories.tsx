@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Meta, StoryObj, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../../.storybook/components'
-import { ValidationMessage } from './ValidationMessage'
+import { HelperMessage } from './HelperMessage'
 import { Field } from '../Field'
 
-const meta: Meta<typeof ValidationMessage> = {
-  title: 'EDS 2.0 (beta)/Inputs/Form/ValidationMessage',
-  component: ValidationMessage,
+const meta: Meta<typeof HelperMessage> = {
+  title: 'EDS 2.0 (beta)/Inputs/Form/HelperMessage',
+  component: HelperMessage,
   decorators: [
     (Story) => (
       <Stack>
@@ -18,7 +18,7 @@ const meta: Meta<typeof ValidationMessage> = {
     docs: {
       description: {
         component:
-          'ValidationMessage communicates problems or status information associated with a field.',
+          'HelperMessage communicates guidance, validation errors, or status information associated with a field.',
       },
     },
   },
@@ -26,7 +26,7 @@ const meta: Meta<typeof ValidationMessage> = {
 
 export default meta
 
-type Story = StoryObj<typeof ValidationMessage>
+type Story = StoryObj<typeof HelperMessage>
 
 export const Default: Story = {
   args: {
@@ -59,7 +59,7 @@ const buttonStyles = {
 }
 
 /**
- * This example shows how ValidationMessage appears when form validation fails.
+ * This example shows how HelperMessage appears when form validation fails.
  * Notice how the layout shifts when the message appears/disappears.
  */
 export const PasswordValidation: StoryFn = () => {
@@ -79,10 +79,10 @@ export const PasswordValidation: StoryFn = () => {
         />
       </Field.Control>
       {!isValid && password.length > 0 && (
-        <ValidationMessage role="alert">
+        <HelperMessage role="alert">
           Password must be at least {minLength} characters (currently{' '}
           {password.length})
-        </ValidationMessage>
+        </HelperMessage>
       )}
       <button type="button" style={buttonStyles}>
         Submit
@@ -92,7 +92,7 @@ export const PasswordValidation: StoryFn = () => {
 }
 
 /**
- * To prevent layout shift, reserve space for the ValidationMessage using
+ * To prevent layout shift, reserve space for the HelperMessage using
  * CSS `visibility: hidden` instead of conditional rendering.
  * This keeps the message in the DOM but invisible.
  */
@@ -114,12 +114,12 @@ export const PasswordValidationNoLayoutShift: StoryFn = () => {
         />
       </Field.Control>
       {/* Always render, use visibility to hide - no layout shift */}
-      <ValidationMessage
+      <HelperMessage
         role="alert"
         style={{ visibility: showError ? 'visible' : 'hidden' }}
       >
         Password must be at least {minLength} characters
-      </ValidationMessage>
+      </HelperMessage>
       <button type="button" style={buttonStyles}>
         Submit
       </button>

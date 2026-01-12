@@ -3,4 +3,4 @@
 
 /* Component styles */
 @import './components/next/Field/field.css';
-@import './components/next/ValidationMessage/validation-message.css';
+@import './components/next/HelperMessage/helper-message.css';

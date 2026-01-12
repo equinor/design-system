@@ -1,6 +1,6 @@
 export { Icon } from './Icon'
 export { Field } from './Field'
-export { ValidationMessage } from './ValidationMessage'
+export { HelperMessage } from './HelperMessage'
 
 export type { IconProps, IconSize, IconData, IconName } from './Icon'
 export type {
@@ -10,4 +10,4 @@ export type {
   FieldControlProps,
 } from './Field'
 
-export type { ValidationMessageProps } from './ValidationMessage'
+export type { HelperMessageProps } from './HelperMessage'

@@ -3,7 +3,7 @@ import { useMemo, useState, type CSSProperties, type ChangeEvent } from 'react'
 import { Stack } from '../../../../.storybook/components'
 import { Field } from './Field'
 import type { FieldProps } from './Field.types'
-import { ValidationMessage } from '../ValidationMessage'
+import { HelperMessage } from '../HelperMessage'
 
 const meta: Meta<typeof Field> = {
   title: 'EDS 2.0 (beta)/Inputs/Form/Field',
@@ -19,7 +19,7 @@ const meta: Meta<typeof Field> = {
     docs: {
       description: {
         component:
-          'Field composes labels, descriptions, controls, and validation messages while wiring up accessibility attributes automatically.',
+          'Field composes labels, descriptions, controls, and helper messages while wiring up accessibility attributes automatically.',
       },
     },
   },
@@ -46,9 +46,7 @@ export const Default: StoryFn<FieldProps> = () => (
     <Field.Control>
       <input defaultValue="Smith Jones" style={inputStyles} />
     </Field.Control>
-    <ValidationMessage>
-      You cannot have spaces in your last name
-    </ValidationMessage>
+    <HelperMessage>You cannot have spaces in your last name</HelperMessage>
   </Field>
 )
 
@@ -87,9 +85,7 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
         <input value={value} onChange={onChange} style={inputStyles} />
       </Field.Control>
       {hasError && (
-        <ValidationMessage>
-          Username must be at least four characters
-        </ValidationMessage>
+        <HelperMessage>Username must be at least four characters</HelperMessage>
       )}
     </Field>
   )
@@ -165,12 +161,12 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
           I accept the terms
         </label>
         {/* Use visibility to prevent layout shift when message appears/disappears */}
-        <ValidationMessage
+        <HelperMessage
           role="alert"
           style={{ visibility: showError ? 'visible' : 'hidden' }}
         >
           You must accept the terms before continuing.
-        </ValidationMessage>
+        </HelperMessage>
       </Field>
       <button style={{ alignSelf: 'flex-start' }}>Submit</button>
     </div>

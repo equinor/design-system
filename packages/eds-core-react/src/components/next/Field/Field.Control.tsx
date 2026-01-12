@@ -7,16 +7,16 @@ export const FieldControl = forwardRef<HTMLDivElement, FieldControlProps>(
     const {
       id,
       descriptionId,
-      validationId,
+      helperMessageId,
       required,
       disabled,
       hasDescription,
-      hasValidation,
+      hasHelperMessage,
     } = useFieldContext()
 
     // Build aria-describedby from present elements
     const describedBy = [
-      hasValidation && validationId,
+      hasHelperMessage && helperMessageId,
       hasDescription && descriptionId,
     ]
       .filter(Boolean)

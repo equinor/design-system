@@ -1,24 +1,24 @@
 import { forwardRef, useEffect } from 'react'
 import { TypographyNext } from '../../Typography'
-import type { ValidationMessageProps } from './ValidationMessage.types'
+import type { HelperMessageProps } from './HelperMessage.types'
 import { useOptionalFieldContext } from '../Field/Field.context'
-import './validation-message.css'
+import './helper-message.css'
 
-export const ValidationMessage = forwardRef<
+export const HelperMessage = forwardRef<
   HTMLParagraphElement,
-  ValidationMessageProps
->(function ValidationMessage(
+  HelperMessageProps
+>(function HelperMessage(
   { disabled = false, children, className, role, id: providedId, ...rest },
   ref,
 ) {
   const fieldContext = useOptionalFieldContext()
 
   useEffect(() => {
-    fieldContext?.setHasValidation(true)
-    return () => fieldContext?.setHasValidation(false)
+    fieldContext?.setHasHelperMessage(true)
+    return () => fieldContext?.setHasHelperMessage(false)
   }, [fieldContext])
 
-  const id = providedId ?? fieldContext?.validationId
+  const id = providedId ?? fieldContext?.helperMessageId
 
   return (
     <TypographyNext
@@ -32,8 +32,8 @@ export const ValidationMessage = forwardRef<
       tracking="normal"
       role={role}
       className={[
-        'eds-validation-message',
-        disabled && 'eds-validation-message--disabled',
+        'eds-helper-message',
+        disabled && 'eds-helper-message--disabled',
         className,
       ]
         .filter(Boolean)
@@ -45,4 +45,4 @@ export const ValidationMessage = forwardRef<
   )
 })
 
-ValidationMessage.displayName = 'ValidationMessage'
+HelperMessage.displayName = 'HelperMessage'

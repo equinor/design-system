@@ -30,11 +30,11 @@
     width: auto;
   }
 
-  /* Description and validation span full width below in horizontal layout */
+  /* Description and helper message span full width below in horizontal layout */
   .eds-field[data-position='start'] .eds-field__description,
   .eds-field[data-position='end'] .eds-field__description,
-  .eds-field[data-position='start'] .eds-validation-message,
-  .eds-field[data-position='end'] .eds-validation-message {
+  .eds-field[data-position='start'] .eds-helper-message,
+  .eds-field[data-position='end'] .eds-helper-message {
     flex-basis: 100%;
   }
 

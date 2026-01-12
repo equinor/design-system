@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Field } from './Field'
-import { ValidationMessage } from '../ValidationMessage'
+import { HelperMessage } from '../HelperMessage'
 
 describe('Field', () => {
   test('renders label and associates it with control', () => {
@@ -75,24 +75,22 @@ describe('Field', () => {
     expect(field).toHaveAttribute('data-disabled', 'true')
   })
 
-  test('links validation message via aria-describedby', () => {
+  test('links helper message via aria-describedby', () => {
     render(
       <Field>
         <Field.Label>Email</Field.Label>
         <Field.Control>
           <input data-testid="input" />
         </Field.Control>
-        <ValidationMessage data-testid="validation">
-          Error message
-        </ValidationMessage>
+        <HelperMessage data-testid="helper">Error message</HelperMessage>
       </Field>,
     )
     const input = screen.getByTestId('input')
-    const validation = screen.getByTestId('validation')
-    expect(input.getAttribute('aria-describedby')).toContain(validation.id)
+    const helper = screen.getByTestId('helper')
+    expect(input.getAttribute('aria-describedby')).toContain(helper.id)
   })
 
-  test('combines description and validation in aria-describedby', () => {
+  test('combines description and helper message in aria-describedby', () => {
     render(
       <Field>
         <Field.Label>Password</Field.Label>
@@ -102,19 +100,17 @@ describe('Field', () => {
         <Field.Control>
           <input data-testid="input" />
         </Field.Control>
-        <ValidationMessage data-testid="validation">
-          Too short
-        </ValidationMessage>
+        <HelperMessage data-testid="helper">Too short</HelperMessage>
       </Field>,
     )
     const input = screen.getByTestId('input')
     const description = screen.getByTestId('description')
-    const validation = screen.getByTestId('validation')
+    const helper = screen.getByTestId('helper')
     const describedBy = input.getAttribute('aria-describedby') ?? ''
     const ids = describedBy.split(' ').filter(Boolean)
     expect(ids).toHaveLength(2)
     expect(describedBy).toContain(description.id)
-    expect(describedBy).toContain(validation.id)
+    expect(describedBy).toContain(helper.id)
   })
 
   test('forwards ref to wrapper div', () => {

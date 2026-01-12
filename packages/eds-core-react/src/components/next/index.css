@@ -4,4 +4,4 @@
 @layer eds-components;
 
 @import './Field/field.css';
-@import './ValidationMessage/validation-message.css';
+@import './HelperMessage/helper-message.css';
