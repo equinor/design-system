@@ -11,6 +11,33 @@
     --field-optional-color: var(--eds-color-text-subtle);
   }
 
+  /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
+  .eds-field[data-position='start'],
+  .eds-field[data-position='end'] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--eds-generic-gap-horizontal);
+  }
+
+  .eds-field[data-position='end'] {
+    flex-direction: row-reverse;
+  }
+
+  /* Control should not expand in horizontal layout */
+  .eds-field[data-position='start'] .eds-field__control,
+  .eds-field[data-position='end'] .eds-field__control {
+    width: auto;
+  }
+
+  /* Description and validation span full width below in horizontal layout */
+  .eds-field[data-position='start'] .eds-field__description,
+  .eds-field[data-position='end'] .eds-field__description,
+  .eds-field[data-position='start'] .eds-validation-message,
+  .eds-field[data-position='end'] .eds-validation-message {
+    flex-basis: 100%;
+  }
+
   .eds-field__label {
     display: inline-flex;
     flex-wrap: wrap;

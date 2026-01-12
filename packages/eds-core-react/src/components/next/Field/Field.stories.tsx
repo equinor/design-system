@@ -133,20 +133,18 @@ const checkboxStyles: CSSProperties = {
 }
 
 /**
- * For inline checkbox layouts, you can style the Field to use
- * horizontal layout with `flex-direction: row`.
+ * For inline checkbox layouts, use `position="start"` to place
+ * the control before the label in a horizontal layout.
  */
 export const WithCheckbox: StoryFn<FieldProps> = () => (
-  <Field style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '0.5rem' }}>
+  <Field position="start">
     <Field.Control>
       <input type="checkbox" style={checkboxStyles} />
     </Field.Control>
-    <div>
-      <Field.Label style={{ cursor: 'pointer' }}>I accept the terms</Field.Label>
-      <Field.Description style={{ marginTop: '0.25rem' }}>
-        By checking this box you agree to our terms and privacy policy.
-      </Field.Description>
-    </div>
+    <Field.Label style={{ cursor: 'pointer' }}>I accept the terms</Field.Label>
+    <Field.Description>
+      By checking this box you agree to our terms and privacy policy.
+    </Field.Description>
   </Field>
 )
 

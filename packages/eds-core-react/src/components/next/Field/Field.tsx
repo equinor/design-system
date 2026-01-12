@@ -7,7 +7,14 @@ import { FieldLabel } from './Field.Label'
 import { FieldContext, type FieldContextValue } from './Field.context'
 
 const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
-  { required = false, disabled = false, className, children, ...rest },
+  {
+    required = false,
+    disabled = false,
+    position,
+    className,
+    children,
+    ...rest
+  },
   ref,
 ) {
   const id = useId()
@@ -37,6 +44,7 @@ const FieldComponent = forwardRef<HTMLDivElement, FieldProps>(function Field(
         className={['eds-field', className].filter(Boolean).join(' ')}
         data-required={required || undefined}
         data-disabled={disabled || undefined}
+        data-position={position}
         {...rest}
       >
         {children}
