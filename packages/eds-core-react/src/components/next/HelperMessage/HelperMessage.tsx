@@ -14,6 +14,15 @@ export const HelperMessage = forwardRef<
   const fieldContext = useOptionalFieldContext()
 
   useEffect(() => {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      fieldContext?.hasHelperMessage
+    ) {
+      console.warn(
+        'HelperMessage: Multiple HelperMessage components detected within the same Field. ' +
+          'Only one HelperMessage per Field is supported.',
+      )
+    }
     fieldContext?.setHasHelperMessage(true)
     return () => fieldContext?.setHasHelperMessage(false)
   }, [fieldContext])

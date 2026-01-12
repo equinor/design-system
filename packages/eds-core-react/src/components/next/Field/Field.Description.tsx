@@ -7,12 +7,18 @@ export const FieldDescription = forwardRef<
   HTMLParagraphElement,
   FieldDescriptionProps
 >(function FieldDescription({ children, className, ...rest }, ref) {
-  const { descriptionId, setHasDescription } = useFieldContext()
+  const { descriptionId, setHasDescription, hasDescription } = useFieldContext()
 
   useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && hasDescription) {
+      console.warn(
+        'Field.Description: Multiple Description components detected within the same Field. ' +
+          'Only one Description per Field is supported.',
+      )
+    }
     setHasDescription(true)
     return () => setHasDescription(false)
-  }, [setHasDescription])
+  }, [setHasDescription, hasDescription])
 
   return (
     <TypographyNext

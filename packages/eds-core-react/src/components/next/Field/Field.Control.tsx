@@ -1,5 +1,5 @@
 import { forwardRef, cloneElement, isValidElement } from 'react'
-import type { FieldControlProps } from './Field.types'
+import type { FieldControlProps, InjectedControlProps } from './Field.types'
 import { useFieldContext } from './Field.context'
 
 export const FieldControl = forwardRef<HTMLDivElement, FieldControlProps>(
@@ -23,7 +23,11 @@ export const FieldControl = forwardRef<HTMLDivElement, FieldControlProps>(
       .join(' ')
 
     // Clone the child element and add accessibility props
-    const enhancedChild = isValidElement<Record<string, unknown>>(children)
+    // Uses intersection with Record<string, unknown> to allow any additional
+    // props the child element may have beyond InjectedControlProps
+    const enhancedChild = isValidElement<
+      InjectedControlProps & Record<string, unknown>
+    >(children)
       ? cloneElement(children, {
           ...children.props,
           id: children.props.id ?? id,
