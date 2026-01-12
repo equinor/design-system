@@ -207,17 +207,21 @@ describe('Field.Description', () => {
     expect(description).toHaveAttribute('id')
   })
 
-  test('uses custom id when provided', () => {
+  test('ignores custom id within Field context to keep aria-describedby in sync', () => {
     render(
       <Field>
         <Field.Label>Label</Field.Label>
         <Field.Description id="custom-desc">Description</Field.Description>
         <Field.Control>
-          <input />
+          <input data-testid="input" />
         </Field.Control>
       </Field>,
     )
-    expect(screen.getByText('Description')).toHaveAttribute('id', 'custom-desc')
+    const description = screen.getByText('Description')
+    const input = screen.getByTestId('input')
+    // Custom id is ignored - context id is used to keep aria-describedby in sync
+    expect(description).not.toHaveAttribute('id', 'custom-desc')
+    expect(input.getAttribute('aria-describedby')).toContain(description.id)
   })
 })
 
