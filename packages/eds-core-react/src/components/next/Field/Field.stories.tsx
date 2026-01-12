@@ -132,20 +132,21 @@ const checkboxStyles: CSSProperties = {
   accentColor: 'var(--eds-color-interactive-primary)',
 }
 
+/**
+ * For inline checkbox layouts, you can style the Field to use
+ * horizontal layout with `flex-direction: row`.
+ */
 export const WithCheckbox: StoryFn<FieldProps> = () => (
-  <Field>
+  <Field style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '0.5rem' }}>
     <Field.Control>
-      <input type="checkbox" id="terms-checkbox" style={checkboxStyles} />
+      <input type="checkbox" style={checkboxStyles} />
     </Field.Control>
-    <label
-      htmlFor="terms-checkbox"
-      style={{ display: 'flex', flexDirection: 'column' }}
-    >
-      <span>I accept the terms</span>
-      <Field.Description>
+    <div>
+      <Field.Label style={{ cursor: 'pointer' }}>I accept the terms</Field.Label>
+      <Field.Description style={{ marginTop: '0.25rem' }}>
         By checking this box you agree to our terms and privacy policy.
       </Field.Description>
-    </label>
+    </div>
   </Field>
 )
 

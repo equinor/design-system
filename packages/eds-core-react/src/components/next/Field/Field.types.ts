@@ -24,7 +24,15 @@ export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode
 }
 
+/** Props that Field.Control will inject into the child element */
+export type InjectedControlProps = {
+  id?: string
+  'aria-describedby'?: string
+  'aria-required'?: boolean
+  disabled?: boolean
+}
+
 export type FieldControlProps = HTMLAttributes<HTMLDivElement> & {
   /** The form control element (input, select, textarea, etc.) */
-  children: ReactElement
+  children: ReactElement<InjectedControlProps>
 }

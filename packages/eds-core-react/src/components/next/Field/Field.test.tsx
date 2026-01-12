@@ -224,3 +224,36 @@ describe('Field.Description', () => {
     expect(screen.getByText('Description')).toHaveAttribute('id', 'custom-desc')
   })
 })
+
+describe('Error handling', () => {
+  // Suppress console.error for expected errors in these tests
+  const originalError = console.error
+  beforeAll(() => {
+    console.error = jest.fn()
+  })
+  afterAll(() => {
+    console.error = originalError
+  })
+
+  test('Field.Label throws when used outside Field', () => {
+    expect(() => render(<Field.Label>Label</Field.Label>)).toThrow(
+      'Field components must be used within a Field',
+    )
+  })
+
+  test('Field.Description throws when used outside Field', () => {
+    expect(() =>
+      render(<Field.Description>Description</Field.Description>),
+    ).toThrow('Field components must be used within a Field')
+  })
+
+  test('Field.Control throws when used outside Field', () => {
+    expect(() =>
+      render(
+        <Field.Control>
+          <input />
+        </Field.Control>,
+      ),
+    ).toThrow('Field components must be used within a Field')
+  })
+})

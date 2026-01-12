@@ -24,9 +24,7 @@ export const FieldDescription = forwardRef<
       baseline="center"
       lineHeight="default"
       tracking="normal"
-      className={['eds-field__description', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['eds-field__description', className].filter(Boolean).join(' ')}
       {...rest}
     >
       {children}

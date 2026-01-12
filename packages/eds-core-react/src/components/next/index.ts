@@ -7,6 +7,7 @@ export type {
   FieldProps,
   FieldLabelProps,
   FieldDescriptionProps,
+  FieldControlProps,
 } from './Field'
 
 export type { ValidationMessageProps } from './ValidationMessage'
