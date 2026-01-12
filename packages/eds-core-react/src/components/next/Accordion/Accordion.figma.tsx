@@ -26,12 +26,14 @@ figma.connect(
           true: true,
           false: false,
         }),
+        headerText: figma.textContent('Header Text'),
+        contentText: figma.textContent('Content Text'),
       }),
     },
     example: ({ disabled, accordion }) => (
       <Accordion disabled={disabled} defaultOpen={accordion.open}>
-        <Accordion.Header>Accordion Header</Accordion.Header>
-        <Accordion.Content>Accordion content goes here</Accordion.Content>
+        <Accordion.Header>{accordion.headerText}</Accordion.Header>
+        <Accordion.Content>{accordion.contentText}</Accordion.Content>
       </Accordion>
     ),
   },
