@@ -8,7 +8,7 @@ export const HelperMessage = forwardRef<
   HTMLParagraphElement,
   HelperMessageProps
 >(function HelperMessage(
-  { disabled = false, children, className, role, id: providedId, ...rest },
+  { disabled, children, className, role, id: providedId, ...rest },
   ref,
 ) {
   const fieldContext = useOptionalFieldContext()
@@ -19,6 +19,8 @@ export const HelperMessage = forwardRef<
   }, [fieldContext])
 
   const id = providedId ?? fieldContext?.helperMessageId
+  // Inherit disabled from Field context if not explicitly set
+  const isDisabled = disabled ?? fieldContext?.disabled ?? false
 
   return (
     <TypographyNext
@@ -33,7 +35,7 @@ export const HelperMessage = forwardRef<
       role={role}
       className={[
         'eds-helper-message',
-        disabled && 'eds-helper-message--disabled',
+        isDisabled && 'eds-helper-message--disabled',
         className,
       ]
         .filter(Boolean)

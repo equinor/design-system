@@ -66,4 +66,36 @@ describe('HelperMessage within Field', () => {
     const input = screen.getByTestId('input')
     expect(input).toHaveAttribute('aria-describedby')
   })
+
+  test('inherits disabled state from Field context', () => {
+    render(
+      <Field disabled>
+        <Field.Label>Label</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <HelperMessage data-testid="message">Helper text</HelperMessage>
+      </Field>,
+    )
+    expect(screen.getByTestId('message')).toHaveClass(
+      'eds-helper-message--disabled',
+    )
+  })
+
+  test('explicit disabled prop overrides Field context', () => {
+    render(
+      <Field disabled>
+        <Field.Label>Label</Field.Label>
+        <Field.Control>
+          <input />
+        </Field.Control>
+        <HelperMessage disabled={false} data-testid="message">
+          Not disabled
+        </HelperMessage>
+      </Field>,
+    )
+    expect(screen.getByTestId('message')).not.toHaveClass(
+      'eds-helper-message--disabled',
+    )
+  })
 })
