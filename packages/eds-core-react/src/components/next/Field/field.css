@@ -34,7 +34,9 @@
   .eds-field[data-position='start'] .eds-field__description,
   .eds-field[data-position='end'] .eds-field__description,
   .eds-field[data-position='start'] .eds-helper-message,
-  .eds-field[data-position='end'] .eds-helper-message {
+  .eds-field[data-position='end'] .eds-helper-message,
+  .eds-field[data-position='start'] [role='alert'],
+  .eds-field[data-position='end'] [role='alert'] {
     flex-basis: 100%;
   }
 
