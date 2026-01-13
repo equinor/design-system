@@ -8,53 +8,180 @@ const meta: Meta<typeof TextField> = {
   component: TextField,
   tags: ['beta'],
   args: {
-    disabled: false,
-    invalid: false,
+    // Core
+    placeholder: '',
+    // Label
     optional: false,
     required: false,
     requiredSilent: false,
+    // States
+    disabled: false,
+    invalid: false,
+    readOnly: false,
   },
   argTypes: {
+    // Core
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text displayed when input is empty',
+      table: {
+        category: 'Core',
+      },
+    },
+    type: {
+      control: 'select',
+      options: ['text', 'number', 'password', 'email', 'tel', 'url', 'date'],
+      description: 'HTML input type attribute',
+      table: {
+        category: 'Core',
+        defaultValue: { summary: 'text' },
+      },
+    },
+    as: {
+      control: 'radio',
+      options: ['input', 'textarea'],
+      description: 'Render as single-line input or multi-line textarea',
+      table: {
+        category: 'Core',
+        defaultValue: { summary: 'input' },
+      },
+    },
+
+    // Label
     label: {
       control: 'text',
+      description: 'Label text for the field',
+      table: {
+        category: 'Label',
+      },
     },
     labelInfo: {
       control: 'text',
       description: 'Info tooltip content shown next to the label',
+      table: {
+        category: 'Label',
+      },
     },
     optional: {
       control: 'boolean',
       description: 'Shows "(Optional)" indicator in the label',
-      table: { defaultValue: { summary: 'false' } },
+      table: {
+        category: 'Label',
+        defaultValue: { summary: 'false' },
+      },
     },
     required: {
       control: 'boolean',
       description:
         'Shows "(Required)" indicator in the label and sets required/aria-required on the input',
-      table: { defaultValue: { summary: 'false' } },
+      table: {
+        category: 'Label',
+        defaultValue: { summary: 'false' },
+      },
     },
     requiredSilent: {
       control: 'boolean',
       description:
         'Sets required/aria-required on the input without showing indicator (for forms where most fields are required)',
-      table: { defaultValue: { summary: 'false' } },
+      table: {
+        category: 'Label',
+        defaultValue: { summary: 'false' },
+      },
     },
+
+    // Content
     description: {
       control: 'text',
+      description: 'Descriptive text displayed below the label',
+      table: {
+        category: 'Content',
+      },
     },
     helperMessage: {
       control: 'text',
+      description: 'Helper or validation message shown below the input',
+      table: {
+        category: 'Content',
+      },
     },
-    placeholder: {
-      control: 'text',
+
+    // States
+    invalid: {
+      control: 'boolean',
+      description: 'Shows error styling with red border and error icon',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
     },
     disabled: {
       control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
+      description: 'Disables input interaction',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
     },
-    invalid: {
+    readOnly: {
       control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
+      description: 'Makes input read-only (visible but not editable)',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+
+    // Adornments
+    leftText: {
+      control: 'text',
+      description:
+        'Text prefix on the left (e.g., "$", "https://"). Always neutral color.',
+      table: {
+        category: 'Adornments',
+      },
+    },
+    rightText: {
+      control: 'text',
+      description:
+        'Text suffix on the right (e.g., "kg", "%", "USD"). Always neutral color.',
+      table: {
+        category: 'Adornments',
+      },
+    },
+    leftAdornment: {
+      control: false,
+      description:
+        'ReactNode for left side (icons, buttons). Inherits state color (red when invalid).',
+      table: {
+        category: 'Adornments',
+        type: { summary: 'ReactNode' },
+      },
+    },
+    rightAdornment: {
+      control: false,
+      description:
+        'ReactNode for right side (icons, buttons). Inherits state color (red when invalid).',
+      table: {
+        category: 'Adornments',
+        type: { summary: 'ReactNode' },
+      },
+    },
+
+    // Other
+    className: {
+      control: 'text',
+      description: 'Additional CSS class names for the container',
+      table: {
+        category: 'Other',
+      },
+    },
+    id: {
+      control: 'text',
+      description:
+        'Unique identifier for the field (auto-generated if not provided)',
+      table: {
+        category: 'Other',
+      },
     },
   },
   parameters: {
@@ -96,6 +223,7 @@ export const Introduction: StoryFn<TextFieldProps> = (args) => {
 
 Introduction.args = {
   label: 'Label',
+  labelInfo: 'Tooltip text',
   description: 'Help with more details',
   placeholder: 'Placeholder',
   helperMessage: 'Helper Message',
