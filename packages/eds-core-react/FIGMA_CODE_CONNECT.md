@@ -21,28 +21,37 @@ Code Connect bridges your React components with Figma's Dev Mode, showing develo
 
 ## Project Structure
 
+:::info
+
+Code Connect is currently only enabled for components in the `/next` folder (EDS 2.0 components).
+
+:::
+
 ```
-packages/eds-core-react/src/components/
+packages/eds-core-react/
 ├── figma.config.json          # Code Connect configuration
-├── Button/
-│   ├── Button.tsx             # Component implementation
-│   ├── Button.figma.tsx       # Code Connect file
-│   └── ...
-├── Icon/
-│   ├── Icon.tsx
-│   ├── Icon.figma.tsx         # Icon wrapper connection
-│   └── ...
-└── IconData.figma.tsx         # Auto-generated icon connections
+├── .env                       # Figma access token (git-ignored)
+├── package.json
+└── src/components/
+    └── next/                  # EDS 2.0 components (Code Connect enabled)
+        ├── Placeholder/
+        │   ├── Placeholder.tsx
+        │   ├── Placeholder.figma.tsx   # Example Code Connect file
+        │   └── ...
+        └── [YourComponent]/
+            ├── YourComponent.tsx
+            ├── YourComponent.figma.tsx
+            └── ...
 ```
 
 ## Configuration
 
-The `figma.config.json` file configures Code Connect:
+The `figma.config.json` file is located at the package root (alongside `package.json`) and configures Code Connect:
 
 ```json
 {
   "codeConnect": {
-    "include": ["/**/*.{tsx,jsx}"],
+    "include": ["src/components/next/**/*.{tsx,jsx}"],
     "label": "React",
     "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/YOUR_FILE_KEY/..."
   }
@@ -53,13 +62,13 @@ The `figma.config.json` file configures Code Connect:
 
 ### Step 0: Create the .env file
 
-Create a `.env` in the /component directory for easier using your Figma token
+Create a `.env` file at the package root (`packages/eds-core-react/.env`):
 
 ```
 FIGMA_ACCESS_TOKEN="your_token"
 ```
 
-This will be picked up by the Code Connect CLI when run from the /component directory.
+This will be picked up by the Code Connect CLI when run from the package root.
 
 ### Step 1: Create the `.figma.tsx` File
 
@@ -285,10 +294,10 @@ Publish all Code Connect files:
 npx figma connect publish
 ```
 
-Publish a specific component (must be run in /components dir and --dir flag refers to the actual component folder):
+Publish a specific component (run from `packages/eds-core-react/`):
 
 ```bash
-npx figma connect publish --dir "Radio"
+npx figma connect publish --dir "src/components/Radio"
 ```
 
 Dry run (validate without publishing):
@@ -319,7 +328,7 @@ You can set these instead of passing CLI flags:
 export FIGMA_ACCESS_TOKEN=your_token
 ```
 
-Or create a `.env` file in the components directory:
+Or create a `.env` file at the package root (`packages/eds-core-react/`):
 
 ```
 FIGMA_ACCESS_TOKEN=your_token
