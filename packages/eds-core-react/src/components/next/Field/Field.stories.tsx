@@ -50,9 +50,10 @@ const inputStyles: CSSProperties = {
 /**
  * Basic usage with the `useFieldIds` hook for accessible form fields.
  * The hook generates consistent IDs and a `getDescribedBy` helper for `aria-describedby`.
+ * `labelId` is also available for components using `aria-labelledby` instead of `htmlFor`.
  */
 export const Default: StoryFn<FieldProps> = () => {
-  const { inputId, descriptionId, helperMessageId, getDescribedBy } =
+  const { inputId, labelId, descriptionId, helperMessageId, getDescribedBy } =
     useFieldIds()
 
   return (
@@ -287,39 +288,5 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
       </Field>
       <Button>Submit</Button>
     </div>
-  )
-}
-
-/**
- * Use `labelId` with `aria-labelledby` for custom components that don't support
- * native label association via `htmlFor`/`id`.
- */
-export const WithAriaLabelledby: StoryFn<FieldProps> = () => {
-  const { labelId, descriptionId, getDescribedBy } = useFieldIds()
-
-  return (
-    <Field>
-      <Field.Label id={labelId}>Custom slider</Field.Label>
-      <Field.Description id={descriptionId}>
-        Adjust the value between 0 and 100.
-      </Field.Description>
-      {/* Custom component without native label support */}
-      <div
-        role="slider"
-        aria-labelledby={labelId}
-        aria-describedby={getDescribedBy()}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={50}
-        tabIndex={0}
-        style={{
-          width: '100%',
-          height: '8px',
-          background: 'var(--eds-color-interactive-primary)',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}
-      />
-    </Field>
   )
 }
