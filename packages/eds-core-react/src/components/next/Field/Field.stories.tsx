@@ -58,7 +58,9 @@ export const Default: StoryFn<FieldProps> = () => {
 
   return (
     <Field>
-      <Field.Label htmlFor={inputId}>Last name</Field.Label>
+      <Field.Label htmlFor={inputId} id={labelId}>
+        Last name
+      </Field.Label>
       <Field.Description id={descriptionId}>
         Last name cannot contain spaces.
       </Field.Description>
