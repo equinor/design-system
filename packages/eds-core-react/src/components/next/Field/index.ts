@@ -3,6 +3,6 @@ export type {
   FieldProps,
   FieldLabelProps,
   FieldDescriptionProps,
-  FieldControlProps,
 } from './Field.types'
-export { useFieldContext, useOptionalFieldContext } from './Field.context'
+export { useFieldIds } from './useFieldIds'
+export type { FieldIds } from './useFieldIds'

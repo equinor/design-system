@@ -1,14 +1,7 @@
-import type {
-  HTMLAttributes,
-  LabelHTMLAttributes,
-  ReactNode,
-  ReactElement,
-} from 'react'
+import type { HTMLAttributes, LabelHTMLAttributes, ReactNode } from 'react'
 
 export type FieldProps = {
-  /** Marks the field as required */
-  required?: boolean
-  /** Disables all form controls within the field */
+  /** Applies disabled styling to the field */
   disabled?: boolean
   /**
    * Enables horizontal layout for toggle inputs (checkbox, radio, switch).
@@ -25,21 +18,12 @@ export type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
   children: ReactNode
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
+  /** Applies disabled styling to the label */
+  disabled?: boolean
 }
 
 export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode
-}
-
-/** Props that Field.Control will inject into the child element */
-export type InjectedControlProps = {
-  id?: string
-  'aria-describedby'?: string
-  'aria-required'?: boolean
+  /** Applies disabled styling to the description */
   disabled?: boolean
-}
-
-export type FieldControlProps = HTMLAttributes<HTMLDivElement> & {
-  /** The form control element (input, select, textarea, etc.) */
-  children: ReactElement<InjectedControlProps>
 }

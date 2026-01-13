@@ -1,49 +1,31 @@
-import { forwardRef, useEffect, useRef } from 'react'
+import { forwardRef } from 'react'
 import { TypographyNext } from '../../Typography'
 import type { HelperMessageProps } from './HelperMessage.types'
-import { useOptionalFieldContext } from '../Field/Field.context'
 import './helper-message.css'
 
+/**
+ * HelperMessage provides contextual help or validation feedback for form fields.
+ *
+ * Use with `useFieldIds` hook to connect to form controls via `aria-describedby`.
+ *
+ * @example
+ * ```tsx
+ * const { inputId, helperMessageId, getDescribedBy } = useFieldIds()
+ *
+ * <Field>
+ *   <Field.Label htmlFor={inputId}>Email</Field.Label>
+ *   <input id={inputId} aria-describedby={getDescribedBy()} />
+ *   <HelperMessage id={helperMessageId}>We'll never share your email</HelperMessage>
+ * </Field>
+ * ```
+ */
 export const HelperMessage = forwardRef<
   HTMLParagraphElement,
   HelperMessageProps
 >(function HelperMessage(
-  { disabled, children, className, role, id: providedId, ...rest },
+  { disabled = false, children, className, role, id, ...rest },
   ref,
 ) {
-  const fieldContext = useOptionalFieldContext()
-  const hasRegistered = useRef(false)
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production' && providedId && fieldContext) {
-      console.warn(
-        'HelperMessage: Custom "id" prop is ignored when used within a Field. ' +
-          'The id from Field context is used to keep aria-describedby in sync.',
-      )
-    }
-  }, [providedId, fieldContext])
-
-  useEffect(() => {
-    if (
-      process.env.NODE_ENV !== 'production' &&
-      fieldContext?.hasHelperMessage &&
-      !hasRegistered.current
-    ) {
-      console.warn(
-        'HelperMessage: Multiple HelperMessage components detected within the same Field. ' +
-          'Only one HelperMessage per Field is supported.',
-      )
-    }
-    hasRegistered.current = true
-    fieldContext?.setHasHelperMessage(true)
-    return () => fieldContext?.setHasHelperMessage(false)
-  }, [fieldContext])
-
-  // Use context id when inside Field to keep aria-describedby in sync
-  const id = fieldContext?.helperMessageId ?? providedId
-  // Inherit disabled from Field context if not explicitly set
-  const isDisabled = disabled ?? fieldContext?.disabled ?? false
-
   return (
     <TypographyNext
       ref={ref}
@@ -57,7 +39,7 @@ export const HelperMessage = forwardRef<
       role={role}
       className={[
         'eds-helper-message',
-        isDisabled && 'eds-helper-message--disabled',
+        disabled && 'eds-helper-message--disabled',
         className,
       ]
         .filter(Boolean)

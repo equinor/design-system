@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, renderHook } from '@testing-library/react'
 import { HelperMessage } from './HelperMessage'
-import { Field } from '../Field'
+import { Field, useFieldIds } from '../Field'
 
 describe('HelperMessage', () => {
   test('renders helper message text', () => {
@@ -52,50 +52,34 @@ describe('HelperMessage', () => {
   })
 })
 
-describe('HelperMessage within Field', () => {
-  test('registers with Field context for aria-describedby', () => {
-    render(
+describe('HelperMessage with useFieldIds', () => {
+  const FieldWithHelper = () => {
+    const { inputId, helperMessageId, getDescribedBy } = useFieldIds('test')
+    return (
       <Field>
-        <Field.Label>Label</Field.Label>
-        <Field.Control>
-          <input data-testid="input" />
-        </Field.Control>
-        <HelperMessage>Error message</HelperMessage>
-      </Field>,
+        <Field.Label htmlFor={inputId}>Email</Field.Label>
+        <input
+          id={inputId}
+          data-testid="input"
+          aria-describedby={getDescribedBy({ hasHelperMessage: true })}
+        />
+        <HelperMessage id={helperMessageId}>Error message</HelperMessage>
+      </Field>
     )
+  }
+
+  test('connects to input via aria-describedby', () => {
+    render(<FieldWithHelper />)
     const input = screen.getByTestId('input')
     expect(input).toHaveAttribute('aria-describedby')
-  })
-
-  test('inherits disabled state from Field context', () => {
-    render(
-      <Field disabled>
-        <Field.Label>Label</Field.Label>
-        <Field.Control>
-          <input />
-        </Field.Control>
-        <HelperMessage data-testid="message">Helper text</HelperMessage>
-      </Field>,
-    )
-    expect(screen.getByTestId('message')).toHaveClass(
-      'eds-helper-message--disabled',
+    expect(input.getAttribute('aria-describedby')).toContain(
+      'test-helper-message',
     )
   })
 
-  test('explicit disabled prop overrides Field context', () => {
-    render(
-      <Field disabled>
-        <Field.Label>Label</Field.Label>
-        <Field.Control>
-          <input />
-        </Field.Control>
-        <HelperMessage disabled={false} data-testid="message">
-          Not disabled
-        </HelperMessage>
-      </Field>,
-    )
-    expect(screen.getByTestId('message')).not.toHaveClass(
-      'eds-helper-message--disabled',
-    )
+  test('has correct id from useFieldIds', () => {
+    render(<FieldWithHelper />)
+    const helper = screen.getByText('Error message')
+    expect(helper).toHaveAttribute('id', 'test-helper-message')
   })
 })
