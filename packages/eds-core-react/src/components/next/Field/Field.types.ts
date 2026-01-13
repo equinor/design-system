@@ -26,3 +26,15 @@ export type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
 export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode
 }
+
+export type FieldControlProps = HTMLAttributes<HTMLDivElement> & {
+  /** The input element to enhance with accessibility props */
+  children: ReactNode
+}
+
+export type InjectedControlProps = {
+  id?: string
+  'aria-describedby'?: string
+  'aria-required'?: boolean
+  disabled?: boolean
+}
