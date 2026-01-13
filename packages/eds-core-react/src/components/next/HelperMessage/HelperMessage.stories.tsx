@@ -3,7 +3,7 @@ import { Meta, StoryObj, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../../.storybook/components'
 import { Button } from '../../Button'
 import { HelperMessage } from './HelperMessage'
-import { Field } from '../Field'
+import { Field, useFieldIds } from '../Field'
 
 const meta: Meta<typeof HelperMessage> = {
   title: 'EDS 2.0 (beta)/Inputs/Form/HelperMessage',
@@ -59,22 +59,29 @@ export const PasswordValidation: StoryFn = () => {
   const minLength = 8
   const isValid = password.length >= minLength
   const showError = !isValid && password.length > 0
+  const { inputId, helperMessageId, getDescribedBy } = useFieldIds()
 
   return (
     <Field>
-      <Field.Label indicator="(Required)">Password</Field.Label>
-      <Field.Control>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={inputStyles}
-        />
-      </Field.Control>
+      <Field.Label htmlFor={inputId} indicator="(Required)">
+        Password
+      </Field.Label>
+      <input
+        id={inputId}
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        aria-describedby={getDescribedBy({
+          hasDescription: false,
+          hasHelperMessage: showError,
+        })}
+        aria-invalid={showError}
+        style={inputStyles}
+      />
       {/* Wrapper with role="alert" stays in DOM, content renders conditionally */}
       <div role="alert">
         {showError && (
-          <HelperMessage>
+          <HelperMessage id={helperMessageId}>
             Password must be at least {minLength} characters
           </HelperMessage>
         )}
