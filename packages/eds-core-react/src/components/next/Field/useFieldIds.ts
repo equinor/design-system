@@ -1,5 +1,3 @@
-'use client'
-
 import { useId } from 'react'
 
 export interface FieldIds {
