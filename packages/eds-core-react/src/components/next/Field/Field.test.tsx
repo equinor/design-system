@@ -34,9 +34,11 @@ describe('useFieldIds', () => {
     )
   })
 
-  test('getDescribedBy excludes descriptionId when hasDescription is false', () => {
+  test('getDescribedBy returns undefined when hasDescription is false', () => {
     const { result } = renderHook(() => useFieldIds('test'))
-    expect(result.current.getDescribedBy({ hasDescription: false })).toBe('')
+    expect(
+      result.current.getDescribedBy({ hasDescription: false }),
+    ).toBeUndefined()
   })
 
   test('getDescribedBy handles all combinations correctly', () => {
@@ -52,7 +54,7 @@ describe('useFieldIds', () => {
         hasDescription: false,
         hasHelperMessage: false,
       }),
-    ).toBe('')
+    ).toBeUndefined()
   })
 })
 
@@ -149,16 +151,6 @@ describe('Field.Label', () => {
     )
     expect(screen.getByText('(Påkrevd)')).toBeInTheDocument()
   })
-
-  test('applies disabled styling via className', () => {
-    render(
-      <Field.Label htmlFor="test" disabled data-testid="label">
-        Disabled Label
-      </Field.Label>,
-    )
-    const label = screen.getByTestId('label')
-    expect(label).toHaveClass('eds-field__label--disabled')
-  })
 })
 
 describe('Field.Description', () => {
@@ -174,16 +166,6 @@ describe('Field.Description', () => {
     )
     const description = screen.getByText('Description')
     expect(description).toHaveAttribute('id', 'my-description')
-  })
-
-  test('applies disabled styling via className', () => {
-    render(
-      <Field.Description id="desc" disabled data-testid="description">
-        Disabled Description
-      </Field.Description>,
-    )
-    const description = screen.getByTestId('description')
-    expect(description).toHaveClass('eds-field__description--disabled')
   })
 })
 

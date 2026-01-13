@@ -5,10 +5,7 @@ import type { FieldDescriptionProps } from './Field.types'
 export const FieldDescription = forwardRef<
   HTMLParagraphElement,
   FieldDescriptionProps
->(function FieldDescription(
-  { children, className, disabled = false, ...rest },
-  ref,
-) {
+>(function FieldDescription({ children, className, ...rest }, ref) {
   return (
     <TypographyNext
       ref={ref}
@@ -18,11 +15,7 @@ export const FieldDescription = forwardRef<
       baseline="center"
       lineHeight="default"
       tracking="normal"
-      className={[
-        'eds-field__description',
-        disabled && 'eds-field__description--disabled',
-        className,
-      ]
+      className={['eds-field__description', className]
         .filter(Boolean)
         .join(' ')}
       {...rest}

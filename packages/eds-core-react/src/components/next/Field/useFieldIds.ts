@@ -1,23 +1,33 @@
+'use client'
+
 import { useId } from 'react'
 
 export interface FieldIds {
   /** ID for the input/checkbox/radio/switch element */
   inputId: string
-  /** ID for the label element */
+  /**
+   * ID for the label element.
+   * Use with aria-labelledby for components without native label support.
+   * @example
+   * ```tsx
+   * <Field.Label id={labelId}>Name</Field.Label>
+   * <CustomInput aria-labelledby={labelId} />
+   * ```
+   */
   labelId: string
   /** ID for the description element */
   descriptionId: string
   /** ID for the helper message element */
   helperMessageId: string
   /**
-   * Generate aria-describedby string from relevant IDs
+   * Generate aria-describedby string from relevant IDs.
    * @param options - Which elements are present in the field
-   * @returns Space-separated string of IDs, or empty string if none
+   * @returns Space-separated string of IDs, or undefined if none
    */
   getDescribedBy: (options?: {
     hasDescription?: boolean
     hasHelperMessage?: boolean
-  }) => string
+  }) => string | undefined
 }
 
 /**
@@ -68,7 +78,7 @@ export function useFieldIds(providedId?: string): FieldIds {
       if (hasDescription) ids.push(`${baseId}-description`)
       if (hasHelperMessage) ids.push(`${baseId}-helper-message`)
 
-      return ids.join(' ')
+      return ids.length > 0 ? ids.join(' ') : undefined
     },
   }
 }

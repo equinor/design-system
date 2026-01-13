@@ -1,4 +1,4 @@
-import { render, screen, renderHook } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { HelperMessage } from './HelperMessage'
 import { Field, useFieldIds } from '../Field'
 

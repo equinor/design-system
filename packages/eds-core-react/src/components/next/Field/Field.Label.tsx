@@ -3,10 +3,7 @@ import { TypographyNext } from '../../Typography'
 import type { FieldLabelProps } from './Field.types'
 
 export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
-  function FieldLabel(
-    { children, className, indicator, disabled = false, ...rest },
-    ref,
-  ) {
+  function FieldLabel({ children, className, indicator, ...rest }, ref) {
     return (
       <TypographyNext
         ref={ref}
@@ -17,13 +14,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
         lineHeight="default"
         weight="normal"
         tracking="normal"
-        className={[
-          'eds-field__label',
-          disabled && 'eds-field__label--disabled',
-          className,
-        ]
-          .filter(Boolean)
-          .join(' ')}
+        className={['eds-field__label', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}

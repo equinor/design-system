@@ -1,11 +1,14 @@
 import type { HTMLAttributes, LabelHTMLAttributes, ReactNode } from 'react'
 
 export type FieldProps = {
-  /** Applies disabled styling to the field */
+  /**
+   * Applies disabled styling to the field and all sub-components.
+   * Sets `data-disabled` attribute for CSS styling.
+   */
   disabled?: boolean
   /**
    * Enables horizontal layout for toggle inputs (checkbox, radio, switch).
-   * Omit for standard vertical layout with text inputs.
+   * When omitted (default), uses vertical layout for standard text inputs.
    * - `start`: Control on the left, label on the right
    * - `end`: Label on the left, control on the right
    */
@@ -18,12 +21,8 @@ export type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
   children: ReactNode
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
-  /** Applies disabled styling to the label */
-  disabled?: boolean
 }
 
 export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode
-  /** Applies disabled styling to the description */
-  disabled?: boolean
 }

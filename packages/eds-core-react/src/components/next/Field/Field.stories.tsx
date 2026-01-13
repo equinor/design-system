@@ -201,16 +201,15 @@ export const WithDescription: StoryFn<FieldProps> = () => {
 
 /**
  * Disabled state styling with `data-disabled` attribute.
+ * Sub-components inherit disabled styling via CSS custom properties.
  */
 export const DisabledField: StoryFn<FieldProps> = () => {
   const { inputId, descriptionId, getDescribedBy } = useFieldIds()
 
   return (
     <Field disabled>
-      <Field.Label htmlFor={inputId} disabled>
-        Username
-      </Field.Label>
-      <Field.Description id={descriptionId} disabled>
+      <Field.Label htmlFor={inputId}>Username</Field.Label>
+      <Field.Description id={descriptionId}>
         Cannot be changed after creation.
       </Field.Description>
       <input
