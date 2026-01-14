@@ -118,52 +118,34 @@
   fill: var(--eds-color-border-neutral-medium);
 }
 
-/* Icon paths visibility */
-.eds-checkbox__icon-path--checked {
+/* Icon visibility logic is controlled by CSS - default state: show unchecked, hide others */
+.eds-checkbox__icon--checked,
+.eds-checkbox__icon--indeterminate {
   display: none;
 }
 
-.eds-checkbox__input:checked
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--checked {
+.eds-checkbox__icon--unchecked {
   display: inline;
 }
 
-.eds-checkbox__input:checked
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--unchecked {
-  display: none;
-}
-
-.eds-checkbox__input:not(:checked)
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--checked {
-  display: none;
-}
-
-.eds-checkbox__input:not(:checked)
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--unchecked {
+/* Checked state: show checked icon, hide others */
+.eds-checkbox__input:checked ~ .eds-checkbox__icon--checked {
   display: inline;
 }
 
-/* Indeterminate state */
-.eds-checkbox__icon-path--indeterminate {
+.eds-checkbox__input:checked ~ .eds-checkbox__icon--unchecked {
   display: none;
 }
 
+/* Indeterminate state: show indeterminate icon, hide others */
 .eds-checkbox__input[data-indeterminate='true']
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--indeterminate {
+  ~ .eds-checkbox__icon--indeterminate {
   display: inline;
 }
 
+.eds-checkbox__input[data-indeterminate='true'] ~ .eds-checkbox__icon--checked,
 .eds-checkbox__input[data-indeterminate='true']
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--checked,
-.eds-checkbox__input[data-indeterminate='true']
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--unchecked {
+  ~ .eds-checkbox__icon--unchecked {
   display: none;
 }
 

@@ -6,6 +6,7 @@ import {
   checkbox_indeterminate,
 } from '@equinor/eds-icons'
 import { TypographyNext } from '../../Typography'
+import { Icon } from '../Icon'
 import type { CheckboxProps } from './Checkbox.types'
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
@@ -39,8 +40,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     const labelClasses = classNames('eds-checkbox__label')
 
-    const iconClasses = classNames('eds-checkbox__icon')
-
     const sharedWrapperProps: Record<string, unknown> = {
       style,
       'data-disabled': disabled ? 'true' : undefined,
@@ -64,53 +63,18 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           data-indeterminate={indeterminate}
           {...rest}
         />
-        {indeterminate ? (
-          <svg
-            className={iconClasses}
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              className="eds-checkbox__icon-path eds-checkbox__icon-path--indeterminate"
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d={
-                Array.isArray(checkbox_indeterminate.svgPathData)
-                  ? checkbox_indeterminate.svgPathData.join(' ')
-                  : checkbox_indeterminate.svgPathData
-              }
-            />
-          </svg>
-        ) : (
-          <svg
-            className={iconClasses}
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              className="eds-checkbox__icon-path eds-checkbox__icon-path--checked"
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d={
-                Array.isArray(checkbox.svgPathData)
-                  ? checkbox.svgPathData.join(' ')
-                  : checkbox.svgPathData
-              }
-            />
-            <path
-              className="eds-checkbox__icon-path eds-checkbox__icon-path--unchecked"
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d={
-                Array.isArray(checkbox_outline.svgPathData)
-                  ? checkbox_outline.svgPathData.join(' ')
-                  : checkbox_outline.svgPathData
-              }
-            />
-          </svg>
-        )}
+        <Icon
+          data={checkbox}
+          className="eds-checkbox__icon eds-checkbox__icon--checked"
+        />
+        <Icon
+          data={checkbox_outline}
+          className="eds-checkbox__icon eds-checkbox__icon--unchecked"
+        />
+        <Icon
+          data={checkbox_indeterminate}
+          className="eds-checkbox__icon eds-checkbox__icon--indeterminate"
+        />
       </span>
     )
 
