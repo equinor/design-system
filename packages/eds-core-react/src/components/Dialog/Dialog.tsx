@@ -5,13 +5,13 @@ import {
   MouseEvent,
   ForwardedRef,
   useMemo,
+  KeyboardEvent,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   bordersTemplate,
   useToken,
-  useGlobalKeyPress,
   useHideBodyScroll,
   mergeRefs,
 } from '@equinor/eds-utils'
@@ -90,16 +90,21 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
         onClose && onClose()
       }
   }
-  useGlobalKeyPress('Escape', (e) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDialogElement>) => {
+    if (e.key !== 'Escape') return
     e.preventDefault()
     if (isDismissable && onClose && open) {
-      onClose && onClose()
+      onClose()
     }
-  })
+  }
 
   return (
     <ThemeProvider theme={token}>
-      <StyledNativeDialog ref={combinedDialogRef} onMouseDown={handleDismiss}>
+      <StyledNativeDialog
+        ref={combinedDialogRef}
+        onMouseDown={handleDismiss}
+        onKeyDown={handleKeyDown}
+      >
         {open && (
           <StyledDialog {...props} ref={ref}>
             {children}
