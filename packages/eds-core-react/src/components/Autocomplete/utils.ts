@@ -101,7 +101,7 @@ export function mergeEventsFromRight(
   ) as Partial<DOMAttributes<unknown>>
 }
 
-/*When a user clicks the StyledList scrollbar, the input looses focus which breaks downshift
+/*When a user clicks the StyledList scrollbar, the input loses focus which breaks downshift
  * keyboard navigation in the list. This code returns focus to the input on mouseUp
  */
 export const handleListFocus = (e: FocusEvent<HTMLElement>) => {
