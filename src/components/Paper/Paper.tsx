@@ -1,7 +1,7 @@
-import { View, ViewProps } from "react-native";
 import React, { forwardRef } from "react";
-import { EDSStyleSheet, Elevation } from "../../styling";
+import { View, ViewProps } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet, Elevation } from "../../styling";
 
 export type PaperProps = {
     /**
@@ -16,6 +16,7 @@ export const Paper = forwardRef<
     React.PropsWithChildren<PaperProps & ViewProps>
 >(({ elevation = "none", children, ...rest }, ref) => {
     const style = useStyles(themeStyles, elevation);
+
     return (
         <View ref={ref} {...rest} style={[style.container, rest.style]}>
             {children}

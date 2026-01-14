@@ -1,3 +1,4 @@
+import type { Token } from "./tokens";
 import type {
     Color,
     EDSColor,
@@ -5,7 +6,6 @@ import type {
     HexColorValue,
     RGBAColorValue,
     RGBColorValue,
-    Token,
 } from "./types";
 
 export const isHexColorValue = (obj: string): obj is HexColorValue =>

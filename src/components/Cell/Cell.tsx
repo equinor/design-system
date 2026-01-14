@@ -78,7 +78,7 @@ export const Cell = forwardRef<View, React.PropsWithChildren<CellProps>>(
         const { isFirstCell, isLastCell } = useContext(CellGroupContext);
         const { handlePressIn, handlePressOut, animatedStyle } =
             useFadeAnimation();
-        const styles = useStyles(themeStyle, { isFirstCell, isLastCell });
+        const styles = useStyles(tokenStyles, { isFirstCell, isLastCell });
         const swipeableRef = useRef<Swipeable>(null);
         const swipeable = !!leftSwipeGroup || !!rightSwipeGroup;
 
@@ -197,26 +197,26 @@ export const Cell = forwardRef<View, React.PropsWithChildren<CellProps>>(
 
 Cell.displayName = "Cell";
 
-const themeStyle = EDSStyleSheet.create(
-    (theme, props: CellGroupContextType) => ({
+const tokenStyles = EDSStyleSheet.create(
+    (token, props: CellGroupContextType) => ({
         container: {
-            borderColor: theme.colors.border.medium,
+            borderColor: token.colors.border.medium,
             borderBottomWidth: props.isLastCell
-                ? theme.geometry.border.borderWidth
+                ? token.geometry.border.borderWidth
                 : undefined,
             borderTopWidth: props.isFirstCell
-                ? theme.geometry.border.borderWidth
+                ? token.geometry.border.borderWidth
                 : undefined,
-            backgroundColor: theme.colors.container.default,
-            minHeight: theme.geometry.dimension.cell.minHeight,
+            backgroundColor: token.colors.container.default,
             justifyContent: "center",
         },
         contentContainer: {
             flexDirection: "row",
             alignItems: "center",
-            gap: theme.spacing.cell.gapHorizontal,
-            paddingHorizontal: theme.spacing.container.paddingHorizontal,
-            paddingVertical: theme.spacing.cell.paddingVertical,
+            gap: token.newSpacing.spacing.horizontal.lg,
+            paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
+            paddingVertical:
+                token.newSpacing.spacing.inset.xl["vertical-squished"],
         },
         adornment: {
             flexDirection: "row",
@@ -226,20 +226,21 @@ const themeStyle = EDSStyleSheet.create(
             left: 0,
             bottom: 0,
             width: "100%",
-            paddingHorizontal: theme.spacing.container.paddingHorizontal,
+            paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
         },
         dividerInner: {
-            height: theme.geometry.border.borderWidth,
-            backgroundColor: theme.colors.border.medium,
+            height: token.geometry.border.borderWidth,
+            backgroundColor: token.colors.border.medium,
         },
         additionalSurface: {
             justifyContent: "center",
             alignItems: "center",
         },
         verticalLine: {
-            borderRightWidth: theme.geometry.border.borderWidth,
-            borderColor: theme.colors.border.medium,
-            marginVertical: theme.spacing.menu.item.paddingVertical,
+            borderRightWidth: token.geometry.border.borderWidth,
+            borderColor: token.colors.border.medium,
+            marginVertical:
+                token.newSpacing.spacing.inset.xl["vertical-squished"],
         },
         children: {
             flex: 1,

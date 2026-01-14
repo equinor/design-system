@@ -6,7 +6,7 @@ import {
     darkSemantic as darkSemanticJson,
     lightSemantic as lightSemanticJson,
 } from "./edsSemanticTokens.generated";
-import { ColorToken } from "./types";
+import { ColorToken } from "./tokens";
 
 // EDS Background tokens (camelCase accessors)
 const edsBg = {

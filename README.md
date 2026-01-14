@@ -40,7 +40,7 @@ export default function App() {
 
     return (
         <SafeAreaProvider>
-            <EDSProvider colorScheme="light" density="phone">
+            <EDSProvider colorScheme="light" density="comfortable">
                 <Navigation />
                 <StatusBar />
             </EDSProvider>
@@ -52,7 +52,7 @@ export default function App() {
 The `EDSProvider` gives you access to:
 
 - **Color scheme** — switch between `light` and `dark` mode
-- **Density** — switch between `phone` and `tablet` layouts
+- **Density** — switch between `comfortable` and `spacious` layouts
 
 ## Theming
 

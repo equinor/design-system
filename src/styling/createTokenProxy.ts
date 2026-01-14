@@ -1,12 +1,11 @@
 import type {
-    ColorScheme,
     ColorSchemeValues,
-    Density,
     DensityValues,
-    MasterToken,
+    ProxyableMasterToken,
     Token,
-} from "./types";
-import { masterToken } from "./masterToken";
+} from "./tokens/";
+import { proxyableMasterToken } from "./tokens/masterToken";
+import type { ColorScheme, Density } from "./types";
 
 function keyEquality(obj1: unknown, obj2: unknown) {
     if (!obj1 || !obj2) return false;
@@ -28,8 +27,8 @@ function isColorSchemeValuesObject(
 
 function isDensityValuesObject(obj: unknown): obj is DensityValues<unknown> {
     const template: DensityValues<unknown> = {
-        tablet: undefined as unknown,
-        phone: undefined as unknown,
+        comfortable: undefined as unknown,
+        spacious: undefined as unknown,
     };
     return keyEquality(obj, template);
 }
@@ -61,5 +60,8 @@ export function createTokenProxy(scheme: ColorScheme, density: Density): Token {
             return value;
         },
     };
-    return new Proxy<MasterToken>(masterToken, handler) as unknown as Token;
+    return new Proxy<ProxyableMasterToken>(
+        proxyableMasterToken,
+        handler
+    ) as unknown as Token;
 }

@@ -1,11 +1,19 @@
 import React, { PropsWithChildren, useMemo } from "react";
-import { ColorScheme, Density, Token } from "../../styling/types";
-import { Portal, PortalProvider } from "../Portal";
-import { DialogServiceProvider } from "../Dialog/service/DialogServiceProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ScrimProvider } from "../_internal/ScrimProvider";
-import { EDSContext } from "./EDSContext";
 import { createTokenProxy } from "../../styling/createTokenProxy";
+import {
+    MasterToken,
+    ProxyableMasterToken,
+    SpacingToken,
+    WithoutThemeOptionValues,
+    comfortableSpacingToken,
+    spaciousSpacingToken,
+} from "../../styling/tokens";
+import { ColorScheme, Density } from "../../styling/types";
+import { ScrimProvider } from "../_internal/ScrimProvider";
+import { DialogServiceProvider } from "../Dialog/service/DialogServiceProvider";
+import { Portal, PortalProvider } from "../Portal";
+import { EDSContext } from "./EDSContext";
 
 export type EDSProviderProps = {
     /**
@@ -16,23 +24,36 @@ export type EDSProviderProps = {
     colorScheme: ColorScheme;
     /**
      * The density value to use for the components. You can configure the conditional for these yourself,
-     * but an advised approach is to treat all screen widths below 576 as `phone`.
+     * but an advised approach is to treat all screen widths below 576 as `comfortable`.
      */
     density: Density;
 };
 
 export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
-    const token = useMemo(() => {
+    const spacingToken: SpacingToken = useMemo(() => {
+        if (props.density === "comfortable") {
+            return comfortableSpacingToken;
+        }
+        return spaciousSpacingToken;
+    }, [props.density]);
+
+    const masterToken = useMemo(() => {
         const proxy = createTokenProxy(props.colorScheme, props.density);
-        return JSON.parse(JSON.stringify(proxy)) as Token;
-    }, [props.colorScheme, props.density]);
+        const cleanProxyable = JSON.parse(
+            JSON.stringify(proxy)
+        ) as WithoutThemeOptionValues<ProxyableMasterToken>;
+        return {
+            ...cleanProxyable,
+            newSpacing: spacingToken,
+        } satisfies MasterToken;
+    }, [props.colorScheme, props.density, spacingToken]);
 
     return (
         <EDSContext.Provider
             value={{
                 colorScheme: props.colorScheme,
                 density: props.density,
-                token,
+                token: masterToken,
             }}
         >
             <GestureHandlerRootView style={{ flex: 1 }}>

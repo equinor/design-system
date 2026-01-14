@@ -1,11 +1,11 @@
 import React, { PropsWithChildren, useContext } from "react";
 import { View } from "react-native";
-import { EDSStyleSheet } from "../../styling";
 import { useStyles } from "../../hooks/useStyles";
-import { Typography } from "../Typography";
-import { PressableHighlight } from "../PressableHighlight";
-import { TabsContext } from "./TabsContext";
+import { EDSStyleSheet } from "../../styling";
 import { Icon, IconName } from "../Icon";
+import { PressableHighlight } from "../PressableHighlight";
+import { Typography } from "../Typography";
+import { TabsContext } from "./TabsContext";
 
 export type TabProps = PropsWithChildren & {
     /**
@@ -53,7 +53,7 @@ type TabItemStyleProps = {
 const themeStyles = EDSStyleSheet.create((theme, props: TabItemStyleProps) => {
     const { isSelected, disabled } = props;
 
-    const verticalPadding = theme.spacing.tabs.paddingVerical;
+    const verticalPadding = theme.spacing.tabs.paddingVertical;
     const paddingTop = verticalPadding;
     const paddingBottom =
         verticalPadding - theme.geometry.border.tabsBorderWidth;

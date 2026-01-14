@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import { ColorScheme, Density, Token } from "../../styling";
+import { MasterToken } from "src/styling/tokens";
+import { ColorScheme, Density } from "../../styling";
 
 export type EDSContextType = {
     /**
@@ -10,14 +11,14 @@ export type EDSContextType = {
     colorScheme: ColorScheme;
     /**
      * The density value to use for the components. You can configure the conditional for these yourself,
-     * but an advised approach is to treat all screen widths below 576 as `phone`.
+     * but an advised approach is to treat all screen widths below 576 as `comfortable`.
      */
     density: Density;
 
     /**
      * The current themed token for the app. This is automatically inferred from the color scheme and density values.
      */
-    token: Token;
+    token: MasterToken;
 };
 
 export const EDSContext = createContext<EDSContextType | null>(null);

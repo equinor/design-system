@@ -36,13 +36,25 @@ export type ButtonSpecificProps = {
      */
     fullWidth?: boolean;
     /**
+     * @deprecated use `trailingIcon` and/or `leadingIcon` instead.
+     *
      * Name of the icon to use with the title.
      */
     iconName?: IconName;
     /**
+     * @deprecated use `trailingIcon` and/or `leadingIcon` instead.
+     *
      * Options for positioning the icon either to the left or to the right of the label text.
      */
     iconPosition?: "leading" | "trailing";
+    /**
+     * Name of the leading icon to display alongside the button title.
+     */
+    leadingIcon?: IconName;
+    /**
+     * Name of the trailing icon to display alongside the button title.
+     */
+    trailingIcon?: IconName;
     /**
      * Callback method invoked when the user presses the button.
      */
@@ -70,6 +82,8 @@ export const Button = forwardRef<View, ButtonProps>(
             fullWidth = false,
             iconName,
             iconPosition = "leading",
+            leadingIcon,
+            trailingIcon,
             onPress = () => null,
             onPressIn = () => null,
             onPressOut = () => null,
@@ -81,7 +95,7 @@ export const Button = forwardRef<View, ButtonProps>(
         const isToggleButton = !!toggleData;
         const groupData = useContext(ButtonGroupContext);
 
-        const styles = useStyles(themeStyles, {
+        const styles = useStyles(tokenStyles, {
             color,
             variant,
             isToggleButton,
@@ -91,11 +105,18 @@ export const Button = forwardRef<View, ButtonProps>(
             fullWidth,
         });
 
+        const leadingIconName =
+            leadingIcon ?? (iconPosition === "leading" ? iconName : undefined);
+        const trailingIconName =
+            trailingIcon ?? (iconPosition === "trailing" ? iconName : undefined);
         const ButtonContent = () => (
-            <>
-                {iconName && iconPosition === "leading" && (
+            <View style={styles.labelContainer}>
+                {leadingIconName && (
                     <View style={styles.leadingIcon}>
-                        <Icon name={iconName} color={styles.textStyle.color} />
+                        <Icon
+                            name={leadingIconName}
+                            color={styles.textStyle.color}
+                        />
                     </View>
                 )}
                 <Typography
@@ -105,12 +126,15 @@ export const Button = forwardRef<View, ButtonProps>(
                 >
                     {title}
                 </Typography>
-                {iconName && iconPosition === "trailing" && (
+                {trailingIconName && (
                     <View style={styles.trailingIcon}>
-                        <Icon name={iconName} color={styles.textStyle.color} />
+                        <Icon
+                            name={trailingIconName}
+                            color={styles.textStyle.color}
+                        />
                     </View>
                 )}
-            </>
+            </View>
         );
 
         return (
@@ -122,20 +146,18 @@ export const Button = forwardRef<View, ButtonProps>(
                     onPressOut={onPressOut}
                     style={styles.pressableContainer}
                 >
-                    <View style={styles.labelContainer}>
-                        {loading ? (
-                            <DotProgress
-                                color={
-                                    disabled || variant !== "contained"
-                                        ? "primary"
-                                        : "neutral"
-                                }
-                                size={12}
-                            />
-                        ) : (
-                            ButtonContent()
-                        )}
-                    </View>
+                    {loading ? (
+                        <DotProgress
+                            color={
+                                disabled || variant !== "contained"
+                                    ? "primary"
+                                    : "neutral"
+                            }
+                            size={12}
+                        />
+                    ) : (
+                        ButtonContent()
+                    )}
                 </PressableHighlight>
             </View>
         );
@@ -143,7 +165,6 @@ export const Button = forwardRef<View, ButtonProps>(
 );
 
 Button.displayName = "Button";
-
 type ButtonStyleSheetProps = {
     groupData: { isFirstItem: boolean; isLastItem: boolean };
     isToggleButton: boolean;
@@ -154,8 +175,8 @@ type ButtonStyleSheetProps = {
     fullWidth: boolean;
 };
 
-const themeStyles = EDSStyleSheet.create(
-    (theme, props: ButtonStyleSheetProps) => {
+const tokenStyles = EDSStyleSheet.create(
+    (token, props: ButtonStyleSheetProps) => {
         const {
             color,
             isToggleButton,
@@ -173,26 +194,26 @@ const themeStyles = EDSStyleSheet.create(
             : variant;
 
         const backgroundColor = getBackgroundColorForButton(
-            theme,
+            token,
             variant,
             color,
             disabled
         );
         let textColor =
             variant === "contained"
-                ? theme.colors.text.primaryInverted
-                : theme.colors.interactive[color];
-        textColor = disabled ? theme.colors.text.disabled : textColor;
+                ? token.colors.text.primaryInverted
+                : token.colors.interactive[color];
+        textColor = disabled ? token.colors.text.disabled : textColor;
 
         const leftRadius = !groupData.isFirstItem
             ? 0
-            : theme.geometry.border.elementBorderRadius;
+            : token.geometry.border.elementBorderRadius;
         const rightRadius = !groupData.isLastItem
             ? 0
-            : theme.geometry.border.elementBorderRadius;
+            : token.geometry.border.elementBorderRadius;
         const outlinedPaddingReduction =
-            variant === "outlined" ? theme.geometry.border.borderWidth : 0;
-        const outlinedHeightReduction = outlinedPaddingReduction * 2;
+            variant === "outlined" ? token.geometry.border.borderWidth : 0;
+
         return {
             colorContainer: {
                 backgroundColor,
@@ -201,23 +222,20 @@ const themeStyles = EDSStyleSheet.create(
                 borderTopRightRadius: rightRadius,
                 borderBottomRightRadius: rightRadius,
                 borderColor: disabled
-                    ? theme.colors.text.disabled
-                    : theme.colors.interactive[color],
+                    ? token.colors.text.disabled
+                    : token.colors.interactive[color],
                 borderWidth:
                     variant === "outlined"
-                        ? theme.geometry.border.borderWidth
+                        ? token.geometry.border.borderWidth
                         : undefined,
                 overflow: "hidden",
             },
             pressableContainer: {
-                minHeight:
-                    theme.geometry.dimension.button.minHeight -
-                    outlinedHeightReduction,
                 paddingHorizontal:
-                    theme.spacing.button.paddingHorizontal -
+                    token.newSpacing.spacing.inset.lg.horizontal -
                     outlinedPaddingReduction,
                 paddingVertical:
-                    theme.spacing.button.paddingVertical -
+                    token.newSpacing.spacing.inset.lg["vertical-squished"] -
                     outlinedPaddingReduction,
                 justifyContent: "center",
             },
@@ -225,7 +243,7 @@ const themeStyles = EDSStyleSheet.create(
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: theme.spacing.button.iconGap,
+                gap: token.newSpacing.spacing.icon.sm["gap-horizontal"],
             },
             trailingIcon: {
                 flex: fullWidth ? 1 : undefined,

@@ -1,7 +1,9 @@
-import { colors } from "./colors";
-import { LayoutToken } from "./types";
-import { FONT_BASIS, spacings } from "./values";
-export const layoutToken: LayoutToken = {
+import { colors } from "../colors";
+
+import { FONT_BASIS, spacings } from "../values";
+import { OldToken } from "./types";
+
+export const layoutToken: OldToken = {
     geometry: {
         border: {
             elementBorderRadius: 4,
@@ -16,59 +18,59 @@ export const layoutToken: LayoutToken = {
             },
             button: {
                 minHeight: {
-                    tablet: spacings.xx_large,
-                    phone: spacings.xx_large,
+                    spacious: spacings.xx_large,
+                    comfortable: spacings.xx_large,
                 },
             },
             cell: {
                 minHeight: 30,
                 navigation: {
                     height: {
-                        tablet: 60,
-                        phone: 60,
+                        spacious: 60,
+                        comfortable: 60,
                     },
                 },
                 accordion: {
                     height: {
-                        tablet: 40,
-                        phone: 32,
+                        spacious: 40,
+                        comfortable: 32,
                     },
                 },
                 adornment: {
                     widthSmall: {
-                        tablet: 40,
-                        phone: 32,
+                        spacious: 40,
+                        comfortable: 32,
                     },
                     widthMedium: {
-                        tablet: 56,
-                        phone: 48,
+                        spacious: 56,
+                        comfortable: 48,
                     },
                     widthLarge: {
-                        tablet: 96,
-                        phone: 88,
+                        spacious: 96,
+                        comfortable: 88,
                     },
                 },
             },
             dialog: {
                 minHeight: {
-                    tablet: 213,
-                    phone: 213,
+                    spacious: 213,
+                    comfortable: 213,
                 },
                 defaultWidth: {
-                    phone: 500,
-                    tablet: 500,
+                    comfortable: 500,
+                    spacious: 500,
                 },
                 header: {
                     height: {
-                        tablet: 50,
-                        phone: 50,
+                        spacious: 50,
+                        comfortable: 50,
                     },
                 },
             },
             tabs: {
                 minWidth: {
-                    tablet: spacings.xxx_large,
-                    phone: spacings.x_large,
+                    spacious: spacings.xxx_large,
+                    comfortable: spacings.x_large,
                 },
             },
         },
@@ -129,132 +131,132 @@ export const layoutToken: LayoutToken = {
     spacing: {
         container: {
             paddingHorizontal: {
-                tablet: spacings.x_large,
-                phone: spacings.large,
+                spacious: spacings.x_large,
+                comfortable: spacings.large,
             },
             paddingVertical: {
-                tablet: spacings.medium,
-                phone: spacings.medium,
+                spacious: spacings.medium,
+                comfortable: spacings.medium,
             },
         },
         dialog: {
             padding: {
-                tablet: spacings.medium,
-                phone: spacings.medium,
+                spacious: spacings.medium,
+                comfortable: spacings.medium,
             },
             gap: {
-                tablet: spacings.medium,
-                phone: spacings.medium,
+                spacious: spacings.medium,
+                comfortable: spacings.medium,
             },
         },
         element: {
             paddingHorizontal: {
-                tablet: spacings.medium_small,
-                phone: spacings.small,
+                spacious: spacings.medium_small,
+                comfortable: spacings.small,
             },
             paddingVertical: {
-                tablet: spacings.small,
-                phone: spacings.small,
+                spacious: spacings.small,
+                comfortable: spacings.small,
             },
         },
         chip: {
             paddingHorizontal: {
-                tablet: spacings.small,
-                phone: spacings.small,
+                spacious: spacings.small,
+                comfortable: spacings.small,
             },
             paddingVertical: {
-                tablet: spacings.x_small,
-                phone: spacings.x_small,
+                spacious: spacings.x_small,
+                comfortable: spacings.x_small,
             },
         },
         button: {
             paddingHorizontal: {
-                tablet: spacings.medium,
-                phone: spacings.medium_small,
+                spacious: spacings.medium,
+                comfortable: spacings.medium_small,
             },
             paddingVertical: {
-                tablet: spacings.small,
-                phone: spacings.small,
+                spacious: spacings.small,
+                comfortable: spacings.small,
             },
             iconGap: {
-                tablet: spacings.small,
-                phone: spacings.small,
+                spacious: spacings.small,
+                comfortable: spacings.small,
             },
         },
         textField: {
             paddingHorizontal: {
-                tablet: spacings.medium_small,
-                phone: spacings.small,
+                spacious: spacings.medium_small,
+                comfortable: spacings.small,
             },
             paddingVertical: {
-                tablet: spacings.small,
-                phone: spacings.small,
+                spacious: spacings.small,
+                comfortable: spacings.small,
             },
         },
         menu: {
             paddingVertical: {
-                tablet: spacings.small,
-                phone: spacings.small,
+                spacious: spacings.small,
+                comfortable: spacings.small,
             },
             item: {
                 paddingVertical: {
-                    tablet: spacings.medium_small,
-                    phone: spacings.medium_small,
+                    spacious: spacings.medium_small,
+                    comfortable: spacings.medium_small,
                 },
                 paddingHorizontal: {
-                    tablet: spacings.large,
-                    phone: spacings.large,
+                    spacious: spacings.large,
+                    comfortable: spacings.large,
                 },
                 iconGap: {
-                    tablet: spacings.medium,
-                    phone: spacings.medium_small,
+                    spacious: spacings.medium,
+                    comfortable: spacings.medium_small,
                 },
             },
         },
         cell: {
             group: {
                 titleBottomPadding: {
-                    tablet: spacings.medium_small,
-                    phone: spacings.small,
+                    spacious: spacings.medium_small,
+                    comfortable: spacings.small,
                 },
             },
             content: {
                 titleDescriptionGap: {
-                    tablet: spacings.small,
-                    phone: spacings.small,
+                    spacious: spacings.small,
+                    comfortable: spacings.small,
                 },
             },
             paddingVertical: {
-                tablet: spacings.large,
-                phone: spacings.medium,
+                spacious: spacings.large,
+                comfortable: spacings.medium,
             },
             gapHorizontal: {
-                tablet: spacings.large,
-                phone: spacings.medium,
+                spacious: spacings.large,
+                comfortable: spacings.medium,
             },
         },
         spacer: {
             small: {
-                tablet: 20,
-                phone: 12,
+                spacious: 20,
+                comfortable: 12,
             },
             medium: {
-                tablet: 30,
-                phone: 22,
+                spacious: 30,
+                comfortable: 22,
             },
             large: {
-                tablet: 42,
-                phone: 34,
+                spacious: 42,
+                comfortable: 34,
             },
         },
         tabs: {
-            paddingVerical: {
-                tablet: spacings.medium,
-                phone: spacings.medium,
+            paddingVertical: {
+                spacious: spacings.medium,
+                comfortable: spacings.medium,
             },
             paddingHorizontal: {
-                tablet: spacings.medium,
-                phone: spacings.medium,
+                spacious: spacings.medium,
+                comfortable: spacings.medium,
             },
         },
     },

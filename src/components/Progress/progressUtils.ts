@@ -1,4 +1,4 @@
-import { MasterToken, WithoutThemeOptionValues } from "../../styling";
+import { MasterToken } from "src/styling/tokens";
 import { IconName } from "../Icon";
 import { ProgressStatus } from "./types";
 
@@ -15,10 +15,7 @@ export const statusToIconName = (status: ProgressStatus): IconName => {
     }
 };
 
-export const statusToColor = (
-    status: ProgressStatus,
-    token: WithoutThemeOptionValues<MasterToken>
-) => {
+export const statusToColor = (status: ProgressStatus, token: MasterToken) => {
     switch (status) {
         case "inProgress":
             return token.colors.interactive.primary;
