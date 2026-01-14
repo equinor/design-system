@@ -1,10 +1,10 @@
 import { add_box } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
-import { forwardRef, LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
-import { AutocompleteOptionLabel, StyledListItem } from './Option'
 import { input } from '../Input/Input.tokens'
+import { useAutocompleteContext } from './AutocompleteContext'
+import { AutocompleteOptionLabel, StyledListItem } from './Option'
 
 const StyledAddItemIcon = styled(Icon)<{ multiple: boolean }>(({
   multiple,
@@ -20,28 +20,47 @@ const StyledPlaceholder = styled.span`
 `
 
 export type AutocompleteOptionProps = {
-  value: string
-  multiple: boolean
-  highlighted: string
-  multiline: boolean
-} & LiHTMLAttributes<HTMLLIElement>
+  index: number
+  item: unknown
+}
 
-function AddNewOptionInner(
-  props: AutocompleteOptionProps,
-  ref: React.ForwardedRef<HTMLLIElement>,
-) {
-  const { value, multiline, multiple, highlighted, onClick, ...other } = props
+export function AddNewOption({ index, item }: AutocompleteOptionProps) {
+  const {
+    availableItems,
+    multiple,
+    typedInputValue,
+    highlightedIndex,
+    multiline,
+    rowVirtualizer,
+    getItemProps,
+  } = useAutocompleteContext()
+  const value = typedInputValue.trim()
+  const isDisabled = !typedInputValue.trim()
+  const highlighted =
+    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+
+  const itemProps = getItemProps({
+    ...(multiline && {
+      ref: rowVirtualizer.measureElement,
+    }),
+    item,
+    index: index,
+  })
   return (
     <StyledListItem
-      ref={ref}
       $highlighted={highlighted}
-      onClick={(e) => {
-        onClick(e)
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 99,
       }}
-      {...other}
+      {...itemProps}
       aria-label={`Add new option: ${value}`}
+      data-index={0}
+      data-testid={'add-item'}
       aria-live="polite"
       aria-selected={false}
+      aria-setsize={availableItems.length}
     >
       <StyledAddItemIcon multiple={multiple} data={add_box} />
       <AutocompleteOptionLabel $multiline={multiline}>
@@ -54,10 +73,3 @@ function AddNewOptionInner(
     </StyledListItem>
   )
 }
-
-export const AddNewOption = forwardRef(AddNewOptionInner) as (
-  props: AutocompleteOptionProps & {
-    ref?: React.ForwardedRef<HTMLLIElement>
-    displayName?: string | undefined
-  },
-) => ReturnType<typeof AddNewOptionInner>

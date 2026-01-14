@@ -201,6 +201,39 @@ Multiple.args = {
   options: stocks,
 }
 
+export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
+  const { options } = args
+
+  return (
+    <>
+      <Autocomplete
+        label="Summary display (default)"
+        options={options}
+        multiple
+        placeholder="Select stocks"
+        optionLabel={optionLabel}
+        selectionDisplay="summary"
+        initialSelectedOptions={[options[0], options[1]]}
+      />
+      <Autocomplete
+        label="Chips display"
+        options={options}
+        multiple
+        placeholder="Select stocks"
+        optionLabel={optionLabel}
+        selectionDisplay="chips"
+        initialSelectedOptions={[options[0], options[1]]}
+      />
+    </>
+  )
+}
+SelectionDisplay.storyName = 'Selection display'
+SelectionDisplay.args = {
+  options: stocks,
+}
+
 export const ControlledSingleSelect: StoryFn<
   AutocompleteProps<MyOptionType>
 > = () => {
@@ -292,7 +325,6 @@ export const OptionComponent: StoryFn<AutocompleteProps<MyOptionType>> = (
       </div>
     )
   }
-
   return (
     <>
       <Autocomplete
