@@ -191,6 +191,7 @@ export const FieldWrapper = forwardRef(
           onClose={() => setIsOpen(false)}
           onKeyDown={(e) => {
             if (e.key !== 'Escape') return
+            e.stopPropagation()
             e.preventDefault()
           }}
           anchorEl={anchorEl}

@@ -94,7 +94,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
     if (e.key !== 'Escape') return
     e.preventDefault()
     if (isDismissable && onClose && open) {
-      onClose && onClose()
+      onClose()
     }
   }
 
