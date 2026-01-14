@@ -1,4 +1,5 @@
 import { render, screen, renderHook } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { Field } from './Field'
 import { HelperMessage } from '../HelperMessage'
@@ -150,6 +151,17 @@ describe('Field.Label', () => {
       </Field.Label>,
     )
     expect(screen.getByText('(Påkrevd)')).toBeInTheDocument()
+  })
+
+  test('clicking label focuses associated input', async () => {
+    render(
+      <Field>
+        <Field.Label htmlFor="test-input">Email</Field.Label>
+        <input id="test-input" />
+      </Field>,
+    )
+    await userEvent.click(screen.getByText('Email'))
+    expect(screen.getByRole('textbox')).toHaveFocus()
   })
 })
 

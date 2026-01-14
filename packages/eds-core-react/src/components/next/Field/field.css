@@ -1,10 +1,11 @@
 @layer eds-components {
   .eds-field {
-    /* Layout from Figma: inline-flex, column, 8px gap */
-    display: inline-flex;
+    /* Layout - use CSS variable for configurable width */
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--eds-generic-gap-vertical);
+    width: var(--eds-field-width, 100%);
     /* Colors from Figma */
     --eds-field-label-color: var(--eds-color-text-strong);
     --eds-field-description-color: var(--eds-color-text-subtle);
@@ -23,12 +24,6 @@
 
   .eds-field[data-position='end'] {
     flex-direction: row-reverse;
-  }
-
-  /* Control should not expand in horizontal layout */
-  .eds-field[data-position='start'] .eds-field__control,
-  .eds-field[data-position='end'] .eds-field__control {
-    width: auto;
   }
 
   /* Description and helper message span full width below in horizontal layout */
@@ -51,10 +46,6 @@
   .eds-field__indicator {
     margin-inline-start: var(--eds-selectable-space-horizontal);
     color: var(--eds-field-indicator-color);
-  }
-
-  .eds-field__control {
-    width: 100%;
   }
 
   .eds-field__description {

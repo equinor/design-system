@@ -18,7 +18,11 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
         {...rest}
       >
         {children}
-        {indicator && <span className="eds-field__indicator">{indicator}</span>}
+        {indicator && (
+          <span className="eds-field__indicator" data-font-size="sm">
+            {indicator}
+          </span>
+        )}
       </TypographyNext>
     )
   },
