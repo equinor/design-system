@@ -57,7 +57,7 @@ function AppContent() {
 
 export default function RootLayout() {
     return (
-        <EDSProvider density="phone" colorScheme="light">
+        <EDSProvider density="comfortable" colorScheme="light">
             <AppContent />
         </EDSProvider>
     );
