@@ -910,4 +910,75 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
 
     expect(input).toHaveValue('Option 8')
   })
+
+  it('Shows chips when selectionDisplay is set to chips', async () => {
+    render(
+      <Autocomplete
+        label={labelText}
+        options={items}
+        multiple
+        selectionDisplay="chips"
+        initialSelectedOptions={['One', 'Two']}
+      />,
+    )
+
+    const chip1 = await screen.findByText('One')
+    const chip2 = await screen.findByText('Two')
+
+    expect(chip1).toBeInTheDocument()
+    expect(chip2).toBeInTheDocument()
+  })
+
+  it('Removes chip when clicking the chip remove button', async () => {
+    const handleChange = jest.fn()
+    render(
+      <Autocomplete
+        label={labelText}
+        options={items}
+        multiple
+        selectionDisplay="chips"
+        initialSelectedOptions={['One', 'Two']}
+        onOptionsChange={handleChange}
+      />,
+    )
+
+    const chip1 = await screen.findByText('One')
+    expect(chip1).toBeInTheDocument()
+
+    const closeIcons = screen.getAllByTitle('close')
+    fireEvent.click(closeIcons[0])
+
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledWith({ selectedItems: ['Two'] })
+    })
+  })
+
+  it('Moves focus to next chip when removing a chip with Enter key', async () => {
+    render(
+      <Autocomplete
+        label={labelText}
+        options={items}
+        multiple
+        selectionDisplay="chips"
+        initialSelectedOptions={['One', 'Two', 'Three']}
+      />,
+    )
+
+    const chip1 = await screen.findByText('One')
+    const chip2 = await screen.findByText('Two')
+
+    expect(chip1).toBeInTheDocument()
+    expect(chip2).toBeInTheDocument()
+
+    const chip1Button = screen.getByRole('button', { name: /One/i })
+    chip1Button?.focus()
+    fireEvent.keyDown(chip1Button, { key: 'Enter' })
+
+    await waitFor(() => {
+      expect(screen.queryByText('One')).not.toBeInTheDocument()
+    })
+
+    const chip2Button = screen.getByRole('button', { name: /Two/i })
+    expect(chip2Button).toHaveFocus()
+  })
 })

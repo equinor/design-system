@@ -1,7 +1,8 @@
-import { forwardRef, LiHTMLAttributes, ReactNode } from 'react'
+import { spacingsTemplate, typographyTemplate } from '@equinor/eds-utils'
+import { VirtualItem } from '@tanstack/react-virtual'
 import styled, { css } from 'styled-components'
 import { Checkbox } from '../Checkbox'
-import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
+import { useAutocompleteContext } from './AutocompleteContext'
 
 type StyledListItemType = {
   $highlighted?: string
@@ -58,52 +59,68 @@ export const AutocompleteOptionLabel = styled.span<{ $multiline: boolean }>(
 )
 
 export type AutocompleteOptionProps = {
-  value: string
-  multiple: boolean
-  highlighted: string
-  isSelected: boolean
-  isDisabled?: boolean
-  multiline: boolean
-  optionComponent?: ReactNode
+  index: number
+  virtualItem: VirtualItem
+  item: unknown
   indeterminate?: boolean
-} & LiHTMLAttributes<HTMLLIElement>
+}
 
-function AutocompleteOptionInner(
-  props: AutocompleteOptionProps,
-  ref: React.ForwardedRef<HTMLLIElement>,
-) {
+export function Option({
+  indeterminate,
+  index,
+  item,
+  virtualItem,
+}: AutocompleteOptionProps) {
   const {
-    value,
-    optionComponent,
     multiple,
-    isSelected,
-    indeterminate,
-    isDisabled,
+    availableItems,
+    highlightedIndex,
     multiline,
-    highlighted,
-    onClick,
-    'aria-selected': ariaSelected,
-    ...other
-  } = props
+    optionDisabled,
+    selectedItemsLabels,
+    getLabel,
+    getItemProps,
+    optionComponent: _optionComponent,
+    rowVirtualizer,
+  } = useAutocompleteContext()
+
+  const isDisabled = optionDisabled(item)
+  const label = getLabel(item)
+  const isSelected = selectedItemsLabels.includes(label)
+  const optionComponent = _optionComponent?.(item, isSelected)
+  const highlighted =
+    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+
+  const itemProps = getItemProps({
+    ...(multiline && {
+      ref: rowVirtualizer.measureElement,
+    }),
+    item,
+    index,
+    style: {
+      transform: `translateY(${virtualItem.start}px)`,
+      ...(!multiline && {
+        height: `${virtualItem.size}px`,
+      }),
+    },
+  })
   return (
     <StyledListItem
-      ref={ref}
       $isdisabled={isDisabled ? 'true' : 'false'}
       $highlighted={highlighted}
       aria-hidden={isDisabled}
       $active={!multiple && isSelected ? 'true' : 'false'}
-      onClick={(e) => {
-        !isDisabled && onClick(e)
-      }}
-      aria-selected={multiple ? isSelected : ariaSelected}
-      {...other}
+      aria-setsize={availableItems.length}
+      data-index={index}
+      aria-posinset={index + 1}
+      {...itemProps}
     >
       {multiple && (
         <Checkbox
           disabled={isDisabled}
           checked={isSelected}
           indeterminate={indeterminate}
-          value={value}
+          value={label}
           onChange={() => {
             return null
           }}
@@ -113,16 +130,9 @@ function AutocompleteOptionInner(
         <>{optionComponent}</>
       ) : (
         <AutocompleteOptionLabel $multiline={multiline}>
-          {value}
+          {label}
         </AutocompleteOptionLabel>
       )}
     </StyledListItem>
   )
 }
-
-export const AutocompleteOption = forwardRef(AutocompleteOptionInner) as (
-  props: AutocompleteOptionProps & {
-    ref?: React.ForwardedRef<HTMLLIElement>
-    displayName?: string | undefined
-  },
-) => ReturnType<typeof AutocompleteOptionInner>

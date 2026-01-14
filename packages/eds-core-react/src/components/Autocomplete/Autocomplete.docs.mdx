@@ -63,6 +63,11 @@ The property <code>label</code> is mandatory and makes sure you have a descripti
 Enable the `multiple` property for multiple selection of values.
 <Canvas of={ComponentStories.Multiple} />
 
+### Selection display
+Use the `selectionDisplay` prop to control how selected items are displayed in the input field. The default is `summary`, which shows a count of selected items. Use `chips` to display each selected item as a removable chip.
+
+<Canvas of={ComponentStories.SelectionDisplay} />
+
 ### Objects as options
 If the options-list contains objects and not strings, you must define the `optionLabel` function to specify
 how the label should be rendered and searched for. This function must return a string.
