@@ -1,0 +1,7 @@
+{
+  "codeConnect": {
+    "include": ["src/components/next/**/*.{tsx,jsx}"],
+    "label": "React",
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/dz0XQdc5j7AAtjXr1gTfVR/EDS-Core-Components"
+  }
+}
