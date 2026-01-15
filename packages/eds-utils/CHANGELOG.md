@@ -7,44 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0](https://github.com/equinor/design-system/compare/eds-utils@v1.1.0...eds-utils@v2.0.0) (2025-11-06)
 
-
 ### ⚠ BREAKING CHANGES
 
-* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200))
-* **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134))
+- **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200))
+- **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134))
 
 ### ✨ Added
 
-* **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200)) ([7621866](https://github.com/equinor/design-system/commit/7621866194f67d4118167285e9209c5a5194217c))
-
+- **eds-core-react, eds-tokens:** add spacing foundation variables, fix names in old variables and remove density specific spacing variables. eds-tokens package is now a peerDependency in eds-core-react to support using the new variables. ([#4200](https://github.com/equinor/design-system/issues/4200)) ([7621866](https://github.com/equinor/design-system/commit/7621866194f67d4118167285e9209c5a5194217c))
 
 ### 🐛 Fixed
 
-* **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134)) ([72c5f78](https://github.com/equinor/design-system/commit/72c5f78c1eba95beeb1e4363b3808168f3683745))
+- **eds-core-react, eds-utils:** Improve onChange handler typing for TextField component and remove multiline support ([#4134](https://github.com/equinor/design-system/issues/4134)) ([72c5f78](https://github.com/equinor/design-system/commit/72c5f78c1eba95beeb1e4363b3808168f3683745))
 
 ## [1.1.0](https://github.com/equinor/design-system/compare/eds-utils@v1.0.1...eds-utils@v1.1.0) (2025-10-29)
 
-
 ### ✨ Added
 
-* **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
-
+- **eds-core-react, eds-utils:** Create base typography component and opinionated heading and paragraph ([b2130c6](https://github.com/equinor/design-system/commit/b2130c6f2be82e63549caacf876f263253292f87)), closes [#4125](https://github.com/equinor/design-system/issues/4125)
 
 ### 🐛 Fixed
 
-* Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
-
+- Use semver ranges for internal eds dependencies ([#4163](https://github.com/equinor/design-system/issues/4163)) ([7cc8abe](https://github.com/equinor/design-system/commit/7cc8abe64f64f4e5a9081e21e19f71947f354c14))
 
 ### 🔧 Chores
 
-* ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
+- ⬆️ Update dependencies ([#4158](https://github.com/equinor/design-system/issues/4158)) ([344e555](https://github.com/equinor/design-system/commit/344e555ff53ed307026ebb68761281a563c3d3cf))
 
 ## [1.0.1](https://github.com/equinor/design-system/compare/eds-utils@1.0.0...eds-utils@v1.0.1) (2025-10-16)
 
-
 ### 🔧 Chores
 
-* 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
+- 🔧 Align peer deps across packages ([#4066](https://github.com/equinor/design-system/issues/4066)) ([869afad](https://github.com/equinor/design-system/commit/869afadb4a5a34b2c0f105cd1b834e4c824213aa))
 
 ## [1.0.0] - 2025-10-09
 
