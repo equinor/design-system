@@ -1,0 +1,160 @@
+/* Checkbox wrapper/label */
+.eds-checkbox {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  position: relative;
+  /* Hover size from token - use lg to match Figma 36px hover circle */
+  --checkbox-hover-size: var(--eds-sizing-selectable-lg);
+  /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
+  --checkbox-icon-color: var(--eds-color-border-strong);
+  /* Hover color is always accent - interaction feedback, not semantic */
+  --checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-hover);
+  --checkbox-label-color: var(--eds-color-text-strong);
+  --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
+  /* Spacing activated via data-selectable-space and data-space-proportions on element */
+  padding-inline: var(--eds-selectable-space-horizontal);
+  padding-block: var(--eds-selectable-space-vertical);
+}
+
+/* Label wrapper contains checkbox + label text - gap activated via data-horizontal-gap on element */
+.eds-checkbox__label-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eds-generic-gap-horizontal);
+}
+
+.eds-checkbox[data-disabled='true'] {
+  cursor: not-allowed;
+}
+
+/* Checkbox input wrapper */
+.eds-checkbox__input-wrapper {
+  display: inline-grid;
+  grid: [input] 1fr / [input] 1fr;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Hover circle background */
+.eds-checkbox__input-wrapper::before {
+  content: '';
+  position: absolute;
+  width: var(--checkbox-hover-size);
+  aspect-ratio: 1/1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .eds-checkbox__label-wrapper:hover .eds-checkbox__input-wrapper::before,
+  .eds-checkbox:hover .eds-checkbox__input-wrapper::before {
+    background-color: var(--checkbox-hover-color);
+  }
+
+  .eds-checkbox[data-disabled='true']
+    .eds-checkbox__label-wrapper:hover
+    .eds-checkbox__input-wrapper::before,
+  .eds-checkbox[data-disabled='true']:hover
+    .eds-checkbox__input-wrapper::before {
+    background-color: transparent;
+  }
+}
+
+/* Native checkbox input */
+.eds-checkbox__input {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: input;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  /* Scale to 48px touch target - fixed size for accessibility requirement */
+  transform: scale(calc(48px / 24px));
+}
+
+.eds-checkbox__input:disabled {
+  cursor: not-allowed;
+}
+
+.eds-checkbox__input:focus {
+  outline: none;
+}
+
+/* Focus styles - applied to the wrapper for visible focus frame around entire checkbox */
+/* Using pseudo-element with border to match Figma's Focus Frame exactly */
+.eds-checkbox:has(.eds-checkbox__input:focus-visible)::after,
+.eds-checkbox:has(.eds-checkbox__input[data-focus-visible-added]:focus)::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid var(--eds-color-border-focus);
+  /* TODO: Replace with focus frame corner radius token when available from Figma */
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* SVG icon */
+.eds-checkbox__icon {
+  grid-area: input;
+  pointer-events: none;
+  /* Icon size follows font-size via data-font-size attribute */
+  width: var(--eds-typography-icon-size);
+  height: var(--eds-typography-icon-size);
+  fill: var(--checkbox-icon-color);
+  border-radius: var(--eds-shape-corner-medium);
+  position: relative;
+  z-index: 2;
+}
+
+.eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
+  fill: var(--eds-color-border-neutral-medium);
+}
+
+/* Icon visibility logic is controlled by CSS - default state: show unchecked, hide others */
+.eds-checkbox__icon--checked,
+.eds-checkbox__icon--indeterminate {
+  display: none;
+}
+
+.eds-checkbox__icon--unchecked {
+  display: inline;
+}
+
+/* Checked state: show checked icon, hide others */
+.eds-checkbox__input:checked ~ .eds-checkbox__icon--checked {
+  display: inline;
+}
+
+.eds-checkbox__input:checked ~ .eds-checkbox__icon--unchecked {
+  display: none;
+}
+
+/* Indeterminate state: show indeterminate icon, hide others */
+.eds-checkbox__input[data-indeterminate='true']
+  ~ .eds-checkbox__icon--indeterminate {
+  display: inline;
+}
+
+.eds-checkbox__input[data-indeterminate='true'] ~ .eds-checkbox__icon--checked,
+.eds-checkbox__input[data-indeterminate='true']
+  ~ .eds-checkbox__icon--unchecked {
+  display: none;
+}
+
+/* Label text */
+.eds-checkbox__label {
+  color: var(--checkbox-label-color);
+  user-select: none;
+}
+
+.eds-checkbox[data-disabled='true'] .eds-checkbox__label {
+  color: var(--checkbox-label-disabled-color);
+}
