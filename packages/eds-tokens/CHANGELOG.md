@@ -7,18 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.1.0...eds-tokens@v2.1.1) (2025-12-11)
 
-
 ### 🐛 Fixed
 
-* unknown and high security alerts from radix. ([#4313](https://github.com/equinor/design-system/issues/4313)) ([3a9a666](https://github.com/equinor/design-system/commit/3a9a666f9188a1d0bee0f3ebcff1a7de8b03fe18))
+- unknown and high security alerts from radix. ([#4313](https://github.com/equinor/design-system/issues/4313)) ([3a9a666](https://github.com/equinor/design-system/commit/3a9a666f9188a1d0bee0f3ebcff1a7de8b03fe18))
 
 ## [2.1.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.0.1...eds-tokens@v2.1.0) (2025-11-26)
 
-
 ### ✨ Added
 
-* **eds-color-palette-generator:** add optional second color input to palette generator ([#4247](https://github.com/equinor/design-system/issues/4247)) ([5eaf173](https://github.com/equinor/design-system/commit/5eaf173feecb855ebef34718a1a584d0384912c6))
-* **eds-tokens:** generate spacing and typography variables ([#4250](https://github.com/equinor/design-system/issues/4250)) ([6a5ef2c](https://github.com/equinor/design-system/commit/6a5ef2cf7a3821fd67809123f20f5f647ca43935))
+- **eds-color-palette-generator:** add optional second color input to palette generator ([#4247](https://github.com/equinor/design-system/issues/4247)) ([5eaf173](https://github.com/equinor/design-system/commit/5eaf173feecb855ebef34718a1a584d0384912c6))
+- **eds-tokens:** generate spacing and typography variables ([#4250](https://github.com/equinor/design-system/issues/4250)) ([6a5ef2c](https://github.com/equinor/design-system/commit/6a5ef2cf7a3821fd67809123f20f5f647ca43935))
 
 ## [2.0.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.0.0...eds-tokens@v2.0.1) (2025-11-13)
 
