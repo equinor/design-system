@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0](https://github.com/equinor/design-system/compare/eds-lab-react@v0.10.0...eds-lab-react@v0.11.0) (2026-01-15)
+
+
+### ✨ Added
+
+* **eds-icons:** add new icons from Figma sync ([cc7cec8](https://github.com/equinor/design-system/commit/cc7cec8ae3ef2f615dbb4d7b132fdef8936ddec0))
+
 ## [0.10.0](https://github.com/equinor/design-system/compare/eds-lab-react@v0.9.0...eds-lab-react@v0.10.0) (2025-12-11)
 
 

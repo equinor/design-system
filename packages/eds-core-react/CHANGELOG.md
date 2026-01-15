@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.2.0...eds-core-react@v2.3.0) (2026-01-15)
+
+
+### ✨ Added
+
+* adds chips in autocomplete multiple ([#4345](https://github.com/equinor/design-system/issues/4345)) ([faaa8ad](https://github.com/equinor/design-system/commit/faaa8ad967eea30d8cb3dd2d2087b689c09474e5))
+
+
+### 🐛 Fixed
+
+* DatePicker Esc Key Closing Entire Dialog ([#4346](https://github.com/equinor/design-system/issues/4346)) ([4375f39](https://github.com/equinor/design-system/commit/4375f3995c0f167b2077aedc2cbe315ea7c66eb9))
+
+
+### 📝 Changed
+
+* **eds-core-react:** add Figma Code Connect setup and documentation ([#4363](https://github.com/equinor/design-system/issues/4363)) ([e468ec2](https://github.com/equinor/design-system/commit/e468ec2fcab569c3cb742e4692abd6ccf8b3d25b))
+
+
+### 🔧 Chores
+
+* **figma-broker:** sync icons from Figma ([#4361](https://github.com/equinor/design-system/issues/4361)) ([ca944ca](https://github.com/equinor/design-system/commit/ca944ca8525897d1281bf53004a7266ff519a037))
+
 ## [2.2.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.1.0...eds-core-react@v2.2.0) (2025-12-11)
 
 
