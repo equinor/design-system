@@ -1,5 +1,0 @@
-/* Global styles for @equinor/eds-core-react */
-@import '@equinor/eds-tokens/css/variables';
-
-/* EDS 2.0 Next component styles */
-@import './components/next/index.css';
