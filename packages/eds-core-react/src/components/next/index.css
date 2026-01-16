@@ -1,4 +1,5 @@
 /* EDS 2.0 Next Components - CSS */
+@import '@equinor/eds-tokens/css/variables';
 
 /* Define layer order - eds-components has lowest priority for easy user overrides */
 @layer eds-components;
