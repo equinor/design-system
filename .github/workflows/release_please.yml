@@ -17,6 +17,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allow manual triggering from Actions tab
 
 # Permissions required for release-please to function
 permissions:
