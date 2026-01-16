@@ -1,10 +1,10 @@
 @layer eds-components {
   .eds-helper-message {
     margin: 0;
-    color: var(--eds-color-text-strong);
+    color: var(--eds-color-text-subtle);
   }
 
   .eds-helper-message--disabled {
-    color: var(--eds-color-text-subtle);
+    color: var(--eds-color-border-neutral-medium);
   }
 }

@@ -6,16 +6,15 @@
     align-items: flex-start;
     gap: var(--eds-generic-gap-vertical);
     width: var(--eds-field-width, 100%);
-    /* Colors from Figma */
-    --eds-field-label-color: var(--eds-color-text-strong);
-    --eds-field-description-color: var(--eds-color-text-subtle);
-    --eds-field-indicator-color: var(--eds-color-text-subtle);
-    --eds-field-helper-color: var(--eds-color-text-strong);
+    /* Private color variables */
+    --_eds-field-label-color: var(--eds-color-text-strong);
+    --_eds-field-description-color: var(--eds-color-text-subtle);
+    --_eds-field-indicator-color: var(--eds-color-text-subtle);
+    --_eds-field-helper-color: var(--eds-color-text-subtle);
   }
 
   /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
-  .eds-field[data-position='start'],
-  .eds-field[data-position='end'] {
+  .eds-field:is([data-position='start'], [data-position='end']) {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -27,12 +26,8 @@
   }
 
   /* Description and helper message span full width below in horizontal layout */
-  .eds-field[data-position='start'] .eds-field__description,
-  .eds-field[data-position='end'] .eds-field__description,
-  .eds-field[data-position='start'] .eds-helper-message,
-  .eds-field[data-position='end'] .eds-helper-message,
-  .eds-field[data-position='start'] [role='alert'],
-  .eds-field[data-position='end'] [role='alert'] {
+  .eds-field:is([data-position='start'], [data-position='end'])
+    :is(.eds-field__description, .eds-helper-message, [role='alert']) {
     flex-basis: 100%;
   }
 
@@ -40,28 +35,28 @@
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
-    color: var(--eds-field-label-color);
+    color: var(--_eds-field-label-color);
   }
 
   .eds-field__indicator {
     margin-inline-start: var(--eds-selectable-space-horizontal);
-    color: var(--eds-field-indicator-color);
+    color: var(--_eds-field-indicator-color);
+    font-size: var(--eds-typography-font-size);
+    vertical-align: middle;
   }
 
   .eds-field__description {
     margin: 0;
-    color: var(--eds-field-description-color);
+    color: var(--_eds-field-description-color);
   }
 
-  /* HelperMessage inherits disabled styling when inside Field */
+  /* HelperMessage inherits styling when inside Field */
   .eds-field .eds-helper-message {
-    color: var(--eds-field-helper-color);
+    color: var(--_eds-field-helper-color);
   }
 
+  /* Only helper message changes color when disabled */
   .eds-field[data-disabled='true'] {
-    --eds-field-label-color: var(--eds-color-text-subtle);
-    --eds-field-description-color: var(--eds-color-border-neutral-medium);
-    --eds-field-indicator-color: var(--eds-color-border-neutral-medium);
-    --eds-field-helper-color: var(--eds-color-text-subtle);
+    --_eds-field-helper-color: var(--eds-color-border-neutral-medium);
   }
 }
