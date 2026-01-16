@@ -1,10 +1,9 @@
 import { forwardRef } from 'react'
 import { TypographyNext } from '../../Typography'
 import type { HelperMessageProps } from './Field.HelperMessage.types'
-import './helper-message.css'
 
 /**
- * HelperMessage provides contextual help or validation feedback for form fields.
+ * Field.HelperMessage provides contextual help or validation feedback for form fields.
  *
  * Use with `useFieldIds` hook to connect to form controls via `aria-describedby`.
  *
@@ -22,10 +21,7 @@ import './helper-message.css'
 export const HelperMessage = forwardRef<
   HTMLParagraphElement,
   HelperMessageProps
->(function HelperMessage(
-  { disabled = false, children, className, role, id, ...rest },
-  ref,
-) {
+>(function HelperMessage({ children, className, role, id, ...rest }, ref) {
   return (
     <TypographyNext
       ref={ref}
@@ -37,11 +33,7 @@ export const HelperMessage = forwardRef<
       lineHeight="default"
       tracking="normal"
       role={role}
-      className={[
-        'eds-helper-message',
-        disabled && 'eds-helper-message--disabled',
-        className,
-      ]
+      className={['eds-field__helper-message', className]
         .filter(Boolean)
         .join(' ')}
       {...rest}

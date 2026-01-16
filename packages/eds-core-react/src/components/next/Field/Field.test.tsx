@@ -195,14 +195,14 @@ describe('Field.HelperMessage', () => {
     expect(helper).toHaveAttribute('id', 'my-helper')
   })
 
-  test('applies disabled styling', () => {
+  test('applies correct class name', () => {
     render(
-      <Field.HelperMessage id="helper" disabled data-testid="helper">
-        Disabled message
+      <Field.HelperMessage id="helper" data-testid="helper">
+        Helper message
       </Field.HelperMessage>,
     )
     const helper = screen.getByTestId('helper')
-    expect(helper).toHaveClass('eds-helper-message--disabled')
+    expect(helper).toHaveClass('eds-field__helper-message')
   })
 
   test('accepts role prop for accessibility', () => {

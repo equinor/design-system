@@ -27,7 +27,7 @@
 
   /* Description and helper message span full width below in horizontal layout */
   .eds-field:is([data-position='start'], [data-position='end'])
-    :is(.eds-field__description, .eds-helper-message, [role='alert']) {
+    :is(.eds-field__description, .eds-field__helper-message, [role='alert']) {
     flex-basis: 100%;
   }
 
@@ -50,8 +50,9 @@
     color: var(--_eds-field-description-color);
   }
 
-  /* HelperMessage inherits styling when inside Field */
-  .eds-field .eds-helper-message {
+  /* HelperMessage styling */
+  .eds-field__helper-message {
+    margin: 0;
     color: var(--_eds-field-helper-color);
   }
 

@@ -4,4 +4,3 @@
 @layer eds-components;
 
 @import './Field/field.css';
-@import './Field/helper-message.css';
