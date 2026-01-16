@@ -1,1 +1,7 @@
 @import '@equinor/eds-tokens/css/variables';
+
+/* Ensure form elements inherit EDS typography */
+fieldset,
+legend {
+  font-family: var(--eds-typography-ui-body-font-family), sans-serif;
+}

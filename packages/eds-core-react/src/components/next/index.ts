@@ -1,8 +1,12 @@
-// src/components/next/index.ts
-
-// Export all EDS 2.0 components here as they are added
-export { Placeholder } from './Placeholder'
-export type { PlaceholderProps } from './Placeholder'
-
 export { Icon } from './Icon'
+export { Field, useFieldIds } from './Field'
+
 export type { IconProps, IconSize, IconData, IconName } from './Icon'
+
+export type {
+  FieldProps,
+  FieldLabelProps,
+  FieldDescriptionProps,
+  FieldIds,
+  HelperMessageProps,
+} from './Field'

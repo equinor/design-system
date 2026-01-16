@@ -1,0 +1,63 @@
+@layer eds-components {
+  .eds-field {
+    /* Layout - use CSS variable for configurable width */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--eds-generic-gap-vertical);
+    width: var(--eds-field-width, 100%);
+    /* Private color variables */
+    --_eds-field-label-color: var(--eds-color-text-strong);
+    --_eds-field-description-color: var(--eds-color-text-subtle);
+    --_eds-field-indicator-color: var(--eds-color-text-subtle);
+    --_eds-field-helper-color: var(--eds-color-text-subtle);
+  }
+
+  /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
+  .eds-field:is([data-position='start'], [data-position='end']) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--eds-generic-gap-horizontal);
+  }
+
+  .eds-field[data-position='end'] {
+    flex-direction: row-reverse;
+  }
+
+  /* Description and helper message span full width below in horizontal layout */
+  .eds-field:is([data-position='start'], [data-position='end'])
+    :is(.eds-field__description, .eds-field__helper-message, [role='alert']) {
+    flex-basis: 100%;
+  }
+
+  .eds-field__label {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: var(--_eds-field-label-color);
+  }
+
+  .eds-field__indicator {
+    margin-inline-start: var(--eds-selectable-space-horizontal);
+    color: var(--_eds-field-indicator-color);
+    font-size: var(--eds-typography-font-size);
+    vertical-align: middle;
+  }
+
+  .eds-field__description {
+    margin: 0;
+    color: var(--_eds-field-description-color);
+  }
+
+  /* HelperMessage styling */
+  .eds-field__helper-message {
+    margin: 0;
+    color: var(--_eds-field-helper-color);
+  }
+
+  /* Only helper message changes color when disabled */
+  .eds-field[data-disabled='true'] {
+    --_eds-field-helper-color: var(--eds-color-border-neutral-medium);
+  }
+}
