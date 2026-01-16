@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { TypographyNext } from '../../Typography'
-import type { HelperMessageProps } from './HelperMessage.types'
+import type { HelperMessageProps } from './Field.HelperMessage.types'
 import './helper-message.css'
 
 /**
@@ -15,7 +15,7 @@ import './helper-message.css'
  * <Field>
  *   <Field.Label htmlFor={inputId}>Email</Field.Label>
  *   <input id={inputId} aria-describedby={getDescribedBy()} />
- *   <HelperMessage id={helperMessageId}>We'll never share your email</HelperMessage>
+ *   <Field.HelperMessage id={helperMessageId}>We'll never share your email</Field.HelperMessage>
  * </Field>
  * ```
  */
@@ -51,4 +51,4 @@ export const HelperMessage = forwardRef<
   )
 })
 
-HelperMessage.displayName = 'HelperMessage'
+HelperMessage.displayName = 'Field.HelperMessage'

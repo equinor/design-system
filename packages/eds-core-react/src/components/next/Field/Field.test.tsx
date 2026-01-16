@@ -2,7 +2,6 @@ import { render, screen, renderHook } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { Field } from './Field'
-import { HelperMessage } from '../HelperMessage'
 import { useFieldIds } from './useFieldIds'
 
 describe('useFieldIds', () => {
@@ -181,24 +180,26 @@ describe('Field.Description', () => {
   })
 })
 
-describe('HelperMessage', () => {
+describe('Field.HelperMessage', () => {
   test('renders as paragraph element', () => {
-    render(<HelperMessage id="helper">Error message</HelperMessage>)
+    render(<Field.HelperMessage id="helper">Error message</Field.HelperMessage>)
     const helper = screen.getByText('Error message')
     expect(helper.tagName).toBe('P')
   })
 
   test('accepts id prop for aria-describedby linking', () => {
-    render(<HelperMessage id="my-helper">Helper text</HelperMessage>)
+    render(
+      <Field.HelperMessage id="my-helper">Helper text</Field.HelperMessage>,
+    )
     const helper = screen.getByText('Helper text')
     expect(helper).toHaveAttribute('id', 'my-helper')
   })
 
   test('applies disabled styling', () => {
     render(
-      <HelperMessage id="helper" disabled data-testid="helper">
+      <Field.HelperMessage id="helper" disabled data-testid="helper">
         Disabled message
-      </HelperMessage>,
+      </Field.HelperMessage>,
     )
     const helper = screen.getByTestId('helper')
     expect(helper).toHaveClass('eds-helper-message--disabled')
@@ -206,9 +207,9 @@ describe('HelperMessage', () => {
 
   test('accepts role prop for accessibility', () => {
     render(
-      <HelperMessage id="helper" role="alert">
+      <Field.HelperMessage id="helper" role="alert">
         Error
-      </HelperMessage>,
+      </Field.HelperMessage>,
     )
     const helper = screen.getByRole('alert')
     expect(helper).toBeInTheDocument()
@@ -228,7 +229,9 @@ describe('Integration: Field with useFieldIds', () => {
           data-testid="input"
           aria-describedby={getDescribedBy({ hasHelperMessage: true })}
         />
-        <HelperMessage id={helperMessageId}>Invalid email</HelperMessage>
+        <Field.HelperMessage id={helperMessageId}>
+          Invalid email
+        </Field.HelperMessage>
       </Field>
     )
   }

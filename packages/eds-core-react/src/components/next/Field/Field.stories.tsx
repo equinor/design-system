@@ -4,7 +4,6 @@ import { Stack } from '../../../../.storybook/components'
 import { Button } from '../../Button'
 import { Field } from './Field'
 import type { FieldProps } from './Field.types'
-import { HelperMessage } from '../HelperMessage'
 import { useFieldIds } from './useFieldIds'
 
 const meta: Meta<typeof Field> = {
@@ -70,9 +69,9 @@ export const Default: StoryFn<FieldProps> = () => {
         defaultValue="Smith Jones"
         style={inputStyles}
       />
-      <HelperMessage id={helperMessageId}>
+      <Field.HelperMessage id={helperMessageId}>
         You cannot have spaces in your last name
-      </HelperMessage>
+      </Field.HelperMessage>
     </Field>
   )
 }
@@ -152,9 +151,9 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
       />
       <div role="alert">
         {hasError && (
-          <HelperMessage id={helperMessageId}>
+          <Field.HelperMessage id={helperMessageId}>
             Username must be at least four characters
-          </HelperMessage>
+          </Field.HelperMessage>
         )}
       </div>
     </Field>
@@ -282,9 +281,9 @@ export const CheckboxWithValidation: StoryFn<FieldProps> = () => {
         </Field.Label>
         <div role="alert">
           {showError && (
-            <HelperMessage id={helperMessageId}>
+            <Field.HelperMessage id={helperMessageId}>
               You must accept the terms before continuing.
-            </HelperMessage>
+            </Field.HelperMessage>
           )}
         </div>
       </Field>

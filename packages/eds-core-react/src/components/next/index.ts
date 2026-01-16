@@ -1,6 +1,5 @@
 export { Icon } from './Icon'
 export { Field, useFieldIds } from './Field'
-export { HelperMessage } from './HelperMessage'
 
 export type { IconProps, IconSize, IconData, IconName } from './Icon'
 
@@ -9,6 +8,5 @@ export type {
   FieldLabelProps,
   FieldDescriptionProps,
   FieldIds,
+  HelperMessageProps,
 } from './Field'
-
-export type { HelperMessageProps } from './HelperMessage'

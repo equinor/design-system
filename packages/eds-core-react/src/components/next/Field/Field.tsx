@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 import './field.css'
 import { FieldDescription } from './Field.Description'
+import { HelperMessage } from './Field.HelperMessage'
 import type { FieldProps } from './Field.types'
 import { FieldLabel } from './Field.Label'
 
@@ -26,9 +27,11 @@ FieldComponent.displayName = 'Field'
 type CompoundField = typeof FieldComponent & {
   Label: typeof FieldLabel
   Description: typeof FieldDescription
+  HelperMessage: typeof HelperMessage
 }
 
 export const Field = FieldComponent as CompoundField
 
 Field.Label = FieldLabel
 Field.Description = FieldDescription
+Field.HelperMessage = HelperMessage
