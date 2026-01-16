@@ -1,0 +1,170 @@
+@layer eds-components {
+  /* Container */
+  .eds-input-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--eds-selectable-gap-horizontal);
+    box-sizing: border-box;
+    width: 100%;
+    background: var(--eds-color-bg-canvas);
+    border: 1px solid var(--eds-color-border-subtle);
+    border-radius: var(--eds-spacing-border-radius-none);
+    padding-inline: var(--eds-selectable-space-horizontal);
+  }
+
+  /* Hover - only for enabled inputs */
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    ) {
+    border-color: var(--eds-color-border-strong);
+  }
+
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    )
+    .eds-input {
+    color: var(--eds-color-text-strong);
+    -webkit-text-fill-color: var(--eds-color-text-strong);
+  }
+
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    )
+    .eds-input::placeholder {
+    color: var(--eds-color-text-strong);
+    -webkit-text-fill-color: var(--eds-color-text-strong);
+  }
+
+  .eds-input-container:focus-within {
+    border-color: transparent;
+    outline: 2px solid var(--eds-color-border-focus);
+    outline-offset: -2px;
+  }
+
+  /* Invalid focus state - red outline */
+  .eds-input-container--invalid:focus-within {
+    outline-color: var(--eds-color-border-strong);
+  }
+
+  /* Disabled state */
+  .eds-input-container--disabled {
+    cursor: not-allowed;
+    border-color: transparent;
+  }
+
+  .eds-input-container--disabled .eds-input {
+    color: var(--eds-color-border-medium);
+    cursor: not-allowed;
+    opacity: 1;
+    -webkit-text-fill-color: var(--eds-color-border-medium);
+  }
+
+  .eds-input-container--disabled .eds-input::placeholder {
+    color: var(--eds-color-border-medium);
+    -webkit-text-fill-color: var(--eds-color-border-medium);
+  }
+
+  /* Readonly state */
+  .eds-input-container--readonly {
+    border-color: transparent;
+  }
+
+  .eds-input-container--readonly .eds-input {
+    color: var(--eds-color-border-strong);
+    -webkit-text-fill-color: var(--eds-color-border-strong);
+  }
+
+  .eds-input-container--readonly .eds-input::placeholder {
+    color: var(--eds-color-border-strong);
+    -webkit-text-fill-color: var(--eds-color-border-strong);
+  }
+
+  /* Invalid state */
+  .eds-input-container--invalid {
+    border-color: var(--eds-color-border-medium);
+  }
+
+  /* Input/Textarea element */
+  .eds-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: var(--eds-color-text-strong);
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    resize: none;
+  }
+
+  .eds-input::placeholder {
+    color: var(--eds-color-border-strong);
+  }
+
+  /* Error icon - separate from adornments */
+  .eds-error-icon {
+    display: flex;
+    align-items: center;
+    color: var(--eds-color-text-subtle);
+    flex-shrink: 0;
+  }
+
+  /* Adornments container */
+  .eds-adornment {
+    display: flex;
+    align-items: center;
+    gap: var(--eds-selectable-gap-horizontal);
+    flex-shrink: 0;
+  }
+
+  /* Adornment text (prefix/suffix) - always neutral color via data-color-appearance */
+  .eds-adornment__text {
+    display: inline; /* Override display: block from [data-font-family] */
+    color: var(--eds-color-text-subtle);
+  }
+
+  /* Adornment element (icons, buttons, etc.) - inherits state color (red when invalid) */
+  .eds-adornment__adornment {
+    display: flex;
+    align-items: center;
+    color: var(--eds-color-text-subtle);
+  }
+
+  /* Hover state for adornments - only for neutral state (not invalid) */
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    ):not(.eds-input-container--invalid)
+    .eds-adornment__text {
+    color: var(--eds-color-text-strong);
+  }
+
+  .eds-input-container:hover:not(.eds-input-container--disabled):not(
+      .eds-input-container--readonly
+    ):not(.eds-input-container--invalid)
+    .eds-adornment__adornment {
+    color: var(--eds-color-text-strong);
+  }
+
+  /* Disabled state for adornments */
+  .eds-input-container--disabled .eds-adornment__text {
+    color: var(--eds-color-border-medium);
+  }
+
+  .eds-input-container--disabled .eds-adornment__adornment {
+    color: var(--eds-color-border-medium);
+  }
+
+  /* Readonly state for adornments */
+  .eds-input-container--readonly .eds-adornment__text {
+    color: var(--eds-color-border-strong);
+  }
+
+  .eds-input-container--readonly .eds-adornment__adornment {
+    color: var(--eds-color-border-strong);
+  }
+}

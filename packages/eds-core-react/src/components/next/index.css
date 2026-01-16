@@ -1,0 +1,7 @@
+/* EDS 2.0 Next Components - Global CSS */
+/* This file imports all CSS for next/ components */
+
+@import './Field/field.css';
+@import './Label/label.css';
+@import './HelperMessage/helper-message.css';
+@import './Input/input.css';

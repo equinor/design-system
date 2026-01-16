@@ -1,0 +1,13 @@
+@layer eds-components {
+  .eds-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-selectable-space-vertical);
+    width: var(--eds-field-width, 100%);
+  }
+
+  .eds-field__description {
+    margin: 0;
+    color: var(--eds-color-text-subtle);
+  }
+}
