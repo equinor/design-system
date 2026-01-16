@@ -4,6 +4,13 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.4.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.0-beta.0...eds-core-react-next@v2.4.0-beta.0) (2026-01-16)
+
+
+### ✨ Added
+
+* Field + HelperMessage ([#4332](https://github.com/equinor/design-system/issues/4332)) ([6bbbad5](https://github.com/equinor/design-system/commit/6bbbad5feb18963054ef502cc83a6751c7d8592a))
+
 ## [2.3.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.2.1-beta.0...eds-core-react-next@v2.3.0-beta.0) (2026-01-16)
 
 **Version correction release.** This release contains the same code as `2.2.0-beta.0`, republished with correct version number.
