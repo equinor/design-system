@@ -2,6 +2,23 @@
 
 This directory contains custom AI agent configurations for OpenCode in the EDS repository.
 
+## Global Configuration
+
+The root `AGENTS.md` file provides **global instructions** for all AI coding tools (OpenCode, Claude Code, Cursor, GitHub Copilot). It contains repository-wide conventions that apply regardless of which agent or tool is used.
+
+The `.opencode/` directory contains **OpenCode-specific** agent definitions that build on top of the global instructions.
+
+## Planning Mode
+
+OpenCode has a **planning mode** that can be toggled with `Ctrl+L` (or `Cmd+L` on Mac). When enabled:
+
+- The agent analyzes the task before making changes
+- Creates a structured plan with steps
+- Useful for complex, multi-file changes
+- Helps ensure all requirements are considered upfront
+
+Use planning mode for larger features or refactors. Skip it for quick fixes or simple changes.
+
 ## Instruction Pipeline
 
 OpenCode agents receive instructions from multiple sources, applied in this order:
@@ -42,7 +59,7 @@ Primary agents are selectable by the user and run as the main conversation agent
 
 ### Sub-Agents
 
-Sub-agents are invoked by primary agents to perform specialized tasks. They cannot be selected directly.
+Sub-agents are invoked by primary agents to perform specialized tasks. They cannot be selected directly, but must be mentioned in chat.
 
 | Agent | Description | Tools |
 |-------|-------------|-------|
@@ -97,20 +114,24 @@ permission:
 
 ### Selecting a Primary Agent
 
-In OpenCode, use `Ctrl+E` (or `Cmd+E` on Mac) to open the agent picker and select an agent.
+Press `Tab` to cycle through available primary agents. The current agent is shown in the input area.
 
 ### Invoking Sub-Agents
 
-Primary agents can delegate tasks to sub-agents. For example:
+Sub-agents are specialized agents that handle specific tasks. Mention them with `@` to invoke:
 
 ```
-Build the Button component from the Figma design using the figma-component agent
+@figma-component build the Button component from this Figma link
 ```
 
-The primary agent will:
-1. Invoke the specialized sub-agent
-2. Pass the task description
-3. Receive results back when complete
+```
+@eds-component create a new Tooltip component
+```
+
+When a sub-agent is invoked:
+1. It receives the task with its specialized instructions
+2. Executes with its configured tools
+3. Returns results back to the conversation
 
 ## MCP Integration
 
