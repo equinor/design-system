@@ -1,7 +1,7 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
 import { OverridableComponent } from '@equinor/eds-utils'
 import { error_filled } from '@equinor/eds-icons'
-import { Icon } from '../../Icon'
+import { Icon } from '../Icon'
 import type { InputProps } from './Input.types'
 
 export const Input: OverridableComponent<InputProps, HTMLInputElement> =
@@ -52,7 +52,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       >
         {showErrorIcon && (
           <span className="eds-error-icon">
-            <Icon data={error_filled} size={18} />
+            <Icon data={error_filled} size="xs" />
           </span>
         )}
         {hasLeftAdornment && (
