@@ -7,7 +7,26 @@
       "release-type": "node",
       "package-name": "@equinor/eds-core-react",
       "component": "eds-core-react",
-      "exclude-paths": ["src/components/next"]
+      "exclude-paths": [
+        "src/components/next",
+        ".storybook",
+        "stories",
+        "tests",
+        ".gitignore",
+        ".cachebust",
+        "rollup.config.js",
+        "jest.config.cjs",
+        "jest.setup.ts",
+        "tsconfig.json",
+        "tsconfig.build.json",
+        "tsconfig.test.json",
+        "playwright.config.ts",
+        "Dockerfile.storybook",
+        "nginx.conf",
+        "README.md",
+        "FIGMA_CODE_CONNECT.md",
+        "figma.config.json"
+      ]
     },
     "packages/eds-core-react/src/components/next": {
       "release-type": "simple",
