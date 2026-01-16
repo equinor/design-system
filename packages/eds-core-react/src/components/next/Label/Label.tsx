@@ -3,7 +3,7 @@ import { info_circle } from '@equinor/eds-icons'
 import type { LabelProps } from './Label.types'
 import { TypographyNext } from '../../Typography'
 import { Tooltip } from '../../Tooltip'
-import { Icon } from '../../Icon'
+import { Icon } from '../Icon'
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
   { label, optional = false, required = false, info, className, ...rest },
@@ -46,7 +46,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
           className="eds-label__info"
           aria-label="More information"
         >
-          <Icon data={info_circle} size={16} />
+          <Icon data={info_circle} size="xs" />
         </button>
       </Tooltip>
     </div>
