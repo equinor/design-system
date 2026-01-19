@@ -398,10 +398,11 @@ export const ColorAppearance: StoryFn<CheckboxProps> = () => {
           helperMessage="This is the default appearance"
         />
       </li>
-      <li data-color-appearance="danger">
+      <li>
         <Checkbox
           label="Danger appearance"
-          helperMessage="Use data-color-appearance='danger' on parent for error styling"
+          helperMessage="Set data-color-appearance='danger' for error styling"
+          data-color-appearance="danger"
         />
       </li>
     </UnstyledList>
@@ -412,7 +413,7 @@ ColorAppearance.parameters = {
   docs: {
     description: {
       story:
-        'Use `data-color-appearance="danger"` on a parent element to style the checkbox with error colors. This is useful for validation states.',
+        'The checkbox uses `accent` color by default. Use `data-color-appearance="danger"` on the Checkbox for error styling.',
     },
   },
 }

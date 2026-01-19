@@ -159,4 +159,31 @@ describe('Checkbox.new', () => {
 
     expect(checkbox).toHaveAttribute('aria-describedby', helperMessage.id)
   })
+
+  it('should default to accent color appearance', () => {
+    render(<Checkbox label="Test Label" />)
+
+    const checkbox = screen.getByRole('checkbox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = checkbox.closest('.eds-checkbox')
+    expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
+  })
+
+  it('should allow overriding color appearance', () => {
+    render(<Checkbox label="Test Label" data-color-appearance="danger" />)
+
+    const checkbox = screen.getByRole('checkbox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = checkbox.closest('.eds-checkbox')
+    expect(wrapper).toHaveAttribute('data-color-appearance', 'danger')
+  })
+
+  it('should apply color appearance to standalone checkbox', () => {
+    render(<Checkbox aria-label="Standalone" data-color-appearance="danger" />)
+
+    const checkbox = screen.getByRole('checkbox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = checkbox.closest('.eds-checkbox--standalone')
+    expect(wrapper).toHaveAttribute('data-color-appearance', 'danger')
+  })
 })

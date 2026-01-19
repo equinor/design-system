@@ -1,5 +1,13 @@
 import type { InputHTMLAttributes, ReactNode } from 'react'
 
+export type ColorAppearance =
+  | 'neutral'
+  | 'accent'
+  | 'danger'
+  | 'info'
+  | 'success'
+  | 'warning'
+
 export type CheckboxProps = {
   /** Label for the checkbox */
   label?: ReactNode
@@ -13,4 +21,6 @@ export type CheckboxProps = {
   indicator?: string
   /** Helper message shown below the checkbox, useful for additional context */
   helperMessage?: ReactNode
+  /** Color appearance for the checkbox icon. Defaults to 'accent' */
+  'data-color-appearance'?: ColorAppearance
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>

@@ -7,8 +7,8 @@
     --_checkbox-height: var(--eds-sizing-selectable-md);
     /* Hover size from density tokens - 44px spacious, 36px comfortable */
     --_checkbox-hover-size: var(--eds-sizing-selectable-lg);
-    /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
-    --_checkbox-icon-color: var(--eds-color-border-strong);
+    /* Icon color - follows data-color-appearance (defaults to accent in component) */
+    --_checkbox-icon-color: var(--eds-color-text-subtle);
     /* Hover color is always accent - interaction feedback, not semantic */
     --_checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-hover);
     cursor: pointer;
@@ -170,5 +170,14 @@
   /* Label styling - handled by Field.Label, but ensure disabled color */
   .eds-field.eds-checkbox[data-disabled='true'] .eds-field__label {
     color: var(--eds-color-border-neutral-medium);
+  }
+
+  /* Helper message should be neutral by default, only danger overrides */
+  .eds-field.eds-checkbox {
+    --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
+  }
+
+  .eds-field.eds-checkbox[data-color-appearance='danger'] {
+    --_eds-field-helper-color: var(--eds-color-text-danger-subtle);
   }
 }
