@@ -1,7 +1,0 @@
-/* Global styles for @equinor/eds-core-react */
-@import '@equinor/eds-tokens/css/variables';
-
-/* Component styles */
-@import './components/next/Checkbox/checkbox.css';
-@import './components/next/Field/field.css';
-@import './components/next/ValidationMessage/validation-message.css';

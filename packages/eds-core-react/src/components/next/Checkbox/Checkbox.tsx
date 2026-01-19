@@ -1,13 +1,14 @@
 /* eslint camelcase: "off" */
-import { forwardRef, useEffect, useRef } from 'react'
+import { forwardRef, useEffect, useId, useRef } from 'react'
 import {
   checkbox,
   checkbox_outline,
   checkbox_indeterminate,
 } from '@equinor/eds-icons'
-import { TypographyNext } from '../../Typography'
+import { Field } from '../Field'
 import { Icon } from '../Icon'
 import type { CheckboxProps } from './Checkbox.types'
+import './checkbox.css'
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
   classes.filter(Boolean).join(' ')
@@ -19,16 +20,17 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       disabled = false,
       indeterminate = false,
       error = false,
+      indicator,
       className,
-      style,
-      labelProps,
-      wrapperProps,
+      id: providedId,
       ...rest
     },
     ref,
   ) {
     const internalRef = useRef<HTMLInputElement>(null)
     const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
+    const generatedId = useId()
+    const inputId = providedId ?? generatedId
 
     useEffect(() => {
       if (inputRef.current) {
@@ -36,24 +38,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       }
     }, [indeterminate, inputRef])
 
-    const baseWrapperClass = classNames('eds-checkbox', className)
-
-    const labelClasses = classNames('eds-checkbox__label')
-
-    const sharedWrapperProps: Record<string, unknown> = {
-      style,
-      'data-disabled': disabled ? 'true' : undefined,
-      'data-selectable-space': 'md',
-      'data-space-proportions': 'squished',
-      'data-color-appearance': error ? 'danger' : 'accent',
-      'data-font-size': 'lg',
-      ...wrapperProps,
-    }
-
     const checkboxInput = (
       <span className="eds-checkbox__input-wrapper">
         <input
           type="checkbox"
+          id={inputId}
           aria-checked={indeterminate ? 'mixed' : rest.checked}
           aria-disabled={disabled || undefined}
           aria-invalid={error || undefined}
@@ -78,39 +67,34 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </span>
     )
 
+    // Use Field for layout when label is provided
     if (label) {
-      const { className: labelClassName, ...restLabelProps } = labelProps ?? {}
-
       return (
-        <label
-          className={classNames(baseWrapperClass, labelClassName)}
-          {...sharedWrapperProps}
-          {...restLabelProps}
+        <Field
+          position="start"
+          disabled={disabled}
+          className={classNames('eds-checkbox', className)}
+          data-color-appearance={error ? 'danger' : 'accent'}
         >
-          <span
-            className="eds-checkbox__label-wrapper"
-            data-horizontal-gap="md"
-          >
-            {checkboxInput}
-            <TypographyNext
-              as="span"
-              family="ui"
-              size="lg"
-              baseline="center"
-              lineHeight="squished"
-              weight="normal"
-              tracking="normal"
-              className={labelClasses}
-            >
-              {label}
-            </TypographyNext>
-          </span>
-        </label>
+          {checkboxInput}
+          <Field.Label htmlFor={inputId} indicator={indicator}>
+            {label}
+          </Field.Label>
+        </Field>
       )
     }
 
+    // Standalone checkbox without label
     return (
-      <span className={baseWrapperClass} {...sharedWrapperProps}>
+      <span
+        className={classNames(
+          'eds-checkbox',
+          'eds-checkbox--standalone',
+          className,
+        )}
+        data-disabled={disabled || undefined}
+        data-color-appearance={error ? 'danger' : 'accent'}
+      >
         {checkboxInput}
       </span>
     )

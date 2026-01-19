@@ -1,20 +1,16 @@
-import { HTMLAttributes, InputHTMLAttributes, LabelHTMLAttributes } from 'react'
+import type { InputHTMLAttributes, ReactNode } from 'react'
 
 export type CheckboxProps = {
   /** Label for the checkbox */
-  label?: string
+  label?: ReactNode
   /** If true, the checkbox will be disabled */
   disabled?: boolean
-  /** If true, the checkbox appears indeterminate. Important! You'll have to
-   * set the native element to indeterminate yourself.
+  /** If true, the checkbox appears indeterminate. Note: You must also set
+   * the native element's indeterminate property via ref if needed.
    */
   indeterminate?: boolean
   /** If true, the checkbox will be in error state with red styling */
   error?: boolean
-  /** Props to apply to the label element (when label prop is provided) */
-  labelProps?: LabelHTMLAttributes<HTMLLabelElement>
-  /** Props to apply to the wrapper element (span when no label, label when label is provided).
-   * Use this to override default data-attributes like data-color-appearance, data-selectable-space, etc.
-   */
-  wrapperProps?: HTMLAttributes<HTMLElement>
-} & InputHTMLAttributes<HTMLInputElement>
+  /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
+  indicator?: string
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>

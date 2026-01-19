@@ -1,13 +1,10 @@
 import { useState, useRef, ChangeEvent } from 'react'
-import type { LabelHTMLAttributes } from 'react'
 import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { data } from '../../../stories/data'
 import { Stack } from './../../../../.storybook/components'
 import { Typography, Button, Table } from '../../..'
-import { Field } from '../Field'
-import { ValidationMessage } from '../ValidationMessage'
 import { Checkbox } from './Checkbox'
 import type { CheckboxProps } from './Checkbox.types'
 
@@ -18,7 +15,7 @@ const meta: Meta<typeof Checkbox> = {
     docs: {
       description: {
         component:
-          'New Checkbox component using vanilla CSS and EDS foundation tokens. Consumers control tone and density via `data-*` attributes on the wrapper element',
+          'New Checkbox component using vanilla CSS, EDS foundation tokens, and Field for layout. The component handles accessibility automatically via the Field component.',
       },
       source: {
         excludeDecorators: true,
@@ -60,33 +57,8 @@ const CheckboxWrapper = ({ children, ...props }) => (
   </div>
 )
 
-const labelData = (
-  attributes: Record<`data-${string}`, string | undefined>,
-): LabelHTMLAttributes<HTMLLabelElement> => attributes
-
-const appearances = [
-  'accent',
-  'neutral',
-  'success',
-  'info',
-  'warning',
-  'danger',
-] as const
-
 export const Introduction: StoryFn<CheckboxProps> = (args) => {
-  const accentLabelProps = labelData({
-    'data-color-appearance': 'accent',
-    'data-density': 'spacious',
-  })
-
-  return (
-    <Checkbox
-      id="intro-checkbox"
-      label="Play with me"
-      labelProps={accentLabelProps}
-      {...args}
-    />
-  )
+  return <Checkbox id="intro-checkbox" label="Play with me" {...args} />
 }
 
 export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
@@ -284,58 +256,24 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
 }
 WithFormsControl.storyName = 'Example with React Hook Form'
 
-export const Compact: StoryFn<CheckboxProps> = () => {
+export const WithIndicator: StoryFn<CheckboxProps> = () => {
   return (
     <UnstyledList>
       <li>
-        <Checkbox
-          label="I am compact"
-          labelProps={labelData({ 'data-density': 'comfortable' })}
-        />
+        <Checkbox label="I accept the terms" indicator="(Required)" />
       </li>
       <li>
-        <Checkbox
-          label="I am also compact"
-          defaultChecked
-          labelProps={labelData({ 'data-density': 'comfortable' })}
-        />
-      </li>
-      <li>
-        <Checkbox
-          label="I am compact and disabled"
-          disabled
-          labelProps={labelData({ 'data-density': 'comfortable' })}
-        />
+        <Checkbox label="Subscribe to newsletter" indicator="(Optional)" />
       </li>
     </UnstyledList>
   )
 }
-Compact.parameters = {
+WithIndicator.storyName = 'With indicator'
+WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density="comfortable"` on the wrapper (`labelProps`) to switch to the compact touch area.',
-    },
-  },
-}
-
-export const Appearances: StoryFn = () => (
-  <UnstyledList>
-    {appearances.map((appearance) => (
-      <li key={appearance}>
-        <Checkbox
-          label={`Appearance: ${appearance}`}
-          labelProps={labelData({ 'data-color-appearance': appearance })}
-        />
-      </li>
-    ))}
-  </UnstyledList>
-)
-Appearances.parameters = {
-  docs: {
-    description: {
-      story:
-        'Apply different tones by setting `data-color-appearance` on the wrapper element via `labelProps`.',
+        'Use the `indicator` prop to show required or optional status after the label text.',
     },
   },
 }
@@ -393,66 +331,72 @@ export const DarkMode: StoryFn<CheckboxProps> = () => {
 }
 DarkMode.storyName = 'Dark mode'
 
-// export const ErrorState: StoryFn<CheckboxProps> = () => {
-//   const [checked, setChecked] = useState(false)
-
-//   return (
-//     <div>
-//       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-//         Check the box to see how the error state disappears when validated.
-//       </Typography>
-//       <Checkbox
-//         label="I agree to the terms and conditions"
-//         checked={checked}
-//         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-//           setChecked(e.target.checked)
-//         }
-//         error={!checked}
-//       />
-//       <Typography
-//         variant="caption"
-//         style={{
-//           marginTop: '0.5rem',
-//           color: 'var(--eds-color-text-danger-strong)',
-//         }}
-//       >
-//         {!checked && 'You must accept the terms and conditions'}
-//       </Typography>
-//     </div>
-//   )
-// }
-// ErrorState.storyName = 'Error state'
-// ErrorState.parameters = {
-//   docs: {
-//     description: {
-//       story:
-//         'Error state is shown by setting the `error` prop to true, which applies red styling to the checkbox. Error messages should be provided by a separate form field component. This is commonly used for required fields like accepting terms and conditions.',
-//     },
-//   },
-// }
-
-export const WithField: StoryFn<CheckboxProps> = () => {
-  const [accepted, setAccepted] = useState(false)
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAccepted(event.target.checked)
-  }
-
+export const Compact: StoryFn<CheckboxProps> = () => {
   return (
-    <Field required>
-      <Field.Label>Bruksvilkår</Field.Label>
-      <Checkbox
-        label="Jeg bekrefter at jeg har lest og forstått vilkårene"
-        checked={accepted}
-        onChange={onChange}
-        error={!accepted}
-      />
-      {!accepted && (
-        <ValidationMessage>
-          Du må godta bruksvilkårene før du kan gå videre
-        </ValidationMessage>
-      )}
-    </Field>
+    <div data-density="comfortable">
+      <UnstyledList>
+        <li>
+          <Checkbox label="Comfortable density (24px)" />
+        </li>
+        <li>
+          <Checkbox label="Preselected" defaultChecked />
+        </li>
+        <li>
+          <Checkbox label="Disabled" disabled />
+        </li>
+        <li>
+          <Checkbox label="Indeterminate" indeterminate />
+        </li>
+      </UnstyledList>
+    </div>
   )
 }
-WithField.storyName = 'Field integration'
+Compact.storyName = 'Compact (Comfortable density)'
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `data-density="comfortable"` on a parent element to render checkboxes in a more compact size (24px height instead of 36px).',
+    },
+  },
+}
+
+export const ErrorState: StoryFn<CheckboxProps> = () => {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <div>
+      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
+        Check the box to see how the error state disappears when validated.
+      </Typography>
+      <Checkbox
+        label="I agree to the terms and conditions"
+        checked={checked}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setChecked(e.target.checked)
+        }
+        error={!checked}
+      />
+      {!checked && (
+        <Typography
+          variant="caption"
+          style={{
+            marginTop: '0.5rem',
+            color: 'var(--eds-color-text-danger-strong)',
+          }}
+        >
+          You must accept the terms and conditions
+        </Typography>
+      )}
+    </div>
+  )
+}
+ErrorState.storyName = 'Error state'
+ErrorState.parameters = {
+  docs: {
+    description: {
+      story:
+        'Error state is shown by setting the `error` prop to true, which applies red styling to the checkbox.',
+    },
+  },
+}

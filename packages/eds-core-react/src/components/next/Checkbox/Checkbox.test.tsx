@@ -137,26 +137,9 @@ describe('Checkbox.new', () => {
     expect(input).toHaveAttribute('data-analytics', 'track-checkbox')
   })
 
-  it('should apply labelProps to label element', () => {
-    const { container } = render(
-      <Checkbox
-        label="Test Label"
-        data-testid="test-checkbox-input"
-        labelProps={
-          {
-            'data-testid': 'test-checkbox-label',
-            'data-analytics': 'checkbox-wrapper',
-          } as React.LabelHTMLAttributes<HTMLLabelElement>
-        }
-      />,
-    )
+  it('should support indicator prop for required/optional text', () => {
+    render(<Checkbox label="Test Label" indicator="(Required)" />)
 
-    const input = screen.getByRole('checkbox')
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const label = container.querySelector('[data-testid="test-checkbox-label"]')
-
-    expect(input).toHaveAttribute('data-testid', 'test-checkbox-input')
-    expect(label).toHaveAttribute('data-testid', 'test-checkbox-label')
-    expect(label).toHaveAttribute('data-analytics', 'checkbox-wrapper')
+    expect(screen.getByText('(Required)')).toBeInTheDocument()
   })
 })
