@@ -11,14 +11,11 @@ const meta: Meta<typeof TextField> = {
   args: {
     // Core
     placeholder: '',
-    // Label
-    optional: false,
-    required: false,
-    requiredSilent: false,
     // States
     disabled: false,
     invalid: false,
     readOnly: false,
+    required: false,
   },
   argTypes: {
     // Core
@@ -63,30 +60,12 @@ const meta: Meta<typeof TextField> = {
         category: 'Label',
       },
     },
-    optional: {
-      control: 'boolean',
-      description: 'Shows "(Optional)" indicator in the label',
-      table: {
-        category: 'Label',
-        defaultValue: { summary: 'false' },
-      },
-    },
-    required: {
-      control: 'boolean',
+    indicator: {
+      control: 'text',
       description:
-        'Shows "(Required)" indicator in the label and sets required/aria-required on the input',
+        'Indicator text shown after label, e.g. "(Required)" or "(Optional)"',
       table: {
         category: 'Label',
-        defaultValue: { summary: 'false' },
-      },
-    },
-    requiredSilent: {
-      control: 'boolean',
-      description:
-        'Sets required/aria-required on the input without showing indicator (for forms where most fields are required)',
-      table: {
-        category: 'Label',
-        defaultValue: { summary: 'false' },
       },
     },
 
@@ -126,6 +105,14 @@ const meta: Meta<typeof TextField> = {
     readOnly: {
       control: 'boolean',
       description: 'Makes input read-only (visible but not editable)',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    required: {
+      control: 'boolean',
+      description: 'Sets HTML required attribute for form validation',
       table: {
         category: 'States',
         defaultValue: { summary: 'false' },
@@ -230,37 +217,27 @@ Introduction.args = {
   helperMessage: 'Helper Message',
 }
 
-export const WithOptionalLabel: StoryFn<TextFieldProps> = () => (
-  <TextField label="Label" optional placeholder="Placeholder" />
-)
-WithOptionalLabel.storyName = 'With Optional Label'
-
-export const WithRequiredLabel: StoryFn<TextFieldProps> = () => (
-  <TextField label="Label" required placeholder="Placeholder" />
-)
-WithRequiredLabel.storyName = 'With Required Label'
-
-export const WithRequiredSilent: StoryFn<TextFieldProps> = () => (
+export const WithIndicator: StoryFn<TextFieldProps> = () => (
   <>
+    <TextField label="Default field" placeholder="No indicator" />
     <TextField
       label="Email"
-      requiredSilent
-      placeholder="Required but no indicator"
+      indicator="(Required)"
+      required
+      placeholder="Required field"
     />
-    <TextField label="Nickname" optional placeholder="Optional field" />
     <TextField
-      label="Phone"
-      requiredSilent
-      placeholder="Required but no indicator"
+      label="Nickname"
+      indicator="(Optional)"
+      placeholder="Optional field"
     />
   </>
 )
-WithRequiredSilent.storyName = 'Required Silent (Most Fields Required Form)'
-WithRequiredSilent.parameters = {
+WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Use `requiredSilent` when most fields in a form are required. This sets the HTML `required` attribute for validation and accessibility, but does not show "(Required)" text. Only mark optional fields with `optional`.',
+        'Use `indicator` to show text like "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation - these are separate concerns.',
     },
   },
 }
@@ -325,7 +302,7 @@ ReadOnlyState.storyName = 'Read Only State'
 export const FullExample: StoryFn<TextFieldProps> = () => (
   <TextField
     label="Label"
-    optional
+    indicator="(Optional)"
     description="Help with more details"
     placeholder="Placeholder"
     helperMessage="Helper Message"
@@ -342,11 +319,16 @@ export const WithLabelInfo: StoryFn<TextFieldProps> = () => (
     />
     <TextField
       label="API Key"
+      indicator="(Required)"
       required
       placeholder="Enter your API key"
       labelInfo="You can find your API key in the developer settings of your account."
     />
-    <TextField label="Username" optional placeholder="Without info tooltip" />
+    <TextField
+      label="Username"
+      indicator="(Optional)"
+      placeholder="Without info tooltip"
+    />
   </>
 )
 WithLabelInfo.storyName = 'With Label Info Tooltip'
@@ -387,6 +369,7 @@ export const DensityModes: StoryFn<TextFieldProps> = () => {
           <TextField
             label="Password"
             type="password"
+            indicator="(Required)"
             required
             placeholder="Enter password"
             value={spaciousPassword}
@@ -407,6 +390,7 @@ export const DensityModes: StoryFn<TextFieldProps> = () => {
           <TextField
             label="Password"
             type="password"
+            indicator="(Required)"
             required
             placeholder="Enter password"
             value={comfortablePassword}

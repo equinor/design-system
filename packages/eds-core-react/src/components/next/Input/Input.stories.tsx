@@ -2,7 +2,6 @@ import { StoryFn, Meta } from '@storybook/react-vite'
 import { anchor, search } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
-import { Label } from '../Label'
 import { Field } from '../Field'
 import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../../Icon'
@@ -13,6 +12,12 @@ const meta: Meta<typeof Input> = {
   title: 'EDS 2.0 (beta)/Input',
   component: Input,
   tags: ['beta'],
+  args: {
+    disabled: false,
+    invalid: false,
+    readOnly: false,
+    required: false,
+  },
   parameters: {
     docs: {
       page,
@@ -69,6 +74,15 @@ const meta: Meta<typeof Input> = {
     readOnly: {
       control: 'boolean',
       description: 'Makes input read-only (visible but not editable)',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    required: {
+      control: 'boolean',
+      description:
+        'Native HTML required attribute for form validation. Note: For visual indicator text like "(Required)", use Field.Label with the indicator prop.',
       table: {
         category: 'States',
         defaultValue: { summary: 'false' },
@@ -207,7 +221,9 @@ export const WithLabel: StoryFn<InputProps> = () => {
     <>
       {/* Recommended: Use Field component */}
       <Field>
-        <Label htmlFor="field-example" label="Using Field (recommended)" />
+        <Field.Label htmlFor="field-example">
+          Using Field (recommended)
+        </Field.Label>
         <Input id="field-example" placeholder="Field handles spacing" />
       </Field>
 
@@ -219,13 +235,26 @@ export const WithLabel: StoryFn<InputProps> = () => {
           gap: 'var(--eds-selectable-space-vertical)',
         }}
       >
-        <Label htmlFor="manual-example" label="Manual spacing with CSS gap" />
+        <Field.Label htmlFor="manual-example">
+          Manual spacing with CSS gap
+        </Field.Label>
         <Input id="manual-example" placeholder="Custom layout" />
       </div>
     </>
   )
 }
 WithLabel.storyName = 'With Label'
+WithLabel.parameters = {
+  docs: {
+    description: {
+      story: `
+For a complete form field with label, description, helper message, and required/optional indicators, use the **TextField** component instead. It handles all the composition and accessibility for you.
+
+Input is a low-level building block for custom compositions.
+      `,
+    },
+  },
+}
 
 export const Compact: StoryFn<InputProps> = () => (
   <>

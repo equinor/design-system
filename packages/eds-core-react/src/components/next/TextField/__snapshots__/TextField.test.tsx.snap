@@ -9,12 +9,14 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       class="eds-text-field__header"
     >
       <label
-        class="eds-label"
+        class="eds-field__label"
         data-baseline="center"
         data-font-family="ui"
         data-font-size="lg"
-        data-line-height="squished"
-        for="test-id"
+        data-font-weight="normal"
+        data-line-height="default"
+        data-tracking="normal"
+        for="test-id-input"
       >
         Label
       </label>
@@ -26,7 +28,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       data-font-size="sm"
       data-line-height="default"
       data-tracking="normal"
-      id="test-id"
+      id="test-id-description"
     >
       Description text
     </p>
@@ -38,23 +40,24 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       data-space-proportions="stretched"
     >
       <input
-        aria-describedby="test-id test-id"
+        aria-describedby="test-id-description test-id-helper-message"
         class="eds-input"
         data-color-appearance="neutral"
         data-font-family="ui"
         data-font-size="lg"
-        id="test-id"
+        id="test-id-input"
         placeholder="Placeholder"
         type="text"
       />
     </div>
     <p
-      class="eds-helper-message"
+      class="eds-field__helper-message"
       data-baseline="grid"
       data-font-family="ui"
       data-font-size="sm"
       data-line-height="default"
-      id="test-id"
+      data-tracking="normal"
+      id="test-id-helper-message"
     >
       Helper message
     </p>

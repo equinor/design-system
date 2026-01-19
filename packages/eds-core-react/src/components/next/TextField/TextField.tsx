@@ -1,10 +1,8 @@
-import { forwardRef, useId } from 'react'
+import { forwardRef } from 'react'
 import { info_circle } from '@equinor/eds-icons'
 import type { TextFieldProps } from './TextField.types'
-import { Field } from '../Field'
+import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
-import { Label } from '../Label'
-import { HelperMessage } from '../HelperMessage'
 import { Tooltip } from '../../Tooltip'
 import { Icon } from '../Icon'
 import './text-field.css'
@@ -14,9 +12,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     {
       label,
       labelInfo,
-      optional = false,
-      required = false,
-      requiredSilent = false,
+      indicator,
       description,
       helperMessage,
       id: providedId,
@@ -26,31 +22,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     },
     ref,
   ) {
-    const generatedId = useId()
-    const generatedDescriptionId = useId()
-    const generatedHelperMessageId = useId()
-
-    const id = providedId ?? generatedId
-    const descriptionId = description ? generatedDescriptionId : undefined
-    const helperMessageId = helperMessage ? generatedHelperMessageId : undefined
-
-    // Both required and requiredSilent set HTML required, but only required shows text
-    const isRequired = required || requiredSilent
-
-    // Combine IDs for aria-describedby (description first, then helper message)
-    const ariaDescribedBy =
-      [descriptionId, helperMessageId].filter(Boolean).join(' ') || undefined
+    const { inputId, descriptionId, helperMessageId, getDescribedBy } =
+      useFieldIds(providedId)
 
     return (
-      <Field>
+      <Field disabled={disabled}>
         {label && (
           <div className="eds-text-field__header">
-            <Label
-              htmlFor={id}
-              label={label}
-              optional={optional}
-              required={required}
-            />
+            <Field.Label htmlFor={inputId} indicator={indicator}>
+              {label}
+            </Field.Label>
             {labelInfo && (
               <Tooltip title={labelInfo} placement="top">
                 <button
@@ -71,17 +52,19 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         )}
         <Input
           ref={ref}
-          id={id}
+          id={inputId}
           disabled={disabled}
           invalid={invalid}
-          required={isRequired}
-          aria-describedby={ariaDescribedBy}
+          aria-describedby={getDescribedBy({
+            hasDescription: !!description,
+            hasHelperMessage: !!helperMessage,
+          })}
           {...inputProps}
         />
         {helperMessage && (
-          <HelperMessage id={helperMessageId} disabled={disabled}>
+          <Field.HelperMessage id={helperMessageId}>
             {helperMessage}
-          </HelperMessage>
+          </Field.HelperMessage>
         )}
       </Field>
     )

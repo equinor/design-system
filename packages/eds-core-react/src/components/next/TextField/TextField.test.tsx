@@ -61,21 +61,28 @@ describe('TextField (Next EDS 2.0)', () => {
       expect(screen.getByText('Test Label')).toBeInTheDocument()
     })
 
-    it('Renders optional label', () => {
-      render(<TextField label="Label" optional />)
+    it('Renders indicator text', () => {
+      render(<TextField label="Label" indicator="(Optional)" />)
       expect(screen.getByText('(Optional)')).toBeInTheDocument()
     })
 
-    it('Renders required label', () => {
-      render(<TextField label="Label" required />)
+    it('Renders required indicator', () => {
+      render(<TextField label="Label" indicator="(Required)" />)
       expect(screen.getByText('(Required)')).toBeInTheDocument()
     })
 
-    it('Sets required attribute with requiredSilent but does not show indicator', () => {
-      render(<TextField label="Label" requiredSilent />)
+    it('Sets required attribute on input when required prop is true', () => {
+      render(<TextField label="Label" indicator="(Required)" required />)
       const input = screen.getByRole('textbox')
       expect(input).toHaveAttribute('required')
-      expect(screen.queryByText('(Required)')).not.toBeInTheDocument()
+    })
+
+    it('Visual indicator is separate from HTML required attribute', () => {
+      render(<TextField label="Label" indicator="(Optional)" required />)
+      // Shows "(Optional)" text but input is still required
+      expect(screen.getByText('(Optional)')).toBeInTheDocument()
+      const input = screen.getByRole('textbox')
+      expect(input).toHaveAttribute('required')
     })
 
     it('Renders description', () => {
@@ -92,7 +99,7 @@ describe('TextField (Next EDS 2.0)', () => {
       render(<TextField label="Label" id="test-id" />)
       // getByRole with name verifies label is properly connected to input
       const input = screen.getByRole('textbox', { name: 'Label' })
-      expect(input).toHaveAttribute('id', 'test-id')
+      expect(input).toHaveAttribute('id', 'test-id-input')
     })
 
     it('Generates id when not provided', () => {

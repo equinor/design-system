@@ -6,12 +6,8 @@ export type TextFieldProps = {
   label?: ReactNode
   /** Info tooltip content shown next to the label */
   labelInfo?: ReactNode
-  /** Mark field as optional - shows "(Optional)" */
-  optional?: boolean
-  /** Mark field as required - shows "(Required)" and sets required on input */
-  required?: boolean
-  /** Mark field as required without showing indicator - only sets required on input */
-  requiredSilent?: boolean
+  /** Indicator text shown after label, e.g. "(Required)" or "(Optional)" */
+  indicator?: string
   /** Descriptive text that provides additional context for the field */
   description?: ReactNode
   /** Helper or validation message shown below the input */
