@@ -388,3 +388,31 @@ Compact.parameters = {
     },
   },
 }
+
+export const ColorAppearance: StoryFn<CheckboxProps> = () => {
+  return (
+    <UnstyledList>
+      <li>
+        <Checkbox
+          label="Default (accent)"
+          helperMessage="This is the default appearance"
+        />
+      </li>
+      <li data-color-appearance="danger">
+        <Checkbox
+          label="Danger appearance"
+          helperMessage="Use data-color-appearance='danger' on parent for error styling"
+        />
+      </li>
+    </UnstyledList>
+  )
+}
+ColorAppearance.storyName = 'Color appearance'
+ColorAppearance.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `data-color-appearance="danger"` on a parent element to style the checkbox with error colors. This is useful for validation states.',
+    },
+  },
+}
