@@ -16,6 +16,6 @@ module.exports = {
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   testEnvironment: 'jest-environment-jsdom',
-  transformIgnorePatterns: ['node_modules/(?!.pnpm|ramda|style-inject)'],
+  transformIgnorePatterns: ['node_modules/(?!.pnpm|ramda)'],
   testPathIgnorePatterns: ['/dist/'],
 }
