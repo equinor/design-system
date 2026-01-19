@@ -107,7 +107,7 @@ export default [
   },
   // EDS 2.0 CSS bundle (unminified)
   {
-    input: './src/components/next/index.css',
+    input: './src/index.css',
     plugins: [
       del({ targets: 'build/*', runOnce: true }),
       postcss({
@@ -122,7 +122,7 @@ export default [
   },
   // EDS 2.0 CSS bundle (minified)
   {
-    input: './src/components/next/index.css',
+    input: './src/index.css',
     plugins: [
       postcss({
         extensions: ['.css'],
@@ -131,7 +131,6 @@ export default [
         sourceMap: false,
         plugins: [createPostcssImportPlugin()],
       }),
-      // Clean up generated JS files - only CSS output is needed
       del({ targets: 'build/*.js', hook: 'writeBundle' }),
     ],
     output: { dir: 'build', format: 'es' },

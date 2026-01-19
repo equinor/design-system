@@ -1,5 +1,5 @@
 import './preview.css'
-import '../src/components/next/index.css'
+import '../src/index.css'
 
 const preview = {
   viewMode: 'docs',
