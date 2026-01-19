@@ -1,4 +1,6 @@
-/* Global styles for @equinor/eds-core-react */
+
+@layer eds-components;
+/* EDS 2.0 Next Components - CSS */
 :root,[data-color-scheme=light]{color-scheme:light}
 [data-color-scheme=dark]{color-scheme:dark}
 :root{--eds-color-bg-floating:light-dark(#fff,#202223);--eds-color-bg-backdrop:light-dark(#aeaeae,#738696);--eds-color-bg-input:light-dark(#f5f5f5,#0b0b0b);--eds-color-border-focus:light-dark(#6fb6e9,#2d8bc5);--eds-color-text-link:light-dark(#0070a9,#5abbfb);--eds-color-accent-1:light-dark(#eaf8fa,#0a0b0b);--eds-color-accent-2:light-dark(#f6ffff,#1e2323);--eds-color-accent-3:light-dark(#cfe7e9,#3c6266);--eds-color-accent-4:light-dark(#bbdbdf,#3e7378);--eds-color-accent-5:light-dark(#a2cdd2,#41878e);--eds-color-accent-6:light-dark(#bbdbdf,#3c6266);--eds-color-accent-7:light-dark(#7cbac1,#439199);--eds-color-accent-8:light-dark(#21767e,#6ec0c9);--eds-color-accent-9:light-dark(#206f77,#8cd2da);--eds-color-accent-10:light-dark(#205c62,#ace3e9);--eds-color-accent-11:light-dark(#20565c,#c7f1f6);--eds-color-accent-12:light-dark(#1f6369,#bcebf1);--eds-color-accent-13:light-dark(#141f20,#e6ffff);--eds-color-accent-14:light-dark(#cae4e7,#2c3839);--eds-color-accent-15:light-dark(#fff,#030303);--eds-color-neutral-1:light-dark(#f5f5f5,#0b0b0b);--eds-color-neutral-2:light-dark(#fff,#202223);--eds-color-neutral-3:light-dark(#e1e1e1,#525c65);--eds-color-neutral-4:light-dark(#d4d4d4,#5d6b76);--eds-color-neutral-5:light-dark(#c4c4c4,#6b7d8b);--eds-color-neutral-6:light-dark(#d4d4d4,#525c65);--eds-color-neutral-7:light-dark(#aeaeae,#738696);--eds-color-neutral-8:light-dark(#696969,#9fb4c6);--eds-color-neutral-9:light-dark(#636363,#b4c7d7);--eds-color-neutral-10:light-dark(#525252,#cadae7);--eds-color-neutral-11:light-dark(#4d4d4d,#deeaf4);--eds-color-neutral-12:light-dark(#585858,#d6e3ee);--eds-color-neutral-13:light-dark(#1d1d1d,#f5fdff);--eds-color-neutral-14:light-dark(#dedede,#333639);--eds-color-neutral-15:light-dark(#fff,#030303);--eds-color-info-1:light-dark(#e7f8ff,#0a0b0c);--eds-color-info-2:light-dark(#f4ffff,#1d2226);--eds-color-info-3:light-dark(#cae6fa,#33607e);--eds-color-info-4:light-dark(#b5daf5,#316f98);--eds-color-info-5:light-dark(#99cbf0,#2e82b7);--eds-color-info-6:light-dark(#b5daf5,#33607e);--eds-color-info-7:light-dark(#6fb6e9,#2d8bc5);--eds-color-info-8:light-dark(#0070a9,#5abbfb);--eds-color-info-9:light-dark(#006aa0,#7dceff);--eds-color-info-10:light-dark(#085883,#a2e0ff);--eds-color-info-11:light-dark(#0e5279,#c4eeff);--eds-color-info-12:light-dark(#015e8d,#b7e8ff);--eds-color-info-13:light-dark(#121e27,#ecffff);--eds-color-info-14:light-dark(#c5e3f9,#2a3741);--eds-color-info-15:light-dark(#fff,#030304);--eds-color-success-1:light-dark(#eafbe8,#0a0c0a);--eds-color-success-2:light-dark(#f6fff5,#1e231e);--eds-color-success-3:light-dark(#cfeacc,#3c673a);--eds-color-success-4:light-dark(#bbe0b8,#3e793c);--eds-color-success-5:light-dark(#a2d49e,#418e3e);--eds-color-success-6:light-dark(#bbe0b8,#3c673a);--eds-color-success-7:light-dark(#7cc278,#439941);--eds-color-success-8:light-dark(#227e22,#6eca6a);--eds-color-success-9:light-dark(#207720,#8cdb87);--eds-color-success-10:light-dark(#20621f,#aceba8);--eds-color-success-11:light-dark(#215c1f,#c7f7c3);--eds-color-success-12:light-dark(#20691f,#bcf2b8);--eds-color-success-13:light-dark(#142114,#e6ffe3);--eds-color-success-14:light-dark(#cae8c7,#2c392b);--eds-color-success-15:light-dark(#fff,#030303);--eds-color-warning-1:light-dark(#fff1e2,#0c0b0a);--eds-color-warning-2:light-dark(#fffcf0,#27201b);--eds-color-warning-3:light-dark(#fbdac1,#7e4e25);--eds-color-warning-4:light-dark(#f6caaa,#97571b);--eds-color-warning-5:light-dark(#f0b689,#b46201);--eds-color-warning-6:light-dark(#f6caaa,#7e4e25);--eds-color-warning-7:light-dark(#e89959,#c36800);--eds-color-warning-8:light-dark(#a34e00,#f99539);--eds-color-warning-9:light-dark(#9b4900,#ffad63);--eds-color-warning-10:light-dark(#813e00,#ffc791);--eds-color-warning-11:light-dark(#773a00,#ffddb9);--eds-color-warning-12:light-dark(#8a4100,#ffd4aa);--eds-color-warning-13:light-dark(#27190e,#fff7e6);--eds-color-warning-14:light-dark(#fad6bc,#413226);--eds-color-warning-15:light-dark(#fff,#040303);--eds-color-danger-1:light-dark(#ffecea,#0d0a0a);--eds-color-danger-2:light-dark(#fff9f8,#2a1e1e);--eds-color-danger-3:light-dark(#ffd0ce,#923a3c);--eds-color-danger-4:light-dark(#ffbcba,#b03940);--eds-color-danger-5:light-dark(#ffa3a1,#d43745);--eds-color-danger-6:light-dark(#ffbcba,#923a3c);--eds-color-danger-7:light-dark(#ff7a7d,#e53748);--eds-color-danger-8:light-dark(#c6002d,#ff8082);--eds-color-danger-9:light-dark(#bc002a,#ffa3a1);--eds-color-danger-10:light-dark(#9a1026,#ffc1bf);--eds-color-danger-11:light-dark(#8e1525,#ffd9d7);--eds-color-danger-12:light-dark(#a50827,#ffd0ce);--eds-color-danger-13:light-dark(#2e1414,#fff5f4);--eds-color-danger-14:light-dark(#ffcbc9,#492d2c);--eds-color-danger-15:light-dark(#fff,#040303);--eds-color-bg-neutral-canvas:var(--eds-color-neutral-1);--eds-color-bg-neutral-surface:var(--eds-color-neutral-2);--eds-color-bg-neutral-fill-muted-default:var(--eds-color-neutral-3);--eds-color-bg-neutral-fill-muted-hover:var(--eds-color-neutral-4);--eds-color-bg-neutral-fill-muted-active:var(--eds-color-neutral-5);--eds-color-bg-neutral-fill-emphasis-default:var(--eds-color-neutral-9);--eds-color-bg-neutral-fill-emphasis-hover:var(--eds-color-neutral-10);--eds-color-bg-neutral-fill-emphasis-active:var(--eds-color-neutral-11);--eds-color-bg-accent-canvas:var(--eds-color-accent-1);--eds-color-bg-accent-surface:var(--eds-color-accent-2);--eds-color-bg-accent-fill-muted-default:var(--eds-color-accent-3);--eds-color-bg-accent-fill-muted-hover:var(--eds-color-accent-4);--eds-color-bg-accent-fill-muted-active:var(--eds-color-accent-5);--eds-color-bg-accent-fill-emphasis-default:var(--eds-color-accent-9);--eds-color-bg-accent-fill-emphasis-hover:var(--eds-color-accent-10);--eds-color-bg-accent-fill-emphasis-active:var(--eds-color-accent-11);--eds-color-bg-success-canvas:var(--eds-color-success-1);--eds-color-bg-success-surface:var(--eds-color-success-2);--eds-color-bg-success-fill-muted-default:var(--eds-color-success-3);--eds-color-bg-success-fill-muted-hover:var(--eds-color-success-4);--eds-color-bg-success-fill-muted-active:var(--eds-color-success-5);--eds-color-bg-success-fill-emphasis-default:var(--eds-color-success-9);--eds-color-bg-success-fill-emphasis-hover:var(--eds-color-success-10);--eds-color-bg-success-fill-emphasis-active:var(--eds-color-success-11);--eds-color-bg-info-canvas:var(--eds-color-info-1);--eds-color-bg-info-surface:var(--eds-color-info-2);--eds-color-bg-info-fill-muted-default:var(--eds-color-info-3);--eds-color-bg-info-fill-muted-hover:var(--eds-color-info-4);--eds-color-bg-info-fill-muted-active:var(--eds-color-info-5);--eds-color-bg-info-fill-emphasis-default:var(--eds-color-info-9);--eds-color-bg-info-fill-emphasis-hover:var(--eds-color-info-10);--eds-color-bg-info-fill-emphasis-active:var(--eds-color-info-11);--eds-color-bg-warning-canvas:var(--eds-color-warning-1);--eds-color-bg-warning-surface:var(--eds-color-warning-2);--eds-color-bg-warning-fill-muted-default:var(--eds-color-warning-3);--eds-color-bg-warning-fill-muted-hover:var(--eds-color-warning-4);--eds-color-bg-warning-fill-muted-active:var(--eds-color-warning-5);--eds-color-bg-warning-fill-emphasis-default:var(--eds-color-warning-9);--eds-color-bg-warning-fill-emphasis-hover:var(--eds-color-warning-10);--eds-color-bg-warning-fill-emphasis-active:var(--eds-color-warning-11);--eds-color-bg-danger-canvas:var(--eds-color-danger-1);--eds-color-bg-danger-surface:var(--eds-color-danger-2);--eds-color-bg-danger-fill-muted-default:var(--eds-color-danger-3);--eds-color-bg-danger-fill-muted-hover:var(--eds-color-danger-4);--eds-color-bg-danger-fill-muted-active:var(--eds-color-danger-5);--eds-color-bg-danger-fill-emphasis-default:var(--eds-color-danger-9);--eds-color-bg-danger-fill-emphasis-hover:var(--eds-color-danger-10);--eds-color-bg-danger-fill-emphasis-active:var(--eds-color-danger-11);--eds-color-border-neutral-subtle:var(--eds-color-neutral-6);--eds-color-border-neutral-medium:var(--eds-color-neutral-7);--eds-color-border-neutral-strong:var(--eds-color-neutral-8);--eds-color-border-accent-subtle:var(--eds-color-accent-6);--eds-color-border-accent-medium:var(--eds-color-accent-7);--eds-color-border-accent-strong:var(--eds-color-accent-8);--eds-color-border-success-subtle:var(--eds-color-success-6);--eds-color-border-success-medium:var(--eds-color-success-7);--eds-color-border-success-strong:var(--eds-color-success-8);--eds-color-border-info-subtle:var(--eds-color-info-6);--eds-color-border-info-medium:var(--eds-color-info-7);--eds-color-border-info-strong:var(--eds-color-info-8);--eds-color-border-warning-subtle:var(--eds-color-warning-6);--eds-color-border-warning-medium:var(--eds-color-warning-7);--eds-color-border-warning-strong:var(--eds-color-warning-8);--eds-color-border-danger-subtle:var(--eds-color-danger-6);--eds-color-border-danger-medium:var(--eds-color-danger-7);--eds-color-border-danger-strong:var(--eds-color-danger-8);--eds-color-text-neutral-subtle:var(--eds-color-neutral-12);--eds-color-text-neutral-strong:var(--eds-color-neutral-13);--eds-color-text-neutral-subtle-on-emphasis:var(--eds-color-neutral-14);--eds-color-text-neutral-strong-on-emphasis:var(--eds-color-neutral-15);--eds-color-text-accent-subtle:var(--eds-color-accent-12);--eds-color-text-accent-strong:var(--eds-color-accent-13);--eds-color-text-accent-subtle-on-emphasis:var(--eds-color-accent-14);--eds-color-text-accent-strong-on-emphasis:var(--eds-color-accent-15);--eds-color-text-success-subtle:var(--eds-color-success-12);--eds-color-text-success-strong:var(--eds-color-success-13);--eds-color-text-success-subtle-on-emphasis:var(--eds-color-success-14);--eds-color-text-success-strong-on-emphasis:var(--eds-color-success-15);--eds-color-text-info-subtle:var(--eds-color-info-12);--eds-color-text-info-strong:var(--eds-color-info-13);--eds-color-text-info-subtle-on-emphasis:var(--eds-color-info-14);--eds-color-text-info-strong-on-emphasis:var(--eds-color-info-15);--eds-color-text-warning-subtle:var(--eds-color-warning-12);--eds-color-text-warning-strong:var(--eds-color-warning-13);--eds-color-text-warning-subtle-on-emphasis:var(--eds-color-warning-14);--eds-color-text-warning-strong-on-emphasis:var(--eds-color-warning-15);--eds-color-text-danger-subtle:var(--eds-color-danger-12);--eds-color-text-danger-strong:var(--eds-color-danger-13);--eds-color-text-danger-subtle-on-emphasis:var(--eds-color-danger-14);--eds-color-text-danger-strong-on-emphasis:var(--eds-color-danger-15)}
@@ -87,243 +89,246 @@
 [data-tracking=tight]{--eds-typography-tracking:var(--eds-typography-tracking-tight)}
 [data-tracking=normal]{--eds-typography-tracking:var(--eds-typography-tracking-normal)}
 [data-tracking=wide],[data-tracking=loose]{--eds-typography-tracking:var(--eds-typography-tracking-wide)}
-/* Component styles */
-/* Checkbox wrapper/label */
-.eds-checkbox {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  cursor: pointer;
-  position: relative;
-  /* Hover size from token - use lg to match Figma 36px hover circle */
-  --checkbox-hover-size: var(--eds-sizing-selectable-lg);
-  /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
-  --checkbox-icon-color: var(--eds-color-border-strong);
-  /* Use neutral hover color for all appearances - hover is interaction feedback, not semantic */
-  --checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
-  --checkbox-label-color: var(--eds-color-text-strong);
-  --checkbox-label-disabled-color: var(--eds-color-border-neutral-medium);
-  /* Spacing activated via data-selectable-space and data-space-proportions on element */
-  padding-inline: var(--eds-selectable-space-horizontal);
-  padding-block: var(--eds-selectable-space-vertical);
-}
-/* Label wrapper contains checkbox + label text - gap activated via data-horizontal-gap on element */
-.eds-checkbox__label-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--eds-generic-gap-horizontal);
-}
-.eds-checkbox[data-disabled='true'] {
-  cursor: not-allowed;
-}
-/* Checkbox input wrapper */
-.eds-checkbox__input-wrapper {
-  display: inline-grid;
-  grid: [input] 1fr / [input] 1fr;
-  position: relative;
-  isolation: isolate;
-}
-/* Hover circle background */
-.eds-checkbox__input-wrapper::before {
-  content: '';
-  position: absolute;
-  width: var(--checkbox-hover-size);
-  aspect-ratio: 1/1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 100%;
-  background-color: transparent;
-  transition: background-color 0.2s;
-}
-@media (hover: hover) and (pointer: fine) {
-  .eds-checkbox__label-wrapper:hover .eds-checkbox__input-wrapper::before,
-  .eds-checkbox:hover .eds-checkbox__input-wrapper::before {
-    background-color: var(--checkbox-hover-color);
+@layer eds-components {
+  .eds-field {
+    /* Layout - use CSS variable for configurable width */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--eds-generic-gap-vertical);
+    width: var(--eds-field-width, 100%);
+    /* Private color variables */
+    --_eds-field-label-color: var(--eds-color-text-strong);
+    --_eds-field-description-color: var(--eds-color-text-subtle);
+    --_eds-field-indicator-color: var(--eds-color-text-subtle);
+    --_eds-field-helper-color: var(--eds-color-text-subtle);
   }
 
-  .eds-checkbox[data-disabled='true']
-    .eds-checkbox__label-wrapper:hover
-    .eds-checkbox__input-wrapper::before,
-  .eds-checkbox[data-disabled='true']:hover
-    .eds-checkbox__input-wrapper::before {
-    background-color: transparent;
+  /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
+  .eds-field:is([data-position='start'], [data-position='end']) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--eds-generic-gap-horizontal);
+  }
+
+  .eds-field[data-position='end'] {
+    flex-direction: row-reverse;
+  }
+
+  /* Description and helper message span full width below in horizontal layout */
+  .eds-field:is([data-position='start'], [data-position='end'])
+    :is(.eds-field__description, .eds-field__helper-message, [role='alert']) {
+    flex-basis: 100%;
+  }
+
+  .eds-field__label {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: var(--_eds-field-label-color);
+  }
+
+  .eds-field__indicator {
+    margin-inline-start: var(--eds-selectable-space-horizontal);
+    color: var(--_eds-field-indicator-color);
+    font-size: var(--eds-typography-font-size);
+    vertical-align: middle;
+  }
+
+  .eds-field__description {
+    margin: 0;
+    color: var(--_eds-field-description-color);
+  }
+
+  /* HelperMessage styling */
+  .eds-field__helper-message {
+    margin: 0;
+    color: var(--_eds-field-helper-color);
+  }
+
+  /* Only helper message changes color when disabled */
+  .eds-field[data-disabled='true'] {
+    --_eds-field-helper-color: var(--eds-color-border-neutral-medium);
+  }
+
+  /* Error/danger state - helper message turns red */
+  .eds-field[data-color-appearance='danger'] {
+    --_eds-field-helper-color: var(--eds-color-text-danger-strong);
   }
 }
-/* Native checkbox input */
-.eds-checkbox__input {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  grid-area: input;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  /* Scale to 48px touch target - fixed size for accessibility requirement */
-  transform: scale(calc(48px / 24px));
+/* Checkbox component - works with Field for layout */
+@layer eds-components {
+  /* Variables for checkbox styling */
+  .eds-checkbox,
+  .eds-field.eds-checkbox {
+    /* Component height from density tokens - 36px spacious, 24px comfortable */
+    --_checkbox-height: var(--eds-sizing-selectable-md);
+    /* Hover size from density tokens - 44px spacious, 36px comfortable */
+    --_checkbox-hover-size: var(--eds-sizing-selectable-lg);
+    /* Icon color follows data-color-appearance automatically via --eds-color-border-strong */
+    --_checkbox-icon-color: var(--eds-color-border-strong);
+    /* Hover color is always accent - interaction feedback, not semantic */
+    --_checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-hover);
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  /* Standalone checkbox (no label) */
+  .eds-checkbox--standalone {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-inline: 16px;
+    min-height: var(--_checkbox-height);
+    border-radius: 4px;
+  }
+
+  /* When used with Field, apply Figma spacing and layout */
+  .eds-field.eds-checkbox {
+    /* Gap between checkbox icon and label - 16px from Figma */
+    gap: 16px;
+    /* Horizontal padding from Figma */
+    padding-inline: 16px;
+    /* Auto width, not full width */
+    width: auto;
+    /* Border radius from Figma */
+    border-radius: 4px;
+    /* Min height from Figma */
+    min-height: var(--_checkbox-height);
+  }
+
+  .eds-checkbox[data-disabled='true'],
+  .eds-field.eds-checkbox[data-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  /* Checkbox input wrapper - contains the icon and hover background */
+  .eds-checkbox__input-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* Icon is 16px, this wrapper just contains it */
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Hover circle background - centered on the icon */
+  .eds-checkbox__input-wrapper::before {
+    content: '';
+    position: absolute;
+    /* 36px hover background (12px padding on each side of 12px content area) */
+    width: var(--_checkbox-hover-size);
+    height: var(--_checkbox-hover-size);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1000px;
+    background-color: transparent;
+    transition: background-color 0.2s;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .eds-checkbox:hover .eds-checkbox__input-wrapper::before,
+    .eds-field.eds-checkbox:hover .eds-checkbox__input-wrapper::before {
+      background-color: var(--_checkbox-hover-color);
+    }
+
+    .eds-checkbox[data-disabled='true']:hover
+      .eds-checkbox__input-wrapper::before,
+    .eds-field.eds-checkbox[data-disabled='true']:hover
+      .eds-checkbox__input-wrapper::before {
+      background-color: transparent;
+    }
+  }
+
+  /* Native checkbox input - invisible but clickable */
+  .eds-checkbox__input {
+    appearance: none;
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .eds-checkbox__input:disabled {
+    cursor: not-allowed;
+  }
+
+  .eds-checkbox__input:focus {
+    outline: none;
+  }
+
+  /* Focus Frame - around the entire component */
+  /* From Figma: inset -2px, border 1px solid, border-radius 6px */
+  .eds-checkbox--standalone:has(.eds-checkbox__input:focus-visible)::after,
+  .eds-field.eds-checkbox:has(.eds-checkbox__input:focus-visible)::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 1px solid var(--eds-color-border-focus, #6fb6e9);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  /* SVG icon - 16px from Figma */
+  .eds-checkbox__icon {
+    position: relative;
+    pointer-events: none;
+    width: 16px;
+    height: 16px;
+    fill: var(--_checkbox-icon-color);
+    flex-shrink: 0;
+  }
+
+  .eds-checkbox[data-disabled='true'] .eds-checkbox__icon,
+  .eds-field.eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
+    fill: var(--eds-color-border-neutral-medium);
+  }
+
+  /* Icon visibility logic - default state: show unchecked, hide others */
+  .eds-checkbox__icon--checked,
+  .eds-checkbox__icon--indeterminate {
+    display: none;
+  }
+
+  .eds-checkbox__icon--unchecked {
+    display: block;
+  }
+
+  /* Checked state: show checked icon, hide others */
+  .eds-checkbox__input:checked ~ .eds-checkbox__icon--checked {
+    display: block;
+  }
+
+  .eds-checkbox__input:checked ~ .eds-checkbox__icon--unchecked {
+    display: none;
+  }
+
+  /* Indeterminate state: show indeterminate icon, hide others */
+  .eds-checkbox__input[data-indeterminate='true']
+    ~ .eds-checkbox__icon--indeterminate {
+    display: block;
+  }
+
+  .eds-checkbox__input[data-indeterminate='true']
+    ~ .eds-checkbox__icon--checked,
+  .eds-checkbox__input[data-indeterminate='true']
+    ~ .eds-checkbox__icon--unchecked {
+    display: none;
+  }
+
+  /* Label styling - handled by Field.Label, but ensure disabled color */
+  .eds-field.eds-checkbox[data-disabled='true'] .eds-field__label {
+    color: var(--eds-color-border-neutral-medium);
+  }
 }
-.eds-checkbox__input:disabled {
-  cursor: not-allowed;
-}
-.eds-checkbox__input:focus {
-  outline: none;
-}
-/* Focus styles - applied to the wrapper for visible focus frame around entire checkbox */
-/* Using pseudo-element with border to match Figma's Focus Frame exactly */
-.eds-checkbox:has(.eds-checkbox__input:focus-visible)::after,
-.eds-checkbox:has(.eds-checkbox__input[data-focus-visible-added]:focus)::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border: 1px solid var(--eds-color-border-focus);
-  /* TODO: Replace with focus frame corner radius token when available from Figma */
-  border-radius: 6px;
-  pointer-events: none;
-}
-/* SVG icon */
-.eds-checkbox__icon {
-  grid-area: input;
-  pointer-events: none;
-  /* Icon size adapts to density */
-  width: var(--eds-sizing-icon-lg);
-  height: var(--eds-sizing-icon-lg);
-  fill: var(--checkbox-icon-color);
-  border-radius: var(--eds-shape-corner-medium);
-  position: relative;
-  z-index: 2;
-}
-.eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-  fill: var(--eds-color-border-neutral-medium);
-}
-/* Icon paths visibility */
-.eds-checkbox__icon-path--checked {
-  display: none;
-}
-.eds-checkbox__input:checked
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--checked {
-  display: inline;
-}
-.eds-checkbox__input:checked
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--unchecked {
-  display: none;
-}
-.eds-checkbox__input:not(:checked)
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--checked {
-  display: none;
-}
-.eds-checkbox__input:not(:checked)
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--unchecked {
-  display: inline;
-}
-/* Indeterminate state */
-.eds-checkbox__icon-path--indeterminate {
-  display: none;
-}
-.eds-checkbox__input[data-indeterminate='true']
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--indeterminate {
-  display: inline;
-}
-.eds-checkbox__input[data-indeterminate='true']
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--checked,
-.eds-checkbox__input[data-indeterminate='true']
-  ~ .eds-checkbox__icon
-  .eds-checkbox__icon-path--unchecked {
-  display: none;
-}
-/* Label text */
-.eds-checkbox__label {
-  color: var(--checkbox-label-color);
-  user-select: none;
-}
-.eds-checkbox[data-disabled='true'] .eds-checkbox__label {
-  color: var(--checkbox-label-disabled-color);
-}
-.eds-field {
-  /* Figma: gap between Label+Description and Control, and Control and Validation */
-  --field-gap-block: 8px;
-  --field-gap-inline: 12px;
-  /* Colors from Figma */
-  --field-label-color: var(--eds-color-text-strong);
-  --field-description-color: var(--eds-color-text-subtle);
-  --field-optional-color: var(--eds-color-text-subtle);
-  display: grid;
-  grid-template-areas:
-    'label'
-    'description'
-    'control'
-    'validation';
-  gap: var(--field-gap-block);
-}
-.eds-field[data-layout='horizontal'] {
-  grid-template-columns: auto 1fr;
-  grid-template-areas:
-    'label control'
-    'description control'
-    'validation validation';
-  column-gap: var(--field-gap-inline);
-}
-.eds-field__label {
-  grid-area: label;
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--field-label-color);
-  gap: var(--eds-selectable-space-horizontal);
-}
-.eds-field__label-content {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--eds-selectable-space-horizontal);
-}
-.eds-field__label-text {
-  color: inherit;
-}
-.eds-field__required-indicator {
-  color: var(--eds-color-text-danger-strong);
-}
-.eds-field__optional-indicator {
-  color: var(--field-optional-color);
-}
-.eds-field__control {
-  grid-area: control;
-}
-.eds-field__description {
-  grid-area: description;
-  margin: 0;
-  color: var(--field-description-color);
-}
-.eds-field__validation {
-  grid-area: validation;
-}
-.eds-field[data-disabled='true'] {
-  --field-label-color: var(--eds-color-text-subtle);
-  --field-description-color: var(--eds-color-border-neutral-medium);
-  --field-optional-color: var(--eds-color-border-neutral-medium);
-}
-.eds-validation-message {
-  --validation-message-color: var(--eds-color-text-danger-strong);
-  display: inline-flex;
-  align-items: flex-start;
-  gap: var(--eds-spacing-inline-xs, 4px);
-  color: var(--validation-message-color);
-}
-.eds-validation-message__text {
-  color: inherit;
-}
-.eds-validation-message--warning {
-  --validation-message-color: var(--eds-color-text-warning-strong);
-}
-.eds-validation-message--success {
-  --validation-message-color: var(--eds-color-text-success-strong);
-}
-.eds-validation-message--info {
-  --validation-message-color: var(--eds-color-text-info-strong);
-}
+/* Define layer order - eds-components has lowest priority for easy user overrides */
