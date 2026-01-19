@@ -6,9 +6,10 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     class="eds-field"
   >
     <div
-      class="eds-label"
+      class="eds-text-field__header"
     >
       <label
+        class="eds-label"
         data-baseline="center"
         data-font-family="ui"
         data-font-size="lg"

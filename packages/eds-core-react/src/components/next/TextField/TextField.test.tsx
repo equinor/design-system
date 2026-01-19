@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { TextField } from './TextField'
 
@@ -38,6 +39,17 @@ describe('TextField (Next EDS 2.0)', () => {
     it('Should pass a11y test when disabled', async () => {
       const { container } = render(
         <TextField label="Label" placeholder="Placeholder" disabled />,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('Should pass a11y test with labelInfo', async () => {
+      const { container } = render(
+        <TextField
+          label="Label"
+          labelInfo="Additional information"
+          placeholder="Placeholder"
+        />,
       )
       expect(await axe(container)).toHaveNoViolations()
     })
@@ -88,6 +100,43 @@ describe('TextField (Next EDS 2.0)', () => {
       // getByRole with name verifies label is properly connected to input
       const input = screen.getByRole('textbox', { name: 'Label' })
       expect(input).toHaveAttribute('id')
+    })
+  })
+
+  describe('Label info button', () => {
+    it('Renders info button when labelInfo is provided', () => {
+      render(<TextField label="Label" labelInfo="Additional info" />)
+      expect(
+        screen.getByRole('button', { name: 'More information' }),
+      ).toBeInTheDocument()
+    })
+
+    it('Does not render info button when labelInfo is not provided', () => {
+      render(<TextField label="Label" />)
+      expect(
+        screen.queryByRole('button', { name: 'More information' }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('Shows tooltip on hover', async () => {
+      const user = userEvent.setup()
+      render(<TextField label="Label" labelInfo="Hover tooltip content" />)
+      const infoButton = screen.getByRole('button', {
+        name: 'More information',
+      })
+      await user.hover(infoButton)
+      expect(await screen.findByRole('tooltip')).toBeInTheDocument()
+      expect(screen.getByText('Hover tooltip content')).toBeInTheDocument()
+    })
+
+    it('Shows tooltip on focus', async () => {
+      render(<TextField label="Label" labelInfo="Focus tooltip content" />)
+      const infoButton = screen.getByRole('button', {
+        name: 'More information',
+      })
+      infoButton.focus()
+      expect(infoButton).toHaveFocus()
+      expect(await screen.findByRole('tooltip')).toBeInTheDocument()
     })
   })
 

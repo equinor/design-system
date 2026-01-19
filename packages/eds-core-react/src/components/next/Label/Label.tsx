@@ -1,12 +1,10 @@
 import { forwardRef } from 'react'
-import { info_circle } from '@equinor/eds-icons'
 import type { LabelProps } from './Label.types'
 import { TypographyNext } from '../../Typography'
-import { Tooltip } from '../../Tooltip'
-import { Icon } from '../Icon'
+import './label.css'
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
-  { label, optional = false, required = false, info, className, ...rest },
+  { label, optional = false, required = false, className, ...rest },
   ref,
 ) {
   const classes = ['eds-label', className].filter(Boolean).join(' ')
@@ -14,7 +12,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
   // Determine which indicator to show (required takes precedence if both are set)
   const indicator = required ? '(Required)' : optional ? '(Optional)' : null
 
-  const labelElement = (
+  return (
     <TypographyNext
       ref={ref}
       as="label"
@@ -22,6 +20,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
       size="lg"
       lineHeight="squished"
       baseline="center"
+      className={classes}
       {...rest}
     >
       {label}
@@ -31,24 +30,5 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
         </span>
       )}
     </TypographyNext>
-  )
-
-  if (!info) {
-    return <div className={classes}>{labelElement}</div>
-  }
-
-  return (
-    <div className={classes}>
-      {labelElement}
-      <Tooltip title={info} placement="top">
-        <button
-          type="button"
-          className="eds-label__info"
-          aria-label="More information"
-        >
-          <Icon data={info_circle} size="xs" />
-        </button>
-      </Tooltip>
-    </div>
   )
 })
