@@ -1,8 +1,14 @@
-/* Checkbox component - works with Field for layout */
+/* Checkbox component - works with Field for layout
+ *
+ * Note on spacing tokens:
+ * This component uses future Figma token names (e.g. --eds-generic-horizontal-gap,
+ * --eds-selectable-spacing-inline) with fallbacks to existing tokens. Once these
+ * tokens are added to eds-tokens, they will automatically take effect without
+ * any code changes needed here.
+ */
 @layer eds-components {
   /* Variables for checkbox styling */
-  .eds-checkbox,
-  .eds-field.eds-checkbox {
+  .eds-checkbox {
     /* Component height from density tokens - 36px spacious, 24px comfortable */
     --_checkbox-height: var(--eds-sizing-selectable-md);
     /* Hover size from density tokens - 44px spacious, 36px comfortable */
@@ -21,27 +27,41 @@
     display: inline-flex;
     align-items: center;
     position: relative;
-    padding-inline: 16px;
+    /* Horizontal padding - uses future token with fallback */
+    padding-inline: var(
+      --eds-selectable-spacing-inline,
+      var(--eds-spacing-horizontal-md)
+    );
     min-height: var(--_checkbox-height);
-    border-radius: 4px;
+    border-radius: var(--eds-spacing-border-radius-rounded);
   }
 
   /* When used with Field, apply Figma spacing and layout */
   .eds-field.eds-checkbox {
-    /* Gap between checkbox icon and label - 16px from Figma */
-    gap: 16px;
-    /* Horizontal padding from Figma */
-    padding-inline: 16px;
+    /* Gap between checkbox icon and label - uses future token with fallback */
+    gap: var(--eds-generic-horizontal-gap, var(--eds-spacing-horizontal-md));
+    /* Horizontal padding - uses future token with fallback */
+    padding-inline: var(
+      --eds-selectable-spacing-inline,
+      var(--eds-spacing-horizontal-md)
+    );
+    /* Vertical padding - uses future token with fallback */
+    padding-block: var(
+      --eds-selectable-spacing-stack,
+      var(--eds-spacing-vertical-sm)
+    );
     /* Auto width, not full width */
     width: auto;
-    /* Border radius from Figma */
-    border-radius: 4px;
-    /* Min height from Figma */
+    /* Border radius - uses future token with fallback */
+    border-radius: var(
+      --eds-generic-corner-radius,
+      var(--eds-spacing-border-radius-rounded)
+    );
+    /* Min height */
     min-height: var(--_checkbox-height);
   }
 
-  .eds-checkbox[data-disabled='true'],
-  .eds-field.eds-checkbox[data-disabled='true'] {
+  .eds-checkbox[data-disabled='true'] {
     cursor: not-allowed;
   }
 
@@ -61,26 +81,23 @@
   .eds-checkbox__input-wrapper::before {
     content: '';
     position: absolute;
-    /* 36px hover background (12px padding on each side of 12px content area) */
+    /* Hover background size from density tokens */
     width: var(--_checkbox-hover-size);
     height: var(--_checkbox-hover-size);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 1000px;
+    border-radius: var(--eds-spacing-border-radius-pill);
     background-color: transparent;
     transition: background-color 0.2s;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .eds-checkbox:hover .eds-checkbox__input-wrapper::before,
-    .eds-field.eds-checkbox:hover .eds-checkbox__input-wrapper::before {
+    .eds-checkbox:hover .eds-checkbox__input-wrapper::before {
       background-color: var(--_checkbox-hover-color);
     }
 
     .eds-checkbox[data-disabled='true']:hover
-      .eds-checkbox__input-wrapper::before,
-    .eds-field.eds-checkbox[data-disabled='true']:hover
       .eds-checkbox__input-wrapper::before {
       background-color: transparent;
     }
@@ -109,14 +126,12 @@
   }
 
   /* Focus Frame - around the entire component */
-  /* From Figma: inset -2px, border 1px solid, border-radius 6px */
-  .eds-checkbox--standalone:has(.eds-checkbox__input:focus-visible)::after,
-  .eds-field.eds-checkbox:has(.eds-checkbox__input:focus-visible)::after {
+  .eds-checkbox:has(.eds-checkbox__input:focus-visible)::after {
     content: '';
     position: absolute;
     inset: -2px;
-    border: 1px solid var(--eds-color-border-focus, #6fb6e9);
-    border-radius: 6px;
+    border: 1px solid var(--eds-color-border-focus);
+    border-radius: calc(var(--eds-spacing-border-radius-rounded) + 2px);
     pointer-events: none;
   }
 
@@ -130,8 +145,7 @@
     flex-shrink: 0;
   }
 
-  .eds-checkbox[data-disabled='true'] .eds-checkbox__icon,
-  .eds-field.eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
+  .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
     fill: var(--eds-color-border-neutral-medium);
   }
 
@@ -172,12 +186,9 @@
     color: var(--eds-color-border-neutral-medium);
   }
 
-  /* Helper message should be neutral by default, only danger overrides */
-  .eds-field.eds-checkbox {
+  /* Helper message: neutral by default (not accent like checkbox icon).
+     When data-color-appearance is explicitly set, it follows that color. */
+  .eds-field.eds-checkbox[data-color-appearance='accent'] {
     --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
-  }
-
-  .eds-field.eds-checkbox[data-color-appearance='danger'] {
-    --_eds-field-helper-color: var(--eds-color-text-danger-subtle);
   }
 }

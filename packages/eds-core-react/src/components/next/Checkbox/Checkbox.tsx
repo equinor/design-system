@@ -48,7 +48,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         <input
           type="checkbox"
           id={inputId}
-          aria-checked={indeterminate ? 'mixed' : rest.checked}
+          aria-checked={indeterminate ? 'mixed' : undefined}
           aria-disabled={disabled || undefined}
           aria-describedby={helperMessage ? helperMessageId : undefined}
           className="eds-checkbox__input"

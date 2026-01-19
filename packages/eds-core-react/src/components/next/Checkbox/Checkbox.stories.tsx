@@ -260,7 +260,7 @@ export const WithIndicator: StoryFn<CheckboxProps> = () => {
   return (
     <UnstyledList>
       <li>
-        <Checkbox label="I accept the terms" indicator="(Required)" />
+        <Checkbox label="I accept the terms" indicator="(Required)" required />
       </li>
       <li>
         <Checkbox label="Subscribe to newsletter" indicator="(Optional)" />
@@ -273,7 +273,7 @@ WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Use the `indicator` prop to show required or optional status after the label text.',
+        'Use the `indicator` prop to show required or optional status after the label text. Remember to also set `required` for proper accessibility.',
     },
   },
 }
@@ -312,7 +312,7 @@ export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
 AlternativeToLabel.storyName = 'Alternative to label'
 
 export const TableCheckbox: StoryFn<CheckboxProps> = () => (
-  <Table>
+  <Table data-density="comfortable">
     <Table.Head>
       <Table.Row>
         <Table.Cell>Selected</Table.Cell>
@@ -330,6 +330,14 @@ export const TableCheckbox: StoryFn<CheckboxProps> = () => (
   </Table>
 )
 TableCheckbox.storyName = 'Table checkbox'
+TableCheckbox.parameters = {
+  docs: {
+    description: {
+      story:
+        'Checkbox without label for use in tables. Use `data-density="comfortable"` on the Table for compact checkboxes.',
+    },
+  },
+}
 
 export const DarkMode: StoryFn<CheckboxProps> = () => {
   return (
