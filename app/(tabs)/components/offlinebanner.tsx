@@ -11,11 +11,8 @@ export default function OfflineBannerScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={{ padding: 16 }}>
-                <Typography variant="h5">Offline Banner</Typography>
-                <Spacer amount="small" />
-
                 <Typography variant="p">
                     The offline banner appears when the device loses
                     connectivity. It lets users know their changes might not

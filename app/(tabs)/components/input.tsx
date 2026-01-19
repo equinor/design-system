@@ -15,9 +15,8 @@ export default function InputScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Input</Typography>
                 <Typography variant="p">
                     Input fields let users enter and edit text — in forms,
                     search bars, or anywhere you need to capture user input.
@@ -144,9 +143,6 @@ export default function InputScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 16,

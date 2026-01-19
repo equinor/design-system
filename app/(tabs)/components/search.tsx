@@ -10,7 +10,10 @@ export default function SearchScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            contentInsetAdjustmentBehavior="automatic"
+        >
             <Typography variant="h5">Search</Typography>
             <Spacer amount="small" />
             <Typography variant="p">

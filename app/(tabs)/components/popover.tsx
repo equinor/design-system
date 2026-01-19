@@ -12,9 +12,8 @@ export default function PopoverScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Popover</Typography>
                 <Typography variant="p">
                     Popovers display content in a floating container anchored to
                     a trigger element — helpful for additional context or quick
@@ -98,9 +97,6 @@ export default function PopoverScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 16,

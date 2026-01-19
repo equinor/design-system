@@ -7,9 +7,8 @@ export default function LabelScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Labels</Typography>
                 <Typography variant="p">
                     Labels identify form fields and other inputs. They can
                     include optional meta text to indicate whether a field is
@@ -68,9 +67,6 @@ export default function LabelScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 16,

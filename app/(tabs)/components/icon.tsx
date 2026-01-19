@@ -7,9 +7,8 @@ export default function IconScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Icons</Typography>
                 <Typography variant="p">
                     Icons provide visual cues that help users understand actions
                     and content. They use Material Design Community icons and
@@ -145,9 +144,6 @@ export default function IconScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 16,

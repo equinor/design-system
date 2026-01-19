@@ -56,7 +56,10 @@ export default function SelectScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            contentInsetAdjustmentBehavior="automatic"
+        >
             <View style={styles.section}>
                 <Typography variant="h5">Select</Typography>
                 <Spacer amount="small" />
@@ -150,7 +153,6 @@ export default function SelectScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 16,
     },
     section: {

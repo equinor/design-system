@@ -14,9 +14,8 @@ export default function ButtonsScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Button</Typography>
                 <Typography variant="p">
                     Buttons let users take action with a single tap — submitting
                     forms, triggering events, or navigating through your app.
@@ -143,9 +142,6 @@ export default function ButtonsScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 10,
         gap: 16,

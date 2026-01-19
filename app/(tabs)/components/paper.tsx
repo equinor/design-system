@@ -27,9 +27,8 @@ export default function PaperScreen() {
         </Paper>
     );
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Paper</Typography>
                 <Typography variant="p">
                     Paper provides a surface for content with configurable
                     elevation. It&apos;s great for grouping related information
@@ -95,9 +94,6 @@ export default function PaperScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 16,

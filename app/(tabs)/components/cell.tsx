@@ -1,25 +1,19 @@
 import { navigationCell, swipeableCell } from "@/codeSnippets/cell";
 import { Section } from "@/components/Section";
 import { useCodeSnippet } from "@/hooks/useCodeSnippet";
-import {
-    Cell,
-    EDSStyleSheet,
-    Typography,
-    useStyles,
-} from "@equinor/eds-mobile-components";
+import { Cell, Typography } from "@equinor/eds-mobile-components";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 
 export default function CellScreen() {
     const router = useRouter();
-    const styles = useStyles(tokenStyles);
     const [switchValue, setSwitchValue] = useState(false);
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
-            <Section title="Cell">
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+            <Section>
                 <Typography variant="p">
                     Cells are versatile list items for displaying content,
                     navigation, or actions. Group them together for settings
@@ -159,13 +153,3 @@ export default function CellScreen() {
         </ScrollView>
     );
 }
-
-const tokenStyles = EDSStyleSheet.create((token) => ({
-    container: {
-        flex: 1,
-    },
-    section: {
-        padding: token.newSpacing.spacing.inset.lg.horizontal,
-        gap: 16,
-    },
-}));

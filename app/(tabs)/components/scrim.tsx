@@ -1,11 +1,7 @@
 import { basicScrim } from "@/codeSnippets/scrim";
+import { Section } from "@/components/Section";
 import { useCodeSnippet } from "@/hooks/useCodeSnippet";
-import {
-    Button,
-    Scrim,
-    Spacer,
-    Typography,
-} from "@equinor/eds-mobile-components";
+import { Button, Scrim, Typography } from "@equinor/eds-mobile-components";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
@@ -15,25 +11,22 @@ export default function ScrimScreen() {
 
     return (
         <>
-            <ScrollView style={styles.container}>
-                <View style={styles.section}>
-                    <Typography variant="h5">Scrim</Typography>
+            <ScrollView contentInsetAdjustmentBehavior="automatic">
+                <Section>
                     <Typography variant="p">
                         A scrim is a semi-transparent overlay that dims the
                         background. It focuses attention on foreground content
                         like dialogs or menus, and can be tapped to dismiss.
                     </Typography>
-                </View>
+                </Section>
 
-                <View style={styles.section}>
-                    <Typography variant="h6">Scrim Overlay</Typography>
-                    <Spacer amount="small" />
+                <Section title="Scrim overlay">
                     <Button
                         title="Show Scrim"
                         onPress={() => setScrimOpen(true)}
                     />
                     <ViewCode title="Basic Scrim" code={basicScrim} />
-                </View>
+                </Section>
 
                 <CodeSnippetDialog />
             </ScrollView>
@@ -61,21 +54,6 @@ export default function ScrimScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-    section: {
-        marginBottom: 32,
-    },
-    description: {
-        marginBottom: 16,
-        opacity: 0.7,
-    },
-    listItem: {
-        marginBottom: 8,
-        opacity: 0.8,
-    },
     scrimContent: {
         backgroundColor: "white",
         padding: 24,

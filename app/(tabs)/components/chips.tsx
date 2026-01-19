@@ -18,9 +18,8 @@ export default function ChipsScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Chip</Typography>
                 <Typography variant="p">
                     Chips are compact elements for filtering, selecting, or
                     displaying small pieces of information like tags or
@@ -159,9 +158,6 @@ export default function ChipsScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 20,
         gap: 16,

@@ -1,13 +1,18 @@
-import { Cell, Typography } from "@equinor/eds-mobile-components";
+import {
+    Cell,
+    EDSStyleSheet,
+    Typography,
+    useStyles,
+} from "@equinor/eds-mobile-components";
 import { useRouter } from "expo-router";
-import { SectionList, StyleSheet, View } from "react-native";
+import { SectionList, View } from "react-native";
 
 type ComponentItem = { name: string; route: string };
 
 const sections = [
     {
         title: "Actions",
-        data: [{ name: "Button", route: "buttons" }],
+        data: [{ name: "Button", route: "button" }],
     },
     {
         title: "Data Display",
@@ -65,6 +70,7 @@ const sections = [
 
 export default function ComponentsIndex() {
     const router = useRouter();
+    const styles = useStyles(tokenStyles);
 
     const navigateTo = (route: string) => {
         router.push(`/(tabs)/components/${route}` as any);
@@ -74,6 +80,7 @@ export default function ComponentsIndex() {
         <Cell.Navigation
             title={item.name}
             onPress={() => navigateTo(item.route)}
+            style={{ borderTopWidth: 0, borderBottomWidth: 0 }}
         />
     );
 
@@ -82,50 +89,44 @@ export default function ComponentsIndex() {
     }: {
         section: { title: string };
     }) => (
-        <Typography variant="h6" style={styles.sectionHeader}>
+        <Typography variant="h6" style={styles.sectionTitle}>
             {section.title}
         </Typography>
     );
 
-    const renderHeader = () => (
-        <View style={styles.header}>
-            <Typography variant="h5">Components</Typography>
-            <Typography variant="p" style={styles.subtitle}>
-                Tap a component to explore its variants and usage.
-            </Typography>
-        </View>
-    );
-
     return (
         <SectionList
-            style={styles.container}
+            contentContainerStyle={styles.contentContainer}
             sections={sections}
             keyExtractor={(item) => item.route}
             renderItem={renderItem}
             renderSectionHeader={renderSectionHeader}
-            ListHeaderComponent={renderHeader}
             stickySectionHeadersEnabled={true}
+            ItemSeparatorComponent={() => <View style={styles.cellDivider} />}
+            SectionSeparatorComponent={() => (
+                <View style={styles.sectionSeparator} />
+            )}
+            contentInsetAdjustmentBehavior="automatic"
         />
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
+const tokenStyles = EDSStyleSheet.create((token) => ({
+    contentContainer: {
+        backgroundColor: token.newColors.Bg.Neutral.Surface,
     },
-    header: {
-        padding: 16,
-        gap: 8,
+    cellDivider: {
+        height: token.newSpacing.sizing.stroke.thin,
+        backgroundColor: token.newColors.Border.Neutral.Medium,
+        marginHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
     },
-    subtitle: {
-        color: "#555",
+    sectionSeparator: {
+        height: token.newSpacing.sizing.stroke.thin,
+        backgroundColor: token.newColors.Border.Neutral.Medium,
     },
-    sectionHeader: {
-        fontSize: 14,
-        backgroundColor: "#eeececff",
-        color: "#6F6F6F",
-        paddingHorizontal: 16,
-        paddingVertical: 12,
+    sectionTitle: {
+        paddingVertical: token.newSpacing.spacing.inset.md["vertical-squished"],
+        paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
+        backgroundColor: token.newColors.Bg.Neutral.Canvas,
     },
-});
+}));

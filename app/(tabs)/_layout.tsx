@@ -1,12 +1,16 @@
-import { Icon, IconProps } from "@equinor/eds-mobile-components";
+import { Icon, IconProps, useToken } from "@equinor/eds-mobile-components";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
+    const { newColors } = useToken();
+
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: "#007079",
-                tabBarInactiveTintColor: "#6F6F6F",
+                tabBarActiveTintColor:
+                    newColors.Bg.Accent["Fill Emphasis"].Active,
+                tabBarInactiveTintColor:
+                    newColors.Bg.Accent["Fill Muted"].Default,
                 headerShown: false,
             }}
         >

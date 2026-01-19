@@ -1,33 +1,25 @@
-import { Button } from "@equinor/eds-mobile-components";
-import { Stack, useRouter } from "expo-router";
-
-function BackButton() {
-    const router = useRouter();
-    return (
-        <Button.Icon
-            name="chevron-left"
-            variant="ghost"
-            onPress={() => router.back()}
-        />
-    );
-}
+import { ColorSchemeButton } from "@/components/ColorSchemeButton";
+import { Stack } from "expo-router";
 
 export default function ComponentsLayout() {
     return (
         <Stack
             screenOptions={{
-                headerTintColor: "#007079",
-                headerBackVisible: false,
-                headerLeft: () => <BackButton />,
-                animation: "slide_from_right",
-                headerShadowVisible: false,
+                headerTransparent: true,
+                headerBlurEffect: "none",
+                headerLargeTitle: true,
+                headerLargeTitleShadowVisible: true,
+                headerLargeTitleStyle: { fontFamily: "Equinor-Bold" },
+                headerTitleStyle: {
+                    fontFamily: "Equinor-Bold",
+                },
+                headerRight: () => <ColorSchemeButton />,
             }}
         >
             <Stack.Screen
                 name="index"
                 options={{
                     title: "Components",
-                    headerLeft: () => null,
                 }}
             />
             <Stack.Screen name="accordion" options={{ title: "Accordion" }} />
@@ -35,7 +27,7 @@ export default function ComponentsLayout() {
                 name="autocomplete"
                 options={{ title: "Autocomplete" }}
             />
-            <Stack.Screen name="buttons" options={{ title: "Buttons" }} />
+            <Stack.Screen name="button" options={{ title: "Button" }} />
             <Stack.Screen name="cell" options={{ title: "Cell" }} />
             <Stack.Screen name="cell-detail" options={{ title: "Detail" }} />
             <Stack.Screen name="chips" options={{ title: "Chips" }} />

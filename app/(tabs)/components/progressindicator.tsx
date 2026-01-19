@@ -3,6 +3,7 @@ import {
     dotProgress,
     linearProgress,
 } from "@/codeSnippets/progressindicator";
+import { Section } from "@/components/Section";
 import { useCodeSnippet } from "@/hooks/useCodeSnippet";
 import {
     CircularProgress,
@@ -17,44 +18,37 @@ export default function ProgressIndicatorScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <View style={{ padding: 16 }}>
-                <Typography variant="h5">Progress</Typography>
-                <Spacer amount="small" />
-
-                <Typography variant="p">
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+            <Section>
+                <Typography>
                     Progress indicators show that something is loading or
                     processing. Use circular or linear variants depending on the
                     context and available space.
                 </Typography>
-                <Spacer amount="large" />
-
-                <Typography variant="h6">Circular Progress</Typography>
-                <Spacer amount="small" />
+            </Section>
+            <Section title="Circular Progress">
                 <Typography variant="p">Indeterminate (no value)</Typography>
-                <Spacer amount="small" />
                 <View style={{ flexDirection: "row", gap: 16 }}>
                     <CircularProgress size={48} color="primary" />
                     <CircularProgress size={48} color="neutral" />
                 </View>
-                <Spacer amount="large" />
+                <Spacer amount="medium" />
                 <Typography variant="p">Determinate (with value)</Typography>
-                <Spacer amount="small" />
+
                 <View style={{ flexDirection: "row", gap: 16 }}>
                     <CircularProgress size={48} color="primary" value={0.25} />
                     <CircularProgress size={48} color="primary" value={0.5} />
                     <CircularProgress size={48} color="primary" value={0.75} />
                 </View>
                 <ViewCode title="Circular Progress" code={circularProgress} />
-                <Spacer amount="large" />
+            </Section>
 
-                <Typography variant="h5">Dot Progress</Typography>
-                <Spacer amount="small" />
+            <Section title="Dot Progress">
                 <DotProgress size={48} color="primary" />
                 <ViewCode title="Dot Progress" code={dotProgress} />
-                <Spacer amount="large" />
-                <Typography variant="h5">Linear Progress</Typography>
-                <Spacer amount="small" />
+            </Section>
+
+            <Section title="Linear Progress">
                 <Typography variant="p">Indeterminate</Typography>
                 <Spacer amount="small" />
                 <LinearProgress />
@@ -67,7 +61,7 @@ export default function ProgressIndicatorScreen() {
                 <Spacer amount="small" />
                 <LinearProgress value={0.9} />
                 <ViewCode title="Linear Progress" code={linearProgress} />
-            </View>
+            </Section>
 
             <CodeSnippetDialog />
         </ScrollView>

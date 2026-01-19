@@ -11,9 +11,8 @@ export default function DialogsScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Dialog</Typography>
                 <Typography variant="p">
                     Dialogs pop up when you really need someone&apos;s attention
                     — a confirmation, a warning, or an important message.
@@ -131,9 +130,6 @@ export default function DialogsScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 20,
         gap: 16,

@@ -11,9 +11,8 @@ export default function EnvironmentScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Environment Banners</Typography>
                 <Typography variant="p">
                     Environment banners indicate which environment the app is
                     running in. They help prevent accidental changes in
@@ -57,9 +56,6 @@ export default function EnvironmentScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 12,

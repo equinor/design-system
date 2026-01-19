@@ -30,9 +30,8 @@ export default function AutocompleteScreen() {
     const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="h5">Autocomplete</Typography>
                 <Typography variant="p">
                     Autocomplete helps users find and select from a list of
                     options as they type. Ideal for long lists like countries,
@@ -95,9 +94,6 @@ export default function AutocompleteScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     section: {
         padding: 16,
         gap: 16,

@@ -12,7 +12,9 @@ export default function NotFoundScreen() {
                     This screen does not exist.
                 </Typography>
                 <Link href="/" style={styles.link}>
-                    <Typography variant="link">Go to home screen!</Typography>
+                    <Typography group="interactive" variant="link">
+                        Go to home screen!
+                    </Typography>
                 </Link>
             </View>
         </>
