@@ -21,10 +21,11 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     </div>
     <p
       class="eds-field__description"
-      data-baseline="grid"
+      data-baseline="center"
       data-font-family="ui"
       data-font-size="sm"
       data-line-height="default"
+      data-tracking="normal"
       id="test-id"
     >
       Description text
