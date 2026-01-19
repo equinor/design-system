@@ -36,7 +36,7 @@
     width: auto;
     /* Border radius from Figma */
     border-radius: 4px;
-    /* Height from Figma */
+    /* Min height from Figma */
     min-height: var(--_checkbox-height);
   }
 
@@ -108,9 +108,9 @@
     outline: none;
   }
 
-  /* Focus Frame - around the ENTIRE component, not just the icon */
+  /* Focus Frame - around the entire component */
   /* From Figma: inset -2px, border 1px solid, border-radius 6px */
-  .eds-checkbox:has(.eds-checkbox__input:focus-visible)::after,
+  .eds-checkbox--standalone:has(.eds-checkbox__input:focus-visible)::after,
   .eds-field.eds-checkbox:has(.eds-checkbox__input:focus-visible)::after {
     content: '';
     position: absolute;

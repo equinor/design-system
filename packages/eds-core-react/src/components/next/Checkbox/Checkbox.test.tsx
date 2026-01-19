@@ -142,4 +142,34 @@ describe('Checkbox.new', () => {
 
     expect(screen.getByText('(Required)')).toBeInTheDocument()
   })
+
+  it('should support helperMessage prop', () => {
+    render(
+      <Checkbox label="Test Label" helperMessage="This is a helper message" />,
+    )
+
+    expect(screen.getByText('This is a helper message')).toBeInTheDocument()
+  })
+
+  it('should connect helperMessage to input via aria-describedby', () => {
+    render(<Checkbox label="Test Label" helperMessage="Helper text for a11y" />)
+
+    const checkbox = screen.getByRole('checkbox')
+    const helperMessage = screen.getByText('Helper text for a11y')
+
+    expect(checkbox).toHaveAttribute('aria-describedby', helperMessage.id)
+  })
+
+  it('should set role="alert" on helperMessage when error is true', () => {
+    render(
+      <Checkbox
+        label="Test Label"
+        error
+        helperMessage="You must accept the terms"
+      />,
+    )
+
+    const helperMessage = screen.getByText('You must accept the terms')
+    expect(helperMessage).toHaveAttribute('role', 'alert')
+  })
 })

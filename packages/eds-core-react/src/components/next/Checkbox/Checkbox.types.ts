@@ -13,4 +13,6 @@ export type CheckboxProps = {
   error?: boolean
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
+  /** Helper message shown below the checkbox, useful for validation feedback */
+  helperMessage?: ReactNode
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>

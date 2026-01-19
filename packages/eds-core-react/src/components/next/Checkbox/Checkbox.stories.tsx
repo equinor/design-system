@@ -278,6 +278,34 @@ WithIndicator.parameters = {
   },
 }
 
+export const WithHelperMessage: StoryFn<CheckboxProps> = () => {
+  return (
+    <UnstyledList>
+      <li>
+        <Checkbox
+          label="Subscribe to newsletter"
+          helperMessage="We'll send you updates about new features"
+        />
+      </li>
+      <li>
+        <Checkbox
+          label="Share usage data"
+          helperMessage="Help us improve by sharing anonymous usage statistics"
+        />
+      </li>
+    </UnstyledList>
+  )
+}
+WithHelperMessage.storyName = 'With helper message'
+WithHelperMessage.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use the `helperMessage` prop to provide additional context or instructions for the checkbox.',
+    },
+  },
+}
+
 export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
   <Checkbox aria-label="This label is invisible, but read by screen-readers" />
 )
@@ -376,18 +404,10 @@ export const ErrorState: StoryFn<CheckboxProps> = () => {
           setChecked(e.target.checked)
         }
         error={!checked}
+        helperMessage={
+          !checked ? 'You must accept the terms and conditions' : undefined
+        }
       />
-      {!checked && (
-        <Typography
-          variant="caption"
-          style={{
-            marginTop: '0.5rem',
-            color: 'var(--eds-color-text-danger-strong)',
-          }}
-        >
-          You must accept the terms and conditions
-        </Typography>
-      )}
     </div>
   )
 }
@@ -396,7 +416,7 @@ ErrorState.parameters = {
   docs: {
     description: {
       story:
-        'Error state is shown by setting the `error` prop to true, which applies red styling to the checkbox.',
+        'Use the `error` prop combined with `helperMessage` to display validation feedback. The helper message automatically gets `role="alert"` when in error state.',
     },
   },
 }

@@ -21,6 +21,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       error = false,
       indicator,
+      helperMessage,
       className,
       id: providedId,
       ...rest
@@ -31,6 +32,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
     const generatedId = useId()
     const inputId = providedId ?? generatedId
+    const helperMessageId = `${inputId}-helper`
 
     useEffect(() => {
       if (inputRef.current) {
@@ -46,6 +48,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           aria-checked={indeterminate ? 'mixed' : rest.checked}
           aria-disabled={disabled || undefined}
           aria-invalid={error || undefined}
+          aria-describedby={helperMessage ? helperMessageId : undefined}
           className="eds-checkbox__input"
           disabled={disabled}
           ref={inputRef}
@@ -80,6 +83,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <Field.Label htmlFor={inputId} indicator={indicator}>
             {label}
           </Field.Label>
+          {helperMessage && (
+            <Field.HelperMessage
+              id={helperMessageId}
+              role={error ? 'alert' : undefined}
+            >
+              {helperMessage}
+            </Field.HelperMessage>
+          )}
         </Field>
       )
     }
