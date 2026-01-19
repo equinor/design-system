@@ -9,10 +9,8 @@ export type CheckboxProps = {
    * the native element's indeterminate property via ref if needed.
    */
   indeterminate?: boolean
-  /** If true, the checkbox will be in error state with red styling */
-  error?: boolean
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
-  /** Helper message shown below the checkbox, useful for validation feedback */
+  /** Helper message shown below the checkbox, useful for additional context */
   helperMessage?: ReactNode
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>

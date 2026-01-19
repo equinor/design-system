@@ -159,17 +159,4 @@ describe('Checkbox.new', () => {
 
     expect(checkbox).toHaveAttribute('aria-describedby', helperMessage.id)
   })
-
-  it('should set role="alert" on helperMessage when error is true', () => {
-    render(
-      <Checkbox
-        label="Test Label"
-        error
-        helperMessage="You must accept the terms"
-      />,
-    )
-
-    const helperMessage = screen.getByText('You must accept the terms')
-    expect(helperMessage).toHaveAttribute('role', 'alert')
-  })
 })

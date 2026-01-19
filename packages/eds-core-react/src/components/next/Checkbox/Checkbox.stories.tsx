@@ -388,35 +388,3 @@ Compact.parameters = {
     },
   },
 }
-
-export const ErrorState: StoryFn<CheckboxProps> = () => {
-  const [checked, setChecked] = useState(false)
-
-  return (
-    <div>
-      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-        Check the box to see how the error state disappears when validated.
-      </Typography>
-      <Checkbox
-        label="I agree to the terms and conditions"
-        checked={checked}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setChecked(e.target.checked)
-        }
-        error={!checked}
-        helperMessage={
-          !checked ? 'You must accept the terms and conditions' : undefined
-        }
-      />
-    </div>
-  )
-}
-ErrorState.storyName = 'Error state'
-ErrorState.parameters = {
-  docs: {
-    description: {
-      story:
-        'Use the `error` prop combined with `helperMessage` to display validation feedback. The helper message automatically gets `role="alert"` when in error state.',
-    },
-  },
-}

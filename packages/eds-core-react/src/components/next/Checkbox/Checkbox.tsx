@@ -19,7 +19,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       label,
       disabled = false,
       indeterminate = false,
-      error = false,
       indicator,
       helperMessage,
       className,
@@ -47,7 +46,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={inputId}
           aria-checked={indeterminate ? 'mixed' : rest.checked}
           aria-disabled={disabled || undefined}
-          aria-invalid={error || undefined}
           aria-describedby={helperMessage ? helperMessageId : undefined}
           className="eds-checkbox__input"
           disabled={disabled}
@@ -77,17 +75,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           position="start"
           disabled={disabled}
           className={classNames('eds-checkbox', className)}
-          data-color-appearance={error ? 'danger' : 'accent'}
         >
           {checkboxInput}
           <Field.Label htmlFor={inputId} indicator={indicator}>
             {label}
           </Field.Label>
           {helperMessage && (
-            <Field.HelperMessage
-              id={helperMessageId}
-              role={error ? 'alert' : undefined}
-            >
+            <Field.HelperMessage id={helperMessageId}>
               {helperMessage}
             </Field.HelperMessage>
           )}
@@ -104,7 +98,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           className,
         )}
         data-disabled={disabled || undefined}
-        data-color-appearance={error ? 'danger' : 'accent'}
       >
         {checkboxInput}
       </span>
