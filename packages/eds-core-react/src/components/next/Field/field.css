@@ -60,9 +60,4 @@
   .eds-field[data-disabled='true'] {
     --_eds-field-helper-color: var(--eds-color-border-neutral-medium);
   }
-
-  /* Error/danger state - helper message turns red */
-  .eds-field[data-color-appearance='danger'] {
-    --_eds-field-helper-color: var(--eds-color-text-danger-strong);
-  }
 }
