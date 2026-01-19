@@ -9,6 +9,11 @@ import {
     comfortableSpacingToken,
     spaciousSpacingToken,
 } from "../../styling/tokens";
+import {
+    ColorToken,
+    darkColorToken,
+    lightColorToken,
+} from "../../styling/tokens/colorToken";
 import { ColorScheme, Density } from "../../styling/types";
 import { ScrimProvider } from "../_internal/ScrimProvider";
 import { DialogServiceProvider } from "../Dialog/service/DialogServiceProvider";
@@ -37,6 +42,13 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
         return spaciousSpacingToken;
     }, [props.density]);
 
+    const colorToken: ColorToken = useMemo(() => {
+        if (props.colorScheme === "light") {
+            return lightColorToken;
+        }
+        return darkColorToken;
+    }, [props.colorScheme]);
+
     const masterToken = useMemo(() => {
         const proxy = createTokenProxy(props.colorScheme, props.density);
         const cleanProxyable = JSON.parse(
@@ -45,8 +57,9 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
         return {
             ...cleanProxyable,
             newSpacing: spacingToken,
+            newColors: colorToken,
         } satisfies MasterToken;
-    }, [props.colorScheme, props.density, spacingToken]);
+    }, [props.colorScheme, props.density, spacingToken, colorToken]);
 
     return (
         <EDSContext.Provider

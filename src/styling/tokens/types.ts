@@ -7,6 +7,7 @@ import {
     TypographyStyle,
     TypographyVariant,
 } from "../types";
+import { ColorToken } from "./colorToken";
 import { SpacingToken } from "./spacingToken";
 
 export type ColorSchemeValues<T> = Record<ColorScheme, T>;
@@ -17,7 +18,7 @@ type ColorSchemeValue<T> = {
     dark: T;
 };
 
-export type ColorToken = {
+export type OldColorToken = {
     border: {
         lighter: ColorSchemeValue<string>;
         light: ColorSchemeValue<string>;
@@ -91,7 +92,8 @@ export type ColorToken = {
     };
 };
 
-export type OldToken = {
+export type ProxyableMasterToken = {
+    colors: OldColorToken;
     geometry: {
         border: {
             elementBorderRadius: number;
@@ -213,12 +215,9 @@ export type WithoutThemeOptionValues<TToken> = {
             : TToken[K];
 };
 
-export type ProxyableMasterToken = {
-    colors: ColorToken;
-} & OldToken;
+export type OldToken = WithoutThemeOptionValues<ProxyableMasterToken>;
 
-export type MasterToken = WithoutThemeOptionValues<ProxyableMasterToken> & {
+export type MasterToken = OldToken & {
     newSpacing: SpacingToken;
+    newColors: ColorToken;
 };
-
-export type Token = WithoutThemeOptionValues<ProxyableMasterToken>;

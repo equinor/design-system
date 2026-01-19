@@ -1,9 +1,218 @@
 import { colors } from "../colors";
 
 import { FONT_BASIS, spacings } from "../values";
-import { OldToken } from "./types";
+import { ProxyableMasterToken } from "./types";
 
-export const layoutToken: OldToken = {
+export const proxyableMasterToken: ProxyableMasterToken = {
+    colors: {
+        border: {
+            lighter: {
+                light: colors.ui_background_light_default,
+                dark: colors.ui_background_dark_default,
+            },
+            light: {
+                light: colors.ui_background_light_light,
+                dark: colors.ui_background_dark_default,
+            },
+            medium: {
+                light: colors.ui_background_light_medium,
+                dark: colors.ui_background_dark_temporary_nav,
+            },
+        },
+        container: {
+            background: {
+                light: colors.ui_background_light_light,
+                dark: colors.ui_background_dark_light,
+            },
+            default: {
+                light: colors.ui_background_light_default,
+                dark: colors.ui_background_dark_default,
+            },
+            warning: {
+                light: colors.ui_background_light_warning,
+                dark: colors.ui_background_dark_warning,
+            },
+            elevation: {
+                none: {
+                    light: colors.ui_background_light_default,
+                    dark: colors.ui_background_dark_none_plus_above_scrim,
+                },
+                aboveScrim: {
+                    light: colors.ui_background_light_default,
+                    dark: colors.ui_background_dark_none_plus_above_scrim,
+                },
+                raised: {
+                    light: colors.ui_background_light_default,
+                    dark: colors.ui_background_dark_raised,
+                },
+                overlay: {
+                    light: colors.ui_background_light_default,
+                    dark: colors.ui_background_dark_overlay,
+                },
+                sticky: {
+                    light: colors.ui_background_light_default,
+                    dark: colors.ui_background_dark_sticky,
+                },
+                temporaryNav: {
+                    light: colors.ui_background_light_default,
+                    dark: colors.ui_background_dark_temporary_nav,
+                },
+            },
+            scrim: {
+                light: "rgba(0,0,0,0.4)",
+                // TODO same color for dark mode?
+                dark: "rgba(0,0,0,0.4)",
+            },
+        },
+        interactive: {
+            primary: {
+                light: colors.interactive_primary_light_resting,
+                dark: colors.interactive_primary_dark_resting,
+            },
+            secondary: {
+                light: colors.interactive_secondary_light_resting,
+                dark: colors.interactive_secondary_dark_resting,
+            },
+            success: {
+                light: colors.feedback_success_light_resting,
+                dark: colors.feedback_success_dark_resting,
+            },
+            warning: {
+                light: colors.feedback_warning_light_resting,
+                dark: colors.feedback_warning_dark_resting,
+            },
+            danger: {
+                light: colors.feedback_danger_light_resting,
+                dark: colors.feedback_danger_dark_resting,
+            },
+            disabled: {
+                light: colors.interactive_disabled_light_fill,
+                dark: colors.interactive_disabled_dark_fill,
+            },
+            pressedOverlay: {
+                light: "rgba(0,0,0,0.2)",
+                dark: "rgba(255,255,255,0.2)",
+            },
+            selectedHighlight: {
+                light: colors.interactive_primary_light_selected_highlight,
+                dark: colors.interactive_primary_dark_selected_highlight,
+            },
+        },
+        feedback: {
+            success: {
+                light: colors.feedback_success_light_resting,
+                dark: colors.feedback_success_dark_resting,
+            },
+            warning: {
+                light: colors.feedback_warning_light_resting,
+                dark: colors.feedback_warning_dark_resting,
+            },
+            danger: {
+                light: colors.feedback_danger_light_resting,
+                dark: colors.feedback_danger_dark_resting,
+            },
+        },
+        environment: {
+            dev: {
+                light: colors.infographic_primary_energy_red_21,
+                dark: colors.infographic_primary_energy_red_34,
+            },
+            test: {
+                light: colors.infographic_primary_spruce_wood,
+                dark: colors.feedback_warning_dark_hover,
+            },
+            qa: {
+                light: colors.infographic_primary_moss_green_21,
+                dark: colors.infographic_primary_moss_green_34,
+            },
+            text: {
+                light: colors.text_and_static_icons_light_default,
+                dark: colors.text_and_static_icons_dark_primary_black,
+            },
+        },
+        text: {
+            primary: {
+                light: colors.text_and_static_icons_light_default,
+                dark: colors.text_and_static_icons_dark_primary,
+            },
+            secondary: {
+                light: colors.text_and_static_icons_light_secondary,
+                dark: colors.text_and_static_icons_dark_secondary,
+            },
+            tertiary: {
+                light: colors.text_and_static_icons_light_tertiary,
+                dark: colors.text_and_static_icons_dark_tertiary,
+            },
+            primaryInverted: {
+                light: colors.text_and_static_icons_light_primary_white,
+                dark: colors.text_and_static_icons_dark_primary_black,
+            },
+            menu: {
+                resting: {
+                    light: colors.text_and_static_icons_light_default,
+                    dark: colors.text_and_static_icons_dark_secondary,
+                },
+                active: {
+                    light: colors.interactive_primary_light_resting,
+                    dark: colors.interactive_primary_dark_resting,
+                },
+            },
+            danger: {
+                light: colors.feedback_danger_light_text,
+                dark: colors.feedback_danger_dark_text,
+            },
+            disabled: {
+                light: colors.interactive_disabled_light_text,
+                dark: colors.interactive_disabled_dark_text,
+            },
+            feedbackWarning: {
+                light: colors.feedback_warning_light_text,
+                dark: colors.feedback_warning_dark_text,
+            },
+        },
+        toast: {
+            error: {
+                background: {
+                    light: colors.toast_error_background_light,
+                    dark: colors.toast_error_background_dark,
+                },
+                text: {
+                    light: colors.toast_error_text_light,
+                    dark: colors.toast_error_text_dark,
+                },
+            },
+            info: {
+                background: {
+                    light: colors.toast_info_background_light,
+                    dark: colors.toast_info_background_dark,
+                },
+                text: {
+                    light: colors.toast_info_text_light,
+                    dark: colors.toast_info_text_dark,
+                },
+            },
+            warning: {
+                background: {
+                    light: colors.toast_warning_background_light,
+                    dark: colors.toast_warning_background_dark,
+                },
+                text: {
+                    light: colors.toast_warning_text_light,
+                    dark: colors.toast_warning_text_dark,
+                },
+            },
+            success: {
+                background: {
+                    light: colors.toast_success_background_light,
+                    dark: colors.toast_success_background_dark,
+                },
+                text: {
+                    light: colors.toast_success_text_light,
+                    dark: colors.toast_success_text_dark,
+                },
+            },
+        },
+    },
     geometry: {
         border: {
             elementBorderRadius: 4,

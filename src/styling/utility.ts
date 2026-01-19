@@ -1,4 +1,4 @@
-import type { Token } from "./tokens";
+import type { OldToken } from "./tokens";
 import type {
     Color,
     EDSColor,
@@ -33,7 +33,7 @@ export const isTextColor = (obj: string): obj is EDSTextColor =>
  * @param theme The current theme of the application.
  * @returns A resolved color.
  */
-export function resolveColor(color: Color, theme: Token): Color {
+export function resolveColor(color: Color, theme: OldToken): Color {
     if (isEDSColor(color)) return theme.colors.interactive[color];
     if (isTextColor(color)) {
         const textColorToThemeKeyMap = {

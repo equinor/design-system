@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { MasterToken } from "src/styling/tokens";
 import { ColorScheme, Density } from "../../styling";
+import { MasterToken } from "../../styling/tokens";
 
 export type EDSContextType = {
     /**

@@ -1,5 +1,6 @@
-import { Text, TextProps, TextStyle } from "react-native";
 import React, { LegacyRef, forwardRef } from "react";
+import { Text, TextProps, TextStyle } from "react-native";
+import { useStyles } from "../../hooks/useStyles";
 import {
     Color,
     EDSStyleSheet,
@@ -8,7 +9,6 @@ import {
     TypographyVariant,
     resolveColor,
 } from "../../styling";
-import { useStyles } from "../../hooks/useStyles";
 
 export type TypographyColorVariant =
     | "primary"
@@ -91,7 +91,7 @@ const resolveFontName = (
 ) => {
     let fontName = defaultName;
     if (bold) {
-        fontName = fontName.replace(/Regular|Medium|Light/gi, "Bold");
+        fontName = fontName.replace(/Medium|Light/gi, "Bold");
     }
     if (italic) fontName += "Italic";
     fontName = fontName.replace("RegularItalic", "Italic");
