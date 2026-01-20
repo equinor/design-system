@@ -278,34 +278,6 @@ WithIndicator.parameters = {
   },
 }
 
-export const WithHelperMessage: StoryFn<CheckboxProps> = () => {
-  return (
-    <UnstyledList>
-      <li>
-        <Checkbox
-          label="Subscribe to newsletter"
-          helperMessage="We'll send you updates about new features"
-        />
-      </li>
-      <li>
-        <Checkbox
-          label="Share usage data"
-          helperMessage="Help us improve by sharing anonymous usage statistics"
-        />
-      </li>
-    </UnstyledList>
-  )
-}
-WithHelperMessage.storyName = 'With helper message'
-WithHelperMessage.parameters = {
-  docs: {
-    description: {
-      story:
-        'Use the `helperMessage` prop to provide additional context or instructions for the checkbox.',
-    },
-  },
-}
-
 export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
   <Checkbox aria-label="This label is invisible, but read by screen-readers" />
 )
@@ -393,35 +365,6 @@ Compact.parameters = {
     description: {
       story:
         'Use `data-density="comfortable"` on a parent element to render checkboxes in a more compact size (24px height instead of 36px).',
-    },
-  },
-}
-
-export const ColorAppearance: StoryFn<CheckboxProps> = () => {
-  return (
-    <UnstyledList>
-      <li>
-        <Checkbox
-          label="Default (accent)"
-          helperMessage="This is the default appearance"
-        />
-      </li>
-      <li>
-        <Checkbox
-          label="Danger appearance"
-          helperMessage="Set data-color-appearance='danger' for error styling"
-          data-color-appearance="danger"
-        />
-      </li>
-    </UnstyledList>
-  )
-}
-ColorAppearance.storyName = 'Color appearance'
-ColorAppearance.parameters = {
-  docs: {
-    description: {
-      story:
-        'The checkbox uses `accent` color by default. Use `data-color-appearance="danger"` on the Checkbox for error styling.',
     },
   },
 }
