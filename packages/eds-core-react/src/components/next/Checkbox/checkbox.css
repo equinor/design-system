@@ -42,8 +42,6 @@
       --eds-selectable-spacing-inline,
       var(--eds-spacing-horizontal-md)
     );
-    /* Vertical padding - 10px to achieve 36px height with 16px icon */
-    padding-block: var(--eds-selectable-spacing-stack, 0.625rem);
     /* Auto width, not full width */
     width: auto;
     /* Border radius - uses future token with fallback */
@@ -51,8 +49,8 @@
       --eds-generic-corner-radius,
       var(--eds-spacing-border-radius-rounded)
     );
-    /* Min height */
-    min-height: var(--_checkbox-height);
+    /* Fixed height from density tokens - flexbox centers content vertically */
+    height: var(--_checkbox-height);
   }
 
   .eds-checkbox[data-disabled='true'] {
