@@ -230,21 +230,6 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
                 {...register('agree', { required: true })}
               />
             </div>
-            <span
-              role="alert"
-              id="error-name-required"
-              style={{
-                color: 'red',
-                paddingLeft: '3rem',
-                fontSize: '0.75rem',
-                display:
-                  errors.agree && errors.agree.type === 'required'
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              Hey you! This field is required
-            </span>
             <div style={{ padding: '1rem' }}>
               <Button type="submit">I&apos;m done</Button>
             </div>
@@ -256,35 +241,13 @@ export const WithFormsControl: StoryFn<CheckboxProps> = () => {
 }
 WithFormsControl.storyName = 'Example with React Hook Form'
 
-export const WithIndicator: StoryFn<CheckboxProps> = () => {
-  return (
-    <UnstyledList>
-      <li>
-        <Checkbox label="I accept the terms" indicator="(Required)" required />
-      </li>
-      <li>
-        <Checkbox label="Subscribe to newsletter" indicator="(Optional)" />
-      </li>
-    </UnstyledList>
-  )
-}
-WithIndicator.storyName = 'With indicator'
-WithIndicator.parameters = {
-  docs: {
-    description: {
-      story:
-        'Use the `indicator` prop to show required or optional status after the label text. Remember to also set `required` for proper accessibility.',
-    },
-  },
-}
-
 export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
   <Checkbox aria-label="This label is invisible, but read by screen-readers" />
 )
 AlternativeToLabel.storyName = 'Alternative to label'
 
 export const TableCheckbox: StoryFn<CheckboxProps> = () => (
-  <Table data-density="comfortable">
+  <Table>
     <Table.Head>
       <Table.Row>
         <Table.Cell>Selected</Table.Cell>
