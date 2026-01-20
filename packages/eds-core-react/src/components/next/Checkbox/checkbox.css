@@ -15,8 +15,8 @@
     --_checkbox-hover-size: var(--eds-sizing-selectable-lg);
     /* Icon color - follows data-color-appearance (defaults to accent in component) */
     --_checkbox-icon-color: var(--eds-color-text-subtle);
-    /* Hover color is always accent - interaction feedback, not semantic */
-    --_checkbox-hover-color: var(--eds-color-bg-accent-fill-muted-hover);
+    /* Hover color is always neutral - interaction feedback, not semantic */
+    --_checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
