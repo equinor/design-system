@@ -12,84 +12,105 @@
     border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     border-radius: var(--eds-spacing-border-radius-none);
     padding-inline: var(--eds-selectable-space-horizontal);
-  }
 
-  /* Hover - only for enabled inputs */
-  .eds-input-container:hover:not([data-disabled]):not([data-readonly]) {
-    border-color: var(--eds-color-border-strong);
-  }
+    /* Hover - only for enabled inputs */
+    &:hover:not([data-disabled]):not([data-readonly]) {
+      border-color: var(--eds-color-border-strong);
 
-  .eds-input-container:hover:not([data-disabled]):not([data-readonly])
-    .eds-input {
-    color: var(--eds-color-text-strong);
-    -webkit-text-fill-color: var(--eds-color-text-strong);
-  }
+      & .eds-input {
+        color: var(--eds-color-text-strong);
+        -webkit-text-fill-color: var(--eds-color-text-strong);
 
-  .eds-input-container:hover:not([data-disabled]):not([data-readonly])
-    .eds-input::placeholder {
-    color: var(--eds-color-text-strong);
-    -webkit-text-fill-color: var(--eds-color-text-strong);
-  }
+        &::placeholder {
+          color: var(--eds-color-text-strong);
+          -webkit-text-fill-color: var(--eds-color-text-strong);
+        }
+      }
 
-  .eds-input-container:focus-within {
-    border-color: transparent;
-    outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
-    outline-offset: calc(-1 * var(--eds-sizing-stroke-thick));
-  }
+      /* Hover for adornments - only when not invalid */
+      &:not([data-invalid]) {
+        & .eds-adornment__text,
+        & .eds-adornment__adornment {
+          color: var(--eds-color-text-strong);
+        }
+      }
+    }
 
-  /* Invalid focus state - red outline */
-  .eds-input-container[data-invalid]:focus-within {
-    outline-color: var(--eds-color-border-strong);
-  }
+    /* Focus state */
+    &:focus-within {
+      border-color: transparent;
+      outline: var(--eds-sizing-stroke-thick) solid
+        var(--eds-color-border-focus);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thick));
+    }
 
-  /* Disabled state */
-  .eds-input-container[data-disabled] {
-    cursor: not-allowed;
-    border-color: transparent;
-  }
+    /* Invalid state */
+    &[data-invalid] {
+      border-color: var(--eds-color-border-medium);
 
-  .eds-input-container[data-disabled] .eds-input {
-    color: var(--eds-color-border-medium);
-    cursor: not-allowed;
-    opacity: 1;
-    -webkit-text-fill-color: var(--eds-color-border-medium);
-  }
+      &:focus-within {
+        outline-color: var(--eds-color-border-strong);
+      }
 
-  .eds-input-container[data-disabled] .eds-input::placeholder {
-    color: var(--eds-color-border-medium);
-    -webkit-text-fill-color: var(--eds-color-border-medium);
-  }
+      & .eds-input::placeholder {
+        color: var(--eds-color-border-strong);
+        -webkit-text-fill-color: var(--eds-color-border-strong);
+      }
+    }
 
-  /* Readonly state */
-  .eds-input-container[data-readonly] {
-    border-color: transparent;
-  }
+    /* Disabled state */
+    &[data-disabled] {
+      cursor: not-allowed;
+      border-color: transparent;
 
-  .eds-input-container[data-readonly] .eds-input {
-    color: var(--eds-color-border-strong);
-    -webkit-text-fill-color: var(--eds-color-border-strong);
-  }
+      & .eds-input {
+        color: var(--eds-color-border-medium);
+        cursor: not-allowed;
+        opacity: 1;
+        -webkit-text-fill-color: var(
+          --eds-color-border-medium
+        ); /* Safari autofill override */
 
-  .eds-input-container[data-readonly] .eds-input::placeholder {
-    color: var(--eds-color-border-strong);
-    -webkit-text-fill-color: var(--eds-color-border-strong);
-  }
+        &::placeholder {
+          color: var(--eds-color-border-medium);
+          -webkit-text-fill-color: var(--eds-color-border-medium);
+        }
+      }
 
-  /* Invalid state */
-  .eds-input-container[data-invalid] {
-    border-color: var(--eds-color-border-medium);
-  }
+      & .eds-adornment__text,
+      & .eds-adornment__adornment,
+      & .eds-error-icon {
+        color: var(--eds-color-border-medium);
+      }
+    }
 
-  /* Invalid state - text colors stay neutral via data-color-appearance on elements */
-  .eds-input-container[data-invalid] .eds-input::placeholder {
-    color: var(--eds-color-border-strong);
-    -webkit-text-fill-color: var(--eds-color-border-strong);
+    /* Readonly state */
+    &[data-readonly] {
+      border-color: transparent;
+
+      & .eds-input {
+        color: var(--eds-color-border-strong);
+        -webkit-text-fill-color: var(
+          --eds-color-border-strong
+        ); /* Safari autofill override */
+
+        &::placeholder {
+          color: var(--eds-color-border-strong);
+          -webkit-text-fill-color: var(--eds-color-border-strong);
+        }
+      }
+
+      & .eds-adornment__text,
+      & .eds-adornment__adornment {
+        color: var(--eds-color-border-strong);
+      }
+    }
   }
 
   /* Input/Textarea element */
   .eds-input {
     flex: 1;
-    min-width: 0;
+    min-inline-size: 0;
     border: var(--eds-sizing-stroke-none);
     background: transparent;
     outline: none;
@@ -100,13 +121,13 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     resize: none;
+
+    &::placeholder {
+      color: var(--eds-color-border-strong);
+    }
   }
 
-  .eds-input::placeholder {
-    color: var(--eds-color-border-strong);
-  }
-
-  /* Error icon - separate from adornments */
+  /* Error icon */
   .eds-error-icon {
     display: flex;
     align-items: center;
@@ -122,53 +143,16 @@
     flex-shrink: 0;
   }
 
-  /* Adornment text (prefix/suffix) - always neutral color via data-color-appearance */
+  /* Adornment text (prefix/suffix) - always neutral via data-color-appearance */
   .eds-adornment__text {
     display: inline; /* Override display: block from [data-font-family] */
     color: var(--eds-color-text-subtle);
   }
 
-  /* Adornment element (icons, buttons, etc.) - inherits state color (red when invalid) */
+  /* Adornment element (icons, buttons, etc.) */
   .eds-adornment__adornment {
     display: flex;
     align-items: center;
     color: var(--eds-color-text-subtle);
-  }
-
-  /* Hover state for adornments - only for neutral state (not invalid) */
-  .eds-input-container:hover:not([data-disabled]):not([data-readonly]):not(
-      [data-invalid]
-    )
-    .eds-adornment__text {
-    color: var(--eds-color-text-strong);
-  }
-
-  .eds-input-container:hover:not([data-disabled]):not([data-readonly]):not(
-      [data-invalid]
-    )
-    .eds-adornment__adornment {
-    color: var(--eds-color-text-strong);
-  }
-
-  /* Disabled state for adornments */
-  .eds-input-container[data-disabled] .eds-adornment__text {
-    color: var(--eds-color-border-medium);
-  }
-
-  .eds-input-container[data-disabled] .eds-adornment__adornment {
-    color: var(--eds-color-border-medium);
-  }
-
-  .eds-input-container[data-disabled] .eds-error-icon {
-    color: var(--eds-color-border-medium);
-  }
-
-  /* Readonly state for adornments */
-  .eds-input-container[data-readonly] .eds-adornment__text {
-    color: var(--eds-color-border-strong);
-  }
-
-  .eds-input-container[data-readonly] .eds-adornment__adornment {
-    color: var(--eds-color-border-strong);
   }
 }
