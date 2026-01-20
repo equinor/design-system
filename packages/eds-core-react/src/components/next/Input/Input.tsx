@@ -14,10 +14,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       disabled,
       readOnly,
       type = 'text',
-      leftText,
-      leftAdornment,
-      rightText,
-      rightAdornment,
+      startText,
+      startAdornment,
+      endText,
+      endAdornment,
       className,
       as: Component = 'input',
       ...inputProps
@@ -25,20 +25,12 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     ref,
   ) {
     const colorAppearance = invalid && !disabled ? 'danger' : 'neutral'
-    const selectableSpace = 'xs'
-    const spaceProportions = 'stretched'
 
     const showErrorIcon = invalid && !disabled
-    const hasLeftAdornment = leftText || leftAdornment
-    const hasRightAdornment = rightText || rightAdornment
+    const hasStartAdornment = startText || startAdornment
+    const hasEndAdornment = endText || endAdornment
 
-    const containerClasses = [
-      'eds-input-container',
-      className,
-      disabled && 'eds-input-container--disabled',
-      readOnly && 'eds-input-container--readonly',
-      invalid && 'eds-input-container--invalid',
-    ]
+    const containerClasses = ['eds-input-container', className]
       .filter(Boolean)
       .join(' ')
 
@@ -46,28 +38,41 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       <div
         className={containerClasses}
         data-color-appearance={colorAppearance}
-        data-selectable-space={selectableSpace}
-        data-space-proportions={spaceProportions}
-        data-line-height="squished"
+        data-selectable-space="xs"
+        data-space-proportions="stretched"
+        data-font-size="xs"
+        data-disabled={disabled || undefined}
+        data-readonly={readOnly || undefined}
+        data-invalid={invalid || undefined}
       >
         {showErrorIcon && (
-          <span className="eds-error-icon">
-            <Icon data={error_filled} size="xs" />
+          <span
+            className="eds-error-icon"
+            data-font-size="xs"
+            data-font-family="ui"
+          >
+            <Icon data={error_filled} />
           </span>
         )}
-        {hasLeftAdornment && (
-          <div className="eds-adornment">
-            {leftAdornment && (
-              <span className="eds-adornment__adornment">{leftAdornment}</span>
-            )}
-            {leftText && (
+        {hasStartAdornment && (
+          <div className="eds-adornment" data-font-size="xs">
+            {startText && (
               <span
                 className="eds-adornment__text"
                 data-color-appearance="neutral"
                 data-font-family="ui"
-                data-font-size="lg"
+                data-font-size="xs"
               >
-                {leftText}
+                {startText}
+              </span>
+            )}
+            {startAdornment && (
+              <span
+                className="eds-adornment__adornment"
+                data-font-size="xs"
+                data-font-family="ui"
+              >
+                {startAdornment}
               </span>
             )}
           </div>
@@ -80,26 +85,32 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           aria-invalid={invalid || undefined}
           className="eds-input"
           data-color-appearance="neutral"
+          data-font-size="md"
           data-font-family="ui"
-          data-font-size="lg"
           {...(inputProps as InputHTMLAttributes<
             HTMLInputElement | HTMLTextAreaElement
           >)}
         />
-        {hasRightAdornment && (
-          <div className="eds-adornment">
-            {rightText && (
+        {hasEndAdornment && (
+          <div className="eds-adornment" data-font-size="xs">
+            {endText && (
               <span
                 className="eds-adornment__text"
                 data-color-appearance="neutral"
                 data-font-family="ui"
-                data-font-size="lg"
+                data-font-size="xs"
               >
-                {rightText}
+                {endText}
               </span>
             )}
-            {rightAdornment && (
-              <span className="eds-adornment__adornment">{rightAdornment}</span>
+            {endAdornment && (
+              <span
+                className="eds-adornment__adornment"
+                data-font-size="xs"
+                data-font-family="ui"
+              >
+                {endAdornment}
+              </span>
             )}
           </div>
         )}

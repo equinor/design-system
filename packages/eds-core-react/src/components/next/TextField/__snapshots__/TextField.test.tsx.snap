@@ -35,7 +35,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     <div
       class="eds-input-container"
       data-color-appearance="neutral"
-      data-line-height="squished"
+      data-font-size="xs"
       data-selectable-space="xs"
       data-space-proportions="stretched"
     >
@@ -44,7 +44,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
         class="eds-input"
         data-color-appearance="neutral"
         data-font-family="ui"
-        data-font-size="lg"
+        data-font-size="md"
         id="test-id-input"
         placeholder="Placeholder"
         type="text"

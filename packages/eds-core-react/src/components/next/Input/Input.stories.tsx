@@ -4,7 +4,7 @@ import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Field } from '../Field'
 import { Stack } from './../../../../.storybook/components'
-import { Icon } from '../../Icon'
+import { Icon } from '../Icon'
 import { Button } from '../../Button'
 import page from './Input.docs.mdx'
 
@@ -90,35 +90,35 @@ const meta: Meta<typeof Input> = {
     },
 
     // Adornments
-    leftText: {
+    startText: {
       control: 'text',
       description:
-        'Text prefix on the left (e.g., "$", "https://"). Always neutral color.',
+        'Text at the start (e.g., "$", "https://"). Always neutral color.',
       table: {
         category: 'Adornments',
       },
     },
-    rightText: {
+    endText: {
       control: 'text',
       description:
-        'Text suffix on the right (e.g., "kg", "%", "USD"). Always neutral color.',
+        'Text at the end (e.g., "kg", "%", "USD"). Always neutral color.',
       table: {
         category: 'Adornments',
       },
     },
-    leftAdornment: {
+    startAdornment: {
       control: false,
       description:
-        'ReactNode for left side (icons, buttons). Inherits state color (red when invalid).',
+        'ReactNode at the start (icons, buttons). Inherits state color (red when invalid).',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
       },
     },
-    rightAdornment: {
+    endAdornment: {
       control: false,
       description:
-        'ReactNode for right side (icons, buttons). Inherits state color (red when invalid).',
+        'ReactNode at the end (icons, buttons). Inherits state color (red when invalid).',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
@@ -283,25 +283,25 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         aria-label="With text prefix and suffix"
         type="number"
         placeholder="Amount"
-        leftText="$"
-        rightText="USD"
+        startText="$"
+        endText="USD"
       />
       <Input
         aria-label="With icon"
         type="text"
         placeholder="With icon"
-        rightAdornment={<Icon data={anchor} size={18} />}
+        endAdornment={<Icon data={anchor} />}
       />
       <Input
         aria-label="With button"
         type="text"
         placeholder="Search"
-        rightAdornment={
+        endAdornment={
           <Button
             variant="ghost_icon"
             style={{ height: '24px', width: '24px' }}
           >
-            <Icon data={search} size={18} />
+            <Icon data={search} />
           </Button>
         }
       />
@@ -310,29 +310,29 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         defaultValue="Invalid value"
         invalid
-        rightAdornment={<Icon data={anchor} size={18} />}
+        endAdornment={<Icon data={anchor} />}
       />
       <Input
         aria-label="Invalid with text and adornment"
         type="text"
         defaultValue="invalid-url"
         invalid
-        leftText="https://"
-        leftAdornment={<Icon data={anchor} size={18} />}
-        rightText=".com"
+        startText="https://"
+        startAdornment={<Icon data={anchor} />}
+        endText=".com"
       />
       <Input
         aria-label="Invalid with button"
         type="text"
         defaultValue="Invalid with button"
         invalid
-        rightAdornment={
+        endAdornment={
           <Button
             variant="ghost_icon"
             color="danger"
             style={{ height: '24px', width: '24px' }}
           >
-            <Icon data={search} size={18} />
+            <Icon data={search} />
           </Button>
         }
       />
@@ -341,8 +341,8 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         disabled
         value="Disabled"
-        leftText="$"
-        rightAdornment={<Icon data={anchor} size={18} />}
+        startText="$"
+        endAdornment={<Icon data={anchor} />}
       />
     </>
   )
@@ -362,28 +362,28 @@ export const DensityWithAdornments: StoryFn<InputProps> = () => {
         <Input
           aria-label="Default spacious"
           placeholder="Default"
-          leftText="https://"
-          leftAdornment={<Icon data={anchor} size={18} />}
-          rightText=".com"
-          rightAdornment={<Icon data={search} size={18} />}
+          startText="https://"
+          startAdornment={<Icon data={anchor} />}
+          endText=".com"
+          endAdornment={<Icon data={search} />}
         />
         <Input
           aria-label="Invalid spacious"
           defaultValue="invalid-url"
           invalid
-          leftText="https://"
-          leftAdornment={<Icon data={anchor} size={18} />}
-          rightText=".com"
-          rightAdornment={<Icon data={search} size={18} />}
+          startText="https://"
+          startAdornment={<Icon data={anchor} />}
+          endText=".com"
+          endAdornment={<Icon data={search} />}
         />
         <Input
           aria-label="Disabled spacious"
           value="disabled-url"
           disabled
-          leftText="https://"
-          leftAdornment={<Icon data={anchor} size={18} />}
-          rightText=".com"
-          rightAdornment={<Icon data={search} size={18} />}
+          startText="https://"
+          startAdornment={<Icon data={anchor} />}
+          endText=".com"
+          endAdornment={<Icon data={search} />}
         />
       </div>
 
@@ -396,28 +396,28 @@ export const DensityWithAdornments: StoryFn<InputProps> = () => {
         <Input
           aria-label="Default comfortable"
           placeholder="Default"
-          leftText="https://"
-          leftAdornment={<Icon data={anchor} size={18} />}
-          rightText=".com"
-          rightAdornment={<Icon data={search} size={18} />}
+          startText="https://"
+          startAdornment={<Icon data={anchor} />}
+          endText=".com"
+          endAdornment={<Icon data={search} />}
         />
         <Input
           aria-label="Invalid comfortable"
           defaultValue="invalid-url"
           invalid
-          leftText="https://"
-          leftAdornment={<Icon data={anchor} size={18} />}
-          rightText=".com"
-          rightAdornment={<Icon data={search} size={18} />}
+          startText="https://"
+          startAdornment={<Icon data={anchor} />}
+          endText=".com"
+          endAdornment={<Icon data={search} />}
         />
         <Input
           aria-label="Disabled comfortable"
           value="disabled-url"
           disabled
-          leftText="https://"
-          leftAdornment={<Icon data={anchor} size={18} />}
-          rightText=".com"
-          rightAdornment={<Icon data={search} size={18} />}
+          startText="https://"
+          startAdornment={<Icon data={anchor} />}
+          endText=".com"
+          endAdornment={<Icon data={search} />}
         />
       </div>
     </div>

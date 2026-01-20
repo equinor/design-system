@@ -3,9 +3,10 @@
 exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="eds-input-container eds-input-container--readonly"
+    class="eds-input-container"
     data-color-appearance="neutral"
-    data-line-height="squished"
+    data-font-size="xs"
+    data-readonly="true"
     data-selectable-space="xs"
     data-space-proportions="stretched"
   >
@@ -13,7 +14,7 @@ exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
       class="eds-input"
       data-color-appearance="neutral"
       data-font-family="ui"
-      data-font-size="lg"
+      data-font-size="md"
       readonly=""
       type="text"
       value="input value"

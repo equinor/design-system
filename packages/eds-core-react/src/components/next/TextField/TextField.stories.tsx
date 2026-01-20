@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
+import { money } from '@equinor/eds-icons'
 import { TextField } from './TextField'
 import type { TextFieldProps } from './TextField.types'
 import { Stack } from './../../../../.storybook/components'
+import { Icon } from '../Icon'
 
 const meta: Meta<typeof TextField> = {
   title: 'EDS 2.0 (beta)/TextField',
@@ -120,35 +122,35 @@ const meta: Meta<typeof TextField> = {
     },
 
     // Adornments
-    leftText: {
+    startText: {
       control: 'text',
       description:
-        'Text prefix on the left (e.g., "$", "https://"). Always neutral color.',
+        'Text at the start (e.g., "$", "https://"). Always neutral color.',
       table: {
         category: 'Adornments',
       },
     },
-    rightText: {
+    endText: {
       control: 'text',
       description:
-        'Text suffix on the right (e.g., "kg", "%", "USD"). Always neutral color.',
+        'Text at the end (e.g., "kg", "%", "USD"). Always neutral color.',
       table: {
         category: 'Adornments',
       },
     },
-    leftAdornment: {
+    startAdornment: {
       control: false,
       description:
-        'ReactNode for left side (icons, buttons). Inherits state color (red when invalid).',
+        'ReactNode at the start (icons, buttons). Inherits state color (red when invalid).',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
       },
     },
-    rightAdornment: {
+    endAdornment: {
       control: false,
       description:
-        'ReactNode for right side (icons, buttons). Inherits state color (red when invalid).',
+        'ReactNode at the end (icons, buttons). Inherits state color (red when invalid).',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
@@ -301,11 +303,15 @@ ReadOnlyState.storyName = 'Read Only State'
 
 export const FullExample: StoryFn<TextFieldProps> = () => (
   <TextField
-    label="Label"
+    label="Amount"
     indicator="(Optional)"
-    description="Help with more details"
-    placeholder="Placeholder"
+    description="Enter the transaction amount"
+    placeholder="0.00"
+    type="number"
     helperMessage="Helper Message"
+    labelInfo="This field accepts decimal values for currency amounts."
+    startText="NOK"
+    endAdornment={<Icon data={money} />}
   />
 )
 FullExample.storyName = 'Full Example'
