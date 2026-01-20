@@ -150,12 +150,11 @@
     border-radius: var(--eds-spacing-border-radius-pill);
   }
 
-  /* SVG icon - uses density-aware token (24px spacious, 20px comfortable) */
+  /* SVG icon - Icon component with size="lg" handles sizing via tokens
+   * (24px spacious, 20px comfortable) */
   .eds-checkbox__icon {
     position: relative;
     pointer-events: none;
-    width: var(--eds-sizing-icon-lg);
-    height: var(--eds-sizing-icon-lg);
     fill: var(--_checkbox-icon-color);
     flex-shrink: 0;
   }

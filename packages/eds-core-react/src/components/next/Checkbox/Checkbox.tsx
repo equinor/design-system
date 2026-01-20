@@ -60,14 +60,17 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         <span className="eds-checkbox__icon-wrapper">
           <Icon
             data={checkbox}
+            size="lg"
             className="eds-checkbox__icon eds-checkbox__icon--checked"
           />
           <Icon
             data={checkbox_outline}
+            size="lg"
             className="eds-checkbox__icon eds-checkbox__icon--unchecked"
           />
           <Icon
             data={checkbox_indeterminate}
+            size="lg"
             className="eds-checkbox__icon eds-checkbox__icon--indeterminate"
           />
         </span>
