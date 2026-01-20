@@ -11,8 +11,8 @@
   .eds-checkbox {
     /* Component height from density tokens - 36px spacious, 24px comfortable */
     --_checkbox-height: var(--eds-sizing-selectable-md);
-    /* Hover size for standalone (circle) - 44px spacious, 36px comfortable */
-    --_checkbox-hover-size: var(--eds-sizing-selectable-lg);
+    /* Hover size for standalone (circle) - matches component height */
+    --_checkbox-hover-size: var(--eds-sizing-selectable-md);
     /* Icon color - accent teal from Figma color usage spec */
     --_checkbox-icon-color: var(--eds-color-bg-fill-emphasis-default);
     /* Hover background - muted accent from Figma color usage spec */
@@ -76,7 +76,11 @@
     line-height: 0;
   }
 
-  /* Only apply negative margin when used with label (Field) - reduces visual gap */
+  /* Only apply negative margin when used with label (Field) - reduces visual gap
+   * TODO: Replace hardcoded values with tokens when available
+   * See: https://github.com/equinor/design-system/issues/4325
+   * Figma values (lg): spacious -6px/-4.8px, comfortable -4px/-4px
+   */
   .eds-field.eds-checkbox .eds-checkbox__icon-wrapper {
     margin-block: -6px;
     margin-inline: -4.8px;
@@ -146,12 +150,12 @@
     border-radius: var(--eds-spacing-border-radius-pill);
   }
 
-  /* SVG icon - 24px from Figma (visual size reduced by wrapper's negative margin) */
+  /* SVG icon - uses density-aware token (24px spacious, 20px comfortable) */
   .eds-checkbox__icon {
     position: relative;
     pointer-events: none;
-    width: 24px;
-    height: 24px;
+    width: var(--eds-sizing-icon-lg);
+    height: var(--eds-sizing-icon-lg);
     fill: var(--_checkbox-icon-color);
     flex-shrink: 0;
   }

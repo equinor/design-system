@@ -294,7 +294,9 @@ export const TableCheckbox: StoryFn<CheckboxProps> = () => (
       {data.map((data) => (
         <Table.Row key={data.number}>
           <Table.Cell>
-            <Checkbox aria-label={`Select ${data.description}`} />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Checkbox aria-label={`Select ${data.description}`} />
+            </div>
           </Table.Cell>
         </Table.Row>
       ))}
@@ -306,7 +308,7 @@ TableCheckbox.parameters = {
   docs: {
     description: {
       story:
-        'Checkbox without label for use in tables. Use `data-density="comfortable"` on the Table for compact checkboxes.',
+        'Checkbox without label for use in tables. Wrap in a flex container with `justify-content: center` to center the checkbox in the cell.',
     },
   },
 }
