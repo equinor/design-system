@@ -59,19 +59,27 @@
     cursor: not-allowed;
   }
 
-  /* Icon wrapper - contains the checkbox icons */
+  /* Icon wrapper - contains the checkbox icons
+   * Uses negative margin to reduce visual space of 24px icon.
+   * This matches Figma's approach with negative padding on icon container.
+   * See: https://github.com/equinor/design-system/issues/4325
+   */
   .eds-checkbox__icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 16px;
-    height: 16px;
     flex-shrink: 0;
     /* Allow hover circle to overflow */
     overflow: visible;
     /* Prevent baseline alignment issues in table cells */
     line-height: 0;
+  }
+
+  /* Only apply negative margin when used with label (Field) - reduces visual gap */
+  .eds-field.eds-checkbox .eds-checkbox__icon-wrapper {
+    margin-block: -6px;
+    margin-inline: -4.8px;
   }
 
   /* Circle hover background for standalone checkbox (no label) */
@@ -138,12 +146,12 @@
     border-radius: var(--eds-spacing-border-radius-pill);
   }
 
-  /* SVG icon - 16px from Figma */
+  /* SVG icon - 24px from Figma (visual size reduced by wrapper's negative margin) */
   .eds-checkbox__icon {
     position: relative;
     pointer-events: none;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     fill: var(--_checkbox-icon-color);
     flex-shrink: 0;
   }
