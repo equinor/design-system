@@ -44,7 +44,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }, [indeterminate, inputRef])
 
     const checkboxInput = (
-      <span className="eds-checkbox__input-wrapper">
+      <>
         <input
           type="checkbox"
           id={inputId}
@@ -57,19 +57,21 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           data-indeterminate={indeterminate}
           {...rest}
         />
-        <Icon
-          data={checkbox}
-          className="eds-checkbox__icon eds-checkbox__icon--checked"
-        />
-        <Icon
-          data={checkbox_outline}
-          className="eds-checkbox__icon eds-checkbox__icon--unchecked"
-        />
-        <Icon
-          data={checkbox_indeterminate}
-          className="eds-checkbox__icon eds-checkbox__icon--indeterminate"
-        />
-      </span>
+        <span className="eds-checkbox__icon-wrapper">
+          <Icon
+            data={checkbox}
+            className="eds-checkbox__icon eds-checkbox__icon--checked"
+          />
+          <Icon
+            data={checkbox_outline}
+            className="eds-checkbox__icon eds-checkbox__icon--unchecked"
+          />
+          <Icon
+            data={checkbox_indeterminate}
+            className="eds-checkbox__icon eds-checkbox__icon--indeterminate"
+          />
+        </span>
+      </>
     )
 
     // Use Field for layout when label is provided

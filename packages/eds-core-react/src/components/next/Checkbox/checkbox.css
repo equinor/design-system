@@ -11,7 +11,7 @@
   .eds-checkbox {
     /* Component height from density tokens - 36px spacious, 24px comfortable */
     --_checkbox-height: var(--eds-sizing-selectable-md);
-    /* Hover size from density tokens - 44px spacious, 36px comfortable */
+    /* Hover size for standalone (circle) - 44px spacious, 36px comfortable */
     --_checkbox-hover-size: var(--eds-sizing-selectable-lg);
     /* Icon color - follows data-color-appearance (defaults to accent in component) */
     --_checkbox-icon-color: var(--eds-color-text-subtle);
@@ -22,21 +22,18 @@
     box-sizing: border-box;
   }
 
-  /* Standalone checkbox (no label) */
+  /* Standalone checkbox (no label) - uses circle hover on icon */
   .eds-checkbox--standalone {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     position: relative;
-    /* Horizontal padding - uses future token with fallback */
-    padding-inline: var(
-      --eds-selectable-spacing-inline,
-      var(--eds-spacing-horizontal-md)
-    );
-    min-height: var(--_checkbox-height);
-    border-radius: var(--eds-spacing-border-radius-rounded);
+    /* Size matches hover circle so it's centered */
+    width: var(--_checkbox-hover-size);
+    height: var(--_checkbox-hover-size);
   }
 
-  /* When used with Field, apply Figma spacing and layout */
+  /* When used with Field (has label), apply Figma spacing and full-component hover */
   .eds-field.eds-checkbox {
     /* Gap between checkbox icon and label - uses future token with fallback */
     gap: var(--eds-generic-horizontal-gap, var(--eds-spacing-horizontal-md));
@@ -45,11 +42,8 @@
       --eds-selectable-spacing-inline,
       var(--eds-spacing-horizontal-md)
     );
-    /* Vertical padding - uses future token with fallback */
-    padding-block: var(
-      --eds-selectable-spacing-stack,
-      var(--eds-spacing-vertical-sm)
-    );
+    /* Vertical padding - 10px to achieve 36px height with 16px icon */
+    padding-block: var(--eds-selectable-spacing-stack, 0.625rem);
     /* Auto width, not full width */
     width: auto;
     /* Border radius - uses future token with fallback */
@@ -65,53 +59,56 @@
     cursor: not-allowed;
   }
 
-  /* Checkbox input wrapper - contains the icon and hover background */
-  .eds-checkbox__input-wrapper {
+  /* Icon wrapper - contains the checkbox icons */
+  .eds-checkbox__icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    /* Icon is 16px, this wrapper just contains it */
     width: 16px;
     height: 16px;
     flex-shrink: 0;
+    /* Allow hover circle to overflow */
+    overflow: visible;
+    /* Prevent baseline alignment issues in table cells */
+    line-height: 0;
   }
 
-  /* Hover circle background - centered on the icon */
-  .eds-checkbox__input-wrapper::before {
+  /* Circle hover background for standalone checkbox (no label) */
+  .eds-checkbox--standalone::before {
     content: '';
     position: absolute;
-    /* Hover background size from density tokens */
-    width: var(--_checkbox-hover-size);
-    height: var(--_checkbox-hover-size);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
     border-radius: var(--eds-spacing-border-radius-pill);
     background-color: transparent;
     transition: background-color 0.2s;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .eds-checkbox:hover .eds-checkbox__input-wrapper::before {
+    /* Standalone: circle hover on icon */
+    .eds-checkbox--standalone:hover::before {
       background-color: var(--_checkbox-hover-color);
     }
 
-    .eds-checkbox[data-disabled='true']:hover
-      .eds-checkbox__input-wrapper::before {
+    .eds-checkbox--standalone[data-disabled='true']:hover::before {
+      background-color: transparent;
+    }
+
+    /* With label: hover on entire component */
+    .eds-field.eds-checkbox:hover {
+      background-color: var(--_checkbox-hover-color);
+    }
+
+    .eds-field.eds-checkbox[data-disabled='true']:hover {
       background-color: transparent;
     }
   }
 
-  /* Native checkbox input - invisible but clickable */
+  /* Native checkbox input - positioned for clickability */
   .eds-checkbox__input {
     appearance: none;
     position: absolute;
-    width: 48px;
-    height: 48px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
     margin: 0;
     cursor: pointer;
     z-index: 1;
@@ -131,8 +128,14 @@
     position: absolute;
     inset: -2px;
     border: 1px solid var(--eds-color-border-focus);
-    border-radius: calc(var(--eds-spacing-border-radius-rounded) + 2px);
+    /* Hardcoded in Figma - 6px is slightly larger than hover bg (4px) so focus frame nests nicely around it */
+    border-radius: 6px;
     pointer-events: none;
+  }
+
+  /* Standalone focus frame should be circular */
+  .eds-checkbox--standalone:has(.eds-checkbox__input:focus-visible)::after {
+    border-radius: var(--eds-spacing-border-radius-pill);
   }
 
   /* SVG icon - 16px from Figma */
@@ -160,30 +163,36 @@
   }
 
   /* Checked state: show checked icon, hide others */
-  .eds-checkbox__input:checked ~ .eds-checkbox__icon--checked {
+  .eds-checkbox:has(.eds-checkbox__input:checked) .eds-checkbox__icon--checked {
     display: block;
   }
 
-  .eds-checkbox__input:checked ~ .eds-checkbox__icon--unchecked {
+  .eds-checkbox:has(.eds-checkbox__input:checked)
+    .eds-checkbox__icon--unchecked {
     display: none;
   }
 
   /* Indeterminate state: show indeterminate icon, hide others */
-  .eds-checkbox__input[data-indeterminate='true']
-    ~ .eds-checkbox__icon--indeterminate {
+  .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
+    .eds-checkbox__icon--indeterminate {
     display: block;
   }
 
-  .eds-checkbox__input[data-indeterminate='true']
-    ~ .eds-checkbox__icon--checked,
-  .eds-checkbox__input[data-indeterminate='true']
-    ~ .eds-checkbox__icon--unchecked {
+  .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
+    .eds-checkbox__icon--checked,
+  .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
+    .eds-checkbox__icon--unchecked {
     display: none;
   }
 
-  /* Label styling - handled by Field.Label, but ensure disabled color */
+  /* Label styling */
+  .eds-field.eds-checkbox .eds-field__label {
+    cursor: pointer;
+  }
+
   .eds-field.eds-checkbox[data-disabled='true'] .eds-field__label {
     color: var(--eds-color-border-neutral-medium);
+    cursor: not-allowed;
   }
 
   /* Helper message: neutral by default (not accent like checkbox icon).
