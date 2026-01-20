@@ -158,8 +158,8 @@
   }
 
   .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-    /* Disabled uses same color with reduced opacity per Figma spec */
-    opacity: 0.4;
+    /* Disabled uses neutral grey color per Figma spec */
+    fill: var(--eds-color-border-neutral-medium);
   }
 
   /* Icon visibility logic - default state: show unchecked, hide others */
