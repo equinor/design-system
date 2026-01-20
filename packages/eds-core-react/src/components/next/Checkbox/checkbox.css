@@ -13,10 +13,10 @@
     --_checkbox-height: var(--eds-sizing-selectable-md);
     /* Hover size for standalone (circle) - 44px spacious, 36px comfortable */
     --_checkbox-hover-size: var(--eds-sizing-selectable-lg);
-    /* Icon color - follows data-color-appearance (defaults to accent in component) */
-    --_checkbox-icon-color: var(--eds-color-text-subtle);
-    /* Hover color is always neutral - interaction feedback, not semantic */
-    --_checkbox-hover-color: var(--eds-color-bg-neutral-fill-muted-hover);
+    /* Icon color - accent teal from Figma color usage spec */
+    --_checkbox-icon-color: var(--eds-color-bg-fill-emphasis-default);
+    /* Hover background - muted accent from Figma color usage spec */
+    --_checkbox-hover-color: var(--eds-color-bg-fill-muted-default);
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
@@ -157,7 +157,8 @@
   }
 
   .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-    fill: var(--eds-color-border-neutral-medium);
+    /* Disabled uses same color with reduced opacity per Figma spec */
+    opacity: 0.4;
   }
 
   /* Icon visibility logic - default state: show unchecked, hide others */
