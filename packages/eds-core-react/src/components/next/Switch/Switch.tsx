@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from 'react'
+import { forwardRef, useRef, useState, useCallback } from 'react'
 import { Field, useFieldIds } from '../Field'
 import type { SwitchProps } from './Switch.types'
 import './switch.css'
@@ -14,6 +14,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     helperMessage,
     className,
     id: providedId,
+    checked: controlledChecked,
+    defaultChecked,
+    onChange,
     ...rest
   },
   ref,
@@ -21,6 +24,26 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   const internalRef = useRef<HTMLInputElement>(null)
   const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
   const ids = useFieldIds(providedId)
+
+  // Track checked state for dynamic color appearance
+  const isControlled = controlledChecked !== undefined
+  const [internalChecked, setInternalChecked] = useState(
+    defaultChecked ?? false,
+  )
+  const isChecked = isControlled ? controlledChecked : internalChecked
+
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) {
+        setInternalChecked(event.target.checked)
+      }
+      onChange?.(event)
+    },
+    [isControlled, onChange],
+  )
+
+  // Dynamic color appearance based on checked state
+  const colorAppearance = isChecked ? 'accent' : 'neutral'
 
   // When no visible label is provided, use aria-label for accessibility
   const switchInput = (
@@ -37,6 +60,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         className="eds-switch__input"
         disabled={disabled}
         ref={inputRef}
+        checked={isControlled ? controlledChecked : undefined}
+        defaultChecked={!isControlled ? defaultChecked : undefined}
+        onChange={handleChange}
         {...rest}
       />
       <span className="eds-switch__track">
@@ -52,8 +78,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         position="start"
         disabled={disabled}
         className={classNames('eds-switch', className)}
+        data-color-appearance="accent"
       >
-        <span className="eds-switch__control" data-color-appearance="accent">
+        <span
+          className="eds-switch__control"
+          data-color-appearance={colorAppearance}
+        >
           {switchInput}
         </span>
         <Field.Label htmlFor={ids.inputId} indicator={indicator}>
@@ -73,8 +103,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     <span
       className={classNames('eds-switch', 'eds-switch--standalone', className)}
       data-disabled={disabled || undefined}
+      data-color-appearance="accent"
     >
-      <span className="eds-switch__control" data-color-appearance="accent">
+      <span
+        className="eds-switch__control"
+        data-color-appearance={colorAppearance}
+      >
         {switchInput}
       </span>
     </span>

@@ -8,7 +8,10 @@
 @layer eds-components {
   .eds-switch {
     --_switch-height: var(--eds-sizing-selectable-md);
-    --_switch-icon-size: var(--eds-typography-icon-size, var(--eds-sizing-icon-md));
+    --_switch-icon-size: var(
+      --eds-typography-icon-size,
+      var(--eds-sizing-icon-md)
+    );
     --_switch-track-width: calc(var(--_switch-icon-size) * 0.92);
     --_switch-track-height: calc(var(--_switch-icon-size) * 0.33);
     --_switch-handle-size: calc(var(--_switch-icon-size) * 0.5);
@@ -32,8 +35,8 @@
 
   /* With Field (has label) - extends Field with Switch-specific hover styling */
   .eds-field.eds-switch {
-    padding-inline: var(--eds-selectable-space-horizontal);
-    width: auto;
+    padding-inline-end: var(--eds-selectable-space-horizontal);
+    width: fit-content;
     border-radius: var(--eds-spacing-border-radius-rounded);
     height: var(--_switch-height);
   }
@@ -53,9 +56,8 @@
     height: var(--_switch-height);
   }
 
-  /* Hover background */
-  .eds-switch--standalone .eds-switch__control::before,
-  .eds-field.eds-switch .eds-switch__control::before {
+  /* Hover background - on wrapper level to avoid inheriting control's data-color-appearance */
+  .eds-switch--standalone::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -65,20 +67,16 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .eds-switch--standalone:hover .eds-switch__control::before {
+    .eds-switch--standalone:hover::before {
       background-color: var(--eds-color-bg-fill-muted-hover);
     }
 
-    .eds-switch--standalone[data-disabled='true']:hover .eds-switch__control::before {
+    .eds-switch--standalone[data-disabled='true']:hover::before {
       background-color: transparent;
     }
 
     .eds-field.eds-switch:hover {
-      background-color: var(--eds-color-bg-accent-fill-muted-hover);
-    }
-
-    .eds-field.eds-switch:hover .eds-switch__control::before {
-      background-color: transparent;
+      background-color: var(--eds-color-bg-fill-muted-hover);
     }
 
     .eds-field.eds-switch[data-disabled='true']:hover {
@@ -114,7 +112,7 @@
     pointer-events: none;
   }
 
-  /* Track - colors from data-color-appearance on control */
+  /* Track - color controlled by data-color-appearance on control element */
   .eds-switch__track {
     position: relative;
     display: inline-block;
@@ -126,7 +124,7 @@
     pointer-events: none;
   }
 
-  /* Handle */
+  /* Handle - color controlled by data-color-appearance on control element */
   .eds-switch__handle {
     position: absolute;
     top: 50%;
@@ -137,29 +135,28 @@
     background-color: var(--eds-color-bg-fill-emphasis-default);
     border-radius: var(--eds-spacing-border-radius-pill);
     box-shadow: var(--eds-elevation-raised);
-    transition: left 150ms, background-color 150ms;
+    transition:
+      left 150ms,
+      background-color 150ms;
     pointer-events: none;
   }
 
-  /* Checked */
-  .eds-switch:has(.eds-switch__input:checked) .eds-switch__track {
-    background-color: var(--eds-color-bg-fill-muted-default);
-  }
-
+  /* Checked state - just moves handle position (color comes from data-color-appearance) */
   .eds-switch:has(.eds-switch__input:checked) .eds-switch__handle {
     left: calc(100% - var(--_switch-handle-size));
-    background-color: var(--eds-color-bg-fill-emphasis-default);
   }
 
   /* Disabled - overrides checked state colors */
   .eds-switch[data-disabled='true'] .eds-switch__track,
-  .eds-switch[data-disabled='true']:has(.eds-switch__input:checked) .eds-switch__track {
+  .eds-switch[data-disabled='true']:has(.eds-switch__input:checked)
+    .eds-switch__track {
     background-color: var(--_switch-disabled-color);
     opacity: 0.5;
   }
 
   .eds-switch[data-disabled='true'] .eds-switch__handle,
-  .eds-switch[data-disabled='true']:has(.eds-switch__input:checked) .eds-switch__handle {
+  .eds-switch[data-disabled='true']:has(.eds-switch__input:checked)
+    .eds-switch__handle {
     background-color: var(--_switch-disabled-color);
   }
 
