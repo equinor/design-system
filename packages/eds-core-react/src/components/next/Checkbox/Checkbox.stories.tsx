@@ -1,10 +1,11 @@
-import { useState, ChangeEvent, ReactNode } from 'react'
+import { useState } from 'react'
+import type { ChangeEvent, ReactNode } from 'react'
 import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
+import { Button, Table } from '../../..'
 import { data } from '../../../stories/data'
 import { Stack } from './../../../../.storybook/components'
-import { Button, Table } from '../../..'
 import { Checkbox } from './Checkbox'
 import type { CheckboxProps } from './Checkbox.types'
 
@@ -170,14 +171,12 @@ export const Spacious: StoryFn<CheckboxProps> = () => (
     <AllVariants />
   </Wrapper>
 )
-Spacious.storyName = 'Spacious'
 
 export const Comfortable: StoryFn<CheckboxProps> = () => (
   <Wrapper data-density="comfortable">
     <AllVariants />
   </Wrapper>
 )
-Comfortable.storyName = 'Comfortable'
 
 export const ColorSchemes: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '32px' }}>
@@ -237,7 +236,7 @@ export const WithoutVisibleLabel: StoryFn<CheckboxProps> = () => (
     </div>
   </div>
 )
-WithoutVisibleLabel.storyName = 'Without Visible Label'
+
 WithoutVisibleLabel.parameters = {
   docs: {
     description: {
@@ -352,4 +351,3 @@ export const WithReactHookForm: StoryFn<CheckboxProps> = () => {
     </form>
   )
 }
-WithReactHookForm.storyName = 'With React Hook Form'
