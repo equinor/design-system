@@ -1,8 +1,7 @@
 /* EDS 2.0 Next Components - CSS */
-
-/* Define layer order - eds-components has lowest priority for easy user overrides */
-@layer eds-components;
-
 @import '@equinor/eds-tokens/css/variables';
 @import './Field/field.css';
 @import './Checkbox/checkbox.css';
+
+/* Define layer order - eds-components has lowest priority for easy user overrides */
+@layer eds-components;

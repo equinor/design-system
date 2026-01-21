@@ -1,10 +1,10 @@
-import { useState, useRef, ChangeEvent } from 'react'
+import { useState, ChangeEvent, ReactNode } from 'react'
 import { action } from 'storybook/actions'
 import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { data } from '../../../stories/data'
 import { Stack } from './../../../../.storybook/components'
-import { Typography, Button, Table } from '../../..'
+import { Button, Table } from '../../..'
 import { Checkbox } from './Checkbox'
 import type { CheckboxProps } from './Checkbox.types'
 
@@ -15,7 +15,7 @@ const meta: Meta<typeof Checkbox> = {
     docs: {
       description: {
         component:
-          'New Checkbox component using vanilla CSS, EDS foundation tokens, and Field for layout. The component handles accessibility automatically via the Field component.',
+          'Checkbox component using vanilla CSS and EDS tokens. Uses Field internally for layout and accessibility.',
       },
       source: {
         excludeDecorators: true,
@@ -23,313 +23,236 @@ const meta: Meta<typeof Checkbox> = {
     },
   },
   decorators: [
-    (Story) => {
-      return (
-        <Stack>
-          <Story />
-        </Stack>
-      )
-    },
+    (Story) => (
+      <Stack>
+        <Story />
+      </Stack>
+    ),
   ],
 }
 
 export default meta
 
-const UnstyledList = ({ children, ...props }) => (
-  <ul
+const Wrapper = ({
+  children,
+  gap = 16,
+  ...rest
+}: {
+  children: ReactNode
+  gap?: number
+} & React.HTMLAttributes<HTMLDivElement>) => (
+  <div
     style={{
-      margin: 0,
-      padding: 0,
-      listStyleType: 'none',
       display: 'flex',
       flexDirection: 'column',
-      gap: '1rem',
+      gap: `${gap}px`,
+      alignItems: 'flex-start',
     }}
-    {...props}
+    {...rest}
   >
-    {children}
-  </ul>
-)
-
-const CheckboxWrapper = ({ children, ...props }) => (
-  <div style={{ display: 'flex' }} {...props}>
     {children}
   </div>
 )
 
-export const Introduction: StoryFn<CheckboxProps> = (args) => {
-  return <Checkbox id="intro-checkbox" label="Play with me" {...args} />
-}
-
-export const SingleCheckbox: StoryFn<CheckboxProps> = () => {
-  // Use this to set the input to indeterminate = true as this must be done via JavaScript
-  // (cannot use an HTML attribute for this)
-  const indeterminateRef = useRef<HTMLInputElement | null>(null)
-  // State for controlled example
-  const [checked, updateChecked] = useState(false)
-  return (
-    <UnstyledList>
-      <li>
-        <Checkbox label="Check me" />
-      </li>
-      <li>
-        <Checkbox label="You can't check me!" disabled />
-      </li>
-      <li>
-        <Checkbox label="I'm preselected" defaultChecked />
-      </li>
-      <li>
-        <Checkbox label="You can't uncheck me!" disabled defaultChecked />
-      </li>
-      <li>
-        <Checkbox
-          label="I'm in indeterminate state"
-          indeterminate
-          ref={indeterminateRef}
-        />
-      </li>
-      <li>
-        <Checkbox
-          label="I'm a controlled component"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            updateChecked(e.target.checked)
-          }}
-          checked={checked}
-        />
-      </li>
-    </UnstyledList>
-  )
-}
-SingleCheckbox.storyName = 'Single checkbox'
-
-export const GroupedCheckbox: StoryFn<CheckboxProps> = () => {
-  return (
-    <fieldset>
-      <legend>
-        We are in this together!
-        <span role="img" aria-label="raising hands emoji">
-          🙌
-        </span>
-      </legend>
-      <UnstyledList>
-        <li>
-          <Checkbox label="Check me first" name="multiple" value="first" />
-        </li>
-        <li>
-          <Checkbox label="Check me second" name="multiple" value="second" />
-        </li>
-        <li>
-          <Checkbox label="Check me third" name="multiple" value="third" />
-        </li>
-      </UnstyledList>
-    </fieldset>
-  )
-}
-GroupedCheckbox.storyName = 'Grouped checkboxes'
-
-type FormData = {
-  favourites: string[]
-  agree: string
-}
-
-export const WithFormsControl: StoryFn<CheckboxProps> = () => {
-  // Example with external forms library, react-hook-form
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>()
-  const [isSubmitted, updateIsSubmitted] = useState(false)
-  const [formData, updateFormData] = useState<FormData>(null)
-
-  const onSubmit = (data: FormData) => {
-    updateFormData(data)
-    updateIsSubmitted(true)
-    action('onSubmit')(data)
-  }
-
-  return (
-    <div>
-      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-        Real life example with an external{' '}
-        <a
-          href="https://react-hook-form.com/"
-          rel="noreferrer noopener"
-          target="blank"
-        >
-          form library
-        </a>
-      </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {isSubmitted ? (
-          <>
-            <span>Submitted data:</span>
-            <p>{JSON.stringify(formData)}</p>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                updateIsSubmitted(false)
-                updateFormData(null)
-              }}
-            >
-              Reset
-            </Button>
-          </>
-        ) : (
-          <div>
-            <fieldset
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-              }}
-            >
-              <legend>What&apos;s your favourites?</legend>
-              <CheckboxWrapper>
-                <Checkbox
-                  name="favourites"
-                  value="pineapple"
-                  label="Pineapple"
-                  {...register('favourites')}
-                />
-              </CheckboxWrapper>
-              <CheckboxWrapper>
-                <Checkbox
-                  name="favourites"
-                  value="strawberry"
-                  label="Strawberries"
-                  {...register('favourites')}
-                />
-              </CheckboxWrapper>
-              <CheckboxWrapper>
-                <Checkbox
-                  name="favourites"
-                  value="honeyMelon"
-                  label="Honey melon"
-                  {...register('favourites')}
-                />
-              </CheckboxWrapper>
-              <CheckboxWrapper>
-                <Checkbox
-                  name="favourites"
-                  value="apples"
-                  label="Apples"
-                  {...register('favourites')}
-                />
-              </CheckboxWrapper>
-            </fieldset>
-            <div style={{ marginTop: '1rem' }}>
-              <Checkbox
-                name="agree"
-                label="I understand that these preferences will not be saved*"
-                id="agree"
-                aria-invalid={errors.agree ? 'true' : 'false'}
-                aria-describedby="error-name-required"
-                aria-required
-                {...register('agree', { required: true })}
-              />
-            </div>
-            <div style={{ padding: '1rem' }}>
-              <Button type="submit">I&apos;m done</Button>
-            </div>
-          </div>
-        )}
-      </form>
-    </div>
-  )
-}
-WithFormsControl.storyName = 'Example with React Hook Form'
-
-export const AlternativeToLabel: StoryFn<CheckboxProps> = () => (
-  <Checkbox aria-label="This label is invisible, but read by screen-readers" />
+const AllVariants = () => (
+  <>
+    <Checkbox label="Unchecked" />
+    <Checkbox label="Checked" defaultChecked />
+    <Checkbox label="Indeterminate" indeterminate />
+    <Checkbox label="Disabled" disabled />
+    <Checkbox label="Disabled checked" disabled defaultChecked />
+  </>
 )
-AlternativeToLabel.storyName = 'Alternative to label'
+
+export const Introduction: StoryFn<CheckboxProps> = (args) => {
+  return <Checkbox label="Label" {...args} />
+}
+
+export const Spacious: StoryFn<CheckboxProps> = () => (
+  <Wrapper data-density="spacious">
+    <AllVariants />
+  </Wrapper>
+)
+Spacious.storyName = 'Spacious'
+
+export const Comfortable: StoryFn<CheckboxProps> = () => (
+  <Wrapper data-density="comfortable">
+    <AllVariants />
+  </Wrapper>
+)
+Comfortable.storyName = 'Comfortable'
+
+export const ColorSchemes: StoryFn<CheckboxProps> = () => (
+  <div style={{ display: 'flex', gap: '32px' }}>
+    <div
+      data-color-scheme="light"
+      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+    >
+      <Wrapper>
+        <h3 style={{ margin: 0 }}>Light Mode</h3>
+        <Checkbox label="Unchecked" />
+        <Checkbox label="Checked" defaultChecked />
+        <Checkbox label="Indeterminate" indeterminate />
+        <Checkbox label="Disabled" disabled />
+        <Checkbox label="Disabled checked" disabled defaultChecked />
+      </Wrapper>
+    </div>
+    <div
+      data-color-scheme="dark"
+      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+    >
+      <Wrapper>
+        <h3 style={{ margin: 0, color: 'var(--eds-color-text-strong)' }}>
+          Dark Mode
+        </h3>
+        <Checkbox label="Unchecked" />
+        <Checkbox label="Checked" defaultChecked />
+        <Checkbox label="Indeterminate" indeterminate />
+        <Checkbox label="Disabled" disabled />
+        <Checkbox label="Disabled checked" disabled defaultChecked />
+      </Wrapper>
+    </div>
+  </div>
+)
+ColorSchemes.storyName = 'Light & Dark Mode'
+
+export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
+  <fieldset>
+    <legend>Select your options</legend>
+    <Wrapper gap={8}>
+      <Checkbox label="Option 1" name="group" value="1" />
+      <Checkbox label="Option 2" name="group" value="2" />
+      <Checkbox label="Option 3" name="group" value="3" />
+    </Wrapper>
+  </fieldset>
+)
+GroupedCheckbox.storyName = 'Grouped'
+
+export const WithoutVisibleLabel: StoryFn<CheckboxProps> = () => (
+  <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
+    <div data-density="spacious">
+      <p style={{ margin: '0 0 8px' }}>Spacious</p>
+      <Checkbox aria-label="Spacious checkbox" />
+    </div>
+    <div data-density="comfortable">
+      <p style={{ margin: '0 0 8px' }}>Comfortable</p>
+      <Checkbox aria-label="Comfortable checkbox" />
+    </div>
+  </div>
+)
+WithoutVisibleLabel.storyName = 'Without Visible Label'
+WithoutVisibleLabel.parameters = {
+  docs: {
+    description: {
+      story:
+        'When no visible label is needed, use `aria-label` to provide an accessible name for screen readers. This is common in tables or compact UIs.',
+    },
+  },
+}
+
+export const Controlled: StoryFn<CheckboxProps> = () => {
+  const [checked, setChecked] = useState(false)
+  return (
+    <Checkbox
+      label={checked ? 'Checked' : 'Unchecked'}
+      checked={checked}
+      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+        setChecked(e.target.checked)
+      }
+    />
+  )
+}
 
 export const TableCheckbox: StoryFn<CheckboxProps> = () => (
   <Table>
     <Table.Head>
       <Table.Row>
         <Table.Cell>Selected</Table.Cell>
+        <Table.Cell>Description</Table.Cell>
       </Table.Row>
     </Table.Head>
     <Table.Body>
-      {data.map((data) => (
-        <Table.Row key={data.number}>
+      {data.slice(0, 4).map((row) => (
+        <Table.Row key={row.number}>
           <Table.Cell>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Checkbox aria-label={`Select ${data.description}`} />
+              <Checkbox aria-label={`Select ${row.description}`} />
             </div>
           </Table.Cell>
+          <Table.Cell>{row.description}</Table.Cell>
         </Table.Row>
       ))}
     </Table.Body>
   </Table>
 )
-TableCheckbox.storyName = 'Table checkbox'
-TableCheckbox.parameters = {
-  docs: {
-    description: {
-      story:
-        'Checkbox without label for use in tables. Wrap in a flex container with `justify-content: center` to center the checkbox in the cell.',
-    },
-  },
+TableCheckbox.storyName = 'In Table'
+
+type FormData = {
+  favourites: string[]
+  agree: string
 }
 
-export const DarkMode: StoryFn<CheckboxProps> = () => {
-  return (
-    <div
-      data-color-scheme="dark"
-      style={{ padding: '2rem', background: '#0b0b0b' }}
-    >
-      <UnstyledList>
-        <li>
-          <Checkbox label="Check me in dark mode" />
-        </li>
-        <li>
-          <Checkbox label="I'm preselected" defaultChecked />
-        </li>
-        <li>
-          <Checkbox label="I'm disabled" disabled />
-        </li>
-        <li>
-          <Checkbox label="I'm disabled and checked" disabled defaultChecked />
-        </li>
-        <li>
-          <Checkbox label="I'm indeterminate" indeterminate />
-        </li>
-      </UnstyledList>
-    </div>
-  )
-}
-DarkMode.storyName = 'Dark mode'
+export const WithReactHookForm: StoryFn<CheckboxProps> = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [formData, setFormData] = useState<FormData | null>(null)
 
-export const Compact: StoryFn<CheckboxProps> = () => {
+  const onSubmit = (data: FormData) => {
+    setFormData(data)
+    setIsSubmitted(true)
+    action('onSubmit')(data)
+  }
+
+  if (isSubmitted) {
+    return (
+      <div>
+        <p>Submitted: {JSON.stringify(formData)}</p>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setIsSubmitted(false)
+            setFormData(null)
+          }}
+        >
+          Reset
+        </Button>
+      </div>
+    )
+  }
+
   return (
-    <div data-density="comfortable">
-      <UnstyledList>
-        <li>
-          <Checkbox label="Comfortable density (24px)" />
-        </li>
-        <li>
-          <Checkbox label="Preselected" defaultChecked />
-        </li>
-        <li>
-          <Checkbox label="Disabled" disabled />
-        </li>
-        <li>
-          <Checkbox label="Indeterminate" indeterminate />
-        </li>
-      </UnstyledList>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <fieldset>
+        <legend>Pick your favourites</legend>
+        <Wrapper gap={8}>
+          <Checkbox
+            label="Pineapple"
+            value="pineapple"
+            {...register('favourites')}
+          />
+          <Checkbox
+            label="Strawberry"
+            value="strawberry"
+            {...register('favourites')}
+          />
+          <Checkbox label="Melon" value="melon" {...register('favourites')} />
+        </Wrapper>
+      </fieldset>
+      <div style={{ marginTop: '16px' }}>
+        <Checkbox
+          label="I agree to the terms"
+          aria-invalid={errors.agree ? 'true' : 'false'}
+          {...register('agree', { required: true })}
+        />
+      </div>
+      <div style={{ marginTop: '16px' }}>
+        <Button type="submit">Submit</Button>
+      </div>
+    </form>
   )
 }
-Compact.storyName = 'Compact (Comfortable density)'
-Compact.parameters = {
-  docs: {
-    description: {
-      story:
-        'Use `data-density="comfortable"` on a parent element to render checkboxes in a more compact size (24px height instead of 36px).',
-    },
-  },
-}
+WithReactHookForm.storyName = 'With React Hook Form'

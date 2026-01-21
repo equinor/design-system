@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 0.375rem;
+    padding: 0.375rem; /* 6px for spacious: 24px icon + 12px = 36px */
   }
 
   .eds-field.eds-checkbox {
@@ -155,5 +155,11 @@
 
   .eds-field.eds-checkbox[data-color-appearance='accent'] {
     --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
+  }
+
+  /* Comfortable density for standalone checkbox */
+  /* Icon is 20px in comfortable (--eds-sizing-icon-lg: 1.25rem) */
+  [data-density='comfortable'] .eds-checkbox--standalone {
+    padding: 0.25rem; /* 4px: 20px icon + 8px = 28px */
   }
 }
