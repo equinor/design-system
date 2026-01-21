@@ -71,23 +71,6 @@ const meta: Meta<typeof Checkbox> = {
       },
     },
 
-    // Field props
-    indicator: {
-      control: 'text',
-      description:
-        'Indicator text shown after the label, e.g. "(Required)" or "(Optional)"',
-      table: {
-        category: 'Field',
-      },
-    },
-    helperMessage: {
-      control: 'text',
-      description: 'Helper message shown below the checkbox',
-      table: {
-        category: 'Field',
-      },
-    },
-
     // Styling
     className: {
       control: 'text',
