@@ -145,7 +145,8 @@
 
   /* Adornment text (prefix/suffix) - always neutral via data-color-appearance */
   .eds-adornment__text {
-    display: inline; /* Override display: block from [data-font-family] */
+    display: flex;
+    align-items: center;
     color: var(--eds-color-text-subtle);
   }
 

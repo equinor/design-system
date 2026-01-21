@@ -32,8 +32,12 @@ Text input and textarea component for forms and user input. Intended to be used 
 ```tsx
 import { Input } from '@equinor/eds-core-react/next'
 
-<Input placeholder="Enter text" />
+<Input placeholder="Enter text" aria-label="Description of input" />
 ```
+
+> **⚠️ Accessibility Note:** When using Input without a visible label (e.g., in search fields or toolbars), you **must** provide an `aria-label` for accessibility. For form fields with visible labels, use the **TextField** component instead, which handles accessibility automatically.
+
+&nbsp;
 
 ## Examples
 

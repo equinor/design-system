@@ -5,10 +5,7 @@ import { Icon } from '../Icon'
 import type { InputProps } from './Input.types'
 
 export const Input: OverridableComponent<InputProps, HTMLInputElement> =
-  forwardRef<
-    HTMLInputElement,
-    InputProps & InputHTMLAttributes<HTMLInputElement>
-  >(function Input(
+  forwardRef<HTMLInputElement, InputProps>(function Input(
     {
       invalid = false,
       disabled,
@@ -82,7 +79,6 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={type}
           disabled={disabled}
           readOnly={readOnly}
-          aria-invalid={invalid || undefined}
           className="eds-input"
           data-color-appearance="neutral"
           data-font-size="md"
@@ -90,6 +86,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           {...(inputProps as InputHTMLAttributes<
             HTMLInputElement | HTMLTextAreaElement
           >)}
+          aria-invalid={invalid || undefined}
         />
         {hasEndAdornment && (
           <div className="eds-adornment" data-font-size="xs">

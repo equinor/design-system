@@ -1,4 +1,4 @@
-import { ReactNode, InputHTMLAttributes } from 'react'
+import { ReactNode } from 'react'
 import type { InputProps } from '../Input/Input.types'
 
 export type TextFieldProps = {
@@ -14,5 +14,4 @@ export type TextFieldProps = {
   helperMessage?: ReactNode
   /** Unique identifier for the field */
   id?: string
-} & InputProps &
-  InputHTMLAttributes<HTMLInputElement>
+} & InputProps
