@@ -1,0 +1,72 @@
+import { Links } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Switch.stories'
+
+<Meta of={ComponentStories} />
+
+# Switch
+
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+```tsx
+import { Switch } from '@equinor/eds-core-react/next'
+```
+
+Use switches to instantly toggle a single setting on or off, applying changes immediately.
+
+<Links
+  ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/switch/"
+  sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/next/Switch/Switch.tsx"
+  npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Primary />
+<Controls />
+
+## Usage
+
+```tsx
+import { Switch } from '@equinor/eds-core-react/next'
+
+<Switch label="Enable notifications" />
+```
+
+> **⚠️ Accessibility Note:** When using Switch without a visible label (e.g., in tables), you **must** provide an `aria-label` for accessibility.
+
+&nbsp;
+
+## Examples
+
+### States
+
+<Canvas of={ComponentStories.States} />
+
+### Alternative to label
+
+When a visual label is not desirable, use `aria-label` for accessibility compliance.
+
+<Canvas of={ComponentStories.AlternativeToLabel} />
+
+### With helper message
+
+<Canvas of={ComponentStories.WithHelperMessage} />
+
+### Table switch
+
+Example of usage with `Switch` and `aria-label` in tables for accessibility.
+
+<Canvas of={ComponentStories.TableSwitch} />
+
+### Dark mode
+
+<Canvas of={ComponentStories.DarkMode} />
+
+### Density
+
+Spacious is the default density. Use `data-density="comfortable"` on a parent element to render switches in a more compact size.
+
+<Canvas of={ComponentStories.Density} />
