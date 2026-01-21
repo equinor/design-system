@@ -245,6 +245,9 @@ npm install @equinor/eds-core-react@beta
 ```jsx
 // Import from the /next entry point
 import { ComponentName } from '@equinor/eds-core-react/next'
+
+// Import CSS separately (required for SSR compatibility)
+import '@equinor/eds-core-react/next/index.css'
 ```
 
 #### Important Notes
