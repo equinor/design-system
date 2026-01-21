@@ -1,10 +1,22 @@
 import { forwardRef } from 'react'
 import { TypographyNext } from '../../Typography'
-import { ButtonProps } from './Button.types'
+import type { ButtonProps } from './Button.types'
 import './button.css'
 
+const sizeToSelectableSpace = {
+  small: 'sm',
+  default: 'md',
+  large: 'lg',
+} as const
+
+const sizeToTypographySize = {
+  small: 'md',
+  default: 'lg',
+  large: 'xl',
+} as const
+
 /**
- * Button component for user interactions.
+ * Button component for triggering actions.
  *
  * Supports three variants (primary, outline, ghost), three sizes (small, default, large),
  * and three color appearances (accent, neutral, danger) through `data-color-appearance`.
@@ -13,17 +25,22 @@ import './button.css'
  * ```tsx
  * import { Button } from '@equinor/eds-core-react/next'
  *
- * <Button variant="primary" colorAppearance="accent">
- *   Save
+ * // Primary button
+ * <Button variant="primary">Submit</Button>
+ *
+ * // Outline button with icon
+ * <Button variant="outline" iconStart={<Icon data={add} />}>
+ *   Add item
  * </Button>
  *
- * <Button variant="outline" size="large" colorAppearance="danger">
+ * // Danger ghost button
+ * <Button variant="ghost" colorAppearance="danger">
  *   Delete
  * </Button>
  * ```
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
+  function Button(
     {
       variant = 'primary',
       size = 'default',
@@ -37,31 +54,42 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...rest
     },
     ref,
-  ) => {
-    const classNames = ['eds-button', `eds-button__${variant}`, className]
-      .filter(Boolean)
-      .join(' ')
-
-    const buttonSize = size === 'small' ? 'sm' : size === 'large' ? 'lg' : 'md'
+  ) {
+    const classes = ['eds-button', className].filter(Boolean).join(' ')
 
     return (
       <button
         ref={ref}
         type={type}
-        className={classNames}
-        data-color-appearance={colorAppearance}
-        data-space-proportions="squished"
-        data-selectable-space={buttonSize}
+        className={classes}
         disabled={disabled}
+        data-variant={variant}
+        data-color-appearance={disabled ? 'neutral' : colorAppearance}
+        data-selectable-space={sizeToSelectableSpace[size]}
+        data-space-proportions="squished"
+        data-font-size={sizeToTypographySize[size]}
         {...rest}
       >
-        {iconStart}
+        {iconStart && (
+          <span className="eds-button__icon" aria-hidden="true">
+            {iconStart}
+          </span>
+        )}
         {children && (
-          <TypographyNext as="span" family="ui" size="md" baseline="center">
+          <TypographyNext
+            as="span"
+            family="ui"
+            size={sizeToTypographySize[size]}
+            baseline="center"
+          >
             {children}
           </TypographyNext>
         )}
-        {iconEnd}
+        {iconEnd && (
+          <span className="eds-button__icon" aria-hidden="true">
+            {iconEnd}
+          </span>
+        )}
       </button>
     )
   },

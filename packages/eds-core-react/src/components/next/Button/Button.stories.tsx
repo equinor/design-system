@@ -1,210 +1,255 @@
-import { StoryFn, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { add, chevron_right, delete_forever } from '@equinor/eds-icons'
 import { Button } from './Button'
-import { ButtonProps } from './Button.types'
+import { Icon } from '../Icon'
 
 const meta: Meta<typeof Button> = {
   title: 'EDS 2.0 (beta)/Button',
   component: Button,
-  tags: ['beta'],
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'outline', 'ghost'],
-    },
-    size: {
-      control: 'select',
-      options: ['small', 'default', 'large'],
-    },
-    colorAppearance: {
-      control: 'select',
-      options: ['accent', 'neutral', 'danger'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-  },
   parameters: {
     docs: {
       description: {
         component: `
-**⚠️ Beta Component** - This component is under active development and may have breaking changes.
-
-\`\`\`bash
-npm install @equinor/eds-core-react@beta
-\`\`\`
+Button component for triggering actions.
+## Usage
 
 \`\`\`tsx
 import { Button } from '@equinor/eds-core-react/next'
-\`\`\`
+import { Icon } from '@equinor/eds-core-react/next'
+import { add } from '@equinor/eds-icons'
 
-Button component for user interactions with support for multiple variants, sizes, and color appearances.
+<Button variant="primary" colorAppearance="accent">
+  Submit
+</Button>
+
+<Button variant="outline" iconStart={<Icon data={add} />}>
+  Add item
+</Button>
+\`\`\`
         `,
+      },
+    },
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'outline', 'ghost'],
+      description: 'Visual style variant',
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'default', 'large'],
+      description: 'Button size',
+    },
+    colorAppearance: {
+      control: 'select',
+      options: ['accent', 'neutral', 'danger'],
+      description: 'Color theme',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disabled state',
+    },
+    iconStart: {
+      control: false,
+      description: 'Icon before label',
+    },
+    iconEnd: {
+      control: false,
+      description: 'Icon after label',
+    },
+    children: {
+      control: 'text',
+      description: 'Button label',
+    },
+  },
+  args: {
+    children: 'Button',
+    variant: 'primary',
+    size: 'default',
+    colorAppearance: 'accent',
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof Button>
+
+// ===== Basic Examples =====
+
+export const Default: Story = {}
+
+// ===== Sizes =====
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <Button size="small">Small</Button>
+      <Button size="default">Default</Button>
+      <Button size="large">Large</Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Three sizes are available: `small` (28px), `default` (36px), and `large` (44px).',
       },
     },
   },
 }
 
-export default meta
+// ===== Color Appearances =====
 
-export const Introduction: StoryFn<ButtonProps> = (args) => {
-  return <Button {...args} />
-}
-Introduction.args = {
-  children: 'Label',
-  variant: 'primary',
-  size: 'default',
-  colorAppearance: 'accent',
-}
-
-export const ColorAppearances: StoryFn<ButtonProps> = () => {
-  return (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Button colorAppearance="accent">Accent</Button>
-      <Button colorAppearance="neutral">Neutral</Button>
-      <Button colorAppearance="danger">Danger</Button>
-    </div>
-  )
-}
-ColorAppearances.parameters = {
-  docs: {
-    description: {
-      story:
-        'The `colorAppearance` prop controls the color scheme of the button using `data-color-appearance`.',
-    },
-  },
-}
-
-export const Variants: StoryFn<ButtonProps> = () => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <span style={{ width: '80px' }}>Primary</span>
-        <Button variant="primary" colorAppearance="accent">
-          Label
-        </Button>
-        <Button variant="primary" colorAppearance="neutral">
-          Label
-        </Button>
-        <Button variant="primary" colorAppearance="danger">
-          Label
-        </Button>
+export const ColorAppearances: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px' }}>
+        <Button colorAppearance="accent">Accent</Button>
+        <Button colorAppearance="neutral">Neutral</Button>
+        <Button colorAppearance="danger">Danger</Button>
       </div>
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <span style={{ width: '80px' }}>Outline</span>
+      <div style={{ display: 'flex', gap: '16px' }}>
         <Button variant="outline" colorAppearance="accent">
-          Label
+          Accent
         </Button>
         <Button variant="outline" colorAppearance="neutral">
-          Label
+          Neutral
         </Button>
         <Button variant="outline" colorAppearance="danger">
-          Label
+          Danger
         </Button>
       </div>
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <span style={{ width: '80px' }}>Ghost</span>
+      <div style={{ display: 'flex', gap: '16px' }}>
         <Button variant="ghost" colorAppearance="accent">
-          Label
+          Accent
         </Button>
         <Button variant="ghost" colorAppearance="neutral">
-          Label
+          Neutral
         </Button>
         <Button variant="ghost" colorAppearance="danger">
-          Label
+          Danger
         </Button>
       </div>
     </div>
-  )
-}
-Variants.parameters = {
-  docs: {
-    description: {
-      story:
-        'Three variants are available: `primary` (filled), `outline` (bordered), and `ghost` (minimal).',
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The `colorAppearance` prop controls the color scheme using `data-color-appearance`.',
+      },
     },
   },
 }
 
-export const Sizes: StoryFn<ButtonProps> = () => {
-  return (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Button size="large">Large</Button>
-      <Button size="default">Default</Button>
-      <Button size="small">Small</Button>
-    </div>
-  )
-}
-Sizes.parameters = {
-  docs: {
-    description: {
-      story: 'Three sizes are available: `large`, `default`, and `small`.',
+// ===== With Icons =====
+
+export const WithIconStart: Story = {
+  args: {
+    iconStart: <Icon data={add} />,
+    children: 'Add Item',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `iconStart` to add an icon before the label.',
+      },
     },
   },
 }
 
-export const States: StoryFn<ButtonProps> = () => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <span style={{ width: '80px' }}>Primary</span>
-        <Button variant="primary">Default</Button>
-        <Button variant="primary" disabled>
-          Disabled
-        </Button>
-      </div>
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <span style={{ width: '80px' }}>Outline</span>
-        <Button variant="outline">Default</Button>
-        <Button variant="outline" disabled>
-          Disabled
-        </Button>
-      </div>
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <span style={{ width: '80px' }}>Ghost</span>
-        <Button variant="ghost">Default</Button>
-        <Button variant="ghost" disabled>
-          Disabled
-        </Button>
-      </div>
-    </div>
-  )
-}
-States.parameters = {
-  docs: {
-    description: {
-      story:
-        'Buttons can be disabled using the `disabled` prop. Hover and active states are handled via CSS.',
+export const WithIconEnd: Story = {
+  args: {
+    iconEnd: <Icon data={chevron_right} />,
+    children: 'Next',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `iconEnd` to add an icon after the label.',
+      },
     },
   },
 }
 
-export const AllVariantsAndStates: StoryFn<ButtonProps> = () => {
-  const variants = ['primary', 'outline', 'ghost'] as const
-  const colorAppearances = ['accent', 'neutral', 'danger'] as const
+// ===== States =====
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {colorAppearances.map((appearance) => (
-        <div key={appearance}>
-          <h3 style={{ marginBottom: '1rem', textTransform: 'capitalize' }}>
-            {appearance}
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: 'Disabled',
+  },
+}
+
+export const DisabledVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px' }}>
+      <Button variant="primary" disabled>
+        Primary
+      </Button>
+      <Button variant="outline" disabled>
+        Outline
+      </Button>
+      <Button variant="ghost" disabled>
+        Ghost
+      </Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'All variants support the disabled state.',
+      },
+    },
+  },
+}
+
+// ===== All Variants Matrix =====
+
+export const AllVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {(['primary', 'outline', 'ghost'] as const).map((variant) => (
+        <div key={variant}>
+          <h3 style={{ marginBottom: '12px', textTransform: 'capitalize' }}>
+            {variant}
           </h3>
           <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+            style={{
+              display: 'flex',
+              gap: '16px',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+            }}
           >
-            {variants.map((variant) => (
+            {(['accent', 'neutral', 'danger'] as const).map((color) => (
               <div
-                key={variant}
-                style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}
+                key={color}
+                style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
               >
-                <span style={{ width: '80px', textTransform: 'capitalize' }}>
-                  {variant}
-                </span>
-                <Button variant={variant} colorAppearance={appearance}>
+                <Button
+                  variant={variant}
+                  colorAppearance={color}
+                  size="small"
+                  iconStart={<Icon data={add} />}
+                >
+                  Small
+                </Button>
+                <Button
+                  variant={variant}
+                  colorAppearance={color}
+                  size="default"
+                  iconStart={<Icon data={add} />}
+                >
                   Default
                 </Button>
-                <Button variant={variant} colorAppearance={appearance} disabled>
-                  Disabled
+                <Button
+                  variant={variant}
+                  colorAppearance={color}
+                  size="large"
+                  iconStart={<Icon data={add} />}
+                >
+                  Large
                 </Button>
               </div>
             ))}
@@ -212,12 +257,58 @@ export const AllVariantsAndStates: StoryFn<ButtonProps> = () => {
         </div>
       ))}
     </div>
-  )
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Complete overview of all variants, sizes, and color appearances.',
+      },
+    },
+  },
 }
-AllVariantsAndStates.parameters = {
-  docs: {
-    description: {
-      story: 'Complete overview of all variants and color appearances.',
+
+// ===== Danger Action Example =====
+
+export const DangerAction: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px' }}>
+      <Button
+        variant="primary"
+        colorAppearance="danger"
+        iconStart={<Icon data={delete_forever} />}
+      >
+        Delete
+      </Button>
+      <Button variant="outline" colorAppearance="danger">
+        Cancel
+      </Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `colorAppearance="danger"` for destructive actions.',
+      },
+    },
+  },
+}
+
+// ===== Focus State Demo =====
+
+export const FocusState: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px' }}>
+      <Button variant="primary">Focus me</Button>
+      <Button variant="outline">Focus me</Button>
+      <Button variant="ghost">Focus me</Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tab to the button to see the focus ring styling.',
+      },
     },
   },
 }
