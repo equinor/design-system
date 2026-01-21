@@ -22,6 +22,7 @@
     padding-block: var(--eds-selectable-space-vertical);
     width: auto;
     border-radius: var(--eds-spacing-border-radius-rounded);
+    transition: background-color 150ms;
   }
 
   .eds-checkbox[data-disabled='true'] {
@@ -64,7 +65,6 @@
 
     .eds-field.eds-checkbox:hover {
       background-color: var(--_checkbox-hover-color);
-      transition: background-color 150ms;
     }
 
     .eds-field.eds-checkbox[data-disabled='true']:hover {
