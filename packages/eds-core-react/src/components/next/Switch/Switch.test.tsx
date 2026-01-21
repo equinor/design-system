@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import { useState } from 'react'
+import { useState, createRef } from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'
@@ -116,6 +115,24 @@ describe('Switch (next)', () => {
       render(<Switch label="Default checked" defaultChecked />)
       const switchEl = screen.getByLabelText('Default checked')
       expect(switchEl).toBeChecked()
+    })
+
+    it('can be toggled with Space key', async () => {
+      render(<Switch label="Keyboard toggle" />)
+      const switchEl = screen.getByLabelText('Keyboard toggle')
+
+      expect(switchEl).not.toBeChecked()
+      switchEl.focus()
+      await userEvent.keyboard(' ')
+      expect(switchEl).toBeChecked()
+    })
+
+    it('forwards ref to input element', () => {
+      const ref = createRef<HTMLInputElement>()
+      render(<Switch label="Ref test" ref={ref} />)
+
+      expect(ref.current).toBeInstanceOf(HTMLInputElement)
+      expect(ref.current?.tagName).toBe('INPUT')
     })
   })
 

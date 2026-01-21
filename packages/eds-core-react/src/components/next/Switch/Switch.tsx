@@ -1,7 +1,6 @@
-import { forwardRef, useRef, useState, useCallback } from 'react'
+import { forwardRef, useState, useCallback } from 'react'
 import { Field, useFieldIds } from '../Field'
 import type { SwitchProps } from './Switch.types'
-import './switch.css'
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
   classes.filter(Boolean).join(' ')
@@ -21,8 +20,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   },
   ref,
 ) {
-  const internalRef = useRef<HTMLInputElement>(null)
-  const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
   const ids = useFieldIds(providedId)
 
   // Track checked state for dynamic color appearance
@@ -42,12 +39,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     [isControlled, onChange],
   )
 
-  // Dynamic color appearance based on checked state (disabled always neutral)
-  const colorAppearance = disabled
-    ? 'neutral'
-    : isChecked
-      ? 'accent'
-      : 'neutral'
+  // Use accent appearance only when checked and enabled
+  const colorAppearance = !disabled && isChecked ? 'accent' : 'neutral'
 
   // When no visible label is provided, use aria-label for accessibility
   const switchInput = (
@@ -63,7 +56,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         })}
         className="eds-switch__input"
         disabled={disabled}
-        ref={inputRef}
+        ref={ref}
         checked={isControlled ? controlledChecked : undefined}
         defaultChecked={!isControlled ? defaultChecked : undefined}
         onChange={handleChange}
