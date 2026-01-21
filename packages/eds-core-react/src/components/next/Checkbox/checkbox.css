@@ -1,101 +1,59 @@
-/* Checkbox component - works with Field for layout
- *
- * Note on spacing tokens:
- * This component uses future Figma token names (e.g. --eds-generic-horizontal-gap,
- * --eds-selectable-spacing-inline) with fallbacks to existing tokens. Once these
- * tokens are added to eds-tokens, they will automatically take effect without
- * any code changes needed here.
- */
 @layer eds-components {
-  /* Variables for checkbox styling */
   .eds-checkbox {
-    /* Component height from density tokens - 36px spacious, 24px comfortable */
-    --_checkbox-height: var(--eds-sizing-selectable-md);
-    /* Hover size for standalone (circle) - matches component height */
-    --_checkbox-hover-size: var(--eds-sizing-selectable-md);
-    /* Icon color - accent teal from Figma color usage spec */
     --_checkbox-icon-color: var(--eds-color-bg-fill-emphasis-default);
-    /* Hover background - muted accent from Figma color usage spec */
     --_checkbox-hover-color: var(--eds-color-bg-fill-muted-default);
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
   }
 
-  /* Standalone checkbox (no label) - uses circle hover on icon */
   .eds-checkbox--standalone {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    /* Size matches hover circle so it's centered */
-    width: var(--_checkbox-hover-size);
-    height: var(--_checkbox-hover-size);
+    padding: 0.375rem;
   }
 
-  /* When used with Field (has label), apply Figma spacing and full-component hover */
   .eds-field.eds-checkbox {
-    /* Gap between checkbox icon and label - uses future token with fallback */
-    gap: var(--eds-generic-horizontal-gap, var(--eds-spacing-horizontal-md));
-    /* Horizontal padding - uses future token with fallback */
-    padding-inline: var(
-      --eds-selectable-spacing-inline,
-      var(--eds-spacing-horizontal-md)
-    );
-    /* Auto width, not full width */
+    /* Gap compensates for icon-wrapper negative margin (-4.8px) */
+    gap: 0.925rem;
+    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
     width: auto;
-    /* Border radius - uses future token with fallback */
-    border-radius: var(
-      --eds-generic-corner-radius,
-      var(--eds-spacing-border-radius-rounded)
-    );
-    /* Fixed height from density tokens - flexbox centers content vertically */
-    height: var(--_checkbox-height);
+    border-radius: var(--eds-spacing-border-radius-rounded);
   }
 
   .eds-checkbox[data-disabled='true'] {
     cursor: not-allowed;
   }
 
-  /* Icon wrapper - contains the checkbox icons
-   * Uses negative margin to reduce visual space of 24px icon.
-   * This matches Figma's approach with negative padding on icon container.
-   * See: https://github.com/equinor/design-system/issues/4325
-   */
   .eds-checkbox__icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
     flex-shrink: 0;
-    /* Allow hover circle to overflow */
     overflow: visible;
-    /* Prevent baseline alignment issues in table cells */
     line-height: 0;
   }
 
-  /* Only apply negative margin when used with label (Field) - reduces visual gap
-   * TODO: Replace hardcoded values with tokens when available
-   * See: https://github.com/equinor/design-system/issues/4325
-   * Figma values (lg): spacious -6px/-4.8px, comfortable -4px/-4px
-   */
+  /* Negative margin matches Figma icon container padding */
   .eds-field.eds-checkbox .eds-checkbox__icon-wrapper {
     margin-block: -6px;
     margin-inline: -4.8px;
   }
 
-  /* Circle hover background for standalone checkbox (no label) */
   .eds-checkbox--standalone::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: var(--eds-spacing-border-radius-pill);
     background-color: transparent;
-    transition: background-color 0.2s;
+    transition: background-color 150ms;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    /* Standalone: circle hover on icon */
     .eds-checkbox--standalone:hover::before {
       background-color: var(--_checkbox-hover-color);
     }
@@ -104,9 +62,9 @@
       background-color: transparent;
     }
 
-    /* With label: hover on entire component */
     .eds-field.eds-checkbox:hover {
       background-color: var(--_checkbox-hover-color);
+      transition: background-color 150ms;
     }
 
     .eds-field.eds-checkbox[data-disabled='true']:hover {
@@ -114,7 +72,6 @@
     }
   }
 
-  /* Native checkbox input - positioned for clickability */
   .eds-checkbox__input {
     appearance: none;
     position: absolute;
@@ -132,24 +89,19 @@
     outline: none;
   }
 
-  /* Focus Frame - around the entire component */
   .eds-checkbox:has(.eds-checkbox__input:focus-visible)::after {
     content: '';
     position: absolute;
     inset: -2px;
     border: 1px solid var(--eds-color-border-focus);
-    /* Hardcoded in Figma - 6px is slightly larger than hover bg (4px) so focus frame nests nicely around it */
     border-radius: 6px;
     pointer-events: none;
   }
 
-  /* Standalone focus frame should be circular */
   .eds-checkbox--standalone:has(.eds-checkbox__input:focus-visible)::after {
     border-radius: var(--eds-spacing-border-radius-pill);
   }
 
-  /* SVG icon - Icon component with size="lg" handles sizing via tokens
-   * (24px spacious, 20px comfortable) */
   .eds-checkbox__icon {
     position: relative;
     pointer-events: none;
@@ -158,11 +110,10 @@
   }
 
   .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-    /* Disabled uses neutral grey color per Figma spec */
     fill: var(--eds-color-border-neutral-medium);
   }
 
-  /* Icon visibility logic - default state: show unchecked, hide others */
+  /* Icon visibility */
   .eds-checkbox__icon--checked,
   .eds-checkbox__icon--indeterminate {
     display: none;
@@ -172,7 +123,6 @@
     display: block;
   }
 
-  /* Checked state: show checked icon, hide others */
   .eds-checkbox:has(.eds-checkbox__input:checked) .eds-checkbox__icon--checked {
     display: block;
   }
@@ -182,7 +132,6 @@
     display: none;
   }
 
-  /* Indeterminate state: show indeterminate icon, hide others */
   .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
     .eds-checkbox__icon--indeterminate {
     display: block;
@@ -195,7 +144,6 @@
     display: none;
   }
 
-  /* Label styling */
   .eds-field.eds-checkbox .eds-field__label {
     cursor: pointer;
   }
@@ -205,8 +153,6 @@
     cursor: not-allowed;
   }
 
-  /* Helper message: neutral by default (not accent like checkbox icon).
-     When data-color-appearance is explicitly set, it follows that color. */
   .eds-field.eds-checkbox[data-color-appearance='accent'] {
     --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
   }
