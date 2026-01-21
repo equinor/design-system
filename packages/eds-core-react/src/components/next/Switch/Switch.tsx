@@ -42,8 +42,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     [isControlled, onChange],
   )
 
-  // Dynamic color appearance based on checked state
-  const colorAppearance = isChecked ? 'accent' : 'neutral'
+  // Dynamic color appearance based on checked state (disabled always neutral)
+  const colorAppearance = disabled
+    ? 'neutral'
+    : isChecked
+      ? 'accent'
+      : 'neutral'
 
   // When no visible label is provided, use aria-label for accessibility
   const switchInput = (
@@ -78,7 +82,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         position="start"
         disabled={disabled}
         className={classNames('eds-switch', className)}
-        data-color-appearance="accent"
       >
         <span
           className="eds-switch__control"
@@ -103,7 +106,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     <span
       className={classNames('eds-switch', 'eds-switch--standalone', className)}
       data-disabled={disabled || undefined}
-      data-color-appearance="accent"
     >
       <span
         className="eds-switch__control"
