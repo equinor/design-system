@@ -63,7 +63,7 @@
   }
 
   .eds-button[data-variant='outline']:disabled {
-    border: 1px solid var(--eds-color-border-strong);
+    border: 1px solid var(--eds-color-border-medium);
     color: var(--eds-color-border-medium);
     cursor: not-allowed;
   }
