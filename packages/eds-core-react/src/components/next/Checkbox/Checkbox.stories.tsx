@@ -11,6 +11,11 @@ import type { CheckboxProps } from './Checkbox.types'
 const meta: Meta<typeof Checkbox> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Checkbox',
   component: Checkbox,
+  args: {
+    label: 'Label',
+    disabled: false,
+    indeterminate: false,
+  },
   parameters: {
     docs: {
       description: {
@@ -19,6 +24,98 @@ const meta: Meta<typeof Checkbox> = {
       },
       source: {
         excludeDecorators: true,
+      },
+    },
+  },
+  argTypes: {
+    // Core
+    label: {
+      control: 'text',
+      description: 'Label text displayed next to the checkbox',
+      table: {
+        category: 'Core',
+      },
+    },
+
+    // States
+    disabled: {
+      control: 'boolean',
+      description: 'Disables checkbox interaction',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    indeterminate: {
+      control: 'boolean',
+      description:
+        'Shows indeterminate state (partially checked). Useful for "select all" scenarios.',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    checked: {
+      control: 'boolean',
+      description: 'Controlled checked state',
+      table: {
+        category: 'States',
+      },
+    },
+    defaultChecked: {
+      control: 'boolean',
+      description: 'Initial checked state for uncontrolled usage',
+      table: {
+        category: 'States',
+      },
+    },
+
+    // Field props
+    indicator: {
+      control: 'text',
+      description:
+        'Indicator text shown after the label, e.g. "(Required)" or "(Optional)"',
+      table: {
+        category: 'Field',
+      },
+    },
+    helperMessage: {
+      control: 'text',
+      description: 'Helper message shown below the checkbox',
+      table: {
+        category: 'Field',
+      },
+    },
+
+    // Styling
+    className: {
+      control: 'text',
+      description: 'Additional CSS class names for the input element',
+      table: {
+        category: 'Styling',
+      },
+    },
+
+    // HTML attributes
+    id: {
+      control: 'text',
+      description: 'HTML id attribute',
+      table: {
+        category: 'HTML Attributes',
+      },
+    },
+    name: {
+      control: 'text',
+      description: 'HTML name attribute for form submission',
+      table: {
+        category: 'HTML Attributes',
+      },
+    },
+    value: {
+      control: 'text',
+      description: 'HTML value attribute for form submission',
+      table: {
+        category: 'HTML Attributes',
       },
     },
   },
@@ -65,7 +162,7 @@ const AllVariants = () => (
 )
 
 export const Introduction: StoryFn<CheckboxProps> = (args) => {
-  return <Checkbox label="Label" {...args} />
+  return <Checkbox {...args} />
 }
 
 export const Spacious: StoryFn<CheckboxProps> = () => (

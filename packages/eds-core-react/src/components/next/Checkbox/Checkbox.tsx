@@ -21,7 +21,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       indicator,
       helperMessage,
-      className,
       id: providedId,
       'data-color-appearance': colorAppearance,
       ...rest
@@ -82,7 +81,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         <Field
           position="start"
           disabled={disabled}
-          className={classNames('eds-checkbox', className)}
+          className="eds-checkbox"
           data-color-appearance={resolvedColorAppearance}
           data-selectable-space="md"
           data-space-proportions="squished"
@@ -102,11 +101,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className={classNames(
-          'eds-checkbox',
-          'eds-checkbox--standalone',
-          className,
-        )}
+        className={classNames('eds-checkbox', 'eds-checkbox--standalone')}
         data-color-appearance={resolvedColorAppearance}
         data-disabled={disabled || undefined}
       >

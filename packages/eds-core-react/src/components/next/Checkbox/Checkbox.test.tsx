@@ -55,9 +55,7 @@ describe('Checkbox.new', () => {
     )
     const checkbox = screen.getByLabelText('checkbox-test')
     expect(checkbox).toBeInTheDocument()
-    // eslint-disable-next-line testing-library/no-node-access
-    const label = checkbox.closest('.eds-checkbox')
-    expect(label).toHaveClass('custom-checkbox')
+    expect(checkbox).toHaveClass('custom-checkbox')
   })
 
   it('Has provided label', () => {
