@@ -14,6 +14,7 @@
       background-color 150ms ease-in-out,
       border-color 150ms ease-in-out,
       color 150ms ease-in-out;
+    box-sizing: border-box;
   }
 
   .eds-button:focus-visible {
@@ -48,6 +49,9 @@
     background-color: transparent;
     color: var(--eds-color-text-subtle);
     border: 1px solid var(--eds-color-border-strong);
+    /*Remove the added padding for outline variant*/
+    padding: calc(var(--eds-selectable-space-vertical) - 1px)
+      calc(var(--eds-selectable-space-horizontal) - 1px);
   }
 
   .eds-button[data-variant='outline']:hover:not(:disabled) {
@@ -59,7 +63,7 @@
   }
 
   .eds-button[data-variant='outline']:disabled {
-    border-color: var(--eds-color-border-medium);
+    border: 1px solid var(--eds-color-border-strong);
     color: var(--eds-color-border-medium);
     cursor: not-allowed;
   }
@@ -84,11 +88,34 @@
     cursor: not-allowed;
   }
 
-  /* ===== ICON WRAPPER ===== */
+  /* ===== ICON STYLING ===== */
 
-  .eds-button__icon {
-    display: inline-flex;
-    align-items: center;
+  .eds-button > .icon {
     flex-shrink: 0;
+  }
+
+  /* ===== ICON-ONLY BUTTON ===== */
+
+  .eds-button[data-icon-only] {
+    aspect-ratio: 1;
+    padding: var(--eds-generic-space-vertical)
+      var(--eds-generic-space-horizontal);
+
+    /* TODO: Remove this when we revisit <Icon/> sizing*/
+    svg {
+      margin-block: 0 !important;
+      margin-inline: 0 !important;
+    }
+  }
+  /*Remove the added padding for outline variant on icon-only buttons */
+  .eds-button[data-icon-only][data-variant='outline'] {
+    padding: calc(var(--eds-generic-space-vertical) - 1px)
+      calc(var(--eds-generic-space-horizontal) - 1px);
+  }
+
+  /* ===== RADIUS VARIANTS ===== */
+
+  .eds-button[data-radius='rounded'] {
+    border-radius: 1000px;
   }
 }

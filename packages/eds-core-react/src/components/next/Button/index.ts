@@ -4,4 +4,5 @@ export type {
   ButtonVariant,
   ButtonSize,
   ButtonColorAppearance,
+  ButtonRadius,
 } from './Button.types'

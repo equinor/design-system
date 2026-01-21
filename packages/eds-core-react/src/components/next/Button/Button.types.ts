@@ -24,6 +24,16 @@ export type ButtonSize = 'small' | 'default' | 'large'
  */
 export type ButtonColorAppearance = 'accent' | 'neutral' | 'danger'
 
+/**
+ * Border radius options for icon-only buttons
+ * - `default`: Square shape (4px radius)
+ * - `rounded`: Circular shape (1000px radius)
+ *
+ * Note: This prop only applies when `icon={true}`.
+ * Buttons with labels are always square (4px radius).
+ */
+export type ButtonRadius = 'default' | 'rounded'
+
 export type ButtonProps = {
   /**
    * Button variant - controls visual style
@@ -37,29 +47,52 @@ export type ButtonProps = {
   size?: ButtonSize
   /**
    * Color appearance for theming
-   * @default 'neutral'
+   * @default 'accent'
    */
   colorAppearance?: ButtonColorAppearance
   /**
-   * Icon element to display before the label.
-   * Should be an Icon component from eds-core-react/next.
+   * Border radius style for icon-only buttons.
+   * - `default`: Square shape (4px radius)
+   * - `rounded`: Circular shape (1000px radius)
+   *
+   * Note: Only applies when `icon={true}`. Ignored for buttons with labels.
+   * @default 'default'
+   */
+  radius?: ButtonRadius
+  /**
+   * Icon-only button mode. When true, the button uses uniform padding
+   * (square shape) and requires an `aria-label` for accessibility.
+   *
    * @example
    * ```tsx
-   * <Button iconStart={<Icon data={add} />}>Add item</Button>
+   * <Button icon aria-label="Add item">
+   *   <Icon data={add} aria-hidden />
+   * </Button>
    * ```
+   * @default false
    */
-  iconStart?: ReactNode
+  icon?: boolean
   /**
-   * Icon element to display after the label.
-   * Should be an Icon component from eds-core-react/next.
+   * Button content. Can include text, icons, or a combination.
+   * Icons should be placed as children in the desired order.
+   *
    * @example
    * ```tsx
-   * <Button iconEnd={<Icon data={chevron_right} />}>Next</Button>
+   * // Text only
+   * <Button>Submit</Button>
+   *
+   * // Icon before label
+   * <Button>
+   *   <Icon data={add} aria-hidden />
+   *   Add item
+   * </Button>
+   *
+   * // Icon after label
+   * <Button>
+   *   Next
+   *   <Icon data={chevron_right} aria-hidden />
+   * </Button>
    * ```
-   */
-  iconEnd?: ReactNode
-  /**
-   * Button content/label
    */
   children?: ReactNode
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'>

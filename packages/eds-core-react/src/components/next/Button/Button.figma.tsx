@@ -22,24 +22,21 @@ figma.connect(
       disabled: figma.enum('State', {
         Disabled: true,
       }),
-      iconStart: figma.boolean('showLeadingIcon', {
+      leadingIcon: figma.boolean('showLeadingIcon', {
         true: figma.instance('Leading Icon Item'),
         false: undefined,
       }),
-      iconEnd: figma.boolean('showTrailingIcon', {
+      trailingIcon: figma.boolean('showTrailingIcon', {
         true: figma.instance('Trailing Icon Item'),
         false: undefined,
       }),
-      children: figma.string('label'),
+      label: figma.string('label'),
     },
-    example: ({ variant, disabled, iconStart, iconEnd, children }) => (
-      <Button
-        variant={variant}
-        disabled={disabled}
-        iconStart={iconStart}
-        iconEnd={iconEnd}
-      >
-        {children}
+    example: ({ variant, disabled, leadingIcon, trailingIcon, label }) => (
+      <Button variant={variant} disabled={disabled}>
+        {leadingIcon}
+        {label}
+        {trailingIcon}
       </Button>
     ),
   },
@@ -65,7 +62,7 @@ figma.connect(
         disabled: figma.enum('State', {
           Disabled: true,
         }),
-        children: figma.string('label'),
+        label: figma.string('label'),
       }),
     },
     example: ({ colorAppearance, inner }) => (
@@ -74,7 +71,7 @@ figma.connect(
         colorAppearance={colorAppearance}
         disabled={inner.disabled}
       >
-        {inner.children}
+        {inner.label}
       </Button>
     ),
   },

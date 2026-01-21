@@ -5,7 +5,7 @@ import { axe } from 'jest-axe'
 import { Button } from '.'
 
 // Mock icon for testing
-const MockIcon = () => <svg data-testid="mock-icon" />
+const MockIcon = () => <svg data-testid="mock-icon" aria-hidden />
 
 describe('Button (next)', () => {
   describe('Rendering', () => {
@@ -23,7 +23,6 @@ describe('Button (next)', () => {
       expect(button).toHaveAttribute('data-variant', 'primary')
       expect(button).toHaveAttribute('data-color-appearance', 'accent')
       expect(button).toHaveAttribute('data-selectable-space', 'md')
-      expect(button).toHaveAttribute('data-space-proportions', 'squished')
       expect(button).toHaveAttribute('type', 'button')
     })
 
@@ -93,33 +92,64 @@ describe('Button (next)', () => {
     })
   })
 
-  describe('Icons', () => {
-    it('renders iconStart when provided', () => {
-      render(<Button iconStart={<MockIcon />}>Search</Button>)
-      expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
-    })
-
-    it('renders iconEnd when provided', () => {
-      render(<Button iconEnd={<MockIcon />}>Next</Button>)
-      expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
-    })
-
-    it('renders both icons when provided', () => {
+  describe('Children (Icons and Text)', () => {
+    it('renders icon as child', () => {
       render(
-        <Button iconStart={<MockIcon />} iconEnd={<MockIcon />}>
+        <Button>
+          <MockIcon />
+          Label
+        </Button>,
+      )
+      expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
+    })
+
+    it('renders icon after label', () => {
+      render(
+        <Button>
+          Label
+          <MockIcon />
+        </Button>,
+      )
+      expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
+      expect(screen.getByRole('button')).toHaveTextContent('Label')
+    })
+
+    it('renders multiple icons', () => {
+      render(
+        <Button>
+          <MockIcon />
           Navigate
+          <MockIcon />
         </Button>,
       )
       expect(screen.getAllByTestId('mock-icon')).toHaveLength(2)
     })
 
-    it('hides icons from screen readers', () => {
-      render(<Button iconStart={<MockIcon />}>With Icon</Button>)
+    it('wraps text children in typography', () => {
+      render(<Button>Text Content</Button>)
+      const button = screen.getByRole('button')
+      // Text should be wrapped in a span (TypographyNext)
+      // eslint-disable-next-line testing-library/no-node-access
+      const span = button.querySelector('span')
+      expect(span).toBeInTheDocument()
+      expect(span).toHaveTextContent('Text Content')
+    })
+
+    it('preserves child order', () => {
+      render(
+        <Button>
+          <MockIcon />
+          Middle
+          <MockIcon />
+        </Button>,
+      )
       const button = screen.getByRole('button')
       // eslint-disable-next-line testing-library/no-node-access
-      const iconWrapper = button.querySelector('[aria-hidden="true"]')
-      expect(iconWrapper).toBeInTheDocument()
-      expect(iconWrapper).toContainElement(screen.getByTestId('mock-icon'))
+      const children = Array.from(button.children)
+      expect(children).toHaveLength(3)
+      expect(children[0]).toHaveAttribute('data-testid', 'mock-icon')
+      expect(children[1]).toHaveTextContent('Middle')
+      expect(children[2]).toHaveAttribute('data-testid', 'mock-icon')
     })
   })
 
@@ -246,7 +276,10 @@ describe('Button (next)', () => {
 
     it('has no accessibility violations (with icon)', async () => {
       const { container } = render(
-        <Button iconStart={<MockIcon />}>With Icon</Button>,
+        <Button>
+          <MockIcon />
+          With Icon
+        </Button>,
       )
       expect(await axe(container)).toHaveNoViolations()
     })
@@ -267,6 +300,175 @@ describe('Button (next)', () => {
       const button = screen.getByRole('button')
       button.focus()
       expect(button).toHaveFocus()
+    })
+
+    it('has no accessibility violations (icon-only with aria-label)', async () => {
+      const { container } = render(
+        <Button icon aria-label="Add item">
+          <MockIcon />
+        </Button>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+  })
+
+  describe('Icon-Only (icon prop)', () => {
+    it('sets data-icon-only when icon prop is true', () => {
+      render(
+        <Button icon aria-label="Add">
+          <MockIcon />
+        </Button>,
+      )
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-icon-only', 'true')
+    })
+
+    it('uses generic space tokens for icon-only (default size)', () => {
+      render(
+        <Button icon aria-label="Add">
+          <MockIcon />
+        </Button>,
+      )
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-horizontal-space', '2xs')
+      expect(button).toHaveAttribute('data-vertical-space', '2xs')
+      expect(button).not.toHaveAttribute('data-selectable-space')
+    })
+
+    it('uses generic space tokens for icon-only (small size)', () => {
+      render(
+        <Button icon aria-label="Add" size="small">
+          <MockIcon />
+        </Button>,
+      )
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-horizontal-space', '3xs')
+      expect(button).toHaveAttribute('data-vertical-space', '3xs')
+    })
+
+    it('uses generic space tokens for icon-only (large size)', () => {
+      render(
+        <Button icon aria-label="Add" size="large">
+          <MockIcon />
+        </Button>,
+      )
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-horizontal-space', 'xs')
+      expect(button).toHaveAttribute('data-vertical-space', 'xs')
+    })
+
+    it('uses selectable space tokens for regular button', () => {
+      render(
+        <Button>
+          <MockIcon />
+          Label
+        </Button>,
+      )
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-selectable-space', 'md')
+      expect(button).not.toHaveAttribute('data-horizontal-space')
+      expect(button).not.toHaveAttribute('data-vertical-space')
+    })
+
+    it('renders icon child in icon-only mode', () => {
+      render(
+        <Button icon aria-label="Add">
+          <MockIcon />
+        </Button>,
+      )
+      expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
+    })
+
+    it.each(['small', 'default', 'large'] as const)(
+      'renders icon-only with %s size',
+      (size) => {
+        render(
+          <Button icon aria-label="Add" size={size}>
+            <MockIcon />
+          </Button>,
+        )
+        expect(screen.getByRole('button')).toHaveAttribute('data-icon-only')
+      },
+    )
+
+    it('does not set data-icon-only when icon prop is false', () => {
+      render(<Button>Regular Button</Button>)
+      const button = screen.getByRole('button')
+      expect(button).not.toHaveAttribute('data-icon-only')
+    })
+  })
+
+  describe('Radius (icon-only buttons)', () => {
+    it('does not set data-radius on non-icon buttons', () => {
+      render(<Button>Label Button</Button>)
+      expect(screen.getByRole('button')).not.toHaveAttribute('data-radius')
+    })
+
+    it('does not set data-radius on buttons with label and icon', () => {
+      render(
+        <Button>
+          <MockIcon />
+          Label
+        </Button>,
+      )
+      expect(screen.getByRole('button')).not.toHaveAttribute('data-radius')
+    })
+
+    it('sets data-radius="default" on icon-only button by default', () => {
+      render(
+        <Button icon aria-label="Add">
+          <MockIcon />
+        </Button>,
+      )
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'data-radius',
+        'default',
+      )
+    })
+
+    it('sets data-radius="rounded" on icon-only button', () => {
+      render(
+        <Button icon aria-label="Add" radius="rounded">
+          <MockIcon />
+        </Button>,
+      )
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'data-radius',
+        'rounded',
+      )
+    })
+
+    it.each(['default', 'rounded'] as const)(
+      'renders icon-only with %s radius',
+      (radius) => {
+        render(
+          <Button icon aria-label="Action" radius={radius}>
+            <MockIcon />
+          </Button>,
+        )
+        expect(screen.getByRole('button')).toHaveAttribute(
+          'data-radius',
+          radius,
+        )
+      },
+    )
+
+    it('has no accessibility violations (circular icon-only)', async () => {
+      const { container } = render(
+        <Button icon aria-label="Add" radius="rounded">
+          <MockIcon />
+        </Button>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('has no accessibility violations (square icon-only)', async () => {
+      const { container } = render(
+        <Button icon aria-label="Add" radius="default">
+          <MockIcon />
+        </Button>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
     })
   })
 })

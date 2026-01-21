@@ -3,7 +3,13 @@ import { add, chevron_right, delete_forever } from '@equinor/eds-icons'
 import { Button } from './Button'
 import { Icon } from '../Icon'
 
-const meta: Meta<typeof Button> = {
+type StoryArgs = React.ComponentProps<typeof Button> & {
+  label: string
+  iconStart: boolean
+  iconEnd: boolean
+}
+
+const meta: Meta<StoryArgs> = {
   title: 'EDS 2.0 (beta)/Button',
   component: Button,
   parameters: {
@@ -11,19 +17,34 @@ const meta: Meta<typeof Button> = {
       description: {
         component: `
 Button component for triggering actions.
+
 ## Usage
 
 \`\`\`tsx
 import { Button } from '@equinor/eds-core-react/next'
 import { Icon } from '@equinor/eds-core-react/next'
-import { add } from '@equinor/eds-icons'
+import { add, chevron_right } from '@equinor/eds-icons'
 
+// Text only
 <Button variant="primary" colorAppearance="accent">
   Submit
 </Button>
 
-<Button variant="outline" iconStart={<Icon data={add} />}>
+// Icon before label
+<Button variant="outline">
+  <Icon data={add} aria-hidden />
   Add item
+</Button>
+
+// Icon after label
+<Button>
+  Next
+  <Icon data={chevron_right} aria-hidden />
+</Button>
+
+// Icon-only button (requires aria-label)
+<Button icon aria-label="Add item">
+  <Icon data={add} aria-hidden />
 </Button>
 \`\`\`
         `,
@@ -31,6 +52,18 @@ import { add } from '@equinor/eds-icons'
     },
   },
   argTypes: {
+    label: {
+      control: 'text',
+      description: 'Button label text',
+    },
+    iconStart: {
+      control: 'boolean',
+      description: 'Show icon before label',
+    },
+    iconEnd: {
+      control: 'boolean',
+      description: 'Show icon after label',
+    },
     variant: {
       control: 'select',
       options: ['primary', 'outline', 'ghost'],
@@ -46,37 +79,46 @@ import { add } from '@equinor/eds-icons'
       options: ['accent', 'neutral', 'danger'],
       description: 'Color theme',
     },
+    radius: {
+      control: 'select',
+      options: ['default', 'rounded'],
+      description: 'Border radius (only applies to icon-only buttons)',
+    },
+    icon: {
+      control: 'boolean',
+      description: 'Icon-only button mode (requires aria-label)',
+    },
     disabled: {
       control: 'boolean',
       description: 'Disabled state',
     },
-    iconStart: {
-      control: false,
-      description: 'Icon before label',
-    },
-    iconEnd: {
-      control: false,
-      description: 'Icon after label',
-    },
-    children: {
-      control: 'text',
-      description: 'Button label',
-    },
   },
   args: {
-    children: 'Button',
+    label: 'Button',
+    iconStart: false,
+    iconEnd: false,
     variant: 'primary',
     size: 'default',
     colorAppearance: 'accent',
+    icon: false,
+    disabled: false,
   },
 }
 
 export default meta
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<StoryArgs>
 
 // ===== Basic Examples =====
 
-export const Default: Story = {}
+export const Default: Story = {
+  render: ({ label, iconStart, iconEnd, icon, ...rest }) => (
+    <Button icon={icon} aria-label={icon ? label : undefined} {...rest}>
+      {iconStart && <Icon data={add} aria-hidden />}
+      {!icon && label}
+      {iconEnd && <Icon data={chevron_right} aria-hidden />}
+    </Button>
+  ),
+}
 
 // ===== Sizes =====
 
@@ -144,29 +186,35 @@ export const ColorAppearances: Story = {
 
 // ===== With Icons =====
 
-export const WithIconStart: Story = {
-  args: {
-    iconStart: <Icon data={add} />,
-    children: 'Add Item',
-  },
+export const WithIconBefore: Story = {
+  render: () => (
+    <Button>
+      <Icon data={add} aria-hidden />
+      Add Item
+    </Button>
+  ),
   parameters: {
     docs: {
       description: {
-        story: 'Use `iconStart` to add an icon before the label.',
+        story:
+          'Place an Icon before the text as a child to show it before the label.',
       },
     },
   },
 }
 
-export const WithIconEnd: Story = {
-  args: {
-    iconEnd: <Icon data={chevron_right} />,
-    children: 'Next',
-  },
+export const WithIconAfter: Story = {
+  render: () => (
+    <Button>
+      Next
+      <Icon data={chevron_right} aria-hidden />
+    </Button>
+  ),
   parameters: {
     docs: {
       description: {
-        story: 'Use `iconEnd` to add an icon after the label.',
+        story:
+          'Place an Icon after the text as a child to show it after the label.',
       },
     },
   },
@@ -227,28 +275,20 @@ export const AllVariants: Story = {
                 key={color}
                 style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
               >
-                <Button
-                  variant={variant}
-                  colorAppearance={color}
-                  size="small"
-                  iconStart={<Icon data={add} />}
-                >
+                <Button variant={variant} colorAppearance={color} size="small">
+                  <Icon data={add} aria-hidden />
                   Small
                 </Button>
                 <Button
                   variant={variant}
                   colorAppearance={color}
                   size="default"
-                  iconStart={<Icon data={add} />}
                 >
+                  <Icon data={add} aria-hidden />
                   Default
                 </Button>
-                <Button
-                  variant={variant}
-                  colorAppearance={color}
-                  size="large"
-                  iconStart={<Icon data={add} />}
-                >
+                <Button variant={variant} colorAppearance={color} size="large">
+                  <Icon data={add} aria-hidden />
                   Large
                 </Button>
               </div>
@@ -273,11 +313,8 @@ export const AllVariants: Story = {
 export const DangerAction: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px' }}>
-      <Button
-        variant="primary"
-        colorAppearance="danger"
-        iconStart={<Icon data={delete_forever} />}
-      >
+      <Button variant="primary" colorAppearance="danger">
+        <Icon data={delete_forever} aria-hidden />
         Delete
       </Button>
       <Button variant="outline" colorAppearance="danger">
@@ -293,21 +330,117 @@ export const DangerAction: Story = {
     },
   },
 }
+// ===== Icon-Only Buttons =====
 
-// ===== Focus State Demo =====
-
-export const FocusState: Story = {
+export const IconOnly: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '16px' }}>
-      <Button variant="primary">Focus me</Button>
-      <Button variant="outline">Focus me</Button>
-      <Button variant="ghost">Focus me</Button>
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Button icon aria-label="Add" size="small">
+        <Icon data={add} aria-hidden />
+      </Button>
+      <Button icon aria-label="Add" size="default">
+        <Icon data={add} aria-hidden />
+      </Button>
+      <Button icon aria-label="Add" size="large">
+        <Icon data={add} aria-hidden />
+      </Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Tab to the button to see the focus ring styling.',
+        story:
+          'Use the `icon` prop for icon-only buttons. They are square with uniform padding. Always provide `aria-label` for accessibility.',
+      },
+    },
+  },
+}
+
+export const IconOnlyVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Button variant="primary" icon aria-label="Add">
+          <Icon data={add} aria-hidden />
+        </Button>
+        <Button variant="outline" icon aria-label="Add">
+          <Icon data={add} aria-hidden />
+        </Button>
+        <Button variant="ghost" icon aria-label="Add">
+          <Icon data={add} aria-hidden />
+        </Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Button
+          variant="primary"
+          colorAppearance="danger"
+          icon
+          aria-label="Delete"
+        >
+          <Icon data={delete_forever} aria-hidden />
+        </Button>
+        <Button
+          variant="outline"
+          colorAppearance="danger"
+          icon
+          aria-label="Delete"
+        >
+          <Icon data={delete_forever} aria-hidden />
+        </Button>
+        <Button
+          variant="ghost"
+          colorAppearance="danger"
+          icon
+          aria-label="Delete"
+        >
+          <Icon data={delete_forever} aria-hidden />
+        </Button>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Icon-only buttons support all variants and color appearances.',
+      },
+    },
+  },
+}
+
+// ===== Circular Icon-Only Buttons =====
+
+export const CircularIconOnly: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Button icon radius="rounded" aria-label="Add" size="small">
+          <Icon data={add} aria-hidden />
+        </Button>
+        <Button icon radius="rounded" aria-label="Add" size="default">
+          <Icon data={add} aria-hidden />
+        </Button>
+        <Button icon radius="rounded" aria-label="Add" size="large">
+          <Icon data={add} aria-hidden />
+        </Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <Button variant="primary" icon radius="rounded" aria-label="Add">
+          <Icon data={add} aria-hidden />
+        </Button>
+        <Button variant="outline" icon radius="rounded" aria-label="Add">
+          <Icon data={add} aria-hidden />
+        </Button>
+        <Button variant="ghost" icon radius="rounded" aria-label="Add">
+          <Icon data={add} aria-hidden />
+        </Button>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `radius="rounded"` on icon-only buttons to create circular buttons.',
       },
     },
   },
