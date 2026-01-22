@@ -37,18 +37,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     [isControlled, onChange],
   )
 
-  // Dev warning for missing accessible name
-  if (
-    process.env.NODE_ENV !== 'production' &&
-    !label &&
-    !rest['aria-label'] &&
-    !rest['aria-labelledby']
-  ) {
-    console.warn(
-      'Switch: Provide label, aria-label, or aria-labelledby for accessibility',
-    )
-  }
-
   // Use accent appearance only when checked and enabled
   const colorAppearance = !disabled && isChecked ? 'accent' : 'neutral'
 

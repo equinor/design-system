@@ -35,11 +35,42 @@ import { Switch } from '@equinor/eds-core-react/next'
 <Switch label="Enable notifications" />
 ```
 
-> **⚠️ Accessibility Note:** When using Switch without a visible label (e.g., in tables), you **must** provide an `aria-label` for accessibility.
+&nbsp;
+
+## Examples
+
+### States
+
+<Canvas of={ComponentStories.States} />
+
+### Without visible label
+
+In compact UIs like tables or toolbars, you may need a switch without a visible label. Use `aria-label` to provide an accessible name for screen readers.
+
+<Canvas of={ComponentStories.AlternativeToLabel} />
+
+### Table switch
+
+<Canvas of={ComponentStories.TableSwitch} />
+
+### Dark mode
+
+<Canvas of={ComponentStories.DarkMode} />
+
+### Density
+
+Use `data-density="comfortable"` on a parent element for a more compact size.
+
+<Canvas of={ComponentStories.Density} />
+
+## Accessibility
+
+- **With label:** Accessible name is provided automatically
+- **Without label:** You must provide `aria-label` or `aria-labelledby`
 
 ### Status announcements
 
-If toggling the Switch triggers a status change (e.g., "Settings saved"), use an `aria-live` region to announce it to screen reader users:
+If toggling triggers an important status change, announce it with an `aria-live` region:
 
 ```tsx
 <Switch
@@ -53,33 +84,3 @@ If toggling the Switch triggers a status change (e.g., "Settings saved"), use an
   {status}
 </div>
 ```
-
-&nbsp;
-
-## Examples
-
-### States
-
-<Canvas of={ComponentStories.States} />
-
-### Alternative to label
-
-When a visual label is not desirable, use `aria-label` for accessibility compliance.
-
-<Canvas of={ComponentStories.AlternativeToLabel} />
-
-### Table switch
-
-Example of usage with `Switch` and `aria-label` in tables for accessibility.
-
-<Canvas of={ComponentStories.TableSwitch} />
-
-### Dark mode
-
-<Canvas of={ComponentStories.DarkMode} />
-
-### Density
-
-Spacious is the default density. Use `data-density="comfortable"` on a parent element to render switches in a more compact size.
-
-<Canvas of={ComponentStories.Density} />
