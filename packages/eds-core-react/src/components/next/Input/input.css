@@ -58,12 +58,6 @@
         color: var(--eds-color-border-strong);
         -webkit-text-fill-color: var(--eds-color-border-strong);
       }
-
-      & .eds-adornment__text,
-      & .eds-adornment__adornment,
-      & .eds-error-icon {
-        color: var(--eds-color-border-strong);
-      }
     }
 
     /* Disabled state */
@@ -146,11 +140,15 @@
     align-items: center;
     gap: var(--eds-typography-gap-horizontal);
     flex-shrink: 0;
+  }
 
-    /* Adornment content (text prefix/suffix and icon elements) */
-    &__text,
-    &__adornment {
-      color: var(--eds-color-text-subtle);
-    }
+  /* Adornment text (prefix/suffix) */
+  .eds-adornment__text {
+    color: var(--eds-color-text-subtle);
+  }
+
+  /* Adornment icons */
+  .eds-adornment__adornment {
+    color: var(--eds-color-text-subtle);
   }
 }
