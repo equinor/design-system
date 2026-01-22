@@ -35,9 +35,9 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     <div
       class="eds-input-container"
       data-color-appearance="neutral"
-      data-font-size="xs"
-      data-selectable-space="xs"
-      data-space-proportions="stretched"
+      data-font-size="md"
+      data-selectable-space="sm"
+      data-space-proportions="squished"
     >
       <input
         aria-describedby="test-id-description test-id-helper-message"
@@ -45,6 +45,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
         data-color-appearance="neutral"
         data-font-family="ui"
         data-font-size="md"
+        data-line-height="default"
         id="test-id-input"
         placeholder="Placeholder"
         type="text"

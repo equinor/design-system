@@ -35,9 +35,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       <div
         className={containerClasses}
         data-color-appearance={colorAppearance}
-        data-selectable-space="xs"
-        data-space-proportions="stretched"
-        data-font-size="xs"
+        data-font-size="md"
+        data-selectable-space="sm"
+        data-space-proportions="squished"
         data-disabled={disabled || undefined}
         data-readonly={readOnly || undefined}
         data-invalid={invalid || undefined}
@@ -47,6 +47,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             className="eds-error-icon"
             data-font-size="xs"
             data-font-family="ui"
+            data-baseline="center"
           >
             <Icon data={error_filled} />
           </span>
@@ -59,6 +60,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
                 data-color-appearance="neutral"
                 data-font-family="ui"
                 data-font-size="xs"
+                data-baseline="center"
               >
                 {startText}
               </span>
@@ -68,6 +70,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
                 className="eds-adornment__adornment"
                 data-font-size="xs"
                 data-font-family="ui"
+                data-baseline="center"
               >
                 {startAdornment}
               </span>
@@ -81,8 +84,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           readOnly={readOnly}
           className="eds-input"
           data-color-appearance="neutral"
-          data-font-size="md"
           data-font-family="ui"
+          data-font-size="md"
+          data-line-height="default"
           {...(inputProps as InputHTMLAttributes<
             HTMLInputElement | HTMLTextAreaElement
           >)}
@@ -96,6 +100,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
                 data-color-appearance="neutral"
                 data-font-family="ui"
                 data-font-size="xs"
+                data-baseline="center"
               >
                 {endText}
               </span>
@@ -105,6 +110,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
                 className="eds-adornment__adornment"
                 data-font-size="xs"
                 data-font-family="ui"
+                data-baseline="center"
               >
                 {endAdornment}
               </span>

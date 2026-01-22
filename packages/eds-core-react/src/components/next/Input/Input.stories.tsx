@@ -243,7 +243,6 @@ export const WithLabel: StoryFn<InputProps> = () => {
     </>
   )
 }
-WithLabel.storyName = 'With Label'
 WithLabel.parameters = {
   docs: {
     description: {

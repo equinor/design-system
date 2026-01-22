@@ -1,7 +1,7 @@
 @layer eds-components {
   /* Container */
   .eds-input-container {
-    position: relative;
+    isolation: isolate;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,6 +12,7 @@
     border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     border-radius: var(--eds-spacing-border-radius-none);
     padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
 
     /* Hover - only for enabled inputs */
     &:hover:not([data-disabled]):not([data-readonly]) {
@@ -19,6 +20,7 @@
 
       & .eds-input {
         color: var(--eds-color-text-strong);
+        /* -webkit-text-fill-color overrides Safari autofill background styling */
         -webkit-text-fill-color: var(--eds-color-text-strong);
 
         &::placeholder {
@@ -55,6 +57,12 @@
       & .eds-input::placeholder {
         color: var(--eds-color-border-strong);
         -webkit-text-fill-color: var(--eds-color-border-strong);
+      }
+
+      & .eds-adornment__text,
+      & .eds-adornment__adornment,
+      & .eds-error-icon {
+        color: var(--eds-color-border-strong);
       }
     }
 
@@ -115,8 +123,7 @@
     background: transparent;
     outline: none;
     color: var(--eds-color-text-strong);
-    padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: 0;
+    padding: 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -129,8 +136,6 @@
 
   /* Error icon */
   .eds-error-icon {
-    display: flex;
-    align-items: center;
     color: var(--eds-color-text-subtle);
     flex-shrink: 0;
   }
@@ -141,19 +146,11 @@
     align-items: center;
     gap: var(--eds-typography-gap-horizontal);
     flex-shrink: 0;
-  }
 
-  /* Adornment text (prefix/suffix) - always neutral via data-color-appearance */
-  .eds-adornment__text {
-    display: flex;
-    align-items: center;
-    color: var(--eds-color-text-subtle);
-  }
-
-  /* Adornment element (icons, buttons, etc.) */
-  .eds-adornment__adornment {
-    display: flex;
-    align-items: center;
-    color: var(--eds-color-text-subtle);
+    /* Adornment content (text prefix/suffix and icon elements) */
+    &__text,
+    &__adornment {
+      color: var(--eds-color-text-subtle);
+    }
   }
 }

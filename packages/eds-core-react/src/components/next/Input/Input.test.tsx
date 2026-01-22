@@ -177,20 +177,21 @@ describe('Input (Next EDS 2.0)', () => {
         const input = screen.getByDisplayValue('test')
         expect(input).toHaveAttribute('data-font-family', 'ui')
         expect(input).toHaveAttribute('data-font-size', 'md')
+        expect(input).toHaveAttribute('data-line-height', 'default')
       })
     })
 
     describe('Spacing attributes', () => {
-      it('Sets data-selectable-space to xs', () => {
+      it('Sets data-selectable-space to sm', () => {
         render(<Input />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-selectable-space', 'xs')
+        expect(wrapper).toHaveAttribute('data-selectable-space', 'sm')
       })
 
-      it('Sets data-space-proportions to stretched', () => {
+      it('Sets data-space-proportions to squished', () => {
         render(<Input />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-space-proportions', 'stretched')
+        expect(wrapper).toHaveAttribute('data-space-proportions', 'squished')
       })
     })
 
