@@ -77,6 +77,12 @@
       }
     }
 
+    /* Focus ring around entire switch + label */
+    &:has(.eds-switch__input:focus-visible) {
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thick);
+    }
+
     & .eds-field__label {
       cursor: pointer;
     }
@@ -95,8 +101,8 @@
     position: relative;
     flex-shrink: 0;
 
-    /* Focus ring */
-    &:has(.eds-switch__input:focus-visible)::after {
+    /* Focus ring - only for standalone (no label) */
+    .eds-switch--standalone &:has(.eds-switch__input:focus-visible)::after {
       content: '';
       position: absolute;
       inset: calc(-1 * var(--eds-sizing-stroke-thick));
