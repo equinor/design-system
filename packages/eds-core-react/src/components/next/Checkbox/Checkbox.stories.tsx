@@ -20,8 +20,13 @@ const meta: Meta<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Checkbox component using vanilla CSS and EDS tokens. Uses Field internally for layout and accessibility.',
+        component: `**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+\`\`\`bash
+npm install @equinor/eds-core-react@beta
+\`\`\`
+
+Checkbox component using vanilla CSS and EDS tokens. Uses Field internally for layout and accessibility.`,
       },
       source: {
         excludeDecorators: true,
