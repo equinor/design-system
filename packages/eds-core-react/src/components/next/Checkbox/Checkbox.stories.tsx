@@ -26,7 +26,25 @@ const meta: Meta<typeof Checkbox> = {
 npm install @equinor/eds-core-react@beta
 \`\`\`
 
-Checkbox component using vanilla CSS and EDS tokens. Uses Field internally for layout and accessibility.`,
+\`\`\`tsx
+import { Checkbox } from '@equinor/eds-core-react/next'
+
+// Basic checkbox
+<Checkbox label="Accept terms" />
+
+// Checkbox group
+<fieldset>
+  <legend>Select options</legend>
+  <Checkbox label="Option 1" name="group" value="1" />
+  <Checkbox label="Option 2" name="group" value="2" />
+</fieldset>
+
+// Without visible label (use aria-label)
+<Checkbox aria-label="Select row" />
+\`\`\`
+
+Checkboxes allow users to select one or more options from a set, or toggle a single option on/off.
+`,
       },
       source: {
         excludeDecorators: true,
