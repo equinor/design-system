@@ -115,6 +115,11 @@
     cursor: pointer;
     z-index: 1;
 
+    /* Extend clickable area to cover full standalone wrapper for WCAG compliance */
+    .eds-switch--standalone & {
+      inset: calc(-1 * var(--eds-selectable-space-vertical));
+    }
+
     &:disabled {
       cursor: not-allowed;
     }
@@ -134,6 +139,14 @@
     border-radius: var(--eds-spacing-border-radius-pill);
     transition: background-color 150ms;
     pointer-events: none;
+
+    /* Hover state */
+    @media (hover: hover) and (pointer: fine) {
+      .eds-switch:hover:not([data-disabled='true']) &,
+      .eds-field.eds-switch:hover:not([data-disabled='true']) & {
+        background-color: var(--eds-color-bg-surface);
+      }
+    }
   }
 
   /* Handle */

@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
+import { useArgs } from 'storybook/preview-api'
 import { Stack } from './../../../../.storybook/components'
 import { Typography, Table } from '../../..'
 import { Switch } from './Switch'
@@ -18,23 +19,15 @@ const meta: Meta<typeof Switch> = {
       control: 'boolean',
       description: 'Disables the switch',
     },
-    defaultChecked: {
+    checked: {
       control: 'boolean',
-      description: 'Initial checked state for uncontrolled usage',
-    },
-    indicator: {
-      control: 'text',
-      description: 'Indicator text shown after the label',
-    },
-    helperMessage: {
-      control: 'text',
-      description: 'Helper message shown below the switch',
+      description: 'Checked state (controlled)',
     },
   },
   args: {
     label: 'Enable notifications',
     disabled: false,
-    defaultChecked: false,
+    checked: false,
   },
   parameters: {
     docs: {
@@ -79,10 +72,13 @@ const UnstyledList = ({
 )
 
 export const Introduction: StoryFn<SwitchProps> = (args) => {
-  return <Switch {...args} />
-}
-Introduction.args = {
-  label: 'Enable notifications',
+  const [, setArgs] = useArgs()
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setArgs({ checked: e.target.checked })
+  }
+
+  return <Switch {...args} onChange={handleChange} />
 }
 
 export const States: StoryFn<SwitchProps> = () => {
@@ -114,27 +110,6 @@ export const States: StoryFn<SwitchProps> = () => {
     </UnstyledList>
   )
 }
-
-export const WithHelperMessage: StoryFn<SwitchProps> = () => {
-  return (
-    <UnstyledList style={{ gap: '2rem' }}>
-      <li>
-        <Switch
-          label="Email notifications"
-          helperMessage="Receive updates about your account"
-        />
-      </li>
-      <li>
-        <Switch
-          label="Marketing emails"
-          helperMessage="We'll only send you relevant content"
-          indicator="(Optional)"
-        />
-      </li>
-    </UnstyledList>
-  )
-}
-WithHelperMessage.storyName = 'With helper message'
 
 export const AlternativeToLabel: StoryFn<SwitchProps> = () => (
   <Switch aria-label="This label is invisible, but read by screen-readers" />

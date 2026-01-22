@@ -66,15 +66,6 @@ describe('Switch (next)', () => {
       const { container } = render(<Switch aria-label="switch-test" />)
       expect(await axe(container)).toHaveNoViolations()
     })
-
-    it('should connect helperMessage to input via aria-describedby', () => {
-      render(<Switch label="Test Label" helperMessage="Helper text for a11y" />)
-
-      const switchEl = screen.getByRole('switch')
-      const helperMessage = screen.getByText('Helper text for a11y')
-
-      expect(switchEl).toHaveAttribute('aria-describedby', helperMessage.id)
-    })
   })
 
   describe('Interaction', () => {
@@ -127,6 +118,23 @@ describe('Switch (next)', () => {
       expect(switchEl).toBeChecked()
     })
 
+    it('can be focused via Tab key', async () => {
+      render(<Switch label="Tab focus" />)
+      const switchEl = screen.getByLabelText('Tab focus')
+
+      expect(switchEl).not.toHaveFocus()
+      await userEvent.tab()
+      expect(switchEl).toHaveFocus()
+    })
+
+    it('disabled switch is not focusable via Tab', async () => {
+      render(<Switch label="Disabled focus" disabled />)
+      const switchEl = screen.getByLabelText('Disabled focus')
+
+      await userEvent.tab()
+      expect(switchEl).not.toHaveFocus()
+    })
+
     it('forwards ref to input element', () => {
       const ref = createRef<HTMLInputElement>()
       render(<Switch label="Ref test" ref={ref} />)
@@ -137,18 +145,6 @@ describe('Switch (next)', () => {
   })
 
   describe('Props', () => {
-    it('supports indicator prop', () => {
-      render(<Switch label="Test Label" indicator="(Required)" />)
-      expect(screen.getByText('(Required)')).toBeInTheDocument()
-    })
-
-    it('supports helperMessage prop', () => {
-      render(
-        <Switch label="Test Label" helperMessage="This is a helper message" />,
-      )
-      expect(screen.getByText('This is a helper message')).toBeInTheDocument()
-    })
-
     it('applies disabled state correctly', () => {
       render(<Switch label="Disabled switch" disabled />)
       const switchEl = screen.getByLabelText('Disabled switch')
