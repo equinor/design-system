@@ -9,6 +9,33 @@ import mdx from './Switch.docs.mdx'
 const meta: Meta<typeof Switch> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Switch',
   component: Switch,
+  argTypes: {
+    label: {
+      control: 'text',
+      description: 'Visible label for the switch',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the switch',
+    },
+    defaultChecked: {
+      control: 'boolean',
+      description: 'Initial checked state for uncontrolled usage',
+    },
+    indicator: {
+      control: 'text',
+      description: 'Indicator text shown after the label',
+    },
+    helperMessage: {
+      control: 'text',
+      description: 'Helper message shown below the switch',
+    },
+  },
+  args: {
+    label: 'Enable notifications',
+    disabled: false,
+    defaultChecked: false,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -52,7 +79,10 @@ const UnstyledList = ({
 )
 
 export const Introduction: StoryFn<SwitchProps> = (args) => {
-  return <Switch id="intro-switch" label="Enable notifications" {...args} />
+  return <Switch {...args} />
+}
+Introduction.args = {
+  label: 'Enable notifications',
 }
 
 export const States: StoryFn<SwitchProps> = () => {
@@ -84,7 +114,6 @@ export const States: StoryFn<SwitchProps> = () => {
     </UnstyledList>
   )
 }
-States.storyName = 'States'
 
 export const WithHelperMessage: StoryFn<SwitchProps> = () => {
   return (
@@ -224,7 +253,6 @@ export const Density: StoryFn<SwitchProps> = () => {
     </div>
   )
 }
-Density.storyName = 'Density'
 Density.parameters = {
   docs: {
     description: {

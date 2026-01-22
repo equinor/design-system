@@ -75,6 +75,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         position="start"
         disabled={disabled}
         className={classNames('eds-switch', className)}
+        data-font-size="lg"
+        data-selectable-space="md"
+        data-space-proportions="squished"
       >
         <span
           className="eds-switch__control"
@@ -99,6 +102,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     <span
       className={classNames('eds-switch', 'eds-switch--standalone', className)}
       data-disabled={disabled || undefined}
+      data-font-size="lg"
+      data-selectable-space="md"
+      data-space-proportions="squished"
     >
       <span
         className="eds-switch__control"

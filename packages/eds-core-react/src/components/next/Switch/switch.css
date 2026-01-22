@@ -6,7 +6,6 @@
  */
 @layer eds-components {
   .eds-switch {
-    --_switch-height: var(--eds-sizing-selectable-md);
     --_switch-icon-size: var(
       --eds-typography-icon-size,
       var(--eds-sizing-icon-md)
@@ -30,8 +29,13 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: var(--_switch-height);
-    height: var(--_switch-height);
+    /* Dynamic sizing from generic tokens (icon + padding) */
+    width: calc(
+      var(--eds-selectable-space-vertical) * 2 + var(--eds-typography-icon-size)
+    );
+    height: calc(
+      var(--eds-selectable-space-vertical) * 2 + var(--eds-typography-icon-size)
+    );
 
     /* Hover background pseudo-element */
     &::before {
@@ -56,10 +60,12 @@
 
   /* With Field (has label) */
   .eds-field.eds-switch {
-    padding-inline-end: var(--eds-selectable-space-horizontal);
+    gap: var(--eds-typography-gap-horizontal);
+    padding: var(--eds-selectable-space-vertical)
+      var(--eds-selectable-space-horizontal);
     width: fit-content;
     border-radius: var(--eds-spacing-border-radius-rounded);
-    height: var(--_switch-height);
+    height: auto;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -88,8 +94,6 @@
     justify-content: center;
     position: relative;
     flex-shrink: 0;
-    width: var(--_switch-height);
-    height: var(--_switch-height);
 
     /* Focus ring */
     &:has(.eds-switch__input:focus-visible)::after {
@@ -148,7 +152,7 @@
       background-color 150ms;
     pointer-events: none;
 
-    /* Checked state */
+    /* Checked state - position */
     .eds-switch:has(.eds-switch__input:checked) & {
       left: calc(100% - var(--_switch-handle-size));
     }
