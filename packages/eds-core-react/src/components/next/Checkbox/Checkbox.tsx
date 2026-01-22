@@ -22,7 +22,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indicator,
       helperMessage,
       id: providedId,
-      'data-color-appearance': colorAppearance,
       ...rest
     },
     ref,
@@ -32,8 +31,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const generatedId = useId()
     const inputId = providedId ?? generatedId
     const helperMessageId = `${inputId}-helper`
-
-    const resolvedColorAppearance = colorAppearance ?? 'accent'
 
     useEffect(() => {
       if (inputRef.current) {
@@ -82,7 +79,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           position="start"
           disabled={disabled}
           className="eds-checkbox"
-          data-color-appearance={resolvedColorAppearance}
+          data-color-appearance="accent"
           data-selectable-space="md"
           data-space-proportions="squished"
         >
@@ -102,7 +99,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <span
         className={classNames('eds-checkbox', 'eds-checkbox--standalone')}
-        data-color-appearance={resolvedColorAppearance}
+        data-color-appearance="accent"
         data-disabled={disabled || undefined}
       >
         {checkboxInput}
