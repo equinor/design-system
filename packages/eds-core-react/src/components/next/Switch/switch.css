@@ -3,9 +3,9 @@
   .eds-switch {
     --eds-field-width: fit-content; /* Override Field's default 100% width */
     --_icon-size: var(--eds-typography-icon-size, var(--eds-sizing-icon-md));
-    --_handle-size: calc(var(--_icon-size) * 0.5);
-    --_track-width: calc(var(--_icon-size) * 0.92);
-    --_track-height: calc(var(--_icon-size) * 0.33);
+    --_handle-size: calc(var(--_icon-size) * 0.6);
+    --_track-width: calc(var(--_icon-size) * 1.1);
+    --_track-height: calc(var(--_icon-size) * 0.4);
     /* TODO: Replace with semantic token when available */
     --_track-hover-bg: var(--eds-color-neutral-2);
 
@@ -15,6 +15,7 @@
       var(--eds-selectable-space-horizontal);
     border-radius: var(--eds-spacing-border-radius-rounded);
     cursor: pointer;
+    transition: background-color 150ms;
 
     &:has(.eds-switch__input:focus-visible) {
       outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
@@ -46,6 +47,9 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    /* Same margins as icons for proper form alignment */
+    margin-block: calc(var(--_icon-size) * -0.25);
+    margin-inline: calc(var(--_icon-size) * -0.1);
   }
 
   .eds-switch__input {
