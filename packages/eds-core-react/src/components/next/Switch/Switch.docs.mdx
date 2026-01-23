@@ -43,16 +43,6 @@ import { Switch } from '@equinor/eds-core-react/next'
 
 <Canvas of={ComponentStories.States} />
 
-### Without visible label
-
-In compact UIs like tables or toolbars, you may need a switch without a visible label. Use `aria-label` to provide an accessible name for screen readers.
-
-<Canvas of={ComponentStories.AlternativeToLabel} />
-
-### Table switch
-
-<Canvas of={ComponentStories.TableSwitch} />
-
 ### Dark mode
 
 <Canvas of={ComponentStories.DarkMode} />
@@ -65,8 +55,7 @@ Use `data-density="comfortable"` on a parent element for a more compact size.
 
 ## Accessibility
 
-- **With label:** Accessible name is provided automatically
-- **Without label:** You must provide `aria-label` or `aria-labelledby`
+The Switch component requires a visible `label` prop which provides the accessible name automatically.
 
 ### Status announcements
 

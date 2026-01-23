@@ -30,11 +30,6 @@ describe('Switch (next)', () => {
       expect(screen.getByLabelText('Enable notifications')).toBeInTheDocument()
     })
 
-    it('renders without label using aria-label', () => {
-      render(<Switch aria-label="Toggle setting" />)
-      expect(screen.getByLabelText('Toggle setting')).toBeInTheDocument()
-    })
-
     it('has role="switch"', () => {
       render(<Switch label="Toggle" />)
       expect(screen.getByRole('switch')).toBeInTheDocument()
@@ -59,11 +54,6 @@ describe('Switch (next)', () => {
   describe('Accessibility', () => {
     it('should pass a11y test with label', async () => {
       const { container } = render(<Switch label="switch-test" />)
-      expect(await axe(container)).toHaveNoViolations()
-    })
-
-    it('should pass a11y test with aria-label', async () => {
-      const { container } = render(<Switch aria-label="switch-test" />)
       expect(await axe(container)).toHaveNoViolations()
     })
   })

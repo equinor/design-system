@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { useArgs } from 'storybook/preview-api'
 import { Stack } from './../../../../.storybook/components'
-import { Typography, Table } from '../../..'
+import { Typography } from '../../..'
 import { Switch } from './Switch'
 import type { SwitchProps } from './Switch.types'
 import mdx from './Switch.docs.mdx'
@@ -13,7 +13,7 @@ const meta: Meta<typeof Switch> = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Visible label for the switch',
+      description: 'Visible label for the switch (required)',
     },
     disabled: {
       control: 'boolean',
@@ -109,60 +109,6 @@ export const States: StoryFn<SwitchProps> = () => {
       </li>
     </UnstyledList>
   )
-}
-
-export const AlternativeToLabel: StoryFn<SwitchProps> = () => (
-  <Switch aria-label="This label is invisible, but read by screen-readers" />
-)
-AlternativeToLabel.storyName = 'Alternative to label'
-AlternativeToLabel.parameters = {
-  docs: {
-    description: {
-      story:
-        'When a visual label is not desirable, use `aria-label` for accessibility compliance.',
-    },
-  },
-}
-
-const data = [
-  { id: 1, name: 'Email notifications', enabled: true },
-  { id: 2, name: 'Push notifications', enabled: false },
-  { id: 3, name: 'SMS alerts', enabled: true },
-]
-
-export const TableSwitch: StoryFn<SwitchProps> = () => (
-  <Table>
-    <Table.Head>
-      <Table.Row>
-        <Table.Cell>Setting</Table.Cell>
-        <Table.Cell>Enabled</Table.Cell>
-      </Table.Row>
-    </Table.Head>
-    <Table.Body>
-      {data.map((item) => (
-        <Table.Row key={item.id}>
-          <Table.Cell>{item.name}</Table.Cell>
-          <Table.Cell>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Switch
-                aria-label={`Toggle ${item.name}`}
-                defaultChecked={item.enabled}
-              />
-            </div>
-          </Table.Cell>
-        </Table.Row>
-      ))}
-    </Table.Body>
-  </Table>
-)
-TableSwitch.storyName = 'Table switch'
-TableSwitch.parameters = {
-  docs: {
-    description: {
-      story:
-        'Switch without visible label for use in tables. Use `aria-label` for accessibility.',
-    },
-  },
 }
 
 export const DarkMode: StoryFn<SwitchProps> = () => {

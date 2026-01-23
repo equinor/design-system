@@ -2,9 +2,6 @@ import { forwardRef, useState, useCallback } from 'react'
 import { Field, useFieldIds } from '../Field'
 import type { SwitchProps } from './Switch.types'
 
-const classNames = (...classes: (string | boolean | undefined)[]) =>
-  classes.filter(Boolean).join(' ')
-
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   {
     label,
@@ -37,62 +34,37 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     [isControlled, onChange],
   )
 
-  // Use accent appearance only when checked and enabled
-  const colorAppearance = !disabled && isChecked ? 'accent' : 'neutral'
-
-  const dataAttributes = {
-    'data-font-size': 'lg',
-    'data-selectable-space': 'md',
-    'data-space-proportions': 'squished',
-  } as const
-
-  const switchControl = (
-    <span
-      className="eds-switch__control"
-      data-color-appearance={colorAppearance}
-    >
-      <input
-        type="checkbox"
-        role="switch"
-        id={inputId}
-        className="eds-switch__input"
-        disabled={disabled}
-        ref={ref}
-        checked={isControlled ? controlledChecked : undefined}
-        defaultChecked={!isControlled ? defaultChecked : undefined}
-        onChange={handleChange}
-        {...rest}
-      />
-      <span className="eds-switch__track">
-        <span className="eds-switch__handle" />
-      </span>
-    </span>
-  )
-
-  // Use Field for layout when label is provided
-  if (label) {
-    return (
-      <Field
-        position="start"
-        disabled={disabled}
-        className={classNames('eds-switch', className)}
-        {...dataAttributes}
-      >
-        {switchControl}
-        <Field.Label htmlFor={inputId}>{label}</Field.Label>
-      </Field>
-    )
-  }
-
-  // Standalone switch without label
   return (
-    <span
-      className={classNames('eds-switch', 'eds-switch--standalone', className)}
-      data-disabled={disabled || undefined}
-      {...dataAttributes}
+    <Field
+      position="start"
+      disabled={disabled}
+      className={['eds-switch', className].filter(Boolean).join(' ')}
+      data-font-size="md"
+      data-selectable-space="md"
+      data-space-proportions="squished"
     >
-      {switchControl}
-    </span>
+      <span
+        className="eds-switch__control"
+        data-color-appearance={!disabled && isChecked ? 'accent' : 'neutral'}
+      >
+        <input
+          type="checkbox"
+          role="switch"
+          id={inputId}
+          className="eds-switch__input"
+          disabled={disabled}
+          ref={ref}
+          checked={isControlled ? controlledChecked : undefined}
+          defaultChecked={!isControlled ? defaultChecked : undefined}
+          onChange={handleChange}
+          {...rest}
+        />
+        <span className="eds-switch__track">
+          <span className="eds-switch__handle" />
+        </span>
+      </span>
+      <Field.Label htmlFor={inputId}>{label}</Field.Label>
+    </Field>
   )
 })
 

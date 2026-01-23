@@ -1,86 +1,34 @@
-/* Switch component - works with Field for layout
- *
- * TODO: Replace when tokens available:
- * - 150ms → --eds-motion-duration-fast
- * - calc multipliers → switch-specific tokens
- */
+/* Switch component - uses Field for layout */
 @layer eds-components {
   .eds-switch {
-    --_switch-icon-size: var(
-      --eds-typography-icon-size,
-      var(--eds-sizing-icon-md)
-    );
-    --_switch-track-width: calc(var(--_switch-icon-size) * 0.92);
-    --_switch-track-height: calc(var(--_switch-icon-size) * 0.33);
-    --_switch-handle-size: calc(var(--_switch-icon-size) * 0.5);
+    --eds-field-width: fit-content; /* Override Field's default 100% width */
+    --_icon-size: var(--eds-typography-icon-size, var(--eds-sizing-icon-md));
+    --_handle-size: calc(var(--_icon-size) * 0.5);
+    --_track-width: calc(var(--_icon-size) * 0.92);
+    --_track-height: calc(var(--_icon-size) * 0.33);
+    /* TODO: Replace with semantic token when available */
+    --_track-hover-bg: var(--eds-color-neutral-2);
 
-    cursor: pointer;
     position: relative;
-    box-sizing: border-box;
+    gap: var(--eds-typography-gap-horizontal);
+    padding: var(--eds-selectable-space-vertical)
+      var(--eds-selectable-space-horizontal);
+    border-radius: var(--eds-spacing-border-radius-rounded);
+    cursor: pointer;
+
+    &:has(.eds-switch__input:focus-visible) {
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thick);
+    }
 
     &[data-disabled='true'] {
       cursor: not-allowed;
     }
-  }
-
-  /* Standalone (no label) */
-  .eds-switch--standalone {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    /* Dynamic sizing from generic tokens (icon + padding) */
-    width: calc(
-      var(--eds-selectable-space-vertical) * 2 + var(--eds-typography-icon-size)
-    );
-    height: calc(
-      var(--eds-selectable-space-vertical) * 2 + var(--eds-typography-icon-size)
-    );
-
-    /* Hover background pseudo-element */
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--eds-spacing-border-radius-pill);
-      background-color: transparent;
-      transition: background-color 150ms;
-    }
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover::before {
-        background-color: var(--eds-color-bg-accent-fill-muted-hover);
+      &:hover:not([data-disabled='true']) {
+        background-color: var(--eds-color-bg-accent-fill-muted-default);
       }
-
-      &[data-disabled='true']:hover::before {
-        background-color: transparent;
-      }
-    }
-  }
-
-  /* With Field (has label) */
-  .eds-field.eds-switch {
-    gap: var(--eds-typography-gap-horizontal);
-    padding: var(--eds-selectable-space-vertical)
-      var(--eds-selectable-space-horizontal);
-    width: fit-content;
-    border-radius: var(--eds-spacing-border-radius-rounded);
-    height: auto;
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        background-color: var(--eds-color-bg-accent-fill-muted-hover);
-      }
-
-      &[data-disabled='true']:hover {
-        background-color: transparent;
-      }
-    }
-
-    /* Focus ring around entire switch + label */
-    &:has(.eds-switch__input:focus-visible) {
-      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-      outline-offset: var(--eds-sizing-stroke-thick);
     }
 
     & .eds-field__label {
@@ -93,90 +41,66 @@
     }
   }
 
-  /* Control wrapper */
   .eds-switch__control {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     flex-shrink: 0;
-
-    /* Focus ring - only for standalone (no label) */
-    .eds-switch--standalone &:has(.eds-switch__input:focus-visible)::after {
-      content: '';
-      position: absolute;
-      inset: calc(-1 * var(--eds-sizing-stroke-thick));
-      border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-      border-radius: var(--eds-spacing-border-radius-pill);
-      pointer-events: none;
-    }
   }
 
-  /* Hidden input */
   .eds-switch__input {
-    appearance: none;
     position: absolute;
     inset: 0;
-    margin: 0;
-    cursor: pointer;
     z-index: 1;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
 
-    /* Extend clickable area to cover full standalone wrapper for WCAG compliance */
-    .eds-switch--standalone & {
-      inset: calc(-1 * var(--eds-selectable-space-vertical));
+    &:focus {
+      outline: none;
     }
 
     &:disabled {
       cursor: not-allowed;
     }
-
-    &:focus {
-      outline: none;
-    }
   }
 
-  /* Track */
   .eds-switch__track {
     position: relative;
     display: inline-block;
-    width: var(--_switch-track-width);
-    height: var(--_switch-track-height);
-    background-color: var(--eds-color-bg-fill-muted-default);
+    inline-size: var(--_track-width);
+    block-size: var(--_track-height);
     border-radius: var(--eds-spacing-border-radius-pill);
+    background-color: var(--eds-color-bg-fill-muted-default);
     transition: background-color 150ms;
     pointer-events: none;
 
-    /* Hover state */
     @media (hover: hover) and (pointer: fine) {
-      .eds-switch:hover:not([data-disabled='true']) &,
-      .eds-field.eds-switch:hover:not([data-disabled='true']) & {
-        background-color: var(--eds-color-bg-surface);
+      .eds-switch:hover:not([data-disabled='true']) & {
+        background-color: var(--_track-hover-bg);
       }
     }
   }
 
-  /* Handle */
   .eds-switch__handle {
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: var(--_switch-handle-size);
-    height: var(--_switch-handle-size);
-    background-color: var(--eds-color-bg-fill-emphasis-default);
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    translate: 0 -50%;
+    inline-size: var(--_handle-size);
+    block-size: var(--_handle-size);
     border-radius: var(--eds-spacing-border-radius-pill);
+    background-color: var(--eds-color-bg-fill-emphasis-default);
     box-shadow: var(--eds-elevation-raised);
     transition:
-      left 150ms,
+      inset-inline-start 150ms,
       background-color 150ms;
     pointer-events: none;
 
-    /* Checked state - position */
     .eds-switch:has(.eds-switch__input:checked) & {
-      left: calc(100% - var(--_switch-handle-size));
+      inset-inline-start: calc(100% - var(--_handle-size));
     }
 
-    /* Disabled state */
     .eds-switch:has(.eds-switch__input:disabled) & {
       background-color: var(--eds-color-border-medium);
       box-shadow: none;
