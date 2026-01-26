@@ -9,14 +9,19 @@
     box-sizing: border-box;
     inline-size: 100%;
     background: var(--eds-color-bg-canvas);
-    border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+    /* Use outline instead of border to not affect height (36px target) */
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     border-radius: var(--eds-spacing-border-radius-none);
     padding-inline: var(--eds-selectable-space-horizontal);
     padding-block: var(--eds-selectable-space-vertical);
+    transition:
+      background-color 150ms,
+      outline-color 150ms;
 
     /* Hover - only for enabled inputs */
     &:hover:not([data-disabled]):not([data-readonly]) {
-      border-color: var(--eds-color-border-strong);
+      outline-color: var(--eds-color-border-strong);
 
       & .eds-input {
         color: var(--eds-color-text-strong);
@@ -40,15 +45,13 @@
 
     /* Focus state */
     &:focus-within {
-      border-color: transparent;
-      outline: var(--eds-sizing-stroke-thick) solid
-        var(--eds-color-border-focus);
-      outline-offset: calc(-1 * var(--eds-sizing-stroke-thick));
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thick);
     }
 
     /* Invalid state */
     &[data-invalid] {
-      border-color: var(--eds-color-border-medium);
+      outline-color: var(--eds-color-border-medium);
 
       &:focus-within {
         outline-color: var(--eds-color-border-strong);
@@ -63,7 +66,7 @@
     /* Disabled state */
     &[data-disabled] {
       cursor: not-allowed;
-      border-color: transparent;
+      outline-color: transparent;
 
       & .eds-input {
         color: var(--eds-color-border-medium);
@@ -88,7 +91,7 @@
 
     /* Readonly state */
     &[data-readonly] {
-      border-color: transparent;
+      outline-color: transparent;
 
       & .eds-input {
         color: var(--eds-color-border-strong);
