@@ -1,5 +1,5 @@
-import { forwardRef, useState, useCallback } from 'react'
-import { Field, useFieldIds } from '../Field'
+import { forwardRef, useState, useCallback, useId } from 'react'
+import { Field } from '../Field'
 import type { SwitchProps } from './Switch.types'
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
@@ -7,7 +7,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     label,
     disabled,
     className,
-    id: providedId,
+    id,
     checked: controlledChecked,
     defaultChecked,
     onChange,
@@ -15,7 +15,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   },
   ref,
 ) {
-  const { inputId } = useFieldIds(providedId)
+  const generatedId = useId()
+  const inputId = id ?? generatedId
 
   // Track checked state for dynamic color appearance
   const isControlled = controlledChecked !== undefined
