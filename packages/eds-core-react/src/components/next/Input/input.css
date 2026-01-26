@@ -43,10 +43,16 @@
       }
     }
 
-    /* Focus state */
+    /* Focus state - border stays in place, focus ring appears outside with gap
+       Matches Switch pattern: stroke-thin ring with stroke-thick gap */
     &:focus-within {
-      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-      outline-offset: var(--eds-sizing-stroke-thick);
+      outline-color: var(--eds-color-border-strong);
+      /* Use box-shadow since outline is used for the border */
+      box-shadow:
+        0 0 0 var(--eds-sizing-stroke-thick) var(--eds-color-bg-canvas),
+        0 0 0
+          calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
+          var(--eds-color-border-focus);
     }
 
     /* Invalid state */
@@ -55,6 +61,11 @@
 
       &:focus-within {
         outline-color: var(--eds-color-border-strong);
+        box-shadow:
+          0 0 0 var(--eds-sizing-stroke-thick) var(--eds-color-bg-canvas),
+          0 0 0
+            calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
+            var(--eds-color-border-focus);
       }
 
       & .eds-input::placeholder {
