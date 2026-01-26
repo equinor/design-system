@@ -22,7 +22,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     },
     ref,
   ) {
-    const colorAppearance = invalid && !disabled ? 'danger' : 'neutral'
+    const tone = invalid && !disabled ? 'danger' : 'neutral'
 
     const showErrorIcon = invalid && !disabled
     const hasStartAdornment = startText || startAdornment
@@ -35,7 +35,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     return (
       <div
         className={containerClasses}
-        data-color-appearance={colorAppearance}
+        data-color-appearance={tone}
         data-font-size="md"
         data-selectable-space="sm"
         data-space-proportions="squished"
