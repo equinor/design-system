@@ -125,12 +125,19 @@ const meta: Meta<typeof Input> = {
       },
     },
 
-    // Other
+    // Styling
     className: {
       control: 'text',
-      description: 'Additional CSS class names for the container',
+      description: 'CSS class names applied to the input element',
       table: {
-        category: 'Other',
+        category: 'Styling',
+      },
+    },
+    containerClassName: {
+      control: 'text',
+      description: 'CSS class names applied to the container wrapper',
+      table: {
+        category: 'Styling',
       },
     },
   },
@@ -510,3 +517,59 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
   )
 }
 ColorSchemes.storyName = 'Light & Dark Mode'
+
+/**
+ * The Input component provides two props for applying custom CSS classes:
+ * - `className`: Applied to the input element itself
+ * - `containerClassName`: Applied to the container wrapper
+ *
+ * This separation allows for precise styling control over both elements.
+ */
+export const CustomStyling: StoryFn<InputProps> = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <style>
+      {`
+        .custom-container {
+          border-radius: 999px;
+        }
+        .custom-input {
+          text-transform: uppercase;
+        }
+        .custom-input::placeholder {
+          text-transform: none;
+        }
+      `}
+    </style>
+    <div>
+      <p style={{ marginBottom: '8px' }}>
+        <code>containerClassName</code> - styles the wrapper (e.g.,
+        border-radius)
+      </p>
+      <Input
+        aria-label="Container styled"
+        placeholder="Rounded container"
+        containerClassName="custom-container"
+      />
+    </div>
+    <div>
+      <p style={{ marginBottom: '8px' }}>
+        <code>className</code> - styles the input element (e.g., text-transform)
+      </p>
+      <Input
+        aria-label="Input styled"
+        placeholder="Type to see uppercase"
+        className="custom-input"
+      />
+    </div>
+    <div>
+      <p style={{ marginBottom: '8px' }}>Both props combined</p>
+      <Input
+        aria-label="Both styled"
+        placeholder="Type to see both styles"
+        containerClassName="custom-container"
+        className="custom-input"
+      />
+    </div>
+  </div>
+)
+CustomStyling.storyName = 'Custom Styling'

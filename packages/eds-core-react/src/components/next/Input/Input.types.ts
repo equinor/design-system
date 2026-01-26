@@ -13,4 +13,6 @@ export type InputProps = {
   endAdornment?: ReactNode
   /** Render as input or textarea */
   as?: 'input' | 'textarea'
+  /** Class name applied to the container element */
+  containerClassName?: string
 } & InputHTMLAttributes<HTMLInputElement>

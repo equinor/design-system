@@ -15,6 +15,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       startAdornment,
       endText,
       endAdornment,
+      containerClassName,
       className,
       as: Component = 'input',
       ...inputProps
@@ -27,7 +28,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const hasStartAdornment = startText || startAdornment
     const hasEndAdornment = endText || endAdornment
 
-    const containerClasses = ['eds-input-container', className]
+    const containerClasses = ['eds-input-container', containerClassName]
       .filter(Boolean)
       .join(' ')
 
@@ -82,7 +83,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={type}
           disabled={disabled}
           readOnly={readOnly}
-          className="eds-input"
+          className={['eds-input', className].filter(Boolean).join(' ')}
           data-color-appearance="neutral"
           data-font-family="ui"
           data-font-size="md"

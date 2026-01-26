@@ -52,12 +52,21 @@ describe('Input (Next EDS 2.0)', () => {
       expect(input).toHaveAttribute('type', 'password')
     })
 
-    it('Can be extended with className', () => {
-      render(<Input value="textfield" className="custom-class" readOnly />)
+    it('Can be extended with containerClassName', () => {
+      render(
+        <Input value="textfield" containerClassName="custom-class" readOnly />,
+      )
       const input = screen.getByDisplayValue('textfield')
       expect(input).toBeInTheDocument()
       // eslint-disable-next-line testing-library/no-node-access
       expect(input.parentElement).toHaveClass('custom-class')
+    })
+
+    it('Can be extended with className on input element', () => {
+      render(<Input value="textfield" className="input-class" readOnly />)
+      const input = screen.getByDisplayValue('textfield')
+      expect(input).toHaveClass('eds-input')
+      expect(input).toHaveClass('input-class')
     })
 
     it('Renders as textarea when as prop is textarea', () => {
@@ -226,8 +235,8 @@ describe('Input (Next EDS 2.0)', () => {
     })
 
     describe('CSS classes', () => {
-      it('Applies base class and custom className', () => {
-        render(<Input className="test-class" />)
+      it('Applies base class and custom containerClassName', () => {
+        render(<Input containerClassName="test-class" />)
         const wrapper = getInputWrapper()
         expect(wrapper).toHaveClass('eds-input-container')
         expect(wrapper).toHaveClass('test-class')
