@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Radio (next) matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="eds-field eds-radio"
+    data-color-appearance="accent"
+    data-position="start"
+    data-selectable-space="md"
+    data-space-proportions="squished"
+  >
+    <input
+      class="eds-radio__input"
+      id="test-id"
+      name="test"
+      type="radio"
+    />
+    <span
+      class="eds-radio__icon-wrapper"
+    >
+      <svg
+        aria-hidden="true"
+        class="icon eds-radio__icon eds-radio__icon--checked"
+        data-icon-size="lg"
+        data-testid="eds-icon"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8m-5-8a5 5 0 1 1 10 0 5 5 0 0 1-10 0"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <svg
+        aria-hidden="true"
+        class="icon eds-radio__icon eds-radio__icon--unchecked"
+        data-icon-size="lg"
+        data-testid="eds-icon"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12m2 0c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8-8 3.58-8 8"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+    <label
+      class="eds-field__label"
+      data-baseline="center"
+      data-font-family="ui"
+      data-font-size="lg"
+      data-font-weight="normal"
+      data-line-height="default"
+      data-tracking="normal"
+      for="test-id"
+    >
+      radio
+    </label>
+  </div>
+</DocumentFragment>
+`;
