@@ -9,7 +9,7 @@
     /* Private color variables */
     --_eds-field-label-color: var(--eds-color-text-strong);
     --_eds-field-description-color: var(--eds-color-text-subtle);
-    --_eds-field-indicator-color: var(--eds-color-text-subtle);
+    --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
     --_eds-field-helper-color: var(--eds-color-text-subtle);
   }
 

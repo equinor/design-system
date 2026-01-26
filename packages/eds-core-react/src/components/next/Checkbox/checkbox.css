@@ -1,0 +1,165 @@
+@layer eds-components {
+  .eds-checkbox {
+    --_checkbox-icon-color: var(--eds-color-bg-fill-emphasis-default);
+    --_checkbox-hover-color: var(--eds-color-bg-fill-muted-default);
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .eds-checkbox--standalone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0.375rem; /* 6px for spacious: 24px icon + 12px = 36px */
+  }
+
+  .eds-field.eds-checkbox {
+    /* Gap compensates for icon-wrapper negative margin (-4.8px) */
+    gap: 0.925rem;
+    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
+    width: auto;
+    border-radius: var(--eds-spacing-border-radius-rounded);
+    transition: background-color 150ms;
+  }
+
+  .eds-checkbox[data-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  .eds-checkbox__icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    overflow: visible;
+    line-height: 0;
+  }
+
+  /* Negative margin matches Figma icon container padding */
+  .eds-field.eds-checkbox .eds-checkbox__icon-wrapper {
+    margin-block: -6px;
+    margin-inline: -4.8px;
+  }
+
+  .eds-checkbox--standalone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--eds-spacing-border-radius-pill);
+    background-color: transparent;
+    transition: background-color 150ms;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .eds-checkbox--standalone:hover::before {
+      background-color: var(--_checkbox-hover-color);
+    }
+
+    .eds-checkbox--standalone[data-disabled='true']:hover::before {
+      background-color: transparent;
+    }
+
+    .eds-field.eds-checkbox:hover {
+      background-color: var(--_checkbox-hover-color);
+    }
+
+    .eds-field.eds-checkbox[data-disabled='true']:hover {
+      background-color: transparent;
+    }
+  }
+
+  .eds-checkbox__input {
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .eds-checkbox__input:disabled {
+    cursor: not-allowed;
+  }
+
+  .eds-checkbox__input:focus {
+    outline: none;
+  }
+
+  .eds-checkbox:has(.eds-checkbox__input:focus-visible)::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 1px solid var(--eds-color-border-focus);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  .eds-checkbox--standalone:has(.eds-checkbox__input:focus-visible)::after {
+    border-radius: var(--eds-spacing-border-radius-pill);
+  }
+
+  .eds-checkbox__icon {
+    position: relative;
+    pointer-events: none;
+    fill: var(--_checkbox-icon-color);
+    flex-shrink: 0;
+  }
+
+  .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
+    fill: var(--eds-color-border-neutral-medium);
+  }
+
+  /* Icon visibility */
+  .eds-checkbox__icon--checked,
+  .eds-checkbox__icon--indeterminate {
+    display: none;
+  }
+
+  .eds-checkbox__icon--unchecked {
+    display: block;
+  }
+
+  .eds-checkbox:has(.eds-checkbox__input:checked) .eds-checkbox__icon--checked {
+    display: block;
+  }
+
+  .eds-checkbox:has(.eds-checkbox__input:checked)
+    .eds-checkbox__icon--unchecked {
+    display: none;
+  }
+
+  .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
+    .eds-checkbox__icon--indeterminate {
+    display: block;
+  }
+
+  .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
+    .eds-checkbox__icon--checked,
+  .eds-checkbox:has(.eds-checkbox__input[data-indeterminate='true'])
+    .eds-checkbox__icon--unchecked {
+    display: none;
+  }
+
+  .eds-field.eds-checkbox .eds-field__label {
+    cursor: pointer;
+  }
+
+  .eds-field.eds-checkbox[data-disabled='true'] .eds-field__label {
+    color: var(--eds-color-border-neutral-medium);
+    cursor: not-allowed;
+  }
+
+  .eds-field.eds-checkbox[data-color-appearance='accent'] {
+    --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
+  }
+
+  /* Comfortable density for standalone checkbox */
+  /* Icon is 20px in comfortable (--eds-sizing-icon-lg: 1.25rem) */
+  [data-density='comfortable'] .eds-checkbox--standalone {
+    padding: 0.25rem; /* 4px: 20px icon + 8px = 28px */
+  }
+}
