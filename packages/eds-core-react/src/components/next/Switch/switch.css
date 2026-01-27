@@ -1,0 +1,113 @@
+/* Switch component - uses Field for layout */
+@layer eds-components {
+  .eds-switch {
+    --eds-field-width: fit-content; /* Override Field's default 100% width */
+    --_icon-size: var(--eds-typography-icon-size, var(--eds-sizing-icon-md));
+    --_handle-size: calc(var(--_icon-size) * 0.6);
+    --_track-width: calc(var(--_icon-size) * 1.1);
+    --_track-height: calc(var(--_icon-size) * 0.4);
+    /* TODO: Replace with semantic token when available */
+    --_track-hover-bg: var(--eds-color-neutral-2);
+
+    position: relative;
+    gap: var(--eds-typography-gap-horizontal);
+    padding: var(--eds-selectable-space-vertical)
+      var(--eds-selectable-space-horizontal);
+    border-radius: var(--eds-spacing-border-radius-rounded);
+    cursor: pointer;
+    transition: background-color 150ms;
+
+    &:has(.eds-switch__input:focus-visible) {
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thick);
+    }
+
+    &[data-disabled='true'] {
+      cursor: not-allowed;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not([data-disabled='true']) {
+        background-color: var(--eds-color-bg-accent-fill-muted-default);
+      }
+    }
+
+    & .eds-field__label {
+      cursor: pointer;
+    }
+
+    &[data-disabled='true'] .eds-field__label {
+      color: var(--eds-color-border-medium);
+      cursor: not-allowed;
+    }
+  }
+
+  .eds-switch__control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* Same margins as icons for proper form alignment */
+    margin-block: calc(var(--_icon-size) * -0.25);
+    margin-inline: calc(var(--_icon-size) * -0.1);
+  }
+
+  .eds-switch__input {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .eds-switch__track {
+    position: relative;
+    display: inline-block;
+    inline-size: var(--_track-width);
+    block-size: var(--_track-height);
+    border-radius: var(--eds-spacing-border-radius-pill);
+    background-color: var(--eds-color-bg-fill-muted-default);
+    transition: background-color 150ms;
+    pointer-events: none;
+
+    @media (hover: hover) and (pointer: fine) {
+      .eds-switch:hover:not([data-disabled='true']) & {
+        background-color: var(--_track-hover-bg);
+      }
+    }
+  }
+
+  .eds-switch__handle {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    translate: 0 -50%;
+    inline-size: var(--_handle-size);
+    block-size: var(--_handle-size);
+    border-radius: var(--eds-spacing-border-radius-pill);
+    background-color: var(--eds-color-bg-fill-emphasis-default);
+    box-shadow: var(--eds-elevation-raised);
+    transition:
+      inset-inline-start 150ms,
+      background-color 150ms;
+    pointer-events: none;
+
+    .eds-switch:has(.eds-switch__input:checked) & {
+      inset-inline-start: calc(100% - var(--_handle-size));
+    }
+
+    .eds-switch:has(.eds-switch__input:disabled) & {
+      background-color: var(--eds-color-border-medium);
+      box-shadow: none;
+    }
+  }
+}
