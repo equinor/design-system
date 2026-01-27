@@ -2,6 +2,7 @@
 @layer eds-components {
   .eds-switch {
     --eds-field-width: fit-content; /* Override Field's default 100% width */
+    --_switch-hover-color: var(--eds-color-bg-fill-muted-default);
     --_icon-size: var(--eds-typography-icon-size, var(--eds-sizing-icon-md));
     --_handle-size: calc(var(--_icon-size) * 0.6);
     --_track-width: calc(var(--_icon-size) * 1.1);
@@ -28,7 +29,7 @@
 
     @media (hover: hover) and (pointer: fine) {
       &:hover:not([data-disabled='true']) {
-        background-color: var(--eds-color-bg-accent-fill-muted-default);
+        background-color: var(--_switch-hover-color);
       }
     }
 

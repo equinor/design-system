@@ -43,6 +43,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       data-font-size="md"
       data-selectable-space="md"
       data-space-proportions="squished"
+      data-color-appearance={disabled ? 'neutral' : 'accent'}
     >
       <span
         className="eds-switch__control"
