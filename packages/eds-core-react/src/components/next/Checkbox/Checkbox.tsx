@@ -8,7 +8,6 @@ import {
 import { Field } from '../Field'
 import { Icon } from '../Icon'
 import type { CheckboxProps } from './Checkbox.types'
-import './checkbox.css'
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
   classes.filter(Boolean).join(' ')
@@ -78,7 +77,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           position="start"
           disabled={disabled}
           className="eds-checkbox"
-          data-color-appearance="accent"
+          data-color-appearance={disabled ? 'neutral' : 'accent'}
           data-selectable-space="md"
           data-space-proportions="squished"
         >
@@ -98,7 +97,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <span
         className={classNames('eds-checkbox', 'eds-checkbox--standalone')}
-        data-color-appearance="accent"
+        data-color-appearance={disabled ? 'neutral' : 'accent'}
         data-disabled={disabled || undefined}
       >
         {checkboxInput}
