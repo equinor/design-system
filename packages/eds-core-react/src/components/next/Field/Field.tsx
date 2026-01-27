@@ -1,5 +1,4 @@
 import { forwardRef } from 'react'
-import './field.css'
 import { FieldDescription } from './Field.Description'
 import { HelperMessage } from './Field.HelperMessage'
 import type { FieldProps } from './Field.types'

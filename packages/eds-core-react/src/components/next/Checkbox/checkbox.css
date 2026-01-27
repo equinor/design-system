@@ -27,11 +27,23 @@
 
   .eds-field.eds-checkbox {
     /*
-     * Gap must compensate for icon-wrapper negative margin (-4.8px inline).
-     * This negative margin matches Figma's icon container padding for optical alignment.
-     * Compensation: 4.8px (margin) + 2px (visual balance) ≈ 6.8px (0.425rem)
+     * Gap compensation for label alignment.
+     *
+     * Problem: The icon-wrapper has negative margin (-4.8px inline) to match
+     * Figma's icon container padding. This pulls the icon closer to the edge,
+     * but CSS gap is measured from the icon-wrapper's margin box, not from the
+     * visible icon graphic. Without compensation, labels appear too close to icons.
+     *
+     * Solution: Add gap compensation to offset the negative margin effect.
+     *
+     * Result: 7px gap from SVG bounding box to label text.
+     *
+     * Note: Checkbox and Radio use the same compensation value (0.2375rem)
+     * to ensure their labels align perfectly when stacked vertically.
+     * This is prioritized over exact pixel-perfect gap from the icon stroke,
+     * since the icons have different internal padding (Checkbox: 3px, Radio: 2px).
      */
-    --_checkbox-gap-compensation: 0.425rem;
+    --_checkbox-gap-compensation: 0.2375rem;
     gap: calc(
       var(--eds-generic-gap-horizontal) + var(--_checkbox-gap-compensation)
     );
@@ -56,7 +68,17 @@
     line-height: 0;
   }
 
-  /* Negative margin matches Figma icon container padding */
+  /*
+   * Negative margin to match Figma's icon container padding.
+   *
+   * In Figma, the icon container has internal padding that positions the icon
+   * inward from the component edge. We replicate this with negative margin to:
+   * 1. Align the icon's left edge with Figma's design
+   * 2. Keep the component's padding consistent with other Field-based components
+   *
+   * The gap compensation (--_checkbox-gap-compensation) counteracts this for
+   * proper label spacing. See the gap compensation comment above for details.
+   */
   .eds-field.eds-checkbox .eds-checkbox__icon-wrapper {
     margin-block: -6px;
     margin-inline: -4.8px;
@@ -124,7 +146,7 @@
   }
 
   .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-    fill: var(--eds-color-border-neutral-medium);
+    fill: var(--eds-color-border-medium);
   }
 
   /* Icon visibility */
@@ -163,7 +185,7 @@
   }
 
   .eds-field.eds-checkbox[data-disabled='true'] .eds-field__label {
-    color: var(--eds-color-border-neutral-medium);
+    color: var(--eds-color-border-medium);
     cursor: not-allowed;
   }
 
