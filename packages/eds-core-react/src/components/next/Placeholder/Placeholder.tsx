@@ -1,14 +1,7 @@
 /**
- * Placeholder component for testing the /next entry point.
- * This component should be removed once real EDS 2.0 components are added.
+ * Placeholder component for Code Connect example.
+ * This is a minimal component used to demonstrate Figma Code Connect setup.
  */
-export type PlaceholderProps = {
-  /** Text to display */
-  text?: string
-}
-
-export const Placeholder = ({
-  text = 'EDS 2.0 Placeholder',
-}: PlaceholderProps) => {
-  return <div data-testid="eds-placeholder">{text}</div>
+export const Placeholder = ({ text = 'Placeholder' }: { text?: string }) => {
+  return <div>{text}</div>
 }

@@ -14,6 +14,7 @@
  * See FIGMA_CODE_CONNECT.md for full documentation.
  */
 
+/* eslint-disable import/no-unresolved, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
 import figma from '@figma/code-connect'
 import { Placeholder } from './Placeholder'
 

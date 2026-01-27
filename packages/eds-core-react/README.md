@@ -27,6 +27,9 @@ npm install @equinor/eds-core-react@beta
 
 ```typescript
 import { Button, Typography } from '@equinor/eds-core-react/next'
+
+// Import CSS separately (required for SSR compatibility)
+import '@equinor/eds-core-react/next/index.css'
 ```
 
 **Learn more:**

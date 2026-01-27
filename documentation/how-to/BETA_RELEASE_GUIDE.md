@@ -4,12 +4,13 @@ This guide explains how beta releases work for EDS 2.0 components under the `/ne
 
 ## Quick Reference
 
-| Action                | Command                                                  |
-| --------------------- | -------------------------------------------------------- |
-| Install beta          | `npm install @equinor/eds-core-react@beta`               |
-| Import beta component | `import { Button } from '@equinor/eds-core-react/next'`  |
-| Commit for beta       | `feat(next): add new component`                          |
-| View beta versions    | `npm view @equinor/eds-core-react versions \| grep beta` |
+| Action                | Command                                                    |
+| --------------------- | ---------------------------------------------------------- |
+| Install beta          | `npm install @equinor/eds-core-react@beta`                 |
+| Import beta component | `import { Button } from '@equinor/eds-core-react/next'`    |
+| Import CSS            | `import '@equinor/eds-core-react/next/index.css'`          |
+| Commit for beta       | `feat(next): add new component`                            |
+| View beta versions    | `npm view @equinor/eds-core-react versions \| grep beta`   |
 
 ## Overview
 
@@ -74,6 +75,9 @@ npm install @equinor/eds-core-react@2.0.0-beta.1
 ```typescript
 // Import from /next entry point
 import { Placeholder } from '@equinor/eds-core-react/next'
+
+// Import CSS separately (required for SSR compatibility)
+import '@equinor/eds-core-react/next/index.css'
 ```
 
 ## Viewing Beta Components in Storybook
