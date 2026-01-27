@@ -4,6 +4,8 @@ import { useArgs } from 'storybook/preview-api'
 import { Stack } from './../../../../.storybook/components'
 import { Typography } from '../../..'
 import { Switch } from './Switch'
+import { Checkbox } from '../Checkbox'
+import { Radio } from '../Radio'
 import type { SwitchProps } from './Switch.types'
 import mdx from './Switch.docs.mdx'
 
@@ -179,6 +181,48 @@ Density.parameters = {
     description: {
       story:
         'Use `data-density="comfortable"` on a parent element to render switches in a more compact size. Spacious is the default density.',
+    },
+  },
+}
+
+/** Visual comparison of all selection controls alignment */
+export const SelectionControlsAlignment: StoryFn = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+    <div>
+      <h3 style={{ marginBottom: '8px' }}>
+        Stacked (labels and hover areas should align)
+      </h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <Checkbox label="Checkbox option" />
+        <Radio label="Radio option" name="stacked" />
+        <Switch label="Switch option" />
+      </div>
+    </div>
+
+    <div>
+      <h3 style={{ marginBottom: '8px' }}>Disabled States</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <Checkbox label="Disabled checkbox" disabled />
+        <Radio label="Disabled radio" name="disabled" disabled />
+        <Switch label="Disabled switch" disabled />
+      </div>
+    </div>
+
+    <div>
+      <h3 style={{ marginBottom: '8px' }}>Hover Test (hover each row)</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <Checkbox label="Hover me - Checkbox" />
+        <Radio label="Hover me - Radio" name="hover" />
+        <Switch label="Hover me - Switch" />
+      </div>
+    </div>
+  </div>
+)
+SelectionControlsAlignment.parameters = {
+  docs: {
+    description: {
+      story:
+        'Visual comparison showing all selection controls (Checkbox, Radio, Switch) aligned. Labels, hover backgrounds, and disabled states should be consistent.',
     },
   },
 }
