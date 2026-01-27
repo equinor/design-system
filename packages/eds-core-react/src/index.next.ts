@@ -6,6 +6,9 @@
  *
  * Install: npm install @equinor/eds-core-react@beta
  *
+ * CSS must be imported separately for SSR compatibility:
+ * import '@equinor/eds-core-react/next/index.css'
+ *
  * @packageDocumentation
  */
 

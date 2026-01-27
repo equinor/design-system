@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="eds-input-container"
+    data-color-appearance="neutral"
+    data-font-size="md"
+    data-readonly="true"
+    data-selectable-space="sm"
+    data-space-proportions="squished"
+  >
+    <input
+      class="eds-input"
+      data-color-appearance="neutral"
+      data-font-family="ui"
+      data-font-size="md"
+      data-line-height="default"
+      readonly=""
+      type="text"
+      value="input value"
+    />
+  </div>
+</DocumentFragment>
+`;
