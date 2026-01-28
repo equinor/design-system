@@ -1,0 +1,110 @@
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Button.stories'
+
+<Meta of={ComponentStories} />
+
+# Button
+
+Button component for triggering actions.
+
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+<Primary />
+<Controls />
+
+## Usage
+
+```tsx
+import { Button } from '@equinor/eds-core-react/next'
+import { Icon } from '@equinor/eds-core-react/next'
+import { add, chevron_right } from '@equinor/eds-icons'
+
+// Text only
+<Button variant="primary" tone="accent">
+  Submit
+</Button>
+
+// Icon before label
+<Button variant="secondary">
+  <Icon data={add} aria-hidden />
+  Add item
+</Button>
+
+// Icon after label
+<Button>
+  Next
+  <Icon data={chevron_right} aria-hidden />
+</Button>
+
+// Icon-only button (requires aria-label)
+<Button icon aria-label="Add item">
+  <Icon data={add} aria-hidden />
+</Button>
+
+// Circular icon-only button
+<Button icon round aria-label="Add item">
+  <Icon data={add} aria-hidden />
+</Button>
+```
+
+## Examples
+
+### Sizes
+
+Three sizes are available: `small` (24px spacious / 20px comfortable), `default` (36px spacious / 24px comfortable), and `large` (44px spacious / 36px comfortable).
+
+<Canvas of={ComponentStories.Sizes} />
+
+### Tones
+
+The `tone` prop controls the color scheme using `data-color-appearance`.
+
+<Canvas of={ComponentStories.Tones} />
+
+### With Icons
+
+Place an Icon before or after the text as a child.
+
+<Canvas of={ComponentStories.WithIconBefore} />
+<Canvas of={ComponentStories.WithIconAfter} />
+
+### Disabled States
+
+All variants support the disabled state.
+
+<Canvas of={ComponentStories.DisabledVariants} />
+
+### Danger Actions
+
+Use `tone="danger"` for destructive actions.
+
+<Canvas of={ComponentStories.DangerAction} />
+
+### Icon-Only Buttons
+
+Use the `icon` prop for icon-only buttons. They are square with uniform padding. Always provide `aria-label` for accessibility.
+
+<Canvas of={ComponentStories.IconOnly} />
+<Canvas of={ComponentStories.IconOnlyVariants} />
+
+### Circular Icon-Only Buttons
+
+Use `round` on icon-only buttons to create circular buttons.
+
+<Canvas of={ComponentStories.CircularIconOnly} />
+
+### Density Modes
+
+Comparison of all button sizes across density modes. Use `data-density` on a parent container to control density.
+
+<Canvas of={ComponentStories.DensityComparison} />
+
+### All Variants
+
+Complete overview of all variants, sizes, and color appearances.
+
+<Canvas of={ComponentStories.AllVariants} />

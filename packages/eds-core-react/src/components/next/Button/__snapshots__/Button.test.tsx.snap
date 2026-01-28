@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Button (next) Rendering matches snapshot 1`] = `
+<div>
+  <button
+    class="eds-button"
+    data-color-appearance="accent"
+    data-font-family="ui"
+    data-font-size="md"
+    data-line-height="squished"
+    data-selectable-space="md"
+    data-space-proportions="squished"
+    data-variant="primary"
+    type="button"
+  >
+    <span
+      data-baseline="center"
+      data-font-family="ui"
+      data-font-size="md"
+      data-line-height="squished"
+    >
+      Click me
+    </span>
+  </button>
+</div>
+`;

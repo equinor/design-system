@@ -1,58 +1,60 @@
-/* Inline with text: uses token from parent's data-font-size, or 1.5em fallback */
-.icon {
-  /*
-   * Set font-size first to establish the icon's size context.
-   * Then use 1em for width/height (relative to computed font-size).
-   * This avoids compound scaling (1.5em × 1.5em = 2.25em would be wrong).
-   */
-  font-size: var(--eds-typography-icon-size, 1.5em);
-  width: 1em;
-  height: 1em;
+@layer eds-components {
+  /* Inline with text: uses token from parent's data-font-size, or 1.5em fallback */
+  .icon {
+    /*
+     * Set font-size first to establish the icon's size context.
+     * Then use 1em for width/height (relative to computed font-size).
+     * This avoids compound scaling (1.5em × 1.5em = 2.25em would be wrong).
+     */
+    font-size: var(--eds-typography-icon-size, 1.5em);
+    width: 1em;
+    height: 1em;
 
-  /* Negative margins for optical alignment with text baseline */
-  margin-block: -0.25em;
-  margin-inline: -0.1em;
+    /* Negative margins for optical alignment with text baseline */
+    margin-block: -0.25em;
+    margin-inline: -0.1em;
 
-  flex-shrink: 0;
-}
+    flex-shrink: 0;
+  }
 
-/* Explicit size: fixed size from design tokens, no margins */
-.icon[data-icon-size] {
-  --_explicit-size: var(--eds-sizing-icon-md); /* fallback */
+  /* Explicit size: fixed size from design tokens, no margins */
+  .icon[data-icon-size] {
+    --_explicit-size: var(--eds-sizing-icon-md); /* fallback */
 
-  width: var(--_explicit-size);
-  height: var(--_explicit-size);
-  margin: 0;
-  font-size: inherit;
-}
+    width: var(--_explicit-size);
+    height: var(--_explicit-size);
+    margin: 0;
+    font-size: inherit;
+  }
 
-.icon[data-icon-size='xs'] {
-  --_explicit-size: var(--eds-sizing-icon-xs);
-}
-.icon[data-icon-size='sm'] {
-  --_explicit-size: var(--eds-sizing-icon-sm);
-}
-.icon[data-icon-size='md'] {
-  --_explicit-size: var(--eds-sizing-icon-md);
-}
-.icon[data-icon-size='lg'] {
-  --_explicit-size: var(--eds-sizing-icon-lg);
-}
-.icon[data-icon-size='xl'] {
-  --_explicit-size: var(--eds-sizing-icon-xl);
-}
-.icon[data-icon-size='2xl'] {
-  --_explicit-size: var(--eds-sizing-icon-2xl);
-}
-.icon[data-icon-size='3xl'] {
-  --_explicit-size: var(--eds-sizing-icon-3xl);
-}
-.icon[data-icon-size='4xl'] {
-  --_explicit-size: var(--eds-sizing-icon-4xl);
-}
-.icon[data-icon-size='5xl'] {
-  --_explicit-size: var(--eds-sizing-icon-5xl);
-}
-.icon[data-icon-size='6xl'] {
-  --_explicit-size: var(--eds-sizing-icon-6xl);
+  .icon[data-icon-size='xs'] {
+    --_explicit-size: var(--eds-sizing-icon-xs);
+  }
+  .icon[data-icon-size='sm'] {
+    --_explicit-size: var(--eds-sizing-icon-sm);
+  }
+  .icon[data-icon-size='md'] {
+    --_explicit-size: var(--eds-sizing-icon-md);
+  }
+  .icon[data-icon-size='lg'] {
+    --_explicit-size: var(--eds-sizing-icon-lg);
+  }
+  .icon[data-icon-size='xl'] {
+    --_explicit-size: var(--eds-sizing-icon-xl);
+  }
+  .icon[data-icon-size='2xl'] {
+    --_explicit-size: var(--eds-sizing-icon-2xl);
+  }
+  .icon[data-icon-size='3xl'] {
+    --_explicit-size: var(--eds-sizing-icon-3xl);
+  }
+  .icon[data-icon-size='4xl'] {
+    --_explicit-size: var(--eds-sizing-icon-4xl);
+  }
+  .icon[data-icon-size='5xl'] {
+    --_explicit-size: var(--eds-sizing-icon-5xl);
+  }
+  .icon[data-icon-size='6xl'] {
+    --_explicit-size: var(--eds-sizing-icon-6xl);
+  }
 }
