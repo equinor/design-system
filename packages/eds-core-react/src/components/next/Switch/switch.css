@@ -3,21 +3,38 @@
   .eds-switch {
     --eds-field-width: fit-content; /* Override Field's default 100% width */
     --_switch-hover-color: var(--eds-color-bg-fill-muted-default);
-    --_icon-size: var(--eds-typography-icon-size, var(--eds-sizing-icon-md));
-    --_handle-size: calc(var(--_icon-size) * 0.6);
-    --_track-width: calc(var(--_icon-size) * 1.1);
-    --_track-height: calc(var(--_icon-size) * 0.4);
+    --_icon-size: var(--eds-sizing-icon-lg);
+    /* Track: 22x8px, Handle: 12px (spacious density with 24px icon size) */
+    --_handle-size: calc(var(--_icon-size) / 2);
+    --_track-width: calc(var(--_icon-size) * 11 / 12);
+    --_track-height: calc(var(--_icon-size) / 3);
     /* TODO: Replace with semantic token when available */
     --_track-hover-bg: var(--eds-color-neutral-2);
+    /*
+     * Gap compensation for label alignment with Checkbox and Radio.
+     *
+     * Unlike Checkbox/Radio which use icons with ~3px internal SVG padding,
+     * the Switch track is rendered edge-to-edge with no padding.
+     *
+     * Using smaller margin (-2px vs -4.8px) and proportionally smaller gap
+     * compensation to achieve the same visual label alignment.
+     * Derived as fraction of icon size: 1.6px / 24px ≈ 1/15
+     */
+    --_switch-gap-compensation: calc(var(--_icon-size) / 15);
 
     position: relative;
-    gap: var(--eds-typography-gap-horizontal);
-    padding: var(--eds-selectable-space-vertical)
-      var(--eds-selectable-space-horizontal);
+    gap: calc(
+      var(--eds-generic-gap-horizontal) + var(--_switch-gap-compensation)
+    );
+    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
+    width: auto;
     border-radius: var(--eds-spacing-border-radius-rounded);
     cursor: pointer;
     transition: background-color 150ms;
+  }
 
+  .eds-switch {
     &:has(.eds-switch__input:focus-visible) {
       outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
       outline-offset: var(--eds-sizing-stroke-thick);
@@ -48,9 +65,21 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    /* Same margins as icons for proper form alignment */
-    margin-block: calc(var(--_icon-size) * -0.25);
-    margin-inline: calc(var(--_icon-size) * -0.1);
+    /*
+     * Margin adjustment for alignment with Checkbox/Radio icons.
+     *
+     * Checkbox/Radio icons (24px) have ~3px internal SVG padding and use
+     * margin-block: -6px, margin-inline: -4.8px.
+     *
+     * Switch track has no internal padding, so uses smaller inline margin
+     * (-1.9px vs -4.8px) to achieve the same visual label alignment.
+     */
+    margin-block: -6px;
+    margin-inline: -1.9px;
+  }
+
+  [data-density='comfortable'] .eds-switch__control {
+    margin-inline: -2.1px;
   }
 
   .eds-switch__input {
