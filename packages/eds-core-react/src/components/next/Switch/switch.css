@@ -60,15 +60,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    /*
-     * Margin adjustment for alignment with Checkbox/Radio icons.
-     *
-     * Checkbox/Radio icons (24px) have ~3px internal SVG padding and use
-     * margin-block: -6px, margin-inline: -4.8px.
-     *
-     * Switch track has no internal padding, so uses smaller inline margin
-     * (-1.9px vs -4.8px) to achieve the same visual label alignment.
-     */
+    /* Negative margin for alignment with Checkbox/Radio icons */
     margin-block: -6px;
     margin-inline: -1.9px;
   }
