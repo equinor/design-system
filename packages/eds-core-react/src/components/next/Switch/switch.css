@@ -15,7 +15,7 @@
      * track is rendered edge-to-edge. This requires smaller gap adjustment
      * to achieve consistent label positioning across all selection controls.
      */
-    --_switch-gap-compensation: calc(var(--_icon-size) / 15);
+    --_switch-gap-compensation: 0.1rem;
 
     position: relative;
     gap: calc(
