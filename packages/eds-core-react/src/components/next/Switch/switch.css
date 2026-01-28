@@ -60,6 +60,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    min-block-size: var(--_icon-size);
     /* Negative margin for alignment with Checkbox/Radio icons */
     margin-block: -6px;
     margin-inline: -1.9px;

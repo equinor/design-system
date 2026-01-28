@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Switch (next) matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="eds-field eds-switch"
+    data-color-appearance="accent"
+    data-font-size="md"
+    data-position="start"
+    data-selectable-space="md"
+    data-space-proportions="squished"
+  >
+    <span
+      class="eds-switch__control"
+      data-color-appearance="neutral"
+    >
+      <input
+        class="eds-switch__input"
+        id="test-id"
+        role="switch"
+        type="checkbox"
+      />
+      <span
+        class="eds-switch__track"
+      >
+        <span
+          class="eds-switch__handle"
+        />
+      </span>
+    </span>
+    <label
+      class="eds-field__label"
+      data-baseline="center"
+      data-font-family="ui"
+      data-font-size="md"
+      data-font-weight="normal"
+      data-line-height="default"
+      data-tracking="normal"
+      for="test-id"
+    >
+      switch
+    </label>
+  </div>
+</DocumentFragment>
+`;
