@@ -11,13 +11,9 @@
     --_track-hover-bg: var(--eds-color-neutral-2);
     /*
      * Gap compensation for label alignment with Checkbox and Radio.
-     *
-     * Unlike Checkbox/Radio which use icons with ~3px internal SVG padding,
-     * the Switch track is rendered edge-to-edge with no padding.
-     *
-     * Using smaller margin (-2px vs -4.8px) and proportionally smaller gap
-     * compensation to achieve the same visual label alignment.
-     * Derived as fraction of icon size: 1.6px / 24px ≈ 1/15
+     * Checkbox/Radio icons have ~3px internal SVG padding, but the Switch
+     * track is rendered edge-to-edge. This requires smaller gap adjustment
+     * to achieve consistent label positioning across all selection controls.
      */
     --_switch-gap-compensation: calc(var(--_icon-size) / 15);
 
