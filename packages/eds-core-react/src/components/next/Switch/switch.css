@@ -1,7 +1,6 @@
 /* Switch component - uses Field for layout */
 @layer eds-components {
   .eds-switch {
-    --eds-field-width: fit-content; /* Override Field's default 100% width */
     --_switch-hover-color: var(--eds-color-bg-fill-muted-default);
     --_icon-size: var(--eds-sizing-icon-lg);
     /* Track: 22x8px, Handle: 12px (spacious density with 24px icon size) */
