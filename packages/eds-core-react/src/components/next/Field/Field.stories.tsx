@@ -204,7 +204,6 @@ export const Disabled: StoryFn<FieldProps> = () => {
         id={inputId}
         value="john.doe"
         disabled
-        readOnly
         aria-describedby={getDescribedBy()}
       />
     </Field>
