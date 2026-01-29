@@ -31,14 +31,7 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/eds-core-react.cjs"
-    },
-    "./next": {
-      "types": "./dist/types/index.next.d.ts",
-      "import": "./dist/esm/index.next.js",
-      "require": "./dist/index.next.cjs"
-    },
-    "./next/index.css": "./build/index.css",
-    "./next/index.min.css": "./build/index.min.css"
+    }
   },
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",

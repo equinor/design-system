@@ -138,6 +138,27 @@ jobs:
           cd packages/eds-core-react
           npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
           echo "Updated package.json version to $BETA_VERSION"
+      - name: Add /next exports for beta release
+        if: github.event.inputs.npm-tag == 'beta'
+        id: add-next-exports
+        run: |
+          cd packages/eds-core-react
+          # Add /next exports to package.json for beta releases
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            pkg.exports['./next'] = {
+              types: './dist/types/index.next.d.ts',
+              import: './dist/esm/index.next.js',
+              require: './dist/index.next.cjs'
+            };
+            pkg.exports['./next/index.css'] = './build/index.css';
+            pkg.exports['./next/index.min.css'] = './build/index.min.css';
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+            console.log('Added /next exports to package.json');
+          "
+          echo "Updated exports:"
+          cat package.json | grep -A 15 '"exports"'
       - name: Publish to npm
         id: publish-to-npm
         run: |
