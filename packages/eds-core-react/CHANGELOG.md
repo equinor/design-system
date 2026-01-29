@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.2](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.1...eds-core-react@v2.3.2) (2026-01-29)
+
+
+### 🐛 Fixed
+
+* 🚑️ output next bundle to separate directory to prevent export overwrite ([#4405](https://github.com/equinor/design-system/issues/4405)) ([a53e64e](https://github.com/equinor/design-system/commit/a53e64e1efe10a45b23a7df7e2be119a5358a658))
+
 ## [2.3.1](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.0...eds-core-react@v2.3.1) (2026-01-29)
 
 
