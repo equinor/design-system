@@ -20,8 +20,8 @@ export const SingleInput = () => {
       rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
       rightAdornments={<RightAdornments />}
       {...restHtmlProps}
-      {...consolidatedEvents}
       {...inputProps}
+      {...consolidatedEvents}
     ></Input>
   )
 }
