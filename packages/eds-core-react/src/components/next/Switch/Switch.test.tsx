@@ -24,6 +24,11 @@ const ControlledSwitch = ({ onChange }: ControlledProps) => {
 }
 
 describe('Switch (next)', () => {
+  it('matches snapshot', () => {
+    const { asFragment } = render(<Switch label="switch" />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+
   describe('Rendering', () => {
     it('renders with label', () => {
       render(<Switch label="Enable notifications" />)
