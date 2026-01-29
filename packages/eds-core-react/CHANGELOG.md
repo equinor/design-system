@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.0...eds-core-react@v2.4.0) (2026-01-29)
+
+
+### ✨ Added
+
+* Field + HelperMessage ([#4332](https://github.com/equinor/design-system/issues/4332)) ([6bbbad5](https://github.com/equinor/design-system/commit/6bbbad5feb18963054ef502cc83a6751c7d8592a))
+* **next:** ✨ add Input and TextField component for EDS 2.0 ([8dd4dca](https://github.com/equinor/design-system/commit/8dd4dca74a6699a5cd1dfbf8977117c9e48fc445))
+
+
+### 🐛 Fixed
+
+* 🐛 Autocomplete - restore onBlur and onKeyDown event handler support ([#4396](https://github.com/equinor/design-system/issues/4396)) ([39e8e97](https://github.com/equinor/design-system/commit/39e8e97a8e1eb46c42cd7330dc3d2e7c7059a849))
+* restrict /next exports to beta releases only ([#4395](https://github.com/equinor/design-system/issues/4395)) ([cff5521](https://github.com/equinor/design-system/commit/cff55216bd7672d40653693e3d0d0ce6d8423715))
+
+
+### 📝 Changed
+
+* organize EDS 2.0 component navigation ([#4398](https://github.com/equinor/design-system/issues/4398)) ([44751b1](https://github.com/equinor/design-system/commit/44751b1c798d740da2d24ea7a13930e81a6f832c))
+
 ## [2.3.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.2.0...eds-core-react@v2.3.0) (2026-01-15)
 
 
