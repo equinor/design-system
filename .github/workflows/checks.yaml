@@ -40,8 +40,6 @@ jobs:
           node-version: "22.12.0"
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
       # Fallback if cache miss (shouldn’t happen as job needs: setup)
       - name: Fallback checkout (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
