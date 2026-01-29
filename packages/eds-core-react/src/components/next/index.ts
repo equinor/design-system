@@ -1,9 +1,16 @@
+export { Button } from './Button'
 export { Icon } from './Icon'
 export { Field, useFieldIds } from './Field'
 export { Checkbox } from './Checkbox'
 export { Radio } from './Radio'
 export { Switch } from './Switch'
 
+export type {
+  ButtonProps,
+  ButtonVariant,
+  ButtonSize,
+  ButtonTone,
+} from './Button'
 export type { IconProps, IconSize, IconData, IconName } from './Icon'
 export type { CheckboxProps } from './Checkbox'
 export type { RadioProps } from './Radio'

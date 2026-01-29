@@ -1,0 +1,347 @@
+@layer eds-components {
+  .eds-button {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    /* Appearance */
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+
+    /* Transitions */
+    transition:
+      background-color 150ms ease-in-out,
+      border-color 150ms ease-in-out,
+      color 150ms ease-in-out;
+
+    /* Comfortable density asymmetric padding for visual text centering */
+    /* These values compensate for font metrics (ascenders/descenders) */
+    /* Empirically determined from Figma design */
+    --_comfortable-padding-top: 0.313rem; /* 5px */
+    --_comfortable-padding-bottom: 0.188rem; /* 3px */
+
+    /* Comfortable density icon-only padding to match label button heights */
+    /* Formula: (target-height - icon-size) / 2 where target-height = label button height */
+    /* Empirically determined from Figma design */
+    --_comfortable-icon-padding-sm: 0.125rem; /* 2px: (20px - 16px) / 2 */
+    --_comfortable-icon-padding-md: 0.188rem; /* 3px: (24px - 18px) / 2 */
+    --_comfortable-icon-padding-lg: 0.5rem; /* 8px: (36px - 20px) / 2 */
+  }
+
+  /* ===== SIZE VARIANTS (Button with label) ===== */
+  /*
+   * Spacing adjusted from design tokens to compensate for icon negative margins
+   * Icons have margin-block: -0.25em and margin-inline: -0.1em for optical alignment
+   *
+   * Token reference (from --eds-selectable-space-*):
+   * - lg: horizontal=20px, vertical=16px (spacious) / 12px (comfortable)
+   * - md: horizontal=16px, vertical=12px (spacious) / 8px (comfortable)
+   * - sm: horizontal=12px, vertical=8px (spacious) / 6px (comfortable)
+   *
+   * Adjustments made:
+   * - Vertical padding reduced by ~4px to account for icon negative margins
+   * - Gap values slightly adjusted for visual balance with icons
+   */
+
+  .eds-button[data-selectable-space='lg'] {
+    /* Base from token (16px spacious / 12px comfortable) → Adjusted: -4px vertical for icon margins */
+    padding-block: calc(var(--eds-selectable-space-vertical) - 0.25rem); /* 16px → 12px / 12px → 8px */
+    padding-inline: var(--eds-selectable-space-horizontal); /* 20px spacious / 16px comfortable */
+    gap: var(--eds-typography-gap-horizontal);
+  }
+
+  .eds-button[data-selectable-space='md'] {
+    /* Base from token (12px spacious / 8px comfortable) → Adjusted: -2px vertical for icon margins */
+    padding-block: calc(var(--eds-selectable-space-vertical) - 0.125rem); /* 12px → 10px / 8px → 6px */
+    padding-inline: var(--eds-selectable-space-horizontal); /* 16px spacious / 12px comfortable */
+    gap: var(--eds-typography-gap-horizontal);
+  }
+
+  .eds-button[data-selectable-space='sm'] {
+    /* Base from token (8px spacious / 6px comfortable) → Adjusted: -2px vertical for icon margins */
+    padding-block: calc(var(--eds-selectable-space-vertical) - 0.125rem); /* 8px → 6px / 6px → 4px */
+    padding-inline: var(--eds-selectable-space-horizontal); /* 12px spacious / 8px comfortable */
+    gap: var(--eds-typography-gap-horizontal);
+  }
+
+  /* ===== DENSITY OVERRIDES ===== */
+  /*
+   * Note: Density-specific overrides are defined OUTSIDE @layer (after this block closes)
+   * to ensure they can override the typography tokens from @equinor/eds-tokens
+   */
+
+  /* ===== ICON-ONLY BUTTON ===== */
+  /*
+   * Icon-only buttons maintain same height as label buttons but adapt to density.
+   * Formula: padding = base-padding + (line-height - icon-size) / 2
+   *
+   * This ensures icon buttons:
+   * - Match label button height in both spacious and comfortable density
+   * - Center the icon vertically regardless of density mode
+   * - Adapt automatically via --eds-typography-line-height-squished token
+   *
+   * Density behavior:
+   * - Spacious: Uses larger line-height → more padding → taller buttons
+   * - Comfortable: Uses smaller line-height → less padding → shorter buttons
+   */
+
+  .eds-button[data-icon-only] {
+    aspect-ratio: 1;
+  }
+
+  .eds-button[data-icon-only][data-selectable-space='lg'] {
+    /* Base padding from token minus icon compensation: (16px - 4px) = 12px spacious / (12px - 4px) = 8px comfortable */
+    /* Adapts with line-height (20px spacious / 16px comfortable) */
+    /* Target height: 44px spacious / 40px comfortable */
+    --_base-padding: calc(var(--eds-selectable-space-vertical) - 0.25rem);
+    padding: calc(
+      var(--_base-padding) +
+        (
+          var(--eds-typography-line-height-squished) -
+            var(--eds-typography-icon-size)
+        ) /
+        2
+    );
+  }
+
+  .eds-button[data-icon-only][data-selectable-space='md'] {
+    /* Base padding from token minus icon compensation: (12px - 2px) = 10px spacious / (8px - 2px) = 6px comfortable */
+    /* Adapts with line-height (16px spacious / 12px comfortable) */
+    /* Target height: 36px spacious / 32px comfortable */
+    --_base-padding: calc(var(--eds-selectable-space-vertical) - 0.125rem);
+    padding: calc(
+      var(--_base-padding) +
+        (
+          var(--eds-typography-line-height-squished) -
+            var(--eds-typography-icon-size)
+        ) /
+        2
+    );
+  }
+
+  .eds-button[data-icon-only][data-selectable-space='sm'] {
+    /* Base padding from token minus icon compensation: (8px - 2px) = 6px spacious / (6px - 2px) = 4px comfortable */
+    /* Line-height (12px) same for both densities */
+    /* Target height: 24px (consistent across densities) */
+    --_base-padding: calc(var(--eds-selectable-space-vertical) - 0.125rem);
+    padding: calc(
+      var(--_base-padding) +
+        (
+          var(--eds-typography-line-height-squished) -
+            var(--eds-typography-icon-size)
+        ) /
+        2
+    );
+  }
+
+  /* ===== ROUND ICON-ONLY BUTTON ===== */
+
+  .eds-button[data-round] {
+    border-radius: 50%;
+  }
+
+  /* ===== PRIMARY VARIANT ===== */
+
+  .eds-button[data-variant='primary'] {
+    background-color: var(--eds-color-bg-fill-emphasis-default);
+    color: var(--eds-color-text-strong-on-emphasis);
+  }
+
+  .eds-button[data-variant='primary']:hover:not(:disabled) {
+    background-color: var(--eds-color-bg-fill-emphasis-hover);
+  }
+
+  .eds-button[data-variant='primary']:active:not(:disabled) {
+    background-color: var(--eds-color-bg-fill-emphasis-active);
+  }
+
+  .eds-button[data-variant='primary']:disabled {
+    background-color: var(--eds-color-bg-fill-muted-default);
+    color: var(--eds-color-border-medium);
+    cursor: not-allowed;
+  }
+
+  /* ===== SECONDARY VARIANT ===== */
+
+  .eds-button[data-variant='secondary'] {
+    background-color: transparent;
+    color: var(--eds-color-text-subtle);
+    outline: var(--eds-border-width-default, 1px) solid
+      var(--eds-color-border-strong);
+    outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+  }
+
+  .eds-button[data-variant='secondary']:hover:not(:disabled) {
+    background-color: var(--eds-color-bg-fill-muted-default);
+  }
+
+  .eds-button[data-variant='secondary']:active:not(:disabled) {
+    background-color: var(--eds-color-bg-fill-muted-hover);
+  }
+
+  .eds-button[data-variant='secondary']:disabled {
+    outline: var(--eds-border-width-default, 1px) solid
+      var(--eds-color-border-medium);
+    outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+    color: var(--eds-color-border-medium);
+    cursor: not-allowed;
+  }
+
+  /* ===== GHOST VARIANT ===== */
+
+  .eds-button[data-variant='ghost'] {
+    background-color: transparent;
+    color: var(--eds-color-text-subtle);
+  }
+
+  .eds-button[data-variant='ghost']:hover:not(:disabled) {
+    background-color: var(--eds-color-bg-fill-muted-default);
+  }
+
+  .eds-button[data-variant='ghost']:active:not(:disabled) {
+    background-color: var(--eds-color-bg-fill-muted-hover);
+  }
+
+  .eds-button[data-variant='ghost']:disabled {
+    color: var(--eds-color-border-medium);
+    cursor: not-allowed;
+  }
+
+  /* ===== FOCUS STATE ===== */
+
+  .eds-button:focus-visible {
+    outline: var(--eds-sizing-stroke-thick) solid
+      var(--eds-color-border-focus);
+    outline-offset: var(--eds-sizing-stroke-thin);
+  }
+
+  .eds-button[data-variant='secondary']:focus-visible {
+    outline-offset: var(--eds-sizing-stroke-thin);
+  }
+
+  /* ===== ICON STYLING ===== */
+  /* Icons inherit size from Typography via --eds-typography-icon-size */
+  /* Icons use em-based negative margins from icon.css for optical alignment */
+
+  .eds-button .icon {
+    flex-shrink: 0;
+  }
+
+  /* Icon-only buttons: remove negative margins, use padding for sizing */
+  .eds-button[data-icon-only] .icon {
+    margin: 0;
+  }
+}
+
+/* ===== LABEL WRAPPER (TypographyNext) ===== */
+/* Outside @layer to override typography.css which sets display: block on [data-font-family] */
+
+.eds-button {
+  display: inline-flex;
+}
+
+.eds-button > span {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+/* Reset baseline padding and text-box-trim for proper centering */
+.eds-button > span[data-baseline] {
+  padding: 0;
+  /* Disable text-box-trim so text sits centered within its line-height box */
+  /* Flexbox will then center the entire line-height box vertically in the button */
+  text-box-trim: none;
+  text-box-edge: auto;
+}
+
+/* Icon-only: span should not affect layout */
+.eds-button[data-icon-only] > span {
+  display: contents;
+}
+
+/* ===== DENSITY OVERRIDES ===== */
+/*
+ * Comfortable density uses smaller font-sizes (one size down) and tighter spacing.
+ *
+ * Font-size mapping (from Figma):
+ * - small: XS (10.5px) instead of SM (12px)
+ * - default: SM (12px) instead of MD (14px)
+ * - large: MD (14px) instead of LG (16px)
+ *
+ * Target heights in comfortable mode:
+ * - small: 20px (4px × 2 + 12px line-height)
+ * - default: 24px (4px × 2 + 16px line-height)
+ * - large: 36px (8px × 2 + 20px line-height)
+ *
+ * These overrides are OUTSIDE @layer to ensure they can override the typography
+ * tokens from @equinor/eds-tokens/css/variables.
+ */
+
+[data-density='comfortable'] .eds-button[data-selectable-space='sm'][data-font-size='sm'],
+[data-density='comfortable'] .eds-button[data-selectable-space='sm'] [data-font-size='sm'] {
+  /* Override line-height to maintain SM height (12px instead of XS's 12px) */
+  --eds-typography-line-height: 0.75rem; /* 12px (SM line-height) */
+  --eds-typography-line-height-squished: 0.75rem; /* 12px */
+}
+
+[data-density='comfortable'] .eds-button[data-selectable-space='sm'][data-font-size='sm'] {
+  /* Target: 20px = (5px + 3px) + 12px line-height */
+  /* Asymmetric padding to visually center text (more top, less bottom) */
+  padding-top: var(--_comfortable-padding-top);
+  padding-bottom: var(--_comfortable-padding-bottom);
+}
+
+[data-density='comfortable'] .eds-button[data-selectable-space='md'][data-font-size='md'],
+[data-density='comfortable'] .eds-button[data-selectable-space='md'] [data-font-size='md'] {
+  /* Override line-height to maintain MD height (16px instead of SM's 12px) */
+  --eds-typography-line-height: 1rem; /* 16px (MD line-height, NOT SM) */
+  --eds-typography-line-height-squished: 1rem; /* 16px */
+}
+
+[data-density='comfortable'] .eds-button[data-selectable-space='md'][data-font-size='md'] {
+  /* Target: 24px = (5px + 3px) + 16px line-height */
+  /* Asymmetric padding to visually center text (more top, less bottom) */
+  padding-top: var(--_comfortable-padding-top);
+  padding-bottom: var(--_comfortable-padding-bottom);
+}
+
+[data-density='comfortable'] .eds-button[data-selectable-space='lg'][data-font-size='lg'],
+[data-density='comfortable'] .eds-button[data-selectable-space='lg'] [data-font-size='lg'] {
+  /* Override line-height to maintain LG height (20px instead of MD's 16px) */
+  --eds-typography-line-height: 1.25rem; /* 20px (LG line-height, NOT MD) */
+  --eds-typography-line-height-squished: 1.25rem; /* 20px */
+}
+
+[data-density='comfortable'] .eds-button[data-selectable-space='lg'][data-font-size='lg'] {
+  /* Target: 36px = (8px × 2) + 20px */
+  /* Token gives 12px in comfortable mode, minus icon compensation = 8px */
+  padding-block: calc(var(--eds-selectable-space-vertical) - 0.25rem); /* 12px → 8px */
+}
+
+/* Icon-only button overrides for comfortable density */
+/* Set fixed padding to ensure square buttons that match labeled button heights */
+/* Formula: padding = (target-height - icon-size) / 2 */
+
+[data-density='comfortable'] .eds-button[data-icon-only][data-selectable-space='sm'] {
+  /* Target: 20×20px to match labeled small button (20px height) */
+  /* Icon size: 16px, padding needed: (20 - 16) / 2 = 2px */
+  padding: var(--_comfortable-icon-padding-sm);
+}
+
+[data-density='comfortable'] .eds-button[data-icon-only][data-selectable-space='md'] {
+  /* Target: 24×24px to match labeled default button (24px height) */
+  /* Icon size: 18px, padding needed: (24 - 18) / 2 = 3px */
+  padding: var(--_comfortable-icon-padding-md);
+}
+
+[data-density='comfortable'] .eds-button[data-icon-only][data-selectable-space='lg'] {
+  /* Target: 36×36px to match labeled large button (36px height) */
+  /* Icon size: 20px, padding needed: (36 - 20) / 2 = 8px */
+  padding: var(--_comfortable-icon-padding-lg);
+}

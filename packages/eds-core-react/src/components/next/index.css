@@ -3,6 +3,8 @@
 @layer eds-components;
 
 @import '@equinor/eds-tokens/css/variables';
+@import './Icon/icon.css';
+@import './Button/button.css';
 @import './Field/field.css';
 @import './Checkbox/checkbox.css';
 @import './Radio/radio.css';
