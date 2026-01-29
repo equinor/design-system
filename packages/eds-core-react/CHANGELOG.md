@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.1](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.0...eds-core-react@v2.3.1) (2026-01-29)
+## [2.4.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.0...eds-core-react@v2.4.0) (2026-01-29)
+
+
+### ✨ Added
+
+* Field + HelperMessage ([#4332](https://github.com/equinor/design-system/issues/4332)) ([6bbbad5](https://github.com/equinor/design-system/commit/6bbbad5feb18963054ef502cc83a6751c7d8592a))
+* **next:** ✨ add Input and TextField component for EDS 2.0 ([8dd4dca](https://github.com/equinor/design-system/commit/8dd4dca74a6699a5cd1dfbf8977117c9e48fc445))
 
 
 ### 🐛 Fixed
