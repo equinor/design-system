@@ -4,17 +4,17 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
-## [2.4.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.0-beta.0...eds-core-react-next@v2.4.0-beta.0) (2026-01-29)
+## [2.3.1-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.0-beta.0...eds-core-react-next@v2.3.1-beta.0) (2026-01-29)
 
 
 ### ✨ Added
 
-* ✨ Implement Button 2.0 component ([#4389](https://github.com/equinor/design-system/issues/4389)) ([94c9fbc](https://github.com/equinor/design-system/commit/94c9fbc148833e611f4c3b6ed9df6baf7a3b3d09))
-* add Radio component for EDS 2.0 ([#4388](https://github.com/equinor/design-system/issues/4388)) ([b9cd9c3](https://github.com/equinor/design-system/commit/b9cd9c3931bbe666d2739b94335419107559a23b))
-* Checkbox 2.0 component ([#4208](https://github.com/equinor/design-system/issues/4208)) ([6171f95](https://github.com/equinor/design-system/commit/6171f95b4581d2e36d5bd14ea1204ba7357bb113))
-* Field + HelperMessage ([#4332](https://github.com/equinor/design-system/issues/4332)) ([6bbbad5](https://github.com/equinor/design-system/commit/6bbbad5feb18963054ef502cc83a6751c7d8592a))
-* **next:** ✨ add Input and TextField component for EDS 2.0 ([8dd4dca](https://github.com/equinor/design-system/commit/8dd4dca74a6699a5cd1dfbf8977117c9e48fc445))
-* **next:** Switch component for EDS 2.0 ([#4387](https://github.com/equinor/design-system/issues/4387)) ([0a5226d](https://github.com/equinor/design-system/commit/0a5226d45bb5664c758240d03e3c0331369c875b))
+* Button component ([#4389](https://github.com/equinor/design-system/issues/4389)) ([94c9fbc](https://github.com/equinor/design-system/commit/94c9fbc148833e611f4c3b6ed9df6baf7a3b3d09))
+* Radio component ([#4388](https://github.com/equinor/design-system/issues/4388)) ([b9cd9c3](https://github.com/equinor/design-system/commit/b9cd9c3931bbe666d2739b94335419107559a23b))
+* Checkbox component ([#4208](https://github.com/equinor/design-system/issues/4208)) ([6171f95](https://github.com/equinor/design-system/commit/6171f95b4581d2e36d5bd14ea1204ba7357bb113))
+* Field and HelperMessage components ([#4332](https://github.com/equinor/design-system/issues/4332)) ([6bbbad5](https://github.com/equinor/design-system/commit/6bbbad5feb18963054ef502cc83a6751c7d8592a))
+* Input and TextField components ([8dd4dca](https://github.com/equinor/design-system/commit/8dd4dca74a6699a5cd1dfbf8977117c9e48fc445))
+* Switch component ([#4387](https://github.com/equinor/design-system/issues/4387)) ([0a5226d](https://github.com/equinor/design-system/commit/0a5226d45bb5664c758240d03e3c0331369c875b))
 
 
 ### 🐛 Fixed
@@ -40,7 +40,7 @@ The previous release `2.2.0-beta.0` was incorrectly versioned since `2.2.1-beta.
 
 ### 📝 Changed
 
-- **eds-core-react:** add Figma Code Connect setup and documentation ([#4363](https://github.com/equinor/design-system/issues/4363)) ([e468ec2](https://github.com/equinor/design-system/commit/e468ec2fcab569c3cb742e4692abd6ccf8b3d25b))
+- Add Figma Code Connect setup and documentation ([#4363](https://github.com/equinor/design-system/issues/4363)) ([e468ec2](https://github.com/equinor/design-system/commit/e468ec2fcab569c3cb742e4692abd6ccf8b3d25b))
 
 ## [2.2.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.2.1-beta.0...eds-core-react-next@v2.2.0-beta.0) (2026-01-15)
 
