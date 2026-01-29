@@ -7,12 +7,12 @@ const preview = {
   parameters: {
     options: {
       storySort: {
-        method: '',
+        method: 'alphabetical',
         order: [
           'Introduction',
           'EdsProvider',
           'EDS 2.0 (beta)',
-          ['About', '*'],
+          ['About', 'Icon', 'Inputs'],
           'Data Display',
           'Feedback',
           'Inputs',

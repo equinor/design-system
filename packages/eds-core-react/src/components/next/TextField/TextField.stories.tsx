@@ -7,7 +7,7 @@ import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../Icon'
 
 const meta: Meta<typeof TextField> = {
-  title: 'EDS 2.0 (beta)/TextField',
+  title: 'EDS 2.0 (beta)/Inputs/TextField',
   component: TextField,
   tags: ['beta'],
   args: {

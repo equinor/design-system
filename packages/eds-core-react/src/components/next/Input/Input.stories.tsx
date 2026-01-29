@@ -9,7 +9,7 @@ import { Button } from '../../Button'
 import page from './Input.docs.mdx'
 
 const meta: Meta<typeof Input> = {
-  title: 'EDS 2.0 (beta)/Input',
+  title: 'EDS 2.0 (beta)/Inputs/Input',
   component: Input,
   tags: ['beta'],
   args: {
