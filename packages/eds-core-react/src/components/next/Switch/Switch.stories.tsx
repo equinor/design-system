@@ -8,7 +8,7 @@ import type { SwitchProps } from './Switch.types'
 import mdx from './Switch.docs.mdx'
 
 const meta: Meta<typeof Switch> = {
-  title: 'EDS 2.0 (beta)/Inputs/Switch',
+  title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Switch',
   component: Switch,
   argTypes: {
     label: {

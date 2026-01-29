@@ -6,7 +6,7 @@ import { Radio } from './Radio'
 import type { RadioProps } from './Radio.types'
 
 const meta: Meta<typeof Radio> = {
-  title: 'EDS 2.0 (beta)/Inputs/Radio',
+  title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Radio',
   component: Radio,
   args: {
     label: 'Option',
