@@ -74,8 +74,8 @@ const createPlugins = (includeDelete = false) => [
   }),
 ]
 
-const createEsmOutput = () => ({
-  dir: 'dist/esm',
+const createEsmOutput = (dir = 'dist/esm') => ({
+  dir,
   preserveModules: true,
   preserveModulesRoot: 'src',
   format: 'es',
@@ -95,13 +95,14 @@ export default [
     ],
   },
   // Beta components (EDS 2.0)
+  // Output to separate directory to prevent overwriting shared files from main bundle
   {
     input: ['./src/index.next.ts'],
     external: externalDeps,
     watch: watchConfig,
     plugins: createPlugins(false),
     output: [
-      createEsmOutput(),
+      createEsmOutput('dist/esm-next'),
       { file: './dist/index.next.cjs', format: 'cjs', interop: 'auto' },
     ],
   },
