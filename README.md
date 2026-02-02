@@ -11,6 +11,7 @@ While the design system itself lives in [Figma][], this repository contains impl
 - [Figma](https://www.figma.com/files/682286909510540417/team/590517879490131675/EDS---Equinor-Design-System?fuid=677437722215124736)
 - [Storefront](https://eds.equinor.com)
 - [Slack](https://equinor.slack.com/archives/CJT20H1B9)
+- [Architecture Decision Records](./docs/adr/) – documented architecture decisions
 
 ## Repository structure
 
