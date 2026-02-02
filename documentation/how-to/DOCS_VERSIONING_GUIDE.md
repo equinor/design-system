@@ -10,7 +10,7 @@ The EDS documentation site uses [Docusaurus versioning](https://docusaurus.io/do
 
 | Version   | Description                            | Location                        | URL Path      |
 | --------- | -------------------------------------- | ------------------------------- | ------------- |
-| 2.0.0-wip | Work in progress (current development) | `docs/`                         | `/docs/Next/` |
+| 2.0.0-beta| Work in progress (current development) | `docs/`                         | `/docs/Next/` |
 | 1.1.0     | Latest stable release                  | `versioned_docs/version-1.1.0/` | `/docs/`      |
 
 ## How Versioning Works
@@ -90,7 +90,7 @@ docs: {
   // ... other config
   versions: {
     current: {
-      label: '2.1.0-wip', // Update this to reflect the next planned version
+      label: '2.1.0-beta', // Update this to reflect the next planned version
       path: 'Next',
     },
   },
@@ -122,7 +122,7 @@ docs: {
   sidebarPath: './sidebars.ts',
   versions: {
     current: {
-      label: '2.0.0-wip',  // Display label for the current version
+      label: '2.0.0-beta',  // Display label for the current version
       path: 'Next',        // URL path segment
     },
   },
