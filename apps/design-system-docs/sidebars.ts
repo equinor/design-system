@@ -55,15 +55,9 @@ const sidebars: SidebarsConfig = {
       label: 'Data Display',
       link: {
         type: 'doc',
-        id: 'components/data-display/chip',
+        id: 'components/data-display/tooltip',
       },
       items: [
-        'components/data-display/chip',
-        'components/data-display/divider',
-        'components/data-display/list',
-        'components/data-display/popover',
-        'components/data-display/table_data_grid',
-        'components/data-display/table',
         'components/data-display/tooltip',
       ],
     },
@@ -76,9 +70,6 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'components/feedback/banner',
-        'components/feedback/dialog',
-        'components/feedback/progress_indicators',
-        'components/feedback/scrim',
         'components/feedback/snackbar',
       ],
     },
@@ -92,12 +83,12 @@ const sidebars: SidebarsConfig = {
       items: [
         'components/inputs/autocomplete',
         'components/inputs/button',
-        'components/inputs/date_time_picker',
+        'components/inputs/input',
         'components/inputs/search',
         'components/inputs/selection_controls',
         'components/inputs/slider',
+        'components/inputs/field',
         'components/inputs/textfield',
-        'components/inputs/toggle_button',
       ],
     },
     {
@@ -108,17 +99,8 @@ const sidebars: SidebarsConfig = {
         id: 'components/navigation/app_launcher',
       },
       items: [
-        'components/navigation/app_launcher',
-        'components/navigation/breadcrumbs',
-        'components/navigation/drawer',
         'components/navigation/link',
         'components/navigation/menu',
-        'components/navigation/pagination',
-        'components/navigation/sidebar',
-        'components/navigation/stepper',
-        'components/navigation/table_of_contents',
-        'components/navigation/tabs',
-        'components/navigation/topbar',
       ],
     },
     {
@@ -130,10 +112,7 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'components/surfaces/accordion',
-        'components/surfaces/card',
-        'components/surfaces/side_sheet',
-        'components/surfaces/toolbar',
-      ],
+     ],
     },
   ],
   //Foundation Section
