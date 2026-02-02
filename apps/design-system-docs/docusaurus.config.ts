@@ -44,7 +44,7 @@ const config: Config = {
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
           versions: {
             current: {
-              label: '2.0.0-wip', // Current version label
+              label: '2.0.0-beta', // Current version label
               path: 'Next', // URL path for the current version
             },
           },
