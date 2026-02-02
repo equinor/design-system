@@ -107,6 +107,10 @@ We will write an ADR when:
 - Deciding on breaking changes
 - Making security or accessibility architecture decisions
 
+### Public vs Internal ADRs
+
+ADRs are public by default. Decisions about components, tokens, APIs, tooling, and processes all belong in this repository (`design-system`). Only ADRs containing sensitive information (security details, internal infrastructure specifics) should go in `design-system-internal`.
+
 ### Consequences
 
 - Good, because architecture decisions are documented and discoverable

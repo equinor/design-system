@@ -4,6 +4,9 @@
   Title should be short and descriptive, e.g.:
   - "Use vanilla CSS for EDS 2.0 components"
   - "Adopt conventional commits"
+
+  NOTE: ADRs are public by default. Only use design-system-internal for
+  decisions containing sensitive information.
 -->
 
 - **Status:** Proposed | Accepted | Rejected | Deprecated | Superseded by [ADR-NNNN]
