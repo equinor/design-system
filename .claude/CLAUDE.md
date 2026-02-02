@@ -161,7 +161,7 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 
 - **Components/Types**: PascalCase (`Button`, `ButtonProps`)
 - **Variables/Functions**: camelCase (`isDisabled`, `useToken`)
-- **CSS classes**: lowercase BEM (`icon`, `button__label--disabled`)
+- **CSS classes**: lowercase BEM with 'eds-' prefix (`eds-icon`, `eds-button__label--disabled`)
 - **Files**: Match export (`Icon.tsx`, `Icon.types.ts`, `icon.css`)
 
 ## Accessibility
