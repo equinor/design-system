@@ -1,7 +1,7 @@
-  ---
-  title: List
-  sidebar_position: 3
-  ---
+---
+title: List
+sidebar_position: 3
+---
 # List
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

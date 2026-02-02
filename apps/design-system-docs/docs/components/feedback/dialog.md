@@ -1,7 +1,7 @@
- ---
-  title: Dialog
-  sidebar_position: 2
-  ---
+---
+title: Dialog
+sidebar_position: 2
+---
 # Dialog
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

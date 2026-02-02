@@ -1,7 +1,7 @@
- ---
-  title: Scrim
-  sidebar_position: 4
-  ---
+---
+title: Scrim
+sidebar_position: 4
+---
 # Scrim
 
 ## When to Use

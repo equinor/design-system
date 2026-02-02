@@ -1,7 +1,7 @@
- ---
-  title: Banner
-  sidebar_position: 1
-  ---
+---
+title: Banner
+sidebar_position: 1
+---
 # Banner
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

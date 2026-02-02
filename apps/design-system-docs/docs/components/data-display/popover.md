@@ -1,7 +1,7 @@
-  ---
-  title: Popover
-  sidebar_position: 4
-  ---
+---
+title: Popover
+sidebar_position: 4
+---
 # Popover
 
 ## When to Use

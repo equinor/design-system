@@ -1,6 +1,6 @@
 ---
 title: Toggle button
-sidebar_position: 8
+sidebar_position: 9
 ---
 # Toggle button
 
@@ -18,7 +18,7 @@ sidebar_position: 8
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

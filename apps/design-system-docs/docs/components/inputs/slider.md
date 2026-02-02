@@ -1,6 +1,6 @@
 ---
 title: Slider
-sidebar_position: 6
+sidebar_position: 7
 ---
 # Slider
 
@@ -18,7 +18,7 @@ sidebar_position: 6
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

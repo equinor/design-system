@@ -18,7 +18,7 @@ sidebar_position: 8
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 
