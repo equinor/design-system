@@ -20,6 +20,74 @@ We need a lightweight way to document significant architecture decisions that is
 - Searchable and discoverable
 - Not overly bureaucratic
 
+## Decision Drivers
+
+- Documentation should live close to the code
+- Low barrier to write and maintain
+- Should support review process (PR-based)
+- Must be searchable and discoverable
+
+## Options Considered
+
+### Option 1: ADRs in the repository
+
+Store Markdown-based Architecture Decision Records in `docs/adr/`.
+
+**Pros:**
+
+- Version controlled with the code
+- PR review process for changes
+- Searchable via GitHub/IDE
+- Lightweight, just Markdown files
+
+**Cons:**
+
+- Requires discipline to write consistently
+- Another thing to maintain
+
+### Option 2: Wiki or Confluence documentation
+
+Use a separate wiki system to document decisions.
+
+**Pros:**
+
+- Rich editing features
+- Easy to link between pages
+
+**Cons:**
+
+- Disconnected from codebase, harder to keep in sync
+- No PR review process for changes
+- Often becomes outdated
+
+### Option 3: No formal documentation
+
+Rely on institutional knowledge and code comments.
+
+**Pros:**
+
+- No overhead
+- No additional process
+
+**Cons:**
+
+- Context is lost when team members leave
+- Same discussions happen repeatedly
+- New team members struggle to understand why decisions were made
+
+### Option 4: Detailed design documents
+
+Write comprehensive design documents for each decision.
+
+**Pros:**
+
+- Very thorough documentation
+
+**Cons:**
+
+- Heavyweight, often not written or maintained
+- Overkill for most decisions
+
 ## Decision
 
 We will use Architecture Decision Records (ADRs) to document significant architecture decisions in the Equinor Design System.
@@ -39,35 +107,20 @@ We will write an ADR when:
 - Deciding on breaking changes
 - Making security or accessibility architecture decisions
 
-## Consequences
+### Consequences
 
-### Positive
+- Good, because architecture decisions are documented and discoverable
+- Good, because new team members can understand historical context
+- Good, because decisions can be reviewed and evaluated over time
+- Good, because it reduces repeated discussions about the same topics
+- Bad, because it requires discipline to write ADRs consistently
+- Bad, because it adds some overhead to the decision-making process
+- Bad, because ADRs may become outdated if not properly maintained
 
-- Architecture decisions are documented and discoverable
-- New team members can understand historical context
-- Decisions can be reviewed and evaluated over time
-- Reduces repeated discussions about the same topics
-- Creates accountability for significant decisions
+### Confirmation
 
-### Negative
-
-- Requires discipline to write ADRs consistently
-- Adds overhead to the decision-making process
-- ADRs may become outdated if not properly maintained
-
-## Alternatives Considered
-
-### Wiki or Confluence documentation
-
-Wikis are often disconnected from the codebase, making it harder to keep documentation in sync. ADRs live with the code and follow the same review process.
-
-### No formal documentation
-
-Relying on institutional knowledge and code comments doesn't scale. Important context is lost when team members leave or forget discussions.
-
-### Detailed design documents
-
-Full design documents are heavyweight and often not written or maintained. ADRs are intentionally lightweight and focused on a single decision.
+- PR reviews will check that significant architecture decisions have an accompanying ADR
+- The `docs/adr/` folder is referenced in onboarding documentation
 
 ## Related
 

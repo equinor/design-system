@@ -6,7 +6,7 @@
   - "Adopt conventional commits"
 -->
 
-- **Status:** Proposed | Accepted | Deprecated | Superseded by [ADR-NNNN]
+- **Status:** Proposed | Accepted | Rejected | Deprecated | Superseded by [ADR-NNNN]
 - **Date:** YYYY-MM-DD
 - **Decision makers:** [List the people involved in making this decision]
 
@@ -45,30 +45,48 @@
 <!--
   List each realistic option with pros and cons.
   Be fair - every option has trade-offs.
+
+  NOTE: Pros/Cons here are about each option IN THEORY - the arguments
+  for and against choosing this option. This helps evaluate the options.
 -->
 
 ### Option 1: [Name]
 
 [Brief description of this option]
 
-- Good: [Advantage]
-- Good: [Another advantage]
-- Bad: [Disadvantage]
-- Bad: [Another disadvantage]
+**Pros:**
+
+- [Advantage]
+- [Another advantage]
+
+**Cons:**
+
+- [Disadvantage]
+- [Another disadvantage]
 
 ### Option 2: [Name]
 
 [Brief description of this option]
 
-- Good: [Advantage]
-- Bad: [Disadvantage]
+**Pros:**
+
+- [Advantage]
+
+**Cons:**
+
+- [Disadvantage]
 
 ### Option 3: [Name]
 
 [Brief description of this option]
 
-- Good: [Advantage]
-- Bad: [Disadvantage]
+**Pros:**
+
+- [Advantage]
+
+**Cons:**
+
+- [Disadvantage]
 
 ## Decision
 
@@ -82,22 +100,39 @@
   and the team is already familiar with CSS."
 -->
 
-## Consequences
+### Consequences
 
 <!--
-  What are the implications of this decision?
-  Be honest about both benefits and costs.
+  What happens as a result of this decision? This is different from Pros/Cons:
+  - Pros/Cons = theoretical arguments BEFORE deciding
+  - Consequences = practical implications AFTER deciding
+
+  Think about:
+  - What does the team need to do differently?
+  - What new skills or tools are needed?
+  - What becomes easier or harder?
+  - What technical debt or migration effort is created?
+
+  Example consequences:
+  - Good: "We no longer need to configure SSR for styled-components"
+  - Bad: "Consumers must migrate their styled-components overrides to CSS"
 -->
 
-### Positive
+- Good, because [positive consequence]
+- Good, because [another positive consequence]
+- Bad, because [negative consequence or trade-off]
+- Bad, because [another negative consequence]
 
-- [Benefit 1]
-- [Benefit 2]
+### Confirmation
 
-### Negative
+<!--
+  Optional: How will you verify this decision is followed?
 
-- [Cost or trade-off 1]
-- [Cost or trade-off 2]
+  Examples:
+  - "Code reviews check that new components use vanilla CSS"
+  - "ESLint rule warns if styled-components is imported in /next"
+  - "CI validates all CSS files use design tokens"
+-->
 
 ## Related
 
