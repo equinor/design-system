@@ -177,17 +177,26 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 type(scope): description
 ```
 
-**Types**: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
-**Scopes**: `eds-core-react`, `eds-tokens`, `eds-icons`
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+
+**Scopes (packages)**: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+
+**Scopes (infrastructure)**: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
+
 **Breaking**: `feat(eds-core-react)!: remove deprecated prop`
+
+See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 ## Git Workflow
 
-Always ask before:
+⚠️ **CRITICAL: Always ask the user for permission before:**
+
 - Creating commits
 - Pushing to remote
 - Creating branches
 - Creating PRs with `gh`
+
+**Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
 
 ## Additional Guidelines
 
@@ -196,6 +205,7 @@ See `.github/copilot-instructions.md` and `.github/instructions/` for detailed g
 ## Specialized Rules
 
 Path-specific rules are available in `.claude/rules/`:
+
 - `eds-component.md` - EDS 2.0 component building conventions
 - `figma-component.md` - Figma-to-code workflow with MCP tools
 - `advisor.md` - Read-only code review guidelines
