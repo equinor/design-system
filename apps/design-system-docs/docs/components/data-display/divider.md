@@ -1,7 +1,7 @@
-  ---
-  title: Divider
-  sidebar_position: 2
-  ---
+---
+title: Divider
+sidebar_position: 2
+---
 # Divider
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

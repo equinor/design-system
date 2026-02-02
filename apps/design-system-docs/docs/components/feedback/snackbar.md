@@ -1,7 +1,7 @@
- ---
-  title: Snackbar
-  sidebar_position: 5
-  ---
+---
+title: Snackbar
+sidebar_position: 5
+---
 # Snackbar
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

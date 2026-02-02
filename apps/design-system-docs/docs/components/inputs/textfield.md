@@ -1,6 +1,6 @@
 ---
 title: Text field
-sidebar_position: 7
+sidebar_position: 8
 ---
 # Text field
 
@@ -18,7 +18,7 @@ sidebar_position: 7
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

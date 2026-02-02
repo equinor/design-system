@@ -1,7 +1,7 @@
-  ---
-  title: Autocomplete
-  sidebar_position: 1
-  ---
+---
+title: Autocomplete
+sidebar_position: 1
+---
 # Autocomplete
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

@@ -1,7 +1,7 @@
-  ---
-  title: Table Data Grid
-  sidebar_position: 1
-  ---
+---
+title: Table Data Grid
+sidebar_position: 1
+---
 # Table Data Grid
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

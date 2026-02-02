@@ -1,8 +1,8 @@
 ---
-title: Button
-sidebar_position: 2
+title: Input
+sidebar_position: 4
 ---
-# Button
+# Input
 
 ## When to Use
 
@@ -18,7 +18,7 @@ sidebar_position: 2
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

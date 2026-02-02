@@ -1,7 +1,7 @@
-  ---
-  title: Chip
-  sidebar_position: 1
-  ---
+---
+title: Chip
+sidebar_position: 1
+---
 # Chip
 
 ## When to Use

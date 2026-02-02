@@ -1,7 +1,7 @@
-  ---
-  title: Table
-  sidebar_position: 5
-  ---
+---
+title: Table
+sidebar_position: 5
+---
 # Table
 
 ## When to Use
@@ -18,7 +18,7 @@
 
 
 
-## Do's and don'ts
+### Do's and don'ts
 
 :::info **Do**
 

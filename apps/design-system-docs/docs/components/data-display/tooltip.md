@@ -1,7 +1,7 @@
-  ---
-  title: Tooltip
-  sidebar_position: 6
-  ---
+---
+title: Tooltip
+sidebar_position: 6
+---
 # Tooltip
 
 ## When to Use
