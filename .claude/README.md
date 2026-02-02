@@ -39,6 +39,7 @@ Claude Code receives instructions from multiple sources, applied in this order:
 .claude/
 ├── README.md           # This file
 ├── CLAUDE.md           # Main project instructions
+├── settings.json       # Shared team permissions
 ├── commands/           # Slash commands
 │   └── new-component.md    # /new-component <Name>
 └── rules/
@@ -46,6 +47,18 @@ Claude Code receives instructions from multiple sources, applied in this order:
     ├── figma-component.md  # Figma-to-code workflow
     └── advisor.md          # Code review guidelines
 ```
+
+## Settings
+
+`settings.json` contains shared team permissions for Claude Code. This pre-approves common tools so team members don't need to manually approve each one.
+
+**Included permissions:**
+- MCP tools: Figma, Chrome DevTools
+- Test commands: `pnpm test`, `npm test`, `jest`
+- Git operations: `add`, `commit`, `fetch`, `checkout`, `pull`
+- GitHub CLI: `gh pr view`, `gh pr checks`, `gh pr list`
+
+**Personal overrides:** Create `settings.local.json` (gitignored) to add your own permissions without affecting the team.
 
 ## Commands
 
