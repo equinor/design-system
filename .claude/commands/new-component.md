@@ -2,6 +2,8 @@
 
 Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/src/components/next/`.
 
+> **Note:** CSS class names must be lowercase. For component `Avatar`, use class `eds-avatar` (not `eds-Avatar`).
+
 ## Instructions
 
 1. **Create the component folder** with all required files:
@@ -45,6 +47,7 @@ import './$ARGUMENTS.css'
 export const $ARGUMENTS = forwardRef<HTMLDivElement, $ARGUMENTSProps>(
   function $ARGUMENTS({ className, variant = 'primary', ...rest }, ref) {
     const classes = ['eds-$ARGUMENTS', className].filter(Boolean).join(' ')
+    // ^ IMPORTANT: Use lowercase (eds-avatar, not eds-Avatar)
 
     return (
       <div
@@ -58,11 +61,14 @@ export const $ARGUMENTS = forwardRef<HTMLDivElement, $ARGUMENTSProps>(
 )
 ```
 
-### $ARGUMENTS.css (lowercase)
-Use `@layer eds-components` and data-attribute selectors (matches button.css, checkbox.css):
+### $ARGUMENTS.css (lowercase filename)
+Use `@layer eds-components` and data-attribute selectors (matches button.css, checkbox.css).
+
+**Important:** CSS class names should be lowercase (e.g., `eds-avatar` not `eds-Avatar`).
 
 ```css
 @layer eds-components {
+  /* IMPORTANT: Use lowercase class name (eds-avatar, not eds-Avatar) */
   .eds-$ARGUMENTS {
     /* Use --eds-* design tokens */
   }
@@ -95,6 +101,7 @@ describe('$ARGUMENTS (next)', () => {
 
     it('applies custom className', () => {
       render(<$ARGUMENTS data-testid="eds-$ARGUMENTS" className="custom" />)
+      // IMPORTANT: Use lowercase class name (eds-avatar, not eds-Avatar)
       expect(screen.getByTestId('eds-$ARGUMENTS')).toHaveClass('eds-$ARGUMENTS', 'custom')
     })
 
@@ -179,5 +186,5 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 - **Data attributes**: Use `data-*` for styling variants instead of CSS class modifiers
 - **CSS layer**: Always wrap in `@layer eds-components { }`
 - **Tokens**: Use `--eds-*` CSS custom properties, never hardcode values
-- **Class prefix**: All CSS classes use `eds-` prefix
+- **Class naming**: Lowercase with `eds-` prefix (e.g., `eds-button`, `eds-avatar`)
 - **No default exports**: Only use named exports (except story meta)
