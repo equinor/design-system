@@ -29,24 +29,7 @@ For EDS 2.0, we need a styling approach that is future-proof and works seamlessl
 
 ## Options Considered
 
-### Option 1: Vanilla CSS with CSS custom properties
-
-Use plain CSS files with CSS custom properties (design tokens) for theming.
-
-**Pros:**
-
-- Zero runtime overhead
-- Native browser support, excellent DevTools experience
-- Works perfectly with SSR and RSC
-- CSS custom properties enable theming without JavaScript
-- Team already familiar with CSS
-
-**Cons:**
-
-- No automatic scoping (requires naming conventions like BEM)
-- Less type-safety than CSS-in-JS
-
-### Option 2: CSS Modules
+### CSS Modules
 
 Scoped CSS with automatic class name generation.
 
@@ -62,7 +45,7 @@ Scoped CSS with automatic class name generation.
 - Harder to override styles from consuming applications
 - Less flexible for theming compared to CSS custom properties
 
-### Option 3: Tailwind CSS
+### Tailwind CSS
 
 Utility-first CSS framework.
 
@@ -79,7 +62,7 @@ Utility-first CSS framework.
 - Utility classes don't align well with design token architecture
 - Harder for consumers to understand component styling
 
-### Option 4: Keep styled-components
+### Keep styled-components
 
 Continue with current CSS-in-JS approach.
 
@@ -146,7 +129,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 - Good, because it's familiar technology with lower learning curve for contributors
 - Good, because it's future-proof and aligns with where the React ecosystem is heading
 - Good, because smaller bundle size without CSS-in-JS runtime
-- Bad, because no automatic style scoping requires discipline with naming conventions
+- Bad, because requires discipline with naming conventions (BEM) and `@layer` for scoping
 - Bad, because less type-safety for style values compared to TypeScript-based CSS-in-JS
 - Bad, because consumers need to ensure CSS is imported in their applications
 - Bad, because it's a breaking change from EDS 1.x requiring migration effort for consumers
