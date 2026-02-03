@@ -24,9 +24,7 @@ const config: Config = {
 
     '^react$': '<rootDir>/node_modules/react',
     '^styled-components$': '<rootDir>/node_modules/styled-components',
-
-    '^@equinor/eds-core-react$':
-      '<rootDir>/node_modules/@equinor/eds-core-react/dist/esm/index.mjs',
+    '^@equinor/eds-core-react$': '<rootDir>/../eds-core-react/dist/esm/index.mjs',
   },
 }
 
