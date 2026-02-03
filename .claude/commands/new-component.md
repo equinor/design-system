@@ -4,6 +4,23 @@ Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/
 
 > **Note:** CSS class names must be lowercase. For component `Avatar`, use class `eds-avatar` (not `eds-Avatar`).
 
+## Figma Design Integration
+
+**Before creating the component**, ask the user for a Figma URL to the component design.
+
+If a Figma URL is provided, use these MCP tools to extract the design:
+
+1. **Get design context**: Call `figma_get_design_context` with the Figma URL to understand the component structure
+2. **Get screenshot**: Call `figma_get_screenshot` to see the visual design
+3. **Extract tokens for EACH state**: Call `figma_get_variable_defs` for:
+   - Default state
+   - Hover state
+   - Focus state
+   - Disabled state
+   - Any other states visible in the design
+
+**Critical:** Use the EXACT variable names from `figma_get_variable_defs`. Never assume tokens based on semantics or copy from similar components without verifying.
+
 ## Instructions
 
 1. **Create the component folder** with all required files:
@@ -14,6 +31,7 @@ $ARGUMENTS/
   $ARGUMENTS.tsx
   $ARGUMENTS.types.ts
   $ARGUMENTS.css         (lowercase filename)
+  $ARGUMENTS.figma.tsx   (Figma Code Connect - if Figma URL provided)
   $ARGUMENTS.test.tsx
   $ARGUMENTS.stories.tsx
 ```
@@ -37,12 +55,13 @@ export type $ARGUMENTSProps = {
 ```
 
 ### $ARGUMENTS.tsx
-Use the forwardRef pattern with named function (matches Button, Checkbox, Input):
+Use the forwardRef pattern with named function (matches Button, Checkbox, Input).
+
+**Note:** Do NOT import CSS in the component file. CSS is imported globally via `index.css`.
 
 ```typescript
 import { forwardRef } from 'react'
 import type { $ARGUMENTSProps } from './$ARGUMENTS.types'
-import './$ARGUMENTS.css'
 
 export const $ARGUMENTS = forwardRef<HTMLDivElement, $ARGUMENTSProps>(
   function $ARGUMENTS({ className, variant = 'primary', ...rest }, ref) {
@@ -64,13 +83,15 @@ export const $ARGUMENTS = forwardRef<HTMLDivElement, $ARGUMENTSProps>(
 ### $ARGUMENTS.css (lowercase filename)
 Use `@layer eds-components` and data-attribute selectors (matches button.css, checkbox.css).
 
-**Important:** CSS class names should be lowercase (e.g., `eds-avatar` not `eds-Avatar`).
+**Important:**
+- CSS class names should be lowercase (e.g., `eds-avatar` not `eds-Avatar`)
+- Use EXACT `--eds-*` tokens from Figma - never hardcode hex values
 
 ```css
 @layer eds-components {
   /* IMPORTANT: Use lowercase class name (eds-avatar, not eds-Avatar) */
   .eds-$ARGUMENTS {
-    /* Use --eds-* design tokens */
+    /* Use --eds-* design tokens from figma_get_variable_defs */
   }
 
   .eds-$ARGUMENTS[data-variant='primary'] {
@@ -81,6 +102,28 @@ Use `@layer eds-components` and data-attribute selectors (matches button.css, ch
     /* Variant styles */
   }
 }
+```
+
+### $ARGUMENTS.figma.tsx (Figma Code Connect)
+Only create this file if a Figma URL was provided.
+
+```typescript
+import figma from '@figma/code-connect'
+import { $ARGUMENTS } from '.'
+
+figma.connect($ARGUMENTS, 'FIGMA_URL_HERE', {
+  props: {
+    // Map Figma properties to component props
+    variant: figma.enum('Variant', {
+      Primary: 'primary',
+      Secondary: 'secondary',
+    }),
+    disabled: figma.enum('State', { Disabled: true }),
+  },
+  example: ({ variant, disabled }) => (
+    <$ARGUMENTS variant={variant} disabled={disabled} />
+  ),
+})
 ```
 
 ### $ARGUMENTS.test.tsx
@@ -185,6 +228,13 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 - **forwardRef**: All /next components use forwardRef with named function
 - **Data attributes**: Use `data-*` for styling variants instead of CSS class modifiers
 - **CSS layer**: Always wrap in `@layer eds-components { }`
-- **Tokens**: Use `--eds-*` CSS custom properties, never hardcode values
+- **Tokens**: Use `--eds-*` CSS custom properties from Figma, never hardcode values
 - **Class naming**: Lowercase with `eds-` prefix (e.g., `eds-button`, `eds-avatar`)
 - **No default exports**: Only use named exports (except story meta)
+
+## Anti-patterns
+
+- Using `figma_get_design_context` alone without `figma_get_variable_defs` for each state
+- Copying patterns from similar components without verifying Figma design
+- Adding props/features not specified in the design
+- Hardcoding hex color values instead of using CSS variables
