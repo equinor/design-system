@@ -28,6 +28,7 @@ export default [
         preserveModules: true,
         preserveModulesRoot: 'src',
         format: 'es',
+        entryFileNames: '[name].mjs',
       },
       {
         file: './dist/icons.cjs',

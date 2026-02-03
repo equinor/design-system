@@ -75,10 +75,25 @@ npm install @equinor/eds-core-react@2.0.0-beta.1
 ```typescript
 // Import from /next entry point
 import { Placeholder } from '@equinor/eds-core-react/next'
+```
 
-// Import CSS separately (required for SSR compatibility)
+### CSS Setup
+
+Beta components require CSS to be imported **once** in your app's entry point:
+
+```typescript
+// main.tsx or App.tsx (import once at app root)
 import '@equinor/eds-core-react/next/index.css'
 ```
+
+Or in a global CSS file:
+
+```css
+/* styles/global.css */
+@import '@equinor/eds-core-react/next/index.css';
+```
+
+> **Important:** Import the CSS only once at the app root, not in each component file. The stylesheet contains styles for all beta components and bundlers will deduplicate multiple imports, but it's cleaner to import once.
 
 ## Viewing Beta Components in Storybook
 
@@ -326,4 +341,4 @@ npm view @equinor/eds-core-react@beta version
 
 - Ensure component is exported in `src/index.next.ts`
 - Check rollup build includes `/next` entry point
-- Verify package.json exports include `./next` subpath
+- Verify package.json exports include `./next` subpath (added during beta release workflow)

@@ -48,6 +48,7 @@ export default [
         preserveModules: true,
         preserveModulesRoot: 'src',
         format: 'es',
+        entryFileNames: '[name].mjs',
         sourcemap: isDevelopment,
       },
       { file: './dist/eds-lab-react.cjs', format: 'cjs', interop: 'auto' },

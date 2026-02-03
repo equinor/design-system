@@ -149,7 +149,7 @@ jobs:
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
             pkg.exports['./next'] = {
               types: './dist/types/index.next.d.ts',
-              import: './dist/esm-next/index.next.js',
+              import: './dist/esm-next/index.next.mjs',
               require: './dist/index.next.cjs'
             };
             pkg.exports['./next/index.css'] = './build/index.css';
