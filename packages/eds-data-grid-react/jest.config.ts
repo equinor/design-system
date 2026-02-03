@@ -26,7 +26,7 @@ const config: Config = {
     '^styled-components$': '<rootDir>/node_modules/styled-components',
 
     '^@equinor/eds-core-react$':
-      '<rootDir>/node_modules/@equinor/eds-core-react/dist/esm/index.js',
+      '<rootDir>/node_modules/@equinor/eds-core-react/dist/esm/index.mjs',
   },
 }
 
