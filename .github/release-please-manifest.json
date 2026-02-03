@@ -1,9 +1,9 @@
 {
-  "packages/eds-core-react": "2.3.2",
+  "packages/eds-core-react": "2.3.3",
   "packages/eds-core-react/src/components/next": "2.3.1-beta.0",
-  "packages/eds-data-grid-react": "1.2.1",
-  "packages/eds-icons": "1.2.0",
-  "packages/eds-lab-react": "0.10.0",
+  "packages/eds-data-grid-react": "1.2.2",
+  "packages/eds-icons": "1.2.1",
+  "packages/eds-lab-react": "0.10.1",
   "packages/eds-tokens": "2.1.1",
   "packages/eds-utils": "2.0.0"
 }

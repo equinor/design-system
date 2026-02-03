@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.3](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.2...eds-core-react@v2.3.3) (2026-02-03)
+
+
+### 🐛 Fixed
+
+* **config:** use .mjs extension for ESM builds ([#4463](https://github.com/equinor/design-system/issues/4463)) ([476a40e](https://github.com/equinor/design-system/commit/476a40ebfd73080e469898ae45d78fcb6cd612d9))
+
 ## [2.3.2](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.1...eds-core-react@v2.3.2) (2026-01-29)
 
 
