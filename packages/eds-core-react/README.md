@@ -27,10 +27,25 @@ npm install @equinor/eds-core-react@beta
 
 ```typescript
 import { Button, Typography } from '@equinor/eds-core-react/next'
+```
 
-// Import CSS separately (required for SSR compatibility)
+#### CSS Setup
+
+Beta components require CSS to be imported **once** in your app's entry point:
+
+```typescript
+// main.tsx or App.tsx (import once at app root)
 import '@equinor/eds-core-react/next/index.css'
 ```
+
+Or in a global CSS file:
+
+```css
+/* styles/global.css */
+@import '@equinor/eds-core-react/next/index.css';
+```
+
+> **Note:** Import the CSS only once, not in each component file. The stylesheet contains styles for all beta components.
 
 **Learn more:**
 - [Complete Beta Release Guide](../../documentation/how-to/BETA_RELEASE_GUIDE.md)

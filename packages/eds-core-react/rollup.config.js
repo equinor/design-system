@@ -79,6 +79,7 @@ const createEsmOutput = (dir = 'dist/esm') => ({
   preserveModules: true,
   preserveModulesRoot: 'src',
   format: 'es',
+  entryFileNames: '[name].mjs',
   sourcemap: isDevelopment,
 })
 

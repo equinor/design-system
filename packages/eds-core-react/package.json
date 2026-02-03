@@ -7,7 +7,7 @@
   ],
   "types": "dist/types/index.d.ts",
   "main": "dist/eds-core-react.cjs",
-  "module": "dist/esm/index.js",
+  "module": "dist/esm/index.mjs",
   "license": "MIT",
   "author": {
     "name": "EDS Core Team",
@@ -29,7 +29,7 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js",
+      "import": "./dist/esm/index.mjs",
       "require": "./dist/eds-core-react.cjs"
     }
   },

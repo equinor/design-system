@@ -7,11 +7,11 @@
   ],
   "types": "dist/types/index.d.ts",
   "main": "dist/eds-lab-react.cjs",
-  "module": "./dist/esm/index.js",
+  "module": "./dist/esm/index.mjs",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js",
+      "import": "./dist/esm/index.mjs",
       "require": "./dist/eds-lab-react.cjs"
     }
   },
