@@ -21,6 +21,18 @@ If a Figma URL is provided, use these MCP tools to extract the design:
 
 **Critical:** Use the EXACT variable names from `figma_get_variable_defs`. Never assume tokens based on semantics or copy from similar components without verifying.
 
+## Check for Existing EDS 2.0 Components to Reuse
+
+**Before implementing**, check `packages/eds-core-react/src/components/next/index.ts` for existing components that can be composed:
+
+- **Field** - Field.Label, Field.Description, Field.HelperMessage for form fields
+- **Icon** - For icons (use `@equinor/eds-icons` data)
+- **Input** - For text input elements
+- **Button** - For action buttons
+- **Typography** - TypographyNext for text styling
+
+**Always prefer composing existing components over creating new elements from scratch.**
+
 ## Instructions
 
 1. **Create the component folder** with all required files:
@@ -30,11 +42,13 @@ $ARGUMENTS/
   index.ts
   $ARGUMENTS.tsx
   $ARGUMENTS.types.ts
-  $ARGUMENTS.css         (lowercase filename)
-  $ARGUMENTS.figma.tsx   (Figma Code Connect - if Figma URL provided)
+  $ARGUMENTS_LOWERCASE.css   (e.g., avatar.css for Avatar component)
+  $ARGUMENTS.figma.tsx       (Figma Code Connect - if Figma URL provided)
   $ARGUMENTS.test.tsx
   $ARGUMENTS.stories.tsx
 ```
+
+> **Note:** The CSS filename must be lowercase (e.g., `avatar.css` for `Avatar`, `button.css` for `Button`).
 
 2. **Use these exact patterns from the codebase:**
 
@@ -78,28 +92,60 @@ export const $ARGUMENTS = forwardRef<HTMLDivElement, $ARGUMENTSProps>(
     )
   },
 )
+
+$ARGUMENTS.displayName = '$ARGUMENTS'
 ```
 
-### $ARGUMENTS.css (lowercase filename)
+### $ARGUMENTS_LOWERCASE.css (e.g., avatar.css)
 Use `@layer eds-components` and data-attribute selectors (matches button.css, checkbox.css).
 
 **Important:**
 - CSS class names should be lowercase (e.g., `eds-avatar` not `eds-Avatar`)
 - Use EXACT `--eds-*` tokens from Figma - never hardcode hex values
+- **Use EDS 2.0 tokens only** - see `packages/eds-tokens/css/variables/` for available tokens
+
+**EDS 2.0 Token Examples (correct):**
+- `--eds-color-bg-fill-emphasis-default` (NOT `--eds-color-interactive-primary`)
+- `--eds-color-text-subtle` (NOT `--eds-color-text-static-icons`)
+- `--eds-color-border-strong` (NOT `--eds-color-text-error`)
+- `--eds-selectable-space-vertical` / `--eds-selectable-space-horizontal`
+- `--eds-typography-*` tokens for font sizing
+
+**Data Attributes for Styling Modes:**
+Components use data attributes to enable dynamic token-based styling:
+
+| Attribute | Purpose | Values |
+|-----------|---------|--------|
+| `data-variant` | Visual variant | component-specific (primary, secondary, ghost) |
+| `data-selectable-space` | Spacing mode | `sm`, `md`, `lg` |
+| `data-space-proportions` | Padding proportions | `squished`, `default`, `spacious` |
+| `data-font-family` | Typography family | `ui`, `body` |
+| `data-font-size` | Font size | `xs`, `sm`, `md`, `lg`, `xl` |
+| `data-line-height` | Line height mode | `squished`, `default`, `spacious` |
+| `data-color-appearance` | Color theming | `neutral`, `accent`, `warning`, `danger` |
 
 ```css
 @layer eds-components {
   /* IMPORTANT: Use lowercase class name (eds-avatar, not eds-Avatar) */
   .eds-$ARGUMENTS {
     /* Use --eds-* design tokens from figma_get_variable_defs */
+    /* Example: background-color: var(--eds-color-bg-fill-muted-default); */
   }
 
+  /* Use data-attribute selectors for variants */
   .eds-$ARGUMENTS[data-variant='primary'] {
-    /* Variant styles */
+    /* Variant styles using --eds-color-* tokens */
   }
 
-  .eds-$ARGUMENTS[data-variant='secondary'] {
-    /* Variant styles */
+  /* Spacing controlled by data-selectable-space */
+  .eds-$ARGUMENTS[data-selectable-space='md'] {
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+  }
+
+  /* Color appearance mode */
+  .eds-$ARGUMENTS[data-color-appearance='accent'] {
+    /* Uses accent color tokens */
   }
 }
 ```
@@ -194,7 +240,7 @@ const meta: Meta<typeof $ARGUMENTS> = {
     docs: {
       description: {
         component: `
-**Beta Component** - This component is under active development.
+⚠️ **Beta Component** - This component is under active development.
 
 \`\`\`tsx
 import { $ARGUMENTS } from '@equinor/eds-core-react/next'
@@ -220,17 +266,21 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 
 4. **Import CSS in next/index.css** - Add to `packages/eds-core-react/src/components/next/index.css`:
 ```css
-@import './$ARGUMENTS/$ARGUMENTS.css';
+@import './$ARGUMENTS/$ARGUMENTS_LOWERCASE.css';
 ```
+> **Example:** For `Avatar` component: `@import './Avatar/avatar.css';`
 
 ## Key Patterns
 
 - **forwardRef**: All /next components use forwardRef with named function
-- **Data attributes**: Use `data-*` for styling variants instead of CSS class modifiers
+- **displayName**: Always add `ComponentName.displayName = 'ComponentName'` after component definition
+- **Data attributes**: Use `data-*` for styling variants and modes (see CSS section for attribute list)
 - **CSS layer**: Always wrap in `@layer eds-components { }`
-- **Tokens**: Use `--eds-*` CSS custom properties from Figma, never hardcode values
+- **EDS 2.0 Tokens**: Use `--eds-*` CSS custom properties from Figma or `packages/eds-tokens/css/variables/`
+- **Dynamic tokens**: Prefer dynamic tokens (e.g., `--eds-selectable-space-vertical`) over static values
 - **Class naming**: Lowercase with `eds-` prefix (e.g., `eds-button`, `eds-avatar`)
 - **No default exports**: Only use named exports (except story meta)
+- **Composition**: Reuse existing /next components (Field, Icon, Input, Button) instead of creating from scratch
 
 ## Anti-patterns
 
@@ -238,3 +288,7 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 - Copying patterns from similar components without verifying Figma design
 - Adding props/features not specified in the design
 - Hardcoding hex color values instead of using CSS variables
+- Using EDS 1.0 tokens (e.g., `--eds-color-interactive-primary`, `--eds-color-text-error`)
+- Creating custom labels/helper text instead of using Field.Label/Field.HelperMessage
+- Implementing icons from scratch instead of using the Icon component
+- Missing `displayName` on the component
