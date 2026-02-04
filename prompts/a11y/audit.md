@@ -1,6 +1,6 @@
 ---
-mode: 'agent'
-model: Claude Sonnet 4
+agent: 'agent'
+model: Claude Opus 4.5
 tools: ['edit/createFile', 'search/codebase', 'microsoft/playwright-mcp/*']
 description: 'Generate Accessibility Audit Report'
 ---
