@@ -58,7 +58,7 @@ const config = {
       ...config,
       resolve: {
         ...config.resolve,
-        dedupe: ['styled-components'],
+        dedupe: ['styled-components', 'react', 'react-dom'],
         alias: {
           ...config.resolve?.alias,
           '@equinor/eds-core-react/style.css': '/dist/style.css',

@@ -39,11 +39,21 @@ Claude Code receives instructions from multiple sources, applied in this order:
 .claude/
 ├── README.md           # This file
 ├── CLAUDE.md           # Main project instructions
+├── commands/           # Slash commands
+│   └── new-component.md    # /new-component <Name>
 └── rules/
     ├── eds-component.md    # EDS 2.0 component conventions
     ├── figma-component.md  # Figma-to-code workflow
     └── advisor.md          # Code review guidelines
 ```
+
+## Commands
+
+Commands are user-invokable prompts triggered with `/command-name`. They support `$ARGUMENTS` for user input.
+
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `/new-component` | `/new-component Button` | Scaffold a new EDS 2.0 component with all files |
 
 ## Rules
 

@@ -25,9 +25,9 @@ docz-fresh
 storybook-build
 review.txt
 
+# local settings
 opencode.json
-
+settings.local.json
 
 # Generated build files
 packages/eds-core-react/build/
-
