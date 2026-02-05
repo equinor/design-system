@@ -20,4 +20,8 @@ export type {
 } from './types'
 
 // Typography token types
-export type { TypographyVariants, ColorVariants, TypographyGroups } from './Typography.tokens'
+export type {
+  TypographyVariants,
+  ColorVariants,
+  TypographyGroups,
+} from './Typography.tokens'
