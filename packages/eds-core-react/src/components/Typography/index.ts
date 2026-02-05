@@ -18,3 +18,10 @@ export type {
   FontWeight,
   Tracking,
 } from './types'
+
+// Typography token types
+export type {
+  TypographyVariants,
+  ColorVariants,
+  TypographyGroups,
+} from './Typography.tokens'
