@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.4](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.3...eds-core-react@v2.3.4) (2026-02-05)
+
+
+### 🐛 Fixed
+
+* 🐛 Fix multiple height in compact density mode ([#4468](https://github.com/equinor/design-system/issues/4468)) ([b01311b](https://github.com/equinor/design-system/commit/b01311bbea2a283330a1bc34ddeb8763ae71b486))
+* export TypographyVariants from public API ([#4470](https://github.com/equinor/design-system/issues/4470)) ([13fb583](https://github.com/equinor/design-system/commit/13fb583f7e5ab456eabb9a3d1b40af46a42e0ded))
+
+
+### 🔧 Chores
+
+* **config:** Add new-component slash command for automating new components ([#4461](https://github.com/equinor/design-system/issues/4461)) ([6f878f2](https://github.com/equinor/design-system/commit/6f878f2f89f35dcb2638cadf6d55ca96ef64724f))
+
 ## [2.3.3](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.2...eds-core-react@v2.3.3) (2026-02-03)
 
 
