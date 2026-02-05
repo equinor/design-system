@@ -504,12 +504,37 @@ export const Compact: StoryFn<AutocompleteProps<MyOptionType>> = (args) => {
         }}
         checked={compact}
       />
-      <Autocomplete
-        label="Select a stock"
-        initialSelectedOptions={[options[0]]}
-        options={options}
-        optionLabel={optionLabel}
-      />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          marginTop: '16px',
+          width: '300px',
+        }}
+      >
+        <Autocomplete
+          label="Single select"
+          initialSelectedOptions={[options[0]]}
+          options={options}
+          optionLabel={optionLabel}
+        />
+        <Autocomplete
+          label="Multiple (summary)"
+          multiple
+          initialSelectedOptions={[options[0], options[1]]}
+          options={options}
+          optionLabel={optionLabel}
+        />
+        <Autocomplete
+          label="Multiple (chips)"
+          multiple
+          selectionDisplay="chips"
+          initialSelectedOptions={[options[0], options[1]]}
+          options={options}
+          optionLabel={optionLabel}
+        />
+      </div>
     </EdsProvider>
   )
 }

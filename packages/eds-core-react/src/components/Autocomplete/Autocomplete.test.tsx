@@ -10,6 +10,7 @@ import {
 import '@testing-library/jest-dom'
 import styled from 'styled-components'
 import { Autocomplete } from '.'
+import { EdsProvider } from '../EdsProvider'
 
 const itemObjects = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
 const items = ['One', 'Two', 'Three']
@@ -980,5 +981,47 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
 
     const chip2Button = screen.getByRole('button', { name: /Two/i })
     expect(chip2Button).toHaveFocus()
+  })
+})
+
+describe('Autocomplete: Density mode', () => {
+  it('Has 36px minHeight in comfortable density with multiple chips', () => {
+    const { container } = render(
+      <EdsProvider density="comfortable">
+        <Autocomplete
+          label={labelText}
+          options={items}
+          multiple
+          selectionDisplay="chips"
+        />
+      </EdsProvider>,
+    )
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const inputContainer = container.querySelector(
+      '[style*="min-height: 36px"]',
+    )
+
+    expect(inputContainer).toBeInTheDocument()
+  })
+
+  it('Has 24px minHeight in compact density with multiple chips', () => {
+    const { container } = render(
+      <EdsProvider density="compact">
+        <Autocomplete
+          label={labelText}
+          options={items}
+          multiple
+          selectionDisplay="chips"
+        />
+      </EdsProvider>,
+    )
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const inputContainer = container.querySelector(
+      '[style*="min-height: 24px"]',
+    )
+
+    expect(inputContainer).toBeInTheDocument()
   })
 })
