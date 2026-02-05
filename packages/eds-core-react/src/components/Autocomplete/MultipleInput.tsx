@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
 import { Chip } from '../Chip'
+import { useEds } from '../EdsProvider'
 import { Input } from '../Input'
 import { useAutocompleteContext } from './AutocompleteContext'
 import { RightAdornments } from './RightAdornments'
@@ -17,14 +18,18 @@ const UnstyledInput = styled.input`
   }
 `
 
-const ChipContainer = styled.div`
+const ChipContainer = styled.div<{ $density: string }>`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  height: 100%;
+  align-items: center;
+  align-content: center;
+  min-height: 100%;
+  gap: ${({ $density }) => ($density === 'compact' ? '2px' : '0.5rem')};
+  margin: ${({ $density }) => ($density === 'compact' ? '-2px 0' : '0')};
 `
 
 export const MultipleInput = () => {
+  const { density } = useEds()
   const {
     selectedItems,
     selectionDisplay,
@@ -71,6 +76,8 @@ export const MultipleInput = () => {
       handleChipRemove(item, index, false)
     }
 
+  const minHeight = density === 'compact' ? '24px' : '36px'
+
   return (
     <Input
       as={'div'}
@@ -78,12 +85,12 @@ export const MultipleInput = () => {
       rightAdornmentsWidth={hideClearButton ? 24 + 8 : 24 * 2 + 8}
       rightAdornments={<RightAdornments />}
       readOnly={readOnly}
-      style={{
-        height: 'auto',
-        minHeight: '36px',
-      }}
+      style={
+        selectionDisplay === 'chips' ? { height: 'auto', minHeight } : undefined
+      }
+      data-density={density}
     >
-      <ChipContainer>
+      <ChipContainer $density={density}>
         {selectionDisplay === 'chips' &&
           selectedItems.map((item, index) => (
             <Chip
@@ -94,6 +101,11 @@ export const MultipleInput = () => {
               }}
               style={{
                 outline: '1px solid var(--eds-color-accent-12)',
+                ...(density === 'compact' && {
+                  height: '16px',
+                  fontSize: '12px',
+                  gridGap: '0px',
+                }),
               }}
               onDelete={handleChipDelete(item, index)}
               onClick={handleChipClick(item, index)}
