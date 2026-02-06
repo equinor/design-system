@@ -1,4 +1,6 @@
 name: Publish tokens
+permissions:
+  contents: read
 on:
   workflow_dispatch:
     inputs:
@@ -10,8 +12,6 @@ on:
           - next
           - latest
         default: 'next'
-permissions:
-  contents: read
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
