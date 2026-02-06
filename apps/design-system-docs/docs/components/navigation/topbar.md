@@ -1,55 +1,33 @@
+---
+title: Top bar
+sidebar_position: 11
+---
 # Top bar
 
-The _top bar_, also known as a header, displays navigation and actions relating to the interface.
+## When to Use
 
-<iframe 
-        class="sb-iframe"
-        src="
-        https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=navigation-topbar--with-search-and-icons&viewMode=story
-        "
-        width="100%"
-        height="200"
-        frameborder="1"
-        ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/docs/navigation-topbar--docs)
-
-## When to use
-
-Top bars span the full width of the viewport and are always the topmost component on a page. The top bar does not scroll away, being a consistent guidepost to users.
-
-The top bar always has a title which is the same throughout the whole application group. A subtitle is allowed, this can be the same throughout the whole application group, or can be specific to sub-apps within the application.
-
-The top bar has one _optional_ main navigational icon button which is always to the far left. This icon can either open the `App launcher` or toggle the `Navigation Drawer`.
 
 ## Guidelines
 
-The center block of the top bar can either be left empty, or custom content can be inserted into the placeholder.
 
-Custom content allowed:
+## Accessibility
 
-- Tabs (Tabs are allowed with nested menus)
-- Search bars
-- Buttons as menus
 
-The actions on the far-right are standard. This area is for the following common actions within the application:
+## Figma
 
-- Fullscreen: Users can choose to launch the interface to be fullscreen
-- Notifications: This opens a `Menu` for the user to see their notifications
-- Accessibility: This opens a `Menu` with choices for the users to choose light/dark mode and their font size _This button is mandatory to keep._
-- User profile: This opens a `Menu` where the user can see more account details and log out. _This button is mandatory to keep_
 
-## Implementation in Figma
 
-1. In Figma go to the **Assets Panel** and search for **top bar**.
-2. Drag and drop the component in your frame.
-3. Rename and resize the component if needed.
-4. Choose the variant from the **Design Panel**.
+### Do's and don'ts
 
-## Do's and don'ts
+:::info **Do**
 
-✅ Keep the top bar visible at all times
+- 
+:::
 
-❌ Do not hide the top bar while scrolling
+:::danger **Don't**
 
-❌ Do not change the colour of the top bar
+- 
+:::
+
+
