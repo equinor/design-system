@@ -1,0 +1,17 @@
+.next
+!package-lock.json
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Build output
+dist/
+output/

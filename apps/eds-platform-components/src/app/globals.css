@@ -1,0 +1,152 @@
+:root {
+  --max-width: 1200px;
+  --border-radius: 4px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  color: var(--eds-color-text-primary, #000);
+  background: var(--eds-color-bg-default, #fff);
+}
+
+a {
+  color: var(--eds-color-link-primary, #007079);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  color: var(--eds-color-text-primary, #000);
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.main {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.footer {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--eds-color-border-medium, #dcdcdc);
+  color: var(--eds-color-text-secondary, #6f6f6f);
+}
+
+/* Platform Selector */
+.platform-selector {
+  margin-bottom: var(--spacing-xl);
+}
+
+.platform-selector h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--eds-color-text-primary, #000);
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Components Section */
+.components-section {
+  margin-top: var(--spacing-xl);
+}
+
+.components-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--eds-color-text-primary, #000);
+}
+
+.info-box {
+  padding: var(--spacing-lg);
+  border: 1px solid var(--eds-color-border-medium, #dcdcdc);
+  border-radius: var(--border-radius);
+  background: var(--eds-color-bg-light, #f7f7f7);
+}
+
+.info-box p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.coming-soon {
+  font-style: italic;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .platform-grid {
+    grid-template-columns: 1fr;
+  }
+}

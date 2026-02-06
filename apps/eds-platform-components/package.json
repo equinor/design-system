@@ -1,0 +1,45 @@
+{
+  "name": "@equinor/eds-platform-components",
+  "description": "EDS Platform Components - Special components for unconventional platforms and frameworks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:codegen": "playwright codegen"
+  },
+  "dependencies": {
+    "@equinor/eds-core-react": "workspace:^",
+    "@equinor/eds-icons": "workspace:^",
+    "@equinor/eds-tokens": "workspace:^",
+    "@equinor/eds-utils": "workspace:^",
+    "lucide-react": "^0.546.0",
+    "next": "16.0.9",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@next/eslint-plugin-next": "16.0.7",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "16.0.7",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.0.2"
+  }
+}
