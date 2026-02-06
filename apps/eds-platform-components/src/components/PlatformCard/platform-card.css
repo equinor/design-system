@@ -1,0 +1,31 @@
+.platform-card {
+  padding: var(--eds-spacing-large, 1.5rem);
+  border: 2px solid var(--eds-color-border-medium, #dcdcdc);
+  border-radius: 4px;
+  background: var(--eds-color-bg-default, #fff);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.platform-card:hover {
+  border-color: var(--eds-color-border-strong, #6f6f6f);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.platform-card--active {
+  border-color: var(--eds-color-link-primary, #007079);
+  background: var(--eds-color-bg-light, #f7f7f7);
+}
+
+.platform-card__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--eds-color-text-primary, #000);
+}
+
+.platform-card__description {
+  color: var(--eds-color-text-secondary, #6f6f6f);
+  font-size: 0.875rem;
+}
