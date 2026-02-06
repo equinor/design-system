@@ -15,3 +15,11 @@ next-env.d.ts
 # Build output
 dist/
 output/
+
+# Power Apps generated output (exclude by default)
+scripts/power-apps/output/*.yaml
+scripts/power-apps/output/
+
+# Keep example files
+!scripts/power-apps/output/README.md
+!scripts/power-apps/output/example-*.yaml

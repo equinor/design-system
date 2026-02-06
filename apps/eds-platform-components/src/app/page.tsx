@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import { PlatformCard } from '@/components/PlatformCard'
 
@@ -11,16 +12,19 @@ export default function Home() {
       id: 'power-platform',
       title: 'Power Platform',
       description: 'Components optimized for Power Apps',
+      href: '/power-apps/buttons',
     },
     {
       id: 'power-bi',
       title: 'Power BI',
       description: 'Custom visuals for Power BI reports',
+      href: null,
     },
     {
       id: 'low-code',
       title: 'Low-Code Platforms',
       description: 'Components for various low-code solutions',
+      href: null,
     },
   ]
 
@@ -38,15 +42,30 @@ export default function Home() {
         <section className="platform-selector">
           <h2>Select Platform</h2>
           <div className="platform-grid">
-            {platforms.map((platform) => (
-              <PlatformCard
-                key={platform.id}
-                title={platform.title}
-                description={platform.description}
-                isActive={selectedPlatform === platform.id}
-                onClick={() => setSelectedPlatform(platform.id)}
-              />
-            ))}
+            {platforms.map((platform) =>
+              platform.href ? (
+                <Link
+                  key={platform.id}
+                  href={platform.href}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <PlatformCard
+                    title={platform.title}
+                    description={platform.description}
+                    isActive={selectedPlatform === platform.id}
+                    onClick={() => setSelectedPlatform(platform.id)}
+                  />
+                </Link>
+              ) : (
+                <PlatformCard
+                  key={platform.id}
+                  title={platform.title}
+                  description={platform.description}
+                  isActive={selectedPlatform === platform.id}
+                  onClick={() => setSelectedPlatform(platform.id)}
+                />
+              ),
+            )}
           </div>
         </section>
 
