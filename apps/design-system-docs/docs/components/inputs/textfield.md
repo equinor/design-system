@@ -23,7 +23,7 @@ Use TextField when you need a complete form field with label, description, and v
 
 **Avoid TextField when:**
 
-- You need a simple input without form composition—use [Input](/docs/components/inputs/input) instead
+- You need a simple input without form composition—use [Input](./input) instead
 - Users should choose from limited options—use Radio, Checkbox, Select, or Autocomplete instead
 - You need multiline text entry—use Textarea instead
 
@@ -36,7 +36,7 @@ TextField is composed of several elements that work together:
 - **Input**: The text entry area
 - **HelperMessage**: Validation feedback or hints below the input
 
-For more flexibility, use the individual components via the [Field](/docs/components/inputs/field) composition pattern.
+For more flexibility, use the individual components via the [Field](./field) composition pattern.
 
 ## Guidelines
 

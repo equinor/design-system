@@ -112,7 +112,7 @@ Switches toggle a single setting on or off. Changes take effect immediately when
 
 ### Labels and Grouping
 
-Selection controls should always be accompanied by a clear label. Make sure labels are concise and use consistent wording across grouped controls. Selection controls use the [Field](/docs/components/inputs/field) component internally to manage label positioning and accessibility.
+Selection controls should always be accompanied by a clear label. Make sure labels are concise and use consistent wording across grouped controls. Selection controls use the [Field](./field) component internally to manage label positioning and accessibility.
 
 **For checkboxes and radios:**
 
