@@ -15,17 +15,21 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
-    "test:codegen": "playwright codegen"
+    "test:codegen": "playwright codegen",
+    "generate:power-apps": "tsx scripts/power-apps/generate-components.ts"
   },
   "dependencies": {
     "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "lucide-react": "^0.546.0",
     "next": "16.0.9",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

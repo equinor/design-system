@@ -12,11 +12,59 @@ This application serves as a showcase and resource for developers working with E
 
 ## Features
 
-- Interactive component library tailored for specific platforms
+- **Interactive Web Gallery** - Browse and copy Power Apps components with visual previews
+- **Power Apps YAML Generator** - CLI tool to generate copy-paste ready YAML components
 - Implementation examples and best practices
 - Export/download capabilities for platform-specific formats
 - Documentation for integration and customization
 - Accessibility-focused design following WCAG 2.1 AA standards
+
+## Power Apps Components
+
+### Web Gallery (Recommended)
+
+Browse, preview, and copy Power Apps components directly from your browser:
+
+```bash
+# Start the development server
+pnpm dev
+
+# Open in browser
+http://localhost:3000/power-apps/buttons
+```
+
+Features:
+- Visual preview of all button variants
+- One-click copy to clipboard
+- Organized by style (Contained, Outlined, Ghost)
+- Live rendering with EDS styling
+
+See [BUTTON_GALLERY.md](BUTTON_GALLERY.md) for details.
+
+### CLI Generator (Alternative)
+
+Generate YAML files to disk for batch processing:
+
+```bash
+# Generate button components
+pnpm generate:power-apps button
+
+# Output will be in scripts/power-apps/output/
+```
+
+See [scripts/power-apps/README.md](scripts/power-apps/README.md) for detailed documentation.
+
+### Quick Usage
+
+1. Visit `/power-apps/buttons` or run the CLI generator
+2. Copy YAML code (click "Copy YAML" button or open generated file)
+3. Open Power Apps Studio
+4. Go to Tree View → Click (...) → Paste YAML
+5. Paste the content
+
+Available components:
+
+- ✅ **Button** - Contained, Outlined, and Ghost variants in Primary, Secondary, and Danger colors
 
 ## Getting Started
 
@@ -77,6 +125,11 @@ eds-platform-components/
 │   │   └── globals.css   # Global styles
 │   ├── components/       # React components
 │   └── styles/           # Additional style files
+├── scripts/
+│   └── power-apps/       # Power Apps component generators
+│       ├── components/   # Component generators
+│       ├── utils/        # Utilities and token mappings
+│       └── output/       # Generated YAML files
 ├── tests/
 │   └── e2e/              # Playwright E2E tests
 ├── package.json          # Dependencies and scripts

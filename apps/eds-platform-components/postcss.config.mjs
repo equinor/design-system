@@ -1,3 +1,5 @@
-export default {
+const config = {
   plugins: {},
 }
+
+export default config
