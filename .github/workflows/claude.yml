@@ -19,32 +19,71 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
-      issues: read
+      contents: write
+      pull-requests: write
+      issues: write
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
+      - name: Check admin permission
+        id: check-permission
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PERMISSION=$(gh api repos/${{ github.repository }}/collaborators/${{ github.actor }}/permission --jq '.permission')
+          echo "permission=$PERMISSION" >> "$GITHUB_OUTPUT"
+          if [ "$PERMISSION" != "admin" ]; then
+            echo "::notice::User ${{ github.actor }} has '$PERMISSION' permission, 'admin' required. Skipping."
+            exit 0
+          fi
+
       - name: Checkout repository
+        if: steps.check-permission.outputs.permission == 'admin'
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
 
+      - name: Install Node.js
+        if: steps.check-permission.outputs.permission == 'admin'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+
+      - name: Setup pnpm
+        if: steps.check-permission.outputs.permission == 'admin'
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        if: steps.check-permission.outputs.permission == 'admin'
+        run: pnpm install --force
+
+      - name: Build packages
+        if: steps.check-permission.outputs.permission == 'admin'
+        run: pnpm run build
+
       - name: Run Claude Code
+        if: steps.check-permission.outputs.permission == 'admin'
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 
-          # This is an optional setting that allows Claude to read CI results on PRs
+          # Allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
 
-          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
-          # prompt: 'Update the pull request description to include a summary of changes.'
-
-          # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr:*)'
-
+          claude_args: >-
+            --append-system-prompt
+            "The project is already set up with all dependencies installed and all packages built.
+            Useful commands: pnpm run build:core-react, pnpm run test:core-react,
+            pnpm run lint ./path/to/file.tsx,
+            cd packages/eds-core-react && pnpm test -- --testPathPattern=ComponentName.
+            Follow the conventions in CLAUDE.md and .github/copilot-instructions.md.
+            Use conventional commits: type(scope): description.
+            New components go in packages/eds-core-react/src/components/next/."
+            --allowed-tools
+            "Bash(pnpm:*),Bash(npm:*),Bash(node:*),Bash(git:*),Bash(gh pr:*),Bash(gh issue:*),Bash(ls:*),Bash(cd:*),Bash(cat:*),Bash(find:*),Bash(grep:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(diff:*),Bash(echo:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*)"
