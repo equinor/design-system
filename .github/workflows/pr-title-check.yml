@@ -5,6 +5,8 @@ on:
 
 jobs:
   check-title:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Title Format
