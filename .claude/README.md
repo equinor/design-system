@@ -137,7 +137,7 @@ Hooks are shell commands that run in response to Claude Code events. They can bl
 
 | Hook | Event | Matcher | Purpose |
 |------|-------|---------|---------|
-| `read_hook.js` | `PreToolUse` | `Read\|Grep` | Blocks reading `.env` files to protect secrets |
+| `read_hook.js` | `PreToolUse` | `Read\|Grep\|Glob\|Bash` | Blocks access to `.env` files (read, grep, glob, shell commands) |
 
 ### Configuration
 
@@ -148,7 +148,7 @@ Hooks are defined in `.claude/settings.json`:
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Read|Grep",
+        "matcher": "Read|Grep|Glob|Bash",
         "hooks": [
           {
             "type": "command",
