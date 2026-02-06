@@ -19,6 +19,9 @@ on:
         description: 'Package tag'
         value: ${{ jobs.variables.outputs.tag }}
 
+permissions:
+  contents: read
+
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
