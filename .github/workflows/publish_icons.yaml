@@ -1,5 +1,7 @@
 # TODO: Create a composite action for publishing to simplify things
 name: Publish icons
+permissions:
+  contents: read
 on:
   workflow_dispatch:
     inputs:
