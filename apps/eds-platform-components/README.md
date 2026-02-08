@@ -34,6 +34,7 @@ http://localhost:3000/power-apps/buttons
 ```
 
 Features:
+
 - Visual preview of all button variants
 - One-click copy to clipboard
 - Organized by style (Contained, Outlined, Ghost)
@@ -116,7 +117,7 @@ pnpm platform:lint
 
 ## Project Structure
 
-```
+```text
 eds-platform-components/
 ├── src/
 │   ├── app/              # Next.js app directory

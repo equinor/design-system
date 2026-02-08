@@ -1,5 +1,10 @@
+'use client'
+
 import { ComponentCard } from '@/components/ComponentCard'
 import { generateButtonYaml } from '@/lib/generateButtonYaml'
+import { PlatformLayout } from '@/components/PlatformLayout'
+import { ComponentSidebar } from '@/components/ComponentSidebar'
+import { Accordion } from '@equinor/eds-core-react'
 import './layout.css'
 
 type ButtonVariant = 'contained' | 'outlined' | 'ghost'
@@ -31,120 +36,212 @@ const buttonConfigs: ButtonConfig[] = [
   { variant: 'ghost', color: 'primary', disabled: true },
 ]
 
+const categories = [
+  {
+    title: 'Inputs',
+    items: [
+      { label: 'Button', active: true },
+      { label: 'Text Input' },
+      { label: 'Checkbox' },
+      { label: 'Radio' },
+    ],
+  },
+  {
+    title: 'Display',
+    items: [{ label: 'Card' }, { label: 'Label' }, { label: 'Icon' }],
+  },
+]
+
 export default function PowerAppsButtonsPage() {
   return (
-    <div className="page-container">
-      <header className="page-header">
-        <h1>Power Apps Button Components</h1>
-        <p className="page-description">
-          Browse and copy EDS button components for Power Apps Canvas apps.
-          Click the copy button to copy the YAML code to your clipboard, then
-          paste it into Power Apps Studio.
-        </p>
-      </header>
+    <PlatformLayout activePlatform="power-platform">
+      <div className="page-layout">
+        <ComponentSidebar
+          categories={categories}
+          onRequestComponent={() => {
+            window.open(
+              'https://github.com/equinor/design-system/issues/new',
+              '_blank',
+            )
+          }}
+        />
 
-      <section className="components-section">
-        <h2>Contained Buttons</h2>
-        <div className="components-grid">
-          {buttonConfigs
-            .filter((config) => config.variant === 'contained')
-            .map((config, index) => {
-              const name = `EDSButton_contained_${config.color}${config.disabled ? '_disabled' : ''}`
-              const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Contained Button`
-              const yaml = generateButtonYaml({
-                name,
-                variant: config.variant,
-                color: config.color,
-                text,
-                disabled: config.disabled,
-              })
+        <main className="page-main">
+          <Accordion className="variant-accordion">
+            <Accordion.Item isExpanded>
+              <Accordion.Header>Contained - Primary</Accordion.Header>
+              <Accordion.Panel>
+                <div className="button-cards-row">
+                  {buttonConfigs
+                    .filter(
+                      (config) =>
+                        config.variant === 'contained' &&
+                        config.color === 'primary',
+                    )
+                    .map((config, index) => {
+                      const name = `EDSButton_contained_${config.color}${config.disabled ? '_disabled' : ''}`
+                      const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Contained Button`
+                      const yaml = generateButtonYaml({
+                        name,
+                        variant: config.variant,
+                        color: config.color,
+                        text,
+                        disabled: config.disabled,
+                      })
 
-              return (
-                <ComponentCard
-                  key={`${config.variant}-${config.color}-${index}`}
-                  name={name}
-                  variant={config.variant}
-                  color={config.color}
-                  disabled={config.disabled}
-                  yamlContent={yaml}
-                />
-              )
-            })}
-        </div>
-      </section>
+                      return (
+                        <ComponentCard
+                          key={`${config.variant}-${config.color}-${index}`}
+                          name={name}
+                          variant={config.variant}
+                          color={config.color}
+                          disabled={config.disabled}
+                          yamlContent={yaml}
+                        />
+                      )
+                    })}
+                </div>
+              </Accordion.Panel>
+            </Accordion.Item>
 
-      <section className="components-section">
-        <h2>Outlined Buttons</h2>
-        <div className="components-grid">
-          {buttonConfigs
-            .filter((config) => config.variant === 'outlined')
-            .map((config, index) => {
-              const name = `EDSButton_outlined_${config.color}${config.disabled ? '_disabled' : ''}`
-              const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Outlined Button`
-              const yaml = generateButtonYaml({
-                name,
-                variant: config.variant,
-                color: config.color,
-                text,
-                disabled: config.disabled,
-              })
+            <Accordion.Item isExpanded>
+              <Accordion.Header>Contained - Secondary</Accordion.Header>
+              <Accordion.Panel>
+                <div className="button-cards-row">
+                  {buttonConfigs
+                    .filter(
+                      (config) =>
+                        config.variant === 'contained' &&
+                        config.color === 'secondary',
+                    )
+                    .map((config, index) => {
+                      const name = `EDSButton_contained_${config.color}${config.disabled ? '_disabled' : ''}`
+                      const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Contained Button`
+                      const yaml = generateButtonYaml({
+                        name,
+                        variant: config.variant,
+                        color: config.color,
+                        text,
+                        disabled: config.disabled,
+                      })
 
-              return (
-                <ComponentCard
-                  key={`${config.variant}-${config.color}-${index}`}
-                  name={name}
-                  variant={config.variant}
-                  color={config.color}
-                  disabled={config.disabled}
-                  yamlContent={yaml}
-                />
-              )
-            })}
-        </div>
-      </section>
+                      return (
+                        <ComponentCard
+                          key={`${config.variant}-${config.color}-${index}`}
+                          name={name}
+                          variant={config.variant}
+                          color={config.color}
+                          disabled={config.disabled}
+                          yamlContent={yaml}
+                        />
+                      )
+                    })}
+                </div>
+              </Accordion.Panel>
+            </Accordion.Item>
 
-      <section className="components-section">
-        <h2>Ghost Buttons</h2>
-        <div className="components-grid">
-          {buttonConfigs
-            .filter((config) => config.variant === 'ghost')
-            .map((config, index) => {
-              const name = `EDSButton_ghost_${config.color}${config.disabled ? '_disabled' : ''}`
-              const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Ghost Button`
-              const yaml = generateButtonYaml({
-                name,
-                variant: config.variant,
-                color: config.color,
-                text,
-                disabled: config.disabled,
-              })
+            <Accordion.Item isExpanded>
+              <Accordion.Header>Contained - Danger</Accordion.Header>
+              <Accordion.Panel>
+                <div className="button-cards-row">
+                  {buttonConfigs
+                    .filter(
+                      (config) =>
+                        config.variant === 'contained' &&
+                        config.color === 'danger',
+                    )
+                    .map((config, index) => {
+                      const name = `EDSButton_contained_${config.color}${config.disabled ? '_disabled' : ''}`
+                      const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Contained Button`
+                      const yaml = generateButtonYaml({
+                        name,
+                        variant: config.variant,
+                        color: config.color,
+                        text,
+                        disabled: config.disabled,
+                      })
 
-              return (
-                <ComponentCard
-                  key={`${config.variant}-${config.color}-${index}`}
-                  name={name}
-                  variant={config.variant}
-                  color={config.color}
-                  disabled={config.disabled}
-                  yamlContent={yaml}
-                />
-              )
-            })}
-        </div>
-      </section>
+                      return (
+                        <ComponentCard
+                          key={`${config.variant}-${config.color}-${index}`}
+                          name={name}
+                          variant={config.variant}
+                          color={config.color}
+                          disabled={config.disabled}
+                          yamlContent={yaml}
+                        />
+                      )
+                    })}
+                </div>
+              </Accordion.Panel>
+            </Accordion.Item>
 
-      <footer className="page-footer">
-        <h3>How to Use</h3>
-        <ol>
-          <li>Click the &quot;Copy YAML&quot; button on any component</li>
-          <li>Open Power Apps Studio</li>
-          <li>
-            Go to Tree View → Click (...) menu → Select &quot;Paste YAML&quot;
-          </li>
-          <li>Paste the copied content</li>
-          <li>The component will appear in your canvas app with EDS styling</li>
-        </ol>
-      </footer>
-    </div>
+            <Accordion.Item>
+              <Accordion.Header>Outlined Buttons</Accordion.Header>
+              <Accordion.Panel>
+                <div className="button-cards-grid">
+                  {buttonConfigs
+                    .filter((config) => config.variant === 'outlined')
+                    .map((config, index) => {
+                      const name = `EDSButton_outlined_${config.color}${config.disabled ? '_disabled' : ''}`
+                      const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Outlined Button`
+                      const yaml = generateButtonYaml({
+                        name,
+                        variant: config.variant,
+                        color: config.color,
+                        text,
+                        disabled: config.disabled,
+                      })
+
+                      return (
+                        <ComponentCard
+                          key={`${config.variant}-${config.color}-${index}`}
+                          name={name}
+                          variant={config.variant}
+                          color={config.color}
+                          disabled={config.disabled}
+                          yamlContent={yaml}
+                        />
+                      )
+                    })}
+                </div>
+              </Accordion.Panel>
+            </Accordion.Item>
+
+            <Accordion.Item>
+              <Accordion.Header>Ghost Buttons</Accordion.Header>
+              <Accordion.Panel>
+                <div className="button-cards-grid">
+                  {buttonConfigs
+                    .filter((config) => config.variant === 'ghost')
+                    .map((config, index) => {
+                      const name = `EDSButton_ghost_${config.color}${config.disabled ? '_disabled' : ''}`
+                      const text = `${config.color.charAt(0).toUpperCase() + config.color.slice(1)} Ghost Button`
+                      const yaml = generateButtonYaml({
+                        name,
+                        variant: config.variant,
+                        color: config.color,
+                        text,
+                        disabled: config.disabled,
+                      })
+
+                      return (
+                        <ComponentCard
+                          key={`${config.variant}-${config.color}-${index}`}
+                          name={name}
+                          variant={config.variant}
+                          color={config.color}
+                          disabled={config.disabled}
+                          yamlContent={yaml}
+                        />
+                      )
+                    })}
+                </div>
+              </Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
+        </main>
+      </div>
+    </PlatformLayout>
   )
 }
