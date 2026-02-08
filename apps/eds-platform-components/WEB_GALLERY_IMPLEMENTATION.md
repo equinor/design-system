@@ -56,7 +56,7 @@ Added an interactive web gallery to the EDS Platform Components application that
 
 ### New Files Created
 
-```
+```text
 src/
 ├── app/power-apps/buttons/
 │   ├── page.tsx           # Gallery page

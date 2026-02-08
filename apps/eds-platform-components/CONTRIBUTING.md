@@ -24,13 +24,14 @@ Thank you for your interest in contributing to the EDS Platform Components appli
    ```
 
 4. **Lint code**:
+
    ```bash
    pnpm platform:lint
    ```
 
 ## Project Structure
 
-```
+```text
 src/
 ├── app/              # Next.js App Router pages
 │   ├── layout.tsx    # Root layout
@@ -54,7 +55,7 @@ tests/
 
 Every component should follow this structure:
 
-```
+```text
 ComponentName/
 ├── index.ts                 # Export only
 ├── ComponentName.tsx        # Component implementation
@@ -142,7 +143,7 @@ describe('ComponentName', () => {
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 type(scope): description
 
 feat(platform): add Power Platform component

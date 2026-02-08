@@ -55,7 +55,7 @@ scripts/power-apps/output/
 
 ### File Structure
 
-```
+```text
 src/
 ├── app/
 │   └── power-apps/

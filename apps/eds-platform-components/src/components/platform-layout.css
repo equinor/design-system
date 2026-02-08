@@ -1,0 +1,36 @@
+.platform-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.platform-topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--eds-color-border-medium, #dcdcdc);
+  flex-shrink: 0;
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.platform-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--eds-color-text-primary, #3d3d3d);
+}
+
+.platform-actions {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.platform-content {
+  flex: 1;
+  overflow: auto;
+  background: #f7f7f7;
+}

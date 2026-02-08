@@ -214,7 +214,8 @@ OnSelect = Patch(
 4. **State Management**: Use variables (`Set()`, `UpdateContext()`) for button states
 
 5. **Error Handling**: Wrap actions in error handling:
-   ```powerfx
+
+   ```csharp
    OnSelect = IfError(
        SubmitForm(Form1),
        Notify("Error: " & FirstError.Message, NotificationType.Error)

@@ -82,7 +82,7 @@ A specialized Equinor Design System application for generating platform-specific
 
 The official Power Apps YAML schema contains regex patterns incompatible with JavaScript:
 
-```
+```regex
 /^([a-zA-Z][a-zA-Z0-9]{1,7})_)?(\w+\.)+(\w+)(\([0-9a-f-]{36}\))?$/u
 ```
 
@@ -184,7 +184,7 @@ All generated files in `scripts/power-apps/output/`:
 
 ## 📁 Project Structure
 
-```
+```text
 apps/eds-platform-components/
 ├── src/                          # Next.js app (UI for platform selection)
 ├── scripts/                      # Component generation scripts
