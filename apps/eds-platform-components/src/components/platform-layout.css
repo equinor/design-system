@@ -17,10 +17,25 @@
   padding: 0 1rem;
 }
 
+.platform-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.platform-title-link:hover {
+  text-decoration: none;
+}
+
 .platform-title {
   font-size: 1rem;
   font-weight: 500;
   color: var(--eds-color-text-primary, #3d3d3d);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.platform-title-link:hover .platform-title {
+  color: var(--eds-color-link-primary, #007079);
 }
 
 .platform-actions {
