@@ -48,40 +48,41 @@ a:hover {
 }
 
 /* Layout */
-.container {
-  min-height: 100vh;
+.home-container {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   padding: var(--spacing-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
-.header {
+.home-header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
 }
 
-.header h1 {
+.home-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
   color: var(--eds-color-text-primary, #000);
 }
 
-.subtitle {
+.home-subtitle {
   font-size: 1.125rem;
   color: var(--eds-color-text-secondary, #6f6f6f);
   max-width: 600px;
   margin: 0 auto;
 }
 
-.main {
+.home-main {
   flex: 1;
-  max-width: var(--max-width);
   width: 100%;
-  margin: 0 auto;
 }
 
-.footer {
+.home-footer {
   text-align: center;
   margin-top: var(--spacing-xl);
   padding-top: var(--spacing-lg);
@@ -89,21 +90,15 @@ a:hover {
   color: var(--eds-color-text-secondary, #6f6f6f);
 }
 
-/* Platform Selector */
-.platform-selector {
+/* Home Sections */
+.home-welcome {
   margin-bottom: var(--spacing-xl);
 }
 
-.platform-selector h2 {
+.home-welcome h2 {
   font-size: 1.5rem;
   margin-bottom: var(--spacing-md);
   color: var(--eds-color-text-primary, #000);
-}
-
-.platform-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-md);
 }
 
 /* Components Section */
@@ -132,22 +127,55 @@ a:hover {
   margin-bottom: 0;
 }
 
-.coming-soon {
-  font-style: italic;
-  color: var(--eds-color-text-secondary, #6f6f6f);
+.info-box a {
+  color: var(--eds-color-link-primary, #007079);
+  font-weight: 500;
+}
+
+.info-box a:hover {
+  text-decoration: underline;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  padding: var(--spacing-sm) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.features-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--eds-color-link-primary, #007079);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.features-list li:first-child {
+  padding-top: 0;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .header h1 {
+  .home-header h1 {
     font-size: 2rem;
   }
 
-  .subtitle {
+  .home-subtitle {
     font-size: 1rem;
   }
 
   .platform-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-container {
+    padding: var(--spacing-sm);
   }
 }

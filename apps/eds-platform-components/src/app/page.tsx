@@ -1,100 +1,76 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { PlatformCard } from '@/components/PlatformCard'
+import { PlatformLayout } from '@/components/PlatformLayout'
 
 export default function Home() {
-  const [selectedPlatform, setSelectedPlatform] = useState<string>('')
-
-  const platforms = [
-    {
-      id: 'power-platform',
-      title: 'Power Platform',
-      description: 'Components optimized for Power Apps',
-      href: '/power-apps/buttons',
-    },
-    {
-      id: 'power-bi',
-      title: 'Power BI',
-      description: 'Custom visuals for Power BI reports',
-      href: null,
-    },
-    {
-      id: 'low-code',
-      title: 'Low-Code Platforms',
-      description: 'Components for various low-code solutions',
-      href: null,
-    },
-  ]
-
   return (
-    <div className="container">
-      <header className="header">
-        <h1>EDS Platform Components</h1>
-        <p className="subtitle">
-          Equinor Design System components for unconventional platforms and
-          frameworks
-        </p>
-      </header>
+    <PlatformLayout activePlatform="home">
+      <div className="home-container">
+        <header className="home-header">
+          <h1>EDS Platform Components</h1>
+          <p className="home-subtitle">
+            Equinor Design System components for unconventional platforms and
+            frameworks
+          </p>
+        </header>
 
-      <main className="main">
-        <section className="platform-selector">
-          <h2>Select Platform</h2>
-          <div className="platform-grid">
-            {platforms.map((platform) =>
-              platform.href ? (
-                <Link
-                  key={platform.id}
-                  href={platform.href}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <PlatformCard
-                    title={platform.title}
-                    description={platform.description}
-                    isActive={selectedPlatform === platform.id}
-                    onClick={() => setSelectedPlatform(platform.id)}
-                  />
-                </Link>
-              ) : (
-                <PlatformCard
-                  key={platform.id}
-                  title={platform.title}
-                  description={platform.description}
-                  isActive={selectedPlatform === platform.id}
-                  onClick={() => setSelectedPlatform(platform.id)}
-                />
-              ),
-            )}
-          </div>
-        </section>
-
-        {selectedPlatform && (
-          <section className="components-section">
-            <h2>Available Components</h2>
+        <main className="home-main">
+          <section className="home-welcome">
+            <h2>Welcome</h2>
             <div className="info-box">
               <p>
-                Components for <strong>{selectedPlatform}</strong> will be
-                displayed here.
+                Use the navigation tabs above to browse components optimized for
+                different platforms. Currently, only{' '}
+                <Link href="/power-apps/buttons">Power Platform</Link> is
+                implemented with ready-to-use button components for Power Apps.
               </p>
-              <p className="coming-soon">Coming soon...</p>
+              <p>
+                Additional platforms like Power BI, Pega, and SharePoint are
+                planned. We welcome suggestions for other platforms that would
+                benefit from EDS component implementations.
+              </p>
             </div>
           </section>
-        )}
-      </main>
 
-      <footer className="footer">
-        <p>
-          Part of the{' '}
-          <a
-            href="https://eds.equinor.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Equinor Design System
-          </a>
-        </p>
-      </footer>
-    </div>
+          <section className="components-section">
+            <h2>What You&apos;ll Find Here</h2>
+            <div className="info-box">
+              <ul className="features-list">
+                <li>
+                  <strong>Platform-optimized components</strong> - Pre-configured
+                  for specific environments
+                </li>
+                <li>
+                  <strong>Copy-paste ready</strong> - YAML snippets and code you
+                  can use immediately
+                </li>
+                <li>
+                  <strong>EDS design tokens</strong> - Consistent with the Equinor
+                  Design System
+                </li>
+                <li>
+                  <strong>Accessibility-focused</strong> - Following WCAG 2.1 AA
+                  standards
+                </li>
+              </ul>
+            </div>
+          </section>
+        </main>
+
+        <footer className="home-footer">
+          <p>
+            Part of the{' '}
+            <a
+              href="https://eds.equinor.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Equinor Design System
+            </a>
+          </p>
+        </footer>
+      </div>
+    </PlatformLayout>
   )
 }
