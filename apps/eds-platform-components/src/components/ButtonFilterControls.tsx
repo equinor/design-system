@@ -1,6 +1,6 @@
 'use client'
 
-import { Chip } from '@equinor/eds-core-react'
+import { Button } from '@equinor/eds-core-react'
 import './button-filter-controls.css'
 
 type ButtonVariant = 'contained' | 'outlined' | 'ghost'
@@ -15,6 +15,18 @@ type ButtonFilterControlsProps = {
   onDisabledChange: (disabled: boolean) => void
 }
 
+const variantIndexMap: Record<ButtonVariant, number> = {
+  contained: 0,
+  outlined: 1,
+  ghost: 2,
+}
+
+const colorIndexMap: Record<ButtonColor, number> = {
+  primary: 0,
+  secondary: 1,
+  danger: 2,
+}
+
 export const ButtonFilterControls = ({
   variant,
   color,
@@ -23,72 +35,61 @@ export const ButtonFilterControls = ({
   onColorChange,
   onDisabledChange,
 }: ButtonFilterControlsProps) => {
+  const handleVariantChange = (indexes: number[]) => {
+    const variants: ButtonVariant[] = ['contained', 'outlined', 'ghost']
+    if (indexes.length > 0) {
+      onVariantChange(variants[indexes[0]])
+    }
+  }
+
+  const handleColorChange = (indexes: number[]) => {
+    const colors: ButtonColor[] = ['primary', 'secondary', 'danger']
+    if (indexes.length > 0) {
+      onColorChange(colors[indexes[0]])
+    }
+  }
+
+  const handleDisabledChange = (indexes: number[]) => {
+    if (indexes.length > 0) {
+      onDisabledChange(indexes[0] === 1)
+    }
+  }
+
   return (
     <div className="button-filter-controls">
       <div className="filter-section">
         <label className="filter-label">Variant</label>
-        <div className="filter-options">
-          <Chip
-            onClick={() => onVariantChange('contained')}
-            variant={variant === 'contained' ? 'active' : 'default'}
-          >
-            Contained
-          </Chip>
-          <Chip
-            onClick={() => onVariantChange('outlined')}
-            variant={variant === 'outlined' ? 'active' : 'default'}
-          >
-            Outlined
-          </Chip>
-          <Chip
-            onClick={() => onVariantChange('ghost')}
-            variant={variant === 'ghost' ? 'active' : 'default'}
-          >
-            Ghost
-          </Chip>
-        </div>
+        <Button.Toggle
+          selectedIndexes={[variantIndexMap[variant]]}
+          onChange={handleVariantChange}
+        >
+          <Button>Contained</Button>
+          <Button>Outlined</Button>
+          <Button>Ghost</Button>
+        </Button.Toggle>
       </div>
 
       <div className="filter-section">
         <label className="filter-label">Color</label>
-        <div className="filter-options">
-          <Chip
-            onClick={() => onColorChange('primary')}
-            variant={color === 'primary' ? 'active' : 'default'}
-          >
-            Primary
-          </Chip>
-          <Chip
-            onClick={() => onColorChange('secondary')}
-            variant={color === 'secondary' ? 'active' : 'default'}
-          >
-            Secondary
-          </Chip>
-          <Chip
-            onClick={() => onColorChange('danger')}
-            variant={color === 'danger' ? 'active' : 'default'}
-          >
-            Danger
-          </Chip>
-        </div>
+        <Button.Toggle
+          selectedIndexes={[colorIndexMap[color]]}
+          onChange={handleColorChange}
+        >
+          <Button>Primary</Button>
+          <Button>Secondary</Button>
+          <Button>Danger</Button>
+        </Button.Toggle>
       </div>
 
       <div className="filter-section">
         <label className="filter-label">State</label>
-        <div className="filter-options">
-          <Chip
-            onClick={() => onDisabledChange(false)}
-            variant={!disabled ? 'active' : 'default'}
-          >
-            Normal
-          </Chip>
-          <Chip
-            onClick={() => onDisabledChange(true)}
-            variant={disabled ? 'active' : 'default'}
-          >
-            Disabled
-          </Chip>
-        </div>
+        <Button.Toggle
+          selectedIndexes={[disabled ? 1 : 0]}
+          onChange={handleDisabledChange}
+        >
+          <Button>Normal</Button>
+          <Button>Disabled</Button>
+        </Button.Toggle>
       </div>
     </div>
   )

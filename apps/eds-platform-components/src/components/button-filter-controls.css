@@ -23,18 +23,8 @@
   letter-spacing: 0.025em;
 }
 
-.filter-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
 @media (max-width: 768px) {
   .button-filter-controls {
     padding: 1rem;
-  }
-
-  .filter-options {
-    width: 100%;
   }
 }

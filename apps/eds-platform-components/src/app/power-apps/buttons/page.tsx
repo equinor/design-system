@@ -103,6 +103,17 @@ export default function PowerAppsButtonsPage() {
               onDisabledChange={setDisabled}
             />
 
+            <div className="button-preview-section">
+              <h2 className="preview-title">Preview</h2>
+              <ComponentCard
+                name={name}
+                variant={variant}
+                color={color}
+                disabled={disabled}
+                yamlContent={yaml}
+              />
+            </div>
+
             <div className="properties-section">
               <h2 className="properties-title">Customize Properties</h2>
               <p className="properties-description">
@@ -159,16 +170,6 @@ export default function PowerAppsButtonsPage() {
                   </Accordion.Panel>
                 </Accordion.Item>
               </Accordion>
-            </div>
-
-            <div className="button-result">
-              <ComponentCard
-                name={name}
-                variant={variant}
-                color={color}
-                disabled={disabled}
-                yamlContent={yaml}
-              />
             </div>
           </div>
         </main>
