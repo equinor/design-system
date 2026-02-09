@@ -1,0 +1,40 @@
+.button-filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--eds-color-border-medium, #dcdcdc);
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--eds-color-text-primary, #243746);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .button-filter-controls {
+    padding: 1rem;
+  }
+
+  .filter-options {
+    width: 100%;
+  }
+}

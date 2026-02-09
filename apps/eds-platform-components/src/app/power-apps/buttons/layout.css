@@ -11,6 +11,31 @@
   background: #f7f7f7;
 }
 
+.button-configurator {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.configurator-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--eds-color-text-primary, #243746);
+  margin-bottom: 0.5rem;
+}
+
+.configurator-description {
+  font-size: 1rem;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.button-result {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
 .variant-accordion {
   background: transparent;
 }
