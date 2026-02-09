@@ -1,21 +1,35 @@
 /**
  * Client-side button YAML generator
- * Mirrors the server-side generator for in-browser component generation
+ * Generates Power Apps YAML with customizable properties
  */
 
 type ButtonVariant = 'contained' | 'outlined' | 'ghost'
 type ButtonColor = 'primary' | 'secondary' | 'danger'
 
-type ButtonOptions = {
+export type ButtonYamlOptions = {
   name: string
   variant: ButtonVariant
   color: ButtonColor
   text: string
   disabled?: boolean
+  // Layout
   width?: number
   height?: number
   x?: number
   y?: number
+  // Style - Padding
+  paddingLeft?: number
+  paddingRight?: number
+  paddingTop?: number
+  paddingBottom?: number
+  // Style - Border
+  borderRadius?: number
+  borderThickness?: number
+  // Style - Typography
+  fontSize?: number
+  // Interaction
+  tooltip?: string
+  onSelectAction?: string
 }
 
 const EDSColors = {
@@ -41,7 +55,7 @@ const disabledTextColor = 'RGBA(190, 190, 190, 1)'
 const borderLight = 'RGBA(220, 220, 220, 1)'
 const borderMedium = 'RGBA(220, 220, 220, 1)'
 
-export const generateButtonYaml = (options: ButtonOptions): string => {
+export const generateButtonYaml = (options: ButtonYamlOptions): string => {
   const {
     name,
     variant,
@@ -52,6 +66,15 @@ export const generateButtonYaml = (options: ButtonOptions): string => {
     height = 36,
     x = 40,
     y = 40,
+    paddingLeft = 16,
+    paddingRight = 16,
+    paddingTop = 0,
+    paddingBottom = 0,
+    borderRadius = 4,
+    borderThickness = 1,
+    fontSize = 10.5,
+    tooltip = text,
+    onSelectAction = `Notify("${text} clicked", NotificationType.Information)`,
   } = options
 
   const colorScheme = EDSColors[color]
@@ -79,21 +102,21 @@ export const generateButtonYaml = (options: ButtonOptions): string => {
       HoverBorderColor: =${hoverFill}
       HoverColor: =${disabled ? disabledTextColor : textColor}
       HoverFill: =${hoverFill}
-      OnSelect: =Notify("${text} clicked", NotificationType.Information)
-      PaddingBottom: =0
-      PaddingLeft: =16
-      PaddingRight: =16
-      PaddingTop: =0
+      OnSelect: =${onSelectAction}
+      PaddingBottom: =${paddingBottom}
+      PaddingLeft: =${paddingLeft}
+      PaddingRight: =${paddingRight}
+      PaddingTop: =${paddingTop}
       PressedBorderColor: =${hoverFill}
       PressedColor: =${disabled ? disabledTextColor : textColor}
       PressedFill: =${hoverFill}
-      RadiusBottomLeft: =4
-      RadiusBottomRight: =4
-      RadiusTopLeft: =4
-      RadiusTopRight: =4
-      Size: =10.5
+      RadiusBottomLeft: =${borderRadius}
+      RadiusBottomRight: =${borderRadius}
+      RadiusTopLeft: =${borderRadius}
+      RadiusTopRight: =${borderRadius}
+      Size: =${fontSize}
       Text: ="${text}"
-      Tooltip: ="${text}"
+      Tooltip: ="${tooltip}"
       Width: =${width}
       X: =${x}
       Y: =${y}
@@ -110,7 +133,7 @@ export const generateButtonYaml = (options: ButtonOptions): string => {
     Properties:
       BorderColor: =${borderColor}
       BorderStyle: =BorderStyle.Solid
-      BorderThickness: =1
+      BorderThickness: =${borderThickness}
       Color: =${textColorValue}
       DisabledBorderColor: =${borderMedium}
       DisabledColor: =${disabledTextColor}
@@ -123,21 +146,21 @@ export const generateButtonYaml = (options: ButtonOptions): string => {
       HoverBorderColor: =${disabled ? borderColor : colorScheme.hover}
       HoverColor: =${textColorValue}
       HoverFill: =${hoverFill}
-      OnSelect: =Notify("${text} clicked", NotificationType.Information)
-      PaddingBottom: =0
-      PaddingLeft: =16
-      PaddingRight: =16
-      PaddingTop: =0
+      OnSelect: =${onSelectAction}
+      PaddingBottom: =${paddingBottom}
+      PaddingLeft: =${paddingLeft}
+      PaddingRight: =${paddingRight}
+      PaddingTop: =${paddingTop}
       PressedBorderColor: =${disabled ? borderColor : colorScheme.hover}
       PressedColor: =${textColorValue}
       PressedFill: =${hoverFill}
-      RadiusBottomLeft: =4
-      RadiusBottomRight: =4
-      RadiusTopLeft: =4
-      RadiusTopRight: =4
-      Size: =10.5
+      RadiusBottomLeft: =${borderRadius}
+      RadiusBottomRight: =${borderRadius}
+      RadiusTopLeft: =${borderRadius}
+      RadiusTopRight: =${borderRadius}
+      Size: =${fontSize}
       Text: ="${text}"
-      Tooltip: ="${text}"
+      Tooltip: ="${tooltip}"
       Width: =${width}
       X: =${x}
       Y: =${y}
@@ -166,21 +189,21 @@ export const generateButtonYaml = (options: ButtonOptions): string => {
       HoverBorderColor: =Color.Transparent
       HoverColor: =${textColorValue}
       HoverFill: =${hoverFill}
-      OnSelect: =Notify("${text} clicked", NotificationType.Information)
-      PaddingBottom: =0
-      PaddingLeft: =16
-      PaddingRight: =16
-      PaddingTop: =0
+      OnSelect: =${onSelectAction}
+      PaddingBottom: =${paddingBottom}
+      PaddingLeft: =${paddingLeft}
+      PaddingRight: =${paddingRight}
+      PaddingTop: =${paddingTop}
       PressedBorderColor: =Color.Transparent
       PressedColor: =${textColorValue}
       PressedFill: =${hoverFill}
-      RadiusBottomLeft: =4
-      RadiusBottomRight: =4
-      RadiusTopLeft: =4
-      RadiusTopRight: =4
-      Size: =10.5
+      RadiusBottomLeft: =${borderRadius}
+      RadiusBottomRight: =${borderRadius}
+      RadiusTopLeft: =${borderRadius}
+      RadiusTopRight: =${borderRadius}
+      Size: =${fontSize}
       Text: ="${text}"
-      Tooltip: ="${text}"
+      Tooltip: ="${tooltip}"
       Width: =${width}
       X: =${x}
       Y: =${y}

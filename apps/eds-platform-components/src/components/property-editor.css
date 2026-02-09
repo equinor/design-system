@@ -1,0 +1,88 @@
+.property-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.property-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.property-description {
+  font-size: 0.875rem;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.property-token {
+  font-size: 0.75rem;
+  color: var(--eds-color-link-primary, #007079);
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  background: var(--eds-color-bg-light, #f7f7f7);
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.property-input {
+  width: 100%;
+}
+
+.number-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.property-input--number {
+  flex: 1;
+}
+
+.property-unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+  min-width: 2rem;
+}
+
+.property-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid var(--eds-color-border-medium, #dcdcdc);
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.property-select:hover {
+  border-color: var(--eds-color-link-primary, #007079);
+}
+
+.property-select:focus {
+  outline: none;
+  border-color: var(--eds-color-link-primary, #007079);
+  border-width: 2px;
+}
+
+.property-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--eds-color-text-primary, #243746);
+}
+
+.property-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
