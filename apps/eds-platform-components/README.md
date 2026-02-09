@@ -1,171 +1,109 @@
 # EDS Platform Components
 
-A web application providing Equinor Design System components optimized for unconventional platforms and frameworks such as Power Platform, Power BI, and other low-code platforms.
+Web application and tooling for Equinor Design System components optimized for low-code platforms (Power Platform, Power BI, etc.).
 
-## Purpose
+## Quick Start
 
-This application serves as a showcase and resource for developers working with EDS components in environments that have unique constraints or requirements, such as:
+```bash
+# Start web app
+pnpm dev
 
-- **Power Platform** - Components optimized for Power Apps and Power Pages, including YAML snippets and PowerFX formulas
-- **Power BI** - Custom visuals and components for Power BI reports and dashboards
-- **Low-Code Platforms** - Adaptations for various low-code and no-code development tools
+# Visit http://localhost:3000/power-apps/buttons
+# Configure button → Copy YAML → Paste in Power Apps Studio
+```
 
 ## Features
 
-- **Interactive Web Gallery** - Browse and copy Power Apps components with visual previews
-- **Power Apps YAML Generator** - CLI tool to generate copy-paste ready YAML components
-- Implementation examples and best practices
-- Export/download capabilities for platform-specific formats
-- Documentation for integration and customization
-- Accessibility-focused design following WCAG 2.1 AA standards
+- **Interactive Configurator** - Filter variants, customize properties, get real-time YAML
+- **Property Editor** - Fine-tune 14+ properties mapped to EDS design tokens
+- **CLI Generator** - Batch generate YAML files (`pnpm generate:power-apps button`)
+- **Type-Safe** - Shared TypeScript logic in `lib/` used by both web app and scripts
 
-## Power Apps Components
+## Architecture
 
-### Web Gallery (Recommended)
+### Shared Logic (`lib/`)
 
-Browse, preview, and copy Power Apps components directly from your browser:
+The core generation logic is centralized and reusable:
 
-```bash
-# Start the development server
-pnpm dev
+- **`buttonPropertySchema.ts`** - Property definitions with EDS token mappings
+- **`generateButtonYaml.ts`** - YAML generator accepting custom properties
+- **Token mapping** - EDS design tokens → platform-specific format
 
-# Open in browser
-http://localhost:3000/power-apps/buttons
-```
+Both the web app and CLI scripts use this shared logic, ensuring consistency.
 
-Features:
+### Web App (`src/`)
 
-- Visual preview of all button variants
-- One-click copy to clipboard
-- Organized by style (Contained, Outlined, Ghost)
-- Live rendering with EDS styling
+- **Dynamic configurator** - React app with filter chips and property editor
+- **Real-time preview** - Live button preview with copy-to-clipboard
+- **Platform routes** - `/power-apps/buttons`, future: `/power-bi/*`, etc.
 
-See [BUTTON_GALLERY.md](BUTTON_GALLERY.md) for details.
+### CLI Scripts (`scripts/`)
 
-### CLI Generator (Alternative)
+- **Batch generation** - Generate all variants to disk
+- **Same logic** - Imports from `lib/` to ensure consistency
+- **CI/CD friendly** - Scriptable for automated workflows
 
-Generate YAML files to disk for batch processing:
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed patterns.
 
-```bash
-# Generate button components
-pnpm generate:power-apps button
+## Usage
 
-# Output will be in scripts/power-apps/output/
-```
+### Web App (Recommended)
 
-See [scripts/power-apps/README.md](scripts/power-apps/README.md) for detailed documentation.
+1. Start: `pnpm dev`
+2. Navigate to `/power-apps/buttons`
+3. Select variant/color, customize properties
+4. Copy YAML, paste in Power Apps Studio
 
-### Quick Usage
-
-1. Visit `/power-apps/buttons` or run the CLI generator
-2. Copy YAML code (click "Copy YAML" button or open generated file)
-3. Open Power Apps Studio
-4. Go to Tree View → Click (...) → Paste YAML
-5. Paste the content
-
-Available components:
-
-- ✅ **Button** - Contained, Outlined, and Ghost variants in Primary, Secondary, and Danger colors
-
-## Getting Started
-
-### Development
-
-First, install dependencies (from the repository root):
+### CLI Generator
 
 ```bash
-pnpm install
+pnpm generate:power-apps button [outputDir]
 ```
 
-Then, run the development server:
+Generates all button variants to `scripts/power-apps/output/`.
+
+## Development
 
 ```bash
-pnpm dev
+pnpm dev          # Start dev server
+pnpm build        # Build for production
+pnpm test         # Run unit tests
+pnpm test:e2e     # Run Playwright tests
+pnpm lint         # Lint code
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+See main repo's [CLAUDE.md](../../.claude/CLAUDE.md) for development guidelines.
 
-### Building
+## Contributing
 
-Build the application for production:
+Follow repo-wide standards:
 
-```bash
-pnpm build
-```
+- Vanilla CSS with BEM + EDS tokens
+- Named exports only
+- WCAG 2.1 AA accessibility
+- Conventional commits
 
-### Testing
-
-Run unit tests:
-
-```bash
-pnpm test
-```
-
-Run end-to-end tests:
-
-```bash
-pnpm test:e2e
-```
-
-### Linting
-
-Lint the codebase:
-
-```bash
-pnpm lint
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md) and [../../.github/copilot-instructions.md](../../.github/copilot-instructions.md).
 
 ## Project Structure
 
 ```text
 eds-platform-components/
 ├── src/
-│   ├── app/              # Next.js app directory
-│   │   ├── layout.tsx    # Root layout
-│   │   ├── page.tsx      # Home page
-│   │   └── globals.css   # Global styles
-│   ├── components/       # React components
-│   └── styles/           # Additional style files
+│   ├── app/              # Next.js pages
+│   ├── components/       # React components (filters, editors)
+│   └── lib/              # Shared logic (schemas, generators)
 ├── scripts/
-│   └── power-apps/       # Power Apps component generators
-│       ├── components/   # Component generators
-│       ├── utils/        # Utilities and token mappings
-│       └── output/       # Generated YAML files
-├── tests/
-│   └── e2e/              # Playwright E2E tests
-├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-├── next.config.ts        # Next.js configuration
-└── README.md             # This file
+│   └── power-apps/       # CLI tools (uses lib/)
+└── tests/                # E2E tests
 ```
 
-## Technology Stack
+## Available Components
 
-- **Next.js 16** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **EDS Core React** - Equinor Design System components
-- **EDS Tokens** - Design tokens and CSS variables
-- **Vitest** - Unit testing
-- **Playwright** - End-to-end testing
-
-## Contributing
-
-This project follows the Equinor Design System development guidelines:
-
-- Use functional components with hooks
-- Follow TypeScript best practices
-- Maintain WCAG 2.1 AA accessibility standards
-- Use vanilla CSS with BEM naming convention
-- Write tests for all components
-
-See the main [AGENTS.md](../../AGENTS.md) and [.github/copilot-instructions.md](../../.github/copilot-instructions.md) for detailed guidelines.
-
-## Related Projects
-
-- [EDS Color Palette Generator](../eds-color-palette-generator) - Tool for generating accessible color palettes
-- [EDS Demo](../eds-demo) - Example implementations of EDS components
-- [Design System Docs](../design-system-docs) - Official EDS documentation
+- ✅ **Button** - Contained, Outlined, Ghost × Primary, Secondary, Danger
+- 🚧 **Text Input** - Planned
+- 🚧 **Checkbox** - Planned
 
 ## License
 
-See the main [LICENSE](../../LICENSE) file in the repository root.
+See [LICENSE](../../LICENSE)
