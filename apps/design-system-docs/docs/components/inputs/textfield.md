@@ -86,6 +86,8 @@ Use the `invalid` prop to show error styling with a red border and error icon. P
 
 Avoid using `disabled` where possible. Consider using `readOnly` instead—it keeps the value visible and accessible while preventing edits.
 
+#### Disabled state
+
 <iframe
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--disabled-state"
@@ -93,8 +95,19 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead—it ke
   height="195"
   frameborder="1"
 ></iframe>
-
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--disabled-state)
+
+#### Read-only state
+
+<iframe
+  class="sb-iframe"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--read-only-state"
+  width="100%"
+  height="110"
+  frameborder="1"
+></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--read-only-state)
 
 ### Prefix and Suffix
 
@@ -153,14 +166,50 @@ Use appropriate `autocomplete` values for predefined input purposes (given-name,
 
 ## Figma
 
+### Components
+
+The TextField is available as one component in Figma:
+
+- **Text Field [EDS]**: Complete form field combining label, description, input, and helper message
+
+### Subcomponents
+
+TextField is built from two main subcomponents, each with their own toggleable parts:
+
+**.Label + Description** — The upper section containing the label and optional description text.
+
+- **.↳ Optional/Required**: Indicator text next to the label. Type: `(Optional)` or `(Required)`.
+- **.↳ Information Icon**: Info circle icon next to the label for tooltip content. State: `Default` or `Hover`.
+- **Description**: Toggleable descriptive text below the label.
+
+**.⌘ Input** — The input field with adornments and helper message.
+
+- **↳ Left Adornment**: Toggleable prefix text and/or icon before the input. Type: `Prefix + Icon`, `Suffix`, or `Icon`.
+- **↳ Right Adornment**: Toggleable suffix text and/or icon after the input. Type: `Prefix + Icon`, `Prefix`, or `Icon`.
+- **Helper Message**: Toggleable text below the input for validation or hints.
+- **Focus Frame**: Visual focus indicator around the input.
+
 ### Using TextField in Figma
 
-1. In Figma, go to the **Assets Panel** and search for **text field**
-2. Drag and drop the component into your frame
-3. Rename and resize the component if needed
-4. Choose the variant from the **Design Panel**
+1. In Figma, go to the **Assets Panel** and search for **Text field**
+2. Drag the component into your frame
+3. Select the component to see its properties in the **Design Panel**
 
-The component includes options for unit display and placeholder icons. It uses auto layout to place icons and units with correct spacing.
+### Property Structure
+
+The component uses a nested structure:
+
+**Top level** (Text Field) — Set the **Label** text, and toggle visibility of **Description**, **Optional/Required** indicator, and **Information Icon**.
+
+**⌘ Input** — Set the **State** (Default, Hover, Focus, Active, Filled, Read-only, Disabled), **Validation** (Default, Error), **Placeholder** text, and toggle **Left Adornment**, **Right Adornment**, and **Helper Message**.
+
+### Configuring Adornments
+
+For inputs with units, prefixes, or icons:
+
+- Toggle **Left Adornment** or **Right Adornment** to show prefix/suffix areas
+- Click the adornment instance to switch between text, icon, or text + icon types
+- Click the icon instance within an adornment to swap to a different icon from the library
 
 ## Do's and Don'ts
 
