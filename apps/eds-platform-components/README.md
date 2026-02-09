@@ -80,7 +80,7 @@ pnpm install
 Then, run the development server:
 
 ```bash
-pnpm platform:dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
@@ -90,7 +90,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Build the application for production:
 
 ```bash
-pnpm platform:build
+pnpm build
 ```
 
 ### Testing
@@ -98,13 +98,13 @@ pnpm platform:build
 Run unit tests:
 
 ```bash
-pnpm platform:test
+pnpm test
 ```
 
 Run end-to-end tests:
 
 ```bash
-pnpm platform:test:e2e
+pnpm test:e2e
 ```
 
 ### Linting
@@ -112,7 +112,7 @@ pnpm platform:test:e2e
 Lint the codebase:
 
 ```bash
-pnpm platform:lint
+pnpm lint
 ```
 
 ## Project Structure
