@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
 jobs:
   setup:
+    permissions:
+      contents: read
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:

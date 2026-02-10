@@ -1,4 +1,6 @@
 name: Publish tokens
+permissions:
+  contents: read
 on:
   workflow_dispatch:
     inputs:
