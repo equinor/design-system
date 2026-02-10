@@ -227,4 +227,65 @@ describe('DatePicker', () => {
 
     expect(screen.getByRole('presentation')).toHaveTextContent('2024年05月04日')
   })
+
+  it('should allow typing 31 in day field from empty state', async () => {
+    const onChange = jest.fn()
+
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker label={'Datepicker'} value={null} onChange={onChange} />
+      </I18nProvider>,
+    )
+
+    const dayEl = screen.getByText('dd')
+    await userEvent.type(dayEl, '31')
+
+    // Should be able to type 31 without validation blocking it
+    expect(dayEl).toHaveTextContent('31')
+    expect(dayEl).toHaveAttribute('aria-valuetext', '31')
+  })
+
+  it('should allow typing 30 or 31 even when February is selected', async () => {
+    const onChange = jest.fn()
+
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker label={'Datepicker'} value={null} onChange={onChange} />
+      </I18nProvider>,
+    )
+
+    const monthEl = screen.getByText('mm')
+    const dayEl = screen.getByText('dd')
+
+    // Type February first
+    await userEvent.type(monthEl, '02')
+    expect(monthEl).toHaveTextContent('02')
+
+    // Should still be able to type 31 in day field (deferred validation)
+    await userEvent.type(dayEl, '31')
+    expect(dayEl).toHaveTextContent('31')
+  })
+
+  it('should allow typing full date sequence dd.mm.yyyy without blocking', async () => {
+    const onChange = jest.fn()
+
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker label={'Datepicker'} value={null} onChange={onChange} />
+      </I18nProvider>,
+    )
+
+    const monthEl = screen.getByText('mm')
+    const dayEl = screen.getByText('dd')
+    const yearEl = screen.getByText('yyyy')
+
+    // Type a full date: 31/01/2024
+    await userEvent.type(monthEl, '01')
+    await userEvent.type(dayEl, '31')
+    await userEvent.type(yearEl, '2024')
+
+    expect(monthEl).toHaveTextContent('01')
+    expect(dayEl).toHaveTextContent('31')
+    expect(yearEl).toHaveTextContent('2024')
+  })
 })

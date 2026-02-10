@@ -3,7 +3,7 @@ import {
   DateFieldStateOptions,
   useDateFieldState,
 } from '@react-stately/datepicker'
-import { forwardRef, ReactNode, useRef } from 'react'
+import { forwardRef, ReactNode, useRef, useState } from 'react'
 import { InputFieldWrapper } from './FieldWrapper'
 import { DateFieldSegments } from './DateFieldSegments'
 import { GroupDOMAttributes } from '@react-types/shared'
@@ -27,7 +27,21 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
   { fieldProps, groupProps, variant, dateCreateProps, ...props }: Props,
   ref,
 ) {
-  const state = useDateFieldState(dateCreateProps)
+  const [isFocused, setIsFocused] = useState(false)
+
+  // During typing (focused), relax validation to allow any day value
+  // This prevents blocking "30" or "31" when February is selected
+  const fieldStateProps = {
+    ...dateCreateProps,
+    // Remove validation constraints during typing
+    ...(isFocused && {
+      minValue: undefined,
+      maxValue: undefined,
+      isDateUnavailable: undefined,
+    }),
+  }
+
+  const state = useDateFieldState(fieldStateProps)
   const inputRef = useRef(null)
 
   return (
@@ -38,6 +52,8 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
       color={state.isInvalid ? 'warning' : variant}
       ref={ref}
       className={`field ${state.isInvalid ? 'invalid' : 'valid'}`}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
     >
       <DateFieldSegments
         {...state}
