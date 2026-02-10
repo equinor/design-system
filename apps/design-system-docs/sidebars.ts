@@ -57,9 +57,7 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'components/data-display/tooltip',
       },
-      items: [
-        'components/data-display/tooltip',
-      ],
+      items: ['components/data-display/tooltip'],
     },
     {
       type: 'category',
@@ -68,10 +66,7 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'components/feedback/banner',
       },
-      items: [
-        'components/feedback/banner',
-        'components/feedback/snackbar',
-      ],
+      items: ['components/feedback/banner', 'components/feedback/snackbar'],
     },
     {
       type: 'category',
@@ -98,10 +93,7 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'components/navigation/app_launcher',
       },
-      items: [
-        'components/navigation/link',
-        'components/navigation/menu',
-      ],
+      items: ['components/navigation/link', 'components/navigation/menu'],
     },
     {
       type: 'category',
@@ -110,9 +102,7 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'components/surfaces/accordion',
       },
-      items: [
-        'components/surfaces/accordion',
-     ],
+      items: ['components/surfaces/accordion'],
     },
   ],
   //Foundation Section
