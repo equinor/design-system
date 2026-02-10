@@ -60,9 +60,9 @@ Use selection controls when users need to:
 
 **Avoid selection controls for:**
 
-- More than seven options—use Select or Autocomplete instead
-- Navigating between content views—use Tabs or ToggleGroup instead
-- Filtering content—use Chip instead
+- More than seven options - use Select or Autocomplete instead
+- Navigating between content views - use Tabs or ToggleGroup instead
+- Filtering content - use Chip instead
 
 ## Structure
 
@@ -96,7 +96,7 @@ Radio buttons allow users to select exactly one option from a group. They expose
 
 ### Switch
 
-Switches toggle a single setting on or off. Changes take effect immediately when the user interacts with the switch—there's no need for a submit action.
+Switches toggle a single setting on or off. Changes take effect immediately when the user interacts with the switch - there's no need for a submit action.
 
 <iframe
   class="sb-iframe"
@@ -143,7 +143,7 @@ Exercise caution with preselected options, as they can influence user choice. Fo
 
 ### Indeterminate State (Checkbox)
 
-The indeterminate state indicates a partially checked condition—useful for "select all" scenarios where some, but not all, child items are selected.
+The indeterminate state indicates a partially checked condition - useful for "select all" scenarios where some, but not all, child items are selected.
 
 <iframe
   class="sb-iframe"
@@ -232,6 +232,6 @@ If toggling a switch triggers an important status change, announce it with an `a
 - Mix different selection controls within the same grouped list
 - Resize any of the selection controls beyond their intended dimensions
 - Pre-select consent checkboxes
-- Use switches for form questions—use Radio or Checkbox instead
-- Use more than seven options in one group—consider Select or Autocomplete
+- Use switches for form questions - use Radio or Checkbox instead
+- Use more than seven options in one group - consider Select or Autocomplete
   :::

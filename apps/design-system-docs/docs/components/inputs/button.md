@@ -23,9 +23,9 @@ Use a button when a concrete action needs to be performed, such as saving or sub
 
 **Avoid buttons for:**
 
-- Navigating between pages—use Link instead
-- Filtering information in lists or tables—use Chip instead
-- Displaying selected filters—use Chip instead
+- Navigating between pages - use Link instead
+- Filtering information in lists or tables - use Chip instead
+- Displaying selected filters - use Chip instead
 
 ## Structure
 
@@ -174,11 +174,11 @@ The Button is available as two components in Figma:
 
 Both components use a nested structure:
 
-**Top level** — Set the **Tone** (Accent, Neutral, or Danger)
+**Top level** - Set the **Tone** (Accent, Neutral, or Danger)
 
-**Geometry Options** — Configure the **Size** (Large, Default, Small). For Icon Button, toggle **Round** for circular buttons.
+**Geometry Options** - Configure the **Size** (Large, Default, Small). For Icon Button, toggle **Round** for circular buttons.
 
-**Button content** (⌘ Button or ⌘ Icon Button) — Set the **Variant** (Primary, Secondary, Ghost), **State**, and configure icons/labels.
+**Button content** (⌘ Button or ⌘ Icon Button) - Set the **Variant** (Primary, Secondary, Ghost), **State**, and configure icons/labels.
 
 ### Adding Icons
 
@@ -203,10 +203,10 @@ For buttons with icons:
 
 :::danger **Don't**
 
-- Apply the same variant to all action buttons—users need to understand which action has the most emphasis
-- Wrap text over multiple lines—scale the width to fit text on one line
+- Apply the same variant to all action buttons - users need to understand which action has the most emphasis
+- Wrap text over multiple lines - scale the width to fit text on one line
 - Use icons that can mislead the main action
-- Rely on colour alone to convey meaning—ensure text and icons are clear
-- Disable buttons without explanation—add a tooltip explaining why it's disabled
+- Rely on colour alone to convey meaning - ensure text and icons are clear
+- Disable buttons without explanation - add a tooltip explaining why it's disabled
 - Use more than one primary-variant accent-tone button per page
   :::

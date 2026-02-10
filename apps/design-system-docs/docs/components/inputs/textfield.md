@@ -19,13 +19,13 @@ TextField lets users enter, interact with, and edit content in forms and dialogs
 
 ## When to Use
 
-Use TextField when you need a complete form field with label, description, and validation messaging. Text fields should be discoverable, clear, and efficient—making it easy for users to understand what's required and address any errors.
+Use TextField when you need a complete form field with label, description, and validation messaging. Text fields should be discoverable, clear, and efficient - making it easy for users to understand what's required and address any errors.
 
 **Avoid TextField when:**
 
-- You need a simple input without form composition—use [Input](./input) instead
-- Users should choose from limited options—use Radio, Checkbox, Select, or Autocomplete instead
-- You need multiline text entry—use Textarea instead
+- You need a simple input without form composition - use [Input](./input) instead
+- Users should choose from limited options - use Radio, Checkbox, Select, or Autocomplete instead
+- You need multiline text entry - use Textarea instead
 
 ## Structure
 
@@ -42,7 +42,7 @@ For more flexibility, use the individual components via the [Field](./field) com
 
 ### Required and Optional Indicators
 
-Use the `indicator` prop to show "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation—these are separate concerns.
+Use the `indicator` prop to show "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation - these are separate concerns.
 
 <iframe
   class="sb-iframe"
@@ -84,7 +84,7 @@ Use the `invalid` prop to show error styling with a red border and error icon. P
 
 ### Disabled and Read Only
 
-Avoid using `disabled` where possible. Consider using `readOnly` instead—it keeps the value visible and accessible while preventing edits.
+Avoid using `disabled` where possible. Consider using `readOnly` instead - it keeps the value visible and accessible while preventing edits.
 
 #### Disabled state
 
@@ -111,7 +111,7 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead—it ke
 
 ### Prefix and Suffix
 
-Use `startText` and `endText` to display units, currency, or contextual information. Note that screen readers won't announce these automatically—ensure matching information appears in the label text as well.
+Use `startText` and `endText` to display units, currency, or contextual information. Note that screen readers won't announce these automatically - ensure matching information appears in the label text as well.
 
 <iframe
   class="sb-iframe"
@@ -125,11 +125,11 @@ Use `startText` and `endText` to display units, currency, or contextual informat
 
 ### Input Types
 
-Choose input types matching the data requested (tel, email, url). Avoid `type="number"` due to accessibility issues—use `type="text"` with `inputmode="numeric"` instead.
+Choose input types matching the data requested (tel, email, url). Avoid `type="number"` due to accessibility issues - use `type="text"` with `inputmode="numeric"` instead.
 
 ### Field Width
 
-Adjust the width to match expected input length—shorter for phone numbers, wider for addresses or descriptions.
+Adjust the width to match expected input length - shorter for phone numbers, wider for addresses or descriptions.
 
 ### Density
 
@@ -176,13 +176,13 @@ The TextField is available as one component in Figma:
 
 TextField is built from two main subcomponents, each with their own toggleable parts:
 
-**.Label + Description** — The upper section containing the label and optional description text.
+**.Label + Description** - The upper section containing the label and optional description text.
 
 - **.↳ Optional/Required**: Indicator text next to the label. Type: `(Optional)` or `(Required)`.
 - **.↳ Information Icon**: Info circle icon next to the label for tooltip content. State: `Default` or `Hover`.
 - **Description**: Toggleable descriptive text below the label.
 
-**.⌘ Input** — The input field with adornments and helper message.
+**.⌘ Input** - The input field with adornments and helper message.
 
 - **↳ Left Adornment**: Toggleable prefix text and/or icon before the input. Type: `Prefix + Icon`, `Suffix`, or `Icon`.
 - **↳ Right Adornment**: Toggleable suffix text and/or icon after the input. Type: `Prefix + Icon`, `Prefix`, or `Icon`.
@@ -199,9 +199,9 @@ TextField is built from two main subcomponents, each with their own toggleable p
 
 The component uses a nested structure:
 
-**Top level** (Text Field) — Set the **Label** text, and toggle visibility of **Description**, **Optional/Required** indicator, and **Information Icon**.
+**Top level** (Text Field) - Set the **Label** text, and toggle visibility of **Description**, **Optional/Required** indicator, and **Information Icon**.
 
-**⌘ Input** — Set the **State** (Default, Hover, Focus, Active, Filled, Read-only, Disabled), **Validation** (Default, Error), **Placeholder** text, and toggle **Left Adornment**, **Right Adornment**, and **Helper Message**.
+**⌘ Input** - Set the **State** (Default, Hover, Focus, Active, Filled, Read-only, Disabled), **Validation** (Default, Error), **Placeholder** text, and toggle **Left Adornment**, **Right Adornment**, and **Helper Message**.
 
 ### Configuring Adornments
 
@@ -228,5 +228,5 @@ For inputs with units, prefixes, or icons:
 - End placeholder text with a period
 - Use placeholder text as a substitute for labels
 - Disable copy and paste functionality
-- Use `type="number"` for numeric input—use `inputmode="numeric"` instead
+- Use `type="number"` for numeric input - use `inputmode="numeric"` instead
   :::

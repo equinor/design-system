@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Input
 
-Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation—serving as a building block for higher-level components like TextField.
+Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation - serving as a building block for higher-level components like TextField.
 
 <iframe
   class="sb-iframe"
@@ -23,8 +23,8 @@ Use Input when you need a basic input field without additional functionality, or
 
 **Avoid Input when:**
 
-- You need a complete form field with label, description, and validation message—use TextField instead
-- The field requires built-in accessibility features—use TextField which handles composition automatically
+- You need a complete form field with label, description, and validation message - use TextField instead
+- The field requires built-in accessibility features - use TextField which handles composition automatically
 
 ## Guidelines
 
@@ -58,7 +58,7 @@ Use the `invalid` prop to indicate validation errors. The input displays a red b
 
 ### Disabled & Read Only
 
-Avoid using `disabled` where possible. Consider using `readOnly` instead—it keeps the value visible and accessible while preventing edits.
+Avoid using `disabled` where possible. Consider using `readOnly` instead - it keeps the value visible and accessible while preventing edits.
 
 - **Disabled**: The input is non-interactive and visually dimmed
 - **Read Only**: The value is visible but not editable, maintaining better accessibility
@@ -75,7 +75,7 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead—it ke
 
 ### Using with Labels
 
-For a complete form field with label, description, helper message, and required/optional indicators, use the TextField component instead—it handles all the composition and accessibility for you.
+For a complete form field with label, description, helper message, and required/optional indicators, use the TextField component instead - it handles all the composition and accessibility for you.
 
 When using Input with a visible label, use the Field component for proper spacing.
 
@@ -110,7 +110,7 @@ Input supports two density modes to fit different UI contexts:
 
 Use `startText` and `endText` for prefix/suffix text (e.g., "$", "USD", "km"). These stay neutral in all states.
 
-Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colors—turning red when invalid.
+Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colors - turning red when invalid.
 
 <iframe
   class="sb-iframe"
@@ -147,7 +147,7 @@ While labels may be visually hidden in special cases (such as in tables), they m
 - **Tab**: Move focus to and from the input
 - **Type**: Enter text when focused
 
-**For form fields with visible labels**, use the TextField component instead—it handles accessibility automatically.
+**For form fields with visible labels**, use the TextField component instead - it handles accessibility automatically.
 
 ## Do's and Don'ts
 
@@ -164,6 +164,6 @@ While labels may be visually hidden in special cases (such as in tables), they m
 
 - Use Input when TextField would provide needed functionality
 - Leave inputs without an accessible name (label or aria-label)
-- Overuse the disabled state—prefer readOnly when appropriate
+- Overuse the disabled state - prefer readOnly when appropriate
 - Hide validation messages behind obscured elements
   :::

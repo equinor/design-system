@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Field
 
-Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes—ensuring a consistent and accessible experience.
+Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes - ensuring a consistent and accessible experience.
 
 <iframe
   class="sb-iframe"
@@ -21,12 +21,12 @@ Field is a layout primitive for building accessible form fields. It automaticall
 
 Use Field when you need to ensure Label, Description, and helper messages are correctly associated with a form control. Field is a low-level building block for creating custom form components.
 
-**For most use cases, use TextField instead**—it handles all the composition and accessibility for you.
+**For most use cases, use TextField instead** - it handles all the composition and accessibility for you.
 
 **Avoid Field when:**
 
-- You need a complete, ready-to-use form field—use TextField instead
-- You're grouping multiple related fields—use Fieldset instead
+- You need a complete, ready-to-use form field - use TextField instead
+- You're grouping multiple related fields - use Fieldset instead
 
 ## Structure
 
@@ -46,7 +46,7 @@ const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds(
 
 ### Required and Optional Indicators
 
-Use the `indicator` prop on Field.Label to show required or optional status. This is a visual indicator only—remember to also set `aria-required` on the input for accessibility.
+Use the `indicator` prop on Field.Label to show required or optional status. This is a visual indicator only - remember to also set `aria-required` on the input for accessibility.
 
 <iframe
   class="sb-iframe"
@@ -74,7 +74,7 @@ Use Field.Description to provide additional context below the label. Connect it 
 
 ### Live Validation
 
-For accessible live validation, wrap conditional content in a container with `role="alert"`. The wrapper acts as an ARIA live region—screen readers will announce changes when content appears inside it.
+For accessible live validation, wrap conditional content in a container with `role="alert"`. The wrapper acts as an ARIA live region - screen readers will announce changes when content appears inside it.
 
 Pass IDs to `getDescribedBy()` conditionally based on what's rendered.
 
@@ -142,5 +142,5 @@ Screen readers won't automatically announce prefix/suffix text (like currency sy
 - Forget to connect descriptions with `aria-describedby`
 - Use Field when TextField would be simpler
 - Rely only on visual indicators for required/optional status
-- Skip the `useFieldIds` hook—manual ID management is error-prone
+- Skip the `useFieldIds` hook - manual ID management is error-prone
   :::

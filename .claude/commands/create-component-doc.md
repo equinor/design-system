@@ -47,10 +47,15 @@ Example: `apps/design-system-docs/docs/components/inputs/button.md`
 - Use `1.` for ordered/numbered steps
 - Bold key terms: `**Term**: Description`
 
-### Em Dashes
+### Dashes
 
-Use em dashes (—) not hyphens for alternatives:
-- "Navigating between pages—use Link instead"
+Use standard hyphens or en dashes for separating clauses. Never use em dashes (—).
+
+- "Navigating between pages - use Link instead"
+
+### Language
+
+Use British English throughout (e.g., "colour" not "color", "behaviour" not "behavior", "summarise" not "summarize", "centre" not "center").
 
 ### Admonitions
 
@@ -89,27 +94,32 @@ Example: `eds-2-0-beta-inputs-button--default`
 ### Chrome MCP Workflow for Iframes
 
 1. **Navigate to Storybook docs page:**
+
    ```
    mcp__chrome-devtools__navigate_page → https://storybook.eds.equinor.com/?path=/docs/eds-2-0-beta-{category}-{component}--docs
    ```
 
 2. **Find available stories:**
+
    ```
    mcp__chrome-devtools__take_snapshot → See sidebar with all story links
    ```
+
    Extract story IDs from link URLs (e.g., `?path=/story/{story-id}`)
 
 3. **Navigate to story iframe:**
+
    ```
    mcp__chrome-devtools__navigate_page → https://storybook.eds.equinor.com/iframe.html?globals=&args=&id={STORY_ID}
    ```
 
 4. **Measure content height:**
+
    ```javascript
    // Use mcp__chrome-devtools__evaluate_script
-   () => {
-     const storyRoot = document.getElementById('storybook-root');
-     return { storyRootHeight: storyRoot ? storyRoot.scrollHeight : null };
+   ;() => {
+     const storyRoot = document.getElementById('storybook-root')
+     return { storyRootHeight: storyRoot ? storyRoot.scrollHeight : null }
    }
    ```
 
@@ -157,8 +167,8 @@ sidebar_position: [number if provided, otherwise omit]
 
 **Avoid [component] for:**
 
-- Alternative 1—use X instead
-- Alternative 2—use Y instead
+- Alternative 1 - use X instead
+- Alternative 2 - use Y instead
 
 ## Structure
 
@@ -252,12 +262,12 @@ All [component] variants support:
 :::info **Do**
 
 - [Best practices from input]
-:::
+  :::
 
 :::danger **Don't**
 
 - [Anti-patterns or things to avoid from input]
-:::
+  :::
 ```
 
 ## Success Criteria
