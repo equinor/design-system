@@ -29,3 +29,6 @@ export type { InputProps } from './Input'
 
 export { TextField } from './TextField'
 export type { TextFieldProps } from './TextField'
+
+export { Menu, MenuItem, MenuSection } from './Menu'
+export type { MenuProps, MenuItemProps, MenuSectionProps } from './Menu'
