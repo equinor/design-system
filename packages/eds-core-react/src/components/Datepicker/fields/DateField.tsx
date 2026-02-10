@@ -52,8 +52,8 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
       color={state.isInvalid ? 'warning' : variant}
       ref={ref}
       className={`field ${state.isInvalid ? 'invalid' : 'valid'}`}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
+      onFocusCapture={() => setIsFocused(true)}
+      onBlurCapture={() => setIsFocused(false)}
     >
       <DateFieldSegments
         {...state}
