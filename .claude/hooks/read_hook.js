@@ -25,9 +25,9 @@ async function main() {
     return
   }
 
-  // Check file paths for Read/Grep/Glob
+  // Check file paths for Read/Grep/Glob/Edit/Write/NotebookEdit
   const filePath =
-    toolInput.file_path || toolInput.path || ''
+    toolInput.file_path || toolInput.path || toolInput.notebook_path || ''
   const basename = filePath.split('/').pop() || ''
 
   if (basename === '.env' || basename.startsWith('.env.')) {
