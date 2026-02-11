@@ -61,7 +61,7 @@ Use variants to guide users to the most important action:
 
 Tones communicate the intent or nature of an action:
 
-- **Accent**: The default tone for standard actions. Uses the brand color to draw attention.
+- **Accent**: The default tone for standard actions. Uses the brand colour to draw attention.
 - **Neutral**: A subdued option for actions that shouldn't compete for attention.
 - **Danger**: Reserved for destructive actions (e.g., "Delete"). Danger buttons should be placed in opposite order to positive actions in button groups to prevent accidental activation.
 

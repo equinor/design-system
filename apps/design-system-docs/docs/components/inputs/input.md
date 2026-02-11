@@ -44,7 +44,7 @@ Input supports a variety of native HTML input types for different data entry nee
 
 ### Validation States
 
-Use the `invalid` prop to indicate validation errors. The input displays a red border and adornments inherit the error color.
+Use the `invalid` prop to indicate validation errors. The input displays a red border and adornments inherit the error colour.
 
 <iframe
   class="sb-iframe"
@@ -110,7 +110,7 @@ Input supports two density modes to fit different UI contexts:
 
 Use `startText` and `endText` for prefix/suffix text (e.g., "$", "USD", "km"). These stay neutral in all states.
 
-Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colors - turning red when invalid.
+Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colours - turning red when invalid.
 
 <iframe
   class="sb-iframe"

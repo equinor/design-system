@@ -55,12 +55,12 @@ const sidebars: SidebarsConfig = {
       label: 'Inputs',
       link: {
         type: 'doc',
-        id: 'components/inputs/autocomplete',
+        id: 'components/inputs/inputs',
       },
       items: [
         'components/inputs/button',
-        'components/inputs/input',
         'components/inputs/selection_controls',
+        'components/inputs/input',
         'components/inputs/field',
         'components/inputs/textfield',
       ],
