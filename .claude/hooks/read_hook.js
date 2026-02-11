@@ -35,6 +35,20 @@ async function main() {
     process.exit(2)
   }
 
+  // Block common credential/certificate file patterns
+  const credentialPatterns = [
+    /^id_rsa(\.pub)?$/,
+    /\.pem$/,
+    /\.key$/,
+    /^\.?credentials\.json$/,
+    /^\.?secrets\.json$/,
+  ]
+
+  if (credentialPatterns.some((p) => p.test(basename))) {
+    console.error('Blocked: cannot access credential/certificate files')
+    process.exit(2)
+  }
+
   // For Glob, check the pattern field
   if (toolName === 'Glob') {
     const pattern = toolInput.pattern || ''
