@@ -875,6 +875,14 @@ function mergeJsonData(iconGroups) {
           : existing, // Keep original
     )
 
+    // Step 4: Append new icons that don't exist in the file yet
+    const existingNames = new Set(existingIcons.map((i) => i.name))
+    for (const [name, icon] of updatedIconsMap) {
+      if (!existingNames.has(name)) {
+        mergedIcons.push(icon)
+      }
+    }
+
     const action = DRY_RUN ? 'Would update' : 'Updated'
 
     if (DRY_RUN) {
@@ -932,7 +940,7 @@ function mergeTypeScriptData(iconGroups) {
     }
   }
 
-  // Step 3: Replace each icon's export block using regex
+  // Step 3: Replace existing icons or append new ones
   let newContent = existingContent
   for (const [name, newExport] of updatedIcons) {
     // Match the entire export const block for this icon
@@ -941,7 +949,13 @@ function mergeTypeScriptData(iconGroups) {
       `export const ${name}: IconData = \\{[^}]+\\}`,
       'g',
     )
-    newContent = newContent.replace(regex, newExport)
+    if (regex.test(newContent)) {
+      // Icon exists - replace it
+      newContent = newContent.replace(regex, newExport)
+    } else {
+      // New icon - append to end of file
+      newContent = newContent.trimEnd() + '\n\n' + newExport + '\n'
+    }
   }
 
   const action = DRY_RUN ? 'Would update' : 'Updated'
