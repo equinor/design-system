@@ -23,9 +23,9 @@ Use a button when a concrete action needs to be performed, such as saving or sub
 
 **Avoid buttons for:**
 
-- Navigating between pages - use Link instead
-- Filtering information in lists or tables - use Chip instead
-- Displaying selected filters - use Chip instead
+- Navigating between pages - use **Link** instead
+- Filtering information in lists or tables - use **Chip** instead
+- Displaying selected filters - use **Chip** instead
 
 ## Structure
 

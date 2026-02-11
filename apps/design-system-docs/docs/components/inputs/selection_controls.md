@@ -232,6 +232,6 @@ If toggling a switch triggers an important status change, announce it with an `a
 - Mix different selection controls within the same grouped list
 - Resize any of the selection controls beyond their intended dimensions
 - Pre-select consent checkboxes
-- Use switches for form questions - use Radio or Checkbox instead
-- Use more than seven options in one group - consider Select or Autocomplete
+- Use switches for form questions - use **Radio** or **Checkbox** instead
+- Use more than seven options in one group - consider **Select** or **Autocomplete**
   :::

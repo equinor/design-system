@@ -23,8 +23,8 @@ Use Input when you need a basic input field without additional functionality, or
 
 **Avoid Input when:**
 
-- You need a complete form field with label, description, and validation message - use TextField instead
-- The field requires built-in accessibility features - use TextField which handles composition automatically
+- You need a complete form field with label, description, and validation message - use **TextField** instead
+- The field requires built-in accessibility features - use **TextField** which handles composition automatically
 
 ## Guidelines
 

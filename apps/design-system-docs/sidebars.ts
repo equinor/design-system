@@ -52,57 +52,18 @@ const sidebars: SidebarsConfig = {
     'components/components',
     {
       type: 'category',
-      label: 'Data Display',
-      link: {
-        type: 'doc',
-        id: 'components/data-display/tooltip',
-      },
-      items: ['components/data-display/tooltip'],
-    },
-    {
-      type: 'category',
-      label: 'Feedback',
-      link: {
-        type: 'doc',
-        id: 'components/feedback/banner',
-      },
-      items: ['components/feedback/banner', 'components/feedback/snackbar'],
-    },
-    {
-      type: 'category',
       label: 'Inputs',
       link: {
         type: 'doc',
         id: 'components/inputs/autocomplete',
       },
       items: [
-        'components/inputs/autocomplete',
         'components/inputs/button',
         'components/inputs/input',
-        'components/inputs/search',
         'components/inputs/selection_controls',
-        'components/inputs/slider',
         'components/inputs/field',
         'components/inputs/textfield',
       ],
-    },
-    {
-      type: 'category',
-      label: 'Navigation',
-      link: {
-        type: 'doc',
-        id: 'components/navigation/app_launcher',
-      },
-      items: ['components/navigation/link', 'components/navigation/menu'],
-    },
-    {
-      type: 'category',
-      label: 'Surfaces',
-      link: {
-        type: 'doc',
-        id: 'components/surfaces/accordion',
-      },
-      items: ['components/surfaces/accordion'],
     },
   ],
   //Foundation Section

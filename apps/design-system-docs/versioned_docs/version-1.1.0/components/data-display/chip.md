@@ -1,6 +1,6 @@
 # Chip
 
-_Chips_, also known as tags or badges, are advanced badges that represent discrete information.
+_Chip_, also known as tags or badges, are advanced badges that represent discrete information.
 
 <iframe 
         class="sb-iframe"
@@ -16,7 +16,7 @@ _Chips_, also known as tags or badges, are advanced badges that represent discre
 
 ## When to Use
 
-Chips allow users to enter information, make selections, filter content, or trigger actions.
+Chip allow users to enter information, make selections, filter content, or trigger actions.
 
 - Chips are **compact** components that represent discrete information
 - Chips should be **relevant** to the content or task they represent
@@ -56,4 +56,4 @@ Chips allow users to make selections, perform an action, input information and a
 
 ✅ Chips can be used as status indicators
 
-❌ Do not use chips as a call-to-action
+❌ Do not use chip as a call-to-action

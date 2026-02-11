@@ -134,13 +134,13 @@ Screen readers won't automatically announce prefix/suffix text (like currency sy
 - Place labels and descriptions above the form control
 - Use `role="alert"` for live validation messages
 - Set `aria-required` on inputs when using the required indicator
-- Use TextField for standard form fields
+- Use **TextField** for standard form fields
   :::
 
 :::danger **Don't**
 
 - Forget to connect descriptions with `aria-describedby`
-- Use Field when TextField would be simpler
+- Use Field when **TextField** would be simpler
 - Rely only on visual indicators for required/optional status
 - Skip the `useFieldIds` hook - manual ID management is error-prone
   :::
