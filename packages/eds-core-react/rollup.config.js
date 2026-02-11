@@ -74,6 +74,13 @@ const createPlugins = (includeDelete = false) => [
   }),
 ]
 
+// NOTE: We intentionally output .js (not .mjs) and do NOT set "type": "module"
+// in dist/esm/. Using .mjs or "type": "module" forces Node's native ESM loader,
+// which breaks styled-components (its default export becomes undefined in that
+// context). This means the ESM build cannot be run directly in Node without a
+// bundler — but that's a styled-components limitation, not something we can fix.
+// Bundlers (Vite, webpack) resolve ESM correctly via the "module" and "exports"
+// fields in package.json regardless of file extension.
 const createEsmOutput = (dir = 'dist/esm') => ({
   dir,
   preserveModules: true,

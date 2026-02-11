@@ -39,6 +39,7 @@ export default [
     ],
     output: [
       {
+        // Output .js, not .mjs — see eds-core-react/rollup.config.js for details
         dir: 'dist/esm',
         preserveModules: true,
         preserveModulesRoot: 'src',
