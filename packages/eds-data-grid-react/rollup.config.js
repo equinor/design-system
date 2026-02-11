@@ -39,11 +39,11 @@ export default [
     ],
     output: [
       {
+        // Output .js, not .mjs — see ADR-0003
         dir: 'dist/esm',
         preserveModules: true,
         preserveModulesRoot: 'src',
         format: 'es',
-        entryFileNames: '[name].mjs',
         sourcemap: isDevelopment,
       },
       {

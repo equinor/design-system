@@ -74,12 +74,13 @@ const createPlugins = (includeDelete = false) => [
   }),
 ]
 
+// NOTE: We intentionally output .js (not .mjs) — see ADR-0003 for details.
+// Using .mjs breaks styled-components in Vitest, Jest, and SSR contexts.
 const createEsmOutput = (dir = 'dist/esm') => ({
   dir,
   preserveModules: true,
   preserveModulesRoot: 'src',
   format: 'es',
-  entryFileNames: '[name].mjs',
   sourcemap: isDevelopment,
 })
 
