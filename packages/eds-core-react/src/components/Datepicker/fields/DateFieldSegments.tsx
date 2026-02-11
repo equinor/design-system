@@ -1,6 +1,7 @@
 // In some cases we need to use the index as key
 /* eslint-disable react/no-array-index-key */
 import {
+  DateFieldState,
   DateFieldStateOptions,
   useDateFieldState,
 } from '@react-stately/datepicker'
@@ -9,18 +10,28 @@ import { createCalendar } from '@internationalized/date'
 import { DateSegment } from './DateSegment'
 import { forwardRef, RefObject } from 'react'
 
-type Props = Partial<DateFieldStateOptions>
+type Props = Partial<DateFieldStateOptions> & {
+  // Accept state from parent to support deferred validation
+  state?: DateFieldState
+}
 
 /**
  * A field that wraps segments for inputting a date / date-time
  */
 export const DateFieldSegments = forwardRef(
-  (props: Props, ref: RefObject<HTMLDivElement | null>) => {
-    const state = useDateFieldState({
+  (
+    { state: externalState, ...props }: Props,
+    ref: RefObject<HTMLDivElement | null>,
+  ) => {
+    // Create own state if not provided (backward compatibility)
+    const ownState = useDateFieldState({
       ...props,
       locale: props.locale,
       createCalendar,
     })
+
+    // Use state from parent if provided (supports deferred validation)
+    const state = externalState ?? ownState
 
     const { fieldProps } = useDateField(
       {

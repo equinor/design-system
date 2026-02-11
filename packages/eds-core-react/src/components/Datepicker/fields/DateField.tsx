@@ -56,7 +56,7 @@ export const DateField = forwardRef<HTMLDivElement, Props>(function (
       onBlurCapture={() => setIsFocused(false)}
     >
       <DateFieldSegments
-        {...state}
+        state={state}
         {...fieldProps}
         locale={dateCreateProps.locale}
         ref={inputRef}
