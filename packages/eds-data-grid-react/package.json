@@ -5,11 +5,11 @@
   "license": "MIT",
   "types": "dist/types/index.d.ts",
   "main": "dist/eds-data-grid-react.cjs",
-  "module": "./dist/esm/index.mjs",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.mjs",
+      "import": "./dist/esm/index.js",
       "require": "./dist/eds-data-grid-react.cjs"
     }
   },

@@ -11,7 +11,7 @@ module.exports = {
     '^react$': '<rootDir>/node_modules/react',
     '^styled-components$': '<rootDir>/node_modules/styled-components',
     '^@equinor/eds-core-react$':
-      '<rootDir>/../eds-core-react/dist/esm/index.mjs',
+      '<rootDir>/node_modules/@equinor/eds-core-react/dist/esm/index.js',
   },
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
