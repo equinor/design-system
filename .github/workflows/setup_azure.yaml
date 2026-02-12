@@ -32,7 +32,7 @@ jobs:
       # Do the actual deployment
       - name: deploy 🚀
         id: deploy
-        uses: azure/arm-deploy@v1
+        uses: azure/arm-deploy@v2
         with:
           scope: subscription
           region: northeurope
