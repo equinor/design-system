@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 
+declare const process: { env?: { NODE_ENV?: string } } | undefined
+
 /**
  * Hook that displays a deprecation warning in the console during development.
  * The warning is only shown once per component instance and only in development mode.
