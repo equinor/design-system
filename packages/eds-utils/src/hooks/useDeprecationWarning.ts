@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react'
 
-declare const process: { env?: { NODE_ENV?: string } } | undefined
-
 /**
  * Hook that displays a deprecation warning in the console during development.
  * The warning is only shown once per component instance and only in development mode.
@@ -32,10 +30,8 @@ export const useDeprecationWarning = (
     let isDevelopment = false
 
     // Check Node.js environment (for tests and SSR)
-    if (
-      typeof process !== 'undefined' &&
-      process.env?.NODE_ENV === 'development'
-    ) {
+    const g = globalThis as { process?: { env?: { NODE_ENV?: string } } }
+    if (g.process?.env?.NODE_ENV === 'development') {
       isDevelopment = true
     }
 
