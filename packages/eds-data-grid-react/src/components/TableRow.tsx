@@ -1,3 +1,5 @@
+declare const process: { env: { NODE_ENV?: string } }
+
 import { Table } from '@equinor/eds-core-react'
 import { Row } from '@tanstack/react-table'
 import { HTMLAttributes, useCallback, useEffect, useRef } from 'react'

@@ -1,3 +1,5 @@
+declare const process: { env: { NODE_ENV?: string } }
+
 /**
  * Function returning wether a string only contains number. Allows leading or trailing spaces.
  *
