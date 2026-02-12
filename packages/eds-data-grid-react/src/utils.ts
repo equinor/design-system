@@ -1,5 +1,3 @@
-declare const process: { env: { NODE_ENV?: string } }
-
 /**
  * Function returning wether a string only contains number. Allows leading or trailing spaces.
  *
@@ -31,7 +29,8 @@ export function addPxSuffixIfInputHasNoPrefix(size: number | string) {
 export function logDevelopmentWarningOfPropUse(
   deprecatedProps: Record<string, { value: unknown; mitigationInfo?: string }>,
 ) {
-  if (process.env.NODE_ENV !== 'development') {
+  const g = globalThis as { process?: { env?: { NODE_ENV?: string } } }
+  if (g.process?.env?.NODE_ENV !== 'development') {
     return
   }
 
