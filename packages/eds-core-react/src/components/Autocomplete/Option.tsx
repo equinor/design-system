@@ -91,28 +91,29 @@ export function Option({
   const highlighted =
     highlightedIndex === index && !isDisabled ? 'true' : 'false'
 
-  const itemProps = item !== undefined
-    ? getItemProps({
-        ...(multiline && {
-          ref: rowVirtualizer.measureElement,
-        }),
-        item,
-        index,
-        style: {
-          transform: `translateY(${virtualItem.start}px)`,
-          ...(!multiline && {
-            height: `${virtualItem.size}px`,
+  const itemProps =
+    item !== undefined
+      ? getItemProps({
+          ...(multiline && {
+            ref: rowVirtualizer.measureElement,
           }),
-        },
-      })
-    : {
-        style: {
-          transform: `translateY(${virtualItem.start}px)`,
-          ...(!multiline && {
-            height: `${virtualItem.size}px`,
-          }),
-        },
-      }
+          item,
+          index,
+          style: {
+            transform: `translateY(${virtualItem.start}px)`,
+            ...(!multiline && {
+              height: `${virtualItem.size}px`,
+            }),
+          },
+        })
+      : {
+          style: {
+            transform: `translateY(${virtualItem.start}px)`,
+            ...(!multiline && {
+              height: `${virtualItem.size}px`,
+            }),
+          },
+        }
   return (
     <StyledListItem
       $isdisabled={isDisabled ? 'true' : 'false'}
