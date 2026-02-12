@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    commit-message:
+      prefix: 'chore(deps)'
+    schedule:
+      interval: weekly
+      day: thursday
+      time: '13:30'
+      timezone: Europe/Oslo
+    groups:
+      all-dependencies:
+        update-types:
+          - minor
+          - patch
+    versioning-strategy: increase
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    commit-message:
+      prefix: 'chore(deps)'
+    schedule:
+      interval: weekly
+      day: thursday
+      time: '13:30'
+      timezone: Europe/Oslo
+    groups:
+      all-actions:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
