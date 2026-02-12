@@ -198,6 +198,8 @@ See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 **Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
 
+NEVER attribute AI, or add to the commit message "Co-authored by Claude" or similar.
+
 ## Additional Guidelines
 
 See `.github/copilot-instructions.md` and `.github/instructions/` for detailed guidelines.
