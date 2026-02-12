@@ -14,6 +14,7 @@ import {
   useImperativeHandle,
   useEffect,
 } from 'react'
+import type { DOMAttributes } from 'react'
 import { useEds } from '../EdsProvider'
 import {
   defaultOptionDisabled,
@@ -635,7 +636,10 @@ export const useAutocomplete = <T>({
     }),
   )
 
-  const consolidatedEvents = mergeEventsFromRight(other, inputProps)
+  const consolidatedEvents = mergeEventsFromRight(
+    other,
+    inputProps as DOMAttributes<unknown>,
+  )
 
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),
