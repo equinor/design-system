@@ -74,7 +74,7 @@ jobs:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
       - name: Download storybook build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: storybook-build
           path: packages/eds-core-react/storybook-build
