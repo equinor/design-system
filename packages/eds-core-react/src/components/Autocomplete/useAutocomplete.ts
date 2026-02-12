@@ -638,7 +638,7 @@ export const useAutocomplete = <T>({
 
   const consolidatedEvents = mergeEventsFromRight(
     other,
-    inputProps as DOMAttributes<unknown>,
+    inputProps as unknown as DOMAttributes<unknown>,
   )
 
   const selectedItemsLabels = useMemo(
