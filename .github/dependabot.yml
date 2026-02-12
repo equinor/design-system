@@ -7,7 +7,7 @@ updates:
     schedule:
       interval: weekly
       day: thursday
-      time: '13:30'
+      time: '13:10'
       timezone: Europe/Oslo
     groups:
       all-dependencies:
@@ -24,7 +24,7 @@ updates:
     schedule:
       interval: weekly
       day: thursday
-      time: '13:30'
+      time: '13:10'
       timezone: Europe/Oslo
     groups:
       all-actions:
