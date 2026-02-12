@@ -197,7 +197,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     children,
     (child: React.ReactElement<Record<string, unknown>>) => {
       // We force size on Icon & Avatar component
-      if (child.props) {
+      if (child?.props) {
         return cloneElement(child, {
           size: 16,
           disabled,
