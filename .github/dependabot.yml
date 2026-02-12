@@ -7,10 +7,12 @@ updates:
     schedule:
       interval: weekly
       day: thursday
-      time: '13:10'
+      time: '13:35'
       timezone: Europe/Oslo
     groups:
       all-dependencies:
+        patterns:
+          - '*'
         update-types:
           - minor
           - patch
@@ -24,7 +26,7 @@ updates:
     schedule:
       interval: weekly
       day: thursday
-      time: '13:10'
+      time: '13:35'
       timezone: Europe/Oslo
     groups:
       all-actions:
