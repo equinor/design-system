@@ -63,7 +63,7 @@ jobs:
       has-beta-release: ${{ steps.detect.outputs.has-beta-release }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -110,7 +110,7 @@ jobs:
     steps:
       # Checkout the repository - we only need the current state
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2 # Fetch last 2 commits to compare
 

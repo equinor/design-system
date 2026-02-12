@@ -16,7 +16,7 @@ jobs:
     env:
       PLAYWRIGHT_URL: https://color-palette-generator-eds-dev.radix.equinor.com/
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4

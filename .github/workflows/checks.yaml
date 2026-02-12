@@ -45,7 +45,7 @@ jobs:
       # Fallback if cache miss (shouldn’t happen as job needs: setup)
       - name: Fallback checkout (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Fallback install (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install

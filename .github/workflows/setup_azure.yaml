@@ -24,7 +24,7 @@ jobs:
       # Checkout internal repository where the bicep files are located
       - name: Checkout internal 🛎️
         id: checkout-internal
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           repository: 'equinor/design-system-internal'
           ref: main
