@@ -57,7 +57,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^24.9.1",
+    "@types/node": "^25.2.3",
     "@types/ramda": "^0.31.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
