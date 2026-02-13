@@ -19,12 +19,6 @@
       border-color 150ms ease-in-out,
       color 150ms ease-in-out;
 
-    /* Comfortable density asymmetric padding for visual text centering */
-    /* These values compensate for font metrics (ascenders/descenders) */
-    /* Empirically determined from Figma design */
-    --_comfortable-padding-top: 0.313rem; /* 5px */
-    --_comfortable-padding-bottom: 0.188rem; /* 3px */
-
     /* Comfortable density icon-only padding to match label button heights */
     /* Formula: (target-height - icon-size) / 2 where target-height = label button height */
     /* Empirically determined from Figma design */
@@ -263,23 +257,17 @@
  */
 
 [data-density='comfortable'] .eds-button[data-selectable-space='sm'][data-font-size='sm'] {
-  /* Override line-height to maintain SM height (12px instead of XS's 12px) */
-  --eds-typography-line-height: 0.75rem; /* 12px (SM line-height) */
+  --eds-typography-line-height: 0.75rem; /* 12px */
   --eds-typography-line-height-squished: 0.75rem; /* 12px */
-  /* Target: 20px = (5px + 3px) + 12px line-height */
-  /* Asymmetric padding to visually center text (more top, less bottom) */
-  padding-top: var(--_comfortable-padding-top);
-  padding-bottom: var(--_comfortable-padding-bottom);
+  /* Target: 20px = 4px + 12px + 4px */
+  padding-block: 0.25rem; /* 4px */
 }
 
 [data-density='comfortable'] .eds-button[data-selectable-space='md'][data-font-size='md'] {
-  /* Override line-height to maintain MD height (16px instead of SM's 12px) */
-  --eds-typography-line-height: 1rem; /* 16px (MD line-height, NOT SM) */
+  --eds-typography-line-height: 1rem; /* 16px */
   --eds-typography-line-height-squished: 1rem; /* 16px */
-  /* Target: 24px = (5px + 3px) + 16px line-height */
-  /* Asymmetric padding to visually center text (more top, less bottom) */
-  padding-top: var(--_comfortable-padding-top);
-  padding-bottom: var(--_comfortable-padding-bottom);
+  /* Target: 24px = 4px + 16px + 4px */
+  padding-block: 0.25rem; /* 4px */
 }
 
 [data-density='comfortable'] .eds-button[data-selectable-space='lg'][data-font-size='lg'] {
