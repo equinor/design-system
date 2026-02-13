@@ -61,7 +61,7 @@ jobs:
           echo Running build:storybook!
           pnpm build:storybook
       - name: Upload storybook build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: storybook-build
           path: packages/eds-core-react/storybook-build
