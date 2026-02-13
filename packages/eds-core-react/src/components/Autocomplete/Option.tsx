@@ -91,6 +91,7 @@ export function Option({
   const highlighted =
     highlightedIndex === index && !isDisabled ? 'true' : 'false'
 
+  // Guard: downshift 9.x validates that item exists in the items array
   const itemProps =
     item !== undefined
       ? getItemProps({
