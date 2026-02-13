@@ -238,31 +238,10 @@
   }
 }
 
-/* ===== LABEL WRAPPER (TypographyNext) ===== */
 /* Outside @layer to override typography.css which sets display: block on [data-font-family] */
 
 .eds-button {
   display: inline-flex;
-}
-
-.eds-button > span {
-  display: inline-flex;
-  align-items: center;
-  gap: inherit;
-}
-
-/* Reset baseline padding and text-box-trim for proper centering */
-.eds-button > span[data-baseline] {
-  padding: 0;
-  /* Disable text-box-trim so text sits centered within its line-height box */
-  /* Flexbox will then center the entire line-height box vertically in the button */
-  text-box-trim: none;
-  text-box-edge: auto;
-}
-
-/* Icon-only: span should not affect layout */
-.eds-button[data-icon-only] > span {
-  display: contents;
 }
 
 /* ===== DENSITY OVERRIDES ===== */
@@ -283,42 +262,30 @@
  * tokens from @equinor/eds-tokens/css/variables.
  */
 
-[data-density='comfortable'] .eds-button[data-selectable-space='sm'][data-font-size='sm'],
-[data-density='comfortable'] .eds-button[data-selectable-space='sm'] [data-font-size='sm'] {
+[data-density='comfortable'] .eds-button[data-selectable-space='sm'][data-font-size='sm'] {
   /* Override line-height to maintain SM height (12px instead of XS's 12px) */
   --eds-typography-line-height: 0.75rem; /* 12px (SM line-height) */
   --eds-typography-line-height-squished: 0.75rem; /* 12px */
-}
-
-[data-density='comfortable'] .eds-button[data-selectable-space='sm'][data-font-size='sm'] {
   /* Target: 20px = (5px + 3px) + 12px line-height */
   /* Asymmetric padding to visually center text (more top, less bottom) */
   padding-top: var(--_comfortable-padding-top);
   padding-bottom: var(--_comfortable-padding-bottom);
 }
 
-[data-density='comfortable'] .eds-button[data-selectable-space='md'][data-font-size='md'],
-[data-density='comfortable'] .eds-button[data-selectable-space='md'] [data-font-size='md'] {
+[data-density='comfortable'] .eds-button[data-selectable-space='md'][data-font-size='md'] {
   /* Override line-height to maintain MD height (16px instead of SM's 12px) */
   --eds-typography-line-height: 1rem; /* 16px (MD line-height, NOT SM) */
   --eds-typography-line-height-squished: 1rem; /* 16px */
-}
-
-[data-density='comfortable'] .eds-button[data-selectable-space='md'][data-font-size='md'] {
   /* Target: 24px = (5px + 3px) + 16px line-height */
   /* Asymmetric padding to visually center text (more top, less bottom) */
   padding-top: var(--_comfortable-padding-top);
   padding-bottom: var(--_comfortable-padding-bottom);
 }
 
-[data-density='comfortable'] .eds-button[data-selectable-space='lg'][data-font-size='lg'],
-[data-density='comfortable'] .eds-button[data-selectable-space='lg'] [data-font-size='lg'] {
+[data-density='comfortable'] .eds-button[data-selectable-space='lg'][data-font-size='lg'] {
   /* Override line-height to maintain LG height (20px instead of MD's 16px) */
   --eds-typography-line-height: 1.25rem; /* 20px (LG line-height, NOT MD) */
   --eds-typography-line-height-squished: 1.25rem; /* 20px */
-}
-
-[data-density='comfortable'] .eds-button[data-selectable-space='lg'][data-font-size='lg'] {
   /* Target: 36px = (8px × 2) + 20px */
   /* Token gives 12px in comfortable mode, minus icon compensation = 8px */
   padding-block: calc(var(--eds-selectable-space-vertical) - 0.25rem); /* 12px → 8px */

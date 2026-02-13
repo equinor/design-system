@@ -13,14 +13,7 @@ exports[`Button (next) Rendering matches snapshot 1`] = `
     data-variant="primary"
     type="button"
   >
-    <span
-      data-baseline="center"
-      data-font-family="ui"
-      data-font-size="md"
-      data-line-height="squished"
-    >
-      Click me
-    </span>
+    Click me
   </button>
 </div>
 `;

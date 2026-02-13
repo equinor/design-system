@@ -132,14 +132,10 @@ describe('Button (next)', () => {
       expect(screen.getAllByTestId('mock-icon')).toHaveLength(2)
     })
 
-    it('wraps text children in typography', () => {
+    it('renders text children directly', () => {
       render(<Button>Text Content</Button>)
       const button = screen.getByRole('button')
-      // Text should be wrapped in a span (TypographyNext)
-      // eslint-disable-next-line testing-library/no-node-access
-      const span = button.querySelector('span')
-      expect(span).toBeInTheDocument()
-      expect(span).toHaveTextContent('Text Content')
+      expect(button).toHaveTextContent('Text Content')
     })
 
     it('preserves child order', () => {
@@ -151,12 +147,8 @@ describe('Button (next)', () => {
         </Button>,
       )
       const button = screen.getByRole('button')
-      // Children are wrapped in TypographyNext span
-      // eslint-disable-next-line testing-library/no-node-access
-      const span = button.children[0]
-      expect(span).toHaveTextContent('Middle')
+      expect(button).toHaveTextContent('Middle')
 
-      // Get all icons using data-testid
       const icons = screen.getAllByTestId('mock-icon')
       expect(icons).toHaveLength(2)
     })
