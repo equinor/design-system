@@ -36,16 +36,15 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
+      - name: Fallback checkout (cache miss)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v6
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "22.12.0"
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-      # Fallback if cache miss (shouldn’t happen as job needs: setup)
-      - name: Fallback checkout (cache miss)
-        if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v6
       - name: Fallback install (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install
