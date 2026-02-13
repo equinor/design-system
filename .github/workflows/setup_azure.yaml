@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Login to azure 🔑
         id: login-to-azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
           tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
