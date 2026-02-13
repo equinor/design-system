@@ -37,7 +37,7 @@ jobs:
           allow-no-subscriptions: true
       - name: Upload files 📂
         id: upload-files
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           inlineScript: |
             az storage blob sync -c ${{ vars.AZURE_CDN_CONTAINER_NAME }} -s assets --account-name ${{ vars.AZURE_CDN_STORAGE_ACCOUNT_NAME }}
