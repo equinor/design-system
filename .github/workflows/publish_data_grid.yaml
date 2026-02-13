@@ -122,7 +122,7 @@ jobs:
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-data-grid
       - name: Deploy the website
         id: deploy-website
-        uses: tibor19/static-website-deploy@v2
+        uses: tibor19/static-website-deploy@v4
         with:
           enabled-static-website: 'true'
           folder: 'packages/eds-data-grid-react/storybook-build'
