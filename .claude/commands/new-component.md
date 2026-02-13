@@ -26,17 +26,20 @@ If a Figma URL is provided, use these MCP tools to extract the design:
 ⚠️ **CRITICAL**: When Figma shows colors using dynamic modes (accent, neutral, danger, etc.), you MUST set the corresponding `data-color-appearance` attribute in the HTML!
 
 **How to identify:**
+
 - Look at variable names in `figma_get_variable_defs`: if you see `var(--eds-color-bg-fill-emphasis-default)` or similar **dynamic tokens** (without "accent"/"neutral" in the name)
 - Check the Figma screenshot: if icons/text are in accent blue color, they're using accent mode
 - Check the Figma design context: look for color appearance indicators
 
 **Examples:**
+
 - **Icons in accent blue** → Add `data-color-appearance="accent"` to the icon container or parent
 - **Error text in red** → Add `data-color-appearance="danger"` to the text element
 - **Neutral/gray elements** → Add `data-color-appearance="neutral"` or omit (neutral is often default)
 
 **Why this matters:**
 Dynamic tokens like `var(--eds-color-bg-fill-emphasis-default)` change their value based on `data-color-appearance`:
+
 - `data-color-appearance="accent"` → token resolves to accent blue (#007079)
 - `data-color-appearance="danger"` → token resolves to danger red (#c6002d)
 - `data-color-appearance="neutral"` → token resolves to neutral gray
@@ -74,14 +77,14 @@ Check `packages/eds-core-react/src/components/next/index.ts` for existing compon
 
 3. **Compare with Figma and decide:**
 
-   | Feature Type | Action |
-   |--------------|--------|
-   | **Visual in Figma** (clear button, loading spinner, icons) | ✅ **Implement directly** |
-   | **States in Figma** (hover, focus, disabled, error) | ✅ **Implement directly** |
-   | **Props from Figma** (size variants, disabled state) | ✅ **Implement directly** |
-   | **Complex behavior** (keyboard nav, focus trap, positioning) | 📝 **Add TODO** if needed |
-   | **Old patterns** (styled-components, portals, complex state) | ❌ **Skip** - use modern approach |
-   | **Not in Figma** (extra features, legacy support) | ❌ **Skip** - can add later if needed |
+   | Feature Type                                                 | Action                                |
+   | ------------------------------------------------------------ | ------------------------------------- |
+   | **Visual in Figma** (clear button, loading spinner, icons)   | ✅ **Implement directly**             |
+   | **States in Figma** (hover, focus, disabled, error)          | ✅ **Implement directly**             |
+   | **Props from Figma** (size variants, disabled state)         | ✅ **Implement directly**             |
+   | **Complex behavior** (keyboard nav, focus trap, positioning) | 📝 **Add TODO** if needed             |
+   | **Old patterns** (styled-components, portals, complex state) | ❌ **Skip** - use modern approach     |
+   | **Not in Figma** (extra features, legacy support)            | ❌ **Skip** - can add later if needed |
 
 4. **Only add TODO comments for:**
    - Complex behavioral features requiring careful implementation (keyboard navigation, focus management)
@@ -89,6 +92,7 @@ Check `packages/eds-core-react/src/components/next/index.ts` for existing compon
    - Integrations with external systems (Floating UI, Popper)
 
 **Example - Minimal TODOs:**
+
 ```tsx
 /**
  * NOTE: Complex behavioral features from old component to consider:
@@ -96,51 +100,60 @@ Check `packages/eds-core-react/src/components/next/index.ts` for existing compon
  * TODO: Focus trap when modal is open
  * TODO: Click-outside to close (if this is a modal/dropdown pattern)
  */
-export const Search = forwardRef<HTMLInputElement, SearchProps>(
-  function Search({ disabled, onClear, ...rest }, ref) {
-    // ✅ Clear button implemented directly (visible in Figma)
-    // ✅ Disabled state implemented (visible in Figma)
-    // ✅ Icon positioning implemented (visible in Figma)
+export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
+  { disabled, onClear, ...rest },
+  ref,
+) {
+  // ✅ Clear button implemented directly (visible in Figma)
+  // ✅ Disabled state implemented (visible in Figma)
+  // ✅ Icon positioning implemented (visible in Figma)
 
-    const [value, setValue] = useState('')
+  const [value, setValue] = useState('')
 
-    return (
-      <div className="eds-search">
-        <Icon data={search} />
-        <Input
-          ref={ref}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          disabled={disabled}
-          {...rest}
-        />
-        {value && !disabled && (
-          <Button icon onClick={() => { setValue(''); onClear?.() }}>
-            <Icon data={close} />
-          </Button>
-        )}
-      </div>
-    )
-  }
-)
+  return (
+    <div className="eds-search">
+      <Icon data={search} />
+      <Input
+        ref={ref}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={disabled}
+        {...rest}
+      />
+      {value && !disabled && (
+        <Button
+          icon
+          onClick={() => {
+            setValue('')
+            onClear?.()
+          }}
+        >
+          <Icon data={close} />
+        </Button>
+      )}
+    </div>
+  )
+})
 ```
 
 **Modern alternatives that simplify implementation:**
 
-| Old Pattern | Modern Replacement | Why It's Better |
-|-------------|-------------------|-----------------|
-| Custom focus indicators | `:focus-visible` | Built-in, accessible, less code |
-| Portal components | `position: fixed` | Native CSS, no React overhead |
-| Styled-components theming | CSS tokens + data-attrs | Faster, cacheable, less JS |
-| Manual event delegation | Native event listeners | Simpler, browser-optimized |
-| Complex state management | Simple useState/useRef | Less code, easier to understand |
+| Old Pattern               | Modern Replacement      | Why It's Better                 |
+| ------------------------- | ----------------------- | ------------------------------- |
+| Custom focus indicators   | `:focus-visible`        | Built-in, accessible, less code |
+| Portal components         | `position: fixed`       | Native CSS, no React overhead   |
+| Styled-components theming | CSS tokens + data-attrs | Faster, cacheable, less JS      |
+| Manual event delegation   | Native event listeners  | Simpler, browser-optimized      |
+| Complex state management  | Simple useState/useRef  | Less code, easier to understand |
 
 **Do NOT:**
+
 - ❌ Add TODOs for everything from old component
 - ❌ Copy old implementation patterns
 - ❌ Add TODOs for features visible in Figma (just implement them!)
 
 **DO:**
+
 - ✅ Implement all visual features from Figma directly
 - ✅ Use modern CSS/browser features to simplify
 - ✅ Only add TODOs for truly complex behavioral features
@@ -166,6 +179,7 @@ $ARGUMENTS/
 2. **Use these exact patterns from the codebase:**
 
 ### index.ts
+
 ```typescript
 export { $ARGUMENTS } from './$ARGUMENTS'
 export type { $ARGUMENTSProps } from './$ARGUMENTS.types'
@@ -174,9 +188,10 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS.types'
 ### $ARGUMENTS.types.ts
 
 **Foundation Data-Attribute Values** (from `/documentation/how-to/TOKEN_SYSTEM_GUIDE.md`):
+
 - `data-color-appearance`: `'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'danger'`
 - `data-selectable-space`: `'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`
-- `data-space-proportions`: `'squished' | 'square' | 'stretched'`
+- `data-space-proportions`: `'squished' | 'squared' | 'stretched'`
 - `data-font-size`: `'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'`
 - `data-font-family`: `'ui' | 'header'`
 - `data-line-height`: `'squished' | 'default' | 'spacious'`
@@ -200,6 +215,7 @@ export type $ARGUMENTSProps = {
 ```
 
 ### $ARGUMENTS.tsx
+
 Use the forwardRef pattern with named function (matches Button, Checkbox, Input).
 
 **Critical**: Set foundation data-attributes to enable dynamic token styling. The CSS tokens like `--eds-color-bg-fill-emphasis-default` change their values based on these attributes.
@@ -237,6 +253,7 @@ $ARGUMENTS.displayName = '$ARGUMENTS'
 ```
 
 **When to use each data-attribute:**
+
 1. **Interactive components** (buttons, inputs, selects): Add `data-color-appearance`, `data-selectable-space`, `data-space-proportions`
 2. **Text/typography**: Add `data-font-size`, `data-font-family`, `data-line-height`
 3. **State-based**: Add `data-disabled`, `data-invalid`, `data-readonly` conditionally
@@ -271,22 +288,52 @@ $ARGUMENTS.displayName = '$ARGUMENTS'
 ```
 
 **Key principle**: Apply `data-color-appearance` to the **smallest element** that needs that color. This ensures:
+
 - Hover states stay neutral (gray) while icons stay accent (blue)
 - Only the specific element uses that color mode
 - Dynamic tokens resolve correctly for each element
 
 **Without `data-color-appearance`, dynamic tokens won't resolve to the correct color!**
 
+**CRITICAL - Check Figma for Data-Attribute Modes:**
+
+⚠️ **Don't copy data-attributes from similar components** - always verify from Figma! Check for:
+
+1. **`data-space-proportions`** - Check padding ratio in Figma:
+   - Equal horizontal/vertical (16px/16px) → `"squared"`
+   - More horizontal than vertical (16px/8px) → `"squished"`
+   - More vertical than horizontal (8px/16px) → `"stretched"`
+
+2. **`data-line-height`** - Check line-height mode in Figma:
+   - Tight spacing → `"squished"`
+   - Standard → `"default"`
+   - Loose spacing → `"spacious"`
+
+3. **`data-selectable-space`** - Check padding size: `"sm"` (8px), `"md"` (16px), `"lg"` (24px)
+
+**Example: Don't assume Button's values work for Menu!**
+
+```tsx
+// ❌ WRONG: Copying Button without checking Figma
+<button data-space-proportions="squished">  // Button has unequal padding
+
+// ✅ CORRECT: Checked Figma - Menu has equal padding (16px × 16px)
+<button data-space-proportions="squared">  // Menu has equal padding
+```
+
 ### $ARGUMENTS_LOWERCASE.css (e.g., avatar.css)
+
 Use `@layer eds-components` and data-attribute selectors (matches button.css, checkbox.css).
 
 **Important:**
+
 - CSS class names should be lowercase (e.g., `eds-avatar` not `eds-Avatar`)
 - **CRITICAL: Use EXACT `--eds-*` tokens from `figma_get_variable_defs`** - never hardcode hex values or assume token names
 - Always call `figma_get_variable_defs` for each component state and use the exact variable names returned
 - **Use EDS 2.0 tokens only** - see `packages/eds-tokens/css/variables/` for available tokens
 
 **EDS 2.0 Token Examples (correct):**
+
 - `--eds-color-bg-fill-emphasis-default` (NOT `--eds-color-interactive-primary`)
 - `--eds-color-text-subtle` (NOT `--eds-color-text-static-icons`)
 - `--eds-color-border-strong` (NOT `--eds-color-text-error`)
@@ -296,15 +343,15 @@ Use `@layer eds-components` and data-attribute selectors (matches button.css, ch
 **Data Attributes for Styling Modes:**
 Components use data attributes to enable dynamic token-based styling:
 
-| Attribute | Purpose | Values |
-|-----------|---------|--------|
-| `data-variant` | Visual variant | component-specific (primary, secondary, ghost) |
-| `data-selectable-space` | Spacing mode | `sm`, `md`, `lg` |
-| `data-space-proportions` | Padding proportions | `squished`, `default`, `spacious` |
-| `data-font-family` | Typography family | `ui`, `body` |
-| `data-font-size` | Font size | `xs`, `sm`, `md`, `lg`, `xl` |
-| `data-line-height` | Line height mode | `squished`, `default`, `spacious` |
-| `data-color-appearance` | Color theming | `neutral`, `accent`, `warning`, `danger` |
+| Attribute                | Purpose             | Values                                         |
+| ------------------------ | ------------------- | ---------------------------------------------- |
+| `data-variant`           | Visual variant      | component-specific (primary, secondary, ghost) |
+| `data-selectable-space`  | Spacing mode        | `sm`, `md`, `lg`                               |
+| `data-space-proportions` | Padding proportions | `squished`, `default`, `spacious`              |
+| `data-font-family`       | Typography family   | `ui`, `body`                                   |
+| `data-font-size`         | Font size           | `xs`, `sm`, `md`, `lg`, `xl`                   |
+| `data-line-height`       | Line height mode    | `squished`, `default`, `spacious`              |
+| `data-color-appearance`  | Color theming       | `neutral`, `accent`, `warning`, `danger`       |
 
 ```css
 @layer eds-components {
@@ -357,107 +404,119 @@ Components use data attributes to enable dynamic token-based styling:
 ```
 
 **Key CSS patterns:**
+
 - **ALWAYS use exact tokens from `figma_get_variable_defs`** - Don't guess or copy from similar components
 - **Dynamic tokens** like `--eds-color-bg-fill-emphasis-default` adapt to `data-color-appearance`
 - **Spacing tokens** like `--eds-selectable-space-vertical` adapt to `data-selectable-space`
 - **Use attribute selectors** for state: `[data-disabled]`, `[data-variant='primary']`
 - **Avoid hardcoded values** - use tokens that respond to data-attributes
+- **Check Figma for shadows** - EDS 2.0 has NO shadow tokens; only add `box-shadow` if visible in Figma screenshot
+- **Use outline for borders** - Interactive components (36px, 44px heights) should use `outline` with negative offset instead of `border` to maintain correct height
+- **Focus rings with box-shadow** - When `outline` is used for border, use `box-shadow` for focus state (see pattern below)
+- **Verify padding from Figma** - Never hardcode padding; check `figma_get_variable_defs` and Figma screenshot first
+
+**Outline Border + Box-Shadow Focus Pattern:**
+
+When using `outline` for borders (to maintain exact height), you can't use `outline` again for focus. Use `box-shadow` instead.
+
+**IMPORTANT: Always check Figma for the specific focus pattern** - some components may have different focus styles!
+
+```css
+.my-component {
+  /* Border using outline (doesn't affect height calculation) */
+  outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+  outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+  border-radius: var(--eds-spacing-border-radius-rounded);
+}
+
+.my-component:hover {
+  outline-color: var(--eds-color-border-strong);
+}
+
+.my-component:focus-within {
+  outline-color: var(--eds-color-border-strong);
+  /* Use box-shadow since outline is used for border
+   * Creates: inner gap (stroke-thick) + outer focus ring (stroke-thin)
+   */
+  box-shadow:
+    0 0 0 var(--eds-sizing-stroke-thick) var(--eds-color-bg-canvas),
+    0 0 0
+      calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
+      var(--eds-color-border-focus);
+}
+```
+
+**See:** Input component (`Input/input.css`) for working example.
 
 **CRITICAL: Typography `display: block` Issue**
 
 ⚠️ **`[data-font-family]` sets `display: block`** (from `typography.css`), which breaks flex layouts!
 
-When a component has `data-font-family`, it gets `display: block` for text-box trimming. This must be overridden:
+**SOLUTION: Don't put `data-font-family` on flex containers**
 
-```css
-.eds-your-component {
-  display: flex; /* or inline-flex - MUST override the block display */
-}
-```
+Only apply `data-font-family` to elements that actually render text. This works for ALL components:
 
-**For components with icon + text (like Button):**
-
-Wrap children in a `<span>` to create a nested flex container:
+**Example 1: Input-style (container + input element)**
 
 ```tsx
-// TSX
-<button
-  data-font-family="ui"
-  data-font-size="md"
+<div
+  data-color-appearance={tone}
+  data-font-size="md" // Sets context for children
   data-selectable-space="md"
+  // NO data-font-family here!
 >
-  <span>{children}</span>  {/* Wraps Icon + text */}
+  <input data-font-family="ui" data-font-size="md" />
+</div>
+```
+
+**Example 2: Button/Menu-style (button + text span)**
+
+```tsx
+<button
+  data-selectable-space="md"
+  data-font-size="md" // Sets context for gap/icons
+  // NO data-font-family here!
+>
+  <span data-color-appearance="accent">
+    <Icon />
+  </span>
+  <span data-font-family="ui" data-font-size="md">
+    {children}
+  </span>
 </button>
 ```
 
 ```css
-/* CSS */
-.eds-component {
-  display: flex;  /* Override typography block display */
-  gap: var(--eds-typography-gap-horizontal);
+@layer eds-components {
+  .eds-component {
+    display: flex; /* Works fine - no override needed! */
+    align-items: center;
+    gap: var(--eds-typography-gap-horizontal);
+    padding: var(--eds-selectable-space-horizontal);
+  }
 
-  /* CRITICAL: Keep padding on the component element */
-  padding-block: var(--eds-selectable-space-vertical);
-  padding-inline: var(--eds-selectable-space-horizontal);
+  .eds-component__label {
+    flex: 1; /* Label span takes remaining space */
+    color: var(--eds-color-text-strong);
+  }
 }
-
-.eds-component > span {
-  display: inline-flex;
-  align-items: center;
-  gap: inherit;  /* Inherits gap from parent */
-  /* NO padding here - padding stays on parent element */
-}
+/* NO display overrides outside @layer needed! */
 ```
 
-**⚠️ CRITICAL: Padding Placement**
+**Why this works for everything:**
 
-**DO NOT add padding to both the element AND the span** - this causes double padding!
-
-✅ **CORRECT: Padding on element (Button's approach - use this)**
-```css
-.eds-button {
-  padding-block: var(--eds-selectable-space-vertical);
-  padding-inline: var(--eds-selectable-space-horizontal);
-}
-
-.eds-button > span {
-  display: inline-flex;
-  gap: inherit;
-  /* No padding */
-}
-```
-
-❌ **WRONG: Padding on both**
-```css
-.eds-component {
-  padding: 1rem;  /* ❌ Double padding! */
-}
-
-.eds-component > span {
-  padding: 1rem;  /* ❌ Combined = 2rem total */
-}
-```
-
-**Why padding stays on the element:**
-1. ✅ The padding is part of the interactive/clickable area
-2. ✅ Hover/focus states naturally cover the full padded area
-3. ✅ Span's only job is to fix `display: block` issue (single responsibility)
-4. ✅ Clearer mental model: element owns its spacing, span just fixes layout
-
-**How this works:**
-1. Parent element has `gap` and `padding` tokens
-2. Child span has `display: inline-flex` to fix typography block display
-3. Child span uses `gap: inherit` to use parent's gap
-4. Icon and text become flex items of the span with proper spacing
-
-See `Button/button.css` (lines 51-70, 248-252) for reference implementation.
+- ✅ Container handles layout, spacing, and interactive states
+- ✅ Text elements handle their own typography
+- ✅ Works for: Input, TextField, Button, Menu, Card, ListItem, etc.
 
 **Token workflow:**
+
 1. Call `figma_get_variable_defs` for the component (default, hover, focus, disabled states)
 2. Copy the EXACT variable names from the response (e.g., `var(--eds-color-bg-canvas)`)
 3. Use those exact tokens in your CSS - never hardcode hex values or guess token names
 
 ### $ARGUMENTS.figma.tsx (Figma Code Connect)
+
 Only create this file if a Figma URL was provided.
 
 ```typescript
@@ -480,6 +539,7 @@ figma.connect($ARGUMENTS, 'FIGMA_URL_HERE', {
 ```
 
 ### $ARGUMENTS.test.tsx
+
 Use describe blocks matching Button.test.tsx structure:
 
 ```typescript
@@ -525,6 +585,26 @@ describe('$ARGUMENTS (next)', () => {
     })
   })
 
+  describe('Height verification', () => {
+    it('has correct data-attributes for Figma target height', () => {
+      // Figma specifies 44px height (example)
+      const { container } = render(<$ARGUMENTS data-testid="eds-$ARGUMENTS">Test content</$ARGUMENTS>)
+      const element = screen.getByTestId('eds-$ARGUMENTS')
+
+      // Verify data-attributes that produce target height
+      expect(element).toHaveAttribute('data-selectable-space', 'md')
+      expect(element).toHaveAttribute('data-space-proportions', 'squared')
+      expect(element).toHaveAttribute('data-font-size', 'md')
+      expect(element).toHaveAttribute('data-line-height', 'default')
+
+      // Verify text has data-baseline for text-box-trim (critical for exact height)
+      const textElement = container.querySelector('.eds-$ARGUMENTS__text')
+      expect(textElement).toHaveAttribute('data-baseline', 'center')
+
+      // jsdom can't test pixel height - verify visually in Storybook
+    })
+  })
+
   describe('Accessibility', () => {
     it('has no accessibility violations', async () => {
       const { container } = render(<$ARGUMENTS />)
@@ -535,6 +615,7 @@ describe('$ARGUMENTS (next)', () => {
 ```
 
 ### $ARGUMENTS.stories.tsx
+
 ```typescript
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { $ARGUMENTS, type $ARGUMENTSProps } from '.'
@@ -566,15 +647,18 @@ export const Introduction: StoryFn<$ARGUMENTSProps> = (args) => {
 ```
 
 3. **Export from next/index.ts** - Add to `packages/eds-core-react/src/components/next/index.ts`:
+
 ```typescript
 export { $ARGUMENTS } from './$ARGUMENTS'
 export type { $ARGUMENTSProps } from './$ARGUMENTS'
 ```
 
 4. **Import CSS in next/index.css** - Add to `packages/eds-core-react/src/components/next/index.css`:
+
 ```css
 @import './$ARGUMENTS/$ARGUMENTS_LOWERCASE.css';
 ```
+
 > **Example:** For `Avatar` component: `@import './Avatar/avatar.css';`
 
 ## Key Patterns
@@ -594,15 +678,16 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 See how existing components use data-attributes and dynamic tokens:
 
 ### Button (packages/eds-core-react/src/components/next/Button/)
+
 ```tsx
 // Button.tsx - Sets multiple foundation data-attributes
 <button
-  data-variant={variant}                              // Component-specific
-  data-selectable-space={selectableSpace}             // Foundation: md, lg, sm
-  data-space-proportions="squished"                   // Foundation
-  data-font-family="ui"                               // Foundation
-  data-font-size={typographySize}                     // Foundation
-  data-line-height="squished"                         // Foundation
+  data-variant={variant} // Component-specific
+  data-selectable-space={selectableSpace} // Foundation: md, lg, sm
+  data-space-proportions="squished" // Foundation
+  data-font-family="ui" // Foundation
+  data-font-size={typographySize} // Foundation
+  data-line-height="squished" // Foundation
   data-color-appearance={disabled ? 'neutral' : tone} // Foundation: accent, danger
 />
 ```
@@ -610,19 +695,24 @@ See how existing components use data-attributes and dynamic tokens:
 ```css
 /* button.css - Dynamic tokens respond to data-attributes */
 .eds-button[data-variant='primary'] {
-  background-color: var(--eds-color-bg-fill-emphasis-default);  /* Changes with data-color-appearance */
+  background-color: var(
+    --eds-color-bg-fill-emphasis-default
+  ); /* Changes with data-color-appearance */
 }
 
 .eds-button:hover:not(:disabled) {
-  background-color: var(--eds-color-bg-fill-emphasis-hover);    /* Also responds to data-color-appearance */
+  background-color: var(
+    --eds-color-bg-fill-emphasis-hover
+  ); /* Also responds to data-color-appearance */
 }
 ```
 
 ### Input (packages/eds-core-react/src/components/next/Input/)
+
 ```tsx
 // Input.tsx - Container sets color context for child elements
 <div
-  data-color-appearance={tone}      // 'danger' when invalid, 'neutral' otherwise
+  data-color-appearance={tone} // 'danger' when invalid, 'neutral' otherwise
   data-font-size="md"
   data-selectable-space="sm"
   data-space-proportions="squished"
@@ -632,15 +722,16 @@ See how existing components use data-attributes and dynamic tokens:
 ```
 
 ### Icon (packages/eds-core-react/src/components/next/Icon/)
+
 ```tsx
 // Icon.tsx - Size inherits from parent's data-font-size
-<svg data-icon-size={size} />  // Only set if explicit size prop provided
+<svg data-icon-size={size} /> // Only set if explicit size prop provided
 ```
 
 ```css
 /* icon.css - Inherits size from parent's typography tokens */
 .icon {
-  font-size: var(--eds-typography-icon-size, 1.5em);  /* Inherits from parent */
+  font-size: var(--eds-typography-icon-size, 1.5em); /* Inherits from parent */
   width: 1em;
   height: 1em;
 }
@@ -649,6 +740,7 @@ See how existing components use data-attributes and dynamic tokens:
 ## Common Mistakes & How to Fix Them
 
 ### ❌ WRONG: Missing data-color-appearance on icon
+
 ```tsx
 // Icon appears in Figma as accent blue, but no data-attribute!
 <button className="menu-item">
@@ -659,11 +751,14 @@ See how existing components use data-attributes and dynamic tokens:
 
 ```css
 .menu-item {
-  color: var(--eds-color-bg-fill-emphasis-default);  /* No context - will be wrong color! */
+  color: var(
+    --eds-color-bg-fill-emphasis-default
+  ); /* No context - will be wrong color! */
 }
 ```
 
 ### ❌ WRONG: data-color-appearance on entire button
+
 ```tsx
 // Entire button becomes accent - hover will be accent too!
 <button className="menu-item" data-color-appearance="accent">
@@ -673,6 +768,7 @@ See how existing components use data-attributes and dynamic tokens:
 ```
 
 ### ✅ RIGHT: data-color-appearance only on icon wrapper
+
 ```tsx
 // Only icon is accent in Figma, hover stays neutral
 <button className="menu-item">
@@ -685,47 +781,61 @@ See how existing components use data-attributes and dynamic tokens:
 
 ```css
 .menu-item span {
-  color: var(--eds-color-bg-fill-emphasis-default);  /* Resolves to accent blue! */
+  color: var(
+    --eds-color-bg-fill-emphasis-default
+  ); /* Resolves to accent blue! */
 }
 
 .menu-item:hover {
-  background: var(--eds-color-bg-fill-muted-default);  /* Resolves to neutral gray! */
+  background: var(
+    --eds-color-bg-fill-muted-default
+  ); /* Resolves to neutral gray! */
 }
 ```
 
 ---
 
 ### ❌ WRONG: Using static tokens instead of dynamic
+
 ```css
 .my-component {
-  background: var(--eds-color-bg-accent-fill-emphasis-default);  /* Only works for accent */
+  background: var(
+    --eds-color-bg-accent-fill-emphasis-default
+  ); /* Only works for accent */
 }
 ```
 
 ### ✅ RIGHT: Use dynamic tokens that respond to data-color-appearance
+
 ```css
 .my-component {
-  background: var(--eds-color-bg-fill-emphasis-default);  /* Adapts to accent/neutral/danger */
+  background: var(
+    --eds-color-bg-fill-emphasis-default
+  ); /* Adapts to accent/neutral/danger */
 }
 ```
 
 ---
 
 ### ❌ WRONG: Hardcoded spacing values
+
 ```css
 .my-component {
-  padding: 12px 8px;  /* Breaks responsive spacing */
+  padding: 12px 8px; /* Breaks responsive spacing */
 }
 ```
 
 ### ✅ RIGHT: Use foundation spacing tokens
+
 ```tsx
 <div data-selectable-space="md" />
 ```
 
 ```css
 .my-component {
-  padding-block: var(--eds-selectable-space-vertical);    /* Responds to data-selectable-space */
+  padding-block: var(
+    --eds-selectable-space-vertical
+  ); /* Responds to data-selectable-space */
   padding-inline: var(--eds-selectable-space-horizontal);
 }
 ```
@@ -733,13 +843,15 @@ See how existing components use data-attributes and dynamic tokens:
 ---
 
 ### ❌ WRONG: Not mapping props to data-attributes
+
 ```tsx
 function MyComponent({ size }: { size: 'small' | 'large' }) {
-  return <div>...</div>  // size prop has no effect!
+  return <div>...</div> // size prop has no effect!
 }
 ```
 
 ### ✅ RIGHT: Map props to foundation data-attributes
+
 ```tsx
 const SIZE_MAPPING = { small: 'sm', large: 'lg' } as const
 
@@ -751,6 +863,7 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
 ---
 
 ### ❌ WRONG: Adding padding to both element and span wrapper
+
 ```css
 .eds-component {
   padding-block: var(--eds-selectable-space-vertical);
@@ -767,6 +880,7 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
 ```
 
 ### ✅ RIGHT: Keep padding on element only (Button's approach)
+
 ```css
 .eds-component {
   display: flex;
@@ -786,14 +900,128 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
 
 **Why:** The span's job is to fix `display: block` from `[data-font-family]`, not to add spacing. Padding belongs on the element for hover/focus states.
 
+---
+
+### ❌ WRONG: Using opacity for disabled state
+
+```css
+.my-component[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5; /* ❌ Improvising! Check Figma for actual tokens */
+}
+```
+
+**Problem:** `opacity` affects everything (background, borders, text). Figma specifies exact color tokens for disabled text/icons.
+
+### ✅ RIGHT: Use Figma's disabled color tokens
+
+```tsx
+// If icon uses accent color when enabled, change to neutral when disabled
+{icon && (
+  <span
+    className="my-component__icon"
+    data-color-appearance={disabled ? 'neutral' : 'accent'}
+  >
+    {icon}
+  </span>
+)}
+```
+
+```css
+.my-component[data-disabled] {
+  cursor: not-allowed;
+}
+
+.my-component[data-disabled] .my-component__text {
+  /* TODO: Replace with dedicated disabled token when available */
+  color: var(--eds-color-border-medium); /* ✅ From Figma disabled state */
+}
+
+.my-component[data-disabled] .my-component__icon {
+  /* Change data-color-appearance to neutral, then set specific disabled color */
+  /* TODO: Replace with dedicated disabled token when available */
+  color: var(--eds-color-border-medium); /* ✅ Same disabled color for icons */
+}
+```
+
+**How to find:** Check `figma_get_variable_defs` for the disabled state, or inspect disabled variant in `get_design_context`. Look for text/icon colors in disabled state.
+
+**Pattern for accent icons:** If icons are accent when enabled, change `data-color-appearance` from `"accent"` to `"neutral"` when disabled, then set specific `--eds-color-border-medium` in CSS.
+
+---
+
+### ❌ WRONG: Missing data-baseline causing height mismatch
+
+**Problem:** Figma shows component height as 44px, but code renders 52px. Text uses full line-height (20px) instead of trimmed cap height (~12px).
+
+```tsx
+// Missing data-baseline attribute!
+<span
+  data-font-family="ui"
+  data-font-size="md"
+  data-line-height="default"
+>
+  Menu Item
+</span>
+```
+
+**Height calculation WITHOUT text-box-trim:**
+- Padding: 16px top + 20px line-height + 16px bottom = 52px ❌
+
+### ✅ RIGHT: Add data-baseline to match Figma's baseline trimming
+
+```tsx
+<span
+  data-font-family="ui"
+  data-font-size="md"
+  data-line-height="default"
+  data-baseline="center"  // ✅ Enables text-box-trim
+>
+  Menu Item
+</span>
+```
+
+**Height calculation WITH text-box-trim:**
+- Padding: 16px top + ~12px trimmed text + 16px bottom = 44px ✅
+
+**Why:** Figma applies baseline trimming by default (shown as "Baseline adjust top/bottom" in variables). The EDS typography system uses `text-box: trim-both ex alphabetic` when `data-baseline="center"` or `data-baseline="grid"` is set. This removes extra line-height spacing, making text occupy only its actual cap/x-height.
+
+**When to use:**
+- **`data-baseline="center"`**: For interactive elements (buttons, menu items) where text should be optically centered within its container
+- **`data-baseline="grid"`**: For body text that should align to the 4px baseline grid
+- **No data-baseline**: For cases where you want the full line-height box (rare in EDS 2.0)
+
+**Optional: Fix 43.99px rounding with fixed height**
+
+Text-box-trim padding uses `1cap`/`1ex` units which can produce fractional pixels (43.99px instead of 44px). If exact pixel height is required, use density tokens:
+
+```css
+.my-component {
+  /* Use fixed height token + flexbox centering instead of padding-block */
+  height: var(--eds-sizing-selectable-lg); /* 44px spacious, 36px comfortable */
+  display: flex;
+  align-items: center;
+  padding-inline: var(--eds-selectable-space-horizontal);
+}
+```
+
+Available tokens: `--eds-sizing-selectable-{sm|md|lg|xl}` (see Checkbox for example).
+
+**See:**
+- `/packages/eds-tokens/build/css/typography.css` for text-box-trim implementation
+- Checkbox component (`Checkbox/checkbox.css`) for fixed height pattern example
+
 ## Anti-patterns
 
 - Using `figma_get_design_context` alone without `figma_get_variable_defs` for each state
+- **Using `opacity` for disabled states** - Figma specifies color tokens (e.g., `--eds-color-border-medium`), not opacity. Check disabled state in Figma and use exact tokens for text/icon colors.
+- **Missing `data-baseline` on text spans** - Height won't match Figma (text-box-trim not applied)
 - **Missing `data-color-appearance` when Figma shows accent/danger/neutral colors** - Dynamic tokens won't resolve correctly
 - **Missing data-attributes in TSX** - CSS tokens won't have context to apply correct values
 - **Using static tokens** (e.g., `--eds-color-bg-accent-*`) instead of dynamic tokens (`--eds-color-bg-*`)
 - **Hardcoding spacing values** instead of using `--eds-selectable-space-*` tokens
-- **Adding padding to both element and span wrapper** - Causes double padding (keep padding on element only)
+- **Hardcoding gap values** (e.g., `gap: 8.5px`) - Use `var(--eds-typography-gap-horizontal)` which scales with font-size and density
+- **Putting `data-font-family` on flex containers** - Only put it on text elements to avoid `display: block` issues
 - **Not mapping component props to data-attributes** - props won't affect styling
 - **Not checking Figma color modes** - Assuming all elements are neutral when they might be accent
 - Copying patterns from similar components without verifying Figma design
