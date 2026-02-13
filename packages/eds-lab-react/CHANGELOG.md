@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.3](https://github.com/equinor/design-system/compare/eds-lab-react@v0.10.2...eds-lab-react@v0.10.3) (2026-02-13)
+
+
+### 🔧 Chores
+
+* **deps:** bump eslint-plugin-storybook from 9.1.13 to 10.2.8 ([#4501](https://github.com/equinor/design-system/issues/4501)) ([bc6e3f8](https://github.com/equinor/design-system/commit/bc6e3f84b1c96e76de26bdde101c5af86b22d654))
+
 ## [0.10.2](https://github.com/equinor/design-system/compare/eds-lab-react@v0.10.1...eds-lab-react@v0.10.2) (2026-02-11)
 
 

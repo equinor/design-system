@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.6](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.5...eds-core-react@v2.3.6) (2026-02-13)
+
+
+### 🔧 Chores
+
+* **deps:** bump @types/node from 24.9.1 to 25.2.3 ([#4503](https://github.com/equinor/design-system/issues/4503)) ([4c0c5ee](https://github.com/equinor/design-system/commit/4c0c5ee69a5bdb006c0d398df802535a68aa2792))
+* **deps:** bump eslint-plugin-storybook from 9.1.13 to 10.2.8 ([#4501](https://github.com/equinor/design-system/issues/4501)) ([bc6e3f8](https://github.com/equinor/design-system/commit/bc6e3f84b1c96e76de26bdde101c5af86b22d654))
+
 ## [2.3.5](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.4...eds-core-react@v2.3.5) (2026-02-11)
 
 
