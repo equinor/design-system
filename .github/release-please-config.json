@@ -83,19 +83,23 @@
     },
     {
       "type": "chore",
-      "section": "🔧 Chores"
+      "section": "🔧 Chores",
+      "hidden": true
     },
     {
       "type": "ci",
-      "section": "👷 CI/CD"
+      "section": "👷 CI/CD",
+      "hidden": true
     },
     {
       "type": "build",
-      "section": "📦 Build System"
+      "section": "📦 Build System",
+      "hidden": true
     },
     {
       "type": "test",
-      "section": "✅ Tests"
+      "section": "✅ Tests",
+      "hidden": true
     }
   ],
 
