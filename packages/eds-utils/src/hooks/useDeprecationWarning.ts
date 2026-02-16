@@ -30,10 +30,8 @@ export const useDeprecationWarning = (
     let isDevelopment = false
 
     // Check Node.js environment (for tests and SSR)
-    if (
-      typeof process !== 'undefined' &&
-      process.env?.NODE_ENV === 'development'
-    ) {
+    const g = globalThis as { process?: { env?: { NODE_ENV?: string } } }
+    if (g.process?.env?.NODE_ENV === 'development') {
       isDevelopment = true
     }
 

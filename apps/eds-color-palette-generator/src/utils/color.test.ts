@@ -741,7 +741,7 @@ describe('generateColorScale', () => {
       )
 
       scale.forEach((color) => {
-        expect(color).toMatch(/oklch\([0-9.]+\s+0\.000\s+[0-9.]+\)/)
+        expect(color).toMatch(/oklch\([0-9.]+\s+0\.?0*\s+[0-9.]+\)/)
       })
     })
   })

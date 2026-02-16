@@ -43,7 +43,10 @@ export function TableRow<T>({
         } catch (error) {
           // Silently catch any errors during measurement to prevent crashes
           // This can happen if the virtualizer is in an inconsistent state during unmount
-          if (process.env.NODE_ENV === 'development') {
+          const g = globalThis as {
+            process?: { env?: { NODE_ENV?: string } }
+          }
+          if (g.process?.env?.NODE_ENV === 'development') {
             console.warn(
               'Failed to measure element during virtualization:',
               error,
