@@ -1,4 +1,6 @@
 name: Sync tokens to Figma
+permissions:
+  contents: read
 on:
   workflow_dispatch:
 jobs:
