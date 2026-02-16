@@ -22,46 +22,62 @@
 
   /* ===== SIZE VARIANTS ===== */
   /*
-   * Explicit height from Figma. Flexbox handles vertical centering.
-   * Horizontal padding and gap use design tokens.
+   * Figma uses padding + text-box-trim for content-driven button height.
+   * We follow the same model with progressive enhancement:
    *
-   * TODO: Replace hardcoded heights with --eds-selectable-height token
-   * when available from the token pipeline.
+   * 1. padding-block/inline from selectable-space tokens (all browsers)
+   * 2. min-height as fallback for browsers without cap unit support
+   *    (half-leading makes padding alone too tall)
+   * 3. @supports removes min-height — the span's cap-height constraint
+   *    (see below) gives correct content-driven sizing
    *
    * Spacious (default): sm=24px, md=36px, lg=44px
    * Comfortable:        sm=20px, md=24px, lg=36px
    */
 
   .eds-button[data-selectable-space='lg'] {
-    height: 2.75rem; /* 44px */
+    min-height: 2.75rem; /* 44px */
     padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
     gap: var(--eds-typography-gap-horizontal);
   }
 
   .eds-button[data-selectable-space='md'] {
-    height: 2.25rem; /* 36px */
+    min-height: 2.25rem; /* 36px */
     padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
     gap: var(--eds-typography-gap-horizontal);
   }
 
   .eds-button[data-selectable-space='sm'] {
-    height: 1.5rem; /* 24px */
+    min-height: 1.5rem; /* 24px */
     padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-selectable-space-vertical);
     gap: var(--eds-typography-gap-horizontal);
   }
 
   /* Comfortable density */
 
   [data-density='comfortable'] .eds-button[data-selectable-space='lg'] {
-    height: 2.25rem; /* 36px */
+    min-height: 2.25rem; /* 36px */
   }
 
   [data-density='comfortable'] .eds-button[data-selectable-space='md'] {
-    height: 1.5rem; /* 24px */
+    min-height: 1.5rem; /* 24px */
   }
 
   [data-density='comfortable'] .eds-button[data-selectable-space='sm'] {
-    height: 1.25rem; /* 20px */
+    min-height: 1.25rem; /* 20px */
+  }
+
+  /* Remove min-height when cap unit is available (Chrome 133+, Safari 17.5+).
+   * Content-driven height: padding + span cap-height = exact Figma match.
+   * Icon-only buttons keep min-height (they use aspect-ratio, not text). */
+
+  @supports (text-box: trim-both cap alphabetic) {
+    .eds-button[data-selectable-space]:not([data-icon-only]) {
+      min-height: unset;
+    }
   }
 
   /* ===== ICON-ONLY BUTTON ===== */
@@ -171,8 +187,34 @@
   }
 }
 
-/* Outside @layer to override typography.css which sets display: block on [data-font-family] */
+/*
+ * Outside @layer to override typography.css [data-font-family] { display: block }.
+ * The span wraps text children via TypographyNext and needs inline-flex for
+ * icon+text gap and vertical centering.
+ */
 
-.eds-button {
+.eds-button > span {
   display: inline-flex;
+  align-items: center;
+  gap: var(--eds-typography-gap-horizontal);
 }
+
+/*
+ * Constrain span height to font cap-height so button sizing matches Figma.
+ * Without this, half-leading inflates the span and padding alone gives
+ * buttons 6–11px too tall.
+ *
+ * round(1cap, 4px) uses the span's own font metrics — it adapts per size.
+ * Icons overflow the span but stay centered via align-items: center.
+ * Disables typography.css baseline padding (button handles its own sizing).
+ *
+ */
+@supports (text-box: trim-both cap alphabetic) {
+  .eds-button > span {
+    height: round(1cap, 4px);
+    overflow: visible;
+    text-box: normal;
+    padding-block: 0;
+  }
+}
+
