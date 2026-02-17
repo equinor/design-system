@@ -80,23 +80,23 @@
       outline-color: transparent;
 
       & .eds-input {
-        color: var(--eds-color-border-medium);
+        color: var(--eds-color-text-disabled);
         cursor: not-allowed;
         opacity: 1;
         -webkit-text-fill-color: var(
-          --eds-color-border-medium
+          --eds-color-text-disabled
         ); /* Safari autofill override */
 
         &::placeholder {
-          color: var(--eds-color-border-medium);
-          -webkit-text-fill-color: var(--eds-color-border-medium);
+          color: var(--eds-color-text-disabled);
+          -webkit-text-fill-color: var(--eds-color-text-disabled);
         }
       }
 
       & .eds-adornment__text,
       & .eds-adornment__adornment,
       & .eds-error-icon {
-        color: var(--eds-color-border-medium);
+        color: var(--eds-color-text-disabled);
       }
     }
 

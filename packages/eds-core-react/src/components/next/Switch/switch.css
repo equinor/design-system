@@ -50,7 +50,7 @@
     }
 
     &[data-disabled='true'] .eds-field__label {
-      color: var(--eds-color-border-medium);
+      color: var(--eds-color-text-disabled);
       cursor: not-allowed;
     }
   }
@@ -124,7 +124,7 @@
     }
 
     .eds-switch:has(.eds-switch__input:disabled) & {
-      background-color: var(--eds-color-border-medium);
+      background-color: var(--eds-color-bg-disabled);
       box-shadow: none;
     }
   }

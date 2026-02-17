@@ -58,6 +58,6 @@
 
   /* Only helper message changes color when disabled */
   .eds-field[data-disabled='true'] {
-    --_eds-field-helper-color: var(--eds-color-border-neutral-medium);
+    --_eds-field-helper-color: var(--eds-color-text-disabled);
   }
 }
