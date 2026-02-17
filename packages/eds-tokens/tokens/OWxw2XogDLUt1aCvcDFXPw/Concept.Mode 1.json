@@ -59,7 +59,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-bg-input)"
+            "WEB": "var(--eds-color-bg-disabled)"
           }
         }
       }
@@ -93,7 +93,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-border-focus)"
+            "WEB": "var(--eds-color-border-disabled)"
           }
         }
       }
@@ -127,7 +127,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-text-link)"
+            "WEB": "var(--eds-color-text-disabled)"
           }
         }
       }

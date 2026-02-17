@@ -50,6 +50,18 @@
     "text-link": {
       "Light": "{Light.Blue.8}",
       "Dark": "{Dark.Blue.8}"
+    },
+    "bg-disabled": {
+      "Light": "{Neutral.3}",
+      "Dark": "{Neutral.3}"
+    },
+    "border-disabled": {
+      "Light": "{Neutral.7}",
+      "Dark": "{Neutral.7}"
+    },
+    "text-disabled": {
+      "Light": "{Neutral.7}",
+      "Dark": "{Neutral.7}"
     }
   }
 }

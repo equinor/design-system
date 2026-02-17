@@ -61,7 +61,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-bg-fill-muted-default)"
+                "WEB": "var(--eds-color-bg-fill-muted-disabled)"
               }
             }
           }
@@ -127,7 +127,7 @@
                 "ALL_SCOPES"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-color-bg-fill-muted-default)"
+                "WEB": "var(--eds-color-bg-fill-emphasis-disabled)"
               }
             }
           }
@@ -227,7 +227,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-border-medium)"
+            "WEB": "var(--eds-color-border-disabled)"
           }
         }
       }
@@ -277,7 +277,7 @@
             "ALL_SCOPES"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-color-border-medium)"
+            "WEB": "var(--eds-color-text-disabled)"
           }
         }
       }
