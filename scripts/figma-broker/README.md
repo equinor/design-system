@@ -105,6 +105,8 @@ Names are matched using **partial, case-insensitive** matching against both:
 | `--only substation`           | Partial match -- all icons containing "substation" |
 | `--only jacket,monopile`      | Multiple icons                                     |
 
+> **Note:** `--only` works for both updating existing icons and adding new ones. New icons that don't yet exist in `data.ts` or `system-icons.json` will be appended automatically.
+
 ## Output Files
 
 The script generates three types of output:
